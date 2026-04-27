@@ -185,10 +185,11 @@
     content: '';
     position: absolute; inset: 0;
     background: linear-gradient(
-      150deg,
-      rgba(30,51,66,0.45) 0%,
-      rgba(30,51,66,0.72) 55%,
-      rgba(30,51,66,0.93) 100%
+      to right,
+      rgba(253,248,243,0.94) 0%,
+      rgba(253,248,243,0.82) 38%,
+      rgba(253,248,243,0.30) 68%,
+      rgba(253,248,243,0.00) 100%
     );
   }
   .hero-deco { display: none; }
@@ -196,17 +197,45 @@
   .hero-content {
     position: relative; z-index: 2;
     width: 100%; max-width: 1200px;
-    padding: 140px 48px 100px;
-    display: flex; align-items: center; justify-content: flex-start;
+    padding: 120px 48px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 56px;
   }
   .hero-card {
     background: transparent;
     backdrop-filter: none;
     border-radius: 0;
     padding: 0;
-    max-width: 720px; width: 100%;
+    width: 100%;
     box-shadow: none;
     border: none;
+  }
+  .hero-right {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .hero-stat-card {
+    background: rgba(253,248,243,0.93);
+    backdrop-filter: blur(14px);
+    border-radius: var(--radius-md);
+    padding: 18px 24px;
+    border: 1px solid rgba(45,74,92,0.09);
+    box-shadow: 0 4px 20px rgba(45,74,92,0.09);
+    transition: var(--transition);
+  }
+  .hero-stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(45,74,92,0.14); }
+  .hero-stat-card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem; font-weight: 800;
+    color: var(--navy); display: block; line-height: 1;
+  }
+  .hero-stat-card-value.orange { color: var(--orange); }
+  .hero-stat-card-value.teal { color: var(--teal); font-size: 1.5rem; }
+  .hero-stat-card-label {
+    font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-light); margin-top: 4px; display: block;
   }
   .hero-badge-row {
     display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
@@ -218,56 +247,28 @@
     font-size: 0.76rem; font-weight: 600;
     letter-spacing: 0.04em;
   }
-  .badge-aps { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.2); }
-  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+  .badge-aps { background: rgba(45,74,92,0.10); color: var(--navy); border: 1px solid rgba(45,74,92,0.18); }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.6; }
 
   .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
     font-weight: 800;
-    color: white;
+    color: var(--navy);
     line-height: 1.05;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    text-shadow: none;
   }
   .hero-title .accent { color: var(--orange); font-style: italic; }
   .hero-subtitle {
-    font-size: 1.12rem;
-    color: rgba(255,255,255,0.78);
-    margin-bottom: 40px;
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    margin-bottom: 36px;
     line-height: 1.75;
-    max-width: 560px;
-  }
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 12px; margin-bottom: 40px;
     max-width: 480px;
   }
-  .hero-stat {
-    text-align: center;
-    padding: 16px 8px;
-    background: rgba(255,255,255,0.10);
-    border-radius: var(--radius-md);
-    border: 1px solid rgba(255,255,255,0.14);
-    backdrop-filter: blur(8px);
-  }
-  .hero-stat-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; font-weight: 800;
-    color: white;
-    display: block;
-  }
-  .hero-stat-label {
-    font-size: 0.72rem; font-weight: 600;
-    color: rgba(255,255,255,0.55);
-    text-transform: uppercase; letter-spacing: 0.06em;
-    margin-top: 3px;
-    display: block;
-  }
-  .hero-stat:nth-child(1) .hero-stat-value { color: white; }
-  .hero-stat:nth-child(2) .hero-stat-value { color: var(--orange); }
-  .hero-stat:nth-child(3) .hero-stat-value { color: var(--teal-light); }
+  .hero-stats { display: none; }
 
   .hero-actions {
     display: flex; gap: 12px; flex-wrap: wrap;
@@ -292,8 +293,6 @@
     border: 2px solid rgba(45,74,92,0.2);
   }
   .btn-secondary:hover { border-color: var(--navy); background: rgba(45,74,92,0.05); transform: translateY(-2px); }
-  #hero .btn-secondary { color: white; border-color: rgba(255,255,255,0.35); }
-  #hero .btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.10); }
   .btn-navy { background: var(--navy); color: white; box-shadow: 0 4px 16px rgba(45,74,92,0.3); }
   .btn-navy:hover { background: var(--navy-dark); transform: translateY(-2px); }
   .btn-teal { background: var(--teal); color: white; box-shadow: 0 4px 16px rgba(107,165,168,0.3); }
@@ -606,44 +605,30 @@
   /* ── LIBRI ── */
   #libri { background: white; }
   .books-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 28px; margin: 56px auto 0; max-width: 800px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 56px;
   }
   .book-card {
-    background: var(--cream);
+    background: white;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-soft);
     transition: var(--transition);
-    border: 1px solid rgba(45,74,92,0.06);
+    border: 1px solid rgba(45,74,92,0.07);
+    display: flex; flex-direction: column;
   }
   .book-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
   .book-cover {
-    width: 100%; aspect-ratio: 3/2;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    padding: 24px;
+    width: 100%; aspect-ratio: 3/4;
+    overflow: hidden; position: relative;
   }
-  .book-cover-1 { background: linear-gradient(135deg, #2d4a5c, #6ba5a8); }
-  .book-cover-2 { background: linear-gradient(135deg, #e8954a, #c9a227); }
-  .book-cover-3 { background: linear-gradient(135deg, #6ba5a8, #2d4a5c); }
-  .book-cover-visual {
-    width: 90px; height: 120px;
-    border-radius: 4px 12px 12px 4px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.5rem;
-    box-shadow: -4px 4px 16px rgba(0,0,0,0.2);
-    position: relative;
+  .book-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    transition: transform 0.4s ease;
   }
-  .book-cover-visual::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0; width: 8px;
-    background: rgba(0,0,0,0.15);
-    border-radius: 4px 0 0 4px;
-  }
-  .book-body { padding: 24px; }
+  .book-card:hover .book-cover img { transform: scale(1.04); }
+  .book-body { padding: 20px 20px 24px; flex: 1; display: flex; flex-direction: column; }
   .book-tag {
     font-size: 0.72rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.08em;
@@ -830,20 +815,24 @@
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .hero-stats { grid-template-columns: repeat(2, 1fr); }
-    .team-grid, .piatto-layout, .books-grid, .benefits-grid { grid-template-columns: 1fr; }
+    .hero-content { grid-template-columns: 1fr; gap: 32px; padding: 120px 24px 60px; }
+    .hero-right { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .team-grid, .piatto-layout, .benefits-grid { grid-template-columns: 1fr; }
+    .books-grid { grid-template-columns: repeat(2, 1fr); }
     .pillars-grid { grid-template-columns: repeat(2, 1fr); }
     .features-grid { grid-template-columns: repeat(3, 1fr); }
     .social-groups { grid-template-columns: 1fr; max-width: 400px; }
-    .cinquemila-box { flex-direction: column; text-align: center; }
     .cert-section, .map-cta-box { padding: 40px 24px; }
-    .hero-card { padding: 36px 24px; }
+    .cert-section { grid-template-columns: 1fr !important; text-align: center !important; }
+    .cert-section img { margin: 0 auto; }
   }
   @media (max-width: 600px) {
     section { padding: 72px 20px; }
-    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero-content { padding: 100px 20px 56px; }
+    .hero-right { grid-template-columns: repeat(2, 1fr); }
     .pillars-grid { grid-template-columns: 1fr; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .books-grid { grid-template-columns: 1fr; }
     .hero-actions { flex-direction: column; }
     .footer-inner { flex-direction: column; text-align: center; }
     .footer-links { justify-content: center; }
@@ -884,45 +873,46 @@
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-deco">
-    <div class="hero-deco-circle"></div>
-    <div class="hero-deco-circle"></div>
-    <div class="hero-deco-circle"></div>
-  </div>
   <div class="hero-content">
+    <!-- LEFT -->
     <div class="hero-card">
       <div class="hero-badge-row">
         <span class="badge badge-aps">
           <span class="badge-dot"></span>
-          Associazione di Promozione Sociale
+          APS · Dal 2023
         </span>
-        <span class="badge badge-aps" style="background:rgba(232,149,74,0.25);border-color:rgba(232,149,74,0.4);color:var(--orange);">
+        <span class="badge badge-aps" style="background:rgba(232,149,74,0.12);border-color:rgba(232,149,74,0.3);color:var(--orange-dark);">
           <span class="badge-dot"></span>
           Ginetto AI è live
         </span>
       </div>
-      <h1 class="hero-title">Dove Andiamo<br><span class="accent">Oggi Papi?</span></h1>
-      <p class="hero-subtitle">La community per le famiglie di Alessandria e Asti. Nata da una domanda semplice, cresciuta con migliaia di genitori. Ginetto AI trova luoghi ed eventi per i tuoi bambini.</p>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <span class="hero-stat-value">5.000+</span>
-          <span class="hero-stat-label">Famiglie</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat-value">2.900+</span>
-          <span class="hero-stat-label">Luoghi</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat-value">2023</span>
-          <span class="hero-stat-label">Dal</span>
-        </div>
-      </div>
+      <h1 class="hero-title">Dove andiamo<br>oggi <span class="accent">papi?</span></h1>
+      <p class="hero-subtitle">La guida delle famiglie di Alessandria e Asti per uscite, alimentazione sana e avventure quotidiane con i figli. Perché ogni giorno può essere una piccola grande scoperta.</p>
       <div class="hero-actions">
         <a href="https://ginettoapp.it" target="_blank" rel="noopener" class="btn btn-primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Prova Ginetto — è gratis
+          Scopri i progetti
         </a>
-        <a href="#chi-siamo" class="btn btn-secondary">Scopri la community</a>
+        <a href="#chi-siamo" class="btn btn-secondary">Chi siamo</a>
+      </div>
+    </div>
+    <!-- RIGHT: stat cards -->
+    <div class="hero-right">
+      <div class="hero-stat-card">
+        <span class="hero-stat-card-value orange">5.000+</span>
+        <span class="hero-stat-card-label">Famiglie nella community</span>
+      </div>
+      <div class="hero-stat-card">
+        <span class="hero-stat-card-value">2.900+</span>
+        <span class="hero-stat-card-label">Luoghi family-friendly</span>
+      </div>
+      <div class="hero-stat-card">
+        <span class="hero-stat-card-value">7</span>
+        <span class="hero-stat-card-label">Libri pubblicati</span>
+      </div>
+      <div class="hero-stat-card" style="border-color:rgba(107,165,168,0.25);">
+        <span class="hero-stat-card-value teal">Ginetto</span>
+        <span class="hero-stat-card-label">Il tuo assistente AI per famiglie</span>
       </div>
     </div>
   </div>
@@ -933,7 +923,7 @@
   <div class="section-inner">
     <span class="section-label fade-in">Chi Siamo</span>
     <h2 class="section-title fade-in">Il cuore della community</h2>
-    <p class="section-subtitle fade-in">Tutto è nato da una domanda semplice: «Dove andiamo oggi papi?». Patrick ha costruito tutto — la community, Ginetto AI, i libri, Il Piatto Sano — dal 2023. Nel tempo Alessandra si è unita come curatrice per la provincia di Asti.</p>
+    <p class="section-subtitle fade-in">«Dove andiamo oggi papi?» — è la domanda di mio figlio che ha dato vita a tutto. Dal 2023 DAOP è cresciuta fino a diventare una community, Ginetto AI, libri e Il Piatto Sano. Alessandra si è unita come socia fondatrice e curatrice per la provincia di Asti.</p>
     <div class="team-grid">
       <div class="team-card fade-in fade-in-delay-1">
         <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#3d6e74);display:block;position:relative;">
@@ -956,9 +946,15 @@
           <img src="assets/images/alessandra.png" alt="Alessandra Zaccone" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
         </div>
         <div class="team-body">
-          <div class="team-role">Curatrice Eventi · DAOP Asti</div>
+          <div class="team-role">Socia Fondatrice · Curatrice DAOP Asti</div>
           <div class="team-name">Alessandra Zaccone</div>
-          <p class="team-desc">Si è unita a DAOP come curatrice degli eventi per la provincia di Asti. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti e mantiene vivo il dialogo con le famiglie del territorio.</p>
+          <p class="team-desc">Socia fondatrice di DAOP APS e curatrice degli eventi per la provincia di Asti. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti e mantiene vivo il dialogo con le famiglie del territorio.</p>
+          <div class="team-socials">
+            <a href="https://www.instagram.com/wonder_alepippi/" target="_blank" rel="noopener" class="team-social-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              @wonder_alepippi
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1130,30 +1126,44 @@
 
     <div class="books-grid">
       <div class="book-card fade-in fade-in-delay-1">
-        <div class="book-cover book-cover-2">
-          <div class="book-cover-visual">🌱</div>
+        <div class="book-cover">
+          <img src="assets/images/nathan.jpg" alt="Il Viaggio di Nathan">
         </div>
         <div class="book-body">
           <div class="book-tag">Albo illustrato</div>
-          <div class="book-title">La bambolina che profumava di nuvola</div>
-          <p class="book-desc">Un racconto delicato sul legame tra nonni e nipoti, sulla memoria affettiva e sul profumo dei ricordi che non svaniscono mai.</p>
-          <a href="https://amzn.eu/d/78U1n22" target="_blank" rel="noopener" class="btn-amazon">
+          <div class="book-title">Il Viaggio di Nathan</div>
+          <p class="book-desc">Un albo illustrato poetico e magico sul legame tra fratelli e il potere dell'immaginazione.</p>
+          <a href="https://amzn.eu/d/40ODNRs" target="_blank" rel="noopener" class="btn-amazon" style="margin-top:auto;">
             <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.153 12.527c-3.258 0-6.245.816-8.68 2.248 2.245-3.258 3.558-7.227 3.558-11.497 0-1.41-1.143-2.553-2.553-2.553S10 1.868 10 3.278c0 4.27 1.313 8.24 3.558 11.497-2.435-1.432-5.422-2.248-8.68-2.248C2.554 12.527.5 14.58.5 17.104c0 2.525 2.054 4.578 4.578 4.578.42 0 .83-.057 1.222-.163C7.893 22.464 9.913 23 12 23s4.107-.536 5.7-1.481c.392.106.802.163 1.222.163 2.524 0 4.578-2.053 4.578-4.578 0-2.524-2.054-4.577-4.347-4.577z"/></svg>
-            Acquista su Amazon
+            Scopri su Amazon
           </a>
         </div>
       </div>
       <div class="book-card fade-in fade-in-delay-2">
-        <div class="book-cover book-cover-3">
-          <div class="book-cover-visual">🎯</div>
+        <div class="book-cover">
+          <img src="assets/images/kiko.jpg" alt="Kiko e i Semi della Meraviglia">
         </div>
         <div class="book-body">
           <div class="book-tag">Albo illustrato</div>
-          <div class="book-title">Il viaggio di Nathan</div>
-          <p class="book-desc">Un bambino coraggioso affronta un viaggio straordinario — una storia sull'amicizia, il coraggio e la scoperta di mondi nuovi.</p>
-          <a href="https://amzn.eu/d/40ODNRs" target="_blank" rel="noopener" class="btn-amazon">
+          <div class="book-title">Kiko e i Semi della Meraviglia</div>
+          <p class="book-desc">Un racconto ispirante sull'amicizia e sulla bellezza nascosta nei piccoli gesti quotidiani.</p>
+          <a href="https://www.amazon.it/stores/Patrick-Orlando/author/B0F7CRNMGG" target="_blank" rel="noopener" class="btn-amazon" style="margin-top:auto;">
             <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.153 12.527c-3.258 0-6.245.816-8.68 2.248 2.245-3.258 3.558-7.227 3.558-11.497 0-1.41-1.143-2.553-2.553-2.553S10 1.868 10 3.278c0 4.27 1.313 8.24 3.558 11.497-2.435-1.432-5.422-2.248-8.68-2.248C2.554 12.527.5 14.58.5 17.104c0 2.525 2.054 4.578 4.578 4.578.42 0 .83-.057 1.222-.163C7.893 22.464 9.913 23 12 23s4.107-.536 5.7-1.481c.392.106.802.163 1.222.163 2.524 0 4.578-2.053 4.578-4.578 0-2.524-2.054-4.577-4.347-4.577z"/></svg>
-            Acquista su Amazon
+            Scopri su Amazon
+          </a>
+        </div>
+      </div>
+      <div class="book-card fade-in fade-in-delay-3">
+        <div class="book-cover">
+          <img src="assets/images/bambolina.jpg" alt="La Bambolina che Profumava di Nuvola">
+        </div>
+        <div class="book-body">
+          <div class="book-tag">Albo illustrato</div>
+          <div class="book-title">La Bambolina che Profumava di Nuvola</div>
+          <p class="book-desc">Una storia delicata sul legame tra generazioni e il potere dei ricordi.</p>
+          <a href="https://amzn.eu/d/78U1n22" target="_blank" rel="noopener" class="btn-amazon" style="margin-top:auto;">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.153 12.527c-3.258 0-6.245.816-8.68 2.248 2.245-3.258 3.558-7.227 3.558-11.497 0-1.41-1.143-2.553-2.553-2.553S10 1.868 10 3.278c0 4.27 1.313 8.24 3.558 11.497-2.435-1.432-5.422-2.248-8.68-2.248C2.554 12.527.5 14.58.5 17.104c0 2.525 2.054 4.578 4.578 4.578.42 0 .83-.057 1.222-.163C7.893 22.464 9.913 23 12 23s4.107-.536 5.7-1.481c.392.106.802.163 1.222.163 2.524 0 4.578-2.053 4.578-4.578 0-2.524-2.054-4.577-4.347-4.577z"/></svg>
+            Scopri su Amazon
           </a>
         </div>
       </div>
@@ -1189,17 +1199,15 @@
       </div>
     </div>
 
-    <div class="cert-section fade-in">
-      <div class="cert-badge-visual">
-        <div class="cert-badge-icon">🏅</div>
-        <div class="cert-badge-name">DAOP Certified Partner</div>
-        <div class="cert-badge-sub">Certificato di qualità per le famiglie</div>
+    <div class="cert-section fade-in" style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;text-align:left;">
+      <img src="assets/images/adesivo-daop.png" alt="Bollino Consigliato DAOP" style="width:160px;height:160px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.25));flex-shrink:0;">
+      <div style="position:relative;">
+        <h3 style="margin-bottom:10px;">Il bollino «Consigliato DAOP» sulla tua vetrina</h3>
+        <p style="margin-bottom:24px;">I partner DAOP ricevono il nostro adesivo ufficiale da esporre in vetrina — un segnale immediato di fiducia per le oltre 5.000 famiglie che ci seguono ogni settimana. La tua attività compare anche su Ginetto AI con QR code diretto alla tua scheda.</p>
+        <a href="mailto:info@doveandiamooggipapi.it" class="btn btn-gold" style="font-size:1rem;padding:14px 28px;">
+          Richiedi il bollino
+        </a>
       </div>
-      <h3>Diventa DAOP Certified</h3>
-      <p>Il bollino DAOP certifica che la tua attività è stata verificata e raccomandata dalla community. La tua attività comparirà anche su Ginetto AI quando le famiglie cercano posti nelle province di AL e AT.</p>
-      <a href="#social" class="btn btn-gold" style="font-size:1rem; padding:14px 28px;">
-        Richiedi la certificazione
-      </a>
     </div>
   </div>
 </section>
