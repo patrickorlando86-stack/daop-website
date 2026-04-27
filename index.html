@@ -198,13 +198,14 @@
     gap: 56px;
   }
   .hero-card {
-    background: transparent;
-    backdrop-filter: none;
-    border-radius: 0;
-    padding: 0;
+    background: rgba(253,248,243,0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-xl);
+    padding: 40px 44px;
     width: 100%;
-    box-shadow: none;
-    border: none;
+    box-shadow: 0 4px 32px rgba(45,74,92,0.10);
+    border: 1px solid rgba(255,255,255,0.7);
   }
   .hero-right {
     display: flex; flex-direction: column; gap: 12px;
@@ -896,7 +897,7 @@
         <span class="hero-stat-card-label">Famiglie nella community</span>
       </div>
       <div class="hero-stat-card">
-        <span class="hero-stat-card-value">2.900+</span>
+        <span class="hero-stat-card-value orange">2.900+</span>
         <span class="hero-stat-card-label">Luoghi family-friendly</span>
       </div>
       <div class="hero-stat-card">
@@ -918,7 +919,7 @@
       <div style="position:relative;" class="fade-in">
         <div style="background:var(--navy);border-radius:36px;padding:16px;box-shadow:var(--shadow-card),0 32px 64px rgba(45,74,92,0.2);max-width:300px;margin:0 auto;position:relative;">
           <div style="background:linear-gradient(180deg,#f5f9f5 0%,#e8f3e8 100%);border-radius:24px;min-height:460px;display:flex;flex-direction:column;align-items:center;padding:28px 20px;gap:14px;">
-            <img src="assets/images/logodaop.png" alt="Ginetto logo" style="width:110px;height:110px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.12));">
+            <img src="assets/images/ginetto-esplora.png" alt="Ginetto il lupetto" style="width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.15));margin-top:-10px;">
             <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:var(--navy);">GINETTO</div>
             <div style="font-size:0.72rem;color:var(--text-mid);">DAOP — Dove Andiamo Oggi Papi</div>
             <div style="background:var(--navy);color:white;border-radius:16px 16px 4px 16px;padding:11px 15px;font-size:0.8rem;line-height:1.5;max-width:230px;align-self:flex-end;">Dove porto i bimbi sabato?</div>
@@ -1089,62 +1090,85 @@
           <div class="piatto-screen-dot"></div>
           <span class="piatto-screen-title">Il Piatto Sano</span>
         </div>
-        <div class="piatto-screen-body" style="justify-content:center;align-items:center;">
-          <img src="assets/images/icon-512.png" alt="Il Piatto Sano" style="width:180px;height:180px;object-fit:contain;filter:drop-shadow(0 8px 32px rgba(0,0,0,0.12));border-radius:32px;">
-          <div class="piatto-score">
-            <div class="piatto-score-chip green">✓ Verdure 35%</div>
-            <div class="piatto-score-chip orange">Carboidrati 30%</div>
+        <div class="piatto-screen-body" style="justify-content:flex-start;align-items:stretch;padding:20px 20px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+            <img src="assets/images/icon-512.png" alt="Il Piatto Sano" style="width:64px;height:64px;object-fit:contain;border-radius:16px;flex-shrink:0;">
+            <div>
+              <div style="font-weight:800;color:#1a2d3a;font-size:0.95rem;line-height:1.2;">Il Piatto Sano</div>
+              <div style="font-size:0.72rem;color:#6ba5a8;font-weight:600;letter-spacing:0.05em;">ilpiattosano.netlify.app</div>
+            </div>
           </div>
-          <div class="piatto-score">
-            <div class="piatto-score-chip green">✓ Proteine 20%</div>
-            <div class="piatto-score-chip green">✓ Grassi sani 15%</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="background:white;border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid rgba(45,74,92,0.06);">
+              <span style="font-size:1rem;">🌾</span><span style="font-size:0.78rem;font-weight:600;color:#1a2d3a;">Conosciamo gli Alimenti</span><span style="margin-left:auto;font-size:0.7rem;color:#6ba5a8;font-weight:700;">MOD 1</span>
+            </div>
+            <div style="background:white;border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid rgba(45,74,92,0.06);">
+              <span style="font-size:1rem;">🥗</span><span style="font-size:0.78rem;font-weight:600;color:#1a2d3a;">Il Piatto Equilibrato</span><span style="margin-left:auto;font-size:0.7rem;color:#6ba5a8;font-weight:700;">MOD 2</span>
+            </div>
+            <div style="background:white;border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid rgba(45,74,92,0.06);">
+              <span style="font-size:1rem;">⚡</span><span style="font-size:0.78rem;font-weight:600;color:#1a2d3a;">Energia in Movimento</span><span style="margin-left:auto;font-size:0.7rem;color:#6ba5a8;font-weight:700;">MOD 3</span>
+            </div>
+            <div style="background:white;border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid rgba(45,74,92,0.06);">
+              <span style="font-size:1rem;">🎒</span><span style="font-size:0.78rem;font-weight:600;color:#1a2d3a;">Lo Zaino della Salute</span><span style="margin-left:auto;font-size:0.7rem;color:#6ba5a8;font-weight:700;">MOD 4</span>
+            </div>
+            <div style="background:white;border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid rgba(45,74,92,0.06);">
+              <span style="font-size:1rem;">🌍</span><span style="font-size:0.78rem;font-weight:600;color:#1a2d3a;">Cibo, Ambiente e Cultura</span><span style="margin-left:auto;font-size:0.7rem;color:#6ba5a8;font-weight:700;">MOD 5</span>
+            </div>
+            <div style="background:white;border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid rgba(45,74,92,0.06);">
+              <span style="font-size:1rem;">🛡️</span><span style="font-size:0.78rem;font-weight:600;color:#1a2d3a;">Allergie e Sicurezza</span><span style="margin-left:auto;font-size:0.7rem;color:#6ba5a8;font-weight:700;">MOD 6</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="piatto-content fade-in fade-in-delay-2">
-        <span class="section-label">Progetto educativo</span>
-        <h2 class="section-title">Il Piatto Sano</h2>
-        <p class="section-subtitle">Un gioco interattivo per insegnare ai bambini l'alimentazione equilibrata in modo divertente. Basato sulle linee guida nutrizionali italiane.</p>
+        <span class="section-label">Progetto educativo · con Dott.ssa Serafina Cardaci</span>
+        <h2 class="section-title">Mangiare Bene,<br>Crescere Meglio</h2>
+        <p class="section-subtitle">Programma di educazione alimentare per bambini dai 6 ai 13 anni: 6 moduli tematici in classe, un'app interattiva per LIM e smartphone, e nessun bambino escluso — nemmeno chi ha allergie.</p>
         <ul class="piatto-features">
           <li class="piatto-feature-item">
             <span class="piatto-feature-check">
               <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            Adatto a bambini dai 4 agli 11 anni
+            <span><strong>6 moduli tematici</strong> — da ottobre a marzo, 1 ora al mese in classe</span>
           </li>
           <li class="piatto-feature-item">
             <span class="piatto-feature-check">
               <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            Approvato da pediatri e nutrizionisti
+            <span><strong>Gioco interattivo su LIM</strong> — i bambini trascinano i cibi rispettando le proporzioni 50/25/25</span>
           </li>
           <li class="piatto-feature-item">
             <span class="piatto-feature-check">
               <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            Disponibile online e su app mobile
+            <span><strong>14 allergeni gestiti</strong> — il piatto si adatta automaticamente a ogni bambino</span>
           </li>
           <li class="piatto-feature-item">
             <span class="piatto-feature-check">
               <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            Premi e badge motivazionali
+            <span><strong>Chat AI con Serafina</strong> — assistente integrato che risponde alle domande dei bambini</span>
+          </li>
+          <li class="piatto-feature-item">
+            <span class="piatto-feature-check">
+              <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span><strong>Due livelli</strong> — Facile (elementari) e Difficile (medie), installabile su ogni dispositivo</span>
           </li>
         </ul>
         <div class="piatto-actions">
-          <a href="#" class="btn btn-teal">
+          <a href="https://ilpiattosano.netlify.app" target="_blank" rel="noopener" class="btn btn-teal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="5,3 19,12 5,21"/></svg>
-            Gioca online
+            Gioca online — è gratis
           </a>
-          <a href="#" class="btn btn-navy">
+          <a href="https://play.google.com/store/apps" target="_blank" rel="noopener" class="btn btn-navy">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 2v10M12 12l-4-4M12 12l4-4"/><rect x="3" y="16" width="18" height="4" rx="2"/></svg>
-            Scarica l'app
+            Google Play Store
           </a>
-          <a href="#" class="btn btn-secondary">Scopri di più</a>
         </div>
         <div class="piatto-school-box">
-          <p><strong>Per le scuole</strong>Il Piatto Sano è disponibile gratuitamente per le classi delle scuole primarie. Contattaci per integrare il gioco nel tuo programma didattico.</p>
+          <p><strong>Per le scuole — progetto gratuito per le classi pilota</strong>Nutrizionista qualificata in presenza, materiali didattici, kit gioco e formazione docenti. Contattaci per portare il programma nella tua scuola.</p>
         </div>
       </div>
     </div>
