@@ -193,7 +193,7 @@
     width: 100%; max-width: 1200px;
     padding: 120px 48px 80px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 5fr;
     align-items: center;
     gap: 56px;
   }
@@ -242,7 +242,8 @@
     font-size: 0.76rem; font-weight: 600;
     letter-spacing: 0.04em;
   }
-  .badge-aps { background: rgba(45,74,92,0.10); color: var(--navy); border: 1px solid rgba(45,74,92,0.18); }
+  .badge-aps { background: var(--navy); color: white; border: 1px solid var(--navy); }
+  .badge-dot { background: white !important; }
   .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.6; }
 
   .hero-title {
@@ -902,7 +903,7 @@
           <span class="badge-dot"></span>
           APS · Dal 2026
         </span>
-        <span class="badge badge-aps" style="background:rgba(232,149,74,0.12);border-color:rgba(232,149,74,0.3);color:var(--orange-dark);">
+        <span class="badge badge-aps" style="background:var(--orange);border-color:var(--orange);color:white;">
           <span class="badge-dot"></span>
           Ginetto AI è live
         </span>
@@ -914,7 +915,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Scopri i progetti
         </a>
-        <a href="#chi-siamo" class="btn btn-secondary">Chi siamo</a>
+        <a href="#chi-siamo" class="btn btn-navy">Chi siamo</a>
       </div>
     </div>
   </div>
