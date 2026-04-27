@@ -198,14 +198,14 @@
     gap: 56px;
   }
   .hero-card {
-    background: rgba(253,248,243,0.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: var(--radius-xl);
-    padding: 40px 44px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    padding: 0;
     width: 100%;
-    box-shadow: 0 4px 32px rgba(45,74,92,0.10);
-    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: none;
+    border: none;
   }
   .hero-right {
     display: flex; flex-direction: column; gap: 12px;
@@ -253,7 +253,7 @@
     line-height: 1.05;
     margin-bottom: 18px;
     letter-spacing: -0.02em;
-    text-shadow: none;
+    text-shadow: 0 2px 12px rgba(253,248,243,0.8);
   }
   .hero-title .accent { color: var(--orange); font-style: italic; }
   .hero-subtitle {
