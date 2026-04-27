@@ -1,0 +1,121 @@
+<!-- HEADER -->
+<header class="daop-blog-header">
+  <nav class="daop-nav">
+    <div class="daop-nav-container">
+      <a href="https://www.doveandiamooggipapi.it/" class="daop-logo" aria-label="DAOP Home">
+        <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/01/cropped-cropped-Logo1.jpg"
+             alt="Logo DAOP" width="40" height="40" style="height:40px;width:auto;">
+        <span>DAOP</span>
+      </a>
+      <ul class="daop-nav-links" id="daopNavLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/articoli-daop/">Articoli</a></li>
+        <li><a href="/privacy-policy/">Privacy</a></li>
+        <li><a class="active" href="/cookie-policy/">Cookie Policy</a></li>
+      </ul>
+      <button class="daop-menu-toggle" id="daopMenuToggle" aria-label="Apri menù" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<style>
+.daop-nav{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.daop-nav-container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.daop-logo{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;color:#2d4a5c;font-size:1.2rem}
+.daop-nav-links{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.daop-nav-links a{color:#2d4a5c;text-decoration:none;padding:8px 0;border-bottom:2px solid transparent;font-weight:600;transition:color .2s,border-color .2s}
+.daop-nav-links a:hover{color:#e8954a;border-bottom-color:#e8954a}
+.daop-nav-links a.active{color:#e8954a;border-bottom-color:#e8954a}
+.daop-menu-toggle{display:none;flex-direction:column;gap:5px;background:transparent;border:0;cursor:pointer}
+.daop-menu-toggle span{width:26px;height:3px;background:#2d4a5c;border-radius:2px}
+@media (max-width:768px){
+  .daop-menu-toggle{display:flex}
+  .daop-nav-links{position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;gap:14px;padding:18px 22px;display:none;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+  .daop-nav-links.show{display:flex}
+  .daop-nav-links a{padding:10px 0}
+}
+.daop-container{max-width:900px;margin:0 auto;padding:60px 20px}
+.daop-container h1{color:#2d4a5c;font-size:2.2rem;margin-bottom:10px;text-align:center}
+.daop-container h2{color:#2d4a5c;font-size:1.3rem;margin-top:40px}
+.daop-container p,.daop-container li{color:#333;line-height:1.7}
+.daop-footer{background:#2d3748;color:#fff;text-align:center;padding:24px 20px}
+.daop-footer a{color:#fff;text-decoration:underline}
+</style>
+
+<script>
+(function(){
+  const btn=document.getElementById('daopMenuToggle');
+  const list=document.getElementById('daopNavLinks');
+  if(!btn||!list)return;
+  btn.addEventListener('click',()=>{
+    const open=list.classList.toggle('show');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+})();
+</script>
+
+<!-- CONTENUTO COOKIE POLICY -->
+<section class="daop-container">
+  <h1>Cookie Policy</h1>
+  <p><strong>Ultimo aggiornamento:</strong> Novembre 2025</p>
+
+  <p>La presente Cookie Policy spiega cosa sono i cookie, come li utilizziamo su
+    <strong>doveandiamooggipapi.it</strong> e come puoi gestire le tue preferenze.</p>
+
+  <h2>1. Cosa sono i cookie</h2>
+  <p>I cookie sono piccoli file di testo che i siti web inviano al tuo browser per memorizzare informazioni. Servono a far funzionare correttamente il sito, ricordare preferenze e svolgere analisi anonime del traffico.</p>
+
+  <h2>2. Tipologie di cookie utilizzati</h2>
+  <ul>
+    <li><strong>Cookie tecnici (necessari)</strong> – garantiscono il funzionamento di base del sito (es. sicurezza, preferenze, gestione del consenso). Sono sempre attivi e non richiedono consenso.</li>
+    <li><strong>Cookie analitici</strong> – ci aiutano a capire come viene utilizzato il sito in forma aggregata e anonima (pagine visitate, tempo di permanenza). Questi cookie vengono attivati solo con il tuo consenso.</li>
+    <li><strong>Cookie di terze parti per contenuti incorporati</strong> – alcuni contenuti (es. <em>Google Maps</em>, <em>YouTube</em>, post social) possono impostare cookie quando interagisci con essi. Anche questi richiedono il consenso, se non tecnici.</li>
+  </ul>
+
+  <div style="background:#eef3f6;border-left:4px solid #2d4a5c;padding:14px 16px;border-radius:6px;margin:16px 0;color:#2d4a5c;">
+    Nota: puoi modificare in qualsiasi momento la tua scelta cliccando su
+    <a href="#" id="cookieyes-manage-consent" style="color:#2d4a5c;text-decoration:underline;">Rivedi preferenze cookie</a>.
+  </div>
+
+  <h2>3. Servizi di terze parti usati sul sito</h2>
+  <ul>
+    <li><strong>Google Analytics</strong> (analitici, anonimizzati/aggregati): misurazione del traffico del sito.
+      Privacy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+    <li><strong>Google Maps</strong> (contenuti incorporati): visualizzazione della mappa interattiva.
+      Privacy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+    <li><strong>YouTube</strong> (video incorporati): riproduzione di contenuti multimediali.
+      Privacy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+    <li><strong>Meta / Instagram</strong> (post incorporati): integrazioni social.
+      Privacy: <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener">facebook.com/privacy/policy</a> •
+      <a href="https://privacycenter.instagram.com" target="_blank" rel="noopener">privacycenter.instagram.com</a></li>
+  </ul>
+
+  <h2>4. Gestione del consenso</h2>
+  <p>Al primo accesso mostriamo un banner che ti permette di accettare tutti i cookie, rifiutare quelli non essenziali o scegliere le categorie. I cookie non tecnici vengono attivati solo dopo il tuo consenso.</p>
+  <p>Puoi rivedere o modificare la tua scelta in qualunque momento tramite il link
+    <a href="#" id="cookieyes-manage-consent" style="color:#2d4a5c;text-decoration:underline;">Rivedi preferenze cookie</a> presente nel footer.</p>
+
+  <h2>5. Come disattivare i cookie dal browser</h2>
+  <ul>
+    <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+    <li><a href="https://support.mozilla.org/it/kb/Gestione%20dei%20cookie" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+    <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
+    <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+  </ul>
+
+  <h2>6. Titolare del trattamento</h2>
+  <p><strong>Patrick Orlando</strong> – Alessandria (Italia)<br>
+     Email: <a href="mailto:patrick.orlando@libero.it">patrick.orlando@libero.it</a></p>
+
+  <h2>7. Aggiornamenti</h2>
+  <p>Potremmo aggiornare questa informativa per riflettere cambiamenti normativi o tecnici. La versione corrente è sempre disponibile su questa pagina.</p>
+</section>
+
+<footer class="daop-footer">
+  <p>&copy; 2025 Dove Andiamo Oggi Papi - La guida per famiglie con bambini ·
+    <a href="/privacy-policy/">Privacy Policy</a> ·
+    <a href="/cookie-policy/">Cookie Policy</a>
+  </p>
+</footer>

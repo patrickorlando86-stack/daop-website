@@ -1,0 +1,610 @@
+h<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scopri i libri per bambini e romanzi di Patrick Orlando: storie illustrate per famiglie, avventure da vivere insieme. Disponibili su Amazon.">
+    <meta name="keywords" content="libri bambini famiglia, libri patrick orlando, storie illustrate, libri per famiglie, papà mi regali una nuvola">
+    <title>Libri per Bambini e Famiglia | Patrick Orlando - DAOP</title>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Libri per Bambini e Famiglia - Patrick Orlando">
+    <meta property="og:description" content="Storie illustrate per famiglie, avventure da vivere insieme">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/51nTpaKzadL._SL1000_.jpg">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            position: relative;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* HEADER STICKY DAOP */
+        .daop-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .daop-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .daop-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            text-decoration: none;
+            color: #2d4a5c;
+            font-size: 1.2rem;
+        }
+
+        .daop-nav-links {
+            display: flex;
+            gap: 26px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .daop-nav-links a {
+            color: #2d4a5c;
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .daop-nav-links a:hover {
+            color: #e8954a;
+            border-bottom-color: #e8954a;
+        }
+
+        .daop-nav-links a.active {
+            color: #e8954a;
+            border-bottom-color: #e8954a;
+        }
+
+        .daop-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .daop-menu-toggle span {
+            width: 26px;
+            height: 3px;
+            background: #2d4a5c;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+       /* RESPONSIVE MENU MOBILE */
+@media (max-width: 768px) {
+    .daop-menu-toggle {
+        display: flex;
+    }
+
+    .daop-nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 0;
+        gap: 0;
+        max-height: 0;
+        overflow-y: auto; /* CAMBIATO per permettere lo scroll */
+        overflow-x: hidden;
+        transition: max-height 0.3s ease;
+        list-style: none;
+        -webkit-overflow-scrolling: touch; /* Scroll fluido su iOS */
+    }
+
+    .daop-nav-links li {
+        list-style: none;
+        list-style-type: none;
+    }
+
+    .daop-nav-links.show {
+        max-height: 70vh; /* AUMENTATO - il menu può occupare fino al 70% dello schermo */
+        padding: 10px 0;
+    }
+
+    .daop-nav-links a {
+        display: block;
+        padding: 15px 20px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .daop-nav-links a:last-child {
+        border-bottom: none;
+    }
+}
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #2d4a5c 0%, #4a6b7c 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            color: white !important;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* SECTION TITLES */
+        .section-title {
+            text-align: center;
+            color: #2d4a5c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #e8954a, #f4a261);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #5a6c7d;
+            font-size: 1.2em;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* BOOKS GRID */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(45,74,92,0.3);
+        }
+
+        .book-image {
+            height: 400px;
+            overflow: hidden;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .book-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .book-info {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-info h3 {
+            color: #2d4a5c;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .book-info p {
+            color: #5a6c7d;
+            flex: 1;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-amazon {
+            background: linear-gradient(135deg, #e8954a 0%, #f4a261 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(232,149,74,0.3);
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232,149,74,0.4);
+        }
+
+        /* WHY SECTION */
+        .why-section h3 {
+            color: #2d4a5c;
+            font-size: 1.4em;
+            margin: 30px 0 15px;
+        }
+
+        .why-section p {
+            color: #5a6c7d;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #2d4a5c;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer a {
+            color: #e8954a;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #f4a261;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .book-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- NAVIGATION -->
+<nav class="daop-nav">
+    <div class="daop-nav-container">
+        <a href="https://www.doveandiamooggipapi.it/" class="daop-logo" aria-label="DAOP Home">
+            <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/01/cropped-cropped-Logo1.jpg"
+                 alt="Logo DAOP" width="40" height="40" style="height:40px;width:auto;">
+            <span>DAOP</span>
+        </a>
+        
+        <button class="daop-menu-toggle" id="daopMenuToggle" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="daop-nav-links" id="daopNavLinks">
+            <li><a href="https://www.doveandiamooggipapi.it/#home">Home</a></li>
+            <li><a href="https://www.doveandiamooggipapi.it/#chi-siamo">Chi Siamo</a></li>
+            <li><a href="https://www.doveandiamooggipapi.it/#mappa">Mappa</a></li>
+            <li><a href="https://www.doveandiamooggipapi.it/il-piatto-sano/">Il Piatto Sano</a></li>
+            <li><a href="https://www.doveandiamooggipapi.it/libri/" class="active">Libri</a></li>
+            <li><a href="https://www.doveandiamooggipapi.it/articoli-daop/">Articoli</a></li>
+            <li><a href="https://www.doveandiamooggipapi.it/#contatti">Contatti</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+    <h1>Libri per Bambini e Famiglia</h1>
+    <p>Storie illustrate che creano momenti speciali tra genitori e bambini. Scritte da un papà per tutte le famiglie.</p>
+</header>
+
+<!-- LIBRI PER BAMBINI -->
+<section style="background: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">Libri per Bambini</h2>
+        <p class="section-subtitle">
+            Storie illustrate che parlano di emozioni, famiglia e avventure da vivere insieme
+        </p>
+
+        <div class="books-grid">
+            <!-- Papà mi regali una nuvola -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/51nTpaKzadL._SL1000_.jpg" 
+                         alt="Libri per bambini - Papà mi regali una nuvola di Patrick Orlando">
+                </div>
+                <div class="book-info">
+                    <h3>Papà, mi regali una nuvola?</h3>
+                    <p>Una tenera storia sul valore del tempo trascorso insieme. Quando Nathan chiede una nuvola per il suo compleanno, il papà capisce che il regalo più prezioso è la presenza.</p>
+                    <a href="https://amzn.eu/d/hx1wkC0" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+
+            <!-- La bambolina che profumava di nuvola -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/61rr3elGzoL._SL1293_.jpg" 
+                         alt="Libri bambini famiglia - La bambolina che profumava di nuvola">
+                </div>
+                <div class="book-info">
+                    <h3>La bambolina che profumava di nuvola</h3>
+                    <p>Una storia magica e delicata che parla di sogni, ricordi e l'importanza dei legami affettivi attraverso un oggetto speciale.</p>
+                    <a href="https://amzn.eu/d/78U1n22" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+
+            <!-- Il viaggio di Nathan -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/81Inh9iJtHL._SL1500_.jpg" 
+                         alt="Libri bambini - Il viaggio di Nathan di Patrick Orlando">
+                </div>
+                <div class="book-info">
+                    <h3>Il viaggio di Nathan</h3>
+                    <p>Un'avventura emozionante che accompagna i piccoli lettori alla scoperta del mondo, della curiosità e del coraggio.</p>
+                    <a href="https://amzn.eu/d/40ODNRs" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+
+            <!-- La notte in cui ci siamo visti -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/12/Senza-titolo.jpg" 
+                         alt="Libri per bambini - La notte in cui ci siamo visti di Patrick Orlando">
+                </div>
+                <div class="book-info">
+                    <h3>La notte in cui ci siamo visti</h3>
+                    <p>Due bambini. Due mondi. Una vigilia di Natale che li unisce. Luca e Amina vivono vite lontanissime, ma i loro sogni si incontrano nella neve, insegnando che l'empatia non conosce confini. <strong>Include musica originale con QR code.</strong></p>
+                    <a href="https://amzn.eu/d/0wFnps2" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kiko e i semi della meraviglia -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/91fPd1pTdvL._SL1500_.jpg" 
+                         alt="Libri per bambini famiglia - Kiko e i semi della meraviglia">
+                </div>
+                <div class="book-info">
+                    <h3>Kiko e i semi della meraviglia</h3>
+                    <p>Un'avventura magica che insegna ai bambini il valore della pazienza, della cura e della meraviglia nascosta nelle piccole cose.</p>
+                    <a href="https://amzn.eu/d/b7pFGBo" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIBRI PER ADULTI -->
+<section style="background: white;">
+    <div class="container">
+        <h2 class="section-title">Romanzi per Adulti</h2>
+        <p class="section-subtitle">
+            Storie che esplorano l'animo umano, il tempo e il futuro
+        </p>
+
+        <div class="books-grid">
+            <!-- Il deserto di Sigüenza -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/71ZnxG2le1L._SL1491_.jpg" 
+                         alt="Romanzi famiglia - Il deserto di Sigüenza Patrick Orlando">
+                </div>
+                <div class="book-info">
+                    <h3>Il deserto di Sigüenza</h3>
+                    <p>Un viaggio interiore attraverso i paesaggi dell'anima, alla ricerca di se stessi e del proprio posto nel mondo.</p>
+                    <a href="https://amzn.eu/d/2JxVwyi" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+
+            <!-- Vite nel 2100 -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/61f3FcfkvYL._SL1495_.jpg" 
+                         alt="Libri famiglia - Vite nel 2100">
+                </div>
+                <div class="book-info">
+                    <h3>Vite nel 2100</h3>
+                    <p>Una distopia avvincente che ci porta nel futuro, esplorando temi di identità, tecnologia e umanità.</p>
+                    <a href="https://amzn.eu/d/7MxqXMK" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+
+            <!-- Il colore del tempo -->
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/LIBRO-2.pdf-1.png" 
+                         alt="Romanzi Patrick Orlando - Il colore del tempo">
+                </div>
+                <div class="book-info">
+                    <h3>Il colore del tempo</h3>
+                    <p>Un romanzo che intreccia passato e presente, esplorando il significato del tempo e dei ricordi nella nostra vita.</p>
+                    <a href="https://amzn.eu/d/eUEZGkD" class="btn btn-amazon" target="_blank" rel="noopener">
+                        Scopri su Amazon
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PERCHÉ SCEGLIERE QUESTI LIBRI -->
+<section style="background: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">Perché Scegliere i Nostri Libri per Bambini</h2>
+        
+        <div class="why-section">
+            <p>
+                I <strong>libri per bambini e famiglia</strong> di Patrick Orlando nascono dall'esperienza quotidiana 
+                di un papà che ama raccontare storie al proprio figlio Nathan. Ogni libro è pensato per creare 
+                momenti di condivisione tra genitori e bambini, con storie che parlano di emozioni vere, 
+                avventure immaginarie e valori autentici.
+            </p>
+            
+            <h3>🎨 Illustrazioni curate e testi coinvolgenti</h3>
+            <p>
+                Ogni <strong>libro per bambini</strong> è arricchito da illustrazioni originali che catturano l'attenzione 
+                dei più piccoli e rendono la lettura un'esperienza visiva oltre che narrativa. Le storie 
+                sono scritte con un linguaggio adatto alle diverse fasce d'età, mantenendo sempre 
+                profondità e autenticità.
+            </p>
+            
+            <h3>💡 Temi educativi e valori familiari</h3>
+            <p>
+                I <strong>libri per famiglie</strong> affrontano temi importanti come il valore del tempo trascorso insieme, 
+                l'amicizia, la solitudine, i sogni e la famiglia. Sono strumenti preziosi per 
+                genitori ed educatori che desiderano offrire ai <strong>bambini</strong> letture che stimolino 
+                la riflessione e l'empatia.
+            </p>
+            
+            <h3>📖 Disponibili su Amazon in formato cartaceo ed ebook</h3>
+            <p>
+                Tutti i <strong>libri per bambini</strong> e i romanzi sono disponibili su Amazon, sia in versione 
+                cartacea che digitale. Perfetti come regalo per compleanni, festività o semplicemente 
+                per arricchire la biblioteca di <strong>famiglia</strong> con storie che restano nel cuore.
+            </p>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://www.amazon.it/stores/Patrick-Orlando/author/B0F7CRNMGG" 
+                   class="btn btn-amazon" target="_blank" rel="noopener">
+                    Visita la Pagina Autore su Amazon
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2025 Dove Andiamo Oggi Papi - La guida per famiglie con bambini</p>
+    <p style="margin-top: 10px;">
+        <a href="https://www.doveandiamooggipapi.it/privacy-policy/">Privacy Policy</a> ·
+        <a href="https://www.doveandiamooggipapi.it/cookie-policy/">Cookie Policy</a>
+    </p>
+</footer>
+
+<!-- SCRIPT MENU HAMBURGER -->
+<script>
+(function(){
+    const btn = document.getElementById('daopMenuToggle');
+    const list = document.getElementById('daopNavLinks');
+    if(!btn || !list) return;
+    
+    btn.addEventListener('click', () => {
+        const open = list.classList.toggle('show');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    
+    // Chiudi menu quando clicchi un link (mobile)
+    list.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            list.classList.remove('show');
+            btn.setAttribute('aria-expanded', 'false');
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

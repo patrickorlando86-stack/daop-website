@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Il Piatto Sano – Gioco Educativo sull'Alimentazione per Bambini | DAOP</title>
+  <meta name="description" content="Il Piatto Sano: gioco educativo gratuito per bambini dai 3 ai 12 anni. Impara la piramide alimentare, la gestione dei 14 allergeni e la sicurezza alimentare. Progetto S.A.N.E. Italia.">
+  <link rel="canonical" href="https://www.doveandiamooggipapi.it/il-piatto-sano/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DAOP - Dove Andiamo Oggi Papi">
+  <meta property="og:title" content="Il Piatto Sano – Gioco Educativo sull'Alimentazione per Bambini">
+  <meta property="og:description" content="Gioco gratuito per bambini: alimentazione sana, 14 allergeni, sicurezza nutrizionale. Progetto S.A.N.E. Italia.">
+  <meta property="og:url" content="https://www.doveandiamooggipapi.it/il-piatto-sano/">
+  <meta property="og:image" content="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/08/e01420e8-7db7-466d-aafd-c34d0470f48e-1-1024x683.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Il Piatto Sano – Gioco Educativo sull'Alimentazione per Bambini">
+  <meta name="twitter:description" content="Gioco gratuito per bambini: alimentazione sana, 14 allergeni, sicurezza nutrizionale.">
+  <meta name="twitter:image" content="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/08/e01420e8-7db7-466d-aafd-c34d0470f48e-1-1024x683.png">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Il Piatto Sano",
+    "url":"https://www.doveandiamooggipapi.it/il-piatto-sano/",
+    "description":"Gioco educativo gratuito per bambini su alimentazione sana, piramide alimentare e gestione dei 14 allergeni alimentari.",
+    "publisher": {
+      "@type":"Organization",
+      "name":"DAOP - Dove Andiamo Oggi Papi APS",
+      "logo": { "@type":"ImageObject", "url":"https://www.doveandiamooggipapi.it/wp-content/uploads/2025/01/cropped-cropped-Logo1.jpg" }
+    }
+  }
+  </script>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.7; color:#333; overflow-x:hidden; background:#fff; }
+
+    /* NAV */
+    nav { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:15px 20px; }
+    .logo { font-size:1.4em; font-weight:700; color:#2d4a5c; text-decoration:none !important; display:flex; align-items:center; gap:10px; }
+    .nav-links { display:flex; gap:24px; list-style:none; margin:0; padding:0; }
+    .nav-links li { list-style:none !important; } .nav-links a { color:#2d4a5c; text-decoration:none; font-weight:500; padding:8px 0; border-bottom:2px solid transparent; transition:all .2s; font-size:.95em; }
+    .nav-links a:hover, .nav-links a.active { color:#e8954a; border-bottom-color:#e8954a; }
+    .menu-toggle { display:none; flex-direction:column; cursor:pointer; gap:5px; background:transparent; border:0; }
+    .menu-toggle span { width:25px; height:3px; background:#2d4a5c; border-radius:2px; transition:.3s; }
+
+    /* HERO */
+    .hero { background:linear-gradient(135deg,#2d4a5c 0%,#4a7a8c 100%); padding:70px 20px; text-align:center; color:#fff; }
+    .hero h1 { font-size:2.8em; margin-bottom:16px; color:#fff !important; }
+    .hero p { font-size:1.2em; opacity:.92; max-width:700px; margin:0 auto 24px; color:#fff !important; }
+    .sane-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.15); color:#fff; font-size:.84em; font-weight:600; padding:8px 18px; border-radius:20px; border:1px solid rgba(255,255,255,.3); }
+
+    /* LAYOUT */
+    .container { max-width:1000px; margin:0 auto; padding:60px 20px; }
+    h2 { font-size:1.9em; color:#2d4a5c; margin:50px 0 20px; }
+    
+    h3 { font-size:1.3em; color:#4a6b7c; margin:28px 0 12px; }
+    p { color:#5a6c7d; margin-bottom:16px; font-size:1.02em; }
+
+    /* CARD INTRO */
+    .intro-card { background:#f8f9fa; border-radius:16px; padding:32px 36px; margin-bottom:40px; border-left:4px solid #2d4a5c; }
+    .intro-card p { font-size:1.08em; margin:0; color:#444; }
+
+    /* GAME IMAGE */
+    .game-image { width:100%; max-width:780px; height:auto; border-radius:16px; margin:28px auto; display:block; box-shadow:0 6px 24px rgba(0,0,0,.1); }
+
+    /* FEATURE LIST — niente ul/li per evitare doppi bullet WordPress */
+    .feature-row { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid #f0f0f0; font-size:1.02em; color:#444; }
+    .feature-row:last-child { border:0; }
+    .feature-row .ck { color:#2d4a5c; font-weight:700; font-size:1.1em; flex-shrink:0; margin-top:1px; }
+
+    /* MODALITÀ */
+    .modality-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:24px 0; }
+    .modality-card { border-radius:14px; padding:24px; }
+    .modality-card.easy { background:#e8f5e9; border-left:4px solid #4CAF50; }
+    .modality-card.hard { background:#fff3e0; border-left:4px solid #e8954a; }
+    .modality-card h3 { margin-top:0; color:#2d4a5c; font-size:1.1em; }
+    .modality-card p { font-size:.95em; margin-bottom:10px; }
+
+    /* ALLERGENI */
+    .allergeni-section { background:#fff8e1; border:2px solid #ffc107; border-radius:16px; padding:30px 32px; margin:30px 0; }
+    .allergeni-section h2 { color:#856404; margin-top:0; }
+    .allergeni-section h2::after { background:#ffc107; }
+    .allergeni-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:20px 0; }
+    .allergene-item { background:#fff; padding:12px 10px; border-radius:10px; text-align:center; font-weight:600; font-size:.9em; box-shadow:0 2px 8px rgba(0,0,0,.07); color:#444; }
+
+    /* SANE BOX */
+    .sane-box { background:linear-gradient(135deg,#2d4a5c,#3a5f75); border-radius:16px; padding:32px 36px; color:#fff; margin:40px 0; }
+    .sane-box h2 { color:#fff !important; margin-top:0; }
+    .sane-box h2::after { background:#fff; }
+    .sane-box p { color:rgba(255,255,255,.92) !important; }
+    .moduli-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:20px 0; }
+    .modulo-card { background:rgba(255,255,255,.12); border-radius:10px; padding:16px; text-align:center; border:1px solid rgba(255,255,255,.2); }
+    .modulo-card .icon { font-size:1.8em; margin-bottom:8px; display:block; }
+    .modulo-card strong { display:block; color:#fff !important; font-size:.92em; margin-bottom:4px; }
+    .modulo-card span { font-size:.8em; color:rgba(255,255,255,.8); }
+    .modulo-card .badge-locked { display:inline-block; background:rgba(255,255,255,.2); color:#fff; font-size:.7em; padding:2px 8px; border-radius:10px; margin-top:6px; }
+    .scuole-cta { background:rgba(255,255,255,.1); border-radius:10px; padding:18px 22px; margin-top:20px; }
+    .scuole-cta strong { color:#fff !important; display:block; margin-bottom:6px; }
+    .scuole-cta p { color:rgba(255,255,255,.88) !important; margin:0 0 8px; font-size:.93em; }
+    .scuole-cta span { font-size:.9em; color:rgba(255,255,255,.9); }
+
+    /* CTA BUTTONS */
+    .cta-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin:40px 0; }
+    .btn { display:inline-flex; align-items:center; gap:10px; padding:16px 32px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1.05em; transition:all .3s; border:none; }
+    .btn-primary { background:linear-gradient(135deg,#2d4a5c,#4a6b7c); color:#fff; }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(45,74,92,.3); }
+    .btn-secondary { background:#e8954a; color:#fff; }
+    .btn-secondary:hover { background:#d68439; transform:translateY(-3px); }
+    .btn-outline { background:#fff; color:#2d4a5c; border:2px solid #2d4a5c; }
+    .btn-outline:hover { background:#2d4a5c; color:#fff; }
+
+    /* LANG BADGES */
+    .lang-badges { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; }
+    .lang-badge { background:#e8f0f5; color:#2d4a5c; font-size:.82em; font-weight:700; padding:5px 12px; border-radius:20px; }
+
+    /* SERAFINA */
+    .serafina-box { display:flex; align-items:center; gap:24px; background:#f8f9fa; border-radius:14px; padding:24px 28px; margin:30px 0; }
+    .serafina-box img { width:80px; height:80px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+    .serafina-box h3 { margin:0 0 4px; color:#2d4a5c; font-size:1.1em; }
+    .serafina-box p { margin:0; font-size:.93em; color:#5a6c7d; }
+
+    @media (max-width:768px) {
+      .nav-links { position:absolute; top:100%; left:0; right:0; background:#fff; flex-direction:column; padding:20px 24px; gap:12px; box-shadow:0 5px 10px rgba(0,0,0,.1); display:none; }
+      .nav-links.active { display:flex; }
+      .nav-links li { list-style:none !important; margin:0 !important; }
+      .menu-toggle { display:flex; }
+      .hero h1 { font-size:2em; }
+      .modality-grid { grid-template-columns:1fr; }
+      .cta-buttons { flex-direction:column; align-items:center; }
+      .btn { width:90%; justify-content:center; }
+      .serafina-box { flex-direction:column; text-align:center; }
+      .allergeni-grid { grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); }
+      .moduli-grid { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <a href="https://www.doveandiamooggipapi.it/" class="logo">
+        <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/01/cropped-cropped-Logo1.jpg"
+             alt="Logo DAOP" style="height:40px;width:auto;" width="40" height="40" loading="lazy">
+        DAOP
+      </a>
+      <ul class="nav-links" id="navLinks" style="list-style:none !important;margin:0 !important;padding:0 !important;">
+        <li><a href="https://www.doveandiamooggipapi.it/#home">Home</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#chi-siamo">Chi Siamo</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#mappa">Mappa</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/il-piatto-sano/" class="active">Il Piatto Sano</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#libri">Libri</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/daop-nei-media/">Media</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#collabora">Collabora</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#contatti">Contatti</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Apri menù" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div style="max-width:800px;margin:0 auto;">
+      <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2026/04/icon-512.png"
+           alt="Il Piatto Sano - icona"
+           style="width:120px;height:120px;border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.25);margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;"
+           width="120" height="120" loading="eager">
+      <h1 style="font-size:2.6em;margin-bottom:14px;">Il Piatto Sano</h1>
+      <p>Gioco educativo gratuito sull'alimentazione sana e la sicurezza nutrizionale per bambini dai 3 ai 12 anni</p>
+      <span class="sane-badge" style="margin-top:20px;display:inline-flex;">🌱 Progetto S.A.N.E. Italia – "Mangiare Bene, Crescere Meglio"</span>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- INTRO -->
+    <div class="intro-card">
+      <p>
+        <strong>Il Piatto Sano</strong> è un gioco interattivo gratuito che insegna ai bambini i principi di una corretta alimentazione basata sulle linee guida
+        <strong>Harvard T.H. Chan School of Public Health</strong> e dell'<strong>OMS</strong>. Un progetto educativo serio, sviluppato da professionisti,
+        riconosciuto a livello istituzionale nazionale nell'ambito di <strong>S.A.N.E. Italia</strong>.
+      </p>
+    </div>
+
+    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/08/e01420e8-7db7-466d-aafd-c34d0470f48e-1-1024x683.png"
+         alt="Il Piatto Sano - gioco educativo per bambini"
+         class="game-image" width="1024" height="683" loading="eager" fetchpriority="high">
+
+    <!-- CTA PRINCIPALE -->
+    <div class="cta-buttons" style="margin-top:10px;">
+      <a href="https://ilpiattosano.netlify.app/" class="btn btn-primary">🎮 Gioca Online — Gratis</a>
+      <a href="https://play.google.com/store/apps/details?id=com.daop.ilpiattosano" class="btn btn-secondary">📱 Download App Android</a>
+    </div>
+
+    <div class="lang-badges" style="justify-content:center;">
+      <span class="lang-badge">🇮🇹 Italiano</span>
+      <span class="lang-badge">🇬🇧 English</span>
+      <span class="lang-badge">🇪🇸 Español</span>
+    </div>
+
+    <!-- CARATTERISTICHE -->
+    <h2>Caratteristiche del Gioco</h2>
+    <div class="feature-row"><span class="ck">✓</span> Per bambini dai 3 ai 12 anni</div>
+    <div class="feature-row"><span class="ck">✓</span> Basato sul Piatto Sano di Harvard e linee guida OMS</div>
+    <div class="feature-row"><span class="ck">✓</span> Gestione completa dei <strong>14 allergeni alimentari</strong> obbligatori per legge (Reg. UE 1169/2011)</div>
+    <div class="feature-row"><span class="ck">✓</span> Gestione intolleranze: lattosio, fruttosio, istamina, FODMAP</div>
+    <div class="feature-row"><span class="ck">✓</span> Supporto diete vegane, vegetariane e onnivore con alternative sicure</div>
+    <div class="feature-row"><span class="ck">✓</span> Due modalità di gioco — facile (3-6 anni) e difficile (7-12 anni)</div>
+    <div class="feature-row"><span class="ck">✓</span> Oltre 120 alimenti con informazioni nutrizionali</div>
+    <div class="feature-row"><span class="ck">✓</span> Sviluppato con nutrizionista professionista</div>
+    <div class="feature-row"><span class="ck">✓</span> Completamente gratuito, senza pubblicità, senza raccolta dati</div>
+
+    <!-- MODALITÀ -->
+    <h2>Due Modalità di Gioco</h2>
+    <div class="modality-grid">
+      <div class="modality-card easy">
+        <h3>🟢 Modalità Facile — 3-6 anni</h3>
+        <p>Cibi sani con bordi verdi, da limitare con bordi rossi. Consigli vocali di Serafina la nutrizionista. Concetti semplici e chiari, perfetti per la scuola dell'infanzia.</p>
+      </div>
+      <div class="modality-card hard">
+        <h3>🔴 Modalità Difficile — 7-12 anni</h3>
+        <p>Aspetto degli alimenti neutro, senza colori guida. Il bambino classifica autonomamente. Allena il pensiero critico. Adatto alla scuola primaria.</p>
+      </div>
+    </div>
+
+    <!-- 14 ALLERGENI -->
+    <div class="allergeni-section">
+      <h2>🛡️ I 14 Allergeni Alimentari Obbligatori</h2>
+      <p style="color:#5a4200;">Il gioco gestisce tutti i <strong>14 allergeni</strong> previsti dal Regolamento UE 1169/2011, con alternative nutrizionalmente equivalenti per ciascuno.</p>
+      <div class="allergeni-grid">
+        <div class="allergene-item">🌾 Glutine</div>
+        <div class="allergene-item">🦐 Crostacei</div>
+        <div class="allergene-item">🥚 Uova</div>
+        <div class="allergene-item">🐟 Pesce</div>
+        <div class="allergene-item">🥜 Arachidi</div>
+        <div class="allergene-item">🫘 Soia</div>
+        <div class="allergene-item">🥛 Latte</div>
+        <div class="allergene-item">🌰 Frutta a guscio</div>
+        <div class="allergene-item">🌿 Sedano</div>
+        <div class="allergene-item">🟡 Senape</div>
+        <div class="allergene-item">🌱 Sesamo</div>
+        <div class="allergene-item">🍷 Solfiti</div>
+        <div class="allergene-item">🐚 Molluschi</div>
+        <div class="allergene-item">🟣 Lupini</div>
+      </div>
+    </div>
+
+    <!-- SERAFINA -->
+    <div class="serafina-box">
+      <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/Senza-titolo-1.jpg"
+           alt="Dott.ssa Serafina Cardaci - Nutrizionista" width="80" height="80" loading="lazy">
+      <div>
+        <h3>Dott.ssa Serafina Cardaci — Nutrizionista</h3>
+        <p>Il Piatto Sano è sviluppato in collaborazione con la Dott.ssa Serafina Cardaci, nutrizionista professionista. Ogni contenuto educativo — dalle proporzioni del piatto alla gestione degli allergeni — è validato scientificamente. <a href="https://www.deliziosamenteinforma.com/" target="_blank" rel="noopener" style="color:#2d4a5c;font-weight:600;text-decoration:none;border-bottom:2px solid #e8954a;">deliziosamenteinforma.com</a></p>
+      </div>
+    </div>
+
+    <!-- S.A.N.E. ITALIA -->
+    <div class="sane-box">
+      <h2>🌱 Parte del Progetto S.A.N.E. Italia</h2>
+      <p>Il Piatto Sano è il cuore del progetto <strong>S.A.N.E. Italia — Sicurezza · Alimentazione · Nutrizione · Educazione</strong>, un programma completo di educazione alimentare per le scuole italiane, presentato a livello istituzionale nazionale.</p>
+      <p>Il gioco gratuito è accessibile a tutti. I moduli didattici avanzati sono riservati alle scuole che aderiscono al progetto tramite un biologo S.A.N.E. abilitato.</p>
+
+      <div class="moduli-grid">
+        <div class="modulo-card">
+          <span class="icon">🍽️</span>
+          <strong>Il Piatto Sano</strong>
+          <span>Composizione piatto equilibrato</span>
+          <span class="badge-locked">✅ Gratuito</span>
+        </div>
+        <div class="modulo-card">
+          <span class="icon">🔍</span>
+          <strong>Detective Etichette</strong>
+          <span>Lettura etichette e allergeni</span>
+          <span class="badge-locked">🏫 Scuole</span>
+        </div>
+        <div class="modulo-card">
+          <span class="icon">❓</span>
+          <strong>Quiz Nutrizionale</strong>
+          <span>14 allergeni, nutrizione, sicurezza</span>
+          <span class="badge-locked">🏫 Scuole</span>
+        </div>
+        <div class="modulo-card">
+          <span class="icon">🌿</span>
+          <strong>Piramide & Stagionalità</strong>
+          <span>Alimenti di stagione e km zero</span>
+          <span class="badge-locked">🏫 Scuole</span>
+        </div>
+      </div>
+
+      <div class="scuole-cta">
+        <strong>🏫 Vuoi portare S.A.N.E. Italia nella tua scuola?</strong>
+        <p>Il programma completo include 6 moduli didattici, materiali per insegnanti, questionari PRE/POST e il supporto di un biologo professionista. Contattaci per saperne di più.</p>
+        <span>📧 <strong>info@doveandiamooggipapi.it</strong></span>
+      </div>
+    </div>
+
+    <!-- ROSIGNANO PILOT -->
+    <div style="background:#f0f7f4;border:2px solid #1D9E75;border-radius:16px;padding:24px 28px;display:flex;align-items:flex-start;gap:16px;margin-top:12px;flex-wrap:wrap;">
+      <span style="font-size:2.2em;flex-shrink:0;">🏫</span>
+      <div style="flex:1;min-width:220px;">
+        <div style="display:inline-block;background:#1D9E75;color:#fff;font-size:.75em;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:8px;">Progetto Pilota · Scuola Statale · Ministero dell'Istruzione</div>
+        <strong style="display:block;color:#0f6e56;margin-bottom:6px;font-size:1em;">I.C. "Carducci–Fattori" di Rosignano Marittimo (LI) — marzo 2026</strong>
+        <p style="font-size:.93em;color:#444;margin:0 0 10px;line-height:1.55;">Circa 100 alunni hanno partecipato al progetto pilota <strong>"Mangiare Bene, Crescere Meglio"</strong> con supporto de Il Piatto Sano. Il percorso è stato patrocinato dal Comune di Rosignano Marittimo e ha coinvolto le famiglie in un momento finale di condivisione.</p>
+        <a href="https://www.fattorirosignano.edu.it/mangiare-bene-crescere-meglio/" target="_blank" rel="noopener" style="color:#0f6e56;font-weight:700;font-size:.9em;text-decoration:none;border-bottom:2px solid #1D9E75;">→ Leggi sul sito della scuola</a>
+      </div>
+    </div>
+
+
+    <!-- SICUREZZA -->
+    <h2>Sicurezza e Privacy</h2>
+    <div class="feature-row"><span class="ck">✓</span> Nessun dato personale raccolto</div>
+    <div class="feature-row"><span class="ck">✓</span> Funzionamento anche offline</div>
+    <div class="feature-row"><span class="ck">✓</span> Zero pubblicità o acquisti in-app</div>
+    <div class="feature-row"><span class="ck">✓</span> Sicuro per bambini — approvato da genitori e insegnanti</div>
+
+    <!-- CTA FINALE -->
+    <h2 style="text-align:center;">Inizia a Giocare Subito</h2>
+    <div class="cta-buttons">
+      <a href="https://ilpiattosano.netlify.app/" class="btn btn-primary">🎮 Gioca Online — Gratis</a>
+      <a href="https://play.google.com/store/apps/details?id=com.daop.ilpiattosano" class="btn btn-secondary">📱 Download App Android</a>
+      <a href="https://www.doveandiamooggipapi.it/" class="btn btn-outline">← Torna alla Home DAOP</a>
+    </div>
+
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded','false');
+      });
+    });
+  </script>
+
+
+  <!-- FOOTER -->
+  <div style="background:#2d3748;color:#fff;padding:20px 0;">
+    <div style="text-align:center;font-size:.9em;">
+      <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2026/04/LOGO-DAOP.png" alt="Logo DAOP" style="width:36px;height:36px;object-fit:contain;opacity:.9;vertical-align:middle;margin-right:8px;" width="36" height="36" loading="lazy">
+      &copy; 2026 Dove Andiamo Oggi Papi APS – La guida per famiglie con bambini<br>
+      <a href="/privacy-policy/" style="color:#fff;text-decoration:underline;">Privacy Policy</a> ·
+      <a href="/cookie-policy/" style="color:#fff;text-decoration:underline;">Cookie Policy</a> ·
+      <a href="#" id="cookieyes-manage-consent" style="color:#fff;text-decoration:underline;">Rivedi preferenze cookie</a>
+    </div>
+  </div>
+
+</body>
+</html>

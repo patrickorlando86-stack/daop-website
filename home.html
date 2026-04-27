@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAOP – Dove Andiamo Oggi Papi | Community Famiglie Alessandria e Asti</title>
+
+  <meta name="description" content="DAOP APS: la community che aiuta le famiglie a scoprire eventi e luoghi per bambini in provincia di Alessandria e Asti. Mappa interattiva, giochi educativi, libri illustrati.">
+  <link rel="canonical" href="https://www.doveandiamooggipapi.it/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DAOP - Dove Andiamo Oggi Papi">
+  <meta property="og:title" content="DAOP – Dove Andiamo Oggi Papi | Community Famiglie APS">
+  <meta property="og:description" content="APS per famiglie: mappa family-friendly, eventi settimanali, Il Piatto Sano e libri illustrati.">
+  <meta property="og:url" content="https://www.doveandiamooggipapi.it/">
+  <meta property="og:image" content="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/05/cropped-IMG-20250403-WA0012.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DAOP – Dove Andiamo Oggi Papi | Community Famiglie APS">
+  <meta name="twitter:description" content="APS per famiglie: mappa, eventi, Il Piatto Sano e libri.">
+  <meta name="twitter:image" content="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/05/cropped-IMG-20250403-WA0012.jpg">
+
+  <link rel="preload" as="image" href="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/05/cropped-IMG-20250403-WA0012.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "DAOP - Dove Andiamo Oggi Papi APS",
+    "url": "https://www.doveandiamooggipapi.it/",
+    "logo": "https://www.doveandiamooggipapi.it/wp-content/uploads/2025/01/cropped-cropped-Logo1.jpg",
+    "description": "Associazione di Promozione Sociale per famiglie con bambini nelle province di Alessandria e Asti",
+    "sameAs": [
+      "https://www.instagram.com/daop_alessandria/",
+      "https://www.instagram.com/daop_asti/",
+      "https://www.facebook.com/daopalessandria/",
+      "https://www.facebook.com/daopasti/"
+    ]
+  }
+  </script>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.6; color:#333; overflow-x:hidden; }
+
+    /* NAV */
+    nav { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:15px 20px; }
+    .logo { font-size:1.5em; font-weight:bold; color:#2d4a5c; text-decoration:none !important; display:flex; align-items:center; gap:10px; }
+    .nav-links { display:flex; gap:22px; list-style:none; flex-wrap:wrap; }
+    .nav-links li { list-style:none !important; } .nav-links a { color:#2d4a5c; text-decoration:none; font-weight:500; transition:color .3s; padding:8px 0; border-bottom:2px solid transparent; font-size:.95em; }
+    .nav-links a:hover, .nav-links a:focus { color:#e8954a; border-bottom:2px solid #e8954a; outline:none; }
+    .menu-toggle { display:none; flex-direction:column; cursor:pointer; gap:5px; background:transparent; border:0; }
+    .menu-toggle span { width:25px; height:3px; background:#2d4a5c; border-radius:2px; transition:.3s; }
+
+    /* HERO */
+    .hero { background:#f5f5f5; padding:0; text-align:center; position:relative; overflow:hidden; }
+    .hero-image { width:100%; max-width:100%; height:auto; display:block; }
+    .hero-content { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); width:92%; max-width:880px; background:rgba(255,255,255,0.96); padding:26px 40px 30px; border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,0.15); }
+    .hero h1 { font-size:2.4em; margin-bottom:10px; animation:fadeInUp 1s ease; color:#2d4a5c; }
+    .hero-sub { font-size:1.05em; margin:0 auto 16px; color:#5a6c7d; animation:fadeInUp 1s ease .2s both; }
+    .hero-stats { display:flex; justify-content:center; gap:28px; flex-wrap:wrap; margin:16px 0 20px; }
+    .hero-stat .num { font-size:1.8em; font-weight:700; color:#2d4a5c; line-height:1; }
+    .hero-stat .lbl { font-size:.76em; color:#5a6c7d; margin-top:2px; }
+    .hero-badges { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+    .badge-aps { background:#2d4a5c; color:#fff; font-size:.76em; font-weight:700; padding:5px 14px; border-radius:20px; letter-spacing:.5px; }
+    .badge-ambassador { background:linear-gradient(135deg,#c9a227,#e8c84a); color:#3d2f00; font-size:.76em; font-weight:700; padding:5px 14px; border-radius:20px; letter-spacing:.5px; }
+    .hero-cta { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:16px; }
+    .btn-primary { background:linear-gradient(135deg,#2d4a5c,#4a6b7c); color:#fff; padding:13px 28px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1em; transition:all .3s; display:inline-flex; align-items:center; gap:8px; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(45,74,92,.35); }
+    .btn-secondary { background:#fff; color:#2d4a5c; padding:13px 28px; border-radius:50px; text-decoration:none; font-weight:700; font-size:1em; transition:all .3s; display:inline-flex; align-items:center; gap:8px; border:2px solid #2d4a5c; }
+    .btn-secondary:hover { background:#e8954a; border-color:#e8954a; color:#fff; }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+    /* LAYOUT */
+    .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+    section { padding:80px 20px; }
+    section:nth-of-type(even) { background:#f8f9fa; }
+    h2 { font-size:2.3em; margin-bottom:20px; text-align:center; color:#2d4a5c; position:relative; padding-bottom:15px; }
+    h2::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:80px; height:4px; background:linear-gradient(90deg,#2d4a5c,#4a6b7c); border-radius:2px; }
+
+    /* AMBASSADOR BANNER */
+    .ambassador-banner { background:linear-gradient(135deg,#c9a227 0%,#e8c84a 50%,#c9a227 100%); border-radius:16px; padding:26px 32px; display:flex; align-items:center; gap:22px; margin-bottom:45px; box-shadow:0 6px 24px rgba(201,162,39,.3); }
+    .ambassador-banner .trophy { font-size:2.8em; flex-shrink:0; }
+    .ambassador-banner h3 { font-size:1.2em; color:#3d2f00; margin-bottom:4px; }
+    .ambassador-banner p { font-size:.92em; color:#5a4200; margin:0; }
+    .ambassador-banner .cat { display:inline-block; background:rgba(0,0,0,.12); color:#3d2f00; font-size:.76em; font-weight:700; padding:3px 10px; border-radius:10px; margin-top:5px; }
+
+    /* TEAM */
+    .team { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:35px; margin-top:45px; }
+    .team-member { text-align:center; padding:28px; background:#fff; border-radius:15px; box-shadow:0 5px 20px rgba(0,0,0,.1); transition:transform .3s, box-shadow .3s; }
+    .team-member:hover { transform:translateY(-8px); box-shadow:0 10px 30px rgba(45,74,92,.3); }
+    .team-member h3 { color:#2d4a5c; margin-bottom:8px; font-size:1.4em; }
+    .team-member .role { font-weight:600; margin-bottom:8px; font-size:.95em; }
+    .role.orange { color:#e8954a; }
+    .role.blue { color:#2d4a5c; }
+    .role.teal { color:#6ba5a8; }
+    .team-member p { color:#5a6c7d; font-size:.95em; line-height:1.55; margin-top:5px; }
+
+    /* APS */
+    .aps-box { background:linear-gradient(135deg,#2d4a5c,#3a5f75); border-radius:20px; padding:45px 40px; color:#fff; margin-bottom:40px; position:relative; overflow:hidden; }
+    .aps-box::before { content:'APS'; position:absolute; right:-10px; top:-20px; font-size:9em; font-weight:900; color:rgba(255,255,255,.05); line-height:1; pointer-events:none; }
+    .aps-box h3 { font-size:1.5em; margin-bottom:10px; color:#fff !important; }
+    .aps-box p { opacity:.92; font-size:1.02em; max-width:700px; color:#fff !important; }
+    .aps-pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-top:28px; }
+    .aps-pillar { background:rgba(255,255,255,.12); border-radius:12px; padding:18px; text-align:center; border:1px solid rgba(255,255,255,.2); }
+    .aps-pillar .icon { font-size:1.8em; margin-bottom:7px; display:block; }
+    .aps-pillar strong { display:block; font-size:.95em; color:#fff !important; margin-bottom:3px; }
+    .aps-pillar span { font-size:.84em; opacity:.85; color:#fff !important; }
+    .aps-5x1000 { background:#f0f7f4; border-left:4px solid #1D9E75; border-radius:0 12px 12px 0; padding:18px 22px; margin-top:28px; }
+    .aps-5x1000 strong { color:#0f6e56; display:block; margin-bottom:4px; font-size:1.02em; }
+    .aps-5x1000 p { color:#444; font-size:.93em; margin:0; }
+    .fondatori { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:16px; margin-top:28px; }
+    .fondatore-chip { display:flex; align-items:center; gap:12px; background:#f8f9fa; border-radius:12px; padding:14px 16px; }
+    .fondatore-chip .initials { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#2d4a5c,#4a6b7c); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.84em; flex-shrink:0; }
+    .fondatore-chip .info strong { display:block; font-size:.92em; color:#2d4a5c; }
+    .fondatore-chip .info span { font-size:.8em; color:#5a6c7d; }
+
+    /* PLOGGING */
+    .plogging-banner { background:#fff; border:2px solid #2d4a5c; border-radius:16px; padding:28px 32px; display:flex; align-items:flex-start; gap:22px; margin-top:40px; }
+    .plogging-banner .pl-icon { font-size:2.8em; flex-shrink:0; margin-top:4px; }
+    .plogging-banner h3 { font-size:1.15em; color:#2d4a5c; margin-bottom:6px; }
+    .plogging-banner p { font-size:.93em; color:#5a6c7d; margin:0 0 10px; line-height:1.55; }
+    .plogging-badge { display:inline-block; background:#2d4a5c; color:#fff; font-size:.75em; font-weight:700; padding:4px 12px; border-radius:20px; }
+    .plogging-partners { font-size:.82em; color:#5a6c7d; margin-top:8px; }
+
+    /* SOCIAL CTA */
+    .social-cta { background:linear-gradient(135deg,#2d4a5c,#4a6b7c) !important; color:#fff !important; }
+    .social-buttons { display:flex; justify-content:center; gap:28px; flex-wrap:wrap; margin-top:38px; }
+    .social-group { position:relative; }
+    .social-main-btn { display:inline-flex; align-items:center; gap:10px; padding:14px 32px; border-radius:50px; font-weight:bold; font-size:1.05em; transition:all .3s; cursor:pointer; border:3px solid #fff; background:#fff; color:#2d4a5c; }
+    .social-main-btn:hover { transform:scale(1.05); background:#e8954a; border-color:#e8954a; color:#fff; }
+    .social-submenu { display:none; position:absolute; top:110%; left:50%; transform:translateX(-50%); background:#fff; border-radius:15px; padding:14px; box-shadow:0 10px 30px rgba(0,0,0,.2); min-width:200px; z-index:100; }
+    .social-group:hover .social-submenu, .social-group.open .social-submenu { display:block; animation:slideDown .3s ease; }
+    @keyframes slideDown { from { opacity:0; transform:translateX(-50%) translateY(-10px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+    .social-submenu a { display:flex; align-items:center; gap:10px; padding:11px 14px; color:#333; text-decoration:none; border-radius:8px; transition:all .2s; font-weight:600; font-size:.95em; }
+    .social-submenu a:hover { background:#f8f9fa; color:#2d4a5c; transform:translateX(5px); }
+
+    /* MAPPA */
+    .feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:24px; margin:35px 0; }
+    .feature-item { text-align:center; padding:18px; }
+    .feature-item .icon { font-size:44px; margin-bottom:12px; }
+    .feature-box { background:linear-gradient(135deg,#2d4a5c,#4a6b7c); padding:55px 40px; border-radius:20px; color:#fff; text-align:center; margin-top:35px; box-shadow:0 10px 40px rgba(45,74,92,.3); transition:transform .3s; }
+    .feature-box:hover { transform:scale(1.01); }
+    .feature-box h3 { font-size:1.9em; margin-bottom:16px; color:#fff !important; }
+    .feature-box p { color:rgba(255,255,255,.95) !important; font-size:1.05em; }
+    .btn { display:inline-flex; align-items:center; gap:10px; padding:14px 32px; border-radius:50px; text-decoration:none; font-weight:bold; font-size:1.05em; transition:all .3s; cursor:pointer; border:none; }
+    .feature-box .btn { background:#fff; color:#2d4a5c; margin-top:10px; }
+    .feature-box .btn:hover { background:#e8954a; color:#fff; transform:translateY(-3px); }
+
+    /* PIATTO SANO */
+    .gioco-header { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+    .sane-badge { display:inline-flex; align-items:center; gap:6px; background:#f0f7f4; color:#0f6e56; font-size:.82em; font-weight:700; padding:6px 14px; border-radius:20px; border:1px solid #9FE1CB; }
+    .game-showcase { display:grid; grid-template-columns:1fr 1fr; gap:50px; margin-top:45px; align-items:center; }
+    .game-features { list-style:none; padding:0; margin:0; }
+    .game-features li { padding:13px 0 13px 38px; position:relative; font-size:1.05em; border-bottom:1px solid #f0f0f0; }
+    .game-features li:last-child { border:0; }
+    .game-features li::before { content:'✓'; position:absolute; left:0; color:#2d4a5c; font-weight:bold; font-size:1.4em; }
+    .lang-badges { display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; }
+    .lang-badge { background:#e8f0f5; color:#2d4a5c; font-size:.8em; font-weight:700; padding:4px 12px; border-radius:20px; }
+    .scuole-cta { background:#f8f9fa; border-radius:14px; padding:20px 22px; margin-top:22px; border-left:4px solid #e8954a; }
+    .scuole-cta strong { color:#2d4a5c; display:block; margin-bottom:5px; }
+    .scuole-cta p { font-size:.9em; color:#5a6c7d; margin:0 0 10px; }
+    .scuole-cta a { color:#e8954a; font-weight:700; text-decoration:none; }
+    .scuole-cta a:hover { text-decoration:underline; }
+
+    /* LIBRI */
+    .books-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:35px; margin-top:45px; }
+    .book-card { background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,.1); transition:transform .3s; }
+    .book-card:hover { transform:translateY(-8px); }
+    .book-image { height:380px; display:flex; align-items:center; justify-content:center; }
+    .book-info { padding:22px; }
+    .book-info h3 { color:#2d4a5c; margin-bottom:12px; font-size:1.25em; }
+    .book-info p { color:#5a6c7d; font-size:.93em; margin-bottom:0; }
+
+    /* SPONSOR */
+    .sponsor-tiers { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px; margin-top:35px; }
+    .sponsor-card { background:#fff; border-radius:16px; padding:26px 22px; box-shadow:0 4px 16px rgba(0,0,0,.08); border-top:4px solid; transition:transform .3s; }
+    .sponsor-card:hover { transform:translateY(-5px); }
+    .sponsor-card.tier-base { border-color:#6ba5a8; }
+    .sponsor-card.tier-silver { border-color:#888; }
+    .sponsor-card.tier-gold { border-color:#c9a227; }
+    .sponsor-card.tier-platinum { border-color:#2d4a5c; }
+    .tier-label { font-size:.73em; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:7px; }
+    .tier-base .tier-label { color:#6ba5a8; }
+    .tier-silver .tier-label { color:#888; }
+    .tier-gold .tier-label { color:#c9a227; }
+    .tier-platinum .tier-label { color:#2d4a5c; }
+    .tier-price { font-size:1.9em; font-weight:700; color:#2d4a5c; margin-bottom:3px; line-height:1; }
+    .tier-period { font-size:.78em; color:#5a6c7d; margin-bottom:14px; }
+    .tier-features { list-style:none; padding:0; }
+    .tier-features li { padding:5px 0; font-size:.9em; color:#444; border-bottom:1px solid #f0f0f0; display:flex; align-items:flex-start; gap:7px; }
+    .tier-features li:last-child { border:0; }
+    .tier-features li::before { content:'✓'; color:#2d4a5c; font-weight:700; flex-shrink:0; }
+    .badge-ff { display:inline-flex; align-items:center; gap:8px; background:#2d4a5c; color:#fff; padding:9px 20px; border-radius:50px; font-weight:700; font-size:.95em; margin:0 auto 12px; }
+
+    /* ARTICOLI */
+    .articles-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:35px; }
+    .article-card { background:#fff; border-radius:12px; padding:18px 22px; box-shadow:0 4px 14px rgba(0,0,0,.06); transition:transform .2s, box-shadow .2s; }
+    .article-card:hover { transform:translateY(-3px); box-shadow:0 7px 20px rgba(0,0,0,.1); }
+    .article-card h3 { margin:0; font-size:1.02rem; line-height:1.35; color:#2d4a5c; }
+    .article-card h3 a { color:inherit; text-decoration:none; }
+    .article-card h3 a:hover { color:#e8954a; text-decoration:underline; }
+
+    /* CONTATTI */
+    .contatti { background:linear-gradient(135deg,#2d4a5c,#4a6b7c) !important; color:#fff !important; text-align:center; }
+    .contatti h2 { color:#fff; }
+    .contatti h2::after { background:#fff; }
+    .contact-info { margin-top:35px; font-size:1.15em; }
+    .contact-info a { color:#fff; text-decoration:none; border-bottom:2px solid #fff; transition:opacity .3s; }
+    .contact-info a:hover { opacity:.8; }
+
+    footer { background:#2d3748; color:#fff; text-align:center; padding:28px 20px; }
+
+    /* MOBILE */
+    @media (max-width:768px) {
+      .nav-links { position:absolute; top:100%; left:0; right:0; background:#fff; flex-direction:column; padding:22px 28px; gap:14px; box-shadow:0 5px 10px rgba(0,0,0,.1); display:none; }
+      .nav-links.active { display:flex; }
+      .nav-links li { list-style:none !important; margin-left:0 !important; }
+      .nav-links li a { display:block; width:100%; padding-left:8px; }
+      .menu-toggle { display:flex; }
+      .hero-content { position:static; transform:none; margin:0; padding:22px 16px 26px; width:100%; border-radius:0; }
+      .hero h1 { font-size:1.65em; }
+      .hero-stats { gap:16px; }
+      .hero-stat .num { font-size:1.45em; }
+      h2 { font-size:1.75em; }
+      .game-showcase { grid-template-columns:1fr; }
+      .feature-box { padding:38px 18px; }
+      .social-buttons { flex-direction:column; align-items:center; }
+      .btn { width:80%; justify-content:center; }
+      .aps-box { padding:28px 20px; }
+      .ambassador-banner { flex-direction:column; text-align:center; padding:22px 18px; }
+      .plogging-banner { flex-direction:column; padding:22px 18px; }
+      .hero-cta { flex-direction:column; align-items:center; }
+      .btn-primary, .btn-secondary { width:90%; justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <a href="https://www.doveandiamooggipapi.it/" class="logo">
+        <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/01/cropped-cropped-Logo1.jpg"
+             alt="Logo DAOP" style="height:40px;width:auto" width="400" height="400" loading="lazy">
+        DAOP
+      </a>
+      <ul class="nav-links" id="navLinks" style="list-style:none !important;margin:0 !important;padding:0 !important;">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#chi-siamo">Chi Siamo</a></li>
+        <li><a href="#mappa">Mappa</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/il-piatto-sano/">Il Piatto Sano</a></li>
+        <li><a href="#libri">Libri</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/daop-nei-media/">Media</a></li>
+        <li><a href="#collabora">Collabora</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Apri menù" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/05/cropped-IMG-20250403-WA0012.jpg"
+         alt="DAOP - Dove Andiamo Oggi Papi" class="hero-image"
+         width="1920" height="960" loading="eager" fetchpriority="high">
+    <div class="hero-content">
+      <div class="hero-badges">
+        <span class="badge-aps">🏛️ APS – Associazione di Promozione Sociale</span>
+        <span class="badge-ambassador">🏆 Candidata Italy Ambassador Awards 2026</span>
+      </div>
+      <h1>Dove Andiamo Oggi Papi?</h1>
+      <p class="hero-sub">La community delle famiglie di Alessandria e Asti — eventi, luoghi, giochi e molto altro, ogni settimana</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">5.000+</div><div class="lbl">famiglie nella community</div></div>
+        <div class="hero-stat"><div class="num">2</div><div class="lbl">province coperte</div></div>
+        <div class="hero-stat"><div class="num">2026</div><div class="lbl">anno fondazione APS</div></div>
+        <div class="hero-stat"><div class="num">52</div><div class="lbl">settimane di eventi l'anno</div></div>
+      </div>
+      <div class="hero-cta">
+        <a href="#collabora" class="btn-primary">Collabora con Noi</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHI SIAMO -->
+  <section id="chi-siamo" style="background:#fff;padding:80px 20px;">
+    <div class="container">
+      <h2>Chi Siamo</h2>
+      <p style="text-align:center;max-width:800px;margin:20px auto 35px;font-size:1.05em;color:#5a6c7d;">
+        Dove Andiamo Oggi Papi nasce da un'idea semplice: aiutare i genitori a trovare ogni weekend il posto giusto dove portare i propri figli, senza stress e senza perdere tempo. Dal 2023 community, dal 2026 Associazione di Promozione Sociale.
+      </p>
+
+      <!-- Ambassador Banner -->
+      <div class="ambassador-banner">
+        <div class="trophy">🏆</div>
+        <div>
+          <h3>Candidata Italy Ambassador Awards 2026</h3>
+          <p>DAOP ha ricevuto la candidatura ufficiale nella categoria <strong>Travel &amp; Destination</strong> degli Italy Ambassador Awards 2026, riconoscimento dedicato a chi promuove il territorio italiano con passione e creatività.</p>
+          <span class="cat">Travel &amp; Destination Category</span>
+        </div>
+      </div>
+
+      <div class="team">
+        <div class="team-member">
+          <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-03-at-08.10.20.jpeg"
+               alt="Patrick Orlando" style="width:150px;height:150px;border-radius:50%;object-fit:cover;margin-bottom:18px;" width="150" height="150" loading="lazy">
+          <h3>Patrick Orlando</h3>
+          <p class="role blue">Fondatore • Autore</p>
+          <p>Papà e ingegnere, fondatore di <strong>DAOP</strong>. Crea strumenti utili per le famiglie: la mappa dei luoghi family-friendly, il gioco <em>Il Piatto Sano</em> e albi illustrati per bambini.</p>
+        </div>
+        <div class="team-member">
+          <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/03/Immagine_WhatsApp_2025-03-10_ore_13.12.58_380d8d42-removebg-preview.png"
+               alt="Alessandra Zaccone" style="width:150px;height:150px;border-radius:50%;object-fit:cover;margin-bottom:18px;" width="150" height="150" loading="lazy">
+          <h3>Alessandra Zaccone</h3>
+          <p class="role teal">Curatrice Eventi • DAOP Asti</p>
+          <p>Curatrice degli eventi per la provincia di <strong>Asti</strong>. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti e mantiene vivo il dialogo con i genitori del territorio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APS -->
+  <section id="aps" style="background:#f8f9fa;padding:80px 20px;">
+    <div class="container">
+      <h2>🏛️ DAOP è una APS</h2>
+      <p style="text-align:center;max-width:800px;margin:20px auto 35px;font-size:1.05em;color:#5a6c7d;">
+        Nel 2026 DAOP si è costituita formalmente come <strong>Associazione di Promozione Sociale</strong>, con sede in provincia di Alessandria. Un passo importante per dare struttura e continuità al nostro impegno verso le famiglie del territorio.
+      </p>
+
+      <div class="aps-box" style="color:#fff !important;">
+        <h3>Associazione di Promozione Sociale – Dove Andiamo Oggi Papi</h3>
+        <p>La nostra missione è promuovere la cultura del tempo libero in famiglia, valorizzare il territorio e sostenere le famiglie con bambini attraverso strumenti digitali gratuiti, eventi e contenuti di qualità.</p>
+        <div class="aps-pillars">
+          <div class="aps-pillar">
+            <span class="icon">📍</span>
+            <strong>Territorio</strong>
+            <span>Alessandria e Asti, con sguardo all'Italia</span>
+          </div>
+          <div class="aps-pillar">
+            <span class="icon">👨‍👩‍👧‍👦</span>
+            <strong>Community</strong>
+            <span>5.000+ famiglie attive ogni settimana</span>
+          </div>
+          <div class="aps-pillar">
+            <span class="icon">🎓</span>
+            <strong>Educazione</strong>
+            <span>Strumenti gratuiti per crescere bene</span>
+          </div>
+          <div class="aps-pillar">
+            <span class="icon">🤝</span>
+            <strong>Rete locale</strong>
+            <span>Collaboriamo con attività, enti e scuole</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="aps-5x1000">
+        <strong>💚 Sostienici con il 5x1000 — costa zero, vale tanto</strong>
+        <p>In qualità di APS, DAOP può ricevere il tuo 5x1000 nella dichiarazione dei redditi. Non ti costa nulla: basta indicare il nostro codice fiscale nel riquadro dedicato alle associazioni di promozione sociale. Ogni euro ci aiuta a continuare a farlo gratuitamente per le famiglie.</p>
+        <div style="background:#fff;border-radius:10px;padding:12px 18px;margin-top:10px;display:inline-flex;align-items:center;gap:10px;">
+          <span style="font-size:1.4em;">🏦</span>
+          <div>
+            <span style="font-size:.78em;color:#5a6c7d;display:block;">Codice fiscale APS</span>
+            <strong style="font-size:1.2em;color:#0f6e56;letter-spacing:1px;">92039380065</strong>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="text-align:center;color:#2d4a5c;margin:40px 0 18px;font-size:1.35em;">Soci Fondatori</h3>
+      <div class="fondatori">
+        <div class="fondatore-chip">
+          <div class="initials">PO</div>
+          <div class="info"><strong>Patrick Orlando</strong><span>Fondatore & Presidente</span></div>
+        </div>
+        <div class="fondatore-chip">
+          <div class="initials">DD</div>
+          <div class="info"><strong>Donatella D'Alessandro</strong><span>Socia Fondatrice</span></div>
+        </div>
+        <div class="fondatore-chip">
+          <div class="initials">AZ</div>
+          <div class="info"><strong>Alessandra Zaccone</strong><span>Socia Fondatrice • Asti</span></div>
+        </div>
+      </div>
+
+      <!-- PLOGGING -->
+      <div class="plogging-banner">
+        <div class="pl-icon">🚴</div>
+        <div>
+          <h3>Media partner: Plogging, Biking &amp; Smiling – Novi Ligure</h3>
+          <p>DAOP è media partner ufficiale del progetto <strong>"Plogging, Biking &amp; Smiling"</strong>, l'iniziativa che porta oltre 400 bambini delle scuole e centinaia di famiglie a pedalare, giocare e prendersi cura del territorio di Novi Ligure. Un programma di eventi gratuiti che dura tutta la primavera e l'estate, fino alla grande Festa dello Sport di settembre.</p>
+          <span class="plogging-badge">🌱 Media Partner Ufficiale</span>
+          <p class="plogging-partners">Progetto ideato da Animatamente e Pazzanimazione · Con il supporto del Comune di Novi Ligure e la Fondazione Compagnia di San Paolo · Partner: Gruppo ACOS, Azimut Cooperativa Sociale, DAOP</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COLLABORATORI -->
+  <section style="padding:80px 20px;background:#fff;">
+    <div class="container">
+      <h2>I Nostri Collaboratori</h2>
+      <p style="text-align:center;max-width:800px;margin:20px auto 35px;font-size:1.05em;color:#5a6c7d;">
+        Professionisti che ci supportano per offrire contenuti di qualità alle famiglie.
+      </p>
+      <div class="team">
+        <a href="https://www.deliziosamenteinforma.com/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+          <div class="team-member">
+            <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/Senza-titolo-1.jpg" alt="Serafina Cardaci" style="width:150px;height:150px;border-radius:50%;object-fit:cover;margin-bottom:18px;" width="150" height="150" loading="lazy">
+            <h3>Serafina Cardaci</h3>
+            <p class="role orange">Nutrizionista</p>
+            <p>Collabora al progetto <strong>Il Piatto Sano</strong> e cura la rubrica <em>Mangiando s'impara</em>, con consigli pratici su alimentazione e benessere per tutta la famiglia.</p>
+          </div>
+        </a>
+        <div class="team-member">
+          <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/bened.jpg" alt="Benedetta De Paolis" style="width:150px;height:150px;border-radius:50%;object-fit:cover;margin-bottom:18px;" width="150" height="150" loading="lazy">
+          <h3>Benedetta De Paolis</h3>
+          <p class="role blue">Giornalista</p>
+          <p>Cura la rubrica <em>Avventure di Carta</em>, dove suggerisce letture e percorsi letterari per i più piccoli e per chi legge con loro.</p>
+        </div>
+        <div class="team-member">
+          <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/stef.png" alt="Stefania Eligi" style="width:150px;height:150px;border-radius:50%;object-fit:cover;margin-bottom:18px;" width="150" height="150" loading="lazy">
+          <h3>Stefania Eligi</h3>
+          <p class="role teal">Commercialista</p>
+          <p>Gestisce <em>Pillole Fiscali</em>: bonus, agevolazioni e detrazioni spiegate in modo chiaro e utile per le famiglie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- SOCIAL CTA -->
+  <section class="social-cta" style="padding:80px 20px;">
+    <div class="container">
+      <h2 style="color:#fff;">Seguici per Eventi Settimanali</h2>
+      <p style="text-align:center;font-size:1.1em;max-width:700px;margin:0 auto;color:#fff;">
+        Ogni settimana selezioniamo i migliori eventi per bambini in provincia di <strong>Alessandria</strong> e <strong>Asti</strong>: laboratori, spettacoli, gite e iniziative gratuite!
+      </p>
+      <div class="social-buttons">
+        <div class="social-group">
+          <button class="social-main-btn" type="button" aria-expanded="false">
+            <span style="font-size:1.4em;">📍</span> Alessandria
+          </button>
+          <div class="social-submenu">
+            <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">📘 Facebook</a>
+            <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">📸 Instagram</a>
+          </div>
+        </div>
+        <div class="social-group">
+          <button class="social-main-btn" type="button" aria-expanded="false">
+            <span style="font-size:1.4em;">📍</span> Asti
+          </button>
+          <div class="social-submenu">
+            <a href="https://www.facebook.com/daopasti/" target="_blank" rel="noopener">📘 Facebook</a>
+            <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">📸 Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa" style="background:#fff;padding:80px 20px;">
+    <div class="container">
+      <h2>🗺️ Mappa Luoghi Family-Friendly</h2>
+      <p style="text-align:center;max-width:800px;margin:20px auto;font-size:1.05em;color:#5a6c7d;">
+        La nostra mappa gratuita ti aiuta a trovare luoghi adatti alle famiglie in tutta Italia. Aggiornata dalla community!
+      </p>
+      <div class="feature-grid">
+        <div class="feature-item"><div class="icon">🚜</div><h4>Fattorie Didattiche</h4></div>
+        <div class="feature-item"><div class="icon">📚</div><h4>Biblioteche</h4></div>
+        <div class="feature-item"><div class="icon">🎪</div><h4>Parchi Giochi</h4></div>
+        <div class="feature-item"><div class="icon">🎨</div><h4>Musei</h4></div>
+        <div class="feature-item"><div class="icon">⚽</div><h4>Sport</h4></div>
+        <div class="feature-item"><div class="icon">🌟</div><h4>E tanto altro!</h4></div>
+      </div>
+      <div class="feature-box">
+        <h3>Esplora la Mappa Interattiva</h3>
+        <p style="font-size:1.05em;margin:18px 0;">Trova parchi, musei, fattorie, spazi educativi e centri sportivi ovunque tu sia!</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px;">
+          <a href="/mappa-desktop-standalone.html" class="btn" style="background:#fff;color:#2d4a5c;border:2px solid #2d4a5c;">Apri da Desktop</a>
+          <a href="/mappa-per-bambini/" class="btn" style="background:#e8954a;color:#fff;">Apri da Mobile</a>
+        </div>
+        <small id="map-suggestion" style="display:block;margin-top:10px;opacity:.9;"></small>
+      </div>
+    </div>
+  </section>
+
+  <!-- IL PIATTO SANO -->
+  <section id="gioco" style="background:#f8f9fa;padding:80px 20px;">
+    <div class="container">
+      <h2>🍽️ Il Piatto Sano</h2>
+      <div style="text-align:center;margin:14px auto 8px;max-width:700px;">
+        <span class="sane-badge">🌱 Sviluppato nell'ambito di S.A.N.E. Italia – Progetto "Mangiare Bene, Crescere Meglio"</span>
+      </div>
+      <p style="text-align:center;max-width:750px;margin:16px auto 40px;font-size:1.05em;color:#5a6c7d;">
+        Un gioco educativo gratuito su alimentazione e sicurezza nutrizionale, sviluppato con nutrizionisti professionisti e riconosciuto a livello istituzionale nazionale.
+      </p>
+
+      <div style="background:#fff;border-radius:20px;box-shadow:0 6px 24px rgba(0,0,0,.09);overflow:hidden;max-width:900px;margin:0 auto;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;align-items:stretch;">
+          <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/e01420e8-7db7-466d-aafd-c34d0470f48e-1-1024x683-1.png"
+               alt="Il Piatto Sano - gioco educativo"
+               style="width:100%;height:100%;object-fit:cover;display:block;"
+               width="1024" height="683" loading="lazy">
+          <div style="padding:36px 32px;">
+            <div class="lang-badges" style="margin-bottom:18px;">
+              <span class="lang-badge">🇮🇹 Italiano</span>
+              <span class="lang-badge">🇬🇧 English</span>
+              <span class="lang-badge">🇪🇸 Español</span>
+            </div>
+            <div style="margin-bottom:24px;">
+              <div style="padding:11px 0;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;font-size:1.05em;color:#333;"><span style="color:#2d4a5c;font-weight:700;font-size:1.2em;">✓</span> Per bambini dai 3 ai 12 anni</div>
+              <div style="padding:11px 0;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;font-size:1.05em;color:#333;"><span style="color:#2d4a5c;font-weight:700;font-size:1.2em;">✓</span> Piramide alimentare e allergeni</div>
+              <div style="padding:11px 0;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;font-size:1.05em;color:#333;"><span style="color:#2d4a5c;font-weight:700;font-size:1.2em;">✓</span> Con Serafina, nutrizionista professionista</div>
+              <div style="padding:11px 0;display:flex;align-items:center;gap:10px;font-size:1.05em;color:#333;"><span style="color:#2d4a5c;font-weight:700;font-size:1.2em;">✓</span> Gratuito, sicuro, multilingua</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <a href="https://ilpiattosano.netlify.app/" class="btn" style="background:linear-gradient(135deg,#2d4a5c,#4a6b7c);color:#fff;justify-content:center;">🎮 Gioca Online</a>
+              <a href="https://play.google.com/store/apps/details?id=com.daop.ilpiattosano" class="btn" style="background:#e8954a;color:#fff;justify-content:center;">📱 Download App</a>
+              <a href="https://www.doveandiamooggipapi.it/il-piatto-sano/" class="btn" style="background:#fff;color:#2d4a5c;border:2px solid #2d4a5c;justify-content:center;">📖 Scopri di più</a>
+            </div>
+          </div>
+        </div>
+        <div style="padding:22px 32px;border-top:1px solid #f0f0f0;background:#fafcfb;">
+          <strong style="color:#2d4a5c;display:block;margin-bottom:5px;">🏫 Il Piatto Sano entra nelle scuole</strong>
+          <p style="font-size:.92em;color:#5a6c7d;margin:0 0 8px;">Il progetto S.A.N.E. Italia include moduli didattici avanzati pensati per insegnanti e dirigenti scolastici. Contattaci per saperne di più.</p>
+          <span style="font-size:.9em;color:#5a6c7d;">📧 <strong style="color:#2d4a5c;">info@doveandiamooggipapi.it</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIBRI -->
+  <section id="libri" style="background:#fff;padding:80px 20px;">
+    <div class="container">
+      <h2>📚 I Nostri Libri Illustrati</h2>
+      <p style="text-align:center;max-width:800px;margin:20px auto;font-size:1.05em;color:#5a6c7d;">
+        Libri scritti e illustrati da Patrick per accompagnare bambini e genitori in viaggi ricchi di emozioni e immaginazione.
+      </p>
+      <div class="books-grid">
+        <div class="book-card">
+          <div class="book-image" style="background:none;padding:0;">
+            <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/81Inh9iJtHL._SL1500_.jpg" alt="Il Viaggio di Nathan" style="width:100%;height:100%;object-fit:cover;" width="800" height="1200" loading="lazy">
+          </div>
+          <div class="book-info">
+            <h3>Il Viaggio di Nathan</h3>
+            <p>Un albo illustrato poetico e magico sul legame tra fratelli e il potere dell'immaginazione.</p>
+            <a href="https://amzn.to/4f0ww0d" class="btn" style="background:#FF9900;color:#fff;width:100%;margin-top:14px;justify-content:center;">Scopri su Amazon</a>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-image" style="background:none;padding:0;">
+            <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/91fPd1pTdvL._SL1500_.jpg" alt="Kiko e i Semi della Meraviglia" style="width:100%;height:100%;object-fit:cover;" width="800" height="1200" loading="lazy">
+          </div>
+          <div class="book-info">
+            <h3>Kiko e i Semi della Meraviglia</h3>
+            <p>Un racconto ispirante sull'amicizia e sulla bellezza nascosta nei piccoli gesti quotidiani.</p>
+            <a href="https://amzn.to/45edyj7" class="btn" style="background:#FF9900;color:#fff;width:100%;margin-top:14px;justify-content:center;">Scopri su Amazon</a>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-image" style="background:none;padding:0;">
+            <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/11/61rr3elGzoL._SL1293_.jpg" alt="La Bambolina che Profumava di Nuvola" style="width:100%;height:100%;object-fit:cover;" width="800" height="1200" loading="lazy">
+          </div>
+          <div class="book-info">
+            <h3>La Bambolina che Profumava di Nuvola</h3>
+            <p>Una storia delicata sul legame tra generazioni e il potere dei ricordi.</p>
+            <a href="https://amzn.to/46y85Fb" class="btn" style="background:#FF9900;color:#fff;width:100%;margin-top:14px;justify-content:center;">Scopri su Amazon</a>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:45px;">
+        <a href="https://www.doveandiamooggipapi.it/i-nostri-libri/" class="btn" style="background:linear-gradient(135deg,#2d4a5c,#4a6b7c);color:#fff;padding:16px 32px;font-size:1.05em;">Scopri Tutti i Libri</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLABORA / SPONSOR -->
+  <section id="collabora" style="background:#f8f9fa;padding:80px 20px;">
+    <div class="container">
+      <h2>🤝 Collabora con DAOP</h2>
+      <p style="text-align:center;max-width:750px;margin:20px auto 40px;font-size:1.05em;color:#5a6c7d;">
+        Hai un'attività, un locale, un servizio pensato per le famiglie? Diventa partner DAOP e raggiungi ogni settimana oltre <strong>5.000 famiglie</strong> nelle province di Alessandria e Asti.
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-bottom:40px;">
+        <div style="background:#fff;border-radius:16px;padding:28px 24px;box-shadow:0 4px 16px rgba(0,0,0,.07);border-top:4px solid #2d4a5c;">
+          <div style="font-size:2em;margin-bottom:12px;">📣</div>
+          <h3 style="color:#2d4a5c;font-size:1.1em;margin-bottom:8px;">Promozione eventi</h3>
+          <p style="color:#5a6c7d;font-size:.93em;line-height:1.55;">Promuoviamo le tue iniziative, spettacoli e laboratori alla nostra community di famiglie ogni settimana, sui nostri canali social e nella selezione eventi.</p>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:28px 24px;box-shadow:0 4px 16px rgba(0,0,0,.07);border-top:4px solid #e8954a;">
+          <div style="font-size:2em;margin-bottom:12px;">⭐</div>
+          <h3 style="color:#2d4a5c;font-size:1.1em;margin-bottom:8px;">Badge Family Friendly</h3>
+          <p style="color:#5a6c7d;font-size:.93em;line-height:1.55;">Il tuo locale o servizio entra nella nostra mappa interattiva con il marchio "Consigliato DAOP", segnale di qualità e fiducia per le famiglie del territorio.</p>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:28px 24px;box-shadow:0 4px 16px rgba(0,0,0,.07);border-top:4px solid #6ba5a8;">
+          <div style="font-size:2em;margin-bottom:12px;">🤝</div>
+          <h3 style="color:#2d4a5c;font-size:1.1em;margin-bottom:8px;">Pacchetti su misura</h3>
+          <p style="color:#5a6c7d;font-size:.93em;line-height:1.55;">Costruiamo insieme il pacchetto più adatto alla tua realtà: dalla singola menzione a collaborazioni continuative, sempre con un approccio personale e diretto.</p>
+        </div>
+      </div>
+
+      <!-- ADESIVO BOLLINO -->
+      <div style="background:#fff;border-radius:16px;padding:28px 32px;box-shadow:0 4px 16px rgba(0,0,0,.07);border:2px dashed #e8954a;display:flex;align-items:center;gap:28px;margin-top:32px;margin-bottom:32px;flex-wrap:wrap;">
+        <div style="flex-shrink:0;">
+          <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2026/04/adesivo-daop.png"
+               alt="Bollino Consigliato DAOP Family Friendly"
+               style="width:120px;height:120px;object-fit:contain;"
+               width="120" height="120" loading="lazy">
+        </div>
+        <div style="flex:1;min-width:220px;">
+          <h3 style="color:#2d4a5c;font-size:1.1em;margin-bottom:6px;">Il bollino "Consigliato DAOP" sulla tua vetrina</h3>
+          <p style="color:#5a6c7d;font-size:.93em;line-height:1.55;margin:0;">I partner DAOP ricevono il nostro adesivo ufficiale da esporre in vetrina — un segnale immediato di fiducia per le oltre <strong>5.000 famiglie</strong> che ci seguono ogni settimana. Con QR code diretto alla tua scheda sulla nostra mappa.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <a href="/cdn-cgi/l/email-protection#066f68606946626970636768626f676b696961616f7667766f286f72" class="btn" style="background:linear-gradient(135deg,#2d4a5c,#4a6b7c);color:#fff;font-size:1.02em;">
+          📧 Scrivici per collaborare
+        </a>
+        <p style="color:#5a6c7d;font-size:.88em;margin-top:10px;">Rispondiamo entro 24 ore</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section class="contatti" id="contatti" style="padding:80px 20px;">
+    <div class="container">
+      <h2>Contatti</h2>
+      <div class="contact-info">
+        <p style="margin-bottom:18px;font-size:1.05em;">Scrivici per collaborazioni, sponsorship, informazioni sul progetto S.A.N.E. Italia o per diventare socio DAOP.</p>
+        <p style="color:#fff;">📧 Email: <strong>info@doveandiamooggipapi.it</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;">
+        <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2026/04/LOGO-DAOP.png"
+             alt="Logo DAOP" style="width:40px;height:40px;object-fit:contain;opacity:.9;" width="40" height="40" loading="lazy">
+        <span style="font-size:1em;font-weight:600;color:#fff;">DAOP – Dove Andiamo Oggi Papi APS</span>
+      </div>
+      <p>&copy; 2026 Dove Andiamo Oggi Papi APS – La guida per famiglie con bambini</p>
+      <p style="margin-top:5px;font-size:.88em;">
+        <a href="/privacy-policy/" style="color:#fff;text-decoration:underline;">Privacy Policy</a> ·
+        <a href="/cookie-policy/" style="color:#fff;text-decoration:underline;">Cookie Policy</a> ·
+        <a href="#" id="cookieyes-manage-consent" style="color:#fff;text-decoration:underline;">Rivedi preferenze cookie</a>
+      </p>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const target = document.querySelector(href);
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+        }
+        navLinks.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded','false');
+      });
+    });
+
+    document.querySelectorAll('.social-group .social-main-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const group = btn.closest('.social-group');
+        const isOpen = group.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.social-group')) {
+        document.querySelectorAll('.social-group').forEach(g => {
+          g.classList.remove('open');
+          const b = g.querySelector('.social-main-btn');
+          if (b) b.setAttribute('aria-expanded','false');
+        });
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.social-group').forEach(g => {
+          g.classList.remove('open');

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAOP nei Media – Stampa, Radio e Collaborazioni</title>
+  <meta name="description" content="DAOP nei media: articoli su Gazzetta d'Asti, La Voce di Asti, Il Novese. Programmi radio su Radio PNR. Scopri le collaborazioni territoriali di Dove Andiamo Oggi Papi APS.">
+  <meta property="og:title" content="DAOP nei Media – Stampa e Radio">
+  <meta property="og:description" content="Scopri dove parlano di DAOP: articoli di giornale, programmi radio e collaborazioni territoriali.">
+  <meta property="og:type" content="website">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height:1.7; color:#333; overflow-x:hidden; background:#fff; }
+
+    /* NAV */
+    nav { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:15px 20px; }
+    .logo { font-size:1.4em; font-weight:700; color:#2d4a5c; text-decoration:none !important; display:flex; align-items:center; gap:10px; }
+    .nav-links { display:flex; gap:22px; list-style:none !important; margin:0 !important; padding:0 !important; }
+    .nav-links li { list-style:none !important; }
+    .nav-links a { color:#2d4a5c; text-decoration:none; font-weight:500; padding:8px 0; border-bottom:2px solid transparent; transition:all .2s; font-size:.95em; }
+    .nav-links a:hover, .nav-links a.active { color:#e8954a; border-bottom-color:#e8954a; }
+    .menu-toggle { display:none; flex-direction:column; cursor:pointer; gap:5px; background:transparent; border:0; }
+    .menu-toggle span { width:25px; height:3px; background:#2d4a5c; border-radius:2px; transition:.3s; }
+
+    /* HERO */
+    .hero { background:linear-gradient(135deg,#2d4a5c,#4a7a8c); padding:70px 20px; text-align:center; color:#fff; }
+    .hero h1 { font-size:2.8em; margin-bottom:14px; color:#fff !important; }
+    .hero p { font-size:1.2em; opacity:.92; color:#fff !important; }
+
+    /* LAYOUT */
+    .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+    .section { padding:70px 20px; }
+    .section.alt { background:#f9f9f9; }
+    .section-header { text-align:center; margin-bottom:50px; }
+    .section-header .icon { font-size:2.8em; margin-bottom:12px; }
+    .section-header h2 { font-size:2.2em; color:#2d4a5c; margin-bottom:12px; }
+    .section-header p { font-size:1.1em; color:#666; max-width:650px; margin:0 auto; }
+
+    /* PRESS GRID */
+    .press-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+    .press-card { background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 6px 24px rgba(0,0,0,.09); transition:transform .3s; }
+    .press-card:hover { transform:translateY(-8px); }
+    .press-image { width:100%; height:360px; object-fit:cover; display:block; transition:transform .3s; }
+    .press-card:hover .press-image { transform:scale(1.03); }
+    .press-content { padding:22px; }
+    .press-source { display:inline-block; background:#e8954a; color:#fff; padding:4px 14px; border-radius:20px; font-size:.82em; font-weight:700; margin-bottom:10px; }
+    .press-date { color:#999; font-size:.88em; margin-bottom:8px; }
+    .press-title { font-size:1.2em; color:#2d4a5c; margin-bottom:12px; line-height:1.4; }
+    .press-excerpt { color:#666; font-size:.95em; line-height:1.6; }
+
+    /* RADIO */
+    .radio-container { max-width:860px; margin:0 auto; }
+    .radio-main { background:#fff; border-radius:18px; padding:36px; box-shadow:0 8px 32px rgba(0,0,0,.09); margin-bottom:28px; }
+    .radio-header { display:flex; align-items:center; gap:18px; margin-bottom:22px; }
+    .radio-logo { font-size:3.5em; flex-shrink:0; }
+    .radio-info h3 { font-size:1.7em; color:#2d4a5c; margin-bottom:6px; }
+    .radio-info p { color:#666; font-size:1em; }
+    .radio-desc { font-size:1.02em; color:#444; line-height:1.8; margin-bottom:24px; }
+    .radio-btn { display:inline-flex; align-items:center; gap:10px; padding:13px 28px; background:#e8954a; color:#fff; text-decoration:none; border-radius:50px; font-weight:700; font-size:1em; transition:all .3s; }
+    .radio-btn:hover { background:#d67f38; transform:translateY(-2px); }
+    .radio-btn.dark { background:#2d4a5c; }
+    .radio-btn.dark:hover { background:#1f3644; }
+    .radio-secondary { background:#f5f5f5; border-radius:14px; padding:28px; text-align:center; }
+    .radio-secondary h4 { font-size:1.4em; color:#2d4a5c; margin-bottom:12px; }
+    .radio-secondary p { color:#666; margin-bottom:18px; font-size:.97em; }
+
+    /* PLOGGING PARTNER */
+    .partner-banner { background:#fff; border:2px solid #2d4a5c; border-radius:16px; padding:28px 32px; display:flex; align-items:flex-start; gap:20px; max-width:860px; margin:0 auto; }
+    .partner-banner .pl-icon { font-size:2.6em; flex-shrink:0; }
+    .partner-banner h3 { font-size:1.1em; color:#2d4a5c; margin-bottom:6px; }
+    .partner-banner p { font-size:.92em; color:#5a6c7d; margin:0 0 10px; }
+    .partner-badge { display:inline-block; background:#2d4a5c; color:#fff; font-size:.75em; font-weight:700; padding:4px 12px; border-radius:20px; }
+
+    /* CTA */
+    .cta-bar { background:linear-gradient(135deg,#2d4a5c,#4a7a8c); padding:55px 20px; text-align:center; color:#fff; }
+    .cta-bar h2 { font-size:2em; margin-bottom:14px; color:#fff !important; }
+    .cta-bar p { font-size:1.1em; margin-bottom:24px; opacity:.9; color:#fff !important; }
+    .cta-bar a { display:inline-block; padding:14px 36px; background:#e8954a; color:#fff; text-decoration:none; border-radius:50px; font-weight:700; font-size:1.05em; transition:all .3s; }
+    .cta-bar a:hover { background:#d67f38; transform:translateY(-2px); }
+
+    @media (max-width:768px) {
+      .nav-links { position:absolute; top:100%; left:0; right:0; background:#fff; flex-direction:column; padding:20px 24px; gap:12px; box-shadow:0 5px 10px rgba(0,0,0,.1); display:none; }
+      .nav-links.active { display:flex; }
+      .menu-toggle { display:flex; }
+      .hero h1 { font-size:2em; }
+      .press-grid { grid-template-columns:1fr !important; }
+      .radio-header { flex-direction:column; text-align:center; }
+      .partner-banner { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <a href="https://www.doveandiamooggipapi.it/" class="logo">
+        <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2025/01/cropped-cropped-Logo1.jpg"
+             alt="Logo DAOP" style="height:40px;width:auto;" width="40" height="40" loading="lazy">
+        DAOP
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="https://www.doveandiamooggipapi.it/#home">Home</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#chi-siamo">Chi Siamo</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#mappa">Mappa</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/il-piatto-sano/">Il Piatto Sano</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#libri">Libri</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/daop-nei-media/" class="active">Media</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#collabora">Collabora</a></li>
+        <li><a href="https://www.doveandiamooggipapi.it/#contatti">Contatti</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Apri menù" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>📰 DAOP nei Media</h1>
+    <p>Stampa, radio e collaborazioni territoriali — la storia di un progetto che ha fatto rumore</p>
+  </div>
+
+  <!-- STAMPA -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="icon">📰</div>
+        <h2>Articoli di Stampa</h2>
+        <p>Dai giornali locali alle testate provinciali — DAOP raccontato da chi ci ha conosciuto sul territorio</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:860px;margin:0 auto;">
+
+        <div style="background:#fff;border-radius:14px;padding:22px 26px;box-shadow:0 3px 12px rgba(0,0,0,.07);display:flex;gap:20px;align-items:flex-start;border-left:4px solid #e8954a;">
+          <div style="flex-shrink:0;text-align:center;min-width:110px;">
+            <span style="display:block;font-size:.78em;font-weight:700;color:#e8954a;text-transform:uppercase;letter-spacing:.5px;">Gazzetta d'Asti</span>
+            <span style="display:block;font-size:.8em;color:#999;margin-top:3px;">2 agosto 2024</span>
+          </div>
+          <div>
+            <h3 style="font-size:1.05em;color:#2d4a5c;margin-bottom:6px;line-height:1.4;">"Dove andiamo oggi, papì?": te lo dice la guida digitale</h3>
+            <p style="font-size:.9em;color:#666;margin:0;line-height:1.55;">Il progetto DAOP raccontato dalla Gazzetta d'Asti, con focus sull'espansione nella provincia di Asti grazie al lavoro di Alessandra Zaccone.</p>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:22px 26px;box-shadow:0 3px 12px rgba(0,0,0,.07);display:flex;gap:20px;align-items:flex-start;border-left:4px solid #e8954a;">
+          <div style="flex-shrink:0;text-align:center;min-width:110px;">
+            <span style="display:block;font-size:.78em;font-weight:700;color:#e8954a;text-transform:uppercase;letter-spacing:.5px;">La Voce di Asti</span>
+            <span style="display:block;font-size:.8em;color:#999;margin-top:3px;">15 settembre 2024</span>
+          </div>
+          <div>
+            <h3 style="font-size:1.05em;color:#2d4a5c;margin-bottom:6px;line-height:1.4;">"Dove andiamo oggi, papi?": il papà che ha messo in mappa il tempo libero delle famiglie</h3>
+            <p style="font-size:.9em;color:#666;margin:0;line-height:1.55;">La Voce di Asti racconta Patrick Orlando e la nascita di una piattaforma che unisce genitori e territori della provincia.</p>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:22px 26px;box-shadow:0 3px 12px rgba(0,0,0,.07);display:flex;gap:20px;align-items:flex-start;border-left:4px solid #2d4a5c;">
+          <div style="flex-shrink:0;text-align:center;min-width:110px;">
+            <span style="display:block;font-size:.78em;font-weight:700;color:#2d4a5c;text-transform:uppercase;letter-spacing:.5px;">Il Novese</span>
+            <span style="display:block;font-size:.8em;color:#999;margin-top:3px;">14 dicembre 2024</span>
+          </div>
+          <div>
+            <h3 style="font-size:1.05em;color:#2d4a5c;margin-bottom:6px;line-height:1.4;">La start up 'Dove andiamo oggi papi': dai social al sogno di un'azienda vera</h3>
+            <p style="font-size:.9em;color:#666;margin:0;line-height:1.55;">DAOP in prima pagina sul Novese. Quello che era nato come un'idea per trovare attività da fare con i figli si è trasformato in qualcosa di più grande.</p>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:22px 26px;box-shadow:0 3px 12px rgba(0,0,0,.07);display:flex;gap:20px;align-items:flex-start;border-left:4px solid #2d4a5c;">
+          <div style="flex-shrink:0;text-align:center;min-width:110px;">
+            <span style="display:block;font-size:.78em;font-weight:700;color:#2d4a5c;text-transform:uppercase;letter-spacing:.5px;">Il Novese</span>
+            <span style="display:block;font-size:.8em;color:#999;margin-top:3px;">1 novembre 2025</span>
+          </div>
+          <div>
+            <h3 style="font-size:1.05em;color:#2d4a5c;margin-bottom:6px;line-height:1.4;">Alimentazione: già sul web l'app per bambini e genitori</h3>
+            <p style="font-size:.9em;color:#666;margin:0;line-height:1.55;">Articolo dedicato a "Il Piatto Sano", l'app educativa sviluppata con la nutrizionista Serafina Cardaci nell'ambito del progetto S.A.N.E. Italia.</p>
+          </div>
+        </div>
+
+        <div style="background:#fff;border-radius:14px;padding:22px 26px;box-shadow:0 3px 12px rgba(0,0,0,.07);display:flex;gap:20px;align-items:flex-start;border-left:4px solid #c9a227;">
+          <div style="flex-shrink:0;text-align:center;min-width:110px;">
+            <span style="display:block;font-size:.78em;font-weight:700;color:#c9a227;text-transform:uppercase;letter-spacing:.5px;">Il Tirreno</span>
+            <span style="display:block;font-size:.8em;color:#999;margin-top:3px;">Febbraio 2026</span>
+          </div>
+          <div>
+            <h3 style="font-size:1.05em;color:#2d4a5c;margin-bottom:6px;line-height:1.4;">Cento alunni del Carducci–Fattori nel progetto pilota sulla cucina sana</h3>
+            <p style="font-size:.9em;color:#666;margin:0;line-height:1.55;">Il Tirreno racconta il progetto pilota "Mangiare Bene, Crescere Meglio" a Rosignano Marittimo: 100 alunni, 5 classi, con l'app Il Piatto Sano ideata da Patrick Orlando. Citata l'Assessora Cristina Santinelli e la biologa nutrizionista Sara Comandi.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RADIO -->
+  <section class="section alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="icon">📻</div>
+        <h2>Radio PNR</h2>
+        <p>Due programmi settimanali condotti da Patrick Orlando</p>
+      </div>
+      <div class="radio-container">
+
+        <div class="radio-main">
+          <div class="radio-header">
+            <div class="radio-logo">🎙️</div>
+            <div class="radio-info">
+              <h3>DAOP Weekend</h3>
+              <p>Il programma per le famiglie</p>
+            </div>
+          </div>
+          <p class="radio-desc">Ogni settimana su Radio PNR, Patrick Orlando porta in onda gli eventi e le iniziative per famiglie con bambini nelle province di Alessandria e Asti. Consigli pratici, interviste e tutto quello che c'è da fare nel weekend.</p>
+          <a href="https://www.radiopnr.it/podcast.html" target="_blank" rel="noopener" class="radio-btn">🎧 Ascolta le puntate</a>
+        </div>
+
+</div>
+    </div>
+  </section>
+
+  <!-- PARTNER PLOGGING -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="icon">🤝</div>
+        <h2>Collaborazioni Territoriali</h2>
+        <p>DAOP come media partner di progetti che condividono i nostri valori</p>
+      </div>
+      <div class="partner-banner">
+        <div class="pl-icon">🚴</div>
+        <div>
+          <h3>Media partner: Plogging, Biking &amp; Smiling – Novi Ligure</h3>
+          <p>DAOP è media partner ufficiale del progetto "Plogging, Biking &amp; Smiling", sostenuto dal Comune di Novi Ligure e dalla Fondazione Compagnia di San Paolo. Un programma di eventi gratuiti per famiglie e bambini che unisce sport, sostenibilità e territorio — dall'inverno fino alla grande Festa dello Sport di settembre 2026.</p>
+          <span class="partner-badge">🌱 Media Partner Ufficiale</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+      <!-- CARD SCUOLA ROSIGNANO -->
+      <div style="background:#fff;border:2px solid #1D9E75;border-radius:16px;padding:28px 32px;display:flex;align-items:flex-start;gap:20px;max-width:860px;margin:24px auto 0;flex-wrap:wrap;">
+        <div style="flex-shrink:0;font-size:2.6em;margin-top:4px;">🏫</div>
+        <div style="flex:1;min-width:220px;">
+          <div style="display:inline-block;background:#1D9E75;color:#fff;font-size:.75em;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:8px;">Scuola Pubblica · Ministero dell'Istruzione</div>
+          <h3 style="font-size:1.1em;color:#2d4a5c;margin-bottom:6px;">I.C. "Carducci–Fattori" di Rosignano Marittimo – Progetto pilota S.A.N.E.</h3>
+          <p style="font-size:.92em;color:#5a6c7d;margin:0 0 10px;line-height:1.55;">A marzo 2026 l'Istituto Comprensivo Statale di Rosignano Marittimo (LI) ha avviato il progetto pilota <strong>"Mangiare Bene, Crescere Meglio"</strong> con circa 100 alunni. I ragazzi hanno esplorato i principi della dieta mediterranea supportati dalla tecnologia de <strong>Il Piatto Sano</strong>, con il patrocinio del Comune e il coinvolgimento delle famiglie.</p>
+          <a href="https://www.fattorirosignano.edu.it/mangiare-bene-crescere-meglio/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:#1D9E75;font-weight:700;text-decoration:none;font-size:.9em;border-bottom:2px solid #1D9E75;">→ Leggi sul sito della scuola</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:40px;"></div>
+
+  <!-- CTA -->
+  <div class="cta-bar">
+    <h2>Vuoi parlare di DAOP?</h2>
+    <p>Contattaci per interviste, collaborazioni editoriali o partnership</p>
+    <a href="mailto:info@doveandiamooggipapi.it">Scrivici →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#2d3748;color:#fff;padding:20px 0;">
+    <div style="text-align:center;font-size:.9em;">
+      <img src="https://www.doveandiamooggipapi.it/wp-content/uploads/2026/04/LOGO-DAOP.png" alt="Logo DAOP" style="width:36px;height:36px;object-fit:contain;opacity:.9;vertical-align:middle;margin-right:8px;" width="36" height="36" loading="lazy">
+      &copy; 2026 Dove Andiamo Oggi Papi APS – La guida per famiglie con bambini<br>
+      <a href="/privacy-policy/" style="color:#fff;text-decoration:underline;">Privacy Policy</a> ·
+      <a href="/cookie-policy/" style="color:#fff;text-decoration:underline;">Cookie Policy</a> ·
+      <a href="#" id="cookieyes-manage-consent" style="color:#fff;text-decoration:underline;">Rivedi preferenze cookie</a>
+    </div>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded','false');
+      });
+    });
+  </script>
+
+</body>
+</html>
