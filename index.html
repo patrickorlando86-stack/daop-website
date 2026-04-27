@@ -184,13 +184,7 @@
   .hero-bg::before {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(253,248,243,0.94) 0%,
-      rgba(253,248,243,0.82) 38%,
-      rgba(253,248,243,0.30) 68%,
-      rgba(253,248,243,0.00) 100%
-    );
+    background: rgba(253,248,243,0.48);
   }
   .hero-deco { display: none; }
 
@@ -216,26 +210,26 @@
     display: flex; flex-direction: column; gap: 12px;
   }
   .hero-stat-card {
-    background: rgba(253,248,243,0.93);
-    backdrop-filter: blur(14px);
+    background: rgba(253,248,243,0.95);
+    backdrop-filter: blur(16px);
     border-radius: var(--radius-md);
-    padding: 18px 24px;
-    border: 1px solid rgba(45,74,92,0.09);
-    box-shadow: 0 4px 20px rgba(45,74,92,0.09);
+    padding: 12px 20px;
+    border: 1px solid rgba(45,74,92,0.10);
+    box-shadow: 0 3px 16px rgba(45,74,92,0.10);
     transition: var(--transition);
   }
-  .hero-stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(45,74,92,0.14); }
+  .hero-stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(45,74,92,0.15); }
   .hero-stat-card-value {
     font-family: 'Playfair Display', serif;
-    font-size: 1.9rem; font-weight: 800;
+    font-size: 1.45rem; font-weight: 800;
     color: var(--navy); display: block; line-height: 1;
   }
   .hero-stat-card-value.orange { color: var(--orange); }
-  .hero-stat-card-value.teal { color: var(--teal); font-size: 1.5rem; }
+  .hero-stat-card-value.teal { color: var(--teal); font-size: 1.2rem; }
   .hero-stat-card-label {
-    font-size: 0.7rem; font-weight: 700;
+    font-size: 0.67rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--text-light); margin-top: 4px; display: block;
+    color: var(--text-light); margin-top: 2px; display: block;
   }
   .hero-badge-row {
     display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
@@ -290,9 +284,9 @@
   .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,149,74,0.4); }
   .btn-secondary {
     background: transparent; color: var(--navy);
-    border: 2px solid rgba(45,74,92,0.2);
+    border: 2px solid var(--navy);
   }
-  .btn-secondary:hover { border-color: var(--navy); background: rgba(45,74,92,0.05); transform: translateY(-2px); }
+  .btn-secondary:hover { background: var(--navy); color: white; transform: translateY(-2px); }
   .btn-navy { background: var(--navy); color: white; box-shadow: 0 4px 16px rgba(45,74,92,0.3); }
   .btn-navy:hover { background: var(--navy-dark); transform: translateY(-2px); }
   .btn-teal { background: var(--teal); color: white; box-shadow: 0 4px 16px rgba(107,165,168,0.3); }
@@ -918,82 +912,6 @@
   </div>
 </section>
 
-<!-- ── CHI SIAMO ── -->
-<section id="chi-siamo">
-  <div class="section-inner">
-    <span class="section-label fade-in">Chi Siamo</span>
-    <h2 class="section-title fade-in">Il cuore della community</h2>
-    <p class="section-subtitle fade-in">«Dove andiamo oggi papi?» — è la domanda di mio figlio che ha dato vita a tutto. Dal 2023 DAOP è cresciuta fino a diventare una community, Ginetto AI, libri e Il Piatto Sano. Alessandra si è unita come socia fondatrice e curatrice per la provincia di Asti.</p>
-    <div class="team-grid">
-      <div class="team-card fade-in fade-in-delay-1">
-        <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#3d6e74);display:block;position:relative;">
-          <img src="assets/images/patrick.jpeg" alt="Patrick Orlando" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
-        </div>
-        <div class="team-body">
-          <div class="team-role">Fondatore · Presidente APS · Autore</div>
-          <div class="team-name">Patrick Orlando</div>
-          <p class="team-desc">Papà e ingegnere, fondatore di DAOP nel 2023. Ha costruito Ginetto AI, Il Piatto Sano e scritto 7 libri per famiglie. Dal 2026 guida DAOP come Associazione di Promozione Sociale.</p>
-          <div class="team-socials">
-            <a href="https://www.instagram.com/patrickkorl/" target="_blank" rel="noopener" class="team-social-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              @patrickkorl
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="team-card fade-in fade-in-delay-2">
-        <div class="team-photo" style="background:linear-gradient(135deg,#e8954a,#2d4a5c);display:block;position:relative;">
-          <img src="assets/images/alessandra.png" alt="Alessandra Zaccone" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
-        </div>
-        <div class="team-body">
-          <div class="team-role">Socia Fondatrice · Curatrice DAOP Asti</div>
-          <div class="team-name">Alessandra Zaccone</div>
-          <p class="team-desc">Socia fondatrice di DAOP APS e curatrice degli eventi per la provincia di Asti. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti e mantiene vivo il dialogo con le famiglie del territorio.</p>
-          <div class="team-socials">
-            <a href="https://www.instagram.com/wonder_alepippi/" target="_blank" rel="noopener" class="team-social-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              @wonder_alepippi
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── APS ── -->
-<section id="aps">
-  <div class="section-inner">
-    <span class="section-label fade-in">La nostra missione</span>
-    <h2 class="section-title fade-in">Un'associazione per il territorio</h2>
-    <p class="section-subtitle fade-in">DAOP APS è un ente del Terzo Settore impegnato nella promozione del benessere familiare, dell'educazione e della rete locale nelle province di Alessandria e Asti.</p>
-
-    <div class="pillars-grid">
-      <div class="pillar-card fade-in fade-in-delay-1">
-        <div class="pillar-icon pillar-icon-1" style="font-size:1.6rem">🗺️</div>
-        <div class="pillar-title">Territorio</div>
-        <p class="pillar-desc">Valorizzazione delle realtà locali: fattorie didattiche, parchi, musei, biblioteche e spazi a misura di bambino nel territorio piemontese.</p>
-      </div>
-      <div class="pillar-card fade-in fade-in-delay-2">
-        <div class="pillar-icon pillar-icon-2" style="font-size:1.6rem">👨‍👩‍👧‍👦</div>
-        <div class="pillar-title">Community</div>
-        <p class="pillar-desc">Una rete viva di famiglie che condividono esperienze, consigli e momenti insieme. Oltre 5.000 genitori connessi ogni settimana.</p>
-      </div>
-      <div class="pillar-card fade-in fade-in-delay-3">
-        <div class="pillar-icon pillar-icon-3" style="font-size:1.6rem">📚</div>
-        <div class="pillar-title">Educazione</div>
-        <p class="pillar-desc">Risorse pedagogiche, giochi educativi e strumenti pratici per supportare la crescita sana e consapevole dei bambini.</p>
-      </div>
-      <div class="pillar-card fade-in fade-in-delay-4">
-        <div class="pillar-icon pillar-icon-4" style="font-size:1.6rem">🤝</div>
-        <div class="pillar-title">Rete locale</div>
-        <p class="pillar-desc">Collaborazioni con scuole, comuni, associazioni e imprese locali per costruire un ecosistema solido a supporto delle famiglie.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 <!-- ── GINETTO ── -->
 <section id="ginetto" style="background:white;">
   <div class="section-inner">
@@ -1041,6 +959,123 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── CHI SIAMO ── -->
+<section id="chi-siamo">
+  <div class="section-inner">
+    <span class="section-label fade-in">Chi Siamo</span>
+    <h2 class="section-title fade-in">Il cuore della community</h2>
+    <p class="section-subtitle fade-in">«Dove andiamo oggi papi?» — è la domanda di mio figlio che ha dato vita a tutto. Dal 2023 DAOP è cresciuta fino a diventare una community, Ginetto AI, libri e Il Piatto Sano. Alessandra si è unita come socia fondatrice e curatrice per la provincia di Asti.</p>
+    <div class="team-grid">
+      <div class="team-card fade-in fade-in-delay-1">
+        <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#3d6e74);display:block;position:relative;">
+          <img src="assets/images/patrick.jpeg" alt="Patrick Orlando" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Fondatore · Presidente APS · Autore</div>
+          <div class="team-name">Patrick Orlando</div>
+          <p class="team-desc">Papà e ingegnere, fondatore di DAOP nel 2023. Ha costruito Ginetto AI, Il Piatto Sano e scritto 7 libri per famiglie. Dal 2026 guida DAOP come Associazione di Promozione Sociale.</p>
+          <div class="team-socials">
+            <a href="https://www.instagram.com/patrickkorl/" target="_blank" rel="noopener" class="team-social-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              @patrickkorl
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-2">
+        <div class="team-photo" style="background:linear-gradient(135deg,#e8954a,#2d4a5c);display:block;position:relative;">
+          <img src="assets/images/alessandra.png" alt="Alessandra Zaccone" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Socia Fondatrice · Curatrice DAOP Asti</div>
+          <div class="team-name">Alessandra Zaccone</div>
+          <p class="team-desc">Socia fondatrice di DAOP APS e curatrice degli eventi per la provincia di Asti. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti e mantiene vivo il dialogo con le famiglie del territorio.</p>
+          <div class="team-socials">
+            <a href="https://www.instagram.com/wonder_alepippi/" target="_blank" rel="noopener" class="team-social-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              @wonder_alepippi
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COLLABORATORI ── -->
+<section id="collaboratori" style="background:var(--cream);">
+  <div class="section-inner">
+    <span class="section-label fade-in">Chi scrive con noi</span>
+    <h2 class="section-title fade-in">I nostri collaboratori</h2>
+    <p class="section-subtitle fade-in">Professionisti che scrivono articoli sul nostro sito e sui nostri canali Instagram per offrire contenuti di qualità alle famiglie.</p>
+    <div class="team-grid fade-in" style="grid-template-columns:repeat(3,1fr);margin-top:48px;">
+      <div class="team-card fade-in fade-in-delay-1">
+        <div class="team-photo" style="background:linear-gradient(135deg,#f4a261,#e76f51);display:block;position:relative;">
+          <img src="assets/images/serafina.jpg" alt="Serafina Cardaci" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Nutrizionista</div>
+          <div class="team-name">Serafina Cardaci</div>
+          <p class="team-desc">Cura la rubrica <em>Mangiando s’impara</em>: consigli pratici su alimentazione e benessere per tutta la famiglia, con un occhio speciale al Piatto Sano.</p>
+        </div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-2">
+        <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#2d4a5c);display:block;position:relative;">
+          <img src="assets/images/benedetta.jpg" alt="Benedetta De Paolis" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Giornalista</div>
+          <div class="team-name">Benedetta De Paolis</div>
+          <p class="team-desc">Cura la rubrica <em>Avventure di Carta</em>: consigli letterari e percorsi di lettura per i più piccoli e per chi legge con loro.</p>
+        </div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-3">
+        <div class="team-photo" style="background:linear-gradient(135deg,#c9a227,#8a6d0a);display:block;position:relative;">
+          <img src="assets/images/stef.png" alt="Stefania Eligi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Commercialista</div>
+          <div class="team-name">Stefania Eligi</div>
+          <p class="team-desc">Cura la rubrica <em>Pillole Fiscali</em>: bonus, agevolazioni e detrazioni spiegate in modo chiaro e utile per le famiglie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APS ── -->
+<section id="aps">
+  <div class="section-inner">
+    <span class="section-label fade-in">La nostra missione</span>
+    <h2 class="section-title fade-in">Un'associazione per il territorio</h2>
+    <p class="section-subtitle fade-in">DAOP APS è un ente del Terzo Settore impegnato nella promozione del benessere familiare, dell'educazione e della rete locale nelle province di Alessandria e Asti.</p>
+
+    <div class="pillars-grid">
+      <div class="pillar-card fade-in fade-in-delay-1">
+        <div class="pillar-icon pillar-icon-1" style="font-size:1.6rem">🗺️</div>
+        <div class="pillar-title">Territorio</div>
+        <p class="pillar-desc">Valorizzazione delle realtà locali: fattorie didattiche, parchi, musei, biblioteche e spazi a misura di bambino nel territorio piemontese.</p>
+      </div>
+      <div class="pillar-card fade-in fade-in-delay-2">
+        <div class="pillar-icon pillar-icon-2" style="font-size:1.6rem">👨‍👩‍👧‍👦</div>
+        <div class="pillar-title">Community</div>
+        <p class="pillar-desc">Una rete viva di famiglie che condividono esperienze, consigli e momenti insieme. Oltre 5.000 genitori connessi ogni settimana.</p>
+      </div>
+      <div class="pillar-card fade-in fade-in-delay-3">
+        <div class="pillar-icon pillar-icon-3" style="font-size:1.6rem">🌿</div>
+        <div class="pillar-title">Progetti</div>
+        <p class="pillar-desc">Iniziative concrete sul territorio: Il Piatto Sano, media partnership con eventi locali e collaborazioni con scuole e comuni.</p>
+      </div>
+      <div class="pillar-card fade-in fade-in-delay-4">
+        <div class="pillar-icon pillar-icon-4" style="font-size:1.6rem">🤝</div>
+        <div class="pillar-title">Rete locale</div>
+        <p class="pillar-desc">Collaborazioni con scuole, comuni, associazioni e imprese locali per costruire un ecosistema solido a supporto delle famiglie.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
