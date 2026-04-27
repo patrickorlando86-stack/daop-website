@@ -826,8 +826,8 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .hero-content { grid-template-columns: 1fr; gap: 32px; padding: 120px 24px 60px; }
+    .hero-content > div:first-child { display: none; }
     .hero-card { padding: 28px 24px; }
-    .hero-right { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .team-grid, .piatto-layout, .benefits-grid { grid-template-columns: 1fr; }
     .ginetto-grid { grid-template-columns: 1fr; gap: 40px; }
     .collab-grid { grid-template-columns: 1fr; }
@@ -893,7 +893,9 @@
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <!-- LEFT -->
+    <!-- LEFT: vuoto, lascia respirare l'immagine -->
+    <div></div>
+    <!-- RIGHT: testo -->
     <div class="hero-card">
       <div class="hero-badge-row">
         <span class="badge badge-aps">
@@ -913,25 +915,6 @@
           Scopri i progetti
         </a>
         <a href="#chi-siamo" class="btn btn-secondary">Chi siamo</a>
-      </div>
-    </div>
-    <!-- RIGHT: stat cards -->
-    <div class="hero-right">
-      <div class="hero-stat-card">
-        <span class="hero-stat-card-value orange">5.000+</span>
-        <span class="hero-stat-card-label">Famiglie nella community</span>
-      </div>
-      <div class="hero-stat-card">
-        <span class="hero-stat-card-value orange">2.900+</span>
-        <span class="hero-stat-card-label">Luoghi family-friendly</span>
-      </div>
-      <div class="hero-stat-card">
-        <span class="hero-stat-card-value">7</span>
-        <span class="hero-stat-card-label">Libri pubblicati</span>
-      </div>
-      <div class="hero-stat-card" style="border-color:rgba(107,165,168,0.25);">
-        <span class="hero-stat-card-value teal">Ginetto</span>
-        <span class="hero-stat-card-label">Il tuo assistente AI per famiglie</span>
       </div>
     </div>
   </div>
