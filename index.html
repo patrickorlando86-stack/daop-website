@@ -805,13 +805,32 @@
   .fade-in-delay-3 { transition-delay: 0.3s; }
   .fade-in-delay-4 { transition-delay: 0.4s; }
 
+  /* ── GINETTO GRID ── */
+  .ginetto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  /* ── COLLABORATORI GRID ── */
+  .collab-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
     .hero-content { grid-template-columns: 1fr; gap: 32px; padding: 120px 24px 60px; }
+    .hero-card { padding: 28px 24px; }
     .hero-right { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .team-grid, .piatto-layout, .benefits-grid { grid-template-columns: 1fr; }
+    .ginetto-grid { grid-template-columns: 1fr; gap: 40px; }
+    .collab-grid { grid-template-columns: 1fr; }
     .books-grid { grid-template-columns: repeat(2, 1fr); }
     .pillars-grid { grid-template-columns: repeat(2, 1fr); }
     .features-grid { grid-template-columns: repeat(3, 1fr); }
@@ -823,13 +842,19 @@
   @media (max-width: 600px) {
     section { padding: 72px 20px; }
     .hero-content { padding: 100px 20px 56px; }
+    .hero-card { padding: 24px 20px; }
     .hero-right { grid-template-columns: repeat(2, 1fr); }
     .pillars-grid { grid-template-columns: 1fr; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .books-grid { grid-template-columns: 1fr; }
     .hero-actions { flex-direction: column; }
+    .hero-actions .btn { justify-content: center; }
     .footer-inner { flex-direction: column; text-align: center; }
     .footer-links { justify-content: center; }
+    .piatto-actions { flex-direction: column; }
+    .piatto-actions .btn { justify-content: center; }
+    .ginetto-grid > div:first-child { order: 2; }
+    .ginetto-grid > div:last-child { order: 1; }
   }
 </style>
 </head>
@@ -915,9 +940,9 @@
 <!-- ── GINETTO ── -->
 <section id="ginetto" style="background:white;">
   <div class="section-inner">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:0;">
+    <div class="ginetto-grid">
       <div style="position:relative;" class="fade-in">
-        <div style="background:var(--navy);border-radius:36px;padding:16px;box-shadow:var(--shadow-card),0 32px 64px rgba(45,74,92,0.2);max-width:300px;margin:0 auto;position:relative;">
+        <div style="background:var(--navy);border-radius:36px;padding:16px;box-shadow:var(--shadow-card),0 32px 64px rgba(45,74,92,0.2);max-width:300px;width:100%;margin:0 auto;position:relative;">
           <div style="background:linear-gradient(180deg,#f5f9f5 0%,#e8f3e8 100%);border-radius:24px;min-height:460px;display:flex;flex-direction:column;align-items:center;padding:28px 20px;gap:14px;">
             <img src="assets/images/ginetto-esplora.png" alt="Ginetto il lupetto" style="width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,0.15));margin-top:-10px;">
             <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:var(--navy);">GINETTO</div>
@@ -1011,7 +1036,7 @@
     <span class="section-label fade-in">Chi scrive con noi</span>
     <h2 class="section-title fade-in">I nostri collaboratori</h2>
     <p class="section-subtitle fade-in">Professionisti che scrivono articoli sul nostro sito e sui nostri canali Instagram per offrire contenuti di qualità alle famiglie.</p>
-    <div class="team-grid fade-in" style="grid-template-columns:repeat(3,1fr);margin-top:48px;">
+    <div class="collab-grid fade-in">
       <div class="team-card fade-in fade-in-delay-1">
         <div class="team-photo" style="background:linear-gradient(135deg,#f4a261,#e76f51);position:relative;">
           <img src="assets/images/serafina.jpg" alt="Serafina Cardaci" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;">
