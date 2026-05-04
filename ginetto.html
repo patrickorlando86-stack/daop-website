@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ginetto AI – La guida intelligente per famiglie | DAOP APS</title>
+<meta name="description" content="Ginetto AI è l'assistente digitale DAOP per famiglie. Chat con Gemini AI, 2.900+ luoghi in Italia, eventi locali ad Alessandria e Asti, Passaporto dell'Esploratore. Gratis su ginettoapp.it.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.daop.it/ginetto.html">
+<meta property="og:title" content="Ginetto AI – La guida intelligente per famiglie di Alessandria e Asti">
+<meta property="og:description" content="Chat AI, 2.900+ luoghi, eventi locali e il Passaporto dell'Esploratore. Gratis su ginettoapp.it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.daop.it/ginetto.html">
+<meta property="og:image" content="https://www.daop.it/assets/images/ginetto-hero.png">
+<link rel="icon" href="assets/images/icon512.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#2d4a5c; --navy-dark:#1e3342;
+    --orange:#e8954a; --orange-dark:#d4793a;
+    --teal:#6ba5a8; --teal-dark:#5a9295;
+    --gold:#c9a227;
+    --cream:#fdf8f3; --warm-white:#fffcf8;
+    --text-dark:#1a2d3a; --text-mid:#4a6070; --text-light:#8a9aaa;
+    --radius-sm:10px; --radius-md:16px; --radius-lg:24px; --radius-xl:32px;
+    --shadow-soft:0 4px 24px rgba(45,74,92,0.10);
+    --shadow-card:0 8px 40px rgba(45,74,92,0.13);
+    --shadow-hover:0 16px 56px rgba(45,74,92,0.18);
+    --transition:0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,248,243,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(45,74,92,0.08);transition:var(--transition)}
+  nav.scrolled{box-shadow:0 2px 24px rgba(45,74,92,0.10)}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo-text{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-0.02em}
+  .nav-logo-text span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--text-mid);font-size:0.88rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--transition)}
+  .nav-links a:hover{color:var(--navy);background:rgba(45,74,92,0.07)}
+  .nav-links a.active{color:var(--navy);background:rgba(45,74,92,0.07);font-weight:600}
+  .nav-cta{background:var(--orange)!important;color:white!important;padding:7px 16px!important;border-radius:10px!important;font-weight:600!important}
+  .nav-cta:hover{background:var(--orange-dark)!important;transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:var(--transition)}
+  .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(45,74,92,0.08);padding:16px 24px 24px;z-index:99}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;text-decoration:none;color:var(--text-mid);font-size:1rem;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(45,74,92,0.06);transition:var(--transition)}
+  .mobile-menu a:hover{color:var(--navy)}
+
+  /* ── HERO ── */
+  .ginetto-hero{padding-top:68px;background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 50%,#2a6068 100%);overflow:hidden;position:relative}
+  .ginetto-hero-inner{max-width:1200px;margin:0 auto;padding:64px 48px 0;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:flex-end}
+  .ginetto-hero-text{padding-bottom:72px}
+  .ginetto-hero-text .section-label{color:var(--teal)}
+  .ginetto-hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4rem);font-weight:800;color:white;line-height:1.05;margin-bottom:20px;letter-spacing:-0.02em}
+  .ginetto-hero-text h1 em{color:var(--orange);font-style:italic}
+  .ginetto-hero-text p{font-size:1.1rem;color:rgba(255,255,255,0.72);line-height:1.75;margin-bottom:32px;max-width:460px}
+  .hero-btn-group{display:flex;gap:12px;flex-wrap:wrap}
+  .ginetto-hero-img{display:flex;align-items:flex-end;justify-content:center}
+  .ginetto-hero-img img{width:100%;max-width:480px;display:block;border-radius:var(--radius-xl) var(--radius-xl) 0 0;box-shadow:0 -8px 48px rgba(107,165,168,0.3)}
+
+  /* ── COMMONS ── */
+  section{padding:100px 24px}
+  .section-inner{max-width:1200px;margin:0 auto}
+  .section-inner-narrow{max-width:860px;margin:0 auto}
+  .section-label{display:inline-block;font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:16px}
+  .section-subtitle{font-size:1.05rem;color:var(--text-mid);max-width:580px;line-height:1.7;margin-bottom:0}
+
+  /* ── BUTTONS ── */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--radius-md);font-size:0.95rem;font-weight:600;text-decoration:none;transition:var(--transition);font-family:'DM Sans',sans-serif;border:none;cursor:pointer}
+  .btn-primary{background:var(--orange);color:white;box-shadow:0 4px 16px rgba(232,149,74,0.35)}
+  .btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,149,74,0.4)}
+  .btn-outline-white{background:transparent;color:white;border:2px solid rgba(255,255,255,0.4)}
+  .btn-outline-white:hover{background:rgba(255,255,255,0.1);border-color:white;transform:translateY(-2px)}
+  .btn-navy{background:var(--navy);color:white;box-shadow:0 4px 16px rgba(45,74,92,0.3)}
+  .btn-navy:hover{background:var(--navy-dark);transform:translateY(-2px)}
+  .btn-teal{background:var(--teal);color:white;box-shadow:0 4px 16px rgba(107,165,168,0.3)}
+  .btn-teal:hover{background:var(--teal-dark);transform:translateY(-2px)}
+
+  /* ── FEATURES GRID ── */
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;grid-auto-rows:1fr}
+  .feature-card{background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-card);border:1px solid rgba(45,74,92,0.06);transition:var(--transition)}
+  .feature-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+  .feature-card.highlight{background:var(--navy);border-color:var(--navy)}
+  .feature-card.highlight .feature-title{color:white}
+  .feature-card.highlight .feature-desc{color:rgba(255,255,255,0.65)}
+  .feature-icon{width:48px;height:48px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:20px}
+  .icon-orange{background:rgba(232,149,74,0.12)}
+  .icon-teal{background:rgba(107,165,168,0.15)}
+  .icon-gold{background:rgba(201,162,39,0.12)}
+  .icon-white{background:rgba(255,255,255,0.12)}
+  .feature-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+  .feature-desc{font-size:0.9rem;color:var(--text-mid);line-height:1.65}
+
+  /* ── COME FUNZIONA ── */
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px;position:relative}
+  .steps-grid::before{content:'';position:absolute;top:32px;left:calc(16.66% + 16px);right:calc(16.66% + 16px);height:2px;background:linear-gradient(90deg,var(--orange),var(--teal));border-radius:2px}
+  .step{text-align:center;padding:0 16px}
+  .step-num{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;margin:0 auto 20px;position:relative;z-index:1}
+  .step-num.s1{background:var(--orange);color:white;box-shadow:0 4px 20px rgba(232,149,74,0.4)}
+  .step-num.s2{background:var(--navy);color:white;box-shadow:0 4px 20px rgba(45,74,92,0.35)}
+  .step-num.s3{background:var(--teal);color:white;box-shadow:0 4px 20px rgba(107,165,168,0.4)}
+  .step h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+  .step p{font-size:0.9rem;color:var(--text-mid);line-height:1.65}
+
+  /* ── PREMIUM BOX ── */
+  .premium-box{background:linear-gradient(135deg,rgba(201,162,39,0.12),rgba(201,162,39,0.04));border:1px solid rgba(201,162,39,0.25);border-radius:var(--radius-xl);padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;margin-top:0}
+  .premium-tag{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:white;font-size:0.76rem;font-weight:700;padding:4px 14px;border-radius:100px;margin-bottom:14px;letter-spacing:0.05em}
+  .premium-box h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:var(--navy);margin-bottom:10px}
+  .premium-box p{font-size:0.95rem;color:var(--text-mid);line-height:1.7;max-width:480px}
+  .premium-price{text-align:center;flex-shrink:0}
+  .price-amount{font-family:'Playfair Display',serif;font-size:3rem;font-weight:800;color:var(--navy);line-height:1}
+  .price-period{font-size:0.85rem;color:var(--text-mid);margin-top:4px;margin-bottom:4px}
+  .price-save{display:inline-block;background:rgba(29,158,117,0.1);color:#1D9E75;font-size:0.78rem;font-weight:700;padding:3px 10px;border-radius:100px;margin-bottom:16px}
+
+  /* ── BG ── */
+  .bg-cream{background:var(--cream)}
+  .bg-white{background:white}
+  .bg-navy{background:var(--navy-dark)}
+
+  /* ── CTA FINALE ── */
+  .ginetto-cta{background:linear-gradient(135deg,var(--teal-dark) 0%,var(--navy) 100%);padding:80px 24px;text-align:center}
+  .ginetto-cta .section-label{color:var(--gold)}
+  .ginetto-cta h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;line-height:1.1;margin-bottom:16px}
+  .ginetto-cta p{font-size:1.05rem;color:rgba(255,255,255,0.7);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+  .ginetto-cta-url{font-size:0.85rem;color:rgba(255,255,255,0.4);margin-top:20px}
+  .ginetto-cta-url a{color:rgba(255,255,255,0.5);text-decoration:underline}
+
+  /* ── FOOTER ── */
+  footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.06);padding:40px 24px}
+  .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .footer-logo-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:white;margin:10px 0 8px}
+  .footer-logo-text span{color:var(--orange)}
+  .footer-desc{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px}
+  .footer-col-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px}
+  .footer-col-links{display:flex;flex-direction:column;gap:8px}
+  .footer-col-links a{text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);transition:var(--transition)}
+  .footer-col-links a:hover{color:rgba(255,255,255,0.85)}
+  .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .footer-copy{font-size:0.82rem;color:rgba(255,255,255,0.25)}
+  .footer-bottom-links{display:flex;gap:20px}
+  .footer-bottom-links a{font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:var(--transition)}
+  .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .ginetto-hero-inner{grid-template-columns:1fr;padding:56px 24px 0;gap:32px}
+    .ginetto-hero-text{padding-bottom:0}
+    .ginetto-hero-text p{max-width:100%}
+    .ginetto-hero-img img{max-width:360px;margin:0 auto}
+    .features-grid{grid-template-columns:repeat(2,1fr)}
+    .steps-grid{grid-template-columns:1fr;gap:40px}
+    .steps-grid::before{display:none}
+    .premium-box{grid-template-columns:1fr;text-align:center;padding:36px 28px}
+    .premium-box p{max-width:100%}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    section{padding:72px 20px}
+    .ginetto-hero-text h1{font-size:2.4rem}
+    .features-grid{grid-template-columns:1fr}
+    .hero-btn-group{flex-direction:column}
+    .hero-btn-group .btn{justify-content:center}
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;text-align:center}
+    .footer-bottom-links{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:8px;">
+      <span class="nav-logo-text">DA<span>OP</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+      <li><a href="ginetto.html" class="active">Ginetto AI</a></li>
+      <li><a href="index.html#piatto-sano">Il Piatto Sano</a></li>
+      <li><a href="libri.html">Libri</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="https://ginettoapp.it" target="_blank" rel="noopener" class="nav-cta">Apri Ginetto →</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
+  <a href="ginetto.html" onclick="closeMobile()">Ginetto AI</a>
+  <a href="index.html#piatto-sano" onclick="closeMobile()">Il Piatto Sano</a>
+  <a href="libri.html" onclick="closeMobile()">Libri</a>
+  <a href="media.html" onclick="closeMobile()">Media</a>
+  <a href="https://ginettoapp.it" target="_blank" rel="noopener" onclick="closeMobile()">Apri Ginetto →</a>
+</div>
+
+<!-- HERO -->
+<div class="ginetto-hero">
+  <div class="ginetto-hero-inner">
+    <div class="ginetto-hero-text">
+      <span class="section-label">Novità DAOP · Powered by Gemini</span>
+      <h1>Ginetto,<br>la tua guida<br><em>AI per famiglie</em></h1>
+      <p>Il lupetto esploratore di DAOP: un assistente AI che trova luoghi ed eventi vicino a te, risponde alle tue domande e trasforma ogni uscita in un'avventura.</p>
+      <div class="hero-btn-group">
+        <a href="https://ginettoapp.it" target="_blank" rel="noopener" class="btn btn-primary">
+          Apri Ginetto — è gratis
+        </a>
+        <a href="#come-funziona" class="btn btn-outline-white">Come funziona</a>
+      </div>
+    </div>
+    <div class="ginetto-hero-img">
+      <img src="assets/images/ginetto-hero.png" alt="Ginetto AI per famiglie">
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="bg-cream">
+  <div class="section-inner">
+    <span class="section-label">Cosa fa Ginetto</span>
+    <h2 class="section-title">Tutto quello che ti serve<br>per uscire con i bambini</h2>
+    <p class="section-subtitle">Un unico strumento, pensato per le famiglie del territorio</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon icon-orange">💬</div>
+        <div class="feature-title">Chat AI con Gemini</div>
+        <p class="feature-desc">Chiedi qualsiasi cosa — "dove andiamo questo weekend?", "un'attività per bambini di 4 anni", "qualcosa vicino ad Asti". Ginetto capisce e risponde.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon icon-teal">📍</div>
+        <div class="feature-title">2.900+ luoghi in Italia</div>
+        <p class="feature-desc">Fattorie didattiche, parchi avventura, musei per bambini, piscine, biblioteche. Un database curato e sempre aggiornato per uscite di qualità.</p>
+      </div>
+
+      <div class="feature-card highlight">
+        <div class="feature-icon icon-white">🗓️</div>
+        <div class="feature-title">Eventi locali AL e AT</div>
+        <p class="feature-desc">Aggiornati ogni giovedì con le locandine reali del territorio. Mercatini, sagre, spettacoli, laboratori — non perdi più niente.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon icon-gold">🎒</div>
+        <div class="feature-title">Passaporto dell'Esploratore</div>
+        <p class="feature-desc">Ogni luogo visitato vale un timbro. I bambini collezionano i timbri nel loro Passaporto e sbloccano nuove destinazioni da esplorare.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon icon-teal">📱</div>
+        <div class="feature-title">Installabile come app</div>
+        <p class="feature-desc">Funziona su Android e iPhone senza passare dagli app store. Aggiungila alla schermata home con un click e hai Ginetto sempre con te.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon icon-gold">🏷️</div>
+        <div class="feature-title">Sconti per famiglie</div>
+        <p class="feature-desc">Convenzioni e sconti riservati alle famiglie DAOP su attività, ingressi e servizi del territorio. Risparmia ogni volta che esci.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon icon-orange">🔒</div>
+        <div class="feature-title">Privacy first</div>
+        <p class="feature-desc">DAOP non archivia le conversazioni. Le domande vengono elaborate tramite Google Gemini API nel rispetto della tua privacy e del GDPR.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section id="come-funziona" class="bg-white">
+  <div class="section-inner">
+    <span class="section-label">Semplicissimo</span>
+    <h2 class="section-title">Come funziona</h2>
+    <p class="section-subtitle">In tre passi, dal divano all'avventura</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num s1">1</div>
+        <h3>Chiedi a Ginetto</h3>
+        <p>Scrivi cosa vorresti fare — una gita, un laboratorio, qualcosa di economico, un posto al coperto. Ginetto capisce il linguaggio naturale.</p>
+      </div>
+      <div class="step">
+        <div class="step-num s2">2</div>
+        <h3>Ginetto trova</h3>
+        <p>In pochi secondi ricevi idee personalizzate: luoghi, eventi e attività selezionati per la tua zona e l'età dei tuoi bambini.</p>
+      </div>
+      <div class="step">
+        <div class="step-num s3">3</div>
+        <h3>Esplora e timba</h3>
+        <p>Vai, vivi l'esperienza e colleziona il timbro nel Passaporto dell'Esploratore. Ogni uscita diventa un ricordo da conservare.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM -->
+<section class="bg-cream">
+  <div class="section-inner-narrow">
+    <span class="section-label">Ginetto Premium</span>
+    <h2 class="section-title">Versione gratuita e Premium</h2>
+    <p class="section-subtitle" style="margin-bottom:40px;">Ginetto è gratuito per tutti. Il piano Premium sblocca domande illimitate e accesso prioritario.</p>
+    <div class="premium-box">
+      <div>
+        <span class="premium-tag">★ Premium</span>
+        <h3>30 domande al giorno,<br>senza interruzioni</h3>
+        <p>Accesso prioritario, risposte più veloci e supporto diretto alla community DAOP. Perfetto per le famiglie che usano Ginetto ogni settimana.</p>
+        <div style="margin-top:28px;">
+          <a href="https://ginettoapp.it" target="_blank" rel="noopener" class="btn btn-primary">Attiva Premium su ginettoapp.it</a>
+        </div>
+      </div>
+      <div class="premium-price">
+        <div class="price-amount">€2,99</div>
+        <div class="price-period">al mese</div>
+        <div class="price-save">oppure €24/anno — risparmi il 33%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<div class="ginetto-cta">
+  <span class="section-label">Inizia subito</span>
+  <h2>Pronto a esplorare<br>con Ginetto?</h2>
+  <p>Gratuito, senza registrazione obbligatoria. Apri ginettoapp.it dal tuo telefono e inizia subito.</p>
+  <a href="https://ginettoapp.it" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:1.05rem;padding:16px 40px;">
+    Apri Ginetto ora →
+  </a>
+  <p class="ginetto-cta-url">oppure vai su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a></p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:6px;display:block;">
+      <div class="footer-logo-text">DA<span>OP</span></div>
+      <p class="footer-desc">Associazione di Promozione Sociale. Dove Andiamo Oggi Papi. Alessandria &amp; Asti, Piemonte.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Prodotti</div>
+      <div class="footer-col-links">
+        <a href="ginetto.html">Ginetto AI</a>
+        <a href="index.html#piatto-sano">Il Piatto Sano</a>
+        <a href="libri.html">Libri</a>
+        <a href="media.html">Media</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <div class="footer-col-links">
+        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">Instagram AL</a>
+        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">Instagram AT</a>
+        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">Facebook AL</a>
+        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener">Facebook AT</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Info</div>
+      <div class="footer-col-links">
+        <a href="index.html#chi-siamo">Chi siamo</a>
+        <a href="index.html#collabora">Collabora</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookypolicy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 DAOP – Dove Andiamo Oggi Papi APS · Ente del Terzo Settore · Alessandria &amp; Asti</p>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="cookypolicy.html">Cookie</a>
+      <a href="mailto:patrick.orlando@libero.it">Contatti</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+  function toggleMobile() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+</script>
+</body>
+</html>
