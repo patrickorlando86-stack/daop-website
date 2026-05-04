@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Piatto Sano – Mangiare Bene, Crescere Meglio | S.A.N.E. Italia</title>
+<meta name="description" content="Il Piatto Sano è il programma di educazione alimentare S.A.N.E. Italia per bambini 6-13 anni. Gioco interattivo su LIM, 6 moduli tematici, 14 allergeni gestiti. Gratis per le classi pilota.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.daop.it/piattosano.html">
+<meta property="og:title" content="Il Piatto Sano – Mangiare Bene, Crescere Meglio | S.A.N.E. Italia">
+<meta property="og:description" content="Programma di educazione alimentare nelle scuole italiane per bambini 6-13 anni. Fondato da Serafina Cardaci e Patrick Orlando.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.daop.it/piattosano.html">
+<meta property="og:image" content="https://www.daop.it/assets/images/piattosano-cover.webp">
+<link rel="icon" href="assets/images/icon512.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#2d4a5c; --navy-dark:#1e3342;
+    --orange:#e8954a; --orange-dark:#d4793a;
+    --teal:#6ba5a8; --teal-dark:#5a9295;
+    --green:#1D9E75; --green-dark:#178a64;
+    --gold:#c9a227;
+    --cream:#fdf8f3; --warm-white:#fffcf8;
+    --text-dark:#1a2d3a; --text-mid:#4a6070; --text-light:#8a9aaa;
+    --radius-sm:10px; --radius-md:16px; --radius-lg:24px; --radius-xl:32px;
+    --shadow-soft:0 4px 24px rgba(45,74,92,0.10);
+    --shadow-card:0 8px 40px rgba(45,74,92,0.13);
+    --shadow-hover:0 16px 56px rgba(45,74,92,0.18);
+    --transition:0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,248,243,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(45,74,92,0.08);transition:var(--transition)}
+  nav.scrolled{box-shadow:0 2px 24px rgba(45,74,92,0.10)}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo-text{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-0.02em}
+  .nav-logo-text span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--text-mid);font-size:0.88rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--transition)}
+  .nav-links a:hover{color:var(--navy);background:rgba(45,74,92,0.07)}
+  .nav-links a.active{color:var(--navy);background:rgba(45,74,92,0.07);font-weight:600}
+  .nav-cta{background:var(--green)!important;color:white!important;padding:7px 16px!important;border-radius:10px!important;font-weight:600!important}
+  .nav-cta:hover{background:var(--green-dark)!important;transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:var(--transition)}
+  .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(45,74,92,0.08);padding:16px 24px 24px;z-index:99}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;text-decoration:none;color:var(--text-mid);font-size:1rem;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(45,74,92,0.06);transition:var(--transition)}
+  .mobile-menu a:hover{color:var(--navy)}
+
+  /* ── HERO ── */
+  .ps-hero{padding-top:68px;background:linear-gradient(160deg,#0d4a35 0%,#1D9E75 55%,#2abc8a 100%);overflow:hidden;position:relative}
+  .ps-hero::before{content:'';position:absolute;inset:0;background:url('assets/images/piattosano-cover.webp') center/cover no-repeat;opacity:0.06}
+  .ps-hero-inner{max-width:1200px;margin:0 auto;padding:64px 48px 0;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:flex-end;position:relative;z-index:1}
+  .ps-hero-text{padding-bottom:72px}
+  .ps-hero-text .sane-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 16px;margin-bottom:20px}
+  .ps-hero-text .sane-badge img{height:20px;width:auto;filter:brightness(0) invert(1)}
+  .ps-hero-text .sane-badge span{font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.05em;text-transform:uppercase}
+  .ps-hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4rem);font-weight:800;color:white;line-height:1.05;margin-bottom:20px;letter-spacing:-0.02em}
+  .ps-hero-text h1 em{color:#a8f0d5;font-style:italic}
+  .ps-hero-text p{font-size:1.05rem;color:rgba(255,255,255,0.78);line-height:1.75;margin-bottom:32px;max-width:460px}
+  .ps-hero-img{display:flex;align-items:flex-end;justify-content:center}
+  .ps-hero-img img{width:100%;max-width:440px;display:block;border-radius:var(--radius-xl) var(--radius-xl) 0 0;box-shadow:0 -8px 56px rgba(0,0,0,0.2)}
+
+  /* ── COMMONS ── */
+  section{padding:100px 24px}
+  .section-inner{max-width:1200px;margin:0 auto}
+  .section-inner-narrow{max-width:880px;margin:0 auto}
+  .section-label{display:inline-block;font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+  .section-label.green{color:var(--green)}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:16px}
+  .section-subtitle{font-size:1.05rem;color:var(--text-mid);max-width:600px;line-height:1.7}
+
+  /* ── BUTTONS ── */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--radius-md);font-size:0.95rem;font-weight:600;text-decoration:none;transition:var(--transition);font-family:'DM Sans',sans-serif;border:none;cursor:pointer}
+  .btn-green{background:var(--green);color:white;box-shadow:0 4px 16px rgba(29,158,117,0.35)}
+  .btn-green:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,158,117,0.4)}
+  .btn-navy{background:var(--navy);color:white;box-shadow:0 4px 16px rgba(45,74,92,0.3)}
+  .btn-navy:hover{background:var(--navy-dark);transform:translateY(-2px)}
+  .btn-teal{background:var(--teal);color:white;box-shadow:0 4px 16px rgba(107,165,168,0.3)}
+  .btn-teal:hover{background:var(--teal-dark);transform:translateY(-2px)}
+  .btn-outline{background:transparent;color:var(--green);border:2px solid var(--green)}
+  .btn-outline:hover{background:var(--green);color:white;transform:translateY(-2px)}
+  .btn-outline-white{background:transparent;color:white;border:2px solid rgba(255,255,255,0.5)}
+  .btn-outline-white:hover{background:rgba(255,255,255,0.12);border-color:white}
+
+  /* ── INTRO LAYOUT ── */
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .intro-img{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-card)}
+  .intro-img img{width:100%;display:block}
+  .check-list{list-style:none;margin:28px 0;display:flex;flex-direction:column;gap:14px}
+  .check-item{display:flex;align-items:flex-start;gap:12px;font-size:0.95rem;color:var(--text-mid)}
+  .check-icon{width:22px;height:22px;flex-shrink:0;border-radius:6px;background:rgba(29,158,117,0.12);display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .check-icon svg{width:12px;height:12px;stroke:var(--green);stroke-width:2.5;fill:none}
+
+  /* ── FEATURES ── */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+  .feat-card{background:white;border-radius:var(--radius-lg);padding:30px;box-shadow:var(--shadow-card);border:1px solid rgba(45,74,92,0.06);transition:var(--transition)}
+  .feat-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+  .feat-card.dark{background:var(--navy)}
+  .feat-card.dark .feat-title{color:white}
+  .feat-card.dark .feat-desc{color:rgba(255,255,255,0.6)}
+  .feat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:800;color:rgba(29,158,117,0.2);line-height:1;margin-bottom:12px}
+  .feat-card.dark .feat-num{color:rgba(255,255,255,0.12)}
+  .feat-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+  .feat-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65}
+
+  /* ── TEAM ── */
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:56px}
+  .team-card{background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-card);border:1px solid rgba(45,74,92,0.06);overflow:hidden;display:flex;align-items:center;gap:24px;padding:28px;transition:var(--transition)}
+  .team-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .team-photo{width:90px;height:90px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--cream);border:3px solid white;box-shadow:0 4px 16px rgba(45,74,92,0.15)}
+  .team-photo img{width:100%;height:100%;object-fit:cover}
+  .team-role{font-size:0.74rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+  .team-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:6px}
+  .team-desc{font-size:0.85rem;color:var(--text-mid);line-height:1.6}
+
+  /* ── PILOT CASE ── */
+  .pilot-box{background:white;border-radius:var(--radius-xl);box-shadow:var(--shadow-card);border:2px solid rgba(29,158,117,0.2);padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .pilot-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pilot-stat{background:var(--cream);border-radius:var(--radius-md);padding:20px;text-align:center}
+  .pilot-stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:800;color:var(--green);line-height:1;margin-bottom:4px}
+  .pilot-stat-label{font-size:0.78rem;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.05em}
+  .pilot-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(29,158,117,0.1);color:var(--green);font-size:0.75rem;font-weight:700;padding:4px 14px;border-radius:100px;margin-bottom:16px}
+  .pilot-box h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:12px;line-height:1.2}
+  .pilot-box p{font-size:0.92rem;color:var(--text-mid);line-height:1.72;margin-bottom:20px}
+
+  /* ── SCUOLE CTA ── */
+  .scuole-cta{background:linear-gradient(135deg,#0d4a35 0%,#1D9E75 100%);padding:80px 24px;text-align:center}
+  .scuole-cta .section-label{color:rgba(255,255,255,0.6)}
+  .scuole-cta h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;line-height:1.1;margin-bottom:16px}
+  .scuole-cta p{font-size:1.05rem;color:rgba(255,255,255,0.72);margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7}
+  .scuole-btn-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+  /* ── BG ── */
+  .bg-cream{background:var(--cream)}
+  .bg-white{background:white}
+
+  /* ── FOOTER ── */
+  footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.06);padding:40px 24px}
+  .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .footer-logo-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:white;margin:10px 0 8px}
+  .footer-logo-text span{color:var(--orange)}
+  .footer-desc{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px}
+  .footer-col-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px}
+  .footer-col-links{display:flex;flex-direction:column;gap:8px}
+  .footer-col-links a{text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);transition:var(--transition)}
+  .footer-col-links a:hover{color:rgba(255,255,255,0.85)}
+  .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .footer-copy{font-size:0.82rem;color:rgba(255,255,255,0.25)}
+  .footer-bottom-links{display:flex;gap:20px}
+  .footer-bottom-links a{font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:var(--transition)}
+  .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .ps-hero-inner{grid-template-columns:1fr;padding:56px 24px 0;gap:32px}
+    .ps-hero-text{padding-bottom:0}
+    .ps-hero-img img{max-width:360px;margin:0 auto}
+    .intro-grid{grid-template-columns:1fr;gap:40px}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .team-grid{grid-template-columns:1fr}
+    .pilot-box{grid-template-columns:1fr;padding:32px 24px}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    section{padding:72px 20px}
+    .ps-hero-text h1{font-size:2.4rem}
+    .feat-grid{grid-template-columns:1fr}
+    .team-card{flex-direction:column;text-align:center}
+    .pilot-stat-grid{grid-template-columns:1fr 1fr}
+    .scuole-btn-group{flex-direction:column;align-items:center}
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;text-align:center}
+    .footer-bottom-links{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:8px;">
+      <span class="nav-logo-text">DA<span>OP</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+      <li><a href="ginetto.html">Ginetto AI</a></li>
+      <li><a href="piattosano.html" class="active">Il Piatto Sano</a></li>
+      <li><a href="libri.html">Libri</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="https://ilpiattosano.netlify.app" target="_blank" rel="noopener" class="nav-cta">Gioca ora →</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
+  <a href="ginetto.html" onclick="closeMobile()">Ginetto AI</a>
+  <a href="piattosano.html" onclick="closeMobile()">Il Piatto Sano</a>
+  <a href="libri.html" onclick="closeMobile()">Libri</a>
+  <a href="media.html" onclick="closeMobile()">Media</a>
+  <a href="https://ilpiattosano.netlify.app" target="_blank" rel="noopener" onclick="closeMobile()">Gioca ora →</a>
+</div>
+
+<!-- HERO -->
+<div class="ps-hero">
+  <div class="ps-hero-inner">
+    <div class="ps-hero-text">
+      <div class="sane-badge">
+        <img src="assets/images/sane-logo.webp" alt="S.A.N.E. Italia">
+        <span>S.A.N.E. Italia</span>
+      </div>
+      <h1>Mangiare Bene,<br><em>Crescere Meglio</em></h1>
+      <p>Programma di educazione alimentare nelle scuole italiane per bambini dai 6 ai 13 anni. Un gioco, una missione, una generazione più sana.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="https://ilpiattosano.netlify.app" target="_blank" rel="noopener" class="btn btn-outline-white" style="background:white;color:var(--green);">
+          ▶ Gioca online
+        </a>
+        <a href="#per-le-scuole" class="btn btn-outline-white">Per le scuole</a>
+      </div>
+    </div>
+    <div class="ps-hero-img">
+      <img src="assets/images/piattosano-cover.webp" alt="Il Piatto Sano — gioco educativo alimentare">
+    </div>
+  </div>
+</div>
+
+<!-- COSA È -->
+<section class="bg-white">
+  <div class="section-inner">
+    <div class="intro-grid">
+      <div>
+        <span class="section-label green">Il programma</span>
+        <h2 class="section-title">Un gioco che insegna<br>a mangiare bene</h2>
+        <p style="font-size:1rem;color:var(--text-mid);line-height:1.75;margin-bottom:8px;">Il Piatto Sano è un gioco interattivo su LIM (lavagna interattiva multimediale) dove i bambini compongono il pasto perfetto trascinando i cibi nel piatto, rispettando le proporzioni della dieta mediterranea: 50% verdure, 25% cereali, 25% proteine.</p>
+        <p style="font-size:1rem;color:var(--text-mid);line-height:1.75;margin-bottom:24px;">Il programma copre 6 mesi scolastici — da ottobre a marzo — con un modulo tematico al mese in classe, condotto da una nutrizionista qualificata.</p>
+        <ul class="check-list">
+          <li class="check-item">
+            <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span><strong>6 moduli tematici</strong> — 1 ora al mese da ottobre a marzo</span>
+          </li>
+          <li class="check-item">
+            <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span><strong>14 allergeni gestiti</strong> — il piatto si adatta automaticamente ad ogni bambino</span>
+          </li>
+          <li class="check-item">
+            <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span><strong>Due livelli</strong> — Facile per le elementari, Difficile per le medie</span>
+          </li>
+          <li class="check-item">
+            <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span><strong>Tre lingue</strong> — italiano, spagnolo e inglese</span>
+          </li>
+          <li class="check-item">
+            <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="1,6 4,9 11,2"/></svg></span>
+            <span><strong>Chat AI con Serafina</strong> — assistente integrato che risponde alle domande dei bambini</span>
+          </li>
+        </ul>
+        <a href="https://ilpiattosano.netlify.app" target="_blank" rel="noopener" class="btn btn-green">▶ Prova il gioco online</a>
+      </div>
+      <div class="intro-img">
+        <img src="assets/images/ilpiattosano2.png" alt="Il Piatto Sano — logo e gioco">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="bg-cream">
+  <div class="section-inner">
+    <span class="section-label">Perché funziona</span>
+    <h2 class="section-title">Cosa rende unico<br>Il Piatto Sano</h2>
+    <p class="section-subtitle">Non è una lezione. È un'esperienza che i bambini vogliono ripetere.</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-num">01</div>
+        <div class="feat-title">Gamification reale</div>
+        <p class="feat-desc">I bambini non ascoltano — giocano. Trascinare i cibi nel piatto, rispettare le proporzioni, superare i livelli. L'apprendimento avviene senza che se ne accorgano.</p>
+      </div>
+      <div class="feat-card dark">
+        <div class="feat-num">02</div>
+        <div class="feat-title">Inclusivo per natura</div>
+        <p class="feat-desc">14 allergeni gestiti automaticamente. Il gioco si adatta ad ogni bambino — celiaci, intolleranti al lattosio, allergici alle arachidi — senza escludere nessuno.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">03</div>
+        <div class="feat-title">Nutrizionista in classe</div>
+        <p class="feat-desc">Ogni modulo è condotto da una biologa nutrizionista qualificata. Non un video, non un'app da soli — una persona in carne e ossa che risponde alle domande dei bambini.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">04</div>
+        <div class="feat-title">AI integrata</div>
+        <p class="feat-desc">L'assistente AI "Serafina" risponde alle curiosità in tempo reale durante il gioco. I bambini possono chiedere tutto — "perché le proteine?", "cosa sono i carboidrati?"</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">05</div>
+        <div class="feat-title">Funziona ovunque</div>
+        <p class="feat-desc">Gira su qualsiasi dispositivo — LIM scolastica, tablet, PC, smartphone. Nessuna installazione obbligatoria. Basta un browser e una connessione.</p>
+      </div>
+      <div class="feat-card dark">
+        <div class="feat-num">06</div>
+        <div class="feat-title">Gratuito per le scuole</div>
+        <p class="feat-desc">Le classi pilota ricevono il programma completo senza costi: nutrizionista, materiali didattici, kit gioco e formazione per i docenti. Nessun impegno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- I FONDATORI -->
+<section class="bg-white">
+  <div class="section-inner">
+    <span class="section-label">Chi c'è dietro</span>
+    <h2 class="section-title">I fondatori di S.A.N.E. Italia</h2>
+    <p class="section-subtitle">Un progetto nato dall'incontro tra competenza nutrizionale e passione per le famiglie</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="assets/images/serafina.webp" alt="Dott.ssa Serafina Cardaci">
+        </div>
+        <div>
+          <div class="team-role">Co-fondatrice · Responsabile Scientifica</div>
+          <div class="team-name">Dott.ssa Serafina Cardaci</div>
+          <p class="team-desc">Biologa Nutrizionista, è il cuore scientifico di S.A.N.E. Italia. Conduce i moduli in classe, progetta i contenuti nutrizionali e cura l'assistente AI Serafina. <a href="https://www.serafinacardacinutrizione.com" target="_blank" rel="noopener" style="color:var(--green);font-weight:600;text-decoration:none;">serafinacardacinutrizione.com →</a></p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="assets/images/patrick.webp" alt="Ing. Patrick Orlando">
+        </div>
+        <div>
+          <div class="team-role">Co-fondatore · Partner Tecnologico e Media</div>
+          <div class="team-name">Ing. Patrick Orlando</div>
+          <p class="team-desc">Fondatore di DAOP APS, ha ideato e sviluppato Il Piatto Sano come strumento digitale. Cura la parte tecnologica, il design del gioco e le partnership con le scuole e i media.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASO PILOTA -->
+<section class="bg-cream">
+  <div class="section-inner-narrow">
+    <span class="section-label green">Risultati reali</span>
+    <h2 class="section-title">Il progetto pilota<br>di Rosignano Marittimo</h2>
+    <p class="section-subtitle" style="margin-bottom:40px;">A marzo 2026 il programma è entrato in una scuola pubblica statale per la prima volta</p>
+    <div class="pilot-box">
+      <div>
+        <span class="pilot-badge">🏫 Scuola Pubblica · Ministero dell'Istruzione</span>
+        <h3>I.C. "Carducci–Fattori"<br>Rosignano Marittimo (LI)</h3>
+        <p>Con il patrocinio del Comune di Rosignano Marittimo e il coinvolgimento dell'Assessora Cristina Santinelli, il programma "Mangiare Bene, Crescere Meglio" ha raggiunto 5 classi per un totale di circa 100 alunni. La biologa nutrizionista Sara Comandi ha condotto i moduli in presenza.</p>
+        <p>Il Tirreno ha dedicato un articolo al progetto, sottolineando l'innovazione dell'approccio ludico-educativo nella scuola pubblica.</p>
+        <a href="https://www.fattorirosignano.edu.it/mangiare-bene-crescere-meglio/" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:4px;">Leggi sul sito della scuola →</a>
+      </div>
+      <div class="pilot-stat-grid">
+        <div class="pilot-stat">
+          <div class="pilot-stat-num">100</div>
+          <div class="pilot-stat-label">Alunni</div>
+        </div>
+        <div class="pilot-stat">
+          <div class="pilot-stat-num">5</div>
+          <div class="pilot-stat-label">Classi</div>
+        </div>
+        <div class="pilot-stat">
+          <div class="pilot-stat-num">6</div>
+          <div class="pilot-stat-label">Moduli</div>
+        </div>
+        <div class="pilot-stat">
+          <div class="pilot-stat-num">3</div>
+          <div class="pilot-stat-label">Lingue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PER LE SCUOLE CTA -->
+<div id="per-le-scuole" class="scuole-cta">
+  <span class="section-label">Per le scuole</span>
+  <h2>Porta Il Piatto Sano<br>nella tua scuola</h2>
+  <p>Il programma è gratuito per le classi pilota. Nutrizionista qualificata in presenza, materiali didattici, kit gioco e formazione docenti — tutto incluso.</p>
+  <div class="scuole-btn-group">
+    <a href="mailto:patrick.orlando@libero.it?subject=Richiesta%20Il%20Piatto%20Sano" class="btn btn-outline-white" style="background:white;color:var(--green);">Contattaci per la tua scuola</a>
+    <a href="https://sane-italia.it" target="_blank" rel="noopener" class="btn btn-outline-white">Visita sane-italia.it →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:6px;display:block;">
+      <div class="footer-logo-text">DA<span>OP</span></div>
+      <p class="footer-desc">Associazione di Promozione Sociale. Dove Andiamo Oggi Papi. Alessandria &amp; Asti, Piemonte.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Prodotti</div>
+      <div class="footer-col-links">
+        <a href="ginetto.html">Ginetto AI</a>
+        <a href="piattosano.html">Il Piatto Sano</a>
+        <a href="libri.html">Libri</a>
+        <a href="media.html">Media</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <div class="footer-col-links">
+        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">Instagram AL</a>
+        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">Instagram AT</a>
+        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">Facebook AL</a>
+        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener">Facebook AT</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Info</div>
+      <div class="footer-col-links">
+        <a href="index.html#chi-siamo">Chi siamo</a>
+        <a href="index.html#collabora">Collabora</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookypolicy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 DAOP – Dove Andiamo Oggi Papi APS · Ente del Terzo Settore · Alessandria &amp; Asti</p>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="cookypolicy.html">Cookie</a>
+      <a href="mailto:patrick.orlando@libero.it">Contatti</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+  function toggleMobile() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+</script>
+</body>
+</html>
