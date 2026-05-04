@@ -9,6 +9,20 @@
   </url>
 
   <url>
+    <loc>https://www.daop.it/libri.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.daop.it/media.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://www.daop.it/privacy.html</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>yearly</changefreq>
