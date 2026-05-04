@@ -98,6 +98,9 @@
   .press-date{display:block;font-size:0.78rem;color:var(--text-light)}
   .press-text h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.35}
   .press-text p{font-size:0.88rem;color:var(--text-mid);line-height:1.6;margin:0}
+  .press-photo{flex-shrink:0;width:120px;height:90px;border-radius:var(--radius-sm);overflow:hidden;align-self:center;margin-right:4px}
+  .press-photo img{width:100%;height:100%;object-fit:cover}
+  @media(max-width:600px){.press-photo{display:none}}
 
   /* ── RADIO CARD ── */
   .radio-card{background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-card);border:1px solid rgba(45,74,92,0.06);padding:40px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
@@ -226,6 +229,9 @@
             <h3>"Dove andiamo oggi, papì?": te lo dice la guida digitale</h3>
             <p>Il progetto DAOP raccontato dalla Gazzetta d'Asti, con focus sull'espansione nella provincia di Asti grazie al lavoro di Alessandra Zaccone.</p>
           </div>
+          <div class="press-photo">
+            <img src="assets/images/media1.jpg" alt="Articolo Gazzetta d'Asti" loading="lazy">
+          </div>
         </div>
       </div>
 
@@ -239,6 +245,9 @@
           <div class="press-text">
             <h3>"Dove andiamo oggi, papi?": il papà che ha messo in mappa il tempo libero delle famiglie</h3>
             <p>La Voce di Asti racconta Patrick Orlando e la nascita di una piattaforma che unisce genitori e territori della provincia.</p>
+          </div>
+          <div class="press-photo">
+            <img src="assets/images/media2.jpg" alt="Articolo La Voce di Asti" loading="lazy">
           </div>
         </div>
       </div>
@@ -254,6 +263,9 @@
             <h3>La start up 'Dove andiamo oggi papi': dai social al sogno di un'azienda vera</h3>
             <p>DAOP in prima pagina sul Novese. Quello che era nato come un'idea per trovare attività da fare con i figli si è trasformato in qualcosa di più grande.</p>
           </div>
+          <div class="press-photo">
+            <img src="assets/images/media3.jpg" alt="Articolo Il Novese" loading="lazy">
+          </div>
         </div>
       </div>
 
@@ -267,6 +279,9 @@
           <div class="press-text">
             <h3>Alimentazione: già sul web l'app per bambini e genitori</h3>
             <p>Articolo dedicato a "Il Piatto Sano", l'app educativa sviluppata con la nutrizionista Serafina Cardaci nell'ambito del progetto S.A.N.E. Italia.</p>
+          </div>
+          <div class="press-photo">
+            <img src="assets/images/SANE1.jpg" alt="Articolo Il Novese – Il Piatto Sano" loading="lazy">
           </div>
         </div>
       </div>
