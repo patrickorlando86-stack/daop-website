@@ -101,7 +101,7 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   body {
     font-family: 'DM Sans', sans-serif;
@@ -907,8 +907,12 @@
     .hero-actions .btn { justify-content: center; }
     .footer-inner { flex-direction: column; text-align: center; }
     .footer-links { justify-content: center; }
+    .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
     .piatto-actions { flex-direction: column; }
     .piatto-actions .btn { justify-content: center; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -1336,7 +1340,7 @@
 
 <!-- ── FOOTER ── -->
 <footer>
-  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
+  <div class="footer-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
     <div>
       <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:6px;margin-bottom:14px;display:block;">
       <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;color:white;margin-bottom:8px;">DA<span style="color:var(--orange);">OP</span></div>
