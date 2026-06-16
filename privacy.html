@@ -19,158 +19,234 @@
 <meta name="twitter:description" content="Informativa sul trattamento dei dati personali di DAOP APS ai sensi del GDPR.">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <link rel="icon" href="assets/images/icon512.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box}
-  body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fff}
-  /* Header */
-  .daop-nav{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-  .daop-nav-container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .daop-logo{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;color:#2d4a5c;font-size:1.2rem}
-  .daop-nav-links{display:flex;gap:26px;list-style:none;margin:0;padding:0}
-  .daop-nav-links a{color:#2d4a5c;text-decoration:none;padding:8px 0;border-bottom:2px solid transparent;font-weight:600;transition:color .2s,border-color .2s}
-  .daop-nav-links a:hover{color:#e8954a;border-bottom-color:#e8954a}
-  .daop-nav-links a.active{color:#e8954a;border-bottom-color:#e8954a}
-  .daop-menu-toggle{display:none;flex-direction:column;gap:5px;background:transparent;border:0;cursor:pointer}
-  .daop-menu-toggle span{width:26px;height:3px;background:#2d4a5c;border-radius:2px}
-  @media (max-width:768px){
-    .daop-menu-toggle{display:flex}
-    .daop-nav-links{position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;gap:14px;padding:18px 22px;display:none;box-shadow:0 8px 20px rgba(0,0,0,.12)}
-    .daop-nav-links.show{display:flex}
-    .daop-nav-links a{padding:10px 0}
+  :root{
+    --navy:#2d4a5c; --navy-dark:#1e3342; --orange:#e8954a; --orange-dark:#d4793a;
+    --green:#1D9E75; --green-dark:#178a64; --cream:#fdf8f3; --warm-white:#fffcf8;
+    --text-dark:#1a2d3a; --text-mid:#4a6070;
+    --radius-md:16px; --radius-lg:24px;
+    --shadow-soft:0 4px 24px rgba(45,74,92,0.10);
+    --transition:0.3s cubic-bezier(0.4,0,0.2,1);
   }
-  /* Pagina Privacy */
-  .daop-hero{background:#f8f9fa;padding:60px 20px 30px}
-  .daop-container{max-width:900px;margin:0 auto;padding:0 20px}
-  .daop-hero h1{color:#2d4a5c;font-size:2.2rem;text-align:center;margin:0 0 10px}
-  .daop-hero p{color:#5a6c7d;text-align:center;margin:0}
-  .daop-pp{padding:40px 0 80px}
-  .daop-pp h2{color:#2d4a5c;font-size:1.3rem;margin:28px 0 10px}
-  .daop-pp p,.daop-pp li{color:#333;line-height:1.7}
-  .daop-pp ul{padding-left:20px;margin:10px 0}
-  .daop-note{background:#eef3f6;border-left:4px solid #2d4a5c;padding:14px 16px;border-radius:6px;color:#2d4a5c;margin:14px 0}
-  .daop-footer{background:#2d3748;color:#fff;text-align:center;padding:24px 20px}
-  .daop-footer a{color:#fff;text-decoration:underline}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,248,243,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(45,74,92,0.08);transition:var(--transition)}
+  nav.scrolled{box-shadow:0 2px 24px rgba(45,74,92,0.10)}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo-text{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-0.02em}
+  .nav-logo-text span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--text-mid);font-size:0.88rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--transition)}
+  .nav-links a:hover{color:var(--navy);background:rgba(45,74,92,0.07)}
+  .nav-cta{background:var(--green)!important;color:white!important;padding:7px 16px!important;border-radius:10px!important;font-weight:600!important}
+  .nav-cta:hover{background:var(--green-dark)!important;transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:var(--transition)}
+  .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(45,74,92,0.08);padding:16px 24px 24px;z-index:99}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;text-decoration:none;color:var(--text-mid);font-size:1rem;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(45,74,92,0.06);transition:var(--transition)}
+  .mobile-menu a:hover{color:var(--navy)}
+
+  /* ── HERO LEGALE ── */
+  .legal-hero{padding:128px 24px 56px;background:linear-gradient(160deg,#0d4a35 0%,#1D9E75 70%,#2abc8a 100%);text-align:center}
+  .legal-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-0.02em}
+  .legal-hero p{font-size:1rem;color:rgba(255,255,255,0.8);max-width:620px;margin:0 auto;line-height:1.7}
+
+  /* ── CONTENUTO ── */
+  .legal{max-width:880px;margin:0 auto;padding:64px 24px 96px}
+  .legal h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.4rem;margin:34px 0 12px}
+  .legal p,.legal li{color:var(--text-mid);line-height:1.75;margin-bottom:8px}
+  .legal ul{padding-left:22px;margin:10px 0}
+  .legal a{color:var(--green);font-weight:600;text-decoration:none}
+  .legal a:hover{text-decoration:underline}
+  .legal-note{background:rgba(29,158,117,0.08);border-left:4px solid var(--green);padding:16px 18px;border-radius:8px;color:var(--navy);margin:18px 0}
+
+  /* ── FOOTER ── */
+  footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.06);padding:40px 24px}
+  .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .footer-logo-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:white;margin:10px 0 8px}
+  .footer-logo-text span{color:var(--orange)}
+  .footer-desc{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px}
+  .footer-col-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px}
+  .footer-col-links{display:flex;flex-direction:column;gap:8px}
+  .footer-col-links a{text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);transition:var(--transition)}
+  .footer-col-links a:hover{color:rgba(255,255,255,0.85)}
+  .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .footer-copy{font-size:0.82rem;color:rgba(255,255,255,0.25)}
+  .footer-bottom-links{display:flex;gap:20px}
+  .footer-bottom-links a{font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:var(--transition)}
+  .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;text-align:center}
+    .footer-bottom-links{justify-content:center}
+  }
+
+  /* ── A11Y ── */
+  :focus-visible{outline:3px solid var(--green);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  }
 </style>
 </head>
 <body>
 
-<!-- HEADER STICKY (stile DAOP) -->
-<header class="daop-blog-header">
-  <nav class="daop-nav">
-    <div class="daop-nav-container">
-      <a href="index.html" class="daop-logo" aria-label="DAOP Home">
-        <img src="assets/images/logodaop.png"
-             alt="Logo DAOP" width="40" height="40" style="height:40px;width:auto;border-radius:8px;">
-        <span>DAOP</span>
-      </a>
-
-      <ul class="daop-nav-links" id="daopNavLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
-        <li><a href="ginetto.html">Ginetto AI</a></li>
-        <li><a href="piattosano.html">Il Piatto Sano</a></li>
-        <li><a href="libri.html">Libri</a></li>
-        <li><a href="media.html">Media</a></li>
-        <li><a class="active" href="#">Privacy</a></li>
-      </ul>
-
-      <button class="daop-menu-toggle" id="daopMenuToggle" aria-label="Apri menù" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:8px;">
+      <span class="nav-logo-text">DA<span>OP</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+      <li><a href="ginetto.html">Ginetto AI</a></li>
+      <li><a href="piattosano.html">Il Piatto Sano</a></li>
+      <li><a href="libri.html">Libri</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="https://gioco.sane-italia.it" target="_blank" rel="noopener" class="nav-cta">Gioca ora →</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
     </div>
-  </nav>
-</header>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
+  <a href="ginetto.html" onclick="closeMobile()">Ginetto AI</a>
+  <a href="piattosano.html" onclick="closeMobile()">Il Piatto Sano</a>
+  <a href="libri.html" onclick="closeMobile()">Libri</a>
+  <a href="media.html" onclick="closeMobile()">Media</a>
+  <a href="https://gioco.sane-italia.it" target="_blank" rel="noopener" onclick="closeMobile()">Gioca ora →</a>
+</div>
 
 <!-- HERO -->
-<section class="daop-hero">
-  <div class="daop-container">
-    <h1>Privacy Policy</h1>
-    <p>Informativa sul trattamento dei dati personali ai sensi del GDPR (Reg. UE 2016/679)</p>
-  </div>
+<section class="legal-hero">
+  <h1>Privacy Policy</h1>
+  <p>Informativa sul trattamento dei dati personali ai sensi del GDPR (Reg. UE 2016/679)</p>
 </section>
 
-<!-- CONTENUTO PRIVACY -->
-<section class="daop-pp">
-  <div class="daop-container">
-    <p><strong>Ultimo aggiornamento:</strong> Aprile 2026</p>
-    <p>La presente informativa descrive le modalità di trattamento dei dati personali degli utenti che visitano il sito
-      <strong>www.daop.it</strong>, gestito da <strong>Patrick Orlando</strong> nell'ambito di <strong>DAOP APS</strong>, Titolare del trattamento.</p>
+<!-- CONTENUTO -->
+<section class="legal">
+  <p><strong>Ultimo aggiornamento:</strong> Aprile 2026</p>
+  <p>La presente informativa descrive le modalità di trattamento dei dati personali degli utenti che visitano il sito
+    <strong>www.daop.it</strong>, gestito da <strong>Patrick Orlando</strong> nell'ambito di <strong>DAOP APS</strong>, Titolare del trattamento.</p>
 
-    <div class="daop-note">Per richieste relative ai tuoi dati: <a href="mailto:info@daop.it">info@daop.it</a></div>
+  <div class="legal-note">Per richieste relative ai tuoi dati: <a href="mailto:info@daop.it">info@daop.it</a></div>
 
-    <h2>Chi siamo</h2>
-    <p><strong>DAOP – Dove Andiamo Oggi Papi APS</strong> è un'associazione di promozione sociale che offre contenuti informativi per famiglie nelle province di Alessandria e Asti: uscite, alimentazione sana, eventi, libri per bambini e strumenti digitali come Ginetto AI e Il Piatto Sano.</p>
-    <p><strong>Titolare:</strong> Patrick Orlando – Alessandria (Italia) – Email: <a href="mailto:info@daop.it">info@daop.it</a></p>
+  <h2>Chi siamo</h2>
+  <p><strong>DAOP – Dove Andiamo Oggi Papi APS</strong> è un'associazione di promozione sociale che offre contenuti informativi per famiglie nelle province di Alessandria e Asti: uscite, alimentazione sana, eventi, libri per bambini e strumenti digitali come Ginetto AI e Il Piatto Sano.</p>
+  <p><strong>Titolare:</strong> Patrick Orlando – Alessandria (Italia) – Email: <a href="mailto:info@daop.it">info@daop.it</a></p>
 
-    <h2>Tipologie di dati trattati</h2>
-    <ul>
-      <li><strong>Dati tecnici di navigazione</strong> (IP, tipo di browser, sistema operativo, tempi di permanenza) raccolti in forma aggregata e anonima dall'infrastruttura di hosting (GitHub Pages).</li>
-      <li><strong>Dati forniti volontariamente</strong> tramite email o moduli di contatto (nome, email, messaggio), usati solo per rispondere alla richiesta.</li>
-      <li><strong>Cookie</strong> tecnici e di terze parti (vedi <a href="cookypolicy.html">Cookie Policy</a>).</li>
-    </ul>
-    <p>Il sito non richiede registrazione, non gestisce aree riservate e non abilita i commenti pubblici.</p>
+  <h2>Tipologie di dati trattati</h2>
+  <ul>
+    <li><strong>Dati tecnici di navigazione</strong> (IP, tipo di browser, sistema operativo, tempi di permanenza) raccolti in forma aggregata e anonima dall'infrastruttura di hosting (GitHub Pages).</li>
+    <li><strong>Dati forniti volontariamente</strong> tramite email o moduli di contatto (nome, email, messaggio), usati solo per rispondere alla richiesta.</li>
+    <li><strong>Cookie</strong> tecnici e di terze parti (vedi <a href="cookypolicy.html">Cookie Policy</a>).</li>
+  </ul>
+  <p>Il sito non richiede registrazione, non gestisce aree riservate e non abilita i commenti pubblici.</p>
 
-    <h2>Ginetto AI</h2>
-    <p><strong>Ginetto AI</strong> è l'assistente digitale DAOP, accessibile su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a>. Le domande inviate a Ginetto vengono elaborate tramite <strong>Google Gemini API</strong>. DAOP non archivia il contenuto delle conversazioni. L'utilizzo di Ginetto è soggetto alla privacy policy di <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google</a>.</p>
+  <h2>Ginetto AI</h2>
+  <p><strong>Ginetto AI</strong> è l'assistente digitale DAOP, accessibile su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a>. Le domande inviate a Ginetto vengono elaborate tramite <strong>Google Gemini API</strong>. DAOP non archivia il contenuto delle conversazioni. L'utilizzo di Ginetto è soggetto alla privacy policy di <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google</a>.</p>
 
-    <h2>Finalità e basi giuridiche</h2>
-    <ul>
-      <li>Fornire i contenuti e migliorare la fruizione del sito (interesse legittimo).</li>
-      <li>Rispondere a richieste inviate via email o modulo (esecuzione di misure precontrattuali).</li>
-      <li>Analisi statistiche anonime di traffico (interesse legittimo).</li>
-    </ul>
+  <h2>Finalità e basi giuridiche</h2>
+  <ul>
+    <li>Fornire i contenuti e migliorare la fruizione del sito (interesse legittimo).</li>
+    <li>Rispondere a richieste inviate via email o modulo (esecuzione di misure precontrattuali).</li>
+    <li>Analisi statistiche anonime di traffico (interesse legittimo).</li>
+  </ul>
 
-    <h2>Modalità e luogo del trattamento</h2>
-    <p>Il sito è ospitato su <strong>GitHub Pages</strong> (GitHub Inc., USA), infrastruttura conforme GDPR. I dati sono trattati in UE o in paesi che garantiscono un livello adeguato di protezione.</p>
+  <h2>Modalità e luogo del trattamento</h2>
+  <p>Il sito è ospitato su <strong>GitHub Pages</strong> (GitHub Inc., USA), infrastruttura conforme GDPR. I dati sono trattati in UE o in paesi che garantiscono un livello adeguato di protezione.</p>
 
-    <h2>Conservazione</h2>
-    <ul>
-      <li>Dati inviati via email/modulo: per il tempo necessario a rispondere e gestire la comunicazione.</li>
-      <li>Dati tecnici/analytics anonimi: fino a 12 mesi.</li>
-    </ul>
+  <h2>Conservazione</h2>
+  <ul>
+    <li>Dati inviati via email/modulo: per il tempo necessario a rispondere e gestire la comunicazione.</li>
+    <li>Dati tecnici/analytics anonimi: fino a 12 mesi.</li>
+  </ul>
 
-    <h2>Comunicazione a terzi</h2>
-    <p>I dati non vengono ceduti. Possono essere trattati da fornitori tecnici (hosting, provider email) in qualità di responsabili esterni del trattamento, nel rispetto del GDPR.</p>
+  <h2>Comunicazione a terzi</h2>
+  <p>I dati non vengono ceduti. Possono essere trattati da fornitori tecnici (hosting, provider email) in qualità di responsabili esterni del trattamento, nel rispetto del GDPR.</p>
 
-    <h2>Diritti dell'interessato</h2>
-    <p>Hai diritto di accesso, rettifica, cancellazione, limitazione, portabilità e opposizione (artt. 15–22 GDPR). Puoi esercitarli scrivendo a
-      <a href="mailto:info@daop.it">info@daop.it</a>.
-      Puoi inoltre proporre reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).</p>
+  <h2>Diritti dell'interessato</h2>
+  <p>Hai diritto di accesso, rettifica, cancellazione, limitazione, portabilità e opposizione (artt. 15–22 GDPR). Puoi esercitarli scrivendo a
+    <a href="mailto:info@daop.it">info@daop.it</a>.
+    Puoi inoltre proporre reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).</p>
 
-    <h2>Aggiornamenti</h2>
-    <p>Questa informativa potrà essere aggiornata. La versione corrente è sempre disponibile a questo indirizzo:
-      <strong>www.daop.it/privacy.html</strong>
-    </p>
-  </div>
+  <h2>Aggiornamenti</h2>
+  <p>Questa informativa potrà essere aggiornata. La versione corrente è sempre disponibile a questo indirizzo:
+    <strong>www.daop.it/privacy.html</strong></p>
 </section>
 
 <!-- FOOTER -->
-<footer class="daop-footer">
-  <div class="daop-container" style="max-width:1200px;">
-    <p>&copy; 2026 DAOP APS – Dove Andiamo Oggi Papi ·
-      <a href="privacy.html">Privacy Policy</a> ·
-      <a href="cookypolicy.html">Cookie Policy</a>
-    </p>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:64px;width:auto;border-radius:10px;flex-shrink:0;">
+        <div class="footer-logo-text" style="font-size:1.8rem;margin:0;">DA<span>OP</span></div>
+      </div>
+      <p class="footer-desc">Associazione di Promozione Sociale. Dove Andiamo Oggi Papi. Alessandria &amp; Asti, Piemonte.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Prodotti</div>
+      <div class="footer-col-links">
+        <a href="ginetto.html">Ginetto AI</a>
+        <a href="piattosano.html">Il Piatto Sano</a>
+        <a href="libri.html">Libri</a>
+        <a href="media.html">Media</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <div class="footer-col-links">
+        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">Instagram AL</a>
+        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">Instagram AT</a>
+        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">Facebook AL</a>
+        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener">Facebook AT</a>
+        <a href="https://www.youtube.com/@DOVEANDIAMOOGGIPAPI" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contatti</div>
+      <div class="footer-col-links">
+        <a href="mailto:info@daop.it">info@daop.it</a>
+        <a href="tel:+393471834091">347 183 4091</a>
+        <a href="index.html#chi-siamo">Chi siamo</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookypolicy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 DAOP – Dove Andiamo Oggi Papi APS · Ente del Terzo Settore · Alessandria &amp; Asti</p>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="cookypolicy.html">Cookie</a>
+      <a href="mailto:info@daop.it">Contatti</a>
+    </div>
   </div>
 </footer>
 
 <script>
-  // Burger toggle
-  (function(){
-    const btn = document.getElementById('daopMenuToggle');
-    const list = document.getElementById('daopNavLinks');
-    if(!btn||!list) return;
-    btn.addEventListener('click', ()=>{
-      const open = list.classList.toggle('show');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    list.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=> {
-        list.classList.remove('show');
-        btn.setAttribute('aria-expanded','false');
-      });
-    });
-  })();
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+  function toggleMobile(){ document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMobile(){ document.getElementById('mobile-menu').classList.remove('open'); }
 </script>
 </body>
 </html>

@@ -7,30 +7,121 @@
 <meta name="description" content="La pagina che cerchi non esiste o è stata spostata. Torna alla home di DAOP APS o esplora Ginetto AI, Il Piatto Sano, i libri e i media.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.daop.it/404.html">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP APS">
 <link rel="icon" href="assets/images/icon512.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#2d4a5c; --orange:#e8954a; --green:#1D9E75; --green-dark:#178a64;
-    --cream:#fdf8f3; --text-mid:#4a6070;
+    --navy:#2d4a5c; --navy-dark:#1e3342; --orange:#e8954a; --orange-dark:#d4793a;
+    --green:#1D9E75; --green-dark:#178a64; --cream:#fdf8f3; --warm-white:#fffcf8;
+    --text-dark:#1a2d3a; --text-mid:#4a6070;
+    --transition:0.3s cubic-bezier(0.4,0,0.2,1);
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--cream);color:var(--navy);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
-  .logo{height:72px;width:auto;border-radius:14px;margin-bottom:28px}
-  .code{font-family:'Playfair Display',serif;font-size:clamp(4rem,14vw,7rem);font-weight:800;line-height:1;color:var(--green);letter-spacing:-0.02em}
-  h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;margin:8px 0 14px}
-  p{font-size:1.05rem;color:var(--text-mid);max-width:520px;line-height:1.7;margin-bottom:32px}
-  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:14px 30px;border-radius:16px;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(29,158,117,0.35);transition:.25s}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,248,243,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(45,74,92,0.08);transition:var(--transition)}
+  nav.scrolled{box-shadow:0 2px 24px rgba(45,74,92,0.10)}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo-text{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-0.02em}
+  .nav-logo-text span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--text-mid);font-size:0.88rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--transition)}
+  .nav-links a:hover{color:var(--navy);background:rgba(45,74,92,0.07)}
+  .nav-cta{background:var(--green)!important;color:white!important;padding:7px 16px!important;border-radius:10px!important;font-weight:600!important}
+  .nav-cta:hover{background:var(--green-dark)!important;transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:var(--transition)}
+  .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(45,74,92,0.08);padding:16px 24px 24px;z-index:99}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;text-decoration:none;color:var(--text-mid);font-size:1rem;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(45,74,92,0.06);transition:var(--transition)}
+  .mobile-menu a:hover{color:var(--navy)}
+
+  /* ── 404 ── */
+  .e404{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:128px 20px 80px}
+  .e404 .code{font-family:'Playfair Display',serif;font-size:clamp(4rem,14vw,7rem);font-weight:800;line-height:1;color:var(--green);letter-spacing:-0.02em}
+  .e404 h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;color:var(--navy);margin:8px 0 14px}
+  .e404 p{font-size:1.05rem;color:var(--text-mid);max-width:520px;line-height:1.7;margin-bottom:32px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:14px 30px;border-radius:16px;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(29,158,117,0.35);transition:var(--transition)}
   .btn:hover{background:var(--green-dark);transform:translateY(-2px)}
-  .links{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center}
-  .links a{color:var(--navy);text-decoration:none;font-weight:600;font-size:0.95rem;border-bottom:2px solid transparent;transition:.2s}
-  .links a:hover{color:var(--orange);border-bottom-color:var(--orange)}
+  .e404 .links{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center}
+  .e404 .links a{color:var(--navy);text-decoration:none;font-weight:600;font-size:0.95rem;border-bottom:2px solid transparent;transition:var(--transition)}
+  .e404 .links a:hover{color:var(--orange);border-bottom-color:var(--orange)}
+
+  /* ── FOOTER ── */
+  footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.06);padding:40px 24px}
+  .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .footer-logo-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:white;margin:10px 0 8px}
+  .footer-logo-text span{color:var(--orange)}
+  .footer-desc{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px}
+  .footer-col-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px}
+  .footer-col-links{display:flex;flex-direction:column;gap:8px}
+  .footer-col-links a{text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);transition:var(--transition)}
+  .footer-col-links a:hover{color:rgba(255,255,255,0.85)}
+  .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .footer-copy{font-size:0.82rem;color:rgba(255,255,255,0.25)}
+  .footer-bottom-links{display:flex;gap:20px}
+  .footer-bottom-links a{font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:var(--transition)}
+  .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;text-align:center}
+    .footer-bottom-links{justify-content:center}
+  }
+
+  /* ── A11Y ── */
+  :focus-visible{outline:3px solid var(--green);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  }
 </style>
 </head>
 <body>
-  <img src="assets/images/logodaop.png" alt="Logo DAOP" class="logo">
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:8px;">
+      <span class="nav-logo-text">DA<span>OP</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+      <li><a href="ginetto.html">Ginetto AI</a></li>
+      <li><a href="piattosano.html">Il Piatto Sano</a></li>
+      <li><a href="libri.html">Libri</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="https://gioco.sane-italia.it" target="_blank" rel="noopener" class="nav-cta">Gioca ora →</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
+  <a href="ginetto.html" onclick="closeMobile()">Ginetto AI</a>
+  <a href="piattosano.html" onclick="closeMobile()">Il Piatto Sano</a>
+  <a href="libri.html" onclick="closeMobile()">Libri</a>
+  <a href="media.html" onclick="closeMobile()">Media</a>
+  <a href="https://gioco.sane-italia.it" target="_blank" rel="noopener" onclick="closeMobile()">Gioca ora →</a>
+</div>
+
+<!-- 404 -->
+<main class="e404">
   <div class="code">404</div>
   <h1>Pagina non trovata</h1>
   <p>La pagina che cercavi non esiste o è stata spostata. Nessun problema: torna alla home o scegli dove andare oggi.</p>
@@ -42,5 +133,63 @@
     <a href="libri.html">Libri</a>
     <a href="media.html">Media</a>
   </nav>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:64px;width:auto;border-radius:10px;flex-shrink:0;">
+        <div class="footer-logo-text" style="font-size:1.8rem;margin:0;">DA<span>OP</span></div>
+      </div>
+      <p class="footer-desc">Associazione di Promozione Sociale. Dove Andiamo Oggi Papi. Alessandria &amp; Asti, Piemonte.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Prodotti</div>
+      <div class="footer-col-links">
+        <a href="ginetto.html">Ginetto AI</a>
+        <a href="piattosano.html">Il Piatto Sano</a>
+        <a href="libri.html">Libri</a>
+        <a href="media.html">Media</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <div class="footer-col-links">
+        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">Instagram AL</a>
+        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">Instagram AT</a>
+        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">Facebook AL</a>
+        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener">Facebook AT</a>
+        <a href="https://www.youtube.com/@DOVEANDIAMOOGGIPAPI" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contatti</div>
+      <div class="footer-col-links">
+        <a href="mailto:info@daop.it">info@daop.it</a>
+        <a href="tel:+393471834091">347 183 4091</a>
+        <a href="index.html#chi-siamo">Chi siamo</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="cookypolicy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 DAOP – Dove Andiamo Oggi Papi APS · Ente del Terzo Settore · Alessandria &amp; Asti</p>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="cookypolicy.html">Cookie</a>
+      <a href="mailto:info@daop.it">Contatti</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+  function toggleMobile(){ document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMobile(){ document.getElementById('mobile-menu').classList.remove('open'); }
+</script>
 </body>
 </html>
