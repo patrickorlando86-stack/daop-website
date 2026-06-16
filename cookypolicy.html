@@ -1,28 +1,27 @@
-<!-- HEADER -->
-<header class="daop-blog-header">
-  <nav class="daop-nav">
-    <div class="daop-nav-container">
-      <a href="index.html" class="daop-logo" aria-label="DAOP Home">
-        <img src="assets/images/logodaop.png"
-             alt="Logo DAOP" width="40" height="40" style="height:40px;width:auto;border-radius:8px;">
-        <span>DAOP</span>
-      </a>
-      <ul class="daop-nav-links" id="daopNavLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
-        <li><a href="index.html#piatto-sano">Il Piatto Sano</a></li>
-        <li><a href="index.html#libri">Libri</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li><a class="active" href="#">Cookie Policy</a></li>
-      </ul>
-      <button class="daop-menu-toggle" id="daopMenuToggle" aria-label="Apri menù" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-</header>
-
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Policy – Gestione dei cookie | DAOP APS</title>
+<meta name="description" content="Cookie Policy di DAOP APS (daop.it): quali cookie tecnici e di terze parti usiamo, i servizi esterni coinvolti e come gestire le preferenze dal browser. Nessun cookie di profilazione.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.daop.it/cookypolicy.html">
+<meta property="og:title" content="Cookie Policy | DAOP APS">
+<meta property="og:description" content="Quali cookie usa daop.it e come gestire le preferenze. Nessun cookie di profilazione o tracciamento pubblicitario.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.daop.it/cookypolicy.html">
+<meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP APS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cookie Policy | DAOP APS">
+<meta name="twitter:description" content="Quali cookie usa daop.it e come gestire le preferenze. Nessun cookie di profilazione.">
+<meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<link rel="icon" href="assets/images/icon512.png" type="image/png">
 <style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fff}
 .daop-nav{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1)}
 .daop-nav-container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .daop-logo{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;color:#2d4a5c;font-size:1.2rem}
@@ -45,18 +44,33 @@
 .daop-footer{background:#2d3748;color:#fff;text-align:center;padding:24px 20px}
 .daop-footer a{color:#fff;text-decoration:underline}
 </style>
+</head>
+<body>
 
-<script>
-(function(){
-  const btn=document.getElementById('daopMenuToggle');
-  const list=document.getElementById('daopNavLinks');
-  if(!btn||!list)return;
-  btn.addEventListener('click',()=>{
-    const open=list.classList.toggle('show');
-    btn.setAttribute('aria-expanded',open?'true':'false');
-  });
-})();
-</script>
+<!-- HEADER -->
+<header class="daop-blog-header">
+  <nav class="daop-nav">
+    <div class="daop-nav-container">
+      <a href="index.html" class="daop-logo" aria-label="DAOP Home">
+        <img src="assets/images/logodaop.png"
+             alt="Logo DAOP" width="40" height="40" style="height:40px;width:auto;border-radius:8px;">
+        <span>DAOP</span>
+      </a>
+      <ul class="daop-nav-links" id="daopNavLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+        <li><a href="ginetto.html">Ginetto AI</a></li>
+        <li><a href="piattosano.html">Il Piatto Sano</a></li>
+        <li><a href="libri.html">Libri</a></li>
+        <li><a href="media.html">Media</a></li>
+        <li><a class="active" href="#">Cookie Policy</a></li>
+      </ul>
+      <button class="daop-menu-toggle" id="daopMenuToggle" aria-label="Apri menù" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
 
 <!-- CONTENUTO COOKIE POLICY -->
 <section class="daop-container">
@@ -97,7 +111,7 @@
 
   <h2>6. Titolare del trattamento</h2>
   <p><strong>Patrick Orlando – DAOP APS</strong> – Alessandria (Italia)<br>
-     Email: <a href="mailto:patrick.orlando@libero.it">patrick.orlando@libero.it</a></p>
+     Email: <a href="mailto:info@daop.it">info@daop.it</a></p>
 
   <h2>7. Aggiornamenti</h2>
   <p>Potremmo aggiornare questa informativa per riflettere cambiamenti normativi o tecnici. La versione corrente è sempre disponibile su questa pagina: <strong>www.daop.it/cookypolicy.html</strong></p>
@@ -109,3 +123,23 @@
     <a href="cookypolicy.html">Cookie Policy</a>
   </p>
 </footer>
+
+<script>
+(function(){
+  const btn=document.getElementById('daopMenuToggle');
+  const list=document.getElementById('daopNavLinks');
+  if(!btn||!list)return;
+  btn.addEventListener('click',()=>{
+    const open=list.classList.toggle('show');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  list.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{
+      list.classList.remove('show');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+</script>
+</body>
+</html>

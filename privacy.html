@@ -1,30 +1,27 @@
-<!-- HEADER STICKY (stile DAOP) -->
-<header class="daop-blog-header">
-  <nav class="daop-nav">
-    <div class="daop-nav-container">
-      <a href="index.html" class="daop-logo" aria-label="DAOP Home">
-        <img src="assets/images/logodaop.png"
-             alt="Logo DAOP" width="40" height="40" style="height:40px;width:auto;border-radius:8px;">
-        <span>DAOP</span>
-      </a>
-
-      <ul class="daop-nav-links" id="daopNavLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
-        <li><a href="index.html#piatto-sano">Il Piatto Sano</a></li>
-        <li><a href="index.html#libri">Libri</a></li>
-        <li><a class="active" href="#">Privacy</a></li>
-        <li><a href="cookypolicy.html">Cookie Policy</a></li>
-      </ul>
-
-      <button class="daop-menu-toggle" id="daopMenuToggle" aria-label="Apri menù" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-</header>
-
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – Trattamento dei dati | DAOP APS</title>
+<meta name="description" content="Informativa privacy di DAOP APS (www.daop.it) ai sensi del GDPR (Reg. UE 2016/679): tipologie di dati trattati, finalità, conservazione e diritti dell'interessato.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.daop.it/privacy.html">
+<meta property="og:title" content="Privacy Policy | DAOP APS">
+<meta property="og:description" content="Informativa sul trattamento dei dati personali di DAOP APS ai sensi del GDPR (Reg. UE 2016/679).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.daop.it/privacy.html">
+<meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP APS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy | DAOP APS">
+<meta name="twitter:description" content="Informativa sul trattamento dei dati personali di DAOP APS ai sensi del GDPR.">
+<meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<link rel="icon" href="assets/images/icon512.png" type="image/png">
 <style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fff}
   /* Header */
   .daop-nav{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1)}
   .daop-nav-container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -41,7 +38,6 @@
     .daop-nav-links.show{display:flex}
     .daop-nav-links a{padding:10px 0}
   }
-
   /* Pagina Privacy */
   .daop-hero{background:#f8f9fa;padding:60px 20px 30px}
   .daop-container{max-width:900px;margin:0 auto;padding:0 20px}
@@ -55,25 +51,35 @@
   .daop-footer{background:#2d3748;color:#fff;text-align:center;padding:24px 20px}
   .daop-footer a{color:#fff;text-decoration:underline}
 </style>
+</head>
+<body>
 
-<script>
-  // Burger toggle
-  (function(){
-    const btn = document.getElementById('daopMenuToggle');
-    const list = document.getElementById('daopNavLinks');
-    if(!btn||!list) return;
-    btn.addEventListener('click', ()=>{
-      const open = list.classList.toggle('show');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    list.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=> {
-        list.classList.remove('show');
-        btn.setAttribute('aria-expanded','false');
-      });
-    });
-  })();
-</script>
+<!-- HEADER STICKY (stile DAOP) -->
+<header class="daop-blog-header">
+  <nav class="daop-nav">
+    <div class="daop-nav-container">
+      <a href="index.html" class="daop-logo" aria-label="DAOP Home">
+        <img src="assets/images/logodaop.png"
+             alt="Logo DAOP" width="40" height="40" style="height:40px;width:auto;border-radius:8px;">
+        <span>DAOP</span>
+      </a>
+
+      <ul class="daop-nav-links" id="daopNavLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+        <li><a href="ginetto.html">Ginetto AI</a></li>
+        <li><a href="piattosano.html">Il Piatto Sano</a></li>
+        <li><a href="libri.html">Libri</a></li>
+        <li><a href="media.html">Media</a></li>
+        <li><a class="active" href="#">Privacy</a></li>
+      </ul>
+
+      <button class="daop-menu-toggle" id="daopMenuToggle" aria-label="Apri menù" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
 
 <!-- HERO -->
 <section class="daop-hero">
@@ -90,11 +96,11 @@
     <p>La presente informativa descrive le modalità di trattamento dei dati personali degli utenti che visitano il sito
       <strong>www.daop.it</strong>, gestito da <strong>Patrick Orlando</strong> nell'ambito di <strong>DAOP APS</strong>, Titolare del trattamento.</p>
 
-    <div class="daop-note">Per richieste relative ai tuoi dati: <a href="mailto:patrick.orlando@libero.it">patrick.orlando@libero.it</a></div>
+    <div class="daop-note">Per richieste relative ai tuoi dati: <a href="mailto:info@daop.it">info@daop.it</a></div>
 
     <h2>Chi siamo</h2>
     <p><strong>DAOP – Dove Andiamo Oggi Papi APS</strong> è un'associazione di promozione sociale che offre contenuti informativi per famiglie nelle province di Alessandria e Asti: uscite, alimentazione sana, eventi, libri per bambini e strumenti digitali come Ginetto AI e Il Piatto Sano.</p>
-    <p><strong>Titolare:</strong> Patrick Orlando – Alessandria (Italia) – Email: <a href="mailto:patrick.orlando@libero.it">patrick.orlando@libero.it</a></p>
+    <p><strong>Titolare:</strong> Patrick Orlando – Alessandria (Italia) – Email: <a href="mailto:info@daop.it">info@daop.it</a></p>
 
     <h2>Tipologie di dati trattati</h2>
     <ul>
@@ -128,7 +134,7 @@
 
     <h2>Diritti dell'interessato</h2>
     <p>Hai diritto di accesso, rettifica, cancellazione, limitazione, portabilità e opposizione (artt. 15–22 GDPR). Puoi esercitarli scrivendo a
-      <a href="mailto:patrick.orlando@libero.it">patrick.orlando@libero.it</a>.
+      <a href="mailto:info@daop.it">info@daop.it</a>.
       Puoi inoltre proporre reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).</p>
 
     <h2>Aggiornamenti</h2>
@@ -147,3 +153,24 @@
     </p>
   </div>
 </footer>
+
+<script>
+  // Burger toggle
+  (function(){
+    const btn = document.getElementById('daopMenuToggle');
+    const list = document.getElementById('daopNavLinks');
+    if(!btn||!list) return;
+    btn.addEventListener('click', ()=>{
+      const open = list.classList.toggle('show');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    list.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=> {
+        list.classList.remove('show');
+        btn.setAttribute('aria-expanded','false');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

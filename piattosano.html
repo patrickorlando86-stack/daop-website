@@ -20,16 +20,74 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Game",
-  "name": "Il Piatto Sano",
-  "description": "Gioco educativo del programma di educazione alimentare S.A.N.E. Italia per bambini e ragazzi dai 6 ai 18 anni. 6 mini-giochi, gestione personalizzata dei 14 allergeni EU e allenamento all'uso dell'autoiniettore. Disponibile su browser e come app Android.",
-  "url": "https://gioco.sane-italia.it",
-  "image": "https://www.daop.it/assets/images/piattosano-cover.webp",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Web, Android",
-  "inLanguage": ["it", "en", "es"],
-  "publisher": { "@type": "Organization", "name": "DAOP – Dove Andiamo Oggi Papi APS", "url": "https://www.daop.it" },
-  "provider": { "@type": "Organization", "name": "S.A.N.E. Italia", "url": "https://sane-italia.it/" }
+  "@graph": [
+    {
+      "@type": ["Game", "EducationalApplication"],
+      "name": "Il Piatto Sano",
+      "description": "Gioco educativo del programma di educazione alimentare S.A.N.E. Italia per bambini e ragazzi dai 6 ai 18 anni. 6 mini-giochi, gestione personalizzata dei 14 allergeni EU e allenamento all'uso dell'autoiniettore. Disponibile su browser e come app Android.",
+      "url": "https://gioco.sane-italia.it",
+      "image": "https://www.daop.it/assets/images/piattosano-cover.webp",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web, Android",
+      "inLanguage": ["it", "en", "es"],
+      "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "publisher": { "@type": "Organization", "name": "DAOP – Dove Andiamo Oggi Papi APS", "url": "https://www.daop.it" },
+      "provider": { "@type": "Organization", "name": "S.A.N.E. Italia", "url": "https://sane-italia.it/" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Che cos'è Il Piatto Sano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il Piatto Sano è il gioco educativo del programma di educazione alimentare \"Mangiare Bene, Crescere Meglio\" di S.A.N.E. Italia, sviluppato da DAOP APS. Riunisce 6 mini-giochi pensati per bambini e ragazzi dai 6 ai 18 anni: nel gioco principale si compone il pasto equilibrato secondo il modello del piatto di Harvard (metà frutta e verdura, un quarto cereali integrali, un quarto proteine)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Il Piatto Sano è gratis? Quali mini-giochi sono gratuiti?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Due mini-giochi sono completamente gratuiti — Il Piatto Sano e Il Coraggio di Agire — e si giocano subito da gioco.sane-italia.it. Gli altri quattro (Quiz Alimentare, Piramide Alimentare, Stagionalità e Detective Etichette) sono premium."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Il gioco gestisce le allergie alimentari?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sì. Il Piatto Sano gestisce in modo personalizzato i 14 allergeni obbligatori dell'Unione Europea, adattando i contenuti a ogni bambino. Il mini-gioco \"Il Coraggio di Agire\" è una storia interattiva su una reazione allergica grave che allena all'uso corretto dell'autoiniettore di adrenalina (EpiPen, Jext, Emerade, Fastjekt)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Su quali dispositivi funziona Il Piatto Sano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "È una web app (PWA) trilingue in italiano, inglese e spagnolo che funziona anche offline: si gioca da browser su PC, tablet, LIM e smartphone, oppure si scarica come app Android da Google Play. Si apre direttamente su gioco.sane-italia.it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come si attiva Il Piatto Sano nella scuola?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le scuole di ogni ordine e grado possono attivare il programma in due modalità: il Kit Classe, autonomo e gestito dai docenti, oppure il Programma SANE Completo, con la biologa nutrizionista in presenza. Tutte le informazioni sono su sane-italia.it/scuole.html, oppure si può scrivere a info@daop.it."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "DAOP", "item": "https://www.daop.it/" },
+        { "@type": "ListItem", "position": 2, "name": "Il Piatto Sano", "item": "https://www.daop.it/piattosano.html" }
+      ]
+    }
+  ]
 }
 </script>
 <link rel="icon" href="assets/images/icon512.png" type="image/png">
@@ -151,6 +209,17 @@
   .pilot-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(29,158,117,0.1);color:var(--green);font-size:0.75rem;font-weight:700;padding:4px 14px;border-radius:100px;margin-bottom:16px}
   .pilot-box h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:12px;line-height:1.2}
   .pilot-box p{font-size:0.92rem;color:var(--text-mid);line-height:1.72;margin-bottom:20px}
+
+  /* ── FAQ ── */
+  .faq-list{margin-top:48px;display:flex;flex-direction:column;gap:14px}
+  .faq-item{background:white;border:1px solid rgba(45,74,92,0.10);border-radius:var(--radius-md);box-shadow:var(--shadow-soft);overflow:hidden;transition:var(--transition)}
+  .faq-item[open]{box-shadow:var(--shadow-card)}
+  .faq-item summary{list-style:none;cursor:pointer;padding:22px 26px;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-family:'DM Sans',sans-serif;font-size:1.5rem;font-weight:400;color:var(--green);flex-shrink:0;transition:var(--transition)}
+  .faq-item[open] summary::after{transform:rotate(45deg)}
+  .faq-answer{padding:0 26px 24px;font-size:0.95rem;color:var(--text-mid);line-height:1.7}
+  .faq-answer a{color:var(--green);font-weight:600;text-decoration:none}
 
   /* ── SCUOLE CTA ── */
   .scuole-cta{background:linear-gradient(135deg,#0d4a35 0%,#1D9E75 100%);padding:80px 24px;text-align:center}
@@ -412,12 +481,48 @@
     <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
       <div style="background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);border:1px solid rgba(45,74,92,0.06);padding:24px 26px;">
         <div class="team-role" style="color:var(--green);">Nuove adesioni</div>
-        <p style="font-size:0.92rem;color:var(--text-mid);line-height:1.65;margin-top:6px;">Scuola Primaria di Bribano (Sedico, Belluno) ha aderito al programma per il prossimo anno scolastico.</p>
+        <p style="font-size:0.92rem;color:var(--text-mid);line-height:1.65;margin-top:6px;">Nuove scuole e classi stanno aderendo al programma in diverse regioni italiane per il prossimo anno scolastico.</p>
       </div>
       <div style="background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);border:1px solid rgba(45,74,92,0.06);padding:24px 26px;">
         <div class="team-role" style="color:var(--orange);">In attivazione</div>
         <p style="font-size:0.92rem;color:var(--text-mid);line-height:1.65;margin-top:6px;">Novi Ligure, Asti e Gavi: nuove scuole e classi in fase di attivazione sul territorio.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="bg-white">
+  <div class="section-inner-narrow">
+    <span class="section-label green">Domande frequenti</span>
+    <h2 class="section-title">Tutto su Il Piatto Sano</h2>
+    <p class="section-subtitle">Le risposte alle domande più comuni di famiglie e insegnanti</p>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Che cos'è Il Piatto Sano?</summary>
+        <div class="faq-answer">Il Piatto Sano è il gioco educativo del programma di educazione alimentare «Mangiare Bene, Crescere Meglio» di S.A.N.E. Italia, sviluppato da DAOP APS. Riunisce 6 mini-giochi per bambini e ragazzi dai 6 ai 18 anni: nel gioco principale si compone il pasto equilibrato secondo il modello del piatto di Harvard — metà frutta e verdura, un quarto cereali integrali, un quarto proteine.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Il Piatto Sano è gratis? Quali mini-giochi sono gratuiti?</summary>
+        <div class="faq-answer">Due mini-giochi sono completamente gratuiti — <strong>Il Piatto Sano</strong> e <strong>Il Coraggio di Agire</strong> — e si giocano subito da <a href="https://gioco.sane-italia.it" target="_blank" rel="noopener">gioco.sane-italia.it</a>. Gli altri quattro (Quiz Alimentare, Piramide Alimentare, Stagionalità e Detective Etichette) sono premium.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Il gioco gestisce le allergie alimentari?</summary>
+        <div class="faq-answer">Sì. Il Piatto Sano gestisce in modo personalizzato i <strong>14 allergeni obbligatori dell'Unione Europea</strong>, adattando i contenuti a ogni bambino. Il mini-gioco «Il Coraggio di Agire» è una storia interattiva su una reazione allergica grave che allena all'uso corretto dell'autoiniettore di adrenalina (EpiPen, Jext, Emerade, Fastjekt).</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Su quali dispositivi funziona Il Piatto Sano?</summary>
+        <div class="faq-answer">È una web app (PWA) trilingue in italiano, inglese e spagnolo che funziona anche offline: si gioca da browser su PC, tablet, LIM e smartphone, oppure si scarica come app Android da Google Play. Si apre direttamente su <a href="https://gioco.sane-italia.it" target="_blank" rel="noopener">gioco.sane-italia.it</a>.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Come si attiva Il Piatto Sano nella scuola?</summary>
+        <div class="faq-answer">Le scuole di ogni ordine e grado possono attivare il programma in due modalità: il <strong>Kit Classe</strong>, autonomo e gestito dai docenti, oppure il <strong>Programma SANE Completo</strong>, con la biologa nutrizionista in presenza. Tutte le informazioni sono su <a href="https://sane-italia.it/scuole.html" target="_blank" rel="noopener">sane-italia.it/scuole.html</a>, oppure scrivi a <a href="mailto:info@daop.it">info@daop.it</a>.</div>
+      </details>
     </div>
   </div>
 </section>
@@ -470,6 +575,7 @@
         <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">Instagram AT</a>
         <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">Facebook AL</a>
         <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener">Facebook AT</a>
+        <a href="https://www.youtube.com/@DOVEANDIAMOOGGIPAPI" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
     <div>
@@ -488,7 +594,7 @@
     <div class="footer-bottom-links">
       <a href="privacy.html">Privacy</a>
       <a href="cookypolicy.html">Cookie</a>
-      <a href="mailto:patrick.orlando@libero.it">Contatti</a>
+      <a href="mailto:info@daop.it">Contatti</a>
     </div>
   </div>
 </footer>
