@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ginetto AI – La guida intelligente per famiglie | DAOP APS</title>
+<title>Ginetto AI – Cosa fare con i bambini ad Alessandria e Asti | DAOP</title>
 <meta name="description" content="Ginetto AI è l'assistente digitale DAOP per famiglie. Chat con Gemini AI, oltre 650 luoghi selezionati a mano tra Alessandria e Asti, eventi locali aggiornati ogni settimana, Passaporto dell'Esploratore. Gratis su ginettoapp.it.">
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="Ginetto AI, assistente famiglie, dove andare con bambini, eventi Alessandria, eventi Asti, Passaporto Esploratore, ginettoapp, DAOP APS, guida famiglie Piemonte">
@@ -20,14 +20,72 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Ginetto AI",
-  "description": "Assistente digitale DAOP per famiglie. Chat con Gemini AI, oltre 650 luoghi selezionati a mano tra Alessandria e Asti, eventi locali aggiornati ogni settimana, Passaporto dell'Esploratore.",
-  "url": "https://ginettoapp.it",
-  "applicationCategory": "LifestyleApplication",
-  "operatingSystem": "Web, iOS, Android",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-  "author": { "@type": "Organization", "name": "DAOP APS", "url": "https://www.daop.it" }
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Ginetto AI",
+      "alternateName": "Ginetto",
+      "description": "Assistente digitale DAOP per famiglie. Chat con Gemini AI, oltre 650 luoghi selezionati a mano tra Alessandria e Asti, eventi locali aggiornati ogni settimana, Passaporto dell'Esploratore.",
+      "url": "https://ginettoapp.it",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "inLanguage": "it",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+      "author": { "@type": "Organization", "name": "DAOP APS", "url": "https://www.daop.it" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cosa fare con i bambini ad Alessandria e Asti nel weekend?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ginetto, l'assistente AI gratuito di DAOP, suggerisce cosa fare con i bambini nelle province di Alessandria e Asti: oltre 650 luoghi selezionati a mano (fattorie didattiche, parchi avventura, musei per bambini, piscine, biblioteche) e gli eventi locali del weekend aggiornati ogni settimana. Basta scrivere cosa cerchi e Ginetto risponde con idee vicino a te."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come funziona Ginetto, l'assistente AI di DAOP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ginetto usa l'intelligenza artificiale (Google Gemini) per capire le tue domande in linguaggio naturale, come \"dove andiamo questo weekend?\" o \"un'attività al coperto per bambini di 4 anni\". In pochi secondi propone luoghi ed eventi selezionati per la tua zona e per l'età dei bambini."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ginetto è gratis? Serve registrarsi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sì, Ginetto è completamente gratuito e si usa senza registrazione obbligatoria. Apri ginettoapp.it dal browser del telefono e inizia subito. DAOP non archivia le conversazioni, nel rispetto del GDPR."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quali eventi per famiglie trovo su Ginetto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Eventi locali delle province di Alessandria e Asti aggiornati ogni settimana dalle locandine reali del territorio: mercatini, sagre e feste di paese, spettacoli, laboratori per bambini e centri estivi. La selezione è curata a mano, non è un motore di ricerca automatico."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Su quali dispositivi funziona Ginetto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ginetto funziona da qualsiasi browser su telefono, tablet e computer su ginettoapp.it. Può essere installato come app sulla schermata home di Android e iPhone, senza passare dagli app store."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "DAOP", "item": "https://www.daop.it/" },
+        { "@type": "ListItem", "position": 2, "name": "Ginetto AI", "item": "https://www.daop.it/ginetto.html" }
+      ]
+    }
+  ]
 }
 </script>
 <link rel="icon" href="assets/images/icon512.png" type="image/png">
@@ -143,6 +201,16 @@
   .bg-cream{background:var(--cream)}
   .bg-white{background:white}
   .bg-navy{background:var(--navy-dark)}
+
+  /* ── FAQ ── */
+  .faq-list{margin-top:48px;display:flex;flex-direction:column;gap:14px}
+  .faq-item{background:white;border:1px solid rgba(45,74,92,0.10);border-radius:var(--radius-md);box-shadow:var(--shadow-soft);overflow:hidden;transition:var(--transition)}
+  .faq-item[open]{box-shadow:var(--shadow-card)}
+  .faq-item summary{list-style:none;cursor:pointer;padding:22px 26px;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font-family:'DM Sans',sans-serif;font-size:1.5rem;font-weight:400;color:var(--orange);flex-shrink:0;transition:var(--transition)}
+  .faq-item[open] summary::after{transform:rotate(45deg)}
+  .faq-answer{padding:0 26px 24px;font-size:0.95rem;color:var(--text-mid);line-height:1.7}
 
   /* ── CTA FINALE ── */
   .ginetto-cta{background:linear-gradient(135deg,var(--teal-dark) 0%,var(--navy) 100%);padding:80px 24px;text-align:center}
@@ -324,6 +392,42 @@
         <h3>Esplora e vivi</h3>
         <p>Vai, vivi l'esperienza e torna con un ricordo. Ogni uscita diventa una storia da raccontare ai tuoi bambini.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="bg-cream">
+  <div class="section-inner-narrow">
+    <span class="section-label">Domande frequenti</span>
+    <h2 class="section-title">Cosa fare con i bambini<br>ad Alessandria e Asti</h2>
+    <p class="section-subtitle">Le risposte alle domande più comuni delle famiglie del territorio</p>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Cosa fare con i bambini ad Alessandria e Asti nel weekend?</summary>
+        <div class="faq-answer">Ginetto, l'assistente AI gratuito di DAOP, suggerisce cosa fare con i bambini nelle province di Alessandria e Asti: oltre 650 luoghi selezionati a mano — fattorie didattiche, parchi avventura, musei per bambini, piscine, biblioteche — e gli eventi locali del weekend aggiornati ogni settimana. Basta scrivere cosa cerchi e Ginetto risponde con idee vicino a te.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Come funziona Ginetto, l'assistente AI di DAOP?</summary>
+        <div class="faq-answer">Ginetto usa l'intelligenza artificiale (Google Gemini) per capire le tue domande in linguaggio naturale, come «dove andiamo questo weekend?» o «un'attività al coperto per bambini di 4 anni». In pochi secondi propone luoghi ed eventi selezionati per la tua zona e per l'età dei bambini.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Ginetto è gratis? Serve registrarsi?</summary>
+        <div class="faq-answer">Sì, Ginetto è completamente gratuito e si usa senza registrazione obbligatoria. Apri <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a> dal browser del telefono e inizia subito. DAOP non archivia le conversazioni, nel rispetto del GDPR.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Quali eventi per famiglie trovo su Ginetto?</summary>
+        <div class="faq-answer">Eventi locali delle province di Alessandria e Asti aggiornati ogni settimana dalle locandine reali del territorio: mercatini, sagre e feste di paese, spettacoli, laboratori per bambini e centri estivi. La selezione è curata a mano, non è un motore di ricerca automatico.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Su quali dispositivi funziona Ginetto?</summary>
+        <div class="faq-answer">Ginetto funziona da qualsiasi browser su telefono, tablet e computer su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a>. Può essere installato come app sulla schermata home di Android e iPhone, senza passare dagli app store.</div>
+      </details>
     </div>
   </div>
 </section>
