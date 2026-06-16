@@ -927,7 +927,8 @@
     .piatto-actions .btn { justify-content: center; }
   }
   @media (max-width: 480px) {
-    .footer-grid { grid-template-columns: 1fr !important; }
+    .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px 20px !important; }
+    .footer-grid > div:first-child { grid-column: 1 / -1; }
   }
 </style>
 <style>:focus-visible{outline:3px solid #1D9E75;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}</style></head>
