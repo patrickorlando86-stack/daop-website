@@ -111,6 +111,12 @@ def bucket(e):
     return 'altro', '📍', 'Evento'
 
 
+SITE_URL = "https://www.daop.it"
+PAGE_URL = f"{SITE_URL}/eventi.html"
+DEFAULT_IMG = f"{SITE_URL}/assets/images/headerdaop.jpg"
+FREE_KW = ('gratuito', 'gratis', 'libero', 'ingresso libero')
+
+
 def esc(s):
     return html.escape((s or '').strip())
 
@@ -189,21 +195,87 @@ def render(events):
     return cat_filter, grid
 
 
-def inject(cat_filter, grid):
+def parse_times(ora):
+    """Estrae fino a due orari HH:MM (inizio/fine) dal campo Ora."""
+    return [f"{int(h):02d}:{m}" for h, m in re.findall(r'(\d{1,2})[:.](\d{2})', ora or '')][:2]
+
+
+def event_jsonld(e):
+    """Costruisce un oggetto schema.org/Event per un singolo evento."""
+    times = parse_times(e['ora'])
+    start = e['d_start'].isoformat()
+    if times:
+        start += f"T{times[0]}"
+    end = e['d_end'].isoformat()
+    if len(times) > 1:
+        end += f"T{times[1]}"
+    elif times:
+        end += f"T{times[0]}"
+
+    city = (e['citta'] or '').strip()
+    address = {"@type": "PostalAddress", "addressCountry": "IT"}
+    if city:
+        address["addressLocality"] = city
+    if e['prov']:
+        address["addressRegion"] = e['prov']
+
+    obj = {
+        "@type": "Event",
+        "name": (e['nome'] or '').strip(),
+        "startDate": start,
+        "endDate": end,
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+            "@type": "Place",
+            "name": city or e['prov'],
+            "address": address,
+        },
+        "image": [DEFAULT_IMG],
+        "url": PAGE_URL,
+        "organizer": {"@type": "Organization", "name": "DAOP APS", "url": SITE_URL},
+    }
+    descr = (e['descr'] or '').strip()
+    if descr:
+        obj["description"] = descr
+
+    pz = (e['prezzo'] or '').lower()
+    if any(k in pz for k in FREE_KW):
+        obj["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
+                         "availability": "https://schema.org/InStock", "url": PAGE_URL}
+    elif (e['prezzo'] or '').strip():
+        obj["offers"] = {"@type": "Offer", "availability": "https://schema.org/InStock",
+                         "url": PAGE_URL}
+    return obj
+
+
+def render_jsonld(events):
+    """Blocco <script> JSON-LD con tutti gli eventi (schema.org/Event)."""
+    graph = [event_jsonld(e) for e in events]
+    payload = json.dumps({"@context": "https://schema.org", "@graph": graph},
+                         ensure_ascii=False, indent=2)
+    return ('<script type="application/ld+json" id="eventi-jsonld">\n'
+            + payload + '\n</script>')
+
+
+def inject(cat_filter, grid, jsonld):
     s = open(HTML_PATH, encoding="utf-8").read()
     s, n1 = re.subn(r'    <div class="event-filters" data-group="category".*?</div>',
                     cat_filter, s, count=1, flags=re.S)
     s, n2 = re.subn(r'    <div class="events-grid" id="events-grid">.*?</div>\s*(?=<p class="events-empty")',
                     grid + "\n    ", s, count=1, flags=re.S)
-    if n1 != 1 or n2 != 1:
-        raise SystemExit(f"Ancoraggi non trovati in eventi.html (filtro={n1}, griglia={n2})")
+    s, n3 = re.subn(r'<script type="application/ld\+json" id="eventi-jsonld">.*?</script>',
+                    lambda _: jsonld, s, count=1, flags=re.S)
+    if n1 != 1 or n2 != 1 or n3 != 1:
+        raise SystemExit(f"Ancoraggi non trovati in eventi.html (filtro={n1}, griglia={n2}, json-ld={n3})")
     open(HTML_PATH, "w", encoding="utf-8").write(s)
 
 
 def main():
     events = normalize(fetch_rows())
     cat_filter, grid = render(events)
-    inject(cat_filter, grid)
+    jsonld = render_jsonld(events)
+    inject(cat_filter, grid, jsonld)
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()} for e in events]
