@@ -54,7 +54,11 @@
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
+  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+  /* consenti la selezione solo nei campi di input/textarea, se aggiunti in futuro */
+  input,textarea{-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text}
+  img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
+  a img{pointer-events:auto}
 
   /* ── NAV ── */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,248,243,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(45,74,92,0.08);transition:var(--transition)}
@@ -243,8 +247,13 @@
          che genera l'agenda). Ogni card usa data-category per i filtri:
          escursioni · laboratori · letture · sport · teatro · feste -->
 
-    <div class="event-filters" id="event-filters">
-      <button class="filter-chip active" data-filter="all">Tutti</button>
+    <div class="event-filters" data-group="province" aria-label="Filtra per provincia" style="margin-bottom:14px;">
+      <button class="filter-chip active" data-filter="all">Tutte le province</button>
+      <button class="filter-chip" data-filter="al">Alessandria</button>
+      <button class="filter-chip" data-filter="at">Asti</button>
+    </div>
+    <div class="event-filters" data-group="category" aria-label="Filtra per categoria">
+      <button class="filter-chip active" data-filter="all">Tutte le categorie</button>
       <button class="filter-chip" data-filter="escursioni">Escursioni</button>
       <button class="filter-chip" data-filter="laboratori">Laboratori</button>
       <button class="filter-chip" data-filter="letture">Letture</button>
@@ -256,7 +265,7 @@
     <div class="events-grid" id="events-grid">
 
       <!-- EVENT CARD -->
-      <article class="event-card" data-category="laboratori">
+      <article class="event-card" data-category="laboratori" data-province="al">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">05</span><span class="month">Lug</span></div>
@@ -277,7 +286,7 @@
       </article>
 
       <!-- EVENT CARD -->
-      <article class="event-card" data-category="escursioni">
+      <article class="event-card" data-category="escursioni" data-province="at">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Escursione">🥾</span>
           <div class="event-date"><span class="day">06</span><span class="month">Lug</span></div>
@@ -298,7 +307,7 @@
       </article>
 
       <!-- EVENT CARD -->
-      <article class="event-card" data-category="letture">
+      <article class="event-card" data-category="letture" data-province="al">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Lettura">📚</span>
           <div class="event-date"><span class="day">12</span><span class="month">Lug</span></div>
@@ -319,7 +328,7 @@
       </article>
 
       <!-- EVENT CARD -->
-      <article class="event-card" data-category="sport">
+      <article class="event-card" data-category="sport" data-province="al">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">13</span><span class="month">Lug</span></div>
@@ -340,7 +349,7 @@
       </article>
 
       <!-- EVENT CARD -->
-      <article class="event-card" data-category="teatro">
+      <article class="event-card" data-category="teatro" data-province="at">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Teatro">🎭</span>
           <div class="event-date"><span class="day">19</span><span class="month">Lug</span></div>
@@ -361,7 +370,7 @@
       </article>
 
       <!-- EVENT CARD -->
-      <article class="event-card" data-category="feste">
+      <article class="event-card" data-category="feste" data-province="al">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Festa">🎪</span>
           <div class="event-date"><span class="day">20</span><span class="month">Lug</span></div>
@@ -477,25 +486,50 @@
     document.getElementById('mobile-menu').classList.remove('open');
   }
 
-  // Filtro eventi per categoria
+  // Filtro eventi: provincia + categoria (combinati)
   (function () {
-    const filters = document.getElementById('event-filters');
+    const groups = Array.from(document.querySelectorAll('.event-filters[data-group]'));
     const cards = Array.from(document.querySelectorAll('#events-grid .event-card'));
     const empty = document.getElementById('events-empty');
-    if (!filters) return;
-    filters.addEventListener('click', function (e) {
-      const btn = e.target.closest('.filter-chip');
-      if (!btn) return;
-      filters.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
+    if (!groups.length) return;
+    const active = { province: 'all', category: 'all' };
+
+    function apply() {
       let visible = 0;
       cards.forEach(card => {
-        const show = f === 'all' || card.dataset.category === f;
+        const okProv = active.province === 'all' || card.dataset.province === active.province;
+        const okCat  = active.category === 'all' || card.dataset.category === active.category;
+        const show = okProv && okCat;
         card.classList.toggle('is-hidden', !show);
         if (show) visible++;
       });
       empty.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    groups.forEach(group => {
+      const type = group.dataset.group; // 'province' | 'category'
+      group.addEventListener('click', function (e) {
+        const btn = e.target.closest('.filter-chip');
+        if (!btn) return;
+        group.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        active[type] = btn.dataset.filter;
+        apply();
+      });
+    });
+  })();
+
+  // Protezione anti-copia del testo (deterrente per copia/selezione casuale)
+  (function () {
+    ['copy', 'cut', 'contextmenu', 'selectstart', 'dragstart'].forEach(function (evt) {
+      document.addEventListener(evt, function (e) { e.preventDefault(); });
+    });
+    document.addEventListener('keydown', function (e) {
+      const k = (e.key || '').toLowerCase();
+      // Blocca Ctrl/Cmd + C / X / A / S / U / P
+      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'a', 's', 'u', 'p'].includes(k)) {
+        e.preventDefault();
+      }
     });
   })();
 </script>
