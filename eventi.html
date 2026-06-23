@@ -245,6 +245,13 @@
 
     <!-- Eventi generati dal foglio Google "luoghi" (tab "eventi"). Sezione rigenerata automaticamente: non modificare a mano le card qui sotto. -->
 
+    <div class="event-filters" data-group="date" aria-label="Filtra per data" style="margin-bottom:14px;">
+      <button class="filter-chip active" data-filter="all">Tutte le date</button>
+      <button class="filter-chip" data-filter="oggi">Oggi</button>
+      <button class="filter-chip" data-filter="weekend">Questo weekend</button>
+      <button class="filter-chip" data-filter="settimana">Questa settimana</button>
+      <button class="filter-chip" data-filter="mese">Questo mese</button>
+    </div>
     <div class="event-filters" data-group="province" aria-label="Filtra per provincia" style="margin-bottom:14px;">
       <button class="filter-chip active" data-filter="all">Tutte le province</button>
       <button class="filter-chip" data-filter="al">Alessandria</button>
@@ -258,13 +265,12 @@
       <button class="filter-chip" data-filter="musica">Musica</button>
       <button class="filter-chip" data-filter="sport">Sport</button>
       <button class="filter-chip" data-filter="cultura">Cultura & Natura</button>
-      <button class="filter-chip" data-filter="estivi">Centri Estivi</button>
       <button class="filter-chip" data-filter="altro">Altro</button>
     </div>
 
     <div class="events-grid" id="events-grid">
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-05-10" data-end="2026-07-26">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">10</span><span class="month">mag</span></div>
@@ -285,7 +291,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="cultura" data-province="al">
+      <article class="event-card" data-category="cultura" data-province="al" data-start="2026-05-28" data-end="2026-08-31">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Cultura">🏛️</span>
           <div class="event-date"><span class="day">28</span><span class="month">mag</span></div>
@@ -306,154 +312,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="altro" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Evento">📍</span>
-          <div class="event-date"><span class="day">01</span><span class="month">giu</span></div>
-          <span class="event-cat">Evento</span>
-        </div>
-        <div class="event-body">
-          <h3>Al Ponte Aquasplash - Al Ponte</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pontecurone (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 giu al 30 set · dalle 14:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Area gonfiabili acquatici per i più piccoli con servizio bar. Aperto tutti i sabati e le domeniche da giugno a settembre, a luglio anche il venerdì. Prenotazione non…</p>
-          <div class="event-foot">
-            <span class="event-price">Ingresso giornaliero -…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Atelier Ariel - Centro Estivo Creativo 2026 - Atelier Ariel Spazio Creativo</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Alessandria (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 giu al 31 ago · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo creativo per bambini con attività di arte, musica e fantasia per un&#x27;estate indimenticabile. I partecipanti potranno sperimentare laboratori artistici e…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo Green Days 2026 - Crescere in Natura - Talea APS</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Costa Vescovato (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 giu al 31 ago · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo immerso nella natura per bambini. Attività di outdoor education per crescere a contatto con l&#x27;ambiente naturale, organizzato da Talea Outdoor Education.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo per Bambini - Pro Loco Carezzano</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Carezzano (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 giu al 30 set · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> dai 5 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 5 anni con iscrizioni settimanali. Laboratori creativi, attività all&#x27;aperto nella natura e molto altro.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo per Bambini - Pro Loco Carezzano</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Carezzano (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 giu al 30 set · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Dai 5 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 5 anni, attivo da giugno a settembre 2026 con iscrizioni settimanali. Le attività includono laboratori creativi, attività all&#x27;aperto nella…</p>
-          <div class="event-foot">
-            <span class="event-price">A pagamento (da verificare)</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Estate in Branco 2026 - Rainbow Ranch</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Ovada (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 giu al 31 ago · 09:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-13 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo con attività tra cavalli, natura e avventura. Avvicinamento al cavallo, orto e attività agricole, boschetto e giochi all&#x27;aperto, piscina, lezioni di…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Osterietta Summer - Centro Estivo</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Alessandria (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 giu al 31 ago · 07:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-13 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 3 ai 13 anni, aperto dal lunedì al venerdì dalle 7:00 alle 18:00. Include cucina interna, ampio spazio esterno tra animali e natura,…</p>
-          <div class="event-foot">
-            <span class="event-price">100 euro a settimana (pranzo,…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="sport" data-province="at">
+      <article class="event-card" data-category="sport" data-province="at" data-start="2026-06-04" data-end="2026-06-25">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">04</span><span class="month">giu</span></div>
@@ -474,742 +333,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">08</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo 2026 - ASD Artemis Gym Aerobic</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 8 giu al 31 lug · 07:30-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-17 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini e ragazzi dai 4 ai 17 anni organizzato da ASD Artemis Gym Aerobic. Attività presso il Camping Umberto Cagni con pranzo al sacco.</p>
-          <div class="event-foot">
-            <span class="event-price">a partire da 45 euro a settimana</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">08</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Estate a Cavallo - Centro Estivo tra Cavalli e Natura - ASD I Tre Ponti</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Cassano Spinola (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 8 giu al 7 ago · 07:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 3 ai 14 anni con attività a cavallo, creatività, passeggiate a piedi, musica e balli con pomeriggio a tema, grigliate e laboratorio di…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">10</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Baracca&#x27;s Summer Lab — Associazione Terra di Pan</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Cantalupo Ligure (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 10 giu al 15 ago · 8:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo con gite, piscina, laboratori di cucina, pomeriggi cinema, teatro, sport, compiti con metodo Feuerstein. Cucina interna, grande giardino, sale…</p>
-          <div class="event-foot">
-            <span class="event-price">settimanale €110, giornaliero…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">11</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centri Estivi Sportivi - Nuova Saves</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Alessandria (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 11 giu al 4 set · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo sportivo per bambini e ragazzi dai 4 ai 14 anni con attività di tennis, nuoto e tanto altro. In collaborazione con AnimAzione. Pausa dal 17 al 21 agosto.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">11</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo 2026 - AC Ranch</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Carentino (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 11 giu al 9 set · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> ragazzi</span>
-          </div>
-          <p class="event-desc">Centro estivo di 12 settimane dedicato ai ragazzi presso AC Ranch, con attività a contatto con i cavalli e la natura, inclusa piscina. Un&#x27;esperienza indimenticabile per…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">11</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Monte Valenza Summer Camp - Anima\&amp;Azione</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Valenza (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 11 giu al 31 ago · 07:45-17:45</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-13 anni</span>
-          </div>
-          <p class="event-desc">Campo estivo per bambini e ragazzi con attività di animazione, divertimento, sport, natura e educazione. Include piscina, zoo park, pranzo e servizio navetta da Valenza.</p>
-          <div class="event-foot">
-            <span class="event-price">117 euro a settimana (107 euro…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>A Wonderful Summer 2026 - British Institutes &amp; Equilibri</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Ovada (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · 8:00-18:00 (preingresso…</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Scuola Primaria…</span>
-          </div>
-          <p class="event-desc">Centro estivo bilingue con attività di espressione, movimento, scoperta, creatività e Natural English. Highlights settimanali: Pool Day e Nature Trip.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>ARCEAM - Centro Estivo Cassano Spinola</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Cassano Spinola (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 7 ago · 08:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini organizzato da ARCEAM a Cassano Spinola e località Gavazzana. Pranzo e merenda al sacco. Iscrizioni in comune dal 13 aprile al 29 maggio.</p>
-          <div class="event-foot">
-            <span class="event-price">50 euro</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>ARCEAM - Centro Estivo Merella - Circolo UISP</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 4 set · 08:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini presso il Circolo UISP Merella. Pranzo e merenda inclusi nel servizio. Attività ricreative e divertimento per i più piccoli durante il periodo…</p>
-          <div class="event-foot">
-            <span class="event-price">85 euro</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>ARCEAM - Centro Estivo Serravalle Designer Outlet</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 4 set · 08:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini presso il Circolo UISP Merella. Pranzo al sacco e merenda inclusa. Ingresso pomeridiano al Lele&#x27;s Aqua Park</p>
-          <div class="event-foot">
-            <span class="event-price">65 euro</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centri Estivi - Circolo ANSPI Carlo Acutis</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Capriata d&#x27;Orba (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 26 giu · 07:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-11 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini con attività, giochi e piscina. La quota include piscina, gita e pranzo quando si resta al Circolo. Iscrizioni dal 30 aprile al 2 giugno.</p>
-          <div class="event-foot">
-            <span class="event-price">90 euro a settimana (sconto 20…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centri Estivi 2026 - Oratorio Parrocchiale Don Marco Sambuelli Piovera</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Piovera (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 26 giu · 08:00-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo organizzato dall&#x27;Oratorio Parrocchiale Don Marco Sambuelli di Piovera, nell&#x27;ambito dell&#x27;Unità Pastorale Lungo Tanaro, in collaborazione con ANSPI. Si…</p>
-          <div class="event-foot">
-            <span class="event-price">€ 85,00 a settimana a…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centri Estivi 2026 - Ranch Arizona</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Carrosio (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 4 set · 8:30-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo con lezioni di equitazione, giochi e divertimento, assistenza compiti. Scopri il mondo dei cavalli: accudiscili e impara a comunicare con loro come un vero…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centri Estivi 26 San Michele - Un&#x27;estate fuori dal guscio - Parrocchia di San Michele</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> San Michele (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · 7:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini e ragazzi dai 4 ai 14 anni presso l&#x27;oratorio della Parrocchia di San Michele. Iscrizioni aperte, ritirare i moduli presso l&#x27;oratorio.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo - Centro Pastorale Maria Regina</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Serravalle Scrivia (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 3 lug · 8:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini con laboratori al mattino e giochi al pomeriggio. Merenda inclusa. Un&#x27;estate di gioia, amicizia e avventure\!</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo - PazzAnimazione / AnimataMente</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 4 set · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 4 ai 12 anni con attività di edutainment, outdoor activities, sport e natura. Animazione, aiuto compiti e molto altro.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo 2026 - Parrocchia S. Felice Frugarolo in collaborazione con Il Sentiero…</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Frugarolo (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 24 lug · 08:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dal lunedì al venerdì con giochi, attività, musica, sport, bans e balli di gruppo, 2 giornate in piscina e compiti assistiti presso i locali…</p>
-          <div class="event-foot">
-            <span class="event-price">100 euro settimanali (85 euro…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo Sirius 2026 - A.S.D. Centro Sportivo Sirius</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Bistagno (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini e ragazzi dai 6 ai 14 anni organizzato dall&#x27;A.S.D. Centro Sportivo Sirius in collaborazione con il Comune di Bistagno. Attività sportive,…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo Sportivo Masio Primaria e Infanzia 2026 - Comune di Masio</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Masio (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 7 ago · 08:00-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-11 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo sportivo per bambini della scuola dell&#x27;infanzia e primaria, dal 15 giugno al 7 agosto 2026, dal lunedì al venerdì dalle 8:00 alle 17:30. Le attività…</p>
-          <div class="event-foot">
-            <span class="event-price">Giornata intera: 70€ a…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo Tagliolo Beach</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tagliolo Monferrato (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 24 lug · 7:30-17:30 (dal lunedì al…</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Bambini e ragazzi in età…</span>
-          </div>
-          <p class="event-desc">Centro estivo con il patrocinio del Comune di Tagliolo Monferrato, a cura di ASD Tagliolese CCRT. Attività: laboratori creativi, sport, giochi, aiuto compiti e due…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo Tagliolo Beach - ASD Tagliolese CCRT</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tagliolo Monferrato (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 24 lug · 7:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini e ragazzi dal 15 giugno al 24 luglio 2026, dal lunedì al venerdì dalle 7:30 alle 17:30. Le attività includono laboratori creativi, sport,…</p>
-          <div class="event-foot">
-            <span class="event-price">A pagamento (da verificare);…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>E... State in Gioco 2026 - Centro Gioco Il Bianconiglio</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Spinetta Marengo (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 24 lug · 08:00-13:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-11 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 6 agli 11 anni con animazioni, giochi, laboratori e letture. Attivo dal lunedì al venerdì.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Estate Ragazzi 2026 - New Basket Team ASD</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Castelletto Monferrato (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 24 lug · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-16 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per ragazzi dai 3 ai 16 anni con attività sportive (calcio, karate, basket, ginnastica funzionale), escursioni, piscina settimanale e supporto compiti…</p>
-          <div class="event-foot">
-            <span class="event-price">90,00 euro a settimana (sconto…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Estate ragazzi 2026 - Oratorio Don Bosco</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Nizza Monferrato (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 28 ago · 08:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per ragazzi della durata di 11 settimane, dal lunedì al venerdì. Iscrizioni aperte con posti limitati. Informazioni e moduli su www.fondazionedonceli.it</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Farm Summer Camp 2026 - Fattorie Dertona</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tortona (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 11 set · 8:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
-          </div>
-          <p class="event-desc">Campo estivo in fattoria per bambini e ragazzi. Attività: cura degli animali, laboratori creativi, attività sensoriali, battesimo della sella, giochi d&#x27;acqua e piscina,…</p>
-          <div class="event-foot">
-            <span class="event-price">Giornata intera €145 + €20…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="sport" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Sport</span>
-        </div>
-        <div class="event-body">
-          <h3>Leoni City Camp 2026 - Derthona</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tortona (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 3 lug · 08:30-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 2012-2020 (6-14 anni)</span>
-          </div>
-          <p class="event-desc">Camp estivo sportivo per bambini e ragazzi nati dal 2012 al 2020. Tre settimane di attività: 15-19 giugno, 22-26 giugno, 29 giugno-3 luglio. Possibilità di entrata…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Magic Eventi - Centro Estivo 2026</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Basaluzzo (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · 08:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo con attività di Tamburello, Tennis, Calcio, Gite, Laboratori, Giochi e svago. Include 2 giorni presso Centro Sportivo Basaluzzo, 2 uscite in piscina e 1…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="laboratori" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Laboratorio</span>
-        </div>
-        <div class="event-body">
-          <h3>Momba Camp</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Acqui Terme (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 5 anni - terza media</span>
-          </div>
-          <p class="event-desc">Campo estivo per bambini e ragazzi con giochi, sport, laboratori creativi e tante nuove amicizie. Un&#x27;estate indimenticabile piena di sorrisi e divertimento.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="laboratori" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Laboratorio</span>
-        </div>
-        <div class="event-body">
-          <h3>Sport Factory Kids Camp - PGS Fortitudo Occimiano</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Occimiano (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 3 lug · 09:00-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Tre settimane di sport, piscina, laboratori creativi, giochi e mestieri di una volta, uscite sul territorio, lettura e compiti insieme. Un&#x27;esperienza per conoscersi,…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Summer Camp - Richard&#x27;s Ranch</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Callianetto (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 11 set · 07:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> dai 5 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini e ragazzi dai 5 anni con lezioni di equitazione, cura degli animali, trekking nel bosco, piscina e giochi d&#x27;acqua, compiti e merenda,…</p>
-          <div class="event-foot">
-            <span class="event-price">90 euro prima settimana, 80…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Summer English Mornings and English Breakfasts - British Institutes</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · 07:45-12:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Campus estivo in inglese per bambini con attività mattutine e colazioni in inglese. Iscrivendosi entro luglio si ricevono due lezioni in omaggio. Disponibili anche corsi…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Summer Jump 2026 - ASD Double Jump</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 5-13 anni</span>
-          </div>
-          <p class="event-desc">4ª edizione del centro estivo sportivo con attività di ginnastica artistica, karate, touchball, padel, tamburello, zumba, bachata, ciclismo e orienteering. Richiesto…</p>
-          <div class="event-foot">
-            <span class="event-price">Pacchetti a partire da €55</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Summer Jump 2026 Splash Edition - ASD Double Jump</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · 8:00-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 5-14 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo con scivoli, corsi di nuoto, sport e divertimento. Include pranzo, merenda, maglietta, assicurazione e accesso quotidiano a piscine e scivoli. Staff…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="altro" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Evento">📍</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Evento</span>
-        </div>
-        <div class="event-body">
-          <h3>Tennis &amp; Pickleball Clinic - Tennis Club Asti Alle Mura</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 31 lug · 09:00-14:00 (Lun, Mar, Gio,…</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-16 anni</span>
-          </div>
-          <p class="event-desc">Clinic estivo di tennis e pickleball per ragazzi dai 6 ai 16 anni. Prevede allenamento tecnico con maestro, preparazione atletica con istruttore motoria, match e giochi.…</p>
-          <div class="event-foot">
-            <span class="event-price">130 euro a settimana (pasto…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">15</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Un&#x27;Estate Fantastica - Tanaro Skate School</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 15 giu al 14 ago · 08:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo con settimane a tema ricche di attività: sport, laboratori, giochi, piscina facoltativa, uscite e spazio compiti. Staff formato da educatori e…</p>
-          <div class="event-foot">
-            <span class="event-price">a partire da 60€/settimana</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-18" data-end="2026-07-02">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">18</span><span class="month">giu</span></div>
@@ -1230,7 +354,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-18" data-end="2026-06-24">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">18</span><span class="month">giu</span></div>
@@ -1251,7 +375,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-19" data-end="2026-06-23">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">19</span><span class="month">giu</span></div>
@@ -1272,7 +396,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="at">
+      <article class="event-card" data-category="feste" data-province="at" data-start="2026-06-19" data-end="2026-06-25">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">19</span><span class="month">giu</span></div>
@@ -1293,7 +417,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="cultura" data-province="al">
+      <article class="event-card" data-category="cultura" data-province="al" data-start="2026-06-19" data-end="2026-06-26">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Cultura">🏛️</span>
           <div class="event-date"><span class="day">19</span><span class="month">giu</span></div>
@@ -1314,11 +438,11 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-06-20" data-end="2026-07-05">
         <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
+          <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">20</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
+          <span class="event-cat">Musica</span>
         </div>
         <div class="event-body">
           <h3>Vivi Pozzolo Estate nella Corte del Castello</h3>
@@ -1335,133 +459,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">22</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>ARCEAM - Centro Estivo Novi Ligure</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 22 giu al 31 lug · 08:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini con attività sportive e ricreative. Pranzo al sacco, merenda inclusa. In collaborazione con A.S.D. Tiger Novi.</p>
-          <div class="event-foot">
-            <span class="event-price">65 euro</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">22</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>ARCEAM - Centro Estivo Pasturana</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pasturana (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 22 giu al 7 ago · 08:00-18:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini con pranzo e merenda inclusi. Strutture e spazi messi a disposizione gratuitamente dal Comune e dalla Pro Loco di Pasturana.</p>
-          <div class="event-foot">
-            <span class="event-price">85 euro</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">22</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo - PazzAnimazione</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Stazzano (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 22 giu al 31 lug · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-12 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 3 ai 12 anni con personale professionista maggiorenne, animatori con attestato di primo soccorso. Attività incluse: bolle di sapone,…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">22</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Country Week 2026 - Golden Wings Ranch</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pozzolo Formigaro (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 22 giu al 31 lug · 08:00-16:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-14</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini e ragazzi con attività con i cavalli, giochi di gruppo, piscina, passeggiate e attività pomeridiane. Pranzo e merenda del mattino al sacco,…</p>
-          <div class="event-foot">
-            <span class="event-price">100 euro a settimana</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">22</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>R-Estate a Bosio - Centro Estivo 2026 - Amici Acquedotto di Bosio APS</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Bosio (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 22 giu al 14 ago · 08:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini della Scuola dell&#x27;Infanzia e Primaria. Attività: cucina fresca, sport, giochi, passeggiate, piscina, laboratori, escursioni e tanto altro. Dal…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">22</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>R-Estate a Bosio - Centro Estivo 2026 - Amici Acquedotto di Bosio APS</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Bosio (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 22 giu al 14 ago · 08:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini della Scuola dell&#x27;Infanzia e Primaria. Attività: cucina fresca, sport, giochi, passeggiate, piscina, laboratori, escursioni e tanto altro. Dal…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-23" data-end="2026-06-23">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">23</span><span class="month">giu</span></div>
@@ -1482,7 +480,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="at">
+      <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-06-24" data-end="2026-06-24">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">24</span><span class="month">giu</span></div>
@@ -1498,12 +496,12 @@
           <p class="event-desc">Attività di psicomotricità all&#x27;aperto presso l&#x27;Area Verde di Via G. Sodano. Un pomeriggio di movimento e gioco nella natura per bambini e famiglie.</p>
           <div class="event-foot">
             <span class="event-price free">Gratuito</span>
-            
+            <span class="event-tag">19/06/2026 09:22</span>
           </div>
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-24" data-end="2026-06-24">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">24</span><span class="month">giu</span></div>
@@ -1524,7 +522,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-24" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">24</span><span class="month">giu</span></div>
@@ -1545,7 +543,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-06-24" data-end="2026-06-24">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">24</span><span class="month">giu</span></div>
@@ -1566,11 +564,11 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-25" data-end="2026-06-30">
         <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
+          <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">25</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
+          <span class="event-cat">Sagra &amp; Festa</span>
         </div>
         <div class="event-body">
           <h3>49ª Sagra dei Sicot - Quattordio</h3>
@@ -1587,7 +585,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="at">
+      <article class="event-card" data-category="musica" data-province="at" data-start="2026-06-25" data-end="2026-06-25">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">25</span><span class="month">giu</span></div>
@@ -1608,7 +606,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="altro" data-province="at">
+      <article class="event-card" data-category="altro" data-province="at" data-start="2026-06-25" data-end="2026-06-25">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Evento">📍</span>
           <div class="event-date"><span class="day">25</span><span class="month">giu</span></div>
@@ -1629,7 +627,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-25" data-end="2026-06-25">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">25</span><span class="month">giu</span></div>
@@ -1650,7 +648,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="at">
+      <article class="event-card" data-category="feste" data-province="at" data-start="2026-06-26" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">26</span><span class="month">giu</span></div>
@@ -1671,7 +669,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-26" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">26</span><span class="month">giu</span></div>
@@ -1692,7 +690,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-26" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">26</span><span class="month">giu</span></div>
@@ -1713,7 +711,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="at">
+      <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-06-26" data-end="2026-06-26">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">26</span><span class="month">giu</span></div>
@@ -1734,7 +732,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-26" data-end="2026-06-26">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">26</span><span class="month">giu</span></div>
@@ -1755,7 +753,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-26" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">26</span><span class="month">giu</span></div>
@@ -1776,7 +774,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1797,7 +795,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1818,7 +816,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1839,7 +837,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1860,7 +858,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1881,7 +879,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="at">
+      <article class="event-card" data-category="musica" data-province="at" data-start="2026-06-27" data-end="2026-07-01">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1902,7 +900,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1923,7 +921,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1944,7 +942,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-06-27" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1965,7 +963,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-27" data-end="2026-06-27">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">27</span><span class="month">giu</span></div>
@@ -1986,7 +984,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
@@ -2007,7 +1005,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="at">
+      <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
@@ -2028,7 +1026,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
@@ -2049,7 +1047,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
@@ -2070,7 +1068,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
@@ -2091,7 +1089,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
@@ -2112,7 +1110,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="cultura" data-province="al">
+      <article class="event-card" data-category="cultura" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Cultura">🏛️</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
@@ -2133,11 +1131,11 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
+          <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
+          <span class="event-cat">Laboratorio</span>
         </div>
         <div class="event-body">
           <h3>Officina Creativa - C&#x27;era una volta un...click</h3>
@@ -2154,11 +1152,11 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
+          <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
+          <span class="event-cat">Laboratorio</span>
         </div>
         <div class="event-body">
           <h3>Officina Creativa - Decoriamo la nostra bicicletta</h3>
@@ -2175,11 +1173,11 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-06-28" data-end="2026-06-28">
         <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
+          <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">28</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
+          <span class="event-cat">Sport</span>
         </div>
         <div class="event-body">
           <h3>Taxi Rally - 2° Autogiro Summerqua Quattordio / 1° Memorial Venturini Antonio</h3>
@@ -2196,70 +1194,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">29</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo 2026 - Comune di Borghetto di Borbera</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Borghetto di Borbera (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 29 giu al 31 lug · 08:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Scuola dell&#x27;Infanzia,…</span>
-          </div>
-          <p class="event-desc">Centro Estivo per bambini della Scuola dell&#x27;Infanzia, Primaria e Secondaria di Primo Grado. Gestito da animatori professionisti, il servizio comprende il pasto del…</p>
-          <div class="event-foot">
-            <span class="event-price">91,00 euro a bambino per…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">29</span><span class="month">giu</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo 2026 - PazzAnimazione</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Borghetto di Borbera (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 29 giu al 31 lug · 08:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-13</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini della scuola dell&#x27;infanzia, primaria e secondaria di 1° livello. Personale professionista con attestato di primo soccorso. Attività includono…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="sport" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
-          <div class="event-date"><span class="day">29</span><span class="month">giu</span></div>
-          <span class="event-cat">Sport</span>
-        </div>
-        <div class="event-body">
-          <h3>Day Camp 2026 - Scuola Basket Dolci Terre</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Serravalle Scrivia (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 29 giu al 7 ago · 08:00-17:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 5-13 anni (nati dal 2013…</span>
-          </div>
-          <p class="event-desc">Camp estivo di basket e attività sportive per bambini nati dal 2013 al 2021, organizzato dalla Scuola Basket Dolci Terre. Il programma giornaliero include attività…</p>
-          <div class="event-foot">
-            <span class="event-price">80 euro a settimana</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-30" data-end="2026-06-30">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">30</span><span class="month">giu</span></div>
@@ -2280,49 +1215,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo 2026 - Estate Bimbi - Scuola Mazzarello</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 lug al 31 ago · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> scuola dell&#x27;infanzia</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini della scuola dell&#x27;infanzia organizzato dalla Scuola Mazzarello in collaborazione con Progettoa.</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro estivo baby Avventure in Città - Cooperativa La Strada</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 lug al 31 lug · 07:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-6 anni</span>
-          </div>
-          <p class="event-desc"></p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="laboratori" data-province="at">
+      <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-07-01" data-end="2026-07-31">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">01</span><span class="month">lug</span></div>
@@ -2343,28 +1236,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="at">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Il Club dei Bambini Impossibili - Centro Estivo Infanzia - Cooperativa Sociale Seconda…</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Castell&#x27;Alfero (AT)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 lug al 11 set · 08:00-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-6 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini da 3 a 6 anni organizzato dalla Cooperativa Sociale Seconda Stella con il patrocinio del Comune di Castell&#x27;Alfero. Include 3 pasti settimanali,…</p>
-          <div class="event-foot">
-            <span class="event-price">95 euro settimanale (2° figlio…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="laboratori" data-province="at">
+      <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-07-01" data-end="2026-07-29">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">01</span><span class="month">lug</span></div>
@@ -2380,33 +1252,12 @@
           <p class="event-desc">Pomeriggio dedicato al massaggio infantile, filastrocche e coccole in musica. Un momento tenero e coinvolgente per i più piccoli e i loro genitori all&#x27;aperto. Programma:…</p>
           <div class="event-foot">
             <span class="event-price free">Gratuito</span>
-            
+            <span class="event-tag">19/06/2026 09:22</span>
           </div>
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">01</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Re...State al Cauvin\! - O.D.P.F. Istituto Vittorio Cauvin</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Vignole Borbera (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 lug al 24 lug · 07:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">Centro estivo a tema Toy Story con 4 settimane straordinarie verso l&#x27;infinito e oltre. Attività creative con Forky, relax con Mr. e Mrs. Potato, giochi d&#x27;acqua con Rex e…</p>
-          <div class="event-foot">
-            <span class="event-price">80 euro a settimana</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-02" data-end="2026-07-30">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">02</span><span class="month">lug</span></div>
@@ -2427,7 +1278,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-02" data-end="2026-07-02">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">02</span><span class="month">lug</span></div>
@@ -2448,7 +1299,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-03" data-end="2026-07-03">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">03</span><span class="month">lug</span></div>
@@ -2469,7 +1320,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-03" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">03</span><span class="month">lug</span></div>
@@ -2490,7 +1341,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-03" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">03</span><span class="month">lug</span></div>
@@ -2511,7 +1362,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-03" data-end="2026-07-14">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">03</span><span class="month">lug</span></div>
@@ -2532,7 +1383,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="at">
+      <article class="event-card" data-category="feste" data-province="at" data-start="2026-07-03" data-end="2026-07-03">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">03</span><span class="month">lug</span></div>
@@ -2553,7 +1404,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-04" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2574,7 +1425,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="at">
+      <article class="event-card" data-category="feste" data-province="at" data-start="2026-07-04" data-end="2026-07-04">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2595,7 +1446,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-04" data-end="2026-07-04">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2616,7 +1467,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-04" data-end="2026-07-04">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2637,7 +1488,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="at">
+      <article class="event-card" data-category="feste" data-province="at" data-start="2026-07-04" data-end="2026-07-04">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2658,7 +1509,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="at">
+      <article class="event-card" data-category="feste" data-province="at" data-start="2026-07-04" data-end="2026-07-04">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2679,7 +1530,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-04" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2700,7 +1551,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-04" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2721,7 +1572,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-04" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">04</span><span class="month">lug</span></div>
@@ -2742,7 +1593,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-07-05" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">05</span><span class="month">lug</span></div>
@@ -2763,7 +1614,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-05" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">05</span><span class="month">lug</span></div>
@@ -2784,7 +1635,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-05" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">05</span><span class="month">lug</span></div>
@@ -2805,7 +1656,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-05" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">05</span><span class="month">lug</span></div>
@@ -2826,7 +1677,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-05" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">05</span><span class="month">lug</span></div>
@@ -2847,7 +1698,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-05" data-end="2026-07-05">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">05</span><span class="month">lug</span></div>
@@ -2868,7 +1719,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-06" data-end="2026-08-03">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">06</span><span class="month">lug</span></div>
@@ -2889,28 +1740,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">06</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>E...state in gioco 2026 - Ludoteca C&#x27;è Sole e Luna</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Alessandria (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 6 lug al 31 lug · 08:00-14:00 (lun, mer, ven)…</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-5 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo estivo per bambini dai 3 ai 5 anni dal 6 al 31 luglio 2026. Attività di gioco, laboratori, esplorazioni, attività motorie, gite e piscina. Iscrizioni dal 3…</p>
-          <div class="event-foot">
-            <span class="event-price">80 euro a settimana (con gite)…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="spettacoli" data-province="at">
+      <article class="event-card" data-category="spettacoli" data-province="at" data-start="2026-07-06" data-end="2026-07-23">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">06</span><span class="month">lug</span></div>
@@ -2931,28 +1761,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">06</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Soul Farm Summer Camp</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Castelnuovo Scrivia (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 6 lug al 4 set · Lun-Ven 9:00-16:00</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 5-12 anni</span>
-          </div>
-          <p class="event-desc">Centri estivi in fattoria alla Soul Farm di Castelnuovo Scrivia: un&#x27;estate tra animali, natura, cucina e avventure per bambini e ragazzi. Dal lunedì al venerdì,…</p>
-          <div class="event-foot">
-            <span class="event-price">135€/settimana (120€…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-09" data-end="2026-07-09">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">09</span><span class="month">lug</span></div>
@@ -2973,7 +1782,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-10" data-end="2026-07-10">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">10</span><span class="month">lug</span></div>
@@ -2994,7 +1803,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-10" data-end="2026-07-14">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">10</span><span class="month">lug</span></div>
@@ -3015,7 +1824,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-10" data-end="2026-07-10">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">10</span><span class="month">lug</span></div>
@@ -3036,7 +1845,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="at">
+      <article class="event-card" data-category="feste" data-province="at" data-start="2026-07-10" data-end="2026-07-12">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">10</span><span class="month">lug</span></div>
@@ -3057,7 +1866,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-10" data-end="2026-07-13">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">10</span><span class="month">lug</span></div>
@@ -3078,7 +1887,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="cultura" data-province="al">
+      <article class="event-card" data-category="cultura" data-province="al" data-start="2026-07-11" data-end="2026-07-11">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Cultura">🏛️</span>
           <div class="event-date"><span class="day">11</span><span class="month">lug</span></div>
@@ -3099,7 +1908,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-11" data-end="2026-07-11">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">11</span><span class="month">lug</span></div>
@@ -3120,7 +1929,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-11" data-end="2026-07-11">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">11</span><span class="month">lug</span></div>
@@ -3141,7 +1950,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-11" data-end="2026-07-11">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">11</span><span class="month">lug</span></div>
@@ -3162,7 +1971,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-12" data-end="2026-07-14">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">12</span><span class="month">lug</span></div>
@@ -3183,7 +1992,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-07-12" data-end="2026-07-12">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">12</span><span class="month">lug</span></div>
@@ -3204,7 +2013,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-07-12" data-end="2026-07-12">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">12</span><span class="month">lug</span></div>
@@ -3225,7 +2034,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-12" data-end="2026-07-12">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">12</span><span class="month">lug</span></div>
@@ -3246,7 +2055,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-12" data-end="2026-07-12">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">12</span><span class="month">lug</span></div>
@@ -3267,7 +2076,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-12" data-end="2026-07-12">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">12</span><span class="month">lug</span></div>
@@ -3288,7 +2097,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="feste" data-province="al">
+      <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-12" data-end="2026-07-12">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sagra &amp; Festa">🎪</span>
           <div class="event-date"><span class="day">12</span><span class="month">lug</span></div>
@@ -3309,7 +2118,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="musica" data-province="al">
+      <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-13" data-end="2026-07-13">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Musica">🎵</span>
           <div class="event-date"><span class="day">13</span><span class="month">lug</span></div>
@@ -3330,7 +2139,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-13" data-end="2026-07-13">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">13</span><span class="month">lug</span></div>
@@ -3351,7 +2160,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-13" data-end="2026-08-09">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">13</span><span class="month">lug</span></div>
@@ -3372,7 +2181,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-14" data-end="2026-07-14">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">14</span><span class="month">lug</span></div>
@@ -3393,7 +2202,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-15" data-end="2026-07-15">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">15</span><span class="month">lug</span></div>
@@ -3414,7 +2223,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-16" data-end="2026-07-16">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">16</span><span class="month">lug</span></div>
@@ -3435,7 +2244,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="at">
+      <article class="event-card" data-category="sport" data-province="at" data-start="2026-07-16" data-end="2026-07-21">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">16</span><span class="month">lug</span></div>
@@ -3456,7 +2265,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-16" data-end="2026-07-16">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">16</span><span class="month">lug</span></div>
@@ -3477,7 +2286,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="spettacoli" data-province="al">
+      <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-17" data-end="2026-07-17">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Spettacolo">🎭</span>
           <div class="event-date"><span class="day">17</span><span class="month">lug</span></div>
@@ -3498,70 +2307,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
-          <div class="event-date"><span class="day">18</span><span class="month">lug</span></div>
-          <span class="event-cat">Sport</span>
-        </div>
-        <div class="event-body">
-          <h3>Teen Camp Sport 2026 - Rovereto Central Park</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Alessandria (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 18 lug al 25 lug · vari</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> ragazzi scuole medie</span>
-          </div>
-          <p class="event-desc">Estate di sport, divertimento e amicizia per ragazzi delle scuole medie con Brazilian Jiu-Jitsu, Calisthenics, Basket, Calcio, Trekking e Multisport. Include attività…</p>
-          <div class="event-foot">
-            <span></span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">20</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo Cima 26 - Pro Loco di Cimaferle</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Cimaferle (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 20 lug al 16 ago · dal lunedì al venerdì</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-11 anni</span>
-          </div>
-          <p class="event-desc">Centro estivo per bambini dai 3 agli 11 anni con giornate in Pro Loco e in piscina, in collaborazione con Scoiattolo Beach di Ponzone. Sconto fratelli e sorelle 20 euro,…</p>
-          <div class="event-foot">
-            <span class="event-price">125 euro a bambino a settimana…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="estivi" data-province="al">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="Centro estivo">☀️</span>
-          <div class="event-date"><span class="day">20</span><span class="month">lug</span></div>
-          <span class="event-cat">Centro estivo</span>
-        </div>
-        <div class="event-body">
-          <h3>Centro Estivo Silvanese - Associazione Amici dei Burattini</h3>
-          <div class="event-meta">
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Silvano d&#x27;Orba (AL)</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 20 lug al 7 ago · 07:30-17:30</span>
-            <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12</span>
-          </div>
-          <p class="event-desc">IV edizione del centro estivo con attività per bambini: piscina due volte a settimana, gite tutte le settimane, giochi e laboratori. Merenda offerta.</p>
-          <div class="event-foot">
-            <span class="event-price">105 euro tempo pieno, 55 euro…</span>
-            
-          </div>
-        </div>
-      </article>
-
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-07-24" data-end="2026-07-24">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">24</span><span class="month">lug</span></div>
@@ -3582,7 +2328,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-25" data-end="2026-07-25">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">25</span><span class="month">lug</span></div>
@@ -3603,7 +2349,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="cultura" data-province="al">
+      <article class="event-card" data-category="cultura" data-province="al" data-start="2026-08-08" data-end="2026-08-08">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Cultura">🏛️</span>
           <div class="event-date"><span class="day">08</span><span class="month">ago</span></div>
@@ -3624,7 +2370,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-08-22" data-end="2026-08-22">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">22</span><span class="month">ago</span></div>
@@ -3645,7 +2391,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="laboratori" data-province="al">
+      <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-08-24" data-end="2026-08-31">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Laboratorio">🎨</span>
           <div class="event-date"><span class="day">24</span><span class="month">ago</span></div>
@@ -3666,7 +2412,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-09-01" data-end="2026-09-30">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">01</span><span class="month">set</span></div>
@@ -3687,7 +2433,7 @@
         </div>
       </article>
 
-      <article class="event-card" data-category="sport" data-province="al">
+      <article class="event-card" data-category="sport" data-province="al" data-start="2026-09-20" data-end="2026-09-20">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="Sport">🚴</span>
           <div class="event-date"><span class="day">20</span><span class="month">set</span></div>
@@ -3804,20 +2550,47 @@
     document.getElementById('mobile-menu').classList.remove('open');
   }
 
-  // Filtro eventi: provincia + categoria (combinati)
+  // Filtro eventi: data + provincia + categoria (combinati)
   (function () {
     const groups = Array.from(document.querySelectorAll('.event-filters[data-group]'));
     const cards = Array.from(document.querySelectorAll('#events-grid .event-card'));
     const empty = document.getElementById('events-empty');
     if (!groups.length) return;
-    const active = { province: 'all', category: 'all' };
+    const active = { date: 'all', province: 'all', category: 'all' };
+
+    function matchDate(card, mode) {
+      if (mode === 'all') return true;
+      const s = new Date(card.dataset.start + 'T00:00:00');
+      const e = new Date(card.dataset.end + 'T23:59:59');
+      const now = new Date(); now.setHours(0, 0, 0, 0);
+      if (mode === 'oggi') {
+        const end = new Date(now); end.setHours(23, 59, 59, 999);
+        return s <= end && e >= now;
+      }
+      const dow = now.getDay(); // 0 domenica ... 6 sabato
+      if (mode === 'weekend') {
+        const sat = new Date(now); sat.setDate(now.getDate() + (dow === 0 ? -1 : 6 - dow));
+        const sun = new Date(sat); sun.setDate(sat.getDate() + 1); sun.setHours(23, 59, 59, 999);
+        return s <= sun && e >= sat;
+      }
+      if (mode === 'settimana') {
+        const endWeek = new Date(now); endWeek.setDate(now.getDate() + ((7 - dow) % 7)); endWeek.setHours(23, 59, 59, 999);
+        return s <= endWeek && e >= now;
+      }
+      if (mode === 'mese') {
+        const endMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+        return s <= endMonth && e >= now;
+      }
+      return true;
+    }
 
     function apply() {
       let visible = 0;
       cards.forEach(card => {
-        const okProv = active.province === 'all' || card.dataset.province === active.province;
-        const okCat  = active.category === 'all' || card.dataset.category === active.category;
-        const show = okProv && okCat;
+        const show =
+          (active.province === 'all' || card.dataset.province === active.province) &&
+          (active.category === 'all' || card.dataset.category === active.category) &&
+          matchDate(card, active.date);
         card.classList.toggle('is-hidden', !show);
         if (show) visible++;
       });
@@ -3825,7 +2598,7 @@
     }
 
     groups.forEach(group => {
-      const type = group.dataset.group; // 'province' | 'category'
+      const type = group.dataset.group; // 'date' | 'province' | 'category'
       group.addEventListener('click', function (e) {
         const btn = e.target.closest('.filter-chip');
         if (!btn) return;

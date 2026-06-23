@@ -14,7 +14,7 @@ dentro eventi.html, tra gli ancoraggi esistenti. Tutto il resto resta intatto.
 import os, re, csv, io, json, html, datetime, urllib.request, sys
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
-DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=eventi"
+DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HTML_PATH = os.path.join(ROOT, "eventi.html")
 JSON_PATH = os.path.join(ROOT, "data", "eventi.json")
@@ -25,8 +25,8 @@ KNOWN_CATS = {'Sagra & Festa', 'Sagra', 'Spettacolo', 'Laboratorio', 'Sport',
 MESI = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic']
 LABELS = {'feste': 'Sagre & Feste', 'spettacoli': 'Spettacoli', 'musica': 'Musica',
           'laboratori': 'Laboratori', 'sport': 'Sport', 'cultura': 'Cultura & Natura',
-          'estivi': 'Centri Estivi', 'altro': 'Altro'}
-ORDER = ['feste', 'spettacoli', 'laboratori', 'musica', 'sport', 'cultura', 'estivi', 'altro']
+          'altro': 'Altro'}
+ORDER = ['feste', 'spettacoli', 'laboratori', 'musica', 'sport', 'cultura', 'altro']
 
 
 def pdate(s):
@@ -95,22 +95,19 @@ def normalize(rows):
 
 
 def bucket(e):
-    nd = (e['nome'] + ' ' + e['descr']).lower()
-    if any(k in nd for k in ['centro estivo', 'centri estivi', 'estate ragazzi', 'summer', 'campus', 'grest']):
-        return 'estivi', '☀️', 'Centro estivo'
     cz = e['categoria'].lower()
-    if 'sagra' in cz or 'festa' in cz or 'mercato' in cz: return 'feste', '🎪', 'Sagra & Festa'
+    if 'sagra' in cz or 'festa' in cz or 'mercato' in cz or 'fiera' in cz: return 'feste', '🎪', 'Sagra & Festa'
     if 'spettacolo' in cz or 'teatro' in cz or 'cinema' in cz: return 'spettacoli', '🎭', 'Spettacolo'
     if 'musica' in cz: return 'musica', '🎵', 'Musica'
     if 'laborator' in cz or 'arte' in cz: return 'laboratori', '🎨', 'Laboratorio'
     if 'sport' in cz: return 'sport', '🚴', 'Sport'
     if 'cultura' in cz or 'natura' in cz: return 'cultura', '🏛️', 'Cultura'
-    t = cz + ' ' + nd
-    if 'sagra' in t or 'festa' in t or 'fiera' in t: return 'feste', '🎪', 'Sagra & Festa'
-    if 'concerto' in t or 'musica' in t: return 'musica', '🎵', 'Musica'
-    if 'laborator' in t: return 'laboratori', '🎨', 'Laboratorio'
-    if 'spettacol' in t or 'teatro' in t: return 'spettacoli', '🎭', 'Spettacolo'
-    if 'sport' in t or 'corsa' in t or 'pedalata' in t or 'run' in t: return 'sport', '🚴', 'Sport'
+    nd = (e['nome'] + ' ' + e['descr']).lower()
+    if 'sagra' in nd or 'festa' in nd or 'fiera' in nd: return 'feste', '🎪', 'Sagra & Festa'
+    if 'concerto' in nd or 'musica' in nd: return 'musica', '🎵', 'Musica'
+    if 'laborator' in nd: return 'laboratori', '🎨', 'Laboratorio'
+    if 'spettacol' in nd or 'teatro' in nd: return 'spettacoli', '🎭', 'Spettacolo'
+    if any(k in nd for k in ['sport', 'corsa', 'pedalata', 'run', 'ciclo']): return 'sport', '🚴', 'Sport'
     return 'altro', '📍', 'Evento'
 
 
@@ -152,7 +149,7 @@ def render(events):
         eta = esc(trunc(e['eta'], 26)) if e['eta'] else ''
         eta_html = f'\n            <span>{USER_SVG} {eta}</span>' if eta else ''
         manifest = f'<span class="event-tag">{esc(trunc(e["manifest"], 40))}</span>' if e['manifest'] else ''
-        cards.append(f'''      <article class="event-card" data-category="{slug}" data-province="{e['prov'].lower()}">
+        cards.append(f'''      <article class="event-card" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}">
         <div class="event-media">
           <span class="event-media-emoji" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
           <div class="event-date"><span class="day">{d.day:02d}</span><span class="month">{MESI[d.month-1]}</span></div>
