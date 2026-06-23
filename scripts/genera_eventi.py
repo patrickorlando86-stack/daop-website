@@ -178,7 +178,8 @@ def render(events):
           <span>{PIN_SVG} {luogo}</span>
           <span>{CLOCK_SVG} {esc(datestr)}</span>{eta_html}
         </div>
-        <p class="event-desc">{esc(trunc(e['descr'], 170))}</p>
+        <p class="event-desc">{esc(e['descr'])}</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           {price}
           {manifest}
