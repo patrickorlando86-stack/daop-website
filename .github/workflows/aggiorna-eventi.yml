@@ -1,0 +1,49 @@
+name: Aggiorna eventi
+
+# Rigenera la pagina eventi.html dal foglio Google "luoghi" (tab "eventi").
+# Gira ogni notte e a richiesta manuale.
+
+on:
+  schedule:
+    # 02:00 UTC = 04:00 ora italiana legale (CEST) / 03:00 ora solare (CET)
+    - cron: '0 2 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggiorna-eventi
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Genera eventi
+        env:
+          # Opzionale: URL CSV del tab "eventi" (es. "Pubblica sul web").
+          # Se assente, lo script prova l'export gviz del foglio; se anche
+          # quello non è raggiungibile, usa l'istantanea in data/eventi.json.
+          EVENTI_CSV_URL: ${{ secrets.EVENTI_CSV_URL }}
+        run: python scripts/genera_eventi.py
+
+      - name: Commit se cambiato
+        run: |
+          if [ -n "$(git status --porcelain eventi.html data/eventi.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add eventi.html data/eventi.json
+            git commit -m "Aggiornamento automatico eventi"
+            git push
+          else
+            echo "Nessuna modifica agli eventi."
+          fi
