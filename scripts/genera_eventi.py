@@ -18,6 +18,7 @@ DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=ou
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HTML_PATH = os.path.join(ROOT, "eventi.html")
 JSON_PATH = os.path.join(ROOT, "data", "eventi.json")
+SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 
 KNOWN_CATS = {'Sagra & Festa', 'Sagra', 'Spettacolo', 'Laboratorio', 'Sport',
               'Musica', 'Cultura', 'Natura', 'Altro', 'Mercato', 'Arte',
@@ -271,6 +272,24 @@ def inject(cat_filter, grid, jsonld):
     open(HTML_PATH, "w", encoding="utf-8").write(s)
 
 
+def update_sitemap():
+    """Porta il <lastmod> di eventi.html nella sitemap alla data odierna.
+    Il commit avviene (dal workflow) solo se eventi.html è davvero cambiato,
+    così la data riflette una modifica reale dei contenuti."""
+    if not os.path.exists(SITEMAP_PATH):
+        return
+    today = datetime.date.today().isoformat()
+    s = open(SITEMAP_PATH, encoding="utf-8").read()
+    s, n = re.subn(
+        r'(<loc>https://www\.daop\.it/eventi\.html</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)',
+        lambda m: m.group(1) + today + m.group(2), s, count=1)
+    if n == 1:
+        open(SITEMAP_PATH, "w", encoding="utf-8").write(s)
+        print(f"[genera_eventi] sitemap: lastmod eventi.html -> {today}")
+    else:
+        print("[genera_eventi] sitemap: blocco eventi.html non trovato, salto")
+
+
 def main():
     events = normalize(fetch_rows())
     cat_filter, grid = render(events)
@@ -281,6 +300,7 @@ def main():
             for k, v in e.items()} for e in events]
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=1)
+    update_sitemap()
     print(f"[genera_eventi] {len(events)} eventi futuri scritti in eventi.html")
 
 
