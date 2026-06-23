@@ -3724,7 +3724,10 @@
   .event-meta{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
   .event-meta span{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);line-height:1.4}
   .event-meta svg{flex-shrink:0;margin-top:2px;color:var(--cat-color,var(--teal))}
-  .event-desc{font-size:0.86rem;color:var(--text-mid);line-height:1.6;margin-bottom:18px}
+  .event-desc{font-size:0.86rem;color:var(--text-mid);line-height:1.6;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .event-desc.expanded{-webkit-line-clamp:unset;overflow:visible}
+  .event-readmore{align-self:flex-start;margin:0 0 16px;padding:0;background:none;border:0;cursor:pointer;font-family:inherit;font-size:0.8rem;font-weight:700;color:var(--cat-color,var(--teal));-webkit-user-select:none;user-select:none}
+  .event-readmore:hover{text-decoration:underline}
   .event-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
   .event-price{display:inline-flex;align-items:center;font-size:0.78rem;font-weight:700;color:var(--teal);background:rgba(107,165,168,0.12);border-radius:100px;padding:5px 12px}
   .event-price.free{color:#1D9E75;background:rgba(29,158,117,0.1)}
@@ -3878,7 +3881,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 10 mag al 26 lug · 16:00-19:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
-        <p class="event-desc">Mostra dedicata a Pinocchio in occasione dei 200 anni dalla nascita di Carlo Collodi. Esposizione di opere di artisti e collezionisti. Inaugurazione domenica 10 maggio…</p>
+        <p class="event-desc">Mostra dedicata a Pinocchio in occasione dei 200 anni dalla nascita di Carlo Collodi. Esposizione di opere di artisti e collezionisti. Inaugurazione domenica 10 maggio ore 17:00. Aperta domenica e festivi.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -3898,6 +3902,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
         <p class="event-desc">Mostra di illusioni ottiche e percettive. &quot;Preparati a vedere il mondo con occhi nuovi.&quot; Biglietti su Ticketone.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -3917,6 +3922,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Sportello settimanale di consulenza educativa per famiglie, rivolto a genitori e caregiver. Attivo ogni giovedì dal 4 giugno, dalle 9:00 alle 12:00.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -3935,7 +3941,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 18 giu al 2 lug · 10:00-11:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 7-10 anni</span>
         </div>
-        <p class="event-desc">Primo appuntamento del laboratorio estivo Gli EsplorAttori per bambini dai 7 ai 10 anni. I partecipanti costruiranno insieme il proprio kit personale per gestire al…</p>
+        <p class="event-desc">Primo appuntamento del laboratorio estivo Gli EsplorAttori per bambini dai 7 ai 10 anni. I partecipanti costruiranno insieme il proprio kit personale per gestire al meglio le avventure del percorso. Programma: 18/06 Gli EsplorAttori - Il nostro Kit - Centro per le Famiglie CISA di Tortona; 25/06 Gli EsplorAttori - Caccia nella Natura - Centro per le Famiglie CISA di Tortona; 02/07 Gli EsplorAttori - Animali e Habitat - Centro per le Famiglie CISA di Tortona.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -3955,6 +3962,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Per tutta la famiglia</span>
         </div>
         <p class="event-desc">Il nuovo film d&#x27;animazione Disney·Pixar Toy Story 5 in programmazione al Multisala Moderno di Novi Ligure, dal 18 al 24 giugno (lunedì chiuso).</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento</span>
           
@@ -3973,7 +3981,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 19 giu al 23 giu · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Festa patronale dedicata a San Luigi Orione con cinque giorni di eventi: Pizza Festival, bancarelle in fiera, esposizione auto, concerti (Don Orione e Perosi,…</p>
+        <p class="event-desc">Festa patronale dedicata a San Luigi Orione con cinque giorni di eventi: Pizza Festival, bancarelle in fiera, esposizione auto, concerti (Don Orione e Perosi, Conservatorio Vivaldi, G.T.B. Band, Nico &amp; Franz), spettacoli di danza, docufilm, mostra fotografica &#x27;Istantanee da Ponte&#x27;, Santa Messa e molto altro. L&#x27;evento si svolge in varie location del paese tra cui Piazza Martiri della Libertà, Piazza Matteotti e la Sala Polifunzionale.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -3992,7 +4001,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 19 giu al 25 giu · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">La Pro Loco di Cortiglione organizza la Festa d&#x27;Estate 2026, con serate di musica, buon cibo, divertimento e tante novità. Le date sono il 19, 20, 21 e 25 giugno.…</p>
+        <p class="event-desc">La Pro Loco di Cortiglione organizza la Festa d&#x27;Estate 2026, con serate di musica, buon cibo, divertimento e tante novità. Le date sono il 19, 20, 21 e 25 giugno. Durante tutte le serate saranno presenti gonfiabili per bambini e banco di beneficenza.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4011,7 +4021,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 19 giu al 26 giu · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Serata dedicata al mondo del calcio con un &#x27;abecedario pallonaro&#x27; che porta da Aaltonen a Zubizarreta. Evento della rassegna estiva Notti d&#x27;Estate al Parco Torre,…</p>
+        <p class="event-desc">Serata dedicata al mondo del calcio con un &#x27;abecedario pallonaro&#x27; che porta da Aaltonen a Zubizarreta. Evento della rassegna estiva Notti d&#x27;Estate al Parco Torre, ambientato nella suggestiva cornice del Parco Torre Storica. Programma: 19/06 Abecedario pallonaro - Da Aaltonen a Zubizarreta; 26/06 Così ridevano a San Salvatore.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4030,7 +4041,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 20 giu al 5 lug · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Concerto del Trio Italiano con lo spettacolo &#x27;Suggestioni senza Tempo&#x27;. Appuntamento musicale nell&#x27;affascinante cornice della Corte del Castello di Pozzolo Formigaro.…</p>
+        <p class="event-desc">Concerto del Trio Italiano con lo spettacolo &#x27;Suggestioni senza Tempo&#x27;. Appuntamento musicale nell&#x27;affascinante cornice della Corte del Castello di Pozzolo Formigaro. Programma: 20/06 Trio Italiano - Suggestioni senza Tempo; 24/06 Summer Ladies in Jazz; 28/06 Gipsy Pink - Tributo ai Pink Floyd - Lions di Pozzolo F.ro; 02/07 Lo Sporco Torna Sempre - Commedia brillante; 04/07 Concerto d&#x27;Estate - Banda Musicale Pozzolese R. Marengo; 05/07 Poachella - Festival Hip Pop Reggaeton e Techno con Street Food.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4049,7 +4061,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 23 giu 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Nella magica notte di San Giovanni, serata dedicata alle tradizioni popolari con il racconto &#x27;Le streghe del grande noce&#x27; tratto da favole e leggende del folclore. A…</p>
+        <p class="event-desc">Nella magica notte di San Giovanni, serata dedicata alle tradizioni popolari con il racconto &#x27;Le streghe del grande noce&#x27; tratto da favole e leggende del folclore. A seguire magie, fuoco e balli propiziatori. Dalle ore 22 Balfolk con l&#x27;organetto di Vincenzo Caglioti.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4069,6 +4082,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
         <p class="event-desc">Attività di psicomotricità all&#x27;aperto presso l&#x27;Area Verde di Via G. Sodano. Un pomeriggio di movimento e gioco nella natura per bambini e famiglie.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">19/06/2026 09:22</span>
@@ -4087,7 +4101,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 24 giu 2026 · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Tradizionale falò di San Giovanni organizzato dal Comune di Bosio e dalla Pro Loco. Durante la serata sarà possibile gustare le frittelle della Pro Loco. Dal 18 giugno è…</p>
+        <p class="event-desc">Tradizionale falò di San Giovanni organizzato dal Comune di Bosio e dalla Pro Loco. Durante la serata sarà possibile gustare le frittelle della Pro Loco. Dal 18 giugno è possibile donare ramaglie, fascine e altri materiali idonei (non mobili o legno verniciato) nella zona antistante il piazzale del Percorso della Memoria.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4106,7 +4121,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 24 giu al 27 giu · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Santa Messa in occasione della Festa di San Giovanni a Montemarzino, mercoledì 24 giugno alle ore 21:00. Evento religioso aperto a tutta la comunità organizzato dal…</p>
+        <p class="event-desc">Santa Messa in occasione della Festa di San Giovanni a Montemarzino, mercoledì 24 giugno alle ore 21:00. Evento religioso aperto a tutta la comunità organizzato dal Comune e dalla Pro Loco di Montemarzino. Programma: 24/06 Santa Messa; 27/06 Grigliata.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4125,7 +4141,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 24 giu 2026 · 18:00-24:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le eta&#x27; (famiglie)</span>
         </div>
-        <p class="event-desc">Musica in Centro è un evento all&#x27;aperto nell&#x27;ambito del San Giorgio Festival, con musicisti itineranti e DJ set a cielo aperto nel centro storico di Alessandria.…</p>
+        <p class="event-desc">Musica in Centro è un evento all&#x27;aperto nell&#x27;ambito del San Giorgio Festival, con musicisti itineranti e DJ set a cielo aperto nel centro storico di Alessandria. L&#x27;evento si svolge mercoledì 24 giugno dalle ore 18 alle ore 24. Organizzato in collaborazione con Alegas e Iren.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">San Giorgio Festival</span>
@@ -4144,7 +4161,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 25 giu al 30 giu · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cerimonia di dedica della piazzetta a Gianfranco Trusiano, nell&#x27;ambito dei festeggiamenti patronali Santi Pietro e Paolo e della 49ª Sagra degli Zucchini di Quattordio.…</p>
+        <p class="event-desc">Cerimonia di dedica della piazzetta a Gianfranco Trusiano, nell&#x27;ambito dei festeggiamenti patronali Santi Pietro e Paolo e della 49ª Sagra degli Zucchini di Quattordio. Programma: 25/06 Dedica della piazzetta a Gianfranco Trusiano; 25/06 L&#x27;Uomo dal Fiore in Bocca; 26/06 Cena sotto le Stelle; 26/06 DJ Set Live - DJ Spadix; 27/06 Quattordio Urban Art - Tour Opere; 27/06 Ricette e Sinfonie; 27/06 Cena sotto le Stelle; 27/06 Angelo Cattaneo - Happy Music Anni &#x27;70-&#x27;80-&#x27;90 Dance; 28/06 Rally Taxi - 2° Autogiro Summer QUA - Memorial Antonio Venturini; 28/06 Santa Messa; 28/06 Borse di Studio Classe 5ª - Gianluigi Lanzoni in memoria di Gianfranco Scagliola; 28/06 Rinfresco; 28/06 Pista Polistil F1 Auto Storiche; 28/06 Cena sotto le Stelle; 28/06 Oro Caribe - Danze Latino Americane Anni &#x27;70-&#x27;80-&#x27;90; 29/06 Pizza in Piazza; 29/06 Quiz Game Esagerata - Angelo Cattaneo; 30/06 Visioni Stellate - Cinema all&#x27;aperto: F1 (2025).</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4163,7 +4181,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 25 giu 2026 · 20:00-23:59</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Serata di beneficenza nell&#x27;ambito della Festa d&#x27;Estate 2026 di Cortiglione. Dalle ore 20:00 cena con gnocchi al ragù, porchetta con contorno e dolce. Dalle ore 21:30…</p>
+        <p class="event-desc">Serata di beneficenza nell&#x27;ambito della Festa d&#x27;Estate 2026 di Cortiglione. Dalle ore 20:00 cena con gnocchi al ragù, porchetta con contorno e dolce. Dalle ore 21:30 concerto &#x27;Canzoni per un&#x27;Amica&#x27; con il Gruppo Strega; il ricavato sarà devoluto alla Fondazione per la Ricerca Biomedica ONLUS per la sclerosi multipla.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4182,7 +4201,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 25 giu 2026 · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Swap di abiti, accessori e giochi in buono stato. Le modalità di partecipazione sono indicate sulla locandina dedicata. Un&#x27;occasione per scambiare e riutilizzare in modo…</p>
+        <p class="event-desc">Swap di abiti, accessori e giochi in buono stato. Le modalità di partecipazione sono indicate sulla locandina dedicata. Un&#x27;occasione per scambiare e riutilizzare in modo sostenibile.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4201,7 +4221,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 25 giu 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;The Drama - Un Segreto è per Sempre&#x27; con Zendaya e Robert Pattinson, Usa 2025. Organizzato…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;The Drama - Un Segreto è per Sempre&#x27; con Zendaya e Robert Pattinson, Usa 2025. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -4220,7 +4241,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 26 giu al 28 giu · 19:00-23:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Venerdì della 45ª Sagra di Qualità dell&#x27;Agnolotto d&#x27;Asino a Calliano Monferrato. Dalle 19:00 distribuzione di agnolotti, stufato con polenta e salamini d&#x27;asino. Alle…</p>
+        <p class="event-desc">Venerdì della 45ª Sagra di Qualità dell&#x27;Agnolotto d&#x27;Asino a Calliano Monferrato. Dalle 19:00 distribuzione di agnolotti, stufato con polenta e salamini d&#x27;asino. Alle 21:00 concerto dell&#x27;Orchestra Asilo - Tributo Vasco e alle 22:30 DJ Toyu in Piazza Marconi. Programma: 26/06 Distribuzione Agnolotti, Stufato e Salamini d&#x27;Asino + Orchestra Asilo Tributo Vasco + DJ Toyu; 27/06 Grande Abbuffata con Specialità d&#x27;Asino + Luigi Gallia + DJ Sonik; 28/06 Mercatino Prodotti Tipici, Pranzo con Specialità d&#x27;Asino e Gruppo Musicale B-Side.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4239,7 +4261,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 26 giu al 28 giu · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Serata con DJ Cashmere nell&#x27;ambito della Festa della Birra e Sagra di San Pietro di Cassano Spinola. Presente un grosso parco giochi per i più piccoli. Organizzata dalla…</p>
+        <p class="event-desc">Serata con DJ Cashmere nell&#x27;ambito della Festa della Birra e Sagra di San Pietro di Cassano Spinola. Presente un grosso parco giochi per i più piccoli. Organizzata dalla Pro Loco Cassano Spinola. Programma: 26/06 DJ Cashmere; 27/06 Deejays in Tour; 28/06 Farinelli Group.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4258,7 +4281,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 26 giu al 27 giu · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Venerdì 26 giugno, serata con Stefano Paini e il live degli Italian Women Tribute - The Original Rock Show. Parte della Festa di Inizio Estate organizzata dalla Proloco…</p>
+        <p class="event-desc">Venerdì 26 giugno, serata con Stefano Paini e il live degli Italian Women Tribute - The Original Rock Show. Parte della Festa di Inizio Estate organizzata dalla Proloco Fraschetta in Piazza Barrera a Spinetta Marengo. Menu disponibile con antipasti, agnolotti, salamini, tagliata e patatine. Programma: 26/06 Italian Women Tribute - The Original Rock Show; 27/06 Lunaria - Old is New.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4277,7 +4301,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 26 giu 2026 · 16:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
         </div>
-        <p class="event-desc">Attività per bambini dai 4 ai 12 anni. Percorso guidato sul tema del paesaggio seguito da un laboratorio creativo chiamato &#x27;La scatola dei ricordi&#x27;. I bambini potranno…</p>
+        <p class="event-desc">Attività per bambini dai 4 ai 12 anni. Percorso guidato sul tema del paesaggio seguito da un laboratorio creativo chiamato &#x27;La scatola dei ricordi&#x27;. I bambini potranno creare la propria scatola delle meraviglie.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -4296,7 +4321,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 26 giu 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Pecore sotto Copertura&#x27; con Hugh Jackman, Regno Unito/Usa 2026. Organizzato dal Comune di…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Pecore sotto Copertura&#x27; con Hugh Jackman, Regno Unito/Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -4315,7 +4341,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 26 giu al 28 giu · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Prima serata della Sagra della Panissa organizzata dalla Pro Loco di Morano sul Po. In menu: panissa, vitello tonnato, salame sotto grasso, salamelle e costine, insalate…</p>
+        <p class="event-desc">Prima serata della Sagra della Panissa organizzata dalla Pro Loco di Morano sul Po. In menu: panissa, vitello tonnato, salame sotto grasso, salamelle e costine, insalate varie. Piatto speciale della serata: fritto di pesce. Musica live con Fuori Tempo Max. Programma: 26/06 Serata di apertura con Fuori Tempo Max; 27/06 Serata con B-Side Party Band; 28/06 Serata conclusiva con Bluesphemy Band.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4334,7 +4361,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 27 giu 2026 · 17:00-19:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Pomeriggio dedicato al divertimento di tutta la famiglia con laboratorio creativo per costruire il proprio aquilone, accompagnati da animatori in un&#x27;area decorata con…</p>
+        <p class="event-desc">Pomeriggio dedicato al divertimento di tutta la famiglia con laboratorio creativo per costruire il proprio aquilone, accompagnati da animatori in un&#x27;area decorata con girandole, bandiere e maniche a vento. Un&#x27;occasione speciale per giocare, creare e lasciarsi trasportare dalla magia del volo.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4353,7 +4381,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 27 giu 2026 · 15:00-21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Prima giornata della festa Canta Cián a Rossiglione, Borgata Superiore. In programma: apertura mercatino (ore 15), Gruppo Storico Sestrese con giochi e danze medievali…</p>
+        <p class="event-desc">Prima giornata della festa Canta Cián a Rossiglione, Borgata Superiore. In programma: apertura mercatino (ore 15), Gruppo Storico Sestrese con giochi e danze medievali (ore 17 e 21), Gruppo Rievocazioni Treno Storico con musica itinerante, apertura stand gastronomici e ristorante Da Santin (ore 19). Per tutta la giornata Torre di Arrampicata Artificiale.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Canta Cián 2026</span>
@@ -4372,7 +4401,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 27 giu 2026 · 15:30-19:00 / 20:00-22:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-10 anni</span>
         </div>
-        <p class="event-desc">Evento gratuito per bambini dai 6 ai 10 anni articolato in due momenti: pomeriggio (15:30-19:00) con attività creative, lettura albo, laboratorio musicale, attività…</p>
+        <p class="event-desc">Evento gratuito per bambini dai 6 ai 10 anni articolato in due momenti: pomeriggio (15:30-19:00) con attività creative, lettura albo, laboratorio musicale, attività inclusive, giochi in giardino e caccia al tesoro; serata (20:00-22:00) a tema &#x27;Magia della notte&#x27; con passeggiata notturna, storie sotto le stelle, giochi con pittura fluorescente e scatola dei segreti. Organizzato da Centro per le Famiglie L&#x27;Arcobaleno, Consorzio Servizi Sociali, La Tavola Rotonda ODV, CamminFacendo Next Generation e Cooperativa Sociale Azimut.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4391,7 +4421,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 27 giu 2026 · 15:30-19:00 / 20:00-22:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-10 anni</span>
         </div>
-        <p class="event-desc">Evento gratuito per bambini dai 6 ai 10 anni diviso in due momenti: pomeriggio (15:30-19:00) con attività creative, lettura albo, laboratorio musicale, attività…</p>
+        <p class="event-desc">Evento gratuito per bambini dai 6 ai 10 anni diviso in due momenti: pomeriggio (15:30-19:00) con attività creative, lettura albo, laboratorio musicale, attività inclusive, giochi in giardino, caccia al tesoro e merenda; sera (20:00-22:00) con la magia della notte, passeggiata notturna, storie sotto le stelle, giochi con pittura fluorescente e scatola dei segreti.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4410,7 +4441,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 27 giu 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Disclosure Day&#x27; di Steven Spielberg, Usa 2026. Organizzato dal Comune di Ovada e Centro…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Disclosure Day&#x27; di Steven Spielberg, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -4429,7 +4461,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 27 giu al 1 lug · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le eta&#x27; (famiglie)</span>
         </div>
-        <p class="event-desc">Concerto della band Alive con musica Pop, Rock e Dance. Serata con stand gastronomico aperto dalle ore 19:00 con antipasti, agnolotti, grigliata, dolci, gelati…</p>
+        <p class="event-desc">Concerto della band Alive con musica Pop, Rock e Dance. Serata con stand gastronomico aperto dalle ore 19:00 con antipasti, agnolotti, grigliata, dolci, gelati artigianali, birra e coca alla spina. Programma: 27/06 Concerto Alive Pop Rock &amp; Dance; 28/06 Concerto Sonia de Castelli; 29/06 Serata Pizza con The InStabil Band; 01/07 Passeggiando Tra Boschi e Stelle.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4448,7 +4481,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 27 giu 2026 · 17:00-24:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">2ª edizione di &#x27;Gavi - Il Borgo sotto le Stelle&#x27;, evento estivo nel centro storico di Gavi organizzato dalla Pro Loco. La serata propone street food a cura dei locali…</p>
+        <p class="event-desc">2ª edizione di &#x27;Gavi - Il Borgo sotto le Stelle&#x27;, evento estivo nel centro storico di Gavi organizzato dalla Pro Loco. La serata propone street food a cura dei locali gaviesi e non solo, con degustazioni di Gavi DOCG abbinate a prodotti tipici locali, dalle 17:00 a mezzanotte.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4467,7 +4501,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 27 giu 2026 · 18:00-01:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Notte bianca nel Quartiere Cristo di Alessandria con un tuffo negli anni &#x27;80, &#x27;90 e 2000. In programma street food, apericena, band musicali, attrazioni, DJ set,…</p>
+        <p class="event-desc">Notte bianca nel Quartiere Cristo di Alessandria con un tuffo negli anni &#x27;80, &#x27;90 e 2000. In programma street food, apericena, band musicali, attrazioni, DJ set, animazione, dirette radio e social, attività sportive, stand espositivi, hobbisti e negozi aperti. Navetta gratuita disponibile.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4486,7 +4521,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 27 giu al 28 giu · 14:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Sabato 27 giugno: torneo di basket giovanile (U12 Minibasket e tutte le categorie). Ritrovo ore 14:30, inizio torneo ore 15:00. Ospite d&#x27;onore Pierluigi Brotto, Head…</p>
+        <p class="event-desc">Sabato 27 giugno: torneo di basket giovanile (U12 Minibasket e tutte le categorie). Ritrovo ore 14:30, inizio torneo ore 15:00. Ospite d&#x27;onore Pierluigi Brotto, Head Coach Vanoli Cremona 25/26. Programma: 27/06 Memorial Andrea Foglia - 11ª Edizione - Gli Amici di Andrea; 28/06 Memorial Andrea Foglia - 11ª Edizione (Domenica) - Gli Amici di Andrea.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4506,6 +4542,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
         <p class="event-desc">Notte Bianca nel Quartiere Cristo di Alessandria. Una serata di eventi, musica e intrattenimento per accendere la notte nel quartiere.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4524,7 +4561,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 07:30-13:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Secondo raduno di auto storiche e Youngtimer a Molare (AL). Il programma prevede ritrovo dalle 7:30 alle 10:30 per iscrizioni e consegna gadget, partenza alle 11:00 per…</p>
+        <p class="event-desc">Secondo raduno di auto storiche e Youngtimer a Molare (AL). Il programma prevede ritrovo dalle 7:30 alle 10:30 per iscrizioni e consegna gadget, partenza alle 11:00 per un giro turistico sulle colline ovadesi verso Montaldo Bormida con visita guidata e aperitivo alla Cantina Tre Castelli, e rientro alle 13:00 per pranzo sotto il campanile con l&#x27;agriturismo A Modo Mio. Chiusura iscrizioni 21/06/2026.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Iscrizione 15 euro a…</span>
           
@@ -4543,7 +4581,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 17:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 6-12 anni</span>
         </div>
-        <p class="event-desc">Laboratorio di equilibrismo e giocoleria per bambini dai 6 ai 12 anni, organizzato da Aps NessunIsola e Asd Squilibria Circo. Il contributo di 10 euro include tessera e…</p>
+        <p class="event-desc">Laboratorio di equilibrismo e giocoleria per bambini dai 6 ai 12 anni, organizzato da Aps NessunIsola e Asd Squilibria Circo. Il contributo di 10 euro include tessera e assicurazione. A seguire cena condivisa.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">10 euro (comprensivo di tessera…</span>
           
@@ -4562,7 +4601,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
-        <p class="event-desc">Evento cicloturistico in stile retrò nel centro storico di Tortona. Una pedalata tra le bellezze del territorio organizzata in collaborazione con Colli di Coppi e il…</p>
+        <p class="event-desc">Evento cicloturistico in stile retrò nel centro storico di Tortona. Una pedalata tra le bellezze del territorio organizzata in collaborazione con Colli di Coppi e il Comune di Castellania Coppi.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -4581,7 +4621,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 10:00-21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Seconda giornata della festa Canta Cián. In programma: apertura mercatino e stand gastronomici (ore 10), Magotaz e Bolle Giganti - spettacolo per bambini (ore 17),…</p>
+        <p class="event-desc">Seconda giornata della festa Canta Cián. In programma: apertura mercatino e stand gastronomici (ore 10), Magotaz e Bolle Giganti - spettacolo per bambini (ore 17), premiazione concorso di lettura, apertura stand gastronomici e ristorante Da Santin (ore 19), concerto No Hero - Elisa Tribute Band (ore 21) con premiazione Concorso Angolo Fiorito. Mostra fotografica a cura di PHOTO35.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Canta Cián 2026</span>
@@ -4600,7 +4641,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Disclosure Day&#x27; di Steven Spielberg, Usa 2026. Organizzato dal Comune di Ovada e Centro…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Disclosure Day&#x27; di Steven Spielberg, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -4619,7 +4661,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · mattina</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
-        <p class="event-desc">Ciclostorica con biciclette d&#x27;epoca attraverso i colli dedicati ai campioni Serse e Fausto Coppi. Un evento che celebra la tradizione ciclistica italiana in un percorso…</p>
+        <p class="event-desc">Ciclostorica con biciclette d&#x27;epoca attraverso i colli dedicati ai campioni Serse e Fausto Coppi. Un evento che celebra la tradizione ciclistica italiana in un percorso panoramico.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -4638,7 +4681,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 09:00-12:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Un apicoltore guiderà i partecipanti tra le piante di lavanda e le api al lavoro. Verranno messe a disposizione adeguate protezioni per tutti i partecipanti, in…</p>
+        <p class="event-desc">Un apicoltore guiderà i partecipanti tra le piante di lavanda e le api al lavoro. Verranno messe a disposizione adeguate protezioni per tutti i partecipanti, in particolare per i bambini. Chi desidera raccogliere la lavanda può portare cestino e forbicioni.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4657,7 +4701,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 16:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Laboratorio fotografico per bambini ideato e condotto dai ragazzi del centro estivo della Parrocchia di Valmadonna. Un percorso creativo tra storie e fotografia.…</p>
+        <p class="event-desc">Laboratorio fotografico per bambini ideato e condotto dai ragazzi del centro estivo della Parrocchia di Valmadonna. Un percorso creativo tra storie e fotografia. L&#x27;attività si svolge nell&#x27;ambito del Festival Libri\&amp;Arte in Valle 2026.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Festival Libri\&amp;Arte in Valle 2026</span>
@@ -4676,7 +4721,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 11:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Laboratorio per bambini ideato e condotto dai ragazzi del centro estivo della Parrocchia di Valmadonna. I piccoli partecipanti potranno decorare la propria bicicletta in…</p>
+        <p class="event-desc">Laboratorio per bambini ideato e condotto dai ragazzi del centro estivo della Parrocchia di Valmadonna. I piccoli partecipanti potranno decorare la propria bicicletta in modo creativo. L&#x27;attività si svolge nell&#x27;ambito del Festival Libri\&amp;Arte in Valle 2026.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Festival Libri\&amp;Arte in Valle 2026</span>
@@ -4695,7 +4741,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 28 giu 2026 · 10:00-12:00 e 15:00-18:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Taxi Rally nell&#x27;ambito del 2° Autogiro Summerqua Quattordio e 1° Memorial Venturini Antonio. I partecipanti possono salire a bordo come navigatori sulle auto da rally e…</p>
+        <p class="event-desc">Taxi Rally nell&#x27;ambito del 2° Autogiro Summerqua Quattordio e 1° Memorial Venturini Antonio. I partecipanti possono salire a bordo come navigatori sulle auto da rally e da drift presenti, portando con sé il proprio casco. L&#x27;intero ricavato della giornata sarà devoluto al Gruppo AIDO Intercomunale &#x27;Cristina Venezia&#x27;.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -4714,7 +4761,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 30 giu 2026 · 17:15</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4 anni e oltre</span>
         </div>
-        <p class="event-desc">Spettacolo per bambini dai 4 anni tratto dagli albi illustrati, a cura delle attrici Ilaria Saccà e Chiara Arossa. L&#x27;evento fa parte della rassegna &#x27;I Martedì nel…</p>
+        <p class="event-desc">Spettacolo per bambini dai 4 anni tratto dagli albi illustrati, a cura delle attrici Ilaria Saccà e Chiara Arossa. L&#x27;evento fa parte della rassegna &#x27;I Martedì nel Chiostro delle Storie&#x27;, ciclo estivo di letture, laboratori e attività per bambini presso la Biblioteca Civica di Novi Ligure.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4734,6 +4782,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-12 mesi (genitori e…</span>
         </div>
         <p class="event-desc">Corso di massaggio infantile certificato A.I.M.I. rivolto a genitori con bambini da 0 a 12 mesi. Le informazioni e le iscrizioni sono disponibili su contatto diretto.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -4752,7 +4801,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 lug al 29 lug · 17:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 0-3 anni (neonati e…</span>
         </div>
-        <p class="event-desc">Pomeriggio dedicato al massaggio infantile, filastrocche e coccole in musica. Un momento tenero e coinvolgente per i più piccoli e i loro genitori all&#x27;aperto. Programma:…</p>
+        <p class="event-desc">Pomeriggio dedicato al massaggio infantile, filastrocche e coccole in musica. Un momento tenero e coinvolgente per i più piccoli e i loro genitori all&#x27;aperto. Programma: 01/07 Un prato di coccole; 08/07 I colori dell&#x27;estate; 15/07 Filo di Mamme; 22/07 Spruzzi in allegria; 29/07 Tutti in vacanza\!.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">19/06/2026 09:22</span>
@@ -4771,7 +4821,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 2 lug al 30 lug · 09:00-12:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-11 anni</span>
         </div>
-        <p class="event-desc">La Biblioteca Comunale E. Arecco invita i bambini dai 3 agli 11 anni a partecipare all&#x27;iniziativa estiva &#x27;E...State con Noi 2026&#x27;. Gli incontri si svolgono tutti i…</p>
+        <p class="event-desc">La Biblioteca Comunale E. Arecco invita i bambini dai 3 agli 11 anni a partecipare all&#x27;iniziativa estiva &#x27;E...State con Noi 2026&#x27;. Gli incontri si svolgono tutti i lunedì e giovedì dalle 9 alle 12, dal 2 al 30 luglio 2026. La partecipazione è gratuita, è preferibile la prenotazione.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4790,7 +4841,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Michael&#x27; di Antoine Fuqua, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Michael&#x27; di Antoine Fuqua, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -4809,7 +4861,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Città di Pianura&#x27; di Francesco Sossai, Italia/Germania 2025. Organizzato dal Comune di…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Città di Pianura&#x27; di Francesco Sossai, Italia/Germania 2025. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -4828,7 +4881,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 3 lug al 5 lug · 19:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
-        <p class="event-desc">Tre serate di musica folk e spettacoli in piazza. Venerdì 3 luglio: Roby Circus Art e The Legendary Kid Combo. Sabato 4 luglio: danza acrobatica e Bistrò Dalfin (folk…</p>
+        <p class="event-desc">Tre serate di musica folk e spettacoli in piazza. Venerdì 3 luglio: Roby Circus Art e The Legendary Kid Combo. Sabato 4 luglio: danza acrobatica e Bistrò Dalfin (folk occitano). Domenica 5 luglio: scivolo gonfiabile e Clan Banlieue (agrifolk). Apertura cucina dalle ore 19:00 con menu tipico, servizio bar e pista da ballo.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4847,7 +4901,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 3 lug al 5 lug · dalle 19:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Festival musicale folk alla sua 8ª edizione, in tre serate: venerdì con Roby Circus Art e The Legendary Kid Combo, sabato con danza acrobatica e Bistrò Dalfin (folk…</p>
+        <p class="event-desc">Festival musicale folk alla sua 8ª edizione, in tre serate: venerdì con Roby Circus Art e The Legendary Kid Combo, sabato con danza acrobatica e Bistrò Dalfin (folk occitano), domenica con scivolo gonfiabile e Clan Banlieue (agrifolk). Apertura cucina dalle 19:00 con menù completo, servizio bar e pista da ballo. Ingresso libero.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4867,6 +4922,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Luna Park in Piazza Don Dolermo per tutta la durata della Fiera di San Guido, dal 3 al 14 luglio. Giostre e attrazioni per grandi e piccini.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -4885,7 +4941,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 lug 2026 · 19:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Venerdì 3 luglio presso la Cantina Terre Astesane: Giornata delle Associazioni con esibizione di taekwondo, mostra itinerante MusarMO e presenza delle associazioni di…</p>
+        <p class="event-desc">Venerdì 3 luglio presso la Cantina Terre Astesane: Giornata delle Associazioni con esibizione di taekwondo, mostra itinerante MusarMO e presenza delle associazioni di Mombercelli dalle ore 19:30. Alle ore 21 musica live con Sofa Oversize, a seguire DJ set con Fabry Violino. Menu con agnolotti, pulled pork, hamburger, salamelle, patatine, dolce e caffè.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">MOMBack Dance 2026</span>
@@ -4904,7 +4961,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 4 lug al 5 lug · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">14ª edizione della Sagra delle Lasagne organizzata dalla Pro Loco Orsara Bormida. In menu&#x27;: lasagne al ragù, al pesto, ai formaggi e lasagne vegane, oltre ai piatti…</p>
+        <p class="event-desc">14ª edizione della Sagra delle Lasagne organizzata dalla Pro Loco Orsara Bormida. In menu&#x27;: lasagne al ragù, al pesto, ai formaggi e lasagne vegane, oltre ai piatti della tradizione. Musica con DJ Sir William (sabato) e Dr. Who? (domenica), mercatino di prodotti tipici e artigianali, area bimbi e apertura del Museo Etnografico della Civiltà Contadina domenica 5 luglio dalle 17:00 alle 21:00.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -4923,7 +4981,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 lug 2026 · 19:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Sabato 4 luglio presso la Cantina Terre Astesane: alle ore 19 partenza della Friciula Run. Alle ore 21:30 musica live con Super Flash. Menu a base di friciula con lardo,…</p>
+        <p class="event-desc">Sabato 4 luglio presso la Cantina Terre Astesane: alle ore 19 partenza della Friciula Run. Alle ore 21:30 musica live con Super Flash. Menu a base di friciula con lardo, pulled pork, hamburger, salamelle, patatine, dolce e caffè.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">MOMBack Dance 2026</span>
@@ -4942,7 +5001,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -4961,7 +5021,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 lug 2026 · 10:00-13:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Workshop per adulti dedicato alla creazione di piccoli libri-oggetto. Un tipo di libro che non è solo parola e immagine ma è un mondo a sé, parlante. A cura di Valentina…</p>
+        <p class="event-desc">Workshop per adulti dedicato alla creazione di piccoli libri-oggetto. Un tipo di libro che non è solo parola e immagine ma è un mondo a sé, parlante. A cura di Valentina Gottardi.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
@@ -4980,7 +5041,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 lug 2026 · 18:00-02:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Seconda serata della Notti Bianche di Asti con piatti tipici dei Comitati Palio e DJ set, area bambini e famiglie, artigianato, Cantanapoli, serata anni &#x27;80 e spettacoli…</p>
+        <p class="event-desc">Seconda serata della Notti Bianche di Asti con piatti tipici dei Comitati Palio e DJ set, area bambini e famiglie, artigianato, Cantanapoli, serata anni &#x27;80 e spettacoli itineranti. Una notte di festa nel cuore di Asti.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Notti Bianche Asti 2026</span>
@@ -4999,7 +5061,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 lug 2026 · 18:00-02:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Seconda serata delle Notti Bianche di Asti, &#x27;Divertimento sotto le stelle&#x27;. In programma: piatti tipici con i Comitati Palio e DJ set, area bambini e famiglie,…</p>
+        <p class="event-desc">Seconda serata delle Notti Bianche di Asti, &#x27;Divertimento sotto le stelle&#x27;. In programma: piatti tipici con i Comitati Palio e DJ set, area bambini e famiglie, artigianato, CantaNapoli, serata anni &#x27;80 e spettacoli itineranti.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5018,7 +5081,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 4 lug al 5 lug · 16:00 - tarda notte (e…</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le eta&#x27; (famiglie)</span>
         </div>
-        <p class="event-desc">ValleStock è un festival musicale no-stop ispirato allo spirito di Woodstock, con musica dal vivo dalle 16:00 a tarda notte e ripresa il mattino del 5 luglio con…</p>
+        <p class="event-desc">ValleStock è un festival musicale no-stop ispirato allo spirito di Woodstock, con musica dal vivo dalle 16:00 a tarda notte e ripresa il mattino del 5 luglio con l&#x27;evento &#x27;Passaggi&#x27;. Numerose band e artisti tra cui Banda della Valle Stura, Acoustic Waves, Wildflowers, Ghost Riders, Ginevra Nervi, Paolo Bonfanti &amp; Super Band e molti altri. Presenti area food &amp; beverage, area bimbi, area tende e ospiti dell&#x27;organizzazione umanitaria Music for Peace.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5037,7 +5101,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 4 lug al 5 lug · 18:00-24:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le eta&#x27; (famiglie)</span>
         </div>
-        <p class="event-desc">Sabato 4 luglio, nell&#x27;ambito del Weekend a Ponzone, si esibisce ALU DJ, vincitori del DJ Battle di Ovada 2025. Serata musicale dalle 18 a mezzanotte con stand…</p>
+        <p class="event-desc">Sabato 4 luglio, nell&#x27;ambito del Weekend a Ponzone, si esibisce ALU DJ, vincitori del DJ Battle di Ovada 2025. Serata musicale dalle 18 a mezzanotte con stand enogastronomici delle Pro Loco partecipanti. Programma: 04/07 Concerto ALU DJ; 04/07-05/07 Sapori, Tradizione e Divertimento - Stand Gastronomici e Mercatini; 05/07 Concerto The Dugongos.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5057,6 +5122,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
         <p class="event-desc">19° Raduno delle Pro Loco a Ponzone. Un weekend all&#x27;insegna di sapori, musica e tradizione nel caratteristico borgo piemontese.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5075,7 +5141,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 lug 2026 · 17:00 ritrovo / 17:30…</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Corsa di beneficenza non competitiva di 3,5 km aperta a tutti, con colori e divertimento. Il ricavato sarà devoluto ad ANDOS Casale Monferrato, Dynamo 12 Ore per Dynamo…</p>
+        <p class="event-desc">Corsa di beneficenza non competitiva di 3,5 km aperta a tutti, con colori e divertimento. Il ricavato sarà devoluto ad ANDOS Casale Monferrato, Dynamo 12 Ore per Dynamo Camp e Oratorio Borgo San Martino. Per partecipare basta acquistare la t-shirt dell&#x27;evento; per i bambini fino a 5 anni la partecipazione è gratuita (senza t-shirt). Saranno disponibili spogliatoi e docce.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5094,7 +5161,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -5113,7 +5181,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 lug 2026 · 19:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Torna la Sagra degli Gnocchi organizzata dalla Pro Loco Borgoratto: a partire dalle ore 19:00 si potranno gustare i famosi gnocchi in tutte le salse, preparati a mano…</p>
+        <p class="event-desc">Torna la Sagra degli Gnocchi organizzata dalla Pro Loco Borgoratto: a partire dalle ore 19:00 si potranno gustare i famosi gnocchi in tutte le salse, preparati a mano seguendo ricette tradizionali con ingredienti DOP certificati. In serata concerto con Hollywood Show.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5132,7 +5201,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 lug 2026 · 16:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Lettura e laboratorio dedicato alle api selvatiche, quelle che ronzano e danzano. Un albo illustrato per scoprire e ricreare insieme insetti meravigliosi. A cura di…</p>
+        <p class="event-desc">Lettura e laboratorio dedicato alle api selvatiche, quelle che ronzano e danzano. Un albo illustrato per scoprire e ricreare insieme insetti meravigliosi. A cura di Valentina Gottardi.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
@@ -5151,7 +5221,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 lug 2026 · 11:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Festa di paese a Frazione Giarolo con hobbisti e produttori locali, giochi e buon cibo. Nel pomeriggio intrattenimento per bambini con Associazione Talea APS e Silverado…</p>
+        <p class="event-desc">Festa di paese a Frazione Giarolo con hobbisti e produttori locali, giochi e buon cibo. Nel pomeriggio intrattenimento per bambini con Associazione Talea APS e Silverado Ranch. Aperitivo serale dalle 18:30 alle 19:30 con lo chef Fabrizio Rebollini presso la piscina &#x27;A Un Passo Dal Cielo&#x27; (su prenotazione). Piscina aperta tutto il giorno.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5170,7 +5241,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 lug 2026 · 11:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Festa di paese a Frazione Giarolo con hobbisti e produttori locali, giochi e buon cibo. Nel pomeriggio intrattenimento per bambini con Associazione Talea APS e Silverado…</p>
+        <p class="event-desc">Festa di paese a Frazione Giarolo con hobbisti e produttori locali, giochi e buon cibo. Nel pomeriggio intrattenimento per bambini con Associazione Talea APS e Silverado Ranch. Piscina aperta tutto il giorno e aperitivo dalle 18:30 alle 19:30 con lo chef Fabrizio Rebollini presso la piscina di Giarolo &#x27;A Un Passo Dal Cielo&#x27; (su prenotazione).</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5189,7 +5261,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 6 lug al 3 ago · 10:00-11:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 2-5 anni</span>
         </div>
-        <p class="event-desc">Laboratorio aperto alla cittadinanza dedicato alla favola di Frozen. Lettura della favola e attività ludico-creativa per bambini dai 2 ai 5 anni accompagnati da un…</p>
+        <p class="event-desc">Laboratorio aperto alla cittadinanza dedicato alla favola di Frozen. Lettura della favola e attività ludico-creativa per bambini dai 2 ai 5 anni accompagnati da un caregiver. Iscrizione obbligatoria. Programma: 06/07 Alla (Ri)scoperta delle Favole Disney – Frozen - Cooperativa Sociale Il Gabbiano; 13/07 Alla (Ri)scoperta delle Favole Disney – Il Re Leone - Cooperativa Sociale Il Gabbiano; 20/07 Alla (Ri)scoperta delle Favole Disney – La Sirenetta - Cooperativa Sociale Il Gabbiano; 27/07 Alla (Ri)scoperta delle Favole Disney – Winnie the Pooh - Cooperativa Sociale Il Gabbiano; 03/08 Alla (Ri)scoperta delle Favole Disney – Rapunzel - Cooperativa Sociale Il Gabbiano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5208,7 +5281,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 6 lug al 23 lug · 9:00-12:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 11 anni e oltre</span>
         </div>
-        <p class="event-desc">Laboratorio teatrale con l&#x27;autore Giuseppe Vassallo. Gli incontri si svolgono il 6-9-10, 13-16-17 e 20-21-23 luglio presso il Teatro della Torretta. Età minima 11 anni.…</p>
+        <p class="event-desc">Laboratorio teatrale con l&#x27;autore Giuseppe Vassallo. Gli incontri si svolgono il 6-9-10, 13-16-17 e 20-21-23 luglio presso il Teatro della Torretta. Età minima 11 anni. Pre-iscrizione obbligatoria, verificare disponibilità posti.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -5227,7 +5301,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 9 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Rental Family - Nelle Vite degli Altri&#x27; di Hikari, Usa/Giappone 2025. Organizzato dal…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Rental Family - Nelle Vite degli Altri&#x27; di Hikari, Usa/Giappone 2025. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -5247,6 +5322,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Serata rock con musica live e fire show nella suggestiva zona degli Archi Romani. Apertura della Fiera di San Guido 2026 con un evento spettacolare all&#x27;aperto.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5265,7 +5341,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 10 lug al 14 lug · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">La Fiera di San Guido anima Acqui Terme dal 10 al 14 luglio 2026 con musica dal vivo, spettacoli, mercatini, area gastronomica e luna park tra la zona degli Archi Romani…</p>
+        <p class="event-desc">La Fiera di San Guido anima Acqui Terme dal 10 al 14 luglio 2026 con musica dal vivo, spettacoli, mercatini, area gastronomica e luna park tra la zona degli Archi Romani e il centro città. Programma: 03/07-14/07 Luna Park; 10/07 Acqui Rock Night 2026; 10/07-13/07 Area Gastronomica Archi Romani; 11/07 Acqui al Chiaro di Luna; 11/07 Shary Band Concerto + DJ Set; 12/07 Manifestazione Automobilistica Raduni Eclipse; 12/07 Mercatino del Bambino Giocando si Impara; 12/07 Miss Reginetta d&#x27;Italia Finale Regionale Basso Piemonte e Liguria; 12/07-14/07 Bancarelle Centro Cittadino; 13/07 Concerto Corpo Bandistico Acquese e Spettacolo Pirotecnico.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5284,7 +5361,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 10 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Marty Supreme&#x27; con Timothée Chalamet, Usa 2025. Organizzato dal Comune di Ovada e Centro…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Marty Supreme&#x27; con Timothée Chalamet, Usa 2025. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -5303,7 +5381,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 10 lug al 12 lug · 22:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le eta&#x27; (famiglie)</span>
         </div>
-        <p class="event-desc">Apertura della Sagra del Vitello di Razza Piemontese con stand gastronomico (antipasti, hamburger, primi, dolci, birra alla spina, cocktail). Dalle ore 22:00 cottura del…</p>
+        <p class="event-desc">Apertura della Sagra del Vitello di Razza Piemontese con stand gastronomico (antipasti, hamburger, primi, dolci, birra alla spina, cocktail). Dalle ore 22:00 cottura del vitello intero allo spiedo con concerto del gruppo Enarmonia - Tributo alle Voci, a seguire DJ set con Gianni. Programma: 10/07 Serata Enarmonia - Tributo alle Voci; 11/07 Vitello allo spiedo e B-Side Band; 12/07 Serata Vansun con Zona Pezzali.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5322,7 +5401,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 10 lug al 13 lug · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Tutte le sere dell&#x27;evento, nell&#x27;Area Gastronomica degli Archi Romani, si potranno gustare specialità locali: carne piemontese alla griglia, gnocco tricolore, raviolata e…</p>
+        <p class="event-desc">Tutte le sere dell&#x27;evento, nell&#x27;Area Gastronomica degli Archi Romani, si potranno gustare specialità locali: carne piemontese alla griglia, gnocco tricolore, raviolata e farinata. Info e prenotazioni WhatsApp al 349 2160276.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5342,6 +5422,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Visita guidata notturna al centro storico di Acqui Terme. Un percorso suggestivo tra i monumenti e le bellezze della città illuminata dalla luna.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5360,7 +5441,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 11 lug 2026 · 16:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Lettura e laboratorio con Michela Nodari. Due modi per arrivare a destinazione: uno è dirigersi direttamente, l&#x27;altro è arrivarci per vie non lineari. Quante cose si…</p>
+        <p class="event-desc">Lettura e laboratorio con Michela Nodari. Due modi per arrivare a destinazione: uno è dirigersi direttamente, l&#x27;altro è arrivarci per vie non lineari. Quante cose si scoprono e quanti incontri incredibili si perdono per strada.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
@@ -5379,7 +5461,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 11 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -5399,6 +5482,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Concerto spettacolo della Shary Band seguito da un DJ Set con i grandi successi degli anni &#x27;70, &#x27;80 e &#x27;90. Serata musicale nella zona degli Archi Romani.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5418,6 +5502,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Bancarelle nelle vie del centro cittadino di Acqui Terme dal 12 al 14 luglio. Shopping, artigianato e prodotti locali nel cuore della città durante la Fiera di San Guido.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5436,7 +5521,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 12 lug 2026 · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">10ª edizione della gara di imbarcazioni artigianali sul Po: i partecipanti costruiscono natanti di fortuna e si sfidano sull&#x27;acqua tra divertimento e spettacolo. Le…</p>
+        <p class="event-desc">10ª edizione della gara di imbarcazioni artigianali sul Po: i partecipanti costruiscono natanti di fortuna e si sfidano sull&#x27;acqua tra divertimento e spettacolo. Le iscrizioni sono aperte. Organizzato dall&#x27;associazione Amici del Po Casale Monferrato.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -5456,6 +5542,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Manifestazione automobilistica a cura di Raduni Eclipse nella zona Bagni di Acqui Terme. Esposizione e sfilata di auto nella cornice della Fiera di San Guido.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5474,7 +5561,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 12 lug 2026 · 15:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Mercatino dedicato ai bambini a cura di S.P.A.T. con il tema &quot;Giocando si Impara&quot;. Un&#x27;occasione per i più piccoli di divertirsi e scoprire nuovi giochi e attività…</p>
+        <p class="event-desc">Mercatino dedicato ai bambini a cura di S.P.A.T. con il tema &quot;Giocando si Impara&quot;. Un&#x27;occasione per i più piccoli di divertirsi e scoprire nuovi giochi e attività didattiche.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5493,7 +5581,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 12 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;Minions &amp; Monsters&#x27; di Pierre Coffin, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -5513,6 +5602,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Finale Regionale Basso Piemonte e Liguria di Miss Reginetta d&#x27;Italia, presentata da Liliana Ruocco. Esibizioni a cura delle associazioni di danza e sportive acquesi.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5531,7 +5621,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 12 lug 2026 · 09:00-17:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Raduno di auto d&#x27;epoca organizzato dalla Pro Loco di Cassinelle. Il programma prevede ritrovo alle 9:00 presso l&#x27;ex chiesa Santa Margherita, tour del territorio con…</p>
+        <p class="event-desc">Raduno di auto d&#x27;epoca organizzato dalla Pro Loco di Cassinelle. Il programma prevede ritrovo alle 9:00 presso l&#x27;ex chiesa Santa Margherita, tour del territorio con partenza alle 10:30, visita al Museo Afer di Tiglieto e rientro per il pranzo alle 14:00 circa. Nel pomeriggio le auto restano esposte in paese. Numero massimo di iscritti: 100.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Iscrizione auto 15€; Pranzo 20€…</span>
           
@@ -5551,6 +5642,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
         <p class="event-desc">Concerto del Corpo Bandistico Acquese seguito da uno spettacolo pirotecnico. La serata si conclude con il Fireworks Party con DJ Set a cura di Savage dalle ore 23:00.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
@@ -5569,7 +5661,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 13 lug 2026 · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
         </div>
-        <p class="event-desc">Spettacolo finale del laboratorio dedicato ai bambini, a cura di Francesca Ragno, Belen Gonzáles Fernández, Marco Salvatico, Elena Cantarella, Chiara Cosentino e Susanna…</p>
+        <p class="event-desc">Spettacolo finale del laboratorio dedicato ai bambini, a cura di Francesca Ragno, Belen Gonzáles Fernández, Marco Salvatico, Elena Cantarella, Chiara Cosentino e Susanna Rizzi. I bambini incontrano il magico mondo dei burattini in una serata speciale. In caso di maltempo lo spettacolo si terrà presso il teatro comunale SOMS.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
@@ -5588,7 +5681,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 13 lug al 9 ago · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema sotto le Stelle ogni lunedì 13 e 20 luglio, a cura dell&#x27;Assessorato al Turismo. Proiezioni cinematografiche all&#x27;aperto nella Corte del Castello di Pozzolo…</p>
+        <p class="event-desc">Cinema sotto le Stelle ogni lunedì 13 e 20 luglio, a cura dell&#x27;Assessorato al Turismo. Proiezioni cinematografiche all&#x27;aperto nella Corte del Castello di Pozzolo Formigaro. Programma: 13/07-20/07 Cinema sotto le Stelle - Assessorato al Turismo; 18/07 La Vedova Allegra - Operetta al Castello - A.C.P.S. La Frascheta A.P.S.; 19/07 Gran Torneo di Burraco sotto le Stelle - Centro Anziani; 22/07 Francesco Costa - Attraverso Festival - Assessorato al Turismo; 24/07 Sotto a Chi Tocca - Omaggio a Gilberto Govi - Compagnia Sopra il Palco; 30/07 Trio dell&#x27;Isola in concerto - A.C.P.S. La Frascheta; 06/08-09/08 Festa d&#x27;Agosto - Pro Loco Pozzolese; 08/08 Trofeo Comune di Pozzolo F.ro e ASD Fornasari Auto - Gara ciclistica su strada.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5607,7 +5701,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 14 lug 2026 · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
         </div>
-        <p class="event-desc">Spettacolo di burattini a cura di Baraca e Boratì di Bergamo. Storia di coraggio, duelli e gran mangiate, dove l&#x27;eroe alla fine vince sempre. Nell&#x27;ambito del Premio…</p>
+        <p class="event-desc">Spettacolo di burattini a cura di Baraca e Boratì di Bergamo. Storia di coraggio, duelli e gran mangiate, dove l&#x27;eroe alla fine vince sempre. Nell&#x27;ambito del Premio Silvano d&#x27;Orba 2026. In caso di maltempo presso il teatro comunale SOMS.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
@@ -5626,7 +5721,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 15 lug 2026 · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
         </div>
-        <p class="event-desc">Spettacolo di burattini a cura di Francesca Zoccarato (Milano-Friuli). Varietà Prestige: spettacolo in carne, legno e fantasie surreali. Nell&#x27;ambito del Premio Silvano…</p>
+        <p class="event-desc">Spettacolo di burattini a cura di Francesca Zoccarato (Milano-Friuli). Varietà Prestige: spettacolo in carne, legno e fantasie surreali. Nell&#x27;ambito del Premio Silvano d&#x27;Orba 2026. In caso di maltempo presso il teatro comunale SOMS.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
@@ -5645,7 +5741,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 16 lug 2026 · 21:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;La Villa Portoghese&#x27; di Avelina Prat, Spagna/Portogallo 2025. Organizzato dal Comune di…</p>
+        <p class="event-desc">Cinema all&#x27;aperto nel giardino della Scuola di Musica di Ovada. In programma &#x27;La Villa Portoghese&#x27; di Avelina Prat, Spagna/Portogallo 2025. Organizzato dal Comune di Ovada e Centro Culturale Carignano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
@@ -5664,7 +5761,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 16 lug al 21 lug · 20:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le eta&#x27; (famiglie)</span>
         </div>
-        <p class="event-desc">Gara podistica non competitiva aperta a tutti. Memorial &#x27;Avvocati Gianluca Mastinu e Emiliano Lano&#x27;. Pasta per tutti i partecipanti. Programma: 16/07 Strà San Martino -…</p>
+        <p class="event-desc">Gara podistica non competitiva aperta a tutti. Memorial &#x27;Avvocati Gianluca Mastinu e Emiliano Lano&#x27;. Pasta per tutti i partecipanti. Programma: 16/07 Strà San Martino - Gara Podistica; 17/07 Shary Band - Tributo Ufficiale Italiano alla Disco Music + DJ Set MADJ; 18/07 Serata Danzante con Marianna Lanteri; 19/07 Serata Danzante con Orchestra Matteo Tarantino; 20/07 Serata con l&#x27;Orchestra Spettacolo Pietro Galassi; 21/07 Alex e La Band con ospite Marco Zeta + Grande Spettacolo Pirotecnico.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5683,7 +5781,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 16 lug 2026 · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
         </div>
-        <p class="event-desc">Spettacolo di burattini a cura del Teatro Medico Ipnotico di Parma. Il Cane Infernale: musica e pensiero contro violenza e pregiudizio. Nell&#x27;ambito del Premio Silvano…</p>
+        <p class="event-desc">Spettacolo di burattini a cura del Teatro Medico Ipnotico di Parma. Il Cane Infernale: musica e pensiero contro violenza e pregiudizio. Nell&#x27;ambito del Premio Silvano d&#x27;Orba 2026. In caso di maltempo presso il teatro comunale SOMS.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
@@ -5702,7 +5801,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 17 lug 2026 · 21:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 4-12 anni</span>
         </div>
-        <p class="event-desc">Spettacolo di burattini a cura del Teatro Pane e Mate di Abbiategrasso. Il Cuoco e la Sirena: il viaggio sognante di un cuoco sbadato e della sua amica sirena.…</p>
+        <p class="event-desc">Spettacolo di burattini a cura del Teatro Pane e Mate di Abbiategrasso. Il Cuoco e la Sirena: il viaggio sognante di un cuoco sbadato e della sua amica sirena. Nell&#x27;ambito del Premio Silvano d&#x27;Orba 2026. In caso di maltempo presso il teatro comunale SOMS.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
@@ -5721,7 +5821,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 24 lug 2026 · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Stratrüggia 2026 è una corsa podistica organizzata dalla Pro Loco di Terruggia in collaborazione con AVIS Casale. Prevede una corsa adulti di circa 6,5 km (agonisti UISP…</p>
+        <p class="event-desc">Stratrüggia 2026 è una corsa podistica organizzata dalla Pro Loco di Terruggia in collaborazione con AVIS Casale. Prevede una corsa adulti di circa 6,5 km (agonisti UISP e non agonisti) e una corsa bambini di circa 1,5 km. L&#x27;evento è dedicato ad Angela.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
@@ -5740,7 +5841,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 25 lug 2026 · 16:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Lettura e laboratorio con Bimba Landman. I Kodama sono gli spiriti degli alberi nella tradizione giapponese. Un incontro per conoscerli e portarne a casa uno creato con…</p>
+        <p class="event-desc">Lettura e laboratorio con Bimba Landman. I Kodama sono gli spiriti degli alberi nella tradizione giapponese. Un incontro per conoscerli e portarne a casa uno creato con gli acquerelli, seguito da laboratorio sulla vita segreta del bosco con esperta di biodiversità.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
@@ -5759,7 +5861,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 8 ago 2026 · 17:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età (famiglie)</span>
         </div>
-        <p class="event-desc">Piccola passeggiata per scoprire chi si nasconde nel bosco con Chiara Morosinotto. Dalla scienziata che ha studiato gli allocchi in Finlandia arriva un libro…</p>
+        <p class="event-desc">Piccola passeggiata per scoprire chi si nasconde nel bosco con Chiara Morosinotto. Dalla scienziata che ha studiato gli allocchi in Finlandia arriva un libro appassionante. A seguire laboratorio con l&#x27;Ente Parco Appennino Piemontese.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
@@ -5778,7 +5881,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 22 ago 2026 · 16:00</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 3-10 anni</span>
         </div>
-        <p class="event-desc">Lettura e laboratorio con Daniela Pareschi. Basta andare oltre il primo sguardo per scoprire le trame nascoste che tengono insieme tutte le cose del mondo. Con diverse…</p>
+        <p class="event-desc">Lettura e laboratorio con Daniela Pareschi. Basta andare oltre il primo sguardo per scoprire le trame nascoste che tengono insieme tutte le cose del mondo. Con diverse forme e colori si scopre come tutto si può trasformare sotto i nostri occhi.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
@@ -5797,7 +5901,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 24 ago al 31 ago · 10:00-11:30</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> 2-5 anni</span>
         </div>
-        <p class="event-desc">Laboratorio aperto alla cittadinanza dedicato alla favola di Alice nel Paese delle Meraviglie. Lettura della favola e attività ludico-creativa per bambini dai 2 ai 5…</p>
+        <p class="event-desc">Laboratorio aperto alla cittadinanza dedicato alla favola di Alice nel Paese delle Meraviglie. Lettura della favola e attività ludico-creativa per bambini dai 2 ai 5 anni accompagnati da un caregiver. Iscrizione obbligatoria. Programma: 24/08 Alla (Ri)scoperta delle Favole Disney – Alice nel Paese delle Meraviglie - Cooperativa Sociale Il Gabbiano; 31/08 Serata Finale Cinema e Pizza Disney - Cooperativa Sociale Il Gabbiano.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5816,7 +5921,8 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> dal 1 set al 30 set · vari</span>
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
-        <p class="event-desc">Evento finale del calendario Plogging Smiling Biking: Festa dello Sport. Data esatta di settembre 2026 da definire. Evento conclusivo della rassegna ecologica e sportiva…</p>
+        <p class="event-desc">Evento finale del calendario Plogging Smiling Biking: Festa dello Sport. Data esatta di settembre 2026 da definire. Evento conclusivo della rassegna ecologica e sportiva di Novi Ligure.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -5836,6 +5942,7 @@
           <span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Tutte le età</span>
         </div>
         <p class="event-desc">Pedalata ecologica nella zona Merella di Novi Ligure. Evento cicloturistico in chiave ambientale.</p>
+        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
@@ -6000,6 +6107,22 @@
     });
 
     apply(); // conteggio iniziale
+  })();
+
+  // "Leggi tutto": mostra il toggle solo quando la descrizione è troncata
+  (function () {
+    document.querySelectorAll('#events-grid .event-card').forEach(function (card) {
+      const desc = card.querySelector('.event-desc');
+      const btn = card.querySelector('.event-readmore');
+      if (!desc || !btn) return;
+      if (desc.scrollHeight - desc.clientHeight > 2) {
+        btn.hidden = false;
+        btn.addEventListener('click', function () {
+          const open = desc.classList.toggle('expanded');
+          btn.textContent = open ? 'Leggi meno' : 'Leggi tutto';
+        });
+      }
+    });
   })();
 
   // Protezione anti-copia del testo (deterrente per copia/selezione casuale)
