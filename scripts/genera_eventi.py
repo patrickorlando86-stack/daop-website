@@ -124,6 +124,17 @@ PIN_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="c
 CLOCK_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 USER_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>'
 
+# colore (bordo/accent) e tinta (sfondo cerchietto emoji) per categoria
+COLORS = {
+    'feste': ('#e8954a', 'rgba(232,149,74,0.14)'),
+    'spettacoli': ('#6c63a6', 'rgba(108,99,166,0.14)'),
+    'laboratori': ('#6ba5a8', 'rgba(107,165,168,0.16)'),
+    'musica': ('#c9a227', 'rgba(201,162,39,0.16)'),
+    'sport': ('#1d9e75', 'rgba(29,158,117,0.14)'),
+    'cultura': ('#4a90b9', 'rgba(74,144,185,0.14)'),
+    'altro': ('#7e8c99', 'rgba(126,140,153,0.16)'),
+}
+
 
 def render(events):
     cards, present = [], set()
@@ -147,25 +158,24 @@ def render(events):
         else:
             price = '<span></span>'
         eta = esc(trunc(e['eta'], 26)) if e['eta'] else ''
-        eta_html = f'\n            <span>{USER_SVG} {eta}</span>' if eta else ''
+        eta_html = f'\n          <span>{USER_SVG} {eta}</span>' if eta else ''
         manifest = f'<span class="event-tag">{esc(trunc(e["manifest"], 40))}</span>' if e['manifest'] else ''
-        cards.append(f'''      <article class="event-card" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}">
-        <div class="event-media">
-          <span class="event-media-emoji" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
-          <div class="event-date"><span class="day">{d.day:02d}</span><span class="month">{MESI[d.month-1]}</span></div>
-          <span class="event-cat">{esc(catlabel)}</span>
+        color, tint = COLORS.get(slug, COLORS['altro'])
+        cards.append(f'''      <article class="event-card" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+        <div class="ev-top">
+          <span class="ev-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
+          <span class="ev-cat">{esc(catlabel)}</span>
+          <span class="ev-date"><span class="d">{d.day:02d}</span><span class="m">{MESI[d.month-1]}</span></span>
         </div>
-        <div class="event-body">
-          <h3>{esc(trunc(e['nome'], 90))}</h3>
-          <div class="event-meta">
-            <span>{PIN_SVG} {luogo}</span>
-            <span>{CLOCK_SVG} {esc(datestr)}</span>{eta_html}
-          </div>
-          <p class="event-desc">{esc(trunc(e['descr'], 170))}</p>
-          <div class="event-foot">
-            {price}
-            {manifest}
-          </div>
+        <h3>{esc(trunc(e['nome'], 90))}</h3>
+        <div class="event-meta">
+          <span>{PIN_SVG} {luogo}</span>
+          <span>{CLOCK_SVG} {esc(datestr)}</span>{eta_html}
+        </div>
+        <p class="event-desc">{esc(trunc(e['descr'], 170))}</p>
+        <div class="event-foot">
+          {price}
+          {manifest}
         </div>
       </article>''')
 
