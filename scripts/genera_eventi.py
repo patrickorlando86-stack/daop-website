@@ -11,7 +11,7 @@ Fonte dati (in ordine di priorità):
 Rigenera SOLO la griglia .events-grid e il gruppo di filtri per categoria
 dentro eventi.html, tra gli ancoraggi esistenti. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, sys
+import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, sys
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
@@ -68,7 +68,8 @@ def fetch_rows():
             'Ora': e['ora'], 'Città': e['citta'], 'Provincia': e['prov'],
             'Categoria': e['categoria'], 'Età': e['eta'], 'Prezzo': e['prezzo'],
             'Descrizione': e['descr'], 'Manifestazione': e.get('manifest', ''),
-            'Locandina': e.get('loc', ''),
+            'Locandina': e.get('loc', ''), 'Luogo': e.get('luogo', ''),
+            'Indirizzo Completo': e.get('indirizzo', ''),
         } for e in snap]
 
 
@@ -91,6 +92,7 @@ def normalize(rows):
             categoria=(d.get('Categoria', '') if d.get('Categoria', '') in KNOWN_CATS else ''),
             eta=d.get('Età', ''), prezzo=d.get('Prezzo', ''), descr=d.get('Descrizione', ''),
             manifest=d.get('Manifestazione', ''), loc=d.get('Locandina', ''),
+            luogo=d.get('Luogo', ''), indirizzo=d.get('Indirizzo Completo', ''),
             d_start=di, d_end=df,
         ))
     events.sort(key=lambda e: (e['d_start'], e['nome']))
@@ -153,6 +155,40 @@ def trunc(s, n):
 PIN_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
 CLOCK_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 USER_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>'
+CAL_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
+NAV_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+
+
+def _luogo_query(e):
+    """Stringa luogo migliore disponibile per Maps/calendario."""
+    q = (e.get('indirizzo') or '').strip()
+    if not q:
+        q = " ".join(x for x in [e.get('luogo', ''), e.get('citta', ''),
+                                 f"({e['prov']})" if e.get('prov') else ''] if x).strip()
+    return q
+
+
+def maps_url(e):
+    """Link 'Come arrivare' su Google Maps."""
+    q = _luogo_query(e)
+    if not q:
+        return ''
+    return "https://www.google.com/maps/search/?api=1&query=" + urllib.parse.quote(q + ", Italia")
+
+
+def gcal_url(e):
+    """Link 'Aggiungi al calendario' (Google Calendar, evento tutto-il-giorno:
+    niente fusi orari, robusto anche quando l'ora non è certa)."""
+    start = e['d_start'].strftime('%Y%m%d')
+    end = (e['d_end'] + datetime.timedelta(days=1)).strftime('%Y%m%d')  # fine esclusiva
+    params = {
+        'action': 'TEMPLATE',
+        'text': (e['nome'] or '').strip(),
+        'dates': f"{start}/{end}",
+        'details': (e['descr'] or '').strip()[:900],
+        'location': _luogo_query(e),
+    }
+    return "https://calendar.google.com/calendar/render?" + urllib.parse.urlencode(params)
 
 # colore (bordo/accent) e tinta (sfondo cerchietto emoji) per categoria
 COLORS = {
@@ -191,6 +227,12 @@ def render(events):
         eta_html = f'\n          <span>{USER_SVG} {eta}</span>' if eta else ''
         manifest = f'<span class="event-tag">{esc(trunc(e["manifest"], 40))}</span>' if e['manifest'] else ''
         color, tint = COLORS.get(slug, COLORS['altro'])
+        acts = []
+        murl = maps_url(e)
+        if murl:
+            acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{NAV_SVG} Come arrivare</a>')
+        acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{CAL_SVG} Calendario</a>')
+        actions = '\n        <div class="event-actions">\n          ' + '\n          '.join(acts) + '\n        </div>'
         cover_url = loc_path(e['loc'])
         cover = (f'''        <a class="ev-cover" href="{cover_url}" target="_blank" rel="noopener" aria-label="Apri la locandina di {esc(e['nome'])}">
           <img src="{cover_url}" alt="Locandina: {esc(trunc(e['nome'], 70))}" loading="lazy" decoding="async">
@@ -212,7 +254,7 @@ def render(events):
         <div class="event-foot">
           {price}
           {manifest}
-        </div>
+        </div>{actions}
       </article>''')
 
     chips = ['      <button class="filter-chip active" data-filter="all">Tutte le categorie</button>']

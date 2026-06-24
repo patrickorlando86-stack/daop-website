@@ -3577,7 +3577,7 @@
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none}
+  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
   /* consenti la selezione solo nei campi di input/textarea, se aggiunti in futuro */
   input,textarea{-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text}
   img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
@@ -3639,7 +3639,7 @@
   .events-count{font-size:0.85rem;font-weight:600;color:var(--text-light);margin:26px 0 18px}
 
   /* ── EVENTS GRID (schede compatte, emoji in cerchietto, colore per categoria) ── */
-  .events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+  .events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;align-items:start}
   .event-card{position:relative;background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);border:1px solid rgba(45,74,92,0.07);padding:20px 22px;display:flex;flex-direction:column;transition:var(--transition);overflow:hidden}
   .event-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--cat-color,var(--teal))}
   .event-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-card);border-color:rgba(45,74,92,0.10)}
@@ -3665,6 +3665,10 @@
   .event-price{display:inline-flex;align-items:center;font-size:0.78rem;font-weight:700;color:var(--teal);background:rgba(107,165,168,0.12);border-radius:100px;padding:5px 12px}
   .event-price.free{color:#1D9E75;background:rgba(29,158,117,0.1)}
   .event-tag{display:inline-flex;align-items:center;font-size:0.72rem;font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05);border-radius:100px;padding:5px 11px}
+  .event-actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+  .event-act{display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--navy);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:7px 13px;text-decoration:none;transition:var(--transition)}
+  .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
+  .event-act svg{flex-shrink:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:40px 0}
 
   /* ── BG ── */
@@ -3820,6 +3824,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Villa%20Vidua%20-%20Conzano%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Artisti+%26+Collezionisti+per+Pinocchio+-+a+200+anni+dalla+nascita+di+Carlo+Collodi&dates=20260510%2F20260727&details=Mostra+dedicata+a+Pinocchio+in+occasione+dei+200+anni+dalla+nascita+di+Carlo+Collodi.+Esposizione+di+opere+di+artisti+e+collezionisti.+Inaugurazione+domenica+10+maggio+ore+17%3A00.+Aperta+domenica+e+festivi.&location=Villa+Vidua+-+Conzano+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="cultura" data-province="al" data-start="2026-05-28" data-end="2026-08-31" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14)">
@@ -3839,6 +3847,10 @@
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Viale%20dei%20Campionissimi%2C%20Novi%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mostra+delle+Illusioni&dates=20260528%2F20260901&details=Mostra+di+illusioni+ottiche+e+percettive.+%22Preparati+a+vedere+il+mondo+con+occhi+nuovi.%22+Biglietti+su+Ticketone.&location=Viale+dei+Campionissimi%2C+Novi+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -3863,6 +3875,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sportello+di+consulenza+educativa+per+famiglie+-+Centro+per+famiglie+comune+di+Asti&dates=20260604%2F20260626&details=Sportello+settimanale+di+consulenza+educativa+per+famiglie%2C+rivolto+a+genitori+e+caregiver.+Attivo+ogni+gioved%C3%AC+dal+4+giugno%2C+dalle+9%3A00+alle+12%3A00.&location=Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-18" data-end="2026-07-02" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -3882,6 +3898,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corso%20Alessandria%2C%2039%20-%20Tortona%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Gli+EsplorAttori&dates=20260618%2F20260703&details=Primo+appuntamento+del+laboratorio+estivo+Gli+EsplorAttori+per+bambini+dai+7+ai+10+anni.+I+partecipanti+costruiranno+insieme+il+proprio+kit+personale+per+gestire+al+meglio+le+avventure+del+percorso.+Programma%3A+18%2F06+Gli+EsplorAttori+-+Il+nostro+Kit+-+Centro+per+le+Famiglie+CISA+di+Tortona%3B+25%2F06+Gli+EsplorAttori+-+Caccia+nella+Natura+-+Centro+per+le+Famiglie+CISA+di+Tortona%3B+02%2F07+Gli+EsplorAttori+-+Animali+e+Habitat+-+Centro+per+le+Famiglie+CISA+di+Tortona.&location=Corso+Alessandria%2C+39+-+Tortona+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -3903,6 +3923,10 @@
           <span class="event-price">A pagamento</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20Nicol%C3%B2%20Girardengo%2042%2C%20Novi%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Toy+Story+5+al+cinema&dates=20260618%2F20260625&details=Il+nuovo+film+d%27animazione+Disney%C2%B7Pixar+Toy+Story+5+in+programmazione+al+Multisala+Moderno+di+Novi+Ligure%2C+dal+18+al+24+giugno+%28luned%C3%AC+chiuso%29.&location=Via+Nicol%C3%B2+Girardengo+42%2C+Novi+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="at" data-start="2026-06-19" data-end="2026-06-25" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -3922,6 +3946,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Cortiglione%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Festa+d%27Estate+2026+-+Pro+Loco+Cortiglione&dates=20260619%2F20260626&details=La+Pro+Loco+di+Cortiglione+organizza+la+Festa+d%27Estate+2026%2C+con+serate+di+musica%2C+buon+cibo%2C+divertimento+e+tante+novit%C3%A0.+Le+date+sono+il+19%2C+20%2C+21+e+25+giugno.+Durante+tutte+le+serate+saranno+presenti+gonfiabili+per+bambini+e+banco+di+beneficenza.&location=Cortiglione+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -3943,6 +3971,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Parco%20Torre%20Storica%20-%20San%20Salvatore%20Monferrato%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Notti+d%27Estate+al+Parco+Torre&dates=20260619%2F20260627&details=Serata+dedicata+al+mondo+del+calcio+con+un+%27abecedario+pallonaro%27+che+porta+da+Aaltonen+a+Zubizarreta.+Evento+della+rassegna+estiva+Notti+d%27Estate+al+Parco+Torre%2C+ambientato+nella+suggestiva+cornice+del+Parco+Torre+Storica.+Programma%3A+19%2F06+Abecedario+pallonaro+-+Da+Aaltonen+a+Zubizarreta%3B+26%2F06+Cos%C3%AC+ridevano+a+San+Salvatore.&location=Parco+Torre+Storica+-+San+Salvatore+Monferrato+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="musica" data-province="al" data-start="2026-06-20" data-end="2026-07-05" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
@@ -3962,6 +3994,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corte%20del%20Castello%20-%20Pozzolo%20Formigaro%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Vivi+Pozzolo+Estate+nella+Corte+del+Castello&dates=20260620%2F20260706&details=Concerto+del+Trio+Italiano+con+lo+spettacolo+%27Suggestioni+senza+Tempo%27.+Appuntamento+musicale+nell%27affascinante+cornice+della+Corte+del+Castello+di+Pozzolo+Formigaro.+Programma%3A+20%2F06+Trio+Italiano+-+Suggestioni+senza+Tempo%3B+24%2F06+Summer+Ladies+in+Jazz%3B+28%2F06+Gipsy+Pink+-+Tributo+ai+Pink+Floyd+-+Lions+di+Pozzolo+F.ro%3B+02%2F07+Lo+Sporco+Torna+Sempre+-+Commedia+brillante%3B+04%2F07+Concerto+d%27Estate+-+Banda+Musicale+Pozzolese+R.+Marengo%3B+05%2F07+Poachella+-+Festival+Hip+Pop+Reggaeton+e+Techno+con+Street+Food.&location=Corte+del+Castello+-+Pozzolo+Formigaro+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -3986,6 +4022,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20G.%20Sodano%20-%20Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=4+Salti+nel+verde+-+Centro+per+famiglie+comune+di+Asti&dates=20260624%2F20260625&details=Attivit%C3%A0+di+psicomotricit%C3%A0+all%27aperto+presso+l%27Area+Verde+di+Via+G.+Sodano.+Un+pomeriggio+di+movimento+e+gioco+nella+natura+per+bambini+e+famiglie.&location=Via+G.+Sodano+-+Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-24" data-end="2026-06-24" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4006,6 +4046,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazzale%20del%20Percorso%20della%20Memoria%20-%20Bosio%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Fal%C3%B2+di+San+Giovanni+-+Pro+Loco+Bosio&dates=20260624%2F20260625&details=Tradizionale+fal%C3%B2+di+San+Giovanni+organizzato+dal+Comune+di+Bosio+e+dalla+Pro+Loco.+Durante+la+serata+sar%C3%A0+possibile+gustare+le+frittelle+della+Pro+Loco.+Dal+18+giugno+%C3%A8+possibile+donare+ramaglie%2C+fascine+e+altri+materiali+idonei+%28non+mobili+o+legno+verniciato%29+nella+zona+antistante+il+piazzale+del+Percorso+della+Memoria.&location=Piazzale+del+Percorso+della+Memoria+-+Bosio+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-24" data-end="2026-06-27" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4025,6 +4069,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Montemarzino%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Festa+di+San+Giovanni+-+Montemarzino&dates=20260624%2F20260628&details=Santa+Messa+in+occasione+della+Festa+di+San+Giovanni+a+Montemarzino%2C+mercoled%C3%AC+24+giugno+alle+ore+21%3A00.+Evento+religioso+aperto+a+tutta+la+comunit%C3%A0+organizzato+dal+Comune+e+dalla+Pro+Loco+di+Montemarzino.+Programma%3A+24%2F06+Santa+Messa%3B+27%2F06+Grigliata.&location=Montemarzino+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4049,6 +4097,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">San Giorgio Festival</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Centro%20storico%20-%20Alessandria%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Musica+in+Centro+-+San+Giorgio+Festival&dates=20260624%2F20260625&details=Musica+in+Centro+%C3%A8+un+evento+all%27aperto+nell%27ambito+del+San+Giorgio+Festival%2C+con+musicisti+itineranti+e+DJ+set+a+cielo+aperto+nel+centro+storico+di+Alessandria.+L%27evento+si+svolge+mercoled%C3%AC+24+giugno+dalle+ore+18+alle+ore+24.+Organizzato+in+collaborazione+con+Alegas+e+Iren.&location=Centro+storico+-+Alessandria+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-25" data-end="2026-06-30" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4069,6 +4121,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20San%20Sebastiano%2C%209%20-%20Quattordio%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=49%C2%AA+Sagra+dei+Sicot+-+Quattordio&dates=20260625%2F20260701&details=Cerimonia+di+dedica+della+piazzetta+a+Gianfranco+Trusiano%2C+nell%27ambito+dei+festeggiamenti+patronali+Santi+Pietro+e+Paolo+e+della+49%C2%AA+Sagra+degli+Zucchini+di+Quattordio.+Programma%3A+25%2F06+Dedica+della+piazzetta+a+Gianfranco+Trusiano%3B+25%2F06+L%27Uomo+dal+Fiore+in+Bocca%3B+26%2F06+Cena+sotto+le+Stelle%3B+26%2F06+DJ+Set+Live+-+DJ+Spadix%3B+27%2F06+Quattordio+Urban+Art+-+Tour+Opere%3B+27%2F06+Ricette+e+Sinfonie%3B+27%2F06+Cena+sotto+le+Stelle%3B+27%2F06+Angelo+Cattaneo+-+Happy+Music+Anni+%2770-%2780-%2790+Dance%3B+28%2F06+Rally+Taxi+-+2%C2%B0+Autogiro+Summer+QUA+-+Memorial+Antonio+Venturini%3B+28%2F06+Santa+Messa%3B+28%2F06+Borse+di+Studio+Classe+5%C2%AA+-+Gianluigi+Lanzoni+in+memoria+di+Gianfranco+Scagliola%3B+28%2F06+Rinfresco%3B+28%2F06+Pista+Polistil+F1+Auto+Storiche%3B+28%2F06+Cena+sotto+le+Stelle%3B+28%2F06+Oro+Caribe+-+Danze+Latino+Americane+Anni+%2770-%2780-%2790%3B+29%2F06+Pizza+in+Piazza%3B+29%2F06+Quiz+Game+Esagerata+-+Angelo+Cattaneo%3B+30%2F06+Visioni+Stellate+-+Cinem&location=Via+San+Sebastiano%2C+9+-+Quattordio+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="musica" data-province="at" data-start="2026-06-25" data-end="2026-06-25" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
@@ -4088,6 +4144,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20del%20paese%20-%20Cortiglione%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Canzoni+per+un%27Amica+-+Serata+di+Beneficenza+-+Pro+Loco+Cortiglione&dates=20260625%2F20260626&details=Serata+di+beneficenza+nell%27ambito+della+Festa+d%27Estate+2026+di+Cortiglione.+Dalle+ore+20%3A00+cena+con+gnocchi+al+rag%C3%B9%2C+porchetta+con+contorno+e+dolce.+Dalle+ore+21%3A30+concerto+%27Canzoni+per+un%27Amica%27+con+il+Gruppo+Strega%3B+il+ricavato+sar%C3%A0+devoluto+alla+Fondazione+per+la+Ricerca+Biomedica+ONLUS+per+la+sclerosi+multipla.&location=Piazza+del+paese+-+Cortiglione+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4112,6 +4172,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Gira+la+Moda+-+Centro+per+famiglie+comune+di+Asti&dates=20260625%2F20260626&details=Swap+di+abiti%2C+accessori+e+giochi+in+buono+stato.+Le+modalit%C3%A0+di+partecipazione+sono+indicate+sulla+locandina+dedicata.+Un%27occasione+per+scambiare+e+riutilizzare+in+modo+sostenibile.&location=Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-06-25" data-end="2026-06-25" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -4135,6 +4199,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=The+Drama+-+Un+Segreto+%C3%A8+per+Sempre+-+CineOvada+sotto+le+stelle&dates=20260625%2F20260626&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27The+Drama+-+Un+Segreto+%C3%A8+per+Sempre%27+con+Zendaya+e+Robert+Pattinson%2C+Usa+2025.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="at" data-start="2026-06-26" data-end="2026-06-28" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4154,6 +4222,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20Marconi%20-%20Calliano%20Monferrato%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=45%C2%AA+Sagra+di+Qualit%C3%A0+dell%27Agnolotto+d%27Asino+-+Calliano+Monferrato&dates=20260626%2F20260629&details=Venerd%C3%AC+della+45%C2%AA+Sagra+di+Qualit%C3%A0+dell%27Agnolotto+d%27Asino+a+Calliano+Monferrato.+Dalle+19%3A00+distribuzione+di+agnolotti%2C+stufato+con+polenta+e+salamini+d%27asino.+Alle+21%3A00+concerto+dell%27Orchestra+Asilo+-+Tributo+Vasco+e+alle+22%3A30+DJ+Toyu+in+Piazza+Marconi.+Programma%3A+26%2F06+Distribuzione+Agnolotti%2C+Stufato+e+Salamini+d%27Asino+%2B+Orchestra+Asilo+Tributo+Vasco+%2B+DJ+Toyu%3B+27%2F06+Grande+Abbuffata+con+Specialit%C3%A0+d%27Asino+%2B+Luigi+Gallia+%2B+DJ+Sonik%3B+28%2F06+Mercatino+Prodotti+Tipici%2C+Pranzo+con+Specialit%C3%A0+d%27Asino+e+Gruppo+Musicale+B-Side.&location=Piazza+Marconi+-+Calliano+Monferrato+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4175,6 +4247,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Cassano%20Spinola%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Festa+della+Birra+%26+Sagra+di+San+Pietro+-+Cassano+Spinola&dates=20260626%2F20260629&details=Serata+con+DJ+Cashmere+nell%27ambito+della+Festa+della+Birra+e+Sagra+di+San+Pietro+di+Cassano+Spinola.+Presente+un+grosso+parco+giochi+per+i+pi%C3%B9+piccoli.+Organizzata+dalla+Pro+Loco+Cassano+Spinola.+Programma%3A+26%2F06+DJ+Cashmere%3B+27%2F06+Deejays+in+Tour%3B+28%2F06+Farinelli+Group.&location=Cassano+Spinola+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-26" data-end="2026-06-27" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4195,6 +4271,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20Barrera%20-%20Spinetta%20Marengo%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Festa+di+Inizio+Estate+-+Proloco+Fraschetta&dates=20260626%2F20260628&details=Venerd%C3%AC+26+giugno%2C+serata+con+Stefano+Paini+e+il+live+degli+Italian+Women+Tribute+-+The+Original+Rock+Show.+Parte+della+Festa+di+Inizio+Estate+organizzata+dalla+Proloco+Fraschetta+in+Piazza+Barrera+a+Spinetta+Marengo.+Menu+disponibile+con+antipasti%2C+agnolotti%2C+salamini%2C+tagliata+e+patatine.+Programma%3A+26%2F06+Italian+Women+Tribute+-+The+Original+Rock+Show%3B+27%2F06+Lunaria+-+Old+is+New.&location=Piazza+Barrera+-+Spinetta+Marengo+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-06-26" data-end="2026-06-26" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -4214,6 +4294,10 @@
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Musei%20di%20Asti%20-%20Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Paesaggi+d%27asporto%3A+crea+la+tua+scatola+delle+meraviglie+-+Musei+di+Asti&dates=20260626%2F20260627&details=Attivit%C3%A0+per+bambini+dai+4+ai+12+anni.+Percorso+guidato+sul+tema+del+paesaggio+seguito+da+un+laboratorio+creativo+chiamato+%27La+scatola+dei+ricordi%27.+I+bambini+potranno+creare+la+propria+scatola+delle+meraviglie.&location=Musei+di+Asti+-+Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4238,6 +4322,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pecore+sotto+Copertura+-+CineOvada+sotto+le+stelle&dates=20260626%2F20260627&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Pecore+sotto+Copertura%27+con+Hugh+Jackman%2C+Regno+Unito%2FUsa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-26" data-end="2026-06-28" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4257,6 +4345,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Palatenda%20-%20Morano%20sul%20Po%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sagra+della+Panissa+-+Pro+Loco+di+Morano+sul+Po&dates=20260626%2F20260629&details=Prima+serata+della+Sagra+della+Panissa+organizzata+dalla+Pro+Loco+di+Morano+sul+Po.+In+menu%3A+panissa%2C+vitello+tonnato%2C+salame+sotto+grasso%2C+salamelle+e+costine%2C+insalate+varie.+Piatto+speciale+della+serata%3A+fritto+di+pesce.+Musica+live+con+Fuori+Tempo+Max.+Programma%3A+26%2F06+Serata+di+apertura+con+Fuori+Tempo+Max%3B+27%2F06+Serata+con+B-Side+Party+Band%3B+28%2F06+Serata+conclusiva+con+Bluesphemy+Band.&location=Palatenda+-+Morano+sul+Po+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4281,6 +4373,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Alessandria%20Retail%20Park%20-%20Alessandria%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Aquilonandia+-+Alessandria+Retail+Park&dates=20260627%2F20260628&details=Pomeriggio+dedicato+al+divertimento+di+tutta+la+famiglia+con+laboratorio+creativo+per+costruire+il+proprio+aquilone%2C+accompagnati+da+animatori+in+un%27area+decorata+con+girandole%2C+bandiere+e+maniche+a+vento.+Un%27occasione+speciale+per+giocare%2C+creare+e+lasciarsi+trasportare+dalla+magia+del+volo.&location=Alessandria+Retail+Park+-+Alessandria+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="feste" data-province="al" data-start="2026-06-27" data-end="2026-06-27" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4304,6 +4400,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Canta Cián 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Borgata%20Superiore%20-%20Rossiglione%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Canta+Ci%C3%A1n+2026+-+Sabato+27+Giugno&dates=20260627%2F20260628&details=Prima+giornata+della+festa+Canta+Ci%C3%A1n+a+Rossiglione%2C+Borgata+Superiore.+In+programma%3A+apertura+mercatino+%28ore+15%29%2C+Gruppo+Storico+Sestrese+con+giochi+e+danze+medievali+%28ore+17+e+21%29%2C+Gruppo+Rievocazioni+Treno+Storico+con+musica+itinerante%2C+apertura+stand+gastronomici+e+ristorante+Da+Santin+%28ore+19%29.+Per+tutta+la+giornata+Torre+di+Arrampicata+Artificiale.&location=Borgata+Superiore+-+Rossiglione+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-27" data-end="2026-06-27" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -4324,6 +4424,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20Novi%2013%2C%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Dal+Sole+alle+Stelle+-+Centro+per+le+Famiglie+L%27Arcobaleno&dates=20260627%2F20260628&details=Evento+gratuito+per+bambini+dai+6+ai+10+anni+articolato+in+due+momenti%3A+pomeriggio+%2815%3A30-19%3A00%29+con+attivit%C3%A0+creative%2C+lettura+albo%2C+laboratorio+musicale%2C+attivit%C3%A0+inclusive%2C+giochi+in+giardino+e+caccia+al+tesoro%3B+serata+%2820%3A00-22%3A00%29+a+tema+%27Magia+della+notte%27+con+passeggiata+notturna%2C+storie+sotto+le+stelle%2C+giochi+con+pittura+fluorescente+e+scatola+dei+segreti.+Organizzato+da+Centro+per+le+Famiglie+L%27Arcobaleno%2C+Consorzio+Servizi+Sociali%2C+La+Tavola+Rotonda+ODV%2C+CamminFacendo+Next+Generation+e+Cooperativa+Sociale+Azimut.&location=Via+Novi+13%2C+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-06-27" data-end="2026-06-27" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -4343,6 +4447,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20Novi%2013%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Dal+Sole+alle+Stelle+-+Cooperativa+Sociale+Azimut&dates=20260627%2F20260628&details=Evento+gratuito+per+bambini+dai+6+ai+10+anni+diviso+in+due+momenti%3A+pomeriggio+%2815%3A30-19%3A00%29+con+attivit%C3%A0+creative%2C+lettura+albo%2C+laboratorio+musicale%2C+attivit%C3%A0+inclusive%2C+giochi+in+giardino%2C+caccia+al+tesoro+e+merenda%3B+sera+%2820%3A00-22%3A00%29+con+la+magia+della+notte%2C+passeggiata+notturna%2C+storie+sotto+le+stelle%2C+giochi+con+pittura+fluorescente+e+scatola+dei+segreti.&location=Via+Novi+13+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4367,6 +4475,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Disclosure+Day+-+CineOvada+sotto+le+stelle&dates=20260627%2F20260628&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Disclosure+Day%27+di+Steven+Spielberg%2C+Usa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="musica" data-province="at" data-start="2026-06-27" data-end="2026-07-01" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
@@ -4386,6 +4498,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20del%20paese%20-%20Castellero%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Festa+Patronale+2026+-+Castellero+d%27Asti&dates=20260627%2F20260702&details=Concerto+della+band+Alive+con+musica+Pop%2C+Rock+e+Dance.+Serata+con+stand+gastronomico+aperto+dalle+ore+19%3A00+con+antipasti%2C+agnolotti%2C+grigliata%2C+dolci%2C+gelati+artigianali%2C+birra+e+coca+alla+spina.+Programma%3A+27%2F06+Concerto+Alive+Pop+Rock+%26+Dance%3B+28%2F06+Concerto+Sonia+de+Castelli%3B+29%2F06+Serata+Pizza+con+The+InStabil+Band%3B+01%2F07+Passeggiando+Tra+Boschi+e+Stelle.&location=Piazza+del+paese+-+Castellero+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4407,6 +4523,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Centro%20Storico%20-%20Gavi%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Gavi+-+Il+Borgo+sotto+le+Stelle+-+Pro+Loco+di+Gavi&dates=20260627%2F20260628&details=2%C2%AA+edizione+di+%27Gavi+-+Il+Borgo+sotto+le+Stelle%27%2C+evento+estivo+nel+centro+storico+di+Gavi+organizzato+dalla+Pro+Loco.+La+serata+propone+street+food+a+cura+dei+locali+gaviesi+e+non+solo%2C+con+degustazioni+di+Gavi+DOCG+abbinate+a+prodotti+tipici+locali%2C+dalle+17%3A00+a+mezzanotte.&location=Centro+Storico+-+Gavi+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-06-27" data-end="2026-06-27" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4426,6 +4546,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20Carlo%20Alberto%2C%20Corso%20Acqui%2C%20Piazza%20Gaggia%20Zanzi%2C%20Piazzale%20UNES%20-%20Alessandria%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=La+Grande+Notte+Bianca+-+Quartiere+Cristo&dates=20260627%2F20260628&details=Notte+bianca+nel+Quartiere+Cristo+di+Alessandria+con+un+tuffo+negli+anni+%2780%2C+%2790+e+2000.+In+programma+street+food%2C+apericena%2C+band+musicali%2C+attrazioni%2C+DJ+set%2C+animazione%2C+dirette+radio+e+social%2C+attivit%C3%A0+sportive%2C+stand+espositivi%2C+hobbisti+e+negozi+aperti.+Navetta+gratuita+disponibile.&location=Via+Carlo+Alberto%2C+Corso+Acqui%2C+Piazza+Gaggia+Zanzi%2C+Piazzale+UNES+-+Alessandria+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4447,6 +4571,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazzetta%20Rattazzi%20-%20Novi%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Memorial+Andrea+Foglia+11%C2%AA+Edizione&dates=20260627%2F20260629&details=Sabato+27+giugno%3A+torneo+di+basket+giovanile+%28U12+Minibasket+e+tutte+le+categorie%29.+Ritrovo+ore+14%3A30%2C+inizio+torneo+ore+15%3A00.+Ospite+d%27onore+Pierluigi+Brotto%2C+Head+Coach+Vanoli+Cremona+25%2F26.+Programma%3A+27%2F06+Memorial+Andrea+Foglia+-+11%C2%AA+Edizione+-+Gli+Amici+di+Andrea%3B+28%2F06+Memorial+Andrea+Foglia+-+11%C2%AA+Edizione+%28Domenica%29+-+Gli+Amici+di+Andrea.&location=Piazzetta+Rattazzi+-+Novi+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-27" data-end="2026-06-27" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -4466,6 +4594,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Quartiere%20Cristo%20-%20Alessandria%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Notte+Bianca+-+Quartiere+Cristo&dates=20260627%2F20260628&details=Notte+Bianca+nel+Quartiere+Cristo+di+Alessandria.+Una+serata+di+eventi%2C+musica+e+intrattenimento+per+accendere+la+notte+nel+quartiere.&location=Quartiere+Cristo+-+Alessandria+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4487,6 +4619,10 @@
           <span class="event-price">Iscrizione 15 euro a…</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20del%20paese%20-%20Molare%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=2%C2%B0+Raduno+di+auto+storiche+e+Youngtimer+-+Associazione+Officina+Molarese+del+Arte+e+del+Tempo+A.RS.&dates=20260628%2F20260629&details=Secondo+raduno+di+auto+storiche+e+Youngtimer+a+Molare+%28AL%29.+Il+programma+prevede+ritrovo+dalle+7%3A30+alle+10%3A30+per+iscrizioni+e+consegna+gadget%2C+partenza+alle+11%3A00+per+un+giro+turistico+sulle+colline+ovadesi+verso+Montaldo+Bormida+con+visita+guidata+e+aperitivo+alla+Cantina+Tre+Castelli%2C+e+rientro+alle+13%3A00+per+pranzo+sotto+il+campanile+con+l%27agriturismo+A+Modo+Mio.+Chiusura+iscrizioni+21%2F06%2F2026.&location=Piazza+del+paese+-+Molare+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-06-28" data-end="2026-06-28" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -4507,6 +4643,10 @@
           <span class="event-price">10 euro (comprensivo di tessera…</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Cortile%20dell%27Antica%20Canonica%20-%20Albugnano%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Arti+Circensi+-+Aps+NessunIsola+%26+Asd+Squilibria+Circo&dates=20260628%2F20260629&details=Laboratorio+di+equilibrismo+e+giocoleria+per+bambini+dai+6+ai+12+anni%2C+organizzato+da+Aps+NessunIsola+e+Asd+Squilibria+Circo.+Il+contributo+di+10+euro+include+tessera+e+assicurazione.+A+seguire+cena+condivisa.&location=Cortile+dell%27Antica+Canonica+-+Albugnano+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="al" data-start="2026-06-28" data-end="2026-06-28" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -4526,6 +4666,10 @@
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Centro%20Storico%20-%20Tortona%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bellezze+in+Bicicletta+-+Tortona+Retr%C3%B2+-+La+Mitica&dates=20260628%2F20260629&details=Evento+cicloturistico+in+stile+retr%C3%B2+nel+centro+storico+di+Tortona.+Una+pedalata+tra+le+bellezze+del+territorio+organizzata+in+collaborazione+con+Colli+di+Coppi+e+il+Comune+di+Castellania+Coppi.&location=Centro+Storico+-+Tortona+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4550,6 +4694,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Canta Cián 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Borgata%20Superiore%20-%20Rossiglione%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Canta+Ci%C3%A1n+2026+-+Domenica+28+Giugno&dates=20260628%2F20260629&details=Seconda+giornata+della+festa+Canta+Ci%C3%A1n.+In+programma%3A+apertura+mercatino+e+stand+gastronomici+%28ore+10%29%2C+Magotaz+e+Bolle+Giganti+-+spettacolo+per+bambini+%28ore+17%29%2C+premiazione+concorso+di+lettura%2C+apertura+stand+gastronomici+e+ristorante+Da+Santin+%28ore+19%29%2C+concerto+No+Hero+-+Elisa+Tribute+Band+%28ore+21%29+con+premiazione+Concorso+Angolo+Fiorito.+Mostra+fotografica+a+cura+di+PHOTO35.&location=Borgata+Superiore+-+Rossiglione+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-06-28" data-end="2026-06-28" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -4573,6 +4721,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Disclosure+Day+-+CineOvada+sotto+le+stelle&dates=20260628%2F20260629&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Disclosure+Day%27+di+Steven+Spielberg%2C+Usa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="al" data-start="2026-06-28" data-end="2026-06-28" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -4593,6 +4745,10 @@
           <span class="event-price">A pagamento (da verificare)</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Tortona%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=La+Mitica+-+Ciclostorica+con+bici+d%27epoca+per+i+colli+di+Serse+e+Fausto+Coppi&dates=20260628%2F20260629&details=Ciclostorica+con+biciclette+d%27epoca+attraverso+i+colli+dedicati+ai+campioni+Serse+e+Fausto+Coppi.+Un+evento+che+celebra+la+tradizione+ciclistica+italiana+in+un+percorso+panoramico.&location=Tortona+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="cultura" data-province="al" data-start="2026-06-28" data-end="2026-06-28" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14)">
@@ -4612,6 +4768,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Strada%20Cassano%209%20-%20Pozzolo%20Formigaro%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Momento+didattico+alla+Cascina+Masino+-+Associazione+Maglietto+Novi+Ligure&dates=20260628%2F20260629&details=Un+apicoltore+guider%C3%A0+i+partecipanti+tra+le+piante+di+lavanda+e+le+api+al+lavoro.+Verranno+messe+a+disposizione+adeguate+protezioni+per+tutti+i+partecipanti%2C+in+particolare+per+i+bambini.+Chi+desidera+raccogliere+la+lavanda+pu%C3%B2+portare+cestino+e+forbicioni.&location=Strada+Cassano+9+-+Pozzolo+Formigaro+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4636,6 +4796,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Festival Libri&amp;Arte in Valle 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Valmadonna%20Strada%20Comunale%2029%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Officina+Creativa+-+C%27era+una+volta+un...click&dates=20260628%2F20260629&details=Laboratorio+fotografico+per+bambini+ideato+e+condotto+dai+ragazzi+del+centro+estivo+della+Parrocchia+di+Valmadonna.+Un+percorso+creativo+tra+storie+e+fotografia.+L%27attivit%C3%A0+si+svolge+nell%27ambito+del+Festival+Libri%26Arte+in+Valle+2026.&location=Valmadonna+Strada+Comunale+29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="laboratori" data-province="al" data-start="2026-06-28" data-end="2026-06-28" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -4659,6 +4823,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Festival Libri&amp;Arte in Valle 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Valmadonna%20Strada%20Comunale%2029%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Officina+Creativa+-+Decoriamo+la+nostra+bicicletta&dates=20260628%2F20260629&details=Laboratorio+per+bambini+ideato+e+condotto+dai+ragazzi+del+centro+estivo+della+Parrocchia+di+Valmadonna.+I+piccoli+partecipanti+potranno+decorare+la+propria+bicicletta+in+modo+creativo.+L%27attivit%C3%A0+si+svolge+nell%27ambito+del+Festival+Libri%26Arte+in+Valle+2026.&location=Valmadonna+Strada+Comunale+29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="al" data-start="2026-06-28" data-end="2026-06-28" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -4679,6 +4847,10 @@
           <span class="event-price">A pagamento (da verificare)</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20Serra%2C%201%20-%20Quattordio%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Taxi+Rally+-+2%C2%B0+Autogiro+Summerqua+Quattordio+%2F+1%C2%B0+Memorial+Venturini+Antonio&dates=20260628%2F20260629&details=Taxi+Rally+nell%27ambito+del+2%C2%B0+Autogiro+Summerqua+Quattordio+e+1%C2%B0+Memorial+Venturini+Antonio.+I+partecipanti+possono+salire+a+bordo+come+navigatori+sulle+auto+da+rally+e+da+drift+presenti%2C+portando+con+s%C3%A9+il+proprio+casco.+L%27intero+ricavato+della+giornata+sar%C3%A0+devoluto+al+Gruppo+AIDO+Intercomunale+%27Cristina+Venezia%27.&location=Via+Serra%2C+1+-+Quattordio+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-06-30" data-end="2026-06-30" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -4698,6 +4870,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20Marconi%2066%2C%2015067%20Novi%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=I+Marted%C3%AC+nel+Chiostro+delle+Storie&dates=20260630%2F20260701&details=Spettacolo+per+bambini+dai+4+anni+tratto+dagli+albi+illustrati%2C+a+cura+delle+attrici+Ilaria+Sacc%C3%A0+e+Chiara+Arossa.+L%27evento+fa+parte+della+rassegna+%27I+Marted%C3%AC+nel+Chiostro+delle+Storie%27%2C+ciclo+estivo+di+letture%2C+laboratori+e+attivit%C3%A0+per+bambini+presso+la+Biblioteca+Civica+di+Novi+Ligure.&location=Via+Marconi+66%2C+15067+Novi+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4722,6 +4898,10 @@
           <span class="event-price">A pagamento (da verificare)</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Corso+di+massaggio+infantile+A.I.M.I.+-+Centro+per+famiglie+comune+di+Asti&dates=20260701%2F20260801&details=Corso+di+massaggio+infantile+certificato+A.I.M.I.+rivolto+a+genitori+con+bambini+da+0+a+12+mesi.+Le+informazioni+e+le+iscrizioni+sono+disponibili+su+contatto+diretto.&location=Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="at" data-start="2026-07-01" data-end="2026-07-29" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -4742,6 +4922,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20G.%20Sodano%20-%20Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Il+Giardino+dei+Giochi+-+Centro+per+famiglie+comune+di+Asti&dates=20260701%2F20260730&details=Pomeriggio+dedicato+al+massaggio+infantile%2C+filastrocche+e+coccole+in+musica.+Un+momento+tenero+e+coinvolgente+per+i+pi%C3%B9+piccoli+e+i+loro+genitori+all%27aperto.+Programma%3A+01%2F07+Un+prato+di+coccole%3B+08%2F07+I+colori+dell%27estate%3B+15%2F07+Filo+di+Mamme%3B+22%2F07+Spruzzi+in+allegria%3B+29%2F07+Tutti+in+vacanza%21.&location=Via+G.+Sodano+-+Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-02" data-end="2026-07-30" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -4761,6 +4945,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20Mandirola%201%2C%20Pasturana%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=E...State+con+Noi+2026+-+Biblioteca+Comunale+E.+Arecco&dates=20260702%2F20260731&details=La+Biblioteca+Comunale+E.+Arecco+invita+i+bambini+dai+3+agli+11+anni+a+partecipare+all%27iniziativa+estiva+%27E...State+con+Noi+2026%27.+Gli+incontri+si+svolgono+tutti+i+luned%C3%AC+e+gioved%C3%AC+dalle+9+alle+12%2C+dal+2+al+30+luglio+2026.+La+partecipazione+%C3%A8+gratuita%2C+%C3%A8+preferibile+la+prenotazione.&location=Via+Mandirola+1%2C+Pasturana+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4785,6 +4973,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Michael+-+CineOvada+sotto+le+stelle&dates=20260702%2F20260703&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Michael%27+di+Antoine+Fuqua%2C+Usa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-07-03" data-end="2026-07-03" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -4808,6 +5000,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Citt%C3%A0+di+Pianura+-+CineOvada+sotto+le+stelle&dates=20260703%2F20260704&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Citt%C3%A0+di+Pianura%27+di+Francesco+Sossai%2C+Italia%2FGermania+2025.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-03" data-end="2026-07-05" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
@@ -4828,6 +5024,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20Libert%C3%A0%20-%20Mirabello%20Monferrato%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Folk+%C3%A8+Bello+-+8%C2%B0+Street+Festival+-+Pro+Loco+Mirabello&dates=20260703%2F20260706&details=Tre+serate+di+musica+folk+e+spettacoli+in+piazza.+Venerd%C3%AC+3+luglio%3A+Roby+Circus+Art+e+The+Legendary+Kid+Combo.+Sabato+4+luglio%3A+danza+acrobatica+e+Bistr%C3%B2+Dalfin+%28folk+occitano%29.+Domenica+5+luglio%3A+scivolo+gonfiabile+e+Clan+Banlieue+%28agrifolk%29.+Apertura+cucina+dalle+ore+19%3A00+con+menu+tipico%2C+servizio+bar+e+pista+da+ballo.&location=Piazza+Libert%C3%A0+-+Mirabello+Monferrato+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-03" data-end="2026-07-05" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
@@ -4847,6 +5047,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20Libert%C3%A0%20-%20Mirabello%20Monferrato%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Folk+%C3%A8+Bello+8%C2%B0+Street+Festival+-+Pro+Loco+Mirabello&dates=20260703%2F20260706&details=Festival+musicale+folk+alla+sua+8%C2%AA+edizione%2C+in+tre+serate%3A+venerd%C3%AC+con+Roby+Circus+Art+e+The+Legendary+Kid+Combo%2C+sabato+con+danza+acrobatica+e+Bistr%C3%B2+Dalfin+%28folk+occitano%29%2C+domenica+con+scivolo+gonfiabile+e+Clan+Banlieue+%28agrifolk%29.+Apertura+cucina+dalle+19%3A00+con+men%C3%B9+completo%2C+servizio+bar+e+pista+da+ballo.+Ingresso+libero.&location=Piazza+Libert%C3%A0+-+Mirabello+Monferrato+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4871,6 +5075,10 @@
           <span class="event-price">A pagamento (da verificare)</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20Don%20Dolermo%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Luna+Park&dates=20260703%2F20260715&details=Luna+Park+in+Piazza+Don+Dolermo+per+tutta+la+durata+della+Fiera+di+San+Guido%2C+dal+3+al+14+luglio.+Giostre+e+attrazioni+per+grandi+e+piccini.&location=Piazza+Don+Dolermo+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="feste" data-province="at" data-start="2026-07-03" data-end="2026-07-03" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4894,6 +5102,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">MOMBack Dance 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Cantina%20Terre%20Astesane%20-%20Mombercelli%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=MOMBack+Dance+-+Giornata+delle+Associazioni&dates=20260703%2F20260704&details=Venerd%C3%AC+3+luglio+presso+la+Cantina+Terre+Astesane%3A+Giornata+delle+Associazioni+con+esibizione+di+taekwondo%2C+mostra+itinerante+MusarMO+e+presenza+delle+associazioni+di+Mombercelli+dalle+ore+19%3A30.+Alle+ore+21+musica+live+con+Sofa+Oversize%2C+a+seguire+DJ+set+con+Fabry+Violino.+Menu+con+agnolotti%2C+pulled+pork%2C+hamburger%2C+salamelle%2C+patatine%2C+dolce+e+caff%C3%A8.&location=Cantina+Terre+Astesane+-+Mombercelli+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-04" data-end="2026-07-05" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -4913,6 +5125,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Orsara%20Bormida%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=14%C2%AA+Sagra+delle+Lasagne+-+Pro+Loco+Orsara+B.da+APS&dates=20260704%2F20260706&details=14%C2%AA+edizione+della+Sagra+delle+Lasagne+organizzata+dalla+Pro+Loco+Orsara+Bormida.+In+menu%27%3A+lasagne+al+rag%C3%B9%2C+al+pesto%2C+ai+formaggi+e+lasagne+vegane%2C+oltre+ai+piatti+della+tradizione.+Musica+con+DJ+Sir+William+%28sabato%29+e+Dr.+Who%3F+%28domenica%29%2C+mercatino+di+prodotti+tipici+e+artigianali%2C+area+bimbi+e+apertura+del+Museo+Etnografico+della+Civilt%C3%A0+Contadina+domenica+5+luglio+dalle+17%3A00+alle+21%3A00.&location=Orsara+Bormida+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4937,6 +5153,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">MOMBack Dance 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Cantina%20Terre%20Astesane%20-%20Mombercelli%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=MOMBack+Dance+-+Friciula+Run+%26+Super+Flash&dates=20260704%2F20260705&details=Sabato+4+luglio+presso+la+Cantina+Terre+Astesane%3A+alle+ore+19+partenza+della+Friciula+Run.+Alle+ore+21%3A30+musica+live+con+Super+Flash.+Menu+a+base+di+friciula+con+lardo%2C+pulled+pork%2C+hamburger%2C+salamelle%2C+patatine%2C+dolce+e+caff%C3%A8.&location=Cantina+Terre+Astesane+-+Mombercelli+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-07-04" data-end="2026-07-04" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -4959,6 +5179,10 @@
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Minions+%26+Monsters+-+CineOvada+sotto+le+stelle&dates=20260704%2F20260705&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Minions+%26+Monsters%27+di+Pierre+Coffin%2C+Usa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -4983,6 +5207,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Parco%20Mongiardino%20-%20Mongiardino%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mondi+di+Carta+-+Sarvego+Festival&dates=20260704%2F20260705&details=Workshop+per+adulti+dedicato+alla+creazione+di+piccoli+libri-oggetto.+Un+tipo+di+libro+che+non+%C3%A8+solo+parola+e+immagine+ma+%C3%A8+un+mondo+a+s%C3%A9%2C+parlante.+A+cura+di+Valentina+Gottardi.&location=Parco+Mongiardino+-+Mongiardino+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="feste" data-province="at" data-start="2026-07-04" data-end="2026-07-04" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5006,6 +5234,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Notti Bianche Asti 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazze%20Roma%2C%20Medici%2C%20Catena%2C%20Statuto%2C%20Alfieri%20e%20vie%20limitrofe%20-%20Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Notti+Bianche+Asti+-+4+Luglio&dates=20260704%2F20260705&details=Seconda+serata+della+Notti+Bianche+di+Asti+con+piatti+tipici+dei+Comitati+Palio+e+DJ+set%2C+area+bambini+e+famiglie%2C+artigianato%2C+Cantanapoli%2C+serata+anni+%2780+e+spettacoli+itineranti.+Una+notte+di+festa+nel+cuore+di+Asti.&location=Piazze+Roma%2C+Medici%2C+Catena%2C+Statuto%2C+Alfieri+e+vie+limitrofe+-+Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="at" data-start="2026-07-04" data-end="2026-07-04" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5025,6 +5257,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazze%20Roma%2C%20Medici%2C%20Catena%2C%20Statuto%2C%20Alfieri%20e%20vie%20limitrofe%20-%20Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Notti+Bianche+Asti+-+Citt%C3%A0+di+Asti+%2F+EventDoc+%2F+Associazione+Iperbole&dates=20260704%2F20260705&details=Seconda+serata+delle+Notti+Bianche+di+Asti%2C+%27Divertimento+sotto+le+stelle%27.+In+programma%3A+piatti+tipici+con+i+Comitati+Palio+e+DJ+set%2C+area+bambini+e+famiglie%2C+artigianato%2C+CantaNapoli%2C+serata+anni+%2780+e+spettacoli+itineranti.&location=Piazze+Roma%2C+Medici%2C+Catena%2C+Statuto%2C+Alfieri+e+vie+limitrofe+-+Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5046,6 +5282,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Strada%20panoramica%20Ciazze%20-%20Rossiglione%20%28GE%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ValleStock+-+One+Day+of+Peace+%26+Music&dates=20260704%2F20260706&details=ValleStock+%C3%A8+un+festival+musicale+no-stop+ispirato+allo+spirito+di+Woodstock%2C+con+musica+dal+vivo+dalle+16%3A00+a+tarda+notte+e+ripresa+il+mattino+del+5+luglio+con+l%27evento+%27Passaggi%27.+Numerose+band+e+artisti+tra+cui+Banda+della+Valle+Stura%2C+Acoustic+Waves%2C+Wildflowers%2C+Ghost+Riders%2C+Ginevra+Nervi%2C+Paolo+Bonfanti+%26+Super+Band+e+molti+altri.+Presenti+area+food+%26+beverage%2C+area+bimbi%2C+area+tende+e+ospiti+dell%27organizzazione+umanitaria+Music+for+Peace.&location=Strada+panoramica+Ciazze+-+Rossiglione+%28GE%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="musica" data-province="al" data-start="2026-07-04" data-end="2026-07-05" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
@@ -5065,6 +5305,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Centro%20storico%20di%20Ponzone%20-%20Ponzone%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Weekend+a+Ponzone+-+19%C2%B0+Raduno+delle+Pro+Loco&dates=20260704%2F20260706&details=Sabato+4+luglio%2C+nell%27ambito+del+Weekend+a+Ponzone%2C+si+esibisce+ALU+DJ%2C+vincitori+del+DJ+Battle+di+Ovada+2025.+Serata+musicale+dalle+18+a+mezzanotte+con+stand+enogastronomici+delle+Pro+Loco+partecipanti.+Programma%3A+04%2F07+Concerto+ALU+DJ%3B+04%2F07-05%2F07+Sapori%2C+Tradizione+e+Divertimento+-+Stand+Gastronomici+e+Mercatini%3B+05%2F07+Concerto+The+Dugongos.&location=Centro+storico+di+Ponzone+-+Ponzone+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5086,6 +5330,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Ponzone%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Weekend+a+Ponzone+-+19%C2%B0+Raduno+delle+Pro+Loco+-+Pro+Loco+di+Ponzone&dates=20260704%2F20260706&details=19%C2%B0+Raduno+delle+Pro+Loco+a+Ponzone.+Un+weekend+all%27insegna+di+sapori%2C+musica+e+tradizione+nel+caratteristico+borgo+piemontese.&location=Ponzone+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="al" data-start="2026-07-05" data-end="2026-07-05" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -5105,6 +5353,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Scuole%20Elementari%20-%20Borgo%20San%20Martino%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Color+Run+BSM+-+Edizione+3&dates=20260705%2F20260706&details=Corsa+di+beneficenza+non+competitiva+di+3%2C5+km+aperta+a+tutti%2C+con+colori+e+divertimento.+Il+ricavato+sar%C3%A0+devoluto+ad+ANDOS+Casale+Monferrato%2C+Dynamo+12+Ore+per+Dynamo+Camp+e+Oratorio+Borgo+San+Martino.+Per+partecipare+basta+acquistare+la+t-shirt+dell%27evento%3B+per+i+bambini+fino+a+5+anni+la+partecipazione+%C3%A8+gratuita+%28senza+t-shirt%29.+Saranno+disponibili+spogliatoi+e+docce.&location=Scuole+Elementari+-+Borgo+San+Martino+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5129,6 +5381,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Minions+%26+Monsters+-+CineOvada+sotto+le+stelle&dates=20260705%2F20260706&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Minions+%26+Monsters%27+di+Pierre+Coffin%2C+Usa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="feste" data-province="al" data-start="2026-07-05" data-end="2026-07-05" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5151,6 +5407,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Borgoratto%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sagra+degli+Gnocchi+con+Hollywood+Show+-+Pro+Loco+Borgoratto&dates=20260705%2F20260706&details=Torna+la+Sagra+degli+Gnocchi+organizzata+dalla+Pro+Loco+Borgoratto%3A+a+partire+dalle+ore+19%3A00+si+potranno+gustare+i+famosi+gnocchi+in+tutte+le+salse%2C+preparati+a+mano+seguendo+ricette+tradizionali+con+ingredienti+DOP+certificati.+In+serata+concerto+con+Hollywood+Show.&location=Borgoratto+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5175,6 +5435,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Cabella%20Ligure%20-%20fraz.%20Pobbio%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Solo+Dance+%28Cocai+design%29+-+Sarvego+Festival&dates=20260705%2F20260706&details=Lettura+e+laboratorio+dedicato+alle+api+selvatiche%2C+quelle+che+ronzano+e+danzano.+Un+albo+illustrato+per+scoprire+e+ricreare+insieme+insetti+meravigliosi.+A+cura+di+Valentina+Gottardi.&location=Cabella+Ligure+-+fraz.+Pobbio+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="feste" data-province="al" data-start="2026-07-05" data-end="2026-07-05" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5197,6 +5461,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Frazione%20Giarolo%20-%20Montacuto%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Una+Valle+in+Festa+-+Pro+Loco+Montacuto&dates=20260705%2F20260706&details=Festa+di+paese+a+Frazione+Giarolo+con+hobbisti+e+produttori+locali%2C+giochi+e+buon+cibo.+Nel+pomeriggio+intrattenimento+per+bambini+con+Associazione+Talea+APS+e+Silverado+Ranch.+Aperitivo+serale+dalle+18%3A30+alle+19%3A30+con+lo+chef+Fabrizio+Rebollini+presso+la+piscina+%27A+Un+Passo+Dal+Cielo%27+%28su+prenotazione%29.+Piscina+aperta+tutto+il+giorno.&location=Frazione+Giarolo+-+Montacuto+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5221,6 +5489,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Frazione%20Giarolo%20-%20Montacuto%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Una+Valle+in+Festa+-+Pro+Loco+di+Montacuto&dates=20260705%2F20260706&details=Festa+di+paese+a+Frazione+Giarolo+con+hobbisti+e+produttori+locali%2C+giochi+e+buon+cibo.+Nel+pomeriggio+intrattenimento+per+bambini+con+Associazione+Talea+APS+e+Silverado+Ranch.+Piscina+aperta+tutto+il+giorno+e+aperitivo+dalle+18%3A30+alle+19%3A30+con+lo+chef+Fabrizio+Rebollini+presso+la+piscina+di+Giarolo+%27A+Un+Passo+Dal+Cielo%27+%28su+prenotazione%29.&location=Frazione+Giarolo+-+Montacuto+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-07-06" data-end="2026-08-03" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -5240,6 +5512,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corso%20Alessandria%2C%2039%20-%20Tortona%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Alla+%28Ri%29scoperta+delle+Favole+Disney&dates=20260706%2F20260804&details=Laboratorio+aperto+alla+cittadinanza+dedicato+alla+favola+di+Frozen.+Lettura+della+favola+e+attivit%C3%A0+ludico-creativa+per+bambini+dai+2+ai+5+anni+accompagnati+da+un+caregiver.+Iscrizione+obbligatoria.+Programma%3A+06%2F07+Alla+%28Ri%29scoperta+delle+Favole+Disney+%E2%80%93+Frozen+-+Cooperativa+Sociale+Il+Gabbiano%3B+13%2F07+Alla+%28Ri%29scoperta+delle+Favole+Disney+%E2%80%93+Il+Re+Leone+-+Cooperativa+Sociale+Il+Gabbiano%3B+20%2F07+Alla+%28Ri%29scoperta+delle+Favole+Disney+%E2%80%93+La+Sirenetta+-+Cooperativa+Sociale+Il+Gabbiano%3B+27%2F07+Alla+%28Ri%29scoperta+delle+Favole+Disney+%E2%80%93+Winnie+the+Pooh+-+Cooperativa+Sociale+Il+Gabbiano%3B+03%2F08+Alla+%28Ri%29scoperta+delle+Favole+Disney+%E2%80%93+Rapunzel+-+Cooperativa+Sociale+Il+Gabbiano.&location=Corso+Alessandria%2C+39+-+Tortona+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5264,6 +5540,10 @@
           <span class="event-price">A pagamento (da verificare)</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Teatro%20della%20Torretta%20-%20Parrocchia%20N.S.%20di%20Lourdes%20-%20Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sipario+Aperto%21+-+Laboratorio+di+teatro+con+Giuseppe+Vassallo&dates=20260706%2F20260724&details=Laboratorio+teatrale+con+l%27autore+Giuseppe+Vassallo.+Gli+incontri+si+svolgono+il+6-9-10%2C+13-16-17+e+20-21-23+luglio+presso+il+Teatro+della+Torretta.+Et%C3%A0+minima+11+anni.+Pre-iscrizione+obbligatoria%2C+verificare+disponibilit%C3%A0+posti.&location=Teatro+della+Torretta+-+Parrocchia+N.S.+di+Lourdes+-+Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-07-09" data-end="2026-07-09" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -5286,6 +5566,10 @@
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Rental+Family+-+Nelle+Vite+degli+Altri+-+CineOvada+sotto+le+stelle&dates=20260709%2F20260710&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Rental+Family+-+Nelle+Vite+degli+Altri%27+di+Hikari%2C+Usa%2FGiappone+2025.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5310,6 +5594,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Zona%20Archi%20Romani%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Acqui+Rock+Night+2026&dates=20260710%2F20260711&details=Serata+rock+con+musica+live+e+fire+show+nella+suggestiva+zona+degli+Archi+Romani.+Apertura+della+Fiera+di+San+Guido+2026+con+un+evento+spettacolare+all%27aperto.&location=Zona+Archi+Romani+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-10" data-end="2026-07-14" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5329,6 +5617,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Zona%20Archi%20Romani%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Fiera+di+San+Guido&dates=20260710%2F20260715&details=La+Fiera+di+San+Guido+anima+Acqui+Terme+dal+10+al+14+luglio+2026+con+musica+dal+vivo%2C+spettacoli%2C+mercatini%2C+area+gastronomica+e+luna+park+tra+la+zona+degli+Archi+Romani+e+il+centro+citt%C3%A0.+Programma%3A+03%2F07-14%2F07+Luna+Park%3B+10%2F07+Acqui+Rock+Night+2026%3B+10%2F07-13%2F07+Area+Gastronomica+Archi+Romani%3B+11%2F07+Acqui+al+Chiaro+di+Luna%3B+11%2F07+Shary+Band+Concerto+%2B+DJ+Set%3B+12%2F07+Manifestazione+Automobilistica+Raduni+Eclipse%3B+12%2F07+Mercatino+del+Bambino+Giocando+si+Impara%3B+12%2F07+Miss+Reginetta+d%27Italia+Finale+Regionale+Basso+Piemonte+e+Liguria%3B+12%2F07-14%2F07+Bancarelle+Centro+Cittadino%3B+13%2F07+Concerto+Corpo+Bandistico+Acquese+e+Spettacolo+Pirotecnico.&location=Zona+Archi+Romani+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5353,6 +5645,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Marty+Supreme+-+CineOvada+sotto+le+stelle&dates=20260710%2F20260711&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Marty+Supreme%27+con+Timoth%C3%A9e+Chalamet%2C+Usa+2025.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="at" data-start="2026-07-10" data-end="2026-07-12" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5372,6 +5668,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Piazza%20del%20Mercato%20-%20Montechiaro%20d%27Asti%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sagra+del+Vitello+di+Razza+Piemontese+2026&dates=20260710%2F20260713&details=Apertura+della+Sagra+del+Vitello+di+Razza+Piemontese+con+stand+gastronomico+%28antipasti%2C+hamburger%2C+primi%2C+dolci%2C+birra+alla+spina%2C+cocktail%29.+Dalle+ore+22%3A00+cottura+del+vitello+intero+allo+spiedo+con+concerto+del+gruppo+Enarmonia+-+Tributo+alle+Voci%2C+a+seguire+DJ+set+con+Gianni.+Programma%3A+10%2F07+Serata+Enarmonia+-+Tributo+alle+Voci%3B+11%2F07+Vitello+allo+spiedo+e+B-Side+Band%3B+12%2F07+Serata+Vansun+con+Zona+Pezzali.&location=Piazza+del+Mercato+-+Montechiaro+d%27Asti+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5396,6 +5696,10 @@
           <span class="event-price">A pagamento (da verificare)</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Area%20Gastronomica%20Archi%20Romani%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sagra+della+Carne+Piemontese+alla+Griglia%2C+Gnocco+Tricolore%2C+Raviolata+e+Farinata&dates=20260710%2F20260714&details=Tutte+le+sere+dell%27evento%2C+nell%27Area+Gastronomica+degli+Archi+Romani%2C+si+potranno+gustare+specialit%C3%A0+locali%3A+carne+piemontese+alla+griglia%2C+gnocco+tricolore%2C+raviolata+e+farinata.+Info+e+prenotazioni+WhatsApp+al+349+2160276.&location=Area+Gastronomica+Archi+Romani+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="cultura" data-province="al" data-start="2026-07-11" data-end="2026-07-11" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14)">
@@ -5418,6 +5722,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corso%20Roma%201%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Acqui+al+Chiaro+di+Luna+-+Ti+Racconto+Acqui&dates=20260711%2F20260712&details=Visita+guidata+notturna+al+centro+storico+di+Acqui+Terme.+Un+percorso+suggestivo+tra+i+monumenti+e+le+bellezze+della+citt%C3%A0+illuminata+dalla+luna.&location=Corso+Roma+1+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5442,6 +5750,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Albera%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Forse+non+tutti+sanno+che...+%28Kite%29+-+Sarvego+Festival&dates=20260711%2F20260712&details=Lettura+e+laboratorio+con+Michela+Nodari.+Due+modi+per+arrivare+a+destinazione%3A+uno+%C3%A8+dirigersi+direttamente%2C+l%27altro+%C3%A8+arrivarci+per+vie+non+lineari.+Quante+cose+si+scoprono+e+quanti+incontri+incredibili+si+perdono+per+strada.&location=Albera+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-07-11" data-end="2026-07-11" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -5464,6 +5776,10 @@
         <div class="event-foot">
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Minions+%26+Monsters+-+CineOvada+sotto+le+stelle&dates=20260711%2F20260712&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Minions+%26+Monsters%27+di+Pierre+Coffin%2C+Usa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5488,6 +5804,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Zona%20Archi%20Romani%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Shary+Band+-+Concerto+Spettacolo+con+DJ+Set+%2770+%2780+%2790&dates=20260711%2F20260712&details=Concerto+spettacolo+della+Shary+Band+seguito+da+un+DJ+Set+con+i+grandi+successi+degli+anni+%2770%2C+%2780+e+%2790.+Serata+musicale+nella+zona+degli+Archi+Romani.&location=Zona+Archi+Romani+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="feste" data-province="al" data-start="2026-07-12" data-end="2026-07-14" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5511,6 +5831,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Vie%20del%20centro%20cittadino%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bancarelle+nelle+Vie+del+Centro&dates=20260712%2F20260715&details=Bancarelle+nelle+vie+del+centro+cittadino+di+Acqui+Terme+dal+12+al+14+luglio.+Shopping%2C+artigianato+e+prodotti+locali+nel+cuore+della+citt%C3%A0+durante+la+Fiera+di+San+Guido.&location=Vie+del+centro+cittadino+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="al" data-start="2026-07-12" data-end="2026-07-12" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -5530,6 +5854,10 @@
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Fiume%20Po%20-%20Casale%20Monferrato%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Galleggia+Non+Galleggia+2026+-+Amici+del+Po+Casale+Monferrato&dates=20260712%2F20260713&details=10%C2%AA+edizione+della+gara+di+imbarcazioni+artigianali+sul+Po%3A+i+partecipanti+costruiscono+natanti+di+fortuna+e+si+sfidano+sull%27acqua+tra+divertimento+e+spettacolo.+Le+iscrizioni+sono+aperte.+Organizzato+dall%27associazione+Amici+del+Po+Casale+Monferrato.&location=Fiume+Po+-+Casale+Monferrato+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5554,6 +5882,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Zona%20Bagni%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Manifestazione+Automobilistica+-+Raduni+Eclipse&dates=20260712%2F20260713&details=Manifestazione+automobilistica+a+cura+di+Raduni+Eclipse+nella+zona+Bagni+di+Acqui+Terme.+Esposizione+e+sfilata+di+auto+nella+cornice+della+Fiera+di+San+Guido.&location=Zona+Bagni+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="feste" data-province="al" data-start="2026-07-12" data-end="2026-07-12" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5576,6 +5908,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Zona%20Bagni%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mercatino+del+Bambino+%22Giocando+si+Impara%22+-+S.P.A.T.&dates=20260712%2F20260713&details=Mercatino+dedicato+ai+bambini+a+cura+di+S.P.A.T.+con+il+tema+%22Giocando+si+Impara%22.+Un%27occasione+per+i+pi%C3%B9+piccoli+di+divertirsi+e+scoprire+nuovi+giochi+e+attivit%C3%A0+didattiche.&location=Zona+Bagni+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5600,6 +5936,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Minions+%26+Monsters+-+CineOvada+sotto+le+stelle&dates=20260712%2F20260713&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27Minions+%26+Monsters%27+di+Pierre+Coffin%2C+Usa+2026.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-07-12" data-end="2026-07-12" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -5623,6 +5963,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Zona%20Archi%20Romani%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Miss+Reginetta+d%27Italia+-+Finale+Regionale+Basso+Piemonte+e+Liguria&dates=20260712%2F20260713&details=Finale+Regionale+Basso+Piemonte+e+Liguria+di+Miss+Reginetta+d%27Italia%2C+presentata+da+Liliana+Ruocco.+Esibizioni+a+cura+delle+associazioni+di+danza+e+sportive+acquesi.&location=Zona+Archi+Romani+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="feste" data-province="al" data-start="2026-07-12" data-end="2026-07-12" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
@@ -5642,6 +5986,10 @@
         <div class="event-foot">
           <span class="event-price">Iscrizione auto 15€; Pranzo 20€…</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Ex%20chiesa%20Santa%20Margherita%20-%20Cassinelle%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Raduno+Auto+d%27Epoca+a+Cassinelle+-+Pro+Loco+Cassinelle&dates=20260712%2F20260713&details=Raduno+di+auto+d%27epoca+organizzato+dalla+Pro+Loco+di+Cassinelle.+Il+programma+prevede+ritrovo+alle+9%3A00+presso+l%27ex+chiesa+Santa+Margherita%2C+tour+del+territorio+con+partenza+alle+10%3A30%2C+visita+al+Museo+Afer+di+Tiglieto+e+rientro+per+il+pranzo+alle+14%3A00+circa.+Nel+pomeriggio+le+auto+restano+esposte+in+paese.+Numero+massimo+di+iscritti%3A+100.&location=Ex+chiesa+Santa+Margherita+-+Cassinelle+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5666,6 +6014,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Fiera di San Guido 2026</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Zona%20Archi%20Romani%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Concerto+del+Corpo+Bandistico+Acquese+e+Spettacolo+Pirotecnico&dates=20260713%2F20260714&details=Concerto+del+Corpo+Bandistico+Acquese+seguito+da+uno+spettacolo+pirotecnico.+La+serata+si+conclude+con+il+Fireworks+Party+con+DJ+Set+a+cura+di+Savage+dalle+ore+23%3A00.&location=Zona+Archi+Romani+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="laboratori" data-province="al" data-start="2026-07-13" data-end="2026-07-13" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -5689,6 +6041,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corte%20Padre%20Dionisio%20-%20Silvano%20d%27Orba%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Spettacolo+Finale+del+Laboratorio+-+I+Bambini+Incontrano+il+Magico+Mondo+dei+Burattini&dates=20260713%2F20260714&details=Spettacolo+finale+del+laboratorio+dedicato+ai+bambini%2C+a+cura+di+Francesca+Ragno%2C+Belen+Gonz%C3%A1les+Fern%C3%A1ndez%2C+Marco+Salvatico%2C+Elena+Cantarella%2C+Chiara+Cosentino+e+Susanna+Rizzi.+I+bambini+incontrano+il+magico+mondo+dei+burattini+in+una+serata+speciale.+In+caso+di+maltempo+lo+spettacolo+si+terr%C3%A0+presso+il+teatro+comunale+SOMS.&location=Corte+Padre+Dionisio+-+Silvano+d%27Orba+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="spettacoli" data-province="al" data-start="2026-07-13" data-end="2026-08-09" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -5708,6 +6064,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corte%20del%20Castello%20-%20Pozzolo%20Formigaro%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Vivi+Pozzolo+Estate+nella+Corte+del+Castello&dates=20260713%2F20260810&details=Cinema+sotto+le+Stelle+ogni+luned%C3%AC+13+e+20+luglio%2C+a+cura+dell%27Assessorato+al+Turismo.+Proiezioni+cinematografiche+all%27aperto+nella+Corte+del+Castello+di+Pozzolo+Formigaro.+Programma%3A+13%2F07-20%2F07+Cinema+sotto+le+Stelle+-+Assessorato+al+Turismo%3B+18%2F07+La+Vedova+Allegra+-+Operetta+al+Castello+-+A.C.P.S.+La+Frascheta+A.P.S.%3B+19%2F07+Gran+Torneo+di+Burraco+sotto+le+Stelle+-+Centro+Anziani%3B+22%2F07+Francesco+Costa+-+Attraverso+Festival+-+Assessorato+al+Turismo%3B+24%2F07+Sotto+a+Chi+Tocca+-+Omaggio+a+Gilberto+Govi+-+Compagnia+Sopra+il+Palco%3B+30%2F07+Trio+dell%27Isola+in+concerto+-+A.C.P.S.+La+Frascheta%3B+06%2F08-09%2F08+Festa+d%27Agosto+-+Pro+Loco+Pozzolese%3B+08%2F08+Trofeo+Comune+di+Pozzolo+F.ro+e+ASD+Fornasari+Auto+-+Gara+ciclistica+su+strada.&location=Corte+del+Castello+-+Pozzolo+Formigaro+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5732,6 +6092,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corte%20Padre%20Dionisio%20-%20Silvano%20d%27Orba%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baraca+e+Borat%C3%AC+-+Gioppino+a+Venezia+in+Cerca+di+Fortuna&dates=20260714%2F20260715&details=Spettacolo+di+burattini+a+cura+di+Baraca+e+Borat%C3%AC+di+Bergamo.+Storia+di+coraggio%2C+duelli+e+gran+mangiate%2C+dove+l%27eroe+alla+fine+vince+sempre.+Nell%27ambito+del+Premio+Silvano+d%27Orba+2026.+In+caso+di+maltempo+presso+il+teatro+comunale+SOMS.&location=Corte+Padre+Dionisio+-+Silvano+d%27Orba+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-07-15" data-end="2026-07-15" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -5754,6 +6118,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corte%20Padre%20Dionisio%20-%20Silvano%20d%27Orba%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Francesca+Zoccarato+-+Variet%C3%A0+Prestige&dates=20260715%2F20260716&details=Spettacolo+di+burattini+a+cura+di+Francesca+Zoccarato+%28Milano-Friuli%29.+Variet%C3%A0+Prestige%3A+spettacolo+in+carne%2C+legno+e+fantasie+surreali.+Nell%27ambito+del+Premio+Silvano+d%27Orba+2026.+In+caso+di+maltempo+presso+il+teatro+comunale+SOMS.&location=Corte+Padre+Dionisio+-+Silvano+d%27Orba+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5778,6 +6146,10 @@
           <span class="event-price">Intero €8,00 / Ridotto fino a…</span>
           <span class="event-tag">CineOvada sotto le stelle</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Via%20S.%20Paolo%20-%20Ovada%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=La+Villa+Portoghese+-+CineOvada+sotto+le+stelle&dates=20260716%2F20260717&details=Cinema+all%27aperto+nel+giardino+della+Scuola+di+Musica+di+Ovada.+In+programma+%27La+Villa+Portoghese%27+di+Avelina+Prat%2C+Spagna%2FPortogallo+2025.+Organizzato+dal+Comune+di+Ovada+e+Centro+Culturale+Carignano.&location=Via+S.+Paolo+-+Ovada+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="at" data-start="2026-07-16" data-end="2026-07-21" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -5797,6 +6169,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=San%20Martino%20Alfieri%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sagra+del+Barbera+2026+-+San+Martino+Alfieri&dates=20260716%2F20260722&details=Gara+podistica+non+competitiva+aperta+a+tutti.+Memorial+%27Avvocati+Gianluca+Mastinu+e+Emiliano+Lano%27.+Pasta+per+tutti+i+partecipanti.+Programma%3A+16%2F07+Str%C3%A0+San+Martino+-+Gara+Podistica%3B+17%2F07+Shary+Band+-+Tributo+Ufficiale+Italiano+alla+Disco+Music+%2B+DJ+Set+MADJ%3B+18%2F07+Serata+Danzante+con+Marianna+Lanteri%3B+19%2F07+Serata+Danzante+con+Orchestra+Matteo+Tarantino%3B+20%2F07+Serata+con+l%27Orchestra+Spettacolo+Pietro+Galassi%3B+21%2F07+Alex+e+La+Band+con+ospite+Marco+Zeta+%2B+Grande+Spettacolo+Pirotecnico.&location=San+Martino+Alfieri+%28AT%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5821,6 +6197,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corte%20Padre%20Dionisio%20-%20Silvano%20d%27Orba%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Teatro+Medico+Ipnotico+-+Il+Cane+Infernale&dates=20260716%2F20260717&details=Spettacolo+di+burattini+a+cura+del+Teatro+Medico+Ipnotico+di+Parma.+Il+Cane+Infernale%3A+musica+e+pensiero+contro+violenza+e+pregiudizio.+Nell%27ambito+del+Premio+Silvano+d%27Orba+2026.+In+caso+di+maltempo+presso+il+teatro+comunale+SOMS.&location=Corte+Padre+Dionisio+-+Silvano+d%27Orba+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="spettacoli" data-province="al" data-start="2026-07-17" data-end="2026-07-17" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
@@ -5844,6 +6224,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">35° Rassegna Nazionale Ai Bravi…</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corte%20Padre%20Dionisio%20-%20Silvano%20d%27Orba%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Teatro+Pane+e+Mate+-+Il+Cuoco+e+la+Sirena&dates=20260717%2F20260718&details=Spettacolo+di+burattini+a+cura+del+Teatro+Pane+e+Mate+di+Abbiategrasso.+Il+Cuoco+e+la+Sirena%3A+il+viaggio+sognante+di+un+cuoco+sbadato+e+della+sua+amica+sirena.+Nell%27ambito+del+Premio+Silvano+d%27Orba+2026.+In+caso+di+maltempo+presso+il+teatro+comunale+SOMS.&location=Corte+Padre+Dionisio+-+Silvano+d%27Orba+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="al" data-start="2026-07-24" data-end="2026-07-24" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -5863,6 +6247,10 @@
         <div class="event-foot">
           <span class="event-price">A pagamento (da verificare)</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Terruggia%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Stratr%C3%BCggia+2026+-+Una+Corsa+per+Angela+-+Pro+Loco+Terruggia&dates=20260724%2F20260725&details=Stratr%C3%BCggia+2026+%C3%A8+una+corsa+podistica+organizzata+dalla+Pro+Loco+di+Terruggia+in+collaborazione+con+AVIS+Casale.+Prevede+una+corsa+adulti+di+circa+6%2C5+km+%28agonisti+UISP+e+non+agonisti%29+e+una+corsa+bambini+di+circa+1%2C5+km.+L%27evento+%C3%A8+dedicato+ad+Angela.&location=Terruggia+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5887,6 +6275,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Roccaforte%20Ligure%20-%20fraz.%20San%20Martino%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Noi+Kodama+%28Camelozampa%29+-+Sarvego+Festival&dates=20260725%2F20260726&details=Lettura+e+laboratorio+con+Bimba+Landman.+I+Kodama+sono+gli+spiriti+degli+alberi+nella+tradizione+giapponese.+Un+incontro+per+conoscerli+e+portarne+a+casa+uno+creato+con+gli+acquerelli%2C+seguito+da+laboratorio+sulla+vita+segreta+del+bosco+con+esperta+di+biodiversit%C3%A0.&location=Roccaforte+Ligure+-+fraz.+San+Martino+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card has-cover" data-category="cultura" data-province="al" data-start="2026-08-08" data-end="2026-08-08" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14)">
@@ -5909,6 +6301,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Albera%20Ligure%20-%20fraz.%20Vend%C3%A9rsi%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=La+famiglia+Allocchi+%28Camelozampa%29+-+Sarvego+Festival&dates=20260808%2F20260809&details=Piccola+passeggiata+per+scoprire+chi+si+nasconde+nel+bosco+con+Chiara+Morosinotto.+Dalla+scienziata+che+ha+studiato+gli+allocchi+in+Finlandia+arriva+un+libro+appassionante.+A+seguire+laboratorio+con+l%27Ente+Parco+Appennino+Piemontese.&location=Albera+Ligure+-+fraz.+Vend%C3%A9rsi+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5933,6 +6329,10 @@
           <span class="event-price free">Gratuito</span>
           <span class="event-tag">Sarvego Festival 2026 - A naso in su</span>
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Carrega%20Ligure%20-%20fraz.%20Magioncalda%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Quello+che+%28non%29+vedo+%28Barbagianni+editore%29+-+Sarvego+Festival&dates=20260822%2F20260823&details=Lettura+e+laboratorio+con+Daniela+Pareschi.+Basta+andare+oltre+il+primo+sguardo+per+scoprire+le+trame+nascoste+che+tengono+insieme+tutte+le+cose+del+mondo.+Con+diverse+forme+e+colori+si+scopre+come+tutto+si+pu%C3%B2+trasformare+sotto+i+nostri+occhi.&location=Carrega+Ligure+-+fraz.+Magioncalda+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="laboratori" data-province="al" data-start="2026-08-24" data-end="2026-08-31" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
@@ -5952,6 +6352,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Corso%20Alessandria%2C%2039%20-%20Tortona%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Alla+%28Ri%29scoperta+delle+Favole+Disney&dates=20260824%2F20260901&details=Laboratorio+aperto+alla+cittadinanza+dedicato+alla+favola+di+Alice+nel+Paese+delle+Meraviglie.+Lettura+della+favola+e+attivit%C3%A0+ludico-creativa+per+bambini+dai+2+ai+5+anni+accompagnati+da+un+caregiver.+Iscrizione+obbligatoria.+Programma%3A+24%2F08+Alla+%28Ri%29scoperta+delle+Favole+Disney+%E2%80%93+Alice+nel+Paese+delle+Meraviglie+-+Cooperativa+Sociale+Il+Gabbiano%3B+31%2F08+Serata+Finale+Cinema+e+Pizza+Disney+-+Cooperativa+Sociale+Il+Gabbiano.&location=Corso+Alessandria%2C+39+-+Tortona+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -5973,6 +6377,10 @@
           <span class="event-price free">Gratuito</span>
           
         </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Novi%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Festa+dello+Sport+-+Evento+Finale+Plogging+Smiling+Biking&dates=20260901%2F20261001&details=Evento+finale+del+calendario+Plogging+Smiling+Biking%3A+Festa+dello+Sport.+Data+esatta+di+settembre+2026+da+definire.+Evento+conclusivo+della+rassegna+ecologica+e+sportiva+di+Novi+Ligure.&location=Novi+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
+        </div>
       </article>
 
       <article class="event-card" data-category="sport" data-province="al" data-start="2026-09-20" data-end="2026-09-20" style="--cat-color:#1d9e75;--cat-tint:rgba(29,158,117,0.14)">
@@ -5992,6 +6400,10 @@
         <div class="event-foot">
           <span class="event-price free">Gratuito</span>
           
+        </div>
+        <div class="event-actions">
+          <a class="event-act" href="https://www.google.com/maps/search/?api=1&query=Merella%20-%20Novi%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>
+          <a class="event-act" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pedalata+Ecologica+Merella+-+Plogging+Smiling+Biking&dates=20260920%2F20260921&details=Pedalata+ecologica+nella+zona+Merella+di+Novi+Ligure.+Evento+cicloturistico+in+chiave+ambientale.&location=Merella+-+Novi+Ligure+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Calendario</a>
         </div>
       </article>
 
@@ -6167,20 +6579,6 @@
           const open = desc.classList.toggle('expanded');
           btn.textContent = open ? 'Leggi meno' : 'Leggi tutto';
         });
-      }
-    });
-  })();
-
-  // Protezione anti-copia del testo (deterrente per copia/selezione casuale)
-  (function () {
-    ['copy', 'cut', 'contextmenu', 'selectstart', 'dragstart'].forEach(function (evt) {
-      document.addEventListener(evt, function (e) { e.preventDefault(); });
-    });
-    document.addEventListener('keydown', function (e) {
-      const k = (e.key || '').toLowerCase();
-      // Blocca Ctrl/Cmd + C / X / A / S / U / P
-      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'a', 's', 'u', 'p'].includes(k)) {
-        e.preventDefault();
       }
     });
   })();
