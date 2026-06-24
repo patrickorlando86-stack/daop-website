@@ -11,7 +11,7 @@ Fonte dati (in ordine di priorità):
 Rigenera SOLO la griglia .events-grid e il gruppo di filtri per categoria
 dentro eventi.html, tra gli ancoraggi esistenti. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, sys
+import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
@@ -238,7 +238,7 @@ def render(events):
           <img src="{cover_url}" alt="Locandina: {esc(trunc(e['nome'], 70))}" loading="lazy" decoding="async">
         </a>
 ''' if cover_url else '')
-        cards.append(f'''      <article class="event-card{' has-cover' if cover_url else ''}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+        cards.append(f'''      <article class="event-card{' has-cover' if cover_url else ''}" id="{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
 {cover}        <div class="ev-top">
           <span class="ev-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
           <span class="ev-cat">{esc(catlabel)}</span>
@@ -267,6 +267,27 @@ def render(events):
     return cat_filter, grid
 
 
+def slugify(s):
+    """Slug ASCII per ancore/URL: 'Sagra di Città' -> 'sagra-di-citta'."""
+    s = unicodedata.normalize('NFKD', s or '').encode('ascii', 'ignore').decode()
+    s = re.sub(r'[^a-zA-Z0-9]+', '-', s).strip('-').lower()
+    return s[:50].strip('-') or 'evento'
+
+
+def assegna_ancore(events):
+    """Dà a ogni evento un id univoco e stabile (data + slug del nome), usato sia
+    come ancora della card sia come URL nei dati strutturati."""
+    seen = set()
+    for e in events:
+        base = f"ev-{e['d_start'].isoformat()}-{slugify(e['nome'])}"
+        anchor, i = base, 2
+        while anchor in seen:
+            anchor = f"{base}-{i}"
+            i += 1
+        seen.add(anchor)
+        e['anchor'] = anchor
+
+
 def parse_times(ora):
     """Estrae fino a due orari HH:MM (inizio/fine) dal campo Ora."""
     return [f"{int(h):02d}:{m}" for h, m in re.findall(r'(\d{1,2})[:.](\d{2})', ora or '')][:2]
@@ -290,6 +311,10 @@ def event_jsonld(e):
         address["addressLocality"] = city
     if e['prov']:
         address["addressRegion"] = e['prov']
+    venue = (e.get('luogo') or '').strip()
+    if venue:
+        address["streetAddress"] = venue
+    ev_url = f"{PAGE_URL}#{e['anchor']}" if e.get('anchor') else PAGE_URL
 
     obj = {
         "@type": "Event",
@@ -300,11 +325,11 @@ def event_jsonld(e):
         "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "location": {
             "@type": "Place",
-            "name": city or e['prov'],
+            "name": venue or city or e['prov'],
             "address": address,
         },
         "image": [loc_url(e['loc']) or DEFAULT_IMG],
-        "url": PAGE_URL,
+        "url": ev_url,
         "organizer": {"@type": "Organization", "name": "DAOP APS", "url": SITE_URL},
     }
     descr = (e['descr'] or '').strip()
@@ -314,10 +339,10 @@ def event_jsonld(e):
     pz = (e['prezzo'] or '').lower()
     if any(k in pz for k in FREE_KW):
         obj["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
-                         "availability": "https://schema.org/InStock", "url": PAGE_URL}
+                         "availability": "https://schema.org/InStock", "url": ev_url}
     elif (e['prezzo'] or '').strip():
         obj["offers"] = {"@type": "Offer", "availability": "https://schema.org/InStock",
-                         "url": PAGE_URL}
+                         "url": ev_url}
     return obj
 
 
@@ -363,6 +388,7 @@ def update_sitemap():
 
 def main():
     events = normalize(fetch_rows())
+    assegna_ancore(events)
     cat_filter, grid = render(events)
     jsonld = render_jsonld(events)
     inject(cat_filter, grid, jsonld)

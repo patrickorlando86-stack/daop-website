@@ -15,7 +15,8 @@
   "luogo": "Villa Vidua",
   "indirizzo": "Villa Vidua - Conzano (AL)",
   "d_start": "2026-05-10",
-  "d_end": "2026-07-26"
+  "d_end": "2026-07-26",
+  "anchor": "ev-2026-05-10-artisti-collezionisti-per-pinocchio-a-200-anni-dal"
  },
  {
   "nome": "Mostra delle Illusioni",
@@ -33,7 +34,8 @@
   "luogo": "Museo dei Campionissimi",
   "indirizzo": "Viale dei Campionissimi, Novi Ligure (AL)",
   "d_start": "2026-05-28",
-  "d_end": "2026-08-31"
+  "d_end": "2026-08-31",
+  "anchor": "ev-2026-05-28-mostra-delle-illusioni"
  },
  {
   "nome": "Sportello di consulenza educativa per famiglie - Centro per famiglie comune di Asti",
@@ -51,7 +53,8 @@
   "luogo": "",
   "indirizzo": "Asti (AT)",
   "d_start": "2026-06-04",
-  "d_end": "2026-06-25"
+  "d_end": "2026-06-25",
+  "anchor": "ev-2026-06-04-sportello-di-consulenza-educativa-per-famiglie-cen"
  },
  {
   "nome": "Gli EsplorAttori",
@@ -69,7 +72,8 @@
   "luogo": "Centro per le Famiglie CISA di Tortona",
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-06-18",
-  "d_end": "2026-07-02"
+  "d_end": "2026-07-02",
+  "anchor": "ev-2026-06-18-gli-esplorattori"
  },
  {
   "nome": "Toy Story 5 al cinema",
@@ -87,7 +91,8 @@
   "luogo": "Multisala Moderno",
   "indirizzo": "Via Nicolò Girardengo 42, Novi Ligure (AL)",
   "d_start": "2026-06-18",
-  "d_end": "2026-06-24"
+  "d_end": "2026-06-24",
+  "anchor": "ev-2026-06-18-toy-story-5-al-cinema"
  },
  {
   "nome": "Festa d'Estate 2026 - Pro Loco Cortiglione",
@@ -105,7 +110,8 @@
   "luogo": "Cortiglione",
   "indirizzo": "Cortiglione (AT)",
   "d_start": "2026-06-19",
-  "d_end": "2026-06-25"
+  "d_end": "2026-06-25",
+  "anchor": "ev-2026-06-19-festa-d-estate-2026-pro-loco-cortiglione"
  },
  {
   "nome": "Notti d'Estate al Parco Torre",
@@ -123,7 +129,8 @@
   "luogo": "Parco Torre Storica",
   "indirizzo": "Parco Torre Storica - San Salvatore Monferrato (AL)",
   "d_start": "2026-06-19",
-  "d_end": "2026-06-26"
+  "d_end": "2026-06-26",
+  "anchor": "ev-2026-06-19-notti-d-estate-al-parco-torre"
  },
  {
   "nome": "Vivi Pozzolo Estate nella Corte del Castello",
@@ -141,7 +148,8 @@
   "luogo": "Corte del Castello",
   "indirizzo": "Corte del Castello - Pozzolo Formigaro (AL)",
   "d_start": "2026-06-20",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-06-20-vivi-pozzolo-estate-nella-corte-del-castello"
  },
  {
   "nome": "4 Salti nel verde - Centro per famiglie comune di Asti",
@@ -159,7 +167,8 @@
   "luogo": "Area Verde di Via G. Sodano",
   "indirizzo": "Via G. Sodano - Asti (AT)",
   "d_start": "2026-06-24",
-  "d_end": "2026-06-24"
+  "d_end": "2026-06-24",
+  "anchor": "ev-2026-06-24-4-salti-nel-verde-centro-per-famiglie-comune-di-as"
  },
  {
   "nome": "Falò di San Giovanni - Pro Loco Bosio",
@@ -177,7 +186,8 @@
   "luogo": "Piazzale del Percorso della Memoria",
   "indirizzo": "Piazzale del Percorso della Memoria - Bosio (AL)",
   "d_start": "2026-06-24",
-  "d_end": "2026-06-24"
+  "d_end": "2026-06-24",
+  "anchor": "ev-2026-06-24-falo-di-san-giovanni-pro-loco-bosio"
  },
  {
   "nome": "Festa di San Giovanni - Montemarzino",
@@ -195,7 +205,8 @@
   "luogo": "",
   "indirizzo": "Montemarzino (AL)",
   "d_start": "2026-06-24",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-24-festa-di-san-giovanni-montemarzino"
  },
  {
   "nome": "Musica in Centro - San Giorgio Festival",
@@ -213,7 +224,8 @@
   "luogo": "Centro storico di Alessandria",
   "indirizzo": "Centro storico - Alessandria (AL)",
   "d_start": "2026-06-24",
-  "d_end": "2026-06-24"
+  "d_end": "2026-06-24",
+  "anchor": "ev-2026-06-24-musica-in-centro-san-giorgio-festival"
  },
  {
   "nome": "49ª Sagra dei Sicot - Quattordio",
@@ -231,7 +243,8 @@
   "luogo": "Via San Sebastiano, 9",
   "indirizzo": "Via San Sebastiano, 9 - Quattordio (AL)",
   "d_start": "2026-06-25",
-  "d_end": "2026-06-30"
+  "d_end": "2026-06-30",
+  "anchor": "ev-2026-06-25-49a-sagra-dei-sicot-quattordio"
  },
  {
   "nome": "Canzoni per un'Amica - Serata di Beneficenza - Pro Loco Cortiglione",
@@ -249,7 +262,8 @@
   "luogo": "Piazza del paese",
   "indirizzo": "Piazza del paese - Cortiglione (AT)",
   "d_start": "2026-06-25",
-  "d_end": "2026-06-25"
+  "d_end": "2026-06-25",
+  "anchor": "ev-2026-06-25-canzoni-per-un-amica-serata-di-beneficenza-pro-loc"
  },
  {
   "nome": "Gira la Moda - Centro per famiglie comune di Asti",
@@ -267,7 +281,8 @@
   "luogo": "",
   "indirizzo": "Asti (AT)",
   "d_start": "2026-06-25",
-  "d_end": "2026-06-25"
+  "d_end": "2026-06-25",
+  "anchor": "ev-2026-06-25-gira-la-moda-centro-per-famiglie-comune-di-asti"
  },
  {
   "nome": "The Drama - Un Segreto è per Sempre - CineOvada sotto le stelle",
@@ -285,7 +300,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-06-25",
-  "d_end": "2026-06-25"
+  "d_end": "2026-06-25",
+  "anchor": "ev-2026-06-25-the-drama-un-segreto-e-per-sempre-cineovada-sotto"
  },
  {
   "nome": "45ª Sagra di Qualità dell'Agnolotto d'Asino - Calliano Monferrato",
@@ -303,7 +319,8 @@
   "luogo": "Piazza Marconi",
   "indirizzo": "Piazza Marconi - Calliano Monferrato (AT)",
   "d_start": "2026-06-26",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-26-45a-sagra-di-qualita-dell-agnolotto-d-asino-callia"
  },
  {
   "nome": "Festa della Birra & Sagra di San Pietro - Cassano Spinola",
@@ -321,7 +338,8 @@
   "luogo": "",
   "indirizzo": "Cassano Spinola (AL)",
   "d_start": "2026-06-26",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-26-festa-della-birra-sagra-di-san-pietro-cassano-spin"
  },
  {
   "nome": "Festa di Inizio Estate - Proloco Fraschetta",
@@ -339,7 +357,8 @@
   "luogo": "Piazza Barrera",
   "indirizzo": "Piazza Barrera - Spinetta Marengo (AL)",
   "d_start": "2026-06-26",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-26-festa-di-inizio-estate-proloco-fraschetta"
  },
  {
   "nome": "Paesaggi d'asporto: crea la tua scatola delle meraviglie - Musei di Asti",
@@ -357,7 +376,8 @@
   "luogo": "Musei di Asti",
   "indirizzo": "Musei di Asti - Asti (AT)",
   "d_start": "2026-06-26",
-  "d_end": "2026-06-26"
+  "d_end": "2026-06-26",
+  "anchor": "ev-2026-06-26-paesaggi-d-asporto-crea-la-tua-scatola-delle-merav"
  },
  {
   "nome": "Pecore sotto Copertura - CineOvada sotto le stelle",
@@ -375,7 +395,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-06-26",
-  "d_end": "2026-06-26"
+  "d_end": "2026-06-26",
+  "anchor": "ev-2026-06-26-pecore-sotto-copertura-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Sagra della Panissa - Pro Loco di Morano sul Po",
@@ -393,7 +414,8 @@
   "luogo": "Palatenda",
   "indirizzo": "Palatenda - Morano sul Po (AL)",
   "d_start": "2026-06-26",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-26-sagra-della-panissa-pro-loco-di-morano-sul-po"
  },
  {
   "nome": "Aquilonandia - Alessandria Retail Park",
@@ -411,7 +433,8 @@
   "luogo": "Alessandria Retail Park",
   "indirizzo": "Alessandria Retail Park - Alessandria (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-aquilonandia-alessandria-retail-park"
  },
  {
   "nome": "Canta Cián 2026 - Sabato 27 Giugno",
@@ -429,7 +452,8 @@
   "luogo": "Borgata Superiore",
   "indirizzo": "Borgata Superiore - Rossiglione (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-canta-cian-2026-sabato-27-giugno"
  },
  {
   "nome": "Dal Sole alle Stelle - Centro per le Famiglie L'Arcobaleno",
@@ -447,7 +471,8 @@
   "luogo": "Community Hub",
   "indirizzo": "Via Novi 13, Ovada (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-dal-sole-alle-stelle-centro-per-le-famiglie-l-arco"
  },
  {
   "nome": "Dal Sole alle Stelle - Cooperativa Sociale Azimut",
@@ -465,7 +490,8 @@
   "luogo": "Community Hub",
   "indirizzo": "Via Novi 13 - Ovada (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-dal-sole-alle-stelle-cooperativa-sociale-azimut"
  },
  {
   "nome": "Disclosure Day - CineOvada sotto le stelle",
@@ -483,7 +509,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-disclosure-day-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Festa Patronale 2026 - Castellero d'Asti",
@@ -501,7 +528,8 @@
   "luogo": "Piazza del paese",
   "indirizzo": "Piazza del paese - Castellero (AT)",
   "d_start": "2026-06-27",
-  "d_end": "2026-07-01"
+  "d_end": "2026-07-01",
+  "anchor": "ev-2026-06-27-festa-patronale-2026-castellero-d-asti"
  },
  {
   "nome": "Gavi - Il Borgo sotto le Stelle - Pro Loco di Gavi",
@@ -519,7 +547,8 @@
   "luogo": "Centro Storico di Gavi",
   "indirizzo": "Centro Storico - Gavi (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-gavi-il-borgo-sotto-le-stelle-pro-loco-di-gavi"
  },
  {
   "nome": "La Grande Notte Bianca - Quartiere Cristo",
@@ -537,7 +566,8 @@
   "luogo": "Quartiere Cristo",
   "indirizzo": "Via Carlo Alberto, Corso Acqui, Piazza Gaggia Zanzi, Piazzale UNES - Alessandria (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-la-grande-notte-bianca-quartiere-cristo"
  },
  {
   "nome": "Memorial Andrea Foglia 11ª Edizione",
@@ -555,7 +585,8 @@
   "luogo": "Piazzetta Rattazzi",
   "indirizzo": "Piazzetta Rattazzi - Novi Ligure (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-27-memorial-andrea-foglia-11a-edizione"
  },
  {
   "nome": "Notte Bianca - Quartiere Cristo",
@@ -573,7 +604,8 @@
   "luogo": "Quartiere Cristo",
   "indirizzo": "Quartiere Cristo - Alessandria (AL)",
   "d_start": "2026-06-27",
-  "d_end": "2026-06-27"
+  "d_end": "2026-06-27",
+  "anchor": "ev-2026-06-27-notte-bianca-quartiere-cristo"
  },
  {
   "nome": "2° Raduno di auto storiche e Youngtimer - Associazione Officina Molarese del Arte e del Tempo A.RS.",
@@ -591,7 +623,8 @@
   "luogo": "Piazza del paese",
   "indirizzo": "Piazza del paese - Molare (AL)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-2-raduno-di-auto-storiche-e-youngtimer-associazion"
  },
  {
   "nome": "Arti Circensi - Aps NessunIsola & Asd Squilibria Circo",
@@ -609,7 +642,8 @@
   "luogo": "Cortile dell'Antica Canonica di Albugnano",
   "indirizzo": "Cortile dell'Antica Canonica - Albugnano (AT)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-arti-circensi-aps-nessunisola-asd-squilibria-circo"
  },
  {
   "nome": "Bellezze in Bicicletta - Tortona Retrò - La Mitica",
@@ -627,7 +661,8 @@
   "luogo": "Centro Storico",
   "indirizzo": "Centro Storico - Tortona (AL)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-bellezze-in-bicicletta-tortona-retro-la-mitica"
  },
  {
   "nome": "Canta Cián 2026 - Domenica 28 Giugno",
@@ -645,7 +680,8 @@
   "luogo": "Borgata Superiore",
   "indirizzo": "Borgata Superiore - Rossiglione (AL)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-canta-cian-2026-domenica-28-giugno"
  },
  {
   "nome": "Disclosure Day - CineOvada sotto le stelle",
@@ -663,7 +699,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-disclosure-day-cineovada-sotto-le-stelle"
  },
  {
   "nome": "La Mitica - Ciclostorica con bici d'epoca per i colli di Serse e Fausto Coppi",
@@ -681,7 +718,8 @@
   "luogo": "Tortona",
   "indirizzo": "Tortona (AL)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-la-mitica-ciclostorica-con-bici-d-epoca-per-i-coll"
  },
  {
   "nome": "Momento didattico alla Cascina Masino - Associazione Maglietto Novi Ligure",
@@ -699,7 +737,8 @@
   "luogo": "Cascina Masino",
   "indirizzo": "Strada Cassano 9 - Pozzolo Formigaro (AL)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-momento-didattico-alla-cascina-masino-associazione"
  },
  {
   "nome": "Officina Creativa - C'era una volta un...click",
@@ -717,7 +756,8 @@
   "luogo": "Scuola Da Feltre",
   "indirizzo": "Valmadonna Strada Comunale 29",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-officina-creativa-c-era-una-volta-un-click"
  },
  {
   "nome": "Officina Creativa - Decoriamo la nostra bicicletta",
@@ -735,7 +775,8 @@
   "luogo": "Scuola Da Feltre",
   "indirizzo": "Valmadonna Strada Comunale 29",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-officina-creativa-decoriamo-la-nostra-bicicletta"
  },
  {
   "nome": "Taxi Rally - 2° Autogiro Summerqua Quattordio / 1° Memorial Venturini Antonio",
@@ -753,7 +794,8 @@
   "luogo": "Parcheggio PPG Via Serra, 1 (Parco Assistenza)",
   "indirizzo": "Via Serra, 1 - Quattordio (AL)",
   "d_start": "2026-06-28",
-  "d_end": "2026-06-28"
+  "d_end": "2026-06-28",
+  "anchor": "ev-2026-06-28-taxi-rally-2-autogiro-summerqua-quattordio-1-memor"
  },
  {
   "nome": "I Martedì nel Chiostro delle Storie",
@@ -771,7 +813,8 @@
   "luogo": "Biblioteca Civica Novi Ligure",
   "indirizzo": "Via Marconi 66, 15067 Novi Ligure (AL)",
   "d_start": "2026-06-30",
-  "d_end": "2026-06-30"
+  "d_end": "2026-06-30",
+  "anchor": "ev-2026-06-30-i-martedi-nel-chiostro-delle-storie"
  },
  {
   "nome": "Corso di massaggio infantile A.I.M.I. - Centro per famiglie comune di Asti",
@@ -789,7 +832,8 @@
   "luogo": "",
   "indirizzo": "Asti (AT)",
   "d_start": "2026-07-01",
-  "d_end": "2026-07-31"
+  "d_end": "2026-07-31",
+  "anchor": "ev-2026-07-01-corso-di-massaggio-infantile-a-i-m-i-centro-per-fa"
  },
  {
   "nome": "Il Giardino dei Giochi - Centro per famiglie comune di Asti",
@@ -807,7 +851,8 @@
   "luogo": "Area Verde di Via G. Sodano",
   "indirizzo": "Via G. Sodano - Asti (AT)",
   "d_start": "2026-07-01",
-  "d_end": "2026-07-29"
+  "d_end": "2026-07-29",
+  "anchor": "ev-2026-07-01-il-giardino-dei-giochi-centro-per-famiglie-comune"
  },
  {
   "nome": "E...State con Noi 2026 - Biblioteca Comunale E. Arecco",
@@ -825,7 +870,8 @@
   "luogo": "Punto Tappa",
   "indirizzo": "Via Mandirola 1, Pasturana (AL)",
   "d_start": "2026-07-02",
-  "d_end": "2026-07-30"
+  "d_end": "2026-07-30",
+  "anchor": "ev-2026-07-02-e-state-con-noi-2026-biblioteca-comunale-e-arecco"
  },
  {
   "nome": "Michael - CineOvada sotto le stelle",
@@ -843,7 +889,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-02",
-  "d_end": "2026-07-02"
+  "d_end": "2026-07-02",
+  "anchor": "ev-2026-07-02-michael-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Città di Pianura - CineOvada sotto le stelle",
@@ -861,7 +908,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-03",
-  "d_end": "2026-07-03"
+  "d_end": "2026-07-03",
+  "anchor": "ev-2026-07-03-citta-di-pianura-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Folk è Bello - 8° Street Festival - Pro Loco Mirabello",
@@ -879,7 +927,8 @@
   "luogo": "Piazza Libertà",
   "indirizzo": "Piazza Libertà - Mirabello Monferrato (AL)",
   "d_start": "2026-07-03",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-03-folk-e-bello-8-street-festival-pro-loco-mirabello"
  },
  {
   "nome": "Folk è Bello 8° Street Festival - Pro Loco Mirabello",
@@ -897,7 +946,8 @@
   "luogo": "Piazza Libertà",
   "indirizzo": "Piazza Libertà - Mirabello Monferrato (AL)",
   "d_start": "2026-07-03",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-03-folk-e-bello-8-street-festival-pro-loco-mirabello-2"
  },
  {
   "nome": "Luna Park",
@@ -915,7 +965,8 @@
   "luogo": "Piazza Don Dolermo",
   "indirizzo": "Piazza Don Dolermo - Acqui Terme (AL)",
   "d_start": "2026-07-03",
-  "d_end": "2026-07-14"
+  "d_end": "2026-07-14",
+  "anchor": "ev-2026-07-03-luna-park"
  },
  {
   "nome": "MOMBack Dance - Giornata delle Associazioni",
@@ -933,7 +984,8 @@
   "luogo": "Cantina Terre Astesane",
   "indirizzo": "Cantina Terre Astesane - Mombercelli (AT)",
   "d_start": "2026-07-03",
-  "d_end": "2026-07-03"
+  "d_end": "2026-07-03",
+  "anchor": "ev-2026-07-03-momback-dance-giornata-delle-associazioni"
  },
  {
   "nome": "14ª Sagra delle Lasagne - Pro Loco Orsara B.da APS",
@@ -951,7 +1003,8 @@
   "luogo": "",
   "indirizzo": "Orsara Bormida (AL)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-04-14a-sagra-delle-lasagne-pro-loco-orsara-b-da-aps"
  },
  {
   "nome": "MOMBack Dance - Friciula Run & Super Flash",
@@ -969,7 +1022,8 @@
   "luogo": "Cantina Terre Astesane",
   "indirizzo": "Cantina Terre Astesane - Mombercelli (AT)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-04"
+  "d_end": "2026-07-04",
+  "anchor": "ev-2026-07-04-momback-dance-friciula-run-super-flash"
  },
  {
   "nome": "Minions & Monsters - CineOvada sotto le stelle",
@@ -987,7 +1041,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-04"
+  "d_end": "2026-07-04",
+  "anchor": "ev-2026-07-04-minions-monsters-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Mondi di Carta - Sarvego Festival",
@@ -1005,7 +1060,8 @@
   "luogo": "Parco Mongiardino",
   "indirizzo": "Parco Mongiardino - Mongiardino Ligure (AL)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-04"
+  "d_end": "2026-07-04",
+  "anchor": "ev-2026-07-04-mondi-di-carta-sarvego-festival"
  },
  {
   "nome": "Notti Bianche Asti - 4 Luglio",
@@ -1023,7 +1079,8 @@
   "luogo": "Piazze Roma, Medici, Catena, Statuto, Alfieri e vie limitrofe",
   "indirizzo": "Piazze Roma, Medici, Catena, Statuto, Alfieri e vie limitrofe - Asti (AT)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-04"
+  "d_end": "2026-07-04",
+  "anchor": "ev-2026-07-04-notti-bianche-asti-4-luglio"
  },
  {
   "nome": "Notti Bianche Asti - Città di Asti / EventDoc / Associazione Iperbole",
@@ -1041,7 +1098,8 @@
   "luogo": "Piazze Roma, Medici, Catena, Statuto, Alfieri e vie limitrofe",
   "indirizzo": "Piazze Roma, Medici, Catena, Statuto, Alfieri e vie limitrofe - Asti (AT)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-04"
+  "d_end": "2026-07-04",
+  "anchor": "ev-2026-07-04-notti-bianche-asti-citta-di-asti-eventdoc-associaz"
  },
  {
   "nome": "ValleStock - One Day of Peace & Music",
@@ -1059,7 +1117,8 @@
   "luogo": "Strada panoramica Ciazze",
   "indirizzo": "Strada panoramica Ciazze - Rossiglione (GE)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-04-vallestock-one-day-of-peace-music"
  },
  {
   "nome": "Weekend a Ponzone - 19° Raduno delle Pro Loco",
@@ -1077,7 +1136,8 @@
   "luogo": "Centro storico di Ponzone",
   "indirizzo": "Centro storico di Ponzone - Ponzone (AL)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-04-weekend-a-ponzone-19-raduno-delle-pro-loco"
  },
  {
   "nome": "Weekend a Ponzone - 19° Raduno delle Pro Loco - Pro Loco di Ponzone",
@@ -1095,7 +1155,8 @@
   "luogo": "Centro storico",
   "indirizzo": "Ponzone (AL)",
   "d_start": "2026-07-04",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-04-weekend-a-ponzone-19-raduno-delle-pro-loco-pro-loc"
  },
  {
   "nome": "Color Run BSM - Edizione 3",
@@ -1113,7 +1174,8 @@
   "luogo": "Scuole Elementari Borgo San Martino",
   "indirizzo": "Scuole Elementari - Borgo San Martino (AL)",
   "d_start": "2026-07-05",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-05-color-run-bsm-edizione-3"
  },
  {
   "nome": "Minions & Monsters - CineOvada sotto le stelle",
@@ -1131,7 +1193,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-05",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-05-minions-monsters-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Sagra degli Gnocchi con Hollywood Show - Pro Loco Borgoratto",
@@ -1149,7 +1212,8 @@
   "luogo": "",
   "indirizzo": "Borgoratto (AL)",
   "d_start": "2026-07-05",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-05-sagra-degli-gnocchi-con-hollywood-show-pro-loco-bo"
  },
  {
   "nome": "Solo Dance (Cocai design) - Sarvego Festival",
@@ -1167,7 +1231,8 @@
   "luogo": "Cabella Ligure - fraz. Pobbio",
   "indirizzo": "Cabella Ligure - fraz. Pobbio (AL)",
   "d_start": "2026-07-05",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-05-solo-dance-cocai-design-sarvego-festival"
  },
  {
   "nome": "Una Valle in Festa - Pro Loco Montacuto",
@@ -1185,7 +1250,8 @@
   "luogo": "Frazione Giarolo",
   "indirizzo": "Frazione Giarolo - Montacuto (AL)",
   "d_start": "2026-07-05",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-05-una-valle-in-festa-pro-loco-montacuto"
  },
  {
   "nome": "Una Valle in Festa - Pro Loco di Montacuto",
@@ -1203,7 +1269,8 @@
   "luogo": "Frazione Giarolo",
   "indirizzo": "Frazione Giarolo - Montacuto (AL)",
   "d_start": "2026-07-05",
-  "d_end": "2026-07-05"
+  "d_end": "2026-07-05",
+  "anchor": "ev-2026-07-05-una-valle-in-festa-pro-loco-di-montacuto"
  },
  {
   "nome": "Alla (Ri)scoperta delle Favole Disney",
@@ -1221,7 +1288,8 @@
   "luogo": "Centro per le Famiglie C.I.S.A. di Tortona",
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-07-06",
-  "d_end": "2026-08-03"
+  "d_end": "2026-08-03",
+  "anchor": "ev-2026-07-06-alla-ri-scoperta-delle-favole-disney"
  },
  {
   "nome": "Sipario Aperto! - Laboratorio di teatro con Giuseppe Vassallo",
@@ -1239,7 +1307,8 @@
   "luogo": "Teatro della Torretta - Parrocchia N.S. di Lourdes",
   "indirizzo": "Teatro della Torretta - Parrocchia N.S. di Lourdes - Asti (AT)",
   "d_start": "2026-07-06",
-  "d_end": "2026-07-23"
+  "d_end": "2026-07-23",
+  "anchor": "ev-2026-07-06-sipario-aperto-laboratorio-di-teatro-con-giuseppe"
  },
  {
   "nome": "Rental Family - Nelle Vite degli Altri - CineOvada sotto le stelle",
@@ -1257,7 +1326,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-09",
-  "d_end": "2026-07-09"
+  "d_end": "2026-07-09",
+  "anchor": "ev-2026-07-09-rental-family-nelle-vite-degli-altri-cineovada-sot"
  },
  {
   "nome": "Acqui Rock Night 2026",
@@ -1275,7 +1345,8 @@
   "luogo": "Zona Archi Romani",
   "indirizzo": "Zona Archi Romani - Acqui Terme (AL)",
   "d_start": "2026-07-10",
-  "d_end": "2026-07-10"
+  "d_end": "2026-07-10",
+  "anchor": "ev-2026-07-10-acqui-rock-night-2026"
  },
  {
   "nome": "Fiera di San Guido",
@@ -1293,7 +1364,8 @@
   "luogo": "Zona Archi Romani",
   "indirizzo": "Zona Archi Romani - Acqui Terme (AL)",
   "d_start": "2026-07-10",
-  "d_end": "2026-07-14"
+  "d_end": "2026-07-14",
+  "anchor": "ev-2026-07-10-fiera-di-san-guido"
  },
  {
   "nome": "Marty Supreme - CineOvada sotto le stelle",
@@ -1311,7 +1383,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-10",
-  "d_end": "2026-07-10"
+  "d_end": "2026-07-10",
+  "anchor": "ev-2026-07-10-marty-supreme-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Sagra del Vitello di Razza Piemontese 2026",
@@ -1329,7 +1402,8 @@
   "luogo": "Piazza del Mercato",
   "indirizzo": "Piazza del Mercato - Montechiaro d'Asti (AT)",
   "d_start": "2026-07-10",
-  "d_end": "2026-07-12"
+  "d_end": "2026-07-12",
+  "anchor": "ev-2026-07-10-sagra-del-vitello-di-razza-piemontese-2026"
  },
  {
   "nome": "Sagra della Carne Piemontese alla Griglia, Gnocco Tricolore, Raviolata e Farinata",
@@ -1347,7 +1421,8 @@
   "luogo": "Area Gastronomica Archi Romani",
   "indirizzo": "Area Gastronomica Archi Romani - Acqui Terme (AL)",
   "d_start": "2026-07-10",
-  "d_end": "2026-07-13"
+  "d_end": "2026-07-13",
+  "anchor": "ev-2026-07-10-sagra-della-carne-piemontese-alla-griglia-gnocco-t"
  },
  {
   "nome": "Acqui al Chiaro di Luna - Ti Racconto Acqui",
@@ -1365,7 +1440,8 @@
   "luogo": "Partenza IAT Ufficio Informazioni Turistiche",
   "indirizzo": "Corso Roma 1 - Acqui Terme (AL)",
   "d_start": "2026-07-11",
-  "d_end": "2026-07-11"
+  "d_end": "2026-07-11",
+  "anchor": "ev-2026-07-11-acqui-al-chiaro-di-luna-ti-racconto-acqui"
  },
  {
   "nome": "Forse non tutti sanno che... (Kite) - Sarvego Festival",
@@ -1383,7 +1459,8 @@
   "luogo": "",
   "indirizzo": "Albera Ligure (AL)",
   "d_start": "2026-07-11",
-  "d_end": "2026-07-11"
+  "d_end": "2026-07-11",
+  "anchor": "ev-2026-07-11-forse-non-tutti-sanno-che-kite-sarvego-festival"
  },
  {
   "nome": "Minions & Monsters - CineOvada sotto le stelle",
@@ -1401,7 +1478,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-11",
-  "d_end": "2026-07-11"
+  "d_end": "2026-07-11",
+  "anchor": "ev-2026-07-11-minions-monsters-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Shary Band - Concerto Spettacolo con DJ Set '70 '80 '90",
@@ -1419,7 +1497,8 @@
   "luogo": "Zona Archi Romani",
   "indirizzo": "Zona Archi Romani - Acqui Terme (AL)",
   "d_start": "2026-07-11",
-  "d_end": "2026-07-11"
+  "d_end": "2026-07-11",
+  "anchor": "ev-2026-07-11-shary-band-concerto-spettacolo-con-dj-set-70-80-90"
  },
  {
   "nome": "Bancarelle nelle Vie del Centro",
@@ -1437,7 +1516,8 @@
   "luogo": "Vie del centro cittadino",
   "indirizzo": "Vie del centro cittadino - Acqui Terme (AL)",
   "d_start": "2026-07-12",
-  "d_end": "2026-07-14"
+  "d_end": "2026-07-14",
+  "anchor": "ev-2026-07-12-bancarelle-nelle-vie-del-centro"
  },
  {
   "nome": "Galleggia Non Galleggia 2026 - Amici del Po Casale Monferrato",
@@ -1455,7 +1535,8 @@
   "luogo": "Fiume Po",
   "indirizzo": "Fiume Po - Casale Monferrato (AL)",
   "d_start": "2026-07-12",
-  "d_end": "2026-07-12"
+  "d_end": "2026-07-12",
+  "anchor": "ev-2026-07-12-galleggia-non-galleggia-2026-amici-del-po-casale-m"
  },
  {
   "nome": "Manifestazione Automobilistica - Raduni Eclipse",
@@ -1473,7 +1554,8 @@
   "luogo": "Zona Bagni",
   "indirizzo": "Zona Bagni - Acqui Terme (AL)",
   "d_start": "2026-07-12",
-  "d_end": "2026-07-12"
+  "d_end": "2026-07-12",
+  "anchor": "ev-2026-07-12-manifestazione-automobilistica-raduni-eclipse"
  },
  {
   "nome": "Mercatino del Bambino \"Giocando si Impara\" - S.P.A.T.",
@@ -1491,7 +1573,8 @@
   "luogo": "Zona Bagni",
   "indirizzo": "Zona Bagni - Acqui Terme (AL)",
   "d_start": "2026-07-12",
-  "d_end": "2026-07-12"
+  "d_end": "2026-07-12",
+  "anchor": "ev-2026-07-12-mercatino-del-bambino-giocando-si-impara-s-p-a-t"
  },
  {
   "nome": "Minions & Monsters - CineOvada sotto le stelle",
@@ -1509,7 +1592,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-12",
-  "d_end": "2026-07-12"
+  "d_end": "2026-07-12",
+  "anchor": "ev-2026-07-12-minions-monsters-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Miss Reginetta d'Italia - Finale Regionale Basso Piemonte e Liguria",
@@ -1527,7 +1611,8 @@
   "luogo": "Zona Archi Romani",
   "indirizzo": "Zona Archi Romani - Acqui Terme (AL)",
   "d_start": "2026-07-12",
-  "d_end": "2026-07-12"
+  "d_end": "2026-07-12",
+  "anchor": "ev-2026-07-12-miss-reginetta-d-italia-finale-regionale-basso-pie"
  },
  {
   "nome": "Raduno Auto d'Epoca a Cassinelle - Pro Loco Cassinelle",
@@ -1545,7 +1630,8 @@
   "luogo": "Ex chiesa Santa Margherita",
   "indirizzo": "Ex chiesa Santa Margherita - Cassinelle (AL)",
   "d_start": "2026-07-12",
-  "d_end": "2026-07-12"
+  "d_end": "2026-07-12",
+  "anchor": "ev-2026-07-12-raduno-auto-d-epoca-a-cassinelle-pro-loco-cassinel"
  },
  {
   "nome": "Concerto del Corpo Bandistico Acquese e Spettacolo Pirotecnico",
@@ -1563,7 +1649,8 @@
   "luogo": "Zona Archi Romani",
   "indirizzo": "Zona Archi Romani - Acqui Terme (AL)",
   "d_start": "2026-07-13",
-  "d_end": "2026-07-13"
+  "d_end": "2026-07-13",
+  "anchor": "ev-2026-07-13-concerto-del-corpo-bandistico-acquese-e-spettacolo"
  },
  {
   "nome": "Spettacolo Finale del Laboratorio - I Bambini Incontrano il Magico Mondo dei Burattini",
@@ -1581,7 +1668,8 @@
   "luogo": "Corte Padre Dionisio",
   "indirizzo": "Corte Padre Dionisio - Silvano d'Orba (AL)",
   "d_start": "2026-07-13",
-  "d_end": "2026-07-13"
+  "d_end": "2026-07-13",
+  "anchor": "ev-2026-07-13-spettacolo-finale-del-laboratorio-i-bambini-incont"
  },
  {
   "nome": "Vivi Pozzolo Estate nella Corte del Castello",
@@ -1599,7 +1687,8 @@
   "luogo": "Corte del Castello",
   "indirizzo": "Corte del Castello - Pozzolo Formigaro (AL)",
   "d_start": "2026-07-13",
-  "d_end": "2026-08-09"
+  "d_end": "2026-08-09",
+  "anchor": "ev-2026-07-13-vivi-pozzolo-estate-nella-corte-del-castello"
  },
  {
   "nome": "Baraca e Boratì - Gioppino a Venezia in Cerca di Fortuna",
@@ -1617,7 +1706,8 @@
   "luogo": "Corte Padre Dionisio",
   "indirizzo": "Corte Padre Dionisio - Silvano d'Orba (AL)",
   "d_start": "2026-07-14",
-  "d_end": "2026-07-14"
+  "d_end": "2026-07-14",
+  "anchor": "ev-2026-07-14-baraca-e-borati-gioppino-a-venezia-in-cerca-di-for"
  },
  {
   "nome": "Francesca Zoccarato - Varietà Prestige",
@@ -1635,7 +1725,8 @@
   "luogo": "Corte Padre Dionisio",
   "indirizzo": "Corte Padre Dionisio - Silvano d'Orba (AL)",
   "d_start": "2026-07-15",
-  "d_end": "2026-07-15"
+  "d_end": "2026-07-15",
+  "anchor": "ev-2026-07-15-francesca-zoccarato-varieta-prestige"
  },
  {
   "nome": "La Villa Portoghese - CineOvada sotto le stelle",
@@ -1653,7 +1744,8 @@
   "luogo": "Giardino della Scuola di Musica",
   "indirizzo": "Via S. Paolo - Ovada (AL)",
   "d_start": "2026-07-16",
-  "d_end": "2026-07-16"
+  "d_end": "2026-07-16",
+  "anchor": "ev-2026-07-16-la-villa-portoghese-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Sagra del Barbera 2026 - San Martino Alfieri",
@@ -1671,7 +1763,8 @@
   "luogo": "",
   "indirizzo": "San Martino Alfieri (AT)",
   "d_start": "2026-07-16",
-  "d_end": "2026-07-21"
+  "d_end": "2026-07-21",
+  "anchor": "ev-2026-07-16-sagra-del-barbera-2026-san-martino-alfieri"
  },
  {
   "nome": "Teatro Medico Ipnotico - Il Cane Infernale",
@@ -1689,7 +1782,8 @@
   "luogo": "Corte Padre Dionisio",
   "indirizzo": "Corte Padre Dionisio - Silvano d'Orba (AL)",
   "d_start": "2026-07-16",
-  "d_end": "2026-07-16"
+  "d_end": "2026-07-16",
+  "anchor": "ev-2026-07-16-teatro-medico-ipnotico-il-cane-infernale"
  },
  {
   "nome": "Teatro Pane e Mate - Il Cuoco e la Sirena",
@@ -1707,7 +1801,8 @@
   "luogo": "Corte Padre Dionisio",
   "indirizzo": "Corte Padre Dionisio - Silvano d'Orba (AL)",
   "d_start": "2026-07-17",
-  "d_end": "2026-07-17"
+  "d_end": "2026-07-17",
+  "anchor": "ev-2026-07-17-teatro-pane-e-mate-il-cuoco-e-la-sirena"
  },
  {
   "nome": "Stratrüggia 2026 - Una Corsa per Angela - Pro Loco Terruggia",
@@ -1725,7 +1820,8 @@
   "luogo": "",
   "indirizzo": "Terruggia (AL)",
   "d_start": "2026-07-24",
-  "d_end": "2026-07-24"
+  "d_end": "2026-07-24",
+  "anchor": "ev-2026-07-24-stratruggia-2026-una-corsa-per-angela-pro-loco-ter"
  },
  {
   "nome": "Noi Kodama (Camelozampa) - Sarvego Festival",
@@ -1743,7 +1839,8 @@
   "luogo": "Roccaforte - fraz. San Martino",
   "indirizzo": "Roccaforte Ligure - fraz. San Martino (AL)",
   "d_start": "2026-07-25",
-  "d_end": "2026-07-25"
+  "d_end": "2026-07-25",
+  "anchor": "ev-2026-07-25-noi-kodama-camelozampa-sarvego-festival"
  },
  {
   "nome": "La famiglia Allocchi (Camelozampa) - Sarvego Festival",
@@ -1761,7 +1858,8 @@
   "luogo": "Albera Ligure - fraz. Vendérsi",
   "indirizzo": "Albera Ligure - fraz. Vendérsi (AL)",
   "d_start": "2026-08-08",
-  "d_end": "2026-08-08"
+  "d_end": "2026-08-08",
+  "anchor": "ev-2026-08-08-la-famiglia-allocchi-camelozampa-sarvego-festival"
  },
  {
   "nome": "Quello che (non) vedo (Barbagianni editore) - Sarvego Festival",
@@ -1779,7 +1877,8 @@
   "luogo": "Carrega Ligure - fraz. Magioncalda",
   "indirizzo": "Carrega Ligure - fraz. Magioncalda (AL)",
   "d_start": "2026-08-22",
-  "d_end": "2026-08-22"
+  "d_end": "2026-08-22",
+  "anchor": "ev-2026-08-22-quello-che-non-vedo-barbagianni-editore-sarvego-fe"
  },
  {
   "nome": "Alla (Ri)scoperta delle Favole Disney",
@@ -1797,7 +1896,8 @@
   "luogo": "Centro per le Famiglie C.I.S.A. di Tortona",
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-08-24",
-  "d_end": "2026-08-31"
+  "d_end": "2026-08-31",
+  "anchor": "ev-2026-08-24-alla-ri-scoperta-delle-favole-disney"
  },
  {
   "nome": "Festa dello Sport - Evento Finale Plogging Smiling Biking",
@@ -1815,7 +1915,8 @@
   "luogo": "Novi Ligure",
   "indirizzo": "Novi Ligure (AL)",
   "d_start": "2026-09-01",
-  "d_end": "2026-09-30"
+  "d_end": "2026-09-30",
+  "anchor": "ev-2026-09-01-festa-dello-sport-evento-finale-plogging-smiling-b"
  },
  {
   "nome": "Pedalata Ecologica Merella - Plogging Smiling Biking",
@@ -1833,6 +1934,7 @@
   "luogo": "Merella",
   "indirizzo": "Merella - Novi Ligure (AL)",
   "d_start": "2026-09-20",
-  "d_end": "2026-09-20"
+  "d_end": "2026-09-20",
+  "anchor": "ev-2026-09-20-pedalata-ecologica-merella-plogging-smiling-biking"
  }
 ]
