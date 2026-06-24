@@ -68,6 +68,7 @@ def fetch_rows():
             'Ora': e['ora'], 'Città': e['citta'], 'Provincia': e['prov'],
             'Categoria': e['categoria'], 'Età': e['eta'], 'Prezzo': e['prezzo'],
             'Descrizione': e['descr'], 'Manifestazione': e.get('manifest', ''),
+            'Locandina': e.get('loc', ''),
         } for e in snap]
 
 
@@ -89,7 +90,8 @@ def normalize(rows):
             ora=d.get('Ora', ''), citta=d.get('Città', ''), prov=prov,
             categoria=(d.get('Categoria', '') if d.get('Categoria', '') in KNOWN_CATS else ''),
             eta=d.get('Età', ''), prezzo=d.get('Prezzo', ''), descr=d.get('Descrizione', ''),
-            manifest=d.get('Manifestazione', ''), d_start=di, d_end=df,
+            manifest=d.get('Manifestazione', ''), loc=d.get('Locandina', ''),
+            d_start=di, d_end=df,
         ))
     events.sort(key=lambda e: (e['d_start'], e['nome']))
     return events
@@ -116,6 +118,17 @@ SITE_URL = "https://www.daop.it"
 PAGE_URL = f"{SITE_URL}/eventi.html"
 DEFAULT_IMG = f"{SITE_URL}/assets/images/headerdaop.jpg"
 FREE_KW = ('gratuito', 'gratis', 'libero', 'ingresso libero')
+
+
+def loc_url(loc):
+    """URL assoluto della locandina. Accetta un nome file (cercato in
+    /assets/eventi/) oppure un URL completo già pronto. Vuoto se assente."""
+    loc = (loc or '').strip()
+    if not loc:
+        return ''
+    if loc.startswith(('http://', 'https://')):
+        return loc
+    return f"{SITE_URL}/assets/eventi/{loc.lstrip('/')}"
 
 
 def esc(s):
@@ -168,8 +181,13 @@ def render(events):
         eta_html = f'\n          <span>{USER_SVG} {eta}</span>' if eta else ''
         manifest = f'<span class="event-tag">{esc(trunc(e["manifest"], 40))}</span>' if e['manifest'] else ''
         color, tint = COLORS.get(slug, COLORS['altro'])
-        cards.append(f'''      <article class="event-card" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
-        <div class="ev-top">
+        cover_url = loc_url(e['loc'])
+        cover = (f'''        <a class="ev-cover" href="{cover_url}" target="_blank" rel="noopener" aria-label="Apri la locandina di {esc(e['nome'])}">
+          <img src="{cover_url}" alt="Locandina: {esc(trunc(e['nome'], 70))}" loading="lazy" decoding="async">
+        </a>
+''' if cover_url else '')
+        cards.append(f'''      <article class="event-card{' has-cover' if cover_url else ''}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+{cover}        <div class="ev-top">
           <span class="ev-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
           <span class="ev-cat">{esc(catlabel)}</span>
           <span class="ev-date"><span class="d">{d.day:02d}</span><span class="m">{MESI[d.month-1]}</span></span>
@@ -233,7 +251,7 @@ def event_jsonld(e):
             "name": city or e['prov'],
             "address": address,
         },
-        "image": [DEFAULT_IMG],
+        "image": [loc_url(e['loc']) or DEFAULT_IMG],
         "url": PAGE_URL,
         "organizer": {"@type": "Organization", "name": "DAOP APS", "url": SITE_URL},
     }
