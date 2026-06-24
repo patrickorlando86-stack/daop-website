@@ -120,15 +120,25 @@ DEFAULT_IMG = f"{SITE_URL}/assets/images/headerdaop.jpg"
 FREE_KW = ('gratuito', 'gratis', 'libero', 'ingresso libero')
 
 
-def loc_url(loc):
-    """URL assoluto della locandina. Accetta un nome file (cercato in
-    /assets/eventi/) oppure un URL completo già pronto. Vuoto se assente."""
+def loc_path(loc):
+    """Percorso della locandina per il browser: un nome file diventa
+    root-relative (/assets/eventi/<file>, valido sia in locale sia live),
+    un URL completo resta intatto. Vuoto se assente. Usato nelle card."""
     loc = (loc or '').strip()
     if not loc:
         return ''
     if loc.startswith(('http://', 'https://')):
         return loc
-    return f"{SITE_URL}/assets/eventi/{loc.lstrip('/')}"
+    return f"/assets/eventi/{loc.lstrip('/')}"
+
+
+def loc_url(loc):
+    """URL assoluto della locandina, per i dati strutturati schema.org
+    (che richiedono URL assoluti). Vuoto se assente."""
+    p = loc_path(loc)
+    if not p or p.startswith(('http://', 'https://')):
+        return p
+    return f"{SITE_URL}{p}"
 
 
 def esc(s):
@@ -181,7 +191,7 @@ def render(events):
         eta_html = f'\n          <span>{USER_SVG} {eta}</span>' if eta else ''
         manifest = f'<span class="event-tag">{esc(trunc(e["manifest"], 40))}</span>' if e['manifest'] else ''
         color, tint = COLORS.get(slug, COLORS['altro'])
-        cover_url = loc_url(e['loc'])
+        cover_url = loc_path(e['loc'])
         cover = (f'''        <a class="ev-cover" href="{cover_url}" target="_blank" rel="noopener" aria-label="Apri la locandina di {esc(e['nome'])}">
           <img src="{cover_url}" alt="Locandina: {esc(trunc(e['nome'], 70))}" loading="lazy" decoding="async">
         </a>
