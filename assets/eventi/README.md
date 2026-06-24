@@ -2,11 +2,15 @@
 
 Le immagini delle locandine degli eventi vanno qui.
 
-Flusso:
-1. Scarica la locandina (es. con il "daop downloader").
-2. Copia il file in questa cartella, es. `sagra-conzano-2026.jpg`.
-3. Nel Google Sheet "luoghi", tab **Eventi**, scrivi quel nome file nella colonna **Locandina**.
-4. Commit + push: la notte dopo `scripts/genera_eventi.py` aggiorna la pagina da solo.
+Di norma **ci pensa il "daop downloader" da solo**: estrae gli eventi dalla
+locandina, scrive la colonna `Locandina` nel foglio, copia il file qui e fa
+commit+push da solo (`AUTO_PUSH_SITO`). La notte dopo `scripts/genera_eventi.py`
+(azione GitHub) rigenera la pagina con la copertina. Tu non devi fare nulla.
+
+Se invece aggiungi una locandina **a mano**:
+1. Copia il file in questa cartella, es. `sagra-conzano-2026.jpg`.
+2. Nel Google Sheet "luoghi", tab **Eventi**, scrivi quel nome file nella colonna **Locandina**.
+3. Commit + push di questa cartella.
 
 Note:
 - Nella colonna `Locandina` puoi mettere il **nome file** (cercato qui in `/assets/eventi/`)
