@@ -31,6 +31,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  // Profondita di scroll: evento a 25/50/75/100%
+  var soglie = [25, 50, 75, 100], raggiunte = {};
+  function controllaScroll() {
+    var h = document.documentElement;
+    var scrollabile = h.scrollHeight - h.clientHeight;
+    if (scrollabile <= 0) return;
+    var perc = (h.scrollTop || document.body.scrollTop) / scrollabile * 100;
+    soglie.forEach(function (s) {
+      if (perc >= s && !raggiunte[s]) {
+        raggiunte[s] = true;
+        if (typeof gtag === 'function') { gtag('event', 'scroll_depth', { percent_scroll: s }); }
+      }
+    });
+  }
+  window.addEventListener('scroll', controllaScroll, { passive: true });
 });
 </script>
 
