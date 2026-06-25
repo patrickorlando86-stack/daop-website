@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
         track('click_telefono', href);
       } else if (href.indexOf('ginettoapp.it') !== -1) {
         track('apri_ginetto', href);
+      } else if (href.indexOf('gioco.sane-italia.it') !== -1) {
+        track('gioca_ora', href);
       } else if (href.indexOf('instagram.com') !== -1 || href.indexOf('facebook.com') !== -1) {
         track('click_social', href);
       }
