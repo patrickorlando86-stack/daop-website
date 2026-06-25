@@ -9,6 +9,28 @@
   gtag('js', new Date());
   gtag('config', 'G-6M747985MC');
 </script>
+<!-- DAOP - tracciamento eventi chiave (click contatti e link importanti) -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  function track(name, href) {
+    if (typeof gtag === 'function') { gtag('event', name, { link_url: href }); }
+  }
+  document.querySelectorAll('a[href]').forEach(function (a) {
+    var href = a.getAttribute('href') || '';
+    a.addEventListener('click', function () {
+      if (href.indexOf('mailto:') === 0) {
+        track('click_email', href);
+      } else if (href.indexOf('tel:') === 0) {
+        track('click_telefono', href);
+      } else if (href.indexOf('ginettoapp.it') !== -1) {
+        track('apri_ginetto', href);
+      } else if (href.indexOf('instagram.com') !== -1 || href.indexOf('facebook.com') !== -1) {
+        track('click_social', href);
+      }
+    });
+  });
+});
+</script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
