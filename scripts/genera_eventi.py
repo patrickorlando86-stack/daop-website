@@ -293,6 +293,27 @@ def parse_times(ora):
     return [f"{int(h):02d}:{m}" for h, m in re.findall(r'(\d{1,2})[:.](\d{2})', ora or '')][:2]
 
 
+def parse_price(prezzo):
+    """Estrae il prezzo numerico più basso (in €) dal testo; None se assente.
+    Considera solo i numeri accostati a € o "euro", per non confondere
+    prezzi con età o numero di persone."""
+    p = prezzo or ''
+    nums = re.findall(r'€\s*(\d+(?:[.,]\d{1,2})?)', p)
+    nums += re.findall(r'(\d+(?:[.,]\d{1,2})?)\s*(?:€|euro)', p, re.I)
+    vals = []
+    for n in nums:
+        try:
+            v = float(n.replace(',', '.'))
+            if v > 0:
+                vals.append(v)
+        except ValueError:
+            pass
+    if not vals:
+        return None
+    v = min(vals)
+    return str(int(v)) if v == int(v) else f"{v:.2f}"
+
+
 def event_jsonld(e):
     """Costruisce un oggetto schema.org/Event per un singolo evento."""
     times = parse_times(e['ora'])
@@ -336,13 +357,21 @@ def event_jsonld(e):
     if descr:
         obj["description"] = descr
 
+    # performer: campo consigliato da Google per gli Event (qui l'organizzazione)
+    obj["performer"] = {"@type": "Organization", "name": "DAOP APS"}
+
+    # offers: includiamo price + priceCurrency + validFrom (richiesti per un'offerta valida).
+    # Per gli eventi "a pagamento" senza una cifra nota omettiamo offers, così da non
+    # generare un'offerta incompleta (causa degli avvisi di Search Console).
     pz = (e['prezzo'] or '').lower()
     if any(k in pz for k in FREE_KW):
-        obj["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
-                         "availability": "https://schema.org/InStock", "url": ev_url}
-    elif (e['prezzo'] or '').strip():
-        obj["offers"] = {"@type": "Offer", "availability": "https://schema.org/InStock",
-                         "url": ev_url}
+        price = "0"
+    else:
+        price = parse_price(e['prezzo'])
+    if price is not None:
+        obj["offers"] = {"@type": "Offer", "price": price, "priceCurrency": "EUR",
+                         "availability": "https://schema.org/InStock",
+                         "validFrom": e['d_start'].isoformat(), "url": ev_url}
     return obj
 
 
