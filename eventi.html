@@ -6726,6 +6726,31 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   })();
+
+  // Attribuzione automatica al copia-incolla. Il testo resta liberamente
+  // selezionabile — meglio per gli utenti e per la SEO — ma quando viene
+  // copiato un blocco sostanzioso aggiungiamo in coda la fonte: se i contenuti
+  // finiscono su un altro sito, si portano dietro il riferimento a DAOP.
+  (function () {
+    const FONTE_URL = location.origin + location.pathname;
+    document.addEventListener('copy', function (ev) {
+      const sel = document.getSelection();
+      if (!sel || sel.isCollapsed) return;
+      const text = sel.toString();
+      // Selezioni brevi (un orario, un indirizzo, il nome di un paese): lasciale
+      // pulite, così il copia-incolla "utile" all'utente non viene disturbato.
+      if (text.trim().length < 60) return;
+      const cd = ev.clipboardData;
+      if (!cd) return;
+      // Versione HTML: preserva la formattazione della selezione e aggiunge la fonte.
+      const frag = document.createElement('div');
+      for (let i = 0; i < sel.rangeCount; i++) frag.appendChild(sel.getRangeAt(i).cloneContents());
+      cd.setData('text/html', frag.innerHTML +
+        '<p style="font-size:12px;color:#777">Fonte: <a href="' + FONTE_URL + '">DAOP APS</a> — ' + FONTE_URL + '</p>');
+      cd.setData('text/plain', text + '\n\nFonte: DAOP APS — ' + FONTE_URL);
+      ev.preventDefault();
+    });
+  })();
 </script>
 </body>
 </html>
