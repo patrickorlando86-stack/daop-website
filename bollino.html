@@ -199,6 +199,19 @@ document.addEventListener('DOMContentLoaded', function () {
   .footer-bottom-links a{font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:var(--transition)}
   .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
 
+  /* ── FORM CANDIDATURA ── */
+  .apply-form{background:white;border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-card);border:1px solid rgba(45,74,92,0.06)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .form-field{margin-bottom:20px;display:flex;flex-direction:column}
+  .form-field label{font-size:0.88rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+  .form-field .req{color:var(--orange)}
+  .form-field input,.form-field textarea{font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--text-dark);background:var(--cream);border:1px solid rgba(45,74,92,0.12);border-radius:var(--radius-sm);padding:12px 14px;transition:var(--transition);width:100%}
+  .form-field input:focus,.form-field textarea:focus{outline:none;border-color:var(--orange);background:white;box-shadow:0 0 0 3px rgba(232,149,74,0.12)}
+  .form-field textarea{resize:vertical;min-height:90px}
+  .form-note{color:var(--orange-dark);font-size:0.9rem;font-weight:600;margin-bottom:14px}
+  .form-privacy{font-size:0.82rem;color:var(--text-light);margin-top:16px;line-height:1.6}
+  .form-privacy a{color:var(--text-mid)}
+
   /* ── RESPONSIVE ── */
   @media(max-width:900px){
     .nav-links{display:none}
@@ -209,6 +222,8 @@ document.addEventListener('DOMContentLoaded', function () {
     section{padding:72px 20px}
     .page-hero{padding:120px 20px 72px}
     .first-card{padding:36px 24px}
+    .form-row{grid-template-columns:1fr;gap:0}
+    .apply-form{padding:28px 22px}
     .footer-grid{grid-template-columns:1fr 1fr;gap:24px 20px}
     .footer-grid>div:first-child{grid-column:1/-1}
     .footer-bottom{flex-direction:column;text-align:center}
@@ -350,10 +365,68 @@ document.addEventListener('DOMContentLoaded', function () {
   <h2>Pensi che la tua attività lo meriti?</h2>
   <p>La candidatura è riservata alle attività. Scrivici con due righe sul tuo locale: leggiamo tutto, e veniamo a conoscere chi ci convince.</p>
   <p class="fineprint">Valida per le province di Alessandria e Asti.</p>
-  <a href="mailto:info@daop.it?subject=Candidatura%20Bollino%20Consigliato%20DAOP&body=Ciao%20DAOP%2C%0D%0Avorremmo%20candidare%20la%20nostra%20attivit%C3%A0%20al%20bollino%20%22Consigliato%20DAOP%20%E2%80%93%20Family%20Friendly%22.%0D%0A%0D%0ANome%20dell%27attivit%C3%A0%3A%20%0D%0ACitt%C3%A0%3A%20%0D%0AIndirizzo%3A%20%0D%0ASito%20o%20Instagram%3A%20%0D%0AReferente%20e%20telefono%3A%20%0D%0A%0D%0APerch%C3%A9%20siamo%20un%20luogo%20Family%20Friendly%20%28raccontatecelo%20con%20parole%20vostre%29%3A%0D%0A%0D%0A" class="btn btn-gold" style="font-size:1rem;padding:15px 32px;">
+  <a href="#candidatura" class="btn btn-gold" style="font-size:1rem;padding:15px 32px;">
     📩 Candida la tua attività
   </a>
 </div>
+
+<!-- QUESTIONARIO CANDIDATURA -->
+<section class="bg-cream" id="candidatura">
+  <div class="section-narrow">
+    <div style="text-align:center;max-width:600px;margin:0 auto 48px;">
+      <span class="section-label">Il questionario</span>
+      <h2 class="section-title">Raccontaci la tua attività</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Poche domande, niente burocrazia. Servono a noi per conoscerti e a te per raccontarci cosa rende speciale il tuo modo di accogliere le famiglie.</p>
+    </div>
+    <form class="apply-form" id="bollino-form" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="f-nome">Nome dell'attività <span class="req">*</span></label>
+          <input type="text" id="f-nome" name="nome" autocomplete="organization" required>
+        </div>
+        <div class="form-field">
+          <label for="f-tipo">Tipo di attività</label>
+          <input type="text" id="f-tipo" name="tipo" placeholder="Libreria, bar, ristorante, negozio…">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="f-citta">Città <span class="req">*</span></label>
+          <input type="text" id="f-citta" name="citta" autocomplete="address-level2" required>
+        </div>
+        <div class="form-field">
+          <label for="f-indirizzo">Indirizzo</label>
+          <input type="text" id="f-indirizzo" name="indirizzo" autocomplete="street-address">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="f-referente">Referente <span class="req">*</span></label>
+          <input type="text" id="f-referente" name="referente" autocomplete="name" required>
+        </div>
+        <div class="form-field">
+          <label for="f-contatto">Telefono o email <span class="req">*</span></label>
+          <input type="text" id="f-contatto" name="contatto" required>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="f-web">Sito o Instagram</label>
+        <input type="text" id="f-web" name="web" placeholder="https://…">
+      </div>
+      <div class="form-field">
+        <label for="f-perche">Perché siete un luogo Family Friendly? <span class="req">*</span></label>
+        <textarea id="f-perche" name="perche" rows="4" required placeholder="Raccontatecelo con parole vostre."></textarea>
+      </div>
+      <div class="form-field">
+        <label for="f-bambini">Cosa fate di concreto per i bambini?</label>
+        <textarea id="f-bambini" name="bambini" rows="3" placeholder="Attività, letture, laboratori, accortezze, spazi pensati per loro…"></textarea>
+      </div>
+      <p class="form-note" id="form-note" role="alert" hidden>Compila i campi obbligatori (*) per continuare.</p>
+      <button type="submit" class="btn btn-gold" style="font-size:1rem;padding:15px 32px;">📩 Invia la candidatura</button>
+      <p class="form-privacy">Premendo invio si aprirà la tua email già compilata con le risposte: ti basta inviarla. Usiamo questi dati solo per valutare la candidatura — vedi la <a href="privacy.html">Privacy Policy</a>.</p>
+    </form>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -418,6 +491,46 @@ document.addEventListener('DOMContentLoaded', function () {
   function closeMobile() {
     document.getElementById('mobile-menu').classList.remove('open');
   }
+
+  // Questionario candidatura bollino → compila email ordinata
+  (function () {
+    var form = document.getElementById('bollino-form');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = document.getElementById('form-note');
+      if (!form.checkValidity()) {
+        note.hidden = false;
+        form.reportValidity();
+        return;
+      }
+      note.hidden = true;
+      function v(id) { var el = document.getElementById(id); return (el && el.value || '').trim(); }
+      var lines = [
+        'Ciao DAOP,',
+        'vorremmo candidare la nostra attività al bollino "Consigliato DAOP – Family Friendly".',
+        '',
+        'Nome attività: ' + v('f-nome'),
+        'Tipo: ' + v('f-tipo'),
+        'Città: ' + v('f-citta'),
+        'Indirizzo: ' + v('f-indirizzo'),
+        'Referente: ' + v('f-referente'),
+        'Contatto: ' + v('f-contatto'),
+        'Sito/Instagram: ' + v('f-web'),
+        '',
+        'Perché siamo un luogo Family Friendly:',
+        v('f-perche'),
+        '',
+        'Cosa facciamo di concreto per i bambini:',
+        v('f-bambini')
+      ];
+      var subject = 'Candidatura Bollino Consigliato DAOP – ' + v('f-nome');
+      var mailto = 'mailto:info@daop.it?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(lines.join('\r\n'));
+      if (typeof gtag === 'function') { gtag('event', 'candidatura_bollino', { attivita: v('f-nome') }); }
+      window.location.href = mailto;
+    });
+  })();
 </script>
 </body>
 </html>
