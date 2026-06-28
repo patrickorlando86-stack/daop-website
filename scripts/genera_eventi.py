@@ -17,6 +17,8 @@ SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HTML_PATH = os.path.join(ROOT, "eventi.html")
+HOME_PATH = os.path.join(ROOT, "index.html")
+HOME_LIMIT = 8  # quanti eventi mostrare nel carosello della home
 JSON_PATH = os.path.join(ROOT, "data", "eventi.json")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 
@@ -157,6 +159,7 @@ CLOCK_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke=
 USER_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>'
 CAL_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
 NAV_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'
 
 
 def _luogo_query(e):
@@ -265,6 +268,51 @@ def render(events):
                   + '\n'.join(chips) + '\n    </div>')
     grid = '    <div class="events-grid" id="events-grid">\n\n' + '\n\n'.join(cards) + '\n\n    </div>'
     return cat_filter, grid
+
+
+def render_home(events):
+    """Card compatte per il carosello "Prossimi eventi" della home (index.html).
+    Mostra i primi HOME_LIMIT eventi futuri, ognuno linkato alla card completa
+    in eventi.html tramite la sua ancora."""
+    items = events[:HOME_LIMIT]
+    if not items:
+        return ('      <p class="he-empty">Nessun evento in programma al momento. '
+                '<a href="eventi.html" style="color:var(--orange);font-weight:700;">'
+                'Vedi tutti gli eventi →</a></p>')
+    cards = []
+    for e in items:
+        slug, emoji, catlabel = bucket(e)
+        d = e['d_start']
+        color, tint = COLORS.get(slug, COLORS['altro'])
+        luogo = (esc(e['citta']) + f" ({e['prov']})") if e['citta'] else e['prov']
+        pz = (e['prezzo'] or '').lower()
+        if any(k in pz for k in FREE_KW):
+            price = '<span class="he-price free">Gratuito</span>'
+        elif e['prezzo']:
+            price = f'<span class="he-price">{esc(trunc(e["prezzo"], 22))}</span>'
+        else:
+            price = '<span class="he-price">&nbsp;</span>'
+        cover_url = loc_path(e['loc'])
+        cover = (f'        <div class="he-cover"><img src="{cover_url}" '
+                 f'alt="Locandina: {esc(trunc(e["nome"], 70))}" loading="lazy" decoding="async"></div>\n'
+                 if cover_url else '')
+        href = f"eventi.html#{e.get('anchor', '')}"
+        cards.append(f'''      <a class="he-card" href="{href}" style="--cat-color:{color};--cat-tint:{tint}">
+{cover}        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
+            <span class="he-cat">{esc(catlabel)}</span>
+            <span class="he-date"><span class="d">{d.day:02d}</span><span class="m">{MESI[d.month-1]}</span></span>
+          </div>
+          <h3 class="he-title">{esc(trunc(e['nome'], 64))}</h3>
+          <div class="he-meta"><span>{PIN_SVG} {luogo}</span></div>
+          <div class="he-foot">
+            {price}
+            <span class="he-more">Scopri di più {ARROW_SVG}</span>
+          </div>
+        </div>
+      </a>''')
+    return '\n\n'.join(cards)
 
 
 def slugify(s):
@@ -397,6 +445,23 @@ def inject(cat_filter, grid, jsonld):
     open(HTML_PATH, "w", encoding="utf-8").write(s)
 
 
+def inject_home(cards_html):
+    """Sostituisce le card del carosello in index.html tra i marker HOME-EVENTI.
+    Se la home o i marker mancano, salta senza errore."""
+    if not os.path.exists(HOME_PATH):
+        print("[genera_eventi] index.html non trovato, salto carosello home")
+        return
+    s = open(HOME_PATH, encoding="utf-8").read()
+    block = "<!-- HOME-EVENTI:START -->\n" + cards_html + "\n      <!-- HOME-EVENTI:END -->"
+    s, n = re.subn(r'<!-- HOME-EVENTI:START -->.*?<!-- HOME-EVENTI:END -->',
+                   lambda _: block, s, count=1, flags=re.S)
+    if n != 1:
+        print("[genera_eventi] marker HOME-EVENTI non trovati in index.html, salto carosello home")
+        return
+    open(HOME_PATH, "w", encoding="utf-8").write(s)
+    print("[genera_eventi] carosello eventi aggiornato in index.html")
+
+
 def update_sitemap():
     """Porta il <lastmod> di eventi.html nella sitemap alla data odierna.
     Il commit avviene (dal workflow) solo se eventi.html è davvero cambiato,
@@ -421,6 +486,7 @@ def main():
     cat_filter, grid = render(events)
     jsonld = render_jsonld(events)
     inject(cat_filter, grid, jsonld)
+    inject_home(render_home(events))
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()} for e in events]

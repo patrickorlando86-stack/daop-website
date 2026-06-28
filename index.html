@@ -441,6 +441,74 @@ document.addEventListener('DOMContentLoaded', function () {
   .award-text { font-size: 0.78rem; font-weight: 600; color: #7a6010; line-height: 1.3; }
   .award-text strong { display: block; font-size: 0.82rem; }
 
+  /* ── EVENTI (carosello home) ── */
+  #eventi-home { background: var(--cream); }
+  .he-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap; margin-bottom: 36px;
+  }
+  .he-head .section-subtitle { margin-top: 8px; }
+  .he-nav { display: flex; gap: 10px; flex-shrink: 0; }
+  .he-arrow {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid rgba(45,74,92,0.15); background: white; color: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-soft);
+  }
+  .he-arrow:hover { background: var(--navy); color: white; transform: translateY(-2px); }
+  .he-arrow:disabled { opacity: 0.3; cursor: default; transform: none; box-shadow: none; }
+  .he-arrow svg { width: 20px; height: 20px; }
+
+  .he-track {
+    display: flex; gap: 20px;
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    padding: 4px 4px 22px; margin: 0 -4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .he-track::-webkit-scrollbar { display: none; }
+  .he-card {
+    scroll-snap-align: start; flex: 0 0 300px; max-width: 300px;
+    background: white; border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft); border: 1px solid rgba(45,74,92,0.07);
+    overflow: hidden; display: flex; flex-direction: column;
+    text-decoration: none; transition: var(--transition); position: relative;
+  }
+  .he-card::before {
+    content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+    width: 4px; background: var(--cat-color, var(--teal)); z-index: 2;
+  }
+  .he-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card); border-color: rgba(45,74,92,0.10); }
+  .he-cover { width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: var(--cat-tint, rgba(107,165,168,0.16)); }
+  .he-cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .he-card:hover .he-cover img { transform: scale(1.05); }
+  .he-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .he-top { display: flex; align-items: center; gap: 8px; }
+  .he-icon { font-size: 1.15rem; line-height: 1; }
+  .he-cat {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--cat-color, var(--teal));
+  }
+  .he-date {
+    margin-left: auto; text-align: center; line-height: 1;
+    background: var(--cat-tint, rgba(107,165,168,0.16)); border-radius: 8px; padding: 6px 9px;
+  }
+  .he-date .d { display: block; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); }
+  .he-date .m { display: block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-top: 1px; }
+  .he-title {
+    font-family: 'Playfair Display', serif; font-size: 1.08rem; font-weight: 700;
+    color: var(--navy); line-height: 1.3;
+  }
+  .he-meta { font-size: 0.84rem; color: var(--text-mid); margin-top: auto; }
+  .he-meta span { display: flex; align-items: center; gap: 6px; }
+  .he-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; }
+  .he-price { font-size: 0.82rem; font-weight: 700; color: var(--text-mid); }
+  .he-price.free { color: #2d7a35; }
+  .he-more { font-size: 0.82rem; font-weight: 700; color: var(--orange); display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; }
+  .he-more svg { width: 14px; height: 14px; }
+  .he-empty { color: var(--text-mid); font-size: 0.95rem; padding: 12px 0; }
+  .he-allwrap { margin-top: 12px; text-align: center; }
+
   /* ── CHI SIAMO ── */
   #chi-siamo { background: var(--cream); }
   .team-grid {
@@ -1076,6 +1144,166 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </section>
 
+<!-- ── EVENTI (carosello) ── La lista card è rigenerata da scripts/genera_eventi.py: non modificare a mano tra i marker HOME-EVENTI -->
+<section id="eventi-home">
+  <div class="section-inner">
+    <div class="he-head">
+      <div class="fade-in">
+        <span class="section-label">Agenda</span>
+        <h2 class="section-title">Prossimi eventi in zona</h2>
+        <p class="section-subtitle">Sagre, laboratori, spettacoli ed escursioni per famiglie tra Alessandria e Asti. Selezionati e verificati dalla community DAOP.</p>
+      </div>
+      <div class="he-nav fade-in" aria-hidden="true">
+        <button type="button" class="he-arrow" data-he-dir="-1" aria-label="Eventi precedenti">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="he-arrow" data-he-dir="1" aria-label="Eventi successivi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="he-track" id="he-track">
+      <!-- HOME-EVENTI:START -->
+      <a class="he-card" href="eventi.html#ev-2026-05-10-artisti-collezionisti-per-pinocchio-a-200-anni-dal" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
+            <span class="he-cat">Laboratorio</span>
+            <span class="he-date"><span class="d">10</span><span class="m">mag</span></span>
+          </div>
+          <h3 class="he-title">Artisti &amp; Collezionisti per Pinocchio - a 200 anni dalla…</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Conzano (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-05-28-mostra-delle-illusioni" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Cultura">🏛️</span>
+            <span class="he-cat">Cultura</span>
+            <span class="he-date"><span class="d">28</span><span class="m">mag</span></span>
+          </div>
+          <h3 class="he-title">Mostra delle Illusioni</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price">A pagamento (da…</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-06-18-gli-esplorattori" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
+            <span class="he-cat">Laboratorio</span>
+            <span class="he-date"><span class="d">18</span><span class="m">giu</span></span>
+          </div>
+          <h3 class="he-title">Gli EsplorAttori</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tortona (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-06-20-vivi-pozzolo-estate-nella-corte-del-castello" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Musica">🎵</span>
+            <span class="he-cat">Musica</span>
+            <span class="he-date"><span class="d">20</span><span class="m">giu</span></span>
+          </div>
+          <h3 class="he-title">Vivi Pozzolo Estate nella Corte del Castello</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pozzolo Formigaro (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-06-25-49a-sagra-dei-sicot-quattordio" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">25</span><span class="m">giu</span></span>
+          </div>
+          <h3 class="he-title">49ª Sagra dei Sicot - Quattordio</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Quattordio (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-06-26-45a-sagra-di-qualita-dell-agnolotto-d-asino-callia" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">26</span><span class="m">giu</span></span>
+          </div>
+          <h3 class="he-title">45ª Sagra di Qualità dell&#x27;Agnolotto d&#x27;Asino - Calliano…</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Calliano Monferrato (AT)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-06-26-festa-della-birra-sagra-di-san-pietro-cassano-spin" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">26</span><span class="m">giu</span></span>
+          </div>
+          <h3 class="he-title">Festa della Birra &amp; Sagra di San Pietro - Cassano Spinola</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Cassano Spinola (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-06-26-sagra-della-panissa-pro-loco-di-morano-sul-po" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">26</span><span class="m">giu</span></span>
+          </div>
+          <h3 class="he-title">Sagra della Panissa - Pro Loco di Morano sul Po</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Morano sul Po (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+      <!-- HOME-EVENTI:END -->
+    </div>
+
+    <div class="he-allwrap fade-in">
+      <a href="eventi.html" class="btn btn-primary">
+        Vedi tutti gli eventi
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ── CHI SIAMO ── -->
 <section id="chi-siamo">
   <div class="section-inner">
@@ -1518,6 +1746,32 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Carosello eventi: frecce + stato (disabilita ai bordi). Lo swipe è nativo.
+  (function () {
+    const track = document.getElementById('he-track');
+    if (!track) return;
+    const arrows = document.querySelectorAll('[data-he-dir]');
+    function step() {
+      const card = track.querySelector('.he-card');
+      return card ? card.getBoundingClientRect().width + 20 : track.clientWidth * 0.8;
+    }
+    function update() {
+      const max = track.scrollWidth - track.clientWidth;
+      const scrollable = max > 8;
+      arrows.forEach(a => {
+        const dir = +a.dataset.heDir;
+        a.style.display = scrollable ? '' : 'none';
+        a.disabled = dir < 0 ? track.scrollLeft <= 8 : track.scrollLeft >= max - 8;
+      });
+    }
+    arrows.forEach(a => a.addEventListener('click', () => {
+      track.scrollBy({ left: (+a.dataset.heDir) * step() * 1.5, behavior: 'smooth' });
+    }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
 </script>
 </body>
 </html>
