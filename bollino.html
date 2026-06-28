@@ -481,9 +481,12 @@ document.addEventListener('DOMContentLoaded', function () {
   <p>La candidatura è riservata alle attività. Scrivici con due righe sul tuo locale: leggiamo tutto, e veniamo a conoscere chi ci convince.</p>
   <p class="fineprint">Valida per le province di Alessandria e Asti.</p>
 
-  <form name="candidatura-bollino" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/grazie.html" class="apply-form">
-    <input type="hidden" name="form-name" value="candidatura-bollino">
-    <p class="hidden-bot"><label>Lascia vuoto: <input name="bot-field"></label></p>
+  <form action="https://formsubmit.co/info@daop.it" method="POST" class="apply-form">
+    <input type="hidden" name="_subject" value="Nuova candidatura Bollino Consigliato DAOP">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://www.daop.it/grazie.html">
+    <input type="text" name="_honey" class="hidden-bot" tabindex="-1" autocomplete="off">
     <div class="form-row">
       <label>Nome dell'attività *<input type="text" name="attivita" required></label>
       <label>Città *<input type="text" name="citta" required></label>
