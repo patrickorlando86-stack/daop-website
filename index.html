@@ -897,6 +897,20 @@ document.addEventListener('DOMContentLoaded', function () {
   .cert-section p { color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 28px; font-size: 0.95rem; line-height: 1.7; position: relative; }
   .cert-section .btn { position: relative; }
 
+  /* ── FORM SPONSOR (FormSubmit) ── */
+  .cert-form { max-width: 520px; margin: 28px auto 0; text-align: left; position: relative; }
+  .cert-form .form-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .cert-form .form-row > label { flex: 1 1 200px; }
+  .cert-form label { display: block; margin-bottom: 14px; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.72); letter-spacing: 0.02em; }
+  .cert-form input, .cert-form textarea { width: 100%; margin-top: 6px; padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; transition: var(--transition); }
+  .cert-form input::placeholder, .cert-form textarea::placeholder { color: rgba(255,255,255,0.32); }
+  .cert-form input:focus, .cert-form textarea:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,0.10); }
+  .cert-form textarea { resize: vertical; }
+  .cert-form .btn { margin-top: 6px; width: 100%; justify-content: center; }
+  .cert-form .hidden-bot { position: absolute; left: -9999px; top: 0; }
+  .cert-form-alt { margin-top: 16px; text-align: center; font-size: 0.85rem; }
+  .cert-form-alt a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+
   /* ── SOCIAL ── */
   #social {
     background: var(--navy-dark);
@@ -1603,14 +1617,24 @@ document.addEventListener('DOMContentLoaded', function () {
       <p style="color:rgba(255,255,255,0.4);font-size:0.85rem;margin-bottom:32px;position:relative;">
         Ogni accordo è su misura — niente pacchetti preconfezionati.
       </p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;">
-        <a href="mailto:info@daop.it?subject=Sponsorizzazione%20DAOP" class="btn btn-gold" style="font-size:1rem;padding:15px 32px;">
-          📩 Scrivici per una sponsorizzazione
-        </a>
-        <a href="bollino.html" class="btn" style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);font-size:1rem;padding:15px 28px;">
-          Scopri il bollino Family Friendly →
-        </a>
-      </div>
+      <form action="https://formsubmit.co/info@daop.it" method="POST" class="cert-form">
+        <input type="hidden" name="_subject" value="Nuova richiesta sponsorizzazione DAOP">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://www.daop.it/grazie.html">
+        <input type="text" name="_honey" class="hidden-bot" tabindex="-1" autocomplete="off">
+        <div class="form-row">
+          <label>Azienda o attività *<input type="text" name="azienda" required></label>
+          <label>Referente *<input type="text" name="referente" required></label>
+        </div>
+        <div class="form-row">
+          <label>Email *<input type="email" name="email" required></label>
+          <label>Telefono<input type="tel" name="telefono"></label>
+        </div>
+        <label>Cosa avresti in mente? *<textarea name="messaggio" rows="3" required placeholder="Due righe sull'idea di collaborazione"></textarea></label>
+        <button type="submit" class="btn btn-gold">Invia la richiesta</button>
+        <p class="cert-form-alt">Preferisci la mail? Scrivici a <a href="mailto:info@daop.it?subject=Sponsorizzazione%20DAOP">info@daop.it</a> · oppure <a href="bollino.html">scopri il bollino Family Friendly</a></p>
+      </form>
     </div>
   </div>
 </section>
