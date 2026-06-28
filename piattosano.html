@@ -189,7 +189,8 @@ document.addEventListener('DOMContentLoaded', function () {
   .ps-hero::before{content:'';position:absolute;inset:0;background:url('assets/images/piattosano-cover.webp') center/cover no-repeat;opacity:0.06}
   .ps-hero-inner{max-width:1200px;margin:0 auto;padding:64px 48px 0;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:flex-end;position:relative;z-index:1}
   .ps-hero-text{padding-bottom:72px}
-  .ps-hero-text .sane-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 16px;margin-bottom:20px}
+  .ps-hero-text .sane-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 16px;margin-bottom:20px;text-decoration:none;transition:var(--transition)}
+  a.sane-badge:hover{background:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.5);transform:translateY(-1px)}
   .ps-hero-text .sane-badge img{height:24px;width:auto}
   .ps-hero-text .sane-badge span{font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.05em;text-transform:uppercase}
   .ps-hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4rem);font-weight:800;color:white;line-height:1.05;margin-bottom:20px;letter-spacing:-0.02em}
@@ -363,10 +364,10 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="ps-hero">
   <div class="ps-hero-inner" style="grid-template-columns:1fr;max-width:760px;">
     <div class="ps-hero-text" style="padding-bottom:72px;">
-      <div class="sane-badge">
+      <a class="sane-badge" href="https://sane-italia.it/" target="_blank" rel="noopener" aria-label="Vai al sito di S.A.N.E. Italia">
         <img src="assets/images/sane-logo2.webp" alt="S.A.N.E. Italia">
         <span>S.A.N.E. Italia</span>
-      </div>
+      </a>
       <h1>Mangiare Bene,<br><em>Crescere Meglio</em></h1>
       <p>Il gioco educativo del programma di educazione alimentare S.A.N.E. Italia per bambini e ragazzi dai 6 ai 18 anni. 6 mini-giochi, gestione dei 14 allergeni e allenamento all'uso dell'autoiniettore.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
