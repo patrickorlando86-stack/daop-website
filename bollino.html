@@ -125,7 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
   .page-hero::before{content:'';position:absolute;inset:0;background:url('assets/images/headerdaop.jpg') center/cover no-repeat;opacity:0.08}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
   .page-hero .section-label{color:var(--gold)}
-  .page-hero .hero-badge{width:132px;height:132px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 8px 32px rgba(0,0,0,0.35));margin:0 auto 28px;display:block}
+  .page-hero .hero-badge{width:clamp(230px,42vw,360px);aspect-ratio:1;height:auto;object-fit:contain;filter:drop-shadow(0 14px 50px rgba(0,0,0,0.42));margin:0 auto 36px;display:block;animation:badgeIn .8s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes badgeIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:540px;margin:0 auto}
@@ -175,6 +176,29 @@ document.addEventListener('DOMContentLoaded', function () {
   .first-card h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:12px}
   .first-card p{font-size:1rem;color:var(--text-mid);line-height:1.8;max-width:560px;margin:0 auto 8px}
   .first-card .place{font-size:0.9rem;color:var(--text-light);margin-top:8px}
+
+  /* ── LUOGHI COL BOLLINO ── */
+  .places-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:56px}
+  .place-card{position:relative;background:white;border-radius:var(--radius-lg);padding:32px 28px;box-shadow:var(--shadow-card);border:1px solid rgba(45,74,92,0.06);transition:var(--transition);display:flex;flex-direction:column}
+  .place-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--gold);background:rgba(201,162,39,0.12);padding:5px 13px;border-radius:100px}
+  .place-card .pill{align-self:flex-start;margin-bottom:16px}
+  .place-icon{font-size:2.2rem;margin-bottom:12px;display:block;line-height:1}
+  .place-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:6px;line-height:1.25}
+  .place-type{font-size:0.74rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+  .place-card p{font-size:0.92rem;color:var(--text-mid);line-height:1.7;margin-bottom:16px}
+  .place-loc{font-size:0.88rem;color:var(--text-light);line-height:1.5;margin-bottom:20px}
+  .place-links{margin-top:auto;display:flex;flex-direction:column;gap:12px}
+  .place-socials{display:flex;gap:10px;flex-wrap:wrap}
+  .soc{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:0.88rem;font-weight:700;color:white;padding:10px 18px;border-radius:12px;text-decoration:none;transition:var(--transition);box-shadow:0 4px 14px rgba(0,0,0,0.12);flex:1 1 auto}
+  .soc svg{width:18px;height:18px;flex-shrink:0}
+  .soc-ig{background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)}
+  .soc-fb{background:#1877f2}
+  .soc:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 22px rgba(0,0,0,0.2)}
+  .place-extra{display:flex;gap:10px;flex-wrap:wrap}
+  .place-link{display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:700;color:var(--navy);background:rgba(45,74,92,0.06);padding:8px 14px;border-radius:10px;text-decoration:none;transition:var(--transition)}
+  .place-link:hover{background:var(--navy);color:white}
+  .place-link svg{width:14px;height:14px}
 
   /* ── CTA CANDIDATURA ── */
   .apply-cta{background:var(--navy-dark);padding:88px 24px;text-align:center}
@@ -304,14 +328,98 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </section>
 
-<!-- PRIMO BOLLINO -->
+<!-- LUOGHI COL BOLLINO -->
 <section class="bg-white">
-  <div class="section-narrow">
-    <div class="first-card">
-      <span class="pill">⭐ Il primo bollino</span>
-      <h3>La Bottega del Sanconiglio</h3>
-      <p>Giada non si limita ad accogliere le famiglie tra libri e giochi: porta i bambini al centro del suo lavoro anche fuori dal negozio, con letture animate, laboratori creativi e attività pensate per farli incontrare, ascoltare, immaginare.</p>
-      <p class="place">📍 Via Nicolò Girardengo 79/81, Novi Ligure</p>
+  <div class="section-inner">
+    <div style="text-align:center;max-width:600px;margin:0 auto;">
+      <span class="section-label">Chi ce l'ha</span>
+      <h2 class="section-title">I luoghi col bollino</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Pochi, scelti uno a uno. Posti dove le famiglie di Alessandria e Asti sanno di essere accolte davvero.</p>
+    </div>
+    <div class="places-grid">
+
+      <article class="place-card">
+        <span class="pill">⭐ Primo bollino · 2026</span>
+        <span class="place-icon">📚</span>
+        <h3>La Bottega del Sanconiglio</h3>
+        <div class="place-type">Libreria creativa per bambini · Novi Ligure (AL)</div>
+        <p>Libreria creativa dove i bambini sono al centro: libri, giochi, letture animate e laboratori.</p>
+        <div class="place-links">
+          <div class="place-socials">
+            <a class="soc soc-ig" href="https://www.instagram.com/labottegadelsanconiglio/" target="_blank" rel="noopener" aria-label="Instagram della Bottega del Sanconiglio">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              Instagram
+            </a>
+            <a class="soc soc-fb" href="https://www.facebook.com/labottegadelsanconiglio" target="_blank" rel="noopener" aria-label="Facebook della Bottega del Sanconiglio">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+              Facebook
+            </a>
+          </div>
+          <div class="place-extra">
+            <a class="place-link" href="https://www.labottegadelsanconiglio.it/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+              Sito
+            </a>
+            <a class="place-link" href="tel:+390143341074">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Chiama
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <span class="pill">Bollino 2026</span>
+        <span class="place-icon">📖</span>
+        <h3>Biblioteca di Pasturana</h3>
+        <div class="place-type">Biblioteca «Eugenio Arecco» · Pasturana (AL)</div>
+        <p>Una biblioteca a misura di bambino, tra letture e angoli dove la curiosità è di casa.</p>
+        <div class="place-links">
+          <div class="place-socials">
+            <a class="soc soc-ig" href="https://www.instagram.com/bibliotecadipasturana/" target="_blank" rel="noopener" aria-label="Instagram della Biblioteca di Pasturana">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              Instagram
+            </a>
+            <a class="soc soc-fb" href="https://www.facebook.com/bibliotecapasturana/" target="_blank" rel="noopener" aria-label="Facebook della Biblioteca di Pasturana">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+              Facebook
+            </a>
+          </div>
+          <div class="place-extra">
+            <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=Biblioteca%20Pasturana%2C%20Italia" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Come arrivare
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <span class="pill">Bollino 2026</span>
+        <span class="place-icon">🛝</span>
+        <h3>Parco Giochi Peterpan</h3>
+        <div class="place-type">Parco giochi &amp; gonfiabili · Nizza Monferrato (AT)</div>
+        <p>Gonfiabili, giochi e spazio all'aperto: i bambini liberi di correre, i genitori sereni.</p>
+        <div class="place-links">
+          <div class="place-socials">
+            <a class="soc soc-ig" href="https://www.instagram.com/parco_peterpan/" target="_blank" rel="noopener" aria-label="Instagram del Parco Giochi Peterpan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              Instagram
+            </a>
+            <a class="soc soc-fb" href="https://www.facebook.com/p/Parco-Giochi-Gonfiabili-Peterpan-Nizza-M-100093038331885/" target="_blank" rel="noopener" aria-label="Facebook del Parco Giochi Peterpan">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.1 24 18.1 24 12.07z"/></svg>
+              Facebook
+            </a>
+          </div>
+          <div class="place-extra">
+            <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=Parco%20Giochi%20Gonfiabili%20Peterpan%2C%20Nizza%20Monferrato%2C%20Italia" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Come arrivare
+            </a>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -321,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="section-inner">
     <div style="text-align:center;max-width:600px;margin:0 auto;">
       <span class="section-label">Come funziona</span>
-      <h2 class="section-title">Non si chiede, si merita</h2>
-      <p class="section-subtitle" style="margin:0 auto;">Il bollino non si scarica: è un riconoscimento che nasce da un incontro. Se gestisci un'attività che sente di rispecchiare questi valori, puoi candidarti: saremo noi a venire a conoscerti.</p>
+      <h2 class="section-title">Si propone, e si merita</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Il bollino non si scarica: è un riconoscimento che nasce da un incontro. Se gestisci un'attività che sente di rispecchiare questi valori, mandaci la tua candidatura — saremo noi a venire a conoscerti.</p>
     </div>
     <div class="steps">
       <div class="step">
