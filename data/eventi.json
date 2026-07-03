@@ -38,25 +38,6 @@
   "anchor": "ev-2026-05-28-mostra-delle-illusioni"
  },
  {
-  "nome": "Gli EsplorAttori",
-  "di": "18/06/2026",
-  "df": "02/07/2026",
-  "ora": "10:00-11:30",
-  "citta": "Tortona",
-  "prov": "AL",
-  "categoria": "Laboratorio",
-  "eta": "7-10 anni",
-  "prezzo": "Gratuito",
-  "descr": "Primo appuntamento del laboratorio estivo Gli EsplorAttori per bambini dai 7 ai 10 anni. I partecipanti costruiranno insieme il proprio kit personale per gestire al meglio le avventure del percorso. Programma: 18/06 Gli EsplorAttori - Il nostro Kit - Centro per le Famiglie CISA di Tortona; 25/06 Gli EsplorAttori - Caccia nella Natura - Centro per le Famiglie CISA di Tortona; 02/07 Gli EsplorAttori - Animali e Habitat - Centro per le Famiglie CISA di Tortona.",
-  "manifest": "",
-  "loc": "",
-  "luogo": "Centro per le Famiglie CISA di Tortona",
-  "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
-  "d_start": "2026-06-18",
-  "d_end": "2026-07-02",
-  "anchor": "ev-2026-06-18-gli-esplorattori"
- },
- {
   "nome": "Vivi Pozzolo Estate nella Corte del Castello",
   "di": "20/06/2026",
   "df": "05/07/2026",
@@ -133,25 +114,6 @@
   "anchor": "ev-2026-07-01-il-giardino-dei-giochi-centro-per-famiglie-comune"
  },
  {
-  "nome": "Bolle Giganti - Pro Loco Voltaggio / PazzoAnimazione",
-  "di": "02/07/2026",
-  "df": "02/07/2026",
-  "ora": "vari",
-  "citta": "Voltaggio",
-  "prov": "AL",
-  "categoria": "Spettacolo",
-  "eta": "3-12 anni",
-  "prezzo": "Gratuito",
-  "descr": "L'incanto e lo stupore nel mondo delle Bolle Giganti. Un'esperienza magica dove le bolle sono protagoniste assolute. Evento per bambini nell'ambito del programma estivo Voltaggio Kids Summer.",
-  "manifest": "Voltaggio Kids Summer",
-  "loc": "daop_alessandria_3927416770694079751.jpg",
-  "luogo": "Centro Sportivo Località Fonte Sulfurea",
-  "indirizzo": "Centro Sportivo Località Fonte Sulfurea - Voltaggio (AL)",
-  "d_start": "2026-07-02",
-  "d_end": "2026-07-02",
-  "anchor": "ev-2026-07-02-bolle-giganti-pro-loco-voltaggio-pazzoanimazione"
- },
- {
   "nome": "E...State con Noi 2026 - Biblioteca Comunale E. Arecco",
   "di": "02/07/2026",
   "df": "30/07/2026",
@@ -169,25 +131,6 @@
   "d_start": "2026-07-02",
   "d_end": "2026-07-30",
   "anchor": "ev-2026-07-02-e-state-con-noi-2026-biblioteca-comunale-e-arecco"
- },
- {
-  "nome": "Michael - CineOvada sotto le stelle",
-  "di": "02/07/2026",
-  "df": "02/07/2026",
-  "ora": "21:30",
-  "citta": "Ovada",
-  "prov": "AL",
-  "categoria": "Spettacolo",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Intero €8,00 / Ridotto fino a 12 anni €6,00",
-  "descr": "Cinema all'aperto nel giardino della Scuola di Musica di Ovada. In programma 'Michael' di Antoine Fuqua, Usa 2026. Organizzato dal Comune di Ovada e Centro Culturale Carignano.",
-  "manifest": "CineOvada sotto le stelle",
-  "loc": "daop_alessandria_3923629837362716128.jpg",
-  "luogo": "Giardino della Scuola di Musica",
-  "indirizzo": "Via S. Paolo - Ovada (AL)",
-  "d_start": "2026-07-02",
-  "d_end": "2026-07-02",
-  "anchor": "ev-2026-07-02-michael-cineovada-sotto-le-stelle"
  },
  {
   "nome": "Città di Pianura - CineOvada sotto le stelle",
