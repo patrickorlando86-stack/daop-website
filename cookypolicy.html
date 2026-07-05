@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6M747985MC"></script>
+<!-- Consenso cookie + Google Analytics (caricato solo dopo consenso) -->
+<script src="assets/js/cookie-consent.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- CONTENUTO -->
 <section class="legal">
-  <p><strong>Ultimo aggiornamento:</strong> Aprile 2026</p>
+  <p><strong>Ultimo aggiornamento:</strong> Luglio 2026</p>
 
   <p>La presente Cookie Policy spiega cosa sono i cookie, come li utilizziamo su
     <strong>daop.it</strong> e come puoi gestire le tue preferenze.</p>
@@ -204,12 +204,16 @@ document.addEventListener('DOMContentLoaded', function () {
   <h2>2. Tipologie di cookie utilizzati</h2>
   <ul>
     <li><strong>Cookie tecnici (necessari)</strong> – garantiscono il funzionamento di base del sito (es. sicurezza, preferenze). Sono sempre attivi e non richiedono consenso.</li>
+    <li><strong>Cookie statistici (Google Analytics 4)</strong> – attivi <strong>solo se acconsenti</strong> tramite il banner mostrato alla prima visita. Misurano in forma aggregata le visite al sito (pagine viste, provenienza, dispositivo) per aiutarci a migliorarlo. Se rifiuti, o finché non scegli, Google Analytics non viene caricato e nessun dato viene inviato a Google. Cookie impostati: <code>_ga</code>, <code>_ga_*</code> (durata massima 2 anni).</li>
     <li><strong>Cookie di terze parti per risorse esterne</strong> – alcuni contenuti caricati da domini esterni (es. Google Fonts per i caratteri tipografici, ginettoapp.it per le immagini dei badge) possono impostare cookie propri. Vedi la sezione 3 per i dettagli.</li>
   </ul>
-  <p>Il sito <strong>daop.it</strong> non utilizza cookie di profilazione, cookie di tracciamento pubblicitario, Google Analytics, Google Maps o video incorporati.</p>
+  <p>La scelta espressa nel banner viene memorizzata nel tuo browser e puoi cambiarla in qualsiasi momento dalla sezione 5.</p>
+  <p>Il sito <strong>daop.it</strong> non utilizza cookie di profilazione, cookie di tracciamento pubblicitario, Google Maps o video incorporati.</p>
 
   <h2>3. Servizi di terze parti usati sul sito</h2>
   <ul>
+    <li><strong>Google Analytics 4</strong> (statistiche di utilizzo): attivato solo previo consenso, misura il traffico del sito in forma aggregata. I dati sono trattati da Google Ireland Ltd.
+      Privacy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
     <li><strong>Google Fonts</strong> (caratteri tipografici): caricati da fonts.googleapis.com per la resa grafica del sito.
       Privacy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
     <li><strong>ginettoapp.it</strong> (immagini badge Ginetto): badge dell'assistente AI DAOP caricati dal dominio ginettoapp.it.</li>
@@ -219,7 +223,10 @@ document.addEventListener('DOMContentLoaded', function () {
   <h2>4. Ginetto AI e cookie</h2>
   <p><strong>Ginetto AI</strong> è un servizio separato raggiungibile su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a>. La cookie policy di Ginetto è gestita in modo indipendente su quel dominio.</p>
 
-  <h2>5. Come disattivare i cookie dal browser</h2>
+  <h2>5. Gestire le tue preferenze</h2>
+  <p>Puoi cambiare in qualsiasi momento la scelta fatta nel banner (accettare o rifiutare i cookie statistici):</p>
+  <p><a href="#" onclick="if(window.daopGestisciCookie){daopGestisciCookie();}return false;" style="font-weight:700;">→ Gestisci preferenze cookie</a></p>
+  <p>Puoi inoltre bloccare o eliminare i cookie direttamente dal tuo browser:</p>
   <ul>
     <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
     <li><a href="https://support.mozilla.org/it/kb/Gestione%20dei%20cookie" target="_blank" rel="noopener">Mozilla Firefox</a></li>
