@@ -21,19 +21,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
       - name: Genera eventi
-        env:
-          # Opzionale: URL CSV del tab "eventi" (es. "Pubblica sul web").
-          # Se assente, lo script prova l'export gviz del foglio; se anche
-          # quello non è raggiungibile, usa l'istantanea in data/eventi.json.
-          EVENTI_CSV_URL: ${{ secrets.EVENTI_CSV_URL }}
+        # NON passiamo piu' EVENTI_CSV_URL: quel secret (CSV "Pubblica sul web")
+        # veniva servito in cache da Google e faceva rigenerare dati vecchi. Lo
+        # script ora usa l'export gviz (live) con cache-buster -> sempre fresco.
         run: python scripts/genera_eventi.py
 
       - name: Commit se cambiato

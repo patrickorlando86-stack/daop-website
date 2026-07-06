@@ -44,9 +44,19 @@ def pdate(s):
 
 def fetch_rows():
     """Restituisce una lista di dict (chiavi = intestazioni del foglio)."""
-    url = os.environ.get("EVENTI_CSV_URL", DEFAULT_CSV)
+    base = os.environ.get("EVENTI_CSV_URL") or DEFAULT_CSV
+    # Cache-buster: Google e le CDN possono servire una COPIA IN CACHE del CSV.
+    # Era la causa del "sito non aggiornato" dopo una modifica al foglio: la run
+    # leggeva dati vecchi e rigenerava identico. Un parametro univoco a ogni run
+    # + header no-cache forzano una risposta fresca (DEFAULT_CSV = gviz = live).
+    sep = '&' if '?' in base else '?'
+    url = f"{base}{sep}_cb={int(datetime.datetime.now().timestamp())}"
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "daop-eventi-bot"})
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "daop-eventi-bot",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        })
         with urllib.request.urlopen(req, timeout=30) as r:
             text = r.read().decode("utf-8", "replace")
         reader = list(csv.reader(io.StringIO(text)))
