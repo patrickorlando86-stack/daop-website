@@ -107,7 +107,14 @@ def normalize(rows):
             luogo=d.get('Luogo', ''), indirizzo=d.get('Indirizzo Completo', ''),
             d_start=di, d_end=df,
         ))
-    events.sort(key=lambda e: (e['d_start'], e['nome']))
+    # Ordina per "data utile": un evento già iniziato ma ancora in corso viene
+    # trattato come se iniziasse oggi (max(inizio, oggi)), così non finisce in
+    # cima con una data passata. A parità di data utile diamo priorità alle
+    # novità (eventi che iniziano oggi/domani): gli eventi già in corso, meno
+    # "urgenti", scivolano in fondo al gruppo del giorno (d_start < today = True
+    # ordina dopo False). Poi l'inizio reale e il nome fanno da spareggio.
+    events.sort(key=lambda e: (max(e['d_start'], today), e['d_start'] < today,
+                               e['d_start'], e['nome']))
     return events
 
 
@@ -216,12 +223,18 @@ COLORS = {
 
 
 def render(events):
+    today = datetime.date.today()
     cards, present = [], set()
     for e in events:
         slug, emoji, catlabel = bucket(e)
         present.add(slug)
         d = e['d_start']
-        if e['d_end'] != d:
+        ongoing = d < today  # già iniziato ma non ancora finito (filtrato in normalize)
+        if ongoing:
+            de = e['d_end']
+            datestr = ("In corso · ultimo giorno" if de == today
+                       else f"In corso · fino al {de.day} {MESI[de.month-1]}")
+        elif e['d_end'] != d:
             de = e['d_end']
             datestr = f"dal {d.day} {MESI[d.month-1]} al {de.day} {MESI[de.month-1]}"
         else:
@@ -246,16 +259,22 @@ def render(events):
             acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{NAV_SVG} Come arrivare</a>')
         acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{CAL_SVG} Calendario</a>')
         actions = '\n        <div class="event-actions">\n          ' + '\n          '.join(acts) + '\n        </div>'
+        # In alto a destra: normalmente il riquadro data; per gli eventi in corso
+        # un badge "In corso" (la data di inizio è passata e confonderebbe).
+        if ongoing:
+            datebox = '<span class="ev-live">In corso</span>'
+        else:
+            datebox = f'<span class="ev-date"><span class="d">{d.day:02d}</span><span class="m">{MESI[d.month-1]}</span></span>'
         cover_url = loc_path(e['loc'])
         cover = (f'''        <a class="ev-cover" href="{cover_url}" target="_blank" rel="noopener" aria-label="Apri la locandina di {esc(e['nome'])}">
           <img src="{cover_url}" alt="Locandina: {esc(trunc(e['nome'], 70))}" loading="lazy" decoding="async">
         </a>
 ''' if cover_url else '')
-        cards.append(f'''      <article class="event-card{' has-cover' if cover_url else ''}" id="{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+        cards.append(f'''      <article class="event-card{' has-cover' if cover_url else ''}{' is-ongoing' if ongoing else ''}" id="{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
 {cover}        <div class="ev-top">
           <span class="ev-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
           <span class="ev-cat">{esc(catlabel)}</span>
-          <span class="ev-date"><span class="d">{d.day:02d}</span><span class="m">{MESI[d.month-1]}</span></span>
+          {datebox}
         </div>
         <h3>{esc(trunc(e['nome'], 90))}</h3>
         <div class="event-meta">
@@ -289,10 +308,15 @@ def render_home(events):
         return ('      <p class="he-empty">Nessun evento in programma al momento. '
                 '<a href="eventi.html" style="color:var(--orange);font-weight:700;">'
                 'Vedi tutti gli eventi →</a></p>')
+    today = datetime.date.today()
     cards = []
     for e in items:
         slug, emoji, catlabel = bucket(e)
         d = e['d_start']
+        ongoing = d < today
+        datebox = ('<span class="he-live">In corso</span>' if ongoing else
+                   f'<span class="he-date"><span class="d">{d.day:02d}</span>'
+                   f'<span class="m">{MESI[d.month-1]}</span></span>')
         color, tint = COLORS.get(slug, COLORS['altro'])
         luogo = (esc(e['citta']) + f" ({e['prov']})") if e['citta'] else e['prov']
         pz = (e['prezzo'] or '').lower()
@@ -312,7 +336,7 @@ def render_home(events):
           <div class="he-top">
             <span class="he-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
             <span class="he-cat">{esc(catlabel)}</span>
-            <span class="he-date"><span class="d">{d.day:02d}</span><span class="m">{MESI[d.month-1]}</span></span>
+            {datebox}
           </div>
           <h3 class="he-title">{esc(trunc(e['nome'], 64))}</h3>
           <div class="he-meta"><span>{PIN_SVG} {luogo}</span></div>

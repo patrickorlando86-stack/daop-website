@@ -495,6 +495,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   .he-date .d { display: block; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); }
   .he-date .m { display: block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: var(--text-light); margin-top: 1px; }
+  .he-live {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--cat-color, var(--teal)); background: var(--cat-tint, rgba(107,165,168,0.16));
+    border-radius: 100px; padding: 6px 10px; line-height: 1;
+  }
+  .he-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: he-pulse 1.8s ease-in-out infinite; }
+  @keyframes he-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+  @media (prefers-reduced-motion: reduce) { .he-live::before { animation: none; } }
   .he-title {
     font-family: 'Playfair Display', serif; font-size: 1.08rem; font-weight: 700;
     color: var(--navy); line-height: 1.3;
@@ -1179,130 +1188,135 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <div class="he-track" id="he-track">
       <!-- HOME-EVENTI:START -->
-      <a class="he-card" href="eventi.html#ev-2026-05-10-artisti-collezionisti-per-pinocchio-a-200-anni-dal" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
+      <a class="he-card" href="eventi.html#ev-2026-07-09-gioco-libero-e-mini-corso-di-scacchi-per-principia" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3935042960871225230.jpg" alt="Locandina: Gioco Libero e Mini Corso di Scacchi per Principianti - Novi Scacchi" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
             <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
             <span class="he-cat">Laboratorio</span>
-            <span class="he-date"><span class="d">10</span><span class="m">mag</span></span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
           </div>
-          <h3 class="he-title">Artisti &amp; Collezionisti per Pinocchio - a 200 anni dalla…</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Conzano (AL)</span></div>
-          <div class="he-foot">
-            <span class="he-price free">Gratuito</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-05-28-mostra-delle-illusioni" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14)">
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Cultura">🏛️</span>
-            <span class="he-cat">Cultura</span>
-            <span class="he-date"><span class="d">28</span><span class="m">mag</span></span>
-          </div>
-          <h3 class="he-title">Mostra delle Illusioni</h3>
+          <h3 class="he-title">Gioco Libero e Mini Corso di Scacchi per Principianti - Novi…</h3>
           <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span></div>
           <div class="he-foot">
-            <span class="he-price">A pagamento (da…</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-01-centri-estivi-ai-musei-di-asti" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
-        <div class="he-cover"><img src="/assets/eventi/daop_asti_3932268211164328685.jpg" alt="Locandina: Centri Estivi ai Musei di Asti" loading="lazy" decoding="async"></div>
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
-            <span class="he-cat">Laboratorio</span>
-            <span class="he-date"><span class="d">01</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Centri Estivi ai Musei di Asti</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span></div>
-          <div class="he-foot">
-            <span class="he-price">A pagamento (da…</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-01-corso-di-massaggio-infantile-a-i-m-i-centro-per-fa" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
-        <div class="he-cover"><img src="/assets/eventi/daop_asti_3922266205150380294.jpg" alt="Locandina: Corso di massaggio infantile A.I.M.I. - Centro per famiglie comune di…" loading="lazy" decoding="async"></div>
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
-            <span class="he-cat">Laboratorio</span>
-            <span class="he-date"><span class="d">01</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Corso di massaggio infantile A.I.M.I. - Centro per famiglie…</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span></div>
-          <div class="he-foot">
-            <span class="he-price">A pagamento (da…</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-01-il-giardino-dei-giochi-centro-per-famiglie-comune" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
-            <span class="he-cat">Laboratorio</span>
-            <span class="he-date"><span class="d">01</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Il Giardino dei Giochi - Centro per famiglie comune di Asti</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span></div>
-          <div class="he-foot">
             <span class="he-price free">Gratuito</span>
             <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
       </a>
 
-      <a class="he-card" href="eventi.html#ev-2026-07-02-e-state-con-noi-2026-biblioteca-comunale-e-arecco" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
-            <span class="he-cat">Laboratorio</span>
-            <span class="he-date"><span class="d">02</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">E...State con Noi 2026 - Biblioteca Comunale E. Arecco</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pasturana (AL)</span></div>
-          <div class="he-foot">
-            <span class="he-price free">Gratuito</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-03-luna-park" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
-        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3925173721926495801.jpg" alt="Locandina: Luna Park" loading="lazy" decoding="async"></div>
+      <a class="he-card" href="eventi.html#ev-2026-07-09-la-famosa-notte-delle-candele" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3928813099803057746.jpg" alt="Locandina: La Famosa Notte delle Candele" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
             <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
             <span class="he-cat">Sagra &amp; Festa</span>
-            <span class="he-date"><span class="d">03</span><span class="m">lug</span></span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
           </div>
-          <h3 class="he-title">Luna Park</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Acqui Terme (AL)</span></div>
+          <h3 class="he-title">La Famosa Notte delle Candele</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Arquata Scrivia (AL)</span></div>
           <div class="he-foot">
-            <span class="he-price">A pagamento (da…</span>
+            <span class="he-price free">Gratuito</span>
             <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
       </a>
 
-      <a class="he-card" href="eventi.html#ev-2026-07-06-alla-ri-scoperta-delle-favole-disney" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
+      <a class="he-card" href="eventi.html#ev-2026-07-09-la-notte-delle-candele-distretto-del-novese" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3937304893024441838.jpg" alt="Locandina: La Notte delle Candele - Distretto del Novese" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">La Notte delle Candele - Distretto del Novese</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Arquata Scrivia (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-09-magia-in-azione-pro-loco-voltaggio-pazzoanimazione" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3927416770694079751.jpg" alt="Locandina: Magia in Azione - Pro Loco Voltaggio / PazzoAnimazione" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Spettacolo">🎭</span>
+            <span class="he-cat">Spettacolo</span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Magia in Azione - Pro Loco Voltaggio / PazzoAnimazione</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Voltaggio (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-09-nati-per-leggere-con-i-raccontastorie-fantastiche" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3935299446277070740.jpg" alt="Locandina: Nati per leggere con i raccontastorie - Fantastiche Letture Animate…" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
             <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
             <span class="he-cat">Laboratorio</span>
-            <span class="he-date"><span class="d">06</span><span class="m">lug</span></span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
           </div>
-          <h3 class="he-title">Alla (Ri)scoperta delle Favole Disney</h3>
+          <h3 class="he-title">Nati per leggere con i raccontastorie - Fantastiche Letture…</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Casale Monferrato (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-09-rental-family-nelle-vite-degli-altri-cineovada-sot" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3923629837362716128.jpg" alt="Locandina: Rental Family - Nelle Vite degli Altri - CineOvada sotto le stelle" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Spettacolo">🎭</span>
+            <span class="he-cat">Spettacolo</span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Rental Family - Nelle Vite degli Altri - CineOvada sotto le…</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Ovada (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price">Intero €8,00 /…</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-09-rosso-ciliegia-i-giovedi-di-luglio" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3928780022011243358.jpg" alt="Locandina: Rosso ciliegia - I Giovedì di Luglio" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Rosso ciliegia - I Giovedì di Luglio</h3>
           <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tortona (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-09-una-giornata-con-carlo-guasco-amici-di-solero" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3932397574868187961.jpg" alt="Locandina: Una Giornata con Carlo Guasco - Amici di Solero" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">09</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Una Giornata con Carlo Guasco - Amici di Solero</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Solero (AL)</span></div>
           <div class="he-foot">
             <span class="he-price free">Gratuito</span>
             <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
