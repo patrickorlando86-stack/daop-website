@@ -1,4 +1,37 @@
+# Motori di ricerca: pieno accesso (SEO intatta)
 User-agent: *
+Allow: /
+
+# --- Bot di ADDESTRAMENTO AI: bloccati (prendono i dati, non citano) ---
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# --- Bot di RECUPERO/CITAZIONE: ammessi (portano traffico e brand) ---
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://www.daop.it/sitemap.xml
