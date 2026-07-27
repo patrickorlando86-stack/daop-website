@@ -3641,7 +3641,33 @@ document.addEventListener('DOMContentLoaded', function () {
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
   .ev-select.is-on{background:var(--navy);border-color:var(--navy);color:white}
-  .events-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:14px 0 0}
+  .ev-viewbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 0}
+  .events-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:0}
+  .ev-viewtoggle{margin-left:auto;display:inline-flex;gap:2px;background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:3px}
+  .ev-viewtoggle button{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-mid);background:none;border:0;border-radius:100px;padding:8px 15px;min-height:36px;cursor:pointer;transition:var(--transition)}
+  .ev-viewtoggle button:hover{color:var(--navy)}
+  .ev-viewtoggle button[aria-pressed="true"]{background:var(--navy);color:white}
+
+  /* ── VISTA CALENDARIO: navigazione per giorno, l'agenda resta la lista ── */
+  .ev-cal{max-width:520px;background:white;border:1px solid rgba(45,74,92,0.08);border-radius:var(--radius-lg);box-shadow:var(--shadow-soft);padding:16px 16px 12px;margin:18px auto 4px}
+  .ev-cal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+  .ev-cal-head h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:800;color:var(--navy);margin:0}
+  .ev-cal-nav{display:flex;gap:6px}
+  .ev-cal-nav button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(45,74,92,0.12);background:white;color:var(--navy);font-size:1.1rem;line-height:1;cursor:pointer;transition:var(--transition)}
+  .ev-cal-nav button:hover:not(:disabled){border-color:var(--orange);color:var(--orange)}
+  .ev-cal-nav button:disabled{opacity:0.3;cursor:default}
+  .ev-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .ev-cal-dow{font-size:0.64rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-light);text-align:center;padding-bottom:6px}
+  .ev-cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;border:0;background:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.92rem;color:var(--text-light);cursor:default}
+  .ev-cal-day.has{background:var(--cream);color:var(--navy);font-weight:700;cursor:pointer}
+  .ev-cal-day.has:hover{background:rgba(232,149,74,0.18)}
+  .ev-cal-day.is-today{box-shadow:inset 0 0 0 2px var(--orange)}
+  .ev-cal-day.is-sel{background:var(--navy);color:white}
+  .ev-cal-dots{display:flex;gap:3px;height:6px}
+  .ev-cal-dots i{width:6px;height:6px;border-radius:50%;background:var(--dot)}
+  .ev-cal-day.is-sel .ev-cal-dots i{background:rgba(255,255,255,0.9)}
+  .ev-cal-legend{margin:12px 0 0;font-size:0.78rem;color:var(--text-light);text-align:center}
+  .ev-cal-legend button{font:inherit;font-weight:700;color:var(--orange-dark);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 
   /* ── IN EVIDENZA: corsie "Oggi" e "Questo weekend" ── */
   .ev-hl-block,.ev-day{padding:0}
@@ -3747,6 +3773,8 @@ document.addEventListener('DOMContentLoaded', function () {
     .ev-search{flex:1 1 100%}
     .ev-search input{min-height:42px}
     .ev-select{flex:1 1 0;min-width:0;font-size:0.8rem;padding:9px 8px;min-height:40px}
+    .ev-cal{padding:12px 10px 10px}
+    .ev-cal-day{font-size:0.85rem;border-radius:10px}
     .event-act{min-height:44px;padding:10px 14px}
     .info-strip{flex-direction:column;gap:12px;padding:22px 22px}
     .footer-grid{grid-template-columns:1fr 1fr;gap:24px 20px}
@@ -3840,7 +3868,14 @@ document.addEventListener('DOMContentLoaded', function () {
       <!-- EVENTI-TIPO:END -->
       </select>
     </div>
-    <p class="events-count" id="events-count"></p>
+    <div class="ev-viewbar">
+      <p class="events-count" id="events-count"></p>
+      <div class="ev-viewtoggle" role="group" aria-label="Come vedere gli eventi">
+        <button type="button" id="v-agenda" aria-pressed="true">Agenda</button>
+        <button type="button" id="v-cal" aria-pressed="false">Calendario</button>
+      </div>
+    </div>
+    <div class="ev-cal" id="ev-cal" hidden></div>
 
 <!-- EVENTI-LISTA:START -->
     <div class="ev-highlights" id="ev-highlights" data-day="2026-07-27">
@@ -5986,17 +6021,22 @@ document.addEventListener('DOMContentLoaded', function () {
       return true;
     }
 
+    // I filtri della barra e la selezione del calendario restano separati: il
+    // calendario deve poter contare i giorni pieni *dentro* i filtri attivi.
+    function passaFiltri(card, f, term) {
+      return (f.province === 'all' || card.dataset.province === f.province) &&
+        (f.category === 'all' || card.dataset.category === f.category) &&
+        matchDate(card, f.date) &&
+        (!term || testo.get(card).includes(term));
+    }
+
     function apply() {
       const term = q.value.trim().toLowerCase();
       const f = { date: sel.date.value, province: sel.province.value, category: sel.category.value };
       const filtrato = term !== '' || f.date !== 'all' || f.province !== 'all' || f.category !== 'all';
       let visible = 0;
       cards.forEach(card => {
-        const show =
-          (f.province === 'all' || card.dataset.province === f.province) &&
-          (f.category === 'all' || card.dataset.category === f.category) &&
-          matchDate(card, f.date) &&
-          (!term || testo.get(card).includes(term));
+        const show = passaFiltri(card, f, term) && passaCalendario(card);
         card.classList.toggle('is-hidden', !show);
         if (show) visible++;
       });
@@ -6008,10 +6048,12 @@ document.addEventListener('DOMContentLoaded', function () {
         hlCards.forEach(c => c.classList.toggle('is-hidden',
           !matchDate(c, c.closest('.ev-hl-block').dataset.rail === 'oggi' ? 'oggi' : 'weekend')));
         hlBlocks.forEach(b => b.classList.toggle('is-hidden', !b.querySelector('.ev-hl-card:not(.is-hidden)')));
-        hl.classList.toggle('is-hidden', filtrato || !hl.querySelector('.ev-hl-block:not(.is-hidden)'));
+        hl.classList.toggle('is-hidden', filtrato || vista === 'calendario' ||
+          !hl.querySelector('.ev-hl-block:not(.is-hidden)'));
       }
       empty.style.display = visible === 0 ? 'block' : 'none';
       if (count) count.textContent = visible + (visible === 1 ? ' evento in agenda' : ' eventi in agenda');
+      if (vista === 'calendario') disegnaCalendario(f, term);
     }
 
     // Le intestazioni dei giorni arrivano già scritte dal generatore notturno:
@@ -6030,6 +6072,121 @@ document.addEventListener('DOMContentLoaded', function () {
           : g.dataset.day === iso(domani) ? 'Domani · ' + base : base;
       });
     })();
+
+    // ── Vista calendario ──────────────────────────────────────────────────
+    // Non è una seconda lista: è solo un modo di scegliere il giorno. La griglia
+    // del mese mostra i giorni pieni, il click filtra l'agenda qui sotto.
+    const cal = document.getElementById('ev-cal');
+    const btnAgenda = document.getElementById('v-agenda');
+    const btnCal = document.getElementById('v-cal');
+    const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio',
+                  'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+    let vista = 'agenda', calMese = null, calGiorno = null;
+
+    const isoDi = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
+                       '-' + String(d.getDate()).padStart(2, '0');
+
+    function copre(card, da, a) {
+      return new Date(card.dataset.start + 'T00:00:00') <= a &&
+             new Date(card.dataset.end + 'T23:59:59') >= da;
+    }
+
+    function passaCalendario(card) {
+      if (vista !== 'calendario' || !calMese) return true;
+      if (calGiorno) {
+        const g = new Date(calGiorno + 'T00:00:00');
+        const fine = new Date(g); fine.setHours(23, 59, 59, 999);
+        return copre(card, g, fine);
+      }
+      // nessun giorno scelto: l'agenda mostra tutto il mese in vista
+      const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+      const primo = new Date(calMese.getFullYear(), calMese.getMonth(), 1);
+      const ultimo = new Date(calMese.getFullYear(), calMese.getMonth() + 1, 0, 23, 59, 59, 999);
+      return copre(card, primo < oggi ? oggi : primo, ultimo);
+    }
+
+    function disegnaCalendario(f, term) {
+      const anno = calMese.getFullYear(), mese = calMese.getMonth();
+      const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+      const ultimo = new Date(anno, mese + 1, 0);
+      // colori per giorno, contando solo gli eventi che passano i filtri attivi
+      const perGiorno = new Map();
+      cards.forEach(card => {
+        if (!passaFiltri(card, f, term)) return;
+        const colore = getComputedStyle(card).getPropertyValue('--cat-color').trim();
+        for (let g = 1; g <= ultimo.getDate(); g++) {
+          const d = new Date(anno, mese, g), fine = new Date(d); fine.setHours(23, 59, 59, 999);
+          if (d < oggi || !copre(card, d, fine)) continue;
+          const k = isoDi(d);
+          if (!perGiorno.has(k)) perGiorno.set(k, []);
+          if (!perGiorno.get(k).includes(colore)) perGiorno.get(k).push(colore);
+        }
+      });
+      const primoMese = new Date(oggi.getFullYear(), oggi.getMonth(), 1);
+      let h = '<div class="ev-cal-head"><h3>' + MESI[mese] + ' ' + anno + '</h3><div class="ev-cal-nav">' +
+        '<button type="button" data-salto="-1" aria-label="Mese precedente"' +
+        (calMese <= primoMese ? ' disabled' : '') + '>&#8249;</button>' +
+        '<button type="button" data-salto="1" aria-label="Mese successivo">&#8250;</button></div></div>' +
+        '<div class="ev-cal-grid">';
+      ['lun', 'mar', 'mer', 'gio', 'ven', 'sab', 'dom'].forEach(g => h += '<div class="ev-cal-dow">' + g + '</div>');
+      const salto = (new Date(anno, mese, 1).getDay() + 6) % 7; // la settimana parte da lunedì
+      for (let i = 0; i < salto; i++) h += '<div></div>';
+      for (let g = 1; g <= ultimo.getDate(); g++) {
+        const d = new Date(anno, mese, g);
+        const k = isoDi(d);
+        // I giorni già passati restano spenti anche se una mostra lunga li copre:
+        // segnarli pieni prometterebbe eventi che non si possono più vedere.
+        const colori = d < oggi ? [] : (perGiorno.get(k) || []).slice(0, 3);
+        const cls = ['ev-cal-day'];
+        if (colori.length) cls.push('has');
+        if (k === calGiorno) cls.push('is-sel');
+        if (k === isoDi(oggi)) cls.push('is-today');
+        h += '<button type="button" class="' + cls.join(' ') + '" data-giorno="' + k + '"' +
+          (colori.length ? '' : ' disabled') + '><span>' + g + '</span><span class="ev-cal-dots">' +
+          colori.map(c => '<i style="--dot:' + c + '"></i>').join('') + '</span></button>';
+      }
+      h += '</div>';
+      h += '<p class="ev-cal-legend">' + (calGiorno
+        ? 'Stai vedendo un solo giorno. <button type="button" data-tutto="1">Mostra tutto il mese</button>'
+        : 'Tocca un giorno con il pallino per vedere solo quello.') + '</p>';
+      cal.innerHTML = h;
+    }
+
+    function cambiaVista(nuova) {
+      vista = nuova;
+      btnAgenda.setAttribute('aria-pressed', String(vista === 'agenda'));
+      btnCal.setAttribute('aria-pressed', String(vista === 'calendario'));
+      cal.hidden = vista !== 'calendario';
+      if (vista === 'calendario') {
+        const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+        calMese = new Date(oggi.getFullYear(), oggi.getMonth(), 1);
+        calGiorno = null;
+        // "Quando" e calendario risponderebbero alla stessa domanda: vince il calendario
+        sel.date.value = 'all';
+      } else {
+        calMese = null;
+        calGiorno = null;
+      }
+      apply();
+    }
+
+    cal.addEventListener('click', function (ev) {
+      const salto = ev.target.closest('[data-salto]');
+      if (salto) {
+        calMese = new Date(calMese.getFullYear(), calMese.getMonth() + Number(salto.dataset.salto), 1);
+        calGiorno = null;
+        apply();
+        return;
+      }
+      if (ev.target.closest('[data-tutto]')) { calGiorno = null; apply(); return; }
+      const giorno = ev.target.closest('.ev-cal-day:not([disabled])');
+      if (giorno) {
+        calGiorno = giorno.dataset.giorno === calGiorno ? null : giorno.dataset.giorno;
+        apply();
+      }
+    });
+    btnAgenda.addEventListener('click', () => cambiaVista('agenda'));
+    btnCal.addEventListener('click', () => cambiaVista('calendario'));
 
     list.addEventListener('click', function (ev) {
       const btn = ev.target.closest('.ev-row');
@@ -6073,12 +6230,34 @@ document.addEventListener('DOMContentLoaded', function () {
     apriDaHash();
   })();
 
-  // Attribuzione automatica al copia-incolla. Il testo resta liberamente
-  // selezionabile — meglio per gli utenti e per la SEO — ma quando viene
-  // copiato un blocco sostanzioso aggiungiamo in coda la fonte: se i contenuti
-  // finiscono su un altro sito, si portano dietro il riferimento a DAOP.
+  // Copia-incolla. Il testo resta selezionabile — meglio per gli utenti e per
+  // la SEO — ma con due freni: sotto le 60 battute non tocchiamo niente, su una
+  // selezione normale aggiungiamo la fonte in coda, e su una selezione che
+  // rastrella mezza agenda mandiamo negli appunti un estratto con il link.
+  // Le descrizioni stanno dentro i dettagli chiusi, quindi un "seleziona tutto"
+  // porta via solo le righe visibili: l'agenda completa resta sul sito.
   (function () {
     const FONTE_URL = location.origin + location.pathname;
+    const MAX_EVENTI = 3;      // oltre questa soglia la copia diventa un estratto
+    const MAX_BATTUTE = 2000;  // ripiego dove Selection.containsNode non c'è
+    const list = document.getElementById('events-list');
+
+    function schedeSelezionate(sel) {
+      if (!list || typeof sel.containsNode !== 'function') return null;
+      return Array.from(list.querySelectorAll('.event-card'))
+        .filter(c => !c.classList.contains('is-hidden') && sel.containsNode(c, true));
+    }
+
+    function riga(card) {
+      const nome = card.querySelector('.ev-name');
+      const meta = card.querySelector('.ev-line');
+      const gruppo = card.closest('.ev-day');
+      const giorno = gruppo ? gruppo.querySelector('.ev-dayname') : null;
+      return '• ' + (nome ? nome.textContent.trim() : '') +
+        (giorno ? ' — ' + giorno.textContent.trim() : '') +
+        (meta ? ' — ' + meta.textContent.trim() : '');
+    }
+
     document.addEventListener('copy', function (ev) {
       const sel = document.getSelection();
       if (!sel || sel.isCollapsed) return;
@@ -6088,6 +6267,30 @@ document.addEventListener('DOMContentLoaded', function () {
       if (text.trim().length < 60) return;
       const cd = ev.clipboardData;
       if (!cd) return;
+
+      const scelte = schedeSelezionate(sel);
+      const troppe = scelte ? scelte.length > MAX_EVENTI : text.length > MAX_BATTUTE;
+
+      if (troppe) {
+        const anteprima = scelte
+          ? scelte.slice(0, MAX_EVENTI).map(riga)
+          : [text.trim().slice(0, 400).replace(/\s+\S*$/, '') + '…'];
+        const restanti = scelte ? scelte.length - MAX_EVENTI : 0;
+        const coda = restanti
+          ? '… e altri ' + restanti + ' eventi, aggiornati ogni giorno su ' + FONTE_URL
+          : 'Agenda completa e aggiornata ogni giorno su ' + FONTE_URL;
+        cd.setData('text/plain',
+          'Eventi per famiglie ad Alessandria e Asti — agenda DAOP APS\n\n' +
+          anteprima.join('\n') + '\n\n' + coda +
+          '\n\nPer riusare questi contenuti scrivi a info@daop.it.');
+        cd.setData('text/html',
+          '<p><strong>Eventi per famiglie ad Alessandria e Asti — agenda DAOP APS</strong></p><ul>' +
+          anteprima.map(r => '<li>' + r.replace(/^• /, '') + '</li>').join('') + '</ul>' +
+          '<p>' + coda.replace(FONTE_URL, '<a href="' + FONTE_URL + '">' + FONTE_URL + '</a>') + '</p>');
+        ev.preventDefault();
+        return;
+      }
+
       // Versione HTML: preserva la formattazione della selezione e aggiunge la fonte.
       const frag = document.createElement('div');
       for (let i = 0; i < sel.rangeCount; i++) frag.appendChild(sel.getRangeAt(i).cloneContents());
