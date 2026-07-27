@@ -8,8 +8,9 @@ Fonte dati (in ordine di priorità):
   2. URL CSV gviz di default (richiede foglio condiviso "chiunque con il link")
   3. data/eventi.json (istantanea committata, fallback se la rete non è disponibile)
 
-Rigenera SOLO la griglia .events-grid e il gruppo di filtri per categoria
-dentro eventi.html, tra gli ancoraggi esistenti. Tutto il resto resta intatto.
+Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
+(opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
+raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
 import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys
 
@@ -26,6 +27,9 @@ KNOWN_CATS = {'Sagra & Festa', 'Sagra', 'Spettacolo', 'Laboratorio', 'Sport',
               'Musica', 'Cultura', 'Natura', 'Altro', 'Mercato', 'Arte',
               'Cinema', 'Teatro'}
 MESI = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic']
+MESI_LUNGHI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio',
+               'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre']
+GIORNI = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica']
 LABELS = {'feste': 'Sagre & Feste', 'spettacoli': 'Spettacoli', 'musica': 'Musica',
           'laboratori': 'Laboratori', 'sport': 'Sport', 'cultura': 'Cultura & Natura',
           'altro': 'Altro'}
@@ -177,6 +181,9 @@ USER_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="
 CAL_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
 NAV_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
 ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'
+CHEV_SVG = '<svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>'
+IMG_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
+HL_LIMIT = 12  # quante schede al massimo nelle corsie "Oggi" / "Questo weekend"
 
 
 def _luogo_query(e):
@@ -222,81 +229,177 @@ COLORS = {
 }
 
 
-def render(events):
-    today = datetime.date.today()
-    cards, present = [], set()
-    for e in events:
-        slug, emoji, catlabel = bucket(e)
-        present.add(slug)
-        d = e['d_start']
-        ongoing = d < today  # già iniziato ma non ancora finito (filtrato in normalize)
-        if ongoing:
-            de = e['d_end']
-            datestr = ("In corso · ultimo giorno" if de == today
-                       else f"In corso · fino al {de.day} {MESI[de.month-1]}")
-        elif e['d_end'] != d:
-            de = e['d_end']
-            datestr = f"dal {d.day} {MESI[d.month-1]} al {de.day} {MESI[de.month-1]}"
-        else:
-            datestr = f"{d.day} {MESI[d.month-1]} {d.year}"
-        if e['ora']:
-            datestr += f" · {trunc(e['ora'], 28)}"
-        luogo = (esc(e['citta']) + f" ({e['prov']})") if e['citta'] else e['prov']
-        pz = (e['prezzo'] or '').lower()
-        if any(k in pz for k in ['gratuito', 'gratis', 'libero', 'ingresso libero']):
-            price = '<span class="event-price free">Gratuito</span>'
-        elif e['prezzo']:
-            price = f'<span class="event-price">{esc(trunc(e["prezzo"], 32))}</span>'
-        else:
-            price = '<span></span>'
-        eta = esc(trunc(e['eta'], 26)) if e['eta'] else ''
-        eta_html = f'\n          <span>{USER_SVG} {eta}</span>' if eta else ''
-        manifest = f'<span class="event-tag">{esc(trunc(e["manifest"], 40))}</span>' if e['manifest'] else ''
-        color, tint = COLORS.get(slug, COLORS['altro'])
-        acts = []
-        murl = maps_url(e)
-        if murl:
-            acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{NAV_SVG} Come arrivare</a>')
-        acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{CAL_SVG} Calendario</a>')
-        actions = '\n        <div class="event-actions">\n          ' + '\n          '.join(acts) + '\n        </div>'
-        # In alto a destra: normalmente il riquadro data; per gli eventi in corso
-        # un badge "In corso" (la data di inizio è passata e confonderebbe).
-        if ongoing:
-            datebox = '<span class="ev-live">In corso</span>'
-        else:
-            datebox = f'<span class="ev-date"><span class="d">{d.day:02d}</span><span class="m">{MESI[d.month-1]}</span></span>'
-        cover_url = loc_path(e['loc'])
-        cover = (f'''        <a class="ev-cover" href="{cover_url}" target="_blank" rel="noopener" aria-label="Apri la locandina di {esc(e['nome'])}">
-          <img src="{cover_url}" alt="Locandina: {esc(trunc(e['nome'], 70))}" loading="lazy" decoding="async">
-        </a>
-''' if cover_url else '')
-        cards.append(f'''      <article class="event-card{' has-cover' if cover_url else ''}{' is-ongoing' if ongoing else ''}" id="{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
-{cover}        <div class="ev-top">
-          <span class="ev-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
-          <span class="ev-cat">{esc(catlabel)}</span>
-          {datebox}
-        </div>
-        <h3>{esc(trunc(e['nome'], 90))}</h3>
-        <div class="event-meta">
-          <span>{PIN_SVG} {luogo}</span>
-          <span>{CLOCK_SVG} {esc(datestr)}</span>{eta_html}
-        </div>
-        <p class="event-desc">{esc(e['descr'])}</p>
-        <button class="event-readmore" type="button" hidden>Leggi tutto</button>
-        <div class="event-foot">
-          {price}
-          {manifest}
-        </div>{actions}
-      </article>''')
+def weekend_range(today):
+    """Sabato e domenica del weekend più vicino. Se oggi è già sabato o domenica
+    restituisce il weekend in corso, così la sezione "Questo weekend" non salta
+    di una settimana proprio nei giorni in cui serve di più."""
+    dow = today.weekday()  # 0 = lunedì … 6 = domenica
+    sat = today - datetime.timedelta(days=1) if dow == 6 else today + datetime.timedelta(days=(5 - dow) % 7)
+    return sat, sat + datetime.timedelta(days=1)
 
-    chips = ['      <button class="filter-chip active" data-filter="all">Tutte le categorie</button>']
+
+def prezzo_pill(e):
+    pz = (e['prezzo'] or '').lower()
+    if any(k in pz for k in FREE_KW):
+        return '<span class="ev-pill is-free">Gratuito</span>'
+    if e['prezzo']:
+        return f'<span class="ev-pill is-price">{esc(trunc(e["prezzo"], 26))}</span>'
+    return ''
+
+
+def riga(e, today):
+    """Una riga dell'agenda: intestazione sempre visibile (miniatura, nome,
+    contesto, etichette) + dettaglio che si apre al tocco."""
+    slug, emoji, catlabel = bucket(e)
+    color, tint = COLORS.get(slug, COLORS['altro'])
+    ongoing = e['d_start'] < today
+    anchor = e.get('anchor', '')
+    cover = loc_path(e['loc'])
+    thumb = (f'<img class="ev-thumb" src="{cover}" alt="" loading="lazy" decoding="async">'
+             if cover else f'<span class="ev-thumb is-ph" aria-hidden="true">{emoji}</span>')
+
+    # La data sta già nell'intestazione del giorno: qui restano luogo, durata,
+    # orario ed età, cioè quello che serve per decidere in un colpo d'occhio.
+    bits = [f"{esc(e['citta'])} ({e['prov']})" if e['citta'] else e['prov']]
+    de = e['d_end']
+    if ongoing:
+        bits.append('ultimo giorno' if de == today else f"fino al {de.day} {MESI[de.month-1]}")
+    elif de != e['d_start']:
+        bits.append(f"fino al {de.day} {MESI[de.month-1]}")
+    if e['ora']:
+        bits.append(esc(trunc(e['ora'], 28)))
+    if e['eta']:
+        bits.append(esc(trunc(e['eta'], 26)))
+
+    tags = [f'<span class="ev-pill is-cat">{emoji} {esc(catlabel)}</span>']
+    if ongoing:
+        tags.append('<span class="ev-pill is-live">In corso</span>')
+    pill = prezzo_pill(e)
+    if pill:
+        tags.append(pill)
+    if e['manifest']:
+        tags.append(f'<span class="ev-pill is-tag">{esc(trunc(e["manifest"], 34))}</span>')
+
+    acts = []
+    murl = maps_url(e)
+    if murl:
+        acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{NAV_SVG} Come arrivare</a>')
+    acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{CAL_SVG} Calendario</a>')
+    if cover:
+        acts.append(f'<a class="event-act" href="{cover}" target="_blank" rel="noopener">{IMG_SVG} Locandina</a>')
+
+    dove = esc(e['indirizzo'] or e['luogo'])
+    dove_html = f'\n          <p class="ev-where">{PIN_SVG} {dove}</p>' if dove else ''
+
+    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-{anchor}">
+            {thumb}
+            <span class="ev-main">
+              <span class="ev-name">{esc(trunc(e['nome'], 110))}</span>
+              <span class="ev-line">{' · '.join(bits)}</span>
+              <span class="ev-tags">{''.join(tags)}</span>
+            </span>
+            {CHEV_SVG}
+          </button></h4>
+          <div class="ev-det" id="det-{anchor}" hidden>
+            <p class="event-desc">{esc(e['descr'])}</p>{dove_html}
+            <div class="event-actions">
+              {chr(10) + '              '.join(acts)}
+            </div>
+          </div>
+        </article>'''
+
+
+def hl_card(e):
+    """Scheda compatta con locandina per le corsie "Oggi" e "Questo weekend".
+    Punta all'ancora della riga corrispondente più in basso nell'agenda."""
+    slug, emoji, catlabel = bucket(e)
+    color, tint = COLORS.get(slug, COLORS['altro'])
+    cover = loc_path(e['loc'])
+    img = (f'<img src="{cover}" alt="" loading="lazy" decoding="async">'
+           if cover else f'<span class="ev-hl-ph" aria-hidden="true">{emoji}</span>')
+    bits = [f"{esc(e['citta'])} ({e['prov']})" if e['citta'] else e['prov']]
+    if e['ora']:
+        bits.append(esc(trunc(e['ora'], 20)))
+    pill = prezzo_pill(e)
+    return f'''        <a class="ev-hl-card" href="#{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+          <span class="ev-hl-cover">{img}</span>
+          <span class="ev-hl-body">
+            <span class="ev-hl-cat">{emoji} {esc(catlabel)}</span>
+            <span class="ev-hl-name">{esc(trunc(e['nome'], 70))}</span>
+            <span class="ev-hl-meta">{' · '.join(bits)}</span>
+            {pill}
+          </span>
+        </a>'''
+
+
+def rail(titolo, lista, slug):
+    if not lista:
+        return ''
+    return (f'      <section class="ev-hl-block" data-rail="{slug}">\n'
+            f'        <h3 class="ev-hl-title">{titolo}<span class="ev-hl-n">{len(lista)}</span></h3>\n'
+            f'        <div class="ev-rail">\n' + '\n'.join(hl_card(e) for e in lista) +
+            '\n        </div>\n      </section>')
+
+
+def intestazione_giorno(d, today):
+    """'Oggi · lunedì 27 luglio'. Il prefisso viene ricalcolato anche lato JS,
+    così resta corretto se la pagina viene servita da cache il giorno dopo."""
+    if d == today:
+        pre = 'Oggi · '
+    elif d == today + datetime.timedelta(days=1):
+        pre = 'Domani · '
+    else:
+        pre = ''
+    return f"{pre}{GIORNI[d.weekday()]} {d.day} {MESI_LUNGHI[d.month - 1]}"
+
+
+def render(events):
+    """Restituisce (opzioni del filtro Tipo, agenda completa)."""
+    today = datetime.date.today()
+    present = {bucket(e)[0] for e in events}
+
+    # ── in evidenza: oggi e il primo weekend utile ──────────────────────────
+    sat, sun = weekend_range(today)
+    oggi = [e for e in events if e['d_start'] <= today <= e['d_end']]
+    visti = {id(e) for e in oggi}
+    wknd = [e for e in events if id(e) not in visti and e['d_start'] <= sun and e['d_end'] >= sat]
+    blocchi = [rail('Oggi', oggi[:HL_LIMIT], 'oggi'),
+               rail('Questo weekend', wknd[:HL_LIMIT], 'weekend')]
+    blocchi = [b for b in blocchi if b]
+    highlights = ''
+    if blocchi:
+        highlights = (f'    <div class="ev-highlights" id="ev-highlights" data-day="{today.isoformat()}">\n'
+                      + '\n'.join(blocchi) + '\n    </div>\n\n')
+
+    # ── agenda: gli eventi già in corso in testa, poi un gruppo per giornata ─
+    gruppi = []
+    in_corso = [e for e in events if e['d_start'] < today]
+    if in_corso:
+        gruppi.append(('in-corso', 'Già iniziati, ancora in corso', in_corso))
+    per_giorno = {}
+    for e in events:
+        if e['d_start'] >= today:
+            per_giorno.setdefault(e['d_start'], []).append(e)
+    for d in sorted(per_giorno):
+        gruppi.append((d.isoformat(), intestazione_giorno(d, today), per_giorno[d]))
+
+    sezioni = []
+    for day, titolo, lista in gruppi:
+        righe = '\n'.join(riga(e, today) for e in lista)
+        sezioni.append(f'''      <section class="ev-day" data-day="{day}">
+        <h3 class="ev-dayhead"><span class="ev-dayname">{titolo}</span><span class="ev-daycount">{len(lista)}</span></h3>
+{righe}
+      </section>''')
+
+    lista_html = (highlights + '    <div class="events-list" id="events-list">\n'
+                  + '\n\n'.join(sezioni) + '\n    </div>')
+
+    opts = ['      <option value="all">🏷️ Tutti</option>']
     for s in ORDER:
         if s in present:
-            chips.append(f'      <button class="filter-chip" data-filter="{s}">{LABELS[s]}</button>')
-    cat_filter = ('    <div class="event-filters" data-group="category" aria-label="Filtra per categoria">\n'
-                  + '\n'.join(chips) + '\n    </div>')
-    grid = '    <div class="events-grid" id="events-grid">\n\n' + '\n\n'.join(cards) + '\n\n    </div>'
-    return cat_filter, grid
+            opts.append(f'      <option value="{s}">{LABELS[s]}</option>')
+    return '\n'.join(opts), lista_html
 
 
 def render_home(events):
@@ -466,16 +569,16 @@ def render_jsonld(events):
             + payload + '\n</script>')
 
 
-def inject(cat_filter, grid, jsonld):
+def inject(tipo_opts, lista, jsonld):
     s = open(HTML_PATH, encoding="utf-8").read()
-    s, n1 = re.subn(r'    <div class="event-filters" data-group="category".*?</div>',
-                    cat_filter, s, count=1, flags=re.S)
-    s, n2 = re.subn(r'    <div class="events-grid" id="events-grid">.*?</div>\s*(?=<p class="events-empty")',
-                    grid + "\n    ", s, count=1, flags=re.S)
+    s, n1 = re.subn(r'(<!-- EVENTI-TIPO:START -->\n).*?(\n *<!-- EVENTI-TIPO:END -->)',
+                    lambda m: m.group(1) + tipo_opts + m.group(2), s, count=1, flags=re.S)
+    s, n2 = re.subn(r'(<!-- EVENTI-LISTA:START -->\n).*?(\n *<!-- EVENTI-LISTA:END -->)',
+                    lambda m: m.group(1) + lista + m.group(2), s, count=1, flags=re.S)
     s, n3 = re.subn(r'<script type="application/ld\+json" id="eventi-jsonld">.*?</script>',
                     lambda _: jsonld, s, count=1, flags=re.S)
     if n1 != 1 or n2 != 1 or n3 != 1:
-        raise SystemExit(f"Ancoraggi non trovati in eventi.html (filtro={n1}, griglia={n2}, json-ld={n3})")
+        raise SystemExit(f"Ancoraggi non trovati in eventi.html (tipo={n1}, lista={n2}, json-ld={n3})")
     open(HTML_PATH, "w", encoding="utf-8").write(s)
 
 
@@ -517,9 +620,9 @@ def update_sitemap():
 def main():
     events = normalize(fetch_rows())
     assegna_ancore(events)
-    cat_filter, grid = render(events)
+    tipo_opts, lista = render(events)
     jsonld = render_jsonld(events)
-    inject(cat_filter, grid, jsonld)
+    inject(tipo_opts, lista, jsonld)
     inject_home(render_home(events))
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
