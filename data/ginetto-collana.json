@@ -18,7 +18,7 @@
       "titolo": "Ginetto alla scoperta di Casale Monferrato",
       "paese": "Casale Monferrato",
       "provincia": "Alessandria",
-      "descrizione": "Il primo viaggio di Ginetto parte dal Po e attraversa la città dei mattoni rossi, tra il Duomo, la torre civica e i cortili del centro storico. Una passeggiata illustrata alla scoperta della capitale del Monferrato.",
+      "descrizione": "Il primo viaggio di Ginetto parte dal grande Castello di mattoni rossi e attraversa Casale tappa dopo tappa: il Duomo di Sant'Evasio, la Sinagoga nascosta tra i cortili, Piazza del Cavallo e i krumiri, i biscotti a forma di baffo nati proprio qui. In ogni illustrazione si nasconde Briciola, la topolina: trovarla è il gioco che accompagna la lettura.",
       "copertina": "assets/ginetto/copertine/vol-1-casale-monferrato.jpg",
       "copertina_alt": "Copertina del volume 1 di Ginetto l'Esploratore, dedicato a Casale Monferrato",
       "amazon": "https://www.amazon.it/dp/B0H73GRK9M",
@@ -33,12 +33,6 @@
           "titolo": "Checklist \"Ci sono stato!\"",
           "descrizione": "I luoghi del libro in un elenco da spuntare uno a uno, durante la passeggiata.",
           "file": "assets/ginetto/materiali/vol-1-casale-monferrato-checklist.pdf",
-          "formato": "PDF A4"
-        },
-        {
-          "titolo": "Disegni da colorare",
-          "descrizione": "Le illustrazioni del volume in bianco e nero, pronte per matite e pennarelli.",
-          "file": "assets/ginetto/materiali/vol-1-casale-monferrato-disegni.pdf",
           "formato": "PDF A4"
         }
       ]

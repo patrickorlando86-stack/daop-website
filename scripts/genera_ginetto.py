@@ -61,30 +61,30 @@ def esiste(path_rel):
 
 def copertina(v):
     """<img> se la copertina esiste, altrimenti un segnaposto disegnato con
-    le stesse proporzioni (2:3), cosi' il layout non balla quando arrivera'
-    il file vero."""
+    le stesse proporzioni (1:1: i libri della collana sono quadrati), cosi'
+    il layout non balla quando arrivera' il file vero."""
     src, alt = v.get("copertina", ""), v.get("copertina_alt", "")
     if esiste(src):
-        return (f'<img src="{e(src)}" alt="{e(alt)}" width="800" height="1200" '
+        return (f'<img src="{e(src)}" alt="{e(alt)}" width="980" height="980" '
                 f'loading="lazy" decoding="async">')
     mancanti.append(src or f"(copertina del volume {v.get('numero')})")
     etichetta = "In arrivo" if v.get("stato") == "in-arrivo" else "Copertina in arrivo"
     return (
         '<div class="vol-placeholder" role="img" aria-label="' + e(alt) + '">'
-        '<svg viewBox="0 0 800 1200" aria-hidden="true" focusable="false">'
-        '<rect width="800" height="1200" fill="#2d4a5c"/>'
+        '<svg viewBox="0 0 800 800" aria-hidden="true" focusable="false">'
+        '<rect width="800" height="800" fill="#2d4a5c"/>'
         # Ago di bussola, non una croce: con due semplici linee il segnaposto
         # sembrava un pulsante "+" (aggiungi) invece di un volume in arrivo.
-        '<circle cx="400" cy="470" r="132" fill="none" stroke="#c9a227" stroke-width="9"/>'
-        '<g transform="rotate(32 400 470)">'
-        '<path d="M400 368 L426 470 L400 470 Z" fill="#c9a227"/>'
-        '<path d="M400 368 L374 470 L400 470 Z" fill="#a8871f"/>'
-        '<path d="M400 572 L426 470 L400 470 Z" fill="rgba(255,255,255,0.32)"/>'
-        '<path d="M400 572 L374 470 L400 470 Z" fill="rgba(255,255,255,0.17)"/>'
-        '</g><circle cx="400" cy="470" r="11" fill="#2d4a5c"/>'
-        f'<text x="400" y="712" text-anchor="middle" fill="#ffffff" '
+        '<circle cx="400" cy="330" r="132" fill="none" stroke="#c9a227" stroke-width="9"/>'
+        '<g transform="rotate(32 400 330)">'
+        '<path d="M400 228 L426 330 L400 330 Z" fill="#c9a227"/>'
+        '<path d="M400 228 L374 330 L400 330 Z" fill="#a8871f"/>'
+        '<path d="M400 432 L426 330 L400 330 Z" fill="rgba(255,255,255,0.32)"/>'
+        '<path d="M400 432 L374 330 L400 330 Z" fill="rgba(255,255,255,0.17)"/>'
+        '</g><circle cx="400" cy="330" r="11" fill="#2d4a5c"/>'
+        f'<text x="400" y="572" text-anchor="middle" fill="#ffffff" '
         f'font-family="Georgia,serif" font-size="72" font-weight="700">Vol. {e(v.get("numero"))}</text>'
-        f'<text x="400" y="790" text-anchor="middle" fill="rgba(255,255,255,0.62)" '
+        f'<text x="400" y="650" text-anchor="middle" fill="rgba(255,255,255,0.62)" '
         f'font-family="Helvetica,Arial,sans-serif" font-size="42">{e(etichetta)}</text>'
         '</svg></div>')
 

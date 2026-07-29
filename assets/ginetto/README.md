@@ -4,7 +4,7 @@ Qui dentro stanno i file della pagina **[/esploratore](https://www.daop.it/esplo
 quella puntata dai **QR code stampati dentro i libri**.
 
     copertine/    le copertine dei volumi (JPG)
-    materiali/    i PDF da stampare (diploma, checklist, disegni)
+    materiali/    i PDF da stampare (diploma, checklist)
 
 ## Come funziona
 
@@ -28,9 +28,10 @@ Due cose che fa da solo, e che quindi **non vanno scritte a mano nel JSON**:
 
 ## File attesi
 
-Copertine — **JPG, 800×1200 px (2:3), sotto i ~200 KB**:
+Copertine — **JPG quadrato (1:1), ~980×980 px, sotto i ~200 KB** (i libri
+della collana sono quadrati):
 
-- [ ] `copertine/vol-1-casale-monferrato.jpg`
+- [x] `copertine/vol-1-casale-monferrato.jpg`  ← estratta dal PDF del libro
 - [ ] `copertine/vol-2-castelnuovo-scrivia.jpg`
 
 Materiali — **PDF in formato A4 verticale**, pensati per la stampa in bianco e
@@ -38,7 +39,11 @@ nero su una stampante di casa o di scuola:
 
 - [ ] `materiali/vol-1-casale-monferrato-diploma.pdf`
 - [ ] `materiali/vol-1-casale-monferrato-checklist.pdf`
-- [ ] `materiali/vol-1-casale-monferrato-disegni.pdf`
+
+> I **disegni da colorare** sono stati tolti dalla pagina: le illustrazioni del
+> libro sono a colori, non c'è line-art pronto. Per riaggiungerli, crea le
+> versioni in bianco e nero, rimetti il blocco in `data/ginetto-collana.json`
+> e rilancia lo script.
 
 I materiali del **volume 2** non servono ancora: finché nel JSON il volume ha
 `"stato": "in-arrivo"` la pagina non li nomina nemmeno. I loro nomi sono già
