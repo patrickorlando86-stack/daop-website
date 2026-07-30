@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Consenso cookie + Google Analytics (caricato solo dopo consenso) -->
+<script src="assets/js/cookie-consent.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6M747985MC');
+</script>
+<!-- DAOP - tracciamento eventi chiave (click contatti e link importanti) -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  function track(name, href) {
+    if (typeof gtag === 'function') { gtag('event', name, { link_url: href }); }
+  }
+  document.querySelectorAll('a[href]').forEach(function (a) {
+    var href = a.getAttribute('href') || '';
+    a.addEventListener('click', function () {
+      if (href.indexOf('mailto:') === 0) {
+        track('click_email', href);
+      } else if (href.indexOf('tel:') === 0) {
+        track('click_telefono', href);
+      } else if (href.indexOf('ginettoapp.it') !== -1) {
+        track('apri_ginetto', href);
+      } else if (href.indexOf('gioco.sane-italia.it') !== -1) {
+        track('gioca_ora', href);
+      } else if (href.indexOf('instagram.com') !== -1 || href.indexOf('facebook.com') !== -1) {
+        track('click_social', href);
+      }
+    });
+  });
+
+  // Profondita di scroll: evento a 25/50/75/100%
+  var soglie = [25, 50, 75, 100], raggiunte = {};
+  function controllaScroll() {
+    var h = document.documentElement;
+    var scrollabile = h.scrollHeight - h.clientHeight;
+    if (scrollabile <= 0) return;
+    var perc = (h.scrollTop || document.body.scrollTop) / scrollabile * 100;
+    soglie.forEach(function (s) {
+      if (perc >= s && !raggiunte[s]) {
+        raggiunte[s] = true;
+        if (typeof gtag === 'function') { gtag('event', 'scroll_depth', { percent_scroll: s }); }
+      }
+    });
+  }
+  window.addEventListener('scroll', controllaScroll, { passive: true });
+});
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Policy – Gestione dei cookie | DAOP</title>
+<meta name="description" content="Cookie Policy di DAOP (daop.it): quali cookie tecnici e di terze parti usiamo, i servizi esterni coinvolti e come gestire le preferenze dal browser. Nessun cookie di profilazione.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.daop.it/cookie-policy.html">
+<meta property="og:title" content="Cookie Policy | DAOP">
+<meta property="og:description" content="Quali cookie usa daop.it e come gestire le preferenze. Nessun cookie di profilazione o tracciamento pubblicitario.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.daop.it/cookie-policy.html">
+<meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cookie Policy | DAOP">
+<meta name="twitter:description" content="Quali cookie usa daop.it e come gestire le preferenze. Nessun cookie di profilazione.">
+<meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<link rel="icon" href="assets/images/icon-512.png" type="image/png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-fonts.css">
+<style>
+  :root{
+    --navy:#2d4a5c; --navy-dark:#1e3342; --orange:#e8954a; --orange-dark:#d4793a;
+    --green:#188663; --green-dark:#136b4f; --cream:#fdf8f3; --warm-white:#fffcf8;
+    --text-dark:#1a2d3a; --text-mid:#4a6070;
+    --radius-md:16px; --radius-lg:24px;
+    --shadow-soft:0 4px 24px rgba(45,74,92,0.10);
+    --transition:0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,248,243,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(45,74,92,0.08);transition:var(--transition)}
+  nav.scrolled{box-shadow:0 2px 24px rgba(45,74,92,0.10)}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo-text{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;color:var(--navy);letter-spacing:-0.02em}
+  .nav-logo-text span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+  .nav-links a{text-decoration:none;color:var(--text-mid);font-size:0.88rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--transition)}
+  .nav-links a:hover{color:var(--navy);background:rgba(45,74,92,0.07)}
+  .nav-cta{background:var(--green)!important;color:white!important;padding:7px 16px!important;border-radius:10px!important;font-weight:600!important}
+  .nav-cta:hover{background:var(--green-dark)!important;transform:translateY(-1px)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:var(--transition)}
+  .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(45,74,92,0.08);padding:16px 24px 24px;z-index:99}
+  .mobile-menu.open{display:block}
+  .mobile-menu a{display:block;text-decoration:none;color:var(--text-mid);font-size:1rem;font-weight:500;padding:12px 0;border-bottom:1px solid rgba(45,74,92,0.06);transition:var(--transition)}
+  .mobile-menu a:hover{color:var(--navy)}
+
+  /* ── HERO LEGALE ── */
+  .legal-hero{padding:128px 24px 56px;background:linear-gradient(160deg,#0d4a35 0%,#1D9E75 70%,#2abc8a 100%);text-align:center}
+  .legal-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-0.02em}
+  .legal-hero p{font-size:1rem;color:rgba(255,255,255,0.8);max-width:620px;margin:0 auto;line-height:1.7}
+
+  /* ── CONTENUTO ── */
+  .legal{max-width:880px;margin:0 auto;padding:64px 24px 96px}
+  .legal h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.4rem;margin:34px 0 12px}
+  .legal p,.legal li{color:var(--text-mid);line-height:1.75;margin-bottom:8px}
+  .legal ul{padding-left:22px;margin:10px 0}
+  .legal a{color:var(--green);font-weight:600;text-decoration:none}
+  .legal a:hover{text-decoration:underline}
+
+  /* ── FOOTER ── */
+  footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.06);padding:40px 24px}
+  .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .footer-logo-text{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:white;margin:10px 0 8px}
+  .footer-logo-text span{color:var(--orange)}
+  .footer-desc{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px}
+  .footer-col-title{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px}
+  .footer-col-links{display:flex;flex-direction:column;gap:8px}
+  .footer-col-links a{text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);transition:var(--transition)}
+  .footer-col-links a:hover{color:rgba(255,255,255,0.85)}
+  .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .footer-copy{font-size:0.82rem;color:rgba(255,255,255,0.25)}
+  .footer-bottom-links{display:flex;gap:20px}
+  .footer-bottom-links a{font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:var(--transition)}
+  .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .footer-grid{grid-template-columns:1fr 1fr;gap:24px 20px}
+    .footer-grid>div:first-child{grid-column:1/-1}
+    .footer-bottom{flex-direction:column;text-align:center}
+    .footer-bottom-links{justify-content:center}
+  }
+
+  /* ── A11Y ── */
+  :focus-visible{outline:3px solid var(--green);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  }
+</style>
+<link rel="stylesheet" href="/assets/css/daop-system.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/images/logodaop.webp" alt="Logo DAOP" style="height:36px;width:auto;border-radius:8px;" width="500" height="500">
+      <span class="nav-logo-text">DA<span>OP</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#chi-siamo">Chi Siamo</a></li>
+      <li><a href="eventi.html">Eventi</a></li>
+      <li><a href="ginetto.html">Ginetto AI</a></li>
+      <li><a href="piattosano.html">Il Piatto Sano</a></li>
+      <li><a href="libri.html">Libri</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="https://gioco.sane-italia.it" target="_blank" rel="noopener" class="nav-cta">Gioca ora →</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
+  <a href="eventi.html" onclick="closeMobile()">Eventi</a>
+  <a href="ginetto.html" onclick="closeMobile()">Ginetto AI</a>
+  <a href="piattosano.html" onclick="closeMobile()">Il Piatto Sano</a>
+  <a href="libri.html" onclick="closeMobile()">Libri</a>
+  <a href="media.html" onclick="closeMobile()">Media</a>
+  <a href="https://gioco.sane-italia.it" target="_blank" rel="noopener" onclick="closeMobile()">Gioca ora →</a>
+</div>
+
+<!-- HERO -->
+<section class="legal-hero">
+  <h1>Cookie Policy</h1>
+  <p>Cosa sono i cookie, come li usiamo su daop.it e come gestire le tue preferenze</p>
+</section>
+
+<!-- CONTENUTO -->
+<section class="legal">
+  <p><strong>Ultimo aggiornamento:</strong> Luglio 2026</p>
+
+  <p>La presente Cookie Policy spiega cosa sono i cookie, come li utilizziamo su
+    <strong>daop.it</strong> e come puoi gestire le tue preferenze.</p>
+
+  <h2>1. Cosa sono i cookie</h2>
+  <p>I cookie sono piccoli file di testo che i siti web inviano al tuo browser per memorizzare informazioni. Servono a far funzionare correttamente il sito, ricordare preferenze e svolgere analisi anonime del traffico.</p>
+
+  <h2>2. Tipologie di cookie utilizzati</h2>
+  <ul>
+    <li><strong>Cookie tecnici (necessari)</strong> – garantiscono il funzionamento di base del sito (es. sicurezza, preferenze). Sono sempre attivi e non richiedono consenso.</li>
+    <li><strong>Cookie statistici (Google Analytics 4)</strong> – attivi <strong>solo se acconsenti</strong> tramite il banner mostrato alla prima visita. Misurano in forma aggregata le visite al sito (pagine viste, provenienza, dispositivo) per aiutarci a migliorarlo. Se rifiuti, o finché non scegli, Google Analytics non viene caricato e nessun dato viene inviato a Google. Cookie impostati: <code>_ga</code>, <code>_ga_*</code> (durata massima 2 anni).</li>
+    <li><strong>Cookie di terze parti per risorse esterne</strong> – alcuni contenuti caricati da domini esterni (es. ginettoapp.it per le immagini dei badge) possono impostare cookie propri. Vedi la sezione 3 per i dettagli. I caratteri tipografici del sito sono <strong>ospitati direttamente su daop.it</strong>: non vengono richiesti a Google e il tuo indirizzo IP non viene comunicato a terzi per visualizzarli.</li>
+  </ul>
+  <p>La scelta espressa nel banner viene memorizzata nel tuo browser e puoi cambiarla in qualsiasi momento dalla sezione 5.</p>
+  <p>Il sito <strong>daop.it</strong> non utilizza cookie di profilazione, cookie di tracciamento pubblicitario, Google Maps, Google Fonts o video incorporati.</p>
+
+  <h2>3. Servizi di terze parti usati sul sito</h2>
+  <ul>
+    <li><strong>Google Analytics 4</strong> (statistiche di utilizzo): attivato solo previo consenso, misura il traffico del sito in forma aggregata. I dati sono trattati da Google Ireland Ltd.
+      Privacy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+    <li><strong>ginettoapp.it</strong> (immagini badge Ginetto): badge dell'assistente AI DAOP caricati dal dominio ginettoapp.it.</li>
+    <li><strong>Meta / Instagram</strong> (link social): i pulsanti social sono semplici link esterni, non widget incorporati — non impostano cookie sul sito daop.it.</li>
+  </ul>
+
+  <h2>4. Ginetto AI e cookie</h2>
+  <p><strong>Ginetto AI</strong> è un servizio separato raggiungibile su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a>. La cookie policy di Ginetto è gestita in modo indipendente su quel dominio.</p>
+
+  <h2>5. Gestire le tue preferenze</h2>
+  <p>Puoi cambiare in qualsiasi momento la scelta fatta nel banner (accettare o rifiutare i cookie statistici):</p>
+  <p><a href="#" onclick="if(window.daopGestisciCookie){daopGestisciCookie();}return false;" style="font-weight:700;">→ Gestisci preferenze cookie</a></p>
+  <p>Puoi inoltre bloccare o eliminare i cookie direttamente dal tuo browser:</p>
+  <ul>
+    <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+    <li><a href="https://support.mozilla.org/it/kb/Gestione%20dei%20cookie" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+    <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
+    <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+  </ul>
+
+  <h2>6. Titolare del trattamento</h2>
+  <p><strong>Patrick Orlando – DAOP</strong> – Alessandria (Italia)<br>
+     Email: <a href="mailto:info@daop.it">info@daop.it</a></p>
+
+  <h2>7. Aggiornamenti</h2>
+  <p>Potremmo aggiornare questa informativa per riflettere cambiamenti normativi o tecnici. La versione corrente è sempre disponibile su questa pagina: <strong>www.daop.it/cookie-policy.html</strong></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <img src="assets/images/logodaop.webp" alt="Logo DAOP" style="height:64px;width:auto;border-radius:10px;flex-shrink:0;" width="500" height="500">
+        <div class="footer-logo-text" style="font-size:1.8rem;margin:0;">DA<span>OP</span></div>
+      </div>
+      <p class="footer-desc">L'associazione delle famiglie di Alessandria e Asti, Piemonte.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Prodotti</div>
+      <div class="footer-col-links">
+        <a href="eventi.html">Eventi</a>
+        <a href="ginetto.html">Ginetto AI</a>
+        <a href="piattosano.html">Il Piatto Sano</a>
+        <a href="libri.html">Libri</a>
+        <a href="media.html">Media</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <div class="footer-col-links">
+        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">Instagram AL</a>
+        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">Instagram AT</a>
+        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">Facebook AL</a>
+        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener">Facebook AT</a>
+        <a href="https://www.youtube.com/@DOVEANDIAMOOGGIPAPI" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contatti</div>
+      <div class="footer-col-links">
+        <a href="mailto:info@daop.it">info@daop.it</a>
+        <a href="tel:+393471834091">347 183 4091</a>
+        <a href="index.html#chi-siamo">Chi siamo</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="/cookie-policy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 DAOP – Dove Andiamo Oggi Papi · Alessandria &amp; Asti</p>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="/cookie-policy.html">Cookie</a>
+      <a href="mailto:info@daop.it">Contatti</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+  function toggleMobile(){ document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMobile(){ document.getElementById('mobile-menu').classList.remove('open'); }
+</script>
+</body>
+</html>

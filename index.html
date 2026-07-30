@@ -54,25 +54,25 @@ document.addEventListener('DOMContentLoaded', function () {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ── SEO BASE ── -->
-<title>DAOP APS – Dove Andiamo Oggi Papi | Famiglie di Alessandria e Asti</title>
-<meta name="description" content="DAOP APS è la community delle famiglie di Alessandria e Asti. Uscite, eventi, alimentazione sana con Ginetto AI e il programma Il Piatto Sano nelle scuole.">
-<meta name="keywords" content="famiglie Alessandria, famiglie Asti, uscite bambini Alessandria, Ginetto AI, Il Piatto Sano, educazione alimentare scuole, DAOP APS, dove andiamo oggi papi">
-<meta name="author" content="Patrick Orlando – DAOP APS">
+<title>DAOP – Dove Andiamo Oggi Papi | Famiglie di Alessandria e Asti</title>
+<meta name="description" content="DAOP è la community delle famiglie di Alessandria e Asti. Uscite, eventi, alimentazione sana con Ginetto AI e il programma Il Piatto Sano nelle scuole.">
+<meta name="keywords" content="famiglie Alessandria, famiglie Asti, uscite bambini Alessandria, Ginetto AI, Il Piatto Sano, educazione alimentare scuole, DAOP, dove andiamo oggi papi">
+<meta name="author" content="Patrick Orlando – DAOP">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/">
 
 <!-- ── OPEN GRAPH (WhatsApp, Facebook, LinkedIn) ── -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/">
-<meta property="og:title" content="DAOP APS – La community delle famiglie di Alessandria e Asti">
+<meta property="og:title" content="DAOP – La community delle famiglie di Alessandria e Asti">
 <meta property="og:description" content="Uscite, eventi, Ginetto AI e Il Piatto Sano nelle scuole. La guida delle famiglie di AL e AT.">
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta property="og:locale" content="it_IT">
-<meta property="og:site_name" content="DAOP APS">
+<meta property="og:site_name" content="DAOP">
 
 <!-- ── TWITTER CARD ── -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DAOP APS – La community delle famiglie di Alessandria e Asti">
+<meta name="twitter:title" content="DAOP – La community delle famiglie di Alessandria e Asti">
 <meta name="twitter:description" content="Uscite, eventi, Ginetto AI e Il Piatto Sano nelle scuole.">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 
@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       "@type": "Organization",
       "@id": "https://www.daop.it/#organization",
-      "name": "DAOP APS – Dove Andiamo Oggi Papi",
+      "name": "DAOP – Dove Andiamo Oggi Papi",
       "alternateName": "DAOP",
       "url": "https://www.daop.it",
       "logo": "https://www.daop.it/assets/images/logodaop.png",
-      "description": "Associazione di Promozione Sociale per le famiglie delle province di Alessandria e Asti. Offre Ginetto AI, il programma educativo Il Piatto Sano e libri illustrati per bambini.",
+      "description": "Associazione per le famiglie delle province di Alessandria e Asti. Offre Ginetto AI, il programma educativo Il Piatto Sano e libri illustrati per bambini.",
       "foundingDate": "2023",
       "founder": {
         "@type": "Person",
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
       "@type": "WebSite",
       "@id": "https://www.daop.it/#website",
       "url": "https://www.daop.it",
-      "name": "DAOP APS",
+      "name": "DAOP",
       "description": "La community delle famiglie di Alessandria e Asti",
       "publisher": { "@id": "https://www.daop.it/#organization" },
       "inLanguage": "it-IT"
@@ -131,9 +131,9 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <link rel="icon" href="assets/images/icon-512.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-fonts.css">
 <style>
   :root {
     --navy: #2d4a5c;
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
     --warm-white: #fffcf8;
     --text-dark: #1a2d3a;
     --text-mid: #4a6070;
-    --text-light: #8a9aaa;
+    --text-light: #627588;
     --radius-sm: 10px;
     --radius-md: 16px;
     --radius-lg: 24px;
@@ -382,7 +382,9 @@ document.addEventListener('DOMContentLoaded', function () {
     letter-spacing: -0.02em;
     text-shadow: 0 2px 12px rgba(253,248,243,0.8);
   }
-  .hero-title .accent { color: var(--orange); font-style: italic; }
+  /* #e8954a su crema stava a 2.33:1: sotto il 3:1 richiesto per il
+     testo grande. Stessa tinta, solo piu' profonda. */
+  .hero-title .accent { color: #c9742f; font-style: italic; }
   .hero-subtitle {
     font-size: 1.05rem;
     color: var(--text-mid);
@@ -573,14 +575,14 @@ document.addEventListener('DOMContentLoaded', function () {
   .team-social-btn:hover { background: var(--navy); color: white; }
   .team-social-btn svg { width: 14px; height: 14px; }
 
-  /* ── APS ── */
-  #aps {
+  /* ── MISSIONE ── */
+  #missione {
     background: var(--navy);
     color: white;
   }
-  #aps .section-label { color: var(--gold); }
-  #aps .section-title { color: white; }
-  #aps .section-subtitle { color: rgba(255,255,255,0.65); }
+  #missione .section-label { color: var(--gold); }
+  #missione .section-title { color: white; }
+  #missione .section-subtitle { color: rgba(255,255,255,0.65); }
 
   .pillars-grid {
     display: grid; grid-template-columns: repeat(4, 1fr);
@@ -591,12 +593,11 @@ document.addEventListener('DOMContentLoaded', function () {
     border: none;
     border-left: 3px solid rgba(255,255,255,0.15);
     border-radius: 0;
-    padding: 8px 24px;
+    padding: 4px 24px 8px;
     transition: var(--transition);
     cursor: default;
   }
   .pillar-card:hover { border-left-color: var(--orange); transform: none; }
-  .pillar-icon { display: none; }
   .pillar-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem; font-weight: 700;
@@ -1071,14 +1072,49 @@ document.addEventListener('DOMContentLoaded', function () {
     .footer-grid > div:first-child { grid-column: 1 / -1; }
   }
 </style>
-<style>:focus-visible{outline:3px solid #1D9E75;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}</style></head>
+<style>:focus-visible{outline:3px solid #1D9E75;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}</style>
+<link rel="stylesheet" href="/assets/css/daop-system.css"></head>
 <body>
+<!-- DAOP — sprite icone (set Lucide, stroke 1.75, currentColor).
+     Inserito inline in ogni pagina: zero richieste extra, nessun flash.
+     Uso: un <svg class="icon" viewBox="0 0 24 24"> con dentro <use> che punta all'id voluto. -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false"><defs>
+<g id="i-map"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></g>
+<g id="i-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g>
+<g id="i-sprout"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></g>
+<g id="i-handshake"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></g>
+<g id="i-palette"><circle cx="13.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="17.5" cy="10.5" r=".6" fill="currentColor" stroke="none"/><circle cx="8.5" cy="7.5" r=".6" fill="currentColor" stroke="none"/><circle cx="6.5" cy="12.5" r=".6" fill="currentColor" stroke="none"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></g>
+<g id="i-drama"><path d="M10 11h.01"/><path d="M14 6h.01"/><path d="M18 6h.01"/><path d="M6.5 13.1h.01"/><path d="M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3"/><path d="M17.4 9.9c-.8.8-2 .8-2.8 0"/><path d="M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7"/><path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4"/></g>
+<g id="i-party"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11-.11.7-.72 1.22-1.43 1.22H17"/><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2z"/></g>
+<g id="i-landmark"><path d="M3 22h18"/><path d="M6 18v-7"/><path d="M10 18v-7"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M12 2 20 7H4z"/></g>
+<g id="i-music"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g>
+<g id="i-bike"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></g>
+<g id="i-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></g>
+<g id="i-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g>
+<g id="i-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".6" fill="currentColor" stroke="none"/></g>
+<g id="i-paw"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10z"/></g>
+<g id="i-megaphone"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></g>
+<g id="i-message"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></g>
+<g id="i-backpack"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 10h8"/><path d="M8 18h8"/><path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></g>
+<g id="i-smartphone"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></g>
+<g id="i-lock"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></g>
+<g id="i-headphones"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></g>
+<g id="i-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></g>
+<g id="i-school"><path d="M14 22v-4a2 2 0 1 0-4 0v4"/><path d="m18 10 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7.382a1 1 0 0 1 .553-.894L6 10"/><path d="M18 5v17"/><path d="m4 6 7.106-3.553a2 2 0 0 1 1.788 0L20 6"/><path d="M6 5v17"/><circle cx="12" cy="9" r="2"/></g>
+<g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></g>
+<g id="i-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></g>
+<g id="i-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></g>
+<g id="i-building"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></g>
+<g id="i-grape"><path d="M22 5V2l-5.89 5.89"/><circle cx="16.6" cy="15.89" r="3"/><circle cx="8.11" cy="7.4" r="3"/><circle cx="12.35" cy="11.65" r="3"/><circle cx="13.91" cy="5.85" r="3"/><circle cx="18.15" cy="10.09" r="3"/><circle cx="6.56" cy="13.2" r="3"/><circle cx="10.8" cy="17.44" r="3"/><circle cx="5" cy="19" r="3"/></g>
+<g id="i-briefcase"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></g>
+<g id="i-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></g>
+</defs></svg>
 
 <!-- ── NAVBAR ── -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
-      <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:36px;width:auto;border-radius:8px;">
+      <img src="assets/images/logodaop.webp" alt="Logo DAOP" style="height:36px;width:auto;border-radius:8px;" width="500" height="500">
       <span class="nav-logo-text">DA<span>OP</span></span>
     </a>
     <ul class="nav-links">
@@ -1102,7 +1138,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <a href="eventi.html" onclick="closeMobile()">Eventi</a>
   <a href="ginetto.html" onclick="closeMobile()">Ginetto AI</a>
   <a href="bollino.html" onclick="closeMobile()">Bollino</a>
-  <a href="#piatto-sano" onclick="closeMobile()">Il Piatto Sano</a>
+  <a href="piattosano.html" onclick="closeMobile()">Il Piatto Sano</a>
   <a href="libri.html" onclick="closeMobile()">Libri</a>
   <a href="esploratore.html" onclick="closeMobile()">Esploratore</a>
   <a href="media.html" onclick="closeMobile()">Media</a>
@@ -1118,15 +1154,85 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="hero-badge-row">
         <span class="badge badge-aps">
           <span class="badge-dot"></span>
-          APS · Dal 2026
+          Associazione · Dal 2023
         </span>
-        <span class="badge badge-aps" style="background:var(--orange);border-color:var(--orange);color:white;">
+        <span class="badge badge-aps" style="background:var(--orange);border-color:var(--orange);color:#1a2d3a;">
           <span class="badge-dot"></span>
           Ginetto AI è live
         </span>
       </div>
       <h1 class="hero-title">Dove andiamo<br>oggi <span class="accent">papi?</span></h1>
       <p class="hero-subtitle">La guida delle famiglie di Alessandria e Asti per uscite, alimentazione sana e avventure quotidiane con i figli. Perché ogni giorno può essere una piccola grande scoperta.</p>
+      <div class="hero-actions">
+        <a href="eventi.html" class="btn btn-primary">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-calendar"/></svg>
+          Cosa fare questo weekend
+        </a>
+        <a href="#percorsi" class="btn btn-secondary">Scopri DAOP</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── DICONO DI NOI (testate reali, dettagli in media.html) ── -->
+<div class="proof-strip">
+  <div class="proof-inner">
+    <span class="proof-label">Hanno parlato di noi</span>
+    <ul class="proof-list">
+      <li><a href="media.html">Gazzetta d'Asti</a></li>
+      <li><a href="media.html">La Voce di Asti</a></li>
+      <li><a href="media.html">Il Novese</a></li>
+      <li><a href="media.html">Il Tirreno</a></li>
+      <li><a href="media.html">Radio PNR</a></li>
+    </ul>
+    <a href="media.html" class="proof-more">Leggi la rassegna stampa →</a>
+  </div>
+</div>
+
+<!-- ── PERCORSI PER PUBBLICO ── -->
+<section id="percorsi" style="background:white;">
+  <div class="section-inner">
+    <span class="section-label fade-in">Da dove vuoi partire</span>
+    <h2 class="section-title fade-in">Tre strade, a seconda di chi sei</h2>
+    <p class="section-subtitle fade-in">DAOP fa cose diverse per persone diverse. Scegli la tua: ognuna porta dove serve, senza farti girare tutto il sito.</p>
+
+    <div class="paths-grid">
+      <div class="path-card fade-in fade-in-delay-1" style="--path-color:#e8954a;--path-ink:#b06016;">
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span>
+        <div class="path-who">Sei un genitore</div>
+        <h3 class="path-title">Trova cosa fare<br>con i tuoi figli</h3>
+        <p class="path-desc">Eventi per famiglie tra Alessandria e Asti aggiornati ogni settimana, oltre 650 luoghi mappati e Ginetto AI che risponde alle tue domande. Tutto gratuito.</p>
+        <a href="eventi.html" class="path-cta">
+          Vedi gli eventi
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </a>
+        <p class="path-alt">Oppure <a href="https://ginettoapp.it" target="_blank" rel="noopener">chiedi a Ginetto AI</a></p>
+      </div>
+
+      <div class="path-card fade-in fade-in-delay-2" style="--path-color:#6ba5a8;--path-ink:#4a7c7f;">
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-school"/></svg></span>
+        <div class="path-who">Sei una scuola o un comune</div>
+        <h3 class="path-title">Porta Il Piatto Sano<br>nelle tue classi</h3>
+        <p class="path-desc">Programma di educazione alimentare per bambini dai 6 ai 13 anni: 6 moduli, nutrizionista in presenza, gioco su LIM e materiali didattici. Gratuito per le classi pilota.</p>
+        <a href="piattosano.html" class="path-cta">
+          Scopri il programma
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </a>
+        <p class="path-alt">Oppure scrivi a <a href="mailto:info@daop.it?subject=Il%20Piatto%20Sano%20nella%20nostra%20scuola">info@daop.it</a></p>
+      </div>
+
+      <div class="path-card fade-in fade-in-delay-3" style="--path-color:#c9a227;--path-ink:#8d721b;">
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-briefcase"/></svg></span>
+        <div class="path-who">Sei un'attività o un brand</div>
+        <h3 class="path-title">Fatti conoscere<br>dalle famiglie del posto</h3>
+        <p class="path-desc">Sponsorizzazioni su misura sui canali DAOP, oppure il bollino "Consigliato DAOP" per i luoghi davvero a misura di bambino. Niente pacchetti preconfezionati.</p>
+        <a href="#collabora" class="path-cta">
+          Parliamone
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </a>
+        <p class="path-alt">Oppure <a href="bollino.html">scopri il bollino Family Friendly</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -1152,7 +1258,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Apri Ginetto
           </a>
           <a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener" aria-label="Scarica Ginetto su Google Play" style="display:inline-block;transition:var(--transition);">
-            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/it_badge_web_generic.png" alt="Disponibile su Google Play" style="height:52px;width:auto;display:block;">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/it_badge_web_generic.png" alt="Disponibile su Google Play" style="height:52px;width:auto;display:block;" loading="lazy" decoding="async">
           </a>
         </div>
         <div style="margin-top:24px;padding:20px 24px;background:linear-gradient(135deg,rgba(107,165,168,0.10),rgba(107,165,168,0.03));border-radius:var(--radius-md);border:1px solid rgba(107,165,168,0.2);">
@@ -1162,7 +1268,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="fade-in fade-in-delay-2" style="display:flex;flex-direction:column;gap:16px;align-items:center;">
         <div style="border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-card),0 24px 56px rgba(232,149,74,0.25);width:100%;">
-          <img loading="lazy" src="assets/images/ginetto-hero.png" alt="Ginetto AI — Idee per famiglie vicino a te" style="width:100%;display:block;">
+          <img loading="lazy" src="assets/images/ginetto-hero.webp" alt="Ginetto AI — Idee per famiglie vicino a te" style="width:100%;display:block;" width="1024" height="1024">
         </div>
       </div>
     </div>
@@ -1194,7 +1300,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3938848443469937906.jpg" alt="Locandina: Arlecchino e il Mistero del Castello - Compagnia I Burattini di…" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Spettacolo">🎭</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-drama"/></svg></span>
             <span class="he-cat">Spettacolo</span>
             <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
           </div>
@@ -1211,7 +1317,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3928813099803057746.jpg" alt="Locandina: Concerto Banda Musicale Arquatese - &quot;Tra note e stelle&quot;" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Musica">🎵</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg></span>
             <span class="he-cat">Musica</span>
             <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
           </div>
@@ -1228,7 +1334,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3928780221291063836.jpg" alt="Locandina: Hawaiian Night - Fiori e colori per salutare al prossimo anno" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Sagra &amp; Festa">🎪</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-party"/></svg></span>
             <span class="he-cat">Sagra &amp; Festa</span>
             <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
           </div>
@@ -1245,7 +1351,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3927416770694079751.jpg" alt="Locandina: Music Party - Pro Loco Voltaggio / PazzoAnimazione" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Musica">🎵</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg></span>
             <span class="he-cat">Musica</span>
             <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
           </div>
@@ -1262,7 +1368,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3935299446277070740.jpg" alt="Locandina: Nati per leggere con i raccontastorie - Fantastiche Letture Animate…" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-palette"/></svg></span>
             <span class="he-cat">Laboratorio</span>
             <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
           </div>
@@ -1279,7 +1385,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3945956994936142885.jpg" alt="Locandina: Mostra delle Illusioni - Museo dei Campionissimi" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Cultura">🏛️</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-landmark"/></svg></span>
             <span class="he-cat">Cultura</span>
             <span class="he-live">In corso</span>
           </div>
@@ -1296,7 +1402,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_asti_3932268211164328685.jpg" alt="Locandina: Centri Estivi ai Musei di Asti" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-palette"/></svg></span>
             <span class="he-cat">Laboratorio</span>
             <span class="he-live">In corso</span>
           </div>
@@ -1313,7 +1419,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="he-cover"><img src="/assets/eventi/daop_asti_3922266205150380294.jpg" alt="Locandina: Corso di massaggio infantile A.I.M.I. - Centro per famiglie comune di…" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="Laboratorio">🎨</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-palette"/></svg></span>
             <span class="he-cat">Laboratorio</span>
             <span class="he-live">In corso</span>
           </div>
@@ -1346,12 +1452,12 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="team-grid">
       <div class="team-card fade-in fade-in-delay-1">
         <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#3d6e74);position:relative;">
-          <img loading="lazy" src="assets/images/patrick.jpeg" alt="Patrick Orlando" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
+          <img loading="lazy" src="assets/images/patrick.webp" alt="Patrick Orlando" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;" width="801" height="1001">
         </div>
         <div class="team-body">
-          <div class="team-role">Fondatore · Presidente APS · Autore</div>
+          <div class="team-role">Fondatore · Presidente · Autore</div>
           <div class="team-name">Patrick Orlando</div>
-          <p class="team-desc">Papà e ingegnere, fondatore di DAOP nel 2023. Ha costruito Ginetto AI, Il Piatto Sano e scritto 7 libri per famiglie. Dal 2026 guida DAOP come Associazione di Promozione Sociale.</p>
+          <p class="team-desc">Papà e ingegnere, fondatore di DAOP nel 2023. Ha costruito Ginetto AI, Il Piatto Sano e scritto 7 libri per famiglie. Oggi guida DAOP e ne coordina i progetti sul territorio.</p>
           <div class="team-socials">
             <a href="https://www.instagram.com/patrickkorl/" target="_blank" rel="noopener" class="team-social-btn">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -1362,12 +1468,12 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="team-card fade-in fade-in-delay-2">
         <div class="team-photo" style="background:linear-gradient(135deg,#e8954a,#2d4a5c);position:relative;">
-          <img loading="lazy" src="assets/images/alessandra.png" alt="Alessandra Zaccone" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;">
+          <img loading="lazy" src="assets/images/alessandra.webp" alt="Alessandra Zaccone" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;" width="448" height="557">
         </div>
         <div class="team-body">
           <div class="team-role">Socia Fondatrice · Curatrice DAOP Asti</div>
           <div class="team-name">Alessandra Zaccone</div>
-          <p class="team-desc">Socia fondatrice di DAOP APS e curatrice degli eventi per la provincia di Asti. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti e mantiene vivo il dialogo con le famiglie del territorio.</p>
+          <p class="team-desc">Socia fondatrice di DAOP e curatrice degli eventi per la provincia di Asti. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti e mantiene vivo il dialogo con le famiglie del territorio.</p>
           <div class="team-socials">
             <a href="https://www.instagram.com/wonder_alepippi/" target="_blank" rel="noopener" class="team-social-btn">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -1386,34 +1492,82 @@ document.addEventListener('DOMContentLoaded', function () {
     <span class="section-label fade-in">Chi scrive con noi</span>
     <h2 class="section-title fade-in">I nostri collaboratori esterni</h2>
     <p class="section-subtitle fade-in">Per le nostre rubriche ci affidiamo a professionisti selezionati, ognuno esperto nel proprio campo, così da offrire alle famiglie contenuti autorevoli, affidabili e di qualità.</p>
+    <div class="collab-grid fade-in">
+      <div class="team-card fade-in fade-in-delay-1">
+        <div class="team-photo" style="background:linear-gradient(135deg,#f4a261,#e76f51);position:relative;">
+          <img loading="lazy" src="assets/images/serafina.webp" alt="Serafina Cardaci" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" width="399" height="536">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Nutrizionista</div>
+          <div class="team-name">Serafina Cardaci</div>
+          <p class="team-desc">Cura la rubrica <em>Mangiando s’impara</em>: consigli pratici su alimentazione e benessere per tutta la famiglia, con un occhio speciale al Piatto Sano.</p>
+          <a href="https://www.serafinacardacinutrizione.com" target="_blank" rel="noopener" class="team-social-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Sito web
+          </a>
+          <a href="https://www.instagram.com/sery.cardaci.nutrizionista/" target="_blank" rel="noopener" class="team-social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-2">
+        <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#2d4a5c);position:relative;">
+          <img loading="lazy" src="assets/images/benedetta.webp" alt="Benedetta De Paolis" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" width="468" height="527">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Giornalista</div>
+          <div class="team-name">Benedetta De Paolis</div>
+          <p class="team-desc">Cura la rubrica <em>Avventure di Carta</em>: consigli letterari e percorsi di lettura per i più piccoli e per chi legge con loro.</p>
+          <a href="https://www.instagram.com/benedettadepaolis82/" target="_blank" rel="noopener" class="team-social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-3">
+        <div class="team-photo" style="background:linear-gradient(135deg,#c9a227,#8a6d0a);position:relative;">
+          <img loading="lazy" src="assets/images/stef.webp" alt="Stefania Eligi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" width="411" height="458">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Commercialista</div>
+          <div class="team-name">Stefania Eligi</div>
+          <p class="team-desc">Cura la rubrica <em>Pillole Fiscali</em>: bonus, agevolazioni e detrazioni spiegate in modo chiaro e utile per le famiglie.</p>
+          <a href="https://www.instagram.com/stefyste1982/" target="_blank" rel="noopener" class="team-social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ── APS ── -->
-<section id="aps">
+<!-- ── MISSIONE ── -->
+<section id="missione">
   <div class="section-inner">
     <span class="section-label fade-in">La nostra missione</span>
     <h2 class="section-title fade-in">Un'associazione per il territorio</h2>
-    <p class="section-subtitle fade-in">DAOP APS è un ente del Terzo Settore impegnato nella promozione del benessere familiare, dell'educazione e della rete locale nelle province di Alessandria e Asti.</p>
+    <p class="section-subtitle fade-in">DAOP è un'associazione impegnata nella promozione del benessere familiare, dell'educazione e della rete locale nelle province di Alessandria e Asti.</p>
 
     <div class="pillars-grid">
       <div class="pillar-card fade-in fade-in-delay-1">
-        <div class="pillar-icon pillar-icon-1">🗺️</div>
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-map"/></svg></span>
         <div class="pillar-title">Territorio</div>
         <p class="pillar-desc">Valorizzazione delle realtà locali: fattorie didattiche, parchi, musei, biblioteche e spazi a misura di bambino nel territorio piemontese.</p>
       </div>
       <div class="pillar-card fade-in fade-in-delay-2">
-        <div class="pillar-icon pillar-icon-2">👨‍👩‍👧‍👦</div>
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span>
         <div class="pillar-title">Community</div>
         <p class="pillar-desc">Una rete viva di famiglie che condividono esperienze, consigli e momenti insieme. Oltre 5.000 genitori connessi ogni settimana.</p>
       </div>
       <div class="pillar-card fade-in fade-in-delay-3">
-        <div class="pillar-icon pillar-icon-3">🌿</div>
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sprout"/></svg></span>
         <div class="pillar-title">Progetti</div>
         <p class="pillar-desc">Iniziative concrete sul territorio: Il Piatto Sano, media partnership con eventi locali e collaborazioni con scuole e comuni.</p>
       </div>
       <div class="pillar-card fade-in fade-in-delay-4">
-        <div class="pillar-icon pillar-icon-4">🤝</div>
+        <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-handshake"/></svg></span>
         <div class="pillar-title">Rete locale</div>
         <p class="pillar-desc">Collaborazioni con scuole, comuni, associazioni e imprese locali per costruire un ecosistema solido a supporto delle famiglie.</p>
       </div>
@@ -1476,7 +1630,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="5,3 19,12 5,21"/></svg>
             Gioca online
           </a>
-          <a href="https://play.google.com/store/apps" target="_blank" rel="noopener" class="btn btn-navy">
+          <a href="https://play.google.com/store/apps/details?id=com.daop.ilpiattosano" target="_blank" rel="noopener" class="btn btn-navy">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 2v10M12 12l-4-4M12 12l4-4"/><rect x="3" y="16" width="18" height="4" rx="2"/></svg>
             Google Play Store
           </a>
@@ -1484,9 +1638,9 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="fade-in fade-in-delay-2" style="display:flex;flex-direction:column;gap:16px;">
         <div style="border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-card);position:relative;">
-          <img loading="lazy" src="assets/images/piattosano-cover.webp" alt="Il Piatto Sano — Mangiare Bene Crescere Meglio" style="width:100%;display:block;">
+          <img loading="lazy" src="assets/images/piattosano-cover.webp" alt="Il Piatto Sano — Mangiare Bene Crescere Meglio" style="width:100%;display:block;" width="1376" height="768">
           <div style="position:absolute;bottom:16px;left:16px;right:16px;background:rgba(253,248,243,0.92);backdrop-filter:blur(10px);border-radius:var(--radius-md);padding:10px 14px;display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,0.7);">
-            <img loading="lazy" src="assets/images/sane-logo.webp" alt="S.A.N.E. Italia" style="height:32px;width:auto;object-fit:contain;flex-shrink:0;">
+            <img loading="lazy" src="assets/images/sane-logo.webp" alt="S.A.N.E. Italia" style="height:32px;width:auto;object-fit:contain;flex-shrink:0;" width="1536" height="1024">
             <div>
               <div style="font-size:0.78rem;font-weight:700;color:var(--navy);line-height:1.2;">Un progetto S.A.N.E. Italia</div>
               <div style="font-size:0.7rem;color:var(--text-light);">Sicurezza · Alimentazione · Nutrizione · Educazione</div>
@@ -1506,7 +1660,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <p class="section-subtitle fade-in">Guide pratiche, storie e risorse create dalla community DAOP per accompagnare genitori e bambini nella crescita.</p>
 
     <a href="esploratore.html" class="fade-in" style="display:flex;flex-wrap:wrap;align-items:center;gap:34px;justify-content:center;background:#fdf8f3;border:1px solid rgba(45,74,92,0.08);border-radius:24px;padding:32px;margin:40px 0 12px;text-decoration:none;box-shadow:0 8px 40px rgba(45,74,92,0.10);">
-      <img loading="lazy" decoding="async" src="assets/ginetto/copertine/vol-1-casale-monferrato.jpg" alt="Copertina di Ginetto alla scoperta di Casale Monferrato" width="180" height="180" style="width:180px;height:180px;border-radius:16px;box-shadow:0 12px 40px rgba(45,74,92,0.22);flex:0 0 auto;">
+      <img loading="lazy" decoding="async" src="assets/ginetto/copertine/vol-1-casale-monferrato.webp" alt="Copertina di Ginetto alla scoperta di Casale Monferrato" width="180" height="180" style="width:180px;height:180px;border-radius:16px;box-shadow:0 12px 40px rgba(45,74,92,0.22);flex:0 0 auto;">
       <div style="flex:1 1 320px;max-width:520px;">
         <div style="display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#d4793a;margin-bottom:10px;">La collana DAOP</div>
         <h3 style="font-family:'Playfair Display',serif;font-size:1.55rem;color:#1a2d3a;line-height:1.2;margin-bottom:12px;">Ginetto l'Esploratore</h3>
@@ -1520,7 +1674,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="books-grid">
       <div class="book-card fade-in fade-in-delay-1">
         <div class="book-cover">
-          <img loading="lazy" src="assets/images/nathan.jpg" alt="Il Viaggio di Nathan">
+          <img loading="lazy" src="assets/images/nathan.webp" alt="Il Viaggio di Nathan" width="1500" height="1500">
         </div>
         <div class="book-body">
           <div class="book-tag">Albo illustrato</div>
@@ -1534,7 +1688,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="book-card fade-in fade-in-delay-2">
         <div class="book-cover">
-          <img loading="lazy" src="assets/images/kiko.jpg" alt="Kiko e i Semi della Meraviglia">
+          <img loading="lazy" src="assets/images/kiko.webp" alt="Kiko e i Semi della Meraviglia" width="1500" height="1500">
         </div>
         <div class="book-body">
           <div class="book-tag">Albo illustrato</div>
@@ -1548,7 +1702,7 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
       <div class="book-card fade-in fade-in-delay-3">
         <div class="book-cover">
-          <img loading="lazy" src="assets/images/bambolina.jpg" alt="La Bambolina che Profumava di Nuvola">
+          <img loading="lazy" src="assets/images/bambolina.webp" alt="La Bambolina che Profumava di Nuvola" width="1000" height="1293">
         </div>
         <div class="book-body">
           <div class="book-tag">Albo illustrato</div>
@@ -1588,7 +1742,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="benefit-card fade-in fade-in-delay-3">
         <div class="benefit-number">03</div>
         <div class="benefit-title">Supporto al territorio</div>
-        <p class="benefit-desc">Sponsorizzare DAOP significa anche sostenere una APS del territorio. Un investimento in visibilità che ha un impatto concreto sulle famiglie di Alessandria e Asti.</p>
+        <p class="benefit-desc">Sponsorizzare DAOP significa anche sostenere un'associazione del territorio. Un investimento in visibilità che ha un impatto concreto sulle famiglie di Alessandria e Asti.</p>
       </div>
     </div>
 
@@ -1605,7 +1759,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://www.daop.it/grazie.html">
-        <input type="text" name="_honey" class="hidden-bot" tabindex="-1" autocomplete="off">
+        <input type="text" name="_honey" class="hidden-bot" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-row">
           <label>Azienda o attività *<input type="text" name="azienda" required></label>
           <label>Referente *<input type="text" name="referente" required></label>
@@ -1617,6 +1771,34 @@ document.addEventListener('DOMContentLoaded', function () {
         <label>Cosa avresti in mente? *<textarea name="messaggio" rows="3" required placeholder="Due righe sull'idea di collaborazione"></textarea></label>
         <button type="submit" class="btn btn-gold">Invia la richiesta</button>
         <p class="cert-form-alt">Preferisci la mail? Scrivici a <a href="mailto:info@daop.it?subject=Sponsorizzazione%20DAOP">info@daop.it</a> · oppure <a href="bollino.html">scopri il bollino Family Friendly</a></p>
+      </form>
+    </div>
+
+    <!-- ── NEWSLETTER ── Era citata nel pacchetto sponsor ma non c'era modo di iscriversi. -->
+    <div class="nl-band fade-in" id="newsletter">
+      <div class="nl-copy">
+        <div class="nl-title">Le idee del weekend,<br>una volta a settimana</div>
+        <p class="nl-desc">Ogni giovedì gli eventi per famiglie tra Alessandria e Asti selezionati dalla community, più le novità di Ginetto e del Piatto Sano. Niente pubblicità, un'email sola.</p>
+      </div>
+      <form action="https://formsubmit.co/info@daop.it" method="POST" class="nl-form">
+        <input type="hidden" name="_subject" value="Nuova iscrizione newsletter DAOP">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://www.daop.it/grazie.html">
+        <input type="text" name="_honey" class="hidden-bot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="nl-row">
+          <label for="nl-nome" class="visually-hidden">Nome</label>
+          <input id="nl-nome" type="text" name="nome" placeholder="Il tuo nome" autocomplete="given-name" required>
+        </div>
+        <div class="nl-row">
+          <label for="nl-email" class="visually-hidden">Email</label>
+          <input id="nl-email" type="email" name="email" placeholder="La tua email" autocomplete="email" required>
+          <button type="submit">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-send"/></svg>
+            Iscrivimi
+          </button>
+        </div>
+        <p class="nl-consent">Iscrivendoti accetti la <a href="privacy.html">privacy policy</a>. Puoi cancellarti quando vuoi: c'è il link in fondo a ogni email.</p>
       </form>
     </div>
   </div>
@@ -1646,7 +1828,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <div class="social-groups">
       <div class="social-group-card fade-in">
-        <div class="social-city">Alessandria 🏙️</div>
+        <div class="social-city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-building"/></svg> Alessandria</div>
         <div class="social-btns">
           <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener" class="social-btn social-btn-ig">
             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -1659,13 +1841,13 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       </div>
       <div class="social-group-card fade-in fade-in-delay-2">
-        <div class="social-city">Asti 🍇</div>
+        <div class="social-city"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-grape"/></svg> Asti</div>
         <div class="social-btns">
-          <a href="#" class="social-btn social-btn-ig">
+          <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener" class="social-btn social-btn-ig">
             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             Instagram Asti
           </a>
-          <a href="#" class="social-btn social-btn-fb">
+          <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener" class="social-btn social-btn-fb">
             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             Facebook Asti
           </a>
@@ -1681,10 +1863,10 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="footer-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
     <div>
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
-        <img src="assets/images/logodaop.png" alt="Logo DAOP" style="height:64px;width:auto;border-radius:10px;flex-shrink:0;">
+        <img src="assets/images/logodaop.webp" alt="Logo DAOP" style="height:64px;width:auto;border-radius:10px;flex-shrink:0;" width="500" height="500">
         <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:white;line-height:1;">DA<span style="color:var(--orange);">OP</span></div>
       </div>
-      <p style="font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px;">Associazione di Promozione Sociale. Dove Andiamo Oggi Papi. Alessandria &amp; Asti, Piemonte.</p>
+      <p style="font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px;">L'associazione delle famiglie di Alessandria e Asti, Piemonte.</p>
     </div>
     <div>
       <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px;">Prodotti</div>
@@ -1714,15 +1896,15 @@ document.addEventListener('DOMContentLoaded', function () {
         <a href="tel:+393471834091" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">347 183 4091</a>
         <a href="#chi-siamo" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Chi siamo</a>
         <a href="privacy.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Privacy Policy</a>
-        <a href="cookypolicy.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Cookie Policy</a>
+        <a href="/cookie-policy.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Cookie Policy</a>
       </div>
     </div>
   </div>
   <div style="max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-    <p style="font-size:0.82rem;color:rgba(255,255,255,0.25);">© 2026 DAOP – Dove Andiamo Oggi Papi APS · Ente del Terzo Settore · Alessandria &amp; Asti</p>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,0.25);">© 2026 DAOP – Dove Andiamo Oggi Papi · Alessandria &amp; Asti</p>
     <div style="display:flex;gap:20px;">
       <a href="privacy.html" style="font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
-      <a href="cookypolicy.html" style="font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;">Cookie</a>
+      <a href="/cookie-policy.html" style="font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;">Cookie</a>
       <a href="mailto:info@daop.it" style="font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;">Contatti</a>
     </div>
   </div>

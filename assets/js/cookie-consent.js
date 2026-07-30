@@ -64,7 +64,7 @@
     box.innerHTML =
       '<p><strong>Cookie e statistiche.</strong> Usiamo Google Analytics, solo se acconsenti, ' +
       'per capire come viene usato il sito e migliorarlo. Nessuna pubblicità, nessuna profilazione. ' +
-      'Dettagli nella <a href="cookypolicy.html">cookie policy</a>.</p>' +
+      'Dettagli nella <a href="/cookie-policy.html">cookie policy</a>.</p>' +
       '<div class="dcb-actions">' +
       '<button type="button" class="dcb-ok">Accetta</button>' +
       '<button type="button" class="dcb-no">Rifiuta</button>' +

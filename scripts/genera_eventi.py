@@ -122,21 +122,40 @@ def normalize(rows):
     return events
 
 
+# Icone dello sprite (assets/icons.svg.html) per categoria. Prima qui c'erano
+# emoji: si vedevano diverse su ogni sistema operativo ed erano il segnale piu'
+# evidente di "sito fatto in casa".
+ICONS = {'feste': 'i-party', 'spettacoli': 'i-drama', 'musica': 'i-music',
+         'laboratori': 'i-palette', 'sport': 'i-bike', 'cultura': 'i-landmark',
+         'altro': 'i-pin'}
+
+
+def icon(slug, cls="icon"):
+    """Markup dell'icona di categoria, presa dallo sprite inline della pagina."""
+    # viewBox obbligatorio: senza, sotto i 24px l'icona viene tagliata.
+    return (f'<svg class="{cls}" viewBox="0 0 24 24" aria-hidden="true">'
+            f'<use href="#{ICONS[slug]}"/></svg>')
+
+
 def bucket(e):
+    """Restituisce (slug, icona_svg, etichetta) per la categoria dell'evento."""
+    def out(slug, label):
+        return slug, icon(slug), label
+
     cz = e['categoria'].lower()
-    if 'sagra' in cz or 'festa' in cz or 'mercato' in cz or 'fiera' in cz: return 'feste', '🎪', 'Sagra & Festa'
-    if 'spettacolo' in cz or 'teatro' in cz or 'cinema' in cz: return 'spettacoli', '🎭', 'Spettacolo'
-    if 'musica' in cz: return 'musica', '🎵', 'Musica'
-    if 'laborator' in cz or 'arte' in cz: return 'laboratori', '🎨', 'Laboratorio'
-    if 'sport' in cz: return 'sport', '🚴', 'Sport'
-    if 'cultura' in cz or 'natura' in cz: return 'cultura', '🏛️', 'Cultura'
+    if 'sagra' in cz or 'festa' in cz or 'mercato' in cz or 'fiera' in cz: return out('feste', 'Sagra & Festa')
+    if 'spettacolo' in cz or 'teatro' in cz or 'cinema' in cz: return out('spettacoli', 'Spettacolo')
+    if 'musica' in cz: return out('musica', 'Musica')
+    if 'laborator' in cz or 'arte' in cz: return out('laboratori', 'Laboratorio')
+    if 'sport' in cz: return out('sport', 'Sport')
+    if 'cultura' in cz or 'natura' in cz: return out('cultura', 'Cultura')
     nd = (e['nome'] + ' ' + e['descr']).lower()
-    if 'sagra' in nd or 'festa' in nd or 'fiera' in nd: return 'feste', '🎪', 'Sagra & Festa'
-    if 'concerto' in nd or 'musica' in nd: return 'musica', '🎵', 'Musica'
-    if 'laborator' in nd: return 'laboratori', '🎨', 'Laboratorio'
-    if 'spettacol' in nd or 'teatro' in nd: return 'spettacoli', '🎭', 'Spettacolo'
-    if any(k in nd for k in ['sport', 'corsa', 'pedalata', 'run', 'ciclo']): return 'sport', '🚴', 'Sport'
-    return 'altro', '📍', 'Evento'
+    if 'sagra' in nd or 'festa' in nd or 'fiera' in nd: return out('feste', 'Sagra & Festa')
+    if 'concerto' in nd or 'musica' in nd: return out('musica', 'Musica')
+    if 'laborator' in nd: return out('laboratori', 'Laboratorio')
+    if 'spettacol' in nd or 'teatro' in nd: return out('spettacoli', 'Spettacolo')
+    if any(k in nd for k in ['sport', 'corsa', 'pedalata', 'run', 'ciclo']): return out('sport', 'Sport')
+    return out('altro', 'Evento')
 
 
 SITE_URL = "https://www.daop.it"
@@ -217,13 +236,13 @@ def gcal_url(e):
     }
     return "https://calendar.google.com/calendar/render?" + urllib.parse.urlencode(params)
 
-# colore (bordo/accent) e tinta (sfondo cerchietto emoji) per categoria
+# colore (bordo/accent) e tinta (sfondo del cerchietto icona) per categoria
 COLORS = {
     'feste': ('#e8954a', 'rgba(232,149,74,0.14)'),
     'spettacoli': ('#6c63a6', 'rgba(108,99,166,0.14)'),
     'laboratori': ('#6ba5a8', 'rgba(107,165,168,0.16)'),
     'musica': ('#c9a227', 'rgba(201,162,39,0.16)'),
-    'sport': ('#1d9e75', 'rgba(29,158,117,0.14)'),
+    'sport': ('#188663', 'rgba(24,134,99,0.14)'),
     'cultura': ('#4a90b9', 'rgba(74,144,185,0.14)'),
     'altro': ('#7e8c99', 'rgba(126,140,153,0.16)'),
 }
@@ -250,13 +269,13 @@ def prezzo_pill(e):
 def riga(e, today):
     """Una riga dell'agenda: intestazione sempre visibile (miniatura, nome,
     contesto, etichette) + dettaglio che si apre al tocco."""
-    slug, emoji, catlabel = bucket(e)
+    slug, cat_icon, catlabel = bucket(e)
     color, tint = COLORS.get(slug, COLORS['altro'])
     ongoing = e['d_start'] < today
     anchor = e.get('anchor', '')
     cover = loc_path(e['loc'])
     thumb = (f'<img class="ev-thumb" src="{cover}" alt="" loading="lazy" decoding="async">'
-             if cover else f'<span class="ev-thumb is-ph" aria-hidden="true">{emoji}</span>')
+             if cover else f'<span class="ev-thumb is-ph" aria-hidden="true">{cat_icon}</span>')
 
     # La data sta già nell'intestazione del giorno: qui restano luogo, durata,
     # orario ed età, cioè quello che serve per decidere in un colpo d'occhio.
@@ -271,7 +290,7 @@ def riga(e, today):
     if e['eta']:
         bits.append(esc(trunc(e['eta'], 26)))
 
-    tags = [f'<span class="ev-pill is-cat">{emoji} {esc(catlabel)}</span>']
+    tags = [f'<span class="ev-pill is-cat">{cat_icon} {esc(catlabel)}</span>']
     if ongoing:
         tags.append('<span class="ev-pill is-live">In corso</span>')
     pill = prezzo_pill(e)
@@ -313,11 +332,11 @@ def riga(e, today):
 def hl_card(e):
     """Scheda compatta con locandina per le corsie "Oggi" e "Questo weekend".
     Punta all'ancora della riga corrispondente più in basso nell'agenda."""
-    slug, emoji, catlabel = bucket(e)
+    slug, cat_icon, catlabel = bucket(e)
     color, tint = COLORS.get(slug, COLORS['altro'])
     cover = loc_path(e['loc'])
     img = (f'<img src="{cover}" alt="" loading="lazy" decoding="async">'
-           if cover else f'<span class="ev-hl-ph" aria-hidden="true">{emoji}</span>')
+           if cover else f'<span class="ev-hl-ph" aria-hidden="true">{cat_icon}</span>')
     bits = [f"{esc(e['citta'])} ({e['prov']})" if e['citta'] else e['prov']]
     if e['ora']:
         bits.append(esc(trunc(e['ora'], 20)))
@@ -325,7 +344,7 @@ def hl_card(e):
     return f'''        <a class="ev-hl-card" href="#{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
           <span class="ev-hl-cover">{img}</span>
           <span class="ev-hl-body">
-            <span class="ev-hl-cat">{emoji} {esc(catlabel)}</span>
+            <span class="ev-hl-cat">{cat_icon} {esc(catlabel)}</span>
             <span class="ev-hl-name">{esc(trunc(e['nome'], 70))}</span>
             <span class="ev-hl-meta">{' · '.join(bits)}</span>
             {pill}
@@ -395,7 +414,7 @@ def render(events):
     lista_html = (highlights + '    <div class="events-list" id="events-list">\n'
                   + '\n\n'.join(sezioni) + '\n    </div>')
 
-    opts = ['      <option value="all">🏷️ Tutti</option>']
+    opts = ['      <option value="all">Tutte le categorie</option>']
     for s in ORDER:
         if s in present:
             opts.append(f'      <option value="{s}">{LABELS[s]}</option>')
@@ -414,7 +433,7 @@ def render_home(events):
     today = datetime.date.today()
     cards = []
     for e in items:
-        slug, emoji, catlabel = bucket(e)
+        slug, cat_icon, catlabel = bucket(e)
         d = e['d_start']
         ongoing = d < today
         datebox = ('<span class="he-live">In corso</span>' if ongoing else
@@ -437,7 +456,7 @@ def render_home(events):
         cards.append(f'''      <a class="he-card" href="{href}" style="--cat-color:{color};--cat-tint:{tint}">
 {cover}        <div class="he-body">
           <div class="he-top">
-            <span class="he-icon" role="img" aria-label="{esc(catlabel)}">{emoji}</span>
+            <span class="he-icon">{cat_icon}</span>
             <span class="he-cat">{esc(catlabel)}</span>
             {datebox}
           </div>
@@ -499,17 +518,29 @@ def parse_price(prezzo):
     return str(int(v)) if v == int(v) else f"{v:.2f}"
 
 
+def rome_offset(d):
+    """Offset di Europe/Rome per una data: +02:00 in ora legale, +01:00 altrimenti."""
+    try:
+        from zoneinfo import ZoneInfo
+        tz = ZoneInfo("Europe/Rome")
+    except Exception:                      # tzdata assente: assume ora solare
+        return "+01:00"
+    off = datetime.datetime(d.year, d.month, d.day, 12, tzinfo=tz).utcoffset()
+    total = int(off.total_seconds()) // 60
+    return f"{'+' if total >= 0 else '-'}{abs(total) // 60:02d}:{abs(total) % 60:02d}"
+
+
 def event_jsonld(e):
     """Costruisce un oggetto schema.org/Event per un singolo evento."""
     times = parse_times(e['ora'])
     start = e['d_start'].isoformat()
     if times:
-        start += f"T{times[0]}"
+        start += f"T{times[0]}{rome_offset(e['d_start'])}"
     end = e['d_end'].isoformat()
     if len(times) > 1:
-        end += f"T{times[1]}"
+        end += f"T{times[1]}{rome_offset(e['d_end'])}"
     elif times:
-        end += f"T{times[0]}"
+        end += f"T{times[0]}{rome_offset(e['d_end'])}"
 
     city = (e['citta'] or '').strip()
     address = {"@type": "PostalAddress", "addressCountry": "IT"}
@@ -536,14 +567,17 @@ def event_jsonld(e):
         },
         "image": [loc_url(e['loc']) or DEFAULT_IMG],
         "url": ev_url,
-        "organizer": {"@type": "Organization", "name": "DAOP APS", "url": SITE_URL},
     }
+    # Questi eventi sono organizzati da pro loco, comuni e associazioni: DAOP
+    # li raccoglie e li segnala. Dichiarare DAOP come chi organizza o chi si
+    # esibisce e' un dato strutturato falso, e Google lo incrocia con le altre
+    # fonti. Quando il foglio indica la manifestazione, quella e' vera.
+    manifest = (e.get('manifest') or '').strip()
+    if manifest:
+        obj["superEvent"] = {"@type": "Event", "name": manifest}
     descr = (e['descr'] or '').strip()
     if descr:
         obj["description"] = descr
-
-    # performer: campo consigliato da Google per gli Event (qui l'organizzazione)
-    obj["performer"] = {"@type": "Organization", "name": "DAOP APS"}
 
     # offers: includiamo price + priceCurrency + validFrom (richiesti per un'offerta valida).
     # Per gli eventi "a pagamento" senza una cifra nota omettiamo offers, così da non
