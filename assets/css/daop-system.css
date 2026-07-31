@@ -507,13 +507,19 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 .hamburger {
   background: none;
   border: none;
-  padding: 4px;
   margin: 0;
   font: inherit;
   color: inherit;
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
+  /* Area di tocco 44x44 (le tre barrette ne occupavano 32x12): l'aspetto
+     non cambia, cambia quanto e' facile centrarlo col pollice. */
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 /* --------------------------------------------------------------------------
