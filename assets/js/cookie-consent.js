@@ -43,12 +43,12 @@
     'box-shadow:0 12px 40px rgba(30,51,66,0.25);padding:20px 22px;' +
     'font-family:"DM Sans",system-ui,sans-serif;font-size:0.92rem;line-height:1.5}' +
     '#daop-cookie-banner p{margin:0 0 14px}' +
-    '#daop-cookie-banner a{color:#d4793a;font-weight:600}' +
+    '#daop-cookie-banner a{color:#ad5e16;font-weight:600}' +
     '#daop-cookie-banner .dcb-actions{display:flex;gap:10px;flex-wrap:wrap}' +
     '#daop-cookie-banner button{cursor:pointer;border-radius:10px;padding:10px 20px;' +
     'font:inherit;font-weight:700;transition:opacity .2s}' +
     '#daop-cookie-banner button:hover{opacity:.85}' +
-    '#daop-cookie-banner .dcb-ok{background:#e8954a;border:1px solid #e8954a;color:#fff}' +
+    '#daop-cookie-banner .dcb-ok{background:#e8954a;border:1px solid #e8954a;color:#1a2d3a}' +
     '#daop-cookie-banner .dcb-no{background:transparent;border:1px solid rgba(45,74,92,0.35);color:#2d4a5c}';
 
   function mostraBanner() {
@@ -64,7 +64,7 @@
     box.innerHTML =
       '<p><strong>Cookie e statistiche.</strong> Usiamo Google Analytics, solo se acconsenti, ' +
       'per capire come viene usato il sito e migliorarlo. Nessuna pubblicità, nessuna profilazione. ' +
-      'Dettagli nella <a href="cookypolicy.html">cookie policy</a>.</p>' +
+      'Dettagli nella <a href="/cookie-policy.html">cookie policy</a>.</p>' +
       '<div class="dcb-actions">' +
       '<button type="button" class="dcb-ok">Accetta</button>' +
       '<button type="button" class="dcb-no">Rifiuta</button>' +

@@ -1,0 +1,587 @@
+/* ==========================================================================
+   DAOP — Design system condiviso
+
+   Caricato DOPO il <style> inline di ogni pagina, quindi vince sulle regole
+   di pari specificita'. Contiene solo cio' che deve essere identico ovunque:
+   scala tipografica, sistema di icone, componenti trasversali.
+
+   ATTENZIONE: le pagine caricano daop-system.min.css, non questo file.
+   Dopo ogni modifica qui lancia:  python3 scripts/build_css.py
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. SCALA TIPOGRAFICA
+   Sei gradini, rapporto 1.2 su mobile e 1.25 su desktop, interpolati con
+   clamp() cosi' non servono breakpoint tipografici.
+   -------------------------------------------------------------------------- */
+:root {
+  --step--1: clamp(0.82rem, 0.80rem + 0.10vw, 0.88rem);
+  --step-0:  clamp(1.00rem, 0.97rem + 0.16vw, 1.09rem);
+  --step-1:  clamp(1.20rem, 1.14rem + 0.30vw, 1.36rem);
+  --step-2:  clamp(1.44rem, 1.34rem + 0.50vw, 1.70rem);
+  --step-3:  clamp(1.73rem, 1.56rem + 0.84vw, 2.13rem);
+  --step-4:  clamp(2.07rem, 1.81rem + 1.32vw, 2.66rem);
+  --step-5:  clamp(2.49rem, 2.08rem + 2.05vw, 3.32rem);
+
+  /* Misura di riga: 68 caratteri sul corpo, 22 parole circa */
+  --measure: 68ch;
+  --measure-short: 46ch;
+
+  --leading-body: 1.65;
+  --leading-snug: 1.45;
+  --leading-tight: 1.12;
+
+  --tracking-tight: -0.021em;
+  --tracking-wide: 0.11em;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis-weight: none;
+}
+
+/* I titoli respirano stretti e non spezzano male l'ultima riga.
+   Solo i display (h1/h2) vanno davvero stretti: su un h3 di tre righe
+   1.12 fa toccare le lettere ascendenti e discendenti. */
+h1, h2,
+.section-title, .hero-title {
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+h3, h4,
+.team-name, .book-title, .pillar-title, .benefit-title, .path-title {
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+h5, h6 { line-height: var(--leading-snug); }
+
+/* Il corpo evita le righe orfane di una parola sola. */
+p, li, .section-subtitle, .team-desc, .book-desc,
+.benefit-desc, .pillar-desc {
+  text-wrap: pretty;
+}
+
+/* Misura di riga: si applica solo dove il testo scorre libero, mai dentro
+   card a larghezza fissa (li' e' il contenitore a dare la misura). */
+.section-subtitle,
+.prose p,
+.prose li {
+  max-width: var(--measure);
+}
+
+/* Occhielli / etichette di sezione */
+.section-label,
+.book-tag,
+.team-role,
+.he-cat {
+  letter-spacing: var(--tracking-wide);
+  font-variant-numeric: tabular-nums;
+}
+
+/* I numeri in colonna devono incolonnarsi davvero. */
+.benefit-number,
+.hero-stat-card-value,
+.he-date .d,
+.stat-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --------------------------------------------------------------------------
+   2. SISTEMA DI ICONE
+   SVG a linea, 24x24, stroke 1.75, currentColor. Sostituiscono le emoji.
+   -------------------------------------------------------------------------- */
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: -0.22em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-lg { width: 2rem; height: 2rem; stroke-width: 1.5; }
+.icon-xl { width: 2.5rem; height: 2.5rem; stroke-width: 1.4; }
+
+/* Icona dentro un quadrato colorato: usata per i pilastri e le feature. */
+.icon-tile {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(232, 149, 74, 0.12);
+  color: var(--orange, #e8954a);
+  margin-bottom: 18px;
+  transition: var(--transition, 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+}
+.icon-tile .icon { width: 26px; height: 26px; }
+
+/* Su fondo scuro l'icona vira all'oro del brand. */
+.on-dark .icon-tile,
+#missione .icon-tile {
+  background: rgba(201, 162, 39, 0.14);
+  color: var(--gold-light, #e0b93a);
+}
+
+/* Icona di categoria nelle card evento: cerchio tinto del colore categoria. */
+.he-icon,
+.ev-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--cat-tint, rgba(107, 165, 168, 0.16));
+  color: var(--cat-color, var(--teal, #6ba5a8));
+  flex-shrink: 0;
+}
+.he-icon .icon,
+.ev-icon .icon { width: 15px; height: 15px; stroke-width: 2; }
+
+/* --------------------------------------------------------------------------
+   3. STRISCIA "DICONO DI NOI" — prove al posto di affermazioni
+   -------------------------------------------------------------------------- */
+.proof-strip {
+  border-top: 1px solid rgba(45, 74, 92, 0.10);
+  border-bottom: 1px solid rgba(45, 74, 92, 0.10);
+  padding: 26px 24px;
+  background: var(--warm-white, #fffcf8);
+}
+.proof-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 40px;
+  flex-wrap: wrap;
+}
+.proof-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-light, #8a9aaa);
+  flex-shrink: 0;
+}
+.proof-list {
+  display: flex;
+  align-items: center;
+  gap: 12px 30px;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+.proof-list a,
+.proof-list span {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text-mid, #4a6070);
+  text-decoration: none;
+  white-space: nowrap;
+  /* Niente opacita': portava #4a6070 a 3.62:1 sul crema. Il tono piu'
+     tenue si ottiene col colore, non sbiadendo il testo. */
+  transition: var(--transition, 0.3s ease);
+}
+.proof-list a:hover { color: var(--navy, #2d4a5c); }
+.proof-more {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--orange, #e8954a);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.proof-more:hover { text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   4. PERCORSI PER PUBBLICO — una strada per ciascuno, un solo invito primario
+   -------------------------------------------------------------------------- */
+.paths-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 52px;
+}
+.path-card {
+  background: #fff;
+  border: 1px solid rgba(45, 74, 92, 0.09);
+  border-radius: var(--radius-lg, 24px);
+  padding: 34px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-soft, 0 4px 24px rgba(45, 74, 92, 0.10));
+  transition: var(--transition, 0.3s ease);
+  position: relative;
+  overflow: hidden;
+}
+.path-card::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--path-color, var(--orange, #e8954a));
+  opacity: 0.85;
+}
+.path-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card, 0 8px 40px rgba(45, 74, 92, 0.13));
+  border-color: rgba(45, 74, 92, 0.14);
+}
+.path-card .icon-tile {
+  background: color-mix(in srgb, var(--path-color, #e8954a) 13%, transparent);
+  color: var(--path-color, #e8954a);
+}
+.path-who {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--path-color, var(--orange, #e8954a));
+  margin-bottom: 8px;
+}
+.path-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: var(--step-2);
+  font-weight: 800;
+  color: var(--navy, #2d4a5c);
+  margin-bottom: 10px;
+}
+.path-desc {
+  font-size: 0.94rem;
+  color: var(--text-mid, #4a6070);
+  line-height: var(--leading-body);
+  margin-bottom: 22px;
+}
+.path-cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 12px 22px;
+  border-radius: var(--radius-md, 16px);
+  background: var(--path-color, var(--orange, #e8954a));
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition, 0.3s ease);
+}
+.path-cta:hover { filter: brightness(0.93); transform: translateY(-2px); }
+.path-cta .icon { width: 17px; height: 17px; stroke-width: 2.2; }
+
+/* Il link secondario e' volutamente sottotono: un solo invito primario. */
+.path-alt {
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: var(--text-light, #8a9aaa);
+}
+.path-alt a {
+  color: var(--text-mid, #4a6070);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.path-alt a:hover { color: var(--navy, #2d4a5c); }
+
+/* --------------------------------------------------------------------------
+   5. NEWSLETTER
+   -------------------------------------------------------------------------- */
+.nl-band {
+  background: var(--navy, #2d4a5c);
+  border-radius: var(--radius-xl, 32px);
+  padding: 48px 52px;
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.nl-band::before {
+  content: '';
+  position: absolute;
+  top: -160px;
+  right: -140px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 149, 74, 0.16), transparent 70%);
+  pointer-events: none;
+}
+.nl-copy { position: relative; }
+.nl-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: var(--step-3);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: var(--leading-tight);
+}
+.nl-desc {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.96rem;
+  line-height: var(--leading-body);
+  max-width: var(--measure-short);
+}
+.nl-form { position: relative; display: flex; flex-direction: column; gap: 12px; }
+.nl-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.nl-row input {
+  flex: 1 1 220px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: var(--transition, 0.3s ease);
+}
+.nl-row input::placeholder { color: rgba(255, 255, 255, 0.38); }
+.nl-row input:focus {
+  outline: none;
+  border-color: var(--orange, #e8954a);
+  background: rgba(255, 255, 255, 0.11);
+}
+.nl-form button {
+  padding: 14px 26px;
+  border: none;
+  border-radius: var(--radius-md, 16px);
+  background: var(--orange, #e8954a);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition, 0.3s ease);
+}
+.nl-form button:hover { background: var(--orange-dark, #d4793a); transform: translateY(-2px); }
+.nl-consent {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.55;
+}
+.nl-consent a { color: rgba(255, 255, 255, 0.72); }
+.nl-form .hidden-bot { position: absolute; left: -9999px; top: 0; }
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .paths-grid { grid-template-columns: 1fr; }
+  .nl-band { grid-template-columns: 1fr; padding: 36px 26px; gap: 26px; }
+  .proof-inner { gap: 12px 24px; }
+}
+
+@media (max-width: 600px) {
+  .proof-list { gap: 10px 20px; }
+  .proof-list a, .proof-list span { font-size: 0.92rem; }
+  .nl-row input { flex-basis: 100%; }
+  .nl-form button { width: 100%; }
+}
+
+/* Chi ha chiesto meno movimento non deve subire le transizioni delle card. */
+@media (prefers-reduced-motion: reduce) {
+  .path-card:hover,
+  .path-cta:hover,
+  .nl-form button:hover { transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   7. UTILITY
+   -------------------------------------------------------------------------- */
+/* Etichetta letta dagli screen reader ma non mostrata: serve dove il campo
+   ha solo un placeholder (che non e' un'etichetta accessibile). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. CONTRASTO — WCAG AA
+   Il palette del brand non arrivava a 4.5:1 con il testo: bianco su arancione
+   #e8954a stava a 2.38:1 e Lighthouse lo segnalava su ogni pagina.
+   Due mosse, senza toccare i colori del brand:
+   a) sui fondi accento il testo diventa navy scuro (#e8954a + #1a2d3a = 5.96:1)
+   b) per il testo piccolo su fondo chiaro esistono varianti piu' scure con
+      stessa tinta e stessa saturazione, solo meno luminose.
+   -------------------------------------------------------------------------- */
+:root {
+  --orange-ink: #a05714;   /* 4.73:1 anche sulle tinte arancioni chiare */
+  --gold-ink:   #856a19;   /* 4.69:1 anche sulla tinta oro chiara */
+  --teal-ink:   #467477;   /* 4.84:1 anche sulla tinta teal chiara */
+  --green-ink:  #157254;   /* 5.20:1 anche sulla tinta verde chiara delle pill */
+  --on-accent:  #1a2d3a;   /* testo sui fondi accento */
+}
+
+/* (a) Testo sui fondi accento. Il navy non e' un ripiego: su un arancione
+   caldo legge meglio del bianco e non sbianca il colore. */
+.btn-primary,
+.btn-gold,
+.btn-teal,
+.btn-amazon,
+.path-cta,
+.nl-form button {
+  color: var(--on-accent) !important;
+}
+/* Sulle pagine S.A.N.E. la nav-cta e' verde: li' il bianco contrasta di piu'
+   del navy, quindi si scurisce il verde invece di cambiare il testo. */
+.nav-cta { color: var(--on-accent) !important; }
+.btn-green, .btn-green:hover { color: #fff !important; }
+.btn-primary:hover,
+.btn-gold:hover,
+.btn-teal:hover,
+.btn-amazon:hover,
+.path-cta:hover,
+.nl-form button:hover {
+  color: var(--on-accent) !important;
+}
+
+/* (b) Testo accento su fondo chiaro. Le sezioni scure sovrascrivono gia' con
+   specificita' maggiore (.page-hero .section-label, ecc.) e restano intatte. */
+.section-label { color: var(--orange-ink); }
+.section-label.green { color: var(--green-ink); }
+.he-more,
+.proof-more,
+.he-cat { color: var(--orange-ink); }
+.he-price.free,
+.ev-pill.is-free { color: var(--green-ink); }
+/* Pillole su sfondo tinto: l'inchiostro va misurato su quella tinta, non
+   sul bianco, altrimenti resta un decimo sotto la soglia. */
+.ev-pill.is-live { color: #a55915; }
+.pilot-badge { color: #167d5d; }
+.book-tag { color: var(--teal-ink); }
+.book-tag.tag-green { color: var(--green-ink); }
+.team-role { color: var(--orange-ink); }
+
+/* L'occhiello delle card evento eredita il colore della categoria: quelli
+   chiari (oro, teal) non passavano su bianco. Il generatore emette anche
+   --cat-ink, la stessa tinta piu' scura, da usare per il testo.
+   (Un filter: brightness() non basta: scurisce il pixel ma il colore
+   calcolato resta quello chiaro, quindi gli audit lo segnalano comunque.) */
+.he-cat,
+.ev-pill.is-cat,
+.ev-hl-cat { color: var(--cat-ink, var(--cat-color)); }
+
+/* Percorsi: --path-color colora bordo e bottone (fondo), --path-ink il testo. */
+.path-who { color: var(--path-ink, var(--orange-ink)); }
+.path-card .icon-tile { color: var(--path-ink, var(--orange-ink)); }
+
+/* Il menu hamburger era un <div> con aria-label ma senza ruolo: non
+   raggiungibile da tastiera e segnalato come ARIA non valido. Ora e' un
+   <button>, che pero' porta con se' lo stile di default del browser. */
+.hamburger {
+  background: none;
+  border: none;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Area di tocco 44x44 (le tre barrette ne occupavano 32x12): l'aspetto
+     non cambia, cambia quanto e' facile centrarlo col pollice. */
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER — contrasto
+   Il testo del footer stava fra 2.56:1 e 3.45:1 sul navy scuro: sotto la
+   soglia AA. Alzata l'opacita' quanto basta, resta comunque secondario.
+   -------------------------------------------------------------------------- */
+.footer-desc,
+.footer-col-links a,
+.footer-links a,
+.footer-bottom-links a { color: rgba(255, 255, 255, 0.60); }
+
+.footer-col-title,
+.footer-copy { color: rgba(255, 255, 255, 0.58); }
+
+.footer-col-links a:hover,
+.footer-links a:hover,
+.footer-bottom-links a:hover { color: rgba(255, 255, 255, 0.92); }
+
+/* --------------------------------------------------------------------------
+   10. IMMAGINI
+   width/height in HTML servono a riservare lo spazio (CLS), ma valgono anche
+   come hint di presentazione: se poi il CSS scala solo la larghezza,
+   l'immagine si deforma. height:auto a specificita' minima lo evita, e
+   qualunque regola di classe con un'altezza esplicita continua a vincere.
+   -------------------------------------------------------------------------- */
+img { height: auto; }
+
+/* --------------------------------------------------------------------------
+   11. CONTRASTO — classi specifiche delle singole pagine
+   Ogni pagina ha i suoi occhielli e le sue pillole, tutti costruiti sui
+   colori d'accento del brand usati come colore del TESTO: e' li' che il
+   palette non arriva ai 4.5:1. Stessa cura del blocco 8, applicata ai nomi
+   di classe che esistono solo in una pagina.
+   -------------------------------------------------------------------------- */
+.press-source.orange,
+.radio-sub,
+.vol-num,
+.ev-pill.is-live { color: var(--orange-ink); }
+
+.press-source.gold,
+.pill { color: var(--gold-ink); }
+
+.place-type,
+.radio-overline,
+.radio-badge { color: var(--teal-ink); }
+
+.pilot-badge { color: #167d5d; }
+
+/* Pillola grigia su fondo grigio chiaro: 4.39:1, mancava un soffio. */
+.ev-pill.is-tag { color: #5a6c7d; }
+
+/* Testo minuto sul navy scuro: 3.26:1. */
+.fineprint { color: #97a3ac; }
+
+/* Bianco sul blu di Facebook: 4.23:1. Un blu leggermente piu' profondo
+   resta riconoscibile e passa. */
+.soc-fb { background: #1462cc !important; }
+
+/* Mail su fondo arancione pieno: come tutti gli altri accenti, testo navy. */
+.contatti-mail { color: var(--on-accent) !important; }
+
+/* Ultimi occhielli accento su fondo chiaro, senza una classe condivisa. */
+.prog-link,
+.prog-link:hover { color: var(--orange-ink); }
