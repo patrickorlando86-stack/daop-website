@@ -306,115 +306,26 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 .path-alt a:hover { color: var(--navy, #2d4a5c); }
 
 /* --------------------------------------------------------------------------
-   5. NEWSLETTER
-   -------------------------------------------------------------------------- */
-.nl-band {
-  background: var(--navy, #2d4a5c);
-  border-radius: var(--radius-xl, 32px);
-  padding: 48px 52px;
-  margin-top: 64px;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-.nl-band::before {
-  content: '';
-  position: absolute;
-  top: -160px;
-  right: -140px;
-  width: 340px;
-  height: 340px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 149, 74, 0.16), transparent 70%);
-  pointer-events: none;
-}
-.nl-copy { position: relative; }
-.nl-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: var(--step-3);
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 10px;
-  line-height: var(--leading-tight);
-}
-.nl-desc {
-  color: rgba(255, 255, 255, 0.66);
-  font-size: 0.96rem;
-  line-height: var(--leading-body);
-  max-width: var(--measure-short);
-}
-.nl-form { position: relative; display: flex; flex-direction: column; gap: 12px; }
-.nl-row { display: flex; gap: 10px; flex-wrap: wrap; }
-.nl-row input {
-  flex: 1 1 220px;
-  padding: 14px 16px;
-  border-radius: var(--radius-md, 16px);
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  background: rgba(255, 255, 255, 0.07);
-  color: #fff;
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition: var(--transition, 0.3s ease);
-}
-.nl-row input::placeholder { color: rgba(255, 255, 255, 0.38); }
-.nl-row input:focus {
-  outline: none;
-  border-color: var(--orange, #e8954a);
-  background: rgba(255, 255, 255, 0.11);
-}
-.nl-form button {
-  padding: 14px 26px;
-  border: none;
-  border-radius: var(--radius-md, 16px);
-  background: var(--orange, #e8954a);
-  color: #fff;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: var(--transition, 0.3s ease);
-}
-.nl-form button:hover { background: var(--orange-dark, #d4793a); transform: translateY(-2px); }
-.nl-consent {
-  font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.42);
-  line-height: 1.55;
-}
-.nl-consent a { color: rgba(255, 255, 255, 0.72); }
-.nl-form .hidden-bot { position: absolute; left: -9999px; top: 0; }
-
-/* --------------------------------------------------------------------------
-   6. RESPONSIVE
+   5. RESPONSIVE
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
   .paths-grid { grid-template-columns: 1fr; }
-  .nl-band { grid-template-columns: 1fr; padding: 36px 26px; gap: 26px; }
   .proof-inner { gap: 12px 24px; }
 }
 
 @media (max-width: 600px) {
   .proof-list { gap: 10px 20px; }
   .proof-list a, .proof-list span { font-size: 0.92rem; }
-  .nl-row input { flex-basis: 100%; }
-  .nl-form button { width: 100%; }
 }
 
 /* Chi ha chiesto meno movimento non deve subire le transizioni delle card. */
 @media (prefers-reduced-motion: reduce) {
   .path-card:hover,
-  .path-cta:hover,
-  .nl-form button:hover { transform: none; }
+  .path-cta:hover { transform: none; }
 }
 
 /* --------------------------------------------------------------------------
-   7. UTILITY
+   6. UTILITY
    -------------------------------------------------------------------------- */
 /* Etichetta letta dagli screen reader ma non mostrata: serve dove il campo
    ha solo un placeholder (che non e' un'etichetta accessibile). */
@@ -432,7 +343,7 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 }
 
 /* --------------------------------------------------------------------------
-   8. CONTRASTO — WCAG AA
+   7. CONTRASTO — WCAG AA
    Il palette del brand non arrivava a 4.5:1 con il testo: bianco su arancione
    #e8954a stava a 2.38:1 e Lighthouse lo segnalava su ogni pagina.
    Due mosse, senza toccare i colori del brand:
@@ -454,8 +365,7 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 .btn-gold,
 .btn-teal,
 .btn-amazon,
-.path-cta,
-.nl-form button {
+.path-cta {
   color: var(--on-accent) !important;
 }
 /* Sulle pagine S.A.N.E. la nav-cta e' verde: li' il bianco contrasta di piu'
@@ -466,8 +376,7 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 .btn-gold:hover,
 .btn-teal:hover,
 .btn-amazon:hover,
-.path-cta:hover,
-.nl-form button:hover {
+.path-cta:hover {
   color: var(--on-accent) !important;
 }
 
@@ -523,7 +432,7 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 }
 
 /* --------------------------------------------------------------------------
-   9. FOOTER — contrasto
+   8. FOOTER — contrasto
    Il testo del footer stava fra 2.56:1 e 3.45:1 sul navy scuro: sotto la
    soglia AA. Alzata l'opacita' quanto basta, resta comunque secondario.
    -------------------------------------------------------------------------- */
@@ -540,7 +449,7 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 .footer-bottom-links a:hover { color: rgba(255, 255, 255, 0.92); }
 
 /* --------------------------------------------------------------------------
-   10. IMMAGINI
+   9. IMMAGINI
    width/height in HTML servono a riservare lo spazio (CLS), ma valgono anche
    come hint di presentazione: se poi il CSS scala solo la larghezza,
    l'immagine si deforma. height:auto a specificita' minima lo evita, e
@@ -549,10 +458,10 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 img { height: auto; }
 
 /* --------------------------------------------------------------------------
-   11. CONTRASTO — classi specifiche delle singole pagine
+   10. CONTRASTO — classi specifiche delle singole pagine
    Ogni pagina ha i suoi occhielli e le sue pillole, tutti costruiti sui
    colori d'accento del brand usati come colore del TESTO: e' li' che il
-   palette non arriva ai 4.5:1. Stessa cura del blocco 8, applicata ai nomi
+   palette non arriva ai 4.5:1. Stessa cura del blocco 7, applicata ai nomi
    di classe che esistono solo in una pagina.
    -------------------------------------------------------------------------- */
 .press-source.orange,
