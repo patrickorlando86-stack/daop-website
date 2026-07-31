@@ -236,15 +236,19 @@ def gcal_url(e):
     }
     return "https://calendar.google.com/calendar/render?" + urllib.parse.urlencode(params)
 
-# colore (bordo/accent) e tinta (sfondo del cerchietto icona) per categoria
+# Per ogni categoria: colore d'accento (bordi, icone, sfondi), tinta di
+# sfondo, e "inchiostro" per il testo. Il terzo serve perche' i colori
+# d'accento come testo su bianco non raggiungono i 4.5:1 richiesti da WCAG AA
+# (il teal stava a 2.77:1). Calcolati sul caso peggiore, cioe' sul testo
+# posato sulla PROPRIA tinta di sfondo, non sul bianco.
 COLORS = {
-    'feste': ('#e8954a', 'rgba(232,149,74,0.14)'),
-    'spettacoli': ('#6c63a6', 'rgba(108,99,166,0.14)'),
-    'laboratori': ('#6ba5a8', 'rgba(107,165,168,0.16)'),
-    'musica': ('#c9a227', 'rgba(201,162,39,0.16)'),
-    'sport': ('#188663', 'rgba(24,134,99,0.14)'),
-    'cultura': ('#4a90b9', 'rgba(74,144,185,0.14)'),
-    'altro': ('#7e8c99', 'rgba(126,140,153,0.16)'),
+    'feste': ('#e8954a', 'rgba(232,149,74,0.14)', '#a75b15'),
+    'spettacoli': ('#6c63a6', 'rgba(108,99,166,0.14)', '#6a61a5'),
+    'laboratori': ('#6ba5a8', 'rgba(107,165,168,0.16)', '#467477'),
+    'musica': ('#c9a227', 'rgba(201,162,39,0.16)', '#846a1a'),
+    'sport': ('#188663', 'rgba(24,134,99,0.14)', '#167859'),
+    'cultura': ('#4a90b9', 'rgba(74,144,185,0.14)', '#397293'),
+    'altro': ('#7e8c99', 'rgba(126,140,153,0.16)', '#606d7a'),
 }
 
 
@@ -270,7 +274,7 @@ def riga(e, today):
     """Una riga dell'agenda: intestazione sempre visibile (miniatura, nome,
     contesto, etichette) + dettaglio che si apre al tocco."""
     slug, cat_icon, catlabel = bucket(e)
-    color, tint = COLORS.get(slug, COLORS['altro'])
+    color, tint, ink = COLORS.get(slug, COLORS['altro'])
     ongoing = e['d_start'] < today
     anchor = e.get('anchor', '')
     cover = loc_path(e['loc'])
@@ -310,7 +314,7 @@ def riga(e, today):
     dove = esc(e['indirizzo'] or e['luogo'])
     dove_html = f'\n          <p class="ev-where">{PIN_SVG} {dove}</p>' if dove else ''
 
-    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-{anchor}">
             {thumb}
             <span class="ev-main">
@@ -329,19 +333,24 @@ def riga(e, today):
         </article>'''
 
 
-def hl_card(e):
+def hl_card(e, eager=False):
     """Scheda compatta con locandina per le corsie "Oggi" e "Questo weekend".
-    Punta all'ancora della riga corrispondente più in basso nell'agenda."""
+    Punta all'ancora della riga corrispondente più in basso nell'agenda.
+
+    eager=True per le prime schede: sono sopra la piega e una di loro e'
+    l'elemento LCP, quindi il lazy loading la rallenterebbe soltanto."""
     slug, cat_icon, catlabel = bucket(e)
-    color, tint = COLORS.get(slug, COLORS['altro'])
+    color, tint, ink = COLORS.get(slug, COLORS['altro'])
     cover = loc_path(e['loc'])
-    img = (f'<img src="{cover}" alt="" loading="lazy" decoding="async">'
+    load = ('loading="eager" fetchpriority="high"' if eager
+            else 'loading="lazy"')
+    img = (f'<img src="{cover}" alt="" {load} decoding="async">'
            if cover else f'<span class="ev-hl-ph" aria-hidden="true">{cat_icon}</span>')
     bits = [f"{esc(e['citta'])} ({e['prov']})" if e['citta'] else e['prov']]
     if e['ora']:
         bits.append(esc(trunc(e['ora'], 20)))
     pill = prezzo_pill(e)
-    return f'''        <a class="ev-hl-card" href="#{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint}">
+    return f'''        <a class="ev-hl-card" href="#{e.get('anchor', '')}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <span class="ev-hl-cover">{img}</span>
           <span class="ev-hl-body">
             <span class="ev-hl-cat">{cat_icon} {esc(catlabel)}</span>
@@ -352,12 +361,17 @@ def hl_card(e):
         </a>'''
 
 
-def rail(titolo, lista, slug):
+EAGER_HL = 2  # quante schede della prima corsia caricano l'immagine subito
+
+
+def rail(titolo, lista, slug, eager=False):
     if not lista:
         return ''
+    cards = '\n'.join(hl_card(e, eager=eager and i < EAGER_HL)
+                      for i, e in enumerate(lista))
     return (f'      <section class="ev-hl-block" data-rail="{slug}">\n'
             f'        <h3 class="ev-hl-title">{titolo}<span class="ev-hl-n">{len(lista)}</span></h3>\n'
-            f'        <div class="ev-rail">\n' + '\n'.join(hl_card(e) for e in lista) +
+            f'        <div class="ev-rail">\n' + cards +
             '\n        </div>\n      </section>')
 
 
@@ -439,7 +453,7 @@ def render_home(events):
         datebox = ('<span class="he-live">In corso</span>' if ongoing else
                    f'<span class="he-date"><span class="d">{d.day:02d}</span>'
                    f'<span class="m">{MESI[d.month-1]}</span></span>')
-        color, tint = COLORS.get(slug, COLORS['altro'])
+        color, tint, ink = COLORS.get(slug, COLORS['altro'])
         luogo = (esc(e['citta']) + f" ({e['prov']})") if e['citta'] else e['prov']
         pz = (e['prezzo'] or '').lower()
         if any(k in pz for k in FREE_KW):
@@ -453,7 +467,7 @@ def render_home(events):
                  f'alt="Locandina: {esc(trunc(e["nome"], 70))}" loading="lazy" decoding="async"></div>\n'
                  if cover_url else '')
         href = f"eventi.html#{e.get('anchor', '')}"
-        cards.append(f'''      <a class="he-card" href="{href}" style="--cat-color:{color};--cat-tint:{tint}">
+        cards.append(f'''      <a class="he-card" href="{href}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
 {cover}        <div class="he-body">
           <div class="he-top">
             <span class="he-icon">{cat_icon}</span>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<meta charset="UTF-8">
 <!-- Consenso cookie + Google Analytics (caricato solo dopo consenso) -->
 <script src="assets/js/cookie-consent.js"></script>
 <script>
@@ -50,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ── SEO BASE ── -->
@@ -130,10 +130,14 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 </script>
 
-<link rel="icon" href="assets/images/icon-512.png" type="image/png">
+<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" as="image" type="image/webp" fetchpriority="high"
+      imagesrcset="/assets/images/headerdaop-500.webp 500w, /assets/images/headerdaop-900.webp 900w, /assets/images/headerdaop.webp 1600w"
+      imagesizes="100vw">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/daop-fonts.css">
+<style>@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
 <style>
   :root {
     --navy: #2d4a5c;
@@ -215,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
     color: var(--navy);
     letter-spacing: -0.02em;
   }
-  .nav-logo-text span { color: var(--orange); }
+  .nav-logo-text span { color: #c9742f; }
   .nav-links {
     display: flex; align-items: center; gap: 4px;
     list-style: none;
@@ -304,8 +308,26 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('assets/images/headerdaop.jpg') center/cover no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-color: var(--navy-dark);
+    /* Ripiego per i browser senza image-set(): scaricano il jpg e basta. */
+    background-image: url('assets/images/headerdaop.jpg');
+  }
+  /* Tre tagli: su un telefono da 390px non ha senso scaricare 1600px.
+     E' l'immagine LCP, quindi e' qui che si guadagna di piu'. */
+  @media (max-width: 600px) {
+    .hero-bg { background-image: image-set(url('assets/images/headerdaop-500.webp') type('image/webp'),
+                                           url('assets/images/headerdaop.jpg') type('image/jpeg')); }
+  }
+  @media (min-width: 601px) and (max-width: 1100px) {
+    .hero-bg { background-image: image-set(url('assets/images/headerdaop-900.webp') type('image/webp'),
+                                           url('assets/images/headerdaop.jpg') type('image/jpeg')); }
+  }
+  @media (min-width: 1101px) {
+    .hero-bg { background-image: image-set(url('assets/images/headerdaop.webp') type('image/webp'),
+                                           url('assets/images/headerdaop.jpg') type('image/jpeg')); }
   }
   .hero-bg::before {
     content: '';
@@ -1073,7 +1095,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 </style>
 <style>:focus-visible{outline:3px solid #1D9E75;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}</style>
-<link rel="stylesheet" href="/assets/css/daop-system.css"></head>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css"></head>
 <body>
 <!-- DAOP — sprite icone (set Lucide, stroke 1.75, currentColor).
      Inserito inline in ogni pagina: zero richieste extra, nessun flash.
@@ -1128,9 +1150,9 @@ document.addEventListener('DOMContentLoaded', function () {
       <li><a href="media.html">Media</a></li>
       <li><a href="#social" class="nav-cta">Contatti</a></li>
     </ul>
-    <div class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <button type="button" class="hamburger" onclick="toggleMobile()" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
@@ -1145,6 +1167,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <a href="#social" onclick="closeMobile()">Contatti</a>
 </div>
 
+<main id="contenuto">
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-bg"></div>
@@ -1258,7 +1281,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Apri Ginetto
           </a>
           <a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener" aria-label="Scarica Ginetto su Google Play" style="display:inline-block;transition:var(--transition);">
-            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/it_badge_web_generic.png" alt="Disponibile su Google Play" style="height:52px;width:auto;display:block;" loading="lazy" decoding="async">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/it_badge_web_generic.png" alt="Disponibile su Google Play" width="175" height="52" style="height:52px;width:auto;display:block;" loading="lazy" decoding="async">
           </a>
         </div>
         <div style="margin-top:24px;padding:20px 24px;background:linear-gradient(135deg,rgba(107,165,168,0.10),rgba(107,165,168,0.03));border-radius:var(--radius-md);border:1px solid rgba(107,165,168,0.2);">
@@ -1296,101 +1319,101 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <div class="he-track" id="he-track">
       <!-- HOME-EVENTI:START -->
-      <a class="he-card" href="eventi.html#ev-2026-07-30-arlecchino-e-il-mistero-del-castello-compagnia-i-b" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14)">
-        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3938848443469937906.jpg" alt="Locandina: Arlecchino e il Mistero del Castello - Compagnia I Burattini di…" loading="lazy" decoding="async"></div>
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-drama"/></svg></span>
-            <span class="he-cat">Spettacolo</span>
-            <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Arlecchino e il Mistero del Castello - Compagnia I Burattini di…</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tortona (AL)</span></div>
-          <div class="he-foot">
-            <span class="he-price free">Gratuito</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-30-concerto-banda-musicale-arquatese-tra-note-e-stell" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
-        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3928813099803057746.jpg" alt="Locandina: Concerto Banda Musicale Arquatese - &quot;Tra note e stelle&quot;" loading="lazy" decoding="async"></div>
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg></span>
-            <span class="he-cat">Musica</span>
-            <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Concerto Banda Musicale Arquatese - &quot;Tra note e stelle&quot;</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Arquata Scrivia (AL)</span></div>
-          <div class="he-foot">
-            <span class="he-price free">Gratuito</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-30-hawaiian-night-fiori-e-colori-per-salutare-al-pros" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14)">
-        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3928780221291063836.jpg" alt="Locandina: Hawaiian Night - Fiori e colori per salutare al prossimo anno" loading="lazy" decoding="async"></div>
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-party"/></svg></span>
-            <span class="he-cat">Sagra &amp; Festa</span>
-            <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Hawaiian Night - Fiori e colori per salutare al prossimo anno</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tortona (AL)</span></div>
-          <div class="he-foot">
-            <span class="he-price free">Gratuito</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-30-music-party-pro-loco-voltaggio-pazzoanimazione" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16)">
-        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3927416770694079751.jpg" alt="Locandina: Music Party - Pro Loco Voltaggio / PazzoAnimazione" loading="lazy" decoding="async"></div>
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg></span>
-            <span class="he-cat">Musica</span>
-            <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Music Party - Pro Loco Voltaggio / PazzoAnimazione</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Voltaggio (AL)</span></div>
-          <div class="he-foot">
-            <span class="he-price free">Gratuito</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-07-30-nati-per-leggere-con-i-raccontastorie-fantastiche" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
-        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3935299446277070740.jpg" alt="Locandina: Nati per leggere con i raccontastorie - Fantastiche Letture Animate…" loading="lazy" decoding="async"></div>
-        <div class="he-body">
-          <div class="he-top">
-            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-palette"/></svg></span>
-            <span class="he-cat">Laboratorio</span>
-            <span class="he-date"><span class="d">30</span><span class="m">lug</span></span>
-          </div>
-          <h3 class="he-title">Nati per leggere con i raccontastorie - Fantastiche Letture…</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Casale Monferrato (AL)</span></div>
-          <div class="he-foot">
-            <span class="he-price free">Gratuito</span>
-            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="he-card" href="eventi.html#ev-2026-01-01-mostra-delle-illusioni-museo-dei-campionissimi" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14)">
-        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3945956994936142885.jpg" alt="Locandina: Mostra delle Illusioni - Museo dei Campionissimi" loading="lazy" decoding="async"></div>
+      <a class="he-card" href="eventi.html#ev-2026-07-31-cinema-sotto-le-stelle-castel-rocchero" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3936845732552254741.jpg" alt="Locandina: Cinema sotto le stelle - Castel Rocchero" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
             <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-landmark"/></svg></span>
             <span class="he-cat">Cultura</span>
-            <span class="he-live">In corso</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
           </div>
-          <h3 class="he-title">Mostra delle Illusioni - Museo dei Campionissimi</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Novi Ligure (AL)</span></div>
+          <h3 class="he-title">Cinema sotto le stelle - Castel Rocchero</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Castel Rocchero (AT)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-31-concerto-gail-acher-pro-loco-oviglio" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16);--cat-ink:#846a1a">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3934769171201712455.jpg" alt="Locandina: Concerto Gail Acher - Pro Loco Oviglio" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg></span>
+            <span class="he-cat">Musica</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Concerto Gail Acher - Pro Loco Oviglio</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Oviglio (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-31-festa-patronale-felizzano-2026" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16);--cat-ink:#846a1a">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3935223909697247297.jpg" alt="Locandina: Festa Patronale Felizzano 2026" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg></span>
+            <span class="he-cat">Musica</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Festa Patronale Felizzano 2026</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Felizzano (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-31-festa-a-madonnina" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3941916554211893873.jpg" alt="Locandina: Festa a Madonnina" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-party"/></svg></span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Festa a Madonnina</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Madonnina di Serralunga di Crea (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-31-fiera-nuova-bue-grasso-2026" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3946020831630662541.jpg" alt="Locandina: Fiera Nuova Bue Grasso 2026" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-party"/></svg></span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Fiera Nuova Bue Grasso 2026</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Cassinelle (AL)</span></div>
+          <div class="he-foot">
+            <span class="he-price free">Gratuito</span>
+            <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="he-card" href="eventi.html#ev-2026-07-31-il-borgo-delle-armonie" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16);--cat-ink:#846a1a">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3946461640522258062.jpg" alt="Locandina: Il Borgo delle Armonie" loading="lazy" decoding="async"></div>
+        <div class="he-body">
+          <div class="he-top">
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg></span>
+            <span class="he-cat">Musica</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
+          </div>
+          <h3 class="he-title">Il Borgo delle Armonie</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Casalnoceto (AL)</span></div>
           <div class="he-foot">
             <span class="he-price">A pagamento (da…</span>
             <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
@@ -1398,35 +1421,35 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       </a>
 
-      <a class="he-card" href="eventi.html#ev-2026-07-01-centri-estivi-ai-musei-di-asti" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
-        <div class="he-cover"><img src="/assets/eventi/daop_asti_3932268211164328685.jpg" alt="Locandina: Centri Estivi ai Musei di Asti" loading="lazy" decoding="async"></div>
+      <a class="he-card" href="eventi.html#ev-2026-07-31-meneghino-e-il-castello-di-tremarello-compagnia-or" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5">
+        <div class="he-cover"><img src="/assets/eventi/daop_alessandria_3938848443469937906.jpg" alt="Locandina: Meneghino e il Castello di Tremarello - Compagnia Ortoteatro" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-palette"/></svg></span>
-            <span class="he-cat">Laboratorio</span>
-            <span class="he-live">In corso</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-drama"/></svg></span>
+            <span class="he-cat">Spettacolo</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
           </div>
-          <h3 class="he-title">Centri Estivi ai Musei di Asti</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span></div>
+          <h3 class="he-title">Meneghino e il Castello di Tremarello - Compagnia Ortoteatro</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Castelnuovo Scrivia (AL)</span></div>
           <div class="he-foot">
-            <span class="he-price">A pagamento (da…</span>
+            <span class="he-price free">Gratuito</span>
             <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
       </a>
 
-      <a class="he-card" href="eventi.html#ev-2026-07-01-corso-di-massaggio-infantile-a-i-m-i-centro-per-fa" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16)">
-        <div class="he-cover"><img src="/assets/eventi/daop_asti_3922266205150380294.jpg" alt="Locandina: Corso di massaggio infantile A.I.M.I. - Centro per famiglie comune di…" loading="lazy" decoding="async"></div>
+      <a class="he-card" href="eventi.html#ev-2026-07-31-tigliole-in-festa-2026" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+        <div class="he-cover"><img src="/assets/eventi/daop_asti_3935967191266160896.jpg" alt="Locandina: Tigliole in Festa 2026" loading="lazy" decoding="async"></div>
         <div class="he-body">
           <div class="he-top">
-            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-palette"/></svg></span>
-            <span class="he-cat">Laboratorio</span>
-            <span class="he-live">In corso</span>
+            <span class="he-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-party"/></svg></span>
+            <span class="he-cat">Sagra &amp; Festa</span>
+            <span class="he-date"><span class="d">31</span><span class="m">lug</span></span>
           </div>
-          <h3 class="he-title">Corso di massaggio infantile A.I.M.I. - Centro per famiglie…</h3>
-          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Asti (AT)</span></div>
+          <h3 class="he-title">Tigliole in Festa 2026</h3>
+          <div class="he-meta"><span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Tigliole (AT)</span></div>
           <div class="he-foot">
-            <span class="he-price">A pagamento (da…</span>
+            <span class="he-price free">Gratuito</span>
             <span class="he-more">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
           </div>
         </div>
@@ -1730,17 +1753,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <div class="benefits-grid">
       <div class="benefit-card fade-in fade-in-delay-1">
-        <div class="benefit-number">01</div>
+        <div class="benefit-number" aria-hidden="true">01</div>
         <div class="benefit-title">Visibilità sui nostri canali</div>
         <p class="benefit-desc">Instagram Alessandria e Asti, sito daop.it, Ginetto AI e newsletter. Una presenza costante dove le famiglie cercano idee per i propri figli.</p>
       </div>
       <div class="benefit-card fade-in fade-in-delay-2">
-        <div class="benefit-number">02</div>
+        <div class="benefit-number" aria-hidden="true">02</div>
         <div class="benefit-title">Community di fiducia</div>
         <p class="benefit-desc">Oltre 5.000 famiglie attive che si fidano dei contenuti DAOP. Non pubblicità fredda: sei consigliato da una realtà che le famiglie conoscono e seguono.</p>
       </div>
       <div class="benefit-card fade-in fade-in-delay-3">
-        <div class="benefit-number">03</div>
+        <div class="benefit-number" aria-hidden="true">03</div>
         <div class="benefit-title">Supporto al territorio</div>
         <p class="benefit-desc">Sponsorizzare DAOP significa anche sostenere un'associazione del territorio. Un investimento in visibilità che ha un impatto concreto sulle famiglie di Alessandria e Asti.</p>
       </div>
@@ -1859,6 +1882,8 @@ document.addEventListener('DOMContentLoaded', function () {
 </section>
 
 <!-- ── FOOTER ── -->
+</main>
+
 <footer>
   <div class="footer-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
     <div>
@@ -1866,46 +1891,46 @@ document.addEventListener('DOMContentLoaded', function () {
         <img src="assets/images/logodaop.webp" alt="Logo DAOP" style="height:64px;width:auto;border-radius:10px;flex-shrink:0;" width="500" height="500">
         <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:white;line-height:1;">DA<span style="color:var(--orange);">OP</span></div>
       </div>
-      <p style="font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6;max-width:260px;">L'associazione delle famiglie di Alessandria e Asti, Piemonte.</p>
+      <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.6;max-width:260px;">L'associazione delle famiglie di Alessandria e Asti, Piemonte.</p>
     </div>
     <div>
-      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px;">Prodotti</div>
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.55);margin-bottom:16px;">Prodotti</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <a href="eventi.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Eventi</a>
-        <a href="https://ginettoapp.it" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);transition:var(--transition);">Ginetto AI</a>
-        <a href="piattosano.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Il Piatto Sano</a>
-        <a href="libri.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Libri</a>
-        <a href="esploratore.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Esploratore</a>
-        <a href="media.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Media</a>
+        <a href="eventi.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Eventi</a>
+        <a href="https://ginettoapp.it" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);transition:var(--transition);">Ginetto AI</a>
+        <a href="piattosano.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Il Piatto Sano</a>
+        <a href="libri.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Libri</a>
+        <a href="esploratore.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Esploratore</a>
+        <a href="media.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Media</a>
       </div>
     </div>
     <div>
-      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px;">Community</div>
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.55);margin-bottom:16px;">Community</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Instagram AL</a>
-        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Instagram AT</a>
-        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Facebook AL</a>
-        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Facebook AT</a>
-        <a href="https://www.youtube.com/@DOVEANDIAMOOGGIPAPI" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">YouTube</a>
+        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Instagram AL</a>
+        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Instagram AT</a>
+        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Facebook AL</a>
+        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Facebook AT</a>
+        <a href="https://www.youtube.com/@DOVEANDIAMOOGGIPAPI" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">YouTube</a>
       </div>
     </div>
     <div>
-      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px;">Contatti</div>
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.55);margin-bottom:16px;">Contatti</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <a href="mailto:info@daop.it" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">info@daop.it</a>
-        <a href="tel:+393471834091" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">347 183 4091</a>
-        <a href="#chi-siamo" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Chi siamo</a>
-        <a href="privacy.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Privacy Policy</a>
-        <a href="/cookie-policy.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.5);">Cookie Policy</a>
+        <a href="mailto:info@daop.it" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">info@daop.it</a>
+        <a href="tel:+393471834091" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">347 183 4091</a>
+        <a href="#chi-siamo" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Chi siamo</a>
+        <a href="privacy.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Privacy Policy</a>
+        <a href="/cookie-policy.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Cookie Policy</a>
       </div>
     </div>
   </div>
   <div style="max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-    <p style="font-size:0.82rem;color:rgba(255,255,255,0.25);">© 2026 DAOP – Dove Andiamo Oggi Papi · Alessandria &amp; Asti</p>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,0.55);">© 2026 DAOP – Dove Andiamo Oggi Papi · Alessandria &amp; Asti</p>
     <div style="display:flex;gap:20px;">
-      <a href="privacy.html" style="font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;">Privacy</a>
-      <a href="/cookie-policy.html" style="font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;">Cookie</a>
-      <a href="mailto:info@daop.it" style="font-size:0.82rem;color:rgba(255,255,255,0.3);text-decoration:none;">Contatti</a>
+      <a href="privacy.html" style="font-size:0.82rem;color:rgba(255,255,255,0.55);text-decoration:none;">Privacy</a>
+      <a href="/cookie-policy.html" style="font-size:0.82rem;color:rgba(255,255,255,0.55);text-decoration:none;">Cookie</a>
+      <a href="mailto:info@daop.it" style="font-size:0.82rem;color:rgba(255,255,255,0.55);text-decoration:none;">Contatti</a>
     </div>
   </div>
 </footer>

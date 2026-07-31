@@ -1,8 +1,12 @@
 /* ==========================================================================
    DAOP — Design system condiviso
+
    Caricato DOPO il <style> inline di ogni pagina, quindi vince sulle regole
    di pari specificita'. Contiene solo cio' che deve essere identico ovunque:
    scala tipografica, sistema di icone, componenti trasversali.
+
+   ATTENZIONE: le pagine caricano daop-system.min.css, non questo file.
+   Dopo ogni modifica qui lancia:  python3 scripts/build_css.py
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -197,10 +201,11 @@ p, li, .section-subtitle, .team-desc, .book-desc,
   color: var(--text-mid, #4a6070);
   text-decoration: none;
   white-space: nowrap;
-  opacity: 0.75;
+  /* Niente opacita': portava #4a6070 a 3.62:1 sul crema. Il tono piu'
+     tenue si ottiene col colore, non sbiadendo il testo. */
   transition: var(--transition, 0.3s ease);
 }
-.proof-list a:hover { opacity: 1; color: var(--navy, #2d4a5c); }
+.proof-list a:hover { color: var(--navy, #2d4a5c); }
 .proof-more {
   font-size: 0.82rem;
   font-weight: 600;
@@ -436,10 +441,10 @@ p, li, .section-subtitle, .team-desc, .book-desc,
       stessa tinta e stessa saturazione, solo meno luminose.
    -------------------------------------------------------------------------- */
 :root {
-  --orange-ink: #ad5e16;   /* hsl(28,77%,38%) — 4.53:1 sul crema piu' scuro */
-  --gold-ink:   #8d721b;   /* hsl(46,68%,33%) — 4.51:1 */
-  --teal-ink:   #4a7c7f;   /* hsl(183,26%,39%) — 4.58:1 */
-  --green-ink:  #188462;   /* hsl(161,69%,31%) — 4.55:1 */
+  --orange-ink: #a05714;   /* 4.73:1 anche sulle tinte arancioni chiare */
+  --gold-ink:   #856a19;   /* 4.69:1 anche sulla tinta oro chiara */
+  --teal-ink:   #467477;   /* 4.84:1 anche sulla tinta teal chiara */
+  --green-ink:  #157254;   /* 5.20:1 anche sulla tinta verde chiara delle pill */
   --on-accent:  #1a2d3a;   /* testo sui fondi accento */
 }
 
@@ -475,16 +480,102 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 .he-cat { color: var(--orange-ink); }
 .he-price.free,
 .ev-pill.is-free { color: var(--green-ink); }
+/* Pillole su sfondo tinto: l'inchiostro va misurato su quella tinta, non
+   sul bianco, altrimenti resta un decimo sotto la soglia. */
+.ev-pill.is-live { color: #a55915; }
+.pilot-badge { color: #167d5d; }
 .book-tag { color: var(--teal-ink); }
 .book-tag.tag-green { color: var(--green-ink); }
 .team-role { color: var(--orange-ink); }
 
 /* L'occhiello delle card evento eredita il colore della categoria: quelli
-   chiari (oro, teal) non passavano su bianco. */
+   chiari (oro, teal) non passavano su bianco. Il generatore emette anche
+   --cat-ink, la stessa tinta piu' scura, da usare per il testo.
+   (Un filter: brightness() non basta: scurisce il pixel ma il colore
+   calcolato resta quello chiaro, quindi gli audit lo segnalano comunque.) */
 .he-cat,
 .ev-pill.is-cat,
-.ev-hl-cat { filter: saturate(1.05) brightness(0.78); }
+.ev-hl-cat { color: var(--cat-ink, var(--cat-color)); }
 
 /* Percorsi: --path-color colora bordo e bottone (fondo), --path-ink il testo. */
 .path-who { color: var(--path-ink, var(--orange-ink)); }
 .path-card .icon-tile { color: var(--path-ink, var(--orange-ink)); }
+
+/* Il menu hamburger era un <div> con aria-label ma senza ruolo: non
+   raggiungibile da tastiera e segnalato come ARIA non valido. Ora e' un
+   <button>, che pero' porta con se' lo stile di default del browser. */
+.hamburger {
+  background: none;
+  border: none;
+  padding: 4px;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER — contrasto
+   Il testo del footer stava fra 2.56:1 e 3.45:1 sul navy scuro: sotto la
+   soglia AA. Alzata l'opacita' quanto basta, resta comunque secondario.
+   -------------------------------------------------------------------------- */
+.footer-desc,
+.footer-col-links a,
+.footer-links a,
+.footer-bottom-links a { color: rgba(255, 255, 255, 0.60); }
+
+.footer-col-title,
+.footer-copy { color: rgba(255, 255, 255, 0.58); }
+
+.footer-col-links a:hover,
+.footer-links a:hover,
+.footer-bottom-links a:hover { color: rgba(255, 255, 255, 0.92); }
+
+/* --------------------------------------------------------------------------
+   10. IMMAGINI
+   width/height in HTML servono a riservare lo spazio (CLS), ma valgono anche
+   come hint di presentazione: se poi il CSS scala solo la larghezza,
+   l'immagine si deforma. height:auto a specificita' minima lo evita, e
+   qualunque regola di classe con un'altezza esplicita continua a vincere.
+   -------------------------------------------------------------------------- */
+img { height: auto; }
+
+/* --------------------------------------------------------------------------
+   11. CONTRASTO — classi specifiche delle singole pagine
+   Ogni pagina ha i suoi occhielli e le sue pillole, tutti costruiti sui
+   colori d'accento del brand usati come colore del TESTO: e' li' che il
+   palette non arriva ai 4.5:1. Stessa cura del blocco 8, applicata ai nomi
+   di classe che esistono solo in una pagina.
+   -------------------------------------------------------------------------- */
+.press-source.orange,
+.radio-sub,
+.vol-num,
+.ev-pill.is-live { color: var(--orange-ink); }
+
+.press-source.gold,
+.pill { color: var(--gold-ink); }
+
+.place-type,
+.radio-overline,
+.radio-badge { color: var(--teal-ink); }
+
+.pilot-badge { color: #167d5d; }
+
+/* Pillola grigia su fondo grigio chiaro: 4.39:1, mancava un soffio. */
+.ev-pill.is-tag { color: #5a6c7d; }
+
+/* Testo minuto sul navy scuro: 3.26:1. */
+.fineprint { color: #97a3ac; }
+
+/* Bianco sul blu di Facebook: 4.23:1. Un blu leggermente piu' profondo
+   resta riconoscibile e passa. */
+.soc-fb { background: #1462cc !important; }
+
+/* Mail su fondo arancione pieno: come tutti gli altri accenti, testo navy. */
+.contatti-mail { color: var(--on-accent) !important; }
+
+/* Ultimi occhielli accento su fondo chiaro, senza una classe condivisa. */
+.prog-link,
+.prog-link:hover { color: var(--orange-ink); }

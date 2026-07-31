@@ -1,3 +1,8 @@
+/* NOTA: questo file non viene piu' caricato dalle pagine. Le stesse regole
+   sono inlinizzate nel <head> di ogni pagina (una richiesta bloccante in
+   meno). Resta qui come versione leggibile: se cambi i font, aggiorna prima
+   questo file e poi riporta il blocco minificato dentro le pagine. */
+
 /* DAOP — font self-hostati (DM Sans + Playfair Display, SIL OFL 1.1).
    Nessuna richiesta a fonts.googleapis.com/gstatic.com: nessun IP dei
    visitatori inviato a terzi, due richieste bloccanti in meno.
