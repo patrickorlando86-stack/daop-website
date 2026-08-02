@@ -200,6 +200,12 @@ USER_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="
 CAL_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'
 NAV_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
 ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>'
+# Come ARROW_SVG ma con width/height espliciti. ARROW_SVG nasce per .he-more,
+# dove e' il CSS a dargli una misura; dentro .event-act nessuna regola lo
+# dimensiona, e un SVG senza dimensioni intrinseche si espande fino a sfondare
+# la riga. Le altre icone di .event-act portano width/height inline: questa fa
+# lo stesso.
+ACT_ARROW_SVG = ARROW_SVG.replace('<svg ', '<svg width="14" height="14" ', 1)
 CHEV_SVG = '<svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>'
 IMG_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
 HL_LIMIT = 12  # quante schede al massimo nelle corsie "Oggi" / "Questo weekend"
@@ -308,7 +314,7 @@ def riga(e, today):
     # scopre e le passa autorità dall'agenda, che è la pagina più forte del sito.
     if ha_pagina(e):
         acts.append(f'<a class="event-act" href="/eventi/{slug_evento(e)}.html">'
-                    f'{ARROW_SVG} Scheda completa</a>')
+                    f'{ACT_ARROW_SVG} Scheda completa</a>')
     murl = maps_url(e)
     if murl:
         acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{NAV_SVG} Come arrivare</a>')
