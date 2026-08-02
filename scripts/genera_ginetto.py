@@ -28,7 +28,12 @@ JSON_PATH = os.path.join(ROOT, "data", "ginetto-collana.json")
 HTML_PATH = os.path.join(ROOT, "esploratore.html")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 
-PAGE_URL = "https://www.daop.it/esploratore"
+# Con l'estensione: /esploratore senza .html non esiste come file e rispondeva
+# 404. Era il canonical rotto che teneva la pagina fuori dall'indice. Qui
+# alimenta i dati strutturati, quindi lasciarlo sbagliato li faceva puntare a
+# una pagina inesistente a ogni rigenerazione, anche dopo averlo corretto a
+# mano nell'HTML.
+PAGE_URL = "https://www.daop.it/esploratore.html"
 AMAZON_AUTORE = "https://www.amazon.it/stores/Patrick-Orlando/author/B0F8B95YG5"
 
 mancanti = []   # file citati dal JSON ma non presenti nel repo
