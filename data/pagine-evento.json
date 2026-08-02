@@ -19,7 +19,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "acqui-wine-days-acqui-terme"
+  "slug": "acqui-wine-days-acqui-terme",
+  "updated": "2026-08-02"
  },
  "cena-in-piazza-musica-con-nico-e-franz-casalnoceto": {
   "anchor": "ev-2026-08-15-cena-in-piazza-musica-con-nico-e-franz",
@@ -41,7 +42,8 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "slug": "cena-in-piazza-musica-con-nico-e-franz-casalnoceto"
+  "slug": "cena-in-piazza-musica-con-nico-e-franz-casalnoceto",
+  "updated": "2026-08-02"
  },
  "cena-in-piazza-musica-tributo-ai-queen-casalnoceto": {
   "anchor": "ev-2026-08-16-cena-in-piazza-musica-tributo-ai-queen",
@@ -63,7 +65,8 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "slug": "cena-in-piazza-musica-tributo-ai-queen-casalnoceto"
+  "slug": "cena-in-piazza-musica-tributo-ai-queen-casalnoceto",
+  "updated": "2026-08-02"
  },
  "cena-sotto-le-stelle-mornese": {
   "anchor": "ev-2026-08-08-3a-cena-sotto-le-stelle",
@@ -85,7 +88,8 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "cena-sotto-le-stelle-mornese"
+  "slug": "cena-sotto-le-stelle-mornese",
+  "updated": "2026-08-02"
  },
  "comitato-palio-san-damiano-d-asti": {
   "anchor": "ev-2026-08-20-comitato-palio",
@@ -107,7 +111,8 @@
   "ora": "15:30-18:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "comitato-palio-san-damiano-d-asti"
+  "slug": "comitato-palio-san-damiano-d-asti",
+  "updated": "2026-08-02"
  },
  "festa-a-madonnina-madonnina-di-serralunga-di-crea": {
   "anchor": "ev-2026-07-31-festa-a-madonnina",
@@ -129,7 +134,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-a-madonnina-madonnina-di-serralunga-di-crea"
+  "slug": "festa-a-madonnina-madonnina-di-serralunga-di-crea",
+  "updated": "2026-08-02"
  },
  "festa-del-bro-d-carvo-pro-loco-caldirola": {
   "anchor": "ev-2026-08-09-festa-del-bro-d-carvo-pro-loco-caldirola",
@@ -151,7 +157,8 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-del-bro-d-carvo-pro-loco-caldirola"
+  "slug": "festa-del-bro-d-carvo-pro-loco-caldirola",
+  "updated": "2026-08-02"
  },
  "festa-del-fungo-pro-loco-ciglione": {
   "anchor": "ev-2026-09-11-7a-festa-del-fungo-pro-loco-ciglione",
@@ -173,7 +180,8 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "slug": "festa-del-fungo-pro-loco-ciglione"
+  "slug": "festa-del-fungo-pro-loco-ciglione",
+  "updated": "2026-08-02"
  },
  "festa-dell-uva-e-del-vino-pro-loco-ciglione": {
   "anchor": "ev-2026-08-30-festa-dell-uva-e-del-vino-pro-loco-ciglione",
@@ -195,7 +203,8 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "festa-dell-uva-e-del-vino-pro-loco-ciglione"
+  "slug": "festa-dell-uva-e-del-vino-pro-loco-ciglione",
+  "updated": "2026-08-02"
  },
  "festa-della-birra-street-food-alessandria": {
   "anchor": "ev-2026-09-12-festa-della-birra-street-food",
@@ -217,7 +226,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-della-birra-street-food-alessandria"
+  "slug": "festa-della-birra-street-food-alessandria",
+  "updated": "2026-08-02"
  },
  "festa-della-pizza-margherita-novi-ligure": {
   "anchor": "ev-2026-08-07-1-festa-della-pizza-margherita-2",
@@ -239,7 +249,8 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-della-pizza-margherita-novi-ligure"
+  "slug": "festa-della-pizza-margherita-novi-ligure",
+  "updated": "2026-08-02"
  },
  "festa-della-vendemmia-a-valli-unite-costa-vescovato": {
   "anchor": "ev-2026-08-28-festa-della-vendemmia-a-valli-unite",
@@ -261,7 +272,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-della-vendemmia-a-valli-unite-costa-vescovato"
+  "slug": "festa-della-vendemmia-a-valli-unite-costa-vescovato",
+  "updated": "2026-08-02"
  },
  "festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure": {
   "anchor": "ev-2026-09-01-festa-dello-sport-evento-finale-plogging-smiling-b",
@@ -283,7 +295,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure"
+  "slug": "festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure",
+  "updated": "2026-08-02"
  },
  "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto": {
   "anchor": "ev-2026-10-31-festa-di-halloween-per-i-bambini-pro-loco-san-marz",
@@ -305,7 +318,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto"
+  "slug": "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto",
+  "updated": "2026-08-02"
  },
  "festa-di-san-rocco-celle-enomondo": {
   "anchor": "ev-2026-08-13-festa-di-san-rocco-celle-enomondo-2026",
@@ -327,7 +341,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "festa-di-san-rocco-celle-enomondo"
+  "slug": "festa-di-san-rocco-celle-enomondo",
+  "updated": "2026-08-02"
  },
  "festa-patronale-di-fubine-monferrato": {
   "anchor": "ev-2026-07-29-festa-patronale-di-fubine-monferrato-2026",
@@ -349,7 +364,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-patronale-di-fubine-monferrato"
+  "slug": "festa-patronale-di-fubine-monferrato",
+  "updated": "2026-08-02"
  },
  "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba": {
   "anchor": "ev-2026-08-10-festa-patronale-di-san-lorenzo-comune-di-castellet",
@@ -371,7 +387,8 @@
   "ora": "18:00-notte",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba"
+  "slug": "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba",
+  "updated": "2026-08-02"
  },
  "festa-patronale-di-sant-agostino-pro-loco-ferrere": {
   "anchor": "ev-2026-08-28-festa-patronale-di-sant-agostino-pro-loco-ferrere",
@@ -393,7 +410,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "festa-patronale-di-sant-agostino-pro-loco-ferrere"
+  "slug": "festa-patronale-di-sant-agostino-pro-loco-ferrere",
+  "updated": "2026-08-02"
  },
  "festa-patronale-felizzano": {
   "anchor": "ev-2026-07-31-festa-patronale-felizzano-2026",
@@ -415,7 +433,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-patronale-felizzano"
+  "slug": "festa-patronale-felizzano",
+  "updated": "2026-08-02"
  },
  "festa-patronale-n-s-della-neve-pratolungo": {
   "anchor": "ev-2026-07-27-festa-patronale-n-s-della-neve",
@@ -437,7 +456,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-patronale-n-s-della-neve-pratolungo"
+  "slug": "festa-patronale-n-s-della-neve-pratolungo",
+  "updated": "2026-08-02"
  },
  "festa-sull-aia-pianlago-ponzone": {
   "anchor": "ev-2026-08-14-festa-sull-aia-pianlago",
@@ -459,7 +479,8 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "festa-sull-aia-pianlago-ponzone"
+  "slug": "festa-sull-aia-pianlago-ponzone",
+  "updated": "2026-08-02"
  },
  "fiera-di-agosto-novi-ligure": {
   "anchor": "ev-2026-07-27-fiera-di-agosto-2026",
@@ -481,7 +502,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "fiera-di-agosto-novi-ligure"
+  "slug": "fiera-di-agosto-novi-ligure",
+  "updated": "2026-08-02"
  },
  "fiera-di-s-fermo-pro-loco-roccaforte-roccaforte-ligure": {
   "anchor": "ev-2026-08-11-fiera-di-s-fermo-pro-loco-roccaforte",
@@ -503,7 +525,8 @@
   "ora": "11:00-22:30",
   "prezzo": "Gratuito (raviolata a pagamento, prenotazione obbligatoria entro il giorno 8)",
   "prov": "AL",
-  "slug": "fiera-di-s-fermo-pro-loco-roccaforte-roccaforte-ligure"
+  "slug": "fiera-di-s-fermo-pro-loco-roccaforte-roccaforte-ligure",
+  "updated": "2026-08-02"
  },
  "fiera-nuova-bue-grasso-cassinelle": {
   "anchor": "ev-2026-07-31-fiera-nuova-bue-grasso-2026",
@@ -525,7 +548,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "fiera-nuova-bue-grasso-cassinelle"
+  "slug": "fiera-nuova-bue-grasso-cassinelle",
+  "updated": "2026-08-02"
  },
  "fiera-regionale-dello-zucchino-de-co-rivalta-bormida": {
   "anchor": "ev-2026-07-31-6-fiera-regionale-dello-zucchino-de-co",
@@ -547,7 +571,8 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "slug": "fiera-regionale-dello-zucchino-de-co-rivalta-bormida"
+  "slug": "fiera-regionale-dello-zucchino-de-co-rivalta-bormida",
+  "updated": "2026-08-02"
  },
  "gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti": {
   "anchor": "ev-2026-08-02-gianmarco-bagutti-orchestra-italiana-79-sagra-del",
@@ -569,7 +594,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti"
+  "slug": "gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti",
+  "updated": "2026-08-02"
  },
  "gran-grigliata-con-intrattenimento-musicale-pro-lo-roatto": {
   "anchor": "ev-2026-08-05-gran-grigliata-con-intrattenimento-musicale-pro-lo",
@@ -591,7 +617,8 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "slug": "gran-grigliata-con-intrattenimento-musicale-pro-lo-roatto"
+  "slug": "gran-grigliata-con-intrattenimento-musicale-pro-lo-roatto",
+  "updated": "2026-08-02"
  },
  "raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato": {
   "anchor": "ev-2026-08-23-5-raduno-di-auto-e-moto-storiche-i-calanchi-di-spi",
@@ -613,7 +640,8 @@
   "ora": "08:30-16:00",
   "prezzo": "€ 40,00 a veicolo + € 25,00 accompagnatore",
   "prov": "AL",
-  "slug": "raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato"
+  "slug": "raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato",
+  "updated": "2026-08-02"
  },
  "rassegna-gastronomica-sagra-del-guanciotto-d-asino-montiglio-monferrato": {
   "anchor": "ev-2026-07-31-40a-rassegna-gastronomica-sagra-del-guanciotto-d-a",
@@ -635,7 +663,8 @@
   "ora": "vari",
   "prezzo": "Gratuito (giostra a 1,00 €)",
   "prov": "AT",
-  "slug": "rassegna-gastronomica-sagra-del-guanciotto-d-asino-montiglio-monferrato"
+  "slug": "rassegna-gastronomica-sagra-del-guanciotto-d-asino-montiglio-monferrato",
+  "updated": "2026-08-02"
  },
  "sagra-dei-ceci-novi-ligure": {
   "anchor": "ev-2026-09-04-sagra-dei-ceci",
@@ -657,7 +686,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "sagra-dei-ceci-novi-ligure"
+  "slug": "sagra-dei-ceci-novi-ligure",
+  "updated": "2026-08-02"
  },
  "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv": {
   "anchor": "ev-2026-10-16-sagra-del-rapule-calosso-2026-pro-loco-san-marzano",
@@ -679,7 +709,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv"
+  "slug": "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv",
+  "updated": "2026-08-02"
  },
  "sagra-della-trippa-novi-ligure": {
   "anchor": "ev-2026-08-20-sagra-della-trippa",
@@ -701,7 +732,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "sagra-della-trippa-novi-ligure"
+  "slug": "sagra-della-trippa-novi-ligure",
+  "updated": "2026-08-02"
  },
  "san-lorenzo-pro-loco-di-scurzolengo": {
   "anchor": "ev-2026-08-07-san-lorenzo-2026-pro-loco-di-scurzolengo",
@@ -723,7 +755,8 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "san-lorenzo-pro-loco-di-scurzolengo"
+  "slug": "san-lorenzo-pro-loco-di-scurzolengo",
+  "updated": "2026-08-02"
  },
  "saturday-open-ferragosto-in-citta-acqui-terme": {
   "anchor": "ev-2026-08-15-saturday-open-ferragosto-in-citta",
@@ -745,7 +778,8 @@
   "ora": "21:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "slug": "saturday-open-ferragosto-in-citta-acqui-terme"
+  "slug": "saturday-open-ferragosto-in-citta-acqui-terme",
+  "updated": "2026-08-02"
  },
  "tigliole-in-festa": {
   "anchor": "ev-2026-07-31-tigliole-in-festa-2026",
@@ -767,6 +801,7 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "slug": "tigliole-in-festa"
+  "slug": "tigliole-in-festa",
+  "updated": "2026-08-02"
  }
 }

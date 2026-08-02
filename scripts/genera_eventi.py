@@ -754,8 +754,8 @@ def aggiorna_registro(events):
         rec['slug'] = s
         rec['last_seen'] = oggi
         reg[s] = rec
-    with open(REGISTRO_PATH, 'w', encoding='utf-8') as fh:
-        json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
+    # Il registro viene scritto da scrivi_pagine(), dopo aver stabilito quali
+    # pagine sono davvero cambiate: serve per registrare la data di modifica.
     return reg, nuovi
 
 
@@ -947,15 +947,20 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 
 
 def scrivi_pagine(events):
-    """Genera/aggiorna le pagine evento. Restituisce la lista degli slug attivi."""
+    """Genera/aggiorna le pagine evento.
+
+    Restituisce {slug: data_ultima_modifica} per la sitemap. La data e' quella
+    in cui la pagina e' cambiata davvero, non quella della run: dichiarare 35
+    pagine "modificate oggi" a ogni giro e' falso, e Google smette di dare peso
+    a <lastmod> quando lo trova inaffidabile."""
     reg, nuovi = aggiorna_registro(events)
     if not reg:
         print("[genera_eventi] nessuna pagina evento da generare")
-        return []
+        return {}
     os.makedirs(PAGINE_DIR, exist_ok=True)
     css, nav, foot = _guscio()
     oggi = datetime.date.today()
-    conclusi = 0
+    conclusi = cambiate = 0
     for slug, rec in reg.items():
         path = os.path.join(PAGINE_DIR, f"{slug}.html")
         nuovo = render_pagina(rec, css, nav, foot, oggi)
@@ -963,12 +968,17 @@ def scrivi_pagine(events):
             conclusi += 1
         # riscriviamo solo se cambia: evita commit rumorosi ogni notte
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
+            rec.setdefault('updated', rec.get('first_seen', oggi.isoformat()))
             continue
         with open(path, 'w', encoding='utf-8') as fh:
             fh.write(nuovo)
+        rec['updated'] = oggi.isoformat()
+        cambiate += 1
+    with open(REGISTRO_PATH, 'w', encoding='utf-8') as fh:
+        json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
     print(f"[genera_eventi] pagine evento: {len(reg)} totali "
-          f"({nuovi} nuove, {conclusi} concluse)")
-    return sorted(reg)
+          f"({nuovi} nuove, {cambiate} riscritte, {conclusi} concluse)")
+    return {s: r['updated'] for s, r in sorted(reg.items())}
 
 
 def inject(tipo_opts, lista, jsonld):
@@ -1014,9 +1024,9 @@ def update_sitemap(slugs=()):
     if slugs:
         blocco = "\n".join(
             f"  <url>\n    <loc>{SITE_URL}/eventi/{sl}.html</loc>\n"
-            f"    <lastmod>{today}</lastmod>\n"
+            f"    <lastmod>{mod}</lastmod>\n"
             f"    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>"
-            for sl in slugs)
+            for sl, mod in slugs.items())
         s, nb = re.subn(
             r'(<!-- PAGINE-EVENTO:START.*?-->).*?( *<!-- PAGINE-EVENTO:END -->)',
             lambda m: f"{m.group(1)}\n{blocco}\n{m.group(2)}", s, count=1, flags=re.S)
