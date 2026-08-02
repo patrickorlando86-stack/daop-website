@@ -760,21 +760,29 @@ def aggiorna_registro(events):
 
 
 def _guscio():
-    """Nav e footer presi da eventi.html a ogni run, con i link resi
+    """CSS, nav e footer presi da eventi.html a ogni run, con i link resi
     root-relative perche' le pagine evento stanno in /eventi/. Estrarli invece
-    di duplicarli tiene le sottopagine allineate quando il menu cambia."""
+    di duplicarli tiene le sottopagine allineate quando il sito cambia.
+
+    Il CSS va copiato per intero: daop-system.min.css contiene solo i token
+    tipografici, mentre le regole di layout (nav, footer, bottoni, griglie)
+    stanno in blocchi <style> inline dentro ogni pagina. Linkare solo il file
+    lasciava le pagine evento senza stile."""
     s = open(HTML_PATH, encoding="utf-8").read()
     nav = re.search(r'<!-- NAV -->.*?</div>\s*(?=\n<!--|\n<main)', s, re.S)
     foot = re.search(r'<footer>.*?</footer>', s, re.S)
+    css = re.findall(r'<style[^>]*>(.*?)</style>', s, re.S)
     if not nav or not foot:
         raise SystemExit("[genera_eventi] nav o footer non trovati in eventi.html")
+    if not css:
+        raise SystemExit("[genera_eventi] nessun blocco <style> trovato in eventi.html")
 
     def rooted(html_frag):
         html_frag = re.sub(r'(href|src)="(?!https?://|/|#|mailto:|tel:)',
                            lambda m: f'{m.group(1)}="/', html_frag)
         return html_frag.replace('class="active"', '')
 
-    return rooted(nav.group(0)), rooted(foot.group(0))
+    return "\n".join(css), rooted(nav.group(0)), rooted(foot.group(0))
 
 
 PAGINA_CSS = """
@@ -795,7 +803,7 @@ PAGINA_CSS = """
 """
 
 
-def render_pagina(rec, nav, foot, oggi):
+def render_pagina(rec, css, nav, foot, oggi):
     """HTML completo di una pagina evento."""
     e = dict(rec)
     e['d_start'] = datetime.date.fromisoformat(rec['d_start'])
@@ -885,7 +893,7 @@ def render_pagina(rec, nav, foot, oggi):
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{PAGINA_CSS}</style>
+<style>{css}{PAGINA_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script type="application/ld+json">
 {jsonld}
@@ -930,12 +938,12 @@ def scrivi_pagine(events):
         print("[genera_eventi] nessuna pagina evento da generare")
         return []
     os.makedirs(PAGINE_DIR, exist_ok=True)
-    nav, foot = _guscio()
+    css, nav, foot = _guscio()
     oggi = datetime.date.today()
     conclusi = 0
     for slug, rec in reg.items():
         path = os.path.join(PAGINE_DIR, f"{slug}.html")
-        nuovo = render_pagina(rec, nav, foot, oggi)
+        nuovo = render_pagina(rec, css, nav, foot, oggi)
         if datetime.date.fromisoformat(rec['d_end']) < oggi:
             conclusi += 1
         # riscriviamo solo se cambia: evita commit rumorosi ogni notte
