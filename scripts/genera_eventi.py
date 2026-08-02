@@ -93,20 +93,16 @@ def fetch_rows():
             for e in snap]
 
 
-# Colonne facoltative del foglio: sono il giudizio editoriale, cioe' l'unica
-# parte che un assistente AI non puo' ricavare dal volantino dell'organizzatore.
-# Restano vuote finche' Patrick non aggiunge le colonne al foglio, e quando sono
-# vuote non compare nessun blocco: meglio niente che un titolo senza risposta.
+# Colonne facoltative del foglio, in prosa. Il grosso del giudizio editoriale su
+# DAOP passa dal flag "Consigliato DAOP", che c'e' gia' su ogni riga: queste
+# restano per i casi in cui una frase serve davvero, e finche' sono vuote non
+# compare nessun blocco (meglio niente che un titolo senza risposta).
 # I nomi sono tollerati in piu' grafie perche' il foglio lo scrivono due persone.
 CAMPI_DAOP = {
-    'perche':          ("Perché andarci", "Perche andarci", "Nota DAOP", "Perché DAOP lo consiglia"),
     'eta_consigliata': ("Età consigliata", "Eta consigliata", "Età ideale"),
     'adatto':          ("Adatto ai bambini", "Adatto davvero ai bambini"),
     'prenotazione':    ("Prenotazione", "Prenotazioni", "Serve prenotare"),
-    'parcheggio':      ("Parcheggio", "Dove parcheggiare"),
     'dintorni':        ("Nei dintorni", "Cosa fare nei dintorni", "Dintorni"),
-    'piano_b':         ("Piano B", "In caso di pioggia", "Se piove"),
-    'ginetto':         ("Consiglio di Ginetto", "Ginetto"),
 }
 
 
@@ -1105,13 +1101,9 @@ CHECK_SVG = ('<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke
 # L'ordine e' quello con cui si decide davvero: prima se ci vado, poi se e'
 # adatto, poi la logistica.
 BLOCCHI_DAOP = (
-    ('perche', 'Perché andarci, secondo DAOP'),
     ('adatto', 'Adatto davvero ai bambini?'),
     ('eta_consigliata', 'Età consigliata'),
-    ('parcheggio', 'Dove parcheggiare'),
     ('dintorni', 'Cosa fare nei dintorni'),
-    ('piano_b', 'Piano B se piove'),
-    ('ginetto', 'Il consiglio di Ginetto'),
 )
 
 
@@ -1447,14 +1439,9 @@ def scrivi_pagine(events):
     # Distinguiamo i due casi: la colonna non c'e' (va aggiunta) oppure c'e' ed
     # e' vuota (va compilata). Dire "aggiungi Età consigliata" quando nel foglio
     # c'e' gia' fa perdere tempo a chi legge.
-    mancanti = [nomi[0] for campo, nomi in CAMPI_DAOP.items()
-                if campo not in COLONNE_VISTE]
     vuote = [nomi[0] for campo, nomi in CAMPI_DAOP.items()
              if campo in COLONNE_VISTE
              and not any((r.get(campo) or '').strip() for r in reg.values())]
-    if mancanti:
-        print("[genera_eventi]   colonne da aggiungere al foglio: "
-              + ", ".join(f'"{n}"' for n in mancanti))
     if vuote:
         print("[genera_eventi]   colonne presenti ma mai compilate: "
               + ", ".join(f'"{n}"' for n in vuote))
