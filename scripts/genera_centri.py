@@ -46,6 +46,7 @@ STAGIONI = {
         'file': 'centri-estivi.html',
         'tab': 'Centri Est/Inv',
         'h1': 'Centri Estivi',
+        'singolare': 'centro estivo',
         'titolo': 'Centri Estivi in Provincia di Alessandria e Asti | DAOP',
         'descr': ('Centri estivi per bambini in provincia di Alessandria e Asti: '
                   'elenco con età, orari e costi, e la guida per scegliere e '
@@ -58,6 +59,7 @@ STAGIONI = {
         'file': 'centri-invernali.html',
         'tab': 'Centri Est/Inv',
         'h1': 'Centri Invernali',
+        'singolare': 'centro invernale',
         'titolo': 'Centri Invernali e Vacanze di Natale ad Alessandria e Asti | DAOP',
         'descr': ('Centri invernali e attività per bambini durante le vacanze di Natale '
                   'in provincia di Alessandria e Asti: elenco, età, orari e costi, '
@@ -72,23 +74,29 @@ STAGIONI = {
 # intestazioni cambiano nel tempo: meglio riconoscerne piu' di una che rompersi.
 COLONNE = {
     'nome': ('nome', 'denominazione', 'centro', 'titolo'),
+    'di': ('data inizio', 'inizio', 'dal'),
+    'df': ('data fine', 'fine', 'al'),
     'citta': ('città', 'citta', 'comune', 'paese'),
     'prov': ('provincia', 'prov'),
     'eta': ('età', 'eta', 'fascia', 'fascia età', 'fascia eta'),
     'prezzo': ('prezzo', 'costo', 'tariffa', 'quota'),
     'ora': ('ora', 'orario', 'orari'),
-    'periodo': ('periodo', 'date', 'durata', 'settimane'),
     'descr': ('descrizione', 'note', 'dettagli'),
-    'luogo': ('luogo', 'sede', 'struttura'),
+    'luogo': ('luogo', 'sede', 'struttura', 'nome luogo'),
     'indirizzo': ('indirizzo completo', 'indirizzo', 'via'),
     'gestore': ('gestore', 'ente', 'organizzatore', 'associazione'),
     'contatti': ('contatti', 'contatto', 'telefono', 'email', 'recapiti'),
     'sito': ('sito', 'sito web', 'link', 'url', 'iscrizioni'),
-    # La tab "Centri Est/Inv" tiene estivi e invernali insieme: se esiste una
-    # colonna che li distingue la usiamo per filtrare, altrimenti prendiamo
-    # tutto (oggi le righe sono tutte estive).
+    'loc': ('locandina', 'immagine', 'foto'),
+    'consigliato': ('consigliato daop', 'consigliato'),
+    # Estivi e invernali stanno nella stessa tab. Se una colonna li distingue
+    # la usiamo, ma il criterio affidabile sono le date: un centro che parte a
+    # giugno e' estivo comunque sia compilata la riga.
     'stagione': ('stagione', 'tipo', 'tipologia', 'est/inv'),
 }
+
+# Mesi di inizio che identificano la stagione, quando non c'e' una colonna.
+MESI_STAGIONE = {'estivi': (5, 6, 7, 8, 9), 'invernali': (11, 12, 1, 2)}
 
 
 def _mappa(header):
@@ -140,19 +148,13 @@ def leggi_centri(tab, chiave):
     if ignorate:
         print(f"[genera_centri] colonne ignorate (aggiungere un alias in COLONNE "
               f"se servono): {', '.join(ignorate)}")
-    for campo in ('citta', 'eta', 'periodo', 'descr'):
+    for campo in ('citta', 'eta', 'di', 'descr'):
         if campo not in idx:
             print(f"[genera_centri] nota: manca la colonna '{campo}', le schede "
                   f"usciranno senza quel dato")
 
-    # Estivi e invernali stanno nella stessa tab: se una colonna li distingue
-    # filtriamo, altrimenti prendiamo tutto e lo diciamo.
     parola = 'invern' if chiave == 'invernali' else 'estiv'
-    filtra = 'stagione' in idx
-    if not filtra:
-        print(f"[genera_centri] nessuna colonna stagione: prendo tutte le righe "
-              f"per '{chiave}'")
-
+    mesi = MESI_STAGIONE[chiave]
     out, scartati = [], 0
     for r in righe[hi + 1:]:
         def val(campo):
@@ -163,10 +165,25 @@ def leggi_centri(tab, chiave):
         prov = val('prov').upper()
         if prov and prov not in ('AL', 'AT'):
             continue
-        if filtra and parola not in val('stagione').lower():
+        c = {campo: val(campo) for campo in COLONNE}
+        c['d_start'] = G.pdate(c['di'])
+        c['d_end'] = G.pdate(c['df']) or c['d_start']
+
+        # La colonna stagione, se c'e' ed e' compilata, ha la precedenza.
+        # Altrimenti decide il mese di inizio, che e' il dato piu' affidabile.
+        st = c['stagione'].lower()
+        if st:
+            se = parola in st
+        elif c['d_start']:
+            se = c['d_start'].month in mesi
+        else:
+            se = chiave == 'estivi'   # senza date, il default e' l'estivo
+        if not se:
             scartati += 1
             continue
-        out.append({c: val(c) for c in COLONNE})
+        out.append(c)
+
+    out.sort(key=lambda c: (c['d_start'] or datetime.date.max, c['nome']))
     coda = f", {scartati} di altra stagione" if scartati else ""
     print(f"[genera_centri] tab '{tab}': {len(out)} centri per '{chiave}'{coda}")
     return out
@@ -182,8 +199,14 @@ CSS = """
 .ce-note strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ce-note{background:#1d2a24;border-color:#3c5548}}
 .ce-list{list-style:none;padding:0;margin:26px 0;display:grid;gap:14px}
-.ce-card{border:1px solid rgba(45,74,92,0.14);border-radius:16px;padding:16px 18px}
+.ce-card{border:1px solid rgba(45,74,92,0.14);border-radius:16px;overflow:hidden;display:flex;gap:16px;align-items:flex-start}
+.ce-img{flex:0 0 116px;width:116px;height:auto;object-fit:cover;align-self:stretch}
+.ce-body{padding:16px 18px;min-width:0}
+@media(max-width:600px){.ce-card{flex-direction:column;gap:0}.ce-img{flex:none;width:100%;max-height:210px}}
 .ce-card h3{margin:0 0 6px;font-size:1.08rem;line-height:1.3}
+.ce-badge{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:100px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;background:var(--orange,#e8954a);color:#fff;vertical-align:middle}
+.ce-contatti{margin-top:8px;font-size:.9rem;opacity:.85}
+.ce-links{margin-top:10px;display:flex;flex-wrap:wrap;gap:16px}
 .ce-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.86rem;opacity:.85;margin:0 0 8px}
 .ce-card p{margin:0;line-height:1.6}
 .ce-card a.ce-go{display:inline-block;margin-top:10px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
@@ -201,7 +224,7 @@ def guida(cfg):
     nove mesi su dodici, cioe' contenuto magro."""
     return f"""
 <section class="ce-guide">
-  <h2>Come scegliere un centro {cfg['h1'].split()[-1].lower()}</h2>
+  <h2>Come scegliere un {cfg['singolare']}</h2>
   <p>La scelta si gioca su poche cose concrete, e quasi tutte si chiariscono con
   una telefonata prima di iscrivere. Ecco cosa conviene chiedere.</p>
 
@@ -268,29 +291,63 @@ def guida(cfg):
 """
 
 
+def periodo_testo(c):
+    """'dal 15 giugno al 31 luglio' dalle due colonne di data."""
+    di, df = c['d_start'], c['d_end']
+    if not di:
+        return ''
+    M = G.MESI_LUNGHI
+    if not df or df == di:
+        return f"{di.day} {M[di.month - 1]}"
+    if di.month == df.month:
+        return f"dal {di.day} al {df.day} {M[df.month - 1]}"
+    return f"dal {di.day} {M[di.month - 1]} al {df.day} {M[df.month - 1]}"
+
+
 def card(c):
     meta = []
     dove = " · ".join(x for x in (c['citta'], c['luogo']) if x)
     if dove:
         meta.append(G.esc(dove))
-    for campo in ('eta', 'periodo', 'ora', 'prezzo'):
-        if c[campo]:
-            meta.append(G.esc(c[campo]))
+    for testo in (periodo_testo(c), c['eta'], c['ora'], c['prezzo']):
+        if testo:
+            meta.append(G.esc(testo))
+
     link = c['sito'].strip()
     if link and not link.startswith(('http://', 'https://')):
         link = 'https://' + link
-    azione = (f'<a class="ce-go" href="{G.esc(link)}" target="_blank" rel="noopener">'
-              f'Informazioni e iscrizioni</a>') if link else (
-              f'<p class="ce-contatti">{G.esc(c["contatti"])}</p>' if c['contatti'] else '')
+    azioni = []
+    if link:
+        azioni.append(f'<a class="ce-go" href="{G.esc(link)}" target="_blank" '
+                      f'rel="noopener">Informazioni e iscrizioni</a>')
+    # maps_url vuole le stesse chiavi degli eventi: gliele passiamo cosi' come
+    # sono, invece di riscrivere la stessa logica.
+    mappa = G.maps_url({'indirizzo': c['indirizzo'], 'luogo': c['luogo'],
+                        'citta': c['citta'], 'prov': c['prov']})
+    if mappa:
+        azioni.append(f'<a class="ce-go" href="{G.esc(mappa)}" target="_blank" '
+                      f'rel="noopener">Come arrivare</a>')
+    contatti = (f'<p class="ce-contatti">{G.esc(c["contatti"])}</p>'
+                if c['contatti'] else '')
+
     # Nel foglio il gestore e' spesso gia' dentro il nome ("ARCEAM - Centro
     # Estivo Novi Ligure"): ripeterlo darebbe "... — ARCEAM".
     gestore = c['gestore'].strip()
     titolo = c['nome']
     if gestore and gestore.lower() not in c['nome'].lower():
         titolo = f"{titolo} — {gestore}"
-    return (f'<li class="ce-card">\n  <h3>{G.esc(titolo)}</h3>\n'
-            f'  <p class="ce-meta">{" · ".join(meta)}</p>\n'
-            f'  <p>{G.esc(c["descr"])}</p>\n  {azione}\n</li>')
+    badge = ('<span class="ce-badge">Consigliato DAOP</span>'
+             if c['consigliato'].strip().lower() in ('si', 'sì', 'x', 'true') else '')
+
+    img = G.loc_path(c['loc'])
+    figura = (f'<img class="ce-img" src="{G.esc(img)}" alt="Locandina di '
+              f'{G.esc(c["nome"])}" loading="lazy">') if img else ''
+
+    return (f'<li class="ce-card">\n  {figura}\n  <div class="ce-body">\n'
+            f'    <h3>{G.esc(titolo)}{badge}</h3>\n'
+            f'    <p class="ce-meta">{" · ".join(meta)}</p>\n'
+            f'    <p>{G.esc(c["descr"])}</p>\n    {contatti}\n'
+            f'    <p class="ce-links">{" ".join(azioni)}</p>\n  </div>\n</li>')
 
 
 def jsonld(cfg, centri, url):
@@ -326,17 +383,35 @@ def jsonld(cfg, centri, url):
 
 def render(chiave, cfg, centri, css, nav, foot):
     url = f"{SITE_URL}/{cfg['file']}"
-    if centri:
-        elenco = (f'<ul class="ce-list">\n' + "\n".join(card(c) for c in centri) + '\n</ul>')
+    # Un centro concluso non va mostrato come se fosse aperto. Ma l'elenco
+    # dell'edizione appena passata resta utile a chi si informa per l'anno
+    # prossimo, purche' sia dichiarato per quello che e'.
+    oggi = datetime.date.today()
+    attivi = [c for c in centri if not c['d_end'] or c['d_end'] >= oggi]
+    passati = [c for c in centri if c['d_end'] and c['d_end'] < oggi]
+
+    def lista(v):
+        return '<ul class="ce-list">\n' + "\n".join(card(c) for c in v) + '\n</ul>'
+
+    if attivi:
+        elenco = lista(attivi)
         avviso = ''
     else:
         elenco = ''
         avviso = (f'<div class="ce-note"><strong>Iscrizioni non ancora aperte</strong>'
-                  f'L\'elenco dei centri {chiave} torna online appena i gestori pubblicano '
-                  f'date e tariffe, di solito {cfg["quando_riaprono"]}. Intanto qui sotto '
-                  f'trovi la guida per arrivare preparato alla scelta, e '
-                  f'nell\'<a href="/eventi.html">agenda DAOP</a> tutto quello che c\'è in '
-                  f'programma per le famiglie in questi giorni.</div>')
+                  f'L\'elenco aggiornato torna online appena i gestori pubblicano date e '
+                  f'tariffe, di solito {cfg["quando_riaprono"]}. Qui sotto trovi la guida '
+                  f'per arrivare preparato alla scelta, e nell\'<a href="/eventi.html">'
+                  f'agenda DAOP</a> quello che c\'è in programma in questi giorni.</div>')
+
+    if passati:
+        titolo = ("Anche questi hanno aperto quest'anno" if attivi
+                  else f"I centri dell'edizione {passati[-1]['d_end'].year}")
+        elenco += (f'\n<h2>{titolo}</h2>\n'
+                   f'<p>Le date sono quelle dell\'edizione conclusa: servono a farsi '
+                   f'un\'idea di chi organizza in zona, per quali età e a quali prezzi. '
+                   f'Verifica sempre con il gestore prima di contare su una riapertura.</p>\n'
+                   + lista(passati))
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -365,7 +440,7 @@ def render(chiave, cfg, centri, css, nav, foot):
 <style>{css}{CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script type="application/ld+json">
-{jsonld(cfg, centri, url)}
+{jsonld(cfg, attivi, url)}
 </script>
 </head>
 <body>
