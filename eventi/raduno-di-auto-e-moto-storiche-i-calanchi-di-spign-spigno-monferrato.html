@@ -269,7 +269,11 @@
 .ev-facts svg{flex:0 0 auto;margin-top:3px;opacity:.65}
 .ev-body{margin:26px 0;line-height:1.7}
 .ev-loc{width:100%;height:auto;border-radius:14px;margin:22px 0}
-.ev-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 8px}
+.ev-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:28px 0 8px}
+/* Rete di sicurezza: se un .btn restasse senza modificatore non deve mai
+   ricadere sul blu di sistema, come e' successo a "Come arrivare". */
+.ev-actions .btn{color:#fff}
+.ev-back{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:3px}
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
@@ -387,7 +391,7 @@
   <div class="ev-body">
     <p>5° edizione del raduno di auto e moto storiche &#x27;I Calanchi di Spigno&#x27;, organizzato dalla Pro Loco di Spigno Monferrato. La giornata prevede ritrovo, iscrizione veicoli, colazione, tour dei Calanchi con aperitivo offerto dai Figazen di Turpino, rientro per pranzo e consegna gadgets nel pomeriggio. Prenotazione obbligatoria entro il 23 agosto.</p>
   </div>
-  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=5%C2%B0+Raduno+di+Auto+e+Moto+Storiche+-+I+Calanchi+di+Spigno+-+Pro+Loco+Spigno+Monferrato&amp;dates=20260823%2F20260824&amp;details=5%C2%B0+edizione+del+raduno+di+auto+e+moto+storiche+%27I+Calanchi+di+Spigno%27%2C+organizzato+dalla+Pro+Loco+di+Spigno+Monferrato.+La+giornata+prevede+ritrovo%2C+iscrizione+veicoli%2C+colazione%2C+tour+dei+Calanchi+con+aperitivo+offerto+dai+Figazen+di+Turpino%2C+rientro+per+pranzo+e+consegna+gadgets+nel+pomeriggio.+Prenotazione+obbligatoria+entro+il+23+agosto.&amp;location=Piazza+IV+Novembre+%28Scuole+Elementari%29+-+Spigno+Monferrato+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza%20IV%20Novembre%20%28Scuole%20Elementari%29%20-%20Spigno%20Monferrato%20%28AL%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="btn" href="/eventi.html">Altri eventi in zona</a></div>
+  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=5%C2%B0+Raduno+di+Auto+e+Moto+Storiche+-+I+Calanchi+di+Spigno+-+Pro+Loco+Spigno+Monferrato&amp;dates=20260823%2F20260824&amp;details=5%C2%B0+edizione+del+raduno+di+auto+e+moto+storiche+%27I+Calanchi+di+Spigno%27%2C+organizzato+dalla+Pro+Loco+di+Spigno+Monferrato.+La+giornata+prevede+ritrovo%2C+iscrizione+veicoli%2C+colazione%2C+tour+dei+Calanchi+con+aperitivo+offerto+dai+Figazen+di+Turpino%2C+rientro+per+pranzo+e+consegna+gadgets+nel+pomeriggio.+Prenotazione+obbligatoria+entro+il+23+agosto.&amp;location=Piazza+IV+Novembre+%28Scuole+Elementari%29+-+Spigno+Monferrato+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza%20IV%20Novembre%20%28Scuole%20Elementari%29%20-%20Spigno%20Monferrato%20%28AL%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
 </article>
 </main>
 <footer>

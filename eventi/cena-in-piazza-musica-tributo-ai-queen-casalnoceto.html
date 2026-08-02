@@ -269,7 +269,11 @@
 .ev-facts svg{flex:0 0 auto;margin-top:3px;opacity:.65}
 .ev-body{margin:26px 0;line-height:1.7}
 .ev-loc{width:100%;height:auto;border-radius:14px;margin:22px 0}
-.ev-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 8px}
+.ev-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:28px 0 8px}
+/* Rete di sicurezza: se un .btn restasse senza modificatore non deve mai
+   ricadere sul blu di sistema, come e' successo a "Come arrivare". */
+.ev-actions .btn{color:#fff}
+.ev-back{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:3px}
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
@@ -382,7 +386,7 @@
   <div class="ev-body">
     <p>Cena in piazza con concerto tributo ai Queen, a cura di Pro Loco Casalnoceto. Serata di musica e convivialità con i grandi successi della band britannica.</p>
   </div>
-  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Cena+in+Piazza+%2B+Musica+Tributo+ai+Queen&amp;dates=20260816%2F20260817&amp;details=Cena+in+piazza+con+concerto+tributo+ai+Queen%2C+a+cura+di+Pro+Loco+Casalnoceto.+Serata+di+musica+e+convivialit%C3%A0+con+i+grandi+successi+della+band+britannica.&amp;location=Casalnoceto+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Casalnoceto%20%28AL%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="btn" href="/eventi.html">Altri eventi in zona</a></div>
+  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Cena+in+Piazza+%2B+Musica+Tributo+ai+Queen&amp;dates=20260816%2F20260817&amp;details=Cena+in+piazza+con+concerto+tributo+ai+Queen%2C+a+cura+di+Pro+Loco+Casalnoceto.+Serata+di+musica+e+convivialit%C3%A0+con+i+grandi+successi+della+band+britannica.&amp;location=Casalnoceto+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=Casalnoceto%20%28AL%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
 </article>
 </main>
 <footer>

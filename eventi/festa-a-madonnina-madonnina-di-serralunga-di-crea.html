@@ -269,7 +269,11 @@
 .ev-facts svg{flex:0 0 auto;margin-top:3px;opacity:.65}
 .ev-body{margin:26px 0;line-height:1.7}
 .ev-loc{width:100%;height:auto;border-radius:14px;margin:22px 0}
-.ev-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 8px}
+.ev-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:28px 0 8px}
+/* Rete di sicurezza: se un .btn restasse senza modificatore non deve mai
+   ricadere sul blu di sistema, come e' successo a "Come arrivare". */
+.ev-actions .btn{color:#fff}
+.ev-back{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:3px}
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
@@ -391,7 +395,7 @@
   <div class="ev-body">
     <p>Tre serate di festa a Madonnina di Serralunga di Crea, dal 31 luglio al 2 agosto 2026, organizzate dalla Pro Loco di Serralunga di Crea in occasione del suo 45° anniversario. Ogni serata propone musica dal vivo e intrattenimento a partire dalle ore 21:00-22:00, con ingresso libero per tutti. Programma: 31/07 Videodiscoteca Super Sound - Pro Loco Serralunga di Crea (22:00); 01/08 M.P.30 e DJ Toyu - Pro Loco Serralunga di Crea (22:00); 02/08 Giorgio Leoni Band - Pro Loco Serralunga di Crea (21:00).</p>
   </div>
-  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Festa+a+Madonnina&amp;dates=20260731%2F20260803&amp;details=Tre+serate+di+festa+a+Madonnina+di+Serralunga+di+Crea%2C+dal+31+luglio+al+2+agosto+2026%2C+organizzate+dalla+Pro+Loco+di+Serralunga+di+Crea+in+occasione+del+suo+45%C2%B0+anniversario.+Ogni+serata+propone+musica+dal+vivo+e+intrattenimento+a+partire+dalle+ore+21%3A00-22%3A00%2C+con+ingresso+libero+per+tutti.+Programma%3A+31%2F07+Videodiscoteca+Super+Sound+-+Pro+Loco+Serralunga+di+Crea+%2822%3A00%29%3B+01%2F08+M.P.30+e+DJ+Toyu+-+Pro+Loco+Serralunga+di+Crea+%2822%3A00%29%3B+02%2F08+Giorgio+Leoni+Band+-+Pro+Loco+Serralunga+di+Crea+%2821%3A00%29.&amp;location=Piazza+dottori+Carlo+e+Luigi+Balbo+-+Madonnina+di+Serralunga+di+Crea+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza%20dottori%20Carlo%20e%20Luigi%20Balbo%20-%20Madonnina%20di%20Serralunga%20di%20Crea%20%28AL%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="btn" href="/eventi.html">Altri eventi in zona</a></div>
+  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Festa+a+Madonnina&amp;dates=20260731%2F20260803&amp;details=Tre+serate+di+festa+a+Madonnina+di+Serralunga+di+Crea%2C+dal+31+luglio+al+2+agosto+2026%2C+organizzate+dalla+Pro+Loco+di+Serralunga+di+Crea+in+occasione+del+suo+45%C2%B0+anniversario.+Ogni+serata+propone+musica+dal+vivo+e+intrattenimento+a+partire+dalle+ore+21%3A00-22%3A00%2C+con+ingresso+libero+per+tutti.+Programma%3A+31%2F07+Videodiscoteca+Super+Sound+-+Pro+Loco+Serralunga+di+Crea+%2822%3A00%29%3B+01%2F08+M.P.30+e+DJ+Toyu+-+Pro+Loco+Serralunga+di+Crea+%2822%3A00%29%3B+02%2F08+Giorgio+Leoni+Band+-+Pro+Loco+Serralunga+di+Crea+%2821%3A00%29.&amp;location=Piazza+dottori+Carlo+e+Luigi+Balbo+-+Madonnina+di+Serralunga+di+Crea+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza%20dottori%20Carlo%20e%20Luigi%20Balbo%20-%20Madonnina%20di%20Serralunga%20di%20Crea%20%28AL%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
 </article>
 </main>
 <footer>

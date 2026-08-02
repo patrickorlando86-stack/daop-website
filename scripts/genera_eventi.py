@@ -804,7 +804,11 @@ PAGINA_CSS = """
 .ev-facts svg{flex:0 0 auto;margin-top:3px;opacity:.65}
 .ev-body{margin:26px 0;line-height:1.7}
 .ev-loc{width:100%;height:auto;border-radius:14px;margin:22px 0}
-.ev-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 8px}
+.ev-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:28px 0 8px}
+/* Rete di sicurezza: se un .btn restasse senza modificatore non deve mai
+   ricadere sul blu di sistema, come e' successo a "Come arrivare". */
+.ev-actions .btn{color:#fff}
+.ev-back{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:3px}
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
@@ -855,10 +859,13 @@ def render_pagina(rec, css, nav, foot, oggi):
         azioni = '<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>'
     else:
         avviso = ''
+        # .btn da sola dà solo la forma: senza modificatore l'ancora resta un
+        # link blu di sistema. I modificatori che il CSS del sito definisce
+        # davvero sono btn-primary, btn-navy e btn-teal.
         bottoni = [f'<a class="btn btn-navy" href="{esc(gcal_url(e))}" target="_blank" rel="noopener">Aggiungi al calendario</a>']
         if maps_url(e):
-            bottoni.append(f'<a class="btn" href="{esc(maps_url(e))}" target="_blank" rel="noopener">Come arrivare</a>')
-        bottoni.append('<a class="btn" href="/eventi.html">Altri eventi in zona</a>')
+            bottoni.append(f'<a class="btn btn-teal" href="{esc(maps_url(e))}" target="_blank" rel="noopener">Come arrivare</a>')
+        bottoni.append('<a class="ev-back" href="/eventi.html">Torna all\'agenda</a>')
         azioni = '<div class="ev-actions">' + "".join(bottoni) + '</div>'
 
     ev_obj = event_jsonld(e, url)
