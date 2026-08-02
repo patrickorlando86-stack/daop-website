@@ -1,91 +1,87 @@
 {
-  "_nota": "Sorgente di verita' della pagina esploratore.html. Dopo ogni modifica qui, oppure dopo aver caricato copertine/PDF in assets/ginetto/, rigenera la pagina con:  python scripts/genera_ginetto.py",
-  "_come_aggiungere_un_volume": "Copia un blocco dentro 'volumi', cambia id/numero/paese/testi, metti i file in assets/ginetto/copertine e assets/ginetto/materiali, imposta visibile: true e rilancia lo script. Non toccare mai il markup di esploratore.html.",
-  "_peso_file": "Il peso dei PDF NON si scrive qui: lo calcola lo script leggendo il file vero, cosi' non diventa mai obsoleto.",
-
-  "collana": {
-    "titolo": "Ginetto l'Esploratore",
-    "occhiello": "Collana illustrata",
-    "intro": "Ginetto l'Esploratore è una collana di libri illustrati che accompagna bambini e genitori alla scoperta dei paesi del nostro territorio, un volume alla volta. Ogni libro nasce camminando: le piazze, i cortili e i campanili che ci sono dentro sono quelli veri, quelli che si possono andare a vedere il pomeriggio stesso. Per questo a ogni volume si affiancano materiali da stampare gratuitamente: servono a far uscire la storia dal libro e a portarla in strada."
-  },
-
-  "volumi": [
+ "_nota": "Sorgente di verita' della pagina esploratore.html. Dopo ogni modifica qui, oppure dopo aver caricato copertine/PDF in assets/ginetto/, rigenera la pagina con:  python scripts/genera_ginetto.py",
+ "_come_aggiungere_un_volume": "Copia un blocco dentro 'volumi', cambia id/numero/paese/testi, metti i file in assets/ginetto/copertine e assets/ginetto/materiali, imposta visibile: true e rilancia lo script. Non toccare mai il markup di esploratore.html.",
+ "_peso_file": "Il peso dei PDF NON si scrive qui: lo calcola lo script leggendo il file vero, cosi' non diventa mai obsoleto.",
+ "collana": {
+  "titolo": "Ginetto l'Esploratore",
+  "occhiello": "Collana illustrata",
+  "intro": "Ginetto l'Esploratore è una collana di libri illustrati che accompagna bambini e genitori alla scoperta dei paesi del nostro territorio, un volume alla volta. Ogni libro nasce camminando: le piazze, i cortili e i campanili che ci sono dentro sono quelli veri, quelli che si possono andare a vedere il pomeriggio stesso. Per questo a ogni volume si affiancano materiali da stampare gratuitamente: servono a far uscire la storia dal libro e a portarla in strada."
+ },
+ "volumi": [
+  {
+   "id": "casale-monferrato",
+   "numero": 1,
+   "visibile": true,
+   "stato": "pubblicato",
+   "titolo": "Ginetto alla scoperta di Casale Monferrato",
+   "paese": "Casale Monferrato",
+   "provincia": "Alessandria",
+   "descrizione": "Il primo viaggio di Ginetto parte dal grande Castello di mattoni rossi e attraversa Casale tappa dopo tappa: il Duomo di Sant'Evasio, la Sinagoga nascosta tra i cortili, Piazza del Cavallo e i krumiri, i biscotti a forma di baffo nati proprio qui. In ogni illustrazione si nasconde Briciola, la topolina: trovarla è il gioco che accompagna la lettura.",
+   "copertina": "assets/ginetto/copertine/vol-1-casale-monferrato.webp",
+   "copertina_alt": "Copertina del volume 1 di Ginetto l'Esploratore, dedicato a Casale Monferrato",
+   "amazon": "https://www.amazon.it/dp/B0H73GRK9M",
+   "materiali": [
     {
-      "id": "casale-monferrato",
-      "numero": 1,
-      "visibile": true,
-      "stato": "pubblicato",
-      "titolo": "Ginetto alla scoperta di Casale Monferrato",
-      "paese": "Casale Monferrato",
-      "provincia": "Alessandria",
-      "descrizione": "Il primo viaggio di Ginetto parte dal grande Castello di mattoni rossi e attraversa Casale tappa dopo tappa: il Duomo di Sant'Evasio, la Sinagoga nascosta tra i cortili, Piazza del Cavallo e i krumiri, i biscotti a forma di baffo nati proprio qui. In ogni illustrazione si nasconde Briciola, la topolina: trovarla è il gioco che accompagna la lettura.",
-      "copertina": "assets/ginetto/copertine/vol-1-casale-monferrato.jpg",
-      "copertina_alt": "Copertina del volume 1 di Ginetto l'Esploratore, dedicato a Casale Monferrato",
-      "amazon": "https://www.amazon.it/dp/B0H73GRK9M",
-      "materiali": [
-        {
-          "titolo": "Diploma di Piccolo Esploratore",
-          "descrizione": "Da compilare con il proprio nome e appendere in cameretta a esplorazione finita.",
-          "file": "assets/ginetto/materiali/vol-1-casale-monferrato-diploma.pdf",
-          "formato": "PDF A4"
-        },
-        {
-          "titolo": "Checklist \"Ci sono stato!\"",
-          "descrizione": "I luoghi del libro in un elenco da spuntare uno a uno, durante la passeggiata.",
-          "file": "assets/ginetto/materiali/vol-1-casale-monferrato-checklist.pdf",
-          "formato": "PDF A4"
-        }
-      ]
+     "titolo": "Diploma di Piccolo Esploratore",
+     "descrizione": "Da compilare con il proprio nome e appendere in cameretta a esplorazione finita.",
+     "file": "assets/ginetto/materiali/vol-1-casale-monferrato-diploma.pdf",
+     "formato": "PDF A4"
     },
-
     {
-      "id": "castelnuovo-scrivia",
-      "numero": 2,
-      "visibile": true,
-      "_stato": "Passa a \"pubblicato\" quando il volume esce: torneranno da soli il bottone Amazon e il gruppo di materiali qui sotto, che finche' e' 'in-arrivo' non vengono mostrati.",
-      "stato": "in-arrivo",
-      "titolo": "Ginetto alla scoperta di Castelnuovo Scrivia",
-      "paese": "Castelnuovo Scrivia",
-      "provincia": "Alessandria",
-      "descrizione": "Lungo la Scrivia, Ginetto arriva al paese di Matteo Bandello e ne gira le vie, il castello e le cascine intorno. Il secondo volume della collana e' in fase di completamento.",
-      "copertina": "assets/ginetto/copertine/vol-2-castelnuovo-scrivia.jpg",
-      "copertina_alt": "Copertina del volume 2 di Ginetto l'Esploratore, dedicato a Castelnuovo Scrivia",
-      "amazon": "",
-      "materiali": [
-        {
-          "titolo": "Diploma di Piccolo Esploratore",
-          "descrizione": "Da compilare con il proprio nome e appendere in cameretta a esplorazione finita.",
-          "file": "assets/ginetto/materiali/vol-2-castelnuovo-scrivia-diploma.pdf",
-          "formato": "PDF A4"
-        },
-        {
-          "titolo": "Checklist \"Ci sono stato!\"",
-          "descrizione": "I luoghi del libro in un elenco da spuntare uno a uno, durante la passeggiata.",
-          "file": "assets/ginetto/materiali/vol-2-castelnuovo-scrivia-checklist.pdf",
-          "formato": "PDF A4"
-        },
-        {
-          "titolo": "Disegni da colorare",
-          "descrizione": "Le illustrazioni del volume in bianco e nero, pronte per matite e pennarelli.",
-          "file": "assets/ginetto/materiali/vol-2-castelnuovo-scrivia-disegni.pdf",
-          "formato": "PDF A4"
-        }
-      ]
-    },
-
-    {
-      "id": "prossimo-paese",
-      "numero": 3,
-      "visibile": false,
-      "stato": "in-arrivo",
-      "titolo": "Il prossimo paese",
-      "paese": "",
-      "provincia": "",
-      "descrizione": "Il prossimo volume è in preparazione. Il paese lo scegliamo anche grazie ai suggerimenti di famiglie e insegnanti.",
-      "copertina": "",
-      "copertina_alt": "Segnaposto del prossimo volume della collana, non ancora pubblicato",
-      "amazon": "",
-      "materiali": []
+     "titolo": "Checklist \"Ci sono stato!\"",
+     "descrizione": "I luoghi del libro in un elenco da spuntare uno a uno, durante la passeggiata.",
+     "file": "assets/ginetto/materiali/vol-1-casale-monferrato-checklist.pdf",
+     "formato": "PDF A4"
     }
-  ]
+   ]
+  },
+  {
+   "id": "castelnuovo-scrivia",
+   "numero": 2,
+   "visibile": true,
+   "_stato": "Passa a \"pubblicato\" quando il volume esce: torneranno da soli il bottone Amazon e il gruppo di materiali qui sotto, che finche' e' 'in-arrivo' non vengono mostrati.",
+   "stato": "pubblicato",
+   "titolo": "Ginetto alla scoperta di Castelnuovo Scrivia",
+   "paese": "Castelnuovo Scrivia",
+   "provincia": "Alessandria",
+   "descrizione": "Lungo la Scrivia, Ginetto arriva al paese di Matteo Bandello e ne gira le vie, il castello e le cascine intorno. Il secondo volume della collana e' in fase di completamento.",
+   "copertina": "assets/ginetto/copertine/vol-2-castelnuovo-scrivia.jpg",
+   "copertina_alt": "Copertina del volume 2 di Ginetto l'Esploratore, dedicato a Castelnuovo Scrivia",
+   "amazon": "https://amzn.eu/d/08bxd7U2",
+   "materiali": [
+    {
+     "titolo": "Diploma di Piccolo Esploratore",
+     "descrizione": "Da compilare con il proprio nome e appendere in cameretta a esplorazione finita.",
+     "file": "assets/ginetto/materiali/vol-2-castelnuovo-scrivia-diploma.pdf",
+     "formato": "PDF A4"
+    },
+    {
+     "titolo": "Checklist \"Ci sono stato!\"",
+     "descrizione": "I luoghi del libro in un elenco da spuntare uno a uno, durante la passeggiata.",
+     "file": "assets/ginetto/materiali/vol-2-castelnuovo-scrivia-checklist.pdf",
+     "formato": "PDF A4"
+    },
+    {
+     "titolo": "Disegni da colorare",
+     "descrizione": "Le illustrazioni del volume in bianco e nero, pronte per matite e pennarelli.",
+     "file": "assets/ginetto/materiali/vol-2-castelnuovo-scrivia-disegni.pdf",
+     "formato": "PDF A4"
+    }
+   ]
+  },
+  {
+   "id": "prossimo-paese",
+   "numero": 3,
+   "visibile": false,
+   "stato": "in-arrivo",
+   "titolo": "Il prossimo paese",
+   "paese": "",
+   "provincia": "",
+   "descrizione": "Il prossimo volume è in preparazione. Il paese lo scegliamo anche grazie ai suggerimenti di famiglie e insegnanti.",
+   "copertina": "",
+   "copertina_alt": "Segnaposto del prossimo volume della collana, non ancora pubblicato",
+   "amazon": "",
+   "materiali": []
+  }
+ ]
 }

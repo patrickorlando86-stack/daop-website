@@ -242,7 +242,11 @@ def update_sitemap():
     oggi = datetime.date.today().isoformat()
     s = open(SITEMAP_PATH, encoding="utf-8").read()
     s, n = re.subn(
-        r'(<loc>https://www\.daop\.it/esploratore</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)',
+        # esploratore.html, non /esploratore: quella URL senza estensione non e'
+        # mai esistita come file e mandava Google su un 404. Corretta nel
+        # canonical, nella sitemap e qui, dove faceva fallire l'aggiornamento
+        # del lastmod in silenzio.
+        r'(<loc>https://www\.daop\.it/esploratore\.html</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)',
         lambda m: m.group(1) + oggi + m.group(2), s, count=1)
     if n == 1:
         open(SITEMAP_PATH, "w", encoding="utf-8").write(s)

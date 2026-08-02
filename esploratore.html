@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     {
       "@type": "BookSeries",
       "name": "Ginetto l'Esploratore",
-      "url": "https://www.daop.it/esploratore.html",
+      "url": "https://www.daop.it/esploratore",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -122,13 +122,39 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           },
           "url": "https://www.amazon.it/dp/B0H73GRK9M"
+        },
+        {
+          "@type": "Book",
+          "position": 2,
+          "name": "Ginetto alla scoperta di Castelnuovo Scrivia",
+          "bookEdition": "Volume 2",
+          "inLanguage": "it",
+          "author": {
+            "@type": "Person",
+            "name": "Patrick Orlando"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "DAOP"
+          },
+          "about": {
+            "@type": "Place",
+            "name": "Castelnuovo Scrivia",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Castelnuovo Scrivia",
+              "addressRegion": "Alessandria",
+              "addressCountry": "IT"
+            }
+          },
+          "url": "https://amzn.eu/d/08bxd7U2"
         }
       ]
     },
     {
       "@type": "WebPage",
       "name": "Ginetto l'Esploratore - la collana",
-      "url": "https://www.daop.it/esploratore.html",
+      "url": "https://www.daop.it/esploratore",
       "isPartOf": {
         "@type": "WebSite",
         "name": "DAOP",
@@ -443,14 +469,14 @@ document.addEventListener('DOMContentLoaded', function () {
           <a class="vol-link" href="https://www.amazon.it/dp/B0H73GRK9M" target="_blank" rel="noopener" aria-label="Vedi su Amazon: Ginetto alla scoperta di Casale Monferrato">Vedi su Amazon<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
         </div>
       </article>
-      <article class="vol-card is-soon">
-        <div class="vol-cover"><div class="vol-placeholder" role="img" aria-label="Copertina del volume 2 di Ginetto l&#x27;Esploratore, dedicato a Castelnuovo Scrivia"><svg viewBox="0 0 800 800" aria-hidden="true" focusable="false"><rect width="800" height="800" fill="#2d4a5c"/><circle cx="400" cy="330" r="132" fill="none" stroke="#c9a227" stroke-width="9"/><g transform="rotate(32 400 330)"><path d="M400 228 L426 330 L400 330 Z" fill="#c9a227"/><path d="M400 228 L374 330 L400 330 Z" fill="#a8871f"/><path d="M400 432 L426 330 L400 330 Z" fill="rgba(255,255,255,0.32)"/><path d="M400 432 L374 330 L400 330 Z" fill="rgba(255,255,255,0.17)"/></g><circle cx="400" cy="330" r="11" fill="#2d4a5c"/><text x="400" y="572" text-anchor="middle" fill="#ffffff" font-family="Georgia,serif" font-size="72" font-weight="700">Vol. 2</text><text x="400" y="650" text-anchor="middle" fill="rgba(255,255,255,0.62)" font-family="Helvetica,Arial,sans-serif" font-size="42">In arrivo</text></svg></div></div>
+      <article class="vol-card">
+        <div class="vol-cover"><div class="vol-placeholder" role="img" aria-label="Copertina del volume 2 di Ginetto l&#x27;Esploratore, dedicato a Castelnuovo Scrivia"><svg viewBox="0 0 800 800" aria-hidden="true" focusable="false"><rect width="800" height="800" fill="#2d4a5c"/><circle cx="400" cy="330" r="132" fill="none" stroke="#c9a227" stroke-width="9"/><g transform="rotate(32 400 330)"><path d="M400 228 L426 330 L400 330 Z" fill="#c9a227"/><path d="M400 228 L374 330 L400 330 Z" fill="#a8871f"/><path d="M400 432 L426 330 L400 330 Z" fill="rgba(255,255,255,0.32)"/><path d="M400 432 L374 330 L400 330 Z" fill="rgba(255,255,255,0.17)"/></g><circle cx="400" cy="330" r="11" fill="#2d4a5c"/><text x="400" y="572" text-anchor="middle" fill="#ffffff" font-family="Georgia,serif" font-size="72" font-weight="700">Vol. 2</text><text x="400" y="650" text-anchor="middle" fill="rgba(255,255,255,0.62)" font-family="Helvetica,Arial,sans-serif" font-size="42">Copertina in arrivo</text></svg></div></div>
         <div class="vol-body">
           <p class="vol-num">Volume 2</p>
           <h3>Ginetto alla scoperta di Castelnuovo Scrivia</h3>
           <p class="vol-luogo"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg><span>Castelnuovo Scrivia <span class="vol-prov">(Alessandria)</span></span></p>
           <p class="vol-desc">Lungo la Scrivia, Ginetto arriva al paese di Matteo Bandello e ne gira le vie, il castello e le cascine intorno. Il secondo volume della collana e&#x27; in fase di completamento.</p>
-          <p class="vol-soon">In preparazione</p>
+          <a class="vol-link" href="https://amzn.eu/d/08bxd7U2" target="_blank" rel="noopener" aria-label="Vedi su Amazon: Ginetto alla scoperta di Castelnuovo Scrivia">Vedi su Amazon<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
         </div>
       </article>
 <!-- GINETTO:VOLUMI:END -->
@@ -484,6 +510,23 @@ document.addEventListener('DOMContentLoaded', function () {
           <li class="mat-item is-soon"><div class="mat-link">
             <span class="mat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M5 18.5h14"/></svg></span>
             <span class="mat-text"><span class="mat-titolo">Checklist &quot;Ci sono stato!&quot;</span><span class="mat-desc">I luoghi del libro in un elenco da spuntare uno a uno, durante la passeggiata.</span><span class="mat-meta">In preparazione</span></span>
+          </div></li>
+        </ul>
+      </div>
+      <div class="mat-group">
+        <h3 class="mat-group-title"><span class="mat-group-num">Vol. 2</span> Castelnuovo Scrivia</h3>
+        <ul class="mat-list">
+          <li class="mat-item is-soon"><div class="mat-link">
+            <span class="mat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M5 18.5h14"/></svg></span>
+            <span class="mat-text"><span class="mat-titolo">Diploma di Piccolo Esploratore</span><span class="mat-desc">Da compilare con il proprio nome e appendere in cameretta a esplorazione finita.</span><span class="mat-meta">In preparazione</span></span>
+          </div></li>
+          <li class="mat-item is-soon"><div class="mat-link">
+            <span class="mat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M5 18.5h14"/></svg></span>
+            <span class="mat-text"><span class="mat-titolo">Checklist &quot;Ci sono stato!&quot;</span><span class="mat-desc">I luoghi del libro in un elenco da spuntare uno a uno, durante la passeggiata.</span><span class="mat-meta">In preparazione</span></span>
+          </div></li>
+          <li class="mat-item is-soon"><div class="mat-link">
+            <span class="mat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M5 18.5h14"/></svg></span>
+            <span class="mat-text"><span class="mat-titolo">Disegni da colorare</span><span class="mat-desc">Le illustrazioni del volume in bianco e nero, pronte per matite e pennarelli.</span><span class="mat-meta">In preparazione</span></span>
           </div></li>
         </ul>
       </div>
