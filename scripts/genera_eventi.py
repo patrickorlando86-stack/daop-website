@@ -786,8 +786,12 @@ def _guscio():
 
 
 PAGINA_CSS = """
-.ev-wrap{max-width:820px;margin:0 auto;padding:0 20px}
-.ev-crumb{font-size:.85rem;opacity:.7;margin:26px 0 10px}
+/* La nav del sito e' position:fixed: senza spazio in cima gli finisce sotto
+   il breadcrumb e mezzo H1. Stessi valori con cui .page-hero la compensa
+   nelle altre pagine (148px, 120px sotto i 600px). */
+.ev-wrap{max-width:820px;margin:0 auto;padding:148px 20px 40px}
+@media(max-width:600px){.ev-wrap{padding:120px 18px 32px}}
+.ev-crumb{font-size:.85rem;opacity:.7;margin:0 0 10px}
 .ev-crumb a{color:inherit}
 .ev-head h1{margin:.1em 0 .3em;line-height:1.15}
 .ev-when{font-size:1.05rem;font-weight:600;color:var(--daop-navy,#1b3a5c)}
