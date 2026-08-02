@@ -281,6 +281,41 @@
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
+/* Il punto di vista DAOP: e' il motivo per cui vale la pena aprire la pagina,
+   quindi si vede che e' nostro e non copiato dal volantino. */
+.ev-daop{border:1px solid rgba(107,165,168,.45);background:rgba(107,165,168,.09);
+  border-radius:16px;padding:20px 22px;margin:28px 0}
+.ev-daop>h2{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:0 0 12px;
+  color:var(--navy,#2d4a5c)}
+.ev-daop-voce+.ev-daop-voce{margin-top:14px}
+.ev-daop-voce h3{font-size:.98rem;margin:0 0 3px;color:var(--navy,#2d4a5c)}
+.ev-daop-voce p{margin:0 0 6px;line-height:1.6}
+/* Firma editoriale: chi ha controllato e quando. */
+.ev-firma{border-top:2px solid rgba(45,74,92,.14);margin:30px 0 0;padding:16px 0 0;
+  font-size:.92rem;line-height:1.6}
+.ev-firma-t{display:flex;align-items:center;gap:7px;font-weight:700;margin:0 0 6px;
+  color:var(--teal,#6ba5a8)}
+.ev-firma p{margin:0 0 6px}
+.ev-firma-nota{opacity:.78;font-size:.86rem}
+.ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Altri eventi vicini: link in uscita e motivo per restare sul sito. */
+.ev-vicini{margin:34px 0 0}
+.ev-vicini h2{font-size:1.15rem;margin:0 0 12px}
+.ev-vicini ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-vicini a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
+  border:1px solid rgba(45,74,92,.14);border-radius:12px;padding:11px 14px;
+  color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
+.ev-vicini a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
+.ev-vic-d{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+  color:var(--teal,#6ba5a8);flex:0 0 auto;min-width:92px}
+.ev-vic-n{font-weight:600;flex:1 1 220px}
+.ev-vic-c{font-size:.85rem;opacity:.7}
+.ev-vic-all{margin:14px 0 0;font-size:.92rem}
+.ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+@media (prefers-color-scheme:dark){
+  .ev-daop{background:rgba(107,165,168,.14);border-color:rgba(107,165,168,.35)}
+  .ev-vicini a{border-color:rgba(255,255,255,.16)}
+}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script type="application/ld+json">
@@ -308,7 +343,12 @@
         "https://www.daop.it/assets/eventi/daop_asti_3932273221679851436.jpg"
       ],
       "url": "https://www.daop.it/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html",
+      "organizer": {
+        "@type": "Organization",
+        "name": "Pro Loco San Marzano Oliveto APS"
+      },
       "description": "Partecipazione alla Sagra del Rapulè di Calosso 2026, tre giorni dedicati a uno dei prodotti tipici del territorio astigiano. Un evento enogastronomico e folkloristico aperto a tutti.",
+      "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -316,7 +356,47 @@
         "availability": "https://schema.org/InStock",
         "validFrom": "2026-10-16",
         "url": "https://www.daop.it/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html"
-      }
+      },
+      "@id": "https://www.daop.it/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html#event"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.daop.it/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html",
+      "url": "https://www.daop.it/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html",
+      "name": "Sagra del Rapulè Calosso 2026 a Calosso | DAOP",
+      "inLanguage": "it-IT",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.daop.it/#website",
+        "url": "https://www.daop.it",
+        "name": "DAOP"
+      },
+      "about": {
+        "@id": "https://www.daop.it/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html#event"
+      },
+      "publisher": {
+        "@id": "https://www.daop.it/#organization"
+      },
+      "reviewedBy": {
+        "@id": "https://www.daop.it/#organization"
+      },
+      "datePublished": "2026-08-02",
+      "dateModified": "2026-08-02",
+      "lastReviewed": "2026-08-02"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.daop.it/#organization",
+      "name": "DAOP – Dove Andiamo Oggi Papi",
+      "alternateName": "DAOP",
+      "url": "https://www.daop.it",
+      "logo": "https://www.daop.it/assets/images/logodaop.png",
+      "areaServed": [
+        "Alessandria",
+        "Asti",
+        "Piemonte"
+      ],
+      "description": "Associazione delle famiglie di Alessandria e Asti. Seleziona e verifica gli eventi per famiglie del territorio."
     },
     {
       "@type": "BreadcrumbList",
@@ -394,7 +474,10 @@
   <div class="ev-body">
     <p>Partecipazione alla Sagra del Rapulè di Calosso 2026, tre giorni dedicati a uno dei prodotti tipici del territorio astigiano. Un evento enogastronomico e folkloristico aperto a tutti.</p>
   </div>
+  
   <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Sagra+del+Rapul%C3%A8+Calosso+2026+-+Pro+Loco+San+Marzano+Oliveto+APS&amp;dates=20261016%2F20261019&amp;details=Partecipazione+alla+Sagra+del+Rapul%C3%A8+di+Calosso+2026%2C+tre+giorni+dedicati+a+uno+dei+prodotti+tipici+del+territorio+astigiano.+Un+evento+enogastronomico+e+folkloristico+aperto+a+tutti.&amp;location=Calosso+%28AT%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=Calosso%20%28AT%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
+  <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria e Asti. Ultimo controllo: <time datetime="2026-08-02">2 agosto 2026</time>.</p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Sagra%20del%20Rapul%C3%A8%20Calosso%202026%20-%20Pro%20Loco%20San%20Marzano%20Oliveto%20APS">Segnala una correzione</a></p></aside>
+  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Calosso</h2><ul><li><a href="/eventi/rassegna-gastronomica-sagra-del-guanciotto-d-asino-montiglio-monferrato.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">40ª Rassegna Gastronomica Sagra del Guanciotto d&#x27;Asino</span><span class="ev-vic-c">Montiglio Monferrato</span></a></li><li><a href="/eventi/tigliole-in-festa.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Tigliole in Festa 2026</span><span class="ev-vic-c">Tigliole</span></a></li><li><a href="/eventi.html#ev-2026-08-02-castello-di-monastero-bormida-castelli-aperti"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Castello di Monastero Bormida - Castelli Aperti</span><span class="ev-vic-c">Monastero Bormida</span></a></li><li><a href="/eventi.html#ev-2026-08-02-concerto-del-coro-dei-ragazzi-di-san-martino-di-bi"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Concerto del Coro dei Ragazzi di San Martino di Biberach - Gruppo…</span><span class="ev-vic-c">Asti</span></a></li><li><a href="/eventi/gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Gianmarco Bagutti - Orchestra Italiana - 79° Sagra del Peperone</span><span class="ev-vic-c">Costigliole d&#x27;Asti</span></a></li><li><a href="/eventi.html#ev-2026-08-02-mostra-mercato-piccoli-animali-citta-di-san-damian"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</span><span class="ev-vic-c">San Damiano d&#x27;Asti</span></a></li></ul><p class="ev-vic-all"><a href="/eventi.html">Vedi tutta l'agenda DAOP</a></p></section>
 </article>
 </main>
 <footer>
@@ -432,6 +515,7 @@
         <a href="mailto:info@daop.it">info@daop.it</a>
         <a href="tel:+393471834091">347 183 4091</a>
         <a href="/index.html#chi-siamo">Chi siamo</a>
+        <a href="/metodo.html">Come verifichiamo gli eventi</a>
         <a href="/privacy.html">Privacy Policy</a>
         <a href="/cookie-policy.html">Cookie Policy</a>
       </div>

@@ -25,6 +25,12 @@ User-agent: Meta-ExternalAgent
 Disallow: /
 
 # --- Bot di RECUPERO/CITAZIONE: ammessi (portano traffico e brand) ---
+# Sono user agent diversi da quelli di addestramento qui sopra: servono a
+# indicizzare la pagina per citarla, o a leggerla quando un utente la chiede.
+# Bloccare GPTBot non toglie le citazioni: chi cita e' OAI-SearchBot.
+# Stessa cosa in casa Anthropic: ClaudeBot addestra, Claude-SearchBot e
+# Claude-User no. Sono gia' ammessi dalla regola "*" piu' in alto, ma qui la
+# scelta e' esplicita e si legge senza doverla dedurre.
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -32,6 +38,23 @@ User-agent: ChatGPT-User
 Allow: /
 
 User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+# Applebot indicizza per Siri e Spotlight (l'addestramento e'
+# Applebot-Extended, bloccato sopra).
+User-agent: Applebot
 Allow: /
 
 Sitemap: https://www.daop.it/sitemap.xml
