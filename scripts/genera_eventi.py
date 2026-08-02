@@ -1368,18 +1368,19 @@ METODO_CSS = """
 METODO_FAQ = [
     ("Chi inserisce gli eventi su DAOP?",
      "Le schede le compilano a mano Patrick Orlando per la provincia di Alessandria e "
-     "Alessandra Zaccone per la provincia di Asti, soci fondatori di DAOP. Non c'è "
-     "nessuno script che copia in automatico da altri siti: ogni riga entra perché una "
-     "persona l'ha letta e trascritta."),
+     "Alessandra Zaccone per la provincia di Asti, soci fondatori di DAOP. DAOP non "
+     "aggrega in automatico da altri siti: ogni scheda passa da una persona prima di "
+     "essere pubblicata."),
     ("Da dove arrivano gli eventi?",
      "Da tre strade: le locandine e i canali ufficiali di comuni, pro loco, biblioteche e "
      "associazioni del territorio; le segnalazioni delle famiglie della community DAOP; "
      "e gli organizzatori che ci scrivono direttamente a info@daop.it."),
     ("Come viene verificata una scheda?",
-     "Prima di pubblicare controlliamo che ci siano data, luogo, orario e prezzo, e che "
-     "coincidano con quello che dichiara l'organizzatore. Se un dato non è confermato non "
-     "lo inventiamo: lo scriviamo come da verificare. Ogni scheda riporta la data "
-     "dell'ultimo controllo."),
+     "I dati vengono dalla comunicazione ufficiale di chi organizza: locandina, pagina o "
+     "avviso del comune, della pro loco o dell'associazione. Prima di pubblicare "
+     "controlliamo che data, luogo, orario e prezzo ci siano e siano coerenti con quella "
+     "fonte. Se un dato non è confermato non lo inventiamo: lo scriviamo come da "
+     "verificare. Ogni scheda riporta la data dell'ultimo controllo."),
     ("Ogni quanto vengono aggiornati gli eventi?",
      "L'agenda si rigenera automaticamente ogni notte: gli eventi passati escono, quelli "
      "nuovi entrano e le schede modificate vengono riscritte. La data dell'ultimo "
@@ -1489,8 +1490,8 @@ def scrivi_metodo(events):
     <p class="ev-when">Il metodo dietro l'agenda di Alessandria e Asti</p>
   </header>
 
-  <p>DAOP non è un aggregatore automatico. Ogni evento che leggi sul sito è stato
-  inserito a mano da una persona che vive in questo territorio, con data, luogo, orario,
+  <p>DAOP non è un aggregatore automatico. Ogni evento che leggi sul sito è stato scelto
+  e inserito da una persona che vive in questo territorio, con data, luogo, orario,
   prezzo e fascia d'età controllati prima della pubblicazione. Questa pagina spiega chi
   lo fa, come, e ogni quanto.</p>
 
@@ -1518,12 +1519,14 @@ def scrivi_metodo(events):
     <li><strong>Raccolta.</strong> Locandine e canali ufficiali di comuni, pro loco,
     biblioteche e associazioni; segnalazioni delle famiglie della community;
     organizzatori che ci scrivono direttamente.</li>
-    <li><strong>Trascrizione a mano.</strong> Ogni evento entra nel database DAOP con
-    nome, date, orario, luogo e indirizzo, prezzo, fascia d'età e descrizione scritta da
-    noi. Niente copia-incolla automatico da altri siti.</li>
-    <li><strong>Controllo.</strong> Verifichiamo che data, luogo, orario e prezzo
-    coincidano con quanto dichiara l'organizzatore. Quello che non è confermato non viene
-    inventato: resta scritto come <em>da verificare</em>.</li>
+    <li><strong>Inserimento.</strong> Ogni evento entra nel database DAOP con nome, date,
+    orario, luogo e indirizzo, prezzo, fascia d'età e descrizione scritta da noi. Niente
+    aggregazione automatica da altri siti: la scheda passa da una persona prima di essere
+    pubblicata.</li>
+    <li><strong>Controllo.</strong> Data, luogo, orario e prezzo li prendiamo dalla
+    comunicazione ufficiale di chi organizza e controlliamo che siano completi e coerenti.
+    Quello che non è confermato non viene inventato: resta scritto come
+    <em>da verificare</em>.</li>
     <li><strong>Pubblicazione.</strong> L'evento entra nell'agenda e, se è una sagra o una
     festa, riceve una scheda con URL dedicata che resta online anche dopo, così l'anno
     dopo ritrovi la stessa pagina aggiornata.</li>
