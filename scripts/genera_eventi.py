@@ -745,15 +745,32 @@ def carica_registro():
         return {}
 
 
+def completezza(e):
+    """Quanto e' completa una riga del foglio. Serve a scegliere fra due righe
+    che finiscono sullo stesso slug: capita che lo stesso evento sia inserito
+    due volte con dati diversi (Acqui Wine Days: 784 caratteri e fine 09/08 in
+    una riga, 991 caratteri e fine 10/08 nell'altra). Prima vinceva l'ultima
+    letta, cioe' il caso; ora vince la piu' ricca."""
+    return (len((e.get('descr') or '').strip()),
+            (e['d_end'] - e['d_start']).days,
+            sum(1 for k in ('ora', 'luogo', 'indirizzo', 'loc', 'prezzo', 'eta')
+                if (e.get(k) or '').strip()))
+
+
 def aggiorna_registro(events):
     """Fonde gli eventi correnti nel registro persistente. Non rimuove nulla."""
     reg = carica_registro()
     oggi = datetime.date.today().isoformat()
     nuovi = 0
+    # Un solo evento per slug, il piu' completo, prima di toccare il registro.
+    migliori = {}
     for e in events:
         if not ha_pagina(e):
             continue
         s = slug_evento(e)
+        if s not in migliori or completezza(e) > completezza(migliori[s]):
+            migliori[s] = e
+    for s, e in migliori.items():
         rec = reg.get(s)
         if rec is None:
             rec, nuovi = {'first_seen': oggi}, nuovi + 1
