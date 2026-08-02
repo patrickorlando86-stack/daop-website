@@ -87,7 +87,8 @@ def fetch_rows():
             'Descrizione': e['descr'], 'Manifestazione': e.get('manifest', ''),
             'Locandina': e.get('loc', ''), 'Luogo': e.get('luogo', ''),
             'Indirizzo Completo': e.get('indirizzo', ''),
-        }, **{nomi[0]: e[campo] for campo, nomi in CAMPI_DAOP.items()
+        }, **{nomi[0]: e[campo]
+              for campo, nomi in dict(CAMPI_DAOP, **CAMPI_EXTRA).items()
               if (e.get(campo) or '').strip()})
             for e in snap]
 
@@ -109,6 +110,18 @@ CAMPI_DAOP = {
 }
 
 
+# Colonne che nel foglio ci sono gia' e che finora buttavamo via: il giudizio
+# DAOP e' in parte gia' stato dato, sotto forma di flag, e i recapiti e le
+# coordinate sono i due dati che una risposta di un assistente non contiene mai.
+CAMPI_EXTRA = {
+    'contatto':        ("Contatto", "Contatti", "Telefono", "Email", "Recapiti"),
+    'consigliato':     ("Consigliato DAOP", "Consigliato"),
+    'adatto_famiglie': ("Adatto Famiglie", "Adatto alle famiglie", "Adatto famiglie"),
+    'lat':             ("Latitude", "Latitudine", "Lat"),
+    'lon':             ("Longitude", "Longitudine", "Lon", "Lng"),
+}
+
+
 def _key(s):
     """Chiave di confronto per le intestazioni: senza accenti, spazi e maiuscole.
     'Età consigliata', 'ETA CONSIGLIATA' e 'eta_consigliata' sono la stessa cosa."""
@@ -126,12 +139,62 @@ def campi_daop(d):
     """Legge dalla riga del foglio le colonne editoriali, se ci sono."""
     idx = {_key(k): (v or '').strip() for k, v in d.items()}
     out = {}
-    for campo, nomi in CAMPI_DAOP.items():
+    for campo, nomi in dict(CAMPI_DAOP, **CAMPI_EXTRA).items():
         presenti = [_key(n) for n in nomi if _key(n) in idx]
         if presenti:
             COLONNE_VISTE.add(campo)
         out[campo] = next((idx[k] for k in presenti if idx[k]), '')
     return out
+
+
+def si(v):
+    """La colonna e' compilata a mano: 'Si', 'SI', 'Sì', 'x', 'true' valgono si."""
+    return _key(v) in ('si', 'sì', 'x', 'true', 'vero', '1', 'y', 'yes')
+
+
+def coord(e):
+    """(lat, lon) come stringhe, solo se sono due numeri plausibili per l'Italia.
+    Una cella con un appunto dentro non deve finire nei dati strutturati."""
+    try:
+        la, lo = float((e.get('lat') or '').replace(',', '.')), \
+            float((e.get('lon') or '').replace(',', '.'))
+    except ValueError:
+        return None
+    if 35 <= la <= 48 and 6 <= lo <= 19:
+        return f"{la:.7f}".rstrip('0').rstrip('.'), f"{lo:.7f}".rstrip('0').rstrip('.')
+    return None
+
+
+TEL_RE = re.compile(r'(?:\+39[\s.]?)?(?:\d[\s.]?){8,12}\d')
+MAIL_RE = re.compile(r'[\w.+-]+@[\w-]+\.[\w.-]+')
+
+
+def contatti_html(testo):
+    """I recapiti diventano link: da telefono si chiama, da mobile soprattutto.
+    Il testo intorno resta come l'ha scritto chi compila il foglio."""
+    t = (testo or '').strip()
+    if not t:
+        return ''
+    pezzi, pos = [], 0
+    trovati = sorted(
+        [(m.start(), m.end(), 'mail') for m in MAIL_RE.finditer(t)]
+        + [(m.start(), m.end(), 'tel') for m in TEL_RE.finditer(t)])
+    # Un numero dentro un indirizzo email non va linkato due volte.
+    ultimo = -1
+    for a, b, tipo in trovati:
+        if a < ultimo:
+            continue
+        # html.escape e non esc(): esc() fa strip, e qui mangerebbe lo spazio
+        # fra il nome e il numero ("Patrizia351 6754801").
+        pezzi.append(html.escape(t[pos:a]))
+        val = t[a:b].strip()
+        if tipo == 'mail':
+            pezzi.append(f'<a href="mailto:{esc(val)}">{esc(val)}</a>')
+        else:
+            pezzi.append(f'<a href="tel:{esc(re.sub(r"[^+0-9]", "", val))}">{esc(val)}</a>')
+        pos, ultimo = b, b
+    pezzi.append(html.escape(t[pos:]))
+    return "".join(pezzi)
 
 
 def normalize(rows):
@@ -267,7 +330,14 @@ def _luogo_query(e):
 
 
 def maps_url(e):
-    """Link 'Come arrivare' su Google Maps."""
+    """Link 'Come arrivare' su Google Maps.
+
+    Con le coordinate del foglio si va sul punto esatto: la ricerca per nome
+    del luogo, in paesi dove la piazza non e' geocodificata, apre il centro del
+    comune e ti lascia a cercare a piedi."""
+    xy = coord(e)
+    if xy:
+        return f"https://www.google.com/maps/search/?api=1&query={xy[0]},{xy[1]}"
     q = _luogo_query(e)
     if not q:
         return ''
@@ -347,6 +417,10 @@ def riga(e, today):
         bits.append(esc(trunc(e['eta'], 26)))
 
     tags = [f'<span class="ev-pill is-cat">{cat_icon} {esc(catlabel)}</span>']
+    # Il consiglio di DAOP viene prima del prezzo e della manifestazione: e' il
+    # motivo per cui uno guarda l'agenda nostra invece di un elenco qualsiasi.
+    if si(e.get('consigliato')):
+        tags.append(f'<span class="ev-pill is-daop">{STAR_SVG} Consigliato DAOP</span>')
     if ongoing:
         tags.append('<span class="ev-pill is-live">In corso</span>')
     pill = prezzo_pill(e)
@@ -661,6 +735,21 @@ def event_jsonld(e, url_override=None):
     org = organizzatore(e.get('nome'))
     if org:
         obj["organizer"] = {"@type": "Organization", "name": org}
+        # I recapiti del foglio sono di chi organizza, non di DAOP: vanno
+        # sull'organizzatore, e solo se abbiamo un nome a cui attaccarli.
+        cont = (e.get('contatto') or '').strip()
+        mail = MAIL_RE.search(cont)
+        tel = TEL_RE.search(cont)
+        if mail:
+            obj["organizer"]["email"] = mail.group(0)
+        if tel:
+            obj["organizer"]["telephone"] = re.sub(r'[^+0-9]', '', tel.group(0))
+    xy = coord(e)
+    if xy:
+        obj["location"]["geo"] = {"@type": "GeoCoordinates",
+                                  "latitude": xy[0], "longitude": xy[1]}
+    if si(e.get('adatto_famiglie')):
+        obj["audience"] = {"@type": "Audience", "audienceType": "Famiglie con bambini"}
     fascia = fascia_eta(e.get('eta_consigliata') or e.get('eta'))
     if fascia:
         obj["typicalAgeRange"] = fascia
@@ -890,7 +979,7 @@ def aggiorna_registro(events):
         # scheda gonfiano il registro e il diff di ogni notte. Vanno tolte, non
         # solo saltate, se no una cella svuotata nel foglio resterebbe qui per
         # sempre.
-        for k in CAMPI_DAOP:
+        for k in dict(CAMPI_DAOP, **CAMPI_EXTRA):
             if not (rec.get(k) or '').strip():
                 rec.pop(k, None)
         rec['slug'] = s
@@ -942,6 +1031,9 @@ PAGINA_CSS = """
    ulteriore difesa se un giorno la regola si allargasse. */
 .ev-crumb{position:static;font-size:.85rem;opacity:.7;margin:0 0 10px}
 .ev-crumb a{color:inherit}
+.ev-scelto{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;
+  letter-spacing:.02em;text-transform:uppercase;color:#a75b15;background:rgba(232,149,74,.16);
+  border-radius:100px;padding:5px 12px;margin:0 0 8px}
 .ev-head h1{margin:.1em 0 .3em;line-height:1.15}
 .ev-when{font-size:1.05rem;font-weight:600;color:var(--daop-navy,#1b3a5c)}
 .ev-facts{list-style:none;padding:0;margin:22px 0;display:grid;gap:10px}
@@ -998,6 +1090,13 @@ PAGINA_CSS = """
 ORG_ID = f"{SITE_URL}/#organization"
 SITE_ID = f"{SITE_URL}/#website"
 METODO_URL = f"{SITE_URL}/metodo.html"
+
+PHONE_SVG = ('<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" '
+             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+             '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>')
+
+STAR_SVG = ('<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" '
+            'aria-hidden="true"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.4-5.8-3-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>')
 
 CHECK_SVG = ('<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" '
              'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -1151,6 +1250,11 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
     if e.get('prenotazione'):
         facts.append(f'<li>{CHECK_SVG}<span><strong>Prenotazione:</strong> '
                      f'{esc(e["prenotazione"])}</span></li>')
+    # I recapiti dell'organizzatore sono la cosa piu' utile che possiamo dare a
+    # chi deve decidere oggi: nessuna risposta di un assistente te li da'.
+    if contatti_html(e.get('contatto')):
+        facts.append(f'<li>{PHONE_SVG}<span><strong>Contatti:</strong> '
+                     f'{contatti_html(e["contatto"])}</span></li>')
 
     loc = loc_path(e.get('loc'))
     img = (f'<img class="ev-loc" src="{esc(loc)}" alt="Locandina di {esc(nome)}" '
@@ -1223,6 +1327,10 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
 
     corpo = "".join(f"<p>{esc(p)}</p>" for p in re.split(r'\n{2,}', descr_txt) if p.strip())
     consiglio = blocco_daop(e)
+    # "Consigliato DAOP" nel foglio e' gia' un giudizio, dato riga per riga:
+    # tenerlo dentro il database e non mostrarlo era buttarlo via.
+    consigliato_badge = (f'<p class="ev-scelto">{STAR_SVG} Consigliato da DAOP</p>'
+                         if si(e.get('consigliato')) else '')
     firma = firma_daop(rec, oggi)
     altri = blocco_vicini(rec, vicini, oggi) if vicini else ''
 
@@ -1264,7 +1372,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
     <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(trunc(nome, 60))}</span>
   </div>
   <header class="ev-head">
-    <h1>{esc(nome)}</h1>
+    {consigliato_badge}<h1>{esc(nome)}</h1>
     <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>
   </header>
   {avviso}
@@ -1694,7 +1802,8 @@ def main():
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()
-            if k not in CAMPI_DAOP or (v or '').strip()} for e in events]
+            if k not in CAMPI_DAOP and k not in CAMPI_EXTRA
+            or (v or '').strip()} for e in events]
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=1)
     update_sitemap(slugs)
