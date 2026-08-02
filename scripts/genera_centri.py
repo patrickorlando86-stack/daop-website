@@ -193,6 +193,10 @@ def leggi_centri(tab, chiave):
     out.sort(key=lambda c: (c['d_start'] or datetime.date.max, c['nome']))
     coda = f", {scartati} di altra stagione" if scartati else ""
     print(f"[genera_centri] tab '{tab}': {len(out)} centri per '{chiave}'{coda}")
+    senza = sum(1 for c in out if c['loc'].strip() and not locandina(c))
+    if senza:
+        print(f"[genera_centri] ATTENZIONE: {senza} locandine indicate nel foglio "
+              f"non esistono in assets/eventi/, le schede escono senza immagine")
     return out
 
 
@@ -298,6 +302,21 @@ def guida(cfg):
 """
 
 
+def locandina(c):
+    """Percorso della locandina, ma solo se il file c'e' davvero.
+
+    La colonna Locandina dei centri contiene nomi di immagini che nel repo non
+    esistono: sono riferimenti a file mai importati. Emetterli comunque
+    riempirebbe la pagina di immagini rotte. Le locandine degli eventi invece
+    ci sono tutte, quindi il controllo non toglie niente a loro."""
+    p = G.loc_path(c['loc'])
+    if not p:
+        return ''
+    if p.startswith(('http://', 'https://')):
+        return p
+    return p if os.path.exists(os.path.join(ROOT, p.lstrip('/'))) else ''
+
+
 def periodo_testo(c):
     """'dal 15 giugno al 31 luglio' dalle due colonne di data."""
     di, df = c['d_start'], c['d_end']
@@ -346,7 +365,7 @@ def card(c):
     badge = ('<span class="ce-badge">Consigliato DAOP</span>'
              if c['consigliato'].strip().lower() in ('si', 'sì', 'x', 'true') else '')
 
-    img = G.loc_path(c['loc'])
+    img = locandina(c)
     figura = (f'<img class="ce-img" src="{G.esc(img)}" alt="Locandina di '
               f'{G.esc(c["nome"])}" loading="lazy">') if img else ''
 
