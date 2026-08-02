@@ -44,7 +44,7 @@ SITEMAP_PATH = G.SITEMAP_PATH
 STAGIONI = {
     'estivi': {
         'file': 'centri-estivi.html',
-        'tab': 'Centri estivi',
+        'tab': 'Centri Est/Inv',
         'h1': 'Centri Estivi',
         'titolo': 'Centri Estivi in Provincia di Alessandria e Asti | DAOP',
         'descr': ('Centri estivi per bambini in provincia di Alessandria e Asti: '
@@ -56,7 +56,7 @@ STAGIONI = {
     },
     'invernali': {
         'file': 'centri-invernali.html',
-        'tab': 'Centri invernali',
+        'tab': 'Centri Est/Inv',
         'h1': 'Centri Invernali',
         'titolo': 'Centri Invernali e Vacanze di Natale ad Alessandria e Asti | DAOP',
         'descr': ('Centri invernali e attività per bambini durante le vacanze di Natale '
@@ -84,6 +84,10 @@ COLONNE = {
     'gestore': ('gestore', 'ente', 'organizzatore', 'associazione'),
     'contatti': ('contatti', 'contatto', 'telefono', 'email', 'recapiti'),
     'sito': ('sito', 'sito web', 'link', 'url', 'iscrizioni'),
+    # La tab "Centri Est/Inv" tiene estivi e invernali insieme: se esiste una
+    # colonna che li distingue la usiamo per filtrare, altrimenti prendiamo
+    # tutto (oggi le righe sono tutte estive).
+    'stagione': ('stagione', 'tipo', 'tipologia', 'est/inv'),
 }
 
 
@@ -98,11 +102,14 @@ def _mappa(header):
     return out
 
 
-def leggi_centri(tab):
-    """Righe della tab indicata. Lista vuota se il foglio non e' raggiungibile
-    o la tab non esiste: la pagina si genera comunque, fuori stagione."""
+def leggi_centri(tab, chiave):
+    """Righe della tab indicata, filtrate per stagione. Lista vuota se il foglio
+    non e' raggiungibile o la tab non esiste: la pagina si genera comunque,
+    fuori stagione."""
+    # safe='' e' obbligatorio: la tab si chiama "Centri Est/Inv" e con la quote
+    # di default lo slash resterebbe tale, spezzando il parametro sheet.
     url = (f"https://docs.google.com/spreadsheets/d/{G.SHEET_ID}/gviz/tq"
-           f"?tqx=out:csv&sheet={urllib.parse.quote(tab)}"
+           f"?tqx=out:csv&sheet={urllib.parse.quote(tab, safe='')}"
            f"&_cb={int(datetime.datetime.now().timestamp())}")
     try:
         req = urllib.request.Request(url, headers={
@@ -124,7 +131,29 @@ def leggi_centri(tab):
         print(f"[genera_centri] tab '{tab}': nessuna colonna 'Nome' riconosciuta")
         return []
     idx = _mappa(righe[hi])
-    out = []
+    # Il foglio si compila a mano e io non posso leggerlo in fase di sviluppo:
+    # dire quali colonne sono state riconosciute e quali ignorate e' l'unico
+    # modo per accorgersi da subito di un'intestazione fuori elenco.
+    ignorate = [h.strip() for i, h in enumerate(righe[hi])
+                if h.strip() and i not in idx.values()]
+    print(f"[genera_centri] colonne riconosciute: {', '.join(sorted(idx))}")
+    if ignorate:
+        print(f"[genera_centri] colonne ignorate (aggiungere un alias in COLONNE "
+              f"se servono): {', '.join(ignorate)}")
+    for campo in ('citta', 'eta', 'periodo', 'descr'):
+        if campo not in idx:
+            print(f"[genera_centri] nota: manca la colonna '{campo}', le schede "
+                  f"usciranno senza quel dato")
+
+    # Estivi e invernali stanno nella stessa tab: se una colonna li distingue
+    # filtriamo, altrimenti prendiamo tutto e lo diciamo.
+    parola = 'invern' if chiave == 'invernali' else 'estiv'
+    filtra = 'stagione' in idx
+    if not filtra:
+        print(f"[genera_centri] nessuna colonna stagione: prendo tutte le righe "
+              f"per '{chiave}'")
+
+    out, scartati = [], 0
     for r in righe[hi + 1:]:
         def val(campo):
             i = idx.get(campo)
@@ -134,8 +163,12 @@ def leggi_centri(tab):
         prov = val('prov').upper()
         if prov and prov not in ('AL', 'AT'):
             continue
+        if filtra and parola not in val('stagione').lower():
+            scartati += 1
+            continue
         out.append({c: val(c) for c in COLONNE})
-    print(f"[genera_centri] tab '{tab}': {len(out)} centri letti")
+    coda = f", {scartati} di altra stagione" if scartati else ""
+    print(f"[genera_centri] tab '{tab}': {len(out)} centri per '{chiave}'{coda}")
     return out
 
 
@@ -249,7 +282,12 @@ def card(c):
     azione = (f'<a class="ce-go" href="{G.esc(link)}" target="_blank" rel="noopener">'
               f'Informazioni e iscrizioni</a>') if link else (
               f'<p class="ce-contatti">{G.esc(c["contatti"])}</p>' if c['contatti'] else '')
-    titolo = c['nome'] + (f" — {c['gestore']}" if c['gestore'] else '')
+    # Nel foglio il gestore e' spesso gia' dentro il nome ("ARCEAM - Centro
+    # Estivo Novi Ligure"): ripeterlo darebbe "... — ARCEAM".
+    gestore = c['gestore'].strip()
+    titolo = c['nome']
+    if gestore and gestore.lower() not in c['nome'].lower():
+        titolo = f"{titolo} — {gestore}"
     return (f'<li class="ce-card">\n  <h3>{G.esc(titolo)}</h3>\n'
             f'  <p class="ce-meta">{" · ".join(meta)}</p>\n'
             f'  <p>{G.esc(c["descr"])}</p>\n  {azione}\n</li>')
@@ -400,7 +438,7 @@ def main(argv):
     for chiave in chiavi:
         cfg = STAGIONI[chiave]
         tab = os.environ.get(f"CENTRI_TAB_{chiave.upper()}", cfg['tab'])
-        centri = leggi_centri(tab)
+        centri = leggi_centri(tab, chiave)
         path = os.path.join(ROOT, cfg['file'])
         nuovo = render(chiave, cfg, centri, css, nav, foot)
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
