@@ -900,7 +900,7 @@ def render_pagina(rec, nav, foot, oggi):
   </nav>
   <header class="ev-head">
     <h1>{esc(nome)}</h1>
-    <p class="ev-when">{esc(periodo_esteso(e))}{esc(' · ' + citta if citta else '')}</p>
+    <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>
   </header>
   {avviso}
   <ul class="ev-facts">
