@@ -16,6 +16,10 @@
   "indirizzo": "Rifugio Escursionistico Piani di San Lorenzo, Frazione Pallavicino - Cantalupo Ligure (AL)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.718152",
+  "lon": "9.044958",
   "anchor": "ev-2026-08-02-25-anni-di-avventure-in-cammino-rifugio-escursioni"
  },
  {
@@ -35,6 +39,11 @@
   "indirizzo": "Castello dei Paleologi - Acqui Terme (AL)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6740198",
+  "lon": "8.4726563",
   "anchor": "ev-2026-08-02-castelli-aperti-2026-castello-dei-paleologi"
  },
  {
@@ -54,6 +63,11 @@
   "indirizzo": "Castello di Monastero Bormida - Monastero Bormida (AT)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "contatto": "Loretta 3333191536",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6476",
+  "lon": "8.3244",
   "anchor": "ev-2026-08-02-castello-di-monastero-bormida-castelli-aperti"
  },
  {
@@ -73,6 +87,10 @@
   "indirizzo": "Piazza Dellepiane - Novi Ligure (AL)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7591756",
+  "lon": "8.7858567",
   "anchor": "ev-2026-08-02-cinemasferico-planetario-mobile-360"
  },
  {
@@ -92,6 +110,10 @@
   "indirizzo": "Chiesa di San Martino - Asti (AT)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8983111",
+  "lon": "8.2005577",
   "anchor": "ev-2026-08-02-concerto-del-coro-dei-ragazzi-di-san-martino-di-bi"
  },
  {
@@ -111,6 +133,10 @@
   "indirizzo": "Corte di Palazzo Dellepiane - Novi Ligure (AL)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.76085",
+  "lon": "8.789551",
   "anchor": "ev-2026-08-02-crocevia-festival-estivo"
  },
  {
@@ -130,6 +156,10 @@
   "indirizzo": "Motta di Costigliole d'Asti - Costigliole d'Asti (AT)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8086376",
+  "lon": "8.1465473",
   "anchor": "ev-2026-08-02-gianmarco-bagutti-orchestra-italiana-79-sagra-del"
  },
  {
@@ -149,6 +179,10 @@
   "indirizzo": "Via Roma 1 - Pasturana (AL)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7500018",
+  "lon": "8.7457524",
   "anchor": "ev-2026-08-02-il-robot-selvaggio-visioni-stellate"
  },
  {
@@ -168,6 +202,10 @@
   "indirizzo": "Viale alberato di Baluardo Palestro - San Damiano d'Asti (AT)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-02-mostra-mercato-piccoli-animali-citta-di-san-damian"
  },
  {
@@ -187,6 +225,10 @@
   "indirizzo": "Piazza Libertà - Sezzadio (AL)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7855524",
+  "lon": "8.5721321",
   "anchor": "ev-2026-08-02-musica-sotto-le-stelle-pro-loco-sezzadio"
  },
  {
@@ -206,6 +248,11 @@
   "indirizzo": "Piazza del paese - Roatto (AT)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "contatto": "339 6105620 - 338 7662329",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9516416",
+  "lon": "8.0269895",
   "anchor": "ev-2026-08-02-rock-n-roatto-hillside-power-trio-con-giuseppe-sca"
  },
  {
@@ -225,6 +272,10 @@
   "indirizzo": "Ferrere - Ferrere (AT)",
   "d_start": "2026-08-02",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.875446",
+  "lon": "7.994732",
   "anchor": "ev-2026-08-02-spettacolo-teatrale-monk-e-pannonica-storia-jazz-d"
  },
  {
@@ -244,6 +295,11 @@
   "indirizzo": "Viale dei Campionissimi - Novi Ligure (AL)",
   "d_start": "2026-01-01",
   "d_end": "2026-08-31",
+  "contatto": "0143 772266 - museodeicampionissimi@comune.noviligure.al.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7554907",
+  "lon": "8.7758364",
   "anchor": "ev-2026-01-01-mostra-delle-illusioni-museo-dei-campionissimi"
  },
  {
@@ -263,6 +319,10 @@
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-07-06",
   "d_end": "2026-08-03",
+  "contatto": "3457097018",
+  "consigliato": "No",
+  "lat": "44.8975",
+  "lon": "8.8644",
   "anchor": "ev-2026-07-06-alla-ri-scoperta-delle-favole-disney"
  },
  {
@@ -282,6 +342,9 @@
   "indirizzo": "Corte del Castello - Pozzolo Formigaro (AL)",
   "d_start": "2026-07-13",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "lat": "44.7929799",
+  "lon": "8.783417",
   "anchor": "ev-2026-07-13-vivi-pozzolo-estate-nella-corte-del-castello"
  },
  {
@@ -301,6 +364,10 @@
   "indirizzo": "Pratolungo (AL)",
   "d_start": "2026-07-27",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6713016",
+  "lon": "8.8694756",
   "anchor": "ev-2026-07-27-festa-patronale-n-s-della-neve"
  },
  {
@@ -320,6 +387,10 @@
   "indirizzo": "Piazza Dellepiane - Novi Ligure (AL)",
   "d_start": "2026-07-27",
   "d_end": "2026-08-05",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7591756",
+  "lon": "8.7858567",
   "anchor": "ev-2026-07-27-fiera-di-agosto-2026"
  },
  {
@@ -339,6 +410,11 @@
   "indirizzo": "Campi Cerrina - Fubine Monferrato (AL)",
   "d_start": "2026-07-29",
   "d_end": "2026-08-02",
+  "contatto": "340 7343733 / 329 0568249",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9665378",
+  "lon": "8.4269607",
   "anchor": "ev-2026-07-29-festa-patronale-di-fubine-monferrato-2026"
  },
  {
@@ -358,6 +434,11 @@
   "indirizzo": "Palazzo Chiabrera - Acqui Terme (AL)",
   "d_start": "2026-07-30",
   "d_end": "2026-08-04",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-07-30-mostra-personale-di-luca-giacobbe-luca-espone"
  },
  {
@@ -377,6 +458,10 @@
   "indirizzo": "Montiglio Monferrato (AT)",
   "d_start": "2026-07-31",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "45.0644167",
+  "lon": "8.0988906",
   "anchor": "ev-2026-07-31-40a-rassegna-gastronomica-sagra-del-guanciotto-d-a"
  },
  {
@@ -396,6 +481,10 @@
   "indirizzo": "Piazza del paese - Rivalta Bormida (AL)",
   "d_start": "2026-07-31",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7113749",
+  "lon": "8.5500679",
   "anchor": "ev-2026-07-31-6-fiera-regionale-dello-zucchino-de-co"
  },
  {
@@ -415,6 +504,10 @@
   "indirizzo": "Piazza P. Ercole - Felizzano (AL)",
   "d_start": "2026-07-31",
   "d_end": "2026-08-04",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8978669",
+  "lon": "8.4355874",
   "anchor": "ev-2026-07-31-festa-patronale-felizzano-2026"
  },
  {
@@ -434,6 +527,10 @@
   "indirizzo": "Piazza dottori Carlo e Luigi Balbo - Madonnina di Serralunga di Crea (AL)",
   "d_start": "2026-07-31",
   "d_end": "2026-08-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "45.1023482",
+  "lon": "8.3083294",
   "anchor": "ev-2026-07-31-festa-a-madonnina"
  },
  {
@@ -453,6 +550,10 @@
   "indirizzo": "Loc. Colombara - Cassinelle (AL)",
   "d_start": "2026-07-31",
   "d_end": "2026-08-03",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.601544",
+  "lon": "8.563449",
   "anchor": "ev-2026-07-31-fiera-nuova-bue-grasso-2026"
  },
  {
@@ -472,6 +573,10 @@
   "indirizzo": "Parco del Castello Comunale, Piazza Vittoria n.3 - Tigliole (AT)",
   "d_start": "2026-07-31",
   "d_end": "2026-08-03",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.886952",
+  "lon": "8.0753546",
   "anchor": "ev-2026-07-31-tigliole-in-festa-2026"
  },
  {
@@ -491,6 +596,11 @@
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-08-03",
   "d_end": "2026-08-03",
+  "contatto": "3457097018",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.89666",
+  "lon": "8.8641282",
   "anchor": "ev-2026-08-03-alla-ri-scoperta-delle-favole-disney-rapunzel-il-g"
  },
  {
@@ -510,6 +620,10 @@
   "indirizzo": "Piazza Carenzi - Novi Ligure (AL)",
   "d_start": "2026-08-03",
   "d_end": "2026-08-03",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7595335",
+  "lon": "8.7873891",
   "anchor": "ev-2026-08-03-gran-concerto-della-madonna-della-neve-corpo-music"
  },
  {
@@ -529,6 +643,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-03",
   "d_end": "2026-08-03",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-03-selvatici-e-verdi-laboratorio-espressivo"
  },
  {
@@ -548,6 +667,10 @@
   "indirizzo": "Corte del Palazzo Comunale - Alessandria (AL)",
   "d_start": "2026-08-04",
   "d_end": "2026-08-04",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9129853",
+  "lon": "8.6154564",
   "anchor": "ev-2026-08-04-il-diavolo-veste-prada-2"
  },
  {
@@ -567,6 +690,11 @@
   "indirizzo": "Piazza del paese - Roatto (AT)",
   "d_start": "2026-08-04",
   "d_end": "2026-08-04",
+  "contatto": "339 6105620 - 338 7662329",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9516416",
+  "lon": "8.0269895",
   "anchor": "ev-2026-08-04-orchestra-spettacolo-francesca-mazzuccato-pro-loco"
  },
  {
@@ -586,6 +714,10 @@
   "indirizzo": "Piazzetta Solferino - San Sebastiano Curone (AL)",
   "d_start": "2026-08-05",
   "d_end": "2026-08-05",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7858161",
+  "lon": "9.0646537",
   "anchor": "ev-2026-08-05-cinema-in-piazzetta-coco-pro-loco-sanse"
  },
  {
@@ -605,6 +737,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-05",
   "d_end": "2026-08-05",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-05-frida-un-giardino-di-sogni-performance-teatrale-e"
  },
  {
@@ -624,6 +761,11 @@
   "indirizzo": "Piazza del paese - Roatto (AT)",
   "d_start": "2026-08-05",
   "d_end": "2026-08-05",
+  "contatto": "339 6105620 - 338 7662329",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9516416",
+  "lon": "8.0269895",
   "anchor": "ev-2026-08-05-gran-grigliata-con-intrattenimento-musicale-pro-lo"
  },
  {
@@ -643,6 +785,10 @@
   "indirizzo": "Corte del Palazzo Comunale - Alessandria (AL)",
   "d_start": "2026-08-05",
   "d_end": "2026-08-05",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9129853",
+  "lon": "8.6154564",
   "anchor": "ev-2026-08-05-zootropolis-2"
  },
  {
@@ -662,6 +808,11 @@
   "indirizzo": "Impianti Sportivi, Pista Atletica Scuole Medie - San Damiano d'Asti (AT)",
   "d_start": "2026-08-06",
   "d_end": "2026-08-06",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-06-atletica"
  },
  {
@@ -681,6 +832,11 @@
   "indirizzo": "Castello di Casale Monferrato - Casale Monferrato (AL)",
   "d_start": "2026-08-06",
   "d_end": "2026-08-06",
+  "contatto": "bibliolu@comune.casalemonferrato.al.it / Tel 0142-444302-444308",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "45.1374482",
+  "lon": "8.4462455",
   "anchor": "ev-2026-08-06-evviva-l-estate-con-i-laboratori-creativi-bibliote"
  },
  {
@@ -700,6 +856,11 @@
   "indirizzo": "Chiostro S. Francesco - Acqui Terme (AL)",
   "d_start": "2026-08-06",
   "d_end": "2026-08-07",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-06-jam-fest-centro-giovanile-yepp"
  },
  {
@@ -719,6 +880,11 @@
   "indirizzo": "Corso Alessandria, 39 - 15057 Tortona (AL)",
   "d_start": "2026-08-06",
   "d_end": "2026-08-06",
+  "contatto": "345.70.97.018",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8975",
+  "lon": "8.8644",
   "anchor": "ev-2026-08-06-la-citta-che-vorrei-gli-esplorattori"
  },
  {
@@ -738,6 +904,11 @@
   "indirizzo": "Centro Sportivo Località Fonte Sulfurea - Voltaggio (AL)",
   "d_start": "2026-08-06",
   "d_end": "2026-08-06",
+  "contatto": "333 759 6970",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6203576",
+  "lon": "8.8426697",
   "anchor": "ev-2026-08-06-splash-party-pro-loco-voltaggio-pazzoanimazione"
  },
  {
@@ -757,6 +928,10 @@
   "indirizzo": "Centro Sportivo della Merella - Novi Ligure (AL)",
   "d_start": "2026-08-07",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.76085",
+  "lon": "8.789551",
   "anchor": "ev-2026-08-07-1-festa-della-pizza-margherita"
  },
  {
@@ -776,6 +951,11 @@
   "indirizzo": "Via Villalvernia, 114 - Novi Ligure (AL)",
   "d_start": "2026-08-07",
   "d_end": "2026-08-09",
+  "contatto": "Marco 3332867221 - Carmen 3393109322",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.76085",
+  "lon": "8.789551",
   "anchor": "ev-2026-08-07-1-festa-della-pizza-margherita-2"
  },
  {
@@ -795,6 +975,10 @@
   "indirizzo": "Piazza Castello, 1 - Monastero Bormida (AT)",
   "d_start": "2026-08-07",
   "d_end": "2026-08-07",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.648543",
+  "lon": "8.326643",
   "anchor": "ev-2026-08-07-cinema-sotto-le-stelle-monastero-bormida"
  },
  {
@@ -814,6 +998,10 @@
   "indirizzo": "Via Maiocco 5 - Scurzolengo (AT)",
   "d_start": "2026-08-07",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9657993",
+  "lon": "8.2784987",
   "anchor": "ev-2026-08-07-san-lorenzo-2026-pro-loco-di-scurzolengo"
  },
  {
@@ -833,6 +1021,11 @@
   "indirizzo": "Centro Città - Acqui Terme (AL)",
   "d_start": "2026-08-07",
   "d_end": "2026-08-07",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-07-ti-racconto-acqui-storytelling-tours"
  },
  {
@@ -852,6 +1045,10 @@
   "indirizzo": "Fraz. Mazzarelli, Chiesetta di San Lorenzo - Mornese (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6191651",
+  "lon": "8.7625574",
   "anchor": "ev-2026-08-08-3-cena-sotto-le-stelle"
  },
  {
@@ -871,6 +1068,10 @@
   "indirizzo": "Fraz. Mazzarelli, Chiesetta di San Lorenzo - Mornese (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6191651",
+  "lon": "8.7625574",
   "anchor": "ev-2026-08-08-3a-cena-sotto-le-stelle"
  },
  {
@@ -890,6 +1091,11 @@
   "indirizzo": "Piazza Levi - Acqui Terme (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-09",
+  "contatto": "0144 321783 - enoteca@termeevino.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-08-acqui-wine-days"
  },
  {
@@ -909,6 +1115,11 @@
   "indirizzo": "Piazza Levi - Acqui Terme (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-10",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-08-acqui-wine-days-2"
  },
  {
@@ -928,6 +1139,10 @@
   "indirizzo": "Albera Ligure - fraz. Vendérsi (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-08",
+  "contatto": "sarvegofestival@gmail.com",
+  "consigliato": "No",
+  "lat": "44.702351",
+  "lon": "9.066158",
   "anchor": "ev-2026-08-08-la-famiglia-allocchi-camelozampa-sarvego-festival"
  },
  {
@@ -947,6 +1162,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-08",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-08-mercatino-di-produttori-e-artigiani-locali-pro-loc"
  },
  {
@@ -966,6 +1186,11 @@
   "indirizzo": "Palazzo Chiabrera - Acqui Terme (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-23",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-08-mostra-collettiva-giudice-de-angelis"
  },
  {
@@ -985,6 +1210,11 @@
   "indirizzo": "Palazzo Robellini - Acqui Terme (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-23",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-08-mostra-personale-di-pierangelo-bertolo-pittura-e-s"
  },
  {
@@ -1004,6 +1234,10 @@
   "indirizzo": "Serravalle Designer Outlet - Serravalle Scrivia (AL)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-08",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7350776",
+  "lon": "8.8372996",
   "anchor": "ev-2026-08-08-play-land-kids-summer-events-2026-ass-la-bellaria"
  },
  {
@@ -1023,6 +1257,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-08",
   "d_end": "2026-08-08",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-08-serata-country-con-silvacountry-boys-pro-loco-cigl"
  },
  {
@@ -1042,6 +1281,10 @@
   "indirizzo": "Piazza Terracini - Cartosio (AL)",
   "d_start": "2026-08-09",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.5918425",
+  "lon": "8.4201313",
   "anchor": "ev-2026-08-09-cinema-sotto-le-stelle-cartosio"
  },
  {
@@ -1061,6 +1304,10 @@
   "indirizzo": "Vicoli di Caldirola - Caldirola (AL)",
   "d_start": "2026-08-09",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7281939",
+  "lon": "9.1503825",
   "anchor": "ev-2026-08-09-festa-del-bro-d-carvo-pro-loco-caldirola"
  },
  {
@@ -1080,6 +1327,10 @@
   "indirizzo": "Teatro SOMS - Casalnoceto (AL)",
   "d_start": "2026-08-09",
   "d_end": "2026-08-09",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-08-09-torneo-di-burraco"
  },
  {
@@ -1099,6 +1350,10 @@
   "indirizzo": "Piazza San Lorenzo e Piazza G. Marconi - Castelletto d'Orba (AL)",
   "d_start": "2026-08-10",
   "d_end": "2026-08-10",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6820897",
+  "lon": "8.7111163",
   "anchor": "ev-2026-08-10-festa-patronale-di-san-lorenzo-comune-di-castellet"
  },
  {
@@ -1118,6 +1373,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-10",
   "d_end": "2026-08-10",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-10-il-bastone-della-parola-laboratorio-espressivo"
  },
  {
@@ -1137,6 +1397,11 @@
   "indirizzo": "Bosco dei Narcisi - Roccaforte Ligure (AL)",
   "d_start": "2026-08-11",
   "d_end": "2026-08-11",
+  "contatto": "347.4102961 / 349.1958233",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6774862",
+  "lon": "9.0286948",
   "anchor": "ev-2026-08-11-fiera-di-s-fermo-pro-loco-roccaforte"
  },
  {
@@ -1156,6 +1421,10 @@
   "indirizzo": "Giardini viale della Repubblica - Alessandria (AL)",
   "d_start": "2026-08-11",
   "d_end": "2026-08-11",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9090191",
+  "lon": "8.6106815",
   "anchor": "ev-2026-08-11-l-illusione-perfetta-now-you-see-me"
  },
  {
@@ -1175,6 +1444,10 @@
   "indirizzo": "Piazzetta Solferino - San Sebastiano Curone (AL)",
   "d_start": "2026-08-12",
   "d_end": "2026-08-12",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.7858161",
+  "lon": "9.0646537",
   "anchor": "ev-2026-08-12-cinema-in-piazzetta-moulin-rouge-pro-loco-sanse"
  },
  {
@@ -1194,6 +1467,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-12",
   "d_end": "2026-08-12",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-12-giochiamo-insieme"
  },
  {
@@ -1213,6 +1491,10 @@
   "indirizzo": "Strada Piccagallo n. 19 - Castelnuovo Scrivia (AL)",
   "d_start": "2026-08-12",
   "d_end": "2026-08-12",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9808509",
+  "lon": "8.8811063",
   "anchor": "ev-2026-08-12-le-piccole-letture-notturne-soulfarm-elilu"
  },
  {
@@ -1232,6 +1514,10 @@
   "indirizzo": "Giardini viale della Repubblica - Alessandria (AL)",
   "d_start": "2026-08-12",
   "d_end": "2026-08-12",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9090191",
+  "lon": "8.6106815",
   "anchor": "ev-2026-08-12-michael"
  },
  {
@@ -1251,6 +1537,10 @@
   "indirizzo": "Santuario della Fagliata - Casalnoceto (AL)",
   "d_start": "2026-08-12",
   "d_end": "2026-08-12",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-08-12-serata-astronomica"
  },
  {
@@ -1270,6 +1560,10 @@
   "indirizzo": "Ballo a Palchetto Molino - Celle Enomondo (AT)",
   "d_start": "2026-08-13",
   "d_end": "2026-08-17",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8573468",
+  "lon": "8.1223923",
   "anchor": "ev-2026-08-13-festa-di-san-rocco-celle-enomondo-2026"
  },
  {
@@ -1289,6 +1583,11 @@
   "indirizzo": "Via Govone 9 - San Damiano d'Asti (AT)",
   "d_start": "2026-08-13",
   "d_end": "2026-08-13",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-13-ocr-power-camp"
  },
  {
@@ -1308,6 +1607,10 @@
   "indirizzo": "Via Galvani - Alessandria (AL)",
   "d_start": "2026-08-13",
   "d_end": "2026-08-13",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9016766",
+  "lon": "8.6188359",
   "anchor": "ev-2026-08-13-sentimental-value"
  },
  {
@@ -1327,6 +1630,11 @@
   "indirizzo": "Centro Sportivo Località Fonte Sulfurea - Voltaggio (AL)",
   "d_start": "2026-08-13",
   "d_end": "2026-08-13",
+  "contatto": "333 759 6970",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6203576",
+  "lon": "8.8426697",
   "anchor": "ev-2026-08-13-splash-party-il-ritorno-pro-loco-voltaggio-pazzoan"
  },
  {
@@ -1346,6 +1654,10 @@
   "indirizzo": "Piazzetta Ambrogio Spinola - Casalnoceto (AL)",
   "d_start": "2026-08-14",
   "d_end": "2026-08-14",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9126947",
+  "lon": "8.9839496",
   "anchor": "ev-2026-08-14-cantando-il-cinema"
  },
  {
@@ -1365,6 +1677,11 @@
   "indirizzo": "Pianlago - Ponzone (AL)",
   "d_start": "2026-08-14",
   "d_end": "2026-08-16",
+  "contatto": "3494454675 - Pianlagando@gmail.com",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.5704509",
+  "lon": "8.4571589",
   "anchor": "ev-2026-08-14-festa-sull-aia-pianlago"
  },
  {
@@ -1384,6 +1701,10 @@
   "indirizzo": "Edificio Scolastico - Casalnoceto (AL)",
   "d_start": "2026-08-14",
   "d_end": "2026-08-16",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-08-14-la-radio-e-la-macchina-da-scrivere-nella-storia"
  },
  {
@@ -1403,6 +1724,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-14",
   "d_end": "2026-08-14",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-14-musical-chiudo-gli-occhi-e-penso-a-te-pro-loco-cig"
  },
  {
@@ -1422,6 +1748,10 @@
   "indirizzo": "Piazza Pro Loco - Casalnoceto (AL)",
   "d_start": "2026-08-15",
   "d_end": "2026-08-15",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-08-15-cena-in-piazza-musica-con-nico-e-franz"
  },
  {
@@ -1441,6 +1771,11 @@
   "indirizzo": "Centro Città - Acqui Terme (AL)",
   "d_start": "2026-08-15",
   "d_end": "2026-08-15",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-15-saturday-open-ferragosto-in-citta"
  },
  {
@@ -1460,6 +1795,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-15",
   "d_end": "2026-08-15",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-15-serata-discorevival-anni-80-summer-nights-dancing"
  },
  {
@@ -1479,6 +1819,11 @@
   "indirizzo": "Castello dei Paleologi - Acqui Terme (AL)",
   "d_start": "2026-08-16",
   "d_end": "2026-08-16",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6740198",
+  "lon": "8.4726563",
   "anchor": "ev-2026-08-16-castelli-aperti-2026-castello-dei-paleologi"
  },
  {
@@ -1498,6 +1843,11 @@
   "indirizzo": "Castello di Monastero Bormida - Monastero Bormida (AT)",
   "d_start": "2026-08-16",
   "d_end": "2026-08-16",
+  "contatto": "Loretta 3333191536",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6476",
+  "lon": "8.3244",
   "anchor": "ev-2026-08-16-castello-di-monastero-bormida-castelli-aperti"
  },
  {
@@ -1517,6 +1867,10 @@
   "indirizzo": "Casalnoceto (AL)",
   "d_start": "2026-08-16",
   "d_end": "2026-08-16",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-08-16-cena-in-piazza-musica-tributo-ai-queen"
  },
  {
@@ -1536,6 +1890,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-16",
   "d_end": "2026-08-16",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-16-il-musichiere-quiz-musicale-pro-loco-ciglione"
  },
  {
@@ -1555,6 +1914,11 @@
   "indirizzo": "Corso Roma 44 - San Damiano d'Asti (AT)",
   "d_start": "2026-08-19",
   "d_end": "2026-08-19",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8292907",
+  "lon": "8.0617161",
   "anchor": "ev-2026-08-19-alla-scoperta-della-croce-rossa-piccoli-volontari"
  },
  {
@@ -1574,6 +1938,11 @@
   "indirizzo": "Centro Sportivo Località Fonte Sulfurea - Voltaggio (AL)",
   "d_start": "2026-08-20",
   "d_end": "2026-08-20",
+  "contatto": "333 759 6970",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6203576",
+  "lon": "8.8426697",
   "anchor": "ev-2026-08-20-bolle-giganti-edizione-agosto-pro-loco-voltaggio-p"
  },
  {
@@ -1593,6 +1962,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-20",
   "d_end": "2026-08-20",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-20-comitato-palio"
  },
  {
@@ -1612,6 +1986,11 @@
   "indirizzo": "Corso Alessandria, 39 - 15057 Tortona (AL)",
   "d_start": "2026-08-20",
   "d_end": "2026-08-20",
+  "contatto": "345.70.97.018",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8975",
+  "lon": "8.8644",
   "anchor": "ev-2026-08-20-le-regole-della-mia-citta-gli-esplorattori"
  },
  {
@@ -1631,6 +2010,10 @@
   "indirizzo": "Centro Sportivo della Merella - Novi Ligure (AL)",
   "d_start": "2026-08-20",
   "d_end": "2026-08-23",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.76085",
+  "lon": "8.789551",
   "anchor": "ev-2026-08-20-sagra-della-trippa"
  },
  {
@@ -1650,6 +2033,10 @@
   "indirizzo": "Piazza Campora - Alessandria (AL)",
   "d_start": "2026-08-21",
   "d_end": "2026-08-21",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.894081",
+  "lon": "8.5848671",
   "anchor": "ev-2026-08-21-jumpers"
  },
  {
@@ -1669,6 +2056,11 @@
   "indirizzo": "Laghetto del Furnas - Buttigliera d'Asti (AT)",
   "d_start": "2026-08-22",
   "d_end": "2026-08-23",
+  "contatto": "011 992 1905",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "45.0226378",
+  "lon": "7.9507994",
   "anchor": "ev-2026-08-22-agosto-letterario"
  },
  {
@@ -1688,6 +2080,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-22",
   "d_end": "2026-08-22",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-22-cabaret-con-marco-guarena-pro-loco-ciglione"
  },
  {
@@ -1707,6 +2104,10 @@
   "indirizzo": "Serravalle Designer Outlet - Serravalle Scrivia (AL)",
   "d_start": "2026-08-22",
   "d_end": "2026-08-22",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7350776",
+  "lon": "8.8372996",
   "anchor": "ev-2026-08-22-play-land-kids-summer-events-2026-ass-animatamente"
  },
  {
@@ -1726,6 +2127,10 @@
   "indirizzo": "Carrega Ligure - fraz. Magioncalda (AL)",
   "d_start": "2026-08-22",
   "d_end": "2026-08-22",
+  "contatto": "sarvegofestival@gmail.com",
+  "consigliato": "No",
+  "lat": "44.6190465",
+  "lon": "9.1756369",
   "anchor": "ev-2026-08-22-quello-che-non-vedo-barbagianni-editore-sarvego-fe"
  },
  {
@@ -1745,6 +2150,10 @@
   "indirizzo": "Piazza Campora - Alessandria (AL)",
   "d_start": "2026-08-22",
   "d_end": "2026-08-22",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.894081",
+  "lon": "8.5848671",
   "anchor": "ev-2026-08-22-un-bel-giorno"
  },
  {
@@ -1764,6 +2173,11 @@
   "indirizzo": "Piazza IV Novembre (Scuole Elementari) - Spigno Monferrato (AL)",
   "d_start": "2026-08-23",
   "d_end": "2026-08-23",
+  "contatto": "Gianpiero 329 079 47 20 / Angelo 349 192 31 00",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.5196665",
+  "lon": "8.3232175",
   "anchor": "ev-2026-08-23-5-raduno-di-auto-e-moto-storiche-i-calanchi-di-spi"
  },
  {
@@ -1783,6 +2197,11 @@
   "indirizzo": "Castello dei Paleologi - Acqui Terme (AL)",
   "d_start": "2026-08-23",
   "d_end": "2026-08-23",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6740198",
+  "lon": "8.4726563",
   "anchor": "ev-2026-08-23-castelli-aperti-2026-castello-dei-paleologi"
  },
  {
@@ -1802,6 +2221,11 @@
   "indirizzo": "Corso Bagni - Acqui Terme (AL)",
   "d_start": "2026-08-23",
   "d_end": "2026-08-23",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6698199",
+  "lon": "8.4687139",
   "anchor": "ev-2026-08-23-mercatino-degli-sgaiento"
  },
  {
@@ -1821,6 +2245,10 @@
   "indirizzo": "Via della Libertà - Spinetta Marengo, Alessandria (AL)",
   "d_start": "2026-08-24",
   "d_end": "2026-08-24",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9129853",
+  "lon": "8.6154564",
   "anchor": "ev-2026-08-24-2-cuori-2-capanne"
  },
  {
@@ -1840,6 +2268,10 @@
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-08-24",
   "d_end": "2026-08-31",
+  "contatto": "3457097018",
+  "consigliato": "No",
+  "lat": "44.8975",
+  "lon": "8.8644",
   "anchor": "ev-2026-08-24-alla-ri-scoperta-delle-favole-disney"
  },
  {
@@ -1859,6 +2291,11 @@
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-08-24",
   "d_end": "2026-08-24",
+  "contatto": "3457097018",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.89666",
+  "lon": "8.8641282",
   "anchor": "ev-2026-08-24-alla-ri-scoperta-delle-favole-disney-alice-nel-pae"
  },
  {
@@ -1878,6 +2315,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-24",
   "d_end": "2026-08-24",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-24-laboratorio-creativo-sulle-emozioni"
  },
  {
@@ -1897,6 +2339,10 @@
   "indirizzo": "Circolo ANSPI - Mongardino (AT)",
   "d_start": "2026-08-24",
   "d_end": "2026-08-31",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.8492328",
+  "lon": "8.2184747",
   "anchor": "ev-2026-08-24-mongardino-agosto-2026"
  },
  {
@@ -1916,6 +2362,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-24",
   "d_end": "2026-08-24",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-24-schegge-di-teatro-con-paolo-portesine-pro-loco-cig"
  },
  {
@@ -1935,6 +2386,10 @@
   "indirizzo": "Via della Libertà - Spinetta Marengo, Alessandria (AL)",
   "d_start": "2026-08-25",
   "d_end": "2026-08-25",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9129853",
+  "lon": "8.6154564",
   "anchor": "ev-2026-08-25-super-mario-galaxy"
  },
  {
@@ -1954,6 +2409,10 @@
   "indirizzo": "Piazza della Chiesa - Mongardino (AT)",
   "d_start": "2026-08-26",
   "d_end": "2026-08-26",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8492328",
+  "lon": "8.2184747",
   "anchor": "ev-2026-08-26-pigiama-party-pro-loco-mongardino"
  },
  {
@@ -1973,6 +2432,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-26",
   "d_end": "2026-08-26",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-26-un-circo-in-via-pero-laboratorio-teatrale-ed-espre"
  },
  {
@@ -1992,6 +2456,11 @@
   "indirizzo": "Corso Alessandria, 39 - 15057 Tortona (AL)",
   "d_start": "2026-08-27",
   "d_end": "2026-08-27",
+  "contatto": "345.70.97.018",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8975",
+  "lon": "8.8644",
   "anchor": "ev-2026-08-27-la-mostra-gli-esplorattori"
  },
  {
@@ -2011,6 +2480,11 @@
   "indirizzo": "Impianti Sportivi, Palestra Polivalente - San Damiano d'Asti (AT)",
   "d_start": "2026-08-27",
   "d_end": "2026-08-27",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-27-tamburello"
  },
  {
@@ -2030,6 +2504,10 @@
   "indirizzo": "Via della Chiesa - Valmadonna, Alessandria (AL)",
   "d_start": "2026-08-28",
   "d_end": "2026-08-28",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9709889",
+  "lon": "8.6136254",
   "anchor": "ev-2026-08-28-buen-camino"
  },
  {
@@ -2049,6 +2527,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-28",
   "d_end": "2026-08-28",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-28-cena-con-magia-con-alfred-the-magician-pro-loco-ci"
  },
  {
@@ -2068,6 +2551,10 @@
   "indirizzo": "Ferrere - Ferrere (AT)",
   "d_start": "2026-08-28",
   "d_end": "2026-08-30",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.875446",
+  "lon": "7.994732",
   "anchor": "ev-2026-08-28-festa-patronale-di-sant-agostino-pro-loco-ferrere"
  },
  {
@@ -2087,6 +2574,11 @@
   "indirizzo": "Valli Unite - Costa Vescovato (AL)",
   "d_start": "2026-08-28",
   "d_end": "2026-08-29",
+  "contatto": "0131/838100",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.8174212",
+  "lon": "8.9189391",
   "anchor": "ev-2026-08-28-festa-della-vendemmia-a-valli-unite"
  },
  {
@@ -2106,6 +2598,11 @@
   "indirizzo": "Palazzo Chiabrera - Acqui Terme (AL)",
   "d_start": "2026-08-29",
   "d_end": "2026-09-13",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-29-aurum-mostra-personale-di-ezio-e-marco-gaviglio"
  },
  {
@@ -2125,6 +2622,11 @@
   "indirizzo": "Piazza Don Piero Dolermo - Acqui Terme (AL)",
   "d_start": "2026-08-29",
   "d_end": "2026-08-29",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-29-acqui-prog-night-acqui-rock-festival"
  },
  {
@@ -2144,6 +2646,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-29",
   "d_end": "2026-08-29",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Da verificare",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-29-cabaret-con-massimo-pica-pro-loco-ciglione"
  },
  {
@@ -2163,6 +2670,11 @@
   "indirizzo": "Palazzo Robellini - Acqui Terme (AL)",
   "d_start": "2026-08-29",
   "d_end": "2026-10-11",
+  "contatto": "0144 322142",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.6743287",
+  "lon": "8.4684633",
   "anchor": "ev-2026-08-29-menu-alla-carta-carta-menu"
  },
  {
@@ -2182,6 +2694,10 @@
   "indirizzo": "Serravalle Designer Outlet - Serravalle Scrivia (AL)",
   "d_start": "2026-08-29",
   "d_end": "2026-08-29",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7350776",
+  "lon": "8.8372996",
   "anchor": "ev-2026-08-29-play-land-kids-summer-events-2026-ass-movimente"
  },
  {
@@ -2201,6 +2717,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-08-30",
   "d_end": "2026-08-30",
+  "contatto": "340 0578004 (Jonela) - 347 9102180 (Carlo)",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-08-30-festa-dell-uva-e-del-vino-pro-loco-ciglione"
  },
  {
@@ -2220,6 +2741,10 @@
   "indirizzo": "Corso Italia 8 - Villaromagnano (AL)",
   "d_start": "2026-08-30",
   "d_end": "2026-08-30",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.8454469",
+  "lon": "8.8952063",
   "anchor": "ev-2026-08-30-piru-e-il-cavaliere-di-mezzotacco-compagnia-walter"
  },
  {
@@ -2239,6 +2764,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-08-31",
   "d_end": "2026-08-31",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-08-31-laboratorio-creativo-sulle-emozioni"
  },
  {
@@ -2258,6 +2788,11 @@
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
   "d_start": "2026-08-31",
   "d_end": "2026-08-31",
+  "contatto": "3457097018",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.89666",
+  "lon": "8.8641282",
   "anchor": "ev-2026-08-31-serata-finale-cinema-e-pizza-disney-il-gabbiano"
  },
  {
@@ -2277,6 +2812,10 @@
   "indirizzo": "Casalnoceto (AL)",
   "d_start": "2026-09-01",
   "d_end": "2026-09-10",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-09-01-casalnoceto-kids"
  },
  {
@@ -2296,6 +2835,10 @@
   "indirizzo": "Novi Ligure (AL)",
   "d_start": "2026-09-01",
   "d_end": "2026-09-30",
+  "contatto": "351 7091495",
+  "consigliato": "No",
+  "lat": "44.7624091",
+  "lon": "8.777673",
   "anchor": "ev-2026-09-01-festa-dello-sport-evento-finale-plogging-smiling-b"
  },
  {
@@ -2315,6 +2858,10 @@
   "indirizzo": "Ferrere - Ferrere (AT)",
   "d_start": "2026-09-02",
   "d_end": "2026-09-02",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.875446",
+  "lon": "7.994732",
   "anchor": "ev-2026-09-02-tra-boschi-e-stelle-pro-loco-ferrere"
  },
  {
@@ -2334,6 +2881,11 @@
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
   "d_start": "2026-09-02",
   "d_end": "2026-09-02",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-09-02-un-circo-in-via-pero-laboratorio-teatrale-ed-espre"
  },
  {
@@ -2353,6 +2905,10 @@
   "indirizzo": "Casalnoceto (AL)",
   "d_start": "2026-09-03",
   "d_end": "2026-09-03",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-09-03-i-giovedi-in-biblioteca"
  },
  {
@@ -2372,6 +2928,11 @@
   "indirizzo": "Impianti Sportivi, Palestra Medie e Polivalente - San Damiano d'Asti (AT)",
   "d_start": "2026-09-03",
   "d_end": "2026-09-03",
+  "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-09-03-tennis-da-tavolo-e-basket"
  },
  {
@@ -2391,6 +2952,10 @@
   "indirizzo": "Centro Sportivo della Merella - Novi Ligure (AL)",
   "d_start": "2026-09-04",
   "d_end": "2026-09-06",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.76085",
+  "lon": "8.789551",
   "anchor": "ev-2026-09-04-sagra-dei-ceci"
  },
  {
@@ -2410,6 +2975,10 @@
   "indirizzo": "Cittadella di Alessandria - Alessandria (AL)",
   "d_start": "2026-09-05",
   "d_end": "2026-09-06",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9165",
+  "lon": "8.598",
   "anchor": "ev-2026-09-05-alecomics-festival-2026"
  },
  {
@@ -2429,6 +2998,10 @@
   "indirizzo": "Serravalle Designer Outlet - Serravalle Scrivia (AL)",
   "d_start": "2026-09-05",
   "d_end": "2026-09-05",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7350776",
+  "lon": "8.8372996",
   "anchor": "ev-2026-09-05-play-land-kids-summer-events-2026-ass-jim-pet"
  },
  {
@@ -2448,6 +3021,10 @@
   "indirizzo": "Viale alberato di Baluardo Palestro - San Damiano d'Asti (AT)",
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-09-06-mostra-mercato-piccoli-animali-citta-di-san-damian"
  },
  {
@@ -2467,6 +3044,10 @@
   "indirizzo": "Casalnoceto (AL)",
   "d_start": "2026-09-10",
   "d_end": "2026-09-10",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-09-10-i-giovedi-in-biblioteca"
  },
  {
@@ -2486,6 +3067,11 @@
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione (AT)",
   "d_start": "2026-09-11",
   "d_end": "2026-09-13",
+  "contatto": "3457558165 - 340472004",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.608366",
+  "lon": "8.4875824",
   "anchor": "ev-2026-09-11-7a-festa-del-fungo-pro-loco-ciglione"
  },
  {
@@ -2505,6 +3091,10 @@
   "indirizzo": "Via Campi - Alessandria (AL)",
   "d_start": "2026-09-12",
   "d_end": "2026-09-13",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9129853",
+  "lon": "8.6154564",
   "anchor": "ev-2026-09-12-festa-della-birra-street-food"
  },
  {
@@ -2524,6 +3114,10 @@
   "indirizzo": "Buttigliera d'Asti (AT)",
   "d_start": "2026-09-13",
   "d_end": "2026-09-13",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "45.0226378",
+  "lon": "7.9507994",
   "anchor": "ev-2026-09-13-pompieropoli-2026-buttigliera"
  },
  {
@@ -2543,6 +3137,10 @@
   "indirizzo": "Parco della Pieve - Viguzzolo (AL)",
   "d_start": "2026-09-14",
   "d_end": "2026-09-14",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.905507",
+  "lon": "8.9186164",
   "anchor": "ev-2026-09-14-il-passerotto-che-scopri-il-mondo-l-arca-di-noe-te"
  },
  {
@@ -2562,6 +3160,10 @@
   "indirizzo": "Casalnoceto (AL)",
   "d_start": "2026-09-17",
   "d_end": "2026-09-17",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-09-17-i-giovedi-in-biblioteca"
  },
  {
@@ -2581,6 +3183,10 @@
   "indirizzo": "Merella - Novi Ligure (AL)",
   "d_start": "2026-09-20",
   "d_end": "2026-09-20",
+  "contatto": "351 7091495",
+  "consigliato": "No",
+  "lat": "44.7910973",
+  "lon": "8.8295794",
   "anchor": "ev-2026-09-20-pedalata-ecologica-merella-plogging-smiling-biking"
  },
  {
@@ -2600,6 +3206,10 @@
   "indirizzo": "Casalnoceto (AL)",
   "d_start": "2026-09-24",
   "d_end": "2026-09-24",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.9131769",
+  "lon": "8.9811563",
   "anchor": "ev-2026-09-24-i-giovedi-in-biblioteca"
  },
  {
@@ -2619,6 +3229,10 @@
   "indirizzo": "Viale alberato di Baluardo Palestro - San Damiano d'Asti (AT)",
   "d_start": "2026-10-04",
   "d_end": "2026-10-04",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-10-04-mostra-mercato-piccoli-animali-citta-di-san-damian"
  },
  {
@@ -2638,6 +3252,10 @@
   "indirizzo": "Calosso (AT)",
   "d_start": "2026-10-16",
   "d_end": "2026-10-18",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.739837",
+  "lon": "8.2275011",
   "anchor": "ev-2026-10-16-sagra-del-rapule-calosso-2026-pro-loco-san-marzano"
  },
  {
@@ -2657,6 +3275,10 @@
   "indirizzo": "Via Girardengo 3 - Novi Ligure (AL)",
   "d_start": "2026-10-24",
   "d_end": "2026-10-24",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.76085",
+  "lon": "8.789551",
   "anchor": "ev-2026-10-24-i-musicanti-di-brema-teatrino-dell-erba-matta"
  },
  {
@@ -2676,6 +3298,10 @@
   "indirizzo": "Chiesa dei Battuti - San Marzano Oliveto (AT)",
   "d_start": "2026-10-31",
   "d_end": "2026-10-31",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.7540212",
+  "lon": "8.2957567",
   "anchor": "ev-2026-10-31-festa-di-halloween-per-i-bambini-pro-loco-san-marz"
  },
  {
@@ -2695,6 +3321,10 @@
   "indirizzo": "Viale alberato di Baluardo Palestro - San Damiano d'Asti (AT)",
   "d_start": "2026-11-01",
   "d_end": "2026-11-01",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-11-01-mostra-mercato-piccoli-animali-citta-di-san-damian"
  },
  {
@@ -2714,6 +3344,10 @@
   "indirizzo": "Viale alberato di Baluardo Palestro - San Damiano d'Asti (AT)",
   "d_start": "2026-12-06",
   "d_end": "2026-12-06",
+  "consigliato": "No",
+  "adatto_famiglie": "Si",
+  "lat": "44.833445",
+  "lon": "8.063534",
   "anchor": "ev-2026-12-06-mostra-mercato-piccoli-animali-citta-di-san-damian"
  }
 ]
