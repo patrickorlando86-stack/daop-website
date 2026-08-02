@@ -111,9 +111,15 @@ def _mappa(header):
 
 
 def leggi_centri(tab, chiave):
-    """Righe della tab indicata, filtrate per stagione. Lista vuota se il foglio
-    non e' raggiungibile o la tab non esiste: la pagina si genera comunque,
-    fuori stagione."""
+    """Righe della tab indicata, filtrate per stagione.
+
+    Distingue due esiti che prima si confondevano:
+      []   il foglio l'abbiamo letto e per questa stagione non c'e' niente
+           -> la pagina si rigenera fuori stagione, ed e' giusto cosi';
+      None il foglio non l'abbiamo letto (rete, tab sparita, intestazione
+           irriconoscibile) -> non sappiamo niente, e chi non sa niente non
+           riscrive una pagina piena. Bastava un timeout di Google durante la
+           run notturna per pubblicare la pagina svuotata."""
     # safe='' e' obbligatorio: la tab si chiama "Centri Est/Inv" e con la quote
     # di default lo slash resterebbe tale, spezzando il parametro sheet.
     url = (f"https://docs.google.com/spreadsheets/d/{G.SHEET_ID}/gviz/tq"
@@ -127,17 +133,18 @@ def leggi_centri(tab, chiave):
         with urllib.request.urlopen(req, timeout=30) as r:
             testo = r.read().decode("utf-8", "replace")
     except Exception as err:
-        print(f"[genera_centri] tab '{tab}' non leggibile ({err}): pagina fuori stagione")
-        return []
+        print(f"[genera_centri] tab '{tab}' non leggibile ({err})")
+        return None
 
     righe = [r for r in csv.reader(io.StringIO(testo)) if any(c.strip() for c in r)]
     if not righe:
-        return []
+        print(f"[genera_centri] tab '{tab}': risposta vuota")
+        return None
     # L'intestazione e' la prima riga che contiene qualcosa di riconoscibile.
     hi = next((i for i, r in enumerate(righe) if _mappa(r).get('nome') is not None), None)
     if hi is None:
         print(f"[genera_centri] tab '{tab}': nessuna colonna 'Nome' riconosciuta")
-        return []
+        return None
     idx = _mappa(righe[hi])
     # Il foglio si compila a mano e io non posso leggerlo in fase di sviluppo:
     # dire quali colonne sono state riconosciute e quali ignorate e' l'unico
@@ -515,6 +522,18 @@ def main(argv):
         tab = os.environ.get(f"CENTRI_TAB_{chiave.upper()}", cfg['tab'])
         centri = leggi_centri(tab, chiave)
         path = os.path.join(ROOT, cfg['file'])
+        if centri is None:
+            # Il foglio non l'abbiamo letto. Se la pagina c'e' gia', resta
+            # com'e': meglio un elenco vecchio di un giorno che una pagina
+            # svuotata e committata al posto di quella buona.
+            if os.path.exists(path):
+                print(f"[genera_centri] {cfg['file']}: foglio non letto, "
+                      f"lascio la pagina com'e'")
+                scritte.append(cfg['file'])
+                continue
+            print(f"[genera_centri] {cfg['file']}: foglio non letto e pagina "
+                  f"assente, la creo fuori stagione")
+            centri = []
         nuovo = render(chiave, cfg, centri, css, nav, foot)
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
             print(f"[genera_centri] {cfg['file']}: invariata")
