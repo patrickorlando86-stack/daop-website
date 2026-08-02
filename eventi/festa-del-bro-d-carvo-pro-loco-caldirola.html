@@ -239,7 +239,11 @@
     .ev-toolbar{gap:7px;padding:10px 0 9px}
     .ev-search{flex:1 1 100%}
     .ev-search input{min-height:42px}
-    .ev-select{flex:1 1 0;min-width:0;font-size:0.8rem;padding:9px 8px;min-height:40px}
+    /* Sul telefono tre select in fila lasciano ~100px l'uno: "Tutte le province"
+   e le categorie lunghe ("Cultura & Natura") venivano tagliate a meta'. Con
+   base 50% ne stanno due per riga e la terza occupa la riga sotto, cosi' c'e'
+   spazio anche per l'opzione selezionata piu' lunga. */
+.ev-select{flex:1 1 calc(50% - 4px);min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
     .ev-cal{padding:12px 10px 10px}
     .ev-cal-day{font-size:0.85rem;border-radius:10px}
     .event-act{min-height:44px;padding:10px 14px}

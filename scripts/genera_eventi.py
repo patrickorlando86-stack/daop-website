@@ -439,7 +439,9 @@ def render(events):
     lista_html = (highlights + '    <div class="events-list" id="events-list">\n'
                   + '\n\n'.join(sezioni) + '\n    </div>')
 
-    opts = ['      <option value="all">Tutte le categorie</option>']
+    # "Categorie" e non "Tutte le categorie": in un <select> stretto il testo
+    # veniva tagliato a meta' sul telefono.
+    opts = ['      <option value="all">Categorie</option>']
     for s in ORDER:
         if s in present:
             opts.append(f'      <option value="{s}">{LABELS[s]}</option>')
