@@ -304,6 +304,11 @@ def riga(e, today):
         tags.append(f'<span class="ev-pill is-tag">{esc(trunc(e["manifest"], 34))}</span>')
 
     acts = []
+    # Link alla pagina dedicata, quando esiste: è la via con cui Google la
+    # scopre e le passa autorità dall'agenda, che è la pagina più forte del sito.
+    if ha_pagina(e):
+        acts.append(f'<a class="event-act" href="/eventi/{slug_evento(e)}.html">'
+                    f'{ARROW_SVG} Scheda completa</a>')
     murl = maps_url(e)
     if murl:
         acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{NAV_SVG} Come arrivare</a>')
@@ -544,8 +549,12 @@ def rome_offset(d):
     return f"{'+' if total >= 0 else '-'}{abs(total) // 60:02d}:{abs(total) % 60:02d}"
 
 
-def event_jsonld(e):
-    """Costruisce un oggetto schema.org/Event per un singolo evento."""
+def event_jsonld(e, url_override=None):
+    """Costruisce un oggetto schema.org/Event per un singolo evento.
+
+    url_override: URL canonico dell'evento. Se l'evento ha una pagina dedicata
+    passiamo quella, così i dati strutturati puntano alla pagina che vogliamo
+    far posizionare invece che all'ancora dentro l'agenda."""
     times = parse_times(e['ora'])
     start = e['d_start'].isoformat()
     if times:
@@ -565,7 +574,10 @@ def event_jsonld(e):
     venue = (e.get('luogo') or '').strip()
     if venue:
         address["streetAddress"] = venue
-    ev_url = f"{PAGE_URL}#{e['anchor']}" if e.get('anchor') else PAGE_URL
+    if url_override:
+        ev_url = url_override
+    else:
+        ev_url = f"{PAGE_URL}#{e['anchor']}" if e.get('anchor') else PAGE_URL
 
     obj = {
         "@type": "Event",
@@ -610,11 +622,330 @@ def event_jsonld(e):
 
 def render_jsonld(events):
     """Blocco <script> JSON-LD con tutti gli eventi (schema.org/Event)."""
-    graph = [event_jsonld(e) for e in events]
+    graph = [event_jsonld(e, pagina_url(e) if ha_pagina(e) else None) for e in events]
     payload = json.dumps({"@context": "https://schema.org", "@graph": graph},
                          ensure_ascii=False, indent=2)
     return ('<script type="application/ld+json" id="eventi-jsonld">\n'
             + payload + '\n</script>')
+
+
+# ---------------------------------------------------------------------------
+# PAGINE EVENTO DEDICATE
+#
+# Perche': in Search Console le query per nome della singola sagra ("festa
+# valenzani 2026", "sagra basaluzzo 2026") portano decine di impressioni con
+# zero clic, perche' ci arriviamo con l'agenda generica in ottava posizione.
+# Una pagina per evento risponde esattamente a quella query.
+#
+# Solo sagre e feste: e' dove abbiamo insieme la domanda di ricerca e le
+# descrizioni piu' ricche (18 su 31 sopra i 300 caratteri, contro una mediana
+# di 212 sul totale). Generare tutti e 143 gli eventi produrrebbe decine di
+# pagine-template magre, che Google penalizza oltre la singola pagina.
+#
+# Le pagine NON vengono mai cancellate. normalize() scarta gli eventi passati,
+# quindi una sagra conclusa sparisce dalla sorgente: rigenerare solo dal feed
+# significherebbe un 404 per ogni edizione finita. Il registro in
+# data/pagine-evento.json conserva i dati, la pagina resta online marcata
+# "edizione conclusa" e se l'anno dopo la sagra torna la stessa URL si
+# aggiorna, conservando l'autorita' accumulata.
+# ---------------------------------------------------------------------------
+PAGINE_DIR = os.path.join(ROOT, "eventi")
+REGISTRO_PATH = os.path.join(ROOT, "data", "pagine-evento.json")
+SAGRA_KW = ('sagra', 'festa', 'palio', 'fiera')
+
+
+def ha_pagina(e):
+    """True se l'evento merita una pagina dedicata."""
+    if (e.get('categoria') or '') == 'Sagra & Festa':
+        return True
+    return any(w in (e.get('nome') or '').lower() for w in SAGRA_KW)
+
+
+def slug_evento(e):
+    """Slug stabile fra un'edizione e l'altra: togliamo l'anno e il numero di
+    edizione dal nome ("40ª Sagra del Guanciotto 2026" -> "sagra-del-guanciotto")
+    e aggiungiamo la citta'. Cosi' l'edizione 2027 aggiorna la stessa URL invece
+    di crearne una nuova che riparte da zero."""
+    nome = re.sub(r'\b(?:19|20)\d{2}\b', ' ', e.get('nome') or '')
+    # Numero di edizione, in tutte le grafie che compaiono nel foglio: 1°, 3ª,
+    # 3^, 40ª, 6º, 3a. Va tolto o l'edizione successiva creerebbe una URL nuova
+    # invece di aggiornare questa, che è tutto il punto dello slug evergreen.
+    # \b non funziona dopo ° perché non è un carattere di parola.
+    nome = re.sub(r'(?<!\w)\d+\s*[°ºª^]', ' ', nome)
+    nome = re.sub(r'(?<!\w)\d+a\b', ' ', nome)
+    base = slugify(nome)
+    citta = slugify(e.get('citta') or '')
+    if citta and citta not in base:
+        base = f"{base}-{citta}"
+    return base.strip('-')[:80].strip('-') or 'evento'
+
+
+def pagina_url(e):
+    return f"{SITE_URL}/eventi/{slug_evento(e)}.html"
+
+
+MAX_TITLE = 62  # oltre, Google tronca nello snippet
+
+# Nel foglio il nome porta spesso in coda chi organizza ("… - Pro Loco Ferrere").
+# Nel title è spazio sprecato: nessuno cerca la sagra per nome della pro loco, e
+# senza sparisce quasi ogni troncamento. Resta per intero nell'H1 e nel corpo.
+ORGANIZZATORE_RE = re.compile(
+    r'\s*[-–—]\s*(?:Pro\s*Loco|Comune|Comitato|Associazione|Circolo|Gruppo|'
+    r'Parrocchia|A\.?S\.?D\.?)\b.*$', re.I)
+
+
+def _titolo(nome, citta):
+    """Title che sta nei limiti senza mai perdere la città né finire a metà
+    parola. Ordine di sacrificio: prima il suffisso di brand, poi il nome."""
+    coda = f" a {citta}" if citta else ""
+    for base in (nome, ORGANIZZATORE_RE.sub('', nome).strip(' -–—')):
+        for suffisso in (" | DAOP", ""):
+            t = f"{base}{coda}{suffisso}"
+            if len(t) <= MAX_TITLE:
+                return t
+    corto = ORGANIZZATORE_RE.sub('', nome).strip(' -–—') or nome
+    return f"{trunc(corto, max(MAX_TITLE - len(coda), 20))}{coda}"
+
+
+def _dal(giorno):
+    """'Dal 7' ma 'Dall'8' e 'Dall'11': l'articolo cambia davanti a vocale."""
+    return f"Dall'{giorno}" if giorno in (8, 11) else f"Dal {giorno}"
+
+
+def data_estesa(d):
+    return f"{GIORNI[d.weekday()]} {d.day} {MESI_LUNGHI[d.month - 1]} {d.year}"
+
+
+def periodo_esteso(rec):
+    di, df = rec['d_start'], rec['d_end']
+    if di == df:
+        return data_estesa(di).capitalize()
+    if (di.year, di.month) == (df.year, df.month):
+        return f"{_dal(di.day)} al {df.day} {MESI_LUNGHI[df.month - 1]} {df.year}"
+    return (f"{_dal(di.day)} {MESI_LUNGHI[di.month - 1]} "
+            f"al {df.day} {MESI_LUNGHI[df.month - 1]} {df.year}")
+
+
+def carica_registro():
+    if not os.path.exists(REGISTRO_PATH):
+        return {}
+    try:
+        with open(REGISTRO_PATH, encoding='utf-8') as fh:
+            return json.load(fh)
+    except (OSError, ValueError) as err:
+        print(f"[genera_eventi] registro pagine illeggibile ({err}), riparto da vuoto")
+        return {}
+
+
+def aggiorna_registro(events):
+    """Fonde gli eventi correnti nel registro persistente. Non rimuove nulla."""
+    reg = carica_registro()
+    oggi = datetime.date.today().isoformat()
+    nuovi = 0
+    for e in events:
+        if not ha_pagina(e):
+            continue
+        s = slug_evento(e)
+        rec = reg.get(s)
+        if rec is None:
+            rec, nuovi = {'first_seen': oggi}, nuovi + 1
+        rec.update({k: (v.isoformat() if isinstance(v, datetime.date) else v)
+                    for k, v in e.items()})
+        rec['slug'] = s
+        rec['last_seen'] = oggi
+        reg[s] = rec
+    with open(REGISTRO_PATH, 'w', encoding='utf-8') as fh:
+        json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
+    return reg, nuovi
+
+
+def _guscio():
+    """Nav e footer presi da eventi.html a ogni run, con i link resi
+    root-relative perche' le pagine evento stanno in /eventi/. Estrarli invece
+    di duplicarli tiene le sottopagine allineate quando il menu cambia."""
+    s = open(HTML_PATH, encoding="utf-8").read()
+    nav = re.search(r'<!-- NAV -->.*?</div>\s*(?=\n<!--|\n<main)', s, re.S)
+    foot = re.search(r'<footer>.*?</footer>', s, re.S)
+    if not nav or not foot:
+        raise SystemExit("[genera_eventi] nav o footer non trovati in eventi.html")
+
+    def rooted(html_frag):
+        html_frag = re.sub(r'(href|src)="(?!https?://|/|#|mailto:|tel:)',
+                           lambda m: f'{m.group(1)}="/', html_frag)
+        return html_frag.replace('class="active"', '')
+
+    return rooted(nav.group(0)), rooted(foot.group(0))
+
+
+PAGINA_CSS = """
+.ev-wrap{max-width:820px;margin:0 auto;padding:0 20px}
+.ev-crumb{font-size:.85rem;opacity:.7;margin:26px 0 10px}
+.ev-crumb a{color:inherit}
+.ev-head h1{margin:.1em 0 .3em;line-height:1.15}
+.ev-when{font-size:1.05rem;font-weight:600;color:var(--daop-navy,#1b3a5c)}
+.ev-facts{list-style:none;padding:0;margin:22px 0;display:grid;gap:10px}
+.ev-facts li{display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+.ev-facts svg{flex:0 0 auto;margin-top:3px;opacity:.65}
+.ev-body{margin:26px 0;line-height:1.7}
+.ev-loc{width:100%;height:auto;border-radius:14px;margin:22px 0}
+.ev-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 8px}
+.ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
+.ev-over strong{display:block;margin-bottom:4px}
+@media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
+"""
+
+
+def render_pagina(rec, nav, foot, oggi):
+    """HTML completo di una pagina evento."""
+    e = dict(rec)
+    e['d_start'] = datetime.date.fromisoformat(rec['d_start'])
+    e['d_end'] = datetime.date.fromisoformat(rec['d_end'])
+    concluso = e['d_end'] < oggi
+    url = f"{SITE_URL}/eventi/{rec['slug']}.html"
+    nome = (e.get('nome') or '').strip()
+    citta = (e.get('citta') or '').strip()
+    anno = e['d_start'].year
+
+    # Il title si costruisce dal nome verso l'esterno: la città non va mai
+    # troncata (è metà della query) e il suffisso " | DAOP" si sacrifica prima
+    # del contenuto. Si accorcia solo il nome, e solo se serve davvero.
+    titolo_seo = _titolo(f"{nome} {anno}" if str(anno) not in nome else nome, citta)
+
+    descr_txt = (e.get('descr') or '').strip()
+    meta_d = trunc(f"{periodo_esteso(e)}. {descr_txt}" if descr_txt
+                   else f"{nome} a {citta}: {periodo_esteso(e)}.", 152)
+
+    facts = []
+    if e.get('ora'):
+        facts.append(f'<li>{CLOCK_SVG}<span><strong>Orario:</strong> {esc(e["ora"])}</span></li>')
+    luogo = " · ".join(x for x in [(e.get('luogo') or '').strip(),
+                                   (e.get('indirizzo') or '').strip()] if x)
+    if luogo:
+        facts.append(f'<li>{PIN_SVG}<span><strong>Dove:</strong> {esc(luogo)}</span></li>')
+    if e.get('prezzo'):
+        facts.append(f'<li>{CAL_SVG}<span><strong>Ingresso:</strong> {esc(e["prezzo"])}</span></li>')
+    if e.get('eta'):
+        facts.append(f'<li>{USER_SVG}<span><strong>Età:</strong> {esc(e["eta"])}</span></li>')
+
+    loc = loc_path(e.get('loc'))
+    img = (f'<img class="ev-loc" src="{esc(loc)}" alt="Locandina di {esc(nome)}" '
+           f'loading="lazy" width="900" height="1200">') if loc else ''
+
+    if concluso:
+        avviso = ('<div class="ev-over"><strong>Edizione conclusa</strong>'
+                  f'Questa edizione si è svolta {periodo_esteso(e).lower()}. '
+                  'Se la manifestazione torna, aggiorniamo questa pagina con le nuove date. '
+                  'Intanto trovi tutto quello che c\'è in programma nell\'<a href="/eventi.html">agenda DAOP</a>.</div>')
+        azioni = '<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>'
+    else:
+        avviso = ''
+        bottoni = [f'<a class="btn btn-navy" href="{esc(gcal_url(e))}" target="_blank" rel="noopener">Aggiungi al calendario</a>']
+        if maps_url(e):
+            bottoni.append(f'<a class="btn" href="{esc(maps_url(e))}" target="_blank" rel="noopener">Come arrivare</a>')
+        bottoni.append('<a class="btn" href="/eventi.html">Altri eventi in zona</a>')
+        azioni = '<div class="ev-actions">' + "".join(bottoni) + '</div>'
+
+    ev_obj = event_jsonld(e, url)
+    if concluso:
+        ev_obj["eventStatus"] = "https://schema.org/EventScheduled"
+    breadcrumb = {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
+            {"@type": "ListItem", "position": 2, "name": "Eventi", "item": PAGE_URL},
+            {"@type": "ListItem", "position": 3, "name": nome, "item": url},
+        ],
+    }
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": [ev_obj, breadcrumb]},
+                        ensure_ascii=False, indent=2)
+
+    corpo = "".join(f"<p>{esc(p)}</p>" for p in re.split(r'\n{2,}', descr_txt) if p.strip())
+
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(titolo_seo)}</title>
+<meta name="description" content="{esc(meta_d)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{esc(titolo_seo)}">
+<meta property="og:description" content="{esc(meta_d)}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{esc(loc_url(e.get('loc')) or DEFAULT_IMG)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(trunc(titolo_seo, 60))}">
+<meta name="twitter:description" content="{esc(trunc(meta_d, 120))}">
+<meta name="twitter:image" content="{esc(loc_url(e.get('loc')) or DEFAULT_IMG)}">
+<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{PAGINA_CSS}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script type="application/ld+json">
+{jsonld}
+</script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<article class="ev-wrap">
+  <nav class="ev-crumb" aria-label="Percorso">
+    <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(trunc(nome, 60))}</span>
+  </nav>
+  <header class="ev-head">
+    <h1>{esc(nome)}</h1>
+    <p class="ev-when">{esc(periodo_esteso(e))}{esc(' · ' + citta if citta else '')}</p>
+  </header>
+  {avviso}
+  <ul class="ev-facts">
+    {"".join(facts)}
+  </ul>
+  {img}
+  <div class="ev-body">
+    {corpo}
+  </div>
+  {azioni}
+</article>
+</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+
+
+def scrivi_pagine(events):
+    """Genera/aggiorna le pagine evento. Restituisce la lista degli slug attivi."""
+    reg, nuovi = aggiorna_registro(events)
+    if not reg:
+        print("[genera_eventi] nessuna pagina evento da generare")
+        return []
+    os.makedirs(PAGINE_DIR, exist_ok=True)
+    nav, foot = _guscio()
+    oggi = datetime.date.today()
+    conclusi = 0
+    for slug, rec in reg.items():
+        path = os.path.join(PAGINE_DIR, f"{slug}.html")
+        nuovo = render_pagina(rec, nav, foot, oggi)
+        if datetime.date.fromisoformat(rec['d_end']) < oggi:
+            conclusi += 1
+        # riscriviamo solo se cambia: evita commit rumorosi ogni notte
+        if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
+            continue
+        with open(path, 'w', encoding='utf-8') as fh:
+            fh.write(nuovo)
+    print(f"[genera_eventi] pagine evento: {len(reg)} totali "
+          f"({nuovi} nuove, {conclusi} concluse)")
+    return sorted(reg)
 
 
 def inject(tipo_opts, lista, jsonld):
@@ -647,22 +978,38 @@ def inject_home(cards_html):
     print("[genera_eventi] carosello eventi aggiornato in index.html")
 
 
-def update_sitemap():
-    """Porta il <lastmod> di eventi.html nella sitemap alla data odierna.
+def update_sitemap(slugs=()):
+    """Porta il <lastmod> di eventi.html nella sitemap alla data odierna e
+    rigenera il blocco delle pagine evento.
     Il commit avviene (dal workflow) solo se eventi.html è davvero cambiato,
     così la data riflette una modifica reale dei contenuti."""
     if not os.path.exists(SITEMAP_PATH):
         return
     today = datetime.date.today().isoformat()
     s = open(SITEMAP_PATH, encoding="utf-8").read()
+
+    if slugs:
+        blocco = "\n".join(
+            f"  <url>\n    <loc>{SITE_URL}/eventi/{sl}.html</loc>\n"
+            f"    <lastmod>{today}</lastmod>\n"
+            f"    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>"
+            for sl in slugs)
+        s, nb = re.subn(
+            r'(<!-- PAGINE-EVENTO:START.*?-->).*?( *<!-- PAGINE-EVENTO:END -->)',
+            lambda m: f"{m.group(1)}\n{blocco}\n{m.group(2)}", s, count=1, flags=re.S)
+        if nb == 1:
+            print(f"[genera_eventi] sitemap: {len(slugs)} pagine evento")
+        else:
+            print("[genera_eventi] sitemap: marker PAGINE-EVENTO non trovati, salto")
+
     s, n = re.subn(
         r'(<loc>https://www\.daop\.it/eventi\.html</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)',
         lambda m: m.group(1) + today + m.group(2), s, count=1)
-    if n == 1:
-        open(SITEMAP_PATH, "w", encoding="utf-8").write(s)
-        print(f"[genera_eventi] sitemap: lastmod eventi.html -> {today}")
-    else:
-        print("[genera_eventi] sitemap: blocco eventi.html non trovato, salto")
+    print(f"[genera_eventi] sitemap: lastmod eventi.html -> {today}" if n == 1
+          else "[genera_eventi] sitemap: blocco eventi.html non trovato, salto")
+    # Una sola scrittura alla fine: se il lastmod non matcha non dobbiamo
+    # comunque perdere il blocco delle pagine evento appena rigenerato.
+    open(SITEMAP_PATH, "w", encoding="utf-8").write(s)
 
 
 def main():
@@ -672,12 +1019,13 @@ def main():
     jsonld = render_jsonld(events)
     inject(tipo_opts, lista, jsonld)
     inject_home(render_home(events))
+    slugs = scrivi_pagine(events)
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()} for e in events]
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=1)
-    update_sitemap()
+    update_sitemap(slugs)
     print(f"[genera_eventi] {len(events)} eventi futuri scritti in eventi.html")
 
 
