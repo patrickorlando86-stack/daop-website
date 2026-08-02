@@ -39,10 +39,10 @@ jobs:
           # eventi/ e data/pagine-evento.json vanno inclusi: sono le pagine per
           # singola sagra e il registro che le tiene in vita quando l'evento
           # esce dal foglio. Senza, verrebbero rigenerate a ogni run e perse.
-          if [ -n "$(git status --porcelain eventi.html index.html data/eventi.json data/pagine-evento.json eventi/)" ]; then
+          if [ -n "$(git status --porcelain eventi.html index.html data/eventi.json data/pagine-evento.json eventi/ metodo.html)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add eventi.html index.html data/eventi.json data/pagine-evento.json sitemap.xml eventi/
+            git add eventi.html index.html data/eventi.json data/pagine-evento.json sitemap.xml eventi/ metodo.html
             git commit -m "Aggiornamento automatico eventi"
             git push
           else

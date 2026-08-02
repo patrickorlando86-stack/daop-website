@@ -78,15 +78,48 @@ def fetch_rows():
         print(f"[genera_eventi] CSV remoto non disponibile ({e}); uso {JSON_PATH}")
         with open(JSON_PATH, encoding="utf-8") as fh:
             snap = json.load(fh)
-        # rimappa lo snapshot sulle stesse chiavi del foglio
-        return [{
+        # rimappa lo snapshot sulle stesse chiavi del foglio (comprese le
+        # colonne editoriali, altrimenti il fallback perderebbe i consigli DAOP)
+        return [dict({
             'Nome': e['nome'], 'Data Inizio': e['di'], 'Data fine': e['df'],
             'Ora': e['ora'], 'Città': e['citta'], 'Provincia': e['prov'],
             'Categoria': e['categoria'], 'Età': e['eta'], 'Prezzo': e['prezzo'],
             'Descrizione': e['descr'], 'Manifestazione': e.get('manifest', ''),
             'Locandina': e.get('loc', ''), 'Luogo': e.get('luogo', ''),
             'Indirizzo Completo': e.get('indirizzo', ''),
-        } for e in snap]
+        }, **{nomi[0]: e.get(campo, '') for campo, nomi in CAMPI_DAOP.items()})
+            for e in snap]
+
+
+# Colonne facoltative del foglio: sono il giudizio editoriale, cioe' l'unica
+# parte che un assistente AI non puo' ricavare dal volantino dell'organizzatore.
+# Restano vuote finche' Patrick non aggiunge le colonne al foglio, e quando sono
+# vuote non compare nessun blocco: meglio niente che un titolo senza risposta.
+# I nomi sono tollerati in piu' grafie perche' il foglio lo scrivono due persone.
+CAMPI_DAOP = {
+    'perche':          ("Perché andarci", "Perche andarci", "Nota DAOP", "Perché DAOP lo consiglia"),
+    'eta_consigliata': ("Età consigliata", "Eta consigliata", "Età ideale"),
+    'adatto':          ("Adatto ai bambini", "Adatto davvero ai bambini"),
+    'prenotazione':    ("Prenotazione", "Prenotazioni", "Serve prenotare"),
+    'parcheggio':      ("Parcheggio", "Dove parcheggiare"),
+    'dintorni':        ("Nei dintorni", "Cosa fare nei dintorni", "Dintorni"),
+    'piano_b':         ("Piano B", "In caso di pioggia", "Se piove"),
+    'ginetto':         ("Consiglio di Ginetto", "Ginetto"),
+}
+
+
+def _key(s):
+    """Chiave di confronto per le intestazioni: senza accenti, spazi e maiuscole.
+    'Età consigliata', 'ETA CONSIGLIATA' e 'eta_consigliata' sono la stessa cosa."""
+    s = unicodedata.normalize('NFD', s or '').encode('ascii', 'ignore').decode()
+    return re.sub(r'[^a-z0-9]+', '', s.lower())
+
+
+def campi_daop(d):
+    """Legge dalla riga del foglio le colonne editoriali, se ci sono."""
+    idx = {_key(k): (v or '').strip() for k, v in d.items()}
+    return {campo: next((idx[_key(n)] for n in nomi if idx.get(_key(n))), '')
+            for campo, nomi in CAMPI_DAOP.items()}
 
 
 def normalize(rows):
@@ -110,6 +143,7 @@ def normalize(rows):
             manifest=d.get('Manifestazione', ''), loc=d.get('Locandina', ''),
             luogo=d.get('Luogo', ''), indirizzo=d.get('Indirizzo Completo', ''),
             d_start=di, d_end=df,
+            **campi_daop(d),
         ))
     # Ordina per "data utile": un evento già iniziato ma ancora in corso viene
     # trattato come se iniziasse oggi (max(inizio, oggi)), così non finisce in
@@ -609,6 +643,15 @@ def event_jsonld(e, url_override=None):
     manifest = (e.get('manifest') or '').strip()
     if manifest:
         obj["superEvent"] = {"@type": "Event", "name": manifest}
+    # Chi organizza: NON lo inventiamo, lo leggiamo dalla coda del nome quando il
+    # foglio ce l'ha ("... - Pro Loco Ciglione"). E' il dato che Google incrocia
+    # con le altre fonti, quindi o e' quello vero o non ci va.
+    org = organizzatore(e.get('nome'))
+    if org:
+        obj["organizer"] = {"@type": "Organization", "name": org}
+    fascia = fascia_eta(e.get('eta_consigliata') or e.get('eta'))
+    if fascia:
+        obj["typicalAgeRange"] = fascia
     descr = (e['descr'] or '').strip()
     if descr:
         obj["description"] = descr
@@ -619,6 +662,7 @@ def event_jsonld(e, url_override=None):
     pz = (e['prezzo'] or '').lower()
     if any(k in pz for k in FREE_KW):
         price = "0"
+        obj["isAccessibleForFree"] = True
     else:
         price = parse_price(e['prezzo'])
     if price is not None:
@@ -700,6 +744,33 @@ MAX_TITLE = 62  # oltre, Google tronca nello snippet
 ORGANIZZATORE_RE = re.compile(
     r'\s*[-–—]\s*(?:Pro\s*Loco|Comune|Comitato|Associazione|Circolo|Gruppo|'
     r'Parrocchia|A\.?S\.?D\.?)\b.*$', re.I)
+
+# Stessa coda, ma catturata: serve a dichiarare organizer nei dati strutturati.
+ORGANIZZATORE_NOME_RE = re.compile(
+    r'[-–—]\s*((?:Pro\s*Loco|Comune|Comitato|Associazione|Circolo|Gruppo|'
+    r'Parrocchia|A\.?S\.?D\.?)\b[^-–—]*)$', re.I)
+
+
+def organizzatore(nome):
+    """Chi organizza, quando il nome nel foglio lo porta in coda. '' altrimenti."""
+    m = ORGANIZZATORE_NOME_RE.search((nome or '').strip())
+    return re.sub(r'\s+', ' ', m.group(1)).strip(' .') if m else ''
+
+
+def fascia_eta(testo):
+    """typicalAgeRange da 'Età consigliata' quando c'e' un intervallo numerico:
+    '3-10 anni' -> '3-10', 'dai 6 anni' -> '6-'. 'Tutte le età' non e' una
+    fascia: dichiararla come 0- sarebbe un dato inventato, quindi resta vuota."""
+    t = (testo or '').strip()
+    if not t:
+        return ''
+    m = re.search(r'(\d{1,2})\s*(?:-|–|—|a|/)\s*(\d{1,2})', t)
+    if m and int(m.group(1)) <= int(m.group(2)):
+        return f"{m.group(1)}-{m.group(2)}"
+    m = re.search(r'\b(?:dai|da|oltre i|\+)\s*(\d{1,2})', t, re.I)
+    if m:
+        return f"{m.group(1)}-"
+    return ''
 
 
 def _titolo(nome, citta):
@@ -803,6 +874,13 @@ def aggiorna_registro(events):
             rec, nuovi = {'first_seen': oggi}, nuovi + 1
         rec.update({k: (v.isoformat() if isinstance(v, datetime.date) else v)
                     for k, v in e.items()})
+        # Le colonne editoriali vuote non si salvano: otto stringhe vuote per
+        # scheda gonfiano il registro e il diff di ogni notte. Vanno tolte, non
+        # solo saltate, se no una cella svuotata nel foglio resterebbe qui per
+        # sempre.
+        for k in CAMPI_DAOP:
+            if not (rec.get(k) or '').strip():
+                rec.pop(k, None)
         rec['slug'] = s
         rec['last_seen'] = oggi
         reg[s] = rec
@@ -867,10 +945,156 @@ PAGINA_CSS = """
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
+/* Il punto di vista DAOP: e' il motivo per cui vale la pena aprire la pagina,
+   quindi si vede che e' nostro e non copiato dal volantino. */
+.ev-daop{border:1px solid rgba(107,165,168,.45);background:rgba(107,165,168,.09);
+  border-radius:16px;padding:20px 22px;margin:28px 0}
+.ev-daop>h2{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:0 0 12px;
+  color:var(--navy,#2d4a5c)}
+.ev-daop-voce+.ev-daop-voce{margin-top:14px}
+.ev-daop-voce h3{font-size:.98rem;margin:0 0 3px;color:var(--navy,#2d4a5c)}
+.ev-daop-voce p{margin:0 0 6px;line-height:1.6}
+/* Firma editoriale: chi ha controllato e quando. */
+.ev-firma{border-top:2px solid rgba(45,74,92,.14);margin:30px 0 0;padding:16px 0 0;
+  font-size:.92rem;line-height:1.6}
+.ev-firma-t{display:flex;align-items:center;gap:7px;font-weight:700;margin:0 0 6px;
+  color:var(--teal,#6ba5a8)}
+.ev-firma p{margin:0 0 6px}
+.ev-firma-nota{opacity:.78;font-size:.86rem}
+.ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Altri eventi vicini: link in uscita e motivo per restare sul sito. */
+.ev-vicini{margin:34px 0 0}
+.ev-vicini h2{font-size:1.15rem;margin:0 0 12px}
+.ev-vicini ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-vicini a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
+  border:1px solid rgba(45,74,92,.14);border-radius:12px;padding:11px 14px;
+  color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
+.ev-vicini a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
+.ev-vic-d{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+  color:var(--teal,#6ba5a8);flex:0 0 auto;min-width:92px}
+.ev-vic-n{font-weight:600;flex:1 1 220px}
+.ev-vic-c{font-size:.85rem;opacity:.7}
+.ev-vic-all{margin:14px 0 0;font-size:.92rem}
+.ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+@media (prefers-color-scheme:dark){
+  .ev-daop{background:rgba(107,165,168,.14);border-color:rgba(107,165,168,.35)}
+  .ev-vicini a{border-color:rgba(255,255,255,.16)}
+}
 """
 
 
-def render_pagina(rec, css, nav, foot, oggi, orfano=False):
+ORG_ID = f"{SITE_URL}/#organization"
+SITE_ID = f"{SITE_URL}/#website"
+METODO_URL = f"{SITE_URL}/metodo.html"
+
+CHECK_SVG = ('<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" '
+             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+             '<path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg>')
+
+# L'ordine e' quello con cui si decide davvero: prima se ci vado, poi se e'
+# adatto, poi la logistica.
+BLOCCHI_DAOP = (
+    ('perche', 'Perché andarci, secondo DAOP'),
+    ('adatto', 'Adatto davvero ai bambini?'),
+    ('eta_consigliata', 'Età consigliata'),
+    ('parcheggio', 'Dove parcheggiare'),
+    ('dintorni', 'Cosa fare nei dintorni'),
+    ('piano_b', 'Piano B se piove'),
+    ('ginetto', 'Il consiglio di Ginetto'),
+)
+
+
+def blocco_daop(e):
+    """Il giudizio editoriale: l'unica parte che non sta sul volantino.
+
+    Compare solo per i campi compilati nel foglio. Un titolo senza risposta
+    ("Dove parcheggiare" seguito dal vuoto) e' peggio che non averlo."""
+    voci = [(t, (e.get(k) or '').strip()) for k, t in BLOCCHI_DAOP]
+    voci = [(t, v) for t, v in voci if v]
+    if not voci:
+        return ''
+    corpo = "".join(
+        f'<div class="ev-daop-voce"><h3>{esc(t)}</h3>'
+        + "".join(f"<p>{esc(p)}</p>" for p in re.split(r'\n{2,}', v) if p.strip())
+        + '</div>' for t, v in voci)
+    return ('<section class="ev-daop" aria-labelledby="daop-consiglio">'
+            f'<h2 id="daop-consiglio">{CHECK_SVG} Il punto di vista DAOP</h2>'
+            f'{corpo}</section>')
+
+
+def firma_daop(rec, oggi):
+    """Firma editoriale + data dell'ultimo controllo + avvertenza.
+
+    La data e' last_seen, cioe' l'ultima volta che la scheda e' stata
+    riscontrata sul foglio DAOP: e' un controllo vero, non la data della run."""
+    iso = rec.get('last_seen') or rec.get('updated') or rec.get('first_seen') or oggi.isoformat()
+    try:
+        d = datetime.date.fromisoformat(iso)
+        leggibile = f"{d.day} {MESI_LUNGHI[d.month - 1]} {d.year}"
+    except ValueError:
+        d, leggibile = oggi, iso
+    ogg = urllib.parse.quote(f"Correzione scheda: {(rec.get('nome') or '').strip()}")
+    return (
+        '<aside class="ev-firma">'
+        f'<p class="ev-firma-t">{CHECK_SVG} Scheda verificata da DAOP</p>'
+        '<p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, '
+        'l\'associazione delle famiglie di Alessandria e Asti. Ultimo controllo: '
+        f'<time datetime="{d.isoformat()}">{leggibile}</time>.</p>'
+        '<p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, '
+        'controlla eventuali aggiornamenti dell\'organizzatore. '
+        '<a href="/metodo.html">Come verifichiamo gli eventi</a> · '
+        f'<a href="mailto:info@daop.it?subject={ogg}">Segnala una correzione</a></p>'
+        '</aside>')
+
+
+def blocco_vicini(rec, events, oggi, limite=6):
+    """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
+
+    Serve a chi legge (l'evento e' finito, o piove: cosa c'e' invece?) e serve
+    alle pagine, che senza questo sono foglie senza link in uscita."""
+    citta = _key(rec.get('citta'))
+    prov = (rec.get('prov') or '').upper()
+    mio = rec['slug']
+    cand = []
+    for e in events:
+        if slug_evento(e) == mio:
+            continue
+        stessa = _key(e.get('citta')) == citta
+        if not stessa and (e.get('prov') or '').upper() != prov:
+            continue
+        cand.append((0 if stessa else 1, max(e['d_start'], oggi),
+                     e['d_start'], (e.get('nome') or ''), e))
+    if not cand:
+        return ''
+    cand.sort(key=lambda t: t[:4])
+    righe = []
+    for _, _, _, _, e in cand[:limite]:
+        href = (f"/eventi/{slug_evento(e)}.html" if ha_pagina(e)
+                else f"/eventi.html#{e['anchor']}" if e.get('anchor') else "/eventi.html")
+        # Una mostra iniziata a gennaio e ancora aperta non va etichettata
+        # "giovedì 1 gen": per chi legge oggi e' semplicemente in corso.
+        if e['d_start'] < oggi:
+            quando = "in corso"
+        elif e['d_start'] == oggi:
+            quando = "oggi"
+        elif (e['d_start'] - oggi).days == 1:
+            quando = "domani"
+        else:
+            quando = (data_estesa(e['d_start']).split(' ', 1)[0] + ' '
+                      + f"{e['d_start'].day} {MESI[e['d_start'].month - 1]}")
+        righe.append(
+            f'<li><a href="{href}"><span class="ev-vic-d">{esc(quando)}</span>'
+            f'<span class="ev-vic-n">{esc(trunc(e.get("nome") or "", 70))}</span>'
+            f'<span class="ev-vic-c">{esc(e.get("citta") or "")}</span></a></li>')
+    titolo = f"Altri eventi vicino a {rec.get('citta')}" if rec.get('citta') else "Altri eventi vicini"
+    return ('<section class="ev-vicini" aria-labelledby="ev-vicini-t">'
+            f'<h2 id="ev-vicini-t">{esc(titolo)}</h2>'
+            f'<ul>{"".join(righe)}</ul>'
+            '<p class="ev-vic-all"><a href="/eventi.html">Vedi tutta l\'agenda DAOP</a></p>'
+            '</section>')
+
+
+def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
     """HTML completo di una pagina evento.
 
     orfano: l'evento e' sparito dal foglio pur non essendo ancora passato.
@@ -907,6 +1131,10 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False):
     if e.get('eta'):
         facts.append(f'<li>{USER_SVG}<span><strong>Età:</strong> {esc(e["eta"])}</span></li>')
 
+    if e.get('prenotazione'):
+        facts.append(f'<li>{CHECK_SVG}<span><strong>Prenotazione:</strong> '
+                     f'{esc(e["prenotazione"])}</span></li>')
+
     loc = loc_path(e.get('loc'))
     img = (f'<img class="ev-loc" src="{esc(loc)}" alt="Locandina di {esc(nome)}" '
            f'loading="lazy" width="900" height="1200">') if loc else ''
@@ -929,8 +1157,41 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False):
         azioni = '<div class="ev-actions">' + "".join(bottoni) + '</div>'
 
     ev_obj = event_jsonld(e, url)
+    ev_obj["@id"] = f"{url}#event"
     if concluso:
         ev_obj["eventStatus"] = "https://schema.org/EventScheduled"
+    # La scheda dichiara anche CHI l'ha controllata e QUANDO: e' la traduzione in
+    # dati strutturati della firma visibile. lastReviewed/reviewedBy esistono
+    # apposta, e chi cita la pagina trova il nome della fonte accanto al dato.
+    controllo = rec.get('last_seen') or rec.get('updated') or rec.get('first_seen')
+    webpage = {
+        "@type": "WebPage",
+        "@id": url,
+        "url": url,
+        "name": titolo_seo,
+        "inLanguage": "it-IT",
+        "isPartOf": {"@type": "WebSite", "@id": SITE_ID, "url": SITE_URL, "name": "DAOP"},
+        "about": {"@id": f"{url}#event"},
+        "publisher": {"@id": ORG_ID},
+        "reviewedBy": {"@id": ORG_ID},
+    }
+    if rec.get('first_seen'):
+        webpage["datePublished"] = rec['first_seen']
+    if rec.get('updated'):
+        webpage["dateModified"] = rec['updated']
+    if controllo:
+        webpage["lastReviewed"] = controllo
+    organizzazione = {
+        "@type": "Organization",
+        "@id": ORG_ID,
+        "name": "DAOP – Dove Andiamo Oggi Papi",
+        "alternateName": "DAOP",
+        "url": SITE_URL,
+        "logo": f"{SITE_URL}/assets/images/logodaop.png",
+        "areaServed": ["Alessandria", "Asti", "Piemonte"],
+        "description": ("Associazione delle famiglie di Alessandria e Asti. Seleziona e "
+                        "verifica gli eventi per famiglie del territorio."),
+    }
     breadcrumb = {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -939,10 +1200,14 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False):
             {"@type": "ListItem", "position": 3, "name": nome, "item": url},
         ],
     }
-    jsonld = json.dumps({"@context": "https://schema.org", "@graph": [ev_obj, breadcrumb]},
+    jsonld = json.dumps({"@context": "https://schema.org",
+                         "@graph": [ev_obj, webpage, organizzazione, breadcrumb]},
                         ensure_ascii=False, indent=2)
 
     corpo = "".join(f"<p>{esc(p)}</p>" for p in re.split(r'\n{2,}', descr_txt) if p.strip())
+    consiglio = blocco_daop(e)
+    firma = firma_daop(rec, oggi)
+    altri = blocco_vicini(rec, vicini, oggi) if vicini else ''
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -993,7 +1258,10 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False):
   <div class="ev-body">
     {corpo}
   </div>
+  {consiglio}
   {azioni}
+  {firma}
+  {altri}
 </article>
 </main>
 {foot}
@@ -1029,7 +1297,7 @@ def scrivi_pagine(events):
         # questa e' un doppione: fuori dall'indice e fuori dalla sitemap.
         orfano = slug not in visti and \
             datetime.date.fromisoformat(rec['d_end']) >= oggi
-        nuovo = render_pagina(rec, css, nav, foot, oggi, orfano)
+        nuovo = render_pagina(rec, css, nav, foot, oggi, orfano, vicini=events)
         if orfano:
             orfane.append(slug)
         if datetime.date.fromisoformat(rec['d_end']) < oggi:
@@ -1046,11 +1314,276 @@ def scrivi_pagine(events):
         json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
     print(f"[genera_eventi] pagine evento: {len(reg)} totali "
           f"({nuovi} nuove, {cambiate} riscritte, {conclusi} concluse)")
+    # Il valore aggiunto e' l'unica cosa che un assistente non trova altrove:
+    # se e' a zero la pagina resta un doppione del volantino, e va detto.
+    con_giudizio = sum(1 for r in reg.values()
+                       if any((r.get(k) or '').strip() for k in CAMPI_DAOP))
+    print(f"[genera_eventi] schede con giudizio DAOP: {con_giudizio}/{len(reg)}"
+          + ("" if con_giudizio else
+             "  <- aggiungi al foglio le colonne " + ", ".join(
+                 f'"{n[0]}"' for n in CAMPI_DAOP.values())))
     if orfane:
         print(f"[genera_eventi] ATTENZIONE: {len(orfane)} pagine di eventi futuri "
               f"spariti dal foglio (annullati o rinominati), messe in noindex "
               f"e tolte dalla sitemap: {', '.join(sorted(orfane))}")
     return {s: r['updated'] for s, r in sorted(reg.items()) if s not in orfane}
+
+
+# ---------------------------------------------------------------------------
+# PAGINA METODO
+#
+# Perche': un motore o un assistente puo' capire COSA pubblica DAOP dai dati
+# strutturati, ma non CHI e' DAOP ne' perche' dovrebbe fidarsi. Questa pagina
+# risponde a quello, ed e' il bersaglio del link "Scheda verificata da DAOP"
+# che sta su ogni scheda evento.
+#
+# Viene rigenerata a ogni run come le pagine evento: cosi' i numeri sono veri
+# (quante schede, quanti comuni, ultimo aggiornamento) invece di essere una
+# frase scritta una volta e diventata falsa il mese dopo.
+# ---------------------------------------------------------------------------
+METODO_PATH = os.path.join(ROOT, "metodo.html")
+
+METODO_CSS = """
+.met-num{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.met-num div{border:1px solid rgba(45,74,92,.14);border-radius:14px;padding:14px 16px}
+.met-num b{display:block;font-size:1.6rem;line-height:1.1;color:var(--teal,#6ba5a8)}
+.met-num span{font-size:.88rem;opacity:.78}
+.ev-wrap h2{margin:34px 0 10px;font-size:1.3rem}
+.ev-wrap h3{margin:20px 0 4px;font-size:1.02rem;color:var(--navy,#2d4a5c)}
+/* Il reset del sito azzera i margini dei <p>: senza questo i paragrafi della
+   pagina si toccano e sembrano un muro di testo. */
+.ev-wrap p{margin:0 0 12px;line-height:1.7}
+.ev-wrap li{line-height:1.7}
+.ev-wrap p a,.ev-wrap li a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+.met-passi{padding-left:20px;margin:10px 0;display:grid;gap:8px}
+.met-passi>li{padding-left:4px}
+.met-lim{border:1px solid rgba(45,74,92,.16);border-radius:14px;padding:16px 18px;margin:18px 0}
+.met-lim ul{margin:8px 0 0 18px;display:grid;gap:6px}
+.met-cta{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
+@media (prefers-color-scheme:dark){
+  .met-num div,.met-lim{border-color:rgba(255,255,255,.16)}
+}
+"""
+
+METODO_FAQ = [
+    ("Chi inserisce gli eventi su DAOP?",
+     "Le schede le compilano a mano Patrick Orlando per la provincia di Alessandria e "
+     "Alessandra Zaccone per la provincia di Asti, soci fondatori di DAOP. Non c'è "
+     "nessuno script che copia in automatico da altri siti: ogni riga entra perché una "
+     "persona l'ha letta e trascritta."),
+    ("Da dove arrivano gli eventi?",
+     "Da tre strade: le locandine e i canali ufficiali di comuni, pro loco, biblioteche e "
+     "associazioni del territorio; le segnalazioni delle famiglie della community DAOP; "
+     "e gli organizzatori che ci scrivono direttamente a info@daop.it."),
+    ("Come viene verificata una scheda?",
+     "Prima di pubblicare controlliamo che ci siano data, luogo, orario e prezzo, e che "
+     "coincidano con quello che dichiara l'organizzatore. Se un dato non è confermato non "
+     "lo inventiamo: lo scriviamo come da verificare. Ogni scheda riporta la data "
+     "dell'ultimo controllo."),
+    ("Ogni quanto vengono aggiornati gli eventi?",
+     "L'agenda si rigenera automaticamente ogni notte: gli eventi passati escono, quelli "
+     "nuovi entrano e le schede modificate vengono riscritte. La data dell'ultimo "
+     "controllo sulla singola scheda è quella dell'ultima volta che l'abbiamo riscontrata, "
+     "non quella dell'aggiornamento automatico."),
+    ("Che zona copre DAOP?",
+     "Le province di Alessandria e Asti, in Piemonte. Fuori da lì non pubblichiamo: "
+     "preferiamo coprire bene un territorio che male mezzo Nord Italia."),
+    ("Come segnalo un errore o propongo un evento?",
+     "Scrivendo a info@daop.it, oppure dai profili social DAOP di Alessandria e Asti. "
+     "Le correzioni su un evento già pubblicato hanno la precedenza su tutto il resto."),
+]
+
+
+def scrivi_metodo(events):
+    """Genera /metodo.html: chi è DAOP, come verifica, ogni quanto aggiorna."""
+    reg = carica_registro()
+    oggi = datetime.date.today()
+    comuni = len({_key(e.get('citta')) for e in events if (e.get('citta') or '').strip()})
+    schede = len(reg)
+    url = METODO_URL
+    titolo = "Come verifichiamo gli eventi | DAOP"
+    descr = ("Chi inserisce gli eventi su DAOP, da dove arrivano, come li verifichiamo e "
+             "ogni quanto aggiorniamo le schede per le famiglie di Alessandria e Asti.")
+
+    try:
+        css, nav, foot = _guscio()
+    except SystemExit as err:
+        print(f"[genera_eventi] pagina metodo saltata: {err}")
+        return
+
+    faq = "".join(
+        f'<h3>{esc(q)}</h3><p>{esc(a)}</p>' for q, a in METODO_FAQ)
+
+    grafo = [
+        {"@type": "AboutPage", "@id": url, "url": url, "name": titolo,
+         "description": descr, "inLanguage": "it-IT",
+         "isPartOf": {"@type": "WebSite", "@id": SITE_ID, "url": SITE_URL, "name": "DAOP"},
+         "about": {"@id": ORG_ID}, "publisher": {"@id": ORG_ID},
+         "dateModified": oggi.isoformat()},
+        {"@type": "Organization", "@id": ORG_ID,
+         "name": "DAOP – Dove Andiamo Oggi Papi", "alternateName": "DAOP", "url": SITE_URL,
+         "logo": f"{SITE_URL}/assets/images/logodaop.png", "foundingDate": "2023",
+         "description": ("Associazione delle famiglie di Alessandria e Asti. Seleziona e "
+                         "verifica a mano gli eventi per famiglie del territorio."),
+         "areaServed": ["Alessandria", "Asti", "Piemonte"],
+         "founder": {"@type": "Person", "name": "Patrick Orlando"},
+         "member": [{"@type": "Person", "name": "Patrick Orlando"},
+                    {"@type": "Person", "name": "Alessandra Zaccone"}],
+         "email": "info@daop.it",
+         "sameAs": ["https://www.instagram.com/daop_alessandria/",
+                    "https://www.instagram.com/daop_asti/",
+                    "https://www.facebook.com/daopalessandria/",
+                    "https://www.facebook.com/daopasti",
+                    "https://www.youtube.com/@DOVEANDIAMOOGGIPAPI"]},
+        {"@type": "FAQPage",
+         "mainEntity": [{"@type": "Question", "name": q,
+                         "acceptedAnswer": {"@type": "Answer", "text": a}}
+                        for q, a in METODO_FAQ]},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
+            {"@type": "ListItem", "position": 2, "name": "Come verifichiamo gli eventi",
+             "item": url}]},
+    ]
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": grafo},
+                        ensure_ascii=False, indent=2)
+
+    html_out = f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(titolo)}</title>
+<meta name="description" content="{esc(descr)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{esc(titolo)}">
+<meta property="og:description" content="{esc(descr)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{DEFAULT_IMG}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(titolo)}">
+<meta name="twitter:description" content="{esc(trunc(descr, 120))}">
+<meta name="twitter:image" content="{DEFAULT_IMG}">
+<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{PAGINA_CSS}{METODO_CSS}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script type="application/ld+json">
+{jsonld}
+</script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<article class="ev-wrap">
+  <div class="ev-crumb" role="navigation" aria-label="Percorso">
+    <a href="/">Home</a> › <span>Come verifichiamo gli eventi</span>
+  </div>
+  <header class="ev-head">
+    <h1>Come DAOP sceglie e verifica gli eventi</h1>
+    <p class="ev-when">Il metodo dietro l'agenda di Alessandria e Asti</p>
+  </header>
+
+  <p>DAOP non è un aggregatore automatico. Ogni evento che leggi sul sito è stato
+  inserito a mano da una persona che vive in questo territorio, con data, luogo, orario,
+  prezzo e fascia d'età controllati prima della pubblicazione. Questa pagina spiega chi
+  lo fa, come, e ogni quanto.</p>
+
+  <div class="met-num">
+    <div><b>{len(events)}</b><span>eventi in agenda adesso</span></div>
+    <div><b>{schede}</b><span>schede evento dedicate</span></div>
+    <div><b>{comuni}</b><span>comuni coperti</span></div>
+    <div><b>2</b><span>province: Alessandria e Asti</span></div>
+  </div>
+
+  <h2>Chi inserisce gli eventi</h2>
+  <p><strong>Patrick Orlando</strong> — fondatore e presidente di DAOP, papà e ingegnere.
+  Ha fondato DAOP nel 2023, ha costruito <a href="/ginetto.html">Ginetto AI</a> e
+  <a href="/piattosano.html">Il Piatto Sano</a> e ha scritto i
+  <a href="/libri.html">libri per famiglie</a> della collana. Cura la provincia di
+  Alessandria.</p>
+  <p><strong>Alessandra Zaccone</strong> — socia fondatrice e curatrice per la provincia
+  di Asti. Seleziona e verifica le proposte della community, aggiorna le pagine DAOP Asti
+  e tiene il dialogo con le famiglie del territorio.</p>
+  <p>Sono due persone, non una redazione: è il motivo per cui copriamo bene due province
+  invece che male mezza regione.</p>
+
+  <h2>Come nasce una scheda</h2>
+  <ol class="met-passi">
+    <li><strong>Raccolta.</strong> Locandine e canali ufficiali di comuni, pro loco,
+    biblioteche e associazioni; segnalazioni delle famiglie della community;
+    organizzatori che ci scrivono direttamente.</li>
+    <li><strong>Trascrizione a mano.</strong> Ogni evento entra nel database DAOP con
+    nome, date, orario, luogo e indirizzo, prezzo, fascia d'età e descrizione scritta da
+    noi. Niente copia-incolla automatico da altri siti.</li>
+    <li><strong>Controllo.</strong> Verifichiamo che data, luogo, orario e prezzo
+    coincidano con quanto dichiara l'organizzatore. Quello che non è confermato non viene
+    inventato: resta scritto come <em>da verificare</em>.</li>
+    <li><strong>Pubblicazione.</strong> L'evento entra nell'agenda e, se è una sagra o una
+    festa, riceve una scheda con URL dedicata che resta online anche dopo, così l'anno
+    dopo ritrovi la stessa pagina aggiornata.</li>
+    <li><strong>Manutenzione.</strong> Gli eventi conclusi escono dall'agenda, le schede
+    modificate vengono riscritte e ognuna porta in fondo la data dell'ultimo controllo.</li>
+  </ol>
+
+  <h2>Ogni quanto aggiorniamo</h2>
+  <p>L'agenda si rigenera <strong>ogni notte</strong>. La data che leggi in fondo a ogni
+  scheda ("Ultimo controllo") non è la data della rigenerazione automatica: è l'ultima
+  volta che quella scheda è stata riscontrata sui dati DAOP.</p>
+
+  <div class="met-lim">
+    <strong>Cosa DAOP non è</strong>
+    <ul>
+      <li>Non siamo l'organizzatore degli eventi: li raccogliamo e li segnaliamo. Chi
+      organizza è indicato nella scheda quando lo conosciamo.</li>
+      <li>Non vendiamo biglietti e non gestiamo prenotazioni: per quelle serve
+      l'organizzatore.</li>
+      <li>Un programma può cambiare o saltare all'ultimo, soprattutto per il meteo. Prima
+      di partire, un controllo ai canali dell'organizzatore vale sempre la pena.</li>
+    </ul>
+  </div>
+
+  <h2>Segnalare un errore o proporre un evento</h2>
+  <p>Se trovi un dato sbagliato, scrivici: le correzioni su un evento già pubblicato
+  hanno la precedenza su tutto il resto. Se organizzi qualcosa per famiglie in provincia
+  di Alessandria o Asti, mandaci locandina, date e contatti.</p>
+  <div class="met-cta">
+    <a class="btn btn-navy" href="mailto:info@daop.it?subject=Correzione%20su%20un%20evento%20DAOP">Segnala una correzione</a>
+    <a class="btn btn-teal" href="mailto:info@daop.it?subject=Proposta%20evento%20per%20DAOP">Proponi un evento</a>
+  </div>
+
+  <h2>Domande frequenti</h2>
+  {faq}
+
+  <h2>Dove trovi DAOP</h2>
+  <p><a href="/eventi.html">L'agenda eventi</a> di Alessandria e Asti ·
+  <a href="/ginetto.html">Ginetto AI</a>, l'assistente che risponde alle famiglie ·
+  <a href="/index.html#chi-siamo">Chi siamo</a> ·
+  <a href="/media.html">Rassegna stampa</a></p>
+
+  <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
+</article>
+</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+    if os.path.exists(METODO_PATH) and \
+            open(METODO_PATH, encoding='utf-8').read() == html_out:
+        print("[genera_eventi] metodo.html invariato")
+        return
+    with open(METODO_PATH, 'w', encoding='utf-8') as fh:
+        fh.write(html_out)
+    print(f"[genera_eventi] metodo.html aggiornato ({schede} schede, {comuni} comuni)")
 
 
 def inject(tipo_opts, lista, jsonld):
@@ -1126,9 +1659,11 @@ def main():
     inject(tipo_opts, lista, jsonld)
     inject_home(render_home(events))
     slugs = scrivi_pagine(events)
+    scrivi_metodo(events)
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
-            for k, v in e.items()} for e in events]
+            for k, v in e.items()
+            if k not in CAMPI_DAOP or (v or '').strip()} for e in events]
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=1)
     update_sitemap(slugs)

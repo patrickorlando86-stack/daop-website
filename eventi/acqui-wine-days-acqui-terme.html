@@ -281,6 +281,41 @@
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
+/* Il punto di vista DAOP: e' il motivo per cui vale la pena aprire la pagina,
+   quindi si vede che e' nostro e non copiato dal volantino. */
+.ev-daop{border:1px solid rgba(107,165,168,.45);background:rgba(107,165,168,.09);
+  border-radius:16px;padding:20px 22px;margin:28px 0}
+.ev-daop>h2{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:0 0 12px;
+  color:var(--navy,#2d4a5c)}
+.ev-daop-voce+.ev-daop-voce{margin-top:14px}
+.ev-daop-voce h3{font-size:.98rem;margin:0 0 3px;color:var(--navy,#2d4a5c)}
+.ev-daop-voce p{margin:0 0 6px;line-height:1.6}
+/* Firma editoriale: chi ha controllato e quando. */
+.ev-firma{border-top:2px solid rgba(45,74,92,.14);margin:30px 0 0;padding:16px 0 0;
+  font-size:.92rem;line-height:1.6}
+.ev-firma-t{display:flex;align-items:center;gap:7px;font-weight:700;margin:0 0 6px;
+  color:var(--teal,#6ba5a8)}
+.ev-firma p{margin:0 0 6px}
+.ev-firma-nota{opacity:.78;font-size:.86rem}
+.ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Altri eventi vicini: link in uscita e motivo per restare sul sito. */
+.ev-vicini{margin:34px 0 0}
+.ev-vicini h2{font-size:1.15rem;margin:0 0 12px}
+.ev-vicini ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-vicini a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
+  border:1px solid rgba(45,74,92,.14);border-radius:12px;padding:11px 14px;
+  color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
+.ev-vicini a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
+.ev-vic-d{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+  color:var(--teal,#6ba5a8);flex:0 0 auto;min-width:92px}
+.ev-vic-n{font-weight:600;flex:1 1 220px}
+.ev-vic-c{font-size:.85rem;opacity:.7}
+.ev-vic-all{margin:14px 0 0;font-size:.92rem}
+.ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+@media (prefers-color-scheme:dark){
+  .ev-daop{background:rgba(107,165,168,.14);border-color:rgba(107,165,168,.35)}
+  .ev-vicini a{border-color:rgba(255,255,255,.16)}
+}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script type="application/ld+json">
@@ -314,6 +349,7 @@
         "name": "Acqui Wine Days"
       },
       "description": "Acqui Wine Days è una manifestazione enogastronomica dedicata ai vini del territorio acquese che si svolge ad Acqui Terme dal 8 al 10 agosto 2026. Durante i tre giorni è possibile partecipare a degustazioni di vini locali, esplorare il centro storico con tour narrativi e scoprire i segreti della città, mentre i negozi restano aperti la sera in un'atmosfera festosa. La manifestazione offre anche l'apertura straordinaria del Castello dei Paleologi con visite guidate, un mercatino del libro lungo Corso Bagni e una serata di tango all'aperto in Piazza Italia. Programma: 08/08 Inaugurazione – Acqui Wine Days (18:00); 08/08 A Taste of Acqui – Degustazione Itinerante con Storytelling (18:30); 08/08 Saturday Open – Acqui Wine Days (21:30); 09/08 Librando – Mercatino del Libro (09:00); 09/08 Castelli Aperti 2026 – Castello dei Paleologi (16:30); 09/08 Milonga Sotto le Stelle – Calici di Tango (19:00); 09/08 Ti Racconto Acqui – Storytelling Tours (21:00); 10/08 Calici di Stelle (20:00).",
+      "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -321,7 +357,47 @@
         "availability": "https://schema.org/InStock",
         "validFrom": "2026-08-08",
         "url": "https://www.daop.it/eventi/acqui-wine-days-acqui-terme.html"
-      }
+      },
+      "@id": "https://www.daop.it/eventi/acqui-wine-days-acqui-terme.html#event"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.daop.it/eventi/acqui-wine-days-acqui-terme.html",
+      "url": "https://www.daop.it/eventi/acqui-wine-days-acqui-terme.html",
+      "name": "Acqui Wine Days 2026 a Acqui Terme | DAOP",
+      "inLanguage": "it-IT",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.daop.it/#website",
+        "url": "https://www.daop.it",
+        "name": "DAOP"
+      },
+      "about": {
+        "@id": "https://www.daop.it/eventi/acqui-wine-days-acqui-terme.html#event"
+      },
+      "publisher": {
+        "@id": "https://www.daop.it/#organization"
+      },
+      "reviewedBy": {
+        "@id": "https://www.daop.it/#organization"
+      },
+      "datePublished": "2026-08-02",
+      "dateModified": "2026-08-02",
+      "lastReviewed": "2026-08-02"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.daop.it/#organization",
+      "name": "DAOP – Dove Andiamo Oggi Papi",
+      "alternateName": "DAOP",
+      "url": "https://www.daop.it",
+      "logo": "https://www.daop.it/assets/images/logodaop.png",
+      "areaServed": [
+        "Alessandria",
+        "Asti",
+        "Piemonte"
+      ],
+      "description": "Associazione delle famiglie di Alessandria e Asti. Seleziona e verifica gli eventi per famiglie del territorio."
     },
     {
       "@type": "BreadcrumbList",
@@ -399,7 +475,10 @@
   <div class="ev-body">
     <p>Acqui Wine Days è una manifestazione enogastronomica dedicata ai vini del territorio acquese che si svolge ad Acqui Terme dal 8 al 10 agosto 2026. Durante i tre giorni è possibile partecipare a degustazioni di vini locali, esplorare il centro storico con tour narrativi e scoprire i segreti della città, mentre i negozi restano aperti la sera in un&#x27;atmosfera festosa. La manifestazione offre anche l&#x27;apertura straordinaria del Castello dei Paleologi con visite guidate, un mercatino del libro lungo Corso Bagni e una serata di tango all&#x27;aperto in Piazza Italia. Programma: 08/08 Inaugurazione – Acqui Wine Days (18:00); 08/08 A Taste of Acqui – Degustazione Itinerante con Storytelling (18:30); 08/08 Saturday Open – Acqui Wine Days (21:30); 09/08 Librando – Mercatino del Libro (09:00); 09/08 Castelli Aperti 2026 – Castello dei Paleologi (16:30); 09/08 Milonga Sotto le Stelle – Calici di Tango (19:00); 09/08 Ti Racconto Acqui – Storytelling Tours (21:00); 10/08 Calici di Stelle (20:00).</p>
   </div>
+  
   <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Acqui+Wine+Days&amp;dates=20260808%2F20260811&amp;details=Acqui+Wine+Days+%C3%A8+una+manifestazione+enogastronomica+dedicata+ai+vini+del+territorio+acquese+che+si+svolge+ad+Acqui+Terme+dal+8+al+10+agosto+2026.+Durante+i+tre+giorni+%C3%A8+possibile+partecipare+a+degustazioni+di+vini+locali%2C+esplorare+il+centro+storico+con+tour+narrativi+e+scoprire+i+segreti+della+citt%C3%A0%2C+mentre+i+negozi+restano+aperti+la+sera+in+un%27atmosfera+festosa.+La+manifestazione+offre+anche+l%27apertura+straordinaria+del+Castello+dei+Paleologi+con+visite+guidate%2C+un+mercatino+del+libro+lungo+Corso+Bagni+e+una+serata+di+tango+all%27aperto+in+Piazza+Italia.+Programma%3A+08%2F08+Inaugurazione+%E2%80%93+Acqui+Wine+Days+%2818%3A00%29%3B+08%2F08+A+Taste+of+Acqui+%E2%80%93+Degustazione+Itinerante+con+Storytelling+%2818%3A30%29%3B+08%2F08+Saturday+Open+%E2%80%93+Acqui+Wine+Days+%2821%3A30%29%3B+09%2F08+Librando+%E2%80%93+Mercatino+del+Libro+%2809%3A00%29%3B+09%2F08+Castelli+Aperti+2026+%E2%80%93+Castello+dei+Paleologi+%2816%3A30%29%3B+09%2F08+Milonga+Sotto+le+Stelle+%E2%80%93+Calici+di+Tango+%2819&amp;location=Piazza+Levi+-+Acqui+Terme+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza%20Levi%20-%20Acqui%20Terme%20%28AL%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
+  <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria e Asti. Ultimo controllo: <time datetime="2026-08-02">2 agosto 2026</time>.</p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Acqui%20Wine%20Days">Segnala una correzione</a></p></aside>
+  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Acqui Terme</h2><ul><li><a href="/eventi.html#ev-2026-07-30-mostra-personale-di-luca-giacobbe-luca-espone"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra Personale di Luca Giacobbe &quot;Luca Espone&quot;</span><span class="ev-vic-c">Acqui Terme</span></a></li><li><a href="/eventi.html#ev-2026-08-02-castelli-aperti-2026-castello-dei-paleologi"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Castelli Aperti 2026 – Castello dei Paleologi</span><span class="ev-vic-c">Acqui Terme</span></a></li><li><a href="/eventi.html#ev-2026-08-06-jam-fest-centro-giovanile-yepp"><span class="ev-vic-d">giovedì 6 ago</span><span class="ev-vic-n">Jam Fest – Centro Giovanile Yepp</span><span class="ev-vic-c">Acqui Terme</span></a></li><li><a href="/eventi.html#ev-2026-08-07-ti-racconto-acqui-storytelling-tours"><span class="ev-vic-d">venerdì 7 ago</span><span class="ev-vic-n">Ti Racconto Acqui – Storytelling Tours</span><span class="ev-vic-c">Acqui Terme</span></a></li><li><a href="/eventi.html#ev-2026-08-08-mostra-collettiva-giudice-de-angelis"><span class="ev-vic-d">sabato 8 ago</span><span class="ev-vic-n">Mostra Collettiva Giudice – De Angelis</span><span class="ev-vic-c">Acqui Terme</span></a></li><li><a href="/eventi.html#ev-2026-08-08-mostra-personale-di-pierangelo-bertolo-pittura-e-s"><span class="ev-vic-d">sabato 8 ago</span><span class="ev-vic-n">Mostra Personale di Pierangelo Bertolo – Pittura e scultura</span><span class="ev-vic-c">Acqui Terme</span></a></li></ul><p class="ev-vic-all"><a href="/eventi.html">Vedi tutta l'agenda DAOP</a></p></section>
 </article>
 </main>
 <footer>
@@ -437,6 +516,7 @@
         <a href="mailto:info@daop.it">info@daop.it</a>
         <a href="tel:+393471834091">347 183 4091</a>
         <a href="/index.html#chi-siamo">Chi siamo</a>
+        <a href="/metodo.html">Come verifichiamo gli eventi</a>
         <a href="/privacy.html">Privacy Policy</a>
         <a href="/cookie-policy.html">Cookie Policy</a>
       </div>
