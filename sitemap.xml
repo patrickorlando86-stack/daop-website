@@ -78,6 +78,15 @@
     <priority>0.3</priority>
   </url>
 
+  <!-- CENTRI:START (generato da scripts/genera_centri.py — non modificare a mano) -->
+  <url>
+    <loc>https://www.daop.it/centri-estivi.html</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- CENTRI:END -->
+
   <!-- PAGINE-EVENTO:START (generato da scripts/genera_eventi.py — non modificare a mano) -->
   <url>
     <loc>https://www.daop.it/eventi/acqui-wine-days-acqui-terme.html</loc>
