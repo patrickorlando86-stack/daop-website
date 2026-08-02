@@ -12,7 +12,7 @@ Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
 (opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
 raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys
+import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
@@ -757,6 +757,33 @@ def completezza(e):
                 if (e.get(k) or '').strip()))
 
 
+def segnala_doppioni(events):
+    """Elenca gli eventi inseriti piu' volte nel foglio.
+
+    Criterio: stesso evento (slug, che ignora anno e numero di edizione, cosi'
+    "3^ Cena Sotto le Stelle" e "3ª Cena sotto le Stelle" si riconoscono) e
+    stessa data di inizio. La data di inizio e' quello che distingue un
+    doppione da una ricorrenza: "I giovedi' in biblioteca" compare quattro
+    volte ma con quattro date, ed e' corretto cosi'.
+
+    Vale su tutti gli eventi, non solo su quelli con pagina dedicata: il
+    doppione si vede nell'agenda a prescindere. Si pulisce solo a mano nel
+    foglio, quindi va ricordato a ogni run."""
+    g = collections.defaultdict(list)
+    for e in events:
+        g[(slug_evento(e), e['d_start'])].append(e)
+    doppi = {k: v for k, v in g.items() if len(v) > 1}
+    if not doppi:
+        return
+    print(f"[genera_eventi] ATTENZIONE: {len(doppi)} eventi ripetuti nel foglio "
+          f"(nell'agenda compaiono doppi, vanno uniti a mano):")
+    for (s, d), v in sorted(doppi.items(), key=lambda kv: kv[0][1]):
+        print(f"    {len(v)}x  {v[0]['nome'][:44]} — {v[0]['citta']} — dal {d.strftime('%d/%m')}")
+        for x in v:
+            print(f"          fine {x['df']}  {x['categoria'] or '(senza categoria)':16} "
+                  f"{len(x['descr'])} caratteri")
+
+
 def aggiorna_registro(events):
     """Fonde gli eventi correnti nel registro persistente. Non rimuove nulla."""
     reg = carica_registro()
@@ -781,7 +808,10 @@ def aggiorna_registro(events):
         reg[s] = rec
     # Il registro viene scritto da scrivi_pagine(), dopo aver stabilito quali
     # pagine sono davvero cambiate: serve per registrare la data di modifica.
-    return reg, nuovi
+    # Restituiamo anche gli slug visti in QUESTA run: confrontare last_seen con
+    # la data odierna non basta, perche' due run nello stesso giorno non si
+    # distinguerebbero.
+    return reg, nuovi, set(migliori)
 
 
 def _guscio():
@@ -840,8 +870,13 @@ PAGINA_CSS = """
 """
 
 
-def render_pagina(rec, css, nav, foot, oggi):
-    """HTML completo di una pagina evento."""
+def render_pagina(rec, css, nav, foot, oggi, orfano=False):
+    """HTML completo di una pagina evento.
+
+    orfano: l'evento e' sparito dal foglio pur non essendo ancora passato.
+    Vuol dire che e' stato annullato, oppure rinominato - e in quel caso
+    esiste gia' un'altra pagina con lo stesso contenuto. In entrambi i casi
+    non deve stare in indice."""
     e = dict(rec)
     e['d_start'] = datetime.date.fromisoformat(rec['d_start'])
     e['d_end'] = datetime.date.fromisoformat(rec['d_end'])
@@ -916,7 +951,7 @@ def render_pagina(rec, css, nav, foot, oggi):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(titolo_seo)}</title>
 <meta name="description" content="{esc(meta_d)}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="{'noindex, follow' if orfano else 'index, follow'}">
 <link rel="canonical" href="{url}">
 <meta property="og:title" content="{esc(titolo_seo)}">
 <meta property="og:description" content="{esc(meta_d)}">
@@ -978,7 +1013,7 @@ def scrivi_pagine(events):
     in cui la pagina e' cambiata davvero, non quella della run: dichiarare 35
     pagine "modificate oggi" a ogni giro e' falso, e Google smette di dare peso
     a <lastmod> quando lo trova inaffidabile."""
-    reg, nuovi = aggiorna_registro(events)
+    reg, nuovi, visti = aggiorna_registro(events)
     if not reg:
         print("[genera_eventi] nessuna pagina evento da generare")
         return {}
@@ -986,9 +1021,17 @@ def scrivi_pagine(events):
     css, nav, foot = _guscio()
     oggi = datetime.date.today()
     conclusi = cambiate = 0
+    orfane = []
     for slug, rec in reg.items():
         path = os.path.join(PAGINE_DIR, f"{slug}.html")
-        nuovo = render_pagina(rec, css, nav, foot, oggi)
+        # Un evento ancora futuro che non compare piu' nel foglio e' stato
+        # annullato o rinominato. Se rinominato, la pagina nuova esiste gia' e
+        # questa e' un doppione: fuori dall'indice e fuori dalla sitemap.
+        orfano = slug not in visti and \
+            datetime.date.fromisoformat(rec['d_end']) >= oggi
+        nuovo = render_pagina(rec, css, nav, foot, oggi, orfano)
+        if orfano:
+            orfane.append(slug)
         if datetime.date.fromisoformat(rec['d_end']) < oggi:
             conclusi += 1
         # riscriviamo solo se cambia: evita commit rumorosi ogni notte
@@ -1003,7 +1046,11 @@ def scrivi_pagine(events):
         json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
     print(f"[genera_eventi] pagine evento: {len(reg)} totali "
           f"({nuovi} nuove, {cambiate} riscritte, {conclusi} concluse)")
-    return {s: r['updated'] for s, r in sorted(reg.items())}
+    if orfane:
+        print(f"[genera_eventi] ATTENZIONE: {len(orfane)} pagine di eventi futuri "
+              f"spariti dal foglio (annullati o rinominati), messe in noindex "
+              f"e tolte dalla sitemap: {', '.join(sorted(orfane))}")
+    return {s: r['updated'] for s, r in sorted(reg.items()) if s not in orfane}
 
 
 def inject(tipo_opts, lista, jsonld):
@@ -1072,6 +1119,7 @@ def update_sitemap(slugs=()):
 
 def main():
     events = normalize(fetch_rows())
+    segnala_doppioni(events)
     assegna_ancore(events)
     tipo_opts, lista = render(events)
     jsonld = render_jsonld(events)
