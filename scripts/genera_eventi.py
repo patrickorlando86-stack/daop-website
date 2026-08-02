@@ -87,7 +87,8 @@ def fetch_rows():
             'Descrizione': e['descr'], 'Manifestazione': e.get('manifest', ''),
             'Locandina': e.get('loc', ''), 'Luogo': e.get('luogo', ''),
             'Indirizzo Completo': e.get('indirizzo', ''),
-        }, **{nomi[0]: e.get(campo, '') for campo, nomi in CAMPI_DAOP.items()})
+        }, **{nomi[0]: e[campo] for campo, nomi in CAMPI_DAOP.items()
+              if (e.get(campo) or '').strip()})
             for e in snap]
 
 
@@ -115,11 +116,22 @@ def _key(s):
     return re.sub(r'[^a-z0-9]+', '', s.lower())
 
 
+# Quali colonne editoriali esistono davvero nel foglio (a prescindere dal fatto
+# che siano compilate). Serve a non chiedere a fine run di aggiungere una
+# colonna che c'e' gia': l'unica cosa da fare, in quel caso, e' riempirla.
+COLONNE_VISTE = set()
+
+
 def campi_daop(d):
     """Legge dalla riga del foglio le colonne editoriali, se ci sono."""
     idx = {_key(k): (v or '').strip() for k, v in d.items()}
-    return {campo: next((idx[_key(n)] for n in nomi if idx.get(_key(n))), '')
-            for campo, nomi in CAMPI_DAOP.items()}
+    out = {}
+    for campo, nomi in CAMPI_DAOP.items():
+        presenti = [_key(n) for n in nomi if _key(n) in idx]
+        if presenti:
+            COLONNE_VISTE.add(campo)
+        out[campo] = next((idx[k] for k in presenti if idx[k]), '')
+    return out
 
 
 def normalize(rows):
@@ -1009,7 +1021,12 @@ def blocco_daop(e):
 
     Compare solo per i campi compilati nel foglio. Un titolo senza risposta
     ("Dove parcheggiare" seguito dal vuoto) e' peggio che non averlo."""
-    voci = [(t, (e.get(k) or '').strip()) for k, t in BLOCCHI_DAOP]
+    voci = [(t, (e.get(k) or '').strip()) for k, t in BLOCCHI_DAOP
+            # "Età consigliata" e' il giudizio nostro: se ripete la colonna Età,
+            # che sta gia' nella scheda fra i dati, e' una riga in piu' che dice
+            # la stessa cosa.
+            if not (k == 'eta_consigliata'
+                    and _key(e.get(k)) == _key(e.get('eta')))]
     voci = [(t, v) for t, v in voci if v]
     if not voci:
         return ''
@@ -1318,10 +1335,21 @@ def scrivi_pagine(events):
     # se e' a zero la pagina resta un doppione del volantino, e va detto.
     con_giudizio = sum(1 for r in reg.values()
                        if any((r.get(k) or '').strip() for k in CAMPI_DAOP))
-    print(f"[genera_eventi] schede con giudizio DAOP: {con_giudizio}/{len(reg)}"
-          + ("" if con_giudizio else
-             "  <- aggiungi al foglio le colonne " + ", ".join(
-                 f'"{n[0]}"' for n in CAMPI_DAOP.values())))
+    print(f"[genera_eventi] schede con giudizio DAOP: {con_giudizio}/{len(reg)}")
+    # Distinguiamo i due casi: la colonna non c'e' (va aggiunta) oppure c'e' ed
+    # e' vuota (va compilata). Dire "aggiungi Età consigliata" quando nel foglio
+    # c'e' gia' fa perdere tempo a chi legge.
+    mancanti = [nomi[0] for campo, nomi in CAMPI_DAOP.items()
+                if campo not in COLONNE_VISTE]
+    vuote = [nomi[0] for campo, nomi in CAMPI_DAOP.items()
+             if campo in COLONNE_VISTE
+             and not any((r.get(campo) or '').strip() for r in reg.values())]
+    if mancanti:
+        print("[genera_eventi]   colonne da aggiungere al foglio: "
+              + ", ".join(f'"{n}"' for n in mancanti))
+    if vuote:
+        print("[genera_eventi]   colonne presenti ma mai compilate: "
+              + ", ".join(f'"{n}"' for n in vuote))
     if orfane:
         print(f"[genera_eventi] ATTENZIONE: {len(orfane)} pagine di eventi futuri "
               f"spariti dal foglio (annullati o rinominati), messe in noindex "
