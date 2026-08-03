@@ -146,7 +146,25 @@ def graph(cfg, path, params, metodo='GET'):
         raise RuntimeError(f"rete non raggiungibile: {e.reason}")
 
 
-def elenca_pagine(cfg, con_token=False):
+def token_lungo(cfg, breve):
+    """Scambia il token utente da un'ora dell'Esplora API con quello da 60
+    giorni. Serve solo di passaggio: e' dal token lungo che nascono i token di
+    pagina senza scadenza, ed e' quello il motivo di tutto il giro."""
+    app_id = os.environ.get('FB_APP_ID', '').strip()
+    segreto = os.environ.get('FB_APP_SECRET', '').strip()
+    if not app_id or not segreto:
+        raise SystemExit("[facebook] servono FB_APP_ID e FB_APP_SECRET in ambiente "
+                         "(Impostazioni dell'app -> Di base)")
+    res = graph(cfg, 'oauth/access_token', {
+        'grant_type': 'fb_exchange_token',
+        'client_id': app_id,
+        'client_secret': segreto,
+        'fb_exchange_token': breve,
+    })
+    return res['access_token']
+
+
+def elenca_pagine(cfg, con_token=False, scambia=False):
     """Stampa nome e ID delle pagine amministrate, per riempire data/social.json.
 
     Con --con-token stampa anche il token di pagina: se FB_USER_TOKEN e' un
@@ -156,6 +174,9 @@ def elenca_pagine(cfg, con_token=False):
     token = os.environ.get('FB_USER_TOKEN', '').strip()
     if not token:
         raise SystemExit("[facebook] serve FB_USER_TOKEN (token utente) in ambiente")
+    if scambia:
+        token = token_lungo(cfg, token)
+        print("[facebook] token utente allungato a 60 giorni")
     campi = 'name,id,access_token' if con_token else 'name,id'
     res = graph(cfg, 'me/accounts', {'fields': campi, 'limit': 100,
                                      'access_token': token})
@@ -198,13 +219,16 @@ def main():
                     help="elenca le pagine e i loro ID partendo da FB_USER_TOKEN")
     ap.add_argument('--con-token', action='store_true',
                     help="con --pagine, stampa anche il token di pagina da mettere nei secret")
+    ap.add_argument('--scambia', action='store_true',
+                    help="con --pagine, allunga prima il token utente a 60 giorni "
+                         "(servono FB_APP_ID e FB_APP_SECRET)")
     ap.add_argument('--anche-da-verificare', action='store_true',
                     help="posta anche gli articoli con dati non ancora confermati")
     args = ap.parse_args()
 
     cfg = carica_config()
     if args.pagine:
-        elenca_pagine(cfg, con_token=args.con_token)
+        elenca_pagine(cfg, con_token=args.con_token, scambia=args.scambia)
         return 0
 
     oggi = datetime.date.today()
