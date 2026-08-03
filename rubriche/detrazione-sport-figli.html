@@ -218,7 +218,10 @@
   color:var(--orange-ink,#a05714);margin:2px 0 8px}
 .art-firma p{font-size:.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:10px}
 .art-firma-link{font-size:.84rem;font-weight:600;color:var(--navy);margin-right:14px}
-.art-altri{margin:48px 0 0;border-top:1px solid rgba(45,74,92,.1);padding-top:30px}
+/* position:static esplicito come rete di sicurezza: il blocco e' un div con
+   role="navigation", ma se un giorno tornasse a essere un <nav> la regola di
+   elemento del sito lo incollerebbe di nuovo in cima alla pagina. */
+.art-altri{position:static;margin:48px 0 0;border-top:1px solid rgba(45,74,92,.1);padding-top:30px}
 .art-altri-titolo{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   color:var(--text-light);margin-bottom:16px}
 .art-altri-lista{display:grid;gap:12px}
@@ -372,10 +375,10 @@
         <a class="art-firma-link" href="https://www.instagram.com/stefyste1982/" target="_blank" rel="noopener">Instagram →</a>
       </div>
     </aside>
-  <nav class="art-altri" aria-label="Altri articoli della rubrica">
+  <div class="art-altri" role="navigation" aria-label="Altri articoli della rubrica">
       <div class="art-altri-titolo">Altri articoli della rubrica</div>
       <div class="art-altri-lista"><a href="/rubriche/iva-agevolata-infanzia.html"><div class="art-altri-data">1 agosto 2026</div><h3>IVA agevolata sui prodotti per l&#x27;infanzia: dove il risparmio c&#x27;è davvero</h3></a><a href="/rubriche/spese-mediche.html"><div class="art-altri-data">1 luglio 2026</div><h3>Spese mediche in famiglia: come non perdere nemmeno un euro</h3></a><a href="/rubriche/spese-veterinarie.html"><div class="art-altri-data">1 giugno 2026</div><h3>Spese veterinarie: la detrazione che in pochi conoscono</h3></a></div>
-    </nav>
+    </div>
   <a href="/rubriche.html" class="art-back">← Tutte le rubriche</a>
 </article>
 </main>

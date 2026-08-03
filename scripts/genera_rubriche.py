@@ -221,7 +221,10 @@ ARTICOLO_CSS = """
   color:var(--orange-ink,#a05714);margin:2px 0 8px}
 .art-firma p{font-size:.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:10px}
 .art-firma-link{font-size:.84rem;font-weight:600;color:var(--navy);margin-right:14px}
-.art-altri{margin:48px 0 0;border-top:1px solid rgba(45,74,92,.1);padding-top:30px}
+/* position:static esplicito come rete di sicurezza: il blocco e' un div con
+   role="navigation", ma se un giorno tornasse a essere un <nav> la regola di
+   elemento del sito lo incollerebbe di nuovo in cima alla pagina. */
+.art-altri{position:static;margin:48px 0 0;border-top:1px solid rgba(45,74,92,.1);padding-top:30px}
 .art-altri-titolo{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   color:var(--text-light);margin-bottom:16px}
 .art-altri-lista{display:grid;gap:12px}
@@ -296,18 +299,28 @@ def blocco_firma(aut, rub):
 
 
 def blocco_altri(a, pubblicati):
-    """Gli ultimi tre pezzi della stessa rubrica, escluso quello corrente."""
-    altri = [x for x in pubblicati if x['rubrica'] == a['rubrica'] and x['slug'] != a['slug']][:3]
+    """Gli ultimi tre pezzi della stessa rubrica, escluso quello corrente.
+
+    Qui l'ordine resta dal piu' recente: in fondo a un articolo si offre
+    l'ultima uscita, non il pezzo di gennaio. L'indice invece va in ordine
+    di mese (vedi render_hub), perche' li' si legge la rubrica come serie."""
+    altri = sorted((x for x in pubblicati
+                    if x['rubrica'] == a['rubrica'] and x['slug'] != a['slug']),
+                   key=lambda x: x['data'], reverse=True)[:3]
     if not altri:
         return ''
     voci = "".join(
         f'<a href="/rubriche/{x["slug"]}.html">'
         f'<div class="art-altri-data">{esc(data_estesa(x["data"]))}</div>'
         f'<h3>{esc(x["titolo"])}</h3></a>' for x in altri)
-    return f"""<nav class="art-altri" aria-label="Altri articoli della rubrica">
+    # <div role="navigation"> e non <nav>: il CSS del sito ha nav{position:fixed;
+    # top:0;left:0;right:0} come selettore di ELEMENTO, e un <nav> qui dentro
+    # finiva incollato in cima alla pagina sopra la barra. Stessa scelta gia'
+    # fatta per il breadcrumb delle pagine evento.
+    return f"""<div class="art-altri" role="navigation" aria-label="Altri articoli della rubrica">
       <div class="art-altri-titolo">Altri articoli della rubrica</div>
       <div class="art-altri-lista">{voci}</div>
-    </nav>"""
+    </div>"""
 
 
 def pagina_articolo(a, rub, aut, cfg, pubblicati, css, nav, foot, sprite):
@@ -418,7 +431,11 @@ def scrivi_pagine(cfg, rubriche, autori, pubblicati):
 def render_hub(rubriche, autori, pubblicati):
     sezioni = []
     for i, (rslug, rub) in enumerate(rubriche.items()):
-        articoli = [a for a in pubblicati if a['rubrica'] == rslug]
+        # Ordine di mese, dal primo all'ultimo: sono rubriche mensili e si
+        # leggono come una serie (il pezzo di gennaio e' quello che presenta
+        # la rubrica). Dal piu' recente si arrivava all'introduzione per ultima.
+        articoli = sorted((a for a in pubblicati if a['rubrica'] == rslug),
+                          key=lambda a: a['data'])
         aut = autori[rub['autore']]
         acc = rub['accento']
         link = []

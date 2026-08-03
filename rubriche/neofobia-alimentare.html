@@ -218,7 +218,10 @@
   color:var(--orange-ink,#a05714);margin:2px 0 8px}
 .art-firma p{font-size:.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:10px}
 .art-firma-link{font-size:.84rem;font-weight:600;color:var(--navy);margin-right:14px}
-.art-altri{margin:48px 0 0;border-top:1px solid rgba(45,74,92,.1);padding-top:30px}
+/* position:static esplicito come rete di sicurezza: il blocco e' un div con
+   role="navigation", ma se un giorno tornasse a essere un <nav> la regola di
+   elemento del sito lo incollerebbe di nuovo in cima alla pagina. */
+.art-altri{position:static;margin:48px 0 0;border-top:1px solid rgba(45,74,92,.1);padding-top:30px}
 .art-altri-titolo{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   color:var(--text-light);margin-bottom:16px}
 .art-altri-lista{display:grid;gap:12px}
@@ -374,10 +377,10 @@
         <a class="art-firma-link" href="https://www.serafinacardacinutrizione.com" target="_blank" rel="noopener">Sito web →</a><a class="art-firma-link" href="https://www.instagram.com/sery.cardaci.nutrizionista/" target="_blank" rel="noopener">Instagram →</a>
       </div>
     </aside>
-  <nav class="art-altri" aria-label="Altri articoli della rubrica">
+  <div class="art-altri" role="navigation" aria-label="Altri articoli della rubrica">
       <div class="art-altri-titolo">Altri articoli della rubrica</div>
       <div class="art-altri-lista"><a href="/rubriche/cucinare-insieme.html"><div class="art-altri-data">1 agosto 2026</div><h3>Cucinare insieme ai bambini è educazione alimentare vera</h3></a><a href="/rubriche/colazione-bambini.html"><div class="art-altri-data">1 luglio 2026</div><h3>La colazione dei bambini: cosa serve davvero (e cosa no)</h3></a><a href="/rubriche/feste-e-cibo.html"><div class="art-altri-data">1 giugno 2026</div><h3>Sagre, feste e cibo: perché un giorno fuori dalle regole non rovina nulla</h3></a></div>
-    </nav>
+    </div>
   <a href="/rubriche.html" class="art-back">← Tutte le rubriche</a>
 </article>
 </main>
