@@ -164,6 +164,37 @@ def token_lungo(cfg, breve):
     return res['access_token']
 
 
+def diagnosi(cfg):
+    """Dice di chi e' il token, quali permessi ha davvero e cosa risponde
+    /me/accounts. Serve quando l'elenco pagine torna vuoto: la causa e' sempre
+    uno di questi tre, ma da fuori sono indistinguibili."""
+    token = os.environ.get('FB_USER_TOKEN', '').strip()
+    if not token:
+        raise SystemExit("[facebook] serve FB_USER_TOKEN (token utente) in ambiente")
+
+    io_ = graph(cfg, 'me', {'fields': 'id,name', 'access_token': token})
+    print(f"[facebook] il token appartiene a: {io_.get('name')} (id {io_.get('id')})")
+
+    perm = graph(cfg, 'me/permissions', {'access_token': token})
+    concessi = sorted(p['permission'] for p in perm.get('data', [])
+                      if p.get('status') == 'granted')
+    negati = sorted(p['permission'] for p in perm.get('data', [])
+                    if p.get('status') != 'granted')
+    print(f"[facebook] permessi concessi: {', '.join(concessi) or 'nessuno'}")
+    if negati:
+        print(f"[facebook] permessi NEGATI: {', '.join(negati)}")
+    for serve in ('pages_show_list', 'pages_manage_posts', 'pages_read_engagement'):
+        if serve not in concessi:
+            print(f"[facebook]   manca {serve}")
+
+    res = graph(cfg, 'me/accounts', {'fields': 'name,id,tasks', 'limit': 100,
+                                     'access_token': token})
+    dati = res.get('data', [])
+    print(f"[facebook] /me/accounts risponde con {len(dati)} pagine")
+    for p in dati:
+        print(f"    {p['id']}   {p['name']}   tasks={','.join(p.get('tasks') or [])}")
+
+
 def elenca_pagine(cfg, con_token=False, scambia=False):
     """Stampa nome e ID delle pagine amministrate, per riempire data/social.json.
 
@@ -219,6 +250,8 @@ def main():
                     help="elenca le pagine e i loro ID partendo da FB_USER_TOKEN")
     ap.add_argument('--con-token', action='store_true',
                     help="con --pagine, stampa anche il token di pagina da mettere nei secret")
+    ap.add_argument('--diagnosi', action='store_true',
+                    help="dice di chi e' il token, che permessi ha e cosa vede")
     ap.add_argument('--scambia', action='store_true',
                     help="con --pagine, allunga prima il token utente a 60 giorni "
                          "(servono FB_APP_ID e FB_APP_SECRET)")
@@ -227,6 +260,9 @@ def main():
     args = ap.parse_args()
 
     cfg = carica_config()
+    if args.diagnosi:
+        diagnosi(cfg)
+        return 0
     if args.pagine:
         elenca_pagine(cfg, con_token=args.con_token, scambia=args.scambia)
         return 0
