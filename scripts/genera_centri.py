@@ -663,14 +663,38 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def aggiorna_sitemap(files):
-    """Tiene le pagine dei centri nella sitemap, dentro i propri marker."""
+def aggiorna_sitemap(cambiate):
+    """Tiene le pagine dei centri nella sitemap, dentro i propri marker.
+
+    Elenca TUTTE le pagine di stagione presenti su disco, non solo quelle
+    generate in questa run: il blocco viene riscritto per intero, e passare
+    solo la stagione appena rigenerata cancellava le altre dalla sitemap
+    (bastava un "genera_centri.py invernali" per far sparire gli estivi).
+
+    Il lastmod si aggiorna solo per le pagine davvero cambiate: ristampare
+    la data di oggi su una pagina identica e' un segnale di freschezza falso."""
     if not os.path.exists(SITEMAP_PATH):
         return
+    # Ordine stabile e senza doppioni (piu' stagioni possono puntare allo
+    # stesso file), limitato alle pagine che esistono davvero.
+    files, visti = [], set()
+    for cfg in STAGIONI.values():
+        f = cfg['file']
+        if f not in visti and os.path.exists(os.path.join(ROOT, f)):
+            visti.add(f)
+            files.append(f)
+    if not files:
+        print("[genera_centri] nessuna pagina centri su disco, sitemap invariata")
+        return
+
     oggi = datetime.date.today().isoformat()
     s = open(SITEMAP_PATH, encoding='utf-8').read()
+    # lastmod gia' in sitemap, per non azzerarlo su pagine non toccate.
+    precedenti = dict(re.findall(
+        r'<loc>\s*' + re.escape(SITE_URL) + r'/([^<\s]+)\s*</loc>\s*<lastmod>\s*([^<\s]+)\s*</lastmod>', s))
     blocco = "\n".join(
-        f"  <url>\n    <loc>{SITE_URL}/{f}</loc>\n    <lastmod>{oggi}</lastmod>\n"
+        f"  <url>\n    <loc>{SITE_URL}/{f}</loc>\n"
+        f"    <lastmod>{oggi if f in cambiate else precedenti.get(f, oggi)}</lastmod>\n"
         f"    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>"
         for f in files)
     s, n = re.subn(r'(<!-- CENTRI:START.*?-->).*?( *<!-- CENTRI:END -->)',
@@ -679,7 +703,8 @@ def aggiorna_sitemap(files):
         print("[genera_centri] marker CENTRI non trovati in sitemap.xml, salto")
         return
     open(SITEMAP_PATH, 'w', encoding='utf-8').write(s)
-    print(f"[genera_centri] sitemap: {len(files)} pagine centri")
+    print(f"[genera_centri] sitemap: {len(files)} pagine centri "
+          f"({len(cambiate & set(files))} con lastmod aggiornato)")
 
 
 # Stagioni generate senza argomenti. Gli invernali sono configurati ma NON
@@ -697,7 +722,7 @@ def main(argv):
     if ignote:
         raise SystemExit(f"[genera_centri] stagione sconosciuta: {', '.join(ignote)}")
     css, nav, foot = G._guscio()
-    scritte = []
+    cambiate = set()   # solo le pagine riscritte davvero: guidano il lastmod
     for chiave in chiavi:
         cfg = STAGIONI[chiave]
         tab = os.environ.get(f"CENTRI_TAB_{chiave.upper()}", cfg['tab'])
@@ -710,7 +735,6 @@ def main(argv):
             if os.path.exists(path):
                 print(f"[genera_centri] {cfg['file']}: foglio non letto, "
                       f"lascio la pagina com'e'")
-                scritte.append(cfg['file'])
                 continue
             print(f"[genera_centri] {cfg['file']}: foglio non letto e pagina "
                   f"assente, la creo fuori stagione")
@@ -721,8 +745,8 @@ def main(argv):
         else:
             open(path, 'w', encoding='utf-8').write(nuovo)
             print(f"[genera_centri] {cfg['file']}: scritta ({len(centri)} centri)")
-        scritte.append(cfg['file'])
-    aggiorna_sitemap(scritte)
+            cambiate.add(cfg['file'])
+    aggiorna_sitemap(cambiate)
     return 0
 
 
