@@ -47,6 +47,8 @@ STAGIONI = {
         'file': 'centri-estivi.html',
         'tab': 'Centri Est/Inv',
         'h1': 'Centri Estivi',
+        # parte in corsivo oro dell'H1, come "Oggi" nell'hero degli eventi
+        'h1_em': 'Alessandria e Asti',
         'singolare': 'centro estivo',
         'titolo': 'Centri Estivi in Provincia di Alessandria e Asti | DAOP',
         'descr': ('Centri estivi per bambini in provincia di Alessandria e Asti: '
@@ -60,6 +62,7 @@ STAGIONI = {
         'file': 'centri-invernali.html',
         'tab': 'Centri Est/Inv',
         'h1': 'Centri Invernali',
+        'h1_em': 'Alessandria e Asti',
         'singolare': 'centro invernale',
         'titolo': 'Centri Invernali e Vacanze di Natale ad Alessandria e Asti | DAOP',
         'descr': ('Centri invernali e attività per bambini durante le vacanze di Natale '
@@ -223,11 +226,16 @@ def leggi_centri(tab, chiave):
 
 
 CSS = """
-.ce-wrap{max-width:900px;margin:0 auto;padding:148px 20px 40px}
-@media(max-width:600px){.ce-wrap{padding:120px 18px 32px}}
-.ce-crumb{position:static;font-size:.85rem;opacity:.7;margin:0 0 10px}
-.ce-crumb a{color:inherit}
-.ce-lead{font-size:1.06rem;line-height:1.7;margin:.4em 0 1.2em}
+/* L'intestazione ora e' un .page-hero come negli eventi e compensa lei la nav
+   fissa: al contenuto serve solo il respiro sotto l'hero. */
+.ce-wrap{max-width:900px;margin:0 auto;padding:34px 20px 40px}
+@media(max-width:600px){.ce-wrap{padding:26px 18px 32px}}
+/* Il breadcrumb sta dentro l'hero blu: testo chiaro, non il grigio su bianco.
+   position:static perche' il CSS del sito ha nav{position:fixed} come selettore
+   di elemento e renderebbe fisso anche questo. */
+.page-hero .ce-crumb{position:static;font-size:.85rem;color:rgba(255,255,255,0.7);margin:0 0 14px}
+.page-hero .ce-crumb a{color:rgba(255,255,255,0.9)}
+.page-hero .ce-crumb span{color:rgba(255,255,255,0.7)}
 .ce-note{border:1px solid #cfe0d8;background:#f2f8f5;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ce-note strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ce-note{background:#1d2a24;border-color:#3c5548}}
@@ -619,16 +627,22 @@ def render(chiave, cfg, centri, css, nav, foot):
 <body>
 {nav}
 <main id="contenuto">
-<article class="ce-wrap">
-  <div class="ce-crumb" role="navigation" aria-label="Percorso">
-    <a href="/">Home</a> › <span>{G.esc(cfg['h1'])}</span>
+<!-- HERO — stessa intestazione della pagina eventi (.page-hero arriva dal CSS
+     di eventi.html copiato da _guscio(): le due pagine restano coerenti). -->
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="ce-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <span>{G.esc(cfg['h1'])}</span>
+    </div>
+    <span class="section-label">Alessandria · Asti · Famiglie</span>
+    <h1>{G.esc(cfg['h1'])} <em>{cfg['h1_em']}</em></h1>
+    <p>I centri per bambini attivi durante {cfg['periodo']} nelle province di
+    Alessandria e Asti, con età, orari e costi. Sotto, la guida per scegliere:
+    quando ci si iscrive, cosa chiedere prima e quali documenti servono.</p>
+    <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi qualcosa per oggi? Vedi le <a href="/eventi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">sagre e gli eventi in provincia di Alessandria e Asti</a>.</p>
   </div>
-  <header>
-    <h1>{G.esc(cfg['h1'])} in Provincia di <em>Alessandria e Asti</em></h1>
-    <p class="ce-lead">I centri per bambini attivi durante {cfg['periodo']} nelle
-    province di Alessandria e Asti, con età, orari e costi. Sotto, la guida per
-    scegliere: quando ci si iscrive, cosa chiedere prima e quali documenti servono.</p>
-  </header>
+</header>
+<article class="ce-wrap">
   {avviso}
   {elenco}
   {guida(cfg)}
