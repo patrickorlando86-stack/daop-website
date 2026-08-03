@@ -191,8 +191,29 @@ def leggi_centri(tab, chiave):
             continue
         out.append(c)
 
+    # Il foglio e' compilato a mano e capita la stessa riga due volte (es.
+    # "Osterietta Summer", "R-Estate a Bosio"): in pagina uscivano schede
+    # doppie. Per ogni centro (nome+citta'+inizio) teniamo la riga piu'
+    # completa - piu' descrizione, e con locandina/sito/contatti - cosi' non
+    # serve ripulire il foglio a mano ogni volta.
+    def _chiave(c):
+        return (cslug(c['nome']), cslug(c['citta']), c['d_start'])
+
+    def _punteggio(c):
+        return (len(c['descr'] or ''), bool(c['loc'].strip()),
+                bool(c['sito'].strip()), bool(c['contatti'].strip()))
+
+    migliori = {}
+    for c in out:
+        k = _chiave(c)
+        if k not in migliori or _punteggio(c) > _punteggio(migliori[k]):
+            migliori[k] = c
+    doppi = len(out) - len(migliori)
+    out = list(migliori.values())
+
     out.sort(key=lambda c: (c['d_start'] or datetime.date.max, c['nome']))
     coda = f", {scartati} di altra stagione" if scartati else ""
+    coda += f", {doppi} doppioni uniti" if doppi else ""
     print(f"[genera_centri] tab '{tab}': {len(out)} centri per '{chiave}'{coda}")
     senza = sum(1 for c in out if c['loc'].strip() and not locandina(c))
     if senza:
