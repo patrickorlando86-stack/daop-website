@@ -1043,10 +1043,14 @@ document.addEventListener('DOMContentLoaded', function () {
     align-items: center;
   }
 
-  /* ── COLLABORATORI GRID ── */
+  /* ── COLLABORATORI GRID ──
+     auto-fit invece di 3 colonne fisse: le rubriche sono due, e una terza
+     colonna vuota lasciava le schede spinte a sinistra con un buco a destra.
+     Cosi' la griglia si adatta anche se un domani se ne aggiunge una. */
   .collab-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
+    justify-content: center;
     gap: 32px;
     margin-top: 48px;
   }
@@ -1141,7 +1145,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </a>
     <ul class="nav-links">
       <li><a href="#chi-siamo">Chi Siamo</a></li>
-      <li><a href="eventi.html">Eventi</a></li>
+      <li><a href="eventi.html">Eventi</a></li><li><a href="rubriche.html">Rubriche</a></li>
       <li><a href="ginetto.html">Ginetto AI</a></li>
       <li><a href="bollino.html">Bollino</a></li>
       <li><a href="piattosano.html">Il Piatto Sano</a></li>
@@ -1158,6 +1162,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <div class="mobile-menu" id="mobile-menu">
   <a href="#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
   <a href="eventi.html" onclick="closeMobile()">Eventi</a>
+  <a href="rubriche.html" onclick="closeMobile()">Rubriche</a>
   <a href="ginetto.html" onclick="closeMobile()">Ginetto AI</a>
   <a href="bollino.html" onclick="closeMobile()">Bollino</a>
   <a href="piattosano.html" onclick="closeMobile()">Il Piatto Sano</a>
@@ -1522,6 +1527,10 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="team-role">Nutrizionista</div>
           <div class="team-name">Serafina Cardaci</div>
           <p class="team-desc">Cura la rubrica <em>Mangiando s’impara</em>: consigli pratici su alimentazione e benessere per tutta la famiglia, con un occhio speciale al Piatto Sano.</p>
+          <a href="rubriche.html#mangiando-simpara" class="team-social-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Leggi la rubrica
+          </a>
           <a href="https://www.serafinacardacinutrizione.com" target="_blank" rel="noopener" class="team-social-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             Sito web
@@ -1533,20 +1542,6 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       </div>
       <div class="team-card fade-in fade-in-delay-2">
-        <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#2d4a5c);position:relative;">
-          <img loading="lazy" src="assets/images/benedetta.webp" alt="Benedetta De Paolis" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" width="468" height="527">
-        </div>
-        <div class="team-body">
-          <div class="team-role">Giornalista</div>
-          <div class="team-name">Benedetta De Paolis</div>
-          <p class="team-desc">Cura la rubrica <em>Avventure di Carta</em>: consigli letterari e percorsi di lettura per i più piccoli e per chi legge con loro.</p>
-          <a href="https://www.instagram.com/benedettadepaolis82/" target="_blank" rel="noopener" class="team-social-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            Instagram
-          </a>
-        </div>
-      </div>
-      <div class="team-card fade-in fade-in-delay-3">
         <div class="team-photo" style="background:linear-gradient(135deg,#c9a227,#8a6d0a);position:relative;">
           <img loading="lazy" src="assets/images/stef.webp" alt="Stefania Eligi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" width="411" height="458">
         </div>
@@ -1554,6 +1549,10 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="team-role">Commercialista</div>
           <div class="team-name">Stefania Eligi</div>
           <p class="team-desc">Cura la rubrica <em>Pillole Fiscali</em>: bonus, agevolazioni e detrazioni spiegate in modo chiaro e utile per le famiglie.</p>
+          <a href="rubriche.html#pillole-fiscali" class="team-social-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Leggi la rubrica
+          </a>
           <a href="https://www.instagram.com/stefyste1982/" target="_blank" rel="noopener" class="team-social-btn">
             <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             Instagram
@@ -1868,6 +1867,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.55);margin-bottom:16px;">Prodotti</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
         <a href="eventi.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Eventi</a>
+        <a href="rubriche.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Rubriche</a>
         <a href="https://ginettoapp.it" target="_blank" rel="noopener" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);transition:var(--transition);">Ginetto AI</a>
         <a href="piattosano.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Il Piatto Sano</a>
         <a href="libri.html" style="text-decoration:none;font-size:0.88rem;color:rgba(255,255,255,0.62);">Libri</a>

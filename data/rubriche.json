@@ -1,0 +1,75 @@
+{
+  "_nota": "Metadati delle rubriche e degli autori. I testi degli articoli stanno in contenuti/rubriche/<rubrica>/*.md, uno per pezzo. Per aggiungere un articolo: crea il file .md e rilancia scripts/genera_rubriche.py.",
+  "rubriche": [
+    {
+      "slug": "mangiando-simpara",
+      "nome": "Mangiando s'impara",
+      "occhiello": "Alimentazione e famiglia",
+      "sottotitolo": "Ogni mese un argomento, tanti spunti pratici per vivere il cibo in famiglia con più serenità.",
+      "descrizione": "Come si compone un piatto equilibrato, perché i bambini rifiutano il cibo nuovo, cosa mettere nello zaino per la merenda. Consigli pratici di educazione alimentare per genitori, senza dogmi e senza sensi di colpa.",
+      "accento": "orange",
+      "icona": "i-sprout",
+      "autore": "serafina-cardaci"
+    },
+    {
+      "slug": "pillole-fiscali",
+      "nome": "Pillole Fiscali",
+      "occhiello": "Bonus e detrazioni",
+      "sottotitolo": "Bonus, agevolazioni e detrazioni spiegate in modo chiaro e utile per le famiglie.",
+      "descrizione": "Assegno Unico, Bonus Nido, detrazioni per sport, scuola e spese mediche. Quello che spetta a una famiglia con figli, spiegato senza gergo da una commercialista.",
+      "accento": "gold",
+      "icona": "i-briefcase",
+      "autore": "stefania-eligi",
+      "avviso": "Le informazioni di questa rubrica hanno finalità divulgativa e si riferiscono alla normativa in vigore alla data di pubblicazione indicata. Importi, soglie e requisiti cambiano spesso: prima di prendere una decisione verifica sulle fonti ufficiali (INPS, Agenzia delle Entrate) o rivolgiti al tuo commercialista."
+    }
+  ],
+  "autori": [
+    {
+      "slug": "serafina-cardaci",
+      "nome": "Serafina Cardaci",
+      "titolo": "Biologa nutrizionista",
+      "bio": "Biologa nutrizionista, responsabile scientifica del programma S.A.N.E. e del gioco educativo Il Piatto Sano. Cura per DAOP la rubrica Mangiando s'impara.",
+      "foto": "/assets/images/serafina.webp",
+      "sito": "https://www.serafinacardacinutrizione.com",
+      "instagram": "https://www.instagram.com/sery.cardaci.nutrizionista/"
+    },
+    {
+      "slug": "stefania-eligi",
+      "nome": "Stefania Eligi",
+      "titolo": "Commercialista",
+      "bio": "Dottore commercialista. Cura per DAOP la rubrica Pillole Fiscali, dedicata a bonus, agevolazioni e detrazioni per le famiglie con figli.",
+      "foto": "/assets/images/stef.webp",
+      "instagram": "https://www.instagram.com/stefyste1982/"
+    }
+  ],
+  "cta": {
+    "piattosano": {
+      "titolo": "Il Piatto Sano",
+      "testo": "Il gioco educativo che insegna ai bambini a comporre un piatto equilibrato, con i 14 allergeni e la guida della nutrizionista.",
+      "label": "Scopri Il Piatto Sano",
+      "link": "/piattosano.html",
+      "icona": "i-sprout"
+    },
+    "ginetto": {
+      "titolo": "Ginetto AI",
+      "testo": "L'assistente digitale che aiuta le famiglie a scoprire cosa fare con i bambini nel weekend in provincia di Alessandria e Asti.",
+      "label": "Prova Ginetto",
+      "link": "/ginetto.html",
+      "icona": "i-smartphone"
+    },
+    "eventi": {
+      "titolo": "Eventi per famiglie",
+      "testo": "Sagre, laboratori, spettacoli e feste per bambini in provincia di Alessandria e Asti, aggiornati ogni giorno.",
+      "label": "Guarda gli eventi",
+      "link": "/eventi.html",
+      "icona": "i-calendar"
+    },
+    "libri": {
+      "titolo": "I libri di DAOP",
+      "testo": "La collana dell'Esploratore e i libri che accompagnano le famiglie alla scoperta del territorio.",
+      "label": "Sfoglia i libri",
+      "link": "/libri.html",
+      "icona": "i-backpack"
+    }
+  }
+}
