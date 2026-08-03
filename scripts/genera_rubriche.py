@@ -20,7 +20,7 @@ statico senza pubblicare articoli datati domani.
 
 Per aggiungere un pezzo: crea il .md, rilancia lo script. Nient'altro.
 """
-import os, re, json, html, datetime, unicodedata, sys
+import os, re, json, html, datetime, unicodedata, sys, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "data", "rubriche.json")
@@ -428,6 +428,47 @@ def scrivi_pagine(cfg, rubriche, autori, pubblicati):
 
 # -------------------------------------------------------------------- hub
 
+def card_articolo(a, acc):
+    return (f'<a class="rub-card" href="rubriche/{a["slug"]}.html">'
+            f'<div class="rub-card-accent {acc}"></div>'
+            f'<div class="rub-card-body">'
+            f'<div class="rub-card-date">{esc(data_estesa(a["data"]))}</div>'
+            f'<h3>{esc(a["titolo"])}</h3>'
+            f'<p>{esc(trunc(a["sommario"], 155))}</p>'
+            f'<span class="rub-card-more {acc}">Leggi '
+            f'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
+            f'</span></div></a>')
+
+
+def fisarmonica_anni(articoli, acc):
+    """Un <details> per anno. Anni dal piu' recente (chi torna sul sito vuole
+    l'annata in corso senza scorrere), mesi in ordine dentro l'anno (la rubrica
+    si legge come una serie). Aperto solo l'anno piu' recente.
+
+    <details> nativo e non un accordion in JavaScript: funziona senza script,
+    e' navigabile da tastiera e i motori indicizzano anche il contenuto chiuso.
+    """
+    per_anno = collections.OrderedDict()
+    for a in sorted(articoli, key=lambda a: a['data']):
+        per_anno.setdefault(a['data'].year, []).append(a)
+
+    blocchi = []
+    for pos, anno in enumerate(sorted(per_anno, reverse=True)):
+        pezzi = per_anno[anno]
+        conta = f"{len(pezzi)} articolo" if len(pezzi) == 1 else f"{len(pezzi)} articoli"
+        blocchi.append(
+            f'<details class="rub-anno"{" open" if pos == 0 else ""}>'
+            f'<summary class="rub-anno-sommario">'
+            f'<span class="rub-anno-num">{anno}</span>'
+            f'<span class="rub-anno-conta">{conta}</span>'
+            f'<svg class="icon rub-anno-chevron" viewBox="0 0 24 24" aria-hidden="true">'
+            f'<use href="#i-chevron-down"/></svg>'
+            f'</summary>'
+            f'<div class="rub-grid">{"".join(card_articolo(a, acc) for a in pezzi)}</div>'
+            f'</details>')
+    return "\n    ".join(blocchi)
+
+
 def render_hub(rubriche, autori, pubblicati):
     sezioni = []
     for i, (rslug, rub) in enumerate(rubriche.items()):
@@ -449,17 +490,7 @@ def render_hub(rubriche, autori, pubblicati):
         if rub.get('avviso'):
             avviso = f'<div class="rub-avviso"><strong>Nota</strong>{esc(rub["avviso"])}</div>'
         if articoli:
-            card = "".join(
-                f'<a class="rub-card" href="rubriche/{a["slug"]}.html">'
-                f'<div class="rub-card-accent {acc}"></div>'
-                f'<div class="rub-card-body">'
-                f'<div class="rub-card-date">{esc(data_estesa(a["data"]))}</div>'
-                f'<h3>{esc(a["titolo"])}</h3>'
-                f'<p>{esc(trunc(a["sommario"], 155))}</p>'
-                f'<span class="rub-card-more {acc}">Leggi '
-                f'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
-                f'</span></div></a>' for a in articoli)
-            griglia = f'<div class="rub-grid">{card}</div>'
+            griglia = fisarmonica_anni(articoli, acc)
         else:
             griglia = ('<p class="section-subtitle">Il primo articolo di questa rubrica '
                        'sarà pubblicato a breve.</p>')
