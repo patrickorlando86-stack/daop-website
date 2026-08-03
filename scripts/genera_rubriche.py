@@ -443,7 +443,8 @@ def card_articolo(a, acc):
 def fisarmonica_anni(articoli, acc):
     """Un <details> per anno. Anni dal piu' recente (chi torna sul sito vuole
     l'annata in corso senza scorrere), mesi in ordine dentro l'anno (la rubrica
-    si legge come una serie). Aperto solo l'anno piu' recente.
+    si legge come una serie). Tutti chiusi all'apertura della pagina: si vede
+    l'indice degli anni e si apre quello che interessa, senza scorrere schede.
 
     <details> nativo e non un accordion in JavaScript: funziona senza script,
     e' navigabile da tastiera e i motori indicizzano anche il contenuto chiuso.
@@ -453,11 +454,11 @@ def fisarmonica_anni(articoli, acc):
         per_anno.setdefault(a['data'].year, []).append(a)
 
     blocchi = []
-    for pos, anno in enumerate(sorted(per_anno, reverse=True)):
+    for anno in sorted(per_anno, reverse=True):
         pezzi = per_anno[anno]
         conta = f"{len(pezzi)} articolo" if len(pezzi) == 1 else f"{len(pezzi)} articoli"
         blocchi.append(
-            f'<details class="rub-anno"{" open" if pos == 0 else ""}>'
+            f'<details class="rub-anno">'
             f'<summary class="rub-anno-sommario">'
             f'<span class="rub-anno-num">{anno}</span>'
             f'<span class="rub-anno-conta">{conta}</span>'
