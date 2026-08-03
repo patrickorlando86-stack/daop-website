@@ -5,7 +5,7 @@
  "collana": {
   "titolo": "Ginetto l'Esploratore",
   "occhiello": "Collana illustrata",
-  "intro": "Ginetto l'Esploratore è una collana di libri illustrati che accompagna bambini e genitori alla scoperta dei paesi del nostro territorio, un volume alla volta. Ogni libro nasce camminando: le piazze, i cortili e i campanili che ci sono dentro sono quelli veri, quelli che si possono andare a vedere il pomeriggio stesso. Per questo a ogni volume si affiancano materiali da stampare gratuitamente: servono a far uscire la storia dal libro e a portarla in strada."
+  "intro": "Ginetto l'Esploratore è una collana di libri illustrati che accompagna bambini e genitori alla scoperta dei paesi del nostro territorio, un volume alla volta. Ogni libro nasce camminando: le piazze, i cortili e i campanili che ci sono dentro sono quelli veri, quelli che si possono andare a vedere il pomeriggio stesso. Per questo a ogni volume stiamo affiancando materiali da stampare gratuitamente: serviranno a far uscire la storia dal libro e a portarla in strada."
  },
  "volumi": [
   {
@@ -44,10 +44,10 @@
    "titolo": "Ginetto alla scoperta di Castelnuovo Scrivia",
    "paese": "Castelnuovo Scrivia",
    "provincia": "Alessandria",
-   "descrizione": "Lungo la Scrivia, Ginetto arriva al paese di Matteo Bandello e ne gira le vie, il castello e le cascine intorno. Il secondo volume della collana e' in fase di completamento.",
-   "copertina": "assets/ginetto/copertine/vol-2-castelnuovo-scrivia.jpg",
+   "descrizione": "Lungo la Scrivia, Ginetto arriva al paese di Matteo Bandello e ne gira le vie, il castello e le cascine intorno, sulle tracce dell'oro blu. Come nel primo volume, in ogni illustrazione si nasconde Briciola: trovarla è il gioco che accompagna la lettura.",
+   "copertina": "assets/ginetto/copertine/vol-2-castelnuovo-scrivia.webp",
    "copertina_alt": "Copertina del volume 2 di Ginetto l'Esploratore, dedicato a Castelnuovo Scrivia",
-   "amazon": "https://amzn.eu/d/08bxd7U2",
+   "amazon": "https://www.amazon.it/dp/B0HCBRNTVV",
    "materiali": [
     {
      "titolo": "Diploma di Piccolo Esploratore",

@@ -31,8 +31,8 @@ Due cose che fa da solo, e che quindi **non vanno scritte a mano nel JSON**:
 Copertine — **JPG quadrato (1:1), ~980×980 px, sotto i ~200 KB** (i libri
 della collana sono quadrati):
 
-- [x] `copertine/vol-1-casale-monferrato.jpg`  ← estratta dal PDF del libro
-- [ ] `copertine/vol-2-castelnuovo-scrivia.jpg`
+- [x] `copertine/vol-1-casale-monferrato.webp`  ← estratta dal PDF del libro
+- [x] `copertine/vol-2-castelnuovo-scrivia.webp`  ← ripresa dalla scheda Amazon
 
 Materiali — **PDF in formato A4 verticale**, pensati per la stampa in bianco e
 nero su una stampante di casa o di scuola:
