@@ -29,6 +29,7 @@ import csv
 import io
 import json
 import datetime
+import unicodedata
 import urllib.request
 import urllib.parse
 import sys
@@ -201,32 +202,97 @@ def leggi_centri(tab, chiave):
 
 
 CSS = """
-.ce-wrap{max-width:880px;margin:0 auto;padding:148px 20px 40px}
+.ce-wrap{max-width:900px;margin:0 auto;padding:148px 20px 40px}
 @media(max-width:600px){.ce-wrap{padding:120px 18px 32px}}
 .ce-crumb{position:static;font-size:.85rem;opacity:.7;margin:0 0 10px}
 .ce-crumb a{color:inherit}
-.ce-lead{font-size:1.06rem;line-height:1.7;margin:.4em 0 1.6em}
+.ce-lead{font-size:1.06rem;line-height:1.7;margin:.4em 0 1.2em}
 .ce-note{border:1px solid #cfe0d8;background:#f2f8f5;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ce-note strong{display:block;margin-bottom:4px}
 @media (prefers-color-scheme:dark){.ce-note{background:#1d2a24;border-color:#3c5548}}
-.ce-list{list-style:none;padding:0;margin:26px 0;display:grid;gap:14px}
-.ce-card{border:1px solid rgba(45,74,92,0.14);border-radius:16px;overflow:hidden;display:flex;gap:16px;align-items:flex-start}
-.ce-img{flex:0 0 116px;width:116px;height:auto;object-fit:cover;align-self:stretch}
-.ce-body{padding:16px 18px;min-width:0}
-@media(max-width:600px){.ce-card{flex-direction:column;gap:0}.ce-img{flex:none;width:100%;max-height:210px}}
-.ce-card h3{margin:0 0 6px;font-size:1.08rem;line-height:1.3}
-.ce-badge{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:100px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;background:var(--orange,#e8954a);color:#fff;vertical-align:middle}
-.ce-contatti{margin-top:8px;font-size:.9rem;opacity:.85}
-.ce-links{margin-top:10px;display:flex;flex-wrap:wrap;gap:16px}
-.ce-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.86rem;opacity:.85;margin:0 0 8px}
-.ce-card p{margin:0;line-height:1.6}
-.ce-card a.ce-go{display:inline-block;margin-top:10px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* La lista, le card e la toolbar riusano le classi .ev-*/.event-card definite
+   nel <style> di eventi.html, che _guscio() inietta per intero in questa pagina.
+   Cosi' i centri hanno la stessa struttura degli eventi senza duplicare il CSS.
+   Qui restano solo i pezzi propri della pagina centri (guida, avviso, contatti). */
+.ce-contatti{margin:10px 0 0;font-size:.9rem;opacity:.85}
+.ce-past-h{margin:2.4em 0 .2em;font-size:1.25rem}
+.ce-past-note{opacity:.8;margin:0 0 6px}
 .ce-guide h2{margin:2em 0 .5em}
 .ce-guide h3{margin:1.6em 0 .35em;font-size:1.05rem}
 .ce-guide p,.ce-guide li{line-height:1.7}
 .ce-guide ul{padding-left:1.15em}
 .ce-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:30px 0 8px}
 .ce-actions .btn{color:#fff}
+"""
+
+# Icona segnaposto (sole) per le schede senza locandina, e lente per la ricerca:
+# inline perche' lo sprite #i-* degli eventi non e' presente in questa pagina.
+SUN_SVG = ('<svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="none" '
+           'stroke="currentColor" stroke-width="1.6" stroke-linecap="round" '
+           'stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/>'
+           '<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2'
+           'M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>')
+SEARCH_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" fill="none" '
+              'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+              'stroke-linejoin="round"><circle cx="11" cy="11" r="7"/>'
+              '<path d="M21 21l-4.3-4.3"/></svg>')
+
+# Accento cromatico delle card per stagione (le stesse tinte degli eventi:
+# arancio "sole" per gli estivi, azzurro per gli invernali).
+ACCENTO = {
+    'estivi': ('#e8954a', 'rgba(232,149,74,0.14)', '#a75b15'),
+    'invernali': ('#4a90b9', 'rgba(74,144,185,0.14)', '#397293'),
+}
+PROV_LABEL = {'AL': 'Alessandria', 'AT': 'Asti'}
+
+
+def cslug(s):
+    """'Novi Ligure' -> 'novi-ligure', per il valore del filtro Citta'."""
+    s = unicodedata.normalize('NFKD', s or '').encode('ascii', 'ignore').decode()
+    return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
+
+
+# Apertura schede + filtri (ricerca, provincia, citta'), in vanilla JS come la
+# pagina eventi. I filtri agiscono solo sui centri attivi (#ce-active); le schede
+# dell'edizione passata restano come archivio, ma anche loro si aprono al tocco.
+FILTER_JS = """
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.event-card'));
+  cards.forEach(function(c){
+    var btn=c.querySelector('.ev-row'), det=c.querySelector('.ev-det');
+    if(!btn||!det) return;
+    btn.addEventListener('click',function(){
+      var open=c.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded',open?'true':'false');
+      det.hidden=!open;
+    });
+  });
+  var box=document.getElementById('ce-active');
+  if(!box) return;
+  var items=[].slice.call(box.querySelectorAll('.event-card')),
+      q=document.getElementById('ce-q'),
+      fp=document.getElementById('ce-prov'),
+      fc=document.getElementById('ce-city'),
+      empty=document.getElementById('ce-empty'),
+      count=document.getElementById('ce-count');
+  function norm(s){return (s||'').toLowerCase();}
+  function apply(){
+    var term=norm(q&&q.value.trim()), p=fp?fp.value:'all', ct=fc?fc.value:'all', vis=0;
+    items.forEach(function(c){
+      var ok=(p==='all'||c.dataset.province===p)
+           &&(ct==='all'||c.dataset.city===ct)
+           &&(!term||norm(c.textContent).indexOf(term)>=0);
+      c.classList.toggle('is-hidden',!ok);
+      if(ok) vis++;
+    });
+    if(fp) fp.classList.toggle('is-on',p!=='all');
+    if(fc) fc.classList.toggle('is-on',ct!=='all');
+    if(empty) empty.style.display=vis?'none':'block';
+    if(count) count.textContent=vis+(vis===1?' centro':' centri');
+  }
+  [q,fp,fc].forEach(function(el){ if(el){ el.addEventListener('input',apply); el.addEventListener('change',apply); }});
+  apply();
+})();
 """
 
 
@@ -330,31 +396,46 @@ def periodo_testo(c):
     return f"dal {di.day} {M[di.month - 1]} al {df.day} {M[df.month - 1]}"
 
 
-def card(c):
-    meta = []
-    dove = " · ".join(x for x in (c['citta'], c['luogo']) if x)
-    if dove:
-        meta.append(G.esc(dove))
-    for testo in (periodo_testo(c), c['eta'], c['ora'], c['prezzo']):
+def card(c, accent, idx):
+    """Una scheda in stile agenda eventi: riga sempre visibile (miniatura, nome,
+    contesto, etichette) + dettaglio che si apre al tocco, con la locandina
+    cliccabile fra le azioni. Riusa le classi .event-card/.ev-* degli eventi."""
+    color, tint, ink = accent
+    det_id = f"det-ce-{idx}"
+
+    # Riga di contesto: dove, periodo, orario, eta'. Il prezzo diventa pill.
+    bits = [f"{G.esc(c['citta'])} ({c['prov']})" if c['citta'] else (c['prov'] or '')]
+    for testo in (periodo_testo(c), c['ora'], c['eta']):
         if testo:
-            meta.append(G.esc(testo))
+            bits.append(G.esc(G.trunc(testo, 30)))
+    bits = [b for b in bits if b]
+
+    consigliato = c['consigliato'].strip().lower() in ('si', 'sì', 'x', 'true')
+    tags = []
+    if consigliato:
+        tags.append(f'<span class="ev-pill is-daop">{G.STAR_SVG} Consigliato DAOP</span>')
+    pill = G.prezzo_pill(c)
+    if pill:
+        tags.append(pill)
 
     link = c['sito'].strip()
     if link and not link.startswith(('http://', 'https://')):
         link = 'https://' + link
-    azioni = []
+    img = locandina(c)
+    acts = []
     if link:
-        azioni.append(f'<a class="ce-go" href="{G.esc(link)}" target="_blank" '
-                      f'rel="noopener">Informazioni e iscrizioni</a>')
+        acts.append(f'<a class="event-act" href="{G.esc(link)}" target="_blank" '
+                    f'rel="noopener">{G.ACT_ARROW_SVG} Informazioni e iscrizioni</a>')
     # maps_url vuole le stesse chiavi degli eventi: gliele passiamo cosi' come
     # sono, invece di riscrivere la stessa logica.
     mappa = G.maps_url({'indirizzo': c['indirizzo'], 'luogo': c['luogo'],
                         'citta': c['citta'], 'prov': c['prov']})
     if mappa:
-        azioni.append(f'<a class="ce-go" href="{G.esc(mappa)}" target="_blank" '
-                      f'rel="noopener">Come arrivare</a>')
-    contatti = (f'<p class="ce-contatti">{G.esc(c["contatti"])}</p>'
-                if c['contatti'] else '')
+        acts.append(f'<a class="event-act" href="{G.esc(mappa)}" target="_blank" '
+                    f'rel="noopener">{G.NAV_SVG} Come arrivare</a>')
+    if img:
+        acts.append(f'<a class="event-act" href="{G.esc(img)}" target="_blank" '
+                    f'rel="noopener">{G.IMG_SVG} Locandina</a>')
 
     # Nel foglio il gestore e' spesso gia' dentro il nome ("ARCEAM - Centro
     # Estivo Novi Ligure"): ripeterlo darebbe "... — ARCEAM".
@@ -362,18 +443,32 @@ def card(c):
     titolo = c['nome']
     if gestore and gestore.lower() not in c['nome'].lower():
         titolo = f"{titolo} — {gestore}"
-    badge = ('<span class="ce-badge">Consigliato DAOP</span>'
-             if c['consigliato'].strip().lower() in ('si', 'sì', 'x', 'true') else '')
 
-    img = locandina(c)
-    figura = (f'<img class="ce-img" src="{G.esc(img)}" alt="Locandina di '
-              f'{G.esc(c["nome"])}" loading="lazy">') if img else ''
+    thumb = (f'<img class="ev-thumb" src="{G.esc(img)}" alt="" loading="lazy" '
+             f'decoding="async">' if img
+             else f'<span class="ev-thumb is-ph" aria-hidden="true">{SUN_SVG}</span>')
+    dove = G.esc(c['indirizzo'] or c['luogo'] or '')
+    dove_html = f'\n            <p class="ev-where">{G.PIN_SVG} {dove}</p>' if dove else ''
+    contatti = (f'\n            <p class="ce-contatti">Contatti: {G.esc(c["contatti"])}</p>'
+                if c['contatti'] else '')
 
-    return (f'<li class="ce-card">\n  {figura}\n  <div class="ce-body">\n'
-            f'    <h3>{G.esc(titolo)}{badge}</h3>\n'
-            f'    <p class="ce-meta">{" · ".join(meta)}</p>\n'
-            f'    <p>{G.esc(c["descr"])}</p>\n    {contatti}\n'
-            f'    <p class="ce-links">{" ".join(azioni)}</p>\n  </div>\n</li>')
+    return f'''        <article class="event-card" data-province="{c['prov'].lower()}" data-city="{cslug(c['citta'])}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
+            {thumb}
+            <span class="ev-main">
+              <span class="ev-name">{G.esc(G.trunc(titolo, 110))}</span>
+              <span class="ev-line">{" · ".join(bits)}</span>
+              <span class="ev-tags">{"".join(tags)}</span>
+            </span>
+            {G.CHEV_SVG}
+          </button></h4>
+          <div class="ev-det" id="{det_id}" hidden>
+            <p class="event-desc">{G.esc(c["descr"])}</p>{dove_html}{contatti}
+            <div class="event-actions">
+              {chr(10) + "              ".join(acts)}
+            </div>
+          </div>
+        </article>'''
 
 
 def jsonld(cfg, centri, url):
@@ -409,6 +504,7 @@ def jsonld(cfg, centri, url):
 
 def render(chiave, cfg, centri, css, nav, foot):
     url = f"{SITE_URL}/{cfg['file']}"
+    accent = ACCENTO.get(chiave, ACCENTO['estivi'])
     # Un centro concluso non va mostrato come se fosse aperto. Ma l'elenco
     # dell'edizione appena passata resta utile a chi si informa per l'anno
     # prossimo, purche' sia dichiarato per quello che e'.
@@ -416,11 +512,41 @@ def render(chiave, cfg, centri, css, nav, foot):
     attivi = [c for c in centri if not c['d_end'] or c['d_end'] >= oggi]
     passati = [c for c in centri if c['d_end'] and c['d_end'] < oggi]
 
-    def lista(v):
-        return '<ul class="ce-list">\n' + "\n".join(card(c) for c in v) + '\n</ul>'
+    n = [0]  # indice progressivo, per id univoci dei dettagli (det-ce-N)
+
+    def lista(v, active=False):
+        schede = []
+        for c in v:
+            schede.append(card(c, accent, n[0]))
+            n[0] += 1
+        idattr = ' id="ce-active"' if active else ''
+        return f'<div class="events-list"{idattr}>\n' + "\n".join(schede) + '\n</div>'
 
     if attivi:
-        elenco = lista(attivi)
+        provs = sorted({c['prov'] for c in attivi if c['prov']})
+        opt_prov = ['<option value="all">Tutte le province</option>'] + [
+            f'<option value="{p.lower()}">{PROV_LABEL.get(p, p)}</option>' for p in provs]
+        citta_map = {}
+        for c in attivi:
+            if c['citta']:
+                citta_map.setdefault(cslug(c['citta']), c['citta'])
+        opt_city = ['<option value="all">Tutte le città</option>'] + [
+            f'<option value="{k}">{G.esc(v)}</option>'
+            for k, v in sorted(citta_map.items(), key=lambda kv: kv[1].lower())]
+        toolbar = (
+            '  <div class="ev-toolbar">\n'
+            f'    <div class="ev-search">{SEARCH_SVG}'
+            '<input type="search" id="ce-q" placeholder="Cerca un centro, un paese, un gestore…" '
+            'aria-label="Cerca fra i centri"></div>\n'
+            f'    <select class="ev-select" id="ce-prov" aria-label="Filtra per provincia">'
+            f'{"".join(opt_prov)}</select>\n'
+            f'    <select class="ev-select" id="ce-city" aria-label="Filtra per città">'
+            f'{"".join(opt_city)}</select>\n'
+            '  </div>\n'
+            '  <div class="ev-viewbar"><p class="events-count" id="ce-count"></p></div>\n')
+        elenco = (toolbar + lista(attivi, active=True)
+                  + '\n  <p class="events-empty" id="ce-empty">Nessun centro con questi '
+                    'filtri. Prova a togliere qualche filtro.</p>')
         avviso = ''
     else:
         elenco = ''
@@ -433,11 +559,11 @@ def render(chiave, cfg, centri, css, nav, foot):
     if passati:
         titolo = ("Anche questi hanno aperto quest'anno" if attivi
                   else f"I centri dell'edizione {passati[-1]['d_end'].year}")
-        elenco += (f'\n<h2>{titolo}</h2>\n'
-                   f'<p>Le date sono quelle dell\'edizione conclusa: servono a farsi '
-                   f'un\'idea di chi organizza in zona, per quali età e a quali prezzi. '
-                   f'Verifica sempre con il gestore prima di contare su una riapertura.</p>\n'
-                   + lista(passati))
+        elenco += (f'\n<h2 class="ce-past-h">{titolo}</h2>\n'
+                   f'<p class="ce-past-note">Le date sono quelle dell\'edizione conclusa: '
+                   f'servono a farsi un\'idea di chi organizza in zona, per quali età e a '
+                   f'quali prezzi. Verifica sempre con il gestore prima di contare su una '
+                   f'riapertura.</p>\n' + lista(passati))
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -486,7 +612,7 @@ def render(chiave, cfg, centri, css, nav, foot):
   {elenco}
   {guida(cfg)}
   <div class="ce-actions">
-    <a class="btn btn-navy" href="/eventi.html">Sagre ed eventi di oggi</a>
+    <a class="btn btn-navy" href="/eventi.html">Eventi di oggi</a>
     <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
   </div>
 </article>
@@ -496,6 +622,7 @@ def render(chiave, cfg, centri, css, nav, foot):
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
+<script>{FILTER_JS}</script>
 </body>
 </html>
 """

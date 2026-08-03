@@ -532,16 +532,25 @@ def render(events):
         highlights = (f'    <div class="ev-highlights" id="ev-highlights" data-day="{today.isoformat()}">\n'
                       + '\n'.join(blocchi) + '\n    </div>\n\n')
 
-    # ── agenda: gli eventi già in corso in testa, poi un gruppo per giornata ─
-    gruppi = []
-    in_corso = [e for e in events if e['d_start'] < today]
-    if in_corso:
-        gruppi.append(('in-corso', 'Già iniziati, ancora in corso', in_corso))
+    # ── agenda: prima la giornata più vicina ("Oggi"), poi gli eventi già
+    #    iniziati ma ancora in corso, infine gli altri giorni. Prima il gruppo
+    #    "in corso" apriva l'agenda: sul telefono spingeva "Oggi" sotto una
+    #    lista di 10-15 sagre/mostre lunghe già partite, e chi apre la pagina
+    #    vuole vedere subito cosa c'è OGGI, non cosa è iniziato la settimana scorsa.
     per_giorno = {}
     for e in events:
         if e['d_start'] >= today:
             per_giorno.setdefault(e['d_start'], []).append(e)
-    for d in sorted(per_giorno):
+    giorni = sorted(per_giorno)
+    in_corso = [e for e in events if e['d_start'] < today]
+
+    gruppi = []
+    if giorni:  # la giornata più vicina (di norma "Oggi") apre sempre l'agenda
+        d0 = giorni.pop(0)
+        gruppi.append((d0.isoformat(), intestazione_giorno(d0, today), per_giorno[d0]))
+    if in_corso:
+        gruppi.append(('in-corso', 'Già iniziati, ancora in corso', in_corso))
+    for d in giorni:
         gruppi.append((d.isoformat(), intestazione_giorno(d, today), per_giorno[d]))
 
     sezioni = []
