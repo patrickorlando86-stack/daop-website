@@ -1,0 +1,58 @@
+name: Pubblica sui social
+
+# Posta sulle pagine Facebook di DAOP gli articoli delle rubriche usciti di
+# recente sul sito. Gira a giorno fatto, non insieme alla generazione: quando
+# Facebook riceve un link va subito a leggerlo per costruire l'anteprima e si
+# tiene in cache quello che trova. Postando un istante dopo il commit la pagina
+# non sarebbe ancora online e l'anteprima resterebbe un 404 per giorni.
+#
+# Finche' data/social.json ha "attiva": false lo script gira e non fa nulla:
+# si puo' lasciare acceso il workflow anche prima di aver messo i token.
+
+on:
+  schedule:
+    # 07:30 UTC = 09:30 ora italiana legale / 08:30 ora solare. Gli articoli
+    # del giorno sono online dalle 04:00 (workflow aggiorna-eventi).
+    - cron: '30 7 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pubblica-social
+  cancel-in-progress: false
+
+jobs:
+  facebook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Pubblica su Facebook
+        env:
+          FB_TOKEN_ALESSANDRIA: ${{ secrets.FB_TOKEN_ALESSANDRIA }}
+          FB_TOKEN_ASTI: ${{ secrets.FB_TOKEN_ASTI }}
+        run: python scripts/pubblica_facebook.py
+
+      - name: Salva il registro
+        # Il registro e' l'unica cosa che impedisce i doppioni: va committato
+        # anche se il passo precedente ha fallito su una pagina, altrimenti i
+        # post gia' andati a buon fine ripartirebbero domani.
+        if: always()
+        run: |
+          if [ -n "$(git status --porcelain data/social-pubblicati.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/social-pubblicati.json
+            git commit -m "Registro post social"
+            git push
+          else
+            echo "Nessun post nuovo."
+          fi
