@@ -195,6 +195,53 @@ def diagnosi(cfg):
         print(f"    {p['id']}   {p['name']}   tasks={','.join(p.get('tasks') or [])}")
 
 
+def verifica(cfg):
+    """Controlla che ogni pagina configurata abbia un token valido e che il
+    token sia davvero di quella pagina. Non pubblica niente.
+
+    Serve perche' l'errore piu' probabile della configurazione a mano e'
+    incrociare i due: token di Alessandria sotto l'ID di Asti. Postando ci si
+    accorgerebbe dell'inversione dal post finito sulla pagina sbagliata."""
+    problemi = 0
+    for p in cfg['pagine']:
+        nome = p['nome']
+        page_id = str(p.get('page_id') or '').strip()
+        token = os.environ.get(p.get('token_env', ''), '').strip()
+        if not page_id:
+            print(f"[facebook] {nome}: manca page_id in data/social.json")
+            problemi += 1
+            continue
+        if not token:
+            print(f"[facebook] {nome}: manca il token in {p.get('token_env')}")
+            problemi += 1
+            continue
+        try:
+            res = graph(cfg, page_id, {'fields': 'name', 'access_token': token})
+        except RuntimeError as e:
+            print(f"[facebook] {nome}: token non valido — {e}")
+            problemi += 1
+            continue
+        # /me con un token di pagina restituisce la pagina stessa: se non
+        # coincide con page_id, i due token sono incrociati.
+        try:
+            chi = graph(cfg, 'me', {'fields': 'id,name', 'access_token': token})
+        except RuntimeError as e:
+            print(f"[facebook] {nome}: non riesco a risalire al proprietario — {e}")
+            problemi += 1
+            continue
+        if str(chi.get('id')) != page_id:
+            print(f"[facebook] {nome}: INCROCIATO — questo token e' di "
+                  f"'{chi.get('name')}' (id {chi.get('id')}), non di {page_id}")
+            problemi += 1
+            continue
+        print(f"[facebook] {nome}: ok — token valido per '{res.get('name')}'")
+    if problemi:
+        print(f"[facebook] {problemi} problemi da sistemare prima di accendere")
+    else:
+        print("[facebook] tutto a posto: puoi mettere \"attiva\": true")
+    return problemi
+
+
 def elenca_pagine(cfg, con_token=False, scambia=False):
     """Stampa nome e ID delle pagine amministrate, per riempire data/social.json.
 
@@ -250,6 +297,8 @@ def main():
                     help="elenca le pagine e i loro ID partendo da FB_USER_TOKEN")
     ap.add_argument('--con-token', action='store_true',
                     help="con --pagine, stampa anche il token di pagina da mettere nei secret")
+    ap.add_argument('--verifica', action='store_true',
+                    help="controlla ID e token di ogni pagina senza pubblicare")
     ap.add_argument('--diagnosi', action='store_true',
                     help="dice di chi e' il token, che permessi ha e cosa vede")
     ap.add_argument('--scambia', action='store_true',
@@ -260,6 +309,8 @@ def main():
     args = ap.parse_args()
 
     cfg = carica_config()
+    if args.verifica:
+        return 1 if verifica(cfg) else 0
     if args.diagnosi:
         diagnosi(cfg)
         return 0
