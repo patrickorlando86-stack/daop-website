@@ -188,6 +188,12 @@
 
   <!-- PAGINE-EVENTO:START (generato da scripts/genera_eventi.py — non modificare a mano) -->
   <url>
+    <loc>https://www.daop.it/eventi/agosto-vinchio.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -261,6 +267,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/festa-a-madonnina-madonnina-di-serralunga-di-crea.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festa-campestre-di-s-antonio-e-s-bernardo-envie.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -392,6 +404,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/festeggiamenti-patronali-sant-agostino-ferrere.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/festival-cartosio-pro-loco-cartosio.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -507,6 +525,18 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/sagra-della-trippa-novi-ligure.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/sagra-delle-frittelle-arquata-scrivia.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/san-fermo-pro-loco-roccaforte-ligure.html</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

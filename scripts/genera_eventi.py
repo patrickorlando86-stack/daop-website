@@ -23,6 +23,25 @@ HOME_LIMIT = 8  # quanti eventi mostrare nel carosello della home
 JSON_PATH = os.path.join(ROOT, "data", "eventi.json")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 
+# Province i cui eventi vengono pubblicati sul sito. Una sola lista, usata sia dal
+# filtro dei dati sia dal copy che dice "che zona copre DAOP": prima la sigla era
+# scritta a mano dentro normalize() e il numero di province era una costante "2"
+# in un'altra pagina, quindi si poteva aprire il filtro e lasciare il testo che
+# diceva il contrario. CN aggiunta il 04/08/2026, primi eventi di Cuneo sul foglio.
+PROVINCE_PUBBLICATE = ('AL', 'AT', 'CN')
+PROVINCE_NOMI = {'AL': 'Alessandria', 'AT': 'Asti', 'CN': 'Cuneo'}
+
+
+def province_in_elenco(codici):
+    """"Alessandria, Asti e Cuneo" a partire dalle sigle, in ordine di PROVINCE_PUBBLICATE."""
+    nomi = [PROVINCE_NOMI[c] for c in PROVINCE_PUBBLICATE if c in set(codici)]
+    if not nomi:
+        return ""
+    if len(nomi) == 1:
+        return nomi[0]
+    return ", ".join(nomi[:-1]) + " e " + nomi[-1]
+
+
 KNOWN_CATS = {'Sagra & Festa', 'Sagra', 'Spettacolo', 'Laboratorio', 'Sport',
               'Musica', 'Cultura', 'Natura', 'Altro', 'Mercato', 'Arte',
               'Cinema', 'Teatro'}
@@ -201,7 +220,7 @@ def normalize(rows):
         if not di:
             continue
         prov = (d.get('Provincia') or '').strip().upper()
-        if prov not in ('AL', 'AT'):
+        if prov not in PROVINCE_PUBBLICATE:
             continue
         df = pdate(d.get('Data fine')) or di
         if df < today:
@@ -1310,7 +1329,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
         "alternateName": "DAOP",
         "url": SITE_URL,
         "logo": f"{SITE_URL}/assets/images/logodaop.png",
-        "areaServed": ["Alessandria", "Asti", "Piemonte"],
+        "areaServed": [PROVINCE_NOMI[c] for c in PROVINCE_PUBBLICATE] + ["Piemonte"],
         "description": ("Associazione delle famiglie di Alessandria e Asti. Seleziona e "
                         "verifica gli eventi per famiglie del territorio."),
     }
@@ -1519,8 +1538,8 @@ METODO_FAQ = [
      "controllo sulla singola scheda è quella dell'ultima volta che l'abbiamo riscontrata, "
      "non quella dell'aggiornamento automatico."),
     ("Che zona copre DAOP?",
-     "Le province di Alessandria e Asti, in Piemonte. Fuori da lì non pubblichiamo: "
-     "preferiamo coprire bene un territorio che male mezzo Nord Italia."),
+     f"Le province di {province_in_elenco(PROVINCE_PUBBLICATE)}, in Piemonte. Fuori da lì "
+     "non pubblichiamo: preferiamo coprire bene un territorio che male mezzo Nord Italia."),
     ("Come segnalo un errore o propongo un evento?",
      "Scrivendo a info@daop.it, oppure dai profili social DAOP di Alessandria e Asti. "
      "Le correzioni su un evento già pubblicato hanno la precedenza su tutto il resto."),
@@ -1533,10 +1552,17 @@ def scrivi_metodo(events):
     oggi = datetime.date.today()
     comuni = len({_key(e.get('citta')) for e in events if (e.get('citta') or '').strip()})
     schede = len(reg)
+    # Province ricavate dagli eventi VERI in agenda, non da una costante scritta a
+    # mano: il contatore diceva "2 province" ed era rimasto indietro rispetto al
+    # filtro dei dati. Cosi' se una provincia resta senza eventi non viene contata.
+    prov_agenda = {e.get('prov') for e in events if e.get('prov')}
+    n_province = len(prov_agenda)
+    nomi_province = province_in_elenco(prov_agenda) or "—"
     url = METODO_URL
     titolo = "Come verifichiamo gli eventi | DAOP"
     descr = ("Chi inserisce gli eventi su DAOP, da dove arrivano, come li verifichiamo e "
-             "ogni quanto aggiorniamo le schede per le famiglie di Alessandria e Asti.")
+             "ogni quanto aggiorniamo le schede per le famiglie di "
+             f"{province_in_elenco(PROVINCE_PUBBLICATE)}.")
 
     try:
         css, nav, foot = _guscio()
@@ -1558,7 +1584,7 @@ def scrivi_metodo(events):
          "logo": f"{SITE_URL}/assets/images/logodaop.png", "foundingDate": "2023",
          "description": ("Associazione delle famiglie di Alessandria e Asti. Seleziona e "
                          "verifica a mano gli eventi per famiglie del territorio."),
-         "areaServed": ["Alessandria", "Asti", "Piemonte"],
+         "areaServed": [PROVINCE_NOMI[c] for c in PROVINCE_PUBBLICATE] + ["Piemonte"],
          "founder": {"@type": "Person", "name": "Patrick Orlando"},
          "member": [{"@type": "Person", "name": "Patrick Orlando"},
                     {"@type": "Person", "name": "Alessandra Zaccone"}],
@@ -1619,7 +1645,7 @@ def scrivi_metodo(events):
   </div>
   <header class="ev-head">
     <h1>Come DAOP sceglie e verifica gli eventi</h1>
-    <p class="ev-when">Il metodo dietro l'agenda di Alessandria e Asti</p>
+    <p class="ev-when">Il metodo dietro l'agenda di {nomi_province}</p>
   </header>
 
   <p>DAOP non è un aggregatore automatico. Ogni evento che leggi sul sito è stato scelto
@@ -1631,7 +1657,7 @@ def scrivi_metodo(events):
     <div><b>{len(events)}</b><span>eventi in agenda adesso</span></div>
     <div><b>{schede}</b><span>schede evento dedicate</span></div>
     <div><b>{comuni}</b><span>comuni coperti</span></div>
-    <div><b>2</b><span>province: Alessandria e Asti</span></div>
+    <div><b>{n_province}</b><span>province: {nomi_province}</span></div>
   </div>
 
   <h2>Chi inserisce gli eventi</h2>
@@ -1696,7 +1722,7 @@ def scrivi_metodo(events):
   {faq}
 
   <h2>Dove trovi DAOP</h2>
-  <p><a href="/eventi.html">L'agenda eventi</a> di Alessandria e Asti ·
+  <p><a href="/eventi.html">L'agenda eventi</a> di {nomi_province} ·
   <a href="/ginetto.html">Ginetto AI</a>, l'assistente che risponde alle famiglie ·
   <a href="/index.html#chi-siamo">Chi siamo</a> ·
   <a href="/media.html">Rassegna stampa</a></p>
