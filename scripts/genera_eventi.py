@@ -1747,7 +1747,24 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
     print(f"[genera_eventi] metodo.html aggiornato ({schede} schede, {comuni} comuni)")
 
 
-def inject(tipo_opts, lista, jsonld):
+def opzioni_provincia(events):
+    """Opzioni del filtro provincia, ricavate dagli eventi in agenda.
+
+    Erano HTML statico FUORI dai marker (solo "Prov. AL" e "Prov. AT"), quindi
+    aprire il filtro dei dati a CN non bastava: gli eventi di Cuneo comparivano in
+    elenco ma non c'era modo di filtrarli. Ora l'elenco si genera da solo e non
+    puo' piu' restare indietro. I value sono minuscoli perche' e' quello che il JS
+    confronta con data-province sulle schede.
+    """
+    presenti = {e.get('prov') for e in events if e.get('prov')}
+    righe = ['        <option value="all">Province</option>']
+    for c in PROVINCE_PUBBLICATE:
+        if c in presenti:
+            righe.append(f'        <option value="{c.lower()}">Prov. {c}</option>')
+    return "\n".join(righe)
+
+
+def inject(tipo_opts, lista, jsonld, prov_opts=None):
     s = open(HTML_PATH, encoding="utf-8").read()
     s, n1 = re.subn(r'(<!-- EVENTI-TIPO:START -->\n).*?(\n *<!-- EVENTI-TIPO:END -->)',
                     lambda m: m.group(1) + tipo_opts + m.group(2), s, count=1, flags=re.S)
@@ -1755,6 +1772,15 @@ def inject(tipo_opts, lista, jsonld):
                     lambda m: m.group(1) + lista + m.group(2), s, count=1, flags=re.S)
     s, n3 = re.subn(r'<script type="application/ld\+json" id="eventi-jsonld">.*?</script>',
                     lambda _: jsonld, s, count=1, flags=re.S)
+    # Il blocco province e' opzionale: se i marker non ci sono (eventi.html piu'
+    # vecchio del deploy) si va avanti con un avviso invece di far fallire tutto.
+    n4 = 1
+    if prov_opts is not None:
+        s, n4 = re.subn(r'(<!-- EVENTI-PROV:START -->\n).*?(\n *<!-- EVENTI-PROV:END -->)',
+                        lambda m: m.group(1) + prov_opts + m.group(2), s, count=1, flags=re.S)
+        if n4 != 1:
+            print("[genera_eventi] ATTENZIONE: marker EVENTI-PROV non trovati in "
+                  "eventi.html: il filtro provincia resta quello scritto a mano")
     if n1 != 1 or n2 != 1 or n3 != 1:
         raise SystemExit(f"Ancoraggi non trovati in eventi.html (tipo={n1}, lista={n2}, json-ld={n3})")
     open(HTML_PATH, "w", encoding="utf-8").write(s)
@@ -1817,7 +1843,7 @@ def main():
     assegna_ancore(events)
     tipo_opts, lista = render(events)
     jsonld = render_jsonld(events)
-    inject(tipo_opts, lista, jsonld)
+    inject(tipo_opts, lista, jsonld, opzioni_provincia(events))
     inject_home(render_home(events))
     slugs = scrivi_pagine(events)
     scrivi_metodo(events)
