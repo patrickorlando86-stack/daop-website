@@ -1837,8 +1837,57 @@ def update_sitemap(slugs=()):
     open(SITEMAP_PATH, "w", encoding="utf-8").write(s)
 
 
+def controlla_crollo(events):
+    """Blocca la rigenerazione se gli eventi sono crollati rispetto all'ultima volta.
+
+    PERCHE' ESISTE (05/08/2026): l'export CSV di Google **rispetta i filtri** del
+    foglio. Con un filtro attivo sul tab Eventi l'export restituisce solo le righe
+    visibili: quel giorno erano 26 invece di 193. Rigenerare in quello stato
+    pubblica un sito con un decimo degli eventi, la sitemap che crolla, e decine di
+    pagine messe in noindex - tutto senza un errore, quindi senza che nessuno se ne
+    accorga. Il workflow notturno gira non presidiato: e' proprio lo scenario in cui
+    un guasto silenzioso fa danno.
+
+    Il confronto e' con data/eventi.json, l'istantanea committata dell'ultimo run
+    buono. Se il calo e' oltre la soglia si esce con codice 1: il workflow FALLISCE
+    in modo visibile invece di pubblicare. Per un calo legittimo (fine stagione) si
+    forza con la variabile d'ambiente ACCETTA_CALO=1.
+    """
+    if os.environ.get("ACCETTA_CALO"):
+        print("[genera_eventi] ACCETTA_CALO attivo: nessun controllo sul crollo.")
+        return
+    try:
+        with open(JSON_PATH, encoding="utf-8") as fh:
+            precedenti = len(json.load(fh))
+    except Exception:
+        return          # prima esecuzione o snapshot illeggibile: niente con cui confrontare
+
+    if precedenti < 20:
+        return          # troppo pochi per un confronto sensato
+
+    soglia = int(precedenti * 0.6)
+    if len(events) >= soglia:
+        return
+
+    print()
+    print("=" * 68)
+    print("  BLOCCATO: gli eventi sono CROLLATI, non rigenero il sito.")
+    print("=" * 68)
+    print(f"  letti ora        : {len(events)}")
+    print(f"  ultimo run buono : {precedenti}   (soglia di allarme: {soglia})")
+    print()
+    print("  Causa piu' probabile: un FILTRO attivo sul tab Eventi del foglio.")
+    print("  L'export CSV rispetta i filtri, quindi le righe nascoste non arrivano.")
+    print("  Togli il filtro (Dati -> Rimuovi filtro) e rilancia.")
+    print()
+    print("  Se il calo e' vero (fine stagione), forza con:  ACCETTA_CALO=1")
+    print("=" * 68)
+    sys.exit(1)
+
+
 def main():
     events = normalize(fetch_rows())
+    controlla_crollo(events)
     segnala_doppioni(events)
     assegna_ancore(events)
     tipo_opts, lista = render(events)
