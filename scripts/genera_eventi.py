@@ -48,10 +48,12 @@ PROVINCE_IG = {
     'AT': {'ig': 'daop_asti', 'nostra': True,
            'fb': 'https://www.facebook.com/daopasti',
            'curatore': 'Alessandra Zaccone'},
-    # Nessun curatore DAOP: la provincia la segue una pagina esterna e noi la
-    # ospitiamo. Scriverlo e' meglio che lasciar credere che ci sia qualcuno
-    # di nostro sul posto.
-    'CN': {'ig': 'eventi_bambini_provincia_cuneo', 'nostra': False},
+    # Non e' un curatore DAOP: la provincia la segue una pagina esterna e noi la
+    # ospitiamo. Scriverlo e' meglio che lasciar credere che ci sia qualcuno di
+    # nostro sul posto. Il nome proprio c'e' lo stesso: una collaborazione con
+    # una persona con un nome pesa diverso da una con un handle.
+    'CN': {'ig': 'eventi_bambini_provincia_cuneo', 'nostra': False,
+           'curatore': 'Giovanni'},
 }
 
 
@@ -1865,11 +1867,16 @@ def scrivi_zone(events):
                      f"territorio.")
         else:
             badge = '<span class="zon-part">In collaborazione</span>'
-            testo = (f"La provincia di {esc(f['provincia'])} la segue "
-                     f"<strong>@{esc(f['ig'])}</strong>, una pagina che non è nostra. "
-                     "Gli eventi di questa zona arrivano dal loro lavoro: noi li "
-                     "ospitiamo nell'agenda e sull'app, e li accreditiamo su ogni "
-                     "scheda. Se cerchi la fonte originale, è quella.")
+            # Il nome proprio al posto del solo handle: e' la differenza fra
+            # "arriva da una pagina" e "c'e' una persona che lo fa".
+            chi = (f"<strong>{esc(f['curatore'])}</strong>, con la sua pagina "
+                   f"@{esc(f['ig'])}" if f.get('curatore') else
+                   f"<strong>@{esc(f['ig'])}</strong>")
+            testo = (f"La provincia di {esc(f['provincia'])} la segue {chi} — "
+                     "una pagina che non è nostra. Gli eventi di questa zona "
+                     "arrivano dal suo lavoro: noi li ospitiamo nell'agenda e "
+                     "sull'app, e li accreditiamo su ogni scheda. Se cerchi la "
+                     "fonte originale, è quella.")
         link = [f'<a href="{f["url"]}" target="_blank" rel="noopener">Instagram @{esc(f["ig"])}</a>']
         if f.get('fb'):
             link.append(f'<a href="{f["fb"]}" target="_blank" rel="noopener">Facebook</a>')
