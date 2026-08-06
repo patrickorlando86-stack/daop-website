@@ -495,11 +495,15 @@ def riga(e, today):
     dove_html = f'\n          <p class="ev-where">{PIN_SVG} {dove}</p>' if dove else ''
 
     # Il credito va anche QUI, non solo sulla scheda dedicata: le schede sono 71
-    # su 187 eventi: senza questo, per i due terzi dell'agenda l'attribuzione non
-    # esisterebbe da nessuna parte. Testo e non link, vedi .ev-src in eventi.html.
+    # su 187 eventi, quindi per due terzi dell'agenda l'attribuzione non
+    # esisterebbe da nessuna parte.
+    # Cliccabile: le occorrenze sono ~190 ma le destinazioni sono TRE, e i motori
+    # consolidano per URL di destinazione - non e' un elenco di link diversi. Un
+    # credito che non si puo' seguire e' mezzo credito, soprattutto per Cuneo.
     f = fonte_provincia(e['prov'])
-    fonte_html = (f'\n            <p class="ev-src">Segnalato da @{esc(f["ig"])}</p>'
-                  if f else '')
+    fonte_html = (f'\n            <p class="ev-src">Segnalato da '
+                  f'<a href="{f["url"]}" target="_blank" rel="noopener">'
+                  f'@{esc(f["ig"])}</a></p>' if f else '')
 
     return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-{anchor}">
