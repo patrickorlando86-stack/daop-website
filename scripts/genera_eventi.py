@@ -494,6 +494,13 @@ def riga(e, today):
     dove = esc(e['indirizzo'] or e['luogo'])
     dove_html = f'\n          <p class="ev-where">{PIN_SVG} {dove}</p>' if dove else ''
 
+    # Il credito va anche QUI, non solo sulla scheda dedicata: le schede sono 71
+    # su 187 eventi: senza questo, per i due terzi dell'agenda l'attribuzione non
+    # esisterebbe da nessuna parte. Testo e non link, vedi .ev-src in eventi.html.
+    f = fonte_provincia(e['prov'])
+    fonte_html = (f'\n            <p class="ev-src">Segnalato da @{esc(f["ig"])}</p>'
+                  if f else '')
+
     return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-{anchor}">
             {thumb}
@@ -508,7 +515,7 @@ def riga(e, today):
             <p class="event-desc">{esc(e['descr'])}</p>{dove_html}
             <div class="event-actions">
               {chr(10) + '              '.join(acts)}
-            </div>
+            </div>{fonte_html}
           </div>
         </article>'''
 
@@ -614,8 +621,21 @@ def render(events):
 {righe}
       </section>''')
 
+    # Le pagine di provenienza, linkate UNA volta sola: sulle card il credito e'
+    # testo, qui sotto ci sono i link veri. Solo le province con eventi in agenda,
+    # cosi' la riga non promette una zona che oggi e' vuota.
+    presenti = [s for s in PROVINCE_PUBBLICATE
+                if any(e['prov'].upper() == s for e in events)]
+    fonti = [fonte_provincia(s) for s in presenti]
+    fonti_html = ''
+    if fonti:
+        voci = " · ".join(f'<a href="{f["url"]}" target="_blank" rel="noopener">'
+                          f'@{esc(f["ig"])}</a> ({esc(f["provincia"])})' for f in fonti)
+        fonti_html = ('\n    <p class="ev-fonti">Gli eventi arrivano dalle pagine di zona: '
+                      f'{voci}.<br><a href="{ZONE_HREF}">Chi segue la tua provincia</a></p>')
+
     lista_html = (highlights + '    <div class="events-list" id="events-list">\n'
-                  + '\n\n'.join(sezioni) + '\n    </div>')
+                  + '\n\n'.join(sezioni) + '\n    </div>' + fonti_html)
 
     # "Categorie" e non "Tutte le categorie": in un <select> stretto il testo
     # veniva tagliato a meta' sul telefono.
