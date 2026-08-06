@@ -31,6 +31,38 @@ SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 PROVINCE_PUBBLICATE = ('AL', 'AT', 'CN')
 PROVINCE_NOMI = {'AL': 'Alessandria', 'AT': 'Asti', 'CN': 'Cuneo'}
 
+# Pagina Instagram da cui arrivano le segnalazioni, provincia per provincia.
+# "nostra": la pagina e' di DAOP (AL, AT) oppure di un partner (CN). Non e' un
+# dettaglio grafico: su una pagina nostra il credito e' un rimando, su quella di
+# un altro e' l'attribuzione di un lavoro che non e' nostro, ed e' il motivo per
+# cui questa riga esiste. La locandina resta comunque dell'organizzatore: qui si
+# dice DOVE l'abbiamo trovata, per questo "Segnalato da" e mai "Fonte".
+# ATTENZIONE: e' il gemello di PROFILI in config_segreti.py del downloader, che
+# sta in un altro repo. Se li' si aggiunge o cambia una provincia, questa mappa
+# NON se ne accorge: l'evento arriva lo stesso e resta semplicemente senza
+# credito (nessun errore, nessun link rotto). Da aggiornare a mano.
+PROVINCE_IG = {
+    'AL': {'ig': 'daop_alessandria', 'nostra': True,
+           'fb': 'https://www.facebook.com/daopalessandria/',
+           'curatore': 'Patrick Orlando'},
+    'AT': {'ig': 'daop_asti', 'nostra': True,
+           'fb': 'https://www.facebook.com/daopasti',
+           'curatore': 'Alessandra Zaccone'},
+    # Nessun curatore DAOP: la provincia la segue una pagina esterna e noi la
+    # ospitiamo. Scriverlo e' meglio che lasciar credere che ci sia qualcuno
+    # di nostro sul posto.
+    'CN': {'ig': 'eventi_bambini_provincia_cuneo', 'nostra': False},
+}
+
+
+def fonte_provincia(prov):
+    """Dati della pagina di provenienza, o None se la provincia non ne ha una."""
+    f = PROVINCE_IG.get((prov or '').strip().upper())
+    if not f:
+        return None
+    return dict(f, url=f"https://www.instagram.com/{f['ig']}/",
+                provincia=PROVINCE_NOMI.get((prov or '').strip().upper(), ''))
+
 
 def province_in_elenco(codici):
     """"Alessandria, Asti e Cuneo" a partire dalle sigle, in ordine di PROVINCE_PUBBLICATE."""
@@ -1088,6 +1120,9 @@ PAGINA_CSS = """
 .ev-firma-t{display:flex;align-items:center;gap:7px;font-weight:700;margin:0 0 6px;
   color:var(--teal,#6ba5a8)}
 .ev-firma p{margin:0 0 6px}
+/* Da dove arriva la segnalazione: piu' leggero della firma, piu' presente
+   della nota legale sotto - e' un credito, non un disclaimer. */
+.ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito. */
@@ -1114,6 +1149,8 @@ PAGINA_CSS = """
 ORG_ID = f"{SITE_URL}/#organization"
 SITE_ID = f"{SITE_URL}/#website"
 METODO_URL = f"{SITE_URL}/metodo.html"
+ZONE_HREF = "/zone.html"                       # nei link interni delle pagine
+ZONE_URL = f"{SITE_URL}{ZONE_HREF}"            # canonical e dati strutturati
 
 PHONE_SVG = ('<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" '
              'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -1170,12 +1207,27 @@ def firma_daop(rec, oggi):
     except ValueError:
         d, leggibile = oggi, iso
     ogg = urllib.parse.quote(f"Correzione scheda: {(rec.get('nome') or '').strip()}")
+    # Da dove arriva la segnalazione. Sta QUI, dentro la firma, e non fra i dati
+    # in cima: non e' un'informazione che serve a decidere se andarci, e' la
+    # trasparenza su come la scheda e' nata - lo stesso posto in cui diciamo chi
+    # l'ha controllata e quando.
+    f = fonte_provincia(rec.get('prov'))
+    credito = ''
+    if f:
+        chi = (f"la nostra pagina per la provincia di {esc(f['provincia'])}"
+               if f['nostra'] else
+               f"la pagina che segue la provincia di {esc(f['provincia'])}, "
+               "con cui collaboriamo")
+        credito = (f'<p class="ev-fonte">Segnalato da <a href="{f["url"]}" '
+                   f'target="_blank" rel="noopener">@{esc(f["ig"])}</a>, {chi}. '
+                   f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
     return (
         '<aside class="ev-firma">'
         f'<p class="ev-firma-t">{CHECK_SVG} Scheda verificata da DAOP</p>'
         '<p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, '
         'l\'associazione delle famiglie di Alessandria e Asti. Ultimo controllo: '
         f'<time datetime="{d.isoformat()}">{leggibile}</time>.</p>'
+        f'{credito}'
         '<p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, '
         'controlla eventuali aggiornamenti dell\'organizzatore. '
         '<a href="/metodo.html">Come verifichiamo gli eventi</a> · '
@@ -1722,7 +1774,8 @@ def scrivi_metodo(events):
   {faq}
 
   <h2>Dove trovi DAOP</h2>
-  <p><a href="/eventi.html">L'agenda eventi</a> di {nomi_province} ·
+  <p><a href="{ZONE_HREF}">Le pagine della tua zona</a>, una per provincia ·
+  <a href="/eventi.html">L'agenda eventi</a> di {nomi_province} ·
   <a href="/ginetto.html">Ginetto AI</a>, l'assistente che risponde alle famiglie ·
   <a href="/index.html#chi-siamo">Chi siamo</a> ·
   <a href="/media.html">Rassegna stampa</a></p>
@@ -1745,6 +1798,190 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
     with open(METODO_PATH, 'w', encoding='utf-8') as fh:
         fh.write(html_out)
     print(f"[genera_eventi] metodo.html aggiornato ({schede} schede, {comuni} comuni)")
+
+
+# ---------------------------------------------------------------------------
+# PAGINA ZONE
+#
+# Perche': il credito in fondo a ogni scheda dice DA DOVE arriva quell'evento,
+# ma non spiega il modello - che DAOP e' una pagina per provincia, e che una di
+# quelle pagine non e' nostra. Trenta link sparsi non lo raccontano; una pagina
+# sola si'. Serve anche a chi arriva da fuori zona e vuole sapere se lo copriamo.
+#
+# Rigenerata a ogni run come le altre: i conteggi per provincia sono veri, e una
+# provincia senza eventi in agenda lo dice invece di fingere copertura.
+# ---------------------------------------------------------------------------
+ZONE_PATH = os.path.join(ROOT, "zone.html")
+
+ZONE_CSS = """
+.zon-card{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:18px 20px;margin:16px 0}
+.zon-card h2{margin:0 0 2px;font-size:1.25rem}
+.zon-n{font-size:.88rem;opacity:.75;margin:0 0 10px}
+.zon-link{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.zon-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
+  padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;
+  color:var(--navy,#2d4a5c)}
+.zon-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
+.zon-part{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.03em;
+  text-transform:uppercase;color:#a75b15;background:rgba(232,149,74,.16);
+  border-radius:100px;padding:4px 11px;margin:0 0 8px}
+@media (prefers-color-scheme:dark){.zon-card{border-color:rgba(255,255,255,.16)}
+  .zon-link a{border-color:rgba(255,255,255,.2);color:inherit}}
+"""
+
+
+def scrivi_zone(events):
+    """Genera /zone.html: una provincia, una pagina, e chi la segue."""
+    oggi = datetime.date.today()
+    per_prov = collections.Counter((e.get('prov') or '').upper() for e in events)
+    titolo = "Le pagine della tua zona | DAOP"
+    descr = ("Le pagine DAOP provincia per provincia: chi segue "
+             f"{province_in_elenco(PROVINCE_PUBBLICATE)} e da dove arrivano gli eventi "
+             "per famiglie che pubblichiamo.")
+
+    try:
+        css, nav, foot = _guscio()
+    except SystemExit as err:
+        print(f"[genera_eventi] pagina zone saltata: {err}")
+        return
+
+    schede = []
+    for sigla in PROVINCE_PUBBLICATE:
+        f = fonte_provincia(sigla)
+        if not f:
+            continue
+        n = per_prov.get(sigla, 0)
+        # Il conteggio e' quello vero di adesso. Una provincia a zero non viene
+        # nascosta: "nessun evento in questo momento" e' un'informazione, una
+        # provincia che sparisce dall'elenco sembra un errore del sito.
+        quanti = (f"{n} eventi in agenda in questo momento" if n > 1 else
+                  "1 evento in agenda in questo momento" if n == 1 else
+                  "nessun evento in agenda in questo momento")
+        if f['nostra']:
+            badge = ''
+            testo = (f"La pagina DAOP della provincia di {esc(f['provincia'])}. "
+                     f"Gli eventi che trovi qui sul sito nascono da lì: li seleziona e "
+                     f"li verifica <strong>{esc(f['curatore'])}</strong>, che vive in questo "
+                     f"territorio.")
+        else:
+            badge = '<span class="zon-part">In collaborazione</span>'
+            testo = (f"La provincia di {esc(f['provincia'])} la segue "
+                     f"<strong>@{esc(f['ig'])}</strong>, una pagina che non è nostra. "
+                     "Gli eventi di questa zona arrivano dal loro lavoro: noi li "
+                     "ospitiamo nell'agenda e sull'app, e li accreditiamo su ogni "
+                     "scheda. Se cerchi la fonte originale, è quella.")
+        link = [f'<a href="{f["url"]}" target="_blank" rel="noopener">Instagram @{esc(f["ig"])}</a>']
+        if f.get('fb'):
+            link.append(f'<a href="{f["fb"]}" target="_blank" rel="noopener">Facebook</a>')
+        # Link all'agenda intera, non a un'ancora per provincia: il filtro di
+        # eventi.html e' una <select> in JS, non ci sono ancore per provincia e
+        # un "#prov-al" inventato qui atterrerebbe in cima alla pagina.
+        link.append('<a href="/eventi.html">Vedi l\'agenda</a>')
+        schede.append(
+            f'<section class="zon-card">{badge}'
+            f'<h2>{esc(f["provincia"])}</h2>'
+            f'<p class="zon-n">{quanti}</p>'
+            f'<p>{testo}</p>'
+            f'<div class="zon-link">{"".join(link)}</div>'
+            '</section>')
+
+    grafo = [
+        {"@type": "WebPage", "@id": ZONE_URL, "url": ZONE_URL, "name": titolo,
+         "description": descr, "inLanguage": "it-IT",
+         "isPartOf": {"@type": "WebSite", "@id": SITE_ID, "url": SITE_URL, "name": "DAOP"},
+         "about": {"@id": ORG_ID}, "publisher": {"@id": ORG_ID},
+         "dateModified": oggi.isoformat()},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
+            {"@type": "ListItem", "position": 2, "name": "Le pagine della tua zona",
+             "item": ZONE_URL}]},
+    ]
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": grafo},
+                        ensure_ascii=False, indent=2)
+
+    html_out = f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(titolo)}</title>
+<meta name="description" content="{esc(descr)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{ZONE_URL}">
+<meta property="og:title" content="{esc(titolo)}">
+<meta property="og:description" content="{esc(descr)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{ZONE_URL}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{DEFAULT_IMG}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(titolo)}">
+<meta name="twitter:description" content="{esc(trunc(descr, 120))}">
+<meta name="twitter:image" content="{DEFAULT_IMG}">
+<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{PAGINA_CSS}{METODO_CSS}{ZONE_CSS}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script type="application/ld+json">
+{jsonld}
+</script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<article class="ev-wrap">
+  <div class="ev-crumb" role="navigation" aria-label="Percorso">
+    <a href="/">Home</a> › <span>Le pagine della tua zona</span>
+  </div>
+  <header class="ev-head">
+    <h1>Le pagine della tua zona</h1>
+    <p class="ev-when">Una provincia, una pagina, una persona che la segue</p>
+  </header>
+
+  <p>DAOP non è un calendario unico calato dall'alto: è una pagina per provincia, tenuta
+  da chi in quella provincia ci vive. Il sito e l'app le rimettono insieme in un'agenda
+  sola, ma ogni evento continua ad arrivare da una pagina precisa — ed è scritto in fondo
+  a ogni scheda.</p>
+
+  {"".join(schede)}
+
+  <h2>Perché lo scriviamo</h2>
+  <p>Perché una provincia non è coperta allo stesso modo delle altre, e nasconderlo
+  sarebbe la cosa sbagliata. Dove c'è un curatore DAOP, gli eventi li scegliamo noi. Dove
+  c'è una collaborazione, il lavoro è di qualcun altro e il nome giusto da leggere è il
+  loro. In entrambi i casi chi organizza l'evento resta l'organizzatore: noi lo
+  segnaliamo, non lo produciamo.</p>
+
+  <h2>Vuoi che arriviamo nella tua provincia?</h2>
+  <p>Se segui già gli eventi per famiglie della tua zona — una pagina, un gruppo, un
+  blog — il modello è questo: tu continui a fare il tuo lavoro sulla tua pagina, noi lo
+  portiamo dentro l'agenda e ti accreditiamo. Scrivici.</p>
+  <div class="met-cta">
+    <a class="btn btn-navy" href="mailto:info@daop.it?subject=Collaborazione%20per%20la%20mia%20provincia">Proponi la tua zona</a>
+    <a class="btn btn-teal" href="/metodo.html">Come verifichiamo gli eventi</a>
+  </div>
+
+  <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
+</article>
+</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+    if os.path.exists(ZONE_PATH) and \
+            open(ZONE_PATH, encoding='utf-8').read() == html_out:
+        print("[genera_eventi] zone.html invariato")
+        return
+    with open(ZONE_PATH, 'w', encoding='utf-8') as fh:
+        fh.write(html_out)
+    print(f"[genera_eventi] zone.html aggiornato ({len(schede)} province)")
 
 
 def opzioni_provincia(events):
@@ -1896,6 +2133,7 @@ def main():
     inject_home(render_home(events))
     slugs = scrivi_pagine(events)
     scrivi_metodo(events)
+    scrivi_zone(events)
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()
