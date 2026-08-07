@@ -638,13 +638,30 @@ def render(events, hub=None):
     # cosi' la riga non promette una zona che oggi e' vuota.
     presenti = [s for s in PROVINCE_PUBBLICATE
                 if any(e['prov'].upper() == s for e in events)]
-    fonti = [fonte_provincia(s) for s in presenti]
+    fonti = [f for f in (fonte_provincia(s) for s in presenti) if f]
     fonti_html = ''
     if fonti:
-        voci = " · ".join(f'<a href="{f["url"]}" target="_blank" rel="noopener">'
-                          f'@{esc(f["ig"])}</a> ({esc(f["provincia"])})' for f in fonti)
-        fonti_html = ('\n    <p class="ev-fonti">Gli eventi arrivano dalle pagine di zona: '
-                      f'{voci}.<br><a href="{ZONE_HREF}">Chi segue la tua provincia</a></p>')
+        # Non sono tutte la stessa cosa, e metterle in fila lo faceva credere.
+        # Le pagine DAOP sono nostre, quella di Cuneo e' di Giovanni e noi la
+        # ospitiamo: la riga separa le due frasi invece di elencare tre handle.
+        # Il flag arriva da PROVINCE_IG, lo stesso che usa zone.html.
+        def elenco(voci):
+            return " · ".join(f'<a href="{f["url"]}" target="_blank" rel="noopener">'
+                              f'@{esc(f["ig"])}</a> ({esc(f["provincia"])})' for f in voci)
+        nostre = [f for f in fonti if f['nostra']]
+        ospiti = [f for f in fonti if not f['nostra']]
+        frasi = []
+        if nostre:
+            frasi.append('Gli eventi arrivano dalle pagine DAOP di zona: '
+                         + elenco(nostre) + '.')
+        if ospiti:
+            quali = " e ".join(f"{esc(f['provincia'])} la segue "
+                               f"<a href=\"{f['url']}\" target=\"_blank\" rel=\"noopener\">"
+                               f"@{esc(f['ig'])}</a>" for f in ospiti)
+            frasi.append(f'{quali}: una pagina che non è nostra, con cui '
+                         'collaboriamo e che accreditiamo su ogni scheda.')
+        fonti_html = ('\n    <p class="ev-fonti">' + ' '.join(frasi)
+                      + f'<br><a href="{ZONE_HREF}">Chi segue la tua provincia</a></p>')
 
     lista_html = (highlights + '    <div class="events-list" id="events-list">\n'
                   + '\n\n'.join(sezioni) + '\n    </div>' + fonti_html)
