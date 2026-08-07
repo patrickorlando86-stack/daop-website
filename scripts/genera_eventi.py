@@ -807,10 +807,15 @@ def event_jsonld(e, url_override=None):
     # Questi eventi sono organizzati da pro loco, comuni e associazioni: DAOP
     # li raccoglie e li segnala. Dichiarare DAOP come chi organizza o chi si
     # esibisce e' un dato strutturato falso, e Google lo incrocia con le altre
-    # fonti. Quando il foglio indica la manifestazione, quella e' vera.
-    manifest = (e.get('manifest') or '').strip()
-    if manifest:
-        obj["superEvent"] = {"@type": "Event", "name": manifest}
+    # fonti.
+    #
+    # La manifestazione del foglio NON va in superEvent come semplice nome:
+    # Google legge quell'oggetto come un secondo Event a se' stante, che ha solo
+    # "name" e quindi risulta privo di startDate e location (errori critici in
+    # Search Console: 0 elementi non validi fino al 01/08/2026, 224 il giorno
+    # dopo il deploy che introduceva questo blocco). Per dichiararla servirebbe
+    # un evento-padre completo di date e luogo propri, dato che il foglio non
+    # ha; il nome della manifestazione resta comunque visibile nella card.
     # Chi organizza: NON lo inventiamo, lo leggiamo dalla coda del nome quando il
     # foglio ce l'ha ("... - Pro Loco Ciglione"). E' il dato che Google incrocia
     # con le altre fonti, quindi o e' quello vero o non ci va.
