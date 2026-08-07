@@ -441,7 +441,7 @@ def prezzo_pill(e):
     return ''
 
 
-def riga(e, today):
+def riga(e, today, hub=None):
     """Una riga dell'agenda: intestazione sempre visibile (miniatura, nome,
     contesto, etichette) + dettaglio che si apre al tocco."""
     slug, cat_icon, catlabel = bucket(e)
@@ -490,6 +490,14 @@ def riga(e, today):
     acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{CAL_SVG} Calendario</a>')
     if cover:
         acts.append(f'<a class="event-act" href="{cover}" target="_blank" rel="noopener">{IMG_SVG} Locandina</a>')
+    # Il comune, quando ha una pagina sua. Sta in fondo perche' non e' un'azione
+    # su QUESTO evento ma una via laterale, ed e' dentro il dettaglio che si apre
+    # (nella riga chiusa la citta' vive dentro un <button>, dove un <a> non puo'
+    # stare). Riguarda solo i comuni sopra soglia: gli altri restano testo.
+    mio_hub = (hub or {}).get(_key(e.get('citta')))
+    if mio_hub:
+        acts.append(f'<a class="event-act" href="/eventi/comune/{mio_hub["slug"]}.html">'
+                    f'{PIN_SVG} Tutti gli eventi{a_citta(mio_hub["nome"])}</a>')
 
     dove = esc(e['indirizzo'] or e['luogo'])
     dove_html = f'\n          <p class="ev-where">{PIN_SVG} {dove}</p>' if dove else ''
@@ -578,7 +586,7 @@ def intestazione_giorno(d, today):
     return f"{pre}{GIORNI[d.weekday()]} {d.day} {MESI_LUNGHI[d.month - 1]}"
 
 
-def render(events):
+def render(events, hub=None):
     """Restituisce (opzioni del filtro Tipo, agenda completa)."""
     today = datetime.date.today()
     present = {bucket(e)[0] for e in events}
@@ -619,7 +627,7 @@ def render(events):
 
     sezioni = []
     for day, titolo, lista in gruppi:
-        righe = '\n'.join(riga(e, today) for e in lista)
+        righe = '\n'.join(riga(e, today, hub) for e in lista)
         sezioni.append(f'''      <section class="ev-day" data-day="{day}">
         <h3 class="ev-dayhead"><span class="ev-dayname">{titolo}</span><span class="ev-daycount">{len(lista)}</span></h3>
 {righe}
@@ -2359,6 +2367,33 @@ def url_comune(dati):
     return f"{SITE_URL}/eventi/comune/{dati['slug']}.html"
 
 
+def blocco_comuni(hub):
+    """L'elenco delle pagine per comune, per il fondo di eventi.html.
+
+    Le pagine comune esistevano gia' ma le linkavano solo zone.html e le poche
+    schede evento di quei comuni: dall'agenda, che e' la pagina piu' forte del
+    sito, non arrivava niente. Il conteggio accanto al nome non e' decorazione,
+    e' la promessa che dice se vale la pena entrare."""
+    if not hub:
+        return ''
+    voci = sorted(hub.values(), key=lambda d: (-len(d['futuri']), d['nome']))
+    link = "".join(
+        # Il numero da solo tiene la pillola corta; "eventi in programma" per
+        # esteso sta nell'aria-label, perche' un "12" nudo allo screen reader
+        # non dice niente.
+        f'<a href="/eventi/comune/{d["slug"]}.html" '
+        f'aria-label="{esc(d["nome"])}: {len(d["futuri"])} eventi in programma">'
+        f'{esc(d["nome"])} <span>{len(d["futuri"])}</span></a>'
+        for d in voci if d['futuri'])
+    if not link:
+        return ''
+    return ('    <h2 class="ev-comuni-t">Eventi comune per comune</h2>\n'
+            '    <p class="ev-comuni-s">I centri con abbastanza eventi hanno una pagina '
+            'loro, con le feste raggruppate per manifestazione e quelle che tornano ogni '
+            'anno. Accanto al nome, quanti eventi ci sono in programma adesso.</p>\n'
+            f'    <div class="ev-comuni">{link}</div>')
+
+
 COMUNE_CSS = """
 .com-stat{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 6px;padding:0;list-style:none}
 .com-stat li{border:1px solid rgba(45,74,92,.16);border-radius:100px;padding:6px 14px;font-size:.86rem}
@@ -2705,7 +2740,7 @@ def opzioni_provincia(events):
     return "\n".join(righe)
 
 
-def inject(tipo_opts, lista, jsonld, prov_opts=None):
+def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None):
     s = open(HTML_PATH, encoding="utf-8").read()
     s, n1 = re.subn(r'(<!-- EVENTI-TIPO:START -->\n).*?(\n *<!-- EVENTI-TIPO:END -->)',
                     lambda m: m.group(1) + tipo_opts + m.group(2), s, count=1, flags=re.S)
@@ -2722,6 +2757,14 @@ def inject(tipo_opts, lista, jsonld, prov_opts=None):
         if n4 != 1:
             print("[genera_eventi] ATTENZIONE: marker EVENTI-PROV non trovati in "
                   "eventi.html: il filtro provincia resta quello scritto a mano")
+    # Anche questo blocco e' opzionale, stessa ragione: un eventi.html piu'
+    # vecchio del deploy non deve far fallire tutta la generazione.
+    if comuni_html is not None:
+        s, n5 = re.subn(r'(<!-- EVENTI-COMUNI:START -->\n).*?(\n *<!-- EVENTI-COMUNI:END -->)',
+                        lambda m: m.group(1) + comuni_html + m.group(2), s, count=1, flags=re.S)
+        if n5 != 1:
+            print("[genera_eventi] ATTENZIONE: marker EVENTI-COMUNI non trovati in "
+                  "eventi.html: l'elenco delle pagine comune non viene scritto")
     if n1 != 1 or n2 != 1 or n3 != 1:
         raise SystemExit(f"Ancoraggi non trovati in eventi.html (tipo={n1}, lista={n2}, json-ld={n3})")
     open(HTML_PATH, "w", encoding="utf-8").write(s)
@@ -2847,13 +2890,15 @@ def main():
     controlla_crollo(events)
     segnala_doppioni(events)
     assegna_ancore(events)
-    tipo_opts, lista = render(events)
-    jsonld = render_jsonld(events)
-    inject(tipo_opts, lista, jsonld, opzioni_provincia(events))
-    inject_home(render_home(events))
+    # hub va calcolato PRIMA di render(): l'agenda linka le pagine comune sia
+    # nelle schede sia nel blocco in fondo, e senza non saprebbe quali esistono.
     oggi = datetime.date.today()
     storico = aggiorna_storico(events, oggi)
     hub = comuni_hub(events, storico, oggi)
+    tipo_opts, lista = render(events, hub)
+    jsonld = render_jsonld(events)
+    inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub))
+    inject_home(render_home(events))
     slugs = scrivi_pagine(events, hub)
     comuni = scrivi_comuni(hub, oggi)
     scrivi_metodo(events)

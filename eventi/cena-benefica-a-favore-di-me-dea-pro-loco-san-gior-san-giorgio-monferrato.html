@@ -188,6 +188,17 @@
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
   .event-act svg{flex-shrink:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
+  /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
+     zone.html e le poche schede evento di quei comuni: la pagina piu' forte
+     del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
+     marker EVENTI-COMUNI e cresce da solo quando un comune passa la soglia. */
+  .ev-comuni-sec{padding:0 24px 72px;background:var(--warm-white)}
+  .ev-comuni-t{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .ev-comuni-s{font-size:0.92rem;color:var(--text-mid);margin-bottom:18px;max-width:62ch}
+  .ev-comuni{display:flex;flex-wrap:wrap;gap:10px}
+  .ev-comuni a{display:inline-flex;align-items:baseline;gap:8px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:9px 17px;font-size:0.92rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
+  .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
+  .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
   /* Da dove arriva la segnalazione, cliccabile verso la pagina di provenienza.
      Le occorrenze sono ~190 ma puntano a TRE URL soli. Sta sotto i bottoni e
      pesa meno di loro: e' un credito, non un'azione da fare. */
