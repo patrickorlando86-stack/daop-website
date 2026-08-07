@@ -961,10 +961,19 @@ def fascia_eta(testo):
     return ''
 
 
+def a_citta(citta):
+    """' ad Acqui Terme' ma ' a Novi Ligure': davanti a vocale ci va la d.
+    Vale sia per il title sia per la meta description, cioè per le due righe
+    che la gente legge davvero: "a Acqui" in pagina dei risultati si nota."""
+    if not citta:
+        return ""
+    return f" ad {citta}" if citta[0].lower() in 'aeiou' else f" a {citta}"
+
+
 def _titolo(nome, citta):
     """Title che sta nei limiti senza mai perdere la città né finire a metà
     parola. Ordine di sacrificio: prima il suffisso di brand, poi il nome."""
-    coda = f" a {citta}" if citta else ""
+    coda = a_citta(citta)
     for base in (nome, ORGANIZZATORE_RE.sub('', nome).strip(' -–—')):
         for suffisso in (" | DAOP", ""):
             t = f"{base}{coda}{suffisso}"
@@ -991,6 +1000,81 @@ def periodo_esteso(rec):
         return f"{_dal(di.day)} al {df.day} {MESI_LUNGHI[df.month - 1]} {df.year}"
     return (f"{_dal(di.day)} {MESI_LUNGHI[di.month - 1]} "
             f"al {df.day} {MESI_LUNGHI[df.month - 1]} {df.year}")
+
+
+# Quello che la gente cerca non e' il nome della festa: e' quello che ci trova
+# dentro. In sette giorni le query sui fuochi d'artificio di Novi Ligure hanno
+# fatto 283 impressioni e 1 solo clic, da settima posizione: la pagina c'era e
+# rispondeva, ma nello snippet si leggevano solo le date, e la parola stava
+# sepolta a meta' descrizione scritta "spettacolo pirotecnico". Chi cerca
+# "fuochi d'artificio novi ligure 2026" non riconosceva la risposta.
+#
+# Qui il richiamo lo tiriamo fuori dal testo e lo mettiamo in testa alla meta
+# description, che e' la riga che si legge fra i risultati. Non si inventa
+# niente: se la parola non e' nella descrizione del foglio, non esce. L'ordine
+# della lista e' l'ordine in cui la gente cerca, e ne teniamo al massimo tre:
+# oltre, la riga diventa un elenco della spesa e non la legge nessuno.
+RICHIAMI = [
+    (r'pirotecnic|fuochi', "fuochi d'artificio"),
+    (r'luna\s*park', "luna park"),
+    (r'giostr', "giostre"),
+    (r'gonfiabil', "gonfiabili"),
+    (r'trucca\s*-?\s*bimbi|face\s*painting', "truccabimbi"),
+    (r'buratt|marionett', "burattini"),
+    (r'laborator', "laboratori per bambini"),
+    (r'mercatin|bancarell|banchett|hobbist', "mercatino"),
+    (r'street\s*food', "street food"),
+    (r'stand\s+gastronomic|cucina\s+apert', "stand gastronomico"),
+    (r'degustazion', "degustazioni"),
+    (r'process', "processione"),
+    (r'rievocazion|medioeval|sbandierator', "rievocazione storica"),
+    (r'sfilat|carr\w*\s+allegoric', "sfilata"),
+    (r'orchestra|liscio', "ballo con orchestra"),
+    (r'\bdj\b', "dj set"),
+    (r'musica\s+dal\s+vivo|concerto|tribute|cover\s+band', "musica dal vivo"),
+    (r'mongolfier', "mongolfiere"),
+]
+RICHIAMI = [(re.compile(rx, re.I), etichetta) for rx, etichetta in RICHIAMI]
+
+# Una descrizione che promette una cosa che non c'e' costa molto piu' del clic
+# che porta: e' la parola di DAOP che ci va di mezzo. Quindi se il testo la nega
+# ("quest'anno senza fuochi", "lo spettacolo pirotecnico e' annullato"), il
+# richiamo non esce. La negazione si cerca nella proposizione in cui cade la
+# parola, non in una finestra di caratteri: "niente gonfiabili, ma ci sono i
+# burattini" deve perdere i gonfiabili e tenere i burattini.
+NEGAZIONE_RE = re.compile(
+    r'\b(?:senza|niente|nessun\w*|non|salt(?:a|ato|ata|ate)|annullat\w*|'
+    r'sospes\w*|rinviat\w*)\b', re.I)
+STACCHI = '.;:!?,\n'
+
+
+def _proposizione(testo, pos):
+    """Il pezzo di frase in cui cade pos, fra due segni di punteggiatura."""
+    inizio = max(testo.rfind(c, 0, pos) for c in STACCHI) + 1
+    fini = [i for i in (testo.find(c, pos) for c in STACCHI) if i != -1]
+    return testo[inizio:min(fini) if fini else len(testo)]
+
+
+def richiami(testo, massimo=3):
+    """Le attrazioni davvero citate nella descrizione, pronte da leggere."""
+    testo = testo or ''
+    trovati = []
+    for rx, etichetta in RICHIAMI:
+        for m in rx.finditer(testo):
+            if NEGAZIONE_RE.search(_proposizione(testo, m.start())):
+                continue
+            trovati.append(etichetta)
+            break
+        if len(trovati) >= massimo:
+            break
+    return trovati
+
+
+def elenco_it(voci):
+    """'a, b e c': l'ultima virgola in italiano non si mette."""
+    if len(voci) < 2:
+        return voci[0] if voci else ''
+    return ", ".join(voci[:-1]) + " e " + voci[-1]
 
 
 def carica_registro():
@@ -1335,8 +1419,16 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
     titolo_seo = _titolo(f"{nome} {anno}" if str(anno) not in nome else nome, citta)
 
     descr_txt = (e.get('descr') or '').strip()
-    meta_d = trunc(f"{periodo_esteso(e)}. {descr_txt}" if descr_txt
-                   else f"{nome} a {citta}: {periodo_esteso(e)}.", 152)
+    # La riga che si legge fra i risultati: prima quando e dove (sono le parole
+    # della query, "2026" compreso), poi cosa ci trovi. Prima diceva solo le
+    # date e ripeteva l'attacco della descrizione, che quasi sempre le ripete
+    # un'altra volta ancora.
+    testa = periodo_esteso(e) + a_citta(citta)
+    attrazioni = richiami(descr_txt)
+    if attrazioni:
+        testa += f": {elenco_it(attrazioni)}"
+    meta_d = trunc(f"{testa}. {descr_txt}" if descr_txt
+                   else f"{nome}{a_citta(citta)}: {periodo_esteso(e)}.", 152)
 
     facts = []
     if e.get('ora'):
