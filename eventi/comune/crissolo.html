@@ -385,6 +385,15 @@
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
 
+/* Il ritmo verticale. Il reset del sito e' *{margin:0}, e le altre pagine si
+   rimettono i margini componente per componente: qui la pagina e' fatta anche
+   di prosa - titoletto, paragrafo, riga di link - e senza margini si incollava
+   tutta insieme, con l'h2 appiccicato al fondo del paragrafo precedente.
+   Il selettore e' figlio diretto apposta: i <p> dentro le schede (.com-per) i
+   loro margini ce li hanno gia'. */
+.ev-wrap>h2{margin:34px 0 8px;font-size:1.3rem;line-height:1.32}
+.ev-wrap>p{margin:0 0 12px;max-width:66ch}
+.ev-wrap>p a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
 .com-stat{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 6px;padding:0;list-style:none}
 .com-stat li{border:1px solid rgba(45,74,92,.16);border-radius:100px;padding:6px 14px;font-size:.86rem}
 .com-grp{position:relative;border:1px solid rgba(45,74,92,.16);border-radius:16px;
@@ -445,17 +454,19 @@
   font-variant-numeric:tabular-nums}
 .com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
 .com-anni a:hover{text-decoration:underline}
-.com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
 .com-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .com-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem}
 /* Il credito alla pagina di provenienza: stesso peso che ha sulle schede
-   evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina. */
-.com-fonte{font-size:.88rem;opacity:.85;margin:22px 0 0;padding-top:14px;
-  border-top:1px solid rgba(45,74,92,.12)}
+   evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina.
+   Piu' specifici di .ev-wrap>p, se no vince quello e il filo si attacca. */
+.ev-wrap>p.com-fonte{font-size:.88rem;opacity:.85;margin:26px 0 0;padding-top:14px;
+  border-top:1px solid rgba(45,74,92,.12);max-width:none}
 .com-fonte a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+.ev-wrap>p.ev-firma-nota{margin:8px 0 0;max-width:none}
 @media(max-width:600px){
   .com-grp{padding:13px 14px}
   .com-solo{padding:11px 12px;gap:12px}
@@ -611,7 +622,7 @@
 </header>
 <article class="ev-wrap ev-wrap--hero">
   <ul class="com-stat"><li>6 in programma</li><li>4 manifestazioni</li><li>provincia di Cuneo</li></ul>
-  <p>6 eventi in programma a Crissolo, in provincia di Cuneo: 4 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. Gli eventi di questa provincia li segnala @eventi_bambini_provincia_cuneo, una pagina che non è nostra e che accreditiamo su ogni scheda.</p>
+  <p>6 eventi in programma a Crissolo, in provincia di Cuneo: 4 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. A cura di <a href="https://www.instagram.com/eventi_bambini_provincia_cuneo/" target="_blank" rel="noopener">@eventi_bambini_provincia_cuneo</a>.</p>
 
   <h2>In programma</h2>
   <section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956908804397429390.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Estate a Crissolo 2026</h3><p class="com-per">Dall&#x27;8 agosto al 18 agosto · 3 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">domani · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-08-il-villaggio-creativo-con-gaia-pro-loco-crissolo">Il Villaggio Creativo con Gaia - Pro Loco Crissolo</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">lun 10 ago · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-10-il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr">Il Panino Più Lungo del Mondo! con Gaia - Pro Loco Crissolo</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">mar 18 ago · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-18-ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss">Ciao Ciao Estate! Sorprese per Tutti - Pro Loco Crissolo</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#7e8c99;--cat-tint:rgba(126,140,153,0.16);--cat-ink:#606d7a"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956899937568819294.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-08-serata-giochi-kam-3841-e-pro-loco-crissolo">Serata Giochi - KaM 3841 e Pro Loco Crissolo</a></h3><p class="com-per">Sabato 8 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956907714135639777.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-15-caccia-al-tesoro-kam-3841">Caccia al Tesoro - KaM 3841</a></h3><p class="com-per">Sabato 15 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956907797677785571.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-16-giochiamo-a-basket-con-edo-kam-3841">Giochiamo a Basket con &quot;Edo&quot; - KaM 3841</a></h3><p class="com-per">Domenica 16 agosto 2026</p></div></section><h2>Come funziona a Crissolo</h2><p>I posti che tornano più spesso: <strong>Sala delle Guide di Crissolo</strong>, <strong>Sala delle Guide</strong>, <strong>Salone delle Guide</strong> e <strong>Pista di pattinaggio Il Cervo di Ghiaccio</strong>.</p><p>A organizzare sono soprattutto <strong>Pro Loco Crissolo</strong>: i recapiti stanno sulla scheda di ogni evento.</p>

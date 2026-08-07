@@ -385,6 +385,15 @@
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
 
+/* Il ritmo verticale. Il reset del sito e' *{margin:0}, e le altre pagine si
+   rimettono i margini componente per componente: qui la pagina e' fatta anche
+   di prosa - titoletto, paragrafo, riga di link - e senza margini si incollava
+   tutta insieme, con l'h2 appiccicato al fondo del paragrafo precedente.
+   Il selettore e' figlio diretto apposta: i <p> dentro le schede (.com-per) i
+   loro margini ce li hanno gia'. */
+.ev-wrap>h2{margin:34px 0 8px;font-size:1.3rem;line-height:1.32}
+.ev-wrap>p{margin:0 0 12px;max-width:66ch}
+.ev-wrap>p a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
 .com-stat{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 6px;padding:0;list-style:none}
 .com-stat li{border:1px solid rgba(45,74,92,.16);border-radius:100px;padding:6px 14px;font-size:.86rem}
 .com-grp{position:relative;border:1px solid rgba(45,74,92,.16);border-radius:16px;
@@ -445,17 +454,19 @@
   font-variant-numeric:tabular-nums}
 .com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
 .com-anni a:hover{text-decoration:underline}
-.com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
 .com-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .com-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem}
 /* Il credito alla pagina di provenienza: stesso peso che ha sulle schede
-   evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina. */
-.com-fonte{font-size:.88rem;opacity:.85;margin:22px 0 0;padding-top:14px;
-  border-top:1px solid rgba(45,74,92,.12)}
+   evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina.
+   Piu' specifici di .ev-wrap>p, se no vince quello e il filo si attacca. */
+.ev-wrap>p.com-fonte{font-size:.88rem;opacity:.85;margin:26px 0 0;padding-top:14px;
+  border-top:1px solid rgba(45,74,92,.12);max-width:none}
 .com-fonte a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+.ev-wrap>p.ev-firma-nota{margin:8px 0 0;max-width:none}
 @media(max-width:600px){
   .com-grp{padding:13px 14px}
   .com-solo{padding:11px 12px;gap:12px}
