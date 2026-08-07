@@ -1,0 +1,3229 @@
+{
+ "acquiterme": {
+  "eventi": {
+   "acqui-prog-night-acqui-rock-festival-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Piero Dolermo",
+    "manifest": "",
+    "nome": "Acqui Prog Night – Acqui Rock Festival",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "acqui-wine-days-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile di Palazzo Levi",
+    "manifest": "Acqui Wine Days",
+    "nome": "Acqui Wine Days",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "aurum-mostra-personale-di-ezio-e-marco-gaviglio-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Chiabrera",
+    "manifest": "",
+    "nome": "\"Aurum\" – Mostra Personale di Ezio e Marco Gaviglio",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "castelli-aperti-castello-dei-paleologi-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello dei Paleologi",
+    "manifest": "",
+    "nome": "Castelli Aperti 2026 – Castello dei Paleologi",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "jam-fest-centro-giovanile-yepp-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiostro S. Francesco",
+    "manifest": "",
+    "nome": "Jam Fest – Centro Giovanile Yepp",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-06"
+   },
+   "menu-alla-carta-carta-menu-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Robellini",
+    "manifest": "",
+    "nome": "Menù alla Carta – Carta Menù",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "mercatino-degli-sgaiento-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Bagni",
+    "manifest": "",
+    "nome": "Mercatino degli Sgaientò",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "mostra-collettiva-giudice-de-angelis-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Chiabrera",
+    "manifest": "",
+    "nome": "Mostra Collettiva Giudice – De Angelis",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "mostra-personale-di-pierangelo-bertolo-pittura-e-s-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Robellini",
+    "manifest": "",
+    "nome": "Mostra Personale di Pierangelo Bertolo – Pittura e scultura",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "saturday-open-ferragosto-in-citta-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Città",
+    "manifest": "",
+    "nome": "Saturday Open – Ferragosto in Città",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "ti-racconto-acqui-storytelling-tours-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Città",
+    "manifest": "",
+    "nome": "Ti Racconto Acqui – Storytelling Tours",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Acqui Terme",
+  "prov": "AL"
+ },
+ "albaretto": {
+  "eventi": {
+   "passeggiata-a-cavallo-con-axel-circolo-la-torre-albaretto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardinetto a fianco dell'Asilo, di fronte al Circolo La Torre",
+    "manifest": "Festa di Albaretto",
+    "nome": "Passeggiata a Cavallo con Axel - Circolo La Torre",
+    "organizza": "Circolo La Torre",
+    "pagina": false,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Albaretto",
+  "prov": "CN"
+ },
+ "alberaligure": {
+  "eventi": {
+   "la-famiglia-allocchi-camelozampa-sarvego-festival-albera-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Albera Ligure - fraz. Vendérsi",
+    "manifest": "Sarvego Festival 2026 - A naso in su",
+    "nome": "La famiglia Allocchi (Camelozampa) - Sarvego Festival",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Albera Ligure",
+  "prov": "AL"
+ },
+ "alessandria": {
+  "eventi": {
+   "2-cuori-2-capanne-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via della Libertà Spinetta M.go",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "2 Cuori 2 Capanne",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "alecomics-festival-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cittadella di Alessandria",
+    "manifest": "",
+    "nome": "Alecomics Festival 2026",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "buen-camino-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via della Chiesa Valmadonna",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "Buen Camino",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-28"
+   },
+   "festa-della-birra-street-food-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Verde Zona Scuola Morbelli",
+    "manifest": "Festa della Birra Street Food",
+    "nome": "Festa della Birra Street Food",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
+   "jumpers-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Campora",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "Jumpers",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-21"
+   },
+   "l-illusione-perfetta-now-you-see-me-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini viale della Repubblica",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "L'illusione perfetta - Now You See Me",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-11"
+   },
+   "michael-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini viale della Repubblica",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "Michael",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
+   "sentimental-value-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Galvani",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "Sentimental Value",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   },
+   "super-mario-galaxy-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via della Libertà Spinetta M.go",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "Super Mario Galaxy",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-25"
+   },
+   "un-bel-giorno-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Campora",
+    "manifest": "Alessandria Grandi Film Sotto le Stelle",
+    "nome": "Un bel giorno",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   }
+  },
+  "nome": "Alessandria",
+  "prov": "AL"
+ },
+ "aramengo": {
+  "eventi": {
+   "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgata Perello",
+    "manifest": "Primo Raduno Trattori d'Epoca - Ruggine Piemontese 2026",
+    "nome": "Primo Raduno Trattori d'Epoca - Ruggine Piemontese 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Aramengo",
+  "prov": "AT"
+ },
+ "arguello": {
+  "eventi": {
+   "fagiolino-casaro-teatro-medico-ipnotico-arguello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco San Frontiniano",
+    "manifest": "Teatro in Alta Langa Estate 2026",
+    "nome": "Fagiolino Casaro - Teatro Medico Ipnotico",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Arguello",
+  "prov": "CN"
+ },
+ "arquatascrivia": {
+  "eventi": {
+   "sagra-delle-frittelle-arquata-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza o area coperta Sottovalle di Arquata Scrivia",
+    "manifest": "47ª Sagra delle Frittelle 2026",
+    "nome": "47ª Sagra delle Frittelle 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Arquata Scrivia",
+  "prov": "AL"
+ },
+ "asti": {
+  "eventi": {
+   "palio-di-asti-sabato-05-settembre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Cattedrale",
+    "manifest": "Palio di Asti - Sabato 05 Settembre",
+    "nome": "Palio di Asti - Sabato 05 Settembre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "piccoli-scultori-in-vacanza-musei-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Mazzetti",
+    "manifest": "",
+    "nome": "Piccoli Scultori in Vacanza - Musei di Asti",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Asti",
+  "prov": "AT"
+ },
+ "baldichieridasti": {
+  "eventi": {
+   "cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardino Comunale Baldichieri d'Asti",
+    "manifest": "Palio di Asti - Sabato 05 Settembre",
+    "nome": "Cena Propiziatoria - Pro Loco di Cantarana",
+    "organizza": "Pro Loco di Cantarana",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Baldichieri d'Asti",
+  "prov": "AT"
+ },
+ "buttiglieradasti": {
+  "eventi": {
+   "agosto-letterario-buttigliera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Laghetto del Furnas",
+    "manifest": "Agosto Letterario",
+    "nome": "Agosto Letterario",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "pompieropoli-buttigliera-buttigliera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Pompieropoli 2026",
+    "nome": "Pompieropoli 2026 - Buttigliera",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Buttigliera d'Asti",
+  "prov": "AT"
+ },
+ "caldirola": {
+  "eventi": {
+   "festa-del-bro-d-carvo-pro-loco-caldirola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vicoli di Caldirola",
+    "manifest": "",
+    "nome": "Festa del Brö 'd Carvò - Pro Loco Caldirola",
+    "organizza": "Pro Loco Caldirola",
+    "pagina": true,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Caldirola",
+  "prov": "AL"
+ },
+ "calosso": {
+  "eventi": {
+   "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Sagra del Rapulè Calosso 2026 - Pro Loco San Marzano Oliveto APS",
+    "organizza": "Pro Loco San Marzano Oliveto APS",
+    "pagina": true,
+    "ultima": "2026-10-16"
+   }
+  },
+  "nome": "Calosso",
+  "prov": "AT"
+ },
+ "carbonarascrivia": {
+  "eventi": {
+   "festa-patronale-di-san-rocco-carbonara-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Balera",
+    "manifest": "Festa Patronale di San Rocco - Carbonara Scrivia",
+    "nome": "Festa Patronale di San Rocco - Carbonara Scrivia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-18"
+   }
+  },
+  "nome": "Carbonara Scrivia",
+  "prov": "AL"
+ },
+ "carregaligure": {
+  "eventi": {
+   "quello-che-non-vedo-barbagianni-editore-sarvego-fe-carrega-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Carrega Ligure - fraz. Magioncalda",
+    "manifest": "Sarvego Festival 2026 - A naso in su",
+    "nome": "Quello che (non) vedo (Barbagianni editore) - Sarvego Festival",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   }
+  },
+  "nome": "Carrega Ligure",
+  "prov": "AL"
+ },
+ "carru": {
+  "eventi": {
+   "la-scala-del-re-al-castello-di-carru": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Filippi del Castello",
+    "manifest": "",
+    "nome": "La Scala del Re al Castello di Carrù",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-31"
+   }
+  },
+  "nome": "Carrù",
+  "prov": "CN"
+ },
+ "cartosio": {
+  "eventi": {
+   "cinema-sotto-le-stelle-cartosio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Terracini",
+    "manifest": "Cinema sotto le stelle - Aspettando Corte dei Corti Film Festival V",
+    "nome": "Cinema sotto le stelle - Cartosio",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-09"
+   },
+   "festival-cartosio-pro-loco-cartosio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sferisterio",
+    "manifest": "",
+    "nome": "Festival Cartosio - Pro Loco Cartosio",
+    "organizza": "Pro Loco Cartosio",
+    "pagina": true,
+    "ultima": "2026-08-12"
+   }
+  },
+  "nome": "Cartosio",
+  "prov": "AL"
+ },
+ "casalnoceto": {
+  "eventi": {
+   "cantando-il-cinema-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzetta Ambrogio Spinola",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "Cantando il Cinema",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   },
+   "casalnoceto-kids": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "Casalnoceto Kids",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "casalnoceto-kids-comune-di-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Edificio scolastico",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "Casalnoceto Kids - Comune di Casalnoceto",
+    "organizza": "Comune di Casalnoceto",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "cena-in-piazza-musica-con-nico-e-franz-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Pro Loco Casalnoceto",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "Cena in Piazza + Musica con Nico e Franz",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "cena-in-piazza-musica-tributo-ai-queen-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "Cena in Piazza + Musica Tributo ai Queen",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "i-giovedi-in-biblioteca-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "I Giovedì in Biblioteca",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-24"
+   },
+   "la-radio-e-la-macchina-da-scrivere-nella-storia-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Permanente La Memoria del Passato ODV",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "La Radio e la Macchina da Scrivere nella Storia",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   },
+   "serata-astronomica-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Santuario della Fagliata",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "Serata Astronomica",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
+   "torneo-di-burraco-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro SOMS",
+    "manifest": "Estate a Casalnoceto 2026",
+    "nome": "Torneo di Burraco",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Casalnoceto",
+  "prov": "AL"
+ },
+ "casorzomonferrato": {
+  "eventi": {
+   "casorzo-monferrato-al-di-d-la-festa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Arcatella e Cortil Bar",
+    "manifest": "Casorzo Monferrato al dì d'la festa 2026",
+    "nome": "Casorzo Monferrato al dì d'la festa 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Casorzo Monferrato",
+  "prov": "AT"
+ },
+ "cassinasco": {
+  "eventi": {
+   "festa-d-estate-cassinasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Festa d'Estate Cassinasco 2026",
+    "nome": "Festa d'Estate Cassinasco 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-05"
+   }
+  },
+  "nome": "Cassinasco",
+  "prov": "AT"
+ },
+ "castelboglione": {
+  "eventi": {
+   "festa-patronale-di-castel-boglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Pallone",
+    "manifest": "Festa Patronale 2026 di Castel Boglione",
+    "nome": "Festa Patronale 2026 di Castel Boglione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-12"
+   }
+  },
+  "nome": "Castel Boglione",
+  "prov": "AT"
+ },
+ "casteldelfino": {
+  "eventi": {
+   "guida-per-un-giorno-parco-del-monviso-casteldelfino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Visita Alevè",
+    "manifest": "In Famiglia a Casteldelfino",
+    "nome": "Guida per un giorno - Parco del Monviso",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-19"
+   },
+   "una-storia-tira-l-altra-seguendo-il-richiamo-del-b-casteldelfino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Municipio",
+    "manifest": "In Famiglia a Casteldelfino",
+    "nome": "Una storia tira l'altra... seguendo il richiamo del bosco - Parco del Monviso",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   }
+  },
+  "nome": "Casteldelfino",
+  "prov": "CN"
+ },
+ "castellalfero": {
+  "eventi": {
+   "palio-baldichieri-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Equestre Capricorno",
+    "manifest": "Palio Baldichieri 1987",
+    "nome": "Palio Baldichieri 1987",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-02"
+   }
+  },
+  "nome": "Castell'Alfero",
+  "prov": "AT"
+ },
+ "castellazzobormida": {
+  "eventi": {
+   "mezzanotte-bianca-castellazzo-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele",
+    "manifest": "Mezzanotte Bianca Castellazzo Bormida",
+    "nome": "Mezzanotte Bianca Castellazzo Bormida",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Castellazzo Bormida",
+  "prov": "AL"
+ },
+ "castellettodorba": {
+  "eventi": {
+   "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Lorenzo e Piazza G. Marconi",
+    "manifest": "Festa Patronale di San Lorenzo",
+    "nome": "Festa Patronale di San Lorenzo - Comune di Castelletto d'Orba",
+    "organizza": "Comune di Castelletto d'Orba",
+    "pagina": true,
+    "ultima": "2026-08-10"
+   }
+  },
+  "nome": "Castelletto d'Orba",
+  "prov": "AL"
+ },
+ "castellettomonferrato": {
+  "eventi": {
+   "sagra-delle-nocciole-de-co-e-dello-stinco-pro-loco-castelletto-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Verde Franco Ricaldone",
+    "manifest": "Sagra delle Nocciole De.Co. e dello Stinco",
+    "nome": "Sagra delle Nocciole De.Co. e dello Stinco - Pro Loco Giardinetto",
+    "organizza": "Pro Loco Giardinetto",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Castelletto Monferrato",
+  "prov": "AL"
+ },
+ "castellinaldodalba": {
+  "eventi": {
+   "festa-d-la-madona-du-ri-castellinaldo-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castellinaldo d'Alba",
+    "manifest": "",
+    "nome": "Festa 'd la Madona du Ri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Castellinaldo d'Alba",
+  "prov": "CN"
+ },
+ "castelnuovoscrivia": {
+  "eventi": {
+   "le-piccole-letture-notturne-soulfarm-elilu-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Soulfarm Elilù",
+    "manifest": "Le Piccole Letture Notturne",
+    "nome": "Le Piccole Letture Notturne - Soulfarm Elilù",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   }
+  },
+  "nome": "Castelnuovo Scrivia",
+  "prov": "AL"
+ },
+ "celleenomondo": {
+  "eventi": {
+   "festa-di-san-rocco-celle-enomondo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ballo a Palchetto Molino",
+    "manifest": "Festa di San Rocco - Celle Enomondo 2026",
+    "nome": "Festa di San Rocco - Celle Enomondo 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Celle Enomondo",
+  "prov": "AT"
+ },
+ "ceresolealba": {
+  "eventi": {
+   "apertura-domenicale-della-biblioteca-civica-pro-lo-ceresole-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Avalle-Trincheri",
+    "manifest": "",
+    "nome": "Apertura Domenicale della Biblioteca Civica - Pro Loco Ceresole Alba",
+    "organizza": "Pro Loco Ceresole Alba",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Avalle-Trincheri",
+    "manifest": "",
+    "nome": "Benvenuto Ufficiale alla Leva 2008 - Pro Loco Ceresole Alba",
+    "organizza": "Pro Loco Ceresole Alba",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "consegna-dei-libri-pro-loco-ceresole-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Punto Bookcrossing Kids - Cortile della Biblioteca Civica",
+    "manifest": "",
+    "nome": "Consegna dei Libri - Pro Loco Ceresole Alba",
+    "organizza": "Pro Loco Ceresole Alba",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "Ceresole Alba",
+  "prov": "CN"
+ },
+ "ciglione": {
+  "eventi": {
+   "cabaret-con-marco-guarena-pro-loco-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Cabaret con Marco Guarena - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "cabaret-con-massimo-pica-pro-loco-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Cabaret con Massimo Pica - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "cena-con-magia-con-alfred-the-magician-pro-loco-ci-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Cena con Magia con Alfred the Magician - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-28"
+   },
+   "festa-del-fungo-pro-loco-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "",
+    "nome": "7a Festa del Fungo - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
+   "festa-dell-uva-e-del-vino-pro-loco-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Festa dell'Uva e del Vino - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
+   "il-musichiere-quiz-musicale-pro-loco-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Il Musichiere - Quiz Musicale - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   },
+   "mercatino-di-produttori-e-artigiani-locali-pro-loc-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Mercatino di Produttori e Artigiani locali - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "musical-chiudo-gli-occhi-e-penso-a-te-pro-loco-cig-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Musical Chiudo gli Occhi e Penso a Te - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   },
+   "schegge-di-teatro-con-paolo-portesine-pro-loco-cig-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Schegge di Teatro con Paolo Portesine - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "serata-country-con-silvacountry-boys-pro-loco-cigl-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Serata Country con Silvacountry Boys - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "serata-discorevival-anni-80-summer-nights-dancing-ciglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Serata Discorevival Anni 80 Summer Nights Dancing - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Ciglione",
+  "prov": "AT"
+ },
+ "cimaferle": {
+  "eventi": {
+   "sagra-della-fugassetta-cimaferle": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cimaferle",
+    "manifest": "Sagra della Fugassetta - Cimaferle 2026",
+    "nome": "Sagra della Fugassetta - Cimaferle 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Cimaferle",
+  "prov": "AL"
+ },
+ "cinaglio": {
+  "eventi": {
+   "festa-patronale-di-san-felice-cinaglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini della Scuola",
+    "manifest": "Festa Patronale di San Felice 2026 - Cinaglio",
+    "nome": "Festa Patronale di San Felice 2026 - Cinaglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Cinaglio",
+  "prov": "AT"
+ },
+ "confreria": {
+  "eventi": {
+   "colori-dall-orto-puraessenza-confreria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Puraessenza",
+    "manifest": "Il Folletto Artista dell'Orto",
+    "nome": "Colori dall'orto - Puraessenza",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   },
+   "il-sapore-delle-emozioni-puraessenza-confreria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Puraessenza",
+    "manifest": "Il Folletto Artista dell'Orto",
+    "nome": "Il sapore delle emozioni - Puraessenza",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-27"
+   },
+   "l-energia-magica-della-frutta-puraessenza-confreria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Puraessenza",
+    "manifest": "Il Folletto Artista dell'Orto",
+    "nome": "L'energia magica della frutta - Puraessenza",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Confreria",
+  "prov": "CN"
+ },
+ "confreriacuneo": {
+  "eventi": {
+   "laboratorio-yoga-e-arte-per-bambini-3-6-anni-purae-confreria-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Puraessenza",
+    "manifest": "",
+    "nome": "Laboratorio Yoga e Arte per Bambini (3-6 anni) - Puraessenza",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Confreria - Cuneo",
+  "prov": "CN"
+ },
+ "costavescovato": {
+  "eventi": {
+   "festa-della-vendemmia-a-valli-unite-costa-vescovato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Valli Unite",
+    "manifest": "Festa della Vendemmia a Valli Unite",
+    "nome": "Festa della Vendemmia a Valli Unite",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Costa Vescovato",
+  "prov": "AL"
+ },
+ "crissolo": {
+  "eventi": {
+   "caccia-al-tesoro-kam-3841-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone delle Guide",
+    "manifest": "",
+    "nome": "Caccia al Tesoro - KaM 3841",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
+   "ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide di Crissolo",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Ciao Ciao Estate! Sorprese per Tutti - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-18"
+   },
+   "giochiamo-a-basket-con-edo-kam-3841-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pista di pattinaggio Il Cervo di Ghiaccio",
+    "manifest": "",
+    "nome": "Giochiamo a Basket con \"Edo\" - KaM 3841",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   },
+   "il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide di Crissolo",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Il Panino Più Lungo del Mondo! con Gaia - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   },
+   "il-villaggio-creativo-con-gaia-pro-loco-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide di Crissolo",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Il Villaggio Creativo con Gaia - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "serata-giochi-kam-3841-e-pro-loco-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide",
+    "manifest": "",
+    "nome": "Serata Giochi - KaM 3841 e Pro Loco Crissolo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Crissolo",
+  "prov": "CN"
+ },
+ "cuneo": {
+  "eventi": {
+   "vita-da-api-parco-fluviale-gesso-e-stura-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Casa del Fiume",
+    "manifest": "Estate al Parco 2026",
+    "nome": "Vita da Api - Parco fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Cuneo",
+  "prov": "CN"
+ },
+ "dogliani": {
+  "eventi": {
+   "festa-dei-bambini-pro-loco-dogliani-castello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Festa dei Bambini - Pro Loco Dogliani Castello",
+    "organizza": "Pro Loco Dogliani Castello",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   },
+   "san-lorenzo-celso-dogliani": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Dogliani Castello",
+    "manifest": "San Lorenzo & Celso 2026",
+    "nome": "San Lorenzo & Celso 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-06"
+   }
+  },
+  "nome": "Dogliani",
+  "prov": "CN"
+ },
+ "ferrere": {
+  "eventi": {
+   "festa-patronale-di-sant-agostino-pro-loco-ferrere": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ferrere",
+    "manifest": "E-State a Ferrere",
+    "nome": "Festa Patronale di Sant'Agostino - Pro Loco Ferrere",
+    "organizza": "Pro Loco Ferrere",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   },
+   "festeggiamenti-patronali-sant-agostino-ferrere": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Pro Loco Ferrere",
+    "manifest": "Festeggiamenti Patronali Sant'Agostino 2026 - Ferrere",
+    "nome": "Festeggiamenti Patronali Sant'Agostino 2026 - Ferrere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   },
+   "tra-boschi-e-stelle-pro-loco-ferrere": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ferrere",
+    "manifest": "E-State a Ferrere",
+    "nome": "Tra Boschi e Stelle - Pro Loco Ferrere",
+    "organizza": "Pro Loco Ferrere",
+    "pagina": false,
+    "ultima": "2026-09-02"
+   }
+  },
+  "nome": "Ferrere",
+  "prov": "AT"
+ },
+ "festiona": {
+  "eventi": {
+   "beach-volley-fasi-finali-festiona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Fondo Festiona",
+    "manifest": "San Magno Festiona 26",
+    "nome": "Beach Volley - Fasi finali",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   },
+   "beach-volley-torneo-festiona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Fondo Festiona",
+    "manifest": "San Magno Festiona 26",
+    "nome": "Beach Volley - Torneo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
+   "gara-a-petanque-festiona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortili festionesi",
+    "manifest": "San Magno Festiona 26",
+    "nome": "Gara a Petanque",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "giochi-per-bambini-e-bolle-di-sapone-giganti-festiona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Padiglione festeggimenti",
+    "manifest": "San Magno Festiona 26",
+    "nome": "Giochi per Bambini e Bolle di Sapone Giganti",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   },
+   "memorial-ezio-fiandino-festiona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Fondo Festiona",
+    "manifest": "San Magno Festiona 26",
+    "nome": "Memorial Ezio Fiandino",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   }
+  },
+  "nome": "Festiona",
+  "prov": "CN"
+ },
+ "frassino": {
+  "eventi": {
+   "sulla-pista-dello-skills-bike-park-attivita-guidat-frassino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Sportiva di Frassino",
+    "manifest": "Emozioni & Avventura in Valle Varaita",
+    "nome": "Sulla pista dello Skills bike park - Attività guidata per bambini e ragazzi in MTB",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Frassino",
+  "prov": "CN"
+ },
+ "govone": {
+  "eventi": {
+   "sagra-dell-agnolotto-e-del-bollito-misto-con-alex-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Padiglione Festa Patronale Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "37ª Sagra dell'Agnolotto e del Bollito Misto con Alex e la Band - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "sagra-dell-agnolotto-e-del-bollito-misto-con-dj-de-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Padiglione Festa Patronale Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "37ª Sagra dell'Agnolotto e del Bollito Misto con DJ Dedo, Italobeat e DJ Skyline - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
+   "sagra-gastronomica-con-polenta-e-cinghiale-con-giu-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Padiglione Festa Patronale Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "25ª Sagra Gastronomica con Polenta e Cinghiale con Giuliano & I Baroni - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": true,
+    "ultima": "2026-09-08"
+   },
+   "serata-hamburger-patatine-e-birra-con-max-mania-88-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Padiglione Festa Patronale Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "Serata Hamburger, Patatine e Birra con Max Mania 883 Tribute Band - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
+   "tombola-sotto-le-stelle-pro-loco-canove-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Padiglione Festa Patronale Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "Tombola Sotto le Stelle - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": true,
+    "ultima": "2026-09-10"
+   }
+  },
+  "nome": "Govone",
+  "prov": "CN"
+ },
+ "limonepiemonte": {
+  "eventi": {
+   "ferragosto-senza-frontiere-comune-di-limone-piemon-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Municipio",
+    "manifest": "",
+    "nome": "Ferragosto Senza Frontiere - Comune di Limone Piemonte",
+    "organizza": "Comune di Limone Piemonte",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "letture-ad-alta-voce-estate-di-storie-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca e Museo dello Sci di Limone Piemonte",
+    "manifest": "",
+    "nome": "Letture ad Alta Voce - Estate di Storie",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Limone Piemonte",
+  "prov": "CN"
+ },
+ "mantovana": {
+  "eventi": {
+   "sagra-del-bollito-misto-con-bagnet-mantovana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stand al Coperto Pro Loco Mantovana",
+    "manifest": "49ª Sagra del Bollito Misto con Bagnet",
+    "nome": "49ª Sagra del Bollito Misto con Bagnet",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-06"
+   }
+  },
+  "nome": "Mantovana",
+  "prov": "AL"
+ },
+ "monasterobormida": {
+  "eventi": {
+   "castello-di-monastero-bormida-castelli-aperti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Monastero Bormida",
+    "manifest": "Castelli Aperti 2026",
+    "nome": "Castello di Monastero Bormida - Castelli Aperti",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   },
+   "cinema-sotto-le-stelle-monastero-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corte del Castello Medievale",
+    "manifest": "Cinema sotto le stelle - Aspettando Corte dei Corti Film Festival V",
+    "nome": "Cinema sotto le stelle - Monastero Bormida",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Monastero Bormida",
+  "prov": "AT"
+ },
+ "mondovi": {
+  "eventi": {
+   "laboratorio-di-carta-riciclata-il-melograno-societ-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Maggiore",
+    "manifest": "",
+    "nome": "Laboratorio di Carta Riciclata - Il Melograno Società Cooperativa Sociale",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   }
+  },
+  "nome": "Mondovì",
+  "prov": "CN"
+ },
+ "mongardino": {
+  "eventi": {
+   "mongardino-agosto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Circolo ANSPI",
+    "manifest": "Mongardino Agosto 2026",
+    "nome": "Mongardino Agosto 2026",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "pigiama-party-pro-loco-mongardino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Chiesa",
+    "manifest": "",
+    "nome": "Pigiama Party - Pro Loco Mongardino",
+    "organizza": "Pro Loco Mongardino",
+    "pagina": false,
+    "ultima": "2026-08-26"
+   }
+  },
+  "nome": "Mongardino",
+  "prov": "AT"
+ },
+ "montigliomonferrato": {
+  "eventi": {
+   "concerto-di-san-lorenzo-duo-griot-fola-pro-loco-mo-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pieve Romanica di San Lorenzo",
+    "manifest": "Festa Patronale San Lorenzo 2026 - Estate di Eventi a Montiglio Monferrato",
+    "nome": "Concerto di San Lorenzo - Duo Griot Folà - Pro Loco Montiglio Monferrato",
+    "organizza": "Pro Loco Montiglio Monferrato",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   },
+   "divina-dj-pablo-pro-loco-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Manifestazioni Via Stazione",
+    "manifest": "Festa Patronale San Lorenzo 2026 - Estate di Eventi a Montiglio Monferrato",
+    "nome": "Divina & DJ Pablo - Pro Loco Montiglio Monferrato",
+    "organizza": "Pro Loco Montiglio Monferrato",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "festa-di-san-rocco-pro-loco-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzetta di San Rocco",
+    "manifest": "Festa Patronale San Lorenzo 2026 - Estate di Eventi a Montiglio Monferrato",
+    "nome": "Festa di San Rocco - Pro Loco Montiglio Monferrato",
+    "organizza": "Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "jdrummer-dj-catalin-sax-pro-loco-montiglio-monferr-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Manifestazioni Via Stazione",
+    "manifest": "Festa Patronale San Lorenzo 2026 - Estate di Eventi a Montiglio Monferrato",
+    "nome": "JDrummer.DJ & Catalin Sax - Pro Loco Montiglio Monferrato",
+    "organizza": "Pro Loco Montiglio Monferrato",
+    "pagina": false,
+    "ultima": "2026-08-07"
+   },
+   "luna-park-giostre-a-1-euro-pro-loco-montiglio-monf-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Manifestazioni Via Stazione",
+    "manifest": "Festa Patronale San Lorenzo 2026 - Estate di Eventi a Montiglio Monferrato",
+    "nome": "Luna Park - Giostre a 1 euro - Pro Loco Montiglio Monferrato",
+    "organizza": "Pro Loco Montiglio Monferrato",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   },
+   "s-messa-in-onore-del-santo-patrono-pro-loco-montig-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pieve di San Lorenzo",
+    "manifest": "Festa Patronale San Lorenzo 2026 - Estate di Eventi a Montiglio Monferrato",
+    "nome": "S. Messa in onore del Santo Patrono - Pro Loco Montiglio Monferrato",
+    "organizza": "Pro Loco Montiglio Monferrato",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   },
+   "sonia-de-castelli-pro-loco-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Manifestazioni Via Stazione",
+    "manifest": "Festa Patronale San Lorenzo 2026 - Estate di Eventi a Montiglio Monferrato",
+    "nome": "Sonia De Castelli - Pro Loco Montiglio Monferrato",
+    "organizza": "Pro Loco Montiglio Monferrato",
+    "pagina": false,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Montiglio Monferrato",
+  "prov": "AT"
+ },
+ "moransengo": {
+  "eventi": {
+   "festa-pro-loco-di-moransengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pista in Acciaio Molino",
+    "manifest": "Festa Pro Loco di Moransengo 2026",
+    "nome": "Festa Pro Loco di Moransengo 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Moransengo",
+  "prov": "AT"
+ },
+ "morbello": {
+  "eventi": {
+   "sagra-del-cinghiale-morbello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Loc. Giardino",
+    "manifest": "23ª Sagra del Cinghiale",
+    "nome": "23ª Sagra del Cinghiale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-06"
+   }
+  },
+  "nome": "Morbello",
+  "prov": "AL"
+ },
+ "mornese": {
+  "eventi": {
+   "cena-sotto-le-stelle-mornese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesetta di San Lorenzo",
+    "manifest": "3ª Cena sotto le Stelle",
+    "nome": "3ª Cena sotto le Stelle",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Mornese",
+  "prov": "AL"
+ },
+ "murazzano": {
+  "eventi": {
+   "san-lorenzo-family-night-comune-di-murazzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "San Lorenzo Family Night - Comune di Murazzano",
+    "organizza": "Comune di Murazzano",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Murazzano",
+  "prov": "CN"
+ },
+ "nizzamonferrato": {
+  "eventi": {
+   "cinema-all-aperto-bad-guys-troppo-cattivi-oratorio-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio Don Bosco",
+    "manifest": "La Domenica della Festa dei Borghi",
+    "nome": "Cinema all'aperto: Bad Guys - Troppo Cattivi - Oratorio Don Bosco",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Nizza Monferrato",
+  "prov": "AT"
+ },
+ "noviligure": {
+  "eventi": {
+   "festa-della-pizza-margherita-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo della Merella",
+    "manifest": "Merella in Festa 2026",
+    "nome": "1° Festa della Pizza Margherita",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-07"
+   },
+   "festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Novi Ligure",
+    "manifest": "",
+    "nome": "Festa dello Sport - Evento Finale Plogging Smiling Biking",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-01"
+   },
+   "i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Dellepiane",
+    "manifest": "Baracche d'Estate",
+    "nome": "I Musicanti di Brema - Teatrino dell'Erba Matta",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-10-24"
+   },
+   "mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "",
+    "nome": "Mostra delle Illusioni - Museo dei Campionissimi",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-01-01"
+   },
+   "pedalata-ecologica-merella-plogging-smiling-biking-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Merella",
+    "manifest": "",
+    "nome": "Pedalata Ecologica Merella - Plogging Smiling Biking",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-20"
+   },
+   "sagra-dei-ceci-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo della Merella",
+    "manifest": "Merella in Festa 2026",
+    "nome": "Sagra dei Ceci",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   },
+   "sagra-della-trippa-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo della Merella",
+    "manifest": "Merella in Festa 2026",
+    "nome": "Sagra della Trippa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Novi Ligure",
+  "prov": "AL"
+ },
+ "ormea": {
+  "eventi": {
+   "mini-olimpiadi-ormea-edizione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vecchie scuole via dr. Bassi",
+    "manifest": "Mini Olimpiadi Ormea 5a edizione",
+    "nome": "Mini Olimpiadi Ormea 5a edizione",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Ormea",
+  "prov": "CN"
+ },
+ "paesana": {
+  "eventi": {
+   "barbaluc-woodlab-alla-scoperta-degli-abitanti-del-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pian Muné",
+    "manifest": "",
+    "nome": "Barbalüc Woodlab - Alla scoperta degli abitanti del bosco",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Paesana",
+  "prov": "CN"
+ },
+ "pecettodivalenza": {
+  "eventi": {
+   "notte-dei-desideri-gruppo-astrofili-galileo-pecetto-di-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Osservatorio Astronomico M. Hack - Rocca di Pecetto di Valenza",
+    "manifest": "",
+    "nome": "Notte dei Desideri - Gruppo Astrofili Galileo",
+    "organizza": "Gruppo Astrofili Galileo",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Pecetto di Valenza",
+  "prov": "AL"
+ },
+ "pontechianale": {
+  "eventi": {
+   "obiettivo-impollinatori-parco-del-monviso-pontechianale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parcheggio della borgata Chianale",
+    "manifest": "",
+    "nome": "Obiettivo Impollinatori - Parco del Monviso",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "parco-scenico-zenzero-pontechianale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Municipio",
+    "manifest": "",
+    "nome": "Parco Scenico! - Zenzero",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Pontechianale",
+  "prov": "CN"
+ },
+ "ponzanomonferrato": {
+  "eventi": {
+   "festa-d-estate-ponzano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede della Pro Loco",
+    "manifest": "Festa d'Estate 2026",
+    "nome": "Festa d'Estate 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Ponzano Monferrato",
+  "prov": "AL"
+ },
+ "ponzone": {
+  "eventi": {
+   "festa-sull-aia-pianlago-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pianlago",
+    "manifest": "Festa sull'Aia Pianlago",
+    "nome": "Festa sull'Aia Pianlago",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   }
+  },
+  "nome": "Ponzone",
+  "prov": "AL"
+ },
+ "portacomaro": {
+  "eventi": {
+   "angelica-bove-fondazione-monferrato-on-stage-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Tamburello",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Angelica Bove - Fondazione Monferrato On Stage",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-21"
+   },
+   "b-side-party-band-pro-loco-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Tamburello",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "B-Side Party Band - Pro Loco Portacomaro",
+    "organizza": "Pro Loco Portacomaro",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "camminata-sulle-orme-di-papa-francesco-edizione-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roggero",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Camminata sulle Orme di Papa Francesco - 3ª Edizione",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-30"
+   },
+   "enrico-negro-la-musica-dal-vivo-pro-loco-portacoma-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Tamburello",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Enrico Negro & La Musica dal Vivo - Pro Loco Portacomaro",
+    "organizza": "Pro Loco Portacomaro",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "gita-dell-oratorio-a-gardaland-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Luigino",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Gita dell'Oratorio a Gardaland",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-26"
+   },
+   "il-cerchio-magico-laboratorio-di-uncinetto-la-casa-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roggero",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Il Cerchio Magico - Laboratorio di Uncinetto - La Casa dell'Artista",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "laboratorio-per-bambini-la-casa-dell-artista-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Laboratorio per Bambini - La Casa dell'Artista",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "maratona-di-tambass-rossi-vs-blu-memorial-marco-di-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Tamburello",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "19ª Maratona di Tambass Rossi vs Blu - Memorial Marco Diliberto",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-30"
+   },
+   "mi-ricordo-ti-ricordi-la-casa-dell-artista-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roggero",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Mi Ricordo, Ti Ricordi? - La Casa dell'Artista",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-26"
+   },
+   "non-esiste-un-pianeta-b-incontro-su-ambiente-e-cri-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palatenda",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Non Esiste un Pianeta B - Incontro su Ambiente e Crisi Climatica",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-25"
+   },
+   "party-a-90-live-show-tributo-gigi-d-agostino-pro-l-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Tamburello",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Party a 90 Live Show + Tributo Gigi D'Agostino - Pro Loco Portacomaro",
+    "organizza": "Pro Loco Portacomaro",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "tradizionale-concerto-di-san-bartolomeo-banda-musi-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roggero",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "Tradizionale Concerto di San Bartolomeo - Banda Musicale Comunale di Portacomaro",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Portacomaro",
+  "prov": "AT"
+ },
+ "pozzoloformigaro": {
+  "eventi": {
+   "vivi-pozzolo-estate-nella-corte-del-castello-pozzolo-formigaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corte del Castello",
+    "manifest": "",
+    "nome": "Vivi Pozzolo Estate nella Corte del Castello",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-07-13"
+   }
+  },
+  "nome": "Pozzolo Formigaro",
+  "prov": "AL"
+ },
+ "pratonevoso": {
+  "eventi": {
+   "family-day-giochi-senza-frontiere-prato-nevoso-vil": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Prato Nevoso Village",
+    "manifest": "",
+    "nome": "Family Day - Giochi Senza Frontiere - Prato Nevoso Village",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   }
+  },
+  "nome": "Prato Nevoso",
+  "prov": "CN"
+ },
+ "roccaforteligure": {
+  "eventi": {
+   "fiera-di-s-fermo-pro-loco-roccaforte-roccaforte-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco dei Narcisi",
+    "manifest": "Fiera di S. Fermo 2026",
+    "nome": "Fiera di S. Fermo - Pro Loco Roccaforte",
+    "organizza": "Pro Loco Roccaforte",
+    "pagina": true,
+    "ultima": "2026-08-11"
+   },
+   "san-fermo-pro-loco-roccaforte-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco dei Narcisi",
+    "manifest": "",
+    "nome": "San Fermo 2026 - Pro Loco Roccaforte Ligure",
+    "organizza": "Pro Loco Roccaforte Ligure",
+    "pagina": true,
+    "ultima": "2026-08-11"
+   }
+  },
+  "nome": "Roccaforte Ligure",
+  "prov": "AL"
+ },
+ "rocchettatanaro": {
+  "eventi": {
+   "apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Piacentino",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Apertura Stand Gastronomico con I Controcorrente - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "apertura-stand-gastronomico-con-luigi-gallia-pro-l-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Piacentino",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Apertura Stand Gastronomico con Luigi Gallia - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "apertura-stand-gastronomico-con-shary-band-pro-loc-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Piacentino",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Apertura Stand Gastronomico con Shary Band - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   },
+   "concerto-per-i-50-anni-dalla-rifondazione-della-ba-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Fattoria Roceta",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Concerto per i 50 anni dalla Rifondazione della Banda Municipale di Rocchetta T. - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "concerto-sanremo-junior-serata-di-beneficenza-pro-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Piacentino",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Concerto Sanremo Junior - Serata di Beneficenza - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": false,
+    "ultima": "2026-08-17"
+   },
+   "festa-di-inaugurazione-della-nuova-piazza-di-rocch-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Piacentino",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Festa di Inaugurazione della Nuova Piazza di Rocchetta Tanaro - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "fiera-dei-piccoli-animali-pro-loco-rocchetta-tanar-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Viale dei Platani",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Fiera dei Piccoli Animali - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "gara-di-scala-40-individuale-pro-loco-rocchetta-ta-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile Fattoria Roceta",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Gara di Scala 40 Individuale - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": false,
+    "ultima": "2026-08-18"
+   },
+   "passaggio-della-corsa-ciclistica-monsterrando-pro-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Località Asinara",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Passaggio della Corsa Ciclistica Monsterrando - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "passeggi-amo-rocchetta-pro-loco-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile Fattoria Roceta",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026",
+    "nome": "Passeggi AMO Rocchetta - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   },
+   "passeggiamo-rocchetta-passeggiata-enogastronomica-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile Fattoria Roceta",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "PasseggiAMO Rocchetta - Passeggiata Enogastronomica tra le Vigne - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   },
+   "santa-messa-nella-chiesa-di-san-rocco-pro-loco-roc-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa di San Rocco",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Santa Messa nella Chiesa di San Rocco - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "santa-messa-solenne-di-ferragosto-con-processione-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parrocchia Santi Nicolao e Stefano",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Santa Messa Solenne di Ferragosto con Processione - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "santo-rosario-e-santa-messa-pro-loco-rocchetta-tan-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parrocchia Santi Nicolao e Stefano",
+    "manifest": "Festa Patronale Madonna d'Agosto 2026 - Rocchetta Tanaro",
+    "nome": "Santo Rosario e Santa Messa - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Rocchetta Tanaro",
+  "prov": "AT"
+ },
+ "saluzzo": {
+  "eventi": {
+   "eventi-per-bambini-e-famiglie-wonderland-park-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Wonderland Park - Parco di Villa Aliberti",
+    "manifest": "",
+    "nome": "Eventi per Bambini e Famiglie - Wonderland Park",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Saluzzo",
+  "prov": "CN"
+ },
+ "sambuco": {
+  "eventi": {
+   "dolcemiele-dispari-teatro-sambuco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Municipio",
+    "manifest": "Un Sipario tra Cielo e Terra 2026",
+    "nome": "Dolcemiele - Dispari Teatro",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Sambuco",
+  "prov": "CN"
+ },
+ "sampeyre": {
+  "eventi": {
+   "il-segreto-dei-colori-della-natura-laboratorio-di-sampeyre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Storico Etnografico di Sampeyre",
+    "manifest": "Laboratori artistici per bambini - Estate Sampeyre 2026",
+    "nome": "Il segreto dei colori della natura - Laboratorio di acquarello",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "serata-cartoni-animati-bar-vittoria-sampeyre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bar Vittoria",
+    "manifest": "",
+    "nome": "Serata Cartoni Animati - Bar Vittoria",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Sampeyre",
+  "prov": "CN"
+ },
+ "sandamianodasti": {
+  "eventi": {
+   "alla-scoperta-della-croce-rossa-piccoli-volontari-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Roma 44",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Alla scoperta della Croce Rossa: piccoli volontari crescono",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-19"
+   },
+   "comitato-palio-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini Via Pero",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Comitato Palio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   },
+   "giochiamo-insieme-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini Via Pero",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Giochiamo insieme",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
+   "il-bastone-della-parola-laboratorio-espressivo-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini Via Pero",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Il bastone della parola: laboratorio espressivo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   },
+   "laboratorio-creativo-sulle-emozioni-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini Via Pero",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Laboratorio creativo sulle emozioni",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-31"
+   },
+   "mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Viale alberato di Baluardo Palestro",
+    "manifest": "",
+    "nome": "Mostra mercato piccoli animali - Città di San Damiano d'Asti",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-12-06"
+   },
+   "ocr-power-camp-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo OCR Via Govone 9",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "OCR Power Camp",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   },
+   "tamburello-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Impianti Sportivi - Palestra Polivalente",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Tamburello",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-27"
+   },
+   "tennis-da-tavolo-e-basket-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Impianti Sportivi - Palestra Medie e Polivalente",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Tennis da tavolo e Basket",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-03"
+   },
+   "un-circo-in-via-pero-laboratorio-teatrale-ed-espre-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini Via Pero",
+    "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
+    "nome": "Un circo in Via Pero - Laboratorio teatrale ed espressivo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-02"
+   }
+  },
+  "nome": "San Damiano d'Asti",
+  "prov": "AT"
+ },
+ "sangiorgiomonferrato": {
+  "eventi": {
+   "aperitivo-con-lt-band-circolo-arci-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Caprioglio",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "Aperitivo con LT Band - Circolo ARCI",
+    "organizza": "Circolo ARCI",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "camminare-il-monferrato-sul-cammino-dei-minatori-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "Camminare il Monferrato sul Cammino dei Minatori",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "cena-benefica-a-favore-di-me-dea-pro-loco-san-gior-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "Cena Benefica a favore di Me.Dea - Pro Loco San Giorgio Monferrato",
+    "organizza": "Pro Loco San Giorgio Monferrato",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "li-brogli-miracolosi-compagnia-teatrale-separe-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Parrocchiale",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "Li Brogli Miracolosi - Compagnia Teatrale Separé",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "mercatino-interparrocchiale-zia-bianca-e-amiche-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile dell'Oratorio",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "Mercatino Interparrocchiale Zia Bianca e Amiche",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "mostra-degli-hobbysti-sangiorgesi-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "Mostra degli Hobbysti Sangiorgesi",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "san-giorgio-bike-ride-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cantina San Giorgio",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "1° San Giorgio Bike Ride",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "visite-guidate-al-castello-e-merenda-sinoira-con-m-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di San Giorgio",
+    "manifest": "Quattro Passi a San Giorgio",
+    "nome": "Visite Guidate al Castello e Merenda Sinoira con Mr Dema Sax",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "San Giorgio Monferrato",
+  "prov": "AL"
+ },
+ "sanmarzanooliveto": {
+  "eventi": {
+   "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa dei Battuti",
+    "manifest": "",
+    "nome": "Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS",
+    "organizza": "Pro Loco San Marzano Oliveto APS",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "San Marzano Oliveto",
+  "prov": "AT"
+ },
+ "sansebastianocurone": {
+  "eventi": {
+   "cinema-in-piazzetta-moulin-rouge-pro-loco-sanse-san-sebastiano-curone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzetta Solferino",
+    "manifest": "Sconfinamenti Sonori",
+    "nome": "Cinema in Piazzetta: Moulin Rouge! - Pro Loco Sanse",
+    "organizza": "Pro Loco Sanse",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   }
+  },
+  "nome": "San Sebastiano Curone",
+  "prov": "AL"
+ },
+ "santalbanostura": {
+  "eventi": {
+   "aperitivo-offerto-dalla-pro-loco-e-porchetta-pro-l-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Aperitivo offerto dalla Pro Loco e Porchetta - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
+   "ballo-con-l-orchestra-gonfia-dei-castelli-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Ballo con l'Orchestra Gonfia dei Castelli - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-08-30"
+   },
+   "beach-volley-organizzato-dagli-amici-del-volley-pr-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Beach Volley organizzato dagli Amici del Volley - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "beach-volley-organizzato-dagli-amici-del-volley-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Beach Volley organizzato dagli Amici del Volley",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "carne-alla-brace-e-musica-con-dj-schiffer-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Carne alla Brace e Musica con DJ Schiffer - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "cena-antipasti-piemontesi-e-ballo-con-orchestra-ra-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Cena Antipasti Piemontesi e Ballo con Orchestra Ravera Maria - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-09-03"
+   },
+   "cinema-all-aperto-a-cura-dell-oratorio-pro-loco-sa-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Cinema all'Aperto a cura dell'Oratorio - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-09-02"
+   },
+   "cinema-all-aperto-a-cura-dell-oratorio-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Cinema all'Aperto a cura dell'Oratorio",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-02"
+   },
+   "edizione-del-trail-di-san-liberato-pro-loco-sant-a-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "3ª Edizione del Trail di San Liberato - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "edizione-del-trail-di-san-liberato-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "3ª Edizione del Trail di San Liberato",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "estemporanea-di-pittura-sant-albano-in-cornice-pro-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Estemporanea di Pittura 'Sant'Albano in Cornice' - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "fritto-di-pesce-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Fritto di Pesce - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-27"
+   },
+   "giochi-popolari-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Giochi Popolari - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-08-31"
+   },
+   "giornata-bimbi-organizzata-dall-oratorio-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Giornata Bimbi organizzata dall'Oratorio - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "giornata-bimbi-organizzata-dall-oratorio-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Giornata Bimbi organizzata dall'Oratorio",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "gran-fritto-misto-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Gran Fritto Misto - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-31"
+   },
+   "messa-solenne-e-giochi-popolari-pro-loco-sant-alba-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Messa Solenne e Giochi Popolari - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
+   "percorso-apericena-e-street-food-pro-loco-sant-alb-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Percorso Apericena e Street Food - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "porchetta-e-ballo-con-orchestra-borsa-dei-castelli-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Porchetta e Ballo con Orchestra Borsa dei Castelli - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
+   "raviolata-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Raviolata - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   },
+   "sagra-della-soma-d-aj-gruppo-alpini-sant-albano-st-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "40ª Sagra della Soma d'Aj - Gruppo Alpini Sant'Albano Stura",
+    "organizza": "Gruppo Alpini Sant'Albano Stura",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "serata-latina-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Serata Latina - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-08-27"
+   },
+   "serata-musicale-con-i-coitoni-e-i-s-a-m-e-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Serata Musicale con i Coitoni e I.S.A.M.E. - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "serata-musicale-con-i-coitoni-e-i-s-a-m-e-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Serata Musicale con i Coitoni e I.S.A.M.E.",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "spettacolo-4ever-young-con-l-orchestra-di-marianna-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Spettacolo 4Ever Young con l'Orchestra di Marianna Lanteri",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-28"
+   },
+   "spettacolo-comico-non-si-vede-un-kansas-pro-loco-s-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "Spettacolo Comico 'Non si vede un Kansas' - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Sant'Albano Stura",
+  "prov": "CN"
+ },
+ "sarezzano": {
+  "eventi": {
+   "back-to-the-90s-dj-in-tour-con-max-pensa-e-roby-gi-sarezzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "",
+    "nome": "Back to the '90s - DJ in Tour con Max Pensa e Roby Giovati - Pro Loco di Sarezzano",
+    "organizza": "Pro Loco di Sarezzano",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   }
+  },
+  "nome": "Sarezzano",
+  "prov": "AL"
+ },
+ "scurzolengo": {
+  "eventi": {
+   "san-lorenzo-pro-loco-di-scurzolengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pro Loco di Scurzolengo",
+    "manifest": "San Lorenzo 2026 - Pro Loco di Scurzolengo",
+    "nome": "San Lorenzo 2026 - Pro Loco di Scurzolengo",
+    "organizza": "Pro Loco di Scurzolengo",
+    "pagina": true,
+    "ultima": "2026-08-07"
+   }
+  },
+  "nome": "Scurzolengo",
+  "prov": "AT"
+ },
+ "serravallescrivia": {
+  "eventi": {
+   "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Serravalle Designer Outlet",
+    "manifest": "Play Land Kids Summer Events 2026",
+    "nome": "Play Land Kids Summer Events 2026 - Ass. Animatamente",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "play-land-kids-summer-events-ass-jim-pet-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Serravalle Designer Outlet",
+    "manifest": "Play Land Kids Summer Events 2026",
+    "nome": "Play Land Kids Summer Events 2026 - Ass. Jim Pet",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "play-land-kids-summer-events-ass-la-bellaria-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Serravalle Designer Outlet",
+    "manifest": "Play Land Kids Summer Events 2026",
+    "nome": "Play Land Kids Summer Events 2026 - Ass. La Bellaria",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-08"
+   },
+   "play-land-kids-summer-events-ass-movimente-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Serravalle Designer Outlet",
+    "manifest": "Play Land Kids Summer Events 2026",
+    "nome": "Play Land Kids Summer Events 2026 - Ass. Movimente",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Serravalle Scrivia",
+  "prov": "AL"
+ },
+ "spignomonferrato": {
+  "eventi": {
+   "raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza IV Novembre",
+    "manifest": "",
+    "nome": "5° Raduno di Auto e Moto Storiche - I Calanchi di Spigno - Pro Loco Spigno Monferrato",
+    "organizza": "Pro Loco Spigno Monferrato",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Spigno Monferrato",
+  "prov": "AL"
+ },
+ "spinettamarengo": {
+  "eventi": {
+   "spinetta-in-festa-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Barrera",
+    "manifest": "Spinetta in Festa 2026",
+    "nome": "Spinetta in Festa 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Spinetta Marengo",
+  "prov": "AL"
+ },
+ "tortona": {
+  "eventi": {
+   "alla-ri-scoperta-delle-favole-disney-alice-nel-pae-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie C.I.S.A. di Tortona",
+    "manifest": "Alla (Ri)scoperta delle Favole Disney",
+    "nome": "Alla (Ri)scoperta delle Favole Disney - Alice nel Paese delle Meraviglie - Il Gabbiano",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "alla-ri-scoperta-delle-favole-disney-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie C.I.S.A. di Tortona",
+    "manifest": "",
+    "nome": "Alla (Ri)scoperta delle Favole Disney",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "la-mostra-gli-esplorattori-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie CISA",
+    "manifest": "Gli EsplorAttori",
+    "nome": "La Mostra - Gli EsplorAttori",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-27"
+   },
+   "le-regole-della-mia-citta-gli-esplorattori-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie CISA",
+    "manifest": "Gli EsplorAttori",
+    "nome": "Le regole della mia città! - Gli EsplorAttori",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-20"
+   },
+   "serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie C.I.S.A. di Tortona",
+    "manifest": "Alla (Ri)scoperta delle Favole Disney",
+    "nome": "Serata Finale Cinema e Pizza Disney - Il Gabbiano",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-31"
+   },
+   "stratortona-croce-rossa-italiana-comitato-di-torto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Malaspina",
+    "manifest": "",
+    "nome": "StraTortona 2026 - Croce Rossa Italiana Comitato di Tortona",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Tortona",
+  "prov": "AL"
+ },
+ "verzuolo": {
+  "eventi": {
+   "ferragosto-al-castello-pro-loco-villa-di-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Verzuolo",
+    "manifest": "",
+    "nome": "Ferragosto al Castello - Pro Loco Villa di Verzuolo",
+    "organizza": "Pro Loco Villa di Verzuolo",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "una-giornata-tra-gusto-e-divertimento-pro-loco-vil-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Verzuolo",
+    "manifest": "",
+    "nome": "Una Giornata tra Gusto e Divertimento - Pro Loco Villa di Verzuolo",
+    "organizza": "Pro Loco Villa di Verzuolo",
+    "pagina": true,
+    "ultima": "2026-08-09"
+   }
+  },
+  "nome": "Verzuolo",
+  "prov": "CN"
+ },
+ "viguzzolo": {
+  "eventi": {
+   "il-passerotto-che-scopri-il-mondo-l-arca-di-noe-te-viguzzolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco della Pieve",
+    "manifest": "Baracche d'Estate",
+    "nome": "Il Passerotto che Scoprì il Mondo - L'Arca di Noè Teatro ETS",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-14"
+   }
+  },
+  "nome": "Viguzzolo",
+  "prov": "AL"
+ },
+ "villaromagnano": {
+  "eventi": {
+   "asd-villaromagnano-festeggiamo-i-30-anni": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo L. Guerci",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "ASD Villaromagnano: Festeggiamo i 30 anni",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "S.M.S. Villaromagnano",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "Ass. Sarina Burattini e Serata gastronomica con DJ SET - Domenica 30 Agosto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
+   "fiera-e-street-food-domenica-6-settembre-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "Fiera e Street Food - Domenica 6 Settembre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
+   "giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo Parrocchiale",
+    "manifest": "",
+    "nome": "Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "inaugurazione-mostra-di-pittura-oltre-la-tela-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "Inaugurazione Mostra di Pittura 'Oltre la tela'",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "piru-e-il-cavaliere-di-mezzotacco-compagnia-walter-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "S.O.M.S.",
+    "manifest": "Baracche d'Estate",
+    "nome": "Pirù e il Cavaliere di Mezzotacco - Compagnia Walter Broggini",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-30"
+   },
+   "s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "S. Messa Solenne, Processione con Banda Pozzolese e Banco di Beneficenza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "serata-gastronomica-con-dj-set-sabato-29-agosto-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "S.M.S. Villaromagnano",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "Serata gastronomica con DJ SET - Sabato 29 Agosto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "street-food-showlab-con-nico-franz-e-presentazione-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "Street Food, ShowLab con Nico & Franz e presentazione ASD Villaromagnano - Lunedì 7 Settembre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-07"
+   }
+  },
+  "nome": "Villaromagnano",
+  "prov": "AL"
+ },
+ "vinchio": {
+  "eventi": {
+   "agosto-vinchio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Marco",
+    "manifest": "Agosto 2026 Vinchio",
+    "nome": "Agosto 2026 Vinchio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   }
+  },
+  "nome": "Vinchio",
+  "prov": "AT"
+ },
+ "volpedo": {
+  "eventi": {
+   "giochi-in-piazza-volpedo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Foro Boario",
+    "manifest": "Giochi in Piazza",
+    "nome": "Giochi in Piazza",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Volpedo",
+  "prov": "AL"
+ },
+ "voltaggio": {
+  "eventi": {
+   "bolle-giganti-edizione-agosto-pro-loco-voltaggio-p": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Località Fonte Sulfurea",
+    "manifest": "Voltaggio Kids Summer",
+    "nome": "Bolle Giganti (edizione agosto) - Pro Loco Voltaggio / PazzoAnimazione",
+    "organizza": "Pro Loco Voltaggio / PazzoAnimazione",
+    "pagina": false,
+    "ultima": "2026-08-20"
+   },
+   "splash-party-il-ritorno-pro-loco-voltaggio-pazzoan": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Località Fonte Sulfurea",
+    "manifest": "Voltaggio Kids Summer",
+    "nome": "Splash Party Il Ritorno - Pro Loco Voltaggio / PazzoAnimazione",
+    "organizza": "Pro Loco Voltaggio / PazzoAnimazione",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Voltaggio",
+  "prov": "AL"
+ }
+}

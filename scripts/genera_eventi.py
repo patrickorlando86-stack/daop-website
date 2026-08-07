@@ -1350,7 +1350,7 @@ def firma_daop(rec, oggi):
         '</aside>')
 
 
-def blocco_vicini(rec, events, oggi, limite=6):
+def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
 
     Serve a chi legge (l'evento e' finito, o piove: cosa c'e' invece?) e serve
@@ -1390,14 +1390,20 @@ def blocco_vicini(rec, events, oggi, limite=6):
             f'<span class="ev-vic-n">{esc(trunc(e.get("nome") or "", 70))}</span>'
             f'<span class="ev-vic-c">{esc(e.get("citta") or "")}</span></a></li>')
     titolo = f"Altri eventi vicino a {rec.get('citta')}" if rec.get('citta') else "Altri eventi vicini"
+    # Se il comune ha una pagina sua, il primo link va li': e' piu' vicino a
+    # quello che sta cercando chi e' arrivato qui da "festa <comune>".
+    mio_hub = (hub or {}).get(citta)
+    tutti = (f'<a href="/eventi/comune/{mio_hub["slug"]}.html">Tutti gli eventi'
+             f'{a_citta(mio_hub["nome"])}</a> · ' if mio_hub else '')
     return ('<section class="ev-vicini" aria-labelledby="ev-vicini-t">'
             f'<h2 id="ev-vicini-t">{esc(titolo)}</h2>'
             f'<ul>{"".join(righe)}</ul>'
-            '<p class="ev-vic-all"><a href="/eventi.html">Vedi tutta l\'agenda DAOP</a></p>'
+            f'<p class="ev-vic-all">{tutti}'
+            '<a href="/eventi.html">Vedi tutta l\'agenda DAOP</a></p>'
             '</section>')
 
 
-def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
+def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     """HTML completo di una pagina evento.
 
     orfano: l'evento e' sparito dal foglio pur non essendo ancora passato.
@@ -1527,7 +1533,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=()):
     consigliato_badge = (f'<p class="ev-scelto">{STAR_SVG} Consigliato da DAOP</p>'
                          if si(e.get('consigliato')) else '')
     firma = firma_daop(rec, oggi)
-    altri = blocco_vicini(rec, vicini, oggi) if vicini else ''
+    altri = blocco_vicini(rec, vicini, oggi, hub=hub) if vicini else ''
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -1594,7 +1600,7 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def scrivi_pagine(events):
+def scrivi_pagine(events, hub=None):
     """Genera/aggiorna le pagine evento.
 
     Restituisce {slug: data_ultima_modifica} per la sitemap. La data e' quella
@@ -1617,7 +1623,7 @@ def scrivi_pagine(events):
         # questa e' un doppione: fuori dall'indice e fuori dalla sitemap.
         orfano = slug not in visti and \
             datetime.date.fromisoformat(rec['d_end']) >= oggi
-        nuovo = render_pagina(rec, css, nav, foot, oggi, orfano, vicini=events)
+        nuovo = render_pagina(rec, css, nav, foot, oggi, orfano, vicini=events, hub=hub)
         if orfano:
             orfane.append(slug)
         if datetime.date.fromisoformat(rec['d_end']) < oggi:
@@ -1953,7 +1959,7 @@ ZONE_CSS = """
 """
 
 
-def scrivi_zone(events):
+def scrivi_zone(events, hub=None):
     """Genera /zone.html: una provincia, una pagina, e chi la segue."""
     oggi = datetime.date.today()
     per_prov = collections.Counter((e.get('prov') or '').upper() for e in events)
@@ -2005,6 +2011,13 @@ def scrivi_zone(events):
         # eventi.html e' una <select> in JS, non ci sono ancore per provincia e
         # un "#prov-al" inventato qui atterrerebbe in cima alla pagina.
         link.append('<a href="/eventi.html">Vedi l\'agenda</a>')
+        # I comuni della provincia che hanno una pagina loro. E' qui che
+        # restano attaccati al resto del sito: una pagina raggiungibile solo
+        # dalla sitemap e' una pagina che Google tratta come tale.
+        for d in sorted((hub or {}).values(), key=lambda x: x['nome']):
+            if d['prov'] == sigla:
+                link.append(f'<a href="/eventi/comune/{d["slug"]}.html">'
+                            f'Eventi{a_citta(d["nome"])}</a>')
         schede.append(
             f'<section class="zon-card">{badge}'
             f'<h2>{esc(f["provincia"])}</h2>'
@@ -2112,6 +2125,509 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
     print(f"[genera_eventi] zone.html aggiornato ({len(schede)} province)")
 
 
+# ---------------------------------------------------------------------------
+# PAGINE COMUNE
+#
+# Perche': in Search Console le query di comune ("festa novi ligure oggi",
+# "sagre provincia di alessandria oggi") fanno decine di impressioni in nona
+# posizione e zero clic, perche' ci arriviamo con l'agenda generica. E' lo
+# stesso problema che le pagine evento hanno risolto per le query di singola
+# sagra, un piano sopra.
+#
+# Il rischio qui e' peggiore della pagina magra: una serie di pagine per
+# localita', tutte uguali tranne il nome del posto, e' quello che Google chiama
+# doorway page, e la penalizzazione non colpisce quelle pagine ma il dominio.
+# La differenza fra una doorway page e un hub locale vero e' una sola: la
+# pagina deve contenere qualcosa che l'agenda non da'. Qui e' il raggruppamento
+# per manifestazione (le 13 serate della patronale sono UNA cosa, non 13), i
+# luoghi e le pro loco che ricorrono, e le feste che tornano ogni anno.
+#
+# Per questo la soglia sta scritta nel codice e non nella testa di chi genera.
+# ---------------------------------------------------------------------------
+COMUNI_DIR = os.path.join(PAGINE_DIR, "comune")
+STORICO_PATH = os.path.join(ROOT, "data", "storico-comuni.json")
+REGISTRO_COMUNI = os.path.join(ROOT, "data", "pagine-comune.json")
+
+# I comuni per cui una pagina ha senso: i piu' grandi delle province che
+# copriamo. E' una lista di ambizione, non di stato: Casale Monferrato oggi ha
+# zero eventi sul foglio e infatti la pagina non nasce. Nascera' da sola la
+# notte in cui il foglio avra' abbastanza roba, senza che nessuno tocchi il
+# codice. Un comune fuori da questa lista non prende una pagina nemmeno se
+# passa le soglie: la domanda di ricerca, in un paese di 400 abitanti, non c'e'
+# comunque, e una pagina in piu' e' solo un'altra porta che sembra una doorway.
+CITTA_HUB = (
+    # Alessandria
+    'Alessandria', 'Casale Monferrato', 'Novi Ligure', 'Tortona', 'Acqui Terme',
+    'Valenza', 'Ovada', 'Serravalle Scrivia', 'Arquata Scrivia',
+    # Asti
+    'Asti', 'Nizza Monferrato', 'Canelli', "San Damiano d'Asti",
+    'Costigliole d\'Asti', 'Montiglio Monferrato',
+    # Cuneo
+    'Cuneo', 'Alba', 'Bra', 'Mondovì', 'Fossano', 'Savigliano', 'Saluzzo',
+)
+CITTA_HUB_KEY = {_key(c): c for c in CITTA_HUB}
+
+# Le soglie. Quattro eventi e tre cose diverse: sotto, la pagina non ha niente
+# da dire che l'agenda non dica meglio.
+MIN_EVENTI_HUB = 4
+MIN_VARIETA_HUB = 3
+FINESTRA_HUB = 365      # giorni di storico che contano per la soglia
+MEMORIA_STORICO = 800   # ~2 anni: bastano a dire "torna ogni anno"
+
+
+def chiavi_gruppo(terne):
+    """La chiave di raggruppamento di ogni evento, date le terne
+    (manifestazione, nome, slug).
+
+    Chi ha una manifestazione sta con la sua manifestazione. Chi non ce l'ha ma
+    si chiama COME una manifestazione presente e' la riga "cappello" del foglio
+    (succede: "Alla (Ri)scoperta delle Favole Disney" esiste sia come
+    manifestazione sia come riga singola), e va nello stesso gruppo, non in uno
+    nuovo con lo stesso identico titolo. Tutti gli altri stanno per conto loro."""
+    terne = list(terne)
+    manifesti = {_key(m) for m, _, _ in terne if (m or '').strip()}
+    out = []
+    for m, nome, sl in terne:
+        if (m or '').strip():
+            out.append(_key(m))
+        elif _key(nome) in manifesti:
+            out.append(_key(nome))
+        else:
+            out.append(f'solo::{sl}')
+    return out
+
+
+def varieta(terne):
+    """Quante cose DIVERSE succedono in un comune.
+
+    Le 18 serate di San Liberato a Sant'Albano Stura contano 1, non 18. Senza
+    questo numero il comune con piu' eventi in assoluto (18) sarebbe il primo
+    candidato a una pagina "Eventi a Sant'Albano Stura" che in realta' e' il
+    programma di una festa sola, mentre Novi Ligure - 7 eventi, 5 cose diverse,
+    e la domanda di ricerca vera - resterebbe fuori."""
+    return len(set(chiavi_gruppo(terne)))
+
+
+def carica_storico():
+    if not os.path.exists(STORICO_PATH):
+        return {}
+    try:
+        with open(STORICO_PATH, encoding='utf-8') as fh:
+            return json.load(fh)
+    except (OSError, ValueError) as err:
+        print(f"[genera_eventi] storico comuni illeggibile ({err}), riparto da vuoto")
+        return {}
+
+
+def aggiorna_storico(events, oggi):
+    """Archivio leggero comune -> eventi visti, aggiornato a ogni run.
+
+    data/eventi.json tiene solo il futuro: senza archivio, a novembre la pagina
+    di un comune sarebbe una pagina vuota, e una pagina vuota non deve
+    esistere. Lo slug di slug_evento() e' stabile fra un'edizione e l'altra,
+    quindi l'archivio sa da solo quali feste tornano ogni anno - che e' l'unica
+    cosa che questa pagina puo' dire e che ne' l'agenda ne' chi copia gli
+    eventi da Instagram sa dire."""
+    storico = carica_storico()
+    for e in events:
+        citta = (e.get('citta') or '').strip()
+        k = _key(citta)
+        if not k:
+            continue
+        c = storico.setdefault(k, {"nome": citta, "prov": e.get('prov') or '', "eventi": {}})
+        c["nome"] = citta or c["nome"]
+        c["prov"] = (e.get('prov') or c.get("prov") or '').upper()
+        sl = slug_evento(e)
+        r = c["eventi"].setdefault(sl, {"anni": []})
+        r["nome"] = (e.get('nome') or '').strip()
+        r["manifest"] = (e.get('manifest') or '').strip()
+        r["luogo"] = (e.get('luogo') or '').strip()
+        r["organizza"] = organizzatore(e.get('nome'))
+        r["pagina"] = ha_pagina(e)
+        r["ultima"] = e['d_start'].isoformat()
+        if e['d_start'].year not in r["anni"]:
+            r["anni"] = sorted(r["anni"] + [e['d_start'].year])
+    # Potatura: quello che non si vede da due anni non torna piu'.
+    limite = (oggi - datetime.timedelta(days=MEMORIA_STORICO)).isoformat()
+    for k in list(storico):
+        c = storico[k]
+        c["eventi"] = {sl: r for sl, r in c["eventi"].items()
+                       if (r.get("ultima") or '') >= limite}
+        if not c["eventi"]:
+            del storico[k]
+    with open(STORICO_PATH, 'w', encoding='utf-8') as fh:
+        json.dump(storico, fh, ensure_ascii=False, indent=1, sort_keys=True)
+    return storico
+
+
+def comuni_hub(events, storico, oggi):
+    """{chiave: dati} dei comuni che meritano una pagina, soglie alla mano."""
+    limite = (oggi - datetime.timedelta(days=FINESTRA_HUB)).isoformat()
+    hub = {}
+    for k, nome_ufficiale in CITTA_HUB_KEY.items():
+        futuri = sorted((e for e in events if _key(e.get('citta')) == k),
+                        key=lambda e: (e['d_start'], e.get('nome') or ''))
+        arch = (storico.get(k) or {}).get('eventi', {})
+        visti = {sl: r for sl, r in arch.items() if (r.get('ultima') or '') >= limite}
+        # Un evento futuro e' anche in archivio: si contano una volta sola.
+        terne = {slug_evento(e): ((e.get('manifest') or ''), (e.get('nome') or ''))
+                 for e in futuri}
+        for sl, r in visti.items():
+            terne.setdefault(sl, (r.get('manifest') or '', r.get('nome') or ''))
+        var = varieta((m, nome, sl) for sl, (m, nome) in terne.items())
+        if len(terne) < MIN_EVENTI_HUB or var < MIN_VARIETA_HUB:
+            continue
+        nome = (futuri[0].get('citta') if futuri
+                else (storico.get(k) or {}).get('nome') or nome_ufficiale)
+        hub[k] = {
+            'nome': nome,
+            'prov': ((futuri[0].get('prov') if futuri else
+                      (storico.get(k) or {}).get('prov')) or '').upper(),
+            'slug': slugify(nome),
+            'futuri': futuri,
+            'archivio': visti,
+            'eventi': len(terne),
+            'varieta': var,
+        }
+    return hub
+
+
+def url_comune(dati):
+    return f"{SITE_URL}/eventi/comune/{dati['slug']}.html"
+
+
+COMUNE_CSS = """
+.com-stat{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 6px;padding:0;list-style:none}
+.com-stat li{border:1px solid rgba(45,74,92,.16);border-radius:100px;padding:6px 14px;font-size:.86rem}
+.com-grp{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:15px 18px;margin:14px 0}
+.com-grp h3{margin:0 0 3px;font-size:1.06rem}
+.com-per{font-size:.85rem;opacity:.72;margin:0 0 9px}
+.com-ev{list-style:none;margin:0;padding:0}
+.com-ev li{padding:7px 0;border-top:1px solid rgba(45,74,92,.1);font-size:.94rem;
+  display:flex;gap:10px;align-items:baseline}
+.com-ev li:first-child{border-top:0}
+.com-d{font-weight:700;white-space:nowrap;font-size:.86rem;opacity:.8;min-width:78px}
+.com-ev a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
+.com-ev a:hover{text-decoration:underline}
+.com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
+  padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
+.com-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
+.com-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
+  margin:16px 0;font-size:.95rem}
+@media (prefers-color-scheme:dark){
+  .com-stat li,.com-grp,.com-vuoto{border-color:rgba(255,255,255,.16)}
+  .com-ev li{border-top-color:rgba(255,255,255,.12)}
+  .com-ev a,.com-link a{color:inherit}
+  .com-link a{border-color:rgba(255,255,255,.2)}}
+"""
+
+
+def _gruppi_comune(futuri):
+    """Gli eventi futuri raggruppati per manifestazione.
+
+    E' il motivo per cui questa pagina esiste: nell'agenda le 13 serate della
+    patronale sono 13 righe in fila, qui sono una festa con dentro 13 serate.
+    Chi cerca "festa novi ligure" vuole la seconda cosa."""
+    gruppi = collections.OrderedDict()
+    chiavi = chiavi_gruppo(((e.get('manifest') or ''), (e.get('nome') or ''),
+                            slug_evento(e)) for e in futuri)
+    for e, chiave in zip(futuri, chiavi):
+        m = (e.get('manifest') or '').strip()
+        g = gruppi.setdefault(chiave, {'titolo': m, 'eventi': []})
+        if m and not g['titolo']:
+            g['titolo'] = m
+        g['eventi'].append(e)
+    for g in gruppi.values():
+        if not g['titolo']:
+            g['titolo'] = (g['eventi'][0].get('nome') or '').strip()
+    return list(gruppi.values())
+
+
+def _href_evento(e):
+    if ha_pagina(e):
+        return f"/eventi/{slug_evento(e)}.html"
+    return f"/eventi.html#{e['anchor']}" if e.get('anchor') else "/eventi.html"
+
+
+def _quando_breve(e, oggi):
+    d = e['d_start']
+    if d < oggi:
+        return "in corso"
+    if d == oggi:
+        return "oggi"
+    if (d - oggi).days == 1:
+        return "domani"
+    return f"{GIORNI[d.weekday()][:3]} {d.day} {MESI[d.month - 1]}"
+
+
+def _ricorrenti(archivio):
+    """Le feste viste in piu' di un anno: quelle che tornano davvero."""
+    out = [(sl, r) for sl, r in archivio.items() if len(r.get('anni') or []) > 1]
+    out.sort(key=lambda t: (-len(t[1]['anni']), t[1].get('nome') or ''))
+    return out
+
+
+def _ricorrenze(valori, minimo=2, quante=4):
+    """I valori che tornano almeno `minimo` volte, dal piu' frequente."""
+    c = collections.Counter(v.strip() for v in valori if (v or '').strip())
+    return [(v, n) for v, n in c.most_common(quante) if n >= minimo]
+
+
+def render_comune(dati, css, nav, foot, oggi, vicini=None):
+    citta = dati['nome']
+    futuri, archivio = dati['futuri'], dati['archivio']
+    url = url_comune(dati)
+    prov_nome = PROVINCE_NOMI.get(dati['prov'], dati['prov'])
+
+    # L'anno sta nelle query ("sagre novi ligure 2026") ma non si scrive a mano:
+    # e' quello del prossimo evento, o l'anno in corso se non ce n'e' nessuno.
+    anno = futuri[0]['d_start'].year if futuri else oggi.year
+    base = f"Eventi e sagre{a_citta(citta)} {anno}"
+    titolo = next((t for t in (f"{base} | DAOP", base) if len(t) <= MAX_TITLE),
+                  trunc(base, MAX_TITLE))
+    gruppi = _gruppi_comune(futuri)
+
+    # L'attacco si costruisce con i numeri veri: e' quello che rende questa
+    # pagina diversa dalla stessa pagina di un altro comune, ed e' anche
+    # l'unica cosa onesta da scrivere senza aver visitato il posto.
+    if futuri:
+        fine = max(e['d_end'] for e in futuri)
+        quanti = (f"{len(futuri)} eventi in programma" if len(futuri) > 1
+                  else "1 evento in programma")
+        cosa = (f"{len(gruppi)} manifestazioni diverse" if len(gruppi) > 1
+                else "una manifestazione")
+        sotto = f"{quanti}, fino al {fine.day} {MESI_LUNGHI[fine.month - 1]} {fine.year}"
+        apertura = (f"{quanti}{a_citta(citta)}, in provincia di {prov_nome}: "
+                    f"{cosa}, con le date, gli orari e i contatti di chi le organizza. "
+                    "Le schede le controlliamo una per una prima di pubblicarle.")
+    else:
+        sotto = "Nessun evento in programma in questo momento"
+        apertura = (f"In questo momento{a_citta(citta)} non abbiamo eventi in agenda. "
+                    "Qui sotto restano le feste che tornano ogni anno, così sai "
+                    "quando aspettarle: appena arrivano le date della prossima "
+                    "edizione le trovi in questa pagina.")
+
+    stat = [f"<li>{len(futuri)} in programma</li>" if futuri else "",
+            f"<li>{len(gruppi)} manifestazioni</li>" if len(gruppi) > 1 else "",
+            f"<li>provincia di {esc(prov_nome)}</li>"]
+    blocchi = []
+    for g in gruppi:
+        ev = g['eventi']
+        di, df = min(e['d_start'] for e in ev), max(e['d_end'] for e in ev)
+        periodo = (data_estesa(di).capitalize() if di == df else
+                   f"{_dal(di.day)} {MESI_LUNGHI[di.month - 1]} al "
+                   f"{df.day} {MESI_LUNGHI[df.month - 1]}")
+        if len(ev) == 1:
+            # Un evento solo: il titolo del gruppo E' l'evento. Ripeterlo sotto
+            # come unica riga di elenco riempirebbe la pagina di doppioni, che
+            # e' il modo piu' rapido per farla sembrare generata a macchina.
+            blocchi.append(
+                f'<section class="com-grp"><h3>'
+                f'<a href="{_href_evento(ev[0])}">{esc(trunc(g["titolo"], 80))}</a></h3>'
+                f'<p class="com-per">{esc(periodo)}</p></section>')
+            continue
+        righe = "".join(
+            f'<li><span class="com-d">{esc(_quando_breve(e, oggi))}</span>'
+            f'<a href="{_href_evento(e)}">{esc(trunc(e.get("nome") or "", 80))}</a></li>'
+            for e in ev)
+        blocchi.append(
+            f'<section class="com-grp"><h3>{esc(trunc(g["titolo"], 80))}</h3>'
+            f'<p class="com-per">{esc(periodo)} · {len(ev)} appuntamenti</p>'
+            f'<ul class="com-ev">{righe}</ul></section>')
+
+    ric = _ricorrenti(archivio)
+    if ric:
+        righe = "".join(
+            f'<li><span class="com-d">{r["anni"][0]}–{r["anni"][-1]}</span>'
+            + (f'<a href="/eventi/{sl}.html">{esc(trunc(r.get("nome") or "", 80))}</a>'
+               if r.get('pagina') else f'<span>{esc(trunc(r.get("nome") or "", 80))}</span>')
+            + '</li>' for sl, r in ric[:8])
+        blocchi.append(
+            f'<h2>Le feste che tornano ogni anno{a_citta(citta)}</h2>'
+            f'<p>Le abbiamo già viste in più di un\'edizione: quando escono le date '
+            f'nuove, questa pagina si aggiorna da sola.</p>'
+            f'<section class="com-grp"><ul class="com-ev">{righe}</ul></section>')
+
+    # Luoghi e organizzatori ricorrenti: si ricavano contando, non si scrivono.
+    tutti_luoghi = [e.get('luogo') or '' for e in futuri] + \
+                   [r.get('luogo') or '' for r in archivio.values()]
+    tutti_org = [organizzatore(e.get('nome')) for e in futuri] + \
+                [r.get('organizza') or '' for r in archivio.values()]
+    extra = []
+    # "I posti che tornano più spesso: Novi Ligure" non è un'informazione: nel
+    # foglio la colonna del luogo a volte ripete il comune. Fuori.
+    tutti_luoghi = [v for v in tutti_luoghi if _key(v) and _key(v) != _key(citta)]
+    luoghi = _ricorrenze(tutti_luoghi)
+    if luoghi:
+        extra.append("<p>I posti che tornano più spesso: "
+                     + elenco_it([f"<strong>{esc(v)}</strong>" for v, _ in luoghi])
+                     + ".</p>")
+    org = _ricorrenze(tutti_org)
+    if org:
+        extra.append("<p>A organizzare sono soprattutto "
+                     + elenco_it([f"<strong>{esc(v)}</strong>" for v, _ in org])
+                     + ": i recapiti stanno sulla scheda di ogni evento.</p>")
+    if extra:
+        blocchi.append(f"<h2>Come funziona{a_citta(citta)}</h2>" + "".join(extra))
+
+    altri = [d for k, d in sorted((vicini or {}).items())
+             if d['slug'] != dati['slug'] and d['prov'] == dati['prov']][:6]
+    link_altri = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
+                         for d in altri)
+
+    descr = trunc(f"Eventi, sagre e feste{a_citta(citta)}: {sotto.lower()}. "
+                  "Date, orari e contatti, controllati uno per uno da DAOP.", 152)
+
+    lista = [{"@type": "ListItem", "position": i + 1,
+              "url": f"{SITE_URL}{_href_evento(e)}",
+              "name": (e.get('nome') or '').strip()}
+             for i, e in enumerate(futuri[:30])]
+    grafo = [
+        {"@type": "CollectionPage", "@id": url, "url": url, "name": titolo,
+         "description": descr, "inLanguage": "it-IT",
+         "isPartOf": {"@type": "WebSite", "@id": SITE_ID, "url": SITE_URL, "name": "DAOP"},
+         "about": {"@type": "Place", "name": citta,
+                   "address": {"@type": "PostalAddress", "addressLocality": citta,
+                               "addressRegion": dati['prov'], "addressCountry": "IT"}},
+         "publisher": {"@id": ORG_ID}, "dateModified": oggi.isoformat()},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
+            {"@type": "ListItem", "position": 2, "name": "Eventi", "item": PAGE_URL},
+            {"@type": "ListItem", "position": 3, "name": citta, "item": url}]},
+    ]
+    # L'ItemList RIMANDA alle pagine evento, non ripete gli Event: due copie
+    # dello stesso evento in due pagine diverse sono due elementi da validare
+    # invece di uno, ed e' esattamente il pasticcio del superEvent.
+    if lista:
+        grafo.append({"@type": "ItemList", "name": f"Eventi{a_citta(citta)}",
+                      "numberOfItems": len(lista), "itemListElement": lista})
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": grafo},
+                        ensure_ascii=False, indent=2)
+    robots = "index, follow" if futuri or ric else "noindex, follow"
+
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(titolo)}</title>
+<meta name="description" content="{esc(descr)}">
+<meta name="robots" content="{robots}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{esc(titolo)}">
+<meta property="og:description" content="{esc(descr)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{DEFAULT_IMG}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(titolo)}">
+<meta name="twitter:description" content="{esc(trunc(descr, 120))}">
+<meta name="twitter:image" content="{DEFAULT_IMG}">
+<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{PAGINA_CSS}{COMUNE_CSS}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script type="application/ld+json">
+{jsonld}
+</script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<article class="ev-wrap">
+  <div class="ev-crumb" role="navigation" aria-label="Percorso">
+    <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(citta)}</span>
+  </div>
+  <header class="ev-head">
+    <h1>Eventi e sagre{a_citta(citta)}</h1>
+    <p class="ev-when">{esc(sotto)}</p>
+  </header>
+  <ul class="com-stat">{"".join(stat)}</ul>
+  <p>{apertura}</p>
+
+  {'<h2>In programma</h2>' if futuri else ''}
+  {"".join(blocchi)}
+
+  <div class="com-link">
+    <a href="/eventi.html">Tutta l'agenda DAOP</a>
+    <a href="/metodo.html">Come verifichiamo gli eventi</a>
+  </div>
+  {f'<h2>Altri comuni della provincia di {esc(prov_nome)}</h2><div class="com-link">{link_altri}</div>' if link_altri else ''}
+
+  <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
+</article>
+</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+
+
+def scrivi_comuni(hub, oggi):
+    """Genera le pagine comune. Restituisce {slug: lastmod} per la sitemap."""
+    if not hub:
+        print("[genera_eventi] nessun comune sopra soglia: nessuna pagina comune")
+        return {}
+    try:
+        css, nav, foot = _guscio()
+    except SystemExit as err:
+        print(f"[genera_eventi] pagine comune saltate: {err}")
+        return {}
+    os.makedirs(COMUNI_DIR, exist_ok=True)
+    # Il lastmod e' la data in cui la pagina e' cambiata davvero, non quella
+    # della run: e' lo stesso motivo per cui scrivi_pagine() tiene un registro.
+    # Dichiarare "modificata oggi" ogni notte e' falso, e Google smette di dare
+    # peso a <lastmod> quando lo trova inaffidabile.
+    try:
+        reg = json.load(open(REGISTRO_COMUNI, encoding='utf-8'))
+    except (OSError, ValueError):
+        reg = {}
+    cambiate = 0
+    for dati in sorted(hub.values(), key=lambda d: d['slug']):
+        path = os.path.join(COMUNI_DIR, f"{dati['slug']}.html")
+        nuovo = render_comune(dati, css, nav, foot, oggi, vicini=hub)
+        if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
+            reg.setdefault(dati['slug'], oggi.isoformat())
+            continue
+        with open(path, 'w', encoding='utf-8') as fh:
+            fh.write(nuovo)
+        reg[dati['slug']] = oggi.isoformat()
+        cambiate += 1
+    # Le pagine dei comuni scesi sotto soglia NON si cancellano: i link che
+    # girano restano validi. Vanno pero' in noindex e fuori dalla sitemap,
+    # perche' senza abbastanza eventi la pagina non ha piu' niente da dire.
+    vivi = {d['slug'] for d in hub.values()}
+    orfane = sorted(f[:-5] for f in os.listdir(COMUNI_DIR)
+                    if f.endswith('.html') and f[:-5] not in vivi)
+    for slug in orfane:
+        path = os.path.join(COMUNI_DIR, f"{slug}.html")
+        vecchio = open(path, encoding='utf-8').read()
+        spento = vecchio.replace('<meta name="robots" content="index, follow">',
+                                 '<meta name="robots" content="noindex, follow">')
+        if spento != vecchio:
+            open(path, 'w', encoding='utf-8').write(spento)
+        reg.pop(slug, None)
+    with open(REGISTRO_COMUNI, 'w', encoding='utf-8') as fh:
+        json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
+    print(f"[genera_eventi] pagine comune: {len(hub)} sopra soglia "
+          f"({cambiate} riscritte)" +
+          (f", {len(orfane)} sotto soglia in noindex: {', '.join(orfane)}"
+           if orfane else ""))
+    for d in sorted(hub.values(), key=lambda d: d['nome']):
+        print(f"[genera_eventi]   {d['nome']}: {len(d['futuri'])} in programma, "
+              f"{d['varieta']} cose diverse")
+    return {s: m for s, m in sorted(reg.items()) if s in vivi}
+
+
 def opzioni_provincia(events):
     """Opzioni del filtro provincia, ricavate dagli eventi in agenda.
 
@@ -2168,7 +2684,7 @@ def inject_home(cards_html):
     print("[genera_eventi] carosello eventi aggiornato in index.html")
 
 
-def update_sitemap(slugs=()):
+def update_sitemap(slugs=(), comuni=()):
     """Porta il <lastmod> di eventi.html nella sitemap alla data odierna e
     rigenera il blocco delle pagine evento.
     Il commit avviene (dal workflow) solo se eventi.html è davvero cambiato,
@@ -2191,6 +2707,22 @@ def update_sitemap(slugs=()):
             print(f"[genera_eventi] sitemap: {len(slugs)} pagine evento")
         else:
             print("[genera_eventi] sitemap: marker PAGINE-EVENTO non trovati, salto")
+
+    if comuni:
+        # priority piu' alta delle pagine evento: una pagina comune vale tutto
+        # l'anno, una pagina evento vale fino alla domenica della sagra.
+        blocco = "\n".join(
+            f"  <url>\n    <loc>{SITE_URL}/eventi/comune/{sl}.html</loc>\n"
+            f"    <lastmod>{mod}</lastmod>\n"
+            f"    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>"
+            for sl, mod in comuni.items())
+        s, nb = re.subn(
+            r'(<!-- PAGINE-COMUNE:START.*?-->).*?( *<!-- PAGINE-COMUNE:END -->)',
+            lambda m: f"{m.group(1)}\n{blocco}\n{m.group(2)}", s, count=1, flags=re.S)
+        if nb == 1:
+            print(f"[genera_eventi] sitemap: {len(comuni)} pagine comune")
+        else:
+            print("[genera_eventi] sitemap: marker PAGINE-COMUNE non trovati, salto")
 
     s, n = re.subn(
         r'(<loc>https://www\.daop\.it/eventi\.html</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)',
@@ -2259,9 +2791,13 @@ def main():
     jsonld = render_jsonld(events)
     inject(tipo_opts, lista, jsonld, opzioni_provincia(events))
     inject_home(render_home(events))
-    slugs = scrivi_pagine(events)
+    oggi = datetime.date.today()
+    storico = aggiorna_storico(events, oggi)
+    hub = comuni_hub(events, storico, oggi)
+    slugs = scrivi_pagine(events, hub)
+    comuni = scrivi_comuni(hub, oggi)
     scrivi_metodo(events)
-    scrivi_zone(events)
+    scrivi_zone(events, hub)
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()
@@ -2269,7 +2805,7 @@ def main():
             or (v or '').strip()} for e in events]
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=1)
-    update_sitemap(slugs)
+    update_sitemap(slugs, comuni)
     print(f"[genera_eventi] {len(events)} eventi futuri scritti in eventi.html")
 
 

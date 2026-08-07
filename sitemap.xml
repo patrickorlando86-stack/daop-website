@@ -766,4 +766,31 @@
   </url>
   <!-- PAGINE-EVENTO:END -->
 
+  <!-- PAGINE-COMUNE:START (generato da scripts/genera_eventi.py — non modificare a mano) -->
+  <url>
+    <loc>https://www.daop.it/eventi/comune/acqui-terme.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/alessandria.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/novi-ligure.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/tortona.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- PAGINE-COMUNE:END -->
+
 </urlset>
