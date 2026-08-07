@@ -387,22 +387,81 @@
 
 .com-stat{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 6px;padding:0;list-style:none}
 .com-stat li{border:1px solid rgba(45,74,92,.16);border-radius:100px;padding:6px 14px;font-size:.86rem}
-.com-grp{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:15px 18px;margin:14px 0}
-.com-grp h3{margin:0 0 3px;font-size:1.06rem}
-.com-per{font-size:.85rem;opacity:.72;margin:0 0 9px}
-.com-ev{list-style:none;margin:0;padding:0}
-.com-ev li{padding:7px 0;border-top:1px solid rgba(45,74,92,.1);font-size:.94rem;
-  display:flex;gap:10px;align-items:baseline}
-.com-ev li:first-child{border-top:0}
-.com-d{font-weight:700;white-space:nowrap;font-size:.86rem;opacity:.8;min-width:78px}
-.com-ev a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
-.com-ev a:hover{text-decoration:underline}
+.com-grp{position:relative;border:1px solid rgba(45,74,92,.16);border-radius:16px;
+  padding:15px 18px;margin:12px 0;background:#fff}
+.com-grp h3{margin:0 0 3px;font-size:1.06rem;line-height:1.32}
+.com-per{font-size:.85rem;opacity:.72;margin:0 0 2px}
+/* La miniatura e' la locandina che sta gia' in /assets/eventi/: la stessa che
+   l'agenda mostra nelle righe (.ev-thumb), stesse misure e stesso taglio dal
+   bordo alto, perche' su una locandina il titolo sta in cima. Dove manca -
+   quattro eventi su 257 - resta il segnaposto nel colore della categoria. */
+.com-th{width:56px;height:56px;flex:0 0 56px;border-radius:11px;object-fit:cover;
+  object-position:top center;background:var(--cream,#fbf7f0);display:block}
+.com-th.is-ph{display:flex;align-items:center;justify-content:center;
+  background:var(--cat-tint,rgba(126,140,153,.16));color:var(--cat-color,#7e8c99)}
+.com-th.is-ph svg{width:22px;height:22px}
+/* Il link copre tutta la riga: il bersaglio da toccare e' il rettangolo, non
+   le venti lettere del titolo. Vale per la scheda singola e per ogni riga di
+   una manifestazione, quindi ::after si aggrappa a .com-grp o a .com-ev li. */
+.com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
+.com-go::after{content:"";position:absolute;inset:0}
+.com-head{display:flex;gap:14px;align-items:center}
+.com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.com-solo h3{font-size:1rem;margin:0 0 2px}
+.com-solo:hover,.com-ev li:hover{border-color:rgba(107,165,168,.55)}
+.com-solo:hover{box-shadow:0 2px 14px rgba(45,74,92,.07)}
+.com-solo:hover .com-go,.com-ev li:hover .com-go{text-decoration:underline}
+.com-ev{list-style:none;margin:11px 0 0;padding:0}
+.com-ev li{position:relative;display:flex;gap:12px;align-items:center;
+  padding:9px 0;border-top:1px solid rgba(45,74,92,.1)}
+.com-ev li:first-child{border-top:0;padding-top:1px}
+.com-ev .com-th{width:50px;height:50px;flex-basis:50px;border-radius:10px}
+.com-ev .com-th.is-ph svg{width:20px;height:20px}
+/* Righe senza francobollo (il poster e' salito in testa al gruppo): la data
+   torna a fianco del titolo in colonna fissa, che a schermo largo si scorre
+   meglio di due righe impilate. Sul telefono la colonna non ci sta e si
+   impila - stessa scelta che fa l'agenda con .ev-line. */
+.com-ev.is-nude li{gap:14px;align-items:baseline}
+.com-ev.is-nude .com-b{flex-direction:row;gap:14px;align-items:baseline;flex-wrap:wrap}
+.com-ev.is-nude .com-d{min-width:132px}
+@media(max-width:560px){
+  .com-ev.is-nude .com-b{flex-direction:column;gap:2px}
+  .com-ev.is-nude .com-d{min-width:0}
+}
+.com-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+/* La data in alto e nel colore della categoria: e' l'unica cosa che si legge
+   scorrendo con il pollice, e sta sempre alla stessa distanza dal bordo. */
+.com-d{font-weight:700;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase;
+  color:var(--cat-ink,#606d7a)}
+.com-ev .com-go{font-size:.95rem;line-height:1.34}
+/* Le feste che tornano: niente locandina, perche' quella in archivio e'
+   dell'edizione passata e prometterebbe una data che non c'e' piu'. */
+.com-anni{list-style:none;margin:0;padding:0}
+.com-anni li{display:flex;gap:12px;align-items:baseline;padding:7px 0;
+  border-top:1px solid rgba(45,74,92,.1);font-size:.94rem}
+.com-anni li:first-child{border-top:0}
+.com-y{font-weight:700;white-space:nowrap;font-size:.82rem;opacity:.7;min-width:76px;
+  font-variant-numeric:tabular-nums}
+.com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
+.com-anni a:hover{text-decoration:underline}
 .com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
 .com-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .com-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem}
+/* Il credito alla pagina di provenienza: stesso peso che ha sulle schede
+   evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina. */
+.com-fonte{font-size:.88rem;opacity:.85;margin:22px 0 0;padding-top:14px;
+  border-top:1px solid rgba(45,74,92,.12)}
+.com-fonte a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+@media(max-width:600px){
+  .com-grp{padding:13px 14px}
+  .com-solo{padding:11px 12px;gap:12px}
+  .com-th{width:50px;height:50px;flex-basis:50px}
+  .com-ev .com-th{width:46px;height:46px;flex-basis:46px}
+}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script type="application/ld+json">
@@ -591,14 +650,14 @@
   <p>12 eventi in programma ad Acqui Terme, in provincia di Alessandria: 11 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. Le schede le controlliamo una per una prima di pubblicarle.</p>
 
   <h2>In programma</h2>
-  <section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-06-jam-fest-centro-giovanile-yepp">Jam Fest – Centro Giovanile Yepp</a></h3><p class="com-per">Dal 6 agosto al 7 agosto</p></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-07-ti-racconto-acqui-storytelling-tours">Ti Racconto Acqui – Storytelling Tours</a></h3><p class="com-per">Venerdì 7 agosto 2026</p></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-08-acqui-wine-days">Acqui Wine Days</a></h3><p class="com-per">Dall&#x27;8 agosto al 9 agosto</p></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-08-mostra-collettiva-giudice-de-angelis">Mostra Collettiva Giudice – De Angelis</a></h3><p class="com-per">Dall&#x27;8 agosto al 23 agosto</p></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-08-mostra-personale-di-pierangelo-bertolo-pittura-e-s">Mostra Personale di Pierangelo Bertolo – Pittura e scultura</a></h3><p class="com-per">Dall&#x27;8 agosto al 23 agosto</p></section><section class="com-grp"><h3><a href="/eventi/saturday-open-ferragosto-in-citta-acqui-terme.html">Saturday Open – Ferragosto in Città</a></h3><p class="com-per">Sabato 15 agosto 2026</p></section><section class="com-grp"><h3>Castelli Aperti 2026 – Castello dei Paleologi</h3><p class="com-per">Dal 16 agosto al 23 agosto · 2 appuntamenti</p><ul class="com-ev"><li><span class="com-d">dom 16 ago</span><a href="/eventi.html#ev-2026-08-16-castelli-aperti-2026-castello-dei-paleologi">Castelli Aperti 2026 – Castello dei Paleologi</a></li><li><span class="com-d">dom 23 ago</span><a href="/eventi.html#ev-2026-08-23-castelli-aperti-2026-castello-dei-paleologi">Castelli Aperti 2026 – Castello dei Paleologi</a></li></ul></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-23-mercatino-degli-sgaiento">Mercatino degli Sgaientò</a></h3><p class="com-per">Domenica 23 agosto 2026</p></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-29-aurum-mostra-personale-di-ezio-e-marco-gaviglio">&quot;Aurum&quot; – Mostra Personale di Ezio e Marco Gaviglio</a></h3><p class="com-per">Dal 29 agosto al 13 settembre</p></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-29-acqui-prog-night-acqui-rock-festival">Acqui Prog Night – Acqui Rock Festival</a></h3><p class="com-per">Sabato 29 agosto 2026</p></section><section class="com-grp"><h3><a href="/eventi.html#ev-2026-08-29-menu-alla-carta-carta-menu">Menù alla Carta – Carta Menù</a></h3><p class="com-per">Dal 29 agosto al 11 ottobre</p></section><h2>Come funziona ad Acqui Terme</h2><p>I posti che tornano più spesso: <strong>Centro Città</strong>, <strong>Palazzo Chiabrera</strong>, <strong>Palazzo Robellini</strong> e <strong>Castello dei Paleologi</strong>.</p>
+  <section class="com-grp com-solo" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16);--cat-ink:#846a1a"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-06-jam-fest-centro-giovanile-yepp">Jam Fest – Centro Giovanile Yepp</a></h3><p class="com-per">Dal 6 agosto al 7 agosto</p></div></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-07-ti-racconto-acqui-storytelling-tours">Ti Racconto Acqui – Storytelling Tours</a></h3><p class="com-per">Venerdì 7 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/eventi/daop_alessandria_3940943250282030210.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-08-acqui-wine-days">Acqui Wine Days</a></h3><p class="com-per">Dall&#x27;8 agosto al 9 agosto</p></div></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-08-mostra-collettiva-giudice-de-angelis">Mostra Collettiva Giudice – De Angelis</a></h3><p class="com-per">Dall&#x27;8 agosto al 23 agosto</p></div></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-08-mostra-personale-di-pierangelo-bertolo-pittura-e-s">Mostra Personale di Pierangelo Bertolo – Pittura e scultura</a></h3><p class="com-per">Dall&#x27;8 agosto al 23 agosto</p></div></section><section class="com-grp com-solo" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/saturday-open-ferragosto-in-citta-acqui-terme.html">Saturday Open – Ferragosto in Città</a></h3><p class="com-per">Sabato 15 agosto 2026</p></div></section><section class="com-grp" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><div class="com-head"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Castelli Aperti 2026 – Castello dei Paleologi</h3><p class="com-per">Dal 16 agosto al 23 agosto · 2 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><span class="com-b"><span class="com-d">dom 16 ago · 16:30</span><a class="com-go" href="/eventi.html#ev-2026-08-16-castelli-aperti-2026-castello-dei-paleologi">Castelli Aperti 2026 – Castello dei Paleologi</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><span class="com-b"><span class="com-d">dom 23 ago · 16:30</span><a class="com-go" href="/eventi.html#ev-2026-08-23-castelli-aperti-2026-castello-dei-paleologi">Castelli Aperti 2026 – Castello dei Paleologi</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-23-mercatino-degli-sgaiento">Mercatino degli Sgaientò</a></h3><p class="com-per">Domenica 23 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-29-aurum-mostra-personale-di-ezio-e-marco-gaviglio">&quot;Aurum&quot; – Mostra Personale di Ezio e Marco Gaviglio</a></h3><p class="com-per">Dal 29 agosto al 13 settembre</p></div></section><section class="com-grp com-solo" style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16);--cat-ink:#846a1a"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-29-acqui-prog-night-acqui-rock-festival">Acqui Prog Night – Acqui Rock Festival</a></h3><p class="com-per">Sabato 29 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/eventi/daop_alessandria_3951996366445679636.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-29-menu-alla-carta-carta-menu">Menù alla Carta – Carta Menù</a></h3><p class="com-per">Dal 29 agosto al 11 ottobre</p></div></section><h2>Come funziona ad Acqui Terme</h2><p>I posti che tornano più spesso: <strong>Centro Città</strong>, <strong>Palazzo Chiabrera</strong>, <strong>Palazzo Robellini</strong> e <strong>Castello dei Paleologi</strong>.</p>
 
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
-  <h2>Altri comuni della provincia di Alessandria</h2><div class="com-link"><a href="/eventi/comune/alessandria.html">Alessandria</a><a href="/eventi/comune/novi-ligure.html">Novi Ligure</a><a href="/eventi/comune/tortona.html">Tortona</a></div>
-
+  <h2>Altri comuni della provincia di Alessandria</h2><div class="com-link"><a href="/eventi/comune/alessandria.html">Alessandria</a><a href="/eventi/comune/novi-ligure.html">Novi Ligure</a><a href="/eventi/comune/tortona.html">Tortona</a><a href="/eventi/comune/villaromagnano.html">Villaromagnano</a></div>
+  <p class="com-fonte">Gli eventi ad Acqui Terme arrivano da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p>
   <p class="ev-firma-nota">Pagina aggiornata il 7 agosto 2026.</p>
 </article>
 <section class="bg-cream ev-ginetto">
@@ -652,6 +711,7 @@
         <a href="tel:+393471834091">347 183 4091</a>
         <a href="/index.html#chi-siamo">Chi siamo</a>
         <a href="/metodo.html">Come verifichiamo gli eventi</a>
+        <a href="/zone.html">Le pagine della tua zona</a>
         <a href="/privacy.html">Privacy Policy</a>
         <a href="/cookie-policy.html">Cookie Policy</a>
       </div>

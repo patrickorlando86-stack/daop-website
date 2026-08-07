@@ -2042,6 +2042,13 @@ ZONE_CSS = """
 .zon-part{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.03em;
   text-transform:uppercase;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:4px 11px;margin:0 0 8px}
+/* Le pagine dei comuni su una riga loro, sotto un'etichetta. In fila ai
+   pulsanti di Instagram e Facebook sembravano un quarto profilo di qualcun
+   altro, e sono invece l'unica cosa di questa scheda che porta dentro il sito. */
+.zon-lab{font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  opacity:.6;margin:16px 0 0}
+.zon-com{margin-top:7px}
+.zon-com a{border-style:dashed}
 """
 
 
@@ -2099,17 +2106,20 @@ def scrivi_zone(events, hub=None):
         link.append('<a href="/eventi.html">Vedi l\'agenda</a>')
         # I comuni della provincia che hanno una pagina loro. E' qui che
         # restano attaccati al resto del sito: una pagina raggiungibile solo
-        # dalla sitemap e' una pagina che Google tratta come tale.
-        for d in sorted((hub or {}).values(), key=lambda x: x['nome']):
-            if d['prov'] == sigla:
-                link.append(f'<a href="/eventi/comune/{d["slug"]}.html">'
-                            f'Eventi{a_citta(d["nome"])}</a>')
+        # dalla sitemap e' una pagina che Google tratta come tale. Riga a
+        # parte, pero': in fila ai pulsanti social erano indistinguibili da un
+        # altro profilo esterno, e sono l'opposto - portano dentro il sito.
+        com = [f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
+               for d in sorted((hub or {}).values(), key=lambda x: x['nome'])
+               if d['prov'] == sigla]
+        com_html = ('<p class="zon-lab">Le pagine dei comuni</p>'
+                    f'<div class="zon-link zon-com">{"".join(com)}</div>') if com else ''
         schede.append(
             f'<section class="zon-card">{badge}'
             f'<h2>{esc(f["provincia"])}</h2>'
             f'<p class="zon-n">{quanti}</p>'
             f'<p>{testo}</p>'
-            f'<div class="zon-link">{"".join(link)}</div>'
+            f'<div class="zon-link">{"".join(link)}</div>{com_html}'
             '</section>')
 
     grafo = [
@@ -2236,24 +2246,14 @@ COMUNI_DIR = os.path.join(PAGINE_DIR, "comune")
 STORICO_PATH = os.path.join(ROOT, "data", "storico-comuni.json")
 REGISTRO_COMUNI = os.path.join(ROOT, "data", "pagine-comune.json")
 
-# I comuni per cui una pagina ha senso: i piu' grandi delle province che
-# copriamo. E' una lista di ambizione, non di stato: Casale Monferrato oggi ha
-# zero eventi sul foglio e infatti la pagina non nasce. Nascera' da sola la
-# notte in cui il foglio avra' abbastanza roba, senza che nessuno tocchi il
-# codice. Un comune fuori da questa lista non prende una pagina nemmeno se
-# passa le soglie: la domanda di ricerca, in un paese di 400 abitanti, non c'e'
-# comunque, e una pagina in piu' e' solo un'altra porta che sembra una doorway.
-CITTA_HUB = (
-    # Alessandria
-    'Alessandria', 'Casale Monferrato', 'Novi Ligure', 'Tortona', 'Acqui Terme',
-    'Valenza', 'Ovada', 'Serravalle Scrivia', 'Arquata Scrivia',
-    # Asti
-    'Asti', 'Nizza Monferrato', 'Canelli', "San Damiano d'Asti",
-    'Costigliole d\'Asti', 'Montiglio Monferrato',
-    # Cuneo
-    'Cuneo', 'Alba', 'Bra', 'Mondovì', 'Fossano', 'Savigliano', 'Saluzzo',
-)
-CITTA_HUB_KEY = {_key(c): c for c in CITTA_HUB}
+# Chi prende una pagina lo decidono le soglie qui sotto, e nient'altro. Fino a
+# ieri c'era anche una whitelist dei comuni piu' grandi, per paura che un paese
+# di 400 abitanti producesse una doorway page. Era la difesa sbagliata al posto
+# giusto: teneva fuori Villaromagnano - 9 eventi e 3 manifestazioni diverse -
+# per la popolazione, cioe' per un dato che non dice niente su quanto la pagina
+# abbia da raccontare. A tenere lontane le pagine vuote bastano il numero e la
+# varieta', che guardano il contenuto: ed e' il contenuto, non la taglia del
+# comune, la sola cosa che distingue un hub locale da una doorway page.
 
 # Le soglie. Quattro eventi e tre cose diverse: sotto, la pagina non ha niente
 # da dire che l'agenda non dica meglio.
@@ -2351,8 +2351,12 @@ def aggiorna_storico(events, oggi):
 def comuni_hub(events, storico, oggi):
     """{chiave: dati} dei comuni che meritano una pagina, soglie alla mano."""
     limite = (oggi - datetime.timedelta(days=FINESTRA_HUB)).isoformat()
+    # Senza whitelist i candidati sono tutti i comuni visti, in agenda o in
+    # archivio: a scartare ci pensano le soglie qualche riga piu' sotto.
+    chiavi = set(storico) | {_key(e.get('citta')) for e in events
+                             if (e.get('citta') or '').strip()}
     hub = {}
-    for k, nome_ufficiale in CITTA_HUB_KEY.items():
+    for k in sorted(chiavi):
         futuri = sorted((e for e in events if _key(e.get('citta')) == k),
                         key=lambda e: (e['d_start'], e.get('nome') or ''))
         arch = (storico.get(k) or {}).get('eventi', {})
@@ -2365,8 +2369,12 @@ def comuni_hub(events, storico, oggi):
         var = varieta((m, nome, sl) for sl, (m, nome) in terne.items())
         if len(terne) < MIN_EVENTI_HUB or var < MIN_VARIETA_HUB:
             continue
-        nome = (futuri[0].get('citta') if futuri
-                else (storico.get(k) or {}).get('nome') or nome_ufficiale)
+        nome = ((futuri[0].get('citta') if futuri
+                 else (storico.get(k) or {}).get('nome')) or '').strip()
+        # `k` e' una chiave normalizzata ("novillgure"), non un nome da
+        # stampare: senza un nome vero la pagina non si puo' scrivere.
+        if not nome:
+            continue
         hub[k] = {
             'nome': nome,
             'prov': ((futuri[0].get('prov') if futuri else
@@ -2411,23 +2419,102 @@ def blocco_comuni(hub):
 COMUNE_CSS = """
 .com-stat{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 6px;padding:0;list-style:none}
 .com-stat li{border:1px solid rgba(45,74,92,.16);border-radius:100px;padding:6px 14px;font-size:.86rem}
-.com-grp{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:15px 18px;margin:14px 0}
-.com-grp h3{margin:0 0 3px;font-size:1.06rem}
-.com-per{font-size:.85rem;opacity:.72;margin:0 0 9px}
-.com-ev{list-style:none;margin:0;padding:0}
-.com-ev li{padding:7px 0;border-top:1px solid rgba(45,74,92,.1);font-size:.94rem;
-  display:flex;gap:10px;align-items:baseline}
-.com-ev li:first-child{border-top:0}
-.com-d{font-weight:700;white-space:nowrap;font-size:.86rem;opacity:.8;min-width:78px}
-.com-ev a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
-.com-ev a:hover{text-decoration:underline}
+.com-grp{position:relative;border:1px solid rgba(45,74,92,.16);border-radius:16px;
+  padding:15px 18px;margin:12px 0;background:#fff}
+.com-grp h3{margin:0 0 3px;font-size:1.06rem;line-height:1.32}
+.com-per{font-size:.85rem;opacity:.72;margin:0 0 2px}
+/* La miniatura e' la locandina che sta gia' in /assets/eventi/: la stessa che
+   l'agenda mostra nelle righe (.ev-thumb), stesse misure e stesso taglio dal
+   bordo alto, perche' su una locandina il titolo sta in cima. Dove manca -
+   quattro eventi su 257 - resta il segnaposto nel colore della categoria. */
+.com-th{width:56px;height:56px;flex:0 0 56px;border-radius:11px;object-fit:cover;
+  object-position:top center;background:var(--cream,#fbf7f0);display:block}
+.com-th.is-ph{display:flex;align-items:center;justify-content:center;
+  background:var(--cat-tint,rgba(126,140,153,.16));color:var(--cat-color,#7e8c99)}
+.com-th.is-ph svg{width:22px;height:22px}
+/* Il link copre tutta la riga: il bersaglio da toccare e' il rettangolo, non
+   le venti lettere del titolo. Vale per la scheda singola e per ogni riga di
+   una manifestazione, quindi ::after si aggrappa a .com-grp o a .com-ev li. */
+.com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
+.com-go::after{content:"";position:absolute;inset:0}
+.com-head{display:flex;gap:14px;align-items:center}
+.com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.com-solo h3{font-size:1rem;margin:0 0 2px}
+.com-solo:hover,.com-ev li:hover{border-color:rgba(107,165,168,.55)}
+.com-solo:hover{box-shadow:0 2px 14px rgba(45,74,92,.07)}
+.com-solo:hover .com-go,.com-ev li:hover .com-go{text-decoration:underline}
+.com-ev{list-style:none;margin:11px 0 0;padding:0}
+.com-ev li{position:relative;display:flex;gap:12px;align-items:center;
+  padding:9px 0;border-top:1px solid rgba(45,74,92,.1)}
+.com-ev li:first-child{border-top:0;padding-top:1px}
+.com-ev .com-th{width:50px;height:50px;flex-basis:50px;border-radius:10px}
+.com-ev .com-th.is-ph svg{width:20px;height:20px}
+/* Righe senza francobollo (il poster e' salito in testa al gruppo): la data
+   torna a fianco del titolo in colonna fissa, che a schermo largo si scorre
+   meglio di due righe impilate. Sul telefono la colonna non ci sta e si
+   impila - stessa scelta che fa l'agenda con .ev-line. */
+.com-ev.is-nude li{gap:14px;align-items:baseline}
+.com-ev.is-nude .com-b{flex-direction:row;gap:14px;align-items:baseline;flex-wrap:wrap}
+.com-ev.is-nude .com-d{min-width:132px}
+@media(max-width:560px){
+  .com-ev.is-nude .com-b{flex-direction:column;gap:2px}
+  .com-ev.is-nude .com-d{min-width:0}
+}
+.com-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+/* La data in alto e nel colore della categoria: e' l'unica cosa che si legge
+   scorrendo con il pollice, e sta sempre alla stessa distanza dal bordo. */
+.com-d{font-weight:700;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase;
+  color:var(--cat-ink,#606d7a)}
+.com-ev .com-go{font-size:.95rem;line-height:1.34}
+/* Le feste che tornano: niente locandina, perche' quella in archivio e'
+   dell'edizione passata e prometterebbe una data che non c'e' piu'. */
+.com-anni{list-style:none;margin:0;padding:0}
+.com-anni li{display:flex;gap:12px;align-items:baseline;padding:7px 0;
+  border-top:1px solid rgba(45,74,92,.1);font-size:.94rem}
+.com-anni li:first-child{border-top:0}
+.com-y{font-weight:700;white-space:nowrap;font-size:.82rem;opacity:.7;min-width:76px;
+  font-variant-numeric:tabular-nums}
+.com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
+.com-anni a:hover{text-decoration:underline}
 .com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
 .com-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .com-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem}
+/* Il credito alla pagina di provenienza: stesso peso che ha sulle schede
+   evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina. */
+.com-fonte{font-size:.88rem;opacity:.85;margin:22px 0 0;padding-top:14px;
+  border-top:1px solid rgba(45,74,92,.12)}
+.com-fonte a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+@media(max-width:600px){
+  .com-grp{padding:13px 14px}
+  .com-solo{padding:11px 12px;gap:12px}
+  .com-th{width:50px;height:50px;flex-basis:50px}
+  .com-ev .com-th{width:46px;height:46px;flex-basis:46px}
+}
 """
+
+
+def _com_cat(e):
+    """(stile con i colori della categoria, miniatura) per una riga di comune.
+
+    Le custom property stanno sulla riga e non sull'immagine: il segnaposto e'
+    un figlio, e --cat-tint si eredita."""
+    slug, _icona, _lab = bucket(e)
+    color, tint, ink = COLORS.get(slug, COLORS['altro'])
+    stile = f'--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}'
+    cover = loc_path(e.get('loc'))
+    if cover:
+        thumb = (f'<img class="com-th" src="{esc(cover)}" alt="" '
+                 f'loading="lazy" decoding="async" width="56" height="56">')
+    else:
+        # Icona autoconclusiva e non quella di categoria: le icone di categoria
+        # sono <use href="#i-party"> e il simbolo vive nello sprite inline di
+        # eventi.html, che qui non c'e' - disegnerebbe il vuoto.
+        thumb = f'<span class="com-th is-ph" aria-hidden="true">{CAL_SVG}</span>'
+    return stile, thumb
 
 
 def _gruppi_comune(futuri):
@@ -2490,6 +2577,13 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     # L'anno sta nelle query ("sagre novi ligure 2026") ma non si scrive a mano:
     # e' quello del prossimo evento, o l'anno in corso se non ce n'e' nessuno.
     anno = futuri[0]['d_start'].year if futuri else oggi.year
+    # Da dove arrivano gli eventi di questa provincia. Sulle pagine comune non
+    # c'era mai stato: finche' esistevano solo comuni della provincia di
+    # Alessandria la fonte era la nostra e si poteva sottintendere. Tolto il
+    # filtro sui comuni e' nata Crissolo, che sta in provincia di Cuneo - una
+    # provincia che segue una pagina non nostra. Una pagina DAOP che elenca il
+    # lavoro di qualcun altro senza dirlo e' esattamente quello che non facciamo.
+    fonte = fonte_provincia(dati['prov'])
     base = f"Eventi e sagre{a_citta(citta)} {anno}"
     titolo = next((t for t in (f"{base} | DAOP", base) if len(t) <= MAX_TITLE),
                   trunc(base, MAX_TITLE))
@@ -2505,9 +2599,16 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
         cosa = (f"{len(gruppi)} manifestazioni diverse" if len(gruppi) > 1
                 else "una manifestazione")
         sotto = f"{quanti}, fino al {fine.day} {MESI_LUNGHI[fine.month - 1]} {fine.year}"
+        # "Le controlliamo una per una" si puo' dire solo dove il lavoro e'
+        # nostro. Dove la provincia la segue una pagina esterna la frase
+        # sarebbe una firma su una cosa fatta da altri.
+        chiusa = ("Le schede le controlliamo una per una prima di pubblicarle."
+                  if not fonte or fonte['nostra'] else
+                  f"Gli eventi di questa provincia li segnala @{esc(fonte['ig'])}, "
+                  "una pagina che non è nostra e che accreditiamo su ogni scheda.")
         apertura = (f"{quanti}{a_citta(citta)}, in provincia di {prov_nome}: "
                     f"{cosa}, con le date, gli orari e i contatti di chi le organizza. "
-                    "Le schede le controlliamo una per una prima di pubblicarle.")
+                    + chiusa)
     else:
         sotto = "Nessun evento in programma in questo momento"
         apertura = (f"In questo momento{a_citta(citta)} non abbiamo eventi in agenda. "
@@ -2529,24 +2630,56 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             # Un evento solo: il titolo del gruppo E' l'evento. Ripeterlo sotto
             # come unica riga di elenco riempirebbe la pagina di doppioni, che
             # e' il modo piu' rapido per farla sembrare generata a macchina.
+            stile, thumb = _com_cat(ev[0])
             blocchi.append(
-                f'<section class="com-grp"><h3>'
-                f'<a href="{_href_evento(ev[0])}">{esc(trunc(g["titolo"], 80))}</a></h3>'
-                f'<p class="com-per">{esc(periodo)}</p></section>')
+                f'<section class="com-grp com-solo" style="{stile}">{thumb}'
+                f'<div class="com-b"><h3>'
+                f'<a class="com-go" href="{_href_evento(ev[0])}">'
+                f'{esc(trunc(g["titolo"], 80))}</a></h3>'
+                f'<p class="com-per">{esc(periodo)}</p></div></section>')
             continue
-        righe = "".join(
-            f'<li><span class="com-d">{esc(_quando_breve(e, oggi))}</span>'
-            f'<a href="{_href_evento(e)}">{esc(trunc(e.get("nome") or "", 80))}</a></li>'
-            for e in ev)
+        # Le 13 serate di una patronale hanno quasi sempre LA STESSA locandina,
+        # quella della festa. Ripeterla su ogni riga fa una colonna di sette
+        # francobolli uguali, che non aiuta a distinguere niente: quando il
+        # poster e' uno solo sale in testa al gruppo, dove appartiene, e le
+        # righe restano pulite. Se invece ogni serata ha il suo, il poster torna
+        # sulla riga: li' distingue davvero.
+        stile, _ = _com_cat(ev[0])
+        poster = {loc_path(e.get('loc')) for e in ev}
+        comune_a_tutti = poster.pop() if len(poster) == 1 else ''
+        righe = ""
+        for e in ev:
+            # L'ora accanto alla data: e' la domanda subito dopo "quando", e
+            # nell'agenda ce l'ha ogni riga. Solo se e' un'ora vera, pero': la
+            # colonna del foglio a volte dice "vari", e qui, in maiuscoletto,
+            # "OGGI · VARI" sembra un'etichetta invece di un orario.
+            quando = _quando_breve(e, oggi)
+            ora = (e.get('ora') or '').strip()
+            if any(c.isdigit() for c in ora):
+                quando += ' · ' + trunc(ora, 18)
+            riga_stile, thumb = _com_cat(e)
+            if comune_a_tutti:
+                riga_stile, thumb = stile, ''
+            righe += (f'<li style="{riga_stile}">{thumb}<span class="com-b">'
+                      f'<span class="com-d">{esc(quando)}</span>'
+                      f'<a class="com-go" href="{_href_evento(e)}">'
+                      f'{esc(trunc(e.get("nome") or "", 80))}</a></span></li>')
+        testa = (f'<img class="com-th" src="{esc(comune_a_tutti)}" alt="" '
+                 f'loading="lazy" decoding="async" width="56" height="56">'
+                 if comune_a_tutti else '')
         blocchi.append(
-            f'<section class="com-grp"><h3>{esc(trunc(g["titolo"], 80))}</h3>'
+            f'<section class="com-grp" style="{stile}">'
+            f'<div class="com-head">{testa}<div class="com-b">'
+            f'<h3>{esc(trunc(g["titolo"], 80))}</h3>'
             f'<p class="com-per">{esc(periodo)} · {len(ev)} appuntamenti</p>'
-            f'<ul class="com-ev">{righe}</ul></section>')
+            f'</div></div>'
+            f'<ul class="com-ev{" is-nude" if comune_a_tutti else ""}">{righe}</ul>'
+            f'</section>')
 
     ric = _ricorrenti(archivio)
     if ric:
         righe = "".join(
-            f'<li><span class="com-d">{r["anni"][0]}–{r["anni"][-1]}</span>'
+            f'<li><span class="com-y">{r["anni"][0]}–{r["anni"][-1]}</span>'
             + (f'<a href="/eventi/{sl}.html">{esc(trunc(r.get("nome") or "", 80))}</a>'
                if r.get('pagina') else f'<span>{esc(trunc(r.get("nome") or "", 80))}</span>')
             + '</li>' for sl, r in ric[:8])
@@ -2554,7 +2687,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             f'<h2>Le feste che tornano ogni anno{a_citta(citta)}</h2>'
             f'<p>Le abbiamo già viste in più di un\'edizione: quando escono le date '
             f'nuove, questa pagina si aggiorna da sola.</p>'
-            f'<section class="com-grp"><ul class="com-ev">{righe}</ul></section>')
+            f'<section class="com-grp"><ul class="com-anni">{righe}</ul></section>')
 
     # Luoghi e organizzatori ricorrenti: si ricavano contando, non si scrivono.
     tutti_luoghi = [e.get('luogo') or '' for e in futuri] + \
@@ -2583,8 +2716,22 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     link_altri = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
                          for d in altri)
 
+    credito = ''
+    if fonte:
+        chi = (f"la nostra pagina per la provincia di {esc(fonte['provincia'])}"
+               if fonte['nostra'] else
+               f"la pagina che segue la provincia di {esc(fonte['provincia'])}, "
+               "con cui collaboriamo")
+        credito = (f'<p class="com-fonte">Gli eventi{a_citta(citta)} arrivano da '
+                   f'<a href="{fonte["url"]}" target="_blank" rel="noopener">'
+                   f'@{esc(fonte["ig"])}</a>, {chi}. '
+                   f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+
     descr = trunc(f"Eventi, sagre e feste{a_citta(citta)}: {sotto.lower()}. "
-                  "Date, orari e contatti, controllati uno per uno da DAOP.", 152)
+                  + ("Date, orari e contatti, controllati uno per uno da DAOP."
+                     if not fonte or fonte['nostra'] else
+                     "Date, orari e contatti, in collaborazione con chi segue "
+                     "la provincia."), 152)
 
     lista = [{"@type": "ListItem", "position": i + 1,
               "url": f"{SITE_URL}{_href_evento(e)}",
@@ -2667,7 +2814,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
   {f'<h2>Altri comuni della provincia di {esc(prov_nome)}</h2><div class="com-link">{link_altri}</div>' if link_altri else ''}
-
+  {credito}
   <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
 </article>
 {blocco_ginetto(citta)}</main>
