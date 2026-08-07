@@ -2508,7 +2508,7 @@ COMUNE_CSS = """
 """
 
 
-def _com_cat(e):
+def _com_cat(e, con_thumb=True):
     """(stile con i colori della categoria, miniatura) per una riga di comune.
 
     Le custom property stanno sulla riga e non sull'immagine: il segnaposto e'
@@ -2516,7 +2516,7 @@ def _com_cat(e):
     slug, _icona, _lab = bucket(e)
     color, tint, ink = COLORS.get(slug, COLORS['altro'])
     stile = f'--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}'
-    cover = loc_path(e.get('loc'))
+    cover = loc_path(e.get('loc')) if con_thumb else ''
     if cover:
         thumb = (f'<img class="com-th" src="{esc(cover)}" alt="" '
                  f'loading="lazy" decoding="async" width="56" height="56">')
@@ -2525,7 +2525,28 @@ def _com_cat(e):
         # sono <use href="#i-party"> e il simbolo vive nello sprite inline di
         # eventi.html, che qui non c'e' - disegnerebbe il vuoto.
         thumb = f'<span class="com-th is-ph" aria-hidden="true">{CAL_SVG}</span>'
-    return stile, thumb
+    return stile, ('' if not con_thumb else thumb)
+
+
+def _com_locandine_utili(gruppi):
+    """La pagina merita le miniature, o la stessa immagine copre mezza pagina?
+
+    Ad Acqui Terme la locandina e' identica su 10 gruppi su 11: non e' il
+    poster di un evento, e' il grafico riepilogativo che quella pagina di zona
+    pubblica ogni settimana. Dieci francobolli uguali in colonna non
+    distinguono niente, e un segnaposto di categoria al loro posto sarebbe la
+    stessa cosa in tinta unita - sette su dodici sono "Cultura". Quando succede
+    la pagina va senza miniature, tutta: un elenco pulito dice piu' di una
+    colonna di doppioni. La locandina resta sulla scheda dell'evento, che e'
+    l'unico posto dove parla di quel giorno soltanto."""
+    quanti = collections.Counter()
+    for g in gruppi:
+        poster = {loc_path(e.get('loc')) for e in g['eventi']}
+        # Un gruppo conta per il suo poster solo se e' uno solo per tutte le
+        # serate: se dentro variano, quel gruppo le miniature le usa davvero.
+        if len(poster) == 1 and next(iter(poster)):
+            quanti[next(iter(poster))] += 1
+    return not quanti or quanti.most_common(1)[0][1] <= 2
 
 
 def _gruppi_comune(futuri):
@@ -2599,6 +2620,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     titolo = next((t for t in (f"{base} | DAOP", base) if len(t) <= MAX_TITLE),
                   trunc(base, MAX_TITLE))
     gruppi = _gruppi_comune(futuri)
+    con_thumb = _com_locandine_utili(gruppi)
 
     # L'attacco si costruisce con i numeri veri: e' quello che rende questa
     # pagina diversa dalla stessa pagina di un altro comune, ed e' anche
@@ -2644,7 +2666,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             # Un evento solo: il titolo del gruppo E' l'evento. Ripeterlo sotto
             # come unica riga di elenco riempirebbe la pagina di doppioni, che
             # e' il modo piu' rapido per farla sembrare generata a macchina.
-            stile, thumb = _com_cat(ev[0])
+            stile, thumb = _com_cat(ev[0], con_thumb)
             blocchi.append(
                 f'<section class="com-grp com-solo" style="{stile}">{thumb}'
                 f'<div class="com-b"><h3>'
@@ -2660,7 +2682,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
         # sulla riga: li' distingue davvero.
         stile, _ = _com_cat(ev[0])
         poster = {loc_path(e.get('loc')) for e in ev}
-        comune_a_tutti = poster.pop() if len(poster) == 1 else ''
+        comune_a_tutti = (poster.pop() if len(poster) == 1 else '') if con_thumb else ''
         righe = ""
         for e in ev:
             # L'ora accanto alla data: e' la domanda subito dopo "quando", e
@@ -2671,7 +2693,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             ora = (e.get('ora') or '').strip()
             if any(c.isdigit() for c in ora):
                 quando += ' · ' + trunc(ora, 18)
-            riga_stile, thumb = _com_cat(e)
+            riga_stile, thumb = _com_cat(e, con_thumb)
             if comune_a_tutti:
                 riga_stile, thumb = stile, ''
             righe += (f'<li style="{riga_stile}">{thumb}<span class="com-b">'
@@ -2687,7 +2709,8 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             f'<h3>{esc(trunc(g["titolo"], 80))}</h3>'
             f'<p class="com-per">{esc(periodo)} · {len(ev)} appuntamenti</p>'
             f'</div></div>'
-            f'<ul class="com-ev{" is-nude" if comune_a_tutti else ""}">{righe}</ul>'
+            f'<ul class="com-ev{"" if con_thumb and not comune_a_tutti else " is-nude"}">'
+            f'{righe}</ul>'
             f'</section>')
 
     ric = _ricorrenti(archivio)
