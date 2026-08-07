@@ -188,6 +188,14 @@
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
   .event-act svg{flex-shrink:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
+  /* Da dove arriva la segnalazione, cliccabile verso la pagina di provenienza.
+     Le occorrenze sono ~190 ma puntano a TRE URL soli. Sta sotto i bottoni e
+     pesa meno di loro: e' un credito, non un'azione da fare. */
+  .ev-src{font-size:0.76rem;color:var(--text-mid);opacity:.75;margin-top:12px}
+  .ev-src a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+  .ev-src a:hover{color:var(--cat-color,var(--orange))}
+  .ev-fonti{text-align:center;font-size:0.82rem;color:var(--text-mid);padding:22px 16px 4px;line-height:1.7}
+  .ev-fonti a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
 
   /* ── BG ── */
   .bg-cream{background:var(--cream)}
