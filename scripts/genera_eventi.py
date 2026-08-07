@@ -2404,11 +2404,8 @@ def blocco_comuni(hub):
         for d in voci if d['futuri'])
     if not link:
         return ''
-    return ('    <h2 class="ev-comuni-t">Eventi comune per comune</h2>\n'
-            '    <p class="ev-comuni-s">I centri con abbastanza eventi hanno una pagina '
-            'loro, con le feste raggruppate per manifestazione e quelle che tornano ogni '
-            'anno. Accanto al nome, quanti eventi ci sono in programma adesso.</p>\n'
-            f'    <div class="ev-comuni">{link}</div>')
+    return ('      <span class="ev-comuni-lab">Vai al comune</span>\n'
+            f'      <div class="ev-comuni">{link}</div>')
 
 
 COMUNE_CSS = """

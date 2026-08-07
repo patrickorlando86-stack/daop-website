@@ -192,11 +192,19 @@
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
      del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
      marker EVENTI-COMUNI e cresce da solo quando un comune passa la soglia. */
-  .ev-comuni-sec{padding:0 24px 72px;background:var(--warm-white)}
-  .ev-comuni-t{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--navy);margin-bottom:6px}
-  .ev-comuni-s{font-size:0.92rem;color:var(--text-mid);margin-bottom:18px;max-width:62ch}
-  .ev-comuni{display:flex;flex-wrap:wrap;gap:10px}
-  .ev-comuni a{display:inline-flex;align-items:baseline;gap:8px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:9px 17px;font-size:0.92rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
+  /* Sta con i filtri, non in fondo: e' un altro modo di restringere l'elenco,
+     e in coda a 250 schede non lo raggiungeva nessuno. Sopra l'agenda pero'
+     deve pesare poco, altrimenti spinge giu' il primo evento sul telefono:
+     niente titolo e niente paragrafo, solo l'etichetta e le pillole. */
+  /* position:static e background:none non sono ridondanti: il CSS del sito ha
+     nav{position:fixed;top:0;z-index:100;background:…} come selettore di
+     ELEMENTO, e senza questi il blocco si incollava in cima alla pagina sopra
+     la barra vera. Stesso inciampo del breadcrumb nelle pagine evento. */
+  .ev-comuni-nav{position:static;background:none;z-index:auto;box-shadow:none;border:0;
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:14px 0 0;padding:0}
+  .ev-comuni-lab{font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light)}
+  .ev-comuni{display:flex;flex-wrap:wrap;gap:8px}
+  .ev-comuni a{display:inline-flex;align-items:baseline;gap:7px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:7px 14px;font-size:0.86rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
   .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
   .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
   /* Da dove arriva la segnalazione, cliccabile verso la pagina di provenienza.
