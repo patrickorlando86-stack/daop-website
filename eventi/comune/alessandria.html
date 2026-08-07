@@ -415,6 +415,22 @@
 .com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
 .com-go::after{content:"";position:absolute;inset:0}
 .com-head{display:flex;gap:14px;align-items:center}
+/* La locandina del cartellone, una volta sola in cima all'elenco. Il riquadro
+   e' fisso (aspect-ratio) e l'immagine sta dentro senza tagli: e' un poster da
+   leggere, non un francobollo da riconoscere, e un box fisso non fa saltare la
+   pagina quando l'immagine arriva. */
+.com-poster{display:flex;gap:16px;align-items:center;margin:14px 0 4px;
+  border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:14px 16px;background:#fff}
+.com-poster img{width:132px;aspect-ratio:3/4;object-fit:contain;border-radius:10px;
+  display:block;background:var(--cream,#fbf7f0)}
+.com-poster figcaption{font-size:.9rem;line-height:1.55;opacity:.85}
+.com-poster figcaption a{color:var(--navy,#2d4a5c);font-weight:600;
+  text-decoration:underline;text-underline-offset:2px}
+@media(max-width:520px){
+  .com-poster{gap:13px;padding:12px 13px}
+  .com-poster img{width:96px}
+  .com-poster figcaption{font-size:.86rem}
+}
 .com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
   transition:border-color .15s ease,box-shadow .15s ease}
 .com-solo h3{font-size:1rem;margin:0 0 2px}
@@ -649,6 +665,7 @@
   <p>10 eventi in programma ad Alessandria, in provincia di Alessandria: 3 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. Le schede le controlliamo una per una prima di pubblicarle.</p>
 
   <h2>In programma</h2>
+  
   <section class="com-grp" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><div class="com-head"><img class="com-th" src="/assets/eventi/daop_alessandria_3951417280937662935.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Alessandria Grandi Film Sotto le Stelle</h3><p class="com-per">Dall&#x27;11 agosto al 28 agosto · 8 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">mar 11 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-11-l-illusione-perfetta-now-you-see-me">L&#x27;illusione perfetta - Now You See Me</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">mer 12 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-12-michael">Michael</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">gio 13 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-13-sentimental-value">Sentimental Value</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">ven 21 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-21-jumpers">Jumpers</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">sab 22 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-22-un-bel-giorno">Un bel giorno</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">lun 24 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-24-2-cuori-2-capanne">2 Cuori 2 Capanne</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">mar 25 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-25-super-mario-galaxy">Super Mario Galaxy</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><span class="com-b"><span class="com-d">ven 28 ago · 21:30</span><a class="com-go" href="/eventi.html#ev-2026-08-28-buen-camino">Buen Camino</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/eventi/daop_alessandria_3944839100361812334.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-09-05-alecomics-festival-2026">Alecomics Festival 2026</a></h3><p class="com-per">Dal 5 settembre al 6 settembre</p></div></section><section class="com-grp com-solo" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="/assets/eventi/daop_alessandria_3943479245575048023.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/festa-della-birra-street-food-alessandria.html">Festa della Birra Street Food</a></h3><p class="com-per">Dal 12 settembre al 13 settembre</p></div></section><h2>Come funziona ad Alessandria</h2><p>I posti che tornano più spesso: <strong>Giardini viale della Repubblica</strong>, <strong>Piazza Campora</strong>, <strong>Via della Libertà Spinetta M.go</strong> e <strong>Via Galvani</strong>.</p>
 
   <div class="com-link">

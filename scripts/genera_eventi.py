@@ -2447,6 +2447,22 @@ COMUNE_CSS = """
 .com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
 .com-go::after{content:"";position:absolute;inset:0}
 .com-head{display:flex;gap:14px;align-items:center}
+/* La locandina del cartellone, una volta sola in cima all'elenco. Il riquadro
+   e' fisso (aspect-ratio) e l'immagine sta dentro senza tagli: e' un poster da
+   leggere, non un francobollo da riconoscere, e un box fisso non fa saltare la
+   pagina quando l'immagine arriva. */
+.com-poster{display:flex;gap:16px;align-items:center;margin:14px 0 4px;
+  border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:14px 16px;background:#fff}
+.com-poster img{width:132px;aspect-ratio:3/4;object-fit:contain;border-radius:10px;
+  display:block;background:var(--cream,#fbf7f0)}
+.com-poster figcaption{font-size:.9rem;line-height:1.55;opacity:.85}
+.com-poster figcaption a{color:var(--navy,#2d4a5c);font-weight:600;
+  text-decoration:underline;text-underline-offset:2px}
+@media(max-width:520px){
+  .com-poster{gap:13px;padding:12px 13px}
+  .com-poster img{width:96px}
+  .com-poster figcaption{font-size:.86rem}
+}
 .com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
   transition:border-color .15s ease,box-shadow .15s ease}
 .com-solo h3{font-size:1rem;margin:0 0 2px}
@@ -2508,15 +2524,21 @@ COMUNE_CSS = """
 """
 
 
-def _com_cat(e, con_thumb=True):
+def _com_cat(e, salita=''):
     """(stile con i colori della categoria, miniatura) per una riga di comune.
 
-    Le custom property stanno sulla riga e non sull'immagine: il segnaposto e'
-    un figlio, e --cat-tint si eredita."""
+    `salita` e' la locandina gia' mostrata in cima alla pagina: chi ce l'ha
+    uguale non la ripete. Le custom property stanno sulla riga e non
+    sull'immagine: il segnaposto e' un figlio, e --cat-tint si eredita."""
     slug, _icona, _lab = bucket(e)
     color, tint, ink = COLORS.get(slug, COLORS['altro'])
     stile = f'--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}'
-    cover = loc_path(e.get('loc')) if con_thumb else ''
+    cover = loc_path(e.get('loc'))
+    if cover and cover == salita:
+        # Gia' in cima alla pagina, grande. Qui sotto sarebbe un doppione, e
+        # nemmeno il segnaposto di categoria aiuta: ad Acqui sette schede su
+        # dodici sono "Cultura", quindi sarebbero sette quadrati identici.
+        return stile, ''
     if cover:
         thumb = (f'<img class="com-th" src="{esc(cover)}" alt="" '
                  f'loading="lazy" decoding="async" width="56" height="56">')
@@ -2525,20 +2547,20 @@ def _com_cat(e, con_thumb=True):
         # sono <use href="#i-party"> e il simbolo vive nello sprite inline di
         # eventi.html, che qui non c'e' - disegnerebbe il vuoto.
         thumb = f'<span class="com-th is-ph" aria-hidden="true">{CAL_SVG}</span>'
-    return stile, ('' if not con_thumb else thumb)
+    return stile, thumb
 
 
-def _com_locandine_utili(gruppi):
-    """La pagina merita le miniature, o la stessa immagine copre mezza pagina?
+def _com_poster_pagina(gruppi):
+    """La locandina che vale per (quasi) tutta la pagina, se ce n'e' una.
 
-    Ad Acqui Terme la locandina e' identica su 10 gruppi su 11: non e' il
-    poster di un evento, e' il grafico riepilogativo che quella pagina di zona
-    pubblica ogni settimana. Dieci francobolli uguali in colonna non
-    distinguono niente, e un segnaposto di categoria al loro posto sarebbe la
-    stessa cosa in tinta unita - sette su dodici sono "Cultura". Quando succede
-    la pagina va senza miniature, tutta: un elenco pulito dice piu' di una
-    colonna di doppioni. La locandina resta sulla scheda dell'evento, che e'
-    l'unico posto dove parla di quel giorno soltanto."""
+    E' la stessa regola che dentro una manifestazione fa salire il poster in
+    testa al gruppo, applicata un piano sopra. Ad Acqui Terme la locandina e'
+    identica su 10 gruppi su 11: non e' il poster di un evento, e' il grafico
+    che quella pagina di zona pubblica per l'intero cartellone. Quindi non
+    appartiene a nessuna scheda, appartiene alla pagina - e li' va messa, una
+    volta sola e grande abbastanza da aprirla. Le schede che la condividono
+    restano pulite; quella che ha un poster suo se lo tiene, perche' li' la
+    miniatura distingue davvero."""
     quanti = collections.Counter()
     for g in gruppi:
         poster = {loc_path(e.get('loc')) for e in g['eventi']}
@@ -2546,7 +2568,10 @@ def _com_locandine_utili(gruppi):
         # serate: se dentro variano, quel gruppo le miniature le usa davvero.
         if len(poster) == 1 and next(iter(poster)):
             quanti[next(iter(poster))] += 1
-    return not quanti or quanti.most_common(1)[0][1] <= 2
+    if not quanti:
+        return ''
+    p, n = quanti.most_common(1)[0]
+    return p if n > 2 else ''
 
 
 def _gruppi_comune(futuri):
@@ -2620,7 +2645,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     titolo = next((t for t in (f"{base} | DAOP", base) if len(t) <= MAX_TITLE),
                   trunc(base, MAX_TITLE))
     gruppi = _gruppi_comune(futuri)
-    con_thumb = _com_locandine_utili(gruppi)
+    salita = _com_poster_pagina(gruppi)
 
     # L'attacco si costruisce con i numeri veri: e' quello che rende questa
     # pagina diversa dalla stessa pagina di un altro comune, ed e' anche
@@ -2666,7 +2691,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             # Un evento solo: il titolo del gruppo E' l'evento. Ripeterlo sotto
             # come unica riga di elenco riempirebbe la pagina di doppioni, che
             # e' il modo piu' rapido per farla sembrare generata a macchina.
-            stile, thumb = _com_cat(ev[0], con_thumb)
+            stile, thumb = _com_cat(ev[0], salita)
             blocchi.append(
                 f'<section class="com-grp com-solo" style="{stile}">{thumb}'
                 f'<div class="com-b"><h3>'
@@ -2682,8 +2707,10 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
         # sulla riga: li' distingue davvero.
         stile, _ = _com_cat(ev[0])
         poster = {loc_path(e.get('loc')) for e in ev}
-        comune_a_tutti = (poster.pop() if len(poster) == 1 else '') if con_thumb else ''
-        righe = ""
+        comune_a_tutti = poster.pop() if len(poster) == 1 else ''
+        if comune_a_tutti == salita:
+            comune_a_tutti = ''      # sta gia' in cima alla pagina
+        righe, nude = "", True
         for e in ev:
             # L'ora accanto alla data: e' la domanda subito dopo "quando", e
             # nell'agenda ce l'ha ogni riga. Solo se e' un'ora vera, pero': la
@@ -2693,9 +2720,10 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             ora = (e.get('ora') or '').strip()
             if any(c.isdigit() for c in ora):
                 quando += ' · ' + trunc(ora, 18)
-            riga_stile, thumb = _com_cat(e, con_thumb)
+            riga_stile, thumb = _com_cat(e, salita)
             if comune_a_tutti:
                 riga_stile, thumb = stile, ''
+            nude = nude and not thumb
             righe += (f'<li style="{riga_stile}">{thumb}<span class="com-b">'
                       f'<span class="com-d">{esc(quando)}</span>'
                       f'<a class="com-go" href="{_href_evento(e)}">'
@@ -2709,9 +2737,28 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             f'<h3>{esc(trunc(g["titolo"], 80))}</h3>'
             f'<p class="com-per">{esc(periodo)} · {len(ev)} appuntamenti</p>'
             f'</div></div>'
-            f'<ul class="com-ev{"" if con_thumb and not comune_a_tutti else " is-nude"}">'
-            f'{righe}</ul>'
+            f'<ul class="com-ev{" is-nude" if nude else ""}">{righe}</ul>'
             f'</section>')
+
+    # La locandina del cartellone, se ce n'e' una che vale per quasi tutto.
+    # Apre l'elenco invece di ripetersi dentro: e' l'immagine che chi segue la
+    # zona pubblica per l'intero programma, e a dimensione di francobollo non
+    # si legge - qui si apre a grandezza vera con un tocco.
+    poster_html = ''
+    if salita:
+        poster_html = (
+            f'<figure class="com-poster">'
+            f'<a href="{esc(salita)}" target="_blank" rel="noopener">'
+            f'<img src="{esc(salita)}" alt="Locandina degli eventi{a_citta(citta)}" '
+            f'loading="lazy" decoding="async"></a>'
+            # Quello che si puo' dire davvero: nei nostri dati questa immagine
+            # e' legata a tutte queste date. Chi l'abbia disegnata non lo
+            # sappiamo, e "chi organizza" sarebbe falso - gli organizzatori di
+            # queste undici cose sono undici diversi.
+            f'<figcaption>Una sola locandina per tutte queste date, '
+            f'così come ci arriva. '
+            f'<a href="{esc(salita)}" target="_blank" rel="noopener">Aprila grande</a>'
+            f'</figcaption></figure>')
 
     ric = _ricorrenti(archivio)
     if ric:
@@ -2844,6 +2891,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
   <p>{apertura}</p>
 
   {'<h2>In programma</h2>' if futuri else ''}
+  {poster_html}
   {"".join(blocchi)}
 
   <div class="com-link">

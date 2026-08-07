@@ -415,6 +415,22 @@
 .com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
 .com-go::after{content:"";position:absolute;inset:0}
 .com-head{display:flex;gap:14px;align-items:center}
+/* La locandina del cartellone, una volta sola in cima all'elenco. Il riquadro
+   e' fisso (aspect-ratio) e l'immagine sta dentro senza tagli: e' un poster da
+   leggere, non un francobollo da riconoscere, e un box fisso non fa saltare la
+   pagina quando l'immagine arriva. */
+.com-poster{display:flex;gap:16px;align-items:center;margin:14px 0 4px;
+  border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:14px 16px;background:#fff}
+.com-poster img{width:132px;aspect-ratio:3/4;object-fit:contain;border-radius:10px;
+  display:block;background:var(--cream,#fbf7f0)}
+.com-poster figcaption{font-size:.9rem;line-height:1.55;opacity:.85}
+.com-poster figcaption a{color:var(--navy,#2d4a5c);font-weight:600;
+  text-decoration:underline;text-underline-offset:2px}
+@media(max-width:520px){
+  .com-poster{gap:13px;padding:12px 13px}
+  .com-poster img{width:96px}
+  .com-poster figcaption{font-size:.86rem}
+}
 .com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
   transition:border-color .15s ease,box-shadow .15s ease}
 .com-solo h3{font-size:1rem;margin:0 0 2px}
@@ -625,6 +641,7 @@
   <p>6 eventi in programma a Crissolo, in provincia di Cuneo: 4 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. A cura di <a href="https://www.instagram.com/eventi_bambini_provincia_cuneo/" target="_blank" rel="noopener">@eventi_bambini_provincia_cuneo</a>.</p>
 
   <h2>In programma</h2>
+  
   <section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956908804397429390.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Estate a Crissolo 2026</h3><p class="com-per">Dall&#x27;8 agosto al 18 agosto · 3 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">domani · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-08-il-villaggio-creativo-con-gaia-pro-loco-crissolo">Il Villaggio Creativo con Gaia - Pro Loco Crissolo</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">lun 10 ago · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-10-il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr">Il Panino Più Lungo del Mondo! con Gaia - Pro Loco Crissolo</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">mar 18 ago · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-18-ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss">Ciao Ciao Estate! Sorprese per Tutti - Pro Loco Crissolo</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#7e8c99;--cat-tint:rgba(126,140,153,0.16);--cat-ink:#606d7a"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956899937568819294.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-08-serata-giochi-kam-3841-e-pro-loco-crissolo">Serata Giochi - KaM 3841 e Pro Loco Crissolo</a></h3><p class="com-per">Sabato 8 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956907714135639777.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-15-caccia-al-tesoro-kam-3841">Caccia al Tesoro - KaM 3841</a></h3><p class="com-per">Sabato 15 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="/assets/eventi/eventi_bambini_provincia_cuneo_3956907797677785571.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-16-giochiamo-a-basket-con-edo-kam-3841">Giochiamo a Basket con &quot;Edo&quot; - KaM 3841</a></h3><p class="com-per">Domenica 16 agosto 2026</p></div></section><h2>Come funziona a Crissolo</h2><p>I posti che tornano più spesso: <strong>Sala delle Guide di Crissolo</strong>, <strong>Sala delle Guide</strong>, <strong>Salone delle Guide</strong> e <strong>Pista di pattinaggio Il Cervo di Ghiaccio</strong>.</p><p>A organizzare sono soprattutto <strong>Pro Loco Crissolo</strong>: i recapiti stanno sulla scheda di ogni evento.</p>
 
   <div class="com-link">

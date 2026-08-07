@@ -415,6 +415,22 @@
 .com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
 .com-go::after{content:"";position:absolute;inset:0}
 .com-head{display:flex;gap:14px;align-items:center}
+/* La locandina del cartellone, una volta sola in cima all'elenco. Il riquadro
+   e' fisso (aspect-ratio) e l'immagine sta dentro senza tagli: e' un poster da
+   leggere, non un francobollo da riconoscere, e un box fisso non fa saltare la
+   pagina quando l'immagine arriva. */
+.com-poster{display:flex;gap:16px;align-items:center;margin:14px 0 4px;
+  border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:14px 16px;background:#fff}
+.com-poster img{width:132px;aspect-ratio:3/4;object-fit:contain;border-radius:10px;
+  display:block;background:var(--cream,#fbf7f0)}
+.com-poster figcaption{font-size:.9rem;line-height:1.55;opacity:.85}
+.com-poster figcaption a{color:var(--navy,#2d4a5c);font-weight:600;
+  text-decoration:underline;text-underline-offset:2px}
+@media(max-width:520px){
+  .com-poster{gap:13px;padding:12px 13px}
+  .com-poster img{width:96px}
+  .com-poster figcaption{font-size:.86rem}
+}
 .com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
   transition:border-color .15s ease,box-shadow .15s ease}
 .com-solo h3{font-size:1rem;margin:0 0 2px}
@@ -643,6 +659,7 @@
   <p>9 eventi in programma a Villaromagnano, in provincia di Alessandria: 3 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. Le schede le controlliamo una per una prima di pubblicarle.</p>
 
   <h2>In programma</h2>
+  
   <section class="com-grp" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><div class="com-head"><img class="com-th" src="/assets/eventi/daop_alessandria_3956487578405878241.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Festa Patronale San Michele Arcangelo in Villaromagnano</h3><p class="com-per">Dal 29 agosto al 7 settembre · 7 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 29 ago · 19:00</span><a class="com-go" href="/eventi/serata-gastronomica-con-dj-set-sabato-29-agosto-villaromagnano.html">Serata gastronomica con DJ SET - Sabato 29 Agosto</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">dom 30 ago · 17:30</span><a class="com-go" href="/eventi/ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano.html">Ass. Sarina Burattini e Serata gastronomica con DJ SET - Domenica 30 Agosto</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 15:30</span><a class="com-go" href="/eventi.html#ev-2026-09-05-asd-villaromagnano-festeggiamo-i-30-anni">ASD Villaromagnano: Festeggiamo i 30 anni</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 11:00</span><a class="com-go" href="/eventi.html#ev-2026-09-05-inaugurazione-mostra-di-pittura-oltre-la-tela">Inaugurazione Mostra di Pittura &#x27;Oltre la tela&#x27;</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 21:00</span><a class="com-go" href="/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html">S. Messa Solenne, Processione con Banda Pozzolese e Banco di Beneficenza</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">dom 6 set</span><a class="com-go" href="/eventi/fiera-e-street-food-domenica-6-settembre-villaromagnano.html">Fiera e Street Food - Domenica 6 Settembre</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">lun 7 set · 10:00</span><a class="com-go" href="/eventi/street-food-showlab-con-nico-franz-e-presentazione-villaromagnano.html">Street Food, ShowLab con Nico &amp; Franz e presentazione ASD Villaromagnano -…</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><img class="com-th" src="/assets/eventi/daop_alessandria_3938848443469937906.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-30-piru-e-il-cavaliere-di-mezzotacco-compagnia-walter">Baracche d&#x27;Estate</a></h3><p class="com-per">Domenica 30 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="/assets/eventi/daop_alessandria_3954915799598260727.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-09-06-giochi-sotto-il-campanile-raddix-group-parrocchia">Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo</a></h3><p class="com-per">Domenica 6 settembre 2026</p></div></section><h2>Come funziona a Villaromagnano</h2><p>I posti che tornano più spesso: <strong>S.M.S. Villaromagnano</strong>, <strong>S.O.M.S.</strong>, <strong>Campo Sportivo L. Guerci</strong> e <strong>Campo Sportivo Parrocchiale</strong>.</p>
 
   <div class="com-link">

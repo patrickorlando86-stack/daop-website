@@ -415,6 +415,22 @@
 .com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
 .com-go::after{content:"";position:absolute;inset:0}
 .com-head{display:flex;gap:14px;align-items:center}
+/* La locandina del cartellone, una volta sola in cima all'elenco. Il riquadro
+   e' fisso (aspect-ratio) e l'immagine sta dentro senza tagli: e' un poster da
+   leggere, non un francobollo da riconoscere, e un box fisso non fa saltare la
+   pagina quando l'immagine arriva. */
+.com-poster{display:flex;gap:16px;align-items:center;margin:14px 0 4px;
+  border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:14px 16px;background:#fff}
+.com-poster img{width:132px;aspect-ratio:3/4;object-fit:contain;border-radius:10px;
+  display:block;background:var(--cream,#fbf7f0)}
+.com-poster figcaption{font-size:.9rem;line-height:1.55;opacity:.85}
+.com-poster figcaption a{color:var(--navy,#2d4a5c);font-weight:600;
+  text-decoration:underline;text-underline-offset:2px}
+@media(max-width:520px){
+  .com-poster{gap:13px;padding:12px 13px}
+  .com-poster img{width:96px}
+  .com-poster figcaption{font-size:.86rem}
+}
 .com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
   transition:border-color .15s ease,box-shadow .15s ease}
 .com-solo h3{font-size:1rem;margin:0 0 2px}
@@ -625,6 +641,7 @@
   <p>6 eventi in programma a Tortona, in provincia di Alessandria: 3 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. Le schede le controlliamo una per una prima di pubblicarle.</p>
 
   <h2>In programma</h2>
+  
   <section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><img class="com-th" src="/assets/eventi/daop_alessandria_3948230743651728390.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Gli EsplorAttori</h3><p class="com-per">Dal 20 agosto al 27 agosto · 2 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">gio 20 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-20-le-regole-della-mia-citta-gli-esplorattori">Le regole della mia città! - Gli EsplorAttori</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">gio 27 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-27-la-mostra-gli-esplorattori">La Mostra - Gli EsplorAttori</a></span></li></ul></section><section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><div class="com-b"><h3>Alla (Ri)scoperta delle Favole Disney</h3><p class="com-per">Dal 24 agosto al 31 agosto · 3 appuntamenti</p></div></div><ul class="com-ev"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-th is-ph" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="com-b"><span class="com-d">lun 24 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-24-alla-ri-scoperta-delle-favole-disney">Alla (Ri)scoperta delle Favole Disney</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><img class="com-th" src="/assets/eventi/daop_alessandria_3928097704112146022.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 24 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-24-alla-ri-scoperta-delle-favole-disney-alice-nel-pae">Alla (Ri)scoperta delle Favole Disney - Alice nel Paese delle Meraviglie - Il…</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><img class="com-th" src="/assets/eventi/daop_alessandria_3928097704112146022.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 31 ago · 18:30-22:00</span><a class="com-go" href="/eventi.html#ev-2026-08-31-serata-finale-cinema-e-pizza-disney-il-gabbiano">Serata Finale Cinema e Pizza Disney - Il Gabbiano</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="/assets/eventi/daop_alessandria_3955059525435840055.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-09-04-stratortona-2026-croce-rossa-italiana-comitato-di">StraTortona 2026 - Croce Rossa Italiana Comitato di Tortona</a></h3><p class="com-per">Venerdì 4 settembre 2026</p></div></section><h2>Come funziona a Tortona</h2><p>I posti che tornano più spesso: <strong>Centro per le Famiglie C.I.S.A. di Tortona</strong>, <strong>Centro per le Famiglie CISA</strong> e <strong>Piazza Malaspina</strong>.</p>
 
   <div class="com-link">
