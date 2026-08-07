@@ -171,7 +171,11 @@ def guscio():
                       lambda m: f'{m.group(1)}="/', frag)
         return frag.replace(' class="active"', '')
 
-    return "\n".join(css), rooted(nav.group(0)), rooted(foot.group(0)), sprite.group(0)
+    # Anche le url() del CSS: la texture della .page-hero in rubriche.html e'
+    # url('assets/images/...') senza slash, e da /rubriche/ risponde 404.
+    css_txt = re.sub(r"url\((['\"]?)(?!https?://|/|data:)",
+                     lambda m: f"url({m.group(1)}/", "\n".join(css))
+    return css_txt, rooted(nav.group(0)), rooted(foot.group(0)), sprite.group(0)
 
 
 ARTICOLO_CSS = """
@@ -179,6 +183,22 @@ ARTICOLO_CSS = """
    il breadcrumb e mezzo H1. Stessi valori della .page-hero. */
 .art-wrap{max-width:760px;margin:0 auto;padding:148px 20px 40px}
 @media(max-width:600px){.art-wrap{padding:120px 18px 32px}}
+/* La barra scura in cima e' la .page-hero delle altre pagine del sito (il CSS
+   arriva gia' copiato da rubriche.html): occhiello, titolo e sommario ci
+   stanno dentro, la firma dell'autore resta sul bianco perche' le sue righe
+   di separazione su fondo navy sparivano. */
+.art-hero{padding:148px 24px 56px;text-align:left}
+.art-hero .page-hero-inner{max-width:760px}
+.art-hero .art-crumb{color:rgba(255,255,255,.62);opacity:1;margin:0 0 12px}
+.art-hero .art-crumb a{color:rgba(255,255,255,.82)}
+.art-hero .art-occhiello,.art-hero .art-occhiello.orange,
+.art-hero .art-occhiello.gold{color:var(--gold,#c9a227)}
+.art-hero .art-sommario{color:rgba(255,255,255,.74);margin:0}
+@media(max-width:600px){.art-hero{padding:120px 20px 44px}}
+/* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
+.art-wrap--hero{padding-top:36px}
+@media(max-width:600px){.art-wrap--hero{padding-top:26px}}
+.art-wrap--hero .art-meta{border-top:0;padding-top:0}
 /* Il breadcrumb e' un div, non un <nav>: il CSS del sito ha nav{position:fixed}
    come selettore di elemento e lo incollerebbe sopra la barra. */
 .art-crumb{position:static;font-size:.85rem;opacity:.72;margin:0 0 14px}
@@ -187,8 +207,11 @@ ARTICOLO_CSS = """
   text-transform:uppercase;margin-bottom:10px}
 .art-occhiello.orange{color:var(--orange-ink,#a05714)}
 .art-occhiello.gold{color:var(--gold-ink,#856a19)}
-.art-head h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.2vw,2.6rem);
+.art-head h1,.art-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.2vw,2.6rem);
   font-weight:800;color:var(--navy);line-height:1.16;margin:0 0 14px;letter-spacing:-0.015em}
+/* Sul navy della barra il titolo va in bianco: sta qui sotto e non nel blocco
+   .art-hero perche' la regola sopra ha la stessa specificita' e vince l'ultima. */
+.art-hero h1{color:#fff}
 .art-sommario{font-size:1.08rem;color:var(--text-mid);line-height:1.65;margin-bottom:22px}
 .art-meta{display:flex;align-items:center;gap:12px;padding:16px 0;border-top:1px solid rgba(45,74,92,.1);
   border-bottom:1px solid rgba(45,74,92,.1);margin-bottom:34px}
@@ -367,14 +390,18 @@ def pagina_articolo(a, rub, aut, cfg, pubblicati, css, nav, foot, sprite):
 {sprite}
 {nav}
 <main id="contenuto">
-<article class="art-wrap">
-  <div class="art-crumb" role="navigation" aria-label="Percorso">
-    <a href="/">Home</a> › <a href="/rubriche.html">Rubriche</a> › <a href="/rubriche.html#{rub['slug']}">{esc(rub['nome'])}</a>
-  </div>
-  <header class="art-head">
+<header class="page-hero art-hero">
+  <div class="page-hero-inner">
+    <div class="art-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/rubriche.html">Rubriche</a> › <a href="/rubriche.html#{rub['slug']}">{esc(rub['nome'])}</a>
+    </div>
     <span class="art-occhiello {rub['accento']}">{esc(rub['nome'])}</span>
     <h1>{esc(a['titolo'])}</h1>
     <p class="art-sommario">{esc(a['sommario'])}</p>
+  </div>
+</header>
+<article class="art-wrap art-wrap--hero">
+  <header class="art-head">
     <div class="art-meta">
       <div class="art-meta-foto"><img src="{esc(aut['foto'])}" alt="{esc(aut['nome'])}" width="88" height="88"></div>
       <div>

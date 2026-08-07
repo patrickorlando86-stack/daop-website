@@ -65,7 +65,7 @@
 
   /* ── HERO ── */
   .page-hero{padding:148px 24px 88px;background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 60%,#3a6070 100%);text-align:center;position:relative;overflow:hidden}
-  .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('assets/images/headerdaop-500.webp') type('image/webp'),url('assets/images/headerdaop.jpg') type('image/jpeg'))}
+  .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('/assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('/assets/images/headerdaop-500.webp') type('image/webp'),url('/assets/images/headerdaop.jpg') type('image/jpeg'))}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
@@ -192,6 +192,22 @@
    il breadcrumb e mezzo H1. Stessi valori della .page-hero. */
 .art-wrap{max-width:760px;margin:0 auto;padding:148px 20px 40px}
 @media(max-width:600px){.art-wrap{padding:120px 18px 32px}}
+/* La barra scura in cima e' la .page-hero delle altre pagine del sito (il CSS
+   arriva gia' copiato da rubriche.html): occhiello, titolo e sommario ci
+   stanno dentro, la firma dell'autore resta sul bianco perche' le sue righe
+   di separazione su fondo navy sparivano. */
+.art-hero{padding:148px 24px 56px;text-align:left}
+.art-hero .page-hero-inner{max-width:760px}
+.art-hero .art-crumb{color:rgba(255,255,255,.62);opacity:1;margin:0 0 12px}
+.art-hero .art-crumb a{color:rgba(255,255,255,.82)}
+.art-hero .art-occhiello,.art-hero .art-occhiello.orange,
+.art-hero .art-occhiello.gold{color:var(--gold,#c9a227)}
+.art-hero .art-sommario{color:rgba(255,255,255,.74);margin:0}
+@media(max-width:600px){.art-hero{padding:120px 20px 44px}}
+/* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
+.art-wrap--hero{padding-top:36px}
+@media(max-width:600px){.art-wrap--hero{padding-top:26px}}
+.art-wrap--hero .art-meta{border-top:0;padding-top:0}
 /* Il breadcrumb e' un div, non un <nav>: il CSS del sito ha nav{position:fixed}
    come selettore di elemento e lo incollerebbe sopra la barra. */
 .art-crumb{position:static;font-size:.85rem;opacity:.72;margin:0 0 14px}
@@ -200,8 +216,11 @@
   text-transform:uppercase;margin-bottom:10px}
 .art-occhiello.orange{color:var(--orange-ink,#a05714)}
 .art-occhiello.gold{color:var(--gold-ink,#856a19)}
-.art-head h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.2vw,2.6rem);
+.art-head h1,.art-hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.2vw,2.6rem);
   font-weight:800;color:var(--navy);line-height:1.16;margin:0 0 14px;letter-spacing:-0.015em}
+/* Sul navy della barra il titolo va in bianco: sta qui sotto e non nel blocco
+   .art-hero perche' la regola sopra ha la stessa specificita' e vince l'ultima. */
+.art-hero h1{color:#fff}
 .art-sommario{font-size:1.08rem;color:var(--text-mid);line-height:1.65;margin-bottom:22px}
 .art-meta{display:flex;align-items:center;gap:12px;padding:16px 0;border-top:1px solid rgba(45,74,92,.1);
   border-bottom:1px solid rgba(45,74,92,.1);margin-bottom:34px}
@@ -335,14 +354,18 @@
 </div>
 
 <main id="contenuto">
-<article class="art-wrap">
-  <div class="art-crumb" role="navigation" aria-label="Percorso">
-    <a href="/">Home</a> › <a href="/rubriche.html">Rubriche</a> › <a href="/rubriche.html#pillole-fiscali">Pillole Fiscali</a>
-  </div>
-  <header class="art-head">
+<header class="page-hero art-hero">
+  <div class="page-hero-inner">
+    <div class="art-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/rubriche.html">Rubriche</a> › <a href="/rubriche.html#pillole-fiscali">Pillole Fiscali</a>
+    </div>
     <span class="art-occhiello gold">Pillole Fiscali</span>
     <h1>IVA agevolata sui prodotti per l&#x27;infanzia: dove il risparmio c&#x27;è davvero</h1>
     <p class="art-sommario">Su pannolini, latte in formula, omogeneizzati e seggiolini auto l&#x27;IVA è ridotta. Non lo vedi sullo scontrino, ma è un risparmio reale su ogni acquisto.</p>
+  </div>
+</header>
+<article class="art-wrap art-wrap--hero">
+  <header class="art-head">
     <div class="art-meta">
       <div class="art-meta-foto"><img src="/assets/images/stef.webp" alt="Stefania Eligi" width="88" height="88"></div>
       <div>

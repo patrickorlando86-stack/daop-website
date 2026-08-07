@@ -238,7 +238,9 @@ CSS = """
 .page-hero .ce-crumb span{color:rgba(255,255,255,0.7)}
 .ce-note{border:1px solid #cfe0d8;background:#f2f8f5;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ce-note strong{display:block;margin-bottom:4px}
-@media (prefers-color-scheme:dark){.ce-note{background:#1d2a24;border-color:#3c5548}}
+/* Niente @media (prefers-color-scheme:dark): il sito non ha un tema scuro, il
+   body resta crema. La regola che stava qui dipingeva l'avviso di verde scuro
+   #1d2a24 lasciandoci sopra il testo scuro, su una pagina chiara. */
 /* La lista, le card e la toolbar riusano le classi .ev-*/.event-card definite
    nel <style> di eventi.html, che _guscio() inietta per intero in questa pagina.
    Cosi' i centri hanno la stessa struttura degli eventi senza duplicare il CSS.

@@ -1187,7 +1187,13 @@ def _guscio():
                            lambda m: f'{m.group(1)}="/', html_frag)
         return html_frag.replace('class="active"', '')
 
-    return "\n".join(css), rooted(nav.group(0)), rooted(foot.group(0))
+    # Anche le url() del CSS vanno messe alla radice. In eventi.html la texture
+    # della .page-hero e' url('assets/images/...') senza slash: da /eventi/ e da
+    # /eventi/comune/ diventa /eventi/assets/... e risponde 404. Finche' nessuna
+    # pagina generata usava la barra il difetto restava invisibile.
+    css_txt = re.sub(r"url\((['\"]?)(?!https?://|/|data:)",
+                     lambda m: f"url({m.group(1)}/", "\n".join(css))
+    return css_txt, rooted(nav.group(0)), rooted(foot.group(0))
 
 
 PAGINA_CSS = """
@@ -1196,6 +1202,24 @@ PAGINA_CSS = """
    nelle altre pagine (148px, 120px sotto i 600px). */
 .ev-wrap{max-width:820px;margin:0 auto;padding:148px 20px 40px}
 @media(max-width:600px){.ev-wrap{padding:120px 18px 32px}}
+/* La barra scura in cima e' la .page-hero delle altre pagine del sito: il CSS
+   arriva gia' copiato da eventi.html, qui c'e' solo la variante allineata a
+   sinistra e con il titolo piu' contenuto, perche' i nomi degli eventi sono
+   lunghi ("Apertura stand gastronomico con i Controcorrente") e a 3.6rem
+   riempivano tre righe. Senza barra queste erano le uniche pagine del sito a
+   partire dal bianco. */
+.ev-hero{padding:148px 24px 56px;text-align:left}
+.ev-hero .page-hero-inner{max-width:820px}
+.ev-hero .ev-crumb{color:rgba(255,255,255,.62);opacity:1;margin:0 0 12px}
+.ev-hero .ev-crumb a{color:rgba(255,255,255,.82)}
+.ev-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.9rem);
+  font-weight:800;color:#fff;line-height:1.12;margin:0 0 12px;letter-spacing:-.02em}
+.ev-hero .ev-when{font-size:1.08rem;font-weight:600;color:var(--gold,#c9a227);margin:0}
+.ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
+@media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
+/* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
+.ev-wrap--hero{padding-top:44px}
+@media(max-width:600px){.ev-wrap--hero{padding-top:32px}}
 /* Il breadcrumb e' un <div role="navigation">, non un <nav>: il CSS del sito
    ha nav{position:fixed;top:0} come selettore di elemento, che rendeva fisso
    anche il breadcrumb piazzandolo sopra la barra. position:static come
@@ -1205,13 +1229,18 @@ PAGINA_CSS = """
 .ev-scelto{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;
   letter-spacing:.02em;text-transform:uppercase;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:5px 12px;margin:0 0 8px}
-.ev-head h1{margin:.1em 0 .3em;line-height:1.15}
+/* .ev-when vive nella barra scura: il colore vero e' in .ev-hero .ev-when,
+   qui resta la misura come ripiego se un giorno finisse fuori dalla barra. */
 .ev-when{font-size:1.05rem;font-weight:600;color:var(--daop-navy,#1b3a5c)}
 .ev-facts{list-style:none;padding:0;margin:22px 0;display:grid;gap:10px}
 .ev-facts li{display:flex;gap:10px;align-items:flex-start;line-height:1.45}
 .ev-facts svg{flex:0 0 auto;margin-top:3px;opacity:.65}
 .ev-body{margin:26px 0;line-height:1.7}
-.ev-loc{width:100%;height:auto;border-radius:14px;margin:22px 0}
+/* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
+   cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
+   non e' la pagina. */
+.ev-loc{display:block;width:100%;max-width:420px;height:auto;border-radius:14px;
+  margin:22px auto;border:1px solid rgba(45,74,92,.12);box-shadow:0 6px 24px rgba(45,74,92,.10)}
 .ev-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:28px 0 8px}
 /* Rete di sicurezza: se un .btn restasse senza modificatore non deve mai
    ricadere sul blu di sistema, come e' successo a "Come arrivare". */
@@ -1219,7 +1248,10 @@ PAGINA_CSS = """
 .ev-back{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:3px}
 .ev-over{border:1px solid #e5c07b;background:#fdf6e6;border-radius:14px;padding:16px 18px;margin:22px 0}
 .ev-over strong{display:block;margin-bottom:4px}
-@media (prefers-color-scheme:dark){.ev-over{background:#2e2717;border-color:#6b5a2e}}
+/* Niente regole per il dark mode qui dentro: il sito non ha un tema scuro, il
+   body resta crema anche col telefono in dark mode. Quella che stava qui
+   dipingeva "Edizione conclusa" di marrone #2e2717 lasciandoci sopra il testo
+   navy. Il tema scuro, se arriva, si fa sul body in eventi.html e poi scende. */
 /* Il punto di vista DAOP: e' il motivo per cui vale la pena aprire la pagina,
    quindi si vede che e' nostro e non copiato dal volantino. */
 .ev-daop{border:1px solid rgba(107,165,168,.45);background:rgba(107,165,168,.09);
@@ -1240,8 +1272,11 @@ PAGINA_CSS = """
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
-/* Altri eventi vicini: link in uscita e motivo per restare sul sito. */
-.ev-vicini{margin:34px 0 0}
+/* Altri eventi vicini: link in uscita e motivo per restare sul sito.
+   padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
+   section{padding:100px 24px} come selettore di elemento, che qui dentro
+   diventava 100px di vuoto e 24px di rientro rispetto al resto della colonna. */
+.ev-vicini{margin:34px 0 0;padding:0}
 .ev-vicini h2{font-size:1.15rem;margin:0 0 12px}
 .ev-vicini ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .ev-vicini a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
@@ -1254,10 +1289,37 @@ PAGINA_CSS = """
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-@media (prefers-color-scheme:dark){
-  .ev-daop{background:rgba(107,165,168,.14);border-color:rgba(107,165,168,.35)}
-  .ev-vicini a{border-color:rgba(255,255,255,.16)}
-}
+/* Striscia Ginetto: stesso componente .info-strip della home eventi (card
+   crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
+   Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
+   ha trovato quello che cercava. */
+.ev-ginetto{padding:56px 24px}
+.ev-ginetto .info-strip{margin-bottom:0;align-items:center}
+.ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
+@media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+"""
+
+
+def blocco_ginetto(citta=""):
+    """Rimando a Ginetto in fondo alle pagine di evento e di comune.
+
+    Non e' un avviso e non e' un popup: e' la .info-strip della home eventi,
+    stesso componente, con la mascotte al posto dell'icona. Il comune nel
+    titolo lo sappiamo gia', e una domanda che nomina il posto in cui si trova
+    chi legge vale piu' di un invito generico."""
+    # a_citta() mette la d eufonica: "vicino ad Acqui Terme", non "a Acqui".
+    dove = " vicino " + esc(a_citta(citta)) if citta else " con i bambini"
+    return f"""<section class="bg-cream ev-ginetto">
+  <div class="section-inner">
+    <div class="info-strip">
+      <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
+      <div>
+        <h3>Cerchi altro da fare{dove}?</h3>
+        <p>Chiedilo a <strong>Ginetto AI</strong>, l'assistente di DAOP: trova eventi e luoghi per famiglie in base all'et&agrave; dei tuoi figli e a quanto sei disposto a guidare. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+</section>
 """
 
 
@@ -1568,14 +1630,16 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
 <body>
 {nav}
 <main id="contenuto">
-<article class="ev-wrap">
-  <div class="ev-crumb" role="navigation" aria-label="Percorso">
-    <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(trunc(nome, 60))}</span>
-  </div>
-  <header class="ev-head">
+<header class="page-hero ev-hero">
+  <div class="page-hero-inner">
+    <div class="ev-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(trunc(nome, 60))}</span>
+    </div>
     {consigliato_badge}<h1>{esc(nome)}</h1>
     <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>
-  </header>
+  </div>
+</header>
+<article class="ev-wrap ev-wrap--hero">
   {avviso}
   <ul class="ev-facts">
     {"".join(facts)}
@@ -1589,7 +1653,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   {firma}
   {altri}
 </article>
-</main>
+{blocco_ginetto(citta)}</main>
 {foot}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
@@ -1692,9 +1756,6 @@ METODO_CSS = """
 .met-lim{border:1px solid rgba(45,74,92,.16);border-radius:14px;padding:16px 18px;margin:18px 0}
 .met-lim ul{margin:8px 0 0 18px;display:grid;gap:6px}
 .met-cta{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
-@media (prefers-color-scheme:dark){
-  .met-num div,.met-lim{border-color:rgba(255,255,255,.16)}
-}
 """
 
 METODO_FAQ = [
@@ -1820,14 +1881,16 @@ def scrivi_metodo(events):
 <body>
 {nav}
 <main id="contenuto">
-<article class="ev-wrap">
-  <div class="ev-crumb" role="navigation" aria-label="Percorso">
-    <a href="/">Home</a> › <span>Come verifichiamo gli eventi</span>
-  </div>
-  <header class="ev-head">
+<header class="page-hero ev-hero">
+  <div class="page-hero-inner">
+    <div class="ev-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <span>Come verifichiamo gli eventi</span>
+    </div>
     <h1>Come DAOP sceglie e verifica gli eventi</h1>
     <p class="ev-when">Il metodo dietro l'agenda di {nomi_province}</p>
-  </header>
+  </div>
+</header>
+<article class="ev-wrap ev-wrap--hero">
 
   <p>DAOP non è un aggregatore automatico. Ogni evento che leggi sul sito è stato scelto
   e inserito da una persona che vive in questo territorio, con data, luogo, orario,
@@ -1954,8 +2017,6 @@ ZONE_CSS = """
 .zon-part{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.03em;
   text-transform:uppercase;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:4px 11px;margin:0 0 8px}
-@media (prefers-color-scheme:dark){.zon-card{border-color:rgba(255,255,255,.16)}
-  .zon-link a{border-color:rgba(255,255,255,.2);color:inherit}}
 """
 
 
@@ -2073,14 +2134,16 @@ def scrivi_zone(events, hub=None):
 <body>
 {nav}
 <main id="contenuto">
-<article class="ev-wrap">
-  <div class="ev-crumb" role="navigation" aria-label="Percorso">
-    <a href="/">Home</a> › <span>Le pagine della tua zona</span>
-  </div>
-  <header class="ev-head">
+<header class="page-hero ev-hero">
+  <div class="page-hero-inner">
+    <div class="ev-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <span>Le pagine della tua zona</span>
+    </div>
     <h1>Le pagine della tua zona</h1>
     <p class="ev-when">Una provincia, una pagina, una persona che la segue</p>
-  </header>
+  </div>
+</header>
+<article class="ev-wrap ev-wrap--hero">
 
   <p>DAOP non è un calendario unico calato dall'alto: è una pagina per provincia, tenuta
   da chi in quella provincia ci vive. Il sito e l'app le rimettono insieme in un'agenda
@@ -2315,11 +2378,6 @@ COMUNE_CSS = """
 .com-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .com-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem}
-@media (prefers-color-scheme:dark){
-  .com-stat li,.com-grp,.com-vuoto{border-color:rgba(255,255,255,.16)}
-  .com-ev li{border-top-color:rgba(255,255,255,.12)}
-  .com-ev a,.com-link a{color:inherit}
-  .com-link a{border-color:rgba(255,255,255,.2)}}
 """
 
 
@@ -2539,14 +2597,16 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
 <body>
 {nav}
 <main id="contenuto">
-<article class="ev-wrap">
-  <div class="ev-crumb" role="navigation" aria-label="Percorso">
-    <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(citta)}</span>
-  </div>
-  <header class="ev-head">
+<header class="page-hero ev-hero">
+  <div class="page-hero-inner">
+    <div class="ev-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(citta)}</span>
+    </div>
     <h1>Eventi e sagre{a_citta(citta)}</h1>
     <p class="ev-when">{esc(sotto)}</p>
-  </header>
+  </div>
+</header>
+<article class="ev-wrap ev-wrap--hero">
   <ul class="com-stat">{"".join(stat)}</ul>
   <p>{apertura}</p>
 
@@ -2561,7 +2621,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
 
   <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
 </article>
-</main>
+{blocco_ginetto(citta)}</main>
 {foot}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
