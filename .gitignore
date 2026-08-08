@@ -1,2 +1,9 @@
 __pycache__/
 *.pyc
+
+# Le locandine vivono nel bucket Supabase "locandine", non qui: committarle
+# faceva crescere .git di ~340 MB l'anno di blob che non escono piu'. La
+# cartella resta come archivio locale del downloader, ma fuori dal repo.
+# Vedi assets/eventi/README.md e loc_path() in scripts/genera_eventi.py.
+assets/eventi/*
+!assets/eventi/README.md

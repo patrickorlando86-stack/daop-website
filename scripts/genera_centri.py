@@ -32,6 +32,7 @@ import datetime
 import unicodedata
 import urllib.request
 import urllib.parse
+import urllib.error
 import sys
 
 import genera_eventi as G
@@ -221,7 +222,7 @@ def leggi_centri(tab, chiave):
     senza = sum(1 for c in out if c['loc'].strip() and not locandina(c))
     if senza:
         print(f"[genera_centri] ATTENZIONE: {senza} locandine indicate nel foglio "
-              f"non esistono in assets/eventi/, le schede escono senza immagine")
+              f"non esistono nel bucket Supabase, le schede escono senza immagine")
     return out
 
 
@@ -399,19 +400,43 @@ def guida(cfg):
 """
 
 
-def locandina(c):
-    """Percorso della locandina, ma solo se il file c'e' davvero.
+_ESISTE = {}
 
-    La colonna Locandina dei centri contiene nomi di immagini che nel repo non
-    esistono: sono riferimenti a file mai importati. Emetterli comunque
-    riempirebbe la pagina di immagini rotte. Le locandine degli eventi invece
-    ci sono tutte, quindi il controllo non toglie niente a loro."""
+
+def _immagine_c_e(url):
+    """L'immagine risponde davvero a quell'indirizzo?
+
+    Il controllo esiste perche' la colonna Locandina dei centri e' compilata a
+    mano e ha sempre contenuto nomi di file mai importati: emetterli comunque
+    riempirebbe la pagina di immagini rotte. Prima si guardava sul disco
+    (assets/eventi/); ora che l'immagine sta nel bucket Supabase si guarda li',
+    che poi e' il posto da cui la prende il browser.
+
+    In caso di dubbio si TIENE l'immagine: solo un 404 o un 400 secco la
+    scartano. Un timeout o una rete che fa i capricci in GitHub Actions
+    cancellerebbe altrimenti locandine buone dalla pagina."""
+    if url in _ESISTE:
+        return _ESISTE[url]
+    ok = True
+    try:
+        req = urllib.request.Request(url, method='HEAD',
+                                     headers={'User-Agent': 'daop-genera-centri'})
+        with urllib.request.urlopen(req, timeout=10):
+            pass
+    except urllib.error.HTTPError as e:
+        ok = e.code not in (400, 404)
+    except Exception:
+        pass
+    _ESISTE[url] = ok
+    return ok
+
+
+def locandina(c):
+    """URL della locandina, ma solo se l'immagine c'e' davvero."""
     p = G.loc_path(c['loc'])
     if not p:
         return ''
-    if p.startswith(('http://', 'https://')):
-        return p
-    return p if os.path.exists(os.path.join(ROOT, p.lstrip('/'))) else ''
+    return p if _immagine_c_e(p) else ''
 
 
 def periodo_testo(c):

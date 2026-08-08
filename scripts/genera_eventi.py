@@ -321,17 +321,32 @@ PAGE_URL = f"{SITE_URL}/eventi.html"
 DEFAULT_IMG = f"{SITE_URL}/assets/images/headerdaop.jpg"
 FREE_KW = ('gratuito', 'gratis', 'libero', 'ingresso libero')
 
+# Le locandine NON stanno piu' nel repo: stanno nel bucket pubblico Supabase
+# "locandine", dove il downloader le carica gia' da luglio (ottimizzate 1080/q80,
+# ~95 KB invece dei ~190 KB dell'originale) e da dove l'app Ginetto le legge da
+# sempre. Erano salvate due volte, e la copia costosa era proprio quella che non
+# serviva: committate in git crescevano di ~340 MB l'anno che dai blob non
+# escono piu' (misurato: 188 MB di .git in tre mesi e mezzo).
+# Il nome file nella colonna "Locandina" del foglio e' identico nei due posti,
+# quindi qui cambia solo il prefisso.
+SUPABASE_LOCANDINE = ("https://aaseyjdsldgjerjqlumu.supabase.co"
+                      "/storage/v1/object/public/locandine")
+
 
 def loc_path(loc):
-    """Percorso della locandina per il browser: un nome file diventa
-    root-relative (/assets/eventi/<file>, valido sia in locale sia live),
-    un URL completo resta intatto. Vuoto se assente. Usato nelle card."""
+    """URL della locandina per il browser: un nome file diventa l'URL pubblico
+    nel bucket Supabase, un URL completo resta intatto. Vuoto se assente.
+
+    Unico punto in cui un nome file diventa un indirizzo: lo usano le card degli
+    eventi, le pagine per comune e (via G.loc_path) i centri estivi."""
     loc = (loc or '').strip()
     if not loc:
         return ''
     if loc.startswith(('http://', 'https://')):
         return loc
-    return f"/assets/eventi/{loc.lstrip('/')}"
+    # quote: i nomi dal downloader sono ASCII, ma la colonna si compila anche a
+    # mano e uno spazio spezzerebbe l'attributo src.
+    return f"{SUPABASE_LOCANDINE}/{urllib.parse.quote(loc.lstrip('/'))}"
 
 
 def loc_url(loc):
@@ -2432,7 +2447,7 @@ COMUNE_CSS = """
   padding:15px 18px;margin:12px 0;background:#fff}
 .com-grp h3{margin:0 0 3px;font-size:1.06rem;line-height:1.32}
 .com-per{font-size:.85rem;opacity:.72;margin:0 0 2px}
-/* La miniatura e' la locandina che sta gia' in /assets/eventi/: la stessa che
+/* La miniatura e' la locandina servita dal bucket Supabase: la stessa che
    l'agenda mostra nelle righe (.ev-thumb), stesse misure e stesso taglio dal
    bordo alto, perche' su una locandina il titolo sta in cima. Dove manca -
    quattro eventi su 257 - resta il segnaposto nel colore della categoria. */
