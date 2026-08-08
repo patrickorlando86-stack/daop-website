@@ -647,6 +647,7 @@ def render(chiave, cfg, centri, css, nav, foot):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {jsonld(cfg, attivi, url)}
 </script>

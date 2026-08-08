@@ -1663,6 +1663,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{PAGINA_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {jsonld}
 </script>
@@ -2885,6 +2886,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{PAGINA_CSS}{COMUNE_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {jsonld}
 </script>
