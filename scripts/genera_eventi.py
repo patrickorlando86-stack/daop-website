@@ -807,13 +807,23 @@ def event_jsonld(e, url_override=None):
     far posizionare invece che all'ancora dentro l'agenda."""
     times = parse_times(e['ora'])
     start = e['d_start'].isoformat()
-    if times:
-        start += f"T{times[0]}{rome_offset(e['d_start'])}"
     end = e['d_end'].isoformat()
-    if len(times) > 1:
-        end += f"T{times[1]}{rome_offset(e['d_end'])}"
-    elif times:
-        end += f"T{times[0]}{rome_offset(e['d_end'])}"
+    if times:
+        ora_i = times[0]
+        ora_f = times[1] if len(times) > 1 else times[0]
+        fine = e['d_end']
+        # Una serata che nel foglio finisce "alle 00:00" (o alle 01:30) finisce
+        # DOPO mezzanotte, cioe' il giorno dopo. Scritta sulla stessa data,
+        # endDate cade PRIMA di startDate: per Google e' un errore critico, e un
+        # Event non valido non prende il rich result - quindi la pagina perde in
+        # SERP proprio le date e il badge evento, che sono la ragione per cui i
+        # dati strutturati ci sono. Trovato su "Ferragosto 2026 - Family Eco
+        # Park", ora "10:00-00:00": 1 pagina su 100 oggi, ma la scrittura
+        # "dalle 21 alle 24" nel foglio e' comune e ricapita a ogni stagione.
+        if len(times) > 1 and fine == e['d_start'] and ora_f <= ora_i:
+            fine += datetime.timedelta(days=1)
+        start += f"T{ora_i}{rome_offset(e['d_start'])}"
+        end = f"{fine.isoformat()}T{ora_f}{rome_offset(fine)}"
 
     city = (e['citta'] or '').strip()
     address = {"@type": "PostalAddress", "addressCountry": "IT"}
@@ -941,6 +951,12 @@ def ha_pagina(e):
     return any(w in (e.get('nome') or '').lower() for w in SAGRA_KW)
 
 
+# Slug che una pagina evento non puo' prendersi: /eventi/oggi.html e
+# /eventi/weekend.html stanno nella stessa cartella, e una sagra che si
+# chiamasse "Oggi" sovrascriverebbe la pagina di intenzione senza un errore.
+SLUG_RISERVATI = {'oggi', 'weekend'}
+
+
 def slug_evento(e):
     """Slug stabile fra un'edizione e l'altra: togliamo l'anno e il numero di
     edizione dal nome ("40ª Sagra del Guanciotto 2026" -> "sagra-del-guanciotto")
@@ -957,7 +973,8 @@ def slug_evento(e):
     citta = slugify(e.get('citta') or '')
     if citta and citta not in base:
         base = f"{base}-{citta}"
-    return base.strip('-')[:80].strip('-') or 'evento'
+    base = base.strip('-')[:80].strip('-') or 'evento'
+    return f"{base}-evento" if base in SLUG_RISERVATI else base
 
 
 def pagina_url(e):
@@ -1115,6 +1132,81 @@ def elenco_it(voci):
     if len(voci) < 2:
         return voci[0] if voci else ''
     return ", ".join(voci[:-1]) + " e " + voci[-1]
+
+
+# La stessa regola dei richiami, ma per il TITLE, che e' la riga su cui si
+# decide il clic. Mettere il richiamo nella descrizione non e' bastato: la
+# pagina della Fiera di Agosto di Novi Ligure ha fatto 1.843 impressioni al
+# 2,98% di clic contro il 17% delle pagine evento sorelle, e le query perse
+# sono tutte la stessa cosa scritta in quattro modi ("fuochi novi ligure 2026",
+# "fuochi d'artificio novi ligure 2026", "novi ligure fuochi d artificio
+# 2026"): ~300 impressioni in posizione 6-9 con quasi zero clic. In sesta
+# posizione si legge solo il title, e il title diceva "Fiera di Agosto", che
+# non e' la cosa che stanno cercando.
+#
+# Non ci va OGNI richiamo, e la lista e' corta apposta. Un gancio sbagliato
+# costa piu' di quanto renda: provata con tutti i richiami, questa regola
+# scriveva "Mercatino a Cimaferle 2026" al posto di "Sagra della Fugassetta"
+# (nel testo il mercatino e' una riga: "giochi, una lotteria e un mercatino di
+# articoli vintage") e "Rievocazione storica ad Asti" al posto del Palio di
+# Asti. Il richiamo c'era davvero in tutti e due i casi: quello che manca e'
+# che sia LA cosa che si cerca.
+#
+# Qui stanno solo le attrazioni che sono a loro volta una query, cioe' quelle
+# che si cercano SENZA sapere come si chiama la festa - nessuno cerca "sagra
+# con mercatino", tutti cercano "fuochi d'artificio novi ligure". L'ordine e'
+# la priorita': vince il primo.
+GANCI_TITOLO = {
+    "fuochi d'artificio": "Fuochi d'artificio",
+    "luna park": "Luna park",
+    "mongolfiere": "Mongolfiere",
+}
+RICHIAMO_RE = {etichetta: rx for rx, etichetta in RICHIAMI}
+
+
+def gancio(nome, descr):
+    """Il richiamo da promuovere nel title, o '' se non ce n'e' uno.
+
+    Vale la regola dei richiami: se la parola non e' nella descrizione del
+    foglio non esce, e se la proposizione la nega ("quest'anno senza fuochi")
+    nemmeno. In piu' non esce quando il nome della festa la dice gia': su
+    "Festa della Pizza Margherita" il gancio "street food" ruberebbe il posto
+    al nome senza aggiungere una parola nuova."""
+    presenti = set(richiami(descr, massimo=len(RICHIAMI)))
+    n = (nome or '')
+    for etichetta, in_titolo in GANCI_TITOLO.items():
+        if etichetta in presenti and not RICHIAMO_RE[etichetta].search(n):
+            return in_titolo
+    return ''
+
+
+def _senza_anno(nome):
+    """Il nome senza l'anno e senza la coda dell'organizzatore: serve dopo il
+    gancio, dove l'anno c'e' gia' e ripeterlo ("… 2026 | Fiera di Agosto
+    2026") mangia dieci caratteri per dire due volte la stessa cosa."""
+    corto = ORGANIZZATORE_RE.sub('', nome or '').strip(' -–—')
+    corto = re.sub(r'\s*\b(?:19|20)\d{2}\b\s*', ' ', corto)
+    return re.sub(r'\s{2,}', ' ', corto).strip(' -–—:·') or (nome or '')
+
+
+def _titolo_evento(nome, citta, anno, gan):
+    """Title della pagina evento.
+
+    Con il gancio davanti quando c'e': "Fuochi d'artificio a Novi Ligure 2026 |
+    Fiera di Agosto". Le tre cose che la query contiene (cosa, dove, anno)
+    stanno tutte prima della barra, e il nome della festa resta comunque nel
+    title - non si scambia una query per un'altra, si tengono tutte e due.
+
+    Il nome NON e' sacrificabile: se il gancio non ci sta insieme al nome, il
+    gancio salta e resta il title di prima. Un title che dice "Mongolfiere ad
+    Alessandria 2026" e non dice piu' "Festa della Birra" ha vinto una query e
+    ne ha persa una piu' grossa, che e' il modo piu' facile di peggiorare
+    partendo da un'idea giusta."""
+    if gan:
+        titolo = f"{gan}{a_citta(citta)} {anno} | {_senza_anno(nome)}"
+        if len(titolo) <= MAX_TITLE:
+            return titolo
+    return _titolo(f"{nome} {anno}" if str(anno) not in nome else nome, citta)
 
 
 def carica_registro():
@@ -1333,6 +1425,11 @@ PAGINA_CSS = """
    crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
    Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
    ha trovato quello che cercava. */
+/* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
+   famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
+   a chi arriva dalla ricerca di essere nel posto giusto. */
+.ev-gancio{margin:6px 0 0;font-size:.95rem;font-weight:600;letter-spacing:.01em;
+  opacity:.92}
 .ev-ginetto{padding:56px 24px}
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
@@ -1521,12 +1618,16 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     citta = (e.get('citta') or '').strip()
     anno = e['d_start'].year
 
+    descr_txt = (e.get('descr') or '').strip()
+
     # Il title si costruisce dal nome verso l'esterno: la città non va mai
     # troncata (è metà della query) e il suffisso " | DAOP" si sacrifica prima
     # del contenuto. Si accorcia solo il nome, e solo se serve davvero.
-    titolo_seo = _titolo(f"{nome} {anno}" if str(anno) not in nome else nome, citta)
+    # Davanti al nome, quando c'è, va la cosa che la gente cerca davvero: i
+    # fuochi d'artificio, il luna park, la rievocazione storica.
+    gan = gancio(nome, descr_txt)
+    titolo_seo = _titolo_evento(nome, citta, anno, gan)
 
-    descr_txt = (e.get('descr') or '').strip()
     # La riga che si legge fra i risultati: prima quando e dove (sono le parole
     # della query, "2026" compreso), poi cosa ci trovi. Prima diceva solo le
     # date e ripeteva l'attacco della descrizione, che quasi sempre le ripete
@@ -1535,6 +1636,12 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     attrazioni = richiami(descr_txt)
     if attrazioni:
         testa += f": {elenco_it(attrazioni)}"
+    # Le stesse attrazioni, in pagina sotto il titolo. Non è una ripetizione
+    # della descrizione: nella descrizione del foglio "fuochi d'artificio" sta
+    # scritto "spettacolo pirotecnico" a metà del sesto rigo, e chi arriva dalla
+    # ricerca deve vedere subito che è finito nel posto giusto.
+    gancio_html = (f'\n    <p class="ev-gancio">{esc(elenco_it(attrazioni).capitalize())}</p>'
+                   if attrazioni else '')
     meta_d = trunc(f"{testa}. {descr_txt}" if descr_txt
                    else f"{nome}{a_citta(citta)}: {periodo_esteso(e)}.", 152)
 
@@ -1677,7 +1784,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(trunc(nome, 60))}</span>
     </div>
     {consigliato_badge}<h1>{esc(nome)}</h1>
-    <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>
+    <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>{gancio_html}
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
@@ -2415,8 +2522,16 @@ def blocco_comuni(hub):
     schede evento di quei comuni: dall'agenda, che e' la pagina piu' forte del
     sito, non arrivava niente. Il conteggio accanto al nome non e' decorazione,
     e' la promessa che dice se vale la pena entrare."""
+    # Le pagine di intenzione vanno per prime e ci sono sempre, hub o non hub:
+    # sono la risposta alle query generiche su cui l'agenda ranka in settima
+    # posizione, e da nessuna parte del sito ci arriverebbe un link. Una pagina
+    # che solo la sitemap conosce, Google la tratta come tale.
+    scorc = "".join(f'<a href="{href}">{esc(testo)}</a>' for href, testo in link_landing())
+    testa = ('      <div class="ev-scorc-row">'
+             '<span class="ev-comuni-lab">Cosa cerchi</span>'
+             f'<div class="ev-comuni">{scorc}</div></div>\n')
     if not hub:
-        return ''
+        return testa.rstrip('\n')
     voci = sorted(hub.values(), key=lambda d: (-len(d['futuri']), d['nome']))
     link = "".join(
         # Il numero da solo tiene la pillola corta; "eventi in programma" per
@@ -2427,9 +2542,10 @@ def blocco_comuni(hub):
         f'{esc(d["nome"])} <span>{len(d["futuri"])}</span></a>'
         for d in voci if d['futuri'])
     if not link:
-        return ''
-    return ('      <span class="ev-comuni-lab">Vai al comune</span>\n'
-            f'      <div class="ev-comuni">{link}</div>')
+        return testa.rstrip('\n')
+    return (testa
+            + '      <span class="ev-comuni-lab">Vai al comune</span>\n'
+            + f'      <div class="ev-comuni">{link}</div>')
 
 
 COMUNE_CSS = """
@@ -2986,6 +3102,497 @@ def scrivi_comuni(hub, oggi):
     return {s: m for s, m in sorted(reg.items()) if s in vivi}
 
 
+# ---------------------------------------------------------------------------
+# PAGINE DI INTENZIONE (oggi, weekend, sagre per provincia)
+#
+# Perche': eventi.html fa 6.866 impressioni al 2,45% di clic. Ranka in
+# posizione 7-10 su query che tornano ogni settimana e non dipendono dalla
+# stagione - "sagre provincia di alessandria oggi", "eventi provincia
+# alessandria weekend", "cosa fare oggi in provincia di alessandria" - e ci
+# arriva con l'agenda intera, cioe' con una pagina che risponde a tutte e tre
+# insieme e quindi a nessuna per bene. E' lo stesso salto che le pagine evento
+# hanno gia' fatto un piano sotto: 61 pagine per singola sagra fanno l'8,9% di
+# clic, l'hub il 2,45%.
+#
+# Il rischio e' identico a quello delle pagine comune, e va detto qui: tre
+# pagine ritagliate dallo stesso elenco sono doorway pages se l'unica cosa che
+# cambia e' il filtro. Quello che l'agenda non da', e che qui c'e':
+#   - "oggi" e "weekend" rispondono alla domanda con un elenco corto e chiuso,
+#     mentre l'agenda apre su 250 schede in cui oggi e' una corsia fra tante;
+#   - la riga per famiglie, che usa la colonna "Adatto Famiglie" del foglio e
+#     nell'agenda non e' filtrabile;
+#   - le pagine sagre tengono il calendario mese per mese e le sagre che
+#     tornano ogni anno, che stanno nell'archivio e in agenda non ci sono.
+# ---------------------------------------------------------------------------
+LANDING_REGISTRO = os.path.join(ROOT, "data", "pagine-landing.json")
+
+# Quanto deve avere una pagina sagre per stare in indice: sotto, non ha niente
+# da dire piu' dell'agenda e va in noindex come le pagine comune sotto soglia.
+# Le sagre che tornano ogni anno contano: sono la parte che regge a novembre,
+# quando di sagre in programma non ce n'e' nessuna.
+MIN_LANDING = 5
+
+LANDING_CSS = """
+/* Il comune sotto il nome dell'evento: qui gli elenchi attraversano la
+   provincia, quindi "dove" e' la seconda cosa da sapere dopo "cosa" - nelle
+   pagine comune non serve perche' il comune e' la pagina stessa. */
+.com-luogo{font-size:.85rem;opacity:.72}
+.com-ev.is-nude .com-b .com-luogo{flex:0 0 auto}
+/* Le scorciatoie fra una pagina di intenzione e l'altra. */
+.lan-alt{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px}
+.lan-alt a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
+  padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;
+  color:var(--navy,#2d4a5c)}
+.lan-alt a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
+.lan-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
+  margin:16px 0;font-size:.95rem;line-height:1.6}
+"""
+
+
+def in_corso(e, giorno):
+    """L'evento e' aperto in quel giorno (anche se e' cominciato prima)."""
+    return e['d_start'] <= giorno <= e['d_end']
+
+
+def _landing_righe(ev, oggi):
+    """(righe, nude) di un elenco, nel vocabolario delle pagine comune.
+
+    `nude` dice se nessuna riga ha la miniatura: e' la stessa condizione che
+    nelle pagine comune accende .is-nude, cioe' la data in colonna fissa a
+    fianco del titolo. Con le miniature quella variante non va usata - la
+    colonna della data si somma al francobollo e il nome parte a meta' riga."""
+    out, nude = "", True
+    for e in ev:
+        quando = _quando_breve(e, oggi)
+        ora = (e.get('ora') or '').strip()
+        if any(c.isdigit() for c in ora):
+            quando += ' · ' + trunc(ora, 18)
+        stile, thumb = _com_cat(e)
+        nude = nude and not thumb
+        citta = (e.get('citta') or '').strip()
+        dove = f"{citta} ({e['prov']})" if citta else (e.get('prov') or '')
+        out += (f'<li style="{stile}">{thumb}<span class="com-b">'
+                f'<span class="com-d">{esc(quando)}</span>'
+                f'<a class="com-go" href="{_href_evento(e)}">'
+                f'{esc(trunc(e.get("nome") or "", 80))}</a>'
+                f'<span class="com-luogo">{esc(dove)}</span>'
+                '</span></li>')
+    return out, nude
+
+
+def _landing_sezione(titolo, sotto, ev, oggi):
+    """Un blocco di elenco con la sua intestazione. Vuoto se non c'e' niente:
+    un titoletto senza righe sotto e' il modo piu' rapido per far sembrare
+    generata a macchina una pagina che non lo e'."""
+    if not ev:
+        return ''
+    testa = f'<h3>{esc(titolo)}</h3>'
+    if sotto:
+        testa += f'<p class="com-per">{esc(sotto)}</p>'
+    righe, nude = _landing_righe(ev, oggi)
+    return (f'<section class="com-grp"><div class="com-head"><div class="com-b">'
+            f'{testa}</div></div>'
+            f'<ul class="com-ev{" is-nude" if nude else ""}">{righe}</ul></section>')
+
+
+def _landing_titolo(candidati):
+    """Il primo title che sta nei 62 caratteri. L'elenco delle province cresce
+    (CN e' arrivata ad agosto), quindi il title non si puo' scrivere a mano una
+    volta: si scrive una scala di versioni e vince la piu' lunga che ci sta."""
+    for t in candidati:
+        if len(t) <= MAX_TITLE:
+            return t
+    return trunc(candidati[-1], MAX_TITLE)
+
+
+def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi):
+    """CollectionPage + briciole + ItemList.
+
+    L'ItemList RIMANDA alle pagine evento e non ripete gli Event, per la stessa
+    ragione delle pagine comune: due copie dello stesso evento su due URL sono
+    due elementi da validare invece di uno."""
+    grafo = [
+        {"@type": "CollectionPage", "@id": url, "url": url, "name": titolo,
+         "description": descr, "inLanguage": "it-IT",
+         "isPartOf": {"@type": "WebSite", "@id": SITE_ID, "url": SITE_URL, "name": "DAOP"},
+         "publisher": {"@id": ORG_ID}, "dateModified": oggi.isoformat()},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
+            {"@type": "ListItem", "position": 2, "name": "Eventi", "item": PAGE_URL},
+            {"@type": "ListItem", "position": 3, "name": crumb, "item": url}]},
+    ]
+    lista = [{"@type": "ListItem", "position": i + 1,
+              "url": f"{SITE_URL}{_href_evento(e)}",
+              "name": (e.get('nome') or '').strip()}
+             for i, e in enumerate(eventi[:30])]
+    if lista:
+        grafo.append({"@type": "ItemList", "name": nome_lista,
+                      "numberOfItems": len(lista), "itemListElement": lista})
+    return json.dumps({"@context": "https://schema.org", "@graph": grafo},
+                      ensure_ascii=False, indent=2)
+
+
+def _landing_shell(spec, css, nav, foot, oggi):
+    """Il guscio HTML condiviso dalle pagine di intenzione."""
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(spec['titolo'])}</title>
+<meta name="description" content="{esc(spec['descr'])}">
+<meta name="robots" content="{spec['robots']}">
+<link rel="canonical" href="{spec['url']}">
+<meta property="og:title" content="{esc(spec['titolo'])}">
+<meta property="og:description" content="{esc(spec['descr'])}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{spec['url']}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{DEFAULT_IMG}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(spec['titolo'])}">
+<meta name="twitter:description" content="{esc(trunc(spec['descr'], 120))}">
+<meta name="twitter:image" content="{DEFAULT_IMG}">
+<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{PAGINA_CSS}{COMUNE_CSS}{LANDING_CSS}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/locandina.js" defer></script>
+<script type="application/ld+json">
+{spec['jsonld']}
+</script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<header class="page-hero ev-hero">
+  <div class="page-hero-inner">
+    <div class="ev-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(spec['crumb'])}</span>
+    </div>
+    <h1>{esc(spec['h1'])}</h1>
+    <p class="ev-when">{esc(spec['sotto'])}</p>
+  </div>
+</header>
+<article class="ev-wrap ev-wrap--hero">
+  {spec['corpo']}
+  <div class="com-link">
+    <a href="/eventi.html">Tutta l'agenda DAOP</a>
+    <a href="/metodo.html">Come verifichiamo gli eventi</a>
+  </div>
+  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
+</article>
+{blocco_ginetto()}</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+
+
+def _altre_landing(qui, elenco):
+    """La riga di scorciatoie verso le altre pagine di intenzione."""
+    voci = "".join(f'<a href="{href}">{esc(testo)}</a>'
+                   for href, testo in elenco if href != qui)
+    return f'<div class="lan-alt">{voci}</div>' if voci else ''
+
+
+def spec_oggi(events, oggi, altre):
+    """/eventi/oggi.html — quello che c'e' adesso, in tutte le province."""
+    url = f"{SITE_URL}/eventi/oggi.html"
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+    ordina = lambda ev: sorted(ev, key=lambda e: ((e.get('citta') or ''),
+                                                  (e.get('nome') or '')))
+    adesso = ordina([e for e in events if in_corso(e, oggi)])
+    domani = ordina([e for e in events if in_corso(e, oggi + datetime.timedelta(days=1))
+                     and not in_corso(e, oggi)])
+    famiglie = [e for e in adesso if si(e.get('adatto_famiglie'))]
+    prossimi = ordina([e for e in events if e['d_start'] > oggi])[:12] if not adesso else []
+
+    titolo = _landing_titolo([f"Cosa fare oggi in provincia di {prov}",
+                              f"Cosa fare oggi: {prov} | DAOP",
+                              f"Cosa fare oggi: {prov}"])
+    if adesso:
+        sotto = (f"{len(adesso)} eventi in corso oggi, {data_estesa(oggi)}"
+                 if len(adesso) > 1 else f"1 evento in corso oggi, {data_estesa(oggi)}")
+        apertura = (f"<p>Quello che c'è <strong>oggi</strong>, {data_estesa(oggi)}, "
+                    f"in provincia di {prov}: {len(adesso)} eventi, sagre e feste comprese, "
+                    f"con l'orario, il comune e la scheda di ognuno. "
+                    f"Le controlliamo una per una prima di pubblicarle, e questa pagina "
+                    f"si rifà da sola ogni notte — quindi qui non trovi cose di ieri.</p>")
+    else:
+        sotto = f"Oggi, {data_estesa(oggi)}, non c'è niente in agenda"
+        apertura = ("<p class=\"lan-vuoto\">Oggi in agenda non abbiamo niente, e lo "
+                    "scriviamo invece di riempire la pagina: gli eventi che pubblichiamo "
+                    "sono quelli che abbiamo verificato, e oggi non ce ne sono. "
+                    "Qui sotto trovi i primi che arrivano.</p>")
+    descr = trunc(f"Cosa fare oggi, {data_estesa(oggi)}, in provincia di {prov}: "
+                  + (f"{len(adesso)} eventi in corso, verificati uno per uno da DAOP. "
+                     "Orari, comune e contatti di chi organizza."
+                     if adesso else
+                     "l'agenda aggiornata ogni notte con i prossimi appuntamenti "
+                     "per famiglie, verificati uno per uno."), 152)
+
+    corpo = apertura
+    corpo += _landing_sezione("In corso oggi", None, adesso, oggi)
+    corpo += _landing_sezione("I primi in arrivo", "Oggi non c'è niente: questi sono i prossimi",
+                              prossimi, oggi)
+    if famiglie:
+        # La colonna "Adatto Famiglie" del foglio esiste da sempre e in agenda
+        # non e' filtrabile: e' l'unico posto del sito in cui quel giudizio,
+        # che e' nostro e non del volantino, diventa una domanda a cui si
+        # risponde ("oggi, con i bambini, dove andiamo").
+        corpo += (f"<h2>Oggi con i bambini</h2><p>Di quelli qui sopra, "
+                  f"{len(famiglie)} li abbiamo segnati come adatti alle famiglie: "
+                  f"è una colonna del nostro database, non una parola presa dalla "
+                  f"locandina.</p>")
+        corpo += _landing_sezione("Adatti alle famiglie", None, famiglie, oggi)
+    corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi)
+    corpo += _altre_landing("/eventi/oggi.html", altre)
+
+    return {
+        'path': os.path.join("eventi", "oggi.html"), 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': "Cosa fare oggi", 'sotto': sotto, 'crumb': "Oggi",
+        'corpo': corpo, 'robots': "index, follow",
+        'jsonld': _grafo_landing(url, titolo, descr, adesso or prossimi,
+                                 "Eventi di oggi", "Oggi", oggi),
+        'eventi': len(adesso),
+    }
+
+
+def spec_weekend(events, oggi, altre):
+    """/eventi/weekend.html — sabato e domenica, quelli veri del calendario."""
+    sab, dom = weekend_range(oggi)
+    url = f"{SITE_URL}/eventi/weekend.html"
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+    del_weekend = sorted((e for e in events
+                          if e['d_start'] <= dom and e['d_end'] >= sab),
+                         key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    di_sabato = [e for e in del_weekend if in_corso(e, sab)]
+    di_domenica = [e for e in del_weekend if in_corso(e, dom)]
+    famiglie = [e for e in del_weekend if si(e.get('adatto_famiglie'))]
+    quando = (f"sabato {sab.day} e domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}"
+              if sab.month == dom.month else
+              f"sabato {sab.day} {MESI_LUNGHI[sab.month - 1]} e "
+              f"domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}")
+
+    titolo = _landing_titolo([f"Eventi del weekend in provincia di {prov}",
+                              f"Eventi del weekend: {prov} | DAOP",
+                              f"Eventi del weekend: {prov}"])
+    if del_weekend:
+        sotto = f"{len(del_weekend)} eventi {quando}"
+        apertura = (f"<p>Il programma del weekend — {quando} — in provincia di {prov}: "
+                    f"{len(di_sabato)} eventi il sabato e {len(di_domenica)} la domenica, "
+                    f"con gli orari e il comune di ognuno. Le date le rifacciamo ogni notte, "
+                    f"quindi il weekend qui sopra è sempre il prossimo, non quello passato.</p>")
+    else:
+        sotto = f"Per {quando} non c'è ancora niente in agenda"
+        apertura = ("<p class=\"lan-vuoto\">Per questo weekend non abbiamo ancora niente "
+                    "di verificato in agenda. Le sagre arrivano spesso a ridosso: "
+                    "questa pagina si rifà ogni notte, e appena entrano compaiono qui.</p>")
+    descr = trunc(f"Eventi, sagre e feste del weekend ({quando}) in provincia di {prov}: "
+                  + (f"{len(del_weekend)} appuntamenti verificati da DAOP, con orari e comune."
+                     if del_weekend else
+                     "l'agenda si aggiorna ogni notte, appena arrivano le date."), 152)
+
+    corpo = apertura
+    corpo += _landing_sezione(f"Sabato {sab.day} {MESI_LUNGHI[sab.month - 1]}", None,
+                              di_sabato, oggi)
+    corpo += _landing_sezione(f"Domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}", None,
+                              di_domenica, oggi)
+    if famiglie:
+        corpo += (f"<h2>Il weekend con i bambini</h2><p>{len(famiglie)} di questi "
+                  f"appuntamenti li abbiamo segnati come adatti alle famiglie nel "
+                  f"nostro database: è il giudizio di chi ha compilato la scheda, "
+                  f"non una frase della locandina.</p>")
+        corpo += _landing_sezione("Adatti alle famiglie", None, famiglie, oggi)
+    corpo += _altre_landing("/eventi/weekend.html", altre)
+
+    return {
+        'path': os.path.join("eventi", "weekend.html"), 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': "Eventi del weekend", 'sotto': sotto, 'crumb': "Weekend",
+        'corpo': corpo, 'robots': "index, follow",
+        'jsonld': _grafo_landing(url, titolo, descr, del_weekend,
+                                 "Eventi del weekend", "Weekend", oggi),
+        'eventi': len(del_weekend),
+    }
+
+
+def _sagre_ricorrenti(storico, prov, quante=12):
+    """Le sagre di quella provincia viste in piu' di un'edizione.
+
+    E' la parte della pagina che non dipende dalla stagione: a novembre di
+    sagre in programma non ce n'e' nessuna, ma "quando c'e' la sagra del
+    tartufo" si continua a cercarlo tutto l'anno."""
+    out = []
+    for c in storico.values():
+        if (c.get('prov') or '').upper() != prov:
+            continue
+        for sl, r in (c.get('eventi') or {}).items():
+            nome = (r.get('nome') or '').strip()
+            if len(r.get('anni') or []) < 2:
+                continue
+            if not any(w in nome.lower() for w in SAGRA_KW):
+                continue
+            out.append((sl, r, c.get('nome') or ''))
+    out.sort(key=lambda t: (-len(t[1]['anni']), t[1].get('nome') or ''))
+    return out[:quante]
+
+
+def spec_sagre(prov, events, hub, storico, oggi, altre):
+    """/sagre-provincia-<nome>.html — le sagre di una provincia, mese per mese."""
+    nome_prov = PROVINCE_NOMI.get(prov, prov)
+    slug = f"sagre-provincia-{slugify(nome_prov)}"
+    url = f"{SITE_URL}/{slug}.html"
+    href = f"/{slug}.html"
+    sagre = sorted((e for e in events
+                    if (e.get('prov') or '').upper() == prov and bucket(e)[0] == 'feste'),
+                   key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    ric = _sagre_ricorrenti(storico, prov)
+    anno = sagre[0]['d_start'].year if sagre else oggi.year
+
+    titolo = _landing_titolo([f"Sagre e feste in provincia di {nome_prov} {anno} | DAOP",
+                              f"Sagre e feste in provincia di {nome_prov} {anno}",
+                              f"Sagre in provincia di {nome_prov} {anno}"])
+    comuni = sorted((d for d in (hub or {}).values() if d['prov'] == prov),
+                    key=lambda d: -len(d['futuri']))
+    fonte = fonte_provincia(prov)
+
+    if sagre:
+        fine = max(e['d_end'] for e in sagre)
+        paesi = len({_key(e.get('citta')) for e in sagre if (e.get('citta') or '').strip()})
+        sotto = (f"{len(sagre)} sagre e feste in programma, fino al {fine.day} "
+                 f"{MESI_LUNGHI[fine.month - 1]} {fine.year}")
+        apertura = (f"<p>Le sagre, le feste patronali, le fiere e le pro loco in provincia "
+                    f"di {esc(nome_prov)}: <strong>{len(sagre)} appuntamenti</strong> in "
+                    f"{paesi} comuni diversi, con le date, gli orari e i contatti di chi "
+                    f"le organizza. L'elenco è in ordine di data e si rifà ogni notte: "
+                    f"quello che è passato esce da solo.</p>")
+    else:
+        sotto = f"Nessuna sagra in programma in provincia di {nome_prov} in questo momento"
+        apertura = (f"<p class=\"lan-vuoto\">In provincia di {esc(nome_prov)} in questo "
+                    f"momento non abbiamo sagre in agenda: è normale fuori stagione. "
+                    f"Qui sotto restano quelle che tornano ogni anno, così sai quando "
+                    f"aspettarle — appena escono le date della prossima edizione le trovi "
+                    f"in questa pagina.</p>")
+    descr = trunc(f"Sagre e feste in provincia di {nome_prov} {anno}: "
+                  + (f"{len(sagre)} appuntamenti in programma, con date, orari e comune. "
+                     "Verificati uno per uno da DAOP."
+                     if sagre else
+                     "il calendario delle sagre che tornano ogni anno e le date "
+                     "della prossima edizione, appena escono."), 152)
+
+    corpo = apertura
+    # Mese per mese: e' il modo in cui si guarda un calendario di sagre, e in
+    # agenda non esiste perche' li' i mesi sono mischiati fra le province.
+    per_mese = collections.OrderedDict()
+    for e in sagre:
+        per_mese.setdefault((e['d_start'].year, e['d_start'].month), []).append(e)
+    for (y, m), ev in per_mese.items():
+        corpo += _landing_sezione(f"{MESI_LUNGHI[m - 1].capitalize()} {y}",
+                                  f"{len(ev)} sagre e feste" if len(ev) > 1 else "1 sagra",
+                                  ev, oggi)
+    if ric:
+        righe = "".join(
+            f'<li><span class="com-y">{r["anni"][0]}–{r["anni"][-1]}</span>'
+            + (f'<a href="/eventi/{sl}.html">{esc(trunc(r.get("nome") or "", 70))}</a>'
+               if r.get('pagina') else f'<span>{esc(trunc(r.get("nome") or "", 70))}</span>')
+            + f'<span class="com-luogo">{esc(citta)}</span></li>'
+            for sl, r, citta in ric)
+        corpo += (f"<h2>Le sagre che tornano ogni anno in provincia di {esc(nome_prov)}</h2>"
+                  f"<p>Le abbiamo viste in più di un'edizione: sono quelle su cui si può "
+                  f"contare anche quando le date della prossima non sono ancora uscite.</p>"
+                  f'<section class="com-grp"><ul class="com-anni">{righe}</ul></section>')
+    if comuni:
+        link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
+                       for d in comuni)
+        corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)}</h2>"
+                  f'<div class="com-link">{link}</div>')
+    if fonte:
+        chi = ("la nostra pagina per questa provincia" if fonte['nostra'] else
+               "la pagina che segue questa provincia, con cui collaboriamo")
+        corpo += (f'<p class="com-fonte">Le sagre della provincia di {esc(nome_prov)} '
+                  f'arrivano da <a href="{fonte["url"]}" target="_blank" rel="noopener">'
+                  f'@{esc(fonte["ig"])}</a>, {chi}. '
+                  f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    corpo += _altre_landing(href, altre)
+
+    # Sotto soglia la pagina resta (i link che girano non si rompono) ma esce
+    # dall'indice e dalla sitemap: la stessa regola delle pagine comune.
+    robots = "index, follow" if len(sagre) + len(ric) >= MIN_LANDING else "noindex, follow"
+    return {
+        'path': f"{slug}.html", 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': f"Sagre e feste in provincia di {nome_prov}",
+        'sotto': sotto, 'crumb': f"Sagre {nome_prov}",
+        'corpo': corpo, 'robots': robots,
+        'jsonld': _grafo_landing(url, titolo, descr, sagre,
+                                 f"Sagre in provincia di {nome_prov}",
+                                 f"Sagre in provincia di {nome_prov}", oggi),
+        'eventi': len(sagre),
+    }
+
+
+def link_landing():
+    """(href, testo) delle pagine di intenzione. Una lista sola, usata dalle
+    scorciatoie in fondo alle pagine e dal blocco in cima all'agenda: se
+    cambia un indirizzo non deve cambiare in due posti."""
+    voci = [("/eventi/oggi.html", "Cosa c'è oggi"),
+            ("/eventi/weekend.html", "Questo weekend")]
+    for c in PROVINCE_PUBBLICATE:
+        nome = PROVINCE_NOMI.get(c, c)
+        voci.append((f"/sagre-provincia-{slugify(nome)}.html", f"Sagre {nome}"))
+    return voci
+
+
+def scrivi_landing(events, hub, storico, oggi):
+    """Genera le pagine di intenzione. Restituisce {path: lastmod} per la
+    sitemap, gia' senza quelle finite in noindex."""
+    try:
+        css, nav, foot = _guscio()
+    except SystemExit as err:
+        print(f"[genera_eventi] pagine di intenzione saltate: {err}")
+        return {}
+    altre = link_landing()
+    specs = [spec_oggi(events, oggi, altre), spec_weekend(events, oggi, altre)]
+    specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
+
+    try:
+        reg = json.load(open(LANDING_REGISTRO, encoding='utf-8'))
+    except (OSError, ValueError):
+        reg = {}
+    cambiate, fuori = 0, []
+    for spec in specs:
+        path = os.path.join(ROOT, spec['path'])
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        nuovo = _landing_shell(spec, css, nav, foot, oggi)
+        if spec['robots'].startswith('noindex'):
+            fuori.append(spec['path'])
+        if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
+            reg.setdefault(spec['path'], oggi.isoformat())
+            continue
+        with open(path, 'w', encoding='utf-8') as fh:
+            fh.write(nuovo)
+        reg[spec['path']] = oggi.isoformat()
+        cambiate += 1
+    with open(LANDING_REGISTRO, 'w', encoding='utf-8') as fh:
+        json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
+    print(f"[genera_eventi] pagine di intenzione: {len(specs)} ({cambiate} riscritte)"
+          + (f", {len(fuori)} in noindex sotto soglia: {', '.join(fuori)}" if fuori else ""))
+    for spec in specs:
+        print(f"[genera_eventi]   {spec['path']}: {spec['eventi']} eventi")
+    return {p: m for p, m in sorted(reg.items())
+            if p in {s['path'] for s in specs} and p not in fuori}
+
+
 def opzioni_provincia(events):
     """Opzioni del filtro provincia, ricavate dagli eventi in agenda.
 
@@ -3050,7 +3657,7 @@ def inject_home(cards_html):
     print("[genera_eventi] carosello eventi aggiornato in index.html")
 
 
-def update_sitemap(slugs=(), comuni=()):
+def update_sitemap(slugs=(), comuni=(), landing=()):
     """Porta il <lastmod> di eventi.html nella sitemap alla data odierna e
     rigenera il blocco delle pagine evento.
     Il commit avviene (dal workflow) solo se eventi.html è davvero cambiato,
@@ -3089,6 +3696,24 @@ def update_sitemap(slugs=(), comuni=()):
             print(f"[genera_eventi] sitemap: {len(comuni)} pagine comune")
         else:
             print("[genera_eventi] sitemap: marker PAGINE-COMUNE non trovati, salto")
+
+    if landing:
+        # priority 0.9 come l'agenda: "cosa fare oggi" e "sagre in provincia di"
+        # sono query permanenti, non legate a una singola edizione. changefreq
+        # daily perche' e' vero: il contenuto di /eventi/oggi.html cambia ogni
+        # notte per costruzione.
+        blocco = "\n".join(
+            f"  <url>\n    <loc>{SITE_URL}/{p.replace(os.sep, '/')}</loc>\n"
+            f"    <lastmod>{mod}</lastmod>\n"
+            f"    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>"
+            for p, mod in landing.items())
+        s, nb = re.subn(
+            r'(<!-- PAGINE-LANDING:START.*?-->).*?( *<!-- PAGINE-LANDING:END -->)',
+            lambda m: f"{m.group(1)}\n{blocco}\n{m.group(2)}", s, count=1, flags=re.S)
+        if nb == 1:
+            print(f"[genera_eventi] sitemap: {len(landing)} pagine di intenzione")
+        else:
+            print("[genera_eventi] sitemap: marker PAGINE-LANDING non trovati, salto")
 
     s, n = re.subn(
         r'(<loc>https://www\.daop\.it/eventi\.html</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)',
@@ -3164,6 +3789,7 @@ def main():
     inject_home(render_home(events))
     slugs = scrivi_pagine(events, hub)
     comuni = scrivi_comuni(hub, oggi)
+    landing = scrivi_landing(events, hub, storico, oggi)
     scrivi_metodo(events)
     scrivi_zone(events, hub)
     # aggiorna l'istantanea committata
@@ -3173,7 +3799,7 @@ def main():
             or (v or '').strip()} for e in events]
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=1)
-    update_sitemap(slugs, comuni)
+    update_sitemap(slugs, comuni, landing)
     print(f"[genera_eventi] {len(events)} eventi futuri scritti in eventi.html")
 
 

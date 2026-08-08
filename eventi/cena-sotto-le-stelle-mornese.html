@@ -204,6 +204,13 @@
     display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:14px 0 0;padding:0}
   .ev-comuni-lab{font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light)}
   .ev-comuni{display:flex;flex-wrap:wrap;gap:8px}
+  /* Le pagine di intenzione (oggi, weekend, sagre per provincia): stessa forma
+     delle pillole dei comuni ma riga tutta loro, perche' non sono un modo di
+     restringere l'elenco - sono un'altra pagina che risponde a un'altra
+     domanda. Il bordo caldo le distingue senza aggiungere un componente. */
+  .ev-scorc-row{flex-basis:100%;display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px}
+  .ev-scorc-row .ev-comuni a{border-color:rgba(232,149,74,0.42)}
+  .ev-scorc-row .ev-comuni a:hover{border-color:var(--orange);background:rgba(232,149,74,0.09)}
   .ev-comuni a{display:inline-flex;align-items:baseline;gap:7px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:7px 14px;font-size:0.86rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
   .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
   .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
@@ -380,6 +387,11 @@
    crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
    Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
    ha trovato quello che cercava. */
+/* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
+   famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
+   a chi arriva dalla ricerca di essere nel posto giusto. */
+.ev-gancio{margin:6px 0 0;font-size:.95rem;font-weight:600;letter-spacing:.01em;
+  opacity:.92}
 .ev-ginetto{padding:56px 24px}
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
@@ -542,6 +554,7 @@
     </div>
     <h1>3ª Cena sotto le Stelle</h1>
     <p class="ev-when">Dall&#x27;8 al 9 agosto 2026 · Mornese</p>
+    <p class="ev-gancio">Dj set</p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">

@@ -51,10 +51,26 @@ jobs:
           # eventi/ e data/pagine-evento.json vanno inclusi: sono le pagine per
           # singola sagra e il registro che le tiene in vita quando l'evento
           # esce dal foglio. Senza, verrebbero rigenerate a ogni run e perse.
-          if [ -n "$(git status --porcelain eventi.html index.html centri-estivi.html metodo.html rubriche.html data/eventi.json data/pagine-evento.json eventi/ rubriche/)" ]; then
+          #
+          # Stessa ragione per gli altri file generati, che fino all'08/08/2026
+          # NON erano in elenco e quindi ogni notte venivano riscritti nel
+          # runner e buttati via con lui:
+          #   data/storico-comuni.json  l'archivio "quali feste tornano ogni
+          #     anno". Non venendo mai committato non accumulava niente: ogni
+          #     run ripartiva dallo stesso file fermo al 7 agosto, ed e' la
+          #     sola cosa che regge le pagine fuori stagione.
+          #   data/pagine-comune.json, data/pagine-landing.json  i registri dei
+          #     lastmod: senza, la sitemap dichiara "modificata oggi" a ogni giro.
+          #   zone.html, sagre-provincia-*.html  pagine generate come le altre.
+          FILE="eventi.html index.html centri-estivi.html metodo.html rubriche.html zone.html \
+                sagre-provincia-*.html \
+                data/eventi.json data/pagine-evento.json data/pagine-comune.json \
+                data/pagine-landing.json data/storico-comuni.json \
+                eventi/ rubriche/"
+          if [ -n "$(git status --porcelain $FILE)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add eventi.html index.html centri-estivi.html metodo.html rubriche.html data/eventi.json data/pagine-evento.json sitemap.xml eventi/ rubriche/
+            git add $FILE sitemap.xml
             git commit -m "Aggiornamento automatico eventi"
             git push
           else
@@ -62,3 +78,12 @@ jobs:
             git checkout -- sitemap.xml 2>/dev/null || true
             echo "Nessuna modifica agli eventi."
           fi
+
+      - name: Controlla i dati strutturati
+        # Gira DOPO il commit, e non prima, di proposito. Un Event non valido su
+        # una pagina e' un guaio; il sito fermo per un giorno intero, con gli
+        # eventi di ieri ancora in agenda, e' un guaio piu' grosso. Cosi' il
+        # sito si aggiorna comunque e la run diventa rossa: l'errore si vede
+        # subito e si corregge nel foglio, invece di restare invisibile fino al
+        # prossimo controllo di Search Console.
+        run: python scripts/valida_jsonld.py
