@@ -1027,17 +1027,102 @@ def a_citta(citta):
     return f" ad {citta}" if citta[0].lower() in 'aeiou' else f" a {citta}"
 
 
-def _titolo(nome, citta):
-    """Title che sta nei limiti senza mai perdere la città né finire a metà
-    parola. Ordine di sacrificio: prima il suffisso di brand, poi il nome."""
-    coda = a_citta(citta)
+def _scorpora_anno(nome):
+    """Il nome senza l'anno, ovunque stia. Serve a rimetterlo dopo, in un posto
+    fisso: nel foglio l'anno sta quasi sempre in coda ("Sagra del Cinghiale
+    2026") ma non sempre, e due anni nello stesso title sono peggio di zero."""
+    return re.sub(r'\s{2,}', ' ', re.sub(r'\s*\b(?:19|20)\d{2}\b', ' ', nome or '')).strip(' -–—')
+
+
+# Parole che in fondo a un title tagliato non dicono niente: "Apertura Stand
+# Gastronomico con I… 2026" si legge male e "con I" non entra in nessuna query.
+CODA_VUOTA_RE = re.compile(
+    r'[\s,;:.&–—-]*\b(?:e|ed|con|di|da|a|ad|in|per|su|tra|fra|il|lo|la|i|gli|le|'
+    r'un|uno|una|del|dello|della|dei|degli|delle|al|allo|alla|ai|agli|alle|'
+    r'dal|dallo|dalla|dai|nel|nella|sul|sulla)\s*$', re.I)
+
+
+def _coda_propria(nome):
+    """Le ultime parole del nome, se sono un nome proprio: "… con Shary Band",
+    "… con Luigi Gallia", "… con Alex e la Band". '' se non lo sono.
+
+    Serve perche' e' li' che sta la differenza fra una serata e l'altra. A
+    Rocchetta Tanaro il foglio ha quattro "Apertura Stand Gastronomico con
+    <nome del gruppo>": tagliando dalla fine diventano quattro pagine con lo
+    stesso identico title, e due pagine con lo stesso title per Google sono una
+    pagina sola. Meglio un buco in mezzo che quattro doppioni."""
+    parole = nome.split()
+    coda = []
+    for p in reversed(parole[1:]):            # la prima parola non e' mai coda
+        if len(coda) >= 3 or sum(len(x) + 1 for x in coda) > 20:
+            break
+        coda.insert(0, p)
+        if p[:1].isupper() and not CODA_VUOTA_RE.match(p):
+            continue
+        if not coda[0][:1].isupper():
+            coda.pop(0)
+            break
+    while coda and not coda[0][:1].isupper():
+        coda.pop(0)
+    return " ".join(coda) if coda and any(p[:1].isupper() for p in coda) else ''
+
+
+def _taglia_nome(nome, quanti, evita=''):
+    """Il nome accorciato all'ultima parola che vale la pena leggere, tenendo
+    la coda quando e' quella a distinguere un evento dall'altro.
+
+    `evita`: la citta'. Nel foglio il nome finisce spesso con il comune
+    ("Festeggiamenti Patronali Sant'Agostino - Ferrere"), e tenerla come coda
+    darebbe "Festeggiamenti Patronali… Ferrere a Ferrere": due volte la stessa
+    parola al posto di quella che manca."""
+    nome = (nome or '').strip()
+    if len(nome) <= quanti:
+        return nome
+
+    def pulisci(s):
+        prima = None
+        while prima != s:                     # "con i" se ne va in due giri
+            prima = s
+            s = CODA_VUOTA_RE.sub('', s).rstrip(' ,;:.-–—&')
+        return s
+
+    coda = _coda_propria(nome)
+    if coda and evita and (_key(coda) in _key(evita) or _key(evita) in _key(coda)):
+        coda = ''
+    if coda and len(coda) + 14 <= quanti:
+        testa = pulisci(nome[:quanti - len(coda) - 2].rsplit(' ', 1)[0])
+        # Solo se la testa resta una frase e non due parole monche, e solo se
+        # la coda non c'e' gia' dentro (nomi corti, dove il taglio non serve).
+        if len(testa) >= 12 and coda not in testa:
+            return f"{testa}… {coda}"
+    corto = pulisci(nome[:quanti].rsplit(' ', 1)[0])
+    return f"{corto}…" if corto else trunc(nome, quanti)
+
+
+def _titolo(nome, citta, anno=None):
+    """Title che sta nei limiti senza mai perdere la città, l'anno, né finire a
+    metà parola. Ordine di sacrificio: prima il suffisso di brand, poi la coda
+    dell'organizzatore, poi il nome della festa.
+
+    L'ANNO NON SI TOCCA, ed è la correzione dell'08/08/2026. Prima arrivava qui
+    incollato in fondo al nome ("Sagra del Cinghiale 2026"), quindi era l'ultima
+    cosa della stringa: e siccome il taglio parte dalla fine, sui nomi lunghi
+    spariva. Erano 47 pagine su 88, cioè più della metà, e l'anno è esattamente
+    la parola che in Search Console fa la differenza fra un title che porta
+    clic e uno che ne porta zero: "cassinasco festa 2026" batte al 62%,
+    "sagra morbello 2026" al 37%, mentre le query senza anno restano a guardare.
+    Si accorcia il nome e l'anno resta, non il contrario."""
+    nome = (nome or '').strip()
+    if anno:
+        nome = _scorpora_anno(nome) or nome
+    coda = f" {anno}{a_citta(citta)}" if anno else a_citta(citta)
     for base in (nome, ORGANIZZATORE_RE.sub('', nome).strip(' -–—')):
         for suffisso in (" | DAOP", ""):
             t = f"{base}{coda}{suffisso}"
             if len(t) <= MAX_TITLE:
                 return t
     corto = ORGANIZZATORE_RE.sub('', nome).strip(' -–—') or nome
-    return f"{trunc(corto, max(MAX_TITLE - len(coda), 20))}{coda}"
+    return f"{_taglia_nome(corto, max(MAX_TITLE - len(coda) - 1, 20), citta)}{coda}"
 
 
 def _dal(giorno):
@@ -1206,7 +1291,7 @@ def _titolo_evento(nome, citta, anno, gan):
         titolo = f"{gan}{a_citta(citta)} {anno} | {_senza_anno(nome)}"
         if len(titolo) <= MAX_TITLE:
             return titolo
-    return _titolo(f"{nome} {anno}" if str(anno) not in nome else nome, citta)
+    return _titolo(nome, citta, anno)
 
 
 def carica_registro():
