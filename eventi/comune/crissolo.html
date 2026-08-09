@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eventi e sagre a Crissolo 2026 | DAOP</title>
-<meta name="description" content="Eventi, sagre e feste a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. Date, orari e contatti, in collaborazione con chi segue la provincia.">
+<title>Eventi e sagre per famiglie a Crissolo 2026 | DAOP</title>
+<meta name="description" content="Eventi, sagre e feste per famiglie a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. 4 per bambini. Date, orari e contatti, in collaborazione…">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/eventi/comune/crissolo.html">
-<meta property="og:title" content="Eventi e sagre a Crissolo 2026 | DAOP">
-<meta property="og:description" content="Eventi, sagre e feste a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. Date, orari e contatti, in collaborazione con chi segue la provincia.">
+<meta property="og:title" content="Eventi e sagre per famiglie a Crissolo 2026 | DAOP">
+<meta property="og:description" content="Eventi, sagre e feste per famiglie a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. 4 per bambini. Date, orari e contatti, in collaborazione…">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/eventi/comune/crissolo.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Eventi e sagre a Crissolo 2026 | DAOP">
-<meta name="twitter:description" content="Eventi, sagre e feste a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. Date, orari e contatti, in…">
+<meta name="twitter:title" content="Eventi e sagre per famiglie a Crissolo 2026 | DAOP">
+<meta name="twitter:description" content="Eventi, sagre e feste per famiglie a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. 4 per bambini. Date,…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -355,6 +355,25 @@
 .ev-daop-voce+.ev-daop-voce{margin-top:14px}
 .ev-daop-voce h3{font-size:.98rem;margin:0 0 3px;color:var(--navy,#2d4a5c)}
 .ev-daop-voce p{margin:0 0 6px;line-height:1.6}
+/* "Ci vado con i bambini?": la domanda con cui la gente arriva, dentro il
+   corpo della pagina e non nel menu. Colore crema/oro invece del teal del
+   punto di vista DAOP: sono due blocchi diversi e non devono sembrare uno. */
+.ev-fam{border:1px solid rgba(232,149,74,.42);background:rgba(232,149,74,.08);
+  border-radius:16px;padding:20px 22px;margin:28px 0}
+.ev-fam>h2{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:0 0 12px;
+  color:var(--navy,#2d4a5c)}
+.ev-fam>h2 svg{opacity:.7}
+.ev-fam p{margin:0 0 8px;line-height:1.6}
+.ev-fam-lab{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  color:#a75b15;margin:16px 0 8px}
+.ev-fam-altri{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.ev-fam-altri li{line-height:1.45}
+.ev-fam-altri a{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
+.ev-fam-altri span{font-size:.85rem;opacity:.7}
+.ev-fam-piu{margin:10px 0 0}
+.ev-fam-tutti{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
 /* Firma editoriale: chi ha controllato e quando. */
 .ev-firma{border-top:2px solid rgba(45,74,92,.14);margin:30px 0 0;padding:16px 0 0;
   font-size:.92rem;line-height:1.6}
@@ -397,6 +416,16 @@
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
 
+/* L'elenco "cosa c'e' per i bambini": le stesse righe delle altre, ma senza il
+   wrapper .com-b - data, titolo e fascia d'eta' stanno tutti e tre in fila.
+   flex-wrap perche' sul telefono la pillola dell'eta' deve andare a capo invece
+   di strizzare il titolo a due parole per riga. */
+.com-kids li{flex-wrap:wrap;align-items:baseline}
+.com-kids .com-d{flex:0 0 auto;min-width:118px}
+.com-kids .com-go{flex:1 1 220px}
+.com-eta{flex:0 0 auto;font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  color:#a75b15;background:rgba(232,149,74,.16);border-radius:100px;padding:3px 10px}
+@media(max-width:600px){.com-kids .com-d{min-width:0}}
 /* Il ritmo verticale. Il reset del sito e' *{margin:0}, e le altre pagine si
    rimettono i margini componente per componente: qui la pagina e' fatta anche
    di prosa - titoletto, paragrafo, riga di link - e senza margini si incollava
@@ -512,8 +541,8 @@
       "@type": "CollectionPage",
       "@id": "https://www.daop.it/eventi/comune/crissolo.html",
       "url": "https://www.daop.it/eventi/comune/crissolo.html",
-      "name": "Eventi e sagre a Crissolo 2026 | DAOP",
-      "description": "Eventi, sagre e feste a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. Date, orari e contatti, in collaborazione con chi segue la provincia.",
+      "name": "Eventi e sagre per famiglie a Crissolo 2026 | DAOP",
+      "description": "Eventi, sagre e feste per famiglie a Crissolo: 4 eventi in programma, fino al 18 agosto 2026. 4 per bambini. Date, orari e contatti, in collaborazione…",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -579,7 +608,7 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "url": "https://www.daop.it/eventi.html#ev-2026-08-16-giochiamo-a-basket-con-edo-kam-3841",
+          "url": "https://www.daop.it/eventi/giochiamo-a-basket-con-edo-kam-3841-crissolo.html",
           "name": "Giochiamo a Basket con \"Edo\" - KaM 3841"
         },
         {
@@ -633,7 +662,7 @@
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Crissolo</span>
     </div>
-    <h1>Eventi e sagre a Crissolo</h1>
+    <h1>Eventi e sagre per famiglie a Crissolo</h1>
     <p class="ev-when">4 eventi in programma, fino al 18 agosto 2026</p>
   </div>
 </header>
@@ -643,7 +672,7 @@
 
   <h2>In programma</h2>
   
-  <section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3956908804397429390.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Estate a Crissolo 2026</h3><p class="com-per">Dal 10 agosto al 18 agosto · 2 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">domani · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-10-il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr">Il Panino Più Lungo del Mondo! con Gaia - Pro Loco Crissolo</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">mar 18 ago · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-18-ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss">Ciao Ciao Estate! Sorprese per Tutti - Pro Loco Crissolo</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3956907714135639777.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-15-caccia-al-tesoro-kam-3841">Caccia al Tesoro - KaM 3841</a></h3><p class="com-per">Sabato 15 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3956907797677785571.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-16-giochiamo-a-basket-con-edo-kam-3841">Giochiamo a Basket con &quot;Edo&quot; - KaM 3841</a></h3><p class="com-per">Domenica 16 agosto 2026</p></div></section><h2>Come funziona a Crissolo</h2><p>I posti che tornano più spesso: <strong>Sala delle Guide di Crissolo</strong>, <strong>Salone delle Guide</strong> e <strong>Pista di pattinaggio Il Cervo di Ghiaccio</strong>.</p><p>A organizzare sono soprattutto <strong>Pro Loco Crissolo</strong>: i recapiti stanno sulla scheda di ogni evento.</p>
+  <section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3956908804397429390.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Estate a Crissolo 2026</h3><p class="com-per">Dal 10 agosto al 18 agosto · 2 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">domani · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-10-il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr">Il Panino Più Lungo del Mondo! con Gaia - Pro Loco Crissolo</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">mar 18 ago · 17:00</span><a class="com-go" href="/eventi.html#ev-2026-08-18-ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss">Ciao Ciao Estate! Sorprese per Tutti - Pro Loco Crissolo</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3956907714135639777.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-15-caccia-al-tesoro-kam-3841">Caccia al Tesoro - KaM 3841</a></h3><p class="com-per">Sabato 15 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3956907797677785571.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/giochiamo-a-basket-con-edo-kam-3841-crissolo.html">Giochiamo a Basket con &quot;Edo&quot; - KaM 3841</a></h3><p class="com-per">Domenica 16 agosto 2026</p></div></section><h2>Cosa c'è per i bambini a Crissolo</h2><p>4 appuntamenti pensati per i bambini: hanno una fascia d'età dichiarata dagli organizzatori oppure laboratori, burattini o giochi scritti nel programma. Il resto degli eventi qui sopra è comunque adatto alle famiglie.</p><section class="com-grp"><ul class="com-ev com-kids"><li><span class="com-d">domani</span><a class="com-go" href="/eventi.html#ev-2026-08-10-il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr">Il Panino Più Lungo del Mondo! con Gaia - Pro Loco Crissolo</a><span class="com-eta">3-12 anni</span></li><li><span class="com-d">sab 15 ago</span><a class="com-go" href="/eventi.html#ev-2026-08-15-caccia-al-tesoro-kam-3841">Caccia al Tesoro - KaM 3841</a><span class="com-eta">0-14 anni (bambini accompagnati dai genitori)</span></li><li><span class="com-d">dom 16 ago</span><a class="com-go" href="/eventi/giochiamo-a-basket-con-edo-kam-3841-crissolo.html">Giochiamo a Basket con &quot;Edo&quot; - KaM 3841</a><span class="com-eta">5-99 anni</span></li><li><span class="com-d">mar 18 ago</span><a class="com-go" href="/eventi.html#ev-2026-08-18-ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss">Ciao Ciao Estate! Sorprese per Tutti - Pro Loco Crissolo</a><span class="com-eta">3-12 anni</span></li></ul></section><h2>Come funziona a Crissolo</h2><p>I posti che tornano più spesso: <strong>Sala delle Guide di Crissolo</strong>, <strong>Salone delle Guide</strong> e <strong>Pista di pattinaggio Il Cervo di Ghiaccio</strong>.</p><p>A organizzare sono soprattutto <strong>Pro Loco Crissolo</strong>: i recapiti stanno sulla scheda di ogni evento.</p>
 
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>

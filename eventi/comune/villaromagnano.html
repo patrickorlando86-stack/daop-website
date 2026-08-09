@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eventi e sagre a Villaromagnano 2026 | DAOP</title>
-<meta name="description" content="Eventi, sagre e feste a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. Date, orari e contatti, controllati uno per uno da DAOP.">
+<title>Eventi e sagre per famiglie a Villaromagnano 2026 | DAOP</title>
+<meta name="description" content="Eventi, sagre e feste per famiglie a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. 3 per bambini. Date, orari e contatti,…">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/eventi/comune/villaromagnano.html">
-<meta property="og:title" content="Eventi e sagre a Villaromagnano 2026 | DAOP">
-<meta property="og:description" content="Eventi, sagre e feste a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. Date, orari e contatti, controllati uno per uno da DAOP.">
+<meta property="og:title" content="Eventi e sagre per famiglie a Villaromagnano 2026 | DAOP">
+<meta property="og:description" content="Eventi, sagre e feste per famiglie a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. 3 per bambini. Date, orari e contatti,…">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/eventi/comune/villaromagnano.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Eventi e sagre a Villaromagnano 2026 | DAOP">
-<meta name="twitter:description" content="Eventi, sagre e feste a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. Date, orari e contatti,…">
+<meta name="twitter:title" content="Eventi e sagre per famiglie a Villaromagnano 2026 | DAOP">
+<meta name="twitter:description" content="Eventi, sagre e feste per famiglie a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. 3 per bambini.…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -355,6 +355,25 @@
 .ev-daop-voce+.ev-daop-voce{margin-top:14px}
 .ev-daop-voce h3{font-size:.98rem;margin:0 0 3px;color:var(--navy,#2d4a5c)}
 .ev-daop-voce p{margin:0 0 6px;line-height:1.6}
+/* "Ci vado con i bambini?": la domanda con cui la gente arriva, dentro il
+   corpo della pagina e non nel menu. Colore crema/oro invece del teal del
+   punto di vista DAOP: sono due blocchi diversi e non devono sembrare uno. */
+.ev-fam{border:1px solid rgba(232,149,74,.42);background:rgba(232,149,74,.08);
+  border-radius:16px;padding:20px 22px;margin:28px 0}
+.ev-fam>h2{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:0 0 12px;
+  color:var(--navy,#2d4a5c)}
+.ev-fam>h2 svg{opacity:.7}
+.ev-fam p{margin:0 0 8px;line-height:1.6}
+.ev-fam-lab{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  color:#a75b15;margin:16px 0 8px}
+.ev-fam-altri{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.ev-fam-altri li{line-height:1.45}
+.ev-fam-altri a{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
+.ev-fam-altri span{font-size:.85rem;opacity:.7}
+.ev-fam-piu{margin:10px 0 0}
+.ev-fam-tutti{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
 /* Firma editoriale: chi ha controllato e quando. */
 .ev-firma{border-top:2px solid rgba(45,74,92,.14);margin:30px 0 0;padding:16px 0 0;
   font-size:.92rem;line-height:1.6}
@@ -397,6 +416,16 @@
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
 
+/* L'elenco "cosa c'e' per i bambini": le stesse righe delle altre, ma senza il
+   wrapper .com-b - data, titolo e fascia d'eta' stanno tutti e tre in fila.
+   flex-wrap perche' sul telefono la pillola dell'eta' deve andare a capo invece
+   di strizzare il titolo a due parole per riga. */
+.com-kids li{flex-wrap:wrap;align-items:baseline}
+.com-kids .com-d{flex:0 0 auto;min-width:118px}
+.com-kids .com-go{flex:1 1 220px}
+.com-eta{flex:0 0 auto;font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  color:#a75b15;background:rgba(232,149,74,.16);border-radius:100px;padding:3px 10px}
+@media(max-width:600px){.com-kids .com-d{min-width:0}}
 /* Il ritmo verticale. Il reset del sito e' *{margin:0}, e le altre pagine si
    rimettono i margini componente per componente: qui la pagina e' fatta anche
    di prosa - titoletto, paragrafo, riga di link - e senza margini si incollava
@@ -512,8 +541,8 @@
       "@type": "CollectionPage",
       "@id": "https://www.daop.it/eventi/comune/villaromagnano.html",
       "url": "https://www.daop.it/eventi/comune/villaromagnano.html",
-      "name": "Eventi e sagre a Villaromagnano 2026 | DAOP",
-      "description": "Eventi, sagre e feste a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. Date, orari e contatti, controllati uno per uno da DAOP.",
+      "name": "Eventi e sagre per famiglie a Villaromagnano 2026 | DAOP",
+      "description": "Eventi, sagre e feste per famiglie a Villaromagnano: 9 eventi in programma, fino al 7 settembre 2026. 3 per bambini. Date, orari e contatti,…",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -609,7 +638,7 @@
         {
           "@type": "ListItem",
           "position": 8,
-          "url": "https://www.daop.it/eventi.html#ev-2026-09-06-giochi-sotto-il-campanile-raddix-group-parrocchia",
+          "url": "https://www.daop.it/eventi/giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano.html",
           "name": "Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo"
         },
         {
@@ -663,7 +692,7 @@
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Villaromagnano</span>
     </div>
-    <h1>Eventi e sagre a Villaromagnano</h1>
+    <h1>Eventi e sagre per famiglie a Villaromagnano</h1>
     <p class="ev-when">9 eventi in programma, fino al 7 settembre 2026</p>
   </div>
 </header>
@@ -673,7 +702,7 @@
 
   <h2>In programma</h2>
   
-  <section class="com-grp" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><div class="com-head"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3956487578405878241.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Festa Patronale San Michele Arcangelo in Villaromagnano</h3><p class="com-per">Dal 29 agosto al 7 settembre · 7 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 29 ago · 19:00</span><a class="com-go" href="/eventi/serata-gastronomica-con-dj-set-sabato-29-agosto-villaromagnano.html">Serata gastronomica con DJ SET - Sabato 29 Agosto</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">dom 30 ago · 17:30</span><a class="com-go" href="/eventi/ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano.html">Ass. Sarina Burattini e Serata gastronomica con DJ SET - Domenica 30 Agosto</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 15:30</span><a class="com-go" href="/eventi.html#ev-2026-09-05-asd-villaromagnano-festeggiamo-i-30-anni">ASD Villaromagnano: Festeggiamo i 30 anni</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 11:00</span><a class="com-go" href="/eventi.html#ev-2026-09-05-inaugurazione-mostra-di-pittura-oltre-la-tela">Inaugurazione Mostra di Pittura &#x27;Oltre la tela&#x27;</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 21:00</span><a class="com-go" href="/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html">S. Messa Solenne, Processione con Banda Pozzolese e Banco di Beneficenza</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">dom 6 set</span><a class="com-go" href="/eventi/fiera-e-street-food-domenica-6-settembre-villaromagnano.html">Fiera e Street Food - Domenica 6 Settembre</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">lun 7 set · 10:00</span><a class="com-go" href="/eventi/street-food-showlab-con-nico-franz-e-presentazione-villaromagnano.html">Street Food, ShowLab con Nico &amp; Franz e presentazione ASD Villaromagnano -…</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3938848443469937906.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-30-piru-e-il-cavaliere-di-mezzotacco-compagnia-walter">Baracche d&#x27;Estate</a></h3><p class="com-per">Domenica 30 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3954915799598260727.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-09-06-giochi-sotto-il-campanile-raddix-group-parrocchia">Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo</a></h3><p class="com-per">Domenica 6 settembre 2026</p></div></section><h2>Come funziona a Villaromagnano</h2><p>I posti che tornano più spesso: <strong>S.M.S. Villaromagnano</strong>, <strong>S.O.M.S.</strong>, <strong>Campo Sportivo L. Guerci</strong> e <strong>Campo Sportivo Parrocchiale</strong>.</p>
+  <section class="com-grp" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><div class="com-head"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3956487578405878241.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Festa Patronale San Michele Arcangelo in Villaromagnano</h3><p class="com-per">Dal 29 agosto al 7 settembre · 7 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 29 ago · 19:00</span><a class="com-go" href="/eventi/serata-gastronomica-con-dj-set-sabato-29-agosto-villaromagnano.html">Serata gastronomica con DJ SET - Sabato 29 Agosto</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">dom 30 ago · 17:30</span><a class="com-go" href="/eventi/ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano.html">Ass. Sarina Burattini e Serata gastronomica con DJ SET - Domenica 30 Agosto</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 15:30</span><a class="com-go" href="/eventi.html#ev-2026-09-05-asd-villaromagnano-festeggiamo-i-30-anni">ASD Villaromagnano: Festeggiamo i 30 anni</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 11:00</span><a class="com-go" href="/eventi.html#ev-2026-09-05-inaugurazione-mostra-di-pittura-oltre-la-tela">Inaugurazione Mostra di Pittura &#x27;Oltre la tela&#x27;</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">sab 5 set · 21:00</span><a class="com-go" href="/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html">S. Messa Solenne, Processione con Banda Pozzolese e Banco di Beneficenza</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">dom 6 set</span><a class="com-go" href="/eventi/fiera-e-street-food-domenica-6-settembre-villaromagnano.html">Fiera e Street Food - Domenica 6 Settembre</a></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><span class="com-b"><span class="com-d">lun 7 set · 10:00</span><a class="com-go" href="/eventi/street-food-showlab-con-nico-franz-e-presentazione-villaromagnano.html">Street Food, ShowLab con Nico &amp; Franz e presentazione ASD Villaromagnano -…</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3938848443469937906.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-08-30-piru-e-il-cavaliere-di-mezzotacco-compagnia-walter">Baracche d&#x27;Estate</a></h3><p class="com-per">Domenica 30 agosto 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3954915799598260727.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano.html">Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo</a></h3><p class="com-per">Domenica 6 settembre 2026</p></div></section><h2>Cosa c'è per i bambini a Villaromagnano</h2><p>3 appuntamenti pensati per i bambini: hanno una fascia d'età dichiarata dagli organizzatori oppure laboratori, burattini o giochi scritti nel programma. Il resto degli eventi qui sopra è comunque adatto alle famiglie.</p><section class="com-grp"><ul class="com-ev com-kids"><li><span class="com-d">dom 30 ago</span><a class="com-go" href="/eventi/ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano.html">Ass. Sarina Burattini e Serata gastronomica con DJ SET - Domenica 30 Agosto</a></li><li><span class="com-d">dom 30 ago</span><a class="com-go" href="/eventi.html#ev-2026-08-30-piru-e-il-cavaliere-di-mezzotacco-compagnia-walter">Pirù e il Cavaliere di Mezzotacco - Compagnia Walter Broggini</a><span class="com-eta">4-12 anni</span></li><li><span class="com-d">dom 6 set</span><a class="com-go" href="/eventi/giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano.html">Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo</a><span class="com-eta">5-12 anni</span></li></ul></section><h2>Come funziona a Villaromagnano</h2><p>I posti che tornano più spesso: <strong>S.M.S. Villaromagnano</strong>, <strong>S.O.M.S.</strong>, <strong>Campo Sportivo L. Guerci</strong> e <strong>Campo Sportivo Parrocchiale</strong>.</p>
 
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>

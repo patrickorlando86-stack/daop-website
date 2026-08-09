@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eventi e sagre a Tortona 2026 | DAOP</title>
-<meta name="description" content="Eventi, sagre e feste a Tortona: 6 eventi in programma, fino al 4 settembre 2026. Date, orari e contatti, controllati uno per uno da DAOP.">
+<title>Eventi e sagre per famiglie a Tortona 2026 | DAOP</title>
+<meta name="description" content="Eventi, sagre e feste per famiglie a Tortona: 6 eventi in programma, fino al 4 settembre 2026. 5 per bambini. Date, orari e contatti, controllati uno…">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/eventi/comune/tortona.html">
-<meta property="og:title" content="Eventi e sagre a Tortona 2026 | DAOP">
-<meta property="og:description" content="Eventi, sagre e feste a Tortona: 6 eventi in programma, fino al 4 settembre 2026. Date, orari e contatti, controllati uno per uno da DAOP.">
+<meta property="og:title" content="Eventi e sagre per famiglie a Tortona 2026 | DAOP">
+<meta property="og:description" content="Eventi, sagre e feste per famiglie a Tortona: 6 eventi in programma, fino al 4 settembre 2026. 5 per bambini. Date, orari e contatti, controllati uno…">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/eventi/comune/tortona.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Eventi e sagre a Tortona 2026 | DAOP">
-<meta name="twitter:description" content="Eventi, sagre e feste a Tortona: 6 eventi in programma, fino al 4 settembre 2026. Date, orari e contatti, controllati…">
+<meta name="twitter:title" content="Eventi e sagre per famiglie a Tortona 2026 | DAOP">
+<meta name="twitter:description" content="Eventi, sagre e feste per famiglie a Tortona: 6 eventi in programma, fino al 4 settembre 2026. 5 per bambini. Date,…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -355,6 +355,25 @@
 .ev-daop-voce+.ev-daop-voce{margin-top:14px}
 .ev-daop-voce h3{font-size:.98rem;margin:0 0 3px;color:var(--navy,#2d4a5c)}
 .ev-daop-voce p{margin:0 0 6px;line-height:1.6}
+/* "Ci vado con i bambini?": la domanda con cui la gente arriva, dentro il
+   corpo della pagina e non nel menu. Colore crema/oro invece del teal del
+   punto di vista DAOP: sono due blocchi diversi e non devono sembrare uno. */
+.ev-fam{border:1px solid rgba(232,149,74,.42);background:rgba(232,149,74,.08);
+  border-radius:16px;padding:20px 22px;margin:28px 0}
+.ev-fam>h2{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:0 0 12px;
+  color:var(--navy,#2d4a5c)}
+.ev-fam>h2 svg{opacity:.7}
+.ev-fam p{margin:0 0 8px;line-height:1.6}
+.ev-fam-lab{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  color:#a75b15;margin:16px 0 8px}
+.ev-fam-altri{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.ev-fam-altri li{line-height:1.45}
+.ev-fam-altri a{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
+.ev-fam-altri span{font-size:.85rem;opacity:.7}
+.ev-fam-piu{margin:10px 0 0}
+.ev-fam-tutti{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
 /* Firma editoriale: chi ha controllato e quando. */
 .ev-firma{border-top:2px solid rgba(45,74,92,.14);margin:30px 0 0;padding:16px 0 0;
   font-size:.92rem;line-height:1.6}
@@ -397,6 +416,16 @@
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
 
+/* L'elenco "cosa c'e' per i bambini": le stesse righe delle altre, ma senza il
+   wrapper .com-b - data, titolo e fascia d'eta' stanno tutti e tre in fila.
+   flex-wrap perche' sul telefono la pillola dell'eta' deve andare a capo invece
+   di strizzare il titolo a due parole per riga. */
+.com-kids li{flex-wrap:wrap;align-items:baseline}
+.com-kids .com-d{flex:0 0 auto;min-width:118px}
+.com-kids .com-go{flex:1 1 220px}
+.com-eta{flex:0 0 auto;font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  color:#a75b15;background:rgba(232,149,74,.16);border-radius:100px;padding:3px 10px}
+@media(max-width:600px){.com-kids .com-d{min-width:0}}
 /* Il ritmo verticale. Il reset del sito e' *{margin:0}, e le altre pagine si
    rimettono i margini componente per componente: qui la pagina e' fatta anche
    di prosa - titoletto, paragrafo, riga di link - e senza margini si incollava
@@ -512,8 +541,8 @@
       "@type": "CollectionPage",
       "@id": "https://www.daop.it/eventi/comune/tortona.html",
       "url": "https://www.daop.it/eventi/comune/tortona.html",
-      "name": "Eventi e sagre a Tortona 2026 | DAOP",
-      "description": "Eventi, sagre e feste a Tortona: 6 eventi in programma, fino al 4 settembre 2026. Date, orari e contatti, controllati uno per uno da DAOP.",
+      "name": "Eventi e sagre per famiglie a Tortona 2026 | DAOP",
+      "description": "Eventi, sagre e feste per famiglie a Tortona: 6 eventi in programma, fino al 4 settembre 2026. 5 per bambini. Date, orari e contatti, controllati uno…",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -567,13 +596,13 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "url": "https://www.daop.it/eventi.html#ev-2026-08-20-le-regole-della-mia-citta-gli-esplorattori",
+          "url": "https://www.daop.it/eventi/le-regole-della-mia-citta-gli-esplorattori-tortona.html",
           "name": "Le regole della mia città! - Gli EsplorAttori"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "url": "https://www.daop.it/eventi.html#ev-2026-08-24-alla-ri-scoperta-delle-favole-disney",
+          "url": "https://www.daop.it/eventi/alla-ri-scoperta-delle-favole-disney-tortona.html",
           "name": "Alla (Ri)scoperta delle Favole Disney"
         },
         {
@@ -585,7 +614,7 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "url": "https://www.daop.it/eventi.html#ev-2026-08-27-la-mostra-gli-esplorattori",
+          "url": "https://www.daop.it/eventi/la-mostra-gli-esplorattori-tortona.html",
           "name": "La Mostra - Gli EsplorAttori"
         },
         {
@@ -597,7 +626,7 @@
         {
           "@type": "ListItem",
           "position": 6,
-          "url": "https://www.daop.it/eventi.html#ev-2026-09-04-stratortona-2026-croce-rossa-italiana-comitato-di",
+          "url": "https://www.daop.it/eventi/stratortona-croce-rossa-italiana-comitato-di-torto.html",
           "name": "StraTortona 2026 - Croce Rossa Italiana Comitato di Tortona"
         }
       ]
@@ -645,7 +674,7 @@
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Tortona</span>
     </div>
-    <h1>Eventi e sagre a Tortona</h1>
+    <h1>Eventi e sagre per famiglie a Tortona</h1>
     <p class="ev-when">6 eventi in programma, fino al 4 settembre 2026</p>
   </div>
 </header>
@@ -655,7 +684,7 @@
 
   <h2>In programma</h2>
   
-  <section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3948230743651728390.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Gli EsplorAttori</h3><p class="com-per">Dal 20 agosto al 27 agosto · 2 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">gio 20 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-20-le-regole-della-mia-citta-gli-esplorattori">Le regole della mia città! - Gli EsplorAttori</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">gio 27 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-27-la-mostra-gli-esplorattori">La Mostra - Gli EsplorAttori</a></span></li></ul></section><section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><div class="com-b"><h3>Alla (Ri)scoperta delle Favole Disney</h3><p class="com-per">Dal 24 agosto al 31 agosto · 3 appuntamenti</p></div></div><ul class="com-ev"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-th is-ph" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="com-b"><span class="com-d">lun 24 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-24-alla-ri-scoperta-delle-favole-disney">Alla (Ri)scoperta delle Favole Disney</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3928097704112146022.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 24 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-24-alla-ri-scoperta-delle-favole-disney-alice-nel-pae">Alla (Ri)scoperta delle Favole Disney - Alice nel Paese delle Meraviglie - Il…</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3928097704112146022.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 31 ago · 18:30-22:00</span><a class="com-go" href="/eventi.html#ev-2026-08-31-serata-finale-cinema-e-pizza-disney-il-gabbiano">Serata Finale Cinema e Pizza Disney - Il Gabbiano</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3955059525435840055.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-09-04-stratortona-2026-croce-rossa-italiana-comitato-di">StraTortona 2026 - Croce Rossa Italiana Comitato di Tortona</a></h3><p class="com-per">Venerdì 4 settembre 2026</p></div></section><h2>Come funziona a Tortona</h2><p>I posti che tornano più spesso: <strong>Centro per le Famiglie C.I.S.A. di Tortona</strong>, <strong>Centro per le Famiglie CISA</strong> e <strong>Piazza Malaspina</strong>.</p>
+  <section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3948230743651728390.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3>Gli EsplorAttori</h3><p class="com-per">Dal 20 agosto al 27 agosto · 2 appuntamenti</p></div></div><ul class="com-ev is-nude"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">gio 20 ago · 10:00-11:30</span><a class="com-go" href="/eventi/le-regole-della-mia-citta-gli-esplorattori-tortona.html">Le regole della mia città! - Gli EsplorAttori</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-b"><span class="com-d">gio 27 ago · 10:00-11:30</span><a class="com-go" href="/eventi/la-mostra-gli-esplorattori-tortona.html">La Mostra - Gli EsplorAttori</a></span></li></ul></section><section class="com-grp" style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><div class="com-head"><div class="com-b"><h3>Alla (Ri)scoperta delle Favole Disney</h3><p class="com-per">Dal 24 agosto al 31 agosto · 3 appuntamenti</p></div></div><ul class="com-ev"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><span class="com-th is-ph" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="com-b"><span class="com-d">lun 24 ago · 10:00-11:30</span><a class="com-go" href="/eventi/alla-ri-scoperta-delle-favole-disney-tortona.html">Alla (Ri)scoperta delle Favole Disney</a></span></li><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3928097704112146022.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 24 ago · 10:00-11:30</span><a class="com-go" href="/eventi.html#ev-2026-08-24-alla-ri-scoperta-delle-favole-disney-alice-nel-pae">Alla (Ri)scoperta delle Favole Disney - Alice nel Paese delle Meraviglie - Il…</a></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3928097704112146022.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 31 ago · 18:30-22:00</span><a class="com-go" href="/eventi.html#ev-2026-08-31-serata-finale-cinema-e-pizza-disney-il-gabbiano">Serata Finale Cinema e Pizza Disney - Il Gabbiano</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3955059525435840055.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/stratortona-croce-rossa-italiana-comitato-di-torto.html">StraTortona 2026 - Croce Rossa Italiana Comitato di Tortona</a></h3><p class="com-per">Venerdì 4 settembre 2026</p></div></section><h2>Cosa c'è per i bambini a Tortona</h2><p>5 appuntamenti pensati per i bambini: hanno una fascia d'età dichiarata dagli organizzatori oppure laboratori, burattini o giochi scritti nel programma. Il resto degli eventi qui sopra è comunque adatto alle famiglie.</p><section class="com-grp"><ul class="com-ev com-kids"><li><span class="com-d">gio 20 ago</span><a class="com-go" href="/eventi/le-regole-della-mia-citta-gli-esplorattori-tortona.html">Le regole della mia città! - Gli EsplorAttori</a><span class="com-eta">7-10 anni</span></li><li><span class="com-d">lun 24 ago</span><a class="com-go" href="/eventi/alla-ri-scoperta-delle-favole-disney-tortona.html">Alla (Ri)scoperta delle Favole Disney</a><span class="com-eta">2-5 anni</span></li><li><span class="com-d">lun 24 ago</span><a class="com-go" href="/eventi.html#ev-2026-08-24-alla-ri-scoperta-delle-favole-disney-alice-nel-pae">Alla (Ri)scoperta delle Favole Disney - Alice nel Paese delle Meraviglie - Il…</a><span class="com-eta">2-5 anni</span></li><li><span class="com-d">gio 27 ago</span><a class="com-go" href="/eventi/la-mostra-gli-esplorattori-tortona.html">La Mostra - Gli EsplorAttori</a><span class="com-eta">7-10 anni</span></li><li><span class="com-d">lun 31 ago</span><a class="com-go" href="/eventi.html#ev-2026-08-31-serata-finale-cinema-e-pizza-disney-il-gabbiano">Serata Finale Cinema e Pizza Disney - Il Gabbiano</a><span class="com-eta">2-5 anni</span></li></ul></section><h2>Come funziona a Tortona</h2><p>I posti che tornano più spesso: <strong>Centro per le Famiglie C.I.S.A. di Tortona</strong>, <strong>Centro per le Famiglie CISA</strong> e <strong>Piazza Malaspina</strong>.</p>
 
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>

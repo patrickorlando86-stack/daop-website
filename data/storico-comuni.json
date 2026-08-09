@@ -20,7 +20,7 @@
     "manifest": "Acqui Wine Days",
     "nome": "Acqui Wine Days",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-08"
    },
    "aurum-mostra-personale-di-ezio-e-marco-gaviglio-acqui-terme": {
@@ -136,7 +136,7 @@
     "manifest": "Festa di Albaretto",
     "nome": "Passeggiata a Cavallo con Axel - Circolo La Torre",
     "organizza": "Circolo La Torre",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-04"
    }
   },
@@ -181,7 +181,7 @@
     "manifest": "",
     "nome": "Alecomics Festival 2026",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-05"
    },
    "buen-camino-alessandria": {
@@ -303,7 +303,7 @@
     "manifest": "Teatro in Alta Langa Estate 2026",
     "nome": "Fagiolino Casaro - Teatro Medico Ipnotico",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-23"
    }
   },
@@ -382,7 +382,7 @@
     "manifest": "Agosto Letterario",
     "nome": "Agosto Letterario",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-22"
    },
    "pompieropoli-buttigliera-buttigliera-d-asti": {
@@ -478,7 +478,7 @@
     "manifest": "",
     "nome": "La Scala del Re al Castello di Carrù",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-31"
    }
   },
@@ -545,7 +545,7 @@
     "manifest": "Estate a Casalnoceto 2026",
     "nome": "Casalnoceto Kids - Comune di Casalnoceto",
     "organizza": "Comune di Casalnoceto",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-01"
    },
    "cena-in-piazza-musica-con-nico-e-franz-casalnoceto": {
@@ -679,7 +679,7 @@
     "manifest": "In Famiglia a Casteldelfino",
     "nome": "Guida per un giorno - Parco del Monviso",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-19"
    },
    "una-storia-tira-l-altra-seguendo-il-richiamo-del-b-casteldelfino": {
@@ -690,7 +690,7 @@
     "manifest": "In Famiglia a Casteldelfino",
     "nome": "Una storia tira l'altra... seguendo il richiamo del bosco - Parco del Monviso",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-14"
    }
   },
@@ -837,7 +837,7 @@
     "manifest": "",
     "nome": "Benvenuto Ufficiale alla Leva 2008 - Pro Loco Ceresole Alba",
     "organizza": "Pro Loco Ceresole Alba",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-06"
    },
    "consegna-dei-libri-pro-loco-ceresole-alba": {
@@ -1121,7 +1121,7 @@
     "manifest": "",
     "nome": "Giochiamo a Basket con \"Edo\" - KaM 3841",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-16"
    },
    "il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr-crissolo": {
@@ -1316,7 +1316,7 @@
     "manifest": "Emozioni & Avventura in Valle Varaita",
     "nome": "Sulla pista dello Skills bike park - Attività guidata per bambini e ragazzi in MTB",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-13"
    }
   },
@@ -1405,7 +1405,7 @@
     "manifest": "",
     "nome": "Letture ad Alta Voce - Estate di Storie",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-16"
    }
   },
@@ -1439,7 +1439,7 @@
     "manifest": "Castelli Aperti 2026",
     "nome": "Castello di Monastero Bormida - Castelli Aperti",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-16"
    },
    "cinema-sotto-le-stelle-monastero-bormida": {
@@ -1467,7 +1467,7 @@
     "manifest": "",
     "nome": "Laboratorio di Carta Riciclata - Il Melograno Società Cooperativa Sociale",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-14"
    }
   },
@@ -1484,7 +1484,7 @@
     "manifest": "Mongardino Agosto 2026",
     "nome": "Mongardino Agosto 2026",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-24"
    },
    "pigiama-party-pro-loco-mongardino": {
@@ -1663,7 +1663,7 @@
     "manifest": "La Domenica della Festa dei Borghi",
     "nome": "Cinema all'aperto: Bad Guys - Troppo Cattivi - Oratorio Don Bosco",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-09"
    }
   },
@@ -1713,7 +1713,7 @@
     "manifest": "",
     "nome": "Mostra delle Illusioni - Museo dei Campionissimi",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-01-01"
    },
    "pedalata-ecologica-merella-plogging-smiling-biking-novi-ligure": {
@@ -1825,7 +1825,7 @@
     "manifest": "",
     "nome": "Parco Scenico! - Zenzero",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-09"
    }
   },
@@ -2014,7 +2014,7 @@
     "manifest": "",
     "nome": "Vivi Pozzolo Estate nella Corte del Castello",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-07-13"
    }
   },
@@ -2353,7 +2353,7 @@
     "manifest": "",
     "nome": "Mostra mercato piccoli animali - Città di San Damiano d'Asti",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-12-06"
    },
    "ocr-power-camp-san-damiano-d-asti": {
@@ -2963,7 +2963,7 @@
     "manifest": "",
     "nome": "Alla (Ri)scoperta delle Favole Disney",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-24"
    },
    "la-mostra-gli-esplorattori-tortona": {
@@ -2974,7 +2974,7 @@
     "manifest": "Gli EsplorAttori",
     "nome": "La Mostra - Gli EsplorAttori",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-27"
    },
    "le-regole-della-mia-citta-gli-esplorattori-tortona": {
@@ -2985,7 +2985,7 @@
     "manifest": "Gli EsplorAttori",
     "nome": "Le regole della mia città! - Gli EsplorAttori",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-20"
    },
    "serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona": {
@@ -3007,7 +3007,7 @@
     "manifest": "",
     "nome": "StraTortona 2026 - Croce Rossa Italiana Comitato di Tortona",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-04"
    }
   },
@@ -3102,7 +3102,7 @@
     "manifest": "",
     "nome": "Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-06"
    },
    "inaugurazione-mostra-di-pittura-oltre-la-tela-villaromagnano": {

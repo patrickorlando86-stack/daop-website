@@ -1,6 +1,8 @@
 {
  "eventi/oggi.html": "2026-08-09",
  "eventi/weekend.html": "2026-08-09",
+ "eventi\\oggi.html": "2026-08-09",
+ "eventi\\weekend.html": "2026-08-09",
  "sagre-provincia-alessandria.html": "2026-08-09",
  "sagre-provincia-asti.html": "2026-08-09",
  "sagre-provincia-cuneo.html": "2026-08-09"

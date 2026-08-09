@@ -927,10 +927,22 @@ def render_jsonld(events):
 # zero clic, perche' ci arriviamo con l'agenda generica in ottava posizione.
 # Una pagina per evento risponde esattamente a quella query.
 #
-# Solo sagre e feste: e' dove abbiamo insieme la domanda di ricerca e le
-# descrizioni piu' ricche (18 su 31 sopra i 300 caratteri, contro una mediana
-# di 212 sul totale). Generare tutti e 143 gli eventi produrrebbe decine di
-# pagine-template magre, che Google penalizza oltre la singola pagina.
+# Per un anno la regola e' stata "solo Sagra & Festa", con la motivazione che
+# generare tutti gli eventi avrebbe prodotto pagine-template magre. I dati del
+# 09/08/2026 dicono che quella motivazione non regge: la mediana della
+# descrizione e' 187 caratteri per le sagre e 223 per i laboratori. Le sagre non
+# vincono perche' le loro pagine siano piu' ricche - vincono perche' hanno un
+# nome che qualcuno digita ("festa cassinasco 2026", CTR 24%).
+#
+# La discriminante vera e' quindi la DOMANDA NOMINALE, non la categoria: un nome
+# proprio che si cerca, piu' abbastanza testo da non essere il volantino
+# ribattuto. Sotto i 250 caratteri la pagina non ha niente da dire che l'agenda
+# non dica meglio - ed e' una soglia piu' severa della mediana delle sagre che
+# gia' pubblichiamo, non piu' generosa.
+#
+# Serve anche a coprire un buco: fino a ieri i 34 laboratori, i 35 spettacoli e
+# i 27 eventi di cultura in agenda non avevano NESSUNA pagina, cioe' proprio la
+# parte pensata per i bambini restava invisibile ai motori.
 #
 # Le pagine NON vengono mai cancellate. normalize() scarta gli eventi passati,
 # quindi una sagra conclusa sparisce dalla sorgente: rigenerare solo dal feed
@@ -938,17 +950,99 @@ def render_jsonld(events):
 # data/pagine-evento.json conserva i dati, la pagina resta online marcata
 # "edizione conclusa" e se l'anno dopo la sagra torna la stessa URL si
 # aggiorna, conservando l'autorita' accumulata.
+#
+# E' anche il motivo per cui questa regola va allargata con prudenza: una pagina
+# sbagliata resta online per sempre. Ogni run stampa l'elenco di quelle aperte
+# dal criterio nominale, cosi' si vede cosa e' entrato finche' sono poche.
 # ---------------------------------------------------------------------------
 PAGINE_DIR = os.path.join(ROOT, "eventi")
 REGISTRO_PATH = os.path.join(ROOT, "data", "pagine-evento.json")
 SAGRA_KW = ('sagra', 'festa', 'palio', 'fiera')
+
+MIN_DESCR_PAGINA = 250   # caratteri: sopra la mediana delle sagre gia' online
+
+# Parole che da sole non fanno un nome che qualcuno digita. "Serata Giochi" e
+# "Caccia al Tesoro" sono etichette, non nomi: ce n'e' una in ogni paese e
+# nessuno le cerca. "Mostra delle Illusioni" invece ha "Illusioni", che e' la
+# parola con cui la si cerca. La lista tiene solo teste generiche: se dopo
+# averle tolte non resta niente, non c'e' un nome da posizionare.
+NOMI_GENERICI = frozenset("""
+laboratorio laboratori mostra mostre mercato mercatino mercatini serata serate
+gioco giochi giochiamo caccia tesoro lettura letture cinema film proiezione
+passeggiata passeggiate camminata concerto concerti spettacolo spettacoli
+corso corsi torneo tornei gara gare escursione escursioni visita visite
+aperitivo cena cene pranzo pranzi merenda colazione degustazione degustazioni
+notte notti giornata giornate pomeriggio mattina mattinata sera serale
+estate autunno inverno primavera gennaio febbraio marzo aprile maggio giugno
+luglio agosto settembre ottobre novembre dicembre
+bambini bambine bambino famiglie famiglia ragazzi ragazze adulti piccoli grandi
+apertura chiusura inaugurazione incontro incontri attivita evento eventi
+festa feste sagra sagre fiera fiere palio raduno ritrovo appuntamento
+piazza piazze centro paese comune parco parchi giardino giardini campo campi
+musica musicale ballo danza teatro teatrale animazione intrattenimento
+libera libero aperta aperto grande piccola nuovo nuova primo prima
+""".split())
+
+# Articoli, preposizioni e congiunzioni: non contano ne' come nome ne' come
+# parola generica, semplicemente non pesano.
+PAROLE_VUOTE = frozenset("""
+il lo la i gli le un uno una dei del della delle degli dal dalla dai dalle
+di da a ad in con su per tra fra al allo alla ai agli alle nel nello nella
+nei negli nelle sul sullo sulla sui sugli sulle e ed o od che chi cui non
+""".split())
+
+# ORGANIZZATORE_RE taglia solo quando l'organizzatore segue un trattino, perche'
+# li' serve a ripulire il title. Qui il taglio dev'essere piu' largo: in "Serata
+# Giochi - KaM 3841 e Pro Loco Crissolo" l'organizzatore arriva dopo una "e", e
+# senza toglierlo era "Crissolo" a far sembrare cercabile un nome che non lo e'.
+RUOLO_ORGANIZZATORE_RE = re.compile(
+    r'\b(?:Pro\s*Loco|Comitato|Associazione|Circolo|Gruppo|Parrocchia|Oratorio|'
+    r'Polisportiva|Comune\s+di|A\.?S\.?D\.?)\b.*$', re.I)
+
+
+def _parole_nome(nome):
+    """Le parole del nome che possono reggere una ricerca: via l'organizzatore,
+    via l'anno e il numero di edizione, via articoli e preposizioni."""
+    n = RUOLO_ORGANIZZATORE_RE.sub(' ', nome or '').strip(' -–—')
+    n = re.sub(r'\b(?:19|20)\d{2}\b', ' ', n)
+    n = re.sub(r'(?<!\w)\d+\s*[°ºª^]', ' ', n)
+    parole = re.findall(r"[0-9A-Za-zÀ-ÿ']{2,}", n)
+    return [p for p in parole if p.lower() not in PAROLE_VUOTE]
+
+
+def _insieme_parole(nome):
+    """Le parole del nome come insieme, per riconoscere due titoli girati.
+
+    Nel foglio capita che lo stesso evento sia inserito due volte con le parole
+    in ordine diverso: sono due righe, due slug, ma una cosa sola."""
+    return frozenset(p.lower() for p in _parole_nome(nome))
+
+
+def nome_cercabile(nome):
+    """True se nel nome resta qualcosa che si puo' cercare per nome.
+
+    Serve almeno una parola di quattro LETTERE che non sia una testa generica:
+    e' quella la parola che qualcuno digita insieme al paese. Le lettere sono
+    richieste sul serio, perche' altrimenti "Serata Giochi - KaM 3841" passava
+    grazie al numero della sezione, che nessuno ha mai cercato."""
+    parole = _parole_nome(nome)
+    if len(parole) < 2:
+        return False
+    return any(sum(c.isalpha() for c in p) >= 4 and p.lower() not in NOMI_GENERICI
+               for p in parole)
 
 
 def ha_pagina(e):
     """True se l'evento merita una pagina dedicata."""
     if (e.get('categoria') or '') == 'Sagra & Festa':
         return True
-    return any(w in (e.get('nome') or '').lower() for w in SAGRA_KW)
+    nome = e.get('nome') or ''
+    if any(w in nome.lower() for w in SAGRA_KW):
+        return True
+    # Fuori dalle sagre serve tutto: un nome che si cerca E il testo per
+    # riempire la pagina. Uno dei due da solo non basta.
+    return (len((e.get('descr') or '').strip()) >= MIN_DESCR_PAGINA
+            and nome_cercabile(nome))
 
 
 # Slug che una pagina evento non puo' prendersi: /eventi/oggi.html e
@@ -1478,6 +1572,25 @@ PAGINA_CSS = """
 .ev-daop-voce+.ev-daop-voce{margin-top:14px}
 .ev-daop-voce h3{font-size:.98rem;margin:0 0 3px;color:var(--navy,#2d4a5c)}
 .ev-daop-voce p{margin:0 0 6px;line-height:1.6}
+/* "Ci vado con i bambini?": la domanda con cui la gente arriva, dentro il
+   corpo della pagina e non nel menu. Colore crema/oro invece del teal del
+   punto di vista DAOP: sono due blocchi diversi e non devono sembrare uno. */
+.ev-fam{border:1px solid rgba(232,149,74,.42);background:rgba(232,149,74,.08);
+  border-radius:16px;padding:20px 22px;margin:28px 0}
+.ev-fam>h2{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:0 0 12px;
+  color:var(--navy,#2d4a5c)}
+.ev-fam>h2 svg{opacity:.7}
+.ev-fam p{margin:0 0 8px;line-height:1.6}
+.ev-fam-lab{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+  color:#a75b15;margin:16px 0 8px}
+.ev-fam-altri{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.ev-fam-altri li{line-height:1.45}
+.ev-fam-altri a{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
+.ev-fam-altri span{font-size:.85rem;opacity:.7}
+.ev-fam-piu{margin:10px 0 0}
+.ev-fam-tutti{font-weight:600;color:var(--navy,#2d4a5c);text-decoration:underline;
+  text-underline-offset:3px}
 /* Firma editoriale: chi ha controllato e quando. */
 .ev-firma{border-top:2px solid rgba(45,74,92,.14);margin:30px 0 0;padding:16px 0 0;
   font-size:.92rem;line-height:1.6}
@@ -1592,6 +1705,125 @@ def blocco_daop(e):
     return ('<section class="ev-daop" aria-labelledby="daop-consiglio">'
             f'<h2 id="daop-consiglio">{CHECK_SVG} Il punto di vista DAOP</h2>'
             f'{corpo}</section>')
+
+
+# Le attrazioni della lista RICHIAMI che riguardano i bambini e non gli adulti.
+# Servono a distinguere "sagra dove i bambini sono tollerati" da "sagra dove per
+# i bambini c'e' qualcosa": la prima ha lo stand gastronomico, la seconda ha i
+# gonfiabili. E' una differenza che nel foglio non c'e' come colonna, ma che sta
+# scritta nelle descrizioni, e che e' esattamente la domanda di chi legge.
+RICHIAMI_BAMBINI = (
+    "laboratori per bambini", "gonfiabili", "truccabimbi", "burattini",
+    "giostre", "luna park", "mongolfiere",
+)
+
+# Sottoinsieme piu' stretto, per decidere se un evento va CONSIGLIATO ad altri
+# come "roba per bambini". Il luna park e le mongolfiere restano fuori: sono
+# attrazioni che stanno anche nelle feste pensate per gli adulti, e mettere
+# "Divina & DJ Pablo" sotto "altro per bambini qui vicino" perche' in paese
+# c'e' il luna park e' il genere di scivolone che toglie fiducia alla pagina.
+RICHIAMI_BAMBINI_FORTI = (
+    "laboratori per bambini", "gonfiabili", "truccabimbi", "burattini", "giostre",
+)
+
+
+def per_bambini(e):
+    """Le attrazioni per bambini citate nella descrizione dell'evento."""
+    return [v for v in richiami(e.get('descr'), massimo=len(RICHIAMI))
+            if v in RICHIAMI_BAMBINI]
+
+
+def e_per_bambini(e):
+    """True se l'evento e' pensato PER i bambini, non solo adatto a portarceli.
+
+    Il segnale forte e' uno dei due: una fascia d'eta' NUMERICA nel foglio
+    (qualcuno ha deciso che e' per i 3-10 anni) oppure un'attrazione dedicata ai
+    bambini scritta nella descrizione. 'Adatto famiglie: Si' da solo non basta:
+    ce l'ha il 93% delle righe, e una parola vera per il 93% dei casi non dice
+    niente. Nemmeno 'Tutte le eta'' basta, per lo stesso motivo: e' la risposta
+    che si da' quando non si e' deciso niente."""
+    return bool(fascia_eta(e.get('eta'))
+                or [v for v in per_bambini(e) if v in RICHIAMI_BAMBINI_FORTI])
+
+
+def blocco_famiglie(rec, events, oggi, hub=None):
+    """La riga che risponde alla domanda con cui la gente arriva davvero.
+
+    PERCHE' ESISTE (09/08/2026): l'86% dei clic del sito arriva sulle schede
+    evento, e il 93% degli eventi in agenda e' segnato adatto alle famiglie -
+    ma sulla scheda non c'era una parola che lo dicesse dentro il testo. Il solo
+    aggancio a DAOP era il riquadro Ginetto in fondo, al 71% della pagina.
+    Questa e' la stessa cosa detta dove si legge, e con i dati che abbiamo gia'
+    nel foglio: niente di inventato, e se non sappiamo niente non compare."""
+    adatto = (rec.get('adatto_famiglie') or '').strip()
+    eta = (rec.get('eta') or '').strip()
+    cosa = per_bambini(rec)
+    citta = (rec.get('citta') or '').strip()
+    if not si(adatto) and _key(adatto) != _key('Da verificare'):
+        return ''
+    # La soglia e' avere qualcosa di SPECIFICO da dire. "Adatto famiglie: Si" +
+    # "Tutte le eta'" ce l'ha quasi ogni riga del foglio: un riquadro che
+    # ripetesse quello su 99 schede su 100 sarebbe rumore, e la riga "Età" fra i
+    # dati lo dice gia'. Serve una fascia numerica o un'attrazione vera.
+    fascia = fascia_eta(eta)
+    if not (fascia or cosa):
+        return ''
+
+    # L'eta' si stampa nel testo del foglio ("3-10 anni"), non normalizzata: e'
+    # gia' scritta per essere letta. Ma solo quando e' una fascia vera, se no
+    # "Età indicata: Tutte le età" subito dopo "adatto alle famiglie" e' la
+    # stessa frase detta due volte.
+    riga_eta = f' Età indicata: {esc(eta)}.' if fascia else ''
+    righe = []
+    if si(adatto):
+        righe.append('<p>Sì: nella scheda DAOP questo evento è segnato come '
+                     f'<strong>adatto alle famiglie</strong>.{riga_eta}</p>')
+    else:
+        righe.append('<p>Non ce l\'ha ancora confermato l\'organizzatore, quindi lo '
+                     f'diciamo com\'è: <strong>da verificare</strong>.{riga_eta}'
+                     ' I recapiti per chiedere sono qui sopra.</p>')
+    if cosa:
+        righe.append(f'<p>Per i più piccoli, nel programma ci sono '
+                     f'<strong>{esc(elenco_it(cosa))}</strong>.</p>')
+
+    # Altri eventi PER bambini in zona: stessa citta' prima, poi provincia.
+    # Lo slug non basta a riconoscersi: la stessa festa compare nel foglio con
+    # le parole girate ("Al dì d'la festa - Casorzo Monferrato" e "Casorzo
+    # Monferrato al dì d'la festa"), che fanno due slug diversi. Confrontare
+    # l'insieme delle parole li riconosce uguali, che e' quello che sono; senza,
+    # la scheda consigliava se stessa come "altro per bambini qui vicino".
+    mio = rec['slug']
+    prov = (rec.get('prov') or '').upper()
+    k_citta = _key(citta)
+    miei_slug = {mio, slugify(rec.get('nome') or '')} - {''}
+    mie_parole = _insieme_parole(rec.get('nome'))
+    cand = []
+    for e in events:
+        if slug_evento(e) in miei_slug or _insieme_parole(e.get('nome')) == mie_parole:
+            continue
+        if not e_per_bambini(e):
+            continue
+        stessa = _key(e.get('citta')) == k_citta
+        if not stessa and (e.get('prov') or '').upper() != prov:
+            continue
+        cand.append((0 if stessa else 1, e['d_start'], (e.get('nome') or ''), e))
+    cand.sort(key=lambda t: t[:3])
+    if cand:
+        voci = []
+        for _, _, _, e in cand[:3]:
+            voci.append(f'<a href="{_href_evento(e)}">'
+                        f'{esc(trunc(e.get("nome") or "", 52))}</a>'
+                        f' <span>{esc(e.get("citta") or "")}</span>')
+        mio_hub = (hub or {}).get(k_citta)
+        tutti = (f'<a class="ev-fam-tutti" href="/eventi/comune/{mio_hub["slug"]}.html">'
+                 f'Tutti gli eventi{a_citta(mio_hub["nome"])}</a>' if mio_hub else '')
+        righe.append('<p class="ev-fam-lab">Altro per bambini qui vicino</p>'
+                     f'<ul class="ev-fam-altri">{"".join(f"<li>{v}</li>" for v in voci)}</ul>'
+                     + (f'<p class="ev-fam-piu">{tutti}</p>' if tutti else ''))
+
+    return ('<section class="ev-fam" aria-labelledby="ev-fam-t">'
+            f'<h2 id="ev-fam-t">{USER_SVG} Ci vado con i bambini?</h2>'
+            + "".join(righe) + '</section>')
 
 
 def firma_daop(rec, oggi):
@@ -1821,6 +2053,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
                         ensure_ascii=False, indent=2)
 
     corpo = "".join(f"<p>{esc(p)}</p>" for p in re.split(r'\n{2,}', descr_txt) if p.strip())
+    famiglie = blocco_famiglie(rec, vicini, oggi, hub=hub) if vicini else ''
     consiglio = blocco_daop(e)
     # "Consigliato DAOP" nel foglio e' gia' un giudizio, dato riga per riga:
     # tenerlo dentro il database e non mostrarlo era buttarlo via.
@@ -1881,6 +2114,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   <div class="ev-body">
     {corpo}
   </div>
+  {famiglie}
   {consiglio}
   {azioni}
   {firma}
@@ -1937,6 +2171,20 @@ def scrivi_pagine(events, hub=None):
         json.dump(reg, fh, ensure_ascii=False, indent=1, sort_keys=True)
     print(f"[genera_eventi] pagine evento: {len(reg)} totali "
           f"({nuovi} nuove, {cambiate} riscritte, {conclusi} concluse)")
+    # Le pagine aperte dal criterio nominale invece che dalla categoria: sono la
+    # parte nuova e la piu' facile da sbagliare, e una pagina evento non si
+    # cancella piu'. Stamparle per nome e' l'unico modo perche' qualcuno se ne
+    # accorga finche' sono poche.
+    nominali = [r for r in reg.values()
+                if (r.get('categoria') or '') != 'Sagra & Festa'
+                and not any(w in (r.get('nome') or '').lower() for w in SAGRA_KW)]
+    if nominali:
+        print(f"[genera_eventi] di cui {len(nominali)} aperte dal nome proprio "
+              f"(non sagre):")
+        for r in sorted(nominali, key=lambda r: (r.get('citta') or '', r.get('nome') or '')):
+            print(f"[genera_eventi]   {r.get('citta') or '?'} · "
+                  f"{(r.get('nome') or '')[:56]} "
+                  f"[{r.get('categoria') or '?'}, {len((r.get('descr') or '').strip())} car]")
     # Il valore aggiunto e' l'unica cosa che un assistente non trova altrove:
     # se e' a zero la pagina resta un doppione del volantino, e va detto.
     con_giudizio = sum(1 for r in reg.values()
@@ -2634,6 +2882,16 @@ def blocco_comuni(hub):
 
 
 COMUNE_CSS = """
+/* L'elenco "cosa c'e' per i bambini": le stesse righe delle altre, ma senza il
+   wrapper .com-b - data, titolo e fascia d'eta' stanno tutti e tre in fila.
+   flex-wrap perche' sul telefono la pillola dell'eta' deve andare a capo invece
+   di strizzare il titolo a due parole per riga. */
+.com-kids li{flex-wrap:wrap;align-items:baseline}
+.com-kids .com-d{flex:0 0 auto;min-width:118px}
+.com-kids .com-go{flex:1 1 220px}
+.com-eta{flex:0 0 auto;font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  color:#a75b15;background:rgba(232,149,74,.16);border-radius:100px;padding:3px 10px}
+@media(max-width:600px){.com-kids .com-d{min-width:0}}
 /* Il ritmo verticale. Il reset del sito e' *{margin:0}, e le altre pagine si
    rimettono i margini componente per componente: qui la pagina e' fatta anche
    di prosa - titoletto, paragrafo, riga di link - e senza margini si incollava
@@ -2858,9 +3116,20 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     # provincia che segue una pagina non nostra. Una pagina DAOP che elenca il
     # lavoro di qualcun altro senza dirlo e' esattamente quello che non facciamo.
     fonte = fonte_provincia(dati['prov'])
-    base = f"Eventi e sagre{a_citta(citta)} {anno}"
-    titolo = next((t for t in (f"{base} | DAOP", base) if len(t) <= MAX_TITLE),
-                  trunc(base, MAX_TITLE))
+    # "sagre" nel title non si tocca: "sagre <comune> 2026" e' il modello di
+    # query che porta i clic, misurato. "per famiglie" si aggiunge, non
+    # sostituisce - e solo dove e' vero, cioe' dove la maggioranza degli eventi
+    # in programma e' segnata adatta alle famiglie nel foglio. Su un comune con
+    # tre concerti serali sarebbe una promessa che la pagina non mantiene.
+    adatti = sum(1 for e in futuri if si(e.get('adatto_famiglie')))
+    famiglie_vere = bool(futuri) and adatti >= max(1, len(futuri) * 0.6)
+    bambini = [e for e in futuri if e_per_bambini(e)]
+    basi = ([f"Eventi e sagre per famiglie{a_citta(citta)} {anno}"] if famiglie_vere
+            else []) + [f"Eventi e sagre{a_citta(citta)} {anno}"]
+    titolo = next((t for b in basi for t in (f"{b} | DAOP", b) if len(t) <= MAX_TITLE),
+                  trunc(basi[-1], MAX_TITLE))
+    h1 = (f"Eventi e sagre per famiglie{a_citta(citta)}" if famiglie_vere
+          else f"Eventi e sagre{a_citta(citta)}")
     gruppi = _gruppi_comune(futuri)
     salita = _com_poster_pagina(gruppi)
 
@@ -2977,6 +3246,27 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             f'<a href="{esc(salita)}" target="_blank" rel="noopener">Aprila grande</a>'
             f'</figcaption></figure>')
 
+    # Cosa c'e' per i bambini, in chiaro. E' la sezione che questa pagina puo'
+    # avere e che l'agenda generale non puo': l'agenda mescola tre province, qui
+    # invece "laboratori per bambini a Tortona" e' una riga vera con sotto
+    # l'elenco. Compare solo se gli eventi ci sono davvero.
+    if bambini:
+        voci = "".join(
+            f'<li><span class="com-d">{esc(_quando_breve(e, oggi))}</span>'
+            f'<a class="com-go" href="{_href_evento(e)}">'
+            f'{esc(trunc(e.get("nome") or "", 80))}</a>'
+            + (f'<span class="com-eta">{esc((e.get("eta") or "").strip())}</span>'
+               if fascia_eta(e.get('eta')) else '')
+            + '</li>' for e in bambini[:10])
+        quanti_b = (f"{len(bambini)} appuntamenti pensati per i bambini"
+                    if len(bambini) > 1 else "Un appuntamento pensato per i bambini")
+        blocchi.append(
+            f'<h2>Cosa c\'è per i bambini{a_citta(citta)}</h2>'
+            f'<p>{quanti_b}: hanno una fascia d\'età dichiarata dagli organizzatori '
+            f'oppure laboratori, burattini o giochi scritti nel programma. '
+            f'Il resto degli eventi qui sopra è comunque adatto alle famiglie.</p>'
+            f'<section class="com-grp"><ul class="com-ev com-kids">{voci}</ul></section>')
+
     ric = _ricorrenti(archivio)
     if ric:
         righe = "".join(
@@ -3028,7 +3318,10 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
                    f'@{esc(fonte["ig"])}</a>, {chi}. '
                    f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
 
-    descr = trunc(f"Eventi, sagre e feste{a_citta(citta)}: {sotto.lower()}. "
+    per_chi = " per famiglie" if famiglie_vere else ""
+    quanti_bimbi = f" {len(bambini)} per bambini." if bambini else ""
+    descr = trunc(f"Eventi, sagre e feste{per_chi}{a_citta(citta)}: "
+                  f"{sotto.lower()}.{quanti_bimbi} "
                   + ("Date, orari e contatti, controllati uno per uno da DAOP."
                      if not fonte or fonte['nostra'] else
                      "Date, orari e contatti, in collaborazione con chi segue "
@@ -3100,7 +3393,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(citta)}</span>
     </div>
-    <h1>Eventi e sagre{a_citta(citta)}</h1>
+    <h1>{esc(h1)}</h1>
     <p class="ev-when">{esc(sotto)}</p>
   </div>
 </header>
