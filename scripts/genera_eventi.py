@@ -961,6 +961,18 @@ SAGRA_KW = ('sagra', 'festa', 'palio', 'fiera')
 
 MIN_DESCR_PAGINA = 250   # caratteri: sopra la mediana delle sagre gia' online
 
+# Soglia piu' bassa per gli eventi pensati per i bambini. MIN_DESCR_PAGINA e'
+# tarata sulle sagre, che nel foglio hanno la scheda lunga; laboratori,
+# spettacoli e teatro per bambini stanno intorno ai 210 caratteri e restavano
+# tutti fuori. Erano 118 eventi su 227 senza pagina propria, e sono proprio le
+# righe su cui si cerca "eventi bambini <paese>": senza pagina finiscono in
+# un'ancora #ev- dentro eventi.html, che non e' una URL a se' (non si
+# posiziona, non si manda su WhatsApp, non vale come voce di carosello - vedi
+# _voci_lista). A fare il filtro resta nome_cercabile(), non la lunghezza:
+# "Caccia al Tesoro" e "Giochi in Piazza" restano fuori, "Pompieropoli" e "I
+# Musicanti di Brema" entrano.
+MIN_DESCR_BAMBINI = 120
+
 # Parole che da sole non fanno un nome che qualcuno digita. "Serata Giochi" e
 # "Caccia al Tesoro" sono etichette, non nomi: ce n'e' una in ogni paese e
 # nessuno le cerca. "Mostra delle Illusioni" invece ha "Illusioni", che e' la
@@ -1041,8 +1053,15 @@ def ha_pagina(e):
         return True
     # Fuori dalle sagre serve tutto: un nome che si cerca E il testo per
     # riempire la pagina. Uno dei due da solo non basta.
-    return (len((e.get('descr') or '').strip()) >= MIN_DESCR_PAGINA
-            and nome_cercabile(nome))
+    descr = len((e.get('descr') or '').strip())
+    if descr >= MIN_DESCR_PAGINA and nome_cercabile(nome):
+        return True
+    # Gli eventi per bambini entrano con meno testo, ma con lo stesso filtro sul
+    # nome. "Per bambini" e' il segnale forte gia' usato altrove: una fascia
+    # d'eta' NUMERICA decisa a mano nel foglio, non il flag "Adatto famiglie"
+    # che ce l'ha il 93% delle righe e quindi non distingue niente.
+    return (descr >= MIN_DESCR_BAMBINI and nome_cercabile(nome)
+            and e_per_bambini(e))
 
 
 # Slug che una pagina evento non puo' prendersi: /eventi/oggi.html e
@@ -3076,6 +3095,30 @@ def _href_evento(e):
     return f"/eventi.html#{e['anchor']}" if e.get('anchor') else "/eventi.html"
 
 
+def _voci_lista(eventi, limite=30):
+    """Le voci ItemList di una pagina elenco: SOLO gli eventi con pagina propria.
+
+    Un carosello di Google e' fatto di voci che puntano ognuna a una URL che
+    contiene a sua volta il markup Event. Un'ancora dentro l'agenda
+    (/eventi.html#ev-...) non e' una pagina a se': Google non la tratta come
+    elemento distinto, e le voci che non si risolvono non fanno partire il
+    carosello per l'INTERA lista. Su comune/acqui-terme.html erano 8 voci su 10
+    a puntare a un'ancora: la lista era lunga e inservibile.
+
+    Meglio una lista corta e vera. Gli eventi senza pagina restano visibili
+    nell'HTML della pagina, semplicemente non entrano nei dati strutturati -
+    dove non avrebbero comunque una URL da dichiarare.
+
+    Il filtro si stringe da solo man mano che ha_pagina() si allarga: la strada
+    per una lista lunga e' dare una pagina agli eventi, non dichiararli qui.
+    """
+    con_pagina = [e for e in eventi if ha_pagina(e)]
+    return [{"@type": "ListItem", "position": i + 1,
+             "url": f"{SITE_URL}{_href_evento(e)}",
+             "name": (e.get('nome') or '').strip()}
+            for i, e in enumerate(con_pagina[:limite])]
+
+
 def _quando_breve(e, oggi):
     d = e['d_start']
     if d < oggi:
@@ -3327,10 +3370,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
                      "Date, orari e contatti, in collaborazione con chi segue "
                      "la provincia."), 152)
 
-    lista = [{"@type": "ListItem", "position": i + 1,
-              "url": f"{SITE_URL}{_href_evento(e)}",
-              "name": (e.get('nome') or '').strip()}
-             for i, e in enumerate(futuri[:30])]
+    lista = _voci_lista(futuri)
     grafo = [
         {"@type": "CollectionPage", "@id": url, "url": url, "name": titolo,
          "description": descr, "inLanguage": "it-IT",
@@ -3599,10 +3639,7 @@ def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi):
             {"@type": "ListItem", "position": 2, "name": "Eventi", "item": PAGE_URL},
             {"@type": "ListItem", "position": 3, "name": crumb, "item": url}]},
     ]
-    lista = [{"@type": "ListItem", "position": i + 1,
-              "url": f"{SITE_URL}{_href_evento(e)}",
-              "name": (e.get('nome') or '').strip()}
-             for i, e in enumerate(eventi[:30])]
+    lista = _voci_lista(eventi)
     if lista:
         grafo.append({"@type": "ItemList", "name": nome_lista,
                       "numberOfItems": len(lista), "itemListElement": lista})

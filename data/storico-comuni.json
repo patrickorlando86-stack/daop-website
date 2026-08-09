@@ -393,7 +393,7 @@
     "manifest": "Pompieropoli 2026",
     "nome": "Pompieropoli 2026 - Buttigliera",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-13"
    }
   },
@@ -461,7 +461,7 @@
     "manifest": "Sarvego Festival 2026 - A naso in su",
     "nome": "Quello che (non) vedo (Barbagianni editore) - Sarvego Festival",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-22"
    }
   },
@@ -534,7 +534,7 @@
     "manifest": "Estate a Casalnoceto 2026",
     "nome": "Casalnoceto Kids",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-01"
    },
    "casalnoceto-kids-comune-di-casalnoceto": {
@@ -848,7 +848,7 @@
     "manifest": "",
     "nome": "Consegna dei Libri - Pro Loco Ceresole Alba",
     "organizza": "Pro Loco Ceresole Alba",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-06"
    }
   },
@@ -1026,7 +1026,7 @@
     "manifest": "Il Folletto Artista dell'Orto",
     "nome": "Colori dall'orto - Puraessenza",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-13"
    },
    "il-sapore-delle-emozioni-puraessenza-confreria": {
@@ -1037,7 +1037,7 @@
     "manifest": "Il Folletto Artista dell'Orto",
     "nome": "Il sapore delle emozioni - Puraessenza",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-27"
    },
    "l-energia-magica-della-frutta-puraessenza-confreria": {
@@ -1048,7 +1048,7 @@
     "manifest": "Il Folletto Artista dell'Orto",
     "nome": "L'energia magica della frutta - Puraessenza",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-20"
    }
   },
@@ -1110,7 +1110,7 @@
     "manifest": "Estate a Crissolo 2026",
     "nome": "Ciao Ciao Estate! Sorprese per Tutti - Pro Loco Crissolo",
     "organizza": "Pro Loco Crissolo",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-18"
    },
    "giochiamo-a-basket-con-edo-kam-3841-crissolo": {
@@ -1132,7 +1132,7 @@
     "manifest": "Estate a Crissolo 2026",
     "nome": "Il Panino Più Lungo del Mondo! con Gaia - Pro Loco Crissolo",
     "organizza": "Pro Loco Crissolo",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-10"
    },
    "il-villaggio-creativo-con-gaia-pro-loco-crissolo": {
@@ -1288,7 +1288,7 @@
     "manifest": "San Magno Festiona 26",
     "nome": "Giochi per Bambini e Bolle di Sapone Giganti",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-10"
    },
    "memorial-ezio-fiandino-festiona": {
@@ -1495,7 +1495,7 @@
     "manifest": "",
     "nome": "Pigiama Party - Pro Loco Mongardino",
     "organizza": "Pro Loco Mongardino",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-26"
    }
   },
@@ -1702,7 +1702,7 @@
     "manifest": "Baracche d'Estate",
     "nome": "I Musicanti di Brema - Teatrino dell'Erba Matta",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-10-24"
    },
    "mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure": {
@@ -2253,7 +2253,7 @@
     "manifest": "Un Sipario tra Cielo e Terra 2026",
     "nome": "Dolcemiele - Dispari Teatro",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-09"
    }
   },
@@ -2298,7 +2298,7 @@
     "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
     "nome": "Alla scoperta della Croce Rossa: piccoli volontari crescono",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-19"
    },
    "comitato-palio-san-damiano-d-asti": {
@@ -2320,7 +2320,7 @@
     "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
     "nome": "Giochiamo insieme",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-12"
    },
    "il-bastone-della-parola-laboratorio-espressivo-san-damiano-d-asti": {
@@ -2331,7 +2331,7 @@
     "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
     "nome": "Il bastone della parola: laboratorio espressivo",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-10"
    },
    "laboratorio-creativo-sulle-emozioni-san-damiano-d-asti": {
@@ -2342,7 +2342,7 @@
     "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
     "nome": "Laboratorio creativo sulle emozioni",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-31"
    },
    "mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti": {
@@ -2364,7 +2364,7 @@
     "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
     "nome": "OCR Power Camp",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-13"
    },
    "tamburello-san-damiano-d-asti": {
@@ -2386,7 +2386,7 @@
     "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
     "nome": "Tennis da tavolo e Basket",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-03"
    },
    "un-circo-in-via-pero-laboratorio-teatrale-ed-espre-san-damiano-d-asti": {
@@ -2397,7 +2397,7 @@
     "manifest": "Laboratori Ludico-Creativi per Bambini/e da 6 a 11 anni",
     "nome": "Un circo in Via Pero - Laboratorio teatrale ed espressivo",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-02"
    }
   },
@@ -2868,7 +2868,7 @@
     "manifest": "Play Land Kids Summer Events 2026",
     "nome": "Play Land Kids Summer Events 2026 - Ass. Animatamente",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-22"
    },
    "play-land-kids-summer-events-ass-jim-pet-serravalle-scrivia": {
@@ -2879,7 +2879,7 @@
     "manifest": "Play Land Kids Summer Events 2026",
     "nome": "Play Land Kids Summer Events 2026 - Ass. Jim Pet",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-05"
    },
    "play-land-kids-summer-events-ass-la-bellaria-serravalle-scrivia": {
@@ -2901,7 +2901,7 @@
     "manifest": "Play Land Kids Summer Events 2026",
     "nome": "Play Land Kids Summer Events 2026 - Ass. Movimente",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-29"
    }
   },
@@ -2952,7 +2952,7 @@
     "manifest": "Alla (Ri)scoperta delle Favole Disney",
     "nome": "Alla (Ri)scoperta delle Favole Disney - Alice nel Paese delle Meraviglie - Il Gabbiano",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-24"
    },
    "alla-ri-scoperta-delle-favole-disney-tortona": {
@@ -2996,7 +2996,7 @@
     "manifest": "Alla (Ri)scoperta delle Favole Disney",
     "nome": "Serata Finale Cinema e Pizza Disney - Il Gabbiano",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-31"
    },
    "stratortona-croce-rossa-italiana-comitato-di-torto": {
@@ -3052,7 +3052,7 @@
     "manifest": "Baracche d'Estate",
     "nome": "Il Passerotto che Scoprì il Mondo - L'Arca di Noè Teatro ETS",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-14"
    }
   },
@@ -3124,7 +3124,7 @@
     "manifest": "Baracche d'Estate",
     "nome": "Pirù e il Cavaliere di Mezzotacco - Compagnia Walter Broggini",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-30"
    },
    "s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano": {
@@ -3208,7 +3208,7 @@
     "manifest": "Voltaggio Kids Summer",
     "nome": "Bolle Giganti (edizione agosto) - Pro Loco Voltaggio / PazzoAnimazione",
     "organizza": "Pro Loco Voltaggio / PazzoAnimazione",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-20"
    },
    "splash-party-il-ritorno-pro-loco-voltaggio-pazzoan": {
@@ -3219,7 +3219,7 @@
     "manifest": "Voltaggio Kids Summer",
     "nome": "Splash Party Il Ritorno - Pro Loco Voltaggio / PazzoAnimazione",
     "organizza": "Pro Loco Voltaggio / PazzoAnimazione",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-13"
    }
   },
