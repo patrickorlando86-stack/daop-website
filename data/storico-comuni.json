@@ -1002,6 +1002,17 @@
     "pagina": true,
     "ultima": "2026-09-06"
    },
+   "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Punto Bookcrossing Kids - Cortile della Biblioteca Civica",
+    "manifest": "",
+    "nome": "Consegna dei Libri alle Famiglie - Progetto Che Storia - Pro Loco Ceresole Alba",
+    "organizza": "Pro Loco Ceresole Alba",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
    "consegna-dei-libri-pro-loco-ceresole-alba": {
     "anni": [
      2026
@@ -1015,6 +1026,23 @@
    }
   },
   "nome": "Ceresole Alba",
+  "prov": "CN"
+ },
+ "ceresoledalba": {
+  "eventi": {
+   "festa-di-ceresole-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Artuffi",
+    "manifest": "Festa di Ceresole d'Alba",
+    "nome": "Festa di Ceresole d'Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "Ceresole d'Alba",
   "prov": "CN"
  },
  "ciglione": {
@@ -1234,6 +1262,23 @@
   "nome": "Confreria - Cuneo",
   "prov": "CN"
  },
+ "cortemilia": {
+  "eventi": {
+   "cortemilia-comics-games": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Cortemilia Comics & Games 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-01-01"
+   }
+  },
+  "nome": "Cortemilia",
+  "prov": "CN"
+ },
  "costavescovato": {
   "eventi": {
    "festa-della-vendemmia-a-valli-unite-costa-vescovato": {
@@ -1435,6 +1480,17 @@
  },
  "cuneo": {
   "eventi": {
+   "scopri-gli-amici-alpaca-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tenuta BisAlpaca",
+    "manifest": "",
+    "nome": "Scopri gli Amici Alpaca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
    "vita-da-api-parco-fluviale-gesso-e-stura-cuneo": {
     "anni": [
      2026
@@ -1578,6 +1634,23 @@
   "nome": "Festiona",
   "prov": "CN"
  },
+ "fossano": {
+  "eventi": {
+   "cresco-con-te-biblioteca-civica-di-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Cittadino di Piazza d'Armi",
+    "manifest": "",
+    "nome": "Cresco Con TE - Biblioteca Civica di Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Fossano",
+  "prov": "CN"
+ },
  "frassino": {
   "eventi": {
    "sulla-pista-dello-skills-bike-park-attivita-guidat-frassino": {
@@ -1686,6 +1759,17 @@
  },
  "limonepiemonte": {
   "eventi": {
+   "estate-di-storie-letture-ad-alta-voce-biblioteca-e-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca e Museo dello Sci di Limone Piemonte",
+    "manifest": "",
+    "nome": "Estate di Storie - Letture ad Alta Voce - Biblioteca e Museo dello Sci di Limone Piemonte",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
    "ferragosto-senza-frontiere-comune-di-limone-piemon-limone-piemonte": {
     "anni": [
      2026
@@ -2137,6 +2221,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-07"
+   },
+   "ti-racconto-una-storia-letture-per-bambini-bibliot-ormea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Città di Ormea",
+    "manifest": "",
+    "nome": "Ti racconto una storia - Letture per bambini - Biblioteca Civica Città di Ormea",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
    }
   },
   "nome": "Ormea",
@@ -2973,6 +3068,17 @@
     "pagina": false,
     "ultima": "2026-08-30"
    },
+   "beach-volley-amici-del-volley-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026 - Sant'Albano Stura in Festa",
+    "nome": "Beach Volley - Amici del Volley",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
    "beach-volley-organizzato-dagli-amici-del-volley-pr-sant-albano-stura": {
     "anni": [
      2026
@@ -3061,6 +3167,17 @@
     "pagina": false,
     "ultima": "2026-09-01"
    },
+   "edizione-estemporanea-di-pittura-sant-albano-in-co-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026 - Sant'Albano Stura in Festa",
+    "nome": "1ª Edizione Estemporanea di Pittura Sant'Albano in Cornice",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
    "estemporanea-di-pittura-sant-albano-in-cornice-pro-sant-albano-stura": {
     "anni": [
      2026
@@ -3114,6 +3231,17 @@
     "nome": "Giornata Bimbi organizzata dall'Oratorio",
     "organizza": "",
     "pagina": false,
+    "ultima": "2026-09-01"
+   },
+   "giornata-bimbi-pro-loco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Giornata Bimbi - Pro Loco Sant'Albano Stura",
+    "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": true,
     "ultima": "2026-09-01"
    },
    "gran-fritto-misto-pro-loco-sant-albano-stura": {
@@ -3234,6 +3362,17 @@
     "manifest": "San Liberato 2026",
     "nome": "Spettacolo Comico 'Non si vede un Kansas' - Pro Loco Sant'Albano Stura",
     "organizza": "Pro Loco Sant'Albano Stura",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "spettacolo-comico-non-si-vede-un-kansas-telecupole-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026 - Sant'Albano Stura in Festa",
+    "nome": "Spettacolo Comico Non si vede un Kansas - Telecupole",
+    "organizza": "",
     "pagina": false,
     "ultima": "2026-08-29"
    }
