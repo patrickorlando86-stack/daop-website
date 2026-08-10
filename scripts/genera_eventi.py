@@ -120,10 +120,19 @@ def fetch_rows():
         hi = next(i for i, row in enumerate(reader) if any('Data Inizio' in c for c in row))
         header = [c.strip() for c in reader[hi]]
         out = []
-        for row in reader[hi + 1:]:
+        for j, row in enumerate(reader[hi + 1:]):
             if not any(c.strip() for c in row):
                 continue
             d = {header[i]: (row[i].strip() if i < len(row) else '') for i in range(len(header))}
+            # Numero di riga NEL FOGLIO, quello che si legge nella colonnina
+            # grigia a sinistra. Serve alle segnalazioni: dire "togli il
+            # doppione di Sant'Albano" costringe chi corregge a cercarlo a
+            # mano fra duecento righe, dire "riga 118" no.
+            # reader e' 0-based e il foglio 1-based, quindi +1; e la riga
+            # dell'intestazione sta a hi, quindi la prima riga di dati e' hi+2.
+            # Stringa e non intero: questo dict e' fatto di celle di CSV e c'e'
+            # chi lo scorre tutto trattandole come testo (campi_daop).
+            d['_riga'] = str(hi + j + 2)
             out.append(d)
         print(f"[genera_eventi] {len(out)} righe lette da CSV remoto")
         return out
@@ -266,7 +275,7 @@ def normalize(rows):
             eta=d.get('Età', ''), prezzo=d.get('Prezzo', ''), descr=d.get('Descrizione', ''),
             manifest=d.get('Manifestazione', ''), loc=d.get('Locandina', ''),
             luogo=d.get('Luogo', ''), indirizzo=d.get('Indirizzo Completo', ''),
-            d_start=di, d_end=df,
+            d_start=di, d_end=df, riga=int(d.get('_riga') or 0),
             **campi_daop(d),
         ))
     # Ordina per "data utile": un evento già iniziato ma ancora in corso viene
@@ -1430,6 +1439,18 @@ def completezza(e):
                 if (e.get(k) or '').strip()))
 
 
+def _rif(e):
+    """"riga 118", il riferimento da dare a chi deve correggere il foglio.
+
+    Il numero e' quello della colonnina grigia di Google Sheets. Vale finche'
+    l'export non e' filtrato: con un filtro attivo le righe nascoste non
+    arrivano e la numerazione slitta - lo stesso guaio che controlla_crollo()
+    intercetta sui conteggi. Da li' il "riga ?" quando il numero non c'e',
+    che capita solo quando si sta girando sull'istantanea locale."""
+    n = e.get('riga') or 0
+    return f"riga {n:>4}" if n else "riga    ?"
+
+
 def _ora_inizio(ora):
     """L'ora d'inizio normalizzata, o '' se la riga non ne dichiara una.
 
@@ -1479,9 +1500,9 @@ def segnala_sovrapposizioni(events):
           f"da due locandine: si uniscono a mano nel foglio, guardando il luogo.")
     for (citta, d, ora), v in sorted(coll.items(), key=lambda kv: (kv[0][1], kv[0][2])):
         print(f"    {d.strftime('%d/%m')} ore {ora} — {citta}:")
-        for e in v:
-            print(f"        · {(e.get('nome') or '')[:58]}")
-            print(f"          luogo: {(e.get('luogo') or '(vuoto)')[:52]}")
+        for e in sorted(v, key=lambda e: e.get('riga') or 0):
+            print(f"        {_rif(e)}  {(e.get('nome') or '')[:56]}")
+            print(f"                 luogo: {(e.get('luogo') or '(vuoto)')[:52]}")
 
 
 MAX_GIORNI_PLAUSIBILI = 30
@@ -1514,8 +1535,8 @@ def segnala_durate_assurde(events):
           f"{MAX_GIORNI_PLAUSIBILI} giorni. Se non sono mostre, la data e' sbagliata "
           f"e restano 'in corso' in cima all'agenda finche' non si corregge il foglio:")
     for giorni, e in lunghi:
-        print(f"    {giorni:4d} giorni  {e['prov']}  {e.get('di')} -> {e.get('df')}  "
-              f"{(e.get('nome') or '')[:52]}")
+        print(f"    {_rif(e)}  {giorni:4d} giorni  {e['prov']}  "
+              f"{e.get('di')} -> {e.get('df')}  {(e.get('nome') or '')[:46]}")
 
 
 def segnala_doppioni(events):
@@ -1541,7 +1562,8 @@ def segnala_doppioni(events):
     for (s, d), v in sorted(doppi.items(), key=lambda kv: kv[0][1]):
         print(f"    {len(v)}x  {v[0]['nome'][:44]} — {v[0]['citta']} — dal {d.strftime('%d/%m')}")
         for x in v:
-            print(f"          fine {x['df']}  {x['categoria'] or '(senza categoria)':16} "
+            print(f"          {_rif(x)}  fine {x['df']}  "
+                  f"{x['categoria'] or '(senza categoria)':16} "
                   f"{len(x['descr'])} caratteri")
 
 
@@ -4445,10 +4467,12 @@ def main():
     scrivi_zone(events, hub)
     scrivi_box(events, oggi)
     # aggiorna l'istantanea committata
+    # 'riga' resta fuori dall'istantanea: e' la posizione nel foglio, cambia a
+    # ogni inserimento e sporcherebbe il diff di data/eventi.json a ogni run.
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()
-            if k not in CAMPI_DAOP and k not in CAMPI_EXTRA
-            or (v or '').strip()} for e in events]
+            if k != 'riga' and (k not in CAMPI_DAOP and k not in CAMPI_EXTRA
+                                or (v or '').strip())} for e in events]
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=1)
     update_sitemap(slugs, comuni, landing)
