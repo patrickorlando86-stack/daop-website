@@ -1430,6 +1430,60 @@ def completezza(e):
                 if (e.get(k) or '').strip()))
 
 
+def _ora_inizio(ora):
+    """L'ora d'inizio normalizzata, o '' se la riga non ne dichiara una.
+
+    Serve a far combaciare "14:00" e "14:00-18:30", che sono lo stesso inizio
+    scritto da due locandine diverse. Lo zero davanti si toglie perche' "9:45"
+    e "09:45" arrivano tutti e due dal foglio."""
+    m = re.search(r'(\d{1,2})[:.](\d{2})', ora or '')
+    return f"{int(m.group(1))}:{m.group(2)}" if m else ''
+
+
+def segnala_sovrapposizioni(events):
+    """Elenca gli eventi che stanno nello stesso posto alla stessa ora.
+
+    PERCHE' ESISTE (10/08/2026). segnala_doppioni() confronta slug e data, cioe'
+    riconosce la stessa riga copiata due volte. Ma il doppione che capita
+    davvero e' un altro: lo stesso evento raccontato da DUE LOCANDINE diverse -
+    il programma generale della Pro Loco e il volantino del singolo
+    appuntamento - e quindi entrato nel foglio con due nomi diversi. Per lo
+    slug sono due eventi, per un genitore che guarda l'agenda sono due righe
+    identiche una sotto l'altra.
+
+    Esempio del giorno in cui e' nato questo controllo, a Crissolo il 16/08
+    alle 10:00: "Giochi di Basket - Pro Loco Crissolo" all'Area Pattinaggio e
+    "Giochiamo a Basket con Edo - KaM 3841" alla Pista di pattinaggio Il Cervo
+    di Ghiaccio. Stesso posto, chiamato in due modi.
+
+    Il criterio e' citta + giorno + ora d'inizio. Non e' una prova: due cose
+    diverse possono cominciare alle 21 nello stesso paese durante una festa
+    patronale, ed e' giusto che ci siano tutte e due. Quindi anche questo
+    SEGNALA e non filtra - e stampa il luogo di ognuna, perche' e' guardando
+    quello che si capisce in un secondo se sono la stessa cosa.
+
+    Le righe senza un'ora numerica ("vari", vuoto) restano fuori: senza ora il
+    criterio diventa citta + giorno, e in una sagra di paese segnalerebbe
+    mezzo programma."""
+    g = collections.defaultdict(list)
+    for e in events:
+        ora = _ora_inizio(e.get('ora'))
+        if ora:
+            g[((e.get('citta') or '').strip(), e['d_start'], ora)].append(e)
+    coll = {k: v for k, v in g.items() if len(v) > 1}
+    if not coll:
+        return
+    quante = sum(len(v) for v in coll.values())
+    print(f"[genera_eventi] ATTENZIONE: {quante} eventi in {len(coll)} sovrapposizioni "
+          f"(stessa citta, stesso giorno, stessa ora). Spesso e' lo stesso evento preso "
+          f"da due locandine: si uniscono a mano nel foglio, guardando il luogo.")
+    for (citta, d, ora), v in sorted(coll.items(), key=lambda kv: (kv[0][1], kv[0][2])):
+        print(f"    {d.strftime('%d/%m')} ore {ora} — {citta}:")
+        for e in v:
+            print(f"        · {(e.get('nome') or '')[:58]}")
+            print(f"          luogo: {(e.get('luogo') or '(vuoto)')[:52]}")
+
+
 MAX_GIORNI_PLAUSIBILI = 30
 
 
@@ -4372,6 +4426,7 @@ def main():
     events = normalize(fetch_rows())
     controlla_crollo(events)
     segnala_doppioni(events)
+    segnala_sovrapposizioni(events)
     segnala_durate_assurde(events)
     assegna_ancore(events)
     # hub va calcolato PRIMA di render(): l'agenda linka le pagine comune sia
