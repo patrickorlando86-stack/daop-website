@@ -916,6 +916,23 @@
   "nome": "Castellinaldo d'Alba",
   "prov": "CN"
  },
+ "castelnuovobelbo": {
+  "eventi": {
+   "automotoraduno-memorial-gianfranco-ardrizzi-comune-castelnuovo-belbo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Municipio",
+    "manifest": "",
+    "nome": "6° Automotoraduno Memorial Gianfranco Ardrizzi - Comune di Castelnuovo Belbo",
+    "organizza": "Comune di Castelnuovo Belbo",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Castelnuovo Belbo",
+  "prov": "AT"
+ },
  "castelnuovoscrivia": {
   "eventi": {
    "le-perseidi-incontrano-l-eclissi-di-sole-sinoira-c-castelnuovo-scrivia": {
@@ -1998,6 +2015,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-09"
+   },
+   "nizza-e-sport-pro-loco-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio Don Bosco",
+    "manifest": "",
+    "nome": "Nizza è Sport - Pro Loco Nizza Monferrato",
+    "organizza": "Pro Loco Nizza Monferrato",
+    "pagina": true,
+    "ultima": "2026-09-12"
    }
   },
   "nome": "Nizza Monferrato",
