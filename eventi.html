@@ -10933,14 +10933,17 @@ document.addEventListener('DOMContentLoaded', function () {
   .ev-cal-nav button:disabled{opacity:0.3;cursor:default}
   .ev-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
   .ev-cal-dow{font-size:0.64rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-light);text-align:center;padding-bottom:6px}
-  .ev-cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;border:0;background:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.92rem;color:var(--text-light);cursor:default}
+  .ev-cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0;border:0;background:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.92rem;color:var(--text-light);cursor:default}
   .ev-cal-day.has{background:var(--cream);color:var(--navy);font-weight:700;cursor:pointer}
-  .ev-cal-day.has:hover{background:rgba(232,149,74,0.18)}
+  /* Tre livelli di pieno: quanto e' carico il giorno rispetto agli altri del
+     mese in vista. Il weekend si vede senza dover leggere i numeri. */
+  .ev-cal-day.liv-2{background:rgba(232,149,74,0.24)}
+  .ev-cal-day.liv-3{background:rgba(232,149,74,0.45)}
+  .ev-cal-day.has:hover{background:rgba(232,149,74,0.6)}
   .ev-cal-day.is-today{box-shadow:inset 0 0 0 2px var(--orange)}
   .ev-cal-day.is-sel{background:var(--navy);color:white}
-  .ev-cal-dots{display:flex;gap:3px;height:6px}
-  .ev-cal-dots i{width:6px;height:6px;border-radius:50%;background:var(--dot)}
-  .ev-cal-day.is-sel .ev-cal-dots i{background:rgba(255,255,255,0.9)}
+  .ev-cal-n{font-size:0.68rem;font-weight:700;line-height:1;height:0.7em;color:rgba(45,74,92,0.68)}
+  .ev-cal-day.is-sel .ev-cal-n{color:rgba(255,255,255,0.85)}
   .ev-cal-legend{margin:12px 0 0;font-size:0.78rem;color:var(--text-light);text-align:center}
   .ev-cal-legend button{font:inherit;font-weight:700;color:var(--orange-dark);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 
@@ -11095,6 +11098,7 @@ document.addEventListener('DOMContentLoaded', function () {
 .ev-select{flex:1 1 calc(50% - 4px);min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
     .ev-cal{padding:12px 10px 10px}
     .ev-cal-day{font-size:0.85rem;border-radius:10px}
+    .ev-cal-n{font-size:0.64rem}
     .event-act{min-height:44px;padding:10px 14px}
     .info-strip{flex-direction:column;gap:12px;padding:22px 22px}
     .footer-grid{grid-template-columns:1fr 1fr;gap:24px 20px}
@@ -16969,19 +16973,27 @@ document.addEventListener('DOMContentLoaded', function () {
       const anno = calMese.getFullYear(), mese = calMese.getMonth();
       const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
       const ultimo = new Date(anno, mese + 1, 0);
-      // colori per giorno, contando solo gli eventi che passano i filtri attivi
+      // quanti eventi per giorno, contando solo quelli che passano i filtri attivi
       const perGiorno = new Map();
       cards.forEach(card => {
         if (!passaFiltri(card, f, term)) return;
-        const colore = getComputedStyle(card).getPropertyValue('--cat-color').trim();
         for (let g = 1; g <= ultimo.getDate(); g++) {
           const d = new Date(anno, mese, g), fine = new Date(d); fine.setHours(23, 59, 59, 999);
           if (d < oggi || !copre(card, d, fine)) continue;
           const k = isoDi(d);
-          if (!perGiorno.has(k)) perGiorno.set(k, []);
-          if (!perGiorno.get(k).includes(colore)) perGiorno.get(k).push(colore);
+          perGiorno.set(k, (perGiorno.get(k) || 0) + 1);
         }
       });
+      // L'intensita' e' relativa al mese in vista: con un filtro stretto i numeri
+      // scendono tutti, ma "qual e' il giorno piu' pieno" resta leggibile. La
+      // scala parte dal giorno piu' scarico, non da zero: in agosto il minimo e'
+      // gia' una decina di eventi e partendo da zero sarebbero quasi tutti pieni.
+      const conti = [...perGiorno.values()];
+      const massimo = conti.length ? Math.max(...conti) : 0;
+      const minimo = conti.length ? Math.min(...conti) : 0;
+      const scarto = massimo - minimo;
+      const livello = n => scarto <= 0 ? 2
+        : 1 + Math.min(2, Math.floor((n - minimo) / (scarto + 1) * 3));
       const primoMese = new Date(oggi.getFullYear(), oggi.getMonth(), 1);
       let h = '<div class="ev-cal-head"><h3>' + MESI[mese] + ' ' + anno + '</h3><div class="ev-cal-nav">' +
         '<button type="button" data-salto="-1" aria-label="Mese precedente"' +
@@ -16996,19 +17008,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const k = isoDi(d);
         // I giorni già passati restano spenti anche se una mostra lunga li copre:
         // segnarli pieni prometterebbe eventi che non si possono più vedere.
-        const colori = d < oggi ? [] : (perGiorno.get(k) || []).slice(0, 3);
+        const n = d < oggi ? 0 : (perGiorno.get(k) || 0);
         const cls = ['ev-cal-day'];
-        if (colori.length) cls.push('has');
+        if (n) cls.push('has', 'liv-' + livello(n));
         if (k === calGiorno) cls.push('is-sel');
         if (k === isoDi(oggi)) cls.push('is-today');
         h += '<button type="button" class="' + cls.join(' ') + '" data-giorno="' + k + '"' +
-          (colori.length ? '' : ' disabled') + '><span>' + g + '</span><span class="ev-cal-dots">' +
-          colori.map(c => '<i style="--dot:' + c + '"></i>').join('') + '</span></button>';
+          (n ? ' aria-label="' + g + ' ' + MESI[mese] + ', ' + n + (n === 1 ? ' evento' : ' eventi') + '"'
+             : ' disabled') +
+          '><span>' + g + '</span><span class="ev-cal-n">' + (n || '') + '</span></button>';
       }
       h += '</div>';
       h += '<p class="ev-cal-legend">' + (calGiorno
         ? 'Stai vedendo un solo giorno. <button type="button" data-tutto="1">Mostra tutto il mese</button>'
-        : 'Tocca un giorno con il pallino per vedere solo quello.') + '</p>';
+        : 'Il numero sono gli eventi di quel giorno: più il colore è pieno, più ce n\'è. Tocca un giorno per vederlo da solo.') + '</p>';
       cal.innerHTML = h;
     }
 
