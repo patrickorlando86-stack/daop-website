@@ -4188,6 +4188,137 @@ def controlla_crollo(events):
     sys.exit(1)
 
 
+BOX_DIR = os.path.join(ROOT, "eventi")
+BOX_VOCI = 12
+
+
+def _box_riga(e, oggi):
+    quando = _quando_breve(e, oggi)
+    ora = (e.get('ora') or '').strip()
+    if any(c.isdigit() for c in ora):
+        quando += ' · ' + trunc(ora, 12)
+    citta = (e.get('citta') or '').strip()
+    return (f'<li><span class="q">{esc(quando)}</span>'
+            f'<a href="{SITE_URL}{_href_evento(e)}">'
+            f'{esc(trunc(e.get("nome") or "", 70))}</a>'
+            + (f'<span class="dv">{esc(citta)}</span>' if citta else '')
+            + '</li>')
+
+
+def _box_html(prov, ev, oggi):
+    nome = PROVINCE_NOMI.get(prov, prov)
+    righe = ''.join(_box_riga(e, oggi) for e in ev[:BOX_VOCI])
+    if not righe:
+        righe = ('<li class="vuoto">Nessun evento in agenda in questo momento. '
+                 'Torna a trovarci fra qualche giorno.</li>')
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eventi per bambini in provincia di {esc(nome)} | DAOP</title>
+<meta name="robots" content="noindex, follow">
+<base target="_blank">
+<style>
+*,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
+body{{background:transparent;color:#1a2d3a;
+ font:400 15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ -webkit-font-smoothing:antialiased;padding:2px}}
+.tt{{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+ color:#6ba5a8;margin-bottom:10px}}
+ul{{list-style:none}}
+li{{display:grid;grid-template-columns:88px 1fr;gap:2px 12px;align-items:baseline;
+ padding:10px 0;border-top:1px solid rgba(45,74,92,.14)}}
+li:first-child{{border-top:0}}
+.q{{grid-row:span 2;font-size:12px;font-weight:700;color:#e8954a;text-transform:uppercase;
+ letter-spacing:.03em;padding-top:2px}}
+li a{{color:#2d4a5c;font-weight:600;text-decoration:none}}
+li a:hover,li a:focus{{color:#d4793a;text-decoration:underline}}
+.dv{{font-size:13px;color:#627588}}
+.vuoto{{grid-template-columns:1fr;color:#627588;font-size:14px}}
+.fn{{margin-top:12px;padding-top:10px;border-top:1px solid rgba(45,74,92,.14);
+ font-size:12.5px;color:#627588}}
+.fn a{{color:#2d4a5c;font-weight:600;text-decoration:none}}
+.fn a:hover{{text-decoration:underline}}
+@media (max-width:420px){{
+ li{{grid-template-columns:1fr}}
+ .q{{grid-row:auto}}
+}}
+</style>
+</head>
+<body>
+<p class="tt">Eventi per bambini · provincia di {esc(nome)}</p>
+<ul>{righe}</ul>
+<p class="fn">Agenda aggiornata ogni giorno da
+<a href="{SITE_URL}/eventi.html">DAOP &ndash; Dove Andiamo Oggi Papi</a></p>
+<script>
+// L'iframe non si ridimensiona da solo. Chi vuole il riquadro sempre alto
+// quanto serve aggiunge tre righe sul suo sito e ascolta questo messaggio;
+// chi non lo fa tiene l'altezza fissa e la lista scorre. Nessuna delle due
+// strade richiede che il partner sappia programmare.
+(function () {{
+  function avvisa() {{
+    parent.postMessage({{daopBox: true, altezza: document.body.scrollHeight}}, '*');
+  }}
+  addEventListener('load', avvisa);
+  addEventListener('resize', avvisa);
+}})();
+</script>
+</body>
+</html>
+"""
+
+
+def scrivi_box(events, oggi):
+    """Il riquadro che un partner territoriale incolla sul proprio sito.
+
+    PERCHE' ESISTE (10/08/2026). Il patto con i partner di provincia e' che gli
+    eventi si regalano e le schede dei luoghi no: un evento scade e condividerlo
+    non costa niente, una scheda luogo resta e vale per anni. Ma "ti do gli
+    eventi" a un partner che non programma non vuol dire niente finche' non
+    esiste una cosa che possa incollare. Questa e' quella cosa.
+
+    E' una pagina spogliata - niente menu, niente header, niente footer - che il
+    partner mette dentro un <iframe> di una riga. Funziona su WordPress, Wix,
+    Squarespace e su qualsiasi cosa accetti dell'HTML, che e' l'unico requisito
+    che si puo' dare a qualcuno di cui non conosci il sito.
+
+    TRE SCELTE CHE SEMBRANO DETTAGLI E NON LO SONO:
+
+    1. `noindex`. Questa pagina e' l'agenda ridetta a un'altra URL. Lasciarla
+       indicizzare vorrebbe dire mettere in concorrenza con eventi.html una sua
+       copia sbiadita e senza navigazione.
+
+    2. `<base target="_blank">`. Dentro un iframe un link normale aprirebbe
+       daop.it INTERO nel riquadro da 600 pixel del partner. Con il base ogni
+       link esce in una scheda nuova, che e' anche quello che vuole lui: il
+       visitatore non lascia il suo sito.
+
+    3. CSS scritto qui dentro, senza il foglio di stile del sito. Il riquadro
+       carica dentro la pagina di qualcun altro: deve pesare poco e non puo'
+       dipendere dal guscio, che porterebbe con se' font, header e regole sul
+       body che li' non hanno senso.
+
+    Un file per provincia e non ?prov=CN, perche' il sito e' statico: un
+    parametro nella URL non cambierebbe niente senza JavaScript.
+    """
+    os.makedirs(BOX_DIR, exist_ok=True)
+    scritti = []
+    for prov in PROVINCE_PUBBLICATE:
+        ev = sorted((e for e in events if e.get('prov') == prov),
+                    key=lambda e: (e['d_start'], (e.get('nome') or '')))
+        path = os.path.join(BOX_DIR, f"box-{prov.lower()}.html")
+        nuovo = _box_html(prov, ev, oggi)
+        if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
+            scritti.append((prov, len(ev), False))
+            continue
+        with open(path, 'w', encoding='utf-8') as fh:
+            fh.write(nuovo)
+        scritti.append((prov, len(ev), True))
+    detta = ', '.join(f"{p} {n}{'*' if w else ''}" for p, n, w in scritti)
+    print(f"[genera_eventi] riquadri da incorporare: {detta}  (* riscritto)")
+
+
 def main():
     events = normalize(fetch_rows())
     controlla_crollo(events)
@@ -4207,6 +4338,7 @@ def main():
     landing = scrivi_landing(events, hub, storico, oggi)
     scrivi_metodo(events)
     scrivi_zone(events, hub)
+    scrivi_box(events, oggi)
     # aggiorna l'istantanea committata
     rec = [{k: (v.isoformat() if isinstance(v, datetime.date) else v)
             for k, v in e.items()

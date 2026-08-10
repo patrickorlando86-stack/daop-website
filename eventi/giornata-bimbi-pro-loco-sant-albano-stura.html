@@ -120,14 +120,17 @@
   .ev-cal-nav button:disabled{opacity:0.3;cursor:default}
   .ev-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
   .ev-cal-dow{font-size:0.64rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-light);text-align:center;padding-bottom:6px}
-  .ev-cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0;border:0;background:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.92rem;color:var(--text-light);cursor:default}
+  .ev-cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0;border:0;background:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.92rem;color:var(--text-light);cursor:default}
   .ev-cal-day.has{background:var(--cream);color:var(--navy);font-weight:700;cursor:pointer}
-  .ev-cal-day.has:hover{background:rgba(232,149,74,0.18)}
+  /* Tre livelli di pieno: quanto e' carico il giorno rispetto agli altri del
+     mese in vista. Il weekend si vede senza dover leggere i numeri. */
+  .ev-cal-day.liv-2{background:rgba(232,149,74,0.24)}
+  .ev-cal-day.liv-3{background:rgba(232,149,74,0.45)}
+  .ev-cal-day.has:hover{background:rgba(232,149,74,0.6)}
   .ev-cal-day.is-today{box-shadow:inset 0 0 0 2px var(--orange)}
   .ev-cal-day.is-sel{background:var(--navy);color:white}
-  .ev-cal-dots{display:flex;gap:3px;height:6px}
-  .ev-cal-dots i{width:6px;height:6px;border-radius:50%;background:var(--dot)}
-  .ev-cal-day.is-sel .ev-cal-dots i{background:rgba(255,255,255,0.9)}
+  .ev-cal-n{font-size:0.68rem;font-weight:700;line-height:1;height:0.7em;color:rgba(45,74,92,0.68)}
+  .ev-cal-day.is-sel .ev-cal-n{color:rgba(255,255,255,0.85)}
   .ev-cal-legend{margin:12px 0 0;font-size:0.78rem;color:var(--text-light);text-align:center}
   .ev-cal-legend button{font:inherit;font-weight:700;color:var(--orange-dark);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 
@@ -282,6 +285,7 @@
 .ev-select{flex:1 1 calc(50% - 4px);min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
     .ev-cal{padding:12px 10px 10px}
     .ev-cal-day{font-size:0.85rem;border-radius:10px}
+    .ev-cal-n{font-size:0.64rem}
     .event-act{min-height:44px;padding:10px 14px}
     .info-strip{flex-direction:column;gap:12px;padding:22px 22px}
     .footer-grid{grid-template-columns:1fr 1fr;gap:24px 20px}
@@ -491,6 +495,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-10",
+      "dateModified": "2026-08-10",
       "lastReviewed": "2026-08-10"
     },
     {
