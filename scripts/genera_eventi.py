@@ -1430,6 +1430,40 @@ def completezza(e):
                 if (e.get(k) or '').strip()))
 
 
+MAX_GIORNI_PLAUSIBILI = 30
+
+
+def segnala_durate_assurde(events):
+    """Elenca gli eventi che durano troppo per essere veri.
+
+    PERCHE' ESISTE (10/08/2026). "Cortemilia Comics & Games 2026" stava sul
+    foglio con 01/01/2026 - 31/12/2026: un anno intero. In agenda risultava
+    quindi "in corso" TUTTI I GIORNI, in cima a tutto, per dodici mesi - mentre
+    la festa vera e' a fine agosto. Se ne e' accorto il partner di Cuneo
+    guardando il riquadro sul suo sito, non noi: dall'interno una riga sempre
+    presente si legge come una costante del sito e smette di dare nell'occhio.
+
+    Un evento non si puo' pero' bocciare solo perche' e' lungo: una mostra al
+    museo che dura due mesi e' legittima e va in agenda tutti quei giorni.
+    Quindi qui si SEGNALA e basta, non si filtra: chi guarda decide se e' una
+    mostra o una data messa a caso. La soglia e' larga apposta - sopra i trenta
+    giorni sono pochissime righe, e vanno guardate a una a una."""
+    lunghi = []
+    for e in events:
+        giorni = (e['d_end'] - e['d_start']).days
+        if giorni > MAX_GIORNI_PLAUSIBILI:
+            lunghi.append((giorni, e))
+    if not lunghi:
+        return
+    lunghi.sort(key=lambda t: -t[0])
+    print(f"[genera_eventi] ATTENZIONE: {len(lunghi)} eventi durano piu' di "
+          f"{MAX_GIORNI_PLAUSIBILI} giorni. Se non sono mostre, la data e' sbagliata "
+          f"e restano 'in corso' in cima all'agenda finche' non si corregge il foglio:")
+    for giorni, e in lunghi:
+        print(f"    {giorni:4d} giorni  {e['prov']}  {e.get('di')} -> {e.get('df')}  "
+              f"{(e.get('nome') or '')[:52]}")
+
+
 def segnala_doppioni(events):
     """Elenca gli eventi inseriti piu' volte nel foglio.
 
@@ -4189,7 +4223,20 @@ def controlla_crollo(events):
 
 
 BOX_DIR = os.path.join(ROOT, "eventi")
-BOX_VOCI = 12
+
+# Una FINESTRA DI GIORNI, non un numero di voci.
+#
+# La prima versione tagliava a 12 righe fisse. Sembra ragionevole finche' non
+# guardi i numeri: in provincia di Cuneo ci sono cinque eventi al giorno, quindi
+# dodici righe coprivano fino a giovedi' e il riquadro si fermava PRIMA del
+# weekend. Cioe' esattamente l'unica cosa che un genitore ci va a cercare.
+#
+# Dieci giorni tengono sempre dentro il weekend che arriva - anche se lo si
+# guarda di lunedi' - e quello dopo. Il tetto sulle voci resta solo come
+# paracadute per non spedire tre schermate a chi ha incorniciato il riquadro in
+# una colonna stretta.
+BOX_GIORNI = 10
+BOX_MAX = 25
 
 
 def _box_riga(e, oggi):
@@ -4207,7 +4254,7 @@ def _box_riga(e, oggi):
 
 def _box_html(prov, ev, oggi):
     nome = PROVINCE_NOMI.get(prov, prov)
-    righe = ''.join(_box_riga(e, oggi) for e in ev[:BOX_VOCI])
+    righe = ''.join(_box_riga(e, oggi) for e in ev)
     if not righe:
         righe = ('<li class="vuoto">Nessun evento in agenda in questo momento. '
                  'Torna a trovarci fra qualche giorno.</li>')
@@ -4303,10 +4350,12 @@ def scrivi_box(events, oggi):
     parametro nella URL non cambierebbe niente senza JavaScript.
     """
     os.makedirs(BOX_DIR, exist_ok=True)
+    limite = oggi + datetime.timedelta(days=BOX_GIORNI)
     scritti = []
     for prov in PROVINCE_PUBBLICATE:
-        ev = sorted((e for e in events if e.get('prov') == prov),
-                    key=lambda e: (e['d_start'], (e.get('nome') or '')))
+        ev = sorted((e for e in events
+                     if e.get('prov') == prov and e['d_start'] <= limite),
+                    key=lambda e: (e['d_start'], (e.get('nome') or '')))[:BOX_MAX]
         path = os.path.join(BOX_DIR, f"box-{prov.lower()}.html")
         nuovo = _box_html(prov, ev, oggi)
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
@@ -4323,6 +4372,7 @@ def main():
     events = normalize(fetch_rows())
     controlla_crollo(events)
     segnala_doppioni(events)
+    segnala_durate_assurde(events)
     assegna_ancore(events)
     # hub va calcolato PRIMA di render(): l'agenda linka le pagine comune sia
     # nelle schede sia nel blocco in fondo, e senza non saprebbe quali esistono.
