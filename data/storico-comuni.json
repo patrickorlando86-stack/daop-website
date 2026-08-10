@@ -239,6 +239,39 @@
     "pagina": false,
     "ultima": "2026-08-12"
    },
+   "musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Conventuale di San Francesco",
+    "manifest": "Musei Aperti ad Agosto 2026",
+    "nome": "Musei Aperti ad Agosto 2026 - Complesso Conventuale di San Francesco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-01"
+   },
+   "musei-aperti-ad-agosto-museo-civico-di-palazzo-cut-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Civico di Palazzo Cuttica",
+    "manifest": "Musei Aperti ad Agosto 2026",
+    "nome": "Musei Aperti ad Agosto 2026 - Museo Civico di Palazzo Cuttica",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-01"
+   },
+   "musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sale d'Arte di Via Machiavelli",
+    "manifest": "Musei Aperti ad Agosto 2026",
+    "nome": "Musei Aperti ad Agosto 2026 - Sale d'Arte di Via Machiavelli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-01"
+   },
    "sentimental-value-alessandria": {
     "anni": [
      2026
@@ -372,6 +405,23 @@
   "nome": "Baldichieri d'Asti",
   "prov": "AT"
  },
+ "borghettodiborbera": {
+  "eventi": {
+   "laboratorio-di-pittura-per-bambini-e-ragazzi-assoc-borghetto-di-borbera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oasi del Kookaburra",
+    "manifest": "",
+    "nome": "Laboratorio di Pittura per Bambini e Ragazzi - Associazione Amici dell'Arte di Serravalle Scrivia",
+    "organizza": "Associazione Amici dell'Arte di Serravalle Scrivia",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   }
+  },
+  "nome": "Borghetto di Borbera",
+  "prov": "AL"
+ },
  "buttiglieradasti": {
   "eventi": {
    "agosto-letterario-buttigliera-d-asti": {
@@ -399,6 +449,34 @@
   },
   "nome": "Buttigliera d'Asti",
   "prov": "AT"
+ },
+ "cabellaligure": {
+  "eventi": {
+   "cena-al-sacco-sotto-le-piante-con-dj-mbc-pro-loco-cabella-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cabella Ligure",
+    "manifest": "San Lorenzo 2026 - Cabella Ligure",
+    "nome": "Cena al Sacco Sotto le Piante con DJ MBC - Pro Loco Cabella Ligure",
+    "organizza": "Pro Loco Cabella Ligure",
+    "pagina": true,
+    "ultima": "2026-08-10"
+   },
+   "festa-della-birra-pro-loco-cabella-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pala Vittoria",
+    "manifest": "",
+    "nome": "Festa della Birra - Pro Loco Cabella Ligure",
+    "organizza": "Pro Loco Cabella Ligure",
+    "pagina": true,
+    "ultima": "2026-08-17"
+   }
+  },
+  "nome": "Cabella Ligure",
+  "prov": "AL"
  },
  "caldirola": {
   "eventi": {
@@ -449,6 +527,23 @@
    }
   },
   "nome": "Carbonara Scrivia",
+  "prov": "AL"
+ },
+ "carpeneto": {
+  "eventi": {
+   "fassona-brace-madonna-della-villa-carpeneto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Madonna della Villa",
+    "manifest": "Fassona & Brace Madonna della Villa",
+    "nome": "Fassona & Brace Madonna della Villa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Carpeneto",
   "prov": "AL"
  },
  "carregaligure": {
@@ -515,6 +610,17 @@
  },
  "casalnoceto": {
   "eventi": {
+   "assaggia-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Martiri della Libertà",
+    "manifest": "Assaggia Casalnoceto",
+    "nome": "Assaggia Casalnoceto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
    "cantando-il-cinema-casalnoceto": {
     "anni": [
      2026
@@ -669,6 +775,23 @@
   "nome": "Castel Boglione",
   "prov": "AT"
  },
+ "castelceriolo": {
+  "eventi": {
+   "festa-dei-rioni-gli-amici-del-campetto-castelceriolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Festa dei Rioni 2026 - Gli Amici del Campetto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Castelceriolo",
+  "prov": "AL"
+ },
  "casteldelfino": {
   "eventi": {
    "guida-per-un-giorno-parco-del-monviso-casteldelfino": {
@@ -750,6 +873,17 @@
  },
  "castellettomonferrato": {
   "eventi": {
+   "sagra-della-zucca-castelletto-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza V. Veneto",
+    "manifest": "Sagra della Zucca 2026",
+    "nome": "Sagra della Zucca 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   },
    "sagra-delle-nocciole-de-co-e-dello-stinco-pro-loco-castelletto-monferrato": {
     "anni": [
      2026
@@ -784,6 +918,17 @@
  },
  "castelnuovoscrivia": {
   "eventi": {
+   "le-perseidi-incontrano-l-eclissi-di-sole-sinoira-c-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Agriturismo Mangià ad Campagna - Planetario",
+    "manifest": "",
+    "nome": "Le Perseidi incontrano l'eclissi di Sole - Sinoira con le Stelle & Le Piccole Letture Notturne in Bici da Elilù",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-12"
+   },
    "le-piccole-letture-notturne-soulfarm-elilu-castelnuovo-scrivia": {
     "anni": [
      2026
@@ -1102,6 +1247,28 @@
     "pagina": false,
     "ultima": "2026-08-15"
    },
+   "caccia-al-tesoro-per-i-piu-piccoli-pro-loco-crisso-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Caccia al Tesoro per i Più Piccoli - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
+   "camminata-corsa-non-competitiva-corri-con-edo-e-sa-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Camminata/Corsa Non Competitiva Corri con Edo e Samu - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   },
    "ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss-crissolo": {
     "anni": [
      2026
@@ -1113,6 +1280,28 @@
     "pagina": true,
     "ultima": "2026-08-18"
    },
+   "crissolo-in-bianco-pro-loco-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Pedonale",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Crissolo in Bianco! - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": true,
+    "ultima": "2026-08-17"
+   },
+   "giochi-di-basket-pro-loco-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Pattinaggio",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Giochi di Basket - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   },
    "giochiamo-a-basket-con-edo-kam-3841-crissolo": {
     "anni": [
      2026
@@ -1123,6 +1312,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-16"
+   },
+   "grande-festa-di-ferragosto-pro-loco-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Grande Festa di Ferragosto - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": true,
+    "ultima": "2026-08-14"
    },
    "il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr-crissolo": {
     "anni": [
@@ -1146,6 +1346,39 @@
     "pagina": false,
     "ultima": "2026-08-08"
    },
+   "laboratorio-ciao-ciao-estate-sorprese-per-tutti-pr-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Laboratorio: Ciao Ciao Estate... Sorprese per Tutti! - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": true,
+    "ultima": "2026-08-18"
+   },
+   "serata-culturale-la-marchesa-giulia-di-barolo-si-p-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Serata Culturale: La Marchesa Giulia di Barolo si Presenta - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "serata-di-cabaret-con-marco-guarena-pro-loco-criss-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala delle Guide",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Serata di Cabaret con Marco Guarena - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-10"
+   },
    "serata-giochi-kam-3841-e-pro-loco-crissolo": {
     "anni": [
      2026
@@ -1156,6 +1389,28 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "tradizionale-fiera-di-san-chiaffredo-pro-loco-cris-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro e Area Pedonale",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Tradizionale Fiera di San Chiaffredo - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "tres-jorns-d-crisol-tornei-tra-le-4-squadre-del-pa-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo da Calcio",
+    "manifest": "Estate a Crissolo 2026",
+    "nome": "Tres Jorns D'Crisol - Tornei tra le 4 Squadre del Paese - Pro Loco Crissolo",
+    "organizza": "Pro Loco Crissolo",
+    "pagina": false,
+    "ultima": "2026-08-11"
    }
   },
   "nome": "Crissolo",
@@ -1322,6 +1577,34 @@
   },
   "nome": "Frassino",
   "prov": "CN"
+ },
+ "garbagna": {
+  "eventi": {
+   "ferragosto-in-piazza-doria-con-i-deejays-in-tour-p-garbagna": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Doria",
+    "manifest": "",
+    "nome": "Ferragosto in Piazza Doria con i Deejays in Tour - Pro Loco Garbagna",
+    "organizza": "Pro Loco Garbagna",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
+   "la-notte-bella-a-garbagna-pro-loco-garbagna": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Principe Doria",
+    "manifest": "",
+    "nome": "La Notte Bella a Garbagna - Pro Loco Garbagna",
+    "organizza": "Pro Loco Garbagna",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Garbagna",
+  "prov": "AL"
  },
  "govone": {
   "eventi": {
@@ -1636,6 +1919,56 @@
   "nome": "Mornese",
   "prov": "AL"
  },
+ "morsasco": {
+  "eventi": {
+   "cena-nutella-party-e-dj-set-con-music-power-pro-lo-morsasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Morsasco",
+    "manifest": "Agosto 2026 Morsasco",
+    "nome": "Cena Nutella Party e DJ Set con Music Power - Pro Loco Morsasco",
+    "organizza": "Pro Loco Morsasco",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   },
+   "festa-patronale-di-san-bartolomeo-con-menu-tradizi-morsasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Morsasco",
+    "manifest": "Agosto 2026 Morsasco",
+    "nome": "Festa Patronale di San Bartolomeo con Menù Tradizionale e Fritto Misto di Pesce - Pro Loco Morsasco",
+    "organizza": "Pro Loco Morsasco",
+    "pagina": true,
+    "ultima": "2026-08-24"
+   },
+   "menu-tradizionale-e-fritto-misto-di-pesce-con-jack-morsasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Morsasco",
+    "manifest": "Agosto 2026 Morsasco",
+    "nome": "Menù Tradizionale e Fritto Misto di Pesce con Jack'O'Maly - Pro Loco Morsasco",
+    "organizza": "Pro Loco Morsasco",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
+   "morsaschiadi-pro-loco-morsasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Morsasco",
+    "manifest": "Agosto 2026 Morsasco",
+    "nome": "Morsaschiadi - Pro Loco Morsasco",
+    "organizza": "Pro Loco Morsasco",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Morsasco",
+  "prov": "AL"
+ },
  "murazzano": {
   "eventi": {
    "san-lorenzo-family-night-comune-di-murazzano": {
@@ -1672,6 +2005,17 @@
  },
  "noviligure": {
   "eventi": {
+   "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo dell'Apicoltura Maglietto",
+    "manifest": "",
+    "nome": "Con il Naso all'Insù - Museo dell'Apicoltura Maglietto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-10"
+   },
    "festa-della-pizza-margherita-novi-ligure": {
     "anni": [
      2026
@@ -1787,6 +2131,23 @@
   "nome": "Paesana",
   "prov": "CN"
  },
+ "pasturana": {
+  "eventi": {
+   "sagra-del-corzetto-settembre-pasturanese-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Sagra del Corzetto - Settembre Pasturanese",
+    "nome": "Sagra del Corzetto - Settembre Pasturanese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Pasturana",
+  "prov": "AL"
+ },
  "pecettodivalenza": {
   "eventi": {
    "notte-dei-desideri-gruppo-astrofili-galileo-pecetto-di-valenza": {
@@ -1834,6 +2195,17 @@
  },
  "ponzanomonferrato": {
   "eventi": {
+   "camminata-alla-ricerca-delle-stelle-cadenti-pro-lo-ponzano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Pro Loco Ponzano M.",
+    "manifest": "Festa d'Estate 2026",
+    "nome": "Camminata alla ricerca delle stelle cadenti - Pro Loco Ponzano M.",
+    "organizza": "Pro Loco Ponzano M",
+    "pagina": true,
+    "ultima": "2026-08-10"
+   },
    "festa-d-estate-ponzano-monferrato": {
     "anni": [
      2026
@@ -2020,6 +2392,23 @@
   },
   "nome": "Pozzolo Formigaro",
   "prov": "AL"
+ },
+ "pratolungo": {
+  "eventi": {
+   "sagra-del-raviolo-al-sugo-di-birra-pratolungo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pratolungo",
+    "manifest": "38ª Sagra del Raviolo al Sugo di Birra",
+    "nome": "38ª Sagra del Raviolo al Sugo di Birra",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   }
+  },
+  "nome": "Pratolungo",
+  "prov": "CN"
  },
  "pratonevoso": {
   "eventi": {
@@ -2910,6 +3299,17 @@
  },
  "spignomonferrato": {
   "eventi": {
+   "masca-il-ritorno-della-strega-pro-loco-di-spigno-m-spigno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spigno Monferrato",
+    "manifest": "",
+    "nome": "Masca - Il Ritorno della Strega - Pro Loco di Spigno Monferrato 2014",
+    "organizza": "Pro Loco di Spigno Monferrato 2014",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato": {
     "anni": [
      2026
