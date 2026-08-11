@@ -1189,6 +1189,43 @@ def _coda_propria(nome):
     return " ".join(coda) if coda and any(p[:1].isupper() for p in coda) else ''
 
 
+# Nel foglio il nome e' quasi sempre una collana di pezzi separati da trattino
+# o virgola: "<chi suona> - <che gruppo e'> - <la festa in cui suona>".
+SEPARATORE_RE = re.compile(r'\s*[-–—|·]\s+|\s*,\s*')
+
+
+def _frase_sagra(nome):
+    """La frase che contiene sagra/festa/fiera/palio, intera. '' se non c'e'.
+
+    E' QUELLA la query. "sagra del peperone costigliole" si cerca, "gianmarco
+    bagutti" no, e nel foglio la festa sta spesso in fondo, dopo il nome di chi
+    suona quella sera: "Gianmarco Bagutti - Orchestra Italiana - 79° Sagra del
+    Peperone". Tagliando dalla coda, _coda_propria si fermava sul "del"
+    minuscolo e teneva solo "Peperone" - cioe' la parola meno cercabile delle
+    tre, senza il "Sagra del" che la rende una ricerca. In Search Console
+    quella pagina ha fatto 289 impressioni allo 0,7% di CTR in tre mesi: e'
+    l'unica delle 218 in cui il troncamento perdeva la parola della festa, ma
+    e' anche la piu' vista, e il nome "artista - orchestra - sagra" nel foglio
+    ricorre a ogni serata di ballo.
+
+    Si ferma al separatore: oltre il trattino comincia un'altra cosa (la pro
+    loco, il paese, l'orchestra). Quattro parole al massimo perche' "Sagra del
+    Peperone" ne vuole tre e "Festa Patronale di San Rocco" quattro; se la
+    quarta e' un articolo la frase si chiude prima, altrimenti resta appesa
+    ("Sagra dell'Agnolotto e del")."""
+    for pezzo in SEPARATORE_RE.split(nome or ''):
+        parole = pezzo.strip(' -–—').split()
+        for i, p in enumerate(parole):
+            if any(k in p.lower() for k in SAGRA_KW):
+                frase = " ".join(parole[i:i + 4])
+                prima = None
+                while prima != frase:
+                    prima = frase
+                    frase = CODA_VUOTA_RE.sub('', frase).rstrip(' ,;:.-–—&')
+                return frase
+    return ''
+
+
 def _taglia_nome(nome, quanti, evita=''):
     """Il nome accorciato all'ultima parola che vale la pena leggere, tenendo
     la coda quando e' quella a distinguere un evento dall'altro.
@@ -1208,15 +1245,30 @@ def _taglia_nome(nome, quanti, evita=''):
             s = CODA_VUOTA_RE.sub('', s).rstrip(' ,;:.-–—&')
         return s
 
-    coda = _coda_propria(nome)
+    # La festa batte il nome proprio: fra "… Shary Band" e "… Sagra del
+    # Peperone" la seconda e' una query e la prima no. Ma solo se il taglio
+    # normale la perderebbe davvero: quando la festa e' gia' in testa al nome
+    # ("Festa Patronale di San Bartolomeo - …") tenerla anche in coda la scrive
+    # due volte nello stesso title.
+    sagra = _frase_sagra(nome)
+    if sagra and sagra in nome[:quanti]:
+        sagra = ''
+    coda = sagra or _coda_propria(nome)
     if coda and evita and (_key(coda) in _key(evita) or _key(evita) in _key(coda)):
-        coda = ''
+        coda, sagra = '', ''
     if coda and len(coda) + 14 <= quanti:
         testa = pulisci(nome[:quanti - len(coda) - 2].rsplit(' ', 1)[0])
         # Solo se la testa resta una frase e non due parole monche, e solo se
         # la coda non c'e' gia' dentro (nomi corti, dove il taglio non serve).
-        if len(testa) >= 12 and coda not in testa:
+        # Con la festa in coda basta una parola intera ("Gianmarco…"): il taglio
+        # cade comunque su uno spazio, e li' serve solo a distinguere una serata
+        # dall'altra - il resto del title lo fa gia' il nome della sagra.
+        if len(testa) >= (9 if sagra else 12) and coda not in testa:
             return f"{testa}… {coda}"
+    # Ultima scelta: la festa da sola. Un title corto che contiene la query
+    # batte un title pieno che non la contiene.
+    if sagra and len(sagra) <= quanti and sagra not in nome[:quanti]:
+        return sagra
     corto = pulisci(nome[:quanti].rsplit(' ', 1)[0])
     return f"{corto}…" if corto else trunc(nome, quanti)
 
@@ -4408,11 +4460,27 @@ def _box_html(prov, ev, oggi):
 <base target="_blank">
 <style>
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
+/* Il body resta TRASPARENTE e la scheda bianca sta dentro: cosi' il riquadro
+   si appoggia sul colore del sito che lo ospita invece di stamparci sopra un
+   rettangolo bianco che non c'entra niente. (La pagina di Cuneo ha lo sfondo
+   #f3f4f9: con body bianco si vedeva la toppa.) */
 body{{background:transparent;color:#1a2d3a;
  font:400 15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
- -webkit-font-smoothing:antialiased;padding:2px}}
-.tt{{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
- color:#6ba5a8;margin-bottom:10px}}
+ -webkit-font-smoothing:antialiased;padding:4px}}
+.card{{background:#fff;border:1px solid rgba(45,74,92,.10);border-radius:14px;
+ box-shadow:0 1px 2px rgba(45,74,92,.05),0 6px 18px rgba(45,74,92,.06);
+ padding:12px 14px 14px;overflow:hidden}}
+/* La testata: marchio a sinistra, due righe di testo a destra. Compatta di
+   proposito - dentro un iframe alto 560px ogni riga di intestazione e' una
+   riga di eventi in meno, e gli eventi sono il motivo per cui uno guarda. */
+.hd{{display:flex;align-items:center;gap:10px;padding-bottom:10px;
+ border-bottom:1px solid rgba(45,74,92,.12)}}
+.hd img{{width:38px;height:38px;border-radius:50%;flex:none;
+ border:1px solid rgba(45,74,92,.12);background:#fff}}
+.tt{{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+ color:#6ba5a8;line-height:1.25}}
+.st{{font-size:12.5px;color:#627588;line-height:1.3}}
+.st b{{color:#2d4a5c;font-weight:600}}
 ul{{list-style:none}}
 li{{display:grid;grid-template-columns:88px 1fr;gap:2px 12px;align-items:baseline;
  padding:10px 0;border-top:1px solid rgba(45,74,92,.14)}}
@@ -4422,20 +4490,28 @@ li[hidden]{{display:none}}
 /* Il filo sopra lo toglie il JS alla prima riga VISIBILE, che dopo un filtro
    non e' quasi mai la prima figlia. */
 li:first-child,li.p{{border-top:0}}
-.fx{{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:6px;
- align-items:center;padding:6px 0 10px;
- background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(6px);
- backdrop-filter:blur(6px)}}
-.fx select,.fx input{{font:inherit;font-size:13px;color:#2d4a5c;
- border:1px solid rgba(45,74,92,.22);border-radius:7px;padding:5px 8px;
+/* Sticky dentro la scheda, quindi il fondo bianco pieno e' quello giusto: sotto
+   c'e' la scheda, non la pagina del partner. */
+/* Sticky dentro la scheda, quindi il fondo bianco pieno e' quello giusto: sotto
+   c'e' la scheda, non la pagina del partner.
+   Compatta per forza: l'iframe del partner e' alto 560px fissi, e ogni riga in
+   cui la barra va a capo e' un evento in meno che si vede senza scorrere. Con i
+   controlli elastici (flex-basis piccola) su 343px stanno in due righe invece
+   di quattro: 125px di barra erano diventati cinque eventi visibili su
+   novantanove. */
+.fx{{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:5px;
+ align-items:center;padding:8px 0;background:#fff}}
+.fx select,.fx input{{font:inherit;font-size:12.5px;color:#2d4a5c;
+ border:1px solid rgba(45,74,92,.22);border-radius:7px;padding:4px 6px;
  background:#fff;max-width:100%}}
-.fx input{{min-width:0;flex:1 1 110px}}
+.fx select{{flex:1 1 104px;min-width:0}}
+.fx input{{min-width:0;flex:1 1 86px}}
 .fx select:focus-visible,.fx input:focus-visible,.fx button:focus-visible{{
  outline:2px solid #6ba5a8;outline-offset:1px}}
 .fw{{display:flex;border:1px solid rgba(45,74,92,.22);border-radius:7px;
  overflow:hidden}}
-.fw button{{font:inherit;font-size:13px;color:#2d4a5c;background:#fff;border:0;
- border-left:1px solid rgba(45,74,92,.16);padding:5px 10px;cursor:pointer}}
+.fw button{{font:inherit;font-size:12.5px;color:#2d4a5c;background:#fff;border:0;
+ border-left:1px solid rgba(45,74,92,.16);padding:4px 8px;cursor:pointer}}
 .fw button:first-child{{border-left:0}}
 .fw button:hover{{background:rgba(107,165,168,.12)}}
 .fw button.on{{background:#6ba5a8;color:#fff}}
@@ -4451,9 +4527,11 @@ li a:hover,li a:focus{{color:#d4793a;text-decoration:underline}}
 .dv{{font-size:13px;color:#627588}}
 .vuoto{{grid-template-columns:1fr;color:#627588;font-size:14px}}
 .fn{{margin-top:12px;padding-top:10px;border-top:1px solid rgba(45,74,92,.14);
- font-size:12.5px;color:#627588}}
+ font-size:12.5px;color:#627588;display:flex;flex-wrap:wrap;gap:4px 10px;
+ align-items:baseline;justify-content:space-between}}
 .fn a{{color:#2d4a5c;font-weight:600;text-decoration:none}}
 .fn a:hover{{text-decoration:underline}}
+.fn .vt{{color:#d4793a}}
 @media (max-width:420px){{
  li{{grid-template-columns:1fr}}
  .q{{grid-row:auto}}
@@ -4461,12 +4539,21 @@ li a:hover,li a:focus{{color:#d4793a;text-decoration:underline}}
 </style>
 </head>
 <body>
-<p class="tt">Eventi per bambini · provincia di {esc(nome)}</p>
+<div class="card">
+<div class="hd">
+<img src="{SITE_URL}/assets/images/logodaop.webp" alt="DAOP" width="38" height="38">
+<div>
+<p class="tt">Eventi per bambini · {esc(nome)}</p>
+<p class="st">a cura di <b>DAOP</b> &ndash; Dove Andiamo Oggi Papi</p>
+</div>
+</div>
 {filtri}
 <ul id="ls">{righe}</ul>
 <p id="nn" class="nn" hidden>Nessun evento con questi filtri.</p>
-<p class="fn">Agenda aggiornata ogni giorno da
-<a href="{SITE_URL}/eventi.html">DAOP &ndash; Dove Andiamo Oggi Papi</a></p>
+<p class="fn"><span>Agenda aggiornata ogni giorno da
+<a href="{SITE_URL}/eventi.html">daop.it</a></span>
+<a class="vt" href="{SITE_URL}/eventi.html">Vedi tutti gli eventi &rarr;</a></p>
+</div>
 <script>
 // L'iframe non si ridimensiona da solo. Chi vuole il riquadro sempre alto
 // quanto serve aggiunge tre righe sul suo sito e ascolta questo messaggio;
