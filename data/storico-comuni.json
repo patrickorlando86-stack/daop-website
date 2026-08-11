@@ -422,6 +422,23 @@
   "nome": "Borghetto di Borbera",
   "prov": "AL"
  },
+ "brossasco": {
+  "eventi": {
+   "san-bernardo-brossasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cappella San Bernardo",
+    "manifest": "San Bernardo 2026",
+    "nome": "San Bernardo 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-19"
+   }
+  },
+  "nome": "Brossasco",
+  "prov": "CN"
+ },
  "buttiglieradasti": {
   "eventi": {
    "agosto-letterario-buttigliera-d-asti": {
@@ -1463,6 +1480,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "tres-jorns-d-crisol-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo da Calcio di Crissolo",
+    "manifest": "Tres Jorns d Crisol 2026",
+    "nome": "Tres Jorns d Crisol 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-11"
+   },
    "tres-jorns-d-crisol-tornei-tra-le-4-squadre-del-pa-crissolo": {
     "anni": [
      2026
@@ -1480,6 +1508,17 @@
  },
  "cuneo": {
   "eventi": {
+   "giochi-d-acqua-chiosco-parri-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Ferruccio Parri",
+    "manifest": "Laboratori Estivi 2026 - Chiosco Parri",
+    "nome": "Giochi d'Acqua - Chiosco Parri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-11"
+   },
    "scopri-gli-amici-alpaca-cuneo": {
     "anni": [
      2026
@@ -1532,6 +1571,221 @@
    }
   },
   "nome": "Dogliani",
+  "prov": "CN"
+ },
+ "entracque": {
+  "eventi": {
+   "c-e-un-mondo-dentro-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardinetti Salone Maria José",
+    "manifest": "",
+    "nome": "C'è un Mondo Dentro",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
+   "crocetta-piu-in-tour-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale Europa",
+    "manifest": "",
+    "nome": "Crocetta Più in Tour",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   },
+   "estate-sonora-giochi-di-note-prismadanza-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardinetti Salone Maria José",
+    "manifest": "",
+    "nome": "Estate Sonora, Giochi di Note - Prismadanza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   },
+   "festa-del-pescatore-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Lago delle Rovine",
+    "manifest": "",
+    "nome": "Festa del Pescatore",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   },
+   "food-village-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Mercato",
+    "manifest": "",
+    "nome": "Food Village",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-12"
+   },
+   "food-village-tributo-gigi-d-agostino-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Mercato",
+    "manifest": "",
+    "nome": "Food Village - Tributo Gigi D'Agostino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   },
+   "food-village-tributo-max-pezzali-e-883-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Mercato",
+    "manifest": "",
+    "nome": "Food Village - Tributo Max Pezzali e 883",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   },
+   "il-magico-mondo-dei-folletti-del-bosco-guida-tizia-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Valle Stura e Valle Grana",
+    "manifest": "Passeggiata nella natura per bambini e famiglie alla scoperta - Settimana Ferragosto",
+    "nome": "Il magico mondo dei folletti del bosco - Guida Tiziana",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   },
+   "il-margaro-e-le-sue-mucche-guida-tiziana-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Passeggiata nella natura per bambini e famiglie alla scoperta - Settimana Ferragosto",
+    "nome": "Il margaro e le sue mucche - Guida Tiziana",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
+   "la-delicatezza-del-silenzio-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Maria José",
+    "manifest": "",
+    "nome": "La Delicatezza del Silenzio",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-11"
+   },
+   "laboratorio-scervelliamoci-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Maria José",
+    "manifest": "",
+    "nome": "Laboratorio Scervelliamoci",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-11"
+   },
+   "laboratorio-scientifico-battesimo-della-sella-scud-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campeggio Il Bosco",
+    "manifest": "",
+    "nome": "Laboratorio Scientifico + Battesimo della Sella - Scuderia del Gess",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "lezioni-di-pilates-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardinetti Salone Maria José",
+    "manifest": "",
+    "nome": "Lezioni di Pilates",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
+   "nel-sentiero-del-lupo-guida-tiziana-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Entracque",
+    "manifest": "Passeggiata nella natura per bambini e famiglie alla scoperta - Settimana Ferragosto",
+    "nome": "Nel sentiero del lupo - Guida Tiziana",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-11"
+   },
+   "sotto-il-cielo-dell-eclissi-guida-tiziana-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Entracque",
+    "manifest": "Passeggiata nella natura per bambini e famiglie alla scoperta - Settimana Ferragosto",
+    "nome": "Sotto il cielo dell'eclissi - Guida Tiziana",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   },
+   "sui-passi-di-camilla-guida-tiziana-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Entracque",
+    "manifest": "Passeggiata nella natura per bambini e famiglie alla scoperta - Settimana Ferragosto",
+    "nome": "Sui passi di Camilla - Guida Tiziana",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
+   "una-montagna-di-scienza-marshmallow-challenge-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Visita Uomini e Lupi",
+    "manifest": "",
+    "nome": "Una Montagna di Scienza: Marshmallow Challenge",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-11"
+   },
+   "una-montagna-di-scienza-matematica-intorno-a-noi-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Faunistico Uomini e Lupi",
+    "manifest": "",
+    "nome": "Una Montagna di Scienza: Matematica Intorno a Noi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-12"
+   },
+   "una-montagna-di-scienza-sfida-in-natura-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Informazioni Luigi Einaudi",
+    "manifest": "",
+    "nome": "Una Montagna di Scienza: Sfida in Natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Entracque",
   "prov": "CN"
  },
  "ferrere": {
@@ -1696,8 +1950,58 @@
   "nome": "Garbagna",
   "prov": "AL"
  },
+ "gerbo": {
+  "eventi": {
+   "festa-di-ferragosto-pro-loco-gerbo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Festa di Ferragosto Pro Loco Gerbo",
+    "nome": "Festa di Ferragosto Pro Loco Gerbo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Gerbo",
+  "prov": "CN"
+ },
  "govone": {
   "eventi": {
+   "dj-set-dj-dedo-italobeat-dj-skyline-90-volte-ancor-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "DJ Set: DJ Dedo, Italobeat, DJ Skyline - 90 Volte Ancora 2000 - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "govone-in-festa-sagra-della-lumaca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Reale di Govone",
+    "manifest": "Govone in Festa - 11° Sagra della Lumaca",
+    "nome": "Govone in Festa - 11° Sagra della Lumaca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   },
+   "musica-dal-vivo-max-mania-883-tribute-band-pro-loc-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "Musica dal Vivo: Max Mania 883 Tribute Band - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": false,
+    "ultima": "2026-09-11"
+   },
    "sagra-dell-agnolotto-e-del-bollito-misto-con-alex-govone": {
     "anni": [
      2026
@@ -1720,6 +2024,17 @@
     "pagina": true,
     "ultima": "2026-09-06"
    },
+   "sagra-dell-agnolotto-e-del-bollito-misto-pro-loco-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "37ª Sagra dell'Agnolotto e del Bollito Misto - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
    "sagra-gastronomica-con-polenta-e-cinghiale-con-giu-govone": {
     "anni": [
      2026
@@ -1731,6 +2046,28 @@
     "pagina": true,
     "ultima": "2026-09-08"
    },
+   "serata-danzante-con-alex-e-la-band-pro-loco-canove-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "Serata Danzante con Alex e la Band - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "serata-danzante-con-giuliano-i-baroni-pro-loco-can-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "Serata Danzante con Giuliano & I Baroni - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": false,
+    "ultima": "2026-09-08"
+   },
    "serata-hamburger-patatine-e-birra-con-max-mania-88-govone": {
     "anni": [
      2026
@@ -1738,6 +2075,17 @@
     "luogo": "Padiglione Festa Patronale Canove di Govone",
     "manifest": "Festa Patronale 2026 - Canove di Govone",
     "nome": "Serata Hamburger, Patatine e Birra con Max Mania 883 Tribute Band - Pro Loco Canove",
+    "organizza": "Pro Loco Canove",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
+   "serata-hamburger-patatine-e-birra-pro-loco-canove-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Canove di Govone",
+    "manifest": "Festa Patronale 2026 - Canove di Govone",
+    "nome": "Serata Hamburger, Patatine e Birra - Pro Loco Canove",
     "organizza": "Pro Loco Canove",
     "pagina": true,
     "ultima": "2026-09-11"
@@ -1813,6 +2161,23 @@
   "nome": "Mantovana",
   "prov": "AL"
  },
+ "mombarcaro": {
+  "eventi": {
+   "sagra-dello-gnocco-festa-patronale-mombarcaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bricco de Faule",
+    "manifest": "27a Sagra dello Gnocco - Festa Patronale",
+    "nome": "27a Sagra dello Gnocco - Festa Patronale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-27"
+   }
+  },
+  "nome": "Mombarcaro",
+  "prov": "CN"
+ },
  "monasterobormida": {
   "eventi": {
    "castello-di-monastero-bormida-castelli-aperti": {
@@ -1843,6 +2208,17 @@
  },
  "mondovi": {
   "eventi": {
+   "bestiario-d-inchiostro-museo-civico-della-stampa-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Civico della Stampa - Polo Culturale delle Orfane",
+    "manifest": "",
+    "nome": "Bestiario d'inchiostro - Museo Civico della Stampa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   },
    "laboratorio-di-carta-riciclata-il-melograno-societ-mondovi": {
     "anni": [
      2026
@@ -2211,6 +2587,17 @@
  },
  "ormea": {
   "eventi": {
+   "estate-in-coro-laboratorio-di-canto-corale-aeropla-ormea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spazio Giovani",
+    "manifest": "Estate in Coro",
+    "nome": "Estate in Coro - Laboratorio di Canto Corale - Aeroplani di Carta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
    "mini-olimpiadi-ormea-edizione": {
     "anni": [
      2026
@@ -2288,8 +2675,36 @@
   "nome": "Pecetto di Valenza",
   "prov": "AL"
  },
+ "piozzo": {
+  "eventi": {
+   "pranzo-sociale-piozzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ristorante Perlage di Piozzo",
+    "manifest": "Festa di San Bartolomeo",
+    "nome": "Pranzo Sociale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Piozzo",
+  "prov": "CN"
+ },
  "pontechianale": {
   "eventi": {
+   "caccia-al-tesoro-pro-loco-pontechianale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Municipio",
+    "manifest": "",
+    "nome": "Caccia al Tesoro - Pro Loco Pontechianale",
+    "organizza": "Pro Loco Pontechianale",
+    "pagina": false,
+    "ultima": "2026-08-12"
+   },
    "obiettivo-impollinatori-parco-del-monviso-pontechianale": {
     "anni": [
      2026
@@ -2545,9 +2960,54 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-12"
+   },
+   "prato-nevoso-c-ho-talent-prato-nevoso-village": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Prato Nevoso Village",
+    "manifest": "",
+    "nome": "Prato Nevoso C'ho Talent - Prato Nevoso Village",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
    }
   },
   "nome": "Prato Nevoso",
+  "prov": "CN"
+ },
+ "roburent": {
+  "eventi": {
+   "gymkana-in-bicicletta-pro-loco-roburent": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo di Roburent",
+    "manifest": "",
+    "nome": "Gymkana in Bicicletta! - Pro Loco Roburent",
+    "organizza": "Pro Loco Roburent",
+    "pagina": true,
+    "ultima": "2026-08-12"
+   }
+  },
+  "nome": "Roburent",
+  "prov": "CN"
+ },
+ "roccadebaldi": {
+  "eventi": {
+   "festa-di-san-bartolomeo-rocca-de-baldi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rocca De' Baldi",
+    "manifest": "Festa di San Bartolomeo",
+    "nome": "Festa di San Bartolomeo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Rocca De' Baldi",
   "prov": "CN"
  },
  "roccaforteligure": {
@@ -2798,6 +3258,23 @@
    }
   },
   "nome": "Sampeyre",
+  "prov": "CN"
+ },
+ "sanbenigno": {
+  "eventi": {
+   "programma-festeggiamenti-pro-loco-san-benigno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Programma Festeggiamenti Pro Loco San Benigno",
+    "nome": "Programma Festeggiamenti Pro Loco San Benigno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-31"
+   }
+  },
+  "nome": "San Benigno",
   "prov": "CN"
  },
  "sandamianodasti": {
@@ -3730,6 +4207,23 @@
   },
   "nome": "Villaromagnano",
   "prov": "AL"
+ },
+ "vinadio": {
+  "eventi": {
+   "a-piccoli-passi-inaugurazione-forte-di-vinadio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Forte di Vinadio",
+    "manifest": "",
+    "nome": "A Piccoli Passi - Inaugurazione - Forte di Vinadio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Vinadio",
+  "prov": "CN"
  },
  "vinchio": {
   "eventi": {
