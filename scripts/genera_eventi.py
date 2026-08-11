@@ -4187,7 +4187,44 @@ def opzioni_provincia(events):
     return "\n".join(righe)
 
 
-def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None):
+# Sotto questa soglia, nei prossimi 30 giorni, la stagione delle sagre e'
+# finita e l'hero smette di prometterle. Tre e non una: con una sola sagra
+# rimasta l'H1 ballerebbe da un giorno all'altro, e eventi.html si ricommitta
+# ogni volta che cambia di un carattere.
+MIN_SAGRE_HERO = 3
+FINESTRA_HERO = 30
+
+
+def blocco_hero(events, oggi):
+    """H1 e occhiello dell'agenda, scritti sulla stagione che c'e' davvero.
+
+    Erano HTML fisso, ed e' un problema che si vede solo a novembre: "Sagre ed
+    eventi oggi e questo weekend" quando di sagre non ce n'e' nessuna promette
+    una cosa che la pagina non ha. E' la stessa regola che le landing seguono
+    gia' con lan-vuoto - si scrive quello che c'e', non quello che vorremmo -
+    solo che qui il testo non lo generava nessuno.
+
+    Fuori stagione l'H1 non perde l'intento ("oggi e questo weekend" vale tutto
+    l'anno): perde la parola sagre, che a dicembre non porta nessuno."""
+    limite = oggi + datetime.timedelta(days=FINESTRA_HERO)
+    sagre = sum(1 for e in events
+                if bucket(e)[0] == 'feste' and e['d_end'] >= oggi and e['d_start'] <= limite)
+    if sagre >= MIN_SAGRE_HERO:
+        h1 = "<em>Sagre ed eventi</em> oggi e questo weekend"
+        occhiello = ("Tutte le sagre, le feste patronali, le fiere, i laboratori e gli "
+                     "spettacoli di oggi e del weekend nelle province di Alessandria, "
+                     "Asti e Cuneo. Agenda aggiornata ogni notte, selezionata per le "
+                     "famiglie e verificata evento per evento.")
+    else:
+        h1 = "<em>Eventi per famiglie</em> oggi e questo weekend"
+        occhiello = ("Laboratori, spettacoli e appuntamenti per famiglie di oggi e del "
+                     "weekend nelle province di Alessandria, Asti e Cuneo. Agenda "
+                     "aggiornata ogni notte e verificata evento per evento: fuori "
+                     "stagione le sagre non ci sono, e non le scriviamo.")
+    return f"    <h1>{h1}</h1>\n    <p>{occhiello}</p>"
+
+
+def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None, hero=None):
     s = open(HTML_PATH, encoding="utf-8").read()
     s, n1 = re.subn(r'(<!-- EVENTI-TIPO:START -->\n).*?(\n *<!-- EVENTI-TIPO:END -->)',
                     lambda m: m.group(1) + tipo_opts + m.group(2), s, count=1, flags=re.S)
@@ -4212,6 +4249,14 @@ def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None):
         if n5 != 1:
             print("[genera_eventi] ATTENZIONE: marker EVENTI-COMUNI non trovati in "
                   "eventi.html: l'elenco delle pagine comune non viene scritto")
+    # Opzionale come gli altri due: se i marker non ci sono resta l'hero scritto
+    # a mano, che e' sbagliato solo fuori stagione - non vale far fallire il run.
+    if hero is not None:
+        s, n6 = re.subn(r'(<!-- EVENTI-HERO:START -->\n).*?(\n *<!-- EVENTI-HERO:END -->)',
+                        lambda m: m.group(1) + hero + m.group(2), s, count=1, flags=re.S)
+        if n6 != 1:
+            print("[genera_eventi] ATTENZIONE: marker EVENTI-HERO non trovati in "
+                  "eventi.html: titolo e occhiello restano quelli scritti a mano")
     if n1 != 1 or n2 != 1 or n3 != 1:
         raise SystemExit(f"Ancoraggi non trovati in eventi.html (tipo={n1}, lista={n2}, json-ld={n3})")
     open(HTML_PATH, "w", encoding="utf-8").write(s)
@@ -4759,7 +4804,8 @@ def main():
     hub = comuni_hub(events, storico, oggi)
     tipo_opts, lista = render(events, hub)
     jsonld = render_jsonld(events)
-    inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub))
+    inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub),
+           blocco_hero(events, oggi))
     inject_home(render_home(events))
     slugs = scrivi_pagine(events, hub)
     comuni = scrivi_comuni(hub, oggi)
