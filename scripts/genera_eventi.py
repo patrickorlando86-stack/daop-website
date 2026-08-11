@@ -4300,19 +4300,44 @@ def controlla_crollo(events):
 
 BOX_DIR = os.path.join(ROOT, "eventi")
 
-# Una FINESTRA DI GIORNI, non un numero di voci.
+# TUTTA l'agenda della provincia, non una finestra (11/08/2026).
 #
-# La prima versione tagliava a 12 righe fisse. Sembra ragionevole finche' non
-# guardi i numeri: in provincia di Cuneo ci sono cinque eventi al giorno, quindi
-# dodici righe coprivano fino a giovedi' e il riquadro si fermava PRIMA del
-# weekend. Cioe' esattamente l'unica cosa che un genitore ci va a cercare.
+# La storia di questo taglio in due righe, perche' e' istruttiva: la prima
+# versione fermava il riquadro a 12 righe fisse, e con i cinque eventi al
+# giorno che ha Cuneo si fermava al giovedi', cioe' prima del weekend. La
+# seconda l'ha sostituito con una finestra di 10 giorni, che il weekend lo
+# teneva sempre dentro ma spostava il problema piu' in la': il partner
+# pubblicava 21 eventi su 59, e per chi guardava il suo sito settembre non
+# esisteva.
 #
-# Dieci giorni tengono sempre dentro il weekend che arriva - anche se lo si
-# guarda di lunedi' - e quello dopo. Il tetto sulle voci resta solo come
-# paracadute per non spedire tre schermate a chi ha incorniciato il riquadro in
-# una colonna stretta.
-BOX_GIORNI = 10
-BOX_MAX = 25
+# Con i filtri qui sotto la lista lunga smette di essere una cosa da contenere
+# e diventa il magazzino da cui i filtri pescano. Sessanta voci che si
+# restringono a "Cuneo, questo weekend" in due clic servono piu' di ventuno che
+# non si restringono affatto.
+#
+# Resta solo un paracadute molto alto: se un giorno il foglio esplode, meglio un
+# riquadro troncato che un file da megabyte dentro la pagina di qualcun altro.
+BOX_MAX = 400
+
+# Sotto questa soglia la barra dei filtri non si disegna: con sei eventi in
+# elenco tre menu a tendina sono piu' ingombro che aiuto.
+BOX_MIN_FILTRI = 8
+
+
+def _box_cerca(e):
+    """Il testo su cui morde la casella di ricerca, gia' pronto per il confronto.
+
+    Senza accenti e in minuscolo, perche' chi cerca scrive "citta" e "perche'"
+    come gli viene: il confronto lo fa il generatore una volta, non il browser a
+    ogni tasto premuto. Dentro ci va anche quello che NON si vede nella riga -
+    il luogo e il nome della manifestazione - cosi' "biblioteca" o "sagra del
+    raviolo" trovano anche gli eventi che nel titolo non li nominano.
+    """
+    pezzi = [e.get('nome'), e.get('citta'), e.get('luogo'),
+             e.get('manifest'), e.get('categoria')]
+    s = ' '.join(p for p in pezzi if p)
+    s = unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode()
+    return re.sub(r'\s+', ' ', s).strip().lower()
 
 
 def _box_riga(e, oggi):
@@ -4321,16 +4346,55 @@ def _box_riga(e, oggi):
     if any(c.isdigit() for c in ora):
         quando += ' · ' + trunc(ora, 12)
     citta = (e.get('citta') or '').strip()
-    return (f'<li><span class="q">{esc(quando)}</span>'
+    # data-s/data-e sono le date VERE, non l'etichetta: "oggi" e "questo
+    # weekend" li decide il browser con l'orologio di chi guarda, non con
+    # quello che aveva il generatore stanotte. Servono entrambe perche' una
+    # sagra di tre giorni deve comparire sotto "oggi" anche il secondo giorno.
+    return (f'<li data-c="{esc(citta)}" data-k="{esc(e.get("categoria") or "")}"'
+            f' data-s="{e["d_start"].isoformat()}" data-e="{e["d_end"].isoformat()}"'
+            f' data-t="{esc(_box_cerca(e))}">'
+            f'<span class="q">{esc(quando)}</span>'
             f'<a href="{SITE_URL}{_href_evento(e)}">'
             f'{esc(trunc(e.get("nome") or "", 70))}</a>'
             + (f'<span class="dv">{esc(citta)}</span>' if citta else '')
             + '</li>')
 
 
+def _box_filtri(ev):
+    """La barra dei filtri. Stringa vuota se non c'e' abbastanza da filtrare."""
+    if len(ev) < BOX_MIN_FILTRI:
+        return ''
+    comuni = sorted({(x.get('citta') or '').strip() for x in ev} - {''},
+                    key=lambda s: s.lower())
+    categorie = sorted({(x.get('categoria') or '').strip() for x in ev} - {''},
+                       key=lambda s: s.lower())
+    # In ordine alfabetico e non per frequenza: una tendina si legge cercando un
+    # nome, e un nome lo si cerca dove l'alfabeto dice che sta.
+    opz_c = ''.join(f'<option value="{esc(c)}">{esc(c)}</option>' for c in comuni)
+    opz_k = ''.join(f'<option value="{esc(k)}">{esc(k)}</option>' for k in categorie)
+    sel_c = (f'<select id="fc" aria-label="Filtra per comune">'
+             f'<option value="">Tutti i comuni</option>{opz_c}</select>'
+             if len(comuni) > 1 else '')
+    sel_k = (f'<select id="fk" aria-label="Filtra per categoria">'
+             f'<option value="">Tutte le categorie</option>{opz_k}</select>'
+             if len(categorie) > 1 else '')
+    return f'''<div class="fx">
+<div class="fw" role="group" aria-label="Filtra per data">
+<button type="button" data-w="oggi">Oggi</button>
+<button type="button" data-w="weekend">Weekend</button>
+<button type="button" data-w="tutti" class="on" aria-pressed="true">Tutti</button>
+</div>
+{sel_c}{sel_k}
+<input id="fq" type="search" placeholder="Cerca…" aria-label="Cerca tra gli eventi">
+<button type="button" id="fz" class="fz" hidden>Azzera</button>
+<span id="nc" class="nc"></span>
+</div>'''
+
+
 def _box_html(prov, ev, oggi):
     nome = PROVINCE_NOMI.get(prov, prov)
     righe = ''.join(_box_riga(e, oggi) for e in ev)
+    filtri = _box_filtri(ev)
     if not righe:
         righe = ('<li class="vuoto">Nessun evento in agenda in questo momento. '
                  'Torna a trovarci fra qualche giorno.</li>')
@@ -4352,7 +4416,34 @@ body{{background:transparent;color:#1a2d3a;
 ul{{list-style:none}}
 li{{display:grid;grid-template-columns:88px 1fr;gap:2px 12px;align-items:baseline;
  padding:10px 0;border-top:1px solid rgba(45,74,92,.14)}}
-li:first-child{{border-top:0}}
+/* [hidden] della UA perde contro `li{{display:grid}}`: senza questa riga i
+   filtri nascondono e non si vede nessun effetto. */
+li[hidden]{{display:none}}
+/* Il filo sopra lo toglie il JS alla prima riga VISIBILE, che dopo un filtro
+   non e' quasi mai la prima figlia. */
+li:first-child,li.p{{border-top:0}}
+.fx{{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:6px;
+ align-items:center;padding:6px 0 10px;
+ background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(6px);
+ backdrop-filter:blur(6px)}}
+.fx select,.fx input{{font:inherit;font-size:13px;color:#2d4a5c;
+ border:1px solid rgba(45,74,92,.22);border-radius:7px;padding:5px 8px;
+ background:#fff;max-width:100%}}
+.fx input{{min-width:0;flex:1 1 110px}}
+.fx select:focus-visible,.fx input:focus-visible,.fx button:focus-visible{{
+ outline:2px solid #6ba5a8;outline-offset:1px}}
+.fw{{display:flex;border:1px solid rgba(45,74,92,.22);border-radius:7px;
+ overflow:hidden}}
+.fw button{{font:inherit;font-size:13px;color:#2d4a5c;background:#fff;border:0;
+ border-left:1px solid rgba(45,74,92,.16);padding:5px 10px;cursor:pointer}}
+.fw button:first-child{{border-left:0}}
+.fw button:hover{{background:rgba(107,165,168,.12)}}
+.fw button.on{{background:#6ba5a8;color:#fff}}
+.fz{{font:inherit;font-size:13px;color:#627588;background:none;border:0;
+ padding:5px 2px;cursor:pointer;text-decoration:underline}}
+.fz:hover{{color:#d4793a}}
+.nc{{font-size:12.5px;color:#627588;margin-left:auto}}
+.nn{{padding:14px 0;color:#627588;font-size:14px}}
 .q{{grid-row:span 2;font-size:12px;font-weight:700;color:#e8954a;text-transform:uppercase;
  letter-spacing:.03em;padding-top:2px}}
 li a{{color:#2d4a5c;font-weight:600;text-decoration:none}}
@@ -4371,7 +4462,9 @@ li a:hover,li a:focus{{color:#d4793a;text-decoration:underline}}
 </head>
 <body>
 <p class="tt">Eventi per bambini · provincia di {esc(nome)}</p>
-<ul>{righe}</ul>
+{filtri}
+<ul id="ls">{righe}</ul>
+<p id="nn" class="nn" hidden>Nessun evento con questi filtri.</p>
 <p class="fn">Agenda aggiornata ogni giorno da
 <a href="{SITE_URL}/eventi.html">DAOP &ndash; Dove Andiamo Oggi Papi</a></p>
 <script>
@@ -4385,6 +4478,100 @@ li a:hover,li a:focus{{color:#d4793a;text-decoration:underline}}
   }}
   addEventListener('load', avvisa);
   addEventListener('resize', avvisa);
+
+  // --- filtri ---------------------------------------------------------
+  // Tutto quello che serve e' gia' nel documento: i filtri mostrano e
+  // nascondono righe, non chiedono niente a nessuno. Il riquadro resta un file
+  // solo, senza chiamate di rete, e continua a funzionare identico dentro
+  // WordPress, Wix o una pagina scritta a mano.
+  var lista = document.getElementById('ls');
+  var barra = document.querySelector('.fx');
+  if (!lista || !barra) return;
+
+  var voci = [].slice.call(lista.querySelectorAll('li[data-s]'));
+  var selC = document.getElementById('fc');
+  var selK = document.getElementById('fk');
+  var cerca = document.getElementById('fq');
+  var azzera = document.getElementById('fz');
+  var conta = document.getElementById('nc');
+  var niente = document.getElementById('nn');
+  var giorni = [].slice.call(barra.querySelectorAll('.fw button'));
+  var quando = 'tutti';
+
+  function iso(d) {{
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2)
+                           + '-' + ('0' + d.getDate()).slice(-2);
+  }}
+  function norm(s) {{
+    return (s || '').toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');
+  }}
+  // L'intervallo lo si calcola con l'orologio di CHI GUARDA, non con quello del
+  // generatore: la pagina puo' restare in cache nel browser o nella CDN del
+  // partner, e un "oggi" congelato a stanotte sarebbe una bugia il giorno dopo.
+  function intervallo() {{
+    var d = new Date(); d.setHours(0, 0, 0, 0);
+    if (quando === 'oggi') return [iso(d), iso(d)];
+    var g = d.getDay();                          // 0 = domenica
+    if (g === 0) return [iso(d), iso(d)];        // di domenica il weekend finisce oggi
+    var sab = new Date(d); sab.setDate(d.getDate() + ((6 - g) % 7));
+    var dom = new Date(sab); dom.setDate(sab.getDate() + 1);
+    return [iso(sab), iso(dom)];
+  }}
+
+  function filtra() {{
+    var c = selC ? selC.value : '';
+    var k = selK ? selK.value : '';
+    var q = norm(cerca ? cerca.value : '').trim();
+    var r = quando === 'tutti' ? null : intervallo();
+    var n = 0, primo = null;
+    voci.forEach(function (li) {{
+      // Sulle date si confronta la SOVRAPPOSIZIONE, non l'inizio: una sagra
+      // che parte venerdi' e dura tre giorni e' un evento del weekend anche se
+      // e' cominciata prima.
+      var ok = (!c || li.getAttribute('data-c') === c)
+            && (!k || li.getAttribute('data-k') === k)
+            && (!q || li.getAttribute('data-t').indexOf(q) > -1)
+            && (!r || (li.getAttribute('data-s') <= r[1]
+                       && li.getAttribute('data-e') >= r[0]));
+      li.hidden = !ok;
+      li.classList.remove('p');
+      if (ok) {{ n++; if (!primo) primo = li; }}
+    }});
+    if (primo) primo.classList.add('p');
+    if (niente) niente.hidden = n > 0;
+    if (conta) conta.textContent = n === 0 ? '' : (n === 1 ? '1 evento' : n + ' eventi');
+    var attivo = !!(c || k || q || quando !== 'tutti');
+    if (azzera) azzera.hidden = !attivo;
+    avvisa();
+  }}
+
+  giorni.forEach(function (b) {{
+    b.addEventListener('click', function () {{
+      quando = b.getAttribute('data-w');
+      giorni.forEach(function (x) {{
+        var on = x === b;
+        x.classList.toggle('on', on);
+        x.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }});
+      filtra();
+    }});
+  }});
+  if (selC) selC.addEventListener('change', filtra);
+  if (selK) selK.addEventListener('change', filtra);
+  if (cerca) cerca.addEventListener('input', filtra);
+  if (azzera) azzera.addEventListener('click', function () {{
+    if (selC) selC.value = '';
+    if (selK) selK.value = '';
+    if (cerca) cerca.value = '';
+    giorni.forEach(function (x) {{
+      var on = x.getAttribute('data-w') === 'tutti';
+      x.classList.toggle('on', on);
+      x.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }});
+    quando = 'tutti';
+    filtra();
+  }});
+  filtra();
 }})();
 </script>
 </body>
@@ -4422,15 +4609,24 @@ def scrivi_box(events, oggi):
        dipendere dal guscio, che porterebbe con se' font, header e regole sul
        body che li' non hanno senso.
 
+    4. I filtri (comune, quando, categoria, parole) lavorano SUL DOCUMENTO che
+       e' gia' arrivato: mostrano e nascondono righe, non chiedono niente alla
+       rete. Un filtro che interroga un server sarebbe una dipendenza in piu'
+       dentro la pagina di qualcun altro, e la prima cosa che si rompe in
+       silenzio il giorno che il server non risponde. Cosi' invece il peggio
+       che puo' capitare e' un riquadro fermo a ieri.
+
     Un file per provincia e non ?prov=CN, perche' il sito e' statico: un
     parametro nella URL non cambierebbe niente senza JavaScript.
     """
     os.makedirs(BOX_DIR, exist_ok=True)
-    limite = oggi + datetime.timedelta(days=BOX_GIORNI)
     scritti = []
     for prov in PROVINCE_PUBBLICATE:
+        # `d_end >= oggi` e non `d_start`: senza finestra superiore un evento
+        # gia' finito non ha piu' niente che lo tenga fuori, e una sagra di tre
+        # giorni deve restare in elenco anche il suo ultimo giorno.
         ev = sorted((e for e in events
-                     if e.get('prov') == prov and e['d_start'] <= limite),
+                     if e.get('prov') == prov and e['d_end'] >= oggi),
                     key=lambda e: (e['d_start'], (e.get('nome') or '')))[:BOX_MAX]
         path = os.path.join(BOX_DIR, f"box-{prov.lower()}.html")
         nuovo = _box_html(prov, ev, oggi)
