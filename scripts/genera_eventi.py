@@ -4536,6 +4536,24 @@ li a:hover,li a:focus{{color:#d4793a;text-decoration:underline}}
  li{{grid-template-columns:1fr}}
  .q{{grid-row:auto}}
 }}
+/* POCA ALTEZZA: il riquadro si stringe da solo.
+   Dentro un iframe una media query sui pixel misura il RIQUADRO, non lo
+   schermo: qui dentro `max-height` vuol dire "il partner mi ha dato poco
+   spazio". E allora se lo prende il contenuto, invece di chiedere a lui di
+   cambiare una cifra sul suo sito - che e' una modifica che dipende da una
+   persona, cioe' una modifica che meta' delle volte non si fa.
+   Sparisce la riga "a cura di DAOP - Dove Andiamo Oggi Papi": il logo e il
+   credito in fondo il marchio lo dicono lo stesso, e a 560px un evento in piu'
+   vale piu' di una riga di firma. */
+@media (max-height:620px){{
+ .card{{padding:8px 12px 10px}}
+ .hd{{padding-bottom:7px;gap:8px}}
+ .hd img{{width:28px;height:28px}}
+ .st{{display:none}}
+ .fx{{padding:6px 0}}
+ li{{padding:7px 0}}
+ .fn{{margin-top:8px;padding-top:7px}}
+}}
 </style>
 </head>
 <body>
