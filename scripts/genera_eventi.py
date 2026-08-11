@@ -3813,6 +3813,29 @@ LANDING_CSS = """
 .lan-alt a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .lan-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem;line-height:1.6}
+/* La categoria accanto alla data. Il colore di categoria su queste righe c'era
+   gia' (.com-d prende --cat-ink) ma non lo sapeva nessuno: un blu e un verde
+   senza etichetta sono due blu e due verdi. Ora che c'e' anche il filtro per
+   tipo, il nome serve due volte - a leggere la riga e a capire cosa si e'
+   filtrato. Va a capo da solo quando la data e' lunga. */
+.com-cat{color:var(--cat-ink,#606d7a);opacity:.78}
+.com-cat::before{content:' · ';opacity:.6}
+/* La barra filtri riusa .ev-toolbar/.ev-search/.ev-select dal CSS dell'agenda.
+   Qui cambia solo l'ancoraggio: nelle pagine di intenzione non c'e' la barra
+   dei giorni sotto, quindi si ferma direttamente sotto la nav del sito. */
+.lan-toolbar{top:68px;margin:18px 0 0;padding:11px 0 10px}
+.lan-count{margin:9px 0 0;font-size:.8rem;font-weight:600;color:var(--text-light,#7e8c99);
+  min-height:1em}
+.lan-nulla{margin-top:14px}
+.lan-nulla button{font:inherit;font-weight:700;color:var(--orange-dark,#c97a2e);
+  background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.com-ev li[hidden],.com-grp[hidden]{display:none}
+@media(max-width:600px){
+  .lan-toolbar{margin-top:14px}
+  /* Stessa ragione dell'agenda: a larghezza uguale le categorie lunghe
+     vengono tagliate, a larghezza naturale ci stanno in fila. */
+  .lan-toolbar .ev-select{flex:1 1 auto}
+}
 """
 
 
@@ -3838,13 +3861,65 @@ def _landing_righe(ev, oggi):
         nude = nude and not thumb
         citta = (e.get('citta') or '').strip()
         dove = f"{citta} ({e['prov']})" if citta else (e.get('prov') or '')
-        out += (f'<li style="{stile}">{thumb}<span class="com-b">'
-                f'<span class="com-d">{esc(quando)}</span>'
+        # data-province/data-category: sono quello su cui lavora la barra
+        # filtri. Stessi valori e stesso vocabolario dell'agenda, cosi' chi
+        # legge il JS di una pagina ha gia' letto quello dell'altra.
+        slug, _ic, cat = bucket(e)
+        out += (f'<li style="{stile}" data-province="{(e.get("prov") or "").lower()}"'
+                f' data-category="{slug}">{thumb}<span class="com-b">'
+                f'<span class="com-d">{esc(quando)}'
+                f'<span class="com-cat">{esc(cat)}</span></span>'
                 f'<a class="com-go" href="{_href_evento(e)}">'
                 f'{esc(trunc(e.get("nome") or "", 80))}</a>'
                 f'<span class="com-luogo">{esc(dove)}</span>'
                 '</span></li>')
     return out, nude
+
+
+# Sotto questo numero di eventi una barra filtri e' arredamento: si scorre
+# prima la lista che a decidere cosa scegliere in una tendina.
+MIN_FILTRI = 12
+
+
+def _landing_filtri(eventi, con_prov=True):
+    """La barra filtri delle pagine di intenzione.
+
+    Non e' la barra dell'agenda ricopiata: li' i controlli sono quattro fissi,
+    qui ognuno compare solo se ha davvero qualcosa da scegliere. "Quando" non
+    c'e' mai - queste pagine SONO gia' una risposta a quando (oggi, il weekend)
+    e una seconda domanda sul tempo la contraddirebbe. La provincia sparisce
+    sulle pagine per provincia, che sono gia' filtrate per definizione. E una
+    tendina con una sola voce non si stampa: sarebbe un comando che non fa
+    niente."""
+    if len(eventi) < MIN_FILTRI:
+        return ''
+    cats = [f'<option value="{s}">{esc(LABELS[s])}</option>' for s in ORDER
+            if any(bucket(e)[0] == s for e in eventi)]
+    provs = ([f'<option value="{c.lower()}">Prov. {c}</option>'
+              for c in PROVINCE_PUBBLICATE
+              if any((e.get('prov') or '').upper() == c for e in eventi)]
+             if con_prov else [])
+    tendine = ''
+    if len(provs) > 1:
+        tendine += ('<select class="ev-select" id="lan-dove" data-campo="province"'
+                    ' aria-label="Filtra per provincia">'
+                    '<option value="all">Province</option>' + "".join(provs) + '</select>')
+    if len(cats) > 1:
+        tendine += ('<select class="ev-select" id="lan-tipo" data-campo="category"'
+                    ' aria-label="Filtra per tipo di evento">'
+                    '<option value="all">Categorie</option>' + "".join(cats) + '</select>')
+    return ('<div class="ev-toolbar lan-toolbar" id="lan-toolbar">'
+            '<div class="ev-search">'
+            '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"'
+            ' stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+            '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>'
+            '<input type="search" id="lan-q" placeholder="Cerca un paese, una sagra…"'
+            ' aria-label="Cerca in questo elenco" autocomplete="off"></div>'
+            + tendine +
+            '</div>'
+            '<p class="lan-count" id="lan-count" role="status"></p>'
+            '<p class="lan-vuoto lan-nulla" id="lan-nulla" hidden>Con questi filtri non resta '
+            'niente. <button type="button" id="lan-reset">Azzera i filtri</button></p>')
 
 
 def _landing_sezione(titolo, sotto, ev, oggi):
@@ -3956,8 +4031,101 @@ def _landing_shell(spec, css, nav, foot, oggi):
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
-</body>
+{LANDING_JS if 'lan-toolbar' in spec['corpo'] else ''}</body>
 </html>
+"""
+
+
+# Il filtro delle pagine di intenzione. Non e' quello dell'agenda: li' ci sono
+# le giornate, il calendario e le righe che si aprono, qui c'e' un elenco di
+# link e basta, quindi riusarlo sarebbe piu' codice da tenere allineato che da
+# risparmiare. Quello che si eredita e' l'aspetto - .ev-toolbar e .ev-select
+# arrivano dal CSS di eventi.html copiato da _guscio() - e il vocabolario:
+# data-province e data-category valgono le stesse cose nei due posti.
+LANDING_JS = r"""<script>
+(function () {
+  var bar = document.getElementById('lan-toolbar');
+  if (!bar) return;
+  var q = document.getElementById('lan-q');
+  var conta = document.getElementById('lan-count');
+  var nulla = document.getElementById('lan-nulla');
+  var reset = document.getElementById('lan-reset');
+  var sel = [].slice.call(bar.querySelectorAll('.ev-select'));
+  var voci = [].slice.call(document.querySelectorAll('.ev-wrap li[data-category]'));
+  // Solo i gruppi che contengono voci filtrabili: nelle pagine per provincia
+  // c'e' anche l'elenco delle feste che tornano ogni anno (.com-anni), che non
+  // ha ne' provincia ne' categoria e non deve sparire quando si filtra.
+  var gruppi = [].slice.call(document.querySelectorAll('.ev-wrap .com-grp'))
+    .filter(function (g) { return g.querySelector('li[data-category]'); });
+  if (!voci.length) return;
+
+  // L'indice della ricerca si costruisce alla prima ricerca vera, non al
+  // caricamento: stessa ragione che nell'agenda, leggere il testo di tutte le
+  // righe e' lavoro che quasi nessun visitatore usa.
+  var testo = null;
+  function indice() {
+    if (!testo) {
+      testo = new Map(voci.map(function (l) {
+        return [l, l.textContent.toLowerCase().replace(/\s+/g, ' ')];
+      }));
+    }
+    return testo;
+  }
+
+  // Un gruppo nascosto lascerebbe in aria il suo titolo: su /eventi/oggi.html
+  // "Oggi con i bambini" e' un <h2> con il suo paragrafo, scritti PRIMA della
+  // sezione e fuori da essa. Si risale ai fratelli precedenti saltando i
+  // paragrafi: se si arriva a un titolo e' suo e sparisce con lui, se si
+  // arriva a qualsiasi altra cosa (o all'inizio) non si tocca niente - cosi'
+  // il paragrafo di apertura della pagina, che non ha titolo sopra, resta.
+  function testaDi(g) {
+    var pezzi = [], n = g.previousElementSibling;
+    while (n && n.tagName === 'P') { pezzi.push(n); n = n.previousElementSibling; }
+    if (n && (n.tagName === 'H2' || n.tagName === 'H3')) { pezzi.push(n); return pezzi; }
+    return [];
+  }
+  var teste = new Map(gruppi.map(function (g) { return [g, testaDi(g)]; }));
+
+  function applica() {
+    var t = q ? q.value.trim().toLowerCase() : '';
+    var f = {};
+    sel.forEach(function (s) {
+      f[s.dataset.campo] = s.value;
+      s.classList.toggle('is-on', s.value !== 'all');
+    });
+    var visti = 0;
+    voci.forEach(function (l) {
+      var ok = (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
+               (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
+               (!t || indice().get(l).indexOf(t) > -1);
+      l.hidden = !ok;
+      if (ok) visti++;
+    });
+    gruppi.forEach(function (g) {
+      var vuoto = !g.querySelector('li[data-category]:not([hidden])');
+      g.hidden = vuoto;
+      teste.get(g).forEach(function (n) { n.hidden = vuoto; });
+    });
+    var filtrato = !!t || sel.some(function (s) { return s.value !== 'all'; });
+    // A riposo il conteggio non si scrive: la pagina lo dice gia' nell'occhiello
+    // e nel paragrafo di apertura, e ripeterlo una terza volta e' rumore.
+    conta.textContent = filtrato
+      ? visti + (visti === 1 ? ' evento' : ' eventi') + ' con questi filtri'
+      : '';
+    if (nulla) nulla.hidden = visti !== 0;
+  }
+
+  if (q) q.addEventListener('input', applica);
+  sel.forEach(function (s) { s.addEventListener('change', applica); });
+  if (reset) reset.addEventListener('click', function () {
+    if (q) q.value = '';
+    sel.forEach(function (s) { s.value = 'all'; });
+    applica();
+    bar.scrollIntoView({ block: 'start' });
+  });
+  applica();
+})();
+</script>
 """
 
 
@@ -4005,6 +4173,9 @@ def spec_oggi(events, oggi, altre):
                      "per famiglie, verificati uno per uno."), 152)
 
     corpo = apertura
+    # famiglie e' un sottoinsieme di adesso: negli elenchi si ripete, fra le
+    # opzioni del filtro no, se no la stessa provincia comparirebbe due volte.
+    corpo += _landing_filtri(adesso + domani + prossimi)
     corpo += _landing_sezione("In corso oggi", None, adesso, oggi)
     corpo += _landing_sezione("I primi in arrivo", "Oggi non c'è niente: questi sono i prossimi",
                               prossimi, oggi)
@@ -4074,6 +4245,7 @@ def spec_weekend(events, oggi, altre):
                      "l'agenda si aggiorna ogni notte, appena arrivano le date."), 152)
 
     corpo = apertura
+    corpo += _landing_filtri(del_weekend)
     corpo += _landing_sezione(f"Sabato {sab.day} {MESI_LUNGHI[sab.month - 1]}", None,
                               di_sabato, oggi)
     corpo += _landing_sezione(f"Domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}", None,
@@ -4162,6 +4334,9 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
                      "della prossima edizione, appena escono."), 152)
 
     corpo = apertura
+    # Niente tendina provincia: la pagina E' una provincia. Resta la ricerca
+    # (il paese) e la categoria, che qui non sono solo sagre.
+    corpo += _landing_filtri(sagre, con_prov=False)
     # Mese per mese: e' il modo in cui si guarda un calendario di sagre, e in
     # agenda non esiste perche' li' i mesi sono mischiati fra le province.
     per_mese = collections.OrderedDict()
