@@ -3233,6 +3233,13 @@ COMUNE_CSS = """
    scorrendo con il pollice, e sta sempre alla stessa distanza dal bordo. */
 .com-d{font-weight:700;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase;
   color:var(--cat-ink,#606d7a)}
+/* La categoria accanto alla data. Il colore di categoria su queste righe c'era
+   gia' (.com-d prende --cat-ink) ma non lo sapeva nessuno: un blu e un verde
+   senza etichetta sono due blu e due verdi. Sta in COMUNE_CSS e non in
+   LANDING_CSS perche' serve in tutti e due i posti, e le pagine comune
+   ricevono solo il primo dei due blocchi. */
+.com-cat{color:var(--cat-ink,#606d7a);opacity:.78}
+.com-cat::before{content:' · ';opacity:.6}
 .com-ev .com-go{font-size:.95rem;line-height:1.34}
 /* Le feste che tornano: niente locandina, perche' quella in archivio e'
    dell'edizione passata e prometterebbe una data che non c'e' piu'. */
@@ -3488,6 +3495,13 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
         if comune_a_tutti == salita:
             comune_a_tutti = ''      # sta gia' in cima alla pagina
         righe, nude = "", True
+        # La categoria in riga solo se il gruppo ne mescola piu' d'una. Dentro
+        # una manifestazione sono quasi sempre tutte uguali, e ripetere
+        # "SAGRA & FESTA" su cinque righe di fila e' rumore: li' il colore
+        # basta. Nel gruppo senza titolo, che raccoglie quello che resta, le
+        # categorie sono davvero diverse ed e' l'unico posto dove il colore da
+        # solo non si sa leggere.
+        misto = len({bucket(e)[0] for e in ev}) > 1
         for e in ev:
             # L'ora accanto alla data: e' la domanda subito dopo "quando", e
             # nell'agenda ce l'ha ogni riga. Solo se e' un'ora vera, pero': la
@@ -3499,10 +3513,22 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
                 quando += ' · ' + trunc(ora, 18)
             riga_stile, thumb = _com_cat(e, salita)
             if comune_a_tutti:
-                riga_stile, thumb = stile, ''
+                # Una locandina sola per tutte le date: la miniatura sparisce,
+                # sarebbe la stessa immagine venti volte. Il colore invece si
+                # appiattisce su quello del gruppo SOLO se il gruppo e' una
+                # cosa sola. Dove le categorie si mescolano - la patronale di
+                # Sant'Albano ha sagra, spettacolo, sport e laboratorio nella
+                # stessa settimana - spegnere il colore contraddirebbe
+                # l'etichetta scritta qui accanto: si leggeva "SPETTACOLO"
+                # nell'arancione delle sagre.
+                thumb = ''
+                if not misto:
+                    riga_stile = stile
             nude = nude and not thumb
+            cat = (f'<span class="com-cat">{esc(bucket(e)[2])}</span>'
+                   if misto else '')
             righe += (f'<li style="{riga_stile}">{thumb}<span class="com-b">'
-                      f'<span class="com-d">{esc(quando)}</span>'
+                      f'<span class="com-d">{esc(quando)}{cat}</span>'
                       f'<a class="com-go" href="{_href_evento(e)}">'
                       f'{esc(trunc(e.get("nome") or "", 80))}</a></span></li>')
         testa = (f'<img class="com-th" src="{esc(comune_a_tutti)}" alt="" '
@@ -3813,13 +3839,6 @@ LANDING_CSS = """
 .lan-alt a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .lan-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem;line-height:1.6}
-/* La categoria accanto alla data. Il colore di categoria su queste righe c'era
-   gia' (.com-d prende --cat-ink) ma non lo sapeva nessuno: un blu e un verde
-   senza etichetta sono due blu e due verdi. Ora che c'e' anche il filtro per
-   tipo, il nome serve due volte - a leggere la riga e a capire cosa si e'
-   filtrato. Va a capo da solo quando la data e' lunga. */
-.com-cat{color:var(--cat-ink,#606d7a);opacity:.78}
-.com-cat::before{content:' · ';opacity:.6}
 /* La barra filtri riusa .ev-toolbar/.ev-search/.ev-select dal CSS dell'agenda.
    Qui cambia solo l'ancoraggio: nelle pagine di intenzione non c'e' la barra
    dei giorni sotto, quindi si ferma direttamente sotto la nav del sito. */

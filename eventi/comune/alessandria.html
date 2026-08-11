@@ -578,6 +578,13 @@
    scorrendo con il pollice, e sta sempre alla stessa distanza dal bordo. */
 .com-d{font-weight:700;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase;
   color:var(--cat-ink,#606d7a)}
+/* La categoria accanto alla data. Il colore di categoria su queste righe c'era
+   gia' (.com-d prende --cat-ink) ma non lo sapeva nessuno: un blu e un verde
+   senza etichetta sono due blu e due verdi. Sta in COMUNE_CSS e non in
+   LANDING_CSS perche' serve in tutti e due i posti, e le pagine comune
+   ricevono solo il primo dei due blocchi. */
+.com-cat{color:var(--cat-ink,#606d7a);opacity:.78}
+.com-cat::before{content:' · ';opacity:.6}
 .com-ev .com-go{font-size:.95rem;line-height:1.34}
 /* Le feste che tornano: niente locandina, perche' quella in archivio e'
    dell'edizione passata e prometterebbe una data che non c'e' piu'. */
