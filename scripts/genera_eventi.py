@@ -2007,7 +2007,12 @@ def blocco_famiglie(rec, events, oggi, hub=None):
     # gia' scritta per essere letta. Ma solo quando e' una fascia vera, se no
     # "Età indicata: Tutte le età" subito dopo "adatto alle famiglie" e' la
     # stessa frase detta due volte.
-    riga_eta = f' Età indicata: {esc(eta)}.' if fascia else ''
+    # L'eta' NON si ripete qui: sta gia' fra i dati della scheda, nella riga
+    # "Età", e in ogni riga degli elenchi. Ripeterla nel riquadro la faceva
+    # sembrare un requisito d'ingresso dell'evento ("da 3 a 10 anni") invece
+    # dell'indicazione di massima che e'. La fascia resta come condizione per
+    # aprire il riquadro - vuol dire che abbiamo qualcosa di specifico da dire
+    # - ma la cifra la si legge dove sta gia'.
     righe = []
     # La risposta non viene piu' da una colonna del foglio ma dal criterio con
     # cui l'agenda e' fatta, che vale per ogni scheda pubblicata. Dire "nella
@@ -2021,10 +2026,10 @@ def blocco_famiglie(rec, events, oggi, hub=None):
     # sia quale il foglio non ha un giudizio - e non prometterlo e' piu' utile
     # che prometterlo a vuoto.
     righe.append('<p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo '
-                 f'scelto <strong>per le famiglie</strong>.{riga_eta} '
-                 'Nelle manifestazioni con più appuntamenti, l\'orario che fa '
-                 'per i bambini cambia da serata a serata: il programma qui '
-                 'sopra è il modo più sicuro per scegliere.</p>')
+                 'scelto <strong>per le famiglie</strong>. Nelle manifestazioni '
+                 'con più appuntamenti, l\'orario che fa per i bambini cambia da '
+                 'serata a serata: il programma qui sopra è il modo più sicuro '
+                 'per scegliere.</p>')
     if _key(adatto) == _key('Da verificare'):
         righe.append('<p>Il programma di questa edizione non ce l\'ha ancora '
                      'confermato l\'organizzatore: i dettagli sono '
