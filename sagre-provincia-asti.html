@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sagre e feste in provincia di Asti 2026 | DAOP</title>
-<meta name="description" content="Sagre e feste in provincia di Asti 2026: 25 appuntamenti in programma, con date, orari e comune. Verificati uno per uno da DAOP.">
+<meta name="description" content="Sagre e feste in provincia di Asti 2026: 30 appuntamenti in programma, con date, orari e comune. Verificati uno per uno da DAOP.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/sagre-provincia-asti.html">
 <meta property="og:title" content="Sagre e feste in provincia di Asti 2026 | DAOP">
-<meta property="og:description" content="Sagre e feste in provincia di Asti 2026: 25 appuntamenti in programma, con date, orari e comune. Verificati uno per uno da DAOP.">
+<meta property="og:description" content="Sagre e feste in provincia di Asti 2026: 30 appuntamenti in programma, con date, orari e comune. Verificati uno per uno da DAOP.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/sagre-provincia-asti.html">
 <meta property="og:locale" content="it_IT">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sagre e feste in provincia di Asti 2026 | DAOP">
-<meta name="twitter:description" content="Sagre e feste in provincia di Asti 2026: 25 appuntamenti in programma, con date, orari e comune. Verificati uno per uno…">
+<meta name="twitter:description" content="Sagre e feste in provincia di Asti 2026: 30 appuntamenti in programma, con date, orari e comune. Verificati uno per uno…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -170,7 +170,11 @@
   .ev-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);line-height:1.3}
   .ev-line{font-size:0.85rem;color:var(--text-mid);line-height:1.45}
   .ev-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .ev-chev{justify-self:end;align-self:center;color:var(--text-light);transition:var(--transition)}
+  /* .ev-chev.icon e non .ev-chev: a parita' di specificita' vince l'ultimo
+     foglio, e daop-system.css (.icon{width:1.25em;stroke-width:1.75}) e'
+     caricato DOPO questo blocco inline. Con la sola classe il chevron
+     rimpiccioliva a 16,7px. */
+  .ev-chev.icon{justify-self:end;align-self:center;width:18px;height:18px;stroke-width:2.2;vertical-align:0;color:var(--text-light);transition:var(--transition)}
   .event-card.is-open .ev-chev{transform:rotate(180deg);color:var(--cat-color)}
   .ev-pill{display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;border-radius:100px;padding:4px 10px;white-space:nowrap}
   .ev-pill.is-cat{color:var(--cat-color);background:var(--cat-tint)}
@@ -185,11 +189,15 @@
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
-  .ev-where svg{flex-shrink:0;margin-top:3px;color:var(--cat-color)}
+  /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
+     le icone delle card sono <use> sullo sprite (una sola definizione per
+     pagina invece di sei path ripetuti in ognuna delle ~290 righe), e .icon
+     porta gia' fill/stroke — qui resta solo la taglia. */
+  .ev-where .icon{flex-shrink:0;width:15px;height:15px;stroke-width:2;margin-top:3px;vertical-align:0;color:var(--cat-color)}
   .event-actions{display:flex;gap:8px;flex-wrap:wrap}
   .event-act{display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--navy);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:8px 14px;text-decoration:none;transition:var(--transition)}
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
-  .event-act svg{flex-shrink:0;color:var(--cat-color,var(--teal))}
+  .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
@@ -396,10 +404,14 @@
 .ev-vicini{margin:34px 0 0;padding:0}
 .ev-vicini h2{font-size:1.15rem;margin:0 0 12px}
 .ev-vicini ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-.ev-vicini a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
+/* "li a" e non "a": questa e' la riga-scheda dell'elenco, alta e a piena
+   larghezza. Quando era .ev-vicini a se la prendevano anche i link di coda
+   qui sotto, che diventavano quattro rettangoli impilati - 258px su mobile
+   per quattro link. */
+.ev-vicini li a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
   border:1px solid rgba(45,74,92,.14);border-radius:12px;padding:11px 14px;
   color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
-.ev-vicini a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
+.ev-vicini li a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
 .ev-vic-d{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
   color:var(--teal,#6ba5a8);flex:0 0 auto;min-width:92px}
 .ev-vic-n{font-weight:600;flex:1 1 220px}
@@ -560,7 +572,7 @@
       "@id": "https://www.daop.it/sagre-provincia-asti.html",
       "url": "https://www.daop.it/sagre-provincia-asti.html",
       "name": "Sagre e feste in provincia di Asti 2026 | DAOP",
-      "description": "Sagre e feste in provincia di Asti 2026: 25 appuntamenti in programma, con date, orari e comune. Verificati uno per uno da DAOP.",
+      "description": "Sagre e feste in provincia di Asti 2026: 30 appuntamenti in programma, con date, orari e comune. Verificati uno per uno da DAOP.",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -599,7 +611,7 @@
     {
       "@type": "ItemList",
       "name": "Sagre in provincia di Asti",
-      "numberOfItems": 25,
+      "numberOfItems": 30,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -616,138 +628,168 @@
         {
           "@type": "ListItem",
           "position": 3,
+          "url": "https://www.daop.it/eventi/feste-di-san-rocco-castelnuovo-don-bosco.html",
+          "name": "Feste di San Rocco 2026"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
           "url": "https://www.daop.it/eventi/apertura-stand-gastronomico-con-shary-band-pro-loc-rocchetta-tanaro.html",
           "name": "Apertura Stand Gastronomico con Shary Band - Pro Loco Rocchetta Tanaro"
         },
         {
           "@type": "ListItem",
-          "position": 4,
+          "position": 5,
+          "url": "https://www.daop.it/eventi/grigliata-di-ferragosto-s-m-s-cunico.html",
+          "name": "Grigliata di Ferragosto - S.M.S. Cunico"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "url": "https://www.daop.it/eventi/festeggiamenti-patronali-di-s-rocco-parrocchia-san-dusino-san-michele.html",
+          "name": "Festeggiamenti Patronali di S. Rocco - Parrocchia Santi Rocco e Michele"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
           "url": "https://www.daop.it/eventi/apertura-stand-gastronomico-con-luigi-gallia-pro-l-rocchetta-tanaro.html",
           "name": "Apertura Stand Gastronomico con Luigi Gallia - Pro Loco Rocchetta Tanaro"
         },
         {
           "@type": "ListItem",
-          "position": 5,
+          "position": 8,
           "url": "https://www.daop.it/eventi/santa-messa-solenne-di-ferragosto-con-processione-rocchetta-tanaro.html",
           "name": "Santa Messa Solenne di Ferragosto con Processione - Pro Loco Rocchetta Tanaro"
         },
         {
           "@type": "ListItem",
-          "position": 6,
+          "position": 9,
+          "url": "https://www.daop.it/eventi/pesci-di-ferragosto-in-piscina-informalmente-a-s-d-vesime.html",
+          "name": "Pesci di Ferragosto in piscina - Informalmente A.S.D."
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
           "url": "https://www.daop.it/eventi/festa-di-san-rocco-pro-loco-montiglio-monferrato.html",
           "name": "Festa di San Rocco - Pro Loco Montiglio Monferrato"
         },
         {
           "@type": "ListItem",
-          "position": 7,
+          "position": 11,
           "url": "https://www.daop.it/eventi/apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro.html",
           "name": "Apertura Stand Gastronomico con I Controcorrente - Pro Loco Rocchetta Tanaro"
         },
         {
           "@type": "ListItem",
-          "position": 8,
+          "position": 12,
           "url": "https://www.daop.it/eventi/fiera-dei-piccoli-animali-pro-loco-rocchetta-tanar-rocchetta-tanaro.html",
           "name": "Fiera dei Piccoli Animali - Pro Loco Rocchetta Tanaro"
         },
         {
           "@type": "ListItem",
-          "position": 9,
+          "position": 13,
           "url": "https://www.daop.it/eventi/santa-messa-nella-chiesa-di-san-rocco-pro-loco-roc-rocchetta-tanaro.html",
           "name": "Santa Messa nella Chiesa di San Rocco - Pro Loco Rocchetta Tanaro"
         },
         {
           "@type": "ListItem",
-          "position": 10,
+          "position": 14,
+          "url": "https://www.daop.it/eventi/fasta-d-san-roch-cena-con-musica-anni-80-90-00-vesime.html",
+          "name": "Fàsta 'd San Rôch - Cena con musica anni '80-'90-'00"
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "url": "https://www.daop.it/eventi/cena-di-raviore-con-berruto-band-catering-sandra-e-vesime.html",
+          "name": "Cena di Raviòre con Berruto Band - Catering Sandra e Paolo"
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
           "url": "https://www.daop.it/eventi/agosto-vinchio.html",
           "name": "Agosto 2026 Vinchio"
         },
         {
           "@type": "ListItem",
-          "position": 11,
+          "position": 17,
           "url": "https://www.daop.it/eventi/mongardino-agosto.html",
           "name": "Mongardino Agosto 2026"
         },
         {
           "@type": "ListItem",
-          "position": 12,
+          "position": 18,
+          "url": "https://www.daop.it/eventi/sagra-dello-stufato-d-asino-calliano-monferrato.html",
+          "name": "31ª Sagra dello Stufato d'Asino"
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
           "url": "https://www.daop.it/eventi/festa-patronale-di-sant-agostino-pro-loco-ferrere.html",
           "name": "Festa Patronale di Sant'Agostino - Pro Loco Ferrere"
         },
         {
           "@type": "ListItem",
-          "position": 13,
+          "position": 20,
           "url": "https://www.daop.it/eventi/festeggiamenti-patronali-sant-agostino-ferrere.html",
           "name": "Festeggiamenti Patronali Sant'Agostino 2026 - Ferrere"
         },
         {
           "@type": "ListItem",
-          "position": 14,
+          "position": 21,
           "url": "https://www.daop.it/eventi/festa-di-inaugurazione-della-nuova-piazza-di-rocch-rocchetta-tanaro.html",
           "name": "Festa di Inaugurazione della Nuova Piazza di Rocchetta Tanaro - Pro Loco Rocchetta Tanaro"
         },
         {
           "@type": "ListItem",
-          "position": 15,
-          "url": "https://www.daop.it/eventi/festa-dell-uva-e-del-vino-pro-loco-ciglione.html",
-          "name": "Festa dell'Uva e del Vino - Pro Loco Ciglione"
-        },
-        {
-          "@type": "ListItem",
-          "position": 16,
+          "position": 22,
           "url": "https://www.daop.it/eventi/palio-baldichieri-castell-alfero.html",
           "name": "Palio Baldichieri 1987"
         },
         {
           "@type": "ListItem",
-          "position": 17,
+          "position": 23,
           "url": "https://www.daop.it/eventi/palio-di-asti-sabato-05-settembre.html",
           "name": "Palio di Asti - Sabato 05 Settembre"
         },
         {
           "@type": "ListItem",
-          "position": 18,
+          "position": 24,
           "url": "https://www.daop.it/eventi/cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti.html",
           "name": "Cena Propiziatoria - Pro Loco di Cantarana"
         },
         {
           "@type": "ListItem",
-          "position": 19,
+          "position": 25,
           "url": "https://www.daop.it/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html",
           "name": "Mostra mercato piccoli animali - Città di San Damiano d'Asti"
         },
         {
           "@type": "ListItem",
-          "position": 20,
-          "url": "https://www.daop.it/eventi/festa-del-fungo-pro-loco-ciglione.html",
-          "name": "7a Festa del Fungo - Pro Loco Ciglione"
-        },
-        {
-          "@type": "ListItem",
-          "position": 21,
+          "position": 26,
           "url": "https://www.daop.it/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html",
           "name": "Mostra mercato piccoli animali - Città di San Damiano d'Asti"
         },
         {
           "@type": "ListItem",
-          "position": 22,
+          "position": 27,
           "url": "https://www.daop.it/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html",
           "name": "Sagra del Rapulè Calosso 2026 - Pro Loco San Marzano Oliveto APS"
         },
         {
           "@type": "ListItem",
-          "position": 23,
+          "position": 28,
           "url": "https://www.daop.it/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html",
           "name": "Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS"
         },
         {
           "@type": "ListItem",
-          "position": 24,
+          "position": 29,
           "url": "https://www.daop.it/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html",
           "name": "Mostra mercato piccoli animali - Città di San Damiano d'Asti"
         },
         {
           "@type": "ListItem",
-          "position": 25,
+          "position": 30,
           "url": "https://www.daop.it/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html",
           "name": "Mostra mercato piccoli animali - Città di San Damiano d'Asti"
         }
@@ -797,11 +839,11 @@
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Sagre Asti</span>
     </div>
     <h1>Sagre e feste in provincia di Asti</h1>
-    <p class="ev-when">25 sagre e feste in programma, fino al 6 dicembre 2026</p>
+    <p class="ev-when">30 sagre e feste in programma, fino al 6 dicembre 2026</p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <p>Le sagre, le feste patronali, le fiere e le pro loco in provincia di Asti: <strong>25 appuntamenti</strong> in 14 comuni diversi, con le date, gli orari e i contatti di chi le organizza. L'elenco è in ordine di data e si rifà ogni notte: quello che è passato esce da solo.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Agosto 2026</h3><p class="com-per">15 sagre e feste</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955065648253649657.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani</span><a class="com-go" href="/eventi/festa-patronale-di-castel-boglione.html">Festa Patronale 2026 di Castel Boglione</a><span class="com-luogo">Castel Boglione (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3947080982607333473.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">gio 13 ago</span><a class="com-go" href="/eventi/festa-di-san-rocco-celle-enomondo.html">Festa di San Rocco - Celle Enomondo 2026</a><span class="com-luogo">Celle Enomondo (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 14 ago · 20:00</span><a class="com-go" href="/eventi/apertura-stand-gastronomico-con-shary-band-pro-loc-rocchetta-tanaro.html">Apertura Stand Gastronomico con Shary Band - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 15 ago · 20:00</span><a class="com-go" href="/eventi/apertura-stand-gastronomico-con-luigi-gallia-pro-l-rocchetta-tanaro.html">Apertura Stand Gastronomico con Luigi Gallia - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 15 ago · 10:00</span><a class="com-go" href="/eventi/santa-messa-solenne-di-ferragosto-con-processione-rocchetta-tanaro.html">Santa Messa Solenne di Ferragosto con Processione - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3957799712212042901.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 21:00</span><a class="com-go" href="/eventi/festa-di-san-rocco-pro-loco-montiglio-monferrato.html">Festa di San Rocco - Pro Loco Montiglio Monferrato</a><span class="com-luogo">Montiglio Monferrato (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 20:00</span><a class="com-go" href="/eventi/apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro.html">Apertura Stand Gastronomico con I Controcorrente - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 10:00</span><a class="com-go" href="/eventi/fiera-dei-piccoli-animali-pro-loco-rocchetta-tanar-rocchetta-tanaro.html">Fiera dei Piccoli Animali - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 9:00</span><a class="com-go" href="/eventi/santa-messa-nella-chiesa-di-san-rocco-pro-loco-roc-rocchetta-tanaro.html">Santa Messa nella Chiesa di San Rocco - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3956076020427309450.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 21 ago</span><a class="com-go" href="/eventi/agosto-vinchio.html">Agosto 2026 Vinchio</a><span class="com-luogo">Vinchio (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955068193458588503.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 24 ago</span><a class="com-go" href="/eventi/mongardino-agosto.html">Mongardino Agosto 2026</a><span class="com-luogo">Mongardino (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3927851526919484739.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 28 ago</span><a class="com-go" href="/eventi/festa-patronale-di-sant-agostino-pro-loco-ferrere.html">Festa Patronale di Sant&#x27;Agostino - Pro Loco Ferrere</a><span class="com-luogo">Ferrere (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955670155681527181.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 28 ago</span><a class="com-go" href="/eventi/festeggiamenti-patronali-sant-agostino-ferrere.html">Festeggiamenti Patronali Sant&#x27;Agostino 2026 - Ferrere</a><span class="com-luogo">Ferrere (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 29 ago · 19:30</span><a class="com-go" href="/eventi/festa-di-inaugurazione-della-nuova-piazza-di-rocch-rocchetta-tanaro.html">Festa di Inaugurazione della Nuova Piazza di Rocchetta Tanaro - Pro Loco…</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3947851034315491228.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 30 ago · 16:00</span><a class="com-go" href="/eventi/festa-dell-uva-e-del-vino-pro-loco-ciglione.html">Festa dell&#x27;Uva e del Vino - Pro Loco Ciglione</a><span class="com-luogo">Ciglione (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Settembre 2026</h3><p class="com-per">5 sagre e feste</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954380761100612941.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 2 set</span><a class="com-go" href="/eventi/palio-baldichieri-castell-alfero.html">Palio Baldichieri 1987</a><span class="com-luogo">Castell&#x27;Alfero (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954381277260028092.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 5 set</span><a class="com-go" href="/eventi/palio-di-asti-sabato-05-settembre.html">Palio di Asti - Sabato 05 Settembre</a><span class="com-luogo">Asti (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954381277260028092.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 5 set · 20:30</span><a class="com-go" href="/eventi/cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti.html">Cena Propiziatoria - Pro Loco di Cantarana</a><span class="com-luogo">Baldichieri d&#x27;Asti (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 6 set · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3947851034315491228.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 11 set</span><a class="com-go" href="/eventi/festa-del-fungo-pro-loco-ciglione.html">7a Festa del Fungo - Pro Loco Ciglione</a><span class="com-luogo">Ciglione (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Ottobre 2026</h3><p class="com-per">3 sagre e feste</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 4 ott · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3932273221679851436.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 16 ott</span><a class="com-go" href="/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html">Sagra del Rapulè Calosso 2026 - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">Calosso (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3932273221679851436.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 31 ott</span><a class="com-go" href="/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html">Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">San Marzano Oliveto (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Novembre 2026</h3><p class="com-per">1 sagra</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 1 nov · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Dicembre 2026</h3><p class="com-per">1 sagra</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 6 dic · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li></ul></section><p class="com-fonte">Le sagre della provincia di Asti arrivano da <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">@daop_asti</a>, la nostra pagina per questa provincia. <a href="/zone.html">Le pagine della tua zona</a></p><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div>
+  <p>Le sagre, le feste patronali, le fiere e le pro loco in provincia di Asti: <strong>30 appuntamenti</strong> in 18 comuni diversi, con le date, gli orari e i contatti di chi le organizza. L'elenco è in ordine di data e si rifà ogni notte: quello che è passato esce da solo.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Agosto 2026</h3><p class="com-per">21 sagre e feste</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955065648253649657.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani</span><a class="com-go" href="/eventi/festa-patronale-di-castel-boglione.html">Festa Patronale 2026 di Castel Boglione</a><span class="com-luogo">Castel Boglione (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3947080982607333473.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">gio 13 ago</span><a class="com-go" href="/eventi/festa-di-san-rocco-celle-enomondo.html">Festa di San Rocco - Celle Enomondo 2026</a><span class="com-luogo">Celle Enomondo (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960867662053736991.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 14 ago</span><a class="com-go" href="/eventi/feste-di-san-rocco-castelnuovo-don-bosco.html">Feste di San Rocco 2026</a><span class="com-luogo">Castelnuovo Don Bosco (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 14 ago · 20:00</span><a class="com-go" href="/eventi/apertura-stand-gastronomico-con-shary-band-pro-loc-rocchetta-tanaro.html">Apertura Stand Gastronomico con Shary Band - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960867403248255449.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 15 ago · 12:30</span><a class="com-go" href="/eventi/grigliata-di-ferragosto-s-m-s-cunico.html">Grigliata di Ferragosto - S.M.S. Cunico</a><span class="com-luogo">Cunico (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960869818697692506.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 15 ago · 9:30</span><a class="com-go" href="/eventi/festeggiamenti-patronali-di-s-rocco-parrocchia-san-dusino-san-michele.html">Festeggiamenti Patronali di S. Rocco - Parrocchia Santi Rocco e Michele</a><span class="com-luogo">Dusino San Michele (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 15 ago · 20:00</span><a class="com-go" href="/eventi/apertura-stand-gastronomico-con-luigi-gallia-pro-l-rocchetta-tanaro.html">Apertura Stand Gastronomico con Luigi Gallia - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 15 ago · 10:00</span><a class="com-go" href="/eventi/santa-messa-solenne-di-ferragosto-con-processione-rocchetta-tanaro.html">Santa Messa Solenne di Ferragosto con Processione - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960868795018975491.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 15 ago · 12:30</span><a class="com-go" href="/eventi/pesci-di-ferragosto-in-piscina-informalmente-a-s-d-vesime.html">Pesci di Ferragosto in piscina - Informalmente A.S.D.</a><span class="com-luogo">Vesime (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3957799712212042901.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 21:00</span><a class="com-go" href="/eventi/festa-di-san-rocco-pro-loco-montiglio-monferrato.html">Festa di San Rocco - Pro Loco Montiglio Monferrato</a><span class="com-luogo">Montiglio Monferrato (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 20:00</span><a class="com-go" href="/eventi/apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro.html">Apertura Stand Gastronomico con I Controcorrente - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 10:00</span><a class="com-go" href="/eventi/fiera-dei-piccoli-animali-pro-loco-rocchetta-tanar-rocchetta-tanaro.html">Fiera dei Piccoli Animali - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 9:00</span><a class="com-go" href="/eventi/santa-messa-nella-chiesa-di-san-rocco-pro-loco-roc-rocchetta-tanaro.html">Santa Messa nella Chiesa di San Rocco - Pro Loco Rocchetta Tanaro</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960868795018975491.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 16 ago · 20:00</span><a class="com-go" href="/eventi/fasta-d-san-roch-cena-con-musica-anni-80-90-00-vesime.html">Fàsta &#x27;d San Rôch - Cena con musica anni &#x27;80-&#x27;90-&#x27;00</a><span class="com-luogo">Vesime (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960868795018975491.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 17 ago · 20:00</span><a class="com-go" href="/eventi/cena-di-raviore-con-berruto-band-catering-sandra-e-vesime.html">Cena di Raviòre con Berruto Band - Catering Sandra e Paolo</a><span class="com-luogo">Vesime (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3956076020427309450.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 21 ago</span><a class="com-go" href="/eventi/agosto-vinchio.html">Agosto 2026 Vinchio</a><span class="com-luogo">Vinchio (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955068193458588503.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 24 ago</span><a class="com-go" href="/eventi/mongardino-agosto.html">Mongardino Agosto 2026</a><span class="com-luogo">Mongardino (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960872998466501310.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 28 ago</span><a class="com-go" href="/eventi/sagra-dello-stufato-d-asino-calliano-monferrato.html">31ª Sagra dello Stufato d&#x27;Asino</a><span class="com-luogo">Calliano Monferrato (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3927851526919484739.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 28 ago</span><a class="com-go" href="/eventi/festa-patronale-di-sant-agostino-pro-loco-ferrere.html">Festa Patronale di Sant&#x27;Agostino - Pro Loco Ferrere</a><span class="com-luogo">Ferrere (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955670155681527181.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 28 ago</span><a class="com-go" href="/eventi/festeggiamenti-patronali-sant-agostino-ferrere.html">Festeggiamenti Patronali Sant&#x27;Agostino 2026 - Ferrere</a><span class="com-luogo">Ferrere (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954379825870947543.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 29 ago · 19:30</span><a class="com-go" href="/eventi/festa-di-inaugurazione-della-nuova-piazza-di-rocch-rocchetta-tanaro.html">Festa di Inaugurazione della Nuova Piazza di Rocchetta Tanaro - Pro Loco…</a><span class="com-luogo">Rocchetta Tanaro (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Settembre 2026</h3><p class="com-per">4 sagre e feste</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954380761100612941.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 2 set</span><a class="com-go" href="/eventi/palio-baldichieri-castell-alfero.html">Palio Baldichieri 1987</a><span class="com-luogo">Castell&#x27;Alfero (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954381277260028092.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 5 set</span><a class="com-go" href="/eventi/palio-di-asti-sabato-05-settembre.html">Palio di Asti - Sabato 05 Settembre</a><span class="com-luogo">Asti (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3954381277260028092.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 5 set · 20:30</span><a class="com-go" href="/eventi/cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti.html">Cena Propiziatoria - Pro Loco di Cantarana</a><span class="com-luogo">Baldichieri d&#x27;Asti (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 6 set · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Ottobre 2026</h3><p class="com-per">3 sagre e feste</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 4 ott · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3932273221679851436.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 16 ott</span><a class="com-go" href="/eventi/sagra-del-rapule-calosso-pro-loco-san-marzano-oliv.html">Sagra del Rapulè Calosso 2026 - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">Calosso (AT)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3932273221679851436.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 31 ott</span><a class="com-go" href="/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html">Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">San Marzano Oliveto (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Novembre 2026</h3><p class="com-per">1 sagra</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 1 nov · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Dicembre 2026</h3><p class="com-per">1 sagra</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 6 dic · 09:00-13:00</span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li></ul></section><p class="com-fonte">Le sagre della provincia di Asti arrivano da <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">@daop_asti</a>, la nostra pagina per questa provincia. <a href="/zone.html">Le pagine della tua zona</a></p><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div>
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>

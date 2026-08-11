@@ -1257,6 +1257,39 @@
  },
  "ceresoledalba": {
   "eventi": {
+   "apertura-domenicale-della-biblioteca-civica-pro-lo-ceresole-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Avalle-Trincheri",
+    "manifest": "",
+    "nome": "Apertura Domenicale della Biblioteca Civica - Pro Loco Ceresole Alba",
+    "organizza": "Pro Loco Ceresole Alba",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Avalle-Trincheri",
+    "manifest": "",
+    "nome": "Benvenuto Ufficiale alla Leva 2008 - Pro Loco Ceresole Alba",
+    "organizza": "Pro Loco Ceresole Alba",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
+   "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Punto Bookcrossing Kids - Cortile della Biblioteca Civica",
+    "manifest": "",
+    "nome": "Consegna dei Libri alle Famiglie - Progetto Che Storia - Pro Loco Ceresole Alba",
+    "organizza": "Pro Loco Ceresole Alba",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
    "festa-di-ceresole-d-alba": {
     "anni": [
      2026

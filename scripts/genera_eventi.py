@@ -304,6 +304,22 @@ def icon(slug, cls="icon"):
             f'<use href="#{ICONS[slug]}"/></svg>')
 
 
+def simbolo(sym, cls="icon"):
+    """Come icon(), ma per un simbolo qualsiasi dello sprite invece che per una
+    categoria.
+
+    Serve SOLO dentro riga(): l'agenda e' l'unica pagina generata che ha lo
+    sprite inline. Le pagine evento e le pagine comune non ce l'hanno, quindi
+    li' le icone devono restare SVG per esteso (le costanti *_SVG qui sotto) -
+    un <use> disegnerebbe il vuoto. E' la stessa ragione spiegata in
+    _com_thumb().
+
+    Le sei icone delle card erano ripetute per esteso in ognuna delle ~290
+    righe: ~1,3 KB di path per card, e sei elementi SVG in piu' nel DOM."""
+    return (f'<svg class="{cls}" viewBox="0 0 24 24" aria-hidden="true">'
+            f'<use href="#{sym}"/></svg>')
+
+
 def bucket(e):
     """Restituisce (slug, icona_svg, etichetta) per la categoria dell'evento."""
     def out(slug, label):
@@ -507,13 +523,13 @@ def riga(e, today, hub=None):
     # scopre e le passa autorità dall'agenda, che è la pagina più forte del sito.
     if ha_pagina(e):
         acts.append(f'<a class="event-act" href="/eventi/{slug_evento(e)}.html">'
-                    f'{ACT_ARROW_SVG} Scheda completa</a>')
+                    f'{simbolo("i-arrow-right")} Scheda completa</a>')
     murl = maps_url(e)
     if murl:
-        acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{NAV_SVG} Come arrivare</a>')
-    acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{CAL_SVG} Calendario</a>')
+        acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{simbolo("i-pin")} Come arrivare</a>')
+    acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{simbolo("i-calendar")} Calendario</a>')
     if cover:
-        acts.append(f'<a class="event-act" href="{cover}" target="_blank" rel="noopener">{IMG_SVG} Locandina</a>')
+        acts.append(f'<a class="event-act" href="{cover}" target="_blank" rel="noopener">{simbolo("i-image")} Locandina</a>')
     # Il comune, quando ha una pagina sua. Sta in fondo perche' non e' un'azione
     # su QUESTO evento ma una via laterale, ed e' dentro il dettaglio che si apre
     # (nella riga chiusa la citta' vive dentro un <button>, dove un <a> non puo'
@@ -521,10 +537,11 @@ def riga(e, today, hub=None):
     mio_hub = (hub or {}).get(_key(e.get('citta')))
     if mio_hub:
         acts.append(f'<a class="event-act" href="/eventi/comune/{mio_hub["slug"]}.html">'
-                    f'{PIN_SVG} Tutti gli eventi{a_citta(mio_hub["nome"])}</a>')
+                    f'{simbolo("i-pin")} Tutti gli eventi{a_citta(mio_hub["nome"])}</a>')
 
     dove = esc(e['indirizzo'] or e['luogo'])
-    dove_html = f'\n          <p class="ev-where">{PIN_SVG} {dove}</p>' if dove else ''
+    dove_html = (f'\n          <p class="ev-where">{simbolo("i-pin")} {dove}</p>'
+                 if dove else '')
 
     # Il credito va anche QUI, non solo sulla scheda dedicata: le schede sono 71
     # su 187 eventi, quindi per due terzi dell'agenda l'attribuzione non
@@ -545,7 +562,7 @@ def riga(e, today, hub=None):
               <span class="ev-line">{' · '.join(bits)}</span>
               <span class="ev-tags">{''.join(tags)}</span>
             </span>
-            {CHEV_SVG}
+            {simbolo("i-chevron-down", "icon ev-chev")}
           </button></h4>
           <div class="ev-det" id="det-{anchor}" hidden>
             <p class="event-desc">{esc(e['descr'])}</p>{dove_html}
@@ -920,12 +937,18 @@ def event_jsonld(e, url_override=None):
 
 
 def render_jsonld(events):
-    """Blocco <script> JSON-LD con tutti gli eventi (schema.org/Event)."""
+    """Blocco <script> JSON-LD con tutti gli eventi (schema.org/Event).
+
+    Compatto, non indentato: con 280 eventi l'indentazione a due spazi vale da
+    sola ~150 KB di HTML, e nessuno legge questo blocco a occhio - chi vuole
+    controllarlo usa il Rich Results Test, che formatta da se'. inject() lo
+    scrive in fondo al body, non nel <head>: e' il blocco piu' pesante della
+    pagina e non ha niente da dire al browser prima del contenuto."""
     graph = [event_jsonld(e, pagina_url(e) if ha_pagina(e) else None) for e in events]
     payload = json.dumps({"@context": "https://schema.org", "@graph": graph},
-                         ensure_ascii=False, indent=2)
-    return ('<script type="application/ld+json" id="eventi-jsonld">\n'
-            + payload + '\n</script>')
+                         ensure_ascii=False, separators=(',', ':'))
+    return ('<script type="application/ld+json" id="eventi-jsonld">'
+            + payload + '</script>')
 
 
 # ---------------------------------------------------------------------------
@@ -1790,10 +1813,14 @@ PAGINA_CSS = """
 .ev-vicini{margin:34px 0 0;padding:0}
 .ev-vicini h2{font-size:1.15rem;margin:0 0 12px}
 .ev-vicini ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-.ev-vicini a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
+/* "li a" e non "a": questa e' la riga-scheda dell'elenco, alta e a piena
+   larghezza. Quando era .ev-vicini a se la prendevano anche i link di coda
+   qui sotto, che diventavano quattro rettangoli impilati - 258px su mobile
+   per quattro link. */
+.ev-vicini li a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
   border:1px solid rgba(45,74,92,.14);border-radius:12px;padding:11px 14px;
   color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
-.ev-vicini a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
+.ev-vicini li a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
 .ev-vic-d{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
   color:var(--teal,#6ba5a8);flex:0 0 auto;min-width:92px}
 .ev-vic-n{font-weight:600;flex:1 1 220px}
@@ -2064,8 +2091,6 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
             continue
         cand.append((0 if stessa else 1, max(e['d_start'], oggi),
                      e['d_start'], (e.get('nome') or ''), e))
-    if not cand:
-        return ''
     cand.sort(key=lambda t: t[:4])
     righe = []
     for _, _, _, _, e in cand[:limite]:
@@ -2086,17 +2111,46 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
             f'<li><a href="{href}"><span class="ev-vic-d">{esc(quando)}</span>'
             f'<span class="ev-vic-n">{esc(trunc(e.get("nome") or "", 70))}</span>'
             f'<span class="ev-vic-c">{esc(e.get("citta") or "")}</span></a></li>')
-    titolo = f"Altri eventi vicino a {rec.get('citta')}" if rec.get('citta') else "Altri eventi vicini"
-    # Se il comune ha una pagina sua, il primo link va li': e' piu' vicino a
-    # quello che sta cercando chi e' arrivato qui da "festa <comune>".
+    if righe:
+        titolo = (f"Altri eventi vicino a {rec.get('citta')}" if rec.get('citta')
+                  else "Altri eventi vicini")
+        elenco = f'<ul>{"".join(righe)}</ul>'
+    else:
+        # Nessun evento vicino in agenda (fuori stagione, o pagina di
+        # un'edizione conclusa): la sezione resta lo stesso, perche' i link qui
+        # sotto sono l'unico modo in cui questa pagina ne alimenta altre.
+        titolo = "Continua a cercare"
+        elenco = ''
+
+    # I link di coda. Prima erano due (comune + agenda) e la sezione spariva del
+    # tutto quando non c'erano eventi vicini.
+    #
+    # Il problema che risolvono: le landing - le tre pagine provincia,
+    # /eventi/oggi.html e /eventi/weekend.html - all'11/08/2026 ricevevano link
+    # interni SOLO da eventi.html e fra loro. Su 241 schede evento, 2 le
+    # linkavano. Le schede sono le pagine con l'autorita' vera (posizione 2,7-3,6
+    # sulle query per nome), le landing sono quelle che devono sopravvivere alla
+    # stagione: "sagre in provincia di Alessandria" ha senso a novembre, "festa
+    # d'estate Cassinasco" no. Erano due insiemi che non si toccavano.
+    #
+    # L'ordine va dal piu' vicino al piu' largo: chi arriva da "festa <comune>"
+    # cerca prima il suo comune, poi la sua provincia, e solo dopo "e stasera?".
+    coda = []
     mio_hub = (hub or {}).get(citta)
-    tutti = (f'<a href="/eventi/comune/{mio_hub["slug"]}.html">Tutti gli eventi'
-             f'{a_citta(mio_hub["nome"])}</a> · ' if mio_hub else '')
+    if mio_hub:
+        coda.append(f'<a href="/eventi/comune/{mio_hub["slug"]}.html">Tutti gli eventi'
+                    f'{a_citta(mio_hub["nome"])}</a>')
+    if prov in PROVINCE_PUBBLICATE:
+        nome_prov = PROVINCE_NOMI[prov]
+        coda.append(f'<a href="/sagre-provincia-{slugify(nome_prov)}.html">'
+                    f'Le sagre in provincia di {esc(nome_prov)}</a>')
+    coda.append('<a href="/eventi/oggi.html">Cosa c\'è oggi</a>')
+    coda.append('<a href="/eventi/weekend.html">Questo weekend</a>')
+    coda.append('<a href="/eventi.html">Tutta l\'agenda DAOP</a>')
     return ('<section class="ev-vicini" aria-labelledby="ev-vicini-t">'
             f'<h2 id="ev-vicini-t">{esc(titolo)}</h2>'
-            f'<ul>{"".join(righe)}</ul>'
-            f'<p class="ev-vic-all">{tutti}'
-            '<a href="/eventi.html">Vedi tutta l\'agenda DAOP</a></p>'
+            f'{elenco}'
+            f'<p class="ev-vic-all">{" · ".join(coda)}</p>'
             '</section>')
 
 
@@ -3934,7 +3988,13 @@ def spec_oggi(events, oggi, altre):
     corpo += _altre_landing("/eventi/oggi.html", altre)
 
     return {
-        'path': os.path.join("eventi", "oggi.html"), 'url': url,
+        # Percorso web, non di filesystem: sempre con la barra normale. Con
+        # os.path.join() diventava "eventi\oggi.html" su Windows e
+        # "eventi/oggi.html" in Actions, cioe' due chiavi diverse per la stessa
+        # pagina nel registro, che accumulava voci morte a ogni run. La scrittura
+        # su disco fa os.path.join(ROOT, path) e su Windows la barra normale va
+        # bene lo stesso.
+        'path': "eventi/oggi.html", 'url': url,
         'titolo': titolo, 'descr': descr,
         'h1': "Cosa fare oggi", 'sotto': sotto, 'crumb': "Oggi",
         'corpo': corpo, 'robots': "index, follow",
@@ -3993,7 +4053,7 @@ def spec_weekend(events, oggi, altre):
     corpo += _altre_landing("/eventi/weekend.html", altre)
 
     return {
-        'path': os.path.join("eventi", "weekend.html"), 'url': url,
+        'path': "eventi/weekend.html", 'url': url,  # barra normale: vedi spec_oggi()
         'titolo': titolo, 'descr': descr,
         'h1': "Eventi del weekend", 'sotto': sotto, 'crumb': "Weekend",
         'corpo': corpo, 'robots': "index, follow",
@@ -4230,8 +4290,21 @@ def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None, hero=None
                     lambda m: m.group(1) + tipo_opts + m.group(2), s, count=1, flags=re.S)
     s, n2 = re.subn(r'(<!-- EVENTI-LISTA:START -->\n).*?(\n *<!-- EVENTI-LISTA:END -->)',
                     lambda m: m.group(1) + lista + m.group(2), s, count=1, flags=re.S)
-    s, n3 = re.subn(r'<script type="application/ld\+json" id="eventi-jsonld">.*?</script>',
-                    lambda _: jsonld, s, count=1, flags=re.S)
+    # Il JSON-LD non viene sostituito dov'e': viene tolto e riscritto in fondo
+    # al body. Stava nel <head>, cioe' ~520 KB (62 KB gzip, il 30% del
+    # trasferito) che il browser doveva scaricare PRIMA del primo byte di
+    # contenuto visibile. Con l'88% del traffico da smartphone e' il primo costo
+    # da togliere dalla strada. Per Google e' indifferente: legge i dati
+    # strutturati ovunque stiano nel documento.
+    #
+    # Togliamo anche la riga vuota che il vecchio blocco si lasciava dietro,
+    # altrimenti a ogni run la pagina ne accumula una.
+    s, n3 = re.subn(r'<script type="application/ld\+json" id="eventi-jsonld">.*?</script>\n?',
+                    '', s, count=1, flags=re.S)
+    if n3 == 1:
+        # lambda e non stringa: il payload JSON contiene \" e \u..., che come
+        # replacement letterale re li interpreterebbe come escape ("bad escape").
+        s, n3 = re.subn(r'(?=</body>)', lambda _: jsonld + '\n', s, count=1)
     # Il blocco province e' opzionale: se i marker non ci sono (eventi.html piu'
     # vecchio del deploy) si va avanti con un avviso invece di far fallire tutto.
     n4 = 1

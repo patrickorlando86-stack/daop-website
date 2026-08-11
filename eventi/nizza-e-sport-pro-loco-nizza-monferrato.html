@@ -170,7 +170,11 @@
   .ev-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);line-height:1.3}
   .ev-line{font-size:0.85rem;color:var(--text-mid);line-height:1.45}
   .ev-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .ev-chev{justify-self:end;align-self:center;color:var(--text-light);transition:var(--transition)}
+  /* .ev-chev.icon e non .ev-chev: a parita' di specificita' vince l'ultimo
+     foglio, e daop-system.css (.icon{width:1.25em;stroke-width:1.75}) e'
+     caricato DOPO questo blocco inline. Con la sola classe il chevron
+     rimpiccioliva a 16,7px. */
+  .ev-chev.icon{justify-self:end;align-self:center;width:18px;height:18px;stroke-width:2.2;vertical-align:0;color:var(--text-light);transition:var(--transition)}
   .event-card.is-open .ev-chev{transform:rotate(180deg);color:var(--cat-color)}
   .ev-pill{display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;border-radius:100px;padding:4px 10px;white-space:nowrap}
   .ev-pill.is-cat{color:var(--cat-color);background:var(--cat-tint)}
@@ -185,11 +189,15 @@
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
-  .ev-where svg{flex-shrink:0;margin-top:3px;color:var(--cat-color)}
+  /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
+     le icone delle card sono <use> sullo sprite (una sola definizione per
+     pagina invece di sei path ripetuti in ognuna delle ~290 righe), e .icon
+     porta gia' fill/stroke — qui resta solo la taglia. */
+  .ev-where .icon{flex-shrink:0;width:15px;height:15px;stroke-width:2;margin-top:3px;vertical-align:0;color:var(--cat-color)}
   .event-actions{display:flex;gap:8px;flex-wrap:wrap}
   .event-act{display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--navy);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:8px 14px;text-decoration:none;transition:var(--transition)}
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
-  .event-act svg{flex-shrink:0;color:var(--cat-color,var(--teal))}
+  .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
@@ -396,10 +404,14 @@
 .ev-vicini{margin:34px 0 0;padding:0}
 .ev-vicini h2{font-size:1.15rem;margin:0 0 12px}
 .ev-vicini ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-.ev-vicini a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
+/* "li a" e non "a": questa e' la riga-scheda dell'elenco, alta e a piena
+   larghezza. Quando era .ev-vicini a se la prendevano anche i link di coda
+   qui sotto, che diventavano quattro rettangoli impilati - 258px su mobile
+   per quattro link. */
+.ev-vicini li a{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;
   border:1px solid rgba(45,74,92,.14);border-radius:12px;padding:11px 14px;
   color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
-.ev-vicini a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
+.ev-vicini li a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.08)}
 .ev-vic-d{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
   color:var(--teal,#6ba5a8);flex:0 0 auto;min-width:92px}
 .ev-vic-n{font-weight:600;flex:1 1 220px}
@@ -597,7 +609,7 @@
   
   <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Nizza+%C3%A8+Sport+-+Pro+Loco+Nizza+Monferrato&amp;dates=20260912%2F20260913&amp;details=Giornata+dedicata+allo+sport+per+far+conoscere+le+associazioni+sportive+locali+di+Nizza+Monferrato%2C+con+la+collaborazione+delle+associazioni+di+volontariato.+Attivit%C3%A0+ludiche+per+avvicinare+bambini+e+ragazzi+dai+4+ai+16+anni+alle+discipline+sportive.+Merenda+offerta+per+tutti+i+partecipanti%2C+anche+per+celiaci.+Nessuna+iscrizione+o+prenotazione+richiesta.&amp;location=Oratorio+Don+Bosco+-+Nizza+Monferrato+%28AT%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=44.7733095,8.353709" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
   <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria e Asti. Ultimo controllo: <time datetime="2026-08-11">11 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">@daop_asti</a>, la nostra pagina per la provincia di Asti. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Nizza%20%C3%A8%20Sport%20-%20Pro%20Loco%20Nizza%20Monferrato">Segnala una correzione</a></p></aside>
-  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Nizza Monferrato</h2><ul><li><a href="/eventi.html#ev-2026-08-06-celebrazione-della-novena-con-recita-del-s-rosario"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Celebrazione della Novena con recita del S. Rosario</span><span class="ev-vic-c">Vesime</span></a></li><li><a href="/eventi/camminata-tra-boschi-e-stelle-parrocchia-santi-roc-dusino-san-michele.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Camminata Tra Boschi e Stelle - Parrocchia Santi Rocco e Michele</span><span class="ev-vic-c">Dusino San Michele</span></a></li><li><a href="/eventi/festa-patronale-di-castel-boglione.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Festa Patronale 2026 di Castel Boglione</span><span class="ev-vic-c">Castel Boglione</span></a></li><li><a href="/eventi/giochiamo-insieme-san-damiano-d-asti.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Giochiamo insieme</span><span class="ev-vic-c">San Damiano d&#x27;Asti</span></a></li><li><a href="/eventi/festa-di-san-rocco-celle-enomondo.html"><span class="ev-vic-d">giovedì 13 ago</span><span class="ev-vic-n">Festa di San Rocco - Celle Enomondo 2026</span><span class="ev-vic-c">Celle Enomondo</span></a></li><li><a href="/eventi/ocr-power-camp-san-damiano-d-asti.html"><span class="ev-vic-d">giovedì 13 ago</span><span class="ev-vic-n">OCR Power Camp</span><span class="ev-vic-c">San Damiano d&#x27;Asti</span></a></li></ul><p class="ev-vic-all"><a href="/eventi.html">Vedi tutta l'agenda DAOP</a></p></section>
+  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Nizza Monferrato</h2><ul><li><a href="/eventi.html#ev-2026-08-06-celebrazione-della-novena-con-recita-del-s-rosario"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Celebrazione della Novena con recita del S. Rosario</span><span class="ev-vic-c">Vesime</span></a></li><li><a href="/eventi/camminata-tra-boschi-e-stelle-parrocchia-santi-roc-dusino-san-michele.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Camminata Tra Boschi e Stelle - Parrocchia Santi Rocco e Michele</span><span class="ev-vic-c">Dusino San Michele</span></a></li><li><a href="/eventi/festa-patronale-di-castel-boglione.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Festa Patronale 2026 di Castel Boglione</span><span class="ev-vic-c">Castel Boglione</span></a></li><li><a href="/eventi/giochiamo-insieme-san-damiano-d-asti.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Giochiamo insieme</span><span class="ev-vic-c">San Damiano d&#x27;Asti</span></a></li><li><a href="/eventi/festa-di-san-rocco-celle-enomondo.html"><span class="ev-vic-d">giovedì 13 ago</span><span class="ev-vic-n">Festa di San Rocco - Celle Enomondo 2026</span><span class="ev-vic-c">Celle Enomondo</span></a></li><li><a href="/eventi/ocr-power-camp-san-damiano-d-asti.html"><span class="ev-vic-d">giovedì 13 ago</span><span class="ev-vic-n">OCR Power Camp</span><span class="ev-vic-c">San Damiano d&#x27;Asti</span></a></li></ul><p class="ev-vic-all"><a href="/sagre-provincia-asti.html">Le sagre in provincia di Asti</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">
