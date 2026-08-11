@@ -1,0 +1,12 @@
+{
+  "name": "daop-prove",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Prove di fumo sulle pagine generate di daop.it",
+  "scripts": {
+    "test": "node run.js"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

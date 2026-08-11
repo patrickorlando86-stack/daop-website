@@ -28,6 +28,15 @@ jobs:
         with:
           python-version: '3.12'
 
+      # Serve solo all'ultimo passo, le prove di fumo. Sta qui e non li' perche'
+      # setup-node vuole girare prima di qualsiasi npm.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
       - name: Genera eventi
         # NON passiamo piu' EVENTI_CSV_URL: quel secret (CSV "Pubblica sul web")
         # veniva servito in cache da Google e faceva rigenerare dati vecchi. Lo
@@ -87,3 +96,23 @@ jobs:
         # subito e si corregge nel foglio, invece di restare invisibile fino al
         # prossimo controllo di Search Console.
         run: python scripts/valida_jsonld.py
+
+      - name: Prove di fumo sulle pagine generate
+        # Stessa scelta del passo qui sopra: DOPO il commit. Il sito si
+        # aggiorna comunque, e se qualcosa si e' rotto la run diventa rossa.
+        #
+        # valida_jsonld.py legge l'HTML, quindi vede i dati strutturati ma non
+        # il JavaScript: filtri, righe che si aprono, link calendario
+        # ricostruito al volo, ancore #ev-. Sono proprio le parti che si
+        # rompono in silenzio - la pagina SEMBRA a posto - e che nessuno
+        # scopre finche' non ci prova qualcuno col telefono in piazza.
+        #
+        # if: always() perche' se i dati strutturati falliscono queste prove
+        # servono comunque: sono due guasti diversi e conviene vederli insieme
+        # invece di scoprirne uno per volta a un giorno di distanza.
+        if: always()
+        run: |
+          cd tests
+          npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+          npm test

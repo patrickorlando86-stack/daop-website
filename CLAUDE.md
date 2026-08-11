@@ -48,7 +48,7 @@ niente — non è un errore, ma vuol dire che le tue modifiche al CSS lì non si
 vedono finché non gira in CI.
 
 Il workflow `.github/workflows/aggiorna-eventi.yml` gira tutti e tre alle 02:00
-UTC, poi `valida_jsonld.py`, e committa da solo su `main`.
+UTC, committa da solo su `main`, poi passa i controlli (vedi in fondo).
 
 ## Decisioni editoriali da non rifare al contrario
 
@@ -153,14 +153,29 @@ proprie:
 
 ## Verifiche prima di pubblicare
 
-`python3 scripts/valida_jsonld.py` per i dati strutturati — gira anche in CI e
-fa fallire la run, quindi conviene lanciarlo prima di pushare. Riferimento
-all'11/08/2026: 289 pagine, 532 Event, 8 avvisi noti, nessun errore.
+Due controlli, e girano tutti e due in CI **dopo** il commit: il sito si
+aggiorna comunque e la run diventa rossa. È una scelta, non una svista — il
+sito fermo un giorno con gli eventi di ieri è peggio di una pagina con un
+difetto.
 
-Per il resto, un giro con Playwright a 412px su: apertura righe, filtri,
-ricerca, stato vuoto, ancore `#ev-`. Ogni volta che un filtro nasconde una
-sezione, controlla che non resti in aria il titolo che sta **prima** di essa e
-fuori da essa.
+```bash
+python3 scripts/valida_jsonld.py                    # dati strutturati
+cd tests && npm install && npm test                 # prove di fumo (Playwright)
+```
+
+`valida_jsonld.py` legge l'HTML: vede i dati strutturati, non il JavaScript.
+Riferimento all'11/08/2026: 289 pagine, 532 Event, 8 avvisi noti, 0 errori.
+
+`tests/` copre proprio quello che l'altro non vede — apertura righe, link
+calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-`,
+più due convenzioni di prestazione che qualcuno smonterebbe per distrazione
+(`content-visibility`, l'href del calendario che resta la sola base). Gira sui
+file veri appena generati: non c'è un ambiente di prova. In un ambiente che ha
+già un Chromium, `CHROMIUM_PATH=/percorso/chrome npm test` evita lo scaricamento.
+
+Quando aggiungi una sezione che un filtro può nascondere, controlla che non
+resti in aria il titolo che sta **prima** di essa e fuori da essa: è già
+successo, ed è il tipo di guasto che si vede solo filtrando.
 
 ## Git
 

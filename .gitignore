@@ -7,3 +7,7 @@ __pycache__/
 # Vedi assets/eventi/README.md e loc_path() in scripts/genera_eventi.py.
 assets/eventi/*
 !assets/eventi/README.md
+
+# Le prove di fumo (tests/) girano con Playwright: le dipendenze si
+# reinstallano da package-lock.json, non si committano.
+tests/node_modules/
