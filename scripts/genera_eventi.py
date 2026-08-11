@@ -930,8 +930,13 @@ def event_jsonld(e, url_override=None):
     if xy:
         obj["location"]["geo"] = {"@type": "GeoCoordinates",
                                   "latitude": xy[0], "longitude": xy[1]}
-    if si(e.get('adatto_famiglie')):
-        obj["audience"] = {"@type": "Audience", "audienceType": "Famiglie con bambini"}
+    # Senza condizioni: in agenda ci entra solo quello che abbiamo scelto per le
+    # famiglie, quindi il pubblico e' quello per ogni evento pubblicato. Prima
+    # dipendeva dalla colonna "Adatto Famiglie" del foglio, che pero' e' "Si" nel
+    # 95% delle righe e vuota o "Da verificare" nelle altre: 13 eventi su 294
+    # restavano senza audience per come era compilata una cella, non perche'
+    # fossero rivolti a qualcun altro.
+    obj["audience"] = {"@type": "Audience", "audienceType": "Famiglie con bambini"}
     fascia = fascia_eta(e.get('eta_consigliata') or e.get('eta'))
     if fascia:
         obj["typicalAgeRange"] = fascia
@@ -1986,8 +1991,10 @@ def blocco_famiglie(rec, events, oggi, hub=None):
     eta = (rec.get('eta') or '').strip()
     cosa = per_bambini(rec)
     citta = (rec.get('citta') or '').strip()
-    if not si(adatto) and _key(adatto) != _key('Da verificare'):
-        return ''
+    # Il flag non fa piu' da cancello: era "Si" nel 95% delle righe e vuoto in
+    # tre, e quelle tre perdevano il riquadro per una cella non compilata, non
+    # perche' l'evento fosse un'altra cosa. Quello che apre il riquadro e'
+    # avere qualcosa di specifico da dire, il controllo qui sotto.
     # La soglia e' avere qualcosa di SPECIFICO da dire. "Adatto famiglie: Si" +
     # "Tutte le eta'" ce l'ha quasi ogni riga del foglio: un riquadro che
     # ripetesse quello su 99 schede su 100 sarebbe rumore, e la riga "Età" fra i
@@ -2002,13 +2009,27 @@ def blocco_famiglie(rec, events, oggi, hub=None):
     # stessa frase detta due volte.
     riga_eta = f' Età indicata: {esc(eta)}.' if fascia else ''
     righe = []
-    if si(adatto):
-        righe.append('<p>Sì: nella scheda DAOP questo evento è segnato come '
-                     f'<strong>adatto alle famiglie</strong>.{riga_eta}</p>')
-    else:
-        righe.append('<p>Non ce l\'ha ancora confermato l\'organizzatore, quindi lo '
-                     f'diciamo com\'è: <strong>da verificare</strong>.{riga_eta}'
-                     ' I recapiti per chiedere sono qui sopra.</p>')
+    # La risposta non viene piu' da una colonna del foglio ma dal criterio con
+    # cui l'agenda e' fatta, che vale per ogni scheda pubblicata. Dire "nella
+    # scheda DAOP e' segnato adatto alle famiglie" faceva sembrare un giudizio
+    # per evento quello che e' la regola d'ingresso, e lasciava intendere che
+    # gli altri fossero segnati diversamente.
+    #
+    # La seconda frase non e' una cautela di rito: la scelta la facciamo sulla
+    # locandina, cioe' sulla manifestazione intera, e sotto una patronale
+    # stanno il laboratorio del pomeriggio e il ballo di mezzanotte. Su quale
+    # sia quale il foglio non ha un giudizio - e non prometterlo e' piu' utile
+    # che prometterlo a vuoto.
+    righe.append('<p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo '
+                 f'scelto <strong>per le famiglie</strong>.{riga_eta} '
+                 'Nelle manifestazioni con più appuntamenti, l\'orario che fa '
+                 'per i bambini cambia da serata a serata: il programma qui '
+                 'sopra è il modo più sicuro per scegliere.</p>')
+    if _key(adatto) == _key('Da verificare'):
+        righe.append('<p>Il programma di questa edizione non ce l\'ha ancora '
+                     'confermato l\'organizzatore: i dettagli sono '
+                     '<strong>da verificare</strong>, e i recapiti per chiedere '
+                     'sono qui sopra.</p>')
     if cosa:
         righe.append(f'<p>Per i più piccoli, nel programma ci sono '
                      f'<strong>{esc(elenco_it(cosa))}</strong>.</p>')
@@ -3416,18 +3437,21 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     fonte = fonte_provincia(dati['prov'])
     # "sagre" nel title non si tocca: "sagre <comune> 2026" e' il modello di
     # query che porta i clic, misurato. "per famiglie" si aggiunge, non
-    # sostituisce - e solo dove e' vero, cioe' dove la maggioranza degli eventi
-    # in programma e' segnata adatta alle famiglie nel foglio. Su un comune con
-    # tre concerti serali sarebbe una promessa che la pagina non mantiene.
-    adatti = sum(1 for e in futuri if si(e.get('adatto_famiglie')))
-    famiglie_vere = bool(futuri) and adatti >= max(1, len(futuri) * 0.6)
+    # sostituisce.
+    #
+    # Prima compariva solo se almeno il 60% degli eventi aveva il flag "Adatto
+    # Famiglie" nel foglio, per non promettere quello che la pagina non
+    # mantiene. Ma la promessa la mantiene sempre: in agenda ci entra solo
+    # quello che abbiamo scelto per le famiglie, e quel flag e' "Si" nel 95%
+    # delle righe - la soglia non misurava l'offerta del comune, misurava
+    # quanto era stata compilata una colonna. Un comune finiva senza "per
+    # famiglie" nel title per tre celle lasciate in bianco.
     bambini = [e for e in futuri if e_per_bambini(e)]
-    basi = ([f"Eventi e sagre per famiglie{a_citta(citta)} {anno}"] if famiglie_vere
-            else []) + [f"Eventi e sagre{a_citta(citta)} {anno}"]
+    basi = [f"Eventi e sagre per famiglie{a_citta(citta)} {anno}",
+            f"Eventi e sagre{a_citta(citta)} {anno}"]
     titolo = next((t for b in basi for t in (f"{b} | DAOP", b) if len(t) <= MAX_TITLE),
                   trunc(basi[-1], MAX_TITLE))
-    h1 = (f"Eventi e sagre per famiglie{a_citta(citta)}" if famiglie_vere
-          else f"Eventi e sagre{a_citta(citta)}")
+    h1 = f"Eventi e sagre per famiglie{a_citta(citta)}"
     gruppi = _gruppi_comune(futuri)
     salita = _com_poster_pagina(gruppi)
 
@@ -3635,7 +3659,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
                    f'@{esc(fonte["ig"])}</a>, {chi}. '
                    f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
 
-    per_chi = " per famiglie" if famiglie_vere else ""
+    per_chi = " per famiglie"
     quanti_bimbi = f" {len(bambini)} per bambini." if bambini else ""
     descr = trunc(f"Eventi, sagre e feste{per_chi}{a_citta(citta)}: "
                   f"{sotto.lower()}.{quanti_bimbi} "
