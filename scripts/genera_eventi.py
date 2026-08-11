@@ -4091,12 +4091,17 @@ LANDING_JS = r"""<script>
     return testo;
   }
 
-  // Un gruppo nascosto lascerebbe in aria il suo titolo: su /eventi/oggi.html
-  // "Oggi con i bambini" e' un <h2> con il suo paragrafo, scritti PRIMA della
-  // sezione e fuori da essa. Si risale ai fratelli precedenti saltando i
-  // paragrafi: se si arriva a un titolo e' suo e sparisce con lui, se si
-  // arriva a qualsiasi altra cosa (o all'inizio) non si tocca niente - cosi'
-  // il paragrafo di apertura della pagina, che non ha titolo sopra, resta.
+  // Un gruppo nascosto lascerebbe in aria il suo titolo, quando il titolo e'
+  // un <h2> con il suo paragrafo scritti PRIMA della sezione e fuori da essa.
+  // Si risale ai fratelli precedenti saltando i paragrafi: se si arriva a un
+  // titolo e' suo e sparisce con lui, se si arriva a qualsiasi altra cosa (o
+  // all'inizio) non si tocca niente - cosi' il paragrafo di apertura della
+  // pagina, che non ha titolo sopra, resta.
+  // Oggi nessuna pagina di intenzione usa piu' quello schema (l'unica che
+  // l'aveva era /eventi/oggi.html con "Oggi con i bambini", tolto perche'
+  // separava gli eventi adatti alle famiglie dagli altri quando in agenda ci
+  // entrano solo i primi). Resta perche' le sezioni si aggiungono e il caso
+  // ricapita: costa otto righe e si accorge da solo di quando serve.
   function testaDi(g) {
     var pezzi = [], n = g.previousElementSibling;
     while (n && n.tagName === 'P') { pezzi.push(n); n = n.previousElementSibling; }
@@ -4164,7 +4169,6 @@ def spec_oggi(events, oggi, altre):
     adesso = ordina([e for e in events if in_corso(e, oggi)])
     domani = ordina([e for e in events if in_corso(e, oggi + datetime.timedelta(days=1))
                      and not in_corso(e, oggi)])
-    famiglie = [e for e in adesso if si(e.get('adatto_famiglie'))]
     prossimi = ordina([e for e in events if e['d_start'] > oggi])[:12] if not adesso else []
 
     titolo = _landing_titolo([f"Cosa fare oggi in provincia di {prov}",
@@ -4198,16 +4202,36 @@ def spec_oggi(events, oggi, altre):
     corpo += _landing_sezione("In corso oggi", None, adesso, oggi)
     corpo += _landing_sezione("I primi in arrivo", "Oggi non c'è niente: questi sono i prossimi",
                               prossimi, oggi)
-    if famiglie:
-        # La colonna "Adatto Famiglie" del foglio esiste da sempre e in agenda
-        # non e' filtrabile: e' l'unico posto del sito in cui quel giudizio,
-        # che e' nostro e non del volantino, diventa una domanda a cui si
-        # risponde ("oggi, con i bambini, dove andiamo").
-        corpo += (f"<h2>Oggi con i bambini</h2><p>Di quelli qui sopra, "
-                  f"{len(famiglie)} li abbiamo segnati come adatti alle famiglie: "
-                  f"è una colonna del nostro database, non una parola presa dalla "
-                  f"locandina.</p>")
-        corpo += _landing_sezione("Adatti alle famiglie", None, famiglie, oggi)
+    # Qui c'era "Oggi con i bambini", un secondo elenco con i soli eventi
+    # segnati "Adatto Famiglie" nel foglio. Tolto, per due ragioni che si
+    # sommano.
+    #
+    # La prima: in agenda ci entra solo quello che abbiamo gia' scelto per le
+    # famiglie. Un sottoelenco "adatti alle famiglie" dice implicitamente che
+    # gli altri non lo sono, cioe' smentisce il criterio con cui la pagina e'
+    # fatta - e su una pagina dove il 93% delle righe ha quel flag separava
+    # praticamente niente da praticamente tutto.
+    #
+    # La seconda: quel flag non descrive la riga a cui e' attaccato. Il
+    # giudizio lo diamo sulla LOCANDINA - la manifestazione nel suo insieme e'
+    # roba da famiglie - ma i sotto-eventi li pubblichiamo tutti, uno per riga,
+    # e poi li raggruppiamo per manifestazione. Il verdetto della locandina
+    # finisce cosi' timbrato identico su ogni riga, compresi i sotto-eventi che
+    # per i bambini non sono: nei dati dell'11/08 le manifestazioni con piu'
+    # righe sono 30 e in 26 il flag e' lo stesso su tutte. "San Liberato 2026"
+    # sono 19 righe tutte "Si", e dentro ci sono la sagra delle 22:30 e lo
+    # spettacolo comico delle 20:45.
+    #
+    # Filtrare le righe con quel flag non separa quindi i sotto-eventi adatti
+    # dagli altri: ripete su ognuno la risposta data alla locandina. Per fare
+    # quella cernita servirebbe un giudizio per sotto-evento, che nel foglio
+    # non c'e'.
+    #
+    # Resta la sezione "Cosa c'e' per i bambini" delle pagine comune: quella
+    # non usa questo flag ma e_per_bambini(), cioe' una fascia d'eta'
+    # dichiarata o laboratori/burattini/giochi scritti nel programma - e dice
+    # "pensati PER i bambini", non "adatti", e infatti scrive a chiare lettere
+    # che il resto e' comunque adatto alle famiglie.
     corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi)
     corpo += _altre_landing("/eventi/oggi.html", altre)
 
@@ -4238,7 +4262,6 @@ def spec_weekend(events, oggi, altre):
                          key=lambda e: (e['d_start'], (e.get('citta') or '')))
     di_sabato = [e for e in del_weekend if in_corso(e, sab)]
     di_domenica = [e for e in del_weekend if in_corso(e, dom)]
-    famiglie = [e for e in del_weekend if si(e.get('adatto_famiglie'))]
     quando = (f"sabato {sab.day} e domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}"
               if sab.month == dom.month else
               f"sabato {sab.day} {MESI_LUNGHI[sab.month - 1]} e "
@@ -4269,12 +4292,8 @@ def spec_weekend(events, oggi, altre):
                               di_sabato, oggi)
     corpo += _landing_sezione(f"Domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}", None,
                               di_domenica, oggi)
-    if famiglie:
-        corpo += (f"<h2>Il weekend con i bambini</h2><p>{len(famiglie)} di questi "
-                  f"appuntamenti li abbiamo segnati come adatti alle famiglie nel "
-                  f"nostro database: è il giudizio di chi ha compilato la scheda, "
-                  f"non una frase della locandina.</p>")
-        corpo += _landing_sezione("Adatti alle famiglie", None, famiglie, oggi)
+    # Qui c'era "Il weekend con i bambini": tolto per le stesse ragioni
+    # scritte per esteso in spec_oggi.
     corpo += _altre_landing("/eventi/weekend.html", altre)
 
     return {

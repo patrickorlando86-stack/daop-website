@@ -1036,12 +1036,17 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     return testo;
   }
 
-  // Un gruppo nascosto lascerebbe in aria il suo titolo: su /eventi/oggi.html
-  // "Oggi con i bambini" e' un <h2> con il suo paragrafo, scritti PRIMA della
-  // sezione e fuori da essa. Si risale ai fratelli precedenti saltando i
-  // paragrafi: se si arriva a un titolo e' suo e sparisce con lui, se si
-  // arriva a qualsiasi altra cosa (o all'inizio) non si tocca niente - cosi'
-  // il paragrafo di apertura della pagina, che non ha titolo sopra, resta.
+  // Un gruppo nascosto lascerebbe in aria il suo titolo, quando il titolo e'
+  // un <h2> con il suo paragrafo scritti PRIMA della sezione e fuori da essa.
+  // Si risale ai fratelli precedenti saltando i paragrafi: se si arriva a un
+  // titolo e' suo e sparisce con lui, se si arriva a qualsiasi altra cosa (o
+  // all'inizio) non si tocca niente - cosi' il paragrafo di apertura della
+  // pagina, che non ha titolo sopra, resta.
+  // Oggi nessuna pagina di intenzione usa piu' quello schema (l'unica che
+  // l'aveva era /eventi/oggi.html con "Oggi con i bambini", tolto perche'
+  // separava gli eventi adatti alle famiglie dagli altri quando in agenda ci
+  // entrano solo i primi). Resta perche' le sezioni si aggiungono e il caso
+  // ricapita: costa otto righe e si accorge da solo di quando serve.
   function testaDi(g) {
     var pezzi = [], n = g.previousElementSibling;
     while (n && n.tagName === 'P') { pezzi.push(n); n = n.previousElementSibling; }
