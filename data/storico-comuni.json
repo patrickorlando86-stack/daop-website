@@ -272,6 +272,17 @@
     "pagina": true,
     "ultima": "2026-08-01"
    },
+   "sbem-festival-sport-benessere-e-movimento-acm-even-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cittadella di Alessandria",
+    "manifest": "",
+    "nome": "SBEM Festival - Sport, Benessere e Movimento - ACM Eventi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
    "sentimental-value-alessandria": {
     "anni": [
      2026
@@ -511,6 +522,23 @@
   },
   "nome": "Caldirola",
   "prov": "AL"
+ },
+ "callianomonferrato": {
+  "eventi": {
+   "sagra-dello-stufato-d-asino-calliano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "31ª Sagra dello Stufato d'Asino",
+    "nome": "31ª Sagra dello Stufato d'Asino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Calliano Monferrato",
+  "prov": "AT"
  },
  "calosso": {
   "eventi": {
@@ -945,13 +973,107 @@
     "organizza": "Comune di Castelnuovo Belbo",
     "pagina": true,
     "ultima": "2026-08-16"
+   },
+   "festeggiamenti-patronali-di-san-rocco-castelnuovo-belbo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Forum di Castelnuovo Belbo",
+    "manifest": "Festeggiamenti Patronali di San Rocco 2026",
+    "nome": "Festeggiamenti Patronali di San Rocco 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
    }
   },
   "nome": "Castelnuovo Belbo",
   "prov": "AT"
  },
+ "castelnuovodonbosco": {
+  "eventi": {
+   "feste-di-san-rocco-castelnuovo-don-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Viale Regina Margherita e Piazza Dante",
+    "manifest": "Feste di San Rocco 2026",
+    "nome": "Feste di San Rocco 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   }
+  },
+  "nome": "Castelnuovo Don Bosco",
+  "prov": "AT"
+ },
  "castelnuovoscrivia": {
   "eventi": {
+   "anna-tatangelo-summer-tour-giornata-franca-cassola-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Anna Tatangelo Summer Tour 2026 - 27ª Giornata Franca Cassola Pasquali",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
+   "festa-dei-coscritti-classe-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Festa dei Coscritti Classe 2008",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "gianfranco-manara-l-uomo-e-il-pittore-incontro-con-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Podestarile",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Gianfranco Manara: L'Uomo è il Pittore - Incontro con Annalisa Bellone, Leonardo Andreoli e Roberto Mottadelli",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "grandioso-spettacolo-pirotecnico-aereo-firework-s-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Località Ponte Scrivia",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Grandioso Spettacolo Pirotecnico Aereo - Firework's Parente di Melara Po",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "inaugurazione-della-mostra-gianfranco-manara-pitto-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Podestarile",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Inaugurazione della Mostra Gianfranco Manara Pittore Padano",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "la-domenica-sportiva-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "La Domenica Sportiva",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
    "le-perseidi-incontrano-l-eclissi-di-sole-sinoira-c-castelnuovo-scrivia": {
     "anni": [
      2026
@@ -973,6 +1095,94 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-12"
+   },
+   "le-piu-belle-canzoni-di-lucio-battisti-equipe-84-r-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Le più belle canzoni di Lucio Battisti & Equipe 84 - Rosario De Cola, Franco Taulino & Beggars' Farm",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "luna-park-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Zona Scrivia",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Luna Park",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   },
+   "mist-live-show-party-band-90-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "MIST Live Show Party Band 90/2000",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "orchestra-spettacolo-tonia-todisco-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Orchestra Spettacolo Tonia Todisco",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "presentazione-libro-due-vite-di-ninna-quario-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Presentazione libro Due Vite di Ninna Quario",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "santa-messa-con-processione-accompagnata-dalla-ban-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Santa Messa con processione accompagnata dalla banda musicale",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "triangolare-di-calcio-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo B. Spinola",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Triangolare di calcio",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "visita-guidata-in-bici-alla-chiesa-di-s-damiano-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Visita guidata in bici alla Chiesa di S. Damiano",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-23"
    }
   },
   "nome": "Castelnuovo Scrivia",
@@ -1545,6 +1755,78 @@
   "nome": "Cuneo",
   "prov": "CN"
  },
+ "cunico": {
+  "eventi": {
+   "dj-toyu-cunicosummerfestival-pro-loco-cunico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stand Gastronomico Festa Patronale",
+    "manifest": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "nome": "DJ Toyu - #CunicoSummerFestival - Pro Loco Cunico",
+    "organizza": "Pro Loco Cunico",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   },
+   "grigliata-di-ferragosto-s-m-s-cunico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "nome": "Grigliata di Ferragosto - S.M.S. Cunico",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "orchestra-liscio-pro-loco-cunico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stand Gastronomico Festa Patronale",
+    "manifest": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "nome": "Orchestra Liscio 2000 - Pro Loco Cunico",
+    "organizza": "Pro Loco Cunico",
+    "pagina": false,
+    "ultima": "2026-08-23"
+   },
+   "orchestra-spettacolo-luigi-gallia-pro-loco-cunico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stand Gastronomico Festa Patronale",
+    "manifest": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "nome": "Orchestra Spettacolo Luigi Gallia - Pro Loco Cunico",
+    "organizza": "Pro Loco Cunico",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
+   "serata-latina-salsabor-pro-loco-cunico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stand Gastronomico Festa Patronale",
+    "manifest": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "nome": "Serata Latina - Salsabor - Pro Loco Cunico",
+    "organizza": "Pro Loco Cunico",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   },
+   "serata-teatro-compagnia-dla-baudetta-in-ariafritta-cunico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stand Gastronomico Festa Patronale",
+    "manifest": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "nome": "Serata Teatro: Compagnia 'dla Baudetta in Ariafritta della Baudetta - Pro Loco Cunico",
+    "organizza": "Pro Loco Cunico",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   }
+  },
+  "nome": "Cunico",
+  "prov": "AT"
+ },
  "dogliani": {
   "eventi": {
    "festa-dei-bambini-pro-loco-dogliani-castello": {
@@ -1572,6 +1854,34 @@
   },
   "nome": "Dogliani",
   "prov": "CN"
+ },
+ "dusinosanmichele": {
+  "eventi": {
+   "camminata-tra-boschi-e-stelle-parrocchia-santi-roc-dusino-san-michele": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale del Centro Sportivo",
+    "manifest": "San Rocco 2026",
+    "nome": "Camminata Tra Boschi e Stelle - Parrocchia Santi Rocco e Michele",
+    "organizza": "Parrocchia Santi Rocco e Michele",
+    "pagina": true,
+    "ultima": "2026-08-12"
+   },
+   "festeggiamenti-patronali-di-s-rocco-parrocchia-san-dusino-san-michele": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa di San Rocco",
+    "manifest": "San Rocco 2026",
+    "nome": "Festeggiamenti Patronali di S. Rocco - Parrocchia Santi Rocco e Michele",
+    "organizza": "Parrocchia Santi Rocco e Michele",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Dusino San Michele",
+  "prov": "AT"
  },
  "entracque": {
   "eventi": {
@@ -2105,6 +2415,23 @@
   "nome": "Govone",
   "prov": "CN"
  },
+ "grondona": {
+  "eventi": {
+   "sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Grondona",
+    "manifest": "",
+    "nome": "Sagra della Capra e della Fersulla - Pro Loco Grondona",
+    "organizza": "Pro Loco Grondona",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   }
+  },
+  "nome": "Grondona",
+  "prov": "AL"
+ },
  "limonepiemonte": {
   "eventi": {
    "estate-di-storie-letture-ad-alta-voce-biblioteca-e-limone-piemonte": {
@@ -2260,6 +2587,23 @@
    }
   },
   "nome": "Mongardino",
+  "prov": "AT"
+ },
+ "montemagno": {
+  "eventi": {
+   "le-500-nel-monferrato-fiat-500-club-italia-coordin-montemagno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Martino",
+    "manifest": "",
+    "nome": "Le 500 nel Monferrato - Fiat 500 Club Italia coordinamento Alba-Bra-Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Montemagno",
   "prov": "AT"
  },
  "montigliomonferrato": {
@@ -2491,6 +2835,23 @@
   "nome": "Nizza Monferrato",
   "prov": "AT"
  },
+ "noche": {
+  "eventi": {
+   "gara-a-uno-comitato-per-noche": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Ferragosto Nochese 2026",
+    "nome": "Gara a UNO - Comitato per Noche",
+    "organizza": "Comitato per Noche",
+    "pagina": false,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Noche",
+  "prov": "CN"
+ },
  "noviligure": {
   "eventi": {
    "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
@@ -2675,6 +3036,23 @@
   "nome": "Pecetto di Valenza",
   "prov": "AL"
  },
+ "pietramarazzi": {
+  "eventi": {
+   "festa-di-fine-estate-comune-di-pietra-marazzi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Umberto I",
+    "manifest": "",
+    "nome": "Festa di Fine Estate - Comune di Pietra Marazzi",
+    "organizza": "Comune di Pietra Marazzi",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   }
+  },
+  "nome": "Pietra Marazzi",
+  "prov": "AL"
+ },
  "piozzo": {
   "eventi": {
    "pranzo-sociale-piozzo": {
@@ -2761,6 +3139,61 @@
  },
  "ponzone": {
   "eventi": {
+   "cabaret-con-marco-guarena-pro-loco-ciglione-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Cabaret con Marco Guarena - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
+   "cabaret-con-massimo-pica-pro-loco-ciglione-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Cabaret con Massimo Pica - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
+   "cena-con-magia-con-alfred-the-magician-pro-loco-ci-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Cena con Magia con Alfred the Magician - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-28"
+   },
+   "festa-del-fungo-pro-loco-ciglione-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "",
+    "nome": "7a Festa del Fungo - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
+   "festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Festa dell'Uva e del Vino - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
    "festa-sull-aia-pianlago-ponzone": {
     "anni": [
      2026
@@ -2771,6 +3204,50 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-14"
+   },
+   "il-musichiere-quiz-musicale-pro-loco-ciglione-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Il Musichiere - Quiz Musicale - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   },
+   "musical-chiudo-gli-occhi-e-penso-a-te-pro-loco-cig-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Musical Chiudo gli Occhi e Penso a Te - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   },
+   "schegge-di-teatro-con-paolo-portesine-pro-loco-cig-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Schegge di Teatro con Paolo Portesine - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-24"
+   },
+   "serata-discorevival-anni-80-summer-nights-dancing-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Pro Loco Ciglione",
+    "manifest": "Agosto 2026 - Pro Loco Ciglione",
+    "nome": "Serata Discorevival Anni 80 Summer Nights Dancing - Pro Loco Ciglione",
+    "organizza": "Pro Loco Ciglione",
+    "pagina": false,
+    "ultima": "2026-08-15"
    }
   },
   "nome": "Ponzone",
@@ -3516,6 +3993,17 @@
     "organizza": "Pro Loco Sanse",
     "pagina": false,
     "ultima": "2026-08-12"
+   },
+   "il-borgo-diventa-osteria-edizione-san-sebastiano-curone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico di San Sebastiano Curone",
+    "manifest": "",
+    "nome": "Il Borgo diventa Osteria - 12^ Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
    }
   },
   "nome": "San Sebastiano Curone",
@@ -3986,6 +4474,40 @@
   "nome": "Spinetta Marengo",
   "prov": "AL"
  },
+ "stazzano": {
+  "eventi": {
+   "lirica-in-piazza-x-edizione-associazione-stazzanes-stazzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Giorgio",
+    "manifest": "",
+    "nome": "Lirica in Piazza (X edizione) - Associazione Stazzanese Amici della Musica APS",
+    "organizza": "Associazione Stazzanese Amici della Musica APS",
+    "pagina": true,
+    "ultima": "2026-08-27"
+   }
+  },
+  "nome": "Stazzano",
+  "prov": "AL"
+ },
+ "tassarolo": {
+  "eventi": {
+   "sagra-di-san-rocco-con-il-superagnolotto-tassarolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo di Tassarolo",
+    "manifest": "44ª Sagra di San Rocco con il SuperAgnolotto",
+    "nome": "44ª Sagra di San Rocco con il SuperAgnolotto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Tassarolo",
+  "prov": "AL"
+ },
  "tortona": {
   "eventi": {
    "alla-ri-scoperta-delle-favole-disney-alice-nel-pae-tortona": {
@@ -4085,6 +4607,128 @@
   },
   "nome": "Verzuolo",
   "prov": "CN"
+ },
+ "vesime": {
+  "eventi": {
+   "apertura-museo-dell-aeroporto-partigiano-con-visit-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Municipio di Vesime",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Apertura Museo dell'Aeroporto Partigiano con visita guidata",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   },
+   "celebrazione-della-novena-con-recita-del-s-rosario-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Pieve",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Celebrazione della Novena con recita del S. Rosario",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-06"
+   },
+   "cena-di-raviore-con-berruto-band-catering-sandra-e-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo sportivo comunale",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Cena di Raviòre con Berruto Band - Catering Sandra e Paolo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-17"
+   },
+   "fasta-d-san-roch-cena-con-musica-anni-80-90-00-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Romita",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Fàsta 'd San Rôch - Cena con musica anni '80-'90-'00",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "pesci-di-ferragosto-in-piscina-informalmente-a-s-d-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piscina comunale",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Pesci di Ferragosto in piscina - Informalmente A.S.D.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "processione-alla-pieve-con-benedizione-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Processione alla Pieve con benedizione",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-14"
+   },
+   "proiezione-le-colline-del-mare-comune-di-santo-ste-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo sportivo comunale",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Proiezione Le Colline del Mare - Comune di Santo Stefano Belbo",
+    "organizza": "Comune di Santo Stefano Belbo",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
+   "santa-messa-alla-pieve-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Pieve",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Santa Messa alla Pieve",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
+   "spettacolo-teatrale-lady-comedy-show-il-bosco-dell-vesime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
+    "nome": "Spettacolo teatrale Lady Comedy Show - Il Bosco delle Acacie ODV",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Vesime",
+  "prov": "AT"
+ },
+ "viarigi": {
+  "eventi": {
+   "saltimpiazza-viarigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa degli Alfieri",
+    "manifest": "SaltimPiazza 2026",
+    "nome": "SaltimPiazza 2026",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Viarigi",
+  "prov": "AT"
  },
  "viguzzolo": {
   "eventi": {
