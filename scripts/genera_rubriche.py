@@ -382,6 +382,7 @@ def pagina_articolo(a, rub, aut, cfg, pubblicati, css, nav, foot, sprite):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{ARTICOLO_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
 <script type="application/ld+json">
 {jsonld_articolo(a, rub, aut, url)}
 </script>

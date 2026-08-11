@@ -2323,6 +2323,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{PAGINA_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {jsonld}
@@ -2590,6 +2591,7 @@ def scrivi_metodo(events):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{PAGINA_CSS}{METODO_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
 <script type="application/ld+json">
 {jsonld}
 </script>
@@ -2853,6 +2855,7 @@ def scrivi_zone(events, hub=None):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{PAGINA_CSS}{METODO_CSS}{ZONE_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
 <script type="application/ld+json">
 {jsonld}
 </script>
@@ -3636,6 +3639,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{PAGINA_CSS}{COMUNE_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {jsonld}
@@ -3891,6 +3895,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{PAGINA_CSS}{COMUNE_CSS}{LANDING_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {spec['jsonld']}

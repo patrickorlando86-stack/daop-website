@@ -170,7 +170,11 @@
   .ev-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);line-height:1.3}
   .ev-line{font-size:0.85rem;color:var(--text-mid);line-height:1.45}
   .ev-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .ev-chev{justify-self:end;align-self:center;color:var(--text-light);transition:var(--transition)}
+  /* .ev-chev.icon e non .ev-chev: a parita' di specificita' vince l'ultimo
+     foglio, e daop-system.css (.icon{width:1.25em;stroke-width:1.75}) e'
+     caricato DOPO questo blocco inline. Con la sola classe il chevron
+     rimpiccioliva a 16,7px. */
+  .ev-chev.icon{justify-self:end;align-self:center;width:18px;height:18px;stroke-width:2.2;vertical-align:0;color:var(--text-light);transition:var(--transition)}
   .event-card.is-open .ev-chev{transform:rotate(180deg);color:var(--cat-color)}
   .ev-pill{display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;border-radius:100px;padding:4px 10px;white-space:nowrap}
   .ev-pill.is-cat{color:var(--cat-color);background:var(--cat-tint)}
@@ -185,11 +189,15 @@
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
-  .ev-where svg{flex-shrink:0;margin-top:3px;color:var(--cat-color)}
+  /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
+     le icone delle card sono <use> sullo sprite (una sola definizione per
+     pagina invece di sei path ripetuti in ognuna delle ~290 righe), e .icon
+     porta gia' fill/stroke — qui resta solo la taglia. */
+  .ev-where .icon{flex-shrink:0;width:15px;height:15px;stroke-width:2;margin-top:3px;vertical-align:0;color:var(--cat-color)}
   .event-actions{display:flex;gap:8px;flex-wrap:wrap}
   .event-act{display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--navy);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:8px 14px;text-decoration:none;transition:var(--transition)}
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
-  .event-act svg{flex-shrink:0;color:var(--cat-color,var(--teal))}
+  .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
@@ -325,6 +333,7 @@
 .ce-actions .btn{color:#fff}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {
@@ -350,7 +359,7 @@
     {
       "@type": "ItemList",
       "name": "Centri Estivi in provincia di Alessandria e Asti",
-      "numberOfItems": 26,
+      "numberOfItems": 27,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -665,6 +674,20 @@
           "position": 23,
           "item": {
             "@type": "LocalBusiness",
+            "name": "Oratorio Aperto Settembre 2026 - Parrocchia Assunzione di Maria Vergine",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Riva presso Chieri",
+              "addressRegion": "AT",
+              "addressCountry": "IT"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "LocalBusiness",
             "name": "R-Estate a Bosio - Centro Estivo 2026 - Amici Acquedotto di Bosio APS",
             "address": {
               "@type": "PostalAddress",
@@ -676,7 +699,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 24,
+          "position": 25,
           "item": {
             "@type": "LocalBusiness",
             "name": "Settimana Verde a Mombello - Associazione Culturale Omnia",
@@ -690,7 +713,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 25,
+          "position": 26,
           "item": {
             "@type": "LocalBusiness",
             "name": "Summer Camp - Richard's Ranch",
@@ -704,7 +727,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 26,
+          "position": 27,
           "item": {
             "@type": "LocalBusiness",
             "name": "Un'Estate Fantastica - Tanaro Skate School",
@@ -776,7 +799,7 @@
     <div class="ev-toolbar">
     <div class="ev-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="ce-q" placeholder="Cerca un centro, un paese, un gestore…" aria-label="Cerca fra i centri"></div>
     <select class="ev-select" id="ce-prov" aria-label="Filtra per provincia"><option value="all">Tutte le province</option><option value="al">Alessandria</option><option value="at">Asti</option></select>
-    <select class="ev-select" id="ce-city" aria-label="Filtra per città"><option value="all">Tutte le città</option><option value="alessandria">Alessandria</option><option value="asti">Asti</option><option value="bosio">Bosio</option><option value="callianetto">Callianetto</option><option value="cantalupo-ligure">Cantalupo Ligure</option><option value="carentino">Carentino</option><option value="carezzano">Carezzano</option><option value="carrosio">Carrosio</option><option value="castell-alfero">Castell&#x27;Alfero</option><option value="castelnuovo-scrivia">Castelnuovo Scrivia</option><option value="cimaferle">Cimaferle</option><option value="costa-vescovato">Costa Vescovato</option><option value="mombello">Mombello</option><option value="nizza-monferrato">Nizza Monferrato</option><option value="novi-ligure">Novi Ligure</option><option value="ovada">Ovada</option><option value="pontecurone">Pontecurone</option><option value="rossiglione">Rossiglione</option><option value="tortona">Tortona</option><option value="valenza">Valenza</option></select>
+    <select class="ev-select" id="ce-city" aria-label="Filtra per città"><option value="all">Tutte le città</option><option value="alessandria">Alessandria</option><option value="asti">Asti</option><option value="bosio">Bosio</option><option value="callianetto">Callianetto</option><option value="cantalupo-ligure">Cantalupo Ligure</option><option value="carentino">Carentino</option><option value="carezzano">Carezzano</option><option value="carrosio">Carrosio</option><option value="castell-alfero">Castell&#x27;Alfero</option><option value="castelnuovo-scrivia">Castelnuovo Scrivia</option><option value="cimaferle">Cimaferle</option><option value="costa-vescovato">Costa Vescovato</option><option value="mombello">Mombello</option><option value="nizza-monferrato">Nizza Monferrato</option><option value="novi-ligure">Novi Ligure</option><option value="ovada">Ovada</option><option value="pontecurone">Pontecurone</option><option value="riva-presso-chieri">Riva presso Chieri</option><option value="rossiglione">Rossiglione</option><option value="tortona">Tortona</option><option value="valenza">Valenza</option></select>
   </div>
   <div class="ev-viewbar"><p class="events-count" id="ce-count"></p></div>
 <div class="events-list" id="ce-active">
@@ -1218,8 +1241,28 @@
             </div>
           </div>
         </article>
-        <article class="event-card" data-province="al" data-city="bosio" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+        <article class="event-card" data-province="at" data-city="riva-presso-chieri" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-22">
+            <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960872773266177645.jpg" alt="" loading="lazy" decoding="async">
+            <span class="ev-main">
+              <span class="ev-name">Oratorio Aperto Settembre 2026 - Parrocchia Assunzione di Maria Vergine</span>
+              <span class="ev-line">Riva presso Chieri (AT) · 07:30-17:45 · 6-14 anni</span>
+              <span class="ev-tags"><span class="ev-pill is-price">A pagamento (da…</span></span>
+            </span>
+            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button></h4>
+          <div class="ev-det" id="det-ce-22" hidden>
+            <p class="event-desc">Oratorio estivo settembrina per bambini e ragazzi dalla 1° elementare in su, dal 31 agosto al 14 settembre 2026. Le attività includono giochi organizzati, laboratori, attività creative, svolgimento dei compiti e uscite sul territorio. Iscrizione entro il 20 agosto.</p>
+            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Parrocchia Assunzione di Maria Vergine - Riva presso Chieri (AT)</p>
+            <p class="ce-contatti">Contatti: 370-3201432</p>
+            <div class="event-actions">
+              
+<a class="event-act" href="https://www.google.com/maps/search/?api=1&amp;query=Parrocchia%20Assunzione%20di%20Maria%20Vergine%20-%20Riva%20presso%20Chieri%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>              <a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960872773266177645.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a>
+            </div>
+          </div>
+        </article>
+        <article class="event-card" data-province="al" data-city="bosio" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-23">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3884751132408951193.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">R-Estate a Bosio - Centro Estivo 2026 - Amici Acquedotto di Bosio APS</span>
@@ -1228,7 +1271,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-22" hidden>
+          <div class="ev-det" id="det-ce-23" hidden>
             <p class="event-desc">Centro estivo per bambini della Scuola dell&#x27;Infanzia e Primaria. Attività: cucina fresca, sport, giochi, passeggiate, piscina, laboratori, escursioni e tanto altro. Dal lunedì al venerdì. Open Day 23/05/26 ore 10:30. Iscrizioni dal 04/05/26.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Scuole di Bosio - Bosio (AL)</p>
             <p class="ce-contatti">Contatti: amiciacquedottobosio@gmail.com - Vittoria 3405248676 - Alice 3406043215 - Gaia 3401088932</p>
@@ -1239,7 +1282,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="mombello" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-23">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-24">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3951416532665438186.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Settimana Verde a Mombello - Associazione Culturale Omnia</span>
@@ -1248,7 +1291,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-23" hidden>
+          <div class="ev-det" id="det-ce-24" hidden>
             <p class="event-desc">Una settimana di avventure all&#x27;aria aperta per bambini dai 6 ai 10 anni, con attività di natura e outdoor, laboratori creativi, giochi e momenti di scoperta e meraviglia. Posti limitati, iscrizione obbligatoria. Organizzata dall&#x27;Associazione Culturale Omnia.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Mombello (AL)</p>
             <p class="ce-contatti">Contatti: associazioneomnia24@gmail.com</p>
@@ -1259,7 +1302,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="callianetto" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-24">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-25">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3872179653284337668.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Summer Camp - Richard&#x27;s Ranch</span>
@@ -1268,7 +1311,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-24" hidden>
+          <div class="ev-det" id="det-ce-25" hidden>
             <p class="event-desc">Centro estivo per bambini e ragazzi dai 5 anni con lezioni di equitazione, cura degli animali, trekking nel bosco, piscina e giochi d&#x27;acqua, compiti e merenda, laboratori di pittura e pet therapy. Pranzo al sacco. Una volta alla settimana tendata con pizza.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Montechiaro 30, Callianetto (AT)</p>
             <p class="ce-contatti">Contatti: 3282443138</p>
@@ -1279,7 +1322,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="asti" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-25">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-26">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3861152267122123768.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Un&#x27;Estate Fantastica - Tanaro Skate School</span>
@@ -1288,7 +1331,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-25" hidden>
+          <div class="ev-det" id="det-ce-26" hidden>
             <p class="event-desc">Centro estivo con settimane a tema ricche di attività: sport, laboratori, giochi, piscina facoltativa, uscite e spazio compiti. Staff formato da educatori e professionisti. Ogni giovedì serata pizza.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Corridoni 51, Asti (AT)</p>
             <p class="ce-contatti">Contatti: 3475855956 (Giulia) - 3332394631 (Mirko)</p>
