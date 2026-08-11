@@ -11453,8 +11453,8 @@ document.addEventListener('DOMContentLoaded', function () {
          Aggiungendone una, cercare "Alessandria e Asti" in TUTTO il file: il
          filtro provincia e le liste sono generati, questi testi no. -->
     <span class="section-label">Alessandria · Asti · Cuneo · Famiglie</span>
-    <h1><em>Eventi</em> Oggi</h1>
-    <p>Tutte le sagre, le feste patronali, i laboratori e gli spettacoli di oggi e del weekend nelle province di Alessandria, Asti e Cuneo. Agenda aggiornata ogni giorno, selezionata per le famiglie.</p>
+    <h1><em>Sagre ed eventi</em> oggi e questo weekend</h1>
+    <p>Tutte le sagre, le feste patronali, le fiere, i laboratori e gli spettacoli di oggi e del weekend nelle province di Alessandria, Asti e Cuneo. Agenda aggiornata ogni notte, selezionata per le famiglie e verificata evento per evento.</p>
     <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi centri estivi o invernali per i tuoi bambini? Vedi i <a href="/centri-estivi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">centri per bambini in provincia di Alessandria e Asti</a>.</p>
   </div>
 </header>
@@ -17138,6 +17138,25 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
 </section>
 
+
+<!-- TESTO DI ZONA
+     Sta QUI, sotto la lista, e non nell'hero: la pagina la si apre per guardare
+     gli eventi, e duecento parole prima dell'elenco le allontanano. Google
+     legge tutta la pagina, il lettore no.
+     Testo scritto a mano, fuori dai marker: non lo tocca genera_eventi.py.
+     padding-top:0 perche' sopra c'e' gia' la sezione bianca della lista con i
+     suoi 100px in fondo: senza, fra l'elenco e questo testo si aprono 200px. -->
+<section class="bg-white" style="padding-top:0;">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">Le zone</span>
+      <h2 class="section-title">Dove arrivano gli eventi di questa agenda</h2>
+    </div>
+    <p>Questa pagina raccoglie <strong>sagre, feste patronali, fiere, laboratori e spettacoli</strong> nelle province di Alessandria, Asti e Cuneo: il Monferrato, l'Acquese, il Novese, l'Astigiano e le valli cuneesi. Ogni evento arriva da una locandina, da una pro loco o da un comune, e prima di finire qui lo controlliamo uno per uno — data, orario e paese. L'elenco si rifà da solo ogni notte, quindi quello che è passato esce e non resta a ingombrare.</p>
+    <p>Se cerchi qualcosa di preciso, le scorciatoie in cima all'agenda portano alle pagine dedicate: <a href="/eventi/oggi.html">cosa fare oggi</a> raccoglie solo quello che è in corso adesso, <a href="/eventi/weekend.html">questo weekend</a> il programma di sabato e domenica. Per le sole sagre e feste, divise mese per mese, ci sono le pagine di <a href="/sagre-provincia-alessandria.html">sagre in provincia di Alessandria</a>, <a href="/sagre-provincia-asti.html">sagre in provincia di Asti</a> e <a href="/sagre-provincia-cuneo.html">sagre in provincia di Cuneo</a>, con anche quelle che tornano ogni anno.</p>
+    <p>Paese per paese, invece, ci sono le pagine dei singoli comuni — da <a href="/eventi/comune/alessandria.html">Alessandria</a> ad <a href="/eventi/comune/acqui-terme.html">Acqui Terme</a>, <a href="/eventi/comune/novi-ligure.html">Novi Ligure</a> e <a href="/eventi/comune/tortona.html">Tortona</a> — e la mappa di <a href="/zone.html">tutte le pagine della tua zona</a>, con chi segue ogni provincia. Organizzi un evento per famiglie? Scrivici a <a href="mailto:info@daop.it">info@daop.it</a> e lo pubblichiamo.</p>
+  </div>
+</section>
 
 <!-- INFO + GINETTO -->
 <section class="bg-cream" style="padding-top:0;">
