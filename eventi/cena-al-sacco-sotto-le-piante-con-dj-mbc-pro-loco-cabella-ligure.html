@@ -135,7 +135,11 @@
   .ev-cal-legend button{font:inherit;font-weight:700;color:var(--orange-dark);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 
   /* ── IN EVIDENZA: corsie "Oggi" e "Questo weekend" ── */
+  /* La seconda corsia ("Questo weekend") nasce sempre fuori schermo: saltarne
+     stile e layout finche' non si arriva costa zero e toglie ~12 schede con
+     immagine dal primo disegno. */
   .ev-hl-block,.ev-day{padding:0}
+  .ev-hl-block{content-visibility:auto;contain-intrinsic-size:auto 340px}
   .ev-highlights{display:flex;flex-direction:column;gap:24px;margin:26px 0 14px}
   .ev-hl-title{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:var(--navy);margin-bottom:14px}
   .ev-hl-n{font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:700;color:var(--text-light);background:var(--cream);border:1px solid rgba(45,74,92,0.07);border-radius:100px;padding:3px 10px}
@@ -157,12 +161,31 @@
   .ev-dayname::first-letter{text-transform:uppercase}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
-  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:160px}
+  /* content-visibility: il browser salta stile, layout e disegno delle schede
+     fuori schermo. Su ~290 schede e' la voce piu' pesante della pagina: senza,
+     ogni misura forzata (la barra appiccicosa, l'apertura di una riga) ricalcola
+     l'intero documento. Il testo resta nel DOM: la ricerca della pagina, il
+     Ctrl+F del browser e i motori lo vedono lo stesso.
+     contain-intrinsic-size: altezza supposta finche' la scheda non e' mai stata
+     disegnata, cosi' la barra di scorrimento non balla. 'auto' la sostituisce
+     con l'altezza vera dopo il primo disegno e se la riga si apre. 108px e'
+     la riga chiusa tipica sul telefono (miniatura 52 + due righe di testo). */
+  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:160px;
+    content-visibility:auto;contain-intrinsic-size:auto 108px}
   .event-card.is-hidden,.ev-day.is-hidden,.ev-hl-card.is-hidden,.ev-hl-block.is-hidden,.ev-highlights.is-hidden{display:none}
   .ev-h{margin:0;font-weight:400}
   .ev-row{width:100%;display:grid;grid-template-columns:60px 1fr 20px;gap:14px;align-items:flex-start;padding:14px 6px;background:none;border:0;border-left:3px solid transparent;font-family:inherit;text-align:left;cursor:pointer;transition:var(--transition)}
   .ev-row:hover{background:var(--cream);border-left-color:var(--cat-color)}
   .event-card.is-open .ev-row{border-left-color:var(--cat-color)}
+  /* Sul telefono il :hover non esiste: il bordo colorato di categoria compariva
+     solo aprendo la riga, quindi trenta schede di fila erano tutte uguali e
+     l'unico appiglio restava la miniatura. Qui il colore c'e' sempre, smorzato
+     (la tinta, non l'accento pieno): sagra, laboratorio e spettacolo si
+     distinguono scorrendo, senza leggere le pillole. */
+  @media(hover:none){
+    .ev-row{border-left-color:var(--cat-tint)}
+    .event-card.is-open .ev-row,.ev-row:active{border-left-color:var(--cat-color)}
+  }
   .ev-thumb{width:60px;height:60px;margin-top:2px;border-radius:12px;object-fit:cover;object-position:top center;background:var(--cream);display:block}
   .ev-thumb.is-ph{display:flex;align-items:center;justify-content:center;background:var(--cat-tint);color:var(--cat-color)}
   .ev-thumb.is-ph .icon{width:24px;height:24px;stroke-width:1.6}
@@ -220,8 +243,31 @@
      restringere l'elenco - sono un'altra pagina che risponde a un'altra
      domanda. Il bordo caldo le distingue senza aggiungere un componente. */
   .ev-scorc-row{flex-basis:100%;display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px}
-  .ev-scorc-row .ev-comuni a{border-color:rgba(232,149,74,0.42)}
-  .ev-scorc-row .ev-comuni a:hover{border-color:var(--orange);background:rgba(232,149,74,0.09)}
+  /* Il bordo caldo da solo non bastava: accanto alle pillole dei comuni, sul
+     telefono, i due gruppi erano due file di ovali bianchi identici. Queste
+     sono pillole PIENE - portano a un'altra pagina che risponde a un'altra
+     domanda - e i comuni restano vuote, che e' la gerarchia vera. */
+  .ev-scorc-row .ev-comuni a{border-color:transparent;background:rgba(232,149,74,0.13);color:var(--orange-ink,#a05714);font-weight:700}
+  .ev-scorc-row .ev-comuni a:hover{border-color:var(--orange);background:rgba(232,149,74,0.2)}
+  /* "Vai al comune" e' un <details>: aperto di norma, chiuso dall'agenda sotto
+     i 600px. La freccetta la disegna il browser, qui serve solo che la riga
+     sembri cliccabile e che il conteggio dica cosa c'e' sotto. */
+  .ev-comuni-box{flex-basis:100%;min-width:0}
+  /* display:flex su <summary> fa sparire il triangolino che disegna il browser,
+     e la riga tornava a sembrare un'etichetta come "Cosa cerchi" invece di
+     qualcosa da toccare: il segnaposto va rimesso a mano. ::marker azzerato
+     perche' Safari lo tiene anche in flex e ne verrebbero due. */
+  .ev-comuni-box>summary{display:flex;align-items:center;gap:8px;cursor:pointer;
+    padding:6px 0;min-height:34px}
+  .ev-comuni-box>summary::marker,.ev-comuni-box>summary::-webkit-details-marker{content:'';display:none}
+  .ev-comuni-box>summary::after{content:'';width:9px;height:9px;margin-left:1px;
+    border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+    transform:rotate(45deg) translate(-2px,-2px);transition:var(--transition)}
+  .ev-comuni-box[open]>summary::after{transform:rotate(-135deg) translate(-3px,-3px)}
+  .ev-comuni-box>summary:hover{color:var(--navy)}
+  .ev-comuni-box[open]>summary{margin-bottom:8px}
+  .ev-comuni-n{font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0;
+    color:var(--text-light);background:var(--cream);border:1px solid rgba(45,74,92,0.07);border-radius:100px;padding:2px 9px}
   .ev-comuni a{display:inline-flex;align-items:baseline;gap:7px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:7px 14px;font-size:0.86rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
   .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
   .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
@@ -286,11 +332,27 @@
     .ev-toolbar{gap:7px;padding:10px 0 9px}
     .ev-search{flex:1 1 100%}
     .ev-search input{min-height:42px}
-    /* Sul telefono tre select in fila lasciano ~100px l'uno: "Tutte le province"
-   e le categorie lunghe ("Cultura & Natura") venivano tagliate a meta'. Con
-   base 50% ne stanno due per riga e la terza occupa la riga sotto, cosi' c'e'
-   spazio anche per l'opzione selezionata piu' lunga. */
-.ev-select{flex:1 1 calc(50% - 4px);min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
+    /* Tre select in fila a larghezza UGUALE lasciano 119px l'uno e tagliano
+   "Cultura & Natura", che ne chiede 144: era il motivo per cui stavano su due
+   righe da 50%. Ma non devono essere uguali - a larghezza naturale chiedono
+   98 + 96 + 144 = 338px piu' i due spazi, e in 372px ci stanno. Cosi' la barra
+   appiccicosa passa da 156 a ~109px: 47px di schermo che sul telefono restavano
+   occupati per tutto lo scorrimento. Se un domani un'etichetta si allunga
+   troppo tornano a capo da sole, cioe' come stavano prima. */
+.ev-select{flex:1 1 auto;min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
+    /* Fra la fine dell'hero e il primo evento c'erano l'intestazione di
+       sezione, quattro controlli e sedici pillole: su un telefono voleva dire
+       due schermate di filtri prima di un evento. L'intestazione qui ripete
+       quello che l'hero ha appena detto, quindi si stringe. */
+    .section-header{margin-bottom:22px}
+    .section-subtitle{font-size:0.95rem;line-height:1.6}
+    .bg-white{padding-top:44px}
+    .ev-comuni-nav{gap:6px 8px;margin-top:12px}
+    .ev-comuni a{padding:8px 13px;font-size:0.84rem}
+    .ev-highlights{margin-top:20px;gap:20px}
+    /* La riga chiusa e' l'unita' che si scorre: piu' aria fra una e l'altra e
+       il bordo di categoria piu' marcato, se no trenta schede sono un muro. */
+    .ev-row{padding:15px 6px;border-left-width:4px}
     .ev-cal{padding:12px 10px 10px}
     .ev-cal-day{font-size:0.85rem;border-radius:10px}
     .ev-cal-n{font-size:0.64rem}

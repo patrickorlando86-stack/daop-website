@@ -433,6 +433,13 @@ def maps_url(e):
     return "https://www.google.com/maps/search/?api=1&query=" + urllib.parse.quote(q + ", Italia")
 
 
+# Base del link "Aggiungi al calendario" senza parametri: e' quello che finisce
+# nell'HTML dell'agenda, dove i campi li riempie il JS all'apertura della riga.
+# Le pagine evento e comune, che hanno una scheda sola per pagina, continuano a
+# usare gcal_url() con tutto dentro.
+GCAL_BASE = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+
+
 def gcal_url(e):
     """Link 'Aggiungi al calendario' (Google Calendar, evento tutto-il-giorno:
     niente fusi orari, robusto anche quando l'ora non è certa)."""
@@ -527,7 +534,19 @@ def riga(e, today, hub=None):
     murl = maps_url(e)
     if murl:
         acts.append(f'<a class="event-act" href="{murl}" target="_blank" rel="noopener">{simbolo("i-pin")} Come arrivare</a>')
-    acts.append(f'<a class="event-act" href="{gcal_url(e)}" target="_blank" rel="noopener">{simbolo("i-calendar")} Calendario</a>')
+    # L'URL completo di Google Calendar porta dentro l'href il nome, le date e
+    # la descrizione intera riscritta in percent-encoding: ~490 byte per riga,
+    # 144 KB sull'agenda, per un link che quasi nessuno apre e che comunque sta
+    # dentro un dettaglio chiuso. Qui resta la base valida (senza JS il link
+    # funziona ancora, apre Calendar col modulo vuoto) e l'agenda lo completa
+    # quando la riga si apre, leggendo nome, date e descrizione dal DOM: sono
+    # gia' tutti li'. Nell'attributo resta solo il luogo, che nella riga chiusa
+    # non c'e' in questa forma.
+    cal_n = (f' data-cal-n="{esc(e["nome"])}"'
+             if len((e['nome'] or '').strip()) > 110 else '')
+    acts.append(f'<a class="event-act ev-gcal" href="{GCAL_BASE}" target="_blank" rel="noopener"'
+                f' data-cal-l="{esc(_luogo_query(e))}"{cal_n}>'
+                f'{simbolo("i-calendar")} Calendario</a>')
     if cover:
         acts.append(f'<a class="event-act" href="{cover}" target="_blank" rel="noopener">{simbolo("i-image")} Locandina</a>')
     # Il comune, quando ha una pagina sua. Sta in fondo perche' non e' un'azione
@@ -3103,7 +3122,8 @@ def blocco_comuni(hub):
              f'<div class="ev-comuni">{scorc}</div></div>\n')
     if not hub:
         return testa.rstrip('\n')
-    voci = sorted(hub.values(), key=lambda d: (-len(d['futuri']), d['nome']))
+    voci = [d for d in sorted(hub.values(), key=lambda d: (-len(d['futuri']), d['nome']))
+            if d['futuri']]
     link = "".join(
         # Il numero da solo tiene la pillola corta; "eventi in programma" per
         # esteso sta nell'aria-label, perche' un "12" nudo allo screen reader
@@ -3111,12 +3131,21 @@ def blocco_comuni(hub):
         f'<a href="/eventi/comune/{d["slug"]}.html" '
         f'aria-label="{esc(d["nome"])}: {len(d["futuri"])} eventi in programma">'
         f'{esc(d["nome"])} <span>{len(d["futuri"])}</span></a>'
-        for d in voci if d['futuri'])
+        for d in voci)
     if not link:
         return testa.rstrip('\n')
+    # <details> e non piu' una riga aperta: sul telefono questi 10-15 comuni
+    # occupavano da soli mezzo schermo fra i filtri e il primo evento, e chi
+    # apre l'agenda vuole vedere un evento, non un indice. Aperto di default
+    # (senza JS resta com'era e su desktop lo spazio c'e'); l'agenda lo chiude
+    # sotto i 600px. I link restano nell'HTML in ogni caso: dentro un details
+    # chiuso Google li vede e li segue lo stesso, che era tutto il punto del
+    # blocco.
     return (testa
-            + '      <span class="ev-comuni-lab">Vai al comune</span>\n'
-            + f'      <div class="ev-comuni">{link}</div>')
+            + '      <details class="ev-comuni-box" open>\n'
+            + f'        <summary class="ev-comuni-lab">Vai al comune<span class="ev-comuni-n">{len(voci)}</span></summary>\n'
+            + f'        <div class="ev-comuni">{link}</div>\n'
+            + '      </details>')
 
 
 COMUNE_CSS = """
