@@ -146,13 +146,17 @@ le pagine `sagre-provincia-*` hanno solo la ricerca: lì gli eventi sono tutti
 "Sagre & Feste". Sulle pagine di intenzione non c'è mai il filtro "quando":
 quelle pagine *sono* già una risposta a quando.
 
-E su `luoghi.html` non c'è la tendina "solo dove c'è qualcosa in programma": quella
-è la domanda a cui risponde `eventi.html`, che la fa meglio perché lì l'evento
-*è* la riga. C'è anche un motivo di misura — quattro tendine sul telefono non
-stanno in una riga, e la barra appiccicosa passava da 109 a 156px. Chrome
-dimensiona una `<select>` sull'opzione **più lunga**, non su quella scelta: è per
-questo che l'etichetta del filtro ("Parchi") non è quella della riga ("Parco &
-Giardino").
+Su `luoghi.html` i filtri sono quattro (provincia, tipo, se piove, età) e sul
+telefono vanno a capo su due righe: 156px invece di 109. È il **contrario** della
+scelta fatta quando quella pagina aveva solo i luoghi dedotti dall'agenda, e il
+motivo è che è cambiato il dato: con centinaia di luoghi scelti a mano l'elenco
+non si scorre, si filtra, e quei 47px si ripagano alla prima ricerca.
+
+Le etichette restano corte lo stesso, perché **Chrome dimensiona una `<select>`
+sull'opzione più lunga**, non su quella scelta: è per questo che l'etichetta del
+filtro ("Servizi") non è quella della riga ("Servizi per Bambini & Famiglie"). E
+non c'è la tendina "solo dove c'è qualcosa in programma": quella è la domanda a
+cui risponde `eventi.html`, che la fa meglio perché lì l'evento *è* la riga.
 
 ### La categoria si scrive, non solo si colora
 
@@ -181,27 +185,54 @@ e quel momento coincide quasi sempre col luogo che diventa premium, perché è i
 gestore a dare il materiale. Il campo nel foglio c'è già; la generazione delle
 schede singole no, e si aggiunge quando le schede da scrivere esistono.
 
-Due sorgenti che **si sommano**, non che si escludono:
+Due sorgenti, e **non pesano uguale**:
 
 | sorgente | cosa porta |
 |---|---|
-| tab `Luoghi` del foglio (ripiego: `data/luoghi.json`) | il catalogo: le righe scelte a mano, le schede curate |
-| `data/eventi.json` + `data/storico-comuni.json` | i posti che l'agenda conosce, **quanti eventi** ci sono passati e **cosa c'è in programma** |
+| tab `Luoghi` del foglio (ripiego: `data/luoghi.json`) | il catalogo. **È questo l'elenco.** |
+| `data/eventi.json` + `data/storico-comuni.json` | solo l'innesto: **quanti eventi** ci sono passati e **cosa c'è in programma** |
 
-Si fondono per nome normalizzato + comune. Il catalogo vince sui campi che
-dichiara; l'agenda aggiunge quello che il catalogo non può sapere. Senza il tab
-la pagina esce lo stesso, con i ~170 posti che l'agenda già conosce: è il motivo
-per cui non è mai vuota.
+I posti che stanno **solo** nell'agenda — le piazze e le vie in cui passa una
+sagra — riempiono la pagina soltanto quando un catalogo non c'è per niente,
+perché non nasca vuota. Appena il tab esiste, spariscono: con 800 luoghi scelti a
+mano, aggiungerne 170 dedotti da "qui è passata una festa" diluisce invece di
+arricchire, e "dove si fanno le cose" ha già una pagina migliore, che è
+`eventi.html`. L'innesto invece resta sempre, ed è il motivo per cui questa
+pagina non è una directory come le altre: nessun altro può scrivere "qui DAOP ha
+seguito 7 eventi per famiglie, il prossimo è sabato".
 
-Colonne del tab (i nomi sono tollerati in più grafie, vedi `COLONNE`): `Nome`,
-`Comune`, `Provincia`, `Categoria`, `Indirizzo`, `Riparo`, `Prezzo`, `Età`,
-`Descrizione`, `Orari`, `Sito`, `Telefono`, `Foto`, `Lat`, `Lon`, `Premium`,
-`A cura di`, `Offerta`, `In evidenza`, `Pubblica`.
+Colonne del tab (i nomi sono tollerati in più grafie, vedi `COLONNE`): `CODICE`,
+`Nome`, `Icona`, `Categoria`, `Servizi`, `Tag`, `Indirizzo`, `Città`, `CAP`,
+`Provincia`, `Regione`, `Descrizione`, `Descrizione PREMIUM`, `Lat`, `Lng`,
+`Premium`, `Premium_dal`, `Consigliato DAOP`, `Gratuito`, `Orari`, `Prezzo`,
+`Website`, `Telefono`, `Email`, `Foto_1…5`, `Eta_min`, `Eta_max`.
 
-Un "luogo" che si chiama come il suo comune, una frazione, uno stand
-gastronomico e un "Centro Città" **non entrano**: sono righe del foglio eventi in
-cui il posto preciso non si sapeva, e in elenco facevano voci che non dicevano
-niente sotto un'intestazione che l'aveva appena detto.
+Quattro cose di quel foglio che non sono ovvie:
+
+- **`Categoria` è gerarchica**, col separatore `›`: "Sport › Arti marziali". Il
+  primo livello regge filtro e colore, il secondo si scrive in riga — ed è quello
+  che dice davvero cos'è il posto ("Arti marziali" vale più di "Sport"). L'elenco
+  delle categorie **non si scrive a mano** da nessuna parte: il foglio ne
+  aggiungerà, e colori e icone hanno un ripiego deterministico per le sconosciute.
+- **"Se piove" non ha una colonna**: sta dentro `Tag`, che è una stringa a
+  trattini. L'ordine dei controlli conta — `all-aperto` contiene `aperto` e
+  `parcheggio-coperto` contiene `coperto`, quindi si guarda prima la forma più
+  lunga. Nel dubbio "misto", che compare in tutte e due le risposte del filtro.
+- **`Icona` è un'emoji**, e sostituisce la miniatura nell'intestazione: si legge
+  meglio a 36px e non costa una richiesta.
+- **`PassaportoEsploratore`, `CodicePassaporto`, `PassaportoDemo`,
+  `CircuitoNome`** si leggono ma non si stampano: sono un'altra funzione, oggi
+  vuota su tutte le righe. Inventarle un'interfaccia qui vorrebbe dire indovinare
+  come funziona.
+
+Il catalogo esce dal Piemonte (l'Acquario di Genova, un parco a Voghera) e le
+province **non si filtrano** su AL/AT/CN come in agenda: chi cerca "gita da
+Alessandria" quelle le vuole proprio. Da qui `dove_siamo()`, che nomina le
+province che pesano e dice "e dintorni" per le altre.
+
+Come `genera_eventi.py`, c'è un `controlla_crollo()`: l'export CSV di Google
+**rispetta i filtri** del foglio, e un filtro rimasto attivo pubblicherebbe 40
+luoghi al posto di 800 senza un errore da nessuna parte.
 
 ### Il premium aggiunge, non riordina
 
@@ -210,11 +241,16 @@ quando la separazione smentisce il criterio con cui è fatto. Se la riga di chi
 paga stesse più in alto, il resto diventerebbe la serie B di una selezione che
 abbiamo fatto noi.
 
-Quindi la scheda premium cambia **cosa** c'è dentro (foto, orari, contatti,
-offerta) e non **dove** sta la riga: resta al suo posto alfabetico, nel suo
-comune. L'unico spazio in cui la posizione si compra è il blocco "In evidenza" in
-cima, che è separato e lo dichiara — e le stesse schede restano comunque
-nell'elenco sotto.
+Quindi la scheda premium cambia **cosa** c'è dentro (`Descrizione PREMIUM`, tutte
+e cinque le foto, contatti) e non **dove** sta la riga: resta al suo posto
+alfabetico, nel suo comune. L'unico spazio in cui la posizione si compra è il
+blocco "In evidenza" in cima, che è separato e lo dichiara — e le stesse schede
+restano comunque nell'elenco sotto.
+
+**"Consigliato DAOP" è un'altra cosa e non si compra**: è il giudizio nostro, lo
+stesso flag che esiste già in agenda. Le due pillole restano distinte apposta, e
+`#come-ordiniamo` lo dice a chi legge. In vetrina ci va chi ha *tutti e due* —
+pagare non basta a occupare i tre posti in cima se il posto non ci convince.
 
 Non è solo stile: **art. 22 comma 4-bis del Codice del consumo** (Omnibus, D.Lgs.
 26/2023) impone di dichiarare i parametri di ordinamento di una lista
@@ -254,9 +290,13 @@ lavora solo sulle nuove.
 `centri-estivi.html` non le usa ancora: ha un generatore suo e le sue locandine
 non passano da `data/eventi.json`.
 
-`luoghi.html` non mette **nessuna** immagine nelle righe non premium: 170 foto
-diverse da 34px sono lo stesso conto sbagliato, e un'icona di categoria si legge
-meglio. La foto compare solo nelle schede curate, dove è il gestore a fornirla.
+`luoghi.html` ha le foto su un altro bucket (`luoghi-foto`) e non mette **nessuna
+immagine nell'intestazione della riga**: al suo posto c'è l'emoji della colonna
+`Icona`. La foto sta nel corpo, cioè dentro un `<details>` chiuso, che il browser
+non disegna: con `loading="lazy"` non parte nessuna richiesta finché la riga non
+si apre. Misurato, non supposto — scorrendo tutta la pagina partono **zero**
+richieste, aprendo una riga ne parte **una**, e `tests/luoghi.js` lo ricontrolla
+a ogni run. È la differenza fra 800 foto per sessione e una manciata.
 
 ## Prestazioni: `eventi.html` è il caso difficile
 

@@ -5,8 +5,8 @@ Genera /luoghi.html: l'elenco filtrabile dei posti dove le famiglie ci vanno.
 PERCHE' UNA PAGINA SOLA E NON UNA SCHEDA PER LUOGO
 --------------------------------------------------
 La domanda di partenza era "800 luoghi, faccio 800 schede?". No, e non per
-pigrizia: il sitemap oggi ha 270 URL, e 800 pagine su template identico con il
-nome del posto scambiato sarebbero i tre quarti del sito fatti delle pagine piu'
+pigrizia: il sitemap ha 270 URL, e 800 pagine su template identico con il nome
+del posto scambiato sarebbero i tre quarti del sito fatti delle pagine piu'
 deboli che abbiamo. E' la definizione che Google da' dello scaled content abuse,
 e la penalizzazione non resta sulle pagine nuove: si porta dietro il dominio,
 cioe' eventi.html, che e' la pagina che regge il traffico.
@@ -16,28 +16,27 @@ schede ne tiene 294 in un file solo. Una scheda propria (/luoghi/<slug>.html) la
 si scrive quando c'e' qualcosa da dire che sta solo li' - foto nostre, orari
 verificati, dov'e' l'ombra ad agosto, dove si cambia il pannolino - e quel
 momento coincide quasi sempre con il luogo che diventa premium, perche' e' il
-gestore a darci il materiale. Il campo c'e' gia' (`scheda`), la generazione
-delle schede singole no: si aggiunge quando le schede da scrivere esistono, non
-prima.
+gestore a darci il materiale.
 
 DA DOVE ARRIVANO I LUOGHI
 -------------------------
-Due sorgenti che si sommano, non che si escludono:
+Due sorgenti, e non pesano uguale:
 
 1. **Il catalogo** - il tab "Luoghi" dello stesso foglio Google degli eventi,
    con ripiego su `data/luoghi.json` quando la rete non c'e' (stessa regola di
    genera_eventi.py: senza rete si va avanti con l'istantanea, non ci si ferma).
-   E' li' che vivranno le 800 righe.
+   E' questo l'elenco vero.
 
-2. **L'agenda** - i luoghi che DAOP conosce gia' perche' ci sono passati degli
-   eventi: `data/eventi.json` per il futuro, `data/storico-comuni.json` per gli
-   anni indietro. Sono ~350 posti veri, con il comune e la provincia giusti.
+2. **L'agenda** - `data/eventi.json` e `data/storico-comuni.json`. Serve a
+   sapere **cosa c'e' in programma** in un posto del catalogo, che e' il dato
+   per cui questa pagina non e' una directory come le altre: nessun altro puo'
+   scrivere "qui DAOP ha seguito 7 eventi per famiglie, il prossimo e' sabato".
 
-I due insiemi si fondono per chiave (nome normalizzato + comune). Il catalogo
-vince sui campi che dichiara; l'agenda aggiunge quello che il catalogo non puo'
-sapere - **quante volte ci si e' andati e quando e' la prossima**. Che poi e' il
-dato per cui questa pagina non e' un elenco come un altro: nessun'altra directory
-puo' scrivere "qui DAOP ha seguito 7 eventi per famiglie, il prossimo e' sabato".
+I posti che stanno SOLO nell'agenda (le piazze e le vie in cui passa una sagra)
+entrano come righe proprie soltanto finche' il catalogo e' piccolo - vedi
+SOGLIA_CATALOGO. Con 800 luoghi scelti a mano, aggiungerne 170 dedotti da "qui
+e' passata una festa" diluirebbe l'elenco invece di arricchirlo, e la domanda
+"dove si fanno le cose" ha gia' una pagina migliore: eventi.html.
 
 IL PREMIUM: AGGIUNGE, NON RIORDINA
 ----------------------------------
@@ -45,8 +44,8 @@ La regola editoriale e' la stessa gia' presa su "Adatto Famiglie": un elenco non
 si spacca in due quando la separazione smentisce il criterio con cui e' fatto. Se
 la riga di chi paga stesse piu' in alto, il resto diventerebbe la serie B di una
 selezione che abbiamo fatto noi. Quindi la scheda premium **aggiunge** (foto,
-orari, contatti, offerta) e sta nel suo posto in ordine alfabetico, dentro il suo
-comune, come tutte.
+descrizione lunga, orari, contatti) e sta nel suo posto in ordine alfabetico,
+dentro il suo comune, come tutte.
 
 L'unico spazio in cui la posizione si compra e' il blocco "In evidenza" in cima,
 che e' separato, dichiarato e non toglie la riga dall'elenco. Ed e' anche un
@@ -55,8 +54,11 @@ in una lista ricercabile i parametri di ordinamento vanno dichiarati, e omettere
 che una posizione e' stata pagata sta nella lista nera delle pratiche ingannevoli
 "in ogni caso". Da qui il blocco #come-ordiniamo, che non e' decorativo.
 
+"Consigliato DAOP" e' un'altra cosa e non si compra: e' il giudizio nostro, lo
+stesso flag che gia' esiste in agenda. Le due pillole restano distinte apposta.
+
 Uso:
-    python3 scripts/genera_luoghi.py        # funziona offline
+    python3 scripts/genera_luoghi.py        # funziona offline, DOPO genera_eventi.py
 """
 import os
 import re
@@ -79,131 +81,226 @@ SITEMAP_PATH = G.SITEMAP_PATH
 PAGE_URL = f"{G.SITE_URL}/luoghi.html"
 DEFAULT_CSV = (f"https://docs.google.com/spreadsheets/d/{G.SHEET_ID}"
                "/gviz/tq?tqx=out:csv&sheet=Luoghi")
+SUPABASE_FOTO = "https://aaseyjdsldgjerjqlumu.supabase.co"
 
-# Quanti eventi passati bastano perche' un posto dell'agenda entri in elenco.
-# A 1 entrerebbero anche i "Centro Citta'" e le vie in cui e' passata una
-# sfilata una volta sola: sono indirizzi, non luoghi dove si va. A 2 resta
-# quello che ha ospitato qualcosa piu' di una volta, che e' il minimo perche'
-# la riga dica qualcosa a chi legge. Il catalogo non passa da qui: se una riga
-# sta nel foglio, e' perche' qualcuno l'ha scelta.
+# Quanti eventi passati bastano perche' un posto della sola agenda entri in
+# elenco (cioe' solo quando il catalogo non c'e' per niente). A 1 entrerebbero
+# anche le vie in cui e' passata una sfilata una volta: sono indirizzi, non
+# luoghi dove si va.
 MIN_EVENTI_AGENDA = 2
 
-# Nomi che non sono luoghi: contenitori generici che il foglio eventi usa
-# quando il posto preciso non si sa. Tenerli farebbe un elenco in cui "Centro
-# Citta'" compare in quaranta comuni diversi.
+# Le categorie del foglio, indovinate dal nome. Serve SOLO ai luoghi dedotti
+# dall'agenda, che una categoria non ce l'hanno: si riusano gli stessi slug del
+# catalogo, cosi' colori, icone e filtro restano una cosa sola invece di due
+# tassonomie da tenere allineate. Prima parola che vince, in quest'ordine.
+INDOVINA_CAT = [
+    ('acqua-mare', ('piscina', 'lido', 'spiaggia', 'lago', 'bagni ')),
+    ('cultura-istruzione', ('museo', 'biblioteca', 'teatro', 'palazzo', 'castello',
+                            'rocca', 'chiesa', 'santuario', 'oratorio', 'chiostro',
+                            'villa ', 'cinema', 'auditorium', 'pinacoteca', 'torre ')),
+    ('natura-aria-aperta', ('parco', 'giardin', 'bosco', 'sentiero', 'oasi',
+                            'area verde', 'pineta', 'riserva')),
+    ('fattorie-didattiche', ('fattoria', 'cascina', 'agrituris', 'azienda agricola',
+                             'maneggio', 'centro equestre')),
+    ('sport', ('campo', 'palestra', 'stadio', 'centro sportivo', 'polisportiv',
+               'bocciofil', 'tennis', 'pista', 'palazzetto', 'sferisterio')),
+    ('divertimento-avventura', ('luna park', 'area giochi', 'area feste', 'pro loco',
+                                'circolo', 'ludoteca')),
+]
+
+
+def indovina_categoria(nome):
+    n = ' ' + (nome or '').lower() + ' '
+    for slug, chiavi in INDOVINA_CAT:
+        if any(k in n for k in chiavi):
+            return slug
+    return 'altro'
+
 NON_LUOGHI = re.compile(
     r'^(centro citt|centro storico|vie del (paese|centro)|vie e piazze|'
     r'varie (sedi|location)|tutto il paese|piu\' sedi|da definire|'
     r'sede da definire|vari luoghi|in paese|stand gastronomic|'
     r'sede della manifestazione)', re.I)
-
-# Un "luogo" che si chiama come il suo comune non e' un luogo: e' la riga del
-# foglio in cui il posto preciso non si sapeva. In elenco faceva "Novi Ligure ·
-# Novi Ligure (AL)", cioe' una voce che non dice niente sotto un'intestazione
-# che l'ha appena detto. Stesso discorso per le frazioni scritte come
-# "Carrega Ligure - fraz. Magioncalda": il comune sta gia' nel titolo del gruppo.
 FRAZIONE = re.compile(r'\bfraz(\.|ione\b)', re.I)
 
 
-# ── Le categorie di luogo ────────────────────────────────────────────────────
+# ── Le colonne del tab "Luoghi" ──────────────────────────────────────────────
 #
-# Non sono le categorie degli eventi: un evento e' "Sagra & Festa", un luogo e'
-# un parco o un castello. Si dichiarano nel foglio (colonna Categoria) e, quando
-# la colonna e' vuota, si deducono dal nome - che per i posti funziona bene,
-# perche' un posto si chiama quasi sempre come quello che e' ("Parco Peppino
-# Impastato", "Castello dei Paleologi", "Biblioteca civica").
+# I nomi sono tollerati in piu' grafie perche' il foglio lo scrivono due persone
+# e perche' una colonna rinominata non deve far uscire una pagina monca in
+# silenzio. La prima grafia e' quella vera del foglio al 12/08/2026.
 #
-# `riparo` e' la risposta a "e se piove?", che e' il filtro piu' usato di
-# qualunque elenco di posti con i bambini: chiuso / aperto / misto. E' un valore
-# di ripiego per categoria, che la colonna Riparo del foglio sovrascrive.
-#
-# Le icone stanno nello sprite in fondo a questo file, non in assets/icons.svg.html:
-# quello e' lo sprite dell'agenda e non contiene ne' un castello ne' una goccia,
-# e allargarlo vorrebbe dire ricommittare eventi.html per una pagina sola.
-CATEGORIE = [
-    ('acqua', 'Acqua', 'lgi-acqua', 'misto',
-     ('piscina', 'lido', 'bagni ', 'spiaggia', 'lago', 'idroscalo', 'acquapark',
-      'parco acquatico', 'torrente', 'fiume ')),
-    ('castello', 'Castello & Rocca', 'lgi-castello', 'misto',
-     ('castello', 'rocca', 'fortezza', 'forte ', 'torre ', 'ricetto', 'bastion',
-      'cittadella', 'castell')),
-    ('museo', 'Museo', 'lgi-museo', 'chiuso',
-     ('museo', 'pinacoteca', 'gipsoteca', 'planetario', 'ecomuseo', 'antiquarium')),
-    ('natura', 'Natura & Fattoria', 'lgi-natura', 'aperto',
-     ('bosco', 'sentiero', 'riserva', 'oasi', 'fattoria', 'cascina', 'agrituris',
-      'azienda agricola', 'orto botanico', 'parco naturale', 'area naturale',
-      'laghetto', 'maneggio', 'ippic', 'centro equestre', 'centro faunistic',
-      'tenuta ', 'cantina', 'vigne', 'apiario', 'centro visita')),
-    ('parco', 'Parco & Giardino', 'lgi-parco', 'aperto',
-     ('parco', 'giardin', 'area verde', 'area giochi', 'area attrezzata',
-      'villa comunale', 'pineta', 'belvedere')),
-    ('sport', 'Sport & Gioco', 'lgi-sport', 'misto',
-     ('palestra', 'campo sportivo', 'centro sportivo', 'polisportiv', 'stadio',
-      'bocciofil', 'tennis', 'pista', 'palazzetto', 'centro fondo', 'skate',
-      'campo da', 'impianti sportivi', 'sferisterio', 'area sportiva',
-      'pala', 'sci ', 'seggiovia', 'palaghiaccio')),
-    ('cultura', 'Cultura & Teatro', 'lgi-cultura', 'chiuso',
-     ('teatro', 'biblioteca', 'cinema', 'auditorium', 'palazzo', 'villa ',
-      'sala ', 'ludoteca', 'centro culturale', 'casa d', 'accademia',
-      'conservatorio', 'archivio', 'municipio', 'comune di ', 'confraternita')),
-    ('fede', 'Chiesa & Oratorio', 'lgi-fede', 'chiuso',
-     ('chiesa', 'santuario', 'oratorio', 'parrocchi', 'abbazia', 'chiostro',
-      'convento', 'conventual', 'pieve', 'basilica', 'duomo', 'cappella',
-      'monastero', 'san francesco', 'battistero')),
-    ('piazza', 'Piazza & Vie', 'lgi-piazza', 'aperto',
-     ('piazza', 'piazzale', 'via ', 'corso ', 'largo ', 'viale ', 'borgo ',
-      'lungo', 'ponte ', 'area pedonale')),
-    ('ritrovo', 'Ritrovo & Pro Loco', 'lgi-ritrovo', 'misto',
-     ('pro loco', 'proloco', 'circolo', 'area feste', 'capannone', 'salone',
-      'polifunzional', 'centro incontro', 'societa\' operaia', 'ex ', 'sede ',
-      'padiglione', 'foro boario', 'ostello', 'rifugio', 'balera',
-      'ballo a palchetto', 'centro per le famiglie', 's.o.m.s', 'soms',
-      's.m.s', 'spazio giovani', 'centro giovani', 'centro anziani')),
-]
-# L'etichetta della tendina non e' quella della riga, e non e' una svista.
-# In riga si parla di UN posto ("Parco & Giardino"), nel filtro di una famiglia
-# di posti ("Parchi"): al plurale la riga suonerebbe sbagliata e al singolare il
-# filtro sembra una scelta sola. E c'e' una ragione tecnica che vale quanto
-# quella di stile - Chrome dimensiona una <select> sull'opzione PIU' LUNGA, non
-# su quella scelta: con "Ritrovo & Pro Loco" dentro, la tendina da sola chiedeva
-# 150px e mandava a capo la barra appiccicosa del telefono.
-CAT_FILTRO = {
-    'acqua': 'Acqua', 'castello': 'Castelli', 'museo': 'Musei', 'natura': 'Natura',
-    'parco': 'Parchi', 'sport': 'Sport', 'cultura': 'Cultura', 'fede': 'Chiese',
-    'piazza': 'Piazze', 'ritrovo': 'Ritrovi',
+# Passaporto* e CircuitoNome si leggono ma NON si stampano: sono un'altra
+# funzione (il passaporto dell'Esploratore), oggi vuota su tutte le righe, e
+# inventarle un'interfaccia qui vorrebbe dire indovinare come funziona.
+COLONNE = {
+    'codice': ('codice', 'id'),
+    'nome': ('nome', 'luogo', 'denominazione'),
+    'icona': ('icona', 'emoji'),
+    'categoria': ('categoria', 'tipo', 'tipologia'),
+    'servizi': ('servizi', 'attività', 'attivita'),
+    'tag': ('tag', 'tags', 'etichette'),
+    'indirizzo': ('indirizzo', 'via', 'indirizzo completo'),
+    'comune': ('città', 'citta', 'comune', 'paese'),
+    'cap': ('cap',),
+    'prov': ('provincia', 'prov', 'sigla'),
+    'regione': ('regione',),
+    'descr': ('descrizione', 'descr'),
+    'descr_premium': ('descrizione premium',),
+    'lat': ('lat', 'latitudine'),
+    'lon': ('lng', 'lon', 'longitudine'),
+    'premium': ('premium',),
+    'premium_dal': ('premium_dal', 'premium dal'),
+    'consigliato': ('consigliato daop', 'consigliato'),
+    'gratuito': ('gratuito', 'gratis'),
+    'passaporto': ('passaportoesploratore', 'passaporto esploratore'),
+    'passaporto_codice': ('codicepassaporto', 'codice passaporto'),
+    'passaporto_demo': ('passaportodemo', 'passaporto demo'),
+    'circuito': ('circuitonome', 'circuito'),
+    'orari': ('orari', 'orario', 'apertura'),
+    'prezzo': ('prezzo', 'costo', 'ingresso'),
+    'sito': ('website', 'sito', 'sito web', 'link'),
+    'tel': ('telefono', 'tel'),
+    'email': ('email', 'mail'),
+    'foto1': ('foto_1', 'foto 1', 'foto'),
+    'foto2': ('foto_2', 'foto 2'),
+    'foto3': ('foto_3', 'foto 3'),
+    'foto4': ('foto_4', 'foto 4'),
+    'foto5': ('foto_5', 'foto 5'),
+    'eta_min': ('eta_min', 'età min', 'eta min'),
+    'eta_max': ('eta_max', 'età max', 'eta max'),
 }
-CAT_INFO = {c[0]: {'label': c[1], 'icona': c[2], 'riparo': c[3],
-                   'filtro': CAT_FILTRO.get(c[0], c[1])} for c in CATEGORIE}
-CAT_INFO['altro'] = {'label': 'Altro luogo', 'icona': 'lgi-pin', 'riparo': 'misto',
-                     'filtro': 'Altro'}
-ORDINE_CAT = [c[0] for c in CATEGORIE] + ['altro']
-
-RIPARO_LABEL = {'chiuso': 'Al chiuso', 'aperto': "All'aperto", 'misto': 'Chiuso e aperto'}
 
 
-# Un nome che COMINCIA con "Corso", "Via", "Piazza" e' un indirizzo, e va deciso
-# li' e subito: "Corso Bagni" (una strada di Acqui Terme) finiva in "Acqua"
-# perche' piu' avanti c'e' la parola bagni, e "Via del Castello" sarebbe
-# diventata un castello. La parola che conta e' la prima.
-INIZI_PIAZZA = re.compile(
-    r"^\s*(piazz(a|ale|etta)|via|viale|corso|c\.so|largo|vicolo|borgo|"
-    r"lungo\w+|strada|salita|contrada|p\.zza|v\.le)\b", re.I)
+def _norm_head(s):
+    return re.sub(r"\s+", " ", (s or '').strip().lower())
 
 
-def categoria_di(nome, dichiarata=''):
-    """Lo slug di categoria del luogo. La colonna del foglio vince sempre."""
-    d = (dichiarata or '').strip().lower()
-    if d:
-        for slug, label, _ico, _rip, chiavi in CATEGORIE:
-            if d == slug or d in label.lower() or any(k.strip() in d for k in chiavi):
-                return slug
-    if INIZI_PIAZZA.match(nome or ''):
-        return 'piazza'
-    n = ' ' + (nome or '').lower() + ' '
-    for slug, _label, _ico, _rip, chiavi in CATEGORIE:
-        if any(k in n for k in chiavi):
-            return slug
-    return 'altro'
+def si(v):
+    return str(v or '').strip().lower() in ('si', 'sì', 'x', 'true', '1', 'vero')
+
+
+# ── La tassonomia ────────────────────────────────────────────────────────────
+#
+# Le categorie del foglio sono gerarchiche e scritte col separatore "›":
+# "Sport › Arti marziali", "Cultura & Istruzione › Biblioteche". Il primo
+# livello regge il filtro e il colore, il secondo si scrive in riga - ed e'
+# quello che dice davvero cos'e' il posto ("Arti marziali" vale piu' di "Sport").
+#
+# NON si tiene un elenco fisso di categorie: il foglio ne aggiungera' altre e un
+# elenco scritto a mano resterebbe indietro senza che nessuno se ne accorga.
+# Colori e icone hanno un ripiego deterministico per le sconosciute, cosi' una
+# categoria nuova esce colorata e distinta invece che grigia.
+SEP_CAT = '›'
+
+COLORI_NOTI = {
+    'sport': ('#e8954a', 'rgba(232,149,74,0.15)', '#a75b15'),
+    'cultura-istruzione': ('#6c63a6', 'rgba(108,99,166,0.14)', '#5c5493'),
+    'fattorie-didattiche': ('#5c9a4a', 'rgba(92,154,74,0.14)', '#487a3a'),
+    'acqua-mare': ('#3d8fc4', 'rgba(61,143,196,0.14)', '#2f7099'),
+    'divertimento-avventura': ('#c9a227', 'rgba(201,162,39,0.16)', '#846a1a'),
+    'servizi-per-bambini-famiglie': ('#6ba5a8', 'rgba(107,165,168,0.16)', '#467477'),
+    'natura-aria-aperta': ('#188663', 'rgba(24,134,99,0.14)', '#146c51'),
+    'mangiare': ('#c2704f', 'rgba(194,112,79,0.15)', '#96543a'),
+    'altro': ('#7e8c99', 'rgba(126,140,153,0.16)', '#606d7a'),
+}
+# Ripiego per le categorie che il foglio aggiungera' dopo di noi. Non e' casuale:
+# si sceglie con la somma dei caratteri dello slug, quindi la stessa categoria
+# prende sempre lo stesso colore e il CSS non balla da una run all'altra.
+PALETTE = [
+    ('#a9793f', 'rgba(169,121,63,0.15)', '#8a6132'),
+    ('#8a7f9b', 'rgba(138,127,155,0.16)', '#6f6580'),
+    ('#4a90b9', 'rgba(74,144,185,0.14)', '#397293'),
+    ('#b06a86', 'rgba(176,106,134,0.15)', '#8d5069'),
+    ('#7d9a3c', 'rgba(125,154,60,0.15)', '#5f7630'),
+]
+
+ICONE_NOTE = {
+    'sport': '⚽', 'cultura-istruzione': '📚', 'fattorie-didattiche': '🐮',
+    'acqua-mare': '🌊', 'divertimento-avventura': '🎡',
+    'servizi-per-bambini-famiglie': '👶', 'natura-aria-aperta': '🌳',
+    'mangiare': '🍽️',
+}
+
+
+def spacca_categoria(testo):
+    """(primo livello, secondo livello) dalla stringa del foglio."""
+    t = (testo or '').replace('>', SEP_CAT)
+    pezzi = [p.strip() for p in t.split(SEP_CAT) if p.strip()]
+    if not pezzi:
+        return ('Altro', '')
+    return (pezzi[0], pezzi[1] if len(pezzi) > 1 else '')
+
+
+def colore_cat(slug):
+    if slug in COLORI_NOTI:
+        return COLORI_NOTI[slug]
+    return PALETTE[sum(map(ord, slug)) % len(PALETTE)]
+
+
+def etichetta_filtro(primo):
+    """Il nome corto della categoria, per la tendina.
+
+    Chrome dimensiona una <select> sull'opzione PIU' LUNGA, non su quella
+    scelta: con "Servizi per Bambini & Famiglie" dentro, la tendina da sola
+    chiedeva mezzo schermo del telefono. In riga il nome resta per esteso -
+    li' descrive un posto e ci sta."""
+    t = (primo or '').split(' & ')[0].split(' per ')[0].strip()
+    if len(t) > 14 and ' ' in t:
+        t = t.split()[0]
+    return t or 'Altro'
+
+
+# ── "Se piove" ───────────────────────────────────────────────────────────────
+#
+# Non c'e' una colonna: sta dentro Tag, che e' una stringa a trattini scritta a
+# mano ("biblioteca-...-al-coperto-tutto-anno", "fattoria-...-parcheggio-all-aperto").
+# L'ordine dei controlli conta: "all-aperto" contiene "aperto" e
+# "parcheggio-coperto" contiene "coperto", quindi si guarda prima la forma piu'
+# lunga e piu' specifica.
+RIPARO_DA_CAT = {
+    'cultura-istruzione': 'chiuso', 'servizi-per-bambini-famiglie': 'chiuso',
+    'fattorie-didattiche': 'aperto', 'natura-aria-aperta': 'aperto',
+}
+
+
+def riparo_da_tag(tag, primo_slug):
+    t = (tag or '').lower()
+    if 'meteo-pioggia' in t or 'al-coperto' in t:
+        return 'chiuso'
+    if 'all-aperto' in t:
+        return 'aperto'
+    if 'coperto' in t:
+        return 'chiuso'
+    if re.search(r'(^|-)aperto(-|$)', t):
+        return 'aperto'
+    # Senza indizi si va per categoria, e nel dubbio "misto": un misto compare
+    # in tutte e due le risposte del filtro, quindi sbagliare qui nasconde meno
+    # di quanto nasconderebbe scegliere.
+    return RIPARO_DA_CAT.get(primo_slug, 'misto')
+
+
+# Le poche etichette pratiche che vale la pena tirare fuori dal campo Tag. Il
+# Tag e' lungo e ripete quello che Servizi dice meglio: qui si tiene solo quello
+# che Servizi NON dice - il parcheggio, la carrozzina, i cani, la prenotazione.
+# Cioe' le cose che fanno decidere se partire.
+ETICHETTE_TAG = {
+    'meteo-pioggia': 'Va bene se piove',
+    'carrozzina': 'Passa la carrozzina',
+    'disabili': 'Accessibile',
+    'parcheggio': 'Parcheggio',
+    'cani-ammessi': 'Cani ammessi',
+    'prenotazione': 'Su prenotazione',
+    'senza-glutine': 'Senza glutine',
+    'compleanno': 'Feste di compleanno',
+    'centri-estivi': 'Centri estivi',
+    'picnic': 'Picnic',
+}
+
+
+def servizi_pratici(tag):
+    t = (tag or '').lower()
+    return [testo for chiave, testo in ETICHETTE_TAG.items() if chiave in t]
 
 
 def _key(nome, comune):
@@ -216,9 +313,8 @@ def _key(nome, comune):
     t = t.replace("p.zza", "piazza").replace("p.za", "piazza").replace("pza ", "piazza ")
     t = t.replace("v.le", "viale").replace("c.so", "corso").replace("s.", "san ")
     t = re.sub(r"[^a-z0-9]+", " ", t).strip()
-    # Le sigle puntate si riattaccano: nel foglio lo stesso posto e' "Centro per
-    # le Famiglie C.I.S.A." e "Centro per le Famiglie CISA", e senza questo
-    # passaggio sono due righe con lo stesso nome nello stesso comune.
+    # Le sigle puntate si riattaccano: "A.S.D. Karate" e "ASD Karate" sono lo
+    # stesso posto, e senza questo passaggio sono due righe.
     t = re.sub(r"\b(?:[a-z] )+[a-z]\b", lambda m: m.group(0).replace(" ", ""), t)
     return f"{t}|{G.slugify(comune or '')}"
 
@@ -227,8 +323,8 @@ def _alfabetico(s):
     """La chiave con cui si ordina, cioe' l'ordine alfabetico come lo legge una
     persona: senza accenti e senza punteggiatura, non con i trattini di slugify.
 
-    Non e' un dettaglio da niente: slugify trasforma "C.I.S.A." in "c-i-s-a" e
-    il trattino viene prima di ogni lettera, quindi l'elenco usciva in un ordine
+    Non e' un dettaglio da niente: slugify trasforma "A.S.D." in "a-s-d" e il
+    trattino viene prima di ogni lettera, quindi l'elenco usciva in un ordine
     che a chi legge sembra sbagliato. E l'ordine alfabetico qui e' una promessa
     scritta in #come-ordiniamo, non una preferenza."""
     t = (s or '').lower()
@@ -238,104 +334,105 @@ def _alfabetico(s):
     return re.sub(r"[^a-z0-9 ]", "", t)
 
 
-def si(v):
-    return str(v or '').strip().lower() in ('si', 'sì', 'x', 'true', '1', 'vero')
+def _eta(v, ripiego):
+    try:
+        return max(0, min(99, int(str(v).strip())))
+    except (TypeError, ValueError):
+        return ripiego
 
 
-# ── Sorgente 1: il catalogo (foglio Google, ripiego su data/luoghi.json) ─────
+# ── Sorgente 1: il catalogo ──────────────────────────────────────────────────
 
-COLONNE = {
-    'nome': ('nome', 'luogo', 'denominazione'),
-    'comune': ('comune', 'citta', 'città', 'paese'),
-    'prov': ('provincia', 'prov', 'sigla'),
-    'cat': ('categoria', 'tipo', 'tipologia'),
-    'indirizzo': ('indirizzo', 'indirizzo completo', 'via'),
-    'riparo': ('riparo', 'coperto', 'al chiuso', 'chiuso/aperto'),
-    'prezzo': ('prezzo', 'costo', 'ingresso'),
-    'eta': ('eta', 'età', 'fascia', "fascia d'eta", "fascia d'età"),
-    'descr': ('descrizione', 'descr', 'note'),
-    'orari': ('orari', 'orario', 'apertura'),
-    'sito': ('sito', 'sito web', 'link', 'url'),
-    'tel': ('telefono', 'tel', 'contatto'),
-    'foto': ('foto', 'immagine', 'locandina'),
-    'lat': ('lat', 'latitudine'),
-    'lon': ('lon', 'lng', 'longitudine'),
-    'premium': ('premium', 'scheda premium', 'sponsor'),
-    'premium_da': ('a cura di', 'gestore', 'premium a cura di'),
-    'offerta': ('offerta', 'offerta famiglie', 'promozione'),
-    'evidenza': ('in evidenza', 'evidenza', 'vetrina'),
-    'pubblica': ('pubblica', 'pubblicare', 'online'),
-}
-
-
-def _norm_head(s):
-    return re.sub(r"\s+", " ", (s or '').strip().lower())
-
-
-def leggi_catalogo():
-    """Le righe del tab "Luoghi", o l'istantanea locale, o niente.
+def _righe_grezze():
+    """Le righe del tab "Luoghi" come dict con le intestazioni del foglio, o
+    l'istantanea locale, o niente.
 
     "O niente" e' un esito normale, non un errore: finche' il tab non esiste la
-    pagina si regge sull'agenda, che di luoghi ne conosce gia' ~350."""
+    pagina si regge sull'agenda. L'istantanea e' salvata con le STESSE chiavi
+    del foglio, cosi' i due percorsi passano dallo stesso normalizzatore e non
+    c'e' un secondo formato da tenere allineato quando una colonna cambia nome.
+
+    Il secondo valore dice se le righe sono FRESCHE (dal foglio): solo in quel
+    caso ha senso riscrivere l'istantanea."""
     base = os.environ.get("LUOGHI_CSV_URL") or DEFAULT_CSV
     sep = '&' if '?' in base else '?'
     url = f"{base}{sep}_cb={int(datetime.datetime.now().timestamp())}"
-    righe = None
     try:
         req = urllib.request.Request(url, headers={
             "User-Agent": "daop-luoghi-bot", "Cache-Control": "no-cache"})
         with urllib.request.urlopen(req, timeout=30) as r:
             testo = r.read().decode("utf-8", "replace")
         lettore = list(csv.reader(io.StringIO(testo)))
-        if lettore and any(_norm_head(c) in COLONNE['nome'] for c in lettore[0]):
-            head = [_norm_head(c) for c in lettore[0]]
+        head = [_norm_head(c) for c in lettore[0]] if lettore else []
+        if any(h in COLONNE['nome'] for h in head) and any(h in COLONNE['categoria'] for h in head):
             righe = [dict(zip(head, r)) for r in lettore[1:] if any(c.strip() for c in r)]
             print(f"[genera_luoghi] {len(righe)} righe lette dal tab Luoghi")
-        else:
-            # Il tab non c'e': gviz risponde comunque, con il primo foglio o con
-            # una pagina d'errore. Meglio accorgersene qui che pubblicare un
-            # elenco di eventi travestito da elenco di luoghi.
-            print("[genera_luoghi] il tab Luoghi non risponde con le colonne attese")
+            return righe, True
+        # Il tab non c'e': gviz risponde comunque, col primo foglio o con una
+        # pagina d'errore. Meglio accorgersene qui che pubblicare un elenco di
+        # eventi travestito da elenco di luoghi.
+        print("[genera_luoghi] il tab Luoghi non risponde con le colonne attese")
     except Exception as e:
         print(f"[genera_luoghi] tab Luoghi non raggiungibile ({e})")
 
-    if righe is None and os.path.exists(JSON_PATH):
+    if os.path.exists(JSON_PATH):
         with open(JSON_PATH, encoding="utf-8") as fh:
             snap = json.load(fh)
-        print(f"[genera_luoghi] uso l'istantanea {os.path.basename(JSON_PATH)}: {len(snap)} luoghi")
-        return snap
-    if righe is None:
-        print("[genera_luoghi] nessun catalogo: la pagina si regge sull'agenda")
-        return []
+        print(f"[genera_luoghi] uso l'istantanea {os.path.basename(JSON_PATH)}: {len(snap)} righe")
+        return [{_norm_head(k): v for k, v in r.items()} for r in snap], False
+    print("[genera_luoghi] nessun catalogo: la pagina si regge sull'agenda")
+    return [], False
 
+
+def leggi_catalogo():
+    righe, fresco = _righe_grezze()
     fuori = []
     for r in righe:
         d = {}
         for campo, nomi in COLONNE.items():
+            d[campo] = ''
             for n in nomi:
-                if r.get(n, '').strip():
+                if (r.get(n) or '').strip():
                     d[campo] = r[n].strip()
                     break
-            d.setdefault(campo, '')
-        if not d['nome']:
+        if not d['nome'] or not d['comune']:
             continue
-        # Colonna "Pubblica" vuota = pubblica. Serve solo a togliere una riga
-        # senza cancellarla dal foglio, che e' l'uso vero: un posto chiuso per
-        # lavori non si cancella, si spegne.
-        if d['pubblica'] and not si(d['pubblica']):
-            continue
-        fuori.append(d)
+        primo, secondo = spacca_categoria(d['categoria'])
+        slug_cat = G.slugify(primo) or 'altro'
+        premium = si(d['premium'])
+        fuori.append({
+            'nome': d['nome'], 'comune': d['comune'], 'prov': d['prov'].upper(),
+            'regione': d['regione'], 'cap': d['cap'],
+            'cat': slug_cat, 'cat_nome': primo, 'cat_sotto': secondo,
+            'cat_filtro': etichetta_filtro(primo),
+            'icona': d['icona'] or ICONE_NOTE.get(slug_cat, '📍'),
+            'colore': colore_cat(slug_cat),
+            'servizi': [s.strip() for s in d['servizi'].split(',') if s.strip()],
+            'pratici': servizi_pratici(d['tag']),
+            'riparo': riparo_da_tag(d['tag'], slug_cat),
+            'indirizzo': d['indirizzo'], 'lat': d['lat'], 'lon': d['lon'],
+            'descr': d['descr'], 'descr_premium': d['descr_premium'],
+            'orari': d['orari'], 'prezzo': d['prezzo'], 'gratuito': si(d['gratuito']),
+            'sito': d['sito'], 'tel': d['tel'], 'email': d['email'],
+            'foto': [d[f'foto{i}'] for i in range(1, 6) if d[f'foto{i}']],
+            'eta_min': _eta(d['eta_min'], 0), 'eta_max': _eta(d['eta_max'], 99),
+            'premium': premium, 'premium_dal': d['premium_dal'],
+            'consigliato': si(d['consigliato']),
+            # In vetrina ci va chi paga, non chi ci piace: "Consigliato DAOP" da
+            # solo non compra la posizione, e premium da solo non basta a
+            # occupare i tre posti in cima.
+            'evidenza': premium and si(d['consigliato']),
+            'codice': d['codice'],
+            'n_eventi': 0, 'ultimo': '', 'prossimi': [], 'fonte': 'catalogo',
+            '_grezzo': r if fresco else None,
+        })
     return fuori
 
 
-# ── Sorgente 2: l'agenda (eventi futuri + storico) ───────────────────────────
+# ── Sorgente 2: l'agenda ─────────────────────────────────────────────────────
 
 def leggi_agenda():
-    """I luoghi che l'agenda conosce, con il conto degli eventi e i prossimi.
-
-    Restituisce un dict chiave -> dati. `prossimi` contiene solo eventi ancora
-    da fare: e' l'unica parte che invecchia, e infatti la pagina si rigenera
-    ogni notte insieme all'agenda."""
+    """I luoghi che l'agenda conosce, con il conto degli eventi e i prossimi."""
     oggi = datetime.date.today()
     luoghi = {}
 
@@ -356,7 +453,6 @@ def leggi_agenda():
                 d[campo] = val
         return d
 
-    # Lo storico: 387 eventi su 118 comuni, con il comune che fa da contenitore.
     if os.path.exists(STORICO_JSON):
         with open(STORICO_JSON, encoding="utf-8") as fh:
             storico = json.load(fh)
@@ -369,30 +465,18 @@ def leggi_agenda():
                 if (ev.get('ultima') or '') > d['ultimo']:
                     d['ultimo'] = ev.get('ultima') or ''
 
-    # L'agenda viva: qui ci sono anche indirizzo e coordinate, che lo storico
-    # non tiene. E i prossimi appuntamenti, che sono la ragione per cui questa
-    # pagina vale piu' di un elenco di nomi.
     if os.path.exists(EVENTI_JSON):
         with open(EVENTI_JSON, encoding="utf-8") as fh:
             eventi = json.load(fh)
-        visti = set()
         for e in eventi:
             d = tocca(e.get('luogo'), e.get('citta'), e.get('prov'),
                       indirizzo=e.get('indirizzo', ''),
                       lat=e.get('lat', ''), lon=e.get('lon', ''))
             if d is None:
                 continue
-            k = _key(e.get('luogo'), e.get('citta'))
-            # Lo storico ha gia' contato gli eventi di quest'anno: ricontarli
-            # qui raddoppierebbe il numero scritto in pagina. Si conta una
-            # volta sola per (luogo, evento).
-            firma = (k, e.get('anchor') or e.get('nome'))
-            if firma not in visti:
-                visti.add(firma)
             if e.get('d_end', '') >= oggi.isoformat():
                 d['prossimi'].append({
-                    'nome': e.get('nome', ''),
-                    'd': e.get('d_start', ''),
+                    'nome': e.get('nome', ''), 'd': e.get('d_start', ''),
                     'href': f"/eventi.html#{e['anchor']}" if e.get('anchor') else "/eventi.html",
                 })
             if (e.get('d_end') or '') > d['ultimo']:
@@ -406,122 +490,70 @@ def leggi_agenda():
     return luoghi
 
 
-# ── Fusione ──────────────────────────────────────────────────────────────────
-
 def unisci(catalogo, agenda):
-    """Catalogo + agenda in un elenco solo, ordinato per provincia, comune, nome.
-
-    Il catalogo vince sui campi che dichiara: e' scritto da una persona, l'altro
-    e' dedotto. L'agenda porta quello che il catalogo non puo' avere - il conto
-    degli eventi e i prossimi appuntamenti - anche sulle righe del catalogo, che
-    e' proprio il punto di fondere invece di scegliere."""
-    fuori = {}
-
-    for r in catalogo:
-        k = _key(r['nome'], r['comune'])
-        cat = categoria_di(r['nome'], r.get('cat'))
-        riparo = (r.get('riparo') or '').strip().lower()
-        if riparo.startswith('chius') or 'copert' in riparo:
-            riparo = 'chiuso'
-        elif riparo.startswith('apert') or 'scopert' in riparo:
-            riparo = 'aperto'
-        elif riparo:
-            riparo = 'misto'
-        fuori[k] = {
-            'nome': r['nome'], 'comune': r['comune'], 'prov': (r['prov'] or '').upper(),
-            'cat': cat, 'riparo': riparo or CAT_INFO[cat]['riparo'],
-            'indirizzo': r.get('indirizzo', ''), 'lat': r.get('lat', ''),
-            'lon': r.get('lon', ''), 'prezzo': r.get('prezzo', ''),
-            'eta': r.get('eta', ''), 'descr': r.get('descr', ''),
-            'orari': r.get('orari', ''), 'sito': r.get('sito', ''),
-            'tel': r.get('tel', ''), 'foto': r.get('foto', ''),
-            'premium': si(r.get('premium')), 'premium_da': r.get('premium_da', ''),
-            'offerta': r.get('offerta', ''), 'evidenza': si(r.get('evidenza')),
-            'n_eventi': 0, 'ultimo': '', 'prossimi': [], 'fonte': 'catalogo',
-        }
+    """Catalogo + agenda in un elenco solo, ordinato per provincia, comune, nome."""
+    fuori = {_key(l['nome'], l['comune']): l for l in catalogo}
+    innestati = 0
 
     for k, a in agenda.items():
         if k in fuori:
             d = fuori[k]
-            d['n_eventi'] = a['n_eventi']
-            d['ultimo'] = a['ultimo']
-            d['prossimi'] = a['prossimi']
+            d['n_eventi'], d['ultimo'], d['prossimi'] = a['n_eventi'], a['ultimo'], a['prossimi']
             for campo in ('indirizzo', 'lat', 'lon'):
                 if not d.get(campo):
                     d[campo] = a.get(campo, '')
+            innestati += 1
+            continue
+        # Il catalogo, quando c'e', E' l'elenco: i posti dedotti dall'agenda non
+        # entrano come righe proprie, restano solo ad arricchire le righe del
+        # catalogo con "cosa c'e' in programma qui". Con 800 luoghi scelti a
+        # mano, aggiungerne 170 dedotti da "qui e' passata una festa" li
+        # diluirebbe - e "dove si fanno le cose" ha gia' una pagina migliore,
+        # che e' eventi.html. Riempiono la pagina soltanto finche' un catalogo
+        # non c'e' per niente, cioe' perche' non nasca vuota.
+        if catalogo:
             continue
         if a['n_eventi'] < MIN_EVENTI_AGENDA and not a['prossimi']:
             continue
-        cat = categoria_di(a['nome'])
-        fuori[k] = dict(a, cat=cat, riparo=CAT_INFO[cat]['riparo'],
-                        prezzo='', eta='', descr='', orari='', sito='', tel='',
-                        foto='', premium=False, premium_da='', offerta='',
-                        evidenza=False, fonte='agenda')
+        slug_cat = indovina_categoria(a['nome'])
+        fuori[k] = dict(
+            a, cat=slug_cat, cat_nome='Luogo', cat_sotto='',
+            cat_filtro=etichetta_filtro(slug_cat.split('-')[0].capitalize()),
+            icona=ICONE_NOTE.get(slug_cat, '📍'), colore=colore_cat(slug_cat),
+            servizi=[], pratici=[],
+            riparo=RIPARO_DA_CAT.get(slug_cat, 'misto'),
+            regione='', cap='', descr='', descr_premium='',
+            orari='', prezzo='', gratuito=False, sito='', tel='', email='',
+            foto=[], eta_min=0, eta_max=99, premium=False, premium_dal='',
+            consigliato=False, evidenza=False, codice='', fonte='agenda', _grezzo=None)
 
     elenco = [d for d in fuori.values() if d['nome'] and d['comune']]
-    # Solo le province che pubblichiamo: nel foglio eventi capita una riga fuori
-    # regione, e in un elenco di posti "dove andare" una Genova sola stona.
-    elenco = [d for d in elenco if not d['prov'] or d['prov'] in G.PROVINCE_PUBBLICATE]
     for d in elenco:
         d['slug'] = 'lg-' + G.slugify(f"{d['nome']} {d['comune']}")[:70]
-    # Slug duplicati: due "Piazza Garibaldi" nello stesso comune non dovrebbero
-    # esistere dopo _key(), ma un'ancora ripetuta rompe i link in silenzio.
+    # Slug duplicati: non dovrebbero esistere dopo _key(), ma un'ancora ripetuta
+    # rompe i link in silenzio.
     visti = collections.Counter()
     for d in elenco:
         visti[d['slug']] += 1
         if visti[d['slug']] > 1:
             d['slug'] = f"{d['slug']}-{visti[d['slug']]}"
     elenco.sort(key=lambda d: (d['prov'], _alfabetico(d['comune']), _alfabetico(d['nome'])))
+    if innestati:
+        print(f"[genera_luoghi] {innestati} luoghi del catalogo hanno eventi in agenda")
     return elenco
 
 
-# ── Sprite, CSS e JS della pagina ────────────────────────────────────────────
-
-SPRITE = """<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false"><defs>
-<g id="lgi-parco"><path d="M12 22v-6"/><path d="M12 16a6 6 0 0 0 6-6c0-3-2-4-2-6a4 4 0 0 0-8 0c0 2-2 3-2 6a6 6 0 0 0 6 6z"/></g>
-<g id="lgi-acqua"><path d="M12 2.7 6.7 8a7.5 7.5 0 1 0 10.6 0z"/></g>
-<g id="lgi-museo"><path d="M3 21h18"/><path d="M5 21V9"/><path d="M19 21V9"/><path d="M9 21v-6h6v6"/><path d="M12 3 3 8h18z"/></g>
-<g id="lgi-castello"><path d="M3 21h18"/><path d="M4 21V8l3 2V6l2.5 2L12 4l2.5 4L17 6v4l3-2v13"/><path d="M10 21v-4a2 2 0 0 1 4 0v4"/></g>
-<g id="lgi-cultura"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></g>
-<g id="lgi-fede"><path d="M12 2v20"/><path d="M8 7h8"/><path d="M5 22V12l7-5 7 5v10"/></g>
-<g id="lgi-natura"><path d="M12 22V9"/><path d="m6 15 6-9 6 9"/><path d="m3 20 9-14 9 14"/></g>
-<g id="lgi-sport"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18"/><path d="M3.5 9h17"/><path d="M3.5 15h17"/></g>
-<g id="lgi-piazza"><path d="M3 21h18"/><path d="M6 21V7l6-4 6 4v14"/><path d="M10 21v-5h4v5"/></g>
-<g id="lgi-ritrovo"><path d="M3 21V10l9-6 9 6v11"/><path d="M3 21h18"/><path d="M9 21v-6h6v6"/><path d="M9 11h6"/></g>
-<g id="lgi-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g>
-<g id="lgi-rain"><path d="M4 14.9A5 5 0 0 1 6 5.2a6 6 0 0 1 11.3 1.9A4 4 0 0 1 18 15"/><path d="m8 19-1 2"/><path d="m13 19-1 2"/><path d="m18 19-1 2"/></g>
-<g id="lgi-star"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-3-5.3 3 1.1-6L3.4 9.4l6-.8z"/></g>
-</defs></svg>"""
-
-# Le tinte delle categorie stanno QUI e non in uno style= sulla riga: 350 righe
-# per ~90 byte di custom property sarebbero 31 KB di attributi ripetuti, che e'
-# esattamente il difetto tolto dall'agenda con i link del calendario.
-COLORI_CAT = {
-    'parco': ('#188663', 'rgba(24,134,99,0.13)', '#146c51'),
-    'acqua': ('#3d8fc4', 'rgba(61,143,196,0.14)', '#2f7099'),
-    'museo': ('#6c63a6', 'rgba(108,99,166,0.14)', '#5c5493'),
-    'castello': ('#a9793f', 'rgba(169,121,63,0.15)', '#8a6132'),
-    'cultura': ('#c9a227', 'rgba(201,162,39,0.16)', '#846a1a'),
-    'fede': ('#8a7f9b', 'rgba(138,127,155,0.16)', '#6f6580'),
-    'natura': ('#5c9a4a', 'rgba(92,154,74,0.14)', '#487a3a'),
-    'sport': ('#e8954a', 'rgba(232,149,74,0.15)', '#a75b15'),
-    'piazza': ('#7e8c99', 'rgba(126,140,153,0.16)', '#606d7a'),
-    'ritrovo': ('#c2704f', 'rgba(194,112,79,0.15)', '#96543a'),
-    'altro': ('#7e8c99', 'rgba(126,140,153,0.16)', '#606d7a'),
-}
+# ── CSS e JS ─────────────────────────────────────────────────────────────────
 
 LUOGHI_CSS = """
 .lg-wrap{max-width:940px;margin:0 auto;padding:0 20px 40px}
 @media(max-width:600px){.lg-wrap{padding:0 16px 32px}}
 .lg-intro{font-size:1.02rem;line-height:1.7;color:var(--text-mid);margin:0 0 6px}
-/* La barra dei filtri e' la .ev-toolbar dell'agenda: stessa classe, stesso
-   aspetto, stesso vocabolario dei data-* - cambia solo cosa filtra. */
 .lg-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:10px 0 0;min-height:1em}
 .lg-reset{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-mid);
   background:none;border:0;border-bottom:1px solid rgba(45,74,92,0.25);padding:0 0 1px;cursor:pointer}
 .lg-reset:hover{color:var(--orange-ink,#a05714);border-color:currentColor}
 
-/* ── Il gruppo comune ─────────────────────────────────────────────────────── */
 .lg-grp{margin:26px 0 0}
 .lg-grp-h{display:flex;align-items:baseline;gap:10px;margin:0 0 6px;padding:0 0 6px;
   border-bottom:1px solid rgba(45,74,92,0.10)}
@@ -533,56 +565,71 @@ LUOGHI_CSS = """
 /* ── La riga ──────────────────────────────────────────────────────────────
    E' un <details>, non una riga con del JS sopra: senza JavaScript si apre lo
    stesso, la tastiera la governa da sola e Ctrl+F la trova anche chiusa.
-   content-visibility come nell'agenda - a 350 righe e' la voce piu' pesante
-   della pagina, e il testo resta comunque nel DOM. */
+   content-visibility come nell'agenda - a centinaia di righe e' la voce piu'
+   pesante della pagina, e il testo resta comunque nel DOM. */
 .lg-row{content-visibility:auto;contain-intrinsic-size:auto 74px;
   border-left:3px solid var(--cat-color,#7e8c99);border-bottom:1px solid rgba(45,74,92,0.07);
   background:white;transition:background .18s ease}
 .lg-row:hover{background:var(--cat-tint,rgba(45,74,92,0.04))}
-.lg-row[open]{background:var(--cat-tint,rgba(45,74,92,0.04))}
+/* Aperta la riga prende il crema neutro, non la tinta di categoria: quella e'
+   pensata per una pillola da 36px, e stesa su mezzo schermo di scheda faceva
+   un fondo lilla su cui il testo si legge peggio. Il colore della categoria
+   resta dov'e' leggibile - il bordo a sinistra e il quadratino dell'icona. */
+.lg-row[open]{background:var(--cream,#fdf8f0)}
 .lg-row > summary{display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;
   list-style:none;min-height:48px}
 .lg-row > summary::-webkit-details-marker{display:none}
+.lg-row > summary::marker{content:''}
 .lg-row > summary:focus-visible{outline:2px solid var(--orange);outline-offset:-2px}
-.lg-ico{flex:0 0 auto;width:34px;height:34px;border-radius:10px;display:flex;
-  align-items:center;justify-content:center;background:var(--cat-tint,rgba(45,74,92,0.08));
-  color:var(--cat-ink,#606d7a)}
-.lg-ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;
-  stroke-linecap:round;stroke-linejoin:round}
+.lg-ico{flex:0 0 auto;width:36px;height:36px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-size:1.15rem;line-height:1;
+  background:var(--cat-tint,rgba(45,74,92,0.08))}
 .lg-txt{min-width:0;flex:1 1 auto}
 .lg-nome{display:block;font-size:0.99rem;font-weight:700;color:var(--navy);line-height:1.3}
 .lg-meta{display:block;font-size:0.79rem;color:var(--text-light);margin-top:2px}
 /* La categoria si scrive, non solo si colora: un verde e un blu senza etichetta
    sono due colori. Stessa regola delle pagine comune. */
 .lg-cat{font-weight:700;color:var(--cat-ink,#606d7a)}
-.lg-tag{flex:0 0 auto;font-size:0.68rem;font-weight:700;letter-spacing:0.03em;
-  text-transform:uppercase;border-radius:100px;padding:4px 9px;white-space:nowrap}
-.lg-tag.is-ev{background:rgba(24,134,99,0.12);color:#146c51}
-.lg-tag.is-prem{background:rgba(201,162,39,0.18);color:#846a1a;display:inline-flex;
-  align-items:center;gap:4px}
-.lg-tag.is-prem svg{width:11px;height:11px;fill:currentColor;stroke:none}
+.lg-pills{flex:0 0 auto;display:flex;gap:5px;align-items:center}
+/* inline-block e NON inline-flex: in un contenitore flex lo spazio in testa a
+   un elemento figlio viene mangiato, e "2 in programma" usciva "2IN PROGRAMMA".
+   Lo spazio sta dentro l'<i> apposta - cosi' se ne va insieme alla parola
+   quando sul telefono resta il solo numero - ma serve un contesto in cui
+   contenga davvero. */
+.lg-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;
+  border-radius:100px;padding:4px 9px;white-space:nowrap;display:inline-block;
+  line-height:1.5;text-align:center}
 .lg-tag i{font-style:normal}
-.lg-tag b{font-weight:700}
+.lg-tag.is-ev{background:rgba(24,134,99,0.12);color:#146c51}
+.lg-tag.is-free{background:rgba(24,134,99,0.10);color:#167859}
+.lg-tag.is-daop{background:rgba(232,149,74,0.16);color:#a75b15}
+.lg-tag.is-prem{background:rgba(201,162,39,0.20);color:#846a1a}
 .lg-chev{flex:0 0 auto;width:17px;height:17px;fill:none;stroke:var(--text-light);
   stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
 .lg-row[open] .lg-chev{transform:rotate(180deg)}
 @media(max-width:600px){
   .lg-row > summary{padding:12px 8px;gap:10px}
   .lg-nome{font-size:0.94rem}
-  /* Resta il pallino con il numero: dice la stessa cosa in 26px invece di 120,
-     e senza di lui le righe sul telefono erano tutte identiche. La riga aperta
-     ha spazio e riprende la parola. */
+  /* Sul telefono resta il segno, non la parola: senza pillole le righe erano
+     tutte identiche, con le parole intere tre pillole mangiavano il nome.
+     La riga aperta ha spazio e riprende le parole. */
   .lg-tag i{display:none}
-  .lg-tag.is-ev{min-width:26px;text-align:center;padding:4px 7px}
+  .lg-tag{padding:4px 7px;min-width:24px}
+  .lg-pills .lg-tag:nth-child(n+3){display:none}
   .lg-row[open] .lg-tag i{display:inline}
+  .lg-row[open] .lg-pills .lg-tag:nth-child(n+3){display:inline-flex}
 }
 
 /* ── Il corpo aperto ─────────────────────────────────────────────────────── */
-.lg-body{padding:2px 14px 18px 60px;font-size:0.9rem;line-height:1.62;color:var(--text-mid)}
+.lg-body{padding:2px 14px 18px 62px;font-size:0.9rem;line-height:1.62;color:var(--text-mid)}
 @media(max-width:600px){.lg-body{padding:2px 8px 16px 8px}}
 .lg-facts{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px}
 .lg-facts li{display:flex;gap:8px}
 .lg-facts b{font-weight:700;color:var(--text-dark);flex:0 0 auto}
+.lg-serv{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding:0;list-style:none}
+.lg-serv li{font-size:0.78rem;color:var(--text-mid);background:var(--cream);
+  border-radius:100px;padding:4px 11px}
+.lg-serv li.is-pratico{background:rgba(24,134,99,0.09);color:#146c51;font-weight:600}
 .lg-next{margin:12px 0 0;padding:12px 14px;background:var(--cream);border-radius:12px}
 .lg-next p{margin:0 0 7px;font-size:0.8rem;font-weight:700;text-transform:uppercase;
   letter-spacing:0.04em;color:var(--text-light)}
@@ -595,16 +642,15 @@ LUOGHI_CSS = """
 .lg-act a:hover{border-color:var(--orange);color:var(--orange-ink,#a05714)}
 .lg-manca{margin:12px 0 0;font-size:0.83rem;color:var(--text-light)}
 .lg-manca a{color:var(--text-mid);text-decoration:underline}
-
-/* ── Premium ──────────────────────────────────────────────────────────────
-   Aggiunge, non sposta: la riga resta al suo posto alfabetico nel suo comune.
-   Quello che cambia e' cosa c'e' dentro. */
-.lg-row.is-prem{border-left-width:4px}
+/* La foto sta DENTRO la riga chiusa, quindi non viene scaricata finche' non si
+   apre: con loading="lazy" il browser non carica le immagini di un sottoalbero
+   che non disegna. E' la ragione per cui 800 foto su Supabase non diventano
+   800 richieste - lo stesso conto di banda gia' sbagliato una volta con le
+   locandine, quando il bucket passo' da 10 a 250 MB al giorno. */
 .lg-foto{display:block;width:100%;max-width:360px;height:auto;aspect-ratio:4/3;object-fit:cover;
   border-radius:12px;margin:0 0 12px;background:var(--cream)}
-.lg-offerta{margin:12px 0 0;padding:11px 14px;border:1px dashed rgba(201,162,39,0.55);
-  border-radius:12px;background:rgba(201,162,39,0.07);font-size:0.87rem}
-.lg-offerta b{color:#846a1a}
+.lg-galleria{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.lg-galleria img{width:104px;height:78px;object-fit:cover;border-radius:8px;background:var(--cream)}
 .lg-cura{margin:10px 0 0;font-size:0.76rem;color:var(--text-light)}
 
 /* ── In evidenza: l'unico posto in cui la posizione si compra, e si dice ──── */
@@ -615,7 +661,6 @@ LUOGHI_CSS = """
 .lg-vetrina > p span{font-weight:600;text-transform:none;letter-spacing:0;color:var(--text-light)}
 .lg-vetrina .lg-row{background:transparent}
 
-/* ── Come ordiniamo: obbligo di legge, non decorazione ───────────────────── */
 .lg-ordine{margin:30px 0 0;padding:16px 18px;background:var(--cream);border-radius:14px;
   font-size:0.85rem;line-height:1.65;color:var(--text-mid)}
 .lg-ordine h2{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;
@@ -642,14 +687,16 @@ LUOGHI_JS = r"""<script>
   if (!righe.length) return;
 
   // L'indice si costruisce alla PRIMA ricerca, non al caricamento: leggere il
-  // testo di 350 righe e' lavoro che quasi nessun visitatore usa. Stessa regola
-  // dell'agenda.
+  // testo di centinaia di righe e' lavoro che quasi nessun visitatore usa.
+  // Si legge il <details> INTERO e non la sola intestazione, cosi' la ricerca
+  // trova anche i servizi ("compleanno", "centro estivo", "carrozzina") che
+  // stanno nel corpo. content-visibility non e' un ostacolo: nasconde il
+  // disegno, non il testo.
   var testo = null;
   function indice() {
     if (!testo) {
       testo = new Map(righe.map(function (r) {
-        var s = r.querySelector('summary');
-        return [r, (s ? s.textContent : r.textContent).toLowerCase().replace(/\s+/g, ' ')];
+        return [r, r.textContent.toLowerCase().replace(/\s+/g, ' ')];
       }));
     }
     return testo;
@@ -662,13 +709,14 @@ LUOGHI_JS = r"""<script>
       f[s.dataset.campo] = s.value;
       s.classList.toggle('is-on', s.value !== 'all');
     });
+    var eta = f.eta && f.eta !== 'all' ? parseInt(f.eta, 10) : null;
     var visti = 0;
     righe.forEach(function (r) {
       var ok = (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
                (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
                (!f.riparo || f.riparo === 'all' ||
                  r.dataset.riparo === f.riparo || r.dataset.riparo === 'misto') &&
-               (!f.agenda || f.agenda === 'all' || r.dataset.agenda === '1') &&
+               (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
                (!t || indice().get(r).indexOf(t) > -1);
       r.hidden = !ok;
       if (ok) visti++;
@@ -721,6 +769,11 @@ LUOGHI_JS = r"""<script>
 
 # ── Render ───────────────────────────────────────────────────────────────────
 
+CHEV = ('<svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true">'
+        '<polyline points="6 9 12 15 18 9"/></svg>')
+RIPARO_LABEL = {'chiuso': 'Al chiuso', 'aperto': "All'aperto", 'misto': 'Chiuso e aperto'}
+
+
 def maps_href(l):
     if l.get('lat') and l.get('lon'):
         return f"https://www.google.com/maps/search/?api=1&query={l['lat']},{l['lon']}"
@@ -744,19 +797,25 @@ def data_breve(iso):
     return f"{d.day} {G.MESI[d.month - 1]}"
 
 
-CHEV = ('<svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true">'
-        '<polyline points="6 9 12 15 18 9"/></svg>')
-STELLA = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#lgi-star"/></svg>'
+def eta_testo(l):
+    """La fascia d'eta' scritta una volta sola, e solo se dice qualcosa.
+
+    0-99 vuol dire "tutte le eta'": stamparlo e' rumore. E la fascia NON si
+    ripete dentro la descrizione - e' gia' successo con gli eventi, dove una
+    cifra scritta due volte faceva sembrare l'indicazione un requisito
+    d'ingresso invece che di massima."""
+    a, b = l.get('eta_min', 0), l.get('eta_max', 99)
+    if a <= 0 and b >= 99:
+        return ''
+    if b >= 99:
+        return f"da {a} anni"
+    if a <= 0:
+        return f"fino a {b} anni"
+    return f"da {a} a {b} anni"
 
 
 def _indirizzo_utile(l):
-    """L'indirizzo si stampa solo se aggiunge qualcosa al nome.
-
-    Nel foglio eventi la colonna "Indirizzo Completo" e' spesso il nome del
-    posto piu' il comune ("Palazzo Chiabrera - Acqui Terme (AL)"), e la riga
-    aperta lo ripeteva subito sotto un'intestazione che diceva gia' "Palazzo
-    Chiabrera · Acqui Terme (AL)". Si toglie il rumore, non l'informazione:
-    quando l'indirizzo ha davvero una via, resta."""
+    """L'indirizzo si stampa solo se aggiunge qualcosa al nome e al comune."""
     ind = (l.get('indirizzo') or '').strip()
     if not ind:
         return False
@@ -768,51 +827,65 @@ def _indirizzo_utile(l):
 
 
 def riga(l, oggi):
-    """Una riga dell'elenco. Chiusa dice cos'e' e dov'e'; aperta dice tutto il
-    resto. Niente immagine nelle righe non premium: 350 miniature diverse in
-    elenco sono l'errore di banda gia' fatto una volta con le locandine, e
-    un'icona di categoria si legge meglio di una foto da 34px."""
-    e = G.esc
-    cat = CAT_INFO[l['cat']]
-    prossimi = l.get('prossimi') or []
-    ha_agenda = '1' if prossimi else '0'
+    """Una riga dell'elenco. Chiusa dice cos'e' e dov'e'; aperta dice il resto.
 
-    # L'etichetta si accorcia sul telefono invece di sparire: "ci sono eventi
-    # qui" e' il motivo per cui questa pagina esiste, e nasconderla a chi legge
-    # da smartphone - cioe' all'88% - lasciava le righe tutte uguali. La parola
-    # sta in un <i> che il CSS spegne sotto i 600px, il numero resta.
-    tag = ''
+    Niente immagine nell'INTESTAZIONE: al posto della miniatura c'e' l'emoji del
+    foglio, che si legge meglio a 36px e non costa una richiesta. La foto vera
+    sta nel corpo, cioe' non viene scaricata finche' la riga resta chiusa."""
+    e = G.esc
+    prossimi = l.get('prossimi') or []
+
+    # L'ordine delle pillole non e' casuale: sul telefono si vedono solo le
+    # prime due, quindi davanti sta quello che chi legge non puo' dedurre
+    # dall'elenco.
+    pillole = []
     if l.get('premium'):
-        tag = f'<span class="lg-tag is-prem">{STELLA}<i>Scheda curata</i></span>'
-    elif prossimi:
-        # Lo spazio sta DENTRO l'<i>, non fra i due elementi: e' il margine CSS
-        # a distanziarli per l'occhio, ma il testo lo leggono anche l'indice
-        # della ricerca e chi usa uno screen reader, e li' "2in programma" e'
-        # sbagliato. Dentro l'<i> lo spazio sparisce insieme alla parola quando
-        # sul telefono resta il solo numero.
-        n = len(prossimi)
-        tag = f'<span class="lg-tag is-ev"><b>{n}</b><i> in programma</i></span>'
+        pillole.append('<span class="lg-tag is-prem">★<i> Scheda curata</i></span>')
+    if l.get('consigliato'):
+        pillole.append('<span class="lg-tag is-daop">♥<i> Scelto da DAOP</i></span>')
+    if prossimi:
+        pillole.append(f'<span class="lg-tag is-ev"><b>{len(prossimi)}</b>'
+                       f'<i> in programma</i></span>')
+    elif l.get('gratuito'):
+        pillole.append('<span class="lg-tag is-free">€<i> Gratis</i></span>')
 
     # ── corpo ──
+    corpo = []
+    foto = l.get('foto') or []
+    if foto:
+        corpo.append(f'<img class="lg-foto" src="{e(foto[0])}" alt="{e(l["nome"])}, '
+                     f'{e(l["comune"])}" loading="lazy" decoding="async" width="360" height="270">')
+    if l.get('premium') and len(foto) > 1:
+        corpo.append('<div class="lg-galleria">' + "".join(
+            f'<img src="{e(u)}" alt="" loading="lazy" decoding="async" width="104" height="78">'
+            for u in foto[1:5]) + '</div>')
+
+    testo = (l.get('descr_premium') if l.get('premium') and l.get('descr_premium')
+             else l.get('descr'))
+    if testo:
+        corpo.append(f"<p>{e(G.trunc(testo, 600 if l.get('premium') else 400))}</p>")
+
+    voci = [f'<li class="is-pratico">{e(p)}</li>' for p in (l.get('pratici') or [])]
+    voci += [f'<li>{e(s)}</li>' for s in (l.get('servizi') or [])[:12]]
+    if voci:
+        corpo.append(f'<ul class="lg-serv">{"".join(voci)}</ul>')
+
     fatti = []
     if _indirizzo_utile(l):
         fatti.append(f"<li><b>Dove:</b> <span>{e(G.trunc(l['indirizzo'], 90))}</span></li>")
-    fatti.append(f"<li><b>Se piove:</b> <span>{RIPARO_LABEL[l['riparo']]}</span></li>")
+    fatti.append(f'<li><b>Se piove:</b> <span>{RIPARO_LABEL[l["riparo"]]}</span></li>')
     if l.get('orari'):
-        fatti.append(f"<li><b>Orari:</b> <span>{e(G.trunc(l['orari'], 120))}</span></li>")
+        fatti.append(f"<li><b>Orari:</b> <span>{e(G.trunc(l['orari'], 200))}</span></li>")
     if l.get('prezzo'):
-        fatti.append(f"<li><b>Ingresso:</b> <span>{e(G.trunc(l['prezzo'], 80))}</span></li>")
-    if l.get('eta'):
-        fatti.append(f"<li><b>Età:</b> <span>{e(G.trunc(l['eta'], 60))}</span></li>")
+        fatti.append(f"<li><b>Ingresso:</b> <span>{e(G.trunc(l['prezzo'], 90))}</span></li>")
+    elif l.get('gratuito'):
+        fatti.append('<li><b>Ingresso:</b> <span>Gratuito</span></li>')
+    et = eta_testo(l)
+    if et:
+        fatti.append(f"<li><b>Età:</b> <span>{et}</span></li>")
     if l.get('tel'):
-        fatti.append(f"<li><b>Telefono:</b> <a href=\"tel:{e(re.sub(r'[^0-9+]', '', l['tel']))}\">{e(l['tel'])}</a></li>")
-
-    corpo = []
-    if l.get('premium') and l.get('foto'):
-        corpo.append(f'<img class="lg-foto" src="{e(l["foto"])}" alt="{e(l["nome"])}, '
-                     f'{e(l["comune"])}" loading="lazy" decoding="async" width="360" height="270">')
-    if l.get('descr'):
-        corpo.append(f"<p>{e(G.trunc(l['descr'], 420))}</p>")
+        num = re.sub(r'[^0-9+]', '', l['tel'])
+        fatti.append(f'<li><b>Telefono:</b> <a href="tel:{e(num)}">{e(l["tel"])}</a></li>')
     corpo.append(f'<ul class="lg-facts">{"".join(fatti)}</ul>')
 
     # La memoria dell'agenda: e' il dato che questa pagina ha e le altre no.
@@ -823,101 +896,105 @@ def riga(l, oggi):
         corpo.append(f'<p class="lg-manca">Qui DAOP ha seguito {quanti}{quando}.</p>')
 
     if prossimi:
-        voci = "".join(
+        elenco = "".join(
             f'<li><a href="{p["href"]}">{e(G.trunc(p["nome"], 70))}</a> '
             f'<span>· {data_breve(p["d"])}</span></li>' for p in prossimi[:5])
-        corpo.append(f'<div class="lg-next"><p>In programma qui</p><ul>{voci}</ul></div>')
-
-    if l.get('offerta'):
-        corpo.append(f'<p class="lg-offerta"><b>Per le famiglie:</b> '
-                     f'{e(G.trunc(l["offerta"], 200))}</p>')
+        corpo.append(f'<div class="lg-next"><p>In programma qui</p><ul>{elenco}</ul></div>')
 
     azioni = [f'<a href="{maps_href(l)}" target="_blank" rel="noopener">Apri nelle mappe</a>']
     if l.get('sito'):
         sito = l['sito'] if l['sito'].startswith('http') else 'https://' + l['sito']
         azioni.append(f'<a href="{e(sito)}" target="_blank" rel="noopener nofollow">Sito del luogo</a>')
+    if l.get('email'):
+        azioni.append(f'<a href="mailto:{e(l["email"])}">Scrivi al luogo</a>')
     corpo.append(f'<div class="lg-act">{"".join(azioni)}</div>')
 
     if l.get('premium'):
-        cura = e(l['premium_da']) if l.get('premium_da') else 'chi gestisce il luogo'
-        corpo.append(f'<p class="lg-cura">Scheda curata da {cura} · spazio a pagamento, '
-                     f'<a href="#come-ordiniamo">come funziona</a>.</p>')
+        corpo.append('<p class="lg-cura">Scheda curata da chi gestisce il luogo · '
+                     'spazio a pagamento, <a href="#come-ordiniamo">come funziona</a>.</p>')
     else:
-        # Il modo in cui le 800 righe si riempiono davvero: non scrivendole
-        # tutte noi, ma facendocele correggere da chi ci va.
         corpo.append('<p class="lg-manca">Manca qualcosa o è cambiato? '
                      '<a href="/index.html#social">Scrivicelo</a>.</p>')
 
     sigla = f' ({l["prov"]})' if l['prov'] else ''
-    classe_prem = ' is-prem' if l.get('premium') else ''
+    etichetta = l.get('cat_sotto') or l.get('cat_nome') or 'Luogo'
+    classe = f'lg-row cat-{l["cat"]}' + (' is-prem' if l.get('premium') else '')
     return (
-        f'<details class="lg-row cat-{l["cat"]}{classe_prem}" '
-        f'id="{l["slug"]}" data-cat="{l["cat"]}" data-prov="{l["prov"].lower()}" '
-        f'data-riparo="{l["riparo"]}" data-agenda="{ha_agenda}">'
+        f'<details class="{classe}" id="{l["slug"]}" data-cat="{l["cat"]}" '
+        f'data-prov="{l["prov"].lower()}" data-riparo="{l["riparo"]}" '
+        f'data-etamin="{l.get("eta_min", 0)}" data-etamax="{l.get("eta_max", 99)}">'
         f'<summary>'
-        f'<span class="lg-ico"><svg viewBox="0 0 24 24" aria-hidden="true">'
-        f'<use href="#{cat["icona"]}"/></svg></span>'
+        f'<span class="lg-ico" aria-hidden="true">{e(l.get("icona") or "📍")}</span>'
         f'<span class="lg-txt"><span class="lg-nome">{e(l["nome"])}</span>'
-        f'<span class="lg-meta"><span class="lg-cat">{cat["label"]}</span> · '
+        f'<span class="lg-meta"><span class="lg-cat">{e(etichetta)}</span> · '
         f'{e(l["comune"])}{sigla}</span></span>'
-        f'{tag}{CHEV}</summary>'
+        f'<span class="lg-pills">{"".join(pillole)}</span>{CHEV}</summary>'
         f'<div class="lg-body">{"".join(corpo)}</div></details>'
     )
 
 
+# Le fasce del filtro eta'. Non sono intervalli da scegliere: sono UN'eta',
+# quella del bambino che si ha in mente, e la riga passa se la sua fascia la
+# contiene. E' la domanda che si fa davvero ("ho un bimbo di 4 anni, dove lo
+# porto?") ed evita di dover spiegare cosa succede quando due fasce si
+# sovrappongono.
+FASCE_ETA = [(1, 'Fino a 2 anni'), (4, '3-5 anni'), (7, '6-9 anni'),
+             (11, '10-13 anni'), (15, 'Dai 14 anni')]
+
+
 def filtri(elenco):
-    """La barra dei filtri, con le regole gia' prese altrove: sotto MIN_FILTRI
-    non si stampa niente (si scorre prima l'elenco che una tendina), e una
-    tendina con una voce sola non si stampa mai - e' un comando che non fa
-    niente."""
+    """La barra dei filtri. Sotto MIN_FILTRI non si stampa niente (si scorre
+    prima l'elenco che una tendina), e una tendina senza una scelta da fare non
+    si stampa mai - e' un comando che non fa niente.
+
+    Sono quattro, e sul telefono vanno a capo su due righe. E' il contrario
+    della scelta fatta quando la pagina aveva 173 righe dedotte dall'agenda, e
+    il motivo e' che il dato e' cambiato: con centinaia di luoghi scelti a mano
+    l'elenco NON si scorre, si filtra, e i 47px di barra in piu' si ripagano
+    alla prima ricerca. Le etichette restano corte lo stesso: Chrome dimensiona
+    una <select> sull'opzione piu' lunga."""
     if len(elenco) < G.MIN_FILTRI:
         return ''
     campi = []
 
-    # Le etichette a riposo sono corte apposta. Sul telefono la barra e'
-    # appiccicosa: quattro tendine larghe andavano a capo e si mangiavano una
-    # riga di schermo per tutto lo scorrimento - lo stesso conto gia' fatto
-    # sull'agenda, dove accorciarle valse 47px.
-    prov = [p for p in G.PROVINCE_PUBBLICATE if any(l['prov'] == p for l in elenco)]
+    prov = sorted({l['prov'] for l in elenco if l['prov']})
     if len(prov) > 1:
         opts = "".join(f'<option value="{p.lower()}">Prov. {p}</option>' for p in prov)
         campi.append('<select class="ev-select" data-campo="prov" aria-label="Filtra per provincia">'
                      f'<option value="all">Prov.</option>{opts}</select>')
 
-    cats = [c for c in ORDINE_CAT if any(l['cat'] == c for l in elenco)]
+    cats = {}
+    for l in elenco:
+        cats.setdefault(l['cat'], l.get('cat_filtro') or l.get('cat_nome') or 'Altro')
     if len(cats) > 1:
-        opts = "".join(f'<option value="{c}">{CAT_INFO[c]["filtro"]}</option>' for c in cats)
+        opts = "".join(f'<option value="{c}">{G.esc(n)}</option>'
+                       for c, n in sorted(cats.items(), key=lambda x: _alfabetico(x[1])))
         campi.append('<select class="ev-select" data-campo="cat" aria-label="Filtra per tipo di luogo">'
                      f'<option value="all">Tipo</option>{opts}</select>')
 
-    # "Se piove" e' il filtro piu' usato di un elenco di posti con i bambini, e
-    # vale la pena anche quando gli altri non ci sono. I "misto" restano visibili
-    # in entrambi i casi: un castello ha il cortile e le sale, escluderlo da una
-    # delle due risposte sarebbe piu' sbagliato che tenerlo in tutte e due.
+    # I "misto" restano visibili in entrambi i casi: un castello ha il cortile e
+    # le sale, escluderlo da una delle due risposte sarebbe piu' sbagliato che
+    # tenerlo in tutte e due.
     if any(l['riparo'] == 'chiuso' for l in elenco) and any(l['riparo'] == 'aperto' for l in elenco):
         campi.append('<select class="ev-select" data-campo="riparo" aria-label="Filtra per al chiuso o all\'aperto">'
                      '<option value="all">Se piove</option>'
                      '<option value="chiuso">Al chiuso</option>'
                      '<option value="aperto">All\'aperto</option></select>')
 
-    # NON c'e' una quarta tendina "solo dove c'e' qualcosa in programma", ed e'
-    # una scelta. Tecnicamente: quattro tendine sul telefono non stanno in una
-    # riga (Chrome dimensiona una <select> sull'opzione piu' lunga) e la barra
-    # appiccicosa passava da 109 a 156px, cioe' 47px di schermo occupati per
-    # tutto lo scorrimento - lo stesso conto gia' fatto sull'agenda.
-    # E prima ancora: quel filtro non si guadagna il posto. "Dove c'e' qualcosa
-    # in programma" e' la domanda a cui risponde /eventi.html, che lo fa meglio
-    # perche' li' l'evento e' la riga. Qui la riga e' il posto, e l'etichetta
-    # verde con il numero lo dice gia' senza togliere niente dall'elenco.
-    # Il JS il campo lo gestisce lo stesso: se un giorno la tendina serve,
-    # basta rimetterla qui.
+    # L'eta' entra solo se le righe la dichiarano davvero: con tutte 0-99 la
+    # tendina non toglierebbe mai niente, cioe' sarebbe un comando che non fa
+    # niente con cinque voci invece che con una.
+    if sum(1 for l in elenco if eta_testo(l)) >= G.MIN_FILTRI:
+        opts = "".join(f'<option value="{v}">{t}</option>' for v, t in FASCE_ETA)
+        campi.append('<select class="ev-select" data-campo="eta" aria-label="Filtra per età del bambino">'
+                     f'<option value="all">Età</option>{opts}</select>')
 
     if not campi:
         return ''
     return f"""    <div class="ev-toolbar" id="lg-toolbar">
       <div class="ev-search">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <input type="search" id="lg-q" placeholder="Cerca un posto o un paese…" aria-label="Cerca fra i luoghi" autocomplete="off">
+        <input type="search" id="lg-q" placeholder="Cerca un posto, un paese, un'attività…" aria-label="Cerca fra i luoghi" autocomplete="off">
       </div>
 {chr(10).join("      " + c for c in campi)}
     </div>
@@ -925,6 +1002,13 @@ def filtri(elenco):
       <p class="lg-count" id="lg-count" role="status" aria-live="polite"></p>
       <button type="button" class="lg-reset" id="lg-reset" style="margin-left:auto">Azzera i filtri</button>
     </div>"""
+
+
+def _per_comune(elenco):
+    ordinati = collections.OrderedDict()
+    for l in elenco:
+        ordinati.setdefault((l['prov'], l['comune']), []).append(l)
+    return list(ordinati.items())
 
 
 def gruppi_comune(elenco, oggi):
@@ -948,13 +1032,6 @@ def gruppi_comune(elenco, oggi):
     return "\n".join(fuori)
 
 
-def _per_comune(elenco):
-    ordinati = collections.OrderedDict()
-    for l in elenco:
-        ordinati.setdefault((l['prov'], l['comune']), []).append(l)
-    return list(ordinati.items())
-
-
 def vetrina(elenco, oggi):
     """Il blocco "In evidenza". Esiste solo se qualcuno l'ha comprato, e lo dice
     in chiaro nella prima riga: e' l'unico punto della pagina in cui la
@@ -975,35 +1052,32 @@ COME_ORDINIAMO = """    <section class="lg-ordine" id="come-ordiniamo">
       criterio a pagamento che sposti una riga più in alto: i filtri restringono l'elenco,
       non lo riordinano.</p>
       <p>Alcune schede sono <b>curate da chi gestisce il luogo, che paga questo spazio</b>:
-      hanno la dicitura “Scheda curata”, la foto e i contatti. Pagare cambia <em>cosa</em>
+      hanno la dicitura “Scheda curata”, le foto e i contatti. Pagare cambia <em>cosa</em>
       c'è dentro la scheda, non <em>dove</em> sta la riga. L'unica eccezione è il blocco
       “In evidenza” in cima, che è a pagamento e lo dichiara: le stesse schede restano
       comunque al loro posto nell'elenco qui sotto.</p>
-      <p>Le informazioni non contrassegnate come curate le mettiamo noi, e vengono dagli
-      eventi che DAOP segue in zona: possono essere incomplete. Se un luogo che conosci è
-      descritto male, <a href="/index.html#social">scrivicelo</a> — è così che questo
-      elenco migliora.</p>
+      <p>“Scelto da DAOP” è un'altra cosa e non si compra: è un giudizio nostro, lo stesso
+      che usiamo in agenda.</p>
+      <p>Se un luogo che conosci è descritto male o ha chiuso,
+      <a href="/index.html#social">scrivicelo</a> — è così che questo elenco migliora.</p>
     </section>"""
 
 
 def jsonld(elenco):
     """ItemList delle voci + Place completo SOLO per le schede curate.
 
-    Un Place per ognuno dei 350 luoghi sarebbe mezzo mega di dati strutturati
-    per dichiarare a Google dei nomi che non abbiamo verificato: i dati
-    strutturati dicono "questo e' un fatto", e su una riga dedotta dall'agenda
-    non lo e'. Le schede curate hanno orari, telefono e foto dati da chi
-    gestisce il posto: quelle si possono dichiarare."""
-    voci = []
-    for i, l in enumerate(elenco, 1):
-        voci.append({"@type": "ListItem", "position": i, "name": l['nome'],
-                     "url": f"{PAGE_URL}#{l['slug']}"})
+    Un Place per ognuno degli 800 luoghi sarebbe mezzo mega di dati strutturati
+    che non produce nessun rich result: Google non ha un risultato ricco per un
+    "luogo" generico. Le schede curate hanno orari, telefono e foto dati da chi
+    gestisce il posto: quelle si possono dichiarare, e sono poche."""
+    voci = [{"@type": "ListItem", "position": i, "name": l['nome'],
+             "url": f"{PAGE_URL}#{l['slug']}"} for i, l in enumerate(elenco, 1)]
     grafo = [{
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         "@id": PAGE_URL,
         "url": PAGE_URL,
-        "name": "I luoghi delle famiglie fra Alessandria, Asti e Cuneo",
+        "name": "Dove andare con i bambini",
         "isPartOf": {"@type": "WebSite", "name": "DAOP", "url": G.SITE_URL},
         "mainEntity": {"@type": "ItemList", "numberOfItems": len(elenco),
                        "itemListOrder": "https://schema.org/ItemListUnordered",
@@ -1014,23 +1088,68 @@ def jsonld(elenco):
             continue
         p = {"@context": "https://schema.org", "@type": "Place",
              "@id": f"{PAGE_URL}#{l['slug']}", "name": l['nome'],
-             "address": {"@type": "PostalAddress",
-                         "addressLocality": l['comune'],
-                         "addressRegion": l['prov'] or "Piemonte",
+             "address": {"@type": "PostalAddress", "addressLocality": l['comune'],
+                         "addressRegion": l.get('regione') or l['prov'] or "Piemonte",
                          "addressCountry": "IT"}}
         if l.get('indirizzo'):
             p['address']['streetAddress'] = l['indirizzo']
+        if l.get('cap'):
+            p['address']['postalCode'] = l['cap']
         if l.get('lat') and l.get('lon'):
             p['geo'] = {"@type": "GeoCoordinates", "latitude": l['lat'], "longitude": l['lon']}
-        for campo, chiave in (('descr', 'description'), ('foto', 'image'),
-                              ('sito', 'url'), ('tel', 'telephone'),
-                              ('orari', 'openingHours')):
-            if l.get(campo):
-                p[chiave] = l[campo]
+        testo = l.get('descr_premium') or l.get('descr')
+        for valore, chiave in ((testo, 'description'), (l.get('sito'), 'url'),
+                               (l.get('tel'), 'telephone'), (l.get('orari'), 'openingHours')):
+            if valore:
+                p[chiave] = valore
+        if l.get('foto'):
+            p['image'] = l['foto'][:3]
         grafo.append(p)
     return "\n".join(
         '<script type="application/ld+json">\n' + json.dumps(g, ensure_ascii=False, indent=1)
         + '\n</script>' for g in grafo)
+
+
+def _elenca(voci):
+    if len(voci) == 1:
+        return voci[0]
+    return ", ".join(voci[:-1]) + " e " + voci[-1]
+
+
+def dove_siamo(elenco):
+    """"Fra Alessandria, Asti e Cuneo" non basta piu': il catalogo esce dalla
+    regione (l'Acquario di Genova, un parco a Voghera). Si nominano le province
+    che pesano davvero e si dice "e dintorni" per le altre, invece di elencarne
+    dodici o di tacere quelle fuori - che sarebbe la cosa peggiore, perche' chi
+    cerca "gita da Alessandria" quelle le vuole proprio."""
+    conta = collections.Counter(l['prov'] for l in elenco if l['prov'])
+    if not conta:
+        return "Piemonte"
+    totale = sum(conta.values())
+    grosse = sorted(p for p, n in conta.items() if n >= max(3, totale * 0.05))
+    if not grosse:
+        grosse = [conta.most_common(1)[0][0]]
+    nomi = [G.PROVINCE_NOMI.get(p, p) for p in grosse]
+    # "Alessandria, Asti e Cuneo" + " e dintorni" faceva due "e" nella stessa
+    # riga. Quando le province di contorno ci sono, l'ultima congiunzione la
+    # prende "e dintorni": "Alessandria, Asti, Cuneo e dintorni".
+    if len(conta) > len(grosse):
+        return ", ".join(nomi) + " e dintorni"
+    if all(p in G.PROVINCE_NOMI for p in grosse):
+        return G.province_in_elenco(grosse)
+    return _elenca(nomi)
+
+
+def _css_categorie(elenco):
+    """Le tinte stanno in classi, non in uno style= sulla riga: 800 righe per
+    ~90 byte di custom property sarebbero 70 KB di attributi ripetuti, che e'
+    esattamente il difetto tolto dall'agenda con i link del calendario."""
+    visti = {}
+    for l in elenco:
+        visti.setdefault(l['cat'], l.get('colore') or colore_cat(l['cat']))
+    return "\n" + "\n".join(
+        f".cat-{slug}{{--cat-color:{c};--cat-tint:{t};--cat-ink:{i}}}"
+        for slug, (c, t, i) in sorted(visti.items())) + "\n"
 
 
 def render(elenco, oggi):
@@ -1039,27 +1158,23 @@ def render(elenco, oggi):
     n = len(elenco)
     comuni = len({(l['prov'], l['comune']) for l in elenco})
     con_eventi = sum(1 for l in elenco if l.get('prossimi'))
-    prov_nomi = G.province_in_elenco({l['prov'] for l in elenco if l['prov']})
+    zona = dove_siamo(elenco)
 
     # Senza "| DAOP" in coda, come le pagine di intenzione: il nome del sito sta
     # gia' in og:site_name, e in SERP quei sette caratteri sono quelli che fanno
-    # tagliare il titolo. Cosi' sta in 49 caratteri invece di 68.
-    #
-    # E non dice "dove andare con i bambini", che pure sarebbe la ricerca piu'
-    # grossa: oggi 55 righe su 173 sono piazze e vie in cui passa una sagra, e
-    # promettere una guida di posti scelti sarebbe piu' di quello che la pagina
-    # ha. Quando il catalogo del foglio sara' pieno, il titolo si potra' alzare.
-    titolo = f"Luoghi per famiglie fra {prov_nomi}"
-    descr = (f"{n} luoghi in {comuni} comuni fra {prov_nomi}: parchi, musei, castelli, "
-             "piscine e spazi al chiuso. Si filtra per provincia, tipo e se piove.")
+    # tagliare il titolo.
+    titolo = f"Dove andare con i bambini in {zona}"
+    descr = (f"{n} luoghi per famiglie in {comuni} comuni: parchi, fattorie didattiche, "
+             "musei, piscine, sport e spazi al chiuso. Si filtra per provincia, tipo, "
+             "età e se piove.")
 
-    intro = (f"<p class=\"lg-intro\">Sono <b>{n} luoghi</b> in <b>{comuni} comuni</b> "
-             f"fra {prov_nomi}: i posti dove DAOP segue gli eventi per famiglie, più "
-             "quelli che ci segnalate. Si filtra per provincia, per tipo e — quello che "
-             "serve davvero — per <b>se piove</b>.</p>")
+    intro = (f'<p class="lg-intro">Sono <b>{n} luoghi</b> in <b>{comuni} comuni</b> '
+             f'di {e(zona)}: parchi e fattorie didattiche, musei e biblioteche, piscine, '
+             'palestre e spazi al chiuso. Si filtra per provincia, per tipo, per '
+             '<b>età</b> e — quello che serve davvero — per <b>se piove</b>.</p>')
     if con_eventi:
-        intro += (f"<p class=\"lg-intro\">In {con_eventi} di questi c'è già "
-                  "qualcosa in programma: la riga lo dice, e porta all'evento.</p>")
+        intro += (f'<p class="lg-intro">In {con_eventi} di questi c\'è già qualcosa in '
+                  'programma: la riga lo dice, e porta all\'evento.</p>')
 
     vuoto = ('<div class="lg-vuoto" id="lg-vuoto" hidden><b>Nessun luogo con questi filtri.</b>'
              'Prova a togliere la provincia o il tipo di luogo.</div>')
@@ -1079,6 +1194,8 @@ def render(elenco, oggi):
         '  </div>',
     ] if x)
 
+    alt_og = ("Illustrazione: un adulto e un bambino camminano mano nella mano su un "
+              "sentiero fra le colline, sotto un arcobaleno")
     return f"""<!DOCTYPE html>
 <!-- PAGINA GENERATA da scripts/genera_luoghi.py: le modifiche scritte a mano
      qui dentro spariscono alla run successiva, senza avvisare. Si tocca il
@@ -1101,27 +1218,29 @@ def render(elenco, oggi):
 <meta property="og:image" content="{G.DEFAULT_IMG}">
 <!-- Misure e alt dell'immagine sociale: senza, WhatsApp e Facebook devono
      scaricarla per sapere come impaginarla, e finche' non ci riescono mostrano
-     l'anteprima senza figura. Sono i valori veri di headerdaop.jpg. Le altre
-     pagine generate non li hanno ancora: quando si toccheranno quei generatori,
-     si copiano da qui. -->
+     l'anteprima senza figura. Sono i valori veri di headerdaop.jpg. -->
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="960">
-<meta property="og:image:alt" content="Illustrazione: un adulto e un bambino camminano mano nella mano su un sentiero fra le colline, sotto un arcobaleno">
+<meta property="og:image:alt" content="{alt_og}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{e(titolo)}">
 <meta name="twitter:description" content="{e(G.trunc(descr, 120))}">
 <meta name="twitter:image" content="{G.DEFAULT_IMG}">
-<meta name="twitter:image:alt" content="Illustrazione: un adulto e un bambino camminano mano nella mano su un sentiero fra le colline, sotto un arcobaleno">
+<meta name="twitter:image:alt" content="{alt_og}">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Le foto dei luoghi stanno su Supabase: il preconnect apre la connessione
+     mentre la pagina si disegna, cosi' la prima riga che si apre non paga DNS
+     e handshake TLS. Non scarica niente: le immagini restano ferme finche' una
+     riga non viene aperta. -->
+<link rel="preconnect" href="{SUPABASE_FOTO}" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{G.PAGINA_CSS}{LUOGHI_CSS}{_css_categorie()}</style>
+<style>{css}{G.PAGINA_CSS}{LUOGHI_CSS}{_css_categorie(elenco)}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>
 <body>
-{SPRITE}
 {nav}
 <main id="contenuto">
 <header class="page-hero ev-hero">
@@ -1129,8 +1248,8 @@ def render(elenco, oggi):
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Luoghi</span>
     </div>
-    <h1>I <em>luoghi</em> delle famiglie</h1>
-    <p class="ev-when">{e(prov_nomi)} · {n} posti in {comuni} comuni</p>
+    <h1>Dove andare <em>con i bambini</em></h1>
+    <p class="ev-when">{e(zona)} · {n} luoghi in {comuni} comuni</p>
   </div>
 </header>
 {corpo}
@@ -1147,32 +1266,20 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def _css_categorie():
-    return "\n" + "\n".join(
-        f".cat-{slug}{{--cat-color:{c};--cat-tint:{t};--cat-ink:{i}}}"
-        for slug, (c, t, i) in COLORI_CAT.items()) + "\n"
-
-
 def salva_istantanea(elenco):
     """L'istantanea che fa da ripiego quando il foglio non risponde.
 
-    Si salvano solo i campi editoriali, non quelli dedotti dall'agenda: quelli
-    si ricalcolano a ogni run e riscriverli qui vorrebbe dire committare ogni
-    notte un file che cambia da solo."""
-    fuori = []
-    for l in elenco:
-        if l.get('fonte') != 'catalogo':
-            continue
-        fuori.append({k: l.get(k, '') for k in (
-            'nome', 'comune', 'prov', 'cat', 'indirizzo', 'riparo', 'prezzo', 'eta',
-            'descr', 'orari', 'sito', 'tel', 'foto', 'lat', 'lon', 'premium_da', 'offerta')}
-            | {'premium': 'Si' if l.get('premium') else '',
-               'evidenza': 'Si' if l.get('evidenza') else ''})
-    if not fuori:
+    Si salvano le righe GREZZE del foglio, con le sue intestazioni: cosi' il
+    ripiego e il CSV passano dallo stesso normalizzatore e non c'e' un secondo
+    formato da tenere allineato quando una colonna cambia nome. Si scrive solo
+    se le righe arrivano davvero dal foglio: rigenerare l'istantanea da se'
+    stessa non aggiunge niente e la farebbe ricommittare ogni notte."""
+    grezzi = [l['_grezzo'] for l in elenco if l.get('_grezzo')]
+    if not grezzi:
         return
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
-        json.dump(fuori, fh, ensure_ascii=False, indent=1)
-    print(f"[genera_luoghi] istantanea salvata: {len(fuori)} luoghi di catalogo")
+        json.dump(grezzi, fh, ensure_ascii=False, indent=1)
+    print(f"[genera_luoghi] istantanea aggiornata: {len(grezzi)} righe di catalogo")
 
 
 def update_sitemap(n):
@@ -1200,9 +1307,38 @@ def update_sitemap(n):
     print(f"[genera_luoghi] sitemap: luoghi.html -> {oggi}")
 
 
+def controlla_crollo(catalogo):
+    """Blocca la rigenerazione se il catalogo e' crollato rispetto all'istantanea.
+
+    E' lo stesso guasto gia' visto sugli eventi il 05/08/2026: l'export CSV di
+    Google **rispetta i filtri** del foglio, e con un filtro attivo sul tab
+    restituisce solo le righe visibili. Quel giorno erano 26 invece di 193.
+    Qui vorrebbe dire pubblicare 40 luoghi al posto di 800, con la pagina
+    dimezzata e nessun errore da nessuna parte - il tipo di guasto che si
+    scopre tre settimane dopo guardando un grafico piatto.
+
+    Si confronta solo con righe FRESCHE: se stiamo gia' usando l'istantanea non
+    c'e' niente da proteggere, e' lei il riferimento."""
+    if not os.path.exists(JSON_PATH):
+        return True
+    fresche = [l for l in catalogo if l.get('_grezzo')]
+    if not fresche:
+        return True
+    with open(JSON_PATH, encoding="utf-8") as fh:
+        prima = len(json.load(fh))
+    if prima >= 20 and len(fresche) < prima * 0.6:
+        print(f"[genera_luoghi] ATTENZIONE: il tab Luoghi da' {len(fresche)} righe "
+              f"contro le {prima} dell'ultima volta. Sembra un filtro attivo sul "
+              f"foglio, non una potatura: lascio la pagina com'è.")
+        return False
+    return True
+
+
 def main():
     oggi = datetime.date.today()
     catalogo = leggi_catalogo()
+    if not controlla_crollo(catalogo):
+        raise SystemExit(1)
     agenda = leggi_agenda()
     elenco = unisci(catalogo, agenda)
     if not elenco:
@@ -1210,13 +1346,14 @@ def main():
         return
     da_cat = sum(1 for l in elenco if l.get('fonte') == 'catalogo')
     premium = sum(1 for l in elenco if l.get('premium'))
+    consigliati = sum(1 for l in elenco if l.get('consigliato'))
     open(OUT_PATH, "w", encoding="utf-8").write(render(elenco, oggi))
     salva_istantanea(elenco)
     update_sitemap(len(elenco))
     peso = os.path.getsize(OUT_PATH) / 1024
     print(f"[genera_luoghi] luoghi.html: {len(elenco)} luoghi "
           f"({da_cat} da catalogo, {len(elenco) - da_cat} dall'agenda), "
-          f"{premium} schede curate, {peso:.0f} KB")
+          f"{premium} schede curate, {consigliati} scelti da DAOP, {peso:.0f} KB")
 
 
 if __name__ == "__main__":

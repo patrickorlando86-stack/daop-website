@@ -51,8 +51,13 @@ module.exports = async function luoghi(browser) {
 
   r.ok(await visibili(page) === tot, `a riposo si vedono tutti: ${tot}`);
   r.ok((await page.textContent('#lg-count')).trim() === '', 'a riposo il conteggio resta muto');
-  r.ok(await page.locator('#lg-toolbar').evaluate((b) => b.offsetHeight) <= 130,
-    'la barra filtri sta compatta sul telefono');
+  // Quattro tendine sul telefono vanno a capo: 156px invece di 109. E' voluto,
+  // ed e' il contrario della scelta fatta quando la pagina aveva solo i luoghi
+  // dedotti dall'agenda. Il dato e' cambiato: con centinaia di luoghi scelti a
+  // mano l'elenco non si scorre, si filtra. La soglia resta per accorgersi se
+  // un giorno diventassero sei.
+  r.ok(await page.locator('#lg-toolbar').evaluate((b) => b.offsetHeight) <= 170,
+    'la barra filtri non supera le due righe sul telefono');
 
   // Una tendina che offre solo "tutti" non si stampa: e' un comando che non fa
   // niente. Due voci (tutti + una scelta) sono un comando vero, quindi la
@@ -144,11 +149,53 @@ module.exports = async function luoghi(browser) {
     return prem.every((p) => p.closest('.lg-vetrina') || p.closest('.lg-grp'));
   }), 'le schede curate stanno nell\'elenco, non sopra di esso');
 
-  // Le miniature: negli elenchi non ci vanno immagini remote per riga. E' il
-  // conto della banda gia' sbagliato una volta con le locandine.
+  // La banda di Supabase. Nell'INTESTAZIONE non ci vanno immagini: al posto
+  // della miniatura c'e' l'emoji del foglio. La foto sta nel corpo, cioe'
+  // dentro un <details> chiuso, che il browser non disegna: con loading="lazy"
+  // non parte nessuna richiesta finche' non si apre la riga.
   r.ok(await page.evaluate(() =>
-    [...document.querySelectorAll('.lg-row:not(.is-prem) img')].length === 0),
-    'nessuna immagine nelle righe non curate: 173 foto in elenco sono banda buttata');
+    [...document.querySelectorAll('.lg-row > summary img')].length === 0),
+    'nessuna immagine nelle intestazioni: sarebbero centinaia di richieste');
+  r.ok(await page.evaluate(() =>
+    [...document.querySelectorAll('.lg-row img')].every((i) => i.loading === 'lazy')),
+    'ogni foto e\' lazy');
+  await ctx.close();
+
+  // ── la prova che conta davvero sulla banda ────────────────────────────
+  // Il bucket Supabase ha 5 GB al mese e l'08/08/2026 le locandine lo hanno
+  // quasi bruciato. Qui si controlla sul browser vero, non sul markup: si
+  // scorre TUTTA la pagina e non deve partire nessuna richiesta di foto.
+  r.titolo('luoghi.html — la banda delle foto');
+  ({ ctx, page } = await apri(browser, 'luoghi.html', 412));
+  const foto = [];
+  page.on('request', (req) => {
+    if (/supabase\.co/.test(req.url())) foto.push(req.url());
+  });
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.body.scrollHeight; y += 800) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 20));
+    }
+  });
+  await page.waitForTimeout(800);
+  r.ok(foto.length === 0,
+    `scorrendo tutta la pagina non si scarica nessuna foto (${foto.length})`);
+
+  const conFoto = await page.evaluate(() => {
+    const r = [...document.querySelectorAll('.lg-row')].find((x) => x.querySelector('img'));
+    return r ? r.id : null;
+  });
+  if (conFoto) {
+    await page.evaluate((id) => {
+      const d = document.getElementById(id);
+      d.open = true;
+      d.scrollIntoView({ block: 'center' });
+    }, conFoto);
+    await page.waitForTimeout(900);
+    r.ok(foto.length >= 1, 'aprendo una riga la sua foto arriva');
+  } else {
+    r.ok(true, 'nessuna riga con foto in questo catalogo');
+  }
 
   // Il link diretto a un luogo deve aprire la riga, non lasciarla chiusa.
   const id = await page.locator('.lg-row').nth(5).getAttribute('id');
