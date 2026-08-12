@@ -181,18 +181,25 @@ module.exports = async function luoghi(browser) {
   r.ok(foto.length === 0,
     `scorrendo tutta la pagina non si scarica nessuna foto (${foto.length})`);
 
+  // Si aspetta LA foto di QUELLA riga, non "una richiesta qualsiasi entro
+  // 900ms". Con 823 righe su un runner lento quell'attesa fissa non bastava e
+  // la prova lampeggiava: verde in locale, rossa in CI. Una prova che lampeggia
+  // e' peggio di nessuna prova, perche' insegna a ignorare il rosso.
   const conFoto = await page.evaluate(() => {
-    const r = [...document.querySelectorAll('.lg-row')].find((x) => x.querySelector('img'));
-    return r ? r.id : null;
+    const d = [...document.querySelectorAll('.lg-row')].find((x) => x.querySelector('img'));
+    return d ? { id: d.id, src: d.querySelector('img').src } : null;
   });
   if (conFoto) {
     await page.evaluate((id) => {
       const d = document.getElementById(id);
       d.open = true;
       d.scrollIntoView({ block: 'center' });
-    }, conFoto);
-    await page.waitForTimeout(900);
-    r.ok(foto.length >= 1, 'aprendo una riga la sua foto arriva');
+    }, conFoto.id);
+    const fine = Date.now() + 15000;
+    while (!foto.includes(conFoto.src) && Date.now() < fine) {
+      await page.waitForTimeout(150);
+    }
+    r.ok(foto.includes(conFoto.src), 'aprendo una riga arriva la sua foto, e solo quella');
   } else {
     r.ok(true, 'nessuna riga con foto in questo catalogo');
   }
