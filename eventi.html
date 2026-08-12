@@ -6934,12 +6934,20 @@ document.addEventListener('DOMContentLoaded', function () {
       const term = q.value.trim().toLowerCase();
       const f = { date: sel.date.value, province: sel.province.value, category: sel.category.value };
       const filtrato = term !== '' || f.date !== 'all' || f.province !== 'all' || f.category !== 'all';
-      let visible = 0;
+      // "fuori" sono le schede che i filtri terrebbero ma che cadono fuori dalla
+      // finestra del calendario. In vista agenda resta zero, perche' li'
+      // passaCalendario() e' sempre vero: non c'e' nessuna finestra da cui
+      // cadere. E senza filtri non si conta: chi sfoglia i mesi a mano non sta
+      // cercando niente, non ha bisogno che gli si offra di allargare.
+      let visible = 0, fuori = 0;
       cards.forEach(card => {
-        const show = passaFiltri(card, f, term) && passaCalendario(card);
+        const passa = passaFiltri(card, f, term);
+        const show = passa && passaCalendario(card);
         card.classList.toggle('is-hidden', !show);
         if (show) visible++;
+        else if (passa) fuori++;
       });
+      if (!filtrato) fuori = 0;
       days.forEach(g => g.classList.toggle('is-hidden', !g.querySelector('.event-card:not(.is-hidden)')));
       Object.keys(sel).forEach(k => sel[k].classList.toggle('is-on', sel[k].value !== 'all'));
       // Le corsie in evidenza servono da vetrina della pagina "a riposo": con un
@@ -6951,9 +6959,22 @@ document.addEventListener('DOMContentLoaded', function () {
         hl.classList.toggle('is-hidden', filtrato || vista === 'calendario' ||
           !hl.querySelector('.ev-hl-block:not(.is-hidden)'));
       }
+      // Con una finestra aperta, "non c'e' niente" e "non c'e' niente qui" sono
+      // due frasi diverse, e dire la prima al posto della seconda fa sembrare
+      // senza risposta una ricerca che ne ha, un mese piu' in la'. Nemmeno "piu'
+      // avanti": da dicembre le risposte sono indietro, non avanti.
+      if (visible === 0) {
+        empty.textContent = vista !== 'calendario'
+          ? 'Nessun evento con questi filtri. Prova ad allargare la ricerca.'
+          : !filtrato ? 'Nessun evento ' + ambito() + '.'
+          : fuori ? 'Nessun evento ' + ambito() + ' con questi filtri. In altri ' +
+              (calGiorno ? 'giorni' : 'mesi') + (fuori === 1 ? ' ce n\'è 1.' : ' ce ne sono ' + fuori + '.')
+          // Niente da nessuna parte: dirlo evita di far sfogliare i mesi a vuoto.
+          : 'Nessun evento con questi filtri, in nessuna data.';
+      }
       empty.style.display = visible === 0 ? 'block' : 'none';
       if (count) count.textContent = visible + (visible === 1 ? ' evento ' : ' eventi ') + ambito();
-      if (vista === 'calendario') disegnaCalendario(f, term);
+      if (vista === 'calendario') disegnaCalendario(f, term, visible, fuori);
     }
 
     // Le intestazioni dei giorni arrivano già scritte dal generatore notturno:
@@ -7018,7 +7039,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return (/^[aeiou]/.test(mese) ? 'ad ' : 'a ') + mese + anno;
     }
 
-    function disegnaCalendario(f, term) {
+    function disegnaCalendario(f, term, visibili, fuori) {
       const anno = calMese.getFullYear(), mese = calMese.getMonth();
       const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
       const ultimo = new Date(anno, mese + 1, 0);
@@ -7068,8 +7089,18 @@ document.addEventListener('DOMContentLoaded', function () {
           '><span>' + g + '</span><span class="ev-cal-n">' + (n || '') + '</span></button>';
       }
       h += '</div>';
+      // Sotto la griglia c'e' una riga sola, e tre cose diverse da dire: si
+      // parla di allargare finche' c'e' qualcosa da allargare, e la griglia si
+      // spiega solo quando non c'e'. L'ordine e' quello di chi cerca: prima si
+      // esce dal giorno, poi dal mese. Il calendario e' un filtro data come gli
+      // altri, e un filtro attivo va detto e va poter essere sciolto - senza
+      // saltare in agenda da solo, che a chi ha scelto agosto toglie il posto
+      // dove si trovava.
       h += '<p class="ev-cal-legend">' + (calGiorno
         ? 'Stai vedendo un solo giorno. <button type="button" data-tutto="1">Mostra tutto il mese</button>'
+        : fuori
+        ? 'Con questi filtri: ' + visibili + ' ' + ambito() + ', ' + (visibili + fuori) +
+          ' in tutta l\'agenda. <button type="button" data-tuttagenda="1">Vedi tutti</button>'
         : 'Il numero sono gli eventi di quel giorno: più il colore è pieno, più ce n\'è. Tocca un giorno per vederlo da solo.') + '</p>';
       cal.innerHTML = h;
     }
@@ -7101,6 +7132,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       if (ev.target.closest('[data-tutto]')) { calGiorno = null; apply(); return; }
+      // Torna in agenda tenendo ricerca e tendine: e' la stessa domanda, fatta
+      // senza il vincolo del mese.
+      if (ev.target.closest('[data-tuttagenda]')) { cambiaVista('agenda'); return; }
       const giorno = ev.target.closest('.ev-cal-day:not([disabled])');
       if (giorno) {
         calGiorno = giorno.dataset.giorno === calGiorno ? null : giorno.dataset.giorno;
