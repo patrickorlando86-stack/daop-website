@@ -152,6 +152,7 @@ COLONNE = {
     'premium': ('premium',),
     'premium_dal': ('premium_dal', 'premium dal'),
     'consigliato': ('consigliato daop', 'consigliato'),
+    'evidenza': ('in evidenza', 'evidenza', 'vetrina'),
     'gratuito': ('gratuito', 'gratis'),
     'passaporto': ('passaportoesploratore', 'passaporto esploratore'),
     'passaporto_codice': ('codicepassaporto', 'codice passaporto'),
@@ -418,10 +419,16 @@ def leggi_catalogo():
             'eta_min': _eta(d['eta_min'], 0), 'eta_max': _eta(d['eta_max'], 99),
             'premium': premium, 'premium_dal': d['premium_dal'],
             'consigliato': si(d['consigliato']),
-            # In vetrina ci va chi paga, non chi ci piace: "Consigliato DAOP" da
-            # solo non compra la posizione, e premium da solo non basta a
-            # occupare i tre posti in cima.
-            'evidenza': premium and si(d['consigliato']),
+            # La vetrina la decide una COLONNA del foglio, non una regola
+            # inventata qui. Per un giorno e' stata `premium and consigliato`,
+            # e il risultato e' che il blocco non compariva mai: le quattro
+            # schede a pagamento hanno tutte "Consigliato DAOP = no", perche'
+            # sono due giudizi diversi - uno lo dà il cliente, l'altro lo diamo
+            # noi - ed era stato tenuto separato apposta tre righe piu' su.
+            # Una condizione che spegne in silenzio uno spazio venduto e' un
+            # difetto, non una cautela. Serve comunque il premium: la posizione
+            # in cima si compra, e chi non l'ha comprata non ci finisce.
+            'evidenza': premium and si(d['evidenza']),
             'codice': d['codice'],
             'n_eventi': 0, 'ultimo': '', 'prossimi': [], 'fonte': 'catalogo',
             '_grezzo': r if fresco else None,
@@ -1347,13 +1354,21 @@ def main():
     da_cat = sum(1 for l in elenco if l.get('fonte') == 'catalogo')
     premium = sum(1 for l in elenco if l.get('premium'))
     consigliati = sum(1 for l in elenco if l.get('consigliato'))
+    in_vetrina = sum(1 for l in elenco if l.get('evidenza') and l.get('premium'))
+    # Se ci sono schede a pagamento e la vetrina resta vuota, lo si dice: e' il
+    # tipo di cosa che non si vede guardando la pagina (manca un blocco, non
+    # compare un errore) e che costa a chi ha pagato.
+    if premium and not in_vetrina:
+        print('[genera_luoghi] nessuno in vetrina: la colonna "In evidenza" del '
+              'foglio è vuota su tutte le schede a pagamento')
     open(OUT_PATH, "w", encoding="utf-8").write(render(elenco, oggi))
     salva_istantanea(elenco)
     update_sitemap(len(elenco))
     peso = os.path.getsize(OUT_PATH) / 1024
     print(f"[genera_luoghi] luoghi.html: {len(elenco)} luoghi "
           f"({da_cat} da catalogo, {len(elenco) - da_cat} dall'agenda), "
-          f"{premium} schede curate, {consigliati} scelti da DAOP, {peso:.0f} KB")
+          f"{premium} schede curate ({in_vetrina} in vetrina), "
+          f"{consigliati} scelti da DAOP, {peso:.0f} KB")
 
 
 if __name__ == "__main__":
