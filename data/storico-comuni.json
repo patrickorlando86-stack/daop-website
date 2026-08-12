@@ -170,7 +170,7 @@
     "manifest": "Alessandria Grandi Film Sotto le Stelle",
     "nome": "2 Cuori 2 Capanne",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-24"
    },
    "alecomics-festival-alessandria": {
@@ -192,7 +192,7 @@
     "manifest": "Alessandria Grandi Film Sotto le Stelle",
     "nome": "Buen Camino",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-28"
    },
    "festa-della-birra-street-food-alessandria": {
@@ -291,7 +291,7 @@
     "manifest": "Alessandria Grandi Film Sotto le Stelle",
     "nome": "Sentimental Value",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-13"
    },
    "super-mario-galaxy-alessandria": {
@@ -313,7 +313,7 @@
     "manifest": "Alessandria Grandi Film Sotto le Stelle",
     "nome": "Un bel giorno",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-22"
    }
   },
@@ -4024,7 +4024,7 @@
     "manifest": "Sconfinamenti Sonori",
     "nome": "Cinema in Piazzetta: Moulin Rouge! - Pro Loco Sanse",
     "organizza": "Pro Loco Sanse",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-12"
    },
    "il-borgo-diventa-osteria-edizione-san-sebastiano-curone": {
@@ -4717,7 +4717,7 @@
     "manifest": "Falò e Smúje - Ferragosto Vesimese 2026",
     "nome": "Proiezione Le Colline del Mare - Comune di Santo Stefano Belbo",
     "organizza": "Comune di Santo Stefano Belbo",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-08-15"
    },
    "santa-messa-alla-pieve-vesime": {
