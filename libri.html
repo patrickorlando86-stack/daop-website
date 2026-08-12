@@ -4,52 +4,7 @@
 <meta charset="UTF-8">
 <!-- Consenso cookie + Google Analytics (caricato solo dopo consenso) -->
 <script src="assets/js/cookie-consent.js"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6M747985MC');
-</script>
-<!-- DAOP - tracciamento eventi chiave (click contatti e link importanti) -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  function track(name, href) {
-    if (typeof gtag === 'function') { gtag('event', name, { link_url: href }); }
-  }
-  document.querySelectorAll('a[href]').forEach(function (a) {
-    var href = a.getAttribute('href') || '';
-    a.addEventListener('click', function () {
-      if (href.indexOf('mailto:') === 0) {
-        track('click_email', href);
-      } else if (href.indexOf('tel:') === 0) {
-        track('click_telefono', href);
-      } else if (href.indexOf('ginettoapp.it') !== -1) {
-        track('apri_ginetto', href);
-      } else if (href.indexOf('gioco.sane-italia.it') !== -1) {
-        track('gioca_ora', href);
-      } else if (href.indexOf('instagram.com') !== -1 || href.indexOf('facebook.com') !== -1) {
-        track('click_social', href);
-      }
-    });
-  });
-
-  // Profondita di scroll: evento a 25/50/75/100%
-  var soglie = [25, 50, 75, 100], raggiunte = {};
-  function controllaScroll() {
-    var h = document.documentElement;
-    var scrollabile = h.scrollHeight - h.clientHeight;
-    if (scrollabile <= 0) return;
-    var perc = (h.scrollTop || document.body.scrollTop) / scrollabile * 100;
-    soglie.forEach(function (s) {
-      if (perc >= s && !raggiunte[s]) {
-        raggiunte[s] = true;
-        if (typeof gtag === 'function') { gtag('event', 'scroll_depth', { percent_scroll: s }); }
-      }
-    });
-  }
-  window.addEventListener('scroll', controllaScroll, { passive: true });
-});
-</script>
+<script src="assets/js/daop-track.js" defer></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I Libri di Patrick Orlando | DAOP</title>

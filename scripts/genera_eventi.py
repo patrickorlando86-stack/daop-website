@@ -2409,6 +2409,9 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
 <meta name="twitter:title" content="{esc(trunc(titolo_seo, 60))}">
 <meta name="twitter:description" content="{esc(trunc(meta_d, 120))}">
 <meta name="twitter:image" content="{esc(loc_url(e.get('loc')) or DEFAULT_IMG)}">
+<meta name="daop:evento" content="{esc(nome)}">
+<meta name="daop:citta" content="{esc(citta)}">
+<meta name="daop:provincia" content="{esc(e['prov'])}">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -3767,6 +3770,8 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
 <meta name="twitter:title" content="{esc(titolo)}">
 <meta name="twitter:description" content="{esc(trunc(descr, 120))}">
 <meta name="twitter:image" content="{DEFAULT_IMG}">
+<meta name="daop:citta" content="{esc(citta)}">
+<meta name="daop:provincia" content="{esc(dati['prov'])}">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -4071,6 +4076,11 @@ def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi):
 
 def _landing_shell(spec, css, nav, foot, oggi):
     """Il guscio HTML condiviso dalle pagine di intenzione."""
+    # Solo le landing provinciali hanno una provincia: /eventi/oggi.html e
+    # /eventi/weekend.html sono trasversali e il meta non va stampato vuoto,
+    # se no in GA4 quelle pagine riempiono i report di "(not set)".
+    prov_meta = (f'\n<meta name="daop:provincia" content="{esc(spec["prov"])}">'
+                 if spec.get('prov') else '')
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -4090,7 +4100,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(spec['titolo'])}">
 <meta name="twitter:description" content="{esc(trunc(spec['descr'], 120))}">
-<meta name="twitter:image" content="{DEFAULT_IMG}">
+<meta name="twitter:image" content="{DEFAULT_IMG}">{prov_meta}
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -4497,6 +4507,10 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
         'h1': f"Sagre e feste in provincia di {nome_prov}",
         'sotto': sotto, 'crumb': f"Sagre {nome_prov}",
         'corpo': corpo, 'robots': robots,
+        # Serve solo al tracciamento: i clic in uscita da questa pagina
+        # portano con se' la provincia, cosi' "quanti aprono le mappe delle
+        # sagre astigiane" si legge senza incrociare a mano gli URL.
+        'prov': prov,
         'jsonld': _grafo_landing(url, titolo, descr, sagre,
                                  f"Sagre in provincia di {nome_prov}",
                                  f"Sagre in provincia di {nome_prov}", oggi),

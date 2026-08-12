@@ -3,19 +3,51 @@
    rifiuto (o senza scelta) non parte alcuna richiesta verso Google e non
    viene impostato alcun cookie di misurazione. La scelta è ricordata in
    localStorage e può essere cambiata da window.daopGestisciCookie()
-   (link "Gestisci preferenze cookie" nella cookie policy). */
+   (link "Gestisci preferenze cookie" nella cookie policy).
+
+   QUESTO FILE E' L'UNICO PUNTO IN CUI GA4 VIENE INIZIALIZZATO.
+   Fino al 12/08/2026 il `gtag('config', ...)` stava scritto a mano dentro
+   dodici pagine e mancava dappertutto altrove: questo script caricava
+   gtag.js ma non gli diceva mai quale proprieta' misurare, quindi le ~280
+   pagine generate (tutte le schede /eventi/, le pagine comune, oggi,
+   weekend, le provinciali, zone, metodo, centri estivi) caricavano la
+   libreria e non mandavano nessun page_view. Da qui il buco fra i clic di
+   Search Console e gli utenti in GA4.
+   Il `config` sta ora qui, una volta sola: chi include questo file e'
+   tracciato, e non c'e' modo di dimenticarsene su una pagina nuova.
+   Corollario: NON riaggiungere un blocco gtag inline nelle pagine, sarebbe
+   una seconda inizializzazione e un secondo page_view. */
 (function () {
   var GA_ID = 'G-6M747985MC';
   var KEY = 'daop-cookie-consent'; // 'granted' | 'denied'
 
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
+  window.gtag = window.gtag || gtag;
   // Consent Mode v2: tutto negato finché l'utente non acconsente
   gtag('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',
     ad_personalization: 'denied',
     analytics_storage: 'denied'
+  });
+
+  /* La home e' raggiungibile come "/" (canonical, sitemap, link da Google) e
+     come "/index.html" (la nav del sito la scrive cosi' in ~290 punti). Per
+     GA4 sono due pagine diverse e la home risultava spezzata in due righe.
+     Si normalizza qui, nel parametro mandato a GA4: nessun redirect, nessun
+     link cambiato, nessun rischio lato SEO — il canonical era gia' "/". */
+  function percorso() {
+    return location.pathname.replace(/\/index\.html$/i, '/') || '/';
+  }
+
+  // Le commands finiscono in dataLayer e restano in coda: vengono eseguite da
+  // gtag.js nel momento in cui viene caricato, cioe' solo dopo il consenso.
+  // Senza consenso questa coda non parte e non esce una sola richiesta.
+  gtag('js', new Date());
+  gtag('config', GA_ID, {
+    page_path: percorso(),
+    page_location: location.origin + percorso() + location.search
   });
 
   function leggiScelta() {
@@ -25,10 +57,20 @@
     try { localStorage.setItem(KEY, v); } catch (e) { /* storage non disponibile */ }
   }
 
+  /* Lo leggono gli altri script (daop-track.js) prima di mandare qualunque
+     evento. Serve perche' `gtag` come funzione esiste sempre — e' lo stub che
+     accoda in dataLayer — quindi "typeof gtag === 'function'" non dice se
+     l'utente ha acconsentito. Senza questo controllo un clic fatto dopo il
+     "Rifiuta" restava in coda in dataLayer e, se piu' tardi l'utente cambiava
+     idea e accettava, gtag.js svuotava la coda e lo spediva lo stesso: un
+     evento raccolto prima del consenso. */
+  window.daopConsensoAnalytics = false;
+
   var gaCaricato = false;
   function avviaAnalytics() {
     if (gaCaricato) return;
     gaCaricato = true;
+    window.daopConsensoAnalytics = true;
     gtag('consent', 'update', { analytics_storage: 'granted' });
     var s = document.createElement('script');
     s.async = true;

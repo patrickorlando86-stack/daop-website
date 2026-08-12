@@ -33,6 +33,41 @@ Non duplicare quelle regole altrove.
 `genera_centri.py` importa `genera_eventi` e usa lo stesso guscio: se cambi il
 CSS, `centri-estivi.html` si allinea solo quando gira **anche** quello script.
 
+### GA4 si inizializza in un posto solo
+
+`assets/js/cookie-consent.js` è **l'unico** punto in cui si scrive
+`gtag('config', ...)`. Chi include quel file è tracciato; non c'è una seconda
+lista da aggiornare quando nasce una pagina.
+
+Fino al 12/08/2026 non era così, ed era un buco silenzioso: il `config` stava
+copiato a mano in dodici pagine e `cookie-consent.js` caricava `gtag.js` senza
+dirgli mai quale proprietà misurare. Le ~280 pagine generate — tutte le schede
+`/eventi/`, le pagine comune, `oggi`, `weekend`, le provinciali, `zone`,
+`metodo`, i centri estivi — scaricavano la libreria e non mandavano **nessun**
+`page_view`. In GA4 si vedeva `/eventi.html` (scritta a mano, quindi col blocco
+inline) e non si vedeva nessuna scheda: 1.932 clic da Search Console contro 215
+utenti. Il sintomo sembrava "manca il tag nel template", ma il tag c'era: gli
+mancava l'inizializzazione.
+
+Da qui due regole:
+
+- **Non riaggiungere un blocco `gtag` inline in una pagina.** Sarebbe una
+  seconda inizializzazione, cioè due `page_view` per visita.
+- **Una pagina nuova si tracciava già da sola**, purché includa
+  `cookie-consent.js`: i sei template in `genera_eventi.py` e quelli di
+  `genera_centri.py` / `genera_rubriche.py` lo fanno.
+
+Restano fuori apposta: i due stub di redirect (`cookypolicy.html`,
+`ilpiattosano.html`), il file di verifica di Search Console, lo sprite
+`assets/icons.svg.html` e i tre `eventi/box-*.html`, che sono `noindex` e
+vivono dentro l'iframe di siti altrui — lì il consenso non è nostro da chiedere.
+
+I clic stanno in `assets/js/daop-track.js`, anche quello uno solo, e leggono
+`daop:evento` / `daop:citta` / `daop:provincia` dai meta che stampano i
+generatori. Nessuno dei due script manda niente prima del consenso:
+`window.daopConsensoAnalytics` è la condizione, e `typeof gtag === 'function'`
+non basta — lo stub che accoda in `dataLayer` esiste da sempre.
+
 ## Far girare i generatori
 
 ```bash
