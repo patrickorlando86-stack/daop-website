@@ -7110,11 +7110,18 @@ document.addEventListener('DOMContentLoaded', function () {
       btnAgenda.setAttribute('aria-pressed', String(vista === 'agenda'));
       btnCal.setAttribute('aria-pressed', String(vista === 'calendario'));
       cal.hidden = vista !== 'calendario';
+      // "Quando" e calendario rispondono alla stessa domanda, e lasciarli
+      // accesi insieme la fa porre due volte: chi scegliesse "Weekend" dentro
+      // agosto vedrebbe due vincoli di data sommati, e il conto "in tutta
+      // l'agenda" resterebbe dentro il piu' stretto dei due. Vince il
+      // calendario, che di quella domanda e' la risposta piu' fine - e la
+      // tendina si toglie invece di restare grigia: un comando spento e' un
+      // comando che non fa niente, e qui la pagina ne ha gia' uno migliore.
+      sel.date.hidden = vista === 'calendario';
       if (vista === 'calendario') {
         const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
         calMese = new Date(oggi.getFullYear(), oggi.getMonth(), 1);
         calGiorno = null;
-        // "Quando" e calendario risponderebbero alla stessa domanda: vince il calendario
         sel.date.value = 'all';
       } else {
         calMese = null;
