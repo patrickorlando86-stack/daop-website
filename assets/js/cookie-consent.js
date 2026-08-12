@@ -41,14 +41,6 @@
     return location.pathname.replace(/\/index\.html$/i, '/') || '/';
   }
 
-  // Le commands finiscono in dataLayer e restano in coda: vengono eseguite da
-  // gtag.js nel momento in cui viene caricato, cioe' solo dopo il consenso.
-  // Senza consenso questa coda non parte e non esce una sola richiesta.
-  gtag('js', new Date());
-  gtag('config', GA_ID, {
-    page_path: percorso(),
-    page_location: location.origin + percorso() + location.search
-  });
 
   function leggiScelta() {
     try { return localStorage.getItem(KEY); } catch (e) { return null; }
@@ -71,7 +63,24 @@
     if (gaCaricato) return;
     gaCaricato = true;
     window.daopConsensoAnalytics = true;
+
+    /* L'ORDINE DI QUESTE TRE COSE NON E' CASUALE.
+       gtag.js, quando si carica, esegue la coda di dataLayer nell'ordine in
+       cui e' stata riempita. Il `config` e' quello che fa partire il
+       page_view, quindi deve stare DOPO l'aggiornamento del consenso.
+       Tenendo il `config` a inizio pagina la coda diventava
+       default(denied) -> config -> update(granted), e il page_view usciva
+       col parametro gcs=G100, cioe' analytics_storage negato: GA4 lo
+       riceveva e lo scartava. Si vedeva un buco preciso — nessun page_view,
+       ma i clic (spediti dopo, quindi con gcs=G101) arrivavano tutti.
+       Verificato il 12/08/2026 leggendo le richieste a /g/collect. */
     gtag('consent', 'update', { analytics_storage: 'granted' });
+    gtag('js', new Date());
+    gtag('config', GA_ID, {
+      page_path: percorso(),
+      page_location: location.origin + percorso() + location.search
+    });
+
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
