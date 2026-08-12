@@ -31,9 +31,12 @@ jobs:
       # Serve solo all'ultimo passo, le prove di fumo. Sta qui e non li' perche'
       # setup-node vuole girare prima di qualsiasi npm.
       - name: Setup Node
-        uses: actions/setup-node@v4
+        # v7 e non v4: la v4 gira su un runtime Node 20 che GitHub ha deprecato,
+        # e ogni run finiva con un avviso. Node 22 per le prove: e' la versione
+        # di supporto lungo su cui Playwright e' provato.
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '22'
           cache: npm
           cache-dependency-path: tests/package-lock.json
 
