@@ -358,15 +358,53 @@ SUPABASE_LOCANDINE = ("https://aaseyjdsldgjerjqlumu.supabase.co"
                       "/storage/v1/object/public/locandine")
 
 
-def loc_path(loc):
+MINIATURE_DIR = os.path.join(ROOT, "assets", "miniature")
+MINIATURE_HREF = "/assets/miniature"
+
+
+def nome_miniatura(loc):
+    """Il nome file della miniatura di una locandina, senza cartella.
+
+    Un URL completo non ce l'ha: quelle immagini stanno da un'altra parte e non
+    passano dal nostro bucket, quindi non le ridimensioniamo."""
+    loc = (loc or '').strip()
+    if not loc or loc.startswith(('http://', 'https://')):
+        return ''
+    return os.path.splitext(os.path.basename(loc.lstrip('/')))[0] + '.webp'
+
+
+def ha_miniatura(loc):
+    m = nome_miniatura(loc)
+    return bool(m) and os.path.exists(os.path.join(MINIATURE_DIR, m))
+
+
+def loc_path(loc, mini=False):
     """URL della locandina per il browser: un nome file diventa l'URL pubblico
     nel bucket Supabase, un URL completo resta intatto. Vuoto se assente.
 
     Unico punto in cui un nome file diventa un indirizzo: lo usano le card degli
-    eventi, le pagine per comune e (via G.loc_path) i centri estivi."""
+    eventi, le pagine per comune e (via G.loc_path) i centri estivi.
+
+    mini=True negli ELENCHI, dove l'immagine sta in un francobollo da 50-60px o
+    in una copertina da 262: li' serviva l'originale da ~95 KB per riempire un
+    quadratino, e moltiplicato per le ~100 righe che si scorrono in una sessione
+    era il grosso del traffico in uscita dal bucket. Dall'08/08/2026, quando le
+    locandine sono passate da git a Supabase, quel traffico e' salito da ~10 a
+    ~250 MB al giorno: con il tetto di 5 GB del piano gratuito le immagini si
+    sarebbero spente da sole verso fine mese.
+
+    Le miniature stanno in git e le serve GitHub Pages, che non ha tetto. Ci
+    stanno perche' sono ~25 KB l'una invece di 190: il motivo per cui le
+    locandine erano uscite dal repo (340 MB l'anno di blob) qui non si ripresenta.
+
+    Il ripiego e' sull'originale, sempre: una locandina arrivata stanotte non ha
+    ancora la sua miniatura - la fa genera_miniature.py alla run dopo - e nel
+    frattempo la pagina mostra quella grande invece di un buco."""
     loc = (loc or '').strip()
     if not loc:
         return ''
+    if mini and ha_miniatura(loc):
+        return f"{MINIATURE_HREF}/{urllib.parse.quote(nome_miniatura(loc))}"
     if loc.startswith(('http://', 'https://')):
         return loc
     # quote: i nomi dal downloader sono ASCII, ma la colonna si compila anche a
@@ -495,9 +533,12 @@ def riga(e, today, hub=None):
     color, tint, ink = COLORS.get(slug, COLORS['altro'])
     ongoing = e['d_start'] < today
     anchor = e.get('anchor', '')
+    # cover = l'originale, che serve al link "Locandina" (si apre grande nel
+    # riquadro sopra la pagina). mini = quello che va nel francobollo da 52px.
     cover = loc_path(e['loc'])
-    thumb = (f'<img class="ev-thumb" src="{cover}" alt="" loading="lazy" decoding="async">'
-             if cover else f'<span class="ev-thumb is-ph" aria-hidden="true">{cat_icon}</span>')
+    thumb_src = loc_path(e['loc'], mini=True)
+    thumb = (f'<img class="ev-thumb" src="{thumb_src}" alt="" loading="lazy" decoding="async">'
+             if thumb_src else f'<span class="ev-thumb is-ph" aria-hidden="true">{cat_icon}</span>')
 
     # La data sta già nell'intestazione del giorno: qui restano luogo, durata,
     # orario ed età, cioè quello che serve per decidere in un colpo d'occhio.
@@ -600,7 +641,13 @@ def hl_card(e, eager=False):
     l'elemento LCP, quindi il lazy loading la rallenterebbe soltanto."""
     slug, cat_icon, catlabel = bucket(e)
     color, tint, ink = COLORS.get(slug, COLORS['altro'])
-    cover = loc_path(e['loc'])
+    # Anche le corsie prendono la miniatura: sono le PRIME immagini della
+    # pagina - misurate, chi apre eventi.html e non scorre ne scarica 4, e sono
+    # queste - quindi stanno sul percorso critico due volte, per la banda e per
+    # il primo disegno. La copertina e' 262px larga e ritagliata a 130 di
+    # altezza: una miniatura da 400 ci sta, su schermi molto densi si ammorbidisce
+    # un po' ed e' un prezzo che si paga volentieri.
+    cover = loc_path(e['loc'], mini=True)
     load = ('loading="eager" fetchpriority="high"' if eager
             else 'loading="lazy"')
     img = (f'<img src="{cover}" alt="" {load} decoding="async">'
@@ -3308,6 +3355,9 @@ def _com_cat(e, salita=''):
     slug, _icona, _lab = bucket(e)
     color, tint, ink = COLORS.get(slug, COLORS['altro'])
     stile = f'--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}'
+    # cover resta l'ORIGINALE perche' e' la chiave del confronto qui sotto:
+    # `salita` arriva da _com_poster_pagina(), che ragiona sugli originali. La
+    # miniatura e' solo quello che finisce nel src.
     cover = loc_path(e.get('loc'))
     if cover and cover == salita:
         # Gia' in cima alla pagina, grande. Qui sotto sarebbe un doppione, e
@@ -3315,7 +3365,7 @@ def _com_cat(e, salita=''):
         # dodici sono "Cultura", quindi sarebbero sette quadrati identici.
         return stile, ''
     if cover:
-        thumb = (f'<img class="com-th" src="{esc(cover)}" alt="" '
+        thumb = (f'<img class="com-th" src="{esc(loc_path(e.get("loc"), mini=True))}" alt="" '
                  f'loading="lazy" decoding="async" width="56" height="56">')
     else:
         # Icona autoconclusiva e non quella di categoria: le icone di categoria

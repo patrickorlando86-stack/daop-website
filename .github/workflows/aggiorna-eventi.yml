@@ -40,6 +40,19 @@ jobs:
           cache: npm
           cache-dependency-path: tests/package-lock.json
 
+      - name: Dipendenze Python
+        run: pip install --quiet Pillow
+
+      - name: Genera miniature
+        # Ridimensiona le locandine nuove per gli ELENCHI e le mette in git.
+        # Gira PRIMA di genera_eventi.py: quello guarda se il file esiste per
+        # decidere se puntarci, quindi una locandina arrivata stanotte entra
+        # nelle pagine gia' con la sua miniatura.
+        #
+        # Se una singola immagine non si scarica non fallisce niente:
+        # loc_path() ripiega sull'originale e la pagina esce comunque.
+        run: python scripts/genera_miniature.py
+
       - name: Genera eventi
         # NON passiamo piu' EVENTI_CSV_URL: quel secret (CSV "Pubblica sul web")
         # veniva servito in cache da Google e faceva rigenerare dati vecchi. Lo
@@ -78,7 +91,7 @@ jobs:
                 sagre-provincia-*.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
-                eventi/ rubriche/"
+                eventi/ rubriche/ assets/miniature/"
           if [ -n "$(git status --porcelain $FILE)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"

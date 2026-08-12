@@ -112,6 +112,36 @@ Se metti l'etichetta, il colore della riga deve essere il suo: quei gruppi
 appiattivano il colore su quello del gruppo e si leggeva "SPETTACOLO" scritto
 nell'arancione delle sagre.
 
+### Le locandine: due misure, due posti
+
+Le immagini stanno nel bucket Supabase, **piano gratuito, tetto 5 GB di traffico
+al mese**. L'08/08/2026 sono uscite da git ed è successo questo: il traffico è
+passato da ~10 a ~250 MB al giorno, cioè una proiezione a ~6,4 GB — le
+locandine si sarebbero spente da sole verso il 26 del mese, tutte insieme e
+senza che niente diventasse rosso.
+
+Da qui la regola: **negli elenchi va la miniatura, l'originale solo dove
+l'immagine si guarda.**
+
+| dove | cosa | perché |
+|---|---|---|
+| righe di agenda, comune, landing (50-60px) | `/assets/miniature/*.webp` | ~100 per sessione |
+| copertine delle corsie (262px) | `/assets/miniature/*.webp` | sono le prime 4 immagini della pagina |
+| link "Locandina", scheda evento, JSON-LD | originale su Supabase | lì si legge davvero |
+
+Le miniature stanno **in git** (~25 KB l'una): il conto che aveva fatto uscire
+le locandine — 190 KB × ~1800 l'anno = 340 MB — a un settimo del peso non si
+ripresenta, e GitHub Pages non ha tetto di banda.
+
+`loc_path(loc, mini=True)` guarda se il file esiste su disco e **ripiega
+sull'originale** se non c'è: una locandina arrivata stanotte non ha ancora la
+sua miniatura e la pagina esce comunque. `scripts/genera_miniature.py` le
+genera (serve Pillow e la rete), gira in CI prima di `genera_eventi.py` e
+lavora solo sulle nuove.
+
+`centri-estivi.html` non le usa ancora: ha un generatore suo e le sue locandine
+non passano da `data/eventi.json`.
+
 ## Prestazioni: `eventi.html` è il caso difficile
 
 294 schede, ~11.000 nodi, 1,4 MB. Convenzioni misurate (Chromium, viewport
