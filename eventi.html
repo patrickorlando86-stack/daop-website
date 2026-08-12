@@ -6952,7 +6952,7 @@ document.addEventListener('DOMContentLoaded', function () {
           !hl.querySelector('.ev-hl-block:not(.is-hidden)'));
       }
       empty.style.display = visible === 0 ? 'block' : 'none';
-      if (count) count.textContent = visible + (visible === 1 ? ' evento in agenda' : ' eventi in agenda');
+      if (count) count.textContent = visible + (visible === 1 ? ' evento ' : ' eventi ') + ambito();
       if (vista === 'calendario') disegnaCalendario(f, term);
     }
 
@@ -7003,6 +7003,19 @@ document.addEventListener('DOMContentLoaded', function () {
       const primo = new Date(calMese.getFullYear(), calMese.getMonth(), 1);
       const ultimo = new Date(calMese.getFullYear(), calMese.getMonth() + 1, 0, 23, 59, 59, 999);
       return copre(card, primo < oggi ? oggi : primo, ultimo);
+    }
+
+    // Il numero in cima e' lo stesso contatore per le due viste, ma non conta la
+    // stessa cosa: in calendario l'agenda e' ristretta al mese in vista, o al
+    // giorno scelto. Scritto "in agenda" anche li' faceva sembrare cancellati
+    // gli eventi dei mesi dopo (287 in agenda, 222 ad agosto): sono solo fuori
+    // dalla finestra che stai guardando. L'anno si scrive solo se non e' questo.
+    function ambito() {
+      if (vista !== 'calendario' || !calMese) return 'in agenda';
+      const mese = MESI[calMese.getMonth()];
+      const anno = calMese.getFullYear() === new Date().getFullYear() ? '' : ' ' + calMese.getFullYear();
+      if (calGiorno) return 'il ' + Number(calGiorno.slice(8)) + ' ' + mese + anno;
+      return (/^[aeiou]/.test(mese) ? 'ad ' : 'a ') + mese + anno;
     }
 
     function disegnaCalendario(f, term) {
