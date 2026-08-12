@@ -31,10 +31,12 @@ che con un buco.
 """
 
 import argparse
+import concurrent.futures
 import io
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -52,9 +54,24 @@ import genera_eventi as G  # noqa: E402  (ROOT deve stare nel path prima)
 # ritagli decorativi dietro al testo, non la locandina che si va a leggere.
 LATO = 400
 QUALITA = 72
+# method: quanto si impegna il codificatore WebP. Il 6 e' il massimo e sul
+# primo giro vero e' costato caro - 300 immagini erano ancora in lavorazione
+# dopo 13 minuti. Il 4 produce file praticamente uguali in una frazione del
+# tempo, e qui stiamo comprimendo francobolli, non stampe.
+METODO = 4
 
 DEST = os.path.join(ROOT, "assets", "miniature")
-TIMEOUT = 30
+# Per singola immagine. Era 30: troppo, perche' moltiplicato per le immagini
+# che non rispondono diventa il tempo di tutta la run.
+TIMEOUT = 12
+# Quante scaricare insieme. Il costo dominante e' l'attesa della rete, non la
+# CPU: in parallelo il primo giro passa da una decina di minuti a meno di due.
+PARALLELE = 8
+# Tetto di tempo per l'intero passo. Lo script e' idempotente e riprende da
+# dove ha lasciato, quindi se le immagini arretrate sono tante si spalmano su
+# piu' run invece di tenere fermo l'aggiornamento del sito. Nel frattempo
+# loc_path() ripiega sugli originali: le pagine escono comunque.
+BUDGET_SECONDI = 300
 
 
 def locandine_citate():
@@ -106,8 +123,21 @@ def rimpicciolisci(dati):
         im = im.convert("RGB")
     im.thumbnail((LATO, LATO), Image.LANCZOS)
     fuori = io.BytesIO()
-    im.save(fuori, "WEBP", quality=QUALITA, method=6)
+    im.save(fuori, "WEBP", quality=QUALITA, method=METODO)
     return fuori.getvalue()
+
+
+def una(voce):
+    """Scarica e rimpicciolisce una sola locandina. Torna (nome, dati, errore).
+
+    Gira dentro un thread: qui non si stampa e non si scrive su disco, cosi'
+    l'ordine dell'output resta quello del thread principale."""
+    mini, loc = voce
+    try:
+        originale = scarica(loc)
+        return mini, originale, rimpicciolisci(originale), None
+    except Exception as err:  # rete, immagine corrotta, formato sconosciuto
+        return mini, None, None, err
 
 
 def main():
@@ -128,27 +158,45 @@ def main():
         print("[miniature] nessuna locandina nei dati: non c'e' niente da fare")
         return 0
 
-    fatte = saltate = fallite = 0
+    saltate = [m for m in citate if os.path.exists(os.path.join(DEST, m))
+               and not args.rifai]
+    da_fare = sorted((m, l) for m, l in citate.items() if m not in set(saltate))
+
+    fatte = fallite = 0
     byte_prima = byte_dopo = 0
-    for mini, loc in sorted(citate.items()):
-        percorso = os.path.join(DEST, mini)
-        if os.path.exists(percorso) and not args.rifai:
-            saltate += 1
-            continue
-        try:
-            originale = scarica(loc)
-            piccola = rimpicciolisci(originale)
-        except (urllib.error.URLError, OSError, ValueError) as err:
-            # Non alziamo: una miniatura che manca fa ripiegare loc_path()
-            # sull'originale, che e' pesante ma funziona.
-            print(f"[miniature] salto {loc}: {err}")
-            fallite += 1
-            continue
-        with open(percorso, "wb") as fh:
-            fh.write(piccola)
-        byte_prima += len(originale)
-        byte_dopo += len(piccola)
-        fatte += 1
+    scaduto = False
+    inizio = time.monotonic()
+    if da_fare:
+        print(f"[miniature] {len(da_fare)} da generare, {PARALLELE} alla volta")
+        with concurrent.futures.ThreadPoolExecutor(max_workers=PARALLELE) as pool:
+            futuri = {pool.submit(una, v): v[0] for v in da_fare}
+            try:
+                for f in concurrent.futures.as_completed(futuri):
+                    mini, originale, piccola, err = f.result()
+                    if err:
+                        # Non alziamo: una miniatura che manca fa ripiegare
+                        # loc_path() sull'originale, pesante ma funzionante.
+                        print(f"[miniature] salto {mini}: {err}")
+                        fallite += 1
+                        continue
+                    with open(os.path.join(DEST, mini), "wb") as fh:
+                        fh.write(piccola)
+                    byte_prima += len(originale)
+                    byte_dopo += len(piccola)
+                    fatte += 1
+                    if time.monotonic() - inizio > BUDGET_SECONDI:
+                        scaduto = True
+                        break
+            finally:
+                if scaduto:
+                    # Le rimaste le fa la run successiva: lo script riparte da
+                    # dove ha lasciato, e intanto il sito si aggiorna lo stesso.
+                    for f in futuri:
+                        f.cancel()
+    if scaduto:
+        print(f"[miniature] tempo scaduto dopo {BUDGET_SECONDI}s: le rimanenti "
+              "alla prossima run (nel frattempo le pagine usano gli originali)")
+    saltate = len(saltate)
 
     # Le locandine sparite dal foglio: la miniatura non serve piu'. Non le
     # cancelliamo - le pagine evento restano online anche a edizione conclusa,
