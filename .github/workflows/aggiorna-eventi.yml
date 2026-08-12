@@ -71,6 +71,18 @@ jobs:
         # farlo comparire da solo.
         run: python scripts/genera_rubriche.py
 
+      - name: Genera luoghi
+        # DOPO genera_eventi.py, e non prima: legge data/eventi.json e
+        # data/storico-comuni.json appena riscritti per sapere quanti eventi ha
+        # ospitato ogni posto e cosa c'e' in programma. Girando prima userebbe
+        # l'istantanea di ieri, cioe' scriverebbe "in programma" su cose gia'
+        # passate.
+        #
+        # Il catalogo vero e' il tab "Luoghi" del foglio: se non esiste ancora
+        # la pagina si genera lo stesso con i luoghi che l'agenda conosce, e
+        # non fallisce niente.
+        run: python scripts/genera_luoghi.py
+
       - name: Commit se cambiato
         run: |
           # eventi/ e data/pagine-evento.json vanno inclusi: sono le pagine per
@@ -87,15 +99,25 @@ jobs:
           #   data/pagine-comune.json, data/pagine-landing.json  i registri dei
           #     lastmod: senza, la sitemap dichiara "modificata oggi" a ogni giro.
           #   zone.html, sagre-provincia-*.html  pagine generate come le altre.
+          #   luoghi.html, data/luoghi.json  l'elenco dei posti e l'istantanea
+          #     del catalogo, che fa da ripiego quando il foglio non risponde -
+          #     stessa funzione che data/eventi.json ha per l'agenda.
           FILE="eventi.html index.html centri-estivi.html metodo.html rubriche.html zone.html \
-                sagre-provincia-*.html \
+                luoghi.html sagre-provincia-*.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
-                data/pagine-landing.json data/storico-comuni.json \
+                data/pagine-landing.json data/storico-comuni.json data/luoghi.json \
                 eventi/ rubriche/ assets/miniature/"
-          if [ -n "$(git status --porcelain $FILE)" ]; then
+          # Solo i file che esistono davvero. `git add` su un percorso che non
+          # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
+          # data/luoghi.json nasce solo quando il tab "Luoghi" del foglio
+          # esiste, quindi fino a quel giorno l'elenco ne conterrebbe uno
+          # inesistente. La stessa protezione vale per tutto il resto.
+          PRESENTI=""
+          for f in $FILE; do [ -e "$f" ] && PRESENTI="$PRESENTI $f"; done
+          if [ -n "$(git status --porcelain $PRESENTI)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add $FILE sitemap.xml
+            git add $PRESENTI sitemap.xml
             git commit -m "Aggiornamento automatico eventi"
             git push
           else

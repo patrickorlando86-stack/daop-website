@@ -30,8 +30,13 @@ aggiunta lì compare in ~260 file al primo `python3 scripts/genera_eventi.py`:
 è voluto, ma spiega perché un diff di due righe di CSS tocca l'intero repo.
 Non duplicare quelle regole altrove.
 
-`genera_centri.py` importa `genera_eventi` e usa lo stesso guscio: se cambi il
-CSS, `centri-estivi.html` si allinea solo quando gira **anche** quello script.
+`genera_centri.py` e `genera_luoghi.py` importano `genera_eventi` e usano lo
+stesso guscio: se cambi il CSS, `centri-estivi.html` e `luoghi.html` si allineano
+solo quando girano **anche** quegli script.
+
+`luoghi.html` non ha marker: è generato **per intero**, come le pagine comune e
+le pagine di intenzione. Non c'è nessuna zona scritta a mano da salvare, quindi
+non se ne cerca una: si tocca `scripts/genera_luoghi.py`.
 
 ### GA4 si inizializza in un posto solo
 
@@ -72,9 +77,15 @@ non basta — lo stub che accoda in `dataLayer` esiste da sempre.
 
 ```bash
 python3 scripts/genera_eventi.py      # funziona offline
+python3 scripts/genera_luoghi.py      # funziona offline, DOPO genera_eventi.py
 python3 scripts/genera_centri.py      # richiede rete
 python3 scripts/genera_rubriche.py    # legge contenuti/rubriche/
 ```
+
+`genera_luoghi.py` va **dopo** `genera_eventi.py`, non prima: legge
+`data/eventi.json` e `data/storico-comuni.json` appena riscritti per sapere cosa
+c'è in programma in ogni posto. Girando prima scriverebbe "in programma" su
+eventi già passati.
 
 `genera_eventi.py` legge il foglio Google e, se non lo raggiunge, ripiega da
 solo su `data/eventi.json` (l'istantanea committata) e va avanti. Gli altri no:
@@ -135,6 +146,14 @@ le pagine `sagre-provincia-*` hanno solo la ricerca: lì gli eventi sono tutti
 "Sagre & Feste". Sulle pagine di intenzione non c'è mai il filtro "quando":
 quelle pagine *sono* già una risposta a quando.
 
+E su `luoghi.html` non c'è la tendina "solo dove c'è qualcosa in programma": quella
+è la domanda a cui risponde `eventi.html`, che la fa meglio perché lì l'evento
+*è* la riga. C'è anche un motivo di misura — quattro tendine sul telefono non
+stanno in una riga, e la barra appiccicosa passava da 109 a 156px. Chrome
+dimensiona una `<select>` sull'opzione **più lunga**, non su quella scelta: è per
+questo che l'etichetta del filtro ("Parchi") non è quella della riga ("Parco &
+Giardino").
+
 ### La categoria si scrive, non solo si colora
 
 Le righe portano `--cat-color/--cat-tint/--cat-ink`, ma un blu e un verde senza
@@ -146,6 +165,64 @@ gruppo mescola più categorie**: dentro una manifestazione uniforme ripetere
 Se metti l'etichetta, il colore della riga deve essere il suo: quei gruppi
 appiattivano il colore su quello del gruppo e si leggeva "SPETTACOLO" scritto
 nell'arancione delle sagre.
+
+### `luoghi.html`: una pagina, non 800 schede
+
+La domanda di partenza era "800 luoghi, faccio 800 schede?". No. Il sitemap ha
+270 URL: 800 pagine su template identico col nome del posto scambiato sarebbero i
+tre quarti del sito fatti delle pagine più deboli che abbiamo, cioè la
+definizione che Google dà dello *scaled content abuse*. E la penalizzazione non
+resta lì: si porta dietro il dominio, cioè `eventi.html`.
+
+Quindi una pagina sola con i filtri, come l'agenda. **Una scheda propria
+(`/luoghi/<slug>.html`) si scrive quando c'è qualcosa che sta solo lì** — foto
+nostre, orari verificati, dov'è l'ombra ad agosto, dove si cambia il pannolino —
+e quel momento coincide quasi sempre col luogo che diventa premium, perché è il
+gestore a dare il materiale. Il campo nel foglio c'è già; la generazione delle
+schede singole no, e si aggiunge quando le schede da scrivere esistono.
+
+Due sorgenti che **si sommano**, non che si escludono:
+
+| sorgente | cosa porta |
+|---|---|
+| tab `Luoghi` del foglio (ripiego: `data/luoghi.json`) | il catalogo: le righe scelte a mano, le schede curate |
+| `data/eventi.json` + `data/storico-comuni.json` | i posti che l'agenda conosce, **quanti eventi** ci sono passati e **cosa c'è in programma** |
+
+Si fondono per nome normalizzato + comune. Il catalogo vince sui campi che
+dichiara; l'agenda aggiunge quello che il catalogo non può sapere. Senza il tab
+la pagina esce lo stesso, con i ~170 posti che l'agenda già conosce: è il motivo
+per cui non è mai vuota.
+
+Colonne del tab (i nomi sono tollerati in più grafie, vedi `COLONNE`): `Nome`,
+`Comune`, `Provincia`, `Categoria`, `Indirizzo`, `Riparo`, `Prezzo`, `Età`,
+`Descrizione`, `Orari`, `Sito`, `Telefono`, `Foto`, `Lat`, `Lon`, `Premium`,
+`A cura di`, `Offerta`, `In evidenza`, `Pubblica`.
+
+Un "luogo" che si chiama come il suo comune, una frazione, uno stand
+gastronomico e un "Centro Città" **non entrano**: sono righe del foglio eventi in
+cui il posto preciso non si sapeva, e in elenco facevano voci che non dicevano
+niente sotto un'intestazione che l'aveva appena detto.
+
+### Il premium aggiunge, non riordina
+
+È la stessa regola già presa su "Adatto Famiglie": un elenco non si spacca in due
+quando la separazione smentisce il criterio con cui è fatto. Se la riga di chi
+paga stesse più in alto, il resto diventerebbe la serie B di una selezione che
+abbiamo fatto noi.
+
+Quindi la scheda premium cambia **cosa** c'è dentro (foto, orari, contatti,
+offerta) e non **dove** sta la riga: resta al suo posto alfabetico, nel suo
+comune. L'unico spazio in cui la posizione si compra è il blocco "In evidenza" in
+cima, che è separato e lo dichiara — e le stesse schede restano comunque
+nell'elenco sotto.
+
+Non è solo stile: **art. 22 comma 4-bis del Codice del consumo** (Omnibus, D.Lgs.
+26/2023) impone di dichiarare i parametri di ordinamento di una lista
+ricercabile, e omettere che una posizione è stata pagata sta nella lista nera
+delle pratiche ingannevoli *in ogni caso*. Da qui il blocco `#come-ordiniamo`,
+che non è decorativo: se cambi l'ordinamento, cambia anche quel testo.
+`tests/luoghi.js` controlla l'ordine alfabetico proprio per questo — se un giorno
+qualcuno ordinasse "premium prima", quella prova diventa rossa.
 
 ### Le locandine: due misure, due posti
 
@@ -176,6 +253,10 @@ lavora solo sulle nuove.
 
 `centri-estivi.html` non le usa ancora: ha un generatore suo e le sue locandine
 non passano da `data/eventi.json`.
+
+`luoghi.html` non mette **nessuna** immagine nelle righe non premium: 170 foto
+diverse da 34px sono lo stesso conto sbagliato, e un'icona di categoria si legge
+meglio. La foto compare solo nelle schede curate, dove è il gestore a fornirla.
 
 ## Prestazioni: `eventi.html` è il caso difficile
 
@@ -215,6 +296,13 @@ proprie:
 - **Le locandine sono su Supabase e l'ambiente di sviluppo le blocca.** Gli
   screenshot vengono con i riquadri grigi: va bene per confrontare il layout,
   non per giudicare le immagini.
+- **GA4 non si prova da `file://`.** Le pagine generate linkano gli script alla
+  radice (`/assets/js/cookie-consent.js`), che da `file://` diventa
+  `file:///assets/...` e risponde 404: `window.daopConsensoAnalytics` resta
+  `undefined` e sembra che il tracciamento sia rotto. Non lo è — le pagine
+  scritte a mano usano percorsi relativi e "funzionano", il che rende il
+  confronto ancora più ingannevole. Per provarlo davvero serve un server:
+  `python3 -m http.server 8899` e si apre `http://localhost:8899/…`.
 
 ## Verifiche prima di pubblicare
 
@@ -232,9 +320,10 @@ cd tests && npm install && npm test                 # prove di fumo (Playwright)
 Riferimento all'11/08/2026: 289 pagine, 532 Event, 8 avvisi noti, 0 errori.
 
 `tests/` copre proprio quello che l'altro non vede — apertura righe, link
-calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-`,
-più due convenzioni di prestazione che qualcuno smonterebbe per distrazione
-(`content-visibility`, l'href del calendario che resta la sola base). Gira sui
+calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-` e
+`#lg-`, più le convenzioni che qualcuno smonterebbe per distrazione
+(`content-visibility`, l'href del calendario che resta la sola base, e su
+`luoghi.html` l'ordine alfabetico che il premium non deve scavalcare). Gira sui
 file veri appena generati: non c'è un ambiente di prova. In un ambiente che ha
 già un Chromium, `CHROMIUM_PATH=/percorso/chrome npm test` evita lo scaricamento.
 

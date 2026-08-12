@@ -15,7 +15,7 @@ const { avvia } = require('./_aiuto');
   let passati = 0;
   const falliti = [];
   try {
-    for (const suite of [require('./agenda'), require('./landing')]) {
+    for (const suite of [require('./agenda'), require('./landing'), require('./luoghi')]) {
       const r = await suite(browser);
       passati += r.passati;
       falliti.push(...r.falliti);
