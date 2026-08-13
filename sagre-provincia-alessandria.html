@@ -87,6 +87,11 @@
      la stessa specificita' ma sta in PAGINA_CSS, che viene dopo. */
   .page-hero a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
   .page-hero p a{color:inherit}
+  /* Un link che occupa da solo tutto il suo <p> non e' una parola dentro una
+     frase: e' un richiamo, e va trattato come tale. E' la differenza fra la riga
+     del Ferragosto (<p><a>…</a></p>, oro) e il rimando ai centri estivi, che sta
+     dentro una frase e resta del colore del discorso. */
+  .page-hero p > a:only-child{color:var(--gold)}
 
   /* ── COMMONS ── */
   section{padding:100px 24px}
