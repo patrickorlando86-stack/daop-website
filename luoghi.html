@@ -645,6 +645,13 @@
    barra. Si limita e si taglia con i puntini - il valore scelto resta
    leggibile, e l'elenco aperto lo disegna il browser alla sua larghezza (sul
    telefono e' un pannello a tutto schermo). */
+/* I filtri NON si allungano per riempire la riga. Con il flex-grow che eredita
+   dall'agenda, l'ultimo rimasto da solo sulla seconda riga si stirava a tutta
+   larghezza: "Età" diventava una pillola da 380px per una parola di tre lettere,
+   e sembrava un campo di ricerca invece di un menu. Larghezza naturale, e la
+   riga finisce dove finiscono i controlli. */
+#lg-toolbar .ev-select{flex:0 1 auto}
+
 /* Il campo comune e' un <input>, non una <select>: veste la stessa pillola ma
    gli servono le cose che .ev-select da' per scontate su un menu. */
 input.ev-select.is-comune{max-width:150px;text-overflow:ellipsis;cursor:text;
