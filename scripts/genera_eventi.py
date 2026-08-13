@@ -1929,11 +1929,17 @@ def blocco_ginetto(citta=""):
     italiano invece di riempire un modulo (con l'esempio, che vale piu' della
     parola "conversazionale"), e che dietro c'e' una selezione fatta a mano.
 
-    "La prima ... per le famiglie di Alessandria e Asti" e non "per le
-    famiglie": un primato senza confini non lo possiamo dimostrare, e un
-    superlativo che non si dimostra e' esattamente il terreno su cui il Codice
-    del consumo considera ingannevole una vanteria. Circoscritto al territorio
-    e' vero, verificabile e dice di piu': e' il nostro."""
+    "La prima ... per le famiglie di <province>" e non "per le famiglie": un
+    primato senza confini non lo possiamo dimostrare, e un superlativo che non
+    si dimostra e' esattamente il terreno su cui il Codice del consumo considera
+    ingannevole una vanteria. Circoscritto al territorio e' vero, verificabile e
+    dice di piu': e' il nostro.
+
+    Le province NON sono scritte a mano: escono da PROVINCE_PUBBLICATE, come i
+    filtri e le liste. E' l'unico modo perche' aggiungerne una non lasci indietro
+    proprio la frase che dichiara dove arriviamo - il commento in cima a
+    eventi.html avverte che "Alessandria e Asti" va cercato a mano in TUTTO il
+    file, e questo e' un posto in meno in cui cercarlo."""
     # a_citta() mette la d eufonica: "vicino ad Acqui Terme", non "a Acqui".
     dove = " vicino " + esc(a_citta(citta)) if citta else " con i bambini"
     return f"""<section class="bg-cream ev-ginetto">
@@ -1942,7 +1948,7 @@ def blocco_ginetto(citta=""):
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
       <div>
         <h3>Cerchi altro da fare{dove}?</h3>
-        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di Alessandria e Asti: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di {province_in_elenco(PROVINCE_PUBBLICATE)}: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
       </div>
     </div>
   </div>
