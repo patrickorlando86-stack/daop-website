@@ -77,6 +77,17 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
+     fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
+     nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
+     sta qui una volta per tutte, e vale su tutte le pagine generate perche' il
+     guscio copia questo <style>.
+     Oro per un link che sta da solo — e' un richiamo, e l'oro e' gia' il colore
+     dei richiami dell'hero; ereditato dentro un <p>, dove il link fa parte del
+     discorso e non deve gridare. Le briciole non si toccano: `.ev-crumb a` ha
+     la stessa specificita' ma sta in PAGINA_CSS, che viene dopo. */
+  .page-hero a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+  .page-hero p a{color:inherit}
 
   /* ── COMMONS ── */
   section{padding:100px 24px}
