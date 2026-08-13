@@ -535,6 +535,27 @@ def unisci(catalogo, agenda):
             consigliato=False, evidenza=False, codice='', fonte='agenda', _grezzo=None)
 
     elenco = [d for d in fuori.values() if d['nome'] and d['comune']]
+
+    # Un comune scritto in due modi e' due comuni. Nel foglio convivono
+    # "Montegrosso d'Asti" e "Montegrosso D'Asti": in pagina uscivano due gruppi
+    # separati, e - peggio - due <h2> con lo STESSO id (c-montegrosso-d-asti),
+    # che e' HTML non valido e manda l'ancora sul primo dei due. Si tiene la
+    # grafia piu' usata; a pari merito la prima in ordine alfabetico, cosi' la
+    # scelta non cambia da una run all'altra.
+    grafie = collections.defaultdict(collections.Counter)
+    for d in elenco:
+        grafie[(d['prov'], G.slugify(d['comune']))][d['comune']] += 1
+    unificati = 0
+    for d in elenco:
+        chiave = (d['prov'], G.slugify(d['comune']))
+        if len(grafie[chiave]) > 1:
+            buona = sorted(grafie[chiave].items(), key=lambda x: (-x[1], x[0]))[0][0]
+            if d['comune'] != buona:
+                unificati += 1
+            d['comune'] = buona
+    if unificati:
+        print(f"[genera_luoghi] {unificati} righe avevano il comune scritto in un'altra grafia")
+
     for d in elenco:
         d['slug'] = 'lg-' + G.slugify(f"{d['nome']} {d['comune']}")[:70]
     # Slug duplicati: non dovrebbero esistere dopo _key(), ma un'ancora ripetuta
@@ -556,6 +577,13 @@ LUOGHI_CSS = """
 .lg-wrap{max-width:940px;margin:0 auto;padding:0 20px 40px}
 @media(max-width:600px){.lg-wrap{padding:0 16px 32px}}
 .lg-intro{font-size:1.02rem;line-height:1.7;color:var(--text-mid);margin:0 0 6px}
+/* Chrome dimensiona una <select> sull'opzione PIU' LUNGA: con dentro
+   "Castelceriolo (Alessandria)" la tendina dei comuni da sola chiedeva mezza
+   barra. Si limita e si taglia con i puntini - il valore scelto resta
+   leggibile, e l'elenco aperto lo disegna il browser alla sua larghezza (sul
+   telefono e' un pannello a tutto schermo). */
+.ev-select.is-comune{max-width:150px;text-overflow:ellipsis}
+@media(max-width:600px){.ev-select.is-comune{max-width:126px}}
 .lg-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:10px 0 0;min-height:1em}
 .lg-reset{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-mid);
   background:none;border:0;border-bottom:1px solid rgba(45,74,92,0.25);padding:0 0 1px;cursor:pointer}
@@ -726,6 +754,7 @@ LUOGHI_JS = r"""<script>
     var visti = 0;
     righe.forEach(function (r) {
       var ok = (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
+               (!f.comune || f.comune === 'all' || r.dataset.comune === f.comune) &&
                (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
                (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
                (!t || indice().get(r).indexOf(t) > -1);
@@ -745,11 +774,32 @@ LUOGHI_JS = r"""<script>
     if (vuoto) vuoto.hidden = visti !== 0;
   }
 
+  // La tendina dei comuni segue quella delle province: scegliendo "Prov. AL"
+  // restano i comuni di AL. Senza, si poteva scegliere "Prov. AT" + un comune
+  // di Alessandria e ottenere un elenco vuoto senza capire perche' - due
+  // filtri che si contraddicono sono peggio di un filtro in meno. Se il comune
+  // gia' scelto non appartiene piu' alla provincia, si azzera invece di
+  // restare selezionato e invisibile.
+  var selProv = bar.querySelector('[data-campo="prov"]');
+  var selCom = bar.querySelector('[data-campo="comune"]');
+  function accordaComuni() {
+    if (!selProv || !selCom) return;
+    var p = selProv.value;
+    [].forEach.call(selCom.querySelectorAll('optgroup'), function (og) {
+      og.hidden = !(p === 'all' || og.dataset.prov === p);
+    });
+    var scelto = selCom.selectedOptions[0];
+    if (scelto && scelto.parentNode.hidden) selCom.value = 'all';
+  }
+  if (selProv) selProv.addEventListener('change', accordaComuni);
+  accordaComuni();
+
   if (q) q.addEventListener('input', applica);
   sel.forEach(function (s) { s.addEventListener('change', applica); });
   if (reset) reset.addEventListener('click', function () {
     if (q) q.value = '';
     sel.forEach(function (s) { s.value = 'all'; });
+    accordaComuni();
     applica();
     bar.scrollIntoView({ block: 'start' });
   });
@@ -940,7 +990,7 @@ def riga(l, oggi):
     classe = f'lg-row cat-{l["cat"]}' + (' is-prem' if l.get('premium') else '')
     return (
         f'<details class="{classe}" id="{l["slug"]}" data-cat="{l["cat"]}" '
-        f'data-prov="{l["prov"].lower()}" '
+        f'data-prov="{l["prov"].lower()}" data-comune="{G.slugify(l["comune"])}" '
         f'data-etamin="{l.get("eta_min", 0)}" data-etamax="{l.get("eta_max", 99)}">'
         f'<summary>'
         f'<span class="lg-ico" aria-hidden="true">{e(l.get("icona") or "📍")}</span>'
@@ -981,6 +1031,27 @@ def filtri(elenco):
         opts = "".join(f'<option value="{p.lower()}">Prov. {p}</option>' for p in prov)
         campi.append('<select class="ev-select" data-campo="prov" aria-label="Filtra per provincia">'
                      f'<option value="all">Prov.</option>{opts}</select>')
+
+    # Il comune: 298 voci, quindi RAGGRUPPATE per provincia con <optgroup>. Una
+    # tendina piatta da 298 righe non si scorre, e il raggruppamento lo fa il
+    # browser da solo, senza JavaScript e con il selettore nativo del telefono.
+    # Il JS in fondo la lega al filtro provincia: scegliendo AL restano i comuni
+    # di AL, se no si potrebbe scegliere "Prov. AT" + "Acqui Terme" e ottenere
+    # un elenco vuoto senza capire perche'.
+    per_prov = collections.OrderedDict()
+    for l in elenco:
+        per_prov.setdefault(l['prov'], {}).setdefault(G.slugify(l['comune']), l['comune'])
+    tutti = sum(len(v) for v in per_prov.values())
+    if tutti > 1:
+        gruppi = []
+        for p in sorted(per_prov):
+            voci = "".join(
+                f'<option value="{s}">{G.esc(n)}</option>'
+                for s, n in sorted(per_prov[p].items(), key=lambda x: _alfabetico(x[1])))
+            etichetta = G.esc(G.PROVINCE_NOMI.get(p, p) or 'Altrove')
+            gruppi.append(f'<optgroup label="{etichetta}" data-prov="{p.lower()}">{voci}</optgroup>')
+        campi.append('<select class="ev-select is-comune" data-campo="comune" aria-label="Filtra per comune">'
+                     f'<option value="all">Comune</option>{"".join(gruppi)}</select>')
 
     cats = {}
     for l in elenco:
@@ -1043,9 +1114,14 @@ def gruppi_comune(elenco, oggi):
         link = ''
         if os.path.exists(os.path.join(ROOT, 'eventi', 'comune', f'{pag}.html')):
             link = f'<a href="/eventi/comune/{pag}.html">Eventi a {G.esc(comune)} →</a>'
+        # La provincia sta NELL'id, non solo nel testo: "Ronco Scrivia" compare
+        # in AL e in GE (nel foglio uno dei due e' un refuso, ma non tocca a noi
+        # indovinare quale), e due <h2> con lo stesso id sono HTML non valido -
+        # l'ancora porterebbe sempre al primo dei due.
+        ancora = f"c-{prov.lower()}-{pag}" if prov else f"c-{pag}"
         fuori.append(
             f'<section class="lg-grp">'
-            f'<div class="lg-grp-h"><h2 id="c-{pag}">{G.esc(comune)}</h2>'
+            f'<div class="lg-grp-h"><h2 id="{ancora}">{G.esc(comune)}</h2>'
             f'<span>{prov} · {n} {"luogo" if n == 1 else "luoghi"}</span>{link}</div>'
             + "".join(riga(l, oggi) for l in righe) + '</section>')
     return "\n".join(fuori)

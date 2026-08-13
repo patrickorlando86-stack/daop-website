@@ -86,6 +86,46 @@ module.exports = async function luoghi(browser) {
       .every((g) => g.hidden === !g.querySelector('.lg-row[data-cat]:not([hidden])'))),
     'i gruppi comune rimasti vuoti spariscono con la loro intestazione');
 
+  // Il comune: 298 voci raggruppate per provincia, e le due tendine devono
+  // andare d'accordo. Due filtri che si contraddicono ("Prov. CN" + un comune
+  // di Alessandria) danno un elenco vuoto senza spiegare perche'.
+  const com = page.locator('#lg-toolbar [data-campo="comune"]');
+  if (await com.count()) {
+    await page.selectOption('#lg-toolbar [data-campo="cat"]', 'all');
+    const primo = await com.evaluate((s) => s.querySelector('optgroup option').value);
+    await page.selectOption('#lg-toolbar [data-campo="comune"]', primo);
+    await page.waitForTimeout(250);
+    const n2 = await visibili(page);
+    r.ok(n2 > 0 && n2 < tot, `filtro comune "${primo}": ${n2}/${tot}`);
+    r.ok(await page.evaluate((c) =>
+      [...document.querySelectorAll('.lg-row[data-cat]:not([hidden])')]
+        .every((l) => l.dataset.comune === c), primo), 'resta solo quel comune');
+
+    const altra = await page.evaluate((c) => {
+      const s = document.querySelector('[data-campo="comune"]');
+      const mia = s.querySelector(`option[value="${c}"]`).parentNode.dataset.prov;
+      const og = [...s.querySelectorAll('optgroup')].find((o) => o.dataset.prov !== mia);
+      return og ? og.dataset.prov : null;
+    }, primo);
+    if (altra) {
+      await page.selectOption('#lg-toolbar [data-campo="prov"]', altra);
+      await page.waitForTimeout(250);
+      r.ok(await com.inputValue() === 'all',
+        'cambiando provincia il comune incompatibile si azzera, non resta scelto e invisibile');
+      r.ok(await page.evaluate(() =>
+        [...document.querySelectorAll('[data-campo="comune"] optgroup')]
+          .filter((o) => !o.hidden).length === 1),
+        'restano i comuni della sola provincia scelta');
+      await page.selectOption('#lg-toolbar [data-campo="prov"]', 'all');
+    }
+    await page.selectOption('#lg-toolbar [data-campo="comune"]', 'all');
+    // Il filtro categoria era stato azzerato qui sopra per isolare il comune:
+    // va rimesso, se no la prova che li somma parte da uno stato diverso da
+    // quello che crede.
+    await page.selectOption('#lg-toolbar [data-campo="cat"]', cat);
+    await page.waitForTimeout(200);
+  }
+
   const prov = await page.locator('#lg-toolbar [data-campo="prov"]');
   if (await prov.count()) {
     const p = await prov.evaluate((s) => s.options[1].value);
@@ -144,6 +184,19 @@ module.exports = async function luoghi(browser) {
   // #come-ordiniamo promette a chi legge.
   r.ok(await page.locator('#come-ordiniamo').count() === 1,
     'la pagina dichiara come e\' ordinata (art. 22 Codice del consumo)');
+
+  // Due id uguali sono HTML non valido e mandano ogni ancora sul primo dei due.
+  // Ci si arriva dai DATI, non dal codice: un comune scritto in due grafie
+  // ("Montegrosso d'Asti" e "Montegrosso D'Asti") o lo stesso nome in due
+  // province ("Ronco Scrivia" in AL e in GE). Non si vede guardando la pagina.
+  r.ok(await page.evaluate(() => {
+    const visti = new Set();
+    for (const e of document.querySelectorAll('[id]')) {
+      if (visti.has(e.id)) return false;
+      visti.add(e.id);
+    }
+    return true;
+  }), 'nessun id ripetuto in pagina');
   r.ok(await page.evaluate(() => {
     const norm = (s) => s.trim().toLowerCase().normalize('NFD').replace(/[^a-z0-9 ]/g, '');
     return [...document.querySelectorAll('.lg-grp')].every((g) => {
