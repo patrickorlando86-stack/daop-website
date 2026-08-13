@@ -193,12 +193,40 @@ tre quarti del sito fatti delle pagine più deboli che abbiamo, cioè la
 definizione che Google dà dello *scaled content abuse*. E la penalizzazione non
 resta lì: si porta dietro il dominio, cioè `eventi.html`.
 
-Quindi una pagina sola con i filtri, come l'agenda. **Una scheda propria
-(`/luoghi/<slug>.html`) si scrive quando c'è qualcosa che sta solo lì** — foto
-nostre, orari verificati, dov'è l'ombra ad agosto, dove si cambia il pannolino —
-e quel momento coincide quasi sempre col luogo che diventa premium, perché è il
-gestore a dare il materiale. Il campo nel foglio c'è già; la generazione delle
-schede singole no, e si aggiunge quando le schede da scrivere esistono.
+Quindi una pagina sola con i filtri, come l'agenda.
+
+**Le pagine dedicate (`/luoghi/<slug>.html`) si fanno per i clienti che pagano,
+quando ci saranno.** Deciso il 13/08/2026, ed è una decisione editoriale, non una
+regola automatica: nessuna soglia, nessun flag che le generi in massa. Si scrive
+la pagina di quel cliente, una alla volta, e finisce lì.
+
+Regge perché il rischio dello *scaled content abuse* è **di volume**: erano le
+800 pagine su template identico a essere un problema, non quattro o quaranta
+pagine con dentro materiale vero. Quello che resta da guardare non è quante sono,
+è **quanto c'è dentro ognuna**: essendo un lavoro a mano, lo si vede scrivendola.
+
+Era stata proposta una soglia automatica (descrizione ≥ 600 caratteri, ≥ 3 foto)
+e scartata. Utile però il motivo per cui non avrebbe funzionato, misurato sul
+catalogo vero:
+
+| | descrizione (mediana) | foto (media) | con orari |
+|---|---|---|---|
+| le 4 premium | 320 car. | 2,0 | 1 su 4 |
+| le 10 col bollino | 259 car. | 1,3 | 6 su 10 |
+| le altre 809 | 148 car. | 1,0 | 265 |
+
+Chi paga ha in effetti il doppio di testo degli altri, ma **il doppio di poco è
+ancora poco**: 320 caratteri sono tre righe. E in tutto il catalogo solo **3
+righe su 823 hanno almeno tre foto** — con quella soglia oggi non nascerebbe
+nessuna pagina, nemmeno per il cliente più fornito (5 foto ma 553 caratteri).
+
+Quindi la cosa da chiedere a un cliente non sono i soldi, sono **le foto e mezza
+cartella di testo**: è quello che manca per riempire una pagina, e vale come lista
+della spesa per il modulo dei materiali.
+
+Da sapere, se un giorno l'elenco sembrasse strano: ai bordi *pagare* e *avere
+materiale* non coincidono. Le descrizioni più lunghe del catalogo (una da 990
+caratteri, due sopra i 600) sono di posti che non pagano e non hanno il bollino.
 
 Due sorgenti, e **non pesano uguale**:
 
