@@ -335,6 +335,126 @@ def _alfabetico(s):
     return re.sub(r"[^a-z0-9 ]", "", t)
 
 
+# ── I nomi ───────────────────────────────────────────────────────────────────
+#
+# Nel foglio 126 nomi su 823 sono scritti TUTTI IN MAIUSCOLO, e in elenco
+# stonano: "SCUOLA PARITARIA SACRO CUORE" sopra "Studio Danza My Balance" sembra
+# un errore o un grido. Si normalizzano quelli, e SOLO quelli - un nome che ha
+# gia' una minuscola e' scritto come lo vuole chi lo porta ("ToBE Together",
+# "iPlay"), e riscriverlo sarebbe peggio del disordine.
+#
+# Non si sceglie il minuscolo (sui nomi propri e' sbagliato) e non si sceglie il
+# maiuscolo (urla, e a Ctrl+F non cambia niente): si sceglie la maiuscola per
+# parola, che e' come sono gia' scritti gli altri 697.
+
+# Parole che restano minuscole quando non aprono il nome.
+MINUSCOLE = {
+    'di', 'da', 'de', 'del', 'dello', 'della', 'dei', 'degli', 'delle', 'dal',
+    'dalla', 'dallo', 'dai', 'e', 'ed', 'il', 'lo', 'la', 'i', 'gli', 'le',
+    'un', 'una', 'in', 'con', 'su', 'per', 'tra', 'fra', 'a', 'al', 'allo',
+    'alla', 'ai', 'agli', 'alle', 'sul', 'sulla', 'che', 'non', 'nel', 'nella',
+    'ad', 'od', 'o',
+}
+# Sigle che restano come sono. Il controllo automatico (parola corta senza
+# vocali) prende SSD, MTB, SMS ma non ASD o SPA, che una vocale ce l'hanno.
+ACRONIMI = {
+    'ASD', 'SSD', 'ARL', 'SRL', 'SNC', 'SAS', 'SPA', 'MTB', 'GAG', 'SOMS',
+    'SMS', 'CISA', 'FC', 'AC', 'US', 'AS', 'CAI', 'AVIS', 'CRI', 'GS', 'PGS',
+    'CSI', 'UISP', 'ACLI', 'ARCI', 'ONLUS', 'APS', 'ODV', 'ANFFAS', 'AICS',
+    'CONI', 'ANA', 'AIDO', 'TV', 'DJ', 'BB', 'SC', 'AC.', 'PMI', 'ITIS', 'IIS',
+    'IC', 'IPSIA', 'CFP', 'CPIA', 'ATL', 'PRO',
+}
+# Numeri romani VERI, non "una parola fatta di I V X L C": con la forma larga
+# anche "IL" passava per numero romano e restava maiuscolo in mezzo ai nomi.
+ROMANI = re.compile(r'^(?=[IVXLCDM])M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})'
+                    r'(IX|IV|V?I{0,3})[°ªº]?$')
+# Forme elise che nel foglio hanno perso l'apostrofo ("SCUOLA DELL INFANZIA").
+# Sono tutte parole che in italiano NON esistono da sole, quindi riattaccarle
+# non puo' essere sbagliato.
+ELISE = {'l', 'd', 'c', 'dell', 'all', 'nell', 'dall', 'sull', 'quell', 'un',
+         'sant', 'grand', 'bell', 'anch'}
+
+
+def _e_sigla(p):
+    """Sigle da lasciare come sono: quelle elencate, quelle puntate (A.S.D.) e
+    quelle corte senza vocali (SSD, MTB, SMS)."""
+    if not p:
+        return False
+    nudo = p.strip('.,;:()«»"\'')
+    return bool(nudo.upper() in ACRONIMI or '.' in p[:-1]
+                or (2 <= len(nudo) <= 5 and not re.search(r'[AEIOUaeiou]', nudo)))
+
+
+def _parola(p, prima):
+    if not p:
+        return p
+    nudo = p.strip('.,;:()«»"\'')
+    # Le parole comuni si controllano PRIMA dei numeri romani, perche' in
+    # numeri romani "DI" vale 501 e "MI" 1001: senza questa riga usciva
+    # "Il Giardino DI Peter Pan".
+    if not prima and p.lower() in MINUSCOLE:
+        return p.lower()
+    if _e_sigla(p) or ROMANI.match(nudo):
+        return p
+    b = p.lower()
+    if not prima and b in MINUSCOLE:
+        return b
+    # L'apostrofo gia' presente: "DELL'INFANZIA" e' un articolo eliso attaccato a
+    # un nome, quindi vanno trattate come due parole - se no usciva
+    # "Dell'infanzia", con la maiuscola sull'articolo e la minuscola sul nome.
+    if "'" in b:
+        testa, _, coda = b.partition("'")
+        if testa in ELISE and coda:
+            return (testa.capitalize() if prima else testa) + "'" + _alza(coda)
+    # Il trattino: si alza solo la prima parte ("Micro-nidi", non "Micro-Nidi").
+    return _alza(b)
+
+
+def _alza(b):
+    """Maiuscola alla prima LETTERA, non al primo carattere: un nome che comincia
+    con un trattino o una virgoletta resterebbe tutto minuscolo."""
+    for i, c in enumerate(b):
+        if c.isalpha():
+            return b[:i] + c.upper() + b[i + 1:]
+    return b
+
+
+def pulisci_nome(nome):
+    """Spazi normalizzati sempre; maiuscole sistemate solo se il nome grida."""
+    t = re.sub(r'\s+', ' ', (nome or '').strip())
+    if not t or re.search(r'[a-zàèéìòùáíóú]', t):
+        return t
+    parole = t.split(' ')
+    fuori, apre = [], True
+    i = 0
+    while i < len(parole):
+        p = parole[i]
+        # Apostrofo perduto: "DELL INFANZIA" -> "dell'Infanzia", "L ISOLA" ->
+        # "L'Isola". "C E" diventa "c'è": e' l'unica lettura sensata, "c" da
+        # sola non e' una parola e "c'e" senza accento resterebbe sbagliato.
+        if p.lower() in ELISE and i + 1 < len(parole):
+            testa = p.lower()
+            coda = parole[i + 1]
+            if testa == 'c' and coda.lower() == 'e':
+                fuori.append("c'è")
+                i += 2
+                apre = False
+                continue
+            testa = testa.capitalize() if apre else testa
+            fuori.append(testa + "'" + _parola(coda, True))
+            i += 2
+            apre = False
+            continue
+        fuori.append(_parola(p, apre))
+        # Dopo una sigla di forma giuridica il nome VERO ricomincia, quindi
+        # l'articolo che segue si tratta come primo: "ASD MTB I Cinghiali" e non
+        # "ASD MTB i Cinghiali". Vale solo dopo una sigla, cosi' "L'Albero e le
+        # Stelle" e "G. e V. Navone" restano com'e' giusto che siano.
+        apre = _e_sigla(p)
+        i += 1
+    return ' '.join(fuori)
+
+
 def _eta(v, ripiego):
     try:
         return max(0, min(99, int(str(v).strip())))
@@ -402,7 +522,9 @@ def leggi_catalogo():
         slug_cat = G.slugify(primo) or 'altro'
         premium = si(d['premium'])
         fuori.append({
-            'nome': d['nome'], 'comune': d['comune'], 'prov': d['prov'].upper(),
+            'nome': pulisci_nome(d['nome']),
+            'comune': re.sub(r'\s+', ' ', d['comune'].strip()),
+            'prov': d['prov'].upper(),
             'regione': d['regione'], 'cap': d['cap'],
             'cat': slug_cat, 'cat_nome': primo, 'cat_sotto': secondo,
             'cat_filtro': etichetta_filtro(primo),

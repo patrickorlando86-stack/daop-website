@@ -197,6 +197,18 @@ module.exports = async function luoghi(browser) {
     }
     return true;
   }), 'nessun id ripetuto in pagina');
+
+  // I nomi non gridano. Nel foglio 126 righe su 823 sono scritte tutte in
+  // maiuscolo, e in elenco "SCUOLA PARITARIA SACRO CUORE" sopra "Studio Danza
+  // My Balance" sembra un errore. Si controlla che in pagina non ne resti
+  // nessuno tutto maiuscolo, salvo le sigle (ASD, A.S.D., SSD).
+  r.ok(await page.evaluate(() => {
+    const grida = [...document.querySelectorAll('.lg-nome')]
+      .map((n) => n.textContent.trim())
+      .filter((t) => t.length > 4 && !/[a-zàèéìòù]/.test(t))
+      .filter((t) => t.split(/\s+/).some((p) => p.replace(/[^A-Za-z]/g, '').length > 5));
+    return grida.length === 0;
+  }), 'nessun nome tutto in maiuscolo');
   r.ok(await page.evaluate(() => {
     const norm = (s) => s.trim().toLowerCase().normalize('NFD').replace(/[^a-z0-9 ]/g, '');
     return [...document.querySelectorAll('.lg-grp')].every((g) => {
