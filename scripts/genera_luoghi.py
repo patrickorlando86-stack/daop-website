@@ -1064,23 +1064,22 @@ def vetrina(elenco, oggi):
             f'{righe}</div>')
 
 
+# Tre righe, non quattro paragrafi. Cancellarlo del tutto non si puo': l'art. 22
+# comma 4-bis del Codice del consumo chiede che i parametri di ordinamento siano
+# dichiarati in una sezione raggiungibile dai risultati, e tacere che una
+# posizione e' pagata sta nella lista nera delle pratiche ingannevoli in ogni
+# caso. Ma l'obbligo e' dire la cosa, non scriverci sopra un tema: quello che
+# serve e' l'ordine (alfabetico), cosa cambia pagare (il contenuto, non il
+# posto) e dov'e' l'unica posizione comprabile. Il resto era prosa.
 COME_ORDINIAMO = """    <section class="lg-ordine" id="come-ordiniamo">
       <h2>Come è ordinato questo elenco</h2>
-      <p>I luoghi sono raggruppati per comune in ordine alfabetico, e dentro ogni comune
-      sono in ordine alfabetico. Non c'è nessun punteggio, nessuna preferenza e nessun
-      criterio a pagamento che sposti una riga più in alto: i filtri restringono l'elenco,
-      non lo riordinano.</p>
-      <p>Alcune schede sono <b>curate da chi gestisce il luogo, che paga questo spazio</b>:
-      hanno la dicitura “Scheda curata”, le foto e i contatti. Pagare cambia <em>cosa</em>
-      c'è dentro la scheda, non <em>dove</em> sta la riga. L'unica eccezione è il blocco
-      “In evidenza” in cima, che è a pagamento e lo dichiara: le stesse schede restano
-      comunque al loro posto nell'elenco qui sotto.</p>
-      <p>“Scelto da DAOP” è un'altra cosa e non si compra: è il
-      <a href="/bollino.html">bollino Family Friendly</a>, il nostro riconoscimento per i
-      luoghi che mettono davvero i bambini al centro. Si propone e si merita, non si
-      acquista.</p>
-      <p>Se un luogo che conosci è descritto male o ha chiuso,
-      <a href="/index.html#social">scrivicelo</a> — è così che questo elenco migliora.</p>
+      <p>Per comune, in ordine alfabetico. I filtri restringono l'elenco, non lo riordinano.</p>
+      <p>Le schede <b>★ curate</b> sono scritte da chi gestisce il luogo e paga questo
+      spazio: cambia <em>cosa</em> c'è dentro, non <em>dove</em> sta la riga. L'unica
+      posizione a pagamento è il blocco “In evidenza” in cima, che lo dichiara.</p>
+      <p>Il <b>♥ bollino</b> <a href="/bollino.html">Family Friendly</a> è un'altra cosa:
+      si merita, non si compra. Un luogo descritto male?
+      <a href="/index.html#social">Scrivicelo</a>.</p>
     </section>"""
 
 
@@ -1266,7 +1265,12 @@ def render(elenco, oggi):
      riga non viene aperta. -->
 <link rel="preconnect" href="{SUPABASE_FOTO}" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{G.PAGINA_CSS}{LUOGHI_CSS}{_css_categorie(elenco)}</style>
+<!-- COMUNE_CSS serve per .com-link, la riga di link in fondo: senza, i tre
+     link uscivano attaccati ("Tutta l'agenda DAOPCome verifichiamoLe zone")
+     perche' quella regola vive li' e non nel guscio. Si include invece di
+     ricopiarla, come fanno le pagine di intenzione: la regola sta in un posto
+     solo. Nessun selettore generico dentro, quindi non tocca le classi lg-*. -->
+<style>{css}{G.PAGINA_CSS}{G.COMUNE_CSS}{LUOGHI_CSS}{_css_categorie(elenco)}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>

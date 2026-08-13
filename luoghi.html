@@ -38,6 +38,11 @@
      riga non viene aperta. -->
 <link rel="preconnect" href="https://aaseyjdsldgjerjqlumu.supabase.co" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<!-- COMUNE_CSS serve per .com-link, la riga di link in fondo: senza, i tre
+     link uscivano attaccati ("Tutta l'agenda DAOPCome verifichiamoLe zone")
+     perche' quella regola vive li' e non nel guscio. Si include invece di
+     ricopiarla, come fanno le pagine di intenzione: la regola sta in un posto
+     solo. Nessun selettore generico dentro, quindi non tocca le classi lg-*. -->
 <style>@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
   :root {
@@ -509,6 +514,128 @@
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+
+/* L'elenco "cosa c'e' per i bambini": le stesse righe delle altre, ma senza il
+   wrapper .com-b - data, titolo e fascia d'eta' stanno tutti e tre in fila.
+   flex-wrap perche' sul telefono la pillola dell'eta' deve andare a capo invece
+   di strizzare il titolo a due parole per riga. */
+.com-kids li{flex-wrap:wrap;align-items:baseline}
+.com-kids .com-d{flex:0 0 auto;min-width:118px}
+.com-kids .com-go{flex:1 1 220px}
+.com-eta{flex:0 0 auto;font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  color:#a75b15;background:rgba(232,149,74,.16);border-radius:100px;padding:3px 10px}
+@media(max-width:600px){.com-kids .com-d{min-width:0}}
+/* Il ritmo verticale. Il reset del sito e' *{margin:0}, e le altre pagine si
+   rimettono i margini componente per componente: qui la pagina e' fatta anche
+   di prosa - titoletto, paragrafo, riga di link - e senza margini si incollava
+   tutta insieme, con l'h2 appiccicato al fondo del paragrafo precedente.
+   Il selettore e' figlio diretto apposta: i <p> dentro le schede (.com-per) i
+   loro margini ce li hanno gia'. */
+.ev-wrap>h2{margin:34px 0 8px;font-size:1.3rem;line-height:1.32}
+.ev-wrap>p{margin:0 0 12px;max-width:66ch}
+.ev-wrap>p a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+.com-stat{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 6px;padding:0;list-style:none}
+.com-stat li{border:1px solid rgba(45,74,92,.16);border-radius:100px;padding:6px 14px;font-size:.86rem}
+.com-grp{position:relative;border:1px solid rgba(45,74,92,.16);border-radius:16px;
+  padding:15px 18px;margin:12px 0;background:#fff}
+.com-grp h3{margin:0 0 3px;font-size:1.06rem;line-height:1.32}
+.com-per{font-size:.85rem;opacity:.72;margin:0 0 2px}
+/* La miniatura e' la locandina servita dal bucket Supabase: la stessa che
+   l'agenda mostra nelle righe (.ev-thumb), stesse misure e stesso taglio dal
+   bordo alto, perche' su una locandina il titolo sta in cima. Dove manca -
+   quattro eventi su 257 - resta il segnaposto nel colore della categoria. */
+.com-th{width:56px;height:56px;flex:0 0 56px;border-radius:11px;object-fit:cover;
+  object-position:top center;background:var(--cream,#fbf7f0);display:block}
+.com-th.is-ph{display:flex;align-items:center;justify-content:center;
+  background:var(--cat-tint,rgba(126,140,153,.16));color:var(--cat-color,#7e8c99)}
+.com-th.is-ph svg{width:22px;height:22px}
+/* Il link copre tutta la riga: il bersaglio da toccare e' il rettangolo, non
+   le venti lettere del titolo. Vale per la scheda singola e per ogni riga di
+   una manifestazione, quindi ::after si aggrappa a .com-grp o a .com-ev li. */
+.com-go{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:none}
+.com-go::after{content:"";position:absolute;inset:0}
+.com-head{display:flex;gap:14px;align-items:center}
+/* La locandina del cartellone, una volta sola in cima all'elenco. Il riquadro
+   e' fisso (aspect-ratio) e l'immagine sta dentro senza tagli: e' un poster da
+   leggere, non un francobollo da riconoscere, e un box fisso non fa saltare la
+   pagina quando l'immagine arriva. */
+.com-poster{display:flex;gap:16px;align-items:center;margin:14px 0 4px;
+  border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:14px 16px;background:#fff}
+.com-poster img{width:132px;aspect-ratio:3/4;object-fit:contain;border-radius:10px;
+  display:block;background:var(--cream,#fbf7f0)}
+.com-poster figcaption{font-size:.9rem;line-height:1.55;opacity:.85}
+.com-poster figcaption a{color:var(--navy,#2d4a5c);font-weight:600;
+  text-decoration:underline;text-underline-offset:2px}
+@media(max-width:520px){
+  .com-poster{gap:13px;padding:12px 13px}
+  .com-poster img{width:96px}
+  .com-poster figcaption{font-size:.86rem}
+}
+.com-solo{display:flex;gap:14px;align-items:center;padding:13px 16px;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.com-solo h3{font-size:1rem;margin:0 0 2px}
+.com-solo:hover,.com-ev li:hover{border-color:rgba(107,165,168,.55)}
+.com-solo:hover{box-shadow:0 2px 14px rgba(45,74,92,.07)}
+.com-solo:hover .com-go,.com-ev li:hover .com-go{text-decoration:underline}
+.com-ev{list-style:none;margin:11px 0 0;padding:0}
+.com-ev li{position:relative;display:flex;gap:12px;align-items:center;
+  padding:9px 0;border-top:1px solid rgba(45,74,92,.1)}
+.com-ev li:first-child{border-top:0;padding-top:1px}
+.com-ev .com-th{width:50px;height:50px;flex-basis:50px;border-radius:10px}
+.com-ev .com-th.is-ph svg{width:20px;height:20px}
+/* Righe senza francobollo (il poster e' salito in testa al gruppo): la data
+   torna a fianco del titolo in colonna fissa, che a schermo largo si scorre
+   meglio di due righe impilate. Sul telefono la colonna non ci sta e si
+   impila - stessa scelta che fa l'agenda con .ev-line. */
+.com-ev.is-nude li{gap:14px;align-items:baseline}
+.com-ev.is-nude .com-b{flex-direction:row;gap:14px;align-items:baseline;flex-wrap:wrap}
+.com-ev.is-nude .com-d{min-width:132px}
+@media(max-width:560px){
+  .com-ev.is-nude .com-b{flex-direction:column;gap:2px}
+  .com-ev.is-nude .com-d{min-width:0}
+}
+.com-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+/* La data in alto e nel colore della categoria: e' l'unica cosa che si legge
+   scorrendo con il pollice, e sta sempre alla stessa distanza dal bordo. */
+.com-d{font-weight:700;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase;
+  color:var(--cat-ink,#606d7a)}
+/* La categoria accanto alla data. Il colore di categoria su queste righe c'era
+   gia' (.com-d prende --cat-ink) ma non lo sapeva nessuno: un blu e un verde
+   senza etichetta sono due blu e due verdi. Sta in COMUNE_CSS e non in
+   LANDING_CSS perche' serve in tutti e due i posti, e le pagine comune
+   ricevono solo il primo dei due blocchi. */
+.com-cat{color:var(--cat-ink,#606d7a);opacity:.78}
+.com-cat::before{content:' · ';opacity:.6}
+.com-ev .com-go{font-size:.95rem;line-height:1.34}
+/* Le feste che tornano: niente locandina, perche' quella in archivio e'
+   dell'edizione passata e prometterebbe una data che non c'e' piu'. */
+.com-anni{list-style:none;margin:0;padding:0}
+.com-anni li{display:flex;gap:12px;align-items:baseline;padding:7px 0;
+  border-top:1px solid rgba(45,74,92,.1);font-size:.94rem}
+.com-anni li:first-child{border-top:0}
+.com-y{font-weight:700;white-space:nowrap;font-size:.82rem;opacity:.7;min-width:76px;
+  font-variant-numeric:tabular-nums}
+.com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
+.com-anni a:hover{text-decoration:underline}
+.com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
+  padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
+.com-link a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
+.com-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
+  margin:16px 0;font-size:.95rem}
+/* Il credito alla pagina di provenienza: stesso peso che ha sulle schede
+   evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina.
+   Piu' specifici di .ev-wrap>p, se no vince quello e il filo si attacca. */
+.ev-wrap>p.com-fonte{font-size:.88rem;opacity:.85;margin:26px 0 0;padding-top:14px;
+  border-top:1px solid rgba(45,74,92,.12);max-width:none}
+.com-fonte a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+.ev-wrap>p.ev-firma-nota{margin:8px 0 0;max-width:none}
+@media(max-width:600px){
+  .com-grp{padding:13px 14px}
+  .com-solo{padding:11px 12px;gap:12px}
+  .com-th{width:50px;height:50px;flex-basis:50px}
+  .com-ev .com-th{width:46px;height:46px;flex-basis:46px}
+}
 
 .lg-wrap{max-width:940px;margin:0 auto;padding:0 20px 40px}
 @media(max-width:600px){.lg-wrap{padding:0 16px 32px}}
@@ -1017,21 +1144,13 @@
 <section class="lg-grp"><div class="lg-grp-h"><h2 id="c-tricerro">Tricerro</h2><span>VC · 1 luogo</span></div><details class="lg-row cat-natura-parchi" id="lg-tenuta-degli-angeli-area-picnic-monferrato-tricerr" data-cat="natura-parchi" data-prov="vc" data-etamin="3" data-etamax="99"><summary><span class="lg-ico" aria-hidden="true">🧺</span><span class="lg-txt"><span class="lg-nome">Tenuta degli Angeli – Area Picnic Monferrato</span><span class="lg-meta"><span class="lg-cat">Aree Picnic</span> · Tricerro (VC)</span></span><span class="lg-pills"></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><p>Area picnic immersa nel parco e bosco della Tenuta degli Angeli, B&amp;B a Tricerro tra le colline del Monferrato e la pianura vercellese. Ingresso €10/adulto (bambini fino a 5 anni gratis). Scelta tra area nel verde con coperte o tavoli e sedie. Barbecue prenotabile. Fattoria didattica con asinelli, animali da cortile, cani e gatti. Servizi igienici disponibili.</p><ul class="lg-serv"><li class="is-pratico">Accessibile</li><li class="is-pratico">Parcheggio</li><li class="is-pratico">Cani ammessi</li><li class="is-pratico">Picnic</li><li>Picnic</li><li>Barbecue</li><li>Tavoli e sedie</li><li>Ingresso a pagamento (€10/adulto</li><li>gratis &lt;5 anni)</li><li>Fattoria didattica</li><li>Animali da cortile</li><li>Parco giochi bambini</li><li>Servizi igienici</li><li>Parcheggio</li><li>Bar/Ristorante</li><li>Accesso disabili</li></ul><ul class="lg-facts"><li><b>Dove:</b> <span>SP455 Cascina Moderna 7</span></li><li><b>Se piove:</b> <span>All'aperto</span></li><li><b>Orari:</b> <span>7 aprile – 15 ottobre (stagionale)</span></li><li><b>Ingresso:</b> <span>€10,00 a persona (bambini &lt;5 anni gratis)</span></li><li><b>Età:</b> <span>da 3 anni</span></li></ul><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.283,8.065" target="_blank" rel="noopener">Apri nelle mappe</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details></section>
     <section class="lg-ordine" id="come-ordiniamo">
       <h2>Come è ordinato questo elenco</h2>
-      <p>I luoghi sono raggruppati per comune in ordine alfabetico, e dentro ogni comune
-      sono in ordine alfabetico. Non c'è nessun punteggio, nessuna preferenza e nessun
-      criterio a pagamento che sposti una riga più in alto: i filtri restringono l'elenco,
-      non lo riordinano.</p>
-      <p>Alcune schede sono <b>curate da chi gestisce il luogo, che paga questo spazio</b>:
-      hanno la dicitura “Scheda curata”, le foto e i contatti. Pagare cambia <em>cosa</em>
-      c'è dentro la scheda, non <em>dove</em> sta la riga. L'unica eccezione è il blocco
-      “In evidenza” in cima, che è a pagamento e lo dichiara: le stesse schede restano
-      comunque al loro posto nell'elenco qui sotto.</p>
-      <p>“Scelto da DAOP” è un'altra cosa e non si compra: è il
-      <a href="/bollino.html">bollino Family Friendly</a>, il nostro riconoscimento per i
-      luoghi che mettono davvero i bambini al centro. Si propone e si merita, non si
-      acquista.</p>
-      <p>Se un luogo che conosci è descritto male o ha chiuso,
-      <a href="/index.html#social">scrivicelo</a> — è così che questo elenco migliora.</p>
+      <p>Per comune, in ordine alfabetico. I filtri restringono l'elenco, non lo riordinano.</p>
+      <p>Le schede <b>★ curate</b> sono scritte da chi gestisce il luogo e paga questo
+      spazio: cambia <em>cosa</em> c'è dentro, non <em>dove</em> sta la riga. L'unica
+      posizione a pagamento è il blocco “In evidenza” in cima, che lo dichiara.</p>
+      <p>Il <b>♥ bollino</b> <a href="/bollino.html">Family Friendly</a> è un'altra cosa:
+      si merita, non si compra. Un luogo descritto male?
+      <a href="/index.html#social">Scrivicelo</a>.</p>
     </section>
     <div class="com-link"><a href="/eventi.html">Tutta l'agenda DAOP</a><a href="/bollino.html">Il bollino Family Friendly</a><a href="/metodo.html">Come verifichiamo</a><a href="/zone.html">Le zone</a></div>
     <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 13 agosto 2026.</p>
@@ -1042,7 +1161,7 @@
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
       <div>
         <h3>Cerchi altro da fare con i bambini?</h3>
-        <p>Chiedilo a <strong>Ginetto AI</strong>, l'assistente di DAOP: trova eventi e luoghi per famiglie in base all'et&agrave; dei tuoi figli e a quanto sei disposto a guidare. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+        <p>Chiedilo a <strong>Ginetto AI</strong>, l'assistente di DAOP: trova eventi e luoghi per famiglie in base all'et&agrave; dei tuoi figli. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
       </div>
     </div>
   </div>
