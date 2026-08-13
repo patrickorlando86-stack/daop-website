@@ -696,9 +696,29 @@ def unisci(catalogo, agenda):
 # ── CSS e JS ─────────────────────────────────────────────────────────────────
 
 LUOGHI_CSS = """
-.lg-wrap{max-width:940px;margin:0 auto;padding:0 20px 40px}
-@media(max-width:600px){.lg-wrap{padding:0 16px 32px}}
-.lg-intro{font-size:1.02rem;line-height:1.7;color:var(--text-mid);margin:0 0 6px}
+/* Il padding in alto NON e' decorativo: e' l'unica pagina generata che non usa
+   .ev-wrap, e .ev-wrap--hero mette 44px fra la fascia scura e il primo elemento.
+   Senza, il corpo partiva incollato al bordo dell'hero (misurato: 329px la fine
+   dell'hero, 329px l'inizio del primo paragrafo) e la fascia sembrava tagliata. */
+.lg-wrap{max-width:940px;margin:0 auto;padding:40px 20px 40px}
+@media(max-width:600px){.lg-wrap{padding:30px 20px 32px}}
+
+/* L'hero e il corpo devono cominciare dalla STESSA x. Il guscio da' all'hero un
+   inner da 820px (`.ev-hero .page-hero-inner`) e qui la colonna dell'elenco e'
+   larga 900: l'H1 partiva 40px piu' a destra del primo comune, ed era il difetto
+   che si vedeva senza saperlo nominare. Si allarga l'inner solo su questa pagina
+   - toccare la regola nel guscio sposterebbe l'hero di 290 file. Sul telefono
+   sono allineati dal padding: 20px l'hero, 20px .lg-wrap. */
+.lg-hero .page-hero-inner{max-width:900px}
+/* La frase che dice di cosa e' fatto l'elenco sta DENTRO l'hero, sotto
+   l'occhiello d'oro: e' la stessa impaginazione dell'hero di eventi.html (titolo,
+   riga di contesto, paragrafo). In fondo alla fascia, da sola sul crema, era un
+   paragrafo grigio senza niente che lo tenesse su - e larga 900px passava i 100
+   caratteri per riga, il doppio della misura usata in tutto il resto del sito.
+   `.page-hero p` la centrerebbe (max-width 520 + margin auto): serve margin:0,
+   perche' questo hero e' allineato a sinistra. */
+.lg-hero .lg-intro{max-width:60ch;margin:12px 0 0;font-size:1.02rem;line-height:1.62;
+  color:rgba(255,255,255,.72)}
 /* Chrome dimensiona una <select> sull'opzione PIU' LUNGA: con dentro
    "Castelceriolo (Alessandria)" la tendina dei comuni da sola chiedeva mezza
    barra. Si limita e si taglia con i puntini - il valore scelto resta
@@ -1456,7 +1476,11 @@ def render(elenco, oggi):
     # Niente coda "in N c'e' gia' un evento in programma": il numero e' piccolo
     # (9 su 823) e prometteva poco a costo di una riga in piu'. Chi ha un evento
     # lo dice gia' da solo, con la pillola verde sulla riga.
-    intro = ('<p class="lg-intro">Fattorie didattiche, musei, parchi e panchine giganti, '
+    # Sta nell'HERO, non in cima al corpo: sotto la fascia scura era un paragrafo
+    # grigio appoggiato sul crema senza niente che lo tenesse su, e la sua CSS
+    # spiega perche' (vedi .lg-hero .lg-intro). Nell'hero e' il terzo gradino di
+    # una scala che si legge: titolo, dove e quanti, di cosa e' fatto.
+    intro = ('    <p class="lg-intro">Fattorie didattiche, musei, parchi e panchine giganti, '
              'piscine, gelaterie, biblioteche e nidi: scelti uno per uno. '
              'Apri una riga per orari, prezzi e contatti.</p>')
 
@@ -1464,7 +1488,7 @@ def render(elenco, oggi):
              'Prova a togliere la provincia o il tipo di luogo.</div>')
 
     corpo = "\n".join(x for x in [
-        f'  <div class="lg-wrap">{intro}',
+        '  <div class="lg-wrap">',
         filtri(elenco),
         vetrina(elenco, oggi),
         vuoto,
@@ -1533,13 +1557,14 @@ def render(elenco, oggi):
 <body>
 {nav}
 <main id="contenuto">
-<header class="page-hero ev-hero">
+<header class="page-hero ev-hero lg-hero">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Luoghi</span>
     </div>
     <h1>Dove andare <em>con i bambini</em></h1>
     <p class="ev-when">{e(zona)} · {n} luoghi in {comuni} comuni</p>
+{intro}
   </div>
 </header>
 {corpo}
