@@ -1078,7 +1078,8 @@ COME_ORDINIAMO = """    <section class="lg-ordine" id="come-ordiniamo">
       spazio: cambia <em>cosa</em> c'è dentro, non <em>dove</em> sta la riga. L'unica
       posizione a pagamento è il blocco “In evidenza” in cima, che lo dichiara.</p>
       <p>Il <b>♥ bollino</b> <a href="/bollino.html">Family Friendly</a> è un'altra cosa:
-      si merita, non si compra. Un luogo descritto male?
+      si merita, non si compra.</p>
+      <p>Un luogo descritto male, o che ha chiuso?
       <a href="/index.html#social">Scrivicelo</a>.</p>
     </section>"""
 
