@@ -262,10 +262,17 @@ alfabetico, nel suo comune. L'unico spazio in cui la posizione si compra è il
 blocco "In evidenza" in cima, che è separato e lo dichiara — e le stesse schede
 restano comunque nell'elenco sotto.
 
-**"Consigliato DAOP" è un'altra cosa e non si compra**: è il giudizio nostro, lo
-stesso flag che esiste già in agenda. Le due pillole restano distinte apposta, e
-`#come-ordiniamo` lo dice a chi legge. In vetrina ci va chi ha *tutti e due* —
-pagare non basta a occupare i tre posti in cima se il posto non ci convince.
+**"Consigliato DAOP" è un'altra cosa e non si compra**: è il bollino Family
+Friendly (`bollino.html`), lo stesso giudizio che esiste già in agenda. Le due
+pillole restano distinte apposta, e `#come-ordiniamo` lo dice a chi legge.
+
+La vetrina la decide **una colonna del foglio** (`In evidenza`), non una regola
+dedotta. Per un giorno è stata `premium and consigliato`, e il risultato era che
+il blocco non compariva mai: le quattro schede a pagamento hanno tutte
+`Consigliato DAOP = no`, ed è giusto così — sono due giudizi diversi, uno lo dà
+il cliente e l'altro lo diamo noi. **Una condizione che spegne in silenzio uno
+spazio venduto è un difetto, non una cautela.** Serve comunque il premium: la
+posizione in cima si compra, e chi non l'ha comprata non ci finisce.
 
 Non è solo stile: **art. 22 comma 4-bis del Codice del consumo** (Omnibus, D.Lgs.
 26/2023) impone di dichiarare i parametri di ordinamento di una lista
@@ -274,6 +281,81 @@ delle pratiche ingannevoli *in ogni caso*. Da qui il blocco `#come-ordiniamo`,
 che non è decorativo: se cambi l'ordinamento, cambia anche quel testo.
 `tests/luoghi.js` controlla l'ordine alfabetico proprio per questo — se un giorno
 qualcuno ordinasse "premium prima", quella prova diventa rossa.
+
+### Vendere uno spazio: il limite non è il numero, è il dislivello
+
+Ragionato il 13/08/2026, quando le schede a pagamento erano 4 su 823. Qui stanno
+le decisioni; quello che manca ancora è elencato in fondo.
+
+**Si vendono due cose, e una terza non è in vendita.**
+
+| | scarsità | note |
+|---|---|---|
+| la riga in elenco | infinita | ce l'hanno tutti e 823, gratis |
+| la **scheda curata ★** | infinita | costo marginale ~zero: descrizione lunga, 5 foto, orari, contatti |
+| **"In evidenza"** in cima | **3 posti** | l'unica scarsità vera, l'unica posizione che si compra |
+| il **bollino ♥** | — | **non si vende mai**, a nessun prezzo |
+
+**Non c'è un tetto al numero di schede a pagamento**, ed è stato deciso dopo
+averne proposto uno e averlo scartato. Il timore veniva dalle directory in cui
+*pagare compra la posizione*: lì il numero conta, perché ogni riga comprata
+spinge giù una riga scelta e l'ordine mente. Qui l'ordine è alfabetico e c'è una
+prova che lo difende, quindi cento schede a pagamento vogliono dire cento posti
+con **più informazioni vere** — il lettore ci guadagna.
+
+Quello che può rompersi non è quante righe pagano, è **quanto diventa povera una
+riga che non paga**. Da qui la regola vera:
+
+> **Il pavimento della riga gratis non si abbassa mai per far risaltare quella a
+> pagamento.** Categoria, comune, descrizione, servizi, età e mappa restano su
+> ogni riga. Se un giorno la riga gratis diventasse nome + comune, basterebbero
+> dieci schede curate a far sembrare rotto tutto il resto.
+
+È un vincolo su cosa **non** togliere, non su quanto vendere: lascia crescere il
+business quanto vuole.
+
+I due limiti che restano non sono editoriali. **"In evidenza" ha 3 posti**, e non
+c'è ancora una regola per il quarto cliente che li compra (rotazione? i più
+recenti? si alza il numero?) — va decisa **prima** di venderne il quarto, perché
+deciderla con un cliente che ha già pagato vuol dire deciderla male. E il secondo
+limite è **il tempo**: ogni scheda curata costa raccolta materiali più revisione,
+e cento clienti sono decine di ore. Non è una policy, è aritmetica, e si alza
+solo con un modulo che raccolga i materiali al posto tuo.
+
+**La revisione editoriale non è pignoleria.** Chi paga scriverà "il parco più
+bello del Piemonte". Se le schede a pagamento suonano come volantini, il lettore
+smette di fidarsi anche delle altre 819 — e a quel punto non vale più niente
+neanche quello che vendi.
+
+**Oggi la pagina non ha ancora traffico.** È nata il 12/08/2026; `eventi.html` fa
+1.932 clic al mese da Search Console, `luoghi.html` parte da zero. I primi
+clienti non stanno comprando un pubblico: stanno comprando una scommessa. Non
+promettere numeri che non puoi mostrare, e tienili a un prezzo da pionieri.
+
+**Far crescere la pagina e far valere di più lo spazio sono lo stesso lavoro.**
+`luoghi.html` è linkata dalla nav di 292 pagine ma da nessun corpo di pagina: la
+pagina comune di Acqui Terme parla di eventi e non dice che ad Acqui ci sono 25
+luoghi. E le pagine di incrocio ("piscine per bambini in provincia di
+Alessandria", "dove andare con la pioggia a Casale") non esistono ancora: sono
+30-50 pagine che rispondono a ricerche vere, e sono l'inventario che poi si
+rivende.
+
+Cosa manca, in ordine di resa:
+
+1. **Il conteggio delle aperture di scheda.** GA4 registra i clic *dalla* scheda
+   (mappe, telefono, sito) ma non le aperture: al rinnovo puoi dire "47 hanno
+   chiesto le indicazioni" e non su quante volte. È il momento in cui smetti di
+   vendere fiducia e cominci a vendere evidenza.
+2. **`Premium_al`, la data di scadenza.** Nel foglio c'è solo `Premium_dal`:
+   **niente si spegne da solo**. È un problema di cassa (nessun innesco per il
+   rinnovo) e di correttezza (continui a pubblicare uno spazio non più pagato).
+3. **Un modulo per i materiali** che scriva nel foglio. Il collo di bottiglia non
+   è vendere: è che i contenuti non arrivano mai.
+
+Ultima cosa, fuori dal nostro mestiere: **DAOP è un'associazione e vendere spazi
+pubblicitari è attività commerciale**, con conseguenze fiscali che cambiano
+secondo l'inquadramento (APS, ASD, regime 398/91). Da sentire col commercialista
+prima della prima fattura.
 
 ### Le locandine: due misure, due posti
 
