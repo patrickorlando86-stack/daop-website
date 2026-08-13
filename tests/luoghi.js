@@ -98,18 +98,27 @@ module.exports = async function luoghi(browser) {
     await page.selectOption('#lg-toolbar [data-campo="prov"]', 'all');
   }
 
-  // "Se piove": i misto restano in tutte e due le risposte, per scelta.
-  const pioggia = await page.locator('#lg-toolbar [data-campo="riparo"]');
-  if (await pioggia.count()) {
-    await page.selectOption('#lg-toolbar [data-campo="cat"]', 'all');
-    await page.selectOption('#lg-toolbar [data-campo="riparo"]', 'chiuso');
-    await page.waitForTimeout(250);
-    r.ok(await page.evaluate(() =>
-      [...document.querySelectorAll('.lg-row[data-cat]:not([hidden])')]
-        .every((l) => l.dataset.riparo === 'chiuso' || l.dataset.riparo === 'misto')),
-      'con "al chiuso" restano i chiusi e i misti, non gli aperti');
-    await page.selectOption('#lg-toolbar [data-campo="riparo"]', 'all');
-  }
+  // IL BUCO. Il gruppo comune e' un <section>, e il foglio di stile del sito ha
+  // `section{padding:100px 24px}` per le fasce della home: senza un padding:0
+  // ogni comune si portava dietro 72px di vuoto sopra e 72 sotto. Senza filtri
+  // non si vedeva (le sezioni sono alte), filtrando restava una riga in mezzo a
+  // 144px di niente. Si controlla che la sezione sia alta quanto il suo
+  // contenuto, ed e' proprio quando si filtra che il difetto salta fuori.
+  r.ok(await page.evaluate(() => {
+    const male = [];
+    for (const s of document.querySelectorAll('.lg-grp')) {
+      if (s.hidden) continue;
+      const box = s.getBoundingClientRect();
+      const figli = [...s.children].filter((c) => c.getBoundingClientRect().height > 0);
+      if (!figli.length) continue;
+      const primo = figli[0].getBoundingClientRect();
+      const ultimo = figli[figli.length - 1].getBoundingClientRect();
+      if (box.bottom - ultimo.bottom > 12 || primo.top - box.top > 12) male.push(s.id);
+    }
+    return male.length === 0;
+  }), 'nessun gruppo comune si porta dietro spazio vuoto (il <section> del sito)');
+  await page.selectOption('#lg-toolbar [data-campo="cat"]', 'all');
+  await page.waitForTimeout(200);
 
   await page.fill('#lg-q', 'zzzznientedeltutto');
   await page.waitForTimeout(300);

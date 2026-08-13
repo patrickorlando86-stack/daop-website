@@ -146,17 +146,22 @@ le pagine `sagre-provincia-*` hanno solo la ricerca: lì gli eventi sono tutti
 "Sagre & Feste". Sulle pagine di intenzione non c'è mai il filtro "quando":
 quelle pagine *sono* già una risposta a quando.
 
-Su `luoghi.html` i filtri sono quattro (provincia, tipo, se piove, età) e sul
-telefono vanno a capo su due righe: 156px invece di 109. È il **contrario** della
-scelta fatta quando quella pagina aveva solo i luoghi dedotti dall'agenda, e il
-motivo è che è cambiato il dato: con centinaia di luoghi scelti a mano l'elenco
-non si scorre, si filtra, e quei 47px si ripagano alla prima ricerca.
+Su `luoghi.html` i filtri sono tre — provincia, tipo, età — e stanno in una riga
+sola sul telefono (109px). Le etichette restano corte perché **Chrome dimensiona
+una `<select>` sull'opzione più lunga**, non su quella scelta: è per questo che
+l'etichetta del filtro ("Servizi") non è quella della riga ("Servizi per Bambini
+& Famiglie").
 
-Le etichette restano corte lo stesso, perché **Chrome dimensiona una `<select>`
-sull'opzione più lunga**, non su quella scelta: è per questo che l'etichetta del
-filtro ("Servizi") non è quella della riga ("Servizi per Bambini & Famiglie"). E
-non c'è la tendina "solo dove c'è qualcosa in programma": quella è la domanda a
-cui risponde `eventi.html`, che la fa meglio perché lì l'evento *è* la riga.
+Due filtri sono stati provati e tolti, per ragioni diverse:
+
+- **"solo dove c'è qualcosa in programma"**: è la domanda a cui risponde
+  `eventi.html`, che la fa meglio perché lì l'evento *è* la riga.
+- **"se piove"** (tolto il 13/08/2026): divideva benissimo — 52% al chiuso, 47%
+  all'aperto — ma rispondeva male alla domanda che ha in testa chi lo usa. Con
+  "Al chiuso" restavano dentro gelaterie, nidi e scuole di lingue: tutti al
+  coperto, nessuno un posto dove passi il pomeriggio di pioggia. Il dato resta
+  nella riga aperta, dove è un'informazione e non una promessa. **Un filtro che
+  divide non è per forza un filtro che risponde.**
 
 ### La categoria si scrive, non solo si colora
 
@@ -366,6 +371,21 @@ calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-` e
 `luoghi.html` l'ordine alfabetico che il premium non deve scavalcare). Gira sui
 file veri appena generati: non c'è un ambiente di prova. In un ambiente che ha
 già un Chromium, `CHROMIUM_PATH=/percorso/chrome npm test` evita lo scaricamento.
+
+### Un `<section>` non è un contenitore neutro
+
+`assets/css/daop-system.min.css` ha `section{padding:100px 24px}` — pensata per
+le fasce a tutta larghezza della home. Vale per **ogni** `<section>` che non
+dichiara il suo padding, quindi anche per un gruppo di righe dentro un elenco.
+
+Su `luoghi.html` ogni comune si portava dietro 72px di vuoto sopra e 72 sotto.
+Senza filtri non si vedeva, perché le sezioni sono alte; **filtrando** restava
+una riga in mezzo a 144px di niente, e sembrava un difetto del filtro. Non lo
+era: il difetto c'era sempre, il filtro lo rendeva visibile.
+
+Da qui due cose: `.lg-grp{padding:0}`, e una prova che confronta l'altezza di
+ogni gruppo con quella del suo contenuto. Se usi `<section>` per raggruppare
+qualcosa dentro una pagina, azzera il padding — o usa un `<div>`.
 
 Quando aggiungi una sezione che un filtro può nascondere, controlla che non
 resti in aria il titolo che sta **prima** di essa e fuori da essa: è già

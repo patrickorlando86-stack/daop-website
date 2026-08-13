@@ -561,7 +561,13 @@ LUOGHI_CSS = """
   background:none;border:0;border-bottom:1px solid rgba(45,74,92,0.25);padding:0 0 1px;cursor:pointer}
 .lg-reset:hover{color:var(--orange-ink,#a05714);border-color:currentColor}
 
-.lg-grp{margin:26px 0 0}
+/* padding:0 NON e' di troppo: il foglio di stile del sito ha una regola
+   `section{padding:100px 24px}` (72px 20px sotto i 600px) pensata per le fasce
+   della home, e il gruppo comune e' un <section> perche' ha un suo <h2>. Il
+   risultato erano 72px di vuoto sopra e 72 sotto ogni comune: senza filtri non
+   si notavano, perche' le sezioni sono alte; filtrando restano una o due righe
+   e quei 144px diventano il buco che si vede fra un comune e l'altro. */
+.lg-grp{margin:26px 0 0;padding:0}
 .lg-grp-h{display:flex;align-items:baseline;gap:10px;margin:0 0 6px;padding:0 0 6px;
   border-bottom:1px solid rgba(45,74,92,0.10)}
 .lg-grp-h h2{font-family:'Playfair Display',serif;font-size:1.24rem;font-weight:800;
@@ -721,8 +727,6 @@ LUOGHI_JS = r"""<script>
     righe.forEach(function (r) {
       var ok = (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
                (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
-               (!f.riparo || f.riparo === 'all' ||
-                 r.dataset.riparo === f.riparo || r.dataset.riparo === 'misto') &&
                (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
                (!t || indice().get(r).indexOf(t) > -1);
       r.hidden = !ok;
@@ -916,6 +920,14 @@ def riga(l, oggi):
         azioni.append(f'<a href="mailto:{e(l["email"])}">Scrivi al luogo</a>')
     corpo.append(f'<div class="lg-act">{"".join(azioni)}</div>')
 
+    # Il bollino si nomina dove sta il cuore, cioe' nella riga che ce l'ha: un
+    # link in fondo alla pagina lo vedrebbe solo chi e' gia' arrivato in fondo,
+    # e chi apre la scheda di una biblioteca col cuore arancione la domanda se
+    # la fa proprio li'.
+    if l.get('consigliato'):
+        corpo.append('<p class="lg-manca">♥ Questo posto ha il '
+                     '<a href="/bollino.html">bollino Family Friendly</a> di DAOP.</p>')
+
     if l.get('premium'):
         corpo.append('<p class="lg-cura">Scheda curata da chi gestisce il luogo · '
                      'spazio a pagamento, <a href="#come-ordiniamo">come funziona</a>.</p>')
@@ -928,7 +940,7 @@ def riga(l, oggi):
     classe = f'lg-row cat-{l["cat"]}' + (' is-prem' if l.get('premium') else '')
     return (
         f'<details class="{classe}" id="{l["slug"]}" data-cat="{l["cat"]}" '
-        f'data-prov="{l["prov"].lower()}" data-riparo="{l["riparo"]}" '
+        f'data-prov="{l["prov"].lower()}" '
         f'data-etamin="{l.get("eta_min", 0)}" data-etamax="{l.get("eta_max", 99)}">'
         f'<summary>'
         f'<span class="lg-ico" aria-hidden="true">{e(l.get("icona") or "📍")}</span>'
@@ -979,14 +991,14 @@ def filtri(elenco):
         campi.append('<select class="ev-select" data-campo="cat" aria-label="Filtra per tipo di luogo">'
                      f'<option value="all">Tipo</option>{opts}</select>')
 
-    # I "misto" restano visibili in entrambi i casi: un castello ha il cortile e
-    # le sale, escluderlo da una delle due risposte sarebbe piu' sbagliato che
-    # tenerlo in tutte e due.
-    if any(l['riparo'] == 'chiuso' for l in elenco) and any(l['riparo'] == 'aperto' for l in elenco):
-        campi.append('<select class="ev-select" data-campo="riparo" aria-label="Filtra per al chiuso o all\'aperto">'
-                     '<option value="all">Se piove</option>'
-                     '<option value="chiuso">Al chiuso</option>'
-                     '<option value="aperto">All\'aperto</option></select>')
+    # NON c'e' la tendina "se piove", tolta il 13/08/2026. Non perche' non
+    # dividesse - divideva benissimo, 52% al chiuso contro 47% all'aperto - ma
+    # perche' rispondeva male alla domanda che ha in testa chi la usa. Con
+    # "Al chiuso" restavano dentro le gelaterie, i nidi e le scuole di lingue:
+    # tutti al coperto, nessuno un posto dove passi il pomeriggio di pioggia.
+    # Il dato resta scritto nella riga aperta, dove e' un'informazione e non una
+    # promessa; se un giorno serve di nuovo come filtro, qui bastano cinque
+    # righe e in riga_() torna un data-riparo.
 
     # L'eta' entra solo se le righe la dichiarano davvero: con tutte 0-99 la
     # tendina non toglierebbe mai niente, cioe' sarebbe un comando che non fa
@@ -1063,8 +1075,10 @@ COME_ORDINIAMO = """    <section class="lg-ordine" id="come-ordiniamo">
       c'è dentro la scheda, non <em>dove</em> sta la riga. L'unica eccezione è il blocco
       “In evidenza” in cima, che è a pagamento e lo dichiara: le stesse schede restano
       comunque al loro posto nell'elenco qui sotto.</p>
-      <p>“Scelto da DAOP” è un'altra cosa e non si compra: è un giudizio nostro, lo stesso
-      che usiamo in agenda.</p>
+      <p>“Scelto da DAOP” è un'altra cosa e non si compra: è il
+      <a href="/bollino.html">bollino Family Friendly</a>, il nostro riconoscimento per i
+      luoghi che mettono davvero i bambini al centro. Si propone e si merita, non si
+      acquista.</p>
       <p>Se un luogo che conosci è descritto male o ha chiuso,
       <a href="/index.html#social">scrivicelo</a> — è così che questo elenco migliora.</p>
     </section>"""
@@ -1175,13 +1189,21 @@ def render(elenco, oggi):
              "musei, piscine, sport e spazi al chiuso. Si filtra per provincia, tipo, "
              "età e se piove.")
 
-    intro = (f'<p class="lg-intro">Sono <b>{n} luoghi</b> in <b>{comuni} comuni</b> '
-             f'di {e(zona)}: parchi e fattorie didattiche, musei e biblioteche, piscine, '
-             'palestre e spazi al chiuso. Si filtra per provincia, per tipo, per '
-             '<b>età</b> e — quello che serve davvero — per <b>se piove</b>.</p>')
+    # Corta apposta. Il conteggio e la zona stanno gia' due righe sopra,
+    # nell'occhiello, e i filtri si vedono subito sotto: elencarli a parole era
+    # spiegare una cosa che si tocca. Qui resta solo quello che l'intestazione
+    # non dice - di che roba e' fatto l'elenco, e cosa succede se apri una riga.
+    # L'elenco degli esempi e' scritto a mano e non dedotto dai numeri. Provato:
+    # ordinando per quantita' la frase cominciava con "Nidi e Micro-nidi", che e'
+    # la categoria piu' numerosa (123) e la meno invitante su una pagina che si
+    # intitola "Dove andare con i bambini". I nidi ci sono e restano nominati -
+    # chi li cerca li trova - ma dopo le cose per cui si esce di casa.
+    intro = ('<p class="lg-intro">Fattorie didattiche, musei, parchi e panchine giganti, '
+             'piscine, gelaterie, biblioteche e nidi: scelti uno per uno. '
+             'Apri una riga per orari, prezzi e contatti')
     if con_eventi:
-        intro += (f'<p class="lg-intro">In {con_eventi} di questi c\'è già qualcosa in '
-                  'programma: la riga lo dice, e porta all\'evento.</p>')
+        intro += f' — in {con_eventi} c\'è già un evento in programma'
+    intro += '.</p>'
 
     vuoto = ('<div class="lg-vuoto" id="lg-vuoto" hidden><b>Nessun luogo con questi filtri.</b>'
              'Prova a togliere la provincia o il tipo di luogo.</div>')
@@ -1194,6 +1216,7 @@ def render(elenco, oggi):
         gruppi_comune(elenco, oggi),
         COME_ORDINIAMO,
         '    <div class="com-link"><a href="/eventi.html">Tutta l\'agenda DAOP</a>'
+        '<a href="/bollino.html">Il bollino Family Friendly</a>'
         '<a href="/metodo.html">Come verifichiamo</a>'
         '<a href="/zone.html">Le zone</a></div>',
         f'    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: '
