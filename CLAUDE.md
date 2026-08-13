@@ -159,6 +159,18 @@ Da qui il resto:
   Ferragosto successivo, e `link_landing(oggi)` la linka dalle altre pagine solo
   dal 10 luglio al 16 agosto. Nessuna data da ricordare a mano.
 
+Come ci si arriva, e la cosa da non fare per dargli più risalto: `blocco_stagione()`
+scrive **una riga sola**, in home (marker `HOME-STAGIONE`) e in coda all'hero
+dell'agenda, dal **5 agosto** — più tardi del link nelle scorciatoie, perché una
+riga in evidenza per cinque settimane è un banner che si impara a non vedere.
+
+**L'H1 di `eventi.html` non si tocca per la stagione.** È la scorciatoia che
+viene in mente per prima ed è un pessimo affare: quell'H1 è l'asset più forte del
+sito e riscriverlo per dieci giorni lo toglie per dieci giorni dalle query su cui
+ranka tutto l'anno. L'avviso è un `<p>` in più, e la sua CSS sta nel `<style>` di
+`index.html` — che è suo e non passa da `_guscio()`, quindi non fa un diff su 260
+file per una riga stagionale.
+
 Nata il 13/08/2026, cioè **due giorni prima**: quest'anno non si posiziona e non
 è per quello che esiste: la resa 2026 arriva da push, WhatsApp e social, quella
 da Google arriva nel 2027. Non giudicarla dai numeri di agosto 2026.
