@@ -1376,7 +1376,6 @@ def render(elenco, oggi):
     e = G.esc
     n = len(elenco)
     comuni = len({(l['prov'], l['comune']) for l in elenco})
-    con_eventi = sum(1 for l in elenco if l.get('prossimi'))
     zona = dove_siamo(elenco)
 
     # Senza "| DAOP" in coda, come le pagine di intenzione: il nome del sito sta
@@ -1396,12 +1395,12 @@ def render(elenco, oggi):
     # la categoria piu' numerosa (123) e la meno invitante su una pagina che si
     # intitola "Dove andare con i bambini". I nidi ci sono e restano nominati -
     # chi li cerca li trova - ma dopo le cose per cui si esce di casa.
+    # Niente coda "in N c'e' gia' un evento in programma": il numero e' piccolo
+    # (9 su 823) e prometteva poco a costo di una riga in piu'. Chi ha un evento
+    # lo dice gia' da solo, con la pillola verde sulla riga.
     intro = ('<p class="lg-intro">Fattorie didattiche, musei, parchi e panchine giganti, '
              'piscine, gelaterie, biblioteche e nidi: scelti uno per uno. '
-             'Apri una riga per orari, prezzi e contatti')
-    if con_eventi:
-        intro += f' — in {con_eventi} c\'è già un evento in programma'
-    intro += '.</p>'
+             'Apri una riga per orari, prezzi e contatti.</p>')
 
     vuoto = ('<div class="lg-vuoto" id="lg-vuoto" hidden><b>Nessun luogo con questi filtri.</b>'
              'Prova a togliere la provincia o il tipo di luogo.</div>')
