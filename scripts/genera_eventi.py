@@ -1920,7 +1920,20 @@ def blocco_ginetto(citta=""):
     Non e' un avviso e non e' un popup: e' la .info-strip della home eventi,
     stesso componente, con la mascotte al posto dell'icona. Il comune nel
     titolo lo sappiamo gia', e una domanda che nomina il posto in cui si trova
-    chi legge vale piu' di un invito generico."""
+    chi legge vale piu' di un invito generico.
+
+    IL TESTO (13/08/2026). Prima diceva "l'assistente di DAOP: trova eventi e
+    luoghi in base all'eta' dei tuoi figli", che di Ginetto e' la descrizione
+    di un filtro, non di quello che e'. Ora dice tre cose che si possono
+    dimostrare: che e' un'intelligenza artificiale, che gli si scrive in
+    italiano invece di riempire un modulo (con l'esempio, che vale piu' della
+    parola "conversazionale"), e che dietro c'e' una selezione fatta a mano.
+
+    "La prima ... per le famiglie di Alessandria e Asti" e non "per le
+    famiglie": un primato senza confini non lo possiamo dimostrare, e un
+    superlativo che non si dimostra e' esattamente il terreno su cui il Codice
+    del consumo considera ingannevole una vanteria. Circoscritto al territorio
+    e' vero, verificabile e dice di piu': e' il nostro."""
     # a_citta() mette la d eufonica: "vicino ad Acqui Terme", non "a Acqui".
     dove = " vicino " + esc(a_citta(citta)) if citta else " con i bambini"
     return f"""<section class="bg-cream ev-ginetto">
@@ -1929,7 +1942,7 @@ def blocco_ginetto(citta=""):
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
       <div>
         <h3>Cerchi altro da fare{dove}?</h3>
-        <p>Chiedilo a <strong>Ginetto AI</strong>, l'assistente di DAOP: trova eventi e luoghi per famiglie in base all'et&agrave; dei tuoi figli. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di Alessandria e Asti: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
       </div>
     </div>
   </div>
