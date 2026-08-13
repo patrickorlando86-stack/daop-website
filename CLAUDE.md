@@ -127,6 +127,42 @@ laboratori/burattini/giochi scritti nel programma. Quello è un dato per riga e
 dice "pensati **per** i bambini", non "adatti". Si può usare, e infatti regge la
 sezione "Cosa c'è per i bambini" delle pagine comune.
 
+### Una pagina stagionale non porta l'anno nell'indirizzo
+
+`/ferragosto.html`, non `/ferragosto-2026.html`. L'anno sta nel `<title>` e
+nell'H1 e lì lo riscrive `spec_ferragosto()` a ogni run.
+
+È la decisione che regge tutta la pagina: una query stagionale si vince con
+l'anzianità dell'URL, e un indirizzo nuovo ogni agosto riparte da zero ogni
+agosto. `tests/landing.js` controlla che il canonical non contenga cifre e che
+il title invece l'anno ce l'abbia.
+
+Da qui il resto:
+
+- **La finestra è il 14-16 agosto fisso**, non "il weekend più vicino al 15".
+  Nel 2026 il 15 cade di sabato: un weekend coinciderebbe con
+  `/eventi/weekend.html`, cioè due nostre pagine sulla stessa lista, e a perdere
+  sarebbe la nuova. Nel 2027 cade di domenica e il 14 resterebbe fuori.
+- **Non è un filtro di date.** Se fosse solo l'elenco del 14-16 sarebbe un
+  doppione di `weekend.html` ogni volta che il 15 cade nel fine settimana. Quello
+  che ha di suo è il blocco sulle due domande di Ferragosto a cui un elenco non
+  risponde — come ci si regola quel giorno, dove si mangia — e da lì manda a
+  `luoghi.html`. È anche **il primo link a quella pagina che parte dal corpo di
+  un'altra** e non dalla nav: finora ne riceveva zero, ed è il motivo per cui non
+  prendeva traffico. Togliere quel blocco non alleggerisce la pagina, la
+  trasforma in un doppione.
+- **Fuori stagione resta online ma esce dall'indice**: `noindex, follow` sotto
+  `MIN_LANDING`, come le `sagre-provincia-*`. I link girati su WhatsApp devono
+  continuare a funzionare, ma una pagina vuota indicizzata per cinquanta
+  settimane è contenuto sottile sull'URL che stiamo facendo invecchiare.
+- **Si gira da sola all'anno dopo**: dal 17 agosto `ferragosto_range()` punta al
+  Ferragosto successivo, e `link_landing(oggi)` la linka dalle altre pagine solo
+  dal 10 luglio al 16 agosto. Nessuna data da ricordare a mano.
+
+Nata il 13/08/2026, cioè **due giorni prima**: quest'anno non si posiziona e non
+è per quello che esiste: la resa 2026 arriva da push, WhatsApp e social, quella
+da Google arriva nel 2027. Non giudicarla dai numeri di agosto 2026.
+
 ### L'età non si ripete nelle descrizioni
 
 La fascia d'età è già nella riga `Età:` dei dati della scheda e in ogni riga
