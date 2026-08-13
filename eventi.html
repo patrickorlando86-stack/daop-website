@@ -185,6 +185,21 @@
   .ev-dayname::first-letter{text-transform:uppercase}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
+  /* Con un giorno scelto nel calendario i gruppi non si possono usare come
+     sono: sono per data di INIZIO, quindi una sagra che il 22 c'e' ancora resta
+     nel gruppo del 16 (o in "gia' iniziati"), e chi ha chiesto il 22 legge
+     "16 agosto" sopra la prima riga. Qui i capi dei gruppi si spengono, il
+     gruppo del giorno scelto passa in cima e le due intestazioni che restano le
+     scrive il JS: cosa comincia quel giorno, cosa era gia' cominciato e quel
+     giorno c'e' ancora. E' 'order', non nodi spostati: le schede non si
+     toccano, quindi niente layout rifatto su 294 righe. */
+  .events-list.is-giorno .ev-day .ev-dayhead{display:none}
+  .ev-dayhead-uno[hidden]{display:none}
+  .ev-dayhead-uno{scroll-margin-top:var(--ev-sticky,126px)}
+  .ev-dayhead-uno.is-oggi{color:var(--orange-dark)}
+  .events-list.is-giorno .ev-cap-inizia{order:-3}
+  .events-list.is-giorno .ev-day.is-scelto{order:-2}
+  .events-list.is-giorno .ev-cap-corso{order:-1}
   /* content-visibility: il browser salta stile, layout e disegno delle schede
      fuori schermo. Su ~290 schede e' la voce piu' pesante della pagina: senza,
      ogni misura forzata (la barra appiccicosa, l'apertura di una riga) ricalcola
@@ -6520,7 +6535,21 @@
         else if (passa) fuori++;
       });
       if (!filtrato) fuori = 0;
-      days.forEach(g => g.classList.toggle('is-hidden', !g.querySelector('.event-card:not(.is-hidden)')));
+      // Il numero accanto al giorno lo scrive il generatore stanotte, quindi con
+      // un filtro attivo diceva "18" sopra una riga sola. Si riscrive solo se e'
+      // cambiato: quello e' un elemento appiccicoso, e toccarlo a ogni battuta
+      // della ricerca costa un ricalcolo di stile.
+      let nScelto = 0;
+      days.forEach(g => {
+        const n = g.querySelectorAll('.event-card:not(.is-hidden)').length;
+        g.classList.toggle('is-hidden', n === 0);
+        const c = g.querySelector('.ev-daycount');
+        if (n && c && c.textContent !== String(n)) c.textContent = n;
+        const scelto = calGiorno !== null && g.dataset.day === calGiorno;
+        g.classList.toggle('is-scelto', scelto);
+        if (scelto) nScelto = n;
+      });
+      intestaGiorno(visible, nScelto);
       Object.keys(sel).forEach(k => sel[k].classList.toggle('is-on', sel[k].value !== 'all'));
       // Le corsie in evidenza servono da vetrina della pagina "a riposo": con un
       // filtro attivo sparirebbero solo per ripetere quello che c'è sotto.
@@ -6578,6 +6607,51 @@
 
     const isoDi = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
                        '-' + String(d.getDate()).padStart(2, '0');
+
+    // Le due intestazioni della vista "un giorno solo". L'agenda e' raggruppata
+    // per data di inizio e non si riordina (spostare i nodi di 294 schede per un
+    // filtro e' il layout piu' caro della pagina): a cambiare sono i capi. Il
+    // gruppo del giorno scelto sale in cima col suo nome, tutto il resto sta
+    // sotto un "gia' iniziati" - e quello che si legge e' vero in entrambi i
+    // posti, mentre "domenica 16 agosto" sopra un evento chiesto per il 22 no.
+    const GIORNI = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
+    function capoGiorno(cls) {
+      const h = document.createElement('h3');
+      h.className = 'ev-dayhead ev-dayhead-uno ' + cls;
+      h.hidden = true;
+      h.innerHTML = '<span class="ev-dayname"></span><span class="ev-daycount"></span>';
+      return list.insertBefore(h, list.firstChild);
+    }
+    const capoCorso = capoGiorno('ev-cap-corso');
+    const capoInizia = capoGiorno('ev-cap-inizia');
+
+    function scriviCapo(capo, nome, n) {
+      const a = capo.querySelector('.ev-dayname'), b = capo.querySelector('.ev-daycount');
+      if (a.textContent !== nome) a.textContent = nome;
+      if (b.textContent !== String(n)) b.textContent = n;
+      capo.hidden = false;
+    }
+
+    function intestaGiorno(visibili, nScelto) {
+      const uno = calGiorno !== null && visibili > 0;
+      list.classList.toggle('is-giorno', calGiorno !== null);
+      capoInizia.hidden = capoCorso.hidden = true;
+      if (!uno) return;
+      const nCorso = visibili - nScelto;
+      // Un giorno in cui non comincia niente (tutto e' in corso da prima) o in
+      // cui non c'e' niente in corso: un capo solo, col totale. Due capi di cui
+      // uno a zero sarebbero una divisione annunciata e non fatta.
+      const doppio = nScelto > 0 && nCorso > 0;
+      const d = new Date(calGiorno + 'T00:00:00');
+      const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+      const domani = new Date(oggi); domani.setDate(oggi.getDate() + 1);
+      const base = GIORNI[d.getDay()] + ' ' + d.getDate() + ' ' + MESI[d.getMonth()];
+      scriviCapo(capoInizia, calGiorno === isoDi(oggi) ? 'Oggi · ' + base
+        : calGiorno === isoDi(domani) ? 'Domani · ' + base : base,
+        doppio ? nScelto : visibili);
+      capoInizia.classList.toggle('is-oggi', calGiorno === isoDi(oggi));
+      if (doppio) scriviCapo(capoCorso, 'Già iniziati, ancora in corso', nCorso);
+    }
 
     function copre(card, da, a) {
       return new Date(card.dataset.start + 'T00:00:00') <= a &&
@@ -6718,6 +6792,14 @@
       if (giorno) {
         calGiorno = giorno.dataset.giorno === calGiorno ? null : giorno.dataset.giorno;
         apply();
+        // Toccare un giorno e restare fermi sul calendario voleva dire scorrere
+        // la griglia del mese, la nav dei comuni e le corsie prima di vedere la
+        // risposta: sul telefono sono due schermate di niente, e chi ha chiesto
+        // il 22 crede che il 22 non ci sia. Si va al capo del giorno, che e' la
+        // prima riga che risponde - solo scegliendo, non deselezionando, e
+        // dopo il disegno, perche' prima quel capo e' ancora nascosto.
+        if (calGiorno) requestAnimationFrame(() =>
+          capoInizia.scrollIntoView({ block: 'start', behavior: 'smooth' }));
       }
     });
     btnAgenda.addEventListener('click', () => cambiaVista('agenda'));

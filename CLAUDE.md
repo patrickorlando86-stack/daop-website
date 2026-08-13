@@ -185,6 +185,40 @@ Se metti l'etichetta, il colore della riga deve essere il suo: quei gruppi
 appiattivano il colore su quello del gruppo e si leggeva "SPETTACOLO" scritto
 nell'arancione delle sagre.
 
+### I gruppi dell'agenda sono per data di INIZIO, e il calendario chiede altro
+
+`eventi.html` raggruppa per giorno di partenza: una sagra dal 16 al 23 agosto sta
+nel gruppo del 16, e se era già cominciata ieri sta in "Già iniziati, ancora in
+corso". È giusto per l'agenda, che si scorre in avanti.
+
+La vista calendario fa un'altra domanda. Toccare il 22 filtra le schede che
+**coprono** il 22 — cioè anche quella del 16 — ma fino al 13/08/2026 le
+intestazioni restavano quelle dei gruppi: chi chiedeva il 22 leggeva "Già
+iniziati" e poi "domenica 16 agosto", e concludeva che il 22 non c'era. Il filtro
+era corretto, i titoli sopra le righe no.
+
+L'agenda **non si riordina** per rispondere (spostare i nodi di ~290 schede è il
+layout più caro della pagina). Con un giorno scelto: le intestazioni dei gruppi si
+spengono, il gruppo di quel giorno sale in cima con `order`, e le due che si
+leggono le scrive il JS — *sabato 22 agosto* per quello che comincia, *Già
+iniziati, ancora in corso* per quello che continua. Due frasi vere in entrambi i
+posti, e nessuna scheda toccata. Il secondo capo compare solo se c'è roba in tutti
+e due: due titoli di cui uno a zero sono una divisione annunciata e non fatta.
+
+Toccando un giorno la pagina **scorre** al primo capo: prima restava ferma sul
+calendario, e sul telefono fra la griglia e la prima riga ci sono la nav dei
+comuni e le corsie, cioè due schermate di niente prima della risposta.
+
+Nello stesso giro è caduta una bugia più vecchia: **il numero accanto al giorno lo
+scrive il generatore stanotte**, quindi con "Prov. AL" attivo diceva `18` sopra
+una riga sola. Ora `apply()` lo riscrive — e solo se è cambiato, perché quella è
+un'intestazione appiccicosa e toccarla a ogni battuta della ricerca costa un
+ricalcolo di stile.
+
+L'app Android non ha questo problema: `daop-mobile/app.js` **clona** gli eventi
+brevi su ogni loro giorno invece di raggrupparli per inizio, e i lunghi li mette
+nei gruppi "Vieni quando vuoi" / "Solo in certi giorni".
+
 ### `luoghi.html`: una pagina, non 800 schede
 
 La domanda di partenza era "800 luoghi, faccio 800 schede?". No. Il sitemap ha
