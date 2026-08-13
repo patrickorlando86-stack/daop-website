@@ -332,6 +332,43 @@ neanche quello che vendi.
 clienti non stanno comprando un pubblico: stanno comprando una scommessa. Non
 promettere numeri che non puoi mostrare, e tienili a un prezzo da pionieri.
 
+#### Tre numeri, cercati in rete il 13/08/2026
+
+Servono a tenere le aspettative in scala, non a fare un piano industriale.
+
+| | |
+|---|---|
+| conversione tipica gratis → pagante (freemium) | **2-5%** → sulle 823 righe fa **16-41 clienti** a regime |
+| ricavo di una directory di nicchia piccola | **100-500 $/mese**, cioè qualche migliaio di euro l'anno |
+| traffico da cui si comincia a poter vendere | **3.000-5.000 visite/mese** |
+
+Il terzo è quello che conta adesso: tutto il sito sta **sotto** quella soglia. Non
+è un problema, è una scadenza — dice che la leva non è vendere di più, è far
+crescere la pagina, e conferma l'ordine dei lavori qui sotto.
+
+I primi due numeri vengono in buona parte da blog di aziende che vendono
+software per directory: hanno interesse a far sembrare il business migliore di
+com'è. Vanno letti come ordine di grandezza, non come promessa.
+
+La ricerca ha anche confermato che **non mettere un tetto è la norma**: nessuno
+limita il numero di schede a pagamento, e il modello standard è a livelli. Quello
+che tutti vendono e **noi no** è la *priority placement*, cioè la posizione in
+classifica. Restiamo più severi del mercato apposta: è la cosa che ci tiene fuori
+dal tiro dell'art. 22 ed è una cosa che gli altri non possono dire.
+
+#### I link in uscita di chi paga vanno qualificati
+
+Un link verso il sito di un cliente è un link commerciale, e le policy di Google
+chiedono `rel="sponsored"` (o almeno `nofollow`): un link a pagamento che passa
+PageRank è uno **schema di link**, e si paga con un'azione manuale **sul
+dominio** — cioè su `eventi.html`, che è la pagina che regge il traffico. Il
+rischio non resta sulla pagina che l'ha causato.
+
+In `riga()`: `sponsored` sulle schede a pagamento, `nofollow` sulle altre, che
+sono segnalazioni nostre e non rapporti commerciali. `tests/luoghi.js` lo
+controlla. Se un giorno nasce un altro spazio venduto — un banner, una scheda
+sponsorizzata in agenda — la regola vale anche lì.
+
 **Far crescere la pagina e far valere di più lo spazio sono lo stesso lavoro.**
 `luoghi.html` è linkata dalla nav di 292 pagine ma da nessun corpo di pagina: la
 pagina comune di Acqui Terme parla di eventi e non dice che ad Acqui ci sono 25

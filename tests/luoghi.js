@@ -219,6 +219,20 @@ module.exports = async function luoghi(browser) {
       .filter((t) => t.split(/\s+/).some((p) => p.replace(/[^A-Za-z]/g, '').length > 5));
     return grida.length === 0;
   }), 'nessun nome tutto in maiuscolo');
+
+  // Un link verso il sito di chi paga e' un link commerciale: senza
+  // rel="sponsored" (o almeno nofollow) e' uno schema di link, e Google lo paga
+  // con un'azione manuale sul DOMINIO - cioe' su eventi.html, che e' la pagina
+  // che regge il traffico. Il rischio non resta su questa pagina.
+  r.ok(await page.evaluate(() => {
+    const fuori = [...document.querySelectorAll('.lg-row a[href^="http"]')]
+      .filter((a) => !/daop\.it|google\.com\/maps/.test(a.href));
+    return fuori.length > 0 && fuori.every((a) => {
+      const rel = (a.getAttribute('rel') || '');
+      const pagata = !!a.closest('.lg-row.is-prem');
+      return pagata ? /sponsored/.test(rel) : /nofollow|sponsored/.test(rel);
+    });
+  }), 'i link in uscita sono qualificati: sponsored sulle schede a pagamento, nofollow sulle altre');
   r.ok(await page.evaluate(() => {
     const norm = (s) => s.trim().toLowerCase().normalize('NFD').replace(/[^a-z0-9 ]/g, '');
     return [...document.querySelectorAll('.lg-grp')].every((g) => {

@@ -1129,7 +1129,16 @@ def riga(l, oggi):
     azioni = [f'<a href="{maps_href(l)}" target="_blank" rel="noopener">Apri nelle mappe</a>']
     if l.get('sito'):
         sito = l['sito'] if l['sito'].startswith('http') else 'https://' + l['sito']
-        azioni.append(f'<a href="{e(sito)}" target="_blank" rel="noopener nofollow">Sito del luogo</a>')
+        # Un link verso il sito di chi ci paga e' un link commerciale, e le
+        # policy di Google chiedono `rel="sponsored"` (o almeno `nofollow`): un
+        # link a pagamento che passa PageRank e' uno schema di link, e si paga
+        # con un'azione manuale sul dominio - cioe' su eventi.html. `nofollow`
+        # basterebbe, ma dice solo "non seguire"; `sponsored` dice cos'e', ed e'
+        # la parola giusta proprio sui quattro link che qualcuno potrebbe
+        # guardare. Le righe non a pagamento restano `nofollow`: sono
+        # segnalazioni nostre, non rapporti commerciali.
+        rel = 'sponsored' if l.get('premium') else 'nofollow'
+        azioni.append(f'<a href="{e(sito)}" target="_blank" rel="noopener {rel}">Sito del luogo</a>')
     if l.get('email'):
         azioni.append(f'<a href="mailto:{e(l["email"])}">Scrivi al luogo</a>')
     corpo.append(f'<div class="lg-act">{"".join(azioni)}</div>')
