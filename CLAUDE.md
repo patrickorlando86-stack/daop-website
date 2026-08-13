@@ -146,11 +146,21 @@ le pagine `sagre-provincia-*` hanno solo la ricerca: lì gli eventi sono tutti
 "Sagre & Feste". Sulle pagine di intenzione non c'è mai il filtro "quando":
 quelle pagine *sono* già una risposta a quando.
 
-Su `luoghi.html` i filtri sono tre — provincia, tipo, età — e stanno in una riga
-sola sul telefono (109px). Le etichette restano corte perché **Chrome dimensiona
-una `<select>` sull'opzione più lunga**, non su quella scelta: è per questo che
-l'etichetta del filtro ("Servizi") non è quella della riga ("Servizi per Bambini
-& Famiglie").
+Su `luoghi.html` i filtri sono quattro — provincia, comune, tipo, età — e sul
+telefono vanno a capo su due righe (156px). Le etichette restano corte perché
+**Chrome dimensiona una `<select>` sull'opzione più lunga**, non su quella
+scelta: è per questo che l'etichetta del filtro ("Servizi") non è quella della
+riga ("Servizi per Bambini & Famiglie").
+
+**Il comune non è una `<select>`, ed è una scelta obbligata.** Con 297 voci il
+selettore nativo di Android diventa un pannello che copre quasi tutto lo schermo,
+senza un pulsante per chiuderlo: chi non vuole scegliere niente deve indovinare
+che si esce toccando fuori. Quel pannello lo disegna il sistema operativo e non
+si può vestire, quindi l'unico modo di non averlo è non usare una `<select>`. Al
+suo posto un `<input>` con `<datalist>`: si scrive "novi" e i suggerimenti
+compaiono in linea, si svuota con la ✕ del campo, e resta un controllo nativo —
+niente finestre finte da tenere in piedi col JavaScript. Il confronto è per pezzo
+di slug, quindi basta un pezzo di nome.
 
 Due filtri sono stati provati e tolti, per ragioni diverse:
 

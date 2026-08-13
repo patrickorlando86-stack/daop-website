@@ -63,7 +63,7 @@ module.exports = async function luoghi(browser) {
   // niente. Due voci (tutti + una scelta) sono un comando vero, quindi la
   // soglia e' >1, non >2.
   r.ok(await page.evaluate(() =>
-    [...document.querySelectorAll('#lg-toolbar .ev-select')]
+    [...document.querySelectorAll('#lg-toolbar select.ev-select')]
       .every((s) => s.options.length > 1)),
     'nessuna tendina senza una scelta da fare');
 
@@ -86,39 +86,49 @@ module.exports = async function luoghi(browser) {
       .every((g) => g.hidden === !g.querySelector('.lg-row[data-cat]:not([hidden])'))),
     'i gruppi comune rimasti vuoti spariscono con la loro intestazione');
 
-  // Il comune: 298 voci raggruppate per provincia, e le due tendine devono
-  // andare d'accordo. Due filtri che si contraddicono ("Prov. CN" + un comune
-  // di Alessandria) danno un elenco vuoto senza spiegare perche'.
-  const com = page.locator('#lg-toolbar [data-campo="comune"]');
+  // Il comune NON e' una tendina: con 297 voci il selettore nativo di Android
+  // copre quasi tutto lo schermo e non si capisce come chiuderlo. E' un campo
+  // di testo con <datalist>, e si scrive un pezzo di nome.
+  const com = page.locator('#lg-toolbar input[data-campo="comune"]');
   if (await com.count()) {
     await page.selectOption('#lg-toolbar [data-campo="cat"]', 'all');
-    const primo = await com.evaluate((s) => s.querySelector('optgroup option').value);
-    await page.selectOption('#lg-toolbar [data-campo="comune"]', primo);
-    await page.waitForTimeout(250);
-    const n2 = await visibili(page);
-    r.ok(n2 > 0 && n2 < tot, `filtro comune "${primo}": ${n2}/${tot}`);
-    r.ok(await page.evaluate((c) =>
-      [...document.querySelectorAll('.lg-row[data-cat]:not([hidden])')]
-        .every((l) => l.dataset.comune === c), primo), 'resta solo quel comune');
+    r.ok(await page.locator('#lg-toolbar select[data-campo="comune"]').count() === 0,
+      'il comune non e\' una <select>: niente pannello a tutto schermo su Android');
+    const quante = await page.locator('#lg-comuni option').count();
+    r.ok(quante > 1, `${quante} comuni suggeriti`);
 
-    const altra = await page.evaluate((c) => {
-      const s = document.querySelector('[data-campo="comune"]');
-      const mia = s.querySelector(`option[value="${c}"]`).parentNode.dataset.prov;
-      const og = [...s.querySelectorAll('optgroup')].find((o) => o.dataset.prov !== mia);
-      return og ? og.dataset.prov : null;
-    }, primo);
+    const nome = await page.locator('#lg-comuni option').first().getAttribute('value');
+    await com.fill(nome);
+    await page.waitForTimeout(300);
+    const n2 = await visibili(page);
+    r.ok(n2 > 0 && n2 < tot, `filtro comune "${nome}": ${n2}/${tot}`);
+    r.ok(await page.evaluate((c) => {
+      const s = c.normalize('NFKD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase();
+      return [...document.querySelectorAll('.lg-row[data-cat]:not([hidden])')]
+        .every((l) => l.dataset.comune.indexOf(s) > -1);
+    }, nome), 'resta solo quel comune');
+
+    // Basta un pezzo di nome: e' il punto del campo di testo.
+    await com.fill(nome.slice(0, 4));
+    await page.waitForTimeout(300);
+    r.ok(await visibili(page) >= n2, `scrivendo solo "${nome.slice(0, 4)}" li trova lo stesso`);
+
+    const altra = await page.evaluate(() => {
+      const p = document.querySelector('select[data-campo="prov"]');
+      return p && p.options.length > 2 ? p.options[p.options.length - 1].value : null;
+    });
     if (altra) {
+      await com.fill(nome);
       await page.selectOption('#lg-toolbar [data-campo="prov"]', altra);
-      await page.waitForTimeout(250);
-      r.ok(await com.inputValue() === 'all',
-        'cambiando provincia il comune incompatibile si azzera, non resta scelto e invisibile');
-      r.ok(await page.evaluate(() =>
-        [...document.querySelectorAll('[data-campo="comune"] optgroup')]
-          .filter((o) => !o.hidden).length === 1),
-        'restano i comuni della sola provincia scelta');
+      await page.waitForTimeout(300);
+      r.ok(await com.inputValue() === '',
+        'cambiando provincia il comune incompatibile si cancella, non resta scritto e senza risultati');
+      r.ok(await page.locator('#lg-comuni option').count() < quante,
+        'restano suggeriti i comuni della sola provincia scelta');
       await page.selectOption('#lg-toolbar [data-campo="prov"]', 'all');
     }
-    await page.selectOption('#lg-toolbar [data-campo="comune"]', 'all');
+    await com.fill('');
     // Il filtro categoria era stato azzerato qui sopra per isolare il comune:
     // va rimesso, se no la prova che li somma parte da uno stato diverso da
     // quello che crede.

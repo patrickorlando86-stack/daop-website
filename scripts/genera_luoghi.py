@@ -704,8 +704,17 @@ LUOGHI_CSS = """
    barra. Si limita e si taglia con i puntini - il valore scelto resta
    leggibile, e l'elenco aperto lo disegna il browser alla sua larghezza (sul
    telefono e' un pannello a tutto schermo). */
-.ev-select.is-comune{max-width:150px;text-overflow:ellipsis}
-@media(max-width:600px){.ev-select.is-comune{max-width:126px}}
+/* Il campo comune e' un <input>, non una <select>: veste la stessa pillola ma
+   gli servono le cose che .ev-select da' per scontate su un menu. */
+input.ev-select.is-comune{max-width:150px;text-overflow:ellipsis;cursor:text;
+  -webkit-appearance:none;appearance:none}
+input.ev-select.is-comune::placeholder{color:var(--text-mid);opacity:1;font-weight:600}
+input.ev-select.is-comune.is-on::placeholder{color:rgba(255,255,255,.75)}
+/* La ✕ per svuotare e la freccetta dei suggerimenti le disegna il browser in
+   scuro: sulla pillola attiva, che e' blu notte, sparivano. */
+input.ev-select.is-comune.is-on::-webkit-search-cancel-button,
+input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert(1) brightness(1.8)}
+@media(max-width:600px){input.ev-select.is-comune{max-width:126px}}
 .lg-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:10px 0 0;min-height:1em}
 .lg-reset{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-mid);
   background:none;border:0;border-bottom:1px solid rgba(45,74,92,0.25);padding:0 0 1px;cursor:pointer}
@@ -844,8 +853,21 @@ LUOGHI_JS = r"""<script>
   var conta = document.getElementById('lg-count');
   var vuoto = document.getElementById('lg-vuoto');
   var reset = document.getElementById('lg-reset');
-  var sel = [].slice.call(bar.querySelectorAll('.ev-select'));
+  var sel = [].slice.call(bar.querySelectorAll('select.ev-select'));
+  var inpCom = bar.querySelector('input[data-campo="comune"]');
+  var listaCom = document.getElementById('lg-comuni');
+  var comuniTutti = listaCom
+    ? [].map.call(listaCom.options, function (o) { return { v: o.value, p: o.dataset.prov }; })
+    : [];
   var righe = [].slice.call(document.querySelectorAll('.lg-row[data-cat]'));
+
+  // Lo stesso slug che il generatore mette in data-comune, rifatto in JS: cosi'
+  // "Novi" scritto a mano trova "novi-ligure" senza dover scrivere tutto, e
+  // "Città" trova "citta".
+  function slugifica(s) {
+    return (s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase();
+  }
   var gruppi = [].slice.call(document.querySelectorAll('.lg-grp'));
   if (!righe.length) return;
 
@@ -873,10 +895,12 @@ LUOGHI_JS = r"""<script>
       s.classList.toggle('is-on', s.value !== 'all');
     });
     var eta = f.eta && f.eta !== 'all' ? parseInt(f.eta, 10) : null;
+    var com = inpCom ? slugifica(inpCom.value) : '';
+    if (inpCom) inpCom.classList.toggle('is-on', !!inpCom.value.trim());
     var visti = 0;
     righe.forEach(function (r) {
       var ok = (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
-               (!f.comune || f.comune === 'all' || r.dataset.comune === f.comune) &&
+               (!com || (r.dataset.comune || '').indexOf(com) > -1) &&
                (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
                (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
                (!t || indice().get(r).indexOf(t) > -1);
@@ -889,7 +913,7 @@ LUOGHI_JS = r"""<script>
     gruppi.forEach(function (g) {
       g.hidden = !g.querySelector('.lg-row[data-cat]:not([hidden])');
     });
-    var filtrato = !!t || sel.some(function (s) { return s.value !== 'all'; });
+    var filtrato = !!t || !!com || sel.some(function (s) { return s.value !== 'all'; });
     conta.textContent = filtrato
       ? visti + (visti === 1 ? ' luogo' : ' luoghi') + ' con questi filtri'
       : '';
@@ -902,24 +926,35 @@ LUOGHI_JS = r"""<script>
   // filtri che si contraddicono sono peggio di un filtro in meno. Se il comune
   // gia' scelto non appartiene piu' alla provincia, si azzera invece di
   // restare selezionato e invisibile.
-  var selProv = bar.querySelector('[data-campo="prov"]');
-  var selCom = bar.querySelector('[data-campo="comune"]');
+  var selProv = bar.querySelector('select[data-campo="prov"]');
   function accordaComuni() {
-    if (!selProv || !selCom) return;
+    if (!selProv || !listaCom) return;
     var p = selProv.value;
-    [].forEach.call(selCom.querySelectorAll('optgroup'), function (og) {
-      og.hidden = !(p === 'all' || og.dataset.prov === p);
-    });
-    var scelto = selCom.selectedOptions[0];
-    if (scelto && scelto.parentNode.hidden) selCom.value = 'all';
+    var buoni = comuniTutti.filter(function (c) { return p === 'all' || c.p === p; });
+    listaCom.innerHTML = buoni.map(function (c) {
+      return '<option value="' + c.v.replace(/"/g, '&quot;') + '"></option>';
+    }).join('');
+    // Un comune scritto che non sta piu' nella provincia scelta si cancella:
+    // due filtri che si contraddicono danno un elenco vuoto senza spiegare
+    // perche', ed e' peggio di un filtro in meno.
+    if (inpCom && inpCom.value.trim()) {
+      var scritto = slugifica(inpCom.value);
+      var resta = buoni.some(function (c) { return slugifica(c.v).indexOf(scritto) > -1; });
+      if (!resta) inpCom.value = '';
+    }
   }
   if (selProv) selProv.addEventListener('change', accordaComuni);
   accordaComuni();
 
   if (q) q.addEventListener('input', applica);
+  if (inpCom) {
+    inpCom.addEventListener('input', applica);
+    inpCom.addEventListener('change', applica);
+  }
   sel.forEach(function (s) { s.addEventListener('change', applica); });
   if (reset) reset.addEventListener('click', function () {
     if (q) q.value = '';
+    if (inpCom) inpCom.value = '';
     sel.forEach(function (s) { s.value = 'all'; });
     accordaComuni();
     applica();
@@ -1154,26 +1189,33 @@ def filtri(elenco):
         campi.append('<select class="ev-select" data-campo="prov" aria-label="Filtra per provincia">'
                      f'<option value="all">Prov.</option>{opts}</select>')
 
-    # Il comune: 298 voci, quindi RAGGRUPPATE per provincia con <optgroup>. Una
-    # tendina piatta da 298 righe non si scorre, e il raggruppamento lo fa il
-    # browser da solo, senza JavaScript e con il selettore nativo del telefono.
-    # Il JS in fondo la lega al filtro provincia: scegliendo AL restano i comuni
-    # di AL, se no si potrebbe scegliere "Prov. AT" + "Acqui Terme" e ottenere
-    # un elenco vuoto senza capire perche'.
+    # Il comune NON e' una <select>, ed e' una scelta obbligata. Con 297 voci il
+    # selettore nativo di Android diventa un pannello che copre quasi tutto lo
+    # schermo, senza un pulsante per chiuderlo: chi non vuole scegliere niente
+    # deve indovinare che si esce toccando fuori o col tasto indietro. Quel
+    # pannello lo disegna il sistema operativo e non si puo' vestire, quindi
+    # l'unico modo di non averlo e' non usare una <select>.
+    #
+    # Al suo posto un campo di testo con <datalist>: si scrive "novi" e i
+    # suggerimenti compaiono sotto, in linea, senza coprire niente; si svuota
+    # con la ✕ del campo. Resta un controllo nativo - niente finestre finte da
+    # tenere in piedi con il JavaScript - e senza JS e' comunque un campo che si
+    # puo' leggere. Il confronto e' per pezzo di slug, quindi "novi" trova
+    # "Novi Ligure" senza dover scrivere tutto.
     per_prov = collections.OrderedDict()
     for l in elenco:
         per_prov.setdefault(l['prov'], {}).setdefault(G.slugify(l['comune']), l['comune'])
     tutti = sum(len(v) for v in per_prov.values())
     if tutti > 1:
-        gruppi = []
+        voci = []
         for p in sorted(per_prov):
-            voci = "".join(
-                f'<option value="{s}">{G.esc(n)}</option>'
-                for s, n in sorted(per_prov[p].items(), key=lambda x: _alfabetico(x[1])))
-            etichetta = G.esc(G.PROVINCE_NOMI.get(p, p) or 'Altrove')
-            gruppi.append(f'<optgroup label="{etichetta}" data-prov="{p.lower()}">{voci}</optgroup>')
-        campi.append('<select class="ev-select is-comune" data-campo="comune" aria-label="Filtra per comune">'
-                     f'<option value="all">Comune</option>{"".join(gruppi)}</select>')
+            for _s, n in sorted(per_prov[p].items(), key=lambda x: _alfabetico(x[1])):
+                voci.append(f'<option value="{G.esc(n)}" data-prov="{p.lower()}"></option>')
+        campi.append(
+            '<input class="ev-select is-comune" type="search" data-campo="comune" '
+            'id="lg-comune" list="lg-comuni" placeholder="Comune" '
+            'aria-label="Filtra per comune" autocomplete="off">'
+            f'<datalist id="lg-comuni">{"".join(voci)}</datalist>')
 
     cats = {}
     for l in elenco:
