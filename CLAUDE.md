@@ -310,6 +310,34 @@ che non è decorativo: se cambi l'ordinamento, cambia anche quel testo.
 `tests/luoghi.js` controlla l'ordine alfabetico proprio per questo — se un giorno
 qualcuno ordinasse "premium prima", quella prova diventa rossa.
 
+### Sull'app la posizione si compra. Sul sito no. È voluto
+
+Le due superfici di DAOP hanno **regole di ordinamento diverse, e vanno tenute
+diverse** — non è un'incoerenza da sanare, è una scelta per ciascun mezzo.
+
+| | ordine | dove lo dice |
+|---|---|---|
+| `luoghi.html` (sito) | alfabetico per comune, **la posizione non si vende** | `#come-ordiniamo` |
+| Ginetto (repo `daop-mobile`) | **Premium sempre primo, ha pagato**, poi distanza | badge `✦ Sponsorizzato` su ogni card + sezione "Come ordino i risultati" |
+
+Nell'app, `_tier()` in `app.js`: 0 = Premium, 1 = Consigliato DAOP *solo se non si
+conosce la posizione*, 2 = il resto. Con il GPS attivo comanda la distanza e il
+bollino torna a essere solo un'etichetta, così un consigliato lontano non
+scavalca un posto perfetto vicino. Gli **eventi** invece restano in ordine di
+data anche per chi paga: su un calendario l'ordine non si compra.
+
+Perché la differenza regge: in un elenco di 823 righe l'ordine lo interpreta chi
+legge, e alfabetico è l'unica promessa che possiamo mantenere. In una risposta che
+nomina due o tre posti l'ordine *è* il consiglio — e proprio per questo lì la
+dichiarazione deve stare attaccata alla voce, che è quello che fa il badge.
+
+Nel repo dell'app c'è anche una suite di prove chiamata *"onestà
+dell'ordinamento dichiarato"*: nata dai log del 4-6/08/2026, quando due risposte
+su dieci promettevano "in ordine di vicinanza" mentre in cima stava il tier a
+pagamento. Ora il prompt obbliga Gemini a dichiarare l'ordine vero e gli vieta
+di inventarne altri. **Se un giorno si cambia `_tier()`, va cambiato anche il
+testo della sezione nell'app**, se no la sezione diventa una bugia.
+
 ### Vendere uno spazio: il limite non è il numero, è il dislivello
 
 Ragionato il 13/08/2026, quando le schede a pagamento erano 4 su 823. Qui stanno
