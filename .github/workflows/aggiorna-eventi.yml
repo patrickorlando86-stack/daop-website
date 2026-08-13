@@ -102,8 +102,13 @@ jobs:
           #   luoghi.html, data/luoghi.json  l'elenco dei posti e l'istantanea
           #     del catalogo, che fa da ripiego quando il foglio non risponde -
           #     stessa funzione che data/eventi.json ha per l'agenda.
+          #   ferragosto.html  il 13/08/2026 non era in NESSUNA delle due liste
+          #     (ne' qui ne' in FILE_GENERATI_SITO del downloader): rigenerata a
+          #     ogni run e pubblicata mai. Online ne dichiarava 62 mentre il
+          #     foglio ne aveva 89, e c'era arrivata solo per caso dentro due
+          #     commit di stile su un link. Le due liste vanno tenute uguali.
           FILE="eventi.html index.html centri-estivi.html metodo.html rubriche.html zone.html \
-                luoghi.html sagre-provincia-*.html \
+                luoghi.html sagre-provincia-*.html ferragosto.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json data/luoghi.json \
                 eventi/ rubriche/ assets/miniature/"
