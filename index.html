@@ -427,6 +427,12 @@
     gap: 24px; flex-wrap: wrap; margin-bottom: 36px;
   }
   .he-head .section-subtitle { margin-top: 8px; }
+  /* Riga stagionale sopra il carosello (oggi: Ferragosto). La stampa il
+     generatore fra i marker HOME-STAGIONE e fuori stagione e' vuota, quindi
+     questa regola non ha niente da vestire e non lascia spazio in giro. */
+  .he-stagione { margin-top: 12px; font-weight: 700; }
+  .he-stagione a { color: var(--orange); text-decoration: none; border-bottom: 2px solid currentColor; }
+  .he-stagione a:hover { opacity: .78; }
   .he-nav { display: flex; gap: 10px; flex-shrink: 0; }
   .he-arrow {
     width: 44px; height: 44px; border-radius: 50%;
@@ -1263,6 +1269,7 @@
         <span class="section-label">Agenda</span>
         <h2 class="section-title">Prossimi eventi in zona</h2>
         <p class="section-subtitle">Sagre, laboratori, spettacoli ed escursioni per famiglie nelle province di Alessandria, Asti e Cuneo. Selezionati e verificati dalla community DAOP, quelli di Cuneo insieme alla pagina con cui collaboriamo.</p>
+        <!-- HOME-STAGIONE:START --><p class="he-stagione"><a href="/ferragosto.html">Ferragosto fra 2 giorni: i 62 eventi del 14-16 agosto →</a></p><!-- HOME-STAGIONE:END -->
       </div>
       <div class="he-nav fade-in" aria-hidden="true">
         <button type="button" class="he-arrow" data-he-dir="-1" aria-label="Eventi precedenti">

@@ -4755,6 +4755,42 @@ MIN_SAGRE_HERO = 3
 FINESTRA_HERO = 30
 
 
+# L'avviso stagionale in home e in cima all'agenda parte piu' tardi del link
+# nelle scorciatoie (FERRAGOSTO_APRE, 10 luglio): una riga in evidenza per
+# cinque settimane e' un banner che la gente impara a non vedere, e a inizio
+# luglio "fra sei settimane" non e' una notizia. Dieci giorni prima si'.
+FERRAGOSTO_AVVISO = (8, 5)  # 5 agosto
+
+
+def blocco_stagione(events, oggi):
+    """La riga "c'è Ferragosto" per la home e per l'hero dell'agenda, o ''.
+
+    Serve a due posti e sta scritta una volta: sono le uniche due superfici da
+    cui /ferragosto.html si raggiunge senza essere gia' dentro una pagina di
+    intenzione. Fuori finestra torna stringa vuota, quindi non c'e' niente da
+    togliere a settembre.
+
+    Il conteggio non e' decorazione: "62 eventi" e' la promessa che dice se
+    vale la pena entrare, esattamente come i numeri accanto ai comuni."""
+    if not (FERRAGOSTO_AVVISO <= (oggi.month, oggi.day) <= (8, FERRAGOSTO_A)):
+        return ''
+    da, il15, a = ferragosto_range(oggi)
+    quanti = sum(1 for e in events if e['d_start'] <= a and e['d_end'] >= da)
+    if quanti < MIN_LANDING:
+        return ''
+    manca = (il15 - oggi).days
+    if manca > 1:
+        quando = f"fra {manca} giorni"
+    elif manca == 1:
+        quando = "domani"
+    elif manca == 0:
+        quando = "è oggi"
+    else:
+        quando = "è in corso"
+    return (f'<a href="/ferragosto.html">Ferragosto {quando}: i {quanti} eventi '
+            f'del 14-16 agosto →</a>')
+
+
 def blocco_hero(events, oggi):
     """H1 e occhiello dell'agenda, scritti sulla stagione che c'e' davvero.
 
@@ -4781,7 +4817,14 @@ def blocco_hero(events, oggi):
                      "weekend nelle province di Alessandria, Asti e Cuneo. Agenda "
                      "aggiornata ogni notte e verificata evento per evento: fuori "
                      "stagione le sagre non ci sono, e non le scriviamo.")
-    return f"    <h1>{h1}</h1>\n    <p>{occhiello}</p>"
+    # L'avviso di Ferragosto e' un <p> in piu', NON un H1 diverso: l'H1 di
+    # eventi.html e' l'asset piu' forte del sito e riscriverlo per dieci giorni
+    # su una festa vuol dire toglierlo per dieci giorni dalle query su cui
+    # ranka tutto l'anno. Niente classe nuova, cosi' non tocchiamo il <style>
+    # che _guscio() ricopia in ~260 file per una riga stagionale.
+    stagione = blocco_stagione(events, oggi)
+    coda = f"\n    <p>{stagione}</p>" if stagione else ""
+    return f"    <h1>{h1}</h1>\n    <p>{occhiello}</p>{coda}"
 
 
 def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None, hero=None):
@@ -4835,8 +4878,9 @@ def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None, hero=None
     open(HTML_PATH, "w", encoding="utf-8").write(s)
 
 
-def inject_home(cards_html):
-    """Sostituisce le card del carosello in index.html tra i marker HOME-EVENTI.
+def inject_home(cards_html, stagione=''):
+    """Sostituisce le card del carosello in index.html tra i marker HOME-EVENTI,
+    e la riga stagionale tra i marker HOME-STAGIONE.
     Se la home o i marker mancano, salta senza errore."""
     if not os.path.exists(HOME_PATH):
         print("[genera_eventi] index.html non trovato, salto carosello home")
@@ -4848,8 +4892,16 @@ def inject_home(cards_html):
     if n != 1:
         print("[genera_eventi] marker HOME-EVENTI non trovati in index.html, salto carosello home")
         return
+    # La riga sta FUORI da .he-track: dentro sarebbe un elemento della striscia
+    # orizzontale delle card, cioe' una scheda finta larga quanto le altre.
+    riga = f'<p class="he-stagione">{stagione}</p>' if stagione else ''
+    s, ns = re.subn(r'<!-- HOME-STAGIONE:START -->.*?<!-- HOME-STAGIONE:END -->',
+                    lambda _: f'<!-- HOME-STAGIONE:START -->{riga}<!-- HOME-STAGIONE:END -->',
+                    s, count=1, flags=re.S)
     open(HOME_PATH, "w", encoding="utf-8").write(s)
-    print("[genera_eventi] carosello eventi aggiornato in index.html")
+    print("[genera_eventi] carosello eventi aggiornato in index.html"
+          + (f", riga stagionale: {'sì' if stagione else 'no'}" if ns else
+             ", marker HOME-STAGIONE non trovati"))
 
 
 def update_sitemap(slugs=(), comuni=(), landing=()):
@@ -5379,7 +5431,7 @@ def main():
     jsonld = render_jsonld(events)
     inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub, oggi),
            blocco_hero(events, oggi))
-    inject_home(render_home(events))
+    inject_home(render_home(events), blocco_stagione(events, oggi))
     slugs = scrivi_pagine(events, hub)
     comuni = scrivi_comuni(hub, oggi)
     landing = scrivi_landing(events, hub, storico, oggi)
