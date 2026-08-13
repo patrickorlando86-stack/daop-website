@@ -1,0 +1,54 @@
+name: auto-merge-to-main
+
+# Porta in live da sola ogni modifica fatta dalle sessioni Claude Code: quando
+# una sessione pusha il suo branch (claude/...), questa Action lo fonde in main
+# -> GitHub Pages deploya -> daop.it aggiornato. Nessun merge manuale, nessuna
+# PR da ricordare. E' la stessa Action che gira gia' su daop-mobile.
+#
+# ATTENZIONE: le modifiche vanno in produzione SENZA revisione. Per disattivare,
+# cancella questo file (o rinominalo .yml.off).
+#
+# Nota per chi legge il repo: i controlli (valida_jsonld.py e le prove di fumo)
+# girano DOPO, dentro aggiorna-eventi.yml, non qui. E' la stessa scelta scritta
+# in CLAUDE.md - il sito fermo un giorno con gli eventi di ieri e' peggio di una
+# pagina con un difetto - quindi un merge che passa non vuol dire "verificato",
+# vuol dire "pubblicato". La run notturna diventa rossa se qualcosa non torna.
+
+on:
+  push:
+    branches:
+      - 'claude/**'
+
+permissions:
+  contents: write
+
+# Una alla volta, in ordine, per evitare push concorrenti su main. Qui serve
+# piu' che sull'app: sul sito la run notturna committa da sola su main, quindi
+# due merge in parallelo troverebbero la testa spostata.
+concurrency:
+  group: auto-merge-main
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fonde ${{ github.ref_name }} in main
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          git pull --ff-only origin main
+          if git merge --no-ff "origin/${{ github.ref_name }}" \
+               -m "auto-merge: ${{ github.ref_name }} -> main"; then
+            git push origin main
+            echo "OK: ${{ github.ref_name }} fuso in main."
+          else
+            echo "::error::Conflitto fondendo ${{ github.ref_name }} in main. Merge manuale necessario."
+            git merge --abort || true
+            exit 1
+          fi
