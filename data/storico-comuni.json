@@ -34,6 +34,17 @@
     "pagina": false,
     "ultima": "2026-08-29"
    },
+   "castelli-aperti-a-ferragosto-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello dei Paleologi",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
    "castelli-aperti-castello-dei-paleologi-acqui-terme": {
     "anni": [
      2026
@@ -195,6 +206,17 @@
     "pagina": true,
     "ultima": "2026-08-28"
    },
+   "capodanno-alessandrino-anno-dell-amore-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Capodanno Alessandrino - Anno dell'Amore",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-31"
+   },
    "festa-della-birra-street-food-alessandria": {
     "anni": [
      2026
@@ -320,6 +342,23 @@
   "nome": "Alessandria",
   "prov": "AL"
  },
+ "alfianonatta": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-di-razzano-alfiano-natta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Razzano",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello di Razzano",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Alfiano Natta",
+  "prov": "AL"
+ },
  "aramengo": {
   "eventi": {
    "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo": {
@@ -416,6 +455,40 @@
   "nome": "Baldichieri d'Asti",
   "prov": "AT"
  },
+ "barolo": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-falletti-e-w-barolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Falletti e WiMu",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello Falletti e WiMu",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Barolo",
+  "prov": "CN"
+ },
+ "bistagno": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Gipsoteca Giulio Monteverde",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Gipsoteca Giulio Monteverde",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Bistagno",
+  "prov": "AL"
+ },
  "borghettodiborbera": {
   "eventi": {
    "laboratorio-di-pittura-per-bambini-e-ragazzi-assoc-borghetto-di-borbera": {
@@ -433,6 +506,23 @@
   "nome": "Borghetto di Borbera",
   "prov": "AL"
  },
+ "bra": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-la-zizzola-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Zizzola",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - La Zizzola",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Bra",
+  "prov": "CN"
+ },
  "brossasco": {
   "eventi": {
    "san-bernardo-brossasco": {
@@ -448,6 +538,23 @@
    }
   },
   "nome": "Brossasco",
+  "prov": "CN"
+ },
+ "busca": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-del-roccolo-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello del Roccolo",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello del Roccolo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Busca",
   "prov": "CN"
  },
  "buttiglieradasti": {
@@ -653,6 +760,23 @@
   "nome": "Cartosio",
   "prov": "AL"
  },
+ "casalcermelli": {
+  "eventi": {
+   "sagra-della-focaccia-al-formaggio-e-delle-trofie-a-casal-cermelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Carlo",
+    "manifest": "22ª Sagra della Focaccia al Formaggio e delle Trofie al Pesto",
+    "nome": "22ª Sagra della Focaccia al Formaggio e delle Trofie al Pesto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Casal Cermelli",
+  "prov": "AL"
+ },
  "casalnoceto": {
   "eventi": {
    "assaggia-casalnoceto": {
@@ -803,6 +927,40 @@
   "nome": "Cassinasco",
   "prov": "AT"
  },
+ "cassine": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-museo-d-arte-sacra-cassine": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo d'Arte Sacra",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Museo d'Arte Sacra",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Cassine",
+  "prov": "AL"
+ },
+ "castagnoledellelanze": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-torre-del-conte-balla-castagnole-delle-lanze": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Torre del Conte Ballada",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Torre del Conte Ballada",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Castagnole delle Lanze",
+  "prov": "AT"
+ },
  "castelboglione": {
   "eventi": {
    "festa-patronale-di-castel-boglione": {
@@ -865,6 +1023,23 @@
   "nome": "Casteldelfino",
   "prov": "CN"
  },
+ "castelferro": {
+  "eventi": {
+   "sagra-dei-salamini-d-asino-polisportiva-m-denegri-castelferro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castelferro",
+    "manifest": "",
+    "nome": "49ª Sagra dei Salamini d'Asino - Polisportiva M. Denegri A.S.D.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   }
+  },
+  "nome": "Castelferro",
+  "prov": "AL"
+ },
  "castellalfero": {
   "eventi": {
    "palio-baldichieri-castell-alfero": {
@@ -884,6 +1059,17 @@
  },
  "castellazzobormida": {
   "eventi": {
+   "coco-cinema-sotto-le-stelle-castellazzo-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile delle scuole",
+    "manifest": "",
+    "nome": "Coco - Cinema Sotto le Stelle",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   },
    "mezzanotte-bianca-castellazzo-bormida": {
     "anni": [
      2026
@@ -989,6 +1175,23 @@
   "nome": "Castelnuovo Belbo",
   "prov": "AT"
  },
+ "castelnuovocalcea": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-area-del-castello-castelnuovo-calcea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area del Castello",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Area del Castello",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Castelnuovo Calcea",
+  "prov": "AT"
+ },
  "castelnuovodonbosco": {
   "eventi": {
    "feste-di-san-rocco-castelnuovo-don-bosco": {
@@ -1000,7 +1203,7 @@
     "nome": "Feste di San Rocco 2026",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-08-14"
+    "ultima": "2026-08-15"
    }
   },
   "nome": "Castelnuovo Don Bosco",
@@ -1556,6 +1759,23 @@
   "nome": "Costa Vescovato",
   "prov": "AL"
  },
+ "costiglioledasti": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-di-rora-costigliole-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Rorà",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello di Rorà",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Costigliole d'Asti",
+  "prov": "AT"
+ },
  "crissolo": {
   "eventi": {
    "caccia-al-tesoro-kam-3841-crissolo": {
@@ -1751,6 +1971,17 @@
  },
  "cuneo": {
   "eventi": {
+   "creazione-giochi-di-societa-chiosco-parri-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Ferruccio Parri",
+    "manifest": "",
+    "nome": "Creazione Giochi di Società - Chiosco Parri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-13"
+   },
    "giochi-d-acqua-chiosco-parri-cuneo": {
     "anni": [
      2026
@@ -2131,6 +2362,23 @@
   "nome": "Entracque",
   "prov": "CN"
  },
+ "entraque": {
+  "eventi": {
+   "tu-che-animale-sei-montagne-del-mare-entraque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Visita Uomini e Lupi",
+    "manifest": "",
+    "nome": "Tu che animale sei? - Montagne del Mare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-19"
+   }
+  },
+  "nome": "Entraque",
+  "prov": "CN"
+ },
  "ferrere": {
   "eventi": {
    "festa-patronale-di-sant-agostino-pro-loco-ferrere": {
@@ -2233,6 +2481,17 @@
  },
  "fossano": {
   "eventi": {
+   "castelli-aperti-a-ferragosto-castello-dei-principi-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello dei Principi d'Acaja",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello dei Principi d'Acaja",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
    "cresco-con-te-biblioteca-civica-di-fossano": {
     "anni": [
      2026
@@ -2312,6 +2571,17 @@
  },
  "govone": {
   "eventi": {
+   "castelli-aperti-a-ferragosto-castello-reale-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Reale",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello Reale",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   },
    "dj-set-dj-dedo-italobeat-dj-skyline-90-volte-ancor-govone": {
     "anni": [
      2026
@@ -2504,6 +2774,40 @@
   "nome": "Limone Piemonte",
   "prov": "CN"
  },
+ "maglianoalfieri": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-degli-alfier-magliano-alfieri": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello degli Alfieri",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello degli Alfieri",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Magliano Alfieri",
+  "prov": "CN"
+ },
+ "manta": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-della-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello della Manta",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello della Manta",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Manta",
+  "prov": "CN"
+ },
  "mantovana": {
   "eventi": {
    "sagra-del-bollito-misto-con-bagnet-mantovana": {
@@ -2547,6 +2851,17 @@
     "luogo": "Castello di Monastero Bormida",
     "manifest": "Castelli Aperti 2026",
     "nome": "Castello di Monastero Bormida - Castelli Aperti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "castello-e-mercato-medievale-di-san-rocco-con-visi-monastero-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Monastero Bormida",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castello e Mercato Medievale di San Rocco con visite guidate e visita teatralizzata",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-16"
@@ -3018,8 +3333,36 @@
   "nome": "Ormea",
   "prov": "CN"
  },
+ "ozzanomonferrato": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-visita-del-borgo-ozzano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgo di Ozzano Monferrato",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Visita del borgo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Ozzano Monferrato",
+  "prov": "AL"
+ },
  "paesana": {
   "eventi": {
+   "barbaluc-cantastorie-nel-bosco-della-trebulina-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco della Trebulina - Pian Munè",
+    "manifest": "Laboratori di Pian Munè",
+    "nome": "Barbalüc - Cantastorie nel Bosco della Trebulina",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   },
    "barbaluc-woodlab-alla-scoperta-degli-abitanti-del-paesana": {
     "anni": [
      2026
@@ -3033,6 +3376,23 @@
    }
   },
   "nome": "Paesana",
+  "prov": "CN"
+ },
+ "pamparato": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-borgo-antico-e-castel-pamparato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgo antico e Castello di Pamparato",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Borgo antico e Castello di Pamparato",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Pamparato",
   "prov": "CN"
  },
  "pasturana": {
@@ -3486,6 +3846,40 @@
   "nome": "Prato Nevoso",
   "prov": "CN"
  },
+ "priero": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-borgo-e-torre-medieva-priero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgo e Torre medievale di Priero",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Borgo e Torre medievale di Priero",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Priero",
+  "prov": "CN"
+ },
+ "rivaltabormida": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-palazzo-lignana-rivalta-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Lignana",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Palazzo Lignana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Rivalta Bormida",
+  "prov": "AL"
+ },
  "roburent": {
   "eventi": {
    "gymkana-in-bicicletta-pro-loco-roburent": {
@@ -3547,6 +3941,23 @@
   },
   "nome": "Roccaforte Ligure",
   "prov": "AL"
+ },
+ "roccavione": {
+  "eventi": {
+   "green-volley-torneo-2vs2-pgs-roccavione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Agosto Roccavionese",
+    "nome": "Green Volley Torneo 2VS2 - PGS Roccavione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Roccavione",
+  "prov": "CN"
  },
  "rocchettatanaro": {
   "eventi": {
@@ -3708,6 +4119,40 @@
   "nome": "Rocchetta Tanaro",
   "prov": "AT"
  },
+ "roddi": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-di-roddi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Roddi",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello di Roddi",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Roddi",
+  "prov": "CN"
+ },
+ "rosignanomonferrato": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-visite-del-borgo-rosignano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgo di Rosignano Monferrato",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Visite del borgo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Rosignano Monferrato",
+  "prov": "AL"
+ },
  "saluzzo": {
   "eventi": {
    "eventi-per-bambini-e-famiglie-wonderland-park-saluzzo": {
@@ -3765,6 +4210,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-07"
+   },
+   "uno-scudo-o-un-paio-di-ali-laboratori-creativi-esp-sampeyre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Etnografico",
+    "manifest": "Laboratori Creativi Espressivi",
+    "nome": "Uno Scudo o un Paio di Ali? - Laboratori Creativi Espressivi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
    }
   },
   "nome": "Sampeyre",
@@ -3996,6 +4452,23 @@
   },
   "nome": "San Giorgio Monferrato",
   "prov": "AL"
+ },
+ "sangiorgioscarampi": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-torre-medievale-san-giorgio-scarampi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Torre Medievale",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Torre Medievale",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "San Giorgio Scarampi",
+  "prov": "AT"
  },
  "sanmarzanooliveto": {
   "eventi": {
@@ -4412,6 +4885,23 @@
   "nome": "Scurzolengo",
   "prov": "AT"
  },
+ "serralungadalba": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-castello-di-serralung-serralunga-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Serralunga d'Alba",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Castello di Serralunga d'Alba",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Serralunga d'Alba",
+  "prov": "CN"
+ },
  "serravallescrivia": {
   "eventi": {
    "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia": {
@@ -4460,6 +4950,23 @@
    }
   },
   "nome": "Serravalle Scrivia",
+  "prov": "AL"
+ },
+ "sezzadio": {
+  "eventi": {
+   "sagra-del-fritto-misto-e-non-solo-sezzadio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Libertà",
+    "manifest": "32ª Sagra del Fritto Misto e non solo...",
+    "nome": "32ª Sagra del Fritto Misto e non solo...",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-27"
+   }
+  },
+  "nome": "Sezzadio",
   "prov": "AL"
  },
  "spignomonferrato": {
@@ -4611,6 +5118,23 @@
    }
   },
   "nome": "Tortona",
+  "prov": "AL"
+ },
+ "trisobbio": {
+  "eventi": {
+   "castelli-aperti-a-ferragosto-salita-alla-torre-del-trisobbio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Torre del Castello di Trisobbio",
+    "manifest": "Castelli Aperti a Ferragosto",
+    "nome": "Castelli Aperti a Ferragosto - Salita alla Torre del Castello",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   }
+  },
+  "nome": "Trisobbio",
   "prov": "AL"
  },
  "verzuolo": {
