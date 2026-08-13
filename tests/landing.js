@@ -125,5 +125,44 @@ module.exports = async function landing(browser) {
   }
   await ctx.close();
 
+  // ── ferragosto ────────────────────────────────────────────────────────
+  // Pagina stagionale: le prove qui sotto difendono le due cose che si
+  // smontano per distrazione, e che si pagano un anno dopo.
+  r.titolo('ferragosto.html — telefono 412px');
+  ({ ctx, page } = await apri(browser, 'ferragosto.html', 412));
+
+  // 1) L'anno non sta nell'indirizzo. Se qualcuno ci mettesse /ferragosto-2027
+  //    la pagina ripartirebbe da zero proprio sulla query che si vince solo
+  //    con l'anzianita' dell'URL.
+  const canon = await page.$eval('link[rel=canonical]', (l) => l.getAttribute('href'));
+  r.ok(/\/ferragosto\.html$/.test(canon), `canonical senza anno: ${canon}`);
+  r.ok(!/\d{4}/.test(new URL(canon).pathname), 'nessun anno nel percorso');
+  // L'anno pero' DEVE stare nel titolo, se no la pagina non dice di quale
+  // Ferragosto parla.
+  r.ok(/\b20\d{2}\b/.test(await page.title()), 'l\'anno sta nel <title>');
+
+  // 2) Non e' un filtro di date. Quando il 15 cade di sabato o domenica
+  //    l'elenco coincide con /eventi/weekend.html: quello che tiene le due
+  //    pagine distinte e' il blocco su come ci si regola e dove si mangia,
+  //    che manda a /luoghi.html. Toglierlo la trasforma in un doppione.
+  r.ok(await page.locator('.ev-wrap p a[href="/luoghi.html"]').count() > 0,
+    'il corpo manda a /luoghi.html (e non solo la nav)');
+
+  const totF = await page.locator('.ev-wrap li[data-category]').count();
+  const giorni = await page.locator('.ev-wrap .com-grp').count();
+  if (totF) {
+    r.ok(giorni > 0 && giorni <= 3, `il ponte sta in ${giorni} giorni (max 14-16)`);
+    r.ok((await page.locator('.com-per').allTextContents()).some((t) => /Ferragosto/i.test(t)),
+      'il 15 e\' etichettato "Ferragosto"');
+    r.ok((await page.$eval('meta[name=robots]', (m) => m.content)).startsWith('index'),
+      `con ${totF} eventi la pagina e' indicizzata`);
+  } else {
+    // Fuori stagione resta online - i link girati devono funzionare - ma
+    // esce dall'indice invece di restare una pagina vuota indicizzata.
+    r.ok((await page.$eval('meta[name=robots]', (m) => m.content)).startsWith('noindex'),
+      'a vuoto la pagina e\' in noindex, follow');
+  }
+  await ctx.close();
+
   return r;
 };

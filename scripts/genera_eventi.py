@@ -3200,7 +3200,7 @@ def url_comune(dati):
     return f"{SITE_URL}/eventi/comune/{dati['slug']}.html"
 
 
-def blocco_comuni(hub):
+def blocco_comuni(hub, oggi):
     """L'elenco delle pagine per comune, per il fondo di eventi.html.
 
     Le pagine comune esistevano gia' ma le linkavano solo zone.html e le poche
@@ -3211,7 +3211,8 @@ def blocco_comuni(hub):
     # sono la risposta alle query generiche su cui l'agenda ranka in settima
     # posizione, e da nessuna parte del sito ci arriverebbe un link. Una pagina
     # che solo la sitemap conosce, Google la tratta come tale.
-    scorc = "".join(f'<a href="{href}">{esc(testo)}</a>' for href, testo in link_landing())
+    scorc = "".join(f'<a href="{href}">{esc(testo)}</a>'
+                    for href, testo in link_landing(oggi))
     testa = ('      <div class="ev-scorc-row">'
              '<span class="ev-comuni-lab">Cosa cerchi</span>'
              f'<div class="ev-comuni">{scorc}</div></div>\n')
@@ -4415,6 +4416,139 @@ def spec_weekend(events, oggi, altre):
     }
 
 
+# La finestra di Ferragosto e' il 14-16 agosto: la vigilia, il giorno e il
+# giorno dopo. NON e' "il weekend piu' vicino al 15", e la differenza non e'
+# accademica: nel 2026 il 15 cade di sabato e un weekend coinciderebbe con
+# /eventi/weekend.html - due nostre pagine sulla stessa lista, e quella che
+# perde e' la nuova; nel 2027 cade di domenica e il 14 resterebbe fuori. Le
+# tre date fisse tengono il ponte in tutti e due i casi.
+FERRAGOSTO_DA, FERRAGOSTO_A = 14, 16
+
+# Da quando la pagina si linka e si indicizza. Prima di meta' luglio le sagre
+# di Ferragosto nel foglio non ci sono ancora: tenerla indicizzata vuota per
+# cinquanta settimane e' contenuto sottile proprio sull'URL che vogliamo far
+# invecchiare bene.
+FERRAGOSTO_APRE = (7, 10)  # 10 luglio
+
+
+def ferragosto_range(oggi):
+    """(14, 15, 16 agosto) del prossimo Ferragosto utile.
+
+    Fino al 16 e' quello di quest'anno: il 16 la pagina serve ancora a chi
+    cerca cosa c'e' oggi. Dal 17 diventa quello dell'anno prossimo, cioe' la
+    pagina passa in fuori stagione da sola, senza che nessuno se ne ricordi."""
+    anno = oggi.year + (1 if (oggi.month, oggi.day) > (8, FERRAGOSTO_A) else 0)
+    return (datetime.date(anno, 8, FERRAGOSTO_DA),
+            datetime.date(anno, 8, 15),
+            datetime.date(anno, 8, FERRAGOSTO_A))
+
+
+def in_stagione_ferragosto(oggi):
+    """Se la pagina va linkata dalle altre. Fuori da qui resta online - i link
+    girati su WhatsApp devono continuare a funzionare - ma non la si annuncia."""
+    return FERRAGOSTO_APRE <= (oggi.month, oggi.day) <= (8, FERRAGOSTO_A)
+
+
+def spec_ferragosto(events, oggi, altre):
+    """/ferragosto.html — il 14-16 agosto, la pagina stagionale che invecchia.
+
+    Due cose non ovvie, e sono il motivo per cui la pagina esiste.
+
+    **L'anno non sta nell'indirizzo.** Sta nel title e nell'H1, e li' lo
+    riscrive il generatore. Una /ferragosto-2026.html sarebbe una pagina nuova
+    ogni agosto: si ricomincerebbe da zero ogni anno proprio sulla query
+    stagionale che si vince solo con l'anzianita' dell'URL.
+
+    **Non e' un filtro di date.** Se fosse solo l'elenco del 14-16 sarebbe un
+    doppione di /eventi/weekend.html tutte le volte che il 15 cade di sabato o
+    domenica - cioe' spesso - e il doppione lo perde la pagina senza autorita'.
+    Quello che ha di suo e' la domanda di Ferragosto: come ci si regola quel
+    giorno, e dove si mangia. Da qui il blocco che manda a /luoghi.html.
+    """
+    da, il15, a = ferragosto_range(oggi)
+    anno = il15.year
+    url = f"{SITE_URL}/ferragosto.html"
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+    finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    comuni = len({(e.get('citta') or '').strip() for e in finestra if e.get('citta')})
+    gratis = sum(1 for e in finestra
+                 if any(k in (e.get('prezzo') or '').lower() for k in FREE_KW))
+
+    titolo = _landing_titolo([f"Ferragosto {anno} con i bambini: {prov}",
+                              f"Cosa fare a Ferragosto {anno} con i bambini | DAOP",
+                              f"Cosa fare a Ferragosto {anno} con i bambini"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi dal 14 al 16 agosto in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento nel ponte di Ferragosto")
+        apertura = (
+            f"<p>Il <strong>15 agosto {anno}</strong> cade di "
+            f"{GIORNI[il15.weekday()]}, e col 14 e il 16 fa un ponte di tre "
+            f"giorni. Qui sotto ci sono i <strong>{len(finestra)} eventi</strong> "
+            f"che abbiamo verificato uno per uno in {comuni} comuni fra le "
+            f"province di {prov}"
+            + (f", di cui {gratis} gratuiti" if gratis else "")
+            + ". Di ognuno trovi l'orario, il comune e chi lo organizza, e "
+              "l'elenco si rifà da solo ogni notte: a Ferragosto i programmi "
+              "cambiano fino all'ultimo.</p>")
+        descr = trunc(
+            f"Cosa fare a Ferragosto {anno} con i bambini in provincia di {prov}: "
+            f"{len(finestra)} fra sagre, feste ed eventi dal 14 al 16 agosto, "
+            "verificati uno per uno da DAOP.", 152)
+    else:
+        sotto = f"Per il 14-16 agosto {anno} non c'è ancora niente in agenda"
+        apertura = (
+            f"<p class=\"lan-vuoto\">Per Ferragosto {anno} in agenda non abbiamo "
+            "ancora niente, e lo scriviamo invece di riempire la pagina. Le "
+            "sagre d'agosto arrivano tardi: i programmi si chiudono a luglio e "
+            "molte pro loco li pubblicano a pochi giorni dalla festa. Questa "
+            "pagina si rifà ogni notte, quindi appena entrano compaiono qui.</p>")
+        descr = trunc(
+            f"Cosa fare a Ferragosto {anno} con i bambini in provincia di {prov}: "
+            "sagre, feste ed eventi del 14-16 agosto, verificati uno per uno da "
+            "DAOP. L'agenda si aggiorna ogni notte.", 152)
+
+    corpo = apertura
+    # Il pezzo che questa pagina ha e /eventi/weekend.html no. Sono le due
+    # domande che a Ferragosto si fanno tutti e a cui un elenco di eventi non
+    # risponde: come ci si regola quel giorno, e dove si mangia. Il secondo e'
+    # anche l'unico link a /luoghi.html che parta dal CORPO di una pagina e non
+    # dalla nav - finora ne arrivavano zero, ed e' la ragione per cui quella
+    # pagina non prende traffico.
+    corpo += (
+        '<p>Ferragosto in zona non è una cosa sola: la mattina ci sono le '
+        'processioni e i mercatini, il pomeriggio i giochi d\'acqua e i '
+        'laboratori, la sera lo stand gastronomico e i fuochi. Alle sagre di '
+        'paese di solito non si prenota e si paga alla cassa, quindi con i '
+        'bambini si arriva presto e si decide sul posto. Il <strong>pranzo del '
+        '15</strong> invece si prenota, e va prenotato con giorni di anticipo: '
+        'gli <a href="/luoghi.html">agriturismi e i posti dove si mangia con i '
+        'bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo. '
+        'Se il 15 piove, la stessa pagina dice quali sono al coperto.</p>')
+    corpo += _landing_filtri(finestra)
+    for giorno in (da, il15, a):
+        del_giorno = [e for e in finestra if in_corso(e, giorno)]
+        corpo += _landing_sezione(
+            f"{GIORNI[giorno.weekday()].capitalize()} {giorno.day} "
+            f"{MESI_LUNGHI[giorno.month - 1]}",
+            "Ferragosto" if giorno == il15 else None, del_giorno, oggi)
+    corpo += _altre_landing("/ferragosto.html", altre)
+
+    return {
+        'path': "ferragosto.html", 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': f"Cosa fare a Ferragosto {anno}", 'sotto': sotto, 'crumb': "Ferragosto",
+        'corpo': corpo,
+        # Stessa regola di sagre-provincia-*: sotto soglia la pagina resta
+        # online ma esce dall'indice. E' quello che la tiene sana i mesi in cui
+        # e' vuota, senza mai cambiare indirizzo.
+        'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
+        'jsonld': _grafo_landing(url, titolo, descr, finestra,
+                                 f"Eventi di Ferragosto {anno}", "Ferragosto", oggi),
+        'eventi': len(finestra),
+    }
+
+
 def _sagre_ricorrenti(storico, prov, quante=12):
     """Le sagre di quella provincia viste in piu' di un'edizione.
 
@@ -4537,12 +4671,18 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
     }
 
 
-def link_landing():
+def link_landing(oggi=None):
     """(href, testo) delle pagine di intenzione. Una lista sola, usata dalle
     scorciatoie in fondo alle pagine e dal blocco in cima all'agenda: se
-    cambia un indirizzo non deve cambiare in due posti."""
+    cambia un indirizzo non deve cambiare in due posti.
+
+    'oggi' serve solo a /ferragosto.html, che e' stagionale: da metà luglio al
+    16 agosto entra in elenco, il resto dell'anno resta online ma non la
+    linkiamo da 290 pagine. Senza 'oggi' l'elenco e' quello di sempre."""
     voci = [("/eventi/oggi.html", "Cosa c'è oggi"),
             ("/eventi/weekend.html", "Questo weekend")]
+    if oggi is not None and in_stagione_ferragosto(oggi):
+        voci.append(("/ferragosto.html", "Ferragosto"))
     for c in PROVINCE_PUBBLICATE:
         nome = PROVINCE_NOMI.get(c, c)
         voci.append((f"/sagre-provincia-{slugify(nome)}.html", f"Sagre {nome}"))
@@ -4557,8 +4697,9 @@ def scrivi_landing(events, hub, storico, oggi):
     except SystemExit as err:
         print(f"[genera_eventi] pagine di intenzione saltate: {err}")
         return {}
-    altre = link_landing()
-    specs = [spec_oggi(events, oggi, altre), spec_weekend(events, oggi, altre)]
+    altre = link_landing(oggi)
+    specs = [spec_oggi(events, oggi, altre), spec_weekend(events, oggi, altre),
+             spec_ferragosto(events, oggi, altre)]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
 
     try:
@@ -5236,7 +5377,7 @@ def main():
     hub = comuni_hub(events, storico, oggi)
     tipo_opts, lista = render(events, hub)
     jsonld = render_jsonld(events)
-    inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub),
+    inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub, oggi),
            blocco_hero(events, oggi))
     inject_home(render_home(events))
     slugs = scrivi_pagine(events, hub)
