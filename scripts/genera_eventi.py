@@ -12,7 +12,7 @@ Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
 (opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
 raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections
+import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
@@ -4450,6 +4450,100 @@ def spec_oggi(events, oggi, altre):
     }
 
 
+MSG_PATH = os.path.join(ROOT, "data", "messaggio-canale.txt")
+MSG_MAX = 10          # quanti eventi nel messaggio
+MSG_PER_COMUNE = 2    # quanti al massimo dallo stesso paese
+MSG_PER_MANIF = 2     # quanti al massimo dalla stessa manifestazione
+
+
+def _msg_riga(e, sab, dom):
+    """Una riga: nome, paese, quando. Il "quando" e' sab/dom e non la data,
+    perche' in un messaggio che parla di UN weekend la data e' rumore."""
+    giorni = [n for n, g in (("sab", sab), ("dom", dom)) if in_corso(e, g)]
+    ora = (e.get('ora') or '').strip().split('-')[0].strip()
+    quando = "/".join(giorni) + (f" {ora}" if ora else "")
+    coda = " · ".join(x for x in [(e.get('citta') or '').strip(), quando] if x)
+    return f"• {(e.get('nome') or '').strip()}" + (f" — {coda}" if coda else "")
+
+
+def messaggio_canale(events, oggi):
+    """Il testo del messaggio del giovedi', gia' pronto da copiare e incollare.
+
+    Nasce il 14/08/2026 col canale WhatsApp, e la ragione per cui e' un file e
+    non un post automatico e' che WhatsApp **non ha API pubbliche per
+    pubblicare sui canali**: quel pezzo resta a mano per forza. Quello che si
+    puo' togliere di mezzo e' il resto - decidere cosa mettere, cercare gli
+    orari, scrivere. Il generatore ce l'ha gia' tutto, quindi lo scrive lui e
+    la gestione del canale diventa un copia-incolla da due minuti.
+
+    Perche' due minuti contano: un canale si abbandona quando pubblicare e'
+    lavoro. Se ogni giovedi' bisogna aprire l'agenda, scegliere, controllare
+    gli orari e scrivere, si salta la seconda settimana. Se il messaggio e'
+    gia' fatto, no.
+
+    La selezione: al massimo MSG_MAX eventi, non piu' di MSG_PER_COMUNE dallo
+    stesso paese. Il tetto per comune non e' estetica - senza, una patronale da
+    19 sotto-eventi si prende tutto il messaggio e a chi sta dall'altra parte
+    della provincia non arriva niente. Chi vuole tutto ha il link in fondo.
+
+    L'ordine mette davanti quello che **comincia** in questi due giorni. Con il
+    solo d_start il primo messaggio veniva fatto di dieci mostre: sono aperte
+    da settimane, quindi hanno la data di inizio piu' vecchia e vincono
+    l'ordinamento - ma "cosa c'e' questo weekend" non vuol dire "cosa e'
+    ancora aperto". Le mostre restano, dopo, e ci arrivano quando c'e' posto."""
+    sab, dom = weekend_range(oggi)
+    # Dentro i due gruppi l'ordine e' mescolato, ma **in modo deterministico
+    # sulla data del weekend**: due run dello stesso giovedi' danno lo stesso
+    # messaggio (se no il file si ricommitterebbe a ogni run notturna), due
+    # weekend diversi danno un giro diverso. Serve contro una distorsione che
+    # con l'ordine alfabetico non si vede finche' non guardi quattro settimane
+    # di fila: Acqui e Alfiano ci sono sempre, Vesime e Voltaggio mai. Su un
+    # sito che campa di paesi da 800 abitanti e' esattamente il pubblico che
+    # non possiamo permetterci di non nominare.
+    mescola = random.Random(sab.isoformat())
+    del_weekend = [e for e in events if e['d_start'] <= dom and e['d_end'] >= sab]
+    mescola.shuffle(del_weekend)
+    del_weekend.sort(key=lambda e: 0 if e['d_start'] >= sab else 1)
+    quando = (f"sabato {sab.day} e domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}"
+              if sab.month == dom.month else
+              f"sabato {sab.day} {MESI_LUNGHI[sab.month - 1]} e "
+              f"domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}")
+
+    righe, per_comune, per_manif = [], collections.Counter(), collections.Counter()
+    for e in del_weekend:
+        c = _key(e.get('citta'))
+        # Il tetto per manifestazione e' l'altra meta' di quello per comune, e
+        # serve al caso opposto: "Castelli Aperti a Ferragosto" e' UN'iniziativa
+        # in quindici paesi diversi, quindi il tetto per comune non la ferma e
+        # da sola si prendeva sei righe su dieci. Sono due monopoli diversi -
+        # uno concentra un paese, l'altro un'iniziativa - e servono tutti e due.
+        m = _key(e.get('manifest')) if (e.get('manifest') or '').strip() else None
+        if per_comune[c] >= MSG_PER_COMUNE or (m and per_manif[m] >= MSG_PER_MANIF):
+            continue
+        per_comune[c] += 1
+        if m:
+            per_manif[m] += 1
+        righe.append(_msg_riga(e, sab, dom))
+        if len(righe) >= MSG_MAX:
+            break
+
+    if not del_weekend:
+        testo = (f"Per {quando} non abbiamo ancora niente di verificato in agenda.\n"
+                 f"Le sagre arrivano spesso a ridosso: l'agenda si rifà ogni notte.\n\n"
+                 f"👉 {SITE_URL}/eventi/weekend.html")
+    else:
+        resto = len(del_weekend) - len(righe)
+        coda = (f"\n…e altri {resto} in agenda." if resto > 0 else "")
+        testo = (f"🎪 *Cosa c'è questo weekend*\n{quando.capitalize()}\n\n"
+                 + "\n".join(righe) + coda
+                 + f"\n\n👉 Tutti gli eventi: {SITE_URL}/eventi/weekend.html")
+
+    with open(MSG_PATH, "w", encoding="utf-8") as fh:
+        fh.write(testo + "\n")
+    print(f"[genera_eventi] messaggio canale: {len(righe)} eventi su "
+          f"{len(del_weekend)} del weekend -> data/messaggio-canale.txt")
+
+
 def spec_weekend(events, oggi, altre):
     """/eventi/weekend.html — sabato e domenica, quelli veri del calendario."""
     sab, dom = weekend_range(oggi)
@@ -5943,6 +6037,7 @@ def main():
     scrivi_metodo(events)
     scrivi_zone(events, hub)
     scrivi_box(events, oggi)
+    messaggio_canale(events, oggi)
     # aggiorna l'istantanea committata
     # 'riga' resta fuori dall'istantanea: e' la posizione nel foglio, cambia a
     # ogni inserimento e sporcherebbe il diff di data/eventi.json a ogni run.
