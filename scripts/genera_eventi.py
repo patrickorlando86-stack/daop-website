@@ -4070,21 +4070,30 @@ def _landing_titolo(candidati):
     return trunc(candidati[-1], MAX_TITLE)
 
 
-def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi):
+def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi, padre=None):
     """CollectionPage + briciole + ItemList.
 
     L'ItemList RIMANDA alle pagine evento e non ripete gli Event, per la stessa
     ragione delle pagine comune: due copie dello stesso evento su due URL sono
-    due elementi da validare invece di uno."""
+    due elementi da validare invece di uno.
+
+    'padre' e' (href, nome) e infila un quarto gradino nelle briciole: lo usano
+    le pagine d'incrocio, che stanno sotto /eventi/oggi.html e non accanto."""
+    briciole = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
+        {"@type": "ListItem", "position": 2, "name": "Eventi", "item": PAGE_URL},
+    ]
+    if padre:
+        briciole.append({"@type": "ListItem", "position": 3, "name": padre[1],
+                         "item": f"{SITE_URL}{padre[0]}"})
+    briciole.append({"@type": "ListItem", "position": len(briciole) + 1,
+                     "name": crumb, "item": url})
     grafo = [
         {"@type": "CollectionPage", "@id": url, "url": url, "name": titolo,
          "description": descr, "inLanguage": "it-IT",
          "isPartOf": {"@type": "WebSite", "@id": SITE_ID, "url": SITE_URL, "name": "DAOP"},
          "publisher": {"@id": ORG_ID}, "dateModified": oggi.isoformat()},
-        {"@type": "BreadcrumbList", "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
-            {"@type": "ListItem", "position": 2, "name": "Eventi", "item": PAGE_URL},
-            {"@type": "ListItem", "position": 3, "name": crumb, "item": url}]},
+        {"@type": "BreadcrumbList", "itemListElement": briciole},
     ]
     lista = _voci_lista(eventi)
     if lista:
@@ -4101,6 +4110,13 @@ def _landing_shell(spec, css, nav, foot, oggi):
     # se no in GA4 quelle pagine riempiono i report di "(not set)".
     prov_meta = (f'\n<meta name="daop:provincia" content="{esc(spec["prov"])}">'
                  if spec.get('prov') else '')
+    # Le pagine d'incrocio stanno SOTTO /eventi/oggi.html, non accanto: il
+    # quarto gradino lo dice a chi legge, e _grafo_landing() lo ripete in
+    # JSON-LD. Senza 'padre' le briciole restano i tre gradini di sempre.
+    briciole = '<a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › '
+    if spec.get('padre'):
+        briciole += f'<a href="{spec["padre"][0]}">{esc(spec["padre"][1])}</a> › '
+    briciole += f'<span>{esc(spec["crumb"])}</span>'
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -4139,7 +4155,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 <header class="page-hero ev-hero">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(spec['crumb'])}</span>
+      {briciole}
     </div>
     <h1>{esc(spec['h1'])}</h1>
     <p class="ev-when">{esc(spec['sotto'])}</p>
@@ -4342,6 +4358,14 @@ def spec_oggi(events, oggi, altre):
     # "pensati PER i bambini", non "adatti", e infatti scrive a chiare lettere
     # che il resto e' comunque adatto alle famiglie.
     corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi)
+    # Da qui in poi questa pagina fa anche da indice delle tre provinciali. E'
+    # il mestiere che le resta: sulla query trasversale eventi.html vince
+    # comunque - piu' contenuto, piu' autorita', e non gliela togliamo - mentre
+    # "oggi in provincia di X" e' l'incrocio che nessuna pagina copriva.
+    corpo += (f"<h2>Provincia per provincia</h2>"
+              f"<p>Le stesse cose di oggi, divise per provincia: sono le pagine da "
+              f"salvare se guardi sempre la stessa zona.</p>"
+              + _blocco_incroci('oggi', events, oggi))
     corpo += _altre_landing("/eventi/oggi.html", altre)
 
     return {
@@ -4353,7 +4377,11 @@ def spec_oggi(events, oggi, altre):
         # bene lo stesso.
         'path': "eventi/oggi.html", 'url': url,
         'titolo': titolo, 'descr': descr,
-        'h1': "Cosa fare oggi", 'sotto': sotto, 'crumb': "Oggi",
+        # L'H1 nomina le province: metà della query e' il posto, e prima
+        # stavano solo nel title. Non e' la de-cannibalizzazione di
+        # eventi.html - quella non si fa - e' questa pagina che dice cosa
+        # copre.
+        'h1': f"Cosa fare oggi in provincia di {prov}", 'sotto': sotto, 'crumb': "Oggi",
         'corpo': corpo, 'robots': "index, follow",
         'jsonld': _grafo_landing(url, titolo, descr, adesso or prossimi,
                                  "Eventi di oggi", "Oggi", oggi),
@@ -4403,16 +4431,246 @@ def spec_weekend(events, oggi, altre):
                               di_domenica, oggi)
     # Qui c'era "Il weekend con i bambini": tolto per le stesse ragioni
     # scritte per esteso in spec_oggi.
+    # E qui comincia il mestiere nuovo: indice delle tre provinciali.
+    corpo += (f"<h2>Provincia per provincia</h2>"
+              f"<p>Lo stesso weekend, diviso per provincia: sono le pagine da salvare "
+              f"se guardi sempre la stessa zona.</p>"
+              + _blocco_incroci('weekend', events, oggi))
     corpo += _altre_landing("/eventi/weekend.html", altre)
 
     return {
         'path': "eventi/weekend.html", 'url': url,  # barra normale: vedi spec_oggi()
         'titolo': titolo, 'descr': descr,
-        'h1': "Eventi del weekend", 'sotto': sotto, 'crumb': "Weekend",
+        # Le province nell'H1: vedi la nota in spec_oggi.
+        'h1': f"Eventi del weekend in provincia di {prov}",
+        'sotto': sotto, 'crumb': "Weekend",
         'corpo': corpo, 'robots': "index, follow",
         'jsonld': _grafo_landing(url, titolo, descr, del_weekend,
                                  "Eventi del weekend", "Weekend", oggi),
         'eventi': len(del_weekend),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Le pagine d'incrocio: provincia X finestra temporale.
+#
+# Perche' esistono, misurato sull'export Search Console del 14/08/2026: le
+# query generiche chiedono quasi sempre le DUE cose insieme - "sagre provincia
+# di alessandria oggi" (372 impressioni), "eventi asti e provincia oggi" (251),
+# "eventi provincia di asti questo weekend" (115). Quello che avevamo era o
+# l'una o l'altra: le sagre-provincia-* hanno la provincia nell'H1 e nessuna
+# finestra, oggi.html e weekend.html hanno la finestra e la provincia solo nel
+# title. Nessuna pagina copriva l'incrocio, e infatti li' stiamo tutti in
+# posizione 8-10 con un CTR del 2,77% - contro il 9,47% dei nomi propri.
+#
+# Sono SEI, cioe' un insieme chiuso: 3 province x 2 finestre. Non e' scaled
+# content per la stessa ragione per cui non lo sono le 12 pagine comune - il
+# numero non cresce con i dati, e la domanda esiste gia' misurata.
+#
+# Quello che NON si fa per de-cannibalizzare, ed e' scritto in CLAUDE.md: non
+# si tocca l'H1 di eventi.html. Vale 13.553 impressioni, il 36% del sito.
+INCROCI = (
+    ('oggi', "Cosa fare oggi", "/eventi/oggi.html", "Oggi"),
+    ('weekend', "Eventi del weekend", "/eventi/weekend.html", "Weekend"),
+)
+
+# La finestra su cui si decide se la pagina sta in indice. NON e' il numero di
+# eventi di oggi, ed e' la differenza che conta: "oggi in provincia di Cuneo"
+# passa da 0 a 6 e torna a 0 nel giro di una settimana, e un robots che cambia
+# ogni notte e' peggio di uno sbagliato - Google smette di fidarsi della
+# direttiva e la pagina si ricommitta tutti i giorni. Con la finestra larga la
+# pagina entra in indice a stagione aperta e ne esce a stagione chiusa, una
+# volta sola per verso.
+FINESTRA_INCROCIO = 30
+
+
+def href_incrocio(prov, modo):
+    """L'indirizzo della pagina d'incrocio. Slug parlante come le
+    sagre-provincia-*, e senza anno: e' la stessa regola di /ferragosto.html,
+    l'URL deve invecchiare invece di rinascere ogni stagione."""
+    return f"/eventi/{modo}-provincia-{slugify(PROVINCE_NOMI.get(prov, prov))}.html"
+
+
+def _in_finestra(events, prov, oggi, giorni=FINESTRA_INCROCIO):
+    """Gli eventi di quella provincia da oggi ai prossimi `giorni`."""
+    fine = oggi + datetime.timedelta(days=giorni)
+    return [e for e in events
+            if (e.get('prov') or '').upper() == prov
+            and e['d_end'] >= oggi and e['d_start'] <= fine]
+
+
+def _blocco_incroci(modo, events, oggi, qui=None):
+    """I link alle tre pagine provinciali di una finestra.
+
+    Sta in fondo alle due pagine trasversali (che da qui in poi fanno anche da
+    indice) e in cima a ogni provinciale, che cosi' rimanda alle sorelle. Il
+    numero accanto al nome non e' decorazione: e' la promessa che dice se vale
+    la pena entrare, come i conteggi accanto ai comuni."""
+    voci = []
+    for c in PROVINCE_PUBBLICATE:
+        href = href_incrocio(c, modo)
+        if href == qui:
+            continue
+        nome = PROVINCE_NOMI.get(c, c)
+        quanti = len(_in_finestra(events, c, oggi))
+        eti = f"{nome} ({quanti})" if quanti else nome
+        voci.append(f'<a href="{href}">{esc(eti)}</a>')
+    return f'<div class="com-link">{"".join(voci)}</div>' if voci else ''
+
+
+def spec_incrocio(prov, modo, events, hub, oggi, altre):
+    """/eventi/<oggi|weekend>-provincia-<nome>.html — la provincia E il quando."""
+    nome_prov = PROVINCE_NOMI.get(prov, prov)
+    href = href_incrocio(prov, modo)
+    url = f"{SITE_URL}{href}"
+    padre = next((p for m, _t, p, _c in INCROCI if m == modo), "/eventi.html")
+    padre_nome = next((c for m, _t, _p, c in INCROCI if m == modo), "Eventi")
+    finestra = _in_finestra(events, prov, oggi)
+    ordina = lambda ev: sorted(ev, key=lambda e: (e['d_start'], (e.get('citta') or ''),
+                                                  (e.get('nome') or '')))
+    sagre_href = f"/sagre-provincia-{slugify(nome_prov)}.html"
+
+    if modo == 'oggi':
+        adesso = ordina([e for e in events
+                         if (e.get('prov') or '').upper() == prov and in_corso(e, oggi)])
+        domani = ordina([e for e in events
+                         if (e.get('prov') or '').upper() == prov
+                         and in_corso(e, oggi + datetime.timedelta(days=1))
+                         and not in_corso(e, oggi)])
+        prossimi = ordina([e for e in _in_finestra(events, prov, oggi)
+                           if e['d_start'] > oggi])[:12] if not adesso else []
+        principale = adesso
+        titolo = _landing_titolo([f"Cosa fare oggi in provincia di {nome_prov} | DAOP",
+                                  f"Cosa fare oggi in provincia di {nome_prov}",
+                                  f"Cosa fare oggi: {nome_prov}"])
+        h1 = f"Cosa fare oggi in provincia di {nome_prov}"
+        crumb = nome_prov
+        comuni = len({_key(e.get('citta')) for e in adesso if (e.get('citta') or '').strip()})
+        if adesso:
+            sotto = (f"{len(adesso)} eventi in corso oggi, {data_estesa(oggi)}"
+                     if len(adesso) > 1 else f"1 evento in corso oggi, {data_estesa(oggi)}")
+            apertura = (f"<p>Quello che c'è <strong>oggi</strong>, {data_estesa(oggi)}, "
+                        f"in provincia di {esc(nome_prov)}: "
+                        f"<strong>{len(adesso)} eventi</strong>"
+                        + (f" in {comuni} comuni diversi" if comuni > 1 else "")
+                        + ", con l'orario, il paese e la scheda di ognuno. Li verifichiamo "
+                          "uno per uno prima di pubblicarli, e la pagina si rifà da sola "
+                          "ogni notte: qui non trovi cose di ieri.</p>")
+        else:
+            sotto = f"Oggi, {data_estesa(oggi)}, in provincia di {nome_prov} non c'è niente"
+            apertura = (f"<p class=\"lan-vuoto\">Oggi in provincia di {esc(nome_prov)} non "
+                        f"abbiamo niente in agenda, e lo scriviamo invece di riempire la "
+                        f"pagina con eventi di un'altra provincia: quello che pubblichiamo "
+                        f"è quello che abbiamo verificato. Qui sotto trovi i primi in "
+                        f"arrivo da queste parti.</p>")
+        descr = trunc(f"Cosa fare oggi, {data_estesa(oggi)}, in provincia di {nome_prov}: "
+                      + (f"{len(adesso)} eventi in corso, sagre e feste comprese, "
+                         "verificati uno per uno da DAOP."
+                         if adesso else
+                         "i prossimi appuntamenti per famiglie, verificati uno per uno "
+                         "da DAOP. L'agenda si rifà ogni notte."), 152)
+        corpo = apertura
+        corpo += _landing_filtri(adesso + domani + prossimi, con_prov=False)
+        corpo += _landing_sezione("In corso oggi", None, adesso, oggi)
+        corpo += _landing_sezione("I primi in arrivo",
+                                  "Oggi non c'è niente: questi sono i prossimi",
+                                  prossimi, oggi)
+        corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi)
+        nome_lista = f"Eventi di oggi in provincia di {nome_prov}"
+    else:
+        sab, dom = weekend_range(oggi)
+        del_weekend = ordina([e for e in events
+                              if (e.get('prov') or '').upper() == prov
+                              and e['d_start'] <= dom and e['d_end'] >= sab])
+        di_sabato = [e for e in del_weekend if in_corso(e, sab)]
+        di_domenica = [e for e in del_weekend if in_corso(e, dom)]
+        principale = del_weekend
+        quando = (f"sabato {sab.day} e domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}"
+                  if sab.month == dom.month else
+                  f"sabato {sab.day} {MESI_LUNGHI[sab.month - 1]} e "
+                  f"domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}")
+        titolo = _landing_titolo([f"Eventi del weekend in provincia di {nome_prov} | DAOP",
+                                  f"Eventi del weekend in provincia di {nome_prov}",
+                                  f"Eventi weekend: {nome_prov}"])
+        h1 = f"Eventi del weekend in provincia di {nome_prov}"
+        crumb = nome_prov
+        comuni = len({_key(e.get('citta')) for e in del_weekend
+                      if (e.get('citta') or '').strip()})
+        if del_weekend:
+            sotto = f"{len(del_weekend)} eventi {quando}, in provincia di {nome_prov}"
+            apertura = (f"<p>Il programma del weekend — {quando} — in provincia di "
+                        f"{esc(nome_prov)}: <strong>{len(del_weekend)} appuntamenti</strong>"
+                        + (f" in {comuni} comuni" if comuni > 1 else "")
+                        + f", {len(di_sabato)} il sabato e {len(di_domenica)} la domenica, "
+                          "con gli orari e il paese di ognuno. Le date le rifacciamo ogni "
+                          "notte, quindi il weekend qui sopra è sempre il prossimo.</p>")
+        else:
+            sotto = f"Per {quando} in provincia di {nome_prov} non c'è ancora niente"
+            apertura = (f"<p class=\"lan-vuoto\">Per questo weekend in provincia di "
+                        f"{esc(nome_prov)} non abbiamo ancora niente di verificato. Le "
+                        f"sagre di paese arrivano spesso a ridosso, e i programmi delle "
+                        f"pro loco escono a pochi giorni dalla festa: questa pagina si "
+                        f"rifà ogni notte, e appena entrano compaiono qui.</p>")
+        descr = trunc(f"Eventi, sagre e feste del weekend ({quando}) in provincia di "
+                      f"{nome_prov}: "
+                      + (f"{len(del_weekend)} appuntamenti verificati da DAOP, "
+                         "con orari e comune."
+                         if del_weekend else
+                         "l'agenda si aggiorna ogni notte, appena arrivano le date."), 152)
+        corpo = apertura
+        corpo += _landing_filtri(del_weekend, con_prov=False)
+        corpo += _landing_sezione(f"Sabato {sab.day} {MESI_LUNGHI[sab.month - 1]}", None,
+                                  di_sabato, oggi)
+        corpo += _landing_sezione(f"Domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}", None,
+                                  di_domenica, oggi)
+        nome_lista = f"Eventi del weekend in provincia di {nome_prov}"
+
+    # I comuni che hanno qualcosa nella finestra larga, non tutti quelli della
+    # provincia: qui la pagina risponde a "adesso", e un elenco di paesi dove
+    # non c'e' niente e' una promessa che la pagina non mantiene.
+    vivi = {_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()}
+    comuni_link = sorted((d for d in (hub or {}).values()
+                          if d['prov'] == prov and _key(d['nome']) in vivi),
+                         key=lambda d: -len(d['futuri']))[:12]
+    if comuni_link:
+        link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
+                       for d in comuni_link)
+        corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)} con eventi in "
+                  f"programma</h2>"
+                  f'<div class="com-link">{link}</div>')
+
+    # Il link alla sorella senza finestra temporale: chi arriva qui da "oggi" e
+    # non trova niente ha comunque una pagina dove andare, e le due si passano
+    # autorita' invece di farsi concorrenza.
+    quando_no = "oggi" if modo == 'oggi' else "questo weekend"
+    corpo += (f'<p>Se quello che cerchi non è per forza {quando_no}: '
+              f'<a href="{sagre_href}">tutte le sagre e le feste della provincia di '
+              f'{esc(nome_prov)}</a>, in ordine di data e mese per mese.</p>')
+
+    fonte = fonte_provincia(prov)
+    if fonte:
+        chi = ("la nostra pagina per questa provincia" if fonte['nostra'] else
+               "la pagina che segue questa provincia, con cui collaboriamo")
+        corpo += (f'<p class="com-fonte">Gli eventi della provincia di {esc(nome_prov)} '
+                  f'arrivano da <a href="{fonte["url"]}" target="_blank" rel="noopener">'
+                  f'@{esc(fonte["ig"])}</a>, {chi}. '
+                  f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+
+    corpo += f'<h2>Le altre province</h2>{_blocco_incroci(modo, events, oggi, qui=href)}'
+    corpo += _altre_landing(href, altre)
+
+    return {
+        'path': href.lstrip('/'), 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': h1, 'sotto': sotto, 'crumb': crumb,
+        'padre': (padre, padre_nome),
+        'corpo': corpo,
+        # Vedi FINESTRA_INCROCIO: si decide sulla finestra larga, non su oggi.
+        'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
+        'prov': prov,
+        'jsonld': _grafo_landing(url, titolo, descr, principale, nome_lista, crumb, oggi,
+                                 padre=(padre, padre_nome)),
+        'eventi': len(principale),
     }
 
 
@@ -4642,6 +4900,14 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
                        for d in comuni)
         corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)}</h2>"
                   f'<div class="com-link">{link}</div>')
+    # Le sorelle con la finestra temporale. Questa pagina risponde a "dove",
+    # quelle a "dove e quando": chi cerca l'una spesso vuole l'altra, ed e' il
+    # link che le tiene insieme invece di lasciarle competere.
+    corpo += (f"<h2>Cosa c'è adesso in provincia di {esc(nome_prov)}</h2>"
+              f'<p>Questa pagina è il calendario completo. Se invece la domanda è '
+              f'"e stasera?": <a href="{href_incrocio(prov, "oggi")}">cosa fare oggi</a> '
+              f'oppure <a href="{href_incrocio(prov, "weekend")}">gli eventi del '
+              f'weekend</a> in provincia di {esc(nome_prov)}.</p>')
     if fonte:
         chi = ("la nostra pagina per questa provincia" if fonte['nostra'] else
                "la pagina che segue questa provincia, con cui collaboriamo")
@@ -4701,6 +4967,9 @@ def scrivi_landing(events, hub, storico, oggi):
     specs = [spec_oggi(events, oggi, altre), spec_weekend(events, oggi, altre),
              spec_ferragosto(events, oggi, altre)]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
+    # Le sei d'incrocio: provincia x finestra. Vedi il commento su INCROCI.
+    specs += [spec_incrocio(c, modo, events, hub, oggi, altre)
+              for modo, _t, _p, _c in INCROCI for c in PROVINCE_PUBBLICATE]
 
     try:
         reg = json.load(open(LANDING_REGISTRO, encoding='utf-8'))

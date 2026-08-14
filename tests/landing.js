@@ -164,5 +164,81 @@ module.exports = async function landing(browser) {
   }
   await ctx.close();
 
+  // ── le sei pagine d'incrocio ──────────────────────────────────────────
+  // Provincia X finestra temporale. Le prove qui difendono le tre cose per
+  // cui esistono: la provincia nell'H1 (non solo nel title, che e' il difetto
+  // di oggi.html/weekend.html), l'indirizzo senza data, e il fatto che dentro
+  // ci sia davvero solo quella provincia - se no la pagina promette una cosa
+  // e ne mostra un'altra.
+  for (const [modo, prov, sigla] of [['oggi', 'alessandria', 'al'],
+                                     ['weekend', 'asti', 'at'],
+                                     ['oggi', 'cuneo', 'cn']]) {
+    const file = `eventi/${modo}-provincia-${prov}.html`;
+    r.titolo(`${file} — telefono 412px`);
+    ({ ctx, page } = await apri(browser, file, 412));
+
+    const h1 = (await page.textContent('h1')).trim();
+    r.ok(new RegExp(`provincia di ${prov}`, 'i').test(h1),
+      `la provincia sta nell'H1, non solo nel title: "${h1}"`);
+    r.ok(/oggi|weekend/i.test(h1), 'e con lei la finestra temporale');
+
+    // Stessa regola di /ferragosto.html: l'anno - e qualsiasi data - fuori
+    // dall'indirizzo, se no la pagina riparte da zero a ogni stagione.
+    const c = await page.$eval('link[rel=canonical]', (l) => l.getAttribute('href'));
+    r.ok(!/\d/.test(new URL(c).pathname), `nessuna cifra nel percorso: ${c}`);
+
+    const righe = await page.locator('.ev-wrap li[data-category]').count();
+    if (righe) {
+      r.ok(await page.evaluate((p) =>
+        [...document.querySelectorAll('.ev-wrap li[data-province]')]
+          .every((l) => l.dataset.province === p), sigla),
+        `tutte le ${righe} righe sono della provincia ${sigla.toUpperCase()}`);
+    }
+    if (await page.locator('#lan-toolbar').count()) {
+      r.ok(await page.locator('#lan-dove').count() === 0,
+        'niente tendina provincia: la pagina E\' una provincia');
+    }
+
+    // Il robots si decide sulla finestra larga, non sugli eventi di oggi: e'
+    // quello che evita a "oggi in provincia di Cuneo" di entrare e uscire
+    // dall'indice ogni notte. Quello che si puo' controllare dal DOM e' il
+    // patto che ne discende: indicizzata solo se ha qualcosa da mostrare.
+    const robots = await page.$eval('meta[name=robots]', (m) => m.content);
+    if (robots.startsWith('index')) {
+      r.ok(righe > 0, `indicizzata e non vuota (${righe} righe)`);
+    } else {
+      r.ok(robots.startsWith('noindex'), 'fuori stagione: noindex, follow');
+    }
+
+    // Le briciole hanno il gradino in piu': queste pagine stanno SOTTO
+    // /eventi/oggi.html, non accanto.
+    r.ok(await page.locator(`.ev-crumb a[href="/eventi/${modo}.html"]`).count() > 0,
+      'le briciole passano dalla pagina madre');
+
+    // L'anello fra le tre sorelle, e nessun link a se stessa.
+    const altre = await page.$$eval('.com-link a[href*="-provincia-"]',
+      (a) => a.map((x) => x.getAttribute('href')));
+    r.ok(altre.length >= 2, `rimanda alle altre province (${altre.length})`);
+    r.ok(!altre.some((h) => h.endsWith(`${modo}-provincia-${prov}.html`)),
+      'e non a se stessa');
+    await ctx.close();
+  }
+
+  // Le due pagine trasversali fanno da indice: se questo blocco sparisce, le
+  // sei nascono orfane e non le trova nessuno.
+  for (const modo of ['oggi', 'weekend']) {
+    r.titolo(`eventi/${modo}.html — indice delle provinciali`);
+    ({ ctx, page } = await apri(browser, `eventi/${modo}.html`, 412));
+    const giu = await page.$$eval('.com-link a[href*="-provincia-"]',
+      (a) => a.map((x) => x.getAttribute('href')));
+    r.ok(giu.length === 3, `linka tutte e tre le provinciali (${giu.length})`);
+    r.ok(giu.every((h) => h.includes(`${modo}-provincia-`)),
+      'e sono quelle della sua finestra temporale');
+    // Meta' della query e' il posto: prima le province stavano solo nel title.
+    r.ok(/provincia di/i.test(await page.textContent('h1')),
+      'l\'H1 nomina le province');
+    await ctx.close();
+  }
+
   return r;
 };

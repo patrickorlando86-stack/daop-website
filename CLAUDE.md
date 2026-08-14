@@ -375,22 +375,52 @@ esattamente quello che si digita. Sono le stesse "pagine di incrocio" già
 elencate come lavoro mancante per `luoghi.html`, e qui la domanda è già misurata
 invece che supposta.
 
-Cosa manca, in ordine di resa — **nessuna di queste è ancora decisa**:
+#### Le sei pagine d'incrocio, e perché `oggi.html` è diventata un indice
 
-1. **Le 6 pagine d'incrocio** (3 province × oggi/weekend). Insieme di dimensione
-   chiusa, quindi non è *scaled content*: la domanda esiste, la risposta no. Da
-   decidere se nascono così o se assorbono `oggi.html`/`weekend.html`, che a quel
-   punto non avrebbero più un mestiere.
-2. **`Event` in JSON-LD sulle pagine aggregate.** `oggi.html` elenca 28 eventi,
-   `weekend.html` 73, le tre provinciali il loro, e **tutte e cinque hanno zero
-   `Event`**: i rich result eventi li prende solo `eventi.html`, che ne ha 286.
-   Da verificare prima di farlo, però, che moltiplicare la stessa entità su più
-   pagine non diluisca invece di aggiungere.
-3. **L'H1 di `oggi.html` e `weekend.html` non nomina le province**, mentre il
-   title sì (`Cosa fare oggi` contro *"Cosa fare oggi in provincia di
-   Alessandria, Asti e Cuneo"*). È la più economica delle tre — metà della query
-   è il posto — ma ha senso solo se quelle due pagine restano, cioè va decisa
-   dopo il punto 1, non prima.
+Fatte il 14/08/2026. `spec_incrocio()` genera
+`/eventi/oggi-provincia-<nome>.html` e `/eventi/weekend-provincia-<nome>.html`
+per le tre province: **sei pagine, insieme chiuso**. Non è *scaled content* per
+la stessa ragione delle 12 pagine comune — il numero non cresce coi dati — e a
+differenza delle pagine d'incrocio ipotizzate per `luoghi.html` qui la domanda
+era già misurata prima di scrivere una riga.
+
+Le decisioni dentro, che è quello che non si ricava dal diff:
+
+- **`oggi.html` e `weekend.html` non sono state assorbite: sono diventate
+  l'indice delle sei.** Sopprimerle avrebbe voluto dire cancellare due URL in
+  sitemap e nella nav di 266 pagine per guadagnare niente — su GitHub Pages un
+  redirect è un `<meta refresh>`, cioè il peggiore dei mondi. Come indice hanno
+  un mestiere che non si sovrappone a nessuno: la query trasversale la vince
+  `eventi.html` comunque, e non gliela togliamo.
+- **L'H1 ora nomina le province** su tutte e otto. Era il punto 3 della vecchia
+  lista ed era bloccato finché non si decideva il destino delle due madri: metà
+  della query è il posto, e prima stava solo nel `<title>`.
+- **`robots` si decide sulla finestra di 30 giorni, non sugli eventi di oggi**
+  (`FINESTRA_INCROCIO`). È la parte che sembra un dettaglio e non lo è: "oggi in
+  provincia di Cuneo" passa da 0 a 6 e torna a 0 nel giro di una settimana, e un
+  `robots` che cambia ogni notte è peggio di uno sbagliato — Google smette di
+  fidarsi della direttiva e la pagina si ricommitta tutti i giorni. Con la
+  finestra larga entra in indice a stagione aperta e ne esce a stagione chiusa,
+  una volta sola per verso. Il contenuto invece resta quello di oggi, e quando
+  oggi è vuoto la pagina lo scrive e mostra i primi in arrivo.
+- **Niente tendina provincia** (`con_prov=False`): la pagina *è* una provincia,
+  come le `sagre-provincia-*`.
+- **Le briciole hanno un quarto gradino** — queste pagine stanno *sotto*
+  `/eventi/oggi.html`, non accanto — e non entrano in `link_landing()`: quella
+  riga si stampa su ~290 pagine e sei voci in più la trasformerebbero in una
+  barra che non guarda nessuno. I link arrivano dalle due madri, dalle sorelle,
+  e dalla `sagre-provincia-*` della stessa provincia.
+
+Resta aperto un punto solo della vecchia lista: **`Event` in JSON-LD sulle
+pagine aggregate.** `oggi.html`, `weekend.html`, le tre provinciali e ora le sei
+d'incrocio hanno tutte `CollectionPage` + `ItemList` che *rimanda* alle schede,
+e zero `Event`: i rich result eventi li prende solo `eventi.html`, che ne ha 286.
+Prima di cambiarlo va verificato che moltiplicare la stessa entità su nove URL
+non diluisca invece di aggiungere — è la ragione per cui non è stato fatto
+insieme al resto.
+
+Cosa **non** si è fatto per de-cannibalizzare, e non si farà: toccare l'H1 di
+`eventi.html`. Vedi sopra, vale 13.553 impressioni.
 
 ### L'età non si ripete nelle descrizioni
 
