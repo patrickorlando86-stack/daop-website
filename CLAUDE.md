@@ -150,6 +150,50 @@ vedono finché non gira in CI.
 Il workflow `.github/workflows/aggiorna-eventi.yml` gira tutti e tre alle 02:00
 UTC, committa da solo su `main`, poi passa i controlli (vedi in fondo).
 
+## Il canale WhatsApp
+
+Aperto il 14/08/2026. `CANALE_WA` in `genera_eventi.py` è l'unico posto in cui
+sta l'indirizzo: **vuoto vuol dire che l'invito non si stampa da nessuna
+parte**, che è il comportamento giusto se un giorno il canale si chiude.
+`blocco_canale()` compare in coda alle schede evento, alle pagine comune e alle
+landing — **290 pagine**, tutte tranne i tre `eventi/box-*.html`. Quelli vivono
+dentro l'iframe di siti altrui, e chiedere lì un'iscrizione vuol dire usare lo
+spazio di qualcun altro per portargli via il pubblico: stessa ragione per cui
+non chiedono il consenso ai cookie. `tests/luoghi.js` controlla che l'invito ci
+sia su tutte e che non sia mai doppio.
+
+**Sta in coda e non in cima**, e il testo dice per prima cosa *quanto spesso si
+scrive*: la paura di chi si iscrive a un canale non è il contenuto, è il
+diluvio. Niente promesse in più ("contenuti esclusivi") che poi non
+manteniamo.
+
+Il messaggio del giovedì lo scrive il generatore in `data/messaggio-canale.txt`
+(`messaggio_canale()`): **WhatsApp non ha API pubbliche per pubblicare sui
+canali**, quindi il copia-incolla resta a mano per forza, ma scegliere gli
+eventi e scrivere no. È la differenza fra due minuti a settimana e mezz'ora, ed
+è la ragione per cui i canali si abbandonano alla seconda settimana.
+
+Tre regole della selezione, tutte nate guardando l'output vero:
+
+- **davanti chi comincia in quei due giorni.** Ordinando per data di inizio il
+  primo messaggio era fatto di dieci mostre: sono aperte da settimane, quindi
+  vincono l'ordinamento. "Cosa c'è questo weekend" non vuol dire "cosa è ancora
+  aperto".
+- **due tetti, non uno**: per comune e per manifestazione. Fermano due monopoli
+  diversi — una patronale da 19 sotto-eventi concentra un paese, "Castelli
+  Aperti" è un'iniziativa in quindici paesi e il tetto per comune non la vede.
+- **ordine mescolato con seme la data del weekend.** Con l'alfabetico Acqui e
+  Alfiano c'erano sempre e Vesime e Voltaggio mai: è una distorsione che non si
+  vede in un messaggio, si vede in quattro settimane. Il seme fisso serve a non
+  ricommittare il file a ogni run notturna.
+
+Cosa il canale **non** dà, e non va promesso a nessuno: niente statistiche
+oltre a iscritti/copertura, niente esportazione della lista (è di Meta, non
+nostra), niente segmentazione per età. Il "98% di open rate" che si trova in
+rete è dei messaggi 1-a-1 della Business API, **non dei canali**. Quando
+servirà una lista di proprietà e misurabile, quella è l'email — e il posto dove
+chiederla sarà il canale stesso.
+
 ## Decisioni editoriali da non rifare al contrario
 
 ### "Adatto Famiglie" non è una discriminante pubblica

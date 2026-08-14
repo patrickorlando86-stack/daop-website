@@ -341,6 +341,32 @@ module.exports = async function luoghi(browser) {
     ? `ancore inesistenti: ${rotti.slice(0, 3).map(([a, f]) => `#${a} (${f})`).join(', ')}`
     : 'ogni ancora linkata esiste davvero in luoghi.html');
 
+  // ── l'invito al canale WhatsApp ───────────────────────────────────────
+  // Due guasti silenziosi: l'invito sparisce da tutte le pagine (CANALE_WA
+  // svuotato per sbaglio), oppure ce n'e' piu' d'uno sulla stessa pagina,
+  // che su una scheda gia' lunga e' una richiesta ripetuta a chi ha gia'
+  // detto di no una volta. Nessuno dei due rompe niente, quindi nessuno dei
+  // due si nota.
+  //
+  // I tre eventi/box-*.html restano fuori, e non e' una dimenticanza: sono i
+  // riquadri da incorporare, che vivono dentro l'iframe del sito di qualcun
+  // altro. Chiedere li' un'iscrizione al nostro canale vuol dire usare lo
+  // spazio di un altro per portarci via il suo pubblico. E' la stessa ragione
+  // per cui quei tre file non chiedono il consenso ai cookie.
+  const nostre = schede.filter((f) => !/\bbox-[a-z]{2}\.html$/.test(f));
+  let conCanale = 0, doppi = [];
+  for (const f of nostre) {
+    const n = (fs.readFileSync(path.join(RADICE, f), 'utf8')
+      .match(/class="ev-canale-cta"/g) || []).length;
+    if (n) conCanale++;
+    if (n > 1) doppi.push(f);
+  }
+  r.ok(conCanale === nostre.length,
+    `l'invito al canale c'e' su tutte le nostre pagine: ${conCanale}/${nostre.length}`);
+  r.ok(doppi.length === 0, doppi.length
+    ? `invito ripetuto in ${doppi.length} pagine (es. ${doppi[0]})`
+    : 'mai due inviti sulla stessa pagina');
+
   await ctx.close();
 
   return r;
