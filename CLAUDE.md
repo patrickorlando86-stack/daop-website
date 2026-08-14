@@ -217,6 +217,82 @@ Nata il 13/08/2026, cioè **due giorni prima**: quest'anno non si posiziona e no
 è per quello che esiste: la resa 2026 arriva da push, WhatsApp e social, quella
 da Google arriva nel 2027. Non giudicarla dai numeri di agosto 2026.
 
+### `/halloween.html`: fatta con due mesi e mezzo d'anticipo, apposta
+
+Stessa impalcatura di Ferragosto (`spec_halloween()`, finestra fissa **25
+ottobre - 2 novembre**, l'anno nel title e non nell'indirizzo), ma nata il
+**14/08/2026** — cioè con 72 giorni d'anticipo invece di due.
+
+Non è zelo, è l'unica correzione possibile all'unico errore di
+`/ferragosto.html`. Su una pagina stagionale l'asset **è l'anzianità dell'URL**:
+è lo stesso motivo per cui l'anno sta fuori dallo slug. Una pagina che esiste da
+agosto e sta in `noindex` finché non ha eventi non costa niente — è la stessa
+regola `MIN_LANDING` delle `sagre-provincia-*` — e arriva a ottobre con due mesi
+di vita. Creata il 25 ottobre ripartirebbe da zero, esattamente come farebbe
+`/halloween-2026.html`. Al 14/08 ha già 2 eventi in agenda, quindi è in
+`noindex` e fuori sitemap: è il comportamento giusto, non un difetto.
+
+**La finestra è fissa e larga nove giorni** perché Halloween non è un giorno:
+prende il fine settimana prima comunque cada, la notte del 31 e **Ognissanti**,
+che in Italia è festa e sposta le gite. "Il weekend più vicino" coinciderebbe
+con `/eventi/weekend.html` un anno su due, che è la ragione già scritta per il
+14-16 agosto.
+
+#### Qui il fossato non ci aiuta, ed è la prima volta
+
+Le sagre di paese le vinciamo sul **nome proprio**: `festa cassinasco 2026`,
+CTR 31%, nessun concorrente. Halloween è l'opposto — query **nazionale e
+generica**, cioè la colonna in cui stiamo in posizione 8-10 col 2,77% di CTR, e
+di fronte ci sono siti che fanno "Halloween in Italia" da dieci anni. La pagina
+si fa lo stesso, ma quello che può realisticamente prendere sono le **code
+lunghe con dentro un nome proprio** (`halloween castello di <paese> 2026`), non
+la query secca. Non aspettarti i numeri di Cassinasco e non giudicarla su
+quelli.
+
+#### Cosa ha di suo, e la cernita che non si fa
+
+Se fosse solo l'elenco del 25/10-2/11 sarebbe `/eventi/weekend.html` con un
+altro titolo, e il doppione lo perde la pagina senza autorità. Quello che ha di
+suo è la domanda che a Halloween si fanno tutti i genitori e a cui un elenco non
+risponde: **fa paura o no?** La caccia ai dolcetti in piazza e la casa infestata
+nel castello finiscono nello stesso elenco, e un bambino di quattro anni e uno
+di dodici cercano la stessa parola volendo due cose opposte. L'età è l'unico
+dato che abbiamo e i siti nazionali no.
+
+**Non si deduce la paura dal titolo.** Una sezione "questi fanno paura" ricavata
+da parole tipo *horror*, *brivido*, *notte nera* sarebbe un giudizio nostro su
+una festa altrui, ricavato da una stringa: sbagliarlo vuol dire mandare un
+bambino di quattro anni in una casa infestata, o togliere pubblico a un evento
+che paura non fa. Si fa come per "ci vado con i bambini?" nelle pagine comune —
+si dà la regola per leggere la pagina (dove l'età è dichiarata è scritta in
+riga, dove non c'è si apre la scheda e si legge il programma) e si mette in
+evidenza **solo** il gruppo su cui il dato esiste davvero: `e_per_bambini()`,
+che dice "pensati **per** i bambini" e non "adatti". Il flag `Adatto Famiglie`
+resta fuori, per le ragioni di sempre. `tests/landing.js` controlla che nessuna
+sezione etichetti gli eventi come spaventosi.
+
+Il secondo pezzo è il **dove** — castelli, cascine, borghi — e manda a
+`luoghi.html`. È la seconda superficie che linka quella pagina dal corpo di
+un'altra: la prima è Ferragosto, e prima ne aveva zero.
+
+#### Non generalizzare a Natale, Carnevale e Pasqua
+
+La tentazione ovvia è scrivere una funzione stagionale e istanziarla quattro
+volte. È da non fare, ed è la stessa aritmetica dello *scaled content*: quello
+che rende utile una stagionale è proprio il blocco che ogni stagione ha di
+**diverso** — a Halloween "fa paura?", a Natale "quale mercatino, e si mangia?".
+Generalizzando adesso verrebbero quattro pagine identiche con una parola
+scambiata. Halloween si fa su misura come Ferragosto; se dalla terza emerge del
+codice comune, si estrae allora.
+
+Quello che invece è già condiviso è **come ci si arriva**: `blocco_stagione()`
+legge la tabella `STAGIONI` e stampa la riga in home e in cima all'agenda per la
+stagione attiva (Ferragosto dal 5 agosto, Halloween dal 20 ottobre). Le finestre
+non si sovrappongono, quindi la prima che risponde vince e non c'è nessuna
+precedenza da decidere. `link_landing()` invece apre prima — dal 1° ottobre per
+Halloween — perché una voce in una riga di scorciatoie costa meno di una riga in
+evidenza.
+
 ### Il traffico sono le schede, e i loro URL non scadono
 
 Misurato sull'export di Search Console del 14/08/2026 (28 giorni, 16/07–12/08):

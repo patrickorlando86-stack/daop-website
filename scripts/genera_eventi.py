@@ -4807,6 +4807,162 @@ def spec_ferragosto(events, oggi, altre):
     }
 
 
+# ---------------------------------------------------------------------------
+# /halloween.html — la seconda pagina stagionale, e la prima in cui il fossato
+# NON ci aiuta.
+#
+# Le sagre di paese le vinciamo sul nome proprio: "festa cassinasco 2026" fa
+# CTR 31% perche' non le pubblica nessun altro. Halloween e' l'opposto - query
+# nazionale e generica, cioe' la colonna in cui stiamo in posizione 8-10 col
+# 2,77% - e i concorrenti fanno "Halloween in Italia" da dieci anni. La pagina
+# si fa lo stesso, ma quello che puo' prendere sono le code lunghe con dentro
+# un nome proprio ("halloween castello di <paese>"), non la query secca.
+#
+# Da qui la data di nascita: creata a settembre, cioe' con due mesi di
+# anticipo, e in noindex finche' non ha eventi. E' l'unico rimpianto di
+# /ferragosto.html, nata due giorni prima: su una stagionale l'asset e'
+# l'anzianita' dell'URL, ed e' anche il motivo per cui l'anno non ci sta
+# dentro.
+#
+# La finestra e' fissa, 25 ottobre - 2 novembre: prende il weekend prima
+# comunque cada, la notte del 31 e Ognissanti, che in Italia e' festa e sposta
+# le gite. Stessa ragione del 14-16 di Ferragosto: "il weekend piu' vicino"
+# coinciderebbe con /eventi/weekend.html un anno su due.
+HALLOWEEN_DA = (10, 25)
+HALLOWEEN_A = (11, 2)
+HALLOWEEN_APRE = (10, 1)     # da quando entra nelle scorciatoie
+HALLOWEEN_AVVISO = (10, 20)  # da quando compare la riga in home
+
+
+def halloween_range(oggi):
+    """(25 ottobre, 31 ottobre, 2 novembre) del prossimo Halloween utile.
+
+    Dal 3 novembre punta all'anno dopo, come ferragosto_range(): la pagina
+    passa in fuori stagione da sola, senza che nessuno se ne ricordi."""
+    anno = oggi.year + (1 if (oggi.month, oggi.day) > HALLOWEEN_A else 0)
+    return (datetime.date(anno, *HALLOWEEN_DA),
+            datetime.date(anno, 10, 31),
+            datetime.date(anno, *HALLOWEEN_A))
+
+
+def in_stagione_halloween(oggi):
+    """Se la pagina va linkata dalle altre."""
+    return HALLOWEEN_APRE <= (oggi.month, oggi.day) <= HALLOWEEN_A
+
+
+def spec_halloween(events, oggi, altre):
+    """/halloween.html — il 25 ottobre-2 novembre, con la domanda vera in cima.
+
+    **Non e' un filtro di date.** Se fosse solo l'elenco della finestra sarebbe
+    /eventi/weekend.html con un altro titolo, e il doppione lo perde la pagina
+    senza autorita'. Quello che ha di suo e' la domanda che a Halloween si
+    fanno tutti i genitori e a cui un elenco non risponde: **fa paura o no?**
+    Un bambino di quattro anni e uno di dodici cercano la stessa parola e
+    vogliono due cose opposte, e l'eta' e' l'unico dato che abbiamo e i siti
+    nazionali no.
+
+    Quello che NON si fa, ed e' la trappola: una sezione "questi fanno paura",
+    dedotta da parole tipo horror/brivido nel programma. Sarebbe un giudizio
+    nostro su una riga altrui, ricavato da un titolo, e sbagliarlo vuol dire
+    mandare un bambino di quattro anni in una casa infestata o togliere
+    pubblico a un evento che paura non fa. Si fa come per "ci vado con i
+    bambini?" nelle pagine comune: si da' la regola per leggere la pagina -
+    dove l'eta' e' dichiarata la stampiamo, se non c'e' si legge il programma -
+    e si mette in evidenza solo il gruppo su cui il dato c'e' davvero,
+    e_per_bambini(), che dice "pensati PER i bambini" e non "adatti".
+    """
+    da, notte, a = halloween_range(oggi)
+    anno = notte.year
+    url = f"{SITE_URL}/halloween.html"
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+    finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    piccoli = [e for e in finestra if e_per_bambini(e)]
+    comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
+
+    titolo = _landing_titolo([f"Halloween {anno} con i bambini: {prov}",
+                              f"Cosa fare a Halloween {anno} con i bambini | DAOP",
+                              f"Cosa fare a Halloween {anno} con i bambini"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi dal 25 ottobre al 2 novembre in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento nella settimana di Halloween")
+        apertura = (f"<p>La notte del <strong>31 ottobre {anno}</strong> cade di "
+                    f"{GIORNI[notte.weekday()]}, e col fine settimana prima e Ognissanti "
+                    f"dopo diventa una decina di giorni di feste. Qui sotto ci sono i "
+                    f"<strong>{len(finestra)} eventi</strong> che abbiamo verificato uno "
+                    f"per uno in {comuni} comuni fra le province di {prov}, con l'orario, "
+                    f"il paese e chi li organizza.</p>")
+        descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
+                      f"{len(finestra)} eventi dal 25 ottobre al 2 novembre, verificati "
+                      "uno per uno da DAOP.", 152)
+    else:
+        sotto = f"Per Halloween {anno} non c'è ancora niente in agenda"
+        apertura = (f"<p class=\"lan-vuoto\">Per Halloween {anno} in agenda non abbiamo "
+                    f"ancora niente, e lo scriviamo invece di riempire la pagina. I "
+                    f"programmi di fine ottobre escono tardi: castelli e pro loco li "
+                    f"pubblicano spesso a due settimane dalla data. Questa pagina si rifà "
+                    f"ogni notte, quindi appena entrano compaiono qui.</p>")
+        descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
+                      "feste, laboratori e castelli dal 25 ottobre al 2 novembre, "
+                      "verificati uno per uno da DAOP.", 152)
+
+    corpo = apertura
+    # Il pezzo che un elenco di date non ha. Due domande, e la seconda e'
+    # l'unico link a /luoghi.html che parta dal corpo di una pagina: la prima
+    # l'ha aperta /ferragosto.html, e questa e' la seconda superficie.
+    corpo += (
+        '<h2>Fa paura o no?</h2>'
+        '<p>È la domanda vera di Halloween, e la risposta cambia dello stesso '
+        'evento a seconda di chi porti: la caccia ai dolcetti in piazza e la '
+        'casa infestata nel castello finiscono nello stesso elenco. Noi non '
+        'dividiamo le due cose a naso — sarebbe un giudizio nostro su una festa '
+        'altrui, ricavato dal titolo. Facciamo l\'unica cosa che si può fare '
+        'onestamente: <strong>dove l\'età è dichiarata la trovi scritta in '
+        'riga</strong>, e dove non c\'è conviene aprire la scheda e leggere il '
+        'programma, che riportiamo per intero. Qui sotto mettiamo in evidenza '
+        'quelli <strong>pensati per i più piccoli</strong>: laboratori, zucche, '
+        'giochi, dolcetto o scherzetto. Il resto della pagina è tutto il '
+        'programma, senza cernite.</p>'
+        '<p>La seconda domanda è dove. Halloween in zona si fa nei <strong>'
+        'castelli, nelle cascine e nei borghi</strong>, e quasi sempre si '
+        'prenota: gli <a href="/luoghi.html">agriturismi, i castelli e i posti '
+        'da visitare con i bambini</a> stanno nel catalogo dei luoghi, con '
+        'telefono e indirizzo. Se quel giorno piove, la stessa pagina dice '
+        'quali sono al coperto.</p>')
+    corpo += _landing_filtri(finestra)
+    corpo += _landing_sezione(
+        "Pensati per i più piccoli",
+        "Laboratori, zucche e giochi: qui l'età è dichiarata o il programma la dice",
+        piccoli, oggi)
+    # Poi tutto il programma, giorno per giorno e senza escludere niente: la
+    # sezione qui sopra e' un'evidenza, non una selezione che declassa il resto.
+    for giorno in [da + datetime.timedelta(days=i) for i in range((a - da).days + 1)]:
+        del_giorno = [e for e in finestra if in_corso(e, giorno)]
+        corpo += _landing_sezione(
+            f"{GIORNI[giorno.weekday()].capitalize()} {giorno.day} "
+            f"{MESI_LUNGHI[giorno.month - 1]}",
+            "La notte di Halloween" if giorno == notte else
+            ("Ognissanti" if (giorno.month, giorno.day) == (11, 1) else None),
+            del_giorno, oggi)
+    corpo += _altre_landing("/halloween.html", altre)
+
+    return {
+        'path': "halloween.html", 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': f"Cosa fare a Halloween {anno} con i bambini",
+        'sotto': sotto, 'crumb': "Halloween",
+        'corpo': corpo,
+        # Fuori stagione resta online - i link girati su WhatsApp devono
+        # continuare a funzionare - ma esce dall'indice: una pagina vuota
+        # indicizzata per cinquanta settimane e' contenuto sottile proprio
+        # sull'URL che stiamo facendo invecchiare.
+        'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
+        'jsonld': _grafo_landing(url, titolo, descr, finestra,
+                                 f"Eventi di Halloween {anno}", "Halloween", oggi),
+        'eventi': len(finestra),
+    }
+
+
 def _sagre_ricorrenti(storico, prov, quante=12):
     """Le sagre di quella provincia viste in piu' di un'edizione.
 
@@ -4949,6 +5105,8 @@ def link_landing(oggi=None):
             ("/eventi/weekend.html", "Questo weekend")]
     if oggi is not None and in_stagione_ferragosto(oggi):
         voci.append(("/ferragosto.html", "Ferragosto"))
+    if oggi is not None and in_stagione_halloween(oggi):
+        voci.append(("/halloween.html", "Halloween"))
     for c in PROVINCE_PUBBLICATE:
         nome = PROVINCE_NOMI.get(c, c)
         voci.append((f"/sagre-provincia-{slugify(nome)}.html", f"Sagre {nome}"))
@@ -4965,7 +5123,7 @@ def scrivi_landing(events, hub, storico, oggi):
         return {}
     altre = link_landing(oggi)
     specs = [spec_oggi(events, oggi, altre), spec_weekend(events, oggi, altre),
-             spec_ferragosto(events, oggi, altre)]
+             spec_ferragosto(events, oggi, altre), spec_halloween(events, oggi, altre)]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
     # Le sei d'incrocio: provincia x finestra. Vedi il commento su INCROCI.
     specs += [spec_incrocio(c, modo, events, hub, oggi, altre)
@@ -5031,33 +5189,50 @@ FINESTRA_HERO = 30
 FERRAGOSTO_AVVISO = (8, 5)  # 5 agosto
 
 
+# Le stagioni che hanno una pagina propria, in ordine di calendario. Una sola
+# puo' essere attiva per volta - le finestre non si toccano - quindi la prima
+# che risponde vince e non serve decidere le precedenze.
+#   (avviso da, ultimo giorno, range(), href, nome, come si chiama la finestra)
+STAGIONI = (
+    (FERRAGOSTO_AVVISO, (8, FERRAGOSTO_A), 'ferragosto_range', "/ferragosto.html",
+     "Ferragosto", "del 14-16 agosto"),
+    (HALLOWEEN_AVVISO, HALLOWEEN_A, 'halloween_range', "/halloween.html",
+     "Halloween", "dal 25 ottobre al 2 novembre"),
+)
+
+
 def blocco_stagione(events, oggi):
-    """La riga "c'è Ferragosto" per la home e per l'hero dell'agenda, o ''.
+    """La riga "c'è Ferragosto" (o Halloween) per la home e per l'hero, o ''.
 
     Serve a due posti e sta scritta una volta: sono le uniche due superfici da
-    cui /ferragosto.html si raggiunge senza essere gia' dentro una pagina di
-    intenzione. Fuori finestra torna stringa vuota, quindi non c'e' niente da
-    togliere a settembre.
+    cui una pagina stagionale si raggiunge senza essere gia' dentro una pagina
+    di intenzione. Fuori finestra torna stringa vuota, quindi non c'e' niente
+    da togliere a settembre.
+
+    L'avviso parte piu' tardi del link nelle scorciatoie apposta: una riga in
+    evidenza per cinque settimane e' un banner che si impara a non vedere.
 
     Il conteggio non e' decorazione: "62 eventi" e' la promessa che dice se
     vale la pena entrare, esattamente come i numeri accanto ai comuni."""
-    if not (FERRAGOSTO_AVVISO <= (oggi.month, oggi.day) <= (8, FERRAGOSTO_A)):
-        return ''
-    da, il15, a = ferragosto_range(oggi)
-    quanti = sum(1 for e in events if e['d_start'] <= a and e['d_end'] >= da)
-    if quanti < MIN_LANDING:
-        return ''
-    manca = (il15 - oggi).days
-    if manca > 1:
-        quando = f"fra {manca} giorni"
-    elif manca == 1:
-        quando = "domani"
-    elif manca == 0:
-        quando = "è oggi"
-    else:
-        quando = "è in corso"
-    return (f'<a href="/ferragosto.html">Ferragosto {quando}: i {quanti} eventi '
-            f'del 14-16 agosto →</a>')
+    for avviso, fine, nome_range, href, nome, quale in STAGIONI:
+        if not (avviso <= (oggi.month, oggi.day) <= fine):
+            continue
+        da, centro, a = globals()[nome_range](oggi)
+        quanti = sum(1 for e in events if e['d_start'] <= a and e['d_end'] >= da)
+        if quanti < MIN_LANDING:
+            return ''
+        manca = (centro - oggi).days
+        if manca > 1:
+            quando = f"fra {manca} giorni"
+        elif manca == 1:
+            quando = "domani"
+        elif manca == 0:
+            quando = "è oggi"
+        else:
+            quando = "è in corso"
+        return (f'<a href="{href}">{nome} {quando}: i {quanti} eventi '
+                f'{quale} →</a>')
+    return ''
 
 
 def blocco_hero(events, oggi):
