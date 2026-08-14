@@ -1,0 +1,1687 @@
+{
+ "c-al-acqui-terme": {
+  "comune": "Acqui Terme",
+  "n": 25,
+  "prov": "AL"
+ },
+ "c-al-alessandria": {
+  "comune": "Alessandria",
+  "n": 71,
+  "prov": "AL"
+ },
+ "c-al-alfiano-natta": {
+  "comune": "Alfiano Natta",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-alice-bel-colle": {
+  "comune": "Alice Bel Colle",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-alluvioni-piovera": {
+  "comune": "Alluvioni Piovera",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-arquata-scrivia": {
+  "comune": "Arquata Scrivia",
+  "n": 4,
+  "prov": "AL"
+ },
+ "c-al-avolasca": {
+  "comune": "Avolasca",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-basaluzzo": {
+  "comune": "Basaluzzo",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-bassignana": {
+  "comune": "Bassignana",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-bistagno": {
+  "comune": "Bistagno",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-borghetto-di-borbera": {
+  "comune": "Borghetto di Borbera",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-borgoratto-alessandrino": {
+  "comune": "Borgoratto Alessandrino",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-bosco-marengo": {
+  "comune": "Bosco Marengo",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-bosio": {
+  "comune": "Bosio",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-bozzole": {
+  "comune": "Bozzole",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-cabella-ligure": {
+  "comune": "Cabella Ligure",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-camino": {
+  "comune": "Camino",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-cantalupo-ligure": {
+  "comune": "Cantalupo Ligure",
+  "n": 4,
+  "prov": "AL"
+ },
+ "c-al-capriata-d-orba": {
+  "comune": "Capriata d'Orba",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-carentino": {
+  "comune": "Carentino",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-carpeneto": {
+  "comune": "Carpeneto",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-carrosio": {
+  "comune": "Carrosio",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-cartosio": {
+  "comune": "Cartosio",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-casal-cermelli": {
+  "comune": "Casal Cermelli",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-casale-monferrato": {
+  "comune": "Casale Monferrato",
+  "n": 41,
+  "prov": "AL"
+ },
+ "c-al-casaleggio-boiro": {
+  "comune": "Casaleggio Boiro",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-casalnoceto": {
+  "comune": "Casalnoceto",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-casasco": {
+  "comune": "Casasco",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-cassano-spinola": {
+  "comune": "Cassano Spinola",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-cassine": {
+  "comune": "Cassine",
+  "n": 4,
+  "prov": "AL"
+ },
+ "c-al-cassinelle": {
+  "comune": "Cassinelle",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-castelceriolo-alessandria": {
+  "comune": "Castelceriolo (Alessandria)",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-castellazzo-bormida": {
+  "comune": "Castellazzo Bormida",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-castelletto-d-orba": {
+  "comune": "Castelletto d'Orba",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-castelnuovo-bormida": {
+  "comune": "Castelnuovo Bormida",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-castelnuovo-scrivia": {
+  "comune": "Castelnuovo Scrivia",
+  "n": 7,
+  "prov": "AL"
+ },
+ "c-al-cavatore": {
+  "comune": "Cavatore",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-cella-monte": {
+  "comune": "Cella Monte",
+  "n": 5,
+  "prov": "AL"
+ },
+ "c-al-ciglione": {
+  "comune": "Ciglione",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-coniolo": {
+  "comune": "Coniolo",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-conzano": {
+  "comune": "Conzano",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-costa-vescovato": {
+  "comune": "Costa Vescovato",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-cremolino": {
+  "comune": "Cremolino",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-fabbrica-curone": {
+  "comune": "Fabbrica Curone",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-felizzano": {
+  "comune": "Felizzano",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-francavilla-bisio": {
+  "comune": "Francavilla Bisio",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-frugarolo": {
+  "comune": "Frugarolo",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-fubine": {
+  "comune": "Fubine",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-fubine-monferrato": {
+  "comune": "Fubine Monferrato",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-garbagna": {
+  "comune": "Garbagna",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-gavi": {
+  "comune": "Gavi",
+  "n": 5,
+  "prov": "AL"
+ },
+ "c-al-giarole": {
+  "comune": "Giarole",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-grondona": {
+  "comune": "Grondona",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-isola-sant-antonio": {
+  "comune": "Isola Sant'Antonio",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-lu-e-cuccaro-monferrato": {
+  "comune": "Lu e Cuccaro Monferrato",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-melazzo": {
+  "comune": "Melazzo",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-merana": {
+  "comune": "Merana",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-molare": {
+  "comune": "Molare",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-mongiardino-ligure": {
+  "comune": "Mongiardino Ligure",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-monleale": {
+  "comune": "Monleale",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-monte-valenza": {
+  "comune": "Monte Valenza",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-montechiaro-d-acqui": {
+  "comune": "Montechiaro d'Acqui",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-montegioco": {
+  "comune": "Montegioco",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-mornese": {
+  "comune": "Mornese",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-morsasco": {
+  "comune": "Morsasco",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-murisengo": {
+  "comune": "Murisengo",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-novi-ligure": {
+  "comune": "Novi Ligure",
+  "n": 44,
+  "prov": "AL"
+ },
+ "c-al-olivola": {
+  "comune": "Olivola",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-orsara-bormida": {
+  "comune": "Orsara Bormida",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-ottiglio": {
+  "comune": "Ottiglio",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-ovada": {
+  "comune": "Ovada",
+  "n": 14,
+  "prov": "AL"
+ },
+ "c-al-ozzano-monferrato": {
+  "comune": "Ozzano Monferrato",
+  "n": 4,
+  "prov": "AL"
+ },
+ "c-al-pareto": {
+  "comune": "Pareto",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-pasturana": {
+  "comune": "Pasturana",
+  "n": 4,
+  "prov": "AL"
+ },
+ "c-al-piovera": {
+  "comune": "Piovera",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-pontecurone": {
+  "comune": "Pontecurone",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-pontestura": {
+  "comune": "Pontestura",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-ponti": {
+  "comune": "Ponti",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-ponzano-monferrato": {
+  "comune": "Ponzano Monferrato",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-ponzone": {
+  "comune": "Ponzone",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-pozzol-groppo": {
+  "comune": "Pozzol Groppo",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-pozzolo-formigaro": {
+  "comune": "Pozzolo Formigaro",
+  "n": 7,
+  "prov": "AL"
+ },
+ "c-al-quargnento": {
+  "comune": "Quargnento",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-quattordio": {
+  "comune": "Quattordio",
+  "n": 4,
+  "prov": "AL"
+ },
+ "c-al-ricaldone": {
+  "comune": "Ricaldone",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-rivalta-bormida": {
+  "comune": "Rivalta Bormida",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-rocca-grimalda": {
+  "comune": "Rocca Grimalda",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-ronco-scrivia": {
+  "comune": "Ronco Scrivia",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-rosignano-monferrato": {
+  "comune": "Rosignano Monferrato",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-sala-monferrato": {
+  "comune": "Sala Monferrato",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-sale": {
+  "comune": "Sale",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-san-giorgio": {
+  "comune": "San Giorgio",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-san-giorgio-monferrato": {
+  "comune": "San Giorgio Monferrato",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-san-giuliano": {
+  "comune": "San Giuliano",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-san-salvatore-monferrato": {
+  "comune": "San Salvatore Monferrato",
+  "n": 4,
+  "prov": "AL"
+ },
+ "c-al-sarezzano": {
+  "comune": "Sarezzano",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-serralunga-di-crea": {
+  "comune": "Serralunga di Crea",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-serravalle-scrivia": {
+  "comune": "Serravalle Scrivia",
+  "n": 11,
+  "prov": "AL"
+ },
+ "c-al-sezzadio": {
+  "comune": "Sezzadio",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-solero": {
+  "comune": "Solero",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-solonghello": {
+  "comune": "Solonghello",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-spigno-monferrato": {
+  "comune": "Spigno Monferrato",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-spinetta-marengo": {
+  "comune": "Spinetta Marengo",
+  "n": 6,
+  "prov": "AL"
+ },
+ "c-al-stazzano": {
+  "comune": "Stazzano",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-strevi": {
+  "comune": "Strevi",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-tagliolo-monferrato": {
+  "comune": "Tagliolo Monferrato",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-al-tassarolo": {
+  "comune": "Tassarolo",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-terruggia": {
+  "comune": "Terruggia",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-terzo": {
+  "comune": "Terzo",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-tortona": {
+  "comune": "Tortona",
+  "n": 31,
+  "prov": "AL"
+ },
+ "c-al-treville": {
+  "comune": "Treville",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-trisobbio": {
+  "comune": "Trisobbio",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-valenza": {
+  "comune": "Valenza",
+  "n": 16,
+  "prov": "AL"
+ },
+ "c-al-valmadonna": {
+  "comune": "Valmadonna",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-vendersi": {
+  "comune": "Vendersi",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-vignale-monferrato": {
+  "comune": "Vignale Monferrato",
+  "n": 5,
+  "prov": "AL"
+ },
+ "c-al-vignole-borbera": {
+  "comune": "Vignole Borbera",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-villadeati": {
+  "comune": "Villadeati",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-villalvernia": {
+  "comune": "Villalvernia",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-villanova-monferrato": {
+  "comune": "Villanova Monferrato",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-visone": {
+  "comune": "Visone",
+  "n": 2,
+  "prov": "AL"
+ },
+ "c-al-volpedo": {
+  "comune": "Volpedo",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-voltaggio": {
+  "comune": "Voltaggio",
+  "n": 3,
+  "prov": "AL"
+ },
+ "c-ao-forte-di-bard": {
+  "comune": "Forte di Bard",
+  "n": 1,
+  "prov": "AO"
+ },
+ "c-at-albugnano": {
+  "comune": "Albugnano",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-aramengo": {
+  "comune": "Aramengo",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-asti": {
+  "comune": "Asti",
+  "n": 67,
+  "prov": "AT"
+ },
+ "c-at-belveglio": {
+  "comune": "Belveglio",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-buttigliera-d-asti": {
+  "comune": "Buttigliera d'Asti",
+  "n": 4,
+  "prov": "AT"
+ },
+ "c-at-calamandrana": {
+  "comune": "Calamandrana",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-callianetto": {
+  "comune": "Callianetto",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-calliano": {
+  "comune": "Calliano",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-calliano-monferrato": {
+  "comune": "Calliano Monferrato",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-calosso": {
+  "comune": "Calosso",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-canelli": {
+  "comune": "Canelli",
+  "n": 12,
+  "prov": "AT"
+ },
+ "c-at-cassinasco": {
+  "comune": "Cassinasco",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-castagnole-delle-lanze": {
+  "comune": "Castagnole delle Lanze",
+  "n": 4,
+  "prov": "AT"
+ },
+ "c-at-castagnole-monferrato": {
+  "comune": "Castagnole Monferrato",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-castel-boglione": {
+  "comune": "Castel Boglione",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-castell-alfero": {
+  "comune": "Castell'Alfero",
+  "n": 3,
+  "prov": "AT"
+ },
+ "c-at-castello-di-annone": {
+  "comune": "Castello di Annone",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-castelnuovo-calcea": {
+  "comune": "Castelnuovo Calcea",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-castelnuovo-don-bosco": {
+  "comune": "Castelnuovo Don Bosco",
+  "n": 3,
+  "prov": "AT"
+ },
+ "c-at-cellarengo": {
+  "comune": "Cellarengo",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-celle-enomondo": {
+  "comune": "Celle Enomondo",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-cerreto-d-asti": {
+  "comune": "Cerreto d'Asti",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-cessole": {
+  "comune": "Cessole",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-cinaglio": {
+  "comune": "Cinaglio",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-cisterna-d-asti": {
+  "comune": "Cisterna d'Asti",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-coazzolo": {
+  "comune": "Coazzolo",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-cocconato": {
+  "comune": "Cocconato",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-cortanze": {
+  "comune": "Cortanze",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-cossombrato": {
+  "comune": "Cossombrato",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-costigliole-d-asti": {
+  "comune": "Costigliole d'Asti",
+  "n": 7,
+  "prov": "AT"
+ },
+ "c-at-dusino-san-michele": {
+  "comune": "Dusino San Michele",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-ferrere": {
+  "comune": "Ferrere",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-fontanile": {
+  "comune": "Fontanile",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-grazzano-badoglio": {
+  "comune": "Grazzano Badoglio",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-maranzana": {
+  "comune": "Maranzana",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-maretto": {
+  "comune": "Maretto",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-moasca": {
+  "comune": "Moasca",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-mombercelli": {
+  "comune": "Mombercelli",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-monale": {
+  "comune": "Monale",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-monastero-bormida": {
+  "comune": "Monastero Bormida",
+  "n": 3,
+  "prov": "AT"
+ },
+ "c-at-moncalvo": {
+  "comune": "Moncalvo",
+  "n": 3,
+  "prov": "AT"
+ },
+ "c-at-moncucco-torinese": {
+  "comune": "Moncucco Torinese",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-mongardino": {
+  "comune": "Mongardino",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-montabone": {
+  "comune": "Montabone",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-montechiaro-d-asti": {
+  "comune": "Montechiaro d'Asti",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-montegrosso-d-asti": {
+  "comune": "Montegrosso d'Asti",
+  "n": 3,
+  "prov": "AT"
+ },
+ "c-at-montiglio-monferrato": {
+  "comune": "Montiglio Monferrato",
+  "n": 4,
+  "prov": "AT"
+ },
+ "c-at-nizza-monferrato": {
+  "comune": "Nizza Monferrato",
+  "n": 14,
+  "prov": "AT"
+ },
+ "c-at-olmo-gentile": {
+  "comune": "Olmo Gentile",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-passerano-marmorito": {
+  "comune": "Passerano Marmorito",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-pino-d-asti": {
+  "comune": "Pino d'Asti",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-piova-massaia": {
+  "comune": "Piovà Massaia",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-portacomaro": {
+  "comune": "Portacomaro",
+  "n": 4,
+  "prov": "AT"
+ },
+ "c-at-refrancore": {
+  "comune": "Refrancore",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-rocchetta-tanaro": {
+  "comune": "Rocchetta Tanaro",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-san-damiano-d-asti": {
+  "comune": "San Damiano d'Asti",
+  "n": 5,
+  "prov": "AT"
+ },
+ "c-at-san-damiano-dasti": {
+  "comune": "San Damiano d’Asti",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-san-martino-alfieri": {
+  "comune": "San Martino Alfieri",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-san-marzano-oliveto": {
+  "comune": "San Marzano Oliveto",
+  "n": 3,
+  "prov": "AT"
+ },
+ "c-at-san-paolo-solbrito": {
+  "comune": "San Paolo Solbrito",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-scurzolengo": {
+  "comune": "Scurzolengo",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-tigliole": {
+  "comune": "Tigliole",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-tonco": {
+  "comune": "Tonco",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-valfenera": {
+  "comune": "Valfenera",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-vesime": {
+  "comune": "Vesime",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-vigliano-d-asti": {
+  "comune": "Vigliano d'Asti",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-villa-san-secondo": {
+  "comune": "Villa San Secondo",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-villafranca-d-asti": {
+  "comune": "Villafranca d'Asti",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-at-villanova-d-asti": {
+  "comune": "Villanova d'Asti",
+  "n": 8,
+  "prov": "AT"
+ },
+ "c-at-vinchio": {
+  "comune": "Vinchio",
+  "n": 2,
+  "prov": "AT"
+ },
+ "c-bi-piedicavallo": {
+  "comune": "Piedicavallo",
+  "n": 1,
+  "prov": "BI"
+ },
+ "c-bi-pollone": {
+  "comune": "Pollone",
+  "n": 1,
+  "prov": "BI"
+ },
+ "c-bi-trivero": {
+  "comune": "Trivero",
+  "n": 1,
+  "prov": "BI"
+ },
+ "c-bi-veglio": {
+  "comune": "Veglio",
+  "n": 1,
+  "prov": "BI"
+ },
+ "c-bi-viverone": {
+  "comune": "Viverone",
+  "n": 1,
+  "prov": "BI"
+ },
+ "c-cn-alba": {
+  "comune": "Alba",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-arguello": {
+  "comune": "Arguello",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-barge": {
+  "comune": "Barge",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-barolo": {
+  "comune": "Barolo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-battifollo": {
+  "comune": "Battifollo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-beinette": {
+  "comune": "Beinette",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-bene-vagienna": {
+  "comune": "Bene Vagienna",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-bernezzo": {
+  "comune": "Bernezzo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-borgo-san-dalmazzo": {
+  "comune": "Borgo San Dalmazzo",
+  "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-boves": {
+  "comune": "Boves",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-bra": {
+  "comune": "Bra",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-briaglia": {
+  "comune": "Briaglia",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-brossasco": {
+  "comune": "Brossasco",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-busca": {
+  "comune": "Busca",
+  "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-canale": {
+  "comune": "Canale",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-caraglio": {
+  "comune": "Caraglio",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-carde": {
+  "comune": "Cardè",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-carru": {
+  "comune": "Carrù",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-casalgrasso": {
+  "comune": "Casalgrasso",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-casteldelfino": {
+  "comune": "Casteldelfino",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-castiglione-falletto": {
+  "comune": "Castiglione Falletto",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-cavallermaggiore": {
+  "comune": "Cavallermaggiore",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-centallo": {
+  "comune": "Centallo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-ceresole-d-alba": {
+  "comune": "Ceresole d'Alba",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-cervasca": {
+  "comune": "Cervasca",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-ceva": {
+  "comune": "Ceva",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-chiusa-di-pesio": {
+  "comune": "Chiusa di Pesio",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-ciglie": {
+  "comune": "Cigliè",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-clavesana": {
+  "comune": "Clavesana",
+  "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-cossano-belbo": {
+  "comune": "Cossano Belbo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-crissolo": {
+  "comune": "Crissolo",
+  "n": 4,
+  "prov": "CN"
+ },
+ "c-cn-cuneo": {
+  "comune": "Cuneo",
+  "n": 6,
+  "prov": "CN"
+ },
+ "c-cn-demonte": {
+  "comune": "Demonte",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-dogliani": {
+  "comune": "Dogliani",
+  "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-dronero": {
+  "comune": "Dronero",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-entracque": {
+  "comune": "Entracque",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-envie": {
+  "comune": "Envie",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-farigliano": {
+  "comune": "Farigliano",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-faule": {
+  "comune": "Faule",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-fossano": {
+  "comune": "Fossano",
+  "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-frabosa-soprana": {
+  "comune": "Frabosa Soprana",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-frabosa-sottana": {
+  "comune": "Frabosa Sottana",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-frassino": {
+  "comune": "Frassino",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-lagnasco": {
+  "comune": "Lagnasco",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-limone-piemonte": {
+  "comune": "Limone Piemonte",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-mango": {
+  "comune": "Mango",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-marene": {
+  "comune": "Marene",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-margarita": {
+  "comune": "Margarita",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-monastero-di-vasco": {
+  "comune": "Monastero di Vasco",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-monasterolo-casotto": {
+  "comune": "Monasterolo Casotto",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-monasterolo-di-savigliano": {
+  "comune": "Monasterolo di Savigliano",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-monchiero": {
+  "comune": "Monchiero",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-monforte-d-alba": {
+  "comune": "Monforte d'Alba",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-monta": {
+  "comune": "Montà",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-montaldo-roero": {
+  "comune": "Montaldo Roero",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-montelupo-albese": {
+  "comune": "Montelupo Albese",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-murazzano": {
+  "comune": "Murazzano",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-neive": {
+  "comune": "Neive",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-niella-belbo": {
+  "comune": "Niella Belbo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-niella-tanaro": {
+  "comune": "Niella Tanaro",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-nucetto": {
+  "comune": "Nucetto",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-ostana": {
+  "comune": "Ostana",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-paesana": {
+  "comune": "Paesana",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-paroldo": {
+  "comune": "Paroldo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-peveragno": {
+  "comune": "Peveragno",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-pianfei": {
+  "comune": "Pianfei",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-piasco": {
+  "comune": "Piasco",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-piozzo": {
+  "comune": "Piozzo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-racconigi": {
+  "comune": "Racconigi",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-revello": {
+  "comune": "Revello",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-robilante": {
+  "comune": "Robilante",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-rocca-de-baldi": {
+  "comune": "Rocca de' Baldi",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-roccabruna": {
+  "comune": "Roccabruna",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-roccavione": {
+  "comune": "Roccavione",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-saluzzo": {
+  "comune": "Saluzzo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-sampeyre": {
+  "comune": "Sampeyre",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-san-benedetto-belbo": {
+  "comune": "San Benedetto Belbo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-san-michele-mondovi": {
+  "comune": "San Michele Mondovì",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-sant-albano-stura": {
+  "comune": "Sant'Albano Stura",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-santo-stefano-belbo": {
+  "comune": "Santo Stefano Belbo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-savigliano": {
+  "comune": "Savigliano",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-sommariva-del-bosco": {
+  "comune": "Sommariva del Bosco",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-tarantasca": {
+  "comune": "Tarantasca",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-torre-mondovi": {
+  "comune": "Torre Mondovì",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-torre-san-giorgio": {
+  "comune": "Torre San Giorgio",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-valdieri": {
+  "comune": "Valdieri",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-venasca": {
+  "comune": "Venasca",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-vernante": {
+  "comune": "Vernante",
+  "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-verzuolo": {
+  "comune": "Verzuolo",
+  "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-vignolo": {
+  "comune": "Vignolo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-villanova-mondovi": {
+  "comune": "Villanova Mondovì",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-villanova-solaro": {
+  "comune": "Villanova Solaro",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-viola": {
+  "comune": "Viola",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-ge-arenzano": {
+  "comune": "Arenzano",
+  "n": 2,
+  "prov": "GE"
+ },
+ "c-ge-ceranesi": {
+  "comune": "Ceranesi",
+  "n": 2,
+  "prov": "GE"
+ },
+ "c-ge-coreglia-ligure": {
+  "comune": "Coreglia Ligure",
+  "n": 1,
+  "prov": "GE"
+ },
+ "c-ge-genova": {
+  "comune": "Genova",
+  "n": 5,
+  "prov": "GE"
+ },
+ "c-ge-lavagna": {
+  "comune": "Lavagna",
+  "n": 1,
+  "prov": "GE"
+ },
+ "c-ge-masone": {
+  "comune": "Masone",
+  "n": 2,
+  "prov": "GE"
+ },
+ "c-ge-ronco-scrivia": {
+  "comune": "Ronco Scrivia",
+  "n": 1,
+  "prov": "GE"
+ },
+ "c-im-diano-marina": {
+  "comune": "Diano Marina",
+  "n": 2,
+  "prov": "IM"
+ },
+ "c-im-imperia": {
+  "comune": "Imperia",
+  "n": 1,
+  "prov": "IM"
+ },
+ "c-im-mendatica": {
+  "comune": "Mendatica",
+  "n": 1,
+  "prov": "IM"
+ },
+ "c-mi-milano": {
+  "comune": "Milano",
+  "n": 5,
+  "prov": "MI"
+ },
+ "c-no-bellinzago-novarese": {
+  "comune": "Bellinzago Novarese",
+  "n": 1,
+  "prov": "NO"
+ },
+ "c-no-orta-san-giulio": {
+  "comune": "Orta San Giulio",
+  "n": 1,
+  "prov": "NO"
+ },
+ "c-no-tornaco": {
+  "comune": "Tornaco",
+  "n": 1,
+  "prov": "NO"
+ },
+ "c-pv-pancarana": {
+  "comune": "Pancarana",
+  "n": 1,
+  "prov": "PV"
+ },
+ "c-pv-pavia": {
+  "comune": "Pavia",
+  "n": 2,
+  "prov": "PV"
+ },
+ "c-pv-salice-terme": {
+  "comune": "Salice Terme",
+  "n": 1,
+  "prov": "PV"
+ },
+ "c-pv-san-martino-siccomario": {
+  "comune": "San Martino Siccomario",
+  "n": 1,
+  "prov": "PV"
+ },
+ "c-pv-sant-alessio-con-vialone": {
+  "comune": "Sant'Alessio con Vialone",
+  "n": 1,
+  "prov": "PV"
+ },
+ "c-pv-vigevano": {
+  "comune": "Vigevano",
+  "n": 1,
+  "prov": "PV"
+ },
+ "c-pv-voghera": {
+  "comune": "Voghera",
+  "n": 1,
+  "prov": "PV"
+ },
+ "c-sv-finale-ligure": {
+  "comune": "Finale Ligure",
+  "n": 1,
+  "prov": "SV"
+ },
+ "c-sv-millesimo": {
+  "comune": "Millesimo",
+  "n": 2,
+  "prov": "SV"
+ },
+ "c-sv-noli": {
+  "comune": "Noli",
+  "n": 1,
+  "prov": "SV"
+ },
+ "c-sv-pietra-ligure": {
+  "comune": "Pietra Ligure",
+  "n": 2,
+  "prov": "SV"
+ },
+ "c-sv-roccavignale": {
+  "comune": "Roccavignale",
+  "n": 1,
+  "prov": "SV"
+ },
+ "c-sv-sassello": {
+  "comune": "Sassello",
+  "n": 1,
+  "prov": "SV"
+ },
+ "c-sv-varazze": {
+  "comune": "Varazze",
+  "n": 1,
+  "prov": "SV"
+ },
+ "c-to-cumiana": {
+  "comune": "Cumiana",
+  "n": 1,
+  "prov": "TO"
+ },
+ "c-to-lessolo": {
+  "comune": "Lessolo",
+  "n": 1,
+  "prov": "TO"
+ },
+ "c-to-marentino": {
+  "comune": "Marentino",
+  "n": 1,
+  "prov": "TO"
+ },
+ "c-to-moncalieri": {
+  "comune": "Moncalieri",
+  "n": 1,
+  "prov": "TO"
+ },
+ "c-to-settimo-torinese": {
+  "comune": "Settimo Torinese",
+  "n": 2,
+  "prov": "TO"
+ },
+ "c-to-torino": {
+  "comune": "Torino",
+  "n": 1,
+  "prov": "TO"
+ },
+ "c-to-venaria-reale": {
+  "comune": "Venaria Reale",
+  "n": 3,
+  "prov": "TO"
+ },
+ "c-to-vinovo": {
+  "comune": "Vinovo",
+  "n": 1,
+  "prov": "TO"
+ },
+ "c-va-somma-lombardo": {
+  "comune": "Somma Lombardo",
+  "n": 1,
+  "prov": "VA"
+ },
+ "c-vb-craveggia": {
+  "comune": "Craveggia",
+  "n": 1,
+  "prov": "VB"
+ },
+ "c-vb-macugnaga": {
+  "comune": "Macugnaga",
+  "n": 1,
+  "prov": "VB"
+ },
+ "c-vb-omegna": {
+  "comune": "Omegna",
+  "n": 1,
+  "prov": "VB"
+ },
+ "c-vb-ornavasso": {
+  "comune": "Ornavasso",
+  "n": 1,
+  "prov": "VB"
+ },
+ "c-vb-pieve-vergonte": {
+  "comune": "Pieve Vergonte",
+  "n": 1,
+  "prov": "VB"
+ },
+ "c-vc-alagna-valsesia": {
+  "comune": "Alagna Valsesia",
+  "n": 1,
+  "prov": "VC"
+ },
+ "c-vc-roasio": {
+  "comune": "Roasio",
+  "n": 1,
+  "prov": "VC"
+ },
+ "c-vc-tricerro": {
+  "comune": "Tricerro",
+  "n": 1,
+  "prov": "VC"
+ }
+}

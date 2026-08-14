@@ -22,6 +22,9 @@ HOME_PATH = os.path.join(ROOT, "index.html")
 HOME_LIMIT = 8  # quanti eventi mostrare nel carosello della home
 JSON_PATH = os.path.join(ROOT, "data", "eventi.json")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
+# Lo scrive genera_luoghi.py, lo legge questo: i comuni che hanno almeno un
+# luogo in /luoghi.html, con l'ancora del loro gruppo. Vedi link_luoghi().
+INDICE_LUOGHI_PATH = os.path.join(ROOT, "data", "luoghi-comuni.json")
 
 # Province i cui eventi vengono pubblicati sul sito. Una sola lista, usata sia dal
 # filtro dei dati sia dal copy che dice "che zona copre DAOP": prima la sigla era
@@ -2185,6 +2188,54 @@ def firma_daop(rec, oggi):
         '</aside>')
 
 
+_INDICE_LUOGHI = None
+
+
+def indice_luoghi():
+    """I comuni che hanno almeno un luogo in /luoghi.html, letti una volta sola.
+
+    Il file lo scrive genera_luoghi.py, che gira DOPO questo script: si legge
+    quindi l'indice della notte prima. E' voluto, vedi salva_indice_comuni()
+    la'. Se il file non c'e' (prima run, o clone senza la notte precedente) il
+    dizionario e' vuoto e i link semplicemente non si stampano: la pagina esce
+    come prima, senza rompersi."""
+    global _INDICE_LUOGHI
+    if _INDICE_LUOGHI is None:
+        try:
+            with open(INDICE_LUOGHI_PATH, encoding="utf-8") as fh:
+                _INDICE_LUOGHI = json.load(fh)
+        except (OSError, ValueError):
+            _INDICE_LUOGHI = {}
+    return _INDICE_LUOGHI
+
+
+def link_luoghi(citta, prov):
+    """Il link ai luoghi del comune, o '' se in quel comune non ce n'e' nessuno.
+
+    E' l'unico ponte fra le due meta' del sito. Le schede evento fanno l'82% dei
+    clic e /luoghi.html ne fa zero: non perche' sia peggiore, ma perche' fino a
+    oggi ci si arrivava solo dalla nav, e alla nav non ci va nessuno. Chi ha
+    appena letto l'orario di una sagra a Ovada e' esattamente la persona a cui
+    interessa cos'altro c'e' a Ovada.
+
+    Si stampa solo se l'ancora esiste per davvero (stessa regola dei link alle
+    pagine comune): mandare su /luoghi.html senza bersaglio scarica in cima a una
+    pagina da 800 righe, cioe' peggio che non linkare. E si stampa il numero,
+    perche' "22 luoghi" e' una ragione per toccare e "Luoghi" non lo e'."""
+    if not citta:
+        return ''
+    slug = slugify(citta)
+    prov = (prov or '').strip()
+    ancora = f"c-{prov.lower()}-{slug}" if prov else f"c-{slug}"
+    dati = indice_luoghi().get(ancora)
+    if not dati:
+        return ''
+    n = dati.get('n') or 0
+    quanti = "Un posto" if n == 1 else f"{n} posti"
+    return (f'<a href="/luoghi.html#{ancora}">{quanti} per famiglie'
+            f'{a_citta(esc(dati.get("comune") or citta))}</a>')
+
+
 def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
 
@@ -2246,11 +2297,20 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     #
     # L'ordine va dal piu' vicino al piu' largo: chi arriva da "festa <comune>"
     # cerca prima il suo comune, poi la sua provincia, e solo dopo "e stasera?".
+    #
+    # Dal 14/08/2026 nella coda c'e' anche /luoghi.html, ed e' l'unico link che
+    # quella pagina riceve dal corpo di qualcosa che ha traffico. Sta subito
+    # dopo il comune e prima della provincia perche' risponde alla stessa
+    # domanda ("cos'altro c'e' qui?") con l'altra meta' della risposta: non un
+    # altro evento, un posto dove andare quando eventi non ce ne sono.
     coda = []
     mio_hub = (hub or {}).get(citta)
     if mio_hub:
         coda.append(f'<a href="/eventi/comune/{mio_hub["slug"]}.html">Tutti gli eventi'
                     f'{a_citta(mio_hub["nome"])}</a>')
+    lg = link_luoghi(rec.get('citta'), prov)
+    if lg:
+        coda.append(lg)
     if prov in PROVINCE_PUBBLICATE:
         nome_prov = PROVINCE_NOMI[prov]
         coda.append(f'<a href="/sagre-provincia-{slugify(nome_prov)}.html">'
