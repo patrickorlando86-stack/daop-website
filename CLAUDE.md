@@ -274,28 +274,56 @@ E prendere una stagione nuova è **veloce**: la scheda di Cassinasco è nata il 
 agosto ed era in posizione 1,13 entro l'8. Cinque giorni, perché su quelle query
 non c'è concorrenza.
 
-#### Il rischio vero è un foglio vuoto, e ha una data
+#### Il calendario vuoto di novembre non è un allarme: la fonte ha 10 giorni di preavviso
 
-Non è Google, è la raccolta. Al 14/08/2026, eventi in agenda per mese:
+Al 14/08/2026 l'agenda ha 220 eventi in agosto, 59 a settembre, **4** a ottobre,
+**1** a novembre, **1** a dicembre, e lo storico dice lo stesso (421 archiviati:
+340 in agosto, 74 a settembre, 3 in ottobre, 1 a dicembre, **0** a novembre).
 
-| ago | set | **ott** | **nov** | **dic** |
+**Quei numeri non prevedono niente.** Misurato su `data/pagine-evento.json`, 224
+schede nate dopo il backfill del 02/08: fra la comparsa della riga e la data
+dell'evento passano **10,5 giorni di mediana**, p90 28 giorni, e 21 righe su 224
+sono arrivate a evento già iniziato. Un imbuto da dieci giorni **deve** avere
+quasi zero a tre mesi di distanza: guardare a metà agosto quanti eventi ci sono
+per novembre è come pesare la spesa di dicembre guardando il frigo di agosto. Il
+numero da guardare è quanti ce ne sono per novembre **a fine ottobre**.
+
+E la domanda d'autunno non è un'ipotesi, è già nell'export del 14/08 — query
+stagionali con impressioni mesi prima dell'evento: `sagra della zucca castelletto
+monferrato` in posizione 3,67, il grappolo `sagra zucchino rivalta bormida` fra
+4,0 e 8,3, `fiere e mercatini in provincia di cuneo domani` in posizione 1. Zero
+clic perché l'evento è lontano, ma Google ci ha già messi lì. Ottobre e novembre
+in Piemonte sono castagne, funghi, tartufo, vendemmia, Halloween nei castelli,
+mercatini, presepi viventi: **il sito non va in letargo, e non è la stagione la
+cosa da temere.**
+
+#### Quello che cambia in autunno è il tipo di query, non il calendario
+
+Sulle 873 query visibili dell'export (che sono il 22% dei clic, il resto Google
+lo anonimizza):
+
+| | query | clic | CTR | posizione |
 |---|---|---|---|---|
-| 220 | 59 | **4** | **1** | **1** |
+| **nome proprio** (`festa cassinasco 2026`) | 539 | 515 | **9,47%** | 6,21 |
+| **generiche** (`sagre provincia alessandria oggi`) | 334 | 95 | 2,77% | 8,42 |
 
-Lo storico dice la stessa cosa (421 eventi archiviati: 340 in agosto, 74 a
-settembre, 3 in ottobre, 1 a dicembre, **0** a novembre). Se a novembre il
-traffico crolla non sarà perché la stagione è finita — ottobre e novembre in
-Piemonte sono castagne, funghi, tartufo, vendemmia, Halloween nei castelli,
-mercatini, presepi viventi — sarà perché nel foglio non c'era niente da
-pubblicare.
+L'84% dei clic visibili viene dai nomi propri, a tre volte e mezzo il CTR. È lì
+che non abbiamo concorrenza, e **il fossato si porta dietro quasi tutto
+l'autunno**: carnevali, presepi viventi, sagre della castagna e del tartufo hanno
+tutti il nome del paese attaccato, cioè sono la stessa partita di agosto.
 
-E non è una previsione, è la cadenza normale della fonte: le righe del foglio
-nascono dalle locandine, e le locandine di ottobre arrivano a ottobre. Il numero
-da guardare non è quanti eventi ci sono in agenda per novembre **oggi** — è
-sempre quasi zero, e va bene — ma se a fine ottobre ce ne sono.
+Si porta dietro molto meno **Halloween** e **"mercatini di Natale in Piemonte"**:
+lì la query è nazionale e generica, cioè la colonna in cui stiamo in posizione
+8-10 al 2,77%. Il rischio d'autunno non è che manchino gli eventi, è che una
+fetta più grossa della domanda cada dove siamo deboli — ed è l'argomento più
+forte per le sei pagine d'incrocio: in agosto sarebbero un miglioramento, a Natale
+sono la differenza fra prendere quella domanda e guardarla passare.
 
-Le query di stagione si cercano **prima** dell'evento, e con cinque giorni di
-rampa il calendario è questo:
+Resta una cosa che il ritmo naturale della fonte **non** copre da solo. Le query
+di stagione si cercano prima dell'evento, e con cinque giorni di rampa servono
+schede molto più in anticipo dei 10 giorni di mediana: per Halloween del 31
+ottobre il ritmo normale porterebbe la riga verso il 21, cioè tardi. Le stagionali
+vanno raccolte **apposta**, prima delle altre:
 
 | stagione | le schede devono esistere entro |
 |---|---|
