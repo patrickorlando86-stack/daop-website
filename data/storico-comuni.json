@@ -472,6 +472,23 @@
   "nome": "Barolo",
   "prov": "CN"
  },
+ "belfortemonferrato": {
+  "eventi": {
+   "xxvii-sagra-delle-trofie-al-pesto-belforte-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo di Belforte Monferrato",
+    "manifest": "XXVII Sagra delle Trofie al Pesto",
+    "nome": "XXVII Sagra delle Trofie al Pesto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-26"
+   }
+  },
+  "nome": "Belforte Monferrato",
+  "prov": "AL"
+ },
  "bistagno": {
   "eventi": {
    "castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno": {
@@ -504,6 +521,23 @@
    }
   },
   "nome": "Borghetto di Borbera",
+  "prov": "AL"
+ },
+ "bosio": {
+  "eventi": {
+   "festa-del-major-bosio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Majör Bosio 90's",
+    "manifest": "",
+    "nome": "Festa del Majör",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-19"
+   }
+  },
+  "nome": "Bosio",
   "prov": "AL"
  },
  "bra": {
@@ -4969,6 +5003,23 @@
   "nome": "Sezzadio",
   "prov": "AL"
  },
+ "silvanodorba": {
+  "eventi": {
+   "silvanoincontrada-silvano-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Peso Pubblico",
+    "manifest": "SilvanoInContraDA",
+    "nome": "SilvanoInContraDA",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   }
+  },
+  "nome": "Silvano d'Orba",
+  "prov": "AL"
+ },
  "spignomonferrato": {
   "eventi": {
    "masca-il-ritorno-della-strega-pro-loco-di-spigno-m-spigno-monferrato": {
@@ -5029,6 +5080,56 @@
    }
   },
   "nome": "Stazzano",
+  "prov": "AL"
+ },
+ "strevi": {
+  "eventi": {
+   "cena-con-rosticciata-strevese-e-b-side-party-band-strevi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Ferragosto Strevese",
+    "nome": "Cena con Rosticciata Strevese e B-Side Party Band - Nuova Pro Loco di Strevi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-16"
+   },
+   "cena-in-piazza-con-musica-anni-90-nuova-pro-loco-d-strevi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Ferragosto Strevese",
+    "nome": "Cena in Piazza con Musica Anni 90/2000 - Nuova Pro Loco di Strevi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-14"
+   },
+   "cena-in-piazza-con-set-latino-americano-e-balli-di-strevi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Ferragosto Strevese",
+    "nome": "Cena in Piazza con Set Latino Americano e Balli di Gruppo - Nuova Pro Loco di Strevi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-15"
+   },
+   "pizza-e-non-solo-con-proiezione-film-nuova-pro-loc-strevi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Ferragosto Strevese",
+    "nome": "Pizza e Non Solo! con Proiezione Film - Nuova Pro Loco di Strevi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   }
+  },
+  "nome": "Strevi",
   "prov": "AL"
  },
  "tassarolo": {
@@ -5136,6 +5237,23 @@
   },
   "nome": "Trisobbio",
   "prov": "AL"
+ },
+ "valderia": {
+  "eventi": {
+   "scopri-natura-valderia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardino Botanico Valderia",
+    "manifest": "Scopri Natura",
+    "nome": "Scopri Natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-17"
+   }
+  },
+  "nome": "Valderia",
+  "prov": "CN"
  },
  "verzuolo": {
   "eventi": {
@@ -5472,6 +5590,17 @@
     "organizza": "Pro Loco Voltaggio / PazzoAnimazione",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "sagra-degli-gnocchi-al-pesto-circolo-ricreativo-en-voltaggio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Zona Campo Sportivo",
+    "manifest": "",
+    "nome": "Sagra degli Gnocchi al Pesto - Circolo Ricreativo Endas Voltaggio",
+    "organizza": "Circolo Ricreativo Endas Voltaggio",
+    "pagina": true,
+    "ultima": "2026-08-14"
    },
    "splash-party-il-ritorno-pro-loco-voltaggio-pazzoan": {
     "anni": [
