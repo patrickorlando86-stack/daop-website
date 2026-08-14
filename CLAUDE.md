@@ -839,6 +839,17 @@ restano fuori apposta: non sono di un comune, quindi non c'è un'ancora sola a c
 mandarle. Il loro ponte verso `luoghi.html` esiste già ed è di altra natura — il
 blocco "dove si mangia" di Ferragosto e Halloween.
 
+Fuori dai generatori restano le due pagine scritte a mano, ed è lì che il link
+si scrive **a mano una volta e basta**: in `eventi.html` sta in coda al blocco
+"TESTO DI ZONA", che è già l'elenco dei link interni e sta **sotto** la lista —
+non nell'hero, che è l'asset da non toccare; in `index.html` sta nel `path-alt`
+della card "Sei un genitore", l'unica delle tre che parla a chi cerca un posto.
+Nessuna delle due passa dai marker, quindi `genera_eventi.py` non le riscrive.
+
+La domanda che quel link deve porre è sempre la stessa, e non è "vedi anche":
+**non un evento, un posto** — cioè la cosa che serve nei giorni in cui in agenda
+non c'è niente. Se un giorno diventa un "scopri di più", ha smesso di funzionare.
+
 E le pagine di incrocio ("piscine per bambini in provincia di Alessandria",
 "dove andare con la pioggia a Casale") non esistono ancora: sono 30-50 pagine
 che rispondono a ricerche vere, e sono l'inventario che poi si rivende.
