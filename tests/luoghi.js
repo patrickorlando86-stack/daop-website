@@ -14,7 +14,9 @@
 // diventa rossa.
 'use strict';
 
-const { apri, esito } = require('./_aiuto');
+const fs = require('fs');
+const path = require('path');
+const { apri, esito, RADICE } = require('./_aiuto');
 
 const visibili = (page) => page.locator('.lg-row[data-cat]:not([hidden])').count();
 
@@ -308,6 +310,30 @@ module.exports = async function luoghi(browser) {
   await page.waitForTimeout(400);
   r.ok(await page.locator(`#${id}`).evaluate((d) => d.open),
     `l'ancora #${id} apre la riga`);
+
+  // ── il ponte dalle schede evento ──────────────────────────────────────
+  // Le schede /eventi/*.html fanno l'82% dei clic, questa pagina ne faceva
+  // zero: l'unico link che riceveva veniva dalla nav. Dal 14/08/2026 ogni
+  // scheda manda ai luoghi del suo comune, e sono due cose che si rompono in
+  // silenzio - il link sparisce, oppure punta a un'ancora che non c'e' e
+  // scarica in cima a una pagina da 800 righe. Nessuna delle due fa rumore.
+  r.titolo('luoghi.html — i link in arrivo dalle schede evento');
+  const ancore = new Set(await page.$$eval('.lg-grp-h h2[id]', (h) => h.map((x) => x.id)));
+  const schede = fs.readdirSync(path.join(RADICE, 'eventi')).filter((f) => f.endsWith('.html'));
+  const bersagli = new Map();
+  for (const f of schede) {
+    const html = fs.readFileSync(path.join(RADICE, 'eventi', f), 'utf8');
+    for (const m of html.matchAll(/href="\/luoghi\.html#(c-[a-z0-9-]+)"/g)) {
+      if (!bersagli.has(m[1])) bersagli.set(m[1], f);
+    }
+  }
+  r.ok(bersagli.size > 0,
+    `il ponte esiste: ${bersagli.size} comuni linkati da ${schede.length} schede`);
+  const rotti = [...bersagli].filter(([a]) => !ancore.has(a));
+  r.ok(rotti.length === 0, rotti.length
+    ? `ancore inesistenti: ${rotti.slice(0, 3).map(([a, f]) => `#${a} (${f})`).join(', ')}`
+    : 'ogni ancora linkata esiste davvero in luoghi.html');
+
   await ctx.close();
 
   return r;

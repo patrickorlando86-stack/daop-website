@@ -129,6 +129,18 @@ python3 scripts/genera_rubriche.py    # legge contenuti/rubriche/
 c'è in programma in ogni posto. Girando prima scriverebbe "in programma" su
 eventi già passati.
 
+C'è però una dipendenza anche nel verso opposto, e **è voluto che sia in
+ritardo di un giro**: `genera_luoghi.py` scrive `data/luoghi-comuni.json`
+(quali comuni hanno almeno un luogo, con l'ancora del loro gruppo) e
+`genera_eventi.py` lo legge per linkare ogni scheda evento ai luoghi del suo
+comune. Girando in quest'ordine le schede usano l'indice della notte prima.
+Chiudere il cerchio — leggere il foglio Luoghi anche qui, o girare tre volte —
+costerebbe più di quello che risolve: un comune che entra oggi nel catalogo
+resta senza link per un giorno, e sbagliare in quel verso è gratis. Il verso
+opposto no: un link a un'ancora che non esiste scarica in cima a una pagina da
+800 righe, ed è peggio di nessun link. Se il file manca, i link non si stampano
+e basta.
+
 `genera_eventi.py` legge il foglio Google e, se non lo raggiunge, ripiega da
 solo su `data/eventi.json` (l'istantanea committata) e va avanti. Gli altri no:
 senza rete `genera_centri.py` stampa "lascio la pagina com'è" e non riscrive
@@ -808,12 +820,23 @@ controlla. Se un giorno nasce un altro spazio venduto — un banner, una scheda
 sponsorizzata in agenda — la regola vale anche lì.
 
 **Far crescere la pagina e far valere di più lo spazio sono lo stesso lavoro.**
-`luoghi.html` è linkata dalla nav di 292 pagine ma da nessun corpo di pagina: la
-pagina comune di Acqui Terme parla di eventi e non dice che ad Acqui ci sono 25
-luoghi. E le pagine di incrocio ("piscine per bambini in provincia di
-Alessandria", "dove andare con la pioggia a Casale") non esistono ancora: sono
-30-50 pagine che rispondono a ricerche vere, e sono l'inventario che poi si
-rivende.
+Fino al 14/08/2026 `luoghi.html` era linkata dalla nav di 292 pagine e da
+**nessun corpo di pagina** tranne le due stagionali — ed è tutta lì la ragione
+per cui non prendeva traffico: alla nav non ci va nessuno. Da quella data ogni
+scheda evento manda ai luoghi del proprio comune, in coda a `blocco_vicini()`
+(`link_luoghi()`): **193 schede su 279**, cioè le pagine che fanno l'82% dei
+clic del sito. Il link si stampa solo se il comune ha davvero un'ancora in
+pagina, e porta il numero — "22 posti per famiglie a Ovada" è una ragione per
+toccare, "Luoghi" no. `tests/luoghi.js` controlla tutte e due le cose: che il
+ponte esista ancora e che nessuna ancora linkata sia inventata.
+
+Restano scoperte le **pagine comune**: quella di Acqui Terme parla di eventi e
+non dice che ad Acqui ci sono 25 luoghi. È la stessa mossa sulla superficie
+successiva, e `link_luoghi()` è già scritta per essere richiamata lì.
+
+E le pagine di incrocio ("piscine per bambini in provincia di Alessandria",
+"dove andare con la pioggia a Casale") non esistono ancora: sono 30-50 pagine
+che rispondono a ricerche vere, e sono l'inventario che poi si rivende.
 
 Cosa manca, in ordine di resa:
 
