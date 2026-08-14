@@ -830,9 +830,14 @@ pagina, e porta il numero — "22 posti per famiglie a Ovada" è una ragione per
 toccare, "Luoghi" no. `tests/luoghi.js` controlla tutte e due le cose: che il
 ponte esista ancora e che nessuna ancora linkata sia inventata.
 
-Restano scoperte le **pagine comune**: quella di Acqui Terme parla di eventi e
-non dice che ad Acqui ci sono 25 luoghi. È la stessa mossa sulla superficie
-successiva, e `link_luoghi()` è già scritta per essere richiamata lì.
+Stessa cosa sulle **pagine comune**, in coda a `.com-link`: quella di Acqui
+Terme diceva "Tutta l'agenda DAOP" e non che ad Acqui ci sono 25 luoghi. Ora lo
+dice, con quelle parole lì. In tutto **204 pagine su 293** portano il link.
+
+Le landing (`oggi`, `weekend`, le provinciali, le sei d'incrocio, le stagionali)
+restano fuori apposta: non sono di un comune, quindi non c'è un'ancora sola a cui
+mandarle. Il loro ponte verso `luoghi.html` esiste già ed è di altra natura — il
+blocco "dove si mangia" di Ferragosto e Halloween.
 
 E le pagine di incrocio ("piscine per bambini in provincia di Alessandria",
 "dove andare con la pioggia a Casale") non esistono ancora: sono 30-50 pagine
