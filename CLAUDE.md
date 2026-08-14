@@ -73,6 +73,48 @@ generatori. Nessuno dei due script manda niente prima del consenso:
 `window.daopConsensoAnalytics` è la condizione, e `typeof gtag === 'function'`
 non basta — lo stub che accoda in `dataLayer` esiste da sempre.
 
+#### Il buco è chiuso, e si misura con Search Console non con GA4
+
+Il fix è andato in produzione il 12/08/2026 alle 14:53. GA4 ha reagito subito, e
+in due modi che vanno letti bene, perché **entrambi sembrano quello che non
+sono**.
+
+Il primo è un avviso "anomalia nel conteggio eventi" il 12 agosto: 904 eventi
+contro un massimo previsto di 821. Non è traffico, è misurazione — e la prova sta
+fuori da GA4, nell'export di Search Console. Il giorno di traffico più grosso del
+mese è l'**8 agosto**, con 603 clic da Google: GA4 quel giorno ha visto ~30
+utenti. Se il salto del 12-13 fosse crescita reale, il massimo sarebbe stato
+l'8.
+
+| giorno | clic da Google | utenti GA4 |
+|---|---|---|
+| 8 ago | 603 (il picco vero) | ~30 |
+| 11 ago | 270 | ~30 |
+| 12 ago (fix alle 14:53) | 311 | ~120 |
+| 13 ago | — | ~220 |
+
+Prima del fix GA4 misurava circa il **5%** della realtà, dopo circa il **70%**.
+Il resto è il banner di consenso, ed è fisiologico: **non si arriverà mai in pari
+con Search Console**, e il criterio di successo è che il divario si stringa, non
+che si chiuda. Il `+608%` settimanale (62 → 439 utenti attivi) è quindi quasi
+tutto recupero di misurazione: non usarlo come numero di crescita con nessuno.
+
+Il secondo è la durata media, scesa del 53% (2:12 → 1:02). **Non è un
+peggioramento, è composizione.** Prima l'unica popolazione misurata erano le
+pagine scritte a mano — `eventi.html`, la home — cioè gente che naviga; ora
+dentro c'è la massa che atterra da Google su una singola scheda, legge l'orario
+della sagra ed esce. È una visita a pagina singola, che GA4 sottostima per
+costruzione. Non inseguirla.
+
+Ne segue la regola di lettura: **nessun confronto che attraversi il 12/08/2026 ha
+senso** — non mese-su-mese, non anno-su-anno. Se GA4 permette un'annotazione su
+quella data, mettila. E aspettati altri avvisi "anomalia" per qualche giorno,
+mentre il modello previsionale reimpara: sono rumore.
+
+Cosa manca ancora, ed è il pezzo che trasforma il tracciamento in argomento di
+vendita: **il conteggio delle aperture di scheda su `luoghi.html`** (vedi
+"Vendere uno spazio"). GA4 registra i clic *dalla* scheda, non le aperture.
+
 ## Far girare i generatori
 
 ```bash
@@ -174,6 +216,153 @@ file per una riga stagionale.
 Nata il 13/08/2026, cioè **due giorni prima**: quest'anno non si posiziona e non
 è per quello che esiste: la resa 2026 arriva da push, WhatsApp e social, quella
 da Google arriva nel 2027. Non giudicarla dai numeri di agosto 2026.
+
+### Il traffico sono le schede, e i loro URL non scadono
+
+Misurato sull'export di Search Console del 14/08/2026 (28 giorni, 16/07–12/08):
+**2.777 clic, 35.122 impressioni, CTR 7,91%, 90% da telefono.** Dove vanno:
+
+| | clic | quota |
+|---|---|---|
+| le ~200 **schede** `/eventi/*.html` | 2.303 | **82%** |
+| `eventi.html` | 331 | 12% |
+| `sagre-provincia-*` | 127 | 5% |
+| tutto il resto (home, rubriche, centri estivi, `piattosano`) | ~40 | 1% |
+
+Da qui la prima cosa da non fraintendere: **come pagina singola `eventi.html`
+resta la più forte del sito, ma come sistema il sito sono le schede.** Ed erano
+esattamente loro a non mandare `page_view` fino al 12/08 — il divario 1.932 clic
+contro 215 utenti non era un mistero, era l'82% del traffico.
+
+**L'onda di agosto non è la stagione delle sagre: sono le schede.** Il `first_seen`
+in `data/pagine-evento.json` dice che il sistema è nato il **02/08/2026**, e i
+clic partono il 3: `5-15 al giorno in luglio → 69 → 118 → 140 → 170 → 269 → 603
+→ 427 → 273 → 270 → 311`. Le stesse sagre erano già in agenda a luglio, quando il
+sito faceva undici clic al giorno. Il picco di Ferragosto ha amplificato, non
+causato.
+
+Dove sono imbattibili: **nomi propri di feste di paese.** `festa cassinasco 2026`
+in posizione 1,13 con CTR 31%, `cassinasco festa 2026` con CTR **72%**. Nessun
+altro pubblica i sotto-eventi di una patronale di 800 abitanti. Le query che
+contengono `2026` fanno il 60% dei clic misurati con CTR 11,1% contro 4,4% delle
+altre: **la gente scrive l'anno**, e i title ce l'hanno — è la ragione per cui
+`_titolo_evento()` lo stampa.
+
+Due numeri per tenere la testa a posto: le prime 10 schede fanno il 53% dei clic
+delle schede e `festa-d-estate-cassinasco.html` da sola l'11% del sito; e il
+foglio `Query` copre solo 610 dei 2.777 clic, perché Google anonimizza le query
+troppo rare. **Il 78% del traffico arriva da ricerche che non possiamo vedere.**
+È il fossato (nessuno ci compete) e la fragilità (non c'è una query da difendere)
+nello stesso dato.
+
+#### Perché "poi arriva Halloween" non è un problema
+
+Perché lo slug non porta l'anno né il numero di edizione — è la stessa decisione
+di `/ferragosto.html`, applicata ~200 volte invece di una. `slug_evento()` toglie
+`2026` e `40ª` dal nome, quindi l'edizione 2027 **aggiorna la stessa URL** invece
+di crearne una che riparte da zero. E le pagine **non si cancellano mai**: quando
+l'evento passa, `normalize()` lo scarta dal feed ma il registro
+`data/pagine-evento.json` conserva i dati e la pagina resta online marcata
+"edizione conclusa" (al 14/08/2026: 70 edizioni concluse su 259 conservate).
+
+Quindi quello che scade sono **le query di questo agosto**, non gli URL. Nel 2027
+`festa cassinasco 2027` si posiziona su un indirizzo che ha un anno di vita e sta
+già in prima posizione. Il 2026 è l'anno zero di ogni stagione; dal 2027 ogni
+stagione erediterà i propri URL invecchiati.
+
+E prendere una stagione nuova è **veloce**: la scheda di Cassinasco è nata il 2-3
+agosto ed era in posizione 1,13 entro l'8. Cinque giorni, perché su quelle query
+non c'è concorrenza.
+
+#### Il rischio vero è un foglio vuoto, e ha una data
+
+Non è Google, è la raccolta. Al 14/08/2026, eventi in agenda per mese:
+
+| ago | set | **ott** | **nov** | **dic** |
+|---|---|---|---|---|
+| 220 | 59 | **4** | **1** | **1** |
+
+Lo storico dice la stessa cosa (421 eventi archiviati: 340 in agosto, 74 a
+settembre, 3 in ottobre, 1 a dicembre, **0** a novembre). Se a novembre il
+traffico crolla non sarà perché la stagione è finita — ottobre e novembre in
+Piemonte sono castagne, funghi, tartufo, vendemmia, Halloween nei castelli,
+mercatini, presepi viventi — sarà perché nel foglio non c'era niente da
+pubblicare.
+
+E non è una previsione, è la cadenza normale della fonte: le righe del foglio
+nascono dalle locandine, e le locandine di ottobre arrivano a ottobre. Il numero
+da guardare non è quanti eventi ci sono in agenda per novembre **oggi** — è
+sempre quasi zero, e va bene — ma se a fine ottobre ce ne sono.
+
+Le query di stagione si cercano **prima** dell'evento, e con cinque giorni di
+rampa il calendario è questo:
+
+| stagione | le schede devono esistere entro |
+|---|---|
+| Halloween | **~10 ottobre** |
+| mercatini, presepi viventi, Natale | **~1 novembre** |
+| Carnevale | **~10 gennaio** |
+| Pasqua | ~1 marzo |
+
+### `eventi.html` cannibalizza `oggi` e `weekend`, e non si risolve indebolendola
+
+Il sintomo sembra un guasto: in 28 giorni `/eventi/oggi.html` ha preso **10
+impressioni** e `/eventi/weekend.html` **13**, mentre le query di quell'intenzione
+esistono e sono grosse (`sagre provincia di alessandria oggi`, 372 impressioni;
+`eventi asti e provincia oggi`, 251). Non è un guasto: sono `index, follow`, con
+canonical proprio, in sitemap, linkate dalla nav di 266 pagine.
+
+La causa è che **`eventi.html` rivendica già quell'intenzione, e la rivendica
+meglio**: title `Eventi e Sagre Oggi in Provincia di Alessandria, Asti, Cuneo`,
+H1 `Sagre ed eventi oggi e questo weekend`, 286 `Event` in JSON-LD, 1,4 MB di
+contenuto, tutta l'autorità del sito. Google consolida su di lei, e fa la cosa
+giusta.
+
+**La scorciatoia da non prendere è togliere "oggi" e "weekend" dall'H1 o dal
+title di `eventi.html` per de-cannibalizzare.** È la stessa regola già scritta per
+la riga stagionale, con la stessa aritmetica: quell'H1 vale 13.553 impressioni,
+cioè il 36% delle impressioni del sito, e si rinuncerebbe a un asset provato per
+sbloccare due pagine che oggi ne fanno 23 in un mese. Nemmeno una prova A/B lo
+giustifica: il rischio è asimmetrico.
+
+Il problema che resta non è *quale* pagina ranka, è che **qualunque pagina ranki,
+ranka in posizione 8-10**. Le query generiche sono il 39% delle impressioni e solo
+il 16% dei clic, con CTR 2,78% e posizione media 9,4. Ed è la domanda che **non
+scade mai**: torna ogni weekend, tutto l'anno, Halloween e Natale compresi.
+
+Guardando le query per quello che chiedono, il buco si vede: **chiedono tutte
+provincia _e_ finestra temporale insieme** — "sagre provincia di alessandria
+oggi", "eventi provincia di asti questo weekend". Quello che esiste è o l'una o
+l'altra:
+
+| pagina | provincia | quando | CTR |
+|---|---|---|---|
+| `sagre-provincia-*` | sì (H1) | **no** | 5,7-13,3% |
+| `oggi.html` / `weekend.html` | **no** (solo nel title) | sì (H1) | invisibili |
+| `eventi.html` | solo nel title | sì (H1) | 2,4% a pos. 8,08 |
+
+Le provinciali convertono 2-5 volte meglio di `eventi.html` per impressione e
+prendono 25 volte meno impressioni. **Nessuna pagina copre l'incrocio**, che è
+esattamente quello che si digita. Sono le stesse "pagine di incrocio" già
+elencate come lavoro mancante per `luoghi.html`, e qui la domanda è già misurata
+invece che supposta.
+
+Cosa manca, in ordine di resa — **nessuna di queste è ancora decisa**:
+
+1. **Le 6 pagine d'incrocio** (3 province × oggi/weekend). Insieme di dimensione
+   chiusa, quindi non è *scaled content*: la domanda esiste, la risposta no. Da
+   decidere se nascono così o se assorbono `oggi.html`/`weekend.html`, che a quel
+   punto non avrebbero più un mestiere.
+2. **`Event` in JSON-LD sulle pagine aggregate.** `oggi.html` elenca 28 eventi,
+   `weekend.html` 73, le tre provinciali il loro, e **tutte e cinque hanno zero
+   `Event`**: i rich result eventi li prende solo `eventi.html`, che ne ha 286.
+   Da verificare prima di farlo, però, che moltiplicare la stessa entità su più
+   pagine non diluisca invece di aggiungere.
+3. **L'H1 di `oggi.html` e `weekend.html` non nomina le province**, mentre il
+   title sì (`Cosa fare oggi` contro *"Cosa fare oggi in provincia di
+   Alessandria, Asti e Cuneo"*). È la più economica delle tre — metà della query
+   è il posto — ma ha senso solo se quelle due pagine restano, cioè va decisa
+   dopo il punto 1, non prima.
 
 ### L'età non si ripete nelle descrizioni
 
@@ -431,10 +620,17 @@ bello del Piemonte". Se le schede a pagamento suonano come volantini, il lettore
 smette di fidarsi anche delle altre 819 — e a quel punto non vale più niente
 neanche quello che vendi.
 
-**Oggi la pagina non ha ancora traffico.** È nata il 12/08/2026; `eventi.html` fa
-1.932 clic al mese da Search Console, `luoghi.html` parte da zero. I primi
-clienti non stanno comprando un pubblico: stanno comprando una scommessa. Non
-promettere numeri che non puoi mostrare, e tienili a un prezzo da pionieri.
+**Oggi la pagina non ha ancora traffico.** È nata il 12/08/2026 e nell'export del
+14/08 ha **zero impressioni** — normale, i dati arrivano fino al 12. Intanto il
+sito fa 2.777 clic in 28 giorni, ma **l'82% va alle schede evento e solo il 12% a
+`eventi.html`**: quel traffico è gente che cerca il nome di una sagra, non un
+posto dove andare. I primi clienti non stanno comprando un pubblico: stanno
+comprando una scommessa. Non promettere numeri che non puoi mostrare, e tienili a
+un prezzo da pionieri.
+
+(La cifra "1.932 clic al mese di `eventi.html`" che stava qui era sbagliata due
+volte: era il totale del sito, non di quella pagina, ed è invecchiata in tre
+giorni. `eventi.html` da sola fa 331 clic su 13.553 impressioni.)
 
 #### Tre numeri, cercati in rete il 13/08/2026
 
@@ -446,9 +642,13 @@ Servono a tenere le aspettative in scala, non a fare un piano industriale.
 | ricavo di una directory di nicchia piccola | **100-500 $/mese**, cioè qualche migliaio di euro l'anno |
 | traffico da cui si comincia a poter vendere | **3.000-5.000 visite/mese** |
 
-Il terzo è quello che conta adesso: tutto il sito sta **sotto** quella soglia. Non
-è un problema, è una scadenza — dice che la leva non è vendere di più, è far
-crescere la pagina, e conferma l'ordine dei lavori qui sotto.
+Il terzo è quello che conta adesso, e nei tre giorni fra questa ricerca e
+l'export del 14/08 è cambiato: il sito ha fatto **2.777 clic in 28 giorni**, cioè
+è arrivato *al bordo* di quella soglia invece di stare molto sotto. Non
+cambia la conclusione, ne cambia il tono: la leva resta far crescere le pagine,
+ma non è più una scadenza lontana. Attenzione a due cose prima di brindare —
+quel numero è concentrato al 95% negli ultimi dieci giorni, e va alle schede
+evento, non a `luoghi.html`, che è quello che si sta vendendo.
 
 I primi due numeri vengono in buona parte da blog di aziende che vendono
 software per directory: hanno interesse a far sembrare il business migliore di
