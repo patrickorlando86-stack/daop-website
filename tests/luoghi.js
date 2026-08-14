@@ -319,16 +319,23 @@ module.exports = async function luoghi(browser) {
   // scarica in cima a una pagina da 800 righe. Nessuna delle due fa rumore.
   r.titolo('luoghi.html — i link in arrivo dalle schede evento');
   const ancore = new Set(await page.$$eval('.lg-grp-h h2[id]', (h) => h.map((x) => x.id)));
-  const schede = fs.readdirSync(path.join(RADICE, 'eventi')).filter((f) => f.endsWith('.html'));
+  const schede = ['eventi', 'eventi/comune'].flatMap((d) =>
+    fs.readdirSync(path.join(RADICE, d))
+      .filter((f) => f.endsWith('.html'))
+      .map((f) => path.join(d, f)));
   const bersagli = new Map();
+  let conLink = 0;
   for (const f of schede) {
-    const html = fs.readFileSync(path.join(RADICE, 'eventi', f), 'utf8');
+    const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    let trovato = false;
     for (const m of html.matchAll(/href="\/luoghi\.html#(c-[a-z0-9-]+)"/g)) {
+      trovato = true;
       if (!bersagli.has(m[1])) bersagli.set(m[1], f);
     }
+    if (trovato) conLink++;
   }
   r.ok(bersagli.size > 0,
-    `il ponte esiste: ${bersagli.size} comuni linkati da ${schede.length} schede`);
+    `il ponte esiste: ${bersagli.size} comuni linkati da ${conLink}/${schede.length} pagine`);
   const rotti = [...bersagli].filter(([a]) => !ancore.has(a));
   r.ok(rotti.length === 0, rotti.length
     ? `ancore inesistenti: ${rotti.slice(0, 3).map(([a, f]) => `#${a} (${f})`).join(', ')}`

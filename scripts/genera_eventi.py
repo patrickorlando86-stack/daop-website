@@ -3885,6 +3885,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
   {"".join(blocchi)}
 
   <div class="com-link">
+    {link_luoghi(citta, dati['prov'])}
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
