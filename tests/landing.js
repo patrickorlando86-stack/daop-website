@@ -164,6 +164,48 @@ module.exports = async function landing(browser) {
   }
   await ctx.close();
 
+  // ── halloween ─────────────────────────────────────────────────────────
+  // Seconda pagina stagionale. Le prove sono quelle di ferragosto.html - un
+  // URL che invecchia, e il blocco che la tiene distinta da un filtro di date
+  // - piu' quella che vale solo qui: la pagina non deve mai dire da sola
+  // quali eventi fanno paura.
+  r.titolo('halloween.html — telefono 412px');
+  ({ ctx, page } = await apri(browser, 'halloween.html', 412));
+
+  const canonH = await page.$eval('link[rel=canonical]', (l) => l.getAttribute('href'));
+  r.ok(/\/halloween\.html$/.test(canonH), `canonical senza anno: ${canonH}`);
+  r.ok(!/\d/.test(new URL(canonH).pathname), 'nessuna cifra nel percorso');
+  r.ok(/\b20\d{2}\b/.test(await page.title()), 'l\'anno sta nel <title>');
+
+  // Il pezzo che un elenco di date non ha: la domanda "fa paura o no?" e il
+  // rimando a /luoghi.html per il dove. Toglierli la rende un doppione di
+  // /eventi/weekend.html, e a perdere sarebbe lei.
+  r.ok((await page.locator('.ev-wrap h2').allTextContents())
+    .some((t) => /fa paura/i.test(t)), 'il blocco "fa paura o no?" c\'è');
+  r.ok(await page.locator('.ev-wrap p a[href="/luoghi.html"]').count() > 0,
+    'il corpo manda a /luoghi.html (e non solo la nav)');
+
+  const totH = await page.locator('.ev-wrap li[data-category]').count();
+  const robotsH = await page.$eval('meta[name=robots]', (m) => m.content);
+  if (totH) {
+    // Le sezioni sono giorni della finestra 25/10-2/11: mai altri mesi.
+    const mesi = (await page.locator('.ev-wrap .com-grp h3').allTextContents())
+      .filter((t) => /\d/.test(t));
+    r.ok(mesi.every((t) => /ottobre|novembre/i.test(t)),
+      `la finestra resta 25 ottobre-2 novembre: ${mesi.join(' / ')}`);
+  } else {
+    r.ok(robotsH.startsWith('noindex'),
+      'a vuoto la pagina è in noindex, follow: resta online ma fuori indice');
+  }
+
+  // La cernita che NON si fa: l'evidenza è "pensati per i più piccoli",
+  // ricavata da e_per_bambini(). Una sezione che dichiari quali fanno paura
+  // sarebbe un giudizio nostro su una festa altrui, dedotto dal titolo.
+  const titoli = await page.locator('.ev-wrap .com-grp h3').allTextContents();
+  r.ok(!titoli.some((t) => /paura|horror|brivid|spavent/i.test(t)),
+    'nessuna sezione etichetta gli eventi come spaventosi');
+  await ctx.close();
+
   // ── le sei pagine d'incrocio ──────────────────────────────────────────
   // Provincia X finestra temporale. Le prove qui difendono le tre cose per
   // cui esistono: la provincia nell'H1 (non solo nel title, che e' il difetto
