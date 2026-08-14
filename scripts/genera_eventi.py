@@ -1880,6 +1880,17 @@ PAGINA_CSS = """
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
+   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
+   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
+   e' un <aside> dentro l'articolo, non una fascia di pagina. */
+.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
+  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
+.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
+.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
+  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
+  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -2185,6 +2196,37 @@ def firma_daop(rec, oggi):
         'controlla eventuali aggiornamenti dell\'organizzatore. '
         '<a href="/metodo.html">Come verifichiamo gli eventi</a> · '
         f'<a href="mailto:info@daop.it?subject={ogg}">Segnala una correzione</a></p>'
+        '</aside>')
+
+
+# Il canale WhatsApp. Vuoto = non si stampa niente da nessuna parte: meglio
+# nessun invito che un invito rotto.
+CANALE_WA = "https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z"
+
+
+def blocco_canale(dove=""):
+    """L'invito al canale WhatsApp.
+
+    Sta in coda alla scheda e non in cima per una ragione sola: in cima chiede
+    qualcosa a chi non ha ancora avuto niente. Chi e' arrivato in fondo l'orario
+    della sagra ce l'ha, e a quel punto "e il prossimo weekend?" e' una domanda
+    che si sta gia' facendo.
+
+    Il testo dice **quanto spesso si scrive**, prima di ogni altra cosa. La
+    paura di chi si iscrive a un canale non e' il contenuto, e' il diluvio: se
+    la prima riga non risponde a quella, il tasto non si tocca. Per lo stesso
+    motivo non c'e' nessuna promessa in piu' - niente "contenuti esclusivi",
+    che sarebbe una cosa che poi non manteniamo."""
+    if not CANALE_WA:
+        return ''
+    return (
+        '<aside class="ev-canale">'
+        f'<p class="ev-canale-t">Un messaggio il giovedì, e basta</p>'
+        '<p>Ti mandiamo quello che c\'è nel weekend'
+        f'{" vicino a " + esc(dove) if dove else " in zona"}: sagre, feste e '
+        'cose da fare con i bambini. Niente altro.</p>'
+        f'<a class="ev-canale-cta" href="{CANALE_WA}" target="_blank" '
+        'rel="noopener">Segui il canale WhatsApp</a>'
         '</aside>')
 
 
@@ -2529,6 +2571,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   {azioni}
   {firma}
   {altri}
+  {blocco_canale(citta)}
 </article>
 {blocco_ginetto(citta)}</main>
 {foot}
@@ -3889,6 +3932,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
+  {blocco_canale(citta)}
   {f'<h2>Altri comuni della provincia di {esc(prov_nome)}</h2><div class="com-link">{link_altri}</div>' if link_altri else ''}
   {credito}
   <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
@@ -4224,6 +4268,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 </header>
 <article class="ev-wrap ev-wrap--hero">
   {spec['corpo']}
+  {blocco_canale()}
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
