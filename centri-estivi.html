@@ -75,6 +75,22 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
+     fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
+     nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
+     sta qui una volta per tutte, e vale su tutte le pagine generate perche' il
+     guscio copia questo <style>.
+     Oro per un link che sta da solo — e' un richiamo, e l'oro e' gia' il colore
+     dei richiami dell'hero; ereditato dentro un <p>, dove il link fa parte del
+     discorso e non deve gridare. Le briciole non si toccano: `.ev-crumb a` ha
+     la stessa specificita' ma sta in PAGINA_CSS, che viene dopo. */
+  .page-hero a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+  .page-hero p a{color:inherit}
+  /* Un link che occupa da solo tutto il suo <p> non e' una parola dentro una
+     frase: e' un richiamo, e va trattato come tale. E' la differenza fra la riga
+     del Ferragosto (<p><a>…</a></p>, oro) e il rimando ai centri estivi, che sta
+     dentro una frase e resta del colore del discorso. */
+  .page-hero p > a:only-child{color:var(--gold)}
 
   /* ── COMMONS ── */
   section{padding:100px 24px}
@@ -421,7 +437,7 @@
     {
       "@type": "ItemList",
       "name": "Centri Estivi in provincia di Alessandria e Asti",
-      "numberOfItems": 27,
+      "numberOfItems": 28,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -778,6 +794,20 @@
           "position": 26,
           "item": {
             "@type": "LocalBusiness",
+            "name": "Sport World! - Rovereto Central Park & Rolling Brazilian Jiu-Jitsu",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Alessandria",
+              "addressRegion": "AL",
+              "addressCountry": "IT"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "LocalBusiness",
             "name": "Summer Camp - Richard's Ranch",
             "address": {
               "@type": "PostalAddress",
@@ -789,7 +819,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 27,
+          "position": 28,
           "item": {
             "@type": "LocalBusiness",
             "name": "Un'Estate Fantastica - Tanaro Skate School",
@@ -1364,8 +1394,27 @@
             </div>
           </div>
         </article>
-        <article class="event-card" data-province="at" data-city="callianetto" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+        <article class="event-card" data-province="al" data-city="alessandria" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-25">
+            <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3962287926100395876.webp" alt="" loading="lazy" decoding="async">
+            <span class="ev-main">
+              <span class="ev-name">Sport World! - Rovereto Central Park &amp; Rolling Brazilian Jiu-Jitsu</span>
+              <span class="ev-line">Alessandria (AL) · vari · 6-12 anni</span>
+              <span class="ev-tags"><span class="ev-pill is-price">A pagamento (da…</span></span>
+            </span>
+            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button></h4>
+          <div class="ev-det" id="det-ce-25" hidden>
+            <p class="event-desc">Sport e laboratori in inglese per bambini dai 6 ai 12 anni, organizzati da Rovereto Central Park in collaborazione con Rolling Brazilian Jiu-Jitsu e Pingu&#x27;s English. Una settimana di attività sportive e didattiche interamente in lingua inglese.</p>
+            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Rovereto Central Park - Alessandria (AL)</p>
+            <div class="event-actions">
+              
+<a class="event-act" href="https://www.google.com/maps/search/?api=1&amp;query=Rovereto%20Central%20Park%20-%20Alessandria%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>              <a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3962287926100395876.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a>
+            </div>
+          </div>
+        </article>
+        <article class="event-card" data-province="at" data-city="callianetto" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-26">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3872179653284337668.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Summer Camp - Richard&#x27;s Ranch</span>
@@ -1374,7 +1423,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-25" hidden>
+          <div class="ev-det" id="det-ce-26" hidden>
             <p class="event-desc">Centro estivo per bambini e ragazzi dai 5 anni con lezioni di equitazione, cura degli animali, trekking nel bosco, piscina e giochi d&#x27;acqua, compiti e merenda, laboratori di pittura e pet therapy. Pranzo al sacco. Una volta alla settimana tendata con pizza.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Montechiaro 30, Callianetto (AT)</p>
             <p class="ce-contatti">Contatti: 3282443138</p>
@@ -1385,7 +1434,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="asti" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-26">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-27">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3861152267122123768.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Un&#x27;Estate Fantastica - Tanaro Skate School</span>
@@ -1394,7 +1443,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-26" hidden>
+          <div class="ev-det" id="det-ce-27" hidden>
             <p class="event-desc">Centro estivo con settimane a tema ricche di attività: sport, laboratori, giochi, piscina facoltativa, uscite e spazio compiti. Staff formato da educatori e professionisti. Ogni giovedì serata pizza.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Corridoni 51, Asti (AT)</p>
             <p class="ce-contatti">Contatti: 3475855956 (Giulia) - 3332394631 (Mirko)</p>
