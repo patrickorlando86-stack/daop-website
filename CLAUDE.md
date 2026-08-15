@@ -652,6 +652,34 @@ Le decisioni, che è quello che non si ricava dal diff:
 - **Sta fuori dalla barra appiccicosa.** Quella è scesa a ~109px sul telefono e
   una riga in più la farebbe ricrescere per tutto lo scorrimento.
 
+#### Come sta in pagina, e i quattro difetti che aveva
+
+Sistemato il 15/08/2026 guardando gli screenshot a 412px, non il codice. Da
+fermo è **una riga sola da 40px**; con un raggio attivo era 176px ed è scesa a
+**110px sul telefono e 66px su desktop**. Cosa lo gonfiava, tutto correggibile:
+
+- **Due pillole identiche affiancate** ("Vicino a me" e "Parti da un comune")
+  obbligavano a scegliere prima di aver capito. Il ripiego non è un secondo
+  comando pari al primo: ora è un testo (`.is-alt`), quindi resta raggiungibile
+  senza competere. Attenzione se lo si ritocca: `.ev-geo-btn:hover` ha
+  specificità maggiore di `.ev-geo-btn.is-alt`, quindi il bordo va spento anche
+  nello stato `:hover`, se no ricompare al passaggio del dito.
+- **"da Acqui Terme" accanto a un campo che diceva già "Acqui Terme".** Adesso
+  l'etichetta si stampa solo quando il posto non si legge altrove, cioè col GPS.
+- **La ✕ cadeva da sola su una terza riga**, perché stava *dopo* i gradini nel
+  DOM. Ora sta subito dopo il campo, e i gradini vanno a capo per conto loro
+  (`.ev-geo-chips` a `flex-basis:100%` **solo sotto i 600px**: su desktop ci
+  stanno in fila e una riga piena sarebbe 40px di vuoto).
+- **La nota prometteva che "la posizione resta nel browser" anche a chi aveva
+  solo scelto un comune da un elenco** — cioè a chi non aveva ceduto nessun
+  dato. Ora quella frase esce solo col GPS; per il comune si dice da dove si
+  misura.
+
+I quattro gradini stanno in fila su 372px perché le pillole sono strette
+(`padding:7px 9px`, `0.76rem`): a 12px il quarto cadeva da solo, e un gradino
+isolato sembra un'altra cosa. Sotto i ~360px tornano su due righe, ed è giusto
+così.
+
 **Non porta un clic da Google e non va confusa con le sei pagine d'incrocio:**
 Googlebot non concede la posizione. Zero rischio SEO (non tocca H1, title,
 canonical, JSON-LD) e zero resa SEO. Serve a chi è già arrivato — cioè risponde

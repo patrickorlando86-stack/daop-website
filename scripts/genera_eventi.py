@@ -4153,15 +4153,15 @@ def _landing_geo(eventi):
     return (
         '<div class="ev-geo" id="ev-geo" hidden>'
         '<button class="ev-geo-btn" id="ev-geo-go" type="button">📍 Vicino a me</button>'
-        '<button class="ev-geo-btn" id="ev-geo-alt" type="button">Parti da un comune</button>'
+        '<button class="ev-geo-btn is-alt" id="ev-geo-alt" type="button">oppure parti da un comune</button>'
         '<input class="ev-geo-in" id="ev-geo-q" list="ev-geo-list" type="text" hidden'
         ' placeholder="Scrivi un comune…"'
         ' aria-label="Scegli il comune da cui misurare la distanza" autocomplete="off">'
         '<datalist id="ev-geo-list"></datalist>'
         '<span class="ev-geo-from" id="ev-geo-from" hidden></span>'
-        '<span id="ev-geo-chips"></span>'
-        '<button class="ev-geo-btn" id="ev-geo-clear" type="button" hidden'
+        '<button class="ev-geo-btn is-clear" id="ev-geo-clear" type="button" hidden'
         ' aria-label="Togli il filtro per distanza">✕</button>'
+        '<span class="ev-geo-chips" id="ev-geo-chips"></span>'
         '<p class="ev-geo-note ev-geo-hint" id="ev-geo-hint" role="status"></p>'
         '<p class="ev-geo-note" id="ev-geo-note"></p>'
         '</div>')
