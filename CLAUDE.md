@@ -1249,6 +1249,38 @@ Pixel 6, CPU 4x), da non smontare per distrazione:
 Il JSON-LD in fondo (~405 KB) **si lascia**: toglierlo vale ~50 ms misurati e
 costa i rich result eventi sulla pagina più forte del sito.
 
+### Quanto si scorre prima di vedere un evento, e dov'è davvero il grasso
+
+Misurato il 15/08/2026 a 412px, perché è la domanda che torna ogni volta che si
+guarda la pagina sul telefono. Il primo contenuto-evento (la corsia "in
+evidenza") sta a **1.215 px**, cioè 1,3 schermate. Non due: le corsie *sono*
+eventi, con la locandina.
+
+Com'è fatto quel tratto, e qui sta la cosa da non sbagliare:
+
+| | |
+|---|---|
+| hero | **602 px**, di cui **412 di testo** |
+| intestazione "Prossimi Eventi" | 160 px, di cui 128 di testo |
+| barra filtri | 109 px |
+| conteggio + Agenda/Calendario | 44 px |
+| "Vicino a me" | 40 px |
+| "COSA CERCHI" + "VAI AL COMUNE" | 154 px |
+
+**L'hero non è spazio vuoto, è testo** — un paragrafo di cinque righe da 174 px
+più la riga sui centri estivi da 75. Ci si casca facilmente misurando solo gli
+elementi contenitore: i paragrafi senza link dentro spariscono dal conto e
+sembra che ci siano 400 px di aria da recuperare. Non ci sono.
+
+Lo spazio vero recuperabile senza toccare una parola era **72 px**, ed è stato
+preso il 15/08/2026: il padding dell'hero sul telefono era tarato sul desktop
+(120 px sopra per una barra fissa alta 69), l'intestazione e lo stacco
+`.bg-white` erano larghi. Oltre quei 72 px **non esiste una scorciatoia
+tecnica**: i 322 px successivi sono i tre blocchi di testo (il paragrafo lungo
+dell'hero, la riga sui centri estivi, il sottotitolo di "Prossimi Eventi" che
+ripete quello che l'hero ha appena detto), e toglierli o accorciarli è una
+decisione editoriale, non un ritocco di CSS.
+
 ## Misurare, non stimare
 
 C'è Chromium in `/opt/pw-browsers/chromium-1194/chrome-linux/chrome` e
