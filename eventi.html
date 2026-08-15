@@ -159,6 +159,8 @@
   .ev-geo-chip:disabled{opacity:0.38;cursor:default}
   .ev-geo-in{font-family:'DM Sans',sans-serif;font-size:0.84rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;min-width:0;flex:1 1 180px;max-width:280px}
   .ev-geo-note{flex:1 1 100%;font-size:0.74rem;line-height:1.5;color:var(--text-light);margin:0}
+  .ev-geo-hint{font-weight:700;color:var(--navy)}
+  .ev-geo-hint:empty,.ev-geo-note:empty{display:none}
   .ev-km{display:inline-block;font-size:0.72rem;font-weight:700;color:var(--text-light);white-space:nowrap}
   .ev-viewbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 0}
   .events-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:0}
@@ -573,6 +575,7 @@
       <span class="ev-geo-from" id="ev-geo-from" hidden></span>
       <span id="ev-geo-chips"></span>
       <button class="ev-geo-btn" id="ev-geo-clear" type="button" hidden aria-label="Togli il filtro per distanza">✕</button>
+      <p class="ev-geo-note ev-geo-hint" id="ev-geo-hint" role="status"></p>
       <p class="ev-geo-note" id="ev-geo-note"></p>
     </div>
 
@@ -6667,6 +6670,10 @@
   </div>
 </footer>
 
+<!-- Senza defer, e qui in fondo: uno script differito girerebbe DOPO il blocco
+     inline qui sotto, che invece ha bisogno di window.daopVicino subito. In
+     coda al body non blocca comunque niente. -->
+<script src="assets/js/daop-vicino.js"></script>
 <script>
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -6710,253 +6717,19 @@
     }
 
     // ── Vicino a me ───────────────────────────────────────────────────────
-    // Il filtro "provincia" non risponde a "vicino": in provincia di
-    // Alessandria ci sono eventi a 55 km dal capoluogo, e a 20 km dal
-    // capoluogo ce ne sono in provincia di Asti. La distanza e' l'unica
-    // risposta giusta, e le coordinate sono gia' nella riga.
-    //
-    // Il raggio FILTRA e non riordina: l'agenda e' un calendario, e l'ordine di
-    // un calendario e' la data. E' la stessa regola per cui nell'app gli eventi
-    // restano in ordine di data anche per chi paga.
-    const STEPS = [10, 20, 30, 50];
-    const geo = document.getElementById('ev-geo');
-    const geoGo = document.getElementById('ev-geo-go');
-    const geoAlt = document.getElementById('ev-geo-alt');
-    const geoQ = document.getElementById('ev-geo-q');
-    const geoList = document.getElementById('ev-geo-list');
-    const geoFrom = document.getElementById('ev-geo-from');
-    const geoChips = document.getElementById('ev-geo-chips');
-    const geoClear = document.getElementById('ev-geo-clear');
-    const geoNote = document.getElementById('ev-geo-note');
-    const conCoord = cards.filter(c => c.dataset.lat);
-    let centro = null, raggio = null, comuniIdx = null;
-    const dist = new Map();
-
-    const norm = s => (s || '').toLowerCase().normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-
-    // In linea d'aria, e la pagina lo dice: nessuno qui sa quanto gira la
-    // strada, e far credere il contrario e' peggio che non dare la distanza.
-    function km(la1, lo1, la2, lo2) {
-      const R = 6371, r = Math.PI / 180;
-      const dLa = (la2 - la1) * r, dLo = (lo2 - lo1) * r;
-      const a = Math.sin(dLa / 2) ** 2 +
-        Math.cos(la1 * r) * Math.cos(la2 * r) * Math.sin(dLo / 2) ** 2;
-      return 2 * R * Math.asin(Math.sqrt(a));
-    }
-
-    // Una riga senza coordinate non e' "lontana", e' sconosciuta: con un raggio
-    // attivo resta fuori, perche' dire "e' a 5 km" senza saperlo e' peggio che
-    // non mostrarla. Oggi sono zero su 278, ma il foglio si compila a mano.
-    function entroRaggio(card) {
-      if (!centro || raggio === null) return true;
-      const d = dist.get(card);
-      return d !== undefined && d <= raggio;
-    }
-
-    const scriviKm = d => (d < 1 ? 'meno di 1 km' : Math.round(d) + ' km');
-
-    function impostaCentro(la, lo, etichetta) {
-      centro = { la, lo, etichetta };
-      dist.clear();
-      conCoord.forEach(c => {
-        const d = km(la, lo, parseFloat(c.dataset.lat), parseFloat(c.dataset.lon));
-        dist.set(c, d);
-        const riga = c.querySelector('.ev-line');
-        if (!riga) return;
-        let tag = c.querySelector('.ev-km');
-        if (!tag) {
-          tag = document.createElement('span');
-          tag.className = 'ev-km';
-          riga.appendChild(tag);
-        }
-        tag.textContent = ' · a ' + scriviKm(d);
-      });
-      // L'indice di ricerca e' il textContent delle righe, che ora contiene
-      // anche "a 12 km": se era gia' costruito va rifatto, se no resta pigro.
-      testo = null;
-      // Il raggio di partenza si sceglie sui dati, non a priori: da Cuneo 10 km
-      // fanno 4 eventi e la pagina nascerebbe vuota. Si parte dal primo gradino
-      // che ha qualcosa da mostrare.
-      const ordinate = Array.from(dist.values()).sort((a, b) => a - b);
-      raggio = STEPS.find(s => ordinate.filter(d => d <= s).length >= 5) ||
-        STEPS[STEPS.length - 1];
-      geoFrom.textContent = 'da ' + etichetta;
-      geoFrom.hidden = false;
-      geoClear.hidden = false;
-      // Il campo del comune NON si chiude qui. La ricerca e' viva: chi scrive
-      // "novi" ha gia' un centro impostato su un prefisso mentre sta ancora
-      // battendo, e chiudergli il campo sotto le dita lo lascerebbe con un
-      // comune che non ha scelto e senza il modo di correggerlo.
-      geoGo.hidden = true;
-      nota('Distanze in linea d\'aria. La posizione resta nel tuo browser: non la inviamo a nessuno.');
-      apply();
-    }
-
-    function togliCentro(tieniAperto) {
-      centro = null; raggio = null; dist.clear();
-      cards.forEach(c => { const t = c.querySelector('.ev-km'); if (t) t.remove(); });
-      testo = null;
-      geoFrom.hidden = true;
-      geoClear.hidden = true;
-      geoChips.textContent = '';
-      if (!tieniAperto) {
-        geoQ.hidden = true; geoQ.value = '';
-        geoAlt.hidden = false;
-      }
-      geoGo.hidden = !gpsUsabile;
-      geoGo.disabled = false;
-      geoGo.textContent = '📍 Vicino a me';
-      nota('');
-      apply();
-    }
-
-    function nota(t) { geoNote.textContent = t; }
-
-    // I gradini portano il conteggio: scegliere fra "20 km" e "30 km" senza
-    // sapere che sono 26 e 135 eventi e' scegliere al buio. Un gradino vuoto
-    // resta visibile ma spento - dice che li' non c'e' niente, che e' una
-    // risposta, invece di sparire e far ballare la barra.
-    function aggiornaChip(conteggi) {
-      if (!centro) { geoChips.textContent = ''; return; }
-      STEPS.forEach((s, i) => {
-        let b = geoChips.children[i];
-        if (!b) {
-          b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'ev-geo-chip';
-          b.addEventListener('click', () => { raggio = s; apply(); });
-          geoChips.appendChild(b);
-        }
-        b.textContent = s + ' km (' + conteggi[i] + ')';
-        b.disabled = conteggi[i] === 0;
-        b.setAttribute('aria-pressed', String(raggio === s));
-      });
-    }
-
-    // L'elenco dei comuni si ricava dalle righe, alla prima apertura: un
-    // <datalist> generato sarebbe HTML in pagina per tutti e utile a pochi.
-    // Il punto di un comune e' la media dei suoi eventi - come partenza di una
-    // misura in linea d'aria basta e avanza.
-    function elencoComuni() {
-      if (comuniIdx) return comuniIdx;
-      const m = new Map();
-      conCoord.forEach(c => {
-        const n = c.dataset.citta;
-        if (!n) return;
-        const k = norm(n);
-        if (!m.has(k)) m.set(k, { nome: n, la: 0, lo: 0, n: 0, k });
-        const v = m.get(k);
-        v.la += parseFloat(c.dataset.lat);
-        v.lo += parseFloat(c.dataset.lon);
-        v.n++;
-      });
-      comuniIdx = Array.from(m.values())
-        .map(v => ({ nome: v.nome, la: v.la / v.n, lo: v.lo / v.n, k: v.k }))
-        .sort((a, b) => a.nome.localeCompare(b.nome, 'it'));
-      comuniIdx.forEach(c => {
-        const o = document.createElement('option');
-        o.value = c.nome;
-        geoList.appendChild(o);
-      });
-      return comuniIdx;
-    }
-
-    function apriComune() {
-      elencoComuni();
-      geoQ.hidden = false;
-      geoAlt.hidden = true;
-      geoQ.focus();
-    }
-
-    function provaComune() {
-      const t = norm(geoQ.value);
-      // Svuotare il campo e' il modo naturale di disdire: lasciare "da Novi
-      // Ligure" acceso sopra una casella vuota e' uno stato che non si spiega.
-      if (!t) { if (centro) togliCentro(true); return; }
-      const l = elencoComuni();
-      const hit = l.find(c => c.k === t) ||
-        (t.length >= 3 ? l.find(c => c.k.startsWith(t)) || l.find(c => c.k.includes(t)) : null);
-      if (hit) { impostaCentro(hit.la, hit.lo, hit.nome); return; }
-      // Il catalogo dei comuni e' quello dell'agenda, non l'anagrafe: un paese
-      // senza eventi in programma semplicemente non c'e'. Dirlo, invece di
-      // lasciare la casella muta, e' la differenza fra una risposta e un guasto.
-      if (t.length >= 3) {
-        if (centro) togliCentro(true);
-        nota('Nessun evento in agenda a «' + geoQ.value.trim() + '». Prova un comune vicino.');
-      }
-    }
-
-    // enableHighAccuracy resta false: il gradino piu' stretto e' 10 km, quindi
-    // un aggancio GPS non aggiunge niente e costa attesa e batteria. E una
-    // posizione di cinque minuti fa va benissimo - le sagre non si spostano.
-    function riposa() {
-      geoGo.disabled = false;
-      geoGo.textContent = '📍 Vicino a me';
-    }
-
-    let richiesta = 0;
-    function chiediPosizione() {
-      const mio = ++richiesta;
-      geoGo.disabled = true;
-      geoGo.textContent = '📍 Cerco…';
-      nota('');
-      // La sveglia e' nostra ed e' necessaria: il `timeout` della Geolocation
-      // API misura solo il tempo per AGGANCIARE la posizione, non l'attesa del
-      // permesso. Se l'avviso del browser resta li' senza risposta - che e' il
-      // caso piu' comune, non un caso limite - non arriva ne' successo ne'
-      // errore, e il bottone resterebbe "Cerco…" per sempre. Provato.
-      const sveglia = setTimeout(() => {
-        if (mio !== richiesta || centro) return;
-        riposa();
-        nota('Non abbiamo ancora la posizione. Intanto puoi scegliere un comune da cui partire.');
-        apriComune();
-      }, 10000);
-      navigator.geolocation.getCurrentPosition(
-        pos => {
-          clearTimeout(sveglia);
-          // Un "consenti" arrivato tardi vale lo stesso: la risposta buona non
-          // si butta solo perche' la sveglia era gia' suonata.
-          if (mio === richiesta) {
-            impostaCentro(pos.coords.latitude, pos.coords.longitude, 'dove sei');
-          }
-        },
-        err => {
-          clearTimeout(sveglia);
-          if (mio !== richiesta) return;
-          riposa();
-          nota(err && err.code === 1
-            ? 'Non abbiamo la tua posizione. Puoi scegliere un comune da cui partire.'
-            : 'Non siamo riusciti a trovare la posizione. Puoi scegliere un comune da cui partire.');
-          apriComune();
-        },
-        { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 });
-    }
-
-    // Senza coordinate su abbastanza righe il controllo non si stampa: e' la
-    // stessa soglia con cui una barra filtri si guadagna il posto.
-    let gpsUsabile = false;
-    if (conCoord.length >= 12) {
-      gpsUsabile = !!(navigator.geolocation && window.isSecureContext);
-      geoGo.hidden = !gpsUsabile;
-      geo.hidden = false;
-      geoGo.addEventListener('click', chiediPosizione);
-      geoAlt.addEventListener('click', apriComune);
-      geoClear.addEventListener('click', togliCentro);
-      geoQ.addEventListener('change', provaComune);
-      geoQ.addEventListener('input', provaComune);
-      // Se il permesso e' gia' stato negato, il bottone non serve: chiederlo di
-      // nuovo non riapre nessun avviso, il browser rifiuta e basta. Meglio
-      // portare subito al ripiego che offrire un comando che non fa niente.
-      if (navigator.permissions && navigator.permissions.query) {
-        navigator.permissions.query({ name: 'geolocation' }).then(p => {
-          if (p.state === 'denied' && !centro) {
-            gpsUsabile = false;
-            geoGo.hidden = true;
-          }
-        }).catch(() => {});
-      }
-    }
+    // La logica sta in /assets/js/daop-vicino.js, condivisa con le pagine di
+    // intenzione: qui restano solo i due innesti che il modulo non puo'
+    // indovinare, cioe' dove appendere la distanza dentro una riga e come
+    // questa pagina rifa' i suoi filtri.
+    const vicino = window.daopVicino ? window.daopVicino.avvia({
+      voci: cards,
+      riga: c => c.querySelector('.ev-line'),
+      // L'indice della ricerca e' il textContent delle righe, che con un centro
+      // impostato contiene anche "a 12 km": se era gia' costruito va rifatto.
+      alRitocco: () => { testo = null; },
+      alCambio: () => apply()
+    }) : null;
+    const entroRaggio = c => !vicino || vicino.entro(c);
 
     function matchDate(el, mode) {
       if (mode === 'all') return true;
@@ -7004,29 +6777,25 @@
       const term = q.value.trim().toLowerCase();
       const f = { date: sel.date.value, province: sel.province.value, category: sel.category.value };
       const filtrato = term !== '' || f.date !== 'all' || f.province !== 'all' ||
-        f.category !== 'all' || (centro !== null && raggio !== null);
+        f.category !== 'all' || (vicino !== null && vicino.attivo());
       // "fuori" sono le schede che i filtri terrebbero ma che cadono fuori dalla
       // finestra del calendario. In vista agenda resta zero, perche' li'
       // passaCalendario() e' sempre vero: non c'e' nessuna finestra da cui
       // cadere. E senza filtri non si conta: chi sfoglia i mesi a mano non sta
       // cercando niente, non ha bisogno che gli si offra di allargare.
       let visible = 0, fuori = 0;
-      // Un passaggio solo: la stessa valutazione senza raggio serve sia a
-      // decidere la riga sia a contare i gradini, quindi non si ripete.
-      const perRaggio = STEPS.map(() => 0);
       cards.forEach(card => {
-        const senza = passaFiltri(card, f, term, true);
-        const passa = senza && entroRaggio(card);
+        const passa = passaFiltri(card, f, term);
         const show = passa && passaCalendario(card);
         card.classList.toggle('is-hidden', !show);
         if (show) visible++;
         else if (passa) fuori++;
-        if (centro && senza && passaCalendario(card)) {
-          const d = dist.get(card);
-          if (d !== undefined) STEPS.forEach((s, i) => { if (d <= s) perRaggio[i]++; });
-        }
       });
-      aggiornaChip(perRaggio);
+      // I gradini contano quanti eventi si vedrebbero DAVVERO a ogni distanza,
+      // cioe' dentro gli altri filtri e dentro la finestra del calendario.
+      if (vicino) {
+        vicino.conta(card => passaFiltri(card, f, term, true) && passaCalendario(card));
+      }
       if (!filtrato) fuori = 0;
       days.forEach(g => g.classList.toggle('is-hidden', !g.querySelector('.event-card:not(.is-hidden)')));
       Object.keys(sel).forEach(k => sel[k].classList.toggle('is-on', sel[k].value !== 'all'));
@@ -7043,17 +6812,10 @@
       // due frasi diverse, e dire la prima al posto della seconda fa sembrare
       // senza risposta una ricerca che ne ha, un mese piu' in la'. Nemmeno "piu'
       // avanti": da dicembre le risposte sono indietro, non avanti.
-      // Con un raggio attivo "non c'e' niente" quasi sempre vuol dire "non
-      // c'e' niente COSI' VICINO", ed e' una differenza grossa: da Cuneo entro
-      // 10 km ci sono 4 eventi e entro 30 quaranta. Il gradino piu' stretto che
-      // ha qualcosa si dice, non si fa cercare.
-      const largo = centro && raggio !== null && visible === 0
-        ? STEPS.find(s => s > raggio && perRaggio[STEPS.indexOf(s)] > 0) : null;
-      if (visible === 0 && largo) {
-        const n = perRaggio[STEPS.indexOf(largo)];
-        empty.textContent = 'Niente entro ' + raggio + ' km. Entro ' + largo + ' km ' +
-          (n === 1 ? "c'è 1 evento." : 'ce ne sono ' + n + '.');
-      } else if (visible === 0) {
+      // Con un raggio attivo, "dove guardare invece" lo scrive il modulo nella
+      // sua riga (#ev-geo-hint): e' la stessa frase su tutte le pagine che
+      // hanno il filtro, e qui sotto resta il messaggio di sempre.
+      if (visible === 0) {
         empty.textContent = vista !== 'calendario'
           ? 'Nessun evento con questi filtri. Prova ad allargare la ricerca.'
           : !filtrato ? 'Nessun evento ' + ambito() + '.'

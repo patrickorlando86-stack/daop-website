@@ -7,6 +7,7 @@
 // prova indipendente dal fatto che il bucket risponda.
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
 
@@ -41,7 +42,22 @@ async function apri(browser, file, larghezza = 412, prima = null) {
   if (prima) await page.addInitScript(prima);
   await page.route('**/*', (route) => {
     const u = route.request().url();
-    if (u.startsWith('file://')) return route.continue();
+    if (u.startsWith('file://')) {
+      // Le pagine generate linkano gli asset alla radice
+      // (/assets/js/daop-vicino.js): da file:// quello diventa
+      // file:///assets/... e risponde 404, ed e' la trappola descritta in
+      // CLAUDE.md a proposito di GA4. Qui si rimappano sul repo, cosi' le
+      // prove caricano gli stessi script che vanno online invece di girare su
+      // una pagina a cui manca meta' del JavaScript.
+      const p = decodeURIComponent(new URL(u).pathname);
+      if (!p.startsWith(RADICE)) {
+        const vero = path.join(RADICE, p);
+        if (fs.existsSync(vero) && fs.statSync(vero).isFile()) {
+          return route.fulfill({ path: vero });
+        }
+      }
+      return route.continue();
+    }
     if (/\.(jpe?g|png|webp|avif|gif)(\?|$)/i.test(u)) {
       return route.fulfill({ status: 200, contentType: 'image/png', body: PIXEL });
     }
