@@ -226,6 +226,32 @@ def coord(e):
     return None
 
 
+def geo_attrs(e):
+    """Le coordinate della riga, per il filtro "vicino a me" di eventi.html.
+
+    Sono gia' nel foglio e gia' nel JSON-LD: qui costano ~45 byte per riga,
+    cioe' ~12 KB su 1,4 MB. E' la lezione dei link calendario al contrario -
+    quelli erano 490 byte per riga e li si e' tolti - ma il rapporto e' dodici
+    volte piu' basso e senza questi il filtro non puo' esistere: la distanza
+    non si deduce dal testo.
+
+    Non sono il centroide del comune: Alessandria ha sei punti distinti, e
+    infatti servono proprio a questo, perche' "provincia" non vuol dire
+    "vicino" (23 eventi in provincia di AL stanno oltre 30 km dal capoluogo, e
+    14 eventi entro 25 km sono in un'altra provincia).
+
+    La citta' viaggia insieme perche' il ripiego senza GPS - "parti da un
+    comune" - costruisce il suo elenco leggendo le righe, non una lista
+    generata a parte: un elenco in piu' in pagina sarebbe HTML che quasi
+    nessuno apre."""
+    xy = coord(e)
+    if not xy:
+        return ''
+    citta = esc(e.get('citta') or '')
+    return (f' data-lat="{xy[0]}" data-lon="{xy[1]}"'
+            + (f' data-citta="{citta}"' if citta else ''))
+
+
 TEL_RE = re.compile(r'(?:\+39[\s.]?)?(?:\d[\s.]?){8,12}\d')
 MAIL_RE = re.compile(r'[\w.+-]+@[\w-]+\.[\w.-]+')
 
@@ -617,7 +643,7 @@ def riga(e, today, hub=None):
                   f'<a href="{f["url"]}" target="_blank" rel="noopener">'
                   f'@{esc(f["ig"])}</a></p>' if f else '')
 
-    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}"{geo_attrs(e)} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-{anchor}">
             {thumb}
             <span class="ev-main">

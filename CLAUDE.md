@@ -554,6 +554,92 @@ insieme al resto.
 Cosa **non** si è fatto per de-cannibalizzare, e non si farà: toccare l'H1 di
 `eventi.html`. Vedi sopra, vale 13.553 impressioni.
 
+### "Vicino a me": il raggio filtra, e la posizione non si chiede mai da soli
+
+Fatto il 15/08/2026 su `eventi.html`, ed è l'unica pagina che ce l'ha: il JS in
+fondo non passa da `_guscio()` (che copia solo `<style>`, nav e footer), quindi
+la funzione vive lì. Il CSS invece si propaga come sempre in ~260 file — sono
+~1,5 KB di regole che solo `eventi.html` usa, ed è il prezzo noto del guscio.
+
+**Il motivo non è "ce l'ha Ginetto": è che il filtro provincia non risponde a
+"vicino".** Misurato prendendo Alessandria come punto: dei 128 eventi in
+provincia di AL la mediana sta a 25 km e il massimo a **55**, con 23 oltre i 30
+km; e **14 eventi entro 25 km sono in provincia di Asti** (Castelnuovo Belbo,
+Rocchetta Tanaro, Viarigi, Montemagno). La tendina attuale include il lontano ed
+esclude il vicino, in tutti e due i versi. Il raggio non è una funzione in più
+accanto a quella: è quella fatta bene.
+
+I dati c'erano già: **278 eventi su 278 hanno lat/lon valide**, e sono le
+coordinate del posto, non il centroide del comune (Alessandria ha 6 punti
+distinti, Novi Ligure 4). `geo_attrs()` le stampa sulla riga: ~45 byte per riga,
+**+18,8 KB su 1,4 MB**. È la lezione dei link calendario al contrario — quelli
+erano 490 byte per riga e si sono tolti — ma il rapporto è dodici volte più
+basso e senza quelle la funzione non può esistere, perché la distanza non si
+deduce dal testo.
+
+Le decisioni, che è quello che non si ricava dal diff:
+
+- **Il raggio filtra, non riordina.** L'agenda è un calendario e l'ordine di un
+  calendario è la data: stessa regola già presa per l'app ("su un calendario
+  l'ordine non si compra"). `tests/agenda.js` controlla che le righe rimaste
+  siano una sottosequenza dell'ordine del generatore — non dell'ordine per data,
+  perché le righe "in corso" stanno in cima per gruppo e non per data.
+- **La posizione non si chiede mai al caricamento**, solo dopo un tocco. È la
+  prassi indicata da W3C e da Chrome, che ha un controllo Lighthouse apposta
+  (*Requests the geolocation permission on page load*), e il motivo pratico è
+  che **un rifiuto è per sempre**: il browser non ripropone l'avviso, e una
+  richiesta sprecata all'arrivo brucia l'unica occasione che c'è. Una prova
+  spia `getCurrentPosition` e pretende **zero** chiamate finché nessuno tocca.
+- **La sveglia dei 10 secondi non è una cautela, è obbligatoria.** Il `timeout`
+  della Geolocation API misura solo l'aggancio della posizione, **non l'attesa
+  del permesso**: se l'avviso del browser resta lì senza risposta — il caso più
+  comune, non un caso limite — non arriva né successo né errore, e il bottone
+  resterebbe "Cerco…" per sempre. Provato, succedeva. Un "consenti" tardivo vale
+  comunque: la risposta buona non si butta perché la sveglia era già suonata.
+- **`enableHighAccuracy: false`**, e `maximumAge` di 5 minuti. Il gradino più
+  stretto è 10 km: un aggancio GPS non aggiunge niente e costa attesa e
+  batteria, e una posizione di cinque minuti fa va benissimo — le sagre non si
+  spostano.
+- **Gradini fissi col conteggio, non uno slider.** Scegliere fra "20 km" e "30
+  km" senza sapere che sono 26 e 135 eventi è scegliere al buio. Un gradino
+  vuoto resta visibile ma spento: dice che lì non c'è niente, che è una
+  risposta, invece di sparire e far ballare la barra.
+- **Il raggio di partenza si sceglie sui dati**, non a priori: il primo gradino
+  con almeno 5 eventi. Da Cuneo entro 10 km ce ne sono 4 e la pagina nascerebbe
+  vuota — è il difetto tipico di questi filtri nelle zone rade, ed è anche il
+  motivo per cui a zero risultati la pagina scrive dove guardare ("Niente entro
+  10 km. Entro 30 km ce ne sono 40.") invece di lasciare il vuoto.
+- **Il ripiego vale più del GPS.** "Parti da un comune" funziona su desktop, per
+  chi ha negato il permesso e per chi vuole vedere cosa c'è dove andrà. L'elenco
+  si ricava **dalle righe** alla prima apertura — non c'è un marker nuovo e non
+  c'è HTML in più per tutti — e il punto di un comune è la media dei suoi
+  eventi, che per una misura in linea d'aria basta.
+- **Il campo del comune non si chiude quando trova.** La ricerca è viva: chi
+  scrive "novi" ha già un centro su un prefisso mentre sta ancora battendo, e
+  chiudergli il campo sotto le dita lo lascia con un comune che non ha scelto.
+  Svuotare il campo disdice; un comune che in agenda non c'è lo dice, invece di
+  restare muto (il catalogo è l'agenda, non l'anagrafe).
+- **Le distanze sono in linea d'aria e la pagina lo scrive**, insieme al fatto
+  che la posizione resta nel browser. Nessuno qui sa quanto gira la strada, e
+  far credere il contrario è peggio che non dare la distanza.
+- **Una riga senza coordinate non è "lontana", è sconosciuta**: con un raggio
+  attivo resta fuori. Oggi sono zero su 278, ma il foglio si compila a mano.
+- **Sta fuori dalla barra appiccicosa.** Quella è scesa a ~109px sul telefono e
+  una riga in più la farebbe ricrescere per tutto lo scorrimento.
+
+**Non porta un clic da Google e non va confusa con le sei pagine d'incrocio:**
+Googlebot non concede la posizione. Zero rischio SEO (non tocca H1, title,
+canonical, JSON-LD) e zero resa SEO. Serve a chi è già arrivato — cioè risponde
+nei giorni in cui uno non sta cercando il nome di una sagra — ed è il ponte
+naturale verso Ginetto.
+
+Cosa manca, e non è stato fatto apposta: **non si misura quanti la usano.** Un
+evento GA4 andrebbe in `assets/js/daop-track.js`, che è l'unico posto dei clic,
+ma è un file caricato da ~290 pagine per una funzione che ne ha una. Va deciso
+insieme all'eventuale estensione a `oggi.html` e `weekend.html`, che sono le
+candidate successive ovvie ("cosa faccio oggi vicino a me"). Le pagine comune
+no: lì sei già in un comune.
+
 ### L'età non si ripete nelle descrizioni
 
 La fascia d'età è già nella riga `Età:` dei dati della scheda e in ogni riga

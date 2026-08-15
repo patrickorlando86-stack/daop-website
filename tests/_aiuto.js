@@ -27,7 +27,10 @@ async function avvia() {
   });
 }
 
-async function apri(browser, file, larghezza = 412) {
+// `prima` e' uno script iniettato prima del caricamento: serve a spiare cosa
+// fa la pagina mentre parte - per esempio se chiede la posizione da sola, che
+// e' proprio quello che non deve fare.
+async function apri(browser, file, larghezza = 412, prima = null) {
   const ctx = await browser.newContext({
     viewport: { width: larghezza, height: 915 },
     deviceScaleFactor: 2,
@@ -35,6 +38,7 @@ async function apri(browser, file, larghezza = 412) {
     hasTouch: larghezza < 700,
   });
   const page = await ctx.newPage();
+  if (prima) await page.addInitScript(prima);
   await page.route('**/*', (route) => {
     const u = route.request().url();
     if (u.startsWith('file://')) return route.continue();
