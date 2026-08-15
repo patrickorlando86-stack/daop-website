@@ -1167,10 +1167,28 @@ Lo spazio vero recuperabile senza toccare una parola era **72 px**, ed è stato
 preso il 15/08/2026: il padding dell'hero sul telefono era tarato sul desktop
 (120 px sopra per una barra fissa alta 69), l'intestazione e lo stacco
 `.bg-white` erano larghi. Oltre quei 72 px **non esiste una scorciatoia
-tecnica**: i 322 px successivi sono i tre blocchi di testo (il paragrafo lungo
-dell'hero, la riga sui centri estivi, il sottotitolo di "Prossimi Eventi" che
-ripete quello che l'hero ha appena detto), e toglierli o accorciarli è una
-decisione editoriale, non un ritocco di CSS.
+tecnica**: quello che resta è testo.
+
+Sul testo si è deciso così, sempre il 15/08/2026, arrivando a **1.111 px** (da
+1.287, cioè 176 in meno e la barra filtri dentro la prima schermata):
+
+- **Il sottotitolo di "Prossimi Eventi" perde la prima frase.** Diceva
+  "Selezionati e verificati dalla community DAOP, giorno per giorno", che è
+  quello che l'hero ha appena detto tre centimetri sopra ("selezionata per le
+  famiglie e verificata evento per evento"). Resta la sola frase che l'hero
+  **non** dice, cioè come si usano i controlli lì sotto: "Cerca un paese,
+  scegli quando e scopri cosa fare con i tuoi figli."
+- **La riga sui centri estivi si alleggerisce ma non sparisce** (`.hero-nota`,
+  0.88rem sul telefono). È un rimando laterale, non il messaggio della pagina —
+  ma è anche un link interno che parte dalla pagina più forte del sito, e
+  quelli non si buttano per venti pixel. Gli stili erano in linea, quindi non
+  si potevano ritoccare da una media query: ora è una classe.
+- **Il paragrafo lungo dell'hero non si tocca**, solo il corpo scende a 1.02rem
+  sul telefono (da cinque righe a quattro). Quell'elenco — *sagre, feste
+  patronali, fiere, laboratori, spettacoli* — è copertura di parole chiave
+  sulla pagina che regge il 12% dei clic, ed è anche la descrizione per chi
+  arriva da Google senza sapere cos'è DAOP. **Sta dentro i marker
+  `EVENTI-HERO`**: si cambia in `genera_eventi.py`, non a mano.
 
 ## Misurare, non stimare
 

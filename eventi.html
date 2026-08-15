@@ -99,6 +99,9 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* La riga di rimando ai centri estivi: e' un collegamento laterale, non
+     il messaggio della pagina, quindi non pesa come il paragrafo sopra. */
+  .hero-nota{margin-top:14px;font-size:0.95rem;opacity:0.9}
   /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
      fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
      nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
@@ -400,6 +403,8 @@
        respiro, che bastano - i 120 di prima erano tarati sul desktop. */
     .page-hero{padding:96px 20px 52px}
     .page-hero h1{margin-bottom:12px}
+    .page-hero p{font-size:1.02rem}
+    .hero-nota{margin-top:15px;font-size:0.88rem}
     .ev-row{grid-template-columns:52px 1fr 18px;gap:12px}
     .ev-thumb{width:52px;height:52px}
     .ev-name{font-size:1rem}
@@ -530,7 +535,7 @@
     <p>Tutte le sagre, le feste patronali, le fiere, i laboratori e gli spettacoli di oggi e del weekend nelle province di Alessandria, Asti e Cuneo. Agenda aggiornata ogni notte, selezionata per le famiglie e verificata evento per evento.</p>
     <p><a href="/ferragosto.html">Ferragosto è oggi: i 77 eventi del 14-16 agosto →</a></p>
     <!-- EVENTI-HERO:END -->
-    <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi centri estivi o invernali per i tuoi bambini? Vedi i <a href="/centri-estivi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">centri per bambini in provincia di Alessandria e Asti</a>.</p>
+    <p class="hero-nota">Cerchi centri estivi o invernali per i tuoi bambini? Vedi i <a href="/centri-estivi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">centri per bambini in provincia di Alessandria e Asti</a>.</p>
   </div>
 </header>
 
@@ -540,7 +545,7 @@
     <div class="section-header">
       <span class="section-label">Agenda</span>
       <h2 class="section-title">Prossimi Eventi</h2>
-      <p class="section-subtitle">Selezionati e verificati dalla community DAOP, giorno per giorno. Cerca un paese, scegli quando e scopri cosa fare con i tuoi figli.</p>
+      <p class="section-subtitle">Cerca un paese, scegli quando e scopri cosa fare con i tuoi figli.</p>
     </div>
 
     <!-- Eventi generati dal foglio Google "luoghi" (tab "eventi"). Tutto quello che
