@@ -133,14 +133,27 @@
         }
         if (raggio === null) raggio = STEPS[STEPS.length - 1];
         da.textContent = 'da ' + etichetta;
-        da.hidden = false;
+        /* Se il comune sta gia' scritto nel campo qui accanto, "da Acqui Terme"
+           lo ripete e basta: due etichette per la stessa cosa, su una riga che
+           sul telefono e' gia' stretta. Si stampa solo quando il posto non si
+           legge da nessun'altra parte, cioe' con il GPS. */
+        da.hidden = !campo.hidden && norm(campo.value) === norm(etichetta);
         azzera.hidden = false;
         /* Il campo del comune NON si chiude qui: la ricerca e' viva, e chi sta
            ancora battendo "novi" ha gia' un centro su un prefisso. Chiudergli
            il campo sotto le dita lo lascerebbe con un comune che non ha scelto
            e senza il modo di correggerlo. */
         if (go) go.hidden = true;
-        nota.textContent = 'Distanze in linea d\'aria. La posizione resta nel tuo browser: non la inviamo a nessuno.';
+        /* Con un centro impostato il ripiego non serve piu' e competerebbe con
+           l'etichetta del posto: la ✕ e' li' accanto e rimette tutto. */
+        if (alt) alt.hidden = true;
+        /* La promessa sulla posizione si fa solo quando una posizione e' stata
+           davvero letta: chi ha scelto un comune da un elenco non ha dato
+           niente, e rassicurarlo su un dato che non ha ceduto e' rumore - oltre
+           a costare due righe sul telefono. */
+        nota.textContent = metodo === 'gps'
+          ? 'Distanze in linea d\'aria. La posizione resta nel tuo browser.'
+          : 'Distanze in linea d\'aria dal centro di ' + etichetta + '.';
         segnala(metodo);
         alCambio();
       }

@@ -127,12 +127,25 @@
      telefono e una riga in piu' la rifarebbe crescere per tutto lo
      scorrimento. Da fermo e' un solo bottone; i gradini compaiono quando c'e'
      un punto di partenza, cioe' quando servono. */
-  .ev-geo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 0}
+  .ev-geo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
   .ev-geo-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;cursor:pointer;transition:var(--transition)}
   .ev-geo-btn:hover:not(:disabled){border-color:var(--orange);color:var(--navy)}
   .ev-geo-btn:disabled{opacity:0.55;cursor:default}
+  /* Il ripiego non e' un secondo comando pari al primo: al tocco la strada e'
+     una sola, e due pillole identiche affiancate obbligano a scegliere prima
+     di aver capito. Resta un testo, quindi resta raggiungibile. */
+  .ev-geo-btn.is-alt{border-color:transparent;background:none;font-weight:600;color:var(--text-light);text-decoration:underline;text-underline-offset:3px;padding:9px 4px}
+  .ev-geo-btn.is-alt:hover{color:var(--navy);border-color:transparent}
+  .ev-geo-btn.is-clear{padding:9px 13px;line-height:1}
+  /* I gradini prendono una riga loro: in coda agli altri controlli si
+     spezzavano a meta' e la ✕ finiva orfana su una terza riga. */
+  .ev-geo-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .ev-geo-chips:empty{display:none}
   .ev-geo-from{font-size:0.82rem;font-weight:700;color:var(--navy)}
-  .ev-geo-chip{font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;color:var(--text-mid);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:7px 12px;min-height:36px;cursor:pointer;transition:var(--transition)}
+  /* Stretti quel tanto che basta a stare tutti e quattro in fila su un
+     telefono da 372px: a 12px di lato il quarto cadeva da solo su una
+     seconda riga, e un gradino isolato sembra un'altra cosa. */
+  .ev-geo-chip{font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:600;color:var(--text-mid);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:7px 9px;min-height:36px;cursor:pointer;transition:var(--transition);white-space:nowrap}
   .ev-geo-chip:hover:not(:disabled){border-color:var(--orange)}
   .ev-geo-chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:white}
   .ev-geo-chip:disabled{opacity:0.38;cursor:default}
@@ -378,6 +391,9 @@
    occupati per tutto lo scorrimento. Se un domani un'etichetta si allunga
    troppo tornano a capo da sole, cioe' come stavano prima. */
 .ev-select{flex:1 1 auto;min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
+    /* Solo qui i gradini prendono una riga loro: su schermi larghi ci
+       stanno in fila col campo e sarebbero 40px di vuoto per niente. */
+    .ev-geo-chips{flex:1 1 100%}
     /* Fra la fine dell'hero e il primo evento c'erano l'intestazione di
        sezione, quattro controlli e sedici pillole: su un telefono voleva dire
        due schermate di filtri prima di un evento. L'intestazione qui ripete
