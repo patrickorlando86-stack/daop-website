@@ -78,6 +78,9 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* La riga di rimando ai centri estivi: e' un collegamento laterale, non
+     il messaggio della pagina, quindi non pesa come il paragrafo sopra. */
+  .hero-nota{margin-top:14px;font-size:0.95rem;opacity:0.9}
   /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
      fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
      nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
@@ -379,6 +382,8 @@
        respiro, che bastano - i 120 di prima erano tarati sul desktop. */
     .page-hero{padding:96px 20px 52px}
     .page-hero h1{margin-bottom:12px}
+    .page-hero p{font-size:1.02rem}
+    .hero-nota{margin-top:15px;font-size:0.88rem}
     .ev-row{grid-template-columns:52px 1fr 18px;gap:12px}
     .ev-thumb{width:52px;height:52px}
     .ev-name{font-size:1rem}
