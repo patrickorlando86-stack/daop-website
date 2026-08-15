@@ -496,6 +496,17 @@
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
+   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
+   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
+   e' un <aside> dentro l'articolo, non una fascia di pagina. */
+.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
+  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
+.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
+.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
+  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
+  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -1252,7 +1263,7 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
       <a href="/index.html#social">Scrivicelo</a>.</p>
     </section>
     <div class="com-link"><a href="/eventi.html">Tutta l'agenda DAOP</a><a href="/bollino.html">Il bollino Family Friendly</a><a href="/metodo.html">Come verifichiamo</a><a href="/zone.html">Le zone</a></div>
-    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 14 agosto 2026.</p>
+    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 15 agosto 2026.</p>
   </div>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">
