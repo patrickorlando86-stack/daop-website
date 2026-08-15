@@ -195,9 +195,9 @@ module.exports = async function agenda(browser) {
   await page.selectOption('#f-tipo', 'laboratori');
   await page.waitForTimeout(300);
   if (await page.locator('.event-card:not(.is-hidden)').count() === 0) {
-    const msg = await page.locator('#events-empty').textContent();
-    r.ok(/Entro \d+ km/.test(msg) || /Nessun evento/.test(msg),
-      `a zero risultati la pagina dice dove guardare: "${msg.slice(0, 60)}"`);
+    const hint = await page.locator('#ev-geo-hint').textContent();
+    r.ok(/Entro \d+ km/.test(hint),
+      `a zero risultati dice dove guardare: "${hint}"`);
   }
   await page.selectOption('#f-tipo', 'all');
   await page.waitForTimeout(200);

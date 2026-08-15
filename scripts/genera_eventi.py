@@ -4120,7 +4120,7 @@ def _landing_righe(ev, oggi):
         # legge il JS di una pagina ha gia' letto quello dell'altra.
         slug, _ic, cat = bucket(e)
         out += (f'<li style="{stile}" data-province="{(e.get("prov") or "").lower()}"'
-                f' data-category="{slug}">{thumb}<span class="com-b">'
+                f' data-category="{slug}"{geo_attrs(e)}>{thumb}<span class="com-b">'
                 f'<span class="com-d">{esc(quando)}'
                 f'<span class="com-cat">{esc(cat)}</span></span>'
                 f'<a class="com-go" href="{_href_evento(e)}">'
@@ -4133,6 +4133,38 @@ def _landing_righe(ev, oggi):
 # Sotto questo numero di eventi una barra filtri e' arredamento: si scorre
 # prima la lista che a decidere cosa scegliere in una tendina.
 MIN_FILTRI = 12
+
+
+def _landing_geo(eventi):
+    """Il controllo "Vicino a me" delle pagine di intenzione.
+
+    Stessa soglia dei filtri, e per la stessa ragione: sotto una dozzina di
+    eventi si scorre prima la lista. Conta pero' quelli che hanno davvero le
+    coordinate, perche' senza quelle il controllo e' un comando che non fa
+    niente - ed e' il motivo per cui su /halloween.html (2 eventi a metà
+    agosto) non compare.
+
+    Il markup e' identico a quello scritto a mano in eventi.html, ids compresi:
+    il modulo li cerca per id, e in una pagina il controllo e' uno solo. Parte
+    `hidden` e lo accende il JS, cosi' senza JavaScript non resta un bottone
+    che non risponde."""
+    if sum(1 for e in eventi if coord(e)) < MIN_FILTRI:
+        return ''
+    return (
+        '<div class="ev-geo" id="ev-geo" hidden>'
+        '<button class="ev-geo-btn" id="ev-geo-go" type="button">📍 Vicino a me</button>'
+        '<button class="ev-geo-btn" id="ev-geo-alt" type="button">Parti da un comune</button>'
+        '<input class="ev-geo-in" id="ev-geo-q" list="ev-geo-list" type="text" hidden'
+        ' placeholder="Scrivi un comune…"'
+        ' aria-label="Scegli il comune da cui misurare la distanza" autocomplete="off">'
+        '<datalist id="ev-geo-list"></datalist>'
+        '<span class="ev-geo-from" id="ev-geo-from" hidden></span>'
+        '<span id="ev-geo-chips"></span>'
+        '<button class="ev-geo-btn" id="ev-geo-clear" type="button" hidden'
+        ' aria-label="Togli il filtro per distanza">✕</button>'
+        '<p class="ev-geo-note ev-geo-hint" id="ev-geo-hint" role="status"></p>'
+        '<p class="ev-geo-note" id="ev-geo-note"></p>'
+        '</div>')
 
 
 def _landing_filtri(eventi, con_prov=True):
@@ -4171,6 +4203,9 @@ def _landing_filtri(eventi, con_prov=True):
             ' aria-label="Cerca in questo elenco" autocomplete="off"></div>'
             + tendine +
             '</div>'
+            # Fuori dalla barra, come nell'agenda: la barra e' appiccicosa e una
+            # riga in piu' la farebbe crescere per tutto lo scorrimento.
+            + _landing_geo(eventi) +
             '<p class="lan-count" id="lan-count" role="status"></p>'
             '<p class="lan-vuoto lan-nulla" id="lan-nulla" hidden>Con questi filtri non resta '
             'niente. <button type="button" id="lan-reset">Azzera i filtri</button></p>')
@@ -4307,7 +4342,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
-{LANDING_JS if 'lan-toolbar' in spec['corpo'] else ''}</body>
+{('<script src="/assets/js/daop-vicino.js"></script>' + LANDING_JS) if 'lan-toolbar' in spec['corpo'] else ''}</body>
 </html>
 """
 
@@ -4334,6 +4369,16 @@ LANDING_JS = r"""<script>
   var gruppi = [].slice.call(document.querySelectorAll('.ev-wrap .com-grp'))
     .filter(function (g) { return g.querySelector('li[data-category]'); });
   if (!voci.length) return;
+
+  // "Vicino a me". Il modulo sta in /assets/js/daop-vicino.js ed e' lo stesso
+  // dell'agenda: qui gli si dice solo dove appendere la distanza dentro una
+  // riga (il blocco col comune) e come questa pagina rifa' i suoi filtri.
+  var vicino = window.daopVicino ? window.daopVicino.avvia({
+    voci: voci,
+    riga: function (l) { return l.querySelector('.com-luogo'); },
+    alRitocco: function () { testo = null; },
+    alCambio: function () { applica(); }
+  }) : null;
 
   // L'indice della ricerca si costruisce alla prima ricerca vera, non al
   // caricamento: stessa ragione che nell'agenda, leggere il testo di tutte le
@@ -4367,6 +4412,15 @@ LANDING_JS = r"""<script>
   }
   var teste = new Map(gruppi.map(function (g) { return [g, testaDi(g)]; }));
 
+  // Tutti i filtri TRANNE la distanza: serve due volte, una per decidere la
+  // riga e una per contare quanti eventi ci sarebbero a ogni gradino di
+  // distanza. I gradini devono dire quanti se ne vedrebbero davvero.
+  function altri(l, f, t) {
+    return (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
+           (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
+           (!t || indice().get(l).indexOf(t) > -1);
+  }
+
   function applica() {
     var t = q ? q.value.trim().toLowerCase() : '';
     var f = {};
@@ -4376,9 +4430,7 @@ LANDING_JS = r"""<script>
     });
     var visti = 0;
     voci.forEach(function (l) {
-      var ok = (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
-               (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
-               (!t || indice().get(l).indexOf(t) > -1);
+      var ok = altri(l, f, t) && (!vicino || vicino.entro(l));
       l.hidden = !ok;
       if (ok) visti++;
     });
@@ -4387,7 +4439,11 @@ LANDING_JS = r"""<script>
       g.hidden = vuoto;
       teste.get(g).forEach(function (n) { n.hidden = vuoto; });
     });
-    var filtrato = !!t || sel.some(function (s) { return s.value !== 'all'; });
+    if (vicino) {
+      vicino.conta(function (l) { return altri(l, f, t); });
+    }
+    var filtrato = !!t || (vicino && vicino.attivo()) ||
+                   sel.some(function (s) { return s.value !== 'all'; });
     // A riposo il conteggio non si scrive: la pagina lo dice gia' nell'occhiello
     // e nel paragrafo di apertura, e ripeterlo una terza volta e' rumore.
     conta.textContent = filtrato

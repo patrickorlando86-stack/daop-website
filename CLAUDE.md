@@ -556,10 +556,31 @@ Cosa **non** si è fatto per de-cannibalizzare, e non si farà: toccare l'H1 di
 
 ### "Vicino a me": il raggio filtra, e la posizione non si chiede mai da soli
 
-Fatto il 15/08/2026 su `eventi.html`, ed è l'unica pagina che ce l'ha: il JS in
-fondo non passa da `_guscio()` (che copia solo `<style>`, nav e footer), quindi
-la funzione vive lì. Il CSS invece si propaga come sempre in ~260 file — sono
-~1,5 KB di regole che solo `eventi.html` usa, ed è il prezzo noto del guscio.
+Fatto il 15/08/2026. La logica sta in **`assets/js/daop-vicino.js`** (15 KB) e
+non dentro le pagine: il JS in fondo a `eventi.html` non passa da `_guscio()`
+(che copia solo `<style>`, nav e footer), quindi le pagine generate non lo
+vedevano, e ricopiarlo nei template sarebbe stato tredici copie da tenere
+allineate — la stessa ragione per cui `daop-track.js` è un file solo.
+
+**Dove c'è, e sono 13 pagine**: `eventi.html`, `oggi`, `weekend`, le sei
+d'incrocio, le tre `sagre-provincia-*`, `ferragosto`. **Halloween no**, ed è il
+comportamento giusto: `_landing_geo()` conta gli eventi *con coordinate* e sotto
+`MIN_FILTRI` non stampa niente — a metà agosto quella pagina ne ha 2. Le pagine
+comune restano fuori apposta: lì sei già in un comune.
+
+Il modulo **non sa come si nasconde una riga** — l'agenda usa una classe, le
+pagine di intenzione l'attributo `hidden` — quindi espone `entro(voce)` e la
+pagina lo somma ai propri filtri. Riceve `alCambio` (rifà i filtri della
+pagina), `riga` (dove appendere la distanza) e `alRitocco` (l'indice di ricerca
+è il `textContent`, che con un centro impostato contiene anche "a 12 km").
+
+Va incluso **senza `defer`**, in coda al body: uno script differito girerebbe
+*dopo* i blocchi inline, che invece hanno bisogno di `window.daopVicino`
+subito. In `eventi.html` il percorso è relativo come gli altri script suoi,
+nelle generate è assoluto.
+
+Il CSS invece si propaga come sempre in ~260 file — sono ~1,5 KB di regole che
+usano in 13, ed è il prezzo noto del guscio.
 
 **Il motivo non è "ce l'ha Ginetto": è che il filtro provincia non risponde a
 "vicino".** Misurato prendendo Alessandria come punto: dei 128 eventi in
@@ -618,7 +639,11 @@ Le decisioni, che è quello che non si ricava dal diff:
   scrive "novi" ha già un centro su un prefisso mentre sta ancora battendo, e
   chiudergli il campo sotto le dita lo lascia con un comune che non ha scelto.
   Svuotare il campo disdice; un comune che in agenda non c'è lo dice, invece di
-  restare muto (il catalogo è l'agenda, non l'anagrafe).
+  restare muto (il catalogo è la pagina, non l'anagrafe — e su una provinciale
+  contiene solo i comuni di quella provincia, che è giusto così).
+- **I gradini contano dentro gli altri filtri**, non sul totale: la pagina passa
+  al modulo il predicato dei suoi filtri, così "30 km (6)" vuol dire sei eventi
+  che si vedrebbero davvero, categoria e ricerca comprese.
 - **Le distanze sono in linea d'aria e la pagina lo scrive**, insieme al fatto
   che la posizione resta nel browser. Nessuno qui sa quanto gira la strada, e
   far credere il contrario è peggio che non dare la distanza.
@@ -633,12 +658,35 @@ canonical, JSON-LD) e zero resa SEO. Serve a chi è già arrivato — cioè risp
 nei giorni in cui uno non sta cercando il nome di una sagra — ed è il ponte
 naturale verso Ginetto.
 
-Cosa manca, e non è stato fatto apposta: **non si misura quanti la usano.** Un
-evento GA4 andrebbe in `assets/js/daop-track.js`, che è l'unico posto dei clic,
-ma è un file caricato da ~290 pagine per una funzione che ne ha una. Va deciso
-insieme all'eventuale estensione a `oggi.html` e `weekend.html`, che sono le
-candidate successive ovvie ("cosa faccio oggi vicino a me"). Le pagine comune
-no: lì sei già in un comune.
+#### Si misura, e la posizione non esce dal browser
+
+`daop-vicino.js` **non chiama `gtag`**: emette un evento DOM `daop:vicino`, e
+`daop-track.js` lo raccoglie. Così gtag resta scritto in un posto solo, come
+`cookie-consent.js` è l'unico posto in cui GA4 si inizializza — se un domani
+nasce un'altra funzione da misurare, si fa allo stesso modo.
+
+L'evento è **`vicino_a_me`**, con due parametri e basta:
+
+| parametro | valori |
+|---|---|
+| `metodo_posizione` | `gps`, `comune`, `gradino` |
+| `raggio_km` | 10, 20, 30, 50 |
+
+**Le coordinate non partono mai**, ed è un vincolo, non una dimenticanza: la
+pagina promette a chi la usa che la posizione resta nel browser, e mandarla a
+GA4 renderebbe quella riga una bugia. Se un giorno serve sapere *da dove*
+cercano, la risposta è `metodo_posizione` più il `page_path`, non le coordinate.
+
+C'è l'antirimbalzo degli 800 ms già usato per i clic: chi prova tre gradini di
+fila è una persona che sta scegliendo, non tre eventi. E `impostaCentro()`
+scarta un centro identico a quello attivo — scrivere in un campo scatena
+`input` *e* `change`, che altrimenti erano due eventi e due calcoli di 278
+distanze.
+
+**Cosa registrare in GA4** perché quei parametri si vedano nei report: due
+dimensioni personalizzate con ambito evento (`metodo_posizione`, `raggio_km`).
+Senza, l'evento si conta ma i parametri restano invisibili fuori da DebugView.
+Vedi "Misurare, non stimare" per come provarlo in locale.
 
 ### L'età non si ripete nelle descrizioni
 
@@ -1084,6 +1132,14 @@ proprie:
   scritte a mano usano percorsi relativi e "funzionano", il che rende il
   confronto ancora più ingannevole. Per provarlo davvero serve un server:
   `python3 -m http.server 8899` e si apre `http://localhost:8899/…`.
+  **Dentro `tests/` non è più così**: dal 15/08/2026 `_aiuto.js` rimappa le
+  richieste `file:///assets/…` sul repo, quindi le prove caricano gli stessi
+  script che vanno online. Vale per la suite, non per una pagina aperta a mano.
+- **La geolocalizzazione vuole un contesto sicuro** e in Playwright il permesso
+  si concede dal contesto (`permissions: ['geolocation']`, `geolocation: {…}`)
+  su `http://localhost`, non da `file://`. In headless senza permesso l'avviso
+  non compare e `getCurrentPosition` **non risponde mai**: è esattamente il caso
+  che la sveglia dei 10 secondi copre, ed è così che è saltato fuori.
 
 ## Verifiche prima di pubblicare
 
