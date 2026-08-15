@@ -128,9 +128,92 @@ senso** — non mese-su-mese, non anno-su-anno. Se GA4 permette un'annotazione s
 quella data, mettila. E aspettati altri avvisi "anomalia" per qualche giorno,
 mentre il modello previsionale reimpara: sono rumore.
 
+Vale anche **fra GA4 e Search Console**, e in un modo che inganna. Nell'export
+GA4 delle pagine su 18/07-14/08 `eventi.html` fa il 28,9% delle visualizzazioni e
+le schede il 40,9%; in Search Console sui tre mesi `eventi.html` fa l'11,5% dei
+clic e le schede il 76%. Sembra una contraddizione da spiegare: è solo che
+**venticinque di quei ventotto giorni sono pre-fix**, e in quei giorni le uniche
+pagine che mandavano `page_view` erano `eventi.html` e la home. Il dato
+interessante è il rovescio — le schede fanno già il 41% delle visualizzazioni
+*avendo misurato tre giorni su ventotto*.
+
 Cosa manca ancora, ed è il pezzo che trasforma il tracciamento in argomento di
 vendita: **il conteggio delle aperture di scheda su `luoghi.html`** (vedi
 "Vendere uno spazio"). GA4 registra i clic *dalla* scheda, non le aperture.
+
+#### Che non ci sia un `page_view` doppio è stato verificato, non supposto
+
+Il sospetto era ragionevole: dopo un fix del genere il difetto tipico è una
+pagina rimasta con il suo `gtag` inline *più* `cookie-consent.js`, cioè due
+inizializzazioni e due `page_view` per visita. L'indizio erano i 6,8 eventi per
+sessione dello screenshot del 15/08.
+
+Non c'è, e il numero che lo dice è **`page_view` 1.997 contro `session_start`
+1.037 = 1,93 pagine per sessione** (GA4, 18/07-14/08). Con una doppia
+inizializzazione sarebbe ~3,9. Il resto del conteggio si spiega tutto senza
+misteri:
+
+| evento | conteggio | |
+|---|---|---|
+| `user_engagement` | 2.224 | automatico |
+| `page_view` | 1.997 | |
+| `scroll_depth` | 1.403 | **nostro**, fino a 4 per pagina |
+| `session_start` + `first_visit` | 1.843 | automatici |
+
+Sono 7.467 su 7.676 totali. **Il numero alto di eventi per sessione è il nostro
+`scroll_depth` a quattro soglie, non un difetto**: se un giorno risalta di nuovo,
+la verifica è questa e non serve rifare l'indagine.
+
+Una pulizia che resta da fare: `scroll` (106 eventi) è l'evento **automatico** di
+GA4 e duplica il nostro. Il commento in `daop-track.js` lo prevedeva già —
+Amministratore → Flussi di dati → il flusso web → **Misurazione avanzata** →
+togliere "Scorrimenti". Meno rumore, e meno benzina per gli avvisi "anomalia".
+
+#### Le dimensioni personalizzate sono sette, non due
+
+`daop-track.js` manda già sette parametri personalizzati, e **finché non sono
+registrati in GA4 esistono solo in DebugView**. Amministratore → colonna
+Proprietà → **Definizioni personalizzate** → ambito **Evento**, col nome del
+parametro scritto identico:
+
+| parametro | su quali eventi | cosa risponde |
+|---|---|---|
+| `event_city` | tutti | **in quali comuni è il pubblico** |
+| `event_province` | tutti | idem, per provincia |
+| `event_title` | tutti | quale scheda genera azioni, non solo visite |
+| `metodo_posizione` | `vicino_a_me` | gps / comune / gradino |
+| `raggio_km` | `vicino_a_me` | 10, 20, 30, 50 — **dimensione, non metrica** |
+| `percent_scroll` | `scroll_depth` | 25/50/75/100 |
+| `destination_url` | i clic | dove se ne vanno |
+
+Il limite sono 50 dimensioni evento, quindi non c'è niente da scegliere: si
+registrano tutte.
+
+**Le prime due valgono più delle altre cinque insieme, e non per il "vicino a
+me".** `event_city` è la risposta alla domanda che farà ogni cliente di
+`luoghi.html`: oggi si può dire "il sito fa 3.491 clic in tre mesi", con quella
+dimensione si dice a un posto di Ovada *quanti dei lettori guardano cose a
+Ovada*. È il primo pezzo di evidenza vendibile, e costa cinque minuti invece del
+lavoro sulle aperture di scheda.
+
+**Non sono retroattive**: i dati partono da quando le crei, quello già raccolto
+resta invisibile per sempre. Nei report compaiono dopo 24-48 ore; in DebugView
+subito, ed è così che si verifica di aver scritto bene i nomi senza aspettare due
+giorni.
+
+#### Sopra 2,5 visualizzazioni per utente, stai guardando te stesso
+
+Nel primo export GA4 delle pagine `luoghi.html` risultava con 41 visualizzazioni,
+che sembravano un inizio di pubblico. Erano **5 utenti con 8,2 pagine a testa e
+2:40 di media**: chi la stava costruendo. Stessa firma su `/rubriche.html` (7,7
+per utente), `/ginetto.html` (4,75), la home (157 visualizzazioni da 25 utenti).
+
+Il traffico vero ha la firma opposta, ed è visibile nello stesso export:
+`/ferragosto.html` fa 87 visualizzazioni da **72 utenti distinti**, cioè 1,2 a
+testa, perché chi arriva da Google guarda una pagina ed esce. **Su una pagina che
+non è l'agenda, un rapporto visualizzazioni/utenti sopra 2,5 è navigazione
+interna, non pubblico** — e su una pagina nuova, che è quando si è più impazienti
+di vedere un numero salire, è quasi sempre così.
 
 ## Far girare i generatori
 
@@ -465,6 +548,47 @@ cancellano mai, e l'autunno piemontese ha il nome del paese attaccato a ogni
 evento — ma è una scommessa, e questa è la data in cui si riscuote. Il numero da
 segnare adesso, per non ricostruirlo dopo: **la baseline pre-schede è 5,5 clic al
 giorno** (luglio 2026).
+
+#### Le schede passano il giudizio di Google, e si vede in un numero solo
+
+Il rapporto **Indicizzazione → Pagine** di Search Console (export del 15/08, che
+chiude al **7 agosto**: ha otto giorni di ritardo contro i due-tre delle
+Prestazioni) dice 112 pagine indicizzate e 19 no. Le 19:
+
+| | pagine | |
+|---|---|---|
+| Rilevata, ma non ancora indicizzata | 7 | coda di scansione |
+| **Scansionata, ma non indicizzata** | **10** | le ha lette e non le pubblica |
+| Non trovata (404) | 1 | vedi sotto |
+| Pagina alternativa con canonical | 1 | normale |
+
+**Le dieci "scansionate ma non indicizzate" sono il termometro dello *scaled
+content*, ed è il numero da guardare a ogni export.** Quella riga è il modo in
+cui Google dice che ha letto la pagina e non gli è sembrata utile: su un sito che
+pubblica centinaia di pagine su template identico ce ne starebbero centinaia.
+Dieci su 131 vuol dire che il giudizio sulle schede una-per-evento è **positivo**
+— ed è la prima misura, invece che un ragionamento, a sostegno della decisione di
+`luoghi.html` (una pagina filtrabile invece di 800 schede). Se un giorno quel
+numero cresce di decine, il posto dove si è esagerato è quello.
+
+Due cose da sapere prima di rileggerlo. Chiudendo al 7 agosto **non dice ancora
+niente** su `luoghi.html`, `halloween.html` e le sei d'incrocio, tutte nate fra
+il 12 e il 14: vanno guardate dal 22-25 agosto. E c'è uno scarto non spiegato del
+tutto — 112 indicizzate al 7 agosto contro **264 pagine con impressioni**
+nell'export Prestazioni, che il ritardo giustifica solo in parte (il conteggio
+cresce a scalini: 9 → 86 il 25 luglio → 112 il 6 agosto). Le impressioni
+coincidono fra i due export, quindi non è un allarme, ma è la prima cosa da
+riguardare al giro dopo. Nota: quel salto a 86 è del **25 luglio**, una settimana
+prima del 02/08 che questo file dà come nascita del sistema — una delle due date
+è imprecisa, e `data/pagine-evento.json` è l'unico posto per verificarlo.
+
+**Il 404 è `/ilpiattosano.html`, ed era già a posto.** Lo stub di redirect verso
+`/piattosano.html` esiste nel repo (`noindex, follow`, meta refresh e
+`location.replace`), ma l'ultima scansione di Google è del **12 luglio**: la
+pagina si era spostata il 16 giugno e lo stub è arrivato dopo, quindi Googlebot è
+passato proprio nella finestra in cui il 404 c'era davvero. Non c'è niente da
+riparare nel generatore — si chiede la **convalida della correzione** in Search
+Console e Google ripassa.
 
 #### Perché "poi arriva Halloween" non è un problema
 
@@ -805,10 +929,16 @@ scarta un centro identico a quello attivo — scrivere in un campo scatena
 `input` *e* `change`, che altrimenti erano due eventi e due calcoli di 278
 distanze.
 
-**Cosa registrare in GA4** perché quei parametri si vedano nei report: due
-dimensioni personalizzate con ambito evento (`metodo_posizione`, `raggio_km`).
-Senza, l'evento si conta ma i parametri restano invisibili fuori da DebugView.
-Vedi "Misurare, non stimare" per come provarlo in locale.
+**Cosa registrare in GA4** perché quei parametri si vedano nei report:
+`metodo_posizione` e `raggio_km` come dimensioni personalizzate con ambito
+evento. Senza, l'evento si conta ma i parametri restano invisibili fuori da
+DebugView. Non sono i soli, e la lista completa sta in "Le dimensioni
+personalizzate sono sette" più sotto. Vedi "Misurare, non stimare" per come
+provarlo in locale.
+
+`raggio_km` va **come dimensione, non come metrica**: GA4 lo propone anche come
+metrica perché è un numero, ma sommare i chilometri non vuol dire niente — serve
+sapere *quante volte* è stato scelto il gradino 30, cioè raggruppare per valore.
 
 ### L'età non si ripete nelle descrizioni
 
@@ -1175,6 +1305,11 @@ Cosa manca, in ordine di resa:
    (mappe, telefono, sito) ma non le aperture: al rinnovo puoi dire "47 hanno
    chiesto le indicazioni" e non su quante volte. È il momento in cui smetti di
    vendere fiducia e cominci a vendere evidenza.
+   Che la metà buona funzioni è già misurato, ed è il modello da copiare: nei
+   primi tre giorni post-fix gli eventi ci sono — `click_come_arrivare` 14,
+   `apri_ginetto` 11, `click_locandina` 9, `aggiungi_calendario` 6. **Su un
+   evento si sa già quante persone hanno detto "ci vado"; su un luogo non si sa
+   nemmeno quante volte la scheda è stata aperta.**
 2. **`Premium_al`, la data di scadenza.** Nel foglio c'è solo `Premium_dal`:
    **niente si spegne da solo**. È un problema di cassa (nessun innesco per il
    rinnovo) e di correttezza (continui a pubblicare uno spazio non più pagato).
