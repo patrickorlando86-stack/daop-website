@@ -549,6 +549,48 @@ evento — ma è una scommessa, e questa è la data in cui si riscuote. Il numer
 segnare adesso, per non ricostruirlo dopo: **la baseline pre-schede è 5,5 clic al
 giorno** (luglio 2026).
 
+#### Il CTR del giorno dopo una festa non è il CTR del sito
+
+Il 16/08/2026 il sito fa 551 clic su 8.725 impressioni, CTR 6,32%, cioè due punti
+sotto l'8,09% dei tre mesi. Sembra un peggioramento e non lo è: quello che si
+misura il giorno dopo Ferragosto è in buona parte **la coda di impressioni degli
+eventi appena finiti**. Incrociando le pagine dell'export con le date in
+`data/pagine-evento.json`:
+
+| | clic | impressioni | CTR |
+|---|---|---|---|
+| schede di eventi **già conclusi** | 68 | 1.237 | **5,50%** |
+| schede **in corso o futuri** | 199 | 1.563 | **12,73%** |
+
+Più di due volte il CTR, a parità di template e di sito. Sommando `ferragosto.html`
+fanno **2.551 impressioni su 9.294 (il 27%) per 90 clic su 558**: un quarto delle
+impressioni della giornata è gente che cerca cose che non ci sono più.
+
+**Non è un difetto da riparare**, ed è importante saperlo prima di provarci: la
+description di ogni scheda stampa la data ("Mercoledì 12 agosto 2026 ad
+Entracque"), quindi chi cerca il 16 legge il giorno e non clicca. Il CTR basso lì
+è il sistema che funziona. Le tre serate del Food Village di Entracque — 12, 13 e
+14 agosto, tre sotto-eventi con tributi diversi — sommano 443 impressioni e 9
+clic per questo motivo, e non perché si cannibalizzino: sono già differenziate nel
+title e nella description, e Google mette in cima quella dal nome generico sulla
+query generica, che è la cosa giusta.
+
+Da qui la regola di lettura: **il CTR aggregato del giorno dopo un picco
+stagionale non si confronta con niente.** Se serve un numero confrontabile, si
+segmenta per data di fine evento come sopra, oppure si aspetta una settimana. E
+non si riscrive un title guardandolo: `ferragosto.html` crolla a 1,67% quel
+giorno con lo **stesso** title che tre giorni prima faceva 6,50% alla stessa
+posizione — e dal 17 agosto va comunque in `noindex` da sola.
+
+Due cose sull'export in sé, che fanno sbagliare i conti. **I fogli non sommano
+uguale**: nello stesso file Grafico, Paesi e Dispositivi danno 551/8.725, Pagine
+dà 558/9.294 e Query 122/2.212, perché l'anonimizzazione lavora per dimensione.
+Il totale del sito è quello dei primi tre; una percentuale che mescola due fogli
+è sbagliata. E **il traffico estero è il 10% delle impressioni**, non solo il
+Regno Unito: 856 impressioni per 5 clic fra UK (407), Paesi Bassi (151), Germania
+(90), Stati Uniti (38). Togliendolo il CTR italiano è **6,94%** invece di 6,32%.
+Non c'è niente da fare — si segmenta per Italia quando il CTR serve a decidere.
+
 #### Le schede passano il giudizio di Google, e si vede in un numero solo
 
 Il rapporto **Indicizzazione → Pagine** di Search Console (export del 15/08, che
@@ -750,16 +792,51 @@ Le decisioni dentro, che è quello che non si ricava dal diff:
   barra che non guarda nessuno. I link arrivano dalle due madri, dalle sorelle,
   e dalla `sagre-provincia-*` della stessa provincia.
 
-**Come si sa se hanno funzionato, e quando.** Sono nate il 14/08 e Search Console
-ha due-tre giorni di ritardo, quindi il primo dato utile è l'export del **21-22
-agosto**. Il metro non è "quanti clic fanno le sei": è se **la somma
-incrocio + `oggi` + `weekend` supera le 28 impressioni in tre mesi** che facevano
-le due madri da sole. Se le sei prendono impressioni e le madri restano a zero,
-ha funzionato: vuol dire che il problema era l'incrocio mancante, non
-l'intenzione. Se restano tutte a zero, la conclusione è che Google consolida su
-`eventi.html` qualunque cosa si scriva, e allora il lavoro si sposta sul CTR di
-quella pagina invece che su nuove URL. È l'unico esperimento in corso con una
-previsione falsificabile: non lasciarlo senza verdetto.
+**Come si sa se hanno funzionato, e quando.** Il metro non era "quanti clic fanno
+le sei": era se **la somma incrocio + `oggi` + `weekend` superasse le 28
+impressioni in tre mesi** che facevano le due madri da sole. Se le sei prendevano
+impressioni e le madri restavano a zero, voleva dire che il problema era
+l'incrocio mancante e non l'intenzione; se restavano tutte a zero, che Google
+consolida su `eventi.html` qualunque cosa si scriva, e allora il lavoro si
+spostava sul CTR di quella pagina invece che su nuove URL.
+
+#### Verdetto: ha funzionato, e di due ordini di grandezza
+
+Export del 16/08/2026, finestra 15/08 18:00 → 16/08 17:00 (24 ore):
+
+| | clic | impressioni |
+|---|---|---|
+| le tre `weekend-provincia-*` | 90 | 1.003 |
+| le tre `oggi-provincia-*` | 9 | 504 |
+| **totale incrocio** | **99** | **1.507** |
+| `oggi.html` (madre, ora indice) | 0 | 3 |
+| `weekend.html` (madre, ora indice) | 0 | 0 |
+
+**1.507 impressioni in ventiquattr'ore** contro le 28 in tre mesi delle due madri:
+~54× la baseline trimestrale in un giorno solo. Le madri restano a zero e fanno
+l'indice, che è il ruolo che gli era stato dato. L'esperimento si chiude qui: il
+buco era l'incrocio provincia × finestra, non l'intenzione.
+
+**La trappola nel leggere questo numero**, ed è quella in cui si è quasi caduti:
+le `oggi-` sembrano "rotte" rispetto alle `weekend-` — 1,79% di CTR contro 8,97%,
+cinque volte meno. Non lo sono, ed è un divario di **posizione**, non di snippet:
+
+| provincia | `oggi-` | `weekend-` |
+|---|---|---|
+| Alessandria | pos 8,25 → 2,78% | pos 5,78 → 12,14% |
+| Asti | pos 8,10 → 1,46% | pos 5,89 → 9,15% |
+| Cuneo | pos 10,74 → 1,91% | pos 7,56 → 5,90% |
+
+Su mobile la curva dà ~2% a posizione 9-10 e ~7-9% a posizione 6: sono **tutte e
+sei sulla curva**. Prima di dare la colpa a un title, si guarda la posizione — e
+qui il title la data ce l'ha già, la stampa `data_estesa(oggi)` dentro `descr`,
+e la pagina si rigenera ogni notte. "Contenuto stantio" è escluso dal codice, non
+da un'impressione.
+
+E il 15-16 agosto è **sabato e domenica**: nel weekend "oggi" e "weekend" sono la
+stessa intenzione e vince la pagina che copre due giorni. È il giorno peggiore
+dell'anno per confrontare quelle due famiglie di pagine. Se un giorno si vuole
+misurare davvero il divario, si prende un mercoledì.
 
 Resta aperto un punto solo della vecchia lista: **`Event` in JSON-LD sulle
 pagine aggregate.** `oggi.html`, `weekend.html`, le tre provinciali e ora le sei
@@ -768,6 +845,19 @@ e zero `Event`: i rich result eventi li prende solo `eventi.html`, che ne ha 286
 Prima di cambiarlo va verificato che moltiplicare la stessa entità su nove URL
 non diluisca invece di aggiungere — è la ragione per cui non è stato fatto
 insieme al resto.
+
+**Un foglio "Aspetto nella ricerca" vuoto non è quella verifica**, ed è
+l'equivoco da cui questo punto è stato riaperto per sbaglio il 16/08/2026. In un
+export **delle ultime 24 ore** quel foglio esce vuoto *sempre*: la vista a 24 ore
+non supporta quella dimensione, e il valore è nullo anche nell'export BigQuery
+sulle date recenti. Non dice niente sul markup, e infatti il markup sta in piedi
+— `valida_jsonld.py` conta 527 `Event` con zero errori, e l'`Event` di una scheda
+ha `name`, `startDate`, `location` con `PostalAddress` completo e `geo`, `image`,
+`description`, `offers`: è idoneo ai rich result, non uno scheletro.
+
+Dove si guarda davvero: un export a **tre mesi** (lì il foglio si popola) oppure
+il report **Miglioramenti → Eventi**. Finché non c'è uno di quei due, "Google non
+riconosce lo schema" non è una diagnosi.
 
 Cosa **non** si è fatto per de-cannibalizzare, e non si farà: toccare l'H1 di
 `eventi.html`. Vedi sopra, vale 16.308 impressioni.
