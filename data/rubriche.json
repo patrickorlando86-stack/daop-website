@@ -52,14 +52,14 @@
     },
     "ginetto": {
       "titolo": "Ginetto AI",
-      "testo": "L'assistente digitale che aiuta le famiglie a scoprire cosa fare con i bambini nel weekend in provincia di Alessandria e Asti.",
+      "testo": "L'assistente digitale che aiuta le famiglie a scoprire cosa fare con i bambini nel weekend in provincia di Alessandria, Asti e Cuneo.",
       "label": "Prova Ginetto",
       "link": "/ginetto.html",
       "icona": "i-smartphone"
     },
     "eventi": {
       "titolo": "Eventi per famiglie",
-      "testo": "Sagre, laboratori, spettacoli e feste per bambini in provincia di Alessandria e Asti, aggiornati ogni giorno.",
+      "testo": "Sagre, laboratori, spettacoli e feste per bambini in provincia di Alessandria, Asti e Cuneo, aggiornati ogni giorno.",
       "label": "Guarda gli eventi",
       "link": "/eventi.html",
       "icona": "i-calendar"

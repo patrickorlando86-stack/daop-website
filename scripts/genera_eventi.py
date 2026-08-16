@@ -31,6 +31,13 @@ SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 PROVINCE_PUBBLICATE = ('AL', 'AT', 'CN')
 PROVINCE_NOMI = {'AL': 'Alessandria', 'AT': 'Asti', 'CN': 'Cuneo'}
 
+# Le province per esteso, come si scrivono in un testo: "Alessandria, Asti e
+# Cuneo". Derivata dalla lista qui sopra e non scritta a mano, perche' e' proprio
+# il copy a restare indietro: CN e' aperta dal 04/08/2026 e per dodici giorni le
+# firme delle schede e i JSON-LD hanno continuato a dire "Alessandria e Asti".
+PROVINCE_TESTO = (', '.join(PROVINCE_NOMI[c] for c in PROVINCE_PUBBLICATE[:-1])
+                  + ' e ' + PROVINCE_NOMI[PROVINCE_PUBBLICATE[-1]])
+
 # Pagina Instagram da cui arrivano le segnalazioni, provincia per provincia.
 # "nostra": la pagina e' di DAOP (AL, AT) oppure di un partner (CN). Non e' un
 # dettaglio grafico: su una pagina nostra il credito e' un rimando, su quella di
@@ -2175,7 +2182,7 @@ def firma_daop(rec, oggi):
         '<aside class="ev-firma">'
         f'<p class="ev-firma-t">{CHECK_SVG} Scheda verificata da DAOP</p>'
         '<p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, '
-        'l\'associazione delle famiglie di Alessandria e Asti. Ultimo controllo: '
+        f'l\'associazione delle famiglie di {PROVINCE_TESTO}. Ultimo controllo: '
         f'<time datetime="{d.isoformat()}">{leggibile}</time>.</p>'
         f'{credito}'
         '<p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, '
@@ -2383,7 +2390,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         "url": SITE_URL,
         "logo": f"{SITE_URL}/assets/images/logodaop.png",
         "areaServed": [PROVINCE_NOMI[c] for c in PROVINCE_PUBBLICATE] + ["Piemonte"],
-        "description": ("Associazione delle famiglie di Alessandria e Asti. Seleziona e "
+        "description": (f"Associazione delle famiglie di {PROVINCE_TESTO}. Seleziona e "
                         "verifica gli eventi per famiglie del territorio."),
     }
     breadcrumb = {
@@ -2655,7 +2662,7 @@ def scrivi_metodo(events):
         {"@type": "Organization", "@id": ORG_ID,
          "name": "DAOP – Dove Andiamo Oggi Papi", "alternateName": "DAOP", "url": SITE_URL,
          "logo": f"{SITE_URL}/assets/images/logodaop.png", "foundingDate": "2023",
-         "description": ("Associazione delle famiglie di Alessandria e Asti. Seleziona e "
+         "description": (f"Associazione delle famiglie di {PROVINCE_TESTO}. Seleziona e "
                          "verifica a mano gli eventi per famiglie del territorio."),
          "areaServed": [PROVINCE_NOMI[c] for c in PROVINCE_PUBBLICATE] + ["Piemonte"],
          "founder": {"@type": "Person", "name": "Patrick Orlando"},
