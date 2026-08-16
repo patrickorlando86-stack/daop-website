@@ -13,7 +13,7 @@
   "eta": "Dai 14 anni (film per adulti)",
   "first_seen": "2026-08-12",
   "indirizzo": "Via della Libertà - Spinetta Marengo, Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9129853",
   "loc": "daop_alessandria_3951417280937662935.jpg",
   "lon": "8.6154564",
@@ -23,9 +23,9 @@
   "ora": "21:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 56,
   "slug": "2-cuori-2-capanne-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "a-piccoli-passi-inaugurazione-forte-di-vinadio": {
   "adatto_famiglie": "Si",
@@ -54,7 +54,7 @@
   "prov": "CN",
   "riga": 219,
   "slug": "a-piccoli-passi-inaugurazione-forte-di-vinadio",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "acqui-wine-days-acqui-terme": {
   "adatto_famiglie": "Da verificare",
@@ -82,7 +82,7 @@
   "prezzo": "25 euro a persona",
   "prov": "AL",
   "slug": "acqui-wine-days-acqui-terme",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "agosto-letterario-buttigliera-d-asti": {
   "adatto_famiglie": "Si",
@@ -99,7 +99,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Laghetto del Furnas - Buttigliera d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.0226378",
   "loc": "daop_asti_3946087706358055044.jpg",
   "lon": "7.9507994",
@@ -109,9 +109,9 @@
   "ora": "",
   "prezzo": "15 euro a persona",
   "prov": "AT",
-  "riga": 0,
+  "riga": 50,
   "slug": "agosto-letterario-buttigliera-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "agosto-vinchio": {
   "adatto_famiglie": "Si",
@@ -128,7 +128,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-04",
   "indirizzo": "Piazza San Marco - Vinchio (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.807159",
   "loc": "daop_asti_3956076020427309450.jpg",
   "lon": "8.317672",
@@ -138,9 +138,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 110,
   "slug": "agosto-vinchio",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "al-di-d-la-festa-casorzo-monferrato": {
   "adatto_famiglie": "Si",
@@ -168,7 +168,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "al-di-d-la-festa-casorzo-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "alecomics-festival-alessandria": {
   "adatto_famiglie": "Si",
@@ -184,7 +184,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Cittadella di Alessandria - Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9165",
   "loc": "daop_alessandria_3944839100361812334.jpg",
   "lon": "8.598",
@@ -194,9 +194,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 34,
   "slug": "alecomics-festival-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "alla-ri-scoperta-delle-favole-disney-alice-nel-pae-tortona": {
   "adatto_famiglie": "Si",
@@ -213,7 +213,7 @@
   "eta": "2-5 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.89666",
   "loc": "daop_alessandria_3928097704112146022.jpg",
   "lon": "8.8641282",
@@ -223,9 +223,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 8,
   "slug": "alla-ri-scoperta-delle-favole-disney-alice-nel-pae-tortona",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "alla-ri-scoperta-delle-favole-disney-tortona": {
   "anchor": "ev-2026-08-24-alla-ri-scoperta-delle-favole-disney",
@@ -269,7 +269,7 @@
   "eta": "6-11 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Corso Roma 44 - San Damiano d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8292907",
   "loc": "daop_asti_3948603898788931262.jpg",
   "lon": "8.0617161",
@@ -279,9 +279,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 42,
   "slug": "alla-scoperta-della-croce-rossa-piccoli-volontari-san-damiano-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "aperitivo-offerto-dalla-pro-loco-e-porchetta-pro-l-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -327,7 +327,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Piazza Piacentino - Rocchetta Tanaro (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8583156",
   "loc": "daop_asti_3954379825870947543.jpg",
   "lon": "8.3453918",
@@ -337,9 +337,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 84,
   "slug": "apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "apertura-stand-gastronomico-con-luigi-gallia-pro-l-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -368,7 +368,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "apertura-stand-gastronomico-con-luigi-gallia-pro-l-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "apertura-stand-gastronomico-con-shary-band-pro-loc-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -397,7 +397,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "apertura-stand-gastronomico-con-shary-band-pro-loc-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "apertura-stand-gastronomico-e-i-controcorrente-pro-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -424,7 +424,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "apertura-stand-gastronomico-e-i-controcorrente-pro-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "apertura-stand-gastronomico-e-luigi-gallia-pro-loc-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -451,7 +451,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "apertura-stand-gastronomico-e-luigi-gallia-pro-loc-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "apertura-stand-gastronomico-e-shary-band-pro-loco-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -478,7 +478,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "apertura-stand-gastronomico-e-shary-band-pro-loco-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -495,7 +495,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "S.M.S. Villaromagnano - Villaromagnano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8454469",
   "loc": "daop_alessandria_3956487578405878241.jpg",
   "lon": "8.8952063",
@@ -505,9 +505,9 @@
   "ora": "17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 120,
   "slug": "ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "assaggia-casalnoceto": {
   "adatto_famiglie": "Si",
@@ -524,7 +524,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Piazza Martiri della Libertà - Casalnoceto (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9131769",
   "loc": "daop_alessandria_3960097640546350700.jpg",
   "lon": "8.9811563",
@@ -534,9 +534,9 @@
   "ora": "20:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 171,
   "slug": "assaggia-casalnoceto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "automotoraduno-memorial-gianfranco-ardrizzi-comune-castelnuovo-belbo": {
   "adatto_famiglie": "Si",
@@ -553,7 +553,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Piazza Municipio - Castelnuovo Belbo (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8015158",
   "loc": "daop_asti_3959305010579389399.jpg",
   "lon": "8.4121919",
@@ -563,9 +563,9 @@
   "ora": "18:00",
   "prezzo": "30,00 euro (tour, visita cantina e cena)",
   "prov": "AT",
-  "riga": 0,
+  "riga": 192,
   "slug": "automotoraduno-memorial-gianfranco-ardrizzi-comune-castelnuovo-belbo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "barbaluc-cantastorie-nel-bosco-della-trebulina-paesana": {
   "anchor": "ev-2026-08-14-barbaluc-cantastorie-nel-bosco-della-trebulina",
@@ -593,7 +593,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "barbaluc-cantastorie-nel-bosco-della-trebulina-paesana",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-alba": {
   "adatto_famiglie": "Si",
@@ -621,7 +621,7 @@
   "prov": "CN",
   "riga": 176,
   "slug": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-alba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba": {
   "adatto_famiglie": "Si",
@@ -637,7 +637,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Via Martiri, 16 - Ceresole Alba (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8205828",
   "loc": "eventi_bambini_provincia_cuneo_3957905266648398466.jpg",
   "lon": "7.8130984",
@@ -647,9 +647,9 @@
   "ora": "11:45",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 160,
   "slug": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "bestiario-d-inchiostro-museo-civico-della-stampa-mondovi": {
   "adatto_famiglie": "Si",
@@ -678,7 +678,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "bestiario-d-inchiostro-museo-civico-della-stampa-mondovi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "bolle-giganti-edizione-agosto-pro-loco-voltaggio-p": {
   "adatto_famiglie": "Si",
@@ -695,7 +695,7 @@
   "eta": "3-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Centro Sportivo Località Fonte Sulfurea - Voltaggio (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6203576",
   "loc": "daop_alessandria_3927416770694079751.jpg",
   "lon": "8.8426697",
@@ -705,9 +705,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 5,
   "slug": "bolle-giganti-edizione-agosto-pro-loco-voltaggio-p",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "buen-camino-alessandria": {
   "adatto_famiglie": "Si",
@@ -723,7 +723,7 @@
   "eta": "Dai 14 anni (film per adulti)",
   "first_seen": "2026-08-12",
   "indirizzo": "Via della Chiesa - Valmadonna, Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9709889",
   "loc": "daop_alessandria_3951417280937662935.jpg",
   "lon": "8.6136254",
@@ -733,9 +733,9 @@
   "ora": "21:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 58,
   "slug": "buen-camino-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "camminata-alla-ricerca-delle-stelle-cadenti-pro-lo-ponzano-monferrato": {
   "adatto_famiglie": "Si",
@@ -793,7 +793,7 @@
   "prov": "AT",
   "riga": 283,
   "slug": "camminata-tra-boschi-e-stelle-parrocchia-santi-roc-dusino-san-michele",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "capodanno-alessandrino-anno-dell-amore-alessandria": {
   "anchor": "ev-2026-08-31-capodanno-alessandrino-anno-dell-amore",
@@ -809,7 +809,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9110327",
   "loc": "daop_alessandria_3961526096889389174.webp",
   "lon": "8.6148186",
@@ -819,9 +819,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 264,
   "slug": "capodanno-alessandrino-anno-dell-amore-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "carne-alla-brace-e-musica-con-dj-schiffer-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -838,7 +838,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -848,9 +848,9 @@
   "ora": "21:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 143,
   "slug": "carne-alla-brace-e-musica-con-dj-schiffer-pro-loco-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "casalnoceto-kids": {
   "adatto_famiglie": "Si",
@@ -877,7 +877,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "slug": "casalnoceto-kids",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "casalnoceto-kids-comune-di-casalnoceto": {
   "adatto_famiglie": "Si",
@@ -894,7 +894,7 @@
   "eta": "5-11 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Biblioteca Edificio scolastico - Casalnoceto (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9131769",
   "loc": "daop_alessandria_3955588101658693343.jpg",
   "lon": "8.9811563",
@@ -904,9 +904,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 109,
   "slug": "casalnoceto-kids-comune-di-casalnoceto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "casorzo-monferrato-al-di-d-la-festa": {
   "adatto_famiglie": "Si",
@@ -935,7 +935,7 @@
   "prov": "AT",
   "riga": 119,
   "slug": "casorzo-monferrato-al-di-d-la-festa",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "castelli-aperti-a-ferragosto-acqui-terme": {
   "anchor": "ev-2026-08-15-castelli-aperti-a-ferragosto",
@@ -950,7 +950,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Castello dei Paleologi - Acqui Terme (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6740198",
   "loc": "daop_alessandria_3962702201610126145.webp",
   "lon": "8.4726563",
@@ -960,9 +960,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 255,
   "slug": "castelli-aperti-a-ferragosto-acqui-terme",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "castelli-aperti-a-ferragosto-area-del-castello-castelnuovo-calcea": {
   "anchor": "ev-2026-08-15-castelli-aperti-a-ferragosto-area-del-castello",
@@ -977,7 +977,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Area del Castello - Castelnuovo Calcea (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7881057",
   "loc": "daop_asti_3962702777545339905.webp",
   "lon": "8.2852996",
@@ -987,9 +987,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 0,
+  "riga": 268,
   "slug": "castelli-aperti-a-ferragosto-area-del-castello-castelnuovo-calcea",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno": {
   "anchor": "ev-2026-08-15-castelli-aperti-a-ferragosto-gipsoteca-giulio-mont",
@@ -1004,7 +1004,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Gipsoteca Giulio Monteverde - Bistagno (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6607771",
   "loc": "daop_alessandria_3962702201610126145.webp",
   "lon": "8.3699065",
@@ -1014,9 +1014,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 257,
   "slug": "castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "castelli-aperti-a-ferragosto-palazzo-lignana-rivalta-bormida": {
   "anchor": "ev-2026-08-15-castelli-aperti-a-ferragosto-palazzo-lignana",
@@ -1031,7 +1031,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Palazzo Lignana - Rivalta Bormida (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7113749",
   "loc": "daop_alessandria_3962702201610126145.webp",
   "lon": "8.5500679",
@@ -1041,9 +1041,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 260,
   "slug": "castelli-aperti-a-ferragosto-palazzo-lignana-rivalta-bormida",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "castelli-aperti-a-ferragosto-salita-alla-torre-del-trisobbio": {
   "anchor": "ev-2026-08-15-castelli-aperti-a-ferragosto-salita-alla-torre-del",
@@ -1058,7 +1058,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Torre del Castello - Trisobbio (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.661646",
   "loc": "daop_alessandria_3962702201610126145.webp",
   "lon": "8.586149",
@@ -1068,9 +1068,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 261,
   "slug": "castelli-aperti-a-ferragosto-salita-alla-torre-del-trisobbio",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "castello-di-monastero-bormida-castelli-aperti": {
   "adatto_famiglie": "Si",
@@ -1087,7 +1087,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Castello di Monastero Bormida - Monastero Bormida (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6476",
   "loc": "daop_asti_3953382051398917258.jpg",
   "lon": "8.3244",
@@ -1097,9 +1097,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 0,
+  "riga": 70,
   "slug": "castello-di-monastero-bormida-castelli-aperti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "castello-e-mercato-medievale-di-san-rocco-con-visi-monastero-bormida": {
   "anchor": "ev-2026-08-16-castello-e-mercato-medievale-di-san-rocco-con-visi",
@@ -1114,7 +1114,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Castello di Monastero Bormida - Monastero Bormida (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6476",
   "loc": "daop_asti_3962702777545339905.webp",
   "lon": "8.3244",
@@ -1124,9 +1124,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 0,
+  "riga": 272,
   "slug": "castello-e-mercato-medievale-di-san-rocco-con-visi-monastero-bormida",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-al-sacco-sotto-le-piante-con-dj-mbc-pro-loco-cabella-ligure": {
   "adatto_famiglie": "Si",
@@ -1155,7 +1155,7 @@
   "prov": "AL",
   "riga": 202,
   "slug": "cena-al-sacco-sotto-le-piante-con-dj-mbc-pro-loco-cabella-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-antipasti-piemontesi-e-ballo-con-orchestra-ra-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -1172,7 +1172,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -1182,9 +1182,9 @@
   "ora": "20:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 141,
   "slug": "cena-antipasti-piemontesi-e-ballo-con-orchestra-ra-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-benefica-a-favore-di-me-dea-pro-loco-san-gior-san-giorgio-monferrato": {
   "adatto_famiglie": "Si",
@@ -1200,7 +1200,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Centro Sportivo - San Giorgio Monferrato (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.1076846",
   "loc": "daop_alessandria_3958281989299639987.jpg",
   "lon": "8.4130547",
@@ -1210,9 +1210,9 @@
   "ora": "19:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 149,
   "slug": "cena-benefica-a-favore-di-me-dea-pro-loco-san-gior-san-giorgio-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-con-rosticciata-strevese-e-b-side-party-band-strevi": {
   "anchor": "ev-2026-08-16-cena-con-rosticciata-strevese-e-b-side-party-band",
@@ -1228,7 +1228,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-14",
   "indirizzo": "Piazza del paese - Strevi (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.698146",
   "loc": "daop_alessandria_3963520392629051459.webp",
   "lon": "8.521847",
@@ -1238,9 +1238,9 @@
   "ora": "20:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 291,
   "slug": "cena-con-rosticciata-strevese-e-b-side-party-band-strevi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-di-raviore-con-berruto-band-catering-sandra-e-vesime": {
   "adatto_famiglie": "Si",
@@ -1257,7 +1257,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Campo sportivo comunale - Vesime (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6368509",
   "loc": "daop_asti_3960868795018975491.jpg",
   "lon": "8.2281701",
@@ -1267,9 +1267,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 241,
   "slug": "cena-di-raviore-con-berruto-band-catering-sandra-e-vesime",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-in-piazza-con-musica-anni-90-nuova-pro-loco-d-strevi": {
   "anchor": "ev-2026-08-14-cena-in-piazza-con-musica-anni-90-2000-nuova-pro-l",
@@ -1297,7 +1297,7 @@
   "prov": "AL",
   "riga": 0,
   "slug": "cena-in-piazza-con-musica-anni-90-nuova-pro-loco-d-strevi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-in-piazza-con-set-latino-americano-e-balli-di-strevi": {
   "anchor": "ev-2026-08-15-cena-in-piazza-con-set-latino-americano-e-balli-di",
@@ -1325,7 +1325,7 @@
   "prov": "AL",
   "riga": 0,
   "slug": "cena-in-piazza-con-set-latino-americano-e-balli-di-strevi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-in-piazza-musica-con-nico-e-franz-casalnoceto": {
   "adatto_famiglie": "Si",
@@ -1353,7 +1353,7 @@
   "prov": "AL",
   "riga": 0,
   "slug": "cena-in-piazza-musica-con-nico-e-franz-casalnoceto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-in-piazza-musica-tributo-ai-queen-casalnoceto": {
   "adatto_famiglie": "Si",
@@ -1369,7 +1369,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Casalnoceto (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9131769",
   "loc": "daop_alessandria_3946461640522258062.jpg",
   "lon": "8.9811563",
@@ -1379,9 +1379,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 38,
   "slug": "cena-in-piazza-musica-tributo-ai-queen-casalnoceto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-nutella-party-e-dj-set-con-music-power-pro-lo-morsasco": {
   "adatto_famiglie": "Si",
@@ -1397,7 +1397,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Morsasco (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6665683",
   "loc": "daop_alessandria_3960099185677697890.jpg",
   "lon": "8.5511648",
@@ -1407,9 +1407,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 181,
   "slug": "cena-nutella-party-e-dj-set-con-music-power-pro-lo-morsasco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti": {
   "adatto_famiglie": "Da verificare",
@@ -1426,7 +1426,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Giardino Comunale - Baldichieri d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.90708",
   "loc": "daop_asti_3954381277260028092.jpg",
   "lon": "8.09125",
@@ -1436,9 +1436,9 @@
   "ora": "20:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 0,
+  "riga": 107,
   "slug": "cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cena-sotto-le-stelle-mornese": {
   "adatto_famiglie": "Si",
@@ -1482,7 +1482,7 @@
   "eta": "3-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Sala delle Guide di Crissolo - Crissolo (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6978198",
   "loc": "eventi_bambini_provincia_cuneo_3956908804397429390.jpg",
   "lon": "7.1587165",
@@ -1492,9 +1492,9 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 161,
   "slug": "ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cinema-all-aperto-bad-guys-troppo-cattivi-oratorio-nizza-monferrato": {
   "adatto_famiglie": "Si",
@@ -1522,7 +1522,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "cinema-all-aperto-bad-guys-troppo-cattivi-oratorio-nizza-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cinema-in-piazzetta-moulin-rouge-pro-loco-sanse-san-sebastiano-curone": {
   "adatto_famiglie": "Da verificare",
@@ -1579,7 +1579,7 @@
   "prov": "CN",
   "riga": 158,
   "slug": "colori-dall-orto-puraessenza-confreria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "comitato-palio-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -1596,7 +1596,7 @@
   "eta": "6-11 anni",
   "first_seen": "2026-08-02",
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.833445",
   "loc": "daop_asti_3948603898788931262.jpg",
   "lon": "8.063534",
@@ -1606,9 +1606,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 43,
   "slug": "comitato-palio-san-damiano-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -1665,7 +1665,7 @@
   "prov": "CN",
   "riga": 218,
   "slug": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-alba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba": {
   "adatto_famiglie": "Si",
@@ -1681,7 +1681,7 @@
   "eta": "0-6 anni",
   "first_seen": "2026-08-11",
   "indirizzo": "Via Martiri, 16 - Ceresole Alba (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8205828",
   "loc": "eventi_bambini_provincia_cuneo_3957905266648398466.jpg",
   "lon": "7.8130984",
@@ -1691,9 +1691,9 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 198,
   "slug": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "consegna-dei-libri-pro-loco-ceresole-alba": {
   "adatto_famiglie": "Si",
@@ -1720,7 +1720,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "consegna-dei-libri-pro-loco-ceresole-alba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cortemilia-comics-games": {
   "adatto_famiglie": "Si",
@@ -1748,7 +1748,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "slug": "cortemilia-comics-games",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "creazione-giochi-di-societa-chiosco-parri-cuneo": {
   "anchor": "ev-2026-08-13-creazione-giochi-di-societa-chiosco-parri",
@@ -1776,7 +1776,7 @@
   "prov": "CN",
   "riga": 290,
   "slug": "creazione-giochi-di-societa-chiosco-parri-cuneo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "cresco-con-te-biblioteca-civica-di-fossano": {
   "adatto_famiglie": "Si",
@@ -1793,7 +1793,7 @@
   "eta": "0-6 anni",
   "first_seen": "2026-08-10",
   "indirizzo": "Parco Cittadino di Piazza d'Armi - Fossano (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5368282",
   "loc": "eventi_bambini_provincia_cuneo_3958495420379218320.jpg",
   "lon": "7.6624155",
@@ -1803,9 +1803,9 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 197,
   "slug": "cresco-con-te-biblioteca-civica-di-fossano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "crissolo-in-bianco-pro-loco-crissolo": {
   "adatto_famiglie": "Si",
@@ -1822,7 +1822,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Area Pedonale - Crissolo (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6978198",
   "loc": "eventi_bambini_provincia_cuneo_3956899657777959155.jpg",
   "lon": "7.1587165",
@@ -1832,9 +1832,9 @@
   "ora": "19:00",
   "prezzo": "Gratuito (prenotazione posto gratuita)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 189,
   "slug": "crissolo-in-bianco-pro-loco-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "dj-toyu-cunicosummerfestival-pro-loco-cunico": {
   "adatto_famiglie": "Si",
@@ -1850,7 +1850,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Cunico (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.03995",
   "loc": "daop_asti_3960867403248255449.jpg",
   "lon": "8.096731",
@@ -1860,9 +1860,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 247,
   "slug": "dj-toyu-cunicosummerfestival-pro-loco-cunico",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "dolcemiele-dispari-teatro-sambuco": {
   "adatto_famiglie": "Si",
@@ -1889,7 +1889,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "dolcemiele-dispari-teatro-sambuco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "estate-di-storie-letture-ad-alta-voce-biblioteca-e-limone-piemonte": {
   "adatto_famiglie": "Si",
@@ -1906,7 +1906,7 @@
   "eta": "4 anni e oltre",
   "first_seen": "2026-08-10",
   "indirizzo": "Biblioteca e Museo dello Sci - Limone Piemonte (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.2013381",
   "loc": "eventi_bambini_provincia_cuneo_3956297960307157882.jpg",
   "lon": "7.576138",
@@ -1916,9 +1916,9 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 194,
   "slug": "estate-di-storie-letture-ad-alta-voce-biblioteca-e-limone-piemonte",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "estate-in-coro-laboratorio-di-canto-corale-aeropla-ormea": {
   "adatto_famiglie": "Si",
@@ -1935,7 +1935,7 @@
   "eta": "5-11 anni",
   "first_seen": "2026-08-11",
   "indirizzo": "Via Dr. Bassi 31 - Ormea (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.1488707",
   "loc": "eventi_bambini_provincia_cuneo_3961260438046257114.jpg",
   "lon": "7.9126065",
@@ -1945,9 +1945,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 206,
   "slug": "estate-in-coro-laboratorio-di-canto-corale-aeropla-ormea",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "estate-sonora-giochi-di-note-prismadanza-entracque": {
   "adatto_famiglie": "Si",
@@ -1975,7 +1975,7 @@
   "prov": "CN",
   "riga": 210,
   "slug": "estate-sonora-giochi-di-note-prismadanza-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "fagiolino-casaro-teatro-medico-ipnotico-arguello": {
   "adatto_famiglie": "Si",
@@ -1991,7 +1991,7 @@
   "eta": "4-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Parco San Frontiniano - Arguello (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5825939",
   "loc": "eventi_bambini_provincia_cuneo_3956301890227486054.jpg",
   "lon": "8.1097502",
@@ -2001,9 +2001,9 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 118,
   "slug": "fagiolino-casaro-teatro-medico-ipnotico-arguello",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "fassona-brace-madonna-della-villa-carpeneto": {
   "adatto_famiglie": "Si",
@@ -2019,7 +2019,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Madonna della Villa - Carpeneto (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6961995",
   "loc": "daop_alessandria_3958455991880183956.jpg",
   "lon": "8.6117853",
@@ -2029,9 +2029,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 169,
   "slug": "fassona-brace-madonna-della-villa-carpeneto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "fasta-d-san-roch-cena-con-musica-anni-80-90-00-vesime": {
   "adatto_famiglie": "Si",
@@ -2048,7 +2048,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Via Romita - Vesime (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6368509",
   "loc": "daop_asti_3960868795018975491.jpg",
   "lon": "8.2281701",
@@ -2058,9 +2058,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 240,
   "slug": "fasta-d-san-roch-cena-con-musica-anni-80-90-00-vesime",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "ferragosto-al-castello-pro-loco-villa-di-verzuolo": {
   "adatto_famiglie": "Si",
@@ -2089,7 +2089,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "ferragosto-al-castello-pro-loco-villa-di-verzuolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "ferragosto-family-eco-park-evento": {
   "adatto_famiglie": "Si",
@@ -2115,7 +2115,7 @@
   "prezzo": "Ingresso adulto 17,00€ / Ingresso bambini 10,00€ / Bagno serale 5,00€",
   "prov": "CN",
   "slug": "ferragosto-family-eco-park-evento",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "ferragosto-senza-frontiere-comune-di-limone-piemon-limone-piemonte": {
   "adatto_famiglie": "Si",
@@ -2143,7 +2143,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "ferragosto-senza-frontiere-comune-di-limone-piemon-limone-piemonte",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-a-madonnina-madonnina-di-serralunga-di-crea": {
   "adatto_famiglie": "Da verificare",
@@ -2197,7 +2197,7 @@
   "prezzo": "Gratuito (serata danzante 5 euro)",
   "prov": "CN",
   "slug": "festa-campestre-di-s-antonio-e-s-bernardo-envie",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-d-estate-cassinasco": {
   "adatto_famiglie": "Si",
@@ -2226,7 +2226,7 @@
   "prov": "AT",
   "riga": 118,
   "slug": "festa-d-estate-cassinasco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-d-estate-ponzano-monferrato": {
   "adatto_famiglie": "Si",
@@ -2283,7 +2283,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "festa-d-la-madona-du-ri-castellinaldo-d-alba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-dei-bambini-pro-loco-dogliani-castello": {
   "adatto_famiglie": "Si",
@@ -2311,7 +2311,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "festa-dei-bambini-pro-loco-dogliani-castello",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-dei-coscritti-classe-castelnuovo-scrivia": {
   "adatto_famiglie": "Si",
@@ -2327,7 +2327,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Piazza Vittorio Emanuele II - Castelnuovo Scrivia (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9808509",
   "loc": "daop_alessandria_3960864106401100329.jpg",
   "lon": "8.8811063",
@@ -2337,9 +2337,9 @@
   "ora": "21:15",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 227,
   "slug": "festa-dei-coscritti-classe-castelnuovo-scrivia",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-dei-rioni-gli-amici-del-campetto-castelceriolo": {
   "adatto_famiglie": "Si",
@@ -2355,7 +2355,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Castelceriolo (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9164186",
   "loc": "daop_alessandria_3958381282402216087.jpg",
   "lon": "8.6906025",
@@ -2365,9 +2365,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 178,
   "slug": "festa-dei-rioni-gli-amici-del-campetto-castelceriolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-del-bro-d-carvo-pro-loco-caldirola": {
   "adatto_famiglie": "Si",
@@ -2423,7 +2423,7 @@
   "prov": "AT",
   "riga": 34,
   "slug": "festa-del-fungo-pro-loco-ciglione",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-del-fungo-pro-loco-ciglione-ponzone": {
   "adatto_famiglie": "Si",
@@ -2440,7 +2440,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione, Ponzone (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.608366",
   "loc": "daop_alessandria_3947851034315491228.jpg",
   "lon": "8.4875824",
@@ -2450,9 +2450,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 32,
   "slug": "festa-del-fungo-pro-loco-ciglione-ponzone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-del-major-bosio": {
   "anchor": "ev-2026-08-19-festa-del-major",
@@ -2468,7 +2468,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-14",
   "indirizzo": "Majör Bosio 90's - Bosio (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6500331",
   "loc": "daop_alessandria_3963086441036298233.webp",
   "lon": "8.7923887",
@@ -2478,9 +2478,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 294,
   "slug": "festa-del-major-bosio",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-del-pescatore-entracque": {
   "adatto_famiglie": "Si",
@@ -2508,7 +2508,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "festa-del-pescatore-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-dell-uva-e-del-vino-pro-loco-ciglione": {
   "adatto_famiglie": "Si",
@@ -2537,7 +2537,7 @@
   "prov": "AT",
   "riga": 33,
   "slug": "festa-dell-uva-e-del-vino-pro-loco-ciglione",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone": {
   "adatto_famiglie": "Si",
@@ -2554,7 +2554,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Terrazza Pro Loco Ciglione - Ciglione, Ponzone (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.608366",
   "loc": "daop_alessandria_3947851034315491228.jpg",
   "lon": "8.4875824",
@@ -2564,9 +2564,9 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 31,
   "slug": "festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-della-birra-pro-loco-cabella-ligure": {
   "adatto_famiglie": "Si",
@@ -2583,7 +2583,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Pala Vittoria - Cabella Ligure (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.673751",
   "loc": "daop_alessandria_3958372442837640487.jpg",
   "lon": "9.09576",
@@ -2593,9 +2593,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 177,
   "slug": "festa-della-birra-pro-loco-cabella-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-della-birra-street-food-alessandria": {
   "adatto_famiglie": "Si",
@@ -2611,7 +2611,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Via Campi - Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9129853",
   "loc": "daop_alessandria_3943479245575048023.jpg",
   "lon": "8.6154564",
@@ -2621,9 +2621,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 40,
   "slug": "festa-della-birra-street-food-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-della-pizza-margherita-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -2667,7 +2667,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Valli Unite - Costa Vescovato (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8174212",
   "loc": "daop_alessandria_3947028490592972274.jpg",
   "lon": "8.9189391",
@@ -2677,9 +2677,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 23,
   "slug": "festa-della-vendemmia-a-valli-unite-costa-vescovato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure": {
   "anchor": "ev-2026-09-01-festa-dello-sport-evento-finale-plogging-smiling-b",
@@ -2695,7 +2695,7 @@
   "eta": "Tutte le età",
   "first_seen": "2026-08-02",
   "indirizzo": "Novi Ligure (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7624091",
   "loc": "",
   "lon": "8.777673",
@@ -2705,9 +2705,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 3,
   "slug": "festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-ceresole-d-alba": {
   "adatto_famiglie": "Si",
@@ -2723,7 +2723,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Via Artuffi - Ceresole d'Alba (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8014607",
   "loc": "eventi_bambini_provincia_cuneo_3957905434739434090.jpg",
   "lon": "7.8202769",
@@ -2733,9 +2733,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 196,
   "slug": "festa-di-ceresole-d-alba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-ferragosto-pro-loco-gerbo": {
   "adatto_famiglie": "Si",
@@ -2764,7 +2764,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "festa-di-ferragosto-pro-loco-gerbo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-fine-estate-comune-di-pietra-marazzi": {
   "adatto_famiglie": "Si",
@@ -2780,7 +2780,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Piazza Umberto I - Pietra Marazzi (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9440143",
   "loc": "daop_alessandria_3960873567039532539.jpg",
   "lon": "8.6707276",
@@ -2790,9 +2790,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 231,
   "slug": "festa-di-fine-estate-comune-di-pietra-marazzi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto": {
   "adatto_famiglie": "Si",
@@ -2808,7 +2808,7 @@
   "eta": "3-10 anni",
   "first_seen": "2026-08-02",
   "indirizzo": "Chiesa dei Battuti - San Marzano Oliveto (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7540212",
   "loc": "daop_asti_3932273221679851436.jpg",
   "lon": "8.2957567",
@@ -2818,9 +2818,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 12,
   "slug": "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-inaugurazione-della-nuova-piazza-di-rocch-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -2837,7 +2837,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Piazza Piacentino - Rocchetta Tanaro (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.858",
   "loc": "daop_asti_3954379825870947543.jpg",
   "lon": "8.3448",
@@ -2847,9 +2847,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 89,
   "slug": "festa-di-inaugurazione-della-nuova-piazza-di-rocch-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-san-bartolomeo-rocca-de-baldi": {
   "adatto_famiglie": "Si",
@@ -2866,7 +2866,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Rocca De' Baldi - Carleveri (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.423633",
   "loc": "eventi_bambini_provincia_cuneo_3960740209430538571.jpg",
   "lon": "7.761136",
@@ -2876,9 +2876,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 209,
   "slug": "festa-di-san-bartolomeo-rocca-de-baldi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-san-rocco-celle-enomondo": {
   "adatto_famiglie": "Si",
@@ -2894,7 +2894,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Ballo a Palchetto Molino - Celle Enomondo (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8573468",
   "loc": "daop_asti_3947080982607333473.jpg",
   "lon": "8.1223923",
@@ -2904,9 +2904,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 41,
   "slug": "festa-di-san-rocco-celle-enomondo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-di-san-rocco-pro-loco-montiglio-monferrato": {
   "adatto_famiglie": "Si",
@@ -2922,7 +2922,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Piazzetta di San Rocco - Montiglio Monferrato (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.0644167",
   "loc": "daop_asti_3957799712212042901.jpg",
   "lon": "8.0988906",
@@ -2932,9 +2932,9 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 154,
   "slug": "festa-di-san-rocco-pro-loco-montiglio-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-patronale-di-castel-boglione": {
   "adatto_famiglie": "Si",
@@ -2950,7 +2950,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Piazza del Pallone - Castel Boglione (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.722778",
   "loc": "daop_asti_3955065648253649657.jpg",
   "lon": "8.381111",
@@ -2960,9 +2960,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 90,
   "slug": "festa-patronale-di-castel-boglione",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-patronale-di-fubine-monferrato": {
   "adatto_famiglie": "Si",
@@ -3006,7 +3006,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Morsasco (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6665683",
   "loc": "daop_alessandria_3960099185677697890.jpg",
   "lon": "8.5511648",
@@ -3016,9 +3016,9 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 182,
   "slug": "festa-patronale-di-san-bartolomeo-con-menu-tradizi-morsasco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-patronale-di-san-felice-cinaglio": {
   "adatto_famiglie": "Si",
@@ -3034,7 +3034,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Giardini della Scuola - Cinaglio (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.97525",
   "loc": "daop_asti_3955064919627592103.jpg",
   "lon": "8.10003",
@@ -3044,9 +3044,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 103,
   "slug": "festa-patronale-di-san-felice-cinaglio",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba": {
   "adatto_famiglie": "Si",
@@ -3091,7 +3091,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Balera - Carbonara Scrivia (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8494005",
   "loc": "daop_alessandria_3955058042808279396.jpg",
   "lon": "8.8696537",
@@ -3101,9 +3101,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 76,
   "slug": "festa-patronale-di-san-rocco-carbonara-scrivia",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-patronale-di-sant-agostino-pro-loco-ferrere": {
   "adatto_famiglie": "Si",
@@ -3119,7 +3119,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Ferrere - Ferrere (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.875446",
   "loc": "daop_asti_3927851526919484739.jpg",
   "lon": "7.994732",
@@ -3129,9 +3129,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 6,
   "slug": "festa-patronale-di-sant-agostino-pro-loco-ferrere",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-patronale-felizzano": {
   "adatto_famiglie": "Si",
@@ -3213,7 +3213,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "festa-pro-loco-di-moransengo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festa-sull-aia-pianlago-ponzone": {
   "adatto_famiglie": "Si",
@@ -3230,7 +3230,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Pianlago - Ponzone (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5704509",
   "loc": "daop_alessandria_3952142543317285869.jpg",
   "lon": "8.4571589",
@@ -3240,9 +3240,9 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 59,
   "slug": "festa-sull-aia-pianlago-ponzone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "feste-di-san-rocco-castelnuovo-don-bosco": {
   "anchor": "ev-2026-08-15-feste-di-san-rocco-2026",
@@ -3269,7 +3269,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "feste-di-san-rocco-castelnuovo-don-bosco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festeggiamenti-patronali-di-s-rocco-parrocchia-san-dusino-san-michele": {
   "adatto_famiglie": "Si",
@@ -3298,7 +3298,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "festeggiamenti-patronali-di-s-rocco-parrocchia-san-dusino-san-michele",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festeggiamenti-patronali-di-san-rocco-castelnuovo-belbo": {
   "adatto_famiglie": "Si",
@@ -3314,7 +3314,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Forum di Castelnuovo Belbo - Via Maraldi - Castelnuovo Belbo (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8015158",
   "loc": "daop_asti_3960870581482260316.jpg",
   "lon": "8.4121919",
@@ -3324,9 +3324,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 244,
   "slug": "festeggiamenti-patronali-di-san-rocco-castelnuovo-belbo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festeggiamenti-patronali-sant-agostino-ferrere": {
   "adatto_famiglie": "Si",
@@ -3342,7 +3342,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-04",
   "indirizzo": "Sede Pro Loco - Ferrere (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.875446",
   "loc": "daop_asti_3955670155681527181.jpg",
   "lon": "7.994732",
@@ -3352,9 +3352,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 111,
   "slug": "festeggiamenti-patronali-sant-agostino-ferrere",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "festival-cartosio-pro-loco-cartosio": {
   "adatto_famiglie": "Si",
@@ -3400,7 +3400,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Viale dei Platani - Rocchetta Tanaro (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8586714",
   "loc": "daop_asti_3954379825870947543.jpg",
   "lon": "8.3457064",
@@ -3410,9 +3410,9 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 83,
   "slug": "fiera-dei-piccoli-animali-pro-loco-rocchetta-tanar-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "fiera-di-agosto-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -3485,7 +3485,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Villaromagnano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8454469",
   "loc": "daop_alessandria_3956487578405878241.jpg",
   "lon": "8.8952063",
@@ -3495,9 +3495,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 124,
   "slug": "fiera-e-street-food-domenica-6-settembre-villaromagnano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "fiera-nuova-bue-grasso-cassinelle": {
   "adatto_famiglie": "Si",
@@ -3551,7 +3551,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
   "slug": "fiera-regionale-dello-zucchino-de-co-rivalta-bormida",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "food-village-entracque": {
   "adatto_famiglie": "Si",
@@ -3579,7 +3579,7 @@
   "prov": "CN",
   "riga": 228,
   "slug": "food-village-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "food-village-tributo-gigi-d-agostino-entracque": {
   "adatto_famiglie": "Si",
@@ -3607,7 +3607,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "food-village-tributo-gigi-d-agostino-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "food-village-tributo-max-pezzali-e-883-entracque": {
   "adatto_famiglie": "Si",
@@ -3635,7 +3635,7 @@
   "prov": "CN",
   "riga": 209,
   "slug": "food-village-tributo-max-pezzali-e-883-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "fritto-di-pesce-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -3652,7 +3652,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -3662,9 +3662,9 @@
   "ora": "19:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 127,
   "slug": "fritto-di-pesce-pro-loco-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti": {
   "adatto_famiglie": "Si",
@@ -3691,7 +3691,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "giochi-d-acqua-chiosco-parri-cuneo": {
   "adatto_famiglie": "Si",
@@ -3719,7 +3719,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "giochi-d-acqua-chiosco-parri-cuneo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "giochi-per-bambini-e-bolle-di-sapone-giganti-festiona": {
   "adatto_famiglie": "Si",
@@ -3747,7 +3747,7 @@
   "prov": "CN",
   "riga": 137,
   "slug": "giochi-per-bambini-e-bolle-di-sapone-giganti-festiona",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -3763,7 +3763,7 @@
   "eta": "5-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Campo Sportivo Parrocchiale - Villaromagnano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8454469",
   "loc": "daop_alessandria_3954915799598260727.jpg",
   "lon": "8.8952063",
@@ -3773,9 +3773,9 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 77,
   "slug": "giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "giochiamo-a-basket-con-edo-kam-3841-crissolo": {
   "adatto_famiglie": "Si",
@@ -3792,7 +3792,7 @@
   "eta": "5-99 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Pista di pattinaggio Il Cervo di Ghiaccio - Crissolo (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6978198",
   "loc": "eventi_bambini_provincia_cuneo_3956907797677785571.jpg",
   "lon": "7.1587165",
@@ -3802,9 +3802,9 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 168,
   "slug": "giochiamo-a-basket-con-edo-kam-3841-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "giochiamo-insieme-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -3860,7 +3860,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "giornata-bimbi-pro-loco-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "govone-in-festa-sagra-della-lumaca": {
   "adatto_famiglie": "Si",
@@ -3877,7 +3877,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Castello Reale di Govone - Govone (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7932094",
   "loc": "eventi_bambini_provincia_cuneo_3960718757217967543.jpg",
   "lon": "8.1047206",
@@ -3887,9 +3887,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 208,
   "slug": "govone-in-festa-sagra-della-lumaca",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "gran-fritto-misto-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -3906,7 +3906,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -3916,9 +3916,9 @@
   "ora": "20:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 137,
   "slug": "gran-fritto-misto-pro-loco-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "gran-grigliata-con-intrattenimento-musicale-pro-lo-roatto": {
   "adatto_famiglie": "Si",
@@ -3946,7 +3946,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
   "slug": "gran-grigliata-con-intrattenimento-musicale-pro-lo-roatto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "grande-festa-di-ferragosto-pro-loco-crissolo": {
   "adatto_famiglie": "Si",
@@ -3974,7 +3974,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "grande-festa-di-ferragosto-pro-loco-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "green-volley-torneo-2vs2-pgs-roccavione": {
   "anchor": "ev-2026-08-29-green-volley-torneo-2vs2-pgs-roccavione",
@@ -3990,7 +3990,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Roccavione (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.2970414",
   "loc": "eventi_bambini_provincia_cuneo_3962731391750114950.webp",
   "lon": "7.4715263",
@@ -4000,9 +4000,9 @@
   "ora": "",
   "prezzo": "20 euro a coppia",
   "prov": "CN",
-  "riga": 0,
+  "riga": 287,
   "slug": "green-volley-torneo-2vs2-pgs-roccavione",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "grigliata-di-ferragosto-s-m-s-cunico": {
   "adatto_famiglie": "Si",
@@ -4031,7 +4031,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "grigliata-di-ferragosto-s-m-s-cunico",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "guida-per-un-giorno-parco-del-monviso-casteldelfino": {
   "adatto_famiglie": "Si",
@@ -4048,7 +4048,7 @@
   "eta": "6-13 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Centro Visita Alevè - Casteldelfino (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5896382",
   "loc": "eventi_bambini_provincia_cuneo_3956300369171357582.jpg",
   "lon": "7.0703201",
@@ -4058,9 +4058,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 115,
   "slug": "guida-per-un-giorno-parco-del-monviso-casteldelfino",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "gymkana-in-bicicletta-pro-loco-roburent": {
   "adatto_famiglie": "Si",
@@ -4088,7 +4088,7 @@
   "prov": "CN",
   "riga": 244,
   "slug": "gymkana-in-bicicletta-pro-loco-roburent",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -4104,7 +4104,7 @@
   "eta": "4-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Via Girardengo 3 - Novi Ligure (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.76085",
   "loc": "daop_alessandria_3938848443469937906.jpg",
   "lon": "8.789551",
@@ -4114,9 +4114,9 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 18,
   "slug": "i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "il-bastone-della-parola-laboratorio-espressivo-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -4203,7 +4203,7 @@
   "prov": "CN",
   "riga": 190,
   "slug": "il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "il-passerotto-che-scopri-il-mondo-l-arca-di-noe-te-viguzzolo": {
   "adatto_famiglie": "Si",
@@ -4219,7 +4219,7 @@
   "eta": "4-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Parco della Pieve - Viguzzolo (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.905507",
   "loc": "daop_alessandria_3938848443469937906.jpg",
   "lon": "8.9186164",
@@ -4229,9 +4229,9 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 17,
   "slug": "il-passerotto-che-scopri-il-mondo-l-arca-di-noe-te-viguzzolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "il-sapore-delle-emozioni-puraessenza-confreria": {
   "adatto_famiglie": "Si",
@@ -4248,7 +4248,7 @@
   "eta": "4-10 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Via Valle Maira 109 - Confreria (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.3944391",
   "loc": "eventi_bambini_provincia_cuneo_3956918575688453976.jpg",
   "lon": "7.5187257",
@@ -4258,9 +4258,9 @@
   "ora": "",
   "prezzo": "20 euro a incontro (il secondo paga 15 euro)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 156,
   "slug": "il-sapore-delle-emozioni-puraessenza-confreria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "l-energia-magica-della-frutta-puraessenza-confreria": {
   "adatto_famiglie": "Si",
@@ -4277,7 +4277,7 @@
   "eta": "4-10 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Via Valle Maira 109 - Confreria (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.3944391",
   "loc": "eventi_bambini_provincia_cuneo_3956918575688453976.jpg",
   "lon": "7.5187257",
@@ -4287,9 +4287,9 @@
   "ora": "",
   "prezzo": "20 euro a incontro (il secondo paga 15 euro)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 155,
   "slug": "l-energia-magica-della-frutta-puraessenza-confreria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "la-mostra-gli-esplorattori-tortona": {
   "adatto_famiglie": "Si",
@@ -4306,7 +4306,7 @@
   "eta": "7-10 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Corso Alessandria, 39 - 15057 Tortona (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8975",
   "loc": "daop_alessandria_3948230743651728390.jpg",
   "lon": "8.8644",
@@ -4316,9 +4316,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 22,
   "slug": "la-mostra-gli-esplorattori-tortona",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "la-notte-bella-a-garbagna-pro-loco-garbagna": {
   "adatto_famiglie": "Si",
@@ -4334,7 +4334,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Piazza Principe Doria - Garbagna (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7797675",
   "loc": "daop_alessandria_3958656743115909628.jpg",
   "lon": "8.9972855",
@@ -4344,9 +4344,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 184,
   "slug": "la-notte-bella-a-garbagna-pro-loco-garbagna",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "la-scala-del-re-al-castello-di-carru": {
   "adatto_famiglie": "Si",
@@ -4363,7 +4363,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Via Stazione, 10 - Carrù (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.4807314",
   "loc": "eventi_bambini_provincia_cuneo_3956299161899644384.jpg",
   "lon": "7.8511229",
@@ -4373,9 +4373,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 112,
   "slug": "la-scala-del-re-al-castello-di-carru",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "laboratorio-ciao-ciao-estate-sorprese-per-tutti-pr-crissolo": {
   "adatto_famiglie": "Si",
@@ -4402,7 +4402,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "laboratorio-ciao-ciao-estate-sorprese-per-tutti-pr-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "laboratorio-creativo-sulle-emozioni-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -4419,7 +4419,7 @@
   "eta": "6-11 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.833445",
   "loc": "daop_asti_3948603898788931262.jpg",
   "lon": "8.063534",
@@ -4429,9 +4429,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 47,
   "slug": "laboratorio-creativo-sulle-emozioni-san-damiano-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "laboratorio-di-carta-riciclata-il-melograno-societ-mondovi": {
   "adatto_famiglie": "Si",
@@ -4459,7 +4459,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "laboratorio-di-carta-riciclata-il-melograno-societ-mondovi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "laboratorio-di-pittura-per-bambini-e-ragazzi-assoc-borghetto-di-borbera": {
   "adatto_famiglie": "Si",
@@ -4476,7 +4476,7 @@
   "eta": "3-14 anni",
   "first_seen": "2026-08-10",
   "indirizzo": "Via Dietro gli Orti 38 - Borghetto di Borbera (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7308921",
   "loc": "daop_alessandria_3958658719144973392.jpg",
   "lon": "8.9453314",
@@ -4486,9 +4486,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 185,
   "slug": "laboratorio-di-pittura-per-bambini-e-ragazzi-assoc-borghetto-di-borbera",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "laboratorio-scientifico-battesimo-della-sella-scud-entracque": {
   "adatto_famiglie": "Si",
@@ -4505,7 +4505,7 @@
   "eta": "3-10 anni",
   "first_seen": "2026-08-11",
   "indirizzo": "Strada Provinciale S. Lucia, 5 - Entracque (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.1882979",
   "loc": "eventi_bambini_provincia_cuneo_3960721908790288194.jpg",
   "lon": "7.3978447",
@@ -4515,9 +4515,9 @@
   "ora": "10:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 203,
   "slug": "laboratorio-scientifico-battesimo-della-sella-scud-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "le-500-nel-monferrato-fiat-500-club-italia-coordin-montemagno": {
   "adatto_famiglie": "Si",
@@ -4534,7 +4534,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Piazza San Martino - Montemagno (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9830158",
   "loc": "daop_asti_3960871596117855244.jpg",
   "lon": "8.3242714",
@@ -4544,9 +4544,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 0,
+  "riga": 251,
   "slug": "le-500-nel-monferrato-fiat-500-club-italia-coordin-montemagno",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "le-perseidi-incontrano-l-eclissi-di-sole-sinoira-c-castelnuovo-scrivia": {
   "adatto_famiglie": "Si",
@@ -4592,7 +4592,7 @@
   "eta": "7-10 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Corso Alessandria, 39 - 15057 Tortona (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8975",
   "loc": "daop_alessandria_3948230743651728390.jpg",
   "lon": "8.8644",
@@ -4602,9 +4602,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 21,
   "slug": "le-regole-della-mia-citta-gli-esplorattori-tortona",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "letture-ad-alta-voce-estate-di-storie-limone-piemonte": {
   "adatto_famiglie": "Si",
@@ -4632,7 +4632,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "letture-ad-alta-voce-estate-di-storie-limone-piemonte",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "lirica-in-piazza-x-edizione-associazione-stazzanes-stazzano": {
   "adatto_famiglie": "Si",
@@ -4648,7 +4648,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Piazza San Giorgio - Stazzano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7273945",
   "loc": "daop_alessandria_3960874367841299625.jpg",
   "lon": "8.8677285",
@@ -4658,9 +4658,9 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 232,
   "slug": "lirica-in-piazza-x-edizione-associazione-stazzanes-stazzano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "luna-park-castelnuovo-scrivia": {
   "adatto_famiglie": "Si",
@@ -4676,7 +4676,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Zona Scrivia - Castelnuovo Scrivia (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9808509",
   "loc": "daop_alessandria_3960864106401100329.jpg",
   "lon": "8.8811063",
@@ -4686,9 +4686,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 219,
   "slug": "luna-park-castelnuovo-scrivia",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "masca-il-ritorno-della-strega-pro-loco-di-spigno-m-spigno-monferrato": {
   "adatto_famiglie": "Si",
@@ -4704,7 +4704,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Spigno Monferrato (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5196665",
   "loc": "daop_alessandria_3960031744608170565.jpg",
   "lon": "8.3232175",
@@ -4714,9 +4714,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 175,
   "slug": "masca-il-ritorno-della-strega-pro-loco-di-spigno-m-spigno-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "menu-tradizionale-e-fritto-misto-di-pesce-con-jack-morsasco": {
   "adatto_famiglie": "Si",
@@ -4732,7 +4732,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Morsasco (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6665683",
   "loc": "daop_alessandria_3960099185677697890.jpg",
   "lon": "8.5511648",
@@ -4742,9 +4742,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 180,
   "slug": "menu-tradizionale-e-fritto-misto-di-pesce-con-jack-morsasco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "messa-solenne-e-giochi-popolari-pro-loco-sant-alba-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -4760,7 +4760,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -4770,9 +4770,9 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 134,
   "slug": "messa-solenne-e-giochi-popolari-pro-loco-sant-alba-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "mongardino-agosto": {
   "adatto_famiglie": "Si",
@@ -4788,7 +4788,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Circolo ANSPI - Mongardino (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.847026",
   "loc": "daop_asti_3955068193458588503.jpg",
   "lon": "8.214164",
@@ -4798,9 +4798,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 104,
   "slug": "mongardino-agosto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "morsaschiadi-pro-loco-morsasco": {
   "adatto_famiglie": "Si",
@@ -4816,7 +4816,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Morsasco (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6665683",
   "loc": "daop_alessandria_3960099185677697890.jpg",
   "lon": "8.5511648",
@@ -4826,9 +4826,9 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 179,
   "slug": "morsaschiadi-pro-loco-morsasco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -4845,7 +4845,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Viale dei Campionissimi - Novi Ligure (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7554907",
   "loc": "daop_alessandria_3945956994936142885.jpg",
   "lon": "8.7758364",
@@ -4855,9 +4855,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 33,
   "slug": "mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -4873,7 +4873,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Viale alberato di Baluardo Palestro - San Damiano d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.833445",
   "loc": "daop_asti_3953380617483947119.jpg",
   "lon": "8.063534",
@@ -4883,9 +4883,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 72,
   "slug": "mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria": {
   "adatto_famiglie": "Si",
@@ -4902,7 +4902,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Complesso Conventuale di San Francesco - Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9110327",
   "loc": "daop_alessandria_3960098760660391404.jpg",
   "lon": "8.6148186",
@@ -4912,9 +4912,9 @@
   "ora": "",
   "prezzo": "Biglietto intero 6 euro; gratuito per disabili con accompagnatore e bambini fino a 11 anni",
   "prov": "AL",
-  "riga": 0,
+  "riga": 172,
   "slug": "musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria": {
   "adatto_famiglie": "Si",
@@ -4930,7 +4930,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Via Machiavelli 13, Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9110327",
   "loc": "daop_alessandria_3960098760660391404.jpg",
   "lon": "8.6148186",
@@ -4940,9 +4940,9 @@
   "ora": "",
   "prezzo": "Biglietto intero 6 euro, ridotto 3,50 euro (dal 22/08 solo Stanze di Artù: ridotto 3,50 euro)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 173,
   "slug": "musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "nizza-e-sport-pro-loco-nizza-monferrato": {
   "adatto_famiglie": "Si",
@@ -4958,7 +4958,7 @@
   "eta": "4-16 anni",
   "first_seen": "2026-08-10",
   "indirizzo": "Oratorio Don Bosco - Nizza Monferrato (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7733095",
   "loc": "daop_asti_3958340919195508576.jpg",
   "lon": "8.353709",
@@ -4968,9 +4968,9 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 193,
   "slug": "nizza-e-sport-pro-loco-nizza-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "ocr-power-camp-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -5015,7 +5015,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Cunico (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.03995",
   "loc": "daop_asti_3960867403248255449.jpg",
   "lon": "8.096731",
@@ -5025,9 +5025,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 248,
   "slug": "orchestra-spettacolo-luigi-gallia-pro-loco-cunico",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "palio-baldichieri-castell-alfero": {
   "adatto_famiglie": "Si",
@@ -5044,7 +5044,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Centro Equestre Capricorno - Castell'Alfero (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.981227",
   "loc": "daop_asti_3954380761100612941.jpg",
   "lon": "8.208004",
@@ -5054,9 +5054,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 0,
+  "riga": 105,
   "slug": "palio-baldichieri-castell-alfero",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "palio-di-asti-sabato-05-settembre": {
   "adatto_famiglie": "Si",
@@ -5073,7 +5073,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Piazza Cattedrale - Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.900311",
   "loc": "daop_asti_3954381277260028092.jpg",
   "lon": "8.197219",
@@ -5083,9 +5083,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 106,
   "slug": "palio-di-asti-sabato-05-settembre",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "parco-scenico-zenzero-pontechianale": {
   "adatto_famiglie": "Si",
@@ -5112,7 +5112,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "slug": "parco-scenico-zenzero-pontechianale",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "passeggi-amo-rocchetta-pro-loco-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -5139,7 +5139,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
   "slug": "passeggi-amo-rocchetta-pro-loco-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "passeggiamo-rocchetta-passeggiata-enogastronomica-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -5167,7 +5167,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "passeggiamo-rocchetta-passeggiata-enogastronomica-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "passeggiata-a-cavallo-con-axel-circolo-la-torre-albaretto": {
   "adatto_famiglie": "Si",
@@ -5183,7 +5183,7 @@
   "eta": "0-10 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Giardinetto a fianco dell'Asilo, di fronte al Circolo La Torre - Albaretto (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5980205",
   "loc": "eventi_bambini_provincia_cuneo_3957042268089978848.jpg",
   "lon": "8.0636755",
@@ -5193,9 +5193,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 126,
   "slug": "passeggiata-a-cavallo-con-axel-circolo-la-torre-albaretto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "percorso-apericena-e-street-food-pro-loco-sant-alb-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -5211,7 +5211,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -5221,9 +5221,9 @@
   "ora": "18:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 132,
   "slug": "percorso-apericena-e-street-food-pro-loco-sant-alb-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "pesci-di-ferragosto-in-piscina-informalmente-a-s-d-vesime": {
   "adatto_famiglie": "Si",
@@ -5252,7 +5252,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "pesci-di-ferragosto-in-piscina-informalmente-a-s-d-vesime",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "pigiama-party-pro-loco-mongardino": {
   "adatto_famiglie": "Si",
@@ -5268,7 +5268,7 @@
   "eta": "0-10 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Piazza della Chiesa - Mongardino (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8492328",
   "loc": "daop_asti_3953380375950154874.jpg",
   "lon": "8.2184747",
@@ -5278,9 +5278,9 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 71,
   "slug": "pigiama-party-pro-loco-mongardino",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "piru-e-il-cavaliere-di-mezzotacco-compagnia-walter-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -5296,7 +5296,7 @@
   "eta": "4-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Corso Italia 8 - Villaromagnano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8454469",
   "loc": "daop_alessandria_3938848443469937906.jpg",
   "lon": "8.8952063",
@@ -5306,9 +5306,9 @@
   "ora": "17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 16,
   "slug": "piru-e-il-cavaliere-di-mezzotacco-compagnia-walter-villaromagnano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "pizza-e-non-solo-con-proiezione-film-nuova-pro-loc-strevi": {
   "anchor": "ev-2026-08-22-pizza-e-non-solo-con-proiezione-film-nuova-pro-loc",
@@ -5324,7 +5324,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-14",
   "indirizzo": "Piazza del paese - Strevi (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.698146",
   "loc": "daop_alessandria_3963520392629051459.webp",
   "lon": "8.521847",
@@ -5334,9 +5334,9 @@
   "ora": "21:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 0,
+  "riga": 292,
   "slug": "pizza-e-non-solo-con-proiezione-film-nuova-pro-loc-strevi",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia": {
   "adatto_famiglie": "Si",
@@ -5352,7 +5352,7 @@
   "eta": "3-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Serravalle Designer Outlet - Serravalle Scrivia (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7350776",
   "loc": "daop_alessandria_3935310113977644727.jpg",
   "lon": "8.8372996",
@@ -5362,9 +5362,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 13,
   "slug": "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "play-land-kids-summer-events-ass-jim-pet-serravalle-scrivia": {
   "adatto_famiglie": "Si",
@@ -5380,7 +5380,7 @@
   "eta": "3-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Serravalle Designer Outlet - Serravalle Scrivia (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7350776",
   "loc": "daop_alessandria_3935310113977644727.jpg",
   "lon": "8.8372996",
@@ -5390,9 +5390,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 15,
   "slug": "play-land-kids-summer-events-ass-jim-pet-serravalle-scrivia",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "play-land-kids-summer-events-ass-movimente-serravalle-scrivia": {
   "adatto_famiglie": "Si",
@@ -5408,7 +5408,7 @@
   "eta": "3-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Serravalle Designer Outlet - Serravalle Scrivia (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7350776",
   "loc": "daop_alessandria_3935310113977644727.jpg",
   "lon": "8.8372996",
@@ -5418,9 +5418,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 14,
   "slug": "play-land-kids-summer-events-ass-movimente-serravalle-scrivia",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "pompieropoli-buttigliera-buttigliera-d-asti": {
   "adatto_famiglie": "Si",
@@ -5436,7 +5436,7 @@
   "eta": "3-12 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Buttigliera d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.0226378",
   "loc": "daop_asti_3929267926326220594.jpg",
   "lon": "7.9507994",
@@ -5446,9 +5446,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 10,
   "slug": "pompieropoli-buttigliera-buttigliera-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "porchetta-e-ballo-con-orchestra-borsa-dei-castelli-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -5465,7 +5465,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -5475,9 +5475,9 @@
   "ora": "19:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 135,
   "slug": "porchetta-e-ballo-con-orchestra-borsa-dei-castelli-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "pranzo-sociale-piozzo": {
   "adatto_famiglie": "Si",
@@ -5494,7 +5494,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Ristorante Perlage - Piozzo (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5190599",
   "loc": "eventi_bambini_provincia_cuneo_3960740209430538571.jpg",
   "lon": "7.882698",
@@ -5504,9 +5504,9 @@
   "ora": "12:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 210,
   "slug": "pranzo-sociale-piozzo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "prato-nevoso-c-ho-talent-prato-nevoso-village": {
   "adatto_famiglie": "Si",
@@ -5535,7 +5535,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "prato-nevoso-c-ho-talent-prato-nevoso-village",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo": {
   "adatto_famiglie": "Si",
@@ -5563,7 +5563,7 @@
   "prezzo": "Gratuito (pranzo offerto a chi porta il proprio mezzo)",
   "prov": "AT",
   "slug": "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "programma-festeggiamenti-pro-loco-san-benigno": {
   "adatto_famiglie": "Si",
@@ -5579,7 +5579,7 @@
   "eta": "3-10 anni",
   "first_seen": "2026-08-11",
   "indirizzo": "San Benigno (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.4599824",
   "loc": "eventi_bambini_provincia_cuneo_3960735221589231225.jpg",
   "lon": "7.536598",
@@ -5589,9 +5589,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 213,
   "slug": "programma-festeggiamenti-pro-loco-san-benigno",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "proiezione-le-colline-del-mare-comune-di-santo-ste-vesime": {
   "adatto_famiglie": "Si",
@@ -5619,7 +5619,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "proiezione-le-colline-del-mare-comune-di-santo-ste-vesime",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "quello-che-non-vedo-barbagianni-editore-sarvego-fe-carrega-ligure": {
   "anchor": "ev-2026-08-22-quello-che-non-vedo-barbagianni-editore-sarvego-fe",
@@ -5635,7 +5635,7 @@
   "eta": "3-10 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Carrega Ligure - fraz. Magioncalda (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6190465",
   "loc": "daop_alessandria_3925083221429127351.jpg",
   "lon": "9.1756369",
@@ -5645,9 +5645,9 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 4,
   "slug": "quello-che-non-vedo-barbagianni-editore-sarvego-fe-carrega-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato": {
   "adatto_famiglie": "Si",
@@ -5664,7 +5664,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Piazza IV Novembre (Scuole Elementari) - Spigno Monferrato (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5196665",
   "loc": "daop_alessandria_3953387918174716847.jpg",
   "lon": "8.3232175",
@@ -5674,9 +5674,9 @@
   "ora": "",
   "prezzo": "€ 40,00 a veicolo + € 25,00 accompagnatore",
   "prov": "AL",
-  "riga": 0,
+  "riga": 69,
   "slug": "raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "rassegna-gastronomica-sagra-del-guanciotto-d-asino-montiglio-monferrato": {
   "adatto_famiglie": "Si",
@@ -5703,7 +5703,7 @@
   "prezzo": "Gratuito (giostra a 1,00 €)",
   "prov": "AT",
   "slug": "rassegna-gastronomica-sagra-del-guanciotto-d-asino-montiglio-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "raviolata-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -5720,7 +5720,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -5730,9 +5730,9 @@
   "ora": "20:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 129,
   "slug": "raviolata-pro-loco-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -5749,7 +5749,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Villaromagnano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8454469",
   "loc": "daop_alessandria_3956487578405878241.jpg",
   "lon": "8.8952063",
@@ -5759,9 +5759,9 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 123,
   "slug": "s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-degli-gnocchi-al-pesto-circolo-ricreativo-en-voltaggio": {
   "anchor": "ev-2026-08-14-sagra-degli-gnocchi-al-pesto-circolo-ricreativo-en",
@@ -5788,7 +5788,7 @@
   "prov": "AL",
   "riga": 0,
   "slug": "sagra-degli-gnocchi-al-pesto-circolo-ricreativo-en-voltaggio",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-dei-ceci-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -5804,7 +5804,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Centro Sportivo della Merella - Novi Ligure (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.76085",
   "loc": "daop_alessandria_3940129394756432014.jpg",
   "lon": "8.789551",
@@ -5814,9 +5814,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 20,
   "slug": "sagra-dei-ceci-novi-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-dei-salamini-d-asino-polisportiva-m-denegri-castelferro": {
   "anchor": "ev-2026-08-13-49a-sagra-dei-salamini-d-asino-polisportiva-m-dene",
@@ -5832,7 +5832,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Castelferro - Castelferro (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7572636",
   "loc": "daop_alessandria_3961385172437437689.webp",
   "lon": "8.6193298",
@@ -5842,9 +5842,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 254,
   "slug": "sagra-dei-salamini-d-asino-polisportiva-m-denegri-castelferro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-del-bollito-misto-con-bagnet-mantovana": {
   "adatto_famiglie": "Si",
@@ -5916,7 +5916,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Pasturana (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7500018",
   "loc": "daop_alessandria_3960094598099029873.jpg",
   "lon": "8.7457524",
@@ -5926,9 +5926,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 186,
   "slug": "sagra-del-corzetto-settembre-pasturanese-pasturana",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-del-fritto-misto-e-non-solo-sezzadio": {
   "anchor": "ev-2026-08-27-32a-sagra-del-fritto-misto-e-non-solo",
@@ -5943,7 +5943,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Piazza Libertà - Sezzadio (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7855524",
   "loc": "daop_alessandria_3962106145862604457.webp",
   "lon": "8.5721321",
@@ -5953,9 +5953,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 265,
   "slug": "sagra-del-fritto-misto-e-non-solo-sezzadio",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv": {
   "adatto_famiglie": "Si",
@@ -5971,7 +5971,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Calosso (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.739837",
   "loc": "daop_asti_3932273221679851436.jpg",
   "lon": "8.2275011",
@@ -5981,9 +5981,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 11,
   "slug": "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-del-raviolo-al-sugo-di-birra-pratolungo": {
   "adatto_famiglie": "Si",
@@ -6000,7 +6000,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Pratolungo - Pratolungo (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.3000262",
   "loc": "daop_alessandria_3958371983957297881.jpg",
   "lon": "7.15648",
@@ -6010,9 +6010,9 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 176,
   "slug": "sagra-del-raviolo-al-sugo-di-birra-pratolungo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-dell-agnolotto-e-del-bollito-misto-con-alex-govone": {
   "adatto_famiglie": "Si",
@@ -6028,7 +6028,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Canove di Govone - Govone (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7932094",
   "loc": "eventi_bambini_provincia_cuneo_3957806897158219869.jpg",
   "lon": "8.1047206",
@@ -6038,9 +6038,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 162,
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-con-alex-govone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-dell-agnolotto-e-del-bollito-misto-con-dj-de-govone": {
   "adatto_famiglie": "Si",
@@ -6056,7 +6056,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Canove di Govone - Govone (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7932094",
   "loc": "eventi_bambini_provincia_cuneo_3957806897158219869.jpg",
   "lon": "8.1047206",
@@ -6066,9 +6066,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 163,
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-con-dj-de-govone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-dell-agnolotto-e-del-bollito-misto-pro-loco-govone": {
   "adatto_famiglie": "Si",
@@ -6096,7 +6096,7 @@
   "prov": "CN",
   "riga": 223,
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-pro-loco-govone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona": {
   "adatto_famiglie": "Si",
@@ -6112,7 +6112,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Grondona (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6906561",
   "loc": "daop_alessandria_3960639199054550961.jpg",
   "lon": "8.9567074",
@@ -6122,9 +6122,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 216,
   "slug": "sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-della-focaccia-al-formaggio-e-delle-trofie-a-casal-cermelli": {
   "anchor": "ev-2026-08-28-22a-sagra-della-focaccia-al-formaggio-e-delle-trof",
@@ -6140,7 +6140,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-13",
   "indirizzo": "Piazza San Carlo - Casal Cermelli (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8352031",
   "loc": "daop_alessandria_3962814434684001751.webp",
   "lon": "8.6256506",
@@ -6150,9 +6150,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 266,
   "slug": "sagra-della-focaccia-al-formaggio-e-delle-trofie-a-casal-cermelli",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-della-fugassetta-cimaferle": {
   "adatto_famiglie": "Si",
@@ -6195,7 +6195,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Parco Olmi - Sant'Albano Stura (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5069356",
   "loc": "eventi_bambini_provincia_cuneo_3957758992015771986.jpg",
   "lon": "7.7237481",
@@ -6205,9 +6205,9 @@
   "ora": "22:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 157,
   "slug": "sagra-della-soma-d-aj-gruppo-alpini-sant-albano-st-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-della-trippa-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -6223,7 +6223,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
   "indirizzo": "Centro Sportivo della Merella - Novi Ligure (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.76085",
   "loc": "daop_alessandria_3940129394756432014.jpg",
   "lon": "8.789551",
@@ -6233,9 +6233,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 19,
   "slug": "sagra-della-trippa-novi-ligure",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-della-zucca-castelletto-monferrato": {
   "adatto_famiglie": "Si",
@@ -6251,7 +6251,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Piazza V. Veneto - Castelletto Monferrato (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9715665",
   "loc": "daop_alessandria_3958372171139015466.jpg",
   "lon": "8.5564681",
@@ -6261,9 +6261,9 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 183,
   "slug": "sagra-della-zucca-castelletto-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-delle-frittelle-arquata-scrivia": {
   "adatto_famiglie": "Si",
@@ -6334,7 +6334,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Bricco de Faule - Mombarcaro (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.467637",
   "loc": "eventi_bambini_provincia_cuneo_3960725228045052749.jpg",
   "lon": "8.088242",
@@ -6344,9 +6344,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 212,
   "slug": "sagra-dello-gnocco-festa-patronale-mombarcaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-dello-stufato-d-asino-calliano-monferrato": {
   "adatto_famiglie": "Si",
@@ -6362,7 +6362,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Piazza Marconi - Calliano Monferrato (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.0077261",
   "loc": "daop_asti_3960872998466501310.jpg",
   "lon": "8.2563259",
@@ -6372,9 +6372,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 253,
   "slug": "sagra-dello-stufato-d-asino-calliano-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-di-san-rocco-con-il-superagnolotto-tassarolo": {
   "adatto_famiglie": "Si",
@@ -6390,7 +6390,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Campo Sportivo di Tassarolo - Tassarolo (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.728549",
   "loc": "daop_alessandria_3960863751244282653.jpg",
   "lon": "8.771552",
@@ -6400,9 +6400,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 215,
   "slug": "sagra-di-san-rocco-con-il-superagnolotto-tassarolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sagra-gastronomica-con-polenta-e-cinghiale-con-giu-govone": {
   "adatto_famiglie": "Si",
@@ -6418,7 +6418,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Canove di Govone - Govone (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7932094",
   "loc": "eventi_bambini_provincia_cuneo_3957806897158219869.jpg",
   "lon": "8.1047206",
@@ -6428,9 +6428,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 164,
   "slug": "sagra-gastronomica-con-polenta-e-cinghiale-con-giu-govone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "san-bernardo-brossasco": {
   "adatto_famiglie": "Si",
@@ -6447,7 +6447,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Cappella San Bernardo - Brossasco (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6112926",
   "loc": "eventi_bambini_provincia_cuneo_3961252182045394740.jpg",
   "lon": "7.2841315",
@@ -6457,9 +6457,9 @@
   "ora": "",
   "prezzo": "15 euro",
   "prov": "CN",
-  "riga": 0,
+  "riga": 211,
   "slug": "san-bernardo-brossasco",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "san-fermo-pro-loco-roccaforte-ligure": {
   "adatto_famiglie": "Si",
@@ -6516,7 +6516,7 @@
   "prov": "CN",
   "riga": 134,
   "slug": "san-lorenzo-celso-dogliani",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "san-lorenzo-pro-loco-di-scurzolengo": {
   "adatto_famiglie": "Si",
@@ -6543,7 +6543,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "san-lorenzo-pro-loco-di-scurzolengo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "santa-messa-nella-chiesa-di-san-rocco-pro-loco-roc-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -6560,7 +6560,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-03",
   "indirizzo": "Chiesa di San Rocco - Rocchetta Tanaro (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8586714",
   "loc": "daop_asti_3954379825870947543.jpg",
   "lon": "8.3457064",
@@ -6570,9 +6570,9 @@
   "ora": "9:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 82,
   "slug": "santa-messa-nella-chiesa-di-san-rocco-pro-loco-roc-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "santa-messa-solenne-di-ferragosto-con-processione-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -6601,7 +6601,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "santa-messa-solenne-di-ferragosto-con-processione-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "santo-rosario-e-santa-messa-pro-loco-rocchetta-tan-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -6629,7 +6629,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "santo-rosario-e-santa-messa-pro-loco-rocchetta-tan-rocchetta-tanaro",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "saturday-open-ferragosto-in-citta-acqui-terme": {
   "adatto_famiglie": "Si",
@@ -6658,7 +6658,7 @@
   "prov": "AL",
   "riga": 0,
   "slug": "saturday-open-ferragosto-in-citta-acqui-terme",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sbem-festival-sport-benessere-e-movimento-acm-even-alessandria": {
   "adatto_famiglie": "Si",
@@ -6674,7 +6674,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Cittadella di Alessandria - Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.9165",
   "loc": "daop_alessandria_3960874066723880927.jpg",
   "lon": "8.598",
@@ -6684,9 +6684,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 233,
   "slug": "sbem-festival-sport-benessere-e-movimento-acm-even-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "scopri-gli-amici-alpaca-cuneo": {
   "adatto_famiglie": "Si",
@@ -6703,7 +6703,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Via Genova 140 - Cuneo, Roata Canale (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.389633",
   "loc": "eventi_bambini_provincia_cuneo_3957890673529449300.jpg",
   "lon": "7.5479007",
@@ -6713,9 +6713,9 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 195,
   "slug": "scopri-gli-amici-alpaca-cuneo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "scopri-natura-valderia": {
   "anchor": "ev-2026-08-17-scopri-natura",
@@ -6731,7 +6731,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-14",
   "indirizzo": "Giardino Botanico Valderia - Valderia (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.2035618",
   "loc": "eventi_bambini_provincia_cuneo_3961975974810626639.webp",
   "lon": "7.2681835",
@@ -6741,9 +6741,9 @@
   "ora": "",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 296,
   "slug": "scopri-natura-valderia",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sentimental-value-alessandria": {
   "adatto_famiglie": "Si",
@@ -6788,7 +6788,7 @@
   "eta": "2-5 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Corso Alessandria, 39 - Tortona (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.89666",
   "loc": "daop_alessandria_3928097704112146022.jpg",
   "lon": "8.8641282",
@@ -6798,9 +6798,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 9,
   "slug": "serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "serata-gastronomica-con-dj-set-sabato-29-agosto-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -6817,7 +6817,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "S.M.S. Villaromagnano - Villaromagnano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8454469",
   "loc": "daop_alessandria_3956487578405878241.jpg",
   "lon": "8.8952063",
@@ -6827,9 +6827,9 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 119,
   "slug": "serata-gastronomica-con-dj-set-sabato-29-agosto-villaromagnano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "serata-hamburger-patatine-e-birra-con-max-mania-88-govone": {
   "adatto_famiglie": "Si",
@@ -6845,7 +6845,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Canove di Govone - Govone (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7932094",
   "loc": "eventi_bambini_provincia_cuneo_3957806897158219869.jpg",
   "lon": "8.1047206",
@@ -6855,9 +6855,9 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 166,
   "slug": "serata-hamburger-patatine-e-birra-con-max-mania-88-govone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "serata-hamburger-patatine-e-birra-pro-loco-canove-govone": {
   "adatto_famiglie": "Si",
@@ -6885,7 +6885,7 @@
   "prov": "CN",
   "riga": 226,
   "slug": "serata-hamburger-patatine-e-birra-pro-loco-canove-govone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "serata-latina-salsabor-pro-loco-cunico": {
   "adatto_famiglie": "Si",
@@ -6901,7 +6901,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-11",
   "indirizzo": "Cunico (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "45.03995",
   "loc": "daop_asti_3960867403248255449.jpg",
   "lon": "8.096731",
@@ -6911,9 +6911,9 @@
   "ora": "19:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 246,
   "slug": "serata-latina-salsabor-pro-loco-cunico",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "silvanoincontrada-silvano-d-orba": {
   "anchor": "ev-2026-08-16-silvanoincontrada",
@@ -6928,7 +6928,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-14",
   "indirizzo": "Peso Pubblico - Silvano d'Orba (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6869148",
   "loc": "daop_alessandria_3963643243801070806.webp",
   "lon": "8.6749599",
@@ -6938,9 +6938,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 293,
   "slug": "silvanoincontrada-silvano-d-orba",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "spinetta-in-festa-spinetta-marengo": {
   "adatto_famiglie": "Si",
@@ -6956,7 +6956,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Piazza Barrera - Spinetta Marengo (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8861753",
   "loc": "daop_alessandria_3957744635348115982.jpg",
   "lon": "8.6829041",
@@ -6966,9 +6966,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 152,
   "slug": "spinetta-in-festa-spinetta-marengo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "splash-party-il-ritorno-pro-loco-voltaggio-pazzoan": {
   "adatto_famiglie": "Si",
@@ -6997,7 +6997,7 @@
   "prov": "AL",
   "riga": 5,
   "slug": "splash-party-il-ritorno-pro-loco-voltaggio-pazzoan",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "stratortona-croce-rossa-italiana-comitato-di-torto": {
   "adatto_famiglie": "Si",
@@ -7013,7 +7013,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-09",
   "indirizzo": "Piazza Malaspina - Tortona (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8945992",
   "loc": "daop_alessandria_3955059525435840055.jpg",
   "lon": "8.8632072",
@@ -7023,9 +7023,9 @@
   "ora": "19:00",
   "prezzo": "10 euro",
   "prov": "AL",
-  "riga": 0,
+  "riga": 78,
   "slug": "stratortona-croce-rossa-italiana-comitato-di-torto",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "street-food-showlab-con-nico-franz-e-presentazione-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -7042,7 +7042,7 @@
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-06",
   "indirizzo": "Villaromagnano (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.8454469",
   "loc": "daop_alessandria_3956487578405878241.jpg",
   "lon": "8.8952063",
@@ -7052,9 +7052,9 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 125,
   "slug": "street-food-showlab-con-nico-franz-e-presentazione-villaromagnano",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "sulla-pista-dello-skills-bike-park-attivita-guidat-frassino": {
   "adatto_famiglie": "Si",
@@ -7083,7 +7083,7 @@
   "prov": "CN",
   "riga": 173,
   "slug": "sulla-pista-dello-skills-bike-park-attivita-guidat-frassino",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "tennis-da-tavolo-e-basket-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -7100,7 +7100,7 @@
   "eta": "6-11 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Impianti Sportivi, Palestra Medie e Polivalente - San Damiano d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.833445",
   "loc": "daop_asti_3948603898788931262.jpg",
   "lon": "8.063534",
@@ -7110,9 +7110,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 49,
   "slug": "tennis-da-tavolo-e-basket-san-damiano-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "ti-racconto-una-storia-letture-per-bambini-bibliot-ormea": {
   "adatto_famiglie": "Si",
@@ -7140,7 +7140,7 @@
   "prov": "CN",
   "riga": 201,
   "slug": "ti-racconto-una-storia-letture-per-bambini-bibliot-ormea",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "tigliole-in-festa": {
   "adatto_famiglie": "Si",
@@ -7167,7 +7167,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "tigliole-in-festa",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "tombola-sotto-le-stelle-pro-loco-canove-govone": {
   "adatto_famiglie": "Si",
@@ -7183,7 +7183,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-07",
   "indirizzo": "Canove di Govone - Govone (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.7932094",
   "loc": "eventi_bambini_provincia_cuneo_3957806897158219869.jpg",
   "lon": "8.1047206",
@@ -7193,9 +7193,9 @@
   "ora": "21:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 165,
   "slug": "tombola-sotto-le-stelle-pro-loco-canove-govone",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "tradizionale-fiera-di-san-chiaffredo-pro-loco-cris-crissolo": {
   "adatto_famiglie": "Si",
@@ -7211,7 +7211,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-10",
   "indirizzo": "Centro e Area Pedonale - Crissolo (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6978198",
   "loc": "eventi_bambini_provincia_cuneo_3956899657777959155.jpg",
   "lon": "7.1587165",
@@ -7221,9 +7221,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 0,
+  "riga": 191,
   "slug": "tradizionale-fiera-di-san-chiaffredo-pro-loco-cris-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "tres-jorns-d-crisol-crissolo": {
   "adatto_famiglie": "Si",
@@ -7252,7 +7252,7 @@
   "prov": "CN",
   "riga": 206,
   "slug": "tres-jorns-d-crisol-crissolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "tu-che-animale-sei-montagne-del-mare-entraque": {
   "anchor": "ev-2026-08-19-tu-che-animale-sei-montagne-del-mare",
@@ -7268,7 +7268,7 @@
   "eta": "3-10 anni",
   "first_seen": "2026-08-13",
   "indirizzo": "Centro Visita Uomini e Lupi - Entraque (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.2505145",
   "loc": "eventi_bambini_provincia_cuneo_3961976111503008317.webp",
   "lon": "7.3851235",
@@ -7278,9 +7278,9 @@
   "ora": "14:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 285,
   "slug": "tu-che-animale-sei-montagne-del-mare-entraque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "un-bel-giorno-alessandria": {
   "adatto_famiglie": "Si",
@@ -7296,7 +7296,7 @@
   "eta": "Dai 14 anni (film per adulti)",
   "first_seen": "2026-08-12",
   "indirizzo": "Piazza Campora - Alessandria (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.894081",
   "loc": "daop_alessandria_3951417280937662935.jpg",
   "lon": "8.5848671",
@@ -7306,9 +7306,9 @@
   "ora": "21:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 55,
   "slug": "un-bel-giorno-alessandria",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "un-circo-in-via-pero-laboratorio-teatrale-ed-espre-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -7325,7 +7325,7 @@
   "eta": "6-11 anni",
   "first_seen": "2026-08-09",
   "indirizzo": "Via Pero - San Damiano d'Asti (AT)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.833445",
   "loc": "daop_asti_3948603898788931262.jpg",
   "lon": "8.063534",
@@ -7335,9 +7335,9 @@
   "ora": "",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 0,
+  "riga": 48,
   "slug": "un-circo-in-via-pero-laboratorio-teatrale-ed-espre-san-damiano-d-asti",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "una-giornata-tra-gusto-e-divertimento-pro-loco-vil-verzuolo": {
   "adatto_famiglie": "Si",
@@ -7365,7 +7365,7 @@
   "prezzo": "Pranzo 20 euro (ingresso visite da verificare)",
   "prov": "CN",
   "slug": "una-giornata-tra-gusto-e-divertimento-pro-loco-vil-verzuolo",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "una-montagna-di-scienza-marshmallow-challenge-entracque": {
   "adatto_famiglie": "Si",
@@ -7393,7 +7393,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "una-montagna-di-scienza-marshmallow-challenge-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "una-montagna-di-scienza-matematica-intorno-a-noi-entracque": {
   "adatto_famiglie": "Si",
@@ -7421,7 +7421,7 @@
   "prov": "CN",
   "riga": 226,
   "slug": "una-montagna-di-scienza-matematica-intorno-a-noi-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "una-montagna-di-scienza-sfida-in-natura-entracque": {
   "adatto_famiglie": "Si",
@@ -7449,7 +7449,7 @@
   "prov": "CN",
   "riga": 207,
   "slug": "una-montagna-di-scienza-sfida-in-natura-entracque",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "una-storia-tira-l-altra-seguendo-il-richiamo-del-b-casteldelfino": {
   "adatto_famiglie": "Si",
@@ -7478,7 +7478,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "una-storia-tira-l-altra-seguendo-il-richiamo-del-b-casteldelfino",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "uno-scudo-o-un-paio-di-ali-laboratori-creativi-esp-sampeyre": {
   "anchor": "ev-2026-08-20-uno-scudo-o-un-paio-di-ali-laboratori-creativi-esp",
@@ -7494,7 +7494,7 @@
   "eta": "3-10 anni",
   "first_seen": "2026-08-13",
   "indirizzo": "Via Roma 27 - Sampeyre (CN)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.5790836",
   "loc": "eventi_bambini_provincia_cuneo_3962719255173531985.webp",
   "lon": "7.18997",
@@ -7504,9 +7504,9 @@
   "ora": "",
   "prezzo": "25 euro (20 euro per fratelli/sorelle)",
   "prov": "CN",
-  "riga": 0,
+  "riga": 286,
   "slug": "uno-scudo-o-un-paio-di-ali-laboratori-creativi-esp-sampeyre",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  },
  "vivi-pozzolo-estate-nella-corte-del-castello-pozzolo-formigaro": {
   "anchor": "ev-2026-07-13-vivi-pozzolo-estate-nella-corte-del-castello",
@@ -7547,7 +7547,7 @@
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-14",
   "indirizzo": "Campo Sportivo - Belforte Monferrato (AL)",
-  "last_seen": "2026-08-15",
+  "last_seen": "2026-08-16",
   "lat": "44.6245869",
   "loc": "daop_alessandria_3962951820938439133.webp",
   "lon": "8.6622018",
@@ -7557,8 +7557,8 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 0,
+  "riga": 295,
   "slug": "xxvii-sagra-delle-trofie-al-pesto-belforte-monferrato",
-  "updated": "2026-08-15"
+  "updated": "2026-08-16"
  }
 }
