@@ -136,6 +136,36 @@
       if (img) invia('click_locandina', img.getAttribute('src') || '');
     }, true);
 
+    /* "Vicino a me". Il filtro per distanza (daop-vicino.js) non chiama gtag
+       da solo: emette un evento DOM e lo raccogliamo qui, cosi' gtag resta
+       scritto in un posto solo - la stessa regola per cui cookie-consent.js e'
+       l'unico posto in cui GA4 si inizializza.
+
+       NON si manda mai la posizione. Partono due cose sole: COME e' stato
+       scelto il centro (gps, comune, gradino) e QUANTI chilometri. Le
+       coordinate restano nel browser, che e' anche quello che la pagina
+       promette a chi la usa: mandarle a GA4 renderebbe quella riga una bugia.
+
+       A cosa serve misurarlo: a decidere se la funzione vale su altre pagine,
+       e soprattutto se chi la usa poi apre una scheda. Il resto del percorso
+       si legge gia' con i page_view. */
+    document.addEventListener('daop:vicino', function (ev) {
+      var d = (ev && ev.detail) || {};
+      var p = { page_path: percorso() };
+      if (d.metodo) p.metodo_posizione = d.metodo;
+      if (d.raggio) p.raggio_km = d.raggio;
+      for (var k in CTX) { if (CTX[k]) p[k] = CTX[k]; }
+      // Stesso antirimbalzo dei clic: chi prova tre gradini di fila e' una
+      // persona che sta scegliendo, non tre eventi.
+      var chiave = 'vicino|' + d.metodo + '|' + d.raggio;
+      var ora = Date.now();
+      if (chiave === ultimo.chiave && ora - ultimo.quando < 800) return;
+      ultimo.chiave = chiave;
+      ultimo.quando = ora;
+      if (!window.daopConsensoAnalytics || typeof gtag !== 'function') return;
+      gtag('event', 'vicino_a_me', p);
+    });
+
     /* Profondita' di scroll: evento a 25/50/75/100%. Su una scheda evento
        dice se sono arrivati in fondo, dove stanno la firma e i link alle
        landing. E' voluto e NON e' un doppione dell'evento automatico

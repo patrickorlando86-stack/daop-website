@@ -86,18 +86,35 @@ mese è l'**8 agosto**, con 603 clic da Google: GA4 quel giorno ha visto ~30
 utenti. Se il salto del 12-13 fosse crescita reale, il massimo sarebbe stato
 l'8.
 
-| giorno | clic da Google | utenti GA4 |
-|---|---|---|
-| 8 ago | 603 (il picco vero) | ~30 |
-| 11 ago | 270 | ~30 |
-| 12 ago (fix alle 14:53) | 311 | ~120 |
-| 13 ago | — | ~220 |
+| giorno | clic da Google | utenti GA4 | copertura |
+|---|---|---|---|
+| 8 ago | 603 (il picco vero) | ~30 | ~5% |
+| 11 ago | 270 | ~30 | ~11% |
+| 12 ago (fix alle 14:53) | 311 | ~120 | mezza giornata |
+| 13 ago | **582** | ~220 | **~38%** |
 
-Prima del fix GA4 misurava circa il **5%** della realtà, dopo circa il **70%**.
+Prima del fix GA4 misurava circa il **5%** della realtà, dopo circa il **38%**.
 Il resto è il banner di consenso, ed è fisiologico: **non si arriverà mai in pari
 con Search Console**, e il criterio di successo è che il divario si stringa, non
-che si chiuda. Il `+608%` settimanale (62 → 439 utenti attivi) è quindi quasi
-tutto recupero di misurazione: non usarlo come numero di crescita con nessuno.
+che si chiuda. Il `+793%` settimanale dello screenshot del 15/08 (697 utenti
+attivi, 839 sessioni, 1.531 visualizzazioni, contro una settimana precedente
+misurata al 5%) è quindi quasi tutto recupero di misurazione: non usarlo come
+numero di crescita con nessuno.
+
+**Quel 38% ha sostituito un 70% scritto qui il 14/08, e come ci si è sbagliati
+conta più della cifra.** La copertura del 13 agosto era stata calcolata dividendo
+gli utenti GA4 del **13** per i clic Search Console del **12**, perché l'export di
+quel giorno arrivava solo fino al 12. Il 13 ha poi fatto 582 clic invece di 311,
+cioè il denominatore era quasi la metà del vero. Da qui la regola: **Search
+Console ha due-tre giorni di ritardo, e un rapporto GA4/SC si calcola solo su
+giorni in cui esistono tutti e due i numeri.** Nel dubbio si aspetta l'export
+dopo, non si stima.
+
+Nemmeno il 38% è una misura pulita, ed è bene saperlo prima di citarlo: gli
+utenti GA4 e i clic SC non sono la stessa unità — chi apre due schede dalla
+stessa ricerca è un utente e due clic — quindi il rapporto vero sta un po' più in
+alto. Serve a dire l'ordine di grandezza (un terzo, non tre quarti), non a fare
+percentuali di precisione.
 
 Il secondo è la durata media, scesa del 53% (2:12 → 1:02). **Non è un
 peggioramento, è composizione.** Prima l'unica popolazione misurata erano le
@@ -111,9 +128,92 @@ senso** — non mese-su-mese, non anno-su-anno. Se GA4 permette un'annotazione s
 quella data, mettila. E aspettati altri avvisi "anomalia" per qualche giorno,
 mentre il modello previsionale reimpara: sono rumore.
 
+Vale anche **fra GA4 e Search Console**, e in un modo che inganna. Nell'export
+GA4 delle pagine su 18/07-14/08 `eventi.html` fa il 28,9% delle visualizzazioni e
+le schede il 40,9%; in Search Console sui tre mesi `eventi.html` fa l'11,5% dei
+clic e le schede il 76%. Sembra una contraddizione da spiegare: è solo che
+**venticinque di quei ventotto giorni sono pre-fix**, e in quei giorni le uniche
+pagine che mandavano `page_view` erano `eventi.html` e la home. Il dato
+interessante è il rovescio — le schede fanno già il 41% delle visualizzazioni
+*avendo misurato tre giorni su ventotto*.
+
 Cosa manca ancora, ed è il pezzo che trasforma il tracciamento in argomento di
 vendita: **il conteggio delle aperture di scheda su `luoghi.html`** (vedi
 "Vendere uno spazio"). GA4 registra i clic *dalla* scheda, non le aperture.
+
+#### Che non ci sia un `page_view` doppio è stato verificato, non supposto
+
+Il sospetto era ragionevole: dopo un fix del genere il difetto tipico è una
+pagina rimasta con il suo `gtag` inline *più* `cookie-consent.js`, cioè due
+inizializzazioni e due `page_view` per visita. L'indizio erano i 6,8 eventi per
+sessione dello screenshot del 15/08.
+
+Non c'è, e il numero che lo dice è **`page_view` 1.997 contro `session_start`
+1.037 = 1,93 pagine per sessione** (GA4, 18/07-14/08). Con una doppia
+inizializzazione sarebbe ~3,9. Il resto del conteggio si spiega tutto senza
+misteri:
+
+| evento | conteggio | |
+|---|---|---|
+| `user_engagement` | 2.224 | automatico |
+| `page_view` | 1.997 | |
+| `scroll_depth` | 1.403 | **nostro**, fino a 4 per pagina |
+| `session_start` + `first_visit` | 1.843 | automatici |
+
+Sono 7.467 su 7.676 totali. **Il numero alto di eventi per sessione è il nostro
+`scroll_depth` a quattro soglie, non un difetto**: se un giorno risalta di nuovo,
+la verifica è questa e non serve rifare l'indagine.
+
+Una pulizia che resta da fare: `scroll` (106 eventi) è l'evento **automatico** di
+GA4 e duplica il nostro. Il commento in `daop-track.js` lo prevedeva già —
+Amministratore → Flussi di dati → il flusso web → **Misurazione avanzata** →
+togliere "Scorrimenti". Meno rumore, e meno benzina per gli avvisi "anomalia".
+
+#### Le dimensioni personalizzate sono sette, non due
+
+`daop-track.js` manda già sette parametri personalizzati, e **finché non sono
+registrati in GA4 esistono solo in DebugView**. Amministratore → colonna
+Proprietà → **Definizioni personalizzate** → ambito **Evento**, col nome del
+parametro scritto identico:
+
+| parametro | su quali eventi | cosa risponde |
+|---|---|---|
+| `event_city` | tutti | **in quali comuni è il pubblico** |
+| `event_province` | tutti | idem, per provincia |
+| `event_title` | tutti | quale scheda genera azioni, non solo visite |
+| `metodo_posizione` | `vicino_a_me` | gps / comune / gradino |
+| `raggio_km` | `vicino_a_me` | 10, 20, 30, 50 — **dimensione, non metrica** |
+| `percent_scroll` | `scroll_depth` | 25/50/75/100 |
+| `destination_url` | i clic | dove se ne vanno |
+
+Il limite sono 50 dimensioni evento, quindi non c'è niente da scegliere: si
+registrano tutte.
+
+**Le prime due valgono più delle altre cinque insieme, e non per il "vicino a
+me".** `event_city` è la risposta alla domanda che farà ogni cliente di
+`luoghi.html`: oggi si può dire "il sito fa 3.491 clic in tre mesi", con quella
+dimensione si dice a un posto di Ovada *quanti dei lettori guardano cose a
+Ovada*. È il primo pezzo di evidenza vendibile, e costa cinque minuti invece del
+lavoro sulle aperture di scheda.
+
+**Non sono retroattive**: i dati partono da quando le crei, quello già raccolto
+resta invisibile per sempre. Nei report compaiono dopo 24-48 ore; in DebugView
+subito, ed è così che si verifica di aver scritto bene i nomi senza aspettare due
+giorni.
+
+#### Sopra 2,5 visualizzazioni per utente, stai guardando te stesso
+
+Nel primo export GA4 delle pagine `luoghi.html` risultava con 41 visualizzazioni,
+che sembravano un inizio di pubblico. Erano **5 utenti con 8,2 pagine a testa e
+2:40 di media**: chi la stava costruendo. Stessa firma su `/rubriche.html` (7,7
+per utente), `/ginetto.html` (4,75), la home (157 visualizzazioni da 25 utenti).
+
+Il traffico vero ha la firma opposta, ed è visibile nello stesso export:
+`/ferragosto.html` fa 87 visualizzazioni da **72 utenti distinti**, cioè 1,2 a
+testa, perché chi arriva da Google guarda una pagina ed esce. **Su una pagina che
+non è l'agenda, un rapporto visualizzazioni/utenti sopra 2,5 è navigazione
+interna, non pubblico** — e su una pagina nuova, che è quando si è più impazienti
+di vedere un numero salire, è quasi sempre così.
 
 ## Far girare i generatori
 
@@ -129,6 +229,18 @@ python3 scripts/genera_rubriche.py    # legge contenuti/rubriche/
 c'è in programma in ogni posto. Girando prima scriverebbe "in programma" su
 eventi già passati.
 
+C'è però una dipendenza anche nel verso opposto, e **è voluto che sia in
+ritardo di un giro**: `genera_luoghi.py` scrive `data/luoghi-comuni.json`
+(quali comuni hanno almeno un luogo, con l'ancora del loro gruppo) e
+`genera_eventi.py` lo legge per linkare ogni scheda evento ai luoghi del suo
+comune. Girando in quest'ordine le schede usano l'indice della notte prima.
+Chiudere il cerchio — leggere il foglio Luoghi anche qui, o girare tre volte —
+costerebbe più di quello che risolve: un comune che entra oggi nel catalogo
+resta senza link per un giorno, e sbagliare in quel verso è gratis. Il verso
+opposto no: un link a un'ancora che non esiste scarica in cima a una pagina da
+800 righe, ed è peggio di nessun link. Se il file manca, i link non si stampano
+e basta.
+
 `genera_eventi.py` legge il foglio Google e, se non lo raggiunge, ripiega da
 solo su `data/eventi.json` (l'istantanea committata) e va avanti. Gli altri no:
 senza rete `genera_centri.py` stampa "lascio la pagina com'è" e non riscrive
@@ -137,6 +249,50 @@ vedono finché non gira in CI.
 
 Il workflow `.github/workflows/aggiorna-eventi.yml` gira tutti e tre alle 02:00
 UTC, committa da solo su `main`, poi passa i controlli (vedi in fondo).
+
+## Il canale WhatsApp
+
+Aperto il 14/08/2026. `CANALE_WA` in `genera_eventi.py` è l'unico posto in cui
+sta l'indirizzo: **vuoto vuol dire che l'invito non si stampa da nessuna
+parte**, che è il comportamento giusto se un giorno il canale si chiude.
+`blocco_canale()` compare in coda alle schede evento, alle pagine comune e alle
+landing — **290 pagine**, tutte tranne i tre `eventi/box-*.html`. Quelli vivono
+dentro l'iframe di siti altrui, e chiedere lì un'iscrizione vuol dire usare lo
+spazio di qualcun altro per portargli via il pubblico: stessa ragione per cui
+non chiedono il consenso ai cookie. `tests/luoghi.js` controlla che l'invito ci
+sia su tutte e che non sia mai doppio.
+
+**Sta in coda e non in cima**, e il testo dice per prima cosa *quanto spesso si
+scrive*: la paura di chi si iscrive a un canale non è il contenuto, è il
+diluvio. Niente promesse in più ("contenuti esclusivi") che poi non
+manteniamo.
+
+Il messaggio del giovedì lo scrive il generatore in `data/messaggio-canale.txt`
+(`messaggio_canale()`): **WhatsApp non ha API pubbliche per pubblicare sui
+canali**, quindi il copia-incolla resta a mano per forza, ma scegliere gli
+eventi e scrivere no. È la differenza fra due minuti a settimana e mezz'ora, ed
+è la ragione per cui i canali si abbandonano alla seconda settimana.
+
+Tre regole della selezione, tutte nate guardando l'output vero:
+
+- **davanti chi comincia in quei due giorni.** Ordinando per data di inizio il
+  primo messaggio era fatto di dieci mostre: sono aperte da settimane, quindi
+  vincono l'ordinamento. "Cosa c'è questo weekend" non vuol dire "cosa è ancora
+  aperto".
+- **due tetti, non uno**: per comune e per manifestazione. Fermano due monopoli
+  diversi — una patronale da 19 sotto-eventi concentra un paese, "Castelli
+  Aperti" è un'iniziativa in quindici paesi e il tetto per comune non la vede.
+- **ordine mescolato con seme la data del weekend.** Con l'alfabetico Acqui e
+  Alfiano c'erano sempre e Vesime e Voltaggio mai: è una distorsione che non si
+  vede in un messaggio, si vede in quattro settimane. Il seme fisso serve a non
+  ricommittare il file a ogni run notturna.
+
+Cosa il canale **non** dà, e non va promesso a nessuno: niente statistiche
+oltre a iscritti/copertura, niente esportazione della lista (è di Meta, non
+nostra), niente segmentazione per età. Il "98% di open rate" che si trova in
+rete è dei messaggi 1-a-1 della Business API, **non dei canali**. Quando
+servirà una lista di proprietà e misurabile, quella è l'email — e il posto dove
+chiederla sarà il canale stesso.
 
 ## Decisioni editoriali da non rifare al contrario
 
@@ -213,9 +369,19 @@ ranka tutto l'anno. L'avviso è un `<p>` in più, e la sua CSS sta nel `<style>`
 `index.html` — che è suo e non passa da `_guscio()`, quindi non fa un diff su 260
 file per una riga stagionale.
 
-Nata il 13/08/2026, cioè **due giorni prima**: quest'anno non si posiziona e non
-è per quello che esiste: la resa 2026 arriva da push, WhatsApp e social, quella
-da Google arriva nel 2027. Non giudicarla dai numeri di agosto 2026.
+Nata il 13/08/2026, cioè **due giorni prima**. Qui c'era scritto "quest'anno non
+si posiziona, la resa da Google arriva nel 2027": **è andata diversamente, e in
+meglio.** L'export Search Console del 15/08 (tre mesi, chiude il 13) le dà 36
+clic, 554 impressioni, CTR 6,50%, **posizione media 6,06** — e sono tutti di un
+giorno solo, perché la pagina è nata quel giorno. Più le schede a tema che ha
+trainato: Acqui Terme 45 clic, Limone Piemonte 35, Eco Park 26.
+
+Non cambia nessuna delle decisioni sopra, e soprattutto **non è un argomento per
+fare le stagionali all'ultimo**: una pagina che parte da posizione 6 in
+ventiquattr'ore su un dominio già forte partirebbe da più su con due mesi di
+anzianità, che è esattamente la scommessa di Halloween. Quello che cambia è
+l'aspettativa: una stagionale nuova rende **qualcosa** già l'anno zero, quindi
+vale la pena farla anche quando è tardi — non "tanto è per l'anno prossimo".
 
 ### `/halloween.html`: fatta con due mesi e mezzo d'anticipo, apposta
 
@@ -242,12 +408,20 @@ con `/eventi/weekend.html` un anno su due, che è la ragione già scritta per il
 
 Le sagre di paese le vinciamo sul **nome proprio**: `festa cassinasco 2026`,
 CTR 31%, nessun concorrente. Halloween è l'opposto — query **nazionale e
-generica**, cioè la colonna in cui stiamo in posizione 8-10 col 2,77% di CTR, e
+generica**, cioè la colonna in cui stiamo in posizione 8-10 col 2,86% di CTR, e
 di fronte ci sono siti che fanno "Halloween in Italia" da dieci anni. La pagina
 si fa lo stesso, ma quello che può realisticamente prendere sono le **code
 lunghe con dentro un nome proprio** (`halloween castello di <paese> 2026`), non
 la query secca. Non aspettarti i numeri di Cassinasco e non giudicarla su
 quelli.
+
+Sul metro giusto — quanto è lontana la domanda — al 13/08 la parola "halloween"
+compare nell'export con **3 impressioni in tutto**, tutte su una scheda (San
+Marzano Oliveto). È il comportamento previsto e non dice niente sulla pagina: la
+domanda di Halloween si accende a ottobre. Il numero da guardare è quello di
+inizio ottobre, ed è anche il promemoria del perché le schede stagionali vanno
+raccolte apposta (vedi la tabella delle scadenze in fondo a "Quello che cambia in
+autunno").
 
 #### Cosa ha di suo, e la cernita che non si fa
 
@@ -295,41 +469,126 @@ evidenza.
 
 ### Il traffico sono le schede, e i loro URL non scadono
 
-Misurato sull'export di Search Console del 14/08/2026 (28 giorni, 16/07–12/08):
-**2.777 clic, 35.122 impressioni, CTR 7,91%, 90% da telefono.** Dove vanno:
+Misurato sull'export di Search Console del 15/08/2026 (tre mesi, 14/05–13/08):
+**3.491 clic, 43.168 impressioni, CTR 8,09%, 88% da telefono.** Dove vanno:
 
-| | clic | quota |
-|---|---|---|
-| le ~200 **schede** `/eventi/*.html` | 2.303 | **82%** |
-| `eventi.html` | 331 | 12% |
-| `sagre-provincia-*` | 127 | 5% |
-| tutto il resto (home, rubriche, centri estivi, `piattosano`) | ~40 | 1% |
+| | clic | quota | CTR | posizione |
+|---|---|---|---|---|
+| le 229 **schede** `/eventi/*.html` | 2.688 | **76%** | 10,30% | ~3 |
+| `eventi.html` | 404 | 11,5% | 2,48% | 8,15 |
+| `sagre-provincia-*` | 264 | 7,5% | 9,68% | ~6,4 |
+| home | 82 | 2,3% | 17,41% | 5,58 |
+| `/ferragosto.html` (un giorno di vita) | 36 | 1% | 6,50% | 6,06 |
+| `oggi.html` + `weekend.html` | **1** | 0% | — | — |
+| `luoghi.html` (un giorno di vita) | 1 | 0% | 1,72% | 7,98 |
 
 Da qui la prima cosa da non fraintendere: **come pagina singola `eventi.html`
 resta la più forte del sito, ma come sistema il sito sono le schede.** Ed erano
-esattamente loro a non mandare `page_view` fino al 12/08 — il divario 1.932 clic
-contro 215 utenti non era un mistero, era l'82% del traffico.
+esattamente loro a non mandare `page_view` fino al 12/08 — il divario fra clic da
+Google e utenti GA4 non era un mistero, erano i tre quarti del traffico.
+
+La seconda è dove sta il buco più grosso: **`eventi.html` incassa 16.308
+impressioni — il 38% di tutto il sito — e le converte al 2,48%.** Le stesse
+persone che sulle schede cliccano al 10% lì non cliccano, e non è un difetto
+della pagina: è la posizione 8,15 sulle query generiche. È il problema che le sei
+pagine d'incrocio provano ad aggredire (vedi la sezione sulla cannibalizzazione),
+non uno da risolvere riscrivendo l'H1.
 
 **L'onda di agosto non è la stagione delle sagre: sono le schede.** Il `first_seen`
-in `data/pagine-evento.json` dice che il sistema è nato il **02/08/2026**, e i
-clic partono il 3: `5-15 al giorno in luglio → 69 → 118 → 140 → 170 → 269 → 603
-→ 427 → 273 → 270 → 311`. Le stesse sagre erano già in agenda a luglio, quando il
-sito faceva undici clic al giorno. Il picco di Ferragosto ha amplificato, non
-causato.
+in `data/pagine-evento.json` dice che il sistema è nato il **02/08/2026**, e la
+rampa è questa:
+
+| | clic al giorno |
+|---|---|
+| maggio-giugno | 1,3 |
+| luglio | 5,5 |
+| 1-2 agosto | 12,5 |
+| **3-13 agosto** | **293,8** |
+
+Cinquantatré volte in undici giorni, con la **posizione media che scende da 7,66
+a 6,00** mentre le impressioni fanno ×20 — di solito succede il contrario, cioè
+arrivano impressioni su query lontane e la media peggiora. Le stesse sagre erano
+già in agenda a luglio, quando il sito faceva cinque clic al giorno: il picco di
+Ferragosto ha amplificato, non causato.
+
+E l'8 agosto non era il picco con la coda in discesa, come sembrava dall'export
+precedente: `603 → 427 → 273 → 270 → 311 → 582`. Il 13 risale al secondo
+giorno migliore di sempre. In sei giorni (8-13) il sito ha fatto 2.466 clic, cioè
+il **71% di tutti i clic dei tre mesi**.
 
 Dove sono imbattibili: **nomi propri di feste di paese.** `festa cassinasco 2026`
 in posizione 1,13 con CTR 31%, `cassinasco festa 2026` con CTR **72%**. Nessun
 altro pubblica i sotto-eventi di una patronale di 800 abitanti. Le query che
-contengono `2026` fanno il 60% dei clic misurati con CTR 11,1% contro 4,4% delle
-altre: **la gente scrive l'anno**, e i title ce l'hanno — è la ragione per cui
-`_titolo_evento()` lo stampa.
+contengono `2026` fanno il 59% dei clic misurati con CTR **11,25% contro 4,50%**
+delle altre: **la gente scrive l'anno**, e i title ce l'hanno — è la ragione per
+cui `_titolo_evento()` lo stampa.
 
-Due numeri per tenere la testa a posto: le prime 10 schede fanno il 53% dei clic
-delle schede e `festa-d-estate-cassinasco.html` da sola l'11% del sito; e il
-foglio `Query` copre solo 610 dei 2.777 clic, perché Google anonimizza le query
-troppo rare. **Il 78% del traffico arriva da ricerche che non possiamo vedere.**
-È il fossato (nessuno ci compete) e la fragilità (non c'è una query da difendere)
-nello stesso dato.
+Due numeri per tenere la testa a posto: le prime 10 schede fanno il **49%** dei
+clic delle schede e `festa-d-estate-cassinasco.html` da sola l'8,6% del sito; e
+il foglio `Query` copre solo 731 dei 3.491 clic, perché Google anonimizza le
+query troppo rare. **Il 79% del traffico arriva da ricerche che non possiamo
+vedere.** È il fossato (nessuno ci compete) e la fragilità (non c'è una query da
+difendere) nello stesso dato.
+
+#### Il verdetto non è agosto, è il 15 settembre
+
+Tutto quello che sappiamo viene da dodici giorni di alta stagione, su un sito che
+non ha mai vissuto un ottobre. Ad agosto qualunque sito di sagre piemontesi fa
+numeri, quindi **la domanda "andiamo bene?" non ha una risposta onesta prima di
+metà settembre**, quando si vede dove si ferma la discesa:
+
+| clic/giorno a metà settembre | cosa vuol dire |
+|---|---|
+| sotto 20 | agosto era la stagione, il sistema non si regge da solo |
+| 50-100 | il sistema regge: è il sito, non il calendario |
+| sopra 150 | non c'è più una stagione da temere |
+
+La scommessa ragionevole è la seconda — 229 schede indicizzate che non si
+cancellano mai, e l'autunno piemontese ha il nome del paese attaccato a ogni
+evento — ma è una scommessa, e questa è la data in cui si riscuote. Il numero da
+segnare adesso, per non ricostruirlo dopo: **la baseline pre-schede è 5,5 clic al
+giorno** (luglio 2026).
+
+#### Le schede passano il giudizio di Google, e si vede in un numero solo
+
+Il rapporto **Indicizzazione → Pagine** di Search Console (export del 15/08, che
+chiude al **7 agosto**: ha otto giorni di ritardo contro i due-tre delle
+Prestazioni) dice 112 pagine indicizzate e 19 no. Le 19:
+
+| | pagine | |
+|---|---|---|
+| Rilevata, ma non ancora indicizzata | 7 | coda di scansione |
+| **Scansionata, ma non indicizzata** | **10** | le ha lette e non le pubblica |
+| Non trovata (404) | 1 | vedi sotto |
+| Pagina alternativa con canonical | 1 | normale |
+
+**Le dieci "scansionate ma non indicizzate" sono il termometro dello *scaled
+content*, ed è il numero da guardare a ogni export.** Quella riga è il modo in
+cui Google dice che ha letto la pagina e non gli è sembrata utile: su un sito che
+pubblica centinaia di pagine su template identico ce ne starebbero centinaia.
+Dieci su 131 vuol dire che il giudizio sulle schede una-per-evento è **positivo**
+— ed è la prima misura, invece che un ragionamento, a sostegno della decisione di
+`luoghi.html` (una pagina filtrabile invece di 800 schede). Se un giorno quel
+numero cresce di decine, il posto dove si è esagerato è quello.
+
+Due cose da sapere prima di rileggerlo. Chiudendo al 7 agosto **non dice ancora
+niente** su `luoghi.html`, `halloween.html` e le sei d'incrocio, tutte nate fra
+il 12 e il 14: vanno guardate dal 22-25 agosto. E c'è uno scarto non spiegato del
+tutto — 112 indicizzate al 7 agosto contro **264 pagine con impressioni**
+nell'export Prestazioni, che il ritardo giustifica solo in parte (il conteggio
+cresce a scalini: 9 → 86 il 25 luglio → 112 il 6 agosto). Le impressioni
+coincidono fra i due export, quindi non è un allarme, ma è la prima cosa da
+riguardare al giro dopo. Nota: quel salto a 86 è del **25 luglio**, una settimana
+prima del 02/08 che questo file dà come nascita del sistema — una delle due date
+è imprecisa, e `data/pagine-evento.json` è l'unico posto per verificarlo.
+
+**Il 404 è `/ilpiattosano.html`, ed era già a posto.** Lo stub di redirect verso
+`/piattosano.html` esiste nel repo (`noindex, follow`, meta refresh e
+`location.replace`), ma l'ultima scansione di Google è del **12 luglio**: la
+pagina si era spostata il 16 giugno e lo stub è arrivato dopo, quindi Googlebot è
+passato proprio nella finestra in cui il 404 c'era davvero. Non c'è niente da
+riparare nel generatore — si chiede la **convalida della correzione** in Search
+Console e Google ripassa.
 
 #### Perché "poi arriva Halloween" non è un problema
 
@@ -364,10 +623,11 @@ quasi zero a tre mesi di distanza: guardare a metà agosto quanti eventi ci sono
 per novembre è come pesare la spesa di dicembre guardando il frigo di agosto. Il
 numero da guardare è quanti ce ne sono per novembre **a fine ottobre**.
 
-E la domanda d'autunno non è un'ipotesi, è già nell'export del 14/08 — query
+E la domanda d'autunno non è un'ipotesi, è già nell'export — query
 stagionali con impressioni mesi prima dell'evento: `sagra della zucca castelletto
-monferrato` in posizione 3,67, il grappolo `sagra zucchino rivalta bormida` fra
-4,0 e 8,3, `fiere e mercatini in provincia di cuneo domani` in posizione 1. Zero
+monferrato` in posizione 3,5, il grappolo `sagra zucchino rivalta bormida` (sette
+varianti, 16 impressioni) fra 4,0 e 8,3, `fiera del tartufo san sebastiano curone
+2026`, `fiere e mercatini in provincia di cuneo domani` in posizione 1. Zero
 clic perché l'evento è lontano, ma Google ci ha già messi lì. Ottobre e novembre
 in Piemonte sono castagne, funghi, tartufo, vendemmia, Halloween nei castelli,
 mercatini, presepi viventi: **il sito non va in letargo, e non è la stagione la
@@ -375,22 +635,22 @@ cosa da temere.**
 
 #### Quello che cambia in autunno è il tipo di query, non il calendario
 
-Sulle 873 query visibili dell'export (che sono il 22% dei clic, il resto Google
-lo anonimizza):
+Sulle 1.000 query visibili dell'export a tre mesi (che sono il 21% dei clic, il
+resto Google lo anonimizza):
 
-| | query | clic | CTR | posizione |
-|---|---|---|---|---|
-| **nome proprio** (`festa cassinasco 2026`) | 539 | 515 | **9,47%** | 6,21 |
-| **generiche** (`sagre provincia alessandria oggi`) | 334 | 95 | 2,77% | 8,42 |
+| | query | clic | CTR |
+|---|---|---|---|
+| **nome proprio** (`festa cassinasco 2026`) | 535 | 610 | **9,71%** |
+| **generiche** (`sagre provincia alessandria oggi`) | 465 | 121 | 2,86% |
 
-L'84% dei clic visibili viene dai nomi propri, a tre volte e mezzo il CTR. È lì
+L'83% dei clic visibili viene dai nomi propri, a tre volte e mezzo il CTR. È lì
 che non abbiamo concorrenza, e **il fossato si porta dietro quasi tutto
 l'autunno**: carnevali, presepi viventi, sagre della castagna e del tartufo hanno
 tutti il nome del paese attaccato, cioè sono la stessa partita di agosto.
 
 Si porta dietro molto meno **Halloween** e **"mercatini di Natale in Piemonte"**:
 lì la query è nazionale e generica, cioè la colonna in cui stiamo in posizione
-8-10 al 2,77%. Il rischio d'autunno non è che manchino gli eventi, è che una
+8-10 al 2,86%. Il rischio d'autunno non è che manchino gli eventi, è che una
 fetta più grossa della domanda cada dove siamo deboli — ed è l'argomento più
 forte per le sei pagine d'incrocio: in agosto sarebbero un miglioramento, a Natale
 sono la differenza fra prendere quella domanda e guardarla passare.
@@ -410,11 +670,13 @@ vanno raccolte **apposta**, prima delle altre:
 
 ### `eventi.html` cannibalizza `oggi` e `weekend`, e non si risolve indebolendola
 
-Il sintomo sembra un guasto: in 28 giorni `/eventi/oggi.html` ha preso **10
-impressioni** e `/eventi/weekend.html` **13**, mentre le query di quell'intenzione
-esistono e sono grosse (`sagre provincia di alessandria oggi`, 372 impressioni;
-`eventi asti e provincia oggi`, 251). Non è un guasto: sono `index, follow`, con
-canonical proprio, in sitemap, linkate dalla nav di 266 pagine.
+Il sintomo sembra un guasto: in **tre mesi** `/eventi/oggi.html` ha preso 12
+impressioni e 1 clic, `/eventi/weekend.html` 16 impressioni e **zero** clic —
+mentre le query di quell'intenzione esistono e sono grosse (`sagre provincia di
+alessandria oggi` da sola: 410 impressioni, 11 clic, posizione 8,26). Non è un
+guasto: sono `index, follow`, con canonical proprio, in sitemap, linkate dalla
+nav di 266 pagine. Un clic in novantadue giorni non è una pagina debole, è una
+pagina che Google ha deciso di non mostrare.
 
 La causa è che **`eventi.html` rivendica già quell'intenzione, e la rivendica
 meglio**: title `Eventi e Sagre Oggi in Provincia di Alessandria, Asti, Cuneo`,
@@ -424,15 +686,16 @@ giusta.
 
 **La scorciatoia da non prendere è togliere "oggi" e "weekend" dall'H1 o dal
 title di `eventi.html` per de-cannibalizzare.** È la stessa regola già scritta per
-la riga stagionale, con la stessa aritmetica: quell'H1 vale 13.553 impressioni,
-cioè il 36% delle impressioni del sito, e si rinuncerebbe a un asset provato per
-sbloccare due pagine che oggi ne fanno 23 in un mese. Nemmeno una prova A/B lo
+la riga stagionale, con la stessa aritmetica: quell'H1 vale 16.308 impressioni,
+cioè il **38%** delle impressioni del sito, e si rinuncerebbe a un asset provato
+per sbloccare due pagine che in tre mesi ne fanno 28. Nemmeno una prova A/B lo
 giustifica: il rischio è asimmetrico.
 
 Il problema che resta non è *quale* pagina ranka, è che **qualunque pagina ranki,
-ranka in posizione 8-10**. Le query generiche sono il 39% delle impressioni e solo
-il 16% dei clic, con CTR 2,78% e posizione media 9,4. Ed è la domanda che **non
-scade mai**: torna ogni weekend, tutto l'anno, Halloween e Natale compresi.
+ranka in posizione 8-10**. Le query generiche sono il 40% delle impressioni
+visibili e solo il 17% dei clic, con CTR 2,86%. Ed è la domanda che **non scade
+mai**: torna ogni weekend, tutto l'anno, Halloween e Natale compresi. Ed è anche
+quella su cui `eventi.html` lascia sul tavolo 16.308 impressioni al 2,48%.
 
 Guardando le query per quello che chiedono, il buco si vede: **chiedono tutte
 provincia _e_ finestra temporale insieme** — "sagre provincia di alessandria
@@ -487,6 +750,17 @@ Le decisioni dentro, che è quello che non si ricava dal diff:
   barra che non guarda nessuno. I link arrivano dalle due madri, dalle sorelle,
   e dalla `sagre-provincia-*` della stessa provincia.
 
+**Come si sa se hanno funzionato, e quando.** Sono nate il 14/08 e Search Console
+ha due-tre giorni di ritardo, quindi il primo dato utile è l'export del **21-22
+agosto**. Il metro non è "quanti clic fanno le sei": è se **la somma
+incrocio + `oggi` + `weekend` supera le 28 impressioni in tre mesi** che facevano
+le due madri da sole. Se le sei prendono impressioni e le madri restano a zero,
+ha funzionato: vuol dire che il problema era l'incrocio mancante, non
+l'intenzione. Se restano tutte a zero, la conclusione è che Google consolida su
+`eventi.html` qualunque cosa si scriva, e allora il lavoro si sposta sul CTR di
+quella pagina invece che su nuove URL. È l'unico esperimento in corso con una
+previsione falsificabile: non lasciarlo senza verdetto.
+
 Resta aperto un punto solo della vecchia lista: **`Event` in JSON-LD sulle
 pagine aggregate.** `oggi.html`, `weekend.html`, le tre provinciali e ora le sei
 d'incrocio hanno tutte `CollectionPage` + `ItemList` che *rimanda* alle schede,
@@ -496,7 +770,175 @@ non diluisca invece di aggiungere — è la ragione per cui non è stato fatto
 insieme al resto.
 
 Cosa **non** si è fatto per de-cannibalizzare, e non si farà: toccare l'H1 di
-`eventi.html`. Vedi sopra, vale 13.553 impressioni.
+`eventi.html`. Vedi sopra, vale 16.308 impressioni.
+
+### "Vicino a me": il raggio filtra, e la posizione non si chiede mai da soli
+
+Fatto il 15/08/2026. La logica sta in **`assets/js/daop-vicino.js`** (15 KB) e
+non dentro le pagine: il JS in fondo a `eventi.html` non passa da `_guscio()`
+(che copia solo `<style>`, nav e footer), quindi le pagine generate non lo
+vedevano, e ricopiarlo nei template sarebbe stato tredici copie da tenere
+allineate — la stessa ragione per cui `daop-track.js` è un file solo.
+
+**Dove c'è, e sono 13 pagine**: `eventi.html`, `oggi`, `weekend`, le sei
+d'incrocio, le tre `sagre-provincia-*`, `ferragosto`. **Halloween no**, ed è il
+comportamento giusto: `_landing_geo()` conta gli eventi *con coordinate* e sotto
+`MIN_FILTRI` non stampa niente — a metà agosto quella pagina ne ha 2. Le pagine
+comune restano fuori apposta: lì sei già in un comune.
+
+Il modulo **non sa come si nasconde una riga** — l'agenda usa una classe, le
+pagine di intenzione l'attributo `hidden` — quindi espone `entro(voce)` e la
+pagina lo somma ai propri filtri. Riceve `alCambio` (rifà i filtri della
+pagina), `riga` (dove appendere la distanza) e `alRitocco` (l'indice di ricerca
+è il `textContent`, che con un centro impostato contiene anche "a 12 km").
+
+Va incluso **senza `defer`**, in coda al body: uno script differito girerebbe
+*dopo* i blocchi inline, che invece hanno bisogno di `window.daopVicino`
+subito. In `eventi.html` il percorso è relativo come gli altri script suoi,
+nelle generate è assoluto.
+
+Il CSS invece si propaga come sempre in ~260 file — sono ~1,5 KB di regole che
+usano in 13, ed è il prezzo noto del guscio.
+
+**Il motivo non è "ce l'ha Ginetto": è che il filtro provincia non risponde a
+"vicino".** Misurato prendendo Alessandria come punto: dei 128 eventi in
+provincia di AL la mediana sta a 25 km e il massimo a **55**, con 23 oltre i 30
+km; e **14 eventi entro 25 km sono in provincia di Asti** (Castelnuovo Belbo,
+Rocchetta Tanaro, Viarigi, Montemagno). La tendina attuale include il lontano ed
+esclude il vicino, in tutti e due i versi. Il raggio non è una funzione in più
+accanto a quella: è quella fatta bene.
+
+I dati c'erano già: **278 eventi su 278 hanno lat/lon valide**, e sono le
+coordinate del posto, non il centroide del comune (Alessandria ha 6 punti
+distinti, Novi Ligure 4). `geo_attrs()` le stampa sulla riga: ~45 byte per riga,
+**+18,8 KB su 1,4 MB**. È la lezione dei link calendario al contrario — quelli
+erano 490 byte per riga e si sono tolti — ma il rapporto è dodici volte più
+basso e senza quelle la funzione non può esistere, perché la distanza non si
+deduce dal testo.
+
+Le decisioni, che è quello che non si ricava dal diff:
+
+- **Il raggio filtra, non riordina.** L'agenda è un calendario e l'ordine di un
+  calendario è la data: stessa regola già presa per l'app ("su un calendario
+  l'ordine non si compra"). `tests/agenda.js` controlla che le righe rimaste
+  siano una sottosequenza dell'ordine del generatore — non dell'ordine per data,
+  perché le righe "in corso" stanno in cima per gruppo e non per data.
+- **La posizione non si chiede mai al caricamento**, solo dopo un tocco. È la
+  prassi indicata da W3C e da Chrome, che ha un controllo Lighthouse apposta
+  (*Requests the geolocation permission on page load*), e il motivo pratico è
+  che **un rifiuto è per sempre**: il browser non ripropone l'avviso, e una
+  richiesta sprecata all'arrivo brucia l'unica occasione che c'è. Una prova
+  spia `getCurrentPosition` e pretende **zero** chiamate finché nessuno tocca.
+- **La sveglia dei 10 secondi non è una cautela, è obbligatoria.** Il `timeout`
+  della Geolocation API misura solo l'aggancio della posizione, **non l'attesa
+  del permesso**: se l'avviso del browser resta lì senza risposta — il caso più
+  comune, non un caso limite — non arriva né successo né errore, e il bottone
+  resterebbe "Cerco…" per sempre. Provato, succedeva. Un "consenti" tardivo vale
+  comunque: la risposta buona non si butta perché la sveglia era già suonata.
+- **`enableHighAccuracy: false`**, e `maximumAge` di 5 minuti. Il gradino più
+  stretto è 10 km: un aggancio GPS non aggiunge niente e costa attesa e
+  batteria, e una posizione di cinque minuti fa va benissimo — le sagre non si
+  spostano.
+- **Gradini fissi col conteggio, non uno slider.** Scegliere fra "20 km" e "30
+  km" senza sapere che sono 26 e 135 eventi è scegliere al buio. Un gradino
+  vuoto resta visibile ma spento: dice che lì non c'è niente, che è una
+  risposta, invece di sparire e far ballare la barra.
+- **Il raggio di partenza si sceglie sui dati**, non a priori: il primo gradino
+  con almeno 5 eventi. Da Cuneo entro 10 km ce ne sono 4 e la pagina nascerebbe
+  vuota — è il difetto tipico di questi filtri nelle zone rade, ed è anche il
+  motivo per cui a zero risultati la pagina scrive dove guardare ("Niente entro
+  10 km. Entro 30 km ce ne sono 40.") invece di lasciare il vuoto.
+- **Il ripiego vale più del GPS.** "Parti da un comune" funziona su desktop, per
+  chi ha negato il permesso e per chi vuole vedere cosa c'è dove andrà. L'elenco
+  si ricava **dalle righe** alla prima apertura — non c'è un marker nuovo e non
+  c'è HTML in più per tutti — e il punto di un comune è la media dei suoi
+  eventi, che per una misura in linea d'aria basta.
+- **Il campo del comune non si chiude quando trova.** La ricerca è viva: chi
+  scrive "novi" ha già un centro su un prefisso mentre sta ancora battendo, e
+  chiudergli il campo sotto le dita lo lascia con un comune che non ha scelto.
+  Svuotare il campo disdice; un comune che in agenda non c'è lo dice, invece di
+  restare muto (il catalogo è la pagina, non l'anagrafe — e su una provinciale
+  contiene solo i comuni di quella provincia, che è giusto così).
+- **I gradini contano dentro gli altri filtri**, non sul totale: la pagina passa
+  al modulo il predicato dei suoi filtri, così "30 km (6)" vuol dire sei eventi
+  che si vedrebbero davvero, categoria e ricerca comprese.
+- **Le distanze sono in linea d'aria e la pagina lo scrive**, insieme al fatto
+  che la posizione resta nel browser. Nessuno qui sa quanto gira la strada, e
+  far credere il contrario è peggio che non dare la distanza.
+- **Una riga senza coordinate non è "lontana", è sconosciuta**: con un raggio
+  attivo resta fuori. Oggi sono zero su 278, ma il foglio si compila a mano.
+- **Sta fuori dalla barra appiccicosa.** Quella è scesa a ~109px sul telefono e
+  una riga in più la farebbe ricrescere per tutto lo scorrimento.
+
+#### Come sta in pagina, e i quattro difetti che aveva
+
+Sistemato il 15/08/2026 guardando gli screenshot a 412px, non il codice. Da
+fermo è **una riga sola da 40px**; con un raggio attivo era 176px ed è scesa a
+**110px sul telefono e 66px su desktop**. Cosa lo gonfiava, tutto correggibile:
+
+- **Due pillole identiche affiancate** ("Vicino a me" e "Parti da un comune")
+  obbligavano a scegliere prima di aver capito. Il ripiego non è un secondo
+  comando pari al primo: ora è un testo (`.is-alt`), quindi resta raggiungibile
+  senza competere. Attenzione se lo si ritocca: `.ev-geo-btn:hover` ha
+  specificità maggiore di `.ev-geo-btn.is-alt`, quindi il bordo va spento anche
+  nello stato `:hover`, se no ricompare al passaggio del dito.
+- **"da Acqui Terme" accanto a un campo che diceva già "Acqui Terme".** Adesso
+  l'etichetta si stampa solo quando il posto non si legge altrove, cioè col GPS.
+- **La ✕ cadeva da sola su una terza riga**, perché stava *dopo* i gradini nel
+  DOM. Ora sta subito dopo il campo, e i gradini vanno a capo per conto loro
+  (`.ev-geo-chips` a `flex-basis:100%` **solo sotto i 600px**: su desktop ci
+  stanno in fila e una riga piena sarebbe 40px di vuoto).
+- **La nota prometteva che "la posizione resta nel browser" anche a chi aveva
+  solo scelto un comune da un elenco** — cioè a chi non aveva ceduto nessun
+  dato. Ora quella frase esce solo col GPS; per il comune si dice da dove si
+  misura.
+
+I quattro gradini stanno in fila su 372px perché le pillole sono strette
+(`padding:7px 9px`, `0.76rem`): a 12px il quarto cadeva da solo, e un gradino
+isolato sembra un'altra cosa. Sotto i ~360px tornano su due righe, ed è giusto
+così.
+
+**Non porta un clic da Google e non va confusa con le sei pagine d'incrocio:**
+Googlebot non concede la posizione. Zero rischio SEO (non tocca H1, title,
+canonical, JSON-LD) e zero resa SEO. Serve a chi è già arrivato — cioè risponde
+nei giorni in cui uno non sta cercando il nome di una sagra — ed è il ponte
+naturale verso Ginetto.
+
+#### Si misura, e la posizione non esce dal browser
+
+`daop-vicino.js` **non chiama `gtag`**: emette un evento DOM `daop:vicino`, e
+`daop-track.js` lo raccoglie. Così gtag resta scritto in un posto solo, come
+`cookie-consent.js` è l'unico posto in cui GA4 si inizializza — se un domani
+nasce un'altra funzione da misurare, si fa allo stesso modo.
+
+L'evento è **`vicino_a_me`**, con due parametri e basta:
+
+| parametro | valori |
+|---|---|
+| `metodo_posizione` | `gps`, `comune`, `gradino` |
+| `raggio_km` | 10, 20, 30, 50 |
+
+**Le coordinate non partono mai**, ed è un vincolo, non una dimenticanza: la
+pagina promette a chi la usa che la posizione resta nel browser, e mandarla a
+GA4 renderebbe quella riga una bugia. Se un giorno serve sapere *da dove*
+cercano, la risposta è `metodo_posizione` più il `page_path`, non le coordinate.
+
+C'è l'antirimbalzo degli 800 ms già usato per i clic: chi prova tre gradini di
+fila è una persona che sta scegliendo, non tre eventi. E `impostaCentro()`
+scarta un centro identico a quello attivo — scrivere in un campo scatena
+`input` *e* `change`, che altrimenti erano due eventi e due calcoli di 278
+distanze.
+
+**Cosa registrare in GA4** perché quei parametri si vedano nei report:
+`metodo_posizione` e `raggio_km` come dimensioni personalizzate con ambito
+evento. Senza, l'evento si conta ma i parametri restano invisibili fuori da
+DebugView. Non sono i soli, e la lista completa sta in "Le dimensioni
+personalizzate sono sette" più sotto. Vedi "Misurare, non stimare" per come
+provarlo in locale.
+
+`raggio_km` va **come dimensione, non come metrica**: GA4 lo propone anche come
+metrica perché è un numero, ma sommare i chilometri non vuol dire niente — serve
+sapere *quante volte* è stato scelto il gradino 30, cioè raggruppare per valore.
 
 ### L'età non si ripete nelle descrizioni
 
@@ -754,17 +1196,27 @@ bello del Piemonte". Se le schede a pagamento suonano come volantini, il lettore
 smette di fidarsi anche delle altre 819 — e a quel punto non vale più niente
 neanche quello che vendi.
 
-**Oggi la pagina non ha ancora traffico.** È nata il 12/08/2026 e nell'export del
-14/08 ha **zero impressioni** — normale, i dati arrivano fino al 12. Intanto il
-sito fa 2.777 clic in 28 giorni, ma **l'82% va alle schede evento e solo il 12% a
-`eventi.html`**: quel traffico è gente che cerca il nome di una sagra, non un
+**Oggi la pagina è entrata in indice e basta.** Nata il 12/08/2026, nell'export
+del 15/08 ha **58 impressioni, 1 clic, posizione 7,98** — ed è un giorno e mezzo
+di vita, perché i dati chiudono il 13. Non è traffico e non ci si vende niente,
+ma non è più zero.
+
+Il numero che conta per chi vende è un altro: il sito fa **3.491 clic in tre
+mesi** e **il 76% va alle schede evento, l'11,5% a `eventi.html` e lo 0,03% a
+`luoghi.html`**. Quel traffico è gente che cerca il nome di una sagra, non un
 posto dove andare. I primi clienti non stanno comprando un pubblico: stanno
 comprando una scommessa. Non promettere numeri che non puoi mostrare, e tienili a
 un prezzo da pionieri.
 
+Il ponte verso quel traffico è partito il **14/08** — 193 schede evento e 204
+pagine comune che linkano i luoghi del proprio comune — quindi al 13 non aveva
+ancora prodotto niente per definizione. **È la prima cosa da guardare
+nell'export successivo**, e il metro è basso apposta: bastano poche decine di
+impressioni per dire che il ponte porta acqua, perché il confronto è con 58.
+
 (La cifra "1.932 clic al mese di `eventi.html`" che stava qui era sbagliata due
 volte: era il totale del sito, non di quella pagina, ed è invecchiata in tre
-giorni. `eventi.html` da sola fa 331 clic su 13.553 impressioni.)
+giorni. `eventi.html` da sola fa 404 clic su 16.308 impressioni in tre mesi.)
 
 #### Tre numeri, cercati in rete il 13/08/2026
 
@@ -776,13 +1228,18 @@ Servono a tenere le aspettative in scala, non a fare un piano industriale.
 | ricavo di una directory di nicchia piccola | **100-500 $/mese**, cioè qualche migliaio di euro l'anno |
 | traffico da cui si comincia a poter vendere | **3.000-5.000 visite/mese** |
 
-Il terzo è quello che conta adesso, e nei tre giorni fra questa ricerca e
-l'export del 14/08 è cambiato: il sito ha fatto **2.777 clic in 28 giorni**, cioè
-è arrivato *al bordo* di quella soglia invece di stare molto sotto. Non
-cambia la conclusione, ne cambia il tono: la leva resta far crescere le pagine,
-ma non è più una scadenza lontana. Attenzione a due cose prima di brindare —
-quel numero è concentrato al 95% negli ultimi dieci giorni, e va alle schede
-evento, non a `luoghi.html`, che è quello che si sta vendendo.
+Il terzo è quello che conta adesso, ed è stato superato in due giorni: fra l'8 e
+il 13 agosto il sito ha fatto **2.466 clic in sei giorni**, cioè viaggia sopra le
+5.000 visite al mese. Non cambia la conclusione, ne cambia il tono: la soglia da
+cui "si comincia a poter vendere" non è più una scadenza lontana.
+
+Prima di brindare, però, tre cose. Il **71% di tutti i clic dei tre mesi sta in
+sei giorni** di alta stagione, e il sito non ha mai vissuto un ottobre: il numero
+vero si legge a metà settembre (vedi "Il verdetto non è agosto"). Va alle
+**schede evento**, non a `luoghi.html`, che è quello che si sta vendendo. E le
+prime 10 schede fanno metà dei clic delle schede — un pubblico concentrato su
+poche feste non è lo stesso che un pubblico diffuso, e a un cliente di Ovada non
+serve il traffico di Cassinasco.
 
 I primi due numeri vengono in buona parte da blog di aziende che vendono
 software per directory: hanno interesse a far sembrare il business migliore di
@@ -808,12 +1265,39 @@ controlla. Se un giorno nasce un altro spazio venduto — un banner, una scheda
 sponsorizzata in agenda — la regola vale anche lì.
 
 **Far crescere la pagina e far valere di più lo spazio sono lo stesso lavoro.**
-`luoghi.html` è linkata dalla nav di 292 pagine ma da nessun corpo di pagina: la
-pagina comune di Acqui Terme parla di eventi e non dice che ad Acqui ci sono 25
-luoghi. E le pagine di incrocio ("piscine per bambini in provincia di
-Alessandria", "dove andare con la pioggia a Casale") non esistono ancora: sono
-30-50 pagine che rispondono a ricerche vere, e sono l'inventario che poi si
-rivende.
+Fino al 14/08/2026 `luoghi.html` era linkata dalla nav di 292 pagine e da
+**nessun corpo di pagina** tranne le due stagionali — ed è tutta lì la ragione
+per cui non prendeva traffico: alla nav non ci va nessuno. Da quella data ogni
+scheda evento manda ai luoghi del proprio comune, in coda a `blocco_vicini()`
+(`link_luoghi()`): **193 schede su 279**, cioè le pagine che fanno il 76% dei
+clic del sito. Il link si stampa solo se il comune ha davvero un'ancora in
+pagina, e porta il numero — "22 posti per famiglie a Ovada" è una ragione per
+toccare, "Luoghi" no. `tests/luoghi.js` controlla tutte e due le cose: che il
+ponte esista ancora e che nessuna ancora linkata sia inventata.
+
+Stessa cosa sulle **pagine comune**, in coda a `.com-link`: quella di Acqui
+Terme diceva "Tutta l'agenda DAOP" e non che ad Acqui ci sono 25 luoghi. Ora lo
+dice, con quelle parole lì. In tutto **204 pagine su 293** portano il link.
+
+Le landing (`oggi`, `weekend`, le provinciali, le sei d'incrocio, le stagionali)
+restano fuori apposta: non sono di un comune, quindi non c'è un'ancora sola a cui
+mandarle. Il loro ponte verso `luoghi.html` esiste già ed è di altra natura — il
+blocco "dove si mangia" di Ferragosto e Halloween.
+
+Fuori dai generatori restano le due pagine scritte a mano, ed è lì che il link
+si scrive **a mano una volta e basta**: in `eventi.html` sta in coda al blocco
+"TESTO DI ZONA", che è già l'elenco dei link interni e sta **sotto** la lista —
+non nell'hero, che è l'asset da non toccare; in `index.html` sta nel `path-alt`
+della card "Sei un genitore", l'unica delle tre che parla a chi cerca un posto.
+Nessuna delle due passa dai marker, quindi `genera_eventi.py` non le riscrive.
+
+La domanda che quel link deve porre è sempre la stessa, e non è "vedi anche":
+**non un evento, un posto** — cioè la cosa che serve nei giorni in cui in agenda
+non c'è niente. Se un giorno diventa un "scopri di più", ha smesso di funzionare.
+
+E le pagine di incrocio ("piscine per bambini in provincia di Alessandria",
+"dove andare con la pioggia a Casale") non esistono ancora: sono 30-50 pagine
+che rispondono a ricerche vere, e sono l'inventario che poi si rivende.
 
 Cosa manca, in ordine di resa:
 
@@ -821,6 +1305,11 @@ Cosa manca, in ordine di resa:
    (mappe, telefono, sito) ma non le aperture: al rinnovo puoi dire "47 hanno
    chiesto le indicazioni" e non su quante volte. È il momento in cui smetti di
    vendere fiducia e cominci a vendere evidenza.
+   Che la metà buona funzioni è già misurato, ed è il modello da copiare: nei
+   primi tre giorni post-fix gli eventi ci sono — `click_come_arrivare` 14,
+   `apri_ginetto` 11, `click_locandina` 9, `aggiungi_calendario` 6. **Su un
+   evento si sa già quante persone hanno detto "ci vado"; su un luogo non si sa
+   nemmeno quante volte la scheda è stata aperta.**
 2. **`Premium_al`, la data di scadenza.** Nel foglio c'è solo `Premium_dal`:
    **niente si spegne da solo**. È un problema di cassa (nessun innesco per il
    rinnovo) e di correttezza (continui a pubblicare uno spazio non più pagato).
@@ -895,6 +1384,56 @@ Pixel 6, CPU 4x), da non smontare per distrazione:
 Il JSON-LD in fondo (~405 KB) **si lascia**: toglierlo vale ~50 ms misurati e
 costa i rich result eventi sulla pagina più forte del sito.
 
+### Quanto si scorre prima di vedere un evento, e dov'è davvero il grasso
+
+Misurato il 15/08/2026 a 412px, perché è la domanda che torna ogni volta che si
+guarda la pagina sul telefono. Il primo contenuto-evento (la corsia "in
+evidenza") sta a **1.215 px**, cioè 1,3 schermate. Non due: le corsie *sono*
+eventi, con la locandina.
+
+Com'è fatto quel tratto, e qui sta la cosa da non sbagliare:
+
+| | |
+|---|---|
+| hero | **602 px**, di cui **412 di testo** |
+| intestazione "Prossimi Eventi" | 160 px, di cui 128 di testo |
+| barra filtri | 109 px |
+| conteggio + Agenda/Calendario | 44 px |
+| "Vicino a me" | 40 px |
+| "COSA CERCHI" + "VAI AL COMUNE" | 154 px |
+
+**L'hero non è spazio vuoto, è testo** — un paragrafo di cinque righe da 174 px
+più la riga sui centri estivi da 75. Ci si casca facilmente misurando solo gli
+elementi contenitore: i paragrafi senza link dentro spariscono dal conto e
+sembra che ci siano 400 px di aria da recuperare. Non ci sono.
+
+Lo spazio vero recuperabile senza toccare una parola era **72 px**, ed è stato
+preso il 15/08/2026: il padding dell'hero sul telefono era tarato sul desktop
+(120 px sopra per una barra fissa alta 69), l'intestazione e lo stacco
+`.bg-white` erano larghi. Oltre quei 72 px **non esiste una scorciatoia
+tecnica**: quello che resta è testo.
+
+Sul testo si è deciso così, sempre il 15/08/2026, arrivando a **1.111 px** (da
+1.287, cioè 176 in meno e la barra filtri dentro la prima schermata):
+
+- **Il sottotitolo di "Prossimi Eventi" perde la prima frase.** Diceva
+  "Selezionati e verificati dalla community DAOP, giorno per giorno", che è
+  quello che l'hero ha appena detto tre centimetri sopra ("selezionata per le
+  famiglie e verificata evento per evento"). Resta la sola frase che l'hero
+  **non** dice, cioè come si usano i controlli lì sotto: "Cerca un paese,
+  scegli quando e scopri cosa fare con i tuoi figli."
+- **La riga sui centri estivi si alleggerisce ma non sparisce** (`.hero-nota`,
+  0.88rem sul telefono). È un rimando laterale, non il messaggio della pagina —
+  ma è anche un link interno che parte dalla pagina più forte del sito, e
+  quelli non si buttano per venti pixel. Gli stili erano in linea, quindi non
+  si potevano ritoccare da una media query: ora è una classe.
+- **Il paragrafo lungo dell'hero non si tocca**, solo il corpo scende a 1.02rem
+  sul telefono (da cinque righe a quattro). Quell'elenco — *sagre, feste
+  patronali, fiere, laboratori, spettacoli* — è copertura di parole chiave
+  sulla pagina che regge il 12% dei clic, ed è anche la descrizione per chi
+  arriva da Google senza sapere cos'è DAOP. **Sta dentro i marker
+  `EVENTI-HERO`**: si cambia in `genera_eventi.py`, non a mano.
+
 ## Misurare, non stimare
 
 C'è Chromium in `/opt/pw-browsers/chromium-1194/chrome-linux/chrome` e
@@ -915,6 +1454,14 @@ proprie:
   scritte a mano usano percorsi relativi e "funzionano", il che rende il
   confronto ancora più ingannevole. Per provarlo davvero serve un server:
   `python3 -m http.server 8899` e si apre `http://localhost:8899/…`.
+  **Dentro `tests/` non è più così**: dal 15/08/2026 `_aiuto.js` rimappa le
+  richieste `file:///assets/…` sul repo, quindi le prove caricano gli stessi
+  script che vanno online. Vale per la suite, non per una pagina aperta a mano.
+- **La geolocalizzazione vuole un contesto sicuro** e in Playwright il permesso
+  si concede dal contesto (`permissions: ['geolocation']`, `geolocation: {…}`)
+  su `http://localhost`, non da `file://`. In headless senza permesso l'avviso
+  non compare e `getCurrentPosition` **non risponde mai**: è esattamente il caso
+  che la sveglia dei 10 secondi copre, ed è così che è saltato fuori.
 
 ## Verifiche prima di pubblicare
 

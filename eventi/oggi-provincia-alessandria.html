@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cosa fare oggi in provincia di Alessandria | DAOP</title>
-<meta name="description" content="Cosa fare oggi, venerdì 14 agosto 2026, in provincia di Alessandria: 15 eventi in corso, sagre e feste comprese, verificati uno per uno da DAOP.">
+<meta name="description" content="Cosa fare oggi, domenica 16 agosto 2026, in provincia di Alessandria: 26 eventi in corso, sagre e feste comprese, verificati uno per uno da DAOP.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/eventi/oggi-provincia-alessandria.html">
 <meta property="og:title" content="Cosa fare oggi in provincia di Alessandria | DAOP">
-<meta property="og:description" content="Cosa fare oggi, venerdì 14 agosto 2026, in provincia di Alessandria: 15 eventi in corso, sagre e feste comprese, verificati uno per uno da DAOP.">
+<meta property="og:description" content="Cosa fare oggi, domenica 16 agosto 2026, in provincia di Alessandria: 26 eventi in corso, sagre e feste comprese, verificati uno per uno da DAOP.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/eventi/oggi-provincia-alessandria.html">
 <meta property="og:locale" content="it_IT">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cosa fare oggi in provincia di Alessandria | DAOP">
-<meta name="twitter:description" content="Cosa fare oggi, venerdì 14 agosto 2026, in provincia di Alessandria: 15 eventi in corso, sagre e feste comprese,…">
+<meta name="twitter:description" content="Cosa fare oggi, domenica 16 agosto 2026, in provincia di Alessandria: 26 eventi in corso, sagre e feste comprese,…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="daop:provincia" content="AL">
 <link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
@@ -76,6 +76,9 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* La riga di rimando ai centri estivi: e' un collegamento laterale, non
+     il messaggio della pagina, quindi non pesa come il paragrafo sopra. */
+  .hero-nota{margin-top:14px;font-size:0.95rem;opacity:0.9}
   /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
      fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
      nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
@@ -120,6 +123,38 @@
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
   .ev-select.is-on{background:var(--navy);border-color:var(--navy);color:white}
+  /* ── VICINO A ME ──
+     Fuori dalla barra appiccicosa apposta: quella e' scesa a ~109px sul
+     telefono e una riga in piu' la rifarebbe crescere per tutto lo
+     scorrimento. Da fermo e' un solo bottone; i gradini compaiono quando c'e'
+     un punto di partenza, cioe' quando servono. */
+  .ev-geo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
+  .ev-geo-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;cursor:pointer;transition:var(--transition)}
+  .ev-geo-btn:hover:not(:disabled){border-color:var(--orange);color:var(--navy)}
+  .ev-geo-btn:disabled{opacity:0.55;cursor:default}
+  /* Il ripiego non e' un secondo comando pari al primo: al tocco la strada e'
+     una sola, e due pillole identiche affiancate obbligano a scegliere prima
+     di aver capito. Resta un testo, quindi resta raggiungibile. */
+  .ev-geo-btn.is-alt{border-color:transparent;background:none;font-weight:600;color:var(--text-light);text-decoration:underline;text-underline-offset:3px;padding:9px 4px}
+  .ev-geo-btn.is-alt:hover{color:var(--navy);border-color:transparent}
+  .ev-geo-btn.is-clear{padding:9px 13px;line-height:1}
+  /* I gradini prendono una riga loro: in coda agli altri controlli si
+     spezzavano a meta' e la ✕ finiva orfana su una terza riga. */
+  .ev-geo-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .ev-geo-chips:empty{display:none}
+  .ev-geo-from{font-size:0.82rem;font-weight:700;color:var(--navy)}
+  /* Stretti quel tanto che basta a stare tutti e quattro in fila su un
+     telefono da 372px: a 12px di lato il quarto cadeva da solo su una
+     seconda riga, e un gradino isolato sembra un'altra cosa. */
+  .ev-geo-chip{font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:600;color:var(--text-mid);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:7px 9px;min-height:36px;cursor:pointer;transition:var(--transition);white-space:nowrap}
+  .ev-geo-chip:hover:not(:disabled){border-color:var(--orange)}
+  .ev-geo-chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:white}
+  .ev-geo-chip:disabled{opacity:0.38;cursor:default}
+  .ev-geo-in{font-family:'DM Sans',sans-serif;font-size:0.84rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;min-width:0;flex:1 1 180px;max-width:280px}
+  .ev-geo-note{flex:1 1 100%;font-size:0.74rem;line-height:1.5;color:var(--text-light);margin:0}
+  .ev-geo-hint{font-weight:700;color:var(--navy)}
+  .ev-geo-hint:empty,.ev-geo-note:empty{display:none}
+  .ev-km{display:inline-block;font-size:0.72rem;font-weight:700;color:var(--text-light);white-space:nowrap}
   .ev-viewbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 0}
   .events-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:0}
   .ev-viewtoggle{margin-left:auto;display:inline-flex;gap:2px;background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:3px}
@@ -340,7 +375,13 @@
   }
   @media(max-width:600px){
     section{padding:72px 20px}
-    .page-hero{padding:120px 20px 72px}
+    /* La barra fissa in cima e' alta 69px: il padding di sopra deve solo
+       scavalcarla, non lasciarle mezzo schermo. A 96px ne restano 27 di
+       respiro, che bastano - i 120 di prima erano tarati sul desktop. */
+    .page-hero{padding:96px 20px 52px}
+    .page-hero h1{margin-bottom:12px}
+    .page-hero p{font-size:1.02rem}
+    .hero-nota{margin-top:15px;font-size:0.88rem}
     .ev-row{grid-template-columns:52px 1fr 18px;gap:12px}
     .ev-thumb{width:52px;height:52px}
     .ev-name{font-size:1rem}
@@ -357,13 +398,16 @@
    occupati per tutto lo scorrimento. Se un domani un'etichetta si allunga
    troppo tornano a capo da sole, cioe' come stavano prima. */
 .ev-select{flex:1 1 auto;min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
+    /* Solo qui i gradini prendono una riga loro: su schermi larghi ci
+       stanno in fila col campo e sarebbero 40px di vuoto per niente. */
+    .ev-geo-chips{flex:1 1 100%}
     /* Fra la fine dell'hero e il primo evento c'erano l'intestazione di
        sezione, quattro controlli e sedici pillole: su un telefono voleva dire
        due schermate di filtri prima di un evento. L'intestazione qui ripete
        quello che l'hero ha appena detto, quindi si stringe. */
-    .section-header{margin-bottom:22px}
+    .section-header{margin-bottom:16px}
     .section-subtitle{font-size:0.95rem;line-height:1.6}
-    .bg-white{padding-top:44px}
+    .bg-white{padding-top:28px}
     .ev-comuni-nav{gap:6px 8px;margin-top:12px}
     .ev-comuni a{padding:8px 13px;font-size:0.84rem}
     .ev-highlights{margin-top:20px;gap:20px}
@@ -476,6 +520,17 @@
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
+   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
+   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
+   e' un <aside> dentro l'articolo, non una fascia di pagina. */
+.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
+  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
+.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
+.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
+  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
+  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -675,7 +730,7 @@
       "@id": "https://www.daop.it/eventi/oggi-provincia-alessandria.html",
       "url": "https://www.daop.it/eventi/oggi-provincia-alessandria.html",
       "name": "Cosa fare oggi in provincia di Alessandria | DAOP",
-      "description": "Cosa fare oggi, venerdì 14 agosto 2026, in provincia di Alessandria: 15 eventi in corso, sagre e feste comprese, verificati uno per uno da DAOP.",
+      "description": "Cosa fare oggi, domenica 16 agosto 2026, in provincia di Alessandria: 26 eventi in corso, sagre e feste comprese, verificati uno per uno da DAOP.",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -686,7 +741,7 @@
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "dateModified": "2026-08-14"
+      "dateModified": "2026-08-16"
     },
     {
       "@type": "BreadcrumbList",
@@ -720,7 +775,7 @@
     {
       "@type": "ItemList",
       "name": "Eventi di oggi in provincia di Alessandria",
-      "numberOfItems": 9,
+      "numberOfItems": 16,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -761,20 +816,62 @@
         {
           "@type": "ListItem",
           "position": 7,
-          "url": "https://www.daop.it/eventi/il-borgo-diventa-osteria-edizione-san-sebastiano-curone.html",
-          "name": "Il Borgo diventa Osteria - 12^ Edizione"
+          "url": "https://www.daop.it/eventi/castelli-aperti-a-ferragosto-acqui-terme.html",
+          "name": "Castelli Aperti a Ferragosto"
         },
         {
           "@type": "ListItem",
           "position": 8,
-          "url": "https://www.daop.it/eventi/cena-in-piazza-con-musica-anni-90-nuova-pro-loco-d-strevi.html",
-          "name": "Cena in Piazza con Musica Anni 90/2000 - Nuova Pro Loco di Strevi"
+          "url": "https://www.daop.it/eventi/castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno.html",
+          "name": "Castelli Aperti a Ferragosto - Gipsoteca Giulio Monteverde"
         },
         {
           "@type": "ListItem",
           "position": 9,
-          "url": "https://www.daop.it/eventi/sagra-degli-gnocchi-al-pesto-circolo-ricreativo-en-voltaggio.html",
-          "name": "Sagra degli Gnocchi al Pesto - Circolo Ricreativo Endas Voltaggio"
+          "url": "https://www.daop.it/eventi/assaggia-casalnoceto.html",
+          "name": "Assaggia Casalnoceto"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "url": "https://www.daop.it/eventi/castelli-aperti-a-ferragosto-palazzo-lignana-rivalta-bormida.html",
+          "name": "Castelli Aperti a Ferragosto - Palazzo Lignana"
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "url": "https://www.daop.it/eventi/castelli-aperti-a-ferragosto-salita-alla-torre-del-trisobbio.html",
+          "name": "Castelli Aperti a Ferragosto - Salita alla Torre del Castello"
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "url": "https://www.daop.it/eventi/cena-in-piazza-musica-tributo-ai-queen-casalnoceto.html",
+          "name": "Cena in Piazza + Musica Tributo ai Queen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "url": "https://www.daop.it/eventi/festa-dei-rioni-gli-amici-del-campetto-castelceriolo.html",
+          "name": "Festa dei Rioni 2026 - Gli Amici del Campetto"
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "url": "https://www.daop.it/eventi/silvanoincontrada-silvano-d-orba.html",
+          "name": "SilvanoInContraDA"
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "url": "https://www.daop.it/eventi/cena-con-rosticciata-strevese-e-b-side-party-band-strevi.html",
+          "name": "Cena con Rosticciata Strevese e B-Side Party Band - Nuova Pro Loco di Strevi"
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "url": "https://www.daop.it/eventi/sagra-di-san-rocco-con-il-superagnolotto-tassarolo.html",
+          "name": "44ª Sagra di San Rocco con il SuperAgnolotto"
         }
       ]
     }
@@ -823,16 +920,17 @@
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <a href="/eventi/oggi.html">Oggi</a> › <span>Alessandria</span>
     </div>
     <h1>Cosa fare oggi in provincia di Alessandria</h1>
-    <p class="ev-when">15 eventi in corso oggi, venerdì 14 agosto 2026</p>
+    <p class="ev-when">26 eventi in corso oggi, domenica 16 agosto 2026</p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <p>Quello che c'è <strong>oggi</strong>, venerdì 14 agosto 2026, in provincia di Alessandria: <strong>15 eventi</strong> in 10 comuni diversi, con l'orario, il paese e la scheda di ognuno. Li verifichiamo uno per uno prima di pubblicarli, e la pagina si rifà da sola ogni notte: qui non trovi cose di ieri.</p><div class="ev-toolbar lan-toolbar" id="lan-toolbar"><div class="ev-search"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="lan-q" placeholder="Cerca un paese, una sagra…" aria-label="Cerca in questo elenco" autocomplete="off"></div><select class="ev-select" id="lan-tipo" data-campo="category" aria-label="Filtra per tipo di evento"><option value="all">Categorie</option><option value="feste">Sagre &amp; Feste</option><option value="spettacoli">Spettacoli</option><option value="musica">Musica</option><option value="cultura">Cultura &amp; Natura</option></select></div><p class="lan-count" id="lan-count" role="status"></p><p class="lan-vuoto lan-nulla" id="lan-nulla" hidden>Con questi filtri non resta niente. <button type="button" id="lan-reset">Azzera i filtri</button></p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>In corso oggi</h3></div></div><ul class="com-ev"><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3945956994936142885.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure.html">Mostra delle Illusioni - Museo dei Campionissimi</a><span class="com-luogo">Novi Ligure (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3960098760660391404.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria.html">Musei Aperti ad Agosto 2026 - Complesso Conventuale di San Francesco</a><span class="com-luogo">Alessandria (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3960098760660391404.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-01-musei-aperti-ad-agosto-2026-museo-civico-di-palazz">Musei Aperti ad Agosto 2026 - Museo Civico di Palazzo Cuttica</a><span class="com-luogo">Alessandria (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3960098760660391404.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria.html">Musei Aperti ad Agosto 2026 - Sale d&#x27;Arte di Via Machiavelli</a><span class="com-luogo">Alessandria (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3951996366445679636.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-08-mostra-collettiva-giudice-de-angelis">Mostra Collettiva Giudice – De Angelis</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3951996366445679636.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-08-mostra-personale-di-pierangelo-bertolo-pittura-e-s">Mostra Personale di Pierangelo Bertolo – Pittura e scultura</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3958455991880183956.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/fassona-brace-madonna-della-villa-carpeneto.html">Fassona &amp; Brace Madonna della Villa</a><span class="com-luogo">Carpeneto (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3961385172437437689.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/sagra-dei-salamini-d-asino-polisportiva-m-denegri-castelferro.html">49ª Sagra dei Salamini d&#x27;Asino - Polisportiva M. Denegri A.S.D.</a><span class="com-luogo">Castelferro (AL)</span></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5" data-province="al" data-category="spettacoli"><img class="com-th" src="/assets/miniature/daop_alessandria_3946461640522258062.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 21:45<span class="com-cat">Spettacolo</span></span><a class="com-go" href="/eventi.html#ev-2026-08-14-cantando-il-cinema">Cantando il Cinema</a><span class="com-luogo">Casalnoceto (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3946461640522258062.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-14-la-radio-e-la-macchina-da-scrivere-nella-storia">La Radio e la Macchina da Scrivere nella Storia</a><span class="com-luogo">Casalnoceto (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3952142543317285869.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 18:00<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-sull-aia-pianlago-ponzone.html">Festa sull&#x27;Aia Pianlago</a><span class="com-luogo">Ponzone (AL)</span></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5" data-province="al" data-category="spettacoli"><img class="com-th" src="/assets/miniature/daop_alessandria_3947851034315491228.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 21:30<span class="com-cat">Spettacolo</span></span><a class="com-go" href="/eventi.html#ev-2026-08-14-musical-chiudo-gli-occhi-e-penso-a-te-pro-loco-cig">Musical Chiudo gli Occhi e Penso a Te - Pro Loco Ciglione</a><span class="com-luogo">Ponzone (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3960736931572200005.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/il-borgo-diventa-osteria-edizione-san-sebastiano-curone.html">Il Borgo diventa Osteria - 12^ Edizione</a><span class="com-luogo">San Sebastiano Curone (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3963520392629051459.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 20:30<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/cena-in-piazza-con-musica-anni-90-nuova-pro-loco-d-strevi.html">Cena in Piazza con Musica Anni 90/2000 - Nuova Pro Loco di Strevi</a><span class="com-luogo">Strevi (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3963084803521187511.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/sagra-degli-gnocchi-al-pesto-circolo-ricreativo-en-voltaggio.html">Sagra degli Gnocchi al Pesto - Circolo Ricreativo Endas Voltaggio</a><span class="com-luogo">Voltaggio (AL)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Domani</h3><p class="com-per">Da tenere d&#x27;occhio</p></div></div><ul class="com-ev"><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-acqui-terme.html">Castelli Aperti a Ferragosto</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3951996366445679636.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani · 21:30<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/saturday-open-ferragosto-in-citta-acqui-terme.html">Saturday Open – Ferragosto in Città</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-castelli-aperti-a-ferragosto-castello-di-razzano">Castelli Aperti a Ferragosto - Castello di Razzano</a><span class="com-luogo">Alfiano Natta (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno.html">Castelli Aperti a Ferragosto - Gipsoteca Giulio Monteverde</a><span class="com-luogo">Bistagno (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3960097640546350700.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani · 20:00<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/assaggia-casalnoceto.html">Assaggia Casalnoceto</a><span class="com-luogo">Casalnoceto (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3946461640522258062.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/cena-in-piazza-musica-con-nico-e-franz-casalnoceto.html">Cena in Piazza + Musica con Nico e Franz</a><span class="com-luogo">Casalnoceto (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-castelli-aperti-a-ferragosto-museo-d-arte-sacra">Castelli Aperti a Ferragosto - Museo d&#x27;Arte Sacra</a><span class="com-luogo">Cassine (AL)</span></span></li><li style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16);--cat-ink:#846a1a" data-province="al" data-category="musica"><img class="com-th" src="/assets/miniature/daop_alessandria_3960097229429602337.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Musica</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-ferragosto-in-piazza-doria-con-i-deejays-in-tour-p">Ferragosto in Piazza Doria con i Deejays in Tour - Pro Loco Garbagna</a><span class="com-luogo">Garbagna (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-castelli-aperti-a-ferragosto-visita-del-borgo">Castelli Aperti a Ferragosto - Visita del borgo</a><span class="com-luogo">Ozzano Monferrato (AL)</span></span></li><li style="--cat-color:#c9a227;--cat-tint:rgba(201,162,39,0.16);--cat-ink:#846a1a" data-province="al" data-category="musica"><img class="com-th" src="/assets/miniature/daop_alessandria_3947851034315491228.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani · 21:30<span class="com-cat">Musica</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-serata-discorevival-anni-80-summer-nights-dancing">Serata Discorevival Anni 80 Summer Nights Dancing - Pro Loco Ciglione</a><span class="com-luogo">Ponzone (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-palazzo-lignana-rivalta-bormida.html">Castelli Aperti a Ferragosto - Palazzo Lignana</a><span class="com-luogo">Rivalta Bormida (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste"><img class="com-th" src="/assets/miniature/daop_alessandria_3963520392629051459.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani · 20:30<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/cena-in-piazza-con-set-latino-americano-e-balli-di-strevi.html">Cena in Piazza con Set Latino Americano e Balli di Gruppo - Nuova Pro Loco di…</a><span class="com-luogo">Strevi (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-salita-alla-torre-del-trisobbio.html">Castelli Aperti a Ferragosto - Salita alla Torre del Castello</a><span class="com-luogo">Trisobbio (AL)</span></span></li></ul></section><h2>I comuni della provincia di Alessandria con eventi in programma</h2><div class="com-link"><a href="/eventi/comune/castelnuovo-scrivia.html">Castelnuovo Scrivia</a><a href="/eventi/comune/alessandria.html">Alessandria</a><a href="/eventi/comune/acqui-terme.html">Acqui Terme</a><a href="/eventi/comune/ponzone.html">Ponzone</a><a href="/eventi/comune/villaromagnano.html">Villaromagnano</a><a href="/eventi/comune/novi-ligure.html">Novi Ligure</a><a href="/eventi/comune/tortona.html">Tortona</a></div><p>Se quello che cerchi non è per forza oggi: <a href="/sagre-provincia-alessandria.html">tutte le sagre e le feste della provincia di Alessandria</a>, in ordine di data e mese per mese.</p><p class="com-fonte">Gli eventi della provincia di Alessandria arrivano da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per questa provincia. <a href="/zone.html">Le pagine della tua zona</a></p><h2>Le altre province</h2><div class="com-link"><a href="/eventi/oggi-provincia-asti.html">Asti (77)</a><a href="/eventi/oggi-provincia-cuneo.html">Cuneo (81)</a></div><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/ferragosto.html">Ferragosto</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-asti.html">Sagre Asti</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div>
+  <p>Quello che c'è <strong>oggi</strong>, domenica 16 agosto 2026, in provincia di Alessandria: <strong>26 eventi</strong> in 18 comuni diversi, con l'orario, il paese e la scheda di ognuno. Li verifichiamo uno per uno prima di pubblicarli, e la pagina si rifà da sola ogni notte: qui non trovi cose di ieri.</p><div class="ev-toolbar lan-toolbar" id="lan-toolbar"><div class="ev-search"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="lan-q" placeholder="Cerca un paese, una sagra…" aria-label="Cerca in questo elenco" autocomplete="off"></div><select class="ev-select" id="lan-tipo" data-campo="category" aria-label="Filtra per tipo di evento"><option value="all">Categorie</option><option value="feste">Sagre &amp; Feste</option><option value="spettacoli">Spettacoli</option><option value="cultura">Cultura &amp; Natura</option></select></div><div class="ev-geo" id="ev-geo" hidden><button class="ev-geo-btn" id="ev-geo-go" type="button">📍 Vicino a me</button><button class="ev-geo-btn is-alt" id="ev-geo-alt" type="button">oppure parti da un comune</button><input class="ev-geo-in" id="ev-geo-q" list="ev-geo-list" type="text" hidden placeholder="Scrivi un comune…" aria-label="Scegli il comune da cui misurare la distanza" autocomplete="off"><datalist id="ev-geo-list"></datalist><span class="ev-geo-from" id="ev-geo-from" hidden></span><button class="ev-geo-btn is-clear" id="ev-geo-clear" type="button" hidden aria-label="Togli il filtro per distanza">✕</button><span class="ev-geo-chips" id="ev-geo-chips"></span><p class="ev-geo-note ev-geo-hint" id="ev-geo-hint" role="status"></p><p class="ev-geo-note" id="ev-geo-note"></p></div><p class="lan-count" id="lan-count" role="status"></p><p class="lan-vuoto lan-nulla" id="lan-nulla" hidden>Con questi filtri non resta niente. <button type="button" id="lan-reset">Azzera i filtri</button></p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>In corso oggi</h3></div></div><ul class="com-ev"><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.7554907" data-lon="8.7758364" data-citta="Novi Ligure"><img class="com-th" src="/assets/miniature/daop_alessandria_3945956994936142885.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure.html">Mostra delle Illusioni - Museo dei Campionissimi</a><span class="com-luogo">Novi Ligure (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.9110327" data-lon="8.6148186" data-citta="Alessandria"><img class="com-th" src="/assets/miniature/daop_alessandria_3960098760660391404.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria.html">Musei Aperti ad Agosto 2026 - Complesso Conventuale di San Francesco</a><span class="com-luogo">Alessandria (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.913" data-lon="8.6155" data-citta="Alessandria"><img class="com-th" src="/assets/miniature/daop_alessandria_3960098760660391404.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-01-musei-aperti-ad-agosto-2026-museo-civico-di-palazz">Musei Aperti ad Agosto 2026 - Museo Civico di Palazzo Cuttica</a><span class="com-luogo">Alessandria (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.9110327" data-lon="8.6148186" data-citta="Alessandria"><img class="com-th" src="/assets/miniature/daop_alessandria_3960098760660391404.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria.html">Musei Aperti ad Agosto 2026 - Sale d&#x27;Arte di Via Machiavelli</a><span class="com-luogo">Alessandria (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.6743287" data-lon="8.4684633" data-citta="Acqui Terme"><img class="com-th" src="/assets/miniature/daop_alessandria_3951996366445679636.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-08-mostra-collettiva-giudice-de-angelis">Mostra Collettiva Giudice – De Angelis</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.6743287" data-lon="8.4684633" data-citta="Acqui Terme"><img class="com-th" src="/assets/miniature/daop_alessandria_3951996366445679636.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-08-mostra-personale-di-pierangelo-bertolo-pittura-e-s">Mostra Personale di Pierangelo Bertolo – Pittura e scultura</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.6961995" data-lon="8.6117853" data-citta="Carpeneto"><img class="com-th" src="/assets/miniature/daop_alessandria_3958455991880183956.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/fassona-brace-madonna-della-villa-carpeneto.html">Fassona &amp; Brace Madonna della Villa</a><span class="com-luogo">Carpeneto (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.7572636" data-lon="8.6193298" data-citta="Castelferro"><img class="com-th" src="/assets/miniature/daop_alessandria_3961385172437437689.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/sagra-dei-salamini-d-asino-polisportiva-m-denegri-castelferro.html">49ª Sagra dei Salamini d&#x27;Asino - Polisportiva M. Denegri A.S.D.</a><span class="com-luogo">Castelferro (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.9131769" data-lon="8.9811563" data-citta="Casalnoceto"><img class="com-th" src="/assets/miniature/daop_alessandria_3946461640522258062.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-14-la-radio-e-la-macchina-da-scrivere-nella-storia">La Radio e la Macchina da Scrivere nella Storia</a><span class="com-luogo">Casalnoceto (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.5704509" data-lon="8.4571589" data-citta="Ponzone"><img class="com-th" src="/assets/miniature/daop_alessandria_3952142543317285869.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso · 18:00<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-sull-aia-pianlago-ponzone.html">Festa sull&#x27;Aia Pianlago</a><span class="com-luogo">Ponzone (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.6740198" data-lon="8.4726563" data-citta="Acqui Terme"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-acqui-terme.html">Castelli Aperti a Ferragosto</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="45.0404173" data-lon="8.1999924" data-citta="Alfiano Natta"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-castelli-aperti-a-ferragosto-castello-di-razzano">Castelli Aperti a Ferragosto - Castello di Razzano</a><span class="com-luogo">Alfiano Natta (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.6607771" data-lon="8.3699065" data-citta="Bistagno"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno.html">Castelli Aperti a Ferragosto - Gipsoteca Giulio Monteverde</a><span class="com-luogo">Bistagno (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.9131769" data-lon="8.9811563" data-citta="Casalnoceto"><img class="com-th" src="/assets/miniature/daop_alessandria_3960097640546350700.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso · 20:00<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/assaggia-casalnoceto.html">Assaggia Casalnoceto</a><span class="com-luogo">Casalnoceto (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.749948" data-lon="8.527846" data-citta="Cassine"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-castelli-aperti-a-ferragosto-museo-d-arte-sacra">Castelli Aperti a Ferragosto - Museo d&#x27;Arte Sacra</a><span class="com-luogo">Cassine (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="45.1089229" data-lon="8.3702303" data-citta="Ozzano Monferrato"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-15-castelli-aperti-a-ferragosto-visita-del-borgo">Castelli Aperti a Ferragosto - Visita del borgo</a><span class="com-luogo">Ozzano Monferrato (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.7113749" data-lon="8.5500679" data-citta="Rivalta Bormida"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-palazzo-lignana-rivalta-bormida.html">Castelli Aperti a Ferragosto - Palazzo Lignana</a><span class="com-luogo">Rivalta Bormida (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.661646" data-lon="8.586149" data-citta="Trisobbio"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">in corso<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi/castelli-aperti-a-ferragosto-salita-alla-torre-del-trisobbio.html">Castelli Aperti a Ferragosto - Salita alla Torre del Castello</a><span class="com-luogo">Trisobbio (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="44.6740198" data-lon="8.4726563" data-citta="Acqui Terme"><img class="com-th" src="/assets/miniature/daop_alessandria_3951996366445679636.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 16:30<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-16-castelli-aperti-2026-castello-dei-paleologi">Castelli Aperti 2026 – Castello dei Paleologi</a><span class="com-luogo">Acqui Terme (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.9131769" data-lon="8.9811563" data-citta="Casalnoceto"><img class="com-th" src="/assets/miniature/daop_alessandria_3946461640522258062.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/cena-in-piazza-musica-tributo-ai-queen-casalnoceto.html">Cena in Piazza + Musica Tributo ai Queen</a><span class="com-luogo">Casalnoceto (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.9164186" data-lon="8.6906025" data-citta="Castelceriolo"><img class="com-th" src="/assets/miniature/daop_alessandria_3958381282402216087.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-dei-rioni-gli-amici-del-campetto-castelceriolo.html">Festa dei Rioni 2026 - Gli Amici del Campetto</a><span class="com-luogo">Castelceriolo (AL)</span></span></li><li style="--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#6a61a5" data-province="al" data-category="spettacoli" data-lat="44.608366" data-lon="8.4875824" data-citta="Ponzone"><img class="com-th" src="/assets/miniature/daop_alessandria_3947851034315491228.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 21:30<span class="com-cat">Spettacolo</span></span><a class="com-go" href="/eventi.html#ev-2026-08-16-il-musichiere-quiz-musicale-pro-loco-ciglione">Il Musichiere - Quiz Musicale - Pro Loco Ciglione</a><span class="com-luogo">Ponzone (AL)</span></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293" data-province="al" data-category="cultura" data-lat="45.0824426" data-lon="8.4235151" data-citta="Rosignano Monferrato"><img class="com-th" src="/assets/miniature/daop_alessandria_3962702201610126145.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi<span class="com-cat">Cultura</span></span><a class="com-go" href="/eventi.html#ev-2026-08-16-castelli-aperti-a-ferragosto-visite-del-borgo">Castelli Aperti a Ferragosto - Visite del borgo</a><span class="com-luogo">Rosignano Monferrato (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.6869148" data-lon="8.6749599" data-citta="Silvano d&#x27;Orba"><img class="com-th" src="/assets/miniature/daop_alessandria_3963643243801070806.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/silvanoincontrada-silvano-d-orba.html">SilvanoInContraDA</a><span class="com-luogo">Silvano d&#x27;Orba (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.698146" data-lon="8.521847" data-citta="Strevi"><img class="com-th" src="/assets/miniature/daop_alessandria_3963520392629051459.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 20:30<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/cena-con-rosticciata-strevese-e-b-side-party-band-strevi.html">Cena con Rosticciata Strevese e B-Side Party Band - Nuova Pro Loco di Strevi</a><span class="com-luogo">Strevi (AL)</span></span></li><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.728549" data-lon="8.771552" data-citta="Tassarolo"><img class="com-th" src="/assets/miniature/daop_alessandria_3960863751244282653.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 19:30<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/sagra-di-san-rocco-con-il-superagnolotto-tassarolo.html">44ª Sagra di San Rocco con il SuperAgnolotto</a><span class="com-luogo">Tassarolo (AL)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Domani</h3><p class="com-per">Da tenere d&#x27;occhio</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="al" data-category="feste" data-lat="44.673751" data-lon="9.09576" data-citta="Cabella Ligure"><img class="com-th" src="/assets/miniature/daop_alessandria_3958372442837640487.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani · 20:00<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-della-birra-pro-loco-cabella-ligure.html">Festa della Birra - Pro Loco Cabella Ligure</a><span class="com-luogo">Cabella Ligure (AL)</span></span></li></ul></section><h2>I comuni della provincia di Alessandria con eventi in programma</h2><div class="com-link"><a href="/eventi/comune/castelnuovo-scrivia.html">Castelnuovo Scrivia</a><a href="/eventi/comune/alessandria.html">Alessandria</a><a href="/eventi/comune/acqui-terme.html">Acqui Terme</a><a href="/eventi/comune/villaromagnano.html">Villaromagnano</a><a href="/eventi/comune/ponzone.html">Ponzone</a><a href="/eventi/comune/novi-ligure.html">Novi Ligure</a><a href="/eventi/comune/tortona.html">Tortona</a></div><p>Se quello che cerchi non è per forza oggi: <a href="/sagre-provincia-alessandria.html">tutte le sagre e le feste della provincia di Alessandria</a>, in ordine di data e mese per mese.</p><p class="com-fonte">Gli eventi della provincia di Alessandria arrivano da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per questa provincia. <a href="/zone.html">Le pagine della tua zona</a></p><h2>Le altre province</h2><div class="com-link"><a href="/eventi/oggi-provincia-asti.html">Asti (65)</a><a href="/eventi/oggi-provincia-cuneo.html">Cuneo (67)</a></div><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/ferragosto.html">Ferragosto</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-asti.html">Sagre Asti</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div>
+  <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend in zona: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
-  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 14 agosto 2026.</p>
+  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 16 agosto 2026.</p>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">
@@ -904,7 +1002,7 @@
 function toggleMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}
 function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}
 </script>
-<script>
+<script src="/assets/js/daop-vicino.js"></script><script>
 (function () {
   var bar = document.getElementById('lan-toolbar');
   if (!bar) return;
@@ -920,6 +1018,16 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
   var gruppi = [].slice.call(document.querySelectorAll('.ev-wrap .com-grp'))
     .filter(function (g) { return g.querySelector('li[data-category]'); });
   if (!voci.length) return;
+
+  // "Vicino a me". Il modulo sta in /assets/js/daop-vicino.js ed e' lo stesso
+  // dell'agenda: qui gli si dice solo dove appendere la distanza dentro una
+  // riga (il blocco col comune) e come questa pagina rifa' i suoi filtri.
+  var vicino = window.daopVicino ? window.daopVicino.avvia({
+    voci: voci,
+    riga: function (l) { return l.querySelector('.com-luogo'); },
+    alRitocco: function () { testo = null; },
+    alCambio: function () { applica(); }
+  }) : null;
 
   // L'indice della ricerca si costruisce alla prima ricerca vera, non al
   // caricamento: stessa ragione che nell'agenda, leggere il testo di tutte le
@@ -953,6 +1061,15 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
   }
   var teste = new Map(gruppi.map(function (g) { return [g, testaDi(g)]; }));
 
+  // Tutti i filtri TRANNE la distanza: serve due volte, una per decidere la
+  // riga e una per contare quanti eventi ci sarebbero a ogni gradino di
+  // distanza. I gradini devono dire quanti se ne vedrebbero davvero.
+  function altri(l, f, t) {
+    return (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
+           (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
+           (!t || indice().get(l).indexOf(t) > -1);
+  }
+
   function applica() {
     var t = q ? q.value.trim().toLowerCase() : '';
     var f = {};
@@ -962,9 +1079,7 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     });
     var visti = 0;
     voci.forEach(function (l) {
-      var ok = (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
-               (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
-               (!t || indice().get(l).indexOf(t) > -1);
+      var ok = altri(l, f, t) && (!vicino || vicino.entro(l));
       l.hidden = !ok;
       if (ok) visti++;
     });
@@ -973,7 +1088,11 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
       g.hidden = vuoto;
       teste.get(g).forEach(function (n) { n.hidden = vuoto; });
     });
-    var filtrato = !!t || sel.some(function (s) { return s.value !== 'all'; });
+    if (vicino) {
+      vicino.conta(function (l) { return altri(l, f, t); });
+    }
+    var filtrato = !!t || (vicino && vicino.attivo()) ||
+                   sel.some(function (s) { return s.value !== 'all'; });
     // A riposo il conteggio non si scrive: la pagina lo dice gia' nell'occhiello
     // e nel paragrafo di apertura, e ripeterlo una terza volta e' rumore.
     conta.textContent = filtrato

@@ -12,7 +12,7 @@ Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
 (opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
 raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections
+import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
@@ -22,6 +22,9 @@ HOME_PATH = os.path.join(ROOT, "index.html")
 HOME_LIMIT = 8  # quanti eventi mostrare nel carosello della home
 JSON_PATH = os.path.join(ROOT, "data", "eventi.json")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
+# Lo scrive genera_luoghi.py, lo legge questo: i comuni che hanno almeno un
+# luogo in /luoghi.html, con l'ancora del loro gruppo. Vedi link_luoghi().
+INDICE_LUOGHI_PATH = os.path.join(ROOT, "data", "luoghi-comuni.json")
 
 # Province i cui eventi vengono pubblicati sul sito. Una sola lista, usata sia dal
 # filtro dei dati sia dal copy che dice "che zona copre DAOP": prima la sigla era
@@ -228,6 +231,32 @@ def coord(e):
     if 35 <= la <= 48 and 6 <= lo <= 19:
         return f"{la:.7f}".rstrip('0').rstrip('.'), f"{lo:.7f}".rstrip('0').rstrip('.')
     return None
+
+
+def geo_attrs(e):
+    """Le coordinate della riga, per il filtro "vicino a me" di eventi.html.
+
+    Sono gia' nel foglio e gia' nel JSON-LD: qui costano ~45 byte per riga,
+    cioe' ~12 KB su 1,4 MB. E' la lezione dei link calendario al contrario -
+    quelli erano 490 byte per riga e li si e' tolti - ma il rapporto e' dodici
+    volte piu' basso e senza questi il filtro non puo' esistere: la distanza
+    non si deduce dal testo.
+
+    Non sono il centroide del comune: Alessandria ha sei punti distinti, e
+    infatti servono proprio a questo, perche' "provincia" non vuol dire
+    "vicino" (23 eventi in provincia di AL stanno oltre 30 km dal capoluogo, e
+    14 eventi entro 25 km sono in un'altra provincia).
+
+    La citta' viaggia insieme perche' il ripiego senza GPS - "parti da un
+    comune" - costruisce il suo elenco leggendo le righe, non una lista
+    generata a parte: un elenco in piu' in pagina sarebbe HTML che quasi
+    nessuno apre."""
+    xy = coord(e)
+    if not xy:
+        return ''
+    citta = esc(e.get('citta') or '')
+    return (f' data-lat="{xy[0]}" data-lon="{xy[1]}"'
+            + (f' data-citta="{citta}"' if citta else ''))
 
 
 TEL_RE = re.compile(r'(?:\+39[\s.]?)?(?:\d[\s.]?){8,12}\d')
@@ -621,7 +650,7 @@ def riga(e, today, hub=None):
                   f'<a href="{f["url"]}" target="_blank" rel="noopener">'
                   f'@{esc(f["ig"])}</a></p>' if f else '')
 
-    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}"{geo_attrs(e)} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-{anchor}">
             {thumb}
             <span class="ev-main">
@@ -1884,6 +1913,17 @@ PAGINA_CSS = """
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
+   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
+   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
+   e' un <aside> dentro l'articolo, non una fascia di pagina. */
+.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
+  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
+.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
+.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
+  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
+  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -2192,6 +2232,85 @@ def firma_daop(rec, oggi):
         '</aside>')
 
 
+# Il canale WhatsApp. Vuoto = non si stampa niente da nessuna parte: meglio
+# nessun invito che un invito rotto.
+CANALE_WA = "https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z"
+
+
+def blocco_canale(dove=""):
+    """L'invito al canale WhatsApp.
+
+    Sta in coda alla scheda e non in cima per una ragione sola: in cima chiede
+    qualcosa a chi non ha ancora avuto niente. Chi e' arrivato in fondo l'orario
+    della sagra ce l'ha, e a quel punto "e il prossimo weekend?" e' una domanda
+    che si sta gia' facendo.
+
+    Il testo dice **quanto spesso si scrive**, prima di ogni altra cosa. La
+    paura di chi si iscrive a un canale non e' il contenuto, e' il diluvio: se
+    la prima riga non risponde a quella, il tasto non si tocca. Per lo stesso
+    motivo non c'e' nessuna promessa in piu' - niente "contenuti esclusivi",
+    che sarebbe una cosa che poi non manteniamo."""
+    if not CANALE_WA:
+        return ''
+    return (
+        '<aside class="ev-canale">'
+        f'<p class="ev-canale-t">Un messaggio il giovedì, e basta</p>'
+        '<p>Ti mandiamo quello che c\'è nel weekend'
+        f'{" vicino a " + esc(dove) if dove else " in zona"}: sagre, feste e '
+        'cose da fare con i bambini. Niente altro.</p>'
+        f'<a class="ev-canale-cta" href="{CANALE_WA}" target="_blank" '
+        'rel="noopener">Segui il canale WhatsApp</a>'
+        '</aside>')
+
+
+_INDICE_LUOGHI = None
+
+
+def indice_luoghi():
+    """I comuni che hanno almeno un luogo in /luoghi.html, letti una volta sola.
+
+    Il file lo scrive genera_luoghi.py, che gira DOPO questo script: si legge
+    quindi l'indice della notte prima. E' voluto, vedi salva_indice_comuni()
+    la'. Se il file non c'e' (prima run, o clone senza la notte precedente) il
+    dizionario e' vuoto e i link semplicemente non si stampano: la pagina esce
+    come prima, senza rompersi."""
+    global _INDICE_LUOGHI
+    if _INDICE_LUOGHI is None:
+        try:
+            with open(INDICE_LUOGHI_PATH, encoding="utf-8") as fh:
+                _INDICE_LUOGHI = json.load(fh)
+        except (OSError, ValueError):
+            _INDICE_LUOGHI = {}
+    return _INDICE_LUOGHI
+
+
+def link_luoghi(citta, prov):
+    """Il link ai luoghi del comune, o '' se in quel comune non ce n'e' nessuno.
+
+    E' l'unico ponte fra le due meta' del sito. Le schede evento fanno l'82% dei
+    clic e /luoghi.html ne fa zero: non perche' sia peggiore, ma perche' fino a
+    oggi ci si arrivava solo dalla nav, e alla nav non ci va nessuno. Chi ha
+    appena letto l'orario di una sagra a Ovada e' esattamente la persona a cui
+    interessa cos'altro c'e' a Ovada.
+
+    Si stampa solo se l'ancora esiste per davvero (stessa regola dei link alle
+    pagine comune): mandare su /luoghi.html senza bersaglio scarica in cima a una
+    pagina da 800 righe, cioe' peggio che non linkare. E si stampa il numero,
+    perche' "22 luoghi" e' una ragione per toccare e "Luoghi" non lo e'."""
+    if not citta:
+        return ''
+    slug = slugify(citta)
+    prov = (prov or '').strip()
+    ancora = f"c-{prov.lower()}-{slug}" if prov else f"c-{slug}"
+    dati = indice_luoghi().get(ancora)
+    if not dati:
+        return ''
+    n = dati.get('n') or 0
+    quanti = "Un posto" if n == 1 else f"{n} posti"
+    return (f'<a href="/luoghi.html#{ancora}">{quanti} per famiglie'
+            f'{a_citta(esc(dati.get("comune") or citta))}</a>')
+
+
 def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
 
@@ -2253,11 +2372,20 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     #
     # L'ordine va dal piu' vicino al piu' largo: chi arriva da "festa <comune>"
     # cerca prima il suo comune, poi la sua provincia, e solo dopo "e stasera?".
+    #
+    # Dal 14/08/2026 nella coda c'e' anche /luoghi.html, ed e' l'unico link che
+    # quella pagina riceve dal corpo di qualcosa che ha traffico. Sta subito
+    # dopo il comune e prima della provincia perche' risponde alla stessa
+    # domanda ("cos'altro c'e' qui?") con l'altra meta' della risposta: non un
+    # altro evento, un posto dove andare quando eventi non ce ne sono.
     coda = []
     mio_hub = (hub or {}).get(citta)
     if mio_hub:
         coda.append(f'<a href="/eventi/comune/{mio_hub["slug"]}.html">Tutti gli eventi'
                     f'{a_citta(mio_hub["nome"])}</a>')
+    lg = link_luoghi(rec.get('citta'), prov)
+    if lg:
+        coda.append(lg)
     if prov in PROVINCE_PUBBLICATE:
         nome_prov = PROVINCE_NOMI[prov]
         coda.append(f'<a href="/sagre-provincia-{slugify(nome_prov)}.html">'
@@ -2476,6 +2604,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   {azioni}
   {firma}
   {altri}
+  {blocco_canale(citta)}
 </article>
 {blocco_ginetto(citta)}</main>
 {foot}
@@ -3832,9 +3961,11 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
   {"".join(blocchi)}
 
   <div class="com-link">
+    {link_luoghi(citta, dati['prov'])}
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
+  {blocco_canale(citta)}
   {f'<h2>Altri comuni della provincia di {esc(prov_nome)}</h2><div class="com-link">{link_altri}</div>' if link_altri else ''}
   {credito}
   <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
@@ -3996,7 +4127,7 @@ def _landing_righe(ev, oggi):
         # legge il JS di una pagina ha gia' letto quello dell'altra.
         slug, _ic, cat = bucket(e)
         out += (f'<li style="{stile}" data-province="{(e.get("prov") or "").lower()}"'
-                f' data-category="{slug}">{thumb}<span class="com-b">'
+                f' data-category="{slug}"{geo_attrs(e)}>{thumb}<span class="com-b">'
                 f'<span class="com-d">{esc(quando)}'
                 f'<span class="com-cat">{esc(cat)}</span></span>'
                 f'<a class="com-go" href="{_href_evento(e)}">'
@@ -4009,6 +4140,38 @@ def _landing_righe(ev, oggi):
 # Sotto questo numero di eventi una barra filtri e' arredamento: si scorre
 # prima la lista che a decidere cosa scegliere in una tendina.
 MIN_FILTRI = 12
+
+
+def _landing_geo(eventi):
+    """Il controllo "Vicino a me" delle pagine di intenzione.
+
+    Stessa soglia dei filtri, e per la stessa ragione: sotto una dozzina di
+    eventi si scorre prima la lista. Conta pero' quelli che hanno davvero le
+    coordinate, perche' senza quelle il controllo e' un comando che non fa
+    niente - ed e' il motivo per cui su /halloween.html (2 eventi a metà
+    agosto) non compare.
+
+    Il markup e' identico a quello scritto a mano in eventi.html, ids compresi:
+    il modulo li cerca per id, e in una pagina il controllo e' uno solo. Parte
+    `hidden` e lo accende il JS, cosi' senza JavaScript non resta un bottone
+    che non risponde."""
+    if sum(1 for e in eventi if coord(e)) < MIN_FILTRI:
+        return ''
+    return (
+        '<div class="ev-geo" id="ev-geo" hidden>'
+        '<button class="ev-geo-btn" id="ev-geo-go" type="button">📍 Vicino a me</button>'
+        '<button class="ev-geo-btn is-alt" id="ev-geo-alt" type="button">oppure parti da un comune</button>'
+        '<input class="ev-geo-in" id="ev-geo-q" list="ev-geo-list" type="text" hidden'
+        ' placeholder="Scrivi un comune…"'
+        ' aria-label="Scegli il comune da cui misurare la distanza" autocomplete="off">'
+        '<datalist id="ev-geo-list"></datalist>'
+        '<span class="ev-geo-from" id="ev-geo-from" hidden></span>'
+        '<button class="ev-geo-btn is-clear" id="ev-geo-clear" type="button" hidden'
+        ' aria-label="Togli il filtro per distanza">✕</button>'
+        '<span class="ev-geo-chips" id="ev-geo-chips"></span>'
+        '<p class="ev-geo-note ev-geo-hint" id="ev-geo-hint" role="status"></p>'
+        '<p class="ev-geo-note" id="ev-geo-note"></p>'
+        '</div>')
 
 
 def _landing_filtri(eventi, con_prov=True):
@@ -4047,6 +4210,9 @@ def _landing_filtri(eventi, con_prov=True):
             ' aria-label="Cerca in questo elenco" autocomplete="off"></div>'
             + tendine +
             '</div>'
+            # Fuori dalla barra, come nell'agenda: la barra e' appiccicosa e una
+            # riga in piu' la farebbe crescere per tutto lo scorrimento.
+            + _landing_geo(eventi) +
             '<p class="lan-count" id="lan-count" role="status"></p>'
             '<p class="lan-vuoto lan-nulla" id="lan-nulla" hidden>Con questi filtri non resta '
             'niente. <button type="button" id="lan-reset">Azzera i filtri</button></p>')
@@ -4170,6 +4336,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 </header>
 <article class="ev-wrap ev-wrap--hero">
   {spec['corpo']}
+  {blocco_canale()}
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
@@ -4182,7 +4349,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
-{LANDING_JS if 'lan-toolbar' in spec['corpo'] else ''}</body>
+{('<script src="/assets/js/daop-vicino.js"></script>' + LANDING_JS) if 'lan-toolbar' in spec['corpo'] else ''}</body>
 </html>
 """
 
@@ -4209,6 +4376,16 @@ LANDING_JS = r"""<script>
   var gruppi = [].slice.call(document.querySelectorAll('.ev-wrap .com-grp'))
     .filter(function (g) { return g.querySelector('li[data-category]'); });
   if (!voci.length) return;
+
+  // "Vicino a me". Il modulo sta in /assets/js/daop-vicino.js ed e' lo stesso
+  // dell'agenda: qui gli si dice solo dove appendere la distanza dentro una
+  // riga (il blocco col comune) e come questa pagina rifa' i suoi filtri.
+  var vicino = window.daopVicino ? window.daopVicino.avvia({
+    voci: voci,
+    riga: function (l) { return l.querySelector('.com-luogo'); },
+    alRitocco: function () { testo = null; },
+    alCambio: function () { applica(); }
+  }) : null;
 
   // L'indice della ricerca si costruisce alla prima ricerca vera, non al
   // caricamento: stessa ragione che nell'agenda, leggere il testo di tutte le
@@ -4242,6 +4419,15 @@ LANDING_JS = r"""<script>
   }
   var teste = new Map(gruppi.map(function (g) { return [g, testaDi(g)]; }));
 
+  // Tutti i filtri TRANNE la distanza: serve due volte, una per decidere la
+  // riga e una per contare quanti eventi ci sarebbero a ogni gradino di
+  // distanza. I gradini devono dire quanti se ne vedrebbero davvero.
+  function altri(l, f, t) {
+    return (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
+           (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
+           (!t || indice().get(l).indexOf(t) > -1);
+  }
+
   function applica() {
     var t = q ? q.value.trim().toLowerCase() : '';
     var f = {};
@@ -4251,9 +4437,7 @@ LANDING_JS = r"""<script>
     });
     var visti = 0;
     voci.forEach(function (l) {
-      var ok = (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
-               (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
-               (!t || indice().get(l).indexOf(t) > -1);
+      var ok = altri(l, f, t) && (!vicino || vicino.entro(l));
       l.hidden = !ok;
       if (ok) visti++;
     });
@@ -4262,7 +4446,11 @@ LANDING_JS = r"""<script>
       g.hidden = vuoto;
       teste.get(g).forEach(function (n) { n.hidden = vuoto; });
     });
-    var filtrato = !!t || sel.some(function (s) { return s.value !== 'all'; });
+    if (vicino) {
+      vicino.conta(function (l) { return altri(l, f, t); });
+    }
+    var filtrato = !!t || (vicino && vicino.attivo()) ||
+                   sel.some(function (s) { return s.value !== 'all'; });
     // A riposo il conteggio non si scrive: la pagina lo dice gia' nell'occhiello
     // e nel paragrafo di apertura, e ripeterlo una terza volta e' rumore.
     conta.textContent = filtrato
@@ -4394,6 +4582,100 @@ def spec_oggi(events, oggi, altre):
                                  "Eventi di oggi", "Oggi", oggi),
         'eventi': len(adesso),
     }
+
+
+MSG_PATH = os.path.join(ROOT, "data", "messaggio-canale.txt")
+MSG_MAX = 10          # quanti eventi nel messaggio
+MSG_PER_COMUNE = 2    # quanti al massimo dallo stesso paese
+MSG_PER_MANIF = 2     # quanti al massimo dalla stessa manifestazione
+
+
+def _msg_riga(e, sab, dom):
+    """Una riga: nome, paese, quando. Il "quando" e' sab/dom e non la data,
+    perche' in un messaggio che parla di UN weekend la data e' rumore."""
+    giorni = [n for n, g in (("sab", sab), ("dom", dom)) if in_corso(e, g)]
+    ora = (e.get('ora') or '').strip().split('-')[0].strip()
+    quando = "/".join(giorni) + (f" {ora}" if ora else "")
+    coda = " · ".join(x for x in [(e.get('citta') or '').strip(), quando] if x)
+    return f"• {(e.get('nome') or '').strip()}" + (f" — {coda}" if coda else "")
+
+
+def messaggio_canale(events, oggi):
+    """Il testo del messaggio del giovedi', gia' pronto da copiare e incollare.
+
+    Nasce il 14/08/2026 col canale WhatsApp, e la ragione per cui e' un file e
+    non un post automatico e' che WhatsApp **non ha API pubbliche per
+    pubblicare sui canali**: quel pezzo resta a mano per forza. Quello che si
+    puo' togliere di mezzo e' il resto - decidere cosa mettere, cercare gli
+    orari, scrivere. Il generatore ce l'ha gia' tutto, quindi lo scrive lui e
+    la gestione del canale diventa un copia-incolla da due minuti.
+
+    Perche' due minuti contano: un canale si abbandona quando pubblicare e'
+    lavoro. Se ogni giovedi' bisogna aprire l'agenda, scegliere, controllare
+    gli orari e scrivere, si salta la seconda settimana. Se il messaggio e'
+    gia' fatto, no.
+
+    La selezione: al massimo MSG_MAX eventi, non piu' di MSG_PER_COMUNE dallo
+    stesso paese. Il tetto per comune non e' estetica - senza, una patronale da
+    19 sotto-eventi si prende tutto il messaggio e a chi sta dall'altra parte
+    della provincia non arriva niente. Chi vuole tutto ha il link in fondo.
+
+    L'ordine mette davanti quello che **comincia** in questi due giorni. Con il
+    solo d_start il primo messaggio veniva fatto di dieci mostre: sono aperte
+    da settimane, quindi hanno la data di inizio piu' vecchia e vincono
+    l'ordinamento - ma "cosa c'e' questo weekend" non vuol dire "cosa e'
+    ancora aperto". Le mostre restano, dopo, e ci arrivano quando c'e' posto."""
+    sab, dom = weekend_range(oggi)
+    # Dentro i due gruppi l'ordine e' mescolato, ma **in modo deterministico
+    # sulla data del weekend**: due run dello stesso giovedi' danno lo stesso
+    # messaggio (se no il file si ricommitterebbe a ogni run notturna), due
+    # weekend diversi danno un giro diverso. Serve contro una distorsione che
+    # con l'ordine alfabetico non si vede finche' non guardi quattro settimane
+    # di fila: Acqui e Alfiano ci sono sempre, Vesime e Voltaggio mai. Su un
+    # sito che campa di paesi da 800 abitanti e' esattamente il pubblico che
+    # non possiamo permetterci di non nominare.
+    mescola = random.Random(sab.isoformat())
+    del_weekend = [e for e in events if e['d_start'] <= dom and e['d_end'] >= sab]
+    mescola.shuffle(del_weekend)
+    del_weekend.sort(key=lambda e: 0 if e['d_start'] >= sab else 1)
+    quando = (f"sabato {sab.day} e domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}"
+              if sab.month == dom.month else
+              f"sabato {sab.day} {MESI_LUNGHI[sab.month - 1]} e "
+              f"domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}")
+
+    righe, per_comune, per_manif = [], collections.Counter(), collections.Counter()
+    for e in del_weekend:
+        c = _key(e.get('citta'))
+        # Il tetto per manifestazione e' l'altra meta' di quello per comune, e
+        # serve al caso opposto: "Castelli Aperti a Ferragosto" e' UN'iniziativa
+        # in quindici paesi diversi, quindi il tetto per comune non la ferma e
+        # da sola si prendeva sei righe su dieci. Sono due monopoli diversi -
+        # uno concentra un paese, l'altro un'iniziativa - e servono tutti e due.
+        m = _key(e.get('manifest')) if (e.get('manifest') or '').strip() else None
+        if per_comune[c] >= MSG_PER_COMUNE or (m and per_manif[m] >= MSG_PER_MANIF):
+            continue
+        per_comune[c] += 1
+        if m:
+            per_manif[m] += 1
+        righe.append(_msg_riga(e, sab, dom))
+        if len(righe) >= MSG_MAX:
+            break
+
+    if not del_weekend:
+        testo = (f"Per {quando} non abbiamo ancora niente di verificato in agenda.\n"
+                 f"Le sagre arrivano spesso a ridosso: l'agenda si rifà ogni notte.\n\n"
+                 f"👉 {SITE_URL}/eventi/weekend.html")
+    else:
+        resto = len(del_weekend) - len(righe)
+        coda = (f"\n…e altri {resto} in agenda." if resto > 0 else "")
+        testo = (f"🎪 *Cosa c'è questo weekend*\n{quando.capitalize()}\n\n"
+                 + "\n".join(righe) + coda
+                 + f"\n\n👉 Tutti gli eventi: {SITE_URL}/eventi/weekend.html")
+
+    with open(MSG_PATH, "w", encoding="utf-8") as fh:
+        fh.write(testo + "\n")
+    print(f"[genera_eventi] messaggio canale: {len(righe)} eventi su "
+          f"{len(del_weekend)} del weekend -> data/messaggio-canale.txt")
 
 
 def spec_weekend(events, oggi, altre):
@@ -5889,6 +6171,7 @@ def main():
     scrivi_metodo(events)
     scrivi_zone(events, hub)
     scrivi_box(events, oggi)
+    messaggio_canale(events, oggi)
     # aggiorna l'istantanea committata
     # 'riga' resta fuori dall'istantanea: e' la posizione nel foglio, cambia a
     # ogni inserimento e sporcherebbe il diff di data/eventi.json a ogni run.

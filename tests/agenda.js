@@ -107,6 +107,119 @@ module.exports = async function agenda(browser) {
   }, id), 'arrivando da un\'ancora il link calendario risulta compilato');
   await ctx.close();
 
+  // ── "Vicino a me" ─────────────────────────────────────────────────────
+  // Si riapre la pagina con una spia sulla Geolocation API: la regola numero
+  // uno e' che la posizione non si chieda da sola. Il resto si prova dal
+  // ripiego "parti da un comune", che non ha bisogno di permessi ed e' la
+  // stessa strada che percorre chi il permesso l'ha negato.
+  r.titolo('eventi.html — vicino a me');
+  ({ ctx, page } = await apri(browser, 'eventi.html', 412, () => {
+    window.__geo = 0;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition = function () { window.__geo++; };
+    }
+  }));
+
+  r.ok(await page.evaluate(() => window.__geo) === 0,
+    'la posizione NON si chiede al caricamento (serve un tocco)');
+
+  const conCoord = await page.locator('.event-card[data-lat][data-lon]').count();
+  const tutte = await page.locator('.event-card').count();
+  r.ok(conCoord === tutte, `ogni riga porta le sue coordinate: ${conCoord}/${tutte}`);
+  r.ok(await page.locator('#ev-geo').isVisible(), 'il controllo compare quando il JS c\'e\'');
+
+  // L'ordine del documento prima di toccare qualsiasi cosa: serve piu' sotto a
+  // dimostrare che il raggio non riordina niente.
+  const ordine0 = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('.event-card')).map((c) => c.id));
+
+  // L'elenco dei comuni si costruisce all'apertura, non al caricamento.
+  r.ok(await page.locator('#ev-geo-list option').count() === 0,
+    'l\'elenco dei comuni non si costruisce al caricamento');
+  await page.locator('#ev-geo-alt').click();
+  await page.waitForTimeout(200);
+  r.ok(await page.locator('#ev-geo-list option').count() > 0,
+    'l\'elenco dei comuni si costruisce alla prima apertura');
+
+  // Un comune con eventi: gradini, conteggi, e il filtro che filtra davvero.
+  const primoComune = await page.locator('#ev-geo-list option').first().getAttribute('value');
+  await page.fill('#ev-geo-q', primoComune);
+  await page.waitForTimeout(350);
+  r.ok((await page.locator('#ev-geo-from').textContent()).includes(primoComune),
+    `il centro e' il comune scelto (${primoComune})`);
+
+  const chip = page.locator('#ev-geo-chips button[aria-pressed="true"]');
+  r.ok(await chip.count() === 1, 'un gradino solo e\' quello attivo');
+  const attivo = parseInt(await chip.textContent(), 10);
+  // Il gradino di partenza si sceglie sui dati: da un paese piccolo un raggio
+  // stretto darebbe una pagina vuota, ed e' il difetto tipico di questi filtri.
+  r.ok(await page.locator('.event-card:not(.is-hidden)').count() > 0,
+    `il raggio di partenza (${attivo} km) non lascia la pagina vuota`);
+  r.ok(/\(\d+\)/.test(await page.locator('#ev-geo-chips button').first().textContent()),
+    'ogni gradino porta il suo conteggio: non si sceglie al buio');
+
+  // La prova che conta: nessuna riga mostrata sta oltre il raggio, e ognuna
+  // dichiara la propria distanza.
+  const sbagliate = await page.evaluate((rag) => {
+    const fuori = [];
+    document.querySelectorAll('.event-card:not(.is-hidden)').forEach((c) => {
+      const t = c.querySelector('.ev-km');
+      if (!t) return fuori.push('riga senza distanza');
+      const m = t.textContent.match(/a (\d+) km/);
+      if (m && Number(m[1]) > rag) fuori.push(m[1] + ' km');
+    });
+    return fuori;
+  }, attivo);
+  r.ok(sbagliate.length === 0,
+    `nessuna riga mostrata sta oltre il raggio (${sbagliate.slice(0, 3).join(', ') || 'ok'})`);
+
+  // Il raggio filtra, non riordina: l'agenda e' un calendario e l'ordine di un
+  // calendario e' la data (le righe "in corso" stanno in cima per gruppo, non
+  // per data, quindi l'ordine giusto e' quello che il generatore ha scritto).
+  // Le righe rimaste devono essere una sottosequenza di quell'ordine: se un
+  // giorno qualcuno ordinasse per vicinanza, questa prova diventa rossa.
+  const rimaste = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('.event-card:not(.is-hidden)')).map((c) => c.id));
+  let k = -1;
+  const inOrdine = rimaste.every((id) => {
+    const i = ordine0.indexOf(id);
+    if (i <= k) return false;
+    k = i;
+    return true;
+  });
+  r.ok(inOrdine && rimaste.length > 0,
+    'il raggio filtra e non riordina: nessuna riga vicina scavalca le altre');
+
+  // Un raggio stretto piu' una categoria stretta e' il modo piu' facile di
+  // arrivare a zero: li' si deve dire dove sta la roba, non lasciare il vuoto.
+  await page.selectOption('#f-tipo', 'laboratori');
+  await page.waitForTimeout(300);
+  if (await page.locator('.event-card:not(.is-hidden)').count() === 0) {
+    const hint = await page.locator('#ev-geo-hint').textContent();
+    r.ok(/Entro \d+ km/.test(hint),
+      `a zero risultati dice dove guardare: "${hint}"`);
+  }
+  await page.selectOption('#f-tipo', 'all');
+  await page.waitForTimeout(200);
+
+  // Un comune che in agenda non c'e' deve dirlo, non restare muto.
+  await page.fill('#ev-geo-q', 'Zzzznonesiste');
+  await page.waitForTimeout(300);
+  r.ok((await page.locator('#ev-geo-note').textContent()).includes('Nessun evento'),
+    'un comune senza eventi lo dice invece di restare muto');
+
+  // La ✕ rimette tutto com'era, distanze comprese.
+  await page.fill('#ev-geo-q', primoComune);
+  await page.waitForTimeout(300);
+  await page.locator('#ev-geo-clear').click();
+  await page.waitForTimeout(300);
+  r.ok(await page.locator('.event-card:not(.is-hidden)').count() === tutte,
+    'la ✕ rimette tutte le righe');
+  r.ok(await page.locator('.ev-km').count() === 0, 'la ✕ toglie anche le distanze dalle righe');
+  r.ok(await page.evaluate(() => window.__geo) === 0,
+    'in tutto questo la posizione non e\' mai stata chiesta');
+  await ctx.close();
+
   // ── desktop ───────────────────────────────────────────────────────────
   r.titolo('eventi.html — desktop 1280px');
   ({ ctx, page } = await apri(browser, 'eventi.html', 1280));

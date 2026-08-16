@@ -282,5 +282,79 @@ module.exports = async function landing(browser) {
     await ctx.close();
   }
 
+  // ── "Vicino a me" sulle pagine di intenzione ──────────────────────────
+  // E' lo stesso modulo dell'agenda (/assets/js/daop-vicino.js) su un DOM
+  // diverso: righe <li> nascoste con `hidden` invece di schede con una classe.
+  // Qui si prova proprio l'innesto, cioe' che il modulo si sommi ai filtri di
+  // questa pagina invece di ignorarli.
+  for (const pag of ['eventi/oggi.html', 'sagre-provincia-alessandria.html']) {
+    r.titolo(`${pag} — vicino a me`);
+    ({ ctx, page } = await apri(browser, pag, 412, () => {
+      window.__geo = 0;
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition = function () { window.__geo++; };
+      }
+    }));
+
+    const righe = await page.locator('.ev-wrap li[data-category]').count();
+    const conCoord = await page.locator('.ev-wrap li[data-lat][data-lon]').count();
+    if (!(await page.locator('#ev-geo').count())) {
+      r.ok(conCoord < 12, `niente controllo con ${conCoord} righe georiferite (sotto la soglia)`);
+      await ctx.close();
+      continue;
+    }
+
+    r.ok(await page.evaluate(() => window.__geo) === 0,
+      'la posizione NON si chiede al caricamento');
+    r.ok(conCoord === righe, `ogni riga porta le coordinate: ${conCoord}/${righe}`);
+    r.ok(await page.locator('#ev-geo').isVisible(),
+      'il modulo condiviso si e\' acceso anche qui');
+
+    await page.locator('#ev-geo-alt').click();
+    await page.waitForTimeout(200);
+    const comune = await page.locator('#ev-geo-list option').first().getAttribute('value');
+    await page.fill('#ev-geo-q', comune);
+    await page.waitForTimeout(350);
+
+    const raggio = parseInt(await page.locator('#ev-geo-chips button[aria-pressed="true"]')
+      .textContent(), 10);
+    const dopo = await visibili(page);
+    r.ok(dopo > 0 && dopo < righe,
+      `il raggio (${raggio} km da ${comune}) restringe: ${dopo}/${righe}`);
+    r.ok(await page.evaluate(() => {
+      const male = [];
+      document.querySelectorAll('.ev-wrap li[data-category]:not([hidden])').forEach((l) => {
+        const t = l.querySelector('.ev-km');
+        if (!t) return male.push(1);
+        return null;
+      });
+      return male.length === 0;
+    }), 'ogni riga rimasta dichiara la sua distanza');
+
+    // Il conteggio della pagina deve accorgersi del raggio: prima contava solo
+    // ricerca e tendine, e con il solo raggio attivo sarebbe restato muto.
+    r.ok(/\d+ eventi? con questi filtri/.test(await page.textContent('#lan-count')),
+      'il conteggio della pagina considera anche il raggio');
+
+    // I gradini contano dentro gli altri filtri, non sul totale della pagina.
+    if (await page.locator('#lan-tipo').count()) {
+      const primaDelTipo = await page.locator('#ev-geo-chips button').last().textContent();
+      const cat = await page.$eval('#lan-tipo', (s) => s.options[1].value);
+      await page.selectOption('#lan-tipo', cat);
+      await page.waitForTimeout(300);
+      const dopoIlTipo = await page.locator('#ev-geo-chips button').last().textContent();
+      r.ok(primaDelTipo !== dopoIlTipo,
+        `i gradini contano dentro gli altri filtri (${primaDelTipo.trim()} -> ${dopoIlTipo.trim()})`);
+      await page.selectOption('#lan-tipo', 'all');
+      await page.waitForTimeout(200);
+    }
+
+    await page.locator('#ev-geo-clear').click();
+    await page.waitForTimeout(300);
+    r.ok(await visibili(page) === righe, 'la ✕ rimette tutte le righe');
+    r.ok(await page.locator('.ev-km').count() === 0, 'la ✕ toglie le distanze');
+    await ctx.close();
+  }
+
   return r;
 };

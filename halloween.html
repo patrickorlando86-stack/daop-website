@@ -75,6 +75,9 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* La riga di rimando ai centri estivi: e' un collegamento laterale, non
+     il messaggio della pagina, quindi non pesa come il paragrafo sopra. */
+  .hero-nota{margin-top:14px;font-size:0.95rem;opacity:0.9}
   /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
      fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
      nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
@@ -119,6 +122,38 @@
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
   .ev-select.is-on{background:var(--navy);border-color:var(--navy);color:white}
+  /* ── VICINO A ME ──
+     Fuori dalla barra appiccicosa apposta: quella e' scesa a ~109px sul
+     telefono e una riga in piu' la rifarebbe crescere per tutto lo
+     scorrimento. Da fermo e' un solo bottone; i gradini compaiono quando c'e'
+     un punto di partenza, cioe' quando servono. */
+  .ev-geo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
+  .ev-geo-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;cursor:pointer;transition:var(--transition)}
+  .ev-geo-btn:hover:not(:disabled){border-color:var(--orange);color:var(--navy)}
+  .ev-geo-btn:disabled{opacity:0.55;cursor:default}
+  /* Il ripiego non e' un secondo comando pari al primo: al tocco la strada e'
+     una sola, e due pillole identiche affiancate obbligano a scegliere prima
+     di aver capito. Resta un testo, quindi resta raggiungibile. */
+  .ev-geo-btn.is-alt{border-color:transparent;background:none;font-weight:600;color:var(--text-light);text-decoration:underline;text-underline-offset:3px;padding:9px 4px}
+  .ev-geo-btn.is-alt:hover{color:var(--navy);border-color:transparent}
+  .ev-geo-btn.is-clear{padding:9px 13px;line-height:1}
+  /* I gradini prendono una riga loro: in coda agli altri controlli si
+     spezzavano a meta' e la ✕ finiva orfana su una terza riga. */
+  .ev-geo-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .ev-geo-chips:empty{display:none}
+  .ev-geo-from{font-size:0.82rem;font-weight:700;color:var(--navy)}
+  /* Stretti quel tanto che basta a stare tutti e quattro in fila su un
+     telefono da 372px: a 12px di lato il quarto cadeva da solo su una
+     seconda riga, e un gradino isolato sembra un'altra cosa. */
+  .ev-geo-chip{font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:600;color:var(--text-mid);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:7px 9px;min-height:36px;cursor:pointer;transition:var(--transition);white-space:nowrap}
+  .ev-geo-chip:hover:not(:disabled){border-color:var(--orange)}
+  .ev-geo-chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:white}
+  .ev-geo-chip:disabled{opacity:0.38;cursor:default}
+  .ev-geo-in{font-family:'DM Sans',sans-serif;font-size:0.84rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;min-width:0;flex:1 1 180px;max-width:280px}
+  .ev-geo-note{flex:1 1 100%;font-size:0.74rem;line-height:1.5;color:var(--text-light);margin:0}
+  .ev-geo-hint{font-weight:700;color:var(--navy)}
+  .ev-geo-hint:empty,.ev-geo-note:empty{display:none}
+  .ev-km{display:inline-block;font-size:0.72rem;font-weight:700;color:var(--text-light);white-space:nowrap}
   .ev-viewbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 0}
   .events-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:0}
   .ev-viewtoggle{margin-left:auto;display:inline-flex;gap:2px;background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:3px}
@@ -339,7 +374,13 @@
   }
   @media(max-width:600px){
     section{padding:72px 20px}
-    .page-hero{padding:120px 20px 72px}
+    /* La barra fissa in cima e' alta 69px: il padding di sopra deve solo
+       scavalcarla, non lasciarle mezzo schermo. A 96px ne restano 27 di
+       respiro, che bastano - i 120 di prima erano tarati sul desktop. */
+    .page-hero{padding:96px 20px 52px}
+    .page-hero h1{margin-bottom:12px}
+    .page-hero p{font-size:1.02rem}
+    .hero-nota{margin-top:15px;font-size:0.88rem}
     .ev-row{grid-template-columns:52px 1fr 18px;gap:12px}
     .ev-thumb{width:52px;height:52px}
     .ev-name{font-size:1rem}
@@ -356,13 +397,16 @@
    occupati per tutto lo scorrimento. Se un domani un'etichetta si allunga
    troppo tornano a capo da sole, cioe' come stavano prima. */
 .ev-select{flex:1 1 auto;min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
+    /* Solo qui i gradini prendono una riga loro: su schermi larghi ci
+       stanno in fila col campo e sarebbero 40px di vuoto per niente. */
+    .ev-geo-chips{flex:1 1 100%}
     /* Fra la fine dell'hero e il primo evento c'erano l'intestazione di
        sezione, quattro controlli e sedici pillole: su un telefono voleva dire
        due schermate di filtri prima di un evento. L'intestazione qui ripete
        quello che l'hero ha appena detto, quindi si stringe. */
-    .section-header{margin-bottom:22px}
+    .section-header{margin-bottom:16px}
     .section-subtitle{font-size:0.95rem;line-height:1.6}
-    .bg-white{padding-top:44px}
+    .bg-white{padding-top:28px}
     .ev-comuni-nav{gap:6px 8px;margin-top:12px}
     .ev-comuni a{padding:8px 13px;font-size:0.84rem}
     .ev-highlights{margin-top:20px;gap:20px}
@@ -475,6 +519,17 @@
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
+   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
+   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
+   e' un <aside> dentro l'articolo, non una fascia di pagina. */
+.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
+  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
+.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
+.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
+  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
+  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -685,7 +740,7 @@
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "dateModified": "2026-08-14"
+      "dateModified": "2026-08-15"
     },
     {
       "@type": "BreadcrumbList",
@@ -778,12 +833,13 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <p>La notte del <strong>31 ottobre 2026</strong> cade di sabato, e col fine settimana prima e Ognissanti dopo diventa una decina di giorni di feste. Qui sotto ci sono i <strong>2 eventi</strong> che abbiamo verificato uno per uno in 2 comuni fra le province di Alessandria, Asti e Cuneo, con l'orario, il paese e chi li organizza.</p><h2>Fa paura o no?</h2><p>È la domanda vera di Halloween, e la risposta cambia dello stesso evento a seconda di chi porti: la caccia ai dolcetti in piazza e la casa infestata nel castello finiscono nello stesso elenco. Noi non dividiamo le due cose a naso — sarebbe un giudizio nostro su una festa altrui, ricavato dal titolo. Facciamo l'unica cosa che si può fare onestamente: <strong>dove l'età è dichiarata la trovi scritta in riga</strong>, e dove non c'è conviene aprire la scheda e leggere il programma, che riportiamo per intero. Qui sotto mettiamo in evidenza quelli <strong>pensati per i più piccoli</strong>: laboratori, zucche, giochi, dolcetto o scherzetto. Il resto della pagina è tutto il programma, senza cernite.</p><p>La seconda domanda è dove. Halloween in zona si fa nei <strong>castelli, nelle cascine e nei borghi</strong>, e quasi sempre si prenota: gli <a href="/luoghi.html">agriturismi, i castelli e i posti da visitare con i bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo. Se quel giorno piove, la stessa pagina dice quali sono al coperto.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Pensati per i più piccoli</h3><p class="com-per">Laboratori, zucche e giochi: qui l&#x27;età è dichiarata o il programma la dice</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="at" data-category="feste"><img class="com-th" src="/assets/miniature/daop_asti_3932273221679851436.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 31 ott<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html">Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">San Marzano Oliveto (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Sabato 31 ottobre</h3><p class="com-per">La notte di Halloween</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="at" data-category="feste"><img class="com-th" src="/assets/miniature/daop_asti_3932273221679851436.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 31 ott<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html">Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">San Marzano Oliveto (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Domenica 1 novembre</h3><p class="com-per">Ognissanti</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="at" data-category="feste"><img class="com-th" src="/assets/miniature/daop_asti_3953380617483947119.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 1 nov<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li></ul></section><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/ferragosto.html">Ferragosto</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-asti.html">Sagre Asti</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div>
+  <p>La notte del <strong>31 ottobre 2026</strong> cade di sabato, e col fine settimana prima e Ognissanti dopo diventa una decina di giorni di feste. Qui sotto ci sono i <strong>2 eventi</strong> che abbiamo verificato uno per uno in 2 comuni fra le province di Alessandria, Asti e Cuneo, con l'orario, il paese e chi li organizza.</p><h2>Fa paura o no?</h2><p>È la domanda vera di Halloween, e la risposta cambia dello stesso evento a seconda di chi porti: la caccia ai dolcetti in piazza e la casa infestata nel castello finiscono nello stesso elenco. Noi non dividiamo le due cose a naso — sarebbe un giudizio nostro su una festa altrui, ricavato dal titolo. Facciamo l'unica cosa che si può fare onestamente: <strong>dove l'età è dichiarata la trovi scritta in riga</strong>, e dove non c'è conviene aprire la scheda e leggere il programma, che riportiamo per intero. Qui sotto mettiamo in evidenza quelli <strong>pensati per i più piccoli</strong>: laboratori, zucche, giochi, dolcetto o scherzetto. Il resto della pagina è tutto il programma, senza cernite.</p><p>La seconda domanda è dove. Halloween in zona si fa nei <strong>castelli, nelle cascine e nei borghi</strong>, e quasi sempre si prenota: gli <a href="/luoghi.html">agriturismi, i castelli e i posti da visitare con i bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo. Se quel giorno piove, la stessa pagina dice quali sono al coperto.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Pensati per i più piccoli</h3><p class="com-per">Laboratori, zucche e giochi: qui l&#x27;età è dichiarata o il programma la dice</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="at" data-category="feste" data-lat="44.7540212" data-lon="8.2957567" data-citta="San Marzano Oliveto"><img class="com-th" src="/assets/miniature/daop_asti_3932273221679851436.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 31 ott<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html">Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">San Marzano Oliveto (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Sabato 31 ottobre</h3><p class="com-per">La notte di Halloween</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="at" data-category="feste" data-lat="44.7540212" data-lon="8.2957567" data-citta="San Marzano Oliveto"><img class="com-th" src="/assets/miniature/daop_asti_3932273221679851436.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 31 ott<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html">Festa di Halloween per i Bambini - Pro Loco San Marzano Oliveto APS</a><span class="com-luogo">San Marzano Oliveto (AT)</span></span></li></ul></section><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Domenica 1 novembre</h3><p class="com-per">Ognissanti</p></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="at" data-category="feste" data-lat="44.833445" data-lon="8.063534" data-citta="San Damiano d&#x27;Asti"><img class="com-th" src="/assets/miniature/daop_asti_3953380617483947119.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 1 nov<span class="com-cat">Sagra &amp; Festa</span></span><a class="com-go" href="/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html">Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti</a><span class="com-luogo">San Damiano d&#x27;Asti (AT)</span></span></li></ul></section><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/ferragosto.html">Ferragosto</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-asti.html">Sagre Asti</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div>
+  <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend in zona: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
-  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 14 agosto 2026.</p>
+  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 15 agosto 2026.</p>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">

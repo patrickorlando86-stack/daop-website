@@ -14,7 +14,9 @@
 // diventa rossa.
 'use strict';
 
-const { apri, esito } = require('./_aiuto');
+const fs = require('fs');
+const path = require('path');
+const { apri, esito, RADICE } = require('./_aiuto');
 
 const visibili = (page) => page.locator('.lg-row[data-cat]:not([hidden])').count();
 
@@ -308,6 +310,63 @@ module.exports = async function luoghi(browser) {
   await page.waitForTimeout(400);
   r.ok(await page.locator(`#${id}`).evaluate((d) => d.open),
     `l'ancora #${id} apre la riga`);
+
+  // ── il ponte dalle schede evento ──────────────────────────────────────
+  // Le schede /eventi/*.html fanno l'82% dei clic, questa pagina ne faceva
+  // zero: l'unico link che riceveva veniva dalla nav. Dal 14/08/2026 ogni
+  // scheda manda ai luoghi del suo comune, e sono due cose che si rompono in
+  // silenzio - il link sparisce, oppure punta a un'ancora che non c'e' e
+  // scarica in cima a una pagina da 800 righe. Nessuna delle due fa rumore.
+  r.titolo('luoghi.html — i link in arrivo dalle schede evento');
+  const ancore = new Set(await page.$$eval('.lg-grp-h h2[id]', (h) => h.map((x) => x.id)));
+  const schede = ['eventi', 'eventi/comune'].flatMap((d) =>
+    fs.readdirSync(path.join(RADICE, d))
+      .filter((f) => f.endsWith('.html'))
+      .map((f) => path.join(d, f)));
+  const bersagli = new Map();
+  let conLink = 0;
+  for (const f of schede) {
+    const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    let trovato = false;
+    for (const m of html.matchAll(/href="\/luoghi\.html#(c-[a-z0-9-]+)"/g)) {
+      trovato = true;
+      if (!bersagli.has(m[1])) bersagli.set(m[1], f);
+    }
+    if (trovato) conLink++;
+  }
+  r.ok(bersagli.size > 0,
+    `il ponte esiste: ${bersagli.size} comuni linkati da ${conLink}/${schede.length} pagine`);
+  const rotti = [...bersagli].filter(([a]) => !ancore.has(a));
+  r.ok(rotti.length === 0, rotti.length
+    ? `ancore inesistenti: ${rotti.slice(0, 3).map(([a, f]) => `#${a} (${f})`).join(', ')}`
+    : 'ogni ancora linkata esiste davvero in luoghi.html');
+
+  // ── l'invito al canale WhatsApp ───────────────────────────────────────
+  // Due guasti silenziosi: l'invito sparisce da tutte le pagine (CANALE_WA
+  // svuotato per sbaglio), oppure ce n'e' piu' d'uno sulla stessa pagina,
+  // che su una scheda gia' lunga e' una richiesta ripetuta a chi ha gia'
+  // detto di no una volta. Nessuno dei due rompe niente, quindi nessuno dei
+  // due si nota.
+  //
+  // I tre eventi/box-*.html restano fuori, e non e' una dimenticanza: sono i
+  // riquadri da incorporare, che vivono dentro l'iframe del sito di qualcun
+  // altro. Chiedere li' un'iscrizione al nostro canale vuol dire usare lo
+  // spazio di un altro per portarci via il suo pubblico. E' la stessa ragione
+  // per cui quei tre file non chiedono il consenso ai cookie.
+  const nostre = schede.filter((f) => !/\bbox-[a-z]{2}\.html$/.test(f));
+  let conCanale = 0, doppi = [];
+  for (const f of nostre) {
+    const n = (fs.readFileSync(path.join(RADICE, f), 'utf8')
+      .match(/class="ev-canale-cta"/g) || []).length;
+    if (n) conCanale++;
+    if (n > 1) doppi.push(f);
+  }
+  r.ok(conCanale === nostre.length,
+    `l'invito al canale c'e' su tutte le nostre pagine: ${conCanale}/${nostre.length}`);
+  r.ok(doppi.length === 0, doppi.length
+    ? `invito ripetuto in ${doppi.length} pagine (es. ${doppi[0]})`
+    : 'mai due inviti sulla stessa pagina');
+
   await ctx.close();
 
   return r;

@@ -75,6 +75,9 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* La riga di rimando ai centri estivi: e' un collegamento laterale, non
+     il messaggio della pagina, quindi non pesa come il paragrafo sopra. */
+  .hero-nota{margin-top:14px;font-size:0.95rem;opacity:0.9}
   /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
      fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
      nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
@@ -119,6 +122,38 @@
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
   .ev-select.is-on{background:var(--navy);border-color:var(--navy);color:white}
+  /* ── VICINO A ME ──
+     Fuori dalla barra appiccicosa apposta: quella e' scesa a ~109px sul
+     telefono e una riga in piu' la rifarebbe crescere per tutto lo
+     scorrimento. Da fermo e' un solo bottone; i gradini compaiono quando c'e'
+     un punto di partenza, cioe' quando servono. */
+  .ev-geo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
+  .ev-geo-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;cursor:pointer;transition:var(--transition)}
+  .ev-geo-btn:hover:not(:disabled){border-color:var(--orange);color:var(--navy)}
+  .ev-geo-btn:disabled{opacity:0.55;cursor:default}
+  /* Il ripiego non e' un secondo comando pari al primo: al tocco la strada e'
+     una sola, e due pillole identiche affiancate obbligano a scegliere prima
+     di aver capito. Resta un testo, quindi resta raggiungibile. */
+  .ev-geo-btn.is-alt{border-color:transparent;background:none;font-weight:600;color:var(--text-light);text-decoration:underline;text-underline-offset:3px;padding:9px 4px}
+  .ev-geo-btn.is-alt:hover{color:var(--navy);border-color:transparent}
+  .ev-geo-btn.is-clear{padding:9px 13px;line-height:1}
+  /* I gradini prendono una riga loro: in coda agli altri controlli si
+     spezzavano a meta' e la ✕ finiva orfana su una terza riga. */
+  .ev-geo-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .ev-geo-chips:empty{display:none}
+  .ev-geo-from{font-size:0.82rem;font-weight:700;color:var(--navy)}
+  /* Stretti quel tanto che basta a stare tutti e quattro in fila su un
+     telefono da 372px: a 12px di lato il quarto cadeva da solo su una
+     seconda riga, e un gradino isolato sembra un'altra cosa. */
+  .ev-geo-chip{font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:600;color:var(--text-mid);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:7px 9px;min-height:36px;cursor:pointer;transition:var(--transition);white-space:nowrap}
+  .ev-geo-chip:hover:not(:disabled){border-color:var(--orange)}
+  .ev-geo-chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:white}
+  .ev-geo-chip:disabled{opacity:0.38;cursor:default}
+  .ev-geo-in{font-family:'DM Sans',sans-serif;font-size:0.84rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;min-width:0;flex:1 1 180px;max-width:280px}
+  .ev-geo-note{flex:1 1 100%;font-size:0.74rem;line-height:1.5;color:var(--text-light);margin:0}
+  .ev-geo-hint{font-weight:700;color:var(--navy)}
+  .ev-geo-hint:empty,.ev-geo-note:empty{display:none}
+  .ev-km{display:inline-block;font-size:0.72rem;font-weight:700;color:var(--text-light);white-space:nowrap}
   .ev-viewbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 0}
   .events-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:0}
   .ev-viewtoggle{margin-left:auto;display:inline-flex;gap:2px;background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:3px}
@@ -339,7 +374,13 @@
   }
   @media(max-width:600px){
     section{padding:72px 20px}
-    .page-hero{padding:120px 20px 72px}
+    /* La barra fissa in cima e' alta 69px: il padding di sopra deve solo
+       scavalcarla, non lasciarle mezzo schermo. A 96px ne restano 27 di
+       respiro, che bastano - i 120 di prima erano tarati sul desktop. */
+    .page-hero{padding:96px 20px 52px}
+    .page-hero h1{margin-bottom:12px}
+    .page-hero p{font-size:1.02rem}
+    .hero-nota{margin-top:15px;font-size:0.88rem}
     .ev-row{grid-template-columns:52px 1fr 18px;gap:12px}
     .ev-thumb{width:52px;height:52px}
     .ev-name{font-size:1rem}
@@ -356,13 +397,16 @@
    occupati per tutto lo scorrimento. Se un domani un'etichetta si allunga
    troppo tornano a capo da sole, cioe' come stavano prima. */
 .ev-select{flex:1 1 auto;min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
+    /* Solo qui i gradini prendono una riga loro: su schermi larghi ci
+       stanno in fila col campo e sarebbero 40px di vuoto per niente. */
+    .ev-geo-chips{flex:1 1 100%}
     /* Fra la fine dell'hero e il primo evento c'erano l'intestazione di
        sezione, quattro controlli e sedici pillole: su un telefono voleva dire
        due schermate di filtri prima di un evento. L'intestazione qui ripete
        quello che l'hero ha appena detto, quindi si stringe. */
-    .section-header{margin-bottom:22px}
+    .section-header{margin-bottom:16px}
     .section-subtitle{font-size:0.95rem;line-height:1.6}
-    .bg-white{padding-top:44px}
+    .bg-white{padding-top:28px}
     .ev-comuni-nav{gap:6px 8px;margin-top:12px}
     .ev-comuni a{padding:8px 13px;font-size:0.84rem}
     .ev-highlights{margin-top:20px;gap:20px}
@@ -437,7 +481,7 @@
     {
       "@type": "ItemList",
       "name": "Centri Estivi in provincia di Alessandria e Asti",
-      "numberOfItems": 28,
+      "numberOfItems": 25,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -528,20 +572,6 @@
           "position": 7,
           "item": {
             "@type": "LocalBusiness",
-            "name": "Baracca's Summer Lab — Associazione Terra di Pan",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Cantalupo Ligure",
-              "addressRegion": "AL",
-              "addressCountry": "IT"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 8,
-          "item": {
-            "@type": "LocalBusiness",
             "name": "Centri Estivi Sportivi - Nuova Saves",
             "address": {
               "@type": "PostalAddress",
@@ -553,7 +583,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 9,
+          "position": 8,
           "item": {
             "@type": "LocalBusiness",
             "name": "Centro Estivo 2026 - AC Ranch",
@@ -567,7 +597,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 10,
+          "position": 9,
           "item": {
             "@type": "LocalBusiness",
             "name": "Estate in Fattoria 2026 - Fattoria Didattica Verde Commerce",
@@ -581,7 +611,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 11,
+          "position": 10,
           "item": {
             "@type": "LocalBusiness",
             "name": "Monte Valenza Summer Camp - Anima&Azione",
@@ -595,7 +625,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 12,
+          "position": 11,
           "item": {
             "@type": "LocalBusiness",
             "name": "Centro Estivo 2026 - Estate Bimbi - Scuola Mazzarello",
@@ -609,7 +639,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 13,
+          "position": 12,
           "item": {
             "@type": "LocalBusiness",
             "name": "Il Club dei Bambini Impossibili - Centro Estivo Infanzia - Cooperativa Sociale Seconda Stella",
@@ -623,7 +653,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 14,
+          "position": 13,
           "item": {
             "@type": "LocalBusiness",
             "name": "Soul Farm Summer Camp",
@@ -637,7 +667,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 15,
+          "position": 14,
           "item": {
             "@type": "LocalBusiness",
             "name": "Centro Estivo - Agорà Cooperativa Sociale",
@@ -651,7 +681,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 16,
+          "position": 15,
           "item": {
             "@type": "LocalBusiness",
             "name": "ARCEAM - Centro Estivo Merella - Circolo UISP",
@@ -665,7 +695,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 17,
+          "position": 16,
           "item": {
             "@type": "LocalBusiness",
             "name": "ARCEAM - Centro Estivo Serravalle Designer Outlet",
@@ -679,7 +709,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 18,
+          "position": 17,
           "item": {
             "@type": "LocalBusiness",
             "name": "Centri Estivi 2026 - Ranch Arizona",
@@ -693,7 +723,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 19,
+          "position": 18,
           "item": {
             "@type": "LocalBusiness",
             "name": "Centro Estivo - PazzAnimazione / AnimataMente",
@@ -707,7 +737,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 20,
+          "position": 19,
           "item": {
             "@type": "LocalBusiness",
             "name": "Centro Estivo Cima 26 - Pro Loco di Cimaferle",
@@ -721,7 +751,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 21,
+          "position": 20,
           "item": {
             "@type": "LocalBusiness",
             "name": "Estate ragazzi 2026 - Oratorio Don Bosco",
@@ -735,7 +765,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 22,
+          "position": 21,
           "item": {
             "@type": "LocalBusiness",
             "name": "Farm Summer Camp 2026 - Fattorie Dertona",
@@ -749,7 +779,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 23,
+          "position": 22,
           "item": {
             "@type": "LocalBusiness",
             "name": "Oratorio Aperto Settembre 2026 - Parrocchia Assunzione di Maria Vergine",
@@ -763,21 +793,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 24,
-          "item": {
-            "@type": "LocalBusiness",
-            "name": "R-Estate a Bosio - Centro Estivo 2026 - Amici Acquedotto di Bosio APS",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Bosio",
-              "addressRegion": "AL",
-              "addressCountry": "IT"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 25,
+          "position": 23,
           "item": {
             "@type": "LocalBusiness",
             "name": "Settimana Verde a Mombello - Associazione Culturale Omnia",
@@ -791,7 +807,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 26,
+          "position": 24,
           "item": {
             "@type": "LocalBusiness",
             "name": "Sport World! - Rovereto Central Park & Rolling Brazilian Jiu-Jitsu",
@@ -805,27 +821,13 @@
         },
         {
           "@type": "ListItem",
-          "position": 27,
+          "position": 25,
           "item": {
             "@type": "LocalBusiness",
             "name": "Summer Camp - Richard's Ranch",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Callianetto",
-              "addressRegion": "AT",
-              "addressCountry": "IT"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 28,
-          "item": {
-            "@type": "LocalBusiness",
-            "name": "Un'Estate Fantastica - Tanaro Skate School",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Asti",
               "addressRegion": "AT",
               "addressCountry": "IT"
             }
@@ -892,7 +894,7 @@
     <div class="ev-toolbar">
     <div class="ev-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="ce-q" placeholder="Cerca un centro, un paese, un gestore…" aria-label="Cerca fra i centri"></div>
     <select class="ev-select" id="ce-prov" aria-label="Filtra per provincia"><option value="all">Tutte le province</option><option value="al">Alessandria</option><option value="at">Asti</option></select>
-    <select class="ev-select" id="ce-city" aria-label="Filtra per città"><option value="all">Tutte le città</option><option value="alessandria">Alessandria</option><option value="asti">Asti</option><option value="bosio">Bosio</option><option value="callianetto">Callianetto</option><option value="cantalupo-ligure">Cantalupo Ligure</option><option value="carentino">Carentino</option><option value="carezzano">Carezzano</option><option value="carrosio">Carrosio</option><option value="castell-alfero">Castell&#x27;Alfero</option><option value="castelnuovo-scrivia">Castelnuovo Scrivia</option><option value="cimaferle">Cimaferle</option><option value="costa-vescovato">Costa Vescovato</option><option value="mombello">Mombello</option><option value="nizza-monferrato">Nizza Monferrato</option><option value="novi-ligure">Novi Ligure</option><option value="ovada">Ovada</option><option value="pontecurone">Pontecurone</option><option value="riva-presso-chieri">Riva presso Chieri</option><option value="rossiglione">Rossiglione</option><option value="tortona">Tortona</option><option value="valenza">Valenza</option></select>
+    <select class="ev-select" id="ce-city" aria-label="Filtra per città"><option value="all">Tutte le città</option><option value="alessandria">Alessandria</option><option value="asti">Asti</option><option value="callianetto">Callianetto</option><option value="carentino">Carentino</option><option value="carezzano">Carezzano</option><option value="carrosio">Carrosio</option><option value="castell-alfero">Castell&#x27;Alfero</option><option value="castelnuovo-scrivia">Castelnuovo Scrivia</option><option value="cimaferle">Cimaferle</option><option value="costa-vescovato">Costa Vescovato</option><option value="mombello">Mombello</option><option value="nizza-monferrato">Nizza Monferrato</option><option value="novi-ligure">Novi Ligure</option><option value="ovada">Ovada</option><option value="pontecurone">Pontecurone</option><option value="riva-presso-chieri">Riva presso Chieri</option><option value="rossiglione">Rossiglione</option><option value="tortona">Tortona</option><option value="valenza">Valenza</option></select>
   </div>
   <div class="ev-viewbar"><p class="events-count" id="ce-count"></p></div>
 <div class="events-list" id="ce-active">
@@ -1016,28 +1018,8 @@
             </div>
           </div>
         </article>
-        <article class="event-card" data-province="al" data-city="cantalupo-ligure" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-6">
-            <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3893046474741138744.jpg" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="ev-name">Baracca&#x27;s Summer Lab — Associazione Terra di Pan</span>
-              <span class="ev-line">Cantalupo Ligure (AL) · dal 10 giugno al 15 agosto · 8:00-17:00 · 3-14 anni</span>
-              <span class="ev-tags"><span class="ev-pill is-price">settimanale €110,…</span></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h4>
-          <div class="ev-det" id="det-ce-6" hidden>
-            <p class="event-desc">Centro estivo con gite, piscina, laboratori di cucina, pomeriggi cinema, teatro, sport, compiti con metodo Feuerstein. Cucina interna, grande giardino, sale climatizzate, animatori esperti in team leading. Maglietta inclusa. Iscrizioni entro il 31 maggio 2026.</p>
-            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Francesco Guida 15, Cantalupo Ligure (AL)</p>
-            <p class="ce-contatti">Contatti: 351 3630419 - terradipan@gmail.com - IG @terradipan</p>
-            <div class="event-actions">
-              
-<a class="event-act" href="https://www.google.com/maps/search/?api=1&amp;query=Via%20Francesco%20Guida%2015%2C%20Cantalupo%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>              <a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3893046474741138744.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a>
-            </div>
-          </div>
-        </article>
         <article class="event-card" data-province="al" data-city="alessandria" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-7">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-6">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3878530764082021226.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Centri Estivi Sportivi - Nuova Saves</span>
@@ -1046,7 +1028,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-7" hidden>
+          <div class="ev-det" id="det-ce-6" hidden>
             <p class="event-desc">Centro estivo sportivo per bambini e ragazzi dai 4 ai 14 anni con attività di tennis, nuoto e tanto altro. In collaborazione con AnimAzione. Pausa dal 17 al 21 agosto.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Giordano Bruno 96 - 15121 - Alessandria (AL)</p>
             <div class="event-actions">
@@ -1056,7 +1038,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="carentino" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-8">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-7">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3892408280290578664.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Centro Estivo 2026 - AC Ranch</span>
@@ -1065,7 +1047,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-8" hidden>
+          <div class="ev-det" id="det-ce-7" hidden>
             <p class="event-desc">Centro estivo di 12 settimane dedicato ai ragazzi presso AC Ranch, con attività a contatto con i cavalli e la natura, inclusa piscina. Un&#x27;esperienza indimenticabile per i più giovani.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Case Sparse, 14, 15026 Carentino AL</p>
             <div class="event-actions">
@@ -1075,7 +1057,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="tortona" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-9">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-8">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3958377032104182054.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Estate in Fattoria 2026 - Fattoria Didattica Verde Commerce</span>
@@ -1084,7 +1066,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-9" hidden>
+          <div class="ev-det" id="det-ce-8" hidden>
             <p class="event-desc">Centro estivo presso la Fattoria Didattica Verde Commerce di Tortona, aperto dall&#x27;11 giugno all&#x27;11 settembre 2026 (chiusura dal 15 al 23 agosto). Settimane a tema con laboratori in natura, contatto con gli animali, orto didattico, giochi, gite e giornate in piscina. Rivolto a bambini dai 5 ai 12 anni, con orari flessibili a scelta. Posti limitati.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Salita Santa Lucia 2 - Tortona (AL)</p>
             <p class="ce-contatti">Contatti: 378 3030760 - fattoria@verde-commerce.it</p>
@@ -1095,7 +1077,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="valenza" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-10">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-9">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3860078268296753479.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Monte Valenza Summer Camp - Anima&amp;Azione</span>
@@ -1104,7 +1086,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-10" hidden>
+          <div class="ev-det" id="det-ce-9" hidden>
             <p class="event-desc">Campo estivo per bambini e ragazzi con attività di animazione, divertimento, sport, natura e educazione. Include piscina, zoo park, pranzo e servizio navetta da Valenza.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Terme di Monte Valenza - Valenza (AL)</p>
             <p class="ce-contatti">Contatti: 379 2288468 - 0131 945253</p>
@@ -1115,7 +1097,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="asti" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-11">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-10">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3897435715822354348.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Centro Estivo 2026 - Estate Bimbi - Scuola Mazzarello</span>
@@ -1124,7 +1106,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-11" hidden>
+          <div class="ev-det" id="det-ce-10" hidden>
             <p class="event-desc">Centro estivo per bambini della scuola dell&#x27;infanzia organizzato dalla Scuola Mazzarello in collaborazione con Progettoa.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Conte Verde, 182 - 14100 Asti (AT)</p>
             <p class="ce-contatti">Contatti: scuola@mazzarello.asti.it - 0141/211844</p>
@@ -1135,7 +1117,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="castell-alfero" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-12">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-11">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3901958981995867564.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Il Club dei Bambini Impossibili - Centro Estivo Infanzia - Cooperativa Sociale Seconda Stella</span>
@@ -1144,7 +1126,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-12" hidden>
+          <div class="ev-det" id="det-ce-11" hidden>
             <p class="event-desc">Centro estivo per bambini da 3 a 6 anni organizzato dalla Cooperativa Sociale Seconda Stella con il patrocinio del Comune di Castell&#x27;Alfero. Include 3 pasti settimanali, contributo gita non compreso. Iscrizioni dal 1° giugno entro il 27 giugno.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Pastrone 15 - Castell&#x27;Alfero (AT)</p>
             <p class="ce-contatti">Contatti: Marcella 3408700536, Dalila 3471266651, secondastellascs@gmail.com</p>
@@ -1155,7 +1137,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="castelnuovo-scrivia" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-13">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-12">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3865473956438392151.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Soul Farm Summer Camp</span>
@@ -1164,7 +1146,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-13" hidden>
+          <div class="ev-det" id="det-ce-12" hidden>
             <p class="event-desc">Centri estivi in fattoria alla Soul Farm di Castelnuovo Scrivia: un&#x27;estate tra animali, natura, cucina e avventure per bambini e ragazzi. Dal lunedì al venerdì, 9:00-16:00, con prodotti a Km0 raccolti e preparati insieme ogni giorno. Settimane: Space Week (6-10/07), Jurassic Week (20-24/07), Cuochi di Campagna (27-31/07), Celti in Fattoria (3-7/08), Lord of the Farm Rings (24-28/08), Adventure Farm (31/08-04/09).</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Strada Piccagallo 19, 15053 Castelnuovo Scrivia (AL)</p>
             <p class="ce-contatti">Contatti: 389 135 8919</p>
@@ -1175,7 +1157,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="rossiglione" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-14">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-13">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3934535077498736443.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Centro Estivo - Agорà Cooperativa Sociale</span>
@@ -1184,7 +1166,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-14" hidden>
+          <div class="ev-det" id="det-ce-13" hidden>
             <p class="event-desc">Centro estivo organizzato da Agорà Cooperativa Sociale, rivolto a bambini dai 4 ai 12 anni. Attività giornaliere di giochi, sport e compiti, dal lunedì al venerdì dalle 8:30 alle 16:30. Pranzo al sacco a carico delle famiglie; la merenda è fornita dall&#x27;organizzazione.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Locali delle Opere - Rossiglione Inferiore (AL)</p>
             <p class="ce-contatti">Contatti: mferrando@agoracoop.it - 3468551657</p>
@@ -1195,7 +1177,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="novi-ligure" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-15">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-14">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3860083387344145676.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">ARCEAM - Centro Estivo Merella - Circolo UISP</span>
@@ -1204,7 +1186,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-15" hidden>
+          <div class="ev-det" id="det-ce-14" hidden>
             <p class="event-desc">Centro estivo per bambini presso il Circolo UISP Merella. Pranzo e merenda inclusi nel servizio. Attività ricreative e divertimento per i più piccoli durante il periodo estivo.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Circolo UISP Merella - Novi Ligure (AL)</p>
             <p class="ce-contatti">Contatti: Alessandro 351 9362352 - Andrea 349 3589791</p>
@@ -1215,7 +1197,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="novi-ligure" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-16">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-15">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3860083244150583677.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">ARCEAM - Centro Estivo Serravalle Designer Outlet</span>
@@ -1224,7 +1206,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-16" hidden>
+          <div class="ev-det" id="det-ce-15" hidden>
             <p class="event-desc">Centro estivo per bambini presso il Circolo UISP Merella. Pranzo al sacco e merenda inclusa. Ingresso pomeridiano al Lele&#x27;s Aqua Park</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via della Moda, 1, 15069 Serravalle Scrivia AL</p>
             <p class="ce-contatti">Contatti: Alessandro 351 9362352 - Andrea 349 3589791</p>
@@ -1235,7 +1217,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="carrosio" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-17">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-16">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3860075339196170601.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Centri Estivi 2026 - Ranch Arizona</span>
@@ -1244,7 +1226,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-17" hidden>
+          <div class="ev-det" id="det-ce-16" hidden>
             <p class="event-desc">Centro estivo con lezioni di equitazione, giochi e divertimento, assistenza compiti. Scopri il mondo dei cavalli: accudiscili e impara a comunicare con loro come un vero cowboy!</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Località Ricoi 1 - Carrosio (AL)</p>
             <p class="ce-contatti">Contatti: 327 8835620</p>
@@ -1255,7 +1237,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="novi-ligure" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-18">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-17">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3866522302867348646.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Centro Estivo - PazzAnimazione / AnimataMente</span>
@@ -1264,7 +1246,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-18" hidden>
+          <div class="ev-det" id="det-ce-17" hidden>
             <p class="event-desc">Centro estivo per bambini dai 4 ai 12 anni con attività di edutainment, outdoor activities, sport e natura. Animazione, aiuto compiti e molto altro.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Corso Piave 2 - Novi Ligure (AL)</p>
             <p class="ce-contatti">Contatti: 351 7091495</p>
@@ -1275,7 +1257,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="cimaferle" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-19">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-18">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3862303611598417502.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Centro Estivo Cima 26 - Pro Loco di Cimaferle</span>
@@ -1284,7 +1266,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-19" hidden>
+          <div class="ev-det" id="det-ce-18" hidden>
             <p class="event-desc">Centro estivo per bambini dai 3 agli 11 anni con giornate in Pro Loco e in piscina, in collaborazione con Scoiattolo Beach di Ponzone. Sconto fratelli e sorelle 20 euro, sconto porta un amico 10 euro. Iscrizioni aperte dal 1 aprile 2026.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Pro Loco di Cimaferle - Cimaferle (AL)</p>
             <p class="ce-contatti">Contatti: Mary 320 8827020 - Stefania 348 333 8936</p>
@@ -1295,7 +1277,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="nizza-monferrato" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-20">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-19">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3888012312401020509.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Estate ragazzi 2026 - Oratorio Don Bosco</span>
@@ -1304,7 +1286,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-20" hidden>
+          <div class="ev-det" id="det-ce-19" hidden>
             <p class="event-desc">Centro estivo per ragazzi della durata di 11 settimane, dal lunedì al venerdì. Iscrizioni aperte con posti limitati. Informazioni e moduli su www.fondazionedonceli.it</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Oratorio Don Bosco - Nizza Monferrato (AT)</p>
             <p class="ce-contatti">Contatti: fondazionedonceli@libero.it</p>
@@ -1315,7 +1297,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="tortona" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-21">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-20">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3861473467091007392.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Farm Summer Camp 2026 - Fattorie Dertona</span>
@@ -1324,7 +1306,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-21" hidden>
+          <div class="ev-det" id="det-ce-20" hidden>
             <p class="event-desc">Campo estivo in fattoria per bambini e ragazzi. Attività: cura degli animali, laboratori creativi, attività sensoriali, battesimo della sella, giochi d&#x27;acqua e piscina, coltivazione dell&#x27;orto, aiuto compiti e potenziamento inglese.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Fattorie Dertona - Tortona (AL)</p>
             <p class="ce-contatti">Contatti: 347/8640922 - 331/9435954</p>
@@ -1335,7 +1317,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="riva-presso-chieri" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-22">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-21">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3960872773266177645.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Oratorio Aperto Settembre 2026 - Parrocchia Assunzione di Maria Vergine</span>
@@ -1344,7 +1326,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-22" hidden>
+          <div class="ev-det" id="det-ce-21" hidden>
             <p class="event-desc">Oratorio estivo settembrina per bambini e ragazzi dalla 1° elementare in su, dal 31 agosto al 14 settembre 2026. Le attività includono giochi organizzati, laboratori, attività creative, svolgimento dei compiti e uscite sul territorio. Iscrizione entro il 20 agosto.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Parrocchia Assunzione di Maria Vergine - Riva presso Chieri (AT)</p>
             <p class="ce-contatti">Contatti: 370-3201432</p>
@@ -1354,28 +1336,8 @@
             </div>
           </div>
         </article>
-        <article class="event-card" data-province="al" data-city="bosio" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-23">
-            <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3884751132408951193.jpg" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="ev-name">R-Estate a Bosio - Centro Estivo 2026 - Amici Acquedotto di Bosio APS</span>
-              <span class="ev-line">Bosio (AL) · 08:00-17:00 · 0-12</span>
-              <span class="ev-tags"></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h4>
-          <div class="ev-det" id="det-ce-23" hidden>
-            <p class="event-desc">Centro estivo per bambini della Scuola dell&#x27;Infanzia e Primaria. Attività: cucina fresca, sport, giochi, passeggiate, piscina, laboratori, escursioni e tanto altro. Dal lunedì al venerdì. Open Day 23/05/26 ore 10:30. Iscrizioni dal 04/05/26.</p>
-            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Scuole di Bosio - Bosio (AL)</p>
-            <p class="ce-contatti">Contatti: amiciacquedottobosio@gmail.com - Vittoria 3405248676 - Alice 3406043215 - Gaia 3401088932</p>
-            <div class="event-actions">
-              
-<a class="event-act" href="https://www.google.com/maps/search/?api=1&amp;query=Scuole%20di%20Bosio%20-%20Bosio%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>              <a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3884751132408951193.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a>
-            </div>
-          </div>
-        </article>
         <article class="event-card" data-province="al" data-city="mombello" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-24">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-22">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3951416532665438186.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Settimana Verde a Mombello - Associazione Culturale Omnia</span>
@@ -1384,7 +1346,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-24" hidden>
+          <div class="ev-det" id="det-ce-22" hidden>
             <p class="event-desc">Una settimana di avventure all&#x27;aria aperta per bambini dai 6 ai 10 anni, con attività di natura e outdoor, laboratori creativi, giochi e momenti di scoperta e meraviglia. Posti limitati, iscrizione obbligatoria. Organizzata dall&#x27;Associazione Culturale Omnia.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Mombello (AL)</p>
             <p class="ce-contatti">Contatti: associazioneomnia24@gmail.com</p>
@@ -1395,7 +1357,7 @@
           </div>
         </article>
         <article class="event-card" data-province="al" data-city="alessandria" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-25">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-23">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3962287926100395876.webp" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Sport World! - Rovereto Central Park &amp; Rolling Brazilian Jiu-Jitsu</span>
@@ -1404,7 +1366,7 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-25" hidden>
+          <div class="ev-det" id="det-ce-23" hidden>
             <p class="event-desc">Sport e laboratori in inglese per bambini dai 6 ai 12 anni, organizzati da Rovereto Central Park in collaborazione con Rolling Brazilian Jiu-Jitsu e Pingu&#x27;s English. Una settimana di attività sportive e didattiche interamente in lingua inglese.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Rovereto Central Park - Alessandria (AL)</p>
             <div class="event-actions">
@@ -1414,7 +1376,7 @@
           </div>
         </article>
         <article class="event-card" data-province="at" data-city="callianetto" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-26">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-24">
             <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3872179653284337668.jpg" alt="" loading="lazy" decoding="async">
             <span class="ev-main">
               <span class="ev-name">Summer Camp - Richard&#x27;s Ranch</span>
@@ -1423,13 +1385,58 @@
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h4>
-          <div class="ev-det" id="det-ce-26" hidden>
+          <div class="ev-det" id="det-ce-24" hidden>
             <p class="event-desc">Centro estivo per bambini e ragazzi dai 5 anni con lezioni di equitazione, cura degli animali, trekking nel bosco, piscina e giochi d&#x27;acqua, compiti e merenda, laboratori di pittura e pet therapy. Pranzo al sacco. Una volta alla settimana tendata con pizza.</p>
             <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Montechiaro 30, Callianetto (AT)</p>
             <p class="ce-contatti">Contatti: 3282443138</p>
             <div class="event-actions">
               
 <a class="event-act" href="https://www.google.com/maps/search/?api=1&amp;query=Via%20Montechiaro%2030%2C%20Callianetto%20%28AT%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>              <a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3872179653284337668.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a>
+            </div>
+          </div>
+        </article>
+</div>
+  <p class="events-empty" id="ce-empty">Nessun centro con questi filtri. Prova a togliere qualche filtro.</p>
+<h2 class="ce-past-h">Anche questi hanno aperto quest'anno</h2>
+<p class="ce-past-note">Le date sono quelle dell'edizione conclusa: servono a farsi un'idea di chi organizza in zona, per quali età e a quali prezzi. Verifica sempre con il gestore prima di contare su una riapertura.</p>
+<div class="events-list">
+        <article class="event-card" data-province="al" data-city="cantalupo-ligure" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-25">
+            <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3893046474741138744.jpg" alt="" loading="lazy" decoding="async">
+            <span class="ev-main">
+              <span class="ev-name">Baracca&#x27;s Summer Lab — Associazione Terra di Pan</span>
+              <span class="ev-line">Cantalupo Ligure (AL) · dal 10 giugno al 15 agosto · 8:00-17:00 · 3-14 anni</span>
+              <span class="ev-tags"><span class="ev-pill is-price">settimanale €110,…</span></span>
+            </span>
+            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button></h4>
+          <div class="ev-det" id="det-ce-25" hidden>
+            <p class="event-desc">Centro estivo con gite, piscina, laboratori di cucina, pomeriggi cinema, teatro, sport, compiti con metodo Feuerstein. Cucina interna, grande giardino, sale climatizzate, animatori esperti in team leading. Maglietta inclusa. Iscrizioni entro il 31 maggio 2026.</p>
+            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via Francesco Guida 15, Cantalupo Ligure (AL)</p>
+            <p class="ce-contatti">Contatti: 351 3630419 - terradipan@gmail.com - IG @terradipan</p>
+            <div class="event-actions">
+              
+<a class="event-act" href="https://www.google.com/maps/search/?api=1&amp;query=Via%20Francesco%20Guida%2015%2C%20Cantalupo%20Ligure%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>              <a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3893046474741138744.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a>
+            </div>
+          </div>
+        </article>
+        <article class="event-card" data-province="al" data-city="bosio" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15">
+          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-ce-26">
+            <img class="ev-thumb" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3884751132408951193.jpg" alt="" loading="lazy" decoding="async">
+            <span class="ev-main">
+              <span class="ev-name">R-Estate a Bosio - Centro Estivo 2026 - Amici Acquedotto di Bosio APS</span>
+              <span class="ev-line">Bosio (AL) · 08:00-17:00 · 0-12</span>
+              <span class="ev-tags"></span>
+            </span>
+            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button></h4>
+          <div class="ev-det" id="det-ce-26" hidden>
+            <p class="event-desc">Centro estivo per bambini della Scuola dell&#x27;Infanzia e Primaria. Attività: cucina fresca, sport, giochi, passeggiate, piscina, laboratori, escursioni e tanto altro. Dal lunedì al venerdì. Open Day 23/05/26 ore 10:30. Iscrizioni dal 04/05/26.</p>
+            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Scuole di Bosio - Bosio (AL)</p>
+            <p class="ce-contatti">Contatti: amiciacquedottobosio@gmail.com - Vittoria 3405248676 - Alice 3406043215 - Gaia 3401088932</p>
+            <div class="event-actions">
+              
+<a class="event-act" href="https://www.google.com/maps/search/?api=1&amp;query=Scuole%20di%20Bosio%20-%20Bosio%20%28AL%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Come arrivare</a>              <a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3884751132408951193.jpg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a>
             </div>
           </div>
         </article>
@@ -1454,7 +1461,6 @@
           </div>
         </article>
 </div>
-  <p class="events-empty" id="ce-empty">Nessun centro con questi filtri. Prova a togliere qualche filtro.</p>
   
 <section class="ce-guide">
   <h2>Come scegliere un centro estivo</h2>

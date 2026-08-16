@@ -78,6 +78,9 @@
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
   .page-hero p{font-size:1.1rem;color:rgba(255,255,255,0.72);max-width:520px;margin:0 auto}
+  /* La riga di rimando ai centri estivi: e' un collegamento laterale, non
+     il messaggio della pagina, quindi non pesa come il paragrafo sopra. */
+  .hero-nota{margin-top:14px;font-size:0.95rem;opacity:0.9}
   /* Un <a> nell'hero senza regola esce del BLU di default del browser, su un
      fondo blu notte: si salvava solo chi si ricordava di scrivere color:inherit
      nell'attributo style, come fa la riga dei centri estivi qui sotto. La regola
@@ -122,6 +125,38 @@
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
   .ev-select.is-on{background:var(--navy);border-color:var(--navy);color:white}
+  /* ── VICINO A ME ──
+     Fuori dalla barra appiccicosa apposta: quella e' scesa a ~109px sul
+     telefono e una riga in piu' la rifarebbe crescere per tutto lo
+     scorrimento. Da fermo e' un solo bottone; i gradini compaiono quando c'e'
+     un punto di partenza, cioe' quando servono. */
+  .ev-geo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0}
+  .ev-geo-btn{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;cursor:pointer;transition:var(--transition)}
+  .ev-geo-btn:hover:not(:disabled){border-color:var(--orange);color:var(--navy)}
+  .ev-geo-btn:disabled{opacity:0.55;cursor:default}
+  /* Il ripiego non e' un secondo comando pari al primo: al tocco la strada e'
+     una sola, e due pillole identiche affiancate obbligano a scegliere prima
+     di aver capito. Resta un testo, quindi resta raggiungibile. */
+  .ev-geo-btn.is-alt{border-color:transparent;background:none;font-weight:600;color:var(--text-light);text-decoration:underline;text-underline-offset:3px;padding:9px 4px}
+  .ev-geo-btn.is-alt:hover{color:var(--navy);border-color:transparent}
+  .ev-geo-btn.is-clear{padding:9px 13px;line-height:1}
+  /* I gradini prendono una riga loro: in coda agli altri controlli si
+     spezzavano a meta' e la ✕ finiva orfana su una terza riga. */
+  .ev-geo-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .ev-geo-chips:empty{display:none}
+  .ev-geo-from{font-size:0.82rem;font-weight:700;color:var(--navy)}
+  /* Stretti quel tanto che basta a stare tutti e quattro in fila su un
+     telefono da 372px: a 12px di lato il quarto cadeva da solo su una
+     seconda riga, e un gradino isolato sembra un'altra cosa. */
+  .ev-geo-chip{font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:600;color:var(--text-mid);background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:7px 9px;min-height:36px;cursor:pointer;transition:var(--transition);white-space:nowrap}
+  .ev-geo-chip:hover:not(:disabled){border-color:var(--orange)}
+  .ev-geo-chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:white}
+  .ev-geo-chip:disabled{opacity:0.38;cursor:default}
+  .ev-geo-in{font-family:'DM Sans',sans-serif;font-size:0.84rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:9px 14px;min-height:40px;min-width:0;flex:1 1 180px;max-width:280px}
+  .ev-geo-note{flex:1 1 100%;font-size:0.74rem;line-height:1.5;color:var(--text-light);margin:0}
+  .ev-geo-hint{font-weight:700;color:var(--navy)}
+  .ev-geo-hint:empty,.ev-geo-note:empty{display:none}
+  .ev-km{display:inline-block;font-size:0.72rem;font-weight:700;color:var(--text-light);white-space:nowrap}
   .ev-viewbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 0}
   .events-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:0}
   .ev-viewtoggle{margin-left:auto;display:inline-flex;gap:2px;background:var(--cream);border:1px solid rgba(45,74,92,0.10);border-radius:100px;padding:3px}
@@ -342,7 +377,13 @@
   }
   @media(max-width:600px){
     section{padding:72px 20px}
-    .page-hero{padding:120px 20px 72px}
+    /* La barra fissa in cima e' alta 69px: il padding di sopra deve solo
+       scavalcarla, non lasciarle mezzo schermo. A 96px ne restano 27 di
+       respiro, che bastano - i 120 di prima erano tarati sul desktop. */
+    .page-hero{padding:96px 20px 52px}
+    .page-hero h1{margin-bottom:12px}
+    .page-hero p{font-size:1.02rem}
+    .hero-nota{margin-top:15px;font-size:0.88rem}
     .ev-row{grid-template-columns:52px 1fr 18px;gap:12px}
     .ev-thumb{width:52px;height:52px}
     .ev-name{font-size:1rem}
@@ -359,13 +400,16 @@
    occupati per tutto lo scorrimento. Se un domani un'etichetta si allunga
    troppo tornano a capo da sole, cioe' come stavano prima. */
 .ev-select{flex:1 1 auto;min-width:0;font-size:0.8rem;padding:9px 10px;min-height:40px}
+    /* Solo qui i gradini prendono una riga loro: su schermi larghi ci
+       stanno in fila col campo e sarebbero 40px di vuoto per niente. */
+    .ev-geo-chips{flex:1 1 100%}
     /* Fra la fine dell'hero e il primo evento c'erano l'intestazione di
        sezione, quattro controlli e sedici pillole: su un telefono voleva dire
        due schermate di filtri prima di un evento. L'intestazione qui ripete
        quello che l'hero ha appena detto, quindi si stringe. */
-    .section-header{margin-bottom:22px}
+    .section-header{margin-bottom:16px}
     .section-subtitle{font-size:0.95rem;line-height:1.6}
-    .bg-white{padding-top:44px}
+    .bg-white{padding-top:28px}
     .ev-comuni-nav{gap:6px 8px;margin-top:12px}
     .ev-comuni a{padding:8px 13px;font-size:0.84rem}
     .ev-highlights{margin-top:20px;gap:20px}
@@ -478,6 +522,17 @@
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
+   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
+   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
+   e' un <aside> dentro l'articolo, non una fascia di pagina. */
+.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
+  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
+.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
+.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
+  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
+  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -586,8 +641,8 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-09",
-      "dateModified": "2026-08-14",
-      "lastReviewed": "2026-08-14"
+      "dateModified": "2026-08-15",
+      "lastReviewed": "2026-08-16"
     },
     {
       "@type": "Organization",
@@ -687,8 +742,9 @@
   <section class="ev-fam" aria-labelledby="ev-fam-t"><h2 id="ev-fam-t"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Ci vado con i bambini?</h2><p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo scelto <strong>per le famiglie</strong>. Nelle manifestazioni con più appuntamenti, l'orario che fa per i bambini cambia da serata a serata: il programma qui sopra è il modo più sicuro per scegliere.</p><p class="ev-fam-lab">Altro per bambini qui vicino</p><ul class="ev-fam-altri"><li><a href="/eventi/silvanoincontrada-silvano-d-orba.html">SilvanoInContraDA</a> <span>Silvano d&#x27;Orba</span></li><li><a href="/eventi/bolle-giganti-edizione-agosto-pro-loco-voltaggio-p.html">Bolle Giganti (edizione agosto) - Pro Loco…</a> <span>Voltaggio</span></li><li><a href="/eventi/le-regole-della-mia-citta-gli-esplorattori-tortona.html">Le regole della mia città! - Gli EsplorAttori</a> <span>Tortona</span></li></ul></section>
   
   <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Il+Passerotto+che+Scopr%C3%AC+il+Mondo+-+L%27Arca+di+No%C3%A8+Teatro+ETS&amp;dates=20260914%2F20260915&amp;details=Spettacolo+Il+Passerotto+che+Scopr%C3%AC+il+Mondo+a+cura+de+L%27Arca+di+No%C3%A8+Teatro+ETS+%28VA%29.+Appuntamento+pomeridiano+al+Parco+della+Pieve+di+Viguzzolo.&amp;location=Parco+della+Pieve+-+Viguzzolo+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=44.905507,8.9186164" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
-  <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria, Asti e Cuneo. Ultimo controllo: <time datetime="2026-08-14">14 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Il%20Passerotto%20che%20Scopr%C3%AC%20il%20Mondo%20-%20L%27Arca%20di%20No%C3%A8%20Teatro%20ETS">Segnala una correzione</a></p></aside>
+  <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria e Asti. Ultimo controllo: <time datetime="2026-08-16">16 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Il%20Passerotto%20che%20Scopr%C3%AC%20il%20Mondo%20-%20L%27Arca%20di%20No%C3%A8%20Teatro%20ETS">Segnala una correzione</a></p></aside>
   <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Viguzzolo</h2><ul><li><a href="/eventi/mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra delle Illusioni - Museo dei Campionissimi</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Complesso Conventuale di San Francesco</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi.html#ev-2026-08-01-musei-aperti-ad-agosto-2026-museo-civico-di-palazz"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Museo Civico di Palazzo Cuttica</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi/musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Sale d&#x27;Arte di Via Machiavelli</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi.html#ev-2026-08-08-mostra-collettiva-giudice-de-angelis"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra Collettiva Giudice – De Angelis</span><span class="ev-vic-c">Acqui Terme</span></a></li><li><a href="/eventi.html#ev-2026-08-08-mostra-personale-di-pierangelo-bertolo-pittura-e-s"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra Personale di Pierangelo Bertolo – Pittura e scultura</span><span class="ev-vic-c">Acqui Terme</span></a></li></ul><p class="ev-vic-all"><a href="/sagre-provincia-alessandria.html">Le sagre in provincia di Alessandria</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
+  <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Viguzzolo: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">

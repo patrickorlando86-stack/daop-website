@@ -74,6 +74,7 @@ import genera_eventi as G
 ROOT = G.ROOT
 OUT_PATH = os.path.join(ROOT, "luoghi.html")
 JSON_PATH = os.path.join(ROOT, "data", "luoghi.json")
+INDICE_COMUNI = G.INDICE_LUOGHI_PATH
 EVENTI_JSON = G.JSON_PATH
 STORICO_JSON = os.path.join(ROOT, "data", "storico-comuni.json")
 SITEMAP_PATH = G.SITEMAP_PATH
@@ -1301,6 +1302,21 @@ def _per_comune(elenco):
     return list(ordinati.items())
 
 
+def ancora_comune(prov, comune):
+    """L'id dell'<h2> del gruppo comune, cioe' il bersaglio dei link in arrivo.
+
+    La provincia sta NELL'id, non solo nel testo: "Ronco Scrivia" compare in AL e
+    in GE (nel foglio uno dei due e' un refuso, ma non tocca a noi indovinare
+    quale), e due <h2> con lo stesso id sono HTML non valido - l'ancora
+    porterebbe sempre al primo dei due.
+
+    Sta in una funzione perche' la usano in due: chi disegna la pagina e chi
+    scrive l'indice che le altre pagine leggono per linkarla. Se le due
+    divergessero, i link arriverebbero su un'ancora che non esiste."""
+    pag = G.slugify(comune)
+    return f"c-{prov.lower()}-{pag}" if prov else f"c-{pag}"
+
+
 def gruppi_comune(elenco, oggi):
     """Le righe raggruppate per comune. Il raggruppamento e' anche la risposta a
     "con che ordine sono messi": comune in ordine alfabetico, luoghi in ordine
@@ -1314,11 +1330,7 @@ def gruppi_comune(elenco, oggi):
         link = ''
         if os.path.exists(os.path.join(ROOT, 'eventi', 'comune', f'{pag}.html')):
             link = f'<a href="/eventi/comune/{pag}.html">Eventi a {G.esc(comune)} →</a>'
-        # La provincia sta NELL'id, non solo nel testo: "Ronco Scrivia" compare
-        # in AL e in GE (nel foglio uno dei due e' un refuso, ma non tocca a noi
-        # indovinare quale), e due <h2> con lo stesso id sono HTML non valido -
-        # l'ancora porterebbe sempre al primo dei due.
-        ancora = f"c-{prov.lower()}-{pag}" if prov else f"c-{pag}"
+        ancora = ancora_comune(prov, comune)
         fuori.append(
             f'<section class="lg-grp">'
             f'<div class="lg-grp-h"><h2 id="{ancora}">{G.esc(comune)}</h2>'
@@ -1597,6 +1609,35 @@ def salva_istantanea(elenco):
     print(f"[genera_luoghi] istantanea aggiornata: {len(grezzi)} righe di catalogo")
 
 
+def salva_indice_comuni(elenco):
+    """L'indice dei comuni con almeno un luogo, per chi vuole linkare qui dentro.
+
+    Nasce il 14/08/2026 per un problema misurato: `luoghi.html` e' nella nav di
+    292 pagine e in nessun CORPO di pagina (a parte le due stagionali), ed e' il
+    motivo per cui non prende traffico mentre le schede evento ne fanno l'82%.
+    Il link dalla scheda al proprio comune usa questo file.
+
+    Perche' un file e non un controllo al volo: chi linka deve sapere se
+    l'ancora esiste DAVVERO, come gia' si fa qui per le pagine comune
+    (`os.path.exists`) - un link a un'ancora che non c'e' scarica in cima a una
+    pagina da 800 righe, che e' peggio di nessun link. Riscriverne la logica in
+    `genera_eventi.py` vorrebbe dire duplicare la normalizzazione del foglio (le
+    grafie doppie, il dedup) e vederla divergere alla prima colonna che cambia
+    nome.
+
+    Si accetta un giro di ritardo: `genera_eventi.py` gira PRIMA di questo (deve,
+    vedi CLAUDE.md), quindi legge l'indice della notte prima. Su un catalogo in
+    cui un comune nuovo compare una volta ogni tanto e' un prezzo giusto, e
+    sbaglia dalla parte buona: un comune appena nato resta senza link per un
+    giorno, invece di avere un link rotto subito."""
+    indice = {ancora_comune(prov, comune): {'comune': comune, 'prov': prov,
+                                            'n': len(righe)}
+              for (prov, comune), righe in _per_comune(elenco)}
+    with open(INDICE_COMUNI, "w", encoding="utf-8") as fh:
+        json.dump(indice, fh, ensure_ascii=False, indent=1, sort_keys=True)
+    print(f"[genera_luoghi] indice comuni: {len(indice)} comuni con almeno un luogo")
+
+
 def update_sitemap(n):
     """Aggiunge (o aggiorna) la voce di luoghi.html nella sitemap.
 
@@ -1671,6 +1712,7 @@ def main():
               'foglio è vuota su tutte le schede a pagamento')
     open(OUT_PATH, "w", encoding="utf-8").write(render(elenco, oggi))
     salva_istantanea(elenco)
+    salva_indice_comuni(elenco)
     update_sitemap(len(elenco))
     peso = os.path.getsize(OUT_PATH) / 1024
     print(f"[genera_luoghi] luoghi.html: {len(elenco)} luoghi "
