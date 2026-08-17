@@ -4987,6 +4987,57 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
     }
 
 
+# ===========================================================================
+# IL CALENDARIO DELLE STAGIONALI
+#
+# Le pagine stagionali devono nascere, indicizzarsi, comparire nelle
+# scorciatoie, annunciarsi in home e ritirarsi DA SOLE. Il pezzo che lo rende
+# possibile e' qui: nessuna data di festa e' scritta a mano da nessuna parte,
+# nemmeno quelle che sembrano fisse.
+#
+# Perche' non basta cablarle: Carnevale e Pasqua si muovono di un mese pieno.
+#   2027  Pasqua 28 mar   martedi' grasso  9 feb
+#   2028  Pasqua 16 apr   martedi' grasso 29 feb
+#   2030  Pasqua 21 apr   martedi' grasso  5 mar
+# Una tabella di date andrebbe riempita a mano ogni anno, cioe' esattamente la
+# cosa da cui questo modulo deve liberare.
+# ===========================================================================
+
+def pasqua(anno):
+    """La domenica di Pasqua (computus gregoriano, Meeus/Jones/Butcher).
+
+    Aritmetica pura: nessuna dipendenza, nessuna tabella, vale fino al 4099.
+    Da qui derivano Carnevale e Pasqua, e quindi meta' del calendario."""
+    a = anno % 19
+    b, c = divmod(anno, 100)
+    d, e = divmod(b, 4)
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = divmod(c, 4)
+    ll = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * ll) // 451
+    mese, giorno = divmod(h + ll - 7 * m + 114, 31)
+    return datetime.date(anno, mese, giorno + 1)
+
+
+# NB rito: il Piemonte e' rito ROMANO, quindi il Carnevale finisce al martedi'
+# grasso (Pasqua-47). A Milano - rito ambrosiano - finisce quattro giorni dopo.
+# Se un domani si coprisse la provincia di Milano, questo va gestito.
+def _finestra_carnevale(anno):
+    p = pasqua(anno)
+    return (p - datetime.timedelta(days=52),   # giovedi' grasso
+            p - datetime.timedelta(days=47),   # martedi' grasso
+            p - datetime.timedelta(days=47))
+
+
+def _finestra_pasqua(anno):
+    p = pasqua(anno)
+    return (p - datetime.timedelta(days=2),    # venerdi' santo
+            p,
+            p + datetime.timedelta(days=1))    # pasquetta
+
+
 # La finestra di Ferragosto e' il 14-16 agosto: la vigilia, il giorno e il
 # giorno dopo. NON e' "il weekend piu' vicino al 15", e la differenza non e'
 # accademica: nel 2026 il 15 cade di sabato e un weekend coinciderebbe con
@@ -4995,32 +5046,36 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
 # tre date fisse tengono il ponte in tutti e due i casi.
 FERRAGOSTO_DA, FERRAGOSTO_A = 14, 16
 
-# Da quando la pagina si linka e si indicizza. Prima di meta' luglio le sagre
-# di Ferragosto nel foglio non ci sono ancora: tenerla indicizzata vuota per
-# cinquanta settimane e' contenuto sottile proprio sull'URL che vogliamo far
-# invecchiare bene.
-FERRAGOSTO_APRE = (7, 10)  # 10 luglio
 
-
-def ferragosto_range(oggi):
-    """(14, 15, 16 agosto) del prossimo Ferragosto utile.
-
-    Fino al 16 e' quello di quest'anno: il 16 la pagina serve ancora a chi
-    cerca cosa c'e' oggi. Dal 17 diventa quello dell'anno prossimo, cioe' la
-    pagina passa in fuori stagione da sola, senza che nessuno se ne ricordi."""
-    anno = oggi.year + (1 if (oggi.month, oggi.day) > (8, FERRAGOSTO_A) else 0)
+def _finestra_ferragosto(anno):
     return (datetime.date(anno, 8, FERRAGOSTO_DA),
             datetime.date(anno, 8, 15),
             datetime.date(anno, 8, FERRAGOSTO_A))
 
 
-def in_stagione_ferragosto(oggi):
-    """Se la pagina va linkata dalle altre. Fuori da qui resta online - i link
-    girati su WhatsApp devono continuare a funzionare - ma non la si annuncia."""
-    return FERRAGOSTO_APRE <= (oggi.month, oggi.day) <= (8, FERRAGOSTO_A)
+def prossima_finestra(calcola, oggi):
+    """(inizio, clou, fine) della prossima occorrenza utile di una festa.
+
+    Fino all'ultimo giorno e' quella di quest'anno - la pagina serve ancora a
+    chi cerca cosa c'e' oggi - e dal giorno dopo diventa quella dell'anno
+    prossimo: la stagionale passa in fuori stagione DA SOLA, senza che nessuno
+    se ne ricordi. E' il pezzo che rende inutile segnarsi le date in agenda.
+
+    `calcola(anno)` restituisce la finestra identificata da quell'anno. Per le
+    feste a cavallo di capodanno l'anno e' quello del giorno CLOU (la Befana
+    del 2027 comincia il 27 dicembre 2026), cosi' il confronto resta banale."""
+    da, clou, a = calcola(oggi.year)
+    if oggi > a:
+        da, clou, a = calcola(oggi.year + 1)
+    return da, clou, a
 
 
-def spec_ferragosto(events, oggi, altre):
+def ferragosto_range(oggi):
+    """(14, 15, 16 agosto) del prossimo Ferragosto utile."""
+    return prossima_finestra(_finestra_ferragosto, oggi)
+
+
+def spec_ferragosto(st, events, oggi, altre):
     """/ferragosto.html — il 14-16 agosto, la pagina stagionale che invecchia.
 
     Due cose non ovvie, e sono il motivo per cui la pagina esiste.
@@ -5143,27 +5198,43 @@ def spec_ferragosto(events, oggi, altre):
 # coinciderebbe con /eventi/weekend.html un anno su due.
 HALLOWEEN_DA = (10, 25)
 HALLOWEEN_A = (11, 2)
-HALLOWEEN_APRE = (10, 1)     # da quando entra nelle scorciatoie
-HALLOWEEN_AVVISO = (10, 20)  # da quando compare la riga in home
 
 
-def halloween_range(oggi):
-    """(25 ottobre, 31 ottobre, 2 novembre) del prossimo Halloween utile.
-
-    Dal 3 novembre punta all'anno dopo, come ferragosto_range(): la pagina
-    passa in fuori stagione da sola, senza che nessuno se ne ricordi."""
-    anno = oggi.year + (1 if (oggi.month, oggi.day) > HALLOWEEN_A else 0)
+def _finestra_halloween(anno):
     return (datetime.date(anno, *HALLOWEEN_DA),
             datetime.date(anno, 10, 31),
             datetime.date(anno, *HALLOWEEN_A))
 
 
-def in_stagione_halloween(oggi):
-    """Se la pagina va linkata dalle altre."""
-    return HALLOWEEN_APRE <= (oggi.month, oggi.day) <= HALLOWEEN_A
+def halloween_range(oggi):
+    """(25 ottobre, 31 ottobre, 2 novembre) del prossimo Halloween utile."""
+    return prossima_finestra(_finestra_halloween, oggi)
 
 
-def spec_halloween(events, oggi, altre):
+# Le finestre delle altre quattro, tutte identificate dall'anno del giorno CLOU.
+#
+# NATALE e BEFANA sono DUE pagine, non una, e il taglio e' il 27 dicembre.
+# Il periodo natalizio e' un continuo dall'Immacolata all'Epifania, ma sono due
+# domande diverse - "dove sono i mercatini" contro "a che ora arriva la Befana" -
+# e su un URL solo si farebbero concorrenza: e' lo stesso errore che avevamo fra
+# oggi-provincia-* e sagre-provincia-*, dove nessuna delle due rispondeva alla
+# domanda intera e stavano tutte e due in fondo alla prima pagina.
+# Tagliandole il 27 le finestre restano DISGIUNTE, che e' l'invariante su cui si
+# regge blocco_stagione(): "la prima che risponde vince". Vedi _controlla_stagioni().
+def _finestra_natale(anno):
+    return (datetime.date(anno, 12, 1),
+            datetime.date(anno, 12, 25),
+            datetime.date(anno, 12, 26))
+
+
+def _finestra_befana(anno):
+    # Comincia nell'anno prima: la Befana del 2027 parte il 27 dicembre 2026.
+    return (datetime.date(anno - 1, 12, 27),
+            datetime.date(anno, 1, 6),
+            datetime.date(anno, 1, 6))
+
+
+def spec_halloween(st, events, oggi, altre):
     """/halloween.html — il 25 ottobre-2 novembre, con la domanda vera in cima.
 
     **Non e' un filtro di date.** Se fosse solo l'elenco della finestra sarebbe
@@ -5274,6 +5345,346 @@ def spec_halloween(events, oggi, altre):
                                  f"Eventi di Halloween {anno}", "Halloween", oggi),
         'eventi': len(finestra),
     }
+
+
+# ---------------------------------------------------------------------------
+# Le altre quattro stagionali. La struttura e' identica per tutte - finestra,
+# conteggi, filtri, elenchi, scorciatoie - e sta nei due aiutanti qui sotto.
+# Quello che NON si fattorizza e' l'angolo editoriale: e' scritto per esteso in
+# ogni spec_*, ed e' l'unica ragione per cui queste pagine non sono un doppione
+# di /eventi/weekend.html con un titolo diverso (vedi il commento su
+# spec_halloween). Una stagionale senza la sua domanda propria la perde.
+# ---------------------------------------------------------------------------
+
+def _stagione_dati(st, events, oggi):
+    """I conti che servono a tutte: finestra, elenco in finestra, comuni."""
+    da, clou, a = prossima_finestra(st.finestra, oggi)
+    finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    comuni = len({_key(e.get('citta')) for e in finestra
+                  if (e.get('citta') or '').strip()})
+    return da, clou, a, finestra, comuni
+
+
+def _stagione_out(st, oggi, finestra, titolo, descr, h1, sotto, corpo, nome_lista):
+    """Il dizionario di spec. Il noindex sotto soglia e' la regola che tiene
+    sana la pagina i mesi in cui e' vuota, senza mai cambiare indirizzo."""
+    url = f"{SITE_URL}{st.href}"
+    return {
+        'path': st.href.lstrip('/'), 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': h1, 'sotto': sotto, 'crumb': st.crumb,
+        'corpo': corpo,
+        'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
+        'jsonld': _grafo_landing(url, titolo, descr, finestra, nome_lista,
+                                 st.crumb, oggi),
+        'eventi': len(finestra),
+    }
+
+
+def _giorno_per_giorno(finestra, da, a, oggi, etichette=None):
+    """Un blocco per giorno. I giorni vuoti spariscono da soli
+    (_landing_sezione torna '' senza righe), quindi si puo' ciclare su tutta
+    la finestra senza controllare prima se c'e' qualcosa."""
+    etichette = etichette or {}
+    fuori = ''
+    for i in range((a - da).days + 1):
+        g = da + datetime.timedelta(days=i)
+        fuori += _landing_sezione(
+            f"{GIORNI[g.weekday()].capitalize()} {g.day} {MESI_LUNGHI[g.month - 1]}",
+            etichette.get((g.month, g.day)),
+            [e for e in finestra if in_corso(e, g)], oggi)
+    return fuori
+
+
+def spec_natale(st, events, oggi, altre):
+    """/natale.html — dal 1° al 26 dicembre.
+
+    La domanda vera di dicembre non e' "che eventi ci sono": e' **dove sono i
+    mercatini e i presepi**, e soprattutto **quali si fanno al coperto**. A
+    dicembre il tempo decide la giornata piu' di qualsiasi programma, ed e'
+    l'unica cosa che un elenco di date non dice.
+
+    La finestra si ferma il 26 e non arriva all'Epifania: dal 27 prende
+    /befana.html. Vedi il commento sulle finestre di Natale e Befana."""
+    da, clou, a, finestra, comuni = _stagione_dati(st, events, oggi)
+    anno = clou.year
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+    gratis = sum(1 for e in finestra
+                 if any(k in (e.get('prezzo') or '').lower() for k in FREE_KW))
+
+    titolo = _landing_titolo([f"Natale {anno} con i bambini: {prov}",
+                              f"Mercatini e presepi di Natale {anno} | DAOP",
+                              f"Natale {anno} con i bambini"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi di dicembre in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento in programma a dicembre")
+        apertura = (f"<p>Il <strong>Natale {anno}</strong> in zona comincia "
+                    f"con l'Immacolata e va avanti fino a Santo Stefano. Qui "
+                    f"sotto ci sono i <strong>{len(finestra)} eventi</strong> "
+                    f"che abbiamo verificato uno per uno in {comuni} comuni fra "
+                    f"le province di {prov}"
+                    + (f", di cui {gratis} gratuiti" if gratis else "")
+                    + ", con la data, il paese e chi li organizza.</p>")
+        descr = trunc(f"Mercatini, presepi ed eventi di Natale {anno} con i bambini "
+                      f"in provincia di {prov}: "
+                      + (f"{len(finestra)} appuntamenti" if len(finestra) > 1
+                         else "1 appuntamento")
+                      + " in dicembre, verificati uno per uno da DAOP.", 152)
+    else:
+        sotto = f"Per il Natale {anno} non c'è ancora niente in agenda"
+        apertura = ("<p class=\"lan-vuoto\">Per dicembre in agenda non abbiamo "
+                    "ancora niente, e lo scriviamo invece di riempire la pagina. "
+                    "I mercatini di paese si decidono tardi: molte pro loco "
+                    "pubblicano il programma a fine novembre. Questa pagina si "
+                    "rifà ogni notte, quindi appena entrano compaiono qui.</p>")
+        descr = trunc(f"Mercatini, presepi ed eventi di Natale {anno} con i bambini "
+                      f"in provincia di {prov}, verificati uno per uno da DAOP. "
+                      "L'agenda si aggiorna ogni notte.", 152)
+
+    corpo = apertura
+    corpo += (
+        '<h2>Al coperto o all\'aperto?</h2>'
+        '<p>A dicembre è <em>la</em> domanda, e cambia la giornata più del '
+        'programma: un mercatino in piazza con quattro gradi e la pioggia non è '
+        'la stessa cosa di un presepe vivente sotto i portici. Dove lo sappiamo '
+        'lo scriviamo nella scheda, ma la regola pratica è più semplice: i '
+        '<strong>mercatini e i presepi viventi</strong> sono quasi sempre '
+        'all\'aperto e si fanno lo stesso, quindi si va coperti e si mette in '
+        'conto di stare poco; le <strong>tombole, i laboratori e gli spettacoli '
+        'di Natale</strong> stanno in oratorio, in biblioteca o in teatro, e '
+        'reggono qualsiasi tempo.</p>'
+        '<p>La seconda domanda è <strong>Babbo Natale a che ora</strong>. Quando '
+        'c\'è un orario preciso lo trovi in riga: è la differenza fra arrivare e '
+        'trovarlo, e arrivare e trovare una piazza che si smonta. Se invece '
+        'cercate un posto dove stare al caldo tutto il pomeriggio, gli <a '
+        'href="/luoghi.html">agriturismi, i musei e i posti al coperto per '
+        'bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo.</p>')
+    corpo += _landing_filtri(finestra)
+    # A settimane e non giorno per giorno: la finestra e' lunga 26 giorni, e
+    # ventisei titoletti - la meta' dei quali vuoti - fanno sembrare generata a
+    # macchina una pagina che non lo e'.
+    for testa, coda, etichetta in ((1, 7, None),
+                                   (8, 14, "C'è l'Immacolata"),
+                                   (15, 21, None),
+                                   (22, 26, "Vigilia, Natale e Santo Stefano")):
+        d1 = datetime.date(anno, 12, testa)
+        d2 = datetime.date(anno, 12, coda)
+        corpo += _landing_sezione(
+            f"Dal {testa} al {coda} dicembre" if testa != 22 else "Dal 22 al 26 dicembre",
+            etichetta,
+            [e for e in finestra if e['d_start'] <= d2 and e['d_end'] >= d1], oggi)
+    corpo += _altre_landing(st.href, altre)
+    return _stagione_out(st, oggi, finestra, titolo, descr,
+                         f"Natale {anno} con i bambini", sotto, corpo,
+                         f"Eventi di Natale {anno}")
+
+
+def spec_befana(st, events, oggi, altre):
+    """/befana.html — dal 27 dicembre al 6 gennaio.
+
+    Pagina separata da /natale.html apposta: "calza della befana <paese>" e
+    "mercatini di natale <paese>" sono due query diverse, e su un URL solo si
+    farebbero concorrenza.
+
+    La domanda propria e' l'ORARIO. La Befana che scende dal campanile e' un
+    evento di dieci minuti, non una giornata: arrivare mezz'ora dopo vuol dire
+    non averla vista. E' l'unica stagionale in cui l'ora conta piu' del posto."""
+    da, clou, a, finestra, comuni = _stagione_dati(st, events, oggi)
+    anno = clou.year
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+
+    titolo = _landing_titolo([f"Befana {anno} con i bambini: {prov}",
+                              f"Cosa fare per la Befana {anno} | DAOP",
+                              f"Befana {anno} con i bambini"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi fra Capodanno e l'Epifania in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento fra Capodanno e l'Epifania")
+        apertura = (f"<p>Dal <strong>27 dicembre al 6 gennaio</strong> ci sono "
+                    f"Capodanno, i presepi che restano aperti e la Befana. Qui "
+                    f"sotto i <strong>{len(finestra)} eventi</strong> verificati "
+                    f"uno per uno in {comuni} comuni fra le province di {prov}, "
+                    f"con l'orario, il paese e chi li organizza.</p>")
+        descr = trunc(f"Cosa fare per la Befana {anno} con i bambini in provincia di "
+                      f"{prov}: "
+                      + (f"{len(finestra)} eventi" if len(finestra) > 1 else "1 evento")
+                      + " fra il 27 dicembre e l'Epifania, verificati uno per uno "
+                        "da DAOP.", 152)
+    else:
+        sotto = f"Per l'Epifania {anno} non c'è ancora niente in agenda"
+        apertura = ("<p class=\"lan-vuoto\">Fra Capodanno e l'Epifania in agenda "
+                    "non abbiamo ancora niente, e lo scriviamo invece di riempire "
+                    "la pagina. Le calze in piazza si annunciano tardi, spesso "
+                    "dopo Natale. Questa pagina si rifà ogni notte, quindi appena "
+                    "entrano compaiono qui.</p>")
+        descr = trunc(f"Cosa fare per la Befana {anno} con i bambini in provincia di "
+                      f"{prov}: calze in piazza, presepi ed eventi dell'Epifania, "
+                      "verificati uno per uno da DAOP.", 152)
+
+    corpo = apertura
+    corpo += (
+        '<h2>A che ora arriva?</h2>'
+        '<p>È la domanda che conta, e su questa pagina più che su tutte le altre. '
+        'La Befana che scende dal campanile o arriva in piazza è un evento di '
+        '<strong>dieci minuti</strong>, non una giornata: arrivare mezz\'ora dopo '
+        'vuol dire trovare la piazza che si svuota. Dove l\'orario è dichiarato '
+        'lo trovi scritto in riga, e dove non c\'è conviene aprire la scheda e '
+        'leggere il programma, che riportiamo per intero — oppure chiamare chi '
+        'organizza, che indichiamo sempre.</p>'
+        '<p>L\'altra cosa da sapere è che in questi giorni <strong>i presepi '
+        'restano aperti</strong> anche quando gli eventi finiscono: i presepi '
+        'viventi e quelli meccanici di solito vanno avanti fino al 6 gennaio, ed '
+        'è la cosa più semplice da fare con i bambini in una giornata vuota fra '
+        'Capodanno e l\'Epifania. Quelli che conosciamo stanno nel <a '
+        'href="/luoghi.html">catalogo dei luoghi</a>, con orari e telefono.</p>')
+    corpo += _landing_filtri(finestra)
+    corpo += _giorno_per_giorno(finestra, da, a, oggi,
+                                {(12, 31): "San Silvestro",
+                                 (1, 1): "Capodanno",
+                                 (1, 6): "L'Epifania"})
+    corpo += _altre_landing(st.href, altre)
+    return _stagione_out(st, oggi, finestra, titolo, descr,
+                         f"Cosa fare per la Befana {anno}", sotto, corpo,
+                         f"Eventi della Befana {anno}")
+
+
+def spec_carnevale(st, events, oggi, altre):
+    """/carnevale.html — dal giovedi' al martedi' grasso.
+
+    Le date le calcola pasqua(): il Carnevale si sposta di un mese pieno da un
+    anno all'altro (martedi' grasso 2027 il 9 febbraio, 2030 il 5 marzo), quindi
+    e' proprio la pagina che a mano ci si dimenticherebbe di aggiornare.
+
+    La domanda propria: **sfilata o festa al chiuso?** Sono due cose diverse -
+    una la si guarda per strada al freddo, l'altra si fa in palestra - e con i
+    bambini cambia tutto, il costume compreso."""
+    da, clou, a, finestra, comuni = _stagione_dati(st, events, oggi)
+    anno = clou.year
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+
+    titolo = _landing_titolo([f"Carnevale {anno} con i bambini: {prov}",
+                              f"Sfilate e feste di Carnevale {anno} | DAOP",
+                              f"Carnevale {anno} con i bambini"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi di Carnevale in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento di Carnevale")
+        apertura = (f"<p>Nel {anno} il <strong>martedì grasso</strong> è il "
+                    f"{clou.day} {MESI_LUNGHI[clou.month - 1]}, e il Carnevale "
+                    f"comincia il giovedì prima. Qui sotto i <strong>"
+                    f"{len(finestra)} eventi</strong> verificati uno per uno in "
+                    f"{comuni} comuni fra le province di {prov}, con la data, il "
+                    f"paese e chi li organizza.</p>")
+        descr = trunc(f"Sfilate e feste di Carnevale {anno} con i bambini in provincia "
+                      f"di {prov}: "
+                      + (f"{len(finestra)} appuntamenti" if len(finestra) > 1
+                         else "1 appuntamento")
+                      + " fino al martedì grasso, verificati uno per uno da DAOP.", 152)
+    else:
+        sotto = f"Per il Carnevale {anno} non c'è ancora niente in agenda"
+        apertura = ("<p class=\"lan-vuoto\">Per il Carnevale in agenda non abbiamo "
+                    "ancora niente, e lo scriviamo invece di riempire la pagina. I "
+                    "programmi dei carri escono tardi, spesso a gennaio inoltrato. "
+                    "Questa pagina si rifà ogni notte, quindi appena entrano "
+                    "compaiono qui.</p>")
+        descr = trunc(f"Sfilate e feste di Carnevale {anno} con i bambini in provincia "
+                      f"di {prov}: carri, coriandoli e feste in maschera, "
+                      "verificati uno per uno da DAOP.", 152)
+
+    corpo = apertura
+    corpo += (
+        '<h2>Sfilata o festa al chiuso?</h2>'
+        '<p>Sono due Carnevali diversi e conviene sapere quale si sta scegliendo. '
+        'La <strong>sfilata dei carri</strong> si guarda per strada, dura un paio '
+        'd\'ore, è gratis e a febbraio fa freddo: con i piccoli si sta sul '
+        'percorso e non alla partenza, e i coriandoli finiscono ovunque. La '
+        '<strong>festa in maschera</strong> — palestra, oratorio, salone della '
+        'pro loco — è al chiuso, spesso con merenda e animazione, di solito si '
+        'paga poco all\'ingresso e regge anche se piove.</p>'
+        '<p>Sul <strong>costume</strong>: alle sfilate non serve, alle feste in '
+        'maschera praticamente sì, e in diversi paesi c\'è la premiazione della '
+        'maschera più bella. Dove il programma lo dice lo riportiamo per intero '
+        'nella scheda. Ultima cosa che vale la pena sapere: nelle nostre zone il '
+        'Carnevale è <strong>rito romano</strong>, quindi finisce al martedì '
+        'grasso — non alla domenica dopo come a Milano.</p>')
+    corpo += _landing_filtri(finestra)
+    corpo += _giorno_per_giorno(finestra, da, a, oggi,
+                                {(da.month, da.day): "Giovedì grasso",
+                                 (clou.month, clou.day): "Martedì grasso"})
+    corpo += _altre_landing(st.href, altre)
+    return _stagione_out(st, oggi, finestra, titolo, descr,
+                         f"Carnevale {anno} con i bambini", sotto, corpo,
+                         f"Eventi di Carnevale {anno}")
+
+
+def spec_pasqua(st, events, oggi, altre):
+    """/pasqua.html — dal venerdi' santo alla pasquetta.
+
+    Come il Carnevale, le date le calcola pasqua(): fra il 2027 e il 2030 la
+    domenica si sposta dal 28 marzo al 21 aprile.
+
+    La domanda propria: **Pasqua o Pasquetta?** Sono due giornate opposte - la
+    domenica e' il pranzo, il lunedi' e' la gita - e chi cerca "cosa fare a
+    Pasqua con i bambini" quasi sempre intende il lunedi'."""
+    da, clou, a, finestra, comuni = _stagione_dati(st, events, oggi)
+    anno = clou.year
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+    pasquetta = clou + datetime.timedelta(days=1)
+
+    titolo = _landing_titolo([f"Pasqua e Pasquetta {anno} con i bambini: {prov}",
+                              f"Pasqua e Pasquetta {anno} con i bambini | DAOP",
+                              f"Pasqua e Pasquetta {anno} con i bambini"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi fra Pasqua e Pasquetta in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento fra Pasqua e Pasquetta")
+        apertura = (f"<p>Nel {anno} <strong>Pasqua</strong> è il {clou.day} "
+                    f"{MESI_LUNGHI[clou.month - 1]} e la <strong>Pasquetta</strong> "
+                    f"il {pasquetta.day}. Qui sotto i <strong>{len(finestra)} "
+                    f"eventi</strong> verificati uno per uno in {comuni} comuni fra "
+                    f"le province di {prov}, con l'orario, il paese e chi li "
+                    f"organizza.</p>")
+        descr = trunc(f"Cosa fare a Pasqua e Pasquetta {anno} con i bambini in "
+                      f"provincia di {prov}: "
+                      + (f"{len(finestra)} eventi verificati" if len(finestra) > 1
+                         else "1 evento verificato")
+                      + " uno per uno da DAOP, con orari e comune.", 152)
+    else:
+        sotto = f"Per la Pasqua {anno} non c'è ancora niente in agenda"
+        apertura = ("<p class=\"lan-vuoto\">Per Pasqua e Pasquetta in agenda non "
+                    "abbiamo ancora niente, e lo scriviamo invece di riempire la "
+                    "pagina. Le sagre di Pasquetta si annunciano tardi e molte "
+                    "dipendono dal tempo. Questa pagina si rifà ogni notte, quindi "
+                    "appena entrano compaiono qui.</p>")
+        descr = trunc(f"Cosa fare a Pasqua e Pasquetta {anno} con i bambini in "
+                      f"provincia di {prov}: sagre, gite e feste verificate uno per "
+                      "uno da DAOP. L'agenda si aggiorna ogni notte.", 152)
+
+    corpo = apertura
+    corpo += (
+        '<h2>Pasqua o Pasquetta?</h2>'
+        '<p>Sono due giornate opposte, e chi cerca "cosa fare a Pasqua con i '
+        'bambini" quasi sempre intende <strong>il lunedì</strong>. La '
+        '<strong>domenica</strong> in zona è il pranzo: quasi tutto è chiuso o su '
+        'prenotazione, e gli eventi sono pochi e spesso legati alle funzioni. Il '
+        '<strong>lunedì dell\'Angelo</strong> è l\'opposto — è la giornata della '
+        'gita fuori porta, e le pro loco ci mettono le sagre, le grigliate e i '
+        'giochi in cascina.</p>'
+        '<p>La cosa da mettere in conto è <strong>il tempo</strong>: a Pasquetta '
+        'piove abbastanza spesso da rovinare il programma, e molte sagre di paese '
+        'annullano o spostano al coperto la mattina stessa. Dove c\'è un contatto '
+        'lo pubblichiamo apposta, e vale una telefonata prima di mettersi in '
+        'macchina. Per il pranzo della domenica, gli <a href="/luoghi.html">'
+        'agriturismi e i posti dove si mangia con i bambini</a> stanno nel '
+        'catalogo dei luoghi: lì si prenota con settimane di anticipo, non '
+        'giorni.</p>')
+    corpo += _landing_filtri(finestra)
+    corpo += _giorno_per_giorno(finestra, da, a, oggi,
+                                {(da.month, da.day): "Venerdì Santo",
+                                 (clou.month, clou.day): "Pasqua",
+                                 (pasquetta.month, pasquetta.day): "Pasquetta"})
+    corpo += _altre_landing(st.href, altre)
+    return _stagione_out(st, oggi, finestra, titolo, descr,
+                         f"Pasqua e Pasquetta {anno}", sotto, corpo,
+                         f"Eventi di Pasqua {anno}")
 
 
 def _sagre_ricorrenti(storico, prov, quante=12):
@@ -5411,15 +5822,16 @@ def link_landing(oggi=None):
     scorciatoie in fondo alle pagine e dal blocco in cima all'agenda: se
     cambia un indirizzo non deve cambiare in due posti.
 
-    'oggi' serve solo a /ferragosto.html, che e' stagionale: da metà luglio al
-    16 agosto entra in elenco, il resto dell'anno resta online ma non la
-    linkiamo da 290 pagine. Senza 'oggi' l'elenco e' quello di sempre."""
+    'oggi' serve alle stagionali: ognuna entra in elenco nella sua finestra
+    (piu' i giorni di `apre`), il resto dell'anno resta online ma non la
+    linkiamo da 290 pagine. Senza 'oggi' l'elenco e' quello di sempre.
+
+    Il ciclo su STAGIONI e' il motivo per cui aggiungere una festa non obbliga
+    a ricordarsi anche di questa funzione."""
     voci = [("/eventi/oggi.html", "Cosa c'è oggi"),
             ("/eventi/weekend.html", "Questo weekend")]
-    if oggi is not None and in_stagione_ferragosto(oggi):
-        voci.append(("/ferragosto.html", "Ferragosto"))
-    if oggi is not None and in_stagione_halloween(oggi):
-        voci.append(("/halloween.html", "Halloween"))
+    if oggi is not None:
+        voci += [(st.href, st.nome) for st in STAGIONI if in_stagione(st, oggi)]
     for c in PROVINCE_PUBBLICATE:
         nome = PROVINCE_NOMI.get(c, c)
         voci.append((f"/sagre-provincia-{slugify(nome)}.html", f"Sagre {nome}"))
@@ -5435,8 +5847,12 @@ def scrivi_landing(events, hub, storico, oggi):
         print(f"[genera_eventi] pagine di intenzione saltate: {err}")
         return {}
     altre = link_landing(oggi)
-    specs = [spec_oggi(events, oggi, altre), spec_weekend(events, oggi, altre),
-             spec_ferragosto(events, oggi, altre), spec_halloween(events, oggi, altre)]
+    specs = [spec_oggi(events, oggi, altre), spec_weekend(events, oggi, altre)]
+    # Tutte le stagionali, dalla tabella. Girano SEMPRE, anche fuori stagione:
+    # la pagina deve esistere mesi prima per invecchiare (sotto MIN_LANDING resta
+    # in noindex e fuori sitemap da sola). E' il rimpianto scritto su
+    # spec_halloween — "su una stagionale l'asset e' l'anzianita' dell'URL".
+    specs += [st.spec(st, events, oggi, altre) for st in STAGIONI]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
     # Le sei d'incrocio: provincia x finestra. Vedi il commento su INCROCI.
     specs += [spec_incrocio(c, modo, events, hub, oggi, altre)
@@ -5495,23 +5911,87 @@ MIN_SAGRE_HERO = 3
 FINESTRA_HERO = 30
 
 
-# L'avviso stagionale in home e in cima all'agenda parte piu' tardi del link
-# nelle scorciatoie (FERRAGOSTO_APRE, 10 luglio): una riga in evidenza per
-# cinque settimane e' un banner che la gente impara a non vedere, e a inizio
-# luglio "fra sei settimane" non e' una notizia. Dieci giorni prima si'.
-FERRAGOSTO_AVVISO = (8, 5)  # 5 agosto
+# ===========================================================================
+# LE STAGIONI — l'unico posto in cui si dichiara una pagina stagionale.
+#
+# Aggiungerne una = AGGIUNGERE UNA RIGA QUI (+ la sua spec_*, che e' la parte
+# editoriale, vedi sotto). Prima erano cinque punti sparsi nel file - costanti,
+# range(), in_stagione(), un `if` in link_landing() e una chiamata in
+# scrivi_landing() - ed e' esattamente il genere di cosa che ci si dimentica.
+#
+# `apre` e `avviso` sono GIORNI PRIMA dell'inizio della finestra, non date sul
+# calendario. Due motivi, e il secondo e' un baco vero che c'era:
+#   1. per Carnevale e Pasqua una data fissa non esiste (si spostano di un mese);
+#   2. il vecchio confronto fra tuple (mese, giorno) NON REGGE le finestre che
+#      scavalcano capodanno: per la Befana "(12,27) <= oggi <= (1,6)" e' falso
+#      sempre, e la pagina non sarebbe MAI entrata in stagione. Contando i
+#      giorni si fa aritmetica sulle date vere e il problema sparisce.
+#
+# `apre`   = da quando entra nelle scorciatoie in fondo alle altre pagine.
+# `avviso` = da quando compare la riga in evidenza in home e in cima all'agenda.
+#            Parte piu' tardi apposta: una riga in evidenza per cinque settimane
+#            e' un banner che la gente impara a non vedere, e "fra sei settimane"
+#            non e' una notizia.
+# ===========================================================================
+Stagione = collections.namedtuple(
+    'Stagione', 'chiave nome href crumb finestra apre avviso quale spec')
 
-
-# Le stagioni che hanno una pagina propria, in ordine di calendario. Una sola
-# puo' essere attiva per volta - le finestre non si toccano - quindi la prima
-# che risponde vince e non serve decidere le precedenze.
-#   (avviso da, ultimo giorno, range(), href, nome, come si chiama la finestra)
 STAGIONI = (
-    (FERRAGOSTO_AVVISO, (8, FERRAGOSTO_A), 'ferragosto_range', "/ferragosto.html",
-     "Ferragosto", "del 14-16 agosto"),
-    (HALLOWEEN_AVVISO, HALLOWEEN_A, 'halloween_range', "/halloween.html",
-     "Halloween", "dal 25 ottobre al 2 novembre"),
+    Stagione('befana', "Befana", "/befana.html", "Befana",
+             _finestra_befana, apre=12, avviso=0,
+             quale="dal 27 dicembre al 6 gennaio", spec=spec_befana),
+    Stagione('carnevale', "Carnevale", "/carnevale.html", "Carnevale",
+             _finestra_carnevale, apre=25, avviso=7,
+             quale="dal giovedì al martedì grasso", spec=spec_carnevale),
+    Stagione('pasqua', "Pasqua", "/pasqua.html", "Pasqua",
+             _finestra_pasqua, apre=25, avviso=7,
+             quale="di Pasqua e Pasquetta", spec=spec_pasqua),
+    Stagione('ferragosto', "Ferragosto", "/ferragosto.html", "Ferragosto",
+             _finestra_ferragosto, apre=35, avviso=9,
+             quale="del 14-16 agosto", spec=spec_ferragosto),
+    Stagione('halloween', "Halloween", "/halloween.html", "Halloween",
+             _finestra_halloween, apre=24, avviso=5,
+             quale="dal 25 ottobre al 2 novembre", spec=spec_halloween),
+    Stagione('natale', "Natale", "/natale.html", "Natale",
+             _finestra_natale, apre=16, avviso=0,
+             quale="dal 1° al 26 dicembre", spec=spec_natale),
 )
+
+
+def in_stagione(st, oggi):
+    """Se la pagina di `st` va linkata dalle altre e indicizzata.
+
+    Fuori da qui resta ONLINE - i link girati su WhatsApp devono continuare a
+    funzionare - ma non la si annuncia e (sotto MIN_LANDING) non la si indicizza:
+    una pagina vuota in indice per cinquanta settimane e' contenuto sottile
+    proprio sull'URL che stiamo facendo invecchiare."""
+    da, _clou, a = prossima_finestra(st.finestra, oggi)
+    return da - datetime.timedelta(days=st.apre) <= oggi <= a
+
+
+def _controlla_stagioni():
+    """Le finestre NON si devono toccare: blocco_stagione() sceglie "la prima
+    che risponde" e con due stagioni attive insieme l'avviso in home diventa
+    arbitrario. Con Carnevale e Pasqua mobili non basta guardarle a occhio, e
+    aggiungendo una festa e' facile sovrapporsi senza accorgersene: qui si
+    controllano dieci anni veri e si fallisce SUBITO, non in produzione."""
+    for anno in range(2026, 2036):
+        viste = []
+        for st in STAGIONI:
+            da, _clou, a = st.finestra(anno)
+            # L'avviso e' la finestra che conta: e' quella per cui blocco_stagione
+            # deve poter scegliere senza ambiguita'.
+            viste.append((da - datetime.timedelta(days=st.avviso), a, st.nome))
+        viste.sort()
+        for (_d1, a1, n1), (d2, _a2, n2) in zip(viste, viste[1:]):
+            if d2 <= a1:
+                raise SystemExit(
+                    f"[genera_eventi] stagioni sovrapposte nel {anno}: "
+                    f"{n1} finisce il {a1} e {n2} comincia il {d2}. "
+                    f"Le finestre devono restare disgiunte — vedi STAGIONI.")
+
+
+_controlla_stagioni()
 
 
 def blocco_stagione(events, oggi):
@@ -5527,10 +6007,11 @@ def blocco_stagione(events, oggi):
 
     Il conteggio non e' decorazione: "62 eventi" e' la promessa che dice se
     vale la pena entrare, esattamente come i numeri accanto ai comuni."""
-    for avviso, fine, nome_range, href, nome, quale in STAGIONI:
-        if not (avviso <= (oggi.month, oggi.day) <= fine):
+    for st in STAGIONI:
+        da, centro, a = prossima_finestra(st.finestra, oggi)
+        if not (da - datetime.timedelta(days=st.avviso) <= oggi <= a):
             continue
-        da, centro, a = globals()[nome_range](oggi)
+        href, nome, quale = st.href, st.nome, st.quale
         quanti = sum(1 for e in events if e['d_start'] <= a and e['d_end'] >= da)
         if quanti < MIN_LANDING:
             return ''
