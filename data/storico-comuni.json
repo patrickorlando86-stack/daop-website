@@ -217,6 +217,17 @@
     "pagina": true,
     "ultima": "2026-08-31"
    },
+   "cinema-drive-in-e-t-l-extra-terrestre-i-spettacolo-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "DLF Alessandria",
+    "manifest": "",
+    "nome": "Cinema Drive In - E.T. L'extra-terrestre (I spettacolo) - Requiem For a Film",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-19"
+   },
    "festa-della-birra-street-food-alessandria": {
     "anni": [
      2026
@@ -357,6 +368,23 @@
    }
   },
   "nome": "Alfiano Natta",
+  "prov": "AL"
+ },
+ "alluvionicambio": {
+  "eventi": {
+   "sagra-del-sedano-alluvioni-cambio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Sagra del Sedano",
+    "manifest": "Sagra del Sedano 2026",
+    "nome": "Sagra del Sedano 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Alluvioni Cambiò",
   "prov": "AL"
  },
  "aramengo": {
@@ -521,6 +549,34 @@
    }
   },
   "nome": "Borghetto di Borbera",
+  "prov": "AL"
+ },
+ "boscomarengo": {
+  "eventi": {
+   "fiorinchiostro-mostra-mercato-florovivaistica-bosco-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Monumentale di Santa Croce",
+    "manifest": "",
+    "nome": "FiorinChiostro - Mostra Mercato Florovivaistica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "sagra-del-pollo-alla-marengo-e-del-galletto-alla-g-bosco-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco Marengo",
+    "manifest": "",
+    "nome": "31ª Sagra del Pollo alla Marengo e del Galletto alla Griglia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Bosco Marengo",
   "prov": "AL"
  },
  "bosio": {
@@ -1121,6 +1177,28 @@
  },
  "castellettodorba": {
   "eventi": {
+   "coppa-dei-fiaschi-domenica-6-settembre-castelletto-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "Coppa dei Fiaschi 2026",
+    "nome": "Coppa dei Fiaschi - Domenica 6 settembre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
+   "coppa-dei-fiaschi-venerdi-4-settembre-castelletto-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "Coppa dei Fiaschi 2026",
+    "nome": "Coppa dei Fiaschi - Venerdì 4 settembre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   },
    "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba": {
     "anni": [
      2026
@@ -1307,6 +1385,17 @@
     "luogo": "Piazza Vittorio Emanuele II",
     "manifest": "Festa Patronale di San Desiderio 2026",
     "nome": "La Domenica Sportiva",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "la-domenica-sportiva-sport-in-piazza-esibizioni-to-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "La Domenica Sportiva - Sport in piazza, esibizioni, tornei, animazione, giochi, Locanda dei Cavalieri",
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-06"
@@ -3366,6 +3455,23 @@
   },
   "nome": "Ormea",
   "prov": "CN"
+ },
+ "ovada": {
+  "eventi": {
+   "ovada-in-festa-pro-loco-ovada-e-del-monferrato-ova": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "",
+    "nome": "Ovada in Festa - Pro Loco Ovada e del Monferrato Ovadese",
+    "organizza": "Pro Loco Ovada e del Monferrato Ovadese",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Ovada",
+  "prov": "AL"
  },
  "ozzanomonferrato": {
   "eventi": {
