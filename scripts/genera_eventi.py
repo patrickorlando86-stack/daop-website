@@ -4829,9 +4829,33 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
         prossimi = ordina([e for e in _in_finestra(events, prov, oggi)
                            if e['d_start'] > oggi])[:12] if not adesso else []
         principale = adesso
-        titolo = _landing_titolo([f"Cosa fare oggi in provincia di {nome_prov} | DAOP",
-                                  f"Cosa fare oggi in provincia di {nome_prov}",
-                                  f"Cosa fare oggi: {nome_prov}"])
+        # Il title dice "sagre", l'H1 dice "cosa fare": non e' una svista.
+        #
+        # Search Console 09-15/08/2026: sulle query con dentro "oggi" il sito
+        # prende 2.317 impressioni e le converte al 3,58%, il peggiore dei
+        # cluster grossi. Guardando quali query sono, il motivo si vede:
+        #   "sagre provincia di alessandria oggi"      362 imp,  9 clic, pos 8,4
+        #   "eventi provincia alessandria oggi"        108 imp,  3 clic, pos 8,8
+        #   "sagre provincia alessandria oggi"          84 imp,  4 clic, pos 8,6
+        #   "cosa fare oggi in provincia di alessandria" 92 imp, 5 clic, pos 7,1
+        # La query grossa vuole "sagre" E "oggi". Questa pagina aveva "oggi" ma
+        # non "sagre"; /sagre-provincia-<x>.html ha "sagre" ma non "oggi".
+        # Nessuna delle due matcha la domanda intera, Google ne sceglie una a
+        # caso e stanno tutte e due in fondo alla prima pagina: le due landing
+        # si cannibalizzano su una query da 446 impressioni.
+        #
+        # Quindi il title prende le due parole che pesano nelle query - "sagre"
+        # (446 imp) ed "eventi" (265) - e lascia andare "cosa fare" (131), che
+        # in 62 caratteri non ci sta insieme al resto.
+        #
+        # L'H1 invece resta "Cosa fare oggi": e' la riga che legge una persona
+        # arrivata sulla pagina, non il crawler, e "cosa fare" e' come la
+        # domanda se la fa in testa. Title e H1 rispondono a due lettori
+        # diversi, e la parola "sagre" in pagina c'e' comunque - nella
+        # description, nell'apertura e in meta' dei nomi degli eventi.
+        titolo = _landing_titolo([f"Sagre ed eventi di oggi in provincia di {nome_prov} | DAOP",
+                                  f"Sagre ed eventi di oggi in provincia di {nome_prov}",
+                                  f"Sagre ed eventi oggi: {nome_prov}"])
         h1 = f"Cosa fare oggi in provincia di {nome_prov}"
         crumb = nome_prov
         comuni = len({_key(e.get('citta')) for e in adesso if (e.get('citta') or '').strip()})
