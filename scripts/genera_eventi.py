@@ -5061,12 +5061,19 @@ def prossima_finestra(calcola, oggi):
     prossimo: la stagionale passa in fuori stagione DA SOLA, senza che nessuno
     se ne ricordi. E' il pezzo che rende inutile segnarsi le date in agenda.
 
-    `calcola(anno)` restituisce la finestra identificata da quell'anno. Per le
-    feste a cavallo di capodanno l'anno e' quello del giorno CLOU (la Befana
-    del 2027 comincia il 27 dicembre 2026), cosi' il confronto resta banale."""
-    da, clou, a = calcola(oggi.year)
-    if oggi > a:
-        da, clou, a = calcola(oggi.year + 1)
+    `calcola(anno)` restituisce la finestra identificata da quell'anno, che e'
+    sempre l'anno del giorno CLOU. Per le feste che sforano nell'anno dopo -
+    Capodanno: clou 31 dicembre, coda 1° gennaio - questo vuol dire che la
+    finestra ancora aperta il 1° gennaio e' quella dell'anno PRECEDENTE.
+
+    Da qui i tre tentativi, e non due: partendo da oggi.year il 1° gennaio si
+    saltava la finestra in corso e si andava dritti a quella di dodici mesi
+    dopo, lasciando Capodanno scoperto proprio il giorno di Capodanno. Il caso
+    si vede solo guardando lo stretto delle feste giorno per giorno."""
+    for anno in (oggi.year - 1, oggi.year, oggi.year + 1):
+        da, clou, a = calcola(anno)
+        if oggi <= a:
+            return da, clou, a
     return da, clou, a
 
 
@@ -5211,25 +5218,36 @@ def halloween_range(oggi):
     return prossima_finestra(_finestra_halloween, oggi)
 
 
-# Le finestre delle altre quattro, tutte identificate dall'anno del giorno CLOU.
+# Le finestre delle altre, tutte identificate dall'anno del giorno CLOU.
 #
-# NATALE e BEFANA sono DUE pagine, non una, e il taglio e' il 27 dicembre.
-# Il periodo natalizio e' un continuo dall'Immacolata all'Epifania, ma sono due
-# domande diverse - "dove sono i mercatini" contro "a che ora arriva la Befana" -
-# e su un URL solo si farebbero concorrenza: e' lo stesso errore che avevamo fra
-# oggi-provincia-* e sagre-provincia-*, dove nessuna delle due rispondeva alla
-# domanda intera e stavano tutte e due in fondo alla prima pagina.
-# Tagliandole il 27 le finestre restano DISGIUNTE, che e' l'invariante su cui si
-# regge blocco_stagione(): "la prima che risponde vince". Vedi _controlla_stagioni().
+# LE FESTE DI DICEMBRE SONO TRE PAGINE, NON UNA. Il periodo e' un continuo
+# dall'Immacolata all'Epifania, ma le domande sono tre e diverse:
+#   "mercatini di natale <paese>"     -> /natale.html      1 - 26 dicembre
+#   "capodanno con bambini <paese>"   -> /capodanno.html  27 dic - 1 gennaio
+#   "calza della befana <paese>"      -> /befana.html      2 -  6 gennaio
+# Su un URL solo si farebbero concorrenza fra loro: e' lo stesso errore che
+# avevamo fra oggi-provincia-* e sagre-provincia-*, dove nessuna delle due
+# rispondeva alla domanda intera e stavano tutte e due in fondo alla prima
+# pagina. Tagliate cosi' coprono tutto lo stretto delle feste senza buchi e
+# restano DISGIUNTE, che e' l'invariante su cui si regge blocco_stagione():
+# "la prima che risponde vince". Lo verifica _controlla_stagioni().
 def _finestra_natale(anno):
     return (datetime.date(anno, 12, 1),
             datetime.date(anno, 12, 25),
             datetime.date(anno, 12, 26))
 
 
+def _finestra_capodanno(anno):
+    # L'anno e' quello del CLOU, cioe' del 31 dicembre: la finestra sfora nel
+    # successivo. Il giorno clou e' il 31 e non il 1° perche' e' li' che stanno
+    # gli eventi — il 1° gennaio in zona e' quasi tutto chiuso.
+    return (datetime.date(anno, 12, 27),
+            datetime.date(anno, 12, 31),
+            datetime.date(anno + 1, 1, 1))
+
+
 def _finestra_befana(anno):
-    # Comincia nell'anno prima: la Befana del 2027 parte il 27 dicembre 2026.
-    return (datetime.date(anno - 1, 12, 27),
+    return (datetime.date(anno, 1, 2),
             datetime.date(anno, 1, 6),
             datetime.date(anno, 1, 6))
 
@@ -5480,12 +5498,86 @@ def spec_natale(st, events, oggi, altre):
                          f"Eventi di Natale {anno}")
 
 
-def spec_befana(st, events, oggi, altre):
-    """/befana.html — dal 27 dicembre al 6 gennaio.
+def spec_capodanno(st, events, oggi, altre):
+    """/capodanno.html — dal 27 dicembre al 1° gennaio.
 
-    Pagina separata da /natale.html apposta: "calza della befana <paese>" e
-    "mercatini di natale <paese>" sono due query diverse, e su un URL solo si
-    farebbero concorrenza.
+    Pagina sua e non un pezzo di /natale.html: "capodanno con bambini" e
+    "mercatini di natale" sono due query diverse, e in mezzo ci sono i giorni
+    morti fra Natale e Capodanno, che sono proprio quelli in cui un genitore
+    cerca qualcosa da fare.
+
+    La domanda propria e' UN PROBLEMA DI ORARIO, ed e' molto concreto: **i
+    bambini a mezzanotte non ci arrivano.** Il veglione non e' una risposta per
+    chi ha cinque anni, e la cosa che la gente cerca davvero e' il countdown
+    anticipato — le feste che fanno scoccare la mezzanotte alle sei o alle otto
+    di sera. Un elenco di eventi del 31 dicembre questa distinzione non la fa,
+    e senza di quella la pagina non serve a niente."""
+    da, clou, a, finestra, comuni = _stagione_dati(st, events, oggi)
+    anno = clou.year
+    prov = province_in_elenco(PROVINCE_PUBBLICATE)
+
+    titolo = _landing_titolo([f"Capodanno {anno + 1} con i bambini: {prov}",
+                              f"Capodanno {anno + 1} con i bambini | DAOP",
+                              f"Capodanno {anno + 1} con i bambini"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi fra Natale e Capodanno in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento fra Natale e Capodanno")
+        apertura = (f"<p>I giorni fra <strong>Natale e Capodanno</strong> sono "
+                    f"quelli in cui la scuola è chiusa e non si sa mai cosa fare. "
+                    f"Qui sotto i <strong>{len(finestra)} eventi</strong> "
+                    f"verificati uno per uno in {comuni} comuni fra le province "
+                    f"di {prov}, dal 27 dicembre al 1° gennaio, con l'orario, il "
+                    f"paese e chi li organizza.</p>")
+        descr = trunc(f"Capodanno {anno + 1} con i bambini in provincia di {prov}: "
+                      + (f"{len(finestra)} eventi" if len(finestra) > 1 else "1 evento")
+                      + " dal 27 dicembre al 1° gennaio, verificati uno per uno "
+                        "da DAOP.", 152)
+    else:
+        sotto = f"Per il Capodanno {anno + 1} non c'è ancora niente in agenda"
+        apertura = ("<p class=\"lan-vuoto\">Per i giorni fra Natale e Capodanno in "
+                    "agenda non abbiamo ancora niente, e lo scriviamo invece di "
+                    "riempire la pagina. Le feste di fine anno si annunciano "
+                    "tardissimo, spesso dopo Natale. Questa pagina si rifà ogni "
+                    "notte, quindi appena entrano compaiono qui.</p>")
+        descr = trunc(f"Capodanno {anno + 1} con i bambini in provincia di {prov}: "
+                      "feste, countdown anticipati ed eventi dal 27 dicembre al 1° "
+                      "gennaio, verificati uno per uno da DAOP.", 152)
+
+    corpo = apertura
+    corpo += (
+        '<h2>I bambini a mezzanotte non ci arrivano</h2>'
+        '<p>È il problema vero del Capodanno in famiglia, e nessun elenco di '
+        'eventi lo risolve da solo. Il <strong>veglione</strong> comincia quando '
+        'i piccoli crollano, e alle due di notte si torna a casa con un bambino '
+        'in braccio. La risposta che cercano in tanti — e che spesso non sanno '
+        'nemmeno di poter cercare — è il <strong>countdown anticipato</strong>: '
+        'le feste che fanno scoccare la mezzanotte alle sei o alle otto di sera, '
+        'con i brindisi analcolici e i coriandoli, e poi tutti a casa. Dove il '
+        'programma lo dice, l\'orario lo trovi scritto in riga: è la prima cosa '
+        'da guardare su questa pagina.</p>'
+        '<p>L\'altra metà sono <strong>i giorni prima</strong>, il 27, il 28, il '
+        '29. La scuola è chiusa, le feste vere non sono ancora cominciate e sono '
+        'esattamente le giornate in cui non si sa cosa fare: restano aperti i '
+        'presepi, e i musei e le ludoteche fanno le aperture straordinarie. Il '
+        '<strong>1° gennaio</strong> invece in zona è quasi tutto chiuso, e se '
+        'qualcosa c\'è è il pranzo — che si prenota prima di Natale, non dopo. '
+        'Gli <a href="/luoghi.html">agriturismi, i musei e i posti al coperto per '
+        'bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo.</p>')
+    corpo += _landing_filtri(finestra)
+    corpo += _giorno_per_giorno(finestra, da, a, oggi,
+                                {(12, 31): "San Silvestro",
+                                 (1, 1): "Capodanno"})
+    corpo += _altre_landing(st.href, altre)
+    return _stagione_out(st, oggi, finestra, titolo, descr,
+                         f"Capodanno {anno + 1} con i bambini", sotto, corpo,
+                         f"Eventi di Capodanno {anno + 1}")
+
+
+def spec_befana(st, events, oggi, altre):
+    """/befana.html — dal 2 al 6 gennaio.
+
+    Pagina separata da /natale.html e da /capodanno.html apposta: "calza della
+    befana <paese>" e' una query sua, e su un URL condiviso si perderebbe.
 
     La domanda propria e' l'ORARIO. La Befana che scende dal campanile e' un
     evento di dieci minuti, non una giornata: arrivare mezz'ora dopo vuol dire
@@ -5498,25 +5590,25 @@ def spec_befana(st, events, oggi, altre):
                               f"Cosa fare per la Befana {anno} | DAOP",
                               f"Befana {anno} con i bambini"])
     if finestra:
-        sotto = (f"{len(finestra)} eventi fra Capodanno e l'Epifania in {comuni} comuni"
-                 if len(finestra) > 1 else "1 evento fra Capodanno e l'Epifania")
-        apertura = (f"<p>Dal <strong>27 dicembre al 6 gennaio</strong> ci sono "
-                    f"Capodanno, i presepi che restano aperti e la Befana. Qui "
-                    f"sotto i <strong>{len(finestra)} eventi</strong> verificati "
-                    f"uno per uno in {comuni} comuni fra le province di {prov}, "
-                    f"con l'orario, il paese e chi li organizza.</p>")
+        sotto = (f"{len(finestra)} eventi dell'Epifania in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento per l'Epifania")
+        apertura = (f"<p>Gli ultimi giorni delle vacanze, dal <strong>2 al 6 "
+                    f"gennaio</strong>: le calze in piazza, i presepi ancora "
+                    f"aperti e la Befana. Qui sotto i <strong>{len(finestra)} "
+                    f"eventi</strong> verificati uno per uno in {comuni} comuni "
+                    f"fra le province di {prov}, con l'orario, il paese e chi li "
+                    f"organizza.</p>")
         descr = trunc(f"Cosa fare per la Befana {anno} con i bambini in provincia di "
                       f"{prov}: "
                       + (f"{len(finestra)} eventi" if len(finestra) > 1 else "1 evento")
-                      + " fra il 27 dicembre e l'Epifania, verificati uno per uno "
-                        "da DAOP.", 152)
+                      + " dal 2 al 6 gennaio, verificati uno per uno da DAOP.", 152)
     else:
         sotto = f"Per l'Epifania {anno} non c'è ancora niente in agenda"
-        apertura = ("<p class=\"lan-vuoto\">Fra Capodanno e l'Epifania in agenda "
+        apertura = ("<p class=\"lan-vuoto\">Per i giorni dell'Epifania in agenda "
                     "non abbiamo ancora niente, e lo scriviamo invece di riempire "
                     "la pagina. Le calze in piazza si annunciano tardi, spesso "
-                    "dopo Natale. Questa pagina si rifà ogni notte, quindi appena "
-                    "entrano compaiono qui.</p>")
+                    "dopo Capodanno. Questa pagina si rifà ogni notte, quindi "
+                    "appena entrano compaiono qui.</p>")
         descr = trunc(f"Cosa fare per la Befana {anno} con i bambini in provincia di "
                       f"{prov}: calze in piazza, presepi ed eventi dell'Epifania, "
                       "verificati uno per uno da DAOP.", 152)
@@ -5534,14 +5626,12 @@ def spec_befana(st, events, oggi, altre):
         '<p>L\'altra cosa da sapere è che in questi giorni <strong>i presepi '
         'restano aperti</strong> anche quando gli eventi finiscono: i presepi '
         'viventi e quelli meccanici di solito vanno avanti fino al 6 gennaio, ed '
-        'è la cosa più semplice da fare con i bambini in una giornata vuota fra '
-        'Capodanno e l\'Epifania. Quelli che conosciamo stanno nel <a '
+        'è la cosa più semplice da fare con i bambini in una giornata vuota di '
+        'inizio gennaio, quando le feste sono finite e la scuola non è ancora '
+        'ricominciata. Quelli che conosciamo stanno nel <a '
         'href="/luoghi.html">catalogo dei luoghi</a>, con orari e telefono.</p>')
     corpo += _landing_filtri(finestra)
-    corpo += _giorno_per_giorno(finestra, da, a, oggi,
-                                {(12, 31): "San Silvestro",
-                                 (1, 1): "Capodanno",
-                                 (1, 6): "L'Epifania"})
+    corpo += _giorno_per_giorno(finestra, da, a, oggi, {(1, 6): "L'Epifania"})
     corpo += _altre_landing(st.href, altre)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Cosa fare per la Befana {anno}", sotto, corpo,
@@ -5938,8 +6028,11 @@ Stagione = collections.namedtuple(
 
 STAGIONI = (
     Stagione('befana', "Befana", "/befana.html", "Befana",
-             _finestra_befana, apre=12, avviso=0,
-             quale="dal 27 dicembre al 6 gennaio", spec=spec_befana),
+             _finestra_befana, apre=18, avviso=0,
+             quale="dal 2 al 6 gennaio", spec=spec_befana),
+    Stagione('capodanno', "Capodanno", "/capodanno.html", "Capodanno",
+             _finestra_capodanno, apre=20, avviso=0,
+             quale="dal 27 dicembre al 1° gennaio", spec=spec_capodanno),
     Stagione('carnevale', "Carnevale", "/carnevale.html", "Carnevale",
              _finestra_carnevale, apre=25, avviso=7,
              quale="dal giovedì al martedì grasso", spec=spec_carnevale),

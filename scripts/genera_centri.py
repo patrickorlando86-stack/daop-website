@@ -58,6 +58,37 @@ STAGIONI = {
         'periodo': 'giugno, luglio e agosto',
         'iscrizioni': 'fra marzo e maggio',
         'quando_riaprono': 'in primavera',
+        'parola': 'estiv',
+        'p_iscrizioni': """<p>Le iscrizioni si aprono di solito fra marzo e
+  maggio, cioè con mesi di anticipo. I posti nelle strutture più richieste
+  finiscono nelle prime settimane, quindi conviene informarsi presto anche
+  senza aver deciso: quasi tutti i gestori permettono di prenotare le settimane
+  singolarmente e chiedono un acconto per bloccarle. Se lavorate entrambi,
+  partite dal calendario delle vostre ferie e non da quello dei centri.</p>""",
+        'p_primo_giorno': """<p>Per i più piccoli, o alla prima esperienza fuori
+  casa, chiedete se è possibile un inserimento graduale: su tre mesi c'è tutto
+  il tempo, ed è la cosa che fa la differenza fra una bella estate e due
+  settimane di pianti. Nello zaino l'essenziale: cambio completo, borraccia,
+  cappellino, crema solare, e tutto marcato con nome e cognome.</p>""",
+        # Le due domande della guida che d'estate hanno una risposta e nelle
+        # altre stagioni un'altra. Vedi il commento su `specifico`.
+        'b_giornata': ('Una giornata tipo dice più di un volantino: quanto tempo '
+                       'all\'aperto, quante uscite, se c\'è la piscina e come ci '
+                       'si arriva.'),
+        'b_meteo': ('<strong>In caso di maltempo.</strong> Dove si sta e cosa si '
+                    'fa quando non si può uscire: è la differenza fra una bella '
+                    'settimana e una lunga.'),
+        'specifico': """
+  <h3>Tre mesi non si comprano tutti insieme</h3>
+  <p>L'estate è lunga e quasi nessuno la copre per intero: si mettono insieme
+  due settimane qui, una là, i nonni, le ferie. Conviene ragionare a blocchi e
+  partire da quelli che <em>devono</em> essere coperti — le settimane in cui
+  lavorate entrambi e non c'è nessun altro — e riempire il resto dopo.</p>
+  <p>L'altra cosa che d'estate conta più che in ogni altra stagione è
+  <strong>il caldo</strong>. Chiedete dove stanno i bambini fra le due e le
+  quattro del pomeriggio, se ci sono spazi ombreggiati o climatizzati, e quanta
+  acqua è prevista. Un centro tutto all'aperto a luglio in pianura è una cosa
+  diversa da uno con la palestra e il cortile alberato.</p>""",
     },
     'invernali': {
         'file': 'centri-invernali.html',
@@ -72,6 +103,98 @@ STAGIONI = {
         'periodo': 'le vacanze di Natale e le chiusure scolastiche invernali',
         'iscrizioni': 'fra ottobre e novembre',
         'quando_riaprono': 'in autunno',
+        'parola': 'invern',
+        'p_iscrizioni': """<p>Qui il calendario è stretto: le proposte escono
+  fra ottobre e novembre e si riempiono in fretta, perché sono poche e i posti
+  pochi. Non aspettate il volantino — a ottobre conviene chiedere direttamente
+  all'oratorio, alla ludoteca e all'ufficio scuola del Comune se organizzano
+  qualcosa durante le vacanze, perché spesso si decide tardi e si annuncia solo
+  su un gruppo WhatsApp o una bacheca.</p>""",
+        'p_primo_giorno': """<p>Su una o due settimane l'inserimento graduale non
+  esiste: si comincia e basta, e se il bambino non conosce nessuno vale la pena
+  saperlo prima. Chiedete se il gruppo è lo stesso dell'estate — spesso sì, ed è
+  un vantaggio — e preparate lo zaino per stare al chiuso: cambio, scarpe da
+  ginnastica pulite da usare dentro, e qualcosa di caldo per gli spostamenti.</p>""",
+        'b_giornata': ('D\'inverno si sta dentro quasi sempre: chiedete in che '
+                       'spazi, quanto sono grandi e se si esce comunque, anche '
+                       'solo per andare in biblioteca o in piscina coperta.'),
+        'b_meteo': ('<strong>Se nevica o la struttura chiude.</strong> A dicembre '
+                    'e gennaio capita: chiedete se avvisano la sera prima, se '
+                    'recuperano la giornata e chi tiene i bambini se chiudono '
+                    'all\'improvviso.'),
+        'specifico': """
+  <h3>Qui il problema non è scegliere, è trovare</h3>
+  <p>È la differenza vera con l'estate, e conviene dirla subito: i centri
+  invernali sono <strong>pochi</strong>. La scuola chiude per due settimane, i
+  genitori lavorano quasi tutti fino al 24 e ricominciano il 7, e le strutture
+  che aprono in quei giorni si contano sulle dita. Non è una scelta fra dieci
+  proposte come a giugno: è prendere quello che c'è, vicino a casa, e
+  iscriversi appena esce.</p>
+  <p>Da qui la cosa più importante: <strong>guardate quali giorni coprono
+  davvero</strong>. Quasi nessuno fa tutte e due le settimane. Molti si fermano
+  il 23 e riprendono il 7, cioè coprono esattamente i giorni in cui la scuola
+  era già aperta; altri fanno solo la settimana fra Natale e l'Epifania, che è
+  quella scoperta ma anche quella in cui più gente è in ferie. Il calendario
+  preciso è il primo dato da chiedere, prima ancora del prezzo.</p>
+  <p>Sugli <strong>orari</strong> vale lo stesso avvertimento: d'inverno molti
+  centri fanno solo la mattina, dalle 8 alle 13, senza mensa. Se lavorate a
+  tempo pieno una mattina non risolve la giornata, e conviene saperlo prima di
+  contare su quel posto.</p>""",
+    },
+    # I centri pasquali sono la stagione piu' corta e la piu' incerta: la
+    # vacanza dura pochi giorni e molti gestori la saltano del tutto. La pagina
+    # esiste lo stesso perche' chi cerca cerca proprio quella - e perche' se un
+    # anno non apre nessuno, dirlo e' un'informazione utile quanto un elenco.
+    'pasquali': {
+        'file': 'centri-pasquali.html',
+        'tab': 'Centri Est/Inv',
+        'h1': 'Centri Pasquali',
+        'h1_em': 'Alessandria e Asti',
+        'singolare': 'centro per le vacanze di Pasqua',
+        'titolo': 'Centri per le Vacanze di Pasqua ad Alessandria e Asti | DAOP',
+        'descr': ('Centri e attività per bambini durante le vacanze di Pasqua in '
+                  'provincia di Alessandria e Asti: elenco con età, orari e costi, '
+                  'e la guida per scegliere.'),
+        'periodo': 'le vacanze di Pasqua',
+        'iscrizioni': 'fra febbraio e marzo',
+        'quando_riaprono': 'a fine inverno',
+        'parola': 'pasqu',
+        'p_iscrizioni': """<p>Quando qualcosa apre, si annuncia con due o tre
+  settimane di preavviso e si riempie in pochi giorni: è troppo corto perché i
+  gestori facciano campagne, e troppo corto perché i genitori se lo organizzino
+  con calma. L'unica strada che funziona è chiedere prima — a febbraio, al
+  proprio Comune e all'oratorio — invece di aspettare che esca qualcosa.</p>""",
+        'p_primo_giorno': """<p>Su quattro giorni non c'è inserimento che tenga,
+  quindi la domanda utile è un'altra: <strong>chi altro c'è</strong>. Se il
+  gruppo è quello dell'oratorio o della scuola il bambino entra e basta; se non
+  conosce nessuno, quattro giorni sono pochi per ambientarsi e tanti per stare
+  scomodo. Nello zaino serve poco: cambio, merenda e una giacca, perché ad
+  aprile il tempo cambia due volte al giorno.</p>""",
+        'b_giornata': ('Sono pochi giorni, quindi chiedete il programma per '
+                       'esteso: a Pasqua si fa spesso un laboratorio unico che '
+                       'dura tutta la settimana, e o piace o sono giornate '
+                       'lunghe.'),
+        'b_meteo': ('<strong>Se piove.</strong> Ad aprile il programma all\'aperto '
+                    'salta facilmente: chiedete cosa succede allora, perché su '
+                    'quattro giorni una giornata storta pesa molto più che a '
+                    'luglio.'),
+        'specifico': """
+  <h3>Quattro giorni, e non è detto che ci siano</h3>
+  <p>Le vacanze di Pasqua durano pochi giorni — di norma dal giovedì al martedì
+  dopo Pasquetta — e questo cambia tutto. Molti gestori <strong>non aprono
+  affatto</strong>: per una manciata di giorni, con due festivi in mezzo, non
+  vale la pena mettere in piedi l'organizzazione. Se questa pagina è vuota non è
+  perché non abbiamo cercato: è che quell'anno non ha aperto nessuno, e
+  preferiamo scriverlo.</p>
+  <p>Quando invece qualcosa c'è, la domanda da fare è <strong>esattamente quali
+  giorni</strong>. La settimana è spezzata dai festivi e ogni gestore la taglia
+  a modo suo: c'è chi fa solo i giorni feriali prima di Pasqua, chi solo quelli
+  dopo Pasquetta, chi due giorni in tutto. Un calendario che sembra coprire la
+  vacanza spesso ne copre metà.</p>
+  <p>Ultima cosa, pratica: essendo così corti, questi centri <strong>si
+  riempiono in pochi giorni</strong> e spesso si annunciano con due o tre
+  settimane di preavviso. Vale la pena chiedere al proprio Comune e all'oratorio
+  già a febbraio, senza aspettare che esca un volantino.</p>""",
     },
 }
 
@@ -165,7 +288,7 @@ def leggi_centri(tab, chiave):
             print(f"[genera_centri] nota: manca la colonna '{campo}', le schede "
                   f"usciranno senza quel dato")
 
-    parola = 'invern' if chiave == 'invernali' else 'estiv'
+    parola = STAGIONI[chiave]['parola']
     mesi = MESI_STAGIONE[chiave]
     out, scartati = [], 0
     for r in righe[hi + 1:]:
@@ -330,19 +453,28 @@ FILTER_JS = """
 
 def guida(cfg):
     """La parte che vale tutto l'anno. Senza questa la pagina sarebbe vuota
-    nove mesi su dodici, cioe' contenuto magro."""
+    nove mesi su dodici, cioe' contenuto magro.
+
+    ⚠️ `specifico` NON e' un abbellimento, e' la ragione per cui esiste piu' di
+    una di queste pagine. Con la sola guida generica cambiata nei riferimenti di
+    stagione, estivi e invernali risultavano IDENTICI AL 97,7% - contenuto
+    duplicato, e il doppione lo perde la pagina piu' debole. E' lo stesso motivo
+    per cui una stagionale degli eventi non puo' essere solo un filtro di date
+    (vedi spec_halloween in genera_eventi.py).
+
+    Il blocco `specifico` sta in cima apposta: e' la prima cosa che legge chi
+    arriva ed e' la prima che indicizza Google. Le due voci `b_giornata` e
+    `b_meteo` sono le domande dell'elenco che in stagioni diverse hanno risposte
+    diverse: d'estate "quanto si sta fuori", d'inverno "cosa si fa dentro"."""
     return f"""
 <section class="ce-guide">
   <h2>Come scegliere un {cfg['singolare']}</h2>
   <p>La scelta si gioca su poche cose concrete, e quasi tutte si chiariscono con
   una telefonata prima di iscrivere. Ecco cosa conviene chiedere.</p>
+{cfg['specifico']}
 
   <h3>Quando ci si iscrive</h3>
-  <p>Le iscrizioni si aprono di solito {cfg['iscrizioni']}, cioè molto prima
-  dell'inizio delle attività. I posti nelle strutture più richieste finiscono
-  nelle prime settimane, quindi conviene informarsi con anticipo anche se non
-  si è ancora deciso. Molti gestori chiedono un acconto per bloccare il posto e
-  permettono di scegliere le settimane singolarmente.</p>
+  {cfg['p_iscrizioni']}
 
   <h3>Le domande che contano</h3>
   <ul>
@@ -355,11 +487,8 @@ def guida(cfg):
     esistono l'ingresso anticipato e l'uscita posticipata, e quanto costano.</li>
     <li><strong>Pranzo.</strong> Mensa interna, catering o pranzo al sacco. E
     come gestiscono allergie e intolleranze.</li>
-    <li><strong>Cosa si fa davvero.</strong> Una giornata tipo dice più di un
-    volantino: quanto tempo all'aperto, quante uscite, se c'è la piscina e come
-    ci si arriva.</li>
-    <li><strong>In caso di maltempo.</strong> Dove si sta e cosa si fa quando
-    non si può uscire: è la differenza fra una bella settimana e una lunga.</li>
+    <li><strong>Cosa si fa davvero.</strong> {cfg['b_giornata']}</li>
+    <li>{cfg['b_meteo']}</li>
     <li><strong>Cosa succede se il bambino si assenta.</strong> Se la quota si
     recupera o si perde, in caso di malattia o di cambio programma.</li>
   </ul>
@@ -392,10 +521,7 @@ def guida(cfg):
   dipende da finanziamenti che vanno attivati per tempo.</p>
 
   <h3>Il primo giorno</h3>
-  <p>Per i più piccoli, o alla prima esperienza fuori casa, chiedete se è
-  possibile un inserimento graduale. E preparate lo zaino con l'essenziale:
-  cambio completo, borraccia, cappellino, crema solare se si sta all'aperto, e
-  tutto marcato con nome e cognome.</p>
+  {cfg['p_primo_giorno']}
 </section>
 """
 
@@ -736,13 +862,21 @@ def aggiorna_sitemap(cambiate):
           f"({len(cambiate & set(files))} con lastmod aggiornato)")
 
 
-# Stagioni generate senza argomenti. Gli invernali sono configurati ma NON
-# attivi: con la sola guida cambiata nei riferimenti di stagione le due pagine
-# risultano identiche al 97,7%, cioe' contenuto duplicato. Prima di attivarli
-# va scritta una guida propria (le vacanze di Natale hanno durata, orari e
-# problemi diversi dall'estate). Nel frattempo si generano a richiesta con
+# Stagioni generate senza argomenti.
+#
+# Gli invernali sono rimasti fuori a lungo, e per una ragione giusta: con la sola
+# guida generica cambiata nei riferimenti di stagione le due pagine risultavano
+# identiche al 97,7%, cioe' contenuto duplicato. Il blocco che mancava e' stato
+# scritto (`specifico` in STAGIONI, piu' le due voci b_giornata/b_meteo), quindi
+# ora ognuna dice una cosa sua: d'estate "tre mesi non si comprano tutti
+# insieme", d'inverno "il problema non e' scegliere, e' trovare", a Pasqua
+# "quattro giorni, e non e' detto che ci siano".
+#
+# Sotto soglia le pagine restano comunque oneste: senza centri in stagione
+# escono con la guida e lo dicono, invece di riempirsi con quelli di un'altra
+# stagione. Una singola stagione si rigenera a mano con
 # "python3 scripts/genera_centri.py invernali".
-ATTIVE = ['estivi']
+ATTIVE = ['estivi', 'invernali', 'pasquali']
 
 
 def main(argv):

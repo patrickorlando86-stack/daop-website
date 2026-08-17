@@ -15,6 +15,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/piscine.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi.html</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>daily</changefreq>
@@ -184,6 +190,18 @@
   <!-- CENTRI:START (generato da scripts/genera_centri.py — non modificare a mano) -->
   <url>
     <loc>https://www.daop.it/centri-estivi.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/centri-invernali.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/centri-pasquali.html</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
