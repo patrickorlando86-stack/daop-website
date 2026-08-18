@@ -279,8 +279,9 @@
   "ora": "10:00-11:30",
   "prezzo": "Gratuito",
   "prov": "AL",
+  "ritirata": "2026-08-18",
   "slug": "alla-ri-scoperta-delle-favole-disney-tortona",
-  "updated": "2026-08-15"
+  "updated": "2026-08-18"
  },
  "alla-scoperta-della-croce-rossa-piccoli-volontari-san-damiano-d-asti": {
   "adatto_famiglie": "Si",
@@ -337,8 +338,9 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 175,
+  "ritirata": "2026-08-18",
   "slug": "aperitivo-offerto-dalla-pro-loco-e-porchetta-pro-l-sant-albano-stura",
-  "updated": "2026-08-15"
+  "updated": "2026-08-18"
  },
  "apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -676,6 +678,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 176,
+  "ritirata": "2026-08-18",
   "slug": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-alba",
   "updated": "2026-08-18"
  },
@@ -932,8 +935,9 @@
   "ora": "9:30",
   "prezzo": "Gratuito",
   "prov": "AL",
+  "ritirata": "2026-08-18",
   "slug": "casalnoceto-kids",
-  "updated": "2026-08-17"
+  "updated": "2026-08-18"
  },
  "casalnoceto-kids-comune-di-casalnoceto": {
   "adatto_famiglie": "Si",
@@ -1720,6 +1724,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 218,
+  "ritirata": "2026-08-18",
   "slug": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-alba",
   "updated": "2026-08-18"
  },
@@ -1775,6 +1780,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
+  "ritirata": "2026-08-18",
   "slug": "consegna-dei-libri-pro-loco-ceresole-alba",
   "updated": "2026-08-18"
  },
@@ -1859,6 +1865,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
+  "ritirata": "2026-08-18",
   "slug": "cortemilia-comics-games",
   "updated": "2026-08-18"
  },
@@ -2562,6 +2569,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
   "riga": 34,
+  "ritirata": "2026-08-18",
   "slug": "festa-del-fungo-pro-loco-ciglione",
   "updated": "2026-08-18"
  },
@@ -2676,6 +2684,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 33,
+  "ritirata": "2026-08-18",
   "slug": "festa-dell-uva-e-del-vino-pro-loco-ciglione",
   "updated": "2026-08-18"
  },
@@ -4052,8 +4061,9 @@
   "ora": "09:00-17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
+  "ritirata": "2026-08-18",
   "slug": "giornata-bimbi-pro-loco-sant-albano-stura",
-  "updated": "2026-08-17"
+  "updated": "2026-08-18"
  },
  "govone-in-festa-sagra-della-lumaca": {
   "adatto_famiglie": "Si",
@@ -4621,6 +4631,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
+  "ritirata": "2026-08-18",
   "slug": "laboratorio-ciao-ciao-estate-sorprese-per-tutti-pr-crissolo",
   "updated": "2026-08-18"
  },
@@ -5892,6 +5903,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 164,
+  "ritirata": "2026-08-18",
   "slug": "pranzo-sociale-piozzo",
   "updated": "2026-08-18"
  },
@@ -6564,8 +6576,9 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 223,
+  "ritirata": "2026-08-18",
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-pro-loco-govone",
-  "updated": "2026-08-17"
+  "updated": "2026-08-18"
  },
  "sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona": {
   "adatto_famiglie": "Si",
@@ -7380,8 +7393,9 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 226,
+  "ritirata": "2026-08-18",
   "slug": "serata-hamburger-patatine-e-birra-pro-loco-canove-govone",
-  "updated": "2026-08-17"
+  "updated": "2026-08-18"
  },
  "serata-latina-salsabor-pro-loco-cunico": {
   "adatto_famiglie": "Si",

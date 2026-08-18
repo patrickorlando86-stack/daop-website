@@ -501,6 +501,23 @@
   .he-more { font-size: 0.82rem; font-weight: 700; color: var(--orange); display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; }
   .he-more svg { width: 14px; height: 14px; }
   .he-empty { color: var(--text-mid); font-size: 0.95rem; padding: 12px 0; }
+  /* Riga di numeri sotto il carosello. Non e' un contatore di visite: quel
+     numero sarebbe un terzo del vero (banner consenso) e scenderebbe ogni
+     novembre. Questi dicono quanto lavoro c'e' dentro, non quanti ci
+     guardano, e li stampa il generatore fra i marker HOME-NUMERI. */
+  .he-num {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+    gap: 4px 14px; margin: 26px 0 0; font-size: 0.92rem; color: var(--text-mid);
+  }
+  /* Il puntino separa le voci solo quando stanno in fila: andando a capo
+     resterebbe orfano a fine riga. Sotto i 600px basta il gap, perche'
+     ogni voce comincia con un numero in grassetto. */
+  @media (min-width: 601px) {
+    .he-num span:not(:last-child)::after { content: '·'; margin-left: 14px; opacity: 0.45; }
+  }
+  .he-num b { color: var(--navy); font-weight: 800; }
+  .he-num a { color: var(--teal); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .he-num a:hover { opacity: 0.78; }
   .he-allwrap { margin-top: 12px; text-align: center; }
 
   /* ── CHI SIAMO ── */
@@ -1420,6 +1437,8 @@
       </a>
       <!-- HOME-EVENTI:END -->
     </div>
+
+    <!-- HOME-NUMERI:START --><p class="he-num"><span><b>227</b> eventi in agenda</span><span><b>88</b> comuni</span><span><b>3</b> province</span><span><a href="/metodo.html">verificati uno per uno</a></span></p><!-- HOME-NUMERI:END -->
 
     <div class="he-allwrap fade-in">
       <a href="eventi.html" class="btn btn-primary">

@@ -6314,9 +6314,43 @@ def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None, hero=None
     open(HTML_PATH, "w", encoding="utf-8").write(s)
 
 
-def inject_home(cards_html, stagione=''):
+MIN_HOME_NUMERI = 12
+
+
+def blocco_numeri(events):
+    """La riga di numeri sotto il carosello della home, o ''.
+
+    Non e' un contatore di visite, ed e' una scelta presa apposta: il pubblico
+    che GA4 ci misura e' circa un terzo di quello vero (il banner consenso), e
+    il traffico e' stagionale al punto che il 79% dei clic del trimestre sta in
+    otto giorni di agosto. Un numero pubblico che ogni novembre scende e' peggio
+    di nessun numero. Questi invece dicono quanto lavoro c'e' dentro — non
+    quanti ci guardano — li conosce gia' il generatore e non hanno bisogno di
+    nessuno script in piu'.
+
+    Sotto MIN_HOME_NUMERI non si stampa niente, che e' la stessa regola al
+    contrario: con l'agenda magra la riga direbbe il vero e suonerebbe male.
+
+    L'ultima voce non e' un numero ma il link a /metodo.html: e' la risposta
+    alla domanda che i numeri fanno venire ("chi li ha controllati?"), ed e'
+    anche l'unico link a quella pagina che parte dal corpo della home invece
+    che dalla nav."""
+    if len(events) < MIN_HOME_NUMERI:
+        return ''
+    comuni = len({_key(e.get('citta')) for e in events if (e.get('citta') or '').strip()})
+    prov = {e.get('prov') for e in events if e.get('prov')}
+    voci = [f"<b>{len(events)}</b> eventi in agenda"]
+    if comuni:
+        voci.append(f"<b>{comuni}</b> comuni")
+    if prov:
+        voci.append(f"<b>{len(prov)}</b> " + ("province" if len(prov) > 1 else "provincia"))
+    voci.append('<a href="/metodo.html">verificati uno per uno</a>')
+    return '<p class="he-num">' + ''.join(f"<span>{v}</span>" for v in voci) + '</p>'
+
+
+def inject_home(cards_html, stagione='', numeri=''):
     """Sostituisce le card del carosello in index.html tra i marker HOME-EVENTI,
-    e la riga stagionale tra i marker HOME-STAGIONE.
+    la riga stagionale tra i marker HOME-STAGIONE e i numeri tra HOME-NUMERI.
     Se la home o i marker mancano, salta senza errore."""
     if not os.path.exists(HOME_PATH):
         print("[genera_eventi] index.html non trovato, salto carosello home")
@@ -6334,10 +6368,15 @@ def inject_home(cards_html, stagione=''):
     s, ns = re.subn(r'<!-- HOME-STAGIONE:START -->.*?<!-- HOME-STAGIONE:END -->',
                     lambda _: f'<!-- HOME-STAGIONE:START -->{riga}<!-- HOME-STAGIONE:END -->',
                     s, count=1, flags=re.S)
+    s, nn = re.subn(r'<!-- HOME-NUMERI:START -->.*?<!-- HOME-NUMERI:END -->',
+                    lambda _: f'<!-- HOME-NUMERI:START -->{numeri}<!-- HOME-NUMERI:END -->',
+                    s, count=1, flags=re.S)
     open(HOME_PATH, "w", encoding="utf-8").write(s)
     print("[genera_eventi] carosello eventi aggiornato in index.html"
           + (f", riga stagionale: {'sì' if stagione else 'no'}" if ns else
-             ", marker HOME-STAGIONE non trovati"))
+             ", marker HOME-STAGIONE non trovati")
+          + (f", numeri: {'sì' if numeri else 'no'}" if nn else
+             ", marker HOME-NUMERI non trovati"))
 
 
 def update_sitemap(slugs=(), comuni=(), landing=()):
@@ -6867,7 +6906,8 @@ def main():
     jsonld = render_jsonld(events)
     inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub, oggi),
            blocco_hero(events, oggi))
-    inject_home(render_home(events), blocco_stagione(events, oggi))
+    inject_home(render_home(events), blocco_stagione(events, oggi),
+                blocco_numeri(events))
     slugs = scrivi_pagine(events, hub)
     comuni = scrivi_comuni(hub, oggi)
     landing = scrivi_landing(events, hub, storico, oggi)
