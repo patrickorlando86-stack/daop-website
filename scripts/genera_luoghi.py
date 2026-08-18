@@ -1111,8 +1111,15 @@ def riga(l, oggi):
     if testo:
         corpo.append(f"<p>{e(G.trunc(testo, 600 if l.get('premium') else 400))}</p>")
 
-    voci = [f'<li class="is-pratico">{e(p)}</li>' for p in (l.get('pratici') or [])]
-    voci += [f'<li>{e(s)}</li>' for s in (l.get('servizi') or [])[:12]]
+    pratici = l.get('pratici') or []
+    voci = [f'<li class="is-pratico">{e(p)}</li>' for p in pratici]
+    # I servizi sono testo libero del foglio e i pratici escono dai Tag: la
+    # stessa cosa e' spesso scritta in tutt'e due le colonne, e la scheda la
+    # mostrava due volte di fila - verde e poi grigia. Misurato il 18/08/2026:
+    # 89 schede su 894, quasi tutte "Parcheggio" (58) e "Picnic" (49).
+    gia_detto = {x.strip().lower() for x in pratici}
+    voci += [f'<li>{e(s)}</li>' for s in (l.get('servizi') or [])[:12]
+             if s.strip().lower() not in gia_detto]
     if voci:
         corpo.append(f'<ul class="lg-serv">{"".join(voci)}</ul>')
 
