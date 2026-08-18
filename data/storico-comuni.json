@@ -171,6 +171,23 @@
   "nome": "Albera Ligure",
   "prov": "AL"
  },
+ "albugnano": {
+  "eventi": {
+   "albugnano-in-festa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Roma",
+    "manifest": "Albugnano in Festa",
+    "nome": "Albugnano in Festa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Albugnano",
+  "prov": "AT"
+ },
  "alessandria": {
   "eventi": {
    "2-cuori-2-capanne-alessandria": {
