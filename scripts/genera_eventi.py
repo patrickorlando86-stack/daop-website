@@ -2192,7 +2192,7 @@ def blocco_famiglie(rec, events, oggi, hub=None):
             + "".join(righe) + '</section>')
 
 
-def firma_daop(rec, oggi):
+def firma_daop(rec, oggi, ritirata=False):
     """Firma editoriale + data dell'ultimo controllo + avvertenza.
 
     La data e' last_seen, cioe' l'ultima volta che la scheda e' stata
@@ -2218,6 +2218,26 @@ def firma_daop(rec, oggi):
         credito = (f'<p class="ev-fonte">Segnalato da <a href="{f["url"]}" '
                    f'target="_blank" rel="noopener">@{esc(f["ig"])}</a>, {chi}. '
                    f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    # Scheda RITIRATA: la riga e' stata tolta dal foglio prima della sua data.
+    # Qui non si puo' dire "verificata": il 18/08/2026 quella frase e' rimasta in
+    # piedi, con tanto di "ultimo controllo", su un evento che avevamo cancellato
+    # PROPRIO perche' non doveva esserci (un pranzo sociale in ristorante finito
+    # in agenda da un programma di sagra). Restano due cose: il credito alla
+    # pagina che l'ha segnalata - la segnalazione c'e' stata davvero - e il
+    # mailto, che e' la strada per dirci che abbiamo ritirato per sbaglio.
+    if ritirata:
+        return (
+            '<aside class="ev-firma">'
+            '<p class="ev-firma-t">Scheda ritirata da DAOP</p>'
+            '<p>Questa scheda non fa piu\' parte dell\'agenda di <strong>DAOP – Dove '
+            'Andiamo Oggi Papi</strong>: risultava in programma fino al '
+            f'<time datetime="{d.isoformat()}">{leggibile}</time>, poi l\'abbiamo tolta. '
+            'Non consideriamo confermato quello che c\'e\' scritto in questa pagina.</p>'
+            f'{credito}'
+            '<p class="ev-firma-nota">'
+            '<a href="/eventi.html">Vai all\'agenda aggiornata</a> · '
+            f'<a href="mailto:info@daop.it?subject={ogg}">Segnala una correzione</a></p>'
+            '</aside>')
     return (
         '<aside class="ev-firma">'
         f'<p class="ev-firma-t">{CHECK_SVG} Scheda verificata da DAOP</p>'
@@ -2406,11 +2426,33 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     orfano: l'evento e' sparito dal foglio pur non essendo ancora passato.
     Vuol dire che e' stato annullato, oppure rinominato - e in quel caso
     esiste gia' un'altra pagina con lo stesso contenuto. In entrambi i casi
-    non deve stare in indice."""
+    non deve stare in indice.
+
+    Il timbro rec['ritirata'] e' un passo oltre il noindex: la pagina smette di
+    descrivere un appuntamento (niente Event, niente firma di verifica, niente
+    calendario) e dichiara di essere stata ritirata. Lo mette scrivi_pagine."""
     e = dict(rec)
     e['d_start'] = datetime.date.fromisoformat(rec['d_start'])
     e['d_end'] = datetime.date.fromisoformat(rec['d_end'])
     concluso = e['d_end'] < oggi
+    # Orfana e non ancora passata = RITIRATA. Le due cose vanno tenute distinte:
+    # una pagina CONCLUSA racconta una cosa che e' avvenuta (il permalink resta, e
+    # deve restare), una RITIRATA descrive un appuntamento che non c'e' - o non
+    # c'e' mai stato. Fino al 18/08/2026 la ritirata usciva identica a una scheda
+    # viva, solo con noindex e fuori dalla sitemap: cioe' invisibile a Google e
+    # perfettamente leggibile da chiunque avesse il link, firma "verificata da
+    # DAOP" e bottone "Aggiungi al calendario" compresi.
+    # RITIRATA la dice il timbro nel registro, e nient'altro. Due ragioni per
+    # non dedurla qui dai sintomi (orfana + data futura):
+    #  - vince sulla data. Il pranzo sociale del 23/08 era orfano fino al 23 e
+    #    dal 24 tornava "Edizione conclusa - Questa edizione si e' svolta
+    #    domenica 23 agosto" con la firma di verifica al suo posto: la pagina
+    #    avrebbe dichiarato SVOLTO un appuntamento che non e' mai esistito;
+    #  - il timbro lo mette scrivi_pagine SOLO se la run ha letto un foglio
+    #    credibile. Se la lettura va a meta', le orfane di quel giorno restano
+    #    pagine normali in noindex - come prima - invece di riscriversi tutte
+    #    "ritirata" e finire cosi' online col push automatico.
+    ritirata = bool(rec.get('ritirata'))
     url = f"{SITE_URL}/eventi/{rec['slug']}.html"
     nome = (e.get('nome') or '').strip()
     citta = (e.get('citta') or '').strip()
@@ -2442,6 +2484,13 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
                    if attrazioni else '')
     meta_d = trunc(f"{testa}. {descr_txt}" if descr_txt
                    else f"{nome}{a_citta(citta)}: {periodo_esteso(e)}.", 152)
+    # noindex tiene la scheda ritirata fuori da Google, non fuori da WhatsApp:
+    # incollato in chat, il link mostra og:title e og:description, e quelli
+    # continuavano a pubblicizzare l'evento. Il titolo lo dice subito.
+    if ritirata:
+        titolo_seo = trunc(f"Scheda ritirata: {nome}", 60) + " | DAOP"
+        meta_d = ("Questa scheda non fa più parte dell'agenda DAOP: l'appuntamento è "
+                  "stato annullato o corretto. Vai all'agenda per gli eventi confermati.")
 
     facts = []
     if e.get('ora'):
@@ -2464,16 +2513,32 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         facts.append(f'<li>{PHONE_SVG}<span><strong>Contatti:</strong> '
                      f'{contatti_html(e["contatto"])}</span></li>')
 
+    # Orario, indirizzo, prezzo, prenotazione e locandina sono le istruzioni per
+    # andarci: su una scheda ritirata non ci vanno, perche' non ci si deve andare.
+    if ritirata:
+        facts = []
     loc = loc_path(e.get('loc'))
     img = (f'<img class="ev-loc" src="{esc(loc)}" alt="Locandina di {esc(nome)}" '
-           f'loading="lazy" width="900" height="1200">') if loc else ''
+           f'loading="lazy" width="900" height="1200">') if loc and not ritirata else ''
 
-    if concluso:
+    if concluso and not ritirata:
         avviso = ('<div class="ev-over"><strong>Edizione conclusa</strong>'
                   f'Questa edizione si è svolta {periodo_esteso(e).lower()}. '
                   'Se la manifestazione torna, aggiorniamo questa pagina con le nuove date. '
                   'Intanto trovi tutto quello che c\'è in programma nell\'<a href="/eventi.html">agenda DAOP</a>.</div>')
         azioni = '<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>'
+    elif ritirata:
+        avviso = ('<div class="ev-over"><strong>Scheda ritirata</strong>'
+                  'Questo appuntamento non è più nell\'agenda DAOP: l\'abbiamo tolto '
+                  'perché è stato annullato, è cambiato, oppure perché la scheda era '
+                  'sbagliata. Quello che leggi qui sotto non è confermato: per sapere '
+                  'cosa c\'è davvero in programma vai all\'<a href="/eventi.html">agenda '
+                  'DAOP</a>.</div>')
+        # NIENTE "Aggiungi al calendario" e niente "Come arrivare": erano i due
+        # bottoni piu' dannosi di tutti - scrivevano in agenda, e mandavano in
+        # macchina, verso un appuntamento che non esiste.
+        azioni = ('<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">'
+                  'Vedi cosa c\'è in programma</a></div>')
     else:
         avviso = ''
         # .btn da sola dà solo la forma: senza modificatore l'ancora resta un
@@ -2510,6 +2575,13 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         webpage["dateModified"] = rec['updated']
     if controllo:
         webpage["lastReviewed"] = controllo
+    if ritirata:
+        # I dati strutturati sono la stessa promessa dell'HTML in una lingua che
+        # leggono le macchine: se la pagina non certifica piu' niente, qui non
+        # devono restare ne' il puntatore all'Event (che sparisce dal grafo) ne'
+        # la firma di chi l'ha rivista e quando.
+        for _k in ("about", "reviewedBy", "lastReviewed"):
+            webpage.pop(_k, None)
     organizzazione = {
         "@type": "Organization",
         "@id": ORG_ID,
@@ -2529,18 +2601,25 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
             {"@type": "ListItem", "position": 3, "name": nome, "item": url},
         ],
     }
-    jsonld = json.dumps({"@context": "https://schema.org",
-                         "@graph": [ev_obj, webpage, organizzazione, breadcrumb]},
+    # Su una scheda ritirata l'Event non entra nel grafo: dichiararlo - anche
+    # come "annullato" - vorrebbe dire garantire a un assistente che
+    # l'appuntamento e' esistito con quei dati, e nel caso della riga sbagliata
+    # non e' vero. WebPage / Organization / BreadcrumbList descrivono la PAGINA,
+    # e quelli restano veri.
+    grafo = ([webpage, organizzazione, breadcrumb] if ritirata
+             else [ev_obj, webpage, organizzazione, breadcrumb])
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": grafo},
                         ensure_ascii=False, indent=2)
 
     corpo = "".join(f"<p>{esc(p)}</p>" for p in re.split(r'\n{2,}', descr_txt) if p.strip())
-    famiglie = blocco_famiglie(rec, vicini, oggi, hub=hub) if vicini else ''
-    consiglio = blocco_daop(e)
+    famiglie = (blocco_famiglie(rec, vicini, oggi, hub=hub)
+                if vicini and not ritirata else '')
+    consiglio = '' if ritirata else blocco_daop(e)
     # "Consigliato DAOP" nel foglio e' gia' un giudizio, dato riga per riga:
     # tenerlo dentro il database e non mostrarlo era buttarlo via.
     consigliato_badge = (f'<p class="ev-scelto">{STAR_SVG} Consigliato da DAOP</p>'
-                         if si(e.get('consigliato')) else '')
-    firma = firma_daop(rec, oggi)
+                         if si(e.get('consigliato')) and not ritirata else '')
+    firma = firma_daop(rec, oggi, ritirata=ritirata)
     altri = blocco_vicini(rec, vicini, oggi, hub=hub) if vicini else ''
 
     return f"""<!DOCTYPE html>
@@ -2633,6 +2712,17 @@ def scrivi_pagine(events, hub=None):
     oggi = datetime.date.today()
     conclusi = cambiate = 0
     orfane = []
+    # Il timbro e' permanente, quindi si mette solo se la run ha visto un foglio
+    # CREDIBILE. Se un giorno la lettura del foglio va a meta' (rete, quota,
+    # colonne spostate), senza questa guardia mezzo sito si timbrerebbe ritirato
+    # in un colpo, e a mano non si torna indietro. Le pagine di oggi non
+    # sparirebbero comunque: restano fuori indice per un giorno e la run dopo le
+    # rimette a posto.
+    sano = len(visti) >= max(20, len(reg) // 2)
+    if not sano:
+        print(f"[genera_eventi] ATTENZIONE: solo {len(visti)} eventi con pagina "
+              f"su {len(reg)} in registro: run considerata NON attendibile, "
+              f"nessuna scheda verra' timbrata come ritirata.")
     for slug, rec in reg.items():
         path = os.path.join(PAGINE_DIR, f"{slug}.html")
         # Un evento ancora futuro che non compare piu' nel foglio e' stato
@@ -2640,6 +2730,13 @@ def scrivi_pagine(events, hub=None):
         # questa e' un doppione: fuori dall'indice e fuori dalla sitemap.
         orfano = slug not in visti and \
             datetime.date.fromisoformat(rec['d_end']) >= oggi
+        if slug in visti:
+            # Tornata sul foglio: il timbro si toglie da solo. E' anche il modo in
+            # cui si rimedia a una ritirata sbagliata - si rimette la riga nel
+            # foglio - e la rete di sicurezza se una run legge il foglio a meta'.
+            rec.pop('ritirata', None)
+        elif orfano and sano:
+            rec.setdefault('ritirata', oggi.isoformat())
         nuovo = render_pagina(rec, css, nav, foot, oggi, orfano, vicini=events, hub=hub)
         if orfano:
             orfane.append(slug)
@@ -2685,11 +2782,19 @@ def scrivi_pagine(events, hub=None):
     if vuote:
         print("[genera_eventi]   colonne presenti ma mai compilate: "
               + ", ".join(f'"{n}"' for n in vuote))
+    timbrate = [s_ for s_, r in reg.items() if r.get('ritirata')]
+    if timbrate:
+        print(f"[genera_eventi] schede ritirate (permanenti): {len(timbrate)}")
     if orfane:
         print(f"[genera_eventi] ATTENZIONE: {len(orfane)} pagine di eventi futuri "
-              f"spariti dal foglio (annullati o rinominati), messe in noindex "
-              f"e tolte dalla sitemap: {', '.join(sorted(orfane))}")
-    return {s: r['updated'] for s, r in sorted(reg.items()) if s not in orfane}
+              f"spariti dal foglio (annullati, sbagliati o rinominati), riscritte "
+              f"come SCHEDA RITIRATA (senza Event nei dati strutturati, senza firma "
+              f"di verifica, senza calendario), in noindex e fuori dalla sitemap: "
+              f"{', '.join(sorted(orfane))}")
+    # Fuori dalla sitemap le orfane di oggi E tutte le timbrate: una ritirata non
+    # rientra in sitemap il giorno dopo la sua data, quando smette di essere orfana.
+    fuori = set(orfane) | set(timbrate)
+    return {s: r['updated'] for s, r in sorted(reg.items()) if s not in fuori}
 
 
 # ---------------------------------------------------------------------------
