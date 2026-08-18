@@ -224,7 +224,18 @@ COLONNE = {
 }
 
 # Mesi di inizio che identificano la stagione, quando non c'e' una colonna.
-MESI_STAGIONE = {'estivi': (5, 6, 7, 8, 9), 'invernali': (11, 12, 1, 2)}
+# Una voce per ogni chiave di STAGIONI: aggiungerne una la' e dimenticarla qui
+# fermava tutta la run notturna (KeyError: 'pasquali', 18/08/2026) - e non solo
+# i centri, perche' il passo che committa viene dopo. Da allora la lettura e'
+# .get(): una stagione senza mesi si fida della sola colonna del foglio, che e'
+# un elenco povero, non un sito fermo.
+# I pasquali stanno in marzo-aprile perche' la Pasqua cade fra il 22 marzo e il
+# 25 aprile: nessun mese si sovrappone alle altre due stagioni.
+MESI_STAGIONE = {
+    'estivi': (5, 6, 7, 8, 9),
+    'invernali': (11, 12, 1, 2),
+    'pasquali': (3, 4),
+}
 
 
 def _mappa(header):
@@ -289,7 +300,7 @@ def leggi_centri(tab, chiave):
                   f"usciranno senza quel dato")
 
     parola = STAGIONI[chiave]['parola']
-    mesi = MESI_STAGIONE[chiave]
+    mesi = MESI_STAGIONE.get(chiave, ())
     out, scartati = [], 0
     for r in righe[hi + 1:]:
         def val(campo):
@@ -397,6 +408,9 @@ SEARCH_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" fill="none" '
 ACCENTO = {
     'estivi': ('#e8954a', 'rgba(232,149,74,0.14)', '#a75b15'),
     'invernali': ('#4a90b9', 'rgba(74,144,185,0.14)', '#397293'),
+    # verde di primavera per i pasquali: senza la sua voce la pagina ripiegava
+    # sull'arancio degli estivi, cioe' due stagioni diverse con la stessa tinta.
+    'pasquali': ('#6f9e4e', 'rgba(111,158,78,0.14)', '#4a6d2e'),
 }
 PROV_LABEL = {'AL': 'Alessandria', 'AT': 'Asti'}
 

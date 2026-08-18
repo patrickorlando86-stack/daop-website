@@ -107,10 +107,31 @@ jobs:
           #     ogni run e pubblicata mai. Online ne dichiarava 62 mentre il
           #     foglio ne aveva 89, e c'era arrivata solo per caso dentro due
           #     commit di stile su un link. Le due liste vanno tenute uguali.
-          FILE="eventi.html index.html centri-estivi.html metodo.html rubriche.html zone.html \
-                luoghi.html sagre-provincia-*.html ferragosto.html \
+          #
+          # L'elenco e' raggruppato per generatore, e ogni generatore va letto
+          # per intero quando se ne aggiunge uno: il 18/08/2026 mancavano tutte
+          # e sei le stagionali nate dopo ferragosto (befana, capodanno,
+          # carnevale, halloween, natale, pasqua), piu' piscine.html e i due
+          # centri non estivi. Erano tracciate in git perche' committate a mano
+          # il giorno che sono nate, e da allora la run notturna le riscriveva
+          # nel runner e le buttava via con lui: online restavano ferme al
+          # giorno della nascita. E' lo stesso guasto gia' descritto qui sotto
+          # per ferragosto.html, ripetuto nove volte.
+          #
+          # La rete di sicurezza sta in fondo al workflow ("Nessun file
+          # generato resta indietro"): se un generatore nuovo scrive un file
+          # che non e' in questo elenco, la run diventa rossa invece di
+          # perderlo in silenzio.
+          FILE="eventi.html index.html metodo.html zone.html \
+                sagre-provincia-*.html \
+                befana.html capodanno.html carnevale.html ferragosto.html \
+                halloween.html natale.html pasqua.html \
+                centri-estivi.html centri-invernali.html centri-pasquali.html \
+                rubriche.html luoghi.html piscine.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
-                data/pagine-landing.json data/storico-comuni.json data/luoghi.json \
+                data/pagine-landing.json data/storico-comuni.json \
+                data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
+                data/rubriche.json \
                 eventi/ rubriche/ assets/miniature/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
@@ -159,3 +180,24 @@ jobs:
           npm ci --no-audit --no-fund || npm install --no-audit --no-fund
           npx playwright install --with-deps chromium
           npm test
+
+      - name: Nessun file generato resta indietro
+        # Rete di sicurezza sull'elenco FILE del passo "Commit se cambiato".
+        # Un file gia' tracciato che risulta modificato e NON e' stato
+        # committato vuol dire che un generatore lo riscrive e nessuno lo
+        # pubblica: online resta la versione del giorno in cui e' nato, e non
+        # se ne accorge nessuno perche' niente diventa rosso. E' successo per
+        # ferragosto.html (13/08/2026) e per altre nove pagine (18/08/2026).
+        #
+        # Gira per ultimo e con if: always() apposta: il sito si e' gia'
+        # aggiornato, e questa non deve coprire i due controlli qui sopra.
+        if: always()
+        run: |
+          RESTI="$(git status --porcelain --untracked-files=no | sed 's/^...//')"
+          if [ -n "$RESTI" ]; then
+            echo "::error::Questi file sono stati rigenerati ma non committati:"
+            echo "$RESTI"
+            echo "Aggiungili all'elenco FILE del passo \"Commit se cambiato\"."
+            exit 1
+          fi
+          echo "Tutto quello che i generatori hanno riscritto e' stato pubblicato."
