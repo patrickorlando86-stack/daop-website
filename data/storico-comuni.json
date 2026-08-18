@@ -517,6 +517,23 @@
   "nome": "Barolo",
   "prov": "CN"
  },
+ "beinette": {
+  "eventi": {
+   "torneo-di-pallaprigioniera-animatori-beinette": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campetto Parrocchiale",
+    "manifest": "",
+    "nome": "Torneo di Pallaprigioniera - Animatori Beinette",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-01"
+   }
+  },
+  "nome": "Beinette",
+  "prov": "CN"
+ },
  "belfortemonferrato": {
   "eventi": {
    "xxvii-sagra-delle-trofie-al-pesto-belforte-monferrato": {
@@ -568,6 +585,23 @@
   "nome": "Borghetto di Borbera",
   "prov": "AL"
  },
+ "borgosandalmazzo": {
+  "eventi": {
+   "sulle-ali-della-notte-borgo-san-dalmazzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Anfiteatro di Monserrato",
+    "manifest": "Sulle Ali della Notte",
+    "nome": "Sulle Ali della Notte",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-22"
+   }
+  },
+  "nome": "Borgo San Dalmazzo",
+  "prov": "CN"
+ },
  "boscomarengo": {
   "eventi": {
    "fiorinchiostro-mostra-mercato-florovivaistica-bosco-marengo": {
@@ -612,6 +646,23 @@
   },
   "nome": "Bosio",
   "prov": "AL"
+ },
+ "boves": {
+  "eventi": {
+   "rivoira-by-sport-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo",
+    "manifest": "Rivoira By Sport",
+    "nome": "Rivoira By Sport",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Boves",
+  "prov": "CN"
  },
  "bra": {
   "eventi": {
@@ -2133,6 +2184,39 @@
     "pagina": true,
     "ultima": "2026-08-11"
    },
+   "l-orco-nel-fagiolo-il-burattinificio-di-mammadraga-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile Officina Santachiara",
+    "manifest": "Officina Santachiara Estate 2026",
+    "nome": "L'Orco nel Fagiolo - Il Burattinificio di Mammadraga",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-26"
+   },
+   "mio-tuo-nostro-pandemonium-teatro-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile Officina Santachiara",
+    "manifest": "Officina Santachiara Estate 2026",
+    "nome": "Mio Tuo Nostro - Pandemonium Teatro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   },
+   "passeggiate-nella-natura-per-bambini-e-famiglie-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Valli Gesso, Grana, Pesio, Stura, Varaita, Vermenagna",
+    "manifest": "Passeggiate nella natura per bambini e famiglie",
+    "nome": "Passeggiate nella natura per bambini e famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   },
    "scopri-gli-amici-alpaca-cuneo": {
     "anni": [
      2026
@@ -2231,6 +2315,23 @@
   "nome": "Cunico",
   "prov": "AT"
  },
+ "demonte": {
+  "eventi": {
+   "festa-da-clara-demonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Clara in Montagna a Cavallo - Località Perosa Ruà del Bial",
+    "manifest": "Festa da Clara",
+    "nome": "Festa da Clara",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   }
+  },
+  "nome": "Demonte",
+  "prov": "CN"
+ },
  "dogliani": {
   "eventi": {
    "festa-dei-bambini-pro-loco-dogliani-castello": {
@@ -2289,6 +2390,17 @@
  },
  "entracque": {
   "eventi": {
+   "aspettando-la-fiera-patate-di-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Maria José",
+    "manifest": "Aspettando la 28ª Fiera Patate di Entracque",
+    "nome": "Aspettando la 28ª Fiera Patate di Entracque",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
    "c-e-un-mondo-dentro-entracque": {
     "anni": [
      2026
@@ -2909,6 +3021,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-16"
+   },
+   "piccole-escursioni-per-bambini-forte-pernante-dal-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Colle di Tenda alto",
+    "manifest": "",
+    "nome": "Piccole Escursioni per bambini - Forte Pernante dal Colle di Tenda - Monica Dalmasso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-19"
    }
   },
   "nome": "Limone Piemonte",
@@ -3447,6 +3570,17 @@
     "pagina": true,
     "ultima": "2026-08-16"
    },
+   "laboratorio-creativo-acquerelli-da-verdura-e-frutt-ormea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Spazio Giovani",
+    "manifest": "",
+    "nome": "Laboratorio Creativo: Acquerelli da Verdura e Frutta e Dipingere con le Bolle",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   },
    "mini-olimpiadi-ormea-edizione": {
     "anni": [
      2026
@@ -3530,6 +3664,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "marmotte-adventure-laboratori-di-pian-mune-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rifugio Pian Muné",
+    "manifest": "",
+    "nome": "Marmotte Adventure - Laboratori di Pian Muné",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
    }
   },
   "nome": "Paesana",
@@ -4346,6 +4491,17 @@
  },
  "sampeyre": {
   "eventi": {
+   "gioca-con-la-c-r-i-croce-rossa-italiana-comitato-d-sampeyre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Vittoria",
+    "manifest": "",
+    "nome": "Gioca con la C.R.I. - Croce Rossa Italiana Comitato di Sampeyre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
    "il-segreto-dei-colori-della-natura-laboratorio-di-sampeyre": {
     "anni": [
      2026
@@ -5378,6 +5534,23 @@
   "nome": "Valderia",
   "prov": "CN"
  },
+ "venasca": {
+  "eventi": {
+   "visita-guidata-la-fabbrica-dei-suoni-venasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Fabbrica dei Suoni",
+    "manifest": "",
+    "nome": "Visita guidata - La Fabbrica dei Suoni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Venasca",
+  "prov": "CN"
+ },
  "verzuolo": {
   "eventi": {
    "ferragosto-al-castello-pro-loco-villa-di-verzuolo": {
@@ -5649,6 +5822,23 @@
   },
   "nome": "Villaromagnano",
   "prov": "AL"
+ },
+ "villarsancostanzo": {
+  "eventi": {
+   "serata-di-magia-blink-circolo-magico-villar-san-costanzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Riserva Naturale Ciciu del Villar",
+    "manifest": "",
+    "nome": "Serata di Magia - Blink Circolo Magico",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Villar San Costanzo",
+  "prov": "CN"
  },
  "vinadio": {
   "eventi": {
