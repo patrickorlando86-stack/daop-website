@@ -331,7 +331,7 @@
  },
  "c-al-novi-ligure": {
   "comune": "Novi Ligure",
-  "n": 44,
+  "n": 46,
   "prov": "AL"
  },
  "c-al-olivola": {
@@ -802,6 +802,11 @@
  "c-at-moasca": {
   "comune": "Moasca",
   "n": 2,
+  "prov": "AT"
+ },
+ "c-at-mombaruzzo": {
+  "comune": "Mombaruzzo",
+  "n": 1,
   "prov": "AT"
  },
  "c-at-mombercelli": {
