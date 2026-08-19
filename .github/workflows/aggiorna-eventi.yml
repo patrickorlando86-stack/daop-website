@@ -64,6 +64,15 @@ jobs:
         # vuota la pagina si genera lo stesso, fuori stagione, con la guida.
         run: python scripts/genera_centri.py
 
+      - name: Genera corsi
+        # Legge la tab "Attivita" del foglio (i corsi annuali: societa' sportive,
+        # scuole di musica, danza, lingue). Se la tab non c'e' o non e' leggibile
+        # NON riscrive niente e la pagina resta com'e': leggi_corsi() torna None
+        # e main() esce senza toccare il file. La distinzione fra "letto e vuoto"
+        # e "non letto" e' l'unica cosa che impedisce a un timeout di Google di
+        # pubblicare una pagina svuotata.
+        run: python scripts/genera_corsi.py
+
       - name: Genera rubriche
         # Legge i testi in contenuti/rubriche/. Serve girare ogni notte anche
         # se i testi non cambiano: un articolo con data futura resta fuori
@@ -127,7 +136,7 @@ jobs:
                 befana.html capodanno.html carnevale.html ferragosto.html \
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \
-                rubriche.html luoghi.html piscine.html \
+                rubriche.html luoghi.html piscine.html corsi.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
                 data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
