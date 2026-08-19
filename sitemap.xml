@@ -2029,4 +2029,12 @@
   </url>
   <!-- PAGINE-COMUNE:END -->
 
+  <!-- CORSI:START (generato da scripts/genera_corsi.py — non modificare a mano) -->
+  <url>
+    <loc>https://www.daop.it/corsi.html</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- CORSI:END -->
 </urlset>
