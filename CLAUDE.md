@@ -306,6 +306,11 @@ tolta. È la stessa logica per cui lì spariscono i fatti e i due bottoni.
 **Il testo è identico nelle due posizioni, apposta.** Cambiando insieme
 posizione e parole non si saprebbe quale delle due ha spostato il numero.
 
+Quanto vale lo spostamento è misurato, non stimato: su una scheda viva l'invito
+è in vista al **59% dello scroll** e ci arriva **il 29%** di chi apre la pagina;
+su una conclusa è allo **0%**. Il conto sta in "Quanti lo vedevano, e quanti lo
+toccavano", qui sotto — e dice anche perché la posizione da sola non basta.
+
 `tests/luoghi.js` controlla tutte e due le posizioni. Attenzione se si tocca
 quella prova: il nome della classe `ev-canale--alto` sta anche nel `<style>` di
 ogni pagina (`PAGINA_CSS` è incollata dappertutto), quindi si cerca l'attributo
@@ -332,13 +337,66 @@ settembre misurerebbe il crollo dell'onda stagionale, non l'invito. Si guarda
 **`iscrizione_canale` ogni mille `page_view` sulle schede**, e lo si legge
 contro il 15 settembre che è già la data del verdetto per tutto il resto.
 
-E prima di spostare ancora qualcosa: **quanti arrivano in fondo a una scheda è
-già misurato**. `scroll_depth` gira a 25/50/75/100 su ogni pagina e
-`percent_scroll` è registrata dal 15/08/2026, quindi il dato c'è da quella data
-in poi. Se la quota di `100` sulle `/eventi/*` è alta, l'invito in coda non era
-nascosto e il problema è il testo; se è bassa, era la posizione. È una lettura
-di GA4, non un esperimento da un mese — e il posto è Esplora → Esplorazione a
-forma libera, perché nei report standard quella scomposizione non c'è.
+#### Quanti lo vedevano, e quanti lo toccavano
+
+Misurato il 19/08/2026 su GA4, finestra **12-18 agosto**, filtro percorso
+`/eventi/` (che prende schede, pagine comune, `oggi`, `weekend` e le sei
+d'incrocio, **non** `eventi.html`, che è `/eventi.html` senza barra). È la
+lettura che ha fatto spostare l'invito, e va rifatta prima di spostarlo ancora.
+
+**Primo pezzo: a che altezza sta l'invito.** Non in fondo — sotto ci sono il
+blocco di Ginetto e il footer, che valgono l'ultimo 40% della pagina. Misurato
+con Playwright a 412px su 40 schede: su una scheda **viva** l'invito è
+interamente in vista al **59% dello scroll** (mediana; range 45-66%), e comincia
+a entrare intorno al 41%. Su una **conclusa**, dal 19/08, allo **0%**.
+
+Da qui una cosa da non rifare: **la soglia da leggere è 50, non 100.** Chi arriva
+al 100% non è "chi ha visto l'invito", è chi ha letto anche il footer.
+
+**Secondo pezzo: dove si fermano.** `page_view` 2.160, `scroll_depth` 1.993 (di
+cui 998 il 12-14, senza dettaglio perché `percent_scroll` nasce il 15). Sul
+15-18: 25% → 546, 50% → 308, 75% → 133, 100% → 8. Cioè, su cento che aprono una
+pagina: **~51 cominciano a scorrere, ~29 arrivano dove l'invito è a schermo, ~12
+passano il 75%, ~1 vede il footer.**
+
+La coda ripida non è un difetto di misura — ci si era pensato. L'evento
+automatico `scroll` di GA4, che scatta al 90%, fa 50 in sette giorni: coerente
+con i nostri 8 al 100% in quattro. Sotto l'invito non ci va nessuno perché sotto
+l'invito non c'è niente da leggere.
+
+**Terzo pezzo, ed è quello che conta.** In sette giorni l'invito è stato visto
+**~600 volte** e `click_sito_organizzatore` — il secchio che lo conteneva fino
+al 19/08, insieme ai clic verso i siti degli organizzatori — fa **4**. Quindi il
+canale converte **fra lo 0 e lo 0,6%**, verosimilmente ~0,3%. Nella stessa
+settimana, sulle stesse pagine: `click_come_arrivare` 33, `aggiungi_calendario`
+10, `click_telefono` 9, `apri_ginetto` 7.
+
+**Non era (solo) la posizione, ed è la conclusione da non semplificare.** La
+posizione costava un fattore 3,5 — 29 su 100 lo vedevano invece di 100 su 100 —
+e quel fattore lo spostamento sulle concluse te lo restituisce. Ma anche fra chi
+lo vedeva non lo toccava quasi nessuno, mentre le altre azioni della stessa
+pagina funzionano benissimo. Se lo 0,3% è il tetto dell'*ask*, da ~600 viste a
+settimana si passa a ~2.000 e da 2 iscritti a 6-7: meglio, non risolutivo.
+
+**Il corollario per la newsletter**, che è la domanda da cui è partito tutto: su
+quella stessa pagina un modulo email chiede *più* attrito (nome, indirizzo,
+conferma) allo stesso pubblico che oggi non tocca un bottone da un tocco solo.
+Se lo 0,3% è il tetto dell'ask lì, la newsletter lì sotto farà peggio, non
+meglio. Il pezzo non ancora provato è **il testo**, non il canale.
+
+**Come si rifà la lettura.** Esplora → Esplorazione a forma libera; nei report
+standard quella scomposizione non c'è. Righe `percent` (è `percent_scroll`, il
+nome visualizzato in GA4 è scritto male), valori Conteggio eventi, filtri
+`Nome evento` = `scroll_depth` e `Percorso pagina` contiene `/eventi/`. Per il
+denominatore si toglie il filtro sul nome evento e si mettono i nomi in riga.
+Attenzione al periodo: `percent_scroll` esiste dal 15/08, quindi una finestra
+che parte prima mescola quattro giorni di dettaglio con giorni di `(not set)` e
+il rapporto esce sbagliato — la riga `(not set)` è il campanello.
+
+Due eventi automatici di GA4 sporcano questa tabella e sono gli stessi di cui si
+parla più sopra: **`scroll`** (50) e **`click`** (46, i "clic in uscita", che
+duplicano in parte i nostri `click_*`). Si spengono da Amministratore → Flussi
+di dati → il flusso web → **Misurazione avanzata**.
 
 Il messaggio del giovedì lo scrive il generatore in `data/messaggio-canale.txt`
 (`messaggio_canale()`): **WhatsApp non ha API pubbliche per pubblicare sui
@@ -1210,6 +1268,14 @@ L'evento è **`vicino_a_me`**, con due parametri e basta:
 pagina promette a chi la usa che la posizione resta nel browser, e mandarla a
 GA4 renderebbe quella riga una bugia. Se un giorno serve sapere *da dove*
 cercano, la risposta è `metodo_posizione` più il `page_path`, non le coordinate.
+
+**Quanto viene usato, al 19/08/2026: pochissimo.** `vicino_a_me` fa **2 eventi
+in sette giorni** (12-18 agosto). Il numero però è quasi inutile e va detto
+perché non lo si prenda per un verdetto: quella misura è filtrata su `/eventi/`,
+che **esclude `eventi.html`** — cioè proprio la pagina dove la funzione è più in
+evidenza e che da sola fa il 10% dei clic del sito. Prima di concludere
+qualunque cosa la lettura va rifatta senza quel filtro. Il posto giusto per
+guardarla è comunque metà settembre, come tutto il resto.
 
 C'è l'antirimbalzo degli 800 ms già usato per i clic: chi prova tre gradini di
 fila è una persona che sta scegliendo, non tre eventi. E `impostaCentro()`
