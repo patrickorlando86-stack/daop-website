@@ -528,6 +528,9 @@
    e' un <aside> dentro l'articolo, non una fascia di pagina. */
 .ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
   background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+/* In cima a un'edizione conclusa non ha 28px sopra (l'avviso ce li ha gia'
+   sotto) e ha bisogno di aria sotto, se no si attacca ai dati della scheda. */
+.ev-canale--alto{margin:0 0 26px}
 .ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
 .ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
 .ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
@@ -639,7 +642,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-18",
-      "dateModified": "2026-08-18",
+      "dateModified": "2026-08-19",
       "lastReviewed": "2026-08-19"
     },
     {

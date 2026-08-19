@@ -255,17 +255,72 @@ UTC, committa da solo su `main`, poi passa i controlli (vedi in fondo).
 Aperto il 14/08/2026. `CANALE_WA` in `genera_eventi.py` è l'unico posto in cui
 sta l'indirizzo: **vuoto vuol dire che l'invito non si stampa da nessuna
 parte**, che è il comportamento giusto se un giorno il canale si chiude.
-`blocco_canale()` compare in coda alle schede evento, alle pagine comune e alle
-landing — **290 pagine**, tutte tranne i tre `eventi/box-*.html`. Quelli vivono
-dentro l'iframe di siti altrui, e chiedere lì un'iscrizione vuol dire usare lo
-spazio di qualcun altro per portargli via il pubblico: stessa ragione per cui
-non chiedono il consenso ai cookie. `tests/luoghi.js` controlla che l'invito ci
-sia su tutte e che non sia mai doppio.
+`blocco_canale()` compare sulle schede evento, sulle pagine comune e sulle
+landing — **323 pagine** al 19/08/2026, tutte tranne i tre `eventi/box-*.html`.
+Quelli vivono dentro l'iframe di siti altrui, e chiedere lì un'iscrizione vuol
+dire usare lo spazio di qualcun altro per portargli via il pubblico: stessa
+ragione per cui non chiedono il consenso ai cookie. `tests/luoghi.js` controlla
+che l'invito ci sia su tutte e che non sia mai doppio. Sta in coda dappertutto
+tranne che sulle edizioni concluse, e il perché è due paragrafi più sotto.
 
 **Sta in coda e non in cima**, e il testo dice per prima cosa *quanto spesso si
 scrive*: la paura di chi si iscrive a un canale non è il contenuto, è il
 diluvio. Niente promesse in più ("contenuti esclusivi") che poi non
 manteniamo.
+
+### L'unica eccezione alla coda: le edizioni concluse
+
+Dal 19/08/2026 su una scheda di **edizione conclusa** l'invito sale sotto
+l'avviso "Edizione conclusa", cioè è la prima cosa che si legge dopo aver
+scoperto che la festa è finita (`blocco_canale(alto=True)`, classe
+`.ev-canale--alto`).
+
+Non è un ripensamento sulla regola: è che lì **la premessa della regola cade**.
+"In cima chiede qualcosa a chi non ha ancora avuto niente" vale finché la pagina
+ha qualcosa da dare; una scheda conclusa non ce l'ha, e l'invito è la cosa più
+utile che resta. E non è un caso di nicchia: al 19/08/2026 sono **132 schede su
+288** (il 46%), e prendono traffico vero — il 16/08 le schede di eventi conclusi
+hanno fatto 1.237 impressioni.
+
+**Le schede ritirate restano in coda.** Quella pagina dichiara di non essere
+attendibile e manda all'agenda: chiedere un'iscrizione in cima a una scheda che
+stiamo smentendo è chiedere fiducia nel punto esatto in cui l'abbiamo appena
+tolta. È la stessa logica per cui lì spariscono i fatti e i due bottoni.
+
+**Il testo è identico nelle due posizioni, apposta.** Cambiando insieme
+posizione e parole non si saprebbe quale delle due ha spostato il numero.
+
+`tests/luoghi.js` controlla tutte e due le posizioni. Attenzione se si tocca
+quella prova: il nome della classe `ev-canale--alto` sta anche nel `<style>` di
+ogni pagina (`PAGINA_CSS` è incollata dappertutto), quindi si cerca l'attributo
+intero `class="ev-canale ev-canale--alto"` — un `includes` sul nome secco
+direbbe "in alto" su tutte e 313 le pagine e la prova passerebbe sempre.
+
+### Il clic sull'invito ha un nome suo
+
+Fino al 19/08/2026 cadeva nel ramo generico di `nome_evento()` in
+`daop-track.js` e finiva in **`click_sito_organizzatore`**, insieme ai clic
+verso il sito di chi organizza. Non era rotto — `destination_url` c'era — ma
+l'unica domanda che il canale pone (*quanti si iscrivono ogni mille visite*) si
+poteva rispondere solo filtrando a mano, cioè mai: non era una conversione, non
+si leggeva in trend.
+
+Ora l'evento è **`iscrizione_canale`**. Il confronto è su
+`whatsapp.com/channel` e non su `whatsapp`: un `wa.me/...` nei recapiti è il
+numero dell'organizzatore, non noi.
+
+**Il numero da guardare non è il totale degli iscritti**, ed è la trappola di
+questo periodo: si parte il 19 agosto, con il 79% dei clic del trimestre
+concentrato negli otto giorni appena passati. Un tasso misurato da qui a metà
+settembre misurerebbe il crollo dell'onda stagionale, non l'invito. Si guarda
+**`iscrizione_canale` ogni mille `page_view` sulle schede**, e lo si legge
+contro il 15 settembre che è già la data del verdetto per tutto il resto.
+
+E prima di spostare ancora qualcosa: **quanti arrivano in fondo a una scheda è
+già misurato**. `scroll_depth` gira a 25/50/75/100 su ogni pagina. Se la quota
+di `100` sulle `/eventi/*` è alta, l'invito in coda non era nascosto e il
+problema è il testo; se è bassa, era la posizione. È una lettura di GA4, non un
+esperimento da un mese.
 
 Il messaggio del giovedì lo scrive il generatore in `data/messaggio-canale.txt`
 (`messaggio_canale()`): **WhatsApp non ha API pubbliche per pubblicare sui

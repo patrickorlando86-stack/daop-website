@@ -1919,6 +1919,9 @@ PAGINA_CSS = """
    e' un <aside> dentro l'articolo, non una fascia di pagina. */
 .ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
   background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
+/* In cima a un'edizione conclusa non ha 28px sopra (l'avviso ce li ha gia'
+   sotto) e ha bisogno di aria sotto, se no si attacca ai dati della scheda. */
+.ev-canale--alto{margin:0 0 26px}
 .ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
 .ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
 .ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
@@ -2257,7 +2260,7 @@ def firma_daop(rec, oggi, ritirata=False):
 CANALE_WA = "https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z"
 
 
-def blocco_canale(dove=""):
+def blocco_canale(dove="", alto=False):
     """L'invito al canale WhatsApp.
 
     Sta in coda alla scheda e non in cima per una ragione sola: in cima chiede
@@ -2269,11 +2272,18 @@ def blocco_canale(dove=""):
     paura di chi si iscrive a un canale non e' il contenuto, e' il diluvio: se
     la prima riga non risponde a quella, il tasto non si tocca. Per lo stesso
     motivo non c'e' nessuna promessa in piu' - niente "contenuti esclusivi",
-    che sarebbe una cosa che poi non manteniamo."""
+    che sarebbe una cosa che poi non manteniamo.
+
+    `alto` e' l'unica eccezione alla coda, e vale su una scheda sola: quella di
+    un'EDIZIONE CONCLUSA (vedi scheda_evento). Non e' un ripensamento sulla
+    regola - e' che li' la premessa della regola cade. "In cima chiede qualcosa
+    a chi non ha ancora avuto niente" vale finche' la pagina ha qualcosa da
+    dare; una scheda conclusa non ce l'ha, e l'invito e' la cosa piu' utile che
+    resta. Cambia la classe e nient'altro: stesso testo, stesso link."""
     if not CANALE_WA:
         return ''
     return (
-        '<aside class="ev-canale">'
+        f'<aside class="ev-canale{" ev-canale--alto" if alto else ""}">'
         f'<p class="ev-canale-t">Un messaggio il giovedì, e basta</p>'
         '<p>Ti mandiamo quello che c\'è nel weekend'
         f'{" vicino a " + esc(dove) if dove else " in zona"}: sagre, feste e '
@@ -2550,6 +2560,26 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         bottoni.append('<a class="ev-back" href="/eventi.html">Torna all\'agenda</a>')
         azioni = '<div class="ev-actions">' + "".join(bottoni) + '</div>'
 
+    # Dove va l'invito al canale. Di regola in coda (vedi blocco_canale), ma su
+    # un'EDIZIONE CONCLUSA sale sotto l'avviso, cioe' e' la prima cosa dopo
+    # "questa edizione si e' svolta". La ragione e' che quella pagina non ha
+    # niente da dare: chi ci arriva da Google ha appena scoperto che la festa
+    # e' finita, e "e il prossimo weekend?" non e' una domanda che gli stiamo
+    # mettendo in testa noi - ce l'ha gia'. Il 19/08/2026 sono 132 schede su
+    # 288, cioe' il 46%, e prendono traffico vero (il 16/08: 1.237 impressioni).
+    # In coda, sotto la firma e gli eventi vicini, la vedeva chi scorreva tutto.
+    #
+    # NON vale per le RITIRATE, che restano in coda: quella pagina dichiara di
+    # non essere attendibile e manda all'agenda: chiedere un'iscrizione in cima
+    # a una scheda che stiamo smentendo e' chiedere fiducia nel punto in cui
+    # l'abbiamo appena tolta. Stessa logica per cui li' spariscono i fatti.
+    #
+    # Il testo e' identico nelle due posizioni, apposta: cambiando insieme
+    # posizione e parole non si saprebbe quale delle due ha spostato il numero.
+    in_cima = concluso and not ritirata
+    canale_alto = blocco_canale(citta, alto=True) if in_cima else ''
+    canale_coda = '' if in_cima else blocco_canale(citta)
+
     ev_obj = event_jsonld(e, url)
     ev_obj["@id"] = f"{url}#event"
     if concluso:
@@ -2670,7 +2700,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  {avviso}
+  {avviso}{canale_alto}
   <ul class="ev-facts">
     {"".join(facts)}
   </ul>
@@ -2683,7 +2713,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   {azioni}
   {firma}
   {altri}
-  {blocco_canale(citta)}
+  {canale_coda}
 </article>
 {blocco_ginetto(citta)}</main>
 {foot}
