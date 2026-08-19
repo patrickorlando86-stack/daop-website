@@ -169,12 +169,23 @@ GA4 e duplica il nostro. Il commento in `daop-track.js` lo prevedeva già —
 Amministratore → Flussi di dati → il flusso web → **Misurazione avanzata** →
 togliere "Scorrimenti". Meno rumore, e meno benzina per gli avvisi "anomalia".
 
-#### Le dimensioni personalizzate sono sette, non due
+#### Le dimensioni personalizzate sono sette, e sono tutte registrate
 
-`daop-track.js` manda già sette parametri personalizzati, e **finché non sono
-registrati in GA4 esistono solo in DebugView**. Amministratore → colonna
-Proprietà → **Definizioni personalizzate** → ambito **Evento**, col nome del
-parametro scritto identico:
+**Fatto: non c'è niente da fare qui.** Verificato il 19/08/2026 in
+Amministratore → Proprietà → **Definizioni personalizzate**: tutte e sette
+esistono con ambito **Evento**, le quattro del 12 agosto e le tre nate col
+"vicino a me" il 15. Questo paragrafo fino a quel giorno le dava come da
+registrare ed era una cosa da fare inseguita per sbaglio due volte — se ti serve
+sapere se una dimensione c'è, l'unico posto che lo sa è quell'elenco, non questo
+file.
+
+C'è anche un'ottava, **`categoria_nome`**, marcata "storica, non più raccolta
+dal 2025": era il vecchio tracciamento dei filtri dell'agenda. Si lascia dov'è.
+Archiviarla libererebbe uno slot su cinquanta — cioè niente — e farebbe sparire
+dai report lo storico che ha raccolto.
+
+`daop-track.js` manda questi sette parametri, col nome scritto identico alla
+dimensione:
 
 | parametro | su quali eventi | cosa risponde |
 |---|---|---|
@@ -186,20 +197,25 @@ parametro scritto identico:
 | `percent_scroll` | `scroll_depth` | 25/50/75/100 |
 | `destination_url` | i clic | dove se ne vanno |
 
-Il limite sono 50 dimensioni evento, quindi non c'è niente da scegliere: si
-registrano tutte.
+Il limite sono 50 dimensioni evento: se un domani ne nasce un'ottava vera, si
+registra e basta, non c'è niente da scegliere.
 
 **Le prime due valgono più delle altre cinque insieme, e non per il "vicino a
 me".** `event_city` è la risposta alla domanda che farà ogni cliente di
 `luoghi.html`: oggi si può dire "il sito fa 4.878 clic in tre mesi", con quella
 dimensione si dice a un posto di Ovada *quanti dei lettori guardano cose a
-Ovada*. È il primo pezzo di evidenza vendibile, e costa cinque minuti invece del
-lavoro sulle aperture di scheda.
+Ovada*. È il primo pezzo di evidenza vendibile, e **il dato c'è dal 12 agosto**:
+non è più una cosa da preparare, è una cosa da leggere.
 
-**Non sono retroattive**: i dati partono da quando le crei, quello già raccolto
-resta invisibile per sempre. Nei report compaiono dopo 24-48 ore; in DebugView
-subito, ed è così che si verifica di aver scritto bene i nomi senza aspettare due
-giorni.
+**Non sono retroattive**, ed è il motivo per cui la data di creazione conta più
+della dimensione stessa: quello raccolto prima resta invisibile per sempre.
+Quindi `event_city`, `event_province`, `event_title` e `destination_url`
+rispondono **dal 12/08**, e `percent_scroll`, `metodo_posizione`, `raggio_km`
+**dal 15/08**. Sotto quelle date non c'è niente e non ci sarà mai: una domanda
+sul comportamento di luglio non ha risposta, e non è un problema di query.
+
+Nei report compaiono dopo 24-48 ore dalla creazione; in DebugView subito, ed è
+così che si verifica di aver scritto bene un nome senza aspettare due giorni.
 
 #### Sopra 2,5 visualizzazioni per utente, stai guardando te stesso
 
@@ -317,10 +333,12 @@ settembre misurerebbe il crollo dell'onda stagionale, non l'invito. Si guarda
 contro il 15 settembre che è già la data del verdetto per tutto il resto.
 
 E prima di spostare ancora qualcosa: **quanti arrivano in fondo a una scheda è
-già misurato**. `scroll_depth` gira a 25/50/75/100 su ogni pagina. Se la quota
-di `100` sulle `/eventi/*` è alta, l'invito in coda non era nascosto e il
-problema è il testo; se è bassa, era la posizione. È una lettura di GA4, non un
-esperimento da un mese.
+già misurato**. `scroll_depth` gira a 25/50/75/100 su ogni pagina e
+`percent_scroll` è registrata dal 15/08/2026, quindi il dato c'è da quella data
+in poi. Se la quota di `100` sulle `/eventi/*` è alta, l'invito in coda non era
+nascosto e il problema è il testo; se è bassa, era la posizione. È una lettura
+di GA4, non un esperimento da un mese — e il posto è Esplora → Esplorazione a
+forma libera, perché nei report standard quella scomposizione non c'è.
 
 Il messaggio del giovedì lo scrive il generatore in `data/messaggio-canale.txt`
 (`messaggio_canale()`): **WhatsApp non ha API pubbliche per pubblicare sui
@@ -1199,12 +1217,13 @@ scarta un centro identico a quello attivo — scrivere in un campo scatena
 `input` *e* `change`, che altrimenti erano due eventi e due calcoli di 278
 distanze.
 
-**Cosa registrare in GA4** perché quei parametri si vedano nei report:
-`metodo_posizione` e `raggio_km` come dimensioni personalizzate con ambito
-evento. Senza, l'evento si conta ma i parametri restano invisibili fuori da
-DebugView. Non sono i soli, e la lista completa sta in "Le dimensioni
-personalizzate sono sette" più sotto. Vedi "Misurare, non stimare" per come
-provarlo in locale.
+**In GA4 sono già registrate** — `metodo_posizione` e `raggio_km` con ambito
+evento, create il 15/08/2026 insieme alla funzione. Non c'era scelta: senza,
+l'evento si conta ma i parametri restano invisibili fuori da DebugView. Il
+corollario è che **quei due rispondono dal 15/08 e non prima**, perché le
+dimensioni non sono retroattive. La lista completa e le date stanno in "Le
+dimensioni personalizzate sono sette" più sopra. Vedi "Misurare, non stimare"
+per come provarlo in locale.
 
 `raggio_km` va **come dimensione, non come metrica**: GA4 lo propone anche come
 metrica perché è un numero, ma sommare i chilometri non vuol dire niente — serve
