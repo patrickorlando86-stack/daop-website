@@ -367,6 +367,37 @@ module.exports = async function luoghi(browser) {
     ? `invito ripetuto in ${doppi.length} pagine (es. ${doppi[0]})`
     : 'mai due inviti sulla stessa pagina');
 
+  // ── e DOVE sta l'invito ───────────────────────────────────────────────
+  // Su una scheda viva l'invito sta in coda (chiede qualcosa a chi ha gia'
+  // avuto l'orario della sagra); su un'EDIZIONE CONCLUSA sale sotto l'avviso,
+  // perche' li' la pagina non ha niente da dare e l'invito e' la cosa piu'
+  // utile che resta. E' una decisione presa il 19/08/2026 e misurata: si
+  // smonta da sola alla prima riscrittura del template, perche' basta
+  // spostare una riga e nessuna pagina si rompe.
+  //
+  // Il marcatore e' la classe .ev-canale--alto, che serve gia' alla CSS: la
+  // prova non aggiunge niente all'HTML per potersi fare. Si cerca l'attributo
+  // intero e non il solo nome della classe: quel nome sta anche nel <style>
+  // di ogni pagina (PAGINA_CSS e' incollata dappertutto), quindi un includes
+  // sul nome secco direbbe "in alto" su tutte e 296 le schede.
+  let concluseSbagliate = [], viveSbagliate = [];
+  for (const f of nostre) {
+    const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    const conclusa = html.includes('<strong>Edizione conclusa</strong>');
+    const alto = html.includes('class="ev-canale ev-canale--alto"');
+    // La coda si riconosce dall'ordine: l'invito DOPO la firma di verifica.
+    const inCoda = !alto && html.indexOf('class="ev-canale"') >
+      html.indexOf('class="ev-firma"');
+    if (conclusa && !alto) concluseSbagliate.push(f);
+    if (!conclusa && !inCoda) viveSbagliate.push(f);
+  }
+  r.ok(concluseSbagliate.length === 0, concluseSbagliate.length
+    ? `edizioni concluse con l'invito ancora in coda: ${concluseSbagliate.length} (es. ${concluseSbagliate[0]})`
+    : "su ogni edizione conclusa l'invito sta sotto l'avviso");
+  r.ok(viveSbagliate.length === 0, viveSbagliate.length
+    ? `invito fuori posto su ${viveSbagliate.length} pagine vive (es. ${viveSbagliate[0]})`
+    : "sulle pagine vive l'invito resta in coda, dopo la firma");
+
   await ctx.close();
 
   return r;

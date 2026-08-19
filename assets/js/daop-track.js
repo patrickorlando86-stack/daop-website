@@ -77,6 +77,16 @@
     if (href.indexOf('tel:') === 0) return 'click_telefono';
     if (href.indexOf('ginettoapp.it') !== -1) return 'apri_ginetto';
     if (href.indexOf('gioco.sane-italia.it') !== -1) return 'gioca_ora';
+    // Il canale WhatsApp. Ha un nome suo e non finisce in
+    // `click_sito_organizzatore` (il ramo generico, dove cadeva fino al
+    // 19/08/2026) per una ragione pratica: sulle schede evento quel nome
+    // conta anche i clic verso il sito di chi organizza, quindi l'unica
+    // domanda che il canale pone - quanti si iscrivono ogni mille visite -
+    // si poteva rispondere solo filtrando a mano `destination_url`, cioe'
+    // mai. Con un nome suo diventa una conversione, e si legge in trend.
+    // Il confronto e' su `whatsapp.com/channel` e non su `whatsapp`: un
+    // `wa.me/...` nei recapiti e' il numero dell'organizzatore, non noi.
+    if (href.indexOf('whatsapp.com/channel') !== -1) return 'iscrizione_canale';
     if (href.indexOf('instagram.com') !== -1 ||
         href.indexOf('facebook.com') !== -1 ||
         href.indexOf('youtube.com') !== -1) return 'click_social';
