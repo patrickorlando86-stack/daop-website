@@ -1,4 +1,21 @@
 {
+ "abasse": {
+  "eventi": {
+   "la-notte-bianca-delle-abasse": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Abasse90",
+    "manifest": "La Notte Bianca delle Abasse",
+    "nome": "La Notte Bianca delle Abasse",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   }
+  },
+  "nome": "Abasse",
+  "prov": "CN"
+ },
  "acquiterme": {
   "eventi": {
    "acqui-prog-night-acqui-rock-festival-acqui-terme": {
@@ -55,6 +72,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-23"
+   },
+   "festa-delle-feste-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Festalunga - Isola Pedonale",
+    "manifest": "Festa delle Feste 2026",
+    "nome": "Festa delle Feste 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
    },
    "jam-fest-centro-giovanile-yepp-acqui-terme": {
     "anni": [
@@ -245,6 +273,17 @@
     "pagina": false,
     "ultima": "2026-09-19"
    },
+   "estate-di-eventi-al-quartiere-cristo-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Campora",
+    "manifest": "",
+    "nome": "Estate di eventi al Quartiere Cristo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   },
    "festa-della-birra-street-food-alessandria": {
     "anni": [
      2026
@@ -321,6 +360,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-01"
+   },
+   "primi-passi-di-svezzamento-officina-femminile-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Studio Ostetrico Officina Femminile",
+    "manifest": "",
+    "nome": "Primi Passi di Svezzamento - Officina Femminile",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-21"
    },
    "sbem-festival-sport-benessere-e-movimento-acm-even-alessandria": {
     "anni": [
@@ -478,6 +528,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-07"
+   },
+   "treno-storico-centoporte-per-cocconato-riviera-del-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stazione di Asti",
+    "manifest": "",
+    "nome": "Treno Storico Centoporte per Cocconato - Riviera del Monferrato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
    }
   },
   "nome": "Asti",
@@ -664,6 +725,23 @@
   "nome": "Boves",
   "prov": "CN"
  },
+ "bozzole": {
+  "eventi": {
+   "di-dla-festa-sagra-della-patata-bozzole": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Dì Dla Festa - Sagra della Patata",
+    "nome": "Dì Dla Festa - Sagra della Patata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-17"
+   }
+  },
+  "nome": "Bozzole",
+  "prov": "AL"
+ },
  "bra": {
   "eventi": {
    "castelli-aperti-a-ferragosto-la-zizzola-bra": {
@@ -697,6 +775,23 @@
   },
   "nome": "Brossasco",
   "prov": "CN"
+ },
+ "bubbio": {
+  "eventi": {
+   "bubbio-festa-delle-figlie": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pala Asti DOCG del Giardino dei Sogni",
+    "manifest": "Bubbio #Festa delle Figlie",
+    "nome": "Bubbio #Festa delle Figlie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   }
+  },
+  "nome": "Bubbio",
+  "prov": "AT"
  },
  "busca": {
   "eventi": {
@@ -738,6 +833,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-13"
+   },
+   "sagra-dell-aglio-e-del-tacchino-festa-di-san-berna-buttigliera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Sagra dell'Aglio e del Tacchino - Festa di San Bernardo",
+    "nome": "Sagra dell'Aglio e del Tacchino - Festa di San Bernardo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
    }
   },
   "nome": "Buttigliera d'Asti",
@@ -807,6 +913,61 @@
  },
  "calosso": {
   "eventi": {
+   "a-calosso-museo-e-dintorni-agosto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Memorie di Futuro",
+    "manifest": "A Calosso Museo e Dintorni",
+    "nome": "A Calosso Museo e Dintorni - Agosto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
+   "a-calosso-museo-e-dintorni-fiera-del-rapule": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Memorie di Futuro",
+    "manifest": "A Calosso Museo e Dintorni",
+    "nome": "A Calosso Museo e Dintorni - Fiera del Rapulé",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
+   "a-calosso-museo-e-dintorni-ottobre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Memorie di Futuro",
+    "manifest": "A Calosso Museo e Dintorni",
+    "nome": "A Calosso Museo e Dintorni - Ottobre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
+   "a-calosso-museo-e-dintorni-settembre-i": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Memorie di Futuro",
+    "manifest": "A Calosso Museo e Dintorni",
+    "nome": "A Calosso Museo e Dintorni - Settembre I",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "a-calosso-museo-e-dintorni-settembre-ii": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Memorie di Futuro",
+    "manifest": "A Calosso Museo e Dintorni",
+    "nome": "A Calosso Museo e Dintorni - Settembre II",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv": {
     "anni": [
      2026
@@ -933,6 +1094,78 @@
    }
   },
   "nome": "Casal Cermelli",
+  "prov": "AL"
+ },
+ "casalemonferrato": {
+  "eventi": {
+   "in-viaggio-per-crescere-con-le-storie-nati-per-leg-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Ragazzi E. Luzzati",
+    "manifest": "Biblioteca Ragazzi E. Luzzati - Appuntamenti di Settembre 2026",
+    "nome": "In viaggio per crescere con le storie (Nati per Leggere con i raccontastorie) - Biblioteca Ragazzi E. Luzzati",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-24"
+   },
+   "la-polizia-locale-incontra-i-piccoli-lettori-regol-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Ragazzi E. Luzzati",
+    "manifest": "Biblioteca Ragazzi E. Luzzati - Appuntamenti di Settembre 2026",
+    "nome": "La Polizia Locale incontra i piccoli lettori: regole della strada, segnali e sicurezza - Biblioteca Ragazzi E. Luzzati",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-10"
+   },
+   "laboratorio-orticolo-del-prof-ganora-il-girasole-b-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Ragazzi E. Luzzati",
+    "manifest": "Biblioteca Ragazzi E. Luzzati - Appuntamenti di Settembre 2026",
+    "nome": "Laboratorio orticolo del Prof. Ganora: Il girasole, bello come il Sole! - Biblioteca Ragazzi E. Luzzati",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-15"
+   },
+   "spazio-creativita-i-colori-dell-autunno-biblioteca-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Ragazzi E. Luzzati",
+    "manifest": "Biblioteca Ragazzi E. Luzzati - Appuntamenti di Settembre 2026",
+    "nome": "Spazio creatività: i colori dell'autunno - Biblioteca Ragazzi E. Luzzati",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-29"
+   },
+   "teatro-in-inglese-con-kids-us-around-the-world-bib-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Ragazzi E. Luzzati",
+    "manifest": "Biblioteca Ragazzi E. Luzzati - Appuntamenti di Settembre 2026",
+    "nome": "Teatro in inglese con Kids&Us: Around the World - Biblioteca Ragazzi E. Luzzati",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-17"
+   },
+   "vietato-sputare-fuoco-con-ass-penelope-emozioni-pe-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Ragazzi E. Luzzati",
+    "manifest": "Biblioteca Ragazzi E. Luzzati - Appuntamenti di Settembre 2026",
+    "nome": "Vietato sputare fuoco con Ass. Penelope: emozioni per bimbi - Biblioteca Ragazzi E. Luzzati",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   }
+  },
+  "nome": "Casale Monferrato",
   "prov": "AL"
  },
  "casalnoceto": {
@@ -1916,6 +2149,23 @@
   "nome": "Confreria - Cuneo",
   "prov": "CN"
  },
+ "cortazzone": {
+  "eventi": {
+   "sagra-della-tagliatella-al-tartufo-cortazzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Feste",
+    "manifest": "16ª Sagra della Tagliatella al Tartufo",
+    "nome": "16ª Sagra della Tagliatella al Tartufo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   }
+  },
+  "nome": "Cortazzone",
+  "prov": "AT"
+ },
  "cortemilia": {
   "eventi": {
    "cortemilia-comics-games": {
@@ -1962,6 +2212,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "stramangiando-pro-loco-motta-di-costigliole-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo Motta di Costigliole d'Asti",
+    "manifest": "",
+    "nome": "Stramangiando 2026 - Pro Loco Motta di Costigliole d'Asti",
+    "organizza": "Pro Loco Motta di Costigliole d'Asti",
+    "pagina": true,
+    "ultima": "2026-09-27"
    }
   },
   "nome": "Costigliole d'Asti",
@@ -2776,6 +3037,23 @@
   "nome": "Frassino",
   "prov": "CN"
  },
+ "frinco": {
+  "eventi": {
+   "frinco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tensostruttura Palageo",
+    "manifest": "Frinco 2026",
+    "nome": "Frinco 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Frinco",
+  "prov": "AT"
+ },
  "garbagna": {
   "eventi": {
    "ferragosto-in-piazza-doria-con-i-deejays-in-tour-p-garbagna": {
@@ -3088,6 +3366,23 @@
   "nome": "Mantovana",
   "prov": "AL"
  },
+ "molare": {
+  "eventi": {
+   "polentone-di-molare": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Molare",
+    "manifest": "Polentone di Molare",
+    "nome": "Polentone di Molare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   }
+  },
+  "nome": "Molare",
+  "prov": "AL"
+ },
  "mombarcaro": {
   "eventi": {
    "sagra-dello-gnocco-festa-patronale-mombarcaro": {
@@ -3104,6 +3399,40 @@
   },
   "nome": "Mombarcaro",
   "prov": "CN"
+ },
+ "mombaruzzo": {
+  "eventi": {
+   "vendemmia-in-vigna-con-i-bambini-vini-piana-mombaruzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vini Piana",
+    "manifest": "Vendemmia in Vigna con i Bambini",
+    "nome": "Vendemmia in Vigna con i Bambini - Vini Piana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   }
+  },
+  "nome": "Mombaruzzo",
+  "prov": "AT"
+ },
+ "mombercelli": {
+  "eventi": {
+   "rewined-festival-mombercelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Unione Europea",
+    "manifest": "REwineD Festival",
+    "nome": "REwineD Festival",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   }
+  },
+  "nome": "Mombercelli",
+  "prov": "AT"
  },
  "monasterobormida": {
   "eventi": {
@@ -3607,6 +3936,23 @@
   "nome": "Ormea",
   "prov": "CN"
  },
+ "osasco": {
+  "eventi": {
+   "festa-patronale-osasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Festa Patronale",
+    "manifest": "Festa Patronale Osasco 2026",
+    "nome": "Festa Patronale Osasco 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-10"
+   }
+  },
+  "nome": "Osasco",
+  "prov": "CN"
+ },
  "ovada": {
   "eventi": {
    "ovada-in-festa-pro-loco-ovada-e-del-monferrato-ova": {
@@ -3696,6 +4042,23 @@
   },
   "nome": "Pamparato",
   "prov": "CN"
+ },
+ "parodiligure": {
+  "eventi": {
+   "sagra-di-seisi-parodi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tramontana",
+    "manifest": "36ª Sagra di Seisi",
+    "nome": "36ª Sagra di Seisi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-21"
+   }
+  },
+  "nome": "Parodi Ligure",
+  "prov": "AL"
  },
  "pasturana": {
   "eventi": {
@@ -3803,6 +4166,23 @@
   },
   "nome": "Pontechianale",
   "prov": "CN"
+ },
+ "ponti": {
+  "eventi": {
+   "contrade-in-fiera-ponti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Contrade in Fiera Ponti 2026",
+    "nome": "Contrade in Fiera Ponti 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Ponti",
+  "prov": "AL"
  },
  "ponzanomonferrato": {
   "eventi": {
@@ -4198,6 +4578,23 @@
   },
   "nome": "Roburent",
   "prov": "CN"
+ },
+ "roccadarazzo": {
+  "eventi": {
+   "i-bambini-del-palio-mostra-fotografica-di-enzo-isa-rocca-d-arazzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Comunale - Sala Consiliare",
+    "manifest": "",
+    "nome": "I Bambini del Palio - Mostra fotografica di Enzo Isaia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
+   }
+  },
+  "nome": "Rocca d'Arazzo",
+  "prov": "AT"
  },
  "roccadebaldi": {
   "eventi": {
@@ -5217,6 +5614,17 @@
  },
  "serravallescrivia": {
   "eventi": {
+   "edutainment-imparare-divertendosi-play-land-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Serravalle Designer Outlet",
+    "manifest": "",
+    "nome": "Edutainment - Imparare, Divertendosi - Play Land",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
    "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia": {
     "anni": [
      2026
@@ -5718,6 +6126,84 @@
   "nome": "Viguzzolo",
   "prov": "AL"
  },
+ "villadelforo": {
+  "eventi": {
+   "caraoki-sotto-le-stelle-con-digei-soms-powered-by-villa-del-foro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "SOMS Villa del Foro",
+    "manifest": "Festa Patronale di Santa Varena",
+    "nome": "CaraOKI sotto le Stelle con Digei SOMS powered by Heckler DJ",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-30"
+   },
+   "concerto-di-musica-da-camera-orchestra-da-camera-o-villa-del-foro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parrocchia di Santa Varena",
+    "manifest": "Festa Patronale di Santa Varena",
+    "nome": "Concerto di Musica da Camera - Orchestra da Camera Oltremusica",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-02"
+   },
+   "pomeriggio-di-festa-giochi-per-tutti-i-bambini-e-r-villa-del-foro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo ASD Forum Fulvii",
+    "manifest": "Festa Patronale di Santa Varena",
+    "nome": "Pomeriggio di Festa - Giochi per tutti i bambini e ragazzi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "serata-da-ballo-nu-disco-con-dj-john-heckler-villa-del-foro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "SOMS Villa del Foro",
+    "manifest": "Festa Patronale di Santa Varena",
+    "nome": "Serata da Ballo NU-DISCO con DJ John Heckler",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Villa del Foro",
+  "prov": "AL"
+ },
+ "villanovadasti": {
+  "eventi": {
+   "festa-patronale-di-sant-isidoro-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Le Torri",
+    "manifest": "Festa Patronale di Sant'Isidoro",
+    "nome": "Festa Patronale di Sant'Isidoro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   },
+   "villanova-summer-festival-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Le Torri",
+    "manifest": "",
+    "nome": "Villanova Summer Festival",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Villanova d'Asti",
+  "prov": "AT"
+ },
  "villaromagnano": {
   "eventi": {
    "asd-villaromagnano-festeggiamo-i-30-anni": {
@@ -5925,6 +6411,17 @@
     "organizza": "Pro Loco Voltaggio / PazzoAnimazione",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "voltaggio-di-note-comune-di-voltaggio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "Voltaggio di...Note - Comune di Voltaggio",
+    "organizza": "Comune di Voltaggio",
+    "pagina": true,
+    "ultima": "2026-08-21"
    }
   },
   "nome": "Voltaggio",
