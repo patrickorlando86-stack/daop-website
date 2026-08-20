@@ -54,11 +54,17 @@ URL = f"{SITE_URL}/{FILE}"
 # foglio") e guarda infatti DUE colonne; questo file era nato credendo il
 # contrario e ne guardava una.
 #
-# Cosa e' successo il 20/08 alle 02:49: le righe A001-A004 della tab Attivita
-# si sono fuse dentro le celle della prima riga, la tab e' diventata
-# illeggibile, il ripiego su 'Attività' (che non esiste) ha restituito Luoghi,
-# e il controllo si e' accontentato della colonna 'Nome' — che Luoghi ha, e ha
-# anche Eventi. Risultato: 895 schede di agriturismi al posto di 5 corsi.
+# Cosa e' successo il 20/08 alle 02:49, e sono TRE difetti in fila — nessuno
+# dei quali stava nel foglio, che era a posto:
+#   1. _scarica() non passava headers=1, quindi gviz ha indovinato male quante
+#      righe fossero intestazione e ha reso la tab illeggibile (il perche' sta
+#      nel commento dentro _scarica);
+#   2. il ripiego su 'Attività' con l'accento, che non esiste, ha restituito
+#      Luoghi — vedi sopra, gviz risponde col primo foglio;
+#   3. il controllo si e' accontentato della colonna 'Nome', che Luoghi ha e ha
+#      anche Eventi.
+# Risultato: 895 schede di agriturismi al posto di 5 corsi. Il primo difetto e'
+# la causa, gli altri due sono i due airbag che non si sono aperti.
 #
 # Quindi non basta chiedersi "ho letto qualcosa": va chiesto "quello che ho
 # letto sono corsi".
@@ -101,6 +107,15 @@ COLONNE = {
     'lng': ('longitude', 'lng', 'lon'),
     'premium': ('premium',),
     'verificato': ('verificatoil', 'verificato il', 'verificato'),
+    # Chiesta da Giovanni il 20/08: "Scopri il corso →". Non c'era nessun campo
+    # per il sito della realta', quindi la sua scheda finiva senza via d'uscita.
+    'sito': ('sito', 'website', 'sito web', 'link', 'url'),
+    # Come su luoghi.html: chi paga porta piu' TESTO, non una posizione migliore.
+    'descr_premium': ('descrizione premium', 'descr premium', 'descrizione_premium'),
+    # L'open day e' un EVENTO e la sua casa e' la tab Eventi: qui ci sta solo il
+    # codice per agganciarlo, cosi' la scheda lo mostra e il calendario resta
+    # l'unico posto in cui l'evento vive davvero.
+    'openday': ('openday', 'open day', 'codice evento', 'id evento'),
 }
 
 # Fasce del filtro eta', quelle suggerite nel documento. Il confronto e' per
@@ -143,8 +158,24 @@ def _e_intestazione(riga):
 
 
 def _scarica(tab):
+    # headers=1 NON e' cosmetico, ed e' la riga che ha rotto la pagina il
+    # 20/08/2026 non essendoci. Senza quel parametro gviz *indovina* quante
+    # righe sono intestazione, e indovina guardando i tipi: se le prime righe di
+    # dati sono tutte testo, decide che sono intestazione anche loro e le fonde
+    # in una sola, unendo le etichette con uno spazio. In questa tab e'
+    # successo esattamente: CODICE, Nome, Organizzatore, Categoria, Annate sono
+    # stringhe pure anche nei dati, quindi delle sei righe (intestazione +
+    # A001-A005) gviz ne ha fuse cinque e ne ha lasciata una — A005, l'unica con
+    # un numero secco in Annate (2012) invece di un intervallo, che rompeva il
+    # motivo. Risultato: 1 riga al posto di 5, intestazione illeggibile, tab
+    # scartata. Il foglio era e resta a posto.
+    #
+    # Le altre tab non ne soffrono per caso, non per merito: Eventi ha le date,
+    # Luoghi e Centri hanno CAP e coordinate, cioe' un tipo diverso subito. Con
+    # headers=1 non c'e' piu' niente da indovinare.
     url = (f"https://docs.google.com/spreadsheets/d/{G.SHEET_ID}/gviz/tq"
            f"?tqx=out:csv&sheet={urllib.parse.quote(tab, safe='')}"
+           f"&headers=1"
            f"&_cb={int(datetime.datetime.now().timestamp())}")
     req = urllib.request.Request(url, headers={
         "User-Agent": "daop-corsi-bot", "Cache-Control": "no-cache"})
@@ -288,6 +319,12 @@ def card(c, idx):
             bits.append(G.esc(G.trunc(testo, 34)))
 
     tags = []
+    # Chi paga si vede, e si vede che ha pagato: e' la stessa dichiarazione che
+    # luoghi.html fa in #come-ordiniamo, e non e' galanteria — art. 22 comma
+    # 4-bis del Codice del consumo. Quello che il premium NON fa e' spostare la
+    # riga: resta al suo posto alfabetico, dentro la sua realta'.
+    if is_premium(c):
+        tags.append('<span class="ev-pill is-pagata">★ Scheda completa</span>')
     # La prova e' il campo che decide: un genitore sceglie un corso dopo averlo
     # fatto provare al figlio. Sta in riga, non sepolta nel dettaglio.
     if c['prova']:
@@ -296,8 +333,22 @@ def card(c, idx):
         tags.append(f'<span class="ev-pill">{G.esc(G.trunc(c["prezzo"], 22))}</span>')
 
     righe_det = []
-    if c['descr']:
-        righe_det.append(f'<p class="event-desc">{G.esc(c["descr"])}</p>')
+    # La locandina si guarda, quindi qui va l'originale e non la miniatura — e'
+    # la stessa regola degli elenchi al contrario. Sta dentro un dettaglio
+    # chiuso, che il browser non disegna: con loading=lazy non parte nessuna
+    # richiesta finche' la riga non si apre.
+    if is_premium(c) and c['loc']:
+        src = G.loc_path(c['loc'])
+        if src:
+            righe_det.append(
+                f'<img class="co-loc" src="{G.esc(src)}" alt="Locandina di '
+                f'{G.esc(c["nome"])}" loading="lazy" decoding="async">')
+    # Il premium aggiunge TESTO, non posizione: se c'e' la descrizione lunga si
+    # usa quella, se no si ripiega su quella normale. Mai il contrario.
+    testo = (c['descr_premium'] if is_premium(c) and c['descr_premium']
+             else c['descr'])
+    if testo:
+        righe_det.append(f'<p class="event-desc">{G.esc(testo)}</p>')
     if c['prova']:
         righe_det.append(f'<p class="co-prova">Prova: {G.esc(c["prova"])}</p>')
     dove = c['sede'] or c['citta']
@@ -321,6 +372,16 @@ def card(c, idx):
     if dati:
         righe_det.append('<dl class="co-dati">' + ''.join(
             f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>')
+    # "Scopri il corso →". Il rel non e' una formalita': un link commerciale che
+    # passa PageRank e' uno schema di link, e si paga con un'azione manuale sul
+    # DOMINIO — cioe' su eventi.html, che regge il traffico. sponsored dove la
+    # presenza e' pagata, nofollow dove e' una nostra segnalazione. Stessa
+    # regola di riga() in genera_luoghi.py.
+    if c['sito']:
+        rel = 'sponsored' if is_premium(c) else 'nofollow'
+        righe_det.append(
+            f'<p class="co-fuori"><a href="{G.esc(c["sito"])}" '
+            f'rel="{rel} noopener" target="_blank">Scopri il corso →</a></p>')
     if c['verificato']:
         # Un corso non scade da solo come un evento: senza questa riga una
         # scheda ferma da un anno e' identica a una aggiornata ieri.
@@ -412,6 +473,11 @@ CSS = """
 .co-realta h2{font-size:1.18rem;margin:0 0 2px}
 .co-realta p{margin:0;font-size:.92rem;opacity:.75}
 .ev-pill.is-prova{background:#eaf7ee;color:#2E7D46}
+.ev-pill.is-pagata{background:#fdf3e0;color:#8a5a12}
+.co-loc{width:100%;max-width:320px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+.co-fuori{margin:10px 0 0}
+.co-fuori a{font-weight:700;color:#2c5d8f;text-decoration:none}
+.co-fuori a:hover{text-decoration:underline}
 .co-prova{margin:8px 0 0;font-weight:600;color:#2E7D46}
 .co-dati{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:12px 0 0;font-size:.93rem}
 .co-dati dt{opacity:.65}
