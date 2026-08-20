@@ -589,12 +589,11 @@
       <span class="nav-logo-text">DA<span>OP</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="/index.html#chi-siamo">Chi Siamo</a></li>
-      <li><a href="/eventi.html" >Eventi</a></li><li><a href="/luoghi.html">Luoghi</a></li><li><a href="/rubriche.html">Rubriche</a></li>
+      <li><a href="/eventi.html" >Eventi</a></li>
+      <li><a href="/luoghi.html">Luoghi</a></li>
+      <li><a href="/centri-estivi.html">Centri estivi</a></li>
+      <li><a href="/corsi.html">Corsi</a></li>
       <li><a href="/ginetto.html">Ginetto AI</a></li>
-      <li><a href="/piattosano.html">Il Piatto Sano</a></li>
-      <li><a href="/libri.html">Libri</a></li>
-      <li><a href="/media.html">Media</a></li>
       <li><a href="/index.html#social" class="nav-cta">Contatti</a></li>
     </ul>
     <button type="button" class="hamburger" onclick="toggleMobile()" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -603,14 +602,17 @@
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="/index.html#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
   <a href="/eventi.html" onclick="closeMobile()">Eventi</a>
   <a href="/luoghi.html" onclick="closeMobile()">Luoghi</a>
-  <a href="/rubriche.html" onclick="closeMobile()">Rubriche</a>
+  <a href="/centri-estivi.html" onclick="closeMobile()">Centri estivi</a>
+  <a href="/corsi.html" onclick="closeMobile()">Corsi</a>
+  <span class="mm-sep">Il resto di DAOP</span>
   <a href="/ginetto.html" onclick="closeMobile()">Ginetto AI</a>
+  <a href="/rubriche.html" onclick="closeMobile()">Rubriche</a>
   <a href="/piattosano.html" onclick="closeMobile()">Il Piatto Sano</a>
   <a href="/libri.html" onclick="closeMobile()">Libri</a>
   <a href="/media.html" onclick="closeMobile()">Media</a>
+  <a href="/index.html#chi-siamo" onclick="closeMobile()">Chi Siamo</a>
   <a href="/index.html#social" onclick="closeMobile()">Contatti</a>
 </div>
 
@@ -632,6 +634,14 @@
   e la domanda di un genitore non è "cosa si fa sabato" ma "dove porto mio figlio quest'anno".
   Qui trovi quello che c'è, con quello che serve davvero per decidere: che età prende,
   che giorni, e se si può provare prima di iscriversi.</p>
+    <div class="ev-toolbar" id="co-toolbar">
+      <div class="ev-search">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="co-q" placeholder="Cerca un corso, una societa', un paese…" aria-label="Cerca fra i corsi" autocomplete="off">
+      </div>
+      <select class="ev-select" data-campo="eta" aria-label="Filtra per età del bambino"><option value="all">Età</option><option value="6-8">6-8 anni</option><option value="9-11">9-11 anni</option><option value="12-14">12-14 anni</option></select>
+    </div>
+    <div class="ev-viewbar"><p class="events-count" id="co-count" role="status" aria-live="polite"></p></div>
 
   <div class="co-realta" id="r-pgs-roccavione" data-lista="l-pgs-roccavione">
     <h2>PGS Roccavione</h2>
@@ -718,8 +728,8 @@
   La scheda è gratuita e la compiliamo noi: basta mandarci la locandina che avete già.
   Molte realtà non hanno un sito, e questa pagina diventa il posto dove le famiglie
   vi trovano. <a href="/ginetto.html">Scrivici qui</a>.</p>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">cosa si fa oggi e questo weekend</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">dove andare quando non c&#x27;è niente in programma</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">estate, Natale e Pasqua, con le iscrizioni</span></a></div></section>
   <div class="co-actions">
-    <a class="btn btn-navy" href="/eventi.html">Eventi di oggi</a>
     <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
   </div>
 </article>
@@ -737,9 +747,11 @@
       <div class="footer-col-title">Prodotti</div>
       <div class="footer-col-links">
         <a href="/eventi.html">Eventi</a>
+        <a href="/luoghi.html">Luoghi</a>
+        <a href="/centri-estivi.html">Centri estivi</a>
         <a href="/corsi.html">Corsi</a>
-        <a href="/rubriche.html">Rubriche</a>
         <a href="https://ginettoapp.it" target="_blank" rel="noopener">Ginetto AI</a>
+        <a href="/rubriche.html">Rubriche</a>
         <a href="/piattosano.html">Il Piatto Sano</a>
         <a href="/libri.html">Libri</a>
         <a href="/esploratore.html">Esploratore</a>

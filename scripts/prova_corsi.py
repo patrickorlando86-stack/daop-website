@@ -111,8 +111,11 @@ corsi.append(corso(
     sito='https://www.santibriganti.it/corsi-teatro-caraglio',
     openday=OD_TEATRO, premium='si', verificato='20/08/2026'))
 
-# Con 6 corsi la barra dei filtri non uscirebbe: qui si abbassa la soglia.
-G.MIN_FILTRI = 2
+# NOTA: qui c'era "G.MIN_FILTRI = 2" per forzare la barra dei filtri, che con
+# 6 corsi non sarebbe uscita. Dal 20/08/2026 non serve piu': la soglia di
+# conteggio e' caduta e i comandi si stampano quando dividono. Questa pagina
+# adesso mostra il comportamento VERO del generatore, non una forzatura — che
+# e' esattamente quello che una pagina dimostrativa deve fare.
 
 FASCIA = (
     '  <div class="co-prova-avviso">\n'

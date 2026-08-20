@@ -8,7 +8,7 @@
 //      pagina e' fatta cosi': N pagine su template identico col nome scambiato
 //      sono scaled content abuse, e i corsi sono la cosa piu' fotocopiabile che
 //      abbiamo ("Under 8", "Under 10", "Under 12" della stessa societa').
-//   2. Sotto MIN_FILTRI la barra dei filtri NON si stampa.
+//   2. Un comando si stampa quando DIVIDE, non quando l'elenco e' lungo.
 //   3. L'eta' si CALCOLA da annate + stagione, non si copia dal foglio.
 //   4. Nei referenti vanno i NOMI, mai i numeri di telefono.
 //   5. Quello che sta in pagina sono CORSI, e ogni realta' ha la sua ancora.
@@ -49,20 +49,71 @@ module.exports = async function corsi(browser) {
   const schede = await page.locator('.event-card').count();
   r.ok(schede > 0, `${schede} corsi in pagina`);
 
-  // ── 2. i filtri solo quando si guadagnano il posto ────────────────────
-  const MIN = 12;
+  // ── 2. un comando si stampa quando DIVIDE, non quando l'elenco e' lungo ─
+  // La soglia di conteggio (sotto 12 corsi niente barra) e' caduta il
+  // 20/08/2026, per decisione di Patrick. Il criterio che resta guarda i dati
+  // invece di contarli, ed e' migliore: dodici corsi tutti 6-8 anni non hanno
+  // bisogno di una tendina eta', cinque corsi da 6 a 14 anni si'.
+  //
+  // La prova e' a DUE facce apposta: se nessun campo dividerebbe la barra NON
+  // deve esserci, se almeno uno divide deve esserci. Una prova che controlla
+  // solo il caso in cui la barra c'e' passerebbe a vuoto su una pagina che non
+  // la stampa piu' per sbaglio.
   const toolbar = await page.locator('#co-toolbar').count();
-  if (schede < MIN) {
-    r.ok(toolbar === 0,
-      `sotto ${MIN} corsi la barra dei filtri non si stampa (${schede} corsi)`);
-  } else {
-    r.ok(toolbar === 1, `sopra ${MIN} corsi la barra dei filtri c'e'`);
+  const distinti = await page.$$eval('.event-card', (cs) => {
+    const quanti = (f) => new Set(cs.map(f).filter(Boolean)).size;
+    // Le stesse fasce di FASCE_ETA, confrontate per sovrapposizione come nel
+    // generatore: un corso 6-11 tocca sia "6-8" sia "9-11".
+    const FASCE = [[0, 3], [3, 5], [6, 8], [9, 11], [12, 14], [15, 99]];
+    const fasce = new Set();
+    cs.forEach((c) => {
+      const lo = Number(c.dataset.etamin);
+      const hi = Number(c.dataset.etamax);
+      if (!Number.isFinite(lo) || !Number.isFinite(hi)) return;
+      FASCE.forEach(([a, b]) => { if (lo <= b && hi >= a) fasce.add(a + "-" + b); });
+    });
+    return {
+      cat: quanti((c) => c.dataset.cat),
+      citta: quanti((c) => c.dataset.city),
+      fasce: fasce.size,
+    };
+  });
+  const divide = distinti.cat > 1 || distinti.citta > 1 || distinti.fasce > 1;
+  r.ok(toolbar === (divide ? 1 : 0),
+    `discipline ${distinti.cat}, comuni ${distinti.citta}, fasce eta ${distinti.fasce}`
+    + ` -> ${divide ? "almeno un comando divide" : "nessun comando dividerebbe"}`
+    + `, barra ${toolbar ? "stampata" : "non stampata"}`);
+
+  if (toolbar) {
     // Una tendina con una voce sola e' un comando che non fa niente.
     const inutili = await page.$$eval('#co-toolbar select', (sels) =>
       sels.filter((s) => s.options.length <= 2).map((s) => s.getAttribute('data-campo')));
     r.ok(inutili.length === 0, inutili.length
       ? `tendine con una scelta sola: ${inutili.join(', ')}`
       : 'ogni tendina ha almeno due scelte vere');
+    // Nessuna voce di tendina puo' dare zero risultati. E' la stessa regola
+    // della tendina con una voce sola, un gradino piu' in la': "0-3 anni" su
+    // una pagina che parte dai 6 e' un comando che non fa niente, e chi lo
+    // sceglie si trova la pagina vuota e pensa che il filtro sia rotto.
+    const aVuoto = [];
+    for (const campo of await page.$$eval('#co-toolbar select',
+      (ss) => ss.map((s2) => s2.getAttribute('data-campo')))) {
+      const sel = page.locator(`#co-toolbar [data-campo="${campo}"]`);
+      const valori = await sel.evaluate((s2) => [...s2.options].map((o) => o.value).slice(1));
+      for (const v of valori) {
+        await sel.selectOption(v);
+        await page.waitForTimeout(120);
+        const rimaste = await page.$$eval('.event-card',
+          (cs) => cs.filter((c) => c.offsetParent !== null).length);
+        if (rimaste === 0) aVuoto.push(`${campo}=${v}`);
+      }
+      await sel.selectOption('all');
+      await page.waitForTimeout(120);
+    }
+    r.ok(aVuoto.length === 0, aVuoto.length
+      ? `voci di tendina che svuotano la pagina: ${aVuoto.join(', ')}`
+      : 'nessuna voce di tendina porta a zero risultati');
+
     // Un gruppo svuotato dai filtri si porta via la sua intestazione: il titolo
     // sta PRIMA del gruppo e fuori da esso, ed e' il caso che resta in aria.
     await page.locator('#co-q').fill('zzzznessuno');
@@ -73,6 +124,7 @@ module.exports = async function corsi(browser) {
     await page.locator('#co-q').fill('');
     await page.waitForTimeout(250);
   }
+
 
   // ── il dettaglio si apre e dice qualcosa ──────────────────────────────
   await page.locator('.event-card .ev-row').first().click();

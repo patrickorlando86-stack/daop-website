@@ -494,14 +494,43 @@ def _emoji(c):
     return '🎓'
 
 
-def toolbar(corsi):
-    """Sotto MIN_FILTRI non si stampa niente: si scorre prima l'elenco che una
-    tendina. E una tendina con una voce sola e' un comando che non fa niente.
+def _fasce_coperte(corsi):
+    """Le fasce d'eta' che l'elenco tocca davvero, nell'ordine di FASCE_ETA.
 
-    Oggi la pagina ha 5 corsi di una societa' sola: la barra non esce, ed e'
-    giusto. Esce da se' quando i corsi crescono."""
-    if len(corsi) < G.MIN_FILTRI:
-        return ''
+    Il confronto e' per SOVRAPPOSIZIONE, come nel filtro: un corso 6-11 conta
+    sia in "6-8" sia in "9-11", perche' un bambino di 7 anni e uno di 10 ci
+    stanno tutti e due.
+
+    Serve a due cose: decidere se la tendina eta' vale la pena (ne servono
+    almeno due, se no non divide) e decidere QUALI voci stamparci dentro. La
+    seconda non e' un dettaglio: una voce che non puo' che dare zero risultati
+    e' un comando che non fa niente, cioe' la stessa cosa di una tendina con
+    una voce sola, e chi la sceglie si trova la pagina vuota e pensa che sia
+    rotta."""
+    tocche = []
+    for chiave, _ in FASCE_ETA:
+        lo, hi = (int(x) for x in chiave.split('-'))
+        if any(r and r[0] <= hi and r[1] >= lo for r in (eta_range(c) for c in corsi)):
+            tocche.append(chiave)
+    return tocche
+
+
+def toolbar(corsi):
+    """Un comando si stampa quando DIVIDE, non quando l'elenco e' lungo.
+
+    Fino al 20/08/2026 c'era una soglia di conteggio: sotto MIN_FILTRI la barra
+    non usciva, perche' con pochi elementi si scorre prima l'elenco che una
+    tendina. La soglia e' caduta per decisione di Patrick, e il criterio che
+    resta e' migliore perche' guarda i dati invece di contarli: una tendina con
+    una voce sola non si stampa, e nemmeno una che non toglierebbe niente.
+
+    Sui 5 corsi di oggi il conto lo fa da solo: disciplina e comune spariscono
+    (una societa' sola, un paese solo), "solo con prova" sparisce (ce l'hanno
+    tutti), resta l'eta' — che divide davvero, perche' vanno dai 6 ai 14 anni.
+    Disciplina e comune ricompaiono da se' quando entra la seconda realta'.
+
+    Se nessun campo si qualifica non esce nemmeno la casella di ricerca: una
+    barra con dentro solo un campo di testo, sopra cinque righe, e' arredamento."""
     campi = []
     cats = {G.slugify(_cat_foglia(c)): _cat_foglia(c) for c in corsi if _cat_foglia(c)}
     if len(cats) > 1:
@@ -515,11 +544,14 @@ def toolbar(corsi):
                        for k, v in sorted(citta.items(), key=lambda kv: kv[1].lower()))
         campi.append('<select class="ev-select" data-campo="citta" aria-label="Filtra per comune">'
                      f'<option value="all">Comune</option>{opts}</select>')
-    # L'eta' entra solo se le righe la dichiarano davvero: con poche righe
-    # compilate la tendina non toglierebbe niente, cioe' sarebbe un comando che
-    # non fa niente con sei voci invece che con una.
-    if sum(1 for c in corsi if eta_range(c)) >= G.MIN_FILTRI:
-        opts = "".join(f'<option value="{v}">{t}</option>' for v, t in FASCE_ETA)
+    # L'eta' entra se DIVIDE: servono almeno due fasce toccate. Prima si
+    # guardava quante righe dichiarassero un'eta' e si chiedeva MIN_FILTRI, che
+    # e' un'altra domanda — dodici corsi tutti 6-8 anni avrebbero acceso una
+    # tendina inutile, e cinque corsi da 6 a 14 anni la tenevano spenta.
+    coperte = _fasce_coperte(corsi)
+    if len(coperte) > 1:
+        opts = "".join(f'<option value="{v}">{t}</option>'
+                       for v, t in FASCE_ETA if v in coperte)
         campi.append('<select class="ev-select" data-campo="eta" aria-label="Filtra per età del bambino">'
                      f'<option value="all">Età</option>{opts}</select>')
     # "Solo con prova" solo se divide davvero: se ce l'hanno tutti non toglie
@@ -779,8 +811,8 @@ def render(corsi, css, nav, foot):
   La scheda è gratuita e la compiliamo noi: basta mandarci la locandina che avete già.
   Molte realtà non hanno un sito, e questa pagina diventa il posto dove le famiglie
   vi trovano. <a href="/ginetto.html">Scrivici qui</a>.</p>
+{G.blocco_ecosistema('corsi')}
   <div class="co-actions">
-    <a class="btn btn-navy" href="/eventi.html">Eventi di oggi</a>
     <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
   </div>
 </article>
@@ -821,6 +853,9 @@ def main():
         # Il controllo sta QUI, prima di qualunque scrittura, e non in fondo.
         print("[genera_corsi] foglio non letto: lascio la pagina com'è")
         return 0
+    # Il proprio numero prima di render(): la riga delle quattro porte lo
+    # rilegge, e questa pagina la scrive di se' stessa (senza contarsi).
+    G.conteggio_scrivi('corsi', len(corsi))
     css, nav, foot = G._guscio()
     nuovo = render(corsi, css, nav, foot)
     vecchio = open(PATH, encoding='utf-8').read() if os.path.exists(PATH) else ''
