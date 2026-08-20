@@ -293,6 +293,73 @@ def leggi_corsi():
     return out
 
 
+def _registro():
+    """Il registro delle pagine evento, letto una volta sola e indicizzato per
+    nome. E' la stessa fonte da cui nascono le schede: qui serve solo a
+    risolvere il nome di un open day nella sua pagina e nella sua data."""
+    if _registro.cache is None:
+        _registro.cache = {}
+        for slug, rec in G.carica_registro().items():
+            chiave = G.slugify(rec.get('nome') or '')
+            if chiave:
+                _registro.cache.setdefault(chiave, []).append((slug, rec))
+    return _registro.cache
+
+
+_registro.cache = None
+
+
+def openday(c, oggi=None):
+    """La riga "Open day" di un corso: quando e', e il link alla sua scheda.
+
+    IL LEGAME SI SCRIVE UNA VOLTA, nella colonna OpenDay del corso, e il valore
+    e' il NOME dell'evento copiato dalla tab Eventi. Non un codice: un codice
+    andrebbe inventato e ricordato, il nome ce l'hai gia' davanti. E la
+    direzione e' questa e non l'opposta perche' un open day serve PIU' corsi —
+    la PGS ne fa uno per cinque squadre: cosi' e' lo stesso nome in cinque
+    celle, invece di cinque corsi elencati dentro una cella dell'evento.
+
+    L'open day sta nella tab Eventi e non qui perche' HA UNA DATA, cioe' e' un
+    evento: da li' si prende da solo la scheda, il calendario, il JSON-LD, la
+    pagina del comune e il messaggio del giovedi' sul canale. Nessuna di quelle
+    superfici va costruita una seconda volta.
+
+    NON si ricalcola lo slug con slug_evento(): si cerca nel registro, che lo
+    slug se lo porta scritto. Cosi' il legame non dipende dalle regole dello
+    slug ne' dal fatto che nel foglio la citta' sia scritta giusta — e
+    slug_evento() senza citta' restituisce "<nome>-evento", che sarebbe una
+    pagina che non esiste.
+
+    Un nome che non trova niente NON stampa un link rotto: tace, come fa
+    link_luoghi() con le ancore inesistenti. Un link che scarica su una pagina
+    sbagliata e' peggio di nessun link."""
+    voce = (c.get('openday') or '').strip()
+    if not voce:
+        return None
+    trovati = _registro().get(G.slugify(voce))
+    if not trovati:
+        return None
+    oggi = oggi or datetime.date.today()
+    # Un open day passato non si annuncia: sarebbe un invito a una porta chiusa.
+    # Fra piu' edizioni con lo stesso nome vince la prima che deve ancora
+    # finire, che e' quella a cui si fa ancora in tempo ad andare.
+    futuri = []
+    for slug, rec in trovati:
+        try:
+            di = datetime.date.fromisoformat(rec['d_start'])
+            df = datetime.date.fromisoformat(rec['d_end'])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if df >= oggi:
+            futuri.append((di, df, slug, rec))
+    if not futuri:
+        return None
+    di, df, slug, rec = min(futuri, key=lambda x: (x[0], x[2]))
+    return {'url': f"/eventi/{slug}.html",
+            'quando': G.periodo_esteso({'d_start': di, 'd_end': df}),
+            'ora': (rec.get('ora') or '').strip()}
+
+
 def is_premium(c):
     return (c.get('premium') or '').strip().lower().replace('sì', 'si') == 'si'
 
@@ -325,6 +392,11 @@ def card(c, idx):
     # riga: resta al suo posto alfabetico, dentro la sua realta'.
     if is_premium(c):
         tags.append('<span class="ev-pill is-pagata">★ Scheda completa</span>')
+    # L'open day sta in RIGA e non solo nel dettaglio: e' l'unica cosa della
+    # pagina che scade. Un corso lo trovi anche fra un mese, un open day no.
+    od = openday(c)
+    if od:
+        tags.append('<span class="ev-pill is-openday">Open day</span>')
     # La prova e' il campo che decide: un genitore sceglie un corso dopo averlo
     # fatto provare al figlio. Sta in riga, non sepolta nel dettaglio.
     if c['prova']:
@@ -349,6 +421,11 @@ def card(c, idx):
              else c['descr'])
     if testo:
         righe_det.append(f'<p class="event-desc">{G.esc(testo)}</p>')
+    if od:
+        quando = od['quando'] + (f", ore {od['ora']}" if od['ora'] else '')
+        righe_det.append(
+            f'<p class="co-openday"><strong>Open day:</strong> {G.esc(quando)} — '
+            f"<a href=\"{od['url']}\">vedi l'evento →</a></p>")
     if c['prova']:
         righe_det.append(f'<p class="co-prova">Prova: {G.esc(c["prova"])}</p>')
     dove = c['sede'] or c['citta']
@@ -474,6 +551,9 @@ CSS = """
 .co-realta p{margin:0;font-size:.92rem;opacity:.75}
 .ev-pill.is-prova{background:#eaf7ee;color:#2E7D46}
 .ev-pill.is-pagata{background:#fdf3e0;color:#8a5a12}
+.ev-pill.is-openday{background:#2E7D46;color:#fff}
+.co-openday{margin:8px 0 0;color:#2E7D46}
+.co-openday a{color:#2E7D46;font-weight:700}
 .co-loc{width:100%;max-width:320px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
 .co-fuori{margin:10px 0 0}
 .co-fuori a{font-weight:700;color:#2c5d8f;text-decoration:none}

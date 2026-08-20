@@ -184,6 +184,26 @@ module.exports = async function corsi(browser) {
       + (quota < 0.5 ? '' : ' — questa pagina sta pubblicando i LUOGHI, non i corsi'));
   }
 
+  // ── 6. un open day non manda mai su una pagina che non esiste ─────────
+  // Il legame lo scrive una persona in una cella (colonna OpenDay del corso, e
+  // dentro va il NOME dell'evento). Una persona scrive male, o rinomina
+  // l'evento in Eventi e si dimentica del corso: allora openday() deve tacere,
+  // non stampare un link che scarica su un 404.
+  //
+  // Oggi nel foglio non c'e' nessun open day, quindi questa prova conta zero
+  // link — e il conteggio si stampa APPOSTA. E' la lezione del 20/08: una prova
+  // che passa a vuoto e una che passa si somigliano troppo, e per un mese
+  // nessuno se ne accorge.
+  const openday = await page.$$eval('.co-openday a', (as) => as.map((a) => ({
+    href: a.getAttribute('href'), testo: a.closest('.co-openday').textContent.trim() })));
+  const rotti = openday.filter((o) => {
+    if (!/^\/eventi\/[^/]+\.html$/.test(o.href || '')) return true;
+    return !fs.existsSync(path.join(RADICE, o.href.replace(/^\//, '')));
+  }).map((o) => o.href);
+  r.ok(rotti.length === 0, rotti.length
+    ? `open day che puntano a pagine inesistenti: ${rotti.join(', ')}`
+    : `${openday.length} link a open day, tutti verso schede che esistono`);
+
   await ctx.close();
   return r;
 };
