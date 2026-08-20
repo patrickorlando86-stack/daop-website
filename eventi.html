@@ -234,6 +234,7 @@
   .events-list{display:flex;flex-direction:column}
   .ev-dayhead{position:sticky;top:var(--ev-sticky,126px);z-index:20;display:flex;align-items:baseline;gap:10px;margin:0;padding:18px 2px 9px;background:white;border-bottom:1px solid rgba(45,74,92,0.12);font-family:'Playfair Display',serif;font-size:1.18rem;font-weight:800;color:var(--navy)}
   .ev-dayname::first-letter{text-transform:uppercase}
+  .ev-daynote{font-family:'DM Sans',sans-serif;font-size:0.73rem;font-weight:600;font-style:italic;color:var(--text-light)}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
   /* content-visibility: il browser salta stile, layout e disegno delle schede
@@ -5190,34 +5191,74 @@
     }) : null;
     const entroRaggio = c => !vicino || vicino.entro(c);
 
-    function matchDate(el, mode) {
-      if (mode === 'all') return true;
-      const s = new Date(el.dataset.start + 'T00:00:00');
-      const e = new Date(el.dataset.end + 'T23:59:59');
+    const isoLoc = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
+                        '-' + String(d.getDate()).padStart(2, '0');
+
+    // La finestra di date del filtro attivo, in ISO. Sta in una funzione sua
+    // perché la usano in due: matchDate, per tenere o scartare una scheda, e le
+    // intestazioni dei giorni, per spiegare perché una sezione che sta fuori
+    // dalla finestra è comunque lì.
+    function finestra(mode) {
       const now = new Date(); now.setHours(0, 0, 0, 0);
       const dow = now.getDay(); // 0 domenica … 6 sabato
-      if (mode === 'oggi') {
-        const fine = new Date(now); fine.setHours(23, 59, 59, 999);
-        return s <= fine && e >= now;
-      }
+      if (mode === 'oggi') return [isoLoc(now), isoLoc(now)];
       if (mode === 'weekend') {
         const sab = new Date(now); sab.setDate(now.getDate() + (dow === 0 ? -1 : 6 - dow));
-        const dom = new Date(sab); dom.setDate(sab.getDate() + 1); dom.setHours(23, 59, 59, 999);
-        return s <= dom && e >= sab;
+        const dom = new Date(sab); dom.setDate(sab.getDate() + 1);
+        return [isoLoc(sab), isoLoc(dom)];
       }
       if (mode === '7') {
-        const fine = new Date(now); fine.setDate(now.getDate() + 7); fine.setHours(23, 59, 59, 999);
-        return s <= fine && e >= now;
+        const fine = new Date(now); fine.setDate(now.getDate() + 7);
+        return [isoLoc(now), isoLoc(fine)];
       }
       if (mode === 'settimana') {
-        const fine = new Date(now); fine.setDate(now.getDate() + ((7 - dow) % 7)); fine.setHours(23, 59, 59, 999);
-        return s <= fine && e >= now;
+        const fine = new Date(now); fine.setDate(now.getDate() + ((7 - dow) % 7));
+        return [isoLoc(now), isoLoc(fine)];
       }
       if (mode === 'mese') {
-        const fine = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
-        return s <= fine && e >= now;
+        return [isoLoc(now), isoLoc(new Date(now.getFullYear(), now.getMonth() + 1, 0))];
       }
-      return true;
+      return null;
+    }
+
+    function matchDate(el, mode) {
+      const fin = finestra(mode);
+      if (!fin) return true;
+      // Sovrapposizione, non inizio: una sagra che parte venerdì e dura tre
+      // giorni è un evento del weekend anche se è cominciata prima. Le date sono
+      // già in ISO, che si confronta come testo.
+      return el.dataset.start <= fin[1] && el.dataset.end >= fin[0];
+    }
+
+    // Il seguito di quella regola. Una sagra che comincia venerdì e arriva a
+    // domenica resta, giustamente, dentro il filtro "Weekend" - ma la sua
+    // sezione continua a chiamarsi "venerdì 21 agosto", e letta lì dentro
+    // sembra un filtro rotto ("filtro weekend e vedo giovedì", 20/08/2026).
+    // Non è rotto: quelle sezioni ci sono perché quegli eventi CONTINUANO nel
+    // weekend, e adesso l'intestazione lo dice invece di lasciarlo indovinare.
+    function notaGiorno(g, fin, mode, filtrato) {
+      const testa = g.querySelector('.ev-dayhead');
+      if (!testa) return;
+      const conta = testa.querySelector('.ev-daycount');
+      // Il numero a destra era quello scritto stanotte dal generatore: con un
+      // filtro attivo diceva 13 dove se ne vedevano 8, cioè raccontava una
+      // sezione che in quel momento non esisteva.
+      if (conta) {
+        if (conta.dataset.tot === undefined) conta.dataset.tot = conta.textContent;
+        const vivi = g.querySelectorAll('.event-card:not(.is-hidden)').length;
+        conta.textContent = String(filtrato ? vivi : conta.dataset.tot);
+      }
+      let nota = testa.querySelector('.ev-daynote');
+      const serve = fin && g.dataset.day !== 'in-corso' && g.dataset.day < fin[0];
+      if (!serve) { if (nota) nota.remove(); return; }
+      if (!nota) {
+        nota = document.createElement('span');
+        nota.className = 'ev-daynote';
+        testa.insertBefore(nota, conta);
+      }
+      nota.textContent = mode === 'weekend'
+        ? 'cominciano prima, ma ci sono anche nel weekend'
+        : 'cominciano prima, ma continuano';
     }
 
     // I filtri della barra e la selezione del calendario restano separati: il
@@ -5256,7 +5297,12 @@
         vicino.conta(card => passaFiltri(card, f, term, true) && passaCalendario(card));
       }
       if (!filtrato) fuori = 0;
-      days.forEach(g => g.classList.toggle('is-hidden', !g.querySelector('.event-card:not(.is-hidden)')));
+      const finGiorni = vista === 'calendario' ? null : finestra(f.date);
+      days.forEach(g => {
+        g.classList.toggle('is-hidden', !g.querySelector('.event-card:not(.is-hidden)'));
+        notaGiorno(g, finGiorni, vista === 'calendario' ? 'calendario' : f.date,
+                   filtrato || vista === 'calendario');
+      });
       Object.keys(sel).forEach(k => sel[k].classList.toggle('is-on', sel[k].value !== 'all'));
       // Le corsie in evidenza servono da vetrina della pagina "a riposo": con un
       // filtro attivo sparirebbero solo per ripetere quello che c'è sotto.

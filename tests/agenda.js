@@ -75,6 +75,39 @@ module.exports = async function agenda(browser) {
   await page.selectOption('#f-dove', 'all');
   await page.waitForTimeout(200);
 
+  // Filtro "Weekend": una sagra che comincia venerdi' e arriva a domenica resta
+  // (si confronta la sovrapposizione, non l'inizio), ma la sua sezione si chiama
+  // ancora "venerdi'", e senza una riga che lo spieghi sembra un filtro rotto -
+  // segnalato il 20/08/2026, "filtro weekend e vedo giovedi'". Il numero a
+  // destra dell'intestazione, poi, e' quello scritto dal generatore: con un
+  // filtro attivo diceva 13 dove se ne vedevano 8.
+  await page.selectOption('#f-quando', 'weekend');
+  await page.waitForTimeout(300);
+  const sezioni = await page.$$eval('.ev-day:not(.is-hidden)', (gs) => gs.map((g) => ({
+    giorno: g.dataset.day,
+    nota: (g.querySelector('.ev-daynote') || {}).textContent || '',
+    scritto: (g.querySelector('.ev-daycount') || {}).textContent || '',
+    vivi: String(g.querySelectorAll('.event-card:not(.is-hidden)').length),
+  })));
+  r.ok(sezioni.every((s) => s.scritto === s.vivi),
+    `col filtro attivo ogni giorno conta quello che mostra (${sezioni.length} sezioni)`);
+  const sab = await page.evaluate(() => {
+    const d = new Date(); d.setHours(0, 0, 0, 0);
+    const g = d.getDay();
+    const s = new Date(d); s.setDate(d.getDate() + (g === 0 ? -1 : 6 - g));
+    return s.getFullYear() + '-' + String(s.getMonth() + 1).padStart(2, '0') +
+           '-' + String(s.getDate()).padStart(2, '0');
+  });
+  r.ok(sezioni.every((s) => (s.giorno !== 'in-corso' && s.giorno < sab)
+    ? /weekend/.test(s.nota) : s.nota === ''),
+    `la nota spiega tutti e soli i giorni prima di sabato ${sab}`);
+  await page.selectOption('#f-quando', 'all');
+  await page.waitForTimeout(300);
+  r.ok(await page.locator('.ev-daynote').count() === 0,
+    'tolto il filtro, la nota sparisce');
+  r.ok(await page.locator('.event-card:not(.is-hidden)').count() === tot,
+    'tolto il filtro tornano tutte le schede');
+
   // Prestazioni: due convenzioni che si smontano per distrazione.
   // La scheda si prende in fondo all'elenco e non a un indice fisso: il 21/08/2026
   // la prova cercava la 201esima su un'agenda scesa a 199 eventi, e la run
