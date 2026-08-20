@@ -427,135 +427,57 @@ chiederla sarà il canale stesso.
 
 ## Le quattro porte: eventi, luoghi, centri, corsi
 
-Fatto il 20/08/2026. Le quattro famiglie del sito non sono quattro argomenti,
-sono **quattro rapporti col tempo** — ed è il criterio che decide dove va una
-scheda nuova senza doverne discutere ogni volta:
+Fatto il 20/08/2026. Le quattro famiglie sono **quattro rapporti col tempo**, ed
+è il criterio che decide dove va una scheda nuova:
 
-| famiglia | tempo | la domanda del genitore | hub |
-|---|---|---|---|
-| **Eventi** | una data | «cosa si fa sabato» | `eventi.html` |
-| **Luoghi** | nessuno, è sempre lì | «dove andiamo oggi» | `luoghi.html` |
-| **Centri** | una settimana, con iscrizione | «dove lo mando ad agosto» | `centri-estivi.html` |
-| **Corsi** | una stagione, con iscrizione | «dove lo porto quest'anno» | `corsi.html` |
+| famiglia | tempo | hub |
+|---|---|---|
+| **Eventi** | una data | `eventi.html` |
+| **Luoghi** | nessuno, è sempre lì | `luoghi.html` |
+| **Centri** | una settimana, con iscrizione | `centri-estivi.html` |
+| **Corsi** | una stagione, con iscrizione | `corsi.html` |
 
-**Non sono nate pagine nuove, ed era la domanda di partenza** («facciamo quattro
-pagine?»). Le quattro pagine c'erano già tutte, ognuna col suo generatore. Quello
-che mancava non era contenuto: era che due famiglie su quattro non avevano una
-porta da nessuna parte e tre pagine non ricevevano un solo link.
+**Non sono nate pagine nuove**: c'erano già tutte. Mancavano i collegamenti —
+la nav aveva due porte, il footer due *diverse*, e `centri-invernali.html`,
+`centri-pasquali.html` e `piscine.html` ricevevano **zero** link dal corpo di
+qualunque pagina (misurato con `grep`). Stesso guasto già risolto su
+`luoghi.html` il 14/08: «alla nav non ci va nessuno».
 
-### Perché `centri-estivi.html` è l'hub e non nasce un `/centri.html`
+Le decisioni da non rifare al contrario:
 
-Chi cerca scrive «centri estivi», non «centri». Un hub nuovo sarebbe una pagina
-**senza una query sua**, magra nove mesi l'anno, e si metterebbe in mezzo fra
-Google e la pagina che quella query la vince davvero — cioè il guasto
-`eventi.html` / `oggi.html`, dove a perdere è sempre la pagina nuova.
+- **`centri-estivi.html` è l'hub della famiglia, non nasce un `/centri.html`.**
+  Chi cerca scrive «centri estivi»: un hub nuovo sarebbe una pagina senza una
+  query sua, e si metterebbe in mezzo a quella che la vince. Il ponte fra le tre
+  stagioni lo fa `sorelle()`.
+- **Centri e corsi non si fondono**: due picchi stagionali diversi sulla stessa
+  URL si cannibalizzano.
+- **`corsi-provincia-*` si spacca quando una provincia arriva a una dozzina di
+  corsi**, non prima.
+- **La nav sta in sei voci.** A nove era già tagliata sopra i 901px
+  (`.nav-links` è una flex row senza `wrap`); con Centri e Corsi sarebbero state
+  undici. Il resto è sceso nel footer, dove c'era già. Sul telefono non si è
+  tolto niente: le quattro porte davanti, poi `.mm-sep` e sotto tutto il resto.
+- **`blocco_ecosistema()` in `genera_eventi.py`** stampa la riga con le altre
+  tre famiglie, **col numero e non l'etichetta** (lezione di `link_luoghi()`),
+  **in coda al corpo** (regola dell'invito al canale) e **non sulle ~300 schede
+  evento**, che in coda hanno già tre blocchi. I conteggi stanno in
+  `data/conteggi.json`, dove ogni generatore scrive il suo — in ritardo di un
+  giro, come `data/luoghi-comuni.json`. Sotto `MIN_CONTEGGIO` (5) parla la riga
+  descrittiva: «1 corso» è una ragione per non toccare.
+- **Il CSS di `.eco` e `.mm-sep` sta in `assets/css/daop-system.css`**, non nel
+  `<style>` di `eventi.html`: la riga compare anche su pagine che non passano da
+  `_guscio()` (corsi, centri, rubriche).
+- **Nei centri la copertura è dichiarata** (`ZONA = G.PROVINCE_TESTO`, così una
+  provincia nuova allarga i title da sola), **nei corsi è dedotta dai dati**
+  (`zona()`). La differenza è voluta: fuori stagione i centri sono zero, e un
+  title dedotto oscillerebbe due volte l'anno.
+- **Sui corsi la disciplina si scrive**: in riga se la realtà ne mescola più di
+  una, altrimenti una volta sola nell'intestazione del gruppo. È la regola già
+  scritta per le pagine comune.
 
-Il prezzo è che a dicembre l'etichetta atterra su una pagina che si chiama
-«Centri Estivi», e si paga in due modi: in nav l'etichetta dice **«Centri
-estivi»** per intero (essere espliciti costa meno che promettere un hub che non
-esiste), e `sorelle()` stampa su tutte e tre le pagine il link alle altre due col
-periodo attaccato, così chi atterra a dicembre sugli estivi è sugli invernali con
-un tocco.
-
-**Centri e corsi restano separati** anche se in ontologia sono la stessa cosa
-(attività a iscrizione, divise dal calendario scolastico): «centri estivi» ha il
-picco fra marzo e giugno, «corsi per bambini» a settembre. Due picchi sulla
-stessa URL si cannibalizzano.
-
-**`corsi-provincia-*` non si fa adesso**: `corsi.html` ha una realtà sola e il
-suo H1 se lo calcola dai dati (`zona()`). La soglia è quella dei filtri — si
-spacca per provincia quando una provincia arriva a una dozzina di corsi.
-
-### I tre difetti che c'erano, tutti misurati con `grep` sul repo
-
-1. **Nessun posto del sito conteneva le quattro porte.** La nav ne aveva due
-   (Eventi, Luoghi), il footer due **diverse** (Eventi, Corsi).
-2. **Tre pagine erano orfane**: `centri-invernali.html`, `centri-pasquali.html` e
-   `piscine.html` ricevevano **zero** link dal corpo di qualunque pagina —
-   stavano solo in sitemap. `centri-estivi.html` ne aveva uno, la riga nell'hero
-   dell'agenda. È lo stesso guasto già diagnosticato e già risolto su
-   `luoghi.html` il 14/08 («alla nav non ci va nessuno»: messo il ponte dalle
-   schede, 58 → 538 impressioni in due giorni). Qui non avevano nemmeno la nav.
-3. **Cuneo era dichiarato in tre modi.** I tre title dei centri promettevano
-   «Alessandria e Asti», `piscine.html` «Alessandria, Asti e dintorni», il footer
-   di ~330 pagine «Alessandria & Asti». Cuneo è aperta dal 04/08.
-
-### `blocco_ecosistema()`: la riga in coda, e le sue regole
-
-Una funzione sola in `genera_eventi.py` (gli altri tre generatori lo importano
-già), con la tabella `FAMIGLIE`. Le regole sono tutte prese da cose già provate
-qui dentro:
-
-- **Col numero, non l'etichetta.** «825 posti scelti a mano» è una ragione per
-  toccare, «Luoghi» no: è la lezione di `link_luoghi()`. I conteggi stanno in
-  `data/conteggi.json`, dove ogni generatore scrive il suo e legge quelli degli
-  altri — **in ritardo di un giro**, come `data/luoghi-comuni.json` e per la
-  stessa ragione.
-- **Sotto `MIN_CONTEGGIO` (5) parla la riga, non il numero.** «1 corso» è una
-  ragione per non toccare. Stessa aritmetica di `MIN_FILTRI`.
-- **In coda al corpo, non nell'hero.** Regola dell'invito al canale: in cima
-  chiedi qualcosa a chi non ha ancora avuto niente.
-- **Non sulle ~300 schede evento.** Hanno già `blocco_vicini()`, il link ai
-  luoghi del comune e l'invito al canale: una quarta riga in coda è la barra che
-  nessuno guarda, e lo 0,3% misurato sull'invito dice che quella zona è morta. La
-  riga sta sui quattro hub, sulle pagine comune e sulle pagine di intenzione
-  (dentro `_altre_landing()`, che le copre tutte e diciotto in un punto solo).
-- **Sulla home escono in quattro** (`qui=None`, marker `HOME-PORTE`): lì non si è
-  dentro nessuna famiglia, quindi non c'è niente da escludere.
-
-**Il CSS di `.eco` sta in `assets/css/daop-system.css`, non nel `<style>` di
-`eventi.html`** — ed è la scelta opposta al resto del sito, apposta: la riga
-compare anche su pagine che non passano da `_guscio()` (corsi, centri, rubriche),
-e il file condiviso le raggiunge tutte senza fare un diff su 260 file per una
-griglia di tre card. Vale anche per `.mm-sep`.
-
-### La nav sta in sei voci, e non è una preferenza estetica
-
-`Eventi · Luoghi · Centri estivi · Corsi · Ginetto AI · Contatti`. Chi Siamo,
-Rubriche, Il Piatto Sano, Libri e Media sono scesi nel footer, **dove c'erano già
-tutti**.
-
-Il motivo è misurato: la nav a nove voci era **già tagliata** sopra i 901px —
-`.nav-links` è una flex row senza `wrap`, e «Il Piatto» si interrompeva sul bordo
-destro. Aggiungendo Centri e Corsi sarebbero state undici. `tests/porte.js`
-controlla che non risalga sopra le sette.
-
-**Sul telefono non si è tolto niente, si è messo in ordine.** Sotto i 900px il
-cassetto è l'unica nav che esiste, cioè per il 90% del traffico: le quattro porte
-stanno davanti, poi `.mm-sep` («Il resto di DAOP») e sotto tutto il resto. Il
-cassetto è alto 647px in un viewport da 812: ci sta senza scorrere.
-
-### Cuneo: nei centri la copertura è dichiarata, nei corsi è dedotta
-
-`genera_centri.py` legge `ZONA = G.PROVINCE_TESTO`, che è derivata da
-`PROVINCE_PUBBLICATE`: il giorno che si apre una quarta provincia i tre title si
-allargano da soli. Erano nove stringhe scritte a mano.
-
-La differenza con `genera_corsi.zona()` **ha una ragione e non va sanata**: fuori
-stagione l'elenco dei centri è vuoto, quindi un titolo dedotto dalle righe
-diventerebbe «in Piemonte» a settembre e tornerebbe indietro a marzo —
-oscillerebbe due volte l'anno sulla pagina il cui unico asset è l'anzianità
-dell'URL. Un `<title>` che balla è peggio di uno largo: è la stessa aritmetica
-per cui il `robots` delle pagine d'incrocio si decide su trenta giorni e non su
-oggi. Sui corsi la copertura non è dichiarata (il catalogo si costruisce una
-società alla volta) e lì il dato deve comandare.
-
-Corretto anche `PROV_LABEL`, che scritto a mano conosceva solo AL e AT: un centro
-a Cuneo avrebbe messo «CN» nella tendina, e il `.get(p, p)` lo nascondeva invece
-di dirlo.
-
-### Le prove girano su Windows, e prima solo per metà
-
-`tests/_aiuto.js` rimappa le richieste `file:///assets/…` sul repo. Su Windows un
-`src="/assets/…"` dentro una pagina aperta da `file:///C:/…` si risolve sulla
-**radice del disco**: il browser chiedeva `file:///C:/assets/js/daop-vicino.js`,
-il join costruiva un percorso inesistente, la richiesta andava in 404 e la pagina
-girava **senza metà del suo JavaScript** — con le prove che passavano comunque,
-perché quasi tutte guardano l'HTML. Si vedeva solo dove una prova tocca il JS:
-`window.daopVicino` era `undefined` e il «vicino a me» cadeva in timeout su un
-datalist che nessuno aveva riempito. In CI (Linux) non si vedeva per niente.
-
-Chi ha già un Chrome, per non scaricare quello di Playwright:
+`tests/porte.js` difende tutto questo. Su Windows le prove ora caricano davvero
+il JavaScript delle pagine: `_aiuto.js` non toglieva il `/C:` dal percorso e
+metà degli script andava in 404, con le prove verdi.
 
 ```bash
 cd tests && CHROMIUM_PATH="C:/Program Files/Google/Chrome/Application/chrome.exe" npm test
