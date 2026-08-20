@@ -11,6 +11,17 @@
 //   2. Sotto MIN_FILTRI la barra dei filtri NON si stampa.
 //   3. L'eta' si CALCOLA da annate + stagione, non si copia dal foglio.
 //   4. Nei referenti vanno i NOMI, mai i numeri di telefono.
+//   5. Quello che sta in pagina sono CORSI, e ogni realta' ha la sua ancora.
+//
+// La quinta e' nata da un guasto vero, e le prime quattro non l'avevano preso.
+// Il 20/08/2026 alle 02:49 la run notturna ha pubblicato qui le 895 schede del
+// catalogo Luoghi al posto dei 5 corsi della PGS Roccavione: la tab del foglio
+// era diventata illeggibile, gviz aveva risposto col primo foglio del documento
+// e il generatore si era accontentato della colonna 'Nome'. Le quattro prove
+// sopra sono passate tutte — l'eta' e i referenti non c'erano, quindi non
+// avevano niente da controllare, e i filtri c'erano perche' 895 schede stanno
+// sopra la soglia. Passare a vuoto e passare non sono la stessa cosa, e una
+// prova che non sa distinguere le due e' una prova che non serve.
 //
 // La quarta e' l'unica che vale come impegno verso persone vere: sulle
 // locandine di partenza c'erano cinque cellulari di volontarie e, a confronto
@@ -118,6 +129,60 @@ module.exports = async function corsi(browser) {
   // dai filtri lascerebbe 144px di niente in mezzo all'elenco.
   r.ok(await page.$$eval('.co-realta', (hs) => hs.every((h) => h.tagName !== 'SECTION')),
     'i gruppi realta\' sono <div>, non <section> (la trappola del padding)');
+
+  // ── 5a. ogni realta' ha la sua ancora, e non sono tutte nel raccoglitore ─
+  // E' il link che Giovanni manda alle societa' ("guarda, questa e' la tua
+  // paginetta"): #r-pgs-roccavione. Nasce dalla colonna Organizzatore, e quando
+  // il generatore legge il foglio sbagliato quella colonna non c'e' — quindi
+  // TUTTO finisce nel gruppo di scarto "Altre realta'" e l'ancora non esiste
+  // piu'. Il browser, davanti a un frammento che non trova, non sbaglia in modo
+  // visibile: resta in cima alla pagina. Ed e' esattamente il sintomo con cui il
+  // guasto e' stato segnalato.
+  const gruppi = await page.$$eval('.co-realta', (hs) => hs.map((h) => ({
+    id: h.id, testo: h.textContent.trim().slice(0, 60) })));
+  r.ok(gruppi.length > 0, `${gruppi.length} gruppi realta' in pagina`);
+
+  const senzaAncora = gruppi.filter((g) => !/^r-.+/.test(g.id)).map((g) => g.testo);
+  r.ok(senzaAncora.length === 0, senzaAncora.length
+    ? `gruppi senza ancora linkabile: ${senzaAncora.join(' | ')}`
+    : "ogni gruppo realta' ha la sua ancora r-…");
+
+  const doppie = gruppi.map((g) => g.id).filter((id, i, a) => a.indexOf(id) !== i);
+  r.ok(doppie.length === 0, doppie.length
+    ? `ancore doppie, il link va sul gruppo sbagliato: ${doppie.join(', ')}`
+    : "le ancore delle realta' sono tutte diverse");
+
+  // Un gruppo "Altre realta'" ci sta: una riga puo' non avere l'organizzatore.
+  // Che ci sia SOLO quello vuol dire che la colonna non e' stata letta.
+  const vere = gruppi.filter((g) => g.id !== 'r-altre-realta');
+  r.ok(vere.length > 0, vere.length
+    ? `${vere.length} realta’ con un nome proprio e un link da mandare in giro`
+    : "tutti i corsi sono in \"Altre realta'\": la colonna Organizzatore non e' "
+      + "stata letta (foglio sbagliato?), e nessuna societa’ ha un link suo");
+
+  // ── 5b. questa pagina non e' il catalogo dei luoghi ─────────────────
+  // Il controllo vero sta nel generatore (CHIAVI_CORSO in genera_corsi.py), che
+  // rifiuta un foglio senza Organizzatore/Annate/Stagione. Questo lo ricontrolla
+  // dall'altro capo, sul file pubblicato: se un domani il ripiego cambia, il
+  // rosso arriva qui e non da un lettore che ci scrive.
+  //
+  // La soglia e' larga apposta: una societa' sportiva sta legittimamente in
+  // tutti e due i cataloghi — la PGS Roccavione e' un corso E un luogo. Quello
+  // che non e' legittimo e' che si somiglino per meta'.
+  const fileLuoghi = path.join(RADICE, 'luoghi.html');
+  if (fs.existsSync(fileLuoghi)) {
+    const nomi = (testo, cls) => new Set(
+      [...testo.matchAll(new RegExp(`class="${cls}"[^>]*>([^<]{2,90})`, 'g'))]
+        .map((m) => m[1].trim().toLowerCase()).filter(Boolean));
+    const qui = nomi(fs.readFileSync(file, 'utf8'), 'ev-name');
+    const la = nomi(fs.readFileSync(fileLuoghi, 'utf8'), 'lg-nome');
+    const comuni = [...qui].filter((n) => la.has(n));
+    const quota = qui.size ? comuni.length / qui.size : 0;
+    r.ok(quota < 0.5,
+      `${comuni.length} nomi su ${qui.size} stanno anche in luoghi.html `
+      + `(${Math.round(quota * 100)}%)`
+      + (quota < 0.5 ? '' : ' — questa pagina sta pubblicando i LUOGHI, non i corsi'));
+  }
 
   await ctx.close();
   return r;

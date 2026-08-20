@@ -43,12 +43,36 @@ FILE = 'corsi.html'
 PATH = os.path.join(ROOT, FILE)
 URL = f"{SITE_URL}/{FILE}"
 
-# La tab si legge per NOME. Si prova prima senza accento e poi con: gviz su una
-# tab che non esiste NON risponde con un errore, risponde 200 con una pagina che
-# vale zero righe — quindi "tab chiamata in un altro modo" e "tab vuota", da
-# fuori, sono la stessa cosa. Successo davvero il 19/08 alla prima run.
+# La tab si legge per NOME, prima senza accento e poi con.
+#
+# ATTENZIONE, questo commento diceva il falso e il falso e' costato una pagina
+# pubblicata sbagliata: gviz su una tab che NON esiste non risponde con un
+# errore e non risponde con zero righe — risponde col PRIMO foglio del
+# documento, che qui e' "Luoghi". Provato il 20/08/2026:
+# sheet=TabCheNonEsisteAffatto123 torna 895 righe col catalogo dei luoghi.
+# genera_luoghi.py lo sapeva gia' ("gviz risponde comunque, col primo
+# foglio") e guarda infatti DUE colonne; questo file era nato credendo il
+# contrario e ne guardava una.
+#
+# Cosa e' successo il 20/08 alle 02:49: le righe A001-A004 della tab Attivita
+# si sono fuse dentro le celle della prima riga, la tab e' diventata
+# illeggibile, il ripiego su 'Attività' (che non esiste) ha restituito Luoghi,
+# e il controllo si e' accontentato della colonna 'Nome' — che Luoghi ha, e ha
+# anche Eventi. Risultato: 895 schede di agriturismi al posto di 5 corsi.
+#
+# Quindi non basta chiedersi "ho letto qualcosa": va chiesto "quello che ho
+# letto sono corsi".
 TAB = os.environ.get('ATTIVITA_TAB')
 TABS = [TAB] if TAB else ['Attivita', 'Attività']
+
+# Le colonne che un foglio di CORSI ha e gli altri due fogli no: chi organizza,
+# per quali annate, in quale stagione. Ne basta UNA.
+#
+# Non si guardano 'prova', 'iscrizioni' o 'referenti': un foglio minimo puo'
+# non averle. E soprattutto non si guardano 'categoria', 'prezzo', 'orari',
+# 'indirizzo' o 'telefono', che sembrano buone e non lo sono — quelle ce le ha
+# anche Luoghi, quindi sarebbero un controllo che non controlla niente.
+CHIAVI_CORSO = ('org', 'annate', 'stagione')
 
 # I nomi delle colonne sono tollerati in piu' grafie, come nei centri: il foglio
 # lo compila una persona e "Città" o "Comune" non devono fare differenza.
@@ -101,6 +125,21 @@ def _mappa(header):
             if h_norm in alias and campo not in out:
                 out[campo] = i
     return out
+
+
+def _e_intestazione(riga):
+    """Vero se questa riga e' l'intestazione di un foglio di CORSI.
+
+    Serve il nome del corso E almeno una delle CHIAVI_CORSO, e le due
+    condizioni fanno due lavori diversi: 'nome' dice che la riga e' una
+    intestazione, le chiavi dicono che il foglio e' quello giusto. Chiedere
+    solo la prima vuol dire pubblicare qualsiasi foglio del documento.
+
+    Lo usano sia il controllo in cima a leggi_corsi() sia la ricerca della riga
+    di intestazione: devono essere d'accordo, se no si valida una riga e poi si
+    legge un'altra."""
+    idx = _mappa(riga)
+    return idx.get('nome') is not None and any(k in idx for k in CHIAVI_CORSO)
 
 
 def _scarica(tab):
@@ -174,16 +213,25 @@ def leggi_corsi():
             print(f"[genera_corsi] tab '{tab}' non leggibile ({err})")
             continue
         righe = [r for r in csv.reader(io.StringIO(t)) if any(x.strip() for x in r)]
-        if righe and any(_mappa(r).get('nome') is not None for r in righe):
+        if righe and any(_e_intestazione(r) for r in righe):
             print(f"[genera_corsi] tab '{tab}': {len(righe) - 1} righe")
             testo = t
             break
-        print(f"[genera_corsi] tab '{tab}': nessuna colonna 'Nome' riconosciuta")
+        # I due casi si stampano diversi apposta: "manca Nome" e' una tab
+        # storta da sistemare nel foglio, "c'e' Nome ma non le chiavi" e' quasi
+        # sempre gviz che ha risposto con un'altra tab.
+        if righe and any(_mappa(r).get('nome') is not None for r in righe):
+            print(f"[genera_corsi] tab '{tab}': c'e' 'Nome' ma nessuna fra "
+                  f"{', '.join(CHIAVI_CORSO)} — questo non e' un foglio di "
+                  f"corsi (Luoghi ed Eventi hanno 'Nome' anche loro): "
+                  f"non lo pubblico")
+        else:
+            print(f"[genera_corsi] tab '{tab}': nessuna colonna 'Nome' riconosciuta")
     if testo is None:
         return None
 
     righe = [r for r in csv.reader(io.StringIO(testo)) if any(x.strip() for x in r)]
-    hi = next(i for i, r in enumerate(righe) if _mappa(r).get('nome') is not None)
+    hi = next(i for i, r in enumerate(righe) if _e_intestazione(r))
     idx = _mappa(righe[hi])
     ignorate = [h.strip() for i, h in enumerate(righe[hi])
                 if h.strip() and i not in idx.values()]
