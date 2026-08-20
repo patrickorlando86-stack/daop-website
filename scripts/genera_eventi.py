@@ -2341,6 +2341,131 @@ def link_luoghi(citta, prov):
             f'{a_citta(esc(dati.get("comune") or citta))}</a>')
 
 
+# --- Le quattro porte -------------------------------------------------------
+#
+# Le quattro famiglie del sito sono quattro rapporti col tempo, e non quattro
+# argomenti: l'evento ha una data, il centro una settimana, il corso una
+# stagione, il luogo nessuno. Non e' una tassonomia per bellezza — e' il
+# criterio che decide dove va una scheda nuova senza doverne discutere.
+#
+# PERCHE' ESISTE QUESTA RIGA. Fino al 20/08/2026 due famiglie su quattro non
+# avevano una porta da nessuna parte: la nav ne aveva due (Eventi, Luoghi), il
+# footer due DIVERSE (Eventi, Corsi), e nessun posto del sito le conteneva tutte
+# e quattro. Misurato lo stesso giorno con grep su tutto il repo:
+# centri-invernali.html, centri-pasquali.html e piscine.html ricevevano ZERO
+# link dal corpo di qualunque pagina — stavano solo in sitemap.
+# E' lo stesso guasto gia' diagnosticato e gia' risolto su luoghi.html il 14/08
+# ("alla nav non ci va nessuno": aggiunto il ponte dalle schede evento, le
+# impressioni sono passate da 58 a 538 in due giorni). Qui le tre orfane non
+# avevano nemmeno la nav.
+#
+# LE TRE REGOLE, tutte prese da cose gia' provate qui dentro:
+#  - COL NUMERO, non l'etichetta. "894 posti per famiglie" e' una ragione per
+#    toccare, "Luoghi" no. E' la lezione di link_luoghi(), riusata.
+#  - IN CODA AL CORPO, non nell'hero. Stessa regola dell'invito al canale: in
+#    cima chiedi qualcosa a chi non ha ancora avuto niente. E l'hero di
+#    eventi.html non si tocca comunque, vale il 30% delle impressioni del sito.
+#  - NON SULLE ~300 SCHEDE EVENTO. Quelle hanno gia' blocco_vicini(), il link ai
+#    luoghi del comune e l'invito al canale: una quarta riga di link in coda e'
+#    la barra che non guarda nessuno, e lo 0,3% misurato sull'invito dice che
+#    quella zona e' morta. Questa riga sta sui quattro hub e sulle pagine di
+#    intenzione: ~40 pagine adulte, non 300. Sulle schede si allarga invece la
+#    riga che funziona gia' — vedi link_luoghi().
+#
+# Il CSS di .eco sta in assets/css/daop-system.css e NON nel <style> di
+# eventi.html, che e' la scelta opposta al resto del sito ed e' voluta: la riga
+# deve comparire anche su pagine che non passano da _guscio() (i corsi, i
+# centri, le rubriche), e il file condiviso le raggiunge tutte senza fare un
+# diff su 260 file per una griglia di tre card.
+FAMIGLIE = (
+    ('eventi', '/eventi.html', 'Eventi e sagre',
+     'cosa si fa oggi e questo weekend'),
+    ('luoghi', '/luoghi.html', 'Luoghi per famiglie',
+     "dove andare quando non c'è niente in programma"),
+    ('centri', '/centri-estivi.html', 'Centri estivi e vacanze',
+     'estate, Natale e Pasqua, con le iscrizioni'),
+    ('corsi', '/corsi.html', 'Corsi per bambini',
+     "l'anno di sport, musica, danza e lingue"),
+)
+
+# Sotto questo numero il conteggio scoraggia invece di invitare: "1 corso" e' una
+# ragione per NON toccare. Stessa aritmetica di MIN_FILTRI — un comando che non
+# dice niente non si stampa. Sopra la soglia parla il numero, sotto la riga.
+MIN_CONTEGGIO = 5
+
+CONTEGGI_PATH = os.path.join(ROOT, "data", "conteggi.json")
+
+
+def conteggio_scrivi(chiave, n):
+    """Ogni generatore scrive il proprio numero, e li legge tutti da qui.
+
+    Il registro e' in ritardo di un giro, esattamente come
+    data/luoghi-comuni.json, e per la stessa ragione: chiudere il cerchio
+    costerebbe piu' di quello che risolve. Un numero di ieri sbaglia di poco e
+    sbaglia nel verso gratis; il verso opposto — non stampare la riga — no."""
+    try:
+        d = json.load(open(CONTEGGI_PATH, encoding="utf-8"))
+    except (OSError, ValueError):
+        d = {}
+    if d.get(chiave) == n:
+        return
+    d[chiave] = n
+    with open(CONTEGGI_PATH, "w", encoding="utf-8") as fh:
+        json.dump(d, fh, ensure_ascii=False, indent=1, sort_keys=True)
+        fh.write("\n")
+
+
+def conteggi_leggi():
+    try:
+        return json.load(open(CONTEGGI_PATH, encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _eco_riga(chiave, n):
+    """Il numero messo in parole. Il conteggio da solo ("894") non dice di cosa,
+    e la parola da sola non da' una ragione: servono insieme."""
+    return {
+        'eventi': f"{n} eventi in agenda, aggiornati ogni notte",
+        'luoghi': f"{n} posti scelti a mano, dal parco al museo",
+        'centri': f"{n} centri con le date e le iscrizioni",
+        'corsi': f"{n} corsi, con l'età e la prova gratuita",
+    }.get(chiave, str(n))
+
+
+def blocco_ecosistema(qui=None):
+    """Le famiglie diverse da quella in cui siamo, in coda al corpo.
+
+    'qui' e' la chiave della famiglia della pagina: quella non si linka da se'.
+    Con qui=None escono tutte e quattro, ed e' il caso della home — dove non si
+    e' dentro nessuna famiglia, quindi non c'e' niente da escludere. Sono i due
+    soli casi: tre card in coda a una pagina, quattro sulla home.
+
+    Il titolo pone una domanda invece di dire "vedi anche", che e' la regola
+    gia' scritta per il ponte verso i luoghi: da dentro una famiglia la domanda
+    vera e' "e se non era un evento quello che cercavo?". Sulla home quella
+    domanda non ha senso — nessuno e' ancora dentro niente — e il titolo dice
+    che cosa c'e'."""
+    n = conteggi_leggi()
+    voci = []
+    for chiave, href, nome, riga in FAMIGLIE:
+        if chiave == qui:
+            continue
+        q = n.get(chiave) or 0
+        sotto = _eco_riga(chiave, q) if q >= MIN_CONTEGGIO else riga
+        voci.append(f'<a class="eco-c" href="{href}">'
+                    f'<span class="eco-n">{esc(nome)}</span>'
+                    f'<span class="eco-d">{esc(sotto)}</span></a>')
+    if not voci:
+        return ''
+    porte = qui is None
+    cls = 'eco eco--porte' if porte else 'eco'
+    titolo = ('Cosa trovi su DAOP' if porte else 'Cerchi un&#x27;altra cosa?')
+    return (f'<section class="{cls}" aria-labelledby="eco-t">'
+            f'<h2 class="eco-t" id="eco-t">{titolo}</h2>'
+            f'<div class="eco-g">{"".join(voci)}</div></section>')
+
+
 def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
 
@@ -4102,6 +4227,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
   </div>
   {blocco_canale(citta)}
   {f'<h2>Altri comuni della provincia di {esc(prov_nome)}</h2><div class="com-link">{link_altri}</div>' if link_altri else ''}
+  {blocco_ecosistema('eventi')}
   {credito}
   <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
 </article>
@@ -4609,10 +4735,17 @@ LANDING_JS = r"""<script>
 
 
 def _altre_landing(qui, elenco):
-    """La riga di scorciatoie verso le altre pagine di intenzione."""
+    """La riga di scorciatoie verso le altre pagine di intenzione, e sotto di
+    essa la riga delle quattro porte.
+
+    Le due righe stanno insieme e in questo ordine perche' rispondono a due
+    domande diverse: le scorciatoie a "un'altra data", le porte a "un'altra
+    cosa". Ed e' l'unico punto da toccare per averle su tutte e diciotto le
+    pagine di intenzione: ogni spec_* chiama questa funzione in coda al corpo."""
     voci = "".join(f'<a href="{href}">{esc(testo)}</a>'
                    for href, testo in elenco if href != qui)
-    return f'<div class="lan-alt">{voci}</div>' if voci else ''
+    scorciatoie = f'<div class="lan-alt">{voci}</div>' if voci else ''
+    return scorciatoie + blocco_ecosistema('eventi')
 
 
 def spec_oggi(events, oggi, altre):
@@ -6339,6 +6472,15 @@ def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None, hero=None
         if n6 != 1:
             print("[genera_eventi] ATTENZIONE: marker EVENTI-HERO non trovati in "
                   "eventi.html: titolo e occhiello restano quelli scritti a mano")
+    # La riga delle quattro porte. Opzionale come gli altri tre blocchi, e per
+    # la stessa ragione: un eventi.html piu' vecchio del deploy non deve far
+    # fallire tutta la generazione.
+    s, n7 = re.subn(r'(<!-- EVENTI-ECO:START -->\n).*?(\n *<!-- EVENTI-ECO:END -->)',
+                    lambda m: m.group(1) + blocco_ecosistema('eventi') + m.group(2),
+                    s, count=1, flags=re.S)
+    if n7 != 1:
+        print("[genera_eventi] ATTENZIONE: marker EVENTI-ECO non trovati in "
+              "eventi.html: la riga delle quattro porte non viene scritta")
     if n1 != 1 or n2 != 1 or n3 != 1:
         raise SystemExit(f"Ancoraggi non trovati in eventi.html (tipo={n1}, lista={n2}, json-ld={n3})")
     open(HTML_PATH, "w", encoding="utf-8").write(s)
@@ -6401,12 +6543,19 @@ def inject_home(cards_html, stagione='', numeri=''):
     s, nn = re.subn(r'<!-- HOME-NUMERI:START -->.*?<!-- HOME-NUMERI:END -->',
                     lambda _: f'<!-- HOME-NUMERI:START -->{numeri}<!-- HOME-NUMERI:END -->',
                     s, count=1, flags=re.S)
+    # Le quattro porte. Qui si passa qui=None: sulla home non si e' dentro
+    # nessuna famiglia, quindi escono tutte e quattro.
+    porte = blocco_ecosistema()
+    s, np_ = re.subn(r'<!-- HOME-PORTE:START -->.*?<!-- HOME-PORTE:END -->',
+                     lambda _: f'<!-- HOME-PORTE:START -->{porte}<!-- HOME-PORTE:END -->',
+                     s, count=1, flags=re.S)
     open(HOME_PATH, "w", encoding="utf-8").write(s)
     print("[genera_eventi] carosello eventi aggiornato in index.html"
           + (f", riga stagionale: {'sì' if stagione else 'no'}" if ns else
              ", marker HOME-STAGIONE non trovati")
           + (f", numeri: {'sì' if numeri else 'no'}" if nn else
-             ", marker HOME-NUMERI non trovati"))
+             ", marker HOME-NUMERI non trovati")
+          + ("" if np_ else ", marker HOME-PORTE non trovati"))
 
 
 def update_sitemap(slugs=(), comuni=(), landing=()):
@@ -6927,6 +7076,10 @@ def main():
     segnala_sovrapposizioni(events)
     segnala_durate_assurde(events)
     assegna_ancore(events)
+    # Il proprio numero si scrive PRIMA di generare qualunque pagina: la riga
+    # delle quattro porte lo rilegge, e scritto dopo mostrerebbe quello di ieri
+    # anche sulle pagine di stanotte.
+    conteggio_scrivi('eventi', len(events))
     # hub va calcolato PRIMA di render(): l'agenda linka le pagine comune sia
     # nelle schede sia nel blocco in fondo, e senza non saprebbe quali esistono.
     oggi = datetime.date.today()

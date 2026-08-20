@@ -1535,6 +1535,16 @@ def render(elenco, oggi):
         vuoto,
         gruppi_comune(elenco, oggi),
         COME_ORDINIAMO,
+        # Il ponte verso /piscine.html, che fino al 20/08/2026 non ce l'aveva:
+        # misurato con grep, quella pagina riceveva ZERO link dal corpo di
+        # qualunque pagina del sito e non sta nemmeno in nav — cioe' esisteva
+        # solo in sitemap. E' il difetto gia' visto su luoghi.html il 14/08.
+        # Si stampa con la stessa soglia con cui la pagina entra in indice (5):
+        # sotto quel numero /piscine.html va in noindex, e linkare dal corpo una
+        # pagina che diciamo a Google di ignorare e' un segnale contro l'altro.
+        # E porta il numero, per la ragione di sempre: "32 piscine" e' un motivo
+        # per toccare, "Piscine" no.
+        _link_piscine(elenco),
         '    <div class="com-link"><a href="/bollino.html">Il bollino Family Friendly</a>'
         '<a href="/metodo.html">Come verifichiamo</a>'
         '<a href="/zone.html">Le zone</a></div>',
@@ -1631,6 +1641,20 @@ PISCINE_PATH = os.path.join(ROOT, "piscine.html")
 # Le due sottocategorie che finiscono in pagina. `riparo` (aperto/chiuso) e'
 # gia' calcolato dai tag e fa da solo il taglio fra le due meta'.
 PISCINE_SOTTO = ('Piscine & Parchi Acquatici', 'Nuoto')
+
+
+def _link_piscine(elenco):
+    """La riga che manda a /piscine.html, o '' se la pagina non e' in indice.
+
+    Sta in un blocco suo e non nella riga dei link di servizio perche' e' un
+    'vedi anche' di contenuto: le piscine sono una fetta tematica del catalogo,
+    cioe' la prima delle pagine di incrocio, non un link istituzionale come il
+    bollino o il metodo."""
+    n = len(le_piscine(elenco))
+    if n < 5:
+        return ''
+    return ('    <div class="com-link"><a href="/piscine.html">'
+            f'{n} piscine per bambini</a></div>')
 
 
 def le_piscine(elenco):

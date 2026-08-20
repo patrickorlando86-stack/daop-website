@@ -370,9 +370,20 @@ def _cat_foglia(c):
     return (c.get('cat') or '').split('›')[-1].strip()
 
 
-def card(c, idx):
+def card(c, idx, mostra_cat=False):
     """Una scheda in stile agenda: riga sempre visibile + dettaglio che si apre
-    al tocco. Riusa le classi .event-card/.ev-* del resto del sito."""
+    al tocco. Riusa le classi .event-card/.ev-* del resto del sito.
+
+    'mostra_cat' scrive la disciplina in riga. E' la regola gia' scritta per le
+    pagine comune — "la categoria si scrive, non solo si colora": una tinta
+    senza etichetta e' solo una tinta, e qui la categoria esisteva soltanto
+    dentro data-cat, cioe' serviva al filtro e non a chi legge.
+    Si stampa solo dove il gruppo MESCOLA discipline, per la stessa ragione per
+    cui le pagine comune la nascondono dentro una manifestazione uniforme: una
+    societa' di pallavolo con cinque squadre per annata direbbe "Pallavolo"
+    cinque volte di fila, che e' rumore e non informazione.
+    E si stampa la FOGLIA ("Arti marziali") e non la radice ("Sport"): il
+    secondo livello e' quello che dice davvero cos'e' il corso."""
     color, tint, ink = ACCENTO
     det_id = f"det-co-{idx}"
     r = eta_range(c)
@@ -469,6 +480,7 @@ def card(c, idx):
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
             <span class="ev-thumb is-ph" aria-hidden="true">{G.esc(_emoji(c))}</span>
             <span class="ev-main">
+              {f'<span class="co-cat">{G.esc(_cat_foglia(c))}</span>' if mostra_cat and _cat_foglia(c) else ''}
               <span class="ev-name">{G.esc(G.trunc(c['nome'], 110))}</span>
               <span class="ev-line">{" · ".join(bits)}</span>
               <span class="ev-tags">{"".join(tags)}</span>
@@ -581,6 +593,11 @@ CSS = """
 .co-realta{margin:30px 0 10px;scroll-margin-top:120px}
 .co-realta h2{font-size:1.18rem;margin:0 0 2px}
 .co-realta p{margin:0;font-size:.92rem;opacity:.75}
+/* La disciplina scritta in riga, quando la realta' ne ha piu' di una. Stessi
+   valori di .com-cat nelle pagine comune: e' la stessa cosa e deve leggersi
+   allo stesso modo. Il colore viene da --cat-ink, che la card imposta. */
+.co-cat{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--cat-ink,#606d7a);opacity:.78;margin-bottom:2px}
 .ev-pill.is-prova{background:#eaf7ee;color:#2E7D46}
 .ev-pill.is-pagata{background:#fdf3e0;color:#8a5a12}
 .ev-pill.is-openday{background:#2E7D46;color:#fff}
@@ -733,14 +750,22 @@ def render(corsi, css, nav, foot):
         anchor = 'r-' + G.slugify(org)
         lista_id = 'l-' + G.slugify(org)
         luoghi = sorted({c['citta'] for c in v if c['citta']})
+        # La disciplina, se la realta' ne ha una sola, si dice QUI e una volta
+        # sola: e' l'altra meta' della regola "la categoria si scrive". Detta
+        # nel titolo del gruppo non e' rumore; ripetuta su cinque righe si'.
+        soli = sorted({_cat_foglia(c) for c in v if _cat_foglia(c)})
         sotto = ' · '.join(filter(None, [
+            soli[0] if len(soli) == 1 else '',
             ', '.join(luoghi),
             f"{len(v)} corsi" if len(v) > 1 else "1 corso",
             next((c['stagione'] for c in v if c['stagione']), ''),
         ]))
+        # La disciplina si scrive in riga solo se questa realta' ne ha piu' di
+        # una: vedi il docstring di card().
+        mescola = len({_cat_foglia(c) for c in v if _cat_foglia(c)}) > 1
         schede = []
         for c in v:
-            schede.append(card(c, n[0]))
+            schede.append(card(c, n[0], mescola))
             n[0] += 1
         blocchi.append(
             f'  <div class="co-realta" id="{anchor}" data-lista="{lista_id}">\n'

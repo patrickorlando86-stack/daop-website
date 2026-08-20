@@ -49,8 +49,20 @@ async function apri(browser, file, larghezza = 412, prima = null) {
       // CLAUDE.md a proposito di GA4. Qui si rimappano sul repo, cosi' le
       // prove caricano gli stessi script che vanno online invece di girare su
       // una pagina a cui manca meta' del JavaScript.
-      const p = decodeURIComponent(new URL(u).pathname);
-      if (!p.startsWith(RADICE)) {
+      let p = decodeURIComponent(new URL(u).pathname);
+      // Su Windows un src="/assets/..." dentro una pagina aperta da
+      // file:///C:/... si risolve sulla RADICE DEL DISCO e non su quella del
+      // repo: il browser chiede file:///C:/assets/js/daop-vicino.js. Senza
+      // togliere quel "/C:" il join qui sotto costruisce un percorso che non
+      // esiste, la richiesta va in 404 e la pagina gira senza meta' del suo
+      // JavaScript - e le prove passano lo stesso, perche' quasi tutte
+      // guardano l'HTML. Verificato il 20/08/2026: window.daopVicino era
+      // undefined e la prova del "vicino a me" cadeva in timeout su un
+      // datalist che nessuno aveva riempito. In CI (Linux) il pathname e'
+      // gia' /assets/... e questa riga non fa niente.
+      const disco = p.match(/^\/[A-Za-z]:(\/.*)$/);
+      if (disco) p = disco[1];
+      if (!path.normalize(p).startsWith(path.normalize(RADICE))) {
         const vero = path.join(RADICE, p);
         if (fs.existsSync(vero) && fs.statSync(vero).isFile()) {
           return route.fulfill({ path: vero });

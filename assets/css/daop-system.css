@@ -494,3 +494,102 @@ img { height: auto; }
 /* Ultimi occhielli accento su fondo chiaro, senza una classe condivisa. */
 .prog-link,
 .prog-link:hover { color: var(--orange-ink); }
+
+/* Il cassetto del telefono e' l'unica nav che esiste sotto i 900px, cioe' per
+   il 90% del traffico: le quattro porte — eventi, luoghi, centri, corsi — stanno
+   davanti e il resto sotto questa etichetta. Sta qui e non nei <style> inline
+   perche' .mobile-menu e' scritta a mano in dodici pagine piu' i due gusci:
+   una regola sola nel file condiviso le raggiunge tutte.
+   Non e' un <a>, quindi ".mobile-menu a" non la veste. */
+.mobile-menu .mm-sep {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft, #8b8378);
+  padding: 20px 0 6px;
+  border-bottom: 1px solid rgba(45, 74, 92, 0.06);
+}
+
+/* La riga delle quattro porte (blocco_ecosistema in scripts/genera_eventi.py).
+   Sta qui e non nel <style> di eventi.html — che e' la scelta opposta al resto
+   del sito, ed e' voluta: la riga compare anche su pagine che non passano da
+   _guscio() (corsi, centri, rubriche), e il file condiviso le raggiunge tutte
+   senza fare un diff su 260 file per una griglia di tre card.
+   Niente max-width ne' margin:auto: la larghezza la da' il contenitore della
+   pagina che la ospita, che nei quattro hub e' diverso ogni volta. */
+.eco { margin: 36px 0 0; }
+
+.eco-t {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy, #2d4a5c);
+  margin: 0 0 14px;
+}
+
+.eco-g {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Tutta la card e' il bersaglio, non solo il titolo: sul telefono un'area di
+   44px e' il minimo, e qui sono ~76. */
+.eco-c {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid rgba(45, 74, 92, 0.16);
+  border-radius: 14px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.5);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.eco-c:hover,
+.eco-c:focus-visible {
+  border-color: var(--teal, #6ba5a8);
+  background: rgba(107, 165, 168, 0.08);
+}
+
+.eco-n {
+  display: block;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--navy, #2d4a5c);
+  margin-bottom: 3px;
+}
+
+/* La riga che da' la ragione per toccare: il conteggio quando c'e', la
+   descrizione quando il conteggio scoraggerebbe (vedi MIN_CONTEGGIO). */
+.eco-d {
+  display: block;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--text-mid, #5d6a70);
+}
+
+/* Sotto i 700px tre card in fila sono tre colonne da 100px: vanno in pila. */
+@media (max-width: 700px) {
+  .eco-g { grid-template-columns: 1fr; gap: 10px; }
+  .eco { margin-top: 28px; }
+}
+
+/* Le quattro porte sulla home: quattro card e non tre, perche' li' non si e'
+   dentro nessuna famiglia e non c'e' niente da escludere. La griglia a 3 non
+   basta — quattro voci in tre colonne fanno 3+1, cioe' una card spaiata. */
+.eco--porte .eco-g { grid-template-columns: repeat(4, 1fr); }
+/* Sulla home il titolo sta in una fascia a tutta larghezza, in mezzo a
+   .section-title da 1,6rem: 1,05rem li' sembrerebbe una didascalia. */
+.eco--porte .eco-t { font-size: 1.5rem; margin-bottom: 20px; }
+
+@media (max-width: 900px) {
+  .eco--porte .eco-g { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Sotto i 560px anche due colonne sono due colonne da 130px: in pila.
+   Il breakpoint e' piu' basso dei 700px della griglia a tre perche' due card
+   affiancate ci stanno ancora, tre no. */
+@media (max-width: 560px) {
+  .eco--porte .eco-g { grid-template-columns: 1fr; }
+}

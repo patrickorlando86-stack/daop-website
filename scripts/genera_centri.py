@@ -41,6 +41,29 @@ ROOT = G.ROOT
 SITE_URL = G.SITE_URL
 SITEMAP_PATH = G.SITEMAP_PATH
 
+# Le province si prendono da genera_eventi e non si riscrivono qui.
+# PROVINCE_TESTO e' derivata da PROVINCE_PUBBLICATE, quindi il giorno che se ne
+# apre una quarta questi tre titoli si allargano da soli.
+#
+# Fino al 20/08/2026 erano nove stringhe scritte a mano che dicevano
+# "Alessandria e Asti" — titoli, descrizioni, H1, occhiello e perfino il
+# JSON-LD — e Cuneo era aperta dal 4 agosto: e' esattamente il difetto che il
+# commento su PROVINCE_TESTO descrive ("e' proprio il copy a restare
+# indietro"), ripetuto in un altro file dove nessuno lo cercava.
+#
+# QUI LA COPERTURA E' DICHIARATA, NON DEDOTTA DAI DATI, al contrario di
+# genera_corsi.zona(), e la differenza ha una ragione: fuori stagione l'elenco
+# dei centri e' vuoto. Un titolo dedotto dalle righe diventerebbe "in Piemonte"
+# a settembre e tornerebbe indietro a marzo, cioe' oscillerebbe due volte
+# l'anno sulla pagina il cui unico asset e' l'anzianita' dell'URL. Un <title>
+# che balla e' peggio di uno largo: e' la stessa aritmetica per cui il robots
+# delle pagine d'incrocio si decide su trenta giorni e non su oggi.
+# Sui corsi invece la copertura non e' dichiarata (il catalogo si costruisce
+# una societa' alla volta) e li' il dato deve comandare.
+ZONA = G.PROVINCE_TESTO
+ETICHETTA = ' · '.join([G.PROVINCE_NOMI[c] for c in G.PROVINCE_PUBBLICATE]
+                       + ['Famiglie'])
+
 # Una voce per stagione. Aggiungere gli invernali significa aggiungere una
 # riga qui: il resto del codice non cambia.
 STAGIONI = {
@@ -49,13 +72,14 @@ STAGIONI = {
         'tab': 'Centri Est/Inv',
         'h1': 'Centri Estivi',
         # parte in corsivo oro dell'H1, come "Oggi" nell'hero degli eventi
-        'h1_em': 'Alessandria e Asti',
+        'h1_em': ZONA,
         'singolare': 'centro estivo',
-        'titolo': 'Centri Estivi in Provincia di Alessandria e Asti | DAOP',
-        'descr': ('Centri estivi per bambini in provincia di Alessandria e Asti: '
+        'titolo': f'Centri Estivi {ZONA} | DAOP',
+        'descr': (f'Centri estivi per bambini in {ZONA}: '
                   'elenco con età, orari e costi, e la guida per scegliere e '
                   'iscriversi in tempo.'),
         'periodo': 'giugno, luglio e agosto',
+        'breve': "d'estate",
         'iscrizioni': 'fra marzo e maggio',
         'quando_riaprono': 'in primavera',
         'parola': 'estiv',
@@ -94,13 +118,14 @@ STAGIONI = {
         'file': 'centri-invernali.html',
         'tab': 'Centri Est/Inv',
         'h1': 'Centri Invernali',
-        'h1_em': 'Alessandria e Asti',
+        'h1_em': ZONA,
         'singolare': 'centro invernale',
-        'titolo': 'Centri Invernali e Vacanze di Natale ad Alessandria e Asti | DAOP',
+        'titolo': f'Centri Invernali e Vacanze di Natale {ZONA} | DAOP',
         'descr': ('Centri invernali e attività per bambini durante le vacanze di Natale '
-                  'in provincia di Alessandria e Asti: elenco, età, orari e costi, '
+                  f'in {ZONA}: elenco, età, orari e costi, '
                   'con la guida per scegliere.'),
         'periodo': 'le vacanze di Natale e le chiusure scolastiche invernali',
+        'breve': 'a Natale',
         'iscrizioni': 'fra ottobre e novembre',
         'quando_riaprono': 'in autunno',
         'parola': 'invern',
@@ -149,13 +174,14 @@ STAGIONI = {
         'file': 'centri-pasquali.html',
         'tab': 'Centri Est/Inv',
         'h1': 'Centri Pasquali',
-        'h1_em': 'Alessandria e Asti',
+        'h1_em': ZONA,
         'singolare': 'centro per le vacanze di Pasqua',
-        'titolo': 'Centri per le Vacanze di Pasqua ad Alessandria e Asti | DAOP',
+        'titolo': f'Centri per le Vacanze di Pasqua {ZONA} | DAOP',
         'descr': ('Centri e attività per bambini durante le vacanze di Pasqua in '
-                  'provincia di Alessandria e Asti: elenco con età, orari e costi, '
+                  f'{ZONA}: elenco con età, orari e costi, '
                   'e la guida per scegliere.'),
         'periodo': 'le vacanze di Pasqua',
+        'breve': 'a Pasqua',
         'iscrizioni': 'fra febbraio e marzo',
         'quando_riaprono': 'a fine inverno',
         'parola': 'pasqu',
@@ -412,7 +438,10 @@ ACCENTO = {
     # sull'arancio degli estivi, cioe' due stagioni diverse con la stessa tinta.
     'pasquali': ('#6f9e4e', 'rgba(111,158,78,0.14)', '#4a6d2e'),
 }
-PROV_LABEL = {'AL': 'Alessandria', 'AT': 'Asti'}
+# Le etichette del filtro provincia: da genera_eventi, non riscritte qui.
+# Scritte a mano conoscevano solo AL e AT, quindi un centro a Cuneo avrebbe
+# messo "CN" nella tendina — il .get(p, p) lo nascondeva invece di dirlo.
+PROV_LABEL = G.PROVINCE_NOMI
 
 
 def cslug(s):
@@ -681,7 +710,7 @@ def jsonld(cfg, centri, url):
     if centri:
         graph.append({
             "@type": "ItemList",
-            "name": f"{cfg['h1']} in provincia di Alessandria e Asti",
+            "name": f"{cfg['h1']} in {ZONA}",
             "numberOfItems": len(centri),
             "itemListElement": [
                 {"@type": "ListItem", "position": i + 1,
@@ -696,6 +725,30 @@ def jsonld(cfg, centri, url):
         })
     return json.dumps({"@context": "https://schema.org", "@graph": graph},
                       ensure_ascii=False, indent=2)
+
+
+def sorelle(chiave):
+    """Le altre due stagioni dei centri.
+
+    E' il ponte che a queste pagine mancava del tutto. Misurato il 20/08/2026
+    con grep su tutto il repo: centri-invernali.html e centri-pasquali.html
+    ricevevano ZERO link dal corpo di qualunque pagina — stavano solo in
+    sitemap — e centri-estivi.html ne aveva uno, la riga nell'hero dell'agenda.
+    Una famiglia intera senza porte, cioe' lo stesso guasto gia' diagnosticato
+    e gia' risolto su luoghi.html il 14/08 ("alla nav non ci va nessuno": messo
+    il ponte dalle schede evento, 58 -> 538 impressioni in due giorni).
+
+    Il link porta il periodo e non solo il nome, per la stessa ragione per cui
+    link_luoghi() porta il numero: "Centri invernali" e' un'etichetta, "a
+    Natale" e' una ragione per toccare. E serve soprattutto a dicembre, quando
+    chi cerca atterra sugli estivi perche' e' la pagina forte della famiglia:
+    li' quel link e' la cosa piu' utile che la pagina ha da dargli."""
+    voci = [f'<a href="/{cfg["file"]}">{G.esc(cfg["h1"])} {G.esc(cfg["breve"])}</a>'
+            for k, cfg in STAGIONI.items() if k != chiave]
+    if not voci:
+        return ''
+    return ('<h2>Le altre vacanze</h2>'
+            f'<div class="com-link">{"".join(voci)}</div>')
 
 
 def render(chiave, cfg, centri, css, nav, foot):
@@ -803,20 +856,21 @@ def render(chiave, cfg, centri, css, nav, foot):
     <div class="ce-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <span>{G.esc(cfg['h1'])}</span>
     </div>
-    <span class="section-label">Alessandria · Asti · Famiglie</span>
+    <span class="section-label">{ETICHETTA}</span>
     <h1>{G.esc(cfg['h1'])} <em>{cfg['h1_em']}</em></h1>
-    <p>I centri per bambini attivi durante {cfg['periodo']} nelle province di
-    Alessandria e Asti, con età, orari e costi. Sotto, la guida per scegliere:
+    <p>I centri per bambini attivi durante {cfg['periodo']} in {ZONA}, con età,
+    orari e costi. Sotto, la guida per scegliere:
     quando ci si iscrive, cosa chiedere prima e quali documenti servono.</p>
-    <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi qualcosa per oggi? Vedi le <a href="/eventi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">sagre e gli eventi in provincia di Alessandria e Asti</a>.</p>
+    <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi qualcosa per oggi? Vedi le <a href="/eventi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">sagre e gli eventi in {ZONA}</a>.</p>
   </div>
 </header>
 <article class="ce-wrap">
   {avviso}
   {elenco}
   {guida(cfg)}
+  {sorelle(chiave)}
+  {G.blocco_ecosistema('centri')}
   <div class="ce-actions">
-    <a class="btn btn-navy" href="/eventi.html">Eventi di oggi</a>
     <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
   </div>
 </article>
@@ -900,6 +954,12 @@ def main(argv):
         raise SystemExit(f"[genera_centri] stagione sconosciuta: {', '.join(ignote)}")
     css, nav, foot = G._guscio()
     cambiate = set()   # solo le pagine riscritte davvero: guidano il lastmod
+    # Il numero per la riga delle quattro porte. Non e' la somma delle tre
+    # stagioni — leggono la stessa tab, quindi sommarle conterebbe lo stesso
+    # centro tre volte — ed e' il MASSIMO fra loro, cioe' la stagione che in
+    # questo momento ha qualcosa: fuori stagione le altre due sono a zero e la
+    # somma direbbe il vero senza dire niente.
+    attivi_max = 0
     for chiave in chiavi:
         cfg = STAGIONI[chiave]
         tab = os.environ.get(f"CENTRI_TAB_{chiave.upper()}", cfg['tab'])
@@ -916,6 +976,9 @@ def main(argv):
             print(f"[genera_centri] {cfg['file']}: foglio non letto e pagina "
                   f"assente, la creo fuori stagione")
             centri = []
+        oggi = datetime.date.today()
+        attivi_max = max(attivi_max, sum(1 for c in centri
+                                         if not c['d_end'] or c['d_end'] >= oggi))
         nuovo = render(chiave, cfg, centri, css, nav, foot)
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
             print(f"[genera_centri] {cfg['file']}: invariata")
@@ -923,6 +986,11 @@ def main(argv):
             open(path, 'w', encoding='utf-8').write(nuovo)
             print(f"[genera_centri] {cfg['file']}: scritta ({len(centri)} centri)")
             cambiate.add(cfg['file'])
+    # Scritto in fondo e non in cima: le pagine di questa run usano il numero di
+    # ieri. E' lo stesso ritardo di un giro di data/luoghi-comuni.json, ed e'
+    # accettato per la stessa ragione — un conteggio di ieri sbaglia di poco e
+    # sbaglia nel verso gratis.
+    G.conteggio_scrivi('centri', attivi_max)
     aggiorna_sitemap(cambiate)
     return 0
 
