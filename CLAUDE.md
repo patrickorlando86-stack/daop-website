@@ -1436,10 +1436,40 @@ Quattro cose di quel foglio che non sono ovvie:
   vuota su tutte le righe. Inventarle un'interfaccia qui vorrebbe dire indovinare
   come funziona.
 
-Il catalogo esce dal Piemonte (l'Acquario di Genova, un parco a Voghera) e le
-province **non si filtrano** su AL/AT/CN come in agenda: chi cerca "gita da
-Alessandria" quelle le vuole proprio. Da qui `dove_siamo()`, che nomina le
-province che pesano e dice "e dintorni" per le altre.
+### Le province della pagina sono tre, come in agenda
+
+`solo_province_nostre()` scarta tutto quello che non è **AL, AT o CN**: al
+20/08/2026 sono **69 righe su 894** (GE 14, TO 11, SV 9, PV 8, BI 5, MI 5, VB 5,
+IM 4, NO 3, VC 3, AO 1, VA 1), e in pagina restano 825 luoghi in 287 comuni.
+
+Fino a quel giorno qui c'era scritto il contrario — "le province **non si
+filtrano**, chi cerca 'gita da Alessandria' quelle le vuole proprio" — e il
+motivo per cui è cambiato non è il gusto: **la tendina non sa dire "una gita
+fuori".** Offrendo "Prov. GE" accanto a "Prov. AL" promette una copertura della
+Liguria che sono quattordici righe contro quattrocentosettantotto, e un elenco
+che si intitola alle tre province si smentisce alla prima voce del filtro. Il
+posto giusto per una gita fuori zona è un blocco che la dichiara tale, non una
+sigla in mezzo alle nostre.
+
+Tre cose da sapere prima di rimetterci mano:
+
+- **La sigla si aggiunge a `PROVINCE_PUBBLICATE` in `genera_eventi.py`**, che è
+  la stessa da cui passa l'agenda: le due superfici non possono divergere in
+  silenzio, e riaprire una provincia è una riga sola.
+- **`data/luoghi.json` non si pota.** `salva_istantanea()` riceve il catalogo
+  intero — è lo specchio del foglio, non della pagina — e il taglio lo rifà il
+  filtro anche quando si gira offline. Quindi il conteggio dell'istantanea (894)
+  non coincide con quello della pagina (825), ed è voluto.
+- **Il crollo si controlla prima di potare.** `controlla_crollo()` guarda le
+  righe fresche del foglio: mettendo il filtro davanti, un filtro rimasto attivo
+  sul tab che lasciasse fuori proprio AL/AT/CN darebbe zero righe fresche, e la
+  guardia leggerebbe quello zero come "sto già girando sull'istantanea", cioè
+  tacerebbe.
+
+`dove_siamo()` di conseguenza non dice più "e dintorni": nomina le province di
+`PROVINCE_PUBBLICATE` che hanno davvero delle righe — la sfumatura serve ancora,
+perché la stessa funzione scrive anche l'intestazione di `/piscine.html`, che è
+un sottoinsieme e può non toccarle tutte e tre.
 
 Come `genera_eventi.py`, c'è un `controlla_crollo()`: l'export CSV di Google
 **rispetta i filtri** del foglio, e un filtro rimasto attivo pubblicherebbe 40

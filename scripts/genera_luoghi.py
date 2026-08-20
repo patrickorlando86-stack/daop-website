@@ -32,6 +32,10 @@ Due sorgenti, e non pesano uguale:
    per cui questa pagina non e' una directory come le altre: nessun altro puo'
    scrivere "qui DAOP ha seguito 7 eventi per famiglie, il prossimo e' sabato".
 
+Fuori da AL, AT e CN non si pubblica: il foglio raccoglie anche gite oltre le
+tre province, ma la tendina non sa dire "una gita fuori" - vedi
+`solo_province_nostre()`.
+
 I posti che stanno SOLO nell'agenda (le piazze e le vie in cui passa una sagra)
 entrano come righe proprie soltanto finche' il catalogo e' piccolo - vedi
 SOGLIA_CATALOGO. Con 800 luoghi scelti a mano, aggiungerne 170 dedotti da "qui
@@ -557,6 +561,36 @@ def leggi_catalogo():
             '_grezzo': r if fresco else None,
         })
     return fuori
+
+
+def solo_province_nostre(catalogo):
+    """Fuori da AL, AT e CN la riga non si pubblica.
+
+    Il foglio raccoglie anche posti oltre le tre province - l'Acquario di
+    Genova, un parco a Voghera, qualche gita in Valle d'Aosta - e per un po'
+    sono stati pubblicati apposta, con l'idea che "gita da Alessandria" li
+    vuole. La pagina pero' e' l'elenco di un territorio dichiarato, lo stesso
+    dell'agenda: una tendina che offre "Prov. GE" accanto a "Prov. AL" promette
+    una copertura della Liguria che non c'e' (quattordici righe contro
+    quattrocentosettantotto), e un elenco che dice di essere di Alessandria,
+    Asti e Cuneo non si smentisce da solo alla prima riga.
+
+    Si scartano qui e non nel foglio: la colonna resta, le righe restano, e
+    riaprire una provincia domani vuol dire aggiungere una sigla a
+    PROVINCE_PUBBLICATE - che e' la stessa da cui passa l'agenda, cosi' le due
+    superfici non possono divergere in silenzio.
+
+    L'istantanea NON si pota: `salva_istantanea()` riceve il catalogo intero,
+    perche' e' lo specchio del foglio e non della pagina. Sara' il filtro a
+    rifare il taglio anche quando si gira offline."""
+    dentro = [l for l in catalogo if l['prov'] in G.PROVINCE_PUBBLICATE]
+    fuori = collections.Counter(l['prov'] or '—' for l in catalogo
+                                if l['prov'] not in G.PROVINCE_PUBBLICATE)
+    if fuori:
+        dettaglio = ", ".join(f"{p} {n}" for p, n in fuori.most_common())
+        print(f"[genera_luoghi] {sum(fuori.values())} luoghi fuori da "
+              f"{'/'.join(G.PROVINCE_PUBBLICATE)} non pubblicati ({dettaglio})")
+    return dentro
 
 
 # ── Sorgente 2: l'agenda ─────────────────────────────────────────────────────
@@ -1426,34 +1460,22 @@ def jsonld(elenco):
         + '\n</script>' for g in grafo)
 
 
-def _elenca(voci):
-    if len(voci) == 1:
-        return voci[0]
-    return ", ".join(voci[:-1]) + " e " + voci[-1]
-
-
 def dove_siamo(elenco):
-    """"Fra Alessandria, Asti e Cuneo" non basta piu': il catalogo esce dalla
-    regione (l'Acquario di Genova, un parco a Voghera). Si nominano le province
-    che pesano davvero e si dice "e dintorni" per le altre, invece di elencarne
-    dodici o di tacere quelle fuori - che sarebbe la cosa peggiore, perche' chi
-    cerca "gita da Alessandria" quelle le vuole proprio."""
-    conta = collections.Counter(l['prov'] for l in elenco if l['prov'])
-    if not conta:
+    """"Alessandria, Asti e Cuneo", e solo le province che hanno righe davvero.
+
+    Qui c'era la logica opposta - "e dintorni" per le province di contorno -
+    perche' il catalogo usciva dalla regione. Da quando `solo_province_nostre()`
+    pota tutto quello che non e' AL/AT/CN quel ramo non era piu' irraggiungibile
+    e basta: era diventato sbagliato, perche' con una provincia sotto il 5% delle
+    righe avrebbe chiamato Cuneo "dintorni".
+
+    Si nominano solo le presenti perche' questa funzione serve anche a un
+    sottoinsieme (le piscine), dove una provincia puo' non avere niente."""
+    presenti = {l['prov'] for l in elenco if l['prov']}
+    dentro = [p for p in G.PROVINCE_PUBBLICATE if p in presenti]
+    if not dentro:
         return "Piemonte"
-    totale = sum(conta.values())
-    grosse = sorted(p for p, n in conta.items() if n >= max(3, totale * 0.05))
-    if not grosse:
-        grosse = [conta.most_common(1)[0][0]]
-    nomi = [G.PROVINCE_NOMI.get(p, p) for p in grosse]
-    # "Alessandria, Asti e Cuneo" + " e dintorni" faceva due "e" nella stessa
-    # riga. Quando le province di contorno ci sono, l'ultima congiunzione la
-    # prende "e dintorni": "Alessandria, Asti, Cuneo e dintorni".
-    if len(conta) > len(grosse):
-        return ", ".join(nomi) + " e dintorni"
-    if all(p in G.PROVINCE_NOMI for p in grosse):
-        return G.province_in_elenco(grosse)
-    return _elenca(nomi)
+    return G.province_in_elenco(dentro)
 
 
 def _css_categorie(elenco):
@@ -1513,10 +1535,14 @@ def render(elenco, oggi):
         vuoto,
         gruppi_comune(elenco, oggi),
         COME_ORDINIAMO,
-        '    <div class="com-link"><a href="/eventi.html">Tutta l\'agenda DAOP</a>'
-        '<a href="/bollino.html">Il bollino Family Friendly</a>'
+        '    <div class="com-link"><a href="/bollino.html">Il bollino Family Friendly</a>'
         '<a href="/metodo.html">Come verifichiamo</a>'
         '<a href="/zone.html">Le zone</a></div>',
+        # "Tutta l'agenda DAOP" era qui e adesso sta nella riga delle quattro
+        # porte, col numero degli eventi attaccato: due link alla stessa pagina
+        # a quattro centimetri di distanza sono uno di troppo, e quello che
+        # sopravvive e' quello che dice quanti eventi ci sono.
+        G.blocco_ecosistema('luoghi'),
         f'    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: '
         f'{oggi.day} {G.MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>',
         '  </div>',
@@ -1579,7 +1605,7 @@ def render(elenco, oggi):
 <header class="page-hero ev-hero lg-hero">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Luoghi</span>
+      <a href="/">Home</a> › <span>Luoghi</span>
     </div>
     <h1>Dove andare <em>con i bambini</em></h1>
     <p class="ev-when">{e(zona)} · {n} luoghi in {comuni} comuni</p>
@@ -1695,8 +1721,11 @@ def render_piscine(elenco, oggi):
                f"{len(coperte)} vasche al chiuso: scuole nuoto e corsi tutto l'anno",
                coperte),
         '    <div class="com-link"><a href="/luoghi.html">Tutti i luoghi per famiglie</a>'
-        '<a href="/eventi.html">Tutta l\'agenda DAOP</a>'
         '<a href="/metodo.html">Come verifichiamo</a></div>',
+        # Questa pagina appartiene alla famiglia Luoghi, quindi la riga porta le
+        # altre tre: 'luoghi' e' la famiglia, non l'URL. Il link a /luoghi.html
+        # resta sopra ed e' un'altra cosa — quello e' il padre, questi i cugini.
+        G.blocco_ecosistema('luoghi'),
         f'    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: '
         f'{oggi.day} {G.MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>',
         '  </div>',
@@ -1770,7 +1799,13 @@ def salva_istantanea(elenco):
     formato da tenere allineato quando una colonna cambia nome. Si scrive solo
     se le righe arrivano davvero dal foglio: rigenerare l'istantanea da se'
     stessa non aggiunge niente e la farebbe ricommittare ogni notte."""
-    grezzi = [l['_grezzo'] for l in elenco if l.get('_grezzo')]
+    # L'ordine e' quello della pagina (provincia, comune, nome) e non quello del
+    # foglio: da qui passa un file committato ogni notte, e un ordinamento che
+    # segue le righe del foglio farebbe un diff di 16.000 righe la prima volta
+    # che qualcuno riordina il tab.
+    grezzi = [l['_grezzo'] for l in sorted(
+        elenco, key=lambda d: (d['prov'], _alfabetico(d['comune']), _alfabetico(d['nome'])))
+        if l.get('_grezzo')]
     if not grezzi:
         return
     with open(JSON_PATH, "w", encoding="utf-8") as fh:
@@ -1863,9 +1898,14 @@ def controlla_crollo(catalogo):
 
 def main():
     oggi = datetime.date.today()
-    catalogo = leggi_catalogo()
-    if not controlla_crollo(catalogo):
+    foglio = leggi_catalogo()
+    # Il crollo si controlla sulle righe del FOGLIO, prima di potare: se il
+    # taglio per provincia venisse prima, un filtro rimasto attivo che lascia
+    # fuori solo AL/AT/CN darebbe zero righe fresche e la guardia lo leggerebbe
+    # come "sto girando sull'istantanea", cioe' tacerebbe.
+    if not controlla_crollo(foglio):
         raise SystemExit(1)
+    catalogo = solo_province_nostre(foglio)
     agenda = leggi_agenda()
     elenco = unisci(catalogo, agenda)
     if not elenco:
@@ -1881,8 +1921,13 @@ def main():
     if premium and not in_vetrina:
         print('[genera_luoghi] nessuno in vetrina: la colonna "In evidenza" del '
               'foglio è vuota su tutte le schede a pagamento')
+    # Il proprio numero prima di scrivere: la riga delle quattro porte lo
+    # rilegge, e le altre pagine lo vedranno alla loro run — cioe' domani. E' lo
+    # stesso ritardo di un giro di data/luoghi-comuni.json, e va bene per la
+    # stessa ragione: un numero di ieri sbaglia di poco e sbaglia gratis.
+    G.conteggio_scrivi('luoghi', len(elenco))
     open(OUT_PATH, "w", encoding="utf-8").write(render(elenco, oggi))
-    salva_istantanea(elenco)
+    salva_istantanea(foglio)
     salva_indice_comuni(elenco)
     update_sitemap(len(elenco))
     # /piscine.html — sotto le 5 righe si scrive lo stesso ma esce in noindex e
