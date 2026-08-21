@@ -76,9 +76,14 @@ module.exports = async function agenda(browser) {
   await page.waitForTimeout(200);
 
   // Prestazioni: due convenzioni che si smontano per distrazione.
-  r.ok(await page.locator('.event-card').nth(200)
+  // La scheda si prende in fondo all'elenco e non a un indice fisso: il 21/08/2026
+  // la prova cercava la 201esima su un'agenda scesa a 199 eventi, e la run
+  // notturna e' diventata rossa per il calendario, non per un difetto. Il numero
+  // di eventi in agenda cala da solo a fine stagione: qualunque indice scritto a
+  // mano e' una data di scadenza.
+  r.ok(await page.locator('.event-card').nth(tot - 1)
     .evaluate((c) => getComputedStyle(c).contentVisibility) === 'auto',
-    'content-visibility:auto sulle schede');
+    `content-visibility:auto sulle schede (l'ultima delle ${tot})`);
   r.ok(/^\d+px$/.test(await page.evaluate(() =>
     getComputedStyle(document.documentElement).getPropertyValue('--ev-sticky').trim())),
     '--ev-sticky viene misurata dopo il primo disegno');
@@ -96,7 +101,7 @@ module.exports = async function agenda(browser) {
   await page.waitForTimeout(300);
 
   // content-visibility non deve impedire di arrivare a una scheda lontana.
-  const id = await page.locator('.event-card').nth(30).getAttribute('id');
+  const id = await page.locator('.event-card').nth(Math.min(30, tot - 1)).getAttribute('id');
   await page.evaluate((x) => { location.hash = x; }, id);
   await page.waitForTimeout(500);
   r.ok(await page.evaluate((x) => !document.getElementById(x).querySelector('.ev-det').hidden, id),

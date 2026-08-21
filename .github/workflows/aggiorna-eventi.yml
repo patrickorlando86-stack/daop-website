@@ -117,6 +117,15 @@ jobs:
           #     foglio ne aveva 89, e c'era arrivata solo per caso dentro due
           #     commit di stile su un link. Le due liste vanno tenute uguali.
           #
+          #   data/conteggi.json  quanti eventi, luoghi, centri e corsi ci sono:
+          #     lo scrive OGNI generatore (conteggio_scrivi) e lo rilegge il
+          #     successivo per la riga blocco_ecosistema(). Nato il 20/08 e
+          #     committato a mano quel giorno, non era in elenco: dalla notte
+          #     dopo i quattro numeri si riscrivevano nel runner e morivano con
+          #     lui, cioe' la riga online sarebbe restata ferma per sempre ai
+          #     conteggi del giorno della nascita. E' lo stesso guasto di
+          #     ferragosto.html, alla dodicesima ripetizione.
+          #
           # L'elenco e' raggruppato per generatore, e ogni generatore va letto
           # per intero quando se ne aggiunge uno: il 18/08/2026 mancavano tutte
           # e sei le stagionali nate dopo ferragosto (befana, capodanno,
@@ -140,7 +149,7 @@ jobs:
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
                 data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
-                data/rubriche.json \
+                data/rubriche.json data/conteggi.json \
                 eventi/ rubriche/ assets/miniature/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
