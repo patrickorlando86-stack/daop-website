@@ -118,13 +118,29 @@ module.exports = async function porte(browser) {
   // in pagina. Sotto MIN_CONTEGGIO (5) il generatore stampa apposta la riga
   // descrittiva invece del conteggio, quindi si guardano solo le famiglie che
   // stanno sopra soglia.
+  // Quello che si controlla e' che in pagina ci sia UN NUMERO, non che sia
+  // esattamente quello di data/conteggi.json oggi. Il registro e' in ritardo di
+  // un giro per costruzione — dentro la stessa run genera_eventi gira prima di
+  // genera_luoghi — quindi il confronto esatto rendeva questa prova rossa ogni
+  // volta che un conteggio cambiava, cioe' quasi ogni notte: verificato il
+  // 21/08/2026, conteggi.json a 830 luoghi ed eventi.html a 825, ed era il
+  // comportamento giusto di tutti e due. Il disallineamento si stampa come
+  // nota, perche' resta utile vederlo, ma non e' un difetto.
   const MIN = 5;
   const eventi = html('eventi.html');
-  for (const [chiave] of HUB) {
+  for (const [chiave, , proprio] of HUB) {
     const n = conteggi[chiave] || 0;
     if (chiave === 'eventi' || n < MIN) continue;
-    r.ok(eventi.includes(`>${n} `),
-      `eventi.html: il conteggio di ${chiave} (${n}) è in pagina`);
+    const card = eventi.match(new RegExp(
+      `<a class="eco-c" href="${proprio}">.*?<span class="eco-d">([^<]*)</span>`));
+    const stampato = card && card[1].match(/^(\d+) /);
+    r.ok(!!stampato, stampato
+      ? `eventi.html: il conteggio di ${chiave} è in pagina (${stampato[1]})`
+      : `eventi.html: la card di ${chiave} non stampa un numero`);
+    if (stampato && Number(stampato[1]) !== n) {
+      console.log(`  --   ${chiave}: in pagina ${stampato[1]}, `
+        + `nel registro ${n} (il ritardo di un giro, non un difetto)`);
+    }
   }
 
   r.titolo('Le quattro porte — nessuna pagina resta orfana');

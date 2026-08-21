@@ -1810,7 +1810,7 @@ def _guscio():
         # I marker della voce stagionale servono solo dove la nav e' scritta a
         # mano: qui la voce e' gia' risolta, e portarseli dietro vorrebbe dire
         # tre commenti in piu' su ~360 pagine per niente.
-        html_frag = re.sub(r'<!-- (?:NAV|MM)-CENTRI:(?:START|END) -->', '',
+        html_frag = re.sub(r'<!-- (?:NAV|MM|HERO)-CENTRI:(?:START|END) -->', '',
                            html_frag)
         return html_frag.replace('class="active"', '')
 

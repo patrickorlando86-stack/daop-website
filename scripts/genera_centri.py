@@ -1097,11 +1097,20 @@ def main(argv):
         # febbraio: Carnevale in corso e iscrizioni estive aperte). Una stagione
         # gia' cominciata ha una data nel passato, quindi vince - ed e' giusto,
         # e' quella che sta succedendo adesso.
-        date = sorted(c['d_start'] for c in attivi if c['d_start'])
+        # Chi ha diritto di voto sulla nav: una riga senza NESSUNA data non sa
+        # dire se la stagione e' adesso. Restano in pagina - togliere una
+        # scheda perche' il foglio e' incompleto sarebbe peggio - ma non tengono
+        # viva una stagione: al 21/08/2026 sono due righe estive senza date, e
+        # da sole avrebbero fatto dire "Centri estivi" alla nav anche a
+        # novembre, cioe' esattamente il difetto che questo meccanismo chiude.
+        # 'attivi' qui e' quindi un numero diverso da quello che la pagina
+        # mostra, ed e' voluto: quello sta in data/conteggi.json.
+        votanti = [c for c in attivi if c['d_start'] or c['d_end']]
+        date = sorted(c['d_start'] for c in votanti if c['d_start'])
         stato[chiave] = {
             'file': cfg['file'],
             'voce': voce_nav(cfg),
-            'attivi': len(attivi),
+            'attivi': len(votanti),
             'inizio': date[0].isoformat() if date else None,
         }
         indicizzabili[cfg['file']] = bool(attivi)

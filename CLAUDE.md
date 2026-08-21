@@ -504,6 +504,13 @@ Le decisioni dentro, che non si ricavano dal diff:
   voci. Spariscono anche la riga di rimando in coda all'hero dell'agenda. Non e'
   un buco: chiedere di andare a vedere una pagina che dice «torna in primavera»
   e' peggio di non chiedere niente.
+- **Una riga senza nessuna data non vota.** Resta in pagina — togliere una
+  scheda perche' il foglio e' incompleto sarebbe peggio — ma non tiene viva una
+  stagione. Al 21/08/2026 sono due righe estive senza date («Estate ragazzi
+  2026», «Oratorio Aperto Settembre 2026») e da sole avrebbero fatto dire
+  «Centri estivi» alla nav anche a novembre, cioe' il difetto che tutto questo
+  chiude. Quindi `attivi` in `centri-stagioni.json` (14) e' un numero **diverso**
+  da quello che la pagina mostra (16), che sta in `data/conteggi.json`.
 - **Lo stato si FONDE, non si sostituisce.** Se il foglio non si legge, di quella
   stagione non sappiamo niente e il valore di ieri resta. Riscrivendo il file da
   zero, **un timeout di Google avrebbe spento una voce di nav su tutto il
@@ -545,6 +552,18 @@ stagione, scritte perche' senza quelle le pagine risultavano identiche al
 97,7%). Una riga con `stagione = carnevale` non se la puo' inventare: si
 aggiunge una voce a `STAGIONI` col suo testo, una volta, e da quel momento
 appare e sparisce da sola col foglio.
+
+Due difetti trovati dalle prove il 21/08/2026, entrambi in pagine che nessuno
+guardava. **`genera_rubriche.py` ha un guscio suo**, che legge nav e footer da
+`rubriche.html` invece di `eventi.html`: si portava dietro i marker, e le 15
+pagine in `rubriche/` sono uscite con tre commenti HTML dentro la nav. La riga
+che li toglie sta adesso in tutti e due i gusci — se un domani nasce un terzo
+generatore con un guscio suo, e' la cosa da ricordare. E **la prova del
+conteggio nella riga delle quattro porte confrontava il numero esatto** con
+`data/conteggi.json`: era rossa ogni volta che un conteggio cambiava, perche'
+dentro la stessa run `genera_eventi` gira prima di `genera_luoghi` (830 nel
+registro, 825 in pagina, e avevano ragione entrambi). Ora controlla che ci sia
+**un numero**, e il disallineamento lo stampa come nota.
 
 **Bug trovato per strada, e non piccolo:** il filtro province di
 `genera_centri.py` era la lista scritta a mano `('AL', 'AT')` ed era rimasta

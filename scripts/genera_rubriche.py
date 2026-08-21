@@ -169,6 +169,13 @@ def guscio():
     def rooted(frag):
         frag = re.sub(r'(href|src)="(?!https?://|/|#|mailto:|tel:)',
                       lambda m: f'{m.group(1)}="/', frag)
+        # I marker della voce stagionale dei centri servono solo dove la nav e'
+        # scritta a mano (qui: rubriche.html, che aggiorna_nav() riscrive). Nelle
+        # pagine generate la voce e' gia' risolta. Questo guscio e' gemello di
+        # quello di genera_eventi.py e la riga sta anche la': trovata da
+        # tests/porte.js, che ha contato 15 pagine rubriche con i commenti
+        # dentro dopo la prima run.
+        frag = re.sub(r'<!-- (?:NAV|MM|HERO)-CENTRI:(?:START|END) -->', '', frag)
         return frag.replace(' class="active"', '')
 
     # Anche le url() del CSS: la texture della .page-hero in rubriche.html e'
