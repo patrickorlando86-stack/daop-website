@@ -1646,6 +1646,17 @@
     "pagina": true,
     "ultima": "2026-08-29"
    },
+   "festa-patronale-di-san-desiderio-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Podestarile",
+    "manifest": "Festa Patronale di San Desiderio 2026",
+    "nome": "Festa Patronale di San Desiderio 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
    "gianfranco-manara-l-uomo-e-il-pittore-incontro-con-castelnuovo-scrivia": {
     "anni": [
      2026
@@ -2516,6 +2527,17 @@
     "organizza": "Pro Loco Cunico",
     "pagina": true,
     "ultima": "2026-08-21"
+   },
+   "festa-patronale-di-san-bartolomeo-cunico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stand Gastronomico Festa Patronale",
+    "manifest": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "nome": "Festa Patronale di San Bartolomeo - Cunico 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
    },
    "grigliata-di-ferragosto-s-m-s-cunico": {
     "anni": [
@@ -3682,6 +3704,17 @@
  },
  "morsasco": {
   "eventi": {
+   "agosto-morsasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Morsasco",
+    "manifest": "Agosto 2026 Morsasco",
+    "nome": "Agosto 2026 Morsasco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
    "cena-nutella-party-e-dj-set-con-music-power-pro-lo-morsasco": {
     "anni": [
      2026
@@ -4450,6 +4483,17 @@
     "organizza": "Pro Loco Portacomaro",
     "pagina": false,
     "ultima": "2026-08-24"
+   },
+   "san-bartolomeo-agosto-portacomaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roggero",
+    "manifest": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "nome": "San Bartolomeo Agosto 2026 - Portacomaro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-20"
    },
    "tradizionale-concerto-di-san-bartolomeo-banda-musi-portacomaro": {
     "anni": [
@@ -5491,6 +5535,17 @@
     "pagina": true,
     "ultima": "2026-08-29"
    },
+   "san-liberato-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Olmi",
+    "manifest": "San Liberato 2026",
+    "nome": "San Liberato 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-27"
+   },
    "serata-latina-pro-loco-sant-albano-stura": {
     "anni": [
      2026
@@ -6150,6 +6205,17 @@
     "pagina": false,
     "ultima": "2026-09-02"
    },
+   "festa-patronale-di-santa-varena-villa-del-foro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo ASD Forum Fulvii",
+    "manifest": "Festa Patronale di Santa Varena",
+    "nome": "Festa Patronale di Santa Varena",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
    "pomeriggio-di-festa-giochi-per-tutti-i-bambini-e-r-villa-del-foro": {
     "anni": [
      2026
@@ -6227,6 +6293,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-30"
+   },
+   "festa-patronale-san-michele-arcangelo-in-villaroma-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "nome": "Festa Patronale San Michele Arcangelo in Villaromagnano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
    },
    "fiera-e-street-food-domenica-6-settembre-villaromagnano": {
     "anni": [

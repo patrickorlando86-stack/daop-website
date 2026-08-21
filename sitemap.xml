@@ -333,6 +333,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/agosto-morsasco.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/agosto-vinchio.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -549,12 +555,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/cena-antipasti-piemontesi-e-ballo-con-orchestra-ra-sant-albano-stura.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/cena-benefica-a-favore-di-me-dea-pro-loco-san-gior-san-giorgio-monferrato.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -593,12 +593,6 @@
   <url>
     <loc>https://www.daop.it/eventi/cena-in-piazza-musica-tributo-ai-queen-casalnoceto.html</loc>
     <lastmod>2026-08-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/cena-nutella-party-e-dj-set-con-music-power-pro-lo-morsasco.html</loc>
-    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -694,12 +688,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/di-dla-festa-sagra-della-patata-bozzole.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/dj-toyu-cunicosummerfestival-pro-loco-cunico.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -951,7 +939,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/festa-patronale-di-san-bartolomeo-con-menu-tradizi-morsasco.html</loc>
+    <loc>https://www.daop.it/eventi/festa-patronale-di-san-bartolomeo-cunico.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festa-patronale-di-san-desiderio-castelnuovo-scrivia.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -987,6 +981,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/festa-patronale-di-santa-varena-villa-del-foro.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/festa-patronale-felizzano.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1000,6 +1000,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/festa-patronale-osasco.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festa-patronale-san-michele-arcangelo-in-villaroma-villaromagnano.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1065,12 +1071,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/fiera-e-street-food-domenica-6-settembre-villaromagnano.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/fiera-nuova-bue-grasso-cassinelle.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1108,12 +1108,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/frinco.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/fritto-di-pesce-pro-loco-sant-albano-stura.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1162,12 +1156,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/govone-in-festa-sagra-della-lumaca.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/gran-fritto-misto-pro-loco-sant-albano-stura.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1365,12 +1353,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/luna-park-castelnuovo-scrivia.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/marmotte-adventure-laboratori-di-pian-mune-paesana.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1378,18 +1360,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/masca-il-ritorno-della-strega-pro-loco-di-spigno-m-spigno-monferrato.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/menu-tradizionale-e-fritto-misto-di-pesce-con-jack-morsasco.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/messa-solenne-e-giochi-popolari-pro-loco-sant-alba-sant-albano-stura.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1449,12 +1419,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/orchestra-spettacolo-luigi-gallia-pro-loco-cunico.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/ovada-in-festa-pro-loco-ovada-e-del-monferrato-ova.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1498,12 +1462,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/passeggiate-nella-natura-per-bambini-e-famiglie-cuneo.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/percorso-apericena-e-street-food-pro-loco-sant-alb-sant-albano-stura.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1563,19 +1521,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/pomeriggio-di-festa-giochi-per-tutti-i-bambini-e-r-villa-del-foro.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/pompieropoli-buttigliera-buttigliera-d-asti.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/porchetta-e-ballo-con-orchestra-borsa-dei-castelli-sant-albano-stura.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1629,12 +1575,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/raviolata-pro-loco-sant-albano-stura.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/rewined-festival-mombercelli.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1642,12 +1582,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/rivoira-by-sport-boves.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1755,12 +1689,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/sagra-della-soma-d-aj-gruppo-alpini-sant-albano-st-sant-albano-stura.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/sagra-della-tagliatella-al-tartufo-cortazzone.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1821,6 +1749,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/san-bartolomeo-agosto-portacomaro.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/san-bernardo-brossasco.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1828,6 +1762,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/san-fermo-pro-loco-roccaforte-ligure.html</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/san-liberato-sant-albano-stura.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1954,12 +1894,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/stratortona-croce-rossa-italiana-comitato-di-torto.html</loc>
-    <lastmod>2026-08-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/street-food-showlab-con-nico-franz-e-presentazione-villaromagnano.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

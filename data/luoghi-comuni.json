@@ -6,7 +6,7 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 71,
+  "n": 72,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
@@ -1146,7 +1146,7 @@
  },
  "c-cn-entracque": {
   "comune": "Entracque",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-envie": {
@@ -1182,6 +1182,11 @@
  "c-cn-frassino": {
   "comune": "Frassino",
   "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-govone": {
+  "comune": "Govone",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-lagnasco": {
@@ -1401,7 +1406,7 @@
  },
  "c-cn-venasca": {
   "comune": "Venasca",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-vernante": {
@@ -1426,6 +1431,11 @@
  },
  "c-cn-villanova-solaro": {
   "comune": "Villanova Solaro",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-villar-san-costanzo": {
+  "comune": "Villar San Costanzo",
   "n": 1,
   "prov": "CN"
  },
