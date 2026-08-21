@@ -795,6 +795,17 @@
  },
  "busca": {
   "eventi": {
+   "busca-comics-games-associazione-ingenium-a-p-s": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Busca Comics & Games - Associazione Ingenium A.P.S.",
+    "organizza": "Associazione Ingenium A.P.S",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   },
    "castelli-aperti-a-ferragosto-castello-del-roccolo-busca": {
     "anni": [
      2026
@@ -805,6 +816,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-16"
+   },
+   "festa-patronale-san-chiaffredo-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tensostruttura Festa Patronale San Chiaffredo",
+    "manifest": "Festa Patronale San Chiaffredo 2026",
+    "nome": "Festa Patronale San Chiaffredo 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
    }
   },
   "nome": "Busca",
@@ -1448,6 +1470,23 @@
   "nome": "Castell'Alfero",
   "prov": "AT"
  },
+ "castellar": {
+  "eventi": {
+   "laboratorio-creativo-di-feltro-ecomuseo-della-past-castellar": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Cavalier Tomatis",
+    "manifest": "Festival della Cucina Popolare Alpina",
+    "nome": "Laboratorio creativo di feltro - Ecomuseo della Pastorizia & Romina Dogliani",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Castellar",
+  "prov": "CN"
+ },
  "castellazzobormida": {
   "eventi": {
    "coco-cinema-sotto-le-stelle-castellazzo-bormida": {
@@ -1882,7 +1921,7 @@
     "anni": [
      2026
     ],
-    "luogo": "Punto Bookcrossing Kids - Cortile della Biblioteca Civica",
+    "luogo": "Punto Bookcrossing Kids - Cortile della Biblioteca",
     "manifest": "",
     "nome": "Consegna dei Libri - Pro Loco Ceresole Alba",
     "organizza": "Pro Loco Ceresole Alba",
@@ -2183,12 +2222,12 @@
     "anni": [
      2026
     ],
-    "luogo": "",
+    "luogo": "Cortemilia",
     "manifest": "",
     "nome": "Cortemilia Comics & Games 2026",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-01-01"
+    "ultima": "2026-08-29"
    }
   },
   "nome": "Cortemilia",
@@ -3042,6 +3081,23 @@
   "nome": "Fossano",
   "prov": "CN"
  },
+ "frabosasoprana": {
+  "eventi": {
+   "fraborienteering-adventure-moms-di-frabosa-soprana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Pelata",
+    "manifest": "",
+    "nome": "Fraborienteering Adventure - Moms di Frabosa Soprana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Frabosa Soprana",
+  "prov": "CN"
+ },
  "frassino": {
   "eventi": {
    "sulla-pista-dello-skills-bike-park-attivita-guidat-frassino": {
@@ -3270,6 +3326,23 @@
   "nome": "Govone",
   "prov": "CN"
  },
+ "grinzanecavour": {
+  "eventi": {
+   "lettura-per-bambini-una-mattina-con-viola-pro-loco-grinzane-cavour": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale",
+    "manifest": "76° Fiera Gallese",
+    "nome": "Lettura per bambini \"Una Mattina con Viola\" - Pro Loco Gallo Grinzane",
+    "organizza": "Pro Loco Gallo Grinzane",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Grinzane Cavour",
+  "prov": "CN"
+ },
  "grondona": {
   "eventi": {
    "sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona": {
@@ -3289,6 +3362,17 @@
  },
  "limonepiemonte": {
   "eventi": {
+   "corrado-brignolo-presenta-villa-felice-un-libro-di-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Museo dello Sci",
+    "manifest": "",
+    "nome": "Corrado Brignolo presenta \"Villa Felice\", un libro di favole per ragazzi e famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   },
    "estate-di-storie-letture-ad-alta-voce-biblioteca-e-limone-piemonte": {
     "anni": [
      2026
@@ -3407,6 +3491,17 @@
  },
  "mombarcaro": {
   "eventi": {
+   "parole-sulla-sabbia-cicogne-teatro-mombarcaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa dei Battuti",
+    "manifest": "Teatro in Alta Langa Estate 2026",
+    "nome": "Parole sulla Sabbia - Cicogne Teatro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   },
    "sagra-dello-gnocco-festa-patronale-mombarcaro": {
     "anni": [
      2026
@@ -3825,6 +3920,23 @@
   "nome": "Noche",
   "prov": "CN"
  },
+ "novello": {
+  "eventi": {
+   "l-albero-compagnia-il-cerchio-tondo-novello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "Burattinarte Festival",
+    "nome": "L'Albero - Compagnia Il Cerchio Tondo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "Novello",
+  "prov": "CN"
+ },
  "noviligure": {
   "eventi": {
    "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
@@ -4173,6 +4285,17 @@
     "organizza": "Pro Loco Pontechianale",
     "pagina": false,
     "ultima": "2026-08-12"
+   },
+   "il-cantico-e-frate-vento-il-mondo-dei-rapaci-dimos-pontechianale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo",
+    "manifest": "Emozioni & Avventura in Valle Varaita",
+    "nome": "Il Cantico e frate vento - Il mondo dei rapaci: dimostrazioni di falconeria e spettacolo di volo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
    },
    "obiettivo-impollinatori-parco-del-monviso-pontechianale": {
     "anni": [
@@ -4908,6 +5031,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "negozi-in-strada-sport-in-piazza-confcommercio-sal-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Saluzzo",
+    "manifest": "",
+    "nome": "Negozi in Strada & Sport in Piazza - Confcommercio Saluzzo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    }
   },
   "nome": "Saluzzo",
@@ -5112,6 +5246,23 @@
   },
   "nome": "San Damiano d'Asti",
   "prov": "AT"
+ },
+ "sangiacomodiroburent": {
+  "eventi": {
+   "laboratorio-di-candele-in-cera-di-riso-pro-loco-sa-san-giacomo-di-roburent": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Laboratorio di candele in cera di riso - Pro Loco San Giacomo",
+    "organizza": "Pro Loco San Giacomo",
+    "pagina": true,
+    "ultima": "2026-08-22"
+   }
+  },
+  "nome": "San Giacomo di Roburent",
+  "prov": "CN"
  },
  "sangiorgiomonferrato": {
   "eventi": {
@@ -5761,6 +5912,23 @@
   },
   "nome": "Silvano d'Orba",
   "prov": "AL"
+ },
+ "sommarivadelbosco": {
+  "eventi": {
+   "picnic-tra-le-pagine-biblioteca-civica-di-sommariv-sommariva-del-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco del Bersaglio",
+    "manifest": "",
+    "nome": "Picnic tra le Pagine - Biblioteca Civica di Sommariva del Bosco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Sommariva del Bosco",
+  "prov": "CN"
  },
  "spignomonferrato": {
   "eventi": {
