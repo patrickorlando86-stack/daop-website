@@ -360,8 +360,246 @@ def openday(c, oggi=None):
             'ora': (rec.get('ora') or '').strip()}
 
 
-def is_premium(c):
-    return (c.get('premium') or '').strip().lower().replace('sì', 'si') == 'si'
+# ── LA TAB "Realta": una riga per societa', non per corso ─────────────────
+#
+# Giovanni (21/08/2026) vuole che #r-pgs-roccavione sia la scheda della societa':
+# logo, descrizione, comune, indirizzo, sito, contatti, attivita' che organizza,
+# corsi, appuntamenti speciali. Nella tab Attivita niente di tutto questo esiste,
+# e non ci deve stare: sarebbero lo stesso logo e la stessa descrizione ricopiati
+# su cinque righe, che e' il modo piu' sicuro di farli divergere.
+#
+# Quindi una tab a parte, LETTA SE C'E'. Se non c'e' la scheda si costruisce
+# lo stesso, con quello che si ricava dai corsi (comuni, discipline, sede, sito,
+# contatto): meno ricca, mai vuota, mai rotta. E' la regola di link_luoghi() —
+# quello che manca non si stampa, non si inventa.
+COLONNE_REALTA = {
+    # 'nome' NON accetta la parola secca "Nome", ed e' apposta: vedi il commento
+    # su gviz sopra. Se la tab non esiste, gviz risponde col PRIMO foglio del
+    # documento, che e' Luoghi — e Luoghi ha "Nome", "Descrizione", "Indirizzo",
+    # "Citta'", "Website", "Telefono", "Email". Chiedendo una colonna che si
+    # chiami "Organizzatore" (o "Realta'", o "Societa'") il ripiego non passa,
+    # perche' quella colonna Luoghi non ce l'ha.
+    'nome': ('organizzatore', 'realtà', 'realta', 'società', 'societa',
+             'ente', 'associazione', 'nome realtà', 'nome realta'),
+    'descr': ('descrizione', 'descrizione breve', 'presentazione', 'note'),
+    'logo': ('logo', 'immagine', 'stemma'),
+    'citta': ('città', 'citta', 'comune', 'paese'),
+    'indirizzo': ('indirizzo', 'sede', 'via'),
+    'sito': ('sito', 'website', 'sito web', 'link', 'url'),
+    'tel': ('telefono', 'tel', 'cellulare', 'contatto'),
+    'email': ('email', 'mail', 'e-mail', 'posta'),
+}
+
+TAB_REALTA = os.environ.get('REALTA_TAB')
+TABS_REALTA = [TAB_REALTA] if TAB_REALTA else ['Realta', 'Realtà', 'Organizzatori']
+
+
+def _mappa_realta(header):
+    out = {}
+    for i, h in enumerate(header):
+        h_norm = (h or '').strip().lower()
+        for campo, alias in COLONNE_REALTA.items():
+            if h_norm in alias and campo not in out:
+                out[campo] = i
+    return out
+
+
+def leggi_realta(orgs):
+    """Le schede delle realta', indicizzate per nome. {} se la tab non c'e'.
+
+    `orgs` sono i nomi degli organizzatori che stanno davvero nei corsi, e sono
+    il terzo airbag dopo il nome della colonna: una riga che non corrisponde a
+    nessuna societa' in pagina viene buttata via. Cosi' anche se un giorno gviz
+    rispondesse con un foglio a caso che per disgrazia ha una colonna
+    "Organizzatore", quel foglio non riuscirebbe comunque a entrare in pagina.
+
+    Il confronto e' sullo slug: nel foglio "PGS Roccavione" e "P.G.S.
+    Roccavione" sono la stessa societa' e non devono diventare due schede."""
+    chiavi = {G.slugify(o) for o in orgs if o}
+    for tab in TABS_REALTA:
+        try:
+            t = _scarica(tab)
+        except Exception as err:
+            print(f"[genera_corsi] tab realta' '{tab}' non leggibile ({err})")
+            continue
+        righe = [r for r in csv.reader(io.StringIO(t)) if any(x.strip() for x in r)]
+        hi = next((i for i, r in enumerate(righe)
+                   if _mappa_realta(r).get('nome') is not None), None)
+        if hi is None:
+            continue
+        idx = _mappa_realta(righe[hi])
+        out = {}
+        for r in righe[hi + 1:]:
+            def val(campo):
+                i = idx.get(campo)
+                return (r[i].strip() if i is not None and i < len(r) else '')
+            k = G.slugify(val('nome'))
+            if not k or k not in chiavi:
+                continue
+            out[k] = {campo: val(campo) for campo in COLONNE_REALTA}
+        print(f"[genera_corsi] tab '{tab}': {len(out)} realta' riconosciute "
+              f"su {len(chiavi)} in pagina")
+        return out
+    print("[genera_corsi] nessuna tab realta': le schede si ricavano dai corsi")
+    return {}
+
+
+def _uniche(valori):
+    """I valori distinti, nell'ordine in cui si incontrano. Serve per i campi
+    che si ricavano dai corsi: se cinque squadre della stessa societa' hanno la
+    stessa palestra, l'indirizzo si scrive una volta."""
+    out = []
+    for v in valori:
+        v = (v or '').strip()
+        if v and v not in out:
+            out.append(v)
+    return out
+
+
+def scheda_realta(org, corsi_org, info):
+    """La scheda di una societa': l'ancora #r-… che le si manda su WhatsApp.
+
+    Sta IN FONDO alla pagina e non in mezzo all'elenco, che e' la seconda meta'
+    della decisione del 21/08: in cima c'e' l'elenco dei corsi, perche' un
+    genitore sceglie un corso e non una societa'. Ma la societa' e' il passo
+    successivo, e la sua scheda deve esistere davvero — con un indirizzo, un
+    numero, e i suoi corsi linkati uno per uno.
+
+    Quello che il foglio non dice si ricava dai corsi: e' il motivo per cui
+    questa scheda non e' mai vuota, nemmeno il primo giorno."""
+    a = _ancora(org)
+    dentro = []
+    logo = (info.get('logo') or '').strip()
+    if logo:
+        dentro.append(f'<img class="co-logo" src="{G.esc(logo)}" alt="Logo di '
+                      f'{G.esc(org)}" loading="lazy" decoding="async">')
+    descr = (info.get('descr') or '').strip()
+    if descr:
+        dentro.append(f'<p class="co-realta-d">{G.esc(descr)}</p>')
+
+    dati = []
+    comuni = _uniche([info.get('citta')]) or _uniche(c['citta'] for c in corsi_org)
+    if comuni:
+        dati.append(('Dove', G.esc(', '.join(comuni))))
+    indirizzi = _uniche([info.get('indirizzo')]) or _uniche(c['sede'] for c in corsi_org)
+    if indirizzi:
+        dati.append(('Indirizzo', G.esc(' · '.join(indirizzi[:2]))))
+    # Le attivita' che organizza: e' la stessa disciplina che sta in riga sui
+    # corsi, qui riunita. Detta una volta sola non e' una ripetizione, e' il
+    # riassunto di cosa fa questa societa'.
+    disc = _uniche(_cat_foglia(c) for c in corsi_org)
+    if disc:
+        dati.append(('Attività', G.esc(' · '.join(disc))))
+    tel = (info.get('tel') or '').strip() or (
+        _uniche(c['contatto'] for c in corsi_org)[:1] or [''])[0]
+    if tel:
+        dati.append(('Contatti', G.esc(tel)))
+    mail = (info.get('email') or '').strip()
+    if mail:
+        dati.append(('Email', f'<a href="mailto:{G.esc(mail)}">{G.esc(mail)}</a>'))
+    sito = (info.get('sito') or '').strip() or (
+        _uniche(c['sito'] for c in corsi_org)[:1] or [''])[0]
+    if sito:
+        # Stesso rel dei link "Scopri il corso": la presenza e' pagata, quindi
+        # sponsored. Vedi il commento in card().
+        dati.append(('Sito', f'<a href="{G.esc(sito)}" rel="sponsored noopener" '
+                             f'target="_blank">{G.esc(G.trunc(sito, 46))}</a>'))
+    if dati:
+        dentro.append('<dl class="co-dati">' + ''.join(
+            f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>')
+
+    # I corsi che organizza, linkati alla loro riga: e' quello che rende questa
+    # scheda una scheda e non un riquadro di contatti.
+    voci = ' · '.join(f'<a href="#{_id_corso(c)}">{G.esc(c["nome"])}</a>'
+                      for c in corsi_org)
+    dentro.append(f'<p class="co-realta-corsi"><strong>'
+                  f'{"Corsi" if len(corsi_org) > 1 else "Corso"}:</strong> {voci}</p>')
+
+    # Gli appuntamenti speciali. Restano EVENTI e vivono nella tab Eventi: qui
+    # se ne stampa solo il rimando, come fa la riga open day dei corsi. Un
+    # saggio o una festa di Natale entra da li' e compare anche in agenda, nella
+    # pagina del comune e nel messaggio del giovedi'.
+    speciali, visti = [], set()
+    for c in corsi_org:
+        od = openday(c)
+        if od and od['url'] not in visti:
+            visti.add(od['url'])
+            speciali.append(f'<a href="{od["url"]}">{G.esc(od["quando"])}</a>')
+    if speciali:
+        dentro.append('<p class="co-realta-ev"><strong>Open day e appuntamenti:'
+                      '</strong> ' + ' · '.join(speciali) + '</p>')
+
+    # <div> e non <section>: section{padding:100px 24px} arriva dal CSS di
+    # sistema, e una scheda nascosta dai filtri lascerebbe 200px di niente.
+    return (f'  <div class="co-realta" id="{a}" data-org="{G.slugify(org)}">\n'
+            f'    <h3>{G.esc(org)}</h3>\n    '
+            + '\n    '.join(dentro) + '\n  </div>')
+
+
+# ── CHI RISPONDE A CHI SCRIVE ────────────────────────────────────────────
+#
+# Deciso da Patrick il 21/08/2026: Cuneo la segue Giovanni, Alessandria e Asti
+# le seguiamo noi. Non e' una cortesia — e' il modello dei partner territoriali:
+# chi cura un territorio e' quello che le societa' di quel territorio conoscono
+# gia', e mandarle a un indirizzo che non risponde e' il modo piu' veloce di
+# perdere una scheda.
+#
+# La riga si compone dai DATI, non da un testo scritto a mano: finche' i corsi
+# sono tutti di Cuneo si legge un indirizzo solo, e la seconda mail compare da
+# se' il giorno che entra la prima societa' di Alessandria. Un testo fisso con
+# due indirizzi direbbe oggi una cosa non vera.
+MAIL_PROV = {'CN': 'collabora@eventiperbambinicuneo.it'}
+MAIL_DEFAULT = 'info@daop.it'
+
+
+def _mail_per(corsi):
+    """[(province, mail)], nell'ordine in cui vanno scritte. Le province che
+    condividono un indirizzo stanno insieme."""
+    provs = sorted({(c['prov'] or '').strip().upper() for c in corsi if c['prov']})
+    if not provs:
+        return [([], MAIL_DEFAULT)]
+    gruppi = {}
+    for p in provs:
+        gruppi.setdefault(MAIL_PROV.get(p, MAIL_DEFAULT), []).append(p)
+    # Prima l'indirizzo che copre piu' province: e' quello che risponde a piu'
+    # gente, e la frase comincia da li'.
+    return sorted(((v, k) for k, v in gruppi.items()),
+                  key=lambda kv: (-len(kv[0]), kv[1]))
+
+
+def _elenco_prov(sigle):
+    nomi = [PROV_NOME.get(s, s) for s in sigle]
+    if len(nomi) == 1:
+        return nomi[0]
+    return ', '.join(nomi[:-1]) + ' e ' + nomi[-1]
+
+
+def blocco_adesione(corsi):
+    """L'invito alle societa', in coda alla pagina.
+
+    NON DICE CHE E' GRATIS, e non e' una dimenticanza: fino al 21/08/2026 c'era
+    scritto "la scheda e' gratuita e la compiliamo noi". Giovanni ha fatto
+    notare che regalare tutto in vetrina rende impossibile far percepire il
+    valore di quello che si vende — e la decisione presa e' che la presenza
+    nella guida sia una sola, uguale per tutti, e pagata. Da qui la riga: non si
+    scrive un prezzo (si tratta caso per caso) e non si scrive "gratuita", che
+    e' una promessa che poi va ritirata.
+
+    E non dice nemmeno "scopri di piu'": dice cosa comprende, perche' e' quello
+    che una societa' deve sapere prima di scrivere."""
+    caselle = _mail_per(corsi)
+    parti = []
+    for sigle, mail in caselle:
+        eti = (f"In provincia di {_elenco_prov(sigle)} scrivi a "
+               if len(caselle) > 1 else "Scrivici a ")
+        parti.append(f'{eti}<a href="mailto:{mail}">{mail}</a>')
+    return (
+        '  <p class="co-nota"><strong>Sei una scuola, un\'associazione o una '
+        'società sportiva e proponi attività per bambini e ragazzi?</strong> '
+        'Stiamo costruendo una guida alle attività per famiglie: la presenza '
+        'comprende la vostra realtà, i corsi che proponete, le informazioni '
+        'utili per le famiglie, le prove e gli open day collegati al calendario '
+        'degli eventi. ' + '. '.join(parti) + '.</p>')
 
 
 def _cat_foglia(c):
@@ -370,39 +608,57 @@ def _cat_foglia(c):
     return (c.get('cat') or '').split('›')[-1].strip()
 
 
-def card(c, idx, mostra_cat=False):
+def _ancora(org):
+    """L'ancora della realta': #r-pgs-roccavione. E' il link che si manda a una
+    societa' ("questa e' la tua pagina"), quindi il nome se lo porta scritto e
+    non dipende dall'ordine dell'elenco."""
+    return 'r-' + G.slugify(org or 'altre-realta')
+
+
+def _id_corso(c):
+    """L'ancora di un singolo corso. Serve alla scheda della realta', che elenca
+    i suoi corsi e ci deve poter mandare: senza, quell'elenco sarebbe un elenco
+    di nomi che non porta da nessuna parte."""
+    return 'c-' + G.slugify(f"{c.get('org', '')}-{c.get('nome', '')}")
+
+
+def card(c, idx):
     """Una scheda in stile agenda: riga sempre visibile + dettaglio che si apre
     al tocco. Riusa le classi .event-card/.ev-* del resto del sito.
 
-    'mostra_cat' scrive la disciplina in riga. E' la regola gia' scritta per le
-    pagine comune — "la categoria si scrive, non solo si colora": una tinta
-    senza etichetta e' solo una tinta, e qui la categoria esisteva soltanto
-    dentro data-cat, cioe' serviva al filtro e non a chi legge.
-    Si stampa solo dove il gruppo MESCOLA discipline, per la stessa ragione per
-    cui le pagine comune la nascondono dentro una manifestazione uniforme: una
-    societa' di pallavolo con cinque squadre per annata direbbe "Pallavolo"
-    cinque volte di fila, che e' rumore e non informazione.
-    E si stampa la FOGLIA ("Arti marziali") e non la radice ("Sport"): il
-    secondo livello e' quello che dice davvero cos'e' il corso."""
+    LA RIGA CHIUSA PORTA TRE DATI, E SONO I TRE DEI FILTRI: disciplina, eta',
+    comune. E' la richiesta di Giovanni del 21/08/2026, e la ragione e' che
+    questa pagina si legge scorrendo: chi e' arrivato qui sta scremando, non
+    ancora scegliendo. I giorni e gli orari — che prima stavano in riga —
+    servono a chi ha gia' scremato, quindi scendono nel dettaglio: sono anche il
+    dato piu' lungo e piu' fragile, perche' cambiano a stagione in corso.
+
+    LA DISCIPLINA SI SCRIVE SEMPRE, ed e' un cambio rispetto a prima. Usciva
+    solo dove il gruppo mescolava piu' discipline, perche' dentro una societa'
+    di pallavolo "Pallavolo" ripetuto su cinque righe e' rumore. Quel
+    ragionamento vale in un elenco raggruppato per realta'; qui l'elenco e'
+    piatto e la riga sopra puo' essere un corso di musica, quindi la disciplina
+    e' il primo dato utile e non una ripetizione.
+
+    NIENTE PILLOLA "SCHEDA COMPLETA". Dal 21/08/2026 la presenza nella guida e'
+    una sola e uguale per tutti: non esiste piu' un livello gratuito da cui
+    distinguersi, quindi un bollino che dice "questa ha aderito" distinguerebbe
+    da niente. Quello che il premium faceva davvero — descrizione lunga,
+    locandina — ce l'ha adesso ogni scheda che abbia il materiale."""
     color, tint, ink = ACCENTO
     det_id = f"det-co-{idx}"
     r = eta_range(c)
 
+    # Il comune, non la sede: l'indirizzo della palestra e' lungo e in riga non
+    # aiuta a scegliere. La sede sta nel dettaglio, col suo segnaposto.
     bits = []
     et = eta_testo(c)
     if et:
         bits.append(G.esc(et))
-    for testo in (c['giorni'], c['citta']):
-        if testo:
-            bits.append(G.esc(G.trunc(testo, 34)))
+    if c['citta']:
+        bits.append(G.esc(G.trunc(c['citta'], 34)))
 
     tags = []
-    # Chi paga si vede, e si vede che ha pagato: e' la stessa dichiarazione che
-    # luoghi.html fa in #come-ordiniamo, e non e' galanteria — art. 22 comma
-    # 4-bis del Codice del consumo. Quello che il premium NON fa e' spostare la
-    # riga: resta al suo posto alfabetico, dentro la sua realta'.
-    if is_premium(c):
-        tags.append('<span class="ev-pill is-pagata">★ Scheda completa</span>')
     # L'open day sta in RIGA e non solo nel dettaglio: e' l'unica cosa della
     # pagina che scade. Un corso lo trovi anche fra un mese, un open day no.
     od = openday(c)
@@ -411,86 +667,101 @@ def card(c, idx, mostra_cat=False):
     # La prova e' il campo che decide: un genitore sceglie un corso dopo averlo
     # fatto provare al figlio. Sta in riga, non sepolta nel dettaglio.
     if c['prova']:
-        tags.append(f'<span class="ev-pill is-prova">Prova gratuita</span>')
-    if c['prezzo']:
-        tags.append(f'<span class="ev-pill">{G.esc(G.trunc(c["prezzo"], 22))}</span>')
+        tags.append('<span class="ev-pill is-prova">Prova gratuita</span>')
 
     righe_det = []
     # La locandina si guarda, quindi qui va l'originale e non la miniatura — e'
     # la stessa regola degli elenchi al contrario. Sta dentro un dettaglio
     # chiuso, che il browser non disegna: con loading=lazy non parte nessuna
     # richiesta finche' la riga non si apre.
-    if is_premium(c) and c['loc']:
+    if c['loc']:
         src = G.loc_path(c['loc'])
         if src:
             righe_det.append(
                 f'<img class="co-loc" src="{G.esc(src)}" alt="Locandina di '
                 f'{G.esc(c["nome"])}" loading="lazy" decoding="async">')
-    # Il premium aggiunge TESTO, non posizione: se c'e' la descrizione lunga si
-    # usa quella, se no si ripiega su quella normale. Mai il contrario.
-    testo = (c['descr_premium'] if is_premium(c) and c['descr_premium']
-             else c['descr'])
+    # Se c'e' una descrizione lunga vince quella, e non dipende piu' da un flag:
+    # il testo migliore e' il testo migliore, e chi ce l'ha ce l'ha.
+    testo = c['descr_premium'] or c['descr']
     if testo:
         righe_det.append(f'<p class="event-desc">{G.esc(testo)}</p>')
     if od:
         quando = od['quando'] + (f", ore {od['ora']}" if od['ora'] else '')
         righe_det.append(
             f'<p class="co-openday"><strong>Open day:</strong> {G.esc(quando)} — '
-            f"<a href=\"{od['url']}\">vedi l'evento →</a></p>")
+            f'<a href="{od["url"]}">vedi la locandina →</a></p>')
     if c['prova']:
         righe_det.append(f'<p class="co-prova">Prova: {G.esc(c["prova"])}</p>')
     dove = c['sede'] or c['citta']
     if dove:
         righe_det.append(f'<p class="ev-where">{G.PIN_SVG} {G.esc(dove)}</p>')
+
     dati = []
+    # L'ORGANIZZATORE E' IL PRIMO DATO DEL DETTAGLIO, e non sta piu' in riga.
+    # Nell'elenco un genitore sceglie il corso, non la societa'; la societa' e'
+    # il passo dopo, e il link porta alla sua scheda in fondo alla pagina.
+    if c['org']:
+        dati.append(('Organizzatore',
+                     f'<a href="#{_ancora(c["org"])}">{G.esc(c["org"])}</a>'))
     if c['periodo']:
         dati.append(('Periodo', G.esc(c['periodo'])))
-    if c['iscrizioni']:
-        dati.append(('Iscrizioni', G.esc(c['iscrizioni'])))
+    # I giorni scendono qui dalla riga: servono a chi ha gia' scelto.
+    if c['giorni']:
+        dati.append(('Giorni', G.esc(c['giorni'])))
+    if c['prezzo']:
+        dati.append(('Quota', G.esc(c['prezzo'])))
+    # NIENTE "Iscrizioni aperte/chiuse", tolto il 21/08/2026 su richiesta di
+    # Giovanni. E' un dato che scade in silenzio e che nessuno viene ad
+    # aggiornare: alla pallavolo si entra quasi sempre, a un corso di teatro
+    # quasi mai, e la risposta vera ce l'ha la societa' — che qui sotto ha il
+    # suo numero. Una riga che dice "Aperte" a gennaio e' peggio di nessuna riga.
+    if c['contatto']:
+        dati.append(('Contatti', G.esc(c['contatto'])))
     # Il contatto e' UNO, quello della realta'. I referenti restano nomi: sulla
     # locandina di partenza erano cinque cellulari di volontarie e, a confronto
     # con quella dell'anno prima, erano cambiati quasi tutti. Ripubblicarli qui
     # vorrebbe dire mandare le famiglie a telefonare a chi non segue piu' quel
     # gruppo — e un numero personale dentro un archivio consultabile non e' la
     # stessa cosa dello stesso numero stampato su un manifesto.
-    if c['contatto']:
-        dati.append(('Contatti', G.esc(c['contatto'])))
     if c['referenti']:
         dati.append(('Referenti', G.esc(c['referenti'])))
     if dati:
         righe_det.append('<dl class="co-dati">' + ''.join(
             f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>')
-    # "Scopri il corso →". Il rel non e' una formalita': un link commerciale che
-    # passa PageRank e' uno schema di link, e si paga con un'azione manuale sul
-    # DOMINIO — cioe' su eventi.html, che regge il traffico. sponsored dove la
-    # presenza e' pagata, nofollow dove e' una nostra segnalazione. Stessa
-    # regola di riga() in genera_luoghi.py.
+    # "Scopri il corso →" deve portare alla pagina del corso sul sito della
+    # scuola, non alla home della societa'. Il rel non e' una formalita': un
+    # link commerciale che passa PageRank e' uno schema di link, e si paga con
+    # un'azione manuale sul DOMINIO — cioe' su eventi.html, che regge il
+    # traffico. Da quando la presenza e' una sola ed e' pagata e' sponsored per
+    # tutti: non c'e' piu' una meta' "nostra segnalazione" da distinguere.
     if c['sito']:
-        rel = 'sponsored' if is_premium(c) else 'nofollow'
         righe_det.append(
             f'<p class="co-fuori"><a href="{G.esc(c["sito"])}" '
-            f'rel="{rel} noopener" target="_blank">Scopri il corso →</a></p>')
+            f'rel="sponsored noopener" target="_blank">Scopri il corso →</a></p>')
     if c['verificato']:
         # Un corso non scade da solo come un evento: senza questa riga una
         # scheda ferma da un anno e' identica a una aggiornata ieri.
-        righe_det.append(f'<p class="co-verif">Dati verificati il {G.esc(c["verificato"])}</p>')
+        righe_det.append(
+            f'<p class="co-verif">Dati verificati il {G.esc(c["verificato"])}</p>')
 
     eta_attr = f' data-etamin="{r[0]}" data-etamax="{r[1]}"' if r else ''
-    return f'''        <article class="event-card" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(_cat_foglia(c))}" data-prova="{'1' if c['prova'] else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
-          <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
+    cat = _cat_foglia(c)
+    riga_cat = f'<span class="co-cat">{G.esc(cat)}</span>' if cat else ''
+    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-prova="{'1' if c['prova'] else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+          <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
             <span class="ev-thumb is-ph" aria-hidden="true">{G.esc(_emoji(c))}</span>
             <span class="ev-main">
-              {f'<span class="co-cat">{G.esc(_cat_foglia(c))}</span>' if mostra_cat and _cat_foglia(c) else ''}
+              {riga_cat}
               <span class="ev-name">{G.esc(G.trunc(c['nome'], 110))}</span>
               <span class="ev-line">{" · ".join(bits)}</span>
               <span class="ev-tags">{"".join(tags)}</span>
             </span>
             {G.CHEV_SVG}
-          </button></h4>
+          </button></h3>
           <div class="ev-det" id="{det_id}" hidden>
             {chr(10) + "            ".join(righe_det)}
           </div>
-        </article>'''
+        </article>"""
 
 
 def _emoji(c):
@@ -590,16 +861,12 @@ CSS = """
 .co-crumb{font-size:.85rem;opacity:.85;margin-bottom:10px}
 .co-crumb a{color:inherit}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
-.co-realta{margin:30px 0 10px;scroll-margin-top:120px}
-.co-realta h2{font-size:1.18rem;margin:0 0 2px}
-.co-realta p{margin:0;font-size:.92rem;opacity:.75}
-/* La disciplina scritta in riga, quando la realta' ne ha piu' di una. Stessi
-   valori di .com-cat nelle pagine comune: e' la stessa cosa e deve leggersi
-   allo stesso modo. Il colore viene da --cat-ink, che la card imposta. */
+/* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
+   e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
+   --cat-ink, che la card imposta. */
 .co-cat{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;
   text-transform:uppercase;color:var(--cat-ink,#606d7a);opacity:.78;margin-bottom:2px}
 .ev-pill.is-prova{background:#eaf7ee;color:#2E7D46}
-.ev-pill.is-pagata{background:#fdf3e0;color:#8a5a12}
 .ev-pill.is-openday{background:#2E7D46;color:#fff}
 .co-openday{margin:8px 0 0;color:#2E7D46}
 .co-openday a{color:#2E7D46;font-weight:700}
@@ -611,11 +878,31 @@ CSS = """
 .co-dati{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:12px 0 0;font-size:.93rem}
 .co-dati dt{opacity:.65}
 .co-dati dd{margin:0;font-weight:600}
+.co-dati dd a{color:#2c5d8f}
 .co-verif{margin:10px 0 0;font-size:.8rem;opacity:.6}
 .co-nota{margin:26px 0 0;padding:14px 16px;border-radius:12px;background:var(--surface,#f5f3f0);font-size:.95rem}
 .event-card.is-hidden{display:none}
 .co-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+/* ── le schede delle realta', in fondo ──────────────────────────────────
+   Sono <div> e non <section>: section{padding:100px 24px} arriva dal CSS di
+   sistema, e una scheda nascosta dai filtri lascerebbe 200px di niente. */
+.co-realta-wrap{margin:40px 0 0}
+.co-realta-t{font-size:1.3rem;margin:0 0 4px}
+.co-realta-sub{margin:0 0 16px;font-size:.93rem;opacity:.72}
+.co-realta{padding:16px 18px;margin:0 0 14px;border:1px solid rgba(0,0,0,.09);
+  border-radius:14px;background:#fff;scroll-margin-top:120px}
+.co-realta h3{font-size:1.1rem;margin:0 0 6px}
+.co-realta-d{margin:0 0 4px;font-size:.95rem;line-height:1.55;opacity:.85}
+.co-realta-corsi,.co-realta-ev{margin:12px 0 0;font-size:.93rem;line-height:1.7}
+.co-realta-corsi a,.co-realta-ev a{color:#2c5d8f}
+.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* L'avviso di sezione in preparazione. Stesso giallo della fascia di
+   corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
+   ancora quello che sembra. */
+.co-avviso{background:#fdf3e0;border:1px solid #e6c98a;border-radius:10px;
+  padding:14px 16px;margin:0 0 18px;font-size:.94rem;line-height:1.55;color:#6b4a10}
 """
+
 
 FILTER_JS = """
 (function(){
@@ -629,13 +916,26 @@ FILTER_JS = """
       det.hidden=!open;
     });
   });
+  // Un link verso un corso (dalla scheda della realta') deve APRIRE la riga,
+  // non solo scorrerci sopra: altrimenti si arriva su una riga chiusa che
+  // sembra la stessa di prima, e il link pare rotto.
+  function apriDaHash(){
+    var id=(location.hash||'').replace('#','');
+    if(!id) return;
+    var c=document.getElementById(id);
+    if(!c||!c.classList.contains('event-card')||c.classList.contains('is-open')) return;
+    var btn=c.querySelector('.ev-row');
+    if(btn) btn.click();
+  }
+  window.addEventListener('hashchange',apriDaHash);
+  apriDaHash();
   var bar=document.getElementById('co-toolbar');
   if(!bar) return;
   var q=document.getElementById('co-q'), count=document.getElementById('co-count'),
       campi=[].slice.call(bar.querySelectorAll('[data-campo]'));
   function norm(s){return (s||'').toLowerCase();}
   function apply(){
-    var term=norm(q&&q.value.trim()), vis=0;
+    var term=norm(q&&q.value.trim()), vis=0, orgVivi={};
     cards.forEach(function(c){
       var ok=!term||norm(c.textContent).indexOf(term)>=0;
       campi.forEach(function(el){
@@ -656,17 +956,21 @@ FILTER_JS = """
         if(c.dataset[campo]!==v) ok=false;
       });
       c.classList.toggle('is-hidden',!ok);
-      if(ok) vis++;
+      if(ok){ vis++; orgVivi[c.dataset.org]=1; }
     });
-    // Una realta' senza piu' nessun corso visibile non deve restare come
-    // intestazione sospesa sopra il vuoto.
-    [].slice.call(document.querySelectorAll('.co-realta')).forEach(function(h){
-      var box=document.getElementById(h.dataset.lista);
-      if(!box) return;
-      var vivi=box.querySelectorAll('.event-card:not(.is-hidden)').length;
-      h.style.display=vivi?'':'none';
-      box.style.display=vivi?'':'none';
+    // Una realta' di cui non resta visibile nessun corso esce anche dalle
+    // schede in fondo: se no il filtro "Musica" lascerebbe in pagina la scheda
+    // della societa' di pallavolo, che e' esattamente cio' che si e' chiesto di
+    // togliere. E con zero corsi visibili sparisce anche il titolo della
+    // sezione, che altrimenti resta in aria sopra il vuoto.
+    var schede=[].slice.call(document.querySelectorAll('.co-realta')), viveUna=false;
+    schede.forEach(function(s){
+      var viva=!!orgVivi[s.dataset.org];
+      s.style.display=viva?'':'none';
+      if(viva) viveUna=true;
     });
+    var wrap=document.getElementById('realta');
+    if(wrap) wrap.style.display=viveUna?'':'none';
     campi.forEach(function(el){
       if(el.tagName==='SELECT') el.classList.toggle('is-on',el.value&&el.value!=='all');
     });
@@ -727,57 +1031,68 @@ def zona(corsi):
     return f'nelle province di {elenco}', elenco
 
 
-def render(corsi, css, nav, foot):
+def render(corsi, css, nav, foot, realta=None):
+    """La pagina: un elenco piatto di corsi, e in fondo le schede delle realta'.
+
+    L'ELENCO NON E' PIU' RAGGRUPPATO PER SOCIETA', ed e' il cambio piu' grosso
+    del 21/08/2026. Prima ogni realta' aveva il suo <h2> con sotto i suoi corsi:
+    si leggeva bene, ma obbligava chi cerca a scegliere prima la societa' e poi
+    il corso — e nessun genitore ragiona in quell'ordine. Giovanni l'ha detto
+    con le sue parole: "in questa pagina mi interessa che compaiano i corsi e io
+    genitore possa sceglierli avendo visione di tutti". Coi filtri in cima,
+    l'ordine per societa' era anche il modo piu' sicuro di rendere quei filtri
+    inutili: filtrando per "Musica" restavano intestazioni sparse.
+
+    LE SOCIETA' NON SPARISCONO, SCENDONO. La loro scheda — #r-pgs-roccavione, il
+    link che si manda su WhatsApp — sta in fondo, e da ogni corso ci si arriva
+    dalla riga "Organizzatore" del dettaglio. E' la stessa ancora di prima:
+    nessun link gia' in giro si rompe.
+
+    L'ORDINE E' disciplina, poi eta', poi comune. Non alfabetico per nome: due
+    corsi di pallavolo di due societa' diverse stanno vicini, che e' quello che
+    serve a chi confronta. E non per societa', per la ragione di sopra."""
+    realta = realta or {}
     dove, zona_breve = zona(corsi)
     titolo = f"Corsi per bambini {dove} | DAOP"
     descr = (f"Corsi e attività continuative per bambini e ragazzi {dove}: musica, sport, "
              f"danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.")
 
-    # Raggruppati per realta': una societa' con cinque squadre e' un blocco solo,
-    # e la sua ancora (#r-...) e' il link che puo' mandare in giro. E' anche il
-    # "collegamento dell'organizzatore con le sue attivita'" del documento, senza
-    # che nasca una pagina per ognuna.
+    ordinati = sorted(corsi, key=lambda c: (
+        _cat_foglia(c).lower(), (eta_range(c) or (999, 999))[0],
+        (c['citta'] or '').lower(), c['nome'].lower()))
+
+    if ordinati:
+        elenco = ('  <div class="events-list" id="co-lista">\n'
+                  + "\n".join(card(c, i) for i, c in enumerate(ordinati))
+                  + '\n  </div>')
+    else:
+        elenco = ('  <p class="co-nota">Le prime schede stanno arrivando.</p>')
+
     gruppi = {}
-    for c in corsi:
+    for c in ordinati:
         gruppi.setdefault(c['org'] or 'Altre realtà', []).append(c)
-    for v in gruppi.values():
-        v.sort(key=lambda c: ((eta_range(c) or (999, 999))[0], c['nome'].lower()))
+    if gruppi:
+        blocchi = [scheda_realta(org, gruppi[org], realta.get(G.slugify(org), {}))
+                   for org in sorted(gruppi, key=lambda s: s.lower())]
+        quante = len(gruppi)
+        sezione = ('  <div class="co-realta-wrap" id="realta">\n'
+                   '    <h2 class="co-realta-t" id="co-realta-t">Chi organizza</h2>\n'
+                   f'    <p class="co-realta-sub">{quante} realtà {dove}: '
+                   'dove sono, come si contattano, cosa organizzano.</p>\n'
+                   + "\n".join(blocchi) + '\n  </div>')
+    else:
+        sezione = ''
 
-    n = [0]
-    blocchi = []
-    for org in sorted(gruppi, key=lambda s: s.lower()):
-        v = gruppi[org]
-        anchor = 'r-' + G.slugify(org)
-        lista_id = 'l-' + G.slugify(org)
-        luoghi = sorted({c['citta'] for c in v if c['citta']})
-        # La disciplina, se la realta' ne ha una sola, si dice QUI e una volta
-        # sola: e' l'altra meta' della regola "la categoria si scrive". Detta
-        # nel titolo del gruppo non e' rumore; ripetuta su cinque righe si'.
-        soli = sorted({_cat_foglia(c) for c in v if _cat_foglia(c)})
-        sotto = ' · '.join(filter(None, [
-            soli[0] if len(soli) == 1 else '',
-            ', '.join(luoghi),
-            f"{len(v)} corsi" if len(v) > 1 else "1 corso",
-            next((c['stagione'] for c in v if c['stagione']), ''),
-        ]))
-        # La disciplina si scrive in riga solo se questa realta' ne ha piu' di
-        # una: vedi il docstring di card().
-        mescola = len({_cat_foglia(c) for c in v if _cat_foglia(c)}) > 1
-        schede = []
-        for c in v:
-            schede.append(card(c, n[0], mescola))
-            n[0] += 1
-        blocchi.append(
-            f'  <div class="co-realta" id="{anchor}" data-lista="{lista_id}">\n'
-            f'    <h2>{G.esc(org)}</h2>\n'
-            f'    <p>{G.esc(sotto)}</p>\n'
-            f'  </div>\n'
-            f'  <div class="events-list" id="{lista_id}">\n' + "\n".join(schede) + '\n  </div>')
-
-    elenco = "\n".join(blocchi) if blocchi else (
-        '<p class="co-nota">Le prime schede stanno arrivando. Se hai una scuola, '
-        'un\'associazione o una società sportiva, <a href="/ginetto.html">scrivici</a>: '
-        'la scheda è gratuita.</p>')
+    # La pagina fuori indice lo dice anche a chi legge, non solo a Google. Un
+    # link girato su WhatsApp continua a funzionare — e' tutto il senso di
+    # lasciarla online — ma chi lo apre deve sapere che sta guardando un elenco
+    # non finito, invece di dedurlo dal fatto che c'e' una societa' sola.
+    avviso = '' if G.CORSI_IN_INDICE else (
+        '  <div class="co-avviso"><strong>Sezione in preparazione.</strong> '
+        'Stiamo raccogliendo i corsi con le società, una alla volta, e '
+        'verifichiamo con loro ogni scheda prima di pubblicarla. Quello che vedi '
+        'qui è un primo elenco: non è ancora completo.</div>\n')
+    robots = 'index, follow' if G.CORSI_IN_INDICE else 'noindex, follow'
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -786,7 +1101,7 @@ def render(corsi, css, nav, foot):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{G.esc(titolo)}</title>
 <meta name="description" content="{G.esc(descr)}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="{robots}">
 <link rel="canonical" href="{URL}">
 <meta property="og:title" content="{G.esc(titolo)}">
 <meta property="og:description" content="{G.esc(descr)}">
@@ -826,19 +1141,17 @@ def render(corsi, css, nav, foot):
   </div>
 </header>
 <article class="co-wrap">
-  <p class="co-intro">Un corso non è un evento: comincia a settembre e finisce a primavera,
+{avviso}  <p class="co-intro">Un corso non è un evento: comincia a settembre e finisce a primavera,
   e la domanda di un genitore non è "cosa si fa sabato" ma "dove porto mio figlio quest'anno".
   Qui trovi quello che c'è, con quello che serve davvero per decidere: che età prende,
   che giorni, e se si può provare prima di iscriversi.</p>
 {toolbar(corsi)}
 {elenco}
-  <p class="co-nota"><strong>Sei una scuola, un'associazione o una società sportiva?</strong>
-  La scheda è gratuita e la compiliamo noi: basta mandarci la locandina che avete già.
-  Molte realtà non hanno un sito, e questa pagina diventa il posto dove le famiglie
-  vi trovano. <a href="/ginetto.html">Scrivici qui</a>.</p>
+{sezione}
+{blocco_adesione(corsi)}
 {G.blocco_ecosistema('corsi')}
   <div class="co-actions">
-    <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
+    <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
   </div>
 </article>
 </main>
@@ -854,9 +1167,23 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 
 
 def aggiorna_sitemap():
+    """La riga della sitemap, che esiste solo se la pagina e' in indice.
+
+    Fuori indice il blocco si TOGLIE invece di non aggiornarsi: una URL in
+    sitemap con robots noindex sono due ordini che si contraddicono, e chiedere
+    a Google di scansionare una pagina per poi dirgli di non tenerla e' il modo
+    piu' veloce di far ignorare la sitemap intera."""
     if not os.path.exists(SITEMAP_PATH) or not os.path.exists(PATH):
         return
     import re
+    if not G.CORSI_IN_INDICE:
+        s = open(SITEMAP_PATH, encoding='utf-8').read()
+        fuori = re.sub(r'  <!-- CORSI:START.*?<!-- CORSI:END -->\n?',
+                       '', s, flags=re.S)
+        if fuori != s:
+            open(SITEMAP_PATH, 'w', encoding='utf-8').write(fuori)
+            print("[genera_corsi] fuori sitemap (CORSI_IN_INDICE = False)")
+        return
     oggi = datetime.date.today().isoformat()
     s = open(SITEMAP_PATH, encoding='utf-8').read()
     blocco = (f"  <!-- CORSI:START (generato da scripts/genera_corsi.py — non modificare a mano) -->\n"
@@ -881,8 +1208,12 @@ def main():
     # Il proprio numero prima di render(): la riga delle quattro porte lo
     # rilegge, e questa pagina la scrive di se' stessa (senza contarsi).
     G.conteggio_scrivi('corsi', len(corsi))
+    # Le schede delle realta' si leggono DOPO i corsi e usando i loro nomi: e'
+    # il filtro che impedisce a un foglio sbagliato di entrare in pagina. Vedi
+    # leggi_realta().
+    realta = leggi_realta({c['org'] for c in corsi})
     css, nav, foot = G._guscio()
-    nuovo = render(corsi, css, nav, foot)
+    nuovo = render(corsi, css, nav, foot, realta)
     vecchio = open(PATH, encoding='utf-8').read() if os.path.exists(PATH) else ''
     if nuovo != vecchio:
         open(PATH, 'w', encoding='utf-8').write(nuovo)

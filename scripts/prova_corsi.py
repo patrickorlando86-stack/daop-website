@@ -2,22 +2,23 @@
 # -*- coding: utf-8 -*-
 """Genera /corsi-prova.html: la pagina di PROVA della sezione corsi.
 
-A COSA SERVE. A far vedere due cose che sulla pagina vera oggi non ci sono,
-perche' non se le sono ancora guadagnate:
+A COSA SERVE. A far vedere con due societa' quello che la pagina vera oggi non
+puo' far vedere con una: i filtri che dividono davvero (due discipline, due
+comuni), l'elenco piatto ordinato per disciplina, e le due schede realta' in
+fondo con le loro ancore #r-…. Nel foglio vero c'e' una societa' sola, quindi
+meta' di questa roba li' non si accende — non per un difetto, ma perche' i
+comandi si stampano quando dividono.
 
-  1. la barra dei filtri in alto, come su eventi.html. Sulla pagina vera non
-     esce: con 5 corsi di una societa' sola quattro tendine sono piu' lavoro
-     che scorrere (MIN_FILTRI = 12). Qui la soglia si abbassa APPOSTA, ed e'
-     l'unica differenza di comportamento fra questa pagina e quella vera;
-  2. la scheda completa di una realta' che ha aderito, che nel foglio vero non
-     esiste ancora perche' nessuna riga ha Premium = si.
+Serve anche a far vedere la scheda realta' PIENA: nel foglio la tab "Realta"
+non esiste ancora, quindi in produzione quelle schede si ricavano dai corsi e
+restano scarne. Qui REALTA_DEMO fa le veci di quella tab, ed e' insieme il
+mockup e la lista della spesa — quelle sono le colonne da creare.
 
 PERCHE' NON E' UNA PAGINA DEL SITO. Sta fuori dall'indice (noindex) e lo dice
-in cima a chi legge, non solo a Google. Il corso di teatro porta il bollino
-"Scheda completa", cioe' sembra un inserzionista: senza quella fascia basta che
-il link giri per far credere che i Santibriganti ci paghino. I dati del teatro
-vengono dal loro sito pubblico e sono l'esempio che ha mandato Giovanni il
-20/08/2026.
+in cima a chi legge, non solo a Google: i dati del teatro vengono dal sito
+pubblico della compagnia — sono l'esempio che ha mandato Giovanni il
+20/08/2026 — e senza quella fascia basta che il link giri per far credere che
+i Santibriganti siano nostri clienti.
 
 Si rigenera con:  python3 scripts/prova_corsi.py
 
@@ -117,11 +118,34 @@ corsi.append(corso(
 # adesso mostra il comportamento VERO del generatore, non una forzatura — che
 # e' esattamente quello che una pagina dimostrativa deve fare.
 
+# Le veci della tab "Realta" del foglio, che non esiste ancora. Le chiavi sono
+# gli slug dei nomi degli organizzatori, come li produce leggi_realta().
+# Indirizzo, telefono e descrizione della PGS sono INVENTATI per far vedere il
+# riquadro pieno — ed e' l'ennesima ragione per cui questa pagina sta in
+# noindex e lo dice in cima.
+REALTA_DEMO = {
+    'pgs-roccavione': {
+        'descr': 'Polisportiva Giovanile Salesiana di Roccavione: pallavolo '
+                 'per bambini e ragazzi dai 6 ai 15 anni, con squadre per '
+                 'annata e allenamenti nella palestra comunale.',
+        'citta': 'Roccavione', 'indirizzo': 'Palestra comunale, via Roma 12',
+        'tel': '0171 000000', 'email': '', 'sito': '', 'logo': '',
+    },
+    'compagnia-santibriganti-teatro': {
+        'descr': 'Compagnia teatrale professionale attiva in Piemonte dal '
+                 '1990, con laboratori per bambini e ragazzi al Teatro Civico '
+                 'di Caraglio.',
+        'citta': 'Caraglio', 'indirizzo': 'Teatro Civico, via Roma 118',
+        'tel': '0171 000000', 'email': '', 'logo': '',
+        'sito': 'https://www.santibriganti.it',
+    },
+}
+
 FASCIA = (
     '  <div class="co-prova-avviso">\n'
     '    <strong>Pagina di prova.</strong> Serve a far vedere come potrebbe '
-    'essere fatta la sezione corsi: la barra dei filtri in alto e la scheda '
-    'completa di una realtà che ha aderito. <strong>I dati sono di '
+    'essere fatta la sezione corsi: l\'elenco filtrabile dei corsi e, in fondo, '
+    'le schede delle realtà che li organizzano. <strong>I dati sono di '
     'esempio</strong> — il corso di teatro è preso dal sito pubblico della '
     'compagnia, e nessuna di queste realtà è un inserzionista. La pagina vera '
     'è <a href="/corsi.html">corsi.html</a>.\n'
@@ -136,14 +160,19 @@ CSS_FASCIA = (
 
 def main():
     css, nav, foot = G._guscio()
-    html = C.render(corsi, css, nav, foot)
+    html = C.render(corsi, css, nav, foot, REALTA_DEMO)
 
     # 1. FUORI DALL'INDICE. Una pagina di dati finti che si posizionasse su
     #    "corsi per bambini" sarebbe un doppione della pagina vera fatto di roba
     #    non vera, e la penalizzazione si porta dietro il dominio. `follow`
     #    resta, cosi' i link interni continuano a valere.
-    html = html.replace('<meta name="robots" content="index, follow">',
-                        '<meta name="robots" content="noindex, follow">')
+    # Dal 21/08/2026 la pagina vera puo' essere gia' noindex (CORSI_IN_INDICE
+    # in genera_eventi.py): la sostituzione secca non troverebbe niente e
+    # fallirebbe in silenzio, che su una pagina di dati finti e' il difetto
+    # peggiore che ci sia. Si riscrive il valore qualunque esso sia, e la
+    # verifica in fondo lo ricontrolla comunque.
+    html = re.sub(r'<meta name="robots" content="[^"]*">',
+                  '<meta name="robots" content="noindex, follow">', html, count=1)
 
     # 2. CANONICAL SU SE STESSA. Ereditata da render() puntava a corsi.html:
     #    con noindex non fa danno, ma "non indicizzarmi" e "la mia versione
@@ -166,6 +195,13 @@ def main():
     html = html.replace(
         '<title>Corsi per bambini in provincia di Cuneo | DAOP</title>',
         '<title>Pagina di prova — Corsi | DAOP</title>')
+    # 5. UNA FASCIA SOLA. Da quando /corsi.html sta fuori dall'indice, render()
+    #    stampa di suo un avviso "Sezione in preparazione": vero per la pagina
+    #    vera, fuori luogo qui, e due riquadri gialli in fila non li legge
+    #    nessuno. Quello di render() esce, resta questo — che dice la cosa piu'
+    #    importante, cioe' che i dati non sono veri.
+    html = re.sub(r'\s*<div class="co-avviso">.*?</div>', '', html, flags=re.S)
+
     html = html.replace('<main id="contenuto">',
                         '<main id="contenuto">\n' + FASCIA, 1)
     html = html.replace('.co-intro{', CSS_FASCIA + '.co-intro{', 1)
@@ -175,12 +211,13 @@ def main():
         fh.write(html)
 
     print(f"[prova_corsi] scritta {out}")
-    print(f"[prova_corsi] {len(corsi)} corsi, "
-          f"{sum(1 for c in corsi if C.is_premium(c))} con scheda completa")
+    print(f"[prova_corsi] {len(corsi)} corsi in "
+          f"{len({c['org'] for c in corsi})} realta'")
     # Le tre cose che rendono innocua questa pagina si verificano qui, non a
     # occhio: se una salta, la pagina non va pubblicata.
     for etichetta, ok in (('noindex', 'noindex, follow' in html),
                           ('fascia di avviso', 'co-prova-avviso' in html),
+                          ('una fascia sola', 'co-avviso"' not in html),
                           ('canonical propria', 'corsi-prova.html">' in html),
                           ('niente dati strutturati', 'ld+json' not in html)):
         print(f"[prova_corsi] {etichetta}: {'si' if ok else 'NO'}")

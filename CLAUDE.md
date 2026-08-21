@@ -580,6 +580,130 @@ metà degli script andava in 404, con le prove verdi.
 cd tests && CHROMIUM_PATH="C:/Program Files/Google/Chrome/Application/chrome.exe" npm test
 ```
 
+### I corsi: la presenza si paga, e l'elenco è dei corsi non delle società
+
+Rifatto il 21/08/2026 sul documento di feedback di Giovanni (Cuneo). Sono tre
+decisioni, e la prima è quella che regge le altre due.
+
+**Non esiste più una scheda gratis e una a pagamento.** C'erano due livelli —
+riga in elenco per tutti, `Premium = si` per descrizione lunga, locandina e
+pillola «★ Scheda completa». Giovanni ha fatto notare il difetto: dando tanto
+nella versione gratuita non si fa percepire il valore di quella a pagamento, e
+si finisce a vendere una differenza che il lettore non vede. Quindi **una
+presenza sola, uguale per tutti, e si paga**. In pagina vuol dire: niente
+pillola, `descr_premium` vince se c'è (non più se il flag c'è), locandina a
+tutti, e `rel="sponsored"` su **tutti** i link in uscita — non c'è più una metà
+«nostra segnalazione» da distinguere con `nofollow`.
+
+Ne segue l'invito in coda: **non dice più «la scheda è gratuita»**. Non dice
+nemmeno un prezzo — si tratta caso per caso — e dice invece *cosa comprende*,
+che è quello che una società deve sapere prima di scrivere. E dice **a chi**
+scrivere: `collabora@eventiperbambinicuneo.it` per Cuneo, `info@daop.it` per
+Alessandria e Asti (`MAIL_PROV` in `genera_corsi.py`). La riga si compone dai
+dati, non da un testo fisso: finché i corsi sono tutti di Cuneo si legge un
+indirizzo solo, e il secondo compare da sé con la prima società di Alessandria.
+Un testo scritto a mano con due indirizzi direbbe oggi una cosa non vera.
+
+**L'elenco non è più raggruppato per società.** Ogni realtà aveva il suo `<h2>`
+coi suoi corsi sotto: si leggeva bene e obbligava a scegliere prima la società e
+poi il corso, che è l'ordine inverso a quello in cui ragiona un genitore
+(«in questa pagina mi interessa che compaiano i corsi e io genitore possa
+sceglierli avendo visione di tutti»). Coi filtri in cima era anche il modo più
+sicuro di renderli inutili: filtrando «Musica» restavano intestazioni sparse
+sopra il vuoto. Ora è un elenco piatto ordinato per **disciplina → età →
+comune**: due corsi di pallavolo di due società diverse stanno vicini, che è
+quello che serve a chi confronta.
+
+**Le società non spariscono, scendono.** In fondo c'è una scheda per ognuna —
+`#r-pgs-roccavione`, il link che si manda su WhatsApp, **la stessa ancora di
+prima**, quindi nessun link già in giro si rompe — e da ogni corso ci si arriva
+dalla riga «Organizzatore» del dettaglio. Un filtro che spegne tutti i corsi di
+una società spegne anche la sua scheda: se no la sezione in fondo smentirebbe il
+filtro appena usato.
+
+**La riga chiusa porta tre dati, e sono i tre dei filtri**: disciplina, età,
+comune. Quello che *non* ci sta è altrettanto deciso, ed è la parte che qualcuno
+rimetterebbe pensando di aggiungere informazione — **i giorni e gli orari** (il
+dato più lungo e più fragile, e serve a chi ha già scelto: sta nel dettaglio) e
+**il nome della società** (qui si sceglie un corso). La disciplina invece si
+scrive **sempre**, e ribalta la regola scritta per le pagine comune: lì
+ripeterla dentro una manifestazione uniforme è rumore, qui la riga sopra può
+essere un corso di musica.
+
+**Via «Iscrizioni aperte/chiuse».** È un dato che scade in silenzio e che nessuno
+viene ad aggiornare: alla pallavolo si entra quasi sempre, a un corso di teatro
+quasi mai, e la risposta vera ce l'ha la società — che ha il suo numero due
+righe sotto. Una riga che dice «Aperte» a gennaio è peggio di nessuna riga.
+
+I **referenti restano nomi senza numeri**, e qui il feedback chiedeva il
+contrario («molti mettono il whatsapp, è bello sapere con chi parli»). Non è
+stato fatto: sulla locandina di partenza erano cinque cellulari di volontarie e,
+a confronto con la stagione prima, erano cambiati quasi tutti — un numero
+personale dentro un archivio consultabile non è la stessa cosa dello stesso
+numero stampato su un manifesto. `tests/corsi.js` lo difende da sempre. **È un
+punto aperto**, non chiuso: se si decide di pubblicarli, va cambiata anche
+quella prova.
+
+#### La tab `Realta` non esiste ancora, e la scheda funziona lo stesso
+
+La scheda della società vuole logo, descrizione, indirizzo, sito, contatti. Nella
+tab `Attivita` **non c'è niente di tutto questo** (verificato il 21/08: 24
+colonne, nessuna a livello organizzatore — e mancano anche `Sito`, `OpenDay` e
+`Descrizione PREMIUM`, che il generatore legge già e il foglio non ha). Non ci
+deve nemmeno stare: sarebbero lo stesso logo e la stessa descrizione ricopiati su
+cinque righe, cioè il modo più sicuro di farli divergere.
+
+Quindi `leggi_realta()` cerca una tab **`Realta`** e, se non la trova, **ricava
+la scheda dai corsi** (comuni, discipline, sede, sito, contatto): meno ricca, mai
+vuota, mai rotta. È la regola di `link_luoghi()` — quello che manca non si
+stampa, non si inventa. Le colonne da creare sono `Organizzatore`, `Descrizione`,
+`Logo`, `Comune`, `Indirizzo`, `Sito`, `Telefono`, `Email`, e
+`REALTA_DEMO` in `prova_corsi.py` fa vedere com'è la scheda quando ci sono.
+
+**Il terzo airbag contro gviz.** Una tab che non esiste non dà errore: gviz
+risponde col **primo foglio del documento**, che è Luoghi — è il guasto del
+20/08 che ha pubblicato 895 agriturismi al posto di 5 corsi. Qui le difese sono
+tre: `headers=1`, una colonna che si chiami `Organizzatore` (Luoghi ha `Nome`,
+`Descrizione`, `Indirizzo`, `Città`, `Website`, `Telefono`, `Email` — ma non
+quella), e soprattutto **una riga che non corrisponde a una società già in
+pagina viene buttata via**. Con l'ultima, un foglio sbagliato non entra comunque.
+
+#### `CORSI_IN_INDICE`, e perché la pagina resta online
+
+`corsi.html` è **fuori dall'indice** dal 21/08/2026: Giovanni considera i dati
+PGS non verificati per la 2026/2027, e una pagina indicizzata fatta di dati che
+l'unica persona che li conosce dichiara sbagliati è un doppione debole sul
+dominio che regge `eventi.html`.
+
+L'interruttore è **uno solo**, `CORSI_IN_INDICE` in `genera_eventi.py`, e governa
+quattro cose insieme: `robots noindex`, fuori sitemap, fuori nav (marker
+`NAV-CORSI` / `MM-CORSI`, stesso meccanismo della stagione dei centri), fuori
+dalla riga delle quattro porte. **Il footer tiene il link**, come per i centri:
+il footer è il catalogo, la nav è cosa c'è adesso.
+
+**La pagina resta online**, ed è la regola di `MIN_LANDING` già scritta per le
+stagionali: i link girati devono continuare a funzionare, e l'anzianità dell'URL
+è l'unico asset che una pagina nuova non può comprare. Fuori indice stampa anche
+un avviso **visibile**, non solo il meta: chi ci arriva da un link deve sapere
+che l'elenco non è finito, invece di dedurlo dal fatto che c'è una società sola.
+
+**Si riaccende a mano**, e non c'è una soglia automatica apposta: il problema non
+è quanti corsi ci sono, è che quelli che ci sono vanno confermati da chi li
+organizza — e un numero non sa rispondere a quella domanda.
+
+`tests/porte.js` legge lo stato **da `corsi.html`**, non dal generatore: così
+quello che prova è che il sito sia d'accordo con se stesso, e un interruttore
+girato a metà (noindex ma ancora in nav) diventa rosso. Le porte diventano tre o
+quattro di conseguenza — è lo stesso adattamento già fatto per la stagione dei
+centri, e per la stessa ragione: una prova che ne pretende quattro sarebbe rossa
+proprio quando il sito fa la cosa giusta.
+
+**Il guscio di `genera_rubriche.py` ha ripreso lo stesso difetto sul secondo
+marker**: toglieva solo `*-CENTRI`, quindi le 15 pagine in `rubriche/` sono uscite
+coi commenti `NAV-CORSI` dentro la nav. È il difetto già trovato il 21/08 sui
+centri, ripetuto identico — la riga che li toglie sta in tutti e due i gusci, e
+se nasce un terzo generatore con un guscio suo è quella da ricordare.
+
 ## Decisioni editoriali da non rifare al contrario
 
 ### "Adatto Famiglie" non è una discriminante pubblica

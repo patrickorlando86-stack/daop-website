@@ -12,6 +12,9 @@
 //   3. L'eta' si CALCOLA da annate + stagione, non si copia dal foglio.
 //   4. Nei referenti vanno i NOMI, mai i numeri di telefono.
 //   5. Quello che sta in pagina sono CORSI, e ogni realta' ha la sua ancora.
+//   6. La riga chiusa porta TRE dati, e sono i tre dei filtri: disciplina,
+//      eta', comune. Niente giorni, niente orari, niente nome della societa'.
+//   7. Non esistono due livelli di scheda. La presenza e' una sola.
 //
 // La quinta e' nata da un guasto vero, e le prime quattro non l'avevano preso.
 // Il 20/08/2026 alle 02:49 la run notturna ha pubblicato qui le 895 schede del
@@ -114,15 +117,42 @@ module.exports = async function corsi(browser) {
       ? `voci di tendina che svuotano la pagina: ${aVuoto.join(', ')}`
       : 'nessuna voce di tendina porta a zero risultati');
 
-    // Un gruppo svuotato dai filtri si porta via la sua intestazione: il titolo
-    // sta PRIMA del gruppo e fuori da esso, ed e' il caso che resta in aria.
+    // Con zero corsi visibili non deve restare in piedi la sezione delle
+    // realta' in fondo: sono schede di societa' di cui in pagina non e'
+    // rimasto nessun corso, cioe' esattamente il vuoto sospeso di prima
+    // spostato piu' giu'. Il titolo della sezione sta FUORI dalle schede, ed e'
+    // il pezzo che resta in aria se ci si dimentica di nasconderlo.
     await page.locator('#co-q').fill('zzzznessuno');
     await page.waitForTimeout(250);
-    const titoliRimasti = await page.$$eval('.co-realta',
+    const rimaste = await page.$$eval('.co-realta',
       (hs) => hs.filter((h) => h.offsetParent !== null).length);
-    r.ok(titoliRimasti === 0, 'con zero risultati non resta in aria nessuna intestazione');
+    r.ok(rimaste === 0, 'con zero risultati non resta nessuna scheda realtà');
+    const titolo = await page.locator('#realta').evaluate(
+      (el) => el.offsetParent !== null).catch(() => false);
+    r.ok(titolo === false, 'e nemmeno il titolo della sezione, sospeso sul vuoto');
     await page.locator('#co-q').fill('');
     await page.waitForTimeout(250);
+
+    // Un filtro che lascia in piedi i corsi di una sola societa' deve lasciare
+    // in piedi una sola scheda: se restassero tutte, la sezione in fondo
+    // smentirebbe il filtro appena usato.
+    const cat = page.locator('#co-toolbar [data-campo="cat"]');
+    if (await cat.count()) {
+      const primo = await cat.evaluate((s2) => s2.options[1].value);
+      await cat.selectOption(primo);
+      await page.waitForTimeout(200);
+      const orgVivi = await page.$$eval('.event-card',
+        (cs) => [...new Set(cs.filter((c) => c.offsetParent !== null)
+          .map((c) => c.dataset.org))]);
+      const schedeVive = await page.$$eval('.co-realta',
+        (hs) => hs.filter((h) => h.offsetParent !== null).map((h) => h.dataset.org));
+      r.ok(schedeVive.length === orgVivi.length
+        && schedeVive.every((o) => orgVivi.includes(o)),
+        `filtrando "${primo}" restano ${orgVivi.length} realtà nei corsi `
+        + `e ${schedeVive.length} schede in fondo`);
+      await cat.selectOption('all');
+      await page.waitForTimeout(200);
+    }
   }
 
 
@@ -176,11 +206,14 @@ module.exports = async function corsi(browser) {
     ? `il titolo nomina province senza corsi: ${promesse.join(', ')}`
     : 'il titolo nomina solo le province che hanno davvero dei corsi');
 
-  // ── i gruppi non sono <section> ───────────────────────────────────────
-  // section{padding:100px 24px} arriva dal CSS di sistema: un gruppo nascosto
-  // dai filtri lascerebbe 144px di niente in mezzo all'elenco.
+  // ── le schede realta' non sono <section> ──────────────────────────────
+  // section{padding:100px 24px} arriva dal CSS di sistema: una scheda nascosta
+  // dai filtri lascerebbe 200px di niente in fondo alla pagina.
   r.ok(await page.$$eval('.co-realta', (hs) => hs.every((h) => h.tagName !== 'SECTION')),
-    'i gruppi realta\' sono <div>, non <section> (la trappola del padding)');
+    'le schede realta\' sono <div>, non <section> (la trappola del padding)');
+  const wrap = await page.locator('#realta').evaluate((el) => el.tagName)
+    .catch(() => 'ASSENTE');
+  r.ok(wrap !== 'SECTION', `il contenitore delle realtà è <${wrap.toLowerCase()}>`);
 
   // ── 5a. ogni realta' ha la sua ancora, e non sono tutte nel raccoglitore ─
   // E' il link che Giovanni manda alle societa' ("guarda, questa e' la tua
@@ -211,6 +244,82 @@ module.exports = async function corsi(browser) {
     ? `${vere.length} realta’ con un nome proprio e un link da mandare in giro`
     : "tutti i corsi sono in \"Altre realta'\": la colonna Organizzatore non e' "
       + "stata letta (foglio sbagliato?), e nessuna societa’ ha un link suo");
+
+  // ── 6. la riga chiusa porta TRE dati, e non uno di piu' ──────────────
+  // Richiesta di Giovanni del 21/08/2026: disciplina, eta', comune. Quello che
+  // NON ci sta e' altrettanto deciso — i giorni e gli orari (troppo lunghi, e
+  // servono a chi ha gia' scelto) e il nome della societa' (in questa pagina si
+  // sceglie un corso, non una societa'). Sono le due cose che qualcuno
+  // rimetterebbe in riga pensando di aggiungere informazione.
+  const inRiga = await page.$$eval('.event-card', (cs) => cs.map((c) => ({
+    nome: c.querySelector('.ev-name').textContent.trim(),
+    linea: c.querySelector('.ev-line').textContent.trim(),
+    cat: (c.querySelector('.co-cat') || {}).textContent || '',
+    org: c.dataset.org || '',
+  })));
+  // Un giorno della settimana o un orario in riga: e' il segno che i giorni
+  // sono risaliti dal dettaglio.
+  const GIORNI = /luned|marted|mercoled|gioved|venerd|sabato|domenica|\d{1,2}[.:]\d{2}/i;
+  const conGiorni = inRiga.filter((c) => GIORNI.test(c.linea)).map((c) => c.nome);
+  r.ok(conGiorni.length === 0, conGiorni.length
+    ? `giorni o orari tornati in riga: ${conGiorni.join(', ')}`
+    : "in riga non ci sono giorni ne' orari");
+  // La disciplina invece ci deve stare, e su ogni riga: e' il primo dato utile
+  // in un elenco che mescola pallavolo e teatro.
+  const senzaCat = inRiga.filter((c) => !c.cat.trim()).map((c) => c.nome);
+  r.ok(senzaCat.length === 0, senzaCat.length
+    ? `righe senza disciplina scritta: ${senzaCat.join(', ')}`
+    : `la disciplina e' scritta su tutte e ${inRiga.length} le righe`);
+
+  // ── 7. non esistono due livelli di scheda ────────────────────────────
+  // Dal 21/08/2026 la presenza nella guida e' una sola e uguale per tutti: una
+  // pillola "scheda completa" distinguerebbe da niente, e un invito che dice
+  // "gratuita" e' una promessa che poi va ritirata. Sono le due cose che
+  // tornerebbero se qualcuno ripescasse la versione di prima.
+  const pillole = await page.$$eval('.ev-pill',
+    (ps) => [...new Set(ps.map((p2) => p2.textContent.trim()))]);
+  r.ok(!pillole.some((t) => /completa|premium|★/i.test(t)),
+    `pillole in pagina: ${pillole.join(' | ') || 'nessuna'}`);
+  const testo = fs.readFileSync(file, 'utf8');
+  r.ok(!/scheda è gratuita|scheda e' gratuita|gratuit[ao] e la compiliamo/i.test(testo),
+    "l'invito alle societa' non promette una scheda gratuita");
+  // E l'invito deve comunque dire a chi si scrive: senza un indirizzo e' un
+  // cartello, non un invito.
+  const mail = await page.$$eval('.co-nota a[href^="mailto:"]',
+    (as) => as.map((a) => a.getAttribute('href').replace('mailto:', '')));
+  r.ok(mail.length > 0, mail.length
+    ? `l'invito porta un indirizzo: ${mail.join(', ')}`
+    : "l'invito alle societa' non dice a chi scrivere");
+
+  // ── l'organizzatore sta nel dettaglio, e il suo link arriva a destinazione ─
+  // E' l'altra meta' della decisione: tolto dalla riga, deve esserci sotto — e
+  // deve portare a un'ancora che esiste davvero. Un link a un frammento
+  // inesistente non sbaglia in modo visibile: il browser resta dov'e', ed e'
+  // il sintomo con cui si segnalano questi guasti.
+  const legami = await page.$$eval('.co-dati dt', (dts) => dts
+    .filter((dt) => /organizzator/i.test(dt.textContent))
+    .map((dt) => {
+      const a = dt.nextElementSibling.querySelector('a');
+      return a ? a.getAttribute('href') : null;
+    }));
+  r.ok(legami.length > 0 && legami.every(Boolean),
+    `${legami.length} corsi rimandano al loro organizzatore`);
+  const persi = [];
+  for (const h of legami.filter(Boolean)) {
+    if (await page.locator(h).count() === 0) persi.push(h);
+  }
+  r.ok(persi.length === 0, persi.length
+    ? `link organizzatore verso ancore inesistenti: ${[...new Set(persi)].join(', ')}`
+    : 'ogni link organizzatore arriva su una scheda che esiste');
+
+  // ── niente "Iscrizioni aperte/chiuse" ────────────────────────────────
+  // Tolto il 21/08/2026: e' un dato che scade in silenzio e che nessuno viene
+  // ad aggiornare. Se torna, torna sbagliato a gennaio.
+  const iscr = await page.$$eval('.co-dati dt',
+    (dts) => dts.filter((dt) => /iscrizion/i.test(dt.textContent)).length);
+  r.ok(iscr === 0, iscr
+    ? `${iscr} schede dichiarano lo stato delle iscrizioni`
+    : 'nessuna scheda dichiara "iscrizioni aperte/chiuse"');
 
   // ── 5b. questa pagina non e' il catalogo dei luoghi ─────────────────
   // Il controllo vero sta nel generatore (CHIAVI_CORSO in genera_corsi.py), che

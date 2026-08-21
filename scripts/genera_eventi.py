@@ -1810,8 +1810,9 @@ def _guscio():
         # I marker della voce stagionale servono solo dove la nav e' scritta a
         # mano: qui la voce e' gia' risolta, e portarseli dietro vorrebbe dire
         # tre commenti in piu' su ~360 pagine per niente.
-        html_frag = re.sub(r'<!-- (?:NAV|MM|HERO)-CENTRI:(?:START|END) -->', '',
-                           html_frag)
+        html_frag = re.sub(
+            r'<!-- (?:NAV|MM|HERO)-(?:CENTRI|CORSI):(?:START|END) -->', '',
+            html_frag)
         return html_frag.replace('class="active"', '')
 
     # Anche le url() del CSS vanno messe alla radice. In eventi.html la texture
@@ -2465,6 +2466,20 @@ def riga_centri_hero():
             f'{esc(v["voce"].lower())} in provincia di {PROVINCE_TESTO}</a>.</p>')
 
 
+def voce_corsi(mobile=False):
+    """La voce Corsi in nav, vuota finche' la pagina sta fuori dall'indice.
+
+    Stesso meccanismo di voce_centri() e per la stessa ragione: la nav dice
+    cosa c'e' adesso, non cosa esiste. La differenza e' la fonte — li' e' il
+    foglio (una stagione ha centri o non ne ha), qui e' una decisione nostra
+    scritta in CORSI_IN_INDICE."""
+    if not CORSI_IN_INDICE:
+        return ''
+    if mobile:
+        return '<a href="corsi.html" onclick="closeMobile()">Corsi</a>'
+    return '<li><a href="corsi.html">Corsi</a></li>'
+
+
 def aggiorna_nav():
     """Riscrive la voce dei centri dove la nav e' scritta a mano.
 
@@ -2482,6 +2497,8 @@ def aggiorna_nav():
         'NAV-CENTRI': voce_centri(),
         'MM-CENTRI': voce_centri(mobile=True),
         'HERO-CENTRI': riga_centri_hero(),
+        'NAV-CORSI': voce_corsi(),
+        'MM-CORSI': voce_corsi(mobile=True),
     }
     v = stagione_centri()
     tocc = []
@@ -2499,6 +2516,29 @@ def aggiorna_nav():
               f"{'nessuna (nessuna stagione ha centri)' if not v else v['voce']}"
               f" - riscritte {len(tocc)} pagine a mano ({', '.join(tocc[:4])}"
               f"{'...' if len(tocc) > 4 else ''})")
+
+
+# I corsi hanno un interruttore, e questa e' la sua unica sede.
+#
+# PERCHE'. Il 21/08/2026 Giovanni ha chiesto di togliere /corsi.html
+# dall'online: la pagina ha cinque corsi di una societa' sola e lui considera
+# quei dati non verificati per la stagione 2026/2027. Una pagina indicizzata
+# fatta di dati che l'unica persona che li conosce dichiara sbagliati e' un
+# doppione debole sul dominio che regge eventi.html.
+#
+# COSA FA, E COSA NON FA. False vuol dire: robots noindex, fuori dalla sitemap,
+# fuori dalla nav (voce assente su ~360 pagine) e fuori dalla riga delle quattro
+# porte. La pagina RESTA ONLINE — e' la regola di MIN_LANDING gia' scritta per
+# le stagionali e per i centri fuori stagione: i link girati su WhatsApp devono
+# continuare a funzionare, e l'anzianita' dell'URL e' l'unico asset che una
+# pagina nuova non puo' comprare. Il footer tiene il link, come per i centri:
+# il footer e' il catalogo, la nav e' cosa c'e' adesso.
+#
+# QUANDO SI RIACCENDE. A mano, mettendo True, quando i corsi in pagina sono
+# dati verificati. Non c'e' una soglia automatica apposta: il problema non e'
+# quanti corsi ci sono, e' che quelli che ci sono vanno confermati da chi li
+# organizza. Un numero non sa rispondere a quella domanda.
+CORSI_IN_INDICE = False
 
 
 FAMIGLIE = (
@@ -2574,6 +2614,10 @@ def blocco_ecosistema(qui=None):
     voci = []
     for chiave, href, nome, riga in FAMIGLIE:
         if chiave == qui:
+            continue
+        # Una porta verso una pagina che abbiamo tolto dall'indice non e' una
+        # porta: e' un invito a entrare in una stanza che stiamo chiudendo.
+        if chiave == 'corsi' and not CORSI_IN_INDICE:
             continue
         q = n.get(chiave) or 0
         sotto = _eco_riga(chiave, q) if q >= MIN_CONTEGGIO else riga
@@ -3587,6 +3631,10 @@ REGISTRO_COMUNI = os.path.join(ROOT, "data", "pagine-comune.json")
 # da dire che l'agenda non dica meglio.
 MIN_EVENTI_HUB = 4
 MIN_VARIETA_HUB = 3
+# Quante pillole di comune restano in vista sotto "Vai al comune": vedi
+# blocco_comuni(). Otto riempie una riga su un desktop stretto e due sul
+# telefono, che e' quanto un indice puo' prendersi stando sopra il primo evento.
+MAX_COMUNI_APERTI = 8
 FINESTRA_HUB = 365      # giorni di storico che contano per la soglia
 MEMORIA_STORICO = 800   # ~2 anni: bastano a dire "torna ogni anno"
 
@@ -3740,16 +3788,44 @@ def blocco_comuni(hub, oggi):
         return testa.rstrip('\n')
     voci = [d for d in sorted(hub.values(), key=lambda d: (-len(d['futuri']), d['nome']))
             if d['futuri']]
-    link = "".join(
-        # Il numero da solo tiene la pillola corta; "eventi in programma" per
-        # esteso sta nell'aria-label, perche' un "12" nudo allo screen reader
-        # non dice niente.
-        f'<a href="/eventi/comune/{d["slug"]}.html" '
-        f'aria-label="{esc(d["nome"])}: {len(d["futuri"])} eventi in programma">'
-        f'{esc(d["nome"])} <span>{len(d["futuri"])}</span></a>'
-        for d in voci)
-    if not link:
+    if not voci:
         return testa.rstrip('\n')
+
+    # Il numero da solo tiene la pillola corta; "eventi in programma" per
+    # esteso sta nell'aria-label, perche' un "12" nudo allo screen reader
+    # non dice niente.
+    def pillola(d):
+        return (f'<a href="/eventi/comune/{d["slug"]}.html" '
+                f'aria-label="{esc(d["nome"])}: {len(d["futuri"])} eventi in programma">'
+                f'{esc(d["nome"])} <span>{len(d["futuri"])}</span></a>')
+
+    # In alta stagione i comuni con almeno un evento sono venti, cioe' tre file
+    # di pillole fra i filtri e il primo evento: l'indice si mangiava la pagina
+    # che doveva indicizzare. Se ne mostrano MAX_COMUNI_APERTI - quelli con piu'
+    # eventi, che e' gia' l'ordine - e la coda va sotto un "+ altri N".
+    #
+    # Il taglio e' sul NUMERO di pillole, non sul conteggio degli eventi: il
+    # difetto da riparare e' di ingombro, ed e' l'ingombro a dover essere
+    # prevedibile. Una soglia tipo "almeno 2 eventi" farebbe ballare la riga fra
+    # cinque e quindici pillole secondo la stagione, cioe' non risolverebbe
+    # niente a Ferragosto e taglierebbe troppo a novembre.
+    #
+    # I link della coda restano nell'HTML, dentro un secondo <details> chiuso:
+    # e' la stessa ragione per cui il blocco e' un <details> e non JavaScript -
+    # Google li vede e li segue lo stesso, che era tutto il punto del blocco.
+    # Un "+ altri 1" occuperebbe il posto della pillola che nasconde, quindi
+    # sotto le due voci di coda non si taglia niente.
+    if len(voci) <= MAX_COMUNI_APERTI + 2:
+        primi, resto = voci, []
+    else:
+        primi, resto = voci[:MAX_COMUNI_APERTI], voci[MAX_COMUNI_APERTI:]
+    link = "".join(pillola(d) for d in primi)
+    if resto:
+        link += ('<details class="ev-comuni-piu">'
+                 f'<summary aria-label="Mostra altri {len(resto)} comuni">'
+                 f'+ altri {len(resto)}</summary>'
+                 f'<div class="ev-comuni">{"".join(pillola(d) for d in resto)}</div>'
+                 '</details>')
     # <details> e non piu' una riga aperta: sul telefono questi 10-15 comuni
     # occupavano da soli mezzo schermo fra i filtri e il primo evento, e chi
     # apre l'agenda vuole vedere un evento, non un indice. Aperto di default

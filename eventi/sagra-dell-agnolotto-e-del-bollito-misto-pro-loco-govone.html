@@ -326,6 +326,20 @@
   .ev-comuni a{display:inline-flex;align-items:baseline;gap:7px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:7px 14px;font-size:0.86rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
   .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
   .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
+  /* La coda dei comuni, quando sono piu' di dieci. La pillola "+ altri N" sta
+     DENTRO .ev-comuni, quindi e' un elemento flex come le altre e chiude la
+     riga invece di aprirne una sua; da aperta prende tutta la larghezza e le
+     pillole nascoste vanno sotto. Bordo tratteggiato apposta: e' un comando,
+     non una destinazione come le pillole piene delle scorciatoie. Il
+     triangolino del browser va tolto a mano, come nel details grande. */
+  .ev-comuni-piu{min-width:0}
+  .ev-comuni-piu[open]{flex-basis:100%}
+  .ev-comuni-piu>summary{display:inline-flex;align-items:center;cursor:pointer;
+    border:1px dashed rgba(45,74,92,0.28);border-radius:100px;padding:7px 14px;
+    font-size:0.86rem;font-weight:600;color:var(--text-mid);transition:var(--transition)}
+  .ev-comuni-piu>summary::marker,.ev-comuni-piu>summary::-webkit-details-marker{content:'';display:none}
+  .ev-comuni-piu>summary:hover{border-color:var(--teal);color:var(--navy)}
+  .ev-comuni-piu[open]>summary{margin-bottom:8px}
   /* Da dove arriva la segnalazione, cliccabile verso la pagina di provenienza.
      Le occorrenze sono ~190 ma puntano a TRE URL soli. Sta sotto i bottoni e
      pesa meno di loro: e' un credito, non un'azione da fare. */
@@ -651,7 +665,7 @@
       <li><a href="/eventi.html" >Eventi</a></li>
       <li><a href="/luoghi.html">Luoghi</a></li>
       <li><a href="/centri-estivi.html">Centri estivi</a></li>
-      <li><a href="/corsi.html">Corsi</a></li>
+      
       <li><a href="/ginetto.html">Ginetto AI</a></li>
       <li><a href="/index.html#social" class="nav-cta">Contatti</a></li>
     </ul>
@@ -664,7 +678,7 @@
   <a href="/eventi.html" onclick="closeMobile()">Eventi</a>
   <a href="/luoghi.html" onclick="closeMobile()">Luoghi</a>
   <a href="/centri-estivi.html" onclick="closeMobile()">Centri estivi</a>
-  <a href="/corsi.html" onclick="closeMobile()">Corsi</a>
+  
   <span class="mm-sep">Il resto di DAOP</span>
   <a href="/ginetto.html" onclick="closeMobile()">Ginetto AI</a>
   <a href="/rubriche.html" onclick="closeMobile()">Rubriche</a>

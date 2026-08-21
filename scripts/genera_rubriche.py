@@ -169,13 +169,18 @@ def guscio():
     def rooted(frag):
         frag = re.sub(r'(href|src)="(?!https?://|/|#|mailto:|tel:)',
                       lambda m: f'{m.group(1)}="/', frag)
-        # I marker della voce stagionale dei centri servono solo dove la nav e'
-        # scritta a mano (qui: rubriche.html, che aggiorna_nav() riscrive). Nelle
-        # pagine generate la voce e' gia' risolta. Questo guscio e' gemello di
-        # quello di genera_eventi.py e la riga sta anche la': trovata da
-        # tests/porte.js, che ha contato 15 pagine rubriche con i commenti
-        # dentro dopo la prima run.
-        frag = re.sub(r'<!-- (?:NAV|MM|HERO)-CENTRI:(?:START|END) -->', '', frag)
+        # I marker delle voci che compaiono e spariscono — la stagione dei
+        # centri, i corsi quando stanno fuori dall'indice — servono solo dove la
+        # nav e' scritta a mano (qui: rubriche.html, che aggiorna_nav()
+        # riscrive). Nelle pagine generate la voce e' gia' risolta. Questo
+        # guscio e' gemello di quello di genera_eventi.py e la riga sta anche
+        # la': trovata da tests/porte.js, che ha contato 15 pagine rubriche con
+        # i commenti dentro dopo la prima run — ed e' successo di nuovo il
+        # 21/08/2026 coi marker dei corsi, cioe' la stessa prova ha ripreso lo
+        # stesso difetto sul secondo marker. Se nasce un terzo generatore con un
+        # guscio suo, e' questa la riga da ricordare.
+        frag = re.sub(
+            r'<!-- (?:NAV|MM|HERO)-(?:CENTRI|CORSI):(?:START|END) -->', '', frag)
         return frag.replace(' class="active"', '')
 
     # Anche le url() del CSS: la texture della .page-hero in rubriche.html e'

@@ -323,6 +323,20 @@
   .ev-comuni a{display:inline-flex;align-items:baseline;gap:7px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:7px 14px;font-size:0.86rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
   .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
   .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
+  /* La coda dei comuni, quando sono piu' di dieci. La pillola "+ altri N" sta
+     DENTRO .ev-comuni, quindi e' un elemento flex come le altre e chiude la
+     riga invece di aprirne una sua; da aperta prende tutta la larghezza e le
+     pillole nascoste vanno sotto. Bordo tratteggiato apposta: e' un comando,
+     non una destinazione come le pillole piene delle scorciatoie. Il
+     triangolino del browser va tolto a mano, come nel details grande. */
+  .ev-comuni-piu{min-width:0}
+  .ev-comuni-piu[open]{flex-basis:100%}
+  .ev-comuni-piu>summary{display:inline-flex;align-items:center;cursor:pointer;
+    border:1px dashed rgba(45,74,92,0.28);border-radius:100px;padding:7px 14px;
+    font-size:0.86rem;font-weight:600;color:var(--text-mid);transition:var(--transition)}
+  .ev-comuni-piu>summary::marker,.ev-comuni-piu>summary::-webkit-details-marker{content:'';display:none}
+  .ev-comuni-piu>summary:hover{border-color:var(--teal);color:var(--navy)}
+  .ev-comuni-piu[open]>summary{margin-bottom:8px}
   /* Da dove arriva la segnalazione, cliccabile verso la pagina di provenienza.
      Le occorrenze sono ~190 ma puntano a TRE URL soli. Sta sotto i bottoni e
      pesa meno di loro: e' un credito, non un'azione da fare. */
@@ -785,7 +799,7 @@
       <li><a href="/eventi.html" >Eventi</a></li>
       <li><a href="/luoghi.html">Luoghi</a></li>
       <li><a href="/centri-estivi.html">Centri estivi</a></li>
-      <li><a href="/corsi.html">Corsi</a></li>
+      
       <li><a href="/ginetto.html">Ginetto AI</a></li>
       <li><a href="/index.html#social" class="nav-cta">Contatti</a></li>
     </ul>
@@ -798,7 +812,7 @@
   <a href="/eventi.html" onclick="closeMobile()">Eventi</a>
   <a href="/luoghi.html" onclick="closeMobile()">Luoghi</a>
   <a href="/centri-estivi.html" onclick="closeMobile()">Centri estivi</a>
-  <a href="/corsi.html" onclick="closeMobile()">Corsi</a>
+  
   <span class="mm-sep">Il resto di DAOP</span>
   <a href="/ginetto.html" onclick="closeMobile()">Ginetto AI</a>
   <a href="/rubriche.html" onclick="closeMobile()">Rubriche</a>
@@ -820,7 +834,7 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <p class="lan-vuoto">Per Ferragosto 2027 in agenda non abbiamo ancora niente, e lo scriviamo invece di riempire la pagina. Le sagre d'agosto arrivano tardi: i programmi si chiudono a luglio e molte pro loco li pubblicano a pochi giorni dalla festa. Questa pagina si rifà ogni notte, quindi appena entrano compaiono qui.</p><p>Ferragosto in zona non è una cosa sola: la mattina ci sono le processioni e i mercatini, il pomeriggio i giochi d'acqua e i laboratori, la sera lo stand gastronomico e i fuochi. Alle sagre di paese di solito non si prenota e si paga alla cassa, quindi con i bambini si arriva presto e si decide sul posto. Il <strong>pranzo del 15</strong> invece si prenota, e va prenotato con giorni di anticipo: gli <a href="/luoghi.html">agriturismi e i posti dove si mangia con i bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo. Se il 15 piove, la stessa pagina dice quali sono al coperto.</p><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-asti.html">Sagre Asti</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div><section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">830 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">16 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">5 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+  <p class="lan-vuoto">Per Ferragosto 2027 in agenda non abbiamo ancora niente, e lo scriviamo invece di riempire la pagina. Le sagre d'agosto arrivano tardi: i programmi si chiudono a luglio e molte pro loco li pubblicano a pochi giorni dalla festa. Questa pagina si rifà ogni notte, quindi appena entrano compaiono qui.</p><p>Ferragosto in zona non è una cosa sola: la mattina ci sono le processioni e i mercatini, il pomeriggio i giochi d'acqua e i laboratori, la sera lo stand gastronomico e i fuochi. Alle sagre di paese di solito non si prenota e si paga alla cassa, quindi con i bambini si arriva presto e si decide sul posto. Il <strong>pranzo del 15</strong> invece si prenota, e va prenotato con giorni di anticipo: gli <a href="/luoghi.html">agriturismi e i posti dove si mangia con i bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo. Se il 15 piove, la stessa pagina dice quali sono al coperto.</p><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/sagre-provincia-alessandria.html">Sagre Alessandria</a><a href="/sagre-provincia-asti.html">Sagre Asti</a><a href="/sagre-provincia-cuneo.html">Sagre Cuneo</a></div><section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">830 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">16 centri con le date e le iscrizioni</span></a></div></section>
   <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend in zona: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>

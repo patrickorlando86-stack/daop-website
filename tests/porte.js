@@ -59,6 +59,25 @@ function stagioneViva() {
 const FILE_CENTRI = ['centri-estivi.html', 'centri-invernali.html',
   'centri-pasquali.html'];
 
+// I corsi hanno un interruttore (CORSI_IN_INDICE in genera_eventi.py): fuori
+// indice la pagina resta online ma esce da nav, sitemap e riga delle quattro
+// porte. Quindi da qui in avanti le porte sono TRE o QUATTRO, e una prova che
+// ne pretende quattro sarebbe rossa proprio quando il sito fa la cosa giusta —
+// e' lo stesso errore gia' corretto per la stagione dei centri.
+//
+// Lo stato non si legge dal generatore ne' da un file di appoggio: si legge da
+// corsi.html, cioe' dal risultato. Cosi' quello che si controlla e' che il sito
+// sia d'accordo con se stesso, che e' la domanda vera — un interruttore girato
+// a meta' (noindex ma ancora in nav) e' esattamente il difetto che qui deve
+// diventare rosso.
+function corsiInIndice() {
+  try {
+    return /name="robots" content="index/.test(html('corsi.html'));
+  } catch (e) {
+    return false;
+  }
+}
+
 // Tutti gli .html del repo, per contare i link entranti.
 function tutte() {
   const out = [];
@@ -78,6 +97,12 @@ module.exports = async function porte(browser) {
   r.titolo('Le quattro porte — la riga in coda ai quattro hub');
 
   const conteggi = JSON.parse(html('data/conteggi.json'));
+  const corsiVivi = corsiInIndice();
+  // Gli hub che partecipano alle porte. Un hub fuori indice non e' una porta:
+  // ne' la propria ne' quella che le altre pagine gli aprono.
+  const PORTE = HUB.filter(([k]) => k !== 'corsi' || corsiVivi);
+  console.log(`  --   corsi ${corsiVivi ? 'in indice' : 'FUORI indice'}: `
+    + `${PORTE.length} porte`);
 
   for (const [chiave, file, proprio] of HUB) {
     const s = html(file);
@@ -91,9 +116,19 @@ module.exports = async function porte(browser) {
     // passando la chiave sbagliata a blocco_ecosistema().
     r.ok(!blocco[0].includes(`href="${proprio}"`),
       `${file}: la riga non linka se stessa (${chiave})`);
+    // Tante quante le porte vive, meno se stessa se e' una di quelle. Una
+    // pagina fuori indice tiene la sua riga (serve a chi ci arriva da un link
+    // girato) ma non compare in quelle degli altri.
+    const attesi = PORTE.length - (PORTE.some(([k]) => k === chiave) ? 1 : 0);
     const card = (blocco[0].match(/class="eco-c"/g) || []).length;
-    r.ok(card === 3, card === 3 ? `${file}: tre card`
-      : `${file}: ${card} card invece di tre`);
+    r.ok(card === attesi, card === attesi ? `${file}: ${card} card`
+      : `${file}: ${card} card invece di ${attesi}`);
+    // E soprattutto: una porta verso una pagina fuori indice non si apre.
+    for (const [k, , href] of HUB) {
+      if (PORTE.some(([kk]) => kk === k)) continue;
+      r.ok(!blocco[0].includes(`href="${href}"`),
+        `${file}: non apre la porta di ${k}, che è fuori indice`);
+    }
   }
 
   // Sulla home non si e' dentro nessuna famiglia, quindi escono tutte e
@@ -103,9 +138,10 @@ module.exports = async function porte(browser) {
   r.ok(!!fascia, fascia ? 'index.html: la fascia c\'è' : 'index.html: la fascia NON c\'è');
   if (fascia) {
     const card = (fascia[0].match(/class="eco-c"/g) || []).length;
-    r.ok(card === 4, card === 4 ? 'index.html: quattro porte'
-      : `index.html: ${card} porte invece di quattro`);
-    for (const [chiave, , proprio] of HUB) {
+    r.ok(card === PORTE.length, card === PORTE.length
+      ? `index.html: ${card} porte`
+      : `index.html: ${card} porte invece di ${PORTE.length}`);
+    for (const [chiave, , proprio] of PORTE) {
       r.ok(fascia[0].includes(`href="${proprio}"`),
         `index.html: la fascia porta a ${chiave}`);
     }
@@ -128,7 +164,7 @@ module.exports = async function porte(browser) {
   // nota, perche' resta utile vederlo, ma non e' un difetto.
   const MIN = 5;
   const eventi = html('eventi.html');
-  for (const [chiave, , proprio] of HUB) {
+  for (const [chiave, , proprio] of PORTE) {
     const n = conteggi[chiave] || 0;
     if (chiave === 'eventi' || n < MIN) continue;
     const card = eventi.match(new RegExp(
@@ -172,7 +208,7 @@ module.exports = async function porte(browser) {
   const viva = stagioneViva();
   // Le porte come sono adesso: quella dei centri e' la stagione viva, e non
   // c'e' affatto se nessuna ha centri.
-  const attese = HUB.map(([chiave, f]) =>
+  const attese = PORTE.map(([chiave, f]) =>
     (chiave === 'centri' ? (viva ? viva.file : null) : f)).filter(Boolean);
   if (nav) {
     // La porta dei centri non e' un file fisso da qui in avanti: la decide il
@@ -185,6 +221,12 @@ module.exports = async function porte(browser) {
       : 'la nav porta le tre porte con contenuto (nessuna stagione di centri)');
     r.ok(ordine.every((v, i) => i === 0 || v > ordine[i - 1]),
       'e nell\'ordine giusto: eventi, luoghi, centri, corsi');
+    // Fuori indice la voce non deve restare: sarebbe l'interruttore girato a
+    // meta', cioe' un link in nav su ~360 pagine verso una pagina che stiamo
+    // chiedendo a Google di non tenere.
+    r.ok(nav[0].includes('href="corsi.html"') === corsiVivi,
+      corsiVivi ? 'la nav porta i corsi'
+        : 'la nav non nomina i corsi (fuori indice)');
     // Una stagione sola, e quella giusta. Senza stagioni vive non deve restare
     // un residuo: e' meta' del difetto da cui e' nato tutto questo — la nav
     // diceva "Centri estivi" anche a novembre, su ~360 pagine.
@@ -245,7 +287,7 @@ module.exports = async function porte(browser) {
   // Il marker deve restare fuori dalle pagine generate: _guscio() lo toglie
   // quando copia la nav, se no sono tre commenti in piu' su ~360 pagine.
   const conMarkerGenerate = files.filter((f) => f.includes(path.sep)
-    && html(f).includes('NAV-CENTRI:START'));
+    && /NAV-(?:CENTRI|CORSI):START/.test(html(f)));
   r.ok(conMarkerGenerate.length === 0, conMarkerGenerate.length
     ? `${conMarkerGenerate.length} pagine generate si portano dietro il marker`
     : 'le pagine generate non si portano dietro i marker');
