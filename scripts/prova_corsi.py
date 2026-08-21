@@ -34,11 +34,19 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import genera_eventi as G
 import genera_corsi as C
 
-# Gli open day sono due eventi VERI di settembre presi dall'agenda, usati come
-# segnaposto: quello della PGS non esiste ancora nel foglio. Servono a mostrare
-# che il link funziona davvero, invece di puntare a una pagina inventata.
-OD_SPORT = 'Festa dello Sport - Evento Finale Plogging Smiling Biking'
-OD_TEATRO = 'Un circo in Via Pero - Laboratorio teatrale ed espressivo'
+# UN open day solo, e su un evento di UN GIORNO. Ce n'erano due, ed erano
+# entrambi sbagliati in un modo che Giovanni ha notato subito (21/08/2026): il
+# segnaposto della PGS era una manifestazione lunga un mese, quindi la scheda
+# leggeva "Dal 1 al 30 settembre" accanto a una colonna Prova che diceva "open
+# day 10, 17 e 24 settembre" — due calendari diversi per la stessa cosa, che
+# lui ha chiamato "un po' di casino con le date". E il link portava comunque a
+# un evento di qualcun altro.
+#
+# Resta un segnaposto — l'open day della compagnia nella tab Eventi non c'e' —
+# ma di un evento che dura un giorno, cosi' la data letta e' una data sola, e
+# la fascia in cima dice apertamente che il link e' un esempio. Un secondo
+# segnaposto non aggiungeva niente: il meccanismo si vede con uno.
+OD_TEATRO = "L'Albero - Compagnia Il Cerchio Tondo"
 
 VUOTI = {k: '' for k in C.COLONNE}
 
@@ -54,34 +62,34 @@ PGS = [
      'Giovedì 17.30-19.30',
      'Corso di volley per bambini e bambine nati nel 2019 e 2020, con la PGS '
      'Roccavione. Si allenano il giovedì pomeriggio.',
-     'Gratuita · open day 10, 17 e 24 settembre', 'Michela'),
+     'Gratuita, su prenotazione', 'Michela'),
     ('A002', 'Volley Under 10 M/F', '2017-2018', '8-9 anni',
      'Lunedì 17.00-18.30 · Mercoledì 17.00-18.30',
      'Corso di volley per bambini e bambine nati nel 2017 e 2018, con la PGS '
      'Roccavione. Due allenamenti a settimana, lunedì e mercoledì.',
-     'Gratuita · open day 7, 9, 14 e 16 settembre', 'Alice'),
+     'Gratuita, su prenotazione', 'Alice'),
     ('A003', 'Volley Under 12 M/F', '2015-2016', '10-11 anni',
      'Mercoledì 18.30-20.00 · Venerdì 17.00-18.30',
      'Corso di volley per ragazzi e ragazze nati nel 2015 e 2016, con la PGS '
      'Roccavione. Due allenamenti a settimana, mercoledì e venerdì.',
-     'Gratuita · open day 8 e 15 settembre', 'Chiara'),
+     'Gratuita, su prenotazione', 'Chiara'),
     ('A004', 'Volley Under 14 F', '2013-2014', '12-13 anni',
      'Lunedì 18.30-20.00 · Giovedì 19.30-21.00',
      'Pallavolo femminile per le ragazze nate nel 2013 e 2014, con la PGS '
      'Roccavione. Due allenamenti a settimana, lunedì e giovedì.',
-     'Gratuita · open day 9 e 16 settembre', 'Sara'),
+     'Gratuita, su prenotazione', 'Sara'),
     ('A005', 'Volley Under 15 F', '2012', '13-14 anni',
      'Mercoledì 20.00-21.30 · Venerdì 20.00-21.30',
      'Pallavolo femminile per le ragazze nate nel 2012, con la PGS Roccavione. '
      'Allenamenti serali, mercoledì e venerdì.',
-     'Gratuita · open day 10 e 17 settembre', 'Elisa'),
+     'Gratuita, su prenotazione', 'Elisa'),
 ]
 
 corsi = [corso(codice=cod, nome=nome, org='PGS Roccavione',
                cat='Sport › Pallavolo', annate=annate, eta=eta,
                stagione='2026/2027', citta='Roccavione', prov='CN',
                giorni=giorni, descr=descr, prova=prova, referenti=ref,
-               openday=OD_SPORT, verificato='19/08/2026',
+               verificato='19/08/2026',
                periodo='Settembre–maggio',
                sede='Palestra comunale, via Roma 12')
          for cod, nome, annate, eta, giorni, descr, prova, ref in PGS]
@@ -98,7 +106,7 @@ corsi.append(corso(
     sede='Teatro Civico di Caraglio, via Roma 118',
     giorni='Una lezione settimanale, il pomeriggio',
     periodo='Ottobre–giugno',
-    prova='Open day 22 settembre, 17.30–18.30',
+    prova='Sì, una lezione di prova gratuita',
     iscrizioni='Aperte',
     descr='Un percorso per "giocare al teatro".',
     descr_premium='Un percorso per "giocare al teatro": i bambini imparano a '
@@ -130,6 +138,11 @@ REALTA_DEMO = {
                  'annata e allenamenti nella palestra comunale.',
         'citta': 'Roccavione', 'indirizzo': 'Palestra comunale, via Roma 12',
         'tel': '0171 000000', 'email': '', 'sito': '', 'logo': '',
+        # I due domini secchi e non un profilo inventato: qui basta far vedere
+        # com'e' fatta la riga, e un URL plausibile ma falso manderebbe chi
+        # clicca sul profilo di qualcun altro.
+        'instagram': 'https://www.instagram.com/',
+        'facebook': 'https://www.facebook.com/',
     },
     'compagnia-santibriganti-teatro': {
         'descr': 'Compagnia teatrale professionale attiva in Piemonte dal '
@@ -144,11 +157,14 @@ REALTA_DEMO = {
 FASCIA = (
     '  <div class="co-prova-avviso">\n'
     '    <strong>Pagina di prova.</strong> Serve a far vedere come potrebbe '
-    'essere fatta la sezione corsi: l\'elenco filtrabile dei corsi e, in fondo, '
-    'le schede delle realtà che li organizzano. <strong>I dati sono di '
+    'essere fatta la sezione corsi: l\'elenco filtrabile, le schede delle realtà '
+    'in fondo e la pagina dedicata di ogni realtà. <strong>I dati sono di '
     'esempio</strong> — il corso di teatro è preso dal sito pubblico della '
-    'compagnia, e nessuna di queste realtà è un inserzionista. La pagina vera '
-    'è <a href="/corsi.html">corsi.html</a>.\n'
+    'compagnia, indirizzi e telefoni sono inventati, e nessuna di queste realtà '
+    'è un inserzionista. Anche <strong>l\'open day è un segnaposto</strong>: è '
+    'un evento vero dell\'agenda, serve solo a mostrare che il collegamento fra '
+    'un corso e la sua locandina funziona. La pagina vera è '
+    '<a href="/corsi.html">corsi.html</a>.\n'
     '  </div>\n')
 
 CSS_FASCIA = (
@@ -158,69 +174,95 @@ CSS_FASCIA = (
     '.co-prova-avviso a{color:#6b4a10;font-weight:700}\n')
 
 
-def main():
-    css, nav, foot = G._guscio()
-    html = C.render(corsi, css, nav, foot, REALTA_DEMO)
+def innocua(html, canonical):
+    """Le quattro cose che rendono innocua una pagina di dati finti.
 
+    Sta in una funzione perche' adesso le pagine sono piu' di una — corsi-prova
+    e una per ogni realta' — e quattro trasformazioni ricopiate a mano
+    divergerebbero al primo ritocco. Una pagina di prova dimenticata a meta'
+    trattamento e' peggio di nessuna pagina di prova."""
     # 1. FUORI DALL'INDICE. Una pagina di dati finti che si posizionasse su
     #    "corsi per bambini" sarebbe un doppione della pagina vera fatto di roba
     #    non vera, e la penalizzazione si porta dietro il dominio. `follow`
     #    resta, cosi' i link interni continuano a valere.
-    # Dal 21/08/2026 la pagina vera puo' essere gia' noindex (CORSI_IN_INDICE
-    # in genera_eventi.py): la sostituzione secca non troverebbe niente e
-    # fallirebbe in silenzio, che su una pagina di dati finti e' il difetto
-    # peggiore che ci sia. Si riscrive il valore qualunque esso sia, e la
-    # verifica in fondo lo ricontrolla comunque.
+    #    Si riscrive il valore qualunque esso sia, invece di sostituire la
+    #    stringa "index, follow": da quando /corsi.html puo' essere gia' noindex
+    #    (CORSI_IN_INDICE), la sostituzione secca non troverebbe niente e
+    #    fallirebbe in silenzio — il difetto peggiore possibile qui.
     html = re.sub(r'<meta name="robots" content="[^"]*">',
                   '<meta name="robots" content="noindex, follow">', html, count=1)
-
     # 2. CANONICAL SU SE STESSA. Ereditata da render() puntava a corsi.html:
     #    con noindex non fa danno, ma "non indicizzarmi" e "la mia versione
     #    buona e' un'altra pagina" sono due ordini che si contraddicono.
-    html = html.replace(
-        '<link rel="canonical" href="https://www.daop.it/corsi.html">',
-        '<link rel="canonical" href="https://www.daop.it/corsi-prova.html">')
-
-    # 3. NIENTE DATI STRUTTURATI. render() dichiara un Course per ogni riga, e
-    #    qui dentro ci sono un indirizzo e un telefono inventati per far numero.
-    #    Il noindex basterebbe, ma i dati strutturati li leggono anche cose che
-    #    non sono Google: su una pagina fatta per un essere umano non servono a
-    #    nessuno, e toglierli e' l'unico modo di essere sicuri che nessuna
-    #    macchina prenda per buono un corso che non esiste.
+    html = re.sub(r'<link rel="canonical" href="[^"]*">',
+                  f'<link rel="canonical" href="{canonical}">', html, count=1)
+    # 3. NIENTE DATI STRUTTURATI. render() dichiara un Course per ogni riga e
+    #    la pagina realta' dichiara un'Organization, e qui dentro ci sono un
+    #    indirizzo e un telefono inventati per far numero. Il noindex
+    #    basterebbe, ma i dati strutturati li leggono anche cose che non sono
+    #    Google: toglierli e' l'unico modo di essere sicuri che nessuna macchina
+    #    prenda per buona una societa' che non e' nostra cliente.
     html = re.sub(r'\s*<script type="application/ld\+json">.*?</script>', '',
                   html, flags=re.S)
+    # 4. LO DICE A CHI LEGGE, e prima di qualunque altra cosa.
+    html = re.sub(r'\s*<div class="co-avviso">.*?</div>', '', html, flags=re.S)
+    html = html.replace('<main id="contenuto">',
+                        '<main id="contenuto">\n' + FASCIA, 1)
+    if '.co-intro{' in html:
+        html = html.replace('.co-intro{', CSS_FASCIA + '.co-intro{', 1)
+    else:
+        html = html.replace('.cr-wrap{', CSS_FASCIA + '.cr-wrap{', 1)
+    return html
 
-    # 4. LO DICE A CHI LEGGE. La fascia sta prima dell'H1: chi apre la pagina la
-    #    incontra prima di qualunque altra cosa, compreso il bollino.
+
+def main():
+    css, nav, foot = G._guscio()
+
+    # LE PAGINE DELLE REALTA' FINTE NON VANNO IN /corsi/, che e' la cartella
+    # delle pagine vere: una scheda inventata dei Santibriganti fra i clienti
+    # veri e' esattamente il danno che questa pagina esiste per evitare. Il
+    # generatore legge DIR_REALTA a ogni chiamata, quindi basta spostarlo — e
+    # scrivi_realta() ripulisce da se' la cartella di prova.
+    C.DIR_REALTA = 'corsi-prova'
+
+    gruppi = {}
+    for c in corsi:
+        gruppi.setdefault(c['org'] or 'Altre realtà', []).append(c)
+    pagine = C.scrivi_realta(gruppi, REALTA_DEMO, css, nav, foot)
+    for f in sorted(pagine):
+        path = os.path.join(G.ROOT, C.DIR_REALTA, f)
+        testo = innocua(open(path, encoding='utf-8').read(),
+                        f"{G.SITE_URL}/{C.DIR_REALTA}/{f}")
+        open(path, 'w', encoding='utf-8').write(testo)
+
+    html = innocua(C.render(corsi, css, nav, foot, REALTA_DEMO),
+                   f"{G.SITE_URL}/corsi-prova.html")
     html = html.replace(
         '<title>Corsi per bambini in provincia di Cuneo | DAOP</title>',
         '<title>Pagina di prova — Corsi | DAOP</title>')
-    # 5. UNA FASCIA SOLA. Da quando /corsi.html sta fuori dall'indice, render()
-    #    stampa di suo un avviso "Sezione in preparazione": vero per la pagina
-    #    vera, fuori luogo qui, e due riquadri gialli in fila non li legge
-    #    nessuno. Quello di render() esce, resta questo — che dice la cosa piu'
-    #    importante, cioe' che i dati non sono veri.
-    html = re.sub(r'\s*<div class="co-avviso">.*?</div>', '', html, flags=re.S)
-
-    html = html.replace('<main id="contenuto">',
-                        '<main id="contenuto">\n' + FASCIA, 1)
-    html = html.replace('.co-intro{', CSS_FASCIA + '.co-intro{', 1)
 
     out = os.path.join(G.ROOT, 'corsi-prova.html')
     with open(out, 'w', encoding='utf-8') as fh:
         fh.write(html)
 
     print(f"[prova_corsi] scritta {out}")
-    print(f"[prova_corsi] {len(corsi)} corsi in "
-          f"{len({c['org'] for c in corsi})} realta'")
-    # Le tre cose che rendono innocua questa pagina si verificano qui, non a
-    # occhio: se una salta, la pagina non va pubblicata.
-    for etichetta, ok in (('noindex', 'noindex, follow' in html),
-                          ('fascia di avviso', 'co-prova-avviso' in html),
-                          ('una fascia sola', 'co-avviso"' not in html),
-                          ('canonical propria', 'corsi-prova.html">' in html),
-                          ('niente dati strutturati', 'ld+json' not in html)):
-        print(f"[prova_corsi] {etichetta}: {'si' if ok else 'NO'}")
+    print(f"[prova_corsi] {len(corsi)} corsi in {len(gruppi)} realta', "
+          f"{len(pagine)} pagine dedicate in /{C.DIR_REALTA}/")
+    # Le cose che rendono innocue queste pagine si verificano qui, non a occhio:
+    # se una salta, non vanno pubblicate. Il controllo gira su TUTTE, non solo
+    # sulla prima: e' il senso di aver messo le trasformazioni in una funzione.
+    tutte = [('corsi-prova.html', html)] + [
+        (f, open(os.path.join(G.ROOT, C.DIR_REALTA, f), encoding='utf-8').read())
+        for f in sorted(pagine)]
+    for nome, testo in tutte:
+        prove = (('noindex', 'noindex, follow' in testo),
+                 ('fascia di avviso', 'co-prova-avviso' in testo),
+                 ('una fascia sola', 'co-avviso"' not in testo),
+                 ('canonical propria', f'{C.DIR_REALTA}/{nome}">' in testo
+                  or 'corsi-prova.html">' in testo),
+                 ('niente dati strutturati', 'ld+json' not in testo))
+        esiti = ', '.join(f"{e}: {'si' if ok else 'NO'}" for e, ok in prove)
+        print(f"[prova_corsi]   {nome} -> {esiti}")
     return 0
 
 

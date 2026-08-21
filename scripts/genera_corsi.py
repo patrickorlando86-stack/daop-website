@@ -388,6 +388,14 @@ COLONNE_REALTA = {
     'sito': ('sito', 'website', 'sito web', 'link', 'url'),
     'tel': ('telefono', 'tel', 'cellulare', 'contatto'),
     'email': ('email', 'mail', 'e-mail', 'posta'),
+    # Due colonne e non una "Social" sola: chi compila il foglio incolla un URL
+    # per volta, e una colonna unica diventa "ig: @tizio, fb: pagina" — cioe' un
+    # testo da cui il generatore non ricava un link. Sono anche le due tappe
+    # finali del percorso che si restituisce alle realta' (sito, telefono,
+    # email, social) e senza un link cliccabile quella colonna resta vuota per
+    # sempre: daop-track.js riconosce instagram.com e facebook.com da se'.
+    'instagram': ('instagram', 'ig', 'profilo instagram'),
+    'facebook': ('facebook', 'fb', 'pagina facebook'),
 }
 
 TAB_REALTA = os.environ.get('REALTA_TAB')
@@ -456,27 +464,17 @@ def _uniche(valori):
     return out
 
 
-def scheda_realta(org, corsi_org, info):
-    """La scheda di una societa': l'ancora #r-… che le si manda su WhatsApp.
+def _dati_realta(org, corsi_org, info):
+    """I dati di una realta': comune, indirizzo, attività, contatti, sito,
+    social. Una lista di coppie, non HTML gia' impaginato.
 
-    Sta IN FONDO alla pagina e non in mezzo all'elenco, che e' la seconda meta'
-    della decisione del 21/08: in cima c'e' l'elenco dei corsi, perche' un
-    genitore sceglie un corso e non una societa'. Ma la societa' e' il passo
-    successivo, e la sua scheda deve esistere davvero — con un indirizzo, un
-    numero, e i suoi corsi linkati uno per uno.
+    Sta fuori da scheda_realta() perche' li usano in due — la scheda in fondo a
+    corsi.html e la pagina dedicata — e un secondo elenco scritto a mano
+    divergerebbe al primo campo aggiunto. E' la stessa ragione per cui la nav
+    si rilegge da eventi.html invece di essere copiata.
 
     Quello che il foglio non dice si ricava dai corsi: e' il motivo per cui
-    questa scheda non e' mai vuota, nemmeno il primo giorno."""
-    a = _ancora(org)
-    dentro = []
-    logo = (info.get('logo') or '').strip()
-    if logo:
-        dentro.append(f'<img class="co-logo" src="{G.esc(logo)}" alt="Logo di '
-                      f'{G.esc(org)}" loading="lazy" decoding="async">')
-    descr = (info.get('descr') or '').strip()
-    if descr:
-        dentro.append(f'<p class="co-realta-d">{G.esc(descr)}</p>')
-
+    questi dati non sono mai vuoti, nemmeno il primo giorno."""
     dati = []
     comuni = _uniche([info.get('citta')]) or _uniche(c['citta'] for c in corsi_org)
     if comuni:
@@ -493,7 +491,8 @@ def scheda_realta(org, corsi_org, info):
     tel = (info.get('tel') or '').strip() or (
         _uniche(c['contatto'] for c in corsi_org)[:1] or [''])[0]
     if tel:
-        dati.append(('Contatti', G.esc(tel)))
+        # Vedi il commento in card(): un numero non cliccabile non si misura.
+        dati.append(('Contatti', G.contatti_html(tel)))
     mail = (info.get('email') or '').strip()
     if mail:
         dati.append(('Email', f'<a href="mailto:{G.esc(mail)}">{G.esc(mail)}</a>'))
@@ -504,6 +503,44 @@ def scheda_realta(org, corsi_org, info):
         # sponsored. Vedi il commento in card().
         dati.append(('Sito', f'<a href="{G.esc(sito)}" rel="sponsored noopener" '
                              f'target="_blank">{G.esc(G.trunc(sito, 46))}</a>'))
+    social = []
+    for campo, etichetta in (('instagram', 'Instagram'), ('facebook', 'Facebook')):
+        u = (info.get(campo) or '').strip()
+        if u:
+            social.append(f'<a href="{G.esc(u)}" rel="sponsored noopener" '
+                          f'target="_blank">{etichetta}</a>')
+    if social:
+        dati.append(('Social', ' · '.join(social)))
+    return dati
+
+
+def scheda_realta(org, corsi_org, info):
+    """La scheda di una societa': l'ancora #r-… che le si manda su WhatsApp.
+
+    Sta IN FONDO alla pagina e non in mezzo all'elenco, che e' la seconda meta'
+    della decisione del 21/08: in cima c'e' l'elenco dei corsi, perche' un
+    genitore sceglie un corso e non una societa'. Ma la societa' e' il passo
+    successivo, e la sua scheda deve esistere davvero — con un indirizzo, un
+    numero, e i suoi corsi linkati uno per uno.
+
+    QUANDO ESISTE ANCHE LA PAGINA DEDICATA la scheda non sparisce, ed e' voluto:
+    resta il riassunto in fondo all'elenco (l'ancora #r-… gira nei messaggi da
+    prima che le pagine esistessero) e guadagna un link verso la pagina. Toglierla
+    romperebbe quei link per guadagnare niente."""
+    a = _ancora(org)
+    dentro = []
+    logo = (info.get('logo') or '').strip()
+    if logo:
+        dentro.append(f'<img class="co-logo" src="{G.esc(logo)}" alt="Logo di '
+                      f'{G.esc(org)}" loading="lazy" decoding="async">')
+    descr = (info.get('descr') or '').strip()
+    if descr:
+        # In fondo all'elenco basta l'attacco: la descrizione intera si legge
+        # sulla pagina della realta', che e' anche la ragione per andarci.
+        breve = G.trunc(descr, 220) if ha_pagina(info) else descr
+        dentro.append(f'<p class="co-realta-d">{G.esc(breve)}</p>')
+
+    dati = _dati_realta(org, corsi_org, info)
     if dati:
         dentro.append('<dl class="co-dati">' + ''.join(
             f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>')
@@ -529,11 +566,307 @@ def scheda_realta(org, corsi_org, info):
         dentro.append('<p class="co-realta-ev"><strong>Open day e appuntamenti:'
                       '</strong> ' + ' · '.join(speciali) + '</p>')
 
+    if ha_pagina(info):
+        dentro.append(f'<p class="co-realta-vai"><a href="{url_realta(org)}">'
+                      f'La pagina di {G.esc(org)} →</a></p>')
+
     # <div> e non <section>: section{padding:100px 24px} arriva dal CSS di
     # sistema, e una scheda nascosta dai filtri lascerebbe 200px di niente.
-    return (f'  <div class="co-realta" id="{a}" data-org="{G.slugify(org)}">\n'
+    return (f'  <div class="co-realta" id="{a}" data-org="{G.slugify(org)}"'
+            f' data-org-nome="{G.esc(org)}">\n'
             f'    <h3>{G.esc(org)}</h3>\n    '
             + '\n    '.join(dentro) + '\n  </div>')
+
+
+# ── LA PAGINA DELL'ORGANIZZATORE ─────────────────────────────────────────
+#
+# Chiesta da Giovanni il 21/08/2026: "mi ero immaginato che ci fosse proprio una
+# pagina organizzatori, non solo la scheda nella pagina generale dei corsi, in
+# modo da poterci mettere dentro gli eventi organizzati da quell'organizzatore
+# li', con locandina e tutto".
+#
+# PERCHE' ADESSO SI PUO', VISTO CHE PER I LUOGHI SI ERA DETTO DI NO. Il rischio
+# dello scaled content abuse e' di VOLUME: erano le 800 pagine su template
+# identico col nome scambiato a essere il problema, non quaranta pagine con
+# dentro materiale vero — sta gia' scritto in CLAUDE.md, ed e' la ragione per
+# cui le pagine dedicate dei luoghi si fanno "per i clienti che pagano, una alla
+# volta". Qui la condizione e' soddisfatta per costruzione: dal 21/08 la
+# presenza nella guida e' una sola ed e' pagata, quindi ogni organizzatore con
+# una pagina E' un cliente con del materiale. Gli organizzatori sono decine, non
+# centinaia, e ognuno porta descrizione, logo, indirizzo, contatti, i suoi corsi
+# e i suoi eventi.
+#
+# LA SOGLIA NON E' UN NUMERO DI CORSI, E' IL MATERIALE. Una societa' con otto
+# squadre e nessuna descrizione farebbe una pagina piu' povera della scheda che
+# ha gia' in corsi.html, cioe' un doppione debole del proprio riassunto. Quindi:
+# serve una riga nella tab Realta (che e' l'atto deliberato — nessuno ci finisce
+# per sbaglio) E una descrizione vera. Senza, resta la scheda e basta, che e'
+# esattamente com'era fino a ieri.
+#
+# COSA MANCA PER FARLA COMPLETA. Gli eventi qui dentro sono solo quelli
+# agganciati dai corsi con la colonna OpenDay: un saggio di fine anno o la festa
+# di Natale della stessa societa' non hanno oggi nessun legame con lei. Per
+# averli servirebbe una colonna "Organizzatore" nella tab EVENTI, scritta con lo
+# stesso nome — e a quel punto questa pagina li raccoglie da se'.
+MIN_DESCR_REALTA = 120
+DIR_REALTA = 'corsi'
+
+
+def ha_pagina(info):
+    """Vero se questa realta' si merita una pagina sua.
+
+    Due condizioni, e fanno due lavori diversi: la riga nella tab Realta dice
+    che qualcuno l'ha decisa, la descrizione dice che c'e' qualcosa da leggere.
+    Con la sola prima nascerebbero pagine vuote appena il foglio si popola; con
+    la sola seconda non nascerebbe niente, perche' la descrizione sta li'."""
+    return len((info or {}).get('descr', '').strip()) >= MIN_DESCR_REALTA
+
+
+def slug_realta(org):
+    return G.slugify(org or 'altre-realta')
+
+
+def url_realta(org):
+    return f"/{DIR_REALTA}/{slug_realta(org)}.html"
+
+
+def eventi_realta(corsi_org):
+    """Gli eventi di questa realta', presi dagli open day dei suoi corsi.
+
+    Uno stesso open day serve piu' corsi — la PGS ne fa uno per cinque squadre —
+    quindi si deduplica sull'URL. Restano EVENTI e vivono nella tab Eventi: da
+    li' prendono scheda, locandina, calendario, JSON-LD e pagina del comune, e
+    qui se ne stampa solo il rimando. Nessuna di quelle superfici va costruita
+    una seconda volta."""
+    reg = G.carica_registro()
+    per_slug = {}
+    for c in corsi_org:
+        od = openday(c)
+        if not od:
+            continue
+        slug = od['url'].rsplit('/', 1)[-1].rsplit('.', 1)[0]
+        rec = reg.get(slug)
+        if rec and slug not in per_slug:
+            per_slug[slug] = (od, rec)
+    return sorted(per_slug.values(), key=lambda x: x[1].get('d_start') or '')
+
+
+def _card_evento(od, rec):
+    """Un evento della realta', con la locandina. Qui la miniatura e non
+    l'originale: sono immagini in elenco, ed e' la regola gia' scritta per le
+    righe di agenda — l'originale sta sulla scheda dell'evento, dove si guarda
+    davvero."""
+    src = G.loc_path(rec.get('loc'), mini=True)
+    img = (f'<img class="cr-ev-loc" src="{G.esc(src)}" alt="" loading="lazy" '
+           f'decoding="async">' if src else
+           '<span class="cr-ev-loc is-ph" aria-hidden="true">📅</span>')
+    quando = od['quando'] + (f", ore {od['ora']}" if od['ora'] else '')
+    dove = (rec.get('luogo') or rec.get('citta') or '').strip()
+    return (f'    <a class="cr-ev" href="{od["url"]}">{img}'
+            f'<span class="cr-ev-t">'
+            f'<span class="cr-ev-n">{G.esc(G.trunc(rec.get("nome", ""), 90))}</span>'
+            f'<span class="cr-ev-q">{G.esc(quando)}'
+            f'{" · " + G.esc(dove) if dove else ""}</span>'
+            f'</span></a>')
+
+
+CSS_REALTA = """
+.cr-wrap{max-width:820px;margin:0 auto;padding:0 20px 48px}
+.cr-crumb{font-size:.85rem;opacity:.85;margin-bottom:10px}
+.cr-crumb a{color:inherit}
+.cr-logo{max-width:150px;height:auto;border-radius:12px;margin:22px 0 0;display:block}
+.cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
+.cr-h{font-size:1.22rem;margin:34px 0 12px}
+.cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
+  border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
+  text-decoration:none;color:inherit}
+.cr-ev-loc{width:54px;height:54px;object-fit:cover;border-radius:8px;flex:0 0 54px}
+.cr-ev-loc.is-ph{display:flex;align-items:center;justify-content:center;
+  background:var(--surface,#f5f3f0);font-size:1.3rem}
+.cr-ev-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cr-ev-n{font-weight:700;font-size:.98rem}
+.cr-ev-q{font-size:.86rem;opacity:.72}
+.cr-torna{margin:30px 0 0;font-size:.95rem}
+"""
+
+
+def jsonld_realta(org, corsi_org, info):
+    o = {'@type': 'Organization', 'name': org,
+         'url': f"{SITE_URL}{url_realta(org)}"}
+    if info.get('descr'):
+        o['description'] = info['descr']
+    if info.get('logo'):
+        o['logo'] = info['logo']
+    if info.get('sito'):
+        o['sameAs'] = [info['sito']]
+    if info.get('tel'):
+        o['telephone'] = info['tel']
+    if info.get('email'):
+        o['email'] = info['email']
+    citta = (info.get('citta') or '').strip() or (
+        _uniche(c['citta'] for c in corsi_org)[:1] or [''])[0]
+    if citta:
+        o['address'] = {'@type': 'PostalAddress', 'addressLocality': citta,
+                        'addressRegion': 'Piemonte', 'addressCountry': 'IT'}
+        if info.get('indirizzo'):
+            o['address']['streetAddress'] = info['indirizzo']
+    graph = [o]
+    for c in corsi_org:
+        graph.append({'@type': 'Course', 'name': c['nome'],
+                      'provider': {'@type': 'Organization', 'name': org},
+                      'description': (c['descr'] or '').strip()
+                      or f"{c['nome']} con {org}."})
+    return json.dumps({'@context': 'https://schema.org', '@graph': graph},
+                      ensure_ascii=False, indent=1)
+
+
+def pagina_realta(org, corsi_org, info, css, nav, foot):
+    """La pagina di una realta': chi e', dove, i suoi corsi, i suoi eventi."""
+    citta = (info.get('citta') or '').strip() or ', '.join(
+        _uniche(c['citta'] for c in corsi_org))
+    disc = _uniche(_cat_foglia(c) for c in corsi_org)
+    url = f"{SITE_URL}{url_realta(org)}"
+    titolo = f"{org}: corsi per bambini{f' a {citta}' if citta else ''} | DAOP"
+    descr = G.trunc((info.get('descr') or '').strip() or
+                    f"{org}: {len(corsi_org)} corsi per bambini e ragazzi"
+                    f"{f' a {citta}' if citta else ''}"
+                    f"{', ' + ', '.join(disc).lower() if disc else ''}.", 300)
+    robots = 'index, follow' if G.CORSI_IN_INDICE else 'noindex, follow'
+
+    testa = []
+    if info.get('logo'):
+        testa.append(f'<img class="cr-logo" src="{G.esc(info["logo"])}" '
+                     f'alt="Logo di {G.esc(org)}" loading="lazy" decoding="async">')
+    if info.get('descr'):
+        testa.append(f'<p class="cr-descr">{G.esc(info["descr"])}</p>')
+
+    # Gli stessi dati della scheda in corsi.html, e non un secondo elenco
+    # scritto a mano: se un domani cambia l'ordine o si aggiunge un campo,
+    # cambia in un posto solo. Qui si toglie solo l'elenco dei corsi, che
+    # sotto c'e' per intero con le sue schede.
+    dati = _dati_realta(org, corsi_org, info)
+    riquadro = ('<dl class="co-dati">' + ''.join(
+        f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>') if dati else ''
+
+    schede = "\n".join(card(c, i, qui_org=slug_realta(org))
+                       for i, c in enumerate(corsi_org))
+    ev = eventi_realta(corsi_org)
+    blocco_ev = ''
+    if ev:
+        blocco_ev = ('  <h2 class="cr-h">Open day e appuntamenti</h2>\n'
+                     + "\n".join(_card_evento(od, rec) for od, rec in ev))
+
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{G.esc(titolo)}</title>
+<meta name="description" content="{G.esc(descr)}">
+<meta name="robots" content="{robots}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{G.esc(titolo)}">
+<meta property="og:description" content="{G.esc(descr)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{G.esc(info.get('logo') or G.DEFAULT_IMG)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{G.esc(G.trunc(titolo, 60))}">
+<meta name="twitter:description" content="{G.esc(G.trunc(descr, 120))}">
+<meta name="twitter:image" content="{G.esc(info.get('logo') or G.DEFAULT_IMG)}">
+<meta name="daop:citta" content="{G.esc(citta)}">
+<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{CSS}{CSS_REALTA}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
+<script type="application/ld+json">
+{jsonld_realta(org, corsi_org, info)}
+</script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="cr-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>{G.esc(org)}</span>
+    </div>
+    <span class="section-label">{G.esc(citta or 'Piemonte')}{' · ' + G.esc(disc[0]) if disc else ''}</span>
+    <h1>{G.esc(org)}</h1>
+  </div>
+</header>
+<article class="cr-wrap" data-org="{slug_realta(org)}" data-org-nome="{G.esc(org)}">
+{chr(10).join('  ' + t for t in testa)}
+  {riquadro}
+  <h2 class="cr-h">{'I corsi' if len(corsi_org) > 1 else 'Il corso'}</h2>
+  <div class="events-list">
+{schede}
+  </div>
+{blocco_ev}
+  <p class="cr-torna"><a href="/corsi.html#{_ancora(org)}">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
+{G.blocco_ecosistema('corsi')}
+</article>
+</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+<script>{FILTER_JS}</script>
+</body>
+</html>
+"""
+
+
+def scrivi_realta(gruppi, realta, css, nav, foot):
+    """Scrive le pagine delle realta' che se le meritano, e toglie quelle che
+    non se le meritano piu'.
+
+    LA RIMOZIONE NON E' UNA SVISTA. Ovunque sul sito le pagine non si cancellano
+    mai — una scheda evento resta online marcata "edizione conclusa", perche'
+    l'anzianita' dell'URL e' l'unico asset che non si ricompra. Qui e' diverso, e
+    la differenza e' che questa pagina e' UNO SPAZIO PAGATO: quando la presenza
+    finisce, continuare a pubblicarla vuol dire pubblicare una realta' che non e'
+    piu' nella guida. E' lo stesso problema che CLAUDE.md segnala per i luoghi
+    ("Premium_al, la data di scadenza: niente si spegne da solo"), risolto nel
+    verso giusto — qui qualcosa si spegne da solo.
+
+    La scheda in corsi.html invece resta finche' la realta' ha corsi nel foglio,
+    e con lei l'ancora #r-…: i link gia' girati non si rompono comunque."""
+    import glob as _glob
+    dest = os.path.join(ROOT, DIR_REALTA)
+    os.makedirs(dest, exist_ok=True)
+    vive, scritte = set(), 0
+    for org, v in gruppi.items():
+        info = realta.get(G.slugify(org), {})
+        if not ha_pagina(info):
+            continue
+        f = f"{slug_realta(org)}.html"
+        vive.add(f)
+        path = os.path.join(dest, f)
+        nuovo = pagina_realta(org, v, info, css, nav, foot)
+        vecchio = open(path, encoding='utf-8').read() if os.path.exists(path) else ''
+        if nuovo != vecchio:
+            open(path, 'w', encoding='utf-8').write(nuovo)
+            scritte += 1
+    tolte = []
+    for path in _glob.glob(os.path.join(dest, '*.html')):
+        if os.path.basename(path) not in vive:
+            os.remove(path)
+            tolte.append(os.path.basename(path))
+    print(f"[genera_corsi] pagine realta': {len(vive)} pubblicate "
+          f"({scritte} riscritte)"
+          + (f", {len(tolte)} tolte: {', '.join(tolte)}" if tolte else ""))
+    if not vive:
+        print(f"[genera_corsi] nessuna realta' ha una descrizione di almeno "
+              f"{MIN_DESCR_REALTA} caratteri nella tab Realta: nessuna pagina "
+              f"dedicata (resta la scheda in corsi.html)")
+    return vive
 
 
 # ── CHI RISPONDE A CHI SCRIVE ────────────────────────────────────────────
@@ -622,7 +955,7 @@ def _id_corso(c):
     return 'c-' + G.slugify(f"{c.get('org', '')}-{c.get('nome', '')}")
 
 
-def card(c, idx):
+def card(c, idx, pagine=(), qui_org=None):
     """Una scheda in stile agenda: riga sempre visibile + dettaglio che si apre
     al tocco. Riusa le classi .event-card/.ev-* del resto del sito.
 
@@ -690,8 +1023,6 @@ def card(c, idx):
         righe_det.append(
             f'<p class="co-openday"><strong>Open day:</strong> {G.esc(quando)} — '
             f'<a href="{od["url"]}">vedi la locandina →</a></p>')
-    if c['prova']:
-        righe_det.append(f'<p class="co-prova">Prova: {G.esc(c["prova"])}</p>')
     dove = c['sede'] or c['citta']
     if dove:
         righe_det.append(f'<p class="ev-where">{G.PIN_SVG} {G.esc(dove)}</p>')
@@ -700,14 +1031,38 @@ def card(c, idx):
     # L'ORGANIZZATORE E' IL PRIMO DATO DEL DETTAGLIO, e non sta piu' in riga.
     # Nell'elenco un genitore sceglie il corso, non la societa'; la societa' e'
     # il passo dopo, e il link porta alla sua scheda in fondo alla pagina.
-    if c['org']:
+    # `pagine` sono gli slug delle realta' che hanno una pagina dedicata: se
+    # c'e', il link ci va, se no resta l'ancora della scheda in fondo. Non e'
+    # un'alternativa fra due indirizzi buoni — l'ancora esiste sempre e i link
+    # gia' girati continuano a funzionare — e' che quando c'e' una pagina vera
+    # mandare a un riassunto e' un passo in piu' per niente.
+    # `qui_org` e' la realta' della pagina su cui siamo: sulla propria pagina la
+    # riga non si stampa affatto, perche' e' l'intestazione che si sta leggendo.
+    if c['org'] and G.slugify(c['org']) != qui_org:
+        href = (url_realta(c['org']) if G.slugify(c['org']) in pagine
+                else f"#{_ancora(c['org'])}")
         dati.append(('Organizzatore',
-                     f'<a href="#{_ancora(c["org"])}">{G.esc(c["org"])}</a>'))
+                     f'<a href="{href}">{G.esc(c["org"])}</a>'))
     if c['periodo']:
         dati.append(('Periodo', G.esc(c['periodo'])))
     # I giorni scendono qui dalla riga: servono a chi ha gia' scelto.
     if c['giorni']:
         dati.append(('Giorni', G.esc(c['giorni'])))
+    # LA PROVA E' UNA CARATTERISTICA DEL CORSO, non un annuncio a se'. Fino al
+    # 21/08/2026 stava in un paragrafo suo, sopra i dati e subito sotto la riga
+    # dell'open day — e le due cose si accavallavano: l'open day porta le sue
+    # date dalla tab Eventi, la colonna Prova ne porta altre scritte a mano
+    # nella stessa cella ("Gratuita · open day 10, 17 e 24 settembre"), e a
+    # schermo si leggevano due calendari diversi per la stessa cosa. Giovanni
+    # l'ha chiamato "un po' di casino con le date", ed e' esatto.
+    #
+    # La divisione e' questa, e va tenuta: l'OPEN DAY e' un evento, ha una data
+    # sola, sta nella tab Eventi e da li' prende la sua locandina; la PROVA e'
+    # un attributo — si puo' provare o no — e sta qui in mezzo agli altri, sotto
+    # i giorni. Nel foglio la colonna Prova non dovrebbe portare date: se ne
+    # porta, sono date che nessuno viene ad aggiornare.
+    if c['prova']:
+        dati.append(('Prova', G.esc(c['prova'])))
     if c['prezzo']:
         dati.append(('Quota', G.esc(c['prezzo'])))
     # NIENTE "Iscrizioni aperte/chiuse", tolto il 21/08/2026 su richiesta di
@@ -716,7 +1071,13 @@ def card(c, idx):
     # quasi mai, e la risposta vera ce l'ha la societa' — che qui sotto ha il
     # suo numero. Una riga che dice "Aperte" a gennaio e' peggio di nessuna riga.
     if c['contatto']:
-        dati.append(('Contatti', G.esc(c['contatto'])))
+        # contatti_html() e non esc(): il numero diventa <a href="tel:">, che su
+        # un telefono e' la differenza fra leggere un numero e chiamare. Non e'
+        # solo comodita' — un numero stampato come testo NON PRODUCE UN CLIC, e
+        # quindi non esiste in GA4: il telefono era l'unica tappa del percorso
+        # che si voleva restituire alle realta' e che non si poteva misurare.
+        # Il testo intorno resta come l'ha scritto chi compila il foglio.
+        dati.append(('Contatti', G.contatti_html(c['contatto'])))
     # Il contatto e' UNO, quello della realta'. I referenti restano nomi: sulla
     # locandina di partenza erano cinque cellulari di volontarie e, a confronto
     # con quella dell'anno prima, erano cambiati quasi tutti. Ripubblicarli qui
@@ -747,7 +1108,16 @@ def card(c, idx):
     eta_attr = f' data-etamin="{r[0]}" data-etamax="{r[1]}"' if r else ''
     cat = _cat_foglia(c)
     riga_cat = f'<span class="co-cat">{G.esc(cat)}</span>' if cat else ''
-    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-prova="{'1' if c['prova'] else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+    # data-org-nome e data-codice esistono per il TRACCIAMENTO, ed e' l'unico
+    # posto da cui daop-track.js li puo' sapere. Il nome per esteso non si
+    # ricava dalla card (in riga non c'e', per la decisione del 21/08: qui si
+    # sceglie un corso, non una societa') e ricostruirlo dallo slug darebbe
+    # "pgs-roccavione" in un report che deve leggere una persona. Il codice e'
+    # quello del foglio: e' l'identificativo che NON cambia se un domani il
+    # corso si chiama "Volley U8" invece di "Volley Under 8 M/F" — lo slug
+    # cambierebbe, e con lui si spezzerebbe la serie storica in GA4.
+    cod_attr = f' data-codice="{G.esc(c["codice"])}"' if c.get('codice') else ''
+    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-prova="{'1' if c['prova'] else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
             <span class="ev-thumb is-ph" aria-hidden="true">{G.esc(_emoji(c))}</span>
             <span class="ev-main">
@@ -895,6 +1265,9 @@ CSS = """
 .co-realta-d{margin:0 0 4px;font-size:.95rem;line-height:1.55;opacity:.85}
 .co-realta-corsi,.co-realta-ev{margin:12px 0 0;font-size:.93rem;line-height:1.7}
 .co-realta-corsi a,.co-realta-ev a{color:#2c5d8f}
+.co-realta-vai{margin:12px 0 0;font-size:.95rem}
+.co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
+.co-realta-vai a:hover{text-decoration:underline}
 .co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
@@ -1061,9 +1434,13 @@ def render(corsi, css, nav, foot, realta=None):
         _cat_foglia(c).lower(), (eta_range(c) or (999, 999))[0],
         (c['citta'] or '').lower(), c['nome'].lower()))
 
+    # Le realta' che hanno una pagina dedicata, per slug: le card ci mandano
+    # il link "Organizzatore" invece che all'ancora del riassunto.
+    pagine = {k for k, v in realta.items() if ha_pagina(v)}
+
     if ordinati:
         elenco = ('  <div class="events-list" id="co-lista">\n'
-                  + "\n".join(card(c, i) for i, c in enumerate(ordinati))
+                  + "\n".join(card(c, i, pagine) for i, c in enumerate(ordinati))
                   + '\n  </div>')
     else:
         elenco = ('  <p class="co-nota">Le prime schede stanno arrivando.</p>')
@@ -1135,16 +1512,17 @@ def render(corsi, css, nav, foot, realta=None):
     </div>
     <span class="section-label">{G.esc(zona_breve)} · Famiglie</span>
     <h1>Corsi per bambini <em>{G.esc(dove)}</em></h1>
-    <p>Le attività che durano tutto l'anno — sport, musica, danza, lingue — con le età,
-    i giorni, i costi e le prove gratuite di settembre. Raccolte a mano, una società
-    alla volta.</p>
+    <p>Sport, musica, danza, lingue, teatro: le attività a cui un bambino si iscrive,
+    con l'età che prendono, dove sono e se si può provare prima. Raccolte a mano,
+    una società alla volta.</p>
   </div>
 </header>
 <article class="co-wrap">
-{avviso}  <p class="co-intro">Un corso non è un evento: comincia a settembre e finisce a primavera,
-  e la domanda di un genitore non è "cosa si fa sabato" ma "dove porto mio figlio quest'anno".
-  Qui trovi quello che c'è, con quello che serve davvero per decidere: che età prende,
-  che giorni, e se si può provare prima di iscriversi.</p>
+{avviso}  <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,
+  qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa
+  sabato" ma "dove porto mio figlio quest'anno". Qui trovi quello che c'è, e lo scegli
+  come lo sceglieresti davvero: per disciplina, per età del bambino e per comune.
+  Dove si può provare prima di iscriversi, è scritto.</p>
 {toolbar(corsi)}
 {elenco}
 {sezione}
@@ -1166,7 +1544,7 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def aggiorna_sitemap():
+def aggiorna_sitemap(pagine=()):
     """La riga della sitemap, che esiste solo se la pagina e' in indice.
 
     Fuori indice il blocco si TOGLIE invece di non aggiornarsi: una URL in
@@ -1186,17 +1564,26 @@ def aggiorna_sitemap():
         return
     oggi = datetime.date.today().isoformat()
     s = open(SITEMAP_PATH, encoding='utf-8').read()
-    blocco = (f"  <!-- CORSI:START (generato da scripts/genera_corsi.py — non modificare a mano) -->\n"
-              f"  <url>\n    <loc>{URL}</loc>\n    <lastmod>{oggi}</lastmod>\n"
-              f"    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n"
-              f"  <!-- CORSI:END -->")
+    # L'hub e le pagine delle realta' stanno nello STESSO blocco: sono la stessa
+    # famiglia e si accendono e si spengono insieme. Con due blocchi, spegnere i
+    # corsi lascerebbe in sitemap le pagine delle societa' — cioe' proprio le
+    # pagine che senza l'hub non hanno piu' un posto da cui si arriva.
+    voci = [f"  <url>\n    <loc>{URL}</loc>\n    <lastmod>{oggi}</lastmod>\n"
+            f"    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>"]
+    for f in sorted(pagine):
+        voci.append(f"  <url>\n    <loc>{SITE_URL}/{DIR_REALTA}/{f}</loc>\n"
+                    f"    <lastmod>{oggi}</lastmod>\n"
+                    f"    <changefreq>monthly</changefreq>\n"
+                    f"    <priority>0.6</priority>\n  </url>")
+    blocco = ("  <!-- CORSI:START (generato da scripts/genera_corsi.py — non modificare a mano) -->\n"
+              + "\n".join(voci) + "\n  <!-- CORSI:END -->")
     re_blocco = re.compile(r'  <!-- CORSI:START.*?<!-- CORSI:END -->', re.S)
     if re_blocco.search(s):
         s = re_blocco.sub(blocco, s)
     else:
         s = s.replace('</urlset>', blocco + '\n</urlset>')
     open(SITEMAP_PATH, 'w', encoding='utf-8').write(s)
-    print("[genera_corsi] sitemap aggiornata")
+    print(f"[genera_corsi] sitemap: corsi.html + {len(pagine)} pagine realta'")
 
 
 def main():
@@ -1213,6 +1600,14 @@ def main():
     # leggi_realta().
     realta = leggi_realta({c['org'] for c in corsi})
     css, nav, foot = G._guscio()
+    # Le pagine delle realta' PRIMA di corsi.html: render() deve sapere quali
+    # esistono per decidere dove manda il link "Organizzatore". Fra le due
+    # chiamate la fonte e' la stessa (ha_pagina sulla riga della tab Realta),
+    # quindi non possono divergere.
+    gruppi = {}
+    for c in corsi:
+        gruppi.setdefault(c['org'] or 'Altre realtà', []).append(c)
+    pagine = scrivi_realta(gruppi, realta, css, nav, foot)
     nuovo = render(corsi, css, nav, foot, realta)
     vecchio = open(PATH, encoding='utf-8').read() if os.path.exists(PATH) else ''
     if nuovo != vecchio:
@@ -1220,7 +1615,7 @@ def main():
         print(f"[genera_corsi] {FILE} riscritta — {len(corsi)} corsi")
     else:
         print(f"[genera_corsi] {FILE} invariata — {len(corsi)} corsi")
-    aggiorna_sitemap()
+    aggiorna_sitemap(pagine)
     return 0
 
 

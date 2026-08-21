@@ -126,6 +126,20 @@ jobs:
           #     conteggi del giorno della nascita. E' lo stesso guasto di
           #     ferragosto.html, alla dodicesima ripetizione.
           #
+          #   data/centri-stagioni.json  quali stagioni hanno centri, cioe' la
+          #     voce che la nav stampa su ~360 pagine. Nato il 21/08 e mancante
+          #     da questo elenco dalla prima run: tredicesima ripetizione dello
+          #     stesso guasto, e stavolta non silenziosa — essendo un file
+          #     tracciato, la rete di sicurezza in fondo avrebbe fatto diventare
+          #     rossa la run notturna.
+          #
+          #   corsi/  le pagine dedicate delle realta' (dal 21/08). Nascono
+          #     UNTRACKED, quando una societa' nuova entra nella tab Realta: e'
+          #     l'unico caso in cui la rete di sicurezza NON avrebbe protetto,
+          #     perche' guarda solo i file gia' tracciati. `git add corsi/` le
+          #     prende comunque, ed e' il motivo per cui qui c'e' la cartella e
+          #     non un elenco di file.
+          #
           # L'elenco e' raggruppato per generatore, e ogni generatore va letto
           # per intero quando se ne aggiunge uno: il 18/08/2026 mancavano tutte
           # e sei le stagionali nate dopo ferragosto (befana, capodanno,
@@ -149,8 +163,8 @@ jobs:
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
                 data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
-                data/rubriche.json data/conteggi.json \
-                eventi/ rubriche/ assets/miniature/"
+                data/rubriche.json data/conteggi.json data/centri-stagioni.json \
+                eventi/ rubriche/ corsi/ assets/miniature/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
           # data/luoghi.json nasce solo quando il tab "Luoghi" del foglio

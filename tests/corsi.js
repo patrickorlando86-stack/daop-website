@@ -304,13 +304,22 @@ module.exports = async function corsi(browser) {
     }));
   r.ok(legami.length > 0 && legami.every(Boolean),
     `${legami.length} corsi rimandano al loro organizzatore`);
+  // Due destinazioni possibili e nessuna delle due puo' essere inventata: se la
+  // realta' ha una pagina dedicata si va li', se no all'ancora del riassunto in
+  // fondo. Sono due controlli diversi — un'ancora si cerca nel DOM, un file si
+  // cerca su disco — e confonderli e' facile: page.locator('/corsi/x.html')
+  // non e' un selettore, e' un errore.
   const persi = [];
-  for (const h of legami.filter(Boolean)) {
-    if (await page.locator(h).count() === 0) persi.push(h);
+  for (const h of [...new Set(legami.filter(Boolean))]) {
+    if (h.startsWith('#')) {
+      if (await page.locator(h).count() === 0) persi.push(h + ' (ancora)');
+    } else if (!fs.existsSync(path.join(RADICE, h.replace(/^\//, '')))) {
+      persi.push(h + ' (file)');
+    }
   }
   r.ok(persi.length === 0, persi.length
-    ? `link organizzatore verso ancore inesistenti: ${[...new Set(persi)].join(', ')}`
-    : 'ogni link organizzatore arriva su una scheda che esiste');
+    ? `link organizzatore che non arrivano da nessuna parte: ${persi.join(', ')}`
+    : 'ogni link organizzatore arriva a destinazione');
 
   // ── niente "Iscrizioni aperte/chiuse" ────────────────────────────────
   // Tolto il 21/08/2026: e' un dato che scade in silenzio e che nessuno viene
@@ -365,6 +374,195 @@ module.exports = async function corsi(browser) {
     ? `open day che puntano a pagine inesistenti: ${rotti.join(', ')}`
     : `${openday.length} link a open day, tutti verso schede che esistono`);
 
+  // ── 7. ogni riga sa di chi e', e il tracciamento lo legge ────────────
+  // Chiesto da Giovanni il 21/08/2026: restituire a ogni realta' il proprio
+  // percorso (scheda aperta -> sito -> telefono -> email -> social) senza
+  // ricostruire l'organizzatore dall'URL di destinazione. Il legame e' un
+  // attributo nel DOM, e se sparisce non si rompe NIENTE di visibile: la
+  // pagina resta identica e i report si svuotano in silenzio. Per questo la
+  // prova sta qui e non nella pagina.
+  const senzaOrg = await page.$$eval('.event-card, .co-realta', (els) => els
+    .filter((e) => !(e.dataset.org || '').trim() || !(e.dataset.orgNome || '').trim())
+    .map((e) => e.id || e.textContent.trim().slice(0, 40)));
+  r.ok(senzaOrg.length === 0, senzaOrg.length
+    ? `righe senza attribuzione (data-org / data-org-nome): ${senzaOrg.join(' | ')}`
+    : "ogni corso e ogni realta' portano id e nome dell'organizzatore");
+
+  // Il telefono e' una TAPPA DEL PERCORSO, e un numero stampato come testo non
+  // produce un clic: in GA4 quella colonna resterebbe vuota per sempre. Vale
+  // anche per chi legge — su un telefono si chiama toccando.
+  const telSpenti = await page.$$eval('.co-dati', (dls) => {
+    const fuori = [];
+    dls.forEach((dl) => {
+      [...dl.querySelectorAll('dt')].forEach((dt) => {
+        if (!/contatt/i.test(dt.textContent)) return;
+        const dd = dt.nextElementSibling;
+        if (!dd) return;
+        // sei cifre di fila = un numero, comunque sia spaziato
+        if (!/(\d[\s.\-/]*){6,}/.test(dd.textContent)) return;
+        if (!dd.querySelector('a[href^="tel:"]')) fuori.push(dd.textContent.trim());
+      });
+    });
+    return fuori;
+  });
+  r.ok(telSpenti.length === 0, telSpenti.length
+    ? `numeri non cliccabili nei Contatti: ${telSpenti.join(' | ')}`
+    : 'i numeri nei Contatti sono link tel:, quindi si chiamano e si contano');
+
   await ctx.close();
+
+  // ── 9. le pagine dedicate delle realta' ──────────────────────────────
+  // Chieste da Giovanni il 21/08/2026 ("una pagina organizzatori, non solo la
+  // scheda nella pagina generale"). Sono la cosa piu' vicina allo scaled
+  // content che questo sito abbia: N pagine su un template solo, col nome
+  // scambiato. Quello che le rende legittime non e' il numero, e' il
+  // MATERIALE — descrizione vera, contatti, corsi, eventi — quindi la prova
+  // guarda proprio quello, non che il file esista.
+  //
+  // Il caso "nessuna pagina" e' legittimo e va detto, non saltato in silenzio:
+  // finche' la tab Realta non ha descrizioni, la pagina non deve nascere.
+  const dedicate = fs.existsSync(path.join(RADICE, 'corsi'))
+    ? fs.readdirSync(path.join(RADICE, 'corsi')).filter((f) => f.endsWith('.html'))
+    : [];
+  r.titolo(`pagine realtà — ${dedicate.length} in /corsi/`);
+  if (!dedicate.length) {
+    console.log('  --   nessuna realtà ha materiale a sufficienza: '
+      + 'nessuna pagina dedicata, ed è il comportamento voluto');
+  }
+  // Ogni pagina dedicata dev'essere raggiungibile da corsi.html: una pagina che
+  // non riceve link dal corpo di nessun'altra e' orfana, ed e' il guasto gia'
+  // costato tutto il traffico a luoghi.html.
+  const hub = fs.readFileSync(file, 'utf8');
+  for (const f of dedicate) {
+    const q = await apri(browser, `corsi/${f}`, 412);
+    const h1 = (await q.page.locator('h1').first().innerText()).trim();
+    const org = await q.page.locator('[data-org-nome]').first()
+      .getAttribute('data-org-nome').catch(() => null);
+    r.ok(!!h1 && h1 === (org || h1), `${f}: l'H1 è la realtà (${h1})`);
+
+    const corsiQui = await q.page.locator('.event-card').count();
+    r.ok(corsiQui > 0, `${f}: ${corsiQui} corsi in pagina`);
+
+    // Il materiale che giustifica la pagina. Senza descrizione questa pagina
+    // dice meno della scheda che la realta' ha gia' in corsi.html, cioe' e' un
+    // doppione piu' debole del proprio riassunto.
+    const descr = await q.page.locator('.cr-descr').innerText().catch(() => '');
+    r.ok(descr.trim().length >= 120,
+      `${f}: descrizione di ${descr.trim().length} caratteri`);
+
+    // Sulla propria pagina la riga "Organizzatore" non si stampa: sarebbe un
+    // link all'intestazione che si sta leggendo.
+    const seStesso = await q.page.$$eval('.co-dati dt',
+      (dts) => dts.filter((dt) => /organizzator/i.test(dt.textContent)).length);
+    r.ok(seStesso === 0, `${f}: nessuna riga "Organizzatore" verso se stessa`);
+
+    // robots d'accordo con l'hub: se corsi.html e' fuori indice, una pagina
+    // realta' indicizzata sarebbe l'interruttore girato a meta'.
+    const rob = await q.page.locator('meta[name="robots"]')
+      .getAttribute('content').catch(() => '');
+    const robHub = (hub.match(/name="robots" content="([^"]*)"/) || [])[1] || '';
+    r.ok(rob === robHub, `${f}: robots "${rob}" come l'hub`);
+
+    const can = await q.page.locator('link[rel="canonical"]')
+      .getAttribute('href').catch(() => '');
+    r.ok(can.endsWith(`/corsi/${f}`), `${f}: canonical su se stessa (${can})`);
+
+    // Le locandine degli eventi: se ce ne sono, i link devono esistere.
+    const ev = await q.page.$$eval('.cr-ev', (as) => as.map((a) => a.getAttribute('href')));
+    const evRotti = ev.filter((h) => !fs.existsSync(path.join(RADICE, h.replace(/^\//, ''))));
+    r.ok(evRotti.length === 0, evRotti.length
+      ? `${f}: eventi verso pagine inesistenti: ${evRotti.join(', ')}`
+      : `${f}: ${ev.length} eventi, tutti verso schede che esistono`);
+
+    r.ok(hub.includes(`/corsi/${f}`),
+      `${f}: corsi.html la linka (non è orfana)`);
+    await q.ctx.close();
+  }
+
+  // ── 8. l'attribuzione arriva davvero in GA4 ──────────────────────────
+  // Si riapre la pagina con uno stub al posto di gtag: quello che si prova non
+  // e' che il DOM abbia gli attributi (l'ha appena detto la 7), e' che
+  // daop-track.js li sappia risalire. Il preventDefault sta su window e non su
+  // document APPOSTA: in fase di capture window viene prima, quindi il clic
+  // arriva comunque all'ascoltatore del tracciamento ma la pagina non naviga.
+  const spia = () => {
+    window.addEventListener('click', (e) => e.preventDefault(), true);
+  };
+  const b = await apri(browser, 'corsi.html', 412, spia);
+  // Il consenso si accende DOPO il caricamento, non nello script iniziale:
+  // cookie-consent.js parte mettendo `daopConsensoAnalytics = false`, quindi un
+  // flag acceso prima verrebbe spento da lui e la prova misurerebbe il banner.
+  await b.page.evaluate(() => {
+    window.__ga = [];
+    window.daopConsensoAnalytics = true;
+    window.gtag = function () { window.__ga.push([].slice.call(arguments)); };
+  });
+
+  // L'APERTURA DELLA SCHEDA: e' il denominatore di tutto il resto. Senza, a una
+  // realta' si puo' dire "3 clic al tuo sito" ma non su quante volte.
+  await b.page.locator('.event-card[data-org] .ev-row').first().click();
+  const aperture = await b.page.evaluate(
+    () => window.__ga.filter((e) => e[1] === 'apri_corso').map((e) => e[2]));
+  r.ok(aperture.length === 1, `apri_corso: ${aperture.length} evento/i su un'apertura`);
+  const a0 = aperture[0] || {};
+  r.ok(!!(a0.organizer_id && a0.organizer_name && a0.course_id && a0.course_name),
+    aperture.length
+      ? `apri_corso porta ${JSON.stringify(a0.organizer_id)} / ${JSON.stringify(a0.course_name)}`
+      : "apri_corso non e' arrivato: l'apertura di una scheda non si misura");
+  // Richiudere non e' un secondo interessamento.
+  await b.page.locator('.event-card[data-org] .ev-row').first().click();
+  r.ok((await b.page.evaluate(
+    () => window.__ga.filter((e) => e[1] === 'apri_corso').length)) === 1,
+    'la chiusura di una scheda non conta come una seconda apertura');
+
+  // I clic in uscita DENTRO una scatola con un padrone: sito, telefono, email,
+  // social. Il conteggio si stampa apposta — oggi il foglio ha poche colonne
+  // compilate, e una prova che passa a vuoto va distinta da una che passa.
+  // I dettagli si aprono prima: i recapiti di un corso vivono dentro
+  // `.ev-det[hidden]`, e un link nascosto non si puo' cliccare. E' anche
+  // l'ordine vero — nessuno telefona senza aver aperto la scheda.
+  for (const riga of await b.page.locator('.event-card[data-org] .ev-row').all()) {
+    await riga.click();
+  }
+  const esterni = await b.page.$$eval('[data-org] a[href]', (as) => as
+    .map((a) => a.getAttribute('href') || '')
+    .filter((h) => /^(tel:|mailto:)/.test(h) || /^https?:\/\//i.test(h)));
+  let orfani = 0;
+  for (const href of esterni) {
+    await b.page.evaluate(() => { window.__ga = []; });
+    await b.page.locator(`[data-org] a[href="${href}"]`).first().click();
+    // Non `__ga[0]`: aprendo i dettagli la pagina cambia altezza e uno
+    // `scroll_depth` puo' infilarsi davanti al clic. Si cerca la destinazione.
+    const p = await b.page.evaluate((h) => {
+      const e = window.__ga.find((x) => x[2] && x[2].destination_url === h);
+      return e ? e[2] : null;
+    }, href);
+    if (!p || !p.organizer_id) orfani += 1;
+  }
+  r.ok(orfani === 0, orfani
+    ? `${orfani} clic su ${esterni.length} non sono attribuiti a nessuna realta'`
+    : `${esterni.length} clic in uscita dentro una scheda, tutti attribuiti`);
+
+  // E IL CONTRARIO, che e' la meta' che si dimentica: un link che non sta
+  // dentro la scheda di nessuno — l'invito alle societa' in fondo, il footer —
+  // non deve prendersi l'attribuzione dell'ultima realta' della pagina.
+  await b.page.evaluate(() => { window.__ga = []; });
+  const fuoriBox = b.page.locator('.co-nota a[href^="mailto:"]').first();
+  if (await fuoriBox.count()) {
+    const suo = await fuoriBox.getAttribute('href');
+    await fuoriBox.click();
+    const p = await b.page.evaluate((h) => {
+      const e = window.__ga.find((x) => x[2] && x[2].destination_url === h);
+      return e ? e[2] : null;
+    }, suo);
+    r.ok(!!p && !p.organizer_id,
+      !p
+        ? "il clic fuori dalle schede non ha prodotto nessun evento (stub muto?)"
+        : p.organizer_id
+          ? `un link fuori dalle schede e' attribuito a ${p.organizer_id}`
+          : "un link fuori dalle schede non e' attribuito a nessuna realta'");
+  }
+
+  await b.ctx.close();
   return r;
 };

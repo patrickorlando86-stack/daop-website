@@ -169,9 +169,19 @@ GA4 e duplica il nostro. Il commento in `daop-track.js` lo prevedeva già —
 Amministratore → Flussi di dati → il flusso web → **Misurazione avanzata** →
 togliere "Scorrimenti". Meno rumore, e meno benzina per gli avvisi "anomalia".
 
-#### Le dimensioni personalizzate sono sette, e sono tutte registrate
+#### Le dimensioni personalizzate sono undici, e sono tutte registrate
 
-**Fatto: non c'è niente da fare qui.** Verificato il 19/08/2026 in
+**Fatto: non c'è niente da fare qui.** Le quattro dei corsi — `organizer_id`,
+`organizer_name`, `course_id`, `course_name`, ambito **Evento** — sono state
+create il **21/08/2026**, verificate a schermo nell'elenco. Con la storica
+`categoria_nome` fanno **dodici righe su cinquanta slot**: lo spazio non è, e
+non sarà, il vincolo.
+
+Ne segue la sola cosa che conta ricordare: **rispondono dal 21/08 e non prima.**
+Una domanda su chi ha guardato i corsi in luglio non ha risposta, e non è un
+problema di query.
+
+**Sulle sette di prima non c'è niente da fare.** Verificato il 19/08/2026 in
 Amministratore → Proprietà → **Definizioni personalizzate**: tutte e sette
 esistono con ambito **Evento**, le quattro del 12 agosto e le tre nate col
 "vicino a me" il 15. Questo paragrafo fino a quel giorno le dava come da
@@ -196,8 +206,12 @@ dimensione:
 | `raggio_km` | `vicino_a_me` | 10, 20, 30, 50 — **dimensione, non metrica** |
 | `percent_scroll` | `scroll_depth` | 25/50/75/100 |
 | `destination_url` | i clic | dove se ne vanno |
+| `organizer_id` | tutti, su `corsi.html` | **a quale realtà va questo clic** |
+| `organizer_name` | idem | la stessa cosa, leggibile in un report |
+| `course_id` | idem, se il clic parte da un corso | quale corso, con l'id stabile |
+| `course_name` | idem | quale corso, leggibile |
 
-Il limite sono 50 dimensioni evento: se un domani ne nasce un'ottava vera, si
+Il limite sono 50 dimensioni evento: se un domani ne nasce una vera in più, si
 registra e basta, non c'è niente da scegliere.
 
 **Le prime due valgono più delle altre cinque insieme, e non per il "vicino a
@@ -210,8 +224,8 @@ non è più una cosa da preparare, è una cosa da leggere.
 **Non sono retroattive**, ed è il motivo per cui la data di creazione conta più
 della dimensione stessa: quello raccolto prima resta invisibile per sempre.
 Quindi `event_city`, `event_province`, `event_title` e `destination_url`
-rispondono **dal 12/08**, e `percent_scroll`, `metodo_posizione`, `raggio_km`
-**dal 15/08**. Sotto quelle date non c'è niente e non ci sarà mai: una domanda
+rispondono **dal 12/08**, `percent_scroll`, `metodo_posizione`, `raggio_km`
+**dal 15/08**, e le quattro dei corsi **dal 21/08**. Sotto quelle date non c'è niente e non ci sarà mai: una domanda
 sul comportamento di luglio non ha risposta, e non è un problema di query.
 
 Nei report compaiono dopo 24-48 ore dalla creazione; in DebugView subito, ed è
@@ -703,6 +717,185 @@ marker**: toglieva solo `*-CENTRI`, quindi le 15 pagine in `rubriche/` sono usci
 coi commenti `NAV-CORSI` dentro la nav. È il difetto già trovato il 21/08 sui
 centri, ripetuto identico — la riga che li toglie sta in tutti e due i gusci, e
 se nasce un terzo generatore con un guscio suo è quella da ricordare.
+
+#### Restituire i numeri a ogni realtà: l'attribuzione è nel DOM
+
+Fatto il 21/08/2026, chiesto da Giovanni in vista del lancio: poter dire a una
+società *scheda aperta → clic al sito → telefono → email → social* senza
+ricostruire ogni volta l'organizzatore da `destination_url`.
+
+Il legame **non è un elenco da tenere allineato**: è un attributo. Il
+generatore stampa `data-org` (lo slug, cioè la stessa ancora `#r-pgs-roccavione`
+che si manda su WhatsApp), `data-org-nome` e `data-codice` sulla card del corso
+e sulla scheda della realtà; `contesto_riga()` in `daop-track.js` risale
+l'albero con `closest()` e aggiunge quattro parametri a **ogni** evento di clic:
+`organizer_id`, `organizer_name`, `course_id`, `course_name`.
+
+La conseguenza voluta è anche il contrario: **un link che non sta dentro una di
+quelle scatole non prende l'attribuzione di nessuno** — l'invito alle società in
+coda, il footer. `tests/corsi.js` prova tutte e due le direzioni, con uno stub al
+posto di `gtag`.
+
+Le decisioni, che è quello che non si ricava dal diff:
+
+- **`organizer_id` è lo slug e non deve mai cambiare.** È già l'ancora che gira
+  nei messaggi, quindi cambiarlo rompe due cose insieme; in GA4 un id nuovo vuol
+  dire una serie storica che riparte da zero. Per lo stesso motivo `course_id` è
+  il **CODICE del foglio** quando c'è, e ripiega sull'id-slug: un corso che si
+  rinomina da "Volley Under 8 M/F" a "Volley U8" non perde il suo storico.
+- **`organizer_name` sta in un attributo, non si deduce dal DOM.** In riga il
+  nome della società non c'è (decisione del 21/08: qui si sceglie un corso), e
+  ricostruirlo dallo slug darebbe "pgs-roccavione" dentro un report che deve
+  leggere una persona.
+- **`apri_corso` è il denominatore, ed è il pezzo che mancava davvero.**
+  `corsi.html` è **una pagina sola**: il suo `page_view` dice "qualcuno ha aperto
+  l'elenco", non "qualcuno ha guardato i corsi della PGS Roccavione". Senza,
+  a una realtà si potrebbe dire "3 clic al tuo sito" ma non *su quante volte* —
+  che è lo stesso identico buco già elencato come lavoro mancante per
+  `luoghi.html`, con la differenza che qui c'era già un gesto deliberato da
+  contare (il `<details>` della riga). Si conta solo l'**apertura**: al momento
+  del capture `aria-expanded` ha ancora il valore vecchio, quindi `"false"`
+  vuol dire che sta aprendo, e richiudere non è un secondo interessamento.
+- **Il selettore chiede `data-org`**, che oggi stampa il solo `genera_corsi.py`.
+  Le ~300 schede evento hanno le stesse `.ev-row`: contarle qui vorrebbe dire
+  moltiplicare gli eventi su tutto il sito per una domanda che lì nessuno ha
+  fatto — e dare benzina agli avvisi "anomalia".
+
+**Due tappe del percorso erano rotte a monte, e non era un problema di GA4.** Il
+telefono era stampato come **testo**: un numero non cliccabile non produce un
+clic, quindi quella colonna sarebbe restata vuota per sempre (ora passa da
+`G.contatti_html()`, la stessa delle schede evento — e si chiama, che su un
+telefono è il punto). I **social** non avevano proprio una colonna: ora
+`COLONNE_REALTA` ha `instagram` e `facebook`, due colonne separate perché una
+"Social" sola diventa `"ig: @tizio, fb: pagina"`, cioè un testo da cui non si
+ricava un link. `daop-track.js` riconosce già quei due domini da sé.
+
+**Quello che si restituisce a una realtà è una sottostima, e va detto a loro.**
+Vale la copertura di ~38% contro Search Console: quello che GA4 vede è circa un
+terzo. Un report che dice "47" senza dire "almeno" è una promessa che il primo
+cliente sveglio smonta. E attenzione alle **soglie sui dati** di GA4: con Google
+Signals attivo le righe con pochi utenti spariscono, cioè proprio il caso della
+società piccola con dodici clic al mese — è la prima cosa da verificare quando
+un report esce vuoto.
+
+**Le quattro dimensioni vanno registrate in GA4 prima del lancio**, e non è una
+formalità: non sono retroattive. Vedi "Le dimensioni personalizzate" più sopra.
+
+#### Il testo non promette quello che il foglio non garantisce
+
+Terza tornata di feedback, 21/08/2026. L'hero diceva «Le attività che durano
+tutto l'anno — sport, musica, danza, lingue — con le età, i giorni, i costi e le
+prove gratuite di settembre», e l'intro «comincia a settembre e finisce a
+primavera… che età prende, che giorni». Due problemi, e sono lo stesso problema:
+
+- **«i giorni e i costi» sono colonne facoltative.** Prometterli in cima
+  obbliga a compilarle su ogni riga, e la riga che non le ha smentisce la
+  pagina. Giovanni: «ci impegna anche a scrivere giorni e costi che io continuo
+  a insistere di tenere facoltativi».
+- **«dura tutto l'anno» non è vero per tutti**: ci sono corsi da uno o due mesi
+  e percorsi di poche lezioni.
+
+Ora l'hero promette solo quello che il generatore **calcola o ha sempre**: la
+disciplina, l'età (che si ricava da annate + stagione, non si copia), il comune,
+e la prova «dove c'è». E l'intro dice come si sceglie — «per disciplina, per età
+del bambino e per comune» — che sono i tre filtri veri, invece di elencare dati
+che potrebbero mancare. È la stessa regola già scritta per l'agenda: una pagina
+non annuncia un dato che la riga sotto può non avere.
+
+#### L'open day è un evento, la prova è un attributo
+
+La scheda aperta mostrava **due calendari per la stessa cosa**: la riga «Open
+day» prendeva le date dalla tab Eventi, e subito sotto un paragrafo «Prova»
+mostrava le date scritte a mano dentro la colonna `Prova` del foglio («Gratuita ·
+open day 10, 17 e 24 settembre»). Giovanni l'ha chiamato «un po' di casino con le
+date», ed era esatto.
+
+La divisione, da tenere:
+
+| | cos'è | dove vive | cosa mostra |
+|---|---|---|---|
+| **Open day** | un evento | tab Eventi, agganciato dalla colonna `OpenDay` | una data sola, e il link alla sua locandina |
+| **Prova** | un attributo del corso | colonna `Prova` | *se* si può provare — sotto Periodo e Giorni, insieme agli altri dati |
+
+**Nel foglio la colonna `Prova` non dovrebbe portare date.** Se ne porta, sono
+date che nessuno viene ad aggiornare e che contraddicono quelle dell'evento. La
+pillola «Prova gratuita» resta in riga: è un simbolo, e Giovanni l'aveva
+approvata («penso sia molto utile»).
+
+**Il segnaposto dell'open day sulla pagina di prova era doppiamente sbagliato** e
+vale la pena saperlo prima di rimetterne uno: era una manifestazione lunga un
+mese (quindi si leggeva «Dal 1 al 30 settembre») e puntava all'evento di un'altra
+realtà. Adesso è **uno solo**, su un evento di **un giorno**, e la fascia in cima
+dice apertamente che è un esempio. Qualunque segnaposto sarà sempre «l'evento di
+qualcun altro»: l'unica difesa è dirlo.
+
+#### La pagina della realtà: quando una pagina per cliente non è scaled content
+
+Giovanni: «mi ero immaginato che ci fosse proprio una pagina organizzatori, non
+solo la scheda nella pagina generale, in modo da poterci mettere dentro gli
+eventi organizzati da quell'organizzatore lì, con locandina e tutto». Fatta:
+`/corsi/<slug>.html`.
+
+**Perché adesso si può, visto che per i luoghi si era detto di no.** Il rischio
+dello *scaled content abuse* è di **volume** — erano le 800 pagine su template
+identico col nome scambiato a essere il problema, non quaranta pagine con dentro
+materiale vero. È già scritto sopra, ed è la ragione per cui le pagine dedicate
+dei luoghi si fanno «per i clienti che pagano, una alla volta». Qui la condizione
+è soddisfatta **per costruzione**: dal 21/08 la presenza nella guida è una sola
+ed è pagata, quindi ogni organizzatore con una pagina *è* un cliente con del
+materiale. E gli organizzatori sono decine, non centinaia.
+
+**La soglia non è un numero di corsi, è il materiale.** Servono due cose
+insieme: una riga nella tab `Realta` (l'atto deliberato — nessuno ci finisce per
+sbaglio) **e** una descrizione di almeno `MIN_DESCR_REALTA` = 120 caratteri.
+Senza, resta la scheda in fondo a `corsi.html` e basta. Il motivo è aritmetico:
+una società con otto squadre e nessuna descrizione farebbe una pagina **più
+povera del proprio riassunto**, cioè un doppione più debole di sé stessa.
+
+Le decisioni che non si ricavano dal diff:
+
+- **La scheda in fondo a `corsi.html` non sparisce quando nasce la pagina**, e
+  l'ancora `#r-pgs-roccavione` resta dov'è: gira nei messaggi da prima che le
+  pagine esistessero. Guadagna un link («La pagina di … →») e la descrizione si
+  accorcia a 220 caratteri, perché il resto è la ragione per andare sulla pagina.
+- **Il link «Organizzatore» nel dettaglio di un corso** va alla pagina se c'è,
+  all'ancora se no. Sulla **propria** pagina quella riga non si stampa affatto:
+  sarebbe un link all'intestazione che si sta leggendo.
+- **I dati della realtà si scrivono in un posto solo** (`_dati_realta()`): li
+  usano la scheda e la pagina, e un secondo elenco scritto a mano divergerebbe
+  al primo campo aggiunto. Stessa ragione per cui la nav si rilegge da
+  `eventi.html` invece di essere copiata.
+- **La pagina si CANCELLA quando la realtà non ha più materiale**, ed è
+  l'unica cosa del sito che si cancella. Ovunque le pagine restano — una scheda
+  evento diventa «edizione conclusa» — perché l'anzianità dell'URL non si
+  ricompra. Qui no: questa pagina è **uno spazio pagato**, e continuare a
+  pubblicarla quando la presenza finisce vuol dire pubblicare una realtà che non
+  è più nella guida. È il problema che per i luoghi è ancora aperto
+  (`Premium_al`, «niente si spegne da solo») risolto nel verso giusto.
+- **Le pagine di prova non vanno in `/corsi/`.** `prova_corsi.py` sposta
+  `DIR_REALTA` su `corsi-prova/`: una scheda inventata dei Santibriganti in
+  mezzo ai clienti veri è esattamente il danno che quella pagina esiste per
+  evitare.
+- **Nella sitemap stanno nello stesso blocco dell'hub**, così `CORSI_IN_INDICE`
+  le spegne insieme. Con due blocchi, spegnere i corsi lascerebbe in sitemap
+  proprio le pagine che senza l'hub non hanno più un posto da cui si arriva.
+
+**Cosa manca perché sia completa.** Gli eventi che compaiono lì dentro sono solo
+quelli agganciati dai corsi con la colonna `OpenDay`: un saggio di fine anno o
+la festa di Natale della stessa società **non hanno oggi nessun legame con lei**.
+Per averli serve una colonna `Organizzatore` nella tab **Eventi**, scritta con lo
+stesso nome — e a quel punto la pagina li raccoglie da sé.
+
+**Due file generati non erano nell'elenco del workflow**, ed è la tredicesima e
+quattordicesima ripetizione dello stesso guasto già documentato per
+`ferragosto.html`. `data/centri-stagioni.json` (nato il 21/08, quello che decide
+la voce dei centri in nav su ~360 pagine) è tracciato, quindi la rete di
+sicurezza in fondo al workflow avrebbe fatto diventare rossa la run notturna. Le
+pagine in `corsi/` no: nascono **untracked**, quando una società nuova entra
+nella tab `Realta`, ed è l'unico caso in cui quella rete **non** protegge —
+`git status --untracked-files=no` non le vede. Per questo nell'elenco c'è la
+cartella `corsi/` e non un elenco di file. Se un domani si vuole chiudere anche
+quel buco, il posto è il flag di quel `git status`.
 
 ## Decisioni editoriali da non rifare al contrario
 
@@ -2110,6 +2303,48 @@ Sul testo si è deciso così, sempre il 15/08/2026, arrivando a **1.111 px** (da
   sulla pagina che regge il 12% dei clic, ed è anche la descrizione per chi
   arriva da Google senza sapere cos'è DAOP. **Sta dentro i marker
   `EVENTI-HERO`**: si cambia in `genera_eventi.py`, non a mano.
+
+#### "Vai al comune" si ferma a otto pillole
+
+Fatto il 21/08/2026. In alta stagione i comuni con almeno un evento in programma
+sono diciannove, cioè tre file di pillole fra i filtri e il primo evento:
+l'indice si mangiava la pagina che doveva indicizzare. Ne restano in vista otto
+— quelli con più eventi, che è già l'ordine — e la coda sta sotto un
+`+ altri N`.
+
+| a 1280px | prima | dopo |
+|---|---|---|
+| il blocco "Vai al comune" | 169 px | **84 px**, una riga sola |
+| con sopra la riga "Cosa cerchi" | 216 px | 130 px |
+
+Sul telefono lo stesso taglio vale 390 → 228 px, ma si vede solo a blocco
+aperto: sotto i 600px l'agenda lo chiude da sola, ed era già così.
+
+Le decisioni, che è quello che non si ricava dal diff:
+
+- **Il taglio è sul NUMERO di pillole, non sul conteggio degli eventi.** La
+  soglia che viene in mente per prima — "almeno due eventi" — sembra più
+  intelligente e non risolve niente: farebbe ballare la riga fra cinque e
+  quindici pillole secondo la stagione, cioè taglierebbe troppo a novembre e
+  niente a Ferragosto, che è l'unico giorno in cui il difetto si vede. Il guasto
+  da riparare è di ingombro, ed è l'ingombro a dover essere prevedibile.
+  `MAX_COMUNI_APERTI = 8` sta in `genera_eventi.py`, accanto a `MIN_EVENTI_HUB`.
+- **Otto e non sei**: a 1280px otto pillole riempiono esattamente una riga, e
+  una riga piena a metà è spazio speso peggio di una riga piena. Sul telefono
+  sono tre righe, ma lì il blocco parte chiuso.
+- **I link della coda restano tutti nell'HTML**, dentro un secondo `<details>`
+  chiuso: è la stessa ragione per cui il blocco grande è un `<details>` e non
+  JavaScript — dentro un details chiuso Google li vede e li segue lo stesso, che
+  era tutto il punto del blocco. Le pagine comune ricevono diciannove link
+  entranti prima e diciannove dopo.
+- **Sotto le due voci di coda non si taglia niente**
+  (`len(voci) <= MAX_COMUNI_APERTI + 2`): un "+ altri 1" occuperebbe il posto
+  della pillola che nasconde.
+- **La pillola `+ altri N` ha il bordo tratteggiato**, non pieno: è un comando,
+  non una destinazione come le pillole delle scorciatoie, e il pieno lì è già
+  preso. Sta *dentro* `.ev-comuni`, quindi è un elemento flex come le altre e
+  chiude la riga invece di aprirsene una sua; da aperta prende tutta la
+  larghezza e le nascoste vanno sotto.
 
 ## Misurare, non stimare
 

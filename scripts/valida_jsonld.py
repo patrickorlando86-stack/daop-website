@@ -140,6 +140,11 @@ def bersagli(argomenti):
     files = sorted(glob.glob(os.path.join(ROOT, '*.html')))
     files += sorted(glob.glob(os.path.join(ROOT, 'eventi', '**', '*.html'), recursive=True))
     files += sorted(glob.glob(os.path.join(ROOT, 'rubriche', '*.html')))
+    # Le pagine delle realta' (dal 21/08/2026). Dichiarano un'Organization e i
+    # suoi Course: senza questa riga nascevano fuori dal controllo, ed e' il
+    # tipo di buco che non fa rumore — il totale delle pagine non cambia,
+    # quindi nessuno si accorge che ne manca una famiglia intera.
+    files += sorted(glob.glob(os.path.join(ROOT, 'corsi', '*.html')))
     return [f for f in files if os.path.basename(f) not in fuori]
 
 

@@ -41,6 +41,51 @@
     event_province: meta('daop:provincia')
   };
 
+  /* ── Contesto della RIGA ────────────────────────────────────────────────
+     I meta qui sopra descrivono la PAGINA, e su quasi tutto il sito basta:
+     una scheda evento parla di un evento solo. Su /corsi.html no — in una
+     pagina sola convivono N societa' e N corsi, quindi "chi ha ricevuto
+     questo clic" e' una domanda per elemento, non per documento.
+
+     La risposta sta gia' nel DOM: il generatore stampa `data-org` sia sulla
+     card del corso sia sulla scheda della realta' (e' lo stesso slug
+     dell'ancora #r-pgs-roccavione che si manda su WhatsApp), piu'
+     `data-org-nome` per il nome leggibile e `data-codice` per il codice del
+     foglio. Qui si risale l'albero e basta: nessun elenco da tenere
+     allineato, e un link che NON sta dentro una di quelle scatole — l'invito
+     alle societa' in fondo, per dire — non prende l'attribuzione di nessuno,
+     che e' il comportamento giusto.
+
+     A cosa serve: a rispondere a una realta' "quanti hanno aperto la tua
+     scheda, quanti sono andati sul tuo sito, quanti ti hanno chiamato"
+     senza ricostruire ogni volta l'organizzatore da `destination_url`.
+
+     `organizer_id` e' lo slug e NON deve mai cambiare: e' anche l'ancora che
+     gira nei messaggi, e in GA4 un id nuovo vuol dire una serie storica che
+     riparte da zero. Se nel foglio c'e' un CODICE, quello vince come
+     `course_id` proprio per questo — un corso che si rinomina non perde il
+     suo storico. */
+  function contesto_riga(el) {
+    var out = {};
+    if (!el || !el.closest) return out;
+    var box = el.closest('[data-org]');
+    if (box) {
+      var oid = box.getAttribute('data-org') || '';
+      var onome = box.getAttribute('data-org-nome') || '';
+      if (oid) out.organizer_id = oid;
+      if (onome) out.organizer_name = onome;
+    }
+    var card = el.closest('.event-card[data-org]');
+    if (card) {
+      var cid = card.getAttribute('data-codice') || card.id || '';
+      if (cid) out.course_id = cid;
+      var n = card.querySelector('.ev-name');
+      var testo = n && (n.textContent || '').trim();
+      if (testo) out.course_name = testo;
+    }
+    return out;
+  }
+
   // Stesso motivo di cookie-consent.js: "/index.html" e "/" sono la stessa
   // pagina e devono contare come una sola riga anche negli eventi di clic.
   function percorso() {
@@ -54,16 +99,17 @@
      dimensione. Chi legge il report lo vede comunque, in colonna.
      `link_url` resta accanto a `destination_url` per non spezzare la serie
      storica: le esplorazioni gia' salvate in GA4 leggono quel nome. */
-  function track(nome, href) {
+  function track(nome, href, el) {
     // `gtag` esiste sempre (e' lo stub che accoda): la domanda vera e' se
     // l'utente ha acconsentito. Il flag lo mette cookie-consent.js.
     if (!window.daopConsensoAnalytics || typeof gtag !== 'function') return;
-    var p = {
-      page_path: percorso(),
-      destination_url: href,
-      link_url: href
-    };
+    var p = { page_path: percorso() };
+    // `apri_corso` non porta da nessuna parte: mandare una destinazione vuota
+    // riempirebbe il report di "(not set)" sulla meta' degli eventi.
+    if (href) { p.destination_url = href; p.link_url = href; }
     for (var k in CTX) { if (CTX[k]) p[k] = CTX[k]; }
+    var riga = contesto_riga(el);
+    for (var j in riga) { p[j] = riga[j]; }
     gtag('event', nome, p);
   }
 
@@ -116,13 +162,17 @@
      resta un href vero) e perche' un doppio clic involontario e' comune sui
      telefoni. Stesso evento + stessa destinazione entro 800 ms: si scarta. */
   var ultimo = { chiave: '', quando: 0 };
-  function invia(nome, href) {
-    var chiave = nome + '|' + href;
+  function invia(nome, href, el) {
+    // L'id della scatola entra nella chiave perche' `apri_corso` non ha una
+    // destinazione: senza, due corsi aperti in fila entro 800 ms sarebbero la
+    // stessa chiave e il secondo si perderebbe.
+    var box = el && el.closest && el.closest('[data-org]');
+    var chiave = nome + '|' + href + '|' + ((box && box.id) || '');
     var ora = Date.now();
     if (chiave === ultimo.chiave && ora - ultimo.quando < 800) return;
     ultimo.chiave = chiave;
     ultimo.quando = ora;
-    track(nome, href);
+    track(nome, href, el);
   }
 
   function avvia() {
@@ -136,14 +186,35 @@
       if (a) {
         var href = a.getAttribute('href') || '';
         var nome = nome_evento(href);
-        if (nome) invia(nome, href);
+        if (nome) invia(nome, href, a);
+        return;
+      }
+      /* L'APERTURA DI UNA SCHEDA CORSO, che e' il denominatore di tutto il
+         resto. /corsi.html e' UNA pagina: il suo page_view dice "qualcuno ha
+         aperto l'elenco", non "qualcuno ha guardato i corsi della PGS
+         Roccavione". Senza questo evento a una realta' si potrebbe dire "3
+         clic al tuo sito" ma non su quante volte, che e' l'unica forma in cui
+         quel numero vuol dire qualcosa — lo stesso buco gia' scritto in
+         CLAUDE.md per le schede di luoghi.html.
+
+         Si conta solo l'APERTURA: al momento del capture `aria-expanded` ha
+         ancora il valore vecchio, quindi "false" vuol dire che sta aprendo.
+         Chiudere una riga non e' un secondo interessamento.
+
+         Il selettore chiede `data-org`, che oggi lo stampa il solo
+         genera_corsi.py: le ~300 schede evento hanno le stesse `.ev-row` e
+         contarle qui vorrebbe dire moltiplicare gli eventi su tutto il sito
+         per una domanda che li' nessuno ha fatto. */
+      var apri = ev.target.closest && ev.target.closest('.event-card[data-org] .ev-row');
+      if (apri) {
+        if (apri.getAttribute('aria-expanded') === 'false') invia('apri_corso', '', apri);
         return;
       }
       // Sulle schede evento la locandina non e' dentro un link: e' l'immagine
       // grande in colonna, che locandina.js apre nel riquadro. Senza questo
       // ramo il clic piu' significativo della scheda non si vedrebbe.
       var img = ev.target.closest && ev.target.closest('img.ev-loc');
-      if (img) invia('click_locandina', img.getAttribute('src') || '');
+      if (img) invia('click_locandina', img.getAttribute('src') || '', img);
     }, true);
 
     /* "Vicino a me". Il filtro per distanza (daop-vicino.js) non chiama gtag

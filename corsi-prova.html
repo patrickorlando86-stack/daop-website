@@ -323,6 +323,20 @@
   .ev-comuni a{display:inline-flex;align-items:baseline;gap:7px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:7px 14px;font-size:0.86rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
   .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
   .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
+  /* La coda dei comuni, quando sono piu' di dieci. La pillola "+ altri N" sta
+     DENTRO .ev-comuni, quindi e' un elemento flex come le altre e chiude la
+     riga invece di aprirne una sua; da aperta prende tutta la larghezza e le
+     pillole nascoste vanno sotto. Bordo tratteggiato apposta: e' un comando,
+     non una destinazione come le pillole piene delle scorciatoie. Il
+     triangolino del browser va tolto a mano, come nel details grande. */
+  .ev-comuni-piu{min-width:0}
+  .ev-comuni-piu[open]{flex-basis:100%}
+  .ev-comuni-piu>summary{display:inline-flex;align-items:center;cursor:pointer;
+    border:1px dashed rgba(45,74,92,0.28);border-radius:100px;padding:7px 14px;
+    font-size:0.86rem;font-weight:600;color:var(--text-mid);transition:var(--transition)}
+  .ev-comuni-piu>summary::marker,.ev-comuni-piu>summary::-webkit-details-marker{content:'';display:none}
+  .ev-comuni-piu>summary:hover{border-color:var(--teal);color:var(--navy)}
+  .ev-comuni-piu[open]>summary{margin-bottom:8px}
   /* Da dove arriva la segnalazione, cliccabile verso la pagina di provenienza.
      Le occorrenze sono ~190 ma puntano a TRE URL soli. Sta sotto i bottoni e
      pesa meno di loro: e' un credito, non un'azione da fare. */
@@ -466,6 +480,9 @@
 .co-realta-d{margin:0 0 4px;font-size:.95rem;line-height:1.55;opacity:.85}
 .co-realta-corsi,.co-realta-ev{margin:12px 0 0;font-size:.93rem;line-height:1.7}
 .co-realta-corsi a,.co-realta-ev a{color:#2c5d8f}
+.co-realta-vai{margin:12px 0 0;font-size:.95rem}
+.co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
+.co-realta-vai a:hover{text-decoration:underline}
 .co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
@@ -514,7 +531,7 @@
 
 <main id="contenuto">
   <div class="co-prova-avviso">
-    <strong>Pagina di prova.</strong> Serve a far vedere come potrebbe essere fatta la sezione corsi: l'elenco filtrabile dei corsi e, in fondo, le schede delle realtà che li organizzano. <strong>I dati sono di esempio</strong> — il corso di teatro è preso dal sito pubblico della compagnia, e nessuna di queste realtà è un inserzionista. La pagina vera è <a href="/corsi.html">corsi.html</a>.
+    <strong>Pagina di prova.</strong> Serve a far vedere come potrebbe essere fatta la sezione corsi: l'elenco filtrabile, le schede delle realtà in fondo e la pagina dedicata di ogni realtà. <strong>I dati sono di esempio</strong> — il corso di teatro è preso dal sito pubblico della compagnia, indirizzi e telefoni sono inventati, e nessuna di queste realtà è un inserzionista. Anche <strong>l'open day è un segnaposto</strong>: è un evento vero dell'agenda, serve solo a mostrare che il collegamento fra un corso e la sua locandina funziona. La pagina vera è <a href="/corsi.html">corsi.html</a>.
   </div>
 
 <header class="page-hero">
@@ -524,16 +541,17 @@
     </div>
     <span class="section-label">Cuneo · Famiglie</span>
     <h1>Corsi per bambini <em>in provincia di Cuneo</em></h1>
-    <p>Le attività che durano tutto l'anno — sport, musica, danza, lingue — con le età,
-    i giorni, i costi e le prove gratuite di settembre. Raccolte a mano, una società
-    alla volta.</p>
+    <p>Sport, musica, danza, lingue, teatro: le attività a cui un bambino si iscrive,
+    con l'età che prendono, dove sono e se si può provare prima. Raccolte a mano,
+    una società alla volta.</p>
   </div>
 </header>
 <article class="co-wrap">
-  <p class="co-intro">Un corso non è un evento: comincia a settembre e finisce a primavera,
-  e la domanda di un genitore non è "cosa si fa sabato" ma "dove porto mio figlio quest'anno".
-  Qui trovi quello che c'è, con quello che serve davvero per decidere: che età prende,
-  che giorni, e se si può provare prima di iscriversi.</p>
+  <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,
+  qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa
+  sabato" ma "dove porto mio figlio quest'anno". Qui trovi quello che c'è, e lo scegli
+  come lo sceglieresti davvero: per disciplina, per età del bambino e per comune.
+  Dove si può provare prima di iscriversi, è scritto.</p>
     <div class="ev-toolbar" id="co-toolbar">
       <div class="ev-search">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -546,87 +564,87 @@
     <div class="ev-viewbar"><p class="events-count" id="co-count" role="status" aria-live="polite"></p></div>
 
   <div class="events-list" id="co-lista">
-        <article class="event-card" id="c-pgs-roccavione-volley-under-8-m-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-prova="1" data-etamin="6" data-etamax="7" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
+        <article class="event-card" id="c-pgs-roccavione-volley-under-8-m-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A001" data-prova="1" data-etamin="6" data-etamax="7" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-0">
             <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 8 M/F</span>
               <span class="ev-line">6-7 anni · Roccavione</span>
-              <span class="ev-tags"><span class="ev-pill is-openday">Open day</span><span class="ev-pill is-prova">Prova gratuita</span></span>
+              <span class="ev-tags"><span class="ev-pill is-prova">Prova gratuita</span></span>
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h3>
           <div class="ev-det" id="det-co-0" hidden>
             
-<p class="event-desc">Corso di volley per bambini e bambine nati nel 2019 e 2020, con la PGS Roccavione. Si allenano il giovedì pomeriggio.</p>            <p class="co-openday"><strong>Open day:</strong> Dal 1 al 30 settembre 2026, ore vari — <a href="/eventi/festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure.html">vedi la locandina →</a></p>            <p class="co-prova">Prova: Gratuita · open day 10, 17 e 24 settembre</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="#r-pgs-roccavione">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Giovedì 17.30-19.30</dd><dt>Referenti</dt><dd>Michela</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
+<p class="event-desc">Corso di volley per bambini e bambine nati nel 2019 e 2020, con la PGS Roccavione. Si allenano il giovedì pomeriggio.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/pgs-roccavione.html">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Giovedì 17.30-19.30</dd><dt>Prova</dt><dd>Gratuita, su prenotazione</dd><dt>Referenti</dt><dd>Michela</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
           </div>
         </article>
-        <article class="event-card" id="c-pgs-roccavione-volley-under-10-m-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-prova="1" data-etamin="8" data-etamax="9" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
+        <article class="event-card" id="c-pgs-roccavione-volley-under-10-m-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A002" data-prova="1" data-etamin="8" data-etamax="9" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-1">
             <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 10 M/F</span>
               <span class="ev-line">8-9 anni · Roccavione</span>
-              <span class="ev-tags"><span class="ev-pill is-openday">Open day</span><span class="ev-pill is-prova">Prova gratuita</span></span>
+              <span class="ev-tags"><span class="ev-pill is-prova">Prova gratuita</span></span>
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h3>
           <div class="ev-det" id="det-co-1" hidden>
             
-<p class="event-desc">Corso di volley per bambini e bambine nati nel 2017 e 2018, con la PGS Roccavione. Due allenamenti a settimana, lunedì e mercoledì.</p>            <p class="co-openday"><strong>Open day:</strong> Dal 1 al 30 settembre 2026, ore vari — <a href="/eventi/festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure.html">vedi la locandina →</a></p>            <p class="co-prova">Prova: Gratuita · open day 7, 9, 14 e 16 settembre</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="#r-pgs-roccavione">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Lunedì 17.00-18.30 · Mercoledì 17.00-18.30</dd><dt>Referenti</dt><dd>Alice</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
+<p class="event-desc">Corso di volley per bambini e bambine nati nel 2017 e 2018, con la PGS Roccavione. Due allenamenti a settimana, lunedì e mercoledì.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/pgs-roccavione.html">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Lunedì 17.00-18.30 · Mercoledì 17.00-18.30</dd><dt>Prova</dt><dd>Gratuita, su prenotazione</dd><dt>Referenti</dt><dd>Alice</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
           </div>
         </article>
-        <article class="event-card" id="c-pgs-roccavione-volley-under-12-m-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-prova="1" data-etamin="10" data-etamax="11" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
+        <article class="event-card" id="c-pgs-roccavione-volley-under-12-m-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A003" data-prova="1" data-etamin="10" data-etamax="11" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-2">
             <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 12 M/F</span>
               <span class="ev-line">10-11 anni · Roccavione</span>
-              <span class="ev-tags"><span class="ev-pill is-openday">Open day</span><span class="ev-pill is-prova">Prova gratuita</span></span>
+              <span class="ev-tags"><span class="ev-pill is-prova">Prova gratuita</span></span>
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h3>
           <div class="ev-det" id="det-co-2" hidden>
             
-<p class="event-desc">Corso di volley per ragazzi e ragazze nati nel 2015 e 2016, con la PGS Roccavione. Due allenamenti a settimana, mercoledì e venerdì.</p>            <p class="co-openday"><strong>Open day:</strong> Dal 1 al 30 settembre 2026, ore vari — <a href="/eventi/festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure.html">vedi la locandina →</a></p>            <p class="co-prova">Prova: Gratuita · open day 8 e 15 settembre</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="#r-pgs-roccavione">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Mercoledì 18.30-20.00 · Venerdì 17.00-18.30</dd><dt>Referenti</dt><dd>Chiara</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
+<p class="event-desc">Corso di volley per ragazzi e ragazze nati nel 2015 e 2016, con la PGS Roccavione. Due allenamenti a settimana, mercoledì e venerdì.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/pgs-roccavione.html">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Mercoledì 18.30-20.00 · Venerdì 17.00-18.30</dd><dt>Prova</dt><dd>Gratuita, su prenotazione</dd><dt>Referenti</dt><dd>Chiara</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
           </div>
         </article>
-        <article class="event-card" id="c-pgs-roccavione-volley-under-14-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-prova="1" data-etamin="12" data-etamax="13" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
+        <article class="event-card" id="c-pgs-roccavione-volley-under-14-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A004" data-prova="1" data-etamin="12" data-etamax="13" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-3">
             <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 14 F</span>
               <span class="ev-line">12-13 anni · Roccavione</span>
-              <span class="ev-tags"><span class="ev-pill is-openday">Open day</span><span class="ev-pill is-prova">Prova gratuita</span></span>
+              <span class="ev-tags"><span class="ev-pill is-prova">Prova gratuita</span></span>
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h3>
           <div class="ev-det" id="det-co-3" hidden>
             
-<p class="event-desc">Pallavolo femminile per le ragazze nate nel 2013 e 2014, con la PGS Roccavione. Due allenamenti a settimana, lunedì e giovedì.</p>            <p class="co-openday"><strong>Open day:</strong> Dal 1 al 30 settembre 2026, ore vari — <a href="/eventi/festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure.html">vedi la locandina →</a></p>            <p class="co-prova">Prova: Gratuita · open day 9 e 16 settembre</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="#r-pgs-roccavione">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Lunedì 18.30-20.00 · Giovedì 19.30-21.00</dd><dt>Referenti</dt><dd>Sara</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
+<p class="event-desc">Pallavolo femminile per le ragazze nate nel 2013 e 2014, con la PGS Roccavione. Due allenamenti a settimana, lunedì e giovedì.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/pgs-roccavione.html">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Lunedì 18.30-20.00 · Giovedì 19.30-21.00</dd><dt>Prova</dt><dd>Gratuita, su prenotazione</dd><dt>Referenti</dt><dd>Sara</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
           </div>
         </article>
-        <article class="event-card" id="c-pgs-roccavione-volley-under-15-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-prova="1" data-etamin="14" data-etamax="14" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
+        <article class="event-card" id="c-pgs-roccavione-volley-under-15-f" data-city="roccavione" data-prov="cn" data-cat="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A005" data-prova="1" data-etamin="14" data-etamax="14" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-4">
             <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 15 F</span>
               <span class="ev-line">14 anni · Roccavione</span>
-              <span class="ev-tags"><span class="ev-pill is-openday">Open day</span><span class="ev-pill is-prova">Prova gratuita</span></span>
+              <span class="ev-tags"><span class="ev-pill is-prova">Prova gratuita</span></span>
             </span>
             <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button></h3>
           <div class="ev-det" id="det-co-4" hidden>
             
-<p class="event-desc">Pallavolo femminile per le ragazze nate nel 2012, con la PGS Roccavione. Allenamenti serali, mercoledì e venerdì.</p>            <p class="co-openday"><strong>Open day:</strong> Dal 1 al 30 settembre 2026, ore vari — <a href="/eventi/festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure.html">vedi la locandina →</a></p>            <p class="co-prova">Prova: Gratuita · open day 10 e 17 settembre</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="#r-pgs-roccavione">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Mercoledì 20.00-21.30 · Venerdì 20.00-21.30</dd><dt>Referenti</dt><dd>Elisa</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
+<p class="event-desc">Pallavolo femminile per le ragazze nate nel 2012, con la PGS Roccavione. Allenamenti serali, mercoledì e venerdì.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Palestra comunale, via Roma 12</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/pgs-roccavione.html">PGS Roccavione</a></dd><dt>Periodo</dt><dd>Settembre–maggio</dd><dt>Giorni</dt><dd>Mercoledì 20.00-21.30 · Venerdì 20.00-21.30</dd><dt>Prova</dt><dd>Gratuita, su prenotazione</dd><dt>Referenti</dt><dd>Elisa</dd></dl>            <p class="co-verif">Dati verificati il 19/08/2026</p>
           </div>
         </article>
-        <article class="event-card" id="c-compagnia-santibriganti-teatro-corso-di-teatro-per" data-city="caraglio" data-prov="cn" data-cat="teatro" data-org="compagnia-santibriganti-teatro" data-prova="1" data-etamin="6" data-etamax="11" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
+        <article class="event-card" id="c-compagnia-santibriganti-teatro-corso-di-teatro-per" data-city="caraglio" data-prov="cn" data-cat="teatro" data-org="compagnia-santibriganti-teatro" data-org-nome="Compagnia Santibriganti Teatro" data-codice="A006" data-prova="1" data-etamin="6" data-etamax="11" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-5">
             <span class="ev-thumb is-ph" aria-hidden="true">🎭</span>
             <span class="ev-main">
@@ -639,26 +657,27 @@
           </button></h3>
           <div class="ev-det" id="det-co-5" hidden>
             
-<p class="event-desc">Un percorso per &quot;giocare al teatro&quot;: i bambini imparano a stare sulla scena partendo dal gioco, e ci arrivano attraverso la socializzazione, l&#x27;espressione del corpo e della voce e la consapevolezza delle proprie capacità. Non si prepara uno spettacolo da mandare a memoria: si costruisce insieme, e quello che si porta a casa vale anche fuori dal palco.</p>            <p class="co-openday"><strong>Open day:</strong> Mercoledì 2 settembre 2026, ore 09:00-12:00 — <a href="/eventi/un-circo-in-via-pero-laboratorio-teatrale-ed-espre-san-damiano-d-asti.html">vedi la locandina →</a></p>            <p class="co-prova">Prova: Open day 22 settembre, 17.30–18.30</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Teatro Civico di Caraglio, via Roma 118</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="#r-compagnia-santibriganti-teatro">Compagnia Santibriganti Teatro</a></dd><dt>Periodo</dt><dd>Ottobre–giugno</dd><dt>Giorni</dt><dd>Una lezione settimanale, il pomeriggio</dd><dt>Contatti</dt><dd>0171 000000</dd><dt>Referenti</dt><dd>Segreteria</dd></dl>            <p class="co-fuori"><a href="https://www.santibriganti.it/corsi-teatro-caraglio" rel="sponsored noopener" target="_blank">Scopri il corso →</a></p>            <p class="co-verif">Dati verificati il 20/08/2026</p>
+<p class="event-desc">Un percorso per &quot;giocare al teatro&quot;: i bambini imparano a stare sulla scena partendo dal gioco, e ci arrivano attraverso la socializzazione, l&#x27;espressione del corpo e della voce e la consapevolezza delle proprie capacità. Non si prepara uno spettacolo da mandare a memoria: si costruisce insieme, e quello che si porta a casa vale anche fuori dal palco.</p>            <p class="co-openday"><strong>Open day:</strong> Domenica 6 settembre 2026, ore 18:00 — <a href="/eventi/l-albero-compagnia-il-cerchio-tondo-novello.html">vedi la locandina →</a></p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Teatro Civico di Caraglio, via Roma 118</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/compagnia-santibriganti-teatro.html">Compagnia Santibriganti Teatro</a></dd><dt>Periodo</dt><dd>Ottobre–giugno</dd><dt>Giorni</dt><dd>Una lezione settimanale, il pomeriggio</dd><dt>Prova</dt><dd>Sì, una lezione di prova gratuita</dd><dt>Contatti</dt><dd><a href="tel:0171000000">0171 000000</a></dd><dt>Referenti</dt><dd>Segreteria</dd></dl>            <p class="co-fuori"><a href="https://www.santibriganti.it/corsi-teatro-caraglio" rel="sponsored noopener" target="_blank">Scopri il corso →</a></p>            <p class="co-verif">Dati verificati il 20/08/2026</p>
           </div>
         </article>
   </div>
   <div class="co-realta-wrap" id="realta">
     <h2 class="co-realta-t" id="co-realta-t">Chi organizza</h2>
     <p class="co-realta-sub">2 realtà in provincia di Cuneo: dove sono, come si contattano, cosa organizzano.</p>
-  <div class="co-realta" id="r-compagnia-santibriganti-teatro" data-org="compagnia-santibriganti-teatro">
+  <div class="co-realta" id="r-compagnia-santibriganti-teatro" data-org="compagnia-santibriganti-teatro" data-org-nome="Compagnia Santibriganti Teatro">
     <h3>Compagnia Santibriganti Teatro</h3>
     <p class="co-realta-d">Compagnia teatrale professionale attiva in Piemonte dal 1990, con laboratori per bambini e ragazzi al Teatro Civico di Caraglio.</p>
-    <dl class="co-dati"><dt>Dove</dt><dd>Caraglio</dd><dt>Indirizzo</dt><dd>Teatro Civico, via Roma 118</dd><dt>Attività</dt><dd>Teatro</dd><dt>Contatti</dt><dd>0171 000000</dd><dt>Sito</dt><dd><a href="https://www.santibriganti.it" rel="sponsored noopener" target="_blank">https://www.santibriganti.it</a></dd></dl>
+    <dl class="co-dati"><dt>Dove</dt><dd>Caraglio</dd><dt>Indirizzo</dt><dd>Teatro Civico, via Roma 118</dd><dt>Attività</dt><dd>Teatro</dd><dt>Contatti</dt><dd><a href="tel:0171000000">0171 000000</a></dd><dt>Sito</dt><dd><a href="https://www.santibriganti.it" rel="sponsored noopener" target="_blank">https://www.santibriganti.it</a></dd></dl>
     <p class="co-realta-corsi"><strong>Corso:</strong> <a href="#c-compagnia-santibriganti-teatro-corso-di-teatro-per">Corso di teatro per bambini</a></p>
-    <p class="co-realta-ev"><strong>Open day e appuntamenti:</strong> <a href="/eventi/un-circo-in-via-pero-laboratorio-teatrale-ed-espre-san-damiano-d-asti.html">Mercoledì 2 settembre 2026</a></p>
+    <p class="co-realta-ev"><strong>Open day e appuntamenti:</strong> <a href="/eventi/l-albero-compagnia-il-cerchio-tondo-novello.html">Domenica 6 settembre 2026</a></p>
+    <p class="co-realta-vai"><a href="/corsi-prova/compagnia-santibriganti-teatro.html">La pagina di Compagnia Santibriganti Teatro →</a></p>
   </div>
-  <div class="co-realta" id="r-pgs-roccavione" data-org="pgs-roccavione">
+  <div class="co-realta" id="r-pgs-roccavione" data-org="pgs-roccavione" data-org-nome="PGS Roccavione">
     <h3>PGS Roccavione</h3>
     <p class="co-realta-d">Polisportiva Giovanile Salesiana di Roccavione: pallavolo per bambini e ragazzi dai 6 ai 15 anni, con squadre per annata e allenamenti nella palestra comunale.</p>
-    <dl class="co-dati"><dt>Dove</dt><dd>Roccavione</dd><dt>Indirizzo</dt><dd>Palestra comunale, via Roma 12</dd><dt>Attività</dt><dd>Pallavolo</dd><dt>Contatti</dt><dd>0171 000000</dd></dl>
+    <dl class="co-dati"><dt>Dove</dt><dd>Roccavione</dd><dt>Indirizzo</dt><dd>Palestra comunale, via Roma 12</dd><dt>Attività</dt><dd>Pallavolo</dd><dt>Contatti</dt><dd><a href="tel:0171000000">0171 000000</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
     <p class="co-realta-corsi"><strong>Corsi:</strong> <a href="#c-pgs-roccavione-volley-under-8-m-f">Volley Under 8 M/F</a> · <a href="#c-pgs-roccavione-volley-under-10-m-f">Volley Under 10 M/F</a> · <a href="#c-pgs-roccavione-volley-under-12-m-f">Volley Under 12 M/F</a> · <a href="#c-pgs-roccavione-volley-under-14-f">Volley Under 14 F</a> · <a href="#c-pgs-roccavione-volley-under-15-f">Volley Under 15 F</a></p>
-    <p class="co-realta-ev"><strong>Open day e appuntamenti:</strong> <a href="/eventi/festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure.html">Dal 1 al 30 settembre 2026</a></p>
+    <p class="co-realta-vai"><a href="/corsi-prova/pgs-roccavione.html">La pagina di PGS Roccavione →</a></p>
   </div>
   </div>
   <p class="co-nota"><strong>Sei una scuola, un'associazione o una società sportiva e proponi attività per bambini e ragazzi?</strong> Stiamo costruendo una guida alle attività per famiglie: la presenza comprende la vostra realtà, i corsi che proponete, le informazioni utili per le famiglie, le prove e gli open day collegati al calendario degli eventi. Scrivici a <a href="mailto:collabora@eventiperbambinicuneo.it">collabora@eventiperbambinicuneo.it</a>.</p>
