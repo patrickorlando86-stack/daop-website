@@ -12,7 +12,7 @@ Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
 (opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
 raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random
+import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
@@ -1807,6 +1807,11 @@ def _guscio():
     def rooted(html_frag):
         html_frag = re.sub(r'(href|src)="(?!https?://|/|#|mailto:|tel:)',
                            lambda m: f'{m.group(1)}="/', html_frag)
+        # I marker della voce stagionale servono solo dove la nav e' scritta a
+        # mano: qui la voce e' gia' risolta, e portarseli dietro vorrebbe dire
+        # tre commenti in piu' su ~360 pagine per niente.
+        html_frag = re.sub(r'<!-- (?:NAV|MM)-CENTRI:(?:START|END) -->', '',
+                           html_frag)
         return html_frag.replace('class="active"', '')
 
     # Anche le url() del CSS vanno messe alla radice. In eventi.html la texture
@@ -2377,6 +2382,125 @@ def link_luoghi(citta, prov):
 # deve comparire anche su pagine che non passano da _guscio() (i corsi, i
 # centri, le rubriche), e il file condiviso le raggiunge tutte senza fare un
 # diff su 260 file per una griglia di tre card.
+# ---------------------------------------------------------------------------
+# La voce dei centri in nav: la scrive il foglio, non il calendario
+# ---------------------------------------------------------------------------
+# Fino al 21/08/2026 la nav diceva "Centri estivi" tutti i giorni dell'anno, su
+# ~360 pagine, cioe' anche a novembre - quando quella pagina risponde
+# "iscrizioni non ancora aperte" e chi cerca vuole il campus di Natale. E' anche
+# anchor text ripetuto su tutto il sito, quindi non era solo una parola fuori
+# posto.
+#
+# Perche' NON un calendario scritto qui: le finestre si spostano ogni anno. In
+# Piemonte il Carnevale 2027 vale cinque giorni (6-10 febbraio) e il ponte di
+# Ognissanti 2026 non esiste, perche' l'1 novembre cade di domenica. Una
+# tabella di mesi in questo file sbaglierebbe ogni anno; il foglio no - e la
+# colonna 'stagione' esiste gia' ed e' gia' piu' forte delle date
+# (genera_centri.leggi_centri).
+#
+# Il patto e' un file, data/centri-stagioni.json, scritto da genera_centri.py e
+# letto qui: e' in ritardo di un giro come data/conteggi.json e
+# data/luoghi-comuni.json. Se il file manca la voce non si stampa - la stessa
+# regola di link_luoghi(): un link verso una pagina vuota e' peggio di nessun
+# link, e il footer tiene comunque il collegamento alla famiglia.
+STAGIONI_PATH = os.path.join(ROOT, "data", "centri-stagioni.json")
+
+
+def stagione_centri():
+    """La stagione dei centri che ha diritto alla nav, o None.
+
+    Vince quella che sta per cominciare - data di inizio piu' vicina fra i
+    centri ancora in piedi. Una stagione GIA' COMINCIATA ha una data nel
+    passato, quindi passa davanti: e' quella che sta succedendo adesso, ed e'
+    il caso di febbraio, quando il Carnevale e' in corso mentre le iscrizioni
+    estive sono appena aperte."""
+    try:
+        d = json.load(open(STAGIONI_PATH, encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    if not isinstance(d, dict):
+        return None
+    vive = [v for v in d.values()
+            if isinstance(v, dict) and v.get('attivi')
+            and v.get('file') and v.get('voce')
+            # Una voce verso una pagina che non esiste su disco scarica in 404
+            # da tutto il sito: si controlla, non si suppone.
+            and os.path.exists(os.path.join(ROOT, v['file']))]
+    if not vive:
+        return None
+    vive.sort(key=lambda v: (v.get('inizio') is None, v.get('inizio') or '',
+                             -v['attivi'], v['file']))
+    return vive[0]
+
+
+def voce_centri(mobile=False):
+    """La voce di nav, vuota se nessuna stagione ha centri.
+
+    Vuota vuol dire una voce in meno in nav, non un buco: e' il comportamento
+    giusto, perche' .nav-links e' una flex row senza wrap e sei voci sono il
+    massimo che sta in riga sopra i 901px."""
+    v = stagione_centri()
+    if not v:
+        return ''
+    href, voce = v['file'], esc(v['voce'])
+    if mobile:
+        return f'<a href="{href}" onclick="closeMobile()">{voce}</a>'
+    return f'<li><a href="{href}">{voce}</a></li>'
+
+
+def riga_centri_hero():
+    """La riga di rimando in fondo all'hero dell'agenda.
+
+    Diceva "centri estivi o invernali ... in provincia di Alessandria e Asti":
+    l'una e' la stagione sbagliata per nove mesi l'anno, l'altra e' il copy
+    rimasto indietro sull'apertura di Cuneo (04/08/2026). Sparisce del tutto
+    quando non c'e' nessuna stagione viva: senza centri quella riga chiede di
+    andare a vedere una pagina che dice "torna in primavera"."""
+    v = stagione_centri()
+    if not v:
+        return ''
+    return (f'<p class="hero-nota">Cerchi un centro per le vacanze dei tuoi '
+            f'bambini? Vedi i <a href="/{v["file"]}" style="color:inherit;'
+            f'text-decoration:underline;text-underline-offset:3px;">'
+            f'{esc(v["voce"].lower())} in provincia di {PROVINCE_TESTO}</a>.</p>')
+
+
+def aggiorna_nav():
+    """Riscrive la voce dei centri dove la nav e' scritta a mano.
+
+    Le ~19 pagine generate la ricevono gratis: _guscio() rilegge nav e footer da
+    eventi.html a ogni run e le incolla dappertutto. Le altre dodici no -
+    index, ginetto, libri, piattosano, media, rubriche, esploratore, bollino,
+    privacy, cookie-policy, 404 - perche' nessun generatore le scrive. Lasciate
+    a mano, fra sei mesi direbbero una stagione diversa dal resto del sito: e'
+    lo stesso motivo per cui il config di GA4 sta in un file solo.
+
+    Nessun elenco di pagine da tenere aggiornato: si riscrive dove il marker
+    c'e'. Una pagina nuova entra mettendoci i marker, e finche' non li ha resta
+    fuori invece di prendere una voce sbagliata."""
+    voci = {
+        'NAV-CENTRI': voce_centri(),
+        'MM-CENTRI': voce_centri(mobile=True),
+        'HERO-CENTRI': riga_centri_hero(),
+    }
+    v = stagione_centri()
+    tocc = []
+    for path in sorted(glob.glob(os.path.join(ROOT, "*.html"))):
+        s = open(path, encoding="utf-8").read()
+        orig = s
+        for nome, val in voci.items():
+            s = re.sub(rf'(<!-- {nome}:START -->).*?(<!-- {nome}:END -->)',
+                       lambda m: m.group(1) + val + m.group(2), s, flags=re.S)
+        if s != orig:
+            open(path, "w", encoding="utf-8").write(s)
+            tocc.append(os.path.basename(path))
+    if tocc:
+        print(f"[genera_eventi] voce centri in nav: "
+              f"{'nessuna (nessuna stagione ha centri)' if not v else v['voce']}"
+              f" - riscritte {len(tocc)} pagine a mano ({', '.join(tocc[:4])}"
+              f"{'...' if len(tocc) > 4 else ''})")
+
+
 FAMIGLIE = (
     ('eventi', '/eventi.html', 'Eventi e sagre',
      'cosa si fa oggi e questo weekend'),
@@ -7085,6 +7209,10 @@ def main():
     oggi = datetime.date.today()
     storico = aggiorna_storico(events, oggi)
     hub = comuni_hub(events, storico, oggi)
+    # Prima di render() e di qualunque _guscio(): la nav di eventi.html e' la
+    # sorgente da cui ~360 pagine copiano la loro, quindi va messa a posto
+    # adesso, se no le generate di stanotte portano la stagione di ieri.
+    aggiorna_nav()
     tipo_opts, lista = render(events, hub)
     jsonld = render_jsonld(events)
     inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub, oggi),

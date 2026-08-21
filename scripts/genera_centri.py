@@ -82,7 +82,7 @@ STAGIONI = {
         'breve': "d'estate",
         'iscrizioni': 'fra marzo e maggio',
         'quando_riaprono': 'in primavera',
-        'parola': 'estiv',
+        'parole': ('estiv', 'estat', 'summer'),
         'p_iscrizioni': """<p>Le iscrizioni si aprono di solito fra marzo e
   maggio, cioè con mesi di anticipo. I posti nelle strutture più richieste
   finiscono nelle prime settimane, quindi conviene informarsi presto anche
@@ -128,7 +128,7 @@ STAGIONI = {
         'breve': 'a Natale',
         'iscrizioni': 'fra ottobre e novembre',
         'quando_riaprono': 'in autunno',
-        'parola': 'invern',
+        'parole': ('invern', 'natal', 'winter', 'befana'),
         'p_iscrizioni': """<p>Qui il calendario è stretto: le proposte escono
   fra ottobre e novembre e si riempiono in fretta, perché sono poche e i posti
   pochi. Non aspettate il volantino — a ottobre conviene chiedere direttamente
@@ -184,7 +184,7 @@ STAGIONI = {
         'breve': 'a Pasqua',
         'iscrizioni': 'fra febbraio e marzo',
         'quando_riaprono': 'a fine inverno',
-        'parola': 'pasqu',
+        'parole': ('pasqu', 'easter'),
         'p_iscrizioni': """<p>Quando qualcosa apre, si annuncia con due o tre
   settimane di preavviso e si riempie in pochi giorni: è troppo corto perché i
   gestori facciano campagne, e troppo corto perché i genitori se lo organizzino
@@ -263,6 +263,22 @@ MESI_STAGIONE = {
     'pasquali': (3, 4),
 }
 
+# Tutte le parole riconosciute, di tutte le stagioni. Serve a distinguere due
+# casi che prima finivano nello stesso silenzio: una riga di UN'ALTRA stagione
+# (giusto scartarla, la prendera' la sua pagina) e una riga con una stagione che
+# NON ESISTE - "carnevale", "ponte", "settimana bianca". La seconda non la
+# pubblica nessuno, e il foglio non ha modo di accorgersene: finiva nel
+# conteggio "N di altra stagione" e via. Il calendario scolastico piemontese
+# 2026/27 dice quanto e' concreto il caso: il Carnevale vale cinque giorni
+# (6-10 febbraio 2027) e il ponte di Ognissanti quest'anno non esiste, perche'
+# l'1 novembre cade di domenica. Le finestre cambiano ogni anno: e' la ragione
+# per cui decide il foglio e non una tabella qui dentro.
+PAROLE_NOTE = tuple(w for cfg in STAGIONI.values() for w in cfg['parole'])
+
+# Una stagione ignota si annuncia una volta per run, non una per stagione: il
+# ciclo di main() chiama leggi_centri() tre volte sulla stessa tab.
+_IGNOTE_VISTE = set()
+
 
 def _mappa(header):
     """Da intestazione del foglio a nome di campo interno."""
@@ -325,9 +341,15 @@ def leggi_centri(tab, chiave):
             print(f"[genera_centri] nota: manca la colonna '{campo}', le schede "
                   f"usciranno senza quel dato")
 
-    parola = STAGIONI[chiave]['parola']
+    parole = STAGIONI[chiave]['parole']
     mesi = MESI_STAGIONE.get(chiave, ())
     out, scartati = [], 0
+    ignote = {}
+    # Quante righe le decide la COLONNA e quante il mese di inizio. Serve a
+    # rispondere alla domanda che si fa dopo aver aggiunto la colonna al foglio:
+    # "la sta usando?". Una colonna che esiste ma e' vuota si comporta
+    # identica a una colonna che non c'e', e dal log non si distingueva.
+    da_colonna = da_mese = 0
     for r in righe[hi + 1:]:
         def val(campo):
             i = idx.get(campo)
@@ -335,7 +357,13 @@ def leggi_centri(tab, chiave):
         if not val('nome'):
             continue
         prov = val('prov').upper()
-        if prov and prov not in ('AL', 'AT'):
+        # La lista era scritta a mano ('AL', 'AT') ed e' rimasta ferma quando
+        # Cuneo e' stata aperta (04/08/2026): i titoli di queste pagine dicevano
+        # gia' "Alessandria, Asti e Cuneo" - ZONA e' derivata da
+        # PROVINCE_PUBBLICATE - mentre un centro a Cuneo veniva buttato via qui
+        # senza un avviso da nessuna parte. Ora la lista e' una sola, la stessa
+        # dell'agenda: le due superfici non possono divergere in silenzio.
+        if prov and prov not in G.PROVINCE_PUBBLICATE:
             continue
         c = {campo: val(campo) for campo in COLONNE}
         c['d_start'] = G.pdate(c['di'])
@@ -345,8 +373,12 @@ def leggi_centri(tab, chiave):
         # Altrimenti decide il mese di inizio, che e' il dato piu' affidabile.
         st = c['stagione'].lower()
         if st:
-            se = parola in st
+            da_colonna += 1
+            se = any(w in st for w in parole)
+            if not se and not any(w in st for w in PAROLE_NOTE):
+                ignote[st] = ignote.get(st, 0) + 1
         elif c['d_start']:
+            da_mese += 1
             se = c['d_start'].month in mesi
         else:
             se = chiave == 'estivi'   # senza date, il default e' l'estivo
@@ -376,6 +408,16 @@ def leggi_centri(tab, chiave):
     out = list(migliori.values())
 
     out.sort(key=lambda c: (c['d_start'] or datetime.date.max, c['nome']))
+    for st, n in sorted(ignote.items()):
+        if st in _IGNOTE_VISTE:
+            continue
+        _IGNOTE_VISTE.add(st)
+        print(f"[genera_centri] ATTENZIONE: {n} righe con stagione '{st}', che "
+              f"non ha una pagina: NON SONO PUBBLICATE DA NESSUNA PARTE. "
+              f"Stagioni riconosciute: {', '.join(sorted(STAGIONI))}.")
+    if da_colonna or da_mese:
+        print(f"[genera_centri] la stagione l'ha decisa la colonna su "
+              f"{da_colonna} righe, il mese di inizio su {da_mese}")
     coda = f", {scartati} di altra stagione" if scartati else ""
     coda += f", {doppi} doppioni uniti" if doppi else ""
     print(f"[genera_centri] tab '{tab}': {len(out)} centri per '{chiave}'{coda}")
@@ -771,6 +813,19 @@ def render(chiave, cfg, centri, css, nav, foot):
         idattr = ' id="ce-active"' if active else ''
         return f'<div class="events-list"{idattr}>\n' + "\n".join(schede) + '\n</div>'
 
+    # Fuori dall'indice quando non c'e' un centro ne' in corso ne' in arrivo.
+    # E' la regola di MIN_LANDING (halloween.html, le sagre-provincia-*): la
+    # pagina resta online - i link girati su WhatsApp devono funzionare e l'URL
+    # deve continuare a invecchiare - ma una pagina che risponde "iscrizioni non
+    # ancora aperte" non va offerta a chi cerca.
+    #
+    # Non e' il robots che cambia ogni notte di cui parla CLAUDE.md: 'attivi'
+    # comprende anche i centri FUTURI, quindi zero vuol dire che nel foglio non
+    # c'e' niente all'orizzonte. Nell'anno gira due volte per stagione - il
+    # giorno dopo l'ultimo centro, e il giorno che arriva la prima riga nuova -
+    # non ogni notte.
+    robots = 'index, follow' if attivi else 'noindex, follow'
+
     if attivi:
         provs = sorted({c['prov'] for c in attivi if c['prov']})
         opt_prov = ['<option value="all">Tutte le province</option>'] + [
@@ -821,7 +876,7 @@ def render(chiave, cfg, centri, css, nav, foot):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{G.esc(cfg['titolo'])}</title>
 <meta name="description" content="{G.esc(cfg['descr'])}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="{robots}">
 <link rel="canonical" href="{url}">
 <meta property="og:title" content="{G.esc(cfg['titolo'])}">
 <meta property="og:description" content="{G.esc(cfg['descr'])}">
@@ -886,7 +941,53 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def aggiorna_sitemap(cambiate):
+STATO_PATH = os.path.join(ROOT, 'data', 'centri-stagioni.json')
+
+
+def voce_nav(cfg):
+    """L'etichetta in nav: "Centri estivi", non "Centri Estivi".
+
+    Derivata dall'H1 invece di essere un campo in piu': un campo si dimentica,
+    e una stagione nuova nascerebbe con l'etichetta vuota."""
+    h1 = cfg['h1']
+    return h1[:1] + h1[1:].lower()
+
+
+def scrivi_stato(stato):
+    """Quali stagioni sono vive, per la nav di tutto il sito.
+
+    Il sito non puo' chiederlo a questo script: genera_eventi.py gira PRIMA
+    (senza rete se serve) e la nav che stampa finisce, via _guscio(), su ~360
+    pagine. Quindi la comunicazione passa da un file, ed e' in ritardo di un
+    giro come data/conteggi.json e data/luoghi-comuni.json - accettato per la
+    stessa ragione: una voce di ieri sbaglia di poco e sbaglia nel verso gratis.
+
+    Si FONDE con quello che c'e' gia', non lo sostituisce. Se il foglio non si
+    legge, di quella stagione non sappiamo niente e il valore di ieri resta:
+    e' la stessa regola per cui in quel caso la pagina non viene riscritta.
+    Riscrivendo il file da zero, un timeout di Google avrebbe spento una voce
+    di nav su tutto il sito."""
+    if not stato:
+        return
+    try:
+        d = json.load(open(STATO_PATH, encoding='utf-8'))
+    except (OSError, ValueError):
+        d = {}
+    if not isinstance(d, dict):
+        d = {}
+    prima = json.dumps(d, sort_keys=True)
+    d.update(stato)
+    if json.dumps(d, sort_keys=True) == prima:
+        return
+    with open(STATO_PATH, 'w', encoding='utf-8') as fh:
+        json.dump(d, fh, ensure_ascii=False, indent=1, sort_keys=True)
+        fh.write("\n")
+    vive = [k for k, v in sorted(d.items()) if (v or {}).get('attivi')]
+    print(f"[genera_centri] stagioni vive: {', '.join(vive) if vive else 'nessuna'} "
+          f"(la nav del sito le segue dalla run di stanotte)")
+
+
+def aggiorna_sitemap(cambiate, indicizzabili=None):
     """Tiene le pagine dei centri nella sitemap, dentro i propri marker.
 
     Elenca TUTTE le pagine di stagione presenti su disco, non solo quelle
@@ -900,12 +1001,20 @@ def aggiorna_sitemap(cambiate):
         return
     # Ordine stabile e senza doppioni (piu' stagioni possono puntare allo
     # stesso file), limitato alle pagine che esistono davvero.
-    files, visti = [], set()
+    files, visti, fuori = [], set(), []
     for cfg in STAGIONI.values():
         f = cfg['file']
-        if f not in visti and os.path.exists(os.path.join(ROOT, f)):
-            visti.add(f)
-            files.append(f)
+        path = os.path.join(ROOT, f)
+        if f in visti or not os.path.exists(path):
+            continue
+        visti.add(f)
+        # Una pagina in noindex non va in sitemap: sono due direttive che si
+        # contraddicono, ed e' la coppia che halloween.html tiene insieme.
+        # Delle stagioni che questa run non ha riscritto non sappiamo niente:
+        # lo si chiede alla pagina su disco invece di indovinare.
+        dentro = (indicizzabili.get(f) if indicizzabili and f in indicizzabili
+                  else 'noindex' not in open(path, encoding='utf-8').read()[:4000])
+        (files if dentro else fuori).append(f)
     if not files:
         print("[genera_centri] nessuna pagina centri su disco, sitemap invariata")
         return
@@ -927,7 +1036,9 @@ def aggiorna_sitemap(cambiate):
         return
     open(SITEMAP_PATH, 'w', encoding='utf-8').write(s)
     print(f"[genera_centri] sitemap: {len(files)} pagine centri "
-          f"({len(cambiate & set(files))} con lastmod aggiornato)")
+          f"({len(cambiate & set(files))} con lastmod aggiornato)"
+          + (f", {len(fuori)} fuori perche' in noindex: {', '.join(fuori)}"
+             if fuori else ""))
 
 
 # Stagioni generate senza argomenti.
@@ -960,6 +1071,8 @@ def main(argv):
     # questo momento ha qualcosa: fuori stagione le altre due sono a zero e la
     # somma direbbe il vero senza dire niente.
     attivi_max = 0
+    stato = {}
+    indicizzabili = {}
     for chiave in chiavi:
         cfg = STAGIONI[chiave]
         tab = os.environ.get(f"CENTRI_TAB_{chiave.upper()}", cfg['tab'])
@@ -977,8 +1090,21 @@ def main(argv):
                   f"assente, la creo fuori stagione")
             centri = []
         oggi = datetime.date.today()
-        attivi_max = max(attivi_max, sum(1 for c in centri
-                                         if not c['d_end'] or c['d_end'] >= oggi))
+        attivi = [c for c in centri if not c['d_end'] or c['d_end'] >= oggi]
+        attivi_max = max(attivi_max, len(attivi))
+        # 'inizio' e' la data piu' vicina fra i centri ancora in piedi, e serve
+        # a scegliere quale stagione parla in nav quando ne sono vive due (a
+        # febbraio: Carnevale in corso e iscrizioni estive aperte). Una stagione
+        # gia' cominciata ha una data nel passato, quindi vince - ed e' giusto,
+        # e' quella che sta succedendo adesso.
+        date = sorted(c['d_start'] for c in attivi if c['d_start'])
+        stato[chiave] = {
+            'file': cfg['file'],
+            'voce': voce_nav(cfg),
+            'attivi': len(attivi),
+            'inizio': date[0].isoformat() if date else None,
+        }
+        indicizzabili[cfg['file']] = bool(attivi)
         nuovo = render(chiave, cfg, centri, css, nav, foot)
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
             print(f"[genera_centri] {cfg['file']}: invariata")
@@ -991,7 +1117,8 @@ def main(argv):
     # accettato per la stessa ragione — un conteggio di ieri sbaglia di poco e
     # sbaglia nel verso gratis.
     G.conteggio_scrivi('centri', attivi_max)
-    aggiorna_sitemap(cambiate)
+    scrivi_stato(stato)
+    aggiorna_sitemap(cambiate, indicizzabili)
     return 0
 
 

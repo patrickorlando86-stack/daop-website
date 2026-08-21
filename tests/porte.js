@@ -37,6 +37,28 @@ function html(f) {
   return fs.readFileSync(path.join(RADICE, f), 'utf8');
 }
 
+// La stagione dei centri che ha diritto alla nav. La regola e' la stessa di
+// genera_eventi.stagione_centri() e va tenuta identica: vince quella che sta
+// per cominciare, e una gia' cominciata (data nel passato) passa davanti.
+// Riscritta qui apposta: una prova che chiama il codice che deve giudicare non
+// prova niente.
+function stagioneViva() {
+  let d;
+  try { d = JSON.parse(html('data/centri-stagioni.json')); } catch (e) { return null; }
+  const vive = Object.values(d).filter((v) => v && v.attivi && v.file && v.voce
+    && fs.existsSync(path.join(RADICE, v.file)));
+  if (!vive.length) return null;
+  vive.sort((a, b) => (a.inizio === null) - (b.inizio === null)
+    || String(a.inizio).localeCompare(String(b.inizio))
+    || b.attivi - a.attivi
+    || a.file.localeCompare(b.file));
+  return vive[0];
+}
+
+// I tre file di stagione, per accorgersi che una nav ne nomina uno qualunque.
+const FILE_CENTRI = ['centri-estivi.html', 'centri-invernali.html',
+  'centri-pasquali.html'];
+
 // Tutti gli .html del repo, per contare i link entranti.
 function tutte() {
   const out = [];
@@ -109,6 +131,16 @@ module.exports = async function porte(browser) {
 
   const files = tutte();
   for (const orfana of EX_ORFANE) {
+    // Il commento in cima a EX_ORFANE lo prevedeva: dal 21/08/2026 una di
+    // queste PUO' stare in nav (la stagione viva), e allora contare i link
+    // entranti misura la nav e non il corpo, cioe' la prova diventa verde per
+    // il motivo sbagliato. Quella la salta: ce ne pensa la prova della nav.
+    const in_nav = stagioneViva();
+    if (in_nav && in_nav.file === orfana) {
+      console.log(`  --   ${orfana}: è la stagione in nav, `
+        + 'il conteggio dei link entranti non dice niente');
+      continue;
+    }
     const da = files.filter((f) => f !== orfana && html(f).includes(`/${orfana}`));
     r.ok(da.length > 0, da.length
       ? `${orfana}: ${da.length} pagine la linkano (es. ${da[0]})`
@@ -121,11 +153,29 @@ module.exports = async function porte(browser) {
   // ogni run): se le porte sparissero da qui sparirebbero da tutto il sito.
   const nav = eventi.match(/<ul class="nav-links">[\s\S]*?<\/ul>/);
   r.ok(!!nav, nav ? 'eventi.html: la nav c\'è' : 'eventi.html: nav non trovata');
+  const viva = stagioneViva();
+  // Le porte come sono adesso: quella dei centri e' la stagione viva, e non
+  // c'e' affatto se nessuna ha centri.
+  const attese = HUB.map(([chiave, f]) =>
+    (chiave === 'centri' ? (viva ? viva.file : null) : f)).filter(Boolean);
   if (nav) {
-    const ordine = HUB.map(([, f]) => nav[0].indexOf(`href="${f}"`));
-    r.ok(ordine.every((i) => i >= 0), 'la nav porta tutte e quattro le porte');
+    // La porta dei centri non e' un file fisso da qui in avanti: la decide il
+    // foglio, e questa prova deve leggere la stessa fonte del generatore. Con
+    // "centri-estivi.html" scritto a mano sarebbe diventata rossa a novembre
+    // per il motivo sbagliato, cioe' proprio quando il sito fa la cosa giusta.
+    const ordine = attese.map((f) => nav[0].indexOf(`href="${f}"`));
+    r.ok(ordine.every((i) => i >= 0), viva
+      ? `la nav porta tutte e quattro le porte (centri: ${viva.file})`
+      : 'la nav porta le tre porte con contenuto (nessuna stagione di centri)');
     r.ok(ordine.every((v, i) => i === 0 || v > ordine[i - 1]),
       'e nell\'ordine giusto: eventi, luoghi, centri, corsi');
+    // Una stagione sola, e quella giusta. Senza stagioni vive non deve restare
+    // un residuo: e' meta' del difetto da cui e' nato tutto questo — la nav
+    // diceva "Centri estivi" anche a novembre, su ~360 pagine.
+    const nominati = FILE_CENTRI.filter((f) => nav[0].includes(`href="${f}"`));
+    r.ok(nominati.length === (viva ? 1 : 0), viva
+      ? `la nav nomina una stagione sola: ${nominati.join(', ') || 'NESSUNA'}`
+      : `nessun centro in nessuna stagione, e la nav non ne nomina (${nominati.length})`);
     // La nav a nove voci era gia' tagliata a destra sopra i 901px, che e' il
     // motivo per cui le porte non ci stavano: se qualcuno la riallunga, questa
     // prova lo dice prima dello screenshot.
@@ -141,11 +191,48 @@ module.exports = async function porte(browser) {
   if (mob) {
     const sep = mob[0].indexOf('class="mm-sep"');
     r.ok(sep > 0, 'il cassetto separa le porte dal resto');
-    const dopo = HUB.filter(([, f]) => mob[0].indexOf(`href="${f}"`) > sep);
+    // Con HUB fisso questa riga passava per il motivo sbagliato: cercando
+    // "centri-estivi.html" in un cassetto che d'inverno dice invernali,
+    // indexOf tornava -1 e -1 > sep e' falso, cioe' verde senza aver
+    // controllato niente.
+    const dopo = attese.filter((f) => mob[0].indexOf(`href="${f}"`) > sep);
     r.ok(dopo.length === 0, dopo.length
       ? `nel cassetto ${dopo.length} porte stanno sotto il separatore`
       : 'le quattro porte stanno tutte prima del separatore');
   }
+
+  r.titolo('La voce dei centri — dodici pagine che nessuno rigenera');
+
+  // Le ~19 pagine generate ricevono la nav da _guscio(), che la rilegge da
+  // eventi.html a ogni run: quelle sono allineate per costruzione. Le altre
+  // dodici (index, ginetto, libri, piattosano, media, rubriche, esploratore,
+  // bollino, privacy, cookie-policy, 404) non le scrive nessun generatore, e
+  // sono quelle che derivano: sei mesi dopo direbbero una stagione diversa dal
+  // resto del sito e nessuno se ne accorgerebbe. Le tiene insieme
+  // aggiorna_nav(), che riscrive dove trova il marker — quindi il set giusto da
+  // controllare e' proprio "chi ha il marker".
+  const conMarker = files.filter((f) => !f.includes(path.sep)
+    && html(f).includes('NAV-CENTRI:START'));
+  r.ok(conMarker.length >= 12,
+    `${conMarker.length} pagine con il marker della voce centri`);
+  const attesa = viva ? viva.file : null;
+  const fuori = conMarker.filter((f) => {
+    const nv = html(f).match(/<ul class="nav-links">[\s\S]*?\/ul>/);
+    if (!nv) return true;
+    const nom = FILE_CENTRI.filter((c) => nv[0].includes(`href="${c}"`));
+    return nom.length !== (attesa ? 1 : 0) || (attesa && nom[0] !== attesa);
+  });
+  r.ok(fuori.length === 0, fuori.length
+    ? `${fuori.length} pagine con la stagione sbagliata in nav: ${fuori.join(', ')}`
+    : `tutte e ${conMarker.length} d'accordo su ${attesa || 'nessuna stagione'}`);
+
+  // Il marker deve restare fuori dalle pagine generate: _guscio() lo toglie
+  // quando copia la nav, se no sono tre commenti in piu' su ~360 pagine.
+  const conMarkerGenerate = files.filter((f) => f.includes(path.sep)
+    && html(f).includes('NAV-CENTRI:START'));
+  r.ok(conMarkerGenerate.length === 0, conMarkerGenerate.length
+    ? `${conMarkerGenerate.length} pagine generate si portano dietro il marker`
+    : 'le pagine generate non si portano dietro i marker');
 
   // Una prova nel browser, perche' il resto e' lettura di file: la riga deve
   // essere davvero visibile e cliccabile, non solo presente nell'HTML. Una

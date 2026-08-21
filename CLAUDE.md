@@ -475,6 +475,84 @@ Le decisioni da non rifare al contrario:
   una, altrimenti una volta sola nell'intestazione del gruppo. È la regola già
   scritta per le pagine comune.
 
+### La voce dei centri la scrive il foglio, non il calendario
+
+Fatto il 21/08/2026. Fino a quel giorno la nav diceva **«Centri estivi» tutti i
+giorni dell'anno**, su ~360 pagine: anche a novembre, quando quella pagina
+risponde «iscrizioni non ancora aperte» e chi cerca vuole il campus di Natale.
+Non era solo una parola fuori posto — quella voce e' **anchor text ripetuto su
+tutto il sito**.
+
+**Perche' non c'e' un calendario scritto nel codice.** Le finestre si spostano
+ogni anno, e non di poco: in Piemonte il Carnevale 2027 vale **cinque giorni**
+(6-10 febbraio) mentre il ponte di Ognissanti 2026 **non esiste**, perche' l'1
+novembre cade di domenica. Una tabella di mesi qui dentro sbaglierebbe ogni
+anno. Il foglio no — e la colonna `stagione` esisteva gia', ed era gia' piu'
+forte delle date (`leggi_centri`).
+
+Il patto e' un file: `genera_centri.py` scrive `data/centri-stagioni.json`
+(quali stagioni hanno centri, l'etichetta, la data di inizio piu' vicina) e
+`genera_eventi.py` lo legge per stampare la voce. **In ritardo di un giro**,
+come `data/conteggi.json` e `data/luoghi-comuni.json`, e per la stessa ragione.
+
+Le decisioni dentro, che non si ricavano dal diff:
+
+- **Vince la stagione che sta per cominciare.** Una gia' cominciata ha la data
+  nel passato, quindi passa davanti: e' il caso di febbraio, col Carnevale in
+  corso e le iscrizioni estive appena aperte.
+- **Zero stagioni con centri: la voce non c'e' affatto**, e la nav sta in cinque
+  voci. Spariscono anche la riga di rimando in coda all'hero dell'agenda. Non e'
+  un buco: chiedere di andare a vedere una pagina che dice «torna in primavera»
+  e' peggio di non chiedere niente.
+- **Lo stato si FONDE, non si sostituisce.** Se il foglio non si legge, di quella
+  stagione non sappiamo niente e il valore di ieri resta. Riscrivendo il file da
+  zero, **un timeout di Google avrebbe spento una voce di nav su tutto il
+  sito**. Se il file manca del tutto la voce non si stampa, come `link_luoghi()`.
+- **Footer e riga delle quattro porte restano su `centri-estivi.html`.** Il
+  footer e' il catalogo, la nav e' cosa c'e' adesso: cosi' l'hub della famiglia
+  — la pagina che vince la query — non perde mai il suo link su tutto il sito.
+- **`noindex, follow` e fuori sitemap quando una stagione e' a zero**, ma la
+  pagina **resta online**: e' la regola di `MIN_LANDING`. E non e' il «robots che
+  cambia ogni notte» di cui si parla per le pagine d'incrocio — `attivi`
+  comprende anche i centri **futuri**, quindi zero vuol dire che nel foglio non
+  c'e' niente all'orizzonte, e nell'anno gira due volte per stagione.
+- **Le dodici pagine con la nav a mano hanno i marker** `NAV-CENTRI`,
+  `MM-CENTRI`, `HERO-CENTRI`; `aggiorna_nav()` riscrive **dove trova il
+  marker**, quindi non c'e' nessun elenco di pagine da tenere aggiornato. Le
+  ~19 generate la ricevono da `_guscio()`, che i marker li **toglie**: se no
+  sarebbero tre commenti in piu' su ~360 pagine.
+- **`aggiorna_nav()` va chiamata prima di qualunque `_guscio()`**, perche' la nav
+  di `eventi.html` e' la sorgente da cui copiano tutte le altre.
+
+Due cose operative, che valgono piu' del codice.
+
+**Nel foglio la colonna `Stagione` oggi NON C'E'.** Verificato il 21/08/2026: le
+colonne riconosciute nella tab `Centri Est/Inv` sono quattordici e quella non
+c'e', quindi la stagione la deduce il **mese di inizio** (`MESI_STAGIONE`). Il
+sito segue il foglio comunque, ma per **decidere a mano** — che era la richiesta
+— va aggiunta una colonna chiamata `Stagione` (o `Tipo`, `Tipologia`, `Est/Inv`:
+`COLONNE` ne tollera piu' grafie). Le parole riconosciute sono `estiv`,
+`estat`, `summer` · `invern`, `natal`, `winter`, `befana` · `pasqu`, `easter`.
+Prima era **una sola per stagione** (`estiv`, `invern`, `pasqu`): scrivere
+«Natale» faceva sparire la riga in silenzio. Ora una parola sconosciuta —
+«carnevale», «settimana bianca» — **urla nel log** invece di finire nel
+conteggio «N di altra stagione».
+
+**Una stagione nuova non nasce dal foglio da sola, e non e' pigrizia.** Quello
+che tiene in piedi quelle pagine nei mesi vuoti e' la **guida scritta a mano**
+(`p_iscrizioni`, `specifico`, `b_giornata`, `b_meteo`: ~50 righe di prosa per
+stagione, scritte perche' senza quelle le pagine risultavano identiche al
+97,7%). Una riga con `stagione = carnevale` non se la puo' inventare: si
+aggiunge una voce a `STAGIONI` col suo testo, una volta, e da quel momento
+appare e sparisce da sola col foglio.
+
+**Bug trovato per strada, e non piccolo:** il filtro province di
+`genera_centri.py` era la lista scritta a mano `('AL', 'AT')` ed era rimasta
+ferma all'apertura di Cuneo (04/08/2026). I titoli di quelle pagine dicevano
+gia' «Alessandria, Asti e Cuneo» — `ZONA` e' derivata da `PROVINCE_PUBBLICATE` —
+mentre **un centro a Cuneo veniva buttato via senza un avviso da nessuna
+parte**. Ora la lista e' una sola, la stessa dell'agenda.
+
 `tests/porte.js` difende tutto questo. Su Windows le prove ora caricano davvero
 il JavaScript delle pagine: `_aiuto.js` non toglieva il `/C:` dal percorso e
 metà degli script andava in 404, con le prove verdi.

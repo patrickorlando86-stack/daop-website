@@ -1,0 +1,20 @@
+{
+ "estivi": {
+  "attivi": 16,
+  "file": "centri-estivi.html",
+  "inizio": "2026-06-11",
+  "voce": "Centri estivi"
+ },
+ "invernali": {
+  "attivi": 0,
+  "file": "centri-invernali.html",
+  "inizio": null,
+  "voce": "Centri invernali"
+ },
+ "pasquali": {
+  "attivi": 0,
+  "file": "centri-pasquali.html",
+  "inizio": null,
+  "voce": "Centri pasquali"
+ }
+}
