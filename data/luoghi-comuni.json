@@ -6,7 +6,7 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 72,
+  "n": 73,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
@@ -461,7 +461,7 @@
  },
  "c-al-san-giorgio-monferrato": {
   "comune": "San Giorgio Monferrato",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-san-giuliano": {
@@ -1171,7 +1171,7 @@
  },
  "c-cn-frabosa-soprana": {
   "comune": "Frabosa Soprana",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-frabosa-sottana": {
@@ -1381,7 +1381,7 @@
  },
  "c-cn-sommariva-del-bosco": {
   "comune": "Sommariva del Bosco",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-tarantasca": {
