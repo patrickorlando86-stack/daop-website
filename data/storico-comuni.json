@@ -184,6 +184,17 @@
  },
  "alberaligure": {
   "eventi": {
+   "festa-al-mulino-pro-loco-albera-albera-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Molino di Santamaria",
+    "manifest": "",
+    "nome": "Festa al Mulino - Pro Loco Albera",
+    "organizza": "Pro Loco Albera",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
    "la-famiglia-allocchi-camelozampa-sarvego-festival-albera-ligure": {
     "anni": [
      2026
@@ -415,6 +426,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "un-estate-al-quartiere-cristo-associazione-attivit-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Campora",
+    "manifest": "",
+    "nome": "Un'Estate al Quartiere Cristo - Associazione Attività e Commercio Quartiere Cristo",
+    "organizza": "Associazione Attività e Commercio Quartiere Cristo",
+    "pagina": true,
+    "ultima": "2026-08-23"
    }
   },
   "nome": "Alessandria",
@@ -507,6 +529,17 @@
  },
  "asti": {
   "eventi": {
+   "paleolab-paleontologo-per-un-giorno-parco-paleonto-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Paleontologico di Asti",
+    "manifest": "",
+    "nome": "PaleoLab - Paleontologo per un Giorno - Parco Paleontologico Astigiano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
    "palio-di-asti-sabato-05-settembre": {
     "anni": [
      2026
@@ -844,6 +877,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "letture-e-laboratori-creativi-biblioteca-comunale-buttigliera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Veneto 3",
+    "manifest": "Agosto Letterario",
+    "nome": "Letture e Laboratori Creativi - Biblioteca Comunale di Buttigliera d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
    },
    "pompieropoli-buttigliera-buttigliera-d-asti": {
     "anni": [
@@ -1982,6 +2026,23 @@
   "nome": "Ceresole d'Alba",
   "prov": "CN"
  },
+ "cerretodasti": {
+  "eventi": {
+   "festa-patronale-agosto-cerreto-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cerreto d'Asti",
+    "manifest": "Festa Patronale Agosto 2026 - Cerreto d'Asti",
+    "nome": "Festa Patronale Agosto 2026 - Cerreto d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Cerreto d'Asti",
+  "prov": "AT"
+ },
  "ciglione": {
   "eventi": {
    "cabaret-con-marco-guarena-pro-loco-ciglione": {
@@ -2232,6 +2293,23 @@
   },
   "nome": "Cortemilia",
   "prov": "CN"
+ },
+ "cosola": {
+  "eventi": {
+   "festa-della-patata-cosola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cosola",
+    "manifest": "",
+    "nome": "Festa della Patata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   }
+  },
+  "nome": "Cosola",
+  "prov": "AL"
  },
  "costavescovato": {
   "eventi": {
@@ -3097,6 +3175,23 @@
   },
   "nome": "Frabosa Soprana",
   "prov": "CN"
+ },
+ "frascaro": {
+  "eventi": {
+   "frutti-e-buoi-dei-paesi-tuoi-frascaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spazi verdi della Cascina Rangone",
+    "manifest": "Frutti e Buoi dei Paesi Tuoi",
+    "nome": "Frutti e Buoi dei Paesi Tuoi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Frascaro",
+  "prov": "AL"
  },
  "frassino": {
   "eventi": {
@@ -3972,6 +4067,17 @@
     "pagina": true,
     "ultima": "2026-09-01"
    },
+   "festa-dello-sport-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Castello",
+    "manifest": "Festa dello Sport Novi Ligure",
+    "nome": "Festa dello Sport Novi Ligure",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
    "i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure": {
     "anni": [
      2026
@@ -3993,6 +4099,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-01-01"
+   },
+   "open-day-esordienti-us-novese-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo San Marziano Sintetico",
+    "manifest": "",
+    "nome": "Open Day Esordienti 2014-2015 - US Novese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-24"
    },
    "pedalata-ecologica-merella-plogging-smiling-biking-novi-ligure": {
     "anni": [
@@ -4115,6 +4232,23 @@
   "nome": "Ovada",
   "prov": "AL"
  },
+ "oviglio": {
+  "eventi": {
+   "color-disco-party-pro-loco-oviglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "39ª Sagra dei Pén",
+    "nome": "Color Disco Party - Pro Loco Oviglio",
+    "organizza": "Pro Loco Oviglio",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Oviglio",
+  "prov": "AL"
+ },
  "ozzanomonferrato": {
   "eventi": {
    "castelli-aperti-a-ferragosto-visita-del-borgo-ozzano-monferrato": {
@@ -4234,6 +4368,17 @@
     "organizza": "Gruppo Astrofili Galileo",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "sagra-dell-agnolotto-pecetto-di-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Comunale - Località Fontanino",
+    "manifest": "Sagra dell'Agnolotto 2026",
+    "nome": "Sagra dell'Agnolotto 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-27"
    }
   },
   "nome": "Pecetto di Valenza",
@@ -5142,6 +5287,23 @@
   "nome": "San Benigno",
   "prov": "CN"
  },
+ "sancristoforo": {
+  "eventi": {
+   "camminata-tra-i-vigneti-la-camminata-di-san-cristo-san-cristoforo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco del Castello di San Cristoforo",
+    "manifest": "",
+    "nome": "Camminata tra i Vigneti - La Camminata di San Cristoforo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "San Cristoforo",
+  "prov": "AL"
+ },
  "sandamianodasti": {
   "eventi": {
    "alla-scoperta-della-croce-rossa-piccoli-volontari-san-damiano-d-asti": {
@@ -5220,6 +5382,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "san-damiano-summer-festival-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "San Damiano Summer Festival",
+    "nome": "San Damiano Summer Festival",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-02"
    },
    "tamburello-san-damiano-d-asti": {
     "anni": [
@@ -5943,6 +6116,17 @@
  },
  "spignomonferrato": {
   "eventi": {
+   "concerto-di-paolo-oreni-pro-loco-spigno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale di Sant'Ambrogio",
+    "manifest": "Settembre Spignese 2026",
+    "nome": "Concerto di Paolo Oreni - Pro Loco Spigno Monferrato",
+    "organizza": "Pro Loco Spigno Monferrato",
+    "pagina": false,
+    "ultima": "2026-08-29"
+   },
    "masca-il-ritorno-della-strega-pro-loco-di-spigno-m-spigno-monferrato": {
     "anni": [
      2026
@@ -5964,6 +6148,17 @@
     "organizza": "Pro Loco Spigno Monferrato",
     "pagina": true,
     "ultima": "2026-08-23"
+   },
+   "settembre-spignese-spigno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza IV Novembre",
+    "manifest": "Settembre Spignese 2026",
+    "nome": "Settembre Spignese 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
    }
   },
   "nome": "Spigno Monferrato",
@@ -6093,6 +6288,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-24"
+   },
+   "festa-della-madonna-della-guardia-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Don Orione",
+    "manifest": "Festa della Madonna della Guardia 2026",
+    "nome": "Festa della Madonna della Guardia 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
    },
    "la-mostra-gli-esplorattori-tortona": {
     "anni": [
@@ -6618,6 +6824,17 @@
  },
  "volpedo": {
   "eventi": {
+   "festa-patronale-volpedo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Libertà",
+    "manifest": "Festa Patronale 2026 - Volpedo",
+    "nome": "Festa Patronale 2026 - Volpedo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-23"
+   },
    "giochi-in-piazza-volpedo": {
     "anni": [
      2026
