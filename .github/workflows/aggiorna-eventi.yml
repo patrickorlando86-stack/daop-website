@@ -239,6 +239,22 @@ jobs:
           npx playwright install --with-deps chromium
           npm test
 
+      - name: Controlla le guide in PDF
+        # Il PDF e' l'unico artefatto del sito che non si corregge dopo: una
+        # pagina sbagliata la riscrive la run di stanotte, un file scaricato su
+        # un telefono ci resta. E i difetti che ha avuto nascendo erano tutti
+        # silenziosi - il file c'era, pesava, si apriva.
+        #
+        # Non serve rete ne' Chromium: la parte grossa prova le trasformazioni
+        # di stampa su una pagina finta scritta dentro lo script, quindi gira
+        # anche nei giorni in cui il foglio non si legge. Poi guarda i PDF
+        # veri, se ci sono.
+        #
+        # if: always() per la stessa ragione delle prove di fumo: sono guasti
+        # diversi e conviene vederli insieme.
+        if: always()
+        run: python scripts/valida_pdf.py
+
       - name: Nessun file generato resta indietro
         # Rete di sicurezza sull'elenco FILE del passo "Commit se cambiato".
         # Un file gia' tracciato che risulta modificato e NON e' stato
