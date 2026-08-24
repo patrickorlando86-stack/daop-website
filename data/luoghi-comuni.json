@@ -4,6 +4,11 @@
   "n": 25,
   "prov": "AL"
  },
+ "c-al-albera-ligure": {
+  "comune": "Albera Ligure",
+  "n": 1,
+  "prov": "AL"
+ },
  "c-al-alessandria": {
   "comune": "Alessandria",
   "n": 73,
@@ -961,7 +966,7 @@
  },
  "c-at-villanova-d-asti": {
   "comune": "Villanova d'Asti",
-  "n": 8,
+  "n": 9,
   "prov": "AT"
  },
  "c-at-vinchio": {
@@ -1186,6 +1191,11 @@
  },
  "c-cn-govone": {
   "comune": "Govone",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-grinzane-cavour": {
+  "comune": "Grinzane Cavour",
   "n": 1,
   "prov": "CN"
  },
