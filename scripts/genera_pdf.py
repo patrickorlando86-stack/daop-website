@@ -37,8 +37,10 @@ data/luoghi-comuni.json e data/conteggi.json.
     python3 scripts/genera_pdf.py estivi     # una sola
 """
 
+import base64
 import datetime
 import glob
+import io
 import json
 import os
 import re
@@ -46,6 +48,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIR_GUIDE = os.path.join(ROOT, 'guide')
@@ -102,6 +105,30 @@ CANDIDATI = [
 # (MAIL_PROV in genera_corsi.py), e inventarne una qui vorrebbe dire scrivere
 # in un PDF un indirizzo che nessuno legge.
 MAIL_GUIDA = 'info@daop.it'
+
+# --- Le locandine ---------------------------------------------------------
+# Chromium NON ridimensiona quando stampa: misurato il 24/08/2026, le stesse
+# immagini disegnate a 35mm e a 120mm danno un PDF identico (8,4 MB in tutti e
+# due i casi). Quindi la riduzione va fatta PRIMA, o la guida passa da 180 kB a
+# quattro-cinque megabyte per un pollice di figurina.
+#
+# Pillow non e' una dipendenza nuova: il workflow gia' fa `pip install Pillow`
+# per genera_miniature.py. Se pero' manca, le locandine si saltano e la guida
+# esce lo stesso — la regola di tutto il resto di questo file.
+#
+# 480px e' la misura giusta per come le stampiamo: una miniatura da 32mm a
+# 300dpi vuole ~380px, quindi 480 copre anche chi ingrandisce a schermo.
+LOC_LATO = 480
+LOC_QUALITA = 80
+# Tetto duro sul totale incorporato. Non e' la paura di oggi (24 centri fanno
+# ~1,2 MB) ma di un domani con duecento righe nel foglio: una guida da 15 MB
+# non la scarica nessuno da un telefono in un paese, e il difetto si
+# scoprirebbe solo dal fatto che i download smettono di crescere.
+LOC_BUDGET = 3 * 1024 * 1024
+# Quanto si aspetta una singola locandina. Corto apposta: sono ~24 richieste
+# di fila dentro una run notturna, e una che non risponde non deve tenere in
+# ostaggio le altre.
+LOC_TIMEOUT = 12
 
 MARK_START = '<!-- GUIDA-PDF:START'
 MARK_END = '<!-- GUIDA-PDF:END -->'
@@ -196,8 +223,7 @@ summary::-webkit-details-marker{display:none}
    cioe' senza orari, costi e contatti — che sono la ragione per cui uno se la
    stampa. Il bottone .ev-row invece resta ma perde il suo aspetto da comando. */
 .ev-det[hidden]{display:block !important}
-.ev-row{background:none;border:0;padding:0;text-align:left;font:inherit;
-  font-weight:600;font-size:11pt;color:inherit;width:100%}
+.ev-row{font-weight:600;font-size:11pt}
 .ev-row .ev-chev,.ev-chev{display:none !important}
 dl{margin:0}
 dt{font-weight:600;font-size:9pt;color:#555;margin-top:1.5mm}
@@ -208,6 +234,17 @@ dd{margin:0 0 1mm}
 .ev-toolbar,.ev-viewbar,.events-count,.events-empty,.ce-actions,.ce-guidapdf,
 .eco,.ev-canale,.ev-geo,svg,input,select,.co-loc
 {display:none !important}
+/* La locandina. Sta a destra e il testo le gira intorno: messa a tutta
+   larghezza farebbe una scheda per pagina e la guida diventerebbe uno
+   sfogliabile invece che una cosa da consultare. 32mm e' la misura in cui si
+   riconosce il manifesto senza doverlo leggere — leggerlo e' compito dei dati
+   qui accanto, che ci sono tutti.
+   Il segnaposto (.is-ph, il sole di chi non ha locandina) sparisce: su carta
+   un buco decorato e' peggio di un buco. */
+.ev-thumb{float:right;width:32mm;margin:0 0 3mm 5mm;border-radius:2mm;
+  border:1px solid #e3e3e3}
+.ev-thumb.is-ph{display:none !important}
+.event-card{overflow:hidden}
 /* I tre link in fondo a una scheda non valgono uguale su carta. "Come arrivare"
    e "Locandina" sono gesti (aprono mappe e un'immagine): su un foglio sono due
    parole morte e si tolgono. "Informazioni e iscrizioni" e' invece l'unico modo
@@ -254,6 +291,114 @@ def estrai(html):
     if k < 0 or k > j:
         return None
     return html[k + 3:j].strip()
+
+
+def _scarica(url):
+    """I byte di una locandina, o None. Non alza mai."""
+    try:
+        if url.startswith('file://') or url.startswith('/'):
+            # Comodo per provare in locale senza rete.
+            percorso = url[7:] if url.startswith('file://') else url
+            with open(percorso, 'rb') as f:
+                return f.read()
+        req = urllib.request.Request(url, headers={'User-Agent': 'daop-guide/1'})
+        with urllib.request.urlopen(req, timeout=LOC_TIMEOUT) as r:
+            return r.read()
+    except Exception:
+        return None
+
+
+def _riduci(dati):
+    """Da locandina a miniatura per la stampa, come data URI. None se non si
+    puo' — e non si puo' succede spesso: Pillow assente, immagine corrotta,
+    formato che non conosciamo. In tutti quei casi la scheda esce senza figura,
+    che e' molto meglio di un riquadro grigio."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    try:
+        im = Image.open(io.BytesIO(dati))
+        im.thumbnail((LOC_LATO, LOC_LATO))
+        if im.mode not in ('RGB', 'L'):
+            im = im.convert('RGB')
+        buf = io.BytesIO()
+        im.save(buf, 'JPEG', quality=LOC_QUALITA, optimize=True)
+        return base64.b64encode(buf.getvalue()).decode('ascii')
+    except Exception:
+        return None
+
+
+def locandine(corpo):
+    """Incorpora le locandine come data URI e toglie tutte le altre immagini.
+
+    Perche' incorporate e non linkate: un PDF che punta a un'immagine in rete
+    la ricarica ogni volta che si apre, cioe' consuma banda Supabase per
+    sempre e mostra un buco a chi lo legge offline — che e' meta' del motivo
+    per cui uno si scarica una guida.
+
+    Perche' si toglie tutto il resto: il logo e le icone sono decorazione di
+    pagina, e in un documento che ha gia' la sua copertina fanno solo rumore.
+
+    Il tetto (LOC_BUDGET) si controlla man mano, non alla fine: superarlo e poi
+    buttare via vorrebbe dire aver gia' scaricato tutto. Le prime schede hanno
+    la figura e le ultime no, il che e' asimmetrico ma onesto — e il log lo
+    dice, cosi' se un giorno succede si vede invece di scoprirlo dal peso."""
+    urls = re.findall(r'<img[^>]*class="ev-thumb"[^>]*src="([^"]+)"', corpo)
+    fatte, saltate, peso = {}, 0, 0
+    for u in dict.fromkeys(urls):          # senza ripetere la stessa due volte
+        if peso >= LOC_BUDGET:
+            saltate += 1
+            continue
+        dati = _scarica(u)
+        mini = _riduci(dati) if dati else None
+        if not mini:
+            saltate += 1
+            continue
+        fatte[u] = mini
+        peso += len(mini)
+    if fatte or saltate:
+        print(f"[genera_pdf]   locandine: {len(fatte)} incorporate "
+              f"({peso // 1024} kB), {saltate} saltate")
+
+    def sostituisci(m):
+        tag = m.group(0)
+        src = re.search(r'src="([^"]+)"', tag)
+        if 'ev-thumb' in tag and src and src.group(1) in fatte:
+            dato = fatte[src.group(1)]
+            return re.sub(r'src="[^"]+"', f'src="data:image/jpeg;base64,{dato}"',
+                          tag)
+        return ''      # tutte le altre immagini, e le locandine non riuscite
+
+    corpo = re.sub(r'<img\b[^>]*>', sostituisci, corpo)
+
+    # La locandina esce dal <button> e diventa figlia della scheda.
+    #
+    # Non e' estetica: un <button> non lascia che il testo giri intorno a un
+    # float al suo interno — si comporta da contenitore chiuso — quindi la riga
+    # del titolo diventava alta quanto l'immagine e sotto restava un buco di
+    # tre centimetri. Spostata di un livello, il float funziona e la
+    # descrizione le gira accanto. Online il bottone deve restare com'e' (e'
+    # il comando che apre la scheda), quindi la modifica sta qui e non nel
+    # generatore della pagina.
+    # Due trasformazioni di impaginazione, e vanno insieme.
+    #
+    # 1. La locandina esce dal <button> e diventa figlia della scheda: un
+    #    <button> non lascia che il testo giri intorno a un float al suo
+    #    interno, quindi la riga del titolo diventava alta quanto l'immagine e
+    #    sotto restava un buco di tre centimetri.
+    # 2. Il <button> diventa uno <span>. Da solo il punto 1 peggiora le cose:
+    #    un bottone e' una scatola atomica, non si spezza, e se non ci sta
+    #    accanto al float scende sotto — il titolo finiva sotto la locandina.
+    #    Uno <span> e' testo vero e gira intorno all'immagine come deve.
+    #    Su carta un comando che apre e chiude non ha nessun senso comunque.
+    #
+    # Online il bottone resta quello che e' (e' il comando che apre la scheda):
+    # queste due righe valgono solo per il documento che si stampa.
+    corpo = re.sub(r'(<h4 class="ev-h"><button[^>]*>)\s*(<img class="ev-thumb"[^>]*>)',
+                   r'\2\1', corpo)
+    corpo = re.sub(r'<button class="ev-row"[^>]*>', '<span class="ev-row">', corpo)
+    return corpo.replace('</button></h4>', '</span></h4>')
 
 
 def numeri(corpo):
@@ -401,7 +546,7 @@ def documento(chiave, cfg, corpo, anno, oggi):
     una volta. Toglierle dall'HTML e' l'unico modo di garantire zero richieste,
     e ha il vantaggio di non dipendere dalla rete per fare un PDF."""
     corpo = corpo.replace('<details', '<details open')
-    corpo = re.sub(r'<img\b[^>]*>', '', corpo)
+    corpo = locandine(corpo)
     conta = numeri(corpo)
 
     # L'intestazione dell'elenco non esiste online — la pagina non ne ha
