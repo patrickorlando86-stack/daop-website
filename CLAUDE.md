@@ -2830,8 +2830,21 @@ difetto.
 
 ```bash
 python3 scripts/valida_jsonld.py                    # dati strutturati
+python3 scripts/valida_pdf.py                       # le guide in PDF
 cd tests && npm install && npm test                 # prove di fumo (Playwright)
 ```
+
+`valida_pdf.py` è il terzo, ed è nato il 24/08/2026 perché **il PDF è l'unico
+artefatto del sito che non si corregge dopo**: una pagina sbagliata la riscrive
+la run di stanotte, un file scaricato su un telefono ci resta. I due difetti che
+la guida ha avuto nascendo erano tutti e due silenziosi — il file c'era, pesava,
+si apriva — e il secondo mescolava **otto centri già conclusi fra quelli
+aperti**, cancellando l'avviso che li dichiarava tali.
+
+Non serve né rete né Chromium: la parte grossa prova le trasformazioni di stampa
+su una pagina finta scritta dentro lo script, quindi gira anche nei giorni in cui
+il foglio non si legge. Poi guarda i PDF veri, se ci sono — e che manchino non è
+un errore: senza date nel foglio nessuna guida nasce, ed è voluto.
 
 `valida_jsonld.py` legge l'HTML: vede i dati strutturati, non il JavaScript.
 Riferimento all'11/08/2026: 289 pagine, 532 Event, 8 avvisi noti, 0 errori.
