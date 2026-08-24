@@ -533,8 +533,7 @@ stampa. Il PDF non può divergere da quello che il sito pubblica, perché è
 letteralmente quello — è la regola di `_dati_realta()` («i dati si scrivono in un
 posto solo») applicata a un secondo formato.
 
-**Niente Playwright, niente Pillow, niente libreria PDF.** Chromium sa già
-stampare da solo:
+**Niente Playwright, niente libreria PDF.** Chromium sa già stampare da solo:
 
 ```
 chrome --headless --no-pdf-header-footer --print-to-pdf=… file://…
@@ -558,10 +557,26 @@ Le decisioni dentro, che non si ricavano dal diff:
 - **Senza Chromium lascia il PDF di ieri** e lo scrive nel log, come
   `genera_centri.py` lascia la pagina com'è quando non legge il foglio. Un PDF
   vecchio di un giorno è meglio di nessun PDF, e molto meglio di uno vuoto.
-- **Niente immagini nel PDF.** Le locandine stanno su Supabase, che ha un tetto
-  di banda e in CI può non rispondere: una guida da 8 MB che a volte esce con i
-  riquadri grigi è peggio di una guida di solo testo. È lo stesso conto che ha
-  fatto uscire le locandine da git.
+- **Le locandine ci sono, ma ridotte e incorporate.** Il 24/08 erano state
+  lasciate fuori per paura della banda Supabase; il conto vero è ~24 richieste a
+  notte, cioè il 3% del tetto mensile — la paura era mal riposta. Il problema
+  vero è un altro, ed è misurato: **Chromium non ridimensiona quando stampa.**
+  Le stesse immagini disegnate a 35 mm e a 120 mm danno un PDF identico di 8,4
+  MB. Quindi la riduzione va fatta prima (`LOC_LATO` = 480px, che a 300 dpi
+  copre una miniatura da 32 mm), e si incorporano come data URI: un PDF che
+  punta a un'immagine in rete la riscarica a ogni apertura e mostra un buco a
+  chi legge offline, che è metà del motivo per cui uno si scarica una guida.
+  **Pillow non è una dipendenza nuova** — il workflow lo installa già per
+  `genera_miniature.py` — e se manca, le locandine si saltano e la guida esce
+  lo stesso. `LOC_BUDGET` (3 MB) è il tetto che protegge dal foglio con
+  duecento righe, non da quello di oggi.
+- **Tre trasformazioni di impaginazione, e nessuna tocca la pagina online.** I
+  `<details>` si aprono testualmente; la locandina esce dal `<button>` (un
+  bottone non lascia che il testo giri intorno a un float al suo interno) e
+  quel `<button>` diventa uno `<span>` (una scatola atomica non si spezza, e
+  accanto a un float scende sotto). Le due ultime vanno **insieme**: la prima
+  da sola sposta il buco invece di toglierlo. Trovate guardando la pagina
+  stampata, non leggendo il codice.
 - **Il link al PDF si stampa in ritardo di un giro.** `genera_pdf.py` scrive
   `data/guide.json`, `genera_centri.py` lo legge alla run dopo. Stesso ritardo di
   `data/luoghi-comuni.json`, `data/conteggi.json` e `data/centri-stagioni.json`, e
