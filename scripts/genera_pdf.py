@@ -61,16 +61,28 @@ GUIDE = {
         'pagina': 'centri-estivi.html',
         'titolo': 'Guida ai centri estivi',
         'occhiello': 'Centri estivi in provincia di Alessandria, Asti e Cuneo',
+        'sottotitolo': 'Come scegliere, cosa chiedere e chi organizza, '
+                       'paese per paese.',
+        'quando': 'Le iscrizioni si aprono fra marzo e maggio. Nei comuni più '
+                  'grandi i posti finiscono nelle prime due settimane.',
     },
     'invernali': {
         'pagina': 'centri-invernali.html',
         'titolo': 'Guida ai centri invernali',
         'occhiello': 'Centri invernali e natalizi in provincia di Alessandria, Asti e Cuneo',
+        'sottotitolo': 'Le due settimane di chiusura scolastica, '
+                       'e chi le copre in zona.',
+        'quando': 'Le iscrizioni si aprono di solito a novembre, e le settimane '
+                  'coperte sono poche: si decide in fretta.',
     },
     'pasquali': {
         'pagina': 'centri-pasquali.html',
         'titolo': 'Guida ai centri pasquali',
         'occhiello': 'Centri pasquali in provincia di Alessandria, Asti e Cuneo',
+        'sottotitolo': 'I giorni di vacanza di primavera, '
+                       'e chi organizza qualcosa.',
+        'quando': 'È la finestra più corta dell\'anno: pochi giorni, e le '
+                  'iscrizioni si aprono appena dopo Carnevale.',
     },
 }
 
@@ -84,6 +96,12 @@ CANDIDATI = [
     '/usr/bin/chromium-browser',
     '/usr/bin/google-chrome',
 ]
+
+# A chi scrive un gestore che vuole entrare nell'edizione dell'anno prossimo.
+# Uno solo: i centri non hanno la divisione per provincia che hanno i corsi
+# (MAIL_PROV in genera_corsi.py), e inventarne una qui vorrebbe dire scrivere
+# in un PDF un indirizzo che nessuno legge.
+MAIL_GUIDA = 'info@daop.it'
 
 MARK_START = '<!-- GUIDA-PDF:START'
 MARK_END = '<!-- GUIDA-PDF:END -->'
@@ -102,12 +120,71 @@ h3{font-size:11.5pt;margin:5mm 0 1.5mm;page-break-after:avoid}
 p,li{line-height:1.5;margin:0 0 2.5mm}
 ul{padding-left:5mm;margin:0 0 3mm}
 a{color:inherit;text-decoration:none}
-.g-testa{border-bottom:2px solid #0f766e;padding-bottom:4mm;margin-bottom:6mm}
 .g-occhiello{font-size:9pt;letter-spacing:.08em;text-transform:uppercase;
   color:#0f766e;margin:0 0 1.5mm;font-weight:600}
-.g-sotto{font-size:9.5pt;color:#555;margin:2mm 0 0}
-.g-piede{margin-top:8mm;padding-top:3mm;border-top:1px solid #ddd;
-  font-size:8.5pt;color:#666}
+
+/* --- Copertina -------------------------------------------------------
+   Niente immagini (stanno su Supabase, vedi il docstring), quindi la
+   copertina la fanno il tipo e il colore. La banda in alto e' l'unico
+   elemento grafico e costa zero byte. */
+.g-cover{page-break-after:always;display:flex;flex-direction:column;
+  min-height:245mm}
+.g-cover-banda{height:6mm;background:#0f766e;margin:-16mm -14mm 14mm}
+.g-cover h1{font-size:34pt;line-height:1.05;margin:0 0 4mm;letter-spacing:-.5pt}
+.g-cover .g-anno{color:#0f766e}
+.g-cover-sub{font-size:13pt;line-height:1.4;color:#444;margin:0 0 10mm;
+  max-width:120mm}
+/* I numeri: dicono in una riga quanto e' grosso il lavoro che c'e' dentro,
+   ed e' la sola prova di serieta' che una copertina senza foto puo' dare. */
+.g-numeri{display:flex;gap:12mm;margin:0 0 12mm}
+.g-num b{display:block;font-size:26pt;line-height:1;color:#0f766e}
+.g-num span{font-size:9pt;text-transform:uppercase;letter-spacing:.06em;
+  color:#666}
+.g-quando{border-left:3px solid #0f766e;padding:1mm 0 1mm 5mm;margin:0 0 10mm;
+  max-width:125mm}
+.g-quando b{display:block;font-size:10pt;margin-bottom:1mm}
+.g-quando p{font-size:10pt;color:#444;margin:0}
+.g-cover-fondo{margin-top:auto;border-top:1px solid #ddd;padding-top:4mm;
+  font-size:9.5pt;color:#666}
+.g-cover-fondo b{color:#1c1c1e}
+
+/* --- Indice ----------------------------------------------------------
+   Senza numeri di pagina, e non per pigrizia: i numeri di pagina in un
+   indice si fanno con target-counter() dei Paged Media, che Chromium NON
+   implementa (li fanno Prince e WeasyPrint, cioe' una dipendenza in piu').
+   Le voci pero' sono link veri: nel PDF diventano annotazioni /Link con
+   destinazione interna, provato. Su carta restano un sommario, che e'
+   quello che serve a decidere se leggere tutto o saltare. */
+.g-toc{page-break-after:always}
+.g-toc h2{font-size:16pt;margin:0 0 6mm;padding-bottom:3mm;
+  border-bottom:2px solid #0f766e}
+.g-toc ol{list-style:none;padding:0;margin:0;counter-reset:voce}
+.g-toc li{padding:2.5mm 0;border-bottom:1px dotted #ccc}
+.g-toc li.liv2{padding-left:9mm;border-bottom:0;padding-top:1mm;
+  padding-bottom:1mm}
+.g-toc a{display:block;font-size:11.5pt;font-weight:600}
+.g-toc li.liv2 a{font-size:10pt;font-weight:400;color:#555}
+.g-toc li.liv1 a::before{counter-increment:voce;content:counter(voce) ". ";
+  color:#0f766e}
+.g-toc-nota{margin-top:8mm;font-size:9.5pt;color:#666;border-left:3px solid #eee;
+  padding-left:4mm}
+
+/* --- Chiusura --------------------------------------------------------
+   Ultima pagina intera. Le tre cose che deve fare: dire che questa e' una
+   fotografia e va verificata, dire dove sta la versione sempre aggiornata,
+   e aprire la porta a chi organizza — che e' l'unico invito commerciale
+   del documento e sta qui, in fondo, come l'invito al canale sulle pagine. */
+.g-fine{page-break-before:always}
+.g-fine h2{font-size:16pt;margin:0 0 6mm;padding-bottom:3mm;
+  border-bottom:2px solid #0f766e}
+.g-fine h3{font-size:11.5pt;margin:6mm 0 1.5mm}
+.g-box{border:1px solid #0f766e;border-radius:3mm;padding:5mm 6mm;margin:6mm 0}
+.g-box h3{margin-top:0}
+.g-firma{margin-top:10mm;padding-top:4mm;border-top:1px solid #ddd;
+  font-size:9.5pt;color:#666}
+
+.g-h-elenco{font-size:16pt;margin:0 0 5mm;padding-bottom:3mm;
+  border-bottom:2px solid #0f766e}
 /* Ogni centro e' una scheda: non si spezza a meta' fra due pagine. */
 .event-card,.ce-card{page-break-inside:avoid;break-inside:avoid;
   border:1px solid #e3e3e3;border-radius:3mm;padding:3mm 4mm;margin:0 0 3mm}
@@ -179,6 +256,132 @@ def estrai(html):
     return html[k + 3:j].strip()
 
 
+def numeri(corpo):
+    """Quanti centri, quanti comuni, quante province — contati sul corpo vero.
+
+    Si contano qui e non si leggono da data/conteggi.json apposta: quel file
+    dice quanti ne ha il sito, questo deve dire quanti ne ha IL PDF. Se un
+    giorno i due numeri divergono (un filtro, una potatura), la copertina deve
+    restare d'accordo con le pagine che ha dietro, non col registro."""
+    n = corpo.count('class="event-card"')
+    comuni = len(set(re.findall(r'data-city="([^"]+)"', corpo)))
+    prov = len(set(re.findall(r'data-province="([^"]+)"', corpo)))
+    return n, comuni, prov
+
+
+def sezioni(corpo):
+    """Mette un id su ogni h2/h3 del corpo e torna l'indice da stampare.
+
+    Gli id li mettiamo qui e non nella pagina: servono solo al PDF, e
+    aggiungerli in pagina vorrebbe dire un diff su tutte le pagine centri per
+    una cosa che online non si vede. Se un'intestazione ha gia' un id suo, si
+    rispetta — un id inventato sopra uno esistente romperebbe un'ancora che
+    qualcuno potrebbe avere in giro."""
+    voci = []
+    n = [0]
+
+    def marca(m):
+        liv, attr, testo = m.group(1), m.group(2), m.group(3)
+        gia = re.search(r'\sid="([^"]+)"', attr)
+        if gia:
+            ident = gia.group(1)
+        else:
+            n[0] += 1
+            ident = f'g-s{n[0]}'
+            attr = f' id="{ident}"' + attr
+        # Il testo dell'intestazione puo' contenere marcatura (un <em>): per
+        # l'indice serve il testo nudo.
+        pulito = re.sub(r'<[^>]+>', '', testo).strip()
+        if pulito:
+            voci.append((int(liv), ident, pulito))
+        return f'<h{liv}{attr}>{testo}</h{liv}>'
+
+    corpo = re.sub(r'<h([23])([^>]*)>(.*?)</h\1>', marca, corpo, flags=re.S)
+    return corpo, voci
+
+
+def copertina(cfg, anno, oggi, conta):
+    n, comuni, prov = conta
+    plurale = 'centri' if n != 1 else 'centro'
+    return f"""<section class="g-cover">
+  <div class="g-cover-banda"></div>
+  <p class="g-occhiello">Guida DAOP</p>
+  <h1>{cfg['titolo'].replace('Guida ai ', '').capitalize()}
+    <span class="g-anno">{anno}</span></h1>
+  <p class="g-cover-sub">{cfg['sottotitolo']}</p>
+  <div class="g-numeri">
+    <div class="g-num"><b>{n}</b><span>{plurale}</span></div>
+    <div class="g-num"><b>{comuni}</b><span>comuni</span></div>
+    <div class="g-num"><b>{prov}</b><span>province</span></div>
+  </div>
+  <div class="g-quando">
+    <b>Quando ci si iscrive</b>
+    <p>{cfg['quando']}</p>
+  </div>
+  <div class="g-cover-fondo">
+    <p><b>DAOP</b> — l'agenda delle famiglie in provincia di Alessandria, Asti
+    e Cuneo. Aggiornata al {oggi.strftime('%d/%m/%Y')} · daop.it</p>
+  </div>
+</section>"""
+
+
+def indice(voci):
+    """L'indice. Torna stringa vuota se non c'e' niente da indicizzare: due
+    voci non sono un indice, sono una pagina sprecata."""
+    if len(voci) < 3:
+        return ''
+    righe = []
+    for liv, ident, testo in voci:
+        cls = 'liv1' if liv == 2 else 'liv2'
+        righe.append(f'    <li class="{cls}"><a href="#{ident}">{testo}</a></li>')
+    return ("""<section class="g-toc">
+  <h2>Cosa c'è dentro</h2>
+  <ol>
+""" + "\n".join(righe) + """
+  </ol>
+  <p class="g-toc-nota">Le voci sono cliccabili se leggi questa guida sul
+  telefono o sul computer. L'elenco dei centri è in ordine alfabetico: la
+  posizione non si compra, e chi paga uno spazio su DAOP non passa avanti
+  agli altri.</p>
+</section>""")
+
+
+def chiusura(cfg, oggi, pagina):
+    return f"""<section class="g-fine">
+  <h2>Prima di chiudere</h2>
+
+  <h3>Questa guida è una fotografia</h3>
+  <p>È stata generata il {oggi.strftime('%d/%m/%Y')} dai dati che i gestori ci
+  hanno comunicato. Date, orari e tariffe cambiano: <strong>prima di contare su
+  un posto, verifica sempre con chi organizza</strong>, ai recapiti che trovi in
+  ogni scheda.</p>
+
+  <h3>La versione sempre aggiornata</h3>
+  <p>L'elenco online si riscrive ogni notte, e questa guida con lui. Se l'hai
+  scaricata qualche settimana fa, la copia più recente è sempre qui:
+  <strong>daop.it/{pagina}</strong></p>
+
+  <div class="g-box">
+    <h3>Organizzi un centro e non sei in questa guida?</h3>
+    <p>L'edizione dell'anno prossimo si chiude prima che aprano le iscrizioni,
+    perché è allora che i genitori scelgono. Scrivici a
+    <strong>{MAIL_GUIDA}</strong> con date, età, orari e costi: entri
+    nell'elenco online subito e nella guida alla prima edizione utile.</p>
+  </div>
+
+  <h3>Cos'è DAOP</h3>
+  <p>Un'associazione che tiene l'agenda di quello che c'è da fare con i bambini
+  in provincia di Alessandria, Asti e Cuneo: sagre, feste, laboratori,
+  spettacoli, centri estivi e corsi. Ogni proposta viene guardata una per una
+  prima di finire in elenco — non è un aggregatore automatico.</p>
+
+  <div class="g-firma">
+    <p><strong>daop.it</strong> — sagre ed eventi per famiglie, giorno per
+    giorno.</p>
+  </div>
+</section>"""
+
+
 def documento(chiave, cfg, corpo, anno, oggi):
     """Il file temporaneo che Chromium stampa.
 
@@ -199,23 +402,25 @@ def documento(chiave, cfg, corpo, anno, oggi):
     e ha il vantaggio di non dipendere dalla rete per fare un PDF."""
     corpo = corpo.replace('<details', '<details open')
     corpo = re.sub(r'<img\b[^>]*>', '', corpo)
-    quando = oggi.strftime('%d/%m/%Y')
+    conta = numeri(corpo)
+
+    # L'intestazione dell'elenco non esiste online — la pagina non ne ha
+    # bisogno, l'elenco e' la prima cosa che si vede. Su carta invece serve:
+    # senza, l'indice non puo' nominare la meta' piu' lunga del documento. E'
+    # un'etichetta di impaginazione, come la copertina: non aggiunge un dato
+    # che il sito non pubblichi.
+    corpo = ('<h2 id="g-elenco" class="g-h-elenco">I centri, uno per uno</h2>\n'
+             + corpo)
+    corpo, voci = sezioni(corpo)
+
     return f"""<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8">
 <title>{cfg['titolo']} {anno} — DAOP</title>
 <style>{CSS_STAMPA}</style></head><body>
-<div class="g-testa">
-  <p class="g-occhiello">{cfg['occhiello']}</p>
-  <h1>{cfg['titolo']} {anno}</h1>
-  <p class="g-sotto">Guida DAOP · aggiornata al {quando} · daop.it</p>
-</div>
+{copertina(cfg, anno, oggi, conta)}
+{indice(voci)}
 {corpo}
-<div class="g-piede">
-  <p><strong>Le date e i prezzi cambiano.</strong> Questa guida è
-  un'istantanea del {quando}: prima di contare su un posto, verifica sempre con
-  chi organizza. L'elenco aggiornato è su daop.it.</p>
-  <p>DAOP — l'agenda delle famiglie in provincia di Alessandria, Asti e Cuneo.</p>
-</div>
+{chiusura(cfg, oggi, cfg['pagina'])}
 </body></html>
 """
 
