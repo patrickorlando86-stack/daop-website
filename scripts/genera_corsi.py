@@ -336,6 +336,22 @@ def openday(c, oggi=None):
     voce = (c.get('openday') or '').strip()
     if not voce:
         return None
+    # UN OPEN DAY CHE IN AGENDA NON C'E'. Succede, e non e' un caso storto: la
+    # realta' annuncia l'open day sul proprio sito settimane prima che l'evento
+    # arrivi nel foglio, e finche' non c'e' la riga non c'e' la scheda. Allora
+    # la cella porta l'indirizzo, e dopo una barra verticale la data e l'ora
+    # scritte come vanno lette:
+    #     https://esempio.it/corsi | Martedi' 22 settembre 2026 | 17:30
+    # Il rimando esce dal sito e lo dice. Se la data manca resta il solo link:
+    # meglio un link giusto senza data che una data inventata.
+    # E' un ripiego DICHIARATO, non la strada maestra. Quando l'evento entra in
+    # agenda si rimette il nome e si riprendono scheda, locandina, calendario,
+    # JSON-LD e pagina del comune, che un link a casa d'altri non da'.
+    if voce.lower().startswith(('http://', 'https://')):
+        pezzi = [x.strip() for x in voce.split('|')]
+        return {'url': pezzi[0],
+                'quando': pezzi[1] if len(pezzi) > 1 else '',
+                'ora': pezzi[2] if len(pezzi) > 2 else ''}
     trovati = _registro().get(G.slugify(voce))
     if not trovati:
         return None
@@ -358,6 +374,20 @@ def openday(c, oggi=None):
     return {'url': f"/eventi/{slug}.html",
             'quando': G.periodo_esteso({'d_start': di, 'd_end': df}),
             'ora': (rec.get('ora') or '').strip()}
+
+
+def _a_openday(od, testo):
+    """Il link di un open day, dentro il sito o fuori.
+
+    Un rimando che porta via dal sito lo deve dire prima che uno ci clicchi:
+    scheda nuova e rel="noopener", come ogni altro link a casa d'altri qui
+    dentro. Sta in una funzione perche' i punti che lo stampano sono due — la
+    riga del corso e la scheda della realta' — e divergerebbero al primo
+    ritocco."""
+    if od['url'].startswith('http'):
+        return (f'<a href="{G.esc(od["url"])}" target="_blank" rel="noopener">'
+                f'{testo}</a>')
+    return f'<a href="{od["url"]}">{testo}</a>'
 
 
 # ── LA TAB "Realta": una riga per societa', non per corso ─────────────────
@@ -561,7 +591,8 @@ def scheda_realta(org, corsi_org, info):
         od = openday(c)
         if od and od['url'] not in visti:
             visti.add(od['url'])
-            speciali.append(f'<a href="{od["url"]}">{G.esc(od["quando"])}</a>')
+            speciali.append(
+                _a_openday(od, G.esc(od['quando']) or 'sul sito →'))
     if speciali:
         dentro.append('<p class="co-realta-ev"><strong>Open day e appuntamenti:'
                       '</strong> ' + ' · '.join(speciali) + '</p>')
@@ -644,11 +675,20 @@ def eventi_realta(corsi_org):
         od = openday(c)
         if not od:
             continue
-        slug = od['url'].rsplit('/', 1)[-1].rsplit('.', 1)[0]
-        rec = reg.get(slug)
-        if rec and slug not in per_slug:
-            per_slug[slug] = (od, rec)
-    return sorted(per_slug.values(), key=lambda x: x[1].get('d_start') or '')
+        # L'open day che sta fuori (vedi openday()) non ha una riga in agenda,
+        # quindi non ha ne' locandina ne' nome: la scheda si fa lo stesso, col
+        # segnaposto del calendario e la sede del corso, perche' su questa
+        # pagina e' l'unica cosa che scade e sparire sarebbe peggio.
+        if od['url'].startswith('http'):
+            rec = {'nome': 'Open day', 'luogo': c['sede'] or c['citta'],
+                   'loc': ''}
+        else:
+            rec = reg.get(od['url'].rsplit('/', 1)[-1].rsplit('.', 1)[0])
+        if rec and od['url'] not in per_slug:
+            per_slug[od['url']] = (od, rec)
+    # Senza data si finisce in fondo e non in cima: davanti vanno gli
+    # appuntamenti che si sanno collocare nel calendario.
+    return sorted(per_slug.values(), key=lambda x: x[1].get('d_start') or '9')
 
 
 def _card_evento(od, rec):
@@ -662,7 +702,9 @@ def _card_evento(od, rec):
            '<span class="cr-ev-loc is-ph" aria-hidden="true">📅</span>')
     quando = od['quando'] + (f", ore {od['ora']}" if od['ora'] else '')
     dove = (rec.get('luogo') or rec.get('citta') or '').strip()
-    return (f'    <a class="cr-ev" href="{od["url"]}">{img}'
+    fuori = (' target="_blank" rel="noopener"'
+             if od['url'].startswith('http') else '')
+    return (f'    <a class="cr-ev" href="{G.esc(od["url"])}"{fuori}>{img}'
             f'<span class="cr-ev-t">'
             f'<span class="cr-ev-n">{G.esc(G.trunc(rec.get("nome", ""), 90))}</span>'
             f'<span class="cr-ev-q">{G.esc(quando)}'
@@ -1020,9 +1062,13 @@ def card(c, idx, pagine=(), qui_org=None):
         righe_det.append(f'<p class="event-desc">{G.esc(testo)}</p>')
     if od:
         quando = od['quando'] + (f", ore {od['ora']}" if od['ora'] else '')
+        # "Vedi la locandina" solo se di la' c'e' davvero la locandina: su un
+        # link esterno sarebbe una promessa che la pagina d'arrivo non mantiene.
+        vedi = 'vedi sul sito →' if od['url'].startswith('http') else                'vedi la locandina →'
+        testa = f'{G.esc(quando)} — ' if quando else ''
         righe_det.append(
-            f'<p class="co-openday"><strong>Open day:</strong> {G.esc(quando)} — '
-            f'<a href="{od["url"]}">vedi la locandina →</a></p>')
+            f'<p class="co-openday"><strong>Open day:</strong> {testa}'
+            + _a_openday(od, vedi) + '</p>')
     dove = c['sede'] or c['citta']
     if dove:
         righe_det.append(f'<p class="ev-where">{G.PIN_SVG} {G.esc(dove)}</p>')

@@ -34,19 +34,23 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import genera_eventi as G
 import genera_corsi as C
 
-# UN open day solo, e su un evento di UN GIORNO. Ce n'erano due, ed erano
-# entrambi sbagliati in un modo che Giovanni ha notato subito (21/08/2026): il
-# segnaposto della PGS era una manifestazione lunga un mese, quindi la scheda
-# leggeva "Dal 1 al 30 settembre" accanto a una colonna Prova che diceva "open
-# day 10, 17 e 24 settembre" — due calendari diversi per la stessa cosa, che
-# lui ha chiamato "un po' di casino con le date". E il link portava comunque a
-# un evento di qualcun altro.
+# L'OPEN DAY ADESSO E' QUELLO VERO, e non punta piu' a un evento di qualcun
+# altro. E' la terza volta che Giovanni inciampa nella stessa cosa: il primo
+# segnaposto era una manifestazione lunga un mese (due calendari diversi per la
+# stessa cosa, "un po' di casino con le date"), il secondo un evento di un
+# giorno solo ma pur sempre altrui — e il 24/08/2026 ha scritto che quel 6
+# settembre "non e' quello giusto", chiedendo il post della compagnia o il suo
+# sito. Aveva ragione due volte su due, e la lezione e' che un segnaposto che
+# si VEDE e' un dato sbagliato: nessuna fascia di avviso lo salva.
 #
-# Resta un segnaposto — l'open day della compagnia nella tab Eventi non c'e' —
-# ma di un evento che dura un giorno, cosi' la data letta e' una data sola, e
-# la fascia in cima dice apertamente che il link e' un esempio. Un secondo
-# segnaposto non aggiungeva niente: il meccanismo si vede con uno.
-OD_TEATRO = "L'Albero - Compagnia Il Cerchio Tondo"
+# L'open day della compagnia nella tab Eventi non c'e' ancora, quindi la cella
+# porta il link e la data — vedi openday() in genera_corsi.py: 22 settembre
+# 2026 al Teatro Civico di Caraglio, fascia 6-11 anni dalle 17.30, presi dalla
+# pagina pubblica santibriganti.it/corsi-teatro-caraglio, la stessa da cui
+# viene il resto del corso. Quando l'evento entrera' in agenda qui si rimette
+# il nome e tornano scheda, locandina e calendario.
+OD_TEATRO = ('https://www.santibriganti.it/corsi-teatro-caraglio'
+             ' | Martedì 22 settembre 2026 | 17:30')
 
 VUOTI = {k: '' for k in C.COLONNE}
 
@@ -161,9 +165,10 @@ FASCIA = (
     'in fondo e la pagina dedicata di ogni realtà. <strong>I dati sono di '
     'esempio</strong> — il corso di teatro è preso dal sito pubblico della '
     'compagnia, indirizzi e telefoni sono inventati, e nessuna di queste realtà '
-    'è un inserzionista. Anche <strong>l\'open day è un segnaposto</strong>: è '
-    'un evento vero dell\'agenda, serve solo a mostrare che il collegamento fra '
-    'un corso e la sua locandina funziona. La pagina vera è '
+    'è un inserzionista. <strong>L\'open day invece è quello vero</strong>: '
+    'data, orario e link vengono dalla pagina pubblica della compagnia, '
+    'perché in agenda quell\'evento non c\'è ancora — quando ci sarà, al '
+    'suo posto comparirà la locandina. La pagina vera è '
     '<a href="/corsi.html">corsi.html</a>.\n'
     '  </div>\n')
 
