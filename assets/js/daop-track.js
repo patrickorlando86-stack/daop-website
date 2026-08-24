@@ -110,6 +110,15 @@
     for (var k in CTX) { if (CTX[k]) p[k] = CTX[k]; }
     var riga = contesto_riga(el);
     for (var j in riga) { p[j] = riga[j]; }
+    /* Quale guida. Sta in un attributo e non si deduce dal nome del file:
+       "estivi-2027.pdf" andrebbe spezzato in due qui dentro, e il giorno che il
+       nome cambia il report cambia in silenzio. Stessa ragione di
+       `organizer_name`. Va registrata in GA4 come dimensione evento prima di
+       pubblicare: non e' retroattiva. */
+    if (el && el.getAttribute) {
+      var g = el.getAttribute('data-guida');
+      if (g) { p.stagione = g; }
+    }
     gtag('event', nome, p);
   }
 
@@ -144,6 +153,14 @@
     if (href.indexOf('calendar.google.com') !== -1) return 'aggiungi_calendario';
     if (href.indexOf('/storage/v1/object/public/locandine/') !== -1 ||
         href.indexOf('/assets/miniature/') !== -1) return 'click_locandina';
+    /* La guida stagionale ha un nome suo e sta PRIMA del ramo generico dei
+       PDF. Nel secchio `scarica_materiale` finirebbe insieme a qualunque
+       allegato di qualunque organizzatore, e l'unica domanda che la guida pone
+       — quanti se la portano via ogni mille visite — si potrebbe rispondere
+       solo filtrando `destination_url` a mano, cioe' mai. E' esattamente il
+       difetto che l'invito al canale ha avuto per una settimana. */
+    if (href.indexOf('/guide/') !== -1 &&
+        href.slice(-4).toLowerCase() === '.pdf') return 'scarica_guida';
     if (href.slice(-4).toLowerCase() === '.pdf') return 'scarica_materiale';
     if (href.indexOf('amazon.') !== -1 || href.indexOf('amzn.') !== -1) return 'click_amazon';
     // Generico: qualunque altro link che porta fuori da daop.it. Sulle schede

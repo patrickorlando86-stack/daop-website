@@ -1,6 +1,14 @@
 # Motori di ricerca: pieno accesso (SEO intatta)
 User-agent: *
 Allow: /
+# Le guide in PDF restano scaricabili ma fuori dall'indice. Non e' pudore: un
+# PDF indicizzato COMPETE con la pagina HTML da cui nasce, e quella pagina e'
+# l'hub che vince la query ("centri estivi alessandria") e che stiamo facendo
+# invecchiare apposta. Su GitHub Pages non si puo' mandare un X-Robots-Tag,
+# quindi questa riga e' l'unica leva che c'e'. Sta in QUESTO gruppo e non in un
+# secondo "User-agent: *": Google li unisce, ma non tutti i parser lo fanno e
+# qualcuno guarda solo il primo.
+Disallow: /guide/
 
 # --- Bot di ADDESTRAMENTO AI: bloccati (prendono i dati, non citano) ---
 User-agent: GPTBot

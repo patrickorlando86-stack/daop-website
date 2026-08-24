@@ -457,6 +457,13 @@ CSS = """
 .ce-guide ul{padding-left:1.15em}
 .ce-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:30px 0 8px}
 .ce-actions .btn{color:#fff}
+/* Il richiamo alla guida in PDF. <div> e non <section>: section{padding:100px
+   24px} arriva dal CSS di sistema e qui varrebbe 200px di vuoto. */
+.ce-guidapdf{margin:2.6em 0 0;padding:20px 22px;border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;background:rgba(0,0,0,.02)}
+.ce-guidapdf h2{margin:0 0 .4em;font-size:1.15rem}
+.ce-guidapdf p{margin:0 0 12px;line-height:1.6}
+.ce-guidapdf .btn{color:#fff}
 """
 
 # Icona segnaposto (sole) per le schede senza locandina, e lente per la ricerca:
@@ -793,6 +800,52 @@ def sorelle(chiave):
             f'<div class="com-link">{"".join(voci)}</div>')
 
 
+GUIDE_PATH = os.path.join(ROOT, 'data', 'guide.json')
+
+
+def _guide():
+    """Quali guide in PDF esistono davvero, scritte da genera_pdf.py.
+
+    In ritardo di un giro, come data/luoghi-comuni.json e data/conteggi.json:
+    il PDF di stanotte lo linka la run di domani. Chiudere il cerchio (stampare
+    prima, generare dopo) vorrebbe dire far girare due volte genera_centri per
+    un link che arriva un giorno prima.
+
+    Se il file manca il link non si stampa e basta - regola di link_luoghi().
+    Un link a un PDF che non c'e' e' peggio di nessun link: qui non c'e'
+    nemmeno una pagina 404 nostra a raccoglierlo."""
+    try:
+        with open(GUIDE_PATH, encoding='utf-8') as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def link_guida(chiave):
+    """L'invito a scaricare la guida, in coda al corpo.
+
+    In coda e non in cima, per la stessa ragione dell'invito al canale: chiedere
+    qualcosa prima di aver dato qualcosa non funziona. Qui la pagina ha appena
+    dato la guida intera - il PDF e' la stessa cosa da portare via, e si dice
+    cosi'."""
+    g = _guide().get(chiave)
+    if not g:
+        return ''
+    # Il peso si scrive: su un telefono con la linea del paese, "PDF, 240 kB"
+    # e' la differenza fra toccare e non toccare.
+    kb = max(1, int(g.get('byte', 0) / 1024))
+    peso = f'{kb} kB' if kb < 1024 else f'{kb / 1024:.1f} MB'
+    return (
+        f'  <div class="ce-guidapdf">\n'
+        f'    <h2>Portala con te</h2>\n'
+        f'    <p>La stessa guida in un foglio solo, con l\'elenco completo e le '
+        f'date: da stampare o da guardare insieme, anche senza connessione.</p>\n'
+        f'    <p><a class="btn btn-teal" href="/{g["file"]}" '
+        f'data-guida="{G.esc(chiave)}">Scarica la guida {G.esc(g["anno"])} '
+        f'(PDF, {peso})</a></p>\n'
+        f'  </div>')
+
+
 def render(chiave, cfg, centri, css, nav, foot):
     url = f"{SITE_URL}/{cfg['file']}"
     accent = ACCENTO.get(chiave, ACCENTO['estivi'])
@@ -921,8 +974,14 @@ def render(chiave, cfg, centri, css, nav, foot):
 </header>
 <article class="ce-wrap">
   {avviso}
+  <!-- GUIDA-PDF:START — quello che sta qui dentro finisce anche nel PDF di
+       guide/. Lo estrae scripts/genera_pdf.py per stringa, quindi i due marker
+       non si tolgono e non si annidano. Fuori restano nav, footer, filtri di
+       stagione e i bottoni: in una guida stampata non servono a niente. -->
   {elenco}
   {guida(cfg)}
+  <!-- GUIDA-PDF:END -->
+  {link_guida(chiave)}
   {sorelle(chiave)}
   {G.blocco_ecosistema('centri')}
   <div class="ce-actions">
