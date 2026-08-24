@@ -158,25 +158,41 @@ REALTA_DEMO = {
     },
 }
 
+# LA FASCIA STAVA SOTTO LA BARRA FISSA. Giovanni (24/08, dopo il fix
+# dell'open day): "vedo ora che c'era questo bannerino ma non lo leggo bene
+# tutto". Non era una sua distrazione: la fascia veniva iniettata come primo
+# figlio di <main>, dove il padding-top di 96px che compensa la nav fixed non
+# c'e' — quel padding vive su .page-hero, che qui viene dopo. Risultato: i
+# primi 69px del riquadro finivano DIETRO la barra, cioe' due righe su desktop
+# e quattro sul telefono. Un avviso che si legge a meta' e' peggio di nessun
+# avviso: quello che nascondeva era proprio la parola "prova".
+#
+# E il testo era lungo 570 caratteri. Adesso e' meno della meta': prima cos'e'
+# la pagina, poi cosa e' finto e cosa no. Chi legge una fascia gialla la legge
+# in tre secondi, non in tre frasi.
 FASCIA = (
     '  <div class="co-prova-avviso">\n'
-    '    <strong>Pagina di prova.</strong> Serve a far vedere come potrebbe '
-    'essere fatta la sezione corsi: l\'elenco filtrabile, le schede delle realtà '
-    'in fondo e la pagina dedicata di ogni realtà. <strong>I dati sono di '
-    'esempio</strong> — il corso di teatro è preso dal sito pubblico della '
-    'compagnia, indirizzi e telefoni sono inventati, e nessuna di queste realtà '
-    'è un inserzionista. <strong>L\'open day invece è quello vero</strong>: '
-    'data, orario e link vengono dalla pagina pubblica della compagnia, '
-    'perché in agenda quell\'evento non c\'è ancora — quando ci sarà, al '
-    'suo posto comparirà la locandina. La pagina vera è '
-    '<a href="/corsi.html">corsi.html</a>.\n'
+    '    <strong>Pagina di prova.</strong> Serve a far vedere com\'è fatta la '
+    'sezione corsi. <strong>I dati sono di esempio</strong>: indirizzi e '
+    'telefoni sono inventati e nessuna di queste realtà è un inserzionista. '
+    'L\'unica cosa vera è l\'open day dei Santibriganti, preso dal loro '
+    'sito. La pagina vera è <a href="/corsi.html">corsi.html</a>.\n'
     '  </div>\n')
 
 CSS_FASCIA = (
+    # I 96px sono gli stessi di .page-hero, che e' il modo in cui questo sito
+    # tiene i contenuti sotto la nav fixed: si copia quella misura invece di
+    # inventarne una, cosi' se la barra cambia altezza si cambia in un posto
+    # solo. Il calc() sulla larghezza serve al telefono, dove il max-width non
+    # morde e il riquadro andrebbe a filo dei bordi.
     '.co-prova-avviso{background:#fdf3e0;border:1px solid #e6c98a;'
-    'border-radius:10px;padding:14px 16px;margin:0 0 18px;font-size:.94rem;'
+    'border-radius:10px;padding:14px 16px;margin:96px auto 18px;'
+    'max-width:900px;width:calc(100% - 32px);font-size:.94rem;'
     'line-height:1.55;color:#6b4a10}\n'
-    '.co-prova-avviso a{color:#6b4a10;font-weight:700}\n')
+    '.co-prova-avviso a{color:#6b4a10;font-weight:700}\n'
+    # L'hero che segue si tiene i suoi 96px e sotto la fascia si aprirebbe un
+    # buco: la nav l'ha gia' scansata il riquadro.
+    '.co-prova-avviso+.page-hero{padding-top:24px}\n')
 
 
 def innocua(html, canonical):
