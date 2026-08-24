@@ -212,6 +212,13 @@ a{color:inherit;text-decoration:none}
 
 .g-h-elenco{font-size:16pt;margin:0 0 5mm;padding-bottom:3mm;
   border-bottom:2px solid #0f766e}
+/* Il titolo del paese. Deve staccare piu' di un h3 qualunque — e' l'appiglio
+   con cui si sfoglia — e non deve mai restare solo in fondo a una pagina con
+   le sue schede di la' (page-break-after:avoid arriva dalla regola h3). */
+.g-comune{font-size:12.5pt;margin:7mm 0 2.5mm;padding:1.5mm 0 1.5mm 4mm;
+  border-left:3px solid #0f766e;background:#f4f8f7;text-transform:uppercase;
+  letter-spacing:.04em}
+.g-comune:first-of-type{margin-top:2mm}
 /* Ogni centro e' una scheda: non si spezza a meta' fra due pagine. */
 .event-card,.ce-card{page-break-inside:avoid;break-inside:avoid;
   border:1px solid #e3e3e3;border-radius:3mm;padding:3mm 4mm;margin:0 0 3mm}
@@ -224,6 +231,21 @@ summary::-webkit-details-marker{display:none}
    stampa. Il bottone .ev-row invece resta ma perde il suo aspetto da comando. */
 .ev-det[hidden]{display:block !important}
 .ev-row{font-weight:600;font-size:11pt}
+/* Titolo e riga dei dati su due righe distinte. Online sono due span che si
+   attaccano e il comune in testa alla seconda faceva da stacco; tolto quello
+   (lo dice il titolo del gruppo) "Nuova Saves" e "dal 11 giugno" finivano
+   appiccicati. Separarli e' comunque piu' leggibile su carta, dove non c'e'
+   il colore a distinguerli. */
+.ev-main{display:block}
+.ev-name{display:block;font-size:11.5pt;font-weight:700;margin:0 0 1mm}
+.ev-line{display:block;font-weight:400;font-size:9.5pt;color:#555;margin:0 0 2mm}
+.ev-tags{display:block;margin:0 0 1mm}
+/* Le pillole (prezzo, "Consigliato DAOP") restano etichette anche su carta:
+   senza bordo diventavano una riga in grassetto sotto il titolo, cioe'
+   sembravano un sottotitolo invece che un dato. */
+.ev-pill{display:inline-block;font-size:8.5pt;font-weight:600;
+  padding:.5mm 2mm;border:1px solid #cfe0dd;border-radius:1.5mm;
+  color:#0f766e;background:#f4f8f7;margin:0 1.5mm 1mm 0}
 .ev-row .ev-chev,.ev-chev{display:none !important}
 dl{margin:0}
 dt{font-weight:600;font-size:9pt;color:#555;margin-top:1.5mm}
@@ -401,6 +423,110 @@ def locandine(corpo):
     return corpo.replace('</button></h4>', '</span></h4>')
 
 
+def _chiude_div(html, i):
+    """Indice subito dopo il </div> che chiude il <div> che comincia a `i`.
+
+    Serve contare l'annidamento e non basta cercare il primo </div>: dentro la
+    lista ogni scheda ha il suo <div class="ev-det">. Nemmeno l'ULTIMO
+    </article> va bene, ed e' il difetto che questa funzione ha avuto per
+    dieci minuti: sotto la lista dei centri aperti c'e' quella delle edizioni
+    CONCLUSE, quindi il taglio arrivava fin li' e otto centri finiti venivano
+    presentati come se fossero aperti — con l'avviso che lo diceva cancellato
+    insieme al resto. Su una pagina si correggerebbe stanotte; in un PDF che
+    gira, no."""
+    j = html.find('>', i)
+    if j < 0:
+        return -1
+    j += 1
+    liv = 1
+    while liv:
+        apre = html.find('<div', j)
+        chiude = html.find('</div>', j)
+        if chiude < 0:
+            return -1
+        if 0 <= apre < chiude:
+            liv += 1
+            j = apre + 4
+        else:
+            liv -= 1
+            j = chiude + 6
+    return j
+
+
+def raggruppa(corpo):
+    """Spezza l'elenco per comune, con un titolo per paese.
+
+    Online l'elenco e' piatto e si filtra con la tendina: e' giusto li', dove
+    un filtro costa un tocco. Su carta non c'e' nessuna tendina, e una lista
+    unica di ventiquattro schede si scorre tutta ogni volta che cerchi il tuo
+    paese. Raggruppare e' il modo in cui la stessa domanda si risolve senza
+    interazione — ed e' anche come e' fatta luoghi.html, che quel problema
+    l'aveva gia' risolto cosi'.
+
+    **L'ordine resta alfabetico, dentro e fuori i gruppi.** Non e' pigrizia:
+    e' la regola di #come-ordiniamo, che qui e' piu' facile da rompere perche'
+    su carta un gruppo in cima sembra una classifica. Nessun comune passa
+    avanti per nessuna ragione.
+
+    Se qualcosa non torna — nessuna scheda, nessun comune leggibile — si
+    restituisce il corpo com'era. Un raggruppamento a meta' e' peggio di
+    nessun raggruppamento."""
+    # I confini della lista NON si prendono con un match annidato: le schede
+    # contengono a loro volta dei <div> (il dettaglio), quindi un `.*?</div>`
+    # si ferma al primo di quelli e taglia via ventitre schede su ventiquattro.
+    # E' il difetto che questa funzione ha avuto per cinque minuti.
+    # Si ancora invece a due punti certi: il div che apre la lista, e il
+    # </div> che segue l'ultima scheda.
+    i = corpo.find('<div class="events-list" id="ce-active">')
+    k = _chiude_div(corpo, i)
+    if k < 0:
+        return corpo
+    # Cintura: la sezione delle edizioni CONCLUSE deve restare fuori dal
+    # taglio. Il matcher qui sopra lo garantisce gia' per costruzione, ma il
+    # difetto che questo controllo descrive e' costato otto centri finiti
+    # presentati come aperti, e su un PDF non lo si corregge dopo. Se un
+    # domani la struttura della pagina cambia, meglio nessun raggruppamento
+    # che un raggruppamento che mente.
+    passati = corpo.find('<h2 class="ce-past-h"')
+    if 0 <= passati < k:
+        print("[genera_pdf]   raggruppamento saltato: la sezione delle "
+              "edizioni concluse cadrebbe dentro l'elenco")
+        return corpo
+    schede = re.findall(r'<article class="event-card".*?</article>',
+                        corpo[i:k], re.S)
+    if len(schede) < 2:
+        return corpo
+
+    gruppi = {}
+    for sch in schede:
+        # Il nome leggibile sta in testa alla riga di contesto ("Ovada (AL) ·
+        # dal 1 luglio..."), non in data-city, che e' uno slug: "castell-alfero"
+        # stampato come titolo di gruppo sarebbe brutto e sbagliato.
+        riga = re.search(r'<span class="ev-line">([^·<]+)', sch)
+        nome = riga.group(1).strip() if riga else ''
+        if not nome:
+            return corpo
+        gruppi.setdefault(nome, []).append(sch)
+
+    fuori = []
+    for nome in sorted(gruppi, key=lambda x: x.lower()):
+        # Dentro il gruppo il comune non si ripete su ogni riga: il titolo
+        # sopra lo dice gia'. E' la regola gia' scritta per le pagine comune
+        # ("dentro una manifestazione uniforme ripetere SAGRA & FESTA su
+        # cinque righe e' rumore"), e qui vale il doppio perche' su carta lo
+        # spazio della riga e' conteso dalla locandina.
+        # Si toglie SOLO se dopo resta qualcosa: una riga che porta il solo
+        # comune diventerebbe vuota, e una riga vuota e' peggio di una
+        # ripetizione.
+        pulite = [re.sub(r'(<span class="ev-line">)' + re.escape(nome) + r'\s*·\s*',
+                         r'\1', sch)
+                  for sch in gruppi[nome]]
+        fuori.append(f'<h3 class="g-comune">{nome}</h3>')
+        fuori.append('<div class="events-list">'
+                     + "\n".join(pulite) + '</div>')
+    return corpo[:i] + "\n".join(fuori) + corpo[k:]
+
+
 def numeri(corpo):
     """Quanti centri, quanti comuni, quante province — contati sul corpo vero.
 
@@ -548,6 +674,7 @@ def documento(chiave, cfg, corpo, anno, oggi):
     corpo = corpo.replace('<details', '<details open')
     corpo = locandine(corpo)
     conta = numeri(corpo)
+    corpo = raggruppa(corpo)
 
     # L'intestazione dell'elenco non esiste online — la pagina non ne ha
     # bisogno, l'elenco e' la prima cosa che si vede. Su carta invece serve:
