@@ -92,6 +92,21 @@ jobs:
         # non fallisce niente.
         run: python scripts/genera_luoghi.py
 
+      - name: Guide stagionali in PDF
+        # Ultimo di tutti, e non e' indifferente: legge le pagine GIA' scritte
+        # dai passi sopra (fra i marker GUIDA-PDF) e le stampa. Girando prima
+        # stamperebbe la pagina di ieri.
+        #
+        # Non fallisce mai la run: senza Chromium, o se la stampa non riesce,
+        # lascia il PDF dell'altra volta e lo scrive nel log. Un PDF vecchio di
+        # un giorno e' meglio di nessun PDF, e molto meglio di uno vuoto — che
+        # a differenza di una pagina non lo correggi piu' una volta che gira.
+        #
+        # CHROMIUM_PATH: il runner di GitHub ha Chrome preinstallato in PATH,
+        # quindi la ricerca automatica lo trova da sola e la variabile serve
+        # solo a chi gira in locale con un binario altrove.
+        run: python scripts/genera_pdf.py
+
       - name: Commit se cambiato
         run: |
           # eventi/ e data/pagine-evento.json vanno inclusi: sono le pagine per
@@ -133,6 +148,16 @@ jobs:
           #     tracciato, la rete di sicurezza in fondo avrebbe fatto diventare
           #     rossa la run notturna.
           #
+          #   guide/ + data/guide.json  le guide stagionali in PDF (dal 24/08).
+          #     Vale il caso di corsi/: un PDF nuovo nasce UNTRACKED — la prima
+          #     volta che una stagione ha date, e poi a ogni cambio d'anno
+          #     ("estivi-2027.pdf" e' un file nuovo, non una modifica di
+          #     "estivi-2026.pdf") — quindi la rete di sicurezza in fondo, che
+          #     guarda solo i file gia' tracciati, non lo vedrebbe. Da qui la
+          #     cartella e non un elenco. data/guide.json invece e' tracciato ed
+          #     e' quello che fa comparire il link in pagina: senza, il PDF
+          #     verrebbe committato e non lo linkerebbe nessuno.
+          #
           #   corsi/  le pagine dedicate delle realta' (dal 21/08). Nascono
           #     UNTRACKED, quando una societa' nuova entra nella tab Realta: e'
           #     l'unico caso in cui la rete di sicurezza NON avrebbe protetto,
@@ -164,7 +189,8 @@ jobs:
                 data/pagine-landing.json data/storico-comuni.json \
                 data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
-                eventi/ rubriche/ corsi/ assets/miniature/"
+                data/guide.json \
+                eventi/ rubriche/ corsi/ guide/ assets/miniature/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
           # data/luoghi.json nasce solo quando il tab "Luoghi" del foglio

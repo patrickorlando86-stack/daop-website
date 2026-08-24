@@ -439,6 +439,190 @@ rete è dei messaggi 1-a-1 della Business API, **non dei canali**. Quando
 servirà una lista di proprietà e misurabile, quella è l'email — e il posto dove
 chiederla sarà il canale stesso.
 
+## Le guide stagionali: la prima cosa che ci si porta via
+
+Deciso il 24/08/2026. Fino a qui il sito è un posto dove si **arriva** — da
+Google, si legge l'orario della sagra, si esce. Una guida è la prima cosa che si
+**porta via**, ed è un rapporto diverso con chi legge.
+
+**Il testo della guida esiste già**: `guida(cfg)` in `genera_centri.py` scrive
+"Come scegliere un centro estivo" da mesi — cosa chiedere al telefono, quando ci
+si iscrive, cosa mettere nello zaino. Quello che mancava non era la prosa, era
+**l'oggetto con una scadenza**. Il pezzo nuovo è quindi solo il pacchetto:
+`scripts/genera_pdf.py` e un file in `guide/`.
+
+### La guida NON è una pagina nuova
+
+È la prima cosa che verrebbe in mente e sarebbe la più costosa. Vale parola per
+parola quello che è già scritto per i centri: «`centri-estivi.html` è l'hub della
+famiglia, non nasce un `/centri.html`; un hub nuovo sarebbe una pagina senza una
+query sua, e si metterebbe in mezzo a quella che la vince». Una
+`/guida-centri-estivi.html` mangerebbe la query `centri estivi alessandria` alla
+pagina che se l'è già presa.
+
+Quindi: **la guida è una sezione dell'hub che c'è già, più un PDF.** Niente URL
+nuove nell'indice.
+
+### L'anno: fuori dallo slug di una pagina, DENTRO al nome di un file
+
+È l'unico posto del sito dove la regola di `/ferragosto.html` si ribalta, e il
+motivo è che le due cose hanno un mestiere opposto:
+
+| | anno nel nome | perché |
+|---|---|---|
+| una **pagina** | mai | deve invecchiare: l'anzianità dell'URL è l'asset |
+| un **PDF** | sempre | è un'istantanea: senza data mente |
+
+`guide/centri-estivi-2027.pdf`. I vecchi **non si cancellano**: uno per anno, e
+un'istantanea datata resta onesta anche quando è vecchia.
+
+**`Disallow: /guide/` in `robots.txt`, il giorno zero.** Un PDF indicizzato
+compete con la pagina HTML che stiamo facendo invecchiare, e su GitHub Pages non
+si può mandare un `X-Robots-Tag`: `robots.txt` è l'unica leva che c'è. Questo è
+il difetto che si scopre sei mesi dopo guardando perché l'hub ha perso posizioni.
+
+### L'insieme è chiuso, e non si fa il prodotto cartesiano
+
+Quattro guide, che sono le quattro pagine che esistono già. **L'insieme non
+cresce coi dati** — è la stessa garanzia contro lo *scaled content* delle sei
+pagine d'incrocio e delle dodici pagine comune.
+
+La tentazione da rifiutare per iscritto: "Guida centri estivi Alessandria / Asti
+/ Cuneo", o per età, o per disciplina. Sono 3 × 4 × N, cioè le 800 pagine su
+template identico da cui `luoghi.html` è nata per scappare.
+
+### Il calendario, che è cosa decide tutto il resto
+
+Cercato in rete il 24/08/2026, non dedotto. Le date sono quelle vere del
+**calendario scolastico Piemonte 2026-2027**: lezioni dal 14/09/2026 al
+10/06/2027, Natale 23/12-6/01, **Carnevale 6-10 febbraio** (cinque giorni),
+Pasqua 25-30 marzo, ponte dell'Immacolata 7-8 dicembre.
+
+| guida | la domanda si accende | online entro | cosa la muove |
+|---|---|---|---|
+| **Corsi e attività** | fine agosto | **~20 agosto** | open day di settembre, "posti limitati" |
+| **Centri natalizi** | fine novembre | ~15 novembre | due settimane di chiusura |
+| **Centri di Carnevale** | metà gennaio | ~15 gennaio | cinque giorni scoperti |
+| **Centri estivi** | fine febbraio | **~1 marzo** | iscrizioni comunali marzo-aprile |
+| **Centri pasquali** | inizio marzo | ~1 marzo | sei giorni scoperti |
+
+Due cose che questo calendario dice e che non si ricavano dai dati nostri:
+
+- **La guida deve esistere PRIMA che aprano le iscrizioni, non durante.** A
+  Torino le iscrizioni ai centri estivi comunali 2026 sono state 13-30 aprile, a
+  Milano 19 marzo-7 aprile: un genitore comincia a cercare **a febbraio**. Una
+  guida pubblicata ad aprile arriva a cose fatte. È la scommessa di
+  `/halloween.html` — settantadue giorni d'anticipo apposta — applicata a una
+  cosa che si vende.
+- **Carnevale 2027 vale cinque giorni scoperti e non ha una pagina.** `STAGIONI`
+  ha estivi, invernali e pasquali. Il Carnevale è già citato in questo file come
+  il caso che dimostra perché il calendario non si scrive nel codice, ma nessuno
+  ha poi aggiunto la voce. Cinque giorni feriali a febbraio sono un problema vero
+  per due genitori che lavorano, ed è la finestra più scoperta dell'anno.
+  Aggiungerla è una voce in `STAGIONI` col suo testo, una volta.
+
+**Aprile-maggio e giugno restano vuoti apposta**: lì la domanda è "cosa faccio
+questo weekend", e ha già la pagina che la vince, che è l'agenda.
+
+### Come si genera, e la dipendenza che NON si aggiunge
+
+`scripts/genera_pdf.py`, che gira **dopo** gli altri e non riscrive nessun
+contenuto: legge le pagine **già generate** fra i marker
+`<!-- GUIDA-PDF:START/END -->`, ci mette intorno il proprio CSS di stampa e
+stampa. Il PDF non può divergere da quello che il sito pubblica, perché è
+letteralmente quello — è la regola di `_dati_realta()` («i dati si scrivono in un
+posto solo») applicata a un secondo formato.
+
+**Niente Playwright, niente Pillow, niente libreria PDF.** Chromium sa già
+stampare da solo:
+
+```
+chrome --headless --no-pdf-header-footer --print-to-pdf=… file://…
+```
+
+Aggiungere `playwright` come dipendenza del workflow per una cosa che il binario
+già installato fa con un argomento sarebbe un costo permanente per un comodo di
+un giorno. I `<details>` chiusi si aprono **testualmente** (`<details` →
+`<details open`) prima di stampare: niente JS da far girare, niente attesa.
+
+Le decisioni dentro, che non si ricavano dal diff:
+
+- **Senza materiale non nasce nessuna guida.** La condizione è `inizio` in
+  `data/centri-stagioni.json`: se la stagione non ha nemmeno una data, il PDF non
+  si scrive. È `MIN_LANDING` applicata a un file — con la differenza che una
+  pagina vuota resta online e un PDF vuoto no, perché un PDF **gira** e non lo
+  puoi correggere dopo.
+- **L'anno del PDF è l'anno di `inizio`**, cioè dell'edizione che la pagina sta
+  mostrando in questo momento. Non "l'anno prossimo": il PDF è l'istantanea di
+  quella pagina, e deve dire la stessa cosa che dice lei.
+- **Senza Chromium lascia il PDF di ieri** e lo scrive nel log, come
+  `genera_centri.py` lascia la pagina com'è quando non legge il foglio. Un PDF
+  vecchio di un giorno è meglio di nessun PDF, e molto meglio di uno vuoto.
+- **Niente immagini nel PDF.** Le locandine stanno su Supabase, che ha un tetto
+  di banda e in CI può non rispondere: una guida da 8 MB che a volte esce con i
+  riquadri grigi è peggio di una guida di solo testo. È lo stesso conto che ha
+  fatto uscire le locandine da git.
+- **Il link al PDF si stampa in ritardo di un giro.** `genera_pdf.py` scrive
+  `data/guide.json`, `genera_centri.py` lo legge alla run dopo. Stesso ritardo di
+  `data/luoghi-comuni.json`, `data/conteggi.json` e `data/centri-stagioni.json`, e
+  per la stessa ragione: chiudere il cerchio costa più di quello che risolve, e
+  un giorno senza link è un errore gratis. **Se il file manca, il link non si
+  stampa** — la regola di `link_luoghi()`.
+- **`guide/` va nell'elenco del workflow come cartella e non come file**, per lo
+  stesso motivo di `corsi/`: un PDF nuovo nasce untracked e
+  `git status --untracked-files=no` non lo vede.
+
+### L'email non si chiede al primo giro, ed è misurato
+
+L'istinto è "il PDF in cambio dell'indirizzo". È la mossa giusta al momento
+sbagliato, e il numero che lo dice è già in questo file: l'invito al canale
+WhatsApp — **un tocco solo, zero campi da compilare** — converte allo **0,3%**.
+Un modulo email chiede di più allo stesso pubblico sulle stesse pagine.
+
+C'è però una differenza vera, ed è l'unica cosa non ancora provata: quello è un
+*ask* che non dà niente in cambio, questo dà un oggetto. È esattamente «il pezzo
+non ancora provato è il testo, non il canale».
+
+Quindi in due tempi, e il primo non è una mezza misura:
+
+1. **Download libero, misurato.** Evento `scarica_guida` in `daop-track.js` (un
+   posto solo, come tutto il resto) col parametro `stagione`, e la dimensione
+   registrata in GA4 **prima** di pubblicare — non è retroattiva, e una guida
+   scaricata a marzo senza dimensione è un dato perso per sempre.
+2. **Il gate email solo se il primo giro mostra domanda.** Costruire una lista
+   per un download che nessuno prende è il modo più veloce di buttare via due
+   settimane, e lascerebbe in giro una promessa ("ti mando la guida") da
+   mantenere a mano.
+
+### Perché questo è il pezzo commerciale che mancava
+
+Nella lista delle cose che mancano per vendere, la numero 2 è «`Premium_al`, la
+data di scadenza. Niente si spegne da solo. È un problema di cassa: nessun
+innesco per il rinnovo».
+
+**Una guida stagionale è quell'innesco**, e non c'è niente di commerciale da
+inventare: «la Guida centri estivi 2027 chiude il 28 febbraio, la tua scheda c'è
+dentro?» è una telefonata **con una data**, che è l'unica specie di telefonata
+che si fa pagare. Sui corsi non si pone nemmeno il problema: dal 21/08 la
+presenza è una sola ed è già pagata, quindi l'inventario della guida esiste già.
+
+E vale la regola di sempre, che qui è più facile da rompere perché un PDF ha una
+copertina: **dentro la guida l'ordine non si vende.** Alfabetico come in
+`luoghi.html`, e "In evidenza" resta il blocco separato che si dichiara.
+
+### Cosa è bloccato, e non dal codice
+
+**La guida la cui stagione è aperta adesso è quella dei corsi**, e non si fa:
+`corsi.html` è `noindex` perché Giovanni considera i dati PGS non verificati per
+la 2026/2027. Stampare in un PDF dei dati che l'unica persona che li conosce
+dichiara sbagliati è peggio che non stamparli — **un PDF gira e non si corregge
+dopo**, mentre una pagina la riscrive la run di stanotte. Si accende con
+`CORSI_IN_INDICE`, lo stesso interruttore di tutto il resto, e non ce n'è un
+secondo da ricordare.
+
+L'impianto quindi si costruisce sui **centri estivi**, la cui finestra apre a
+gennaio: quattro mesi di margine, che è il lusso che non si è mai avuto.
+
 ## Le quattro porte: eventi, luoghi, centri, corsi
 
 Fatto il 20/08/2026. Le quattro famiglie sono **quattro rapporti col tempo**, ed
