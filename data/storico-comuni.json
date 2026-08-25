@@ -1526,6 +1526,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-13"
+   },
+   "laboratorio-di-caseificazione-con-emotionalp-castellar": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Cavalier Tomatis",
+    "manifest": "Festival della Cucina Popolare Alpina",
+    "nome": "Laboratorio di caseificazione con EmotionAlp",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
    }
   },
   "nome": "Castellar",
@@ -2413,6 +2424,17 @@
     "pagina": true,
     "ultima": "2026-08-17"
    },
+   "escursione-naturalistica-gratuita-ge-co-parco-del-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parcheggio Pian della Regina",
+    "manifest": "",
+    "nome": "Escursione Naturalistica Gratuita - GE.CO - Parco del Monviso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   },
    "giochi-di-basket-pro-loco-crissolo": {
     "anni": [
      2026
@@ -2562,6 +2584,17 @@
     "pagina": true,
     "ultima": "2026-08-13"
    },
+   "doppio-laboratorio-di-musica-e-argilla-chiosco-par-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Ferruccio Parri",
+    "manifest": "Laboratori Estivi 2026 Chiosco Parri",
+    "nome": "Doppio Laboratorio di Musica e Argilla - Chiosco Parri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-25"
+   },
    "giochi-d-acqua-chiosco-parri-cuneo": {
     "anni": [
      2026
@@ -2583,6 +2616,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-26"
+   },
+   "la-via-del-gigante-d-acqua-parco-fluviale-gesso-e-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "f'Orma - il fiume a piede libero",
+    "manifest": "Estate al Parco 2026",
+    "nome": "La Via del Gigante d'Acqua - Parco Fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
    },
    "mio-tuo-nostro-pandemonium-teatro-cuneo": {
     "anni": [
@@ -2790,6 +2834,17 @@
  },
  "entracque": {
   "eventi": {
+   "aspettando-la-fiera-della-patata-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Aspettando la 28° Fiera della Patata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
    "aspettando-la-fiera-patate-di-entracque": {
     "anni": [
      2026
@@ -2832,7 +2887,7 @@
     "nome": "Estate Sonora, Giochi di Note - Prismadanza",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-08-13"
+    "ultima": "2026-08-27"
    },
    "festa-del-pescatore-entracque": {
     "anni": [
@@ -2844,6 +2899,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-14"
+   },
+   "fiori-immaginari-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardinetti Salone Maria José",
+    "manifest": "",
+    "nome": "Fiori Immaginari",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-26"
    },
    "food-village-entracque": {
     "anni": [
@@ -2915,12 +2981,12 @@
     "anni": [
      2026
     ],
-    "luogo": "Salone Maria José",
+    "luogo": "Giardinetti Salone Maria José",
     "manifest": "",
     "nome": "Laboratorio Scervelliamoci",
     "organizza": "",
-    "pagina": false,
-    "ultima": "2026-08-11"
+    "pagina": true,
+    "ultima": "2026-08-25"
    },
    "laboratorio-scientifico-battesimo-della-sella-scud-entracque": {
     "anni": [
@@ -2942,7 +3008,7 @@
     "nome": "Lezioni di Pilates",
     "organizza": "",
     "pagina": false,
-    "ultima": "2026-08-12"
+    "ultima": "2026-08-26"
    },
    "nel-sentiero-del-lupo-guida-tiziana-entracque": {
     "anni": [
@@ -2954,6 +3020,28 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-11"
+   },
+   "quiz-interattivo-per-grandi-e-piccini-quizlandia-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bar Gran Viver",
+    "manifest": "",
+    "nome": "Quiz Interattivo per Grandi e Piccini - QuizLandia",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-27"
+   },
+   "shine-on-you-crazy-diamond-concerto-per-luca-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Giustizia e Libertà",
+    "manifest": "",
+    "nome": "Shine On You, Crazy Diamond - Concerto per Luca",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-28"
    },
    "sotto-il-cielo-dell-eclissi-guida-tiziana-entracque": {
     "anni": [
@@ -3009,6 +3097,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "uno-sguardo-su-entracque-visita-guidata": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Informazioni Luigi Einaudi",
+    "manifest": "",
+    "nome": "Uno Sguardo su Entracque - Visita Guidata",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-30"
    }
   },
   "nome": "Entracque",
@@ -3154,6 +3253,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "sogni-di-mare-ricordi-di-sabbia-letture-favolose-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Fossano - Castello degli Acaja",
+    "manifest": "",
+    "nome": "Sogni di mare, ricordi di sabbia - Letture Favolose",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-02"
    }
   },
   "nome": "Fossano",
@@ -3545,6 +3655,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "sere-fai-d-estate-camminata-sotto-la-luna-al-caste-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello della Manta",
+    "manifest": "",
+    "nome": "Sere FAI d'Estate - Camminata sotto la Luna al Castello della Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
    }
   },
   "nome": "Manta",
@@ -3698,6 +3819,17 @@
     "pagina": true,
     "ultima": "2026-08-14"
    },
+   "festa-della-citta-di-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Europa",
+    "manifest": "Festa della Città di Mondovì 2026",
+    "nome": "Festa della Città di Mondovì 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-07"
+   },
    "laboratorio-di-carta-riciclata-il-melograno-societ-mondovi": {
     "anni": [
      2026
@@ -3740,6 +3872,45 @@
   },
   "nome": "Mongardino",
   "prov": "AT"
+ },
+ "monta": {
+  "eventi": {
+   "buffalo-kids-cinema-al-centro-monta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Outdoor Valle delle Rocche",
+    "manifest": "",
+    "nome": "Buffalo Kids - Cinema al Centro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-09"
+   },
+   "jumpers-un-salto-tra-gli-animali-cinema-al-centro-monta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Santuario dei Piloni",
+    "manifest": "",
+    "nome": "Jumpers - Un salto tra gli animali | Cinema al Centro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   },
+   "la-quercia-e-i-suoi-abitanti-cinema-al-centro-monta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Outdoor Valle delle Rocche",
+    "manifest": "",
+    "nome": "La Quercia e i suoi abitanti - Cinema al Centro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-02"
+   }
+  },
+  "nome": "Montà",
+  "prov": "CN"
  },
  "montemagno": {
   "eventi": {
@@ -4403,6 +4574,17 @@
  },
  "piozzo": {
   "eventi": {
+   "osserviamo-il-cielo-baladin-open-garden-piozzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Baladin Open Garden",
+    "manifest": "I Martedì dei Bambini al Garden",
+    "nome": "Osserviamo il Cielo - Baladin Open Garden",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-25"
+   },
    "pranzo-sociale-piozzo": {
     "anni": [
      2026
@@ -4640,6 +4822,23 @@
   "nome": "Ponzone",
   "prov": "AL"
  },
+ "pornassio": {
+  "eventi": {
+   "festa-dell-uva-castello-medievale-di-pornassio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Medievale di Pornassio",
+    "manifest": "Festa dell'Uva - Castello Medievale di Pornassio",
+    "nome": "Festa dell'Uva - Castello Medievale di Pornassio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Pornassio",
+  "prov": "CN"
+ },
  "portacomaro": {
   "eventi": {
    "angelica-bove-fondazione-monferrato-on-stage-portacomaro": {
@@ -4866,6 +5065,23 @@
    }
   },
   "nome": "Priero",
+  "prov": "CN"
+ },
+ "racconigi": {
+  "eventi": {
+   "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "TuteliAMO - Corso Manovre Salvavita Pediatriche - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-24"
+   }
+  },
+  "nome": "Racconigi",
   "prov": "CN"
  },
  "rivaltabormida": {
@@ -6780,6 +6996,17 @@
     "luogo": "Riserva Naturale Ciciu del Villar",
     "manifest": "",
     "nome": "Serata di Magia - Blink Circolo Magico",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   },
+   "spettacolo-di-magia-con-blink-circolo-magico-riser-villar-san-costanzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Riserva Naturale Ciciu del Villar",
+    "manifest": "",
+    "nome": "Spettacolo di magia con Blink Circolo Magico - Riserva Naturale Ciciu del Villar",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-29"
