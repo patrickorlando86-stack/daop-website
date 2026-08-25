@@ -5258,6 +5258,32 @@
       empty.style.display = visible === 0 ? 'block' : 'none';
       if (count) count.textContent = visible + (visible === 1 ? ' evento ' : ' eventi ') + ambito();
       if (vista === 'calendario') disegnaCalendario(f, term, visible, fuori);
+      scriviUrl(f, term);
+    }
+
+    // L'URL segue i filtri: il link da mandare si costruisce toccando le
+    // tendine, invece di scrivere i parametri a mano. Tre vincoli:
+    //  - replaceState e non pushState. Con pushState il tasto indietro
+    //    ripercorrerebbe un passo per ogni tocco, e chi vuole tornare da dove
+    //    e' arrivato dovrebbe premerlo otto volte.
+    //  - il raggio "vicino a me" resta FUORI. La pagina promette che la
+    //    posizione non esce dal browser: un link con le coordinate dentro
+    //    sarebbe lo stesso che mandarle via, e quel link poi gira.
+    //  - mezzo secondo di attesa, perche' la ricerca scrive a ogni lettera e
+    //    i browser limitano quante volte al minuto si puo' riscrivere l'URL.
+    // L'hash si conserva: e' la riga aperta, e apriDaHash() ci conta.
+    let urlAttesa = null;
+    function scriviUrl(f, term) {
+      clearTimeout(urlAttesa);
+      urlAttesa = setTimeout(function () {
+        const par = new URLSearchParams();
+        if (f.province !== 'all') par.set('prov', f.province);
+        if (f.category !== 'all') par.set('cat', f.category);
+        if (f.date !== 'all') par.set('quando', f.date);
+        if (term) par.set('q', term);
+        const qs = par.toString();
+        history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+      }, 500);
     }
 
     // Le intestazioni dei giorni arrivano già scritte dal generatore notturno:

@@ -2364,6 +2364,15 @@ Tre decisioni che non si ricavano dal diff:
   Questo e' un link da mandare a qualcuno, non una pagina da far indicizzare:
   se serve una superficie che prenda traffico, si fa una pagina, non un
   parametro.
+- **L'URL segue i filtri**, cosi' il link si costruisce toccando le tendine
+  invece di scriverlo a mano — ed e' il modo in cui lo usera' chi non ricorda i
+  nomi dei parametri. `replaceState` e non `pushState`: con `pushState` il tasto
+  indietro ripercorrerebbe un passo per ogni tocco. Il raggio di "vicino a me"
+  resta **fuori** dall'URL: la pagina promette che la posizione non esce dal
+  browser, e un link con le coordinate dentro sarebbe lo stesso che mandarle
+  via — con l'aggravante che quel link poi gira. Fuori anche la vista
+  calendario. L'hash si conserva, perche' e' la riga aperta e `apriDaHash()` ci
+  conta.
 - **Con un preset attivo si scende all'agenda**, e dopo `load` non a un `rAF`:
   con le locandine delle corsie ancora in arrivo la pagina cresce sotto i
   piedi e uno scroll calcolato prima finisce nel posto sbagliato (provato).
