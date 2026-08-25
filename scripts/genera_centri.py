@@ -946,7 +946,12 @@ def render(chiave, cfg, centri, css, nav, foot):
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{CSS}</style>
+<!-- COMUNE_CSS serve per .com-link, la riga "Le altre vacanze" in fondo:
+     senza, i due link uscivano attaccati ("Centri Invernali a NataleCentri
+     Pasquali a Pasqua") perche' quella regola vive li' e non nel guscio. Si
+     include invece di ricopiarla, come gia' fa genera_luoghi.py: la regola
+     sta in un posto solo. -->
+<style>{css}{G.COMUNE_CSS}{CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
