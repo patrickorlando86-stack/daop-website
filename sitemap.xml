@@ -399,12 +399,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/aspettando-la-fiera-della-patata-entracque.html</loc>
-    <lastmod>2026-08-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/aspettando-la-fiera-patate-di-entracque.html</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -1162,6 +1156,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/festival-cartosio-pro-loco-cartosio.html</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festival-illustrada-mondovi.html</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2097,12 +2097,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/serata-di-magia-blink-circolo-magico-villar-san-costanzo.html</loc>
-    <lastmod>2026-08-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona.html</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -2425,6 +2419,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/comune/limone-piemonte.html</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/mondovi.html</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
