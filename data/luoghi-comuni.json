@@ -976,7 +976,7 @@
  },
  "c-cn-alba": {
   "comune": "Alba",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-arguello": {
@@ -1019,6 +1019,11 @@
   "n": 3,
   "prov": "CN"
  },
+ "c-cn-bossolasco": {
+  "comune": "Bossolasco",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-boves": {
   "comune": "Boves",
   "n": 2,
@@ -1026,7 +1031,7 @@
  },
  "c-cn-bra": {
   "comune": "Bra",
-  "n": 2,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-briaglia": {
@@ -1042,6 +1047,11 @@
  "c-cn-busca": {
   "comune": "Busca",
   "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-camerana": {
+  "comune": "Camerana",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-canale": {
@@ -1119,6 +1129,11 @@
   "n": 3,
   "prov": "CN"
  },
+ "c-cn-cortemilia": {
+  "comune": "Cortemilia",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-cossano-belbo": {
   "comune": "Cossano Belbo",
   "n": 1,
@@ -1131,7 +1146,7 @@
  },
  "c-cn-cuneo": {
   "comune": "Cuneo",
-  "n": 7,
+  "n": 8,
   "prov": "CN"
  },
  "c-cn-demonte": {
@@ -1151,7 +1166,7 @@
  },
  "c-cn-entracque": {
   "comune": "Entracque",
-  "n": 4,
+  "n": 5,
   "prov": "CN"
  },
  "c-cn-envie": {
@@ -1171,7 +1186,7 @@
  },
  "c-cn-fossano": {
   "comune": "Fossano",
-  "n": 3,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-frabosa-soprana": {
@@ -1244,6 +1259,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-mondovi": {
+  "comune": "Mondovì",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-monforte-d-alba": {
   "comune": "Monforte d'Alba",
   "n": 1,
@@ -1251,7 +1271,7 @@
  },
  "c-cn-monta": {
   "comune": "Montà",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-montaldo-roero": {
@@ -1296,7 +1316,7 @@
  },
  "c-cn-paesana": {
   "comune": "Paesana",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-paroldo": {
@@ -1346,7 +1366,7 @@
  },
  "c-cn-roccabruna": {
   "comune": "Roccabruna",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-roccavione": {
@@ -1356,7 +1376,7 @@
  },
  "c-cn-saluzzo": {
   "comune": "Saluzzo",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-sampeyre": {
@@ -1386,7 +1406,7 @@
  },
  "c-cn-savigliano": {
   "comune": "Savigliano",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-sommariva-del-bosco": {
@@ -1394,8 +1414,18 @@
   "n": 2,
   "prov": "CN"
  },
+ "c-cn-sommariva-perno": {
+  "comune": "Sommariva Perno",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-tarantasca": {
   "comune": "Tarantasca",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-torre-bormida": {
+  "comune": "Torre Bormida",
   "n": 1,
   "prov": "CN"
  },
