@@ -468,6 +468,13 @@
 .ce-guide ul{padding-left:1.15em}
 .ce-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:30px 0 8px}
 .ce-actions .btn{color:#fff}
+/* Il richiamo alla guida in PDF. <div> e non <section>: section{padding:100px
+   24px} arriva dal CSS di sistema e qui varrebbe 200px di vuoto. */
+.ce-guidapdf{margin:2.6em 0 0;padding:20px 22px;border:1px solid rgba(0,0,0,.12);
+  border-radius:14px;background:rgba(0,0,0,.02)}
+.ce-guidapdf h2{margin:0 0 .4em;font-size:1.15rem}
+.ce-guidapdf p{margin:0 0 12px;line-height:1.6}
+.ce-guidapdf .btn{color:#fff}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
@@ -551,6 +558,10 @@
 </header>
 <article class="ce-wrap">
   <div class="ce-note"><strong>Iscrizioni non ancora aperte</strong>L'elenco aggiornato torna online appena i gestori pubblicano date e tariffe, di solito in autunno. Qui sotto trovi la guida per arrivare preparato alla scelta, e nell'<a href="/eventi.html">agenda DAOP</a> quello che c'è in programma in questi giorni.</div>
+  <!-- GUIDA-PDF:START — quello che sta qui dentro finisce anche nel PDF di
+       guide/. Lo estrae scripts/genera_pdf.py per stringa, quindi i due marker
+       non si tolgono e non si annidano. Fuori restano nav, footer, filtri di
+       stagione e i bottoni: in una guida stampata non servono a niente. -->
   
   
 <section class="ce-guide">
@@ -636,8 +647,10 @@
   ginnastica pulite da usare dentro, e qualcosa di caldo per gli spostamenti.</p>
 </section>
 
+  <!-- GUIDA-PDF:END -->
+  
   <h2>Le altre vacanze</h2><div class="com-link"><a href="/centri-estivi.html">Centri Estivi d&#x27;estate</a><a href="/centri-pasquali.html">Centri Pasquali a Pasqua</a></div>
-  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">185 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">834 posti scelti a mano, dal parco al museo</span></a></div></section>
+  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">173 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">837 posti scelti a mano, dal parco al museo</span></a></div></section>
   <div class="ce-actions">
     <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
   </div>
