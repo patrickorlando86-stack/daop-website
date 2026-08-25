@@ -5276,11 +5276,18 @@
     function scriviUrl(f, term) {
       clearTimeout(urlAttesa);
       urlAttesa = setTimeout(function () {
-        const par = new URLSearchParams();
-        if (f.province !== 'all') par.set('prov', f.province);
-        if (f.category !== 'all') par.set('cat', f.category);
-        if (f.date !== 'all') par.set('quando', f.date);
-        if (term) par.set('q', term);
+        // Si parte da quello che c'e' gia' e si toccano SOLO le nostre quattro
+        // chiavi. Riscrivere la querystring da zero cancellava gli utm_* di chi
+        // arriva da una newsletter, e li cancellava mezzo secondo dopo il
+        // caricamento - cioe' quasi sempre PRIMA che il banner dei cookie sia
+        // stato toccato e GA4 abbia mandato il page_view. L'attribuzione della
+        // campagna sarebbe sparita in silenzio, che e' il modo peggiore.
+        const par = new URLSearchParams(location.search);
+        const scrivi = (k, v) => v ? par.set(k, v) : par.delete(k);
+        scrivi('prov', f.province !== 'all' && f.province);
+        scrivi('cat', f.category !== 'all' && f.category);
+        scrivi('quando', f.date !== 'all' && f.date);
+        scrivi('q', term);
         const qs = par.toString();
         history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
       }, 500);

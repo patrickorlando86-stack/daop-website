@@ -2364,6 +2364,12 @@ Tre decisioni che non si ricavano dal diff:
   Questo e' un link da mandare a qualcuno, non una pagina da far indicizzare:
   se serve una superficie che prenda traffico, si fa una pagina, non un
   parametro.
+- **La querystring si modifica, non si riscrive.** Il primo giro la rifaceva
+  da zero e cancellava gli `utm_*` di chi arriva da una newsletter — mezzo
+  secondo dopo il caricamento, cioe' quasi sempre **prima** che il banner dei
+  cookie sia stato toccato e GA4 abbia mandato il `page_view`. L'attribuzione
+  della campagna sarebbe sparita in silenzio. Si toccano solo `prov`, `cat`,
+  `quando` e `q`; tutto il resto resta dov'e'.
 - **L'URL segue i filtri**, cosi' il link si costruisce toccando le tendine
   invece di scriverlo a mano — ed e' il modo in cui lo usera' chi non ricorda i
   nomi dei parametri. `replaceState` e non `pushState`: con `pushState` il tasto
