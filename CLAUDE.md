@@ -1539,6 +1539,13 @@ Ferragosto"): il pavimento feriale del 18-20 agosto è 271 clic al giorno, cioè
 agosto è ancora agosto — ma sposta l'aspettativa verso la terza riga della
 tabella invece che verso la prima.
 
+**E con il 22 agosto dentro la risposta parziale si rafforza** ("Un giorno dopo:
+il sabato senza feste batte Ferragosto"): la settimana 16-22 agosto fa 471,9 clic
+al giorno, cioè -3,2% dalla settimana di Ferragosto, con un sabato qualunque che
+segna il record del sito. Resta agosto, quindi resta una risposta parziale — ma
+il numero da temere il 15 settembre continua a scendere, e la riga della tabella
+verso cui punta è sempre la terza.
+
 La scommessa ragionevole è la seconda — 245 schede indicizzate che non si
 cancellano mai, e l'autunno piemontese ha il nome del paese attaccato a ogni
 evento — ma è una scommessa, e questa è la data in cui si riscuote. Il numero da
@@ -1600,6 +1607,94 @@ il 15 settembre, ma il numero da temere adesso è più basso di quanto sembrasse
 `fungh` zero, `zucca` 3 query per 114 impressioni, `tartufo` 1 per 7. È l'imbuto
 da dieci giorni della fonte, non un presagio — la stessa lettura del 15/08 e con
 lo stesso valore, cioè nessuno.
+
+#### Un giorno dopo: il sabato senza feste batte Ferragosto
+
+Export scaricato lo stesso 24/08 ma con la finestra spostata di un giorno,
+**26/07-22/08**. Un solo giorno in più, e cambia la risposta alla domanda "quanti
+clic al mese" — motivo per cui vale la pena tenere le due letture separate invece
+di sovrascrivere quella sopra.
+
+Totale: **8.151 clic, 102.706 impressioni, CTR 7,94%, posizione 6,13.** Italia
+sola 8,44% (il Regno Unito da solo fa 2.922 impressioni e 4 clic, cioè lo 0,14%:
+è il solito motore che ci mostra a chi cerca in inglese).
+
+| finestra | giorni | clic/giorno | run rate mensile |
+|---|---|---|---|
+| pre-infrastruttura (26/7-2/8) | 8 | **8,1** | 244 |
+| rampa (3-8/8) | 6 | 228,2 | 6.845 |
+| settimana di Ferragosto (9-15/8) | 7 | 487,7 | 14.631 |
+| **settimana dopo (16-22/8)** | 7 | **471,9** | **14.156** |
+
+**La settimana dopo Ferragosto sta a -3,2% dalla settimana di Ferragosto**, e
+sabato 22 agosto — nessuna festa comandata — fa **829 clic**, record assoluto,
+sopra i 787 del sabato di Ferragosto e i 603 dell'8. È la prima prova che il
+sistema non è la stagione, ed è più forte del pavimento feriale citato sopra.
+
+**Qui era scritto ~10-11.000 clic/mese, ed era una sottostima.** La stima si
+reggeva sul solo confronto fra feriali omologhi (270,7 contro 284,7, -5%), che è
+il metodo giusto per sapere se il pavimento tiene e quello sbagliato per sapere
+quanto fa il sito: **il pavimento non è più dove sta la crescita.** Il ritmo si è
+irrigidito su base settimanale — feriali fermi intorno a 270, venerdì e sabato
+che raddoppiano — quindi una media va presa su settimane intere, mai su una
+fascia di giorni scelta.
+
+**Il 22 agosto è l'ultimo giorno dell'export, quindi vale probabilmente ~10% in
+più.** Attenzione però a una cosa che si sarebbe potuta dedurre male: i giorni in
+comune fra questo export e quello che chiude al 21/08 sono **identici clic per
+clic** (13/8 594, 14/8 752, 15/8 787, 20/8 281, 21/8 577). Non smentisce la
+regola del consolidamento all'indietro — i due file sono scaricati lo stesso
+giorno, cioè sono la stessa istantanea — ma vuol dire che **la revisione non si
+osserva a un giorno di distanza**: quella misurata valeva a una settimana.
+
+Le quote per famiglia non si muovono, ed è il dato che dice che la struttura
+regge:
+
+| famiglia | pagine | clic | quota | impressioni | CTR |
+|---|---|---|---|---|---|
+| schede `/eventi/*` | 289 | 5.742 | **69,8%** | 58.185 | 9,87% |
+| `sagre-provincia-*` | 3 | 1.027 | 12,5% | 11.679 | 8,79% |
+| `eventi.html` | 1 | 629 | 7,7% | **22.847** | **2,75%** |
+| pagine comune | 16 | 290 | 3,5% | 5.332 | 5,44% |
+| `ferragosto.html` | 1 | 219 | 2,7% | 7.247 | 3,02% |
+| `weekend-provincia-*` | 3 | 180 | 2,2% | 2.328 | 7,73% |
+| `oggi-provincia-*` | 3 | 47 | 0,6% | 2.276 | 2,07% |
+| `luoghi.html` | 1 | 27 | 0,3% | 2.043 | 1,32% |
+
+**Il buco di `eventi.html` cresce di circa duemila impressioni a export**: 19.563
+(trimestre al 15/08) → 20.973 (28 giorni al 21/08) → **22.847** qui, sempre
+intorno al 2,7% di CTR e al 20% delle impressioni del sito. Non è una cosa da
+riparare toccando l'H1, è la ragione per cui esistono le pagine d'incrocio.
+
+##### Il brand è a zero, e questa è la risposta alla domanda sulle famiglie
+
+Su 1.000 query visibili (2.077 clic, cioè un quarto del traffico — il resto
+Google lo anonimizza):
+
+| | query | clic | impressioni |
+|---|---|---|---|
+| `daop` | 1 | 4 | **7** |
+| contengono "bambin*" | 14 | 4 | 75 |
+| contengono "weekend" | 30 | 46 | 1.553 |
+| contengono "oggi" | 213 | 224 | 6.538 |
+
+**Sette impressioni di brand su 102.706.** Il sito è il riferimento per "che
+sagra c'è a Grondona", non ancora per "dove porto i bambini": la porta funziona,
+la casa dietro la porta non la conosce nessuno. È il KPI del cavallo di Troia
+(vedi la memoria omonima) e va riletto a ogni export — **la curva delle query
+brand, non i clic**. Oggi la curva è piatta a zero, e non è un difetto: è il
+punto di partenza, misurato per la prima volta.
+
+Non se ne ricava che vada aggiunta una superficie "per famiglie": le tre pagine
+`weekend-provincia-*` sono già quella cosa e vincono le loro query. Quello che
+manca è la ragione per tornare **senza passare da Google**, che è la sola cosa
+che le query brand misurano.
+
+**Segnali d'autunno: ancora zero**, come nei due export precedenti — `halloween`,
+`castagn`, `presep`, `natal`, `vendemm`, `fungh` non compaiono affatto; `zucca` 3
+query per 173 impressioni, `tartufo` 1 per 7. E il sito gira a 14.000 clic al
+mese **su un mese che ha 89 eventi in agenda**, mentre ottobre ne ha 6: la
+sezione qui sotto resta l'unica cosa urgente di tutto questo export.
 
 #### L'imbuto si è accorciato, e ottobre è vuoto
 
@@ -2246,6 +2341,34 @@ Due filtri sono stati provati e tolti, per ragioni diverse:
   coperto, nessuno un posto dove passi il pomeriggio di pioggia. Il dato resta
   nella riga aperta, dove è un'informazione e non una promessa. **Un filtro che
   divide non è per forza un filtro che risponde.**
+
+### Un link con i filtri gia' messi, e perche' NON diventa una pagina
+
+Fatto il 25/08/2026, chiesto da Giovanni: un link agli eventi della sua
+provincia da mandare in giro. `eventi.html` legge quattro parametri —
+`?prov=`, `?cat=`, `?quando=`, `?q=` — e imposta le tendine prima del primo
+`apply()`. Sta nel JS in fondo alla pagina, cioe' nella parte scritta a mano:
+`_guscio()` copia solo `<style>`, nav e footer, quindi le altre pagine non lo
+prendono e non c'e' niente da tenere allineato.
+
+Tre decisioni che non si ricavano dal diff:
+
+- **Si scrive solo un valore che esiste nella tendina.** `?prov=to` non lascia
+  un filtro attivo che chi legge non sa da dove togliere: si ignora e la pagina
+  apre intera. Valgono anche gli alias comodi da scrivere a mano in un
+  messaggio (`cuneo`→`cn`, `sagre`→`feste`).
+- **Nessun link INTERNO usa questa forma.** Il canonical non porta parametri,
+  quindi `?prov=cn` non e' un doppione in indice — ma le pagine di intenzione
+  (`sagre-provincia-cuneo.html`, `weekend-provincia-cuneo.html`,
+  `/eventi/comune/*`) hanno un H1 e un title loro e **vincono le loro query**.
+  Questo e' un link da mandare a qualcuno, non una pagina da far indicizzare:
+  se serve una superficie che prenda traffico, si fa una pagina, non un
+  parametro.
+- **Con un preset attivo si scende all'agenda**, e dopo `load` non a un `rAF`:
+  con le locandine delle corsie ancora in arrivo la pagina cresce sotto i
+  piedi e uno scroll calcolato prima finisce nel posto sbagliato (provato).
+  Senza lo scroll si atterra sull'hero, che parla di tutte e tre le province,
+  e l'unica cosa che dice che il filtro c'e' sta uno schermo piu' giu'.
 
 ### La categoria si scrive, non solo si colora
 

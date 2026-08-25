@@ -5524,6 +5524,50 @@
     const comuni = document.querySelector('.ev-comuni-box');
     if (comuni && window.matchMedia('(max-width:600px)').matches) comuni.open = false;
 
+    // ── Filtro preimpostato da link ───────────────────────────────────────
+    // /eventi.html?prov=cn&cat=feste&quando=weekend&q=ovada
+    // Serve a chi condivide l'agenda gia' ristretta - un partner di zona, un
+    // messaggio su WhatsApp - senza che nasca una pagina nuova per ogni
+    // combinazione. Tre regole, e nessuna e' un dettaglio:
+    //  1. si scrive solo un valore che esiste DAVVERO nella tendina. Un
+    //     parametro sbagliato (?prov=to) non deve lasciare un filtro attivo che
+    //     chi legge non sa da dove togliere: si ignora e la pagina apre intera.
+    //  2. il canonical non porta parametri, quindi ?prov=cn non e' un doppione
+    //     in indice. Per la stessa ragione nessun link INTERNO usa questa forma:
+    //     le pagine di intenzione (/eventi/comune/*, sagre-provincia-*) esistono
+    //     gia', hanno un H1 e un title loro, e vincono le loro query. Questo e'
+    //     un link da mandare a qualcuno, non una pagina da far indicizzare.
+    //  3. se un filtro e' stato applicato si scende all'agenda: chi apre il link
+    //     atterrerebbe sull'hero, che parla di tutte e tre le province, e
+    //     l'unica cosa che gli dice che il filtro c'e' sta uno schermo piu' giu'.
+    (function preimpostato() {
+      const par = new URLSearchParams(location.search);
+      // sinonimi comodi da scrivere a mano in un messaggio
+      const alias = { alessandria: 'al', asti: 'at', cuneo: 'cn',
+                      sagre: 'feste', feste: 'feste', '7giorni': '7', settimana: '7' };
+      let messo = false;
+      [['prov', sel.province], ['cat', sel.category], ['quando', sel.date]].forEach(([nome, campo]) => {
+        let v = (par.get(nome) || '').trim().toLowerCase();
+        if (!v) return;
+        if (alias[v]) v = alias[v];
+        if (!Array.from(campo.options).some(o => o.value === v)) return;
+        campo.value = v;
+        messo = true;
+      });
+      const testo = (par.get('q') || '').trim();
+      if (testo) { q.value = testo; messo = true; }
+      if (!messo) return;
+      // Dopo 'load' e non a un rAF: con le locandine delle corsie ancora in
+      // arrivo la pagina cresce sotto i piedi, e uno scroll calcolato prima
+      // finisce nel posto sbagliato o viene riancorato dal browser (provato).
+      const vaiGiu = () => {
+        const testa = document.getElementById('ev-toolbar');
+        window.scrollTo({ top: Math.max(0, testa.getBoundingClientRect().top + window.scrollY - 200) });
+      };
+      if (document.readyState === 'complete') vaiGiu();
+      else window.addEventListener('load', vaiGiu, { once: true });
+    })();
+
     q.addEventListener('input', apply);
     Object.keys(sel).forEach(k => sel[k].addEventListener('change', apply));
     apply();
