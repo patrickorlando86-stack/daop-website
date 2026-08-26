@@ -6759,6 +6759,23 @@
   "nome": "Vesime",
   "prov": "AT"
  },
+ "vezzadalba": {
+  "eventi": {
+   "open-day-corsi-di-musica-crome-in-movimento-aps-vezza-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Crome in Movimento APS",
+    "manifest": "",
+    "nome": "Open Day Corsi di Musica - Crome in Movimento APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   }
+  },
+  "nome": "Vezza d'Alba",
+  "prov": "CN"
+ },
  "viarigi": {
   "eventi": {
    "saltimpiazza-viarigi": {
