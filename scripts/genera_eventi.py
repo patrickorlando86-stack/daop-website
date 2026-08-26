@@ -1749,6 +1749,33 @@ def segnala_doppioni(events):
                   f"{len(x['descr'])} caratteri")
 
 
+def segnala_senza_coordinate(events):
+    """Elenca le righe del foglio senza lat/lon, cioe' invisibili a "vicino a me".
+
+    PERCHE' ESISTE (26/08/2026). Le due colonne si compilano a mano, e una
+    riga che le lascia vuote non e' "lontana", e' sconosciuta: con un raggio
+    attivo resta fuori, sempre, anche se la festa e' a due chilometri. Non e'
+    un difetto del codice - geo_attrs() stampa quello che trova - quindi qui si
+    SEGNALA e basta, come per i doppioni e le durate assurde: si corregge nel
+    foglio, e va ricordato a ogni run finche' non lo si fa.
+
+    Il conto si stampa sempre, anche a zero mancanti: e' il numero che dice se
+    il filtro copre l'agenda o meta' di essa, ed e' l'unico posto in cui si
+    legge senza aprire GA4."""
+    senza = [e for e in events if not coord(e)]
+    tot = len(events)
+    if not senza:
+        print(f"[genera_eventi] coordinate: {tot}/{tot} righe georiferite")
+        return
+    print(f"[genera_eventi] ATTENZIONE: {len(senza)} righe su {tot} senza coordinate "
+          f"(Lat/Lng vuote o illeggibili). Restano fuori da \"vicino a me\" a "
+          f"qualunque raggio: si riempiono a mano nel foglio.")
+    for e in sorted(senza, key=lambda e: e['d_start']):
+        print(f"    {_rif(e)}  {e['d_start'].strftime('%d/%m')}  "
+              f"{(e.get('citta') or '?')[:18]:18} {(e.get('nome') or '')[:44]}")
+        print(f"                 luogo: {(e.get('luogo') or '(vuoto)')[:52]}")
+
+
 def aggiorna_registro(events):
     """Fonde gli eventi correnti nel registro persistente. Non rimuove nulla."""
     reg = carica_registro()
@@ -7275,6 +7302,7 @@ def main():
     segnala_doppioni(events)
     segnala_sovrapposizioni(events)
     segnala_durate_assurde(events)
+    segnala_senza_coordinate(events)
     assegna_ancore(events)
     # Il proprio numero si scrive PRIMA di generare qualunque pagina: la riga
     # delle quattro porte lo rilegge, e scritto dopo mostrerebbe quello di ieri
