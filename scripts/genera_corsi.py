@@ -30,6 +30,7 @@ import os
 import csv
 import io
 import json
+import re
 import datetime
 import urllib.request
 import urllib.parse
@@ -554,6 +555,24 @@ def _dati_realta(org, corsi_org, info):
     return dati
 
 
+def _paragrafi(testo, classe):
+    """Il testo di una societa' in paragrafi, non in un muro.
+
+    La descrizione della tab Realta la scrive una PERSONA, e chi scrive di se'
+    va a capo: la presentazione arrivata il 26/08/2026 era in sei capoversi.
+    Finiva tutta dentro un <p> solo, e in HTML gli a-capo valgono spazi - quindi
+    sul sito diventava un blocco unico da leggere col dito. Si taglia sulle
+    righe vuote e, se non ce ne sono, sui singoli a-capo: un testo scritto tutto
+    di fila resta un paragrafo solo, com'e' giusto."""
+    t = (testo or '').strip()
+    if not t:
+        return ''
+    pezzi = [p.strip() for p in re.split(r'\n\s*\n', t) if p.strip()]
+    if len(pezzi) == 1:
+        pezzi = [p.strip() for p in t.split('\n') if p.strip()]
+    return ''.join(f'<p class="{classe}">{G.esc(p)}</p>' for p in pezzi)
+
+
 def scheda_realta(org, corsi_org, info):
     """La scheda di una societa': l'ancora #r-… che le si manda su WhatsApp.
 
@@ -577,8 +596,13 @@ def scheda_realta(org, corsi_org, info):
     if descr:
         # In fondo all'elenco basta l'attacco: la descrizione intera si legge
         # sulla pagina della realta', che e' anche la ragione per andarci.
-        breve = G.trunc(descr, 220) if ha_pagina(info) else descr
-        dentro.append(f'<p class="co-realta-d">{G.esc(breve)}</p>')
+        if ha_pagina(info):
+            dentro.append(f'<p class="co-realta-d">'
+                          f'{G.esc(G.trunc(descr, 220))}</p>')
+        else:
+            # Nessuna pagina dedicata: qui c'e' TUTTO il testo, quindi i
+            # capoversi contano (vedi _paragrafi).
+            dentro.append(_paragrafi(descr, 'co-realta-d'))
 
     dati = _dati_realta(org, corsi_org, info)
     if dati:
@@ -834,7 +858,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
         testa.append(f'<img class="cr-logo" src="{G.esc(info["logo"])}" '
                      f'alt="Logo di {G.esc(org)}" loading="lazy" decoding="async">')
     if info.get('descr'):
-        testa.append(f'<p class="cr-descr">{G.esc(info["descr"])}</p>')
+        testa.append(_paragrafi(info['descr'], 'cr-descr'))
 
     # Gli stessi dati della scheda in corsi.html, e non un secondo elenco
     # scritto a mano: se un domani cambia l'ordine o si aggiunge un campo,
@@ -1095,8 +1119,19 @@ def card(c, idx, pagine=(), qui_org=None):
         tags.append('<span class="ev-pill is-openday">Open day</span>')
     # La prova e' il campo che decide: un genitore sceglie un corso dopo averlo
     # fatto provare al figlio. Sta in riga, non sepolta nel dettaglio.
+    #
+    # "GRATUITA" SOLO SE IL CAMPO LO DICE. Fino al 26/08/2026 il cartellino
+    # diceva sempre "Prova gratuita", anche su una cella che dice soltanto
+    # QUANDO si prova: la locandina di una scuola di musica scriveva "Lezione di
+    # prova venerdi 25 settembre" e la pagina ci leggeva sopra un prezzo che
+    # nessuno aveva promesso. Una prova a pagamento esiste, ed e' proprio il
+    # genitore che sceglie in base a questo a rimanere fregato.
     if c['prova']:
-        tags.append('<span class="ev-pill is-prova">Prova gratuita</span>')
+        gratis = any(x in c['prova'].lower()
+                     for x in ('gratuit', 'gratis', 'omaggio', 'libero'))
+        tags.append('<span class="ev-pill is-prova">'
+                    + ('Prova gratuita' if gratis else 'Lezione di prova')
+                    + '</span>')
 
     righe_det = []
     # La locandina si guarda, quindi qui va l'originale e non la miniatura — e'
