@@ -451,8 +451,18 @@ def leggi_realta(orgs):
     rispondesse con un foglio a caso che per disgrazia ha una colonna
     "Organizzatore", quel foglio non riuscirebbe comunque a entrare in pagina.
 
-    Il confronto e' sullo slug: nel foglio "PGS Roccavione" e "P.G.S.
-    Roccavione" sono la stessa societa' e non devono diventare due schede."""
+    Il confronto e' sullo slug, cioe' a meno di maiuscole, accenti, spazi e
+    punteggiatura AI BORDI: "crome in movimento" e "Crome in Movimento " sono la
+    stessa societa' e non devono diventare due schede.
+
+    ATTENZIONE a cosa NON fa, perche' qui c'era scritto il contrario e il
+    contrario e' comodo da credere: slugify() non toglie la punteggiatura, la
+    trasforma in trattini. "P.G.S. Roccavione" diventa `p-g-s-roccavione` e
+    "PGS Roccavione" diventa `pgs-roccavione` - due slug diversi, quindi due
+    societa' diverse in pagina, ognuna con la sua meta' dei corsi. Misurato il
+    25/08/2026 con una prova, non dedotto. L'unico rimedio e' scrivere il nome
+    allo stesso modo nel foglio: normalizzare piu' di cosi' vorrebbe dire
+    decidere da soli che due nomi diversi sono lo stesso ente."""
     chiavi = {G.slugify(o) for o in orgs if o}
     for tab in TABS_REALTA:
         try:
@@ -659,6 +669,50 @@ def slug_realta(org):
 
 def url_realta(org):
     return f"/{DIR_REALTA}/{slug_realta(org)}.html"
+
+
+def raggruppa_per_realta(corsi):
+    """I corsi raggruppati per SOCIETA': una voce per realta' vera.
+
+    La chiave e' lo SLUG del nome, non il nome. "Crome in Movimento" e "crome
+    in  movimento" sono la stessa societa' scritta da due locandine diverse, e
+    finche' si raggruppava sulla stringa grezza diventavano due voci: due schede
+    con meta' dei corsi ciascuna, ma con la STESSA ancora e lo STESSO file in
+    corsi/ - perche' quelli passano da slugify() da sempre. Cioe' un id doppio in
+    pagina, il link mandato alla societa' che ne apriva una sola, l'altra meta'
+    dei corsi invisibile a chi cliccava, e la pagina dedicata riscritta due volte
+    con l'elenco dimezzato.
+
+    Quello che questo NON risolve, e va detto qui perche' e' il posto dove uno
+    viene a cercarlo: "P.G.S. Roccavione" e "PGS Roccavione" fanno due slug
+    diversi (slugify trasforma i punti in trattini, non li toglie), quindi
+    restano due societa'. Li' non c'e' codice che tenga: il nome va scritto
+    uguale nel foglio.
+    La tab Realta era gia' d'accordo con questa lettura (leggi_realta confronta
+    gli slug, e il suo commento lo dice: "non devono diventare due schede"): era
+    il raggruppamento a non esserlo.
+
+    Il nome che si MOSTRA e' la grafia piu' frequente fra quelle trovate, a pari
+    merito la piu' lunga - che di solito e' quella scritta per intero. Il nome lo
+    stampa la scheda, quindi si sceglie quello che la societa' usa di piu', non
+    il primo che capita nell'ordine dell'elenco.
+
+    Due societa' DAVVERO diverse con lo stesso slug finirebbero insieme: e' un
+    caso che l'ancora e il nome del file avevano gia', e tenerlo uguale in tutti
+    e tre i posti e' meglio che avere un raggruppamento che non corrisponde ai
+    link che pubblica."""
+    per_slug = {}
+    for c in corsi:
+        nome = c['org'] or 'Altre realtà'
+        per_slug.setdefault(G.slugify(nome), []).append((nome, c))
+    gruppi = {}
+    for voci in per_slug.values():
+        grafie = {}
+        for nome, _ in voci:
+            grafie[nome] = grafie.get(nome, 0) + 1
+        etichetta = max(grafie, key=lambda n: (grafie[n], len(n)))
+        gruppi[etichetta] = [c for _, c in voci]
+    return gruppi
 
 
 def eventi_realta(corsi_org):
@@ -1491,9 +1545,7 @@ def render(corsi, css, nav, foot, realta=None):
     else:
         elenco = ('  <p class="co-nota">Le prime schede stanno arrivando.</p>')
 
-    gruppi = {}
-    for c in ordinati:
-        gruppi.setdefault(c['org'] or 'Altre realtà', []).append(c)
+    gruppi = raggruppa_per_realta(ordinati)
     if gruppi:
         blocchi = [scheda_realta(org, gruppi[org], realta.get(G.slugify(org), {}))
                    for org in sorted(gruppi, key=lambda s: s.lower())]
@@ -1650,9 +1702,7 @@ def main():
     # esistono per decidere dove manda il link "Organizzatore". Fra le due
     # chiamate la fonte e' la stessa (ha_pagina sulla riga della tab Realta),
     # quindi non possono divergere.
-    gruppi = {}
-    for c in corsi:
-        gruppi.setdefault(c['org'] or 'Altre realtà', []).append(c)
+    gruppi = raggruppa_per_realta(corsi)
     pagine = scrivi_realta(gruppi, realta, css, nav, foot)
     nuovo = render(corsi, css, nav, foot, realta)
     vecchio = open(PATH, encoding='utf-8').read() if os.path.exists(PATH) else ''
