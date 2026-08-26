@@ -841,7 +841,16 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
           }
           return;
         }
-        if(c.dataset[campo]!==v) ok=false;
+        // IL NOME DEL CAMPO NON E' SEMPRE IL NOME DELL'ATTRIBUTO. La tendina
+        // del comune si chiama "citta" (come la colonna del foglio) ma la
+        // scheda scrive data-city (come le pagine comune del resto del sito):
+        // qui si leggeva c.dataset.citta, cioe' undefined, e QUALUNQUE comune
+        // scelto nascondeva tutte le righe. Il filtro comune non ha mai
+        // funzionato, e non si vedeva perche' la tendina si stampa solo con due
+        // comuni in pagina: fino al 26/08/2026 di comune ce n'era uno.
+        // Trovato dalla prova che sceglie ogni voce e conta cosa resta.
+        var chiave = campo==='citta' ? 'city' : campo;
+        if(c.dataset[chiave]!==v) ok=false;
       });
       c.classList.toggle('is-hidden',!ok);
       if(ok){ vis++; orgVivi[c.dataset.org]=1; }
