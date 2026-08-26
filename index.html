@@ -522,10 +522,18 @@
 
   /* ── CHI SIAMO ── */
   #chi-siamo { background: var(--cream); }
+  /* Flex e non due colonne fisse: le schede sono tre (Patrick, Alessandra,
+     Giovanni) e in griglia la terza restava sola a sinistra con un buco a
+     destra ogni volta che ne stavano due per riga - cioe' su tutti i portatili
+     fra i 900 e i 1200px. In flex l'ultima riga si centra da se'.
+     Il tetto e' 370px: tre schede piu' due gap fanno 1174px, dentro i 1200 di
+     .section-inner. A 380 sforavano e la terza andava a capo anche su un
+     desktop pieno. */
   .team-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
+    display: flex; flex-wrap: wrap; justify-content: center;
     gap: 32px; margin-top: 56px;
   }
+  .team-grid > .team-card { flex: 1 1 300px; max-width: 370px; }
   .team-card {
     background: white;
     border-radius: var(--radius-lg);
@@ -1042,7 +1050,8 @@
     .hero-content { grid-template-columns: 1fr; gap: 32px; padding: 84px 24px 60px; }
     .hero-content > div:first-child { display: none; }
     .hero-card { padding: 28px 24px; }
-    .team-grid, .piatto-layout, .benefits-grid { grid-template-columns: 1fr; }
+    .piatto-layout, .benefits-grid { grid-template-columns: 1fr; }
+    .team-grid > .team-card { flex-basis: 100%; max-width: 420px; }
     .ginetto-grid { grid-template-columns: 1fr; gap: 40px; }
     .ginetto-grid > div:first-child { order: 2; }
     .ginetto-grid > div:last-child { order: 1; }
@@ -1469,7 +1478,7 @@
   <div class="section-inner">
     <span class="section-label fade-in">Chi Siamo</span>
     <h2 class="section-title fade-in">Il cuore della community</h2>
-    <p class="section-subtitle fade-in">«Dove andiamo oggi papi?» — è la domanda di mio figlio che ha dato vita a tutto. Dal 2023 DAOP è cresciuta fino a diventare una community, Ginetto AI, libri e Il Piatto Sano. Alessandra si è unita come socia fondatrice e curatrice per la provincia di Asti.</p>
+    <p class="section-subtitle fade-in">«Dove andiamo oggi papi?» — è la domanda di mio figlio che ha dato vita a tutto. Dal 2023 DAOP è cresciuta fino a diventare una community, Ginetto AI, libri e Il Piatto Sano. Alessandra si è unita come socia fondatrice e curatrice per la provincia di Asti, Giovanni cura quella di Cuneo.</p>
     <div class="team-grid">
       <div class="team-card fade-in fade-in-delay-1">
         <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#3d6e74);position:relative;">
@@ -1499,6 +1508,22 @@
             <a href="https://www.instagram.com/wonder_alepippi/" target="_blank" rel="noopener" class="team-social-btn">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               @wonder_alepippi
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card fade-in fade-in-delay-3">
+        <div class="team-photo" style="background:linear-gradient(135deg,#6ba5a8,#2d4a5c);position:relative;">
+          <img loading="lazy" src="assets/images/giovanni.webp" alt="Giovanni" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" width="420" height="662">
+        </div>
+        <div class="team-body">
+          <div class="team-role">Curatore DAOP Cuneo</div>
+          <div class="team-name">Giovanni</div>
+          <p class="team-desc">Cura gli eventi per la provincia di Cuneo. Seleziona e verifica le proposte del territorio, aggiorna le pagine DAOP Cuneo e tiene il filo con le famiglie della zona.</p>
+          <div class="team-socials">
+            <a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener" class="team-social-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              @daop_cuneo
             </a>
           </div>
         </div>

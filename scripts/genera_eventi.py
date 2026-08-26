@@ -58,11 +58,13 @@ PROVINCE_IG = {
     'AT': {'ig': 'daop_asti', 'nostra': True,
            'fb': 'https://www.facebook.com/daopasti',
            'curatore': 'Alessandra Zaccone'},
-    # Non e' un curatore DAOP: la provincia la segue una pagina esterna e noi la
-    # ospitiamo. Scriverlo e' meglio che lasciar credere che ci sia qualcuno di
-    # nostro sul posto. Il nome proprio c'e' lo stesso: una collaborazione con
-    # una persona con un nome pesa diverso da una con un handle.
-    'CN': {'ig': 'eventi_bambini_provincia_cuneo', 'nostra': False,
+    # Dal 26/08/2026 e' una pagina DAOP come le altre due: era
+    # @eventi_bambini_provincia_cuneo, una pagina esterna che ospitavamo, ed e'
+    # diventata @daop_cuneo con Giovanni curatore. Il flag 'nostra' non e' un
+    # dettaglio grafico: girandolo, zone.html, le firme delle schede e le pagine
+    # di provincia smettono da sole di scrivere "una pagina che non e' nostra".
+    # Nessun Facebook: quello che non c'e' non si stampa.
+    'CN': {'ig': 'daop_cuneo', 'nostra': True,
            'curatore': 'Giovanni'},
 }
 
