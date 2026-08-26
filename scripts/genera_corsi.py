@@ -463,6 +463,10 @@ COLONNE_REALTA = {
     # perche' quella colonna Luoghi non ce l'ha.
     'nome': ('organizzatore', 'realtà', 'realta', 'società', 'societa',
              'ente', 'associazione', 'nome realtà', 'nome realta'),
+    # Lo STATO della trattativa, e da qui dipende se la pagina entra in Google
+    # (vedi confermata()). Una parola in una cella, scritta da una persona: e'
+    # l'unico passaggio del giro che una persona deve fare.
+    'stato': ('stato', 'stato scheda', 'fase'),
     'descr': ('descrizione', 'descrizione breve', 'presentazione', 'note'),
     'logo': ('logo', 'immagine', 'stemma'),
     'citta': ('città', 'citta', 'comune', 'paese'),
@@ -485,13 +489,29 @@ TABS_REALTA = [TAB_REALTA] if TAB_REALTA else ['Realta', 'Realtà', 'Organizzato
 
 
 def _mappa_realta(header):
+    """Da intestazione a indice di colonna. VINCE L'ALIAS PIU' PRECISO.
+
+    Prima vinceva la colonna piu' a SINISTRA, e su un foglio vissuto non e' la
+    stessa cosa. Il 26/08/2026 la tab Realta aveva due colonne per il comune:
+    "Comune" in D (rimasta da una versione vecchia) e "Città" in K, che e' quella
+    che il downloader scrive. Il generatore leggeva D, cioe' la colonna vuota, e
+    la pagina si salvava solo perche' _dati_realta ripiega sul comune dei corsi:
+    su una societa' con la sede in un comune diverso da dove tiene i corsi
+    avrebbe pubblicato quello sbagliato, e in silenzio.
+    Ordinare per posizione nella lista degli alias risolve senza toccare il
+    foglio di nessuno: il primo alias e' il nome canonico, quello che scriviamo
+    noi, e i successivi restano ripieghi per le grafie di chi compila a mano.
+    """
     out = {}
     for i, h in enumerate(header):
         h_norm = (h or '').strip().lower()
         for campo, alias in COLONNE_REALTA.items():
-            if h_norm in alias and campo not in out:
-                out[campo] = i
-    return out
+            if h_norm not in alias:
+                continue
+            preciso = alias.index(h_norm)
+            if campo not in out or preciso < out[campo][0]:
+                out[campo] = (preciso, i)
+    return {campo: i for campo, (_p, i) in out.items()}
 
 
 def leggi_realta(orgs):
@@ -750,6 +770,34 @@ MIN_DESCR_REALTA = 120
 DIR_REALTA = 'corsi'
 
 
+# Gli stati che valgono "la societa' ha detto sì". Sono tre e non uno perche' il
+# giro va avanti: il programma sposta "confermata" in "pubblicata" quando ha
+# fatto il suo (vedi avanza_stati_realta nel downloader), e "fatturata" e' un
+# fatto commerciale che non deve far uscire la pagina dall'indice.
+# Il confronto e' sul PRIMO pezzo della cella: chi scrive a mano aggiunge le date
+# ("confermata 26/08"), e una parola in piu' non deve valere un no.
+STATI_CONFERMATI = ('confermata', 'confermato', 'pubblicata', 'pubblicato',
+                    'fatturata', 'fatturato', 'ok', 'si', 'sì')
+
+
+def confermata(info):
+    """La societa' ha confermato i suoi dati?
+
+    E' la condizione per mettere la sua pagina in Google, e sostituisce
+    l'interruttore a mano che c'era prima. Il commento di CORSI_IN_INDICE lo
+    diceva gia': "si riaccende quando i corsi in pagina sono dati verificati -
+    non c'e' una soglia automatica apposta, il problema non e' quanti corsi ci
+    sono, e' che quelli che ci sono vanno confermati da chi li organizza". Quel
+    "chi li organizza" adesso ha una cella dove rispondere.
+
+    Vuoto vuol dire NO. Una scheda appena nata non e' confermata, e il silenzio
+    non si interpreta mai come un sì: e' la stessa regola dei luoghi ("senza un
+    sì umano non si genera niente").
+    """
+    prima = (info or {}).get('stato', '').strip().lower().split()
+    return bool(prima) and prima[0].strip('.,;:') in STATI_CONFERMATI
+
+
 def ha_pagina(info):
     """Vero se questa realta' si merita una pagina sua.
 
@@ -951,7 +999,12 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
                     f"{org}: {len(corsi_org)} corsi per bambini e ragazzi"
                     f"{f' a {citta}' if citta else ''}"
                     f"{', ' + ', '.join(disc).lower() if disc else ''}.", 300)
-    robots = 'index, follow' if G.CORSI_IN_INDICE else 'noindex, follow'
+    # IN INDICE SE LA SOCIETA' HA CONFERMATO, una per una. L'interruttore globale
+    # resta padrone dell'hub (/corsi.html, la nav, le quattro porte): quella e'
+    # una decisione sulla sezione. Ma la singola pagina non ha bisogno di
+    # aspettare le altre - i suoi dati li ha confermati chi li conosce, e quella
+    # era l'unica condizione che mancava.
+    robots = ('index, follow' if confermata(info) else 'noindex, follow')
 
     testa = []
     if info.get('logo'):
@@ -1075,13 +1128,18 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
     import glob as _glob
     dest = os.path.join(ROOT, DIR_REALTA)
     os.makedirs(dest, exist_ok=True)
-    vive, scritte = set(), 0
+    vive, scritte, in_indice = set(), 0, set()
     for org, v in gruppi.items():
         info = realta.get(G.slugify(org), {})
         if not ha_pagina(info):
             continue
         f = f"{slug_realta(org)}.html"
         vive.add(f)
+        # Solo le confermate vanno in sitemap. Non e' una restrizione in piu':
+        # e' l'invariante che aggiorna_sitemap dichiara gia' - una URL in
+        # sitemap con robots noindex sono due ordini che si contraddicono.
+        if confermata(info):
+            in_indice.add(f)
         path = os.path.join(dest, f)
         nuovo = pagina_realta(org, v, info, css, nav, foot)
         vecchio = open(path, encoding='utf-8').read() if os.path.exists(path) else ''
@@ -1094,13 +1152,19 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
             os.remove(path)
             tolte.append(os.path.basename(path))
     print(f"[genera_corsi] pagine realta': {len(vive)} pubblicate "
-          f"({scritte} riscritte)"
+          f"({scritte} riscritte), {len(in_indice)} in indice"
           + (f", {len(tolte)} tolte: {', '.join(tolte)}" if tolte else ""))
+    if vive and not in_indice:
+        # Va DETTO, non dedotto dal silenzio: una pagina online e fuori da
+        # Google somiglia in tutto a una in indice, e la differenza la vede solo
+        # chi guarda il sorgente.
+        print(f"[genera_corsi] nessuna realta' ha lo Stato 'confermata' nella "
+              f"tab Realta: le pagine sono online ma tutte noindex")
     if not vive:
         print(f"[genera_corsi] nessuna realta' ha una descrizione di almeno "
               f"{MIN_DESCR_REALTA} caratteri nella tab Realta: nessuna pagina "
               f"dedicata (resta la scheda in corsi.html)")
-    return vive
+    return in_indice
 
 
 # ── CHI RISPONDE A CHI SCRIVE ────────────────────────────────────────────
