@@ -2213,7 +2213,20 @@ Le decisioni, che è quello che non si ricava dal diff:
   che la posizione resta nel browser. Nessuno qui sa quanto gira la strada, e
   far credere il contrario è peggio che non dare la distanza.
 - **Una riga senza coordinate non è "lontana", è sconosciuta**: con un raggio
-  attivo resta fuori. Oggi sono zero su 278, ma il foglio si compila a mano.
+  attivo resta fuori. Il foglio si compila a mano, quindi succede: il 26/08/2026
+  erano 2 righe su 188 (Pornassio, Mondovì). `segnala_senza_coordinate()` le
+  elenca a ogni run con il numero di riga, accanto ai doppioni e alle durate
+  assurde — si riempiono nel foglio, non nel codice.
+- **La prova NON pretende il 100%, e il perché conta.** Fino al 26/08/2026
+  `tests/agenda.js` e `tests/landing.js` chiedevano che *ogni* riga portasse le
+  coordinate, e la run notturna è diventata rossa alla prima cella vuota
+  (186/188) mentre il sito faceva esattamente la cosa giusta: `geo_attrs()`
+  stampa quello che trova e la riga scoperta resta fuori dal raggio. È lo stesso
+  difetto già corretto il 21/08 sulla prova del conteggio nelle quattro porte —
+  **una prova che pretende un dato compilato a mano è rossa quando manca il dato,
+  non quando c'è un difetto.** Ora la soglia è il **95% delle righe** e le
+  scoperte si stampano come nota: la regressione vera — `geo_attrs()` che smette
+  di stampare — fa crollare la copertura, non scendere di due righe.
 - **Sta fuori dalla barra appiccicosa.** Quella è scesa a ~109px sul telefono e
   una riga in più la farebbe ricrescere per tutto lo scorrimento.
 

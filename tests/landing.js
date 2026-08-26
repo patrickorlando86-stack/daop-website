@@ -306,7 +306,18 @@ module.exports = async function landing(browser) {
 
     r.ok(await page.evaluate(() => window.__geo) === 0,
       'la posizione NON si chiede al caricamento');
-    r.ok(conCoord === righe, `ogni riga porta le coordinate: ${conCoord}/${righe}`);
+    // Stessa soglia dell'agenda, per la stessa ragione: le due colonne del
+    // foglio si compilano a mano, e una riga scoperta resta fuori dal raggio
+    // per scelta. Quello che deve restare rosso e' il crollo, non la cella
+    // vuota. Vedi il commento lungo in tests/agenda.js.
+    const COPERTURA_MIN = 0.95;
+    r.ok(conCoord >= Math.ceil(righe * COPERTURA_MIN),
+      `le righe portano le coordinate: ${conCoord}/${righe}`
+      + ` (soglia ${Math.ceil(righe * COPERTURA_MIN)})`);
+    if (conCoord < righe) {
+      console.log(`  --   ${righe - conCoord} righe senza coordinate `
+        + '(Lat/Lng da riempire nel foglio, non un difetto del generatore)');
+    }
     r.ok(await page.locator('#ev-geo').isVisible(),
       'il modulo condiviso si e\' acceso anche qui');
 
