@@ -83,7 +83,7 @@ module.exports = async function corsi(browser) {
   });
   const divide = distinti.cat > 1 || distinti.citta > 1 || distinti.fasce > 1;
   r.ok(toolbar === (divide ? 1 : 0),
-    `discipline ${distinti.cat}, comuni ${distinti.citta}, fasce eta ${distinti.fasce}`
+    `attivita ${distinti.cat}, comuni ${distinti.citta}, fasce eta ${distinti.fasce}`
     + ` -> ${divide ? "almeno un comando divide" : "nessun comando dividerebbe"}`
     + `, barra ${toolbar ? "stampata" : "non stampata"}`);
 
@@ -163,18 +163,42 @@ module.exports = async function corsi(browser) {
   r.ok(await det.evaluate((d) => !d.hidden), 'la riga si apre al tocco');
   r.ok((await det.innerText()).trim().length > 20, 'aperta, la riga dice qualcosa');
 
-  // ── 3. l'eta' mostrata e' quella calcolata dalle annate ───────────────
-  // Se un giorno l'eta' tornasse a essere copiata da una colonna scritta a
-  // mano, a settembre la pagina pubblicherebbe la fascia dell'anno prima.
+  // ── 3. l'eta' in riga: O calcolata dalle annate, O scritta sulla locandina ─
+  // Fino al 26/08/2026 qui si provava una regola sola: la fascia in riga DEVE
+  // essere quella calcolata da annate + stagione. Nasceva giusta - un'eta'
+  // dedotta dalle annate slitta di un anno a ogni stagione, e una colonna
+  // scritta a mano a settembre pubblica la fascia dell'anno prima.
+  //
+  // Ma le annate le stampano le societa' sportive, non le scuole di musica: sui
+  // volantini di Crome c'era "per bambini 3-5 anni", "a partire dai 4 anni".
+  // Buttarle voleva dire sei corsi su sei fuori dalla tendina eta', ed e' stato
+  // il primo rilievo di Giovanni sulla pagina ("manca l'eta': fondamentale,
+  // altrimenti non funzionano i filtri"). Un'eta' STAMPATA non invecchia:
+  // descrive il corso, non un gruppo di nati.
+  //
+  // Quindi le regole sono due, e la scheda dice quale vale (data-etada). La
+  // prova le tiene separate a posta: se un domani il ramo "annate" tornasse a
+  // copiare una colonna scritta a mano, questa resta rossa come prima.
   const incoerenti = await page.$$eval('.event-card[data-etamin]', (cards) =>
     cards.filter((c) => {
       const lo = c.dataset.etamin, hi = c.dataset.etamax;
+      const riga = c.querySelector('.ev-line').textContent;
+      if (c.dataset.etada === 'testo') {
+        // Il ramo "scritta": in riga ci deve stare l'eta' come l'ha scritta la
+        // locandina, e almeno il numero di partenza deve tornare con la fascia
+        // usata dal filtro - se no il filtro e la riga direbbero due cose.
+        return !new RegExp(`\\b${lo}\\b`).test(riga) || !/ann/i.test(riga);
+      }
       const atteso = lo === hi ? `${lo} anni` : `${lo}-${hi} anni`;
-      return !c.querySelector('.ev-line').textContent.includes(atteso);
-    }).map((c) => c.querySelector('.ev-name').textContent.trim()));
+      return !riga.includes(atteso);
+    }).map((c) => `${c.querySelector('.ev-name').textContent.trim()}`
+      + ` [${c.dataset.etada}]`));
+  const daAnnate = await page.$$eval('.event-card[data-etada="annate"]', (c) => c.length);
+  const daTesto = await page.$$eval('.event-card[data-etada="testo"]', (c) => c.length);
   r.ok(incoerenti.length === 0, incoerenti.length
-    ? `eta' in riga diversa da quella calcolata: ${incoerenti.join(', ')}`
-    : "l'eta' in riga e' sempre quella calcolata dalle annate");
+    ? `eta' in riga incoerente: ${incoerenti.join(', ')}`
+    : `l'eta' in riga torna su tutte: ${daAnnate} calcolate dalle annate, `
+      + `${daTesto} scritte sulla locandina`);
 
   // ── 4. nei referenti i nomi, mai i numeri ─────────────────────────────
   const conNumero = await page.$$eval('.co-dati', (dls) => {
@@ -446,7 +470,16 @@ module.exports = async function corsi(browser) {
     // Il materiale che giustifica la pagina. Senza descrizione questa pagina
     // dice meno della scheda che la realta' ha gia' in corsi.html, cioe' e' un
     // doppione piu' debole del proprio riassunto.
-    const descr = await q.page.locator('.cr-descr').innerText().catch(() => '');
+    // textContent e non innerText, e su TUTTI i paragrafi. Due ragioni, ed
+    // entrambe sono cambiamenti del 26/08/2026: la descrizione esce in
+    // paragrafi (una persona che scrive di se' va a capo, e prima finivano
+    // schiacciati in un <p> solo), e sta dentro un <details> che nasce chiuso
+    // (Giovanni: "posso anche non volerla leggere"). innerText su un elemento
+    // chiuso torna vuoto, e su un locator che pesca sei paragrafi non torna
+    // affatto. Quello che questa prova deve garantire non e' "si vede adesso":
+    // e' "il materiale che giustifica la pagina c'e'".
+    const descr = await q.page.$$eval('.cr-descr',
+      (ps) => ps.map((p) => p.textContent).join(' ')).catch(() => '');
     r.ok(descr.trim().length >= 120,
       `${f}: descrizione di ${descr.trim().length} caratteri`);
 
@@ -524,13 +557,21 @@ module.exports = async function corsi(browser) {
   for (const riga of await b.page.locator('.event-card[data-org] .ev-row').all()) {
     await riga.click();
   }
-  const esterni = await b.page.$$eval('[data-org] a[href]', (as) => as
-    .map((a) => a.getAttribute('href') || '')
-    .filter((h) => /^(tel:|mailto:)/.test(h) || /^https?:\/\//i.test(h)));
+  // SI ITERA SUGLI ELEMENTI, NON SUGLI HREF. Prima si raccoglievano gli href e
+  // per ognuno si cliccava `[href="..."]`.first(): con due corsi che portano lo
+  // stesso numero — cioe' con una societa' che ha sei corsi e un telefono solo,
+  // il caso normale — si cliccava tre volte la STESSA ancora e le ripetizioni
+  // risultavano non tracciate. Il sito non c'entrava niente: era la prova a
+  // contare male, e lo si e' visto solo il 26/08/2026, quando in pagina e'
+  // entrata la prima societa' con piu' di un corso allo stesso recapito.
+  const esterni = await b.page.locator(
+    '[data-org] a[href^="tel:"], [data-org] a[href^="mailto:"], '
+    + '[data-org] a[href^="http:"], [data-org] a[href^="https:"]').all();
   let orfani = 0;
-  for (const href of esterni) {
+  for (const ancora of esterni) {
+    const href = await ancora.getAttribute('href');
     await b.page.evaluate(() => { window.__ga = []; });
-    await b.page.locator(`[data-org] a[href="${href}"]`).first().click();
+    await ancora.click();
     // Non `__ga[0]`: aprendo i dettagli la pagina cambia altezza e uno
     // `scroll_depth` puo' infilarsi davanti al clic. Si cerca la destinazione.
     const p = await b.page.evaluate((h) => {

@@ -220,6 +220,57 @@ def _numeri4(s):
     return _re.findall(r'\d{4}', str(s or ''))
 
 
+def eta_da_testo(testo):
+    """La fascia (lo, hi) letta da un'eta' SCRITTA A PAROLE, o None.
+
+    Nasce dal feedback di Giovanni del 26/08/2026 - "nella schedina manca
+    l'eta': fondamentale, altrimenti non funzionano i filtri" - e dalla ragione
+    per cui mancava: eta_range() la ricava dalle ANNATE, e una scuola di musica
+    le annate non le stampa. Sui quattro volantini di Crome c'era scritto "per
+    bambini 3-5 anni", "a partire dai 4 anni", "non ci sono limiti d'eta'":
+    informazione buona, che nessun filtro poteva leggere.
+
+    E' un'altra cosa dalle annate, e non le sostituisce: un'annata slitta di un
+    anno a ogni stagione ("Under 8" = 2018-2019, poi 2019-2020), un'eta'
+    stampata su un volantino no - "dai 3 ai 5 anni" descrive il corso, non una
+    leva di nati. Per questo qui si puo' leggere senza che invecchi.
+
+    Tre forme, e basta quelle: "3-5 anni" (due numeri), "dai 4 anni" (da la' in
+    su), "fino a 10 anni" (da zero a la'). "Tutte le eta'" non da' nessuna
+    fascia a posta: non e' un filtro, e' l'assenza di filtro.
+    """
+    import re as _re
+    t = (testo or '').strip().lower()
+    if not t:
+        return None
+    numeri = [int(x) for x in _re.findall(r'\d{1,2}', t)]
+    if not numeri:
+        return None
+    if len(numeri) >= 2:
+        lo, hi = min(numeri[:2]), max(numeri[:2])
+    elif _re.search(r'\b(fino|entro|max|massimo)\b', t):
+        lo, hi = 0, numeri[0]
+    else:
+        # "dai 4 anni", "a partire dai 4 anni", "4+": il tetto e' quello del
+        # sito (18), non 25: sopra i 18 non e' piu' un corso per bambini e la
+        # fascia larghissima farebbe comparire il corso in ogni filtro.
+        lo, hi = numeri[0], 18
+    return (lo, hi) if 0 <= lo <= hi <= 25 else None
+
+
+def eta_min_max(c):
+    """La fascia da usare PER FILTRARE: prima le annate, poi l'eta' scritta.
+
+    Sta a parte da eta_range() a posta. eta_range() e' la regola gemella di
+    _attivitaEtaRange in app.js (repo daop-mobile) e le due devono restare
+    identiche: qui dentro invece c'e' un RIPIEGO che di la' non c'e' ancora.
+    Tenerle separate vuol dire che il gemello non e' rotto - fa quello che ha
+    sempre fatto - e che quando si porta anche la' si sa esattamente cosa
+    portare.
+    """
+    return eta_range(c) or eta_da_testo(c.get('eta'))
+
+
 def eta_testo(c):
     r = eta_range(c)
     if not r:
@@ -604,17 +655,33 @@ def scheda_realta(org, corsi_org, info):
             # capoversi contano (vedi _paragrafi).
             dentro.append(_paragrafi(descr, 'co-realta-d'))
 
-    dati = _dati_realta(org, corsi_org, info)
-    if dati:
-        dentro.append('<dl class="co-dati">' + ''.join(
-            f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>')
+    # SINTETICA SE HA UNA PAGINA SUA (26/08/2026, Giovanni: "le schede
+    # potrebbero essere anche piu' sintetiche, immaginando di avere piu' realta'
+    # ancora, cosi' da scorrerle piu' facilmente"). Ha ragione, e la regola che
+    # regge e' quella del doppione: contatti e elenco corsi non si perdono, sono
+    # a un clic e su quella pagina stanno scritti meglio. Ripeterli qui allunga
+    # una lista che serve a SCORRERE.
+    # Quando la pagina NON c'e', invece, questa scheda e' l'unico posto dove
+    # quelle informazioni esistono: resta piena com'era.
+    if not ha_pagina(info):
+        dati = _dati_realta(org, corsi_org, info)
+        if dati:
+            dentro.append('<dl class="co-dati">' + ''.join(
+                f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>')
 
-    # I corsi che organizza, linkati alla loro riga: e' quello che rende questa
-    # scheda una scheda e non un riquadro di contatti.
-    voci = ' · '.join(f'<a href="#{_id_corso(c)}">{G.esc(c["nome"])}</a>'
-                      for c in corsi_org)
-    dentro.append(f'<p class="co-realta-corsi"><strong>'
-                  f'{"Corsi" if len(corsi_org) > 1 else "Corso"}:</strong> {voci}</p>')
+        # I corsi che organizza, linkati alla loro riga: e' quello che rende
+        # questa scheda una scheda e non un riquadro di contatti.
+        voci = ' · '.join(f'<a href="#{_id_corso(c)}">{G.esc(c["nome"])}</a>'
+                          for c in corsi_org)
+        dentro.append(f'<p class="co-realta-corsi"><strong>'
+                      f'{"Corsi" if len(corsi_org) > 1 else "Corso"}:</strong> {voci}</p>')
+    else:
+        # Un numero, non un elenco: dice la dimensione senza occupare tre righe.
+        dentro.append(f'<p class="co-realta-corsi">'
+                      f'{len(corsi_org)} '
+                      f'{"corsi" if len(corsi_org) > 1 else "corso"}'
+                      + (f' · {G.esc(", ".join(_uniche(_cat_foglia(c) for c in corsi_org)[:3]))}'
+                         if _cat_foglia(corsi_org[0]) else '') + '</p>')
 
     # Gli appuntamenti speciali. Restano EVENTI e vivono nella tab Eventi: qui
     # se ne stampa solo il rimando, come fa la riga open day dei corsi. Un
@@ -637,9 +704,15 @@ def scheda_realta(org, corsi_org, info):
 
     # <div> e non <section>: section{padding:100px 24px} arriva dal CSS di
     # sistema, e una scheda nascosta dai filtri lascerebbe 200px di niente.
+    # IL NOME E' CLICCABILE quando c'e' una pagina dove andare (26/08/2026,
+    # Giovanni: "metterei cliccabile direttamente il nome"). Non sostituisce il
+    # link in fondo alla scheda: il nome e' il primo posto dove uno clicca, e
+    # trovarlo morto e' un clic che non risponde.
+    titolo = (f'<a href="{url_realta(org)}">{G.esc(org)}</a>'
+              if ha_pagina(info) else G.esc(org))
     return (f'  <div class="co-realta" id="{a}" data-org="{G.slugify(org)}"'
             f' data-org-nome="{G.esc(org)}">\n'
-            f'    <h3>{G.esc(org)}</h3>\n    '
+            f'    <h3>{titolo}</h3>\n    '
             + '\n    '.join(dentro) + '\n  </div>')
 
 
@@ -807,6 +880,20 @@ CSS_REALTA = """
 .cr-ev-n{font-weight:700;font-size:.98rem}
 .cr-ev-q{font-size:.86rem;opacity:.72}
 .cr-torna{margin:30px 0 0;font-size:.95rem}
+/* Il sottotitolo sotto l'H1: dice cosa fa la societa' e dove, che l'H1 (il solo
+   nome) non dice. */
+.cr-sub{margin:6px 0 0;font-size:1.02rem;opacity:.85}
+/* "Chi e' ...": la descrizione che si apre e si chiude. Il triangolino di
+   sistema non si tocca — e' l'unica cosa che dice "questo si apre" senza
+   spiegarlo. */
+.cr-chi{margin:22px 0 0}
+.cr-chi>summary{cursor:pointer;font-weight:700;font-size:1.02rem;
+  padding:10px 0;list-style:none}
+.cr-chi>summary::-webkit-details-marker{display:none}
+.cr-chi>summary::before{content:"▸ ";display:inline-block;transition:transform .15s}
+.cr-chi[open]>summary::before{content:"▾ "}
+.cr-chi>summary:hover{text-decoration:underline}
+.cr-chi .cr-descr:first-of-type{margin-top:4px}
 """
 
 
@@ -845,6 +932,19 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     citta = (info.get('citta') or '').strip() or ', '.join(
         _uniche(c['citta'] for c in corsi_org))
     disc = _uniche(_cat_foglia(c) for c in corsi_org)
+    # L'OCCHIELLO PORTA LA MACRO, NON LA DISCIPLINA (26/08/2026, Giovanni: "il
+    # 'coro' secondo me e' troppo specifico, in fondo loro non fanno solo coro,
+    # ma insegnano anche strumenti"). Prendeva disc[0], cioe' una disciplina a
+    # caso fra le sei di una scuola di musica: la pagina si presentava come
+    # "VEZZA D'ALBA · CORO". La macro le contiene tutte.
+    macro = _uniche(_cat_macro(c) for c in corsi_org)
+    # Il sottotitolo sotto l'H1, che e' anche l'H1 "parlante" che Giovanni
+    # chiedeva nei suggerimenti SEO ("Corsi di musica per bambini a Vezza
+    # d'Alba"): l'H1 resta il nome della societa', questo dice cosa fa e dove.
+    che_corsi = (f"Corsi di {', '.join(m.lower() for m in macro[:2])}"
+                 if macro else "Corsi")
+    occhiello = (f'<p class="cr-sub">{G.esc(che_corsi)} per bambini'
+                 f'{f" a {G.esc(citta)}" if citta else ""}</p>')
     url = f"{SITE_URL}{url_realta(org)}"
     titolo = f"{org}: corsi per bambini{f' a {citta}' if citta else ''} | DAOP"
     descr = G.trunc((info.get('descr') or '').strip() or
@@ -858,7 +958,19 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
         testa.append(f'<img class="cr-logo" src="{G.esc(info["logo"])}" '
                      f'alt="Logo di {G.esc(org)}" loading="lazy" decoding="async">')
     if info.get('descr'):
-        testa.append(_paragrafi(info['descr'], 'cr-descr'))
+        # LA DESCRIZIONE SI APRE E SI CHIUDE (26/08/2026, Giovanni: "posso anche
+        # non volerla leggere"). E' il testo piu' lungo della pagina e sta sopra
+        # i corsi, cioe' sopra la cosa per cui uno e' arrivato qui: chiusa, i
+        # corsi partono subito; aperta, si legge tutta.
+        # <details> e non un blocco in JS: il testo resta nell'HTML (Google lo
+        # legge, ed e' la descrizione della societa'), funziona senza script e
+        # non ha uno stato da sincronizzare.
+        # `open` sulle descrizioni corte: se sta in tre righe, chiuderla e' un
+        # clic chiesto per niente.
+        aperto = ' open' if len(info['descr'].strip()) < 400 else ''
+        testa.append(
+            f'<details class="cr-chi"{aperto}><summary>Chi è {G.esc(org)}</summary>'
+            + _paragrafi(info['descr'], 'cr-descr') + '</details>')
 
     # Gli stessi dati della scheda in corsi.html, e non un secondo elenco
     # scritto a mano: se un domani cambia l'ordine o si aggiunge un campo,
@@ -873,7 +985,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     ev = eventi_realta(corsi_org)
     blocco_ev = ''
     if ev:
-        blocco_ev = ('  <h2 class="cr-h">Open day e appuntamenti</h2>\n'
+        blocco_ev = (f'  <h2 class="cr-h">Open day ed eventi di {G.esc(org)}</h2>\n'
                      + "\n".join(_card_evento(od, rec) for od, rec in ev))
 
     return f"""<!DOCTYPE html>
@@ -916,19 +1028,21 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>{G.esc(org)}</span>
     </div>
-    <span class="section-label">{G.esc(citta or 'Piemonte')}{' · ' + G.esc(disc[0]) if disc else ''}</span>
+    <span class="section-label">{G.esc(citta or 'Piemonte')}{' · ' + G.esc(macro[0]) if macro else ''}</span>
     <h1>{G.esc(org)}</h1>
+    {occhiello}
   </div>
 </header>
 <article class="cr-wrap" data-org="{slug_realta(org)}" data-org-nome="{G.esc(org)}">
 {chr(10).join('  ' + t for t in testa)}
+  {'<h2 class="cr-h">Informazioni e contatti</h2>' if riquadro else ''}
   {riquadro}
-  <h2 class="cr-h">{'I corsi' if len(corsi_org) > 1 else 'Il corso'}</h2>
+  <h2 class="cr-h" id="i-corsi">{f'I corsi di {G.esc(org)}' if len(corsi_org) > 1 else f'Il corso di {G.esc(org)}'}</h2>
   <div class="events-list">
 {schede}
   </div>
 {blocco_ev}
-  <p class="cr-torna"><a href="/corsi.html#{_ancora(org)}">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
+  <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
 {G.blocco_ecosistema('corsi')}
 </article>
 </main>
@@ -1057,8 +1171,39 @@ def blocco_adesione(corsi):
 
 def _cat_foglia(c):
     """"Sport › Pallavolo" -> "Pallavolo". Il secondo livello e' quello che dice
-    davvero cos'e' il corso: "Pallavolo" vale piu' di "Sport"."""
+    davvero cos'e' il corso: "Pallavolo" vale piu' di "Sport".
+
+    SI SCRIVE, NON SI FILTRA (26/08/2026, vedi _cat_macro)."""
     return (c.get('cat') or '').split('›')[-1].strip()
+
+
+def _cat_macro(c):
+    """"Sport › Pallavolo" -> "Sport". La famiglia, ed e' quella che FILTRA.
+
+    Fino al 26/08/2026 la tendina era costruita sul secondo livello. Giovanni:
+    "disciplina e' gia' sfuggito di mano: troppe! nel giro di poco ci metti piu'
+    a cercare il filtro che ti serve che il corso stesso". Aveva ragione, e la
+    ragione vera e' peggiore di quella che si vedeva in pagina: IL SECONDO
+    LIVELLO NON E' STABILE. Le stesse quattro locandine, lette tre volte,
+    davano "Coro"/"Canto corale", "Musica gioco"/"Musica per bambini",
+    "Musica per bambini"/"Musica per l'infanzia", "Musica d'insieme"/"Musica
+    pop" - mentre il primo livello ha detto "Musica" sei volte su sei. Filtrare
+    su una parola che cambia a ogni rilettura vuol dire mandare due locandine
+    identiche in due filtri diversi, e non e' un problema di UX: e' un filtro
+    che perde delle righe.
+
+    Il primo livello invece e' una lista chiusa dettata dal prompt (Sport,
+    Musica, Danza, Teatro, Lingue, Arte, Studio, Natura, Altro), e una lista
+    chiusa e' l'unica cosa su cui si possa filtrare.
+
+    La disciplina non sparisce: resta scritta in riga sulla scheda, dove serve a
+    leggere, e nell'elenco "Attivita'" della realta'. Cambia solo chi comanda la
+    tendina.
+    """
+    testo = (c.get('cat') or '').strip()
+    if not testo:
+        return ''
+    return testo.split('›')[0].strip()
 
 
 def _ancora(org):
@@ -1117,33 +1262,21 @@ def card(c, idx, pagine=(), qui_org=None):
     od = openday(c)
     if od:
         tags.append('<span class="ev-pill is-openday">Open day</span>')
-    # La prova e' il campo che decide: un genitore sceglie un corso dopo averlo
-    # fatto provare al figlio. Sta in riga, non sepolta nel dettaglio.
-    #
-    # "GRATUITA" SOLO SE IL CAMPO LO DICE. Fino al 26/08/2026 il cartellino
-    # diceva sempre "Prova gratuita", anche su una cella che dice soltanto
-    # QUANDO si prova: la locandina di una scuola di musica scriveva "Lezione di
-    # prova venerdi 25 settembre" e la pagina ci leggeva sopra un prezzo che
-    # nessuno aveva promesso. Una prova a pagamento esiste, ed e' proprio il
-    # genitore che sceglie in base a questo a rimanere fregato.
-    if c['prova']:
-        gratis = any(x in c['prova'].lower()
-                     for x in ('gratuit', 'gratis', 'omaggio', 'libero'))
-        tags.append('<span class="ev-pill is-prova">'
-                    + ('Prova gratuita' if gratis else 'Lezione di prova')
-                    + '</span>')
+    # NIENTE CARTELLINO SULLA PROVA (26/08/2026, feedback di Giovanni).
+    # Diceva "Prova gratuita" su qualunque riga con la colonna Prova piena, e il
+    # 26/08 l'avevo corretto in "Lezione di prova" quando il campo non diceva
+    # gratis. Ma il rilievo vero era un altro, e piu' a monte: "credo che tutti i
+    # corsi di questo mondo ti permettano di provare, quelli che non lo fanno e'
+    # perche' hanno da farti pagare l'entrata - quindi l'etichetta la
+    # toglierei". Ha ragione, ed e' lo stesso argomento che il 12/08 ha ucciso
+    # la colonna "Adatto Famiglie": un cartellino che ce l'hanno (quasi) tutti
+    # non fa scegliere nessuno, occupa la riga e la fa sembrare piu' piena di
+    # quanto sia.
+    # IL DATO RESTA: la data della lezione di prova sta nel dettaglio, fra i
+    # dati del corso ("Prova: lezione di prova venerdi 25 settembre"). Quella e'
+    # informazione - via l'etichetta, non la riga.
 
     righe_det = []
-    # La locandina si guarda, quindi qui va l'originale e non la miniatura — e'
-    # la stessa regola degli elenchi al contrario. Sta dentro un dettaglio
-    # chiuso, che il browser non disegna: con loading=lazy non parte nessuna
-    # richiesta finche' la riga non si apre.
-    if c['loc']:
-        src = G.loc_path(c['loc'])
-        if src:
-            righe_det.append(
-                f'<img class="co-loc" src="{G.esc(src)}" alt="Locandina di '
-                f'{G.esc(c["nome"])}" loading="lazy" decoding="async">')
     # Se c'e' una descrizione lunga vince quella, e non dipende piu' da un flag:
     # il testo migliore e' il testo migliore, e chi ce l'ha ce l'ha.
     testo = c['descr_premium'] or c['descr']
@@ -1151,9 +1284,14 @@ def card(c, idx, pagine=(), qui_org=None):
         righe_det.append(f'<p class="event-desc">{G.esc(testo)}</p>')
     if od:
         quando = od['quando'] + (f", ore {od['ora']}" if od['ora'] else '')
-        # "Vedi la locandina" solo se di la' c'e' davvero la locandina: su un
-        # link esterno sarebbe una promessa che la pagina d'arrivo non mantiene.
-        vedi = 'vedi sul sito →' if od['url'].startswith('http') else                'vedi la locandina →'
+        # "SCOPRI L'OPEN DAY" e non "vedi la locandina" (26/08/2026, Giovanni:
+        # "al momento riporta sempre a una stessa locandina, invece delle
+        # singole"). Non era una lettura sbagliata: un open day serve PIU' corsi
+        # - la PGS ne fa uno per cinque squadre - quindi sei corsi puntano allo
+        # stesso evento, ed e' il legame giusto. Era l'etichetta a promettere
+        # un'altra cosa: uno leggeva "la locandina" e si aspettava quella del
+        # SUO corso, che sta gia' qui sotto in fondo al dettaglio.
+        vedi = "vedi sul sito →" if od['url'].startswith('http') else "scopri l'open day →"
         testa = f'{G.esc(quando)} — ' if quando else ''
         righe_det.append(
             f'<p class="co-openday"><strong>Open day:</strong> {testa}'
@@ -1234,14 +1372,44 @@ def card(c, idx, pagine=(), qui_org=None):
         righe_det.append(
             f'<p class="co-fuori"><a href="{G.esc(c["sito"])}" '
             f'rel="sponsored noopener" target="_blank">Scopri il corso →</a></p>')
+    # LA LOCANDINA STA IN FONDO (26/08/2026, Giovanni: "prima diamo le info che
+    # abbiamo estrapolato, e' quello il valore che stiamo dando"). Ha ragione, e
+    # non e' solo gerarchia: l'immagine e' alta, e in cima spingeva eta', giorni
+    # e contatti sotto la piega proprio nel momento in cui uno apre la riga per
+    # leggerli. Chi vuole vedere il volantino originale scorre; chi vuole i dati
+    # non deve scorrere per niente.
+    # Qui va l'originale e non la miniatura - si guarda, e' la stessa regola
+    # degli elenchi al contrario. Sta dentro un dettaglio chiuso, che il browser
+    # non disegna: con loading=lazy non parte nessuna richiesta finche' la riga
+    # non si apre.
+    if c['loc']:
+        src = G.loc_path(c['loc'])
+        if src:
+            righe_det.append(
+                f'<img class="co-loc" src="{G.esc(src)}" alt="Locandina di '
+                f'{G.esc(c["nome"])}" loading="lazy" decoding="async">')
     if c['verificato']:
         # Un corso non scade da solo come un evento: senza questa riga una
         # scheda ferma da un anno e' identica a una aggiornata ieri.
         righe_det.append(
             f'<p class="co-verif">Dati verificati il {G.esc(c["verificato"])}</p>')
 
-    eta_attr = f' data-etamin="{r[0]}" data-etamax="{r[1]}"' if r else ''
+    # La fascia per i filtri: annate se ci sono, altrimenti l'eta' scritta sulla
+    # locandina (vedi eta_min_max). Senza il ripiego, i corsi di una scuola di
+    # musica restavano fuori dalla tendina eta' - che e' il rilievo numero uno
+    # di Giovanni.
+    fascia = eta_min_max(c)
+    # `data-etada` dice DA DOVE viene la fascia, e non e' un dato per il
+    # visitatore: serve alla prova (tests/corsi.js) per sapere quale invariante
+    # controllare. Su "annate" la riga deve portare la fascia CALCOLATA ("6-7
+    # anni"), su "testo" deve portare l'eta' come l'ha scritta la locandina
+    # ("dai 4 anni"): sono due regole diverse, e senza questo attributo la prova
+    # non puo' che confonderle.
+    eta_attr = (f' data-etamin="{fascia[0]}" data-etamax="{fascia[1]}"'
+                f' data-etada="{"annate" if eta_range(c) else "testo"}"'
+                if fascia else '')
     cat = _cat_foglia(c)
+    macro = _cat_macro(c)
     riga_cat = f'<span class="co-cat">{G.esc(cat)}</span>' if cat else ''
     # data-org-nome e data-codice esistono per il TRACCIAMENTO, ed e' l'unico
     # posto da cui daop-track.js li puo' sapere. Il nome per esteso non si
@@ -1252,7 +1420,7 @@ def card(c, idx, pagine=(), qui_org=None):
     # corso si chiama "Volley U8" invece di "Volley Under 8 M/F" — lo slug
     # cambierebbe, e con lui si spezzerebbe la serie storica in GA4.
     cod_attr = f' data-codice="{G.esc(c["codice"])}"' if c.get('codice') else ''
-    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-prova="{'1' if c['prova'] else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(macro)}" data-disc="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-openday="{'1' if od else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
             <span class="ev-thumb is-ph" aria-hidden="true">{G.esc(_emoji(c))}</span>
             <span class="ev-main">
@@ -1298,7 +1466,7 @@ def _fasce_coperte(corsi):
     tocche = []
     for chiave, _ in FASCE_ETA:
         lo, hi = (int(x) for x in chiave.split('-'))
-        if any(r and r[0] <= hi and r[1] >= lo for r in (eta_range(c) for c in corsi)):
+        if any(r and r[0] <= hi and r[1] >= lo for r in (eta_min_max(c) for c in corsi)):
             tocche.append(chiave)
     return tocche
 
@@ -1320,12 +1488,15 @@ def toolbar(corsi):
     Se nessun campo si qualifica non esce nemmeno la casella di ricerca: una
     barra con dentro solo un campo di testo, sopra cinque righe, e' arredamento."""
     campi = []
-    cats = {G.slugify(_cat_foglia(c)): _cat_foglia(c) for c in corsi if _cat_foglia(c)}
+    # LA TENDINA E' SULLA MACRO CATEGORIA, non sulla disciplina (26/08/2026,
+    # vedi _cat_macro): una scuola di musica sola produceva sei voci, e quelle
+    # voci cambiano a ogni rilettura della stessa locandina. "Musica" no.
+    cats = {G.slugify(_cat_macro(c)): _cat_macro(c) for c in corsi if _cat_macro(c)}
     if len(cats) > 1:
         opts = "".join(f'<option value="{k}">{G.esc(v)}</option>'
                        for k, v in sorted(cats.items(), key=lambda kv: kv[1].lower()))
-        campi.append('<select class="ev-select" data-campo="cat" aria-label="Filtra per disciplina">'
-                     f'<option value="all">Disciplina</option>{opts}</select>')
+        campi.append('<select class="ev-select" data-campo="cat" aria-label="Filtra per tipo di attività">'
+                     f'<option value="all">Attività</option>{opts}</select>')
     citta = {G.slugify(c['citta']): c['citta'] for c in corsi if c['citta']}
     if len(citta) > 1:
         opts = "".join(f'<option value="{k}">{G.esc(v)}</option>'
@@ -1342,12 +1513,18 @@ def toolbar(corsi):
                        for v, t in FASCE_ETA if v in coperte)
         campi.append('<select class="ev-select" data-campo="eta" aria-label="Filtra per età del bambino">'
                      f'<option value="all">Età</option>{opts}</select>')
-    # "Solo con prova" solo se divide davvero: se ce l'hanno tutti non toglie
-    # niente, se non ce l'ha nessuno idem.
-    con_prova = sum(1 for c in corsi if c['prova'])
-    if 0 < con_prova < len(corsi):
-        campi.append('<label class="ev-chk"><input type="checkbox" data-campo="prova"> '
-                     'Solo con prova</label>')
+    # "SOLO CON OPEN DAY" al posto di "solo con prova" (26/08/2026, Giovanni:
+    # "di conseguenza 'solo con prova' non so se lo lascerei come filtro,
+    # piuttosto filtro open day"). La ragione e' la stessa che ha tolto il
+    # cartellino: provare si puo' quasi sempre, quindi quel filtro non divide
+    # niente. L'open day invece e' una data, cioe' l'unica cosa di questa pagina
+    # per cui uno si muove entro una scadenza - ed e' anche la domanda vera di
+    # settembre: "dove posso andare a vedere prima di decidere?".
+    # La regola resta quella di sempre: si stampa solo se divide.
+    con_od = sum(1 for c in corsi if openday(c))
+    if 0 < con_od < len(corsi):
+        campi.append('<label class="ev-chk"><input type="checkbox" data-campo="openday"> '
+                     'Solo con open day</label>')
     if not campi:
         return ''
     return f"""    <div class="ev-toolbar" id="co-toolbar">
@@ -1371,7 +1548,8 @@ CSS = """
    --cat-ink, che la card imposta. */
 .co-cat{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;
   text-transform:uppercase;color:var(--cat-ink,#606d7a);opacity:.78;margin-bottom:2px}
-.ev-pill.is-prova{background:#eaf7ee;color:#2E7D46}
+/* .ev-pill.is-prova e .co-prova sono via col cartellino della prova
+   (26/08/2026, vedi card): regole senza piu' nessuno che le porti. */
 .ev-pill.is-openday{background:#2E7D46;color:#fff}
 .co-openday{margin:8px 0 0;color:#2E7D46}
 .co-openday a{color:#2E7D46;font-weight:700}
@@ -1379,7 +1557,6 @@ CSS = """
 .co-fuori{margin:10px 0 0}
 .co-fuori a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-fuori a:hover{text-decoration:underline}
-.co-prova{margin:8px 0 0;font-weight:600;color:#2E7D46}
 .co-dati{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:12px 0 0;font-size:.93rem}
 .co-dati dt{opacity:.65}
 .co-dati dd{margin:0;font-weight:600}
@@ -1409,6 +1586,11 @@ CSS = """
    ancora quello che sembra. */
 .co-avviso{background:#fdf3e0;border:1px solid #e6c98a;border-radius:10px;
   padding:14px 16px;margin:0 0 18px;font-size:.94rem;line-height:1.55;color:#6b4a10}
+/* Il bersaglio del "← Tutti i corsi" delle pagine realta'. Lo stesso stacco
+   delle schede: senza, l'elenco atterra sotto la barra in cima. */
+#co-lista{scroll-margin-top:120px}
+.co-realta h3 a{color:inherit;text-decoration:none}
+.co-realta h3 a:hover{text-decoration:underline}
 """
 
 
@@ -1449,7 +1631,7 @@ FILTER_JS = """
       campi.forEach(function(el){
         if(!ok) return;
         var campo=el.dataset.campo;
-        if(campo==='prova'){ if(el.checked && c.dataset.prova!=='1') ok=false; return; }
+        if(campo==='openday'){ if(el.checked && c.dataset.openday!=='1') ok=false; return; }
         var v=el.value;
         if(!v||v==='all') return;
         if(campo==='eta'){
@@ -1461,7 +1643,16 @@ FILTER_JS = """
           }
           return;
         }
-        if(c.dataset[campo]!==v) ok=false;
+        // IL NOME DEL CAMPO NON E' SEMPRE IL NOME DELL'ATTRIBUTO. La tendina
+        // del comune si chiama "citta" (come la colonna del foglio) ma la
+        // scheda scrive data-city (come le pagine comune del resto del sito):
+        // qui si leggeva c.dataset.citta, cioe' undefined, e QUALUNQUE comune
+        // scelto nascondeva tutte le righe. Il filtro comune non ha mai
+        // funzionato, e non si vedeva perche' la tendina si stampa solo con due
+        // comuni in pagina: fino al 26/08/2026 di comune ce n'era uno.
+        // Trovato dalla prova che sceglie ogni voce e conta cosa resta.
+        var chiave = campo==='citta' ? 'city' : campo;
+        if(c.dataset[chiave]!==v) ok=false;
       });
       c.classList.toggle('is-hidden',!ok);
       if(ok){ vis++; orgVivi[c.dataset.org]=1; }
@@ -1565,8 +1756,12 @@ def render(corsi, css, nav, foot, realta=None):
     descr = (f"Corsi e attività continuative per bambini e ragazzi {dove}: musica, sport, "
              f"danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.")
 
+    # L'ordine segue i filtri: prima la macro (che e' la tendina), poi la
+    # disciplina, poi l'eta'. Con la sola disciplina, "Canto corale" e "Coro"
+    # della stessa scuola finivano a distanza di mezza pagina.
     ordinati = sorted(corsi, key=lambda c: (
-        _cat_foglia(c).lower(), (eta_range(c) or (999, 999))[0],
+        _cat_macro(c).lower(), _cat_foglia(c).lower(),
+        (eta_min_max(c) or (999, 999))[0],
         (c['citta'] or '').lower(), c['nome'].lower()))
 
     # Le realta' che hanno una pagina dedicata, per slug: le card ci mandano
@@ -1646,16 +1841,16 @@ def render(corsi, css, nav, foot, realta=None):
     <span class="section-label">{G.esc(zona_breve)} · Famiglie</span>
     <h1>Corsi per bambini <em>{G.esc(dove)}</em></h1>
     <p>Sport, musica, danza, lingue, teatro: le attività a cui un bambino si iscrive,
-    con l'età che prendono, dove sono e se si può provare prima. Raccolte a mano,
-    una società alla volta.</p>
+    con l'età che prendono, dove sono e quando si può andare a vederle.
+    Informazioni raccolte dalle locandine delle realtà, una società alla volta.</p>
   </div>
 </header>
 <article class="co-wrap">
 {avviso}  <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,
   qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa
   sabato" ma "dove porto mio figlio quest'anno". Qui trovi quello che c'è, e lo scegli
-  come lo sceglieresti davvero: per disciplina, per età del bambino e per comune.
-  Dove si può provare prima di iscriversi, è scritto.</p>
+  come lo sceglieresti davvero: per tipo di attività, per età del bambino e per comune.
+  Dove c'è un open day per andare a vedere prima di decidere, è scritto.</p>
 {toolbar(corsi)}
 {elenco}
 {sezione}
