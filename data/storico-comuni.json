@@ -40,6 +40,17 @@
     "pagina": true,
     "ultima": "2026-08-08"
    },
+   "acquinbanda-festival-delle-bande-musicali-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro città",
+    "manifest": "Acquinbanda - Festival delle Bande Musicali",
+    "nome": "Acquinbanda - Festival delle Bande Musicali",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "aurum-mostra-personale-di-ezio-e-marco-gaviglio-acqui-terme": {
     "anni": [
      2026
@@ -1164,6 +1175,28 @@
  },
  "casalemonferrato": {
   "eventi": {
+   "festa-del-vino-del-monferrato-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "Festa del Vino del Monferrato 2026",
+    "nome": "Festa del Vino del Monferrato 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-18"
+   },
+   "festa-del-vino-del-monferrato-weekend-2-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello e Mercato Pavia",
+    "manifest": "Festa del Vino del Monferrato 2026",
+    "nome": "Festa del Vino del Monferrato - Weekend 2",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-25"
+   },
    "in-viaggio-per-crescere-con-le-storie-nati-per-leg-casale-monferrato": {
     "anni": [
      2026
@@ -1497,6 +1530,23 @@
   "nome": "Castelferro",
   "prov": "AL"
  },
+ "castelferrodipredosa": {
+  "eventi": {
+   "trofeo-riccoboni-holding-ambiente-in-gioco-monferr-castelferro-di-predosa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Polifunzionale Polisportiva Denegri",
+    "manifest": "",
+    "nome": "4° Trofeo Riccoboni Holding Ambiente in Gioco - Monferrato Basket",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Castelferro di Predosa",
+  "prov": "AL"
+ },
  "castellalfero": {
   "eventi": {
    "palio-baldichieri-castell-alfero": {
@@ -1604,6 +1654,17 @@
     "organizza": "Comune di Castelletto d'Orba",
     "pagina": true,
     "ultima": "2026-08-10"
+   },
+   "sagra-campagnola-crebini-cazzuli-passaronda-castelletto-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Circolo ACLI San Maurizio",
+    "manifest": "Sagra Campagnola 2026 - Crebini Cazzuli Passaronda",
+    "nome": "Sagra Campagnola 2026 - Crebini Cazzuli Passaronda",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
    }
   },
   "nome": "Castelletto d'Orba",
@@ -3130,6 +3191,23 @@
   "nome": "Entraque",
   "prov": "CN"
  },
+ "felizzano": {
+  "eventi": {
+   "festa-di-fine-estate-felizzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede P.A. Croce Verde Felizzano",
+    "manifest": "Festa di Fine Estate",
+    "nome": "Festa di Fine Estate",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   }
+  },
+  "nome": "Felizzano",
+  "prov": "AL"
+ },
  "ferrere": {
   "eventi": {
    "festa-patronale-di-sant-agostino-pro-loco-ferrere": {
@@ -3363,6 +3441,23 @@
    }
   },
   "nome": "Garbagna",
+  "prov": "AL"
+ },
+ "gavi": {
+  "eventi": {
+   "guidati-dal-cuore-lions-international-gavi-e-colli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Dante",
+    "manifest": "Guidati dal Cuore",
+    "nome": "Guidati dal Cuore - Lions International Gavi e Colline del Gavi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "Gavi",
   "prov": "AL"
  },
  "gerbo": {
@@ -4022,6 +4117,23 @@
   },
   "nome": "Montiglio Monferrato",
   "prov": "AT"
+ },
+ "moranosulpo": {
+  "eventi": {
+   "al-di-dla-festa-morano-sul-po": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palatenda Parco Don Michelone",
+    "manifest": "Al Di' Dla Festa Morano sul Po 2026",
+    "nome": "Al Di' Dla Festa Morano sul Po 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Morano sul Po",
+  "prov": "AL"
  },
  "moransengo": {
   "eventi": {
@@ -5078,6 +5190,23 @@
   "nome": "Priero",
   "prov": "CN"
  },
+ "quargnento": {
+  "eventi": {
+   "sagra-della-melanzana-quargnento": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza 1° Maggio",
+    "manifest": "Sagra della Melanzana - Quargnento",
+    "nome": "Sagra della Melanzana - Quargnento",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
+   }
+  },
+  "nome": "Quargnento",
+  "prov": "AL"
+ },
  "racconigi": {
   "eventi": {
    "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi": {
@@ -5189,6 +5318,23 @@
    }
   },
   "nome": "Roccaforte Ligure",
+  "prov": "AL"
+ },
+ "roccagrimalda": {
+  "eventi": {
+   "festa-gastronomica-della-peirbuieira-rocca-grimalda": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Terrazza Belvedere Marconi",
+    "manifest": "Festa Gastronomica della Peirbuieira",
+    "nome": "Festa Gastronomica della Peirbuieira",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-27"
+   }
+  },
+  "nome": "Rocca Grimalda",
   "prov": "AL"
  },
  "roccavione": {
@@ -5802,6 +5948,23 @@
   },
   "nome": "San Marzano Oliveto",
   "prov": "AT"
+ },
+ "sansalvatoremonferrato": {
+  "eventi": {
+   "festival-nuova-umanita-san-salvatore-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Village Alessandria - Località Fosseto",
+    "manifest": "Festival Nuova Umanità",
+    "nome": "Festival Nuova Umanità",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "San Salvatore Monferrato",
+  "prov": "AL"
  },
  "sansebastianocurone": {
   "eventi": {
@@ -6608,6 +6771,23 @@
   },
   "nome": "Valderia",
   "prov": "CN"
+ },
+ "valfenera": {
+  "eventi": {
+   "fiera-di-san-bartolomeo-dell-aglio-e-del-pitu-valfenera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Fiera",
+    "manifest": "Fiera di San Bartolomeo dell'aglio e del pitu",
+    "nome": "Fiera di San Bartolomeo dell'aglio e del pitu",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-30"
+   }
+  },
+  "nome": "Valfenera",
+  "prov": "AT"
  },
  "venasca": {
   "eventi": {
