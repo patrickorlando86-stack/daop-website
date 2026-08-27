@@ -319,6 +319,11 @@
   "n": 1,
   "prov": "AL"
  },
+ "c-al-morano-sul-po": {
+  "comune": "Morano sul Po",
+  "n": 1,
+  "prov": "AL"
+ },
  "c-al-mornese": {
   "comune": "Mornese",
   "n": 3,
@@ -476,7 +481,7 @@
  },
  "c-al-san-salvatore-monferrato": {
   "comune": "San Salvatore Monferrato",
-  "n": 4,
+  "n": 5,
   "prov": "AL"
  },
  "c-al-sarezzano": {
@@ -1229,6 +1234,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-manta": {
+  "comune": "Manta",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-marene": {
   "comune": "Marene",
   "n": 1,
@@ -1261,7 +1271,7 @@
  },
  "c-cn-mondovi": {
   "comune": "Mondovì",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-monforte-d-alba": {
@@ -1271,7 +1281,7 @@
  },
  "c-cn-monta": {
   "comune": "Montà",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-montaldo-roero": {
