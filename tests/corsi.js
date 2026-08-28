@@ -515,9 +515,15 @@ module.exports = async function corsi(browser) {
     const rob = await q.page.locator('meta[name="robots"]')
       .getAttribute('content').catch(() => '');
     r.ok(/^(no)?index, follow$/.test(rob), `${f}: robots "${rob}"`);
+    // Vale in tutti e due i versi, ed e' il verso "in indice ma non annunciata"
+    // quello che il 28/08/2026 non tornava: carezza.html era index, follow e
+    // fuori sitemap, perche' il blocco si spegneva tutto con CORSI_IN_INDICE.
+    // Una pagina pagata che Google fa fatica a trovare e' il difetto che si
+    // scopre sei mesi dopo, guardando perche' non ha mai preso un'impressione.
     const inSitemap = sitemap.includes(`/corsi/${f}<`);
-    r.ok(!(inSitemap && /noindex/.test(rob)),
-      `${f}: ${inSitemap ? 'in sitemap' : 'fuori sitemap'} e robots "${rob}"`);
+    const inIndice = !/noindex/.test(rob);
+    r.ok(inSitemap === inIndice,
+      `${f}: robots "${rob}" e ${inSitemap ? 'in sitemap' : 'fuori sitemap'}`);
 
     const can = await q.page.locator('link[rel="canonical"]')
       .getAttribute('href').catch(() => '');

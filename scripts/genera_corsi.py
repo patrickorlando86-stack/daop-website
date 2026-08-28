@@ -1972,36 +1972,53 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 
 
 def aggiorna_sitemap(pagine=()):
-    """La riga della sitemap, che esiste solo se la pagina e' in indice.
+    """Il blocco della sitemap: ci sta dentro solo quello che e' in indice.
 
-    Fuori indice il blocco si TOGLIE invece di non aggiornarsi: una URL in
-    sitemap con robots noindex sono due ordini che si contraddicono, e chiedere
-    a Google di scansionare una pagina per poi dirgli di non tenerla e' il modo
-    piu' veloce di far ignorare la sitemap intera."""
+    L'invariante vale in tutti e due i versi. In sitemap nessuna URL con robots
+    noindex: chiedere a Google di scansionare una pagina per poi dirgli di non
+    tenerla e' il modo piu' veloce di far ignorare la sitemap intera. Ma anche
+    il contrario: una pagina in indice che la sitemap non annuncia e' uno spazio
+    pagato che Google fa fatica a trovare.
+
+    Fino al 28/08/2026 il blocco si spegneva TUTTO con CORSI_IN_INDICE, hub e
+    realta' insieme. Aveva senso finche' la decisione era una sola; da quando
+    confermata() ha reso la pagina della societa' una decisione SUA, quella riga
+    teneva fuori dalla sitemap proprio le pagine confermate, cioe' quelle
+    pagate. Restavano raggiungibili dall'hub, che e' "noindex, FOLLOW" e quindi
+    i link li fa seguire lo stesso — ma un noindex di lunga durata Google
+    finisce per trattarlo come un nofollow, e il giro "confermano, indicizziamo,
+    fatturiamo" si sarebbe spento da solo dopo qualche mese senza un errore da
+    nessuna parte.
+
+    Adesso l'hub segue CORSI_IN_INDICE e ogni realta' segue la sua cella Stato.
+    Il blocco resta UNO: due blocchi vorrebbero dire due marker da tenere
+    allineati in sitemap.xml per una distinzione che qui e' gia' una riga di
+    codice. Se non ci finisce dentro niente, si toglie."""
     if not os.path.exists(SITEMAP_PATH) or not os.path.exists(PATH):
         return
     import re
-    if not G.CORSI_IN_INDICE:
-        s = open(SITEMAP_PATH, encoding='utf-8').read()
-        fuori = re.sub(r'  <!-- CORSI:START.*?<!-- CORSI:END -->\n?',
-                       '', s, flags=re.S)
-        if fuori != s:
-            open(SITEMAP_PATH, 'w', encoding='utf-8').write(fuori)
-            print("[genera_corsi] fuori sitemap (CORSI_IN_INDICE = False)")
-        return
+    re_via = re.compile(r'  <!-- CORSI:START.*?<!-- CORSI:END -->\n?', re.S)
     oggi = datetime.date.today().isoformat()
     s = open(SITEMAP_PATH, encoding='utf-8').read()
-    # L'hub e le pagine delle realta' stanno nello STESSO blocco: sono la stessa
-    # famiglia e si accendono e si spengono insieme. Con due blocchi, spegnere i
-    # corsi lascerebbe in sitemap le pagine delle societa' — cioe' proprio le
-    # pagine che senza l'hub non hanno piu' un posto da cui si arriva.
+    # L'hub e le pagine delle realta' stanno nello STESSO blocco, ma ci entrano
+    # per due ragioni diverse: l'hub perche' la SEZIONE e' in indice, la realta'
+    # perche' LEI ha confermato. Sotto, `pagine` sono gia' le sole confermate
+    # (scrivi_realta restituisce in_indice, non vive).
     voci = [f"  <url>\n    <loc>{URL}</loc>\n    <lastmod>{oggi}</lastmod>\n"
             f"    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>"]
+    if not G.CORSI_IN_INDICE:
+        voci = []
     for f in sorted(pagine):
         voci.append(f"  <url>\n    <loc>{SITE_URL}/{DIR_REALTA}/{f}</loc>\n"
                     f"    <lastmod>{oggi}</lastmod>\n"
                     f"    <changefreq>monthly</changefreq>\n"
                     f"    <priority>0.6</priority>\n  </url>")
+    if not voci:
+        fuori = re_via.sub('', s)
+        if fuori != s:
+            open(SITEMAP_PATH, 'w', encoding='utf-8').write(fuori)
+        print("[genera_corsi] fuori sitemap: hub noindex e nessuna realta' confermata")
+        return
     blocco = ("  <!-- CORSI:START (generato da scripts/genera_corsi.py — non modificare a mano) -->\n"
               + "\n".join(voci) + "\n  <!-- CORSI:END -->")
     re_blocco = re.compile(r'  <!-- CORSI:START.*?<!-- CORSI:END -->', re.S)
@@ -2010,7 +2027,9 @@ def aggiorna_sitemap(pagine=()):
     else:
         s = s.replace('</urlset>', blocco + '\n</urlset>')
     open(SITEMAP_PATH, 'w', encoding='utf-8').write(s)
-    print(f"[genera_corsi] sitemap: corsi.html + {len(pagine)} pagine realta'")
+    print(f"[genera_corsi] sitemap: {'corsi.html + ' if G.CORSI_IN_INDICE else ''}"
+          f"{len(pagine)} pagine realta' confermate"
+          + ('' if G.CORSI_IN_INDICE else " (l'hub e' noindex)"))
 
 
 def main():

@@ -1046,15 +1046,32 @@ sempre la stessa: *una prova che pretende un'uniformità che il sito ha smesso d
 volere*. Ora controlla l'invariante che `aggiorna_sitemap()` dichiara di sé —
 **nessuna URL in sitemap con `noindex`** — che regge in tutti e due i versi.
 
-**Resta un punto aperto, ed è di vendita non di codice.** `corsi/carezza.html` è
-`index, follow` perché la società ha confermato, ma con `CORSI_IN_INDICE = False`
-sta **fuori dalla sitemap e fuori dalla nav**, e l'unica pagina che la linka —
-l'hub — è `noindex`. Non è una contraddizione (una pagina indicizzabile che
-nessuno annuncia non è un ordine doppio), ma è mezzo passo: il giro promesso era
-«confermano → indicizziamo → fatturiamo», e senza un link da qualcosa di
-indicizzato Google non ci arriva. Le due strade sono spostare le confermate in un
-blocco di sitemap loro, oppure accendere `CORSI_IN_INDICE`. È una decisione, non
-un bug, e va presa sapendo che il primo blocco costa un'invariante in più.
+**E da qui è uscito il terzo pezzo, che era mezzo passo mancante.**
+`corsi/carezza.html` era `index, follow` perché la società ha confermato, e
+stava **fuori dalla sitemap**: il blocco `CORSI:*` si spegneva tutto insieme con
+`CORSI_IN_INDICE`, quindi la sola regola della sezione teneva fuori proprio le
+pagine confermate, cioè quelle pagate.
+
+Non era una contraddizione — restavano raggiungibili dall'hub, che è `noindex,
+**follow**` e quindi i link li fa seguire lo stesso. Ma **un `noindex` di lunga
+durata Google finisce per trattarlo come un `nofollow`**, e il giro promesso
+(«confermano → indicizziamo → fatturiamo») si sarebbe spento da solo dopo
+qualche mese, senza un errore da nessuna parte: il difetto che si scopre a marzo
+guardando perché una pagina venduta non ha mai preso un'impressione.
+
+Ora nel blocco l'hub entra se `CORSI_IN_INDICE`, ogni realtà entra se la **sua**
+cella `Stato` dice confermata, e se non ci finisce dentro niente il blocco si
+toglie. **Il blocco resta uno**: due marker in `sitemap.xml` da tenere allineati
+per una distinzione che qui è una riga di codice sarebbero un costo permanente.
+
+**Accendere `CORSI_IN_INDICE` non era l'alternativa**, ed è bene sia scritto:
+quell'interruttore è spento perché Giovanni considera i dati PGS non verificati
+per la 2026/2027, e non si gira per far comparire una URL in una sitemap.
+
+L'invariante ora vale **in tutti e due i versi** — in sitemap niente `noindex`, e
+niente `index` fuori dalla sitemap — e `tests/corsi.js` la controlla così. Era il
+verso nuovo, quello che mancava: la vecchia prova guardava solo che non entrasse
+un `noindex`, e una pagina pagata che nessuno annuncia le passava sotto il naso.
 
 #### Restituire i numeri a ogni realtà: l'attribuzione è nel DOM
 
