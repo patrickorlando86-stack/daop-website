@@ -367,36 +367,51 @@ module.exports = async function luoghi(browser) {
     ? `invito ripetuto in ${doppi.length} pagine (es. ${doppi[0]})`
     : 'mai due inviti sulla stessa pagina');
 
-  // ── e DOVE sta l'invito ───────────────────────────────────────────────
-  // Su una scheda viva l'invito sta in coda (chiede qualcosa a chi ha gia'
-  // avuto l'orario della sagra); su un'EDIZIONE CONCLUSA sale sotto l'avviso,
-  // perche' li' la pagina non ha niente da dare e l'invito e' la cosa piu'
-  // utile che resta. E' una decisione presa il 19/08/2026 e misurata: si
-  // smonta da sola alla prima riscrittura del template, perche' basta
-  // spostare una riga e nessuna pagina si rompe.
+  // ── e DOVE sta l'invito, e CHI sta in cima ────────────────────────────
+  // Fino al 28/08/2026 il posto sotto l'avviso di un'edizione conclusa era
+  // dell'invito al canale (decisione del 19/08). Adesso e' di Ginetto: a
+  // parita' di posto rende di piu' - 7 clic stando al 71% della pagina contro
+  // 4 stando al 59%, settimana 12-18/08 - e soprattutto risponde alla domanda
+  // giusta, perche' chi scopre che la festa e' finita vuole sapere cosa fare
+  // ADESSO, non ricevere un messaggio giovedi'.
   //
-  // Il marcatore e' la classe .ev-canale--alto, che serve gia' alla CSS: la
-  // prova non aggiunge niente all'HTML per potersi fare. Si cerca l'attributo
-  // intero e non il solo nome della classe: quel nome sta anche nel <style>
-  // di ogni pagina (PAGINA_CSS e' incollata dappertutto), quindi un includes
-  // sul nome secco direbbe "in alto" su tutte e 296 le schede.
-  let concluseSbagliate = [], viveSbagliate = [];
+  // Quattro guasti silenziosi, che si smontano tutti da soli alla prima
+  // riscrittura del template: basta spostare una riga e nessuna pagina si
+  // rompe.
+  //
+  // Si cerca l'attributo class INTERO e non il solo nome: quei nomi stanno
+  // anche nel <style> di ogni pagina (PAGINA_CSS e' incollata dappertutto),
+  // quindi un includes sul nome secco direbbe "in cima" su tutte le schede.
+  let canaleFuoriPosto = [], concluseSenzaGinetto = [],
+      ginettoDoppio = [], viveConGinettoAlto = [];
   for (const f of nostre) {
     const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
     const conclusa = html.includes('<strong>Edizione conclusa</strong>');
-    const alto = html.includes('class="ev-canale ev-canale--alto"');
+    const alto = html.includes('class="ev-ginetto-alto"');
+    const coda = html.includes('class="bg-cream ev-ginetto"');
     // La coda si riconosce dall'ordine: l'invito DOPO la firma di verifica.
-    const inCoda = !alto && html.indexOf('class="ev-canale"') >
+    // Dove la firma non c'e' (pagine comune, landing) indexOf da' -1 e il
+    // confronto resta vero, che e' il comportamento giusto: li' basta che ci
+    // sia. Che ci sia lo ha gia' provato il blocco qui sopra.
+    const inCoda = html.indexOf('class="ev-canale"') >
       html.indexOf('class="ev-firma"');
-    if (conclusa && !alto) concluseSbagliate.push(f);
-    if (!conclusa && !inCoda) viveSbagliate.push(f);
+    if (!inCoda) canaleFuoriPosto.push(f);
+    if (conclusa && !alto) concluseSenzaGinetto.push(f);
+    if (alto && coda) ginettoDoppio.push(f);
+    if (!conclusa && alto) viveConGinettoAlto.push(f);
   }
-  r.ok(concluseSbagliate.length === 0, concluseSbagliate.length
-    ? `edizioni concluse con l'invito ancora in coda: ${concluseSbagliate.length} (es. ${concluseSbagliate[0]})`
-    : "su ogni edizione conclusa l'invito sta sotto l'avviso");
-  r.ok(viveSbagliate.length === 0, viveSbagliate.length
-    ? `invito fuori posto su ${viveSbagliate.length} pagine vive (es. ${viveSbagliate[0]})`
-    : "sulle pagine vive l'invito resta in coda, dopo la firma");
+  r.ok(canaleFuoriPosto.length === 0, canaleFuoriPosto.length
+    ? `invito al canale fuori dalla coda su ${canaleFuoriPosto.length} pagine (es. ${canaleFuoriPosto[0]})`
+    : "l'invito al canale sta in coda su tutte le pagine, senza eccezioni");
+  r.ok(concluseSenzaGinetto.length === 0, concluseSenzaGinetto.length
+    ? `edizioni concluse senza Ginetto in cima: ${concluseSenzaGinetto.length} (es. ${concluseSenzaGinetto[0]})`
+    : "su ogni edizione conclusa Ginetto sta sotto l'avviso");
+  r.ok(ginettoDoppio.length === 0, ginettoDoppio.length
+    ? `Ginetto in cima E in fondo su ${ginettoDoppio.length} pagine (es. ${ginettoDoppio[0]})`
+    : 'mai due volte Ginetto sulla stessa pagina');
+  r.ok(viveConGinettoAlto.length === 0, viveConGinettoAlto.length
+    ? `Ginetto in cima su ${viveConGinettoAlto.length} pagine che hanno ancora qualcosa da dare (es. ${viveConGinettoAlto[0]})`
+    : 'sulle pagine vive Ginetto resta in fondo');
 
   await ctx.close();
 

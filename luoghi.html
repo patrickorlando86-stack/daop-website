@@ -331,6 +331,20 @@
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
   .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
+  /* Due paragrafi: il messaggio (che il JS riscrive) e Ginetto. Il margine fra
+     i due sta su `p+p` e non su .events-empty-g apposta: `.events-empty p` ha
+     specificita' 0,1,1 e batterebbe una regola di sola classe, che e' lo stesso
+     inciampo del crumb dei corsi (`.co-crumb a{color:inherit}` che vinceva su
+     `.page-hero a`). */
+  .events-empty p{margin:0 auto;max-width:520px}
+  .events-empty p+p{margin-top:14px}
+  /* Lo stato vuoto e' l'unico punto dell'agenda in cui Ginetto non e' una
+     richiesta ma una risposta: la pagina ha appena fallito, e lui fa quello che
+     l'elenco non e' riuscito a fare. E costa zero pixel a chi invece ha trovato
+     quello che cercava - che e' la ragione per cui sta qui e non in cima. */
+  .events-empty-g{font-size:0.92rem;line-height:1.65}
+  .events-empty-g a{color:var(--orange-ink,#a05714);font-weight:600;text-decoration:none}
+  .events-empty-g a:hover{text-decoration:underline}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
      del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
@@ -630,9 +644,6 @@
    e' un <aside> dentro l'articolo, non una fascia di pagina. */
 .ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
   background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-/* In cima a un'edizione conclusa non ha 28px sopra (l'avviso ce li ha gia'
-   sotto) e ha bisogno di aria sotto, se no si attacca ai dati della scheda. */
-.ev-canale--alto{margin:0 0 26px}
 .ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
 .ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
 .ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
@@ -672,6 +683,13 @@
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+/* In cima a un'edizione conclusa: stesso componente, dentro l'articolo invece
+   che in una fascia di pagina. Nessun margine sopra (l'avviso "Edizione
+   conclusa" ha gia' i suoi 22px sotto) e 26px di aria sotto, se no si attacca
+   ai dati della scheda - sono gli stessi numeri che aveva l'invito al canale
+   quando il posto in cima era suo. */
+.ev-ginetto-alto{margin:0 0 26px}
+.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
 /* ── La barra delle azioni, e solo sul telefono ─────────────────────────
    PERCHE' ESISTE, e il conto e' misurato il 28/08/2026 a 412px su una scheda
    viva, non stimato. .ev-actions - "Aggiungi al calendario" e "Come arrivare",

@@ -334,6 +334,20 @@
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
   .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
+  /* Due paragrafi: il messaggio (che il JS riscrive) e Ginetto. Il margine fra
+     i due sta su `p+p` e non su .events-empty-g apposta: `.events-empty p` ha
+     specificita' 0,1,1 e batterebbe una regola di sola classe, che e' lo stesso
+     inciampo del crumb dei corsi (`.co-crumb a{color:inherit}` che vinceva su
+     `.page-hero a`). */
+  .events-empty p{margin:0 auto;max-width:520px}
+  .events-empty p+p{margin-top:14px}
+  /* Lo stato vuoto e' l'unico punto dell'agenda in cui Ginetto non e' una
+     richiesta ma una risposta: la pagina ha appena fallito, e lui fa quello che
+     l'elenco non e' riuscito a fare. E costa zero pixel a chi invece ha trovato
+     quello che cercava - che e' la ragione per cui sta qui e non in cima. */
+  .events-empty-g{font-size:0.92rem;line-height:1.65}
+  .events-empty-g a{color:var(--orange-ink,#a05714);font-weight:600;text-decoration:none}
+  .events-empty-g a:hover{text-decoration:underline}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
      del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
@@ -5419,7 +5433,17 @@
     </div>
     <p class="ev-fonti">Gli eventi arrivano dalle pagine DAOP di zona: <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a> (Alessandria) · <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">@daop_asti</a> (Asti) · <a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a> (Cuneo).<br><a href="/zone.html">Chi segue la tua provincia</a></p>
     <!-- EVENTI-LISTA:END -->
-    <p class="events-empty" id="events-empty">Nessun evento con questi filtri. Prova ad allargare la ricerca.</p>
+    <!-- Lo stato vuoto. Il <p> interno tiene l'id perche' il JS ci scrive
+         dentro con textContent, che cancellerebbe qualunque markup: Ginetto
+         sta quindi in un fratello, e quello che si accende e si spegne e' il
+         contenitore. Il link va su ginettoapp.it e non su /ginetto.html: qui
+         chi legge vuole una risposta adesso, non una pagina che gli spieghi
+         cos'e' Ginetto - e cosi' daop-track.js riconosce il dominio e conta
+         `apri_ginetto` da se', senza una riga in piu' da nessuna parte. -->
+    <div class="events-empty" id="events-vuoto">
+      <p id="events-empty">Nessun evento con questi filtri. Prova ad allargare la ricerca.</p>
+      <p class="events-empty-g">Oppure chiedilo a <strong>Ginetto AI</strong>: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+    </div>
   </div>
 </section>
 
@@ -5595,6 +5619,9 @@
     const hlCards = hl ? Array.from(hl.querySelectorAll('.ev-hl-card')) : [];
     const hlBlocks = hl ? Array.from(hl.querySelectorAll('.ev-hl-block')) : [];
     const empty = document.getElementById('events-empty');
+    // Il contenitore, non il paragrafo: dentro c'e' anche Ginetto, e quello
+    // che si accende e si spegne sono tutti e due insieme.
+    const vuoto = document.getElementById('events-vuoto');
     const count = document.getElementById('events-count');
     // Testo su cui cerca la barra: nome, luogo, etichette e descrizione della
     // riga. Costruirlo subito voleva dire leggere il textContent di ~290 schede
@@ -5769,7 +5796,7 @@
           // Niente da nessuna parte: dirlo evita di far sfogliare i mesi a vuoto.
           : 'Nessun evento con questi filtri, in nessuna data.';
       }
-      empty.style.display = visible === 0 ? 'block' : 'none';
+      vuoto.style.display = visible === 0 ? 'block' : 'none';
       if (count) count.textContent = visible + (visible === 1 ? ' evento ' : ' eventi ') + ambito();
       if (vista === 'calendario') disegnaCalendario(f, term, visible, fuori);
       scriviUrl(f, term);

@@ -291,45 +291,145 @@ Quelli vivono dentro l'iframe di siti altrui, e chiedere lì un'iscrizione vuol
 dire usare lo spazio di qualcun altro per portargli via il pubblico: stessa
 ragione per cui non chiedono il consenso ai cookie. `tests/luoghi.js` controlla
 che l'invito ci sia su tutte e che non sia mai doppio. Sta in coda dappertutto
-tranne che sulle edizioni concluse, e il perché è due paragrafi più sotto.
+in coda **dappertutto, senza eccezioni**: quella sulle edizioni concluse è
+durata dal 19 al 28/08/2026, e il perché è finita è due paragrafi più sotto.
 
 **Sta in coda e non in cima**, e il testo dice per prima cosa *quanto spesso si
 scrive*: la paura di chi si iscrive a un canale non è il contenuto, è il
 diluvio. Niente promesse in più ("contenuti esclusivi") che poi non
 manteniamo.
 
-### L'unica eccezione alla coda: le edizioni concluse
+### L'eccezione alla coda è durata nove giorni, e il posto è passato a Ginetto
 
-Dal 19/08/2026 su una scheda di **edizione conclusa** l'invito sale sotto
-l'avviso "Edizione conclusa", cioè è la prima cosa che si legge dopo aver
-scoperto che la festa è finita (`blocco_canale(alto=True)`, classe
-`.ev-canale--alto`).
+Dal 19/08/2026 su una scheda di **edizione conclusa** l'invito al canale saliva
+sotto l'avviso "Edizione conclusa". **Dal 28/08/2026 non più**: l'invito è
+tornato in coda su tutte le schede, senza eccezioni, e quel posto è di Ginetto.
 
-Non è un ripensamento sulla regola: è che lì **la premessa della regola cade**.
-"In cima chiede qualcosa a chi non ha ancora avuto niente" vale finché la pagina
-ha qualcosa da dare; una scheda conclusa non ce l'ha, e l'invito è la cosa più
-utile che resta. E non è un caso di nicchia: al 19/08/2026 sono **132 schede su
-288** (il 46%), e prendono traffico vero — il 16/08 le schede di eventi conclusi
-hanno fatto 1.237 impressioni.
+**Il ragionamento del 19/08 regge, quello che è cambiato è l'inquilino.** Lì la
+premessa della regola cade: "in cima chiede qualcosa a chi non ha ancora avuto
+niente" vale finché la pagina ha qualcosa da dare, e una scheda conclusa non ce
+l'ha. Non è un caso di nicchia — al 28/08 sono **211 schede su 419** (il 50%), e
+prendono traffico vero: il 16/08 le schede di eventi conclusi hanno fatto 1.237
+impressioni.
 
-**Le schede ritirate restano in coda.** Quella pagina dichiara di non essere
-attendibile e manda all'agenda: chiedere un'iscrizione in cima a una scheda che
-stiamo smentendo è chiedere fiducia nel punto esatto in cui l'abbiamo appena
-tolta. È la stessa logica per cui lì spariscono i fatti e i due bottoni.
+Due ragioni per Ginetto, e la seconda conta più della prima.
 
-**Il testo è identico nelle due posizioni, apposta.** Cambiando insieme
-posizione e parole non si saprebbe quale delle due ha spostato il numero.
+**È misurato più forte, a parità di posto.** Nella settimana 12-18/08
+`apri_ginetto` fa **7 clic stando al 71%** della pagina; l'invito al canale, più
+in alto al 59%, sta dentro un secchio da 4. Era la richiesta che rendeva di più
+del sito, ed era quella messa più in basso.
 
-Quanto vale lo spostamento è misurato, non stimato: su una scheda viva l'invito
-è in vista al **59% dello scroll** e ci arriva **il 29%** di chi apre la pagina;
-su una conclusa è allo **0%**. Il conto sta in "Quanti lo vedevano, e quanti lo
-toccavano", qui sotto — e dice anche perché la posizione da sola non basta.
+**Risponde alla domanda giusta.** Chi arriva da Google su una scheda conclusa ha
+appena scoperto che la festa è finita e si chiede *e allora cosa faccio?*.
+Ginetto risponde **adesso**; il canale risponde giovedì. In coda quella domanda
+non è più la sua: chi ha scorso tutta la pagina l'ha già passata.
 
-`tests/luoghi.js` controlla tutte e due le posizioni. Attenzione se si tocca
-quella prova: il nome della classe `ev-canale--alto` sta anche nel `<style>` di
+**Non si affiancano.** Due richieste nello stesso punto si dimezzano, e
+misurandole insieme non si saprebbe più quale delle due ha mosso il numero. Per
+la stessa ragione **Ginetto in cima non si ripete in fondo**: sarebbe la stessa
+richiesta fatta due volte a chi ha già detto di no una volta.
+
+**Le schede ritirate restano com'erano.** Quella pagina dichiara di non essere
+attendibile e manda all'agenda: presentare qualcosa di nostro in cima a una
+scheda che stiamo smentendo è chiedere fiducia nel punto esatto in cui l'abbiamo
+appena tolta. È la stessa logica per cui lì spariscono i fatti e i due bottoni.
+
+**Il testo è identico nelle due posizioni, apposta** — vale per Ginetto come
+valeva per il canale. Cambiando insieme posizione e parole non si saprebbe quale
+delle due ha spostato il numero. Cambia solo il guscio: in cima un `<aside
+class="ev-ginetto-alto">` dentro l'articolo, in fondo la fascia a tutta
+larghezza.
+
+Quanto vale lo spostamento è misurato a 412px, non stimato: su
+`2-cuori-2-capanne-alessandria.html` Ginetto passa dal **68,5%** della pagina al
+**11,9%**, cioè da sotto la piega a **540px, dentro la prima schermata**. Il
+canale in coda resta al 72,9%.
+
+`tests/luoghi.js` difende quattro cose: che l'invito al canale stia in coda su
+tutte le pagine, che ogni conclusa abbia Ginetto in cima, che non l'abbia anche
+in fondo, e che nessuna pagina viva ce l'abbia in cima. Verificate rosse tutte e
+quattro rimettendo il difetto, non supposte. Attenzione se si tocca quella
+prova: i nomi `ev-ginetto-alto` e `ev-ginetto` stanno anche nel `<style>` di
 ogni pagina (`PAGINA_CSS` è incollata dappertutto), quindi si cerca l'attributo
-intero `class="ev-canale ev-canale--alto"` — un `includes` sul nome secco
-direbbe "in alto" su tutte e 313 le pagine e la prova passerebbe sempre.
+intero (`class="ev-ginetto-alto"`, `class="bg-cream ev-ginetto"`) — un
+`includes` sul nome secco direbbe "in cima" su tutte e 446 le pagine e la prova
+passerebbe sempre.
+
+#### Perché non una bolla, e perché non in cima all'agenda
+
+La proposta di partenza era **far vedere Ginetto su `eventi.html`**, che è la
+pagina singola più forte del sito. Due cose l'hanno spostata altrove.
+
+**`eventi.html` non è dove sta il pubblico.** Nei 28 giorni al 22/08 fa 629 clic
+(il 7,7%), le schede evento ne fanno 5.742 (il 69,8%) — nove volte tanto. E su
+quelle Ginetto **c'era già**, in fondo. La copertura non era da creare, era da
+spostare.
+
+**Una bolla fissa in basso a destra è da non fare.** Non per la SEO — la soglia
+dell'*interstitial penalty* è il 15-25% del viewport e una bolla ci sta
+abbondantemente sotto — ma perché è la forma più riconoscibile come pubblicità
+che esista sul web (NN/g, *banner blindness*). I benchmark che si trovano sui
+widget a bolla (5-15%) sono chat di assistenza su siti commerciali, dove chi
+scrive ha un problema e cerca aiuto: non sono confrontabili. Il numero
+confrontabile è in casa ed è lo 0,3% dell'invito al canale.
+
+**Una barra fissa nemmeno.** Ginetto da solo è un bottone solo, e vale la regola
+già scritta per `.ev-barra`: una barra fissa costa 62px di schermo a tutti, e
+per un'azione sola prende più di quello che rende. "Vicino a me" non è la
+seconda azione che la giustifica — è già a 795px, cioè nella prima schermata.
+
+**E soprattutto vale la distinzione del 28/08**: un servizio si mette davanti,
+una richiesta no. Su una scheda viva o in cima all'agenda Ginetto è una
+richiesta, e per giunta porta fuori dal sito prima che la pagina abbia dato
+qualcosa. Sta dalla parte dell'invito al canale, non dalla parte di "Come
+arrivare".
+
+#### Lo stato vuoto dell'agenda: l'unico posto in cui Ginetto è una risposta
+
+Fatto lo stesso giorno. Quando la ricerca non trova niente, `eventi.html`
+diceva solo «Nessun evento con questi filtri. Prova ad allargare la ricerca.»
+Adesso sotto c'è Ginetto.
+
+È l'unico momento in cui **la pagina ha fallito e lui risponde meglio di lei** —
+cioè l'unico punto dell'agenda in cui non è una richiesta ma una risposta. E
+**costa zero pixel a chi trova quello che cerca**, che è la ragione per cui sta
+lì e non in cima. Misurato: scorrendo alla barra dei filtri e cercando una
+parola che non esiste, il blocco è a 501px dal bordo alto dello schermo, cioè
+interamente in vista.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Il link va su `ginettoapp.it`, non su `/ginetto.html`.** Lì chi legge vuole
+  una risposta adesso, non una pagina che gli spieghi cos'è Ginetto — e così
+  `daop-track.js` riconosce il dominio e conta **`apri_ginetto` da sé**, senza
+  una riga in più da nessuna parte.
+- **Il blocco in fondo a `eventi.html` resta dov'è e com'è**, e continua a
+  puntare a `/ginetto.html`. Sono due imbuti diversi apposta: quello manda alla
+  landing che esiste per vendere Ginetto (FAQ, JSON-LD, Play Store), ed è
+  l'unico link interno di peso che quella pagina riceve dalla più forte del
+  sito. Che non produca un evento con un nome suo **non vuol dire che non si
+  misura**: è navigazione interna, e `daop-track.js` dice in testa perché non si
+  traccia — ogni pagina manda già un `page_view`, e il percorso si legge con
+  un'esplorazione.
+- **`apri_ginetto` su `/eventi.html` scatta anche dal footer**, e i due non si
+  distinguono. Va bene: al footer arriva circa uno su cento, quindi la baseline
+  è quasi zero e il delta è tutto dello stato vuoto. **Va segnato il numero di
+  oggi prima di leggere quello di domani.**
+- **Il `<p>` interno tiene l'id `events-empty`**, perché il JS ci scrive dentro
+  con `textContent` e cancellerebbe qualunque markup: Ginetto sta in un
+  fratello, e quello che si accende e si spegne è il contenitore
+  `#events-vuoto`.
+- **Il margine fra i due paragrafi sta su `p+p`** e non su `.events-empty-g`:
+  `.events-empty p` ha specificità 0,1,1 e batterebbe una regola di sola classe.
+  È lo stesso inciampo del crumb dei corsi (`.co-crumb a{color:inherit}` che
+  vinceva su `.page-hero a`), e si evita guardando la specificità, non il nome.
+
+**Il numero da guardare fra un mese** è `apri_ginetto` ogni mille `page_view`
+sulle schede, letto contro la baseline di 7 clic in 7 giorni. E vale
+l'avvertenza di sempre sulle soglie di scroll citate qui sopra: sono misurate
+col filtro `/eventi/`, che **esclude `eventi.html`** — la stessa trappola già
+documentata per `vicino_a_me`. L'ordine di grandezza regge, il numero non è di
+quella pagina.
 
 ### Il clic sull'invito ha un nome suo
 
@@ -362,7 +462,9 @@ lettura che ha fatto spostare l'invito, e va rifatta prima di spostarlo ancora.
 blocco di Ginetto e il footer, che valgono l'ultimo 40% della pagina. Misurato
 con Playwright a 412px su 40 schede: su una scheda **viva** l'invito è
 interamente in vista al **59% dello scroll** (mediana; range 45-66%), e comincia
-a entrare intorno al 41%. Su una **conclusa**, dal 19/08, allo **0%**.
+a entrare intorno al 41%. Fra il 19 e il 28/08 su una **conclusa** stava allo
+**0%**; da lì in poi quel posto è di Ginetto e l'invito è tornato al 59% anche
+lì (vedi "L'eccezione alla coda è durata nove giorni").
 
 Da qui una cosa da non rifare: **la soglia da leggere è 50, non 100.** Chi arriva
 al 100% non è "chi ha visto l'invito", è chi ha letto anche il footer.
