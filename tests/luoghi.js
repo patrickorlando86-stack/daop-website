@@ -400,5 +400,102 @@ module.exports = async function luoghi(browser) {
 
   await ctx.close();
 
+  // ── la barra delle azioni in fondo allo schermo ───────────────────────
+  // Nata il 28/08/2026 perche' .ev-actions - "Come arrivare" e "Aggiungi al
+  // calendario", cioe' le due cose che uno viene a fare - e' interamente in
+  // vista solo dopo il 25% dello scroll, e al 25% ci arriva meta' di chi apre
+  // la pagina. Il conto per esteso sta nel commento di .ev-barra.
+  //
+  // Quello che qui si difende non e' che la barra sia bella: sono le tre cose
+  // che si rompono in silenzio.
+  r.titolo('schede evento — la barra delle azioni sul telefono');
+  let conBarra = 0, barraDoppia = [], barraSuConclusa = [], senzaSpazio = [],
+      hrefFuori = [], telDiverso = [];
+  for (const f of nostre) {
+    const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    const barre = html.match(/<div class="ev-barra" role="group"/g) || [];
+    if (!barre.length) continue;
+    conBarra++;
+    if (barre.length > 1) barraDoppia.push(f);
+    if (html.includes('<strong>Edizione conclusa</strong>') ||
+        html.includes('<strong>Scheda ritirata</strong>')) barraSuConclusa.push(f);
+    if (!html.includes('class="ev-barra-spazio"')) senzaSpazio.push(f);
+    const dentro = html.slice(html.indexOf('<div class="ev-barra" role="group"'));
+    const corpo = html.slice(0, html.indexOf('<div class="ev-barra" role="group"'));
+    for (const m of dentro.matchAll(/href="([^"]+)"/g)) {
+      const h = m[1];
+      // Il telefono e' l'unico che nel corpo sta dentro la riga "Contatti:".
+      if (!corpo.includes('href="' + h + '"')) hrefFuori.push(f + ' -> ' + h.slice(0, 40));
+      if (h.startsWith('tel:') && !corpo.includes('href="' + h + '"')) telDiverso.push(f);
+    }
+  }
+  r.ok(conBarra > 0, `la barra c'e': ${conBarra} schede su ${nostre.length}`);
+  r.ok(barraDoppia.length === 0, barraDoppia.length
+    ? `barra ripetuta in ${barraDoppia.length} pagine (es. ${barraDoppia[0]})`
+    : 'mai due barre sulla stessa pagina');
+  // La piu' importante: su una scheda conclusa o ritirata "Come arrivare" e
+  // "Aggiungi al calendario" mandano in macchina, e scrivono in agenda, verso
+  // un appuntamento che non esiste. render_pagina() li toglie gia' dal corpo:
+  // se un domani la barra li rimettesse, sarebbe peggio di prima, perche' li
+  // rimetterebbe FISSI.
+  r.ok(barraSuConclusa.length === 0, barraSuConclusa.length
+    ? `barra su ${barraSuConclusa.length} schede concluse o ritirate (es. ${barraSuConclusa[0]})`
+    : 'mai una barra su una scheda conclusa o ritirata');
+  r.ok(senzaSpazio.length === 0, senzaSpazio.length
+    ? `barra senza lo spazio sotto il footer in ${senzaSpazio.length} pagine`
+    : `dove c'e' la barra c'e' lo spazio che tiene il footer leggibile`);
+  // GA4 ricava il nome dell'evento dall'href (nome_evento() in daop-track.js):
+  // finche' la barra usa gli STESSI href del corpo, i due posti mandano lo
+  // stesso evento con lo stesso destination_url, senza una riga di codice in
+  // piu'. Se un domani divergono - un maps_url costruito a mano, un tel
+  // normalizzato in un altro modo - il report si spacca in due secchi senza
+  // che niente diventi rosso. Questa e' la prova che lo impedisce.
+  r.ok(hrefFuori.length === 0, hrefFuori.length
+    ? `la barra usa link che nel corpo non esistono: ${hrefFuori.slice(0, 2).join(', ')}`
+    : `ogni link della barra e' lo stesso del corpo (stesso evento GA4, stesso destination_url)`);
+
+  // ── e come si comporta davvero, nel browser ───────────────────────────
+  // Il guasto che questa prova ha gia' preso una volta: il <style> del guscio
+  // ha una regola di ELEMENTO nav{position:fixed;top:0;left:0;right:0}, e la
+  // barra - che allora era un <nav> - si ritrovava top:0 E bottom:0 insieme,
+  // cioe' alta 915px, tutto lo schermo. L'HTML era giusto e la pagina era
+  // coperta. Solo una misura nel browser lo vede.
+  const conBarraFile = nostre.find((f) => fs.readFileSync(path.join(RADICE, f), 'utf8')
+    .includes('<div class="ev-barra" role="group"'));
+  if (conBarraFile) {
+    const mob = await apri(browser, conBarraFile, 412);
+    const m = await mob.page.evaluate(() => {
+      const b = document.querySelector('.ev-barra');
+      const sp = document.querySelector('.ev-barra-spazio');
+      const rb = b.getBoundingClientRect();
+      return { h: Math.round(rb.height), display: getComputedStyle(b).display,
+               giu: Math.round(innerHeight - rb.bottom),
+               spazio: Math.round(sp.getBoundingClientRect().height),
+               tocco: Math.min(...[...b.querySelectorAll('a')].map((a) => Math.round(a.getBoundingClientRect().height))),
+               n: b.querySelectorAll('a').length };
+    });
+    r.ok(m.display === 'flex', `a 412px la barra si vede (${m.display})`);
+    r.ok(m.h > 0 && m.h < 120,
+      `la barra e' alta ${m.h}px, non tutto lo schermo (la trappola di nav{top:0})`);
+    r.ok(m.giu === 0, `sta attaccata in fondo (${m.giu}px dal bordo)`);
+    r.ok(m.spazio >= m.h - 4,
+      `lo spazio sotto il footer (${m.spazio}px) copre l'altezza della barra (${m.h}px)`);
+    r.ok(m.tocco >= 44, `l'area toccabile e' alta ${m.tocco}px (minimo 44)`);
+    r.ok(m.n >= 2, `almeno due azioni nella barra (${m.n})`);
+    await mob.ctx.close();
+
+    // Su desktop non deve esserci: li' i bottoni del corpo si vedono senza, e
+    // una barra fissa toglierebbe schermo a chi non ne ha bisogno.
+    const desk = await apri(browser, conBarraFile, 900);
+    const d = await desk.page.evaluate(() => {
+      const b = document.querySelector('.ev-barra');
+      const sp = document.querySelector('.ev-barra-spazio');
+      return { b: getComputedStyle(b).display, sp: getComputedStyle(sp).display };
+    });
+    r.ok(d.b === 'none' && d.sp === 'none',
+      `a 900px la barra e lo spazio spariscono (${d.b}/${d.sp})`);
+    await desk.ctx.close();
+  }
+
   return r;
 };
