@@ -580,7 +580,10 @@
   text-decoration:none;color:inherit}
 .cr-ev-loc{width:54px;height:54px;object-fit:cover;border-radius:8px;flex:0 0 54px}
 .cr-ev-loc.is-ph{display:flex;align-items:center;justify-content:center;
-  background:var(--surface,#f5f3f0);font-size:1.3rem}
+  background:var(--surface,#f5f3f0);color:var(--text-light,#6b7280)}
+/* CAL_SVG nasce a 14px per le righe dell'agenda: qui il riquadro e' 54, e la
+   misura la detta il CSS, che batte gli attributi width/height dell'SVG. */
+.cr-ev-loc.is-ph svg{width:22px;height:22px}
 .cr-ev-t{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cr-ev-n{font-weight:700;font-size:.98rem}
 .cr-ev-q{font-size:.86rem;opacity:.72}
@@ -722,7 +725,7 @@
   <div class="events-list">
         <article class="event-card" id="c-pgs-roccavione-volley-under-8-m-f" data-city="roccavione" data-prov="cn" data-cat="movimento" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A001" data-openday="0" data-etamin="6" data-etamax="7" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-0">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 8 M/F</span>
@@ -738,7 +741,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-10-m-f" data-city="roccavione" data-prov="cn" data-cat="movimento" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A002" data-openday="0" data-etamin="8" data-etamax="9" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-1">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 10 M/F</span>
@@ -754,7 +757,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-12-m-f" data-city="roccavione" data-prov="cn" data-cat="movimento" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A003" data-openday="0" data-etamin="10" data-etamax="11" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-2">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 12 M/F</span>
@@ -770,7 +773,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-14-f" data-city="roccavione" data-prov="cn" data-cat="movimento" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A004" data-openday="0" data-etamin="12" data-etamax="13" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-3">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 14 F</span>
@@ -786,7 +789,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-15-f" data-city="roccavione" data-prov="cn" data-cat="movimento" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A005" data-openday="0" data-etamin="14" data-etamax="14" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-4">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 15 F</span>

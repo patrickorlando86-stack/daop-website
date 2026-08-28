@@ -584,7 +584,10 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
   text-decoration:none;color:inherit}
 .cr-ev-loc{width:54px;height:54px;object-fit:cover;border-radius:8px;flex:0 0 54px}
 .cr-ev-loc.is-ph{display:flex;align-items:center;justify-content:center;
-  background:var(--surface,#f5f3f0);font-size:1.3rem}
+  background:var(--surface,#f5f3f0);color:var(--text-light,#6b7280)}
+/* CAL_SVG nasce a 14px per le righe dell'agenda: qui il riquadro e' 54, e la
+   misura la detta il CSS, che batte gli attributi width/height dell'SVG. */
+.cr-ev-loc.is-ph svg{width:22px;height:22px}
 .cr-ev-t{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cr-ev-n{font-weight:700;font-size:.98rem}
 .cr-ev-q{font-size:.86rem;opacity:.72}
@@ -737,7 +740,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
   <div class="events-list">
         <article class="event-card" id="c-crome-in-movimento-aps-coro-voci-bianche-allegrett" data-city="vezza-d-alba" data-prov="cn" data-cat="musica" data-disc="coro" data-org="crome-in-movimento-aps" data-org-nome="Crome in Movimento APS" data-codice="A006" data-openday="1" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-0">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Coro</span>
               <span class="ev-name">Coro Voci Bianche Allegretto</span>
@@ -753,7 +756,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
         </article>
         <article class="event-card" id="c-crome-in-movimento-aps-io-sono-un-artista-laborato" data-city="vezza-d-alba" data-prov="cn" data-cat="musica" data-disc="musica-gioco" data-org="crome-in-movimento-aps" data-org-nome="Crome in Movimento APS" data-codice="A007" data-openday="1" data-etamin="3" data-etamax="5" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-1">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Musica gioco</span>
               <span class="ev-name">Io sono un&#x27;artista! – Laboratorio di musica gioco</span>
@@ -769,7 +772,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
         </article>
         <article class="event-card" id="c-crome-in-movimento-aps-orchestra-inclusiva" data-city="vezza-d-alba" data-prov="cn" data-cat="musica" data-disc="orchestra" data-org="crome-in-movimento-aps" data-org-nome="Crome in Movimento APS" data-codice="A008" data-openday="1" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-2">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Orchestra</span>
               <span class="ev-name">Orchestra Inclusiva</span>
@@ -785,7 +788,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
         </article>
         <article class="event-card" id="c-crome-in-movimento-aps-gruppo-pop-rock" data-city="vezza-d-alba" data-prov="cn" data-cat="musica" data-disc="musica-pop" data-org="crome-in-movimento-aps" data-org-nome="Crome in Movimento APS" data-codice="A010" data-openday="1" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-3">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Musica pop</span>
               <span class="ev-name">Gruppo Pop/Rock</span>
@@ -801,7 +804,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
         </article>
         <article class="event-card" id="c-crome-in-movimento-aps-corsi-individuali-di-strume" data-city="vezza-d-alba" data-prov="cn" data-cat="musica" data-disc="strumento-musicale" data-org="crome-in-movimento-aps" data-org-nome="Crome in Movimento APS" data-codice="A011" data-openday="1" data-etamin="4" data-etamax="18" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-4">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Strumento musicale</span>
               <span class="ev-name">Corsi Individuali di Strumento</span>
@@ -817,7 +820,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
         </article>
         <article class="event-card" id="c-crome-in-movimento-aps-corsi-collettivi-di-musica" data-city="vezza-d-alba" data-prov="cn" data-cat="musica" data-disc="musica-per-bambini" data-org="crome-in-movimento-aps" data-org-nome="Crome in Movimento APS" data-codice="A012" data-openday="1" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-5">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Musica per bambini</span>
               <span class="ev-name">Corsi Collettivi di Musica Gioco e per la Prima Infanzia</span>

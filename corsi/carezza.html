@@ -584,7 +584,10 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
   text-decoration:none;color:inherit}
 .cr-ev-loc{width:54px;height:54px;object-fit:cover;border-radius:8px;flex:0 0 54px}
 .cr-ev-loc.is-ph{display:flex;align-items:center;justify-content:center;
-  background:var(--surface,#f5f3f0);font-size:1.3rem}
+  background:var(--surface,#f5f3f0);color:var(--text-light,#6b7280)}
+/* CAL_SVG nasce a 14px per le righe dell'agenda: qui il riquadro e' 54, e la
+   misura la detta il CSS, che batte gli attributi width/height dell'SVG. */
+.cr-ev-loc.is-ph svg{width:22px;height:22px}
 .cr-ev-t{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cr-ev-n{font-weight:700;font-size:.98rem}
 .cr-ev-q{font-size:.86rem;opacity:.72}
@@ -736,7 +739,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
   <div class="events-list">
         <article class="event-card" id="c-carezza-percorso-di-psicomotricita-3-6-anni" data-city="racconigi" data-prov="cn" data-cat="movimento" data-disc="psicomotricita" data-org="carezza" data-org-nome="CàRezza" data-codice="A013" data-openday="0" data-etamin="3" data-etamax="6" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-0">
-            <span class="ev-thumb is-ph" aria-hidden="true">🤸</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Psicomotricità</span>
               <span class="ev-name">Percorso di Psicomotricità 3-6 anni</span>
@@ -752,7 +755,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
         </article>
         <article class="event-card" id="c-carezza-allegro-con-moto" data-city="racconigi" data-prov="cn" data-cat="musica" data-disc="educazione-musicale" data-org="carezza" data-org-nome="CàRezza" data-codice="A014" data-openday="0" data-etamin="3" data-etamax="6" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-1">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Educazione musicale</span>
               <span class="ev-name">Allegro con Moto</span>
@@ -768,7 +771,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
         </article>
         <article class="event-card" id="c-carezza-presto-prestissimo-la-musica-nasce-dalla-r" data-city="racconigi" data-prov="cn" data-cat="musica" data-disc="educazione-musicale" data-org="carezza" data-org-nome="CàRezza" data-codice="A015" data-openday="0" data-etamin="0" data-etamax="3" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-2">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎵</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Educazione musicale</span>
               <span class="ev-name">Presto, Prestissimo! – La musica nasce dalla relazione</span>
@@ -784,7 +787,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
         </article>
         <article class="event-card" id="c-carezza-accarezzami-corso-di-massaggio-infantile-a" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="massaggio-infantile" data-org="carezza" data-org-nome="CàRezza" data-codice="A016" data-openday="0" data-etamin="0" data-etamax="1" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-3">
-            <span class="ev-thumb is-ph" aria-hidden="true">🤲</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Massaggio infantile</span>
               <span class="ev-name">Accarezzami – Corso di massaggio infantile Aimi</span>
@@ -800,7 +803,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
         </article>
         <article class="event-card" id="c-carezza-mini-misptm-fascia-2-3-anni" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="benessere-familiare" data-org="carezza" data-org-nome="CàRezza" data-codice="A017" data-openday="0" data-etamin="2" data-etamax="3" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-4">
-            <span class="ev-thumb is-ph" aria-hidden="true">🌿</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Benessere familiare</span>
               <span class="ev-name">mini-MISP™ (fascia 2-3 anni)</span>
@@ -816,7 +819,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
         </article>
         <article class="event-card" id="c-carezza-misptm-fascia-4-12-anni" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="benessere-familiare" data-org="carezza" data-org-nome="CàRezza" data-codice="A018" data-openday="0" data-etamin="4" data-etamax="12" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-5">
-            <span class="ev-thumb is-ph" aria-hidden="true">🌿</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Benessere familiare</span>
               <span class="ev-name">MISP™ (fascia 4-12 anni)</span>

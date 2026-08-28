@@ -936,7 +936,11 @@ def _card_evento(od, rec):
     src = G.loc_path(rec.get('loc'), mini=True)
     img = (f'<img class="cr-ev-loc" src="{G.esc(src)}" alt="" loading="lazy" '
            f'decoding="async">' if src else
-           '<span class="cr-ev-loc is-ph" aria-hidden="true">📅</span>')
+           # Il segnaposto di chi non ha locandina: il calendario dello
+           # sprite, gia' scritto per esteso in genera_eventi (CAL_SVG). Era
+           # un'emoji fino al 28/08/2026 — vedi ICONE_CAT per il perche' non
+           # lo e' piu'.
+           f'<span class="cr-ev-loc is-ph" aria-hidden="true">{G.CAL_SVG}</span>')
     quando = od['quando'] + (f", ore {od['ora']}" if od['ora'] else '')
     dove = (rec.get('luogo') or rec.get('citta') or '').strip()
     fuori = (' target="_blank" rel="noopener"'
@@ -977,7 +981,10 @@ CSS_REALTA = """
   text-decoration:none;color:inherit}
 .cr-ev-loc{width:54px;height:54px;object-fit:cover;border-radius:8px;flex:0 0 54px}
 .cr-ev-loc.is-ph{display:flex;align-items:center;justify-content:center;
-  background:var(--surface,#f5f3f0);font-size:1.3rem}
+  background:var(--surface,#f5f3f0);color:var(--text-light,#6b7280)}
+/* CAL_SVG nasce a 14px per le righe dell'agenda: qui il riquadro e' 54, e la
+   misura la detta il CSS, che batte gli attributi width/height dell'SVG. */
+.cr-ev-loc.is-ph svg{width:22px;height:22px}
 .cr-ev-t{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cr-ev-n{font-weight:700;font-size:.98rem}
 .cr-ev-q{font-size:.86rem;opacity:.72}
@@ -1553,7 +1560,7 @@ def card(c, idx, pagine=(), qui_org=None):
     cod_attr = f' data-codice="{G.esc(c["codice"])}"' if c.get('codice') else ''
     return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(macro)}" data-disc="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-openday="{'1' if od else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
-            <span class="ev-thumb is-ph" aria-hidden="true">{G.esc(_emoji(c))}</span>
+            <span class="ev-thumb is-ph" aria-hidden="true">{_icona(c)}</span>
             <span class="ev-main">
               {riga_cat}
               <span class="ev-name">{G.esc(G.trunc(c['nome'], 110))}</span>
@@ -1568,25 +1575,88 @@ def card(c, idx, pagine=(), qui_org=None):
         </article>"""
 
 
-def _emoji(c):
-    t = f"{c.get('cat','')} {c.get('nome','')}".lower()
-    for chiave, e in (('pallavol', '🏐'), ('volley', '🏐'), ('calci', '⚽'),
-                      ('basket', '🏀'), ('nuoto', '🏊'), ('danz', '💃'),
-                      ('music', '🎵'), ('teatr', '🎭'), ('ingles', '🇬🇧'),
-                      ('lingu', '🇬🇧'), ('arti marzial', '🥋'), ('judo', '🥋'),
-                      ('karate', '🥋'), ('ginnast', '🤸'),
-                      # Le famiglie nuove del 28/08/2026: Movimento (che
-                      # sostituisce Sport) e Benessere. L'ordine conta, si ferma
-                      # al primo che combacia: prima le discipline precise, poi
-                      # le famiglie. "Sport" resta in fondo per le righe scritte
-                      # prima del rename, che sul foglio possono ancora esserci.
-                      ('psicomotric', '🤸'), ('yoga', '🧘'), ('pilates', '🧘'),
-                      ('massagg', '🤲'), ('sonno', '🌙'), ('benesser', '🌿'),
-                      ('arte', '🎨'), ('natur', '🌳'),
-                      ('moviment', '🤸'), ('sport', '⚽')):
-        if chiave in t:
-            return e
-    return '🎓'
+# Icone di categoria, disegnate qui per esteso e non prese dallo sprite:
+# `corsi.html` e le pagine realta' non hanno `assets/icons.svg.html` inline (ce
+# l'hanno l'agenda e la home), quindi un <use href="#i-..."> punterebbe a un id
+# che in quelle pagine non esiste. E' la stessa ragione per cui genera_centri.py
+# si scrive il suo SUN_SVG. Il set e' quello dello sprite — Lucide a linea — e
+# la vestizione arriva da .icon in daop-system.css (fill:none,
+# stroke:currentColor) piu' la regola .ev-thumb.is-ph .icon del guscio, che gli
+# da' 24px e stroke 1.6.
+#
+# QUI C'ERANO LE EMOJI, e sono uscite il 28/08/2026 per la stessa ragione per
+# cui erano uscite dall'agenda mesi prima (vedi ICONS in genera_eventi.py): "si
+# vedevano diverse su ogni sistema operativo ed erano il segnale piu' evidente
+# di sito fatto in casa". I corsi sono nati dopo quel passaggio e non l'avevano
+# mai fatto, quindi erano rimasti l'unica superficie del sito col francobollo a
+# emoji. La bandiera di "Lingue" non era nemmeno una bandiera: Chrome su
+# Windows non compone i regional indicator e stampava "GB" — e una bandiera
+# britannica per una famiglia che comprende anche francese e spagnolo diceva
+# comunque la cosa sbagliata.
+ICONE_CAT = {
+    # Movimento e' il nome nuovo (28/08/2026), Sport quello vecchio: il foglio
+    # puo' portare ancora righe scritte prima del rename.
+    'movimento': '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/>'
+                 '<circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>',
+    'musica': '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/>'
+              '<circle cx="18" cy="16" r="3"/>',
+    'danza': '<circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6"/>'
+             '<path d="m6 8 6 2 6-2"/><path d="M12 10v4"/>',
+    'teatro': '<path d="M10 11h.01"/><path d="M14 6h.01"/><path d="M18 6h.01"/>'
+              '<path d="M6.5 13.1h.01"/><path d="M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3"/>'
+              '<path d="M17.4 9.9c-.8.8-2 .8-2.8 0"/>'
+              '<path d="M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7"/>'
+              '<path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4"/>',
+    'lingue': '<circle cx="12" cy="12" r="10"/>'
+              '<path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+    'arte': '<circle cx="13.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/>'
+            '<circle cx="17.5" cy="10.5" r=".6" fill="currentColor" stroke="none"/>'
+            '<circle cx="8.5" cy="7.5" r=".6" fill="currentColor" stroke="none"/>'
+            '<circle cx="6.5" cy="12.5" r=".6" fill="currentColor" stroke="none"/>'
+            '<path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 '
+            '0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 '
+            '1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
+    'studio': '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 '
+              '4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 '
+              '0-3-3z"/>',
+    'natura': '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/>'
+              '<path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 '
+              '2.8-.5 4.4 0 5.5.8z"/>'
+              '<path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+    'benessere': '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 '
+                 '2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/>',
+}
+ICONE_CAT['sport'] = ICONE_CAT['movimento']
+# Il ripiego: una scuola. Vale per "Altro", per una famiglia nuova che il foglio
+# introduce prima che questa mappa la conosca, e per la riga che la categoria
+# non ce l'ha proprio. Non e' un buco da riempire in fretta — la disciplina
+# precisa sta scritta in chiaro nell'occhiello due millimetri a destra.
+ICONA_ALTRO = ('<path d="M14 22v-4a2 2 0 1 0-4 0v4"/>'
+               '<path d="m18 10 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 '
+               '1-2-2v-7.382a1 1 0 0 1 .553-.894L6 10"/><path d="M18 5v17"/>'
+               '<path d="m4 6 7.106-3.553a2 2 0 0 1 1.788 0L20 6"/><path d="M6 5v17"/>'
+               '<circle cx="12" cy="9" r="2"/>')
+
+
+def _icona(c):
+    """L'icona del francobollo, decisa dalla MACRO categoria.
+
+    La mappa di prima leggeva `cat + nome`, cioe' anche il secondo livello della
+    categoria — proprio il testo che il 26/08/2026 e' stato dichiarato instabile
+    (vedi _cat_macro: le stesse locandine, rilette, davano "Coro"/"Canto
+    corale", "Musica gioco"/"Musica per bambini"). Un'icona appesa a una parola
+    che cambia a ogni rilettura cambia con lei, e due righe identiche escono con
+    due francobolli diversi. Il primo livello e' una lista chiusa, ed e' l'unica
+    cosa su cui si possa mappare — la stessa ragione per cui filtra lui.
+
+    Si perde la distinzione fra pallavolo e psicomotricita', che con le emoji
+    c'era. E' voluto: e' quello che fa anche l'agenda (un'icona per famiglia,
+    non per evento), e la disciplina precisa e' scritta in chiaro nell'occhiello
+    della riga, dove si legge invece di doverla indovinare da un pittogramma.
+    """
+    dentro = ICONE_CAT.get(G.slugify(_cat_macro(c)), ICONA_ALTRO)
+    # viewBox obbligatorio: senza, sotto i 24px l'icona viene tagliata.
+    return f'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">{dentro}</svg>'
 
 
 def _fasce_coperte(corsi):

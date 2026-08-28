@@ -104,6 +104,54 @@ module.exports = async function corsi(browser) {
   const schede = await page.locator('.event-card').count();
   r.ok(schede > 0, `${schede} corsi in pagina`);
 
+  // ── il francobollo e' un'icona, non un'emoji ───────────────────────────
+  // Fino al 28/08/2026 i corsi erano l'ultima superficie del sito col
+  // segnaposto a emoji: l'agenda le aveva perse mesi prima ("si vedevano
+  // diverse su ogni sistema operativo ed erano il segnale piu' evidente di
+  // sito fatto in casa", vedi ICONS in genera_eventi.py) e i corsi, nati dopo,
+  // non avevano mai fatto quel passaggio.
+  //
+  // La prova MISURA il reso invece di leggere l'HTML, ed e' la lezione della
+  // barra delle azioni alta 915px: un SVG senza viewBox, o senza una regola che
+  // lo dimensioni, esce grande quanto il suo contenitore o alto zero, con
+  // l'HTML perfettamente giusto.
+  // Il confronto e' "si disegna come un'emoji", non "e' un simbolo":
+  // Extended_Pictographic da solo prende anche il TM di "MISP™", che nel
+  // foglio e' un marchio scritto da chi organizza e non un pittogramma nostro
+  // (l'ha fatto diventare rossa la prima volta che e' girata). Emoji_Presentation
+  // sono quelli che il carattere disegna a colori da soli, i regional indicator
+  // sono le bandiere, e FE0F e' la richiesta esplicita di presentazione emoji su
+  // un simbolo che di suo sarebbe testo. Restano fuori, e devono restarci: →,
+  // ←, ·, ✕ e ★ sono tipografia, e il sito li usa.
+  const EMOJI = /[\p{Emoji_Presentation}\p{Regional_Indicator}]|\p{Extended_Pictographic}️/u;
+  const francobolli = await page.$$eval('.ev-thumb.is-ph', (ns) => ns.map((n) => {
+    const svg = n.querySelector('svg');
+    const b = svg ? svg.getBoundingClientRect() : null;
+    return {
+      svg: !!svg,
+      testo: n.textContent.trim(),
+      w: b ? Math.round(b.width) : 0,
+      h: b ? Math.round(b.height) : 0,
+    };
+  }));
+  r.ok(francobolli.length > 0, `${francobolli.length} francobolli senza locandina`);
+  r.ok(francobolli.every((f) => f.svg && !f.testo),
+    "ogni francobollo e' un <svg>, e non ha testo dentro");
+  // 16-32px: l'agenda gli da' 24 (.ev-thumb.is-ph .icon), il riquadro ne misura
+  // 52. Fuori da quella forbice o e' sparito o ha sfondato.
+  const fuoriMisura = francobolli.filter((f) => f.w < 16 || f.w > 32 || f.h < 16 || f.h > 32);
+  r.ok(fuoriMisura.length === 0, fuoriMisura.length
+    ? `francobolli fuori misura: ${fuoriMisura.map((f) => f.w + 'x' + f.h).join(', ')}`
+    : `disegnati a ${francobolli[0].w}x${francobolli[0].h}px dentro un riquadro da 52`);
+  // E in tutta la riga non ne deve restare nessuna: il francobollo era il posto
+  // piu' visibile, non l'unico possibile.
+  const conEmoji = await page.$$eval('.event-card', (cs, re) => cs
+    .filter((c) => new RegExp(re, 'u').test(c.textContent))
+    .map((c) => c.id), EMOJI.source);
+  r.ok(conEmoji.length === 0, conEmoji.length
+    ? `righe con un'emoji dentro: ${conEmoji.slice(0, 4).join(', ')}`
+    : 'nessuna emoji nel testo delle righe');
+
   // ── il breadcrumb si deve leggere sull'hero scuro ──────────────────────
   const cr = await contrastoCrumb(page, '.co-crumb');
   if (!cr) {
