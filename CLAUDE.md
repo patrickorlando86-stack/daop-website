@@ -2309,6 +2309,53 @@ per come provarlo in locale.
 metrica perché è un numero, ma sommare i chilometri non vuol dire niente — serve
 sapere *quante volte* è stato scelto il gradino 30, cioè raggruppare per valore.
 
+### I gruppi dell'agenda sono per data di INIZIO, e il calendario chiede altro
+
+`eventi.html` raggruppa per giorno di partenza: una sagra dal 16 al 23 agosto sta
+nel gruppo del 16, e se era già cominciata ieri sta in "Già iniziati, ancora in
+corso". È giusto per l'agenda, che si scorre in avanti.
+
+La vista calendario fa un'altra domanda. Toccare il 30 filtra le schede che
+**coprono** il 30 — cioè anche quella del 27 — ma le intestazioni restavano quelle
+dei gruppi: chi chiedeva il 30 leggeva "giovedì 27 agosto" e "Oggi · venerdì 28",
+e concludeva che il 30 non c'era. Il filtro era corretto, i titoli sopra le
+righe no.
+
+L'agenda **non si riordina** per rispondere (spostare i nodi di ~290 schede è il
+layout più caro della pagina). Con un giorno scelto: le intestazioni dei gruppi si
+spengono (`.events-list.is-giorno`), il gruppo di quel giorno sale in cima con
+`order`, e le due che si leggono le scrive il JS — *domenica 30 agosto* per quello
+che comincia, *Già iniziati, ancora in corso* per quello che continua. Due frasi
+vere in entrambi i posti, e nessuna scheda toccata. Il secondo capo compare solo
+se c'è roba in tutti e due: due titoli di cui uno a zero sono una divisione
+annunciata e non fatta.
+
+Toccando un giorno la pagina **scorre** al primo capo: prima restava ferma sul
+calendario, e sul telefono fra la griglia e la prima riga ci sono la nav dei
+comuni e le corsie, cioè due schermate di niente prima della risposta.
+
+**Questo pezzo è stato scritto il 13/08/2026 e è rimasto fuori da `main` fino al
+28/08.** Il commit `8d013eac` stava sul ramo
+`claude/mobile-calendar-event-order-vihwb8`, mai unito: il ramo era su GitHub, la
+run notturna committava su `main` tutte le notti, e nessuno dei due sapeva
+dell'altro. Il difetto è tornato in produzione per quindici giorni senza che
+niente diventasse rosso, perché **anche le prove che lo difendevano erano su quel
+ramo**. Da qui la cosa da guardare quando una funzione "sparisce": non il
+generatore che riscrive i file, ma `git log --all --oneline -- eventi.html` e i
+rami avanti rispetto a `main` — il generatore non tocca il `<style>` né il JS in
+fondo, quindi quello che sparisce da lì non l'ha riscritto lui.
+
+Il conteggio accanto al giorno è un'altra storia e **non va rimesso da quel
+commit**: la stessa bugia (`18` sopra una riga sola con un filtro attivo) è stata
+poi corretta su `main` dentro `notaGiorno()`, che tiene il totale della notte in
+`dataset.tot` e riscrive solo quando si filtra. È la versione buona: reintrodurre
+quella del ramo vorrebbe dire due pezzi di codice che si contendono lo stesso
+numero.
+
+L'app Android non ha questo problema: `daop-mobile/app.js` **clona** gli eventi
+brevi su ogni loro giorno invece di raggrupparli per inizio, e i lunghi li mette
+nei gruppi "Vieni quando vuoi" / "Solo in certi giorni".
+
 ### L'età non si ripete nelle descrizioni
 
 La fascia d'età è già nella riga `Età:` dei dati della scheda e in ogni riga

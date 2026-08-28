@@ -274,10 +274,16 @@ module.exports = async function porte(browser) {
   r.ok(conMarker.length >= 12,
     `${conMarker.length} pagine con il marker della voce centri`);
   const attesa = viva ? viva.file : null;
+  // In 404.html la stessa voce si scrive con la barra davanti, e non e' una
+  // deriva: quella pagina la serve GitHub Pages all'URL richiesto, quindi da
+  // /eventi/... un href relativo la manderebbe a /eventi/centri-estivi.html.
+  // La stagione dev'essere la stessa delle altre undici; a cambiare e' solo
+  // la forma del percorso.
   const fuori = conMarker.filter((f) => {
     const nv = html(f).match(/<ul class="nav-links">[\s\S]*?\/ul>/);
     if (!nv) return true;
-    const nom = FILE_CENTRI.filter((c) => nv[0].includes(`href="${c}"`));
+    const pre = f === '404.html' ? '/' : '';
+    const nom = FILE_CENTRI.filter((c) => nv[0].includes(`href="${pre}${c}"`));
     return nom.length !== (attesa ? 1 : 0) || (attesa && nom[0] !== attesa);
   });
   r.ok(fuori.length === 0, fuori.length
@@ -307,6 +313,24 @@ module.exports = async function porte(browser) {
   const x = await card.evaluateAll((els) =>
     els.map((e) => Math.round(e.getBoundingClientRect().left)));
   r.ok(new Set(x).size === 1, `sul telefono le card sono in pila (x: ${x.join(', ')})`);
+
+  // 404.html e' l'unica pagina a mano che non viene servita dal proprio
+  // indirizzo: GitHub Pages la restituisce all'URL richiesto, quindi da
+  // /eventi/una-scheda-cancellata.html un href relativo punta a
+  // /eventi/eventi.html e ogni via d'uscita e' rotta - proprio per chi ci
+  // arriva dalle schede evento, che sono il 70% del traffico. Misurato in
+  // produzione il 28/08/2026: tutta la nav rotta, e l'unico link vivo era
+  // quello che portava fuori dal sito.
+  const q404 = html('404.html');
+  const relativi = [...q404.matchAll(/ (?:href|src)="([^"/#][^":]*)"/g)].map((m) => m[1]);
+  r.ok(relativi.length === 0, relativi.length
+    ? `404.html ha ${relativi.length} percorsi relativi: ${[...new Set(relativi)].slice(0, 4).join(', ')}`
+    : 'in 404.html ogni percorso è assoluto: la nav regge da qualunque cartella');
+
+  // La via d'uscita di una pagina di errore non puo' essere l'unico link che
+  // porta via dal sito.
+  r.ok(!/nav-cta[^>]*>\s*Gioca ora/.test(q404) && /nav-cta[^>]*>\s*Contatti/.test(q404),
+    'la CTA della 404 è Contatti, non un rimando fuori dominio');
 
   await ctx.close();
   return r;

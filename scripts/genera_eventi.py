@@ -2463,7 +2463,7 @@ def stagione_centri():
     return vive[0]
 
 
-def voce_centri(mobile=False):
+def voce_centri(mobile=False, assoluto=False):
     """La voce di nav, vuota se nessuna stagione ha centri.
 
     Vuota vuol dire una voce in meno in nav, non un buco: e' il comportamento
@@ -2473,6 +2473,8 @@ def voce_centri(mobile=False):
     if not v:
         return ''
     href, voce = v['file'], esc(v['voce'])
+    if assoluto:
+        href = '/' + href
     if mobile:
         return f'<a href="{href}" onclick="closeMobile()">{voce}</a>'
     return f'<li><a href="{href}">{voce}</a></li>'
@@ -2495,7 +2497,7 @@ def riga_centri_hero():
             f'{esc(v["voce"].lower())} in provincia di {PROVINCE_TESTO}</a>.</p>')
 
 
-def voce_corsi(mobile=False):
+def voce_corsi(mobile=False, assoluto=False):
     """La voce Corsi in nav, vuota finche' la pagina sta fuori dall'indice.
 
     Stesso meccanismo di voce_centri() e per la stessa ragione: la nav dice
@@ -2504,9 +2506,10 @@ def voce_corsi(mobile=False):
     scritta in CORSI_IN_INDICE."""
     if not CORSI_IN_INDICE:
         return ''
+    href = '/corsi.html' if assoluto else 'corsi.html'
     if mobile:
-        return '<a href="corsi.html" onclick="closeMobile()">Corsi</a>'
-    return '<li><a href="corsi.html">Corsi</a></li>'
+        return f'<a href="{href}" onclick="closeMobile()">Corsi</a>'
+    return f'<li><a href="{href}">Corsi</a></li>'
 
 
 def aggiorna_nav():
@@ -2522,18 +2525,27 @@ def aggiorna_nav():
     Nessun elenco di pagine da tenere aggiornato: si riscrive dove il marker
     c'e'. Una pagina nuova entra mettendoci i marker, e finche' non li ha resta
     fuori invece di prendere una voce sbagliata."""
-    voci = {
-        'NAV-CENTRI': voce_centri(),
-        'MM-CENTRI': voce_centri(mobile=True),
-        'HERO-CENTRI': riga_centri_hero(),
-        'NAV-CORSI': voce_corsi(),
-        'MM-CORSI': voce_corsi(mobile=True),
-    }
+    def blocco(assoluto=False):
+        return {
+            'NAV-CENTRI': voce_centri(assoluto=assoluto),
+            'MM-CENTRI': voce_centri(mobile=True, assoluto=assoluto),
+            'HERO-CENTRI': riga_centri_hero(),
+            'NAV-CORSI': voce_corsi(assoluto=assoluto),
+            'MM-CORSI': voce_corsi(mobile=True, assoluto=assoluto),
+        }
+    # 404.html e' l'unica pagina a mano che NON viene servita dal proprio
+    # indirizzo: GitHub Pages la restituisce all'URL richiesto, quindi da
+    # /eventi/qualcosa-che-non-c-e' un href relativo punta a
+    # /eventi/centri-estivi.html e la via d'uscita e' rotta - proprio per chi
+    # ci arriva dal 70% del traffico del sito, che sono le schede evento. Li'
+    # la voce si scrive assoluta; nelle altre undici resta relativa com'era.
+    normali, assolute = blocco(), blocco(assoluto=True)
     v = stagione_centri()
     tocc = []
     for path in sorted(glob.glob(os.path.join(ROOT, "*.html"))):
         s = open(path, encoding="utf-8").read()
         orig = s
+        voci = assolute if os.path.basename(path) == '404.html' else normali
         for nome, val in voci.items():
             s = re.sub(rf'(<!-- {nome}:START -->).*?(<!-- {nome}:END -->)',
                        lambda m: m.group(1) + val + m.group(2), s, flags=re.S)
