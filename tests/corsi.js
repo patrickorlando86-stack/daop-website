@@ -513,13 +513,23 @@ module.exports = async function corsi(browser) {
   // nessuno se ne accorge.
   const openday = await page.$$eval('.co-openday a', (as) => as.map((a) => ({
     href: a.getAttribute('href'), testo: a.closest('.co-openday').textContent.trim() })));
+  // Un OpenDay scritto come INDIRIZZO WEB non e' un link rotto: e' il ripiego
+  // dichiarato in openday() - la realta' annuncia la data sul proprio sito
+  // settimane prima che l'evento entri in agenda - e finche' quella riga non
+  // c'e' la scheda non esiste. Su disco non si cerca, e va detto qui perche'
+  // prima questa prova lo contava fra i guasti: sarebbe diventata rossa la
+  // prima volta che qualcuno usava una funzione documentata.
   const rotti = openday.filter((o) => {
-    if (!/^\/eventi\/[^/]+\.html$/.test(o.href || '')) return true;
-    return !fs.existsSync(path.join(RADICE, o.href.replace(/^\//, '')));
+    const h = o.href || '';
+    if (/^https?:/.test(h)) return false;
+    if (!/^\/eventi\/[^/]+\.html$/.test(h)) return true;
+    return !fs.existsSync(path.join(RADICE, h.replace(/^\//, '')));
   }).map((o) => o.href);
+  const fuori = openday.filter((o) => /^https?:/.test(o.href || '')).length;
   r.ok(rotti.length === 0, rotti.length
     ? `open day che puntano a pagine inesistenti: ${rotti.join(', ')}`
-    : `${openday.length} link a open day, tutti verso schede che esistono`);
+    : `${openday.length} link a open day, tutti buoni`
+      + (fuori ? ` (${fuori} fuori dal sito, ripiego dichiarato)` : ''));
 
   // ── 7. ogni riga sa di chi e', e il tracciamento lo legge ────────────
   // Chiesto da Giovanni il 21/08/2026: restituire a ogni realta' il proprio
@@ -668,7 +678,12 @@ module.exports = async function corsi(browser) {
 
     // Le locandine degli eventi: se ce ne sono, i link devono esistere.
     const ev = await q.page.$$eval('.cr-ev', (as) => as.map((a) => a.getAttribute('href')));
-    const evRotti = ev.filter((h) => !fs.existsSync(path.join(RADICE, h.replace(/^\//, ''))));
+    // Un OpenDay scritto come INDIRIZZO WEB e' il ripiego dichiarato in
+    // openday() - la realta' annuncia la data sul proprio sito prima che
+    // l'evento entri in agenda - e non e' un link rotto: e' un link a casa
+    // d'altri, che su disco non si cerca.
+    const evRotti = ev.filter((h) => !/^https?:/.test(h)
+      && !fs.existsSync(path.join(RADICE, h.replace(/^\//, ''))));
     r.ok(evRotti.length === 0, evRotti.length
       ? `${f}: eventi verso pagine inesistenti: ${evRotti.join(', ')}`
       : `${f}: ${ev.length} eventi, tutti verso schede che esistono`);
@@ -817,5 +832,49 @@ module.exports = async function corsi(browser) {
   }
 
   await b.ctx.close();
+
+  // ── il verso opposto: dalla scheda evento alla pagina di chi organizza ──
+  // Senza questo il legame e' mezzo: la pagina di CàRezza raccoglie i suoi
+  // appuntamenti, ma chi arriva da Google su "Sogni d'Oro Racconigi" trovava
+  // solo /corsi.html generico. Lo stampa link_realta() in genera_eventi.py,
+  // leggendo data/realta-pagine.json che scrive genera_corsi.py.
+  //
+  // Si legge dai file, non col browser: sono ~400 schede, e aprirle tutte per
+  // un attributo costerebbe piu' di tutta la suite messa insieme.
+  //
+  // LA PROVA GUARDA IL VERSO PERICOLOSO, e solo quello. "Ogni realta' con
+  // eventi deve ricevere il link dalle sue schede" sarebbe rossa per un giro
+  // ogni volta che nasce una realta' nuova: in CI genera_eventi gira PRIMA di
+  // genera_corsi, quindi legge il registro della notte prima - e' il ritardo
+  // di un giro dichiarato in indice_realta(), e una prova che non lo ammette
+  // diventa rossa proprio quando il sito fa la cosa giusta (e' successo tre
+  // volte: la copertura delle coordinate, il conteggio delle quattro porte, il
+  // robots delle pagine realta'). Il verso opposto invece non ha scuse: un
+  // link a una pagina che genera_corsi ha appena cancellato e' un 404.
+  r.titolo('il rimando dalla scheda evento alla realtà');
+  const dirEventi = path.join(RADICE, 'eventi');
+  const schedeEv = fs.existsSync(dirEventi)
+    ? fs.readdirSync(dirEventi).filter((n) => n.endsWith('.html')) : [];
+  const rimandi = [];
+  for (const n of schedeEv) {
+    const html = fs.readFileSync(path.join(dirEventi, n), 'utf8');
+    const m = html.match(/Organizzatore:<\/strong>\s*<a href="(\/corsi\/[^"]+)"/);
+    if (m) rimandi.push({ scheda: n, verso: m[1] });
+  }
+  const rimandiRotti = rimandi.filter((x) => !fs.existsSync(path.join(RADICE, x.verso.slice(1))));
+  r.ok(rimandiRotti.length === 0, rimandiRotti.length
+    ? `schede che rimandano a pagine realtà inesistenti: ${rimandiRotti.map((x) => x.scheda + ' -> ' + x.verso).join(', ')}`
+    : `${rimandi.length} schede rimandano a una realtà, tutte verso pagine che esistono`);
+
+  // E il rimando non si stampa su una scheda RITIRATA: quella pagina dichiara
+  // di non essere attendibile e manda all'agenda, quindi non e' il posto da
+  // cui presentare una realta'. Lo garantisce `facts = []` in render_pagina, e
+  // questa prova e' li' perche' quella riga si toglie per distrazione.
+  const suRitirate = rimandi.filter((x) => fs
+    .readFileSync(path.join(dirEventi, x.scheda), 'utf8').includes('Scheda ritirata:'));
+  r.ok(suRitirate.length === 0, suRitirate.length
+    ? `schede ritirate che presentano una realtà: ${suRitirate.map((x) => x.scheda).join(', ')}`
+    : 'nessuna scheda ritirata presenta una realtà');
+
   return r;
 };

@@ -158,6 +158,14 @@ jobs:
           #     e' quello che fa comparire il link in pagina: senza, il PDF
           #     verrebbe committato e non lo linkerebbe nessuno.
           #
+          #   data/realta-pagine.json  quali realta' dei corsi hanno una pagina
+          #     in /corsi/ (dal 28/08). Lo scrive genera_corsi.py e lo legge
+          #     genera_eventi.py al giro DOPO, per stampare sulla scheda di un
+          #     evento il rimando alla realta' che lo organizza. Senza, quel
+          #     rimando sparisce dalle ~400 schede alla prima run che non lo
+          #     trova, e nessuno se ne accorge: e' un link in meno, non un
+          #     errore.
+          #
           #   corsi/  le pagine dedicate delle realta' (dal 21/08). Nascono
           #     UNTRACKED, quando una societa' nuova entra nella tab Realta: e'
           #     l'unico caso in cui la rete di sicurezza NON avrebbe protetto,
@@ -189,7 +197,7 @@ jobs:
                 data/pagine-landing.json data/storico-comuni.json \
                 data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
-                data/guide.json \
+                data/guide.json data/realta-pagine.json \
                 eventi/ rubriche/ corsi/ guide/ assets/miniature/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e

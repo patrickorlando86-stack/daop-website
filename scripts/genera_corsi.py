@@ -902,37 +902,12 @@ def raggruppa_per_realta(corsi):
     return gruppi
 
 
-# IL NOME DELLA SOCIETA' STA IN CODA AL NOME DELL'EVENTO, dopo un trattino
-# spaziato: "Sogni d'Oro - CàRezza", "Green Volley Torneo 2VS2 - PGS Roccavione".
-# Non e' una convenzione dedotta qui: e' quella che il downloader impone al
-# modello quando legge una locandina ("titolo del singolo appuntamento -
-# Organizzatore"), ed e' la stessa da cui organizzatore() in genera_eventi.py
-# ricava l'organizer del JSON-LD. Il trattino DEVE avere spazi intorno, se no
-# "Espressione in Gioco! fascia 2-6 anni" si spezzerebbe sul 2-6.
-CODA_ORG_RE = re.compile(r'\s[-–—]\s+')
-
-
-def _taglia_coda(nome):
-    """(titolo, societa') tagliando sull'ULTIMO trattino spaziato.
-
-    L'ultimo e non il primo: "TuteliAMO - Corso Manovre Salvavita Pediatriche -
-    CàRezza" ha due trattini, e la societa' e' quella in fondo. Senza trattino
-    la coda e' vuota, e un evento che non dichiara chi lo organizza non si
-    attacca a nessuno: e' la regola di link_luoghi(), quello che manca non si
-    stampa e non si inventa."""
-    testo = (nome or '').strip()
-    ultimo = None
-    for m in CODA_ORG_RE.finditer(testo):
-        ultimo = m
-    if not ultimo:
-        return testo, ''
-    return testo[:ultimo.start()].strip(), testo[ultimo.end():].strip()
-
-
-def _spezza_nome_evento(nome):
-    """Lo stesso taglio, in slug: serve a confrontare, non a stampare."""
-    testa, coda = _taglia_coda(nome)
-    return G.slugify(testa), G.slugify(coda)
+# IL TAGLIO DEL NOME VIVE IN genera_eventi.py (taglia_coda), non qui: lo usano
+# tutti e due i versi del legame - la pagina della realta' raccoglie i suoi
+# eventi, e la scheda dell'evento rimanda alla realta' (link_realta la') - e due
+# implementazioni della stessa regola divergerebbero al primo ritocco, dando due
+# link che si contraddicono. Sta di la' e non di qua perche' questo modulo
+# importa quello, non il contrario.
 
 
 def _senza_societa(nome, org):
@@ -946,7 +921,7 @@ def _senza_societa(nome, org):
     Si toglie SOLO se la coda e' davvero la sua: un evento organizzato con
     un'altra realta' tiene il nome per intero, perche' li' quella parola non e'
     una ripetizione, e' l'altro nome."""
-    testa, coda = _taglia_coda(nome)
+    testa, coda = G.taglia_coda(nome)
     if coda and G.slugify(coda) == slug_realta(org or ''):
         return testa
     return (nome or '').strip()
@@ -987,7 +962,7 @@ def eventi_a_nome_di(reg, org, oggi):
     for slug, rec in (reg or {}).items():
         if rec.get('ritirata'):
             continue
-        titolo, coda = _spezza_nome_evento(rec.get('nome'))
+        titolo, coda = G.spezza_nome_evento(rec.get('nome'))
         if coda != slug_org:
             if _pezzi_dentro('-'.join(x for x in (titolo, coda) if x), slug_org):
                 quasi.append(rec.get('nome') or slug)
@@ -1358,12 +1333,18 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
     dest = os.path.join(ROOT, DIR_REALTA)
     os.makedirs(dest, exist_ok=True)
     vive, scritte, in_indice = set(), 0, set()
+    # Il registro per il verso opposto: da una scheda evento alla pagina di chi
+    # lo organizza (link_realta in genera_eventi.py). Si scrive QUI, dove si sa
+    # quali pagine esistono davvero, e si legge con un giro di ritardo - lo
+    # stesso patto di data/luoghi-comuni.json e data/conteggi.json.
+    indice = {}
     for org, v in gruppi.items():
         info = realta.get(G.slugify(org), {})
         if not ha_pagina(info):
             continue
         f = f"{slug_realta(org)}.html"
         vive.add(f)
+        indice[slug_realta(org)] = {'nome': org, 'url': f"/{DIR_REALTA}/{f}"}
         # Solo le confermate vanno in sitemap. Non e' una restrizione in piu':
         # e' l'invariante che aggiorna_sitemap dichiara gia' - una URL in
         # sitemap con robots noindex sono due ordini che si contraddicono.
@@ -1380,6 +1361,14 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
         if os.path.basename(path) not in vive:
             os.remove(path)
             tolte.append(os.path.basename(path))
+    # Si riscrive SEMPRE, anche vuoto: una realta' che perde la pagina deve
+    # perdere anche i link che ci puntano, e un file lasciato indietro li
+    # terrebbe in piedi verso un 404. E' il contrario del patto di
+    # centri-stagioni.json, che invece FONDE - li' un foglio non letto non deve
+    # spegnere una voce di nav; qui la verita' e' cosa c'e' su disco, e questa
+    # funzione l'ha appena stabilita.
+    with open(G.INDICE_REALTA_PATH, 'w', encoding='utf-8') as fh:
+        json.dump(indice, fh, ensure_ascii=False, indent=1, sort_keys=True)
     print(f"[genera_corsi] pagine realta': {len(vive)} pubblicate "
           f"({scritte} riscritte), {len(in_indice)} in indice"
           + (f", {len(tolte)} tolte: {', '.join(tolte)}" if tolte else ""))

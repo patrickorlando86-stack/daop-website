@@ -25,6 +25,10 @@ SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 # Lo scrive genera_luoghi.py, lo legge questo: i comuni che hanno almeno un
 # luogo in /luoghi.html, con l'ancora del loro gruppo. Vedi link_luoghi().
 INDICE_LUOGHI_PATH = os.path.join(ROOT, "data", "luoghi-comuni.json")
+# Le realta' dei corsi che hanno una pagina in /corsi/. Lo scrive
+# genera_corsi.py, che gira dopo: si legge quello della notte prima. Vedi
+# indice_realta() e link_realta().
+INDICE_REALTA_PATH = os.path.join(ROOT, "data", "realta-pagine.json")
 
 # Province i cui eventi vengono pubblicati sul sito. Una sola lista, usata sia dal
 # filtro dei dati sia dal copy che dice "che zona copre DAOP": prima la sigla era
@@ -2381,6 +2385,10 @@ PHONE_SVG = ('<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke
 STAR_SVG = ('<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" '
             'aria-hidden="true"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.4-5.8-3-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>')
 
+ORG_SVG = ('<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" '
+           'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+           '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>'
+           '<path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg>')
 CHECK_SVG = ('<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" '
              'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
              '<path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg>')
@@ -2751,6 +2759,103 @@ def link_luoghi(citta, prov):
     quanti = "Un posto" if n == 1 else f"{n} posti"
     return (f'<a href="/luoghi.html#{ancora}">{quanti} per famiglie'
             f'{a_citta(esc(dati.get("comune") or citta))}</a>')
+
+
+
+
+# --- Chi organizza, quando ha una pagina sua --------------------------------
+#
+# IL NOME DELLA SOCIETA' STA IN CODA AL NOME DELL'EVENTO, dopo un trattino
+# spaziato: "Sogni d'Oro - CàRezza", "Green Volley Torneo 2VS2 - PGS
+# Roccavione". Non e' una convenzione dedotta qui: e' quella che il downloader
+# impone al modello quando legge una locandina ("titolo del singolo
+# appuntamento - Organizzatore"), ed e' la stessa da cui organizzatore() ricava
+# l'organizer del JSON-LD.
+#
+# IL TAGLIO STA QUI e non in genera_corsi.py, che pure lo usa per l'altro verso
+# (gli eventi di una realta' raccolti sulla sua pagina): genera_corsi importa
+# questo modulo, non il contrario, e due implementazioni della stessa regola
+# divergerebbero al primo ritocco - dando due link che si contraddicono, uno
+# per verso. E' la ragione per cui la nav si rilegge da eventi.html invece di
+# essere copiata.
+CODA_ORG_RE = re.compile(r'\s[-–—]\s+')
+
+
+def taglia_coda(nome):
+    """(titolo, societa') tagliando sull'ULTIMO trattino spaziato.
+
+    L'ultimo e non il primo: "TuteliAMO - Corso Manovre Salvavita Pediatriche -
+    CàRezza" ha due trattini, e la societa' e' quella in fondo. Il trattino deve
+    avere spazi intorno, se no "Espressione in Gioco! fascia 2-6 anni" si
+    spezzerebbe sul 2-6.
+
+    Senza trattino la coda e' vuota, e un evento che non dichiara chi lo
+    organizza non si attacca a nessuno: quello che manca non si stampa e non si
+    inventa, come in link_luoghi()."""
+    testo = (nome or '').strip()
+    ultimo = None
+    for m in CODA_ORG_RE.finditer(testo):
+        ultimo = m
+    if not ultimo:
+        return testo, ''
+    return testo[:ultimo.start()].strip(), testo[ultimo.end():].strip()
+
+
+def spezza_nome_evento(nome):
+    """Lo stesso taglio, in slug: serve a confrontare, non a stampare."""
+    testa, coda = taglia_coda(nome)
+    return slugify(testa), slugify(coda)
+
+
+_INDICE_REALTA = None
+
+
+def indice_realta():
+    """Le realta' che hanno una pagina in /corsi/, lette una volta sola.
+
+    Il file lo scrive genera_corsi.py, che gira DOPO questo script: si legge
+    quindi l'indice della notte prima. E' lo stesso ritardo di un giro di
+    data/luoghi-comuni.json e data/conteggi.json, e per la stessa ragione -
+    chiudere il cerchio costerebbe piu' di quello che risolve. Una realta' che
+    entra oggi nel foglio resta un giorno senza il link dalle sue schede, e
+    sbagliare in quel verso e' gratis; il verso opposto no, perche' un link a
+    una pagina che genera_corsi ha appena cancellato e' un 404.
+
+    Se il file non c'e' il dizionario e' vuoto e i link non si stampano: la
+    pagina esce come prima, senza rompersi."""
+    global _INDICE_REALTA
+    if _INDICE_REALTA is None:
+        try:
+            with open(INDICE_REALTA_PATH, encoding="utf-8") as fh:
+                _INDICE_REALTA = json.load(fh)
+        except (OSError, ValueError):
+            _INDICE_REALTA = {}
+    return _INDICE_REALTA
+
+
+def link_realta(nome_evento):
+    """Il link alla pagina di chi organizza, o '' se non ce l'ha.
+
+    E' IL VERSO OPPOSTO del legame che eventi_realta() fa in genera_corsi.py, e
+    senza di questo quello e' mezzo: la pagina di CàRezza raccoglieva i suoi
+    appuntamenti, ma chi arriva da Google su "Sogni d'Oro Racconigi" trovava
+    solo /corsi.html generico e non scopriva che quella realta' ha una pagina
+    sua con dentro i suoi corsi.
+
+    Si stampa il NOME e non l'etichetta - "I corsi di CàRezza" e' una ragione
+    per toccare, "Organizzatore" no. E' la lezione di link_luoghi(), riusata.
+
+    La coda deve corrispondere a una pagina che esiste davvero: un evento
+    firmato da una realta' senza pagina non stampa niente, invece di mandare su
+    un 404 o su /corsi.html, che e' dove si andrebbe comunque dalla riga delle
+    quattro porte in fondo alla scheda."""
+    _, coda = taglia_coda(nome_evento)
+    if not coda:
+        return ''
+    voce = indice_realta().get(slugify(coda))
+    if not voce:
+        return ''
+    return (f'<a href="{voce["url"]}">I corsi di {esc(voce["nome"])}</a>')
 
 
 # --- Le quattro porte -------------------------------------------------------
@@ -3241,6 +3346,13 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     if e.get('prenotazione'):
         facts.append(f'<li>{CHECK_SVG}<span><strong>Prenotazione:</strong> '
                      f'{esc(e["prenotazione"])}</span></li>')
+    # CHI ORGANIZZA, quando ha una pagina sua. Sta fra la prenotazione e i
+    # recapiti perche' e' la stessa domanda dei recapiti - "con chi ho a che
+    # fare?" - e la risposta piu' larga viene prima del numero di telefono.
+    lr = link_realta(e.get('nome'))
+    if lr:
+        facts.append(f'<li>{ORG_SVG}<span><strong>Organizzatore:</strong> '
+                     f'{lr}</span></li>')
     # I recapiti dell'organizzatore sono la cosa piu' utile che possiamo dare a
     # chi deve decidere oggi: nessuna risposta di un assistente te li da'.
     if contatti_html(e.get('contatto')):

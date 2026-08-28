@@ -1397,13 +1397,48 @@ vera, la sezione che sparisce, non l'algoritmo. Rimettendo il difetto le prove
 tornano rosse dicendo «6 eventi a suo nome in registro, 0 in pagina»: verificato,
 non supposto.
 
-**Cosa manca ancora.** Il verso opposto: dalla scheda evento non c'è nessun link
-alla pagina della società. Chi arriva da Google su «Sogni d'Oro Racconigi» trova
-`/corsi.html` generico e non scopre che CàRezza ha una pagina sua con dentro
-tutto il resto. E un evento **senza** il trattino in coda non si aggancia a
-nessuno: è la regola di `link_luoghi()` — quello che manca non si stampa e non
-si inventa — ma vuol dire che una locandina letta male resta muta, e lo si vede
-solo nel log.
+**E il verso opposto, fatto lo stesso giorno.** Sulla scheda di un evento, fra la
+prenotazione e i recapiti, c'è la riga **«Organizzatore: I corsi di CàRezza →»**
+(`link_realta()` in `genera_eventi.py`). Senza, il legame era mezzo: la pagina di
+CàRezza raccoglieva i suoi appuntamenti, ma chi arriva da Google su «Sogni d'Oro
+Racconigi» trovava solo `/corsi.html` generico e non scopriva che quella realtà
+ha una pagina sua. Al 28/08/2026 sono **8 schede su ~400**.
+
+- **Il taglio del nome sta in `genera_eventi.py`** (`taglia_coda()`), non in
+  `genera_corsi.py` che pure lo usa: quel modulo importa questo, non il
+  contrario, e due implementazioni della stessa regola darebbero due link che si
+  contraddicono, uno per verso.
+- **Il patto è un file**, `data/realta-pagine.json`: lo scrive `genera_corsi.py`
+  (che sa quali pagine esistono davvero) e lo legge `genera_eventi.py` **al giro
+  dopo** — nel workflow gira prima lui. Stesso ritardo di
+  `data/luoghi-comuni.json`, e per la stessa ragione: una realtà nuova resta un
+  giorno senza il link dalle sue schede, e sbagliare in quel verso è gratis; il
+  verso opposto no, perché un link a una pagina appena cancellata è un 404.
+- **Il registro si riscrive sempre, anche vuoto**, ed è il contrario del patto
+  di `centri-stagioni.json`, che invece *fonde*. Là un foglio non letto non deve
+  spegnere una voce di nav; qui la verità è cosa c'è su disco, e
+  `scrivi_realta()` l'ha appena stabilita: una realtà che perde la pagina deve
+  perdere anche i link che ci puntano.
+- **Sulla riga si scrive il nome, non l'etichetta.** «I corsi di CàRezza» è una
+  ragione per toccare, «Organizzatore» no — è la lezione di `link_luoghi()`.
+- **Niente su una scheda ritirata**: lo garantisce `facts = []` in
+  `render_pagina()`, ed è la stessa ragione per cui lì spariscono i due bottoni.
+  Quella pagina si dichiara inattendibile, e non è il posto da cui presentare
+  una realtà.
+
+La prova in `tests/corsi.js` guarda **solo il verso pericoloso** — nessun rimando
+verso una pagina che non esiste — e legge i file invece di aprirli col browser,
+che su ~400 schede costerebbe più di tutta la suite. La simmetrica («ogni realtà
+con eventi riceve il link dalle sue schede») **non si scrive**: sarebbe rossa per
+un giro ogni volta che nasce una realtà nuova, cioè proprio quando il sito fa la
+cosa giusta. È la quarta volta che quel tipo di prova si sarebbe rotta da sé —
+dopo la copertura delle coordinate, il conteggio delle quattro porte e il robots
+delle pagine realtà.
+
+**Cosa manca ancora.** Un evento **senza** il trattino in coda non si aggancia a
+nessuno, in nessuno dei due versi: è la regola di `link_luoghi()` — quello che
+manca non si stampa e non si inventa — ma vuol dire che una locandina letta male
+resta muta, e lo si vede solo nel log della run.
 
 **Due file generati non erano nell'elenco del workflow**, ed è la tredicesima e
 quattordicesima ripetizione dello stesso guasto già documentato per
