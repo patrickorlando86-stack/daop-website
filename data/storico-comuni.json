@@ -176,6 +176,23 @@
   "nome": "Acqui Terme",
   "prov": "AL"
  },
+ "aisone": {
+  "eventi": {
+   "il-giardino-di-babushka-pro-loco-aisone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Yurta",
+    "manifest": "Una Yurta di Comunità",
+    "nome": "Il giardino di Babushka - Pro Loco Aisone",
+    "organizza": "Pro Loco Aisone",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Aisone",
+  "prov": "CN"
+ },
  "albaretto": {
   "eventi": {
    "passeggiata-a-cavallo-con-axel-circolo-la-torre-albaretto": {
@@ -604,6 +621,23 @@
   },
   "nome": "Baldichieri d'Asti",
   "prov": "AT"
+ },
+ "barge": {
+  "eventi": {
+   "sport-in-piazza-festa-dello-sport-pro-loco-barge": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "Sport in Piazza - Festa dello Sport - Pro Loco Barge",
+    "organizza": "Pro Loco Barge",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Barge",
+  "prov": "CN"
  },
  "barolo": {
   "eventi": {
@@ -1123,6 +1157,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-31"
+   },
+   "lunatorio-oratorio-carru": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio Carrù",
+    "manifest": "",
+    "nome": "Lunatorio - Oratorio Carrù",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-07"
    }
   },
   "nome": "Carrù",
@@ -1584,6 +1629,17 @@
     "luogo": "Piazza Cavalier Tomatis",
     "manifest": "Festival della Cucina Popolare Alpina",
     "nome": "Laboratorio di caseificazione con EmotionAlp",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   },
+   "laboratorio-di-cioccolato-fagiolo-peirano-busca-castellar": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Cavalier Tomatis",
+    "manifest": "Festival della Cucina Popolare Alpina",
+    "nome": "Laboratorio di cioccolato Fagiolo Peirano Busca",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-13"
@@ -2278,6 +2334,17 @@
  },
  "confreria": {
   "eventi": {
+   "arte-terapia-e-nutrizione-il-sapore-delle-emozioni-confreria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Olistico Polifunzionale Puraessenza",
+    "manifest": "Arte Terapia e Nutrizione",
+    "nome": "Arte Terapia e Nutrizione - Il sapore delle emozioni - Puraessenza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-03"
+   },
    "colori-dall-orto-puraessenza-confreria": {
     "anni": [
      2026
@@ -2634,6 +2701,17 @@
  },
  "cuneo": {
   "eventi": {
+   "apiario-porte-aperte-vita-da-api-parco-fluviale-ge-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Casa del Fiume",
+    "manifest": "",
+    "nome": "Apiario Porte Aperte! Vita da Api - Parco Fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
    "creazione-giochi-di-societa-chiosco-parri-cuneo": {
     "anni": [
      2026
@@ -2710,6 +2788,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "piccoli-semi-grandi-scoperte-parco-fluviale-gesso-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Orto didattico del Parco fluviale Gesso e Stura",
+    "manifest": "Orto Porte Aperte!",
+    "nome": "Piccoli Semi, Grandi Scoperte - Parco fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
+   "pomeriggio-di-giochi-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tendone dietro la chiesa di Borgo San Giuseppe",
+    "manifest": "Festa2026",
+    "nome": "Pomeriggio di Giochi",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-08-30"
    },
    "scopri-gli-amici-alpaca-cuneo": {
     "anni": [
@@ -2863,6 +2963,23 @@
    }
   },
   "nome": "Dogliani",
+  "prov": "CN"
+ },
+ "dronero": {
+  "eventi": {
+   "laboratori-di-giocoleria-circobus-associazione-fum-dronero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale Ex Stazione",
+    "manifest": "Coincidenze 2026",
+    "nome": "Laboratori di giocoleria Circobus - Associazione Fuma che 'nduma",
+    "organizza": "Associazione Fuma che 'nduma",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Dronero",
   "prov": "CN"
  },
  "dusinosanmichele": {
@@ -3332,6 +3449,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "custodi-della-natura-cinque-sensi-per-sentire-la-n-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Fluviale Gesso e Stura",
+    "manifest": "Cresco Con TE",
+    "nome": "Custodi della Natura - Cinque sensi per sentire la Natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
    "sogni-di-mare-ricordi-di-sabbia-letture-favolose-fossano": {
     "anni": [
      2026
@@ -3660,6 +3788,23 @@
   "nome": "Grondona",
   "prov": "AL"
  },
+ "isasca": {
+  "eventi": {
+   "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-isasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Massimo",
+    "manifest": "Emozioni & Avventura in Valle Varaita",
+    "nome": "C'è Posto nel Bosco con il Sarvanòt Pluf - La Fabbrica dei Suoni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Isasca",
+  "prov": "CN"
+ },
  "limonepiemonte": {
   "eventi": {
    "corrado-brignolo-presenta-villa-felice-un-libro-di-limone-piemonte": {
@@ -3716,6 +3861,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-19"
+   },
+   "ricordi-da-conservare-letture-e-laboratorio-creati-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca e Museo dello Sci di Limone Piemonte",
+    "manifest": "",
+    "nome": "Ricordi da Conservare - Letture e Laboratorio Creativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
    }
   },
   "nome": "Limone Piemonte",
@@ -3750,6 +3906,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "festa-di-san-leone-magno-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cascina Aia",
+    "manifest": "Festa di San Leone Magno",
+    "nome": "Festa di San Leone Magno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
    },
    "sere-fai-d-estate-camminata-sotto-la-luna-al-caste-manta": {
     "anni": [
@@ -3913,6 +4080,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-14"
+   },
+   "esposizione-internazionale-canina-cacib-mondovicin": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mondovicino",
+    "manifest": "",
+    "nome": "Esposizione Internazionale Canina 2026 - CACIB Mondovicino Dog Show",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-28"
    },
    "festa-della-citta-di-mondovi": {
     "anni": [
@@ -4678,6 +4856,40 @@
   "nome": "Pecetto di Valenza",
   "prov": "AL"
  },
+ "peveragno": {
+  "eventi": {
+   "corso-trail-running-bambini-giornata-promozionale-peveragno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Baita delle Meschie",
+    "manifest": "",
+    "nome": "Corso Trail Running Bambini - Giornata Promozionale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-09"
+   }
+  },
+  "nome": "Peveragno",
+  "prov": "CN"
+ },
+ "piasco": {
+  "eventi": {
+   "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cappella Santa Brigida",
+    "manifest": "Emozioni & Avventura in Valle Varaita",
+    "nome": "C'è Posto nel Bosco con il Sarvanòt Pluf - La Fabbrica dei Suoni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   }
+  },
+  "nome": "Piasco",
+  "prov": "CN"
+ },
  "pietramarazzi": {
   "eventi": {
    "festa-di-fine-estate-comune-di-pietra-marazzi": {
@@ -5209,6 +5421,17 @@
  },
  "racconigi": {
   "eventi": {
+   "a-caccia-dell-orso-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Regina Margherita - Ponte del Maira",
+    "manifest": "",
+    "nome": "A Caccia dell'Orso - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-25"
+   },
    "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi": {
     "anni": [
      2026
@@ -5616,6 +5839,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "in-mtb-lungo-il-torrente-varaita-asd-transvaraita-sampeyre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Vittoria",
+    "manifest": "Emozioni & Avventura in Valle Varaita",
+    "nome": "In MTB lungo il torrente Varaita - ASD Transvaraita",
+    "organizza": "ASD Transvaraita",
+    "pagina": true,
+    "ultima": "2026-09-05"
    },
    "serata-cartoni-animati-bar-vittoria-sampeyre": {
     "anni": [
@@ -6772,6 +7006,23 @@
   "nome": "Valderia",
   "prov": "CN"
  },
+ "valdieri": {
+  "eventi": {
+   "passi-nel-kuore-di-valdieri": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Sant'Eusebio",
+    "manifest": "Passi nel Kuore di Valdieri",
+    "nome": "Passi nel Kuore di Valdieri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-29"
+   }
+  },
+  "nome": "Valdieri",
+  "prov": "CN"
+ },
  "valfenera": {
   "eventi": {
    "fiera-di-san-bartolomeo-dell-aglio-e-del-pitu-valfenera": {
@@ -6791,6 +7042,17 @@
  },
  "venasca": {
   "eventi": {
+   "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-venasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ala Comunale Piazza Caduti",
+    "manifest": "Emozioni & Avventura in Valle Varaita",
+    "nome": "C'è Posto nel Bosco con il Sarvanòt Pluf - La Fabbrica dei Suoni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "visita-guidata-la-fabbrica-dei-suoni-venasca": {
     "anni": [
      2026
