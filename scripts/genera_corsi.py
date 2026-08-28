@@ -502,6 +502,9 @@ COLONNE_REALTA = {
     # (vedi confermata()). Una parola in una cella, scritta da una persona: e'
     # l'unico passaggio del giro che una persona deve fare.
     'stato': ('stato', 'stato scheda', 'fase'),
+    # L'OCCHIELLO: la riga sotto il nome, in cima alla pagina. Se c'e' vince su
+    # quella calcolata dalle categorie dei corsi (vedi pagina_realta).
+    'occhiello': ('occhiello', 'claim', 'sottotitolo', 'motto', 'payoff'),
     'descr': ('descrizione', 'descrizione breve', 'presentazione', 'note'),
     'logo': ('logo', 'immagine', 'stemma'),
     'citta': ('città', 'citta', 'comune', 'paese'),
@@ -1024,13 +1027,26 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # Il sottotitolo sotto l'H1, che e' anche l'H1 "parlante" che Giovanni
     # chiedeva nei suggerimenti SEO ("Corsi di musica per bambini a Vezza
     # d'Alba"): l'H1 resta il nome della societa', questo dice cosa fa e dove.
-    che_corsi = (f"Corsi di {', '.join(m.lower() for m in macro[:2])}"
-                 if macro else "Corsi")
-    occhiello = (f'<p class="cr-sub">{G.esc(che_corsi)} per bambini'
-                 f'{f" a {G.esc(citta)}" if citta else ""}</p>')
+    # LA FRASE DEL FOGLIO BATTE QUELLA CALCOLATA (28/08/2026). Il conteggio delle
+    # macro funziona su chi fa una cosa sola — "Corsi di musica per bambini a
+    # Vezza d'Alba" — e cade su chi ne fa quattro: CaRezza usciva come "Corsi di
+    # sport, altro per bambini a Racconigi", dove "altro" era il massaggio
+    # infantile e il sostegno alle famiglie. Giovanni: "non e' 'corsi di sport,
+    # altro', e' uno spazio multidisciplinare a misura di famiglia".
+    # Una societa' sa dirlo in una riga meglio di qualsiasi conteggio; quando non
+    # l'ha detto si ricade sul conteggio, che per una societa' di pallavolo e'
+    # esatto. La colonna la scrive il downloader (CAMPI_REALTA, campo del modulo).
+    claim = (info.get('occhiello') or '').strip()
+    if claim:
+        occhiello = f'<p class="cr-sub">{G.esc(claim)}</p>'
+    else:
+        che_corsi = (f"Corsi di {', '.join(m.lower() for m in macro[:2])}"
+                     if macro else "Corsi")
+        occhiello = (f'<p class="cr-sub">{G.esc(che_corsi)} per bambini'
+                     f'{f" a {G.esc(citta)}" if citta else ""}</p>')
     url = f"{SITE_URL}{url_realta(org)}"
     titolo = f"{org}: corsi per bambini{f' a {citta}' if citta else ''} | DAOP"
-    descr = G.trunc((info.get('descr') or '').strip() or
+    descr = G.trunc((info.get('descr') or '').strip() or claim or
                     f"{org}: {len(corsi_org)} corsi per bambini e ragazzi"
                     f"{f' a {citta}' if citta else ''}"
                     f"{', ' + ', '.join(disc).lower() if disc else ''}.", 300)
@@ -1116,7 +1132,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>{G.esc(org)}</span>
     </div>
-    <span class="section-label">{G.esc(citta or 'Piemonte')}{' · ' + G.esc(macro[0]) if macro else ''}</span>
+    <span class="section-label">{G.esc(citta or 'Piemonte')}{' · ' + G.esc(' · '.join(macro[:2])) if macro else ''}</span>
     <h1>{G.esc(org)}</h1>
     {occhiello}
   </div>
@@ -1542,8 +1558,16 @@ def _emoji(c):
                       ('basket', '🏀'), ('nuoto', '🏊'), ('danz', '💃'),
                       ('music', '🎵'), ('teatr', '🎭'), ('ingles', '🇬🇧'),
                       ('lingu', '🇬🇧'), ('arti marzial', '🥋'), ('judo', '🥋'),
-                      ('karate', '🥋'), ('ginnast', '🤸'), ('arte', '🎨'),
-                      ('natur', '🌳'), ('sport', '⚽')):
+                      ('karate', '🥋'), ('ginnast', '🤸'),
+                      # Le famiglie nuove del 28/08/2026: Movimento (che
+                      # sostituisce Sport) e Benessere. L'ordine conta, si ferma
+                      # al primo che combacia: prima le discipline precise, poi
+                      # le famiglie. "Sport" resta in fondo per le righe scritte
+                      # prima del rename, che sul foglio possono ancora esserci.
+                      ('psicomotric', '🤸'), ('yoga', '🧘'), ('pilates', '🧘'),
+                      ('massagg', '🤲'), ('sonno', '🌙'), ('benesser', '🌿'),
+                      ('arte', '🎨'), ('natur', '🌳'),
+                      ('moviment', '🤸'), ('sport', '⚽')):
         if chiave in t:
             return e
     return '🎓'
