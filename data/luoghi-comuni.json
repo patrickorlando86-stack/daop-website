@@ -1331,7 +1331,7 @@
  },
  "c-cn-paesana": {
   "comune": "Paesana",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-paroldo": {
@@ -1472,6 +1472,11 @@
  "c-cn-verzuolo": {
   "comune": "Verzuolo",
   "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-vezza-d-alba": {
+  "comune": "Vezza d'Alba",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-vignolo": {
