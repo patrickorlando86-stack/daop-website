@@ -216,6 +216,21 @@
   .ev-daynote{font-family:'DM Sans',sans-serif;font-size:0.73rem;font-weight:600;font-style:italic;color:var(--text-light)}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
+  /* Con un giorno scelto nel calendario i gruppi non si possono usare come
+     sono: sono per data di INIZIO, quindi una sagra che il 22 c'e' ancora resta
+     nel gruppo del 16 (o in "gia' iniziati"), e chi ha chiesto il 22 legge
+     "16 agosto" sopra la prima riga. Qui i capi dei gruppi si spengono, il
+     gruppo del giorno scelto passa in cima e le due intestazioni che restano le
+     scrive il JS: cosa comincia quel giorno, cosa era gia' cominciato e quel
+     giorno c'e' ancora. E' 'order', non nodi spostati: le schede non si
+     toccano, quindi niente layout rifatto su ~290 righe. */
+  .events-list.is-giorno .ev-day .ev-dayhead{display:none}
+  .ev-dayhead-uno[hidden]{display:none}
+  .ev-dayhead-uno{scroll-margin-top:var(--ev-sticky,126px)}
+  .ev-dayhead-uno.is-oggi{color:var(--orange-dark)}
+  .events-list.is-giorno .ev-cap-inizia{order:-3}
+  .events-list.is-giorno .ev-day.is-scelto{order:-2}
+  .events-list.is-giorno .ev-cap-corso{order:-1}
   /* content-visibility: il browser salta stile, layout e disegno delle schede
      fuori schermo. Su ~290 schede e' la voce piu' pesante della pagina: senza,
      ogni misura forzata (la barra appiccicosa, l'apertura di una riga) ricalcola
@@ -659,7 +674,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-23",
-      "dateModified": "2026-08-25",
+      "dateModified": "2026-08-28",
       "lastReviewed": "2026-08-24"
     },
     {
@@ -759,7 +774,7 @@
   <div class="ev-body">
     <p>Open Day della US Novese dedicato agli Esordienti nati nel 2014-2015. Un pomeriggio in campo per provare l&#x27;esperienza del calcio con la storica società novese, campione d&#x27;Italia 1922. Il tuo futuro inizia in campo!</p>
   </div>
-  <section class="ev-fam" aria-labelledby="ev-fam-t"><h2 id="ev-fam-t"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Ci vado con i bambini?</h2><p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo scelto <strong>per le famiglie</strong>. Nelle manifestazioni con più appuntamenti, l'orario che fa per i bambini cambia da serata a serata: il programma qui sopra è il modo più sicuro per scegliere.</p><p class="ev-fam-lab">Altro per bambini qui vicino</p><ul class="ev-fam-altri"><li><a href="/eventi/i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure.html">I Musicanti di Brema - Teatrino dell&#x27;Erba Matta</a> <span>Novi Ligure</span></li><li><a href="/eventi/la-mostra-gli-esplorattori-tortona.html">La Mostra - Gli EsplorAttori</a> <span>Tortona</span></li><li><a href="/eventi/buen-camino-alessandria.html">Buen Camino</a> <span>Alessandria</span></li></ul><p class="ev-fam-piu"><a class="ev-fam-tutti" href="/eventi/comune/novi-ligure.html">Tutti gli eventi a Novi Ligure</a></p></section>
+  <section class="ev-fam" aria-labelledby="ev-fam-t"><h2 id="ev-fam-t"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Ci vado con i bambini?</h2><p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo scelto <strong>per le famiglie</strong>. Nelle manifestazioni con più appuntamenti, l'orario che fa per i bambini cambia da serata a serata: il programma qui sopra è il modo più sicuro per scegliere.</p><p class="ev-fam-lab">Altro per bambini qui vicino</p><ul class="ev-fam-altri"><li><a href="/eventi/i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure.html">I Musicanti di Brema - Teatrino dell&#x27;Erba Matta</a> <span>Novi Ligure</span></li><li><a href="/eventi/buen-camino-alessandria.html">Buen Camino</a> <span>Alessandria</span></li><li><a href="/eventi/festival-nuova-umanita-san-salvatore-monferrato.html">Festival Nuova Umanità</a> <span>San Salvatore Monferrato</span></li></ul><p class="ev-fam-piu"><a class="ev-fam-tutti" href="/eventi/comune/novi-ligure.html">Tutti gli eventi a Novi Ligure</a></p></section>
   
   <div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>
   <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria, Asti e Cuneo. Ultimo controllo: <time datetime="2026-08-24">24 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Open%20Day%20Esordienti%202014-2015%20-%20US%20Novese">Segnala una correzione</a></p></aside>

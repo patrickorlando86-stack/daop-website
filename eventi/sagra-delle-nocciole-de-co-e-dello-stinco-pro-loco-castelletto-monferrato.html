@@ -216,6 +216,21 @@
   .ev-daynote{font-family:'DM Sans',sans-serif;font-size:0.73rem;font-weight:600;font-style:italic;color:var(--text-light)}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
+  /* Con un giorno scelto nel calendario i gruppi non si possono usare come
+     sono: sono per data di INIZIO, quindi una sagra che il 22 c'e' ancora resta
+     nel gruppo del 16 (o in "gia' iniziati"), e chi ha chiesto il 22 legge
+     "16 agosto" sopra la prima riga. Qui i capi dei gruppi si spengono, il
+     gruppo del giorno scelto passa in cima e le due intestazioni che restano le
+     scrive il JS: cosa comincia quel giorno, cosa era gia' cominciato e quel
+     giorno c'e' ancora. E' 'order', non nodi spostati: le schede non si
+     toccano, quindi niente layout rifatto su ~290 righe. */
+  .events-list.is-giorno .ev-day .ev-dayhead{display:none}
+  .ev-dayhead-uno[hidden]{display:none}
+  .ev-dayhead-uno{scroll-margin-top:var(--ev-sticky,126px)}
+  .ev-dayhead-uno.is-oggi{color:var(--orange-dark)}
+  .events-list.is-giorno .ev-cap-inizia{order:-3}
+  .events-list.is-giorno .ev-day.is-scelto{order:-2}
+  .events-list.is-giorno .ev-cap-corso{order:-1}
   /* content-visibility: il browser salta stile, layout e disegno delle schede
      fuori schermo. Su ~290 schede e' la voce piu' pesante della pagina: senza,
      ogni misura forzata (la barra appiccicosa, l'apertura di una riga) ricalcola
@@ -662,7 +677,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-06",
-      "dateModified": "2026-08-27",
+      "dateModified": "2026-08-28",
       "lastReviewed": "2026-08-09"
     },
     {
@@ -767,7 +782,7 @@
   
   <div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>
   <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria, Asti e Cuneo. Ultimo controllo: <time datetime="2026-08-09">9 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Sagra%20delle%20Nocciole%20De.Co.%20e%20dello%20Stinco%20-%20Pro%20Loco%20Giardinetto">Segnala una correzione</a></p></aside>
-  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Castelletto Monferrato</h2><ul><li><a href="/eventi/sagra-della-zucca-castelletto-monferrato.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Sagra della Zucca 2026</span><span class="ev-vic-c">Castelletto Monferrato</span></a></li><li><a href="/eventi/mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra delle Illusioni - Museo dei Campionissimi</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Complesso Conventuale di San Francesco</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi.html#ev-2026-08-01-musei-aperti-ad-agosto-2026-museo-civico-di-palazz"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Museo Civico di Palazzo Cuttica</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi/musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Sale d&#x27;Arte di Via Machiavelli</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi/xxvii-sagra-delle-trofie-al-pesto-belforte-monferrato.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">XXVII Sagra delle Trofie al Pesto</span><span class="ev-vic-c">Belforte Monferrato</span></a></li></ul><p class="ev-vic-all"><a href="/sagre-provincia-alessandria.html">Le sagre in provincia di Alessandria</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
+  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Castelletto Monferrato</h2><ul><li><a href="/eventi/sagra-della-zucca-castelletto-monferrato.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Sagra della Zucca 2026</span><span class="ev-vic-c">Castelletto Monferrato</span></a></li><li><a href="/eventi/mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra delle Illusioni - Museo dei Campionissimi</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Complesso Conventuale di San Francesco</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi.html#ev-2026-08-01-musei-aperti-ad-agosto-2026-museo-civico-di-palazz"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Museo Civico di Palazzo Cuttica</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi/musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Sale d&#x27;Arte di Via Machiavelli</span><span class="ev-vic-c">Alessandria</span></a></li><li><a href="/eventi/xxvii-sagra-delle-trofie-al-pesto-belforte-monferrato.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">XXVII Sagra delle Trofie al Pesto</span><span class="ev-vic-c">Belforte Monferrato</span></a></li></ul><p class="ev-vic-all"><a href="/sagre-provincia-alessandria.html">Le sagre in provincia di Alessandria</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
   
 </article>
 <section class="bg-cream ev-ginetto">

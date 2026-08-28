@@ -216,6 +216,21 @@
   .ev-daynote{font-family:'DM Sans',sans-serif;font-size:0.73rem;font-weight:600;font-style:italic;color:var(--text-light)}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
+  /* Con un giorno scelto nel calendario i gruppi non si possono usare come
+     sono: sono per data di INIZIO, quindi una sagra che il 22 c'e' ancora resta
+     nel gruppo del 16 (o in "gia' iniziati"), e chi ha chiesto il 22 legge
+     "16 agosto" sopra la prima riga. Qui i capi dei gruppi si spengono, il
+     gruppo del giorno scelto passa in cima e le due intestazioni che restano le
+     scrive il JS: cosa comincia quel giorno, cosa era gia' cominciato e quel
+     giorno c'e' ancora. E' 'order', non nodi spostati: le schede non si
+     toccano, quindi niente layout rifatto su ~290 righe. */
+  .events-list.is-giorno .ev-day .ev-dayhead{display:none}
+  .ev-dayhead-uno[hidden]{display:none}
+  .ev-dayhead-uno{scroll-margin-top:var(--ev-sticky,126px)}
+  .ev-dayhead-uno.is-oggi{color:var(--orange-dark)}
+  .events-list.is-giorno .ev-cap-inizia{order:-3}
+  .events-list.is-giorno .ev-day.is-scelto{order:-2}
+  .events-list.is-giorno .ev-cap-corso{order:-1}
   /* content-visibility: il browser salta stile, layout e disegno delle schede
      fuori schermo. Su ~290 schede e' la voce piu' pesante della pagina: senza,
      ogni misura forzata (la barra appiccicosa, l'apertura di una riga) ricalcola
@@ -658,7 +673,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-11",
-      "dateModified": "2026-08-27",
+      "dateModified": "2026-08-28",
       "lastReviewed": "2026-08-20"
     },
     {

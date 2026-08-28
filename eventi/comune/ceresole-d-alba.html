@@ -215,6 +215,21 @@
   .ev-daynote{font-family:'DM Sans',sans-serif;font-size:0.73rem;font-weight:600;font-style:italic;color:var(--text-light)}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
+  /* Con un giorno scelto nel calendario i gruppi non si possono usare come
+     sono: sono per data di INIZIO, quindi una sagra che il 22 c'e' ancora resta
+     nel gruppo del 16 (o in "gia' iniziati"), e chi ha chiesto il 22 legge
+     "16 agosto" sopra la prima riga. Qui i capi dei gruppi si spengono, il
+     gruppo del giorno scelto passa in cima e le due intestazioni che restano le
+     scrive il JS: cosa comincia quel giorno, cosa era gia' cominciato e quel
+     giorno c'e' ancora. E' 'order', non nodi spostati: le schede non si
+     toccano, quindi niente layout rifatto su ~290 righe. */
+  .events-list.is-giorno .ev-day .ev-dayhead{display:none}
+  .ev-dayhead-uno[hidden]{display:none}
+  .ev-dayhead-uno{scroll-margin-top:var(--ev-sticky,126px)}
+  .ev-dayhead-uno.is-oggi{color:var(--orange-dark)}
+  .events-list.is-giorno .ev-cap-inizia{order:-3}
+  .events-list.is-giorno .ev-day.is-scelto{order:-2}
+  .events-list.is-giorno .ev-cap-corso{order:-1}
   /* content-visibility: il browser salta stile, layout e disegno delle schede
      fuori schermo. Su ~290 schede e' la voce piu' pesante della pagina: senza,
      ogni misura forzata (la barra appiccicosa, l'apertura di una riga) ricalcola
@@ -740,7 +755,7 @@
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "dateModified": "2026-08-27"
+      "dateModified": "2026-08-28"
     },
     {
       "@type": "BreadcrumbList",
@@ -855,9 +870,9 @@
   </div>
   <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Ceresole d&#x27;Alba: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
   <h2>Altri comuni della provincia di Cuneo</h2><div class="com-link"><a href="/eventi/comune/ceresole-alba.html">Ceresole Alba</a><a href="/eventi/comune/crissolo.html">Crissolo</a><a href="/eventi/comune/cuneo.html">Cuneo</a><a href="/eventi/comune/entracque.html">Entracque</a><a href="/eventi/comune/govone.html">Govone</a><a href="/eventi/comune/limone-piemonte.html">Limone Piemonte</a></div>
-  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">856 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">16 centri con le date e le iscrizioni</span></a></div></section>
+  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">861 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">16 centri con le date e le iscrizioni</span></a></div></section>
   <p class="com-fonte">Gli eventi a Ceresole d'Alba arrivano da <a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo. <a href="/zone.html">Le pagine della tua zona</a></p>
-  <p class="ev-firma-nota">Pagina aggiornata il 27 agosto 2026.</p>
+  <p class="ev-firma-nota">Pagina aggiornata il 28 agosto 2026.</p>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">
