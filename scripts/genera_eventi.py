@@ -2232,9 +2232,6 @@ PAGINA_CSS = """
    e' un <aside> dentro l'articolo, non una fascia di pagina. */
 .ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
   background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-/* In cima a un'edizione conclusa non ha 28px sopra (l'avviso ce li ha gia'
-   sotto) e ha bisogno di aria sotto, se no si attacca ai dati della scheda. */
-.ev-canale--alto{margin:0 0 26px}
 .ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
 .ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
 .ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
@@ -2274,6 +2271,13 @@ PAGINA_CSS = """
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+/* In cima a un'edizione conclusa: stesso componente, dentro l'articolo invece
+   che in una fascia di pagina. Nessun margine sopra (l'avviso "Edizione
+   conclusa" ha gia' i suoi 22px sotto) e 26px di aria sotto, se no si attacca
+   ai dati della scheda - sono gli stessi numeri che aveva l'invito al canale
+   quando il posto in cima era suo. */
+.ev-ginetto-alto{margin:0 0 26px}
+.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
 /* ── La barra delle azioni, e solo sul telefono ─────────────────────────
    PERCHE' ESISTE, e il conto e' misurato il 28/08/2026 a 412px su una scheda
    viva, non stimato. .ev-actions - "Aggiungi al calendario" e "Come arrivare",
@@ -2330,8 +2334,8 @@ PAGINA_CSS = """
 """
 
 
-def blocco_ginetto(citta=""):
-    """Rimando a Ginetto in fondo alle pagine di evento e di comune.
+def blocco_ginetto(citta="", alto=False):
+    """Rimando a Ginetto sulle pagine di evento e di comune.
 
     Non e' un avviso e non e' un popup: e' la .info-strip della home eventi,
     stesso componente, con la mascotte al posto dell'icona. Il comune nel
@@ -2355,18 +2359,51 @@ def blocco_ginetto(citta=""):
     filtri e le liste. E' l'unico modo perche' aggiungerne una non lasci indietro
     proprio la frase che dichiara dove arriviamo - il commento in cima a
     eventi.html avverte che "Alessandria e Asti" va cercato a mano in TUTTO il
-    file, e questo e' un posto in meno in cui cercarlo."""
+    file, e questo e' un posto in meno in cui cercarlo.
+
+    `alto` (28/08/2026) e' l'unica eccezione alla coda, e vale su una scheda
+    sola: quella di un'EDIZIONE CONCLUSA. E' lo stesso ragionamento che il
+    19/08 aveva fatto salire l'invito al canale, applicato all'inquilino
+    giusto: in coda chiede a chi ha gia' avuto quello che cercava, ma una
+    scheda conclusa non ha niente da dare - chi ci arriva da Google ha appena
+    scoperto che la festa e' finita, e la domanda che ha in testa e' "e allora
+    cosa faccio?". A quella Ginetto risponde ADESSO; il canale risponde
+    giovedi'. Quindi il posto in cima cambia inquilino e l'invito al canale
+    torna in coda su tutte le schede.
+
+    PERCHE' GINETTO E NON UNA TERZA COSA, ed e' misurato non supposto: nella
+    settimana 12-18/08 `apri_ginetto` fa 7 clic stando al 71% della pagina,
+    mentre l'invito al canale - piu' in alto, al 59% - sta dentro un secchio da
+    4. E' la richiesta che rende di piu' del sito, ed era quella messa piu' in
+    basso. Le concluse sono 132 schede su 288 (il 46%) e prendono traffico vero
+    (il 16/08: 1.237 impressioni).
+
+    Il testo e' IDENTICO nelle due posizioni, come lo era per il canale:
+    cambiando insieme posizione e parole non si saprebbe quale delle due ha
+    spostato il numero. Cambia il guscio e nient'altro - in cima e' un <aside>
+    dentro l'articolo, in fondo una fascia a tutta larghezza.
+
+    E su una scheda CONCLUSA non si stampa due volte: chi la riceve in cima non
+    la ritrova in fondo. Sarebbe la stessa richiesta ripetuta a chi ha gia'
+    detto di no una volta, che e' il difetto che tests/luoghi.js difende gia'
+    per il canale."""
     # a_citta() mette la d eufonica: "vicino ad Acqui Terme", non "a Acqui".
     dove = " vicino " + esc(a_citta(citta)) if citta else " con i bambini"
-    return f"""<section class="bg-cream ev-ginetto">
-  <div class="section-inner">
-    <div class="info-strip">
+    strip = f"""<div class="info-strip">
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
       <div>
         <h3>Cerchi altro da fare{dove}?</h3>
         <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di {province_in_elenco(PROVINCE_PUBBLICATE)}: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
       </div>
-    </div>
+    </div>"""
+    if alto:
+        return f"""<aside class="ev-ginetto-alto">
+    {strip}
+  </aside>
+"""
+    return f"""<section class="bg-cream ev-ginetto">
+  <div class="section-inner">
+    {strip}
   </div>
 </section>
 """
@@ -2680,7 +2717,7 @@ def barra_azioni(e):
             + "".join(link) + '</div>')
 
 
-def blocco_canale(dove="", alto=False):
+def blocco_canale(dove=""):
     """L'invito al canale WhatsApp.
 
     Sta in coda alla scheda e non in cima per una ragione sola: in cima chiede
@@ -2694,16 +2731,25 @@ def blocco_canale(dove="", alto=False):
     motivo non c'e' nessuna promessa in piu' - niente "contenuti esclusivi",
     che sarebbe una cosa che poi non manteniamo.
 
-    `alto` e' l'unica eccezione alla coda, e vale su una scheda sola: quella di
-    un'EDIZIONE CONCLUSA (vedi scheda_evento). Non e' un ripensamento sulla
-    regola - e' che li' la premessa della regola cade. "In cima chiede qualcosa
-    a chi non ha ancora avuto niente" vale finche' la pagina ha qualcosa da
-    dare; una scheda conclusa non ce l'ha, e l'invito e' la cosa piu' utile che
-    resta. Cambia la classe e nient'altro: stesso testo, stesso link."""
+    Dal 19/08/2026 al 28/08/2026 c'era un'eccezione, e adesso non c'e' piu':
+    su un'edizione conclusa l'invito saliva sotto l'avviso, perche' li' la
+    premessa della regola cade - una pagina che non ha niente da dare non sta
+    chiedendo a chi non ha avuto niente. Il ragionamento regge ancora; quello
+    che e' cambiato e' CHI occupa quel posto. Misurato nella settimana
+    12-18/08: `apri_ginetto` fa 7 clic stando al 71% della pagina, questo
+    invito ne fa 4 stando al 59%. A parita' di posto rende di piu' Ginetto, e
+    soprattutto risponde alla domanda giusta: chi scopre che la festa e' finita
+    vuole sapere cosa fare ADESSO, non ricevere un messaggio giovedi'. Quindi
+    il posto in cima e' passato a blocco_ginetto(alto=True) e questo invito
+    torna in coda su tutte le schede, senza eccezioni.
+
+    Non si affiancano: due richieste nello stesso punto si dimezzano, e
+    misurandole insieme non si saprebbe piu' quale delle due ha mosso il
+    numero."""
     if not CANALE_WA:
         return ''
     return (
-        f'<aside class="ev-canale{" ev-canale--alto" if alto else ""}">'
+        '<aside class="ev-canale">'
         f'<p class="ev-canale-t">Un messaggio il giovedì, e basta</p>'
         '<p>Ti mandiamo quello che c\'è nel weekend'
         f'{" vicino a " + esc(dove) if dove else " in zona"}: sagre, feste e '
@@ -3399,25 +3445,34 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         azioni = '<div class="ev-actions">' + "".join(bottoni) + '</div>'
         barra = barra_azioni(e)
 
-    # Dove va l'invito al canale. Di regola in coda (vedi blocco_canale), ma su
-    # un'EDIZIONE CONCLUSA sale sotto l'avviso, cioe' e' la prima cosa dopo
-    # "questa edizione si e' svolta". La ragione e' che quella pagina non ha
+    # CHI sta sotto l'avviso, su un'EDIZIONE CONCLUSA. Quella pagina non ha
     # niente da dare: chi ci arriva da Google ha appena scoperto che la festa
-    # e' finita, e "e il prossimo weekend?" non e' una domanda che gli stiamo
-    # mettendo in testa noi - ce l'ha gia'. Il 19/08/2026 sono 132 schede su
+    # e' finita, e "e allora cosa faccio?" non e' una domanda che gli stiamo
+    # mettendo in testa noi - ce l'ha gia'. Al 28/08/2026 sono 132 schede su
     # 288, cioe' il 46%, e prendono traffico vero (il 16/08: 1.237 impressioni).
-    # In coda, sotto la firma e gli eventi vicini, la vedeva chi scorreva tutto.
+    # In coda, sotto la firma e gli eventi vicini, quel blocco lo vede chi
+    # scorre tutto: circa uno su cento.
     #
-    # NON vale per le RITIRATE, che restano in coda: quella pagina dichiara di
-    # non essere attendibile e manda all'agenda: chiedere un'iscrizione in cima
-    # a una scheda che stiamo smentendo e' chiedere fiducia nel punto in cui
-    # l'abbiamo appena tolta. Stessa logica per cui li' spariscono i fatti.
+    # Dal 19/08 il posto era dell'invito al canale; dal 28/08 e' di GINETTO.
+    # Non e' un ripensamento sul ragionamento, e' un cambio di inquilino: a
+    # parita' di posto Ginetto e' misurato piu' forte (7 clic dal 71% della
+    # pagina contro 4 dal 59%, settimana 12-18/08) e soprattutto risponde alla
+    # domanda giusta - lui risponde ADESSO, il canale risponde giovedi'.
     #
-    # Il testo e' identico nelle due posizioni, apposta: cambiando insieme
-    # posizione e parole non si saprebbe quale delle due ha spostato il numero.
+    # Uno solo, e in un posto solo. I due blocchi non si affiancano in cima -
+    # due richieste nello stesso punto si dimezzano - e Ginetto in cima non si
+    # ripete in fondo, che sarebbe la stessa richiesta fatta due volte a chi ha
+    # gia' detto di no una volta.
+    #
+    # NON vale per le RITIRATE, che restano come prima: quella pagina dichiara
+    # di non essere attendibile e manda all'agenda, e presentare qualcosa di
+    # nostro in cima a una scheda che stiamo smentendo e' chiedere fiducia nel
+    # punto esatto in cui l'abbiamo appena tolta. Stessa logica per cui li'
+    # spariscono i fatti e i due bottoni.
     in_cima = concluso and not ritirata
-    canale_alto = blocco_canale(citta, alto=True) if in_cima else ''
-    canale_coda = '' if in_cima else blocco_canale(citta)
+    ginetto_alto = blocco_ginetto(citta, alto=True) if in_cima else ''
+    ginetto_coda = '' if in_cima else blocco_ginetto(citta)
+    canale_coda = blocco_canale(citta)
 
     ev_obj = event_jsonld(e, url)
     ev_obj["@id"] = f"{url}#event"
@@ -3539,7 +3594,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  {avviso}{canale_alto}
+  {avviso}{ginetto_alto}
   <ul class="ev-facts">
     {"".join(facts)}
   </ul>
@@ -3554,7 +3609,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   {altri}
   {canale_coda}
 </article>
-{blocco_ginetto(citta)}</main>
+{ginetto_coda}</main>
 {foot}
 {barra}
 <script>

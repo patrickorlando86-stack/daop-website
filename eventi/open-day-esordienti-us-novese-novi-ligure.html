@@ -313,6 +313,20 @@
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
   .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
+  /* Due paragrafi: il messaggio (che il JS riscrive) e Ginetto. Il margine fra
+     i due sta su `p+p` e non su .events-empty-g apposta: `.events-empty p` ha
+     specificita' 0,1,1 e batterebbe una regola di sola classe, che e' lo stesso
+     inciampo del crumb dei corsi (`.co-crumb a{color:inherit}` che vinceva su
+     `.page-hero a`). */
+  .events-empty p{margin:0 auto;max-width:520px}
+  .events-empty p+p{margin-top:14px}
+  /* Lo stato vuoto e' l'unico punto dell'agenda in cui Ginetto non e' una
+     richiesta ma una risposta: la pagina ha appena fallito, e lui fa quello che
+     l'elenco non e' riuscito a fare. E costa zero pixel a chi invece ha trovato
+     quello che cercava - che e' la ragione per cui sta qui e non in cima. */
+  .events-empty-g{font-size:0.92rem;line-height:1.65}
+  .events-empty-g a{color:var(--orange-ink,#a05714);font-weight:600;text-decoration:none}
+  .events-empty-g a:hover{text-decoration:underline}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
      del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
@@ -612,9 +626,6 @@
    e' un <aside> dentro l'articolo, non una fascia di pagina. */
 .ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
   background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-/* In cima a un'edizione conclusa non ha 28px sopra (l'avviso ce li ha gia'
-   sotto) e ha bisogno di aria sotto, se no si attacca ai dati della scheda. */
-.ev-canale--alto{margin:0 0 26px}
 .ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
 .ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
 .ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
@@ -654,6 +665,13 @@
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+/* In cima a un'edizione conclusa: stesso componente, dentro l'articolo invece
+   che in una fascia di pagina. Nessun margine sopra (l'avviso "Edizione
+   conclusa" ha gia' i suoi 22px sotto) e 26px di aria sotto, se no si attacca
+   ai dati della scheda - sono gli stessi numeri che aveva l'invito al canale
+   quando il posto in cima era suo. */
+.ev-ginetto-alto{margin:0 0 26px}
+.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
 /* ── La barra delle azioni, e solo sul telefono ─────────────────────────
    PERCHE' ESISTE, e il conto e' misurato il 28/08/2026 a 412px su una scheda
    viva, non stimato. .ev-actions - "Aggiungi al calendario" e "Come arrivare",
@@ -873,7 +891,16 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <div class="ev-over"><strong>Edizione conclusa</strong>Questa edizione si è svolta lunedì 24 agosto 2026. Se la manifestazione torna, aggiorniamo questa pagina con le nuove date. Intanto trovi tutto quello che c'è in programma nell'<a href="/eventi.html">agenda DAOP</a>.</div><aside class="ev-canale ev-canale--alto"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Novi Ligure: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
+  <div class="ev-over"><strong>Edizione conclusa</strong>Questa edizione si è svolta lunedì 24 agosto 2026. Se la manifestazione torna, aggiorniamo questa pagina con le nuove date. Intanto trovi tutto quello che c'è in programma nell'<a href="/eventi.html">agenda DAOP</a>.</div><aside class="ev-ginetto-alto">
+    <div class="info-strip">
+      <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
+      <div>
+        <h3>Cerchi altro da fare vicino a Novi Ligure?</h3>
+        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di Alessandria, Asti e Cuneo: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+      </div>
+    </div>
+  </aside>
+
   <ul class="ev-facts">
     <li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Orario:</strong> 15:30-17:00</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Dove:</strong> Campo San Marziano Sintetico · Via San Marziano 22B - Novi Ligure (AL)</span></li><li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span><strong>Ingresso:</strong> Gratuito</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg><span><strong>Età:</strong> 3-14 anni</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span><strong>Contatti:</strong> 347-5025294 / 320-1408633</span></li>
   </ul>
@@ -886,19 +913,8 @@
   <div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>
   <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria, Asti e Cuneo. Ultimo controllo: <time datetime="2026-08-24">24 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Open%20Day%20Esordienti%202014-2015%20-%20US%20Novese">Segnala una correzione</a></p></aside>
   <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Novi Ligure</h2><ul><li><a href="/eventi/mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra delle Illusioni - Museo dei Campionissimi</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/festa-dello-sport-evento-finale-plogging-smiling-b-novi-ligure.html"><span class="ev-vic-d">martedì 1 set</span><span class="ev-vic-n">Festa dello Sport - Evento Finale Plogging Smiling Biking</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/sagra-dei-ceci-novi-ligure.html"><span class="ev-vic-d">venerdì 4 set</span><span class="ev-vic-n">Sagra dei Ceci</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/festa-dello-sport-novi-ligure.html"><span class="ev-vic-d">sabato 12 set</span><span class="ev-vic-n">Festa dello Sport Novi Ligure</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi.html#ev-2026-09-20-pedalata-ecologica-merella-plogging-smiling-biking"><span class="ev-vic-d">domenica 20 set</span><span class="ev-vic-n">Pedalata Ecologica Merella - Plogging Smiling Biking</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure.html"><span class="ev-vic-d">sabato 24 ott</span><span class="ev-vic-n">I Musicanti di Brema - Teatrino dell&#x27;Erba Matta</span><span class="ev-vic-c">Novi Ligure</span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/novi-ligure.html">Tutti gli eventi a Novi Ligure</a> · <a href="/luoghi.html#c-al-novi-ligure">46 posti per famiglie a Novi Ligure</a> · <a href="/sagre-provincia-alessandria.html">Le sagre in provincia di Alessandria</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
-  
+  <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Novi Ligure: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
 </article>
-<section class="bg-cream ev-ginetto">
-  <div class="section-inner">
-    <div class="info-strip">
-      <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
-      <div>
-        <h3>Cerchi altro da fare vicino a Novi Ligure?</h3>
-        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di Alessandria, Asti e Cuneo: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 <footer>
   <div class="footer-grid">
