@@ -135,6 +135,12 @@
   .ev-chk:hover{border-color:var(--orange)}
   .ev-chk.is-on{background:var(--navy);border-color:var(--navy);color:white}
   .ev-chk input{width:15px;height:15px;margin:0;accent-color:var(--orange);cursor:pointer}
+  /* display:inline-flex batte il display:none che il browser da' a [hidden]:
+     senza questa riga la casella si vedeva anche fuori stagione, quando il JS
+     la lascia hidden perche' non divide - e in piu' spingeva le tendine su tre
+     righe, cioe' faceva crescere la barra appiccicosa proprio nei mesi in cui
+     non serve a niente. Trovata dalla prova che misura l'altezza, non dall'HTML. */
+  .ev-chk[hidden]{display:none}
   /* ── VICINO A ME ──
      Fuori dalla barra appiccicosa apposta: quella e' scesa a ~109px sul
      telefono e una riga in piu' la rifarebbe crescere per tutto lo
