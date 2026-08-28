@@ -199,7 +199,14 @@
   .ev-highlights{display:flex;flex-direction:column;gap:24px;margin:26px 0 14px}
   .ev-hl-title{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:var(--navy);margin-bottom:14px}
   .ev-hl-n{font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:700;color:var(--text-light);background:var(--cream);border:1px solid rgba(45,74,92,0.07);border-radius:100px;padding:3px 10px}
-  .ev-rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,262px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;-webkit-overflow-scrolling:touch}
+  .ev-rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,262px);gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding:4px 4px 14px;margin:0 -4px;-webkit-overflow-scrolling:touch}
+  /* overscroll-behavior-x:contain e' l'unica cosa aggiunta alla corsia, e non
+     si vede: su Android, quando una corsia arriva al suo primo elemento, lo
+     scorrimento continua a propagarsi alla pagina e il gesto diventa il
+     'torna indietro' del browser. Con dodici card e lo snap obbligatorio,
+     tornare all'inizio e' un gesto normale - e chi lo fa esce dal sito senza
+     aver toccato niente. `contain` ferma la propagazione dentro la corsia e
+     lascia il resto identico: stesso layout, stesso snap, stessi colori. */
   .ev-hl-card{scroll-snap-align:start;display:flex;flex-direction:column;background:white;border:1px solid rgba(45,74,92,0.08);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-soft);text-decoration:none;transition:var(--transition)}
   .ev-hl-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-card)}
   .ev-hl-cover{display:block;height:130px;background:var(--cream);line-height:0;flex-shrink:0}
@@ -218,6 +225,21 @@
   .ev-daynote{font-family:'DM Sans',sans-serif;font-size:0.73rem;font-weight:600;font-style:italic;color:var(--text-light)}
   .ev-daycount{margin-left:auto;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;color:var(--text-light)}
   .ev-day.is-today .ev-dayhead{color:var(--orange-dark)}
+  /* Con un giorno scelto nel calendario i gruppi non si possono usare come
+     sono: sono per data di INIZIO, quindi una sagra che il 22 c'e' ancora resta
+     nel gruppo del 16 (o in "gia' iniziati"), e chi ha chiesto il 22 legge
+     "16 agosto" sopra la prima riga. Qui i capi dei gruppi si spengono, il
+     gruppo del giorno scelto passa in cima e le due intestazioni che restano le
+     scrive il JS: cosa comincia quel giorno, cosa era gia' cominciato e quel
+     giorno c'e' ancora. E' 'order', non nodi spostati: le schede non si
+     toccano, quindi niente layout rifatto su ~290 righe. */
+  .events-list.is-giorno .ev-day .ev-dayhead{display:none}
+  .ev-dayhead-uno[hidden]{display:none}
+  .ev-dayhead-uno{scroll-margin-top:var(--ev-sticky,126px)}
+  .ev-dayhead-uno.is-oggi{color:var(--orange-dark)}
+  .events-list.is-giorno .ev-cap-inizia{order:-3}
+  .events-list.is-giorno .ev-day.is-scelto{order:-2}
+  .events-list.is-giorno .ev-cap-corso{order:-1}
   /* content-visibility: il browser salta stile, layout e disegno delle schede
      fuori schermo. Su ~290 schede e' la voce piu' pesante della pagina: senza,
      ogni misura forzata (la barra appiccicosa, l'apertura di una riga) ricalcola
@@ -777,7 +799,7 @@
   <!-- GUIDA-PDF:END -->
   
   <h2>Le altre vacanze</h2><div class="com-link"><a href="/centri-estivi.html">Centri Estivi d&#x27;estate</a><a href="/centri-pasquali.html">Centri Pasquali a Pasqua</a></div>
-  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">194 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">856 posti scelti a mano, dal parco al museo</span></a></div></section>
+  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">188 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">861 posti scelti a mano, dal parco al museo</span></a></div></section>
   <div class="ce-actions">
     <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
   </div>
