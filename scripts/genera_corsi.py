@@ -951,8 +951,24 @@ def _card_evento(od, rec):
 
 CSS_REALTA = """
 .cr-wrap{max-width:820px;margin:0 auto;padding:0 20px 48px}
+/* Il breadcrumb sta dentro .page-hero, che ha lo sfondo scuro — e .page-hero
+   veste h1, p, .section-label e a, cioe' nessuna delle due cose che ci sono qui
+   dentro. Senza un colore suo il crumb ereditava quello del body: rgb(26,45,58)
+   sopra un gradiente che parte da rgb(30,51,66), **contrasto 1,07:1**, cioe'
+   invisibile. Peggio, `.cr-crumb a{color:inherit}` ha la stessa specificita' di
+   `.page-hero a{color:var(--gold)}` e arriva dopo: la regola che doveva salvare
+   il link se lo riportava nel buio, lasciandogli solo la sottolineatura. Da qui
+   sembrava un link blu slavato, ed era invece testo dello stesso colore dello
+   sfondo.
+   I valori non sono nuovi: sono quelli con cui .ev-hero risolve lo stesso
+   inciampo sulle schede evento (.62 la traccia, .82 il link, opacity rimessa a
+   1 perche' l'alfa ora sta nel colore). Restano scritti scoped su .page-hero,
+   cosi' la regola base continua a valere se un domani il crumb finisce su
+   fondo chiaro. */
 .cr-crumb{font-size:.85rem;opacity:.85;margin-bottom:10px}
 .cr-crumb a{color:inherit}
+.page-hero .cr-crumb{color:rgba(255,255,255,.62);opacity:1}
+.page-hero .cr-crumb a{color:rgba(255,255,255,.82)}
 .cr-logo{max-width:150px;height:auto;border-radius:12px;margin:22px 0 0;display:block}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
@@ -1663,8 +1679,24 @@ def toolbar(corsi):
 
 CSS = """
 .co-wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}
+/* Il breadcrumb sta dentro .page-hero, che ha lo sfondo scuro — e .page-hero
+   veste h1, p, .section-label e a, cioe' nessuna delle due cose che ci sono qui
+   dentro. Senza un colore suo il crumb ereditava quello del body: rgb(26,45,58)
+   sopra un gradiente che parte da rgb(30,51,66), **contrasto 1,07:1**, cioe'
+   invisibile. Peggio, `.co-crumb a{color:inherit}` ha la stessa specificita' di
+   `.page-hero a{color:var(--gold)}` e arriva dopo: la regola che doveva salvare
+   il link se lo riportava nel buio, lasciandogli solo la sottolineatura. Da qui
+   sembrava un link blu slavato, ed era invece testo dello stesso colore dello
+   sfondo.
+   I valori non sono nuovi: sono quelli con cui .ev-hero risolve lo stesso
+   inciampo sulle schede evento (.62 la traccia, .82 il link, opacity rimessa a
+   1 perche' l'alfa ora sta nel colore). Restano scritti scoped su .page-hero,
+   cosi' la regola base continua a valere se un domani il crumb finisce su
+   fondo chiaro. */
 .co-crumb{font-size:.85rem;opacity:.85;margin-bottom:10px}
 .co-crumb a{color:inherit}
+.page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
+.page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da

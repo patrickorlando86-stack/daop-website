@@ -36,6 +36,58 @@ const fs = require('fs');
 const path = require('path');
 const { apri, esito, RADICE } = require('./_aiuto');
 
+// Il contrasto si MISURA sul reso, non si legge nel CSS.
+//
+// Il breadcrumb dei corsi e' nato con testo rgb(26,45,58) — il colore del body
+// — sopra un hero che parte da rgb(30,51,66): contrasto 1,07:1, cioe'
+// letteralmente lo stesso colore dello sfondo. L'HTML era corretto, il CSS
+// leggendolo sembrava a posto (`.co-crumb a{color:inherit}`), e nessuna prova
+// se n'e' accorta per una settimana. E' lo stesso genere di guasto della barra
+// delle azioni alta 915px: si vede solo misurando quello che il browser
+// disegna.
+//
+// La trappola dentro la trappola: `.co-crumb a{color:inherit}` e
+// `.page-hero a{color:var(--gold)}` hanno la STESSA specificita' (0,1,1), e la
+// prima arriva dopo. La regola che doveva salvare il link se lo riportava nel
+// buio lasciandogli solo la sottolineatura — da cui l'aspetto di link blu
+// slavato, che e' il sintomo sbagliato da inseguire.
+//
+// Si pretende il 4,5:1 di WCAG AA per il testo normale, e si misura contro la
+// PRIMA tappa del gradiente, che e' la piu' scura: il caso peggiore per un
+// testo chiaro.
+const AA = 4.5;
+
+async function contrastoCrumb(page, sel) {
+  return page.evaluate((s) => {
+    const el = document.querySelector(s);
+    if (!el) return null;
+    const hero = el.closest('.page-hero');
+    if (!hero) return null;
+    const g = getComputedStyle(hero).backgroundImage
+      .match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    const bg = g ? [+g[1], +g[2], +g[3]] : [255, 255, 255];
+    const lin = (v) => {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    };
+    const L = (c) => 0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2]);
+    const misura = (n) => {
+      const p = getComputedStyle(n).color.match(/[\d.]+/g).map(Number);
+      let a = p.length > 3 ? p[3] : 1;
+      // ogni opacity da qui all'hero moltiplica l'alfa: e' il modo in cui il
+      // difetto si nascondeva (colore chiaro ma opacity del padre bassa).
+      for (let x = n; x && x !== hero; x = x.parentElement) {
+        a *= parseFloat(getComputedStyle(x).opacity);
+      }
+      const eff = [0, 1, 2].map((i) => p[i] * a + bg[i] * (1 - a));
+      const [hi, lo] = [L(eff), L(bg)].sort((m, q) => q - m);
+      return Math.round(((hi + 0.05) / (lo + 0.05)) * 100) / 100;
+    };
+    const link = el.querySelector('a');
+    return { traccia: misura(el), link: link ? misura(link) : null };
+  }, sel);
+}
+
 module.exports = async function corsi(browser) {
   const r = esito();
   const file = path.join(RADICE, 'corsi.html');
@@ -51,6 +103,20 @@ module.exports = async function corsi(browser) {
 
   const schede = await page.locator('.event-card').count();
   r.ok(schede > 0, `${schede} corsi in pagina`);
+
+  // ── il breadcrumb si deve leggere sull'hero scuro ──────────────────────
+  const cr = await contrastoCrumb(page, '.co-crumb');
+  if (!cr) {
+    console.log('  --   nessun breadcrumb dentro .page-hero: niente da misurare');
+  } else {
+    r.ok(cr.traccia >= AA,
+      `il breadcrumb si legge sull'hero: ${cr.traccia}:1 (minimo ${AA})`);
+    r.ok(cr.link === null || cr.link >= AA,
+      `e il link "Home" pure: ${cr.link}:1`);
+    // Il link deve staccarsi dalla traccia, se no e' testo che sembra testo.
+    r.ok(cr.link === null || cr.link > cr.traccia,
+      `il link e' piu' chiaro della traccia (${cr.link} > ${cr.traccia})`);
+  }
 
   // ── 2. un comando si stampa quando DIVIDE, non quando l'elenco e' lungo ─
   // La soglia di conteggio (sotto 12 corsi niente barra) e' caduta il
@@ -494,6 +560,17 @@ module.exports = async function corsi(browser) {
       (ps) => ps.map((p) => p.textContent).join(' ')).catch(() => '');
     r.ok(descr.trim().length >= 120,
       `${f}: descrizione di ${descr.trim().length} caratteri`);
+
+    // Stesso hero scuro, altra classe: .cr-crumb e' nata copiando .co-crumb e
+    // ne ha ereditato il difetto. Due classi per la stessa cosa vogliono due
+    // misure — controllarne una sola e' come non controllarne nessuna.
+    const crR = await contrastoCrumb(q.page, '.cr-crumb');
+    if (crR) {
+      r.ok(crR.traccia >= AA,
+        `${f}: il breadcrumb si legge sull'hero (${crR.traccia}:1)`);
+      r.ok(crR.link === null || crR.link >= AA,
+        `${f}: e i suoi link pure (${crR.link}:1)`);
+    }
 
     // Sulla propria pagina la riga "Organizzatore" non si stampa: sarebbe un
     // link all'intestazione che si sta leggendo.

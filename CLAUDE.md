@@ -1173,6 +1173,53 @@ un report esce vuoto.
 **Le quattro dimensioni vanno registrate in GA4 prima del lancio**, e non è una
 formalità: non sono retroattive. Vedi "Le dimensioni personalizzate" più sopra.
 
+#### Il breadcrumb invisibile, e perché il sintomo era il colore sbagliato
+
+Trovato il 28/08/2026 guardando la pagina, non il codice. Sull'hero scuro di
+`corsi.html` la riga `Home › Corsi per bambini` era **testo `rgb(26,45,58)` sopra
+un gradiente che parte da `rgb(30,51,66)`: contrasto 1,07:1.** Non "poco
+leggibile" — lo stesso colore dello sfondo.
+
+**Il sintomo mentiva, ed è la parte da ricordare.** A occhio "Home" sembrava un
+link blu slavato, quindi la diagnosi naturale è "il colore del link è sbagliato".
+Non era il colore del link, era che *tutto* il crumb non ne aveva uno. `.page-hero`
+veste `h1`, `p`, `.section-label` e `a` — cioè nessuno dei due elementi che ci
+sono lì dentro. Il crumb è un `<div>`, quindi ereditava il colore del `body`.
+
+E la regola che avrebbe dovuto salvare almeno il link lo affondava:
+
+| | specificità | |
+|---|---|---|
+| `.page-hero a{color:var(--gold)}` | 0,1,1 | arriva prima |
+| `.co-crumb a{color:inherit}` | 0,1,1 | **arriva dopo, quindi vince** |
+
+`color:inherit` riportava il link nel buio lasciandogli solo la sottolineatura —
+da cui l'aspetto di link blu, che era il dettaglio da non inseguire.
+
+**I valori non sono nuovi**, e non andavano inventati: `.ev-hero` risolve lo
+stesso inciampo sulle schede evento da sempre — `.62` la traccia, `.82` il link,
+`opacity` rimessa a `1` perché l'alfa ora sta nel colore. Il crumb dei corsi non
+aveva mai ricevuto quel trattamento. Resi: **6,02:1** e **9,31:1**, contro il
+4,5:1 di WCAG AA. Le regole sono *scoped* su `.page-hero`, così la regola base
+continua a valere se un domani il crumb finisce su fondo chiaro.
+
+**Sono due classi, e vanno sistemate tutte e due**: `.co-crumb` (l'hub) e
+`.cr-crumb` (le pagine realtà), che è nata copiando la prima e ne ha ereditato il
+difetto. Controllarne una sola sarebbe come non controllarne nessuna.
+
+**La prova misura il reso, non legge il CSS** (`tests/corsi.js`): prende il
+colore calcolato, moltiplica l'alfa per ogni `opacity` da lì all'hero — che è il
+modo in cui un difetto così si nasconde, colore chiaro ma padre trasparente — e
+lo fonde con la **prima** tappa del gradiente, che è la più scura, cioè il caso
+peggiore. Pretende `AA` e in più che il link stacchi dalla traccia: un link che
+ha lo stesso contrasto del testo intorno è testo che sembra testo. Rimettendo il
+difetto la prova torna rossa dicendo `1,07:1`, cioè la cifra esatta misurata a
+mano — verificato, non supposto.
+
+È lo stesso genere di guasto della barra delle azioni alta 915px: **HTML
+corretto, CSS che a leggerlo sembra a posto, e nessuna prova che se ne accorge.**
+Quando una cosa "si vede male", la misura sta nel browser.
+
 #### Il testo non promette quello che il foglio non garantisce
 
 Terza tornata di feedback, 21/08/2026. L'hero diceva «Le attività che durano
