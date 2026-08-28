@@ -1114,6 +1114,62 @@ pezzo *e* sulla cella intera, perché chi scrive a mano aggiunge le date
 il primo pezzo da solo direbbe `in`. Tre parsing della stessa cella
 divergerebbero al primo ritocco.
 
+##### La stessa parola voleva dire due cose opposte nei due repo
+
+Trovato la sera stessa, andando a verificare l'unico dubbio rimasto aperto
+(«`avanza_stati_realta` non è in questo repo, va controllato che non sovrascriva
+un `bozza`»). Quella funzione è a posto — muove solo le righe il cui primo pezzo
+sta in `STATI_REALTA_CONFERMATI`, e `bozza` non c'è. Ma nel downloader c'era
+questo:
+
+```python
+STATO_REALTA_NUOVA = "bozza"      # daop_pipeline.py, riga 632
+#   bozza   la scrive il programma quando nasce la scheda.
+#           Pagina online ma fuori da Google.
+```
+
+**`bozza` era il default di ogni scheda appena compilata**, e il commento
+accanto gli dava esattamente il significato che qui ha il *vuoto*. Due decisioni
+prese in due repo diversi si erano incontrate sulla stessa parola con i due
+significati opposti: «appena nata, mostrala fuori da Google» contro «toglila
+dalla pagina».
+
+Chi ci sarebbe cascato è Giovanni, **proprio facendo il lavoro giusto**: compila
+la scheda di una società, il downloader scrive `bozza`, e la notte dopo i corsi
+di quella società escono dall'elenco. Nessun errore da nessuna parte, e il
+gradino successivo — mandare alla società il link della sua pagina perché la
+controlli — chiede un link che non esiste più. Il meccanismo si rompeva al primo
+passo, e a romperlo era l'aver fatto il lavoro. Non era ancora scattato solo
+perché le due schede compilate finora erano già state mosse oltre il default.
+
+Il default è diventato **`da inviare`** — che questo repo riconosce già in
+`STATI_ATTESA`, quindi stesso effetto del vuoto e nessun avviso di refuso nel log
+notturno. È anche più onesto: dice a che punto è la trattativa, non com'è fatto
+il file. Ora `bozza` è **solo** la leva che nasconde.
+
+Nel downloader sono cambiate altre due cose, e sono la stessa idea da due lati:
+la domanda «te l'hanno confermata?» **non si fa più** per una società
+parcheggiata (`STATI_REALTA_NASCOSTI`, copia di `STATI_BOZZA`), e se un verdetto
+arriva comunque in ritardo — la cassetta è asincrona, un file depositato ieri non
+sa cosa è stato deciso stanotte — `applica_conferme()` lo rifiuta e lo dice. Il
+motivo è che quel sì/no è **sui dati**, ma finiva scritto nella stessa cella che
+tiene nascosta la società: rispondendo di sì, Giovanni l'avrebbe rimessa online
+senza sapere di averlo fatto. Misurato sul foglio vero prima della correzione:
+
+```
+PRIMA (cosa sarebbe partito stanotte):   cuneo  PGS Roccavione      stato='bozza'
+                                         cuneo  Crome in Movimento  stato='inviata'
+DOPO:                                    cuneo  Crome in Movimento  stato='inviata'
+```
+
+La prova sta in `prova_schede_realta.py` (punto 7) e legge **questo** file
+sorgente: verifica che il default del downloader non sia una parola che qui
+nasconde, che sia una che qui si riconosce, e che i due elenchi di parole-che-
+nascondono siano identici. È la stessa forma del punto 6 (le colonne), con una
+differenza: lì due liste divergono e un dato non arriva in pagina, qui due liste
+si **sovrappongono** e la stessa parola vuol dire due cose opposte. Verificata
+rossa sul valore di ieri prima di scriverla.
+
 **Nessuna prova nomina la PGS**, e non è una dimenticanza: sarebbe rossa il
 giorno che quella società conferma, cioè quando il sito fa la cosa giusta — la
 quinta volta che quel tipo di prova si sarebbe rotta da sé. Quello che difende
