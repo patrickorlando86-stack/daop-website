@@ -439,6 +439,100 @@ rete è dei messaggi 1-a-1 della Business API, **non dei canali**. Quando
 servirà una lista di proprietà e misurabile, quella è l'email — e il posto dove
 chiederla sarà il canale stesso.
 
+### La barra delle azioni sulle schede: un servizio si mette davanti
+
+Fatta il 28/08/2026. Sul telefono, in fondo a ogni **scheda viva**, una barra
+fissa con "Come arrivare", "Chiama" (dove il foglio ha un numero) e
+"Calendario". Sono 165 schede su 173 al 28/08 — le otto che restano fuori non
+hanno un indirizzo mappabile, quindi avrebbero una sola azione.
+
+**Il conto e' misurato a 412px, non stimato.** `.ev-actions` — cioe' le due
+cose che uno viene qui a fare — comincia a **1.725px** su una pagina alta
+4.632, ed e' interamente in vista solo **dopo il 25% dello scroll**. E il 25%
+e' la soglia che in GA4 supera **circa meta'** di chi apre la pagina (12-18
+agosto: 546 `scroll_depth` al 25% su ~1.070 `page_view`; al 50% sono 308,
+cioe' il 29%). Uno su due non ha mai visto i due bottoni piu' cliccati del
+sito: `click_come_arrivare` e' l'azione numero uno delle schede, 33 in sette
+giorni contro 10 del calendario e 9 del telefono.
+
+**E' lo stesso conto dell'invito al canale, ma il verso e' opposto, ed e' la
+cosa da non confondere.** Quello e' una *richiesta*: in cima chiederebbe
+qualcosa a chi non ha ancora avuto niente, e infatti converte allo 0,3%.
+Questi sono *servizi* — la mappa e la data sono la ragione per cui uno e'
+arrivato. Un servizio si mette davanti, una richiesta no.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Non sostituisce `.ev-actions`**, che resta dov'e'. La pagina non perde
+  niente (li' c'e' anche "Torna all'agenda"), e cosi' la barra si puo'
+  togliere in qualunque momento senza lasciare un buco.
+- **Niente JavaScript**, e non e' pigrizia: una barra che compare allo scroll
+  e' un terzo ascoltatore su una pagina che ne ha gia' due, e sbaglierebbe
+  proprio nel primo istante, che e' quando meta' del pubblico decide.
+- **Mai su una scheda conclusa o ritirata.** Li' "Come arrivare" e "Aggiungi
+  al calendario" sono esattamente i due bottoni dannosi che `render_pagina()`
+  gia' toglie dal corpo — mandano in macchina, e scrivono in agenda, verso un
+  appuntamento che non c'e'. Rimetterli *fissi* sarebbe peggio di prima.
+- **Sotto le due azioni non si stampa niente.** Una barra fissa costa 62px di
+  schermo a tutti; per un bottone solo prende piu' di quello che rende.
+- **Lo spazio sotto il footer e' un elemento vero in flusso**, non un
+  `padding` su `body:has(.ev-barra)`: `:has()` non c'e' dappertutto, e dove
+  manca il footer finirebbe sotto la barra in silenzio.
+- **`z-index:60` e non di piu'**: il banner dei cookie sta a 99999 e **deve**
+  vincere — una barra non puo' coprire la richiesta di consenso.
+
+**I clic si contano da soli, e questo e' il punto che risponde alla domanda
+sull'uniformita' di GA4.** `daop-track.js` ricava il nome dell'evento
+**dall'href** (`nome_evento()`), quindi la barra manda gli stessi
+`click_come_arrivare` / `click_telefono` / `aggiungi_calendario` del corpo,
+con gli stessi parametri, senza una riga di codice in piu'. Non nasce un
+secondo posto da tenere allineato — e `tests/luoghi.js` prova proprio quello:
+ogni href della barra deve esistere identico nel corpo.
+
+**Un guasto preso per strada, che solo una misura nel browser vede.** Il
+`<style>` del guscio ha la regola di **elemento**
+`nav{position:fixed;top:0;left:0;right:0;z-index:100}` per la barra del sito.
+La barra delle azioni era un `<nav>`: si ritrovava `top:0` **e** `bottom:0`
+insieme, cioe' **alta 915px, tutto lo schermo**, con l'HTML perfettamente
+giusto. Ora e' un `<div role="group">` — sono azioni, non navigazione — e la
+prova misura l'altezza renderizzata, non l'HTML. Se un domani nasce un altro
+elemento fisso dentro una pagina generata, e' la prima cosa da ricordare.
+
+### Le corsie: una riga che non si vede e che evita di perdere il lettore
+
+`overscroll-behavior-x:contain` su `.ev-rail`, e basta. Su Android, quando una
+corsia arriva al suo primo elemento lo scorrimento continua a propagarsi alla
+pagina e il gesto diventa il **"torna indietro" del browser**. Con dodici card
+e lo snap obbligatorio, tornare all'inizio e' un gesto normale — e chi lo fa
+esce dal sito senza aver toccato niente. Il resto della corsia era gia' fatto
+bene (`scroll-snap-align:start` sulle card, 1,56 card in vista a 412px, cioe'
+la sbirciatina che dice che ce n'e' un'altra): non c'era altro da toccare.
+
+### Quello che invece era gia' a posto, e non va "risistemato"
+
+Verificato nel browser il 28/08/2026 a 412px, perche' torna come proposta ogni
+volta che qualcuno guarda il sito sul telefono:
+
+| | stato |
+|---|---|
+| barra filtri appiccicata allo scorrimento | **gia' cosi'**: `.ev-toolbar` sta a `top:68px` sotto la nav a qualunque profondita', provato fino a 15.000px |
+| filtri nella prima schermata | **gia' cosi'**: 676px su un viewport da 915 |
+| "Vicino a me" nella prima schermata | **gia' cosi'**: 795px |
+| "Cosa c'e' oggi" / "Questo weekend" | **933px, cioe' 18px sotto la piega** |
+
+Quei 18px **non si sono presi**, ed e' una decisione: sopra le scorciatoie non
+c'e' spazio morto, ci sono i margini di ritmo fra la barra dei filtri, il
+conteggio e le pillole. Toglierli e' cambiare stile per un guadagno che vale
+su un solo viewport — su un telefono con la barra dell'indirizzo aperta
+(~750px) quelle pillole restano sotto comunque. L'unica correzione vera
+sarebbe **riordinare** i blocchi, che e' strutturale. E le due voci sono
+comunque sempre raggiungibili dalla nav, che e' fissa.
+
+**Non si mettono nella barra appiccicosa**, ed e' gia' scritto per "vicino a
+me": quella e' a ~109px sul telefono e una riga in piu' la farebbe ricrescere
+**per tutto lo scorrimento**, cioe' si pagherebbe su ogni schermata quello che
+si guadagna su una.
+
 ## Le guide stagionali: la prima cosa che ci si porta via
 
 Deciso il 24/08/2026. Fino a qui il sito è un posto dove si **arriva** — da
