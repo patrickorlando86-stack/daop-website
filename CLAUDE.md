@@ -2364,6 +2364,77 @@ d'ingresso ("da 3 a 10 anni") invece dell'indicazione di massima che è. Può
 restare come *condizione* per mostrare o no un blocco; non come cifra stampata
 una seconda volta.
 
+### La descrizione si impagina a valle del dato, e il grassetto no
+
+Fatto il 28/08/2026. Nel foglio la `Descrizione` è **una cella**, cioè una
+stringa sola: al 28/08 nessuna delle 188 righe conteneva un solo `\n`. Il
+template della scheda spezzava sui capoversi (`re.split(r'\n{2,}')`) e quindi
+non trovava mai niente da spezzare: usciva un blocco unico da 600-1.700
+caratteri con dentro, in fila e separata da punti e virgola, la coda
+`Programma: 18/09 Giorgio Vanni in concerto (22:00); …`.
+
+**Il dato non si cambia.** Chi compila il foglio continua a scrivere in prosa e
+non deve imparare nessuna sintassi. L'impaginazione la fa `corpo_descrizione()`
+in `genera_eventi.py`, e solo dove la struttura è nel testo per davvero.
+
+Cosa riconosce, e sono numeri misurati non stimati:
+
+| | |
+|---|---|
+| righe con `Programma:` | 47 su 188 — e sono le manifestazioni lunghe, cioè le schede che prendono traffico |
+| voci, separate da `;` | 235, riconosciute **235 su 235** |
+| con `DD/MM` in testa | 207; le altre 28 ereditano il giorno di quella prima, o sono di un evento di un giorno solo |
+| schede che ne escono impaginate | **112 su ~400** (una manifestazione stampa il suo programma su ogni sotto-evento) |
+| paragrafi | 145 righe restano un paragrafo, 42 ne prendono due, 1 tre |
+
+**Il grassetto sta sulla data e sull'ora del programma, e su niente altro.**
+Sulla prosa sarebbe un giudizio editoriale dato da una regex — perché "6.500
+posti a sedere" e non "31 Pro Loco"? — e soprattutto date, orari, prezzo ed età
+stanno già nella barra dei fatti tre centimetri sopra: è la regola dell'età che
+non si ripete, applicata a tutto il resto.
+
+Le altre decisioni, che non si ricavano dal diff:
+
+- **Niente esce dalla pagina.** `meta description`, `og:description`, il JSON-LD
+  e i campi del link calendario continuano a leggere `descr_txt`, cioè il testo
+  piatto. Un `<ul>` dentro una meta description non è formattazione, è markup
+  che si vede fra i risultati di Google.
+- **Lo split sui capoversi resta il primo taglio**, anche se oggi nel foglio non
+  ce ne sono: il giorno che qualcuno andrà a capo dentro la cella, quella è una
+  divisione voluta da chi scrive e vince su qualunque euristica.
+- **Il confine di frase ha due occhiate indietro, e servono:** "6.500 posti" e
+  "ore 18.00" hanno il punto fra due cifre, "n. 3" ed "es." sono abbreviazioni
+  di una lettera sola. E un paragrafo nuovo non comincia per cifra — una frase
+  che parte con un numero esiste, ma un taglio sbagliato costa più di un taglio
+  mancato.
+- **`PARAG_LUNGH` è 230** perché la descrizione mediana ne misura 263, quindi
+  una tipica esce in due paragrafi da due-tre frasi. Verso i 150 si otterrebbe
+  un paragrafo per frase, che non è prosa impaginata, è un elenco.
+- **La data si scrive una volta per giorno.** Su una patronale di quattro giorni
+  sono venti righe in fila che diventano quattro blocchi. È l'unica cosa che si
+  perde rispetto al foglio, ed è una ripetizione.
+- **Il CSS sta in `PAGINA_CSS`, non nello `<style>` di `eventi.html`.** La
+  descrizione impaginata vive sulle schede: una regola di là farebbe un diff su
+  ~260 file per pagine che non la usano.
+- **Se il foglio cambia grammatica, degrada e non si rompe.** `Programma:` apre
+  la coda solo quando apre una frase; scritto `Programma - `, o con le voci
+  separate da virgole, non viene riconosciuto e la descrizione esce come prima.
+
+**Il difetto che ha avuto nascendo non si vedeva nell'HTML**, ed è il motivo per
+cui `tests/scheda.js` misura anche le larghezze: un programma **senza date** —
+evento di un giorno solo, dove nel foglio la data dentro il programma non si
+scrive — non ha l'etichetta, e il suo elenco cadeva nella gola di 62px riservata
+alla data. 62px di larghezza su **17 schede delle 112**, con l'HTML corretto e
+le prove verdi. La riga che lo chiude è
+`.ev-prog-g > .ev-prog-v:first-child{grid-column:1/-1}`.
+
+`tests/scheda.js` difende quattro cose, e la prima è quella che conta: che
+l'impaginazione **non perda né aggiunga una parola**. Confronta le parole del
+`.ev-body` con la `descr` del registro su tutte le schede, ammettendo come sola
+perdita le date accorpate — e controllando che di date non ne sia comparsa
+nessuna in più, che sarebbe il difetto peggiore di tutti. Al 28/08/2026:
+**407 schede su 407, nessuna discordanza.**
+
 ### I filtri solo dove si guadagnano il posto
 
 `MIN_FILTRI = 12`: sotto quel numero di eventi si scorre prima la lista che a

@@ -293,6 +293,31 @@ def contatti_html(testo):
     return "".join(pezzi)
 
 
+def primo_telefono(testo):
+    """Il primo numero dei recapiti, gia' normalizzato per un href="tel:".
+
+    Passa dalle STESSE due espressioni regolari di contatti_html(), nello
+    stesso ordine: la barra in fondo allo schermo e la riga "Contatti:" devono
+    chiamare lo stesso numero, e due riconoscimenti diversi divergono al primo
+    caso storto - "Patrizia351 6754801", oppure un indirizzo email con dentro
+    nove cifre di fila, che una search() secca prenderebbe per un telefono.
+    Se un domani il riconoscimento cambia, cambia in un posto solo."""
+    t = (testo or '').strip()
+    if not t:
+        return ''
+    trovati = sorted(
+        [(m.start(), m.end(), 'mail') for m in MAIL_RE.finditer(t)]
+        + [(m.start(), m.end(), 'tel') for m in TEL_RE.finditer(t)])
+    ultimo = -1
+    for a, b, tipo in trovati:
+        if a < ultimo:
+            continue
+        if tipo == 'tel':
+            return re.sub(r'[^+0-9]', '', t[a:b].strip())
+        ultimo = b
+    return ''
+
+
 def normalize(rows):
     today = datetime.date.today()
     events = []
@@ -1600,6 +1625,156 @@ def _titolo_evento(nome, citta, anno, gan):
     return _titolo(nome, citta, anno)
 
 
+# ---------------------------------------------------------------------------
+# Impaginare la descrizione a valle del dato
+# ---------------------------------------------------------------------------
+# Nel foglio la Descrizione e' UNA cella, cioe' una stringa sola: al 28/08/2026
+# nessuna delle 188 righe contiene un solo "\n". Quindi lo split sui capoversi
+# che stava nel template della scheda - re.split(r'\n{2,}') - non trovava mai
+# niente da spezzare, e la pagina stampava un blocco unico da 600-1.700
+# caratteri con dentro, in fila e separata da punti e virgola, la coda
+# "Programma: 18/09 Giorgio Vanni in concerto (22:00); ...".
+#
+# IL DATO NON SI CAMBIA. Chi compila il foglio continua a scrivere in prosa e
+# non deve imparare nessuna sintassi: l'impaginazione si fa qui, e solo dove la
+# struttura e' nel testo per davvero.
+#
+# COSA SI FA, E PERCHE' NON DI PIU'. Il grassetto sta sulla data e sull'ora del
+# programma, che sono token riconosciuti da una regex. Sulla prosa NON si mette
+# grassetto: sarebbe un giudizio editoriale dato da una stringa - perche'
+# "6.500 posti a sedere" e non "31 Pro Loco"? - e soprattutto date, orari,
+# prezzo ed eta' stanno gia' nella barra dei fatti tre centimetri sopra. E' la
+# regola "l'eta' non si ripete nelle descrizioni" applicata a tutto il resto.
+#
+# NIENTE DI QUESTO ESCE DALLA PAGINA. meta description, og:description, il
+# JSON-LD e i campi del link calendario continuano a leggere descr_txt, cioe'
+# il testo piatto: un <ul> dentro una meta description non e' formattazione, e'
+# markup che si vede fra i risultati di Google.
+#
+# Verificato riga per riga sulle 188 del 28/08/2026: il testo visibile resta
+# identico parola per parola. La sola cosa che sparisce sono le date ripetute
+# che il raggruppamento per giorno accorpa ("29/08 X; 29/08 Y" -> un 29/08).
+
+# "Programma:" apre la coda solo se apre una frase. In mezzo a una ("il
+# Programma: vedi sito") non e' un marcatore, e allora la coda resta prosa,
+# cioe' esce come prima. Vale per tutto quello che segue: se un domani nel
+# foglio si scrive "Programma - ", o le voci si separano con la virgola, il
+# parser non riconosce e la descrizione esce come oggi. Degrada, non si rompe.
+PROG_MARCA = re.compile(r'(?:^|(?<=[.!?])\s+)Programma:\s*', re.I)
+
+# Una voce: data opzionale in testa, ora opzionale in coda fra parentesi.
+# Misurato sulle 235 voci del 28/08/2026: 207 portano la data, le altre 28 o
+# continuano il giorno di quella prima - nel foglio la data si scrive una volta
+# e non si ripete - o sono di un evento di un giorno solo, che dentro il
+# programma la data non ce l'ha proprio. Le due forme dell'ora sono "(21:30)" e
+# "(19:00-22:00)"; "(vari)" esiste e vale come le altre.
+PROG_VOCE = re.compile(
+    r'^(?:(?P<data>\d{1,2}/\d{1,2})\s+)?'
+    r'(?P<testo>.*?)'
+    r'(?:\s*\((?P<ora>\d{1,2}[:.]\d{2}(?:\s*-\s*\d{1,2}[:.]\d{2})?|vari[ae]?)\))?$',
+    re.S)
+
+# Confine di frase: punto (o ! ?) piu' spazio piu' maiuscola. Le due occhiate
+# indietro non sono cautela teorica - "6.500 posti" e "ore 18.00" hanno il
+# punto fra due cifre, "n. 3" ed "es." sono abbreviazioni di una lettera sola:
+# senza, la prosa si spezzerebbe dentro un numero. E il paragrafo nuovo non
+# comincia per cifra: una frase che parte con un numero esiste, ma un taglio
+# sbagliato costa piu' di un taglio mancato.
+FRASE_FINE = re.compile(r'(?<![0-9])(?<!\b[A-Za-z])([.!?])\s+(?=[A-ZÀ-Ü«"(])')
+
+# 230 caratteri: la descrizione mediana ne misura 263, quindi una tipica esce
+# in due paragrafi da due-tre frasi. Scendendo verso i 150 si otterrebbe un
+# paragrafo per frase, che non e' prosa impaginata, e' un elenco.
+PARAG_LUNGH = 230
+PARAG_MINIMO = 90    # sotto, un paragrafo non si lascia da solo in coda
+
+
+def voci_programma(coda):
+    """Le voci scritte dopo "Programma:", come (data, testo, ora).
+
+    La data si eredita da quella prima quando manca, perche' e' cosi' che e'
+    scritta nel foglio: la si ripete solo quando cambia."""
+    voci, ultima = [], ''
+    for pezzo in coda.strip().rstrip('.').split(';'):
+        pezzo = pezzo.strip()
+        if not pezzo:
+            continue
+        m = PROG_VOCE.match(pezzo)
+        data = (m.group('data') or '').strip() or ultima
+        ultima = data
+        testo = (m.group('testo') or '').strip(' -–—')
+        if not testo:          # "18/09;" da sola non e' una voce
+            continue
+        voci.append((data, testo, (m.group('ora') or '').replace('.', ':').strip()))
+    return voci
+
+
+def _programma_html(voci):
+    """Un gruppo per giorno: la data sta in colonna e non si ripete sette
+    volte. Su una patronale di quattro giorni sono venti righe in fila che
+    diventano quattro blocchi leggibili."""
+    if not voci:
+        return ''
+    gruppi, ultima = [], object()      # object(): nessuna data e' uguale a lui
+    for data, testo, ora in voci:
+        if data != ultima:
+            gruppi.append((data, []))
+            ultima = data
+        gruppi[-1][1].append((testo, ora))
+    blocchi = []
+    for data, righe in gruppi:
+        vv = ''.join(
+            f'<li>{esc(t)}'
+            + (f' <span class="ev-prog-o">{esc(o)}</span>' if o else '')
+            + '</li>' for t, o in righe)
+        etichetta = f'<p class="ev-prog-d">{esc(data)}</p>' if data else ''
+        blocchi.append(f'<div class="ev-prog-g">{etichetta}'
+                       f'<ul class="ev-prog-v">{vv}</ul></div>')
+    return ('<h2 class="ev-prog-h">Programma</h2>'
+            f'<div class="ev-prog">{"".join(blocchi)}</div>')
+
+
+def paragrafi(testo):
+    """La prosa spezzata in paragrafi ai confini di frase.
+
+    Le frasi si accumulano finche' il paragrafo non passa PARAG_LUNGH, cosi'
+    una descrizione corta resta un paragrafo solo - che e' la cosa giusta per
+    145 righe su 188."""
+    frasi = [f.strip() for f in FRASE_FINE.sub(r'\1\n', testo.strip()).split('\n')
+             if f.strip()]
+    out = []
+    for f in frasi:
+        if out and len(out[-1]) < PARAG_LUNGH:
+            out[-1] += ' ' + f
+        else:
+            out.append(f)
+    if len(out) > 1 and len(out[-1]) < PARAG_MINIMO:
+        coda = out.pop()                     # niente code orfane di mezza riga
+        out[-1] += ' ' + coda
+    return out
+
+
+def corpo_descrizione(descr):
+    """La descrizione del foglio impaginata: paragrafi, piu' il programma come
+    elenco quando c'e'.
+
+    Lo split sui capoversi resta il primo taglio: oggi nel foglio non ce ne
+    sono, ma il giorno che qualcuno andra' a capo dentro la cella quella e' una
+    divisione voluta da chi scrive, e vince su qualunque euristica."""
+    descr = (descr or '').strip()
+    if not descr:
+        return ''
+    blocchi = []
+    for capoverso in re.split(r'\n{2,}', descr):
+        if not capoverso.strip():
+            continue
+        pezzi = PROG_MARCA.split(capoverso, maxsplit=1)
+        blocchi += [f'<p>{esc(p)}</p>' for p in paragrafi(pezzi[0])]
+        if len(pezzi) > 1:
+            blocchi.append(_programma_html(voci_programma(pezzi[1])))
+    return ''.join(b for b in blocchi if b)
+
+
 def carica_registro():
     if not os.path.exists(REGISTRO_PATH):
         return {}
@@ -1721,6 +1896,59 @@ def segnala_durate_assurde(events):
     for giorni, e in lunghi:
         print(f"    {_rif(e)}  {giorni:4d} giorni  {e['prov']}  "
               f"{e.get('di')} -> {e.get('df')}  {(e.get('nome') or '')[:46]}")
+
+
+def _mese_intero(e):
+    """La riga copre un mese di calendario esatto: dal primo all'ultimo giorno."""
+    d0, d1 = e['d_start'], e['d_end']
+    return (d0.day == 1 and d0.month == d1.month and d0.year == d1.year
+            and (d1 + datetime.timedelta(days=1)).day == 1)
+
+
+DATA_IGNOTA = re.compile(r'\bda\s+(definire|destinarsi|confermare|stabilire)\b'
+                         r'|\bdata\s+(esatta|precisa)\b', re.I)
+
+
+def segnala_date_ignote(events):
+    """Elenca le righe che dicono "non so quando" scrivendo "tutto il mese".
+
+    PERCHE' ESISTE (28/08/2026). "Festa dello Sport - Evento Finale Plogging
+    Smiling Biking" stava sul foglio con 01/09/2026 - 30/09/2026 e la
+    descrizione diceva, per esteso, "Data esatta di settembre 2026 da
+    definire". Il generatore pero' non ha modo di distinguere *non so quando*
+    da *dura trenta giorni*: nel foglio si scrivono uguale. Quindi la scheda
+    stampava l'unico dato che aveva ("Dal 1 al 30 settembre 2026") e nel
+    calendario copre() la faceva comparire su TUTTI E TRENTA i giorni di
+    settembre - qualunque giorno si toccasse, quella riga rispondeva presente
+    senza mai dire il suo. E' il guasto di segnala_durate_assurde() in
+    piccolo, e quella guardia non lo prende: la sua soglia e' > 30 giorni e un
+    mese ne misura 29 o 30.
+
+    LA FIRMA NON E' LA DURATA, E' L'INTERVALLO TONDO. Una mostra vera dura
+    quanto le pare ma comincia il 12 marzo e finisce il 4 giugno; una data
+    ignota diventa il primo-l'ultimo del mese, perche' e' l'unica cosa che chi
+    compila puo' scrivere quando non sa. Da qui il controllo.
+
+    I falsi positivi esistono e vanno bene: "Musei Aperti ad Agosto 2026" e'
+    davvero 01/08 - 31/08. Per questo si SEGNALA e basta, come per i doppioni
+    e le coordinate mancanti - la riga con la descrizione che ammette di non
+    sapere la data porta un <<< e si legge per prima. Si corregge nel foglio:
+    la data vera, o un intervallo stretto, o la riga si toglie finche' non si
+    sa. Cosi' com'e' occupa trenta caselle di calendario per rispondere boh."""
+    tondi = [e for e in events if _mese_intero(e)]
+    if not tondi:
+        return
+    sospetti = sum(1 for e in tondi if DATA_IGNOTA.search(e.get('descr') or ''))
+    print(f"[genera_eventi] ATTENZIONE: {len(tondi)} eventi coprono un mese di "
+          f"calendario esatto (dal primo all'ultimo giorno), {sospetti} con la data "
+          f"dichiarata incerta nella descrizione. Se non sono mostre o musei aperti, "
+          f"e' una data che non si sapeva: la riga risponde a tutti i giorni del mese "
+          f"e non dice il suo. Si corregge nel foglio:")
+    for e in sorted(tondi, key=lambda e: e['d_start']):
+        spia = '  <<< la descrizione dice che la data non si sa' \
+            if DATA_IGNOTA.search(e.get('descr') or '') else ''
+        print(f"    {_rif(e)}  {e.get('di')} -> {e.get('df')}  {e['prov']}  "
+              f"{(e.get('citta') or '?')[:16]:16} {(e.get('nome') or '')[:44]}{spia}")
 
 
 def segnala_doppioni(events):
@@ -1893,6 +2121,32 @@ PAGINA_CSS = """
 .ev-facts li{display:flex;gap:10px;align-items:flex-start;line-height:1.45}
 .ev-facts svg{flex:0 0 auto;margin-top:3px;opacity:.65}
 .ev-body{margin:26px 0;line-height:1.7}
+.ev-body p{margin:0 0 .9em}
+.ev-body p:last-child{margin-bottom:0}
+/* Il "Programma:" scritto dentro la descrizione, impaginato da
+   corpo_descrizione(): un gruppo per giorno, la data una volta sola in
+   colonna, l'ora come pillola. La griglia a 62px sta in una riga sola fino a
+   "30/08"; sotto i 520px va in colonna, perche' a due colonne il titolo di una
+   voce lunga restava in una gola di 90px. Questo CSS vive in PAGINA_CSS e non
+   nello <style> di eventi.html: la descrizione impaginata sta sulle schede, e
+   una regola di la' farebbe un diff su ~260 file per pagine che non la usano. */
+.ev-prog-h{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:700;
+  margin:1.6em 0 .6em;padding-top:1em;border-top:1px solid rgba(45,74,92,.14)}
+.ev-prog{display:grid;gap:14px}
+.ev-prog-g{display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:baseline}
+/* Un programma senza date - evento di un giorno solo, dove nel foglio la data
+   dentro il programma non si scrive - non ha l'etichetta, e senza questa riga
+   il suo elenco cadeva nella gola di 62px riservata alla data: misurato 62px
+   di larghezza su 17 schede delle 110 che hanno un programma. */
+.ev-prog-g > .ev-prog-v:first-child{grid-column:1/-1}
+@media(max-width:520px){.ev-prog-g{grid-template-columns:1fr;gap:3px}}
+.ev-prog-d{margin:0;font-size:.84rem;font-weight:700;font-variant-numeric:tabular-nums;
+  color:#8a6a12;letter-spacing:.02em}
+.ev-prog-v{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.ev-prog-v li{line-height:1.45}
+.ev-prog-o{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:700;
+  font-variant-numeric:tabular-nums;color:#a75b15;background:rgba(232,149,74,.16);
+  border-radius:100px;padding:2px 9px;white-space:nowrap}
 /* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
    cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
    non e' la pagina. */
@@ -1996,6 +2250,59 @@ PAGINA_CSS = """
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
 .ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+/* ── La barra delle azioni, e solo sul telefono ─────────────────────────
+   PERCHE' ESISTE, e il conto e' misurato il 28/08/2026 a 412px su una scheda
+   viva, non stimato. .ev-actions - "Aggiungi al calendario" e "Come arrivare",
+   cioe' le due cose che uno viene qui a fare - comincia a 1.725px su una
+   pagina alta 4.632: e' interamente in vista solo dopo il 25% dello scroll.
+   E il 25% e' la soglia che in GA4 supera circa META' di chi apre la pagina
+   (12-18 agosto: 546 scroll_depth al 25% su ~1.070 page_view; al 50% sono
+   308, cioe' il 29%). Quindi uno su due non ha mai visto i due bottoni piu'
+   cliccati del sito - `click_come_arrivare` e' l'azione numero uno delle
+   schede, 33 in sette giorni contro 10 del calendario e 9 del telefono.
+
+   E' lo stesso conto dell'invito al canale, con una differenza che decide il
+   verso: quello e' una RICHIESTA, e in cima chiederebbe qualcosa a chi non ha
+   ancora avuto niente. Questi sono SERVIZI - la mappa e la data sono la
+   ragione per cui uno e' arrivato. Un servizio si mette davanti.
+
+   NON sostituisce .ev-actions, che resta dov'e'. La pagina non perde niente
+   (li' c'e' anche "Torna all'agenda"), e cosi' la barra si puo' togliere in
+   qualunque momento senza lasciare un buco.
+
+   NIENTE JAVASCRIPT, e non e' pigrizia: una barra che compare allo scroll e'
+   un terzo ascoltatore su una pagina che ne ha gia' due, e sbaglierebbe
+   proprio nel primo istante, che e' quando meta' del pubblico decide. Sta
+   ferma. Per lo stesso motivo lo spazio sotto al footer e' un elemento vero
+   in flusso e non un padding su body:has(.ev-barra) - :has() non c'e'
+   dappertutto, e dove manca il footer finisce sotto la barra in silenzio.
+
+   z-index 60 e non di piu': il banner dei cookie sta a 99999 e DEVE vincere -
+   la barra non puo' coprire la richiesta di consenso. Sotto i 600px, cioe'
+   dove sta il 90% del pubblico; su desktop i bottoni si vedono senza.
+
+   I clic si contano da soli e senza una riga di JS: daop-track.js ricava il
+   nome dell'evento dall'href (nome_evento()), quindi questi tre link mandano
+   gli stessi `click_come_arrivare`, `click_telefono`, `aggiungi_calendario`
+   dei bottoni nel corpo, con gli stessi parametri. Non c'e' un secondo posto
+   da tenere allineato, ed e' il motivo per cui non ne nasce uno. */
+.ev-barra,.ev-barra-spazio{display:none}
+@media(max-width:600px){
+  .ev-barra-spazio{display:block;height:62px}
+  /* `top:auto` e' esplicito apposta: la regola di elemento nav{top:0} del
+     guscio ha gia' stirato questa barra a tutto schermo una volta. */
+  .ev-barra{display:flex;position:fixed;left:0;right:0;bottom:0;top:auto;z-index:60;gap:2px;
+    padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));
+    background:rgba(255,255,255,.97);backdrop-filter:blur(12px);
+    border-top:1px solid rgba(45,74,92,.14);box-shadow:0 -2px 14px rgba(45,74,92,.09)}
+  .ev-barra a{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:3px;padding:6px 4px;border-radius:12px;text-decoration:none;
+    font-size:.72rem;font-weight:700;line-height:1.15;text-align:center;
+    color:var(--navy,#2d4a5c);-webkit-tap-highlight-color:transparent}
+  .ev-barra a:active{background:rgba(45,74,92,.09)}
+  .ev-barra svg{width:19px;height:19px;opacity:.82}
+  .ev-barra span{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 """
 
 
@@ -2293,6 +2600,56 @@ def firma_daop(rec, oggi, ritirata=False):
 # Il canale WhatsApp. Vuoto = non si stampa niente da nessuna parte: meglio
 # nessun invito che un invito rotto.
 CANALE_WA = "https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z"
+
+
+def barra_azioni(e):
+    """I tre gesti della scheda, fermi in fondo allo schermo del telefono.
+
+    Il perche' sta per esteso nel commento di .ev-barra dentro PAGINA_CSS: i
+    bottoni del corpo sono in vista solo dopo il 25% dello scroll, e al 25%
+    ci arriva meta' del pubblico.
+
+    L'ORDINE E' QUELLO DEI NUMERI, non quello del codice: "Come arrivare" e'
+    l'azione piu' cliccata delle schede, quindi sta a sinistra dove cade
+    l'occhio; il calendario, che e' un gesto di chi ha gia' deciso, va in
+    fondo. Il telefono compare solo dove il foglio ha davvero un numero (62
+    schede vive su 173 al 28/08/2026): un bottone "Chiama" che non chiama
+    nessuno e' peggio di due bottoni.
+
+    SOTTO I DUE NON SI STAMPA NIENTE. Una barra fissa costa 62px di schermo a
+    tutti; per un bottone solo prende piu' di quello che rende, e quel bottone
+    sta gia' nel corpo.
+
+    Non si chiama MAI su una scheda conclusa o ritirata, e non e' una svista:
+    li' "Come arrivare" e "Aggiungi al calendario" sono esattamente i due
+    bottoni dannosi che render_pagina() gia' toglie dal corpo - mandano in
+    macchina, e scrivono in agenda, verso un appuntamento che non c'e'."""
+    voci = []
+    m = maps_url(e)
+    if m:
+        voci.append((m, PIN_SVG, 'Come arrivare', True))
+    tel = primo_telefono(e.get('contatto'))
+    if tel:
+        voci.append(('tel:' + tel, PHONE_SVG, 'Chiama', False))
+    g = gcal_url(e)
+    if g:
+        voci.append((g, CAL_SVG, 'Calendario', True))
+    if len(voci) < 2:
+        return ''
+    link = []
+    for href, ico, testo, fuori in voci:
+        extra = ' target="_blank" rel="noopener"' if fuori else ''
+        link.append(f'<a href="{esc(href)}"{extra}>{ico}<span>{testo}</span></a>')
+    # UN <div> E NON UN <nav>, e non e' una sfumatura di gusto: il <style> di
+    # eventi.html - che _guscio() copia in ogni pagina generata - ha la regola
+    # di ELEMENTO `nav{position:fixed;top:0;left:0;right:0;z-index:100}` per la
+    # barra del sito. Un <nav class="ev-barra"> la eredita e si ritrova top:0
+    # E bottom:0 insieme: misurato, la barra veniva alta 915px, cioe' tutto lo
+    # schermo, coprendo la pagina. Sono anche azioni e non navigazione, quindi
+    # il ruolo giusto e' group.
+    return ('<div class="ev-barra-spazio" aria-hidden="true"></div>'
+            '<div class="ev-barra" role="group" aria-label="Azioni rapide">'
+            + "".join(link) + '</div>')
 
 
 def blocco_canale(dove="", alto=False):
@@ -2871,6 +3228,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
                   'Se la manifestazione torna, aggiorniamo questa pagina con le nuove date. '
                   'Intanto trovi tutto quello che c\'è in programma nell\'<a href="/eventi.html">agenda DAOP</a>.</div>')
         azioni = '<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>'
+        barra = ''
     elif ritirata:
         avviso = ('<div class="ev-over"><strong>Scheda ritirata</strong>'
                   'Questo appuntamento non è più nell\'agenda DAOP: l\'abbiamo tolto '
@@ -2883,6 +3241,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         # macchina, verso un appuntamento che non esiste.
         azioni = ('<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">'
                   'Vedi cosa c\'è in programma</a></div>')
+        barra = ''
     else:
         avviso = ''
         # .btn da sola dà solo la forma: senza modificatore l'ancora resta un
@@ -2893,6 +3252,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
             bottoni.append(f'<a class="btn btn-teal" href="{esc(maps_url(e))}" target="_blank" rel="noopener">Come arrivare</a>')
         bottoni.append('<a class="ev-back" href="/eventi.html">Torna all\'agenda</a>')
         azioni = '<div class="ev-actions">' + "".join(bottoni) + '</div>'
+        barra = barra_azioni(e)
 
     # Dove va l'invito al canale. Di regola in coda (vedi blocco_canale), ma su
     # un'EDIZIONE CONCLUSA sale sotto l'avviso, cioe' e' la prima cosa dopo
@@ -2975,7 +3335,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     jsonld = json.dumps({"@context": "https://schema.org", "@graph": grafo},
                         ensure_ascii=False, indent=2)
 
-    corpo = "".join(f"<p>{esc(p)}</p>" for p in re.split(r'\n{2,}', descr_txt) if p.strip())
+    corpo = corpo_descrizione(descr_txt)
     famiglie = (blocco_famiglie(rec, vicini, oggi, hub=hub)
                 if vicini and not ritirata else '')
     consiglio = '' if ritirata else blocco_daop(e)
@@ -3051,6 +3411,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
 </article>
 {blocco_ginetto(citta)}</main>
 {foot}
+{barra}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
@@ -7316,6 +7677,7 @@ def main():
     segnala_doppioni(events)
     segnala_sovrapposizioni(events)
     segnala_durate_assurde(events)
+    segnala_date_ignote(events)
     segnala_senza_coordinate(events)
     assegna_ancore(events)
     # Il proprio numero si scrive PRIMA di generare qualunque pagina: la riga
