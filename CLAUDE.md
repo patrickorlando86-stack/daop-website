@@ -1011,6 +1011,51 @@ coi commenti `NAV-CORSI` dentro la nav. È il difetto già trovato il 21/08 sui
 centri, ripetuto identico — la riga che li toglie sta in tutti e due i gusci, e
 se nasce un terzo generatore con un guscio suo è quella da ricordare.
 
+#### L'età si legge con la sua unità, e il robots di una realtà non è quello dell'hub
+
+Due prove rosse trovate il 28/08/2026 facendo girare la suite. Nessuna delle due
+era un falso allarme e nessuna delle due era dov'era il sintomo.
+
+**Il primo era un difetto vero, e sarebbe ricomparso.** Il corso «Accarezzami —
+massaggio infantile» ha età `0-12 mesi`: `eta_da_testo()` leggeva due numeri e
+basta, quindi il filtro lo metteva nella fascia **0-12 anni** e il massaggio ai
+lattanti compariva a chi cerca per un dodicenne. La riga in pagina diceva «mesi»,
+il filtro contava anni — cioè le due cose che questa pagina non può permettersi
+di far divergere. Ora `_eta_numeri()` legge **l'unità scritta dopo il numero**, e
+chi non ce l'ha eredita quella del primo che la porta: in `0-12 mesi` è il 12 a
+dirlo e lo zero lo eredita, in `da 6 mesi a 3 anni` ognuno ha la sua. I mesi si
+troncano all'anno (12 mesi = 1 anno, 6 mesi = 0): una fascia d'età non è un
+compleanno, e un corso per lattanti sta nell'anno zero. **La riga continua a
+stampare quello che dice la locandina** (`0-12 mesi`), che è l'unica cosa vera da
+scrivere lì — è `eta_testo()` e non si tocca. Oggi è un corso su diciassette, ma
+baby yoga, pre-parto e nido si scrivono tutti in mesi.
+
+`eta_range()` non è toccata, ed è la ragione per cui il gemello `_attivitaEtaRange`
+in `app.js` (repo `daop-mobile`) non va allineato: l'unità vive nel **ripiego**
+scritto a parole, che di là non c'è ancora.
+
+**Il secondo era una prova invecchiata.** `tests/corsi.js` pretendeva che una
+pagina realtà avesse lo **stesso robots dell'hub** — regola giusta fino al
+26/08/2026, quando `confermata()` ha reso quella decisione della singola società
+(la cella `Stato`) e ha lasciato `CORSI_IN_INDICE` padrone del solo `corsi.html`.
+Sono due decisioni deliberatamente indipendenti, una sulla sezione e una sulla
+realtà: la prova diventava rossa **alla prima società che confermava**, cioè
+esattamente quando il sito faceva la cosa giusta. È la terza volta che capita
+(la copertura delle coordinate, il conteggio delle quattro porte), e la forma è
+sempre la stessa: *una prova che pretende un'uniformità che il sito ha smesso di
+volere*. Ora controlla l'invariante che `aggiorna_sitemap()` dichiara di sé —
+**nessuna URL in sitemap con `noindex`** — che regge in tutti e due i versi.
+
+**Resta un punto aperto, ed è di vendita non di codice.** `corsi/carezza.html` è
+`index, follow` perché la società ha confermato, ma con `CORSI_IN_INDICE = False`
+sta **fuori dalla sitemap e fuori dalla nav**, e l'unica pagina che la linka —
+l'hub — è `noindex`. Non è una contraddizione (una pagina indicizzabile che
+nessuno annuncia non è un ordine doppio), ma è mezzo passo: il giro promesso era
+«confermano → indicizziamo → fatturiamo», e senza un link da qualcosa di
+indicizzato Google non ci arriva. Le due strade sono spostare le confermate in un
+blocco di sitemap loro, oppure accendere `CORSI_IN_INDICE`. È una decisione, non
+un bug, e va presa sapendo che il primo blocco costa un'invariante in più.
+
 #### Restituire i numeri a ogni realtà: l'attribuzione è nel DOM
 
 Fatto il 21/08/2026, chiesto da Giovanni in vista del lancio: poter dire a una

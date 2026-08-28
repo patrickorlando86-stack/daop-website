@@ -187,6 +187,15 @@ module.exports = async function corsi(browser) {
         // Il ramo "scritta": in riga ci deve stare l'eta' come l'ha scritta la
         // locandina, e almeno il numero di partenza deve tornare con la fascia
         // usata dal filtro - se no il filtro e la riga direbbero due cose.
+        //
+        // "0-12 mesi" (il massaggio infantile) e' il caso in cui le due
+        // unita' non coincidono: la riga tiene quella della locandina, il
+        // filtro conta anni. Quello che deve tornare e' che la conversione
+        // ci sia stata (_eta_numeri in genera_corsi.py) - un corso per
+        // lattanti non puo' occupare una fascia larga di anni. Fino al
+        // 28/08/2026 questa prova pretendeva la parola "anni" in riga, ed
+        // era rossa su un corso scritto nel modo giusto.
+        if (/mes/i.test(riga)) return !(Number(hi) <= 2);
         return !new RegExp(`\\b${lo}\\b`).test(riga) || !/ann/i.test(riga);
       }
       const atteso = lo === hi ? `${lo} anni` : `${lo}-${hi} anni`;
@@ -457,6 +466,9 @@ module.exports = async function corsi(browser) {
   // non riceve link dal corpo di nessun'altra e' orfana, ed e' il guasto gia'
   // costato tutto il traffico a luoghi.html.
   const hub = fs.readFileSync(file, 'utf8');
+  const fileSitemap = path.join(RADICE, 'sitemap.xml');
+  const sitemap = fs.existsSync(fileSitemap)
+    ? fs.readFileSync(fileSitemap, 'utf8') : '';
   for (const f of dedicate) {
     const q = await apri(browser, `corsi/${f}`, 412);
     const h1 = (await q.page.locator('h1').first().innerText()).trim();
@@ -489,12 +501,23 @@ module.exports = async function corsi(browser) {
       (dts) => dts.filter((dt) => /organizzator/i.test(dt.textContent)).length);
     r.ok(seStesso === 0, `${f}: nessuna riga "Organizzatore" verso se stessa`);
 
-    // robots d'accordo con l'hub: se corsi.html e' fuori indice, una pagina
-    // realta' indicizzata sarebbe l'interruttore girato a meta'.
+    // robots e sitemap d'accordo, che e' l'invariante che aggiorna_sitemap
+    // dichiara di se': una URL in sitemap con robots noindex sono due ordini
+    // che si contraddicono.
+    //
+    // NON si confronta piu' con l'hub, e il perche' vale la pena saperlo. Dal
+    // 26/08/2026 la pagina di una realta' entra in indice quando la SUA riga
+    // dice "confermata" (confermata() in genera_corsi.py), mentre
+    // CORSI_IN_INDICE resta padrone del solo hub: sono due decisioni
+    // deliberatamente indipendenti - una sulla sezione, una sulla societa'.
+    // "Uguale all'hub" diventava rossa alla prima realta' che confermava,
+    // cioe' proprio quando il sito faceva la cosa giusta.
     const rob = await q.page.locator('meta[name="robots"]')
       .getAttribute('content').catch(() => '');
-    const robHub = (hub.match(/name="robots" content="([^"]*)"/) || [])[1] || '';
-    r.ok(rob === robHub, `${f}: robots "${rob}" come l'hub`);
+    r.ok(/^(no)?index, follow$/.test(rob), `${f}: robots "${rob}"`);
+    const inSitemap = sitemap.includes(`/corsi/${f}<`);
+    r.ok(!(inSitemap && /noindex/.test(rob)),
+      `${f}: ${inSitemap ? 'in sitemap' : 'fuori sitemap'} e robots "${rob}"`);
 
     const can = await q.page.locator('link[rel="canonical"]')
       .getAttribute('href').catch(() => '');

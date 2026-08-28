@@ -220,6 +220,39 @@ def _numeri4(s):
     return _re.findall(r'\d{4}', str(s or ''))
 
 
+def _eta_numeri(t):
+    """I numeri di un'eta' scritta a parole, ognuno convertito in ANNI.
+
+    Nasce il 28/08/2026 da un corso vero: "Accarezzami - Corso di massaggio
+    infantile", eta' "0-12 mesi". Letta come anni dava la fascia 0-12, cioe' il
+    massaggio ai lattanti compariva nel filtro di chi cerca per un dodicenne, e
+    la riga in pagina diceva "mesi" mentre il filtro contava anni. E' l'unica
+    cosa che questa pagina non puo' permettersi: la riga e il filtro devono dire
+    la stessa cosa, ed e' esattamente quello che tests/corsi.js sorveglia.
+
+    L'unita' e' quella scritta DOPO il numero, e chi non ce l'ha prende quella
+    del primo numero che la porta: in "0-12 mesi" e' il 12 a dire mesi e lo zero
+    la eredita, in "da 6 mesi a 3 anni" ognuno ha la sua. Senza unita' scritta
+    si legge in anni, che e' come e' sempre stato.
+
+    I mesi si troncano all'anno (12 mesi = 1 anno, 6 mesi = 0): una fascia
+    d'eta' non e' un compleanno, e un corso per lattanti sta nell'anno zero.
+    """
+    import re as _re
+    pezzi = list(_re.finditer(r'\d{1,2}', t))
+    unita = []
+    for i, m in enumerate(pezzi):
+        coda = t[m.end():pezzi[i + 1].start() if i + 1 < len(pezzi) else len(t)]
+        unita.append('mesi' if _re.search(r'\bmes', coda)
+                     else 'anni' if _re.search(r'\bann', coda) else None)
+    # All'indietro: "0-12 mesi" ha l'unita' solo in fondo, ed e' di tutti e due.
+    for i in range(len(unita) - 2, -1, -1):
+        if unita[i] is None:
+            unita[i] = unita[i + 1]
+    return [int(m.group()) // 12 if u == 'mesi' else int(m.group())
+            for m, u in zip(pezzi, unita)]
+
+
 def eta_da_testo(testo):
     """La fascia (lo, hi) letta da un'eta' SCRITTA A PAROLE, o None.
 
@@ -238,12 +271,14 @@ def eta_da_testo(testo):
     Tre forme, e basta quelle: "3-5 anni" (due numeri), "dai 4 anni" (da la' in
     su), "fino a 10 anni" (da zero a la'). "Tutte le eta'" non da' nessuna
     fascia a posta: non e' un filtro, e' l'assenza di filtro.
+
+    L'unita' la legge _eta_numeri(): "0-12 mesi" e' la fascia 0-1, non 0-12.
     """
     import re as _re
     t = (testo or '').strip().lower()
     if not t:
         return None
-    numeri = [int(x) for x in _re.findall(r'\d{1,2}', t)]
+    numeri = _eta_numeri(t)
     if not numeri:
         return None
     if len(numeri) >= 2:
