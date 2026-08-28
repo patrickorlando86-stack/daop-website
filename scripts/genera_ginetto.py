@@ -138,8 +138,40 @@ def render_volumi(volumi):
 
 # ─────────────────────────── materiali ───────────────────────────
 
-def render_materiali(volumi):
-    out = []
+def render_materiali(volumi, visibile=True):
+    """La sezione INTERA, intestazione compresa, oppure niente.
+
+    I marker GINETTO:MATERIALI abbracciano tutta la sezione e non solo
+    l'elenco, cosi' l'interruttore e' uno solo. Con l'elenco dentro i marker e
+    il titolo scritto a mano fuori, spegnere i materiali avrebbe lasciato in
+    pagina "Materiali per i piccoli esploratori" sopra il vuoto, che e' peggio
+    della sezione intera.
+
+    Spenta il 28/08/2026, e il testo NON e' stato buttato: sta qui e torna
+    girando "materiali_visibili" nel JSON. Prometteva un diploma e una
+    checklist che non esistono ancora ("Li stiamo preparando"), su una pagina
+    raggiunta dal QR stampato DENTRO il libro - cioe' da chi il libro l'ha
+    gia' comprato, che e' il pubblico a cui una promessa non mantenuta costa
+    di piu'. Quando i PDF ci saranno, si riaccende e la sezione ricompare gia'
+    con i suoi download: il peso dei file lo legge lo script dal file vero.
+    """
+    if not visibile:
+        return ""
+    out = ['<!-- MATERIALI -->',
+           '<section class="bg-white" id="materiali">',
+           '  <div class="section-inner">',
+           '    <span class="section-label">Da stampare</span>',
+           '    <h2 class="section-title">Materiali per i piccoli esploratori</h2>',
+           '    <p class="section-subtitle">Il diploma e la checklist dei luoghi che '
+           'accompagneranno i volumi, da stampare su un normale foglio A4. Li stiamo '
+           "preparando: qui sotto c'è l'elenco di quello che arriverà.</p>",
+           '    <p class="nota">',
+           '      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+           '<path d="M9 12.5l2.2 2.2L15.5 10"/><circle cx="12" cy="12" r="9"/></svg>',
+           '      <span>Quando saranno pronti saranno download diretti e gratuiti: '
+           'nessuna registrazione, nessun indirizzo email da lasciare.</span>',
+           '    </p>',
+           '    <div class="mat-groups">']
     for v in volumi:
         mats = v.get("materiali") or []
         # I materiali di un volume non ancora uscito non si annunciano: il
@@ -178,6 +210,7 @@ def render_materiali(volumi):
             out.append('          </a></li>' if kb else '          </div></li>')
         out.append('        </ul>')
         out.append('      </div>')
+    out += ['    </div>', '  </div>', '</section>']
     return "\n".join(out)
 
 
@@ -228,6 +261,21 @@ def render_jsonld(volumi):
 
 # ─────────────────────────── iniezione ───────────────────────────
 
+def alterna_fasce(pagina):
+    """Rimette in fila bianco/crema/bianco su tutte le <section> della pagina.
+
+    Non e' cosmesi: togliendo la sezione bianca dei materiali, la sezione dei
+    volumi (crema) finirebbe attaccata a "Come funziona" (crema), cioe' una
+    fascia sola alta il doppio. E il difetto si propaga a tutte quelle dopo,
+    quindi non basta girare la vicina. Ricalcolarla a ogni run vuol dire che
+    la sezione puo' andare e venire senza che nessuno debba ricordarsi di
+    sistemare a mano i colori di quelle che seguono.
+    """
+    fasce = iter(("bg-white", "bg-cream") * 40)
+    return re.sub(r'<section class="bg-(?:white|cream)"',
+                  lambda _: f'<section class="{next(fasce)}"', pagina)
+
+
 def inject(pagina, blocchi):
     for nome, contenuto in blocchi.items():
         pattern = (r'(<!-- GINETTO:' + nome + r':START -->)(.*?)(<!-- GINETTO:'
@@ -266,14 +314,22 @@ def main():
     if not volumi:
         sys.exit("[genera_ginetto] ERRORE: nessun volume visibile nel JSON")
 
+    materiali_on = bool(dati.get("collana", {}).get("materiali_visibili", True))
+
     pagina = open(HTML_PATH, encoding="utf-8").read()
     pagina = inject(pagina, {
+        # La riga che annuncia i materiali e' staccata dall'intro e si attacca
+        # solo se la sezione c'e': se no l'intro promette un download che in
+        # pagina non esiste, ed e' proprio la promessa che si voleva togliere.
         "INTRO": '      <p class="intro-testo">'
-                 + e(dati.get("collana", {}).get("intro", "")) + '</p>',
+                 + e(dati.get("collana", {}).get("intro", "")
+                     + (dati.get("collana", {}).get("intro_materiali", "")
+                        if materiali_on else "")) + '</p>',
         "VOLUMI": render_volumi(volumi),
-        "MATERIALI": render_materiali(volumi),
+        "MATERIALI": render_materiali(volumi, materiali_on),
         "JSONLD": render_jsonld(volumi),
     })
+    pagina = alterna_fasce(pagina)
     open(HTML_PATH, "w", encoding="utf-8").write(pagina)
     update_sitemap()
 
@@ -282,6 +338,9 @@ def main():
                       if esiste(m.get("file", "")))
     print(f"[genera_ginetto] esploratore.html aggiornata: {pubblicati} volumi, "
           f"{scaricabili} materiali scaricabili")
+    if not materiali_on:
+        print("[genera_ginetto] sezione materiali SPENTA (materiali_visibili: false "
+              "nel JSON): il testo resta nel generatore, non in pagina")
     if mancanti:
         print("\n[genera_ginetto] DA CARICARE (per ora mostrati come segnaposto "
               "o 'in preparazione'):")

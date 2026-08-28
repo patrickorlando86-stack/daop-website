@@ -5,7 +5,11 @@
  "collana": {
   "titolo": "Ginetto l'Esploratore",
   "occhiello": "Collana illustrata",
-  "intro": "Ginetto l'Esploratore è una collana di libri illustrati che accompagna bambini e genitori alla scoperta dei paesi del nostro territorio, un volume alla volta. Ogni libro nasce camminando: le piazze, i cortili e i campanili che ci sono dentro sono quelli veri, quelli che si possono andare a vedere il pomeriggio stesso. Per questo a ogni volume stiamo affiancando materiali da stampare gratuitamente: serviranno a far uscire la storia dal libro e a portarla in strada."
+  "intro": "Ginetto l'Esploratore è una collana di libri illustrati che accompagna bambini e genitori alla scoperta dei paesi del nostro territorio, un volume alla volta. Ogni libro nasce camminando: le piazze, i cortili e i campanili che ci sono dentro sono quelli veri, quelli che si possono andare a vedere il pomeriggio stesso.",
+  "_materiali_visibili": "Interruttore della sezione \"Materiali per i piccoli esploratori\". Spenta il 28/08/2026: annunciava un diploma e una checklist che non esistono ancora, su una pagina che si raggiunge dal QR stampato dentro il libro, cioe' da chi il libro l'ha gia' comprato. Il testo non e' perso: sta in render_materiali() dentro scripts/genera_ginetto.py, e rimettendo true la sezione torna com'era, coi download veri se i PDF nel frattempo ci sono.",
+  "materiali_visibili": false,
+  "_intro": "La frase che annunciava i materiali da stampare sta in 'intro_materiali', staccata dall'intro: si attacca in coda solo quando materiali_visibili e' true. Cosi' l'interruttore e' davvero uno - accendendo la sezione torna anche la riga che la introduce, senza che nessuno debba ricordarsi di rimetterla a mano.",
+  "intro_materiali": " Per questo a ogni volume stiamo affiancando materiali da stampare gratuitamente: serviranno a far uscire la storia dal libro e a portarla in strada."
  },
  "volumi": [
   {
