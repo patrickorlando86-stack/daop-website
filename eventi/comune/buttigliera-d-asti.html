@@ -124,6 +124,20 @@
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
   .ev-select.is-on{background:var(--navy);border-color:var(--navy);color:white}
+  /* Un dato binario e' una casella, non una tendina da due voci: un tocco
+     invece di tre, ed e' lo stesso vocabolario del "Solo con open day" dei
+     corsi. Il vestito e' quello di .ev-select, perche' nella stessa barra due
+     forme diverse per la stessa cosa si leggono come due cose diverse. */
+  .ev-chk{display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;white-space:nowrap;transition:var(--transition)}
+  .ev-chk:hover{border-color:var(--orange)}
+  .ev-chk.is-on{background:var(--navy);border-color:var(--navy);color:white}
+  .ev-chk input{width:15px;height:15px;margin:0;accent-color:var(--orange);cursor:pointer}
+  /* display:inline-flex batte il display:none che il browser da' a [hidden]:
+     senza questa riga la casella si vedeva anche fuori stagione, quando il JS
+     la lascia hidden perche' non divide - e in piu' spingeva le tendine su tre
+     righe, cioe' faceva crescere la barra appiccicosa proprio nei mesi in cui
+     non serve a niente. Trovata dalla prova che misura l'altezza, non dall'HTML. */
+  .ev-chk[hidden]{display:none}
   /* ── VICINO A ME ──
      Fuori dalla barra appiccicosa apposta: quella e' scesa a ~109px sul
      telefono e una riga in piu' la rifarebbe crescere per tutto lo
@@ -427,6 +441,13 @@
     .ev-hl-title{font-size:1.25rem}
     .ev-toolbar{gap:7px;padding:10px 0 9px}
     .ev-search{flex:1 1 100%}
+    /* Con la casella accesa la ricerca smette di prendere tutta la riga e le
+       lascia il posto accanto: 240 + 118 + lo spazio stanno nei 372px, quindi
+       le tre tendine restano insieme sulla seconda riga e la barra resta alta
+       109px come prima. La classe la mette il JS solo quando la casella si
+       accende: senza di essa il ripiego e' esattamente il layout di prima. */
+    .ev-toolbar.has-gratis .ev-search{flex:1 1 calc(100% - 130px)}
+    .ev-toolbar.has-gratis .ev-chk{flex:0 0 auto;font-size:0.8rem;padding:9px 11px;min-height:40px}
     .ev-search input{min-height:42px}
     /* Tre select in fila a larghezza UGUALE lasciano 119px l'uno e tagliano
    "Cultura & Natura", che ne chiede 144: era il motivo per cui stavano su due
@@ -895,7 +916,7 @@
       <li><a href="/eventi.html" >Eventi</a></li>
       <li><a href="/luoghi.html">Luoghi</a></li>
       <li><a href="/centri-estivi.html">Centri estivi</a></li>
-      
+      <li><a href="/corsi.html">Corsi</a></li>
       <li><a href="/ginetto.html">Ginetto AI</a></li>
       <li><a href="/index.html#social" class="nav-cta">Contatti</a></li>
     </ul>
@@ -908,7 +929,7 @@
   <a href="/eventi.html" onclick="closeMobile()">Eventi</a>
   <a href="/luoghi.html" onclick="closeMobile()">Luoghi</a>
   <a href="/centri-estivi.html" onclick="closeMobile()">Centri estivi</a>
-  
+  <a href="/corsi.html" onclick="closeMobile()">Corsi</a>
   <span class="mm-sep">Il resto di DAOP</span>
   <a href="/ginetto.html" onclick="closeMobile()">Ginetto AI</a>
   <a href="/rubriche.html" onclick="closeMobile()">Rubriche</a>
@@ -944,7 +965,7 @@
   </div>
   <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Buttigliera d&#x27;Asti: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
   <h2>Altri comuni della provincia di Asti</h2><div class="com-link"><a href="/eventi/comune/asti.html">Asti</a><a href="/eventi/comune/san-damiano-d-asti.html">San Damiano d&#x27;Asti</a></div>
-  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">864 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">16 centri con le date e le iscrizioni</span></a></div></section>
+  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">864 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">16 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">17 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
   <p class="com-fonte">Gli eventi a Buttigliera d'Asti arrivano da <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">@daop_asti</a>, la nostra pagina per la provincia di Asti. <a href="/zone.html">Le pagine della tua zona</a></p>
   <p class="ev-firma-nota">Pagina aggiornata il 28 agosto 2026.</p>
 </article>

@@ -580,9 +580,31 @@ def weekend_range(today):
     return sat, sat + datetime.timedelta(days=1)
 
 
+def e_gratuito(e):
+    """Vero se il foglio dichiara l'ingresso libero.
+
+    Sta in una funzione sola perche' la stessa risposta serve in quattro posti
+    - il cartellino della riga, la card della home, l'attributo su cui filtra
+    l'agenda - e due letture della stessa colonna che divergono vorrebbero dire
+    un cartellino "Gratuito" su una riga che il filtro "Solo gratuiti" nasconde,
+    cioe' la pagina che smentisce il suo comando."""
+    return any(k in (e.get('prezzo') or '').lower() for k in FREE_KW)
+
+
+def free_attr(e):
+    """L'attributo su cui lavora il filtro "Solo gratuiti".
+
+    Si stampa solo dove c'e' (~13 byte su 4 righe su 5, cioe' ~2 KB su 1,4 MB):
+    e' la regola di geo_attrs(), quello che manca non si scrive. La condizione
+    e' POSITIVA per una ragione che non e' di stile - nel foglio 22 righe su 46
+    dicono "a pagamento (da verificare)", quindi "gratuito" e' un fatto
+    dichiarato mentre "a pagamento" non lo e', e un filtro non deve nascondere
+    righe basandosi su una cella che si dichiara incerta."""
+    return ' data-free="1"' if e_gratuito(e) else ''
+
+
 def prezzo_pill(e):
-    pz = (e['prezzo'] or '').lower()
-    if any(k in pz for k in FREE_KW):
+    if e_gratuito(e):
         return '<span class="ev-pill is-free">Gratuito</span>'
     if e['prezzo']:
         return f'<span class="ev-pill is-price">{esc(trunc(e["prezzo"], 26))}</span>'
@@ -677,7 +699,7 @@ def riga(e, today, hub=None):
                   f'<a href="{f["url"]}" target="_blank" rel="noopener">'
                   f'@{esc(f["ig"])}</a></p>' if f else '')
 
-    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}"{geo_attrs(e)} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+    return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}"{geo_attrs(e)}{free_attr(e)} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-{anchor}">
             {thumb}
             <span class="ev-main">
@@ -865,8 +887,7 @@ def render_home(events):
                    f'<span class="m">{MESI[d.month-1]}</span></span>')
         color, tint, ink = COLORS.get(slug, COLORS['altro'])
         luogo = (esc(e['citta']) + f" ({e['prov']})") if e['citta'] else e['prov']
-        pz = (e['prezzo'] or '').lower()
-        if any(k in pz for k in FREE_KW):
+        if e_gratuito(e):
             price = '<span class="he-price free">Gratuito</span>'
         elif e['prezzo']:
             price = f'<span class="he-price">{esc(trunc(e["prezzo"], 22))}</span>'
@@ -1057,8 +1078,7 @@ def event_jsonld(e, url_override=None):
     # offers: includiamo price + priceCurrency + validFrom (richiesti per un'offerta valida).
     # Per gli eventi "a pagamento" senza una cifra nota omettiamo offers, così da non
     # generare un'offerta incompleta (causa degli avvisi di Search Console).
-    pz = (e['prezzo'] or '').lower()
-    if any(k in pz for k in FREE_KW):
+    if e_gratuito(e):
         price = "0"
         obj["isAccessibleForFree"] = True
     else:
@@ -2936,7 +2956,20 @@ def aggiorna_nav():
 # dati verificati. Non c'e' una soglia automatica apposta: il problema non e'
 # quanti corsi ci sono, e' che quelli che ci sono vanno confermati da chi li
 # organizza. Un numero non sa rispondere a quella domanda.
-CORSI_IN_INDICE = False
+#
+# ACCESO IL 28/08/2026. Giovanni ha dato l'ok: i dati sono verificati. Da qui
+# la pagina torna index, rientra in sitemap, riprende la voce in nav su ~360
+# pagine e la sua card nella riga delle quattro porte, e l'avviso "Sezione in
+# preparazione" sparisce da corsi.html.
+#
+# Quello che NON cambia, ed e' bene sia scritto perche' sembra la stessa cosa:
+# la cella Stato di ogni realta' resta padrona della SUA pagina. Al 28/08 su
+# tre realta' una sola e' confermata (carezza), quindi le altre due restano
+# noindex anche adesso — e vanno bene cosi'. Le due decisioni sono
+# deliberatamente indipendenti: questa e' sulla sezione, quella e' sulla
+# singola societa'. Se un domani si volesse indicizzarle tutte, il posto e' la
+# colonna Stato del foglio, non questo interruttore.
+CORSI_IN_INDICE = True
 
 
 FAMIGLIE = (
@@ -5975,8 +6008,7 @@ def spec_ferragosto(st, events, oggi, altre):
     finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
                       key=lambda e: (e['d_start'], (e.get('citta') or '')))
     comuni = len({(e.get('citta') or '').strip() for e in finestra if e.get('citta')})
-    gratis = sum(1 for e in finestra
-                 if any(k in (e.get('prezzo') or '').lower() for k in FREE_KW))
+    gratis = sum(1 for e in finestra if e_gratuito(e))
 
     titolo = _landing_titolo([f"Ferragosto {anno} con i bambini: {prov}",
                               f"Cosa fare a Ferragosto {anno} con i bambini | DAOP",
@@ -6298,8 +6330,7 @@ def spec_natale(st, events, oggi, altre):
     da, clou, a, finestra, comuni = _stagione_dati(st, events, oggi)
     anno = clou.year
     prov = province_in_elenco(PROVINCE_PUBBLICATE)
-    gratis = sum(1 for e in finestra
-                 if any(k in (e.get('prezzo') or '').lower() for k in FREE_KW))
+    gratis = sum(1 for e in finestra if e_gratuito(e))
 
     titolo = _landing_titolo([f"Natale {anno} con i bambini: {prov}",
                               f"Mercatini e presepi di Natale {anno} | DAOP",

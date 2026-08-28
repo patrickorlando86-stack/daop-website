@@ -108,6 +108,72 @@ module.exports = async function agenda(browser) {
   r.ok(await page.locator('.event-card:not(.is-hidden)').count() === tot,
     'tolto il filtro tornano tutte le schede');
 
+  // ── "Solo gratuiti" ───────────────────────────────────────────────────
+  // Il comando si stampa solo se DIVIDE, e la prova guarda l'invariante nei due
+  // versi: se e' acceso deve togliere almeno una dozzina di righe, se e' spento
+  // quelle righe non devono esserci. Cosi' non diventa rossa a novembre, quando
+  // in agenda resteranno due eventi a pagamento e la casella sparira' da
+  // se': e' lo stesso difetto — una prova che pretende un'uniformita' che il
+  // sito ha smesso di volere — gia' corretto sulla copertura delle coordinate.
+  const prezzi = await page.evaluate(() => ({
+    tot: document.querySelectorAll('.event-card').length,
+    gratis: document.querySelectorAll('.event-card[data-free="1"]').length,
+    accesa: !document.getElementById('ev-gratis-box').hidden,
+    classe: document.getElementById('ev-toolbar').classList.contains('has-gratis'),
+  }));
+  const aPagamento = prezzi.tot - prezzi.gratis;
+  r.ok(prezzi.accesa === (aPagamento >= 12 && aPagamento < prezzi.tot),
+    `"Solo gratuiti" c'e' quando divide: ${aPagamento} righe a pagamento su ${prezzi.tot},`
+    + ` casella ${prezzi.accesa ? 'accesa' : 'spenta'}`);
+  r.ok(prezzi.classe === prezzi.accesa,
+    'la classe has-gratis segue la casella (se no la ricerca cede il posto a nessuno)');
+
+  if (prezzi.accesa) {
+    // La barra e' appiccicosa: un controllo in piu' che la faccia crescere si
+    // paga su OGNI schermata di scorrimento. A 412px le tre tendine occupano
+    // 372px esatti, quindi la casella sta nella prima riga accanto alla
+    // ricerca: qui si misura l'altezza renderizzata, non l'HTML — e' la lezione
+    // della barra delle azioni che con l'HTML giusto veniva alta 915px.
+    const altezze = await page.evaluate(() => {
+      const b = document.getElementById('ev-toolbar');
+      const con = Math.round(b.getBoundingClientRect().height);
+      b.classList.remove('has-gratis');
+      document.getElementById('ev-gratis-box').hidden = true;
+      const senza = Math.round(b.getBoundingClientRect().height);
+      document.getElementById('ev-gratis-box').hidden = false;
+      b.classList.add('has-gratis');
+      return { con, senza };
+    });
+    r.ok(altezze.con === altezze.senza,
+      `la casella non fa crescere la barra appiccicosa: ${altezze.con}px con, ${altezze.senza}px senza`);
+
+    // 900ms e non 400: l'URL si riscrive con mezzo secondo di ritardo, perche'
+    // la ricerca scrive a ogni lettera e i browser limitano quante volte al
+    // minuto si puo' toccare la cronologia.
+    await page.click('#f-gratis');
+    await page.waitForTimeout(900);
+    const soloGratis = await page.locator('.event-card:not(.is-hidden)').count();
+    r.ok(soloGratis === prezzi.gratis,
+      `il filtro lascia esattamente le righe gratuite: ${soloGratis}/${prezzi.tot}`);
+    // Il filtro e la riga devono dire la stessa cosa: e' la ragione per cui il
+    // prezzo si legge in un posto solo (e_gratuito) nel generatore. Un
+    // cartellino che manca su una riga rimasta vuol dire due letture divergenti.
+    r.ok(await page.$$eval('.event-card:not(.is-hidden)',
+      (cs) => cs.every((c) => c.querySelector('.ev-pill.is-free'))),
+      'ogni riga rimasta porta il cartellino "Gratuito"');
+    r.ok(await page.$eval('#ev-gratis-box', (l) => l.classList.contains('is-on')),
+      'la casella attiva si evidenzia come le tendine');
+    // L'URL segue i filtri: e' il link che si manda in giro senza scriverlo.
+    r.ok(/(^|[?&])gratis=1([&]|$)/.test(await page.evaluate(() => location.search)),
+      `l'URL porta gratis=1 (${await page.evaluate(() => location.search)})`);
+    await page.click('#f-gratis');
+    await page.waitForTimeout(900);
+    r.ok(await page.locator('.event-card:not(.is-hidden)').count() === prezzi.tot,
+      'togliendo la spunta tornano tutte');
+    r.ok(!/gratis=/.test(await page.evaluate(() => location.search)),
+      "e il parametro sparisce dall'URL");
+  }
+
   // Prestazioni: due convenzioni che si smontano per distrazione.
   // La scheda si prende in fondo all'elenco e non a un indice fisso: il 21/08/2026
   // la prova cercava la 201esima su un'agenda scesa a 199 eventi, e la run
@@ -328,6 +394,28 @@ module.exports = async function agenda(browser) {
     r.ok(await page.locator('.ev-comuni-box .ev-comuni a').count() > 0,
       'i link ai comuni sono nel DOM');
   }
+
+  // ?gratis=1 preimpostato da link. Vale la regola numero uno dei preset: si
+  // imposta solo un valore che esiste davvero, quindi se la casella e' spenta
+  // (fuori stagione) il parametro si ignora e la pagina apre intera, invece di
+  // lasciare un filtro attivo con il suo comando invisibile.
+  await page.goto(page.url().split('?')[0] + '?gratis=1&utm_source=prova');
+  await page.waitForTimeout(700);
+  const dopo = await page.evaluate(() => ({
+    accesa: !document.getElementById('ev-gratis-box').hidden,
+    spuntata: document.getElementById('f-gratis').checked,
+    viste: document.querySelectorAll('.event-card:not(.is-hidden)').length,
+    gratis: document.querySelectorAll('.event-card[data-free="1"]').length,
+    tot: document.querySelectorAll('.event-card').length,
+    utm: new URLSearchParams(location.search).get('utm_source'),
+  }));
+  r.ok(dopo.spuntata === dopo.accesa,
+    "?gratis=1 imposta la casella solo se in questo momento c'e'");
+  r.ok(dopo.viste === (dopo.accesa ? dopo.gratis : dopo.tot),
+    `il link apre gia' filtrato: ${dopo.viste} righe`);
+  // La querystring si MODIFICA, non si riscrive: cancellare gli utm_* mezzo
+  // secondo dopo il caricamento faceva sparire l'attribuzione della campagna.
+  r.ok(dopo.utm === 'prova', "gli utm_* di chi arriva da una campagna restano nell'URL");
   await ctx.close();
 
   return r;

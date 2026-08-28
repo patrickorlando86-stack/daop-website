@@ -719,18 +719,32 @@ E vale la regola di sempre, che qui è più facile da rompere perché un PDF ha 
 copertina: **dentro la guida l'ordine non si vende.** Alfabetico come in
 `luoghi.html`, e "In evidenza" resta il blocco separato che si dichiara.
 
-### Cosa è bloccato, e non dal codice
+### Cosa era bloccato, e non dal codice — **sbloccato il 28/08/2026**
 
-**La guida la cui stagione è aperta adesso è quella dei corsi**, e non si fa:
-`corsi.html` è `noindex` perché Giovanni considera i dati PGS non verificati per
-la 2026/2027. Stampare in un PDF dei dati che l'unica persona che li conosce
-dichiara sbagliati è peggio che non stamparli — **un PDF gira e non si corregge
-dopo**, mentre una pagina la riscrive la run di stanotte. Si accende con
-`CORSI_IN_INDICE`, lo stesso interruttore di tutto il resto, e non ce n'è un
-secondo da ricordare.
+**La guida la cui stagione è aperta adesso è quella dei corsi**, e fino al
+27/08/2026 non si faceva: `corsi.html` era `noindex` perché Giovanni considerava
+i dati PGS non verificati per la 2026/2027, e stampare in un PDF dei dati che
+l'unica persona che li conosce dichiara sbagliati è peggio che non stamparli —
+**un PDF gira e non si corregge dopo**, mentre una pagina la riscrive la run di
+stanotte.
 
-L'impianto quindi si costruisce sui **centri estivi**, la cui finestra apre a
-gennaio: quattro mesi di margine, che è il lusso che non si è mai avuto.
+Il 28/08 Giovanni ha dato l'ok e `CORSI_IN_INDICE` è tornato `True`: **il blocco
+editoriale è caduto.** Quello che resta è lavoro, non una decisione — i corsi non
+hanno ancora i marker `GUIDA-PDF` in pagina, e `genera_pdf.py` legge solo
+`data/centri-stagioni.json`, che è dei centri. Cioè la guida dei corsi ora si
+*può* fare e non è ancora fatta: sono due stati diversi e vanno tenuti distinti,
+perché il primo si chiude con una telefonata e il secondo con del codice.
+
+Attenzione a una cosa che l'ok di Giovanni **non** ha spostato: la sua finestra.
+La tabella qui sopra dà i corsi online entro **~20 agosto**, che è già passato —
+la stagione 2026/2027 è cominciata. Una guida dei corsi fatta adesso arriva a
+open day in corso, che è l'errore descritto sopra («la guida deve esistere PRIMA
+che aprano le iscrizioni, non durante»). Vale come rodaggio dell'impianto, non
+come la scommessa: quella è la 2027/2028, e la data da segnare è **~20 agosto
+2027**.
+
+L'impianto quindi si costruisce comunque sui **centri estivi**, la cui finestra
+apre a gennaio: quattro mesi di margine, che è il lusso che non si è mai avuto.
 
 ## Le quattro porte: eventi, luoghi, centri, corsi
 
@@ -975,28 +989,48 @@ tre: `headers=1`, una colonna che si chiami `Organizzatore` (Luoghi ha `Nome`,
 quella), e soprattutto **una riga che non corrisponde a una società già in
 pagina viene buttata via**. Con l'ultima, un foglio sbagliato non entra comunque.
 
-#### `CORSI_IN_INDICE`, e perché la pagina resta online
+#### `CORSI_IN_INDICE`: spento il 21/08/2026, **riacceso il 28/08**
 
-`corsi.html` è **fuori dall'indice** dal 21/08/2026: Giovanni considera i dati
-PGS non verificati per la 2026/2027, e una pagina indicizzata fatta di dati che
-l'unica persona che li conosce dichiara sbagliati è un doppione debole sul
-dominio che regge `eventi.html`.
+`corsi.html` è **in indice dal 28/08/2026**. Era fuori dal 21/08 perché Giovanni
+considerava i dati PGS non verificati per la 2026/2027, e una pagina indicizzata
+fatta di dati che l'unica persona che li conosce dichiara sbagliati è un doppione
+debole sul dominio che regge `eventi.html`. Il 28/08 ha dato l'ok: i dati sono
+verificati, e l'interruttore è tornato a `True`.
 
 L'interruttore è **uno solo**, `CORSI_IN_INDICE` in `genera_eventi.py`, e governa
-quattro cose insieme: `robots noindex`, fuori sitemap, fuori nav (marker
-`NAV-CORSI` / `MM-CORSI`, stesso meccanismo della stagione dei centri), fuori
-dalla riga delle quattro porte. **Il footer tiene il link**, come per i centri:
-il footer è il catalogo, la nav è cosa c'è adesso.
+quattro cose insieme: `robots`, la sitemap, la nav (marker `NAV-CORSI` /
+`MM-CORSI`, stesso meccanismo della stagione dei centri) e la riga delle quattro
+porte. **Il footer tiene il link in tutti e due gli stati**, come per i centri:
+il footer è il catalogo, la nav è cosa c'è adesso — ed è per questo che nella
+settimana di `noindex` il footer è rimasto l'**unica** via d'accesso alla pagina.
 
-**La pagina resta online**, ed è la regola di `MIN_LANDING` già scritta per le
-stagionali: i link girati devono continuare a funzionare, e l'anzianità dell'URL
-è l'unico asset che una pagina nuova non può comprare. Fuori indice stampa anche
-un avviso **visibile**, non solo il meta: chi ci arriva da un link deve sapere
-che l'elenco non è finito, invece di dedurlo dal fatto che c'è una società sola.
+**Girarlo è un comando solo, ma i file li riscrivono i generatori**, e sono due —
+`genera_eventi.py` per la nav e la riga delle porte su ~470 pagine,
+`genera_corsi.py` per il `robots`, l'avviso e la sitemap di `corsi.html`. Girato
+l'interruttore senza farli girare tutti e due, il sito resta a metà: è
+esattamente lo stato che `tests/porte.js` è scritto per far diventare rosso.
 
-**Si riaccende a mano**, e non c'è una soglia automatica apposta: il problema non
-è quanti corsi ci sono, è che quelli che ci sono vanno confermati da chi li
-organizza — e un numero non sa rispondere a quella domanda.
+**Con lo spento la pagina restava online**, ed è la regola di `MIN_LANDING` già
+scritta per le stagionali: i link girati devono continuare a funzionare, e
+l'anzianità dell'URL è l'unico asset che una pagina nuova non può comprare.
+Stampava anche un avviso **visibile** ("Sezione in preparazione"), non solo il
+meta: chi ci arrivava da un link doveva sapere che l'elenco non era finito,
+invece di dedurlo dal fatto che c'era una società sola. Acceso, quell'avviso
+sparisce da sé — resta in pagina solo la sua regola CSS, che è inerte.
+
+**Si gira a mano**, e non c'è una soglia automatica apposta: il problema non è
+quanti corsi ci sono, è che quelli che ci sono vanno confermati da chi li
+organizza — e un numero non sa rispondere a quella domanda. Vale in tutti e due i
+versi: se un domani i dati tornassero incerti, si rimette `False` e si rifanno
+girare i due generatori.
+
+**Quello che l'interruttore NON governa, ed è la confusione facile:** la cella
+`Stato` di ogni realtà resta padrona della **sua** pagina. Al 28/08 su tre realtà
+una sola è confermata (`carezza`), quindi `crome-in-movimento-aps` e
+`pgs-roccavione` sono rimaste `noindex` anche dopo l'accensione, e va bene così.
+Sono due decisioni deliberatamente indipendenti — una sulla sezione, una sulla
+singola società — ed è la stessa distinzione che il 28/08 aveva già fatto
+diventare rossa una prova invecchiata (vedi "L'età si legge con la sua unità").
 
 `tests/porte.js` legge lo stato **da `corsi.html`**, non dal generatore: così
 quello che prova è che il sito sia d'accordo con se stesso, e un interruttore
@@ -1064,9 +1098,12 @@ cella `Stato` dice confermata, e se non ci finisce dentro niente il blocco si
 toglie. **Il blocco resta uno**: due marker in `sitemap.xml` da tenere allineati
 per una distinzione che qui è una riga di codice sarebbero un costo permanente.
 
-**Accendere `CORSI_IN_INDICE` non era l'alternativa**, ed è bene sia scritto:
-quell'interruttore è spento perché Giovanni considera i dati PGS non verificati
-per la 2026/2027, e non si gira per far comparire una URL in una sitemap.
+**Accendere `CORSI_IN_INDICE` non era l'alternativa**, ed è bene resti scritto
+anche adesso che è acceso: quel giorno era spento per una ragione editoriale, e
+un interruttore non si gira per far comparire una URL in una sitemap. Che il
+28/08 sia poi stato acceso *per la sua ragione* — Giovanni ha verificato i dati —
+non riabilita l'altra: il difetto della sitemap andava chiuso lo stesso, ed è
+stato chiuso prima e indipendentemente.
 
 L'invariante ora vale **in tutti e due i versi** — in sitemap niente `noindex`, e
 niente `index` fuori dalla sitemap — e `tests/corsi.js` la controlla così. Era il
@@ -2628,6 +2665,87 @@ Due filtri sono stati provati e tolti, per ragioni diverse:
   coperto, nessuno un posto dove passi il pomeriggio di pioggia. Il dato resta
   nella riga aperta, dove è un'informazione e non una promessa. **Un filtro che
   divide non è per forza un filtro che risponde.**
+
+#### "Solo gratuiti": una pagina sola su quattro se lo guadagna
+
+Fatto il 28/08/2026. La domanda era «il filtro gratuito sulle pagine dove ha
+senso farlo?», e la risposta l'hanno data i dati, non il gusto: **c'e' solo in
+`eventi.html`.** Il criterio non e' nuovo — e' quello scritto nella barra dei
+corsi, «un comando si stampa quando DIVIDE» — con una precisazione che qui serve:
+la soglia si applica a quello che il filtro **toglie**, non a quanto e' lungo
+l'elenco.
+
+| | il dato | verdetto |
+|---|---|---|
+| **agenda** | prezzo dichiarato su **216 righe su 216**, gratis 170 (79%) | **si'**: toglie 46 righe |
+| pagine di intenzione | idem, ma toglierebbe **2-11 righe** per pagina | no, vedi sotto |
+| pagine comune | 0-20 eventi, nessun filtro per definizione | no |
+| **corsi** | colonna Prezzo **vuota su tutte e 17 le righe** | no |
+| **luoghi** | 167 gratuiti, 138 con prezzo, **561 righe senza niente** su 866 | no |
+
+**Sui corsi non si fa, e non e' una questione di dati mancanti.** Un corso di
+pallavolo che dura una stagione non e' gratis, quindi quel filtro cercherebbe una
+cosa che non esiste; e la colonna Prezzo e' facoltativa **per decisione di
+Giovanni**, cioe' accendere un filtro sopra di essa vorrebbe dire obbligare a
+compilarla su ogni riga — lo stesso motivo per cui l'occhiello non promette piu'
+«i giorni e i costi». C'e' anche il precedente esatto, del 26/08: «solo con
+prova» e' stato **tolto** perche' provare si puo' quasi sempre. Quello che su
+quella pagina divide e' l'open day, ed e' gia' li'.
+
+**Su `luoghi.html` il problema e' il foglio, non la domanda.** Due terzi delle
+righe non dicono niente sul prezzo — le Fattorie Didattiche sono **103 su 103**
+senza dato — quindi «solo gratuiti» nasconderebbe centinaia di posti che sono
+gratis e che nessuno ha ancora marcato, cioe' mentirebbe nel verso peggiore: un
+parco pubblico che sparisce. Si riparla quando la colonna e' piena, e nel
+frattempo il dato resta dove e' oggi, nella riga aperta.
+
+**Sulle pagine di intenzione non e' una bocciatura, e' un ordine di lavori.**
+Oggi la soglia le tiene fuori da se' (`sagre-provincia-alessandria` toglierebbe
+2 righe su 37, `oggi-provincia-asti` zero). Ma prima di accenderlo li' va fatta
+un'altra cosa: **in quelle righe il prezzo non e' scritto**, e un filtro che
+lavora su un dato che la riga non mostra fa sparire delle voci senza dire
+perche'. Nell'agenda invece il cartellino «Gratuito» e' in riga da sempre, cioe'
+il filtro e la riga dicono la stessa cosa.
+
+Le decisioni dentro, che non si ricavano dal diff:
+
+- **L'attributo `data-free` e' POSITIVO, e non per stile.** Nel foglio 22 righe
+  su 46 dicono «a pagamento (da verificare)»: «gratuito» e' un fatto dichiarato,
+  «a pagamento» no. Un filtro non nasconde righe basandosi su una cella che si
+  dichiara incerta, e per la stessa ragione non esiste il verso opposto («solo a
+  pagamento»), che sarebbe un elenco costruito su 22 forse.
+- **Il prezzo si legge in un posto solo** (`e_gratuito()`): lo usano il
+  cartellino della riga, la card della home, il JSON-LD e l'attributo. Due
+  letture della stessa colonna che divergono vorrebbero dire una riga col
+  cartellino «Gratuito» che il filtro nasconde, cioe' la pagina che smentisce il
+  proprio comando. `tests/agenda.js` prova esattamente quello: **ogni riga
+  rimasta deve portare il cartellino.**
+- **Sta nella PRIMA riga della barra, accanto alla ricerca, e costa zero
+  pixel.** Misurato a 412px: le tre tendine occupano 105+101+152 piu' i due
+  spazi, cioe' 372px **esatti**, quindi un quarto controllo li' dentro avrebbe
+  fatto ricrescere la barra appiccicosa di 47px **per tutto lo scorrimento** —
+  la ragione per cui anche «vicino a me» sta fuori. Nella prima riga lo spazio
+  c'era: la ricerca la prende tutta perche' e' stirata, non perche' le serva.
+  Con la casella accesa la barra resta **109px** e il primo evento a **1.083px**,
+  cioe' dov'era.
+- **La classe `has-gratis` la mette il JS**, e serve solo a far cedere quei
+  130px alla ricerca. Senza di essa il ripiego e' il layout di prima, che e' il
+  comportamento giusto nei mesi in cui la casella non c'e'.
+- **E' una casella e non una tendina da due voci**: un tocco invece di tre, ed e'
+  lo stesso vocabolario del «Solo con open day» dei corsi.
+- **`?gratis=1` entra fra i parametri del link condivisibile** (anche
+  `?gratis=si`), e vale la regola numero uno dei preset: si imposta solo se in
+  quel momento la casella c'e'. Se no il link lascerebbe attivo un filtro il cui
+  comando e' invisibile.
+
+**Il difetto che ha avuto nascendo non si vedeva nell'HTML**, ed e' la terza
+volta che capita su questa pagina: `.ev-chk{display:inline-flex}` batte il
+`display:none` che il browser da' a `[hidden]`, quindi fuori stagione la casella
+si sarebbe vista comunque — e, spingendo le tendine su tre righe, avrebbe fatto
+crescere la barra appiccicosa a **157px** proprio nei mesi in cui non serve. Con
+l'HTML perfettamente giusto. L'ha trovata la prova che **misura l'altezza
+renderizzata** con e senza la casella, come per la barra delle azioni che veniva
+alta 915px: la riga che la chiude e' `.ev-chk[hidden]{display:none}`.
 
 ### Un link con i filtri gia' messi, e perche' NON diventa una pagina
 
