@@ -1062,7 +1062,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 <meta name="twitter:description" content="{G.esc(G.trunc(descr, 120))}">
 <meta name="twitter:image" content="{G.esc(info.get('logo') or G.DEFAULT_IMG)}">
 <meta name="daop:citta" content="{G.esc(citta)}">
-<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
@@ -1883,7 +1883,7 @@ def render(corsi, css, nav, foot, realta=None):
 <meta name="twitter:title" content="{G.esc(G.trunc(titolo, 60))}">
 <meta name="twitter:description" content="{G.esc(G.trunc(descr, 120))}">
 <meta name="twitter:image" content="{G.DEFAULT_IMG}">
-<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">

@@ -33,6 +33,14 @@ della collana sono quadrati):
 
 - [x] `copertine/vol-1-casale-monferrato.webp`  ← estratta dal PDF del libro
 - [x] `copertine/vol-2-castelnuovo-scrivia.webp`  ← ripresa dalla scheda Amazon
+- [ ] `copertine/vol-3-garbagna.webp`
+- [ ] `copertine/vol-4-ovada.webp`
+
+> I volumi **3 (Garbagna)** e **4 (Ovada)** sono in pagina dal 28/08/2026 ma
+> senza copertina e senza link Amazon diretto: finche' i due file non ci sono
+> la pagina disegna il segnaposto, e il bottone manda alla pagina autore invece
+> che alla scheda del libro. Sono le due sole cose che mancano — appena
+> arrivano, basta rilanciare lo script.
 
 Materiali — **PDF in formato A4 verticale**, pensati per la stampa in bianco e
 nero su una stampante di casa o di scuola:

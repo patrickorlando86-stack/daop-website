@@ -130,6 +130,45 @@ module.exports = async function agenda(browser) {
   await page.waitForTimeout(400);
   r.ok(await page.locator('.ev-cal-grid').count() === 1, 'la vista calendario disegna la griglia');
   r.ok(await page.locator('.ev-cal-day.has').count() > 0, 'il calendario segna i giorni pieni');
+
+  // Un giorno scelto. I gruppi dell'agenda sono per data di INIZIO: una sagra
+  // che il 22 c'e' ancora sta nel gruppo del 16, o in "gia' iniziati". Lasciare
+  // accese quelle intestazioni voleva dire rispondere "domenica 16 agosto" a chi
+  // ha chiesto il 22, che e' il difetto per cui questa prova esiste.
+  const pieni = await page.$$eval('.ev-cal-day.has', (bs) => bs
+    .map((b) => ({ k: b.dataset.giorno, n: Number(b.querySelector('.ev-cal-n').textContent || 0) }))
+    .sort((a, b) => b.n - a.n));
+  if (pieni.length) {
+    const g = pieni[0].k; // il giorno piu' pieno: e' li' che la divisione si vede
+    await page.click(`.ev-cal-day[data-giorno="${g}"]`);
+    await page.waitForTimeout(500);
+    const vista = await page.evaluate(() => {
+      const visibile = (e) => !e.hidden && getComputedStyle(e).display !== 'none';
+      const capi = [...document.querySelectorAll('.ev-dayhead')].filter(visibile);
+      const gruppi = [...document.querySelectorAll('.ev-day:not(.is-hidden)')];
+      const y = (e) => e.getBoundingClientRect().top;
+      return {
+        deiGruppi: capi.filter((h) => h.closest('.ev-day')).length,
+        nomi: capi.map((h) => h.querySelector('.ev-dayname').textContent),
+        somma: capi.reduce((s, h) => s + Number(h.querySelector('.ev-daycount').textContent), 0),
+        righe: document.querySelectorAll('.event-card:not(.is-hidden)').length,
+        primo: gruppi.length ? gruppi.reduce((a, b) => (y(a) <= y(b) ? a : b)).dataset.day : null,
+      };
+    });
+    r.ok(vista.deiGruppi === 0, 'con un giorno scelto le intestazioni dei gruppi si spengono');
+    r.ok(vista.nomi.length > 0 &&
+      new RegExp('\\b' + Number(g.slice(8)) + '\\b').test(vista.nomi[0]),
+      `il primo capo e' il giorno scelto: "${vista.nomi[0]}"`);
+    r.ok(vista.somma === vista.righe,
+      `i capi contano tutte le righe mostrate: ${vista.somma}/${vista.righe}`);
+    r.ok(vista.primo === g,
+      'in cima sta il gruppo del giorno scelto, non quello di chi era iniziato prima');
+    await page.click('[data-tutto]');
+    await page.waitForTimeout(400);
+    r.ok(await page.$$eval('.ev-day:not(.is-hidden) .ev-dayhead',
+      (hs) => hs.some((h) => getComputedStyle(h).display !== 'none')),
+      'tornando al mese le intestazioni dei giorni tornano');
+  }
   await page.click('#v-agenda');
   await page.waitForTimeout(300);
 

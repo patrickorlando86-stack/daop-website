@@ -388,7 +388,7 @@ def pagina_articolo(a, rub, aut, cfg, pubblicati, css, nav, foot, sprite):
 <meta name="twitter:title" content="{esc(trunc(a['titolo'], 60))}">
 <meta name="twitter:description" content="{esc(trunc(a['sommario'], 120))}">
 <meta name="twitter:image" content="{DEFAULT_IMG}">
-<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">

@@ -826,7 +826,8 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-cat{font-weight:700;color:var(--cat-ink,#606d7a)}
 .lg-pills{flex:0 0 auto;display:flex;gap:5px;align-items:center}
 /* inline-block e NON inline-flex: in un contenitore flex lo spazio in testa a
-   un elemento figlio viene mangiato, e "2 in programma" usciva "2IN PROGRAMMA".
+   un elemento figlio viene mangiato, e "2 eventi in programma" usciva
+   "2EVENTI IN PROGRAMMA".
    Lo spazio sta dentro l'<i> apposta - cosi' se ne va insieme alla parola
    quando sul telefono resta il solo numero - ma serve un contesto in cui
    contenga davvero. */
@@ -1124,8 +1125,16 @@ def riga(l, oggi):
     if l.get('consigliato'):
         pillole.append('<span class="lg-tag is-daop">♥<i> Scelto da DAOP</i></span>')
     if prossimi:
-        pillole.append(f'<span class="lg-tag is-ev"><b>{len(prossimi)}</b>'
-                       f'<i> in programma</i></span>')
+        # "1 evento in programma" e non "1 in programma": la pillola deve dire
+        # di CHE COSA e' il numero. Senza il sostantivo la frase e' la sola
+        # spiegazione di un dato mai nominato, e si legge come se fosse il
+        # posto a essere "in programma". Le parole spariscono comunque sul
+        # telefono (.lg-tag i), dove resta il solo numero: la riga non si
+        # allunga dove lo spazio manca.
+        n_ev = len(prossimi)
+        pillole.append(f'<span class="lg-tag is-ev"><b>{n_ev}</b>'
+                       f'<i> {"evento" if n_ev == 1 else "eventi"} in programma</i>'
+                       f'</span>')
     elif l.get('gratuito'):
         pillole.append('<span class="lg-tag is-free">€<i> Gratis</i></span>')
 
@@ -1591,7 +1600,7 @@ def render(elenco, oggi):
 <meta name="twitter:description" content="{e(G.trunc(descr, 120))}">
 <meta name="twitter:image" content="{G.DEFAULT_IMG}">
 <meta name="twitter:image:alt" content="{alt_og}">
-<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Le foto dei luoghi stanno su Supabase: il preconnect apre la connessione
@@ -1779,7 +1788,7 @@ def render_piscine(elenco, oggi):
 <meta name="twitter:title" content="{e(titolo)}">
 <meta name="twitter:description" content="{e(G.trunc(descr, 120))}">
 <meta name="twitter:image" content="{G.DEFAULT_IMG}">
-<link rel="icon" href="/assets/images/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="{SUPABASE_FOTO}" crossorigin>
