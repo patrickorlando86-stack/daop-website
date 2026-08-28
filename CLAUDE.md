@@ -1045,6 +1045,81 @@ coi commenti `NAV-CORSI` dentro la nav. È il difetto già trovato il 21/08 sui
 centri, ripetuto identico — la riga che li toglie sta in tutti e due i gusci, e
 se nasce un terzo generatore con un guscio suo è quella da ricordare.
 
+#### Tre stati e non due: "non confermata" non è "in bozza"
+
+Fatto il 28/08/2026 per la PGS Roccavione, che andava tolta dalla pagina senza
+perderne i dati. Prima la cella `Stato` sapeva dire una cosa sola — sì o non
+ancora — e l'unico modo di far sparire una società era **cancellarne le righe
+dal foglio**, cioè buttare via il lavoro fatto per doverlo riscrivere a mano il
+giorno che quella società dice di sì.
+
+Adesso la stessa cella copre tre esiti, e la scala è la cosa da non appiattire:
+
+| `Stato` | cosa succede |
+|---|---|
+| `confermata`, `pubblicata`, `fatturata` | in pagina, in Google, in sitemap |
+| vuoto, o `inviata`/`in attesa`/`contattata` | **in pagina, ma `noindex`**: chi ha il link la vede, Google no |
+| **`bozza`**, `sospesa`, `nascosta`, `ritirata` | **non si vede affatto** |
+| riga cancellata dal foglio | come sopra, ma i dati non ci sono più |
+
+**Il gradino di mezzo non è un ritiro, ed è tutta la ragione del terzo
+insieme.** Il silenzio vale "non ancora confermata" — la regola dei luoghi,
+«senza un sì umano non si genera niente» — e una pagina online e `noindex` è la
+cosa giusta mentre una trattativa è aperta: il link si può mandare alla
+società perché guardi la propria scheda. `bozza` è un'altra affermazione, ed è
+attiva: *questi dati non si pubblicano*.
+
+Con `bozza` spariscono insieme, e da un taglio solo (`togli_nascoste()`, sui
+corsi, prima di tutto il resto): le righe dall'elenco, la scheda in fondo a
+`corsi.html`, la pagina in `corsi/` — che `scrivi_realta()` **cancella** da sé,
+non trovandola più fra le vive — la voce in `data/realta-pagine.json`, e di
+conseguenza la riga «Organizzatore: I corsi di …" sulle schede evento, al giro
+dopo. Tagliare nei quattro posti che usano i corsi vorrebbe dire quattro
+occasioni di divergere, e la peggiore sarebbe la più silenziosa: una pagina in
+`corsi/` rimasta online per una società uscita dalla guida.
+
+**`REALTA_NASCOSTE` sta vuota apposta.** È la leva d'emergenza per il giorno in
+cui una società va tolta subito e il foglio non è raggiungibile; è sempre il
+secondo posto in cui vive un fatto che ne ha già uno, quindi si riempie per un
+giorno e si svuota. Il 28/08 c'è finita dentro `pgs-roccavione` per mezz'ora,
+prima di accorgersi che **nel foglio la cella diceva già `bozza`**: la lista non
+serviva, bastava far girare il generatore. È il caso tipico — la si riempie
+credendo che il foglio non sappia, e il foglio sa. Se le due porte divergono
+(la lista dice "fuori", il foglio dice "confermata") `nascosta()` lo urla nel
+log, invece di lasciarlo scoprire fra sei mesi a chi si chiede perché una
+società che ha pagato non compare da nessuna parte.
+
+**Il registro degli stati si stampa a ogni run, anche quando non nasconde
+niente**, ed è il pezzo che rende la cosa governabile da chi non tocca il
+codice: la cella la scrive Giovanni a Cuneo, la pagina la fa una run notturna,
+e in mezzo non c'era nessuna conferma che le due cose si fossero parlate.
+
+```
+[genera_corsi]   CàRezza: Stato 'pubblicata' -> in pagina, in Google
+[genera_corsi]   Crome in Movimento APS: Stato 'inviata' -> in pagina, ma noindex
+[genera_corsi]   PGS Roccavione: Stato 'bozza' -> fuori dalla pagina (5 corsi)
+```
+
+**`STATI_ATTESA` esiste per una ragione sola: perché il log non gridi al
+refuso.** Una parola non riconosciuta vale "non confermata" — ripiego prudente,
+ma non è quello che ha in testa chi l'ha scritta: chi digita `bozz` o `sospesq`
+lascia la società online e non se ne accorge. Quindi le parole ignote si
+stampano. Ma `inviata` è un gradino vero della trattativa, scritto giusto, e
+senza quel terzo insieme finirebbe fra i refusi **tutte le notti**: un avviso
+che suona sempre smette di essere un avviso.
+
+E la cella si legge in **un posto solo** (`_stato_e()`): confronto sul primo
+pezzo *e* sulla cella intera, perché chi scrive a mano aggiunge le date
+(`confermata 26/08`) ma esistono anche stati di due parole (`in attesa`), dove
+il primo pezzo da solo direbbe `in`. Tre parsing della stessa cella
+divergerebbero al primo ritocco.
+
+**Nessuna prova nomina la PGS**, e non è una dimenticanza: sarebbe rossa il
+giorno che quella società conferma, cioè quando il sito fa la cosa giusta — la
+quinta volta che quel tipo di prova si sarebbe rotta da sé. Quello che difende
+il meccanismo è l'invariante che c'era già: *nessuna scheda evento rimanda a una
+pagina realtà che non esiste*.
+
 #### L'età si legge con la sua unità, e il robots di una realtà non è quello dell'hub
 
 Due prove rosse trovate il 28/08/2026 facendo girare la suite. Nessuna delle due

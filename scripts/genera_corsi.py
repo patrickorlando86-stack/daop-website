@@ -836,8 +836,22 @@ def confermata(info):
     non si interpreta mai come un sì: e' la stessa regola dei luoghi ("senza un
     sì umano non si genera niente").
     """
-    prima = (info or {}).get('stato', '').strip().lower().split()
-    return bool(prima) and prima[0].strip('.,;:') in STATI_CONFERMATI
+    return _stato_e(info, STATI_CONFERMATI)
+
+
+def _stato_e(info, parole):
+    """La cella Stato dice una di queste parole?
+
+    Il confronto e' sul PRIMO pezzo della cella *e* sulla cella intera: chi
+    scrive a mano aggiunge le date ("confermata 26/08"), e una parola in piu'
+    non deve valere un no — ma ci sono anche stati di due parole ("in attesa"),
+    e li' il primo pezzo da solo direbbe "in", che non vuol dire niente.
+    Sta in una funzione sola perche' i tre insiemi la leggono tutti e tre, e
+    tre parsing della stessa cella divergerebbero al primo ritocco."""
+    cella = (info or {}).get('stato', '').strip().lower()
+    if not cella:
+        return False
+    return cella in parole or cella.split()[0].strip('.,;:') in parole
 
 
 def ha_pagina(info):
@@ -856,6 +870,126 @@ def slug_realta(org):
 
 def url_realta(org):
     return f"/{DIR_REALTA}/{slug_realta(org)}.html"
+
+
+# ── LE REALTA' IN BOZZA: nel foglio ci sono, in pagina no ──────────────
+#
+# Chiesto il 28/08/2026 per la PGS Roccavione. "Non confermata" e "in bozza"
+# NON sono la stessa cosa, ed e' la distinzione che regge tutto questo blocco:
+#
+#   Stato vuoto, o parola non riconosciuta -> la pagina esiste ed e' online,
+#       ma noindex (confermata() dice no). Chi ha il link la vede, Google no.
+#       E' il silenzio, e il silenzio non e' un ritiro.
+#   Stato "bozza" -> non si vede affatto: i corsi escono dall'elenco, la
+#       scheda in fondo a corsi.html sparisce, la pagina in corsi/ viene
+#       CANCELLATA da scrivi_realta() (non trovandola piu' fra le vive) e il
+#       link "Organizzatore" sulle schede evento smette di stamparsi al giro
+#       dopo, quando genera_eventi.py rilegge data/realta-pagine.json.
+#
+# Serviva perche' fino a oggi l'unico modo di togliere una societa' dalla
+# pagina era cancellarne le righe dal foglio, cioe' buttare via il lavoro
+# fatto per doverlo riscrivere a mano il giorno che la societa' dice di si'.
+STATI_BOZZA = ('bozza', 'draft', 'sospesa', 'sospeso', 'nascosta', 'nascosto',
+               'ritirata', 'ritirato', 'no')
+
+# I gradini di mezzo della trattativa: la scheda e' partita, la societa' non ha
+# ancora risposto. Valgono esattamente quanto il vuoto — pagina online, noindex
+# — e infatti nessuna riga di codice li guarda per decidere qualcosa.
+#
+# Esistono per una ragione sola: perche' il log NON li segnali come parole
+# sbagliate. Senza questo insieme, 'inviata' (che al 28/08/2026 e' lo stato di
+# Crome in Movimento, ed e' scritto giusto) finirebbe fra i refusi a ogni run
+# notturna, e un avviso che suona tutte le notti smette di essere un avviso.
+STATI_ATTESA = ('inviata', 'inviato', 'attesa', 'in attesa', 'da inviare',
+                'contattata', 'contattato', 'da contattare', 'trattativa',
+                'in trattativa', 'ricevuta', 'ricevuto', 'in lavorazione')
+
+# LA LEVA DI EMERGENZA, E STA VUOTA APPOSTA.
+#
+# Serve solo il giorno in cui una societa' va tolta subito e il foglio non e'
+# raggiungibile (o chi lo cura non e' raggiungibile). E' SEMPRE il secondo
+# posto in cui vive un fatto che ne ha gia' uno, quindi si riempie per un
+# giorno e si svuota appena la cella Stato dice la stessa cosa.
+#
+# Il 28/08/2026 c'e' finita dentro 'pgs-roccavione' per mezz'ora, prima di
+# accorgersi che nel foglio la cella diceva gia' "bozza": la lista non serviva,
+# bastava far girare il generatore. E' il caso tipico — la si riempie credendo
+# che il foglio non sappia, e il foglio sa.
+#
+# L'unico modo in cui le due porte possono divergere — la lista dice "fuori",
+# il foglio dice "confermata" — nascosta() lo urla nel log a ogni run, invece
+# di lasciarlo scoprire fra sei mesi a chi si chiede perche' una societa' che
+# ha pagato non compare da nessuna parte.
+REALTA_NASCOSTE = ()
+
+
+def nascosta(org, info=None):
+    """Questa realta' va tenuta fuori dalla pagina?
+
+    Due porte e una funzione sola che decide: la cella Stato del foglio e la
+    lista qui sopra. Vuoto NON vuol dire nascosta — il silenzio vale "non
+    confermata", che e' un'altra cosa e ha un'altra conseguenza."""
+    if _stato_e(info, STATI_BOZZA):
+        return True
+    if slug_realta(org) in REALTA_NASCOSTE:
+        if confermata(info):
+            print(f"[genera_corsi] ATTENZIONE: '{org}' risulta confermata nel "
+                  f"foglio ma sta in REALTA_NASCOSTE: la tengo fuori. Se il "
+                  f"si' e' buono, va tolta dalla lista in genera_corsi.py")
+        return True
+    return False
+
+
+def togli_nascoste(corsi, realta):
+    """I corsi delle realta' in bozza, fuori dall'elenco.
+
+    Il taglio si fa QUI, sui corsi, e non in ognuno dei posti che li usano:
+    render(), raggruppa_per_realta() e scrivi_realta() partono tutti da questa
+    stessa lista, quindi una riga tolta di qui sparisce da tutte e quattro le
+    superfici insieme — elenco, scheda in fondo, pagina dedicata, registro.
+    Tagliare in quattro punti vorrebbe dire quattro occasioni di divergere, e
+    la peggiore sarebbe la piu' silenziosa: una pagina in corsi/ rimasta
+    online per una societa' che dalla guida e' uscita."""
+    orgs, conta = {}, {}
+    for c in corsi:
+        s = slug_realta(c.get('org') or '')
+        orgs.setdefault(s, c.get('org') or '')
+        conta[s] = conta.get(s, 0) + 1
+    fuori = {s for s, nome in orgs.items() if nascosta(nome, realta.get(s, {}))}
+
+    # Il registro degli stati si stampa SEMPRE, anche quando non nasconde
+    # niente. E' l'unico posto in cui chi cura il foglio vede l'effetto di
+    # quello che ha scritto: la cella e' a Cuneo, la pagina la fa una run
+    # notturna, e in mezzo non c'e' nessuna conferma che le due cose si siano
+    # parlate. Una riga di log non e' un lusso, e' il giro di ritorno.
+    ignoti = []
+    for s in sorted(orgs):
+        info = realta.get(s, {})
+        cella = (info.get('stato') or '').strip()
+        if s in fuori:
+            esito = f"fuori dalla pagina ({conta[s]} corsi)"
+        elif confermata(info):
+            esito = "in pagina, in Google"
+        else:
+            esito = "in pagina, ma noindex"
+            if cella and not _stato_e(info, STATI_ATTESA):
+                ignoti.append((orgs[s], cella))
+        print(f"[genera_corsi]   {orgs[s]}: Stato "
+              f"{cella or '(vuoto)'!r} -> {esito}")
+    if ignoti:
+        # Una parola non riconosciuta vale "non confermata", che e' il ripiego
+        # prudente ma NON e' quello che ha in testa chi l'ha scritta. Va detto,
+        # come per le stagioni dei centri: se qualcuno scrive "bozz" o
+        # "sospesq" la societa' resta online e nessuno se ne accorge.
+        print("[genera_corsi] parole non riconosciute nella colonna Stato: "
+              + ", ".join(f"{n} = {c!r}" for n, c in ignoti)
+              + f". Valgono 'non confermata'. Per nascondere: "
+              + "/".join(STATI_BOZZA[:3]) + "; per pubblicare: "
+              + "/".join(STATI_CONFERMATI[:3]))
+
+    if not fuori:
+        return corsi
+    return [c for c in corsi if slug_realta(c.get('org') or '') not in fuori]
 
 
 def raggruppa_per_realta(corsi):
@@ -2308,13 +2442,18 @@ def main():
         # Il controllo sta QUI, prima di qualunque scrittura, e non in fondo.
         print("[genera_corsi] foglio non letto: lascio la pagina com'è")
         return 0
-    # Il proprio numero prima di render(): la riga delle quattro porte lo
-    # rilegge, e questa pagina la scrive di se' stessa (senza contarsi).
-    G.conteggio_scrivi('corsi', len(corsi))
     # Le schede delle realta' si leggono DOPO i corsi e usando i loro nomi: e'
     # il filtro che impedisce a un foglio sbagliato di entrare in pagina. Vedi
     # leggi_realta().
     realta = leggi_realta({c['org'] for c in corsi})
+    # Le realta' in bozza escono di qui, PRIMA di tutto il resto: da questa
+    # lista discendono l'elenco, le schede in fondo, le pagine dedicate e il
+    # registro. Sta dopo leggi_realta() perche' la cella Stato che lo decide
+    # arriva da li'.
+    corsi = togli_nascoste(corsi, realta)
+    # Il proprio numero prima di render(), e DOPO il taglio: la riga delle
+    # quattro porte lo rilegge, e deve contare i corsi che si vedono davvero.
+    G.conteggio_scrivi('corsi', len(corsi))
     css, nav, foot = G._guscio()
     # Le pagine delle realta' PRIMA di corsi.html: render() deve sapere quali
     # esistono per decidere dove manda il link "Organizzatore". Fra le due
