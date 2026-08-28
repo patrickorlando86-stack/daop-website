@@ -5432,6 +5432,50 @@
     "pagina": true,
     "ultima": "2026-09-25"
    },
+   "coccoliamo-ci-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Coccoliamo-ci - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-29"
+   },
+   "espressione-in-gioco-fascia-2-6-anni-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Espressione in Gioco! fascia 2-6 anni - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-29"
+   },
+   "pilates-in-gravidanza-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Pilates in Gravidanza - CàRezza",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-25"
+   },
+   "sogni-d-oro-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Sogni d'Oro - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-28"
+   },
    "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi": {
     "anni": [
      2026
@@ -5442,6 +5486,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-24"
+   },
+   "tutti-a-tavola-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Tutti a Tavola! - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-30"
    }
   },
   "nome": "Racconigi",
