@@ -583,6 +583,18 @@ module.exports = async function corsi(browser) {
   const fileSitemap = path.join(RADICE, 'sitemap.xml');
   const sitemap = fs.existsSync(fileSitemap)
     ? fs.readFileSync(fileSitemap, 'utf8') : '';
+  // Il registro delle schede evento: lo leggono le tre prove sulla sezione
+  // "Open day ed eventi" qui sotto. Una volta sola, non una per pagina.
+  const fileReg = path.join(RADICE, 'data', 'pagine-evento.json');
+  const registro = fs.existsSync(fileReg)
+    ? JSON.parse(fs.readFileSync(fileReg, 'utf8')) : {};
+  // La data di OGGI in locale, non toISOString: quello e' UTC, e d'estate
+  // fra mezzanotte e le due direbbe gia' domani. Una prova che diventa rossa
+  // solo di notte e' peggio di una prova che manca.
+  const ora = new Date();
+  const OGGI = ora.getFullYear() + '-'
+    + String(ora.getMonth() + 1).padStart(2, '0') + '-'
+    + String(ora.getDate()).padStart(2, '0');
   for (const f of dedicate) {
     const q = await apri(browser, `corsi/${f}`, 412);
     const h1 = (await q.page.locator('h1').first().innerText()).trim();
@@ -660,6 +672,52 @@ module.exports = async function corsi(browser) {
     r.ok(evRotti.length === 0, evRotti.length
       ? `${f}: eventi verso pagine inesistenti: ${evRotti.join(', ')}`
       : `${f}: ${ev.length} eventi, tutti verso schede che esistono`);
+
+    // ── gli eventi della societa', non solo i suoi open day ───────────────
+    // Fino al 28/08/2026 questa sezione la riempiva SOLO la colonna OpenDay
+    // dei corsi, e CàRezza aveva nove appuntamenti in agenda e ZERO qui - la
+    // sezione non si stampava nemmeno. Quella colonna la scrive
+    // collega_openday() nel downloader, che pretende "open day" nel nome
+    // dell'evento: fa bene (se no il saggio di fine anno diventerebbe un open
+    // day) ma era anche l'unica porta che c'era, quindi tutto il resto restava
+    // fuori. Ora eventi_realta() cerca anche gli eventi che portano il nome
+    // della societa' in coda al proprio.
+    //
+    // LA PROVA NON RIFA' IL CONFRONTO DEL GENERATORE, ed e' deliberato: un
+    // secondo posto dove si decide chi si aggancia a chi divergerebbe al primo
+    // ritocco, ed e' lo stesso motivo per cui i dati della realta' si scrivono
+    // in un posto solo (_dati_realta). Chiede una cosa piu' DEBOLE, che per
+    // costruzione non puo' divergere: se in registro c'e' qualcosa di
+    // ovviamente suo e ancora da fare, qui sotto non ci puo' essere il vuoto.
+    // E' la regressione vera - la sezione che sparisce - non l'algoritmo.
+    const suoi = Object.values(registro).filter((rec) => !rec.ritirata
+      && (rec.nome || '').includes(h1) && (rec.d_end || '') >= OGGI);
+    r.ok(suoi.length === 0 || ev.length > 0, suoi.length
+      ? `${f}: ${suoi.length} eventi a suo nome in registro, ${ev.length} in pagina`
+      : `${f}: nessun evento a suo nome in registro, e infatti niente in pagina`);
+
+    // Nessuna scheda gia' passata: un appuntamento finito non si annuncia,
+    // che e' la regola che openday() ha da sempre ("un invito a una porta
+    // chiusa"). Qui vale per tutti e due i modi di arrivarci.
+    const conclusi = ev
+      .map((h) => registro[h.replace('/eventi/', '').replace('.html', '')])
+      .filter((rec) => rec && (rec.d_end || '') < OGGI);
+    r.ok(conclusi.length === 0, conclusi.length
+      ? `${f}: annuncia eventi gia' conclusi: ${conclusi.map((x) => x.nome).join(', ')}`
+      : `${f}: nessun evento concluso fra quelli annunciati`);
+
+    // E il nome della societa' non si ripete su ogni card: sta nel titolo
+    // della sezione tre centimetri sopra, e ripeterlo e' la stessa
+    // ripetizione che le pagine comune tolgono quando un gruppo e' tutto
+    // della stessa categoria. Si guarda la FINE del titolo, che e' esattamente
+    // il pezzo che _senza_societa() taglia: un evento fatto INSIEME a
+    // un'altra realta' tiene il nome per intero, e li' non e' una ripetizione.
+    const titoliEv = await q.page.$$eval('.cr-ev-n',
+      (ns) => ns.map((n) => n.textContent.trim()));
+    const ripetono = titoliEv.filter((t) => t.endsWith(h1));
+    r.ok(ripetono.length === 0, ripetono.length
+      ? `${f}: card che ripetono "${h1}": ${ripetono.join(' · ')}`
+      : `${f}: ${titoliEv.length} card, nessuna ripete il nome della realtà`);
 
     r.ok(hub.includes(`/corsi/${f}`),
       `${f}: corsi.html la linka (non è orfana)`);

@@ -1319,11 +1319,91 @@ Le decisioni che non si ricavano dal diff:
   le spegne insieme. Con due blocchi, spegnere i corsi lascerebbe in sitemap
   proprio le pagine che senza l'hub non hanno più un posto da cui si arriva.
 
-**Cosa manca perché sia completa.** Gli eventi che compaiono lì dentro sono solo
-quelli agganciati dai corsi con la colonna `OpenDay`: un saggio di fine anno o
-la festa di Natale della stessa società **non hanno oggi nessun legame con lei**.
-Per averli serve una colonna `Organizzatore` nella tab **Eventi**, scritta con lo
-stesso nome — e a quel punto la pagina li raccoglie da sé.
+#### Gli eventi di una realtà: il legame è il nome, non una colonna nuova
+
+Chiuso il 28/08/2026. Fino a quel giorno gli eventi sulla pagina di una società
+erano **solo** quelli agganciati dai corsi con la colonna `OpenDay`, e si vedeva:
+**CàRezza aveva nove appuntamenti in agenda e zero sulla sua pagina** — la
+sezione non si stampava nemmeno. Idem PGS Roccavione col suo torneo del 29
+agosto. L'unica che funzionava era Crome in Movimento, per un motivo solo: il
+suo evento si chiama letteralmente «Open Day Corsi di Musica».
+
+La causa non era un difetto, era una porta sola. `OpenDay` la riempie
+`collega_openday()` nel downloader, che pretende `"open day"` dentro il nome
+dell'evento — e fa bene, se no il saggio di fine anno diventerebbe un open day.
+Ma essendo l'**unica** strada, tutto quello che open day non è restava fuori.
+
+**Qui era scritto che serviva una colonna `Organizzatore` nella tab Eventi. Non
+serviva**, ed è la parte da ricordare: il dato c'era già, scritto in coda al nome
+di ogni evento — «Sogni d'Oro **- CàRezza**», «Green Volley Torneo 2VS2 **- PGS
+Roccavione**». È la convenzione che il prompt di visione del downloader impone da
+sempre (`"titolo del singolo appuntamento - Organizzatore"`), la stessa da cui
+`organizzatore()` in `genera_eventi.py` ricava l'organizer del JSON-LD. Una
+colonna nuova sarebbe stata un secondo posto da compilare per un'informazione già
+presente.
+
+**Due strade che si sommano, e rispondono a due domande diverse:**
+
+| | la domanda | dove finisce |
+|---|---|---|
+| `OpenDay` (dal corso all'evento) | «vieni a provare **questo corso**» | nella riga del corso, **e** nella sezione in fondo |
+| il nome in coda (dall'evento alla società) | «questa realtà fa **anche** questo» | **solo** nella sezione in fondo |
+
+Le decisioni che non si ricavano dal diff:
+
+- **Gli eventi non appartengono ai corsi, e non si attaccano a nessun corso.**
+  Verificato sui dati, non supposto: i sei corsi di CàRezza e i suoi sette
+  eventi **non hanno un nome in comune**. L'open day resta l'unico evento legato
+  a un corso preciso, ed è per questo che è l'unico che si stampa dentro la riga
+  di un corso.
+- **Il confronto è solo sulla CODA del nome**, dopo l'ultimo trattino spaziato.
+  Cercare il nome della società dentro tutto il titolo prenderebbe di più e
+  sbaglierebbe, ed è la stessa cautela con cui `collega_openday()` pretende tre
+  condizioni invece di una. Il trattino **deve** avere spazi intorno, se no
+  «Espressione in Gioco! fascia 2-6 anni» si spezza sul `2-6`.
+- **Il confronto è a pezzi interi, non per sottostringa**, e il caso che lo
+  impone è vero: lo slug del corso «Accarezzami» *contiene* la parola
+  «carezza», quindi per sottostringa un corso di CàRezza si sarebbe attaccato
+  la propria società addosso.
+- **Quello che assomiglia ma non torna si stampa nel log, non si indovina.** Se
+  un domani la convenzione dei nomi cambia nel foglio, lo si legge nella run
+  invece di scoprire una sezione che ha smesso di riempirsi senza dirlo.
+- **Un evento ritirato resta fuori**: quella pagina dichiara di non essere
+  attendibile, e annunciarla dalla pagina di chi la organizza vorrebbe dire
+  mandare i suoi lettori a una nostra smentita. Un evento **concluso** pure: è
+  la regola di `openday()`, «un invito a una porta chiusa».
+- **Il nome della società non si ripete su ogni card.** Sulla pagina *di*
+  CàRezza ogni riga diceva «… - CàRezza» sotto un titolo che dice già «eventi di
+  CàRezza»: è la stessa ripetizione che le pagine comune tolgono quando un
+  gruppo è tutto della stessa categoria. Si taglia **solo** se la coda è
+  davvero la sua — un evento fatto insieme a un'altra realtà tiene il nome per
+  intero, perché lì quella parola non è una ripetizione, è l'altro nome.
+
+**Due incontri non fanno un corso** (Giovanni, 28/08/2026, sul caso vero:
+«Coccoliamo-ci» costa *15 euro a incontro* e ha due date). Quindi restano
+eventi, ed è dove sono. Ma sono a una locandina di distanza dal diventare
+**anche** una riga di corso, e allora la stessa cosa comparirebbe due volte
+sulla stessa pagina con due vocabolari diversi: quando il nome di un evento
+coincide con quello di un corso della stessa società, `eventi_realta()` **lo
+stampa e basta**. Il verdetto lo dà una persona guardando la locandina, non una
+regola — è `segnala_senza_coordinate()` applicata a un altro dubbio.
+
+`tests/corsi.js` difende tre cose, e la prima **non rifà il confronto del
+generatore**, deliberatamente: un secondo posto dove si decide chi si aggancia a
+chi divergerebbe al primo ritocco. Chiede una cosa più debole e che per
+costruzione non può divergere — *se in registro c'è qualcosa di ovviamente suo e
+ancora da fare, in pagina non ci può essere il vuoto* — cioè la regressione
+vera, la sezione che sparisce, non l'algoritmo. Rimettendo il difetto le prove
+tornano rosse dicendo «6 eventi a suo nome in registro, 0 in pagina»: verificato,
+non supposto.
+
+**Cosa manca ancora.** Il verso opposto: dalla scheda evento non c'è nessun link
+alla pagina della società. Chi arriva da Google su «Sogni d'Oro Racconigi» trova
+`/corsi.html` generico e non scopre che CàRezza ha una pagina sua con dentro
+tutto il resto. E un evento **senza** il trattino in coda non si aggancia a
+nessuno: è la regola di `link_luoghi()` — quello che manca non si stampa e non
+si inventa — ma vuol dire che una locandina letta male resta muta, e lo si vede
+solo nel log.
 
 **Due file generati non erano nell'elenco del workflow**, ed è la tredicesima e
 quattordicesima ripetizione dello stesso guasto già documentato per

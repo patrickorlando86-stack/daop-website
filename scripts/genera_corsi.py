@@ -799,11 +799,15 @@ def scheda_realta(org, corsi_org, info):
 # per sbaglio) E una descrizione vera. Senza, resta la scheda e basta, che e'
 # esattamente com'era fino a ieri.
 #
-# COSA MANCA PER FARLA COMPLETA. Gli eventi qui dentro sono solo quelli
-# agganciati dai corsi con la colonna OpenDay: un saggio di fine anno o la festa
-# di Natale della stessa societa' non hanno oggi nessun legame con lei. Per
-# averli servirebbe una colonna "Organizzatore" nella tab EVENTI, scritta con lo
-# stesso nome — e a quel punto questa pagina li raccoglie da se'.
+# GLI EVENTI CHE CI FINISCONO DENTRO sono di due specie, e le raccoglie
+# eventi_realta(): gli open day agganciati dai corsi (colonna OpenDay) e quelli
+# che portano il nome della societa' in coda al proprio. Fino al 28/08/2026
+# c'era solo la prima, e qui era scritto che per avere le altre serviva una
+# colonna "Organizzatore" nella tab Eventi: NON serviva, il dato era gia' in
+# coda al nome di ogni evento.
+#
+# COSA MANCA PER FARLA COMPLETA. Il verso opposto: dalla scheda dell'evento non
+# si torna alla pagina di chi lo organizza, si va a /corsi.html e basta.
 MIN_DESCR_REALTA = 120
 DIR_REALTA = 'corsi'
 
@@ -898,15 +902,141 @@ def raggruppa_per_realta(corsi):
     return gruppi
 
 
-def eventi_realta(corsi_org):
-    """Gli eventi di questa realta', presi dagli open day dei suoi corsi.
+# IL NOME DELLA SOCIETA' STA IN CODA AL NOME DELL'EVENTO, dopo un trattino
+# spaziato: "Sogni d'Oro - CàRezza", "Green Volley Torneo 2VS2 - PGS Roccavione".
+# Non e' una convenzione dedotta qui: e' quella che il downloader impone al
+# modello quando legge una locandina ("titolo del singolo appuntamento -
+# Organizzatore"), ed e' la stessa da cui organizzatore() in genera_eventi.py
+# ricava l'organizer del JSON-LD. Il trattino DEVE avere spazi intorno, se no
+# "Espressione in Gioco! fascia 2-6 anni" si spezzerebbe sul 2-6.
+CODA_ORG_RE = re.compile(r'\s[-–—]\s+')
 
-    Uno stesso open day serve piu' corsi — la PGS ne fa uno per cinque squadre —
-    quindi si deduplica sull'URL. Restano EVENTI e vivono nella tab Eventi: da
-    li' prendono scheda, locandina, calendario, JSON-LD e pagina del comune, e
-    qui se ne stampa solo il rimando. Nessuna di quelle superfici va costruita
-    una seconda volta."""
+
+def _taglia_coda(nome):
+    """(titolo, societa') tagliando sull'ULTIMO trattino spaziato.
+
+    L'ultimo e non il primo: "TuteliAMO - Corso Manovre Salvavita Pediatriche -
+    CàRezza" ha due trattini, e la societa' e' quella in fondo. Senza trattino
+    la coda e' vuota, e un evento che non dichiara chi lo organizza non si
+    attacca a nessuno: e' la regola di link_luoghi(), quello che manca non si
+    stampa e non si inventa."""
+    testo = (nome or '').strip()
+    ultimo = None
+    for m in CODA_ORG_RE.finditer(testo):
+        ultimo = m
+    if not ultimo:
+        return testo, ''
+    return testo[:ultimo.start()].strip(), testo[ultimo.end():].strip()
+
+
+def _spezza_nome_evento(nome):
+    """Lo stesso taglio, in slug: serve a confrontare, non a stampare."""
+    testa, coda = _taglia_coda(nome)
+    return G.slugify(testa), G.slugify(coda)
+
+
+def _senza_societa(nome, org):
+    """Il nome dell'evento senza la coda, quando la coda e' questa societa'.
+
+    In agenda e in corsi.html il nome della societa' serve a distinguere; sulla
+    PAGINA di quella societa' no - sta nell'intestazione tre centimetri sopra,
+    e ripeterlo su ogni card e' la stessa ripetizione che le pagine comune
+    tolgono quando un gruppo e' tutto della stessa categoria.
+
+    Si toglie SOLO se la coda e' davvero la sua: un evento organizzato con
+    un'altra realta' tiene il nome per intero, perche' li' quella parola non e'
+    una ripetizione, e' l'altro nome."""
+    testa, coda = _taglia_coda(nome)
+    if coda and G.slugify(coda) == slug_realta(org or ''):
+        return testa
+    return (nome or '').strip()
+
+
+def _pezzi_dentro(slug, cercato):
+    """Vero se `cercato` compare in `slug` come sequenza INTERA di pezzi.
+
+    Serve solo alle segnalazioni, mai a decidere un link, e non e' un `in` su
+    stringa per un caso vero: lo slug del corso "Accarezzami" contiene la
+    parola "carezza", quindi per sottostringa un corso di CàRezza si sarebbe
+    attaccato la propria societa' addosso. A pezzi interi "accarezzami" e
+    "carezza" sono due cose diverse."""
+    if not cercato:
+        return False
+    a, b = (slug or '').split('-'), cercato.split('-')
+    return any(a[i:i + len(b)] == b for i in range(len(a) - len(b) + 1))
+
+
+def eventi_a_nome_di(reg, org, oggi):
+    """Gli eventi del registro che portano in coda il nome di questa societa'.
+
+    IL CONFRONTO E' SOLO SULLA CODA, ed e' stretto apposta. Cercare il nome
+    della societa' dentro tutto il titolo prenderebbe di piu' e sbaglierebbe:
+    il costo di un legame sbagliato e' una realta' che si vede in pagina
+    l'evento di un'altra. E' la stessa cautela con cui collega_openday() nel
+    downloader pretende tre condizioni invece di una.
+
+    Quello che assomiglia ma non torna non si indovina: si stampa. Cosi' una
+    convenzione di nomi che cambia nel foglio si vede nel log della run, invece
+    di diventare una sezione che smette di riempirsi senza dirlo a nessuno.
+
+    Un evento RITIRATO resta fuori: quella pagina dichiara di non essere
+    attendibile, e annunciarla dalla pagina di chi la organizza vorrebbe dire
+    mandare i suoi lettori a una nostra smentita."""
+    slug_org = slug_realta(org)
+    trovati, quasi = [], []
+    for slug, rec in (reg or {}).items():
+        if rec.get('ritirata'):
+            continue
+        titolo, coda = _spezza_nome_evento(rec.get('nome'))
+        if coda != slug_org:
+            if _pezzi_dentro('-'.join(x for x in (titolo, coda) if x), slug_org):
+                quasi.append(rec.get('nome') or slug)
+            continue
+        try:
+            di = datetime.date.fromisoformat(rec['d_start'])
+            df = datetime.date.fromisoformat(rec['d_end'])
+        except (KeyError, TypeError, ValueError):
+            continue
+        # Un appuntamento finito non si annuncia: la stessa regola di openday().
+        if df < oggi:
+            continue
+        trovati.append((slug, rec, di, df, titolo))
+    if quasi:
+        print(f"[genera_corsi] {org}: {len(quasi)} eventi col suo nome NON in "
+              "coda, quindi non agganciati - " + ", ".join(sorted(quasi)[:5]))
+    return trovati
+
+
+def eventi_realta(corsi_org, org=None, oggi=None):
+    """Gli eventi di questa realta': i suoi open day, piu' quelli a suo nome.
+
+    DUE STRADE, E SI SOMMANO - non si sostituiscono, perche' rispondono a due
+    domande diverse:
+      - dai CORSI agli eventi (la colonna OpenDay): "vieni a provare QUESTO
+        corso". E' l'unico legame fra un evento e un corso preciso, e infatti
+        resta stampato anche dentro la riga del corso.
+      - dagli EVENTI alla societa' (il nome in coda): "questa realta' fa ANCHE
+        questo". Non appartiene a nessun corso, e vive solo qui in fondo.
+
+    Fino al 28/08/2026 c'era solo la prima, e si vedeva: CàRezza aveva nove
+    appuntamenti in agenda e ZERO sulla sua pagina - la sezione non si
+    stampava nemmeno. La colonna OpenDay la riempie collega_openday() nel
+    downloader, che pretende "open day" nel nome dell'evento, e fa bene: senza
+    quel filtro il saggio di fine anno diventerebbe un open day. Ma era anche
+    l'unica porta che c'era, quindi tutto quello che open day non e' restava
+    fuori. Le due liste di CàRezza non hanno un nome in comune: i suoi eventi
+    NON sono i suoi corsi, e infatti non si attaccano a nessun corso.
+
+    Uno stesso open day serve piu' corsi - la PGS ne fa uno per cinque squadre -
+    e lo stesso evento puo' arrivare da tutte e due le strade: si deduplica
+    sull'URL, e vince quello trovato per primo, cioe' l'open day, che porta con
+    se' l'ora scritta nella riga del corso.
+
+    Restano EVENTI e vivono nella tab Eventi: da li' prendono scheda, locandina,
+    calendario, JSON-LD e pagina del comune, e qui se ne stampa solo il rimando.
+    Nessuna di quelle superfici va costruita una seconda volta."""
     reg = G.carica_registro()
+    oggi = oggi or datetime.date.today()
     per_slug = {}
     for c in corsi_org:
         od = openday(c)
@@ -923,12 +1053,36 @@ def eventi_realta(corsi_org):
             rec = reg.get(od['url'].rsplit('/', 1)[-1].rsplit('.', 1)[0])
         if rec and od['url'] not in per_slug:
             per_slug[od['url']] = (od, rec)
+    if org:
+        # UN EVENTO CHE SI CHIAMA COME UN CORSO NON SI FONDE E NON SI SCEGLIE.
+        # "Coccoliamo-ci" costa 15 euro *a incontro* e ha due date: e' a una
+        # locandina di distanza dal diventare anche una riga di corso, e allora
+        # la stessa cosa comparirebbe due volte sulla stessa pagina con due
+        # vocabolari diversi. Il verdetto lo da' una persona guardando la
+        # locandina, non una regola: qui si stampa e basta, come
+        # segnala_senza_coordinate() fa con le celle vuote.
+        nomi_corsi = {G.slugify(c.get('nome') or '') for c in corsi_org}
+        nomi_corsi.discard('')
+        doppi = []
+        for slug, rec, di, df, titolo in eventi_a_nome_di(reg, org, oggi):
+            url = f"/eventi/{slug}.html"
+            if url in per_slug:
+                continue
+            if titolo in nomi_corsi:
+                doppi.append(rec.get('nome') or slug)
+            per_slug[url] = ({'url': url,
+                              'quando': G.periodo_esteso({'d_start': di,
+                                                          'd_end': df}),
+                              'ora': (rec.get('ora') or '').strip()}, rec)
+        if doppi:
+            print(f"[genera_corsi] {org}: stesso nome in agenda e fra i corsi, "
+                  "da guardare - " + ", ".join(sorted(doppi)))
     # Senza data si finisce in fondo e non in cima: davanti vanno gli
     # appuntamenti che si sanno collocare nel calendario.
     return sorted(per_slug.values(), key=lambda x: x[1].get('d_start') or '9')
 
 
-def _card_evento(od, rec):
+def _card_evento(od, rec, org=None):
     """Un evento della realta', con la locandina. Qui la miniatura e non
     l'originale: sono immagini in elenco, ed e' la regola gia' scritta per le
     righe di agenda — l'originale sta sulla scheda dell'evento, dove si guarda
@@ -945,9 +1099,10 @@ def _card_evento(od, rec):
     dove = (rec.get('luogo') or rec.get('citta') or '').strip()
     fuori = (' target="_blank" rel="noopener"'
              if od['url'].startswith('http') else '')
+    nome = _senza_societa(rec.get('nome', ''), org) if org else rec.get('nome', '')
     return (f'    <a class="cr-ev" href="{G.esc(od["url"])}"{fuori}>{img}'
             f'<span class="cr-ev-t">'
-            f'<span class="cr-ev-n">{G.esc(G.trunc(rec.get("nome", ""), 90))}</span>'
+            f'<span class="cr-ev-n">{G.esc(G.trunc(nome, 90))}</span>'
             f'<span class="cr-ev-q">{G.esc(quando)}'
             f'{" · " + G.esc(dove) if dove else ""}</span>'
             f'</span></a>')
@@ -1109,11 +1264,11 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 
     schede = "\n".join(card(c, i, qui_org=slug_realta(org))
                        for i, c in enumerate(corsi_org))
-    ev = eventi_realta(corsi_org)
+    ev = eventi_realta(corsi_org, org)
     blocco_ev = ''
     if ev:
         blocco_ev = (f'  <h2 class="cr-h">Open day ed eventi di {G.esc(org)}</h2>\n'
-                     + "\n".join(_card_evento(od, rec) for od, rec in ev))
+                     + "\n".join(_card_evento(od, rec, org) for od, rec in ev))
 
     return f"""<!DOCTYPE html>
 <html lang="it">
