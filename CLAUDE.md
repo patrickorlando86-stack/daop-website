@@ -2681,6 +2681,89 @@ Quello che **non** cambia è il verdetto sull'esperimento: 219 clic e 4.060
 impressioni in otto giorni contro le 28 impressioni in tre mesi delle due madri.
 Il buco era l'incrocio provincia × finestra, e le madri fanno l'indice.
 
+### Le `sagre-provincia-*` mostrano anche quello che sagra non è
+
+Fatto il 29/08/2026, partendo da un'obiezione di Giovanni: «dovremmo fare delle
+pagine di provincia» — quelle ci sono, ma sono **filtrate per sagre**, e aveva
+ragione lui. `spec_sagre()` tiene solo `bucket(e)[0] == 'feste'`, e a Cuneo
+quel filtro butta via l'80% dell'agenda: su 74 eventi le sagre sono 16, il
+resto sono laboratori (23), cultura (19), sport, musica, spettacoli — cioè quasi
+tutto il lavoro del curatore.
+
+**La cosa che veniva in mente per prima — una `/eventi-provincia-<nome>.html` —
+non si fa**, e il motivo sta nell'export GSC del 26/08/2026 (tre mesi):
+
+| query provinciali | query | clic | impressioni |
+|---|---|---|---|
+| con dentro "oggi" / "weekend" | 107 | 148 | **4.953** |
+| **senza finestra temporale** | 19 | 8 | **511** |
+
+Le prime hanno già le sei pagine d'incrocio. Le seconde — cioè tutto quello che
+una pagina nuova andrebbe a prendere — valgono 170 impressioni al mese. E le
+categorie che oggi restano fuori **non hanno una domanda propria**: `laborator`,
+`teatro`, `musei`, `sport`, `natura`, `gita` fanno **zero** impressioni
+nell'export; `bambin` ne fa 74 in tre mesi. È la stessa cosa già scritta nella
+memoria del cavallo di Troia, misurata di nuovo un anno dopo.
+
+Una terza pagina provinciale sarebbe quindi una URL nuova che si contende le
+query delle altre due — lo stesso nodo già descritto in `spec_incrocio()` fra
+`oggi-provincia-*` e `sagre-provincia-*` — per una domanda che non c'è. In rete
+quella query ce l'ha già un dominio a corrispondenza esatta
+(`eventiinprovinciadicuneo.it`), più Cuneodice e Virgilio: è la partita
+generica, quella che perdiamo, non quella del nome proprio.
+
+**Quello che si è fatto invece è distribuzione, non una pagina.** In coda a
+`sagre-provincia-*`, dopo il calendario delle sagre e le ricorrenti, c'è
+«Non solo sagre: gli altri appuntamenti in provincia di X» con il resto
+dell'agenda di quella provincia. Il conto che l'ha decisa:
+
+| pagina | clic | impressioni | pos |
+|---|---|---|---|
+| `/sagre-provincia-cuneo.html` | **405** | 4.503 | 6,86 |
+| `/eventi/weekend-provincia-cuneo.html` | 32 | 604 | 8,73 |
+| `/eventi/oggi-provincia-cuneo.html` | 16 | 855 | 10,36 |
+
+I 58 eventi non-sagra di Cuneo stavano sulle due pagine che insieme fanno 48
+clic in tre mesi. Adesso stanno anche su quella che ne fa 405.
+
+Le decisioni dentro, che non si ricavano dal diff:
+
+- **Title, H1, canonical e `descr` non si toccano.** Sono la query che la
+  pagina vince: il blocco aggiunge contenuto, non riscrive l'identità della
+  pagina. È la stessa regola dell'H1 di `eventi.html` che non si tocca per la
+  stagione, e la tentazione da fermare è «già che ci siamo chiamiamola
+  `eventi-provincia-`».
+- **Sta in coda, sotto le sagre.** Sopra ci va quello per cui la gente è
+  arrivata. Stessa aritmetica dell'invito al canale, verso opposto.
+- **Il `robots` continua a decidersi sulle sole sagre** (`len(sagre) + len(ric)`
+  contro `MIN_LANDING`): una provincia con zero sagre e venti laboratori non è
+  una pagina di sagre da indicizzare. Per lo stesso motivo il JSON-LD e il
+  numero nel log restano quelli delle sagre — `'altri'` si stampa a parte.
+- **La tendina delle categorie riceve `sagre + altri_ev`, ed è la regressione
+  vera.** Con le sole sagre avrebbe **una voce sola**, quindi `_landing_filtri()`
+  non la stamperebbe affatto: il filtro sparirebbe con settanta righe in pagina
+  e cinque categorie da separare. Non si vede leggendo l'HTML — si vede solo
+  confrontando le `<option>` con i `data-category` delle righe, ed è quello che
+  fa la prova.
+- **La riga d'apertura nomina solo le categorie che ci sono davvero**
+  (`LABELS_PROSA`, ordinate mettendo davanti quelle che hanno già una "e"
+  dentro, se no viene fuori «sport e cultura e natura»). È la regola
+  dell'occhiello dei corsi: una pagina non promette un dato che la riga sotto
+  può non avere. `altro` resta fuori dalla frase e dentro l'elenco.
+- **La sezione non ha un `<h3>` suo**: il titolo è l'`<h2>` sopra, ed è quello
+  che il JS dei filtri fa sparire insieme al gruppo quando un filtro lo svuota
+  (`testaDi()`). Quel meccanismo esisteva da mesi senza nessuna pagina che lo
+  usasse — il commento nel codice diceva «costa otto righe e si accorge da solo
+  di quando serve»: questo è il caso.
+
+`tests/landing.js` difende cinque cose su Alessandria e su Cuneo, e una delle
+prove è nata **sbagliata**: pretendeva che ogni href comparisse una volta sola,
+ed è diventata rossa subito — perché una manifestazione di tre giorni ha tre
+righe che puntano alla stessa scheda, e il calendario delle sagre fa così da
+sempre. L'invariante giusta è più stretta e non può divergere: **nessuna scheda
+compare sopra e sotto insieme**, cioè i due elenchi restano complementari. È la
+quinta volta che una prova pretende un'uniformità che il sito non ha mai avuto.
+
 Resta aperto un punto solo della vecchia lista: **`Event` in JSON-LD sulle
 pagine aggregate.** `oggi.html`, `weekend.html`, le tre provinciali e ora le sei
 d'incrocio hanno tutte `CollectionPage` + `ItemList` che *rimanda* alle schede,

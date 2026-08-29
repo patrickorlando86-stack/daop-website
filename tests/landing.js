@@ -7,6 +7,106 @@ const { apri, esito } = require('./_aiuto');
 
 const visibili = (page) => page.locator('.ev-wrap li[data-category]:not([hidden])').count();
 
+// Le sagre-provincia-* mostrano in coda anche il RESTO dell'agenda della
+// provincia (laboratori, cultura, spettacoli, musica, sport). Non e' un
+// cambio di identita' della pagina: e' distribuzione, e le prove qui sotto
+// difendono le tre cose che si romperebbero rifacendola a mente.
+async function provaNonSoloSagre(r, page, prov) {
+  const righe = await page.locator('.ev-wrap li[data-category]').count();
+  const nonSagre = await page.locator('.ev-wrap li[data-category]:not([data-category=feste])')
+    .count();
+
+  // 1) La pagina resta una pagina di SAGRE. E' la query che vince (405 clic e
+  //    posizione 6,86 su Cuneo nell'export del 26/08/2026): il blocco in coda
+  //    aggiunge contenuto, non riscrive l'identita' della pagina. La
+  //    tentazione da fermare e' "gia' che ci siamo chiamiamola eventi-".
+  r.ok(/^Sagre e feste in provincia di /.test(await page.$eval('h1', (h) => h.textContent.trim())),
+    `${prov}: l'H1 resta quello delle sagre`);
+  r.ok(/sagre/i.test(await page.title()), `${prov}: "sagre" resta nel <title>`);
+  r.ok(/\/sagre-provincia-/.test(await page.$eval('link[rel=canonical]', (l) => l.href)),
+    `${prov}: il canonical non si muove`);
+
+  if (!nonSagre) {
+    // Fuori stagione una provincia puo' non avere altro che sagre: la sezione
+    // non si stampa, e non e' un guasto.
+    r.ok(true, `${prov}: nessun evento non-sagra in agenda, sezione assente`);
+    return;
+  }
+
+  // 2) Nessun evento sta in tutti e due gli elenchi. L'invariante NON e'
+  //    "ogni href compare una volta sola": una manifestazione di tre giorni ha
+  //    tre righe che puntano alla stessa scheda, ed e' giusto - il calendario
+  //    delle sagre lo fa da sempre. Quello che i due filtri complementari
+  //    devono garantire e' che la stessa scheda non finisca sopra E sotto:
+  //    se un giorno il secondo elenco smettesse di essere il complemento del
+  //    primo, la pagina direbbe due volte la stessa cosa con due titoli che si
+  //    contraddicono ("sagre" e "che non sono sagre").
+  const attraverso = await page.evaluate(() => {
+    const m = new Map();
+    document.querySelectorAll('.ev-wrap li[data-category]').forEach((l) => {
+      const a = l.querySelector('a.com-go');
+      if (!a) return;
+      const h = a.getAttribute('href');
+      (m.get(h) || m.set(h, new Set()).get(h)).add(l.dataset.category === 'feste');
+    });
+    return [...m].filter(([, s]) => s.size > 1).map(([h]) => h);
+  });
+  r.ok(attraverso.length === 0,
+    `${prov}: nessuna scheda compare sopra e sotto insieme (${righe} righe)`
+    + (attraverso.length ? ': ' + attraverso.slice(0, 3).join(', ') : ''));
+
+  // 3) LA REGRESSIONE VERA. La tendina delle categorie si costruisce
+  //    dall'elenco che _landing_filtri riceve: passandogli le sole sagre
+  //    resterebbe con una voce sola, e una tendina da una voce non si stampa
+  //    affatto - cioe' il filtro sparirebbe con settanta righe in pagina e
+  //    cinque categorie da separare. Non si legge nell'HTML: si vede solo
+  //    confrontando le opzioni con le righe.
+  if (righe >= 12) {
+    const mancanti = await page.evaluate(() => {
+      const sel = document.getElementById('lan-tipo');
+      if (!sel) return ['(la tendina delle categorie non viene stampata)'];
+      const opz = new Set([...sel.options].map((o) => o.value));
+      const cat = new Set([...document.querySelectorAll('.ev-wrap li[data-category]')]
+        .map((l) => l.dataset.category));
+      return [...cat].filter((c) => !opz.has(c));
+    });
+    r.ok(mancanti.length === 0,
+      `${prov}: la tendina conosce tutte le categorie in pagina${mancanti.length ? ': manca ' + mancanti.join(', ') : ''}`);
+  }
+
+  // 4) Le sagre restano il contenuto principale: il blocco in coda sta DOPO
+  //    l'ultima riga del calendario, se no la pagina si apre su quello che
+  //    non e' la sua query.
+  r.ok(await page.evaluate(() => {
+    const li = [...document.querySelectorAll('.ev-wrap li[data-category]')];
+    const ultimaSagra = li.map((l, i) => [l.dataset.category, i])
+      .filter(([c]) => c === 'feste').pop();
+    const primaAltra = li.findIndex((l) => l.dataset.category !== 'feste');
+    return !ultimaSagra || primaAltra === -1 || primaAltra > ultimaSagra[1];
+  }), `${prov}: le ${righe - nonSagre} sagre stanno prima delle ${nonSagre} altre`);
+
+  // 5) Filtrando su una categoria non-sagra restano righe, e il titolo del
+  //    blocco non resta orfano sopra il vuoto.
+  if (await page.locator('#lan-tipo').count()) {
+    const cat = await page.evaluate(() =>
+      (document.querySelector('.ev-wrap li[data-category]:not([data-category=feste])') || {})
+        .dataset.category);
+    await page.selectOption('#lan-tipo', cat);
+    await page.waitForTimeout(250);
+    const n = await page.locator('.ev-wrap li[data-category]:not([hidden])').count();
+    r.ok(n > 0 && n < righe, `${prov}: filtro "${cat}" ${n}/${righe}`);
+    r.ok(await page.evaluate(() =>
+      [...document.querySelectorAll('.ev-wrap h2')].every((h) => {
+        if (h.hidden) return true;
+        let n = h.nextElementSibling;
+        while (n && n.tagName === 'P') n = n.nextElementSibling;
+        return !n || !n.classList.contains('com-grp') || !n.hidden;
+      })), `${prov}: nessun titolo resta orfano`);
+    await page.selectOption('#lan-tipo', 'all');
+    await page.waitForTimeout(200);
+  }
+}
+
 module.exports = async function landing(browser) {
   const r = esito();
 
@@ -122,7 +222,21 @@ module.exports = async function landing(browser) {
       r.ok(await page.locator('.com-anni li:not([hidden])').count() === anni,
         `le ${anni} feste ricorrenti restano visibili`);
     }
+    // Il bottone "azzera" vive dentro il messaggio di elenco vuoto, che qui
+    // non c'e': la ricerca ha trovato qualcosa. Si svuota il campo.
+    await page.fill('#lan-q', '');
+    await page.waitForTimeout(250);
   }
+  await provaNonSoloSagre(r, page, 'Alessandria');
+  await ctx.close();
+
+  // Cuneo e' la provincia che ha fatto nascere il blocco: in agenda le sagre
+  // sono una minoranza (16 su 74 il 29/08/2026), quindi qui la sezione "Non
+  // solo sagre" pesa piu' del calendario sopra. Si prova a parte proprio per
+  // questo - su Alessandria il difetto passerebbe quasi inosservato.
+  r.titolo('sagre-provincia-cuneo.html — telefono 412px');
+  ({ ctx, page } = await apri(browser, 'sagre-provincia-cuneo.html', 412));
+  await provaNonSoloSagre(r, page, 'Cuneo');
   await ctx.close();
 
   // ── ferragosto ────────────────────────────────────────────────────────

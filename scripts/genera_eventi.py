@@ -104,6 +104,13 @@ LABELS = {'feste': 'Sagre & Feste', 'spettacoli': 'Spettacoli', 'musica': 'Music
           'altro': 'Altro'}
 ORDER = ['feste', 'spettacoli', 'laboratori', 'musica', 'sport', 'cultura', 'altro']
 
+# Gli stessi nomi, ma scritti dentro una frase invece che dentro una tendina:
+# "Cultura & Natura" e' un'etichetta, "cultura e natura" e' italiano. 'altro'
+# non c'e' apposta - una categoria che si chiama cosi' non si annuncia in una
+# riga di apertura, si legge nelle righe.
+LABELS_PROSA = {'spettacoli': 'spettacoli', 'laboratori': 'laboratori',
+                'musica': 'musica', 'sport': 'sport', 'cultura': 'cultura e natura'}
+
 
 def pdate(s):
     s = (s or '').strip()
@@ -6875,6 +6882,32 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
     sagre = sorted((e for e in events
                     if (e.get('prov') or '').upper() == prov and bucket(e)[0] == 'feste'),
                    key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    # Tutto il RESTO dell'agenda di quella provincia: laboratori, cultura,
+    # spettacoli, musica, sport. Non cambia cos'e' questa pagina - il title,
+    # l'H1 e il canonical restano quelli delle sagre, che sono la query che
+    # vince - ma la mette dove il pubblico c'e' gia'.
+    #
+    # Il conto che l'ha decisa (export GSC 26/08/2026, tre mesi):
+    #   /sagre-provincia-cuneo.html      405 clic, 4.503 impressioni, pos 6,86
+    #   /eventi/weekend-provincia-cuneo    32 clic,   604 impressioni
+    #   /eventi/oggi-provincia-cuneo       16 clic,   855 impressioni
+    # e in agenda a Cuneo su 79 eventi le sagre sono 16: l'80% del lavoro del
+    # curatore stava sulle due pagine che insieme fanno 48 clic in tre mesi.
+    #
+    # Perche' NON e' invece nata una /eventi-provincia-<nome>.html, che e' la
+    # cosa che viene in mente per prima: nello stesso export le query
+    # provinciali senza finestra temporale ("eventi in provincia di X") fanno
+    # 19 query, 511 impressioni e 8 clic in tre mesi, contro le 4.953
+    # impressioni delle stesse query con "oggi"/"weekend" dentro, che hanno
+    # gia' le loro sei pagine. E le categorie qui sotto non hanno una domanda
+    # propria: "laboratori", "teatro", "musei" fanno ZERO impressioni. Una
+    # pagina nuova sarebbe una terza provinciale a contendersi le query delle
+    # altre due - lo stesso nodo gia' descritto in spec_incrocio - per una
+    # domanda che non c'e'.
+    altri_ev = sorted((e for e in events
+                       if (e.get('prov') or '').upper() == prov
+                       and bucket(e)[0] != 'feste'),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
     ric = _sagre_ricorrenti(storico, prov)
     anno = sagre[0]['d_start'].year if sagre else oggi.year
 
@@ -6911,8 +6944,12 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
 
     corpo = apertura
     # Niente tendina provincia: la pagina E' una provincia. Resta la ricerca
-    # (il paese) e la categoria, che qui non sono solo sagre.
-    corpo += _landing_filtri(sagre, con_prov=False)
+    # (il paese) e la categoria, che qui non sono solo sagre - e da quando in
+    # fondo c'e' anche il resto dell'agenda, la tendina DEVE vederlo: la
+    # costruisce _landing_filtri dall'elenco che riceve, e con le sole sagre
+    # avrebbe avuto una voce sola, cioe' non si sarebbe stampata affatto
+    # mentre in pagina c'erano cinque categorie da separare.
+    corpo += _landing_filtri(sagre + altri_ev, con_prov=False)
     # Mese per mese: e' il modo in cui si guarda un calendario di sagre, e in
     # agenda non esiste perche' li' i mesi sono mischiati fra le province.
     per_mese = collections.OrderedDict()
@@ -6933,6 +6970,30 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
                   f"<p>Le abbiamo viste in più di un'edizione: sono quelle su cui si può "
                   f"contare anche quando le date della prossima non sono ancora uscite.</p>"
                   f'<section class="com-grp"><ul class="com-anni">{righe}</ul></section>')
+    if altri_ev:
+        # Le categorie si NOMINANO solo se ci sono davvero, come per i filtri:
+        # una riga d'apertura che promette "spettacoli" a una provincia che
+        # questo mese non ne ha e' la stessa cosa dell'occhiello dei corsi che
+        # prometteva i costi. 'altro' resta fuori dalla frase e dentro l'elenco.
+        presenti = [LABELS_PROSA[s_] for s_ in ORDER
+                    if s_ in LABELS_PROSA and any(bucket(e)[0] == s_ for e in altri_ev)]
+        # Chi ha gia' una "e" dentro passa davanti, se no elenco_it lo mette in
+        # coda e viene fuori "sport e cultura e natura".
+        presenti.sort(key=lambda n: ' e ' not in n)
+        quali = elenco_it(presenti).capitalize() if presenti else "Il resto dell'agenda"
+        # Sezione senza intestazione propria: il titolo e' l'<h2> qui sopra, ed
+        # e' quello che il JS dei filtri fa sparire insieme al gruppo quando un
+        # filtro lo svuota (testaDi()). Un <h3> dentro il gruppo direbbe due
+        # volte la stessa cosa.
+        righe, nude = _landing_righe(altri_ev, oggi)
+        corpo += (f"<h2>Non solo sagre: gli altri appuntamenti in provincia di "
+                  f"{esc(nome_prov)}</h2>"
+                  f"<p>{esc(quali)}: <strong>{len(altri_ev)} appuntamenti</strong> in "
+                  f"provincia di {esc(nome_prov)} che non sono sagre di paese. Stessa "
+                  f"agenda e stessa verifica, uno per uno, e anche questo elenco si rifà "
+                  f"ogni notte.</p>"
+                  f'<section class="com-grp"><ul class="com-ev'
+                  f'{" is-nude" if nude else ""}">{righe}</ul></section>')
     if comuni:
         link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
                        for d in comuni)
@@ -6971,7 +7032,11 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
         'jsonld': _grafo_landing(url, titolo, descr, sagre,
                                  f"Sagre in provincia di {nome_prov}",
                                  f"Sagre in provincia di {nome_prov}", oggi),
+        # Resta il numero delle SAGRE, non il totale in pagina: e' il numero su
+        # cui si decide il robots ed e' quello che dice se questa pagina sta
+        # facendo il suo mestiere. Gli altri si stampano a parte nel log.
         'eventi': len(sagre),
+        'altri': len(altri_ev),
     }
 
 
@@ -7039,7 +7104,8 @@ def scrivi_landing(events, hub, storico, oggi):
     print(f"[genera_eventi] pagine di intenzione: {len(specs)} ({cambiate} riscritte)"
           + (f", {len(fuori)} in noindex sotto soglia: {', '.join(fuori)}" if fuori else ""))
     for spec in specs:
-        print(f"[genera_eventi]   {spec['path']}: {spec['eventi']} eventi")
+        extra = (f" + {spec['altri']} non-sagre" if spec.get('altri') else "")
+        print(f"[genera_eventi]   {spec['path']}: {spec['eventi']} eventi{extra}")
     return {p: m for p, m in sorted(reg.items())
             if p in {s['path'] for s in specs} and p not in fuori}
 
