@@ -315,6 +315,20 @@
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
   .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
+  /* Due paragrafi: il messaggio (che il JS riscrive) e Ginetto. Il margine fra
+     i due sta su `p+p` e non su .events-empty-g apposta: `.events-empty p` ha
+     specificita' 0,1,1 e batterebbe una regola di sola classe, che e' lo stesso
+     inciampo del crumb dei corsi (`.co-crumb a{color:inherit}` che vinceva su
+     `.page-hero a`). */
+  .events-empty p{margin:0 auto;max-width:520px}
+  .events-empty p+p{margin-top:14px}
+  /* Lo stato vuoto e' l'unico punto dell'agenda in cui Ginetto non e' una
+     richiesta ma una risposta: la pagina ha appena fallito, e lui fa quello che
+     l'elenco non e' riuscito a fare. E costa zero pixel a chi invece ha trovato
+     quello che cercava - che e' la ragione per cui sta qui e non in cima. */
+  .events-empty-g{font-size:0.92rem;line-height:1.65}
+  .events-empty-g a{color:var(--orange-ink,#a05714);font-weight:600;text-decoration:none}
+  .events-empty-g a:hover{text-decoration:underline}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
      del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
@@ -820,7 +834,7 @@
   <!-- GUIDA-PDF:END -->
   
   <h2>Le altre vacanze</h2><div class="com-link"><a href="/centri-estivi.html">Centri Estivi d&#x27;estate</a><a href="/centri-pasquali.html">Centri Pasquali a Pasqua</a></div>
-  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">216 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">864 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">12 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">208 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">864 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">12 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
   <div class="ce-actions">
     <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
   </div>
