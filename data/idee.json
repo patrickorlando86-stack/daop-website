@@ -1,0 +1,70 @@
+{
+  "_nota": [
+    "LE IDEE DECISE: le pagine /idee/<slug>.html, una per volta.",
+    "",
+    "Le scrive scripts/genera_idee.py, e i luoghi arrivano per CODICE dal",
+    "catalogo: qui dentro NON si copiano ne' descrizioni ne' foto ne' orari,",
+    "cosi' la pagina si rigenera ogni notte e segue il posto se cambia.",
+    "",
+    "Quello che sta qui dentro e' l'unica cosa che il catalogo non ha: la",
+    "SCELTA. E i quattro testi che la accompagnano si scrivono a mano, uno per",
+    "pagina - senza, il generatore la salta e lo dice:",
+    "",
+    "  titolo        il <title>, quello che si legge su Google. Max ~60",
+    "                caratteri: piu' lungo viene tagliato a meta' frase.",
+    "  descrizione   la <meta description>. ~150 caratteri, ed e' meta' del",
+    "                motivo per cui uno clicca o no.",
+    "  h1            il titolo dentro la pagina. Puo' essere diverso dal title.",
+    "  intro         una o due righe sotto il titolo.",
+    "  perche        PERCHE' QUESTI CINQUE. La frase che uno ha gia' in testa",
+    "                mentre sceglie, ed e' quella che nessun aggregatore puo'",
+    "                copiare: chi scala non giudica.",
+    "  briciola      il nome corto per la briciola di pane (facoltativo).",
+    "  immagine      l'immagine di condivisione (facoltativo: senza, quella",
+    "                del sito). Ci va la copertina del carosello.",
+    "  luoghi        [{codice, riga}] - il codice viene dal foglio, la riga e'",
+    "                la tua frase su quel posto (facoltativa, ma e' quello che",
+    "                rende la pagina tua).",
+    "",
+    "  titolo_corto  come si chiama il link dalle altre pagine (facoltativo).",
+    "POCHE, e una alla volta: nascono quando un carosello e' piaciuto",
+    "abbastanza da meritarsela. Nessuna soglia automatica."
+  ],
+  "idee": [
+    {
+      "slug": "gite-gratis-cuneo",
+      "titolo": "5 gite gratis con i bambini in provincia di Cuneo",
+      "descrizione": "Cinque posti dove non si paga niente: un sentiero di gnomi, il paese di Pinocchio, i diorami del Monviso e le sorgenti del Po. Scelti uno per uno.",
+      "h1": "5 gite gratis <em>con i bambini</em>",
+      "briciola": "Gite gratis a Cuneo",
+      "intro": "In provincia di Cuneo, e senza biglietto. Non sono i cinque più famosi: sono quelli che reggono una domenica intera con dei bambini.",
+      "perche": "Perché gratis non voglia dire poco, ognuno di questi ha una cosa da fare e non solo da guardare: un sentiero da percorrere, un paese da attraversare cercando i murales, un diorama in cui entrare. E perché stanno in valli diverse: se una domenica ha il tempo storto, ce n'è sempre uno dall'altra parte che tiene.",
+      "tema": "gratis",
+      "provincia": "CN",
+      "luoghi": [
+        {
+          "codice": "50",
+          "riga": "Quattro chilometri di sentiero fra i vigneti, con gnomi di legno lungo la strada: si cammina senza che nessuno chieda quanto manca."
+        },
+        {
+          "codice": "97",
+          "riga": "Un paese intero disegnato sui muri: Pinocchio si cerca casa per casa, ed è l'unico di questi cinque che si fa anche col passeggino."
+        },
+        {
+          "codice": "5001",
+          "riga": "Il bosco di pino cembro più grande delle Alpi, spiegato con un diorama in cui si entra. Aperto solo d'estate: è il posto giusto per il pomeriggio in cui fa troppo caldo per salire."
+        },
+        {
+          "codice": "5002",
+          "riga": "Tre diorami raccontano montagna, collina e pianura del Po. Visite in piccoli gruppi e aperto tutto l'anno: la carta da giocare quando piove."
+        },
+        {
+          "codice": "5003",
+          "riga": "Il Po comincia qui, ai piedi del Monviso, e la sorgente è a pochi passi dal parcheggio: ci arrivano anche i più piccoli. Si sale solo quando la strada di stagione è aperta."
+        }
+      ],
+      "decisa_il": "2026-08-30",
+      "titolo_corto": "5 gite gratis in provincia di Cuneo"
+    }
+  ]
+}

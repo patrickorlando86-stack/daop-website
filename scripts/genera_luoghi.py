@@ -1554,6 +1554,7 @@ def render(elenco, oggi):
         # E porta il numero, per la ragione di sempre: "32 piscine" e' un motivo
         # per toccare, "Piscine" no.
         _link_piscine(elenco),
+        _link_idee(),
         '    <div class="com-link"><a href="/bollino.html">Il bollino Family Friendly</a>'
         '<a href="/metodo.html">Come verifichiamo</a>'
         '<a href="/zone.html">Le zone</a></div>',
@@ -1664,6 +1665,43 @@ def _link_piscine(elenco):
         return ''
     return ('    <div class="com-link"><a href="/piscine.html">'
             f'{n} piscine per bambini</a></div>')
+
+
+def _link_idee():
+    """I 'vedi anche' verso le pagine /idee/, o ''.
+
+    Le idee sono cinque posti scelti a mano (vedi scripts/genera_idee.py), e
+    senza un link dal CORPO di una pagina nascono orfane: e' esattamente il
+    motivo per cui /piscine.html non prendeva niente, misurato il 14/08/2026.
+
+    Si linka solo quello che ESISTE gia' su disco: un link a una 404 vale meno
+    di nessun link. Quindi una pagina appena decisa compare qui il giro dopo -
+    lo stesso ritardo di un giro che si accetta gia' per l'indice dei comuni, e
+    per la stessa ragione: sbaglia dalla parte buona.
+
+    Il file si legge qui invece di importare genera_idee, che a sua volta
+    importa questo modulo: l'import girerebbe in tondo. Quello che serve sono
+    due campi, non la logica.
+    """
+    percorso = os.path.join(ROOT, "data", "idee.json")
+    try:
+        with open(percorso, encoding="utf-8") as fh:
+            idee = json.load(fh).get("idee") or []
+    except Exception:
+        return ''
+    voci = []
+    for idea in idee:
+        slug = (idea.get('slug') or '').strip()
+        titolo = (idea.get('titolo_corto') or idea.get('briciola')
+                  or idea.get('titolo') or '').strip()
+        if not slug or not titolo:
+            continue
+        if not os.path.exists(os.path.join(ROOT, 'idee', f'{slug}.html')):
+            continue
+        voci.append(f'<a href="/idee/{slug}.html">{G.esc(titolo)}</a>')
+    if not voci:
+        return ''
+    return '    <div class="com-link">' + "".join(voci) + '</div>'
 
 
 def le_piscine(elenco):
