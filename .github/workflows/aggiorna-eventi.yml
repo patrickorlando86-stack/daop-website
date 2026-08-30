@@ -263,6 +263,22 @@ jobs:
         if: always()
         run: python scripts/valida_pdf.py
 
+      - name: Controlla il riaggancio dell'edizione
+        # Questa e' l'unica prova del repo che difende una cosa che succede fra
+        # DODICI MESI: che la sagra del 2027 aggiorni la pagina del 2026 invece
+        # di aprirne una nuova che riparte da zero. Un difetto li' dentro non si
+        # vede mai - il sito continua a funzionare benissimo - e si scopre il
+        # prossimo agosto guardando perche' la prima pagina del sito ha smesso
+        # di prendere clic. Per questo gira ogni notte anche se la cosa che
+        # prova non capita mai: e' esattamente il caso in cui una prova a mano
+        # marcisce.
+        #
+        # Offline e in due secondi: legge il registro e simula i nomi dell'anno
+        # prossimo. Come le due qui sopra sta DOPO il commit, quindi non puo'
+        # fermare il deploy.
+        if: always()
+        run: python scripts/prova_riaggancio.py
+
       - name: Nessun file generato resta indietro
         # Rete di sicurezza sull'elenco FILE del passo "Commit se cambiato".
         # Un file gia' tracciato che risulta modificato e NON e' stato

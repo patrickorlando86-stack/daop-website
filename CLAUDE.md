@@ -2529,6 +2529,87 @@ E prendere una stagione nuova è **veloce**: la scheda di Cassinasco è nata il 
 agosto ed era in posizione 1,13 entro l'8. Cinque giorni, perché su quelle query
 non c'è concorrenza.
 
+##### Ma lo slug si ricava dal nome, e il nome lo riscrive una persona
+
+Chiuso il 30/08/2026, partendo da una domanda di Patrick: *«dobbiamo beccare lo
+stesso nome per aggiornare la pagina — riusciremo?»*. Era la domanda giusta, e
+la risposta misurata era **no**.
+
+`slug_evento()` toglieva l'anno e il numero di edizione in cifre, ma lo slug
+resta una funzione del **nome scritto nel foglio**, che ogni anno riscrive una
+persona guardando una locandina diversa. Due buchi, misurati sul registro:
+
+| | quante | il caso che costa |
+|---|---|---|
+| coda dell'organizzatore nel nome (`- Pro Loco Grondona`) | **107 su 412** | Grondona, **490 clic, la prima pagina del sito** |
+| numero di edizione in **numeri romani** (`XXVII`) | 1 su 412 | Belforte, 265 clic, quarta per impressioni AI |
+
+Uno su quattro dei nomi in registro, e fra le 40 schede più visitate sono cinque
+— ma dentro ci sono la prima e la quarta. **Il difetto è raro ovunque tranne che
+dove costa.**
+
+**La correzione non è irrigidire il nome, è smettere di pretenderlo identico.**
+Il nome non deve tornare *uguale*, deve tornare *riconoscibile*: un evento il cui
+slug è nuovo si confronta con le pagine già in registro (`candidati_edizione()`),
+e se ne trova **una sola** che è evidentemente la stessa cosa, riusa quel
+vecchio slug. Le tre condizioni, e la terza è quella che regge tutto:
+
+1. **stesso comune** — sta già dentro lo slug;
+2. **stesso periodo dell'anno**, ±30 giorni circolari: una patronale segue il
+   santo e una sagra il raccolto, si spostano di un weekend, non di una stagione;
+3. **un solo candidato.** Se sono due non si sceglie — è la regola già scritta
+   per `_erede()`, e il caso ambiguo esiste davvero: a Rocchetta Tanaro cinque
+   «Apertura Stand Gastronomico con \<nome della band\>» hanno le stesse parole e
+   le stesse date. Sbagliare aggancio vuol dire **scrivere l'edizione di un
+   evento sopra la pagina di un altro**, che è molto peggio di una URL nuova.
+
+Uno slug già rivendicato da un altro evento **della stessa run** non è un
+candidato: è la guardia che tiene fuori i sotto-eventi di una manifestazione,
+che stanno in pagina tutti insieme e non hanno niente da riagganciare.
+
+**Nessuna URL si sposta, e questa è la parte da non rifare al contrario.** La
+prima idea era normalizzare di più lo slug — togliere anche la coda
+dell'organizzatore — e migrare le 107 pagine con il timbro `spostata`. È
+sbagliata: per riparare un difetto che colpisce fra dodici mesi, sposterebbe
+**oggi** 107 indirizzi indicizzati, cioè farebbe di sicuro il danno che vuole
+evitare. Il riaggancio lo fa a costo zero, una volta l'anno, e solo dove serve.
+Belforte tiene il suo `xxvii-` per sempre — un numero sbagliato in una URL non
+si vede e non pesa, l'anzianità sì. Il romano si toglie **solo dalle pagine che
+nascono da domani**, e solo in testa al nome: cercarlo dappertutto mangerebbe il
+`II` di «A Calosso Museo e Dintorni - Settembre II», e senza il vincolo del
+maiuscolo `Il`, `Di` e `Mi` sono tutti numeri romani validi.
+
+**Quanto regge, misurato sul registro vero simulando i nomi del 2027** (numero di
+edizione aumentato e coda dell'organizzatore caduta):
+
+| | schede |
+|---|---|
+| tengono lo slug da sole | 306 |
+| **riagganciate** | **78** |
+| ambigue → pagina nuova, come oggi | 6 |
+| **agganci sbagliati** | **0** |
+
+Riscrivendo il nome più pesantemente — una parola significativa in meno — se ne
+perdono 171 su 390: **è il limite dichiarato**, e il modo di non arrivarci è
+scrivere i nomi nel foglio come l'anno prima. Il ripiego quando il riaggancio non
+scatta non è un guasto: è una URL nuova, cioè esattamente quello che sarebbe
+successo comunque.
+
+**La prova gira ogni notte in CI anche se la cosa che difende capita una volta
+l'anno**, ed è l'unica del repo fatta per un guasto che si vedrebbe fra dodici
+mesi: `scripts/prova_riaggancio.py`, offline, due secondi, dopo il commit come
+`valida_pdf.py` — quindi non può fermare il deploy. Una prova a mano, qui, sarebbe
+marcita prima di servire. L'invariante che difende non è «riaggancia tutto», è
+**«nessuna edizione scrive sulla pagina di un altro evento»**: la prima è una
+percentuale che può scendere senza che niente sia rotto, la seconda è un danno.
+
+Un caso vero trovato scrivendola, che sembrava un aggancio sbagliato e non lo
+era: nel foglio lo stesso laboratorio di Crissolo è finito su **due righe**, una
+poi ritirata. L'edizione 2027 di quella ritirata va sulla gemella viva — ed è la
+cosa giusta, perché una pagina ritirata è un cartello, non una pagina da
+aggiornare. Per questo le ritirate e le spostate stanno fuori **sia** dai
+candidati **sia** dalla simulazione della prova.
+
 #### Il calendario vuoto di novembre non è un allarme: la fonte ha 10 giorni di preavviso
 
 Al 14/08/2026 l'agenda ha 220 eventi in agosto, 59 a settembre, **4** a ottobre,
