@@ -1267,6 +1267,16 @@ def ha_pagina(e):
 SLUG_RISERVATI = {'oggi', 'weekend'}
 
 
+# Il numero di edizione esiste anche in numeri romani ("XXVII Sagra delle Trofie
+# al Pesto"), e li' le regex in cifre non arrivano. Si toglie SOLO in testa al
+# nome, dove sta un numero di edizione: cercarlo dappertutto mangerebbe il "II"
+# di "A Calosso Museo e Dintorni - Settembre II", che numero di edizione non e'.
+# Maiuscolo obbligatorio e almeno due lettere, se no "Di", "Il", "Mi" sono tutti
+# numeri romani validi e ogni nome che comincia con una preposizione ci cascava.
+ROMANO_INIZIALE_RE = re.compile(
+    r'^\s*(?=[MDCLXVI]{2,}\b)M*(?:C[MD]|D?C*)(?:X[CL]|L?X*)(?:I[XV]|V?I*)\b\s*')
+
+
 def slug_evento(e):
     """Slug stabile fra un'edizione e l'altra: togliamo l'anno e il numero di
     edizione dal nome ("40ª Sagra del Guanciotto 2026" -> "sagra-del-guanciotto")
@@ -1279,6 +1289,7 @@ def slug_evento(e):
     # \b non funziona dopo ° perché non è un carattere di parola.
     nome = re.sub(r'(?<!\w)\d+\s*[°ºª^]', ' ', nome)
     nome = re.sub(r'(?<!\w)\d+a\b', ' ', nome)
+    nome = ROMANO_INIZIALE_RE.sub('', nome, count=1)
     base = slugify(nome)
     citta = slugify(e.get('citta') or '')
     if citta and citta not in base:
@@ -2110,6 +2121,123 @@ def segnala_senza_coordinate(events):
         print(f"                 luogo: {(e.get('luogo') or '(vuoto)')[:52]}")
 
 
+# ---------------------------------------------------------------------------
+# RIAGGANCIO DELL'EDIZIONE SUCCESSIVA
+#
+# Lo slug e' evergreen apposta (slug_evento toglie l'anno e il numero di
+# edizione), cosi' la sagra del 2027 aggiorna la pagina del 2026 invece di
+# fondarne una che riparte da zero. Ma quello slug si ricava dal NOME, e il nome
+# lo riscrive ogni anno chi compila il foglio: basta che la coda
+# "- Pro Loco Grondona" ci sia un anno e manchi l'altro e l'indirizzo cambia.
+# Misurato sul registro del 30/08/2026: 107 nomi su 412 portano quella coda, e
+# fra le 40 schede piu' visitate sono 5 - ma dentro ci sono la prima del sito
+# (Grondona, 490 clic) e la quarta per impressioni nelle AI features (Belforte,
+# 265). Cioe' il difetto non e' raro dove costa.
+#
+# Quindi il nome non deve tornare IDENTICO: deve tornare RICONOSCIBILE. Un
+# evento il cui slug e' nuovo si confronta con le pagine gia' in registro, e se
+# ne trova una sola che e' evidentemente la stessa cosa - stesso comune, stesso
+# periodo dell'anno, stesse parole - riusa quello slug.
+#
+# Le tre condizioni non sono intercambiabili, e la piu' importante e' la terza:
+#   1. STESSO COMUNE. Sempre: il comune sta gia' dentro lo slug.
+#   2. STESSO PERIODO. +/- 30 giorni, circolari (una patronale segue il santo,
+#      una sagra il raccolto: si sposta di un weekend, non di una stagione).
+#   3. UN SOLO CANDIDATO. Se sono due non si sceglie, ed e' la regola gia'
+#      scritta per _erede(): sbagliare aggancio vuol dire scrivere l'edizione di
+#      un evento sopra la pagina di un altro, che e' molto peggio di una URL
+#      nuova. E il caso ambiguo esiste davvero: a Rocchetta Tanaro cinque
+#      "Apertura Stand Gastronomico con <nome della band>" hanno le stesse
+#      parole e le stesse date, e nessuna delle cinque va agganciata a caso.
+#
+# Uno slug gia' preso da un altro evento di QUESTA run non e' un candidato: e'
+# la guardia che tiene fuori i sotto-eventi della stessa manifestazione, che
+# sono in pagina tutti insieme e non hanno bisogno di nessun riaggancio.
+#
+# Misurato sul registro vero simulando i nomi del 2027 (numero di edizione
+# aumentato e coda dell'organizzatore caduta): su 412 schede, 319 tengono lo
+# slug da sole, 84 vengono riagganciate, 9 restano ambigue e ripiegano su una
+# URL nuova - cioe' su quello che succederebbe comunque oggi - e gli agganci
+# SBAGLIATI sono ZERO. Riscrivendo il nome piu' pesantemente (una parola
+# significativa in meno) se ne perdono 171: e' il limite dichiarato, e il modo
+# di non arrivarci e' scrivere i nomi nel foglio come l'anno prima.
+# ---------------------------------------------------------------------------
+SOGLIA_RIAGGANCIO = 0.8   # Jaccard sulle parole che restano
+FINESTRA_RIAGGANCIO = 30  # giorni, circolari
+
+# Parole che non distinguono un evento da un altro. Restano dentro "sagra",
+# "festa" e "patronale": a parita' di comune e periodo sono proprio quelle a
+# separare la sagra dalla festa.
+STOP_RIAGGANCIO = {
+    'di', 'della', 'del', 'delle', 'dei', 'degli', 'la', 'il', 'lo', 'le', 'i',
+    'gli', 'a', 'al', 'alla', 'ai', 'e', 'ed', 'in', 'con', 'per', 'su', 'da',
+    'dal', 'un', 'una', 'edizione',
+}
+
+
+def _chiave_nome(nome):
+    """Le parole del nome che NON cambiano fra un'edizione e l'altra."""
+    n = ORGANIZZATORE_RE.sub(' ', nome or '')
+    n = re.sub(r'\b(?:19|20)\d{2}\b', ' ', n)
+    n = re.sub(r'(?<!\w)\d+\s*[°ºª^]', ' ', n)
+    n = ROMANO_INIZIALE_RE.sub('', n, count=1)
+    n = unicodedata.normalize('NFKD', n).encode('ascii', 'ignore').decode().lower()
+    return {p for p in re.split(r'[^a-z0-9]+', n) if p and p not in STOP_RIAGGANCIO}
+
+
+def _giorno_dell_anno(d):
+    """1-366 da una data, da 'AAAA-MM-GG' o da 'GG/MM/AAAA'. None se non si legge."""
+    if isinstance(d, datetime.datetime):
+        d = d.date()
+    if isinstance(d, datetime.date):
+        return d.timetuple().tm_yday
+    for f in ("%Y-%m-%d", "%d/%m/%Y"):
+        try:
+            return datetime.datetime.strptime(str(d).strip(), f).date().timetuple().tm_yday
+        except (ValueError, TypeError):
+            pass
+    return None
+
+
+def _stesso_periodo(g1, g2, giorni=FINESTRA_RIAGGANCIO):
+    """Due giorni dell'anno abbastanza vicini. Circolare: il 28 dicembre e il 3
+    gennaio distano sei giorni, non trecentocinquantanove."""
+    if g1 is None or g2 is None:
+        return False
+    d = abs(g1 - g2)
+    return min(d, 365 - d) <= giorni
+
+
+def candidati_edizione(e, reg, presi):
+    """Gli slug in registro che sono, verosimilmente, l'edizione precedente di
+    questo evento. Zero, uno o piu' di uno: la scelta la fa chi chiama."""
+    citta = (e.get('citta') or '').strip().lower()
+    if not citta:
+        return []
+    chiave = _chiave_nome(e.get('nome'))
+    if not chiave:
+        return []
+    giorno = _giorno_dell_anno(e.get('d_start') or e.get('di'))
+    fuori = []
+    for slug, rec in reg.items():
+        if slug in presi or not isinstance(rec, dict) or not rec.get('nome'):
+            continue
+        # Una pagina ritirata o gia' spostata altrove non e' una pagina da
+        # aggiornare: la prima si dichiara inattendibile, la seconda e' un
+        # cartello che rimanda a un'altra.
+        if rec.get('ritirata') or rec.get('spostata'):
+            continue
+        if (rec.get('citta') or '').strip().lower() != citta:
+            continue
+        if not _stesso_periodo(giorno, _giorno_dell_anno(rec.get('d_start') or rec.get('di'))):
+            continue
+        altra = _chiave_nome(rec.get('nome'))
+        unione = chiave | altra
+        if unione and len(chiave & altra) / len(unione) >= SOGLIA_RIAGGANCIO:
+            fuori.append(slug)
+    return fuori
+
+
 def aggiorna_registro(events):
     """Fonde gli eventi correnti nel registro persistente. Non rimuove nulla."""
     reg = carica_registro()
@@ -2123,6 +2251,35 @@ def aggiorna_registro(events):
         s = slug_evento(e)
         if s not in migliori or completezza(e) > completezza(migliori[s]):
             migliori[s] = e
+    # Uno slug NUOVO puo' essere l'edizione nuova di una pagina che c'e' gia',
+    # con il nome scritto un po' diversamente. Si guarda solo qui: se lo slug e'
+    # gia' in registro non c'e' niente da riagganciare, ed e' il caso di tre
+    # schede su quattro.
+    presi = set(migliori)
+    riagganci, ambigui = [], []
+    for s in sorted(migliori):
+        if s in reg:
+            continue
+        cand = candidati_edizione(migliori[s], reg, presi)
+        if len(cand) == 1:
+            vecchio = cand[0]
+            riagganci.append((s, vecchio, migliori[s].get('nome') or '',
+                              reg[vecchio].get('nome') or ''))
+            migliori[vecchio] = migliori.pop(s)
+            presi.discard(s)
+            presi.add(vecchio)
+        elif cand:
+            ambigui.append((s, cand))
+    for s, vecchio, nome_nuovo, nome_vecchio in riagganci:
+        print(f"[genera_eventi] riaggancio: \"{nome_nuovo[:44]}\" scrive su "
+              f"/eventi/{vecchio}.html (invece di aprire /eventi/{s}.html)")
+        print(f"                 l'edizione in registro si chiamava \"{nome_vecchio[:44]}\"")
+    for s, cand in ambigui:
+        # Non e' un errore: e' la prudenza che funziona, e si stampa perche' un
+        # nome scritto meglio nel foglio la toglierebbe di mezzo.
+        print(f"[genera_eventi] pagina nuova /eventi/{s}.html: assomiglia a "
+              f"{len(cand)} pagine gia' in registro, quindi non si indovina "
+              f"({', '.join(cand[:3])})")
     for s, e in migliori.items():
         rec = reg.get(s)
         if rec is None:
