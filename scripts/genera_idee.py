@@ -63,6 +63,7 @@ IDEE_CSS = """
  border-radius:12px;background:var(--carta,#fffcf8)}
 .id-chiusa p{margin:0 0 6px}
 .id-chiusa p:last-child{margin:0}
+.id-quando{font-size:.88rem;color:var(--text-mid,#6a7a85)}
 """
 
 
@@ -81,6 +82,22 @@ def leggi_idee():
 
 def url_idea(slug):
     return f"{G.SITE_URL}/idee/{slug}.html"
+
+
+def _data_lunga(iso):
+    """"30 agosto 2026" da "2026-08-30", o la stringa com'e' se non e' una data.
+
+    La riga "rigenerata ogni notte" in fondo parla della MACCHINA: dice quando il
+    file e' stato riscritto, cioe' sempre ieri notte, e non dice niente a
+    nessuno. Questa parla della SCELTA - quando una persona ha deciso che sono
+    questi cinque - ed e' l'unica data che valga qualcosa su una pagina di
+    consigli. Serve anche a chi la rilegge fra sei mesi per sapere se fidarsi.
+    """
+    try:
+        d = datetime.date.fromisoformat(str(iso))
+    except Exception:
+        return str(iso)
+    return f"{d.day} {G.MESI_LUNGHI[d.month - 1]} {d.year}"
 
 
 def h1_html(testo):
@@ -157,7 +174,10 @@ def render(idea, voci, oggi):
         '    <section class="id-chiusa">'
         f"<p><b>Perche' questi {quanti}.</b> "
         f'{e(idea["perche"])}</p>'
-        '<p>Questa e\' una scelta, non tutto quello che abbiamo: '
+        + (f'<p class="id-quando">Questa selezione e\' del '
+           f'{_data_lunga(idea.get("aggiornata_il") or idea.get("decisa_il"))}.</p>'
+           if (idea.get("aggiornata_il") or idea.get("decisa_il")) else '')
+        + '<p>Questa e\' una scelta, non tutto quello che abbiamo: '
         '<a href="/luoghi.html">l\'elenco completo dei luoghi</a> si filtra per '
         'provincia, categoria e distanza. Come li verifichiamo sta in '
         '<a href="/metodo.html">metodo</a>.</p>'
