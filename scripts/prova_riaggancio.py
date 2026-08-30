@@ -179,6 +179,33 @@ ok(uguali + giusti >= 0.9 * len(schede),
    "almeno il 90% delle schede sopravvive a un nome riscritto",
    f"{uguali + giusti}/{len(schede)}")
 
+print("\n8. Il doppione RISCRITTO si vede nel log")
+import contextlib
+
+
+def doppioni(righe):
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        g._doppioni_riscritti([dict(r, riga=0) for r in righe], {})
+    return buf.getvalue()
+
+
+stessa_sera = [ev("Apertura Stand Gastronomico con Shary Band - Pro Loco", "Rocchetta Tanaro", "14/08/2026"),
+               ev("Apertura Stand Gastronomico e Shary Band - Pro Loco", "Rocchetta Tanaro", "14/08/2026")]
+ok("1 coppie" in doppioni(stessa_sera),
+   "lo stesso volantino letto due volte in due modi diventa un avviso")
+ok(doppioni([ev("Sagra della Trippa", "Novi Ligure", "20/08/2026"),
+             ev("Sagra del Raviolo", "Novi Ligure", "20/08/2026")]) == "",
+   "due eventi diversi nello stesso giorno non sono un doppione")
+ok(doppioni([ev("I Giovedì in Biblioteca", "Casalnoceto", "06/08/2026"),
+             ev("I Giovedì in Biblioteca", "Casalnoceto", "13/08/2026")]) == "",
+   "una ricorrenza non e' un doppione: cambia la data")
+# La finestra qui e' zero giorni apposta: due serate diverse della stessa sagra
+# hanno lo stesso nome e non vanno unite.
+ok(doppioni([ev("Apertura Stand Gastronomico con Shary Band", "Rocchetta Tanaro", "14/08/2026"),
+             ev("Apertura Stand Gastronomico e Luigi Gallia", "Rocchetta Tanaro", "15/08/2026")]) == "",
+   "due serate della stessa sagra restano due serate")
+
 print()
 if errori:
     print(f"{len(errori)} controlli falliti:")
