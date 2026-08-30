@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -905,7 +918,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_cuneo_3972819269732460129.webp" alt="Locandina di Passi nel Kuore di Valdieri" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Una giornata all&#x27;insegna della solidarietà e della natura nel cuore delle Alpi Marittime: &quot;Passi nel Kuore di Valdieri&quot; si svolge il 29 agosto 2026 a Valdieri e ad Andonno, combinando una camminata benefica non competitiva lungo il Sentiero delle Farfalle con i Guardia Parco, momenti culturali e una cena della Pro Loco in occasione della Festa Patronale.</p><p>Tutto l&#x27;evento sostiene il progetto di Musicoterapia della Fondazione Ospedale Cuneo ETS, con la partecipazione della campionessa olimpica Stefania Belmondo come testimonial. Un&#x27;occasione per trascorrere una giornata insieme tra natura, cultura e comunità, accessibile a tutti con iscrizione via WhatsApp e offerta libera per la camminata.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><ul class="ev-prog-v"><li>Passi nel Kuore di Valdieri - Camminata benefica <span class="ev-prog-o">14:30</span></li><li>Presentazione progetto Fondazione Ospedale Cuneo e musicoterapeute <span class="ev-prog-o">16:30</span></li><li>Presentazione libro &#x27;Ho imparato a vincere&#x27; con Stefania Belmondo <span class="ev-prog-o">18:00</span></li><li>Cena organizzata dalla Pro Loco di Andonno - Festa Patronale <span class="ev-prog-o">19:00</span></li></ul></div></div>
+    <p>Una giornata all&#x27;insegna della solidarietà e della natura nel cuore delle Alpi Marittime: &quot;Passi nel Kuore di Valdieri&quot; si svolge il 29 agosto 2026 a Valdieri e ad Andonno, combinando una camminata benefica non competitiva lungo il Sentiero delle Farfalle con i Guardia Parco, momenti culturali e una cena della Pro Loco in occasione della Festa Patronale.</p><p>Tutto l&#x27;evento sostiene il progetto di Musicoterapia della Fondazione Ospedale Cuneo ETS, con la partecipazione della campionessa olimpica Stefania Belmondo come testimonial. Un&#x27;occasione per trascorrere una giornata insieme tra natura, cultura e comunità, accessibile a tutti con iscrizione via WhatsApp e offerta libera per la camminata.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><ul class="ev-prog-v"><li>Passi nel Kuore di Valdieri - Camminata benefica <span class="ev-prog-o">14:30</span></li><li>Presentazione progetto Fondazione Ospedale Cuneo e musicoterapeute <span class="ev-prog-o">16:30</span></li><li>Presentazione libro &#x27;Ho imparato a vincere&#x27; con Stefania Belmondo <span class="ev-prog-o">18:00</span></li><li>Cena organizzata dalla Pro Loco di Andonno - Festa Patronale <span class="ev-prog-o">19:00</span></li></ul></div></div>
   </div>
   
   

@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -897,7 +910,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955670155681527181.jpg" alt="Locandina di Festeggiamenti Patronali Sant&#x27;Agostino 2026 - Ferrere" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Ogni anno a fine agosto, Ferrere celebra i propri festeggiamenti patronali in onore di Sant&#x27;Agostino con quattro giorni di festa organizzati dalla Pro Loco. Per tutta la durata della manifestazione è attivo uno stand gastronomico con piatti tipici, fritto di pesce, pizza e antipasti, mentre la musica dal vivo e le serate danzanti animano le sere sotto il padiglione.</p><p>La festa è anche un&#x27;occasione speciale per le famiglie: la domenica la giornata si apre con una suggestiva sfilata storica con majorettes, musici e sbandieratori, e il lunedì pomeriggio i più piccoli sono i protagonisti assoluti con i tradizionali giochi ferreresi.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">28/08</p><ul class="ev-prog-v"><li>Serata Porchetta con ABCO Band e DJ Merlò - Pro Loco Ferrere <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">29/08</p><ul class="ev-prog-v"><li>Gran Fritto di Pesce e Loris Gallo con Robe da Matt - Pro Loco Ferrere <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/08</p><ul class="ev-prog-v"><li>70ª Sagra del Pan, Salam e Vin con Marianna Lanteri - Pro Loco Ferrere <span class="ev-prog-o">9:40</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">31/08</p><ul class="ev-prog-v"><li>Giochi Ferreresi per i Bambini - Pro Loco Ferrere <span class="ev-prog-o">16:00</span></li></ul></div></div>
+    <p>Ogni anno a fine agosto, Ferrere celebra i propri festeggiamenti patronali in onore di Sant&#x27;Agostino con quattro giorni di festa organizzati dalla Pro Loco. Per tutta la durata della manifestazione è attivo uno stand gastronomico con piatti tipici, fritto di pesce, pizza e antipasti, mentre la musica dal vivo e le serate danzanti animano le sere sotto il padiglione.</p><p>La festa è anche un&#x27;occasione speciale per le famiglie: la domenica la giornata si apre con una suggestiva sfilata storica con majorettes, musici e sbandieratori, e il lunedì pomeriggio i più piccoli sono i protagonisti assoluti con i tradizionali giochi ferreresi.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">28/08</p><ul class="ev-prog-v"><li>Serata Porchetta con ABCO Band e DJ Merlò - Pro Loco Ferrere <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">29/08</p><ul class="ev-prog-v"><li>Gran Fritto di Pesce e Loris Gallo con Robe da Matt - Pro Loco Ferrere <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/08</p><ul class="ev-prog-v"><li>70ª Sagra del Pan, Salam e Vin con Marianna Lanteri - Pro Loco Ferrere <span class="ev-prog-o">9:40</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">31/08</p><ul class="ev-prog-v"><li>Giochi Ferreresi per i Bambini - Pro Loco Ferrere <span class="ev-prog-o">16:00</span></li></ul></div></div>
   </div>
   
   

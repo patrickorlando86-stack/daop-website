@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Festa dell&#x27;Uva - Castello Medievale… 2026 a Pornassio</title>
-<meta name="description" content="Dal 28 al 30 agosto 2026 a Pornassio: gonfiabili, truccabimbi e stand gastronomico. La Festa dell&#x27;Uva di Pornassio giunge alla sua 51ª edizione e anima…">
+<title>Scheda ritirata: Festa dell&#x27;Uva - Castello Medievale di… | DAOP</title>
+<meta name="description" content="Questa scheda non fa più parte dell&#x27;agenda DAOP: l&#x27;appuntamento è stato annullato o corretto. Vai all&#x27;agenda per gli eventi confermati.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html">
-<meta property="og:title" content="Festa dell&#x27;Uva - Castello Medievale… 2026 a Pornassio">
-<meta property="og:description" content="Dal 28 al 30 agosto 2026 a Pornassio: gonfiabili, truccabimbi e stand gastronomico. La Festa dell&#x27;Uva di Pornassio giunge alla sua 51ª edizione e anima…">
+<meta property="og:title" content="Scheda ritirata: Festa dell&#x27;Uva - Castello Medievale di… | DAOP">
+<meta property="og:description" content="Questa scheda non fa più parte dell&#x27;agenda DAOP: l&#x27;appuntamento è stato annullato o corretto. Vai all&#x27;agenda per gli eventi confermati.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3968647330876830417.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Festa dell&#x27;Uva - Castello Medievale… 2026 a Pornassio">
-<meta name="twitter:description" content="Dal 28 al 30 agosto 2026 a Pornassio: gonfiabili, truccabimbi e stand gastronomico. La Festa dell&#x27;Uva di Pornassio…">
+<meta name="twitter:title" content="Scheda ritirata: Festa dell&#x27;Uva - Castello Medievale di… |…">
+<meta name="twitter:description" content="Questa scheda non fa più parte dell&#x27;agenda DAOP: l&#x27;appuntamento è stato annullato o corretto. Vai all&#x27;agenda per gli…">
 <meta name="twitter:image" content="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3968647330876830417.webp">
 <meta name="daop:evento" content="Festa dell&#x27;Uva - Castello Medievale di Pornassio">
 <meta name="daop:citta" content="Pornassio">
@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -734,48 +747,10 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Event",
-      "name": "Festa dell'Uva - Castello Medievale di Pornassio",
-      "startDate": "2026-08-28",
-      "endDate": "2026-08-30",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "location": {
-        "@type": "Place",
-        "name": "Castello Medievale di Pornassio",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "IT",
-          "addressLocality": "Pornassio",
-          "addressRegion": "CN",
-          "streetAddress": "Castello Medievale di Pornassio"
-        }
-      },
-      "image": [
-        "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3968647330876830417.webp"
-      ],
-      "url": "https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html",
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Famiglie con bambini"
-      },
-      "description": "La Festa dell'Uva di Pornassio giunge alla sua 51ª edizione e anima per tre giorni il suggestivo Castello Medievale del paese, dal 28 al 30 agosto 2026. Ogni sera gli stand gastronomici propongono i sapori della tradizione ligure, con piatti tipici come il Brandacujun, le Lumache, il Coniglio alla Ligure e tante altre specialità locali, accompagnati da degustazioni guidate dei vini del territorio come l'Ormeasco e lo Sciac-trà. I più piccoli possono divertirsi con gonfiabili e truccabimbi, mentre gli adulti possono scegliere tra tour in bicicletta tra i vigneti, concerti dal vivo, serate danzanti e la presentazione di un libro. Programma: 28/08 Apertura stand gastronomici & Wine Night Dj Set - Pro Loco Pornassio (19:00); 29/08 Apertura stand gastronomici & Orchestra Sorrisi e Musica - Pro Loco Pornassio (19:00); 30/08 Gonfiabili e Truccabimbi - Pro Loco Pornassio; 30/08 Tour in bicicletta tra i vigneti - Pro Loco Pornassio (11:00 e 15:00); 30/08 Degustazione guidata F.I.S.A.R. - Pro Loco Pornassio (11:00); 30/08 Apertura stand gastronomici (pranzo) - Pro Loco Pornassio (12:00); 30/08 Ball and Chain - Country Folk Americana Music - Pro Loco Pornassio (14:00); 30/08 Presentazione libro di Maria Luisa Alberico - Pro Loco Pornassio (17:00); 30/08 Serata Disco Revival - Pro Loco Pornassio (19:00).",
-      "isAccessibleForFree": true,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "validFrom": "2026-08-28",
-        "url": "https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html"
-      },
-      "@id": "https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html#event"
-    },
-    {
       "@type": "WebPage",
       "@id": "https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html",
       "url": "https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html",
-      "name": "Festa dell'Uva - Castello Medievale… 2026 a Pornassio",
+      "name": "Scheda ritirata: Festa dell'Uva - Castello Medievale di… | DAOP",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -783,18 +758,11 @@
         "url": "https://www.daop.it",
         "name": "DAOP"
       },
-      "about": {
-        "@id": "https://www.daop.it/eventi/festa-dell-uva-castello-medievale-di-pornassio.html#event"
-      },
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "reviewedBy": {
-        "@id": "https://www.daop.it/#organization"
-      },
       "datePublished": "2026-08-25",
-      "dateModified": "2026-08-30",
-      "lastReviewed": "2026-08-26"
+      "dateModified": "2026-08-30"
     },
     {
       "@type": "Organization",
@@ -886,18 +854,18 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  
+  <div class="ev-over"><strong>Scheda ritirata</strong>Questo appuntamento non è più nell'agenda DAOP: l'abbiamo tolto perché è stato annullato, è cambiato, oppure perché la scheda era sbagliata. Quello che leggi qui sotto non è confermato: per sapere cosa c'è davvero in programma vai all'<a href="/eventi.html">agenda DAOP</a>.</div>
   <ul class="ev-facts">
-    <li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Orario:</strong> vari</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Dove:</strong> Castello Medievale di Pornassio · Castello Medievale - Pornassio (CN)</span></li><li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span><strong>Ingresso:</strong> Gratuito</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg><span><strong>Età:</strong> Tutte le età (famiglie)</span></li>
+    
   </ul>
-  <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3968647330876830417.webp" alt="Locandina di Festa dell&#x27;Uva - Castello Medievale di Pornassio" loading="lazy" width="900" height="1200">
-  <div class="ev-body">
-    <p>La Festa dell&#x27;Uva di Pornassio giunge alla sua 51ª edizione e anima per tre giorni il suggestivo Castello Medievale del paese, dal 28 al 30 agosto 2026. Ogni sera gli stand gastronomici propongono i sapori della tradizione ligure, con piatti tipici come il Brandacujun, le Lumache, il Coniglio alla Ligure e tante altre specialità locali, accompagnati da degustazioni guidate dei vini del territorio come l&#x27;Ormeasco e lo Sciac-trà.</p><p>I più piccoli possono divertirsi con gonfiabili e truccabimbi, mentre gli adulti possono scegliere tra tour in bicicletta tra i vigneti, concerti dal vivo, serate danzanti e la presentazione di un libro.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">28/08</p><ul class="ev-prog-v"><li>Apertura stand gastronomici &amp; Wine Night Dj Set - Pro Loco Pornassio <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">29/08</p><ul class="ev-prog-v"><li>Apertura stand gastronomici &amp; Orchestra Sorrisi e Musica - Pro Loco Pornassio <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/08</p><ul class="ev-prog-v"><li>Gonfiabili e Truccabimbi - Pro Loco Pornassio</li><li>Tour in bicicletta tra i vigneti - Pro Loco Pornassio (11:00 e 15:00)</li><li>Degustazione guidata F.I.S.A.R. - Pro Loco Pornassio <span class="ev-prog-o">11:00</span></li><li>Apertura stand gastronomici (pranzo) - Pro Loco Pornassio <span class="ev-prog-o">12:00</span></li><li>Ball and Chain - Country Folk Americana Music - Pro Loco Pornassio <span class="ev-prog-o">14:00</span></li><li>Presentazione libro di Maria Luisa Alberico - Pro Loco Pornassio <span class="ev-prog-o">17:00</span></li><li>Serata Disco Revival - Pro Loco Pornassio <span class="ev-prog-o">19:00</span></li></ul></div></div>
-  </div>
-  <section class="ev-fam" aria-labelledby="ev-fam-t"><h2 id="ev-fam-t"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Ci vado con i bambini?</h2><p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo scelto <strong>per le famiglie</strong>. Nelle manifestazioni con più appuntamenti, l'orario che fa per i bambini cambia da serata a serata: il programma qui sopra è il modo più sicuro per scegliere.</p><p>Per i più piccoli, nel programma ci sono <strong>gonfiabili e truccabimbi</strong>.</p><p class="ev-fam-lab">Altro per bambini qui vicino</p><ul class="ev-fam-altri"><li><a href="/eventi/festa-di-san-leone-magno-manta.html">Festa di San Leone Magno</a> <span>Manta</span></li><li><a href="/eventi/festa-da-clara-demonte.html">Festa da Clara</a> <span>Demonte</span></li><li><a href="/eventi/torneo-di-pallaprigioniera-animatori-beinette.html">Torneo di Pallaprigioniera - Animatori Beinette</a> <span>Beinette</span></li></ul></section>
   
-  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Festa+dell%27Uva+-+Castello+Medievale+di+Pornassio&amp;dates=20260828%2F20260831&amp;details=La+Festa+dell%27Uva+di+Pornassio+giunge+alla+sua+51%C2%AA+edizione+e+anima+per+tre+giorni+il+suggestivo+Castello+Medievale+del+paese%2C+dal+28+al+30+agosto+2026.+Ogni+sera+gli+stand+gastronomici+propongono+i+sapori+della+tradizione+ligure%2C+con+piatti+tipici+come+il+Brandacujun%2C+le+Lumache%2C+il+Coniglio+alla+Ligure+e+tante+altre+specialit%C3%A0+locali%2C+accompagnati+da+degustazioni+guidate+dei+vini+del+territorio+come+l%27Ormeasco+e+lo+Sciac-tr%C3%A0.+I+pi%C3%B9+piccoli+possono+divertirsi+con+gonfiabili+e+truccabimbi%2C+mentre+gli+adulti+possono+scegliere+tra+tour+in+bicicletta+tra+i+vigneti%2C+concerti+dal+vivo%2C+serate+danzanti+e+la+presentazione+di+un+libro.+Programma%3A+28%2F08+Apertura+stand+gastronomici+%26+Wine+Night+Dj+Set+-+Pro+Loco+Pornassio+%2819%3A00%29%3B+29%2F08+Apertura+stand+gastronomici+%26+Orchestra+Sorrisi+e+Musica+-+Pro+Loco+Pornassio+%2819%3A00%29%3B+30%2F08+Gonfiabili+e+Truccabimbi+-+Pro+Loco+Pornassio%3B+30%2F08+Tour+in+biciclett&amp;location=Castello+Medievale+-+Pornassio+%28CN%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=Castello%20Medievale%20-%20Pornassio%20%28CN%29%2C%20Italia" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
-  <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria, Asti e Cuneo. Ultimo controllo: <time datetime="2026-08-26">26 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Festa%20dell%27Uva%20-%20Castello%20Medievale%20di%20Pornassio">Segnala una correzione</a></p></aside>
+  <div class="ev-body">
+    <p>La Festa dell&#x27;Uva di Pornassio giunge alla sua 51ª edizione e anima per tre giorni il suggestivo Castello Medievale del paese, dal 28 al 30 agosto 2026. Ogni sera gli stand gastronomici propongono i sapori della tradizione ligure, con piatti tipici come il Brandacujun, le Lumache, il Coniglio alla Ligure e tante altre specialità locali, accompagnati da degustazioni guidate dei vini del territorio come l&#x27;Ormeasco e lo Sciac-trà.</p><p>I più piccoli possono divertirsi con gonfiabili e truccabimbi, mentre gli adulti possono scegliere tra tour in bicicletta tra i vigneti, concerti dal vivo, serate danzanti e la presentazione di un libro.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">28/08</p><ul class="ev-prog-v"><li>Apertura stand gastronomici &amp; Wine Night Dj Set - Pro Loco Pornassio <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">29/08</p><ul class="ev-prog-v"><li>Apertura stand gastronomici &amp; Orchestra Sorrisi e Musica - Pro Loco Pornassio <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/08</p><ul class="ev-prog-v"><li>Gonfiabili e Truccabimbi - Pro Loco Pornassio</li><li>Tour in bicicletta tra i vigneti - Pro Loco Pornassio (11:00 e 15:00)</li><li>Degustazione guidata F.I.S.A.R. - Pro Loco Pornassio <span class="ev-prog-o">11:00</span></li><li>Apertura stand gastronomici (pranzo) - Pro Loco Pornassio <span class="ev-prog-o">12:00</span></li><li>Ball and Chain - Country Folk Americana Music - Pro Loco Pornassio <span class="ev-prog-o">14:00</span></li><li>Presentazione libro di Maria Luisa Alberico - Pro Loco Pornassio <span class="ev-prog-o">17:00</span></li><li>Serata Disco Revival - Pro Loco Pornassio <span class="ev-prog-o">19:00</span></li></ul></div></div>
+  </div>
+  
+  
+  <div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi cosa c'è in programma</a></div>
+  <aside class="ev-firma"><p class="ev-firma-t">Scheda ritirata da DAOP</p><p>Questa scheda non fa piu' parte dell'agenda di <strong>DAOP – Dove Andiamo Oggi Papi</strong>: risultava in programma fino al <time datetime="2026-08-26">26 agosto 2026</time>, poi l'abbiamo tolta. Non consideriamo confermato quello che c'e' scritto in questa pagina.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota"><a href="/eventi.html">Vai all'agenda aggiornata</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Festa%20dell%27Uva%20-%20Castello%20Medievale%20di%20Pornassio">Segnala una correzione</a></p></aside>
   <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Pornassio</h2><ul><li><a href="/eventi/passeggiate-nella-natura-per-bambini-e-famiglie-cuneo.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Passeggiate nella natura per bambini e famiglie</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/sagra-dello-gnocco-festa-patronale-cherasco.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">27a Sagra dello Gnocco - Festa Patronale</span><span class="ev-vic-c">Cherasco</span></a></li><li><a href="/eventi/san-liberato-sant-albano-stura.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">San Liberato 2026</span><span class="ev-vic-c">Sant&#x27;Albano Stura</span></a></li><li><a href="/eventi/esposizione-internazionale-canina-cacib-mondovicin.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Esposizione Internazionale Canina 2026 - CACIB Mondovicino Dog Show</span><span class="ev-vic-c">Mondovì</span></a></li><li><a href="/eventi/festa-di-san-leone-magno-manta.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Festa di San Leone Magno</span><span class="ev-vic-c">Manta</span></a></li><li><a href="/eventi/escursione-naturalistica-gratuita-ge-co-parco-del-crissolo.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Escursione Naturalistica Gratuita - GE.CO - Parco del Monviso</span><span class="ev-vic-c">Crissolo</span></a></li></ul><p class="ev-vic-all"><a href="/sagre-provincia-cuneo.html">Le sagre in provincia di Cuneo</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
   <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Pornassio: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
 </article>
@@ -970,7 +938,7 @@
     </div>
   </div>
 </footer>
-<div class="ev-barra-spazio" aria-hidden="true"></div><div class="ev-barra" role="group" aria-label="Azioni rapide"><a href="https://www.google.com/maps/search/?api=1&amp;query=Castello%20Medievale%20-%20Pornassio%20%28CN%29%2C%20Italia" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Come arrivare</span></a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Festa+dell%27Uva+-+Castello+Medievale+di+Pornassio&amp;dates=20260828%2F20260831&amp;details=La+Festa+dell%27Uva+di+Pornassio+giunge+alla+sua+51%C2%AA+edizione+e+anima+per+tre+giorni+il+suggestivo+Castello+Medievale+del+paese%2C+dal+28+al+30+agosto+2026.+Ogni+sera+gli+stand+gastronomici+propongono+i+sapori+della+tradizione+ligure%2C+con+piatti+tipici+come+il+Brandacujun%2C+le+Lumache%2C+il+Coniglio+alla+Ligure+e+tante+altre+specialit%C3%A0+locali%2C+accompagnati+da+degustazioni+guidate+dei+vini+del+territorio+come+l%27Ormeasco+e+lo+Sciac-tr%C3%A0.+I+pi%C3%B9+piccoli+possono+divertirsi+con+gonfiabili+e+truccabimbi%2C+mentre+gli+adulti+possono+scegliere+tra+tour+in+bicicletta+tra+i+vigneti%2C+concerti+dal+vivo%2C+serate+danzanti+e+la+presentazione+di+un+libro.+Programma%3A+28%2F08+Apertura+stand+gastronomici+%26+Wine+Night+Dj+Set+-+Pro+Loco+Pornassio+%2819%3A00%29%3B+29%2F08+Apertura+stand+gastronomici+%26+Orchestra+Sorrisi+e+Musica+-+Pro+Loco+Pornassio+%2819%3A00%29%3B+30%2F08+Gonfiabili+e+Truccabimbi+-+Pro+Loco+Pornassio%3B+30%2F08+Tour+in+biciclett&amp;location=Castello+Medievale+-+Pornassio+%28CN%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Calendario</span></a></div>
+
 <script>
 function toggleMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}
 function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}

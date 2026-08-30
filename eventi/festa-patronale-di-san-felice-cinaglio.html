@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -798,7 +811,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-03",
-      "dateModified": "2026-08-29",
+      "dateModified": "2026-08-30",
       "lastReviewed": "2026-08-24"
     },
     {
@@ -906,7 +919,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3955064919627592103.jpg" alt="Locandina di Festa Patronale di San Felice 2026 - Cinaglio" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>La Festa Patronale di San Felice è l&#x27;appuntamento estivo più atteso di Cinaglio, che per cinque giorni, dal 20 al 24 agosto 2026, animerà il paese con eventi per tutti. Le famiglie potranno gustare piatti e cocktail allo stand gastronomico, visitare la mostra Cinaglio Arte e cimentarsi nella Caccia al Tesoro Scopri Cinaglio, un gioco divertente per bambini, ragazzi e adulti alla scoperta del paese.</p><p>Non mancheranno il teatro, le gare di bocce e di tamburello, il Banco di Beneficenza con il Canestrello d&#x27;oro, e ogni sera la festa si chiude con musica e balli. L&#x27;iniziativa è organizzata dalla Pro Loco con il patrocinio del Comune.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">20/08</p><ul class="ev-prog-v"><li>Serata Teatrale con J&#x27;Amprovisà - Pro Loco Cinaglio <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Apertura Stand Gastronomico con Non Plus Ultra - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Gara a Bocce Memorial Enrico Molino - Pro Loco Cinaglio <span class="ev-prog-o">14:00</span></li><li>Caccia al Tesoro Scopri Cinaglio - Pro Loco Cinaglio <span class="ev-prog-o">15:30</span></li><li>Inaugurazione Mostra Cinaglio Arte - Pro Loco Cinaglio <span class="ev-prog-o">18:00</span></li><li>Serata Danzante con DJ Toyu e DJ Pablo - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Santa Messa in onore di San Felice - Pro Loco Cinaglio <span class="ev-prog-o">09:45</span></li><li>Gara a Bocce Puntatore Super Individuale - Pro Loco Cinaglio <span class="ev-prog-o">14:00</span></li><li>Serata Danzante con Divina - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/08</p><ul class="ev-prog-v"><li>Partita Spettacolo di Tamburello - Pro Loco Cinaglio <span class="ev-prog-o">17:30</span></li><li>Serata Danzante con Mike e I Simpatici - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div></div>
+    <p>La Festa Patronale di San Felice è l&#x27;appuntamento estivo più atteso di Cinaglio, che per cinque giorni, dal 20 al 24 agosto 2026, animerà il paese con eventi per tutti. Le famiglie potranno gustare piatti e cocktail allo stand gastronomico, visitare la mostra Cinaglio Arte e cimentarsi nella Caccia al Tesoro Scopri Cinaglio, un gioco divertente per bambini, ragazzi e adulti alla scoperta del paese.</p><p>Non mancheranno il teatro, le gare di bocce e di tamburello, il Banco di Beneficenza con il Canestrello d&#x27;oro, e ogni sera la festa si chiude con musica e balli. L&#x27;iniziativa è organizzata dalla Pro Loco con il patrocinio del Comune.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">20/08</p><ul class="ev-prog-v"><li>Serata Teatrale con J&#x27;Amprovisà - Pro Loco Cinaglio <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Apertura Stand Gastronomico con Non Plus Ultra - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Gara a Bocce Memorial Enrico Molino - Pro Loco Cinaglio <span class="ev-prog-o">14:00</span></li><li>Caccia al Tesoro Scopri Cinaglio - Pro Loco Cinaglio <span class="ev-prog-o">15:30</span></li><li>Inaugurazione Mostra Cinaglio Arte - Pro Loco Cinaglio <span class="ev-prog-o">18:00</span></li><li>Serata Danzante con DJ Toyu e DJ Pablo - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Santa Messa in onore di San Felice - Pro Loco Cinaglio <span class="ev-prog-o">09:45</span></li><li>Gara a Bocce Puntatore Super Individuale - Pro Loco Cinaglio <span class="ev-prog-o">14:00</span></li><li>Serata Danzante con Divina - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/08</p><ul class="ev-prog-v"><li>Partita Spettacolo di Tamburello - Pro Loco Cinaglio <span class="ev-prog-o">17:30</span></li><li>Serata Danzante con Mike e I Simpatici - Pro Loco Cinaglio <span class="ev-prog-o">20:00</span></li></ul></div></div>
   </div>
   
   

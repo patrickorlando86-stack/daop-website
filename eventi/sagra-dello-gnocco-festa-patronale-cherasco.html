@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -897,7 +910,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3960725228045052749.jpg" alt="Locandina di 27a Sagra dello Gnocco - Festa Patronale" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Torna a Bricco de&#x27; Faule, frazione di Cherasco, la 27ª Sagra dello Gnocco, in occasione della Festa Patronale, con cinque giorni di festa dal 27 al 31 agosto 2026. Ogni sera è possibile cenare con i piatti tipici del territorio, tra cui gli gnocchi di Mombarcaro in diverse varianti, grigliate e specialità locali, il tutto preparato in collaborazione con le realtà della zona.</p><p>Non mancano la Santa Messa con processione e benedizione dei trattori, un pomeriggio dedicato ai bambini e serate danzanti all&#x27;aperto con musica dal vivo.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">27/08</p><ul class="ev-prog-v"><li>Gara a Scala 40 e Serata Danzante con Lou Serpent - Pro Loco Bricco de Faule <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">28/08</p><ul class="ev-prog-v"><li>Crea il Tuo Menù e Musica con DJ Munch - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">29/08</p><ul class="ev-prog-v"><li>Grigliata Mista e Serata Danzante con Matti da Legare - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/08</p><ul class="ev-prog-v"><li>Santa Messa, Grigliata di Adriana e Pomeriggio Bambini - Pro Loco Bricco de Faule <span class="ev-prog-o">09:30</span></li><li>Sagra dello Gnocco con ospiti da Mombarcaro e Cervere e Serata con Sara Naldi - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">31/08</p><ul class="ev-prog-v"><li>Sagra dello Gnocco con Fiera della Zucca di Piozzo e Serata con I Braida - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div></div>
+    <p>Torna a Bricco de&#x27; Faule, frazione di Cherasco, la 27ª Sagra dello Gnocco, in occasione della Festa Patronale, con cinque giorni di festa dal 27 al 31 agosto 2026. Ogni sera è possibile cenare con i piatti tipici del territorio, tra cui gli gnocchi di Mombarcaro in diverse varianti, grigliate e specialità locali, il tutto preparato in collaborazione con le realtà della zona.</p><p>Non mancano la Santa Messa con processione e benedizione dei trattori, un pomeriggio dedicato ai bambini e serate danzanti all&#x27;aperto con musica dal vivo.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">27/08</p><ul class="ev-prog-v"><li>Gara a Scala 40 e Serata Danzante con Lou Serpent - Pro Loco Bricco de Faule <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">28/08</p><ul class="ev-prog-v"><li>Crea il Tuo Menù e Musica con DJ Munch - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">29/08</p><ul class="ev-prog-v"><li>Grigliata Mista e Serata Danzante con Matti da Legare - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/08</p><ul class="ev-prog-v"><li>Santa Messa, Grigliata di Adriana e Pomeriggio Bambini - Pro Loco Bricco de Faule <span class="ev-prog-o">09:30</span></li><li>Sagra dello Gnocco con ospiti da Mombarcaro e Cervere e Serata con Sara Naldi - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">31/08</p><ul class="ev-prog-v"><li>Sagra dello Gnocco con Fiera della Zucca di Piozzo e Serata con I Braida - Pro Loco Bricco de Faule <span class="ev-prog-o">20:30</span></li></ul></div></div>
   </div>
   
   

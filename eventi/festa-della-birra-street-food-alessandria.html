@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -897,7 +910,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3943479245575048023.jpg" alt="Locandina di Festa della Birra Street Food" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>La Festa della Birra Street Food torna nel quartiere Cristo di Alessandria per due giorni, sabato 12 e domenica 13 settembre 2026, nell&#x27;area verde della Scuola Morbelli in Via Campi. L&#x27;evento, organizzato dal Quartiere Cristo e dalla Pro Loco Lisonòria, propone street food e il suggestivo spettacolo della mongolfiera per tutta la durata della manifestazione.</p><p>La musica dal vivo accompagna entrambe le giornate, rendendo la festa un appuntamento piacevole per grandi e piccoli.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">12/09</p><ul class="ev-prog-v"><li>Festa della Birra Street Food - Quartiere Cristo / Pro Loco Lisonòria</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">13/09</p><ul class="ev-prog-v"><li>Festa della Birra Street Food - Radio Reggae Live - Quartiere Cristo / Pro Loco Lisonòria</li></ul></div></div>
+    <p>La Festa della Birra Street Food torna nel quartiere Cristo di Alessandria per due giorni, sabato 12 e domenica 13 settembre 2026, nell&#x27;area verde della Scuola Morbelli in Via Campi. L&#x27;evento, organizzato dal Quartiere Cristo e dalla Pro Loco Lisonòria, propone street food e il suggestivo spettacolo della mongolfiera per tutta la durata della manifestazione.</p><p>La musica dal vivo accompagna entrambe le giornate, rendendo la festa un appuntamento piacevole per grandi e piccoli.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">12/09</p><ul class="ev-prog-v"><li>Festa della Birra Street Food - Quartiere Cristo / Pro Loco Lisonòria</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">13/09</p><ul class="ev-prog-v"><li>Festa della Birra Street Food - Radio Reggae Live - Quartiere Cristo / Pro Loco Lisonòria</li></ul></div></div>
   </div>
   <section class="ev-fam" aria-labelledby="ev-fam-t"><h2 id="ev-fam-t"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Ci vado con i bambini?</h2><p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo scelto <strong>per le famiglie</strong>. Nelle manifestazioni con più appuntamenti, l'orario che fa per i bambini cambia da serata a serata: il programma qui sopra è il modo più sicuro per scegliere.</p><p>Per i più piccoli, nel programma ci sono <strong>mongolfiere</strong>.</p><p class="ev-fam-lab">Altro per bambini qui vicino</p><ul class="ev-fam-altri"><li><a href="/eventi/primi-passi-di-svezzamento-officina-femminile-alessandria.html">Primi Passi di Svezzamento - Officina Femminile</a> <span>Alessandria</span></li><li><a href="/eventi/festival-nuova-umanita-san-salvatore-monferrato.html">Festival Nuova Umanità</a> <span>San Salvatore Monferrato</span></li><li><a href="/eventi/ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano.html">Ass. Sarina Burattini e Serata gastronomica con DJ…</a> <span>Villaromagnano</span></li></ul><p class="ev-fam-piu"><a class="ev-fam-tutti" href="/eventi/comune/alessandria.html">Tutti gli eventi ad Alessandria</a></p></section>
   

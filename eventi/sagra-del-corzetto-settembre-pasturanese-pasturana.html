@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -896,7 +909,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3960094598099029873.jpg" alt="Locandina di Sagra del Corzetto - Settembre Pasturanese" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Giunta alla sua 53ª edizione, la Sagra del Corzetto - Settembre Pasturanese è una festa di paese organizzata dalla Pro Loco di Pasturana che si svolge per tre giorni, dal 4 al 6 settembre. Per tutta la durata della manifestazione lo stand gastronomico propone i corzetti e le altre specialità della tradizione locale, accompagnati da musica e ballo ogni sera.</p><p>Tra le attività da non perdere ci sono il Trofeo Ranapastu, una simpatica gara di retrorunning (corsa all&#x27;indietro), e &#x27;A Toumbula da Gnepa, per un weekend all&#x27;insegna del divertimento per tutta la famiglia.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">04/09</p><ul class="ev-prog-v"><li>Stand Gastronomico con Mastromarino &amp; ParoDJ - Pro Loco Pasturana <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">05/09</p><ul class="ev-prog-v"><li>Trofeo Ranapastu e Stand Gastronomico con Paolo Bagnasco - Pro Loco Pasturana <span class="ev-prog-o">17:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">06/09</p><ul class="ev-prog-v"><li>Stand Gastronomico e Emozioni Band con Esibizione Scuola di Ballo Desirè - Pro Loco Pasturana <span class="ev-prog-o">12:00</span></li></ul></div></div>
+    <p>Giunta alla sua 53ª edizione, la Sagra del Corzetto - Settembre Pasturanese è una festa di paese organizzata dalla Pro Loco di Pasturana che si svolge per tre giorni, dal 4 al 6 settembre. Per tutta la durata della manifestazione lo stand gastronomico propone i corzetti e le altre specialità della tradizione locale, accompagnati da musica e ballo ogni sera.</p><p>Tra le attività da non perdere ci sono il Trofeo Ranapastu, una simpatica gara di retrorunning (corsa all&#x27;indietro), e &#x27;A Toumbula da Gnepa, per un weekend all&#x27;insegna del divertimento per tutta la famiglia.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">04/09</p><ul class="ev-prog-v"><li>Stand Gastronomico con Mastromarino &amp; ParoDJ - Pro Loco Pasturana <span class="ev-prog-o">19:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">05/09</p><ul class="ev-prog-v"><li>Trofeo Ranapastu e Stand Gastronomico con Paolo Bagnasco - Pro Loco Pasturana <span class="ev-prog-o">17:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">06/09</p><ul class="ev-prog-v"><li>Stand Gastronomico e Emozioni Band con Esibizione Scuola di Ballo Desirè - Pro Loco Pasturana <span class="ev-prog-o">12:00</span></li></ul></div></div>
   </div>
   
   

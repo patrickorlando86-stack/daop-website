@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -797,7 +810,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-09",
-      "dateModified": "2026-08-29",
+      "dateModified": "2026-08-30",
       "lastReviewed": "2026-08-23"
     },
     {
@@ -905,7 +918,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3946087706358055044.jpg" alt="Locandina di Agosto Letterario" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Agosto Letterario è una festa che si tiene a Buttigliera d&#x27;Asti il 22 e 23 agosto 2026, dedicata alla cultura, alla lettura e alla creatività. Il programma include un workshop di pittura en plein air al Laghetto del Furnas (a pagamento, con iscrizione obbligatoria), la presentazione di un libro con aperitivo nel Cortile di Casa Pelissero e letture ad alta voce con laboratori creativi in Piazza Vittorio Veneto, questi ultimi a ingresso libero.</p><p>Le attività di lettura, realizzate in collaborazione con Nati per Leggere, rendono la festa adatta anche alle famiglie con bambini.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Workshop di Pittura en Plein Air - Biblioteca Comunale di Buttigliera d&#x27;Asti <span class="ev-prog-o">09:00-12:00</span></li><li>Presentazione del Libro e Aperitivo - Biblioteca Comunale di Buttigliera d&#x27;Asti <span class="ev-prog-o">17:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Letture e Laboratori Creativi - Biblioteca Comunale di Buttigliera d&#x27;Asti <span class="ev-prog-o">16:00-18:00</span></li></ul></div></div>
+    <p>Agosto Letterario è una festa che si tiene a Buttigliera d&#x27;Asti il 22 e 23 agosto 2026, dedicata alla cultura, alla lettura e alla creatività. Il programma include un workshop di pittura en plein air al Laghetto del Furnas (a pagamento, con iscrizione obbligatoria), la presentazione di un libro con aperitivo nel Cortile di Casa Pelissero e letture ad alta voce con laboratori creativi in Piazza Vittorio Veneto, questi ultimi a ingresso libero.</p><p>Le attività di lettura, realizzate in collaborazione con Nati per Leggere, rendono la festa adatta anche alle famiglie con bambini.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Workshop di Pittura en Plein Air - Biblioteca Comunale di Buttigliera d&#x27;Asti <span class="ev-prog-o">09:00-12:00</span></li><li>Presentazione del Libro e Aperitivo - Biblioteca Comunale di Buttigliera d&#x27;Asti <span class="ev-prog-o">17:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Letture e Laboratori Creativi - Biblioteca Comunale di Buttigliera d&#x27;Asti <span class="ev-prog-o">16:00-18:00</span></li></ul></div></div>
   </div>
   <section class="ev-fam" aria-labelledby="ev-fam-t"><h2 id="ev-fam-t"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Ci vado con i bambini?</h2><p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo scelto <strong>per le famiglie</strong>. Nelle manifestazioni con più appuntamenti, l'orario che fa per i bambini cambia da serata a serata: il programma qui sopra è il modo più sicuro per scegliere.</p><p>Per i più piccoli, nel programma ci sono <strong>laboratori per bambini</strong>.</p><p class="ev-fam-lab">Altro per bambini qui vicino</p><ul class="ev-fam-altri"><li><a href="/eventi/pompieropoli-buttigliera-buttigliera-d-asti.html">Pompieropoli 2026 - Buttigliera</a> <span>Buttigliera d&#x27;Asti</span></li><li><a href="/eventi/vendemmia-in-vigna-con-i-bambini-vini-piana-mombaruzzo.html">Vendemmia in Vigna con i Bambini - Vini Piana</a> <span>Mombaruzzo</span></li><li><a href="/eventi/paleolab-paleontologo-per-un-giorno-parco-paleonto-asti.html">PaleoLab - Paleontologo per un Giorno - Parco…</a> <span>Asti</span></li></ul><p class="ev-fam-piu"><a class="ev-fam-tutti" href="/eventi/comune/buttigliera-d-asti.html">Tutti gli eventi a Buttigliera d'Asti</a></p></section>
   

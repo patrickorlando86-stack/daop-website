@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -906,7 +919,7 @@
   </ul>
   
   <div class="ev-body">
-    <p>Cinema sotto le Stelle ogni lunedì 13 e 20 luglio, a cura dell&#x27;Assessorato al Turismo. Proiezioni cinematografiche all&#x27;aperto nella Corte del Castello di Pozzolo Formigaro.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><ul class="ev-prog-v"><li>13/07-20/07 Cinema sotto le Stelle - Assessorato al Turismo</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">18/07</p><ul class="ev-prog-v"><li>La Vedova Allegra - Operetta al Castello - A.C.P.S. La Frascheta A.P.S.</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">19/07</p><ul class="ev-prog-v"><li>Gran Torneo di Burraco sotto le Stelle - Centro Anziani</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/07</p><ul class="ev-prog-v"><li>Francesco Costa - Attraverso Festival - Assessorato al Turismo</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/07</p><ul class="ev-prog-v"><li>Sotto a Chi Tocca - Omaggio a Gilberto Govi - Compagnia Sopra il Palco</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/07</p><ul class="ev-prog-v"><li>Trio dell&#x27;Isola in concerto - A.C.P.S. La Frascheta</li><li>06/08-09/08 Festa d&#x27;Agosto - Pro Loco Pozzolese</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">08/08</p><ul class="ev-prog-v"><li>Trofeo Comune di Pozzolo F.ro e ASD Fornasari Auto - Gara ciclistica su strada</li></ul></div></div>
+    <p>Cinema sotto le Stelle ogni lunedì 13 e 20 luglio, a cura dell&#x27;Assessorato al Turismo. Proiezioni cinematografiche all&#x27;aperto nella Corte del Castello di Pozzolo Formigaro.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><ul class="ev-prog-v"><li>13/07-20/07 Cinema sotto le Stelle - Assessorato al Turismo</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">18/07</p><ul class="ev-prog-v"><li>La Vedova Allegra - Operetta al Castello - A.C.P.S. La Frascheta A.P.S.</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">19/07</p><ul class="ev-prog-v"><li>Gran Torneo di Burraco sotto le Stelle - Centro Anziani</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/07</p><ul class="ev-prog-v"><li>Francesco Costa - Attraverso Festival - Assessorato al Turismo</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/07</p><ul class="ev-prog-v"><li>Sotto a Chi Tocca - Omaggio a Gilberto Govi - Compagnia Sopra il Palco</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/07</p><ul class="ev-prog-v"><li>Trio dell&#x27;Isola in concerto - A.C.P.S. La Frascheta</li><li>06/08-09/08 Festa d&#x27;Agosto - Pro Loco Pozzolese</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">08/08</p><ul class="ev-prog-v"><li>Trofeo Comune di Pozzolo F.ro e ASD Fornasari Auto - Gara ciclistica su strada</li></ul></div></div>
   </div>
   
   

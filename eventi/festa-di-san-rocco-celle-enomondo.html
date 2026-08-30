@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -798,7 +811,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-02",
-      "dateModified": "2026-08-29",
+      "dateModified": "2026-08-30",
       "lastReviewed": "2026-08-17"
     },
     {
@@ -906,7 +919,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3947080982607333473.jpg" alt="Locandina di Festa di San Rocco - Celle Enomondo 2026" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Torna a Celle Enomondo la Festa di San Rocco, cinque giorni di festa dal 13 al 17 agosto 2026 tra musica dal vivo, stand enogastronomico con piatti tipici come agnolotti, carne alla griglia e la specialità pizza alla canapa. Per i più piccoli non mancano giochi, gonfiabili gratuiti e tante attività pensate per le famiglie. Si chiude in bellezza con una serata di cinema all&#x27;aperto a ingresso gratuito.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">13/08</p><ul class="ev-prog-v"><li>Pole &amp; Basettoni - Festa di San Rocco <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">14/08</p><ul class="ev-prog-v"><li>Salsa Dura &amp; Premiazione Concorso Fotografico - Festa di San Rocco (16:30 - serata)</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">15/08</p><ul class="ev-prog-v"><li>Jolly Blu - 883 &amp; Max Pezzali Tribute Band - Festa di San Rocco <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">16/08</p><ul class="ev-prog-v"><li>Orchestra 2000 &amp; Liscio - Festa di San Rocco <span class="ev-prog-o">15:00 - 21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">17/08</p><ul class="ev-prog-v"><li>Cinema all&#x27;aperto: Onde di Terra - Festa di San Rocco <span class="ev-prog-o">21:00</span></li></ul></div></div>
+    <p>Torna a Celle Enomondo la Festa di San Rocco, cinque giorni di festa dal 13 al 17 agosto 2026 tra musica dal vivo, stand enogastronomico con piatti tipici come agnolotti, carne alla griglia e la specialità pizza alla canapa. Per i più piccoli non mancano giochi, gonfiabili gratuiti e tante attività pensate per le famiglie. Si chiude in bellezza con una serata di cinema all&#x27;aperto a ingresso gratuito.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">13/08</p><ul class="ev-prog-v"><li>Pole &amp; Basettoni - Festa di San Rocco <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">14/08</p><ul class="ev-prog-v"><li>Salsa Dura &amp; Premiazione Concorso Fotografico - Festa di San Rocco (16:30 - serata)</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">15/08</p><ul class="ev-prog-v"><li>Jolly Blu - 883 &amp; Max Pezzali Tribute Band - Festa di San Rocco <span class="ev-prog-o">21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">16/08</p><ul class="ev-prog-v"><li>Orchestra 2000 &amp; Liscio - Festa di San Rocco <span class="ev-prog-o">15:00 - 21:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">17/08</p><ul class="ev-prog-v"><li>Cinema all&#x27;aperto: Onde di Terra - Festa di San Rocco <span class="ev-prog-o">21:00</span></li></ul></div></div>
   </div>
   <section class="ev-fam" aria-labelledby="ev-fam-t"><h2 id="ev-fam-t"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg> Ci vado con i bambini?</h2><p>Sì: in agenda DAOP pubblichiamo solo quello che abbiamo scelto <strong>per le famiglie</strong>. Nelle manifestazioni con più appuntamenti, l'orario che fa per i bambini cambia da serata a serata: il programma qui sopra è il modo più sicuro per scegliere.</p><p>Per i più piccoli, nel programma ci sono <strong>gonfiabili</strong>.</p><p class="ev-fam-lab">Altro per bambini qui vicino</p><ul class="ev-fam-altri"><li><a href="/eventi/vendemmia-in-vigna-con-i-bambini-vini-piana-mombaruzzo.html">Vendemmia in Vigna con i Bambini - Vini Piana</a> <span>Mombaruzzo</span></li><li><a href="/eventi/paleolab-paleontologo-per-un-giorno-parco-paleonto-asti.html">PaleoLab - Paleontologo per un Giorno - Parco…</a> <span>Asti</span></li><li><a href="/eventi/laboratorio-creativo-sulle-emozioni-san-damiano-d-asti.html">Laboratorio creativo sulle emozioni</a> <span>San Damiano d&#x27;Asti</span></li></ul></section>
   

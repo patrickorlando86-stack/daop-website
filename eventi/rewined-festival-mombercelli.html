@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -798,7 +811,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-20",
-      "dateModified": "2026-08-29",
+      "dateModified": "2026-08-30",
       "lastReviewed": "2026-08-23"
     },
     {
@@ -905,7 +918,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3968040272956902129.webp" alt="Locandina di REwineD Festival" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Tre serate di festa a Mombercelli con il REwineD Festival, dal 21 al 23 agosto 2026. Ogni sera è protagonista il buon cibo, con hamburger, gran fritto di pesce e grigliatissima di carne, accompagnati da musica e allegria per tutta la famiglia.</p><p>È gradita la prenotazione per le cene, e per raggiungere comodamente la festa è disponibile un bus navetta.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Hamburger e birra - Discoteca mobile Radio Valle Belbo</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Gran Fritto di Pesce - Gli Anni d&#x27;Oro del &#x27;90</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Grigliatissima di carne - Luigi Gallia</li></ul></div></div>
+    <p>Tre serate di festa a Mombercelli con il REwineD Festival, dal 21 al 23 agosto 2026. Ogni sera è protagonista il buon cibo, con hamburger, gran fritto di pesce e grigliatissima di carne, accompagnati da musica e allegria per tutta la famiglia.</p><p>È gradita la prenotazione per le cene, e per raggiungere comodamente la festa è disponibile un bus navetta.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Hamburger e birra - Discoteca mobile Radio Valle Belbo</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Gran Fritto di Pesce - Gli Anni d&#x27;Oro del &#x27;90</li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Grigliatissima di carne - Luigi Gallia</li></ul></div></div>
   </div>
   
   

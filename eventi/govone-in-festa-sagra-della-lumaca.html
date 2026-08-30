@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -798,7 +811,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-11",
-      "dateModified": "2026-08-28",
+      "dateModified": "2026-08-30",
       "lastReviewed": "2026-08-25"
     },
     {
@@ -906,7 +919,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3960718757217967543.jpg" alt="Locandina di Govone in Festa - 11° Sagra della Lumaca" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Govone in Festa - 11° Sagra della Lumaca è una manifestazione di sei giorni che si tiene presso il Castello Reale di Govone, dal 20 al 25 agosto 2026. Ogni sera lo stand gastronomico apre alle 19:30 per far gustare i piatti tipici della sagra, mentre il programma prevede serate musicali con concerti e orchestre per tutti i gusti.</p><p>Non mancano momenti dedicati ai più piccoli, con intrattenimento sportivo pensato appositamente per i bambini, e appuntamenti culturali come la consegna del Premio Amico di Govone e una Mostra Zootecnica con Fiera della Meccanizzazione Agricola. La maggior parte delle serate è ad ingresso gratuito.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">20/08</p><ul class="ev-prog-v"><li>Shary Band - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Zona Italia: Tributo a Cesare Cremonini e Max Pezzali - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>La Vita a 30 Anni + Deconnection - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Tributo agli ABBA &#x27;ABBA Dream&#x27; - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/08</p><ul class="ev-prog-v"><li>Orchestra Federica Cocco - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">25/08</p><ul class="ev-prog-v"><li>Orchestra Matteo Bensi + Mostra Zootecnica - Pro Loco Govone <span class="ev-prog-o">09:00-21:00</span></li></ul></div></div>
+    <p>Govone in Festa - 11° Sagra della Lumaca è una manifestazione di sei giorni che si tiene presso il Castello Reale di Govone, dal 20 al 25 agosto 2026. Ogni sera lo stand gastronomico apre alle 19:30 per far gustare i piatti tipici della sagra, mentre il programma prevede serate musicali con concerti e orchestre per tutti i gusti.</p><p>Non mancano momenti dedicati ai più piccoli, con intrattenimento sportivo pensato appositamente per i bambini, e appuntamenti culturali come la consegna del Premio Amico di Govone e una Mostra Zootecnica con Fiera della Meccanizzazione Agricola. La maggior parte delle serate è ad ingresso gratuito.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">20/08</p><ul class="ev-prog-v"><li>Shary Band - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Zona Italia: Tributo a Cesare Cremonini e Max Pezzali - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>La Vita a 30 Anni + Deconnection - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>Tributo agli ABBA &#x27;ABBA Dream&#x27; - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/08</p><ul class="ev-prog-v"><li>Orchestra Federica Cocco - Pro Loco Govone <span class="ev-prog-o">21:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">25/08</p><ul class="ev-prog-v"><li>Orchestra Matteo Bensi + Mostra Zootecnica - Pro Loco Govone <span class="ev-prog-o">09:00-21:00</span></li></ul></div></div>
   </div>
   
   

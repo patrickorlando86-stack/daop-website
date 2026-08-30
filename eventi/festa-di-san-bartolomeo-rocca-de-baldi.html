@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -906,7 +919,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/eventi_bambini_provincia_cuneo_3960740209430538571.jpg" alt="Locandina di Festa di San Bartolomeo" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Domenica 23 agosto, la frazione Carleveri di Rocca De&#x27; Baldi celebra la Festa di San Bartolomeo con una giornata ricca di appuntamenti per tutta la famiglia. Si parte dalla Santa Messa al mattino, per poi proseguire nel pomeriggio con un torneo di pallavolo 4 contro 4 e giochi e animazione per i bambini a cura di HOC Academy.</p><p>La serata si conclude a tavola con la paella in piazza — menù con tris di antipasti, paella e dolce, prenotazione obbligatoria — e con musica e balli latini.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><ul class="ev-prog-v"><li>Santa Messa <span class="ev-prog-o">11:00</span></li><li>Torneo di Volley 4 vs 4 <span class="ev-prog-o">14:00</span></li><li>Giochi e Animazione per Bambini con HOC Academy <span class="ev-prog-o">16:00</span></li><li>Paella in Piazza <span class="ev-prog-o">20:00</span></li><li>Serata Latina con Carla e DJ Set by DJ Mirko (A seguire (dopo le 20:00))</li></ul></div></div>
+    <p>Domenica 23 agosto, la frazione Carleveri di Rocca De&#x27; Baldi celebra la Festa di San Bartolomeo con una giornata ricca di appuntamenti per tutta la famiglia. Si parte dalla Santa Messa al mattino, per poi proseguire nel pomeriggio con un torneo di pallavolo 4 contro 4 e giochi e animazione per i bambini a cura di HOC Academy.</p><p>La serata si conclude a tavola con la paella in piazza — menù con tris di antipasti, paella e dolce, prenotazione obbligatoria — e con musica e balli latini.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><ul class="ev-prog-v"><li>Santa Messa <span class="ev-prog-o">11:00</span></li><li>Torneo di Volley 4 vs 4 <span class="ev-prog-o">14:00</span></li><li>Giochi e Animazione per Bambini con HOC Academy <span class="ev-prog-o">16:00</span></li><li>Paella in Piazza <span class="ev-prog-o">20:00</span></li><li>Serata Latina con Carla e DJ Set by DJ Mirko (A seguire (dopo le 20:00))</li></ul></div></div>
   </div>
   
   

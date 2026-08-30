@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S. Messa Solenne… Beneficenza 2026 a Villaromagnano</title>
-<meta name="description" content="Sabato 5 settembre 2026 a Villaromagnano: processione. Santa Messa Solenne con processione accompagnata dalla Banda Pozzolese R. Marenco, al termine…">
+<title>Scheda ritirata: S. Messa Solenne, Processione con Banda… | DAOP</title>
+<meta name="description" content="Questa scheda non fa più parte dell&#x27;agenda DAOP: l&#x27;appuntamento è stato annullato o corretto. Vai all&#x27;agenda per gli eventi confermati.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html">
-<meta property="og:title" content="S. Messa Solenne… Beneficenza 2026 a Villaromagnano">
-<meta property="og:description" content="Sabato 5 settembre 2026 a Villaromagnano: processione. Santa Messa Solenne con processione accompagnata dalla Banda Pozzolese R. Marenco, al termine…">
+<meta property="og:title" content="Scheda ritirata: S. Messa Solenne, Processione con Banda… | DAOP">
+<meta property="og:description" content="Questa scheda non fa più parte dell&#x27;agenda DAOP: l&#x27;appuntamento è stato annullato o corretto. Vai all&#x27;agenda per gli eventi confermati.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3956487578405878241.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="S. Messa Solenne… Beneficenza 2026 a Villaromagnano">
-<meta name="twitter:description" content="Sabato 5 settembre 2026 a Villaromagnano: processione. Santa Messa Solenne con processione accompagnata dalla Banda…">
+<meta name="twitter:title" content="Scheda ritirata: S. Messa Solenne, Processione con Banda… |…">
+<meta name="twitter:description" content="Questa scheda non fa più parte dell&#x27;agenda DAOP: l&#x27;appuntamento è stato annullato o corretto. Vai all&#x27;agenda per gli…">
 <meta name="twitter:image" content="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3956487578405878241.jpg">
 <meta name="daop:evento" content="S. Messa Solenne, Processione con Banda Pozzolese e Banco di Beneficenza">
 <meta name="daop:citta" content="Villaromagnano">
@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -734,52 +747,10 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Event",
-      "name": "S. Messa Solenne, Processione con Banda Pozzolese e Banco di Beneficenza",
-      "startDate": "2026-09-05T21:00+02:00",
-      "endDate": "2026-09-05T21:00+02:00",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "location": {
-        "@type": "Place",
-        "name": "Villaromagnano",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "IT",
-          "addressLocality": "Villaromagnano",
-          "addressRegion": "AL"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "44.8454469",
-          "longitude": "8.8952063"
-        }
-      },
-      "image": [
-        "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3956487578405878241.jpg"
-      ],
-      "url": "https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html",
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Famiglie con bambini"
-      },
-      "description": "Santa Messa Solenne con processione accompagnata dalla Banda Pozzolese R. Marenco, al termine apertura del Banco di beneficenza. Momento centrale della Festa Patronale di Villaromagnano.",
-      "isAccessibleForFree": true,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "validFrom": "2026-09-05",
-        "url": "https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html"
-      },
-      "@id": "https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html#event"
-    },
-    {
       "@type": "WebPage",
       "@id": "https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html",
       "url": "https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html",
-      "name": "S. Messa Solenne… Beneficenza 2026 a Villaromagnano",
+      "name": "Scheda ritirata: S. Messa Solenne, Processione con Banda… | DAOP",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -787,18 +758,11 @@
         "url": "https://www.daop.it",
         "name": "DAOP"
       },
-      "about": {
-        "@id": "https://www.daop.it/eventi/s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano.html#event"
-      },
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "reviewedBy": {
-        "@id": "https://www.daop.it/#organization"
-      },
       "datePublished": "2026-08-06",
-      "dateModified": "2026-08-30",
-      "lastReviewed": "2026-08-21"
+      "dateModified": "2026-08-30"
     },
     {
       "@type": "Organization",
@@ -890,18 +854,18 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  
+  <div class="ev-over"><strong>Scheda ritirata</strong>Questo appuntamento non è più nell'agenda DAOP: l'abbiamo tolto perché è stato annullato, è cambiato, oppure perché la scheda era sbagliata. Quello che leggi qui sotto non è confermato: per sapere cosa c'è davvero in programma vai all'<a href="/eventi.html">agenda DAOP</a>.</div>
   <ul class="ev-facts">
-    <li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Orario:</strong> 21:00</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Dove:</strong> Villaromagnano (AL)</span></li><li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span><strong>Ingresso:</strong> Gratuito</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg><span><strong>Età:</strong> Tutte le eta&#x27; (famiglie)</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span><strong>Contatti:</strong> <a href="tel:131892132">131.892132</a></span></li>
+    
   </ul>
-  <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3956487578405878241.jpg" alt="Locandina di S. Messa Solenne, Processione con Banda Pozzolese e Banco di Beneficenza" loading="lazy" width="900" height="1200">
+  
   <div class="ev-body">
     <p>Santa Messa Solenne con processione accompagnata dalla Banda Pozzolese R. Marenco, al termine apertura del Banco di beneficenza. Momento centrale della Festa Patronale di Villaromagnano.</p>
   </div>
   
   
-  <div class="ev-actions"><a class="btn btn-navy" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=S.+Messa+Solenne%2C+Processione+con+Banda+Pozzolese+e+Banco+di+Beneficenza&amp;dates=20260905%2F20260906&amp;details=Santa+Messa+Solenne+con+processione+accompagnata+dalla+Banda+Pozzolese+R.+Marenco%2C+al+termine+apertura+del+Banco+di+beneficenza.+Momento+centrale+della+Festa+Patronale+di+Villaromagnano.&amp;location=Villaromagnano+%28AL%29" target="_blank" rel="noopener">Aggiungi al calendario</a><a class="btn btn-teal" href="https://www.google.com/maps/search/?api=1&amp;query=44.8454469,8.8952063" target="_blank" rel="noopener">Come arrivare</a><a class="ev-back" href="/eventi.html">Torna all'agenda</a></div>
-  <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria, Asti e Cuneo. Ultimo controllo: <time datetime="2026-08-21">21 agosto 2026</time>.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20S.%20Messa%20Solenne%2C%20Processione%20con%20Banda%20Pozzolese%20e%20Banco%20di%20Beneficenza">Segnala una correzione</a></p></aside>
+  <div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi cosa c'è in programma</a></div>
+  <aside class="ev-firma"><p class="ev-firma-t">Scheda ritirata da DAOP</p><p>Questa scheda non fa piu' parte dell'agenda di <strong>DAOP – Dove Andiamo Oggi Papi</strong>: risultava in programma fino al <time datetime="2026-08-21">21 agosto 2026</time>, poi l'abbiamo tolta. Non consideriamo confermato quello che c'e' scritto in questa pagina.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota"><a href="/eventi.html">Vai all'agenda aggiornata</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20S.%20Messa%20Solenne%2C%20Processione%20con%20Banda%20Pozzolese%20e%20Banco%20di%20Beneficenza">Segnala una correzione</a></p></aside>
   <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Villaromagnano</h2><ul><li><a href="/eventi/ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Ass. Sarina Burattini e Serata gastronomica con DJ SET - Domenica 30…</span><span class="ev-vic-c">Villaromagnano</span></a></li><li><a href="/eventi/piru-e-il-cavaliere-di-mezzotacco-compagnia-walter-villaromagnano.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Pirù e il Cavaliere di Mezzotacco - Compagnia Walter Broggini</span><span class="ev-vic-c">Villaromagnano</span></a></li><li><a href="/eventi/festa-patronale-san-michele-arcangelo-in-villaroma-villaromagnano.html"><span class="ev-vic-d">sabato 5 set</span><span class="ev-vic-n">Festa Patronale San Michele Arcangelo in Villaromagnano</span><span class="ev-vic-c">Villaromagnano</span></a></li><li><a href="/eventi/giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano.html"><span class="ev-vic-d">domenica 6 set</span><span class="ev-vic-n">Giochi sotto il Campanile - Raddix Group Parrocchia San Michele…</span><span class="ev-vic-c">Villaromagnano</span></a></li><li><a href="/eventi/mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Mostra delle Illusioni - Museo dei Campionissimi</span><span class="ev-vic-c">Novi Ligure</span></a></li><li><a href="/eventi/musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Musei Aperti ad Agosto 2026 - Complesso Conventuale di San Francesco</span><span class="ev-vic-c">Alessandria</span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/villaromagnano.html">Tutti gli eventi a Villaromagnano</a> · <a href="/sagre-provincia-alessandria.html">Le sagre in provincia di Alessandria</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
   <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Villaromagnano: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
 </article>
@@ -974,7 +938,7 @@
     </div>
   </div>
 </footer>
-<div class="ev-barra-spazio" aria-hidden="true"></div><div class="ev-barra" role="group" aria-label="Azioni rapide"><a href="https://www.google.com/maps/search/?api=1&amp;query=44.8454469,8.8952063" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Come arrivare</span></a><a href="tel:131892132"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>Chiama</span></a><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=S.+Messa+Solenne%2C+Processione+con+Banda+Pozzolese+e+Banco+di+Beneficenza&amp;dates=20260905%2F20260906&amp;details=Santa+Messa+Solenne+con+processione+accompagnata+dalla+Banda+Pozzolese+R.+Marenco%2C+al+termine+apertura+del+Banco+di+beneficenza.+Momento+centrale+della+Festa+Patronale+di+Villaromagnano.&amp;location=Villaromagnano+%28AL%29" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Calendario</span></a></div>
+
 <script>
 function toggleMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}
 function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}

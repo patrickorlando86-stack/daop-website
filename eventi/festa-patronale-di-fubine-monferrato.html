@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -906,7 +919,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3942803009014192204.jpg" alt="Locandina di Festa Patronale di Fubine Monferrato 2026" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Cinque serate di festa nel cuore di Fubine Monferrato, dal 29 luglio al 2 agosto 2026, tra musica dal vivo, balli e buona cucina. Ogni sera il ristorante accoglie grandi e piccoli con apertura dalle 19:30, mentre la festa si anima con concerti, DJ set e serate danzanti.</p><p>L&#x27;edizione 2026 è anche l&#x27;occasione per celebrare i 55 anni della Pro Loco, con un gran finale che include l&#x27;elezione di Miss, Lady e Mister Fubine.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">29/07</p><ul class="ev-prog-v"><li>Merenda Sinoira e Only Us Band - Pro Loco Fubine Monferrato <span class="ev-prog-o">17:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/07</p><ul class="ev-prog-v"><li>Music &amp; Drink - DJ Set Matteo - Pro Loco Fubine Monferrato <span class="ev-prog-o">18:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">31/07</p><ul class="ev-prog-v"><li>Ballo e Divertimento con Non Plus Ultra Band - Pro Loco Fubine Monferrato <span class="ev-prog-o">19:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">01/08</p><ul class="ev-prog-v"><li>Dance Anni 70/80 e Musiche Caraibiche con I Mambo - Pro Loco Fubine Monferrato <span class="ev-prog-o">19:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">02/08</p><ul class="ev-prog-v"><li>Orchestra Spettacolo Tonia Todisco - Serata Celebrativa 55 anni Pro Loco Fubine Monferrato <span class="ev-prog-o">19:30</span></li></ul></div></div>
+    <p>Cinque serate di festa nel cuore di Fubine Monferrato, dal 29 luglio al 2 agosto 2026, tra musica dal vivo, balli e buona cucina. Ogni sera il ristorante accoglie grandi e piccoli con apertura dalle 19:30, mentre la festa si anima con concerti, DJ set e serate danzanti.</p><p>L&#x27;edizione 2026 è anche l&#x27;occasione per celebrare i 55 anni della Pro Loco, con un gran finale che include l&#x27;elezione di Miss, Lady e Mister Fubine.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">29/07</p><ul class="ev-prog-v"><li>Merenda Sinoira e Only Us Band - Pro Loco Fubine Monferrato <span class="ev-prog-o">17:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">30/07</p><ul class="ev-prog-v"><li>Music &amp; Drink - DJ Set Matteo - Pro Loco Fubine Monferrato <span class="ev-prog-o">18:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">31/07</p><ul class="ev-prog-v"><li>Ballo e Divertimento con Non Plus Ultra Band - Pro Loco Fubine Monferrato <span class="ev-prog-o">19:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">01/08</p><ul class="ev-prog-v"><li>Dance Anni 70/80 e Musiche Caraibiche con I Mambo - Pro Loco Fubine Monferrato <span class="ev-prog-o">19:30</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">02/08</p><ul class="ev-prog-v"><li>Orchestra Spettacolo Tonia Todisco - Serata Celebrativa 55 anni Pro Loco Fubine Monferrato <span class="ev-prog-o">19:30</span></li></ul></div></div>
   </div>
   
   

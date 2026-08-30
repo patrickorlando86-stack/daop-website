@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -897,7 +910,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_alessandria_3971981716781881084.webp" alt="Locandina di Acquinbanda - Festival delle Bande Musicali" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Acquinbanda è il Festival delle Bande Musicali di Acqui Terme, un weekend di festa nei giorni 19 e 20 settembre 2026 tra musica, tradizioni e buon cibo. Per due giorni le bande musicali sfileranno per le vie del centro e si esibiranno in Piazza Italia, mentre gli stand gastronomici offriranno piatti tipici e vini locali del Monferrato.</p><p>Non mancano le occasioni per mettersi alla prova: si può provare una console professionale da DJ, partecipare al Live Body Painting e cimentarsi nella gara di pigiatura dell&#x27;uva, un&#x27;attività coinvolgente per grandi e piccoli legata alle tradizioni vitivinicole del territorio.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">19/09</p><ul class="ev-prog-v"><li>Sfilata della Banda Musicale - Rovellasca Drummers <span class="ev-prog-o">17:00</span></li><li>Gusti e Sapori del Monferrato - AcquiEventi (dalle 18:00)</li><li>DJ Set - Musica Non-Stop con Dj Luca Teggi e Dj Church</li><li>Esibizione Corso per DJ - Scuola Media Robecchi di Gambolò</li><li>Diventa Protagonista! - Console Alpha Theta e Live Body Painting</li><li>Nocturna - House Music Selection con Aria DJ e Tony Serio <span class="ev-prog-o">22:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">20/09</p><ul class="ev-prog-v"><li>Sfilata delle Bande Musicali <span class="ev-prog-o">10:30</span></li><li>Gusti e Sapori del Monferrato - AcquiEventi (dalle 12:00)</li><li>Concerti delle Bande Musicali (dalle 15:30)</li><li>Gara di Pigiatura dell&#x27;Uva <span class="ev-prog-o">18:30</span></li></ul></div></div>
+    <p>Acquinbanda è il Festival delle Bande Musicali di Acqui Terme, un weekend di festa nei giorni 19 e 20 settembre 2026 tra musica, tradizioni e buon cibo. Per due giorni le bande musicali sfileranno per le vie del centro e si esibiranno in Piazza Italia, mentre gli stand gastronomici offriranno piatti tipici e vini locali del Monferrato.</p><p>Non mancano le occasioni per mettersi alla prova: si può provare una console professionale da DJ, partecipare al Live Body Painting e cimentarsi nella gara di pigiatura dell&#x27;uva, un&#x27;attività coinvolgente per grandi e piccoli legata alle tradizioni vitivinicole del territorio.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">19/09</p><ul class="ev-prog-v"><li>Sfilata della Banda Musicale - Rovellasca Drummers <span class="ev-prog-o">17:00</span></li><li>Gusti e Sapori del Monferrato - AcquiEventi (dalle 18:00)</li><li>DJ Set - Musica Non-Stop con Dj Luca Teggi e Dj Church</li><li>Esibizione Corso per DJ - Scuola Media Robecchi di Gambolò</li><li>Diventa Protagonista! - Console Alpha Theta e Live Body Painting</li><li>Nocturna - House Music Selection con Aria DJ e Tony Serio <span class="ev-prog-o">22:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">20/09</p><ul class="ev-prog-v"><li>Sfilata delle Bande Musicali <span class="ev-prog-o">10:30</span></li><li>Gusti e Sapori del Monferrato - AcquiEventi (dalle 12:00)</li><li>Concerti delle Bande Musicali (dalle 15:30)</li><li>Gara di Pigiatura dell&#x27;Uva <span class="ev-prog-o">18:30</span></li></ul></div></div>
   </div>
   
   

@@ -80,7 +80,7 @@
   "prov": "AT",
   "riga": 173,
   "slug": "a-calosso-museo-e-dintorni-agosto",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "a-calosso-museo-e-dintorni-fiera-del-rapule": {
   "anchor": "ev-2026-10-17-a-calosso-museo-e-dintorni-fiera-del-rapule",
@@ -301,7 +301,7 @@
   "prov": "AT",
   "riga": 35,
   "slug": "agosto-letterario-buttigliera-d-asti",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "agosto-morsasco": {
   "adatto_famiglie": "Si",
@@ -358,7 +358,7 @@
   "prov": "AT",
   "riga": 66,
   "slug": "agosto-vinchio",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "al-di-d-la-festa-casorzo-monferrato": {
   "adatto_famiglie": "Si",
@@ -386,7 +386,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "al-di-d-la-festa-casorzo-monferrato",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "al-di-dla-festa-morano-sul-po": {
   "anchor": "ev-2026-09-04-al-di-dla-festa-morano-sul-po-2026",
@@ -921,7 +921,7 @@
   "prov": "AL",
   "riga": 171,
   "slug": "assaggia-casalnoceto",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "automotoraduno-memorial-gianfranco-ardrizzi-comune-castelnuovo-belbo": {
   "adatto_famiglie": "Si",
@@ -950,7 +950,7 @@
   "prov": "AT",
   "riga": 192,
   "slug": "automotoraduno-memorial-gianfranco-ardrizzi-comune-castelnuovo-belbo",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "barbaluc-cantastorie-nel-bosco-della-trebulina-paesana": {
   "anchor": "ev-2026-08-14-barbaluc-cantastorie-nel-bosco-della-trebulina",
@@ -1005,8 +1005,8 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 176,
-  "ritirata": "2026-08-18",
   "slug": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-alba",
+  "spostata": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba",
   "updated": "2026-08-30"
  },
  "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba": {
@@ -1346,7 +1346,7 @@
   "prov": "AT",
   "riga": 283,
   "slug": "camminata-tra-boschi-e-stelle-parrocchia-santi-roc-dusino-san-michele",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "camminata-tra-i-vigneti-la-camminata-di-san-cristo-san-cristoforo": {
   "anchor": "ev-2026-09-06-camminata-tra-i-vigneti-la-camminata-di-san-cristo",
@@ -1458,7 +1458,7 @@
   "prov": "AL",
   "ritirata": "2026-08-18",
   "slug": "casalnoceto-kids",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "casalnoceto-kids-comune-di-casalnoceto": {
   "adatto_famiglie": "Si",
@@ -1516,7 +1516,7 @@
   "prov": "AT",
   "riga": 119,
   "slug": "casorzo-monferrato-al-di-d-la-festa",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "castelli-aperti-a-ferragosto-acqui-terme": {
   "anchor": "ev-2026-08-15-castelli-aperti-a-ferragosto",
@@ -1570,7 +1570,7 @@
   "prov": "AT",
   "riga": 268,
   "slug": "castelli-aperti-a-ferragosto-area-del-castello-castelnuovo-calcea",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "castelli-aperti-a-ferragosto-gipsoteca-giulio-mont-bistagno": {
   "anchor": "ev-2026-08-15-castelli-aperti-a-ferragosto-gipsoteca-giulio-mont",
@@ -1680,7 +1680,7 @@
   "prov": "AT",
   "riga": 70,
   "slug": "castello-di-monastero-bormida-castelli-aperti",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "castello-e-mercato-medievale-di-san-rocco-con-visi-monastero-bormida": {
   "anchor": "ev-2026-08-16-castello-e-mercato-medievale-di-san-rocco-con-visi",
@@ -1707,7 +1707,7 @@
   "prov": "AT",
   "riga": 272,
   "slug": "castello-e-mercato-medievale-di-san-rocco-con-visi-monastero-bormida",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "cena-al-sacco-sotto-le-piante-con-dj-mbc-pro-loco-cabella-ligure": {
   "adatto_famiglie": "Si",
@@ -1764,6 +1764,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 110,
+  "ritirata": "2026-08-30",
   "slug": "cena-antipasti-piemontesi-e-ballo-con-orchestra-ra-sant-albano-stura",
   "updated": "2026-08-30"
  },
@@ -1850,7 +1851,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "cena-di-raviore-con-berruto-band-catering-sandra-e-vesime",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "cena-in-piazza-con-musica-anni-90-nuova-pro-loco-d-strevi": {
   "anchor": "ev-2026-08-14-cena-in-piazza-con-musica-anni-90-2000-nuova-pro-l",
@@ -1934,7 +1935,7 @@
   "prov": "AL",
   "riga": 0,
   "slug": "cena-in-piazza-musica-con-nico-e-franz-casalnoceto",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "cena-in-piazza-musica-tributo-ai-queen-casalnoceto": {
   "adatto_famiglie": "Si",
@@ -1962,7 +1963,7 @@
   "prov": "AL",
   "riga": 38,
   "slug": "cena-in-piazza-musica-tributo-ai-queen-casalnoceto",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "cena-nutella-party-e-dj-set-con-music-power-pro-lo-morsasco": {
   "adatto_famiglie": "Si",
@@ -2103,7 +2104,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "cinema-all-aperto-bad-guys-troppo-cattivi-oratorio-nizza-monferrato",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "cinema-in-piazzetta-moulin-rouge-pro-loco-sanse-san-sebastiano-curone": {
   "adatto_famiglie": "Da verificare",
@@ -2273,7 +2274,7 @@
   "prov": "AL",
   "riga": 201,
   "slug": "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-alba": {
   "adatto_famiglie": "Si",
@@ -2300,8 +2301,8 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 218,
-  "ritirata": "2026-08-18",
   "slug": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-alba",
+  "spostata": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba",
   "updated": "2026-08-30"
  },
  "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba": {
@@ -2694,7 +2695,7 @@
   "prov": "AT",
   "riga": 174,
   "slug": "dj-toyu-cunicosummerfestival-pro-loco-cunico",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "dolcemiele-dispari-teatro-sambuco": {
   "adatto_famiglie": "Si",
@@ -3056,7 +3057,7 @@
   "prov": "AT",
   "riga": 240,
   "slug": "fasta-d-san-roch-cena-con-musica-anni-80-90-00-vesime",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "ferragosto-al-castello-pro-loco-villa-di-verzuolo": {
   "adatto_famiglie": "Si",
@@ -3249,7 +3250,7 @@
   "prov": "AT",
   "riga": 118,
   "slug": "festa-d-estate-cassinasco",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-d-estate-ponzano-monferrato": {
   "adatto_famiglie": "Si",
@@ -3473,9 +3474,9 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
   "riga": 34,
-  "ritirata": "2026-08-18",
   "slug": "festa-del-fungo-pro-loco-ciglione",
-  "updated": "2026-08-29"
+  "spostata": "festa-del-fungo-pro-loco-ciglione-ponzone",
+  "updated": "2026-08-30"
  },
  "festa-del-fungo-pro-loco-ciglione-ponzone": {
   "adatto_famiglie": "Si",
@@ -3638,6 +3639,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 0,
+  "ritirata": "2026-08-30",
   "slug": "festa-dell-uva-castello-medievale-di-pornassio",
   "updated": "2026-08-30"
  },
@@ -3667,9 +3669,9 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 33,
-  "ritirata": "2026-08-18",
   "slug": "festa-dell-uva-e-del-vino-pro-loco-ciglione",
-  "updated": "2026-08-29"
+  "spostata": "festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone",
+  "updated": "2026-08-30"
  },
  "festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone": {
   "adatto_famiglie": "Si",
@@ -3864,7 +3866,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "slug": "festa-della-pizza-margherita-novi-ligure",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "festa-della-vendemmia-a-valli-unite-costa-vescovato": {
   "adatto_famiglie": "Da verificare",
@@ -4227,7 +4229,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "festa-di-san-rocco-celle-enomondo",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-di-san-rocco-pro-loco-montiglio-monferrato": {
   "adatto_famiglie": "Si",
@@ -4255,7 +4257,7 @@
   "prov": "AT",
   "riga": 154,
   "slug": "festa-di-san-rocco-pro-loco-montiglio-monferrato",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-gastronomica-della-peirbuieira-rocca-grimalda": {
   "anchor": "ev-2026-08-27-festa-gastronomica-della-peirbuieira",
@@ -4339,7 +4341,7 @@
   "prov": "AT",
   "riga": 90,
   "slug": "festa-patronale-di-castel-boglione",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-patronale-di-fubine-monferrato": {
   "adatto_famiglie": "Si",
@@ -4423,7 +4425,7 @@
   "prov": "AT",
   "riga": 119,
   "slug": "festa-patronale-di-san-bartolomeo-cunico",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-patronale-di-san-desiderio-castelnuovo-scrivia": {
   "adatto_famiglie": "Si",
@@ -4479,7 +4481,7 @@
   "prov": "AT",
   "riga": 59,
   "slug": "festa-patronale-di-san-felice-cinaglio",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba": {
   "adatto_famiglie": "Si",
@@ -4507,7 +4509,7 @@
   "prov": "AL",
   "riga": 69,
   "slug": "festa-patronale-di-san-lorenzo-comune-di-castellet-castelletto-d-orba",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-patronale-di-san-rocco-carbonara-scrivia": {
   "adatto_famiglie": "Si",
@@ -4700,6 +4702,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 194,
+  "ritirata": "2026-08-30",
   "slug": "festa-patronale-osasco",
   "updated": "2026-08-30"
  },
@@ -4812,7 +4815,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "festa-pro-loco-di-moransengo",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festa-sull-aia-pianlago-ponzone": {
   "adatto_famiglie": "Si",
@@ -4868,7 +4871,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "feste-di-san-rocco-castelnuovo-don-bosco",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festeggiamenti-patronali-di-s-rocco-parrocchia-san-dusino-san-michele": {
   "adatto_famiglie": "Si",
@@ -4897,7 +4900,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "festeggiamenti-patronali-di-s-rocco-parrocchia-san-dusino-san-michele",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festeggiamenti-patronali-di-san-rocco-castelnuovo-belbo": {
   "adatto_famiglie": "Si",
@@ -4925,7 +4928,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "festeggiamenti-patronali-di-san-rocco-castelnuovo-belbo",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "festeggiamenti-patronali-sant-agostino-ferrere": {
   "adatto_famiglie": "Si",
@@ -5092,7 +5095,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "slug": "fiera-di-agosto-novi-ligure",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "fiera-di-s-fermo-pro-loco-roccaforte-roccaforte-ligure": {
   "adatto_famiglie": "Si",
@@ -5176,6 +5179,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 93,
+  "ritirata": "2026-08-30",
   "slug": "fiera-e-street-food-domenica-6-settembre-villaromagnano",
   "updated": "2026-08-30"
  },
@@ -5425,7 +5429,7 @@
   "prov": "AT",
   "riga": 168,
   "slug": "frinco",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "fritto-di-pesce-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -5508,7 +5512,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "gioca-con-la-c-r-i-croce-rossa-italiana-comitato-d-sampeyre": {
   "anchor": "ev-2026-08-22-gioca-con-la-c-r-i-croce-rossa-italiana-comitato-d",
@@ -5734,7 +5738,7 @@
   "prov": "CN",
   "riga": 93,
   "slug": "govone-in-festa-sagra-della-lumaca",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "gran-fritto-misto-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -5762,6 +5766,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 106,
+  "ritirata": "2026-08-30",
   "slug": "gran-fritto-misto-pro-loco-sant-albano-stura",
   "updated": "2026-08-30"
  },
@@ -5791,7 +5796,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
   "slug": "gran-grigliata-con-intrattenimento-musicale-pro-lo-roatto",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "grande-festa-di-ferragosto-pro-loco-crissolo": {
   "adatto_famiglie": "Si",
@@ -5876,7 +5881,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "grigliata-di-ferragosto-s-m-s-cunico",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "guida-per-un-giorno-parco-del-monviso-casteldelfino": {
   "adatto_famiglie": "Si",
@@ -6974,7 +6979,7 @@
   "prov": "AT",
   "riga": 120,
   "slug": "le-500-nel-monferrato-fiat-500-club-italia-coordin-montemagno",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "le-perseidi-incontrano-l-eclissi-di-sole-sinoira-c-castelnuovo-scrivia": {
   "adatto_famiglie": "Si",
@@ -7115,7 +7120,7 @@
   "prov": "AT",
   "riga": 208,
   "slug": "letture-e-laboratori-creativi-biblioteca-comunale-buttigliera-d-asti",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "lirica-in-piazza-x-edizione-associazione-stazzanes-stazzano": {
   "adatto_famiglie": "Si",
@@ -7309,6 +7314,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 103,
+  "ritirata": "2026-08-30",
   "slug": "messa-solenne-e-giochi-popolari-pro-loco-sant-alba-sant-albano-stura",
   "updated": "2026-08-30"
  },
@@ -7675,7 +7681,7 @@
   "prov": "AT",
   "riga": 175,
   "slug": "orchestra-spettacolo-luigi-gallia-pro-loco-cunico",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "osserviamo-il-cielo-baladin-open-garden-piozzo": {
   "anchor": "ev-2026-08-25-osserviamo-il-cielo-baladin-open-garden",
@@ -8066,7 +8072,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "pesci-di-ferragosto-in-piscina-informalmente-a-s-d-vesime",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "piccole-escursioni-per-bambini-forte-pernante-dal-limone-piemonte": {
   "anchor": "ev-2026-08-19-piccole-escursioni-per-bambini-forte-pernante-dal",
@@ -8177,7 +8183,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "pigiama-party-pro-loco-mongardino",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "piru-e-il-cavaliere-di-mezzotacco-compagnia-walter-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -8428,6 +8434,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 104,
+  "ritirata": "2026-08-30",
   "slug": "porchetta-e-ballo-con-orchestra-borsa-dei-castelli-sant-albano-stura",
   "updated": "2026-08-30"
  },
@@ -8544,7 +8551,7 @@
   "prezzo": "Gratuito (pranzo offerto a chi porta il proprio mezzo)",
   "prov": "AT",
   "slug": "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "programma-festeggiamenti-pro-loco-san-benigno": {
   "adatto_famiglie": "Si",
@@ -8600,7 +8607,7 @@
   "prov": "AT",
   "riga": 0,
   "slug": "proiezione-le-colline-del-mare-comune-di-santo-ste-vesime",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "quello-che-non-vedo-barbagianni-editore-sarvego-fe-carrega-ligure": {
   "anchor": "ev-2026-08-22-quello-che-non-vedo-barbagianni-editore-sarvego-fe",
@@ -8684,7 +8691,7 @@
   "prezzo": "Gratuito (giostra a 1,00 €)",
   "prov": "AT",
   "slug": "rassegna-gastronomica-sagra-del-guanciotto-d-asino-montiglio-monferrato",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "raviolata-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -8740,7 +8747,7 @@
   "prov": "AT",
   "riga": 170,
   "slug": "rewined-festival-mombercelli",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "ricordi-da-conservare-letture-e-laboratorio-creati-limone-piemonte": {
   "anchor": "ev-2026-08-29-ricordi-da-conservare-letture-e-laboratorio-creati",
@@ -8824,6 +8831,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 92,
+  "ritirata": "2026-08-30",
   "slug": "s-messa-solenne-processione-con-banda-pozzolese-e-villaromagnano",
   "updated": "2026-08-30"
  },
@@ -9184,7 +9192,7 @@
   "prov": "AT",
   "riga": 169,
   "slug": "sagra-dell-aglio-e-del-tacchino-festa-di-san-berna-buttigliera-d-asti",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "sagra-dell-agnolotto-e-del-bollito-misto-con-alex-govone": {
   "adatto_famiglie": "Si",
@@ -9269,7 +9277,7 @@
   "riga": 223,
   "ritirata": "2026-08-18",
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-pro-loco-govone",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "sagra-dell-agnolotto-pecetto-di-valenza": {
   "anchor": "ev-2026-08-27-sagra-dell-agnolotto-2026",
@@ -9461,7 +9469,7 @@
   "prov": "AT",
   "riga": 171,
   "slug": "sagra-della-tagliatella-al-tartufo-cortazzone",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "sagra-della-trippa-novi-ligure": {
   "adatto_famiglie": "Si",
@@ -9489,7 +9497,7 @@
   "prov": "AL",
   "riga": 16,
   "slug": "sagra-della-trippa-novi-ligure",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "sagra-della-zucca-castelletto-monferrato": {
   "adatto_famiglie": "Si",
@@ -9629,6 +9637,7 @@
   "prov": "CN",
   "riga": 86,
   "slug": "sagra-dello-gnocco-festa-patronale-mombarcaro",
+  "spostata": "sagra-dello-gnocco-festa-patronale-cherasco",
   "updated": "2026-08-30"
  },
  "sagra-dello-stufato-d-asino-calliano-monferrato": {
@@ -9938,7 +9947,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "san-lorenzo-pro-loco-di-scurzolengo",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "santa-messa-nella-chiesa-di-san-rocco-pro-loco-roc-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -10308,7 +10317,7 @@
   "riga": 226,
   "ritirata": "2026-08-18",
   "slug": "serata-hamburger-patatine-e-birra-pro-loco-canove-govone",
-  "updated": "2026-08-28"
+  "updated": "2026-08-30"
  },
  "serata-latina-salsabor-pro-loco-cunico": {
   "adatto_famiglie": "Si",
@@ -10336,7 +10345,7 @@
   "prov": "AT",
   "riga": 178,
   "slug": "serata-latina-salsabor-pro-loco-cunico",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "sere-fai-d-estate-camminata-sotto-la-luna-al-caste-manta": {
   "anchor": "ev-2026-08-28-sere-fai-d-estate-camminata-sotto-la-luna-al-caste",
@@ -10698,6 +10707,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 94,
+  "ritirata": "2026-08-30",
   "slug": "street-food-showlab-con-nico-franz-e-presentazione-villaromagnano",
   "updated": "2026-08-30"
  },
@@ -10840,7 +10850,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "tigliole-in-festa",
-  "updated": "2026-08-29"
+  "updated": "2026-08-30"
  },
  "tombola-sotto-le-stelle-pro-loco-canove-govone": {
   "adatto_famiglie": "Si",

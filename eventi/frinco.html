@@ -302,6 +302,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -798,7 +811,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-20",
-      "dateModified": "2026-08-29",
+      "dateModified": "2026-08-30",
       "lastReviewed": "2026-08-24"
     },
     {
@@ -906,7 +919,7 @@
   </ul>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3966889755463475559.webp" alt="Locandina di Frinco 2026" loading="lazy" width="900" height="1200">
   <div class="ev-body">
-    <p>Cinque serate di festa a Frinco, dal 20 al 24 agosto 2026, nella tensostruttura Palageo. Ogni sera a partire dalle ore 20 è attivo lo stand gastronomico con antipasti, agnolotti alla frinchese, gnocchi, grigliata, carpione e dolci.</p><p>Il programma include musica dal vivo, ballo, animazione e, nel weekend, anche il 4° Raduno Vespa e il tradizionale Gran Polentone con premiazione del Concorso Fotografico &quot;Sguardi su Frinco&quot;.</p><h2 class="ev-prog-h">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">20/08</p><ul class="ev-prog-v"><li>Si balla con DJ Toyu - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Concerto della Cerot Band e DJ Catalin - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Serata Latina con Salsabor - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>4° Raduno Vespa e Tour e Aperitivo Finale - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">17:00</span></li><li>Serata Spettacolo e Dance con JDrummer DJ &amp; Catalin Sax - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/08</p><ul class="ev-prog-v"><li>Si balla con Liscio 2000 e Tradizionale Gran Polentone - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">19:30</span></li></ul></div></div>
+    <p>Cinque serate di festa a Frinco, dal 20 al 24 agosto 2026, nella tensostruttura Palageo. Ogni sera a partire dalle ore 20 è attivo lo stand gastronomico con antipasti, agnolotti alla frinchese, gnocchi, grigliata, carpione e dolci.</p><p>Il programma include musica dal vivo, ballo, animazione e, nel weekend, anche il 4° Raduno Vespa e il tradizionale Gran Polentone con premiazione del Concorso Fotografico &quot;Sguardi su Frinco&quot;.</p><h2 class="ev-prog-h" id="programma">Programma</h2><div class="ev-prog"><div class="ev-prog-g"><p class="ev-prog-d">20/08</p><ul class="ev-prog-v"><li>Si balla con DJ Toyu - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">21/08</p><ul class="ev-prog-v"><li>Concerto della Cerot Band e DJ Catalin - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">22/08</p><ul class="ev-prog-v"><li>Serata Latina con Salsabor - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">23/08</p><ul class="ev-prog-v"><li>4° Raduno Vespa e Tour e Aperitivo Finale - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">17:00</span></li><li>Serata Spettacolo e Dance con JDrummer DJ &amp; Catalin Sax - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">20:00</span></li></ul></div><div class="ev-prog-g"><p class="ev-prog-d">24/08</p><ul class="ev-prog-v"><li>Si balla con Liscio 2000 e Tradizionale Gran Polentone - Pro Loco Antico Marchesato di Frinco <span class="ev-prog-o">19:30</span></li></ul></div></div>
   </div>
   
   
