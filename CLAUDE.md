@@ -2284,6 +2284,95 @@ query per 173 impressioni, `tartufo` 1 per 7. E il sito gira a 14.000 clic al
 mese **su un mese che ha 89 eventi in agenda**, mentre ottobre ne ha 6: la
 sezione qui sotto resta l'unica cosa urgente di tutto questo export.
 
+#### Il 28 agosto rompe i mille, ed è un venerdì
+
+Export del 30/08/2026, finestra **01-28/08** (28 giorni): **11.823 clic, 151.851
+impressioni, CTR 7,79%, posizione 6,13**. Il giorno è questo:
+
+| giorno | clic | impressioni | CTR | pos |
+|---|---|---|---|---|
+| sab 8/8 | 603 | 6.112 | 9,87% | 6,0 |
+| sab 15/8 (Ferragosto) | 787 | 11.685 | 6,74% | 6,2 |
+| sab 22/8 (vecchio record) | 829 | 11.493 | 7,21% | 6,1 |
+| **ven 28/8** | **1.015** | **11.831** | **8,58%** | **6,0** |
+
+Primo giorno a quattro cifre, **+22% sul record precedente e +76% sul venerdì
+prima** (577). E vale la regola del consolidamento all'indietro già scritta:
+il 28 è l'ultimo giorno dell'export, quindi **vale probabilmente ~10% in più**
+di quello che dice — il record vero sta intorno a 1.100.
+
+**Il sabato non è ancora nell'export**, ed è la domanda che viene subito dopo.
+Search Console ha due-tre giorni di ritardo, quindi il 29 si legge il 1°
+settembre e non prima. Quello che si può dire adesso: in quattro settimane il
+sabato ha battuto il proprio venerdì **tre volte su tre** (8>7, 15>14, 22>21),
+con rapporti fra 1,05 e 2,24. Applicati a 1.015 danno una forchetta larghissima
+— 1.070-2.200 — cioè **non si stima, si aspetta l'export**. La sola cosa che il
+dato dice è la direzione.
+
+**La notizia però non è il picco, è il pavimento: la settimana feriale è
+raddoppiata.** Confronto fra giorni omologhi, l'unico onesto:
+
+| | 17-21/08 | 24-28/08 |
+|---|---|---|
+| lun-ven | 1.821 | **3.062** (+68%) |
+| mar-mer-gio | 812 | **1.652** (+103%) |
+
+Il 21/08 qui era scritto che il pavimento feriale «non si era mosso» (-5% sui
+martedì). Adesso si è mosso, e in su. **Questa è la risposta alla scommessa del
+15 settembre**, con due settimane d'anticipo: la tabella delle soglie dà «sopra
+150 clic/giorno = non c'è più una stagione da temere» e i feriali del 25-27
+agosto fanno 513, 521 e 618. La riga è la terza, con un margine di tre volte.
+
+E non è più agosto a spiegarlo: in agenda al 30/08 restano **50 eventi in agosto
+contro 122 a settembre**. Il picco del 28 arriva mentre la stagione delle sagre
+sta finendo, non nel suo mezzo.
+
+Le quote per famiglia non si muovono di nulla (schede 74,6%, `sagre-provincia-*`
+11,3%, `eventi.html` 6,1%), e **il buco di `eventi.html` cresce ancora**: 26.797
+impressioni al 2,71%. È la quarta lettura consecutiva in crescita — 19.563 →
+20.973 → 22.847 → **26.797** — sempre intorno al 2,7%.
+
+##### Le AI features: 11,7% delle impressioni, e l'export non dice i clic
+
+Prima lettura del file **Prestazioni su Funzionalità AI generativa** (stesso
+giorno, stessa finestra). La cosa da sapere prima di citarlo: **porta solo le
+impressioni, non i clic.** Quindi la domanda che tutti fanno — «le AI Overviews
+ci rubano il traffico?» — in questo file **non ha risposta**, e chi la trova
+l'ha dedotta.
+
+**17.717 impressioni su 151.851, cioè l'11,7%**, quasi tutte italiane (17.504) e
+di telefono (15.265). La quota **sale**: 8,4% il 15 agosto, 13,6% il 28.
+
+L'indizio indiretto è che non stanno facendo danno, ed è controintuitivo: **le
+schede con la quota AI più alta hanno il CTR più alto del sito.**
+
+| scheda | quota AI | CTR |
+|---|---|---|
+| Belforte Monferrato | 29,6% | 14,12% |
+| Castel Boglione | 26,6% | **27,30%** |
+| Carpeneto | 26,3% | 16,98% |
+| `/eventi.html` | **6,9%** | 2,71% |
+
+L'ultima riga è la più interessante: la pagina più esposta alle query generiche
+è **la meno presa** dalle AI features. Cioè le funzionalità AI seguono il nome
+proprio, come tutto il resto del sito — e il fossato regge anche lì. Non è una
+prova (senza i clic non lo può essere), è l'unica cosa che il file permette di
+dire, e va detta con quella cautela.
+
+##### La zucca si accende, e il brand raddoppia da niente
+
+Sulle 1.000 query visibili (3.237 clic, il 27% del traffico): `halloween`,
+`castagn`, `presep`, `natal`, `fungh` **zero**, come nei tre export precedenti.
+Ma `zucca` fa **6 query per 622 impressioni** (era 3 per 173 il 24/08), `vendemm`
+2 per 55, `tartufo` 1 per 17. **È il primo segnale d'autunno che si muove**, ed
+è puntuale rispetto alla tabella delle scadenze: la domanda si accende prima
+dell'evento, e le schede devono esserci prima della domanda.
+
+Il brand: **`daop` fa 10 clic su 14 impressioni**, contro 4 su 7 dell'export
+precedente. Raddoppia e resta niente in assoluto — ma la curva che il 24/08 era
+«piatta a zero» ha smesso di esserlo. Si rilegge a ogni export, come già scritto:
+è il KPI del cavallo di Troia, e si guarda la curva, non il valore.
+
 #### L'imbuto si è accorciato, e ottobre è vuoto
 
 Questo sì è un allarme, ed è l'unico di questo export. Al 24/08 l'agenda viva ha
@@ -2301,6 +2390,13 @@ di poco: porterebbe le righe verso il 24 ottobre.
 Non è un problema di codice e non si risolve nel generatore: è raccolta, e va
 fatta apposta. La finestra utile per non perdere Halloween 2026 si apre **adesso**
 e si chiude a inizio ottobre.
+
+**Al 30/08 non è cambiato niente, e sono sei giorni in meno.** L'agenda viva ha
+**50 eventi in agosto, 122 a settembre, 7 a ottobre**, 1 a novembre, 1 a
+dicembre: settembre ha preso altre 35 righe in sei giorni, ottobre **una**. Nel
+frattempo l'export dice che la domanda d'autunno comincia ad accendersi (`zucca`
+622 impressioni). È l'unica cosa urgente di questi export, per la terza volta di
+fila, e la scadenza del ~10 ottobre è più vicina di sei giorni.
 
 #### Il CTR del giorno dopo una festa non è il CTR del sito
 
