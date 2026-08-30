@@ -2529,15 +2529,29 @@ E prendere una stagione nuova è **veloce**: la scheda di Cassinasco è nata il 
 agosto ed era in posizione 1,13 entro l'8. Cinque giorni, perché su quelle query
 non c'è concorrenza.
 
-##### Ma lo slug si ricava dal nome, e il nome lo riscrive una persona
+##### Ma lo slug si ricava dal nome, e il nome lo scrive un modello
 
 Chiuso il 30/08/2026, partendo da una domanda di Patrick: *«dobbiamo beccare lo
 stesso nome per aggiornare la pagina — riusciremo?»*. Era la domanda giusta, e
 la risposta misurata era **no**.
 
 `slug_evento()` toglieva l'anno e il numero di edizione in cifre, ma lo slug
-resta una funzione del **nome scritto nel foglio**, che ogni anno riscrive una
-persona guardando una locandina diversa. Due buchi, misurati sul registro:
+resta una funzione del **nome scritto nel foglio**, e quel nome non lo batte una
+persona: lo scrive `daop_pipeline.py` facendo **leggere la locandina a un
+modello**. Cambia due cose, e vanno tenute distinte:
+
+- **la deriva è correlata, non sparsa.** La coda `- Organizzatore` non compare a
+  caso: è la convenzione che il prompt di visione impone (`"titolo del singolo
+  appuntamento - Organizzatore"`). Quindi o c'è su tutte o non c'è su nessuna, e
+  il giorno che il prompt o il modello cambiano si spostano **107 indirizzi
+  insieme**. È lo scenario peggiore, ed è per questo che la misura qui sotto è
+  fatta proprio su quello — tutte le code che cadono nello stesso momento.
+- **la leva vera è a monte, e non è in questo repo.** Un nome che torna uguale
+  si ottiene dal prompt, o passandogli il nome dell'edizione precedente. Il
+  downloader gira sul PC di Patrick: da qui non si tocca, e il riaggancio è
+  quello che si può fare da questa parte.
+
+Due buchi, misurati sul registro:
 
 | | quante | il caso che costa |
 |---|---|---|
@@ -2602,6 +2616,29 @@ mesi: `scripts/prova_riaggancio.py`, offline, due secondi, dopo il commit come
 marcita prima di servire. L'invariante che difende non è «riaggancia tutto», è
 **«nessuna edizione scrive sulla pagina di un altro evento»**: la prima è una
 percentuale che può scendere senza che niente sia rotto, la seconda è un danno.
+
+**E non è un problema del 2027: succede gia' adesso.** Se lo stesso volantino
+viene letto due volte, esce con due frasi diverse — nel registro del 30/08/2026
+sono **cinque coppie**, stesso comune e stesso identico giorno: «Apertura Stand
+Gastronomico **con** Shary Band» e «… **e** Shary Band» (Rocchetta Tanaro, tre
+serate, cioè **sei pagine per tre eventi**, e tutte e sei vive), «Casalnoceto
+Kids» con e senza «- Comune di Casalnoceto», «Ciao Ciao Estate! Sorprese per
+Tutti» e «Laboratorio: Ciao Ciao Estate… Sorprese per Tutti!».
+
+`segnala_doppioni()` non le vedeva, e per una ragione precisa: **confronta lo
+slug esatto**, cioè riconosce la riga *copiata* e non la riga *riletta*. Ora
+`_doppioni_riscritti()` fa lo stesso confronto del riaggancio (`_chiave_nome` +
+soglia) ma con la finestra a **zero giorni** — stesso comune e stessa data di
+inizio. Con una finestra larga prenderebbe le serate diverse della stessa sagra,
+che doppioni non sono. Si **segnala e basta**, come per i doppioni esatti: unire
+due righe è una decisione editoriale e si prende nel foglio.
+
+La prova su questo **non conta le coppie di oggi**: sarebbe rossa il giorno che
+Patrick pulisce il foglio, cioè quando il sito fa la cosa giusta — è la sesta
+volta che quel tipo di prova si sarebbe rotta da sé. Controlla il
+comportamento: due letture dello stesso volantino sono un avviso, due eventi
+diversi nello stesso giorno no, una ricorrenza no, due serate della stessa sagra
+no.
 
 Un caso vero trovato scrivendola, che sembrava un aggancio sbagliato e non lo
 era: nel foglio lo stesso laboratorio di Crissolo è finito su **due righe**, una

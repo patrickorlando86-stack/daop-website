@@ -2066,6 +2066,53 @@ def segnala_date_ignote(events):
               f"{(e.get('citta') or '?')[:16]:16} {(e.get('nome') or '')[:44]}{spia}")
 
 
+# Il criterio dello slug esatto riconosce la riga COPIATA, non la riga RILETTA:
+# il nome nel foglio lo scrive il downloader facendo leggere la locandina a un
+# modello, e lo stesso volantino letto due volte esce con due frasi diverse.
+# Nel registro del 30/08/2026 ce ne sono cinque coppie, stesso comune e stesso
+# identico giorno: "Apertura Stand Gastronomico CON Shary Band" e "... E Shary
+# Band" (Rocchetta Tanaro, tre serate, sei pagine per tre eventi), "Casalnoceto
+# Kids" con e senza "- Comune di Casalnoceto", "Ciao Ciao Estate! Sorprese per
+# Tutti" e "Laboratorio: Ciao Ciao Estate... Sorprese per Tutti!". Sono doppioni
+# a tutti gli effetti e segnala_doppioni() non li vedeva, perche' guarda una
+# stringa che il modello non ha nessun motivo di ripetere uguale.
+#
+# Il confronto e' lo stesso del riaggancio (_chiave_nome + soglia), ma qui la
+# finestra e' zero giorni: stesso comune e STESSA data di inizio. Con una
+# finestra larga prenderebbe le serate diverse della stessa sagra, che doppioni
+# non sono.
+#
+# Si SEGNALA e basta, come per i doppioni esatti e le durate assurde: unire due
+# righe e' una decisione editoriale, e si prende nel foglio.
+def _doppioni_riscritti(events, gia_visti):
+    """Elenca le righe che sono lo stesso evento scritto con parole diverse."""
+    per_giorno = collections.defaultdict(list)
+    for e in events:
+        citta = (e.get('citta') or '').strip().lower()
+        if citta:
+            per_giorno[(citta, e['d_start'])].append(e)
+    coppie = []
+    for (citta, giorno), gruppo in per_giorno.items():
+        for i, a in enumerate(gruppo):
+            for b in gruppo[i + 1:]:
+                sa, sb = slug_evento(a), slug_evento(b)
+                if sa == sb:
+                    continue  # lo prende gia' il criterio esatto
+                ka, kb = _chiave_nome(a.get('nome')), _chiave_nome(b.get('nome'))
+                unione = ka | kb
+                if unione and len(ka & kb) / len(unione) >= SOGLIA_RIAGGANCIO:
+                    coppie.append((giorno, a, b))
+    if not coppie:
+        return
+    print(f"[genera_eventi] ATTENZIONE: {len(coppie)} coppie di righe sono lo "
+          f"stesso evento scritto in due modi (due pagine per un appuntamento "
+          f"solo, si uniscono a mano nel foglio):")
+    for giorno, a, b in sorted(coppie, key=lambda c: c[0]):
+        print(f"    {giorno.strftime('%d/%m')} {(a.get('citta') or '')[:18]:18} "
+              f"{_rif(a)} \"{(a.get('nome') or '')[:40]}\"")
+        print(f"                              {_rif(b)} \"{(b.get('nome') or '')[:40]}\"")
+
+
 def segnala_doppioni(events):
     """Elenca gli eventi inseriti piu' volte nel foglio.
 
@@ -2082,6 +2129,7 @@ def segnala_doppioni(events):
     for e in events:
         g[(slug_evento(e), e['d_start'])].append(e)
     doppi = {k: v for k, v in g.items() if len(v) > 1}
+    _doppioni_riscritti(events, doppi)
     if not doppi:
         return
     print(f"[genera_eventi] ATTENZIONE: {len(doppi)} eventi ripetuti nel foglio "
