@@ -51,6 +51,13 @@ module.exports = async function scheda(browser) {
 
   for (const f of file) {
     const slug = f.slice(0, -5);
+    // Le schede SPOSTATE non hanno un corpo, ed e' voluto: una correzione (il
+    // comune, il nome) ha cambiato l'indirizzo della pagina, e questa e'
+    // rimasta come cartello verso quella nuova. Il registro conserva la
+    // descrizione vecchia - che e' proprio quella che non deve piu' stare in
+    // pagina - quindi senza questa riga la prova cercherebbe qui il testo che
+    // abbiamo tolto apposta.
+    if ((registro[slug] || {}).spostata) continue;
     const descr = ((registro[slug] || {}).descr || '').trim();
     if (!descr) continue;
     const html = fs.readFileSync(path.join(RADICE, 'eventi', f), 'utf8');
@@ -153,6 +160,81 @@ module.exports = async function scheda(browser) {
     }), 'sotto i 520px la data va sopra le voci, non accanto');
     await ctx.close();
   }
+
+  // ── 5. la riga dell'agenda: la stessa prosa, il programma no ──────────
+  // eventi.html e' l'altra meta' di questa decisione. La riga impagina la
+  // prosa esattamente come la scheda, ma la coda "Programma:" esce e diventa
+  // un rimando (descrizione_riga in genera_eventi.py): la riga si scorre, la
+  // scheda si legge.
+  //
+  // Le prove sono due e nessuna rifa' il lavoro del generatore. La prima e' la
+  // stessa del punto 1 sull'altra superficie: la prosa non perde ne' aggiunge
+  // una parola. La seconda e' quella che il generatore da solo non puo'
+  // garantire - il numero promesso dalla riga dev'essere quello che la scheda
+  // consegna, se no la riga mente su una pagina che chi legge non ha ancora
+  // aperto - e con lei l'ancora #programma: un'ancora che non esiste scarica
+  // in cima a una pagina lunga, che e' peggio di nessun link.
+  r.titolo('eventi.html — la descrizione dentro la riga');
+  const agenda = fs.readFileSync(path.join(RADICE, 'eventi.html'), 'utf8');
+  const feed = JSON.parse(fs.readFileSync(path.join(RADICE, 'data', 'eventi.json'), 'utf8'));
+  const perAncora = new Map(feed.map((e) => [e.anchor, e]));
+  // Lo stesso marcatore di PROG_MARCA: "Programma:" vale solo se apre una
+  // frase. Riscritto qui perche' e' il confine del confronto, non la logica.
+  const MARCA = /(?:^|(?<=[.!?])\s+)Programma:\s*/i;
+  const RIGA = /<article class="event-card[^>]*id="([^"]+)"[\s\S]*?<div class="event-desc">([\s\S]*?)<\/div>/g;
+  const RIM = /<p class="ev-prog-rim"><a href="([^"]+)">([^<]*)<\/a><\/p>/;
+
+  let righe = 0, rimandi = 0, inline = 0;
+  const diverse = [], rotte = [], bugie = [], doppie = [];
+
+  for (const m of agenda.matchAll(RIGA)) {
+    const e = perAncora.get(m[1]);
+    if (!e || !(e.descr || '').trim()) continue;
+    righe++;
+    const corpo = m[2];
+    const rim = RIM.exec(corpo);
+    if (rim) rimandi++;
+    if (/<p>Programma: /.test(corpo)) inline++;
+    // Rimando E coda insieme vorrebbe dire la stessa cosa detta due volte, una
+    // per intero e una per riassunto.
+    if (rim && /<p>Programma: /.test(corpo)) doppie.push(m[1]);
+
+    const prosa = corpo.replace(RIM, '');
+    const attesa = rim ? (e.descr || '').split(MARCA)[0] : (e.descr || '');
+    if (parole(attesa).join(' ') !== parole(prosa).join(' ')) diverse.push(m[1]);
+
+    if (!rim) continue;
+    const [via, ancora] = rim[1].split('#');
+    const dove = path.join(RADICE, via.replace(/^\//, ''));
+    if (ancora !== 'programma' || !fs.existsSync(dove)) { rotte.push(rim[1]); continue; }
+    const sch = fs.readFileSync(dove, 'utf8');
+    if (!sch.includes('id="programma"')) { rotte.push(rim[1]); continue; }
+    // Il conto: un <li> per voce dentro gli <ul class="ev-prog-v">, un
+    // <p class="ev-prog-d"> per giorno. I giorni promessi sono quelli
+    // DISTINTI, quindi non possono essere piu' dei gruppi che la scheda mostra.
+    const voci = (sch.match(/<ul class="ev-prog-v">[\s\S]*?<\/ul>/g) || [])
+      .reduce((n, u) => n + (u.match(/<li>/g) || []).length, 0);
+    const giorni = (sch.match(/<p class="ev-prog-d">/g) || []).length;
+    const p = /(\d+) appuntamenti(?: in (\d+) giorni)?/.exec(rim[2]);
+    if (!p || Number(p[1]) !== voci || (p[2] && Number(p[2]) > giorni)) {
+      bugie.push(`${m[1]}: la riga dice "${rim[2].trim()}", la scheda ha ${voci} voci in ${giorni} giorni`);
+    }
+  }
+
+  r.ok(righe > 100, `${righe} righe dell'agenda con una descrizione nel feed`);
+  r.ok(rimandi > 0, `${rimandi} righe mandano il programma alla scheda, ${inline} lo tengono in riga`);
+  r.ok(diverse.length === 0, diverse.length
+    ? `${diverse.length} righe perdono o aggiungono parole nella prosa: ${diverse.slice(0, 3).join(', ')}`
+    : 'nessuna riga perde o aggiunge una parola di prosa');
+  r.ok(doppie.length === 0, doppie.length
+    ? `${doppie.length} righe hanno rimando e coda insieme: ${doppie.slice(0, 3).join(', ')}`
+    : 'nessuna riga stampa il rimando e la coda insieme');
+  r.ok(rotte.length === 0, rotte.length
+    ? `${rotte.length} rimandi puntano a un'ancora che non c'e': ${rotte.slice(0, 3).join(', ')}`
+    : 'ogni rimando cade sul "Programma" della sua scheda');
+  r.ok(bugie.length === 0, bugie.length
+    ? `${bugie.length} righe promettono un numero che la scheda non ha: ${bugie.slice(0, 2).join(' | ')}`
+    : 'il numero promesso dalla riga e\' quello che la scheda consegna');
 
   return r;
 };

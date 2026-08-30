@@ -64,8 +64,47 @@ css, nav, foot = g._guscio()
 OGGI = datetime.date.today()
 esito = True
 
-CAVIA = CAVIA_PREFERITA if CAVIA_PREFERITA in reg_vero else next(iter(reg_vero))
+
+
+def futura(rec):
+    """La cavia dev'essere un evento ANCORA DA VENIRE.
+
+    "Orfana" vuol dire sparita dal foglio PRIMA della sua data: su una scheda
+    gia' passata non succede niente di quello che si prova qui. Il pranzo di
+    Piozzo - il caso vero da cui e' nato il timbro - e' passato il 23/08/2026, e
+    da allora questa prova girava su una pagina che orfana non poteva piu'
+    essere: quattro controlli rossi che del codice non dicevano niente. La cavia
+    si sceglie a ogni giro, non si scrive una volta per sempre."""
+    return (rec.get('d_end') or '') >= OGGI.isoformat() and not rec.get('ritirata')
+
+
+def senza_gemelli(slug, pool):
+    """Nessun'altra riga le somiglia abbastanza da sembrarne l'erede.
+
+    Un evento con le stesse date e lo stesso nome (o la stessa riga di foglio)
+    sotto un altro slug non da' una scheda ritirata: da' una scheda SPOSTATA, e
+    la cavia prenderebbe il rimando invece del timbro. E' giusto cosi' - lo
+    prova prova_spostata.py - ma qui si prova l'altra meta'."""
+    r = reg_vero[slug]
+    riga = str(r.get('riga') or '').strip()
+    for altro in pool:
+        if altro == slug:
+            continue
+        a = reg_vero[altro]
+        if a.get('d_start') != r.get('d_start') or a.get('d_end') != r.get('d_end'):
+            continue
+        if (g._key(a.get('nome')) == g._key(r.get('nome'))
+                or (riga and str(a.get('riga') or '').strip() == riga)):
+            return False
+    return True
+
+
 tutti = list(reg_vero)[:60]
+buone = [s for s in reg_vero if futura(reg_vero[s]) and senza_gemelli(s, tutti)]
+if not buone:
+    print("nessun evento futuro utilizzabile nel registro: niente da provare")
+    sys.exit(0)
+CAVIA = CAVIA_PREFERITA if CAVIA_PREFERITA in buone else buone[0]
 if CAVIA not in tutti:
     tutti.append(CAVIA)
 altri = [s for s in tutti if s != CAVIA]
@@ -74,14 +113,19 @@ altri = [s for s in tutti if s != CAVIA]
 def come_evento(rec):
     """Il record del registro rimesso nella forma in cui arriva dal foglio."""
     e = {k: v for k, v in rec.items()
-         if k not in ("first_seen", "last_seen", "updated", "slug", "ritirata")}
+         if k not in ("first_seen", "last_seen", "updated", "slug",
+                      "ritirata", "spostata")}
     for k in ("d_start", "d_end"):
         e[k] = datetime.date.fromisoformat(rec[k])
     return e
 
 
 def scrivi_registro(slugs, ritirate=()):
-    reg = {s: dict(reg_vero[s]) for s in slugs}
+    """Il registro di prova. I timbri VERI (in produzione ce n'e' una dozzina)
+    NON si copiano: se no la prova troverebbe gia' fatto quello che deve far
+    fare al codice, e passerebbe senza aver provato niente."""
+    reg = {s: {k: v for k, v in reg_vero[s].items()
+               if k not in ("ritirata", "spostata")} for s in slugs}
     for s in ritirate:
         reg[s]["ritirata"] = OGGI.isoformat()
     json.dump(reg, open(g.REGISTRO_PATH, "w", encoding="utf-8"), ensure_ascii=False)
@@ -165,6 +209,35 @@ ok(f"zero pagine ritirate a video (trovate {len(a_video)})", not a_video)
 ok("la cavia resta una pagina normale, solo in noindex",
    'content="noindex, follow"' in leggi(CAVIA)
    and "Scheda verificata da DAOP" in leggi(CAVIA))
+
+# ---------------------------------------------------------------------------
+# 5) La guardia non deve spegnersi da sola col passare dei mesi.
+#
+# `sano` confronta le pagine viste con quelle che il foglio dovrebbe far vedere.
+# Confrontarle col REGISTRO INTERO sembra la stessa cosa e non lo e': il
+# registro non perde mai niente - le edizioni concluse restano, e' tutto il suo
+# scopo - quindi cresce di continuo, mentre gli eventi in programma restano
+# sempre un centinaio. Prima o poi la meta' del registro supera il numero
+# massimo di pagine che una run possa vedere, e da quel giorno OGNI run si
+# dichiara non attendibile: la rete di sicurezza diventa un interruttore
+# spento, in silenzio. E' successo davvero - il 30/08/2026 la soglia chiedeva
+# 206 pagine viste su 169 possibili - e da allora nessuna scheda veniva piu'
+# timbrata, ne' ritirata ne' spostata.
+# ---------------------------------------------------------------------------
+print()
+print("=== 5) registro pieno di edizioni concluse: la guardia resta accesa ===")
+futuri = [s for s in reg_vero if futura(reg_vero[s])][:40]
+finiti = [s for s in reg_vero if (reg_vero[s].get('d_end') or '') < OGGI.isoformat()][:200]
+if len(futuri) < 21 or not finiti:
+    print("  --  registro troppo piccolo per questa prova, saltata")
+else:
+    cavia2 = next((s for s in futuri if senza_gemelli(s, futuri)), futuri[0])
+    sul_foglio = [s for s in futuri if s != cavia2]
+    scrivi_registro(futuri + finiti)
+    gira(sul_foglio)
+    ok(f"{len(sul_foglio)} pagine viste, {len(futuri) + len(finiti)} in registro "
+       f"({len(finiti)} concluse): run attendibile, timbro messo",
+       registro()[cavia2].get("ritirata"))
 
 shutil.rmtree(OUT, ignore_errors=True)
 print("\nESITO:", "tutto come previsto" if esito else "*** QUALCOSA NON TORNA ***")

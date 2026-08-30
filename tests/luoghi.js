@@ -353,7 +353,16 @@ module.exports = async function luoghi(browser) {
   // altro. Chiedere li' un'iscrizione al nostro canale vuol dire usare lo
   // spazio di un altro per portarci via il suo pubblico. E' la stessa ragione
   // per cui quei tre file non chiedono il consenso ai cookie.
-  const nostre = schede.filter((f) => !/\bbox-[a-z]{2}\.html$/.test(f));
+  // Fuori restano anche le schede SPOSTATE, per un motivo affine: sono
+  // cartelli, non pagine. Una correzione sul foglio (il comune, il nome) ha
+  // cambiato l'indirizzo della scheda, e questa e' rimasta solo per rimandare
+  // alla nuova con un refresh a zero secondi. Chiedere li' l'iscrizione al
+  // canale vuol dire chiederla sulla soglia, a chi sta gia' uscendo dalla
+  // stanza - e la coda in cui l'invito dovrebbe stare, su quella pagina, non
+  // esiste proprio.
+  const cartello = (f) => fs.readFileSync(path.join(RADICE, f), 'utf8')
+    .includes('http-equiv="refresh"');
+  const nostre = schede.filter((f) => !/\bbox-[a-z]{2}\.html$/.test(f) && !cartello(f));
   let conCanale = 0, doppi = [];
   for (const f of nostre) {
     const n = (fs.readFileSync(path.join(RADICE, f), 'utf8')

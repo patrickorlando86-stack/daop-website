@@ -3106,6 +3106,71 @@ perdita le date accorpate — e controllando che di date non ne sia comparsa
 nessuna in più, che sarebbe il difetto peggiore di tutti. Al 28/08/2026:
 **407 schede su 407, nessuna discordanza.**
 
+#### E nella riga dell'agenda la prosa resta, il programma no
+
+Fatto il 30/08/2026. L'impaginazione del 28/08 stava solo su `render_pagina()`:
+`riga()` continuava a rovesciare in pagina la cella del foglio così com'era, e
+sull'agenda si leggeva il muro di testo con dentro, in fila e separata da punti
+e virgola, la coda `Programma: 27/08 …; 28/08 …`.
+
+**La cella però contiene due cose diverse, e vanno da due parti diverse.**
+Misurato sulle 182 righe del 30/08: **55.551 caratteri di prosa** e **15.990 di
+code `Programma:`**, queste ultime su **44 righe** sole (mediana 282 caratteri,
+massimo 1.236). La prosa è la ragione per cui uno ha aperto la riga; il
+programma è una tabella travestita da frase, ed è lui a fare la pappardella.
+
+Quindi `descrizione_riga()`: la prosa si impagina con lo stesso `paragrafi()`
+della scheda — **zero byte in più**, sono gli stessi caratteri con dei `<p>`
+intorno — e il programma esce e diventa una riga sola che porta alla scheda.
+La riga aperta di Cherasco passa da un muro a **380px su desktop e 692 sul
+telefono**, e `eventi.html` perde **8,3 KB**.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Non è una rinuncia, perché quel contenuto ha già una casa**: 43 righe su 44
+  hanno la scheda, e lì il programma è impaginato per giorno dal 28/08. Così
+  "Scheda completa" guadagna una ragione per essere toccato, cioè un clic verso
+  le pagine che fanno il 70% del traffico. **È quello che le altre liste del
+  sito già fanno**: le pagine comune e le `sagre-provincia-*` la descrizione non
+  la stampano affatto — l'agenda era l'unica a rovesciare la cella intera.
+- **Dove la scheda non c'è, il programma resta.** È la regola di
+  `link_luoghi()`: quello che non ha un altrove non si toglie. Al 30/08 è un
+  caso solo (*SaltimPiazza 2026* a Viarigi, 134 caratteri), e resta **prosa e
+  non elenco** apposta: l'elenco vorrebbe il CSS `.ev-prog*` dentro lo `<style>`
+  di `eventi.html`, cioè un diff su ~260 pagine per una riga.
+- **Sotto tre voci la coda resta in riga** (`MIN_VOCI_RIMANDO`). Sono 10 righe,
+  tutte da 98-173 caratteri: mandare a un'altra pagina costa più di quello che
+  risparmia, e «1 appuntamento →» è un link che si prende in giro da solo.
+- **Il rimando porta il numero e non l'etichetta** — «Il programma completo: 6
+  appuntamenti in 5 giorni →» — ed è la lezione di `link_luoghi()`. I giorni
+  sono quelli **distinti**, non i gruppi che la scheda stampa.
+- **L'ancora è `#programma`**, e l'`<h2>` della scheda ha ora quell'`id`: un
+  rimando che scarica in cima a una pagina lunga è peggio di nessun rimando.
+  Non può divergere, perché chi stampa il rimando e chi stampa quel titolo
+  guardano la stessa descrizione con la stessa funzione.
+- **`.event-desc` resta la classe del contenitore, ed è un vincolo del JS.**
+  `preparaCal()` legge da lì la descrizione del link calendario, e
+  `tests/agenda.js` confronta le due cose. Per la stessa ragione i paragrafi si
+  stampano **separati da un ritorno a capo**: senza quel nodo di spazio,
+  `textContent` incollerebbe l'ultima parola di un paragrafo alla prima del
+  successivo.
+
+**Quello che si perde, ed è detto prima e non dopo.** L'indice della ricerca
+dell'agenda è il `textContent` della riga, quindi una parola che sta **solo**
+dentro il programma («Fiera della Zucca di Piozzo») non si trova più cercando in
+`eventi.html` — sulla scheda sì, ed è la pagina che vince quella query. E il
+link del calendario perde il programma: lo tagliava comunque a 900 caratteri a
+metà parola.
+
+Le prove stanno in `tests/scheda.js`, insieme a quelle della scheda perché
+l'invariante è la stessa su due superfici, e **nessuna rifà il lavoro del
+generatore**: che la prosa non perda né aggiunga una parola (confronto con
+`data/eventi.json`, riga per riga), che nessuna riga stampi rimando e coda
+insieme, che ogni rimando cada sull'ancora della sua scheda, e che **il numero
+promesso dalla riga sia quello che la scheda consegna** — se no la riga mente su
+una pagina che chi legge non ha ancora aperto. Verificate rosse tutte e tre
+rimettendo i difetti, non supposte.
+
 ### I filtri solo dove si guadagnano il posto
 
 `MIN_FILTRI = 12`: sotto quel numero di eventi si scorre prima la lista che a

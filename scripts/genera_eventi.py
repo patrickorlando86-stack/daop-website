@@ -721,7 +721,7 @@ def riga(e, today, hub=None):
             {simbolo("i-chevron-down", "icon ev-chev")}
           </button></h4>
           <div class="ev-det" id="det-{anchor}" hidden>
-            <p class="event-desc">{esc(e['descr'])}</p>{dove_html}
+            <div class="event-desc">{descrizione_riga(e)}</div>{dove_html}
             <div class="event-actions">
               {chr(10) + '              '.join(acts)}
             </div>{fonte_html}
@@ -1761,7 +1761,12 @@ def _programma_html(voci):
         etichetta = f'<p class="ev-prog-d">{esc(data)}</p>' if data else ''
         blocchi.append(f'<div class="ev-prog-g">{etichetta}'
                        f'<ul class="ev-prog-v">{vv}</ul></div>')
-    return ('<h2 class="ev-prog-h">Programma</h2>'
+    # id="programma": ci punta il rimando che l'agenda stampa al posto della
+    # coda (descrizione_riga). Un'ancora che non esiste scarica in cima a una
+    # pagina lunga, ed e' peggio di nessun link - qui non puo' succedere,
+    # perche' chi stampa il rimando e chi stampa questo titolo guardano la
+    # stessa descrizione con la stessa funzione.
+    return ('<h2 class="ev-prog-h" id="programma">Programma</h2>'
             f'<div class="ev-prog">{"".join(blocchi)}</div>')
 
 
@@ -1804,6 +1809,74 @@ def corpo_descrizione(descr):
         if len(pezzi) > 1:
             blocchi.append(_programma_html(voci_programma(pezzi[1])))
     return ''.join(b for b in blocchi if b)
+
+
+# Quante voci di programma valgono un rimando invece del testo. Sotto tre, la
+# coda e' una riga o due: mandare a un'altra pagina costa piu' di quello che
+# risparmia, e "1 appuntamento ->" e' un link che si prende in giro da solo.
+MIN_VOCI_RIMANDO = 3
+
+
+def descrizione_riga(e):
+    """La descrizione dentro la riga dell'agenda: la prosa impaginata, e il
+    programma sostituito da un rimando alla scheda.
+
+    LA RIGA E LA SCHEDA FANNO DUE MESTIERI, e la cella del foglio contiene due
+    cose diverse. Misurato sulle 182 righe del 30/08/2026: 55.551 caratteri di
+    prosa e 15.990 di code "Programma:", queste ultime su 44 righe sole
+    (mediana 282 caratteri, massimo 1.236). La prosa e' la ragione per cui uno
+    ha aperto la riga; il programma e' una tabella travestita da frase, ed e'
+    lui a fare il muro di testo.
+
+    Quindi: la prosa si impagina qui come sulla scheda - stesso paragrafi(),
+    zero byte in piu', sono gli stessi caratteri con dei <p> intorno - e il
+    programma esce dalla riga e diventa una riga sola che porta alla scheda.
+    Non e' una rinuncia: 43 volte su 44 quel contenuto e' gia' impaginato bene
+    tre centimetri piu' in la', e cosi' "Scheda completa" guadagna una ragione
+    per essere toccato, cioe' un clic verso le pagine che fanno il 70% del
+    traffico. E' quello che le altre liste del sito gia' fanno: le pagine
+    comune e le sagre-provincia-* la descrizione non la stampano affatto.
+
+    DOVE LA SCHEDA NON C'E', IL PROGRAMMA RESTA. E' la regola di
+    link_luoghi(): quello che non ha un altrove non si toglie. Al 30/08/2026 e'
+    un caso solo (SaltimPiazza 2026 a Viarigi, 134 caratteri), e resta prosa e
+    non elenco apposta - l'elenco vorrebbe il CSS .ev-prog* dentro lo <style>
+    di eventi.html, cioe' un diff su ~260 pagine per una riga.
+
+    QUELLO CHE SI PERDE, ed e' detto prima e non dopo: l'indice della ricerca
+    dell'agenda e' il textContent della riga, quindi una parola che sta SOLO
+    dentro il programma ("Fiera della Zucca di Piozzo") non si trova piu'
+    cercando in eventi.html - sulla scheda si', ed e' la pagina che vince
+    quella query. E il link "Aggiungi al calendario" legge .event-desc dal DOM,
+    quindi perde il programma: lo tagliava gia' a 900 caratteri a meta' parola.
+
+    Niente di questo esce dalla pagina: JSON-LD, meta description e le schede
+    continuano a leggere descr, non il DOM.
+    """
+    descr = (e.get('descr') or '').strip()
+    if not descr:
+        return ''
+    pezzi = PROG_MARCA.split(descr, maxsplit=1)
+    blocchi = [f'<p>{esc(p)}</p>' for p in paragrafi(pezzi[0])]
+    coda = pezzi[1].strip() if len(pezzi) > 1 else ''
+    voci = voci_programma(coda) if coda else []
+    if voci:
+        url = f'/eventi/{slug_evento(e)}.html#programma' if ha_pagina(e) else ''
+        if url and len(voci) >= MIN_VOCI_RIMANDO:
+            # Il numero e non l'etichetta: "12 appuntamenti in 5 giorni" e' una
+            # ragione per toccare, "vedi il programma" no. Lezione di
+            # link_luoghi().
+            gg = len({d for d, _, _ in voci if d})
+            quando = f' in {gg} giorni' if gg > 1 else ''
+            blocchi.append(f'<p class="ev-prog-rim"><a href="{url}">'
+                           f'Il programma completo: {len(voci)} appuntamenti'
+                           f'{quando} &rarr;</a></p>')
+        else:
+            blocchi.append(f'<p>{esc("Programma: " + coda)}</p>')
+    # Il ritorno a capo fra i paragrafi non e' formattazione: il link del
+    # calendario legge textContent, e senza quel nodo di spazio l'ultima parola
+    # di un paragrafo si incollerebbe alla prima del successivo.
+    return '\n'.join(blocchi)
 
 
 def carica_registro():
@@ -3628,6 +3701,180 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
+# ---------------------------------------------------------------------------
+# SCHEDA SPOSTATA: quando una correzione cambia l'INDIRIZZO della pagina
+#
+# PERCHE' ESISTE (30/08/2026): sul foglio la "27a Sagra dello Gnocco" era segnata
+# a Mombarcaro, ma si fa a Bricco de' Faule, frazione di CHERASCO. Corretto il
+# comune e rigenerato il sito, la pagina "non si era aggiornata": lo slug
+# contiene il comune, quindi la correzione non ha modificato la scheda, ne ha
+# fatta NASCERE una nuova all'indirizzo giusto e ha lasciato la vecchia dov'era,
+# con dentro il dato sbagliato e una mappa a 40 km da dove si mangia. Fuori
+# indice si', ma perfettamente leggibile da chiunque avesse il link - il canale,
+# un WhatsApp, un post - cioe' esattamente le persone a cui la correzione
+# serviva. E' il difetto della scheda ritirata (18/08) un passo piu' in la':
+# li' la pagina restava viva, qui resta viva E smentita da un'altra pagina
+# nostra.
+#
+# RITIRATA e SPOSTATA non sono la stessa cosa e non vanno rese uguali:
+#   - RITIRATA = l'appuntamento non c'e' (annullato, o mai esistito). La pagina
+#     lo dichiara e manda all'agenda: e' tutto quello che puo' dare.
+#   - SPOSTATA = l'appuntamento c'e', e' solo altrove. Qui non c'e' niente da
+#     raccontare e niente da smentire: c'e' da portare la persona alla scheda
+#     giusta, subito. Tenere "il contesto" (date, luogo, descrizione vecchia)
+#     vorrebbe dire tenere in pagina proprio la riga che abbiamo corretto.
+#
+# Il timbro rec['spostata'] sta nel REGISTRO ed e' permanente come l'altro, e non
+# si deduce a ogni run: il 1 settembre la sagra e' finita, la pagina vecchia non
+# e' piu' "orfana" (la data e' passata, non manca piu' nessuno dal foglio) e
+# senza timbro tornerebbe a stampare per sempre "Edizione conclusa" con il comune
+# sbagliato. Si toglie da solo se quello slug ricompare nel foglio, come la
+# ritirata: e' il modo di rimediare a un rimando sbagliato.
+# ---------------------------------------------------------------------------
+
+
+def _erede(slug, rec, reg, visti):
+    """Lo slug NUOVO di un evento che ha cambiato indirizzo, o None.
+
+    Un evento futuro sparito dal foglio e' stato annullato oppure rinominato: da
+    qui si vedono uguali, e a distinguerli e' solo questo: se fra le righe LETTE
+    OGGI ce n'e' una che e' lo stesso appuntamento sotto un altro slug, allora
+    non e' sparito, si e' spostato.
+
+    "Lo stesso appuntamento" vuol dire stesse date esatte piu' una delle due
+    identita' che la correzione non tocca:
+      - lo stesso NOME, e allora e' cambiato il comune (il caso della Sagra
+        dello Gnocco: Mombarcaro -> Cherasco);
+      - la stessa RIGA del foglio, e allora e' cambiato il nome, ma la riga
+        corretta e' quella di prima.
+
+    Le date da sole non bastano: a Ferragosto un paese ha cinque righe negli
+    stessi identici giorni, e un rimando alla scheda sbagliata e' peggio del
+    problema che stiamo risolvendo. Per lo stesso motivo, se i candidati sono
+    piu' di uno non si sceglie: si torna alla scheda ritirata, che a nessuno
+    promette niente."""
+    # 'riga' nel registro e' un numero, non una stringa: si confronta dopo
+    # averlo reso testo, se no ci si scorda sempre un str() da qualche parte.
+    d_i, d_f = rec.get('d_start'), rec.get('d_end')
+    nome, riga = _key(rec.get('nome')), str(rec.get('riga') or '').strip()
+    candidati = []
+    for s in visti:
+        if s == slug:
+            continue
+        n = reg.get(s) or {}
+        if n.get('d_start') != d_i or n.get('d_end') != d_f:
+            continue
+        stesso_nome = bool(nome) and _key(n.get('nome')) == nome
+        stessa_riga = bool(riga) and str(n.get('riga') or '').strip() == riga
+        if stesso_nome or stessa_riga:
+            candidati.append(s)
+    return candidati[0] if len(candidati) == 1 else None
+
+
+def _destinazione(rec, reg):
+    """Dove porta davvero una scheda spostata, seguendo la catena.
+
+    La stessa riga puo' essere corretta due volte (prima il comune, poi il nome):
+    senza seguire la catena chi arriva dal link piu' vecchio farebbe due salti, e
+    il secondo su una pagina che a sua volta non e' piu' quella buona. La lista
+    degli slug gia' visti ferma anche un anello (A -> B -> A), che una coppia di
+    correzioni fatte e disfatte puo' produrre - e in fondo a un anello si finisce
+    su se stessi, cioe' su una pagina che rimanda a se stessa e che nel browser
+    non smette piu' di ricaricarsi. Quella non e' una destinazione: si torna a
+    stampare la scheda normale."""
+    visto, s, meta = set(), rec.get('spostata'), None
+    while s and s in reg and s not in visto:
+        visto.add(s)
+        meta = s
+        s = (reg[s] or {}).get('spostata')
+    return meta if meta != rec.get('slug') else None
+
+
+def render_spostata(rec, nuovo, css, nav, foot):
+    """La pagina di una scheda spostata: un cartello, non una scheda.
+
+    Del vecchio resta solo il NOME dell'evento, che serve a chi arriva a capire
+    di essere nel posto giusto. Date, luogo, descrizione e locandina no: sono la
+    riga che abbiamo appena corretto, e questa e' la pagina che quella riga
+    continuava a mostrare a chi aveva il link.
+
+    Due scelte che a occhio non si vedono:
+
+    - il canonical punta alla pagina NUOVA e qui NON si mette noindex. Sono due
+      segnali opposti sulla stessa pagina, e un noindex accanto a un canonical
+      che indica altrove rischia di far passare il noindex proprio alla pagina
+      buona. Fuori dalla sitemap ci va lo stesso: la lista che scrivi_pagine
+      restituisce la salta.
+    - il refresh a 0 secondi e' il piu' vicino a un 301 che si possa scrivere su
+      un sito statico (GitHub Pages serve file, non regole di redirect), e Google
+      lo legge come un redirect. Il cartello sotto e' per chi il refresh non ce
+      l'ha: le anteprime dei link, i lettori di schermo, chi torna indietro."""
+    nome = (rec.get('nome') or '').strip()
+    citta = (nuovo.get('citta') or '').strip()
+    url = f"{SITE_URL}/eventi/{nuovo['slug']}.html"
+    titolo = trunc(f"Scheda spostata: {nome}", 60) + " | DAOP"
+    # og:description e' quello che si legge quando il link vecchio viene
+    # incollato in chat: deve dire "e' altrove", non ripubblicizzare l'evento.
+    meta_d = (f"La scheda di questo appuntamento si è spostata{a_citta(citta)}: "
+              "vai alla versione aggiornata sull'agenda DAOP.")
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="0; url={url}">
+<title>{esc(titolo)}</title>
+<meta name="description" content="{esc(meta_d)}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{esc(titolo)}">
+<meta property="og:description" content="{esc(meta_d)}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{DEFAULT_IMG}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(trunc(titolo, 60))}">
+<meta name="twitter:description" content="{esc(trunc(meta_d, 120))}">
+<meta name="twitter:image" content="{DEFAULT_IMG}">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{PAGINA_CSS}</style>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<header class="page-hero ev-hero">
+  <div class="page-hero-inner">
+    <div class="ev-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Scheda spostata</span>
+    </div>
+    <h1>{esc(nome)}</h1>
+    <p class="ev-when">Questa scheda si è spostata</p>
+  </div>
+</header>
+<article class="ev-wrap ev-wrap--hero">
+  <div class="ev-over"><strong>Scheda spostata</strong>
+  Abbiamo corretto questa scheda, e la correzione le ha cambiato indirizzo:
+  quella buona{a_citta(esc(citta))} è <a href="{url}">a questa pagina</a>.
+  Ci arrivi da solo in un istante; se non succede, usa il bottone qui sotto.</div>
+  <div class="ev-actions">
+    <a class="btn btn-navy" href="{url}">Vai alla scheda aggiornata</a>
+    <a class="ev-back" href="/eventi.html">Torna all'agenda</a>
+  </div>
+</article>
+</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+
+
 def scrivi_pagine(events, hub=None):
     """Genera/aggiorna le pagine evento.
 
@@ -3644,13 +3891,26 @@ def scrivi_pagine(events, hub=None):
     oggi = datetime.date.today()
     conclusi = cambiate = 0
     orfane = []
+    spostate = {}   # slug vecchio -> slug nuovo, per il messaggio e per la sitemap
     # Il timbro e' permanente, quindi si mette solo se la run ha visto un foglio
     # CREDIBILE. Se un giorno la lettura del foglio va a meta' (rete, quota,
     # colonne spostate), senza questa guardia mezzo sito si timbrerebbe ritirato
     # in un colpo, e a mano non si torna indietro. Le pagine di oggi non
     # sparirebbero comunque: restano fuori indice per un giorno e la run dopo le
     # rimette a posto.
-    sano = len(visti) >= max(20, len(reg) // 2)
+    # Il paragone va fatto con quello che il foglio DOVREBBE far vedere OGGI,
+    # non col registro intero: il registro non perde mai niente - le edizioni
+    # concluse restano, e' tutto il suo scopo - quindi cresce e basta, mentre gli
+    # eventi in programma restano sempre un centinaio. Con len(reg) la soglia
+    # scavalca il massimo raggiungibile e la guardia si spegne da sola: al
+    # 30/08/2026 chiedeva 206 pagine viste su 169 possibili, cioe' era ferma su
+    # "run non attendibile", e da li' nessuna scheda veniva piu' timbrata. Gli
+    # attesi sono le schede non ancora passate e non gia' timbrate: le altre dal
+    # foglio non devono arrivare.
+    attesi = sum(1 for r in reg.values()
+                 if datetime.date.fromisoformat(r['d_end']) >= oggi
+                 and not r.get('ritirata') and not r.get('spostata'))
+    sano = len(visti) >= max(20, attesi // 2)
     if not sano:
         print(f"[genera_eventi] ATTENZIONE: solo {len(visti)} eventi con pagina "
               f"su {len(reg)} in registro: run considerata NON attendibile, "
@@ -3667,10 +3927,27 @@ def scrivi_pagine(events, hub=None):
             # cui si rimedia a una ritirata sbagliata - si rimette la riga nel
             # foglio - e la rete di sicurezza se una run legge il foglio a meta'.
             rec.pop('ritirata', None)
+            rec.pop('spostata', None)
         elif orfano and sano:
-            rec.setdefault('ritirata', oggi.isoformat())
-        nuovo = render_pagina(rec, css, nav, foot, oggi, orfano, vicini=events, hub=hub)
-        if orfano:
+            # Prima di dare per sparito un appuntamento si guarda se e' solo
+            # cambiato di indirizzo: correggere il comune o il nome fa nascere la
+            # scheda altrove e lascia qui il dato vecchio. Vedi _erede().
+            erede = _erede(slug, rec, reg, visti)
+            if erede:
+                rec['spostata'] = erede
+                rec.pop('ritirata', None)
+            else:
+                rec.setdefault('ritirata', oggi.isoformat())
+        # Il rimando vale finche' c'e' il timbro, non solo il giorno della
+        # correzione: passata la data questa pagina non e' piu' orfana, e senza
+        # timbro tornerebbe a stampare l'edizione conclusa col dato sbagliato.
+        dove = _destinazione(rec, reg)
+        if dove:
+            nuovo = render_spostata(rec, reg[dove], css, nav, foot)
+            spostate[slug] = dove
+        else:
+            nuovo = render_pagina(rec, css, nav, foot, oggi, orfano, vicini=events, hub=hub)
+        if orfano and not dove:
             orfane.append(slug)
         if datetime.date.fromisoformat(rec['d_end']) < oggi:
             conclusi += 1
@@ -3717,15 +3994,22 @@ def scrivi_pagine(events, hub=None):
     timbrate = [s_ for s_, r in reg.items() if r.get('ritirata')]
     if timbrate:
         print(f"[genera_eventi] schede ritirate (permanenti): {len(timbrate)}")
+    trasferite = [s_ for s_, r in reg.items() if r.get('spostata')]
+    if spostate:
+        print(f"[genera_eventi] schede SPOSTATE (permanenti): {len(spostate)}. "
+              f"L'evento e' stato corretto e la sua pagina e' nata a un altro "
+              f"indirizzo: la vecchia resta come RIMANDO, fuori dalla sitemap. "
+              + "; ".join(f"{a} -> {b}" for a, b in sorted(spostate.items())))
     if orfane:
         print(f"[genera_eventi] ATTENZIONE: {len(orfane)} pagine di eventi futuri "
-              f"spariti dal foglio (annullati, sbagliati o rinominati), riscritte "
-              f"come SCHEDA RITIRATA (senza Event nei dati strutturati, senza firma "
+              f"spariti dal foglio (annullati o sbagliati; i rinominati diventano "
+              f"un rimando e non entrano qui), riscritte come SCHEDA RITIRATA "
+              f"(senza Event nei dati strutturati, senza firma "
               f"di verifica, senza calendario), in noindex e fuori dalla sitemap: "
               f"{', '.join(sorted(orfane))}")
     # Fuori dalla sitemap le orfane di oggi E tutte le timbrate: una ritirata non
     # rientra in sitemap il giorno dopo la sua data, quando smette di essere orfana.
-    fuori = set(orfane) | set(timbrate)
+    fuori = set(orfane) | set(timbrate) | set(trasferite)
     return {s: r['updated'] for s, r in sorted(reg.items()) if s not in fuori}
 
 

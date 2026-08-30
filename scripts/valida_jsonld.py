@@ -110,7 +110,12 @@ def controlla_file(path, err, avv):
     testo = open(path, encoding='utf-8').read()
     blocchi = BLOCCO_RE.findall(testo)
     if not blocchi:
-        avv.append((dove, "nessun blocco JSON-LD", ''))
+        # Una pagina che rimanda altrove (la scheda SPOSTATA: refresh a 0
+        # secondi e canonical su un'altra pagina) non dichiara niente apposta -
+        # non e' una scheda, e' un cartello. Segnalarla tutte le notti
+        # insegnerebbe solo a scorrere via gli avvisi senza leggerli.
+        if 'http-equiv="refresh"' not in testo:
+            avv.append((dove, "nessun blocco JSON-LD", ''))
         return 0
     quanti = 0
     for grezzo in blocchi:
