@@ -2171,6 +2171,23 @@
   "nome": "Cerreto d'Asti",
   "prov": "AT"
  },
+ "cherasco": {
+  "eventi": {
+   "sagra-dello-gnocco-festa-patronale-cherasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bricco de' Faule",
+    "manifest": "27a Sagra dello Gnocco - Festa Patronale",
+    "nome": "27a Sagra dello Gnocco - Festa Patronale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-27"
+   }
+  },
+  "nome": "Cherasco",
+  "prov": "CN"
+ },
  "ciglione": {
   "eventi": {
    "cabaret-con-marco-guarena-pro-loco-ciglione": {
