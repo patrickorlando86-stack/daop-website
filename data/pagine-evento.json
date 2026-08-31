@@ -52,6 +52,7 @@
   "prezzo": "15 euro a iscrizione (sconto fratelli 25 euro)",
   "prov": "CN",
   "riga": 197,
+  "ritirata": "2026-08-31",
   "slug": "a-caccia-dell-orso-carezza-racconigi",
   "updated": "2026-08-31"
  },
@@ -80,7 +81,7 @@
   "prov": "AT",
   "riga": 173,
   "slug": "a-calosso-museo-e-dintorni-agosto",
-  "updated": "2026-08-30"
+  "updated": "2026-08-31"
  },
  "a-calosso-museo-e-dintorni-fiera-del-rapule": {
   "anchor": "ev-2026-10-17-a-calosso-museo-e-dintorni-fiera-del-rapule",
@@ -106,6 +107,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 132,
+  "ritirata": "2026-08-31",
   "slug": "a-calosso-museo-e-dintorni-fiera-del-rapule",
   "updated": "2026-08-31"
  },
@@ -132,7 +134,7 @@
   "ora": "10:30-12:30 e 15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 131,
+  "riga": 93,
   "slug": "a-calosso-museo-e-dintorni-ottobre",
   "updated": "2026-08-31"
  },
@@ -159,7 +161,7 @@
   "ora": "10:30-12:30 e 15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 129,
+  "riga": 91,
   "slug": "a-calosso-museo-e-dintorni-settembre-i",
   "updated": "2026-08-31"
  },
@@ -187,6 +189,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 130,
+  "ritirata": "2026-08-31",
   "slug": "a-calosso-museo-e-dintorni-settembre-ii",
   "updated": "2026-08-31"
  },
@@ -271,6 +274,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 177,
+  "ritirata": "2026-08-31",
   "slug": "acquinbanda-festival-delle-bande-musicali-acqui-terme",
   "updated": "2026-08-31"
  },
@@ -411,7 +415,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 186,
+  "riga": 125,
   "slug": "al-di-dla-festa-morano-sul-po",
   "updated": "2026-08-31"
  },
@@ -439,7 +443,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 106,
+  "riga": 72,
   "slug": "albugnano-in-festa",
   "updated": "2026-08-31"
  },
@@ -467,7 +471,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 22,
+  "riga": 15,
   "slug": "alecomics-festival-alessandria",
   "updated": "2026-08-31"
  },
@@ -778,7 +782,7 @@
   "ora": "10:30-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 207,
+  "riga": 139,
   "slug": "apiario-porte-aperte-vita-da-api-parco-fluviale-ge-cuneo",
   "updated": "2026-08-31"
  },
@@ -806,7 +810,7 @@
   "ora": "14:30-16:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 209,
+  "riga": 141,
   "slug": "arte-terapia-e-nutrizione-il-sapore-delle-emozioni-confreria",
   "updated": "2026-08-31"
  },
@@ -1033,7 +1037,7 @@
   "ora": "11:45",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 67,
+  "riga": 48,
   "slug": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba",
   "updated": "2026-08-31"
  },
@@ -1064,6 +1068,33 @@
   "prov": "CN",
   "riga": 0,
   "slug": "bestiario-d-inchiostro-museo-civico-della-stampa-mondovi",
+  "updated": "2026-08-31"
+ },
+ "bimbi-in-stalla-merenda-col-fantino-moncalvo": {
+  "anchor": "ev-2026-09-03-bimbi-in-stalla-merenda-col-fantino-moncalvo",
+  "categoria": "Sagra & Festa",
+  "citta": "Moncalvo",
+  "consigliato": "No",
+  "d_end": "2026-09-03",
+  "d_start": "2026-09-03",
+  "descr": "Prove del corteo storico e merenda col fantino in Piazza Garibaldi a Moncalvo, in occasione della settimana del Palio di Asti.",
+  "df": "03/09/2026",
+  "di": "03/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Piazza Garibaldi - Moncalvo (AT)",
+  "last_seen": "2026-08-31",
+  "lat": "45.0510671",
+  "loc": "daop_asti_3975685453868814377.webp",
+  "lon": "8.2649087",
+  "luogo": "Piazza Garibaldi",
+  "manifest": "Palio di Asti in Famiglia 2026",
+  "nome": "Bimbi in Stalla + Merenda col Fantino — Moncalvo",
+  "ora": "16:00",
+  "prezzo": "Gratuito",
+  "prov": "AT",
+  "riga": 162,
+  "slug": "bimbi-in-stalla-merenda-col-fantino-moncalvo",
   "updated": "2026-08-31"
  },
  "bolle-giganti-edizione-agosto-pro-loco-voltaggio-p": {
@@ -1120,6 +1151,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 134,
+  "ritirata": "2026-08-31",
   "slug": "bubbio-festa-delle-figlie",
   "updated": "2026-08-31"
  },
@@ -1175,7 +1207,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 164,
+  "riga": 114,
   "slug": "buffalo-kids-cinema-al-centro-monta",
   "updated": "2026-08-31"
  },
@@ -1203,6 +1235,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 141,
+  "ritirata": "2026-08-31",
   "slug": "busca-comics-games-associazione-ingenium-a-p-s",
   "updated": "2026-08-31"
  },
@@ -1230,7 +1263,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 193,
+  "riga": 131,
   "slug": "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-isasca",
   "updated": "2026-08-31"
  },
@@ -1259,6 +1292,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 194,
+  "ritirata": "2026-08-31",
   "slug": "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-piasco",
   "updated": "2026-08-31"
  },
@@ -1287,6 +1321,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 195,
+  "ritirata": "2026-08-31",
   "slug": "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-venasca",
   "updated": "2026-08-31"
  },
@@ -1371,7 +1406,7 @@
   "ora": "18:00",
   "prezzo": "5 euro (con maglietta della manifestazione)",
   "prov": "AL",
-  "riga": 156,
+  "riga": 108,
   "slug": "camminata-tra-i-vigneti-la-camminata-di-san-cristo-san-cristoforo",
   "updated": "2026-08-31"
  },
@@ -1400,6 +1435,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 93,
+  "ritirata": "2026-08-31",
   "slug": "capodanno-alessandrino-anno-dell-amore-alessandria",
   "updated": "2026-08-31"
  },
@@ -1428,7 +1464,7 @@
   "ora": "21:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 56,
+  "riga": 41,
   "slug": "carne-alla-brace-e-musica-con-dj-schiffer-pro-loco-sant-albano-stura",
   "updated": "2026-08-31"
  },
@@ -1485,7 +1521,7 @@
   "ora": "9:30-12:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 47,
+  "riga": 34,
   "slug": "casalnoceto-kids-comune-di-casalnoceto",
   "updated": "2026-08-31"
  },
@@ -1792,7 +1828,7 @@
   "ora": "19:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 62,
+  "riga": 43,
   "slug": "cena-benefica-a-favore-di-me-dea-pro-loco-san-gior-san-giorgio-monferrato",
   "updated": "2026-08-31"
  },
@@ -2018,7 +2054,7 @@
   "ora": "20:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 46,
+  "riga": 33,
   "slug": "cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti",
   "updated": "2026-08-31"
  },
@@ -2134,6 +2170,34 @@
   "slug": "cinema-in-piazzetta-moulin-rouge-pro-loco-sanse-san-sebastiano-curone",
   "updated": "2026-08-31"
  },
+ "cocco-wine-cocconato": {
+  "anchor": "ev-2026-09-04-cocco-wine-2026",
+  "categoria": "Sagra & Festa",
+  "citta": "Cocconato",
+  "consigliato": "No",
+  "contatto": "0173 364631",
+  "d_end": "2026-09-06",
+  "d_start": "2026-09-04",
+  "descr": "La XXV edizione di Cocco...Wine porta a Cocconato, nel cuore della Riviera del Monferrato, tre giorni dedicati ai vini e ai sapori del territorio, dal 4 al 6 settembre 2026. Oltre 25 cantine piemontesi e ospiti speciali dalla Calabria e dall'Est Europa animano i banchi d'assaggio, affiancati da aree gastronomiche con prodotti tipici della zona. Chi vuole vivere l'esperienza in modo speciale può arrivare a bordo di un Treno Storico d'epoca da Asti, con viaggio e ingresso già inclusi nel biglietto (48 euro adulti, 25 euro under); i biglietti sono disponibili su gowinet.it. Tra un assaggio e l'altro è possibile passeggiare tra i vicoli del centro storico con la camminata Cammina il Borgo. Programma: 04/09 Cocco...Wine - Anteprima: Il Salotto di Cocco...Wine - Go Wine (20:00-23:00); 05/09 Cocco...Wine - Go Wine (16:00-24:00); 06/09 Cocco...Wine - Go Wine (11:00-19:00).",
+  "df": "06/09/2026",
+  "di": "04/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Centro Storico di Cocconato - Cocconato (AT)",
+  "last_seen": "2026-08-31",
+  "lat": "45.0874595",
+  "loc": "daop_asti_3975680429646343177.webp",
+  "lon": "8.0392207",
+  "luogo": "Centro Storico di Cocconato",
+  "manifest": "Cocco...Wine 2026",
+  "nome": "Cocco...Wine 2026",
+  "ora": "vari",
+  "prezzo": "A pagamento (da verificare)",
+  "prov": "AT",
+  "riga": 159,
+  "slug": "cocco-wine-cocconato",
+  "updated": "2026-08-31"
+ },
  "coccoliamo-ci-carezza-racconigi": {
   "anchor": "ev-2026-09-15-coccoliamo-ci-carezza",
   "categoria": "Laboratorio",
@@ -2159,6 +2223,7 @@
   "prezzo": "15 euro a incontro",
   "prov": "CN",
   "riga": 214,
+  "ritirata": "2026-08-31",
   "slug": "coccoliamo-ci-carezza-racconigi",
   "updated": "2026-08-31"
  },
@@ -2329,7 +2394,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 85,
+  "riga": 62,
   "slug": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba",
   "updated": "2026-08-31"
  },
@@ -2413,7 +2478,7 @@
   "ora": "20:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 105,
+  "riga": 71,
   "slug": "coppa-dei-fiaschi-domenica-6-settembre-castelletto-d-orba",
   "updated": "2026-08-31"
  },
@@ -2441,7 +2506,7 @@
   "ora": "20:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 104,
+  "riga": 70,
   "slug": "coppa-dei-fiaschi-venerdi-4-settembre-castelletto-d-orba",
   "updated": "2026-08-31"
  },
@@ -2496,7 +2561,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito (pasta party a seguire: 5 euro)",
   "prov": "CN",
-  "riga": 192,
+  "riga": 130,
   "slug": "corso-trail-running-bambini-giornata-promozionale-peveragno",
   "updated": "2026-08-31"
  },
@@ -2581,7 +2646,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 84,
+  "riga": 61,
   "slug": "cresco-con-te-biblioteca-civica-di-fossano",
   "updated": "2026-08-31"
  },
@@ -2638,7 +2703,7 @@
   "ora": "tutto il giorno",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 206,
+  "riga": 138,
   "slug": "custodi-della-natura-cinque-sensi-per-sentire-la-n-fossano",
   "updated": "2026-08-31"
  },
@@ -2860,6 +2925,7 @@
   "prezzo": "15 euro ad incontro",
   "prov": "CN",
   "riga": 212,
+  "ritirata": "2026-08-31",
   "slug": "espressione-in-gioco-fascia-2-6-anni-carezza-racconigi",
   "updated": "2026-08-31"
  },
@@ -2973,6 +3039,33 @@
   "prov": "CN",
   "riga": 175,
   "slug": "estate-sonora-giochi-di-note-prismadanza-entracque",
+  "updated": "2026-08-31"
+ },
+ "expo-d-arte-l-arte-inizia-da-te-atelier-ariel-cent-alessandria": {
+  "anchor": "ev-2026-09-06-2a-expo-d-arte-l-arte-inizia-da-te-atelier-ariel-c",
+  "categoria": "Cultura",
+  "citta": "Alessandria",
+  "consigliato": "No",
+  "d_end": "2026-09-06",
+  "d_start": "2026-09-06",
+  "descr": "La 2ª Expo d'Arte del Centro Estivo Creativo Atelier Ariel, dal tema 'L'Arte Inizia da Te'. Un pomeriggio per condividere tutto ciò che i bambini hanno creato, scoperto e vissuto durante l'estate: arte, musica e fantasia per un'estate indimenticabile.",
+  "df": "06/09/2026",
+  "di": "06/09/2026",
+  "eta": "3-14 anni",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Via Carlo Alberto 1 - Alessandria (AL)",
+  "last_seen": "2026-08-31",
+  "lat": "44.9110327",
+  "loc": "daop_alessandria_3972797849854842313.webp",
+  "lon": "8.6148186",
+  "luogo": "Lostecco",
+  "manifest": "",
+  "nome": "2ª Expo d'Arte 'L'Arte Inizia da Te' - Atelier Ariel Centro Estivo Creativo",
+  "ora": "17:30",
+  "prezzo": "Gratuito",
+  "prov": "AL",
+  "riga": 152,
+  "slug": "expo-d-arte-l-arte-inizia-da-te-atelier-ariel-cent-alessandria",
   "updated": "2026-08-31"
  },
  "fagiolino-casaro-teatro-medico-ipnotico-arguello": {
@@ -3475,6 +3568,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
   "riga": 34,
+  "ritirata": "2026-08-31",
   "slug": "festa-del-fungo-pro-loco-ciglione",
   "spostata": "festa-del-fungo-pro-loco-ciglione-ponzone",
   "updated": "2026-08-30"
@@ -3486,10 +3580,10 @@
   "citta": "Ponzone",
   "consigliato": "No",
   "contatto": "3457558165 - 340472004",
-  "d_end": "2026-09-13",
+  "d_end": "2026-09-11",
   "d_start": "2026-09-11",
   "descr": "Settima edizione della Festa del Fungo, tre giorni di festa dedicata ai funghi con prenotazione obbligatoria. Appuntamento autunnale organizzato dalla Pro Loco Ciglione.",
-  "df": "13/09/2026",
+  "df": "",
   "di": "11/09/2026",
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
@@ -3504,7 +3598,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 20,
+  "riga": 13,
   "slug": "festa-del-fungo-pro-loco-ciglione-ponzone",
   "updated": "2026-08-31"
  },
@@ -3588,6 +3682,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 179,
+  "ritirata": "2026-08-31",
   "slug": "festa-del-vino-del-monferrato-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -3615,6 +3710,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 180,
+  "ritirata": "2026-08-31",
   "slug": "festa-del-vino-del-monferrato-weekend-2-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -3738,10 +3834,10 @@
   "categoria": "Sagra & Festa",
   "citta": "Alessandria",
   "consigliato": "No",
-  "d_end": "2026-09-13",
+  "d_end": "2026-09-12",
   "d_start": "2026-09-12",
   "descr": "La Festa della Birra Street Food torna nel quartiere Cristo di Alessandria per due giorni, sabato 12 e domenica 13 settembre 2026, nell'area verde della Scuola Morbelli in Via Campi. L'evento, organizzato dal Quartiere Cristo e dalla Pro Loco Lisonòria, propone street food e il suggestivo spettacolo della mongolfiera per tutta la durata della manifestazione. La musica dal vivo accompagna entrambe le giornate, rendendo la festa un appuntamento piacevole per grandi e piccoli. Programma: 12/09 Festa della Birra Street Food - Quartiere Cristo / Pro Loco Lisonòria; 13/09 Festa della Birra Street Food - Radio Reggae Live - Quartiere Cristo / Pro Loco Lisonòria.",
-  "df": "13/09/2026",
+  "df": "",
   "di": "12/09/2026",
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-02",
@@ -3756,7 +3852,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 24,
+  "riga": 17,
   "slug": "festa-della-birra-street-food-alessandria",
   "updated": "2026-08-31"
  },
@@ -3784,7 +3880,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 162,
+  "riga": 112,
   "slug": "festa-della-citta-di-mondovi",
   "updated": "2026-08-31"
  },
@@ -3813,6 +3909,34 @@
   "prov": "AL",
   "riga": 154,
   "slug": "festa-della-madonna-della-guardia-tortona",
+  "updated": "2026-08-31"
+ },
+ "festa-della-panissa-circolo-lunassese-lunassi": {
+  "anchor": "ev-2026-09-06-festa-della-panissa-circolo-lunassese",
+  "categoria": "Sagra & Festa",
+  "citta": "Lunassi",
+  "consigliato": "No",
+  "contatto": "348 7456050",
+  "d_end": "2026-09-06",
+  "d_start": "2026-09-06",
+  "descr": "Festa della Panissa a Lunassi organizzata dal Circolo Lunassese: distribuzione di panissa, griglia accesa, birra alla spina e musica dei Big Jam. Possibilità di visitare il Museo degli Attrezzi Agricoli e provare il tiro con l'arco con gli Arcieri Ardivestra Montesegale. Presenti distributori locali.",
+  "df": "06/09/2026",
+  "di": "06/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Lunassi - Lunassi (AL)",
+  "last_seen": "2026-08-31",
+  "lat": "44.7386049",
+  "loc": "daop_alessandria_3975158068871696050.webp",
+  "lon": "9.1674136",
+  "luogo": "Lunassi",
+  "manifest": "",
+  "nome": "Festa della Panissa - Circolo Lunassese",
+  "ora": "13:00",
+  "prezzo": "Gratuito",
+  "prov": "AL",
+  "riga": 154,
+  "slug": "festa-della-panissa-circolo-lunassese-lunassi",
   "updated": "2026-08-31"
  },
  "festa-della-patata-cosola": {
@@ -3921,7 +4045,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 123,
+  "riga": 86,
   "slug": "festa-delle-feste-acqui-terme",
   "updated": "2026-08-31"
  },
@@ -3931,10 +4055,10 @@
   "citta": "Novi Ligure",
   "consigliato": "No",
   "contatto": "351 7091495",
-  "d_end": "2026-09-30",
+  "d_end": "2026-09-01",
   "d_start": "2026-09-01",
   "descr": "Evento finale del calendario Plogging Smiling Biking: Festa dello Sport. Data esatta di settembre 2026 da definire. Evento conclusivo della rassegna ecologica e sportiva di Novi Ligure.",
-  "df": "30/09/2026",
+  "df": "",
   "di": "01/09/2026",
   "eta": "Tutte le età",
   "first_seen": "2026-08-02",
@@ -3976,7 +4100,7 @@
   "ora": "10:00-12:30 e 15:00-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 157,
+  "riga": 109,
   "slug": "festa-dello-sport-novi-ligure",
   "updated": "2026-08-31"
  },
@@ -4004,7 +4128,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 83,
+  "riga": 60,
   "slug": "festa-di-ceresole-d-alba",
   "updated": "2026-08-31"
  },
@@ -4089,6 +4213,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 178,
+  "ritirata": "2026-08-31",
   "slug": "festa-di-fine-estate-felizzano",
   "updated": "2026-08-31"
  },
@@ -4117,6 +4242,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 9,
+  "ritirata": "2026-08-31",
   "slug": "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto",
   "updated": "2026-08-31"
  },
@@ -4592,7 +4718,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 137,
+  "riga": 99,
   "slug": "festa-patronale-di-sant-isidoro-villanova-d-asti",
   "updated": "2026-08-31"
  },
@@ -4730,7 +4856,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 139,
+  "riga": 101,
   "slug": "festa-patronale-san-chiaffredo-busca",
   "updated": "2026-08-31"
  },
@@ -4759,7 +4885,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 52,
+  "riga": 37,
   "slug": "festa-patronale-san-michele-arcangelo-in-villaroma-villaromagnano",
   "updated": "2026-08-31"
  },
@@ -4956,6 +5082,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 48,
+  "ritirata": "2026-08-31",
   "slug": "festeggiamenti-patronali-sant-agostino-ferrere",
   "updated": "2026-08-31"
  },
@@ -4988,16 +5115,70 @@
   "slug": "festival-cartosio-pro-loco-cartosio",
   "updated": "2026-08-31"
  },
+ "festival-delle-quando-e-dove-asti": {
+  "anchor": "ev-2026-09-12-festival-delle-quando-e-dove",
+  "categoria": "Sagra & Festa",
+  "citta": "Asti",
+  "consigliato": "No",
+  "d_end": "2026-09-12",
+  "d_start": "2026-09-12",
+  "descr": "Il Festival delle Quando e Dove? si svolge sabato 12 e domenica 13 settembre in Piazza Campo del Palio ad Asti, con un villaggio gastronomico ricco di stand ed eccellenze enogastronomiche del territorio. Il sabato si comincia in serata con l'apertura degli stand, mentre la domenica la festa prende vita con una suggestiva sfilata contadina che porta in scena la storia della tradizione locale. Un'occasione perfetta per portare tutta la famiglia a scoprire sapori e tradizioni astigiane nel cuore della città. Programma: 12/09 Festival delle Quando e Dove? - Villaggio Gastronomico (apertura) (18:30); 13/09 Festival delle Quando e Dove? - Sfilata Contadina e Villaggio Gastronomico (9:30).",
+  "df": "",
+  "di": "12/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Piazza Campo del Palio - Asti (AT)",
+  "last_seen": "2026-08-31",
+  "lat": "44.9621126",
+  "loc": "daop_asti_3975622937037426700.webp",
+  "lon": "7.9491609",
+  "luogo": "Piazza Campo del Palio",
+  "manifest": "Festival delle Quando e Dove?",
+  "nome": "Festival delle Quando e Dove?",
+  "ora": "vari",
+  "prezzo": "Gratuito",
+  "prov": "AT",
+  "riga": 166,
+  "slug": "festival-delle-quando-e-dove-asti",
+  "updated": "2026-08-31"
+ },
+ "festival-delle-sagre-astigiane": {
+  "anchor": "ev-2026-09-12-festival-delle-sagre-astigiane-2026",
+  "categoria": "Sagra & Festa",
+  "citta": "Asti",
+  "consigliato": "No",
+  "d_end": "2026-09-12",
+  "d_start": "2026-09-12",
+  "descr": "Il Festival delle Sagre Astigiane torna a Piazza Campo del Palio sabato 12 e domenica 13 settembre 2026. Il Villaggio Gastronomico delle Pro-Loco è aperto sabato dalle 18:30 alle 24:00 e domenica dalle 11:30 alle 22:00. Presenti bus navetta da Piazza Cosma Manera e dal piazzale della piscina Asti Lido. Partecipano la Banda Città di Asti 'G. Cotti' e il gruppo folkloristico Gli Arliquatu.",
+  "df": "",
+  "di": "12/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Piazza Campo del Palio - Asti (AT)",
+  "last_seen": "2026-08-31",
+  "lat": "44.9621126",
+  "loc": "daop_asti_3975270591896298793.webp",
+  "lon": "7.9491609",
+  "luogo": "Piazza Campo del Palio",
+  "manifest": "",
+  "nome": "Festival delle Sagre Astigiane 2026",
+  "ora": "vari",
+  "prezzo": "Gratuito",
+  "prov": "AT",
+  "riga": 165,
+  "slug": "festival-delle-sagre-astigiane",
+  "updated": "2026-08-31"
+ },
  "festival-illustrada-mondovi": {
   "anchor": "ev-2026-09-11-festival-illustrada",
   "categoria": "Cultura",
   "citta": "Mondovì",
   "consigliato": "No",
   "contatto": "info@illustrada.it - illustrada.it",
-  "d_end": "2026-09-13",
+  "d_end": "2026-09-11",
   "d_start": "2026-09-11",
   "descr": "Dal 2018 il Festival Illustrada promuove la lettura e la letteratura scritta e disegnata. Tre giorni diffusi nel rione Piazza di Mondovì - Piazza Maggiore, Museo della Ceramica, Giardini del Belvedere, Salotto del Libro - con laboratori gratuiti per bambini, letture ad alta voce, mostra mercato degli illustratori, firmacopie e incontri con autori e illustratori. Ospiti dell'edizione 2026 l'americano David Wiesner e Nicoletta Costa (Giulio Coniglio), con le mostre al Museo della Ceramica. Alcuni appuntamenti sono su prenotazione via Eventbrite. Programma completo su illustrada.it.",
-  "df": "13/09/2026",
+  "df": "",
   "di": "11/09/2026",
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-25",
@@ -5010,7 +5191,7 @@
   "ora": "Ven 16:00-23:00, Sab 10:00-22:30, Dom 10:00-17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 175,
+  "riga": 118,
   "slug": "festival-illustrada-mondovi",
   "updated": "2026-08-31"
  },
@@ -5485,6 +5666,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 158,
+  "ritirata": "2026-08-31",
   "slug": "frutti-e-buoi-dei-paesi-tuoi-frascaro",
   "updated": "2026-08-31"
  },
@@ -5570,6 +5752,33 @@
   "slug": "giochi-d-acqua-chiosco-parri-cuneo",
   "updated": "2026-08-31"
  },
+ "giochi-in-piazza-castell-alfero": {
+  "anchor": "ev-2026-09-04-giochi-in-piazza-castell-alfero",
+  "categoria": "Sagra & Festa",
+  "citta": "Castell'Alfero",
+  "consigliato": "No",
+  "d_end": "2026-09-04",
+  "d_start": "2026-09-04",
+  "descr": "Serata di giochi per famiglie in Piazza Castello a Castell'Alfero, nell'ambito degli eventi del Palio di Asti in Famiglia.",
+  "df": "04/09/2026",
+  "di": "04/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Piazza Castello - Castell'Alfero (AT)",
+  "last_seen": "2026-08-31",
+  "lat": "44.9824812",
+  "loc": "daop_asti_3975685453868814377.webp",
+  "lon": "8.2090158",
+  "luogo": "Piazza Castello",
+  "manifest": "Palio di Asti in Famiglia 2026",
+  "nome": "Giochi in Piazza — Castell'Alfero",
+  "ora": "21:30",
+  "prezzo": "Gratuito",
+  "prov": "AT",
+  "riga": 163,
+  "slug": "giochi-in-piazza-castell-alfero",
+  "updated": "2026-08-31"
+ },
  "giochi-per-bambini-e-bolle-di-sapone-giganti-festiona": {
   "adatto_famiglie": "Si",
   "anchor": "ev-2026-08-10-giochi-per-bambini-e-bolle-di-sapone-giganti",
@@ -5622,7 +5831,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 37,
+  "riga": 28,
   "slug": "giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano",
   "updated": "2026-08-31"
  },
@@ -5684,6 +5893,33 @@
   "slug": "giochiamo-insieme-san-damiano-d-asti",
   "updated": "2026-08-31"
  },
+ "giornata-bimbi-baldichieri-d-asti": {
+  "anchor": "ev-2026-09-02-giornata-bimbi-baldichieri-d-asti",
+  "categoria": "Sagra & Festa",
+  "citta": "Baldichieri d'Asti",
+  "consigliato": "No",
+  "d_end": "2026-09-02",
+  "d_start": "2026-09-02",
+  "descr": "Giornata dedicata ai bambini con incontro coi cavalli e col mondo del Palio. Si svolge presso la Scuderia e il Giardino Comunale di Baldichieri d'Asti.",
+  "df": "02/09/2026",
+  "di": "02/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Scuderia e Giardino Comunale - Baldichieri d'Asti (AT)",
+  "last_seen": "2026-08-31",
+  "lat": "44.9062543",
+  "loc": "daop_asti_3975685453868814377.webp",
+  "lon": "8.0907902",
+  "luogo": "Scuderia e Giardino Comunale",
+  "manifest": "Palio di Asti in Famiglia 2026",
+  "nome": "Giornata Bimbi — Baldichieri d'Asti",
+  "ora": "mattina",
+  "prezzo": "Gratuito",
+  "prov": "AT",
+  "riga": 160,
+  "slug": "giornata-bimbi-baldichieri-d-asti",
+  "updated": "2026-08-31"
+ },
  "giornata-bimbi-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
   "anchor": "ev-2026-09-01-giornata-bimbi-pro-loco-sant-albano-stura",
@@ -5739,7 +5975,7 @@
   "prov": "CN",
   "riga": 93,
   "slug": "govone-in-festa-sagra-della-lumaca",
-  "updated": "2026-08-30"
+  "updated": "2026-08-31"
  },
  "gran-fritto-misto-pro-loco-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -5936,7 +6172,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 185,
+  "riga": 124,
   "slug": "guidati-dal-cuore-lions-international-gavi-e-colli",
   "updated": "2026-08-31"
  },
@@ -5993,6 +6229,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 128,
+  "ritirata": "2026-08-31",
   "slug": "i-bambini-del-palio-mostra-fotografica-di-enzo-isa-rocca-d-arazzo",
   "updated": "2026-08-31"
  },
@@ -6021,6 +6258,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 14,
+  "ritirata": "2026-08-31",
   "slug": "i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure",
   "updated": "2026-08-31"
  },
@@ -6105,7 +6343,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 204,
+  "riga": 136,
   "slug": "il-giardino-di-babushka-pro-loco-aisone",
   "updated": "2026-08-31"
  },
@@ -6163,6 +6401,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 13,
+  "ritirata": "2026-08-31",
   "slug": "il-passerotto-che-scopri-il-mondo-l-arca-di-noe-te-viguzzolo",
   "updated": "2026-08-31"
  },
@@ -6219,7 +6458,7 @@
   "ora": "9:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 205,
+  "riga": 137,
   "slug": "in-mtb-lungo-il-torrente-varaita-asd-transvaraita-sampeyre",
   "updated": "2026-08-31"
  },
@@ -6247,7 +6486,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 112,
+  "riga": 76,
   "slug": "in-viaggio-per-crescere-con-le-storie-nati-per-leg-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -6302,7 +6541,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 147,
+  "riga": 105,
   "slug": "l-albero-compagnia-il-cerchio-tondo-novello",
   "updated": "2026-08-31"
  },
@@ -6499,7 +6738,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 114,
+  "riga": 78,
   "slug": "la-polizia-locale-incontra-i-piccoli-lettori-regol-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -6527,7 +6766,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 174,
+  "riga": 117,
   "slug": "la-quercia-e-i-suoi-abitanti-cinema-al-centro-monta",
   "updated": "2026-08-31"
  },
@@ -6557,6 +6796,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 49,
+  "ritirata": "2026-08-31",
   "slug": "la-scala-del-re-al-castello-di-carru",
   "updated": "2026-08-31"
  },
@@ -6696,6 +6936,7 @@
   "prezzo": "5 euro",
   "prov": "CN",
   "riga": 140,
+  "ritirata": "2026-08-31",
   "slug": "laboratorio-creativo-di-feltro-ecomuseo-della-past-castellar",
   "updated": "2026-08-31"
  },
@@ -6725,6 +6966,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 25,
+  "ritirata": "2026-08-31",
   "slug": "laboratorio-creativo-sulle-emozioni-san-damiano-d-asti",
   "updated": "2026-08-31"
  },
@@ -6809,6 +7051,7 @@
   "prezzo": "7,00 euro a bambino",
   "prov": "CN",
   "riga": 163,
+  "ritirata": "2026-08-31",
   "slug": "laboratorio-di-caseificazione-con-emotionalp-castellar",
   "updated": "2026-08-31"
  },
@@ -6837,6 +7080,7 @@
   "prezzo": "18 euro",
   "prov": "CN",
   "riga": 189,
+  "ritirata": "2026-08-31",
   "slug": "laboratorio-di-cioccolato-fagiolo-peirano-busca-castellar",
   "updated": "2026-08-31"
  },
@@ -6894,6 +7138,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 115,
+  "ritirata": "2026-08-31",
   "slug": "laboratorio-orticolo-del-prof-ganora-il-girasole-b-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -7063,7 +7308,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 138,
+  "riga": 100,
   "slug": "lettura-per-bambini-una-mattina-con-viola-pro-loco-grinzane-cavour",
   "updated": "2026-08-31"
  },
@@ -7180,15 +7425,15 @@
   "updated": "2026-08-31"
  },
  "lunatorio-oratorio-carru": {
-  "anchor": "ev-2026-08-31-lunatorio-oratorio-carru",
+  "anchor": "ev-2026-09-07-lunatorio-oratorio-carru",
   "categoria": "Sagra & Festa",
   "citta": "Carrù",
   "consigliato": "No",
-  "d_end": "2026-09-04",
-  "d_start": "2026-08-31",
-  "descr": "Il Lunatorio è l'evento estivo dell'Oratorio di Carrù: due settimane di attività, giochi e divertimento per bambini e ragazzi, dalle 20:30 alle 22:30. Prima settimana dal 31 agosto al 4 settembre, seconda settimana dal 7 all'11 settembre.",
-  "df": "04/09/2026",
-  "di": "31/08/2026",
+  "d_end": "2026-09-11",
+  "d_start": "2026-09-07",
+  "descr": "Seconda settimana del Lunatorio, l'evento estivo dell'Oratorio di Carrù: attività, giochi e divertimento per bambini e ragazzi dalle 20:30 alle 22:30, dal 7 all'11 settembre.",
+  "df": "11/09/2026",
+  "di": "07/09/2026",
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-28",
   "indirizzo": "Oratorio Carrù - Carrù (CN)",
@@ -7202,7 +7447,7 @@
   "ora": "20:30-22:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 190,
+  "riga": 129,
   "slug": "lunatorio-oratorio-carru",
   "updated": "2026-08-31"
  },
@@ -7259,6 +7504,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 76,
+  "ritirata": "2026-08-31",
   "slug": "masca-il-ritorno-della-strega-pro-loco-di-spigno-m-spigno-monferrato",
   "updated": "2026-08-31"
  },
@@ -7371,6 +7617,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 43,
+  "ritirata": "2026-08-31",
   "slug": "mongardino-agosto",
   "updated": "2026-08-31"
  },
@@ -7428,6 +7675,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
   "riga": 21,
+  "ritirata": "2026-08-31",
   "slug": "mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure",
   "updated": "2026-08-31"
  },
@@ -7455,7 +7703,7 @@
   "ora": "09:00-13:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 33,
+  "riga": 24,
   "slug": "mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti",
   "updated": "2026-08-31"
  },
@@ -7485,6 +7733,7 @@
   "prezzo": "Biglietto intero 6 euro; gratuito per disabili con accompagnatore e bambini fino a 11 anni",
   "prov": "AL",
   "riga": 73,
+  "ritirata": "2026-08-31",
   "slug": "musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria",
   "updated": "2026-08-31"
  },
@@ -7540,6 +7789,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 142,
+  "ritirata": "2026-08-31",
   "slug": "negozi-in-strada-sport-in-piazza-confcommercio-sal-saluzzo",
   "updated": "2026-08-31"
  },
@@ -7567,7 +7817,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 82,
+  "riga": 59,
   "slug": "nizza-e-sport-pro-loco-nizza-monferrato",
   "updated": "2026-08-31"
  },
@@ -7625,6 +7875,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 176,
+  "ritirata": "2026-08-31",
   "slug": "open-day-corsi-di-musica-crome-in-movimento-aps-vezza-d-alba",
   "updated": "2026-08-31"
  },
@@ -7792,8 +8043,35 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 44,
+  "riga": 31,
   "slug": "palio-baldichieri-castell-alfero",
+  "updated": "2026-08-31"
+ },
+ "palio-di-asti": {
+  "anchor": "ev-2026-09-05-palio-di-asti-2026",
+  "categoria": "Sagra & Festa",
+  "citta": "Asti",
+  "consigliato": "No",
+  "d_end": "2026-09-06",
+  "d_start": "2026-09-05",
+  "descr": "Il Palio di Asti è una delle rievocazioni medievali più amate del Piemonte, che si svolge nel centro storico della città e in Piazza Alfieri nel corso di due giorni. Il primo pomeriggio porta in scena circa 1.000 bambini dai 5 ai 15 anni in costume medievale, che sfilano da Piazza Cattedrale fino a Piazza Alfieri sul tema dei giochi e delle tradizioni dell'infanzia nel Medioevo, seguiti nel tardo pomeriggio dalla Prova della Vigilia, la prova generale della corsa. Il giorno successivo, sempre nel pomeriggio, il Corteo Storico dei 21 Rioni, Borghi e Comuni apre la strada alla Corsa del Palio, la storica gara equestre in Piazza Alfieri che è il gran finale dell'intera manifestazione. Programma: 05/09 Sfilata dei Bambini del Palio di Asti (14:45); 05/09 Prova della Vigilia del Palio di Asti (16:30); 06/09 Corteo Storico del Palio di Asti (13:45); 06/09 Corsa del Palio di Asti (16:00).",
+  "df": "06/09/2026",
+  "di": "05/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Piazza Cattedrale - Asti (AT)",
+  "last_seen": "2026-08-31",
+  "lat": "44.9621126",
+  "loc": "daop_asti_3975676855973384968.webp",
+  "lon": "7.9491609",
+  "luogo": "Piazza Cattedrale",
+  "manifest": "Palio di Asti 2026",
+  "nome": "Palio di Asti 2026",
+  "ora": "vari",
+  "prezzo": "Gratuito",
+  "prov": "AT",
+  "riga": 158,
+  "slug": "palio-di-asti",
   "updated": "2026-08-31"
  },
  "palio-di-asti-sabato-05-settembre": {
@@ -7821,7 +8099,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 45,
+  "riga": 32,
   "slug": "palio-di-asti-sabato-05-settembre",
   "updated": "2026-08-31"
  },
@@ -7958,7 +8236,7 @@
   "ora": "18:00-21:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 53,
+  "riga": 38,
   "slug": "passeggiata-a-cavallo-con-axel-circolo-la-torre-albaretto",
   "updated": "2026-08-31"
  },
@@ -7987,6 +8265,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 108,
+  "ritirata": "2026-08-31",
   "slug": "passeggiate-nella-natura-per-bambini-e-famiglie-cuneo",
   "updated": "2026-08-31"
  },
@@ -8127,6 +8406,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 196,
+  "ritirata": "2026-08-31",
   "slug": "piccoli-semi-grandi-scoperte-parco-fluviale-gesso-cuneo",
   "updated": "2026-08-31"
  },
@@ -8294,7 +8574,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 11,
+  "riga": 9,
   "slug": "play-land-kids-summer-events-ass-jim-pet-serravalle-scrivia",
   "updated": "2026-08-31"
  },
@@ -8406,6 +8686,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 7,
+  "ritirata": "2026-08-31",
   "slug": "pompieropoli-buttigliera-buttigliera-d-asti",
   "updated": "2026-08-31"
  },
@@ -8523,6 +8804,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
   "riga": 121,
+  "ritirata": "2026-08-31",
   "slug": "primi-passi-di-svezzamento-officina-femminile-alessandria",
   "updated": "2026-08-31"
  },
@@ -8579,6 +8861,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 87,
+  "ritirata": "2026-08-31",
   "slug": "programma-festeggiamenti-pro-loco-san-benigno",
   "updated": "2026-08-31"
  },
@@ -8802,7 +9085,7 @@
   "ora": "14:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 107,
+  "riga": 73,
   "slug": "rivoira-by-sport-boves",
   "updated": "2026-08-31"
  },
@@ -8914,7 +9197,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 15,
+  "riga": 12,
   "slug": "sagra-dei-ceci-novi-ligure",
   "updated": "2026-08-31"
  },
@@ -9026,7 +9309,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 80,
+  "riga": 57,
   "slug": "sagra-del-corzetto-settembre-pasturanese-pasturana",
   "updated": "2026-08-31"
  },
@@ -9054,6 +9337,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 94,
+  "ritirata": "2026-08-31",
   "slug": "sagra-del-fritto-misto-e-non-solo-sezzadio",
   "updated": "2026-08-31"
  },
@@ -9109,6 +9393,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 8,
+  "ritirata": "2026-08-31",
   "slug": "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv",
   "updated": "2026-08-31"
  },
@@ -9219,7 +9504,7 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 68,
+  "riga": 49,
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-con-alex-govone",
   "updated": "2026-08-31"
  },
@@ -9247,7 +9532,7 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 69,
+  "riga": 50,
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-con-dj-de-govone",
   "updated": "2026-08-31"
  },
@@ -9278,7 +9563,7 @@
   "riga": 223,
   "ritirata": "2026-08-18",
   "slug": "sagra-dell-agnolotto-e-del-bollito-misto-pro-loco-govone",
-  "updated": "2026-08-30"
+  "updated": "2026-08-31"
  },
  "sagra-dell-agnolotto-pecetto-di-valenza": {
   "anchor": "ev-2026-08-27-sagra-dell-agnolotto-2026",
@@ -9528,6 +9813,33 @@
   "slug": "sagra-della-zucca-castelletto-monferrato",
   "updated": "2026-08-31"
  },
+ "sagra-della-zucca-isola-sant-antonio": {
+  "anchor": "ev-2026-09-05-sagra-della-zucca",
+  "categoria": "Sagra & Festa",
+  "citta": "Isola Sant'Antonio",
+  "consigliato": "No",
+  "d_end": "2026-09-06",
+  "d_start": "2026-09-05",
+  "descr": "La Sagra della Zucca torna a Isola Sant'Antonio per due serate di festa, il 5 e il 6 settembre 2026. Ogni sera è possibile cenare con i piatti tipici della tradizione locale e ammirare l'esposizione e la vendita della zucca, protagonista assoluta della manifestazione. A seguire la cena, la musica dal vivo anima la piazza con concerti per tutti i gusti. In caso di maltempo, il ristorante è allestito al coperto. Programma: 05/09 Associazione Musicale Impressioni di Settembre - Music Tribute anni '60 '70 '80 '90 - Pro Loco Isola Sant'Antonio (19:30); 06/09 Jess New Style - Live Music - Pro Loco Isola Sant'Antonio (19:30).",
+  "df": "06/09/2026",
+  "di": "05/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Piazza della Posta - Isola Sant'Antonio (AL)",
+  "last_seen": "2026-08-31",
+  "lat": "45.0305288",
+  "loc": "daop_alessandria_3975158460435274243.webp",
+  "lon": "8.8487577",
+  "luogo": "Piazza della Posta",
+  "manifest": "Sagra della Zucca",
+  "nome": "Sagra della Zucca",
+  "ora": "19:30",
+  "prezzo": "Gratuito",
+  "prov": "AL",
+  "riga": 155,
+  "slug": "sagra-della-zucca-isola-sant-antonio",
+  "updated": "2026-08-31"
+ },
  "sagra-delle-frittelle-arquata-scrivia": {
   "adatto_famiglie": "Si",
   "anchor": "ev-2026-08-07-47a-sagra-delle-frittelle-2026",
@@ -9608,6 +9920,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 86,
+  "ritirata": "2026-08-31",
   "slug": "sagra-dello-gnocco-festa-patronale-cherasco",
   "updated": "2026-08-31"
  },
@@ -9637,6 +9950,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 86,
+  "ritirata": "2026-08-31",
   "slug": "sagra-dello-gnocco-festa-patronale-mombarcaro",
   "spostata": "sagra-dello-gnocco-festa-patronale-cherasco",
   "updated": "2026-08-30"
@@ -9748,7 +10062,7 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 70,
+  "riga": 51,
   "slug": "sagra-gastronomica-con-polenta-e-cinghiale-con-giu-govone",
   "updated": "2026-08-31"
  },
@@ -9833,7 +10147,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 161,
+  "riga": 111,
   "slug": "san-damiano-summer-festival-san-damiano-d-asti",
   "updated": "2026-08-31"
  },
@@ -9891,6 +10205,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 54,
+  "ritirata": "2026-08-31",
   "slug": "san-liberato-sant-albano-stura",
   "updated": "2026-08-31"
  },
@@ -10071,10 +10386,10 @@
   "categoria": "Sport",
   "citta": "Alessandria",
   "consigliato": "No",
-  "d_end": "2026-09-13",
+  "d_end": "2026-09-12",
   "d_start": "2026-09-12",
   "descr": "Due giornate dedicate allo sport, al benessere e al movimento alla Cittadella di Alessandria. Un'occasione per scoprire nuove discipline, provare attività sportive e incontrare associazioni e società del territorio. Evento con patrocinio di Regione Piemonte, Città e Provincia di Alessandria.",
-  "df": "13/09/2026",
+  "df": "",
   "di": "12/09/2026",
   "eta": "Tutte le eta' (famiglie)",
   "first_seen": "2026-08-11",
@@ -10089,7 +10404,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 89,
+  "riga": 65,
   "slug": "sbem-festival-sport-benessere-e-movimento-acm-even-alessandria",
   "updated": "2026-08-31"
  },
@@ -10231,6 +10546,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 6,
+  "ritirata": "2026-08-31",
   "slug": "serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona",
   "updated": "2026-08-31"
  },
@@ -10287,7 +10603,7 @@
   "ora": "20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 72,
+  "riga": 53,
   "slug": "serata-hamburger-patatine-e-birra-con-max-mania-88-govone",
   "updated": "2026-08-31"
  },
@@ -10318,7 +10634,7 @@
   "riga": 226,
   "ritirata": "2026-08-18",
   "slug": "serata-hamburger-patatine-e-birra-pro-loco-canove-govone",
-  "updated": "2026-08-30"
+  "updated": "2026-08-31"
  },
  "serata-latina-salsabor-pro-loco-cunico": {
   "adatto_famiglie": "Si",
@@ -10382,10 +10698,10 @@
   "citta": "Spigno Monferrato",
   "consigliato": "No",
   "contatto": "349 192 31 00",
-  "d_end": "2026-09-13",
+  "d_end": "2026-09-04",
   "d_start": "2026-09-04",
   "descr": "Settembre Spignese è la grande festa estiva di Spigno Monferrato, che dal 4 al 13 settembre 2026 anima piazze, parchi e chiese del paese con dieci giorni di musica, gastronomia e divertimento per tutta la famiglia. Gli stand gastronomici e il servizio bar accompagnano le serate, mentre i più piccoli possono godersi giochi, animazione e passeggiate con i pony al Parco Dottor Antonino Calì. Non mancano momenti culturali e spirituali, mostre di pittura, un banco di beneficenza e le attrazioni del luna park con gli autoscontri, aperti per tutta la durata della manifestazione. Programma: 04/09 Festa delle Leve - Music Power - Pro Loco Spigno Monferrato (22:00); 04/09 Mostre di Pittura, Luna Park e Autoscontri - Pro Loco Spigno Monferrato; 05/09 Serata Musicale con Toy Boy Band - Pro Loco Spigno Monferrato (21:00); 06/09 Gara Scala 40 - Pro Loco Spigno Monferrato (14:00); 06/09 Animazione e Giochi per Bambini - Passeggiate con i Pony - Pro Loco Spigno Monferrato (15:00); 06/09 Serata Musicale con Lui Lei L'Altro - Pro Loco Spigno Monferrato (21:00); 07/09 Concerto di Musica Classica - Aleramo Ensemble - Pro Loco Spigno Monferrato (21:00); 08/09 Santa Messa - Pro Loco Spigno Monferrato (11:00); 08/09 Open Concerto Trelilu: Maria Sole Giovine - Pro Loco Spigno Monferrato (20:30); 08/09 Love alla Coc - Concerto Trelilu con DJ Cionco - Pro Loco Spigno Monferrato (21:00); 13/09 Conversazione Storica del Prof. Claudio Delfino e Proiezioni Video - Pro Loco Spigno Monferrato (17:00).",
-  "df": "13/09/2026",
+  "df": "",
   "di": "04/09/2026",
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-08-23",
@@ -10400,7 +10716,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 155,
+  "riga": 107,
   "slug": "settembre-spignese-spigno-monferrato",
   "updated": "2026-08-31"
  },
@@ -10456,6 +10772,7 @@
   "prezzo": "20 euro",
   "prov": "CN",
   "riga": 210,
+  "ritirata": "2026-08-31",
   "slug": "sogni-d-oro-carezza-racconigi",
   "updated": "2026-08-31"
  },
@@ -10483,8 +10800,35 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 173,
+  "riga": 116,
   "slug": "sogni-di-mare-ricordi-di-sabbia-letture-favolose-fossano",
+  "updated": "2026-08-31"
+ },
+ "soma-d-aj-biblioteca-civica-di-magliano-alfieri": {
+  "anchor": "ev-2026-09-12-soma-d-aj-biblioteca-civica-di-magliano-alfieri",
+  "categoria": "Sagra & Festa",
+  "citta": "Magliano Alfieri",
+  "consigliato": "No",
+  "d_end": "2026-09-12",
+  "d_start": "2026-09-12",
+  "descr": "Appuntamento annuale con la Soma d'Aj, la tradizionale bruschetta con aglio, pomodoro e olio. In programma bruschette, uva, dolci e vino per tutti, performance di giocoleria con Umberto ed Elena, trucca bimbi, palloncini, baratto di libri e consegna della Costituzione ai neo 18enni da parte del Sindaco.",
+  "df": "12/09/2026",
+  "di": "12/09/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-08-31",
+  "indirizzo": "Biblioteca Civica di Magliano Alfieri - Magliano Alfieri (CN)",
+  "last_seen": "2026-08-31",
+  "lat": "44.7662761",
+  "loc": "daop_asti_3975269493374099932.webp",
+  "lon": "8.0750292",
+  "luogo": "Biblioteca Civica di Magliano Alfieri",
+  "manifest": "",
+  "nome": "Soma d'Aj - Biblioteca Civica di Magliano Alfieri",
+  "ora": "16:00",
+  "prezzo": "Gratuito",
+  "prov": "CN",
+  "riga": 164,
+  "slug": "soma-d-aj-biblioteca-civica-di-magliano-alfieri",
   "updated": "2026-08-31"
  },
  "spazio-creativita-i-colori-dell-autunno-biblioteca-casale-monferrato": {
@@ -10512,6 +10856,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 120,
+  "ritirata": "2026-08-31",
   "slug": "spazio-creativita-i-colori-dell-autunno-biblioteca-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -10566,7 +10911,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 65,
+  "riga": 46,
   "slug": "spinetta-in-festa-spinetta-marengo",
   "updated": "2026-08-31"
  },
@@ -10622,7 +10967,7 @@
   "ora": "14:30-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 208,
+  "riga": 140,
   "slug": "sport-in-piazza-festa-dello-sport-pro-loco-barge",
   "updated": "2026-08-31"
  },
@@ -10651,6 +10996,7 @@
   "prezzo": "Adulti 30,00€; Ragazzi 7-12 anni 16,00€; Bambini fino a 6 anni gratis",
   "prov": "AT",
   "riga": 133,
+  "ritirata": "2026-08-31",
   "slug": "stramangiando-pro-loco-motta-di-costigliole-d-asti",
   "updated": "2026-08-31"
  },
@@ -10678,7 +11024,7 @@
   "ora": "19:00",
   "prezzo": "10 euro",
   "prov": "AL",
-  "riga": 38,
+  "riga": 29,
   "slug": "stratortona-croce-rossa-italiana-comitato-di-torto",
   "updated": "2026-08-31"
  },
@@ -10766,6 +11112,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 116,
+  "ritirata": "2026-08-31",
   "slug": "teatro-in-inglese-con-kids-us-around-the-world-bib-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -10794,7 +11141,7 @@
   "ora": "15:30-18:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 27,
+  "riga": 20,
   "slug": "tennis-da-tavolo-e-basket-san-damiano-d-asti",
   "updated": "2026-08-31"
  },
@@ -10877,7 +11224,7 @@
   "ora": "21:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 71,
+  "riga": 52,
   "slug": "tombola-sotto-le-stelle-pro-loco-canove-govone",
   "updated": "2026-08-31"
  },
@@ -10905,7 +11252,7 @@
   "ora": "20:30-22:30",
   "prezzo": "3 euro",
   "prov": "CN",
-  "riga": 111,
+  "riga": 75,
   "slug": "torneo-di-pallaprigioniera-animatori-beinette",
   "updated": "2026-08-31"
  },
@@ -10933,7 +11280,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 81,
+  "riga": 58,
   "slug": "tradizionale-fiera-di-san-chiaffredo-pro-loco-cris-crissolo",
   "updated": "2026-08-31"
  },
@@ -10960,7 +11307,7 @@
   "ora": "da verificare",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 136,
+  "riga": 98,
   "slug": "treno-storico-centoporte-per-cocconato-riviera-del-asti",
   "updated": "2026-08-31"
  },
@@ -11017,6 +11364,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 187,
+  "ritirata": "2026-08-31",
   "slug": "trofeo-riccoboni-holding-ambiente-in-gioco-monferr-castelferro-di-predosa",
   "updated": "2026-08-31"
  },
@@ -11073,6 +11421,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 165,
+  "ritirata": "2026-08-31",
   "slug": "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi",
   "updated": "2026-08-31"
  },
@@ -11101,6 +11450,7 @@
   "prezzo": "25 euro",
   "prov": "CN",
   "riga": 211,
+  "ritirata": "2026-08-31",
   "slug": "tutti-a-tavola-carezza-racconigi",
   "updated": "2026-08-31"
  },
@@ -11157,7 +11507,7 @@
   "ora": "09:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 26,
+  "riga": 19,
   "slug": "un-circo-in-via-pero-laboratorio-teatrale-ed-espre-san-damiano-d-asti",
   "updated": "2026-08-31"
  },
@@ -11363,10 +11713,10 @@
   "citta": "Mombaruzzo",
   "consigliato": "No",
   "contatto": "349 6202302 - info@vinipiana.com",
-  "d_end": "2026-09-13",
+  "d_end": "2026-09-12",
   "d_start": "2026-09-12",
   "descr": "Esperienza di vendemmia in vigna dedicata alle famiglie con bambini. I piccoli possono toccare, raccogliere e scoprire il mondo della vite durante il periodo della raccolta. Prenotazione obbligatoria almeno 48 ore prima.",
-  "df": "13/09/2026",
+  "df": "",
   "di": "12/09/2026",
   "eta": "3-10 anni",
   "first_seen": "2026-08-20",
@@ -11381,7 +11731,7 @@
   "ora": "da verificare",
   "prezzo": "60 euro adulti, 45 euro bambini",
   "prov": "AT",
-  "riga": 125,
+  "riga": 87,
   "slug": "vendemmia-in-vigna-con-i-bambini-vini-piana-mombaruzzo",
   "updated": "2026-08-31"
  },
@@ -11410,6 +11760,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 117,
+  "ritirata": "2026-08-31",
   "slug": "vietato-sputare-fuoco-con-ass-penelope-emozioni-pe-casale-monferrato",
   "updated": "2026-08-31"
  },
@@ -11437,7 +11788,7 @@
   "ora": "9:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 135,
+  "riga": 97,
   "slug": "villanova-summer-festival-villanova-d-asti",
   "updated": "2026-08-31"
  },

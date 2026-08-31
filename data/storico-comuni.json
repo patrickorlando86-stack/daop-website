@@ -323,6 +323,17 @@
     "pagina": true,
     "ultima": "2026-08-23"
    },
+   "expo-d-arte-l-arte-inizia-da-te-atelier-ariel-cent-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Lostecco",
+    "manifest": "",
+    "nome": "2ª Expo d'Arte 'L'Arte Inizia da Te' - Atelier Ariel Centro Estivo Creativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
    "festa-della-birra-street-food-alessandria": {
     "anni": [
      2026
@@ -557,6 +568,28 @@
  },
  "asti": {
   "eventi": {
+   "festival-delle-quando-e-dove-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Campo del Palio",
+    "manifest": "Festival delle Quando e Dove?",
+    "nome": "Festival delle Quando e Dove?",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
+   "festival-delle-sagre-astigiane": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Campo del Palio",
+    "manifest": "",
+    "nome": "Festival delle Sagre Astigiane 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
    "paleolab-paleontologo-per-un-giorno-parco-paleonto-asti": {
     "anni": [
      2026
@@ -567,6 +600,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-30"
+   },
+   "palio-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Cattedrale",
+    "manifest": "Palio di Asti 2026",
+    "nome": "Palio di Asti 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
    },
    "palio-di-asti-sabato-05-settembre": {
     "anni": [
@@ -617,6 +661,17 @@
     "organizza": "Pro Loco di Cantarana",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "giornata-bimbi-baldichieri-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuderia e Giardino Comunale",
+    "manifest": "Palio di Asti in Famiglia 2026",
+    "nome": "Giornata Bimbi — Baldichieri d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-02"
    }
   },
   "nome": "Baldichieri d'Asti",
@@ -1251,7 +1306,7 @@
     "nome": "In viaggio per crescere con le storie (Nati per Leggere con i raccontastorie) - Biblioteca Ragazzi E. Luzzati",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-24"
+    "ultima": "2026-09-08"
    },
    "la-polizia-locale-incontra-i-piccoli-lettori-regol-casale-monferrato": {
     "anni": [
@@ -1389,7 +1444,7 @@
     "nome": "I Giovedì in Biblioteca",
     "organizza": "",
     "pagina": false,
-    "ultima": "2026-09-24"
+    "ultima": "2026-09-10"
    },
    "la-radio-e-la-macchina-da-scrivere-nella-storia-casalnoceto": {
     "anni": [
@@ -1594,6 +1649,17 @@
  },
  "castellalfero": {
   "eventi": {
+   "giochi-in-piazza-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "Palio di Asti in Famiglia 2026",
+    "nome": "Giochi in Piazza — Castell'Alfero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   },
    "palio-baldichieri-castell-alfero": {
     "anni": [
      2026
@@ -2347,6 +2413,23 @@
    }
   },
   "nome": "Cinaglio",
+  "prov": "AT"
+ },
+ "cocconato": {
+  "eventi": {
+   "cocco-wine-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Cocconato",
+    "manifest": "Cocco...Wine 2026",
+    "nome": "Cocco...Wine 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Cocconato",
   "prov": "AT"
  },
  "confreria": {
@@ -3822,6 +3905,40 @@
   "nome": "Isasca",
   "prov": "CN"
  },
+ "isoladasti": {
+  "eventi": {
+   "estate-in-frazione-palco-a-sorpresa-con-i-fuori-di-isola-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Govone",
+    "manifest": "Estate in Frazione",
+    "nome": "Estate in Frazione - Palco a Sorpresa con i Fuori di Quinta - Pro Loco Isola d'Asti",
+    "organizza": "Pro Loco Isola d'Asti",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Isola d'Asti",
+  "prov": "AT"
+ },
+ "isolasantantonio": {
+  "eventi": {
+   "sagra-della-zucca-isola-sant-antonio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Posta",
+    "manifest": "Sagra della Zucca",
+    "nome": "Sagra della Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Isola Sant'Antonio",
+  "prov": "AL"
+ },
  "limonepiemonte": {
   "eventi": {
    "corrado-brignolo-presenta-villa-felice-un-libro-di-limone-piemonte": {
@@ -3894,6 +4011,23 @@
   "nome": "Limone Piemonte",
   "prov": "CN"
  },
+ "lunassi": {
+  "eventi": {
+   "festa-della-panissa-circolo-lunassese-lunassi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Lunassi",
+    "manifest": "",
+    "nome": "Festa della Panissa - Circolo Lunassese",
+    "organizza": "Circolo Lunassese",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "Lunassi",
+  "prov": "AL"
+ },
  "maglianoalfieri": {
   "eventi": {
    "castelli-aperti-a-ferragosto-castello-degli-alfier-magliano-alfieri": {
@@ -3906,6 +4040,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "soma-d-aj-biblioteca-civica-di-magliano-alfieri": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Magliano Alfieri",
+    "manifest": "",
+    "nome": "Soma d'Aj - Biblioteca Civica di Magliano Alfieri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
    }
   },
   "nome": "Magliano Alfieri",
@@ -4023,7 +4168,7 @@
     "nome": "Vendemmia in Vigna con i Bambini - Vini Piana",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-26"
+    "ultima": "2026-09-12"
    }
   },
   "nome": "Mombaruzzo",
@@ -4083,6 +4228,23 @@
    }
   },
   "nome": "Monastero Bormida",
+  "prov": "AT"
+ },
+ "moncalvo": {
+  "eventi": {
+   "bimbi-in-stalla-merenda-col-fantino-moncalvo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Garibaldi",
+    "manifest": "Palio di Asti in Famiglia 2026",
+    "nome": "Bimbi in Stalla + Merenda col Fantino — Moncalvo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-03"
+   }
+  },
+  "nome": "Moncalvo",
   "prov": "AT"
  },
  "mondovi": {
@@ -4706,6 +4868,17 @@
  },
  "ovada": {
   "eventi": {
+   "memorial-pasquale-messina-tamburello-cinaglio-vs-a-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sferisterio di Ovada",
+    "manifest": "",
+    "nome": "Memorial Pasquale Messina - Tamburello Cinaglio vs Arcene",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
+   },
    "ovada-in-festa-pro-loco-ovada-e-del-monferrato-ova": {
     "anni": [
      2026
