@@ -12,7 +12,7 @@ Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
 (opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
 raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob
+import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob, difflib, itertools
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
@@ -1960,11 +1960,16 @@ def segnala_sovrapposizioni(events):
     Le righe senza un'ora numerica ("vari", vuoto) restano fuori: senza ora il
     criterio diventa citta + giorno, e in una sagra di paese segnalerebbe
     mezzo programma."""
+    # Il comune si confronta NORMALIZZATO, non com'e' scritto: maiuscole,
+    # accenti e spazi doppi non fanno due paesi diversi, ma per una stringa
+    # grezza si'. Non basta pero' a coprire il caso del 30/08 - vedi
+    # segnala_comuni_simili() - perche' "Ceresole Alba" e "Ceresole d'Alba"
+    # restano diversi anche normalizzati: li' manca una lettera, non un accento.
     g = collections.defaultdict(list)
     for e in events:
         ora = _ora_inizio(e.get('ora'))
         if ora:
-            g[((e.get('citta') or '').strip(), e['d_start'], ora)].append(e)
+            g[(_key(e.get('citta')), e['d_start'], ora)].append(e)
     coll = {k: v for k, v in g.items() if len(v) > 1}
     if not coll:
         return
@@ -1972,7 +1977,8 @@ def segnala_sovrapposizioni(events):
     print(f"[genera_eventi] ATTENZIONE: {quante} eventi in {len(coll)} sovrapposizioni "
           f"(stessa citta, stesso giorno, stessa ora). Spesso e' lo stesso evento preso "
           f"da due locandine: si uniscono a mano nel foglio, guardando il luogo.")
-    for (citta, d, ora), v in sorted(coll.items(), key=lambda kv: (kv[0][1], kv[0][2])):
+    for (_c, d, ora), v in sorted(coll.items(), key=lambda kv: (kv[0][1], kv[0][2])):
+        citta = (v[0].get('citta') or '').strip()
         print(f"    {d.strftime('%d/%m')} ore {ora} — {citta}:")
         for e in sorted(v, key=lambda e: e.get('riga') or 0):
             print(f"        {_rif(e)}  {(e.get('nome') or '')[:56]}")
@@ -2111,6 +2117,67 @@ def _doppioni_riscritti(events, gia_visti):
         print(f"    {giorno.strftime('%d/%m')} {(a.get('citta') or '')[:18]:18} "
               f"{_rif(a)} \"{(a.get('nome') or '')[:40]}\"")
         print(f"                              {_rif(b)} \"{(b.get('nome') or '')[:40]}\"")
+# Quanto devono somigliarsi due nomi di comune per sospettare che siano lo
+# stesso posto scritto in due modi. Tarato sui 204 comuni visti finora: a 0.92
+# escono SOLO i due casi veri (Ceresole Alba / Ceresole d'Alba, 0.96, ed
+# Entracque / Entraque, 0.94); il primo falso allarme - Ozzano Monferrato
+# contro Ponzano Monferrato, due paesi diversi e distanti - sta a 0.909. Il
+# margine e' stretto: se un giorno la soglia si abbassa, questo controllo
+# diventa rumore e smette di essere letto.
+SOMIGLIANZA_COMUNI = 0.92
+
+
+def segnala_comuni_simili(events):
+    """Elenca i comuni scritti in DUE modi diversi dentro lo stesso foglio.
+
+    PERCHE' ESISTE (30/08/2026). Nel foglio c'erano insieme "Ceresole Alba" e
+    "Ceresole d'Alba": lo stesso paese, due grafie. Sembra una sciocchezza da
+    correttore di bozze, e invece:
+
+      - lo slug della pagina evento contiene il comune, quindi le due grafie
+        producono DUE pagine per lo stesso posto (e il giorno che la si
+        corregge, una delle due resta un cartello - vedi render_spostata);
+      - la pagina comune si spacca in due, e nessuna delle due arriva alle
+        soglie che le darebbero il diritto di esistere;
+      - soprattutto, ACCECA segnala_sovrapposizioni(), che raggruppa per
+        comune: quel giorno le due grafie hanno nascosto un doppione vero (la
+        "Consegna dei Libri" del 06/09 alle 11:00, entrata due volte da due
+        locandine) proprio al controllo nato per trovarlo.
+
+    Il confronto e' fra le grafie PRESENTI NEL FOGLIO, non contro un elenco di
+    comuni veri: qui non si vuole sapere se un paese esiste - lo sa gia' la
+    geocodifica - ma se stiamo chiamando la stessa cosa in due modi. Ed e' per
+    questo che si segnala solo quando ci sono tutte e due: una grafia sola,
+    anche sbagliata, e' coerente e non spacca niente."""
+    per_comune = collections.defaultdict(list)
+    for e in events:
+        citta = (e.get('citta') or '').strip()
+        if citta:
+            per_comune[citta].append(e)
+    sospetti = []
+    for a, b in itertools.combinations(sorted(per_comune), 2):
+        ka, kb = _key(a), _key(b)
+        if not ka or not kb:
+            continue
+        somiglianza = difflib.SequenceMatcher(None, ka, kb).ratio()
+        if somiglianza >= SOMIGLIANZA_COMUNI:
+            sospetti.append((somiglianza, a, b))
+    if not sospetti:
+        return
+    quante = (f"{len(sospetti)} comuni scritti in due modi" if len(sospetti) > 1
+              else "un comune scritto in due modi")
+    print(f"[genera_eventi] ATTENZIONE: {quante} nel foglio. Se sono lo stesso paese "
+          f"vanno unificati a mano, se no il sito ne fa due (pagine, hub e "
+          f"controlli separati):")
+    for somiglianza, a, b in sorted(sospetti, reverse=True):
+        print(f"    {a!r} contro {b!r}  (si somigliano al {somiglianza:.0%})")
+        for nome in (a, b):
+            righe = per_comune[nome]
+            prov = (righe[0].get('prov') or '').upper()
+            dove = ", ".join(_rif(x) for x in righe[:6])
+            if len(righe) > 6:
+                dove += f", e altre {len(righe) - 6}"
+            print(f"        {nome} ({prov}): {len(righe)} righe — {dove}")
 
 
 def segnala_doppioni(events):
@@ -8429,6 +8496,7 @@ def main():
     controlla_crollo(events)
     segnala_doppioni(events)
     segnala_sovrapposizioni(events)
+    segnala_comuni_simili(events)
     segnala_durate_assurde(events)
     segnala_date_ignote(events)
     segnala_senza_coordinate(events)
