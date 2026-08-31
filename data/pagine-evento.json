@@ -390,7 +390,7 @@
  },
  "al-di-dla-festa-morano-sul-po": {
   "anchor": "ev-2026-09-04-al-di-dla-festa-morano-sul-po-2026",
-  "categoria": "Musica",
+  "categoria": "Sagra & Festa",
   "citta": "Morano sul Po",
   "consigliato": "No",
   "d_end": "2026-09-06",
@@ -417,7 +417,7 @@
  },
  "albugnano-in-festa": {
   "anchor": "ev-2026-09-05-albugnano-in-festa",
-  "categoria": "Sport",
+  "categoria": "Sagra & Festa",
   "citta": "Albugnano",
   "consigliato": "No",
   "contatto": "349.810.9376",
@@ -3667,7 +3667,7 @@
  },
  "festa-del-vino-del-monferrato-casale-monferrato": {
   "anchor": "ev-2026-09-18-festa-del-vino-del-monferrato-2026",
-  "categoria": "Musica",
+  "categoria": "Sagra & Festa",
   "citta": "Casale Monferrato",
   "consigliato": "No",
   "d_end": "2026-09-20",
@@ -3862,7 +3862,7 @@
  },
  "festa-della-citta-di-mondovi": {
   "anchor": "ev-2026-09-07-festa-della-citta-di-mondovi-2026",
-  "categoria": "Musica",
+  "categoria": "Sagra & Festa",
   "citta": "Mondovì",
   "consigliato": "No",
   "contatto": "0174 330358",
@@ -4028,7 +4028,7 @@
  },
  "festa-della-vendemmia-castelnuovo-don-bosco": {
   "anchor": "ev-2026-09-20-festa-della-vendemmia-2026",
-  "categoria": "Laboratorio",
+  "categoria": "Sagra & Festa",
   "citta": "Castelnuovo Don Bosco",
   "consigliato": "No",
   "d_end": "2026-09-20",
@@ -4137,7 +4137,7 @@
  },
  "festa-di-ceresole-d-alba": {
   "anchor": "ev-2026-09-06-festa-di-ceresole-d-alba",
-  "categoria": "Laboratorio",
+  "categoria": "Sagra & Festa",
   "citta": "Ceresole d'Alba",
   "consigliato": "No",
   "d_end": "2026-09-07",
@@ -4862,7 +4862,7 @@
  },
  "festa-patronale-san-chiaffredo-busca": {
   "anchor": "ev-2026-09-06-festa-patronale-san-chiaffredo-2026",
-  "categoria": "Cultura",
+  "categoria": "Sagra & Festa",
   "citta": "Busca",
   "consigliato": "No",
   "d_end": "2026-09-07",
@@ -4889,7 +4889,7 @@
  },
  "festa-patronale-san-michele-arcangelo-in-villaroma-villaromagnano": {
   "anchor": "ev-2026-09-05-festa-patronale-san-michele-arcangelo-in-villaroma",
-  "categoria": "Cultura",
+  "categoria": "Sagra & Festa",
   "citta": "Villaromagnano",
   "consigliato": "No",
   "contatto": "131.892132",
@@ -7602,7 +7602,7 @@
  },
  "mongardino-agosto": {
   "anchor": "ev-2026-08-24-mongardino-agosto-2026",
-  "categoria": "Altro",
+  "categoria": "Sagra & Festa",
   "citta": "Mongardino",
   "consigliato": "No",
   "d_end": "2026-08-31",
@@ -9358,7 +9358,7 @@
  },
  "sagra-del-fritto-misto-e-non-solo-sezzadio": {
   "anchor": "ev-2026-08-27-32a-sagra-del-fritto-misto-e-non-solo",
-  "categoria": "Musica",
+  "categoria": "Sagra & Festa",
   "citta": "Sezzadio",
   "consigliato": "No",
   "d_end": "2026-09-02",
