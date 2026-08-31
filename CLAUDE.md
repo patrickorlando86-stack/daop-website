@@ -38,6 +38,44 @@ solo quando girano **anche** quegli script.
 le pagine di intenzione. Non c'è nessuna zona scritta a mano da salvare, quindi
 non se ne cerca una: si tocca `scripts/genera_luoghi.py`.
 
+#### Il footer non sta in un posto: sta in quindici, e nessuno lo compone
+
+Scoperto il 31/08/2026 andando ad aggiungere `@daop_cuneo`, che **mancava da
+tutto il sito**. Cuneo è aperta dal 04/08 ed è una pagina DAOP come le altre due
+dal 26/08, con Giovanni curatore: il codice lo sapeva — sta in `PROVINCE_IG`,
+col curatore accanto — e il footer no, su ~470 pagine.
+
+Il motivo è che **il footer è l'unico pezzo del guscio che nessun generatore
+compone.** `_guscio()` lo *copia*, non lo *costruisce*: legge quello che trova
+in `eventi.html` e lo incolla. Finché una cosa si copia e basta, l'unico posto
+che la sa è quello scritto a mano.
+
+E i posti scritti a mano non erano uno. Sono **quindici**:
+
+| dove | quante | perché |
+|---|---|---|
+| `eventi.html` | 1 | la sorgente di `_guscio()`, cioè ~470 pagine |
+| `rubriche.html` | 1 | `genera_rubriche.py` ha un guscio suo e legge **da lì** |
+| pagine scritte a mano | 13 | `index`, `ginetto`, `libri`, `media`, `piattosano`, `bollino`, `404`, le due legali, `esploratore`, le tre di prova |
+
+La quindicesima grafia dello stesso guasto già documentato per `ferragosto.html`
+e per i marker delle rubriche, con una differenza: **qui non lo prende nessuna
+rete di sicurezza**, perché non è un file che resta indietro — è un file che
+nessuno ha mai avuto il compito di aggiornare.
+
+Da qui due cose, e la seconda vale più della prima:
+
+- **Toccando il footer si toccano `eventi.html`, `rubriche.html` e le tredici a
+  mano.** Il grep che lo verifica è `grep -rl "Instagram AT" --include=*.html`
+  incrociato col nuovo valore: se una pagina ha il vecchio blocco e non il
+  nuovo, è rimasta indietro.
+- **È il punto fragile per una provincia nuova, e non è il codice.** Aprire la
+  quarta provincia costa 3-4 righe per eventi e luoghi — `PROVINCE_PUBBLICATE`
+  fa il resto da solo — e poi quindici modifiche a mano che nessuna prova
+  chiede. Se un giorno vale la pena chiuderlo davvero, il modo è comporre quella
+  colonna da `PROVINCE_IG`, che è già l'unico posto dove i profili vivono
+  (`fonte_provincia()`), e non da una lista nuova.
+
 ### GA4 si inizializza in un posto solo
 
 `assets/js/cookie-consent.js` è **l'unico** punto in cui si scrive
@@ -251,7 +289,11 @@ di vedere un numero salire, è quasi sempre così.
 python3 scripts/genera_eventi.py      # funziona offline
 python3 scripts/genera_luoghi.py      # funziona offline, DOPO genera_eventi.py
 python3 scripts/genera_centri.py      # richiede rete
+python3 scripts/genera_corsi.py       # richiede rete
 python3 scripts/genera_rubriche.py    # legge contenuti/rubriche/
+python3 scripts/genera_ginetto.py     # offline, DOPO genera_eventi.py (tocca la sitemap)
+python3 scripts/genera_idee.py        # offline, DOPO genera_luoghi.py (importa il catalogo)
+python3 scripts/genera_pdf.py         # ultimo di tutti, serve Chromium
 ```
 
 `genera_luoghi.py` va **dopo** `genera_eventi.py`, non prima: legge
@@ -277,8 +319,37 @@ senza rete `genera_centri.py` stampa "lascio la pagina com'è" e non riscrive
 niente — non è un errore, ma vuol dire che le tue modifiche al CSS lì non si
 vedono finché non gira in CI.
 
-Il workflow `.github/workflows/aggiorna-eventi.yml` gira tutti e tre alle 02:00
-UTC, committa da solo su `main`, poi passa i controlli (vedi in fondo).
+Il workflow `.github/workflows/aggiorna-eventi.yml` li gira **tutti e nove**
+alle 02:00 UTC, committa da solo su `main`, poi passa i controlli (vedi in
+fondo).
+
+### Due generatori giravano solo a mano, e non se ne accorgeva nessuno
+
+Fino al 31/08/2026 il workflow ne girava **sette su nove**: `genera_ginetto.py`
+(che scrive `esploratore.html`) e `genera_idee.py` (che scrive `/idee/`) non
+c'erano, e nemmeno i loro file nell'elenco di quelli committati. Quelle due
+pagine si aggiornavano solo se qualcuno lanciava lo script a mano.
+
+È il guasto già pagato nove volte con le stagionali — un file riscritto nel
+runner e buttato via con lui — ma **peggiore in un modo preciso**: là il file
+era tracciato, quindi la rete di sicurezza in fondo al workflow ("Nessun file
+generato resta indietro") faceva diventare rossa la run. Qui il generatore non
+girava proprio, quindi non c'era nessun file modificato da notare: **il difetto
+non era che qualcosa restasse indietro, era che nessuno ci andava.**
+
+L'ordine non è indifferente e sta nel workflow:
+
+- `genera_ginetto.py` **dopo `genera_eventi.py`**, perché tocca `sitemap.xml`,
+  che quello riscrive per blocchi: girando prima, il suo `lastmod` verrebbe
+  sovrascritto.
+- `genera_idee.py` **dopo `genera_luoghi.py`**, perché importa `genera_luoghi`
+  per il catalogo e per il suo CSS, e prende i cinque posti per `CODICE`.
+  Girando prima userebbe l'istantanea di ieri.
+
+Nell'elenco dei file committati c'è `esploratore.html` e la **cartella**
+`idee/`, non un elenco di file: una pagina idea nuova nasce untracked, e
+`git status --untracked-files=no` non la vedrebbe. È la ragione già scritta per
+`corsi/` e `guide/`.
 
 ## Il canale WhatsApp
 
@@ -1146,6 +1217,56 @@ marker**: toglieva solo `*-CENTRI`, quindi le 15 pagine in `rubriche/` sono usci
 coi commenti `NAV-CORSI` dentro la nav. È il difetto già trovato il 21/08 sui
 centri, ripetuto identico — la riga che li toglie sta in tutti e due i gusci, e
 se nasce un terzo generatore con un guscio suo è quella da ricordare.
+
+#### `CORSI_ZONA_ATTESA`: non congela il titolo, lo fa gridare
+
+Fatto il 31/08/2026. `zona()` ricava la copertura **dai dati**, e fa bene: oggi
+i corsi sono di una provincia sola, e un H1 che ne promettesse tre sarebbe
+falso. Ma quella stessa bontà ha un lato pericoloso, ed è di struttura, non di
+testo: **al primo corso di Asti, title e H1 di `corsi.html` diventano da soli
+"nelle province di Asti e Cuneo"**, e in quel momento va presa una decisione di
+architettura — se spaccare in `/corsi-provincia-<p>.html`, come già fanno sagre,
+oggi e weekend. Quella decisione verrebbe **scavalcata da una run notturna**,
+in silenzio.
+
+La cosa che viene in mente per prima — congelare il titolo con una costante,
+come `CORSI_IN_INDICE` — **è da non fare**, ed è utile che sia scritto perché
+sembra la mossa ovvia. Congelato, `corsi.html` direbbe "in provincia di Cuneo"
+con dentro un corso di Asti: cioè esattamente la bugia che `zona()` esiste per
+evitare, e per giunta su una pagina che chi arriva da Google smonta in due
+secondi.
+
+Quindi `CORSI_ZONA_ATTESA = ('CN',)` **non cambia una virgola di quello che
+esce.** Serve a una cosa sola: `_controlla_zona()` confronta le province viste
+nei dati con quelle attese e, se sono cambiate, stampa un avviso che dice
+*anche cosa fare*. La pagina resta sempre vera, e il cambiamento smette di
+essere silenzioso.
+
+```
+[genera_corsi] ATTENZIONE: corsi in province non attese (Asti). title e H1 di
+corsi.html si allargano da soli, e questo e' il momento di decidere se serve
+una pagina /corsi-provincia-<p>.html per provincia. Deciso questo, aggiorna
+CORSI_ZONA_ATTESA.
+```
+
+**Quando suona, si aggiorna la riga DOPO aver deciso**, non prima. Aggiornarla
+per far tacere il log è l'unico modo di usarla male — ed è la stessa disciplina
+di `REALTA_NASCOSTE`, che si riempie per un giorno e si svuota.
+
+**Perché la forma consigliata è `/corsi-provincia-<nome>.html`** e non
+`/corsi-bambini-cuneo.html` né `/cuneo/corsi-bambini/`, il giorno che servirà:
+è la grammatica che le altre tre famiglie provinciali usano già, quindi non se
+ne inventa una quarta; `cuneo` senza `provincia` è ambiguo, e
+`/eventi/comune/cuneo.html` — il capoluogo — **esiste già**; e una cartella per
+provincia introdurrebbe una gerarchia territoriale che nessun'altra parte del
+sito usa, cioè due tassonomie in concorrenza su un sito dove il 301 non esiste.
+`/corsi.html` **non si sposta**: ha 514 link entranti e vince la query generica,
+e diventa l'indice delle province come `/eventi/oggi.html` è diventato l'indice
+delle sue tre.
+
+**Non si fa quando i corsi sono tanti, si fa quando sono di più province.** Al
+31/08/2026 sono 12 in due comuni, tutti cuneesi: tre pagine provinciali adesso
+vorrebbe dire farne nascere due vuote.
 
 #### Tre stati e non due: "non confermata" non è "in bozza"
 
@@ -4121,16 +4242,84 @@ proprie:
   non compare e `getCurrentPosition` **non risponde mai**: è esattamente il caso
   che la sveglia dei 10 secondi copre, ed è così che è saltato fuori.
 
+## L'invariante fra robots e sitemap vale su tutto il sito
+
+Chiuso il 31/08/2026. La regola era già scritta — sta per esteso nel blocco
+`CORSI` (vedi "L'età si legge con la sua unità") — e diceva questo:
+
+> **In sitemap niente `noindex`, e niente `index` fuori dalla sitemap.**
+
+Il punto è che **la applicava una sezione sola**. Undici pagine dicevano il
+contrario del proprio robots, in tutti e due i versi, e nessuna delle due cose
+si vede guardando una pagina: si vede solo incrociando cinquecento file con la
+sitemap.
+
+**Cinque pagine comune in `noindex` stavano dentro la sitemap.** La causa non
+era dove sembrava: `scrivi_pagine_comune()` filtrava sulla **soglia degli
+eventi** (`MIN_EVENTI_HUB`), e una pagina *sopra* soglia ma senza niente in
+programma né di ricorrente va in `noindex` lo stesso — lo decide `render_comune`
+con una condizione sua. Due posti che decidevano la stessa cosa, e uno dei due
+non sapeva dell'altro.
+
+Il rimedio **non rifà il conto**: legge `content="noindex` dall'HTML appena
+prodotto, che la funzione ha già in mano. Non è pigrizia, è l'unico modo perché
+i due non possano divergere — è la regola di `_dati_realta()` e di
+`e_gratuito()` applicata a un'altra decisione. E il log adesso lo dice: `"5
+sopra soglia ma senza niente in programma, quindi fuori sitemap: …"`.
+
+**Sei schede ritirate erano `index, follow`.** Erano già fuori dalla sitemap:
+era l'altro verso, rotto in silenzio. La ragione per correggerlo era già scritta
+venti righe più su nello stesso file, per l'`Event`: *dichiararlo vorrebbe dire
+garantire a un assistente che l'appuntamento è esistito con quei dati, e nel
+caso della riga sbagliata non è vero*. Vale identica per Google — **se non lo
+diciamo a un assistente, non possiamo offrirlo come risposta.** Ora è
+`noindex, follow` se `orfano or ritirata`.
+
+**Restano fuori apposta le cinque "spostata"**, che non hanno affatto il meta
+robots: è deliberato e commentato nel generatore — un `noindex` accanto a un
+canonical che punta altrove rischia di propagarsi alla pagina di destinazione.
+Sono rimandi, non pagine.
+
+### `tests/sitemap.js` — perché una prova sola e non due
+
+Non sono due difetti: sono i due lati di un'affermazione unica, *la sitemap è
+l'elenco delle pagine che chiediamo a Google di indicizzare*. Separarli
+vorrebbe dire due file che possono divergere, e il verso B — quello dimenticato
+— è proprio il più facile da non scrivere.
+
+**Non asserisce nessun numero, ed è la parte che le impedisce di marcire.** Non
+"27 pagine comune", non "sei ritirate", non "467 URL": ognuno di quei numeri
+sarebbe rosso la notte in cui una sagra finisce, cioè quando il sito fa il suo
+mestiere. È l'inciampo già pagato **sei volte** in questo repo — la copertura
+delle coordinate, il conteggio delle quattro porte, il robots delle pagine
+realtà, i doppioni riscritti. Qui si controlla il *rapporto* fra due elenchi,
+che non ha una taglia giusta.
+
+Due dettagli che sembrano cavilli e non lo sono:
+
+- **Il verso B confronta la dichiarazione esplicita `index`**, non l'assenza di
+  `noindex`. Con la seconda forma le cinque "spostata" diventerebbero rosse, cioè
+  la prova pretenderebbe il difetto. Per lo stesso motivo restano fuori lo sprite
+  delle icone e il file di verifica di Search Console, che non hanno nemmeno un
+  titolo.
+- **Il terzo controllo è che ogni URL in sitemap esista su disco.** Una pagina
+  cancellata e non tolta dal suo blocco è un 404 annunciato a Google, ed è il
+  modo più rapido di fargli smettere di dare peso alla sitemap — lo stesso
+  motivo per cui il `<lastmod>` non si scrive "oggi" a ogni run.
+
+Verificata rossa **rimettendo i due difetti uno alla volta**, non supposta.
+
 ## Verifiche prima di pubblicare
 
-Due controlli, e girano tutti e due in CI **dopo** il commit: il sito si
-aggiorna comunque e la run diventa rossa. È una scelta, non una svista — il
-sito fermo un giorno con gli eventi di ieri è peggio di una pagina con un
-difetto.
+Girano tutti in CI **dopo** il commit: il sito si aggiorna comunque e la run
+diventa rossa. È una scelta, non una svista — il sito fermo un giorno con gli
+eventi di ieri è peggio di una pagina con un difetto.
 
 ```bash
 python3 scripts/valida_jsonld.py                    # dati strutturati
 python3 scripts/valida_pdf.py                       # le guide in PDF
+python3 scripts/prova_riaggancio.py                 # l'edizione dell'anno prossimo
+python3 scripts/prova_comuni_simili.py              # due grafie, un paese solo
 cd tests && npm install && npm test                 # prove di fumo (Playwright)
 ```
 
@@ -4156,6 +4345,11 @@ calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-` e
 `luoghi.html` l'ordine alfabetico che il premium non deve scavalcare). Gira sui
 file veri appena generati: non c'è un ambiente di prova. In un ambiente che ha
 già un Chromium, `CHROMIUM_PATH=/percorso/chrome npm test` evita lo scaricamento.
+
+Le suite sono otto, in `tests/run.js`: `agenda`, `landing`, `scheda`, `luoghi`,
+`corsi`, `porte`, `guide`, `sitemap`. Al 31/08/2026 sono **371 prove**.
+`sitemap.js` è l'unica che non apre il browser — legge i file e li incrocia con
+`sitemap.xml`, perché quello che difende non si vede su nessuna pagina.
 
 ### Un `<section>` non è un contenitore neutro
 
