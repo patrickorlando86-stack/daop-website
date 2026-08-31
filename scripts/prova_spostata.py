@@ -113,10 +113,23 @@ def gemello(slug, pool):
     return False
 
 
-CAVIA = next((s for s in FUTURI if not gemello(s, FUTURI)), None)
-if CAVIA is None:
+def ha_riga(slug):
+    """Il numero di riga del foglio c'e' ed e' utilizzabile.
+
+    Serve alla prova 2: la correzione del NOME si riconosce solo dalla riga, e
+    una cavia senza numero (nel registro sono `0` o assenti, e `_rif` le stampa
+    "riga ?") lascerebbe quel ramo senza modo di scattare. Non e' un difetto
+    del codice, ma la prova diventerebbe verde o rossa a seconda di quale
+    evento e' finito per primo nella lista - che e' peggio di rossa."""
+    return bool(str(reg_vero[slug].get('riga') or '').strip())
+
+
+CAVIE = [s for s in FUTURI if not gemello(s, FUTURI)]
+if not CAVIE:
     print("nessuna cavia senza gemelli nel registro: niente da provare")
     sys.exit(0)
+# Con il numero di riga se ce n'e' una, se no si prova quello che si puo'.
+CAVIA = next((s for s in CAVIE if ha_riga(s)), CAVIE[0])
 ALTRI = [s for s in FUTURI if s != CAVIA]
 
 
@@ -204,11 +217,14 @@ ok("le altre pagine restano normali", "Scheda verificata da DAOP" in leggi(ALTRI
 
 print()
 print("=== 2) il NOME viene corretto (stessa riga del foglio) -> stesso rimando ===")
-scrivi_registro(FUTURI)
-eventi, NUOVO2 = foglio({"nome": "Nome Corretto A Mano Per La Prova"})
-gira(eventi)
-ok(f"riconosciuto dalla riga di foglio ({reg_vero[CAVIA].get('riga')})",
-   registro().get(CAVIA, {}).get("spostata") == NUOVO2)
+if not ha_riga(CAVIA):
+    print(f"  --  {CAVIA} non ha un numero di riga nel registro, prova saltata")
+else:
+    scrivi_registro(FUTURI)
+    eventi, NUOVO2 = foglio({"nome": "Nome Corretto A Mano Per La Prova"})
+    gira(eventi)
+    ok(f"riconosciuto dalla riga di foglio ({reg_vero[CAVIA].get('riga')})",
+       registro().get(CAVIA, {}).get("spostata") == NUOVO2)
 
 print()
 print("=== 3) due candidati uguali -> nessun rimando, scheda ritirata ===")
