@@ -3927,6 +3927,19 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     firma = firma_daop(rec, oggi, ritirata=ritirata)
     altri = blocco_vicini(rec, vicini, oggi, hub=hub) if vicini else ''
 
+    # Una ritirata esce dall'indice, e il perche' e' gia' scritto venti righe
+    # piu' su per l'Event: se non dichiariamo a un assistente che quei dati
+    # sono veri, non possiamo offrirli a Google come risposta. Fino al
+    # 31/08/2026 sei schede ritirate erano index, follow — cioe' pagine che
+    # dicono di se stesse di non essere attendibili e che Google poteva
+    # mostrare. Erano gia' fuori dalla sitemap: e' l'altro verso dello stesso
+    # invariante, e questa riga lo chiude.
+    #
+    # RESTA ONLINE, come sempre: il cartello serve a chi arriva da un link gia'
+    # girato, ed e' proprio quella la persona da avvisare. E' la regola di
+    # MIN_LANDING, applicata a una scheda.
+    robots = 'noindex, follow' if orfano or ritirata else 'index, follow'
+
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -3934,7 +3947,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(titolo_seo)}</title>
 <meta name="description" content="{esc(meta_d)}">
-<meta name="robots" content="{'noindex, follow' if orfano else 'index, follow'}">
+<meta name="robots" content="{robots}">
 <link rel="canonical" href="{url}">
 <meta property="og:title" content="{esc(titolo_seo)}">
 <meta property="og:description" content="{esc(meta_d)}">
@@ -5656,9 +5669,23 @@ def scrivi_comuni(hub, oggi):
     except (OSError, ValueError):
         reg = {}
     cambiate = 0
+    # Sopra soglia non vuol dire in indice: render_comune mette noindex a un
+    # comune che ha abbastanza eventi in archivio ma niente in programma ne' di
+    # ricorrente. Quelle pagine vanno tenute FUORI dalla sitemap, se no il sito
+    # dice due cose opposte sulla stessa URL.
+    #
+    # Il conto non si rifa' qui: si legge dall'HTML appena prodotto, cosi' i due
+    # posti non possono divergere. E' il difetto che questa riga chiude — fino
+    # al 31/08/2026 la sitemap filtrava solo sulla soglia, e cinque pagine in
+    # noindex ci restavano dentro (ceresole-alba, entracque, limone-piemonte,
+    # ormea, voltaggio). L'invariante e' lo stesso che il blocco CORSI dichiara
+    # gia' di se': in sitemap niente noindex, e niente index fuori dalla sitemap.
+    senza_indice = []
     for dati in sorted(hub.values(), key=lambda d: d['slug']):
         path = os.path.join(COMUNI_DIR, f"{dati['slug']}.html")
         nuovo = render_comune(dati, css, nav, foot, oggi, vicini=hub)
+        if 'content="noindex' in nuovo:
+            senza_indice.append(dati['slug'])
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
             reg.setdefault(dati['slug'], oggi.isoformat())
             continue
@@ -5685,11 +5712,15 @@ def scrivi_comuni(hub, oggi):
     print(f"[genera_eventi] pagine comune: {len(hub)} sopra soglia "
           f"({cambiate} riscritte)" +
           (f", {len(orfane)} sotto soglia in noindex: {', '.join(orfane)}"
-           if orfane else ""))
+           if orfane else "") +
+          (f", {len(senza_indice)} sopra soglia ma senza niente in programma, "
+           f"quindi fuori sitemap: {', '.join(senza_indice)}"
+           if senza_indice else ""))
     for d in sorted(hub.values(), key=lambda d: d['nome']):
         print(f"[genera_eventi]   {d['nome']}: {len(d['futuri'])} in programma, "
               f"{d['varieta']} cose diverse")
-    return {s: m for s, m in sorted(reg.items()) if s in vivi}
+    return {s: m for s, m in sorted(reg.items())
+            if s in vivi and s not in senza_indice}
 
 
 # ---------------------------------------------------------------------------

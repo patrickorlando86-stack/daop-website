@@ -49,7 +49,7 @@
 
   <url>
     <loc>https://www.daop.it/esploratore.html</loc>
-    <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -2724,12 +2724,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/comune/ceresole-alba.html</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/comune/ceresole-d-alba.html</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -2748,12 +2742,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/comune/entracque.html</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/comune/fossano.html</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -2766,12 +2754,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/comune/limone-piemonte.html</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/comune/mondovi.html</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
@@ -2779,12 +2761,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/comune/novi-ligure.html</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/comune/ormea.html</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -2839,12 +2815,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/comune/villaromagnano.html</loc>
-    <lastmod>2026-08-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/comune/voltaggio.html</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

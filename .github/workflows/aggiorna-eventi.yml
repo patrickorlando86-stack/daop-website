@@ -92,6 +92,30 @@ jobs:
         # non fallisce niente.
         run: python scripts/genera_luoghi.py
 
+      - name: Genera la collana Esploratore
+        # DOPO genera_eventi.py, perche' tocca sitemap.xml, che quello riscrive
+        # per blocchi: girando prima, il suo lastmod verrebbe sovrascritto.
+        #
+        # Fino al 31/08/2026 questo passo NON C'ERA, e nemmeno esploratore.html
+        # nell'elenco dei file committati qui sotto. La pagina si aggiornava
+        # solo a mano: e' lo stesso guasto gia' descritto per ferragosto.html e
+        # per le altre stagionali, con l'aggravante che qui non lo prendeva
+        # nessuna rete di sicurezza, perche' il file non veniva nemmeno
+        # riscritto nel runner.
+        run: python scripts/genera_ginetto.py
+
+      - name: Genera le pagine idea
+        # DOPO genera_luoghi.py, e non e' indifferente: importa genera_luoghi
+        # per il catalogo e per il suo CSS, e prende i cinque posti per CODICE.
+        # Girando prima userebbe l'istantanea di ieri.
+        #
+        # Stessa storia del passo qui sopra: mancava, quindi /idee/ viveva
+        # fuori dalla run notturna. E l'elenco dei file committati porta la
+        # CARTELLA e non un file: una pagina idea nuova nasce untracked, e
+        # `git status --untracked-files=no` non la vedrebbe. E' la ragione gia'
+        # scritta per corsi/ e guide/.
+        run: python scripts/genera_idee.py
+
       - name: Guide stagionali in PDF
         # Ultimo di tutti, e non e' indifferente: legge le pagine GIA' scritte
         # dai passi sopra (fra i marker GUIDA-PDF) e le stampa. Girando prima
@@ -193,12 +217,13 @@ jobs:
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \
                 rubriche.html luoghi.html piscine.html corsi.html \
+                esploratore.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
                 data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
                 data/guide.json data/realta-pagine.json \
-                eventi/ rubriche/ corsi/ guide/ assets/miniature/"
+                eventi/ rubriche/ corsi/ guide/ idee/ assets/miniature/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
           # data/luoghi.json nasce solo quando il tab "Luoghi" del foglio

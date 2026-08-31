@@ -2214,10 +2214,50 @@ def jsonld(corsi):
                       ensure_ascii=False, indent=1)
 
 
+# Le province che questa pagina si aspetta di coprire. NON e' un filtro e non
+# cambia una virgola di quello che esce: zona() continua a seguire i dati, per
+# la ragione scritta nel suo docstring. Serve a una cosa sola — far RUMORE il
+# giorno in cui la copertura cambia.
+#
+# PERCHE'. /corsi.html ha un indirizzo nazionale e un H1 provinciale, e al primo
+# corso fuori Cuneo title e H1 diventano da soli "nelle province di ...". Il
+# problema non e' il testo, che resta vero: e' che in quel momento va presa una
+# decisione di architettura — se spaccare in /corsi-provincia-<p>.html, come
+# gia' fanno sagre, oggi e weekend — e quella decisione verrebbe scavalcata da
+# una run notturna, senza che nessuno se ne accorga.
+#
+# Congelare il titolo sarebbe stato peggio: la pagina direbbe "provincia di
+# Cuneo" con dentro un corso di Asti, cioe' una bugia, che e' esattamente cio'
+# che zona() esiste per evitare. Quindi la pagina resta sempre vera e il
+# cambiamento smette di essere silenzioso.
+#
+# QUANDO SUONA: si aggiorna questa riga, DOPO aver deciso se la provincia nuova
+# merita una pagina sua. Aggiornarla per far tacere il log e' l'unico modo di
+# usarla male.
+CORSI_ZONA_ATTESA = ('CN',)
+
+
+def _controlla_zona(corsi):
+    """Avvisa se i corsi hanno smesso di stare nelle province attese."""
+    viste = {(c['prov'] or '').strip().upper() for c in corsi}
+    viste.discard('')
+    nuove = sorted(viste - set(CORSI_ZONA_ATTESA))
+    if not nuove:
+        return
+    nomi = ', '.join(PROV_NOME.get(p, p) for p in nuove)
+    print(f"[genera_corsi] ATTENZIONE: corsi in province non attese ({nomi}). "
+          f"title e H1 di corsi.html si allargano da soli, e questo e' il "
+          f"momento di decidere se serve una pagina /corsi-provincia-<p>.html "
+          f"per provincia. Deciso questo, aggiorna CORSI_ZONA_ATTESA.")
+
+
 def zona(corsi):
     """Il titolo segue i DATI, non la copertura dichiarata. Oggi i corsi sono di
     una provincia sola: un H1 che ne promette tre sarebbe falso, e chi arriva da
-    Google se ne accorge in due secondi. Si allarga da solo."""
+    Google se ne accorge in due secondi. Si allarga da solo.
+
+    Che si allarghi da solo e' giusto per il TESTO e pericoloso per la
+    STRUTTURA: se ne occupa CORSI_ZONA_ATTESA, qui sopra."""
     provs = []
     for c in corsi:
         p = (c['prov'] or '').strip().upper()
@@ -2254,6 +2294,7 @@ def render(corsi, css, nav, foot, realta=None):
     corsi di pallavolo di due societa' diverse stanno vicini, che e' quello che
     serve a chi confronta. E non per societa', per la ragione di sopra."""
     realta = realta or {}
+    _controlla_zona(corsi)
     dove, zona_breve = zona(corsi)
     titolo = f"Corsi per bambini {dove} | DAOP"
     descr = (f"Corsi e attività continuative per bambini e ragazzi {dove}: musica, sport, "
