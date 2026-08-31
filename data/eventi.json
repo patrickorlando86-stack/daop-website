@@ -41,7 +41,6 @@
   "d_end": "2026-08-31",
   "contatto": "@lascaladelre",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.4807314",
   "lon": "7.8511229",
   "anchor": "ev-2026-08-31-la-scala-del-re-al-castello-di-carru"
@@ -65,7 +64,6 @@
   "d_end": "2026-08-31",
   "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.833445",
   "lon": "8.063534",
   "anchor": "ev-2026-08-31-laboratorio-creativo-sulle-emozioni"
@@ -99,7 +97,7 @@
   "ora": "vari",
   "citta": "Asti",
   "prov": "AT",
-  "categoria": "Laboratorio",
+  "categoria": "Sagra & Festa",
   "eta": "Tutte le età (famiglie)",
   "prezzo": "Gratuito",
   "descr": "Il Palio di Asti in Famiglia è una settimana di festa dedicata ai bambini e alle famiglie, che si svolge ad Asti dal 31 agosto al 5 settembre 2026. Tra i momenti più attesi ci sono la visita alle scuderie per incontrare i cavalli da vicino, il divertente Palio dei Tricicli alla sua quarta edizione e i mercatini del Palio in Piazza San Secondo. La settimana si chiude nel pomeriggio con il grande Corteo Storico dei Bambini, dove oltre mille piccoli in costume sfilano per le vie della città con tema i giochi e i giocattoli del Medioevo. Programma: 31/08 Giochi e Laboratori \"Nui sima gagni alegher\" — San Martino-San Rocco (8:00-18:00); 02/09 Palio dei Tricicli (IV ed.) — Rione Cattedrale (21:00); 02/09 Visita alle Scuderie — Rione San Silvestro (10:00); 03/09 Giornata Bimbi Oroblu — San Marzanotto (8:00-17:00); 03/09 Giornata del Giovane Sanpietrino — Rione San Pietro (9:30); 03/09 Mercatini del Palio — Asti (dalle 10:00); 05/09 Corteo Storico dei Bambini — Asti (14:45).",
@@ -132,7 +130,6 @@
   "d_start": "2026-08-31",
   "d_end": "2026-09-01",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.4599824",
   "lon": "7.536598",
   "anchor": "ev-2026-08-31-programma-festeggiamenti-pro-loco-san-benigno"
@@ -156,7 +153,6 @@
   "d_end": "2026-08-31",
   "contatto": "3457097018",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.89666",
   "lon": "8.8641282",
   "anchor": "ev-2026-08-31-serata-finale-cinema-e-pizza-disney-il-gabbiano"
@@ -180,7 +176,6 @@
   "d_end": "2026-08-31",
   "contatto": "0143 772266 - museodeicampionissimi@comune.noviligure.al.it",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7554907",
   "lon": "8.7758364",
   "anchor": "ev-2026-01-01-mostra-delle-illusioni-museo-dei-campionissimi"
@@ -204,7 +199,6 @@
   "d_end": "2026-08-31",
   "contatto": "0131/234266 (lun-ven 9-13); 0131/515777 (orari apertura); serviziculturali.0220@asmcostruireinsieme.it",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9110327",
   "lon": "8.6148186",
   "anchor": "ev-2026-08-01-musei-aperti-ad-agosto-2026-complesso-conventuale"
@@ -227,7 +221,6 @@
   "d_start": "2026-08-01",
   "d_end": "2026-08-31",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.913",
   "lon": "8.6155",
   "anchor": "ev-2026-08-01-musei-aperti-ad-agosto-2026-museo-civico-di-palazz"
@@ -319,7 +312,6 @@
   "d_start": "2026-08-24",
   "d_end": "2026-08-31",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.847026",
   "lon": "8.214164",
   "anchor": "ev-2026-08-24-mongardino-agosto-2026"
@@ -343,7 +335,6 @@
   "d_end": "2026-08-31",
   "contatto": "375 90 42 843",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.6465",
   "lon": "7.86",
   "anchor": "ev-2026-08-27-27a-sagra-dello-gnocco-festa-patronale"
@@ -389,7 +380,6 @@
   "d_end": "2026-09-03",
   "contatto": "333 9526406",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.5069356",
   "lon": "7.7237481",
   "anchor": "ev-2026-08-27-san-liberato-2026"
@@ -412,7 +402,6 @@
   "d_start": "2026-08-28",
   "d_end": "2026-08-31",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.875446",
   "lon": "7.994732",
   "anchor": "ev-2026-08-28-festeggiamenti-patronali-sant-agostino-2026-ferrer"
@@ -436,7 +425,6 @@
   "d_end": "2026-09-10",
   "contatto": "eventi@comune.casalnoceto.al.it",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9131769",
   "lon": "8.9811563",
   "anchor": "ev-2026-09-01-casalnoceto-kids-comune-di-casalnoceto"
@@ -533,30 +521,6 @@
   "anchor": "ev-2026-09-02-la-quercia-e-i-suoi-abitanti-cinema-al-centro"
  },
  {
-  "nome": "Palio Baldichieri 1987",
-  "di": "02/09/2026",
-  "df": "02/09/2026",
-  "ora": "vari",
-  "citta": "Castell'Alfero",
-  "prov": "AT",
-  "categoria": "Altro",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "A pagamento (da verificare)",
-  "descr": "Il Palio Baldichieri 1987 è una festa che si svolge a Castell'Alfero, con giornate dedicate ai più piccoli tra attività paliesche, visite alle scuderie e momenti conviviali a tavola, per vivere da vicino il mondo del palio. Non mancano le serate per i giovani con street food, cocktail e musica. Un'occasione per tutta la famiglia per immergersi nella tradizione e nell'atmosfera unica di questa manifestazione. Programma: Visite Veterinarie - Comitato Palio Baldichieri 1987 (08:00); Giornata Bimbi - Comitato Palio Baldichieri 1987 (vari); Un Mercoledì da Leoni - Comitato Palio Baldichieri 1987 (20:00).",
-  "manifest": "Palio Baldichieri 1987",
-  "loc": "daop_asti_3954380761100612941.jpg",
-  "luogo": "Centro Equestre Capricorno",
-  "indirizzo": "Centro Equestre Capricorno - Castell'Alfero (AT)",
-  "d_start": "2026-09-02",
-  "d_end": "2026-09-02",
-  "contatto": "Giovanna 320 216 4620 / Federico 348 566 7730",
-  "consigliato": "No",
-  "adatto_famiglie": "Si",
-  "lat": "44.981227",
-  "lon": "8.208004",
-  "anchor": "ev-2026-09-02-palio-baldichieri-1987"
- },
- {
   "nome": "San Damiano Summer Festival",
   "di": "02/09/2026",
   "df": "06/09/2026",
@@ -620,7 +584,6 @@
   "d_start": "2026-09-02",
   "d_end": "2026-09-02",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.875446",
   "lon": "7.994732",
   "anchor": "ev-2026-09-02-tra-boschi-e-stelle-pro-loco-ferrere"
@@ -644,7 +607,6 @@
   "d_end": "2026-09-02",
   "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.833445",
   "lon": "8.063534",
   "anchor": "ev-2026-09-02-un-circo-in-via-pero-laboratorio-teatrale-ed-espre"
@@ -712,7 +674,6 @@
   "d_start": "2026-09-03",
   "d_end": "2026-09-03",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9131769",
   "lon": "8.9811563",
   "anchor": "ev-2026-09-03-i-giovedi-in-biblioteca"
@@ -759,7 +720,6 @@
   "d_end": "2026-09-03",
   "contatto": "0141 975056 int.2 / sociale@comune.sandamiano.at.it",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.833445",
   "lon": "8.063534",
   "anchor": "ev-2026-09-03-tennis-da-tavolo-e-basket"
@@ -917,7 +877,6 @@
   "d_start": "2026-09-04",
   "d_end": "2026-09-04",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.5980205",
   "lon": "8.0636755",
   "anchor": "ev-2026-09-04-passeggiata-a-cavallo-con-axel-circolo-la-torre"
@@ -940,7 +899,6 @@
   "d_start": "2026-09-04",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.76085",
   "lon": "8.789551",
   "anchor": "ev-2026-09-04-sagra-dei-ceci"
@@ -963,7 +921,6 @@
   "d_start": "2026-09-04",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7500018",
   "lon": "8.7457524",
   "anchor": "ev-2026-09-04-sagra-del-corzetto-settembre-pasturanese"
@@ -1009,7 +966,6 @@
   "d_start": "2026-09-04",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8861753",
   "lon": "8.6829041",
   "anchor": "ev-2026-09-04-spinetta-in-festa-2026"
@@ -1032,7 +988,6 @@
   "d_start": "2026-09-04",
   "d_end": "2026-09-04",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8945992",
   "lon": "8.8632072",
   "anchor": "ev-2026-09-04-stratortona-2026-croce-rossa-italiana-comitato-di"
@@ -1055,7 +1010,6 @@
   "d_start": "2026-09-05",
   "d_end": "2026-09-05",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7932094",
   "lon": "8.1047206",
   "anchor": "ev-2026-09-05-37a-sagra-dell-agnolotto-e-del-bollito-misto-con-a"
@@ -1123,7 +1077,6 @@
   "d_start": "2026-09-05",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9165",
   "lon": "8.598",
   "anchor": "ev-2026-09-05-alecomics-festival-2026"
@@ -1168,7 +1121,6 @@
   "d_start": "2026-09-05",
   "d_end": "2026-09-05",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.5069356",
   "lon": "7.7237481",
   "anchor": "ev-2026-09-05-beach-volley-organizzato-dagli-amici-del-volley"
@@ -1191,7 +1143,6 @@
   "d_start": "2026-09-05",
   "d_end": "2026-09-05",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "45.1076846",
   "lon": "8.4130547",
   "anchor": "ev-2026-09-05-camminare-il-monferrato-sul-cammino-dei-minatori"
@@ -1215,7 +1166,6 @@
   "d_end": "2026-09-05",
   "contatto": "338 3868477",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.5069356",
   "lon": "7.7237481",
   "anchor": "ev-2026-09-05-carne-alla-brace-e-musica-con-dj-schiffer-pro-loco"
@@ -1238,7 +1188,6 @@
   "d_start": "2026-09-05",
   "d_end": "2026-09-05",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "45.1076846",
   "lon": "8.4130547",
   "anchor": "ev-2026-09-05-cena-benefica-a-favore-di-me-dea-pro-loco-san-gior"
@@ -1254,7 +1203,7 @@
   "eta": "Tutte le età (famiglie)",
   "prezzo": "A pagamento (da verificare)",
   "descr": "Cena propiziatoria in occasione del Palio di Asti, organizzata dalla Pro Loco di Cantarana presso il Giardino Comunale di Baldichieri d'Asti. Prenotazione obbligatoria. Ore 20:30.",
-  "manifest": "Palio di Asti - Sabato 05 Settembre",
+  "manifest": "Palio di Asti 2026",
   "loc": "daop_asti_3954381277260028092.jpg",
   "luogo": "Giardino Comunale Baldichieri d'Asti",
   "indirizzo": "Giardino Comunale - Baldichieri d'Asti (AT)",
@@ -1262,7 +1211,6 @@
   "d_end": "2026-09-05",
   "contatto": "320 216 4620 / 348 566 7730",
   "consigliato": "No",
-  "adatto_famiglie": "Da verificare",
   "lat": "44.90708",
   "lon": "8.09125",
   "anchor": "ev-2026-09-05-cena-propiziatoria-pro-loco-di-cantarana"
@@ -1286,7 +1234,6 @@
   "d_end": "2026-09-05",
   "contatto": "0172 699700",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.5368282",
   "lon": "7.6624155",
   "anchor": "ev-2026-09-05-cresco-con-te-biblioteca-civica-di-fossano"
@@ -1356,7 +1303,6 @@
   "d_end": "2026-09-07",
   "contatto": "131.892132",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8454469",
   "lon": "8.8952063",
   "anchor": "ev-2026-09-05-festa-patronale-san-michele-arcangelo-in-villaroma"
@@ -1474,30 +1420,6 @@
   "anchor": "ev-2026-09-05-memorial-pasquale-messina-tamburello-cinaglio-vs-a"
  },
  {
-  "nome": "Palio di Asti - Sabato 05 Settembre",
-  "di": "05/09/2026",
-  "df": "05/09/2026",
-  "ora": "vari",
-  "citta": "Asti",
-  "prov": "AT",
-  "categoria": "Sagra & Festa",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Gratuito",
-  "descr": "Il Palio di Asti è una delle rievocazioni storiche più attese del Piemonte, che si svolge ad Asti il 5 settembre 2026. La giornata prende vita con una sfilata in costume storico dei bambini, che partono da Piazza Cattedrale nel pomeriggio, per poi proseguire con le prove generali della corsa in Piazza Alfieri. Un appuntamento coinvolgente per tutta la famiglia, organizzato dal Comitato Palio Baldichieri 1987 e aperto a tutti gli spettatori. Programma: Sfilata dei bambini - Comitato Palio Baldichieri (14:45); Prove generali del Palio - Comitato Palio Baldichieri (16:30).",
-  "manifest": "Palio di Asti - Sabato 05 Settembre",
-  "loc": "daop_asti_3954381277260028092.jpg",
-  "luogo": "Piazza Cattedrale",
-  "indirizzo": "Piazza Cattedrale - Asti (AT)",
-  "d_start": "2026-09-05",
-  "d_end": "2026-09-05",
-  "contatto": "320 216 4620 / 348 566 7730",
-  "consigliato": "No",
-  "adatto_famiglie": "Si",
-  "lat": "44.900311",
-  "lon": "8.197219",
-  "anchor": "ev-2026-09-05-palio-di-asti-sabato-05-settembre"
- },
- {
   "nome": "Palio di Asti 2026",
   "di": "05/09/2026",
   "df": "06/09/2026",
@@ -1537,7 +1459,6 @@
   "d_start": "2026-09-05",
   "d_end": "2026-09-05",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7350776",
   "lon": "8.8372996",
   "anchor": "ev-2026-09-05-play-land-kids-summer-events-2026-ass-jim-pet"
@@ -1604,7 +1525,6 @@
   "d_start": "2026-09-05",
   "d_end": "2026-09-05",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.6978198",
   "lon": "7.1587165",
   "anchor": "ev-2026-09-05-tradizionale-fiera-di-san-chiaffredo-pro-loco-cris"
@@ -1650,7 +1570,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Da verificare",
   "lat": "45.1076846",
   "lon": "8.4130547",
   "anchor": "ev-2026-09-06-1-san-giorgio-bike-ride"
@@ -1695,7 +1614,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7932094",
   "lon": "8.1047206",
   "anchor": "ev-2026-09-06-37a-sagra-dell-agnolotto-e-del-bollito-misto-con-d"
@@ -1718,7 +1636,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8205828",
   "lon": "7.8130984",
   "anchor": "ev-2026-09-06-apertura-domenicale-della-biblioteca-civica-pro-lo"
@@ -1741,7 +1658,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8205828",
   "lon": "7.8130984",
   "anchor": "ev-2026-09-06-benvenuto-ufficiale-alla-leva-2008-pro-loco-cereso"
@@ -1786,7 +1702,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8205828",
   "lon": "7.8130984",
   "anchor": "ev-2026-09-06-consegna-dei-libri-alle-famiglie-progetto-che-stor"
@@ -1877,7 +1792,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-07",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8014607",
   "lon": "7.8202769",
   "anchor": "ev-2026-09-06-festa-di-ceresole-d-alba"
@@ -1900,7 +1814,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.8454469",
   "lon": "8.8952063",
   "anchor": "ev-2026-09-06-giochi-sotto-il-campanile-raddix-group-parrocchia"
@@ -1989,7 +1902,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.833445",
   "lon": "8.063534",
   "anchor": "ev-2026-09-06-mostra-mercato-piccoli-animali-citta-di-san-damian"
@@ -2034,7 +1946,6 @@
   "d_start": "2026-09-06",
   "d_end": "2026-09-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "45.1076846",
   "lon": "8.4130547",
   "anchor": "ev-2026-09-06-visite-guidate-al-castello-e-merenda-sinoira-con-m"
@@ -2102,7 +2013,6 @@
   "d_start": "2026-09-08",
   "d_end": "2026-09-08",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7932094",
   "lon": "8.1047206",
   "anchor": "ev-2026-09-08-25a-sagra-gastronomica-con-polenta-e-cinghiale-con"
@@ -2193,7 +2103,6 @@
   "d_start": "2026-09-10",
   "d_end": "2026-09-10",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9131769",
   "lon": "8.9811563",
   "anchor": "ev-2026-09-10-i-giovedi-in-biblioteca"
@@ -2239,7 +2148,6 @@
   "d_start": "2026-09-10",
   "d_end": "2026-09-10",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7932094",
   "lon": "8.1047206",
   "anchor": "ev-2026-09-10-tombola-sotto-le-stelle-pro-loco-canove"
@@ -2263,7 +2171,6 @@
   "d_end": "2026-09-13",
   "contatto": "3457558165 - 340472004",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.608366",
   "lon": "8.4875824",
   "anchor": "ev-2026-09-11-7a-festa-del-fungo-pro-loco-ciglione"
@@ -2307,7 +2214,6 @@
   "d_start": "2026-09-11",
   "d_end": "2026-09-11",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7932094",
   "lon": "8.1047206",
   "anchor": "ev-2026-09-11-serata-hamburger-patatine-e-birra-con-max-mania-88"
@@ -2330,7 +2236,6 @@
   "d_start": "2026-09-12",
   "d_end": "2026-09-13",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9129853",
   "lon": "8.6154564",
   "anchor": "ev-2026-09-12-festa-della-birra-street-food"
@@ -2356,28 +2261,6 @@
   "lat": "44.757781",
   "lon": "8.786869",
   "anchor": "ev-2026-09-12-festa-dello-sport-novi-ligure"
- },
- {
-  "nome": "Festival delle Quando e Dove?",
-  "di": "12/09/2026",
-  "df": "13/09/2026",
-  "ora": "vari",
-  "citta": "Asti",
-  "prov": "AT",
-  "categoria": "Sagra & Festa",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Gratuito",
-  "descr": "Il Festival delle Quando e Dove? si svolge sabato 12 e domenica 13 settembre in Piazza Campo del Palio ad Asti, con un villaggio gastronomico ricco di stand ed eccellenze enogastronomiche del territorio. Il sabato si comincia in serata con l'apertura degli stand, mentre la domenica la festa prende vita con una suggestiva sfilata contadina che porta in scena la storia della tradizione locale. Un'occasione perfetta per portare tutta la famiglia a scoprire sapori e tradizioni astigiane nel cuore della città. Programma: 12/09 Festival delle Quando e Dove? - Villaggio Gastronomico (apertura) (18:30); 13/09 Festival delle Quando e Dove? - Sfilata Contadina e Villaggio Gastronomico (9:30).",
-  "manifest": "Festival delle Quando e Dove?",
-  "loc": "daop_asti_3975622937037426700.webp",
-  "luogo": "Piazza Campo del Palio",
-  "indirizzo": "Piazza Campo del Palio - Asti (AT)",
-  "d_start": "2026-09-12",
-  "d_end": "2026-09-13",
-  "consigliato": "No",
-  "lat": "44.9621126",
-  "lon": "7.9491609",
-  "anchor": "ev-2026-09-12-festival-delle-quando-e-dove"
  },
  {
   "nome": "Festival delle Sagre Astigiane 2026",
@@ -2441,7 +2324,6 @@
   "d_start": "2026-09-12",
   "d_end": "2026-09-12",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7733095",
   "lon": "8.353709",
   "anchor": "ev-2026-09-12-nizza-e-sport-pro-loco-nizza-monferrato"
@@ -2487,7 +2369,6 @@
   "d_start": "2026-09-12",
   "d_end": "2026-09-13",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9165",
   "lon": "8.598",
   "anchor": "ev-2026-09-12-sbem-festival-sport-benessere-e-movimento-acm-even"
@@ -2690,7 +2571,6 @@
   "d_start": "2026-09-13",
   "d_end": "2026-09-13",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "45.0226378",
   "lon": "7.9507994",
   "anchor": "ev-2026-09-13-pompieropoli-2026-buttigliera"
@@ -2713,7 +2593,6 @@
   "d_start": "2026-09-14",
   "d_end": "2026-09-14",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.905507",
   "lon": "8.9186164",
   "anchor": "ev-2026-09-14-il-passerotto-che-scopri-il-mondo-l-arca-di-noe-te"
@@ -2805,7 +2684,6 @@
   "d_start": "2026-09-17",
   "d_end": "2026-09-17",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9131769",
   "lon": "8.9811563",
   "anchor": "ev-2026-09-17-i-giovedi-in-biblioteca"
@@ -3006,7 +2884,6 @@
   "d_start": "2026-09-19",
   "d_end": "2026-09-20",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.5196665",
   "lon": "8.3232175",
   "anchor": "ev-2026-09-19-masca-il-ritorno-della-strega-pro-loco-di-spigno-m"
@@ -3278,7 +3155,6 @@
   "d_start": "2026-09-24",
   "d_end": "2026-09-24",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.9131769",
   "lon": "8.9811563",
   "anchor": "ev-2026-09-24-i-giovedi-in-biblioteca"
@@ -3598,7 +3474,6 @@
   "d_start": "2026-10-04",
   "d_end": "2026-10-04",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.833445",
   "lon": "8.063534",
   "anchor": "ev-2026-10-04-mostra-mercato-piccoli-animali-citta-di-san-damian"
@@ -3621,7 +3496,6 @@
   "d_start": "2026-10-16",
   "d_end": "2026-10-18",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.739837",
   "lon": "8.2275011",
   "anchor": "ev-2026-10-16-sagra-del-rapule-calosso-2026-pro-loco-san-marzano"
@@ -3689,7 +3563,6 @@
   "d_start": "2026-10-24",
   "d_end": "2026-10-24",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.76085",
   "lon": "8.789551",
   "anchor": "ev-2026-10-24-i-musicanti-di-brema-teatrino-dell-erba-matta"
@@ -3712,7 +3585,6 @@
   "d_start": "2026-10-31",
   "d_end": "2026-10-31",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.7540212",
   "lon": "8.2957567",
   "anchor": "ev-2026-10-31-festa-di-halloween-per-i-bambini-pro-loco-san-marz"
@@ -3735,7 +3607,6 @@
   "d_start": "2026-11-01",
   "d_end": "2026-11-01",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.833445",
   "lon": "8.063534",
   "anchor": "ev-2026-11-01-mostra-mercato-piccoli-animali-citta-di-san-damian"
@@ -3758,7 +3629,6 @@
   "d_start": "2026-12-06",
   "d_end": "2026-12-06",
   "consigliato": "No",
-  "adatto_famiglie": "Si",
   "lat": "44.833445",
   "lon": "8.063534",
   "anchor": "ev-2026-12-06-mostra-mercato-piccoli-animali-citta-di-san-damian"
