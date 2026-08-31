@@ -5,7 +5,7 @@ Genera/aggiorna la sezione eventi di eventi.html a partire dal foglio Google
 
 Fonte dati (in ordine di priorità):
   1. URL CSV in EVENTI_CSV_URL (es. export "Pubblica sul web" del tab eventi)
-  2. URL CSV gviz di default (richiede foglio condiviso "chiunque con il link")
+  2. URL CSV di export del tab Eventi (richiede foglio condiviso "chiunque con il link")
   3. data/eventi.json (istantanea committata, fallback se la rete non è disponibile)
 
 Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
@@ -15,7 +15,21 @@ raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob, difflib, itertools
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
-DEFAULT_CSV = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Eventi"
+# gid del tab "Eventi". Serve perche' la fonte e' l'export, non gviz: vedi sotto.
+EVENTI_GID = "1499875874"
+# L'EXPORT, non gviz (31/08/2026). gviz decide UN TIPO per colonna e restituisce
+# VUOTE le celle che non gli somigliano: nella colonna "Data Inizio" il foglio
+# (locale en_US) tiene 100 date vere e 65 stringhe - "31/08/2026" non e' una data
+# per chi legge mm/dd, e resta testo - e gviz mandava indietro quelle 65 vuote.
+# Qui sotto normalize() scarta chi non ha data d'inizio, quindi 65 eventi su 165
+# non arrivavano sul sito, in silenzio, contati come "non ci sono".
+# L'export restituisce le celle COME SI VEDONO, testo o data che siano, ed e' la
+# stessa strada che fa gia' il downloader (daop_pipeline.righe_csv_pubblico).
+# La sua trappola e' un'altra, e vale la pena saperla: l'export RISPETTA I FILTRI
+# del foglio, quindi un filtro attivo lo fa tornare corto. Non e' un errore che
+# si veda da solo -> il controllo in fetch_rows().
+DEFAULT_CSV = (f"https://docs.google.com/spreadsheets/d/{SHEET_ID}"
+               f"/export?format=csv&gid={EVENTI_GID}")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HTML_PATH = os.path.join(ROOT, "eventi.html")
 HOME_PATH = os.path.join(ROOT, "index.html")
@@ -128,7 +142,7 @@ def fetch_rows():
     # Cache-buster: Google e le CDN possono servire una COPIA IN CACHE del CSV.
     # Era la causa del "sito non aggiornato" dopo una modifica al foglio: la run
     # leggeva dati vecchi e rigenerava identico. Un parametro univoco a ogni run
-    # + header no-cache forzano una risposta fresca (DEFAULT_CSV = gviz = live).
+    # + header no-cache forzano una risposta fresca.
     sep = '&' if '?' in base else '?'
     url = f"{base}{sep}_cb={int(datetime.datetime.now().timestamp())}"
     try:
@@ -157,6 +171,21 @@ def fetch_rows():
             # chi lo scorre tutto trattandole come testo (campi_daop).
             d['_riga'] = str(hi + j + 2)
             out.append(d)
+        # L'export rispetta i filtri del foglio (vedi DEFAULT_CSV) e un filtro
+        # attivo toglie righe senza dire niente: tornerebbe un CSV corto e
+        # valido. Il confronto e' con l'istantanea di ieri, che tiene solo il
+        # futuro ed e' quindi sempre piu' corta di quello che si legge qui: se
+        # perfino quella e' piu' lunga di un terzo abbondante, non e' calo
+        # stagionale, e' il filtro.
+        try:
+            with open(JSON_PATH, encoding="utf-8") as fh:
+                ieri = len(json.load(fh))
+        except Exception:
+            ieri = 0
+        if ieri and len(out) < ieri * 0.7:
+            print(f"[genera_eventi] ATTENZIONE: {len(out)} righe lette, ma ieri il "
+                  f"sito ne pubblicava {ieri}: probabile FILTRO attivo sul tab "
+                  f"Eventi, che l'export rispetta. Toglilo e rilancia.")
         print(f"[genera_eventi] {len(out)} righe lette da CSV remoto")
         return out
     except Exception as e:  # fallback su istantanea locale

@@ -612,6 +612,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "palio-di-asti-in-famiglia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Martino",
+    "manifest": "Palio di Asti in Famiglia 2026",
+    "nome": "Palio di Asti in Famiglia 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-08-31"
+   },
    "palio-di-asti-sabato-05-settembre": {
     "anni": [
      2026
@@ -777,6 +788,23 @@
    }
   },
   "nome": "Borghetto di Borbera",
+  "prov": "AL"
+ },
+ "borgorattoalessandrino": {
+  "eventi": {
+   "pigiama-run-pro-loco-borgoratto-borgoratto-alessandrino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roma",
+    "manifest": "",
+    "nome": "Pigiama Run 2026 - Pro Loco Borgoratto",
+    "organizza": "Pro Loco Borgoratto",
+    "pagina": true,
+    "ultima": "2026-09-18"
+   }
+  },
+  "nome": "Borgoratto Alessandrino",
   "prov": "AL"
  },
  "borgosandalmazzo": {
@@ -1306,7 +1334,7 @@
     "nome": "In viaggio per crescere con le storie (Nati per Leggere con i raccontastorie) - Biblioteca Ragazzi E. Luzzati",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-08"
+    "ultima": "2026-09-24"
    },
    "la-polizia-locale-incontra-i-piccoli-lettori-regol-casale-monferrato": {
     "anni": [
@@ -1444,7 +1472,7 @@
     "nome": "I Giovedì in Biblioteca",
     "organizza": "",
     "pagina": false,
-    "ultima": "2026-09-10"
+    "ultima": "2026-09-24"
    },
    "la-radio-e-la-macchina-da-scrivere-nella-storia-casalnoceto": {
     "anni": [
@@ -1884,6 +1912,17 @@
  },
  "castelnuovodonbosco": {
   "eventi": {
+   "festa-della-vendemmia-castelnuovo-don-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cantina Terre dei Santi",
+    "manifest": "Festa della Vendemmia 2026",
+    "nome": "Festa della Vendemmia 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "feste-di-san-rocco-castelnuovo-don-bosco": {
     "anni": [
      2026
@@ -4168,7 +4207,7 @@
     "nome": "Vendemmia in Vigna con i Bambini - Vini Piana",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-12"
+    "ultima": "2026-09-26"
    }
   },
   "nome": "Mombaruzzo",
@@ -4868,6 +4907,17 @@
  },
  "ovada": {
   "eventi": {
+   "autunno-fiorissima-mostra-mercato-florovivaistica-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco S. Pertini",
+    "manifest": "",
+    "nome": "Autunno Fiorissima - Mostra Mercato Florovivaistica - Associazione Culturale Gardening in Collina",
+    "organizza": "Associazione Culturale Gardening in Collina",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "memorial-pasquale-messina-tamburello-cinaglio-vs-a-ovada": {
     "anni": [
      2026
@@ -6014,6 +6064,23 @@
    }
   },
   "nome": "Rosignano Monferrato",
+  "prov": "AL"
+ },
+ "sale": {
+  "eventi": {
+   "settembeer-fest-sale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Cavour",
+    "manifest": "Settembeer Fest",
+    "nome": "Settembeer Fest",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   }
+  },
+  "nome": "Sale",
   "prov": "AL"
  },
  "saluzzo": {
