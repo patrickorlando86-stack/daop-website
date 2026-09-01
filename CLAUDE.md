@@ -1,5 +1,12 @@
 # DAOP — daop.it
 
+> **Le cose da fare stanno in un file solo, e non e' in questo repo:**
+> `C:\Users\Orlando Patrick\Desktop\daop_downloader\TODO.md`
+> Vale per tutti e tre i repo (downloader, sito, app). Leggilo quando ti
+> chiedono "i to-do" o "a che punto siamo", e aggiorna **quello** - non
+> farne una copia qui, che diventerebbe la seconda lista che dice altro.
+
+
 Sito statico su GitHub Pages (`main` → daop.it). Niente build, niente framework:
 HTML in chiaro nel repo, CSS inline nelle pagine, JS inline o in `assets/js/`.
 
