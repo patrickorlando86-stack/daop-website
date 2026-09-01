@@ -707,6 +707,17 @@
  },
  "barolo": {
   "eventi": {
+   "a-spasso-con-la-marchesa-wi-mu-castello-di-barolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Wi.Mu. Castello Comunale di Barolo",
+    "manifest": "",
+    "nome": "A Spasso con la Marchesa - Wi.Mu. Castello di Barolo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   },
    "castelli-aperti-a-ferragosto-castello-falletti-e-w-barolo": {
     "anni": [
      2026
@@ -755,6 +766,23 @@
   },
   "nome": "Belforte Monferrato",
   "prov": "AL"
+ },
+ "bergolo": {
+  "eventi": {
+   "osservazione-astronomica-con-telescopio-comune-di-bergolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Collina del Vento",
+    "manifest": "I Sapori della Pietra",
+    "nome": "Osservazione Astronomica con Telescopio - Comune di Bergolo",
+    "organizza": "Comune di Bergolo",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   }
+  },
+  "nome": "Bergolo",
+  "prov": "CN"
  },
  "bistagno": {
   "eventi": {
@@ -1230,6 +1258,17 @@
  },
  "carru": {
   "eventi": {
+   "incontro-informativo-di-primo-soccorso-gruppo-volo-carru": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio di Carrù",
+    "manifest": "",
+    "nome": "Incontro Informativo di Primo Soccorso - Gruppo Volontari del Soccorso O.d.V. Clavesana",
+    "organizza": "Gruppo Volontari del Soccorso O.d.V. Clavesana",
+    "pagina": true,
+    "ultima": "2026-09-09"
+   },
    "la-scala-del-re-al-castello-di-carru": {
     "anni": [
      2026
@@ -2159,6 +2198,23 @@
   "nome": "Celle Enomondo",
   "prov": "AT"
  },
+ "centallo": {
+  "eventi": {
+   "giochi-di-fine-estate-movimento-giovanile-centallo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese (al Movi)",
+    "manifest": "",
+    "nome": "Giochi di Fine Estate - Movimento Giovanile",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   }
+  },
+  "nome": "Centallo",
+  "prov": "CN"
+ },
  "ceresolealba": {
   "eventi": {
    "apertura-domenicale-della-biblioteca-civica-pro-lo-ceresole-alba": {
@@ -2950,6 +3006,17 @@
     "pagina": false,
     "ultima": "2026-08-30"
    },
+   "ritorno-a-scuola-un-incontro-particolare-complesso-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Monumentale di San Francesco",
+    "manifest": "",
+    "nome": "Ritorno a scuola! Un incontro particolare.. - Complesso Monumentale di San Francesco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
    "scopri-gli-amici-alpaca-cuneo": {
     "anni": [
      2026
@@ -3595,6 +3662,17 @@
     "luogo": "Parco Fluviale Gesso e Stura",
     "manifest": "Cresco Con TE",
     "nome": "Custodi della Natura - Cinque sensi per sentire la Natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   },
+   "il-passaporto-dei-sogni-museo-diocesano-cuneo-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza d'Armi",
+    "manifest": "Cresco con te",
+    "nome": "Il passaporto dei sogni - Museo Diocesano Cuneo",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
@@ -4431,6 +4509,23 @@
   "nome": "Montemagno",
   "prov": "AT"
  },
+ "monteuroero": {
+  "eventi": {
+   "api-e-biodiversita-laboratorio-per-bambini-associa-monteu-roero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mercato della Terra",
+    "manifest": "",
+    "nome": "Api e Biodiversità - Laboratorio per Bambini - Associazione Amar",
+    "organizza": "Associazione Amar",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   }
+  },
+  "nome": "Monteu Roero",
+  "prov": "CN"
+ },
  "montigliomonferrato": {
   "eventi": {
    "concerto-di-san-lorenzo-duo-griot-fola-pro-loco-mo-montiglio-monferrato": {
@@ -5012,6 +5107,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "ometti-di-pietra-laboratori-di-pian-mune-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Laghi Luset - Pian Munè",
+    "manifest": "",
+    "nome": "Ometti di Pietra - Laboratori di Pian Munè",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-05"
    }
   },
   "nome": "Paesana",
@@ -5672,6 +5778,105 @@
     "pagina": true,
     "ultima": "2026-09-25"
    },
+   "allegro-con-moto-incontro-1-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 1 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-21"
+   },
+   "allegro-con-moto-incontro-2-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 2 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-28"
+   },
+   "allegro-con-moto-incontro-3-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 3 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-04"
+   },
+   "allegro-con-moto-incontro-4-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 4 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-11"
+   },
+   "allegro-con-moto-incontro-5-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 5 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-18"
+   },
+   "allegro-con-moto-incontro-6-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 6 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-25"
+   },
+   "allegro-con-moto-incontro-7-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 7 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-02"
+   },
+   "allegro-con-moto-incontro-8-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro 8 - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-09"
+   },
+   "allegro-con-moto-incontro-prova-gratuito-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Allegro con Moto",
+    "nome": "Allegro con Moto - Incontro Prova Gratuito - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-30"
+   },
    "coccoliamo-ci-carezza-racconigi": {
     "anni": [
      2026
@@ -5704,6 +5909,28 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-25"
+   },
+   "presto-prestissimo-incontro-prova-gratuito-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Presto, Prestissimo!",
+    "nome": "Presto, Prestissimo! - Incontro Prova Gratuito",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-30"
+   },
+   "presto-prestissimo-percorso-di-8-incontri-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "Presto, Prestissimo!",
+    "nome": "Presto, Prestissimo! - Percorso di 8 Incontri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-21"
    },
    "sogni-d-oro-carezza-racconigi": {
     "anni": [
@@ -5837,6 +6064,23 @@
   },
   "nome": "Roccaforte Ligure",
   "prov": "AL"
+ },
+ "roccafortemondovi": {
+  "eventi": {
+   "festa-patronale-di-san-maurizio-roccaforte-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale",
+    "manifest": "Festa Patronale di San Maurizio",
+    "nome": "Festa Patronale di San Maurizio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   }
+  },
+  "nome": "Roccaforte Mondovì",
+  "prov": "CN"
  },
  "roccagrimalda": {
   "eventi": {
@@ -6044,6 +6288,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "questione-di-fiuto-barolo-castles-foundation-roddi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Comunale di Roddi",
+    "manifest": "",
+    "nome": "Questione di Fiuto - Barolo & Castles Foundation",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
    }
   },
   "nome": "Roddi",
@@ -7392,6 +7647,17 @@
     "organizza": "Pro Loco Villa di Verzuolo",
     "pagina": true,
     "ultima": "2026-08-15"
+   },
+   "la-contea-del-mondo-magico-di-harry-e-gandalf-pro-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco del Castello di Verzuolo",
+    "manifest": "",
+    "nome": "La Contea del Mondo Magico - Di Harry e Gandalf - Pro Loco Villa di Verzuolo",
+    "organizza": "Pro Loco Villa di Verzuolo",
+    "pagina": true,
+    "ultima": "2026-09-19"
    },
    "una-giornata-tra-gusto-e-divertimento-pro-loco-vil-verzuolo": {
     "anni": [
