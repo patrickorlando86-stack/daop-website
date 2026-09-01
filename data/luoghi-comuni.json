@@ -721,7 +721,7 @@
  },
  "c-at-castelnuovo-don-bosco": {
   "comune": "Castelnuovo Don Bosco",
-  "n": 3,
+  "n": 4,
   "prov": "AT"
  },
  "c-at-cellarengo": {
@@ -1234,6 +1234,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-magliano-alfieri": {
+  "comune": "Magliano Alfieri",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-mango": {
   "comune": "Mango",
   "n": 1,
@@ -1341,7 +1346,7 @@
  },
  "c-cn-peveragno": {
   "comune": "Peveragno",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-pianfei": {
