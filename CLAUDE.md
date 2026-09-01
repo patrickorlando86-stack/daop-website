@@ -4058,6 +4058,94 @@ pubblicitari è attività commerciale**, con conseguenze fiscali che cambiano
 secondo l'inquadramento (APS, ASD, regime 398/91). Da sentire col commercialista
 prima della prima fattura.
 
+#### AdSense: no, e il motivo non è il decoro
+
+Ridiscusso il 01/09/2026, e la domanda era già quella giusta: «se anche sono 10
+euro, li buttiamo via?». La cifra è quasi esatta — ed è il motivo per cui la
+risposta non può essere «no per principio». È no perché quei 10 euro ne costano
+di più, e uno dei tre costi è sul pezzo che regge tutto.
+
+**Quanto sono davvero**, con i numeri di agosto 2026, che è il mese di picco:
+
+| | |
+|---|---|
+| clic/mese (export 30/08, 01-28/08) | 11.823 |
+| × 1,93 pagine per sessione (GA4, 18/07-14/08) | ~22.800 pagine viste |
+| × consenso: **senza consenso nello SEE non esce nessun annuncio** | ~10.000 impressioni monetizzabili |
+| × RPM realistico (Italia, locale, 90% mobile, pagina singola) €1-2 | **€10-20/mese** |
+
+Cioè **€150-250 l'anno nel caso buono**, e quel caso buono presuppone che il
+pavimento di ~500 clic/giorno regga, che è la scommessa del 15 settembre.
+
+**Primo costo: il consenso va rifatto, e si paga in misurazione.**
+`cookie-consent.js` è un interruttore solo e `ad_storage` sta a `denied` per
+costruzione, per sempre. AdSense nello SEE pretende una CMP certificata Google
+con TCF v2.2: non è un'opzione, è un requisito. Vuol dire un banner più pesante,
+con più scelte, sulle stesse pagine dove il banner è **già** il motivo per cui
+GA4 vede il ~38% della realtà. Un banner che chiede di più viene accettato di
+meno — quindi si paga €15 al mese con un calo probabile della misurazione
+proprio mentre `event_city` e i numeri da restituire alle realtà sono
+l'argomento di vendita, e proprio nel mese in cui si legge il verdetto.
+
+**Secondo costo: i pixel sono già occupati, e sono misurati.** Il 28/08 Ginetto
+è salito in cima a 211 schede su 419 perché quel posto valeva di più;
+l'invito al canale converte allo 0,3%; la barra delle azioni sta su 165 schede.
+Ogni posizione ad alta attenzione ha già un inquilino scelto guardando un
+numero. Un blocco AdSense non va in un buco: va sopra qualcosa di misurato, e
+dopo non si saprebbe più quale delle due mosse ha spostato il numero — che è la
+regola già scritta per Ginetto («cambiando insieme posizione e parole non si
+saprebbe quale delle due»).
+
+**Terzo costo, ed è il solo che conta: il rischio è sul dominio, non sulla
+pagina.** Sono ~470 pagine su una manciata di template, riscritte ogni notte da
+un foglio. L'unica prova che Google le legge come utili e non come *scaled
+content* sono le **10 «scansionate ma non indicizzate» su 131** — un verdetto
+buono, e quel verdetto *è* il business (439 schede = ~70% dei clic). Mettere
+pubblicità su una massa di pagine autogenerate è il profilo che quella policy
+descrive, e si paga con un'azione manuale **sul dominio**. È la stessa
+asimmetria già scritta per `rel="sponsored"`: il rischio non resta sulla pagina
+che l'ha causato. Guadagno atteso €20/mese, costo dello sbagliare 11.800
+clic/mese.
+
+Da dire con onestà, se no diventa allarmismo: **un rifiuto di AdSense non è una
+penalizzazione Search**, sono sistemi diversi e squadre diverse. Ma la domanda
+stessa mette una persona di Google davanti a 439 pagine su template, e «low
+value content» è la prima causa di rifiuto: è informazione che non conviene
+generare adesso.
+
+**Il punto che chiude, e che vale più dei tre costi messi insieme: dove AdSense
+è innocuo non rende, e dove rende è quello che stiamo vendendo.** Su
+`rubriche/`, `idee/` e il 404 fa zero, perché lì non c'è traffico. Sulle schede
+e su `eventi.html` rende — e sono le pagine su cui poggia la frase «il tuo
+spazio su una pagina pulita di cui le famiglie si fidano». Un banner Google per
+un centro estivo concorrente sopra la scheda che stiamo vendendo a un centro
+estivo non è neutro: è uno sconto sul nostro listino, fatto da noi.
+
+E l'aritmetica lo dice più forte di qualunque ragionamento: **due o tre clienti
+diretti a €100-150/anno valgono tutto l'AdSense annuale**, i corsi sono già una
+presenza pagata, e AdSense rende il terzo cliente più difficile da firmare. Lo
+stesso centimetro quadrato venduto a mano vale 10-50 volte, e la macchina c'è
+già — `Premium` nei luoghi, `Stato` nei corsi, `#come-ordiniamo`,
+`rel="sponsored"`. Quello che manca per incassarlo è `Premium_al`, che è già il
+punto 2 della lista qui sopra.
+
+**Quando si cambia idea, ed è una data non un umore.** Se a marzo la vendita
+diretta è stata provata davvero — stagione delle guide passata, telefonate
+fatte, nessuno compra — allora quel pubblico non si monetizza direttamente e
+AdSense diventa il valore residuo del traffico. Lì la domanda non è più «€20
+gratis?», è «questo traffico ha un prezzo o no?», ed è legittima. Provarlo
+adesso non risponde a niente, perché non si è ancora provato a vendere la cosa
+con cui compete.
+
+**Se un giorno si fa lo stesso, la forma meno peggio** — scritta qui perché la
+si ritrovi invece di improvvisarla: **mai gli "annunci automatici"**, che sono
+quelli che iniettano dove vogliono e disfano il lavoro su `content-visibility`
+e sul layout che non si forza al caricamento; una sola unità manuale, in fondo,
+**sotto** l'invito al canale, **solo** sulle schede, dopo la CMP; e trenta
+giorni con `apri_ginetto` e `iscrizione_canale` come controllo, perché il costo
+di cui sopra si misura lì e non nel rendiconto AdSense.
+
+
 ### Le locandine: due misure, due posti
 
 Le immagini stanno nel bucket Supabase, **piano gratuito, tetto 5 GB di traffico
