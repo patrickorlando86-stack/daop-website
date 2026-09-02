@@ -34,7 +34,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3151",
@@ -71,7 +73,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2604",
@@ -108,7 +112,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2204",
@@ -145,7 +151,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "157",
@@ -182,7 +190,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3164",
@@ -219,7 +229,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "439",
@@ -256,7 +268,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2552",
@@ -293,7 +307,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2553",
@@ -330,7 +346,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "496",
@@ -367,7 +385,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1977",
@@ -404,7 +424,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "498",
@@ -441,7 +463,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2179",
@@ -478,7 +502,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "499",
@@ -515,7 +541,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2606",
@@ -552,7 +580,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1318",
@@ -589,7 +619,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2203",
@@ -626,7 +658,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2162",
@@ -663,7 +697,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "5"
+  "eta_max": "5",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "497",
@@ -700,7 +736,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2605",
@@ -737,7 +775,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2602",
@@ -774,7 +814,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2119",
@@ -811,7 +853,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3150",
@@ -848,7 +892,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2135",
@@ -885,7 +931,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2161",
@@ -922,7 +970,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "11"
+  "eta_max": "11",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5133",
@@ -959,7 +1009,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3007",
@@ -996,7 +1048,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "8",
@@ -1033,7 +1087,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2158",
@@ -1070,7 +1126,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "19"
+  "eta_max": "19",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2193",
@@ -1107,7 +1165,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2091",
@@ -1144,7 +1204,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "115",
@@ -1181,7 +1243,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "502",
@@ -1218,7 +1282,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2572",
@@ -1255,7 +1321,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2070",
@@ -1292,7 +1360,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "8",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2581",
@@ -1329,7 +1399,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "13"
+  "eta_max": "13",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "12",
@@ -1366,7 +1438,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2585",
@@ -1403,7 +1477,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2",
@@ -1440,7 +1516,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2087",
@@ -1477,7 +1555,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2191",
@@ -1514,7 +1594,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2547",
@@ -1551,7 +1633,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2074",
@@ -1588,7 +1672,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "500",
@@ -1625,7 +1711,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "506",
@@ -1662,7 +1750,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2094",
@@ -1699,7 +1789,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2164",
@@ -1736,7 +1828,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2168",
@@ -1773,7 +1867,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2147",
@@ -1810,7 +1906,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "440",
@@ -1847,7 +1945,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5114",
@@ -1884,7 +1984,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2190",
@@ -1921,7 +2023,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2584",
@@ -1958,7 +2062,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "34",
@@ -1995,7 +2101,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2165",
@@ -2032,7 +2140,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "222",
@@ -2069,7 +2179,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "501",
@@ -2106,7 +2218,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2557",
@@ -2143,7 +2257,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2555",
@@ -2180,7 +2296,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2556",
@@ -2217,7 +2335,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2558",
@@ -2254,7 +2374,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3031",
@@ -2291,7 +2413,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2099",
@@ -2328,7 +2452,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "49",
@@ -2365,7 +2491,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "504",
@@ -2402,7 +2530,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1319",
@@ -2439,7 +2569,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "509",
@@ -2476,7 +2608,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "508",
@@ -2513,7 +2647,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2169",
@@ -2550,7 +2686,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "510",
@@ -2587,7 +2725,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2167",
@@ -2624,7 +2764,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2098",
@@ -2661,7 +2803,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2166",
@@ -2698,7 +2842,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "63",
@@ -2735,7 +2881,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2102",
@@ -2772,7 +2920,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2096",
@@ -2809,7 +2959,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2097",
@@ -2846,7 +2998,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2130",
@@ -2883,7 +3037,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2587",
@@ -2920,7 +3076,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2072",
@@ -2957,7 +3115,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2132",
@@ -2994,7 +3154,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5117",
@@ -3031,7 +3193,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "5"
+  "eta_max": "5",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "503",
@@ -3068,7 +3232,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3009",
@@ -3105,7 +3271,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "505",
@@ -3142,7 +3310,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2129",
@@ -3179,7 +3349,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2131",
@@ -3216,7 +3388,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "87",
@@ -3253,7 +3427,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "7"
+  "eta_max": "7",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2100",
@@ -3290,7 +3466,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "300",
@@ -3327,7 +3505,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "88",
@@ -3364,7 +3544,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2586",
@@ -3401,7 +3583,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2192",
@@ -3438,7 +3622,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2111",
@@ -3475,7 +3661,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2113",
@@ -3512,7 +3700,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "91",
@@ -3549,7 +3739,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2095",
@@ -3586,7 +3778,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2112",
@@ -3623,7 +3817,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2163",
@@ -3660,7 +3856,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2582",
@@ -3697,7 +3895,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "8",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "206",
@@ -3734,7 +3934,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1985",
@@ -3771,7 +3973,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3073",
@@ -3808,7 +4012,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3091",
@@ -3845,7 +4051,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1320",
@@ -3882,7 +4090,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "78",
@@ -3919,7 +4129,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "310",
@@ -3956,7 +4168,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "10",
@@ -3993,7 +4207,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "511",
@@ -4030,7 +4246,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "70",
@@ -4067,7 +4285,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "512",
@@ -4104,7 +4324,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3080",
@@ -4141,7 +4363,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "71",
@@ -4178,7 +4402,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2510",
@@ -4215,7 +4441,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2025",
@@ -4252,7 +4480,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1321",
@@ -4289,7 +4519,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3061",
@@ -4326,7 +4558,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2614",
@@ -4363,7 +4597,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5031",
@@ -4400,7 +4636,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "67",
@@ -4437,7 +4675,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "197",
@@ -4474,7 +4714,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "62",
@@ -4511,7 +4753,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1322",
@@ -4548,7 +4792,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3070",
@@ -4585,7 +4831,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2514",
@@ -4622,7 +4870,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "26",
@@ -4659,7 +4909,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3029",
@@ -4696,7 +4948,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1981",
@@ -4733,7 +4987,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "322",
@@ -4770,7 +5026,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "173",
@@ -4807,7 +5065,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "249",
@@ -4844,7 +5104,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2615",
@@ -4881,7 +5143,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2017",
@@ -4918,7 +5182,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "15"
+  "eta_max": "15",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1972",
@@ -4955,7 +5221,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "60",
@@ -4992,7 +5260,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3",
@@ -5029,7 +5299,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "103",
@@ -5066,7 +5338,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "82",
@@ -5103,7 +5377,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "85",
@@ -5140,7 +5416,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "299",
@@ -5177,7 +5455,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1323",
@@ -5214,7 +5494,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2021",
@@ -5251,7 +5533,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "201",
@@ -5288,7 +5572,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2592",
@@ -5325,7 +5611,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2588",
@@ -5362,7 +5650,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2589",
@@ -5399,7 +5689,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2090",
@@ -5436,7 +5728,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3145",
@@ -5473,7 +5767,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2196",
@@ -5510,7 +5806,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2501",
@@ -5547,7 +5845,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3143",
@@ -5584,7 +5884,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "13"
+  "eta_max": "13",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2177",
@@ -5621,7 +5923,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2594",
@@ -5658,7 +5962,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1982",
@@ -5695,7 +6001,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2148",
@@ -5732,7 +6040,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2574",
@@ -5769,7 +6079,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "441",
@@ -5806,7 +6118,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2104",
@@ -5843,7 +6157,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3140",
@@ -5880,7 +6196,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2590",
@@ -5917,7 +6235,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2565",
@@ -5954,7 +6274,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2566",
@@ -5991,7 +6313,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "513",
@@ -6028,7 +6352,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2195",
@@ -6065,7 +6391,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2595",
@@ -6102,7 +6430,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3146",
@@ -6139,7 +6469,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2573",
@@ -6176,7 +6508,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2593",
@@ -6213,7 +6547,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2178",
@@ -6250,7 +6586,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "514",
@@ -6287,7 +6625,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2133",
@@ -6324,7 +6664,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3142",
@@ -6361,7 +6703,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1325",
@@ -6398,7 +6742,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2575",
@@ -6435,7 +6781,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1996",
@@ -6472,7 +6820,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1994",
@@ -6509,7 +6859,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "271",
@@ -6546,7 +6898,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1324",
@@ -6583,7 +6937,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "516",
@@ -6620,7 +6976,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3141",
@@ -6657,7 +7015,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2114",
@@ -6694,7 +7054,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2176",
@@ -6731,7 +7093,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3144",
@@ -6768,7 +7132,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "515",
@@ -6805,7 +7171,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1983",
@@ -6842,7 +7210,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3160",
@@ -6879,7 +7249,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3159",
@@ -6916,7 +7288,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2125",
@@ -6953,7 +7327,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1966",
@@ -6990,7 +7366,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3067",
@@ -7027,7 +7405,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "32",
@@ -7064,7 +7444,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1326",
@@ -7101,7 +7483,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "72",
@@ -7138,7 +7522,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "164",
@@ -7175,7 +7561,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1327",
@@ -7212,7 +7600,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "58",
@@ -7249,7 +7639,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "251",
@@ -7286,7 +7678,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3071",
@@ -7323,7 +7717,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2194",
@@ -7360,7 +7756,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "517",
@@ -7397,7 +7795,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2136",
@@ -7434,7 +7834,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "27",
@@ -7471,7 +7873,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2516",
@@ -7508,7 +7912,9 @@
   "foto_4": "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/2516-4.jpg",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3155",
@@ -7545,7 +7951,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "36",
@@ -7582,7 +7990,9 @@
   "foto_4": "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/36-4.jpg",
   "foto_5": "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/36-5.jpg",
   "eta_min": "3",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "57",
@@ -7619,7 +8029,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1973",
@@ -7656,7 +8068,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3136",
@@ -7693,7 +8107,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "518",
@@ -7730,7 +8146,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "240",
@@ -7767,7 +8185,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2022",
@@ -7804,7 +8224,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "289",
@@ -7841,7 +8263,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2512",
@@ -7878,7 +8302,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "241",
@@ -7915,7 +8341,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1328",
@@ -7952,7 +8380,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "46",
@@ -7989,7 +8419,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2505",
@@ -8026,7 +8458,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2026",
@@ -8063,7 +8497,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "312",
@@ -8100,7 +8536,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2522",
@@ -8137,7 +8575,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "90",
@@ -8174,7 +8614,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1971",
@@ -8211,7 +8653,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2607",
@@ -8248,7 +8692,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "43",
@@ -8285,7 +8731,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5189",
@@ -8322,7 +8770,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "15",
@@ -8359,7 +8809,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "37",
@@ -8396,7 +8848,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1883",
@@ -8433,7 +8887,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3135",
@@ -8470,7 +8926,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "519",
@@ -8507,7 +8965,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3015",
@@ -8544,7 +9004,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2127",
@@ -8581,7 +9043,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1984",
@@ -8618,7 +9082,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3033",
@@ -8655,7 +9121,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "306",
@@ -8692,7 +9160,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3081",
@@ -8729,7 +9199,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3133",
@@ -8766,7 +9238,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2121",
@@ -8803,7 +9277,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2591",
@@ -8840,7 +9316,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "131",
@@ -8877,7 +9355,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "129",
@@ -8914,7 +9394,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1329",
@@ -8951,7 +9433,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3060",
@@ -8988,7 +9472,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3072",
@@ -9025,7 +9511,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "146",
@@ -9062,7 +9550,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3099",
@@ -9099,7 +9589,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "309",
@@ -9136,7 +9628,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2027",
@@ -9173,7 +9667,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2616",
@@ -9210,7 +9706,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3001",
@@ -9247,7 +9745,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "185",
@@ -9284,7 +9784,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3066",
@@ -9321,7 +9823,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "93",
@@ -9358,7 +9862,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "520",
@@ -9395,7 +9901,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "221",
@@ -9432,7 +9940,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5177",
@@ -9469,7 +9979,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1632",
@@ -9506,7 +10018,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1330",
@@ -9543,7 +10057,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "301",
@@ -9580,7 +10096,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "6",
@@ -9617,7 +10135,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3092",
@@ -9654,7 +10174,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "272",
@@ -9691,7 +10213,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1995",
@@ -9728,7 +10252,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "521",
@@ -9765,7 +10291,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2200",
@@ -9802,7 +10330,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2014",
@@ -9839,7 +10369,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "523",
@@ -9876,7 +10408,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2078",
@@ -9913,7 +10447,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1",
@@ -9950,7 +10486,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "13",
@@ -9987,7 +10525,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "10",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2578",
@@ -10024,7 +10564,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "14",
@@ -10061,7 +10603,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2079",
@@ -10098,7 +10642,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2202",
@@ -10135,7 +10681,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "17",
@@ -10172,7 +10720,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "20",
@@ -10209,7 +10759,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2170",
@@ -10246,7 +10798,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "31",
@@ -10283,7 +10837,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2018",
@@ -10320,7 +10876,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "15"
+  "eta_max": "15",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "47",
@@ -10357,7 +10915,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2150",
@@ -10394,7 +10954,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2559",
@@ -10431,7 +10993,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "526",
@@ -10468,7 +11032,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2561",
@@ -10505,7 +11071,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "522",
@@ -10542,7 +11110,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2199",
@@ -10579,7 +11149,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2088",
@@ -10616,7 +11188,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2160",
@@ -10653,7 +11227,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "11"
+  "eta_max": "11",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "55",
@@ -10690,7 +11266,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "525",
@@ -10727,7 +11305,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "524",
@@ -10764,7 +11344,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2105",
@@ -10801,7 +11383,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2519",
@@ -10838,7 +11422,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5029",
@@ -10875,7 +11461,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2577",
@@ -10912,7 +11500,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3025",
@@ -10949,7 +11539,9 @@
   "foto_4": "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/3025-4.jpg",
   "foto_5": "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/3025-5.jpg",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3193",
@@ -10986,7 +11578,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "73",
@@ -11023,7 +11617,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "8"
+  "eta_max": "8",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3194",
@@ -11060,7 +11656,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2019",
@@ -11097,7 +11695,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "79",
@@ -11134,7 +11734,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2159",
@@ -11171,7 +11773,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2596",
@@ -11208,7 +11812,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2560",
@@ -11245,7 +11851,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "86",
@@ -11282,7 +11890,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2201",
@@ -11319,7 +11929,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2597",
@@ -11356,7 +11968,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "89",
@@ -11393,7 +12007,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2128",
@@ -11430,7 +12046,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2115",
@@ -11467,7 +12085,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3074",
@@ -11504,7 +12124,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1980",
@@ -11541,7 +12163,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3078",
@@ -11578,7 +12202,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2143",
@@ -11615,7 +12241,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2172",
@@ -11652,7 +12280,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2206",
@@ -11689,7 +12319,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2995",
@@ -11726,7 +12358,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "527",
@@ -11763,7 +12397,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "529",
@@ -11800,7 +12436,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3152",
@@ -11837,7 +12475,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1331",
@@ -11874,7 +12514,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "442",
@@ -11911,7 +12553,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "66",
@@ -11948,7 +12592,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3134",
@@ -11985,7 +12631,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2152",
@@ -12022,7 +12670,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "13"
+  "eta_max": "13",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2118",
@@ -12059,7 +12709,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "528",
@@ -12096,7 +12748,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "120",
@@ -12133,7 +12787,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2024",
@@ -12170,7 +12826,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "180",
@@ -12207,7 +12865,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "303",
@@ -12244,7 +12904,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3098",
@@ -12281,7 +12943,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2016",
@@ -12318,7 +12982,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "13"
+  "eta_max": "13",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "21",
@@ -12355,7 +13021,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "74",
@@ -12392,7 +13060,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5036",
@@ -12429,7 +13099,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5180",
@@ -12466,7 +13138,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "30",
@@ -12503,7 +13177,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2509",
@@ -12540,7 +13216,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2515",
@@ -12577,7 +13255,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3147",
@@ -12614,7 +13294,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3148",
@@ -12651,7 +13333,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "152",
@@ -12688,7 +13372,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "153",
@@ -12725,7 +13411,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3149",
@@ -12762,7 +13450,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "175",
@@ -12799,7 +13489,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3079",
@@ -12836,7 +13528,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2093",
@@ -12873,7 +13567,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "8",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2092",
@@ -12910,7 +13606,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1655",
@@ -12947,7 +13645,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2993",
@@ -12984,7 +13684,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3000",
@@ -13021,7 +13723,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "530",
@@ -13058,7 +13762,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2151",
@@ -13095,7 +13801,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2546",
@@ -13132,7 +13840,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "273",
@@ -13169,7 +13879,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1967",
@@ -13206,7 +13918,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "170",
@@ -13243,7 +13957,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2137",
@@ -13280,7 +13996,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1332",
@@ -13317,7 +14035,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3069",
@@ -13354,7 +14074,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1333",
@@ -13391,7 +14113,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "285",
@@ -13428,7 +14152,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3014",
@@ -13465,7 +14191,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "176",
@@ -13502,7 +14230,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3063",
@@ -13539,7 +14269,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3055",
@@ -13576,7 +14308,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "531",
@@ -13613,7 +14347,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2126",
@@ -13650,7 +14386,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "19",
@@ -13687,7 +14425,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5111",
@@ -13724,7 +14464,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3024",
@@ -13761,7 +14503,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "39",
@@ -13798,7 +14542,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1997",
@@ -13835,7 +14581,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "532",
@@ -13872,7 +14620,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2997",
@@ -13909,7 +14659,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3137",
@@ -13946,7 +14698,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5172",
@@ -13983,7 +14737,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "24",
@@ -14020,7 +14776,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "42",
@@ -14057,7 +14815,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1970",
@@ -14094,7 +14854,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1334",
@@ -14131,7 +14893,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "533",
@@ -14168,7 +14932,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2144",
@@ -14205,7 +14971,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "16",
@@ -14242,7 +15010,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1692",
@@ -14279,7 +15049,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "23",
@@ -14316,7 +15088,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1335",
@@ -14353,7 +15127,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3192",
@@ -14390,7 +15166,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1336",
@@ -14427,7 +15205,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "53",
@@ -14464,7 +15244,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3190",
@@ -14501,7 +15283,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "59",
@@ -14538,7 +15322,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3132",
@@ -14575,7 +15361,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "81",
@@ -14612,7 +15400,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3191",
@@ -14649,7 +15439,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "534",
@@ -14686,7 +15478,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "35",
@@ -14723,7 +15517,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1337",
@@ -14760,7 +15556,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "214",
@@ -14797,7 +15595,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2122",
@@ -14834,7 +15634,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "327",
@@ -14871,7 +15673,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2504",
@@ -14908,7 +15712,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "18",
@@ -14945,7 +15751,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2101",
@@ -14982,7 +15790,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "11"
+  "eta_max": "11",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2103",
@@ -15019,7 +15829,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "247",
@@ -15056,7 +15868,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "507",
@@ -15093,7 +15907,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "535",
@@ -15130,7 +15946,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2517",
@@ -15167,7 +15985,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1979",
@@ -15204,7 +16024,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1968",
@@ -15241,7 +16063,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1570",
@@ -15278,7 +16102,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2508",
@@ -15315,7 +16141,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1338",
@@ -15352,7 +16180,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "150",
@@ -15389,7 +16219,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1339",
@@ -15426,7 +16258,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3020",
@@ -15463,7 +16297,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2603",
@@ -15500,7 +16336,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2198",
@@ -15537,7 +16375,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1340",
@@ -15574,7 +16414,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2599",
@@ -15611,7 +16453,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1845",
@@ -15648,7 +16492,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2069",
@@ -15685,7 +16531,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2171",
@@ -15722,7 +16570,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2075",
@@ -15759,7 +16609,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "443",
@@ -15796,7 +16648,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2197",
@@ -15833,7 +16687,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2600",
@@ -15870,7 +16726,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2576",
@@ -15907,7 +16765,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2598",
@@ -15944,7 +16804,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2077",
@@ -15981,7 +16843,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "96",
@@ -16018,7 +16882,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2568",
@@ -16055,7 +16921,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2567",
@@ -16092,7 +16960,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2507",
@@ -16129,7 +16999,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "52",
@@ -16166,7 +17038,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2518",
@@ -16203,7 +17077,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "538",
@@ -16240,7 +17116,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1341",
@@ -16277,7 +17155,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2106",
@@ -16314,7 +17194,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "539",
@@ -16351,7 +17233,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2015",
@@ -16388,7 +17272,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "536",
@@ -16425,7 +17311,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2134",
@@ -16462,7 +17350,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2082",
@@ -16499,7 +17389,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "537",
@@ -16536,7 +17428,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1342",
@@ -16573,7 +17467,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2116",
@@ -16610,7 +17506,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "94",
@@ -16647,7 +17545,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1955",
@@ -16684,7 +17584,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "80",
@@ -16721,7 +17623,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "541",
@@ -16758,7 +17662,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2611",
@@ -16795,7 +17701,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2089",
@@ -16832,7 +17740,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2610",
@@ -16869,7 +17779,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "543",
@@ -16906,7 +17818,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1969",
@@ -16943,7 +17857,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2175",
@@ -16980,7 +17896,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2205",
@@ -17017,7 +17935,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2569",
@@ -17054,7 +17974,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "290",
@@ -17091,7 +18013,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2173",
@@ -17128,7 +18052,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2076",
@@ -17165,7 +18091,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "542",
@@ -17202,7 +18130,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "540",
@@ -17239,7 +18169,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2117",
@@ -17276,7 +18208,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2174",
@@ -17313,7 +18247,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3008",
@@ -17350,7 +18286,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "11"
+  "eta_max": "11",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "95",
@@ -17387,7 +18325,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "169",
@@ -17424,7 +18364,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1978",
@@ -17461,7 +18403,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "230",
@@ -17498,7 +18442,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1974",
@@ -17535,7 +18481,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3064",
@@ -17572,7 +18520,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1628",
@@ -17609,7 +18559,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "544",
@@ -17646,7 +18598,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3096",
@@ -17683,7 +18637,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1343",
@@ -17720,7 +18676,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "75",
@@ -17757,7 +18715,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2990",
@@ -17794,7 +18754,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "545",
@@ -17831,7 +18793,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2554",
@@ -17868,7 +18832,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "98",
@@ -17905,7 +18871,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3023",
@@ -17942,7 +18910,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "76",
@@ -17979,7 +18949,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3021",
@@ -18016,7 +18988,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "487",
@@ -18053,7 +19027,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2539",
@@ -18090,7 +19066,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1975",
@@ -18127,7 +19105,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "111",
@@ -18164,7 +19144,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3086",
@@ -18201,7 +19183,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2998",
@@ -18238,7 +19222,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2080",
@@ -18275,7 +19261,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2612",
@@ -18312,7 +19300,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2579",
@@ -18349,7 +19339,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2155",
@@ -18386,7 +19378,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2613",
@@ -18423,7 +19417,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2081",
@@ -18460,7 +19456,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "17"
+  "eta_max": "17",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1346",
@@ -18497,7 +19495,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2208",
@@ -18534,7 +19534,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2085",
@@ -18571,7 +19573,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2138",
@@ -18608,7 +19612,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2073",
@@ -18645,7 +19651,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "160",
@@ -18682,7 +19690,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "556",
@@ -18719,7 +19729,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "557",
@@ -18756,7 +19768,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2180",
@@ -18793,7 +19807,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "444",
@@ -18830,7 +19846,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2108",
@@ -18867,7 +19885,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2109",
@@ -18904,7 +19924,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2210",
@@ -18941,7 +19963,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "551",
@@ -18978,7 +20002,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2183",
@@ -19015,7 +20041,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2533",
@@ -19052,7 +20080,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1827",
@@ -19089,7 +20119,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3018",
@@ -19126,7 +20158,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2564",
@@ -19163,7 +20197,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2562",
@@ -19200,7 +20236,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2563",
@@ -19237,7 +20275,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2207",
@@ -19274,7 +20314,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "553",
@@ -19311,7 +20353,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "546",
@@ -19348,7 +20392,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "547",
@@ -19385,7 +20431,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "550",
@@ -19422,7 +20470,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "552",
@@ -19459,7 +20509,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2086",
@@ -19496,7 +20548,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2186",
@@ -19533,7 +20587,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1347",
@@ -19570,7 +20626,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "555",
@@ -19607,7 +20665,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "244",
@@ -19644,7 +20704,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1345",
@@ -19681,7 +20743,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2020",
@@ -19718,7 +20782,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "17"
+  "eta_max": "17",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2500",
@@ -19755,7 +20821,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "548",
@@ -19792,7 +20860,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "554",
@@ -19829,7 +20899,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "549",
@@ -19866,7 +20938,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "307",
@@ -19903,7 +20977,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2534",
@@ -19940,7 +21016,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2146",
@@ -19977,7 +21055,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2145",
@@ -20014,7 +21094,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2084",
@@ -20051,7 +21133,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "16"
+  "eta_max": "16",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2535",
@@ -20088,7 +21172,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2140",
@@ -20125,7 +21211,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3010",
@@ -20162,7 +21250,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2139",
@@ -20199,7 +21289,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2141",
@@ -20236,7 +21328,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2184",
@@ -20273,7 +21367,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2536",
@@ -20310,7 +21406,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2071",
@@ -20347,7 +21445,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2209",
@@ -20384,7 +21484,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "7",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2544",
@@ -20421,7 +21523,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2142",
@@ -20458,7 +21562,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2185",
@@ -20495,7 +21601,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2156",
@@ -20532,7 +21640,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2120",
@@ -20569,7 +21679,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2999",
@@ -20606,7 +21718,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2182",
@@ -20643,7 +21757,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "8",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2181",
@@ -20680,7 +21796,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1953",
@@ -20717,7 +21835,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "142",
@@ -20754,7 +21874,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1604",
@@ -20791,7 +21913,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5016",
@@ -20828,7 +21952,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "252",
@@ -20865,7 +21991,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "558",
@@ -20902,7 +22030,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2153",
@@ -20939,7 +22069,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "13"
+  "eta_max": "13",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "559",
@@ -20976,7 +22108,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3100",
@@ -21013,7 +22147,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3058",
@@ -21050,7 +22186,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1348",
@@ -21087,7 +22225,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1349",
@@ -21124,7 +22264,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2551",
@@ -21161,7 +22303,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1886",
@@ -21198,7 +22342,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "445",
@@ -21235,7 +22381,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2188",
@@ -21272,7 +22420,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2550",
@@ -21309,7 +22459,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2187",
@@ -21346,7 +22498,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "8",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "254",
@@ -21383,7 +22537,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1350",
@@ -21420,7 +22576,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2513",
@@ -21457,7 +22615,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3038",
@@ -21494,7 +22654,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2580",
@@ -21531,7 +22693,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3052",
@@ -21568,7 +22732,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1629",
@@ -21605,7 +22771,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2537",
@@ -21642,7 +22810,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "561",
@@ -21679,7 +22849,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "560",
@@ -21716,7 +22888,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3027",
@@ -21753,7 +22927,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3054",
@@ -21790,7 +22966,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3090",
@@ -21827,7 +23005,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5019",
@@ -21864,7 +23044,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "562",
@@ -21901,7 +23083,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3076",
@@ -21938,7 +23122,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "563",
@@ -21975,7 +23161,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "11",
@@ -22012,7 +23200,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3042",
@@ -22049,7 +23239,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1544",
@@ -22086,7 +23278,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2540",
@@ -22123,7 +23317,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3088",
@@ -22160,7 +23356,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5192",
@@ -22197,7 +23395,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "128",
@@ -22234,7 +23434,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1840",
@@ -22271,7 +23473,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "564",
@@ -22308,7 +23512,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3085",
@@ -22345,7 +23551,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "112",
@@ -22382,7 +23590,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1999",
@@ -22419,7 +23629,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2542",
@@ -22456,7 +23668,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "311",
@@ -22493,7 +23707,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3048",
@@ -22530,7 +23746,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "565",
@@ -22567,7 +23785,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3084",
@@ -22604,7 +23824,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3034",
@@ -22641,7 +23863,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "263",
@@ -22678,7 +23902,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1986",
@@ -22715,7 +23941,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "40",
@@ -22752,7 +23980,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1351",
@@ -22789,7 +24019,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "101",
@@ -22826,7 +24058,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1987",
@@ -22863,7 +24097,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3051",
@@ -22900,7 +24136,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3045",
@@ -22937,7 +24175,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "566",
@@ -22974,7 +24214,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "229",
@@ -23011,7 +24253,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3075",
@@ -23048,7 +24292,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1555",
@@ -23085,7 +24331,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3049",
@@ -23122,7 +24370,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3068",
@@ -23159,7 +24409,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "51",
@@ -23196,7 +24448,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2189",
@@ -23233,7 +24487,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "246",
@@ -23270,7 +24526,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3050",
@@ -23307,7 +24565,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5102",
@@ -23344,7 +24604,9 @@
   "foto_4": "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/5102-4.jpg",
   "foto_5": "https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/5102-5.jpg",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3003",
@@ -23381,7 +24643,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "567",
@@ -23418,7 +24682,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2149",
@@ -23455,7 +24721,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2123",
@@ -23492,7 +24760,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "568",
@@ -23529,7 +24799,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5",
@@ -23566,7 +24838,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2541",
@@ -23603,7 +24877,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "569",
@@ -23640,7 +24916,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3089",
@@ -23677,7 +24955,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1898",
@@ -23714,7 +24994,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3082",
@@ -23751,7 +25033,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "204",
@@ -23788,7 +25072,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "130",
@@ -23825,7 +25111,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1610",
@@ -23835,7 +25123,7 @@
   "servizi": "Biblioteca, Laboratori creativi, Lettura, Attività per bambini e famiglie",
   "tag": "biblioteca-laboratori-lettura-eventi-gratuito-carrozzina-al-coperto-tutto-anno",
   "indirizzo": "Piazza Roero n.3",
-  "città": "Montegrosso D'Asti",
+  "città": "Montegrosso d'Asti",
   "cap": "14048",
   "provincia": "AT",
   "regione": "Piemonte",
@@ -23862,7 +25150,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "570",
@@ -23899,7 +25189,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "151",
@@ -23936,7 +25228,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1988",
@@ -23973,7 +25267,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1976",
@@ -24010,7 +25306,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1989",
@@ -24047,7 +25345,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2609",
@@ -24084,7 +25384,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2608",
@@ -24121,7 +25423,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2549",
@@ -24158,7 +25462,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1695",
@@ -24195,7 +25501,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1991",
@@ -24232,7 +25540,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2110",
@@ -24269,7 +25579,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "571",
@@ -24306,7 +25618,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2548",
@@ -24343,7 +25657,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "572",
@@ -24380,7 +25696,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1990",
@@ -24417,7 +25735,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "573",
@@ -24454,7 +25774,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2211",
@@ -24491,7 +25813,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2157",
@@ -24528,7 +25852,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2617",
@@ -24565,7 +25891,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "316",
@@ -24602,7 +25930,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3087",
@@ -24639,7 +25969,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3059",
@@ -24676,7 +26008,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2991",
@@ -24713,7 +26047,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2502",
@@ -24750,7 +26086,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "305",
@@ -24787,7 +26125,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "574",
@@ -24824,7 +26164,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1344",
@@ -24861,7 +26203,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1559",
@@ -24898,7 +26242,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1352",
@@ -24935,7 +26281,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2538",
@@ -24972,7 +26320,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "121",
@@ -25009,7 +26359,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "575",
@@ -25046,7 +26398,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1353",
@@ -25083,7 +26437,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2571",
@@ -25120,7 +26476,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3161",
@@ -25130,7 +26488,7 @@
   "servizi": "Percorsi a ostacoli (OCR), Corsi per bambini dai 6 anni, Allenamenti ragazzi e adulti, Open day, Lezioni di prova, Laboratori estivi del Comune (6-11 anni), Iscrizione tramite Ufficio Servizi Sociali",
   "tag": "centro-sportivo-corso-aperto-bambini-sport-prenotazione",
   "indirizzo": "Via Govone, 9",
-  "città": "San Damiano d’Asti",
+  "città": "San Damiano d'Asti",
   "cap": "14015",
   "provincia": "AT",
   "regione": "Piemonte",
@@ -25157,7 +26515,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3077",
@@ -25194,7 +26554,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1795",
@@ -25231,7 +26593,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3062",
@@ -25268,7 +26632,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "191",
@@ -25305,7 +26671,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2506",
@@ -25342,7 +26710,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1998",
@@ -25379,7 +26749,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "113",
@@ -25416,7 +26788,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "576",
@@ -25453,7 +26827,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "207",
@@ -25490,7 +26866,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1354",
@@ -25527,7 +26905,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2503",
@@ -25564,7 +26944,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1603",
@@ -25601,7 +26983,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "223",
@@ -25638,7 +27022,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2520",
@@ -25675,7 +27061,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3056",
@@ -25712,7 +27100,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "446",
@@ -25749,7 +27139,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "577",
@@ -25786,7 +27178,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "7",
@@ -25823,7 +27217,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "134",
@@ -25860,7 +27256,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2511",
@@ -25897,7 +27295,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "45",
@@ -25934,7 +27334,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "578",
@@ -25971,7 +27373,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "6"
+  "eta_max": "6",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5167",
@@ -26008,7 +27412,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1548",
@@ -26045,7 +27451,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "579",
@@ -26082,7 +27490,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "3"
+  "eta_max": "3",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2154",
@@ -26119,7 +27529,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "138",
@@ -26156,7 +27568,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3094",
@@ -26193,7 +27607,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2041",
@@ -26230,7 +27646,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2039",
@@ -26267,7 +27685,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "65",
@@ -26304,7 +27724,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2040",
@@ -26341,7 +27763,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1958",
@@ -26378,7 +27802,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5050",
@@ -26415,7 +27841,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5141",
@@ -26452,7 +27880,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3044",
@@ -26489,7 +27919,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5012",
@@ -26526,7 +27958,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3041",
@@ -26563,7 +27997,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5051",
@@ -26600,7 +28036,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "99",
@@ -26637,7 +28075,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3119",
@@ -26674,7 +28114,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5077",
@@ -26711,7 +28153,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5052",
@@ -26748,7 +28192,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5078",
@@ -26785,7 +28231,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5079",
@@ -26822,7 +28270,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5040",
@@ -26859,7 +28309,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5039",
@@ -26896,7 +28348,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5156",
@@ -26933,7 +28387,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5080",
@@ -26970,7 +28426,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5041",
@@ -27007,7 +28465,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5042",
@@ -27044,7 +28504,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5043",
@@ -27081,7 +28543,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5142",
@@ -27118,7 +28582,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5143",
@@ -27155,7 +28621,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3106",
@@ -27192,7 +28660,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5053",
@@ -27229,7 +28699,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5081",
@@ -27266,7 +28738,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5045",
@@ -27303,7 +28777,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5044",
@@ -27340,7 +28816,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5154",
@@ -27377,7 +28855,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3053",
@@ -27414,7 +28894,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5082",
@@ -27451,7 +28933,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5054",
@@ -27488,7 +28972,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5101",
@@ -27525,7 +29011,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5186",
@@ -27562,7 +29050,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3101",
@@ -27599,7 +29089,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5055",
@@ -27636,7 +29128,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5001",
@@ -27673,7 +29167,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3097",
@@ -27710,7 +29206,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5056",
@@ -27747,7 +29245,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5083",
@@ -27784,7 +29284,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5035",
@@ -27821,7 +29323,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5024",
@@ -27858,7 +29362,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5084",
@@ -27895,7 +29401,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3103",
@@ -27932,7 +29440,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5085",
@@ -27969,7 +29479,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3115",
@@ -28006,7 +29518,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3114",
@@ -28043,7 +29557,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3035",
@@ -28080,7 +29596,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3036",
@@ -28117,7 +29635,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3037",
@@ -28154,7 +29674,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5150",
@@ -28191,7 +29713,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3095",
@@ -28228,7 +29752,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5057",
@@ -28265,7 +29791,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5027",
@@ -28302,7 +29830,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5003",
@@ -28339,7 +29869,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5026",
@@ -28376,7 +29908,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5187",
@@ -28413,7 +29947,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5097",
@@ -28450,7 +29986,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5099",
@@ -28487,7 +30025,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5100",
@@ -28524,7 +30064,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "10",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5098",
@@ -28561,7 +30103,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "18"
+  "eta_max": "18",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5006",
@@ -28598,7 +30142,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5139",
@@ -28635,7 +30181,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5004",
@@ -28672,7 +30220,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5140",
@@ -28709,7 +30259,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5086",
@@ -28746,7 +30298,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5020",
@@ -28783,7 +30337,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3040",
@@ -28820,7 +30376,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5046",
@@ -28857,7 +30415,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5087",
@@ -28894,7 +30454,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5138",
@@ -28931,7 +30493,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2000",
@@ -28968,7 +30532,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5047",
@@ -29005,7 +30571,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5152",
@@ -29042,7 +30610,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5109",
@@ -29079,7 +30649,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5058",
@@ -29116,7 +30688,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3039",
@@ -29153,7 +30727,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5059",
@@ -29190,7 +30766,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5060",
@@ -29227,7 +30805,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3111",
@@ -29264,7 +30844,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5048",
@@ -29301,7 +30883,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5144",
@@ -29338,7 +30922,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1959",
@@ -29375,7 +30961,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5125",
@@ -29412,7 +31000,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3116",
@@ -29449,7 +31039,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3105",
@@ -29486,7 +31078,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5061",
@@ -29523,7 +31117,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5028",
@@ -29560,7 +31156,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5107",
@@ -29597,7 +31195,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5131",
@@ -29634,7 +31234,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5179",
@@ -29671,7 +31273,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5062",
@@ -29708,7 +31312,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5008",
@@ -29745,7 +31351,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5193",
@@ -29782,7 +31390,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "50",
@@ -29819,7 +31429,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5171",
@@ -29856,7 +31468,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5063",
@@ -29893,7 +31507,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5088",
@@ -29930,7 +31546,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3109",
@@ -29967,7 +31585,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3110",
@@ -30004,7 +31624,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5064",
@@ -30041,7 +31663,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3047",
@@ -30078,7 +31702,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5160",
@@ -30115,7 +31741,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5145",
@@ -30152,7 +31780,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3043",
@@ -30189,7 +31819,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5037",
@@ -30226,7 +31858,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5149",
@@ -30263,7 +31897,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5163",
@@ -30300,7 +31936,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2029",
@@ -30337,7 +31975,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2028",
@@ -30374,7 +32014,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3093",
@@ -30411,7 +32053,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "77",
@@ -30448,7 +32092,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3065",
@@ -30485,7 +32131,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3046",
@@ -30522,7 +32170,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3112",
@@ -30559,7 +32209,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2048",
@@ -30596,7 +32248,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5068",
@@ -30633,7 +32287,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5069",
@@ -30670,7 +32326,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5153",
@@ -30707,7 +32365,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5184",
@@ -30744,7 +32404,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3118",
@@ -30781,7 +32443,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5190",
@@ -30818,7 +32482,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5089",
@@ -30855,7 +32521,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3104",
@@ -30892,7 +32560,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3113",
@@ -30929,7 +32599,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5070",
@@ -30966,7 +32638,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3102",
@@ -31003,7 +32677,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1961",
@@ -31040,7 +32716,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5067",
@@ -31077,7 +32755,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5002",
@@ -31114,7 +32794,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5090",
@@ -31151,7 +32833,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5038",
@@ -31188,7 +32872,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5091",
@@ -31225,7 +32911,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5151",
@@ -31262,7 +32950,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5092",
@@ -31299,7 +32989,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5066",
@@ -31336,7 +33028,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5146",
@@ -31373,7 +33067,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5071",
@@ -31410,7 +33106,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5005",
@@ -31447,7 +33145,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3057",
@@ -31484,7 +33184,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3108",
@@ -31521,7 +33223,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5021",
@@ -31558,7 +33262,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3083",
@@ -31595,7 +33301,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5065",
@@ -31632,7 +33340,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5049",
@@ -31669,7 +33379,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5147",
@@ -31706,7 +33418,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5072",
@@ -31743,7 +33457,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5124",
@@ -31780,7 +33496,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5148",
@@ -31817,7 +33535,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5093",
@@ -31854,7 +33574,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5155",
@@ -31891,7 +33613,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3117",
@@ -31928,7 +33652,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5073",
@@ -31965,7 +33691,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5094",
@@ -32002,7 +33730,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5074",
@@ -32039,7 +33769,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5108",
@@ -32076,7 +33808,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5095",
@@ -32113,7 +33847,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "97",
@@ -32150,7 +33886,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5075",
@@ -32187,7 +33925,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5007",
@@ -32224,7 +33964,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2043",
@@ -32261,7 +34003,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5183",
@@ -32298,7 +34042,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5096",
@@ -32335,7 +34081,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1960",
@@ -32372,7 +34120,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5076",
@@ -32409,7 +34159,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "5110",
@@ -32446,7 +34198,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3107",
@@ -32483,7 +34237,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2064",
@@ -32520,7 +34276,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2057",
@@ -32557,7 +34315,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2061",
@@ -32594,7 +34354,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "25",
@@ -32631,7 +34393,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2060",
@@ -32668,7 +34432,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "4",
@@ -32705,7 +34471,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "495",
@@ -32742,7 +34510,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "38",
@@ -32779,7 +34549,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "48",
@@ -32816,7 +34588,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2052",
@@ -32853,7 +34627,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "331",
@@ -32890,7 +34666,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2062",
@@ -32927,7 +34705,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2063",
@@ -32964,7 +34744,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "3139",
@@ -33001,7 +34783,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2005",
@@ -33038,7 +34822,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2004",
@@ -33075,7 +34861,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2012",
@@ -33112,7 +34900,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2053",
@@ -33149,7 +34939,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "492",
@@ -33186,7 +34978,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "490",
@@ -33223,7 +35017,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "489",
@@ -33260,7 +35056,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "493",
@@ -33297,7 +35095,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "491",
@@ -33334,7 +35134,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2042",
@@ -33371,7 +35173,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2035",
@@ -33408,7 +35212,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2036",
@@ -33445,7 +35251,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2065",
@@ -33482,7 +35290,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "488",
@@ -33519,7 +35329,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2067",
@@ -33556,7 +35368,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "68",
@@ -33593,7 +35407,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "83",
@@ -33630,7 +35446,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "10"
+  "eta_max": "10",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2068",
@@ -33667,7 +35485,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2066",
@@ -33704,7 +35524,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "33",
@@ -33741,7 +35563,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "330",
@@ -33778,7 +35602,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2054",
@@ -33815,7 +35641,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2051",
@@ -33852,7 +35680,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "333",
@@ -33889,7 +35719,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2007",
@@ -33926,7 +35758,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2050",
@@ -33963,7 +35797,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2059",
@@ -34000,7 +35836,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2056",
@@ -34037,7 +35875,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2008",
@@ -34074,7 +35914,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "100",
@@ -34111,7 +35953,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2049",
@@ -34148,7 +35992,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "61",
@@ -34185,7 +36031,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "5",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2031",
@@ -34222,7 +36070,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "64",
@@ -34259,7 +36109,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2032",
@@ -34296,7 +36148,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2543",
@@ -34333,7 +36187,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2030",
@@ -34370,7 +36226,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1957",
@@ -34407,7 +36265,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "1956",
@@ -34444,7 +36304,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "54",
@@ -34481,7 +36343,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "12"
+  "eta_max": "12",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "494",
@@ -34518,7 +36382,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "14"
+  "eta_max": "14",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2037",
@@ -34555,7 +36421,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2038",
@@ -34592,7 +36460,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "6",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2034",
@@ -34629,7 +36499,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "2",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2033",
@@ -34666,7 +36538,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "4",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2046",
@@ -34703,7 +36577,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2001",
@@ -34740,7 +36616,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "0",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2044",
@@ -34777,7 +36655,9 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "1",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  },
  {
   "codice": "2047",
@@ -34814,6 +36694,8 @@
   "foto_4": "",
   "foto_5": "",
   "eta_min": "3",
-  "eta_max": "99"
+  "eta_max": "99",
+  "placeid": "",
+  "fotoautore": ""
  }
 ]

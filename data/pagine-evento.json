@@ -665,6 +665,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 161,
+  "ritirata": "2026-09-02",
   "slug": "allegro-con-moto-incontro-3-carezza-racconigi",
   "updated": "2026-09-02"
  },
@@ -693,6 +694,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 162,
+  "ritirata": "2026-09-02",
   "slug": "allegro-con-moto-incontro-4-carezza-racconigi",
   "updated": "2026-09-02"
  },
@@ -721,6 +723,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 163,
+  "ritirata": "2026-09-02",
   "slug": "allegro-con-moto-incontro-5-carezza-racconigi",
   "updated": "2026-09-02"
  },
@@ -749,6 +752,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 164,
+  "ritirata": "2026-09-02",
   "slug": "allegro-con-moto-incontro-6-carezza-racconigi",
   "updated": "2026-09-02"
  },
@@ -777,6 +781,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 165,
+  "ritirata": "2026-09-02",
   "slug": "allegro-con-moto-incontro-7-carezza-racconigi",
   "updated": "2026-09-02"
  },
@@ -805,6 +810,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
   "riga": 166,
+  "ritirata": "2026-09-02",
   "slug": "allegro-con-moto-incontro-8-carezza-racconigi",
   "updated": "2026-09-02"
  },
@@ -1057,7 +1063,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 171,
+  "riga": 165,
   "slug": "api-e-biodiversita-laboratorio-per-bambini-associa-monteu-roero",
   "updated": "2026-09-02"
  },
@@ -6783,7 +6789,7 @@
   "ora": "10:00-12:30; 15:00-17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 173,
+  "riga": 167,
   "slug": "il-passaporto-dei-sogni-museo-diocesano-cuneo-fossano",
   "updated": "2026-09-02"
  },
@@ -9324,7 +9330,7 @@
   "ora": "17:30-18:20",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 167,
+  "riga": 161,
   "slug": "presto-prestissimo-incontro-prova-gratuito-racconigi",
   "updated": "2026-09-02"
  },
@@ -9352,7 +9358,7 @@
   "ora": "17:30-18:20",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 168,
+  "riga": 162,
   "slug": "presto-prestissimo-percorso-di-8-incontri-racconigi",
   "updated": "2026-09-02"
  },
@@ -9519,7 +9525,7 @@
   "ora": "16:30",
   "prezzo": "15€ a nucleo familiare, 10€ con Abbonamento Musei",
   "prov": "CN",
-  "riga": 169,
+  "riga": 163,
   "slug": "questione-di-fiuto-barolo-castles-foundation-roddi",
   "updated": "2026-09-02"
  },
@@ -9687,7 +9693,7 @@
   "ora": "10:30",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 170,
+  "riga": 164,
   "slug": "ritorno-a-scuola-un-incontro-particolare-complesso-cuneo",
   "updated": "2026-09-02"
  },
