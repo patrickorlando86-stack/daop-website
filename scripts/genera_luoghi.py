@@ -940,9 +940,8 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-facts li{display:flex;gap:8px}
 .lg-facts b{font-weight:700;color:var(--text-dark);flex:0 0 auto}
 .lg-serv{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding:0;list-style:none}
-.lg-serv li{font-size:0.78rem;color:var(--text-mid);background:var(--cream);
-  border-radius:100px;padding:4px 11px}
-.lg-serv li.is-pratico{background:rgba(24,134,99,0.09);color:#146c51;font-weight:600}
+.lg-serv li{font-size:0.78rem;border-radius:100px;padding:4px 11px;
+  background:rgba(24,134,99,0.09);color:#146c51;font-weight:600}
 .lg-next{margin:12px 0 0;padding:12px 14px;background:var(--cream);border-radius:12px}
 .lg-next p{margin:0 0 7px;font-size:0.8rem;font-weight:700;text-transform:uppercase;
   letter-spacing:0.04em;color:var(--text-light)}
@@ -1249,19 +1248,27 @@ def riga(l, oggi):
     if testo:
         corpo.append(f"<p>{e(G.trunc(testo, 600 if l.get('premium') else 400))}</p>")
 
+    # Pillola verde SOLO per i pratici. I Servizi stavano nella stessa fila
+    # con lo sfondo grigio, e due pillole di colore diverso una accanto
+    # all'altra si leggono come "attiva" e "spenta" - non come due cose
+    # diverse. Sono due cose diverse: i pratici (10 etichette chiuse, dai Tag)
+    # fanno decidere se partire, i Servizi sono testo libero del foglio e
+    # DESCRIVONO. Quindi i Servizi scendono fra i fatti, dove il registro
+    # "Etichetta: valore" dice da solo che non sono un filtro.
     pratici = l.get('pratici') or []
-    voci = [f'<li class="is-pratico">{e(p)}</li>' for p in pratici]
-    # I servizi sono testo libero del foglio e i pratici escono dai Tag: la
-    # stessa cosa e' spesso scritta in tutt'e due le colonne, e la scheda la
+    if pratici:
+        corpo.append('<ul class="lg-serv">' + "".join(
+            f'<li class="is-pratico">{e(p)}</li>' for p in pratici) + '</ul>')
+
+    fatti = []
+    # La stessa cosa e' spesso scritta in tutt'e due le colonne, e la scheda la
     # mostrava due volte di fila - verde e poi grigia. Misurato il 18/08/2026:
     # 89 schede su 894, quasi tutte "Parcheggio" (58) e "Picnic" (49).
     gia_detto = {x.strip().lower() for x in pratici}
-    voci += [f'<li>{e(s)}</li>' for s in (l.get('servizi') or [])[:12]
-             if s.strip().lower() not in gia_detto]
-    if voci:
-        corpo.append(f'<ul class="lg-serv">{"".join(voci)}</ul>')
-
-    fatti = []
+    cose = [s.strip() for s in (l.get('servizi') or [])[:12]
+            if s.strip() and s.strip().lower() not in gia_detto]
+    if cose:
+        fatti.append(f"<li><b>Cosa c'è:</b> <span>{e(', '.join(cose))}</span></li>")
     if _indirizzo_utile(l):
         fatti.append(f"<li><b>Dove:</b> <span>{e(G.trunc(l['indirizzo'], 90))}</span></li>")
     fatti.append(f'<li><b>Se piove:</b> <span>{RIPARO_LABEL[l["riparo"]]}</span></li>')
