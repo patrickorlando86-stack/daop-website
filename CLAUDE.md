@@ -449,7 +449,8 @@ abbondantemente sotto — ma perché è la forma più riconoscibile come pubblic
 che esista sul web (NN/g, *banner blindness*). I benchmark che si trovano sui
 widget a bolla (5-15%) sono chat di assistenza su siti commerciali, dove chi
 scrive ha un problema e cerca aiuto: non sono confrontabili. Il numero
-confrontabile è in casa ed è lo 0,3% dell'invito al canale.
+confrontabile è in casa ed è **~1%** dell'invito al canale (era scritto 0,3%:
+misurato il 01/09 è 3-4 volte tanto, vedi la correzione più sotto).
 
 **Una barra fissa nemmeno.** Ginetto da solo è un bottone solo, e vale la regola
 già scritta per `.ev-barra`: una barra fissa costa 62px di schermo a tutti, e
@@ -565,18 +566,49 @@ canale converte **fra lo 0 e lo 0,6%**, verosimilmente ~0,3%. Nella stessa
 settimana, sulle stesse pagine: `click_come_arrivare` 33, `aggiungi_calendario`
 10, `click_telefono` 9, `apri_ginetto` 7.
 
+**CORREZIONE del 01/09/2026: quello 0,3% era sbagliato per difetto di 3-4
+volte.** Era un *tetto* ricavato da un secchio sporco - `click_sito_organizzatore`
+conteneva anche i clic verso i siti degli organizzatori - e stimato **prima** che
+esistesse un evento dedicato. Da quando c'è, il numero si legge invece di
+dedurlo. GA4 → Coinvolgimento → Eventi, 19/08-31/08: `iscrizione_canale` fa
+**24 eventi da 22 utenti distinti** (1,09 a testa: nessun doppio clic, il dato è
+pulito). I 22 sono lo **0,48% di tutti gli utenti** del periodo (~4.580), ma
+contando solo chi l'invito lo ha visto davvero il tasso sta fra lo **0,9% e
+l'1,4%**. Corretti per la copertura GA4 del 38% sono **~58 persone vere**, e
+58 tocchi → 20 iscritti vuol dire che **circa uno su tre completa**, che per un
+atterraggio su WhatsApp è normale-buono.
+
+Due cose che questa misura porta con sé, e la seconda è un regalo:
+- **il confondente:** dal 19 al 28 agosto l'invito stava in *cima* alle 211
+  schede concluse, visto dal 100% dei lettori invece che dal 29%; il 28/08 quel
+  posto è passato a Ginetto. Quei 24 clic sono **nove giorni col posto buono e
+  quattro senza**, quindi il tasso della posizione attuale è più basso di quello
+  appena scritto.
+- **l'A/B era già fatto senza volerlo:** stesso slot, stesse 211 pagine, due
+  inquilini in due periodi consecutivi. La lettura di `apri_ginetto` a fine
+  settembre non si confronta più con una baseline vaga - si confronta con quello
+  che l'invito ha reso **nello stesso identico posto**.
+
 **Non era (solo) la posizione, ed è la conclusione da non semplificare.** La
 posizione costava un fattore 3,5 — 29 su 100 lo vedevano invece di 100 su 100 —
 e quel fattore lo spostamento sulle concluse te lo restituisce. Ma anche fra chi
 lo vedeva non lo toccava quasi nessuno, mentre le altre azioni della stessa
-pagina funzionano benissimo. Se lo 0,3% è il tetto dell'*ask*, da ~600 viste a
-settimana si passa a ~2.000 e da 2 iscritti a 6-7: meglio, non risolutivo.
+pagina funzionano benissimo. **Questa proiezione era costruita sullo 0,3%
+sbagliato**: diceva che passando da ~600 viste a settimana a ~2.000 si andava da
+2 iscritti a 6-7. Il posto in cima è poi stato occupato per nove giorni davvero,
+e il risultato misurato è **20 iscritti in 13 giorni, cioè ~11 a settimana** -
+quasi il doppio del caso migliore previsto qui. Il tetto dell'*ask* non è lo
+0,3%: è **~l'1%**, e resta vero che non è risolutivo.
 
 **Il corollario per la newsletter**, che è la domanda da cui è partito tutto: su
 quella stessa pagina un modulo email chiede *più* attrito (nome, indirizzo,
 conferma) allo stesso pubblico che oggi non tocca un bottone da un tocco solo.
-Se lo 0,3% è il tetto dell'ask lì, la newsletter lì sotto farà peggio, non
-meglio. Il pezzo non ancora provato è **il testo**, non il canale.
+Se lo 0,3% fosse il tetto dell'ask lì, la newsletter lì sotto farebbe peggio,
+non meglio. **Ma la premessa è caduta: il tetto è ~l'1%, tre-quattro volte
+tanto**, quindi questo argomento **va rifatto, non ripetuto** - resta vero che un
+modulo chiede più attrito di un tocco, non è più vero che il pubblico di quelle
+pagine non risponde agli inviti. Il pezzo non ancora provato è **il testo**, non
+il canale.
 
 **Come si rifà la lettura.** Esplora → Esplorazione a forma libera; nei report
 standard quella scomposizione non c'è. Righe `percent` (è `percent_scroll`, il
@@ -637,7 +669,8 @@ giorni contro 10 del calendario e 9 del telefono.
 
 **E' lo stesso conto dell'invito al canale, ma il verso e' opposto, ed e' la
 cosa da non confondere.** Quello e' una *richiesta*: in cima chiederebbe
-qualcosa a chi non ha ancora avuto niente, e infatti converte allo 0,3%.
+qualcosa a chi non ha ancora avuto niente, e infatti converte a **~l'1%**
+(misurato il 01/09; qui era scritto 0,3%, che era una stima per difetto).
 Questi sono *servizi* — la mappa e la data sono la ragione per cui uno e'
 arrivato. Un servizio si mette davanti, una richiesta no.
 
@@ -865,8 +898,12 @@ Le decisioni dentro, che non si ricavano dal diff:
 
 L'istinto è "il PDF in cambio dell'indirizzo". È la mossa giusta al momento
 sbagliato, e il numero che lo dice è già in questo file: l'invito al canale
-WhatsApp — **un tocco solo, zero campi da compilare** — converte allo **0,3%**.
-Un modulo email chiede di più allo stesso pubblico sulle stesse pagine.
+WhatsApp — **un tocco solo, zero campi da compilare** — converte a **~l'1%**
+(0,9-1,4%, misurato il 01/09: qui era scritto 0,3%, che era un tetto stimato su
+un secchio sporco). Un modulo email chiede di più allo stesso pubblico sulle
+stesse pagine, e questo resta vero anche col numero giusto - ma l'argomento
+regge **meno di quanto sembrava**, perché il pubblico risponde agli inviti
+tre-quattro volte più di quanto si credeva.
 
 C'è però una differenza vera, ed è l'unica cosa non ancora provata: quello è un
 *ask* che non dà niente in cambio, questo dà un oggetto. È esattamente «il pezzo
@@ -4335,7 +4372,7 @@ l'argomento di vendita, e proprio nel mese in cui si legge il verdetto.
 
 **Secondo costo: i pixel sono già occupati, e sono misurati.** Il 28/08 Ginetto
 è salito in cima a 211 schede su 419 perché quel posto valeva di più;
-l'invito al canale converte allo 0,3%; la barra delle azioni sta su 165 schede.
+l'invito al canale converte a ~l'1%; la barra delle azioni sta su 165 schede.
 Ogni posizione ad alta attenzione ha già un inquilino scelto guardando un
 numero. Un blocco AdSense non va in un buco: va sopra qualcosa di misurato, e
 dopo non si saprebbe più quale delle due mosse ha spostato il numero — che è la
