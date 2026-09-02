@@ -145,12 +145,26 @@ module.exports = async function corsi(browser) {
     : `disegnati a ${francobolli[0].w}x${francobolli[0].h}px dentro un riquadro da 52`);
   // E in tutta la riga non ne deve restare nessuna: il francobollo era il posto
   // piu' visibile, non l'unico possibile.
+  //
+  // FUORI la descrizione (.event-desc), ed e' lo stesso confine che ha gia'
+  // fatto restringere EMOJI per il TM di "MISP(TM)": quello che si difende sono
+  // i pittogrammi NOSTRI, non quello che scrive chi organizza. La descrizione e'
+  // testo libero del foglio, arriva verbatim, e un'emoji dentro e' la sua voce -
+  // il 02/09/2026 questa prova e' diventata rossa per la ☺️ in fondo alla
+  // descrizione del Coro Voci Bianche Allegretto ("nessuno e' stonato! E' solo
+  // una questione di ascolto profondo"), che e' esattamente cio' che la scuola
+  // ha scritto. L'alternativa era ripulire la descrizione nel generatore, cioe'
+  // riscrivere in silenzio il testo di chi ce lo manda: peggio del difetto.
   const conEmoji = await page.$$eval('.event-card', (cs, re) => cs
-    .filter((c) => new RegExp(re, 'u').test(c.textContent))
+    .filter((c) => {
+      const q = c.cloneNode(true);
+      q.querySelectorAll('.event-desc').forEach((d) => d.remove());
+      return new RegExp(re, 'u').test(q.textContent);
+    })
     .map((c) => c.id), EMOJI.source);
   r.ok(conEmoji.length === 0, conEmoji.length
     ? `righe con un'emoji dentro: ${conEmoji.slice(0, 4).join(', ')}`
-    : 'nessuna emoji nel testo delle righe');
+    : 'nessuna emoji nel testo delle righe (fuori la descrizione: e la loro voce)');
 
   // ── il breadcrumb si deve leggere sull'hero scuro ──────────────────────
   const cr = await contrastoCrumb(page, '.co-crumb');
