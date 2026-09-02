@@ -180,6 +180,7 @@ COLONNE = {
     # Dal 02/09/2026, in fondo al foglio. `place_id` non si legge qui: e' un
     # dato per riprendere la foto, non da stampare.
     'foto_autore': ('fotoautore', 'foto autore', 'autore foto'),
+    'foto_licenza': ('fotolicenza', 'foto licenza', 'licenza foto'),
 }
 
 
@@ -193,32 +194,46 @@ def si(v):
 
 # ── Il credito della foto ────────────────────────────────────────────────────
 #
-# Le foto dei luoghi vengono da Google Places, e i termini chiedono due cose:
-# non conservarle (noi le ri-ospitiamo: e' il PASSO 3 del TODO, aperto) e
-# **citare l'autore accanto alla foto**. Questa e' la seconda, e non ha zone
-# grigie: vale comunque, dovunque la foto sia ospitata.
+# Le foto dei luoghi vengono da DUE fonti, e tutt'e due chiedono il credito:
 #
-# La colonna `FotoAutore` contiene HTML SCRITTO DA GOOGLE, per esempio:
+#   - Google PLACES (712 righe). I termini chiedono due cose: non conservarle
+#     (noi le ri-ospitiamo: e' una scelta presa il 02/09, scritta nel TODO come
+#     esposizione nota) e **citare l'autore accanto alla foto**. Questa e' la
+#     seconda, e non ha zone grigie: vale dovunque la foto sia ospitata.
+#   - Wikimedia COMMONS (203 righe): sono le `comune-<paese>.jpg`, la foto
+#     rappresentativa del paese. Licenza pulita non vuol dire licenza libera:
+#     Creative Commons vuole autore, licenza e un link al materiale.
+#
+# Le due fonti passano per le STESSE colonne (`FotoAutore` e, dal 02/09 sera,
+# `FotoLicenza`) e si distinguono da sole: la licenza ce l'ha solo Commons, e
+# l'host del link dice da dove viene la foto. Non c'e' una colonna "fonte" e non
+# serve - un dato in piu' da tenere allineato a mano e' un dato in piu' che si
+# sfasa.
+#
+# Quelle colonne contengono HTML SCRITTO DA TERZI, per esempio:
 #   <a href="https://maps.google.com/maps/contrib/1034.../">Mario Rossi</a>
+#   <a href="https://commons.wikimedia.org/wiki/File:Canelli.jpg">Phyrexian</a>
 # Metterlo in pagina cosi' com'e' vorrebbe dire far scrivere HTML nel sito a
 # una terza parte, dentro una stringa che passa per un foglio Google che
 # scrivono in due persone. Quindi NON si stampa: si smonta, si tiene solo cio'
 # che serve (nome e link), e il tag lo scriviamo noi.
 #
 # Il link si conserva quando c'e' - Google chiede che l'attribuzione resti
-# cliccabile - ma solo verso Google: un href verso qualsiasi altro host e'
-# un dato che non ci aspettiamo, e in quel caso resta il solo nome.
+# cliccabile, e Creative Commons vuole il link al materiale - ma solo verso gli
+# host che ci aspettiamo. Un href altrove e' un dato che non ci aspettiamo, e in
+# quel caso resta il solo nome: citare l'autore senza link e' comunque meglio
+# che non citarlo.
 _RE_A = re.compile(r'<a\s[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
                    re.I | re.S)
-_HOST_OK = re.compile(r'^(?:[a-z0-9-]+\.)*google\.com$', re.I)
+_HOST_GOOGLE = re.compile(r'^(?:[a-z0-9-]+\.)*google\.com$', re.I)
+_HOST_COMMONS = re.compile(r'^(?:[a-z0-9-]+\.)*wikimedia\.org$', re.I)
+# Solo per la colonna della licenza: li' l'unico link sensato e' il testo della
+# licenza, che sta su creativecommons.org.
+_HOST_LICENZA = re.compile(r'^(?:[a-z0-9-]+\.)*creativecommons\.org$', re.I)
 
 
-def credito_foto(grezzo):
-    """Da HTML di Google a (nome, link) ripuliti. Senza nome torna ('', '').
-
-    Il nome e' l'unica cosa obbligatoria: se il link non e' di Google si cita
-    l'autore e basta, perche' non citarlo affatto e' l'unico esito sbagliato.
-    """
+def _smonta(grezzo, host_ok):
+    """Da HTML di terzi a (testo, link) ripuliti. Senza testo torna ('', '')."""
     grezzo = (grezzo or '').strip()
     if not grezzo:
         return '', ''
@@ -240,24 +255,64 @@ def credito_foto(grezzo):
             u = urllib.parse.urlparse(href)
         except ValueError:
             u = None
-        if u and u.scheme in ('http', 'https') and _HOST_OK.match(u.hostname or ''):
+        if u and u.scheme in ('http', 'https') and host_ok(u.hostname or ''):
             link = href
     return nome, link
 
 
-def html_credito_foto(grezzo):
+def credito_foto(grezzo):
+    """Da HTML dell'autore a (nome, link) ripuliti. Senza nome torna ('', '').
+
+    Il nome e' l'unica cosa obbligatoria: se il link non e' di una fonte che
+    conosciamo si cita l'autore e basta, perche' non citarlo affatto e' l'unico
+    esito sbagliato.
+    """
+    return _smonta(grezzo, lambda h: bool(_HOST_GOOGLE.match(h) or
+                                          _HOST_COMMONS.match(h)))
+
+
+def licenza_foto(grezzo):
+    """Da HTML della licenza a (nome, link). ('', '') per le foto di Places.
+
+    Public domain e CC0 arrivano senza link: su Commons non hanno un
+    `LicenseUrl`, e non c'e' un testo da linkare. Resta il solo nome, che e'
+    esatto.
+    """
+    return _smonta(grezzo, lambda h: bool(_HOST_LICENZA.match(h)))
+
+
+def fonte_foto(link_autore):
+    """Da dove viene la foto, letto dall'host del link dell'autore.
+
+    Senza link resta "Google Maps": e' la fonte delle righe vecchie riempite a
+    mano, e le righe di Commons il link ce l'hanno sempre (glielo mettiamo noi,
+    ed e' la pagina del file).
+    """
+    if link_autore and 'wikimedia.org' in (link_autore or ''):
+        return 'Wikimedia Commons'
+    return 'Google Maps'
+
+
+def html_credito_foto(grezzo, licenza_grezza=''):
     """Il paragrafo da mettere SOTTO la foto, o '' se l'autore non lo sappiamo.
 
-    Vuoto e' il caso normale sulle 712 righe vecchie: la foto c'e' ma l'autore
-    l'avevamo scartato, e il PASSO 3 del TODO decide se ricomprarlo. Meglio
-    niente che un "autore sconosciuto" scritto sotto ogni foto del sito.
+    Vuoto resta il caso delle 51 righe di Places senza credito e di ogni riga
+    nuova finche' il generatore non l'ha riempita: meglio niente che un "autore
+    sconosciuto" scritto sotto ogni foto del sito.
     """
     nome, link = credito_foto(grezzo)
     if not nome:
         return ''
     chi = (f'<a href="{G.esc(link)}" target="_blank" rel="noopener nofollow">'
            f'{G.esc(nome)}</a>') if link else G.esc(nome)
-    return f'<p class="lg-credito">Foto: {chi} · Google Maps</p>'
+    pezzi = [chi]
+    lic, lic_link = licenza_foto(licenza_grezza)
+    if lic:
+        pezzi.append(f'<a href="{G.esc(lic_link)}" target="_blank" '
+                     f'rel="noopener nofollow">{G.esc(lic)}</a>'
+                     if lic_link else G.esc(lic))
+    pezzi.append(fonte_foto(link))
+    return f'<p class="lg-credito">Foto: {" · ".join(pezzi)}</p>'
 
 
 # ── La tassonomia ────────────────────────────────────────────────────────────
@@ -621,6 +676,7 @@ def leggi_catalogo():
             # Places (`photos[0]`), le altre le abbiamo messe noi. Citare
             # l'autore sbagliato sarebbe peggio che non citarne nessuno.
             'foto_autore': d['foto_autore'],
+            'foto_licenza': d['foto_licenza'],
             'eta_min': _eta(d['eta_min'], 0), 'eta_max': _eta(d['eta_max'], 99),
             'premium': premium, 'premium_dal': d['premium_dal'],
             'consigliato': si(d['consigliato']),
@@ -766,7 +822,8 @@ def unisci(catalogo, agenda):
             riparo=RIPARO_DA_CAT.get(slug_cat, 'misto'),
             regione='', cap='', descr='', descr_premium='',
             orari='', prezzo='', gratuito=False, sito='', tel='', email='',
-            foto=[], foto_autore='', eta_min=0, eta_max=99, premium=False, premium_dal='',
+            foto=[], foto_autore='', foto_licenza='',
+            eta_min=0, eta_max=99, premium=False, premium_dal='',
             consigliato=False, evidenza=False, codice='', fonte='agenda', _grezzo=None)
 
     elenco = [d for d in fuori.values() if d['nome'] and d['comune']]
@@ -1237,7 +1294,8 @@ def riga(l, oggi):
         # subito sotto e' il posto in cui si legge come una didascalia. Riguarda
         # la sola foto[0]; la galleria premium sotto non ne ha (vedi commento in
         # leggi_catalogo).
-        corpo.append(html_credito_foto(l.get('foto_autore')))
+        corpo.append(html_credito_foto(l.get('foto_autore'),
+                                       l.get('foto_licenza')))
     if l.get('premium') and len(foto) > 1:
         corpo.append('<div class="lg-galleria">' + "".join(
             f'<img src="{e(u)}" alt="" loading="lazy" decoding="async" width="104" height="78">'

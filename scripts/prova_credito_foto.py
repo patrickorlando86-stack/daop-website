@@ -3,23 +3,27 @@
 """
 Controlla il CREDITO SOTTO LA FOTO dei luoghi: che ci sia quando l'autore si
 sa, che non ci sia quando non si sa, e - la parte che conta - che l'HTML
-scritto da Google non finisca in pagina cosi' com'e'.
+scritto da terzi non finisca in pagina cosi' com'e'.
 
-PERCHE' ESISTE (02/09/2026, PASSO 2 del TODO "Copyright foto"): i termini di
-Places chiedono di citare l'autore accanto alla foto, e l'attribuzione ci
-arriva come HTML di terzi dentro la colonna `FotoAutore`. Quella stringa fa un
-giro lungo prima della pagina - Places, uno script Node, un foglio Google che
-scrivono in due persone, gviz - e stamparla senza smontarla vorrebbe dire
-lasciare scrivere HTML nel sito a chi sta in fondo a quel giro.
+PERCHE' ESISTE (02/09/2026, PASSO 2 del TODO "Copyright foto"): le foto vengono
+da DUE parti e tutt'e due vogliono il credito - Google Places chiede di citare
+l'autore accanto alla foto, Wikimedia Commons vuole autore E licenza. Le due
+attribuzioni ci arrivano come HTML di terzi dentro le colonne `FotoAutore` e
+`FotoLicenza`. Quelle stringhe fanno un giro lungo prima della pagina - la
+fonte, uno script, un foglio Google che scrivono in due persone, gviz - e
+stamparle senza smontarle vorrebbe dire lasciare scrivere HTML nel sito a chi
+sta in fondo a quel giro.
 
-Il valore da difendere e' che dalla colonna escano SOLO due cose: un nome
-(testo) e, se e' di Google, un link. Tutto il resto si butta.
+Il valore da difendere e' che da quelle colonne escano SOLO due cose: un nome
+(testo) e, se l'host e' uno che ci aspettiamo, un link. Tutto il resto si butta.
 
 Qui dentro:
   1. il caso normale: nome e link di Google diventano il paragrafo;
-  2. autore mancante = nessun paragrafo (e' il caso delle 712 righe vecchie);
+  2. autore mancante = nessun paragrafo (e' il caso delle righe non riempite);
   3. l'HTML di terzi non passa: ne' tag, ne' href verso altri host;
-  4. il paragrafo sta ATTACCATO alla foto dentro la riga del luogo.
+  4. il paragrafo sta ATTACCATO alla foto dentro la riga del luogo;
+  5. le foto di Commons portano anche la LICENZA, e dicono di essere di
+     Commons e non di Google Maps.
 
 Uso:
     python scripts/prova_credito_foto.py
@@ -50,7 +54,7 @@ def ok(etichetta, condizione):
     print(f"  {'OK ' if condizione else 'NO '} {etichetta}")
 
 
-def luogo(autore, con_foto=True):
+def luogo(autore, con_foto=True, licenza=''):
     """Una riga di catalogo col minimo indispensabile per disegnarla."""
     return {
         'nome': 'Museo di Prova', 'comune': 'Alessandria', 'prov': 'AL',
@@ -61,7 +65,7 @@ def luogo(autore, con_foto=True):
         'orari': '', 'prezzo': '', 'gratuito': False,
         'sito': '', 'tel': '', 'email': '',
         'foto': ['https://esempio.invalid/foto.jpg'] if con_foto else [],
-        'foto_autore': autore,
+        'foto_autore': autore, 'foto_licenza': licenza,
         'eta_min': 0, 'eta_max': 99, 'premium': False, 'premium_dal': '',
         'consigliato': False, 'evidenza': False, 'codice': 'X1',
         'slug': 'lg-museo-di-prova-alessandria', 'comune_slug': 'alessandria',
@@ -143,9 +147,61 @@ ok("con la foto ma senza autore la riga resta come prima",
 ok("il CSS del credito viene pubblicato", '.lg-credito{' in L.LUOGHI_CSS)
 
 print()
-print("=== 5) la colonna del foglio si legge ===")
+print("=== 5) le foto di Wikimedia Commons: autore + LICENZA + fonte giusta ===")
+# Le `comune-<paese>.jpg` sono 203 righe su 941 e vengono da Commons, non da
+# Places. Passano per le stesse due colonne e si distinguono da sole: la
+# licenza ce l'ha solo Commons, e l'host del link dice da dove viene la foto.
+# Senza la licenza il credito sarebbe incompleto - li' "pulita" non vuol dire
+# "libera", e Creative Commons vuole autore, licenza e link al materiale.
+COMMONS = ('<a href="https://commons.wikimedia.org/wiki/File:Canelli-panorama.jpg">'
+           'Davide Papalini</a>')
+CC = '<a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>'
+p = L.html_credito_foto(COMMONS, CC)
+ok("dice il nome dell'autore", 'Davide Papalini' in p)
+ok("dice la licenza", 'CC BY-SA 3.0' in p)
+ok("dice Wikimedia Commons e NON Google Maps",
+   'Wikimedia Commons' in p and 'Google Maps' not in p)
+ok("il link porta alla pagina del file su Commons",
+   'href="https://commons.wikimedia.org/wiki/File:Canelli-panorama.jpg"' in p)
+ok("il link della licenza porta al testo della licenza",
+   'href="https://creativecommons.org/licenses/by-sa/3.0"' in p)
+
+# Public domain e CC0 su Commons non hanno un `LicenseUrl`: non c'e' un testo
+# da linkare, e il nome da solo e' esatto.
+p = L.html_credito_foto(COMMONS, 'Public domain')
+ok("una licenza senza link resta scritta lo stesso", 'Public domain' in p)
+ok("...e senza inventarsi un link", p.count('<a ') == 1)
+
+# La licenza e' un dato in piu', non una scusa per allentare la guardia: e'
+# l'altra stringa di terzi che finisce in un attributo.
+for cattivo in ['https://cattivo.invalid/x', 'javascript:alert(1)',
+                'https://creativecommons.org.cattivo.invalid/x']:
+    p = L.html_credito_foto(COMMONS, f'<a href="{cattivo}">CC BY-SA 3.0</a>')
+    ok(f"licenza con href {cattivo[:34]}: si tiene il nome, si butta il link",
+       'CC BY-SA 3.0' in p and p.count('<a ') == 1)
+
+# Le due fonti non si contaminano: una foto di Places non deve mai uscire con
+# una licenza addosso, e senza licenza una foto di Commons resta di Commons.
+p = L.html_credito_foto(VERA, '')
+ok("Places senza licenza: resta 'Google Maps' e basta",
+   'Google Maps' in p and 'CC ' not in p)
+p = L.html_credito_foto(COMMONS, '')
+ok("Commons senza licenza: la fonte e' comunque Commons",
+   'Wikimedia Commons' in p)
+
+print()
+print("    ...e nella riga del luogo il credito completo esce attaccato alla foto:")
+riga = L.riga(luogo(COMMONS, licenza=CC), OGGI)
+i_foto, i_cred = riga.find('class="lg-foto"'), riga.find('class="lg-credito"')
+ok("il credito c'e' e sta dopo la foto", 0 < i_foto < i_cred)
+ok("la licenza e' arrivata fino in pagina", 'CC BY-SA 3.0' in riga)
+
+print()
+print("=== 6) le colonne del foglio si leggono ===")
 ok("'fotoautore' e' fra le grafie ammesse",
    'fotoautore' in L.COLONNE['foto_autore'])
+ok("'fotolicenza' e' fra le grafie ammesse",
+   'fotolicenza' in L.COLONNE['foto_licenza'])
 
 print()
 print("ESITO:", "tutto come previsto" if esito else "*** QUALCOSA NON TORNA ***")
