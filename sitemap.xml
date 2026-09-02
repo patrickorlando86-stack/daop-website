@@ -208,7 +208,7 @@
   <!-- CENTRI:START (generato da scripts/genera_centri.py — non modificare a mano) -->
   <url>
     <loc>https://www.daop.it/centri-estivi.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -2962,13 +2962,13 @@
   <!-- CORSI:START (generato da scripts/genera_corsi.py — non modificare a mano) -->
   <url>
     <loc>https://www.daop.it/corsi.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.daop.it/corsi/carezza.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
