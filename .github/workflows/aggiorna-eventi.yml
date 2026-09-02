@@ -327,6 +327,31 @@ jobs:
           python scripts/prova_spostata.py
           python scripts/prova_ritirata.py
 
+      - name: La pagina corsi senza corsi
+        # Il ramo vuoto di render() in genera_corsi.py: quello che corsi.html
+        # dice quando non ha nemmeno un corso da mostrare.
+        #
+        # PERCHE' GIRA OGNI NOTTE UNA PROVA DI UNA COSA CHE NON CAPITA MAI. E'
+        # la stessa ragione di prova_riaggancio qui sopra, ed e' anzi piu'
+        # stretta: in pagina ci sono undici corsi e ci sono sempre stati, quindi
+        # quel ramo non l'ha mai visto nessuno - e infatti fino al 02/09/2026
+        # diceva "Le prime schede stanno arrivando", cioe' prometteva sopra il
+        # vuoto (l'invariante del 17/08: zero schede, intro onesta).
+        #
+        # E non resta un ramo morto: il giorno che i corsi si dividono per
+        # provincia (CORSI_PER_PROVINCIA in genera_corsi.py) Alessandria e Asti
+        # nascono senza un corso, cioe' il codice mai eseguito diventa in una
+        # notte due pagine su tre. Scoprirlo quel giorno vuol dire scoprirlo
+        # online.
+        #
+        # Le prove in tests/ qui non arrivano: aprono i file HTML che stanno su
+        # disco, e un corsi.html vuoto su disco non c'e'.
+        #
+        # Offline e in un secondo: chiama render() con la lista vuota, non
+        # scrive niente. Come le altre sta DOPO il commit e non ferma il deploy.
+        if: always()
+        run: python scripts/prova_corsi_vuoti.py
+
       - name: Nessun file generato resta indietro
         # Rete di sicurezza sull'elenco FILE del passo "Commit se cambiato".
         # Un file gia' tracciato che risulta modificato e NON e' stato

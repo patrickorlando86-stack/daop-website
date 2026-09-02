@@ -2279,10 +2279,42 @@ def jsonld(corsi):
 # che zona() esiste per evitare. Quindi la pagina resta sempre vera e il
 # cambiamento smette di essere silenzioso.
 #
-# QUANDO SUONA: si aggiorna questa riga, DOPO aver deciso se la provincia nuova
-# merita una pagina sua. Aggiornarla per far tacere il log e' l'unico modo di
-# usarla male.
+# QUANDO SUONA: si gira CORSI_PER_PROVINCIA (qui sotto) e si aggiorna questa
+# riga. Aggiornarla per far tacere il log e' l'unico modo di usarla male.
 CORSI_ZONA_ATTESA = ('CN',)
+
+# LA DECISIONE E' PRESA, E QUESTO E' L'INTERRUTTORE CHE LA ESEGUE (02/09/2026).
+#
+# Il commento qui sopra si fermava a "va presa una decisione di architettura".
+# Patrick l'ha presa: al primo corso fuori Cuneo la sezione si spacca in
+# /corsi-provincia-<nome>.html, una per provincia come gia' fanno le sagre, e
+# /corsi.html NON sparisce - resta l'hub con l'elenco completo di tutti i corsi
+# e le porte per provincia in cima. Non diventa un cartello di smistamento: e'
+# la pagina che ha l'anzianita' e i link girati su WhatsApp, e l'elenco intero
+# serve comunque a chi confronta due societa' di province diverse.
+#
+# PERCHE' A MANO E NON DA SOLO. Far scattare lo split sul dato - "vedo una
+# provincia nuova, spacco" - e' precisamente il guasto che CORSI_ZONA_ATTESA
+# e' nata per impedire: una cella Provincia scritta male sul foglio (un "AL"
+# battuto al posto di "CN") spaccherebbe la sezione in tre pagine dentro una
+# run notturna, senza che nessuno l'abbia chiesto. E' la stessa scelta gia'
+# fatta per CORSI_IN_INDICE, con le stesse parole: "A mano, mettendo True. Non
+# c'e' una soglia automatica apposta". Un numero non sa rispondere alla
+# domanda "questa provincia merita una pagina sua".
+#
+# COSA SUCCEDE IL GIORNO CHE SI GIRA. Le province sotto MIN_LANDING nascono
+# noindex e fuori sitemap, che e' la regola gia' scritta per le
+# sagre-provincia-*: una pagina con due corsi resta raggiungibile ma non si
+# annuncia. E l'elenco vuoto non promette niente - vedi il ramo `else` di
+# render(), scritto il 02/09 apposta per quel giorno.
+#
+# COSA NON BASTA GIRARE. Questa riga da sola non fa lo split: restano da fare
+# la sitemap a N hub, FAMIGLIE / voce_corsi() / link_landing() in
+# genera_eventi.py, i breadcrumb delle pagine in corsi/, valida_jsonld.py e
+# tests/porte.js. Sono stati lasciati indietro di proposito il 02/09 -
+# scriverli senza dati veri di AL/AT voleva dire dichiarare "pronto" del codice
+# mai eseguito.
+CORSI_PER_PROVINCIA = False
 
 
 def _controlla_zona(corsi):
@@ -2293,10 +2325,14 @@ def _controlla_zona(corsi):
     if not nuove:
         return
     nomi = ', '.join(PROV_NOME.get(p, p) for p in nuove)
-    print(f"[genera_corsi] ATTENZIONE: corsi in province non attese ({nomi}). "
-          f"title e H1 di corsi.html si allargano da soli, e questo e' il "
-          f"momento di decidere se serve una pagina /corsi-provincia-<p>.html "
-          f"per provincia. Deciso questo, aggiorna CORSI_ZONA_ATTESA.")
+    print(f"[genera_corsi] ATTENZIONE: primi corsi fuori dalle province attese "
+          f"({nomi}). E' il giorno dello split: la decisione e' gia' presa "
+          f"(una pagina /corsi-provincia-<nome>.html per provincia, corsi.html "
+          f"resta l'hub con l'elenco intero), quindi controlla che la provincia "
+          f"non sia una cella scritta male sul foglio e poi metti "
+          f"CORSI_PER_PROVINCIA = True e aggiorna CORSI_ZONA_ATTESA. Finche' "
+          f"resta False la pagina e' una sola e il title si allarga da solo, "
+          f"che e' vero ma provvisorio.")
 
 
 def zona(corsi):
@@ -2314,11 +2350,83 @@ def zona(corsi):
             provs.append(n)
     provs.sort()
     if not provs:
-        return 'in Piemonte', 'Piemonte'
+        # SENZA CORSI NON SI NOMINA UN POSTO. Fino al 02/09/2026 qui c'era
+        # scritto 'in Piemonte', ed era il difetto peggiore dei due che questo
+        # ramo aveva: una pagina di corsi vuota che si intitola "Corsi per
+        # bambini in Piemonte" dichiara la regione in cui i corsi ce li abbiamo
+        # davvero - undici, a Cuneo - e sotto non ne mostra nessuno. Il giorno
+        # dello split sarebbe stato il titolo di /corsi-provincia-alessandria,
+        # cioe' esattamente la bugia che questa funzione esiste per evitare,
+        # solo piu' grande di quella che evitava.
+        #
+        # La stringa vuota non e' un ripiego: "Corsi per bambini" senza
+        # geografia e' vero su qualunque pagina. Chi legge dove sta lo capisce
+        # dall'indirizzo e dalla nota, che dicono "di questa zona".
+        return '', ''
     if len(provs) == 1:
         return f'in provincia di {provs[0]}', provs[0]
     elenco = ', '.join(provs[:-1]) + ' e ' + provs[-1]
     return f'nelle province di {elenco}', elenco
+
+
+# Il nome del file che resta l'hub di tutti i corsi. Serve a nota_vuota() per
+# non linkare se stessa il giorno in cui a restare vuoto e' l'hub.
+FILE_HUB = 'corsi.html'
+
+
+def nota_vuota():
+    """Cosa si scrive quando di corsi non ce n'e' NESSUNO.
+
+    Fino al 02/09/2026 qui c'era scritto "Le prime schede stanno arrivando", ed
+    e' una promessa: dice che qualcosa sta per succedere, e chi legge se ne va
+    aspettando. E' l'invariante fissata il 17/08 sui risultati di Ginetto -
+    zero schede, intro onesta - che li' era nata per lo stesso identico difetto,
+    un'intro che prometteva sopra il vuoto.
+
+    Il ramo serve al giorno dello split (CORSI_PER_PROVINCIA): Alessandria e
+    Asti nascono senza un corso, e una pagina che dice "arrivano" senza che
+    stia arrivando niente e' peggio di una che dice "non ce ne sono".
+
+    NON NOMINA LA PROVINCIA, e non e' pigrizia. zona() ricava il posto dai
+    CORSI, quindi su una pagina vuota non ha niente da cui ricavarlo e torna
+    "in Piemonte" - che su /corsi-provincia-alessandria.html sarebbe insieme
+    strano e falso, visto che in Piemonte i corsi ce li abbiamo. "Di questa
+    zona" e' vero comunque, e chi legge la zona ce l'ha nell'H1 sopra.
+    """
+    altrove = ("" if FILE == FILE_HUB else
+               '<a href="/corsi.html">tutti i corsi che abbiamo</a> oppure ')
+    return (
+        '  <p class="co-nota"><strong>Qui non c\'è ancora nessun corso.</strong> '
+        "Le schede le raccogliamo una società alla volta e le pubblichiamo solo "
+        "dopo che chi organizza ha confermato i suoi dati: di questa zona non ne "
+        "abbiamo ancora nessuna. Non è un elenco che si sta caricando, è vuoto "
+        "davvero.</p>" + "\n" +
+        f'  <p class="co-nota">Intanto puoi vedere {altrove}'
+        '<a href="/eventi.html">cosa c\'è in agenda</a>.</p>')
+
+
+def _grafo(corsi):
+    """Il blocco dei dati strutturati, vuoto quando non c'e' niente da dichiarare.
+
+    Con zero corsi jsonld() emette un @graph vuoto: un documento valido che non
+    dice nulla, cioe' la versione per macchine della stessa promessa che
+    nota_vuota() toglie agli umani."""
+    if not corsi:
+        return ""
+    return '<script type="application/ld+json">' + "\n" + jsonld(corsi) + "\n</script>\n"
+
+
+# Il paragrafo che apre il corpo della pagina. E' una costante e non testo
+# dentro il template per una ragione sola: con l'elenco vuoto non si stampa.
+# Dice "qui trovi quello che c'e', e lo scegli per tipo, per eta' e per
+# comune" - tre filtri e un catalogo sopra zero corsi.
+INTRO = (
+    '  <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,\n'
+    '  qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa\n'
+    '  sabato" ma "dove porto mio figlio quest\'anno". Qui trovi quello che c\'è, e lo scegli\n'
+    '  come lo sceglieresti davvero: per tipo di attività, per età del bambino e per comune.\n'
+    "  Dove c'è un open day per andare a vedere prima di decidere, è scritto.</p>\n"
+)
 
 
 def render(corsi, css, nav, foot, realta=None):
@@ -2344,8 +2452,13 @@ def render(corsi, css, nav, foot, realta=None):
     realta = realta or {}
     _controlla_zona(corsi)
     dove, zona_breve = zona(corsi)
-    titolo = f"Corsi per bambini {dove} | DAOP"
-    descr = (f"Corsi e attività continuative per bambini e ragazzi {dove}: musica, sport, "
+    # Lo spazio sta QUI e non nelle f-string: con `dove` vuoto (zero corsi, vedi
+    # zona()) "Corsi per bambini  | DAOP" avrebbe due spazi e l'H1 un <em>
+    # vuoto. Le tre righe sotto sono le uniche che sanno che `dove` puo' non
+    # esserci.
+    dove_sp = f' {dove}' if dove else ''
+    titolo = f"Corsi per bambini{dove_sp} | DAOP"
+    descr = (f"Corsi e attività continuative per bambini e ragazzi{dove_sp}: musica, sport, "
              f"danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.")
 
     # L'ordine segue i filtri: prima la macro (che e' la tendina), poi la
@@ -2365,7 +2478,7 @@ def render(corsi, css, nav, foot, realta=None):
                   + "\n".join(card(c, i, pagine) for i, c in enumerate(ordinati))
                   + '\n  </div>')
     else:
-        elenco = ('  <p class="co-nota">Le prime schede stanno arrivando.</p>')
+        elenco = nota_vuota()
 
     gruppi = raggruppa_per_realta(ordinati)
     if gruppi:
@@ -2390,6 +2503,19 @@ def render(corsi, css, nav, foot, realta=None):
         'verifichiamo con loro ogni scheda prima di pubblicarla. Quello che vedi '
         'qui è un primo elenco: non è ancora completo.</div>\n')
     robots = 'index, follow' if G.CORSI_IN_INDICE else 'noindex, follow'
+
+    # Le due cose che con zero corsi diventerebbero una promessa sopra il vuoto,
+    # e che quindi seguono l'elenco invece di essere stampate sempre: il
+    # paragrafo che dice "qui trovi quello che c'e'" e il grafo di Course.
+    # Il perche' esteso sta in nota_vuota().
+    #
+    # `corsi` e non `ordinati`: le due liste hanno gli stessi elementi, quindi
+    # per "e' vuota?" sono identiche - ma jsonld() stampa nell'ordine che
+    # riceve, e passargli quella ordinata riscriverebbe il @graph di corsi.html
+    # senza che sia cambiato un corso. Un diff che non dice niente e' rumore
+    # nella cronologia del sito, e su questo repo la cronologia si legge.
+    intro = INTRO if corsi else ''
+    dati = _grafo(corsi)
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -2418,10 +2544,7 @@ def render(corsi, css, nav, foot, realta=None):
 <style>{css}{CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
-<script type="application/ld+json">
-{jsonld(corsi)}
-</script>
-</head>
+{dati}</head>
 <body>
 {nav}
 <main id="contenuto">
@@ -2430,20 +2553,15 @@ def render(corsi, css, nav, foot, realta=None):
     <div class="co-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <span>Corsi per bambini</span>
     </div>
-    <span class="section-label">{G.esc(zona_breve)} · Famiglie</span>
-    <h1>Corsi per bambini <em>{G.esc(dove)}</em></h1>
+    <span class="section-label">{G.esc(zona_breve) + ' · ' if zona_breve else ''}Famiglie</span>
+    <h1>Corsi per bambini{f' <em>{G.esc(dove)}</em>' if dove else ''}</h1>
     <p>Sport, musica, danza, lingue, teatro: le attività a cui un bambino si iscrive,
     con l'età che prendono, dove sono e quando si può andare a vederle.
     Informazioni raccolte dalle locandine delle realtà, una società alla volta.</p>
   </div>
 </header>
 <article class="co-wrap">
-{avviso}  <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,
-  qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa
-  sabato" ma "dove porto mio figlio quest'anno". Qui trovi quello che c'è, e lo scegli
-  come lo sceglieresti davvero: per tipo di attività, per età del bambino e per comune.
-  Dove c'è un open day per andare a vedere prima di decidere, è scritto.</p>
-{toolbar(corsi)}
+{avviso}{intro}{toolbar(corsi)}
 {elenco}
 {sezione}
 {blocco_adesione(corsi)}
