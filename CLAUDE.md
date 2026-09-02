@@ -2707,6 +2707,26 @@ Il brand: **`daop` fa 12 clic su 17 impressioni in posizione 1,35** (erano 10 su
 e zero clic in posizione 8,91** — cioè il nome per esteso non è nostro in
 SERP. La curva resta quella da guardare, ed è ancora quasi piatta.
 
+#### Il calendario avanti non è un allarme: lo dice Patrick, e chiude il punto
+
+**02/09/2026, e vale da qui in avanti.** Per quattro export di fila la sezione
+qui sotto ha segnalato "ottobre è vuoto" come l'unica cosa urgente. Patrick l'ha
+chiuso: *«non chiedermi più di riempire ottobre, verrà riempito quando arrivano
+gli eventi».*
+
+**È informazione che i dati non hanno, e va rispettata come tale.** Da questa
+parte si vede solo l'imbuto — sette giorni di preavviso mediano fra la comparsa
+di una riga e la data dell'evento — e da un imbuto corto un mese lontano sembra
+per forza vuoto. Chi raccoglie sa quando arrivano le locandine; il registro no.
+È lo stesso genere di verdetto di `segnala_senza_coordinate()`: si segnala una
+volta, decide una persona, e poi non si insiste.
+
+Quindi: **il conteggio dei mesi avanti si stampa, non si allarma.** Le sezioni
+sotto restano come storico di come ci si è arrivati, ma non sono una cosa da
+fare. Resta vero il pezzo che non era sul riempimento ma sul *tempismo* — le
+schede stagionali si cercano prima dell'evento (la tabella delle scadenze),
+quindi se un giorno serve un promemoria è su quello, non sul numero.
+
 #### L'imbuto si è accorciato, e ottobre è vuoto
 
 Questo sì è un allarme, ed è l'unico di questo export. Al 24/08 l'agenda viva ha
