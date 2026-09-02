@@ -71,7 +71,9 @@ import csv
 import json
 import datetime
 import collections
+import html
 import urllib.request
+import urllib.parse
 
 import genera_eventi as G
 
@@ -175,6 +177,9 @@ COLONNE = {
     'foto5': ('foto_5', 'foto 5'),
     'eta_min': ('eta_min', 'età min', 'eta min'),
     'eta_max': ('eta_max', 'età max', 'eta max'),
+    # Dal 02/09/2026, in fondo al foglio. `place_id` non si legge qui: e' un
+    # dato per riprendere la foto, non da stampare.
+    'foto_autore': ('fotoautore', 'foto autore', 'autore foto'),
 }
 
 
@@ -184,6 +189,75 @@ def _norm_head(s):
 
 def si(v):
     return str(v or '').strip().lower() in ('si', 'sì', 'x', 'true', '1', 'vero')
+
+
+# ── Il credito della foto ────────────────────────────────────────────────────
+#
+# Le foto dei luoghi vengono da Google Places, e i termini chiedono due cose:
+# non conservarle (noi le ri-ospitiamo: e' il PASSO 3 del TODO, aperto) e
+# **citare l'autore accanto alla foto**. Questa e' la seconda, e non ha zone
+# grigie: vale comunque, dovunque la foto sia ospitata.
+#
+# La colonna `FotoAutore` contiene HTML SCRITTO DA GOOGLE, per esempio:
+#   <a href="https://maps.google.com/maps/contrib/1034.../">Mario Rossi</a>
+# Metterlo in pagina cosi' com'e' vorrebbe dire far scrivere HTML nel sito a
+# una terza parte, dentro una stringa che passa per un foglio Google che
+# scrivono in due persone. Quindi NON si stampa: si smonta, si tiene solo cio'
+# che serve (nome e link), e il tag lo scriviamo noi.
+#
+# Il link si conserva quando c'e' - Google chiede che l'attribuzione resti
+# cliccabile - ma solo verso Google: un href verso qualsiasi altro host e'
+# un dato che non ci aspettiamo, e in quel caso resta il solo nome.
+_RE_A = re.compile(r'<a\s[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+                   re.I | re.S)
+_HOST_OK = re.compile(r'^(?:[a-z0-9-]+\.)*google\.com$', re.I)
+
+
+def credito_foto(grezzo):
+    """Da HTML di Google a (nome, link) ripuliti. Senza nome torna ('', '').
+
+    Il nome e' l'unica cosa obbligatoria: se il link non e' di Google si cita
+    l'autore e basta, perche' non citarlo affatto e' l'unico esito sbagliato.
+    """
+    grezzo = (grezzo or '').strip()
+    if not grezzo:
+        return '', ''
+    m = _RE_A.search(grezzo)
+    if m:
+        href, testo = m.group(1).strip(), m.group(2)
+    else:
+        # Capita che la colonna contenga il solo nome (riempita a mano, o un
+        # domani in cui Google cambia formato): non e' un errore.
+        href, testo = '', grezzo
+    nome = html.unescape(re.sub(r'<[^>]+>', '', testo)).strip()
+    nome = re.sub(r'\s+', ' ', nome)
+    if not nome:
+        return '', ''
+    link = ''
+    if href:
+        href = html.unescape(href)
+        try:
+            u = urllib.parse.urlparse(href)
+        except ValueError:
+            u = None
+        if u and u.scheme in ('http', 'https') and _HOST_OK.match(u.hostname or ''):
+            link = href
+    return nome, link
+
+
+def html_credito_foto(grezzo):
+    """Il paragrafo da mettere SOTTO la foto, o '' se l'autore non lo sappiamo.
+
+    Vuoto e' il caso normale sulle 712 righe vecchie: la foto c'e' ma l'autore
+    l'avevamo scartato, e il PASSO 3 del TODO decide se ricomprarlo. Meglio
+    niente che un "autore sconosciuto" scritto sotto ogni foto del sito.
+    """
+    nome, link = credito_foto(grezzo)
+    if not nome:
+        return ''
+    chi = (f'<a href="{G.esc(link)}" target="_blank" rel="noopener nofollow">'
+           f'{G.esc(nome)}</a>') if link else G.esc(nome)
+    return f'<p class="lg-credito">Foto: {chi} · Google Maps</p>'
 
 
 # ── La tassonomia ────────────────────────────────────────────────────────────
@@ -543,6 +617,10 @@ def leggi_catalogo():
             'orari': d['orari'], 'prezzo': d['prezzo'], 'gratuito': si(d['gratuito']),
             'sito': d['sito'], 'tel': d['tel'], 'email': d['email'],
             'foto': [d[f'foto{i}'] for i in range(1, 6) if d[f'foto{i}']],
+            # L'attribuzione riguarda la SOLA Foto_1: e' quella che esce da
+            # Places (`photos[0]`), le altre le abbiamo messe noi. Citare
+            # l'autore sbagliato sarebbe peggio che non citarne nessuno.
+            'foto_autore': d['foto_autore'],
             'eta_min': _eta(d['eta_min'], 0), 'eta_max': _eta(d['eta_max'], 99),
             'premium': premium, 'premium_dal': d['premium_dal'],
             'consigliato': si(d['consigliato']),
@@ -688,7 +766,7 @@ def unisci(catalogo, agenda):
             riparo=RIPARO_DA_CAT.get(slug_cat, 'misto'),
             regione='', cap='', descr='', descr_premium='',
             orari='', prezzo='', gratuito=False, sito='', tel='', email='',
-            foto=[], eta_min=0, eta_max=99, premium=False, premium_dal='',
+            foto=[], foto_autore='', eta_min=0, eta_max=99, premium=False, premium_dal='',
             consigliato=False, evidenza=False, codice='', fonte='agenda', _grezzo=None)
 
     elenco = [d for d in fuori.values() if d['nome'] and d['comune']]
@@ -884,6 +962,17 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
    locandine, quando il bucket passo' da 10 a 250 MB al giorno. */
 .lg-foto{display:block;width:100%;max-width:360px;height:auto;aspect-ratio:4/3;object-fit:cover;
   border-radius:12px;margin:0 0 12px;background:var(--cream)}
+/* Il credito della foto: obbligatorio, quindi si legge, ma e' una didascalia e
+   non un contenuto - piccolo, chiaro, attaccato all'immagine. Il margine sopra
+   e' NEGATIVO e non si tocca quello di .lg-foto: il credito ce l'ha solo una
+   riga su tre (le 712 vecchie non hanno l'autore), e ridurre il margine della
+   foto avrebbe stretto la scheda anche a chi il paragrafo non ce l'ha.
+   Senza il recupero il nome dell'autore galleggiava a mezza strada fra la foto
+   e la descrizione, e non si capiva a quale delle due appartenesse. */
+.lg-credito{max-width:360px;margin:-8px 0 12px;font-size:0.72rem;line-height:1.4;
+  color:var(--text-light)}
+.lg-credito a{color:var(--text-light);text-decoration:underline}
+.lg-credito a:hover{color:var(--text-mid)}
 .lg-galleria{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
 .lg-galleria img{width:104px;height:78px;object-fit:cover;border-radius:8px;background:var(--cream)}
 .lg-cura{margin:10px 0 0;font-size:0.76rem;color:var(--text-light)}
@@ -1144,6 +1233,12 @@ def riga(l, oggi):
     if foto:
         corpo.append(f'<img class="lg-foto" src="{e(foto[0])}" alt="{e(l["nome"])}, '
                      f'{e(l["comune"])}" loading="lazy" decoding="async" width="360" height="270">')
+        # Il credito va ATTACCATO alla foto, non in fondo alla scheda: i termini
+        # di Places chiedono l'attribuzione vicino all'immagine, e il paragrafo
+        # subito sotto e' il posto in cui si legge come una didascalia. Riguarda
+        # la sola foto[0]; la galleria premium sotto non ne ha (vedi commento in
+        # leggi_catalogo).
+        corpo.append(html_credito_foto(l.get('foto_autore')))
     if l.get('premium') and len(foto) > 1:
         corpo.append('<div class="lg-galleria">' + "".join(
             f'<img src="{e(u)}" alt="" loading="lazy" decoding="async" width="104" height="78">'

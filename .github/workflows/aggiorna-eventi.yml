@@ -352,6 +352,27 @@ jobs:
         if: always()
         run: python scripts/prova_corsi_vuoti.py
 
+      - name: Il credito sotto la foto dei luoghi
+        # PASSO 2 del TODO "Copyright foto" (02/09/2026). I termini di Places
+        # chiedono di citare l'autore accanto alla foto, e l'attribuzione arriva
+        # come HTML SCRITTO DA GOOGLE nella colonna FotoAutore del foglio: fa un
+        # giro lungo (Places -> uno script Node -> un foglio che scrivono in due
+        # persone -> gviz) e non si stampa cosi' com'e'.
+        #
+        # La prova controlla che da quella colonna escano solo un nome escapato
+        # e un link verso google.com, che senza autore non si stampi NIENTE (il
+        # caso delle 712 righe vecchie) e che il paragrafo resti attaccato alla
+        # foto dentro la riga del luogo - da dove lo prendono anche /piscine.html
+        # e le pagine /idee, che riusano la stessa riga.
+        #
+        # Il rischio che difende non e' una causa: e' che Google spenga la
+        # chiave, e allora si ferma anche l'aggancio dei luoghi.
+        #
+        # Offline e in un secondo: chiama le funzioni, non scrive niente. Come le
+        # altre sta DOPO il commit e non ferma il deploy.
+        if: always()
+        run: python scripts/prova_credito_foto.py
+
       - name: Nessun file generato resta indietro
         # Rete di sicurezza sull'elenco FILE del passo "Commit se cambiato".
         # Un file gia' tracciato che risulta modificato e NON e' stato

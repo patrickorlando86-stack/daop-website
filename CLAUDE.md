@@ -4702,6 +4702,7 @@ python3 scripts/prova_riaggancio.py                 # l'edizione dell'anno pross
 python3 scripts/prova_spostata.py                   # un rimando non porta altrove
 python3 scripts/prova_ritirata.py                   # un evento sparito non mente
 python3 scripts/prova_comuni_simili.py              # due grafie, un paese solo
+python3 scripts/prova_credito_foto.py               # il credito sotto la foto
 cd tests && npm install && npm test                 # prove di fumo (Playwright)
 ```
 
