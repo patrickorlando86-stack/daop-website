@@ -2242,6 +2242,14 @@ quando si vede dove si ferma la discesa:
 | 50-100 | il sistema regge: è il sito, non il calendario |
 | sopra 150 | non c'è più una stagione da temere |
 
+**Risposta, con due settimane d'anticipo: la terza riga, per tre volte.** La
+settimana 24-30/08 fa 880,6 clic/giorno e i feriali stanno fra 513 e 618, cioè
+il triplo della soglia più alta, mentre l'agenda di agosto si svuota. La
+scommessa è riscossa — vedi "Il 29 agosto fa duemila". Quello che resta da
+guardare il 15 settembre non è più *se* regge, è dove si assesta il pavimento
+quando anche settembre finisce: e lì la cifra da temere non è nei clic, è nei
+**10 eventi che ottobre ha in agenda**.
+
 **Una risposta parziale c'è già, ed è nella sezione qui sotto** ("La discesa dopo
 Ferragosto"): il pavimento feriale del 18-20 agosto è 271 clic al giorno, cioè
 -5% rispetto alla settimana prima del picco. Non chiude la scommessa — il 18
@@ -2494,6 +2502,211 @@ precedente. Raddoppia e resta niente in assoluto — ma la curva che il 24/08 er
 «piatta a zero» ha smesso di esserlo. Si rilegge a ogni export, come già scritto:
 è il KPI del cavallo di Troia, e si guarda la curva, non il valore.
 
+#### Il 29 agosto fa duemila, e la scommessa del 15 settembre si chiude in anticipo
+
+Export del 02/09/2026, finestra **03-30/08** (28 giorni): **14.900 clic, 187.138
+impressioni, CTR 7,96%, posizione 6,06**. Contiene il sabato che il 30/08 non si
+poteva ancora leggere.
+
+| giorno | clic | impressioni | CTR |
+|---|---|---|---|
+| sab 22/8 | 829 | 11.493 | 7,21% |
+| ven 28/8 | 1.015 | 11.831 | 8,58% |
+| **sab 29/8** | **1.986** | **20.581** | **9,65%** |
+| dom 30/8 | 1.116 | 15.400 | 7,25% |
+
+**1.986 clic, cioè +140% sul record precedente**, e il 30/08 qui c'era scritto
+che la forchetta stimabile era 1.070-2.200 ma che «non si stima, si aspetta
+l'export». Era la decisione giusta e va segnata come tale: una stima puntuale
+dentro una forchetta larga il doppio non è un'informazione. Il 29 è il
+penultimo giorno dell'export, quindi vale ancora ~10% in più.
+
+**La settimana chiude la scommessa, e con due settimane d'anticipo:**
+
+| settimana | clic | clic/giorno |
+|---|---|---|
+| 03-09/08 | 1.796 | 256,6 |
+| 10-16/08 (Ferragosto) | 3.640 | 520,0 |
+| 17-23/08 | 3.300 | 471,4 |
+| **24-30/08** | **6.164** | **880,6** |
+
+La settimana dopo Ferragosto valeva 471 clic/giorno; questa ne vale 880, cioè
+**+87% mentre la stagione delle sagre finisce**. E il pavimento feriale, che è
+il numero che la tabella delle soglie interroga:
+
+| | 17-21/08 | 24-28/08 |
+|---|---|---|
+| lun-ven | 1.821 | **3.062** |
+| mar-mer-gio | 812 | **1.652** |
+
+La tabella dà «sopra 150 clic/giorno = non c'è più una stagione da temere» e i
+feriali stanno fra 513 e 618. **La riga è la terza con un margine di tre volte,
+e il 15 settembre non è più una data da temere: è una verifica.** Quello che
+resta da guardare quel giorno non è più «regge?», è dove si assesta il
+pavimento quando settembre finisce — perché al 02/09 l'agenda ha 148 eventi a
+settembre e 10 a ottobre, e la seconda cifra è l'unica cosa ancora aperta.
+
+**Il sito ha una nuova prima pagina, e non è più Grondona.**
+`/eventi/festa-della-madonna-della-guardia-tortona.html` fa **999 clic su 6.165
+impressioni, CTR 16,20%, posizione 3,64** — cioè da sola il 6,7% dei clic del
+sito. Grondona resta seconda fra le schede con 493. Non c'è niente da dedurne
+sul sistema: è il fossato che funziona come sempre, su una festa patronale con
+un nome proprio.
+
+Le quote per famiglia si muovono in una direzione sola, e sempre la stessa:
+
+| famiglia | pagine | clic | quota | impressioni | CTR |
+|---|---|---|---|---|---|
+| schede `/eventi/*` | 357 | 11.609 | **77,3%** | 121.049 | 9,59% |
+| `sagre-provincia-*` | 3 | 1.595 | 10,6% | 22.116 | 7,21% |
+| `eventi.html` | 1 | 779 | 5,2% | **30.098** | **2,59%** |
+| pagine comune | 20 | 362 | 2,4% | 8.265 | 4,38% |
+| `weekend-provincia-*` | 3 | 232 | 1,5% | 3.105 | 7,47% |
+| `ferragosto.html` | 1 | 220 | 1,5% | 7.435 | 2,96% |
+| `oggi-provincia-*` | 3 | 73 | 0,5% | 4.305 | 1,70% |
+| `luoghi.html` | 1 | 51 | 0,3% | 4.429 | 1,15% |
+| home | 1 | 50 | 0,3% | 290 | 17,24% |
+
+**Le schede passano il 77%** (erano il 69,8% e poi il 74,6%), e **il buco di
+`eventi.html` è alla quinta lettura consecutiva in crescita**: 19.563 → 20.973
+→ 22.847 → 26.797 → **30.098**, sempre fra il 2,5% e il 2,8% di CTR. Sono
+30.098 impressioni su una pagina sola, cioè il 14,8% del sito. Continua a non
+essere una cosa da riparare toccando l'H1.
+
+**L'estero è sceso al 4,6% delle impressioni** (era il 7,4%): 8.671 impressioni
+per 97 clic. Il Regno Unito da solo fa 3.389 impressioni e **4 clic**. Italia
+sola: CTR **8,29%** invece del 7,96% aggregato — il divario fra i due numeri si
+è ristretto perché il traffico italiano è cresciuto più in fretta del rumore,
+non perché il rumore sia calato.
+
+##### Il capoluogo non ha fossato, e sono 8.673 impressioni
+
+È la scoperta di questo export, ed è una **precisazione** della regola già
+scritta («il fossato non è "le sagre": è il nome proprio in un posto
+piccolo»), non una smentita. Due schede, tutte e due su un evento grosso in un
+capoluogo, tutte e due con un nome proprio che dovrebbe essere il nostro
+terreno:
+
+| scheda | impressioni | clic | CTR | pos |
+|---|---|---|---|---|
+| `/eventi/palio-di-asti-sabato-05-settembre.html` | 5.887 | 55 | **0,93%** | 8,70 |
+| `/eventi/alecomics-festival-alessandria.html` | 2.786 | 10 | **0,36%** | 8,04 |
+| (per confronto: la mediana delle schede) | | | ~10% | ~4 |
+
+**8.673 impressioni — il 4,3% del sito — per 65 clic.** Le query dietro sono
+`palio di asti 2026` (2.060 impressioni, 11 clic, pos 9,76), `palio asti 2026`
+(845), `alecomics 2026` (852, **zero** clic), `alecomics` (507, zero clic).
+
+Le due righe hanno cause diverse e vanno tenute distinte, perché una è un
+difetto e l'altra no.
+
+**Alecomics è la regola, non un guasto.** La pagina è giusta — title, `index,
+follow`, canonical suo — e sta in posizione 8. A quella posizione lo 0,36% è
+sotto la curva ma non fuori scala, e di fronte ci sono il sito ufficiale del
+festival e la stampa locale di un capoluogo. È la stessa partita di Halloween,
+cioè quella che perdiamo: **un nome proprio in un capoluogo si comporta come una
+query generica, non come `festa cassinasco 2026`.** La misura del fossato già
+scritta lo diceva e nessuno l'aveva letta in questo verso — i comuni con una
+scheda sola convertono al 13,52%, quelli con cinque o più al 5,70%.
+
+Non se ne ricava di smettere di coprire i capoluoghi (Novi Ligure resta il
+posto più forte del sito), se ne ricava che **su un evento di capoluogo non si
+prometta il CTR delle sagre a nessuno**, e che le impressioni di quelle schede
+non vadano contate come pubblico mancato da recuperare.
+
+**Il Palio invece era un difetto vero, ed è chiuso.** Vedi qui sotto.
+
+##### Il Palio di Asti rankava su un cartello, e la colpa era del numero di riga
+
+Trovato il 02/09/2026 leggendo l'export, non il codice, ed è il difetto più
+caro mai trovato in questo repo per impressioni bruciate.
+
+`/eventi/palio-di-asti-sabato-05-settembre.html` era una **scheda spostata**,
+cioè un rimando: in SERP il suo snippet diceva «La scheda di questo
+appuntamento si è spostata». Con 5.887 impressioni era **la seconda pagina del
+sito per impressioni dopo `eventi.html`**, e convertiva allo 0,93%. Intanto
+`/eventi/palio-di-asti.html` — la scheda vera, `index, follow`, title «Palio di
+Asti 2026 ad Asti», date giuste — prendeva **zero impressioni**.
+
+E il rimando puntava altrove che alla scheda vera: il canonical mandava a
+`carne-alla-brace-e-musica-con-dj-schiffer-pro-loco-sant-albano-stura`, cioè
+una grigliata in un'altra provincia. Stesso guasto identico su
+`fiera-e-street-food-domenica-6-settembre-villaromagnano` → una camminata a San
+Cristoforo.
+
+**La causa è una riga sola di `_erede()`, e il ragionamento sbagliato che c'è
+dietro vale più della riga.** Quella funzione riconosce una scheda spostata
+pretendendo le stesse date esatte più *una* di due identità: lo stesso NOME
+(allora è cambiato il comune) **oppure la stessa RIGA del foglio** (allora è
+cambiato il nome). Il secondo ramo è sbagliato per costruzione:
+
+> **`riga` non è l'identità di una riga del foglio, è la sua POSIZIONE in un
+> elenco che si riordina ogni notte.**
+
+Lo dimostra il registro stesso: la Festa del Fungo di Ciglione è passata da
+**riga 34 a riga 11** restando lo stesso evento, e la Consegna dei Libri da 218
+a 51. Quindi «stessa riga» vuol dire solo «stesso posto in due ordinamenti
+diversi», che di due eventi non dice niente — e con le date uguali, in un
+sabato di settembre, due eventi qualunque si agganciano.
+
+Il bilancio del ramo: **due decisioni prese da solo, due sbagliate.** Le cinque
+spostate legittime passavano tutte dal ramo del nome.
+
+La correzione è chiedere **anche il comune** sul ramo della riga. Non è una
+cautela in più: un nome che cambia lascia fermo il comune (è la definizione del
+caso che quel ramo esiste per prendere), mentre un comune che cambia arriva dal
+ramo del nome. Le due condizioni sono complementari apposta, e chiedere il
+comune non toglie nessun caso vero.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Il timbro è permanente nel registro, quindi la correzione da sola non lo
+  disfa.** `rec['spostata']` non si ricalcola a ogni run — e il commento nel
+  generatore spiega perché (senza, il 1° settembre la pagina tornerebbe a
+  stampare «Edizione conclusa» col comune sbagliato). Quindi la correzione è
+  due cose insieme: la riga di codice **e** i due timbri tolti a mano da
+  `data/pagine-evento.json`. Chi tocca `_erede()` senza guardare il registro
+  corregge il futuro e lascia il danno dov'è.
+- **Le due pagine diventano «scheda ritirata», non spariscono.** È il ripiego
+  già scritto per il caso ambiguo: `noindex, follow`, fuori sitemap, niente
+  `Event` nei dati strutturati. Non promettono più niente a nessuno e smettono
+  di contendere la query alla scheda vera, che è tutto quello che serve.
+- **Non si è toccato il ramo del nome**, che ha cinque casi su cinque giusti.
+- **La prova sta in `scripts/prova_spostata.py` (punto 7)** e prova tutti e due
+  i versi: che stessa riga con comune diverso non produca un rimando, e che un
+  nome riscritto nello stesso comune continui a produrlo. Verificata rossa
+  rimettendo il difetto — dice esattamente «nessun rimando verso l'estraneo» —
+  non supposta.
+
+**La cosa da ricordare quando una pagina ha molte impressioni e nessun clic:
+guardare cosa dice il suo snippet, non solo la sua posizione.** Qui la
+diagnosi naturale era «posizione 8,70, è la solita partita generica» — la
+stessa che vale per Alecomics due paragrafi sopra, e che qui era sbagliata. Il
+CTR dello 0,93% non veniva dalla posizione: veniva dal fatto che il titolo in
+SERP cominciava con «Scheda spostata:». Le due righe si distinguono solo
+aprendo la pagina.
+
+##### La zucca cresce, Halloween ancora no, e ottobre ha dieci eventi
+
+Sulle 1.000 query visibili (4.516 clic, il 30% del traffico): `halloween`,
+`castagn`, `presep`, `natal`, `fungh`, `carnevale` **zero**, per il quarto
+export di fila. `zucca` fa **8 query per 973 impressioni** — era 622 il 30/08,
+173 il 24/08, cioè **×5,6 in una settimana** — e la scheda
+`sagra-della-zucca-castelletto-monferrato` da sola fa 116 clic su 2.155
+impressioni. `vendemm` 2 query per 81 impressioni, `tartuf` 1 per 19.
+
+**L'agenda ha 10 eventi a ottobre** (erano 7 il 30/08, 6 il 24/08): tre in sei
+giorni. Novembre 5, dicembre 3. La scadenza già scritta — *le schede di
+Halloween devono esistere entro il ~10 ottobre* — è a poco più di un mese, e in
+agenda c'è **un solo evento di Halloween**. È la quarta lettura di fila in cui
+questa è l'unica cosa urgente dell'export, e adesso la domanda si sta
+accendendo per davvero: la zucca è il segnale che il resto arriva dietro.
+
+Il brand: **`daop` fa 12 clic su 17 impressioni in posizione 1,35** (erano 10 su
+14). Compare per la prima volta anche `dove andiamo oggi`, con **34 impressioni
+e zero clic in posizione 8,91** — cioè il nome per esteso non è nostro in
+SERP. La curva resta quella da guardare, ed è ancora quasi piatta.
+
 #### L'imbuto si è accorciato, e ottobre è vuoto
 
 Questo sì è un allarme, ed è l'unico di questo export. Al 24/08 l'agenda viva ha
@@ -2518,6 +2731,12 @@ dicembre: settembre ha preso altre 35 righe in sei giorni, ottobre **una**. Nel
 frattempo l'export dice che la domanda d'autunno comincia ad accendersi (`zucca`
 622 impressioni). È l'unica cosa urgente di questi export, per la terza volta di
 fila, e la scadenza del ~10 ottobre è più vicina di sei giorni.
+
+**Al 02/09 ottobre è a 10**, cioè +3 in tre giorni mentre settembre sta a 148:
+il rapporto fra i due mesi è 15 a 1. La `zucca` intanto è passata a 973
+impressioni. Vedi "La zucca cresce, Halloween ancora no" qui sopra — è la
+quarta lettura di fila in cui questo è l'unico allarme, ed è l'unica riga di
+questi export su cui si può ancora agire in tempo.
 
 #### Il CTR del giorno dopo una festa non è il CTR del sito
 
@@ -4368,6 +4587,15 @@ robots: è deliberato e commentato nel generatore — un `noindex` accanto a un
 canonical che punta altrove rischia di propagarsi alla pagina di destinazione.
 Sono rimandi, non pagine.
 
+**Quella deroga costa cara se il rimando è sbagliato, e il 02/09/2026 lo è
+stato.** Una spostata è l'unica pagina del sito che chiede a Google di
+indicizzarla senza essere una scheda: se punta all'evento sbagliato, Google
+indicizza un cartello al posto della pagina vera — 5.887 impressioni allo 0,93%
+sul Palio di Asti, con la scheda buona a zero. La deroga resta (il rischio del
+`noindex` che si propaga è reale), ma il prezzo è che **la correttezza del
+rimando non è un dettaglio interno: è SEO**. Vedi "Il Palio di Asti rankava su
+un cartello".
+
 ### `tests/sitemap.js` — perché una prova sola e non due
 
 Non sono due difetti: sono i due lati di un'affermazione unica, *la sitemap è
@@ -4407,6 +4635,8 @@ eventi di ieri è peggio di una pagina con un difetto.
 python3 scripts/valida_jsonld.py                    # dati strutturati
 python3 scripts/valida_pdf.py                       # le guide in PDF
 python3 scripts/prova_riaggancio.py                 # l'edizione dell'anno prossimo
+python3 scripts/prova_spostata.py                   # un rimando non porta altrove
+python3 scripts/prova_ritirata.py                   # un evento sparito non mente
 python3 scripts/prova_comuni_simili.py              # due grafie, un paese solo
 cd tests && npm install && npm test                 # prove di fumo (Playwright)
 ```

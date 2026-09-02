@@ -304,6 +304,29 @@ jobs:
         if: always()
         run: python scripts/prova_riaggancio.py
 
+      - name: La scheda spostata e quella ritirata
+        # Aggiunte il 02/09/2026, e il motivo e' che ESISTEVANO GIA' senza
+        # girare mai: due suite scritte il 30/08 e mai messe qui, cioe' verdi
+        # solo quando qualcuno le lanciava a mano. E' lo stesso guasto gia'
+        # pagato per genera_ginetto.py e genera_idee.py, con l'aggravante che
+        # una prova che non gira e' peggio di una prova che non c'e': fa
+        # credere che quel pezzo sia difeso.
+        #
+        # Cosa difendono, e quanto costa il verso sbagliato: il 02/09/2026
+        # /eventi/palio-di-asti-sabato-05-settembre.html era un RIMANDO
+        # sbagliato (mandava a una grigliata in un'altra provincia) e faceva
+        # 5.887 impressioni, la seconda pagina del sito, allo 0,93% di CTR,
+        # mentre la scheda vera del Palio ne prendeva zero. Un rimando sbagliato
+        # non si vede da nessuna parte: la pagina esiste, si apre, e' scritta
+        # bene, e in SERP dice solo "Scheda spostata".
+        #
+        # Offline, pochi secondi, in una cartella temporanea. Come le altre sta
+        # DOPO il commit, quindi non puo' fermare il deploy.
+        if: always()
+        run: |
+          python scripts/prova_spostata.py
+          python scripts/prova_ritirata.py
+
       - name: Nessun file generato resta indietro
         # Rete di sicurezza sull'elenco FILE del passo "Commit se cambiato".
         # Un file gia' tracciato che risulta modificato e NON e' stato

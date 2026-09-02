@@ -4059,18 +4059,31 @@ def _erede(slug, rec, reg, visti):
     identita' che la correzione non tocca:
       - lo stesso NOME, e allora e' cambiato il comune (il caso della Sagra
         dello Gnocco: Mombarcaro -> Cherasco);
-      - la stessa RIGA del foglio, e allora e' cambiato il nome, ma la riga
-        corretta e' quella di prima.
+      - la stessa RIGA del foglio E LO STESSO COMUNE, e allora e' cambiato il
+        nome, ma la riga corretta e' quella di prima.
 
     Le date da sole non bastano: a Ferragosto un paese ha cinque righe negli
     stessi identici giorni, e un rimando alla scheda sbagliata e' peggio del
     problema che stiamo risolvendo. Per lo stesso motivo, se i candidati sono
     piu' di uno non si sceglie: si torna alla scheda ritirata, che a nessuno
-    promette niente."""
+    promette niente.
+
+    Il comune sul ramo della riga non e' una cautela in piu': senza, quel ramo
+    e' sbagliato per costruzione. 'riga' non e' l'identita' di una riga del
+    foglio, e' la sua POSIZIONE in un elenco che si riordina ogni notte - la
+    Festa del Fungo di Ciglione e' passata da riga 34 a riga 11 restando lo
+    stesso evento. Quindi "stessa riga" vuol dire solo "stesso posto in due
+    ordinamenti diversi", che di due eventi non dice niente. Il 02/09/2026
+    quel ramo aveva mandato il Palio di Asti su una grigliata a Sant'Albano
+    Stura e la Fiera di Villaromagnano su una camminata a San Cristoforo:
+    due volte su due, e le uniche due volte che ha deciso da solo. Un nome che
+    cambia lascia fermo il comune, quindi chiedere tutti e due non toglie
+    nessun caso vero e chiude quello falso."""
     # 'riga' nel registro e' un numero, non una stringa: si confronta dopo
     # averlo reso testo, se no ci si scorda sempre un str() da qualche parte.
     d_i, d_f = rec.get('d_start'), rec.get('d_end')
     nome, riga = _key(rec.get('nome')), str(rec.get('riga') or '').strip()
+    citta = _key(rec.get('citta'))
     candidati = []
     for s in visti:
         if s == slug:
@@ -4079,7 +4092,8 @@ def _erede(slug, rec, reg, visti):
         if n.get('d_start') != d_i or n.get('d_end') != d_f:
             continue
         stesso_nome = bool(nome) and _key(n.get('nome')) == nome
-        stessa_riga = bool(riga) and str(n.get('riga') or '').strip() == riga
+        stessa_riga = (bool(riga) and str(n.get('riga') or '').strip() == riga
+                       and bool(citta) and _key(n.get('citta')) == citta)
         if stesso_nome or stessa_riga:
             candidati.append(s)
     return candidati[0] if len(candidati) == 1 else None

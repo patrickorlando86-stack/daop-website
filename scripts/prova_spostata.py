@@ -26,7 +26,20 @@ Le sei cose che questo script tiene ferme, e che a occhio non si vedono:
   5. il RIENTRO: se lo slug vecchio ricompare sul foglio il timbro si toglie da
      solo, come per la ritirata;
   6. la CATENA: due correzioni di fila (prima il comune, poi il nome) non fanno
-     fare due salti a chi arriva dal link piu' vecchio.
+     fare due salti a chi arriva dal link piu' vecchio;
+  7. la RIGA NON BASTA DA SOLA (02/09/2026): stessa riga di foglio e stesse date
+     ma comune diverso non sono lo stesso evento, e il rimando non si fa.
+
+IL PUNTO 7 E' NATO DA UN DANNO MISURATO, non da un'ipotesi. Nell'export Search
+Console del 02/09/2026 la pagina /eventi/palio-di-asti-sabato-05-settembre.html
+prendeva 5.887 impressioni - il 2,9% di tutto il sito, la seconda pagina per
+impressioni dopo eventi.html - con un CTR dello 0,93% contro il ~10% delle
+schede, perche' era un CARTELLO: il ramo della riga l'aveva mandata su una
+grigliata a Sant'Albano Stura, e in SERP si leggeva "La scheda di questo
+appuntamento si e' spostata". Intanto /eventi/palio-di-asti.html, la scheda
+vera, prendeva ZERO impressioni. Stesso guasto su Villaromagnano -> San
+Cristoforo: due volte su due, e le uniche due volte che quel ramo ha deciso
+da solo.
 
 Uso:
     python scripts/prova_spostata.py
@@ -291,7 +304,44 @@ ok("un anello non produce una pagina che rimanda a se stessa",
    g._destinazione(anello["a-prova"], anello) is None)
 
 print()
-print(f"=== 7) run cieca (3 eventi su {len(FUTURI)}): nessun rimando ===")
+print("=== 7) stessa riga ma comune diverso -> nessun rimando ===")
+# Il caso vero del 02/09/2026: 'riga' non e' l'identita' di una riga del foglio,
+# e' la sua POSIZIONE in un elenco che si riordina ogni notte - nel registro la
+# Festa del Fungo di Ciglione e' passata da riga 34 a riga 11 restando lo stesso
+# evento. Quindi due schede possono condividere il numero senza avere niente in
+# comune, ed e' cosi' che il Palio di Asti e' finito su una grigliata a
+# Sant'Albano Stura. Un nome che cambia lascia fermo il comune: chiedere tutti e
+# due non toglie nessun caso vero e chiude questo.
+scrivi_registro(FUTURI)
+riga_cavia = str(reg_vero[CAVIA].get("riga") or "").strip()
+if not riga_cavia:
+    print("  (cavia senza numero di riga: niente da provare qui)")
+else:
+    # La cavia sparisce dal foglio. Al suo posto, con lo STESSO numero di riga e
+    # le STESSE date, un evento che non c'entra niente e sta altrove.
+    estraneo = come_evento(reg_vero[CAVIA])
+    estraneo["nome"] = "Carne alla Brace e Musica con DJ Prova"
+    estraneo["citta"] = "Sant'Albano Prova"
+    eventi = [come_evento(reg_vero[s]) for s in ALTRI] + [estraneo]
+    gira(eventi)
+    dopo = registro().get(CAVIA, {})
+    ok("nessun rimando verso l'estraneo", not dopo.get("spostata"))
+    ok("timbro 'ritirata' al suo posto", dopo.get("ritirata"))
+    ok("la pagina non dice 'si e' spostata'",
+       "Questa scheda si è spostata" not in leggi(CAVIA))
+
+    # E il verso opposto, che e' quello che il ramo della riga esiste per
+    # prendere: stesso numero, STESSO comune, nome riscritto -> il rimando si fa.
+    scrivi_registro(FUTURI)
+    rinominato = come_evento(reg_vero[CAVIA])
+    rinominato["nome"] = "Nome Completamente Riscritto Prova"
+    atteso = g.slug_evento(rinominato)
+    gira([come_evento(reg_vero[s]) for s in ALTRI] + [rinominato])
+    ok("il nome riscritto nello stesso comune resta un rimando",
+       registro().get(CAVIA, {}).get("spostata") == atteso)
+
+print()
+print(f"=== 8) run cieca (3 eventi su {len(FUTURI)}): nessun rimando ===")
 scrivi_registro(FUTURI)
 eventi, _ = foglio({"citta": NUOVO_COMUNE})
 gira(eventi[:3])
