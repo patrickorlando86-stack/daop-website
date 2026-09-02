@@ -117,6 +117,17 @@ COLONNE = {
     # codice per agganciarlo, cosi' la scheda lo mostra e il calendario resta
     # l'unico posto in cui l'evento vive davvero.
     'openday': ('openday', 'open day', 'codice evento', 'id evento'),
+    # L'interruttore del SINGOLO corso (02/09/2026). Fino a oggi l'unico modo di
+    # togliere un corso dalla pagina era cancellarne la riga dal foglio: e' quello
+    # che e' successo il 02/09 al "Coro Voci Bianche Allegretto" di Crome in
+    # Movimento (A006), che la societa' aveva chiesto di non pubblicare. Cancellare
+    # brucia il CODICE - che non si riusa mai, perche' e' l'ancora della scheda sul
+    # sito - e butta via il lavoro fatto sulla locandina, che va rifatto a mano il
+    # giorno che il corso torna. E' la stessa ragione per cui il 28/08 e' nata la
+    # cella Stato sulle REALTA': li' spegneva una societa' intera, qui una riga.
+    # Le parole sono le stesse (STATI_BOZZA): due vocabolari per la stessa domanda
+    # sarebbero due cose da ricordare.
+    'stato': ('stato', 'pubblica', 'pubblicato', 'visibile'),
 }
 
 # Fasce del filtro eta', quelle suggerite nel documento. Il confronto e' per
@@ -990,6 +1001,43 @@ def togli_nascoste(corsi, realta):
     if not fuori:
         return corsi
     return [c for c in corsi if slug_realta(c.get('org') or '') not in fuori]
+
+
+def togli_corsi_spenti(corsi):
+    """I singoli corsi con lo Stato spento, fuori dall'elenco.
+
+    E' togli_nascoste() un gradino piu' in basso: quella spegne una SOCIETA'
+    guardando la sua riga sulla tab Realta, questa spegne UNA RIGA guardando la
+    sua cella sulla tab Attivita. Stesse parole (STATI_BOZZA), stesso taglio in
+    un punto solo - da questa lista discendono elenco, schede in fondo, pagine
+    dedicate e registro, e tagliare in quattro posti sarebbe quattro occasioni
+    di divergere.
+
+    LA DIFFERENZA CHE CONTA rispetto alle realta': qui il vuoto e' un SI'
+    pieno, non un silenzio. Una societa' senza Stato e' "non confermata" e va
+    online noindex; un corso senza Stato e' semplicemente un corso, e va in
+    pagina come ci e' sempre andato. Le 17 righe che stanno sul foglio oggi
+    hanno tutte la cella vuota, e devono restare esattamente dove sono.
+
+    Per lo stesso motivo qui NON si segnalano le parole non riconosciute: sulla
+    tab Realta la cella Stato e' anche il funnel commerciale ('inviata',
+    'da inviare'...), quindi una parola strana e' quasi sempre un refuso; qui
+    la colonna nasce con un mestiere solo, e chi non la usa la lascia vuota.
+    Chi ci scrive dentro qualcosa che non e' un "no" sta dicendo "pubblica".
+    """
+    spenti = [c for c in corsi if _stato_e({'stato': c.get('stato') or ''},
+                                           STATI_BOZZA)]
+    if not spenti:
+        return corsi
+    for c in spenti:
+        print(f"[genera_corsi]   corso spento: {c.get('codice') or '?'} "
+              f"{c.get('nome') or ''} ({c.get('org') or ''}) — Stato "
+              f"{(c.get('stato') or '').strip()!r}")
+    print(f"[genera_corsi] {len(spenti)} "
+          + ("corso spento" if len(spenti) == 1 else "corsi spenti")
+          + " dalla colonna Stato della tab Attivita")
+    fuori = {id(c) for c in spenti}
+    return [c for c in corsi if id(c) not in fuori]
 
 
 def raggruppa_per_realta(corsi):
@@ -2486,6 +2534,13 @@ def main():
     # Le schede delle realta' si leggono DOPO i corsi e usando i loro nomi: e'
     # il filtro che impedisce a un foglio sbagliato di entrare in pagina. Vedi
     # leggi_realta().
+    # I singoli corsi spenti escono PRIMA di leggere le realta', e l'ordine non e'
+    # decorativo: leggi_realta() cerca le schede dei nomi che trova qui dentro, e
+    # raggruppa_per_realta() piu' sotto decide da questa stessa lista quali pagine
+    # in corsi/ restano vive. Spegnendo l'ultimo corso di una societa', la societa'
+    # esce di scena tutta insieme - scheda e pagina dedicata comprese - invece di
+    # restare online come un guscio senza corsi dentro.
+    corsi = togli_corsi_spenti(corsi)
     realta = leggi_realta({c['org'] for c in corsi})
     # Le realta' in bozza escono di qui, PRIMA di tutto il resto: da questa
     # lista discendono l'elenco, le schede in fondo, le pagine dedicate e il
