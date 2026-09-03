@@ -50,7 +50,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 203,
+  "riga": 195,
   "slug": "20-anni-di-g-a-s-tortona",
   "updated": "2026-09-03"
  },
@@ -892,7 +892,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 201,
+  "riga": 193,
   "slug": "animazione-giochi-e-passeggiate-con-i-pony-pro-loc-spigno-monferrato",
   "updated": "2026-09-03"
  },
@@ -919,7 +919,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 187,
+  "riga": 179,
   "slug": "anniversario-associazione-tillo-s-smile-casale-monferrato",
   "updated": "2026-09-03"
  },
@@ -947,6 +947,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 176,
+  "ritirata": "2026-09-03",
   "slug": "aperitivo-di-santa-croce-cassano-spinola",
   "updated": "2026-09-03"
  },
@@ -2994,7 +2995,7 @@
   "ora": "9:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 182,
+  "riga": 174,
   "slug": "corso-gratuito-manovre-salvavita-pediatriche-croce-novi-ligure",
   "updated": "2026-09-03"
  },
@@ -4191,7 +4192,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 200,
+  "riga": 192,
   "slug": "festa-dell-oratorio-valenza",
   "updated": "2026-09-03"
  },
@@ -4414,7 +4415,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 205,
+  "riga": 197,
   "slug": "festa-della-nocciola-nocciole-sapori-e-dintorni-settime",
   "updated": "2026-09-03"
  },
@@ -4552,7 +4553,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 206,
+  "riga": 198,
   "slug": "festa-della-vendemmia-canelli",
   "updated": "2026-09-03"
  },
@@ -5914,7 +5915,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 181,
+  "riga": 173,
   "slug": "fiera-della-zucca-e-mercato-contadino-pro-loco-di-parodi-ligure",
   "updated": "2026-09-03"
  },
@@ -6386,7 +6387,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 183,
+  "riga": 175,
   "slug": "gara-dolciaria-dei-cucu-sfida-cittadina-a-colpi-di-ottiglio",
   "updated": "2026-09-03"
  },
@@ -6414,7 +6415,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 209,
+  "riga": 199,
   "slug": "germogli-0-3-la-cuerta-foglia-cortiglione",
   "updated": "2026-09-03"
  },
@@ -7002,7 +7003,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 185,
+  "riga": 177,
   "slug": "hop-hop-street-food-tortona",
   "updated": "2026-09-03"
  },
@@ -7503,7 +7504,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 186,
+  "riga": 178,
   "slug": "la-domenica-sportiva-castelnuovo-scrivia",
   "updated": "2026-09-03"
  },
@@ -7728,6 +7729,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 207,
+  "ritirata": "2026-09-03",
   "slug": "la-settimana-del-palio-di-asti",
   "updated": "2026-09-03"
  },
@@ -7755,6 +7757,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 208,
+  "ritirata": "2026-09-03",
   "slug": "la-settimana-del-palio-di-asti-canelli",
   "updated": "2026-09-03"
  },
@@ -8426,7 +8429,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 180,
+  "riga": 172,
   "slug": "mandrovai-se-non-a-mandrogne-alessandria",
   "updated": "2026-09-03"
  },
@@ -9258,7 +9261,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 184,
+  "riga": 176,
   "slug": "passeggiata-a-4-zampe-nella-pineta-di-mornese",
   "updated": "2026-09-03"
  },
@@ -9312,7 +9315,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 204,
+  "riga": 196,
   "slug": "passeggiata-cicloturistica-per-bambini-e-bambine-c-basaluzzo",
   "updated": "2026-09-03"
  },
@@ -9842,6 +9845,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
   "riga": 173,
+  "ritirata": "2026-09-03",
   "slug": "pranzo-di-santa-croce-cassano-spinola",
   "updated": "2026-09-03"
  },
@@ -10039,7 +10043,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 169,
+  "riga": 168,
   "slug": "processione-di-santa-croce-e-momento-conviviale-cassano-spinola",
   "updated": "2026-09-03"
  },
@@ -10206,7 +10210,7 @@
   "ora": "8:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 171,
+  "riga": 170,
   "slug": "raduno-intei-cuntre-id-casau-cassano-spinola",
   "updated": "2026-09-03"
  },
@@ -10924,7 +10928,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 179,
+  "riga": 171,
   "slug": "sagra-della-cipilaia-con-oscar-e-valentina-alessandria",
   "updated": "2026-09-03"
  },
@@ -12316,7 +12320,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 202,
+  "riga": 194,
   "slug": "storie-sotto-gli-alberi-la-bottega-del-sanconiglio-novi-ligure",
   "updated": "2026-09-03"
  },
@@ -12569,6 +12573,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
   "riga": 175,
+  "ritirata": "2026-09-03",
   "slug": "tombola-di-santa-croce-cassano-spinola",
   "updated": "2026-09-03"
  },
