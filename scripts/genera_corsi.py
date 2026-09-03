@@ -1455,6 +1455,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 <style>{css}{CSS}{CSS_REALTA}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
+<script src="/assets/js/locandina.js" defer></script>
 <script type="application/ld+json">
 {jsonld_realta(org, corsi_org, info)}
 </script>
@@ -2544,6 +2545,7 @@ def render(corsi, css, nav, foot, realta=None):
 <style>{css}{CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
+<script src="/assets/js/locandina.js" defer></script>
 {dati}</head>
 <body>
 {nav}

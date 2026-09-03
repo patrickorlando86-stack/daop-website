@@ -17,8 +17,11 @@
   // dell'agenda e dei centri estivi, il cartellone delle pagine comune.
   var LINK = 'a.event-act, .com-poster a, a[data-locandina]';
   // Sulle schede evento la locandina non e' dentro un link: e' l'immagine
-  // grande in colonna, che a 420px non si legge.
-  var IMG = 'img.ev-loc';
+  // grande in colonna, che a 420px non si legge. Stessa cosa sulle schede dei
+  // CORSI (03/09/2026), dove sta dentro un <details> e si ferma a 320px: era
+  // l'unico posto del sito in cui una locandina non si poteva guardare, e
+  // proprio quello in cui c'e' scritto l'orario che uno sta cercando.
+  var IMG = 'img.ev-loc, img.co-loc';
 
   var CSS =
     '.daop-lb{position:fixed;inset:0;z-index:99000;display:flex;align-items:center;' +
