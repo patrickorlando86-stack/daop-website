@@ -6307,6 +6307,50 @@ def _msg_riga(e, sab, dom):
     return f"• {(e.get('nome') or '').strip()}" + (f" — {coda}" if coda else "")
 
 
+# Le altre cose che DAOP fa, per il canale. UNA per settimana, a rotazione.
+#
+# Chiesto il 03/09/2026: "nel messaggio del canale mettere anche l'app di
+# Ginetto, il Piatto Sano, i libri". Metterli tutti e tre ogni settimana pero'
+# raddoppia il messaggio, e un messaggio che raddoppia si smette di leggere
+# proprio dove finisce la parte per cui uno si e' iscritto - gli eventi. Uno
+# solo alla volta ha due vantaggi: sta in fondo senza pesare, e ognuno ha lo
+# spazio per dire davvero cos'e' invece di una riga di link.
+#
+# I testi NON sono inventati qui: dicono quello che dicono le pagine del sito
+# (ginetto.html, piattosano.html, libri.html). Se cambia la pagina, cambia qui.
+CODA_CANALE = [
+    ("🤖 *Conosci Ginetto?*\n"
+     "È l'assistente DAOP per le famiglie: gli chiedi \"cosa faccio domenica "
+     "con un bimbo di 3 anni?\" e ti risponde, pescando fra oltre 800 luoghi "
+     "scelti a mano e gli eventi delle tre province.\n"
+     "👉 https://ginettoapp.it"),
+    ("🥗 *Il Piatto Sano*\n"
+     "Il gioco educativo del programma S.A.N.E. Italia, per bambini e ragazzi "
+     "dai 6 ai 18 anni: 6 mini-giochi su alimentazione, i 14 allergeni e "
+     "l'uso dell'autoiniettore. Si gioca dal browser, gratis.\n"
+     "👉 https://ilpiattosano.netlify.app"),
+    ("📚 *I libri*\n"
+     "La collana \"Ginetto l'Esploratore\" - storie illustrate per famiglie - "
+     "e i romanzi di Patrick Orlando.\n"
+     "👉 {sito}/libri.html"),
+]
+
+
+def coda_del_canale(oggi):
+    """Quale delle altre cose DAOP presentare questa settimana.
+
+    Sul NUMERO DI SETTIMANA e non a caso: lo stesso giovedi' deve dare sempre
+    lo stesso testo. Il generatore gira ogni notte e piu' volte al giorno
+    quando si rifa' il sito - con un random, riaprendo la finestra il messaggio
+    cambierebbe sotto le mani di chi lo stava copiando.
+
+    A rotazione, quindi ognuna torna ogni tre settimane: abbastanza spesso da
+    farsi conoscere, abbastanza di rado da non sembrare pubblicita'.
+    """
+    quale = CODA_CANALE[oggi.isocalendar()[1] % len(CODA_CANALE)]
+    return quale.format(sito=SITE_URL)
+
+
 def messaggio_canale(events, oggi):
     """Il testo del messaggio del giovedi', gia' pronto da copiare e incollare.
 
@@ -6369,6 +6413,9 @@ def messaggio_canale(events, oggi):
             break
 
     if not del_weekend:
+        # Anche - anzi soprattutto - nel weekend vuoto: e' l'unica settimana in
+        # cui il messaggio non avrebbe niente da dire, e mandarne uno che dice
+        # solo "non c'e' niente" e' il modo di far disiscrivere la gente.
         testo = (f"Per {quando} non abbiamo ancora niente di verificato in agenda.\n"
                  f"Le sagre arrivano spesso a ridosso: l'agenda si rifà ogni notte.\n\n"
                  f"👉 {SITE_URL}/eventi/weekend.html")
@@ -6378,6 +6425,10 @@ def messaggio_canale(events, oggi):
         testo = (f"🎪 *Cosa c'è questo weekend*\n{quando.capitalize()}\n\n"
                  + "\n".join(righe) + coda
                  + f"\n\n👉 Tutti gli eventi: {SITE_URL}/eventi/weekend.html")
+
+    # In fondo, dopo il link agli eventi: chi legge per gli eventi ha gia' avuto
+    # quello per cui e' li', e chi arriva in fondo trova qualcosa in piu'.
+    testo += "\n\n———\n" + coda_del_canale(oggi)
 
     with open(MSG_PATH, "w", encoding="utf-8") as fh:
         fh.write(testo + "\n")
