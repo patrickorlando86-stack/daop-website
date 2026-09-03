@@ -2971,6 +2971,33 @@
   "slug": "corrado-brignolo-presenta-villa-felice-un-libro-di-limone-piemonte",
   "updated": "2026-09-03"
  },
+ "corsi-di-musica-dolce-post-parto-deborah-dalmasso-cuneo": {
+  "anchor": "ev-2026-09-07-corsi-di-musica-dolce-post-parto-deborah-dalmasso",
+  "categoria": "Laboratorio",
+  "citta": "Cuneo",
+  "consigliato": "No",
+  "d_end": "2026-09-07",
+  "d_start": "2026-09-07",
+  "descr": "Corso di Musica Dolce Post Parto organizzato da Deborah Dalmasso, rivolto a bambini da 0 a 3 anni. Un'esperienza musicale pensata per i più piccoli e i loro genitori nel periodo post parto. L'appuntamento è a Cuneo, lunedì 7 settembre alle 18:00.",
+  "df": "07/09/2026",
+  "di": "07/09/2026",
+  "eta": "0-3 anni",
+  "first_seen": "2026-09-03",
+  "indirizzo": "Cuneo (CN)",
+  "last_seen": "2026-09-03",
+  "lat": "44.389633",
+  "loc": "evento_765035646_1076913971739737_1174802736359_20260903-160301_01.webp",
+  "lon": "7.5479007",
+  "luogo": "",
+  "manifest": "",
+  "nome": "Corsi di Musica Dolce Post Parto - Deborah Dalmasso",
+  "ora": "18:00",
+  "prezzo": "A pagamento (da verificare)",
+  "prov": "CN",
+  "riga": 200,
+  "slug": "corsi-di-musica-dolce-post-parto-deborah-dalmasso-cuneo",
+  "updated": "2026-09-03"
+ },
  "corso-gratuito-manovre-salvavita-pediatriche-croce-novi-ligure": {
   "anchor": "ev-2026-09-26-corso-gratuito-manovre-salvavita-pediatriche-croce",
   "categoria": "Laboratorio",
@@ -3080,7 +3107,7 @@
   "prov": "CN",
   "riga": 290,
   "slug": "creazione-giochi-di-societa-chiosco-parri-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "cresco-con-te-biblioteca-civica-di-fossano": {
   "anchor": "ev-2026-09-05-cresco-con-te-biblioteca-civica-di-fossano",
@@ -3276,7 +3303,7 @@
   "prov": "CN",
   "riga": 191,
   "slug": "doppio-laboratorio-di-musica-e-argilla-chiosco-par-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "edutainment-imparare-divertendosi-play-land-serravalle-scrivia": {
   "anchor": "ev-2026-08-22-edutainment-imparare-divertendosi-play-land",
@@ -6499,7 +6526,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "giochi-d-acqua-chiosco-parri-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "giochi-di-fine-estate-movimento-giovanile-centallo": {
   "anchor": "ev-2026-09-26-giochi-di-fine-estate-movimento-giovanile",
@@ -7451,7 +7478,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "l-orco-nel-fagiolo-il-burattinificio-di-mammadraga-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "la-contea-del-mondo-magico-di-harry-e-gandalf-pro-verzuolo": {
   "anchor": "ev-2026-09-19-la-contea-del-mondo-magico-di-harry-e-gandalf-pro",
@@ -7787,7 +7814,7 @@
   "prov": "CN",
   "riga": 170,
   "slug": "la-via-del-gigante-d-acqua-parco-fluviale-gesso-e-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "laboratori-di-giocoleria-circobus-associazione-fum-dronero": {
   "anchor": "ev-2026-08-29-laboratori-di-giocoleria-circobus-associazione-fum",
@@ -8570,7 +8597,7 @@
   "prov": "CN",
   "riga": 140,
   "slug": "mio-tuo-nostro-pandemonium-teatro-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "mongardino-agosto": {
   "anchor": "ev-2026-08-24-mongardino-agosto-2026",
@@ -9345,7 +9372,7 @@
   "prov": "CN",
   "riga": 72,
   "slug": "passeggiate-nella-natura-per-bambini-e-famiglie-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "passi-nel-kuore-di-valdieri": {
   "anchor": "ev-2026-08-29-passi-nel-kuore-di-valdieri",
@@ -11740,7 +11767,7 @@
   "prov": "CN",
   "riga": 113,
   "slug": "scopri-gli-amici-alpaca-cuneo",
-  "updated": "2026-09-02"
+  "updated": "2026-09-03"
  },
  "scopri-natura-valderia": {
   "anchor": "ev-2026-08-17-scopri-natura",
