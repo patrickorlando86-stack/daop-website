@@ -286,7 +286,13 @@
   <!-- PAGINE-EVENTO:START (generato da scripts/genera_eventi.py — non modificare a mano) -->
   <url>
     <loc>https://www.daop.it/eventi/2-cuori-2-capanne-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/20-anni-di-g-a-s-tortona.html</loc>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -423,6 +429,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/animazione-giochi-e-passeggiate-con-i-pony-pro-loc-spigno-monferrato.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/anniversario-associazione-tillo-s-smile-casale-monferrato.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/aperitivo-di-santa-croce-cassano-spinola.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -550,7 +574,7 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/buen-camino-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -604,7 +628,7 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/capodanno-alessandrino-anno-dell-amore-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -819,6 +843,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/corso-gratuito-manovre-salvavita-pediatriche-croce-novi-ligure.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/corso-trail-running-bambini-giornata-promozionale-peveragno.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -904,7 +934,7 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/estate-di-eventi-al-quartiere-cristo-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1065,6 +1095,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/festa-dell-oratorio-valenza.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -1095,6 +1131,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/festa-della-nocciola-nocciole-sapori-e-dintorni-settime.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/festa-della-panissa-circolo-lunassese-lunassi.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -1114,6 +1156,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/festa-della-vendemmia-a-valli-unite-costa-vescovato.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festa-della-vendemmia-canelli.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1287,6 +1335,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/festa-patronale-gavazzana-cassano-spinola.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festa-patronale-gavazzana-processione-e-momento-co-cassano-spinola.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/festa-patronale-n-s-della-neve-pratolungo.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -1377,6 +1437,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/fiera-della-zucca-e-mercato-contadino-pro-loco-di-parodi-ligure.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/fiera-di-agosto-novi-ligure.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -1455,7 +1521,25 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/fritto-spritz-night-party-cassano-spinola.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/frutti-e-buoi-dei-paesi-tuoi-frascaro.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/gara-dolciaria-dei-cucu-sfida-cittadina-a-colpi-di-ottiglio.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/germogli-0-3-la-cuerta-foglia-cortiglione.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1569,6 +1653,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/hop-hop-street-food-tortona.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/i-bambini-del-palio-mostra-fotografica-di-enzo-isa-rocca-d-arazzo.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -1671,6 +1761,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/la-domenica-sportiva-castelnuovo-scrivia.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/la-mostra-gli-esplorattori-tortona.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -1708,6 +1804,18 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/la-scala-del-re-al-castello-di-carru.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/la-settimana-del-palio-di-asti.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/la-settimana-del-palio-di-asti-canelli.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1845,6 +1953,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/mandrovai-se-non-a-mandrogne-alessandria.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/marmotte-adventure-laboratori-di-pian-mune-paesana.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -1894,13 +2008,13 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/musei-aperti-ad-agosto-complesso-conventuale-di-sa-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.daop.it/eventi/musei-aperti-ad-agosto-sale-d-arte-di-via-machiave-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2001,7 +2115,19 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/passeggiata-a-4-zampe-nella-pineta-di-mornese.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/passeggiata-a-cavallo-con-axel-circolo-la-torre-albaretto.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/passeggiata-cicloturistica-per-bambini-e-bambine-c-basaluzzo.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2109,6 +2235,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/pranzo-di-santa-croce-cassano-spinola.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/prato-nevoso-c-ho-talent-prato-nevoso-village.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -2139,6 +2271,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/processione-di-santa-croce-e-momento-conviviale-cassano-spinola.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/programma-festeggiamenti-pro-loco-san-benigno.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -2164,6 +2302,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/raduno-di-auto-e-moto-storiche-i-calanchi-di-spign-spigno-monferrato.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/raduno-intei-cuntre-id-casau-cassano-spinola.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2302,6 +2446,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/sagra-della-cipilaia-con-oscar-e-valentina-alessandria.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2482,7 +2632,7 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/sentimental-value-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2589,6 +2739,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/storie-sotto-gli-alberi-la-bottega-del-sanconiglio-novi-ligure.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/stramangiando-pro-loco-motta-di-costigliole-d-asti.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -2626,6 +2782,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/tigliole-in-festa.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/tombola-di-santa-croce-cassano-spinola.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2686,7 +2848,7 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/un-bel-giorno-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2698,7 +2860,7 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/un-estate-al-quartiere-cristo-associazione-attivit-alessandria.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2803,6 +2965,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/comune/buttigliera-d-asti.html</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/casale-monferrato.html</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

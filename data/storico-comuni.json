@@ -367,6 +367,17 @@
     "pagina": false,
     "ultima": "2026-08-11"
    },
+   "mandrovai-se-non-a-mandrogne-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Chiesa",
+    "manifest": "MandroVAI - Se Non a Mandrogne",
+    "nome": "MandroVAI - Se Non a Mandrogne",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "michael-alessandria": {
     "anni": [
      2026
@@ -421,6 +432,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-21"
+   },
+   "sagra-della-cipilaia-con-oscar-e-valentina-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "SMS di Mandrogne",
+    "manifest": "MandroVAI - Se Non a Mandrogne",
+    "nome": "Sagra della Cipilaia con Oscar e Valentina",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
    },
    "sbem-festival-sport-benessere-e-movimento-acm-even-alessandria": {
     "anni": [
@@ -590,6 +612,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "la-settimana-del-palio-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Veterinaria Piazza Alfieri",
+    "manifest": "La Settimana del Palio di Asti 2026",
+    "nome": "La Settimana del Palio di Asti 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-03"
+   },
    "paleolab-paleontologo-per-un-giorno-parco-paleonto-asti": {
     "anni": [
      2026
@@ -732,6 +765,23 @@
   },
   "nome": "Barolo",
   "prov": "CN"
+ },
+ "basaluzzo": {
+  "eventi": {
+   "passeggiata-cicloturistica-per-bambini-e-bambine-c-basaluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo di via S. Maria",
+    "manifest": "",
+    "nome": "Passeggiata cicloturistica per bambini e bambine - Comune di Basaluzzo e Comune di Francavilla Bisio",
+    "organizza": "Comune di Basaluzzo e Comune di Francavilla Bisio",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Basaluzzo",
+  "prov": "AL"
  },
  "beinette": {
   "eventi": {
@@ -1205,6 +1255,34 @@
   "nome": "Calosso",
   "prov": "AT"
  },
+ "canelli": {
+  "eventi": {
+   "festa-della-vendemmia-canelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Cavour",
+    "manifest": "Festa della Vendemmia 2026",
+    "nome": "Festa della Vendemmia 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
+   "la-settimana-del-palio-di-asti-canelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro cittadino di Canelli",
+    "manifest": "La Settimana del Palio di Asti 2026",
+    "nome": "La Settimana del Palio di Asti 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Canelli",
+  "prov": "AT"
+ },
  "carbonarascrivia": {
   "eventi": {
    "festa-patronale-di-san-rocco-carbonara-scrivia": {
@@ -1342,6 +1420,17 @@
  },
  "casalemonferrato": {
   "eventi": {
+   "anniversario-associazione-tillo-s-smile-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Tartara",
+    "manifest": "1° Anniversario Associazione Tillo's Smile",
+    "nome": "1° Anniversario Associazione Tillo's Smile",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
    "festa-del-vino-del-monferrato-casale-monferrato": {
     "anni": [
      2026
@@ -1566,6 +1655,210 @@
   },
   "nome": "Casorzo Monferrato",
   "prov": "AT"
+ },
+ "cassanospinola": {
+  "eventi": {
+   "aperitivo-di-santa-croce-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casetta Pro Loco",
+    "manifest": "Settembre Cassanese",
+    "nome": "Aperitivo di Santa Croce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
+   "concerto-suona-con-noi-e-open-day-associazione-mus-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Culturale Corte-Gallizio",
+    "manifest": "Settembre Cassanese",
+    "nome": "Concerto Suona con Noi e Open Day Associazione Musicale Aurora",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-19"
+   },
+   "festa-patronale-gavazzana-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Gavazzana",
+    "manifest": "Settembre Cassanese",
+    "nome": "Festa Patronale Gavazzana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   },
+   "festa-patronale-gavazzana-processione-e-momento-co-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Gavazzana",
+    "manifest": "Settembre Cassanese",
+    "nome": "Festa Patronale Gavazzana - Processione e momento conviviale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
+   "fritto-spritz-night-party-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casetta Pro Loco",
+    "manifest": "Settembre Cassanese",
+    "nome": "Fritto & Spritz Night Party",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   },
+   "goldmen-banda-nel-vento-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza XXVI Aprile",
+    "manifest": "Settembre Cassanese",
+    "nome": "Goldmen... Banda nel Vento",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "inaugurazione-murales-del-castello-di-cassano-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Cassano",
+    "manifest": "Settembre Cassanese",
+    "nome": "Inaugurazione Murales del Castello di Cassano",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-19"
+   },
+   "le-bancarelle-di-santa-croce-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Indipendenza",
+    "manifest": "Settembre Cassanese",
+    "nome": "Le Bancarelle di Santa Croce",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-20"
+   },
+   "open-day-scuola-wb-danze-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palestra Scuole",
+    "manifest": "Settembre Cassanese",
+    "nome": "Open Day Scuola WB Danze",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-25"
+   },
+   "pranzo-di-santa-croce-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casetta Pro Loco",
+    "manifest": "Settembre Cassanese",
+    "nome": "Pranzo di Santa Croce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
+   "presentazione-libro-sulle-tracce-del-lupo-di-valer-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Convegni Comunale",
+    "manifest": "Settembre Cassanese",
+    "nome": "Presentazione Libro Sulle Tracce del Lupo di Valeria Rivabella",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-26"
+   },
+   "presentazione-rivista-casau-casau-inaugurazione-or-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza XXVI Aprile",
+    "manifest": "Settembre Cassanese",
+    "nome": "Presentazione Rivista Casau Casau, Inaugurazione Orologio della Memoria e Aperitivo Culturale",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-19"
+   },
+   "presentazione-squadra-cassano-calcio-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Indipendenza",
+    "manifest": "Settembre Cassanese",
+    "nome": "Presentazione Squadra Cassano Calcio 1982",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-20"
+   },
+   "processione-di-santa-croce-e-momento-conviviale-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza XXVI Aprile",
+    "manifest": "Settembre Cassanese",
+    "nome": "Processione di Santa Croce e Momento Conviviale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
+   "raduno-intei-cuntre-id-casau-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Indipendenza",
+    "manifest": "Settembre Cassanese",
+    "nome": "Raduno Intei Cuntrè Id Casau",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
+   "santa-messa-di-santa-croce-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa di Cassano Spinola",
+    "manifest": "Settembre Cassanese",
+    "nome": "Santa Messa di Santa Croce",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-20"
+   },
+   "stracassano-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza XXVI Aprile",
+    "manifest": "Settembre Cassanese",
+    "nome": "Stracassano 2026",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-11"
+   },
+   "tombola-di-santa-croce-cassano-spinola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Indipendenza",
+    "manifest": "Settembre Cassanese",
+    "nome": "Tombola di Santa Croce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   }
+  },
+  "nome": "Cassano Spinola",
+  "prov": "AL"
  },
  "cassinasco": {
   "eventi": {
@@ -2049,11 +2342,11 @@
     "anni": [
      2026
     ],
-    "luogo": "Piazza Vittorio Emanuele II",
-    "manifest": "Festa Patronale di San Desiderio 2026",
+    "luogo": "Piazza Vittorio Emanuele",
+    "manifest": "La Domenica Sportiva",
     "nome": "La Domenica Sportiva",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-06"
    },
    "la-domenica-sportiva-sport-in-piazza-esibizioni-to-castelnuovo-scrivia": {
@@ -2627,6 +2920,23 @@
   },
   "nome": "Cortemilia",
   "prov": "CN"
+ },
+ "cortiglione": {
+  "eventi": {
+   "germogli-0-3-la-cuerta-foglia-cortiglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Cuèrta Foglia",
+    "manifest": "",
+    "nome": "Germogli 0-3 - La Cuèrta Foglia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-06"
+   }
+  },
+  "nome": "Cortiglione",
+  "prov": "AT"
  },
  "cosola": {
   "eventi": {
@@ -4672,6 +4982,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-08"
+   },
+   "passeggiata-a-4-zampe-nella-pineta-di-mornese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cappelletta di San Carlo - Pineta di Mornese",
+    "manifest": "",
+    "nome": "Passeggiata a 4 zampe nella Pineta di Mornese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
    }
   },
   "nome": "Mornese",
@@ -4830,6 +5151,39 @@
     "pagina": true,
     "ultima": "2026-08-10"
    },
+   "corso-gratuito-manovre-salvavita-pediatriche-croce-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Croce Rossa Italiana Comitato di Novi Ligure",
+    "manifest": "",
+    "nome": "Corso Gratuito Manovre Salvavita Pediatriche - Croce Rossa Italiana Comitato di Novi Ligure",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
+   "coyote-vs-acme-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Multisala Moderno",
+    "manifest": "",
+    "nome": "Coyote vs Acme",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-09"
+   },
+   "coyote-vs-acme-v-o-s-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Multisala Moderno",
+    "manifest": "",
+    "nome": "Coyote vs Acme (V.O.S.)",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-08"
+   },
    "festa-della-pizza-margherita-novi-ligure": {
     "anni": [
      2026
@@ -4885,6 +5239,28 @@
     "pagina": true,
     "ultima": "2026-01-01"
    },
+   "oceania-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Multisala Moderno",
+    "manifest": "",
+    "nome": "Oceania",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
+   },
+   "odissea-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Multisala Moderno",
+    "manifest": "",
+    "nome": "Odissea",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-08"
+   },
    "open-day-esordienti-us-novese-novi-ligure": {
     "anni": [
      2026
@@ -4895,6 +5271,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-24"
+   },
+   "paw-patrol-missione-dinosauri-anteprima-nazionale-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Multisala Moderno",
+    "manifest": "",
+    "nome": "Paw Patrol - Missione Dinosauri (Anteprima Nazionale)",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-06"
    },
    "pedalata-ecologica-merella-plogging-smiling-biking-novi-ligure": {
     "anni": [
@@ -4928,6 +5315,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "storie-sotto-gli-alberi-la-bottega-del-sanconiglio-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Castello",
+    "manifest": "",
+    "nome": "Storie sotto gli alberi - La Bottega del Sanconiglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
+   "the-dog-stars-le-stelle-dopo-la-fine-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Multisala Moderno",
+    "manifest": "",
+    "nome": "The Dog Stars - Le Stelle Dopo la Fine",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-08"
    }
   },
   "nome": "Novi Ligure",
@@ -4999,6 +5408,23 @@
   },
   "nome": "Osasco",
   "prov": "CN"
+ },
+ "ottiglio": {
+  "eventi": {
+   "gara-dolciaria-dei-cucu-sfida-cittadina-a-colpi-di-ottiglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Fieristica",
+    "manifest": "Gara di Torte di Sant'Eusebio",
+    "nome": "Gara Dolciaria dei Cucu - Sfida Cittadina a Colpi di Ricette",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   }
+  },
+  "nome": "Ottiglio",
+  "prov": "AL"
  },
  "ovada": {
   "eventi": {
@@ -5142,6 +5568,17 @@
  },
  "parodiligure": {
   "eventi": {
+   "fiera-della-zucca-e-mercato-contadino-pro-loco-di-parodi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parodi Ligure (centro)",
+    "manifest": "",
+    "nome": "10ª Fiera della Zucca e Mercato Contadino - Pro Loco di Parodi Ligure",
+    "organizza": "Pro Loco di Parodi Ligure",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "sagra-di-seisi-parodi-ligure": {
     "anni": [
      2026
@@ -7254,6 +7691,23 @@
   "nome": "Serravalle Scrivia",
   "prov": "AL"
  },
+ "settime": {
+  "eventi": {
+   "festa-della-nocciola-nocciole-sapori-e-dintorni-settime": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortili del paese",
+    "manifest": "Festa della Nocciola - Nocciole, sapori e dintorni",
+    "nome": "Festa della Nocciola - Nocciole, sapori e dintorni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   }
+  },
+  "nome": "Settime",
+  "prov": "AT"
+ },
  "sezzadio": {
   "eventi": {
    "sagra-del-fritto-misto-e-non-solo-sezzadio": {
@@ -7307,6 +7761,17 @@
  },
  "spignomonferrato": {
   "eventi": {
+   "animazione-giochi-e-passeggiate-con-i-pony-pro-loc-spigno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Antonino Calì",
+    "manifest": "",
+    "nome": "Animazione, Giochi e Passeggiate con i Pony - Pro Loco Spigno Monferrato",
+    "organizza": "Pro Loco Spigno Monferrato",
+    "pagina": true,
+    "ultima": "2026-09-06"
+   },
    "concerto-di-paolo-oreni-pro-loco-spigno-monferrato": {
     "anni": [
      2026
@@ -7458,6 +7923,17 @@
  },
  "tortona": {
   "eventi": {
+   "20-anni-di-g-a-s-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Emilia",
+    "manifest": "20 Anni di G.A.S. Tortona",
+    "nome": "20 Anni di G.A.S. Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "alla-ri-scoperta-delle-favole-disney-alice-nel-pae-tortona": {
     "anni": [
      2026
@@ -7490,6 +7966,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-28"
+   },
+   "hop-hop-street-food-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Duomo",
+    "manifest": "",
+    "nome": "Hop Hop Street Food",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
    },
    "la-mostra-gli-esplorattori-tortona": {
     "anni": [
@@ -7589,6 +8076,23 @@
   },
   "nome": "Valdieri",
   "prov": "CN"
+ },
+ "valenza": {
+  "eventi": {
+   "festa-dell-oratorio-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio del Duomo",
+    "manifest": "Festa dell'Oratorio 2026",
+    "nome": "Festa dell'Oratorio 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-04"
+   }
+  },
+  "nome": "Valenza",
+  "prov": "AL"
  },
  "valfenera": {
   "eventi": {
