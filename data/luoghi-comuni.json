@@ -576,7 +576,7 @@
  },
  "c-al-valenza": {
   "comune": "Valenza",
-  "n": 16,
+  "n": 17,
   "prov": "AL"
  },
  "c-al-valmadonna": {
@@ -597,6 +597,11 @@
  "c-al-vignole-borbera": {
   "comune": "Vignole Borbera",
   "n": 2,
+  "prov": "AL"
+ },
+ "c-al-villa-del-foro": {
+  "comune": "Villa del Foro",
+  "n": 1,
   "prov": "AL"
  },
  "c-al-villadeati": {
@@ -766,6 +771,11 @@
  },
  "c-at-cortanze": {
   "comune": "Cortanze",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-cortiglione": {
+  "comune": "Cortiglione",
   "n": 1,
   "prov": "AT"
  },
