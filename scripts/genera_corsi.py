@@ -264,6 +264,79 @@ def _eta_numeri(t):
             for m, u in zip(pezzi, unita)]
 
 
+# Il ciclo scolastico -> gli anni che ci si passa dentro. Non e' anagrafe fine:
+# e' la fascia in cui cade chi frequenta quella classe, che e' quello che serve a
+# un filtro "che eta' ha mio figlio".
+CICLI = [
+    (('nido', 'asilo nido'),                       0, 2),
+    (('materna', 'infanzia', r'asilo(?!\s*nido)'),  3, 5),
+    (('elementar', 'primaria'),                    6, 10),
+    (('media', 'medie'),                          11, 13),
+    (('superior', 'liceo', 'istituto'),           14, 18),
+]
+
+
+def eta_da_classi(testo):
+    """La fascia d'eta' di un'eta' scritta in CLASSI. (lo, hi) o None.
+
+    IL CASO VERO (03/09/2026). Sul foglio l'ASD Atletica Mondovi' ha le eta'
+    scritte come le dice una societa' sportiva - "1a e 2a media", "3a media e 1a
+    superiore", "da 2a superiore", "scuole elementari" - e il filtro le leggeva
+    come ANNI, perche' eta_da_testo() prende i numeri e basta:
+
+        "1a e 2a media"            -> fascia  1-2   (aveva 11-12)
+        "3a media e 1a superiore"  -> fascia  1-3   (aveva 13-14)
+        "da 2a superiore"          -> fascia  2-18  (aveva 15-18)
+        "3a media"                 -> fascia  3-18  (aveva 13)
+        "scuole elementari"        -> NESSUNA       (aveva 6-10)
+
+    Cosa si vedeva: filtrando 0-3 anni uscivano tutti i corsi di atletica delle
+    medie e delle superiori (le fasce 1-2, 2-18 e 3-18 toccano tutte lo 0-3), e
+    filtrando 6-8 anni ne usciva UNO SOLO - la 3a media, l'unico la cui fascia
+    sbagliata arrivava fin la'. Chi cerca un corso per un bambino di 7 anni si
+    vedeva proposto un corso per quattordicenni, e non vedeva le elementari.
+
+    Il numero davanti alla classe si conta DENTRO il ciclo: 1a media = 11 anni,
+    3a media = 13, 2a superiore = 15. Senza numero vale il ciclo intero.
+
+    "da"/"a partire" apre in alto fino a 18, come per le eta' a parole: "da 2a
+    superiore" e' un corso che accoglie anche i piu' grandi.
+    """
+    import re as _re
+    t = (testo or '').strip().lower()
+    if not t:
+        return None
+    # Dove comincia ogni parola di ciclo, in ordine di comparsa.
+    punti = []
+    for parole, lo, hi in CICLI:
+        for p in parole:
+            for m in _re.finditer(p, t):
+                punti.append((m.start(), lo, hi))
+                break       # una volta per sinonimo: "media"/"medie" e' lo stesso
+    if not punti:
+        return None
+    punti.sort()
+    anni = []
+    prima = 0
+    for pos, lo, hi in punti:
+        # I numeri che stanno PRIMA di questa parola e dopo la precedente sono i
+        # suoi: in "3a media e 1a superiore" il 3 e' della media e l'1 della
+        # superiore.
+        numeri = [int(x) for x in _re.findall(r'\d{1,2}', t[prima:pos])]
+        prima = pos
+        validi = [n for n in numeri if 1 <= n <= (hi - lo + 1)]
+        if validi:
+            anni += [lo + n - 1 for n in validi]
+        else:
+            anni += [lo, hi]
+    if not anni:
+        return None
+    basso, alto = min(anni), max(anni)
+    if _re.search(r'\b(da|dai|dalla|partire)\b', t) and alto < 18:
+        alto = 18
+    return (basso, alto) if 0 <= basso <= alto <= 25 else None
+
+
 def eta_da_testo(testo):
     """La fascia (lo, hi) letta da un'eta' SCRITTA A PAROLE, o None.
 
@@ -289,6 +362,11 @@ def eta_da_testo(testo):
     t = (testo or '').strip().lower()
     if not t:
         return None
+    # Le CLASSI prima dei numeri nudi, o si legge "1a e 2a media" come la fascia
+    # 1-2 ANNI. Vedi eta_da_classi(): e' il caso vero del 03/09/2026.
+    classi = eta_da_classi(t)
+    if classi:
+        return classi
     numeri = _eta_numeri(t)
     if not numeri:
         return None
