@@ -1384,8 +1384,18 @@
   "n": 2,
   "prov": "CN"
  },
+ "c-cn-roccaforte-mondovi": {
+  "comune": "Roccaforte Mondovì",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-roccavione": {
   "comune": "Roccavione",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-roddi": {
+  "comune": "Roddi",
   "n": 1,
   "prov": "CN"
  },
