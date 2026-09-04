@@ -3523,6 +3523,97 @@ Si stampa **solo su fascia numerica**: «tutte le età» è la risposta che si d
 quando non si è deciso niente, ed è il motivo per cui `e_per_bambini()` non la
 conta.
 
+#### La barra è quella dell'agenda, e su queste pagine il divieto non vale
+
+Fatto il **04/09/2026**, chiesto da Patrick: «l'impostazione dovrebbe essere
+identica». Alle nuove mancavano i due controlli che l'agenda ha —
+**«quando»** e **«solo gratuiti»** — e in entrambi i casi il motivo per cui
+mancavano non regge *qui*, ma va scritto perché altrove regge ancora.
+
+**«Quando».** La regola era: «Sulle pagine di intenzione non c'è mai il filtro
+"quando": quelle pagine *sono* già una risposta a quando». Vera per
+`/eventi/oggi.html`, per `weekend` e per le stagionali — lì una seconda domanda
+sul tempo contraddirebbe la pagina. Su `/eventi-provincia-*` **la premessa
+cade**: quelle pagine sono definite dal *non* avere una finestra temporale,
+quindi il filtro non contraddice niente — risponde alla domanda che l'elenco
+lascia aperta. E divide più di qualunque altro controllo della pagina (misurato
+il 04/09, Cuneo su 88 righe: `oggi` 4, `weekend` 24, `7 giorni` 40, `mese` 82).
+
+**Non cannibalizza `oggi-provincia-*` né `weekend-provincia-*`**: è un filtro
+lato client, non crea una URL e non tocca title, H1 né canonical. È la stessa
+ragione per cui il preset `?quando=` dell'agenda non è una pagina.
+
+**«Solo gratuiti».** Qui il file non dava un divieto ma un **ordine di
+lavori**: «prima di accenderlo lì va fatta un'altra cosa: in quelle righe il
+prezzo non è scritto, e un filtro che lavora su un dato che la riga non mostra
+fa sparire delle voci senza dire perché». Quella cosa è fatta: la riga stampa
+`Gratuito`. Quanto toglie: **26 righe a Cuneo, 20 ad Alessandria, 8 ad Asti** —
+e su Asti **la casella resta spenta da sé**, perché la soglia (`TOLTE_MIN` 12)
+è su quello che il filtro *toglie* e non sulla lunghezza dell'elenco.
+
+Le decisioni che non si ricavano dal diff:
+
+- **In riga va solo `Gratuito`, non il prezzo.** Delle 54 righe a pagamento la
+  mediana è 27 caratteri e `prezzo_pill()` tronca a 26, quindi metà
+  uscirebbero mozzate; e 27 dicono «A pagamento (da verificare)», cioè una
+  pillola che non sa niente. Il prezzo intero sta sulla scheda, dove c'è
+  spazio. L'attributo resta **positivo** (`data-free="1"` solo dove c'è) per la
+  ragione già scritta: «gratuito» è un fatto dichiarato, «a pagamento» no.
+- **`data-start`, `data-end` e `data-free` si stampano su tutte le pagine di
+  intenzione**, anche dove i due controlli non ci sono: ~48 byte per riga, lo
+  stesso ordine di grandezza di `geo_attrs()`, e in cambio non esiste il caso
+  di un filtro presente col dato assente — che sarebbe un comando che nasconde
+  righe a caso. È il difetto che il controllo dei rossi ha poi trovato davvero
+  (vedi sotto).
+- **Zero CSS nuovo.** `.ev-chk`, `.ev-chk.is-on`, `.ev-chk[hidden]`,
+  `.ev-toolbar.has-gratis` e `.ev-pill.is-free` stanno già nel `<style>`,
+  perché `_guscio()` lo copia da `eventi.html`. Una seconda regola per la
+  stessa pillola divergerebbe.
+- **La barra non è cresciuta: resta 111px** su tutte e tre, misurato a 375px.
+  È il vincolo che regge ogni decisione su quella barra — è appiccicosa, quindi
+  un pixel in più si paga su *ogni* schermata dello scorrimento, non una volta.
+  La casella sta nella prima riga accanto alla ricerca, che è stirata e cede il
+  posto: è la stessa collocazione (e la stessa ragione) dell'agenda.
+- **La finestra di date è riscritta, non condivisa** con l'agenda: è la
+  decisione già scritta in testa a `LANDING_JS` («riusarlo sarebbe più codice
+  da tenere allineato che da risparmiare»), e sono venti righe. Quello che
+  **non** può divergere sono i valori delle opzioni (`all/oggi/weekend/7/mese`),
+  che sono identici: se divergessero, i due filtri si chiamerebbero uguale e
+  farebbero due cose diverse.
+- **La sovrapposizione, non l'inizio**: una sagra che parte venerdì e dura tre
+  giorni è un evento del weekend anche se è cominciata prima. Stessa regola
+  dell'agenda, e cambiarla in «inizia nel weekend» farebbe perdere al weekend
+  proprio le sagre lunghe.
+
+**Su `sagre-provincia-*` «quando» non è stato acceso**, e non è una
+dimenticanza: anche lì la finestra temporale non c'è, quindi è il candidato
+ovvio — ma è una pagina che fa 405 clic e la si tocca con una decisione sua,
+non di sfondo. `con_quando` e `con_gratis` sono due parametri di
+`_landing_filtri()`: accenderli lì è una riga.
+
+##### Il controllo dei rossi ha trovato due lacune nelle prove, non nel codice
+
+Le prove nuove sono state verificate rimettendo quattro difetti uno alla volta,
+e **due passavano verdi** — cioè il difetto lo aveva il banco di prova:
+
+- **`data-free` togliato da tutte le righe**: la casella non si accende più
+  (le righe a pagamento diventano il totale) e la prova cadeva nel ramo «spenta
+  perché toglierebbe poco», che passa. La perdita completa del dato si leggeva
+  come «controllo correttamente spento»: il filtro sparisce in silenzio, che è
+  il modo in cui questi difetti sopravvivono. L'invariante giusta è più forte e
+  vale in tutti e due gli stati: **cartellino e attributo dicono la stessa cosa
+  su ogni riga**, perché `e_gratuito()` è una funzione sola.
+- **la tendina «quando» togliata dalla barra**: stava dentro un
+  `if (…count())`, quindi l'intero blocco di prove veniva saltato e non falliva
+  niente. È la lacuna classica delle prove condizionali. Su queste pagine il
+  controllo c'è per costruzione, quindi **la sua presenza si chiede, non si
+  suppone**.
+
+Un terzo caso, preso subito: togliendo `data-start`/`data-end` il filtro
+nasconde *tutto*, e la prova di coerenza passava — **zero righe sono coerenti
+con qualunque finestra**. Per questo il dato si chiede per primo, come già si fa
+con la copertura delle coordinate.
+
 #### Il ponte: 497 pagine, e non è la nav
 
 Una pagina nuova nasce con zero link entranti, ed è la lezione del 14/08 su

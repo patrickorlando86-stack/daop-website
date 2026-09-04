@@ -279,7 +279,129 @@ async function provaEventiProv(r, page, prov, slug) {
     await page.waitForTimeout(200);
   }
 
-  // 9) LE TRE SORELLE. Il link non e' cortesia: e' quello che tiene le quattro
+  // 9) IL FILTRO "QUANDO", che sulle altre pagine di intenzione NON c'e'
+  //    apposta: quelle SONO una risposta a quando, e una seconda domanda sul
+  //    tempo le contraddirebbe. Qui la premessa cade - questa pagina e'
+  //    definita dal non avere una finestra temporale - quindi il filtro
+  //    risponde alla domanda che l'elenco lascia aperta.
+  // La presenza NON e' condizionale: su queste pagine il controllo c'e' per
+  // costruzione. Dentro un `if (…count())` il difetto "tendina togliata dalla
+  // barra" avrebbe saltato l'intero blocco senza far fallire niente - trovato
+  // rimettendo il difetto, non ragionandoci.
+  r.ok(await page.locator('#lan-quando').count() > 0,
+    `${prov}: il filtro "quando" c'è`);
+  if (await page.locator('#lan-quando').count()) {
+    // Il dato su cui lavora, chiesto per primo. Senza questa riga il difetto
+    // "le date sparite dalle righe" passerebbe verde: il filtro nasconderebbe
+    // TUTTO, e zero righe sono coerenti con qualunque finestra. E' la stessa
+    // forma della prova sulla copertura delle coordinate.
+    const senzaDate = await page.evaluate(() =>
+      [...document.querySelectorAll('.ev-wrap li[data-category]')]
+        .filter((l) => !/^\d{4}-\d{2}-\d{2}$/.test(l.dataset.start || '')
+                    || !/^\d{4}-\d{2}-\d{2}$/.test(l.dataset.end || '')).length);
+    r.ok(senzaDate === 0,
+      `${prov}: ogni riga dichiara le sue date${senzaDate ? `: ${senzaDate} senza` : ''}`);
+
+    const esiti = {};
+    for (const v of ['oggi', 'weekend', '7', 'mese']) {
+      await page.selectOption('#lan-quando', v);
+      await page.waitForTimeout(220);
+      esiti[v] = await page.evaluate(() => {
+        const viste = [...document.querySelectorAll('.ev-wrap li[data-category]:not([hidden])')];
+        const iso = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0')
+          + '-' + String(d.getDate()).padStart(2, '0');
+        const o = new Date(); o.setHours(0, 0, 0, 0);
+        return { n: viste.length, oggi: iso(o), righe: viste.map((l) => [l.dataset.start, l.dataset.end]) };
+      });
+    }
+    // Coerenza: con "oggi" ogni riga rimasta deve DAVVERO essere in corso
+    // oggi. Vale anche a zero righe, che in un martedi' di novembre e' la
+    // risposta giusta - per questo la prova non pretende n>0.
+    const sballate = esiti.oggi.righe.filter(([a, b]) => !(a <= esiti.oggi.oggi && b >= esiti.oggi.oggi));
+    r.ok(sballate.length === 0,
+      `${prov}: con "oggi" restano solo eventi in corso oggi (${esiti.oggi.n} righe)`);
+    // E il controllo non e' arredamento: almeno una delle quattro opzioni
+    // cambia qualcosa. Se tutte e quattro lasciassero l'elenco intero, il
+    // comando ci sarebbe e non farebbe niente.
+    r.ok(Object.values(esiti).some((e) => e.n < righe),
+      `${prov}: il filtro "quando" divide (oggi ${esiti.oggi.n}, weekend `
+      + `${esiti.weekend.n}, 7gg ${esiti['7'].n}, mese ${esiti.mese.n} su ${righe})`);
+    // La sovrapposizione, non l'inizio: una sagra che parte venerdi' e dura
+    // tre giorni e' un evento del weekend anche se e' cominciata prima. Se
+    // qualcuno cambiasse il confronto in "inizia nel weekend", il weekend
+    // perderebbe le sagre lunghe, che sono quelle che la gente cerca.
+    r.ok(esiti.weekend.n >= esiti.oggi.n || esiti.oggi.n === 0,
+      `${prov}: il weekend non e' piu' stretto di oggi`);
+    await page.selectOption('#lan-quando', 'all');
+    await page.waitForTimeout(200);
+  }
+
+  // 10) "SOLO GRATUITI", e la sua condizione di esistenza. Il CLAUDE.md non lo
+  //     vietava sulle pagine di intenzione: diceva che prima la riga deve
+  //     MOSTRARE il prezzo, se no un filtro fa sparire delle voci senza dire
+  //     perche'. Quindi la prova vera non e' "il filtro funziona", e' che il
+  //     filtro e la riga dicano la stessa cosa - e_gratuito() e' una funzione
+  //     sola apposta.
+  // CARTELLINO E ATTRIBUTO DICONO LA STESSA COSA. Vale a casella accesa e a
+  // casella spenta, ed e' la prova che prende il difetto peggiore: se
+  // data-free spariva dalle righe, la casella non si accendeva piu' e tutto
+  // sembrava "correttamente spento". e_gratuito() e' una funzione sola apposta
+  // - due letture della stessa colonna che divergono vorrebbero dire un
+  // cartellino "Gratuito" su una riga che il filtro nasconde.
+  const discordi = await page.evaluate(() =>
+    [...document.querySelectorAll('.ev-wrap li[data-category]')]
+      .filter((l) => (l.dataset.free === '1') !== !!l.querySelector('.ev-pill.is-free'))
+      .length);
+  r.ok(discordi === 0,
+    `${prov}: cartellino "Gratuito" e data-free d'accordo su ogni riga`
+    + (discordi ? `: ${discordi} discordi` : ''));
+
+  const boxVisibile = await page.locator('#lan-gratis-box').count()
+    ? await page.evaluate(() => !document.getElementById('lan-gratis-box').hidden)
+    : false;
+  const aPagamento = await page.evaluate(() =>
+    [...document.querySelectorAll('.ev-wrap li[data-category]')]
+      .filter((l) => l.dataset.free !== '1').length);
+  if (boxVisibile) {
+    await page.check('#lan-gratis');
+    await page.waitForTimeout(250);
+    const esito = await page.evaluate(() => {
+      const viste = [...document.querySelectorAll('.ev-wrap li[data-category]:not([hidden])')];
+      return {
+        n: viste.length,
+        tuttiGratis: viste.every((l) => l.dataset.free === '1'),
+        tuttiColTag: viste.every((l) => !!l.querySelector('.ev-pill.is-free')),
+      };
+    });
+    r.ok(esito.tuttiGratis, `${prov}: restano solo i gratuiti (${esito.n}/${righe})`);
+    r.ok(esito.tuttiColTag,
+      `${prov}: ogni riga rimasta porta il cartellino "Gratuito"`);
+    r.ok(esito.n < righe, `${prov}: la casella toglie qualcosa`);
+    await page.uncheck('#lan-gratis');
+    await page.waitForTimeout(200);
+  } else {
+    // Spenta e' la risposta giusta quando toglierebbe poco: la soglia e' su
+    // quello che il filtro TOGLIE, non sulla lunghezza dell'elenco. Su Asti
+    // sono 8 righe (04/09/2026), e otto righe si scorrono prima di quanto si
+    // trovi un comando per non vederle.
+    r.ok(aPagamento < 12 || aPagamento === righe,
+      `${prov}: casella spenta perche' toglierebbe solo ${aPagamento} righe`);
+    r.ok(await page.evaluate(() => {
+      const b = document.getElementById('lan-gratis-box');
+      return !b || b.getBoundingClientRect().height === 0;
+    }), `${prov}: e spenta non occupa spazio nella barra`);
+  }
+
+  // 11) LA BARRA NON E' CRESCIUTA. E' il vincolo che regge tutte le decisioni
+  //     su questa barra: e' appiccicosa, quindi ogni pixel in piu' si paga su
+  //     OGNI schermata dello scorrimento, non una volta. La casella sta nella
+  //     prima riga accanto alla ricerca - che e' stirata e cede il posto -
+  //     proprio per non far nascere una terza riga.
+  r.ok(await page.locator('#lan-toolbar').evaluate((b) => b.offsetHeight) <= 120,
+    `${prov}: la barra filtri resta compatta `
+    + `(${await page.locator('#lan-toolbar').evaluate((b) => b.offsetHeight)}px)`);
+
+  // 12) LE TRE SORELLE. Il link non e' cortesia: e' quello che tiene le quattro
   //    pagine provinciali a passarsi autorita' invece di contendersi la
   //    stessa query. Se sparisce, quella che perde e' la piu' nuova.
   for (const [href, chi] of [[`/sagre-provincia-${slug}.html`, 'sagre'],

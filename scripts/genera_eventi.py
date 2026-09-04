@@ -5830,7 +5830,7 @@ def _eta_chip(testo):
     return trunc(t, 24)
 
 
-def _landing_righe(ev, oggi, eta=False):
+def _landing_righe(ev, oggi, eta=False, gratis=False):
     """(righe, nude) di un elenco, nel vocabolario delle pagine comune.
 
     `nude` dice se nessuna riga ha la miniatura: e' la stessa condizione che
@@ -5851,8 +5851,17 @@ def _landing_righe(ev, oggi, eta=False):
         # filtri. Stessi valori e stesso vocabolario dell'agenda, cosi' chi
         # legge il JS di una pagina ha gia' letto quello dell'altra.
         slug, _ic, cat = bucket(e)
+        # data-start/end e data-free: sono i dati su cui lavorano il filtro
+        # "quando" e "solo gratuiti", con gli stessi nomi dell'agenda. Si
+        # stampano sempre, anche dove i due controlli non ci sono: ~48 byte per
+        # riga (lo stesso ordine di grandezza di geo_attrs, accettato per la
+        # stessa ragione) e in cambio non esiste il caso di un filtro presente
+        # con il dato assente, che sarebbe un comando che nasconde righe a caso.
         out += (f'<li style="{stile}" data-province="{(e.get("prov") or "").lower()}"'
-                f' data-category="{slug}"{geo_attrs(e)}>{thumb}<span class="com-b">'
+                f' data-category="{slug}"'
+                f' data-start="{e["d_start"].isoformat()}"'
+                f' data-end="{e["d_end"].isoformat()}"{free_attr(e)}'
+                f'{geo_attrs(e)}>{thumb}<span class="com-b">'
                 f'<span class="com-d">{esc(quando)}'
                 f'<span class="com-cat">{esc(cat)}</span></span>'
                 f'<a class="com-go" href="{_href_evento(e)}">'
@@ -5871,6 +5880,12 @@ def _landing_righe(ev, oggi, eta=False):
                 f'<span class="com-luogo">{esc(dove)}'
                 + (f'<span class="com-eta">{esc(_eta_chip(e.get("eta")))}</span>'
                    if eta and fascia_eta(e.get('eta')) else '')
+                # Solo "Gratuito", non il prezzo: delle righe a pagamento la
+                # meta' uscirebbe troncata e meta' dice "a pagamento (da
+                # verificare)", cioe' una pillola che non sa niente. Il prezzo
+                # intero sta sulla scheda. La classe arriva dal guscio.
+                + ('<span class="ev-pill is-free">Gratuito</span>'
+                   if gratis and e_gratuito(e) else '')
                 + '</span>'
                 + '</span></li>')
     return out, nude
@@ -5913,7 +5928,7 @@ def _landing_geo(eventi):
         '</div>')
 
 
-def _landing_filtri(eventi, con_prov=True):
+def _landing_filtri(eventi, con_prov=True, con_quando=False, con_gratis=False):
     """La barra filtri delle pagine di intenzione.
 
     Non e' la barra dell'agenda ricopiata: li' i controlli sono quattro fissi,
@@ -5931,7 +5946,21 @@ def _landing_filtri(eventi, con_prov=True):
               for c in PROVINCE_PUBBLICATE
               if any((e.get('prov') or '').upper() == c for e in eventi)]
              if con_prov else [])
+    # "Quando". Spento per default: sulle pagine che SONO una risposta a
+    # quando (oggi, weekend, le stagionali) una seconda domanda sul tempo
+    # contraddirebbe la pagina. Acceso dove la finestra temporale non c'e'
+    # affatto - le /eventi-provincia-* - dove invece risponde alla domanda che
+    # l'elenco lascia aperta. I valori sono quelli dell'agenda, identici.
     tendine = ''
+    if con_quando:
+        tendine += ('<select class="ev-select" id="lan-quando" data-campo="date"'
+                    ' aria-label="Filtra per data">'
+                    '<option value="all">Sempre</option>'
+                    '<option value="oggi">Oggi</option>'
+                    '<option value="weekend">Weekend</option>'
+                    '<option value="7">7 giorni</option>'
+                    '<option value="mese">Nel mese</option>'
+                    '</select>')
     if len(provs) > 1:
         tendine += ('<select class="ev-select" id="lan-dove" data-campo="province"'
                     ' aria-label="Filtra per provincia">'
@@ -5940,6 +5969,14 @@ def _landing_filtri(eventi, con_prov=True):
         tendine += ('<select class="ev-select" id="lan-tipo" data-campo="category"'
                     ' aria-label="Filtra per tipo di evento">'
                     '<option value="all">Categorie</option>' + "".join(cats) + '</select>')
+    # "Solo gratuiti". Parte hidden e la accende il JS solo se DIVIDE: la
+    # soglia e' su quello che il filtro TOGLIE, non sulla lunghezza
+    # dell'elenco, ed e' la stessa dell'agenda. Sta nella prima riga accanto
+    # alla ricerca, che e' stirata e quindi cede il posto senza far crescere
+    # la barra appiccicosa - la ragione per cui "vicino a me" invece sta fuori.
+    chk = ('<label class="ev-chk" id="lan-gratis-box" hidden>'
+           '<input type="checkbox" id="lan-gratis"> Solo gratuiti</label>'
+           if con_gratis else '')
     return ('<div class="ev-toolbar lan-toolbar" id="lan-toolbar">'
             '<div class="ev-search">'
             '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"'
@@ -5947,7 +5984,7 @@ def _landing_filtri(eventi, con_prov=True):
             '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>'
             '<input type="search" id="lan-q" placeholder="Cerca un paese, una sagra…"'
             ' aria-label="Cerca in questo elenco" autocomplete="off"></div>'
-            + tendine +
+            + chk + tendine +
             '</div>'
             # Fuori dalla barra, come nell'agenda: la barra e' appiccicosa e una
             # riga in piu' la farebbe crescere per tutto lo scorrimento.
@@ -5957,7 +5994,7 @@ def _landing_filtri(eventi, con_prov=True):
             'niente. <button type="button" id="lan-reset">Azzera i filtri</button></p>')
 
 
-def _landing_sezione(titolo, sotto, ev, oggi, eta=False):
+def _landing_sezione(titolo, sotto, ev, oggi, eta=False, gratis=False):
     """Un blocco di elenco con la sua intestazione. Vuoto se non c'e' niente:
     un titoletto senza righe sotto e' il modo piu' rapido per far sembrare
     generata a macchina una pagina che non lo e'."""
@@ -5966,7 +6003,7 @@ def _landing_sezione(titolo, sotto, ev, oggi, eta=False):
     testa = f'<h3>{esc(titolo)}</h3>'
     if sotto:
         testa += f'<p class="com-per">{esc(sotto)}</p>'
-    righe, nude = _landing_righe(ev, oggi, eta=eta)
+    righe, nude = _landing_righe(ev, oggi, eta=eta, gratis=gratis)
     return (f'<section class="com-grp"><div class="com-head"><div class="com-b">'
             f'{testa}</div></div>'
             f'<ul class="com-ev{" is-nude" if nude else ""}">{righe}</ul></section>')
@@ -6107,6 +6144,8 @@ LANDING_JS = r"""<script>
   var conta = document.getElementById('lan-count');
   var nulla = document.getElementById('lan-nulla');
   var reset = document.getElementById('lan-reset');
+  var gratis = document.getElementById('lan-gratis');
+  var gratisBox = document.getElementById('lan-gratis-box');
   var sel = [].slice.call(bar.querySelectorAll('.ev-select'));
   var voci = [].slice.call(document.querySelectorAll('.ev-wrap li[data-category]'));
   // Solo i gruppi che contengono voci filtrabili: nelle pagine per provincia
@@ -6115,6 +6154,52 @@ LANDING_JS = r"""<script>
   var gruppi = [].slice.call(document.querySelectorAll('.ev-wrap .com-grp'))
     .filter(function (g) { return g.querySelector('li[data-category]'); });
   if (!voci.length) return;
+
+  // Il comando si accende solo se DIVIDE, ed e' la stessa soglia dell'agenda
+  // applicata a quello che il filtro TOGLIE: sotto una dozzina di righe
+  // nascoste si scorre prima la lista che a cercare un comando per non
+  // vederle. Misurato il 04/09/2026: toglie 26 righe su Cuneo, 20 su
+  // Alessandria, 8 su Asti - dove infatti resta spento da se'.
+  var TOLTE_MIN = 12;
+  if (gratisBox) {
+    var aPagamento = voci.filter(function (l) { return l.dataset.free !== '1'; }).length;
+    if (aPagamento >= TOLTE_MIN && aPagamento < voci.length) {
+      gratisBox.hidden = false;
+      // Solo con la casella accesa la ricerca cede il posto: vedi il CSS del
+      // guscio (.ev-toolbar.has-gratis .ev-search).
+      bar.classList.add('has-gratis');
+    }
+  }
+
+  // La finestra di date del filtro "quando", in ISO locale. E' riscritta e
+  // non condivisa con l'agenda: e' la decisione scritta in testa a questo
+  // blocco (li' ci sono le giornate, il calendario e le righe che si aprono,
+  // qui c'e' un elenco di link) e sono venti righe. Quello che NON puo'
+  // divergere sono i valori delle opzioni, che sono gli stessi - se no i due
+  // filtri si chiamerebbero uguale e farebbero due cose diverse.
+  function isoLoc(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0')
+      + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function finestra(modo) {
+    if (!modo || modo === 'all') return null;
+    var ora = new Date(); ora.setHours(0, 0, 0, 0);
+    var gs = ora.getDay(); // 0 domenica ... 6 sabato
+    if (modo === 'oggi') return [isoLoc(ora), isoLoc(ora)];
+    if (modo === 'weekend') {
+      var sab = new Date(ora); sab.setDate(ora.getDate() + (gs === 0 ? -1 : 6 - gs));
+      var dom = new Date(sab); dom.setDate(sab.getDate() + 1);
+      return [isoLoc(sab), isoLoc(dom)];
+    }
+    if (modo === '7') {
+      var f7 = new Date(ora); f7.setDate(ora.getDate() + 7);
+      return [isoLoc(ora), isoLoc(f7)];
+    }
+    if (modo === 'mese') {
+      return [isoLoc(ora), isoLoc(new Date(ora.getFullYear(), ora.getMonth() + 1, 0))];
+    }
+    return null;
+  }
 
   // "Vicino a me". Il modulo sta in /assets/js/daop-vicino.js ed e' lo stesso
   // dell'agenda: qui gli si dice solo dove appendere la distanza dentro una
@@ -6162,8 +6247,14 @@ LANDING_JS = r"""<script>
   // riga e una per contare quanti eventi ci sarebbero a ogni gradino di
   // distanza. I gradini devono dire quanti se ne vedrebbero davvero.
   function altri(l, f, t) {
+    // Sovrapposizione e non inizio: una sagra che parte venerdi' e dura tre
+    // giorni e' un evento del weekend anche se e' cominciata prima. Le date
+    // sono in ISO, che si confronta come testo. Stessa regola dell'agenda.
+    var fin = finestra(f.date);
     return (!f.province || f.province === 'all' || l.dataset.province === f.province) &&
            (!f.category || f.category === 'all' || l.dataset.category === f.category) &&
+           (!fin || (l.dataset.start <= fin[1] && l.dataset.end >= fin[0])) &&
+           (!f.gratis || l.dataset.free === '1') &&
            (!t || indice().get(l).indexOf(t) > -1);
   }
 
@@ -6174,6 +6265,8 @@ LANDING_JS = r"""<script>
       f[s.dataset.campo] = s.value;
       s.classList.toggle('is-on', s.value !== 'all');
     });
+    f.gratis = !!(gratis && gratis.checked && gratisBox && !gratisBox.hidden);
+    if (gratisBox) gratisBox.classList.toggle('is-on', f.gratis);
     var visti = 0;
     voci.forEach(function (l) {
       var ok = altri(l, f, t) && (!vicino || vicino.entro(l));
@@ -6188,7 +6281,7 @@ LANDING_JS = r"""<script>
     if (vicino) {
       vicino.conta(function (l) { return altri(l, f, t); });
     }
-    var filtrato = !!t || (vicino && vicino.attivo()) ||
+    var filtrato = !!t || f.gratis || (vicino && vicino.attivo()) ||
                    sel.some(function (s) { return s.value !== 'all'; });
     // A riposo il conteggio non si scrive: la pagina lo dice gia' nell'occhiello
     // e nel paragrafo di apertura, e ripeterlo una terza volta e' rumore.
@@ -6200,9 +6293,11 @@ LANDING_JS = r"""<script>
 
   if (q) q.addEventListener('input', applica);
   sel.forEach(function (s) { s.addEventListener('change', applica); });
+  if (gratis) gratis.addEventListener('change', applica);
   if (reset) reset.addEventListener('click', function () {
     if (q) q.value = '';
     sel.forEach(function (s) { s.value = 'all'; });
+    if (gratis) gratis.checked = false;
     applica();
     bar.scrollIntoView({ block: 'start' });
   });
@@ -7888,19 +7983,20 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
                      "l'agenda si aggiorna ogni notte, appena arrivano le date."), 152)
 
     corpo = apertura
-    corpo += _landing_filtri(tutti, con_prov=False)
+    corpo += _landing_filtri(tutti, con_prov=False, con_quando=True,
+                             con_gratis=True)
     if bimbi:
         corpo += _landing_sezione(
             "Pensati per i bambini",
             f"{len(bimbi)} appuntamenti con la fascia d'età dichiarata, oppure con "
             f"laboratori, giochi o burattini nel programma",
-            bimbi, oggi, eta=True)
+            bimbi, oggi, eta=True, gratis=True)
     if resto:
         corpo += _landing_sezione(
             f"Gli altri appuntamenti in provincia di {nome_prov}",
             f"{len(resto)} eventi senza una fascia d'età dichiarata: si apre la scheda "
             f"e si legge il programma, che è dove l'età si capisce",
-            resto, oggi, eta=True)
+            resto, oggi, eta=True, gratis=True)
 
     comuni = sorted((d for d in (hub or {}).values() if d['prov'] == prov),
                     key=lambda d: -len(d['futuri']))
