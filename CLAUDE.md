@@ -3311,6 +3311,11 @@ tutto il lavoro del curatore.
 **La cosa che veniva in mente per prima — una `/eventi-provincia-<nome>.html` —
 non si fa**, e il motivo sta nell'export GSC del 26/08/2026 (tre mesi):
 
+> **SUPERATO il 04/09/2026: quelle pagine ci sono.** Il ragionamento qui sotto
+> resta perché spiega perché `sagre-provincia-*` non si è allargata, ma il primo
+> dei due argomenti era **misurato male** — vedi «`/eventi-provincia-*.html`: la
+> quarta cella» più sotto. Non rifare il no partendo da questa tabella.
+
 | query provinciali | query | clic | impressioni |
 |---|---|---|---|
 | con dentro "oggi" / "weekend" | 107 | 148 | **4.953** |
@@ -3407,6 +3412,180 @@ diagnosi.
 
 Cosa **non** si è fatto per de-cannibalizzare, e non si farà: toccare l'H1 di
 `eventi.html`. Vedi sopra, vale 19.563 impressioni.
+
+### `/eventi-provincia-*.html`: la quarta cella, e perché il no del 29/08 era misurato male
+
+Fatte il **04/09/2026**, e sono la pagina che il paragrafo qui sopra dice di non
+fare. Quel paragrafo **non si cancella** — il ragionamento serve ancora, ed è la
+ragione per cui `sagre-provincia-*` non si è allargata — ma la conclusione è
+cambiata. Cosa l'ha cambiata, in ordine di peso.
+
+**Il primo argomento era circolare, e va scritto perché è un errore ripetibile.**
+Il no si reggeva su «le query provinciali senza finestra temporale fanno 19
+query, 511 impressioni e 8 clic in tre mesi». Quel numero viene dal **nostro**
+Search Console, che conta solo le query dove **già compariamo**: su una query
+dove nessuna pagina risponde le impressioni sono zero per costruzione. Era un
+**pavimento, non una misura della domanda** — e misurare la domanda di una cosa
+che non hai con lo strumento che vede solo quello che hai è il modo più
+elegante di darsi ragione da soli.
+
+La contro-prova sta nella SERP di `eventi e attività per bambini provincia di
+cuneo` (04/09/2026): annunci shopping, un blocco «Le persone hanno chiesto
+anche» da quattro voci, Tripadvisor ed Eventbrite in pagina uno. Google non
+apparecchia così una query da venti ricerche al mese.
+
+**Il secondo argomento — la cannibalizzazione — regge meno di quanto sembrava**,
+perché le altre due provinciali sono **entrambe temporali**:
+
+| pagina | provincia | finestra | asse |
+|---|---|---|---|
+| `/eventi/oggi-provincia-<x>` | sì | oggi | il giorno |
+| `/eventi/weekend-provincia-<x>` | sì | weekend | il giorno |
+| `/sagre-provincia-<x>` | sì | nessuna | il mese, **solo sagre** |
+| **`/eventi-provincia-<x>`** | sì | **nessuna** | **l'età, tutta l'agenda** |
+
+È lo stesso asse che `spec_incrocio()` aveva già individuato (provincia ×
+finestra) e la cella senza finestra era l'unica vuota. **L'insieme resta chiuso**
+— una per provincia pubblicata, come le sagre — che è la garanzia di sempre
+contro lo *scaled content*.
+
+**Il terzo pezzo è quello che ha deciso, e il 29/08 non si sapeva.** Su quella
+query il secondo risultato di Google è `eventiperbambinicuneo.it`, il sito del
+curatore di Cuneo — title esatto «Eventi e attività per bambini in provincia di
+Cuneo» — e il 21/08 si è deciso che **non lo userà più**, inglobando tutto in
+DAOP. Cioè stavamo per spegnere l'unica superficie che vince quella query senza
+avere una pagina su cui portarla: il **301 di quel dominio** (già deciso il
+21/08 e mai eseguito) ha bisogno di un atterraggio che risponda alla stessa
+domanda, e mandarlo su `/sagre-provincia-cuneo.html` vuol dire mandarlo su un
+titolo di sagre. Verificato lo stesso giorno: quel sito è su Softr, ha due
+pagine e **zero link verso daop.it** — manda a Instagram, a Facebook e alla sua
+newsletter (~900 iscritti).
+
+Da qui l'ordine dei lavori, che non è indifferente: **la pagina prima, il 301
+dopo.** E due cose da non promettere a nessuno — il beneficio del dominio a
+corrispondenza esatta **non si trasferisce** con un 301 (si trasferiscono link
+e storia), e la sua home e questa pagina **non possono stare insieme** sulla
+stessa query: è la regola «un curatore, una pagina canonica» del modello
+partner.
+
+#### L'asse è l'età, e non è una preferenza estetica
+
+La categoria è **già** la tendina dei filtri ed è scritta in ogni riga
+(`.com-cat`): come principio di raggruppamento sarebbe la seconda volta che si
+dice la stessa cosa — e ordinando per categoria con le sagre davanti questa
+pagina uscirebbe **uguale alla sorella**, cioè sarebbe il doppione che il 29/08
+temeva.
+
+L'età invece è il dato che nessun altro sito ha, ed è letteralmente la parola
+della query. E **divide per davvero**: `e_per_bambini()` è vero su 48 righe di
+88 a Cuneo, 21 di 89 ad Alessandria, 9 di 33 ad Asti. Non è il 93% di `Adatto
+Famiglie` — che per quel motivo non si usa, e qui non si usa.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Il title e l'H1 di `sagre-provincia-*` non si toccano.** Quella pagina fa
+  405 clic e 4.503 impressioni sulle query di sagre (Cuneo, export 26/08) ed è
+  la quinta del sito: allargarne il titolo per coprire anche questa domanda è
+  la stessa aritmetica dell'H1 di `eventi.html`, che non si tocca per la
+  stagione. L'unica riga cambiata là è «questa pagina è il calendario
+  **delle sagre**» invece di «completo», che era diventato falso il 29/08
+  quando in coda è arrivato anche il resto dell'agenda.
+- **I due blocchi sono complementari**, non uno dentro l'altro: «Pensati per i
+  bambini» e «Gli altri appuntamenti». Misurato: zero schede in entrambi.
+- **Il secondo blocco NON si intitola «adatti alle famiglie».** Sarebbe la riga
+  che dice implicitamente che gli altri non lo sono, cioè smentire il criterio
+  con cui l'agenda è fatta. Dice quello che è vero — che lì la fascia d'età non
+  è dichiarata — e dà la regola per leggerli, come fa `/halloween.html` con la
+  paura.
+- **Il blocco dei bambini viene primo**, perché è la risposta alla query.
+- **`robots` si decide su TUTTA l'agenda della provincia**, non su un
+  sottoinsieme: è la ragione per cui questa è la **meno stagionale** delle
+  quattro — quando le sagre finiscono, `sagre-provincia-*` può scendere sotto
+  `MIN_LANDING`, questa no.
+- **L'indirizzo sta in un posto solo** (`href_eventi_prov()`): lo usano la
+  sorella delle sagre, le due d'incrocio e la coda delle schede. Stessa ragione
+  di `href_incrocio()`.
+
+#### L'età si vede in riga, e mancava
+
+Difetto che la pagina ha avuto nascendo: la sezione si intitola «Pensati per i
+bambini» e l'occhiello promette la fascia dichiarata, ma `_landing_righe()`
+stampava quando, categoria, nome e comune — **non l'età**. La pagina che vive
+di quel dato era l'unica a non mostrarlo, ed è la forma dell'occhiello dei corsi
+che prometteva i costi che il foglio non ha.
+
+Il parametro `eta=` è **facoltativo e spento**: sulle altre diciassette pagine
+di intenzione non cambia niente, perché lì l'età non è l'asse e una pillola in
+più su ogni riga di `/eventi/oggi.html` è rumore. **Niente CSS nuovo**:
+`.com-eta` esiste in `COMUNE_CSS` dal blocco «Cosa c'è per i bambini» delle
+pagine comune, e `COMUNE_CSS` è già dentro il `<style>` di `_landing_shell()`.
+Si stampa **solo su fascia numerica**: «tutte le età» è la risposta che si dà
+quando non si è deciso niente, ed è il motivo per cui `e_per_bambini()` non la
+conta.
+
+#### Il ponte: 497 pagine, e non è la nav
+
+Una pagina nuova nasce con zero link entranti, ed è la lezione del 14/08 su
+`luoghi.html`: **alla nav non ci va nessuno.** I link arrivano da dove sta il
+traffico:
+
+| da dove | quante | perché |
+|---|---|---|
+| coda delle **schede evento** (`blocco_vicini()`) | ~450 | fanno il 77% dei clic del sito (export 02/09) |
+| `sagre-provincia-*` | 3 | la più forte della provincia, 209 link entranti sue |
+| le sei d'incrocio | 6 | la riga «se non è per forza oggi» aveva un solo sbocco |
+| `eventi.html`, blocco «TESTO DI ZONA» | 1 | scritto **a mano**, fuori dai marker |
+
+Nella coda delle schede sta **dopo** la voce delle sagre e prima di
+«oggi»/«weekend»: la provincia è lo stesso cerchio e questa ne è la versione
+intera. **Non entra in `link_landing()`**, e non è una dimenticanza: quella riga
+si stampa su ~290 pagine e tre voci in più la trasformano nella barra che nessuno
+guarda — è la ragione già scritta per le sei d'incrocio.
+
+**E sta nell'elenco dei file committati dal workflow** (`eventi-provincia-*.html`,
+accanto al glob delle sagre). Senza quella riga la run notturna le riscrive nel
+runner e le butta via con lui: è il guasto già pagato per `ferragosto.html` e
+ripetuto nove volte con le stagionali.
+
+#### Le prove: nessun conteggio, e verificate rosse
+
+`tests/landing.js` gira su Cuneo e su Alessandria — Cuneo perché è il caso in cui
+il blocco dei bambini pesa più dell'altro, Alessandria perché è il caso opposto
+**e** perché il suo nome fa cadere il «| DAOP» dal title, cioè è il ramo di
+`_landing_titolo()` che altrimenti nessuno percorre.
+
+**Nessuna prova asserisce un conteggio**, ed è deliberato: «48 pensati per i
+bambini» sarebbe rosso la prima notte che una locandina arriva senza la cella
+dell'età compilata, cioè quando il sito fa la cosa giusta. È l'inciampo già
+pagato sei volte in questo repo. Quello che si controlla sono rapporti fra
+insiemi, che non hanno una taglia giusta: la query per intero in title e H1,
+«sagre» che non entra nel title, più di una categoria in pagina (se diventasse
+un sottoinsieme sarebbe il doppione di un'altra provinciale), **ogni riga in un
+blocco e uno solo**, il blocco dei bambini primo, la pillola dell'età presente e
+**che non schiaccia il titolo** (misurata nel reso, non letta nel CSS: è la
+classe di guasto della barra alta 915px), la tendina che conosce tutte le
+categorie in pagina, e i tre link alle sorelle.
+
+Verificate **rosse rimettendo quattro difetti uno alla volta** — pillola
+togliata, blocchi scambiati, link alla sorella rimosso, pagina ridotta a una
+categoria — non supposte.
+
+#### Un rosso pre-esistente trovato per strada: `prova_spostata.py`
+
+Non c'entra con questa pagina e **non è stato toccato**, ma va scritto perché è
+intermittente e quindi si perde. La prova pretende che sul cartello di una
+scheda spostata il comune vecchio **non compaia più**, e confronta la stringa
+con tutta la pagina. Il comune però sta dentro il **nome dell'evento** — «Pro
+Loco Ceresole Alba», «Pro Loco Ciglione» — che il cartello stampa apposta, per
+far riconoscere a chi arriva quale scheda si è spostata; e nel caso di Ciglione
+sta anche dentro lo slug di destinazione (9 occorrenze su una pagina sola).
+
+Quindi è rossa **solo quando la cavia pescata dal registro ha il comune nel
+nome**, che è perché nessuno l'ha notata. È la settima volta che una prova di
+questo repo pretende un'uniformità che il sito non ha mai avuto: l'invariante
+giusta è che non compaiano i **dati** della riga sbagliata (descrizione,
+locandina, calendario, `Event`) — cose che la prova già controlla a parte — non
+che una parola non ricorra.
 
 ### "Vicino a me": il raggio filtra, e la posizione non si chiede mai da soli
 

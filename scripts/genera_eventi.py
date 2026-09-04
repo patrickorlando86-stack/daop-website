@@ -3676,6 +3676,8 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
         nome_prov = PROVINCE_NOMI[prov]
         coda.append(f'<a href="/sagre-provincia-{slugify(nome_prov)}.html">'
                     f'Le sagre in provincia di {esc(nome_prov)}</a>')
+        coda.append(f'<a href="{href_eventi_prov(prov)}">Eventi per bambini in '
+                    f'provincia di {esc(nome_prov)}</a>')
     coda.append('<a href="/eventi/oggi.html">Cosa c\'è oggi</a>')
     coda.append('<a href="/eventi/weekend.html">Questo weekend</a>')
     coda.append('<a href="/eventi.html">Tutta l\'agenda DAOP</a>')
@@ -5772,6 +5774,12 @@ LANDING_CSS = """
    provincia, quindi "dove" e' la seconda cosa da sapere dopo "cosa" - nelle
    pagine comune non serve perche' il comune e' la pagina stessa. */
 .com-luogo{font-size:.85rem;opacity:.72}
+/* La fascia d'eta' accanto al comune, sulle /eventi-provincia-*. Dentro
+   .com-luogo e non accanto: vedi il commento in _landing_righe(). L'opacity
+   del padre la spegnerebbe insieme al comune, e l'eta' e' il motivo per cui
+   quella riga sta nel primo blocco - quindi si rimette a 1. */
+.com-luogo .com-eta{display:inline-block;vertical-align:baseline;margin-left:8px;
+  opacity:1}
 .com-ev.is-nude .com-b .com-luogo{flex:0 0 auto}
 /* Le scorciatoie fra una pagina di intenzione e l'altra. */
 .lan-alt{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px}
@@ -5805,7 +5813,24 @@ def in_corso(e, giorno):
     return e['d_start'] <= giorno <= e['d_end']
 
 
-def _landing_righe(ev, oggi):
+def _eta_chip(testo):
+    """La fascia d'eta' come sta nel chip: il numero, senza la nota.
+
+    Nel foglio la cella e' scritta a mano e a volte e' una frase intera -
+    "3-14 anni (bambini e ragazzi, genitori invitati)" - che dentro un chip
+    diventa due righe larghe due terzi dello schermo. La parentesi non e'
+    l'eta', e' un commento, e sta per intero sulla scheda a un tocco di
+    distanza; il numero resta parola per parola quello della locandina, che e'
+    la regola scritta per i corsi.
+
+    Il taglio a 24 e' la rete per la cella lunga senza parentesi: nel chip una
+    riga sola, sempre."""
+    t = (testo or '').strip()
+    t = t.split(' (')[0].strip() or t
+    return trunc(t, 24)
+
+
+def _landing_righe(ev, oggi, eta=False):
     """(righe, nude) di un elenco, nel vocabolario delle pagine comune.
 
     `nude` dice se nessuna riga ha la miniatura: e' la stessa condizione che
@@ -5832,8 +5857,22 @@ def _landing_righe(ev, oggi):
                 f'<span class="com-cat">{esc(cat)}</span></span>'
                 f'<a class="com-go" href="{_href_evento(e)}">'
                 f'{esc(trunc(e.get("nome") or "", 80))}</a>'
-                f'<span class="com-luogo">{esc(dove)}</span>'
-                '</span></li>')
+                # L'eta' solo dove e' l'asse della pagina (le
+                # /eventi-provincia-*), e solo se e' una fascia NUMERICA:
+                # "tutte le eta'" e' la risposta che si da' quando non si e'
+                # deciso niente, ed e' la ragione per cui e_per_bambini() non
+                # la conta. Stampata sarebbe una pillola che non dice niente.
+                #
+                # Sta DENTRO .com-luogo e non accanto: .com-b e' un flex in
+                # colonna con nowrap, quindi un figlio in piu' prende una riga
+                # intera e la pillola veniva larga 251px su 375 - una fascia,
+                # non un chip. Dentro lo span e' una scatola inline e si
+                # dimensiona sul contenuto. Misurato, non dedotto.
+                f'<span class="com-luogo">{esc(dove)}'
+                + (f'<span class="com-eta">{esc(_eta_chip(e.get("eta")))}</span>'
+                   if eta and fascia_eta(e.get('eta')) else '')
+                + '</span>'
+                + '</span></li>')
     return out, nude
 
 
@@ -5918,7 +5957,7 @@ def _landing_filtri(eventi, con_prov=True):
             'niente. <button type="button" id="lan-reset">Azzera i filtri</button></p>')
 
 
-def _landing_sezione(titolo, sotto, ev, oggi):
+def _landing_sezione(titolo, sotto, ev, oggi, eta=False):
     """Un blocco di elenco con la sua intestazione. Vuoto se non c'e' niente:
     un titoletto senza righe sotto e' il modo piu' rapido per far sembrare
     generata a macchina una pagina che non lo e'."""
@@ -5927,7 +5966,7 @@ def _landing_sezione(titolo, sotto, ev, oggi):
     testa = f'<h3>{esc(titolo)}</h3>'
     if sotto:
         testa += f'<p class="com-per">{esc(sotto)}</p>'
-    righe, nude = _landing_righe(ev, oggi)
+    righe, nude = _landing_righe(ev, oggi, eta=eta)
     return (f'<section class="com-grp"><div class="com-head"><div class="com-b">'
             f'{testa}</div></div>'
             f'<ul class="com-ev{" is-nude" if nude else ""}">{righe}</ul></section>')
@@ -6716,7 +6755,10 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
     quando_no = "oggi" if modo == 'oggi' else "questo weekend"
     corpo += (f'<p>Se quello che cerchi non è per forza {quando_no}: '
               f'<a href="{sagre_href}">tutte le sagre e le feste della provincia di '
-              f'{esc(nome_prov)}</a>, in ordine di data e mese per mese.</p>')
+              f'{esc(nome_prov)}</a>, in ordine di data e mese per mese, oppure '
+              f'<a href="{href_eventi_prov(prov)}">tutti gli eventi e le attività per '
+              f'bambini in provincia di {esc(nome_prov)}</a>, che è l\'agenda '
+              f'completa.</p>')
 
     fonte = fonte_provincia(prov)
     if fonte:
@@ -7554,6 +7596,16 @@ def _sagre_ricorrenti(storico, prov, quante=12):
     return out[:quante]
 
 
+def href_eventi_prov(prov):
+    """L'indirizzo della pagina provinciale senza finestra temporale.
+
+    Scritto qui e non nei quattro posti che lo usano - la sorella delle sagre,
+    le due d'incrocio, la coda delle schede - per la stessa ragione di
+    href_incrocio(): un indirizzo ripetuto e' un indirizzo che un giorno
+    cambia in tre punti su quattro."""
+    return f"/eventi-provincia-{slugify(PROVINCE_NOMI.get(prov, prov))}.html"
+
+
 def spec_sagre(prov, events, hub, storico, oggi, altre):
     """/sagre-provincia-<nome>.html — le sagre di una provincia, mese per mese."""
     nome_prov = PROVINCE_NOMI.get(prov, prov)
@@ -7684,7 +7736,10 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
     # quelle a "dove e quando": chi cerca l'una spesso vuole l'altra, ed e' il
     # link che le tiene insieme invece di lasciarle competere.
     corpo += (f"<h2>Cosa c'è adesso in provincia di {esc(nome_prov)}</h2>"
-              f'<p>Questa pagina è il calendario completo. Se invece la domanda è '
+              f'<p>Questa pagina è il calendario delle sagre. Se cerchi '
+              f'<a href="{href_eventi_prov(prov)}">tutti gli eventi e le attività per '
+              f'bambini della provincia</a> — sagre comprese, divisi per età — sono in '
+              f'una pagina sola. Se invece la domanda è '
               f'"e stasera?": <a href="{href_incrocio(prov, "oggi")}">cosa fare oggi</a> '
               f'oppure <a href="{href_incrocio(prov, "weekend")}">gli eventi del '
               f'weekend</a> in provincia di {esc(nome_prov)}.</p>')
@@ -7718,6 +7773,179 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
         # facendo il suo mestiere. Gli altri si stampano a parte nel log.
         'eventi': len(sagre),
         'altri': len(altri_ev),
+    }
+
+
+def spec_eventi_prov(prov, events, hub, oggi, altre):
+    """/eventi-provincia-<nome>.html — la provincia SENZA finestra temporale.
+
+    PERCHE' ESISTE, visto che spec_sagre dice a chiare lettere di non farla.
+    Quel commento (29/08/2026) la scartava su due argomenti. Il primo era la
+    domanda: "le query provinciali senza finestra temporale fanno 19 query,
+    511 impressioni e 8 clic in tre mesi". Quel numero viene dal NOSTRO Search
+    Console, che conta solo le query dove GIA' compariamo: su una query dove
+    non rankiamo le impressioni sono zero per costruzione, quindi era un
+    pavimento e non una misura della domanda. La SERP di "eventi e attivita'
+    per bambini provincia di cuneo" (04/09/2026) lo dice da sola: annunci
+    shopping e un blocco "Le persone hanno chiesto anche" da quattro voci non
+    li mette su una query da venti ricerche al mese.
+
+    Il secondo argomento era la cannibalizzazione, "una terza provinciale a
+    contendersi le query delle altre due". Regge meno di quanto sembrava,
+    perche' le altre due sono ENTRAMBE temporali:
+
+        /eventi/oggi-provincia-<x>       provincia x oggi
+        /eventi/weekend-provincia-<x>    provincia x weekend
+        /sagre-provincia-<x>             provincia x sagre
+        questa                           provincia, senza finestra, per eta'
+
+    Il taglio e' sullo stesso asse che spec_incrocio aveva gia' individuato
+    (provincia x finestra) e la cella senza finestra era l'unica vuota. E' anche
+    la meno stagionale delle quattro: conta TUTTA l'agenda e non le sole sagre,
+    quindi non scende sotto MIN_LANDING nei mesi in cui le sagre finiscono.
+
+    Il pezzo che ha fatto cambiare la risposta, e che il 29/08 non si sapeva:
+    su quella query il secondo risultato di Google e' eventiperbambinicuneo.it,
+    il sito del curatore di Cuneo, che il 21/08 si e' deciso di chiudere
+    inglobando tutto in DAOP. Cioe' stavamo per spegnere l'unica superficie che
+    la vince, senza avere una pagina su cui portarla: il 301 di quel dominio ha
+    bisogno di un atterraggio che risponda alla stessa domanda, e mandarlo su
+    /sagre-provincia-cuneo.html vuol dire mandarlo su un titolo di sagre.
+    L'insieme resta chiuso e non cresce coi dati - una per provincia
+    pubblicata, come le sagre - che e' la garanzia di sempre contro lo
+    scaled content.
+
+    COSA NON SI TOCCA. Il title e l'H1 di /sagre-provincia-<x>.html restano
+    quelli delle sagre: quella pagina fa 405 clic e 4.503 impressioni sulle
+    query di sagre (export 26/08, Cuneo) ed e' la quinta del sito. Allargarne
+    il titolo per coprire anche questa domanda e' la stessa aritmetica dell'H1
+    di eventi.html, che non si tocca per la stagione.
+
+    L'ASSE E' L'ETA', NON LA CATEGORIA, e non e' una preferenza estetica.
+    La categoria e' gia' la tendina dei filtri ed e' scritta in ogni riga
+    (.com-cat): come principio di raggruppamento sarebbe la seconda volta che
+    si dice la stessa cosa, e ordinando per categoria con le sagre davanti
+    questa pagina uscirebbe uguale alla sorella. L'eta' invece e' il dato che
+    nessun altro sito ha, ed e' letteralmente la parola della query. E divide
+    per davvero: e_per_bambini() e' vero su 48 righe di 88 a Cuneo, 21 di 89 ad
+    Alessandria, 9 di 33 ad Asti - non e' il 93% di 'Adatto Famiglie', che per
+    quel motivo non si usa e qui non si usa.
+
+    I due blocchi sono COMPLEMENTARI, non uno dentro l'altro: nessuna scheda
+    compare sopra e sotto insieme. E' l'invariante che tests/landing.js ha
+    imparato a chiedere sulla sezione "Non solo sagre" dopo aver preteso, per
+    sbaglio, che ogni href comparisse una volta sola in tutta la pagina.
+
+    E il secondo blocco NON si intitola "adatti alle famiglie": sarebbe la riga
+    che dice implicitamente che gli altri non lo sono, cioe' smentire il
+    criterio con cui l'agenda e' fatta. Dice quello che e' vero - che li' la
+    fascia d'eta' non e' dichiarata - e da' la regola per leggerli, come fa
+    /halloween.html con la paura."""
+    nome_prov = PROVINCE_NOMI.get(prov, prov)
+    href = href_eventi_prov(prov)
+    slug = href.strip('/')[:-5]
+    url = f"{SITE_URL}{href}"
+    tutti = sorted((e for e in events if (e.get('prov') or '').upper() == prov),
+                   key=lambda e: (e['d_start'], (e.get('citta') or ''),
+                                  (e.get('nome') or '')))
+    bimbi = [e for e in tutti if e_per_bambini(e)]
+    resto = [e for e in tutti if not e_per_bambini(e)]
+    paesi = len({_key(e.get('citta')) for e in tutti if (e.get('citta') or '').strip()})
+
+    titolo = _landing_titolo([
+        f"Eventi e attività per bambini in provincia di {nome_prov} | DAOP",
+        f"Eventi e attività per bambini in provincia di {nome_prov}",
+        f"Eventi per bambini in provincia di {nome_prov}"])
+    h1 = f"Eventi e attività per bambini in provincia di {nome_prov}"
+    crumb = f"Eventi per bambini {nome_prov}"
+    sagre_href = f"/sagre-provincia-{slugify(nome_prov)}.html"
+
+    if tutti:
+        sotto = (f"{len(tutti)} eventi e attività in programma in {paesi} "
+                 f"comun{'i' if paesi != 1 else 'e'}")
+        # Le categorie si nominano solo se ci sono davvero: e' la regola
+        # dell'occhiello dei corsi, che aveva smesso di promettere i costi.
+        presenti = [LABELS_PROSA[s_] for s_ in ORDER
+                    if s_ in LABELS_PROSA and any(bucket(e)[0] == s_ for e in tutti)]
+        presenti.sort(key=lambda n: ' e ' not in n)
+        quali = elenco_it(presenti)
+        apertura = (f"<p>Tutto quello che c'è in programma per bambini e famiglie in "
+                    f"provincia di {esc(nome_prov)}: <strong>{len(tutti)} appuntamenti"
+                    f"</strong> in {paesi} comuni"
+                    + (f", fra sagre, {esc(quali)}" if presenti else "")
+                    + f". Non è il programma di un weekend: è l'agenda intera, in "
+                    f"ordine di data, e si rifà ogni notte — quello che è passato esce "
+                    f"da solo.</p>")
+    else:
+        sotto = f"Nessun evento in programma in provincia di {nome_prov} in questo momento"
+        apertura = (f"<p class=\"lan-vuoto\">In provincia di {esc(nome_prov)} in questo "
+                    f"momento non abbiamo niente in agenda. Appena arrivano le date lo "
+                    f"trovi qui: la pagina si rifà ogni notte.</p>")
+    descr = trunc(f"Eventi e attività per bambini in provincia di {nome_prov}: "
+                  + (f"{len(tutti)} appuntamenti in {paesi} comuni, con l'età, la data e "
+                     "il comune. Verificati uno per uno da DAOP."
+                     if tutti else
+                     "l'agenda si aggiorna ogni notte, appena arrivano le date."), 152)
+
+    corpo = apertura
+    corpo += _landing_filtri(tutti, con_prov=False)
+    if bimbi:
+        corpo += _landing_sezione(
+            "Pensati per i bambini",
+            f"{len(bimbi)} appuntamenti con la fascia d'età dichiarata, oppure con "
+            f"laboratori, giochi o burattini nel programma",
+            bimbi, oggi, eta=True)
+    if resto:
+        corpo += _landing_sezione(
+            f"Gli altri appuntamenti in provincia di {nome_prov}",
+            f"{len(resto)} eventi senza una fascia d'età dichiarata: si apre la scheda "
+            f"e si legge il programma, che è dove l'età si capisce",
+            resto, oggi, eta=True)
+
+    comuni = sorted((d for d in (hub or {}).values() if d['prov'] == prov),
+                    key=lambda d: -len(d['futuri']))
+    if comuni:
+        link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
+                       for d in comuni)
+        corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)}</h2>"
+                  f'<div class="com-link">{link}</div>')
+
+    # Le tre sorelle. E' lo stesso link che ogni pagina d'incrocio ha verso le
+    # sagre, e serve a passarsi autorita' invece di farsi concorrenza: ognuna
+    # nomina la SUA domanda, non "vedi anche".
+    corpo += (f"<h2>Se la domanda è un'altra</h2>"
+              f"<p>Questa pagina è l'agenda completa della provincia. Se cerchi "
+              f'<a href="{sagre_href}">solo le sagre e le feste di paese</a> le trovi '
+              f'in ordine di mese, con anche quelle che tornano ogni anno; se invece '
+              f'la domanda è "e adesso?", <a href="{href_incrocio(prov, "oggi")}">cosa '
+              f'fare oggi</a> oppure <a href="{href_incrocio(prov, "weekend")}">gli '
+              f'eventi del weekend</a> in provincia di {esc(nome_prov)}.</p>')
+
+    fonte = fonte_provincia(prov)
+    if fonte:
+        chi = ("la nostra pagina per questa provincia" if fonte['nostra'] else
+               "la pagina che segue questa provincia, con cui collaboriamo")
+        corpo += (f'<p class="com-fonte">Gli eventi della provincia di {esc(nome_prov)} '
+                  f'arrivano da <a href="{fonte["url"]}" target="_blank" rel="noopener">'
+                  f'@{esc(fonte["ig"])}</a>, {chi}. '
+                  f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    corpo += _altre_landing(href, altre)
+
+    # Su TUTTA l'agenda della provincia, non su un sottoinsieme: e' la ragione
+    # per cui questa e' la meno stagionale delle quattro. Sotto soglia la
+    # pagina resta online ed esce dall'indice, come le sagre e le stagionali.
+    robots = "index, follow" if len(tutti) >= MIN_LANDING else "noindex, follow"
+    return {
+        'path': f"{slug}.html", 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': h1, 'sotto': sotto, 'crumb': crumb,
+        'corpo': corpo, 'robots': robots,
+        'prov': prov,
+        'jsonld': _grafo_landing(url, titolo, descr, tutti,
+                                 f"Eventi per bambini in provincia di {nome_prov}",
+                                 crumb, oggi),
+        'eventi': len(tutti),
+        'nota': f"{len(bimbi)} pensati per i bambini",
     }
 
 
@@ -7758,6 +7986,10 @@ def scrivi_landing(events, hub, storico, oggi):
     # spec_halloween — "su una stagionale l'asset e' l'anzianita' dell'URL".
     specs += [st.spec(st, events, oggi, altre) for st in STAGIONI]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
+    # La provincia senza finestra temporale: la quarta cella dell'asse
+    # provincia x finestra, che era l'unica vuota. Vedi spec_eventi_prov.
+    specs += [spec_eventi_prov(c, events, hub, oggi, altre)
+              for c in PROVINCE_PUBBLICATE]
     # Le sei d'incrocio: provincia x finestra. Vedi il commento su INCROCI.
     specs += [spec_incrocio(c, modo, events, hub, oggi, altre)
               for modo, _t, _p, _c in INCROCI for c in PROVINCE_PUBBLICATE]
@@ -7786,6 +8018,7 @@ def scrivi_landing(events, hub, storico, oggi):
           + (f", {len(fuori)} in noindex sotto soglia: {', '.join(fuori)}" if fuori else ""))
     for spec in specs:
         extra = (f" + {spec['altri']} non-sagre" if spec.get('altri') else "")
+        extra += (f" ({spec['nota']})" if spec.get('nota') else "")
         print(f"[genera_eventi]   {spec['path']}: {spec['eventi']} eventi{extra}")
     return {p: m for p, m in sorted(reg.items())
             if p in {s['path'] for s in specs} and p not in fuori}

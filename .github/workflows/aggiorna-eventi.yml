@@ -213,6 +213,7 @@ jobs:
           # perderlo in silenzio.
           FILE="eventi.html index.html metodo.html zone.html \
                 sagre-provincia-*.html \
+                eventi-provincia-*.html \
                 befana.html capodanno.html carnevale.html ferragosto.html \
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \

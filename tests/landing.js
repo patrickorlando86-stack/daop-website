@@ -55,6 +55,13 @@ async function provaNonSoloSagre(r, page, prov) {
     `${prov}: nessuna scheda compare sopra e sotto insieme (${righe} righe)`
     + (attraverso.length ? ': ' + attraverso.slice(0, 3).join(', ') : ''));
 
+  // 2-bis) Il ponte verso la sorella senza finestra temporale. Non e'
+  //    cortesia: /eventi-provincia-<x>.html nasce con zero link entranti, e
+  //    "alla nav non ci va nessuno" (lezione del 14/08 su luoghi.html). Se
+  //    questo link sparisce, la pagina nuova torna orfana.
+  r.ok(await page.locator('.ev-wrap a[href^="/eventi-provincia-"]').count() > 0,
+    `${prov}: manda alla sorella senza finestra temporale`);
+
   // 3) LA REGRESSIONE VERA. La tendina delle categorie si costruisce
   //    dall'elenco che _landing_filtri riceve: passandogli le sole sagre
   //    resterebbe con una voce sola, e una tendina da una voce non si stampa
@@ -104,6 +111,182 @@ async function provaNonSoloSagre(r, page, prov) {
       })), `${prov}: nessun titolo resta orfano`);
     await page.selectOption('#lan-tipo', 'all');
     await page.waitForTimeout(200);
+  }
+}
+
+// Le /eventi-provincia-*.html: la provincia SENZA finestra temporale, divisa
+// per eta'. Vedi spec_eventi_prov() in genera_eventi.py per il perche' esiste
+// dopo che spec_sagre diceva di non farla.
+//
+// Nessuna di queste prove asserisce un CONTEGGIO, ed e' deliberato: "48
+// pensati per i bambini" e' rosso la prima notte che una locandina arriva
+// senza la cella dell'eta' compilata, cioe' quando il sito fa la cosa giusta.
+// E' l'inciampo gia' pagato sei volte in questo repo - la copertura delle
+// coordinate, il conteggio delle quattro porte, il robots delle pagine
+// realta'. Qui si controllano rapporti fra insiemi, che non hanno una taglia
+// giusta.
+async function provaEventiProv(r, page, prov, slug) {
+  const righe = await page.locator('.ev-wrap li[data-category]').count();
+
+  // 1) IDENTITA'. La query e' "eventi e attivita' per bambini in provincia di
+  //    X" e sta per intero nel title e nell'H1 - su Alessandria il "| DAOP"
+  //    cade da solo perche' _landing_titolo() taglia a 62 caratteri, e va
+  //    bene: quello che non puo' cadere e' la frase.
+  const atteso = new RegExp(`^Eventi e attività per bambini in provincia di ${prov}`);
+  r.ok(atteso.test(await page.$eval('h1', (h) => h.textContent.trim())),
+    `${prov}: l'H1 e' la query per intero`);
+  r.ok(atteso.test(await page.title()), `${prov}: e anche il <title>`);
+  r.ok(new RegExp(`/eventi-provincia-${slug}\\.html$`)
+    .test(await page.$eval('link[rel=canonical]', (l) => l.getAttribute('href'))),
+    `${prov}: canonical proprio`);
+  // La guardia contro la fusione con la sorella: il giorno che qualcuno
+  // decide di "unificare le due pagine provinciali", una delle due perde la
+  // sua query. Questa non e' una pagina di sagre e non deve dirlo.
+  r.ok(!/sagre/i.test(await page.title()), `${prov}: "sagre" non entra nel title`);
+
+  // 2) E' L'AGENDA INTERA, non un sottoinsieme. Se un giorno qualcuno la
+  //    filtrasse (per categoria, per eta', per "solo i prossimi 30 giorni")
+  //    diventerebbe il doppione di una delle altre tre provinciali.
+  const cats = await page.evaluate(() => [...new Set([...document
+    .querySelectorAll('.ev-wrap li[data-category]')].map((l) => l.dataset.category))]);
+  r.ok(cats.length > 1,
+    `${prov}: in pagina ci sono ${cats.length} categorie, non una (${cats.join(', ')})`);
+  r.ok(await page.evaluate(() => [...document.querySelectorAll('.ev-wrap li[data-province]')]
+    .every((l, _i, a) => l.dataset.province === a[0].dataset.province)),
+    `${prov}: tutte le righe sono della stessa provincia`);
+
+  // 3) I DUE BLOCCHI PARTIZIONANO LE RIGHE. Non "ogni href compare una volta
+  //    sola": una manifestazione di piu' giorni ha piu' righe che puntano
+  //    alla stessa scheda, ed e' giusto - lo fa il calendario delle sagre da
+  //    sempre, e una prova che lo vietasse sarebbe nata rossa (e' successo,
+  //    il 29/08, sulla sezione "Non solo sagre"). Quello che deve valere e'
+  //    che ogni RIGA stia in un blocco e uno solo: se i due elenchi
+  //    smettessero di essere complementari la pagina direbbe due volte la
+  //    stessa cosa sotto due titoli che si contraddicono.
+  const blocchi = await page.evaluate(() =>
+    [...document.querySelectorAll('.ev-wrap .com-grp')]
+      .filter((g) => g.querySelector('li[data-category]'))
+      .map((g) => ({
+        titolo: (g.querySelector('h3') || {}).textContent || '',
+        righe: g.querySelectorAll('li[data-category]').length,
+      })));
+  const somma = blocchi.reduce((a, b) => a + b.righe, 0);
+  r.ok(somma === righe,
+    `${prov}: ogni riga sta in un blocco solo (${somma} di ${righe} in ${blocchi.length} blocchi)`);
+
+  // 4) IL BLOCCO DEI BAMBINI VIENE PRIMO. E' la risposta alla query: se
+  //    finisse sotto, la pagina si aprirebbe su "gli altri appuntamenti",
+  //    cioe' sulla meta' che quella domanda non l'ha fatta. Stessa aritmetica
+  //    per cui su sagre-provincia-* le sagre stanno prima del resto.
+  if (blocchi.length > 1) {
+    r.ok(/pensati per i bambini/i.test(blocchi[0].titolo),
+      `${prov}: il primo blocco e' "${blocchi[0].titolo.trim()}"`);
+  } else {
+    // Una provincia dove tutto ha (o niente ha) la fascia d'eta' ha un blocco
+    // solo: non e' un guasto.
+    r.ok(true, `${prov}: un blocco solo, niente ordine da controllare`);
+  }
+
+  // 5) L'ETA' SI VEDE IN RIGA. E' il difetto che la pagina ha avuto nascendo:
+  //    la sezione si intitola "Pensati per i bambini" e promette la fascia
+  //    dichiarata, ma _landing_righe() stampava quando, categoria, nome e
+  //    comune - non l'eta'. La pagina che vive di quel dato era l'unica a non
+  //    mostrarlo, ed e' la forma dell'occhiello dei corsi che prometteva i
+  //    costi che il foglio non ha.
+  const pillole = await page.locator('.ev-wrap .com-eta').count();
+  if (/pensati per i bambini/i.test((blocchi[0] || {}).titolo || '')) {
+    r.ok(pillole > 0, `${prov}: la fascia d'età si legge in riga (${pillole} pillole)`);
+    r.ok(await page.evaluate(() => [...document.querySelectorAll('.ev-wrap .com-eta')]
+      .every((s) => s.textContent.trim().length > 0)),
+      `${prov}: nessuna pillola d'età vuota`);
+  }
+
+  // 6) E NON ROMPE LA RIGA. Questo non si vede nell'HTML: e' la classe di
+  //    guasto della barra delle azioni che veniva alta 915px e della gola di
+  //    62px dei programmi senza data - markup giusto, reso sbagliato. Una
+  //    pillola in piu' dentro un contenitore flex puo' schiacciare il titolo
+  //    in una colonna stretta, e allora la riga si legge male proprio dove
+  //    l'evento e' per i bambini.
+  if (pillole > 0) {
+    const stretti = await page.evaluate(() =>
+      [...document.querySelectorAll('.ev-wrap .com-eta')].map((s) => {
+        const li = s.closest('li');
+        const a = li && li.querySelector('a.com-go');
+        if (!a) return 1;
+        return a.getBoundingClientRect().width / li.getBoundingClientRect().width;
+      }).filter((q) => q < 0.35).length);
+    r.ok(stretti === 0,
+      `${prov}: la pillola non schiaccia il titolo (${stretti} righe sotto il 35%)`);
+    r.ok(await page.evaluate(() =>
+      document.documentElement.scrollWidth <= window.innerWidth + 1),
+      `${prov}: la pagina non scorre in orizzontale`);
+
+    // E' UN CHIP, NON UNA FASCIA. La prima versione di questa prova non lo
+    // chiedeva, ed e' passata verde mentre la pillola era larga 251px su 375
+    // e si prendeva una riga tutta sua: .com-b e' un flex in COLONNA, quindi
+    // un figlio in piu' occupa l'intera larghezza. .com-eta era nata per
+    // .com-kids delle pagine comune, che e' un flex in riga. Il difetto si
+    // vede solo misurando la pillola - non il titolo, non lo scroll.
+    const fasce = await page.evaluate(() =>
+      [...document.querySelectorAll('.ev-wrap .com-eta')].map((s) => {
+        const li = s.closest('li');
+        const b = s.getBoundingClientRect();
+        return {
+          quota: b.width / li.getBoundingClientRect().width,
+          righe: b.height / parseFloat(getComputedStyle(s).lineHeight || 20),
+          t: s.textContent.trim(),
+        };
+      }).filter((x) => x.quota > 0.7 || x.righe > 1.6));
+    r.ok(fasce.length === 0,
+      `${prov}: la fascia d'età sta in un chip di una riga`
+      + (fasce.length ? `: ${fasce.length} larghe/alte, es. "${fasce[0].t}"` : ''));
+  }
+
+  // 7) LA TENDINA CONOSCE TUTTE LE CATEGORIE IN PAGINA. La stessa regressione
+  //    delle sagre-provincia-*: _landing_filtri costruisce le opzioni
+  //    dall'elenco che riceve, e passandogli un sottoinsieme (per esempio i
+  //    soli 'bimbi') il filtro nasconderebbe righe senza avere la voce per
+  //    farle tornare. Non si legge nell'HTML.
+  if (righe >= 12) {
+    const mancanti = await page.evaluate(() => {
+      const sel = document.getElementById('lan-tipo');
+      if (!sel) return ['(la tendina delle categorie non viene stampata)'];
+      const opz = new Set([...sel.options].map((o) => o.value));
+      return [...new Set([...document.querySelectorAll('.ev-wrap li[data-category]')]
+        .map((l) => l.dataset.category))].filter((c) => !opz.has(c));
+    });
+    r.ok(mancanti.length === 0,
+      `${prov}: la tendina conosce tutte le categorie${mancanti.length ? ': manca ' + mancanti.join(', ') : ''}`);
+    r.ok(await page.locator('#lan-dove').count() === 0,
+      `${prov}: niente tendina provincia, la pagina E' una provincia`);
+  }
+
+  // 8) IL FILTRO ATTRAVERSA I DUE BLOCCHI. Le categorie stanno in tutti e due
+  //    (l'asse della pagina e' l'eta', non la categoria): filtrando su una
+  //    categoria devono restare righe e i blocchi svuotati devono sparire col
+  //    loro titolo, che qui sta DENTRO la sezione.
+  if (await page.locator('#lan-tipo').count()) {
+    const c = await page.$eval('#lan-tipo', (s) => s.options[1].value);
+    await page.selectOption('#lan-tipo', c);
+    await page.waitForTimeout(250);
+    const n = await page.locator('.ev-wrap li[data-category]:not([hidden])').count();
+    r.ok(n > 0 && n < righe, `${prov}: filtro "${c}" ${n}/${righe}`);
+    r.ok(await page.evaluate(() => [...document.querySelectorAll('.ev-wrap .com-grp')]
+      .filter((g) => g.querySelector('li[data-category]'))
+      .every((g) => g.hidden === !g.querySelector('li[data-category]:not([hidden])'))),
+      `${prov}: i blocchi rimasti vuoti spariscono`);
+    await page.selectOption('#lan-tipo', 'all');
+    await page.waitForTimeout(200);
+  }
+
+  // 9) LE TRE SORELLE. Il link non e' cortesia: e' quello che tiene le quattro
+  //    pagine provinciali a passarsi autorita' invece di contendersi la
+  //    stessa query. Se sparisce, quella che perde e' la piu' nuova.
+  for (const [href, chi] of [[`/sagre-provincia-${slug}.html`, 'sagre'],
+                             [`/eventi/oggi-provincia-${slug}.html`, 'oggi'],
+                             [`/eventi/weekend-provincia-${slug}.html`, 'weekend']]) {
+    r.ok(await page.locator(`.ev-wrap a[href="${href}"]`).count() > 0,
+      `${prov}: il corpo manda alla sorella ${chi}`);
   }
 }
 
@@ -238,6 +421,20 @@ module.exports = async function landing(browser) {
   ({ ctx, page } = await apri(browser, 'sagre-provincia-cuneo.html', 412));
   await provaNonSoloSagre(r, page, 'Cuneo');
   await ctx.close();
+
+  // ── la provincia senza finestra temporale ─────────────────────────────
+  // Si provano due province su tre apposta: Cuneo perche' e' quella che ha
+  // fatto nascere la pagina (48 righe su 88 con la fascia d'eta' dichiarata,
+  // il caso in cui il blocco dei bambini pesa piu' dell'altro) e Alessandria
+  // perche' e' il caso opposto (21 su 89) e perche' il suo nome fa cadere il
+  // "| DAOP" dal title, che e' il ramo di _landing_titolo() che altrimenti
+  // nessuno percorre.
+  for (const [prov, slug] of [['Cuneo', 'cuneo'], ['Alessandria', 'alessandria']]) {
+    r.titolo(`eventi-provincia-${slug}.html — telefono 412px`);
+    ({ ctx, page } = await apri(browser, `eventi-provincia-${slug}.html`, 412));
+    await provaEventiProv(r, page, prov, slug);
+    await ctx.close();
+  }
 
   // ── ferragosto ────────────────────────────────────────────────────────
   // Pagina stagionale: le prove qui sotto difendono le due cose che si
