@@ -5838,6 +5838,15 @@ def _landing_righe(ev, oggi, eta=False, gratis=False):
     fianco del titolo. Con le miniature quella variante non va usata - la
     colonna della data si somma al francobollo e il nome parte a meta' riga."""
     out, nude = "", True
+    # La sigla della provincia si stampa solo se in elenco ce n'e' piu' di
+    # una. Su una pagina di UNA provincia "(CN)" e' scritto nell'H1 e ripeterlo
+    # su 88 righe non aggiunge niente: a 360px - l'Android piu' diffuso -
+    # mandava a capo 12 righe su 48 (misurato, non dedotto). Si ricava dai dati
+    # e non da un parametro, cosi' vale da sola sulle pagine di una provincia e
+    # resta dove serve: /eventi/oggi.html e /eventi/weekend.html mescolano le
+    # tre province, e li' la sigla e' l'unica cosa che dice dove sei.
+    piu_province = len({(x.get('prov') or '').upper() for x in ev
+                        if (x.get('prov') or '').strip()}) > 1
     for e in ev:
         quando = _quando_breve(e, oggi)
         ora = (e.get('ora') or '').strip()
@@ -5846,7 +5855,8 @@ def _landing_righe(ev, oggi, eta=False, gratis=False):
         stile, thumb = _com_cat(e)
         nude = nude and not thumb
         citta = (e.get('citta') or '').strip()
-        dove = f"{citta} ({e['prov']})" if citta else (e.get('prov') or '')
+        dove = ((f"{citta} ({e['prov']})" if piu_province else citta) if citta
+                else (e.get('prov') or ''))
         # data-province/data-category: sono quello su cui lavora la barra
         # filtri. Stessi valori e stesso vocabolario dell'agenda, cosi' chi
         # legge il JS di una pagina ha gia' letto quello dell'altra.
@@ -7968,9 +7978,12 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
                     f"provincia di {esc(nome_prov)}: <strong>{len(tutti)} appuntamenti"
                     f"</strong> in {paesi} comuni"
                     + (f", fra sagre, {esc(quali)}" if presenti else "")
+                    # La coda "e si rifa' ogni notte" e' detta di nuovo in fondo
+                    # alla pagina, quindi qui e' l'unica frase che non aggiunge
+                    # niente: a 360px valeva due righe. Quello che resta e'
+                    # l'identita' contro le tre sorelle temporali.
                     + f". Non è il programma di un weekend: è l'agenda intera, in "
-                    f"ordine di data, e si rifà ogni notte — quello che è passato esce "
-                    f"da solo.</p>")
+                    f"ordine di data.</p>")
     else:
         sotto = f"Nessun evento in programma in provincia di {nome_prov} in questo momento"
         apertura = (f"<p class=\"lan-vuoto\">In provincia di {esc(nome_prov)} in questo "
@@ -7988,14 +8001,14 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
     if bimbi:
         corpo += _landing_sezione(
             "Pensati per i bambini",
-            f"{len(bimbi)} appuntamenti con la fascia d'età dichiarata, oppure con "
-            f"laboratori, giochi o burattini nel programma",
+            f"{len(bimbi)} appuntamenti con la fascia d'età dichiarata, o con "
+            f"laboratori e giochi nel programma",
             bimbi, oggi, eta=True, gratis=True)
     if resto:
         corpo += _landing_sezione(
             f"Gli altri appuntamenti in provincia di {nome_prov}",
-            f"{len(resto)} eventi senza una fascia d'età dichiarata: si apre la scheda "
-            f"e si legge il programma, che è dove l'età si capisce",
+            f"{len(resto)} eventi senza una fascia d'età dichiarata: l'età si "
+            f"capisce dal programma, dentro la scheda",
             resto, oggi, eta=True, gratis=True)
 
     comuni = sorted((d for d in (hub or {}).values() if d['prov'] == prov),

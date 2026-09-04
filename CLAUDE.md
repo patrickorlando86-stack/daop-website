@@ -3614,6 +3614,85 @@ nasconde *tutto*, e la prova di coerenza passava — **zero righe sono coerenti
 con qualunque finestra**. Per questo il dato si chiede per primo, come già si fa
 con la copertura delle coordinate.
 
+##### Mobile first: misurato a 320-412px, e la suite girava tutta a 412
+
+Patrick, 04/09/2026: «ovviamente mobile first mi raccomando». Aveva ragione a
+raccomandarlo — la barra era stata misurata a 375 e 412px, e **tutta la suite
+gira a 412, che è lo schermo più LARGO fra quelli comuni.** I due difetti veri
+di questa pagina (la pillola larga 251px, la riga del comune che va a capo) si
+vedono peggio sotto.
+
+Misurato su cinque larghezze — 320 (iPhone SE 1ª gen / Fold chiuso), 360
+(l'Android più diffuso), 375, 390, 412:
+
+| | esito |
+|---|---|
+| scorrimento orizzontale | **mai**, a nessuna larghezza |
+| barra appiccicosa | **111px fissi**, due righe, anche a 320 |
+| chip larghi più del 70% della riga | 0 |
+| titolo dell'evento schiacciato sotto il 35% | 0 |
+| riga del comune a capo (a 360px) | **12 su 48 → 3** dopo la correzione |
+
+**La correzione era editoriale, non di CSS: `(CN)` su 88 righe di una pagina il
+cui H1 dice «in provincia di Cuneo».** È la stessa ripetizione che le pagine
+comune togliono quando un gruppo è tutto della stessa categoria, e che le
+pagine realtà togliono dal nome degli eventi. Vale ~35px per riga, e a 360px
+mandava a capo un quarto delle righe.
+
+**Non è un parametro, è dedotto**: se tutte le righe che `_landing_righe()`
+riceve sono della stessa provincia, la sigla non si stampa. Così vale da sola
+sulle pagine di **una** provincia — le tre nuove, le tre sagre, le sei
+d'incrocio — e resta dove serve, cioè su `/eventi/oggi.html`,
+`/eventi/weekend.html` e le stagionali, dove l'elenco mescola le tre province e
+la sigla è l'unica cosa che dice dove sei. Un parametro avrebbe avuto il
+difetto opposto: un secondo posto dove ricordare una cosa che i dati sanno già.
+**Il comune non si tocca mai** — è il dato per cui la riga esiste — e title,
+H1, description e canonical non cambiano di una virgola, quindi non c'è niente
+di SEO in ballo.
+
+**Lo spazio verticale: 930 → 904px** prima del primo evento a 360px. La pila
+misurata elemento per elemento (il metodo è quello già usato per l'agenda:
+guardando i contenitori i paragrafi di prosa sparirebbero dal conto e
+sembrerebbe che ci sia aria da recuperare quando invece è testo):
+
+| | px |
+|---|---|
+| nav | 69 |
+| hero (crumb + H1 su 3 righe + occhiello) | 373 |
+| paragrafo di apertura | 206 → **180** |
+| barra filtri | 111 |
+| «vicino a me» | 40 |
+| conteggio | 13 |
+| intestazione del blocco | 95 |
+
+**L'unica cosa tagliata è la coda «e si rifà ogni notte — quello che è passato
+esce da solo»**, che la pagina dice una seconda volta in fondo («Pagina
+rigenerata ogni notte. Ultimo aggiornamento: …»). Quello che **non** si taglia:
+l'elenco delle categorie, che è copertura di parole chiave e la descrizione per
+chi arriva da Google senza sapere cos'è DAOP (la ragione identica per cui non
+si tocca il paragrafo lungo dell'hero dell'agenda), e l'H1, che è la query.
+
+**Cosa resta e non si è toccato, apposta:**
+
+- **A 320px 19 righe su 48 vanno ancora a capo.** Il nome di un comune lungo
+  più due chip non ci sta, e va a capo *bene* — nessun troncamento, nessun
+  overflow. 320px è l'iPhone SE del 2016: si accetta.
+- **I bersagli sono 40-42px, non 44.** `.ev-search` 42, le tendine 40, la
+  casella 40 (`has-gratis` la stringe). Passa WCAG 2.5.8 AA (24px) e manca
+  l'AAA/Apple HIG di 4px — ma quelle misure **arrivano dal `<style>` di
+  `eventi.html`** copiato da `_guscio()`, cioè sono le stesse dell'agenda su
+  ~470 pagine. Alzarle qui vorrebbe dire due barre diverse che si somigliano; è
+  una decisione di sistema, non di questa pagina.
+
+**Nelle prove ora c'è un passaggio a 360px** che guarda le tre cose che la
+larghezza può rompere — barra che cresce, scorrimento orizzontale, chip che
+diventano fasce — invece di rifare tutta la pagina. E la sigla si controlla nei
+**due versi**, come l'invariante fra robots e sitemap: che non si ripeta dove la
+provincia è una sola, e che **ci sia** su `weekend.html`, che ne mescola tre. Il
+verso dimenticato sarebbe il secondo, e costerebbe più caro. Verificate rosse
+rimettendo i difetti (sigla rimessa su ogni riga: «88 righe la portano»; una
+tendina in più a 360px: «la barra resta 205px»).
+
 #### Il ponte: 497 pagine, e non è la nav
 
 Una pagina nuova nasce con zero link entranti, ed è la lezione del 14/08 su

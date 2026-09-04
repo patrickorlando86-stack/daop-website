@@ -401,7 +401,20 @@ async function provaEventiProv(r, page, prov, slug) {
     `${prov}: la barra filtri resta compatta `
     + `(${await page.locator('#lan-toolbar').evaluate((b) => b.offsetHeight)}px)`);
 
-  // 12) LE TRE SORELLE. Il link non e' cortesia: e' quello che tiene le quattro
+  // 12) LA SIGLA DELLA PROVINCIA NON SI RIPETE. Su una pagina il cui H1 dice
+  //     "in provincia di Cuneo", "(CN)" su 88 righe non aggiunge niente: a
+  //     360px mandava a capo 12 righe su 48 (misurato). Si ricava dai dati e
+  //     non da un parametro, quindi vale da sola su tutte le pagine di una
+  //     provincia - ed e' il verso che va provato qui. L'altro verso (la sigla
+  //     C'E' dove le province sono piu' di una) si prova su weekend.html.
+  const conSigla = await page.evaluate(() =>
+    [...document.querySelectorAll('.ev-wrap .com-luogo')]
+      .filter((l) => /\([A-Z]{2}\)/.test(l.textContent)).length);
+  r.ok(conSigla === 0,
+    `${prov}: la sigla della provincia non si ripete in riga`
+    + (conSigla ? `: ${conSigla} righe la portano` : ''));
+
+  // 13) LE TRE SORELLE. Il link non e' cortesia: e' quello che tiene le quattro
   //    pagine provinciali a passarsi autorita' invece di contendersi la
   //    stessa query. Se sparisce, quella che perde e' la piu' nuova.
   for (const [href, chi] of [[`/sagre-provincia-${slug}.html`, 'sagre'],
@@ -507,6 +520,18 @@ module.exports = async function landing(browser) {
   } else {
     r.ok(true, 'nessuna tendina provincia da provare su questa pagina');
   }
+  // L'altro verso della sigla: qui l'elenco mescola le tre province, e "(AL)"
+  // accanto al comune e' l'unica cosa che dice dove sei. Se un domani la
+  // deduzione in _landing_righe si rompesse al contrario, questa pagina
+  // perderebbe il dato senza che niente altro se ne accorga.
+  const sigle = await page.evaluate(() =>
+    [...document.querySelectorAll('.ev-wrap .com-luogo')]
+      .filter((l) => /\([A-Z]{2}\)/.test(l.textContent)).length);
+  const provDiverse = await page.evaluate(() =>
+    new Set([...document.querySelectorAll('.ev-wrap li[data-province]')]
+      .map((l) => l.dataset.province)).size);
+  r.ok(provDiverse < 2 || sigle > 0,
+    `weekend.html mescola ${provDiverse} province e la sigla c'è (${sigle} righe)`);
   await ctx.close();
 
   // ── sagre per provincia ───────────────────────────────────────────────
@@ -557,6 +582,33 @@ module.exports = async function landing(browser) {
     await provaEventiProv(r, page, prov, slug);
     await ctx.close();
   }
+
+  // ── mobile first: 360px, l'Android piu' diffuso ───────────────────────
+  // Tutto il resto della suite gira a 412px, che e' lo schermo piu' LARGO fra
+  // quelli comuni: i due difetti veri di questa pagina (la pillola larga 251px
+  // su 375, la riga del comune a capo) si vedono peggio sotto. Qui si guardano
+  // solo le tre cose che la larghezza puo' rompere, non tutta la pagina: la
+  // barra appiccicosa che cresce, lo scorrimento orizzontale e i chip.
+  r.titolo('eventi-provincia-cuneo.html — telefono stretto 360px');
+  ({ ctx, page } = await apri(browser, 'eventi-provincia-cuneo.html', 360));
+  r.ok(await page.evaluate(() =>
+    document.documentElement.scrollWidth <= window.innerWidth + 1),
+    'a 360px la pagina non scorre in orizzontale');
+  const barra360 = await page.locator('#lan-toolbar').evaluate((b) => b.offsetHeight);
+  r.ok(barra360 <= 120,
+    `a 360px la barra appiccicosa resta ${barra360}px (due righe, non tre)`);
+  r.ok(await page.evaluate(() =>
+    [...document.querySelectorAll('.ev-wrap .com-eta, .ev-wrap .ev-pill.is-free')]
+      .every((s) => {
+        const li = s.closest('li');
+        return s.getBoundingClientRect().width / li.getBoundingClientRect().width <= 0.7;
+      })), 'a 360px i chip restano chip');
+  r.ok(await page.evaluate(() =>
+    [...document.querySelectorAll('.ev-wrap li[data-category]')].every((l) => {
+      const a = l.querySelector('a.com-go');
+      return !a || a.getBoundingClientRect().width / l.getBoundingClientRect().width >= 0.35;
+    })), 'a 360px il titolo dell\'evento non viene schiacciato');
+  await ctx.close();
 
   // ── ferragosto ────────────────────────────────────────────────────────
   // Pagina stagionale: le prove qui sotto difendono le due cose che si
