@@ -4925,6 +4925,42 @@ rimettendo il difetto.
 accorto:** le prove girano `if: always()` **dopo** il commit, quindi una run
 rossa non ferma il deploy — è una scelta, ma vuol dire che il rosso va guardato.
 
+## Il Piatto Sano ha un dominio suo: la pagina DAOP diventa quella locale
+
+Fatto il 04/09/2026. Il progetto è vivo, ma da quando esiste **sane-italia.it**
+la pagina su daop.it non è più la casa del programma — e stava nella posizione
+peggiore delle tre possibili: il `<title>` finiva con «| S.A.N.E. Italia» e il
+corpo linka quel dominio **undici volte**, cioè faceva da landing di qualcun
+altro sul nostro dominio. Contro un dominio a corrispondenza esatta quella
+partita non si vince, e infatti la pagina non prende un clic da quattro export.
+
+**La pagina non si toglie e non va in `noindex`.** Con zero clic non c'è nessun
+danno da riparare, e un URL che invecchia non si regala. Quello che cambia è la
+query a cui risponde: non più «il piatto sano», che sane-italia deve vincere,
+ma **«educazione alimentare nelle scuole di Alessandria, Asti e Cuneo»** — la
+stessa logica del fossato, il nome proprio in un posto piccolo, applicata a un
+programma invece che a una sagra. sane-italia è nazionale e su quella non
+compete.
+
+- **Il nome del programma resta nel title**, e non era scontato: «Il Piatto
+  Sano nelle scuole di Alessandria, Asti e Cuneo» sta in 56 caratteri, quindi
+  non c'è nessun motivo di buttare via il brand per far entrare il posto. La
+  query generica la porta l'H1 («Educazione alimentare *nelle scuole di
+  Alessandria, Asti e Cuneo*»), che è la divisione già usata su corsi.html.
+- **Quello che la pagina può dire e sane-italia no** è una cosa sola, ed è
+  l'unica affermazione locale che si può fare senza inventare: DAOP segue
+  quelle tre province, quindi per una scuola di lì il contatto è diretto. Non
+  si scrive in quante scuole il programma è attivo, perché non lo sappiamo.
+- **La card in home resta**, e diventa «Sei una scuola o un comune di
+  Alessandria, Asti o Cuneo». Che la sua destinazione facesse zero clic era un
+  argomento per ripuntarla, non per toglierla: le scuole e i comuni sono il
+  pubblico con cui DAOP si fa conoscere istituzionalmente.
+
+**Un'incoerenza aperta, e non è stata sistemata di nascosto:** `index.html` dice
+che il programma è «per bambini dai 6 ai 13 anni» (2 volte), `piattosano.html`
+«dai 6 ai 18 anni» (5 volte). Una delle due è sbagliata e da qui non si sa
+quale, quindi restano tutte e due com'erano finché non lo dice qualcuno.
+
 ## Verifiche prima di pubblicare
 
 Girano tutti in CI **dopo** il commit: il sito si aggiorna comunque e la run
