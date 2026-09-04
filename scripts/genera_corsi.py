@@ -382,6 +382,9 @@ def eta_da_testo(testo):
     return (lo, hi) if 0 <= lo <= hi <= 25 else None
 
 
+_re_gruppi = __import__('re').compile(r'[a-z0-9]+')
+
+
 def eta_min_max(c):
     """La fascia da usare PER FILTRARE: prima le annate, poi l'eta' scritta.
 
@@ -1497,6 +1500,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     riquadro = ('<dl class="co-dati">' + ''.join(
         f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>') if dati else ''
 
+    corsi_org = raggruppa_per_comune(corsi_org)
     schede = "\n".join(card(c, i, qui_org=slug_realta(org))
                        for i, c in enumerate(corsi_org))
     ev = eventi_realta(corsi_org, org)
@@ -1763,6 +1767,108 @@ def _id_corso(c):
     return 'c-' + G.slugify(f"{c.get('org', '')}-{c.get('nome', '')}")
 
 
+# Quanto devono somigliarsi due nomi per essere lo stesso corso in due paesi.
+# MISURATA sui 23 corsi dell'ASD Atletica Mondovi' il 03/09/2026, e come per la
+# soglia dei comuni non e' stata una scelta: fra le coppie da unire e quelle da
+# tenere separate c'e' un BUCO, e il numero sta in mezzo al vuoto.
+#   da unire:      100, 100, 100 ... (tutte e 18: un nome e' contenuto nell'altro,
+#                  "Esordienti (Scuole Elementari)" dentro "Atletica Esordienti
+#                  (Scuole Elementari)")
+#   da NON unire:  14, 20, 40, 50, 50, 50 (Preparazione Atletica, Ritiro
+#                  Societario, Corsi di Atletica per tutte le eta': corsi
+#                  diversi che condividono solo la parola "atletica")
+# Fra 51 e 99 non c'e' niente. Se un giorno si riempie, e' li' che si torna.
+SOMIGLIANZA_STESSO_CORSO = 80
+
+
+def _parole_nome(s):
+    import unicodedata as _u
+    t = _u.normalize('NFKD', (s or '').lower())
+    t = ''.join(ch for ch in t if not _u.combining(ch))
+    return set(_re_gruppi.findall(t))
+
+
+def _somiglianza_nome(a, b):
+    """Quanto del nome PIU' CORTO sta dentro l'altro, 0-100.
+
+    Il contenimento e non la somiglianza simmetrica, perche' il caso vero e'
+    esattamente quello: la stessa societa' scrive "Esordienti (Scuole
+    Elementari)" a Mondovi' e "Atletica Esordienti (Scuole Elementari)" a Ceva.
+    """
+    pa, pb = _parole_nome(a), _parole_nome(b)
+    if not pa or not pb:
+        return 0
+    return round(100 * len(pa & pb) / min(len(pa), len(pb)))
+
+
+def raggruppa_per_comune(corsi):
+    """Lo stesso corso ripetuto in piu' paesi diventa UNA riga. (03/09/2026).
+
+    IL CONTO CHE L'HA FATTA NASCERE. L'ASD Atletica Mondovi' ha 23 corsi, che
+    sono 4 fasce d'eta' x 5 comuni piu' sei corsi unici: DICIASSETTE righe che
+    dicono quattro cose. La domanda di Patrick era "ha senso mettere x corsi di
+    atletica perche' cambia l'annata?", e i dati rispondono di no: l'annata NON
+    e' il doppione - e' l'asse su cui filtra un genitore, e distingue davvero i
+    corsi. Il doppione e' il COMUNE.
+
+    Qui si raggruppa solo per STAMPARE. Il foglio resta com'e', ogni corso tiene
+    il suo comune e il suo codice, e i filtri continuano a lavorare sulle righe
+    vere: e' la scelta B fra le tre discusse, quella che risolve la leggibilita'
+    senza toccare il modello dei dati - che si progetta meglio con dieci
+    societa' davanti che con cinque.
+
+    Si uniscono solo righe che hanno TUTTO uguale tranne il posto: stessa
+    societa', stessa categoria, stessa fascia d'eta' e nomi che si contengono
+    (vedi SOMIGLIANZA_STESSO_CORSO). E servono almeno DUE COMUNI diversi: due
+    righe nello stesso paese non sono un corso in due sedi, sono due corsi, e
+    fonderle nasconderebbe qualcosa invece di ordinarlo.
+
+    La riga che esce porta `_sedi`: [(comune, sede, giorni, codice)] di ognuna,
+    che la card stampa nel dettaglio. Cosi' non si perde niente di quello che
+    c'era prima - si smette solo di ripeterlo cinque volte.
+    """
+    fuori, usati = [], set()
+    for i, c in enumerate(corsi):
+        if i in usati:
+            continue
+        # Si SEGNANO le candidate, non si prendono: finche' il gruppo non ha
+        # passato i controlli qui sotto quelle righe sono ancora libere. Farlo
+        # al contrario - marcarle subito e liberarle in caso di rifiuto - le
+        # faceva stampare DUE volte, perche' nel frattempo erano gia' finite
+        # nell'elenco in uscita. Trovato dalla prova, con due corsi omonimi
+        # nello stesso comune: due righe in ingresso, tre in pagina.
+        simili = []
+        for j in range(i + 1, len(corsi)):
+            if j in usati:
+                continue
+            d = corsi[j]
+            if (slug_realta(c.get('org') or '') != slug_realta(d.get('org') or '')
+                    or (c.get('cat') or '') != (d.get('cat') or '')
+                    or eta_min_max(c) != eta_min_max(d)):
+                continue
+            if _somiglianza_nome(c.get('nome'), d.get('nome')) < SOMIGLIANZA_STESSO_CORSO:
+                continue
+            simili.append(j)
+        gruppo = [c] + [corsi[j] for j in simili]
+        comuni = {(g.get('citta') or '').strip().lower() for g in gruppo}
+        comuni.discard('')
+        if len(gruppo) < 2 or len(comuni) < 2:
+            # Non e' un gruppo. Esce SOLO il capofila: le altre restano libere e
+            # il ciclo le incontrera' al loro turno, ognuna per conto suo.
+            fuori.append(c)
+            continue
+        usati.update(simili)
+        # Il nome piu' CORTO fa da titolo: e' quello senza il prefisso della
+        # societa' ("Esordienti" e non "Atletica Esordienti"), che nella pagina
+        # di quella societa' e' gia' detto in cima.
+        capo = dict(min(gruppo, key=lambda g: len(g.get('nome') or '')))
+        capo['_sedi'] = [(g.get('citta') or '', g.get('sede') or '',
+                          g.get('giorni') or '', g.get('codice') or '')
+                         for g in sorted(gruppo, key=lambda g: (g.get('citta') or ''))]
+        fuori.append(capo)
+    return fuori
+
+
 def card(c, idx, pagine=(), qui_org=None):
     """Una scheda in stile agenda: riga sempre visibile + dettaglio che si apre
     al tocco. Riusa le classi .event-card/.ev-* del resto del sito.
@@ -1796,7 +1902,12 @@ def card(c, idx, pagine=(), qui_org=None):
     et = eta_testo(c)
     if et:
         bits.append(G.esc(et))
-    if c['citta']:
+    sedi = c.get('_sedi') or []
+    if len(sedi) > 1:
+        # "5 comuni" e non l'elenco: in riga cinque nomi di paese non aiutano a
+        # scegliere piu' di quanto la allunghino. I nomi stanno nel dettaglio.
+        bits.append(f"{len(sedi)} comuni")
+    elif c['citta']:
         bits.append(G.esc(G.trunc(c['citta'], 34)))
 
     tags = []
@@ -1839,9 +1950,24 @@ def card(c, idx, pagine=(), qui_org=None):
         righe_det.append(
             f'<p class="co-openday"><strong>Open day:</strong> {testa}'
             + _a_openday(od, vedi) + '</p>')
-    dove = c['sede'] or c['citta']
-    if dove:
-        righe_det.append(f'<p class="ev-where">{G.PIN_SVG} {G.esc(dove)}</p>')
+    if len(sedi) > 1:
+        # Ogni paese con la sua sede e i suoi giorni: e' esattamente cio' che
+        # prima stava in cinque righe separate, e qui non si perde.
+        voci = []
+        for comune, sede, giorni, _cod in sedi:
+            testo = comune or sede
+            if sede and comune and sede != comune:
+                testo = f"{comune} — {sede}"
+            if giorni:
+                testo += f" · {' '.join(giorni.split())}"
+            voci.append(f'<li>{G.esc(testo)}</li>')
+        righe_det.append('<p class="ev-where">' + G.PIN_SVG
+                         + f' Si tiene in {len(sedi)} comuni:</p>'
+                         + '<ul class="co-sedi">' + ''.join(voci) + '</ul>')
+    else:
+        dove = c['sede'] or c['citta']
+        if dove:
+            righe_det.append(f'<p class="ev-where">{G.PIN_SVG} {G.esc(dove)}</p>')
 
     dati = []
     # L'ORGANIZZATORE E' IL PRIMO DATO DEL DETTAGLIO, e non sta piu' in riga.
@@ -2184,6 +2310,8 @@ CSS = """
 .co-openday{margin:8px 0 0;color:#2E7D46}
 .co-openday a{color:#2E7D46;font-weight:700}
 .co-loc{width:100%;max-width:320px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+.co-sedi{margin:2px 0 10px;padding-left:26px;list-style:disc}
+.co-sedi li{margin:1px 0;font-size:.92rem;line-height:1.45}
 .co-fuori{margin:10px 0 0}
 .co-fuori a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-fuori a:hover{text-decoration:underline}
@@ -2554,7 +2682,8 @@ def render(corsi, css, nav, foot, realta=None):
 
     if ordinati:
         elenco = ('  <div class="events-list" id="co-lista">\n'
-                  + "\n".join(card(c, i, pagine) for i, c in enumerate(ordinati))
+                  + "\n".join(card(c, i, pagine)
+                                for i, c in enumerate(raggruppa_per_comune(ordinati)))
                   + '\n  </div>')
     else:
         elenco = nota_vuota()
