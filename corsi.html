@@ -510,6 +510,23 @@
   }
 
 :focus-visible{outline:3px solid #1D9E75;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+/* Striscia Ginetto: stesso componente .info-strip della home eventi (card
+   crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
+   Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
+   ha trovato quello che cercava. */
+.ev-ginetto{padding:56px 24px}
+.ev-ginetto .info-strip{margin-bottom:0;align-items:center}
+.ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
+@media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+/* Lo stesso componente dentro l'articolo invece che in una fascia di pagina:
+   in cima a un'edizione conclusa, e - dal 04/09/2026 - nel posto che era
+   dell'invito al canale sulle pagine comune e sulle landing. */
+.ev-ginetto-alto{margin:34px 0 26px}
+/* In cima a una conclusa il margine sopra e' zero: l'avviso "Edizione
+   conclusa" ha gia' i suoi 22px sotto, e sommandoli l'aria raddoppia. */
+.ev-over + .ev-ginetto-alto{margin-top:0}
+.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
+
 .co-wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}
 /* Il breadcrumb sta dentro .page-hero, che ha lo sfondo scuro — e .page-hero
    veste h1, p, .section-label e a, cioe' nessuna delle due cose che ci sono qui
@@ -1162,6 +1179,17 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
     <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
   </div>
 </article>
+<section class="bg-cream ev-ginetto">
+  <div class="section-inner">
+    <div class="info-strip">
+      <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
+      <div>
+        <h3>Cerchi altro da fare con i bambini?</h3>
+        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di Alessandria, Asti e Cuneo: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 <footer>
   <div class="footer-grid">

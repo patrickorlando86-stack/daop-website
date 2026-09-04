@@ -635,17 +635,6 @@
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
-/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
-   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
-   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
-   e' un <aside> dentro l'articolo, non una fascia di pagina. */
-.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
-  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
-.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
-.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
-  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
-  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -667,26 +656,11 @@
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-/* Striscia Ginetto: stesso componente .info-strip della home eventi (card
-   crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
-   Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
-   ha trovato quello che cercava. */
 /* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
    famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
    a chi arriva dalla ricerca di essere nel posto giusto. */
 .ev-gancio{margin:6px 0 0;font-size:.95rem;font-weight:600;letter-spacing:.01em;
   opacity:.92}
-.ev-ginetto{padding:56px 24px}
-.ev-ginetto .info-strip{margin-bottom:0;align-items:center}
-.ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
-@media(max-width:600px){.ev-ginetto{padding:40px 20px}}
-/* In cima a un'edizione conclusa: stesso componente, dentro l'articolo invece
-   che in una fascia di pagina. Nessun margine sopra (l'avviso "Edizione
-   conclusa" ha gia' i suoi 22px sotto) e 26px di aria sotto, se no si attacca
-   ai dati della scheda - sono gli stessi numeri che aveva l'invito al canale
-   quando il posto in cima era suo. */
-.ev-ginetto-alto{margin:0 0 26px}
-.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
 /* ── La barra delle azioni, e solo sul telefono ─────────────────────────
    PERCHE' ESISTE, e il conto e' misurato il 28/08/2026 a 412px su una scheda
    viva, non stimato. .ev-actions - "Aggiungi al calendario" e "Come arrivare",
@@ -698,10 +672,11 @@
    cliccati del sito - `click_come_arrivare` e' l'azione numero uno delle
    schede, 33 in sette giorni contro 10 del calendario e 9 del telefono.
 
-   E' lo stesso conto dell'invito al canale, con una differenza che decide il
-   verso: quello e' una RICHIESTA, e in cima chiederebbe qualcosa a chi non ha
-   ancora avuto niente. Questi sono SERVIZI - la mappa e la data sono la
-   ragione per cui uno e' arrivato. Un servizio si mette davanti.
+   E' lo stesso conto che si faceva sull'invito al canale, con una differenza
+   che decide il verso e che vale ora per Ginetto: quello e' una RICHIESTA, e
+   in cima chiederebbe qualcosa a chi non ha ancora avuto niente. Questi sono
+   SERVIZI - la mappa e la data sono la ragione per cui uno e' arrivato. Un
+   servizio si mette davanti, una richiesta no.
 
    NON sostituisce .ev-actions, che resta dov'e'. La pagina non perde niente
    (li' c'e' anche "Torna all'agenda"), e cosi' la barra si puo' togliere in
@@ -740,6 +715,23 @@
   .ev-barra svg{width:19px;height:19px;opacity:.82}
   .ev-barra span{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 }
+
+/* Striscia Ginetto: stesso componente .info-strip della home eventi (card
+   crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
+   Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
+   ha trovato quello che cercava. */
+.ev-ginetto{padding:56px 24px}
+.ev-ginetto .info-strip{margin-bottom:0;align-items:center}
+.ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
+@media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+/* Lo stesso componente dentro l'articolo invece che in una fascia di pagina:
+   in cima a un'edizione conclusa, e - dal 04/09/2026 - nel posto che era
+   dell'invito al canale sulle pagine comune e sulle landing. */
+.ev-ginetto-alto{margin:34px 0 26px}
+/* In cima a una conclusa il margine sopra e' zero: l'avviso "Edizione
+   conclusa" ha gia' i suoi 22px sotto, e sommandoli l'aria raddoppia. */
+.ev-over + .ev-ginetto-alto{margin-top:0}
+.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
 
 /* L'elenco "cosa c'e' per i bambini": le stesse righe delle altre, ma senza il
    wrapper .com-b - data, titolo e fascia d'eta' stanno tutti e tre in fila.
