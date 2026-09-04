@@ -693,6 +693,23 @@
   "nome": "Asti",
   "prov": "AT"
  },
+ "bagnolopiemonte": {
+  "eventi": {
+   "bambinopoli-pro-loco-bagnolo-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza S. Pietro",
+    "manifest": "",
+    "nome": "Bambinopoli - Pro Loco Bagnolo Piemonte",
+    "organizza": "Pro Loco Bagnolo Piemonte",
+    "pagina": false,
+    "ultima": "2026-09-27"
+   }
+  },
+  "nome": "Bagnolo Piemonte",
+  "prov": "CN"
+ },
  "baldichieridasti": {
   "eventi": {
    "cena-propiziatoria-pro-loco-di-cantarana-baldichieri-d-asti": {
@@ -761,6 +778,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "crazy-magic-sunday-gran-gala-della-magia-barolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Caduti della Libertà",
+    "manifest": "",
+    "nome": "Crazy Magic Sunday - Gran Galà della Magia",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-13"
    }
   },
   "nome": "Barolo",
@@ -1255,6 +1283,23 @@
   "nome": "Calosso",
   "prov": "AT"
  },
+ "canale": {
+  "eventi": {
+   "sport-in-piazza-citta-di-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Roma e Piazza Martiri",
+    "manifest": "",
+    "nome": "Sport in Piazza - Città di Canale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Canale",
+  "prov": "CN"
+ },
  "canelli": {
   "eventi": {
    "festa-della-vendemmia-canelli": {
@@ -1282,6 +1327,23 @@
   },
   "nome": "Canelli",
   "prov": "AT"
+ },
+ "caraglio": {
+  "eventi": {
+   "sport-in-piazza-comune-di-caraglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Giolitti",
+    "manifest": "",
+    "nome": "Sport in Piazza - Comune di Caraglio",
+    "organizza": "Comune di Caraglio",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Caraglio",
+  "prov": "CN"
  },
  "carbonarascrivia": {
   "eventi": {
@@ -3206,6 +3268,17 @@
  },
  "cuneo": {
   "eventi": {
+   "apericena-di-comunita-cooperativa-sociale-emmanuel-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Fontanelle 6 - S. Rocco Castagnaretta",
+    "manifest": "Estate 2026 - Cooperativa Sociale Emmanuele",
+    "nome": "Apericena di Comunità - Cooperativa Sociale Emmanuele",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-16"
+   },
    "apiario-porte-aperte-vita-da-api-parco-fluviale-ge-cuneo": {
     "anni": [
      2026
@@ -3249,6 +3322,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-25"
+   },
+   "film-sotto-le-stelle-il-robot-selvaggio-cooperativ-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Fontanelle 6 - S. Rocco Castagnaretta",
+    "manifest": "Estate 2026 - Cooperativa Sociale Emmanuele",
+    "nome": "Film Sotto le Stelle - Il Robot Selvaggio - Cooperativa Sociale Emmanuele",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-04"
    },
    "giochi-d-acqua-chiosco-parri-cuneo": {
     "anni": [
@@ -3348,6 +3432,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "serata-giochi-0-99-anni-cooperativa-sociale-emmanu-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Fontanelle 6 - S. Rocco Castagnaretta",
+    "manifest": "Estate 2026 - Cooperativa Sociale Emmanuele",
+    "nome": "Serata Giochi 0-99 anni - Cooperativa Sociale Emmanuele",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-07"
    },
    "vita-da-api-parco-fluviale-gesso-e-stura-cuneo": {
     "anni": [
@@ -4143,6 +4238,23 @@
   "nome": "Gerbo",
   "prov": "CN"
  },
+ "gorzegno": {
+  "eventi": {
+   "gorzegno-magica-altrove-ritrovarsi-in-altri-luoghi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Gorzegno - centro storico e vie del paese",
+    "manifest": "",
+    "nome": "Gorzegno Magica 2026 - ALTROVE: ritrovarsi in altri luoghi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-05"
+   }
+  },
+  "nome": "Gorzegno",
+  "prov": "CN"
+ },
  "govone": {
   "eventi": {
    "castelli-aperti-a-ferragosto-castello-reale-govone": {
@@ -4550,6 +4662,23 @@
   "nome": "Mantovana",
   "prov": "AL"
  },
+ "marmora": {
+  "eventi": {
+   "fiero-di-debi-marmora": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Fiero di Debi 2026",
+    "nome": "Fiero di Debi 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Marmora",
+  "prov": "CN"
+ },
  "molare": {
   "eventi": {
    "polentone-di-molare": {
@@ -4741,6 +4870,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-14"
+   },
+   "otto-panzer-show-giovanni-risola-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Belvedere",
+    "manifest": "Festival Illustrada",
+    "nome": "Otto Panzer Show - Giovanni Risola",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
    }
   },
   "nome": "Mondovì",
@@ -4808,6 +4948,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-02"
+   },
+   "yoga-della-risata-radici-di-luce-monta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco dell'Ochetta",
+    "manifest": "",
+    "nome": "Yoga della Risata - Radici di Luce",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-13"
    }
   },
   "nome": "Montà",
@@ -5398,6 +5549,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "un-escursione-con-gli-amici-pelosi-ormea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Aimoni",
+    "manifest": "",
+    "nome": "Un'Escursione con gli Amici Pelosi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    }
   },
   "nome": "Ormea",
@@ -5741,6 +5903,17 @@
     "organizza": "Pro Loco Pontechianale",
     "pagina": false,
     "ultima": "2026-08-12"
+   },
+   "fiero-dei-seze-ritorno-dall-alpe-pontechianale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Municipio",
+    "manifest": "",
+    "nome": "Fiero dei Seze - Ritorno dall'Alpe",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    },
    "il-cantico-e-frate-vento-il-mondo-dei-rapaci-dimos-pontechianale": {
     "anni": [
@@ -6415,6 +6588,23 @@
    }
   },
   "nome": "Racconigi",
+  "prov": "CN"
+ },
+ "revello": {
+  "eventi": {
+   "octavia-in-movimento-revello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Impianti Sportivi",
+    "manifest": "Octavia in Movimento",
+    "nome": "Octavia in Movimento",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Revello",
   "prov": "CN"
  },
  "rivaltabormida": {
@@ -7590,6 +7780,23 @@
   "nome": "Sant'Albano Stura",
   "prov": "CN"
  },
+ "santostefanobelbo": {
+  "eventi": {
+   "festa-vendemmia-cascina-fontanette-santo-stefano-belbo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cascina Fontanette",
+    "manifest": "Festa Vendemmia 2026",
+    "nome": "Festa Vendemmia 2026 - Cascina Fontanette",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   }
+  },
+  "nome": "Santo Stefano Belbo",
+  "prov": "CN"
+ },
  "sarezzano": {
   "eventi": {
    "back-to-the-90s-dj-in-tour-con-max-pensa-e-roby-gi-sarezzano": {
@@ -7606,6 +7813,23 @@
   },
   "nome": "Sarezzano",
   "prov": "AL"
+ },
+ "savigliano": {
+  "eventi": {
+   "cresco-con-te-cura-con-il-cuore-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ala Polifunzionale L. Morello",
+    "manifest": "Cresco Con TE - Cura con il Cuore",
+    "nome": "Cresco Con TE - Cura con il Cuore",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Savigliano",
+  "prov": "CN"
  },
  "scurzolengo": {
   "eventi": {
@@ -7914,6 +8138,23 @@
   },
   "nome": "Strevi",
   "prov": "AL"
+ },
+ "tarantasca": {
+  "eventi": {
+   "festa-inizio-scuola-tarantasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo",
+    "manifest": "Festa Inizio Scuola 2026",
+    "nome": "Festa Inizio Scuola 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Tarantasca",
+  "prov": "CN"
  },
  "tassarolo": {
   "eventi": {
