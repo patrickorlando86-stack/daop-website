@@ -128,6 +128,24 @@ COLONNE = {
     # Le parole sono le stesse (STATI_BOZZA): due vocabolari per la stessa domanda
     # sarebbero due cose da ricordare.
     'stato': ('stato', 'pubblica', 'pubblicato', 'visibile'),
+    # LA DATA IN CUI IL CORSO FINISCE (04/09/2026). E' l'unica colonna della tab
+    # che fa sparire una riga da sola, e chiude il buco scritto fin dal primo
+    # giorno: un EVENTO si autopulisce (passa la data), un CENTRO pure (Data
+    # fine), un CORSO no - la danza 2025/26 resta a catalogo finche' non la
+    # toglie qualcuno a mano, e a un genitore che telefona a settembre risponde
+    # una segreteria che quel corso non lo fa piu'.
+    #
+    # La stagione NON basta, ed e' il motivo per cui questa colonna esiste
+    # accanto a quella: la stagione dichiara quando il corso doveva finire, la
+    # scadenza quando e' finito davvero. Un corso 2026/2027 chiuso a marzo la
+    # stagione lo tiene in pagina fino a luglio.
+    #
+    # Le grafie accettate sono le STESSE dell'app (_corsoScaduto in app.js del
+    # repo mobile, 03/09): la tab la compilano persone diverse in momenti
+    # diversi, e due liste che divergono vorrebbero dire un corso sparito su una
+    # superficie e vivo sull'altra - cioe' peggio di non averla.
+    'scadenza': ('scadenza', 'data scadenza', 'valida fino al', 'valido fino al',
+                 'data fine', 'datafine', 'fine'),
 }
 
 # Fasce del filtro eta', quelle suggerite nel documento. Il confronto e' per
@@ -451,7 +469,8 @@ def leggi_corsi():
               f"se servono): {', '.join(ignorate)}")
 
     avvio = stagione_avvio()
-    out, vecchi = [], 0
+    oggi = datetime.date.today()
+    out, vecchi, scaduti = [], 0, 0
     for r in righe[hi + 1:]:
         def val(campo):
             i = idx.get(campo)
@@ -466,9 +485,25 @@ def leggi_corsi():
         if st and int(st[0]) < avvio:
             vecchi += 1
             continue
+        # La scadenza DOPO la stagione, e i due conti restano separati: sono due
+        # motivi diversi di non pubblicare una riga, e sommarli vorrebbe dire non
+        # sapere piu' quale dei due sta lavorando il giorno che uno dei due
+        # sbaglia.
+        #
+        # Cella vuota o illeggibile -> il corso RESTA. E' la stessa regola dei
+        # centri e dell'app: una data scritta di fretta ("a fine stagione") non
+        # deve far sparire un corso buono. La data e' INCLUSA: un corso valido
+        # "fino al 17 ottobre" si vede tutto il 17.
+        fine = G.pdate(c['scadenza'])
+        if fine and fine < oggi:
+            scaduti += 1
+            continue
         out.append(c)
     if vecchi:
         print(f"[genera_corsi] {vecchi} righe di stagioni passate, fuori dall'elenco")
+    if scaduti:
+        print(f"[genera_corsi] {scaduti} righe con la Scadenza passata, "
+              f"fuori dall'elenco")
     return out
 
 
