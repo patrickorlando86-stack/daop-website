@@ -4956,10 +4956,13 @@ compete.
   argomento per ripuntarla, non per toglierla: le scuole e i comuni sono il
   pubblico con cui DAOP si fa conoscere istituzionalmente.
 
-**Un'incoerenza aperta, e non è stata sistemata di nascosto:** `index.html` dice
-che il programma è «per bambini dai 6 ai 13 anni» (2 volte), `piattosano.html`
-«dai 6 ai 18 anni» (5 volte). Una delle due è sbagliata e da qui non si sa
-quale, quindi restano tutte e due com'erano finché non lo dice qualcuno.
+**Un'incoerenza chiusa lo stesso giorno.** `index.html` diceva «dai 6 ai 13
+anni» (2 volte) e `piattosano.html` «dai 6 ai 18 anni» (5 volte): la fascia
+giusta è **6-13**, l'ha detta Patrick, e le cinque occorrenze sbagliate erano
+sulla pagina del programma — cioè quella che una scuola legge prima di
+scrivere. Corrette lì, incluse le due dentro il JSON-LD (la descrizione del
+gioco e la risposta della FAQ), che dovevano restare d'accordo con il testo
+visibile.
 
 ## Verifiche prima di pubblicare
 
