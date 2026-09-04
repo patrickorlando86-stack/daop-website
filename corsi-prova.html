@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pagina di prova — Corsi | DAOP</title>
-<meta name="description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.">
+<meta name="description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con l&#x27;età che prendono, il comune e, dove c&#x27;è, l&#x27;open day per andarli a vedere. Curato a mano.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.daop.it/corsi-prova.html">
 <meta property="og:title" content="Corsi per bambini in provincia di Cuneo | DAOP">
-<meta property="og:description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.">
+<meta property="og:description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con l&#x27;età che prendono, il comune e, dove c&#x27;è, l&#x27;open day per andarli a vedere. Curato a mano.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi.html">
 <meta property="og:locale" content="it_IT">
@@ -130,6 +130,12 @@
   .ev-chk:hover{border-color:var(--orange)}
   .ev-chk.is-on{background:var(--navy);border-color:var(--navy);color:white}
   .ev-chk input{width:15px;height:15px;margin:0;accent-color:var(--orange);cursor:pointer}
+  /* display:inline-flex batte il display:none che il browser da' a [hidden]:
+     senza questa riga la casella si vedeva anche fuori stagione, quando il JS
+     la lascia hidden perche' non divide - e in piu' spingeva le tendine su tre
+     righe, cioe' faceva crescere la barra appiccicosa proprio nei mesi in cui
+     non serve a niente. Trovata dalla prova che misura l'altezza, non dall'HTML. */
+  .ev-chk[hidden]{display:none}
   /* ── VICINO A ME ──
      Fuori dalla barra appiccicosa apposta: quella e' scesa a ~109px sul
      telefono e una riga in piu' la rifarebbe crescere per tutto lo
@@ -293,6 +299,19 @@
   .ev-pill.is-tag{font-weight:600;color:var(--text-light);background:rgba(45,74,92,0.05)}
   .ev-det{padding:2px 6px 20px 80px}
   .ev-det .event-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+  /* .event-desc e' un <div> di paragrafi da descrizione_riga(), non piu' un
+     <p> solo: la prosa del foglio si impagina come sulla scheda. Il margine
+     sta sui figli, e l'ultimo non lo porta - sotto c'e' gia' il margine del
+     contenitore. Su centri e corsi .event-desc resta un <p>, quindi queste
+     due regole li' non pescano niente. */
+  .ev-det .event-desc p{margin:0 0 9px}
+  .ev-det .event-desc p:last-child{margin-bottom:0}
+  /* Il rimando al programma della scheda: e' prosa, non un'azione, quindi non
+     prende la forma a pillola di .event-act - se no sarebbero due bottoni per
+     la stessa destinazione a quattro righe di distanza. */
+  .ev-prog-rim{font-weight:600}
+  .ev-prog-rim a{color:var(--cat-ink,var(--teal));text-decoration:none;border-bottom:1px solid rgba(45,74,92,0.22)}
+  .ev-prog-rim a:hover{border-bottom-color:currentColor}
   .ev-where{display:flex;align-items:flex-start;gap:9px;font-size:0.85rem;color:var(--text-mid);margin-bottom:14px}
   /* Le misure stanno qui e non piu' negli attributi width/height dell'SVG:
      le icone delle card sono <use> sullo sprite (una sola definizione per
@@ -304,6 +323,20 @@
   .event-act:hover{border-color:var(--cat-color,var(--orange));color:var(--cat-color,var(--orange))}
   .event-act .icon{flex-shrink:0;width:14px;height:14px;stroke-width:2;vertical-align:0;color:var(--cat-color,var(--teal))}
   .events-empty{display:none;text-align:center;color:var(--text-mid);font-size:0.95rem;padding:44px 0}
+  /* Due paragrafi: il messaggio (che il JS riscrive) e Ginetto. Il margine fra
+     i due sta su `p+p` e non su .events-empty-g apposta: `.events-empty p` ha
+     specificita' 0,1,1 e batterebbe una regola di sola classe, che e' lo stesso
+     inciampo del crumb dei corsi (`.co-crumb a{color:inherit}` che vinceva su
+     `.page-hero a`). */
+  .events-empty p{margin:0 auto;max-width:520px}
+  .events-empty p+p{margin-top:14px}
+  /* Lo stato vuoto e' l'unico punto dell'agenda in cui Ginetto non e' una
+     richiesta ma una risposta: la pagina ha appena fallito, e lui fa quello che
+     l'elenco non e' riuscito a fare. E costa zero pixel a chi invece ha trovato
+     quello che cercava - che e' la ragione per cui sta qui e non in cima. */
+  .events-empty-g{font-size:0.92rem;line-height:1.65}
+  .events-empty-g a{color:var(--orange-ink,#a05714);font-weight:600;text-decoration:none}
+  .events-empty-g a:hover{text-decoration:underline}
   /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
      zone.html e le poche schede evento di quei comuni: la pagina piu' forte
      del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
@@ -478,8 +511,24 @@
 
 :focus-visible{outline:3px solid #1D9E75;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 .co-wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}
+/* Il breadcrumb sta dentro .page-hero, che ha lo sfondo scuro — e .page-hero
+   veste h1, p, .section-label e a, cioe' nessuna delle due cose che ci sono qui
+   dentro. Senza un colore suo il crumb ereditava quello del body: rgb(26,45,58)
+   sopra un gradiente che parte da rgb(30,51,66), **contrasto 1,07:1**, cioe'
+   invisibile. Peggio, `.co-crumb a{color:inherit}` ha la stessa specificita' di
+   `.page-hero a{color:var(--gold)}` e arriva dopo: la regola che doveva salvare
+   il link se lo riportava nel buio, lasciandogli solo la sottolineatura. Da qui
+   sembrava un link blu slavato, ed era invece testo dello stesso colore dello
+   sfondo.
+   I valori non sono nuovi: sono quelli con cui .ev-hero risolve lo stesso
+   inciampo sulle schede evento (.62 la traccia, .82 il link, opacity rimessa a
+   1 perche' l'alfa ora sta nel colore). Restano scritti scoped su .page-hero,
+   cosi' la regola base continua a valere se un domani il crumb finisce su
+   fondo chiaro. */
 .co-crumb{font-size:.85rem;opacity:.85;margin-bottom:10px}
 .co-crumb a{color:inherit}
+.page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
+.page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-prova-avviso{background:#fdf3e0;border:1px solid #e6c98a;border-radius:10px;padding:14px 16px;margin:96px auto 18px;max-width:900px;width:calc(100% - 32px);font-size:.94rem;line-height:1.55;color:#6b4a10}
 .co-prova-avviso a{color:#6b4a10;font-weight:700}
 .co-prova-avviso+.page-hero{padding-top:24px}
@@ -532,9 +581,19 @@
 #co-lista{scroll-margin-top:120px}
 .co-realta h3 a{color:inherit;text-decoration:none}
 .co-realta h3 a:hover{text-decoration:underline}
+/* "Come scegliere un corso": prosa, non elenco. La colonna e' piu' stretta del
+   resto della pagina perche' un testo lungo su 900px si legge male - e' la
+   stessa larghezza che centri-estivi.html usa per la sua guida. */
+.co-guida{margin:40px 0 0;padding:0;border-top:1px solid rgba(45,74,92,.14)}
+.co-guida-t{font-size:1.35rem;margin:26px 0 6px}
+.co-guida h3{font-size:1.02rem;margin:22px 0 5px;color:var(--navy,#2d4a5c)}
+.co-guida p{max-width:68ch;margin:0 0 10px;font-size:.95rem;line-height:1.65;
+  color:var(--text-mid,#5d6a70)}
+.co-guida a{color:var(--teal,#6ba5a8)}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
+<script src="/assets/js/locandina.js" defer></script>
 </head>
 <body>
 <!-- NAV -->
@@ -610,7 +669,7 @@
   <div class="events-list" id="co-lista">
         <article class="event-card" id="c-compagnia-santibriganti-teatro-corso-di-teatro-per" data-city="caraglio" data-prov="cn" data-cat="espressione" data-disc="teatro" data-org="compagnia-santibriganti-teatro" data-org-nome="Compagnia Santibriganti Teatro" data-codice="A006" data-openday="1" data-etamin="6" data-etamax="11" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-0">
-            <span class="ev-thumb is-ph" aria-hidden="true">🎭</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 22v-4a2 2 0 1 0-4 0v4"/><path d="m18 10 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7.382a1 1 0 0 1 .553-.894L6 10"/><path d="M18 5v17"/><path d="m4 6 7.106-3.553a2 2 0 0 1 1.788 0L20 6"/><path d="M6 5v17"/><circle cx="12" cy="9" r="2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Teatro</span>
               <span class="ev-name">Corso di teatro per bambini</span>
@@ -626,7 +685,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-8-m-f" data-city="roccavione" data-prov="cn" data-cat="sport" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A001" data-openday="0" data-etamin="6" data-etamax="7" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-1">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 8 M/F</span>
@@ -642,7 +701,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-10-m-f" data-city="roccavione" data-prov="cn" data-cat="sport" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A002" data-openday="0" data-etamin="8" data-etamax="9" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-2">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 10 M/F</span>
@@ -658,7 +717,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-12-m-f" data-city="roccavione" data-prov="cn" data-cat="sport" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A003" data-openday="0" data-etamin="10" data-etamax="11" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-3">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 12 M/F</span>
@@ -674,7 +733,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-14-f" data-city="roccavione" data-prov="cn" data-cat="sport" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A004" data-openday="0" data-etamin="12" data-etamax="13" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-4">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 14 F</span>
@@ -690,7 +749,7 @@
         </article>
         <article class="event-card" id="c-pgs-roccavione-volley-under-15-f" data-city="roccavione" data-prov="cn" data-cat="sport" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A005" data-openday="0" data-etamin="14" data-etamax="14" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-5">
-            <span class="ev-thumb is-ph" aria-hidden="true">🏐</span>
+            <span class="ev-thumb is-ph" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
             <span class="ev-main">
               <span class="co-cat">Pallavolo</span>
               <span class="ev-name">Volley Under 15 F</span>
@@ -705,6 +764,54 @@
           </div>
         </article>
   </div>
+  <section class="co-guida" aria-labelledby="co-guida-t">
+    <h2 class="co-guida-t" id="co-guida-t">Come scegliere un corso per bambini</h2>
+    <p>Le domande che vale la pena fare prima di iscrivere un figlio. Non sono
+    consigli generici: sono le cose che, sulle locandine che raccogliamo, o non
+    ci sono scritte o cambiano da una società all'altra.</p>
+
+    <h3>L'età scritta non è un limite, è una fascia</h3>
+    <p>Quasi tutte le realtà indicano un intervallo — qui sopra il filtro usa
+    le 3 fasce d&#x27;età che questo elenco copre — ma quell'intervallo nasce dalle annate sportive o dalle
+    classi, non dal compleanno. Un bambino appena fuori fascia spesso si prende
+    lo stesso: è la prima domanda da fare al telefono, e la risposta è quasi
+    sempre sì.</p>
+
+    <h3>Il comune conta più della disciplina</h3>
+    <p>Un corso è un impegno che si ripete ogni settimana per mesi: venti
+    minuti di macchina il giovedì sera diventano quaranta minuti tutte le
+    settimane fino a primavera. Guarda prima dove si tiene
+    (Caraglio, Roccavione),
+    poi cosa si fa.</p>
+
+    <h3>Chiedi i giorni e gli orari, non darli per scontati</h3>
+    <p>Dove la società ce li ha comunicati li trovi nel dettaglio della riga.
+    Dove non ci sono, non è una dimenticanza nostra: sono dati che cambiano a
+    settembre quando si formano i gruppi, e preferiamo non scrivere un orario
+    che poi non tiene. Il numero della società è nella sua scheda in fondo alla
+    pagina.</p>
+
+    <h3>Vai a vedere prima di decidere</h3>
+    <p>Quasi tutte le realtà lasciano provare una lezione, e dove è dichiarato
+    è scritto nella riga del corso. Gli open day invece sono appuntamenti veri,
+    con una data: quando ce n'è uno collegato, compare nel dettaglio del corso
+    e nel <a href="/eventi.html">calendario degli eventi</a>. Andare una volta
+    dice più di qualunque descrizione.</p>
+
+    <h3>Sul costo: chiedilo, e chiedi cosa comprende</h3>
+    <p>Non pubblichiamo i prezzi, e non è una svista: fra quota associativa,
+    tesseramento, assicurazione e materiale, due corsi con lo stesso prezzo
+    scritto possono costare molto diverso. La cifra che conta è quella che
+    dice la società quando le chiedi il totale della stagione.</p>
+
+    <h3>Uno alla volta</h3>
+    <p>Sport, espressione: la tentazione è iscriversi a due o tre
+    cose "così prova". Un pomeriggio libero durante la settimana vale più di
+    un'attività in più, e il corso che resta l'anno dopo è quasi sempre quello
+    scelto senza fretta.</p>
+  </section>
+
+<section class="faq" aria-labelledby="faq-t"><h2 class="faq-t" id="faq-t">Domande frequenti</h2><p class="faq-sub">Le risposte usano i numeri di questa pagina e si rifanno con lei ogni notte.</p><details class="faq-q"><summary>Quali corsi per bambini si trovano in provincia di Cuneo?</summary><div class="faq-a"><p>In questo momento l'elenco ha <strong>6 corsi</strong> di sport, espressione, di 2 realtà diverse, in 2 comuni. Non è tutto quello che esiste sul territorio: è tutto quello che abbiamo raccolto e che la società che lo organizza ci ha confermato. L'elenco cresce una realtà alla volta.</p></div></details><details class="faq-q"><summary>Posso cercare i corsi per età di mio figlio?</summary><div class="faq-a"><p>Sì, con il filtro <em>Età</em> in cima all'elenco. Le fasce coperte da questa pagina sono 6-8 anni, 9-11 anni, 12-14 anni: le altre non vengono nemmeno stampate nella tendina, così non capita di sceglierne una e trovare la pagina vuota.</p><p>Il confronto è per sovrapposizione, non per contenimento: un corso 6-11 anni esce sia cercando 6-8 sia cercando 9-11, perché un bambino di 7 anni e uno di 10 ci stanno tutti e due.</p></div></details><details class="faq-q"><summary>In quali comuni si tengono?</summary><div class="faq-a"><p>Caraglio, Roccavione. Il filtro <em>Comune</em> in cima all'elenco li separa. Se il tuo paese non c'è, vuol dire che non abbiamo ancora raccolto nessuna realtà che ci lavori — non che non ce ne siano.</p></div></details><details class="faq-q"><summary>Come trovo i corsi con una lezione di prova o un open day?</summary><div class="faq-a"><p>Su questa pagina <strong>6 corsi</strong> dichiarano una lezione di prova e <strong>1</strong> ha un open day con una data precisa, collegata al calendario degli eventi. Gli open day hanno il filtro <em>Solo con open day</em> in cima; la prova invece è scritta nel dettaglio della riga, sotto i giorni.</p><p>Sono due cose diverse: la prova è un attributo del corso (si può provare, quando vuoi tu), l'open day è un appuntamento con una data. Dove la società non dichiara niente, non vuol dire che non si possa provare: quasi tutte lasciano farlo, basta chiedere.</p></div></details><details class="faq-q"><summary>Che differenza c&#x27;è tra un corso e un evento?</summary><div class="faq-a"><p>Il tempo. Un corso dura una stagione — a volte qualche mese, a volte poche lezioni — e ci si iscrive; un evento è una data sola, e ci si va e basta. Sono due pagine diverse apposta: qui trovi le attività continuative, in <a href="/eventi.html">agenda</a> quello che succede questo weekend.</p><p>Gli open day stanno in mezzo, e infatti compaiono in tutte e due: sono eventi con una data, ma servono a far scegliere un corso.</p></div></details><details class="faq-q"><summary>Le informazioni sui corsi sono aggiornate?</summary><div class="faq-a"><p>Ogni scheda la compiliamo dalle locandine e dai canali della società, e la pubblichiamo <strong>solo dopo che chi organizza ci ha confermato i dati</strong>: finché non arriva quel sì, la riga non compare. La pagina si rigenera ogni notte, e in fondo c'è la data dell'ultimo aggiornamento.</p><p>Quello che può cambiare senza che lo sappiamo sono giorni e orari, che si assestano a settembre quando si formano i gruppi. Prima di partire, una telefonata alla società è sempre la cosa giusta.</p></div></details><details class="faq-q"><summary>Come contatto la società che organizza il corso?</summary><div class="faq-a"><p>In fondo alla pagina, sotto <em>Chi organizza</em>, c'è una scheda per ognuna delle realtà in elenco (Compagnia Santibriganti Teatro, PGS Roccavione) con dove sono, il telefono e i loro canali. Dal dettaglio di ogni corso la riga <em>Organizzatore</em> porta direttamente alla sua.</p><p>I referenti sono indicati con il nome e non con il numero personale: il recapito che pubblichiamo è quello della società, che è il numero che resta anche quando cambia il volontario.</p></div></details><details class="faq-q"><summary>Come faccio a inserire i corsi della mia realtà?</summary><div class="faq-a"><p>Scrivici: <a href="mailto:collabora@eventiperbambinicuneo.it">collabora@eventiperbambinicuneo.it</a>. La presenza comprende la scheda della realtà, i corsi che proponete, le informazioni per le famiglie e gli open day collegati al calendario degli eventi. Le schede le compiliamo noi dalle vostre locandine e ve le facciamo rileggere prima di pubblicarle.</p></div></details></section>
   <div class="co-realta-wrap" id="realta">
     <h2 class="co-realta-t" id="co-realta-t">Chi organizza</h2>
     <p class="co-realta-sub">2 realtà in provincia di Cuneo: dove sono, come si contattano, cosa organizzano.</p>
@@ -723,10 +830,12 @@
   </div>
   </div>
   <p class="co-nota"><strong>Sei una scuola, un'associazione o una società sportiva e proponi attività per bambini e ragazzi?</strong> Stiamo costruendo una guida alle attività per famiglie: la presenza comprende la vostra realtà, i corsi che proponete, le informazioni utili per le famiglie, le prove e gli open day collegati al calendario degli eventi. Scrivici a <a href="mailto:collabora@eventiperbambinicuneo.it">collabora@eventiperbambinicuneo.it</a>.</p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">216 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">864 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">16 centri con le date e le iscrizioni</span></a></div></section>
+<aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend in zona: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">190 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">875 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">17 centri con le date e le iscrizioni</span></a></div></section>
   <div class="co-actions">
     <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
   </div>
+  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 4 settembre 2026.</p>
 </article>
 </main>
 <footer>

@@ -2265,6 +2265,94 @@ def segnala_senza_coordinate(events):
         print(f"                 luogo: {(e.get('luogo') or '(vuoto)')[:52]}")
 
 
+def segnala_eta_vaghe(events):
+    """Quante righe dichiarano una fascia d'eta' vera, e quante rispondono
+    "tutte le eta'".
+
+    PERCHE' ESISTE (03/09/2026). Dal 03/09 le tre pagine sagre-provincia-*
+    hanno un <h2> "Eventi per bambini in provincia di X" e le pagine comune
+    una sezione "Cosa c'e' per i bambini": tutte e due si riempiono con
+    e_per_bambini(), che vuole una fascia d'eta' NUMERICA nel foglio oppure
+    un'attrazione per bambini scritta nel programma.
+
+    Quella colonna la scrive il DOWNLOADER, leggendo la locandina con un
+    modello, e "Tutte le eta' (famiglie)" e' la risposta che il modello da'
+    quando sulla locandina l'eta' non c'e'. E' onesta - meglio di un
+    intervallo inventato - ma non e' un dato: e' la stessa cosa del flag
+    "Adatto Famiglie", che sta su 95 righe su 100 e per questo non divide
+    niente.
+
+    Da qui la ragione di questo avviso, che e' la sola leva vera: la sezione
+    "per bambini" cresce se cresce quella colonna, e quella colonna non la
+    riempie questo repo. Si SEGNALA e basta - come per le coordinate, i
+    doppioni e le durate assurde - perche' la decisione (rileggere la
+    locandina, o chiedere l'eta' a chi organizza) e' di una persona.
+
+    NON e' un errore e non deve suonare come tale: una riga senza eta' entra in
+    pagina come tutte le altre e la sezione bambini semplicemente non la
+    prende. Per questo il conto si stampa sempre, anche quando va bene."""
+    tot = len(events)
+    if not tot:
+        return
+    con_eta = [e for e in events if fascia_eta(e.get('eta'))]
+    solo_rich = [e for e in events
+                 if not fascia_eta(e.get('eta')) and e_per_bambini(e)]
+    bimbi = len(con_eta) + len(solo_rich)
+    print(f"[genera_eventi] eta': {len(con_eta)}/{tot} righe con una fascia "
+          f"numerica, +{len(solo_rich)} riconosciute dal programma "
+          f"-> {bimbi} eventi nella sezione \"per bambini\"")
+    # Le due grafie della stessa risposta. Non e' un difetto (le confronta
+    # fascia_eta, che non le riconosce ne' l'una ne' l'altra) ma dice che la
+    # cella arriva da due strade diverse, ed e' il genere di cosa che si vede
+    # solo contando.
+    vaghe = collections.Counter((e.get('eta') or '').strip()
+                                for e in events
+                                if not fascia_eta(e.get('eta'))
+                                and (e.get('eta') or '').strip())
+    if vaghe:
+        detta = ', '.join(f"{v}x {k!r}" for k, v in vaghe.most_common(3))
+        print(f"                 senza fascia: {detta}"
+              + (f" (+{len(vaghe) - 3} altre grafie)" if len(vaghe) > 3 else ""))
+
+
+def segnala_coda_organizzatore(events):
+    """Le righe il cui nome non porta la coda "- Organizzatore", e quelle in
+    cui la coda e' un COMUNE invece di una societa'.
+
+    PERCHE' ESISTE (03/09/2026). Quella coda e' la convenzione che il prompt di
+    visione del downloader impone ("titolo del singolo appuntamento -
+    Organizzatore"), ed e' l'unico legame fra un evento e la realta' che lo
+    organizza: da li' escono l'organizer del JSON-LD, la riga "Organizzatore:
+    I corsi di ..." sulle schede e la sezione "gli eventi di" sulla pagina
+    della societa'. Un nome senza coda non si aggancia a niente, in nessuno dei
+    due versi, e lo si scopriva solo leggendo il registro.
+
+    Il secondo conto e' quello piu' utile e non era mai stato fatto: se la coda
+    e' il nome di un COMUNE, la convenzione e' stata applicata male sulla
+    locandina - "Bimbi in Stalla + Merenda col Fantino - Moncalvo" dice dove,
+    non chi. Oggi non fa danno perche' nessuna societa' si chiama come un
+    paese; il giorno che succede, quell'evento si attacca alla societa'
+    sbagliata. Si segnala adesso che costa niente."""
+    tot = len(events)
+    if not tot:
+        return
+    senza = [e for e in events if not taglia_coda(e.get('nome') or '')[1]]
+    comuni = {_key(e.get('citta')) for e in events if (e.get('citta') or '').strip()}
+    sbagliate = [e for e in events
+                 if _key(taglia_coda(e.get('nome') or '')[1]) in comuni]
+    print(f"[genera_eventi] organizzatore nel nome: {tot - len(senza)}/{tot} righe "
+          f"con la coda \"- Organizzatore\"")
+    if sbagliate:
+        quante = (f"{len(sbagliate)} righe hanno" if len(sbagliate) > 1
+                  else "1 riga ha")
+        print(f"[genera_eventi] ATTENZIONE: {quante} un COMUNE "
+              f"al posto della societa' in coda al nome. Dice dove, non chi: si "
+              f"corregge sul foglio, se no il giorno che una societa' si chiama "
+              f"come un paese quell'evento si aggancia a quella sbagliata.")
+        for e in sbagliate[:6]:
+            print(f"    {_rif(e)}  {(e.get('nome') or '')[:62]}")
+
+
 # ---------------------------------------------------------------------------
 # RIAGGANCIO DELL'EDIZIONE SUCCESSIVA
 #
@@ -2605,19 +2693,12 @@ PAGINA_CSS = """
 /* Da dove arriva la segnalazione: piu' leggero della firma, piu' presente
    della nota legale sotto - e' un credito, non un disclaimer. */
 .ev-fonte{font-size:.88rem;opacity:.85}
-.ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
-/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
-   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
-   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
-   e' un <aside> dentro l'articolo, non una fascia di pagina. */
-.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
-  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
-.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
-.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
-  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
-  font-size:.95rem}
+/* .ev-canale e .ev-firma-nota sono SALITE in assets/css/daop-system.css il
+   03/09/2026, ed e' la stessa mossa gia' fatta per .eco: da quel giorno
+   l'invito al canale e la riga della data compaiono anche su corsi.html, che
+   ha un generatore suo e non riceve questo blocco. Duplicarle qui sarebbe il
+   secondo posto in cui vive una regola che ne ha gia' uno. */
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -3597,6 +3678,355 @@ def blocco_ecosistema(qui=None):
             f'<div class="eco-g">{"".join(voci)}</div></section>')
 
 
+# ---------------------------------------------------------------------------
+# LE DOMANDE FREQUENTI
+# ---------------------------------------------------------------------------
+# Chieste da Giovanni (documento del 03/09/2026) come il pezzo SEO che manca.
+# Misurato lo stesso giorno: FAQPage esisteva su TRE pagine su 568 —
+# ginetto.html, metodo.html, piattosano.html — e su nessuna delle pagine che
+# prendono traffico.
+#
+# TRE COSE DA SAPERE PRIMA DI TOCCARLE, e la terza e' quella che decide come
+# sono fatte:
+#
+#  1. NON ASPETTARSI I RICH RESULT. Da agosto 2023 Google mostra il rich
+#     result FAQ solo a siti governativi e sanitari riconosciuti. Queste FAQ
+#     valgono come CONTENUTO — coprono domande che la pagina non scriveva da
+#     nessuna parte — non come snippet. Se il metro di giudizio e' "compaiono
+#     in SERP a fisarmonica", il metro e' sbagliato.
+#
+#  2. IL MARKUP SEGUE IL VISIBILE, sempre. faq_blocco() costruisce l'HTML e il
+#     JSON-LD dalla STESSA lista: non esiste il modo di dichiarare una domanda
+#     che in pagina non c'e', che e' la violazione tipica e quella che porta
+#     un'azione manuale. Sono <details>, quindi il testo e' nel DOM anche da
+#     chiusi — e' il criterio di "visibile" che Google usa.
+#
+#  3. IL RISCHIO E' LO SCALED CONTENT, E ABBIAMO UN TERMOMETRO. Sette risposte
+#     identiche su 24 pagine comune sono il boilerplate che il rapporto
+#     Indicizzazione conta nella riga "Scansionata, ma non indicizzata" — oggi
+#     10 pagine su 131, cioe' un giudizio buono che queste FAQ possono
+#     rovinare. Da qui la regola: OGNI RISPOSTA PORTA UN NUMERO O UN NOME DI
+#     QUESTA PAGINA. Chi scrive una voce nuova con un testo uguale per tutti
+#     sta rifacendo il difetto che la pagina comune ha gia' risolto nel 2026
+#     ("le pagine risultavano identiche al 97,7%").
+#
+# E la regola che le tiene fuori dalle pagine sbagliate: NIENTE FAQ SOTTO
+# SOGLIA. Una pagina in noindex perche' non ha contenuti non diventa migliore
+# con sette domande sopra il vuoto — diventa esattamente la pagina sottile che
+# il noindex sta tenendo fuori. Lo decide chi chiama, passando la lista vuota.
+
+
+def _faq_testo(html):
+    """L'HTML della risposta come lo vuole schema.org: senza i tag.
+
+    Google accetta un sottoinsieme di HTML dentro acceptedAnswer.text, ma i
+    nostri link sono interni e in un rich result che non avremo (vedi sopra)
+    non servono a niente: il testo pulito e' quello che un assistente legge, ed
+    e' anche l'unica forma che non puo' rompere la validazione."""
+    t = re.sub(r'<[^>]+>', '', html)
+    t = (t.replace('&nbsp;', ' ').replace('&amp;', '&')
+          .replace('&#x27;', "'").replace('&quot;', '"')
+          .replace('&lt;', '<').replace('&gt;', '>'))
+    return re.sub(r'\s+', ' ', t).strip()
+
+
+def faq_blocco(voci, sotto=''):
+    """(html, dizionario FAQPage) da una lista [(domanda, risposta_html), ...].
+
+    Due valori e non uno perche' il JSON-LD sta nel <head> e l'HTML nel corpo:
+    e' l'unico punto in cui la stessa cosa deve uscire da due parti, ed e'
+    esattamente per questo che la costruisce una funzione sola. Con la lista
+    vuota tornano ('', None) e la pagina non stampa ne' il blocco ne' il
+    markup — non c'e' modo di avere l'uno senza l'altro."""
+    voci = [(d, r) for d, r in voci if d and r]
+    if not voci:
+        return '', None
+    corpo = "".join(
+        f'<details class="faq-q"><summary>{esc(d)}</summary>'
+        f'<div class="faq-a">{r}</div></details>' for d, r in voci)
+    testa = '<h2 class="faq-t" id="faq-t">Domande frequenti</h2>'
+    if sotto:
+        testa += f'<p class="faq-sub">{esc(sotto)}</p>'
+    html = (f'<section class="faq" aria-labelledby="faq-t">{testa}{corpo}</section>')
+    dati = {"@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": _faq_testo(d),
+         "acceptedAnswer": {"@type": "Answer", "text": _faq_testo(r)}}
+        for d, r in voci]}
+    return html, dati
+
+
+def _quanti_gratis(ev):
+    return sum(1 for e in ev if e_gratuito(e))
+
+
+def _quali_categorie(ev, quante=4):
+    """Le categorie presenti, in prosa, in ordine di quante righe hanno.
+
+    Si NOMINANO solo quelle che ci sono: e' la stessa regola dell'occhiello dei
+    corsi e della riga "Non solo sagre" — una pagina non promette un dato che
+    la riga sotto puo' non avere."""
+    c = collections.Counter(bucket(e)[0] for e in ev)
+    nomi = [LABELS_PROSA[s_] for s_, _ in c.most_common()
+            if s_ in LABELS_PROSA][:quante]
+    # Chi ha gia' una "e" dentro passa davanti ("cultura e natura"), se no
+    # elenco_it lo mette in coda e viene fuori "laboratori e cultura e natura".
+    # Stesso accorgimento della riga "Non solo sagre" in spec_sagre: e' la
+    # seconda volta che serve, quindi vive qui e non li'.
+    nomi.sort(key=lambda x: ' e ' not in x)
+    return elenco_it(nomi) if nomi else ''
+
+
+def _riga_canale():
+    """La frase sul canale, o '' se il canale non c'e'.
+
+    CANALE_WA vuoto vuol dire che l'invito non si stampa da nessuna parte: una
+    FAQ che risponde "iscriviti al canale" con un link che non esiste sarebbe
+    l'unico posto del sito rimasto a prometterlo."""
+    if not CANALE_WA:
+        return ''
+    return (f'<p>Il modo più comodo è il <a href="{CANALE_WA}" target="_blank" '
+            f'rel="noopener">canale WhatsApp di DAOP</a>: un messaggio il giovedì '
+            f'con quello che c\'è nel weekend, e basta. Non si commenta e nessuno '
+            f'vede il tuo numero.</p>')
+
+
+def faq_provincia(prov, sagre, altri, ric, comuni, oggi):
+    """Le domande frequenti di una /sagre-provincia-<nome>.html.
+
+    OGNI RISPOSTA PORTA UN NUMERO DI QUESTA PAGINA — quante sagre, quanti
+    comuni, quali categorie, quante gratuite, chi cura la provincia. E' la
+    regola scritta in faq_blocco(): con tre pagine provinciali il boilerplate
+    si nota subito, e sarebbe il modo piu' rapido di far salire la riga
+    "Scansionata, ma non indicizzata" del rapporto Indicizzazione.
+
+    Le domande sono quelle del documento di Giovanni del 03/09/2026, meno le
+    due che non abbiamo modo di rispondere onestamente: "gli eventi sono
+    verificati?" ha gia' una pagina intera (/metodo.html) e ripeterla qui in
+    sei righe la indebolisce, e "posso cercare per eta'?" su queste pagine e'
+    falso — il filtro eta' non c'e', ce l'hanno i corsi e i luoghi."""
+    nome = PROVINCE_NOMI.get(prov, prov)
+    tutti = list(sagre) + list(altri)
+    if not tutti and not ric:
+        return []
+    voci = []
+    paesi = len({_key(e.get('citta')) for e in tutti if (e.get('citta') or '').strip()})
+    fonte = fonte_provincia(prov)
+
+    if sagre:
+        fine = max(e['d_end'] for e in sagre)
+        voci.append((
+            f"Quante sagre ci sono in provincia di {nome}?",
+            f"<p>In questo momento in agenda ce ne sono <strong>{len(sagre)}</strong>"
+            + (f", in {paesi} comuni diversi" if paesi > 1 else '')
+            + f", con l'ultima che si chiude il {fine.day} {MESI_LUNGHI[fine.month - 1]} "
+              f"{fine.year}. L'elenco qui sopra è in ordine di data e si rifà ogni "
+              f"notte: quello che è passato esce da solo, quindi il numero cambia "
+              f"tutti i giorni.</p>"))
+
+    if altri:
+        quali = _quali_categorie(altri)
+        voci.append((
+            f"E oltre alle sagre, cosa c'è per i bambini in provincia di {nome}?",
+            f"<p><strong>{len(altri)} appuntamenti</strong> che sagre di paese non "
+            f"sono" + (f": {esc(quali)}" if quali else '')
+            + f". Li trovi in fondo a questa pagina, sotto <em>Non solo sagre</em>, e "
+              f"la tendina in cima all'elenco li separa per tipo.</p>"))
+
+    voci.append((
+        f"Come faccio a sapere cosa c'è oggi o questo weekend in provincia di {nome}?",
+        f"<p>Questa pagina è il calendario completo, quindi risponde a "
+        f"<em>quando</em> ma non a <em>adesso</em>. Per quello ci sono due pagine "
+        f"che si aggiornano ogni notte: <a href=\"{href_incrocio(prov, 'oggi')}\">"
+        f"cosa fare oggi in provincia di {esc(nome)}</a> e "
+        f"<a href=\"{href_incrocio(prov, 'weekend')}\">gli eventi del weekend in "
+        f"provincia di {esc(nome)}</a>.</p>"))
+
+    gratis = _quanti_gratis(tutti)
+    if gratis:
+        voci.append((
+            f"Ci sono sagre ed eventi gratuiti in provincia di {nome}?",
+            f"<p>Sì: di {len(tutti)} appuntamenti in agenda, <strong>{gratis}</strong> "
+            f"{'sono a ingresso libero' if gratis > 1 else 'è a ingresso libero'}. "
+            f"Il cartellino <em>Gratuito</em> è scritto nella riga di ogni evento "
+            f"che lo dichiara; dove non c'è vuol dire che si paga o che chi "
+            f"organizza non l'ha specificato — nel dubbio, in ogni scheda c'è il "
+            f"contatto per chiederlo.</p>"
+            f"<p>Nelle sagre l'ingresso è quasi sempre libero e si paga quello che "
+            f"si mangia: il prezzo che trovi indicato è di solito quello del "
+            f"piatto, non della porta.</p>"))
+
+    if comuni:
+        quali_com = ', '.join(d['nome'] for d in comuni[:8])
+        voci.append((
+            f"Ci sono pagine per singolo comune?",
+            f"<p>Sì, per i comuni in cui gli eventi sono abbastanza da farne una "
+            f"pagina che dica qualcosa in più dell'elenco. In provincia di "
+            f"{esc(nome)} sono {len(comuni)}: {esc(quali_com)}"
+            + ("…" if len(comuni) > 8 else "")
+            + ". Le trovi qui sopra, sotto <em>I comuni della provincia</em>.</p>"
+              "<p>Dove la pagina del comune non c'è, gli eventi ci sono lo stesso: "
+              "sono in questo elenco, e ognuno ha la sua scheda.</p>"))
+
+    if ric:
+        voci.append((
+            f"Quando si fa la sagra di quest'anno, se la data non è ancora uscita?",
+            f"<p>In fondo alla pagina c'è l'elenco delle <strong>{len(ric)} feste "
+            f"che abbiamo già visto in più di un'edizione</strong> in provincia di "
+            f"{esc(nome)}, con gli anni in cui si sono tenute. Serve proprio a "
+            f"questo: sapere che una festa esiste e più o meno quando, prima che "
+            f"escano le date nuove.</p>"
+            f"<p>Appena la data arriva, la pagina della festa si aggiorna da sola — "
+            f"è la stessa, non ne nasce una nuova ogni anno.</p>"))
+
+    aggiorna = _riga_canale()
+    if aggiorna:
+        voci.append((
+            "Come ricevo i nuovi eventi senza controllare ogni giorno?",
+            aggiorna + '<p>In alternativa puoi chiedere a <a href="https://ginettoapp.it" '
+            'target="_blank" rel="noopener">Ginetto</a>, che risponde a domande come '
+            '"cosa c\'è sabato vicino a casa mia con due bambini di 5 e 8 anni".</p>'))
+
+    if fonte:
+        chi = ("la pagina DAOP di questa provincia" if fonte['nostra'] else
+               "la pagina che segue questa provincia, con cui collaboriamo")
+        curatore = (f", curata da {esc(fonte['curatore'])}" if fonte.get('curatore') else '')
+        voci.append((
+            f"Da dove arrivano gli eventi della provincia di {nome}?",
+            f"<p>Da <a href=\"{fonte['url']}\" target=\"_blank\" rel=\"noopener\">"
+            f"@{esc(fonte['ig'])}</a>, {chi}{curatore}. Le locandine le leggiamo una "
+            f"per una e i dati li ricontrolliamo prima di pubblicarli: come, è "
+            f"scritto in <a href=\"/metodo.html\">come verifichiamo gli eventi</a>.</p>"))
+
+    return voci
+
+
+def faq_incrocio(prov, modo, ev, oggi, altri_giorni=()):
+    """Le domande frequenti di una /eventi/<oggi|weekend>-provincia-<nome>.html.
+
+    Sono POCHE e diverse da quelle della pagina sagre, apposta: queste pagine
+    rispondono a "adesso", non a "quando", e la domanda che si fa chi arriva
+    qui non e' "quante sagre ci sono" ma "e se stasera non c'e' niente?".
+    Copiarci le sette della provinciale sarebbe il boilerplate su sei pagine in
+    piu' — cioe' esattamente il rischio scritto in faq_blocco()."""
+    nome = PROVINCE_NOMI.get(prov, prov)
+    quando = "oggi" if modo == 'oggi' else "questo weekend"
+    voci = []
+
+    if ev:
+        paesi = len({_key(e.get('citta')) for e in ev if (e.get('citta') or '').strip()})
+        quali = _quali_categorie(ev)
+        voci.append((
+            f"Cosa si può fare con i bambini {quando} in provincia di {nome}?",
+            f"<p><strong>{len(ev)} appuntament{'i' if len(ev) != 1 else 'o'}</strong>"
+            + (f" in {paesi} comuni" if paesi > 1 else '')
+            + (f": {esc(quali)}" if quali else '')
+            + f". L'elenco è quello qui sopra, e si rifà ogni notte con le date "
+              f"del giorno — non è una pagina scritta una volta.</p>"))
+    else:
+        voci.append((
+            f"Non c'è niente {quando} in provincia di {nome}: è normale?",
+            f"<p>Capita, soprattutto nei giorni feriali e fuori stagione. Questa "
+            f"pagina dice quello che c'è davvero e non riempie il vuoto con eventi "
+            f"di un'altra settimana.</p>"
+            f"<p>Le due cose che restano vere anche oggi: "
+            f"<a href=\"/sagre-provincia-{slugify(nome)}.html\">il calendario "
+            f"completo della provincia</a>, che arriva più in là nel tempo, e "
+            f"<a href=\"/luoghi.html\">i luoghi per famiglie</a>, che sono aperti "
+            f"anche quando non c'è nessuna festa.</p>"))
+
+    gratis = _quanti_gratis(ev)
+    if gratis:
+        voci.append((
+            f"Ci sono cose gratuite {quando}?",
+            f"<p><strong>{gratis}</strong> {'sono a ingresso libero' if gratis > 1 else 'è a ingresso libero'} "
+            f"su {len(ev)} in elenco. Il cartellino <em>Gratuito</em> è nella riga "
+            f"dell'evento; dove non c'è, il prezzo o non è dichiarato o si paga "
+            f"quello che si consuma.</p>"))
+
+    altro = "weekend" if modo == 'oggi' else "oggi"
+    voci.append((
+        f"E se cerco un altro giorno?",
+        f"<p><a href=\"{href_incrocio(prov, altro)}\">"
+        f"{'Gli eventi del weekend' if altro == 'weekend' else 'Cosa fare oggi'} in "
+        f"provincia di {esc(nome)}</a> è la pagina gemella di questa. Per andare "
+        f"oltre i prossimi giorni, il calendario completo è "
+        f"<a href=\"/sagre-provincia-{slugify(nome)}.html\">sagre e feste in "
+        f"provincia di {esc(nome)}</a>, che tiene anche le feste che tornano ogni "
+        f"anno.</p>"))
+
+    return voci
+
+
+def faq_comune(citta, prov, futuri, bambini, ric, vicini, oggi, luoghi=''):
+    """Le domande frequenti di una /eventi/comune/<slug>.html.
+
+    Sono CINQUE al massimo e quasi tutte condizionate: 24 pagine comune sono il
+    posto del sito in cui il boilerplate si accumula piu' in fretta, ed e' lo
+    stesso guasto che queste pagine hanno gia' pagato una volta ("risultavano
+    identiche al 97,7%"). Ogni risposta nomina il comune e porta un numero suo;
+    dove il numero non c'e', la domanda non si stampa."""
+    if not futuri and not ric:
+        return []
+    nome_prov = PROVINCE_NOMI.get(prov, prov)
+    voci = []
+
+    if futuri:
+        fine = max(e['d_end'] for e in futuri)
+        quali = _quali_categorie(futuri)
+        voci.append((
+            f"Cosa fare con i bambini{a_citta(citta)}?",
+            f"<p>In questo momento{a_citta(citta)} abbiamo <strong>{len(futuri)} "
+            f"appuntament{'i' if len(futuri) != 1 else 'o'}</strong> in programma"
+            + (f": {esc(quali)}" if quali else '')
+            + f", fino al {fine.day} {MESI_LUNGHI[fine.month - 1]} {fine.year}. "
+              f"Sono tutti nell'elenco qui sopra, ognuno con la sua scheda: data, "
+              f"orario, luogo e il contatto di chi organizza.</p>"))
+
+    if bambini:
+        voci.append((
+            f"Quali sono adatti all'età dei miei figli?",
+            f"<p>Di quelli in programma, <strong>{len(bambini)}</strong> "
+            f"{'sono pensati' if len(bambini) != 1 else 'è pensato'} proprio per i "
+            f"bambini: hanno una fascia d'età dichiarata da chi organizza, oppure "
+            f"laboratori, burattini o giochi scritti nel programma. Li trovi "
+            f"raccolti nella sezione <em>Cosa c'è per i bambini{a_citta(citta)}</em>, "
+            f"con l'età accanto dove è indicata.</p>"
+            f"<p>Il resto è comunque roba da portarci i figli: in agenda entra solo "
+            f"quello che abbiamo già scelto per le famiglie.</p>"))
+
+    gratis = _quanti_gratis(futuri)
+    if gratis:
+        voci.append((
+            f"Ci sono eventi gratuiti{a_citta(citta)}?",
+            f"<p><strong>{gratis}</strong> su {len(futuri)} in programma "
+            f"{'sono a ingresso libero' if gratis > 1 else 'è a ingresso libero'}, "
+            f"col cartellino <em>Gratuito</em> nella riga. Dove il cartellino non "
+            f"c'è, il prezzo non è dichiarato oppure si paga quello che si "
+            f"consuma — nelle sagre è quasi sempre il secondo caso.</p>"))
+
+    if vicini:
+        elenco = ", ".join(v['nome'] for v in vicini[:6])
+        voci.append((
+            f"E nei comuni vicini{a_citta(citta)}?",
+            f"<p>In provincia di {esc(nome_prov)} hanno una pagina loro anche "
+            f"{esc(elenco)}"
+            + ("…" if len(vicini) > 6 else "")
+            + f": le trovi in fondo, sotto <em>Altri comuni della provincia</em>. "
+              f"Se preferisci guardare tutto insieme, "
+              f"<a href=\"/sagre-provincia-{slugify(nome_prov)}.html\">il calendario "
+              f"della provincia di {esc(nome_prov)}</a> li tiene in un elenco solo.</p>"))
+
+    if luoghi:
+        voci.append((
+            f"E quando non c'è nessun evento{a_citta(citta)}?",
+            f"<p>Restano i posti che ci sono sempre — parchi, musei, fattorie, "
+            f"piscine, biblioteche: {luoghi}.</p>"
+            f"<p>È la domanda dei giorni feriali e dei mesi vuoti, ed è il motivo "
+            f"per cui quella pagina esiste accanto all'agenda.</p>"))
+
+    return voci
+
+
 def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
 
@@ -3672,12 +4102,38 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     lg = link_luoghi(rec.get('citta'), prov)
     if lg:
         coda.append(lg)
+    # "Oggi" e "questo weekend" della PROVINCIA di questa scheda, non le due
+    # pagine trasversali.
+    #
+    # PERCHE' E' CAMBIATO (03/09/2026). Le schede sono l'unica superficie con
+    # autorita' vera - 357 pagine, il 77,3% dei clic del sito (export GSC del
+    # 02/09, 28 giorni) - e mandavano a /eventi/oggi.html e
+    # /eventi/weekend.html, che dal 14/08 sono INDICI e non risposte: nello
+    # stesso export fanno 3 clic in due e oggi.html sta in posizione 21,72.
+    # Le sei pagine d'incrocio, che sono la risposta vera, ricevevano CINQUE
+    # link entranti in tutto il sito (misurato con grep il 03/09) e infatti
+    # /eventi/oggi-provincia-cuneo.html sta in posizione 10,36.
+    #
+    # E' lo stesso guasto gia' pagato due volte: le landing all'11/08 non
+    # ricevevano link dalle schede (risolto qui sotto con le sagre), luoghi.html
+    # non ne riceveva nessuno dal corpo (risolto il 14/08 con link_luoghi, e le
+    # impressioni sono passate da 58 a 538 in due giorni). Qui non nasce niente
+    # di nuovo: si sposta un link che c'era gia' su una pagina piu' precisa.
+    #
+    # Fuori dalle tre province - non capita oggi, ma il foglio si compila a
+    # mano - restano le due trasversali, che di quella provincia non
+    # promettono niente e quindi non mentono.
     if prov in PROVINCE_PUBBLICATE:
         nome_prov = PROVINCE_NOMI[prov]
         coda.append(f'<a href="/sagre-provincia-{slugify(nome_prov)}.html">'
                     f'Le sagre in provincia di {esc(nome_prov)}</a>')
-    coda.append('<a href="/eventi/oggi.html">Cosa c\'è oggi</a>')
-    coda.append('<a href="/eventi/weekend.html">Questo weekend</a>')
+        coda.append(f'<a href="{href_incrocio(prov, "oggi")}">'
+                    f'Cosa c\'è oggi in provincia di {esc(nome_prov)}</a>')
+        coda.append(f'<a href="{href_incrocio(prov, "weekend")}">'
+                    f'Il weekend in provincia di {esc(nome_prov)}</a>')
+    else:
+        coda.append('<a href="/eventi/oggi.html">Cosa c\'è oggi</a>')
+        coda.append('<a href="/eventi/weekend.html">Questo weekend</a>')
     coda.append('<a href="/eventi.html">Tutta l\'agenda DAOP</a>')
     return ('<section class="ev-vicini" aria-labelledby="ev-vicini-t">'
             f'<h2 id="ev-vicini-t">{esc(titolo)}</h2>'
@@ -4696,6 +5152,26 @@ def scrivi_zone(events, hub=None):
         # eventi.html e' una <select> in JS, non ci sono ancore per provincia e
         # un "#prov-al" inventato qui atterrerebbe in cima alla pagina.
         link.append('<a href="/eventi.html">Vedi l\'agenda</a>')
+        # Le tre pagine di quella provincia, su una riga loro.
+        #
+        # PERCHE' NON ERANO QUI (trovato il 03/09/2026 con grep). Questa pagina
+        # E' l'indice delle zone, sta nel footer di 540 pagine, e delle nove
+        # landing provinciali non ne linkava NESSUNA: mandava tutti sull'agenda
+        # trasversale, cioe' sulla pagina che le tre province le mescola. E'
+        # esattamente il difetto che le zon-com hanno gia' risolto per i
+        # comuni, lasciato in piedi un piano piu' su.
+        #
+        # Riga separata dai pulsanti social per la stessa ragione dei comuni:
+        # in fila a Instagram e Facebook un link interno sembra un quarto
+        # profilo di qualcun altro, ed e' l'opposto - porta dentro il sito.
+        prov_link = [
+            f'<a href="/sagre-provincia-{slugify(f["provincia"])}.html">'
+            f'Sagre e feste</a>',
+            f'<a href="{href_incrocio(sigla, "oggi")}">Cosa c\'è oggi</a>',
+            f'<a href="{href_incrocio(sigla, "weekend")}">Questo weekend</a>',
+        ]
+        prov_html = ('<p class="zon-lab">Le pagine della provincia</p>'
+                     f'<div class="zon-link zon-com">{"".join(prov_link)}</div>')
         # I comuni della provincia che hanno una pagina loro. E' qui che
         # restano attaccati al resto del sito: una pagina raggiungibile solo
         # dalla sitemap e' una pagina che Google tratta come tale. Riga a
@@ -4711,7 +5187,7 @@ def scrivi_zone(events, hub=None):
             f'<h2>{esc(f["provincia"])}</h2>'
             f'<p class="zon-n">{quanti}</p>'
             f'<p>{testo}</p>'
-            f'<div class="zon-link">{"".join(link)}</div>{com_html}'
+            f'<div class="zon-link">{"".join(link)}</div>{prov_html}{com_html}'
             '</section>')
 
     grafo = [
@@ -5583,9 +6059,27 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     if lista:
         grafo.append({"@type": "ItemList", "name": f"Eventi{a_citta(citta)}",
                       "numberOfItems": len(lista), "itemListElement": lista})
+    robots = "index, follow" if futuri or ric else "noindex, follow"
+
+    # Le FAQ. Sopra soglia soltanto — sotto, la pagina e' in noindex proprio
+    # perche' non ha contenuti, e cinque domande non la migliorano.
+    #
+    # Le 24 pagine comune sono il posto del sito in cui il boilerplate si
+    # accumula piu' in fretta, ed e' un difetto gia' pagato una volta qui
+    # dentro (le pagine risultavano identiche al 97,7%). faq_comune() risponde
+    # con i numeri di questo comune e salta le domande a cui non ha un numero
+    # da dare: e' quello che le rende diverse l'una dall'altra.
+    faq_html, faq_dati = ('', None)
+    if robots.startswith('index'):
+        faq_html, faq_dati = faq_blocco(
+            faq_comune(citta, dati['prov'], futuri, bambini, ric, altri, oggi,
+                       luoghi=link_luoghi(citta, dati['prov'])),
+            f"Le risposte usano i numeri{a_citta(citta)} di oggi, e si rifanno "
+            f"con la pagina ogni notte.")
+    if faq_dati:
+        grafo.append(faq_dati)
     jsonld = json.dumps({"@context": "https://schema.org", "@graph": grafo},
                         ensure_ascii=False, indent=2)
-    robots = "index, follow" if futuri or ric else "noindex, follow"
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -5648,6 +6142,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
   </div>
   {blocco_canale(citta)}
   {f'<h2>Altri comuni della provincia di {esc(prov_nome)}</h2><div class="com-link">{link_altri}</div>' if link_altri else ''}
+  {faq_html}
   {blocco_ecosistema('eventi')}
   {credito}
   <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
@@ -5766,6 +6261,13 @@ LANDING_REGISTRO = os.path.join(ROOT, "data", "pagine-landing.json")
 # Le sagre che tornano ogni anno contano: sono la parte che regge a novembre,
 # quando di sagre in programma non ce n'e' nessuna.
 MIN_LANDING = 5
+
+# Quanti eventi "pensati per i bambini" servono perche' la loro sezione valga
+# una sezione, e quanti se ne stampano. Sotto tre righe un <h2> con sotto un
+# elenco di uno e' rumore; sopra dodici si ripete mezza pagina, e sono righe
+# che stanno gia' tutte nell'elenco sopra.
+MIN_BIMBI_LANDING = 3
+MAX_BIMBI_LANDING = 12
 
 LANDING_CSS = """
 /* Il comune sotto il nome dell'evento: qui gli elenchi attraversano la
@@ -5943,7 +6445,8 @@ def _landing_titolo(candidati):
     return trunc(candidati[-1], MAX_TITLE)
 
 
-def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi, padre=None):
+def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi, padre=None,
+                   faq=None):
     """CollectionPage + briciole + ItemList.
 
     L'ItemList RIMANDA alle pagine evento e non ripete gli Event, per la stessa
@@ -5972,6 +6475,11 @@ def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi, padre=No
     if lista:
         grafo.append({"@type": "ItemList", "name": nome_lista,
                       "numberOfItems": len(lista), "itemListElement": lista})
+    # Il FAQPage entra solo se il blocco e' anche in pagina: chi chiama passa
+    # qui lo STESSO dizionario che faq_blocco() ha prodotto insieme all'HTML,
+    # quindi non esiste il caso "dichiarata e non visibile".
+    if faq:
+        grafo.append(faq)
     return json.dumps({"@context": "https://schema.org", "@graph": grafo},
                       ensure_ascii=False, indent=2)
 
@@ -6728,6 +7236,18 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
                   f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
 
     corpo += f'<h2>Le altre province</h2>{_blocco_incroci(modo, events, oggi, qui=href)}'
+
+    # Vedi FINESTRA_INCROCIO: il robots si decide sulla finestra larga, non su
+    # oggi. Le FAQ seguono lui, come sulla pagina sagre: sotto soglia non si
+    # stampano.
+    robots = "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow"
+    faq_html, faq_dati = ('', None)
+    if robots.startswith('index'):
+        faq_html, faq_dati = faq_blocco(
+            faq_incrocio(prov, modo, principale, oggi),
+            "Le risposte sono ricavate dagli eventi in elenco, e si rifanno con "
+            "loro ogni notte.")
+    corpo += faq_html
     corpo += _altre_landing(href, altre)
 
     return {
@@ -6736,11 +7256,10 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
         'h1': h1, 'sotto': sotto, 'crumb': crumb,
         'padre': (padre, padre_nome),
         'corpo': corpo,
-        # Vedi FINESTRA_INCROCIO: si decide sulla finestra larga, non su oggi.
-        'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
+        'robots': robots,
         'prov': prov,
         'jsonld': _grafo_landing(url, titolo, descr, principale, nome_lista, crumb, oggi,
-                                 padre=(padre, padre_nome)),
+                                 padre=(padre, padre_nome), faq=faq_dati),
         'eventi': len(principale),
     }
 
@@ -7675,6 +8194,60 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
                   f"ogni notte.</p>"
                   f'<section class="com-grp"><ul class="com-ev'
                   f'{" is-nude" if nude else ""}">{righe}</ul></section>')
+    # COSA C'E' PER I BAMBINI. E' una VISTA sui due elenchi qui sopra, non un
+    # terzo insieme: le stesse schede, filtrate da e_per_bambini().
+    #
+    # PERCHE' ESISTE (03/09/2026). Giovanni chiedeva una pagina vera "Eventi
+    # per bambini in provincia di [PROVINCIA]". Non si fa, e il conto sta in
+    # spec_sagre piu' su: nell'export del 26/08 le query provinciali senza
+    # finestra temporale valgono 511 impressioni in tre mesi, e nell'export del
+    # 02/09 le mille query visibili contengono "bambin*" in 14 query per 75
+    # impressioni e 4 clic. Una decima pagina provinciale si contenderebbe le
+    # query delle nove che ci sono gia' per una domanda che non c'e'.
+    #
+    # Quello che invece manca davvero e' la COPERTURA SEMANTICA: la frase
+    # "eventi per bambini in provincia di X" non era scritta in nessun <h2> del
+    # sito. Questa sezione la scrive, sulla pagina che quella provincia la
+    # vince gia' (10,6% dei clic del sito), e non costa nessuna URL.
+    #
+    # NON USA "Adatto Famiglie", ed e' la regola di sempre: quel flag e' "Si"
+    # sul 95% delle righe, quindi non divide niente. e_per_bambini() vuole una
+    # fascia d'eta' NUMERICA dichiarata da chi organizza oppure un'attrazione
+    # per bambini scritta nel programma - cioe' "pensati PER i bambini", non
+    # "adatti". Su 199 eventi vivi al 03/09 sono 76, e la differenza fra le
+    # province e' vera: CN 44 su 71, AL 22 su 93, AT 10 su 35.
+    bimbi = [e for e in sagre + altri_ev if e_per_bambini(e)]
+    if len(bimbi) >= MIN_BIMBI_LANDING:
+        mostrati = bimbi[:MAX_BIMBI_LANDING]
+        con_eta = sum(1 for e in bimbi if fascia_eta(e.get('eta')))
+        coda = (f" I primi {len(mostrati)} in ordine di data:"
+                if len(bimbi) > len(mostrati) else "")
+        righe, nude = _landing_righe(mostrati, oggi)
+        corpo += (f"<h2>Eventi per bambini in provincia di {esc(nome_prov)}</h2>"
+                  f"<p><strong>{len(bimbi)} appuntamenti</strong> di questa pagina sono "
+                  f"pensati proprio per i bambini"
+                  + (f", e {con_eta} di questi dichiarano la fascia d'età"
+                     if con_eta else "")
+                  + f": hanno un'età indicata da chi organizza, oppure laboratori, "
+                    f"burattini o giochi scritti nel programma. Il resto è comunque "
+                    f"roba da portarci i figli — in agenda entra solo quello che "
+                    f"abbiamo già scelto per le famiglie.{coda}</p>"
+                  # La classe e' com-bimbi e NON com-kids, ed e' l'unica cosa
+                  # di questo blocco che si vede solo misurando. .com-kids sta
+                  # in COMUNE_CSS ed e' tarata sulla riga delle pagine comune
+                  # (.com-d + .com-go); qui le righe le fa _landing_righe(),
+                  # che ha un'altra forma, e le due insieme davano una riga
+                  # alta 332px invece di 101 - dodici righe per 3.981px, con
+                  # l'HTML perfettamente giusto. Trovato a 412px nel browser,
+                  # non leggendo il CSS: e' lo stesso genere di guasto della
+                  # barra delle azioni alta 915px.
+                  #
+                  # com-bimbi non ha nessuna regola sua: serve solo da appiglio
+                  # alla prova, che deve poter distinguere questa vista dai due
+                  # elenchi veri. Una classe senza CSS e' voluta - se un domani
+                  # ne serve uno, si scrive sapendo che vale solo qui.
+                  f'<section class="com-grp"><ul class="com-ev com-bimbi'
+                  f'{" is-nude" if nude else ""}">{righe}</ul></section>')
     if comuni:
         link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
                        for d in comuni)
@@ -7695,11 +8268,23 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
                   f'arrivano da <a href="{fonte["url"]}" target="_blank" rel="noopener">'
                   f'@{esc(fonte["ig"])}</a>, {chi}. '
                   f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
-    corpo += _altre_landing(href, altre)
-
     # Sotto soglia la pagina resta (i link che girano non si rompono) ma esce
     # dall'indice e dalla sitemap: la stessa regola delle pagine comune.
     robots = "index, follow" if len(sagre) + len(ric) >= MIN_LANDING else "noindex, follow"
+
+    # LE FAQ SOLO SOPRA SOGLIA, ed e' la regola scritta in faq_blocco(): una
+    # pagina tenuta fuori dall'indice perche' non ha contenuti non migliora con
+    # sette domande sopra il vuoto, diventa la pagina sottile che il noindex
+    # sta tenendo fuori. Stanno DOPO il contenuto e PRIMA delle scorciatoie:
+    # rispondono a "questa pagina", le scorciatoie mandano altrove.
+    faq_html, faq_dati = ('', None)
+    if robots.startswith('index'):
+        faq_html, faq_dati = faq_blocco(
+            faq_provincia(prov, sagre, altri_ev, ric, comuni, oggi),
+            f"Le risposte usano i numeri di questa pagina, che si rifà ogni notte.")
+    corpo += faq_html
+    corpo += _altre_landing(href, altre)
+
     return {
         'path': f"{slug}.html", 'url': url,
         'titolo': titolo, 'descr': descr,
@@ -7712,7 +8297,8 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
         'prov': prov,
         'jsonld': _grafo_landing(url, titolo, descr, sagre,
                                  f"Sagre in provincia di {nome_prov}",
-                                 f"Sagre in provincia di {nome_prov}", oggi),
+                                 f"Sagre in provincia di {nome_prov}", oggi,
+                                 faq=faq_dati),
         # Resta il numero delle SAGRE, non il totale in pagina: e' il numero su
         # cui si decide il robots ed e' quello che dice se questa pagina sta
         # facendo il suo mestiere. Gli altri si stampano a parte nel log.
@@ -8067,7 +8653,50 @@ def blocco_numeri(events):
     return '<p class="he-num">' + ''.join(f"<span>{v}</span>" for v in voci) + '</p>'
 
 
-def inject_home(cards_html, stagione='', numeri=''):
+def blocco_zone_home(events, oggi):
+    """La riga di link alle province, sotto il carosello della home.
+
+    PERCHE' ESISTE (03/09/2026, chiesto da Giovanni). Misurato con grep lo
+    stesso giorno: index.html linkava ZERO delle nove landing provinciali —
+    non le tre sagre-provincia-*, non le sei d'incrocio. La home nomina le tre
+    province solo dentro un paragrafo, senza un link, e manda tutti
+    sull'agenda trasversale.
+
+    E' lo stesso guasto delle quattro porte (20/08: due famiglie su quattro
+    senza una porta da nessuna parte) applicato alla geografia: le pagine ci
+    sono e rendono — le sagre-provincia-* fanno il 10,6% dei clic del sito
+    nell'export del 02/09 — ma dalla home non ci si arriva.
+
+    TRE COSE CHE NON SI FANNO, e vale la pena siano scritte:
+      - non si tocca l'hero della home, e non nasce una sezione nuova: la riga
+        sta dentro il blocco eventi, cioe' dove chi scorre ha appena visto tre
+        card e la domanda naturale e' "e dalle mie parti?";
+      - non nasce nessuna URL: sono link a pagine che esistono da agosto;
+      - il numero accanto al nome non e' decorazione. E' la stessa regola di
+        link_luoghi() e delle quattro porte: "Cuneo (71)" e' una ragione per
+        toccare, "Cuneo" no. Una provincia a zero resta in elenco senza numero
+        — sparire sembrerebbe un errore del sito, e' la regola di scrivi_zone.
+
+    L'elenco lo fa PROVINCE_PUBBLICATE, quindi una provincia nuova entra da
+    sola come nella nav e nei filtri: non c'e' una seconda lista da ricordare.
+    Sotto MIN_HOME_NUMERI non si stampa, come la riga dei numeri sopra: con
+    l'agenda magra sarebbero tre link a tre pagine quasi vuote."""
+    if len(events) < MIN_HOME_NUMERI:
+        return ''
+    per_prov = collections.Counter((e.get('prov') or '').upper() for e in events)
+    voci = []
+    for c in PROVINCE_PUBBLICATE:
+        nome = PROVINCE_NOMI.get(c, c)
+        n = per_prov.get(c, 0)
+        eti = f"{nome} ({n})" if n else nome
+        voci.append(f'<a href="/sagre-provincia-{slugify(nome)}.html">{esc(eti)}</a>')
+    if not voci:
+        return ''
+    return ('<div class="he-zone"><p class="he-zone-t">Vai alla tua provincia</p>'
+            f'<div class="he-zone-l">{"".join(voci)}</div></div>')
+
+
+def inject_home(cards_html, stagione='', numeri='', zone=''):
     """Sostituisce le card del carosello in index.html tra i marker HOME-EVENTI,
     la riga stagionale tra i marker HOME-STAGIONE e i numeri tra HOME-NUMERI.
     Se la home o i marker mancano, salta senza errore."""
@@ -8090,6 +8719,15 @@ def inject_home(cards_html, stagione='', numeri=''):
     s, nn = re.subn(r'<!-- HOME-NUMERI:START -->.*?<!-- HOME-NUMERI:END -->',
                     lambda _: f'<!-- HOME-NUMERI:START -->{numeri}<!-- HOME-NUMERI:END -->',
                     s, count=1, flags=re.S)
+    # La riga delle province. Opzionale come le altre: una home piu' vecchia
+    # del deploy non deve far fallire tutta la generazione, e senza il marker
+    # la pagina resta quella scritta a mano.
+    s, nz = re.subn(r'<!-- HOME-ZONE:START -->.*?<!-- HOME-ZONE:END -->',
+                    lambda _: f'<!-- HOME-ZONE:START -->{zone}<!-- HOME-ZONE:END -->',
+                    s, count=1, flags=re.S)
+    if nz != 1:
+        print("[genera_eventi] ATTENZIONE: marker HOME-ZONE non trovati in "
+              "index.html: la riga delle province non viene scritta")
     # Le quattro porte. Qui si passa qui=None: sulla home non si e' dentro
     # nessuna famiglia, quindi escono tutte e quattro.
     porte = blocco_ecosistema()
@@ -8625,6 +9263,12 @@ def main():
     segnala_durate_assurde(events)
     segnala_date_ignote(events)
     segnala_senza_coordinate(events)
+    # I due conti che guardano il FOGLIO invece del sito, cioe' il lavoro del
+    # downloader: la colonna Eta' (che riempie la sezione "per bambini") e la
+    # coda "- Organizzatore" nel nome (che tiene insieme eventi e realta').
+    # Nessuno dei due e' un errore da correggere qui: si correggono a monte.
+    segnala_eta_vaghe(events)
+    segnala_coda_organizzatore(events)
     assegna_ancore(events)
     # Il proprio numero si scrive PRIMA di generare qualunque pagina: la riga
     # delle quattro porte lo rilegge, e scritto dopo mostrerebbe quello di ieri
@@ -8644,7 +9288,7 @@ def main():
     inject(tipo_opts, lista, jsonld, opzioni_provincia(events), blocco_comuni(hub, oggi),
            blocco_hero(events, oggi))
     inject_home(render_home(events), blocco_stagione(events, oggi),
-                blocco_numeri(events))
+                blocco_numeri(events), blocco_zone_home(events, oggi))
     slugs = scrivi_pagine(events, hub)
     comuni = scrivi_comuni(hub, oggi)
     landing = scrivi_landing(events, hub, storico, oggi)

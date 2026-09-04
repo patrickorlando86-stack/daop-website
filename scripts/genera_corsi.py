@@ -32,6 +32,7 @@ import io
 import json
 import re
 import datetime
+import collections
 import urllib.request
 import urllib.parse
 
@@ -2221,6 +2222,15 @@ CSS = """
 #co-lista{scroll-margin-top:120px}
 .co-realta h3 a{color:inherit;text-decoration:none}
 .co-realta h3 a:hover{text-decoration:underline}
+/* "Come scegliere un corso": prosa, non elenco. La colonna e' piu' stretta del
+   resto della pagina perche' un testo lungo su 900px si legge male - e' la
+   stessa larghezza che centri-estivi.html usa per la sua guida. */
+.co-guida{margin:40px 0 0;padding:0;border-top:1px solid rgba(45,74,92,.14)}
+.co-guida-t{font-size:1.35rem;margin:26px 0 6px}
+.co-guida h3{font-size:1.02rem;margin:22px 0 5px;color:var(--navy,#2d4a5c)}
+.co-guida p{max-width:68ch;margin:0 0 10px;font-size:.95rem;line-height:1.65;
+  color:var(--text-mid,#5d6a70)}
+.co-guida a{color:var(--teal,#6ba5a8)}
 """
 
 
@@ -2484,15 +2494,283 @@ def nota_vuota():
         '<a href="/eventi.html">cosa c\'è in agenda</a>.</p>')
 
 
-def _grafo(corsi):
+def _discipline(corsi):
+    """Le macro-categorie presenti, in ordine di quanti corsi hanno.
+
+    Serve alla guida e alle FAQ, e serve che sia una funzione: due elenchi
+    scritti a mano in due paragrafi divergono alla prima societa' nuova, ed e'
+    esattamente il difetto che l'occhiello aveva prima del 21/08/2026, quando
+    prometteva "i giorni e i costi" che il foglio non garantisce."""
+    c = collections.Counter(_cat_macro(x) for x in corsi if _cat_macro(x))
+    return [n for n, _ in c.most_common()]
+
+
+def _comuni(corsi):
+    return sorted({(c['citta'] or '').strip() for c in corsi if (c['citta'] or '').strip()})
+
+
+def guida_corsi(corsi):
+    """"Come scegliere un corso per bambini", in coda all'elenco.
+
+    PERCHE' ESISTE (03/09/2026, chiesto da Giovanni). Fino a oggi corsi.html
+    aveva DUE <h2> in tutta la pagina — "Chi organizza" e la riga delle quattro
+    porte — su una sezione che e' l'unica del sito con una presenza pagata. La
+    stessa cosa esiste da mesi su centri-estivi.html (guida(), sette <h3>) e
+    non era mai stata scritta qui.
+
+    NON E' UNA PAGINA NUOVA, ed e' la stessa decisione presa per le guide
+    stagionali: una /guida-corsi.html mangerebbe la query "corsi per bambini
+    cuneo" alla pagina che se l'e' gia' presa. E' una sezione dell'hub.
+
+    STA IN CODA, sotto l'elenco. Sopra ci va quello per cui la gente e'
+    arrivata — i corsi — e un testo di 400 parole prima delle schede e' la
+    ricetta con la storia della nonna sopra. Stessa aritmetica dell'invito al
+    canale.
+
+    LE DOMANDE SONO SEI E NON NOVE. Il documento ne suggeriva nove, e tre sono
+    state tolte perche' promettono un dato che il foglio non garantisce: il
+    COSTO (colonna vuota su tutte e 12 le righe al 03/09/2026, e facoltativa
+    per decisione di Giovanni), la DURATA e la DATA DI ULTIMO AGGIORNAMENTO del
+    singolo corso. Scrivere "controlla il costo" sotto un elenco in cui il
+    costo non c'e' mai e' la stessa cosa dell'occhiello che lo prometteva.
+
+    E niente guida sopra il vuoto: con zero corsi non si stampa, come INTRO e
+    come il grafo di Course."""
+    if not corsi:
+        return ''
+    fasce = _fasce_coperte(corsi)
+    disc = _discipline(corsi)
+    # Le tre righe qui sotto sono le uniche che parlano dei DATI di questa
+    # pagina invece che di corsi in generale: sono quelle che la rendono
+    # diversa dalla stessa guida su un'altra pagina.
+    quante = (f"le {len(fasce)} fasce d'età che questo elenco copre"
+              if len(fasce) > 1 else "la fascia d'età di questo elenco")
+    esempi = ', '.join(disc[:4]).lower() if disc else 'le discipline in elenco'
+    return f"""  <section class="co-guida" aria-labelledby="co-guida-t">
+    <h2 class="co-guida-t" id="co-guida-t">Come scegliere un corso per bambini</h2>
+    <p>Le domande che vale la pena fare prima di iscrivere un figlio. Non sono
+    consigli generici: sono le cose che, sulle locandine che raccogliamo, o non
+    ci sono scritte o cambiano da una società all'altra.</p>
+
+    <h3>L'età scritta non è un limite, è una fascia</h3>
+    <p>Quasi tutte le realtà indicano un intervallo — qui sopra il filtro usa
+    {G.esc(quante)} — ma quell'intervallo nasce dalle annate sportive o dalle
+    classi, non dal compleanno. Un bambino appena fuori fascia spesso si prende
+    lo stesso: è la prima domanda da fare al telefono, e la risposta è quasi
+    sempre sì.</p>
+
+    <h3>Il comune conta più della disciplina</h3>
+    <p>Un corso è un impegno che si ripete ogni settimana per mesi: venti
+    minuti di macchina il giovedì sera diventano quaranta minuti tutte le
+    settimane fino a primavera. Guarda prima dove si tiene
+    ({G.esc(', '.join(_comuni(corsi)[:4]))}{'…' if len(_comuni(corsi)) > 4 else ''}),
+    poi cosa si fa.</p>
+
+    <h3>Chiedi i giorni e gli orari, non darli per scontati</h3>
+    <p>Dove la società ce li ha comunicati li trovi nel dettaglio della riga.
+    Dove non ci sono, non è una dimenticanza nostra: sono dati che cambiano a
+    settembre quando si formano i gruppi, e preferiamo non scrivere un orario
+    che poi non tiene. Il numero della società è nella sua scheda in fondo alla
+    pagina.</p>
+
+    <h3>Vai a vedere prima di decidere</h3>
+    <p>Quasi tutte le realtà lasciano provare una lezione, e dove è dichiarato
+    è scritto nella riga del corso. Gli open day invece sono appuntamenti veri,
+    con una data: quando ce n'è uno collegato, compare nel dettaglio del corso
+    e nel <a href="/eventi.html">calendario degli eventi</a>. Andare una volta
+    dice più di qualunque descrizione.</p>
+
+    <h3>Sul costo: chiedilo, e chiedi cosa comprende</h3>
+    <p>Non pubblichiamo i prezzi, e non è una svista: fra quota associativa,
+    tesseramento, assicurazione e materiale, due corsi con lo stesso prezzo
+    scritto possono costare molto diverso. La cifra che conta è quella che
+    dice la società quando le chiedi il totale della stagione.</p>
+
+    <h3>Uno alla volta</h3>
+    <p>{G.esc(esempi.capitalize())}: la tentazione è iscriversi a due o tre
+    cose "così prova". Un pomeriggio libero durante la settimana vale più di
+    un'attività in più, e il corso che resta l'anno dopo è quasi sempre quello
+    scelto senza fretta.</p>
+  </section>
+"""
+
+
+def faq_corsi(corsi, realta=None):
+    """Le domande frequenti, costruite sui dati di QUESTA pagina.
+
+    Ogni risposta porta un numero o un nome che viene dall'elenco: e' la regola
+    scritta in G.faq_blocco() contro il boilerplate, e qui e' facile
+    rispettarla perche' la pagina e' una sola. Il giorno dello split
+    (CORSI_PER_PROVINCIA) diventa il pezzo da guardare per primo: sette
+    risposte identiche su tre pagine provinciali sarebbero tre doppioni.
+
+    Con zero corsi non si stampa niente: e' la regola di nota_vuota(), e una
+    FAQ che spiega come filtrare un elenco vuoto e' peggio del vuoto."""
+    if not corsi:
+        return []
+    realta = realta or {}
+    dove, _ = zona(corsi)
+    dove_sp = f' {dove}' if dove else ''
+    disc = _discipline(corsi)
+    comuni = _comuni(corsi)
+    fasce = _fasce_coperte(corsi)
+    orgs = sorted({(c['org'] or '').strip() for c in corsi if (c['org'] or '').strip()})
+    con_prova = [c for c in corsi if (c.get('prova') or '').strip()]
+    con_od = [c for c in corsi if (c.get('openday') or '').strip()]
+    caselle = _mail_per(corsi)
+    mail_html = '. '.join(
+        ((f"in provincia di {_elenco_prov(sig)} " if len(caselle) > 1 else '')
+         + f'<a href="mailto:{m}">{m}</a>') for sig, m in caselle)
+
+    voci = []
+
+    n = len(corsi)
+    quali = G.elenco_it([d.lower() for d in disc[:5]]) if disc else ''
+    voci.append((
+        f"Quali corsi per bambini si trovano{dove_sp}?",
+        f"<p>In questo momento l'elenco ha <strong>{n} cors{'i' if n != 1 else 'o'}</strong>"
+        + (f" di {G.esc(quali)}" if quali else '')
+        + (f", proposti da {len(orgs)} realtà diverse" if len(orgs) > 1 else '')
+        + (f", in {len(comuni)} comuni" if len(comuni) > 1
+           else f"{G.a_citta(comuni[0])}" if comuni else '')
+        + ". Non è tutto quello che esiste sul territorio: è tutto quello che "
+          "abbiamo raccolto e che la società che lo organizza ci ha confermato. "
+          "L'elenco cresce una realtà alla volta.</p>"))
+
+    if len(fasce) > 1:
+        etichette = [e for k, e in FASCE_ETA if k in fasce]
+        voci.append((
+            "Posso cercare i corsi per età di mio figlio?",
+            f"<p>Sì, con il filtro <em>Età</em> in cima all'elenco. Le fasce coperte "
+            f"da questa pagina sono {G.esc(', '.join(etichette))}: le altre non "
+            f"vengono nemmeno stampate nella tendina, così non capita di sceglierne "
+            f"una e trovare la pagina vuota.</p>"
+            f"<p>Il confronto è per sovrapposizione, non per contenimento: un corso "
+            f"6-11 anni esce sia cercando 6-8 sia cercando 9-11, perché un bambino "
+            f"di 7 anni e uno di 10 ci stanno tutti e due.</p>"))
+
+    if len(comuni) > 1:
+        voci.append((
+            "In quali comuni si tengono?",
+            f"<p>{G.esc(', '.join(comuni))}. Il filtro <em>Comune</em> in cima "
+            f"all'elenco li separa. Se il tuo paese non c'è, vuol dire che non "
+            f"abbiamo ancora raccolto nessuna realtà che ci lavori — non che non "
+            f"ce ne siano.</p>"))
+
+    if con_prova or con_od:
+        pezzi = []
+        if con_prova:
+            pezzi.append(f"<strong>{len(con_prova)} cors{'i' if len(con_prova) != 1 else 'o'}</strong> "
+                         f"dichiara{'no' if len(con_prova) != 1 else ''} una lezione di prova")
+        if con_od:
+            pezzi.append(f"<strong>{len(con_od)}</strong> ha un open day con una data "
+                         f"precisa, collegata al calendario degli eventi")
+        voci.append((
+            "Come trovo i corsi con una lezione di prova o un open day?",
+            f"<p>Su questa pagina {' e '.join(pezzi)}. Gli open day hanno il filtro "
+            f"<em>Solo con open day</em> in cima; la prova invece è scritta nel "
+            f"dettaglio della riga, sotto i giorni.</p>"
+            f"<p>Sono due cose diverse: la prova è un attributo del corso (si può "
+            f"provare, quando vuoi tu), l'open day è un appuntamento con una data. "
+            f"Dove la società non dichiara niente, non vuol dire che non si possa "
+            f"provare: quasi tutte lasciano farlo, basta chiedere.</p>"))
+
+    voci.append((
+        "Che differenza c'è tra un corso e un evento?",
+        "<p>Il tempo. Un corso dura una stagione — a volte qualche mese, a volte "
+        "poche lezioni — e ci si iscrive; un evento è una data sola, e ci si va e "
+        "basta. Sono due pagine diverse apposta: qui trovi le attività "
+        "continuative, in <a href=\"/eventi.html\">agenda</a> quello che succede "
+        "questo weekend.</p>"
+        "<p>Gli open day stanno in mezzo, e infatti compaiono in tutte e due: sono "
+        "eventi con una data, ma servono a far scegliere un corso.</p>"))
+
+    voci.append((
+        "Le informazioni sui corsi sono aggiornate?",
+        f"<p>Ogni scheda la compiliamo dalle locandine e dai canali della società, e "
+        f"la pubblichiamo <strong>solo dopo che chi organizza ci ha confermato i "
+        f"dati</strong>: finché non arriva quel sì, la riga non compare. La pagina "
+        f"si rigenera ogni notte, e in fondo c'è la data dell'ultimo "
+        f"aggiornamento.</p>"
+        f"<p>Quello che può cambiare senza che lo sappiamo sono giorni e orari, "
+        f"che si assestano a settembre quando si formano i gruppi. Prima di "
+        f"partire, una telefonata alla società è sempre la cosa giusta.</p>"))
+
+    if orgs:
+        elenco = ', '.join(orgs)
+        voci.append((
+            "Come contatto la società che organizza il corso?",
+            f"<p>In fondo alla pagina, sotto <em>Chi organizza</em>, c'è una scheda "
+            f"per ognuna delle realtà in elenco ({G.esc(elenco)}) con dove sono, il "
+            f"telefono e i loro canali. Dal dettaglio di ogni corso la riga "
+            f"<em>Organizzatore</em> porta direttamente alla sua.</p>"
+            f"<p>I referenti sono indicati con il nome e non con il numero "
+            f"personale: il recapito che pubblichiamo è quello della società, che "
+            f"è il numero che resta anche quando cambia il volontario.</p>"))
+
+    voci.append((
+        "Come faccio a inserire i corsi della mia realtà?",
+        f"<p>Scrivici: {mail_html}. La presenza comprende la scheda della realtà, i "
+        f"corsi che proponete, le informazioni per le famiglie e gli open day "
+        f"collegati al calendario degli eventi. Le schede le compiliamo noi dalle "
+        f"vostre locandine e ve le facciamo rileggere prima di pubblicarle.</p>"))
+
+    return voci
+
+
+def _grafo(corsi, faq=None, corsi_ordinati=None):
     """Il blocco dei dati strutturati, vuoto quando non c'e' niente da dichiarare.
 
     Con zero corsi jsonld() emette un @graph vuoto: un documento valido che non
     dice nulla, cioe' la versione per macchine della stessa promessa che
-    nota_vuota() toglie agli umani."""
+    nota_vuota() toglie agli umani.
+
+    QUATTRO PEZZI ARRIVATI IL 03/09/2026, e la ragione e' che mancavano:
+    misurato quel giorno, corsi.html dichiarava Course e Organization e basta —
+    niente BreadcrumbList (il crumb in pagina c'era, il markup no), niente
+    ItemList, niente CollectionPage, niente WebSite. Le pagine generate da
+    genera_eventi.py le hanno tutte da mesi (527 pagine con BreadcrumbList);
+    questa, che e' l'unica con una presenza pagata dentro, era rimasta la piu'
+    povera del sito.
+
+    L'ItemList RIMANDA alle ancore dei corsi e non ripete i Course: e' la
+    stessa scelta delle pagine comune e delle landing — due copie della stessa
+    entita' sono due elementi da validare invece di uno. Qui pero' le due cose
+    stanno sulla STESSA pagina, quindi l'ItemList punta all'ancora (#c-...) e
+    il Course sta nel grafo accanto: si descrivono a vicenda invece di
+    contraddirsi.
+
+    Il FAQPage entra solo se faq_corsi() ha prodotto qualcosa, cioe' solo se il
+    blocco e' anche in pagina: e' G.faq_blocco() a garantirlo, che costruisce i
+    due da una lista sola."""
     if not corsi:
         return ""
-    return '<script type="application/ld+json">' + "\n" + jsonld(corsi) + "\n</script>\n"
+    ordinati = corsi_ordinati if corsi_ordinati is not None else corsi
+    grafo = [
+        {"@type": "CollectionPage", "@id": URL, "url": URL,
+         "name": f"Corsi per bambini{(' ' + zona(corsi)[0]) if zona(corsi)[0] else ''}",
+         "inLanguage": "it-IT",
+         "isPartOf": {"@type": "WebSite", "@id": G.SITE_ID, "url": SITE_URL,
+                      "name": "DAOP"},
+         "publisher": {"@id": G.ORG_ID},
+         "dateModified": datetime.date.today().isoformat()},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
+            {"@type": "ListItem", "position": 2, "name": "Corsi per bambini",
+             "item": URL}]},
+    ]
+    voci = [{"@type": "ListItem", "position": i, "name": c['nome'],
+             "url": f"{URL}#{_id_corso(c)}"}
+            for i, c in enumerate(ordinati, 1)]
+    if voci:
+        grafo.append({"@type": "ItemList", "name": "Corsi per bambini e ragazzi",
+                      "numberOfItems": len(voci), "itemListElement": voci})
+    if faq:
+        grafo.append(faq)
+    grafo.extend(json.loads(jsonld(corsi))['@graph'])
+    testo = json.dumps({"@context": "https://schema.org", "@graph": grafo},
+                       ensure_ascii=False, indent=2)
+    return '<script type="application/ld+json">' + "\n" + testo + "\n</script>\n"
 
 
 # Il paragrafo che apre il corpo della pagina. E' una costante e non testo
@@ -2529,6 +2807,7 @@ def render(corsi, css, nav, foot, realta=None):
     corsi di pallavolo di due societa' diverse stanno vicini, che e' quello che
     serve a chi confronta. E non per societa', per la ragione di sopra."""
     realta = realta or {}
+    oggi = datetime.date.today()
     _controlla_zona(corsi)
     dove, zona_breve = zona(corsi)
     # Lo spazio sta QUI e non nelle f-string: con `dove` vuoto (zero corsi, vedi
@@ -2537,8 +2816,20 @@ def render(corsi, css, nav, foot, realta=None):
     # esserci.
     dove_sp = f' {dove}' if dove else ''
     titolo = f"Corsi per bambini{dove_sp} | DAOP"
+    # LA DESCRIPTION NON PROMETTE GIORNI E COSTI, e il 03/09/2026 lo faceva
+    # ancora. Il 21/08 l'occhiello aveva smesso di prometterli su richiesta di
+    # Giovanni ("ci impegna anche a scrivere giorni e costi che io continuo a
+    # insistere di tenere facoltativi") e questa riga era rimasta indietro:
+    # cioe' la pagina prometteva a Google quello che aveva appena smesso di
+    # promettere a chi legge. Al 03/09 la colonna Prezzo e' vuota su tutte e 12
+    # le righe, quindi "costi" era falso in SERP su ogni singolo corso.
+    #
+    # Quello che resta e' quello che il generatore CALCOLA o ha sempre: la
+    # disciplina, l'eta' (ricavata da annate + stagione, non copiata), il
+    # comune, e la prova "dove c'e'". E' la stessa regola dell'occhiello.
     descr = (f"Corsi e attività continuative per bambini e ragazzi{dove_sp}: musica, sport, "
-             f"danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.")
+             f"danza, lingue, teatro. Con l'età che prendono, il comune e, dove c'è, "
+             f"l'open day per andarli a vedere. Curato a mano.")
 
     # L'ordine segue i filtri: prima la macro (che e' la tendina), poi la
     # disciplina, poi l'eta'. Con la sola disciplina, "Canto corale" e "Coro"
@@ -2594,7 +2885,15 @@ def render(corsi, css, nav, foot, realta=None):
     # senza che sia cambiato un corso. Un diff che non dice niente e' rumore
     # nella cronologia del sito, e su questo repo la cronologia si legge.
     intro = INTRO if corsi else ''
-    dati = _grafo(corsi)
+    # La guida e le FAQ: due blocchi che con zero corsi non si stampano, come
+    # INTRO e come il grafo. G.faq_blocco() e' l'unico posto che costruisce sia
+    # l'HTML sia il JSON-LD, quindi non esiste il caso "dichiarata ma non
+    # visibile" — che e' la violazione che porta un'azione manuale.
+    guida = guida_corsi(corsi)
+    faq_html, faq_dati = G.faq_blocco(
+        faq_corsi(corsi, realta),
+        "Le risposte usano i numeri di questa pagina e si rifanno con lei ogni notte.")
+    dati = _grafo(corsi, faq_dati, ordinati)
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -2643,12 +2942,16 @@ def render(corsi, css, nav, foot, realta=None):
 <article class="co-wrap">
 {avviso}{intro}{toolbar(corsi)}
 {elenco}
+{guida}
+{faq_html}
 {sezione}
 {blocco_adesione(corsi)}
+{G.blocco_canale() if corsi else ''}
 {G.blocco_ecosistema('corsi')}
   <div class="co-actions">
     <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
   </div>
+  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: {oggi.day} {G.MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
 </article>
 </main>
 {foot}

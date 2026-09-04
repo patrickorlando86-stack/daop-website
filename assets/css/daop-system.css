@@ -593,3 +593,118 @@ img { height: auto; }
 @media (max-width: 560px) {
   .eco--porte .eco-g { grid-template-columns: 1fr; }
 }
+
+/* --------------------------------------------------------------------------
+   LE DOMANDE FREQUENTI
+   --------------------------------------------------------------------------
+   Sta QUI e non nel <style> di eventi.html, che e' la scelta opposta al resto
+   del sito ed e' la stessa gia' fatta per .eco: il blocco compare su pagine
+   che non passano da _guscio() — corsi.html ha il suo generatore — e il file
+   condiviso le raggiunge tutte senza fare un diff su ~470 file.
+
+   Sono <details> e non un accordion in JavaScript: dentro un details chiuso il
+   testo resta nel DOM, quindi Google lo legge e Ctrl+F lo trova. E' la stessa
+   ragione per cui il blocco dei comuni in fondo all'agenda e' un <details>.
+   -------------------------------------------------------------------------- */
+.faq { margin: 36px 0 0; }
+
+.faq-t {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  margin: 0 0 4px;
+  color: var(--navy, #2d4a5c);
+}
+
+/* La riga che dice DA DOVE vengono le risposte. Non e' decorazione: queste
+   FAQ si scrivono con i numeri della pagina, e chi legge deve poter capire
+   che non sono un testo uguale su trecento pagine. */
+.faq-sub {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-mid, #5d6a70);
+  margin: 0 0 14px;
+}
+
+.faq-q {
+  border-bottom: 1px solid rgba(45, 74, 92, 0.14);
+}
+
+.faq-q > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 13px 30px 13px 0;
+  position: relative;
+  font-weight: 700;
+  font-size: 0.97rem;
+  line-height: 1.45;
+  color: var(--navy, #2d4a5c);
+}
+
+.faq-q > summary::-webkit-details-marker { display: none; }
+
+/* Il segno +/− disegnato col testo e non con un'icona: e' un carattere, non
+   una richiesta in piu' al server, e ruota senza far ridisegnare il layout. */
+.faq-q > summary::after {
+  content: '+';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--teal, #6ba5a8);
+}
+
+.faq-q[open] > summary::after { content: '\2212'; }
+
+.faq-q > summary:hover { color: var(--teal, #6ba5a8); }
+
+.faq-a {
+  padding: 0 4px 15px 0;
+  font-size: 0.94rem;
+  line-height: 1.62;
+  color: var(--text-mid, #5d6a70);
+}
+
+.faq-a p { margin: 0 0 9px; }
+.faq-a p:last-child { margin-bottom: 0; }
+.faq-a a { color: var(--teal, #6ba5a8); }
+
+/* --------------------------------------------------------------------------
+   L'INVITO AL CANALE E LA RIGA DELLA DATA
+   --------------------------------------------------------------------------
+   Salite qui da PAGINA_CSS il 03/09/2026, quando l'invito al canale e' arrivato
+   anche su corsi.html: quella pagina ha un generatore suo e non riceve il
+   blocco di genera_eventi.py, quindi le regole erano da duplicare o da
+   spostare. Stessa scelta gia' presa per .eco, e per la stessa ragione.
+
+   Verde WhatsApp SOLO sul pulsante: la cornice resta nei colori del sito, se
+   no in fondo a ogni scheda c'e' un riquadro verde che sembra pubblicita' di
+   qualcun altro. padding esplicito perche' e' un <aside> dentro l'articolo,
+   non una fascia di pagina.
+   -------------------------------------------------------------------------- */
+.ev-firma-nota { opacity: 0.78; font-size: 0.86rem; }
+
+.ev-canale {
+  margin: 28px 0 0;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(107, 165, 168, 0.10);
+  border: 1px solid rgba(107, 165, 168, 0.30);
+}
+
+.ev-canale-t { font-weight: 700; margin: 0 0 4px; color: var(--navy, #2d4a5c); }
+.ev-canale p { margin: 0 0 12px; font-size: 0.92rem; line-height: 1.55; }
+
+.ev-canale-cta {
+  display: inline-block;
+  background: #25d366;
+  color: #0b3d24;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+}

@@ -212,9 +212,34 @@ ok("NIENTE noindex", "noindex" not in vecchia)
 ok("fuori dalla sitemap", CAVIA not in sitemap)
 # Il dato vecchio non deve restare "per contesto": e' esattamente la riga che
 # abbiamo corretto, ed e' quello che chi apre il link vecchio non deve leggere.
+#
+# IL CONFRONTO TOGLIE PRIMA IL NOME DELL'EVENTO E IL SUO SLUG, e non e' una
+# scappatoia (03/09/2026). La cavia si estrae dal registro vero, che cambia
+# ogni notte, e questa prova e' diventata rossa il 03/09 su "20 Anni di G.A.S.
+# Tortona": il comune sbagliato era Tortona, cioe' una parola DENTRO IL NOME
+# dell'evento. Il rimando la stampa nel title, nello slug della pagina nuova e
+# nel canonical, e deve farlo — e' il nome della festa, non il dato che
+# abbiamo corretto.
+#
+# Cioe' la prova bocciava il sito per aver scritto la cosa giusta, ed e' la
+# settima volta che capita in questo repo (la copertura delle coordinate, il
+# conteggio delle quattro porte, il robots delle pagine realta', i doppioni
+# riscritti, gli href una volta sola sulle landing). La forma e' sempre la
+# stessa: un'asserzione piu' larga dell'invariante. Qui l'invariante e' "il
+# comune sbagliato non compare come DATO della pagina", e il nome dell'evento
+# dato non e'.
+#
+# Il verso pericoloso resta difeso: se render_spostata() ricominciasse a
+# stampare la citta' fra i fatti, o dentro una mappa, quella occorrenza non
+# sta nel nome e la prova torna rossa. Verificato rimettendo il difetto.
 vecchia_citta = (reg_vero[CAVIA].get("citta") or "").strip()
+_nome_vecchio = (reg_vero[CAVIA].get("nome") or "").strip()
+_senza_nome = vecchia.lower()
+for _pezzo in (_nome_vecchio.lower(), g.slugify(_nome_vecchio), CAVIA, NUOVO):
+    if _pezzo:
+        _senza_nome = _senza_nome.replace(_pezzo.lower(), " ")
 ok(f"il comune sbagliato ({vecchia_citta}) non compare piu'",
-   vecchia_citta.lower() not in vecchia.lower())
+   vecchia_citta.lower() not in _senza_nome)
 descr = (reg_vero[CAVIA].get("descr") or "").strip()
 ok("niente descrizione vecchia", not descr or descr[:60] not in vecchia)
 ok("niente locandina", 'class="ev-loc"' not in vecchia)

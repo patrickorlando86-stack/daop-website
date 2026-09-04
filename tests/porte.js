@@ -332,6 +332,96 @@ module.exports = async function porte(browser) {
   r.ok(!/nav-cta[^>]*>\s*Gioca ora/.test(q404) && /nav-cta[^>]*>\s*Contatti/.test(q404),
     'la CTA della 404 è Contatti, non un rimando fuori dominio');
 
+  // ── LE NOVE LANDING PROVINCIALI, E CHI CI MANDA ────────────────────────
+  //
+  // COSA DIFENDE. Misurato con grep il 03/09/2026: index.html linkava ZERO
+  // delle nove landing provinciali, zone.html — che E' l'indice delle zone e
+  // sta nel footer di 540 pagine — pure ZERO, e /eventi/oggi-provincia-cuneo
+  // riceveva CINQUE link entranti in tutto il sito. Le schede evento, che
+  // sono il 77,3% dei clic, mandavano invece alle due pagine trasversali
+  // /eventi/oggi.html e /eventi/weekend.html, che dal 14/08 sono INDICI e non
+  // risposte (3 clic in due nell'export del 02/09, posizione 21,72).
+  //
+  // E' lo stesso guasto gia' pagato tre volte — le tre pagine orfane qui
+  // sopra, luoghi.html senza link dal corpo, le landing senza link dalle
+  // schede — e non fa rumore: nessuna pagina si rompe, si vede solo contando.
+  r.titolo('Le landing provinciali — chi ci manda');
+
+  // Le province si leggono DAI FILE, non da una lista scritta qui: aprendone
+  // una quarta questa prova la prende da sola, invece di restare verde su tre.
+  // E' la stessa scelta gia' fatta per la stagione dei centri.
+  const province = fs.readdirSync(RADICE)
+    .filter((f) => /^sagre-provincia-[a-z-]+\.html$/.test(f))
+    .map((f) => f.replace(/^sagre-provincia-|\.html$/g, ''));
+  r.ok(province.length > 0, `${province.length} province con una pagina sagre`);
+
+  for (const p of province) {
+    const attesi = [`/sagre-provincia-${p}.html`, `/eventi/oggi-provincia-${p}.html`,
+                    `/eventi/weekend-provincia-${p}.html`];
+    const mancanti = attesi.filter((h) => !fs.existsSync(path.join(RADICE, h.slice(1))));
+    r.ok(mancanti.length === 0,
+      `${p}: le tre pagine esistono` + (mancanti.length ? ` — manca ${mancanti.join(', ')}` : ''));
+  }
+
+  // zone.html: l'indice delle zone deve mandare alle pagine delle zone. Non e'
+  // un dettaglio di navigazione — e' la pagina che sta nel footer di tutto il
+  // sito, cioe' l'unico posto da cui quelle nove ricevono un link stabile che
+  // non dipende da quali eventi ci sono stanotte.
+  const zone = html('zone.html');
+  const senzaLink = province.filter((p) => !zone.includes(`/sagre-provincia-${p}.html`)
+    || !zone.includes(`/eventi/oggi-provincia-${p}.html`)
+    || !zone.includes(`/eventi/weekend-provincia-${p}.html`));
+  r.ok(senzaLink.length === 0,
+    'zone.html manda alle tre pagine di ogni provincia'
+    + (senzaLink.length ? ` — manca per ${senzaLink.join(', ')}` : ''));
+
+  // La home. Non si controlla che ci sia una parola: si controlla che ogni
+  // provincia riceva un link, cosi' la prova regge all'apertura della quarta.
+  const homeHtml = html('index.html');
+  const homeSenza = province.filter((p) => !homeHtml.includes(`/sagre-provincia-${p}.html`));
+  r.ok(homeSenza.length === 0,
+    'la home manda a ogni provincia'
+    + (homeSenza.length ? ` — manca ${homeSenza.join(', ')}` : ''));
+  r.ok(/<!-- HOME-ZONE:START -->\s*<div class="he-zone"/.test(homeHtml),
+    'la riga delle province in home la scrive il generatore, non una mano');
+
+  // LE SCHEDE EVENTO. L'invariante non e' "ogni scheda linka la sua provincia"
+  // — sarebbe rossa la notte in cui entra un evento di una provincia nuova,
+  // cioe' quando il sito fa la cosa giusta, ed e' l'inciampo gia' pagato sei
+  // volte qui dentro. L'invariante e' il ROVESCIO: una scheda che nomina la
+  // provinciale delle sagre (quindi sa in che provincia sta) non puo' mandare
+  // alle due pagine trasversali, che a quella provincia non rispondono.
+  const dirEv = path.join(RADICE, 'eventi');
+  const schede = fs.readdirSync(dirEv).filter((f) => f.endsWith('.html'));
+  let conProvincia = 0;
+  const miste = [];
+  for (const f of schede) {
+    const s = fs.readFileSync(path.join(dirEv, f), 'utf8');
+    const coda = (s.match(/<p class="ev-vic-all">[\s\S]*?<\/p>/) || [''])[0];
+    if (!/\/sagre-provincia-/.test(coda)) continue;
+    conProvincia++;
+    if (/"\/eventi\/(oggi|weekend)\.html"/.test(coda)) miste.push(f);
+  }
+  r.ok(conProvincia > 0, `${conProvincia} schede evento nominano la loro provincia`);
+  r.ok(miste.length === 0,
+    'nessuna scheda con una provincia manda alle pagine trasversali'
+    + (miste.length ? ` — ${miste.slice(0, 3).join(', ')}` : ''));
+
+  // E il verso positivo, sulla stessa coda: dove c'e' la provinciale delle
+  // sagre ci sono anche le sue due sorelle con la finestra temporale.
+  const spaiate = [];
+  for (const f of schede) {
+    const s = fs.readFileSync(path.join(dirEv, f), 'utf8');
+    const coda = (s.match(/<p class="ev-vic-all">[\s\S]*?<\/p>/) || [''])[0];
+    const m = coda.match(/\/sagre-provincia-([a-z-]+)\.html/);
+    if (!m) continue;
+    if (!coda.includes(`/eventi/oggi-provincia-${m[1]}.html`)
+        || !coda.includes(`/eventi/weekend-provincia-${m[1]}.html`)) spaiate.push(f);
+  }
+  r.ok(spaiate.length === 0,
+    'ogni scheda che linka la sua provincia linka anche oggi e weekend di quella provincia'
+    + (spaiate.length ? ` — ${spaiate.slice(0, 3).join(', ')}` : ''));
+
   await ctx.close();
   return r;
 };

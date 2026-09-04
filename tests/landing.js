@@ -11,10 +11,18 @@ const visibili = (page) => page.locator('.ev-wrap li[data-category]:not([hidden]
 // provincia (laboratori, cultura, spettacoli, musica, sport). Non e' un
 // cambio di identita' della pagina: e' distribuzione, e le prove qui sotto
 // difendono le tre cose che si romperebbero rifacendola a mente.
+// Il selettore dei DUE ELENCHI COMPLEMENTARI, cioe' il calendario delle sagre
+// e "Non solo sagre". Esclude la sezione "Eventi per bambini", che dal
+// 03/09/2026 sta in fondo e NON e' un terzo insieme: e' una vista sulle stesse
+// schede (e_per_bambini() le ripesca da tutte e due). Senza questa esclusione
+// le prove 2 e 4 qui sotto chiederebbero che i due elenchi siano gli unici in
+// pagina, che non e' l'invariante - l'invariante e' che restino complementari
+// FRA LORO, e la prova 6 dice l'altra meta': la vista non inventa niente.
+const DUE = '.ev-wrap li[data-category]:not(.com-bimbi li)';
+
 async function provaNonSoloSagre(r, page, prov) {
-  const righe = await page.locator('.ev-wrap li[data-category]').count();
-  const nonSagre = await page.locator('.ev-wrap li[data-category]:not([data-category=feste])')
-    .count();
+  const righe = await page.locator(DUE).count();
+  const nonSagre = await page.locator(`${DUE}:not([data-category=feste])`).count();
 
   // 1) La pagina resta una pagina di SAGRE. E' la query che vince (405 clic e
   //    posizione 6,86 su Cuneo nell'export del 26/08/2026): il blocco in coda
@@ -41,16 +49,16 @@ async function provaNonSoloSagre(r, page, prov) {
   //    se un giorno il secondo elenco smettesse di essere il complemento del
   //    primo, la pagina direbbe due volte la stessa cosa con due titoli che si
   //    contraddicono ("sagre" e "che non sono sagre").
-  const attraverso = await page.evaluate(() => {
+  const attraverso = await page.evaluate((sel) => {
     const m = new Map();
-    document.querySelectorAll('.ev-wrap li[data-category]').forEach((l) => {
+    document.querySelectorAll(sel).forEach((l) => {
       const a = l.querySelector('a.com-go');
       if (!a) return;
       const h = a.getAttribute('href');
       (m.get(h) || m.set(h, new Set()).get(h)).add(l.dataset.category === 'feste');
     });
     return [...m].filter(([, s]) => s.size > 1).map(([h]) => h);
-  });
+  }, DUE);
   r.ok(attraverso.length === 0,
     `${prov}: nessuna scheda compare sopra e sotto insieme (${righe} righe)`
     + (attraverso.length ? ': ' + attraverso.slice(0, 3).join(', ') : ''));
@@ -62,14 +70,13 @@ async function provaNonSoloSagre(r, page, prov) {
   //    cinque categorie da separare. Non si legge nell'HTML: si vede solo
   //    confrontando le opzioni con le righe.
   if (righe >= 12) {
-    const mancanti = await page.evaluate(() => {
+    const mancanti = await page.evaluate((s) => {
       const sel = document.getElementById('lan-tipo');
       if (!sel) return ['(la tendina delle categorie non viene stampata)'];
       const opz = new Set([...sel.options].map((o) => o.value));
-      const cat = new Set([...document.querySelectorAll('.ev-wrap li[data-category]')]
-        .map((l) => l.dataset.category));
+      const cat = new Set([...document.querySelectorAll(s)].map((l) => l.dataset.category));
       return [...cat].filter((c) => !opz.has(c));
-    });
+    }, DUE);
     r.ok(mancanti.length === 0,
       `${prov}: la tendina conosce tutte le categorie in pagina${mancanti.length ? ': manca ' + mancanti.join(', ') : ''}`);
   }
@@ -77,13 +84,81 @@ async function provaNonSoloSagre(r, page, prov) {
   // 4) Le sagre restano il contenuto principale: il blocco in coda sta DOPO
   //    l'ultima riga del calendario, se no la pagina si apre su quello che
   //    non e' la sua query.
-  r.ok(await page.evaluate(() => {
-    const li = [...document.querySelectorAll('.ev-wrap li[data-category]')];
+  r.ok(await page.evaluate((sel) => {
+    const li = [...document.querySelectorAll(sel)];
     const ultimaSagra = li.map((l, i) => [l.dataset.category, i])
       .filter(([c]) => c === 'feste').pop();
     const primaAltra = li.findIndex((l) => l.dataset.category !== 'feste');
     return !ultimaSagra || primaAltra === -1 || primaAltra > ultimaSagra[1];
-  }), `${prov}: le ${righe - nonSagre} sagre stanno prima delle ${nonSagre} altre`);
+  }, DUE), `${prov}: le ${righe - nonSagre} sagre stanno prima delle ${nonSagre} altre`);
+
+  // 6) LA SEZIONE "EVENTI PER BAMBINI" E' UNA VISTA, NON UN TERZO INSIEME.
+  //    E' la prova che tiene onesto il blocco nato il 03/09/2026: ogni riga
+  //    che compare li' deve esistere anche in uno dei due elenchi sopra. Se un
+  //    domani quella sezione cominciasse a pescare da un'altra parte — dallo
+  //    storico, da un'altra provincia — la pagina prometterebbe nell'H2 degli
+  //    eventi che il suo stesso calendario non contiene, e nessun'altra prova
+  //    se ne accorgerebbe.
+  //
+  //    NON si conta quante sono: e' il numero che cambia ogni notte, ed e'
+  //    l'inciampo gia' pagato sei volte in questo repo (la copertura delle
+  //    coordinate, il conteggio delle quattro porte, il robots delle pagine
+  //    realta'). Si controlla il RAPPORTO fra due insiemi, che non ha una
+  //    taglia giusta.
+  const bimbi = await page.evaluate((sel) => {
+    const dentro = new Set([...document.querySelectorAll(sel)]
+      .map((l) => (l.querySelector('a.com-go') || {}).getAttribute
+        ? l.querySelector('a.com-go').getAttribute('href') : null)
+      .filter(Boolean));
+    const kids = [...document.querySelectorAll('.com-bimbi li[data-category]')]
+      .map((l) => (l.querySelector('a.com-go') || {}).getAttribute
+        ? l.querySelector('a.com-go').getAttribute('href') : null)
+      .filter(Boolean);
+    return { quanti: kids.length, estranei: kids.filter((h) => !dentro.has(h)) };
+  }, DUE);
+  if (bimbi.quanti) {
+    r.ok(bimbi.estranei.length === 0,
+      `${prov}: le ${bimbi.quanti} righe "per bambini" sono tutte negli elenchi sopra`
+      + (bimbi.estranei.length ? ': estranee ' + bimbi.estranei.slice(0, 3).join(', ') : ''));
+    r.ok(await page.evaluate(() => {
+      const h2 = [...document.querySelectorAll('.ev-wrap h2')]
+        .find((h) => /Eventi per bambini/.test(h.textContent));
+      const ul = document.querySelector('.com-bimbi');
+      if (!h2 || !ul) return false;
+      // La sezione sta DOPO l'ultima riga dei due elenchi: sopra ci va quello
+      // per cui la gente e' arrivata, che su questa pagina sono le sagre.
+      const ultima = [...document.querySelectorAll(
+        '.ev-wrap li[data-category]:not(.com-bimbi li)')].pop();
+      return !ultima ||
+        (ultima.compareDocumentPosition(h2) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+    }), `${prov}: "Eventi per bambini" sta dopo il calendario, non prima`);
+    // E LA RIGA DEVE ESSERE ALTA COME LE ALTRE. Non e' pignoleria: la prima
+    // versione di questo blocco (03/09/2026) usava la classe .com-kids, che
+    // sta in COMUNE_CSS ed e' tarata sulla riga delle pagine comune. Le righe
+    // qui le fa _landing_righe(), che ha un'altra forma: le due insieme
+    // davano 332px per riga invece di 101, cioe' 3.981px per dodici righe,
+    // con l'HTML perfettamente giusto e ogni altra prova verde.
+    //
+    // Si misura il RESO, non si legge il CSS — e' l'unico modo di vedere
+    // questo genere di guasto, gia' pagato con la barra delle azioni alta
+    // 915px e col crumb dei corsi a contrasto 1,07:1. Il confronto e' con le
+    // righe degli altri elenchi della stessa pagina, non con un numero
+    // scritto qui: 102px oggi sarebbe rosso al primo ritocco di stile.
+    const alte = await page.evaluate(() => {
+      const media = (sel) => {
+        const li = [...document.querySelectorAll(sel)];
+        if (!li.length) return 0;
+        return li.reduce((n, l) => n + l.getBoundingClientRect().height, 0) / li.length;
+      };
+      return { bimbi: media('.com-bimbi li'),
+               normali: media('.ev-wrap ul.com-ev:not(.com-bimbi) li') };
+    });
+    r.ok(alte.normali > 0 && Math.abs(alte.bimbi - alte.normali) < alte.normali * 0.25,
+      `${prov}: le righe "per bambini" sono alte come le altre `
+      + `(${Math.round(alte.bimbi)}px contro ${Math.round(alte.normali)}px)`);
+  } else {
+    r.ok(true, `${prov}: meno di 3 eventi per bambini, sezione assente (voluto)`);
+  }
 
   // 5) Filtrando su una categoria non-sagra restano righe, e il titolo del
   //    blocco non resta orfano sopra il vuoto.

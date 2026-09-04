@@ -631,19 +631,12 @@
 /* Da dove arriva la segnalazione: piu' leggero della firma, piu' presente
    della nota legale sotto - e' un credito, non un disclaimer. */
 .ev-fonte{font-size:.88rem;opacity:.85}
-.ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
-/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
-   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
-   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
-   e' un <aside> dentro l'articolo, non una fascia di pagina. */
-.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
-  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
-.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
-.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
-  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
-  font-size:.95rem}
+/* .ev-canale e .ev-firma-nota sono SALITE in assets/css/daop-system.css il
+   03/09/2026, ed e' la stessa mossa gia' fatta per .eco: da quel giorno
+   l'invito al canale e la riga della data compaiono anche su corsi.html, che
+   ha un generatore suo e non riceve questo blocco. Duplicarle qui sarebbe il
+   secondo posto in cui vive una regola che ne ha gia' uno. */
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -762,7 +755,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-09-01",
-      "dateModified": "2026-09-02"
+      "dateModified": "2026-09-04"
     },
     {
       "@type": "Organization",
@@ -866,7 +859,7 @@
   
   <div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi cosa c'è in programma</a></div>
   <aside class="ev-firma"><p class="ev-firma-t">Scheda ritirata da DAOP</p><p>Questa scheda non fa piu' parte dell'agenda di <strong>DAOP – Dove Andiamo Oggi Papi</strong>: risultava in programma fino al <time datetime="2026-09-02">2 settembre 2026</time>, poi l'abbiamo tolta. Non consideriamo confermato quello che c'e' scritto in questa pagina.</p><p class="ev-fonte">Segnalato da <a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota"><a href="/eventi.html">Vai all'agenda aggiornata</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Allegro%20con%20Moto%20-%20Incontro%203%20-%20C%C3%A0Rezza">Segnala una correzione</a></p></aside>
-  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Racconigi</h2><ul><li><a href="/eventi/coccoliamo-ci-carezza-racconigi.html"><span class="ev-vic-d">martedì 15 set</span><span class="ev-vic-n">Coccoliamo-ci - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/espressione-in-gioco-fascia-2-6-anni-carezza-racconigi.html"><span class="ev-vic-d">martedì 15 set</span><span class="ev-vic-n">Espressione in Gioco! fascia 2-6 anni - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/espressione-in-gioco-fascia-2-6-anni-carezza-racconigi.html"><span class="ev-vic-d">mercoledì 16 set</span><span class="ev-vic-n">Espressione in Gioco! (fascia 2-6 anni) - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi.html"><span class="ev-vic-d">giovedì 24 set</span><span class="ev-vic-n">TuteliAMO - Corso Manovre Salvavita Pediatriche - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/a-caccia-dell-orso-carezza-racconigi.html"><span class="ev-vic-d">venerdì 25 set</span><span class="ev-vic-n">A Caccia dell&#x27;Orso - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi.html#ev-2026-09-25-pilates-in-gravidanza-carezza"><span class="ev-vic-d">venerdì 25 set</span><span class="ev-vic-n">Pilates in Gravidanza - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/racconigi.html">Tutti gli eventi a Racconigi</a> · <a href="/luoghi.html#c-cn-racconigi">Un posto per famiglie a Racconigi</a> · <a href="/sagre-provincia-cuneo.html">Le sagre in provincia di Cuneo</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
+  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Racconigi</h2><ul><li><a href="/eventi/coccoliamo-ci-carezza-racconigi.html"><span class="ev-vic-d">martedì 15 set</span><span class="ev-vic-n">Coccoliamo-ci - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/espressione-in-gioco-fascia-2-6-anni-carezza-racconigi.html"><span class="ev-vic-d">martedì 15 set</span><span class="ev-vic-n">Espressione in Gioco! fascia 2-6 anni - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/espressione-in-gioco-fascia-2-6-anni-carezza-racconigi.html"><span class="ev-vic-d">mercoledì 16 set</span><span class="ev-vic-n">Espressione in Gioco! (fascia 2-6 anni) - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi.html"><span class="ev-vic-d">giovedì 24 set</span><span class="ev-vic-n">TuteliAMO - Corso Manovre Salvavita Pediatriche - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi/a-caccia-dell-orso-carezza-racconigi.html"><span class="ev-vic-d">venerdì 25 set</span><span class="ev-vic-n">A Caccia dell&#x27;Orso - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li><li><a href="/eventi.html#ev-2026-09-25-pilates-in-gravidanza-carezza"><span class="ev-vic-d">venerdì 25 set</span><span class="ev-vic-n">Pilates in Gravidanza - CàRezza</span><span class="ev-vic-c">Racconigi</span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/racconigi.html">Tutti gli eventi a Racconigi</a> · <a href="/luoghi.html#c-cn-racconigi">Un posto per famiglie a Racconigi</a> · <a href="/sagre-provincia-cuneo.html">Le sagre in provincia di Cuneo</a> · <a href="/eventi/oggi-provincia-cuneo.html">Cosa c'è oggi in provincia di Cuneo</a> · <a href="/eventi/weekend-provincia-cuneo.html">Il weekend in provincia di Cuneo</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
   <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Racconigi: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
 </article>
 <section class="bg-cream ev-ginetto">

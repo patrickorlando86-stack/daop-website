@@ -138,5 +138,69 @@ ok("CORSI_PER_PROVINCIA = False", c.CORSI_PER_PROVINCIA is False)
 ok("CORSI_ZONA_ATTESA = ('CN',)", tuple(c.CORSI_ZONA_ATTESA) == ('CN',))
 
 print()
+print("=== 7) la guida, le FAQ e i dati strutturati (03/09/2026) ===")
+# PERCHE' STANNO QUI e non in tests/corsi.js: quelle prove aprono corsi.html
+# su disco, e corsi.html lo riscrive genera_corsi.py, che ha bisogno del foglio
+# Google - senza rete resta la pagina di ieri, quindi una prova scritta li'
+# sarebbe rossa su qualunque macchina senza rete e verde solo in CI. Qui invece
+# si chiama render() con i corsi finti, che e' lo stesso codice: e' la stessa
+# ragione per cui esiste tutto il resto di questo file.
+ok("con i corsi c'e' la guida 'Come scegliere un corso'",
+   'Come scegliere un corso per bambini' in PIENA)
+# L'ATTRIBUTO INTERO e non il nome secco: '.co-guida' sta anche nel <style>,
+# che e' incollato in ogni pagina — un `in` sul nome direbbe "c'e' la guida"
+# anche sulla pagina vuota e la prova passerebbe sempre. E' la stessa trappola
+# gia' documentata per ev-ginetto-alto.
+ok("la guida NON si stampa sopra il vuoto", 'class="co-guida"' not in VUOTA)
+# Le tre cose che la guida NON deve promettere, ed e' la ragione per cui e'
+# stata scritta in sei sezioni e non nelle nove del documento: sono i dati che
+# il foglio tiene facoltativi per decisione di Giovanni (21/08/2026). Una
+# guida che dice "controlla il costo" sotto un elenco in cui il costo non c'e'
+# mai e' l'occhiello che li prometteva, spostato piu' in basso.
+ok("la description non promette piu' i costi",
+   'costi' not in re.search(r'name="description" content="(.*?)"', PIENA).group(1))
+ok("ne' i giorni",
+   'giorni' not in re.search(r'name="description" content="(.*?)"', PIENA).group(1))
+
+ok("con i corsi ci sono le FAQ", 'class="faq"' in PIENA)
+ok("le FAQ non si stampano sopra il vuoto", 'class="faq"' not in VUOTA)
+# L'INVARIANTE CHE CONTA: quello che si dichiara a Google e' quello che si
+# vede. Non e' garantito da una convenzione, e' garantito da faq_blocco(), che
+# costruisce i due da una lista sola - questa prova verifica che la garanzia
+# regga davvero invece di fidarsi. tests/faq.js lo rifa' su tutto il sito.
+import json as _json
+_dom_html = re.findall(r'<summary>(.*?)</summary>', PIENA, re.S)
+_grafo = _json.loads(re.search(
+    r'<script type="application/ld\+json">\s*(.*?)\s*</script>', PIENA, re.S).group(1))
+_tipi = [n.get('@type') for n in _grafo['@graph']]
+_faq = [n for n in _grafo['@graph'] if n.get('@type') == 'FAQPage']
+ok("il FAQPage e' dichiarato una volta sola", len(_faq) == 1)
+ok(f"tante domande dichiarate quante visibili ({len(_dom_html)})",
+   len(_faq[0]['mainEntity']) == len(_dom_html) and len(_dom_html) > 0)
+
+# I QUATTRO PEZZI CHE MANCAVANO. Misurato il 03/09/2026: corsi.html dichiarava
+# Course e Organization e basta - niente briciole (il crumb in pagina c'era, il
+# markup no), niente ItemList, niente CollectionPage, niente WebSite. Le pagine
+# generate da genera_eventi.py le hanno da mesi.
+for _t in ('CollectionPage', 'BreadcrumbList', 'ItemList', 'Course'):
+    ok(f"il grafo dichiara {_t}", _t in _tipi)
+_lista = [n for n in _grafo['@graph'] if n.get('@type') == 'ItemList'][0]
+ok("l'ItemList ha una voce per corso", _lista['numberOfItems'] == len(CAMPIONE))
+# Ogni voce punta a un'ancora che in pagina esiste davvero: un ItemList che
+# rimanda a un #id inventato scarica in cima a una pagina lunga, ed e' la
+# stessa regola gia' scritta per link_luoghi().
+_rotte = [v['url'] for v in _lista['itemListElement']
+          if f'id="{v["url"].split("#")[-1]}"' not in PIENA]
+ok("ogni voce dell'ItemList cade su un'ancora che esiste", not _rotte)
+ok("con zero corsi non c'e' nessun grafo", 'application/ld+json' not in VUOTA)
+
+# L'invito al canale: c'era su 323 pagine e non su questa, che e' l'unica del
+# sito con una presenza pagata dentro.
+ok("l'invito al canale c'e'", 'ev-canale' in PIENA)
+ok("e non e' doppio", PIENA.count('class="ev-canale"') == 1)
+ok("niente invito sopra il vuoto", 'ev-canale' not in VUOTA)
+ok("la data di aggiornamento e' in pagina", 'Ultimo aggiornamento' in PIENA)
+
+print()
 print("ESITO:", "tutto come previsto" if esito else "*** QUALCOSA NON TORNA ***")
 sys.exit(0 if esito else 1)

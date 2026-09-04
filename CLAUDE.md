@@ -4689,6 +4689,242 @@ Due dettagli che sembrano cavilli e non lo sono:
 
 Verificata rossa **rimettendo i due difetti uno alla volta**, non supposta.
 
+## Le nove landing provinciali esistevano già: non ci andava nessuno
+
+Fatto il 03/09/2026, rispondendo a un documento di Giovanni («una vera pagina
+"Eventi per bambini in provincia di [PROVINCIA]": adesso è solo un filtro della
+pagina eventi»). La premessa era sbagliata e il rimedio era un altro.
+
+**Le landing provinciali ci sono, e sono nove**, tutte `index, follow`, in
+sitemap, con title, description, canonical, H1 e BreadcrumbList propri: le tre
+`sagre-provincia-*` e le sei d'incrocio. `eventi.html?prov=cn` è davvero solo un
+filtro, ma il suo canonical non porta parametri e non è mai stato un doppione.
+
+Quello che mancava era **chi ci manda**. Misurato con grep quel giorno:
+
+| | link entranti, prima |
+|---|---|
+| `index.html` → una qualunque delle nove | **0** |
+| `zone.html` (l'indice delle zone, nel footer di 540 pagine) → le nove | **0** |
+| `/eventi/oggi-provincia-cuneo.html` da tutto il sito | **5** |
+| `/sagre-provincia-cuneo.html` da tutto il sito | 197 |
+
+Ed è lo stesso guasto già pagato tre volte: le tre pagine centri orfane
+(20/08), `luoghi.html` senza link dal corpo (14/08, impressioni da 58 a 538 in
+due giorni), le landing senza link dalle schede (11/08).
+
+Le decisioni che non si ricavano dal diff:
+
+- **Le schede evento mandano alla loro PROVINCIA, non alle due trasversali.**
+  In coda a `blocco_vicini()` c'erano «Cosa c'è oggi» e «Questo weekend» verso
+  `/eventi/oggi.html` e `/eventi/weekend.html`, che dal 14/08 sono **indici e
+  non risposte**: nell'export del 02/09 fanno 3 clic in due e `oggi.html` sta
+  in posizione 21,72. Le schede sono il 77,3% dei clic del sito: era la
+  superficie più forte che mandava alla pagina più debole. Da 5 a **184**
+  pagine che linkano `oggi-provincia-cuneo`. Fuori dalle tre province restano
+  le trasversali, che di quella provincia non promettono niente.
+- **La riga in home è generata, non scritta a mano** (marker `HOME-ZONE`, la
+  scrive `blocco_zone_home()`): l'elenco lo fa `PROVINCE_PUBBLICATE`, quindi la
+  quarta provincia entra da sola come nella nav. Col numero e non l'etichetta —
+  «Cuneo (68)» è una ragione per toccare, «Cuneo» no: è la lezione di
+  `link_luoghi()`. Sta **dentro il blocco eventi**, sotto il carosello, non
+  nell'hero: lì chi scorre ha appena visto tre card e la domanda naturale è «e
+  dalle mie parti?».
+- **Il posto più redditizio non è la home**, e va detto perché è
+  controintuitivo: la home fa 50 clic e 290 impressioni in 28 giorni, lo 0,3%
+  del sito. L'ordine di resa è schede → `zone.html` → home. La home si è fatta
+  lo stesso perché costa una riga.
+- **Su `zone.html` i link provinciali stanno su una riga loro**, sotto
+  un'etichetta, come già i comuni: in fila ai pulsanti Instagram e Facebook un
+  link interno sembra un quarto profilo di qualcun altro, ed è l'opposto.
+
+### «Eventi per bambini in provincia di X» è un H2, non una pagina
+
+La decima pagina provinciale **non si fa**, e i numeri sono due:
+
+- nell'export del 26/08 le query provinciali **senza** finestra temporale fanno
+  19 query, 511 impressioni e 8 clic in tre mesi; quelle **con** «oggi» o
+  «weekend» dentro ne fanno 4.953, e hanno già le loro sei pagine;
+- nelle 1.000 query visibili dell'export del 02/09, `bambin*` compare in **14
+  query per 75 impressioni e 4 clic**. Il sito vince sui nomi propri: il 77%
+  dei clic viene da query che contengono un nome di posto.
+
+Una pagina nuova si contenderebbe le query delle nove che ci sono già, per una
+domanda che non c'è. Quello che mancava davvero è la **copertura semantica** —
+la frase non stava in nessun `<h2>` del sito — e adesso c'è in fondo alle tre
+`sagre-provincia-*`, cioè sulla pagina che quella provincia la vince già
+(10,6% dei clic del sito).
+
+- **È una VISTA sui due elenchi, non un terzo insieme**: le stesse schede,
+  filtrate da `e_per_bambini()`. `tests/landing.js` lo difende — ogni riga del
+  blocco deve esistere anche nel calendario o in «Non solo sagre» — e non conta
+  quante sono, che è il numero che cambia ogni notte.
+- **Non usa «Adatto Famiglie»**, che è `Si` sul 95% delle righe e quindi non
+  divide niente. `e_per_bambini()` vuole una fascia d'età **numerica** oppure
+  un'attrazione per bambini scritta nel programma. Al 03/09 sono 72 eventi su
+  190, e la differenza fra le province è vera: CN 44/71, AL 22/93, AT 10/35.
+- **La classe è `com-bimbi` e non `com-kids`**, ed è l'unica cosa di questo
+  blocco che si vede solo misurando. `.com-kids` sta in `COMUNE_CSS` ed è
+  tarata sulla riga delle pagine comune: sulle righe delle landing, che hanno
+  un'altra forma, dava **332px per riga invece di 101** — dodici righe per
+  3.981px, con l'HTML perfettamente giusto e ogni altra prova verde. Trovato a
+  412px nel browser. La prova ora misura il reso e confronta con le righe degli
+  altri elenchi della stessa pagina, non con un numero scritto a mano.
+
+## Le domande frequenti: 3 pagine su 568, e nessuna con traffico
+
+Fatte il 03/09/2026, chieste da Giovanni come «importante SEO». Misurato quel
+giorno: `FAQPage` esisteva su **tre pagine** — `ginetto.html`, `metodo.html`,
+`piattosano.html` — e su nessuna delle pagine che prendono traffico. Adesso
+sono **33 pagine generate**: le 24 comune, le 9 landing provinciali, più i
+corsi.
+
+**Non aspettarsi i rich result, ed è la prima cosa da dire a chi le ha
+chieste.** Da agosto 2023 Google mostra il rich result FAQ solo a siti
+governativi e sanitari riconosciuti. Valgono come **contenuto** — coprono
+domande che la pagina non scriveva da nessuna parte — non come snippet. Se il
+metro è «compaiono in SERP a fisarmonica», il metro è sbagliato.
+
+**Il markup segue il visibile, per costruzione.** `faq_blocco()` costruisce
+HTML e JSON-LD **da una lista sola**: non esiste il modo di dichiarare una
+domanda che in pagina non c'è, che è la violazione tipica e l'unica che si paga
+con un'azione manuale. Sono `<details>`, quindi il testo è nel DOM anche da
+chiusi — è il criterio di «visibile» che Google usa.
+
+**Il rischio è lo scaled content, e abbiamo un termometro.** Sette risposte
+identiche su 24 pagine comune sono la riga «Scansionata, ma non indicizzata»
+del rapporto Indicizzazione: oggi 10 pagine su 131, cioè un giudizio buono che
+queste FAQ possono rovinare. Da qui la regola: **ogni risposta porta un numero
+o un nome di quella pagina**, e una domanda a cui la pagina non sa rispondere
+con un dato suo **non si stampa**. Al 03/09 i blocchi sono 24 su 24 distinti
+fra le comune, 6 su 6 fra le d'incrocio, 3 su 3 fra le provinciali.
+
+**Niente FAQ sotto soglia.** Una pagina in `noindex` perché non ha contenuti
+non migliora con cinque domande sopra il vuoto: diventa la pagina sottile che
+il `noindex` sta tenendo fuori.
+
+### `tests/faq.js`, e la prova che nasceva cieca
+
+Difende tre cose, e la terza è nata **sbagliata**:
+
+1. **verso A, su qualunque grafia**: ogni domanda dichiarata a Google compare
+   nel corpo della pagina. Si cerca il testo, non un tag — se no la prova
+   obbligherebbe il sito ad avere una sola grafia per una cosa che ne ha tre da
+   prima che questo blocco esistesse (`ginetto` e `piattosano` usano
+   `.faq-list`, `metodo` le scrive come titoli);
+2. **verso B, sul blocco generato**: quello che si vede è esattamente quello
+   che si dichiara, nello stesso ordine. Il confronto è su una lista e non su
+   un insieme apposta: una domanda dichiarata due volte è un errore vero e come
+   insieme passerebbe;
+3. **anti-boilerplate**: due pagine della stessa famiglia non possono avere lo
+   stesso blocco. **Questa nasceva cieca**: l'impronta si prendeva sul blocco
+   intero, e l'occhiello sotto il titolo nomina il comune («Le risposte usano i
+   numeri a Cuneo»), quindi bastava da solo a rendere unico anche un blocco di
+   risposte identiche. Verificato rimettendo il difetto: la prova restava
+   **verde** mentre le ventiquattro pagine dicevano tutte la stessa cosa. Ora
+   l'impronta si prende su domande e risposte, escludendo titolo e occhiello.
+   È il motivo per cui una prova nuova si verifica rossa e non si suppone.
+
+## `corsi.html` aveva due `<h2>` e nessuna briciola
+
+Sistemato il 03/09/2026. È la pagina con l'unica presenza pagata del sito, ed
+era la più povera:
+
+| | prima | dopo |
+|---|---|---|
+| `<h2>` in pagina | 2 | 10 |
+| BreadcrumbList in JSON-LD | assente (il crumb in pagina c'era) | c'è |
+| ItemList / CollectionPage / WebSite | assenti | ci sono |
+| FAQ | assenti | 8 domande |
+| invito al canale | assente (c'era sulle altre 323 pagine) | c'è |
+| data di aggiornamento | assente | c'è |
+
+**Un bug vero, e non piccolo:** la `meta description` prometteva ancora *«Con
+età, giorni, costi e le prove gratuite»*. Il 21/08 l'occhiello aveva smesso di
+prometterli su richiesta di Giovanni («ci impegna a scrivere giorni e costi che
+io continuo a insistere di tenere facoltativi») e **questa riga era rimasta
+indietro**: la pagina prometteva a Google quello che aveva appena smesso di
+promettere a chi legge, e la colonna Prezzo è vuota su tutte e 12 le righe —
+quindi «costi» era falso in SERP su ogni singolo corso.
+
+**La guida «Come scegliere un corso» è una sezione, non una pagina** — stessa
+decisione delle guide stagionali: una `/guida-corsi.html` mangerebbe la query
+alla pagina che se l'è già presa. Sta **in coda**, sotto l'elenco: sopra ci va
+quello per cui la gente è arrivata.
+
+**Sei domande e non le nove del documento.** Le tre tolte promettono un dato
+che il foglio tiene facoltativo — il **costo**, la **durata**, la **data di
+ultimo aggiornamento del singolo corso**. Scrivere «controlla il costo» sotto
+un elenco in cui il costo non c'è mai è l'occhiello del 21/08 spostato più in
+basso.
+
+**`/corsi-provincia-<nome>.html` non si fa adesso**, e la forma resta quella già
+decisa (non `/corsi/provincia/cuneo.html`, che ChatGPT propone: `/corsi/` è già
+occupata dalle pagine realtà, e una cartella territoriale sarebbe una seconda
+tassonomia su un sito dove il 301 non esiste). L'innesco c'è già ed è
+automatico: `CORSI_ZONA_ATTESA` grida al primo corso fuori Cuneo.
+
+## Due conti nel log che guardano il foglio, non il sito
+
+Nati il 03/09/2026 insieme alla sezione «per bambini», perché quella sezione si
+riempie con una colonna che **questo repo non scrive**: la scrive il
+downloader, leggendo la locandina con un modello.
+
+```
+[genera_eventi] eta': 59/190 righe con una fascia numerica, +13 riconosciute
+                dal programma -> 72 eventi nella sezione "per bambini"
+                senza fascia: 120x 'Tutte le età (famiglie)', 9x "Tutte le eta'
+                (famiglie)", 1x 'Adulti e bambini accompagnati'
+[genera_eventi] organizzatore nel nome: 127/190 righe con la coda "- Organizzatore"
+```
+
+- **«Tutte le età (famiglie)» è su 120 righe su 190**, ed è la risposta che il
+  modello dà quando sulla locandina l'età non c'è. È onesta — meglio di un
+  intervallo inventato — ma non è un dato: è la stessa cosa del flag «Adatto
+  Famiglie», che sta su 95 righe su 100 e per questo non divide niente. **La
+  sezione per bambini cresce se cresce quella colonna, e la leva è a monte.**
+  Le due grafie (`età` e `eta'`) dicono che la cella arriva da due strade
+  diverse; non è un difetto, `fascia_eta()` non riconosce né l'una né l'altra.
+- **La coda `- Organizzatore` c'è sul 67% delle righe.** È la convenzione che
+  il prompt di visione impone, ed è l'unico legame fra un evento e la realtà
+  che lo organizza: senza, l'evento non si aggancia in nessuno dei due versi.
+  Il secondo conto è quello nuovo e più utile: se la coda è il nome di un
+  **comune** («Bimbi in Stalla + Merenda col Fantino — Moncalvo») la
+  convenzione è stata applicata male — dice dove, non chi. Oggi non fa danno
+  perché nessuna società si chiama come un paese; il giorno che succede,
+  quell'evento si attacca alla società sbagliata.
+
+**Nessuna colonna nuova serve al downloader** per tutto quello che è stato
+fatto il 03/09: FAQ, blocco bambini, link provinciali e guida dei corsi usano
+solo dati che il foglio ha già. Quello che cambierebbe la resa è la **qualità**
+di due colonne, ed è per questo che si contano nel log a ogni run invece di
+scoprirlo fra sei mesi.
+
+## Una prova bocciava il sito per aver scritto la cosa giusta
+
+Trovato il 03/09/2026 lanciando la suite: `scripts/prova_spostata.py` era
+**rosso su `main`**, e non per un difetto del sito.
+
+Quella prova estrae la cavia dal registro vero, che cambia ogni notte, e
+controlla che il comune sbagliato non compaia più sulla pagina-rimando. Il
+03/09 la cavia era **«20 Anni di G.A.S. Tortona»**, con comune sbagliato
+Tortona: cioè una parola **dentro il nome dell'evento**. Il rimando la stampa
+nel title, nello slug della pagina nuova e nel canonical, e **deve** farlo — è
+il nome della festa, non il dato che abbiamo corretto.
+
+È la settima volta che capita in questo repo (la copertura delle coordinate, il
+conteggio delle quattro porte, il robots delle pagine realtà, i doppioni
+riscritti, gli href una volta sola sulle landing, il conteggio nelle quattro
+porte), e la forma è sempre la stessa: **un'asserzione più larga
+dell'invariante**. Qui l'invariante è «il comune sbagliato non compare come
+*dato* della pagina», e il nome dell'evento dato non è. Ora il confronto toglie
+prima il nome e il suo slug; il verso pericoloso resta difeso, verificato
+rimettendo il difetto.
+
+**Vale la pena sapere che quel passo era rosso in CI e nessuno se n'era
+accorto:** le prove girano `if: always()` **dopo** il commit, quindi una run
+rossa non ferma il deploy — è una scelta, ma vuol dire che il rosso va guardato.
+
 ## Verifiche prima di pubblicare
 
 Girano tutti in CI **dopo** il commit: il sito si aggiorna comunque e la run
@@ -4729,10 +4965,19 @@ calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-` e
 file veri appena generati: non c'è un ambiente di prova. In un ambiente che ha
 già un Chromium, `CHROMIUM_PATH=/percorso/chrome npm test` evita lo scaricamento.
 
-Le suite sono otto, in `tests/run.js`: `agenda`, `landing`, `scheda`, `luoghi`,
-`corsi`, `porte`, `guide`, `sitemap`. Al 31/08/2026 sono **371 prove**.
-`sitemap.js` è l'unica che non apre il browser — legge i file e li incrocia con
-`sitemap.xml`, perché quello che difende non si vede su nessuna pagina.
+Le suite sono nove, in `tests/run.js`: `agenda`, `landing`, `scheda`, `luoghi`,
+`corsi`, `porte`, `guide`, `sitemap`, `faq`. Al 03/09/2026 sono **397 prove**.
+`sitemap.js` e `faq.js` sono le uniche che non aprono il browser — leggono i
+file e li incrociano fra loro, perché quello che difendono non si vede su
+nessuna singola pagina.
+
+**Due prove non stanno in `tests/` e non è una dimenticanza.** Quelle su
+`corsi.html` (la guida, le FAQ, il grafo) stanno in
+`scripts/prova_corsi_vuoti.py`, punto 7: `tests/corsi.js` apre il file su
+disco, e quel file lo riscrive `genera_corsi.py`, che **richiede rete**. Una
+prova scritta lì sarebbe rossa su qualunque macchina senza foglio e verde solo
+in CI, cioè inutile proprio dove serve. Lo script invece chiama `render()` con
+dei corsi finti, che è lo stesso codice.
 
 ### Un `<section>` non è un contenitore neutro
 

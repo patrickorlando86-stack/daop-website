@@ -630,19 +630,12 @@
 /* Da dove arriva la segnalazione: piu' leggero della firma, piu' presente
    della nota legale sotto - e' un credito, non un disclaimer. */
 .ev-fonte{font-size:.88rem;opacity:.85}
-.ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
-/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
-   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
-   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
-   e' un <aside> dentro l'articolo, non una fascia di pagina. */
-.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
-  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
-.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
-.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
-  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
-  font-size:.95rem}
+/* .ev-canale e .ev-firma-nota sono SALITE in assets/css/daop-system.css il
+   03/09/2026, ed e' la stessa mossa gia' fatta per .eco: da quel giorno
+   l'invito al canale e la riga della data compaiono anche su corsi.html, che
+   ha un generatore suo e non riceve questo blocco. Duplicarle qui sarebbe il
+   secondo posto in cui vive una regola che ne ha gia' uno. */
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -893,7 +886,7 @@
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "dateModified": "2026-09-03"
+      "dateModified": "2026-09-04"
     },
     {
       "@type": "BreadcrumbList",
@@ -934,6 +927,43 @@
           "position": 2,
           "url": "https://www.daop.it/eventi/giochi-sotto-il-campanile-raddix-group-parrocchia-villaromagnano.html",
           "name": "Giochi sotto il Campanile - Raddix Group Parrocchia San Michele Arcangelo"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cosa fare con i bambini a Villaromagnano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In questo momento a Villaromagnano abbiamo 2 appuntamenti in programma: sport, fino al 7 settembre 2026. Sono tutti nell'elenco qui sopra, ognuno con la sua scheda: data, orario, luogo e il contatto di chi organizza."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quali sono adatti all'età dei miei figli?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Di quelli in programma, 1 è pensato proprio per i bambini: hanno una fascia d'età dichiarata da chi organizza, oppure laboratori, burattini o giochi scritti nel programma. Li trovi raccolti nella sezione Cosa c'è per i bambini a Villaromagnano, con l'età accanto dove è indicata.Il resto è comunque roba da portarci i figli: in agenda entra solo quello che abbiamo già scelto per le famiglie."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ci sono eventi gratuiti a Villaromagnano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2 su 2 in programma sono a ingresso libero, col cartellino Gratuito nella riga. Dove il cartellino non c'è, il prezzo non è dichiarato oppure si paga quello che si consuma — nelle sagre è quasi sempre il secondo caso."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "E nei comuni vicini a Villaromagnano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In provincia di Alessandria hanno una pagina loro anche Acqui Terme, Alessandria, Casale Monferrato, Castelletto d'Orba, Castelnuovo Scrivia, Novi Ligure: le trovi in fondo, sotto Altri comuni della provincia. Se preferisci guardare tutto insieme, il calendario della provincia di Alessandria li tiene in un elenco solo."
+          }
         }
       ]
     }
@@ -1002,9 +1032,10 @@
   </div>
   <aside class="ev-canale"><p class="ev-canale-t">Un messaggio il giovedì, e basta</p><p>Ti mandiamo quello che c'è nel weekend vicino a Villaromagnano: sagre, feste e cose da fare con i bambini. Niente altro.</p><a class="ev-canale-cta" href="https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z" target="_blank" rel="noopener">Segui il canale WhatsApp</a></aside>
   <h2>Altri comuni della provincia di Alessandria</h2><div class="com-link"><a href="/eventi/comune/acqui-terme.html">Acqui Terme</a><a href="/eventi/comune/alessandria.html">Alessandria</a><a href="/eventi/comune/casale-monferrato.html">Casale Monferrato</a><a href="/eventi/comune/castelletto-d-orba.html">Castelletto d&#x27;Orba</a><a href="/eventi/comune/castelnuovo-scrivia.html">Castelnuovo Scrivia</a><a href="/eventi/comune/novi-ligure.html">Novi Ligure</a></div>
+  <section class="faq" aria-labelledby="faq-t"><h2 class="faq-t" id="faq-t">Domande frequenti</h2><p class="faq-sub">Le risposte usano i numeri a Villaromagnano di oggi, e si rifanno con la pagina ogni notte.</p><details class="faq-q"><summary>Cosa fare con i bambini a Villaromagnano?</summary><div class="faq-a"><p>In questo momento a Villaromagnano abbiamo <strong>2 appuntamenti</strong> in programma: sport, fino al 7 settembre 2026. Sono tutti nell'elenco qui sopra, ognuno con la sua scheda: data, orario, luogo e il contatto di chi organizza.</p></div></details><details class="faq-q"><summary>Quali sono adatti all&#x27;età dei miei figli?</summary><div class="faq-a"><p>Di quelli in programma, <strong>1</strong> è pensato proprio per i bambini: hanno una fascia d'età dichiarata da chi organizza, oppure laboratori, burattini o giochi scritti nel programma. Li trovi raccolti nella sezione <em>Cosa c'è per i bambini a Villaromagnano</em>, con l'età accanto dove è indicata.</p><p>Il resto è comunque roba da portarci i figli: in agenda entra solo quello che abbiamo già scelto per le famiglie.</p></div></details><details class="faq-q"><summary>Ci sono eventi gratuiti a Villaromagnano?</summary><div class="faq-a"><p><strong>2</strong> su 2 in programma sono a ingresso libero, col cartellino <em>Gratuito</em> nella riga. Dove il cartellino non c'è, il prezzo non è dichiarato oppure si paga quello che si consuma — nelle sagre è quasi sempre il secondo caso.</p></div></details><details class="faq-q"><summary>E nei comuni vicini a Villaromagnano?</summary><div class="faq-a"><p>In provincia di Alessandria hanno una pagina loro anche Acqui Terme, Alessandria, Casale Monferrato, Castelletto d&#x27;Orba, Castelnuovo Scrivia, Novi Ligure: le trovi in fondo, sotto <em>Altri comuni della provincia</em>. Se preferisci guardare tutto insieme, <a href="/sagre-provincia-alessandria.html">il calendario della provincia di Alessandria</a> li tiene in un elenco solo.</p></div></details></section>
   <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">875 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">17 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">12 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
   <p class="com-fonte">Gli eventi a Villaromagnano arrivano da <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">@daop_alessandria</a>, la nostra pagina per la provincia di Alessandria. <a href="/zone.html">Le pagine della tua zona</a></p>
-  <p class="ev-firma-nota">Pagina aggiornata il 3 settembre 2026.</p>
+  <p class="ev-firma-nota">Pagina aggiornata il 4 settembre 2026.</p>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">
