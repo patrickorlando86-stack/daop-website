@@ -341,86 +341,80 @@ module.exports = async function luoghi(browser) {
     ? `ancore inesistenti: ${rotti.slice(0, 3).map(([a, f]) => `#${a} (${f})`).join(', ')}`
     : 'ogni ancora linkata esiste davvero in luoghi.html');
 
-  // ── l'invito al canale WhatsApp ───────────────────────────────────────
-  // Due guasti silenziosi: l'invito sparisce da tutte le pagine (CANALE_WA
-  // svuotato per sbaglio), oppure ce n'e' piu' d'uno sulla stessa pagina,
-  // che su una scheda gia' lunga e' una richiesta ripetuta a chi ha gia'
-  // detto di no una volta. Nessuno dei due rompe niente, quindi nessuno dei
-  // due si nota.
+  // -- Ginetto: c'e', una volta sola, e nel posto giusto ----------------
+  // Fino al 04/09/2026 questo blocco difendeva l'invito al canale WhatsApp.
+  // Il canale non c'e' piu' e Ginetto e' rimasta l'unica richiesta del sito,
+  // quindi quello che si difende adesso e' lui - e sono gli stessi guasti
+  // silenziosi di prima, che non rompono niente e percio' non si notano: il
+  // blocco sparisce da una famiglia di pagine, oppure ce n'e' due sulla
+  // stessa pagina, che e' la stessa richiesta fatta a chi ha gia' detto di no.
   //
   // I tre eventi/box-*.html restano fuori, e non e' una dimenticanza: sono i
   // riquadri da incorporare, che vivono dentro l'iframe del sito di qualcun
-  // altro. Chiedere li' un'iscrizione al nostro canale vuol dire usare lo
-  // spazio di un altro per portarci via il suo pubblico. E' la stessa ragione
-  // per cui quei tre file non chiedono il consenso ai cookie.
+  // altro, e usare lo spazio di un altro per portargli via il pubblico e' la
+  // stessa ragione per cui quei tre file non chiedono il consenso ai cookie.
   // Fuori restano anche le schede SPOSTATE, per un motivo affine: sono
-  // cartelli, non pagine. Una correzione sul foglio (il comune, il nome) ha
-  // cambiato l'indirizzo della scheda, e questa e' rimasta solo per rimandare
-  // alla nuova con un refresh a zero secondi. Chiedere li' l'iscrizione al
-  // canale vuol dire chiederla sulla soglia, a chi sta gia' uscendo dalla
-  // stanza - e la coda in cui l'invito dovrebbe stare, su quella pagina, non
-  // esiste proprio.
+  // cartelli, non pagine - una correzione sul foglio ha cambiato l'indirizzo e
+  // questa e' rimasta solo per rimandare alla nuova con un refresh a zero
+  // secondi. Li' la coda in cui il blocco dovrebbe stare non esiste proprio.
   const cartello = (f) => fs.readFileSync(path.join(RADICE, f), 'utf8')
     .includes('http-equiv="refresh"');
   const nostre = schede.filter((f) => !/\bbox-[a-z]{2}\.html$/.test(f) && !cartello(f));
-  let conCanale = 0, doppi = [];
-  for (const f of nostre) {
-    const n = (fs.readFileSync(path.join(RADICE, f), 'utf8')
-      .match(/class="ev-canale-cta"/g) || []).length;
-    if (n) conCanale++;
-    if (n > 1) doppi.push(f);
-  }
-  r.ok(conCanale === nostre.length,
-    `l'invito al canale c'e' su tutte le nostre pagine: ${conCanale}/${nostre.length}`);
-  r.ok(doppi.length === 0, doppi.length
-    ? `invito ripetuto in ${doppi.length} pagine (es. ${doppi[0]})`
-    : 'mai due inviti sulla stessa pagina');
 
-  // ── e DOVE sta l'invito, e CHI sta in cima ────────────────────────────
-  // Fino al 28/08/2026 il posto sotto l'avviso di un'edizione conclusa era
-  // dell'invito al canale (decisione del 19/08). Adesso e' di Ginetto: a
-  // parita' di posto rende di piu' - 7 clic stando al 71% della pagina contro
-  // 4 stando al 59%, settimana 12-18/08 - e soprattutto risponde alla domanda
-  // giusta, perche' chi scopre che la festa e' finita vuole sapere cosa fare
-  // ADESSO, non ricevere un messaggio giovedi'.
-  //
-  // Quattro guasti silenziosi, che si smontano tutti da soli alla prima
-  // riscrittura del template: basta spostare una riga e nessuna pagina si
-  // rompe.
-  //
+  // Le tre famiglie che finiscono in questo elenco, riconosciute SENZA tenere
+  // a mano una lista di file: le pagine comune stanno nella loro cartella;
+  // fra quelle in eventi/ la SCHEDA e' quella che porta la firma di chi l'ha
+  // verificata, e quello che resta sono le otto landing (oggi, weekend e le
+  // sei d'incrocio). Un elenco scritto a mano invecchierebbe alla prima
+  // pagina nuova, che e' il difetto gia' pagato piu' volte qui dentro.
+  const famiglia = (f, html) => f.split(path.sep).join('/').startsWith('eventi/comune')
+    ? 'comune'
+    : (html.includes('class="ev-firma"') ? 'scheda' : 'landing');
+
+  let senzaGinetto = [], doppi = [], conCanale = [],
+      conclusePosto = [], vivePosto = [], hubPosto = [];
   // Si cerca l'attributo class INTERO e non il solo nome: quei nomi stanno
-  // anche nel <style> di ogni pagina (PAGINA_CSS e' incollata dappertutto),
-  // quindi un includes sul nome secco direbbe "in cima" su tutte le schede.
-  let canaleFuoriPosto = [], concluseSenzaGinetto = [],
-      ginettoDoppio = [], viveConGinettoAlto = [];
+  // anche nel <style> di ogni pagina (GINETTO_CSS e' incollata dappertutto),
+  // quindi un includes sul nome secco direbbe "c'e'" su tutte le pagine.
   for (const f of nostre) {
     const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    const alto = (html.match(/class="ev-ginetto-alto"/g) || []).length;
+    const coda = (html.match(/class="bg-cream ev-ginetto"/g) || []).length;
     const conclusa = html.includes('<strong>Edizione conclusa</strong>');
-    const alto = html.includes('class="ev-ginetto-alto"');
-    const coda = html.includes('class="bg-cream ev-ginetto"');
-    // La coda si riconosce dall'ordine: l'invito DOPO la firma di verifica.
-    // Dove la firma non c'e' (pagine comune, landing) indexOf da' -1 e il
-    // confronto resta vero, che e' il comportamento giusto: li' basta che ci
-    // sia. Che ci sia lo ha gia' provato il blocco qui sopra.
-    const inCoda = html.indexOf('class="ev-canale"') >
-      html.indexOf('class="ev-firma"');
-    if (!inCoda) canaleFuoriPosto.push(f);
-    if (conclusa && !alto) concluseSenzaGinetto.push(f);
-    if (alto && coda) ginettoDoppio.push(f);
-    if (!conclusa && alto) viveConGinettoAlto.push(f);
+    if (alto + coda === 0) senzaGinetto.push(f);
+    if (alto + coda > 1) doppi.push(f);
+    if (/whatsapp\.com\/channel|class="ev-canale/.test(html)) conCanale.push(f);
+    const dove = famiglia(f, html);
+    // Su una CONCLUSA sta in cima, sotto l'avviso: quella pagina non ha piu'
+    // niente da dare, e chi ci arriva da Google ha gia' in testa "e allora
+    // cosa faccio?". Su una scheda VIVA no: li' Ginetto e' una richiesta e
+    // porterebbe fuori dal sito prima che la pagina abbia dato l'orario della
+    // sagra - un servizio si mette davanti, una richiesta no.
+    if (dove === 'scheda' && conclusa && !alto) conclusePosto.push(f);
+    if (dove === 'scheda' && !conclusa && alto) vivePosto.push(f);
+    // Sulle pagine comune e sulle landing Ginetto ha preso il posto che era
+    // dell'invito al canale (04/09/2026): dentro l'articolo, subito dopo
+    // l'elenco, invece che in fondo sotto altri tre blocchi di coda.
+    if (dove !== 'scheda' && !alto) hubPosto.push(f);
   }
-  r.ok(canaleFuoriPosto.length === 0, canaleFuoriPosto.length
-    ? `invito al canale fuori dalla coda su ${canaleFuoriPosto.length} pagine (es. ${canaleFuoriPosto[0]})`
-    : "l'invito al canale sta in coda su tutte le pagine, senza eccezioni");
-  r.ok(concluseSenzaGinetto.length === 0, concluseSenzaGinetto.length
-    ? `edizioni concluse senza Ginetto in cima: ${concluseSenzaGinetto.length} (es. ${concluseSenzaGinetto[0]})`
-    : "su ogni edizione conclusa Ginetto sta sotto l'avviso");
-  r.ok(ginettoDoppio.length === 0, ginettoDoppio.length
-    ? `Ginetto in cima E in fondo su ${ginettoDoppio.length} pagine (es. ${ginettoDoppio[0]})`
+  r.ok(senzaGinetto.length === 0, senzaGinetto.length
+    ? `Ginetto manca su ${senzaGinetto.length} pagine (es. ${senzaGinetto[0]})`
+    : `Ginetto c'e' su tutte le nostre pagine: ${nostre.length}/${nostre.length}`);
+  r.ok(doppi.length === 0, doppi.length
+    ? `Ginetto due volte sulla stessa pagina: ${doppi.length} (es. ${doppi[0]})`
     : 'mai due volte Ginetto sulla stessa pagina');
-  r.ok(viveConGinettoAlto.length === 0, viveConGinettoAlto.length
-    ? `Ginetto in cima su ${viveConGinettoAlto.length} pagine che hanno ancora qualcosa da dare (es. ${viveConGinettoAlto[0]})`
-    : 'sulle pagine vive Ginetto resta in fondo');
+  r.ok(conCanale.length === 0, conCanale.length
+    ? `invito al canale WhatsApp ancora su ${conCanale.length} pagine (es. ${conCanale[0]})`
+    : "nessuna traccia dell'invito al canale WhatsApp");
+  r.ok(conclusePosto.length === 0, conclusePosto.length
+    ? `edizioni concluse senza Ginetto in cima: ${conclusePosto.length} (es. ${conclusePosto[0]})`
+    : "su ogni edizione conclusa Ginetto sta sotto l'avviso");
+  r.ok(vivePosto.length === 0, vivePosto.length
+    ? `Ginetto in cima su ${vivePosto.length} schede che hanno ancora qualcosa da dare (es. ${vivePosto[0]})`
+    : 'sulle schede vive Ginetto resta in fondo');
+  r.ok(hubPosto.length === 0, hubPosto.length
+    ? `Ginetto ancora in fondo su ${hubPosto.length} pagine comune o landing (es. ${hubPosto[0]})`
+    : "su pagine comune e landing Ginetto sta nel posto che era del canale");
 
   await ctx.close();
 

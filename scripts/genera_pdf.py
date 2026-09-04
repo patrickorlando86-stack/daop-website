@@ -254,7 +254,7 @@ dd{margin:0 0 1mm}
    i comandi (non si clicca su un foglio), le immagini (vedi il docstring),
    i blocchi che rimandano ad altre pagine del sito. */
 .ev-toolbar,.ev-viewbar,.events-count,.events-empty,.ce-actions,.ce-guidapdf,
-.eco,.ev-canale,.ev-geo,svg,input,select,.co-loc
+.eco,.ev-ginetto,.ev-ginetto-alto,.ev-geo,svg,input,select,.co-loc
 {display:none !important}
 /* La locandina. Sta a destra e il testo le gira intorno: messa a tutta
    larghezza farebbe una scheda per pagina e la guida diventerebbe uno

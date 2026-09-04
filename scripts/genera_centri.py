@@ -455,8 +455,6 @@ CSS = """
 .ce-guide h3{margin:1.6em 0 .35em;font-size:1.05rem}
 .ce-guide p,.ce-guide li{line-height:1.7}
 .ce-guide ul{padding-left:1.15em}
-.ce-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:30px 0 8px}
-.ce-actions .btn{color:#fff}
 /* Il richiamo alla guida in PDF. <div> e non <section>: section{padding:100px
    24px} arriva dal CSS di sistema e qui varrebbe 200px di vuoto. */
 .ce-guidapdf{margin:2.6em 0 0;padding:20px 22px;border:1px solid rgba(0,0,0,.12);
@@ -951,7 +949,7 @@ def render(chiave, cfg, centri, css, nav, foot):
      Pasquali a Pasqua") perche' quella regola vive li' e non nel guscio. Si
      include invece di ricopiarla, come gia' fa genera_luoghi.py: la regola
      sta in un posto solo. -->
-<style>{css}{G.COMUNE_CSS}{CSS}</style>
+<style>{css}{G.COMUNE_CSS}{G.GINETTO_CSS}{CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
@@ -989,11 +987,8 @@ def render(chiave, cfg, centri, css, nav, foot):
   {link_guida(chiave)}
   {sorelle(chiave)}
   {G.blocco_ecosistema('centri')}
-  <div class="ce-actions">
-    <a class="btn btn-teal" href="/ginetto.html">Chiedi a Ginetto AI</a>
-  </div>
 </article>
-</main>
+{G.blocco_ginetto()}</main>
 {foot}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}

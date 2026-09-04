@@ -718,7 +718,14 @@
    ha trovato quello che cercava. */
 .ev-ginetto{padding:56px 24px}
 .ev-ginetto .info-strip{margin-bottom:0;align-items:center}
-.ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
+/* 96px e non 64: a 64 la mascotte si leggeva come l'icona di un avviso, cioe'
+   la cosa che l'occhio salta. Dal 04/09/2026 Ginetto e' l'unica richiesta del
+   sito - non divide piu' l'attenzione con l'invito al canale - e puo'
+   prendersi lo spazio. Il file nativo e' 500x500, quindi non si sgrana.
+   Sul telefono la .info-strip va in colonna e la faccia finisce da sola su
+   una riga sua: li' 64px erano persi in mezzo al bianco. */
+.ginetto-faccia{width:96px;height:96px;flex-shrink:0;object-fit:contain}
+@media(max-width:600px){.ginetto-faccia{width:104px;height:104px}}
 @media(max-width:600px){.ev-ginetto{padding:40px 20px}}
 /* Lo stesso componente dentro l'articolo invece che in una fascia di pagina:
    in cima a un'edizione conclusa, e - dal 04/09/2026 - nel posto che era

@@ -2486,6 +2486,41 @@ def _guscio():
     return css_txt, rooted(nav.group(0)), rooted(foot.group(0))
 
 
+# Il componente Ginetto, tenuto FUORI da PAGINA_CSS perche' dal 04/09/2026
+# serve anche a pagine che PAGINA_CSS non ce l'hanno: corsi.html, le pagine
+# realta' in corsi/, i tre hub dei centri. Quelle importano solo questo.
+#
+# Le regole di .info-strip NON stanno qui: arrivano dal <style> di eventi.html
+# che _guscio() copia in ogni pagina generata. Ricopiarle sarebbe una seconda
+# definizione dello stesso componente, cioe' due card che divergono alla prima
+# modifica - la ragione per cui la nav si rilegge invece di essere copiata.
+GINETTO_CSS = """
+/* Striscia Ginetto: stesso componente .info-strip della home eventi (card
+   crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
+   Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
+   ha trovato quello che cercava. */
+.ev-ginetto{padding:56px 24px}
+.ev-ginetto .info-strip{margin-bottom:0;align-items:center}
+/* 96px e non 64: a 64 la mascotte si leggeva come l'icona di un avviso, cioe'
+   la cosa che l'occhio salta. Dal 04/09/2026 Ginetto e' l'unica richiesta del
+   sito - non divide piu' l'attenzione con l'invito al canale - e puo'
+   prendersi lo spazio. Il file nativo e' 500x500, quindi non si sgrana.
+   Sul telefono la .info-strip va in colonna e la faccia finisce da sola su
+   una riga sua: li' 64px erano persi in mezzo al bianco. */
+.ginetto-faccia{width:96px;height:96px;flex-shrink:0;object-fit:contain}
+@media(max-width:600px){.ginetto-faccia{width:104px;height:104px}}
+@media(max-width:600px){.ev-ginetto{padding:40px 20px}}
+/* Lo stesso componente dentro l'articolo invece che in una fascia di pagina:
+   in cima a un'edizione conclusa, e - dal 04/09/2026 - nel posto che era
+   dell'invito al canale sulle pagine comune e sulle landing. */
+.ev-ginetto-alto{margin:34px 0 26px}
+/* In cima a una conclusa il margine sopra e' zero: l'avviso "Edizione
+   conclusa" ha gia' i suoi 22px sotto, e sommandoli l'aria raddoppia. */
+.ev-over + .ev-ginetto-alto{margin-top:0}
+.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
+"""
+
+
 PAGINA_CSS = """
 /* La nav del sito e' position:fixed: senza spazio in cima gli finisce sotto
    il breadcrumb e mezzo H1. Stessi valori con cui .page-hero la compensa
@@ -2607,17 +2642,6 @@ PAGINA_CSS = """
 .ev-fonte{font-size:.88rem;opacity:.85}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
-/* Invito al canale WhatsApp. Verde WhatsApp SOLO sul pulsante: la cornice
-   resta nei colori del sito, se no in fondo a ogni scheda c'e' un riquadro
-   verde che sembra pubblicita' di qualcun altro. padding esplicito perche'
-   e' un <aside> dentro l'articolo, non una fascia di pagina. */
-.ev-canale{margin:28px 0 0;padding:16px 18px;border-radius:14px;
-  background:rgba(107,165,168,.10);border:1px solid rgba(107,165,168,.30)}
-.ev-canale-t{font-weight:700;margin:0 0 4px;color:var(--navy,#2d4a5c)}
-.ev-canale p{margin:0 0 12px;font-size:.92rem;line-height:1.55}
-.ev-canale-cta{display:inline-block;background:#25d366;color:#0b3d24;
-  font-weight:700;text-decoration:none;padding:10px 18px;border-radius:999px;
-  font-size:.95rem}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
    section{padding:100px 24px} come selettore di elemento, che qui dentro
@@ -2639,26 +2663,11 @@ PAGINA_CSS = """
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-/* Striscia Ginetto: stesso componente .info-strip della home eventi (card
-   crema, titolo Playfair, link arancio), con la mascotte al posto dell'icona.
-   Sta in fondo, dopo "altri eventi vicino a": e' il punto in cui chi legge non
-   ha trovato quello che cercava. */
 /* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
    famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
    a chi arriva dalla ricerca di essere nel posto giusto. */
 .ev-gancio{margin:6px 0 0;font-size:.95rem;font-weight:600;letter-spacing:.01em;
   opacity:.92}
-.ev-ginetto{padding:56px 24px}
-.ev-ginetto .info-strip{margin-bottom:0;align-items:center}
-.ginetto-faccia{width:64px;height:64px;flex-shrink:0;object-fit:contain}
-@media(max-width:600px){.ev-ginetto{padding:40px 20px}}
-/* In cima a un'edizione conclusa: stesso componente, dentro l'articolo invece
-   che in una fascia di pagina. Nessun margine sopra (l'avviso "Edizione
-   conclusa" ha gia' i suoi 22px sotto) e 26px di aria sotto, se no si attacca
-   ai dati della scheda - sono gli stessi numeri che aveva l'invito al canale
-   quando il posto in cima era suo. */
-.ev-ginetto-alto{margin:0 0 26px}
-.ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
 /* ── La barra delle azioni, e solo sul telefono ─────────────────────────
    PERCHE' ESISTE, e il conto e' misurato il 28/08/2026 a 412px su una scheda
    viva, non stimato. .ev-actions - "Aggiungi al calendario" e "Come arrivare",
@@ -2670,10 +2679,11 @@ PAGINA_CSS = """
    cliccati del sito - `click_come_arrivare` e' l'azione numero uno delle
    schede, 33 in sette giorni contro 10 del calendario e 9 del telefono.
 
-   E' lo stesso conto dell'invito al canale, con una differenza che decide il
-   verso: quello e' una RICHIESTA, e in cima chiederebbe qualcosa a chi non ha
-   ancora avuto niente. Questi sono SERVIZI - la mappa e la data sono la
-   ragione per cui uno e' arrivato. Un servizio si mette davanti.
+   E' lo stesso conto che si faceva sull'invito al canale, con una differenza
+   che decide il verso e che vale ora per Ginetto: quello e' una RICHIESTA, e
+   in cima chiederebbe qualcosa a chi non ha ancora avuto niente. Questi sono
+   SERVIZI - la mappa e la data sono la ragione per cui uno e' arrivato. Un
+   servizio si mette davanti, una richiesta no.
 
    NON sostituisce .ev-actions, che resta dov'e'. La pagina non perde niente
    (li' c'e' anche "Torna all'agenda"), e cosi' la barra si puo' togliere in
@@ -2715,6 +2725,9 @@ PAGINA_CSS = """
 """
 
 
+PAGINA_CSS += GINETTO_CSS
+
+
 def blocco_ginetto(citta="", alto=False):
     """Rimando a Ginetto sulle pagine di evento e di comune.
 
@@ -2742,32 +2755,37 @@ def blocco_ginetto(citta="", alto=False):
     eventi.html avverte che "Alessandria e Asti" va cercato a mano in TUTTO il
     file, e questo e' un posto in meno in cui cercarlo.
 
-    `alto` (28/08/2026) e' l'unica eccezione alla coda, e vale su una scheda
-    sola: quella di un'EDIZIONE CONCLUSA. E' lo stesso ragionamento che il
-    19/08 aveva fatto salire l'invito al canale, applicato all'inquilino
-    giusto: in coda chiede a chi ha gia' avuto quello che cercava, ma una
-    scheda conclusa non ha niente da dare - chi ci arriva da Google ha appena
-    scoperto che la festa e' finita, e la domanda che ha in testa e' "e allora
-    cosa faccio?". A quella Ginetto risponde ADESSO; il canale risponde
-    giovedi'. Quindi il posto in cima cambia inquilino e l'invito al canale
-    torna in coda su tutte le schede.
+    `alto` NON e' "in cima": e' il GUSCIO. Vero da' l'<aside> dentro
+    l'articolo, falso la fascia a tutta larghezza dopo l'articolo. Il testo e'
+    IDENTICO nei due casi, apposta: cambiando insieme posizione e parole non si
+    saprebbe quale delle due ha spostato il numero.
+
+    Dove va il guscio stretto, e sono due casi con la stessa ragione:
+
+      - IN CIMA a un'EDIZIONE CONCLUSA (28/08/2026). Li' la regola della coda
+        cade: in coda si chiede a chi ha gia' avuto quello che cercava, ma una
+        scheda conclusa non ha niente da dare - chi ci arriva da Google ha
+        appena scoperto che la festa e' finita, e ha gia' in testa "e allora
+        cosa faccio?". Ginetto a quella risponde adesso.
+      - NEL POSTO CHE ERA DELL'INVITO AL CANALE sulle pagine comune e sulle
+        landing (04/09/2026). Li' Ginetto stava in fondo, sotto altri tre o
+        quattro blocchi di coda; l'invito al canale stava piu' in alto, subito
+        dopo l'elenco. Tolto il canale quel posto era libero, e lasciarlo
+        vuoto per tenere Ginetto piu' in basso sarebbe stato regalare la sola
+        cosa che questo cambio guadagna.
 
     PERCHE' GINETTO E NON UNA TERZA COSA, ed e' misurato non supposto: nella
     settimana 12-18/08 `apri_ginetto` fa 7 clic stando al 71% della pagina,
-    mentre l'invito al canale - piu' in alto, al 59% - sta dentro un secchio da
-    4. E' la richiesta che rende di piu' del sito, ed era quella messa piu' in
-    basso. Le concluse sono 132 schede su 288 (il 46%) e prendono traffico vero
-    (il 16/08: 1.237 impressioni).
+    mentre l'invito al canale - piu' in alto, al 59% - stava dentro un secchio
+    da 4. Era la richiesta che rendeva di piu' del sito, ed era quella messa
+    piu' in basso. Dal 04/09/2026 il canale non c'e' piu' e Ginetto e' rimasta
+    l'unica richiesta del sito: la regola "due richieste nello stesso punto si
+    dimezzano" non ha piu' un secondo termine da bilanciare.
 
-    Il testo e' IDENTICO nelle due posizioni, come lo era per il canale:
-    cambiando insieme posizione e parole non si saprebbe quale delle due ha
-    spostato il numero. Cambia il guscio e nient'altro - in cima e' un <aside>
-    dentro l'articolo, in fondo una fascia a tutta larghezza.
-
-    E su una scheda CONCLUSA non si stampa due volte: chi la riceve in cima non
-    la ritrova in fondo. Sarebbe la stessa richiesta ripetuta a chi ha gia'
-    detto di no una volta, che e' il difetto che tests/luoghi.js difende gia'
-    per il canale."""
+    UNA VOLTA SOLA PER PAGINA, e vale in tutti e due i versi: chi lo riceve in
+    cima non lo ritrova in fondo - sarebbe la stessa richiesta fatta due volte
+    a chi ha gia' detto di no una volta - e chi ce l'ha in coda non lo ha
+    sopra. E' quello che tests/luoghi.js difende."""
     # a_citta() mette la d eufonica: "vicino ad Acqui Terme", non "a Acqui".
     dove = " vicino " + esc(a_citta(citta)) if citta else " con i bambini"
     strip = f"""<div class="info-strip">
@@ -3043,11 +3061,6 @@ def firma_daop(rec, oggi, ritirata=False):
         '</aside>')
 
 
-# Il canale WhatsApp. Vuoto = non si stampa niente da nessuna parte: meglio
-# nessun invito che un invito rotto.
-CANALE_WA = "https://whatsapp.com/channel/0029Vb8YbnqL2AU2XNDsPL2z"
-
-
 def barra_azioni(e):
     """I tre gesti della scheda, fermi in fondo allo schermo del telefono.
 
@@ -3096,48 +3109,6 @@ def barra_azioni(e):
     return ('<div class="ev-barra-spazio" aria-hidden="true"></div>'
             '<div class="ev-barra" role="group" aria-label="Azioni rapide">'
             + "".join(link) + '</div>')
-
-
-def blocco_canale(dove=""):
-    """L'invito al canale WhatsApp.
-
-    Sta in coda alla scheda e non in cima per una ragione sola: in cima chiede
-    qualcosa a chi non ha ancora avuto niente. Chi e' arrivato in fondo l'orario
-    della sagra ce l'ha, e a quel punto "e il prossimo weekend?" e' una domanda
-    che si sta gia' facendo.
-
-    Il testo dice **quanto spesso si scrive**, prima di ogni altra cosa. La
-    paura di chi si iscrive a un canale non e' il contenuto, e' il diluvio: se
-    la prima riga non risponde a quella, il tasto non si tocca. Per lo stesso
-    motivo non c'e' nessuna promessa in piu' - niente "contenuti esclusivi",
-    che sarebbe una cosa che poi non manteniamo.
-
-    Dal 19/08/2026 al 28/08/2026 c'era un'eccezione, e adesso non c'e' piu':
-    su un'edizione conclusa l'invito saliva sotto l'avviso, perche' li' la
-    premessa della regola cade - una pagina che non ha niente da dare non sta
-    chiedendo a chi non ha avuto niente. Il ragionamento regge ancora; quello
-    che e' cambiato e' CHI occupa quel posto. Misurato nella settimana
-    12-18/08: `apri_ginetto` fa 7 clic stando al 71% della pagina, questo
-    invito ne fa 4 stando al 59%. A parita' di posto rende di piu' Ginetto, e
-    soprattutto risponde alla domanda giusta: chi scopre che la festa e' finita
-    vuole sapere cosa fare ADESSO, non ricevere un messaggio giovedi'. Quindi
-    il posto in cima e' passato a blocco_ginetto(alto=True) e questo invito
-    torna in coda su tutte le schede, senza eccezioni.
-
-    Non si affiancano: due richieste nello stesso punto si dimezzano, e
-    misurandole insieme non si saprebbe piu' quale delle due ha mosso il
-    numero."""
-    if not CANALE_WA:
-        return ''
-    return (
-        '<aside class="ev-canale">'
-        f'<p class="ev-canale-t">Un messaggio il giovedì, e basta</p>'
-        '<p>Ti mandiamo quello che c\'è nel weekend'
-        f'{" vicino a " + esc(dove) if dove else " in zona"}: sagre, feste e '
-        'cose da fare con i bambini. Niente altro.</p>'
-        f'<a class="ev-canale-cta" href="{CANALE_WA}" target="_blank" '
-        'rel="noopener">Segui il canale WhatsApp</a>'
-        '</aside>')
 
 
 _INDICE_LUOGHI = None
@@ -3306,13 +3277,12 @@ def link_realta(nome_evento):
 # LE TRE REGOLE, tutte prese da cose gia' provate qui dentro:
 #  - COL NUMERO, non l'etichetta. "894 posti per famiglie" e' una ragione per
 #    toccare, "Luoghi" no. E' la lezione di link_luoghi(), riusata.
-#  - IN CODA AL CORPO, non nell'hero. Stessa regola dell'invito al canale: in
-#    cima chiedi qualcosa a chi non ha ancora avuto niente. E l'hero di
-#    eventi.html non si tocca comunque, vale il 30% delle impressioni del sito.
+#  - IN CODA AL CORPO, non nell'hero. Stessa regola che valeva per l'invito al
+#    canale: in cima chiedi qualcosa a chi non ha ancora avuto niente. E l'hero
+#    di eventi.html non si tocca comunque, vale il 30% delle impressioni.
 #  - NON SULLE ~300 SCHEDE EVENTO. Quelle hanno gia' blocco_vicini(), il link ai
-#    luoghi del comune e l'invito al canale: una quarta riga di link in coda e'
-#    la barra che non guarda nessuno, e lo 0,3% misurato sull'invito dice che
-#    quella zona e' morta. Questa riga sta sui quattro hub e sulle pagine di
+#    luoghi del comune e la striscia di Ginetto: una quarta riga di link in coda
+#    e' la barra che non guarda nessuno. Questa riga sta sui quattro hub e sulle pagine di
 #    intenzione: ~40 pagine adulte, non 300. Sulle schede si allarga invece la
 #    riga che funziona gia' — vedi link_luoghi().
 #
@@ -3836,16 +3806,20 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     # In coda, sotto la firma e gli eventi vicini, quel blocco lo vede chi
     # scorre tutto: circa uno su cento.
     #
-    # Dal 19/08 il posto era dell'invito al canale; dal 28/08 e' di GINETTO.
-    # Non e' un ripensamento sul ragionamento, e' un cambio di inquilino: a
-    # parita' di posto Ginetto e' misurato piu' forte (7 clic dal 71% della
-    # pagina contro 4 dal 59%, settimana 12-18/08) e soprattutto risponde alla
-    # domanda giusta - lui risponde ADESSO, il canale risponde giovedi'.
+    # Dal 19/08 il posto era dell'invito al canale WhatsApp; dal 28/08 e' di
+    # GINETTO, perche' a parita' di posto rende di piu' (7 clic dal 71% della
+    # pagina contro 4 dal 59%, settimana 12-18/08) e risponde alla domanda
+    # giusta - lui risponde ADESSO, il canale rispondeva giovedi'.
     #
-    # Uno solo, e in un posto solo. I due blocchi non si affiancano in cima -
-    # due richieste nello stesso punto si dimezzano - e Ginetto in cima non si
-    # ripete in fondo, che sarebbe la stessa richiesta fatta due volte a chi ha
-    # gia' detto di no una volta.
+    # Dal 04/09/2026 il canale non c'e' piu' affatto, e Ginetto e' rimasto
+    # l'unica richiesta del sito. La conseguenza da non disfare: qui sotto era
+    # l'invito al canale a occupare la coda dell'articolo, un blocco sopra la
+    # fascia di Ginetto. Togliendolo la fascia non si e' spostata di posto -
+    # ha ereditato il suo, cioe' e' salita di quell'altezza su ogni scheda.
+    #
+    # Uno solo, e in un posto solo: Ginetto in cima non si ripete in fondo,
+    # che sarebbe la stessa richiesta fatta due volte a chi ha gia' detto di
+    # no una volta.
     #
     # NON vale per le RITIRATE, che restano come prima: quella pagina dichiara
     # di non essere attendibile e manda all'agenda, e presentare qualcosa di
@@ -3855,7 +3829,6 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     in_cima = concluso and not ritirata
     ginetto_alto = blocco_ginetto(citta, alto=True) if in_cima else ''
     ginetto_coda = '' if in_cima else blocco_ginetto(citta)
-    canale_coda = blocco_canale(citta)
 
     ev_obj = event_jsonld(e, url)
     ev_obj["@id"] = f"{url}#event"
@@ -4003,7 +3976,6 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   {azioni}
   {firma}
   {altri}
-  {canale_coda}
 </article>
 {ginetto_coda}</main>
 {foot}
@@ -5648,13 +5620,13 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
-  {blocco_canale(citta)}
+  {blocco_ginetto(citta, alto=True)}
   {f'<h2>Altri comuni della provincia di {esc(prov_nome)}</h2><div class="com-link">{link_altri}</div>' if link_altri else ''}
   {blocco_ecosistema('eventi')}
   {credito}
   <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
 </article>
-{blocco_ginetto(citta)}</main>
+</main>
 {foot}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
@@ -6122,14 +6094,14 @@ def _landing_shell(spec, css, nav, foot, oggi):
 </header>
 <article class="ev-wrap ev-wrap--hero">
   {spec['corpo']}
-  {blocco_canale()}
+  {blocco_ginetto(alto=True)}
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
   <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
 </article>
-{blocco_ginetto()}</main>
+</main>
 {foot}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
@@ -6433,151 +6405,6 @@ def spec_oggi(events, oggi, altre):
                                  "Eventi di oggi", "Oggi", oggi),
         'eventi': len(adesso),
     }
-
-
-MSG_PATH = os.path.join(ROOT, "data", "messaggio-canale.txt")
-MSG_MAX = 10          # quanti eventi nel messaggio
-MSG_PER_COMUNE = 2    # quanti al massimo dallo stesso paese
-MSG_PER_MANIF = 2     # quanti al massimo dalla stessa manifestazione
-
-
-def _msg_riga(e, sab, dom):
-    """Una riga: nome, paese, quando. Il "quando" e' sab/dom e non la data,
-    perche' in un messaggio che parla di UN weekend la data e' rumore."""
-    giorni = [n for n, g in (("sab", sab), ("dom", dom)) if in_corso(e, g)]
-    ora = (e.get('ora') or '').strip().split('-')[0].strip()
-    quando = "/".join(giorni) + (f" {ora}" if ora else "")
-    coda = " · ".join(x for x in [(e.get('citta') or '').strip(), quando] if x)
-    return f"• {(e.get('nome') or '').strip()}" + (f" — {coda}" if coda else "")
-
-
-# Le altre cose che DAOP fa, per il canale. UNA per settimana, a rotazione.
-#
-# Chiesto il 03/09/2026: "nel messaggio del canale mettere anche l'app di
-# Ginetto, il Piatto Sano, i libri". Metterli tutti e tre ogni settimana pero'
-# raddoppia il messaggio, e un messaggio che raddoppia si smette di leggere
-# proprio dove finisce la parte per cui uno si e' iscritto - gli eventi. Uno
-# solo alla volta ha due vantaggi: sta in fondo senza pesare, e ognuno ha lo
-# spazio per dire davvero cos'e' invece di una riga di link.
-#
-# I testi NON sono inventati qui: dicono quello che dicono le pagine del sito
-# (ginetto.html, piattosano.html, libri.html). Se cambia la pagina, cambia qui.
-CODA_CANALE = [
-    ("🤖 *Conosci Ginetto?*\n"
-     "È l'assistente DAOP per le famiglie: gli chiedi \"cosa faccio domenica "
-     "con un bimbo di 3 anni?\" e ti risponde, pescando fra oltre 800 luoghi "
-     "scelti a mano e gli eventi delle tre province.\n"
-     "👉 https://ginettoapp.it"),
-    ("🥗 *Il Piatto Sano*\n"
-     "Il gioco educativo del programma S.A.N.E. Italia, per bambini e ragazzi "
-     "dai 6 ai 18 anni: 6 mini-giochi su alimentazione, i 14 allergeni e "
-     "l'uso dell'autoiniettore. Si gioca dal browser, gratis.\n"
-     "👉 https://ilpiattosano.netlify.app"),
-    ("📚 *I libri*\n"
-     "La collana \"Ginetto l'Esploratore\" - storie illustrate per famiglie - "
-     "e i romanzi di Patrick Orlando.\n"
-     "👉 {sito}/libri.html"),
-]
-
-
-def coda_del_canale(oggi):
-    """Quale delle altre cose DAOP presentare questa settimana.
-
-    Sul NUMERO DI SETTIMANA e non a caso: lo stesso giovedi' deve dare sempre
-    lo stesso testo. Il generatore gira ogni notte e piu' volte al giorno
-    quando si rifa' il sito - con un random, riaprendo la finestra il messaggio
-    cambierebbe sotto le mani di chi lo stava copiando.
-
-    A rotazione, quindi ognuna torna ogni tre settimane: abbastanza spesso da
-    farsi conoscere, abbastanza di rado da non sembrare pubblicita'.
-    """
-    quale = CODA_CANALE[oggi.isocalendar()[1] % len(CODA_CANALE)]
-    return quale.format(sito=SITE_URL)
-
-
-def messaggio_canale(events, oggi):
-    """Il testo del messaggio del giovedi', gia' pronto da copiare e incollare.
-
-    Nasce il 14/08/2026 col canale WhatsApp, e la ragione per cui e' un file e
-    non un post automatico e' che WhatsApp **non ha API pubbliche per
-    pubblicare sui canali**: quel pezzo resta a mano per forza. Quello che si
-    puo' togliere di mezzo e' il resto - decidere cosa mettere, cercare gli
-    orari, scrivere. Il generatore ce l'ha gia' tutto, quindi lo scrive lui e
-    la gestione del canale diventa un copia-incolla da due minuti.
-
-    Perche' due minuti contano: un canale si abbandona quando pubblicare e'
-    lavoro. Se ogni giovedi' bisogna aprire l'agenda, scegliere, controllare
-    gli orari e scrivere, si salta la seconda settimana. Se il messaggio e'
-    gia' fatto, no.
-
-    La selezione: al massimo MSG_MAX eventi, non piu' di MSG_PER_COMUNE dallo
-    stesso paese. Il tetto per comune non e' estetica - senza, una patronale da
-    19 sotto-eventi si prende tutto il messaggio e a chi sta dall'altra parte
-    della provincia non arriva niente. Chi vuole tutto ha il link in fondo.
-
-    L'ordine mette davanti quello che **comincia** in questi due giorni. Con il
-    solo d_start il primo messaggio veniva fatto di dieci mostre: sono aperte
-    da settimane, quindi hanno la data di inizio piu' vecchia e vincono
-    l'ordinamento - ma "cosa c'e' questo weekend" non vuol dire "cosa e'
-    ancora aperto". Le mostre restano, dopo, e ci arrivano quando c'e' posto."""
-    sab, dom = weekend_range(oggi)
-    # Dentro i due gruppi l'ordine e' mescolato, ma **in modo deterministico
-    # sulla data del weekend**: due run dello stesso giovedi' danno lo stesso
-    # messaggio (se no il file si ricommitterebbe a ogni run notturna), due
-    # weekend diversi danno un giro diverso. Serve contro una distorsione che
-    # con l'ordine alfabetico non si vede finche' non guardi quattro settimane
-    # di fila: Acqui e Alfiano ci sono sempre, Vesime e Voltaggio mai. Su un
-    # sito che campa di paesi da 800 abitanti e' esattamente il pubblico che
-    # non possiamo permetterci di non nominare.
-    mescola = random.Random(sab.isoformat())
-    del_weekend = [e for e in events if e['d_start'] <= dom and e['d_end'] >= sab]
-    mescola.shuffle(del_weekend)
-    del_weekend.sort(key=lambda e: 0 if e['d_start'] >= sab else 1)
-    quando = (f"sabato {sab.day} e domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}"
-              if sab.month == dom.month else
-              f"sabato {sab.day} {MESI_LUNGHI[sab.month - 1]} e "
-              f"domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}")
-
-    righe, per_comune, per_manif = [], collections.Counter(), collections.Counter()
-    for e in del_weekend:
-        c = _key(e.get('citta'))
-        # Il tetto per manifestazione e' l'altra meta' di quello per comune, e
-        # serve al caso opposto: "Castelli Aperti a Ferragosto" e' UN'iniziativa
-        # in quindici paesi diversi, quindi il tetto per comune non la ferma e
-        # da sola si prendeva sei righe su dieci. Sono due monopoli diversi -
-        # uno concentra un paese, l'altro un'iniziativa - e servono tutti e due.
-        m = _key(e.get('manifest')) if (e.get('manifest') or '').strip() else None
-        if per_comune[c] >= MSG_PER_COMUNE or (m and per_manif[m] >= MSG_PER_MANIF):
-            continue
-        per_comune[c] += 1
-        if m:
-            per_manif[m] += 1
-        righe.append(_msg_riga(e, sab, dom))
-        if len(righe) >= MSG_MAX:
-            break
-
-    if not del_weekend:
-        # Anche - anzi soprattutto - nel weekend vuoto: e' l'unica settimana in
-        # cui il messaggio non avrebbe niente da dire, e mandarne uno che dice
-        # solo "non c'e' niente" e' il modo di far disiscrivere la gente.
-        testo = (f"Per {quando} non abbiamo ancora niente di verificato in agenda.\n"
-                 f"Le sagre arrivano spesso a ridosso: l'agenda si rifà ogni notte.\n\n"
-                 f"👉 {SITE_URL}/eventi/weekend.html")
-    else:
-        resto = len(del_weekend) - len(righe)
-        coda = (f"\n…e altri {resto} in agenda." if resto > 0 else "")
-        testo = (f"🎪 *Cosa c'è questo weekend*\n{quando.capitalize()}\n\n"
-                 + "\n".join(righe) + coda
-                 + f"\n\n👉 Tutti gli eventi: {SITE_URL}/eventi/weekend.html")
-
-    # In fondo, dopo il link agli eventi: chi legge per gli eventi ha gia' avuto
-    # quello per cui e' li', e chi arriva in fondo trova qualcosa in piu'.
-    testo += "\n\n———\n" + coda_del_canale(oggi)
-
-    with open(MSG_PATH, "w", encoding="utf-8") as fh:
-        fh.write(testo + "\n")
-    print(f"[genera_eventi] messaggio canale: {len(righe)} eventi su "
-          f"{len(del_weekend)} del weekend -> data/messaggio-canale.txt")
 
 
 def spec_weekend(events, oggi, altre):
@@ -8993,7 +8820,6 @@ def main():
     scrivi_metodo(events)
     scrivi_zone(events, hub)
     scrivi_box(events, oggi)
-    messaggio_canale(events, oggi)
     # aggiorna l'istantanea committata
     # 'riga' resta fuori dall'istantanea: e' la posizione nel foglio, cambia a
     # ogni inserimento e sporcherebbe il diff di data/eventi.json a ogni run.

@@ -1569,7 +1569,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{CSS}{CSS_REALTA}</style>
+<style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
@@ -1602,7 +1602,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
 {G.blocco_ecosistema('corsi')}
 </article>
-</main>
+{G.blocco_ginetto()}</main>
 {foot}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
@@ -2784,7 +2784,7 @@ def render(corsi, css, nav, foot, realta=None):
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{CSS}</style>
+<style>{css}{G.GINETTO_CSS}{CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
@@ -2814,7 +2814,7 @@ def render(corsi, css, nav, foot, realta=None):
     <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
   </div>
 </article>
-</main>
+{G.blocco_ginetto()}</main>
 {foot}
 <script>
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}

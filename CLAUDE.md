@@ -358,24 +358,87 @@ Nell'elenco dei file committati c'è `esploratore.html` e la **cartella**
 `git status --untracked-files=no` non la vedrebbe. È la ragione già scritta per
 `corsi/` e `guide/`.
 
-## Il canale WhatsApp
+## Il canale WhatsApp è chiuso, e Ginetto è l'unica richiesta del sito
 
-Aperto il 14/08/2026. `CANALE_WA` in `genera_eventi.py` è l'unico posto in cui
-sta l'indirizzo: **vuoto vuol dire che l'invito non si stampa da nessuna
-parte**, che è il comportamento giusto se un giorno il canale si chiude.
-`blocco_canale()` compare sulle schede evento, sulle pagine comune e sulle
-landing — **323 pagine** al 19/08/2026, tutte tranne i tre `eventi/box-*.html`.
-Quelli vivono dentro l'iframe di siti altrui, e chiedere lì un'iscrizione vuol
-dire usare lo spazio di qualcun altro per portargli via il pubblico: stessa
-ragione per cui non chiedono il consenso ai cookie. `tests/luoghi.js` controlla
-che l'invito ci sia su tutte e che non sia mai doppio. Sta in coda dappertutto
-in coda **dappertutto, senza eccezioni**: quella sulle edizioni concluse è
-durata dal 19 al 28/08/2026, e il perché è finita è due paragrafi più sotto.
+Chiuso il **04/09/2026**, su decisione di Patrick: «non voglio più il canale
+WhatsApp, voglio spingere Ginetto». Non è una misura che ha deciso, è una
+scelta — ma le misure che c'erano non la contraddicono, ed è per questo che il
+resto di questa sezione resta scritto invece di essere cancellato: dentro c'è
+l'unico A/B che il sito abbia mai fatto sullo stesso identico slot.
 
-**Sta in coda e non in cima**, e il testo dice per prima cosa *quanto spesso si
-scrive*: la paura di chi si iscrive a un canale non è il contenuto, è il
-diluvio. Niente promesse in più ("contenuti esclusivi") che poi non
-manteniamo.
+Cosa è sparito, in un colpo solo:
+
+| | |
+|---|---|
+| `CANALE_WA` e `blocco_canale()` in `genera_eventi.py` | l'invito su **535 pagine** |
+| il paragrafo nel «TESTO DI ZONA» di `eventi.html` | l'unico invito fuori dai generatori, scritto a mano |
+| `messaggio_canale()`, `CODA_CANALE`, `data/messaggio-canale.txt` | il messaggio del giovedì |
+| `scripts/prova_coda_canale.py` | la prova che lo difendeva |
+| il ramo `iscrizione_canale` in `daop-track.js` | l'evento GA4 |
+| `.ev-canale*` in `PAGINA_CSS` | il CSS su ~470 pagine |
+
+**Quello che Ginetto ha guadagnato è il POSTO, e vale più della sparizione di
+un concorrente.** Misurato nel browser sulle pagine vere, non stimato —
+percentuale di scroll a cui il blocco sta:
+
+| | prima | dopo |
+|---|---|---|
+| scheda **viva** | interamente in vista al 71% | **64%** |
+| **pagina comune** (Novi Ligure) | fascia in fondo, ~81% | **58%** |
+| **landing** (`/eventi/weekend.html`) | in fondo | 88% |
+| scheda **conclusa** | in cima, 12% | invariata |
+
+Sulle schede il guadagno è piccolo, **e sapere perché evita di riprovarci**:
+lì i due blocchi erano già adiacenti — l'invito in coda all'articolo, la
+fascia di Ginetto subito dopo — quindi togliendo il primo la seconda ha
+ereditato esattamente il suo posto, e non un centimetro di più. Sulle **pagine
+comune e sulle landing** no: lì l'invito stava subito dopo l'elenco e Ginetto
+in fondo, sotto altri tre o quattro blocchi di coda. Quel posto Ginetto lo ha
+preso davvero, con `blocco_ginetto(alto=True)`, cioè il guscio stretto.
+
+**`alto` non vuol dire "in cima": vuol dire il guscio.** Vero dà l'`<aside>`
+dentro l'articolo, falso la fascia a tutta larghezza dopo l'articolo. Il testo
+è identico nei due casi, apposta — cambiando insieme posizione e parole non si
+saprebbe quale delle due ha spostato il numero.
+
+**E dove Ginetto non c'era, adesso c'è**: `corsi.html`, le pagine realtà in
+`corsi/`, i tre hub dei centri. Sui centri ha **sostituito** il bottone «Chiedi
+a Ginetto AI», che mandava alla landing e spariva in una fila di bottoni: uno
+solo per pagina, se no è la stessa richiesta fatta due volte. Il CSS per farlo
+è uscito da `PAGINA_CSS` e vive in **`GINETTO_CSS`**, che quei generatori
+importano; `.info-strip` invece **non si ricopia** — arriva dal `<style>` di
+`eventi.html` che `_guscio()` incolla, e una seconda definizione dello stesso
+componente divergerebbe alla prima modifica.
+
+**Le rubriche restano fuori, ed è deliberato**: `genera_rubriche.py` ha un
+guscio suo che legge da `rubriche.html`, dove `.info-strip` non c'è. Portare
+un secondo componente dentro un terzo guscio per quindici pagine che non
+prendono traffico costa più di quello che rende.
+
+**La faccia è passata da 64 a 96px** (104 sotto i 600px, dove la striscia va
+in colonna e la mascotte finisce da sola su una riga sua). A 64 si leggeva come
+l'icona di un avviso, cioè la cosa che l'occhio salta; e la ragione per cui
+adesso si può è la stessa di tutto il resto — non c'è più una seconda
+richiesta con cui dividere l'attenzione. Il file nativo è 500×500, non si
+sgrana.
+
+**Cosa NON è stato fatto, e la ragione va riletta prima di rifarlo.** Ginetto
+non è salito in cima alle schede **vive**. Sposterebbe il blocco dal ~70% al
+~12% della pagina — è il salto misurato sulle concluse il 28/08 — ma su una
+scheda viva Ginetto è una *richiesta*, e porterebbe fuori dal sito prima che la
+pagina abbia dato l'orario della sagra. Vale ancora la regola scritta per la
+barra delle azioni: **un servizio si mette davanti, una richiesta no.** In cima
+sta solo dove la pagina non ha più niente da dare, cioè su un'edizione
+conclusa.
+
+**`tests/luoghi.js` difende sei cose**, verificate rosse rimettendo i difetti
+uno alla volta: che Ginetto ci sia su tutte e 522 le nostre pagine, che non ci
+sia due volte, che dell'invito al canale non resti traccia, che ogni conclusa
+lo abbia in cima, che nessuna scheda viva ce l'abbia in cima, e che su pagine
+comune e landing stia nel posto che era del canale. Le tre famiglie si
+riconoscono **dai file** — la cartella per le pagine comune, la firma di
+verifica per le schede — e non da un elenco scritto a mano, che invecchierebbe
+alla prima pagina nuova: è l'inciampo già pagato più volte qui dentro.
 
 ### L'eccezione alla coda è durata nove giorni, e il posto è passato a Ginetto
 
@@ -423,14 +486,12 @@ Quanto vale lo spostamento è misurato a 412px, non stimato: su
 **11,9%**, cioè da sotto la piega a **540px, dentro la prima schermata**. Il
 canale in coda resta al 72,9%.
 
-`tests/luoghi.js` difende quattro cose: che l'invito al canale stia in coda su
-tutte le pagine, che ogni conclusa abbia Ginetto in cima, che non l'abbia anche
-in fondo, e che nessuna pagina viva ce l'abbia in cima. Verificate rosse tutte e
-quattro rimettendo il difetto, non supposte. Attenzione se si tocca quella
+`tests/luoghi.js` difendeva quattro cose, e dal 04/09/2026 ne difende sei —
+l'elenco aggiornato sta in cima a questa sezione. Attenzione se si tocca quella
 prova: i nomi `ev-ginetto-alto` e `ev-ginetto` stanno anche nel `<style>` di
-ogni pagina (`PAGINA_CSS` è incollata dappertutto), quindi si cerca l'attributo
-intero (`class="ev-ginetto-alto"`, `class="bg-cream ev-ginetto"`) — un
-`includes` sul nome secco direbbe "in cima" su tutte e 446 le pagine e la prova
+ogni pagina (`GINETTO_CSS` è incollata dappertutto), quindi si cerca
+l'attributo intero (`class="ev-ginetto-alto"`, `class="bg-cream ev-ginetto"`)
+— un `includes` sul nome secco direbbe "c'è" su tutte le pagine e la prova
 passerebbe sempre.
 
 #### Perché non una bolla, e perché non in cima all'agenda
@@ -510,27 +571,12 @@ col filtro `/eventi/`, che **esclude `eventi.html`** — la stessa trappola già
 documentata per `vicino_a_me`. L'ordine di grandezza regge, il numero non è di
 quella pagina.
 
-### Il clic sull'invito ha un nome suo
+#### Quanti lo vedevano, e quanti lo toccavano — la baseline che resta
 
-Fino al 19/08/2026 cadeva nel ramo generico di `nome_evento()` in
-`daop-track.js` e finiva in **`click_sito_organizzatore`**, insieme ai clic
-verso il sito di chi organizza. Non era rotto — `destination_url` c'era — ma
-l'unica domanda che il canale pone (*quanti si iscrivono ogni mille visite*) si
-poteva rispondere solo filtrando a mano, cioè mai: non era una conversione, non
-si leggeva in trend.
-
-Ora l'evento è **`iscrizione_canale`**. Il confronto è su
-`whatsapp.com/channel` e non su `whatsapp`: un `wa.me/...` nei recapiti è il
-numero dell'organizzatore, non noi.
-
-**Il numero da guardare non è il totale degli iscritti**, ed è la trappola di
-questo periodo: si parte il 19 agosto, con il 79% dei clic del trimestre
-concentrato negli otto giorni appena passati. Un tasso misurato da qui a metà
-settembre misurerebbe il crollo dell'onda stagionale, non l'invito. Si guarda
-**`iscrizione_canale` ogni mille `page_view` sulle schede**, e lo si legge
-contro il 15 settembre che è già la data del verdetto per tutto il resto.
-
-#### Quanti lo vedevano, e quanti lo toccavano
+**Il canale è chiuso, questa misura no.** Serve ancora a due cose: è il tetto
+misurato di quanto rende una *richiesta* su quelle pagine (~1%), ed è la
+baseline contro cui si legge `apri_ginetto` — stesso slot, stesse 211 pagine,
+due inquilini in due periodi consecutivi.
 
 Misurato il 19/08/2026 su GA4, finestra **12-18 agosto**, filtro percorso
 `/eventi/` (che prende schede, pagine comune, `oggi`, `weekend` e le sei
@@ -624,32 +670,20 @@ parla più sopra: **`scroll`** (50) e **`click`** (46, i "clic in uscita", che
 duplicano in parte i nostri `click_*`). Si spengono da Amministratore → Flussi
 di dati → il flusso web → **Misurazione avanzata**.
 
-Il messaggio del giovedì lo scrive il generatore in `data/messaggio-canale.txt`
-(`messaggio_canale()`): **WhatsApp non ha API pubbliche per pubblicare sui
-canali**, quindi il copia-incolla resta a mano per forza, ma scegliere gli
-eventi e scrivere no. È la differenza fra due minuti a settimana e mezz'ora, ed
-è la ragione per cui i canali si abbandonano alla seconda settimana.
+**Il messaggio del giovedì non esiste più.** Lo scriveva `messaggio_canale()`
+in `data/messaggio-canale.txt`, perché WhatsApp non ha API pubbliche per
+pubblicare sui canali e il copia-incolla restava a mano per forza. Le tre
+regole di selezione che aveva imparato — davanti chi *comincia* in quei due
+giorni, due tetti (per comune e per manifestazione) e non uno, ordine
+mescolato con seme la data del weekend — non sono di WhatsApp: sono di
+qualunque digest che peschi da questa agenda. Se un giorno nasce la
+newsletter, si ripescano da `git log` invece di riscoprirle.
 
-Tre regole della selezione, tutte nate guardando l'output vero:
-
-- **davanti chi comincia in quei due giorni.** Ordinando per data di inizio il
-  primo messaggio era fatto di dieci mostre: sono aperte da settimane, quindi
-  vincono l'ordinamento. "Cosa c'è questo weekend" non vuol dire "cosa è ancora
-  aperto".
-- **due tetti, non uno**: per comune e per manifestazione. Fermano due monopoli
-  diversi — una patronale da 19 sotto-eventi concentra un paese, "Castelli
-  Aperti" è un'iniziativa in quindici paesi e il tetto per comune non la vede.
-- **ordine mescolato con seme la data del weekend.** Con l'alfabetico Acqui e
-  Alfiano c'erano sempre e Vesime e Voltaggio mai: è una distorsione che non si
-  vede in un messaggio, si vede in quattro settimane. Il seme fisso serve a non
-  ricommittare il file a ogni run notturna.
-
-Cosa il canale **non** dà, e non va promesso a nessuno: niente statistiche
-oltre a iscritti/copertura, niente esportazione della lista (è di Meta, non
-nostra), niente segmentazione per età. Il "98% di open rate" che si trova in
-rete è dei messaggi 1-a-1 della Business API, **non dei canali**. Quando
-servirà una lista di proprietà e misurabile, quella è l'email — e il posto dove
-chiederla sarà il canale stesso.
+E vale ancora la cosa da non promettere a nessuno, il giorno che si valuta un
+altro canale di Meta: niente statistiche oltre a iscritti/copertura, niente
+esportazione della lista (è di Meta, non nostra), niente segmentazione per
+età. Il "98% di open rate" che si trova in rete è dei messaggi 1-a-1 della
+Business API, **non dei canali**.
 
 ### La barra delle azioni sulle schede: un servizio si mette davanti
 
@@ -4721,7 +4755,8 @@ l'argomento di vendita, e proprio nel mese in cui si legge il verdetto.
 
 **Secondo costo: i pixel sono già occupati, e sono misurati.** Il 28/08 Ginetto
 è salito in cima a 211 schede su 419 perché quel posto valeva di più;
-l'invito al canale converte a ~l'1%; la barra delle azioni sta su 165 schede.
+l'invito al canale, finché c'era, convertiva a ~l'1%; la barra delle
+azioni sta su 165 schede.
 Ogni posizione ad alta attenzione ha già un inquilino scelto guardando un
 numero. Un blocco AdSense non va in un buco: va sopra qualcosa di misurato, e
 dopo non si saprebbe più quale delle due mosse ha spostato il numero — che è la
@@ -4773,8 +4808,9 @@ con cui compete.
 si ritrovi invece di improvvisarla: **mai gli "annunci automatici"**, che sono
 quelli che iniettano dove vogliono e disfano il lavoro su `content-visibility`
 e sul layout che non si forza al caricamento; una sola unità manuale, in fondo,
-**sotto** l'invito al canale, **solo** sulle schede, dopo la CMP; e trenta
-giorni con `apri_ginetto` e `iscrizione_canale` come controllo, perché il costo
+**sotto** la striscia di Ginetto, **solo** sulle schede, dopo la CMP; e trenta
+giorni con `apri_ginetto` come controllo — che dal 04/09/2026 è l'unico
+rimasto, quindi è anche l'unico segnale che direbbe che si sta pagando, perché il costo
 di cui sopra si misura lì e non nel rendiconto AdSense.
 
 

@@ -221,7 +221,7 @@ jobs:
                 esploratore.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
-                data/messaggio-canale.txt data/luoghi.json data/luoghi-comuni.json \
+                data/luoghi.json data/luoghi-comuni.json \
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
                 data/guide.json data/realta-pagine.json \
                 eventi/ rubriche/ corsi/ guide/ idee/ assets/miniature/"
