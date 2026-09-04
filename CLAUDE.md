@@ -4832,7 +4832,7 @@ era la più povera:
 
 | | prima | dopo |
 |---|---|---|
-| `<h2>` in pagina | 2 | 10 |
+| `<h2>` in pagina | 2 | 4 (18 titoli in tutto, contando gli `<h3>` della guida) |
 | BreadcrumbList in JSON-LD | assente (il crumb in pagina c'era) | c'è |
 | ItemList / CollectionPage / WebSite | assenti | ci sono |
 | FAQ | assenti | 8 domande |
