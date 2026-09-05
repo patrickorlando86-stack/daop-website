@@ -3774,10 +3774,11 @@ Verificate **rosse rimettendo quattro difetti uno alla volta** — pillola
 togliata, blocchi scambiati, link alla sorella rimosso, pagina ridotta a una
 categoria — non supposte.
 
-#### Un rosso pre-esistente trovato per strada: `prova_spostata.py`
+#### Un rosso pre-esistente trovato per strada: `prova_spostata.py` (chiuso il 05/09/2026)
 
-Non c'entra con questa pagina e **non è stato toccato**, ma va scritto perché è
-intermittente e quindi si perde. La prova pretende che sul cartello di una
+Non c'entra con questa pagina e allora **non era stato toccato**, ma andava
+scritto perché è intermittente e quindi si perde — infatti è tornato, e ha
+tenuto rossa la run notturna del 04 e del 05/09. La prova pretende che sul cartello di una
 scheda spostata il comune vecchio **non compaia più**, e confronta la stringa
 con tutta la pagina. Il comune però sta dentro il **nome dell'evento** — «Pro
 Loco Ceresole Alba», «Pro Loco Ciglione» — che il cartello stampa apposta, per
@@ -3790,6 +3791,24 @@ questo repo pretende un'uniformità che il sito non ha mai avuto: l'invariante
 giusta è che non compaiano i **dati** della riga sbagliata (descrizione,
 locandina, calendario, `Event`) — cose che la prova già controlla a parte — non
 che una parola non ricorra.
+
+**Chiusa il 05/09/2026**, con la cavia pescata quel giorno: «20 Anni di G.A.S.
+Tortona», che ha il comune nel nome del *gruppo*, non nell'indirizzo. Sulle
+nove occorrenze di «Tortona» nella pagina, nove venivano dal nome: quattro
+volte il titolo della scheda (`<title>`, `og:title`, `twitter:title`, H1) e
+cinque il link alla pagina nuova, che dal nome eredita lo slug. Zero erano un
+dato rimasto indietro.
+
+La prova ora cerca il comune in quello che **resta** della pagina tolti il nome
+dell'evento e l'indirizzo della scheda nuova: lì può comparire solo come dato —
+indirizzo, mappa, descrizione — che è l'invariante scritta qui sopra. Verificata
+rossa rimettendo il difetto vero (una riga «Prima era a Tortona» nel cartello),
+non supposta.
+
+Il generatore non ha mai sbagliato niente, e il sito nemmeno: il commit del
+passo «Commit se cambiato» viene **prima** delle prove, quindi le pagine di quei
+due giorni erano già pubblicate e giuste. Rossa era solo la guardia — che però
+manda una mail al giorno, e una guardia che grida sempre smette di essere letta.
 
 ### "Vicino a me": il raggio filtra, e la posizione non si chiede mai da soli
 
