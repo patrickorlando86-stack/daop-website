@@ -1358,8 +1358,8 @@ def riga(l, oggi):
         corpo.append(f'<div class="lg-next"><p>In programma qui</p><ul>{elenco}</ul></div>')
 
     azioni = [f'<a href="{maps_href(l)}" target="_blank" rel="noopener">Apri nelle mappe</a>']
-    if l.get('sito'):
-        sito = l['sito'] if l['sito'].startswith('http') else 'https://' + l['sito']
+    if url_sito(l.get('sito')):
+        sito = url_sito(l['sito'])
         # Un link verso il sito di chi ci paga e' un link commerciale, e le
         # policy di Google chiedono `rel="sponsored"` (o almeno `nofollow`): un
         # link a pagamento che passa PageRank e' uno schema di link, e si paga
@@ -1369,7 +1369,8 @@ def riga(l, oggi):
         # guardare. Le righe non a pagamento restano `nofollow`: sono
         # segnalazioni nostre, non rapporti commerciali.
         rel = 'sponsored' if l.get('premium') else 'nofollow'
-        azioni.append(f'<a href="{e(sito)}" target="_blank" rel="noopener {rel}">Sito del luogo</a>')
+        testo_btn, _ = etichetta_sito(sito)
+        azioni.append(f'<a href="{e(sito)}" target="_blank" rel="noopener {rel}">{testo_btn}</a>')
     if l.get('email'):
         azioni.append(f'<a href="mailto:{e(l["email"])}">Scrivi al luogo</a>')
     corpo.append(f'<div class="lg-act">{"".join(azioni)}</div>')
@@ -1617,16 +1618,67 @@ def jsonld(elenco):
         if l.get('lat') and l.get('lon'):
             p['geo'] = {"@type": "GeoCoordinates", "latitude": l['lat'], "longitude": l['lon']}
         testo = l.get('descr_premium') or l.get('descr')
-        for valore, chiave in ((testo, 'description'), (l.get('sito'), 'url'),
+        for valore, chiave in ((testo, 'description'),
                                (l.get('tel'), 'telephone'), (l.get('orari'), 'openingHours')):
             if valore:
                 p[chiave] = valore
+        # `url` e' l'indirizzo canonico della COSA; un profilo social e'
+        # `sameAs`, che schema.org definisce come la pagina che identifica
+        # l'elemento altrove. Non e' pignoleria: al 05/09/2026 DUE delle quattro
+        # schede a pagamento dichiaravano una pagina Facebook o Instagram come
+        # sito ufficiale del luogo - cioe' proprio quelle che vendiamo - e una
+        # delle due la dichiarava pure senza schema, come URL non valida.
+        u = url_sito(l.get('sito'))
+        if u:
+            social = etichetta_sito(u)[1]
+            p['sameAs' if social else 'url'] = [u] if social else u
         if l.get('foto'):
             p['image'] = l['foto'][:3]
         grafo.append(p)
     return "\n".join(
         '<script type="application/ld+json">\n' + json.dumps(g, ensure_ascii=False, indent=1)
         + '\n</script>' for g in grafo)
+
+
+# I profili social nella colonna Website: il bottone dice CHE COSA sono.
+#
+# PERCHE'. Per un posto piccolo la pagina Facebook *e'* la sua presenza in rete,
+# quindi la riga non e' sbagliata - e' sbagliata l'etichetta. "Sito del luogo"
+# su un link che apre Facebook promette una cosa e ne consegna un'altra, e al
+# 05/09/2026 succedeva su 31 righe delle 191 che quel bottone ce l'hanno (27
+# Facebook, 4 Instagram). Non si nasconde il link: si chiama col suo nome.
+#
+# I tre domini sono ESATTAMENTE quelli che daop-track.js gia' riconosce
+# (`nome_evento()` -> `click_social`). Non e' una seconda lista che vive per
+# conto suo: e' la stessa regola scritta di qua, e questo commento sta in tutti
+# e due i posti. Se un giorno se ne aggiunge un quarto, sono due file.
+SOCIAL_SITO = (
+    ('facebook.com', 'Pagina Facebook'),
+    ('instagram.com', 'Profilo Instagram'),
+    ('youtube.com', 'Canale YouTube'),
+)
+
+
+def url_sito(raw):
+    """L'indirizzo normalizzato, '' se non c'e'.
+
+    In un posto solo perche' lo usano il bottone e il JSON-LD - e finora il
+    secondo NON normalizzava: una riga scritta `www.facebook.com/p/...` finiva
+    nei dati strutturati senza schema, cioe' come URL non valida. Capitava
+    davvero, su una delle quattro schede a pagamento."""
+    v = (raw or '').strip()
+    if not v:
+        return ''
+    return v if v.startswith(('http://', 'https://')) else 'https://' + v
+
+
+def etichetta_sito(url):
+    """(testo del bottone, e' un social?)."""
+    u = (url or '').lower()
+    for dominio, testo in SOCIAL_SITO:
+        if dominio in u:
+            return testo, True
+    return 'Sito del luogo', False
 
 
 def dove_siamo(elenco):

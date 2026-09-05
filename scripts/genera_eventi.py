@@ -96,6 +96,90 @@ def fonte_provincia(prov):
                 provincia=PROVINCE_NOMI.get((prov or '').strip().upper(), ''))
 
 
+# YouTube e' l'unico profilo che non ha una provincia: sta qui e non in
+# PROVINCE_IG, che e' una mappa per provincia e non un elenco di social.
+YOUTUBE_URL = 'https://www.youtube.com/@DOVEANDIAMOOGGIPAPI'
+
+
+def blocco_social_footer(inline=False):
+    """La colonna "Community" del footer, COMPOSTA da PROVINCE_IG.
+
+    PERCHE'. Il footer e' l'unico pezzo del guscio che nessun generatore
+    compone: _guscio() lo COPIA da eventi.html, e finche' una cosa si copia e
+    basta l'unico posto che la sa e' quello scritto a mano. E' costato
+    @daop_cuneo mancante da tutto il sito per settimane, con il codice che lo
+    sapeva (sta in PROVINCE_IG, col curatore accanto) e il footer no, su ~470
+    pagine. Da qui la voce si compone dall'unico posto dove i profili vivono
+    gia' - lo stesso di fonte_provincia() - e una provincia nuova entra nel
+    footer da sola.
+
+    Le pagine si nominano per esteso e non con la sigla: "Instagram AL" chiede
+    a chi legge di sapere il codice della propria provincia, "Instagram
+    Alessandria" no.
+
+    Le pagine ospiti (nostra=False) entrano anche loro: la colonna si chiama
+    Community, e una pagina che ospitiamo ne fa parte. La distinzione fra
+    nostro e ospite si fa dove serve davvero, cioe' nel credito di ogni scheda,
+    che e' l'attribuzione di un lavoro.
+
+    inline=True: index.html ripete gli stili del footer negli attributi style
+    invece di usare le classi, quindi la stessa voce le va data vestita. E' la
+    stessa deroga gia' fatta per 404.html con la nav assoluta."""
+    st_a = (' style="text-decoration:none;font-size:0.88rem;'
+            'color:rgba(255,255,255,0.62);"' if inline else '')
+
+    def link(href, testo):
+        return (f'<a href="{href}" target="_blank" rel="noopener"{st_a}>'
+                f'{esc(testo)}</a>')
+
+    fonti = [f for f in (fonte_provincia(s) for s in PROVINCE_PUBBLICATE) if f]
+    voci = [link(f['url'], f"Instagram {f['provincia']}") for f in fonti]
+    voci += [link(f['fb'], f"Facebook {f['provincia']}")
+             for f in fonti if f.get('fb')]
+    voci.append(link(YOUTUBE_URL, 'YouTube'))
+    sep = chr(10) + ' ' * 8
+    return sep + sep.join(voci) + chr(10) + ' ' * 6
+
+
+def credito_fonte(f, apertura, classe='com-fonte', breve=False):
+    """Il credito alla pagina di provenienza. In un posto solo.
+
+    PERCHE' QUI. Era scritto in cinque punti quasi identici - la firma della
+    scheda, le pagine comune e le tre famiglie provinciali - e cambiarne il
+    testo voleva dire cambiarlo cinque volte, cioe' la forma esatta in cui due
+    copie divergono alla prima modifica. Stessa ragione di _dati_realta() e di
+    e_gratuito(): un fatto che si scrive in un posto solo.
+
+    IL VERBO E' LA PARTE CHE NON C'ERA. Il credito diceva da dove viene
+    l'evento e si fermava li'. E' un'attribuzione, e va benissimo che lo resti
+    - ma "Segnalato da @daop_asti" risponde a *da dove viene questo evento*,
+    non a *perche' dovrei seguirvi*: nessun verbo, nessuna ragione. Adesso
+    dice anche cosa si trova andandoci.
+
+    COSA NON DIVENTA, ed e' la parte da non rifare al contrario. Non sale in
+    cima, non diventa una fascia, non si ripete altrove: dal 28/08/2026
+    Ginetto e' l'unica richiesta del sito e il 04/09 il canale WhatsApp e'
+    stato chiuso apposta per non dividere l'attenzione. Due richieste nello
+    stesso punto si dimezzano, e misurandole insieme non si saprebbe piu'
+    quale delle due ha mosso il numero. Questo resta dov'e' - in fondo, dentro
+    la trasparenza su come la scheda e' nata - e cambia solo le parole.
+
+    'apertura' e' l'unica cosa che cambia davvero fra i cinque punti:
+    "Segnalato da" su una scheda, "Gli eventi di Ovada arrivano da" su una
+    pagina comune. 'breve' quando l'apertura ha gia' nominato la provincia,
+    per non scriverla due volte nella stessa frase."""
+    if not f:
+        return ''
+    dove = ('questa provincia' if breve
+            else f"la provincia di {esc(f['provincia'])}")
+    chi = (f"la nostra pagina per {dove}" if f['nostra'] else
+           f"la pagina che segue {dove}, con cui collaboriamo")
+    return (f'<p class="{classe}">{apertura} '
+            f'<a class="ev-ig" href="{f["url"]}" target="_blank" rel="noopener">'
+            f'@{esc(f["ig"])}</a>, {chi}: seguila per gli eventi in arrivo. '
+            f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+
+
 def province_in_elenco(codici):
     """"Alessandria, Asti e Cuneo" a partire dalle sigle, in ordine di PROVINCE_PUBBLICATE."""
     nomi = [PROVINCE_NOMI[c] for c in PROVINCE_PUBBLICATE if c in set(codici)]
@@ -736,7 +820,7 @@ def riga(e, today, hub=None):
     # credito che non si puo' seguire e' mezzo credito, soprattutto per Cuneo.
     f = fonte_provincia(e['prov'])
     fonte_html = (f'\n            <p class="ev-src">Segnalato da '
-                  f'<a href="{f["url"]}" target="_blank" rel="noopener">'
+                  f'<a class="ev-ig" href="{f["url"]}" target="_blank" rel="noopener">'
                   f'@{esc(f["ig"])}</a></p>' if f else '')
 
     return f'''        <article class="event-card{' is-ongoing' if ongoing else ''}" id="{anchor}" data-category="{slug}" data-province="{e['prov'].lower()}" data-start="{e['d_start'].isoformat()}" data-end="{e['d_end'].isoformat()}"{geo_attrs(e)}{free_attr(e)} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
@@ -878,7 +962,7 @@ def render(events, hub=None):
         # ospitiamo: la riga separa le due frasi invece di elencare tre handle.
         # Il flag arriva da PROVINCE_IG, lo stesso che usa zone.html.
         def elenco(voci):
-            return " · ".join(f'<a href="{f["url"]}" target="_blank" rel="noopener">'
+            return " · ".join(f'<a class="ev-ig" href="{f["url"]}" target="_blank" rel="noopener">'
                               f'@{esc(f["ig"])}</a> ({esc(f["provincia"])})' for f in voci)
         nostre = [f for f in fonti if f['nostra']]
         ospiti = [f for f in fonti if not f['nostra']]
@@ -888,7 +972,7 @@ def render(events, hub=None):
                          + elenco(nostre) + '.')
         if ospiti:
             quali = " e ".join(f"{esc(f['provincia'])} la segue "
-                               f"<a href=\"{f['url']}\" target=\"_blank\" rel=\"noopener\">"
+                               f"<a class=\"ev-ig\" href=\"{f['url']}\" target=\"_blank\" rel=\"noopener\">"
                                f"@{esc(f['ig'])}</a>" for f in ospiti)
             frasi.append(f'{quali}: una pagina che non è nostra, con cui '
                          'collaboriamo e che accreditiamo su ogni scheda.')
@@ -2472,8 +2556,16 @@ def _guscio():
         # I marker della voce stagionale servono solo dove la nav e' scritta a
         # mano: qui la voce e' gia' risolta, e portarseli dietro vorrebbe dire
         # tre commenti in piu' su ~360 pagine per niente.
+        # Il pattern e' volutamente LARGO — qualunque marker, non un elenco di
+        # nomi. L'elenco e' gia' costato due volte lo stesso difetto: nato coi
+        # marker dei centri, ripetuto identico il 21/08/2026 con quelli dei
+        # corsi, perche' aggiungere un marker qui non e' un passaggio che
+        # qualcuno ricorda. Dentro nav e footer un marker e' per definizione una
+        # voce che aggiorna_nav() risolve nelle pagine a mano: nelle generate
+        # e' gia' risolta, quindi non ne deve sopravvivere nessuno — compreso
+        # quello che nascera' domani.
         html_frag = re.sub(
-            r'<!-- (?:NAV|MM|HERO)-(?:CENTRI|CORSI):(?:START|END) -->', '',
+            r'<!-- [A-Z][A-Z0-9-]*:(?:START|END) -->', '',
             html_frag)
         return html_frag.replace('class="active"', '')
 
@@ -3017,16 +3109,8 @@ def firma_daop(rec, oggi, ritirata=False):
     # in cima: non e' un'informazione che serve a decidere se andarci, e' la
     # trasparenza su come la scheda e' nata - lo stesso posto in cui diciamo chi
     # l'ha controllata e quando.
-    f = fonte_provincia(rec.get('prov'))
-    credito = ''
-    if f:
-        chi = (f"la nostra pagina per la provincia di {esc(f['provincia'])}"
-               if f['nostra'] else
-               f"la pagina che segue la provincia di {esc(f['provincia'])}, "
-               "con cui collaboriamo")
-        credito = (f'<p class="ev-fonte">Segnalato da <a href="{f["url"]}" '
-                   f'target="_blank" rel="noopener">@{esc(f["ig"])}</a>, {chi}. '
-                   f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    credito = credito_fonte(fonte_provincia(rec.get('prov')), 'Segnalato da',
+                            classe='ev-fonte')
     # Scheda RITIRATA: la riga e' stata tolta dal foglio prima della sua data.
     # Qui non si puo' dire "verificata": il 18/08/2026 quella frase e' rimasta in
     # piedi, con tanto di "ultimo controllo", su un evento che avevamo cancellato
@@ -3404,13 +3488,17 @@ def aggiorna_nav():
     Nessun elenco di pagine da tenere aggiornato: si riscrive dove il marker
     c'e'. Una pagina nuova entra mettendoci i marker, e finche' non li ha resta
     fuori invece di prendere una voce sbagliata."""
-    def blocco(assoluto=False):
+    def blocco(assoluto=False, inline=False):
         return {
             'NAV-CENTRI': voce_centri(assoluto=assoluto),
             'MM-CENTRI': voce_centri(mobile=True, assoluto=assoluto),
             'HERO-CENTRI': riga_centri_hero(),
             'NAV-CORSI': voce_corsi(assoluto=assoluto),
             'MM-CORSI': voce_corsi(mobile=True, assoluto=assoluto),
+            # I profili social: qui 'assoluto' non c'entra - sono URL esterne,
+            # quindi la voce e' la stessa in tutte e tre le varianti. Cambia
+            # solo la vernice, per index.html che ha gli stili in linea.
+            'FOOTER-SOCIAL': blocco_social_footer(inline=inline),
         }
     # 404.html e' l'unica pagina a mano che NON viene servita dal proprio
     # indirizzo: GitHub Pages la restituisce all'URL richiesto, quindi da
@@ -3418,13 +3506,19 @@ def aggiorna_nav():
     # /eventi/centri-estivi.html e la via d'uscita e' rotta - proprio per chi
     # ci arriva dal 70% del traffico del sito, che sono le schede evento. Li'
     # la voce si scrive assoluta; nelle altre undici resta relativa com'era.
+    # index.html e' la terza variante: ripete gli stili del footer negli
+    # attributi style invece di usare le classi del <style>, quindi la stessa
+    # voce le va data vestita, se no i suoi link social nascono senza colore.
     normali, assolute = blocco(), blocco(assoluto=True)
+    inlinate = blocco(inline=True)
     v = stagione_centri()
     tocc = []
     for path in sorted(glob.glob(os.path.join(ROOT, "*.html"))):
         s = open(path, encoding="utf-8").read()
         orig = s
-        voci = assolute if os.path.basename(path) == '404.html' else normali
+        base = os.path.basename(path)
+        voci = (assolute if base == '404.html'
+                else inlinate if base == 'index.html' else normali)
         for nome, val in voci.items():
             s = re.sub(rf'(<!-- {nome}:START -->).*?(<!-- {nome}:END -->)',
                        lambda m: m.group(1) + val + m.group(2), s, flags=re.S)
@@ -5517,16 +5611,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
     link_altri = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
                          for d in altri)
 
-    credito = ''
-    if fonte:
-        chi = (f"la nostra pagina per la provincia di {esc(fonte['provincia'])}"
-               if fonte['nostra'] else
-               f"la pagina che segue la provincia di {esc(fonte['provincia'])}, "
-               "con cui collaboriamo")
-        credito = (f'<p class="com-fonte">Gli eventi{a_citta(citta)} arrivano da '
-                   f'<a href="{fonte["url"]}" target="_blank" rel="noopener">'
-                   f'@{esc(fonte["ig"])}</a>, {chi}. '
-                   f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    credito = credito_fonte(fonte, f'Gli eventi{a_citta(citta)} arrivano da')
 
     per_chi = " per famiglie"
     quanti_bimbi = f" {len(bambini)} per bambini." if bambini else ""
@@ -6693,13 +6778,8 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
               f'completa.</p>')
 
     fonte = fonte_provincia(prov)
-    if fonte:
-        chi = ("la nostra pagina per questa provincia" if fonte['nostra'] else
-               "la pagina che segue questa provincia, con cui collaboriamo")
-        corpo += (f'<p class="com-fonte">Gli eventi della provincia di {esc(nome_prov)} '
-                  f'arrivano da <a href="{fonte["url"]}" target="_blank" rel="noopener">'
-                  f'@{esc(fonte["ig"])}</a>, {chi}. '
-                  f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    corpo += credito_fonte(
+        fonte, f'Gli eventi della provincia di {esc(nome_prov)} arrivano da', breve=True)
 
     corpo += f'<h2>Le altre province</h2>{_blocco_incroci(modo, events, oggi, qui=href)}'
     corpo += _altre_landing(href, altre)
@@ -7675,13 +7755,8 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
               f'"e stasera?": <a href="{href_incrocio(prov, "oggi")}">cosa fare oggi</a> '
               f'oppure <a href="{href_incrocio(prov, "weekend")}">gli eventi del '
               f'weekend</a> in provincia di {esc(nome_prov)}.</p>')
-    if fonte:
-        chi = ("la nostra pagina per questa provincia" if fonte['nostra'] else
-               "la pagina che segue questa provincia, con cui collaboriamo")
-        corpo += (f'<p class="com-fonte">Le sagre della provincia di {esc(nome_prov)} '
-                  f'arrivano da <a href="{fonte["url"]}" target="_blank" rel="noopener">'
-                  f'@{esc(fonte["ig"])}</a>, {chi}. '
-                  f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    corpo += credito_fonte(
+        fonte, f'Le sagre della provincia di {esc(nome_prov)} arrivano da', breve=True)
     corpo += _altre_landing(href, altre)
 
     # Sotto soglia la pagina resta (i link che girano non si rompono) ma esce
@@ -7858,13 +7933,8 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
               f'eventi del weekend</a> in provincia di {esc(nome_prov)}.</p>')
 
     fonte = fonte_provincia(prov)
-    if fonte:
-        chi = ("la nostra pagina per questa provincia" if fonte['nostra'] else
-               "la pagina che segue questa provincia, con cui collaboriamo")
-        corpo += (f'<p class="com-fonte">Gli eventi della provincia di {esc(nome_prov)} '
-                  f'arrivano da <a href="{fonte["url"]}" target="_blank" rel="noopener">'
-                  f'@{esc(fonte["ig"])}</a>, {chi}. '
-                  f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+    corpo += credito_fonte(
+        fonte, f'Gli eventi della provincia di {esc(nome_prov)} arrivano da', breve=True)
     corpo += _altre_landing(href, altre)
 
     # Su TUTTA l'agenda della provincia, non su un sottoinsieme: e' la ragione

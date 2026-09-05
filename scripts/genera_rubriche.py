@@ -179,8 +179,16 @@ def guscio():
         # 21/08/2026 coi marker dei corsi, cioe' la stessa prova ha ripreso lo
         # stesso difetto sul secondo marker. Se nasce un terzo generatore con un
         # guscio suo, e' questa la riga da ricordare.
+        # Il pattern e' volutamente LARGO — qualunque marker, non un elenco di
+        # nomi. L'elenco e' gia' costato due volte lo stesso difetto: nato coi
+        # marker dei centri, ripetuto identico il 21/08/2026 con quelli dei
+        # corsi, perche' aggiungere un marker qui non e' un passaggio che
+        # qualcuno ricorda. Dentro nav e footer un marker e' per definizione una
+        # voce che aggiorna_nav() risolve nelle pagine a mano: nelle generate
+        # e' gia' risolta, quindi non ne deve sopravvivere nessuno — compreso
+        # quello che nascera' domani.
         frag = re.sub(
-            r'<!-- (?:NAV|MM|HERO)-(?:CENTRI|CORSI):(?:START|END) -->', '', frag)
+            r'<!-- [A-Z][A-Z0-9-]*:(?:START|END) -->', '', frag)
         return frag.replace(' class="active"', '')
 
     # Anche le url() del CSS: la texture della .page-hero in rubriche.html e'

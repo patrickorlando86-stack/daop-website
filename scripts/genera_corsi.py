@@ -423,6 +423,99 @@ def eta_testo(c):
     return f"{r[0]} anni" if r[0] == r[1] else f"{r[0]}-{r[1]} anni"
 
 
+# ── LA PROVA CHE PORTA UNA DATA, E LA DATA E' PASSATA (05/09/2026) ────
+#
+# La cella Prova e' testo libero, e il commento dentro card() lo diceva gia' dal
+# 21/08: "nel foglio la colonna Prova non dovrebbe portare date: se ne porta,
+# sono date che nessuno viene ad aggiornare". Quel "nessuno" adesso e' misurato.
+# Il 05/09/2026 i due corsi di Deborah Dalmasso dicevano "Primo incontro
+# gratuito · lunedi 7 settembre (open day)", e il 7 settembre era due giorni
+# dopo: passato quello, la riga sarebbe rimasta li' a invitare a una data finita.
+#
+# Tutto il resto della pagina si autopulisce - un evento passa e sparisce, una
+# riga con la Scadenza esce da qui sotto, un open day finito non si annuncia
+# (openday(), "sarebbe un invito a una porta chiusa") - questa cella era l'unica
+# che non lo faceva, ed e' anche l'unica che una societa' scrive per invitarti.
+#
+# TRE REGOLE, e sono le stesse che valgono gia' altrove in questo file:
+#   - si toglie la CELLA, non la riga. Il corso resta: quello che e' scaduto e'
+#     l'invito, non il corso;
+#   - una cella ILLEGGIBILE non toglie niente ("su appuntamento", "gratuita a
+#     ottobre", "prima lezione libera"). E' la regola della Scadenza: una data
+#     scritta di fretta non deve far sparire un dato buono. Serve un GIORNO e un
+#     MESE - un mese da solo non dice quando;
+#   - con piu' date ("10, 17 e 24 settembre") la riga vive finche' non e' passata
+#     l'ULTIMA, che e' l'occasione a cui si fa ancora in tempo.
+#
+# Il separatore numerico ammesso e' solo la barra (7/9, 07/09/2026). Il trattino
+# NO, ed e' voluto: "corso 7-9 anni" diventerebbe il 7 settembre, cioe' una
+# fascia d'eta' che cancella una prova buona.
+_RE_PROVA_TESTO = re.compile(r'\b(\d{1,2})\s*[°º]?\s+(?:di\s+)?([a-zA-Z]{3,9})\b')
+_RE_PROVA_NUM = re.compile(r'\b(\d{1,2})/(\d{1,2})(?:/(\d{2,4}))?\b')
+
+
+def _mese_scritto(parola):
+    """Il numero del mese da una parola italiana, intera o abbreviata. 0 se non lo e'."""
+    p = (parola or '').strip().lower()
+    for i, nome in enumerate(G.MESI_LUNGHI, start=1):
+        if p == nome or (len(p) >= 3 and nome.startswith(p)):
+            return i
+    return 0
+
+
+def _con_anno(giorno, mese, oggi):
+    """La data giorno/mese nell'anno che la mette PIU' VICINA a oggi. None se non esiste.
+
+    L'anno nella cella non c'e' quasi mai ("mercoledi 24 settembre"), e metterci
+    sempre quello corrente sbaglia due volte l'anno: a dicembre "10 gennaio" e'
+    l'anno prossimo, a gennaio "20 dicembre" e' quello passato. Fra i tre
+    candidati vince il piu' vicino, che e' quello che intendeva chi ha scritto.
+    """
+    scelte = []
+    for anno in (oggi.year - 1, oggi.year, oggi.year + 1):
+        try:
+            scelte.append(datetime.date(anno, mese, giorno))
+        except ValueError:
+            pass            # 31 novembre: non e' una data, e non lo diventa
+    return min(scelte, key=lambda d: abs((d - oggi).days)) if scelte else None
+
+
+def date_nel_testo(testo, oggi=None):
+    """Le date GIORNO+MESE che si riconoscono in un testo libero. [] se non ce ne sono."""
+    oggi = oggi or datetime.date.today()
+    fuori = []
+    for giorno, parola in _RE_PROVA_TESTO.findall(testo or ''):
+        mese = _mese_scritto(parola)
+        if mese:
+            d = _con_anno(int(giorno), mese, oggi)
+            if d:
+                fuori.append(d)
+    for giorno, mese, anno in _RE_PROVA_NUM.findall(testo or ''):
+        mese = int(mese)
+        if not 1 <= mese <= 12:
+            continue        # 17/30 non e' una data: e' un orario scritto storto
+        if anno:
+            a = int(anno)
+            try:
+                fuori.append(datetime.date(a + 2000 if a < 100 else a,
+                                           mese, int(giorno)))
+            except ValueError:
+                pass
+        else:
+            d = _con_anno(int(giorno), mese, oggi)
+            if d:
+                fuori.append(d)
+    return fuori
+
+
+def prova_ancora_valida(testo, oggi=None):
+    """La cella Prova si puo' ancora stampare? Vero anche quando non c'e' data."""
+    date = date_nel_testo(testo, oggi)
+    if not date:
+        return True
+    return max(date) >= (oggi or datetime.date.today())
+
+
 def leggi_corsi():
     """Le righe della tab, filtrate sulla stagione in corso.
 
@@ -470,7 +563,7 @@ def leggi_corsi():
 
     avvio = stagione_avvio()
     oggi = datetime.date.today()
-    out, vecchi, scaduti = [], 0, 0
+    out, vecchi, scaduti, prove = [], 0, 0, []
     for r in righe[hi + 1:]:
         def val(campo):
             i = idx.get(campo)

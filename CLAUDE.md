@@ -50,43 +50,153 @@ solo quando girano **anche** quegli script.
 le pagine di intenzione. Non c'è nessuna zona scritta a mano da salvare, quindi
 non se ne cerca una: si tocca `scripts/genera_luoghi.py`.
 
-#### Il footer non sta in un posto: sta in quindici, e nessuno lo compone
+#### Il footer si compone da `PROVINCE_IG` — chiuso il 05/09/2026
 
-Scoperto il 31/08/2026 andando ad aggiungere `@daop_cuneo`, che **mancava da
-tutto il sito**. Cuneo è aperta dal 04/08 ed è una pagina DAOP come le altre due
-dal 26/08, con Giovanni curatore: il codice lo sapeva — sta in `PROVINCE_IG`,
-col curatore accanto — e il footer no, su ~470 pagine.
+Fino a quel giorno la colonna «Community» era **quindici grafie scritte a
+mano**, e il footer era l'unico pezzo del guscio che nessun generatore compone:
+`_guscio()` lo *copia* da `eventi.html`, non lo *costruisce*. Finché una cosa si
+copia e basta, l'unico posto che la sa è quello scritto a mano — ed è costato
+`@daop_cuneo` mancante da **tutto il sito** per settimane, con il codice che lo
+sapeva (sta in `PROVINCE_IG`, col curatore accanto) e il footer no, su ~470
+pagine. Non lo prendeva nessuna rete di sicurezza, perché non era un file
+rimasto indietro: era un file che nessuno aveva mai avuto il compito di
+aggiornare.
 
-Il motivo è che **il footer è l'unico pezzo del guscio che nessun generatore
-compone.** `_guscio()` lo *copia*, non lo *costruisce*: legge quello che trova
-in `eventi.html` e lo incolla. Finché una cosa si copia e basta, l'unico posto
-che la sa è quello scritto a mano.
+Adesso `blocco_social_footer()` compone quella colonna da `PROVINCE_IG` — lo
+stesso posto da cui pesca `fonte_provincia()` — e `aggiorna_nav()` la riscrive
+dove trova il marker `FOOTER-SOCIAL`. **Nessun elenco di pagine da tenere
+aggiornato**, come per `NAV-CENTRI` e `NAV-CORSI`: si riscrive dove il marker
+c'è, e una pagina nuova entra mettendocelo. **Aprire la quarta provincia adesso
+è solo le 3-4 righe di `PROVINCE_PUBBLICATE`**: il footer la prende da sé.
 
-E i posti scritti a mano non erano uno. Sono **quindici**:
+Le decisioni che non si ricavano dal diff:
 
-| dove | quante | perché |
-|---|---|---|
-| `eventi.html` | 1 | la sorgente di `_guscio()`, cioè ~470 pagine |
-| `rubriche.html` | 1 | `genera_rubriche.py` ha un guscio suo e legge **da lì** |
-| pagine scritte a mano | 13 | `index`, `ginetto`, `libri`, `media`, `piattosano`, `bollino`, `404`, le due legali, `esploratore`, le tre di prova |
+- **Le pagine si nominano per esteso, non con la sigla.** «Instagram AL» chiede
+  a chi legge di sapere il codice della propria provincia; «Instagram
+  Alessandria» no. Si paga in larghezza e si paga sul telefono: a 360px sta su
+  una riga, a 320px «Instagram Alessandria» e «Facebook Alessandria» vanno a
+  capo — bene, senza troncamenti e senza scorrimento orizzontale. È la stessa
+  tolleranza già accettata a 320px per le righe delle pagine di intenzione.
+- **`index.html` è la terza variante**, e serve saperlo prima di toccare quel
+  file: ripete gli stili del footer negli attributi `style` invece di usare le
+  classi del `<style>`, quindi la stessa voce le va data **vestita**
+  (`inline=True`). È la stessa deroga già fatta per `404.html` con la nav
+  assoluta. Senza, i suoi link social nascerebbero senza colore.
+- **Le pagine ospiti (`nostra=False`) entrano anche loro.** La colonna si chiama
+  Community, e una pagina che ospitiamo ne fa parte. La distinzione fra nostro e
+  ospite si fa dove serve davvero, cioè nel credito di ogni scheda, che è
+  l'attribuzione di un lavoro.
+- **YouTube sta fuori da `PROVINCE_IG`** (`YOUTUBE_URL`): quella è una mappa per
+  provincia, non un elenco di social, e YouTube non ha una provincia.
+- **Il regex che toglie i marker nei due gusci adesso è LARGO** — qualunque
+  marker, non un elenco di nomi. L'elenco è già costato **due volte** lo stesso
+  difetto (i marker dei centri, poi identici quelli dei corsi: quindici pagine
+  in `rubriche/` uscite con i commenti dentro la nav), perché aggiungere un
+  nome lì non è un passaggio che qualcuno ricorda. Dentro nav e footer un marker
+  è per definizione una voce che `aggiorna_nav()` risolve nelle pagine a mano:
+  nelle generate è già risolta, quindi non ne deve sopravvivere nessuno —
+  compreso quello che nascerà domani.
 
-La quindicesima grafia dello stesso guasto già documentato per `ferragosto.html`
-e per i marker delle rubriche, con una differenza: **qui non lo prende nessuna
-rete di sicurezza**, perché non è un file che resta indietro — è un file che
-nessuno ha mai avuto il compito di aggiornare.
+**Tre pagine restano indietro di un giro, ed è normale:** `centri-*.html`,
+`corsi.html` e le pagine in `corsi/` prendono il footer da `G._guscio()`, ma i
+loro generatori **vogliono la rete**. Girando offline stampano «lascio la pagina
+com'è»; si allineano alla prima run in CI. Il grep che lo verifica è
+`grep -rl "Instagram AL<" --include=*.html`: se una pagina ha ancora il vecchio
+blocco, è rimasta indietro.
 
-Da qui due cose, e la seconda vale più della prima:
+##### Lo stesso footer si rendeva con due contrasti diversi, e il brutto stava dove sta il traffico
 
-- **Toccando il footer si toccano `eventi.html`, `rubriche.html` e le tredici a
-  mano.** Il grep che lo verifica è `grep -rl "Instagram AT" --include=*.html`
-  incrociato col nuovo valore: se una pagina ha il vecchio blocco e non il
-  nuovo, è rimasta indietro.
-- **È il punto fragile per una provincia nuova, e non è il codice.** Aprire la
-  quarta provincia costa 3-4 righe per eventi e luoghi — `PROVINCE_PUBBLICATE`
-  fa il resto da solo — e poi quindici modifiche a mano che nessuna prova
-  chiede. Se un giorno vale la pena chiuderlo davvero, il modo è comporre quella
-  colonna da `PROVINCE_IG`, che è già l'unico posto dove i profili vivono
-  (`fonte_provincia()`), e non da una lista nuova.
+Trovato il 05/09/2026 misurando, e **solo** perché la prova è stata verificata
+rossa: la versione che guardava la sola `eventi.html` passava col difetto
+rimesso.
+
+`assets/css/daop-system.min.css` porta `.footer-col-title{...0.58}` e
+`.footer-col-links a{...0.60}`; il `<style>` di `eventi.html` — quello che
+`_guscio()` copia dappertutto — diceva `0.3` e `0.5`. **Stessa specificità (una
+classe), quindi decide l'ordine — e l'ordine è invertito fra le due famiglie:**
+
+| | `<style>` | link al system CSS | chi vince |
+|---|---|---|---|
+| `eventi.html` | riga 50 | riga 537 | il system CSS → **5,49:1** |
+| le ~570 generate | copiato dopo | riga 26 | lo `<style>` → **2,57:1** |
+
+Cioè il footer era illeggibile esattamente sulle pagine che fanno il **77% del
+traffico**, e la pagina che uno apre per prima per controllare era l'unica sana.
+Il titolo di colonna stava a **2,57:1** contro il 4,5:1 di WCAG AA; i link a
+**4,50:1**, cioè in bilico sulla soglia.
+
+I valori nuovi **non sono inventati**: sono `0.55` e `0.62`, quelli che
+`index.html` aveva già nei suoi stili in linea, dove il footer era stato scritto
+un'altra volta. Resi: **5,10:1** e **6,04:1** sulle generate.
+
+**La cosa da ricordare non è il numero, è il metodo**: quando due regole con la
+stessa specificità vivono in due file diversi, il vincitore cambia con l'ordine
+del `<head>` — e l'ordine del `<head>` qui **non è lo stesso** fra pagine
+scritte a mano e pagine generate. Una misura su una sola famiglia non dice
+niente dell'altra. È la stessa classe di guasto del crumb dei corsi a 1,07:1 e
+della barra delle azioni alta 915px: HTML giusto, CSS che a leggerlo sembra a
+posto, e nessuna prova che se ne accorge.
+
+### Il credito alla pagina di provenienza: un'attribuzione, con un verbo
+
+Rifatto il 05/09/2026 partendo da una domanda sull'usabilità dei contatti
+social. Il referto, misurato a 360px e non stimato: i profili vivono in due soli
+posti — il **footer**, che vede circa **uno su cento** (su cento che aprono una
+scheda: ~51 cominciano a scorrere, ~29 arrivano a metà, ~12 passano il 75%, ~1
+vede il footer), e il **credito** al ~59-72%, che vedono ~12-15 su cento. Il
+credito però diceva «Segnalato da @daop_asti» e si fermava lì: risponde a *da
+dove viene questo evento*, non a *perché dovrei seguirvi*. **Nessun verbo,
+nessuna ragione** — una cosa che si legge e non si tocca.
+
+Adesso `credito_fonte()` lo scrive **in un posto solo**. Era in cinque punti
+quasi identici — la firma della scheda, le pagine comune e le tre famiglie
+provinciali — e cambiarne il testo voleva dire cambiarlo cinque volte, cioè la
+forma esatta in cui due copie divergono alla prima modifica. Stessa ragione di
+`_dati_realta()` e di `e_gratuito()`.
+
+Cosa cambia in pagina, e **cosa deliberatamente no**:
+
+- **Dice cosa si trova andandoci** («: seguila per gli eventi in arrivo»), e
+  basta. Non promette una frequenza né un contenuto che nessuno garantisce.
+- **Porta a UNA pagina, non a sei.** La scheda sa già in che provincia si trova:
+  chiederlo a chi legge è la domanda che fa il footer, e questa no.
+- **La maniglia è un bersaglio: da ~18px a 31px** (`.ev-ig`). **Non è una
+  correzione di conformità** — i link in linea sono esentati dal minimo di 24px
+  di WCAG 2.5.8, quindi prima non era una violazione: si sbagliava e basta, un
+  handle di dieci caratteri dentro un paragrafo di testo piccolo. La regola sta
+  in `daop-system.css`/`.min.css` e non nei tre `<style>` che la ospitano
+  (`PAGINA_CSS`, `COMUNE_CSS`, il `<style>` di `eventi.html`): tre definizioni
+  dello stesso componente divergono alla prima modifica.
+- **NON sale in cima, non diventa una fascia, non si ripete.** Dal 28/08/2026
+  Ginetto è l'unica richiesta del sito e il 04/09 il canale WhatsApp è stato
+  chiuso *apposta* per non dividere l'attenzione: due richieste nello stesso
+  punto si dimezzano, e misurandole insieme non si saprebbe più quale ha mosso
+  il numero. Il credito resta dov'è — in fondo, dentro la trasparenza su come la
+  scheda è nata — e cambia solo le parole. `tests/social.js` lo difende
+  pretendendo che stia nella metà bassa della pagina, perché «facciamolo
+  risaltare» è esattamente la proposta che tornerà.
+
+**L'aspettativa va tenuta in scala:** l'invito al canale — stesso tipo di
+richiesta, un tocco solo — convertiva a **~l'1%**, e quello era il numero nel
+posto *buono*. Un credito ben fatto vale l'ordine di grandezza di una decina di
+tocchi a settimana, non una valanga.
+
+**La baseline si legge PRIMA di guardare il dopo, e c'è già:** `click_social` è
+in `daop-track.js` da sempre (riconosce instagram/facebook/youtube dall'href) e
+manda `destination_url`. Il numero di oggi è leggibile in GA4 adesso; senza
+segnarlo, fra un mese il confronto non esiste. È lo stesso errore già
+documentato per `apri_ginetto`.
+
+**Un difetto fuori tema, trovato per strada e NON corretto:** su `luoghi.html`
+31 bottoni su 191 dicono «Sito del luogo» e aprono Facebook o Instagram. È
+un'etichetta che mente, e si corregge dal dominio dell'href come fa già
+`daop-track.js`.
+
+`tests/social.js` difende sei cose e **nessuna è un conteggio** — «sei link nel
+footer» sarebbe rosso il giorno che apre la quarta provincia, cioè quando il
+sito fa la cosa giusta. Verificate rosse rimettendo i difetti uno alla volta
+(Cuneo tolto dalla composizione, contrasto riportato a 0.3/0.5, `.ev-ig` senza
+padding): dicono `2,57:1` e `18px`, cioè le cifre esatte misurate a mano.
 
 ### GA4 si inizializza in un posto solo
 
@@ -4659,6 +4769,46 @@ che tutti vendono e **noi no** è la *priority placement*, cioè la posizione in
 classifica. Restiamo più severi del mercato apposta: è la cosa che ci tiene fuori
 dal tiro dell'art. 22 ed è una cosa che gli altri non possono dire.
 
+#### Il bottone dice dove porta — sistemato il 05/09/2026
+
+Su `luoghi.html` il bottone diceva **«Sito del luogo» anche quando apriva
+Facebook o Instagram**: 31 righe sulle 388 che quel bottone ce l'hanno (27
+Facebook, 4 Instagram; su `piscine.html` un'altra).
+
+**Il link non era sbagliato, era sbagliata l'etichetta**, e la differenza decide
+il rimedio. Per un posto piccolo la pagina Facebook *è* la sua presenza in rete:
+nasconderla toglierebbe l'unico recapito che ha. Quindi non si filtra, si chiama
+col suo nome — «Pagina Facebook», «Profilo Instagram», «Canale YouTube».
+
+- **I tre domini sono ESATTAMENTE quelli di `daop-track.js`** (`nome_evento()` →
+  `click_social`). Non è una seconda lista che vive per conto suo: è la stessa
+  regola scritta di qua, e il commento sta in tutti e due i file. Se un giorno
+  se ne aggiunge un quarto, i posti sono due.
+- **`url_sito()` normalizza in un posto solo**, e serviva: il JSON-LD leggeva la
+  cella grezza, quindi una riga scritta `www.facebook.com/p/...` finiva nei dati
+  strutturati **senza schema**, cioè come URL non valida. Capitava davvero, su
+  una delle quattro schede a pagamento.
+- **Nel JSON-LD un profilo social è `sameAs`, non `url`.** `url` è l'indirizzo
+  canonico della *cosa*; `sameAs` è la pagina che la identifica altrove. Non è
+  pignoleria: al 05/09/2026 **due delle quattro schede a pagamento** dichiaravano
+  una pagina Facebook o Instagram come sito ufficiale del luogo — cioè proprio
+  quelle che vendiamo.
+
+**Cosa NON è stato toccato, e perché è un'altra cosa.** Nella stessa colonna ci
+sono **5 righe che puntano a Pagine Gialle e 3 al Sole 24 Ore**. Anche lì «Sito
+del luogo» è una promessa che non si mantiene, ma quello è un **dato sbagliato
+nel foglio**, non un'etichetta sbagliata nel codice: la scheda di una directory
+non è il sito del posto, e il rimedio è correggere la cella — se no si finisce a
+mantenere nel generatore una lista crescente di «domini che non sono un sito».
+
+`tests/luoghi.js` difende un **rapporto e non un conteggio** — non «27
+Facebook», che sarebbe rosso alla prima riga che il foglio cambia, ma *nessun
+bottone promette una cosa e ne apre un'altra*, **nei due versi**: anche un
+bottone che dice «Pagina Facebook» e apre il sito del comune è lo stesso difetto
+specchiato, ed è il verso che si dimentica. Più le tre invarianti sui dati
+strutturati. Verificate rosse rimettendo i difetti uno alla volta: dicono
+esattamente «31 bottoni mentono» e «2 Place dichiarano un social come url».
+
 #### I link in uscita di chi paga vanno qualificati
 
 Un link verso il sito di un cliente è un link commerciale, e le policy di Google
@@ -5119,8 +5269,8 @@ calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-` e
 file veri appena generati: non c'è un ambiente di prova. In un ambiente che ha
 già un Chromium, `CHROMIUM_PATH=/percorso/chrome npm test` evita lo scaricamento.
 
-Le suite sono otto, in `tests/run.js`: `agenda`, `landing`, `scheda`, `luoghi`,
-`corsi`, `porte`, `guide`, `sitemap`. Al 31/08/2026 sono **371 prove**.
+Le suite sono nove, in `tests/run.js`: `agenda`, `landing`, `scheda`, `luoghi`,
+`corsi`, `porte`, `guide`, `sitemap`, `social`. Al 05/09/2026 sono **496 prove**.
 `sitemap.js` è l'unica che non apre il browser — legge i file e li incrocia con
 `sitemap.xml`, perché quello che difende non si vede su nessuna pagina.
 

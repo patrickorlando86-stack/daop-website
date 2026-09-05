@@ -593,3 +593,17 @@ img { height: auto; }
 @media (max-width: 560px) {
   .eco--porte .eco-g { grid-template-columns: 1fr; }
 }
+
+/* La maniglia del credito alla pagina di provenienza (@daop_asti e compagnia).
+   Sta qui e non nei tre <style> che la ospitano - PAGINA_CSS per le schede,
+   COMUNE_CSS per le pagine comune e le landing, il <style> di eventi.html per
+   le righe dell'agenda - perche' tre definizioni dello stesso componente
+   divergono alla prima modifica. E' la stessa ragione per cui .eco e .mm-sep
+   stanno in questo file.
+
+   Perche' esiste: era un handle di dieci caratteri alto 18-22px dentro un
+   paragrafo di testo piccolo, cioe' una parola in mezzo a una frase e non una
+   cosa da toccare. Adesso e' ~30px. NON e' una correzione di conformita': i
+   link in linea sono esentati dal minimo di 24px di WCAG 2.5.8, quindi prima
+   non era una violazione - si sbagliava e basta. */
+.ev-ig { display: inline-block; padding: 4px 3px; font-weight: 600; }

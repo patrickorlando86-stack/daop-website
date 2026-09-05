@@ -515,5 +515,74 @@ module.exports = async function luoghi(browser) {
     await desk.ctx.close();
   }
 
+  // ── Il bottone dice dove porta ──────────────────────────────────────────
+  //
+  // Fino al 05/09/2026 il bottone diceva "Sito del luogo" anche quando apriva
+  // Facebook o Instagram: 31 righe su 388. Non era il link a essere sbagliato -
+  // per un posto piccolo la pagina Facebook *e'* la sua presenza in rete - era
+  // l'etichetta, che prometteva una cosa e ne consegnava un'altra.
+  //
+  // L'invariante e' un RAPPORTO, non un conteggio: non "27 Facebook", che
+  // sarebbe rosso alla prima riga che il foglio cambia, ma *nessun bottone
+  // promette una cosa e ne apre un'altra*. Vale in tutti e due i versi, ed e'
+  // il verso B quello che si dimentica: un bottone che dice "Pagina Facebook"
+  // e apre il sito del comune e' lo stesso difetto specchiato.
+  const SOCIAL = [[/facebook\.com/i, 'Pagina Facebook'],
+    [/instagram\.com/i, 'Profilo Instagram'],
+    [/youtube\.com/i, 'Canale YouTube']];
+
+  for (const f of ['luoghi.html', 'piscine.html']) {
+    const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    const bottoni = [...html.matchAll(
+      /<a href="(https?:\/\/[^"]+)"[^>]*>(Sito del luogo|Pagina Facebook|Profilo Instagram|Canale YouTube)<\/a>/g)]
+      .map((m) => ({ href: m[1], testo: m[2] }));
+    r.ok(bottoni.length > 0, `${f}: ${bottoni.length} bottoni verso il sito di un luogo`);
+
+    const bugiardi = bottoni.filter((b) => {
+      const atteso = (SOCIAL.find(([rx]) => rx.test(b.href)) || [null, 'Sito del luogo'])[1];
+      return atteso !== b.testo;
+    });
+    r.ok(bugiardi.length === 0, bugiardi.length
+      ? `${f}: ${bugiardi.length} bottoni mentono, es. "${bugiardi[0].testo}" apre ${bugiardi[0].href.slice(0, 46)}`
+      : `${f}: ogni bottone dice dove porta (${bottoni.length} controllati)`);
+
+    // Ogni href e' assoluto: la colonna del foglio si scrive spesso come
+    // "www.tal-dei-tali.it", e senza schema il browser lo risolve come percorso
+    // relativo dentro daop.it. Il regex qui sopra pretende gia' http(s), quindi
+    // il controllo vero e' che non ne sia rimasto FUORI nessuno.
+    const senzaSchema = [...html.matchAll(
+      /<a href="(?!https?:|mailto:|tel:|#|\/)([^"]*)"[^>]*>(?:Sito del luogo|Pagina Facebook|Profilo Instagram|Canale YouTube)<\/a>/g)];
+    r.ok(senzaSchema.length === 0, senzaSchema.length
+      ? `${f}: ${senzaSchema.length} bottoni senza schema, es. ${senzaSchema[0][1].slice(0, 40)}`
+      : `${f}: nessun bottone con un indirizzo senza http`);
+  }
+
+  // I dati strutturati dicono la stessa cosa del bottone. `url` e' l'indirizzo
+  // canonico della COSA; un profilo social e' `sameAs`. Al 05/09/2026 DUE delle
+  // quattro schede a pagamento dichiaravano una pagina Facebook o Instagram
+  // come sito ufficiale del luogo - proprio quelle che vendiamo.
+  const pagina = fs.readFileSync(path.join(RADICE, 'luoghi.html'), 'utf8');
+  const posti = [...pagina.matchAll(
+    /<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)]
+    .map((m) => { try { return JSON.parse(m[1]); } catch (e) { return null; } })
+    .filter((g) => g && g['@type'] === 'Place');
+  r.ok(posti.length > 0, `${posti.length} Place nei dati strutturati`);
+
+  const social = (u) => SOCIAL.some(([rx]) => rx.test(u || ''));
+  const urlSocial = posti.filter((p) => social(p.url));
+  r.ok(urlSocial.length === 0, urlSocial.length
+    ? `${urlSocial.length} Place dichiarano un social come url ufficiale, es. ${urlSocial[0].name}`
+    : 'nessun Place dichiara un profilo social come proprio url');
+  const sameAsNonSocial = posti.filter(
+    (p) => p.sameAs && [].concat(p.sameAs).some((u) => !social(u)));
+  r.ok(sameAsNonSocial.length === 0, sameAsNonSocial.length
+    ? `${sameAsNonSocial.length} Place mettono in sameAs un indirizzo che non è un social`
+    : 'sameAs contiene solo profili social');
+  const relativi = posti.filter(
+    (p) => [p.url].concat(p.sameAs || []).filter(Boolean).some((u) => !/^https?:\/\//i.test(u)));
+  r.ok(relativi.length === 0, relativi.length
+    ? `${relativi.length} Place hanno un indirizzo senza schema, es. ${relativi[0].name}`
+    : 'ogni indirizzo nei dati strutturati è assoluto');
+
   return r;
 };
