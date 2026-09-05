@@ -212,9 +212,24 @@ ok("NIENTE noindex", "noindex" not in vecchia)
 ok("fuori dalla sitemap", CAVIA not in sitemap)
 # Il dato vecchio non deve restare "per contesto": e' esattamente la riga che
 # abbiamo corretto, ed e' quello che chi apre il link vecchio non deve leggere.
+#
+# Ma il comune sta anche DENTRO il nome di certi eventi ("20 Anni di G.A.S.
+# Tortona"), e li' non e' un dato rimasto indietro: e' il titolo della scheda,
+# che il cartello deve continuare a dire per farsi riconoscere da chi arriva
+# dal link vecchio - e da li' finisce anche nello slug, cioe' nel link alla
+# pagina NUOVA, che la pagina vecchia scrive sei volte. Cercare la parola in
+# tutta la pagina rendeva quindi la prova rossa a seconda di quale evento
+# capitava di fare da cavia (05/09/2026: il generatore era a posto, la prova no).
+# Percio' si guarda quello che RESTA tolti il nome e l'indirizzo nuovo: li' il
+# comune puo' comparire solo come dato - indirizzo, mappa, descrizione.
 vecchia_citta = (reg_vero[CAVIA].get("citta") or "").strip()
-ok(f"il comune sbagliato ({vecchia_citta}) non compare piu'",
-   vecchia_citta.lower() not in vecchia.lower())
+nome_cavia = (reg_vero[CAVIA].get("nome") or "").strip()
+residuo = vecchia
+for legittimo in (g.esc(nome_cavia), nome_cavia, NUOVO, CAVIA):
+    if legittimo:
+        residuo = residuo.replace(legittimo, "")
+ok(f"il comune sbagliato ({vecchia_citta}) non compare piu' come dato",
+   vecchia_citta.lower() not in residuo.lower())
 descr = (reg_vero[CAVIA].get("descr") or "").strip()
 ok("niente descrizione vecchia", not descr or descr[:60] not in vecchia)
 ok("niente locandina", 'class="ev-loc"' not in vecchia)
