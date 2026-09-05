@@ -438,6 +438,24 @@ def servizi_pratici(tag):
     return [testo for chiave, testo in ETICHETTE_TAG.items() if chiave in t]
 
 
+def stesso_posto(a, b):
+    """Due righe di catalogo con lo stesso nome nello stesso comune sono lo
+    STESSO posto solo quando lo dicono i dati: indirizzo e coordinate uguali.
+    Il nome da solo non basta e non e' un dettaglio - ad Alessandria ci sono
+    due Gelateria Soban a un chilometro l'una dall'altra."""
+    def via(d):
+        return re.sub(r'[^a-z0-9]+', ' ', (d.get('indirizzo') or '').lower()).strip()
+    def punto(d):
+        return ((d.get('lat') or '').strip(), (d.get('lon') or '').strip())
+    return (via(a) and via(a) == via(b)
+            and punto(a) != ('', '') and punto(a) == punto(b))
+
+
+def _elenca(righe):
+    return ", ".join(f"{d.get('codice') or '?'} {d['nome']} ({d['comune']})"
+                     for d in sorted(righe, key=lambda x: str(x.get('codice'))))
+
+
 def _key(nome, comune):
     """Chiave di fusione fra catalogo e agenda.
 
@@ -790,7 +808,38 @@ def leggi_agenda():
 
 def unisci(catalogo, agenda):
     """Catalogo + agenda in un elenco solo, ordinato per provincia, comune, nome."""
-    fuori = {_key(l['nome'], l['comune']): l for l in catalogo}
+    # Due righe di catalogo con lo stesso nome nello stesso comune non sono un
+    # doppione per forza: "Gelateria Soban" ad Alessandria e' DUE gelaterie,
+    # una in Via San Lorenzo e una in Corso Borsalino. Finche' questa e' stata
+    # una dict comprehension l'ultima vinceva e la prima spariva dalla pagina
+    # senza una parola - e a sparire era la sede principale, mentre restava
+    # online la scheda che dice "seconda sede alessandrina".
+    # A dire quali sono lo stesso posto sono i DATI, non il nome: indirizzo e
+    # coordinate identici (Castello di Grinzane Cavour, codici 5131 e 5179).
+    # Quelli non si pubblicano due volte - la pagina direbbe una cosa falsa -
+    # ma il rimedio e' spegnerne uno sul FOGLIO, e finche' non si fa la riga
+    # continua a portarsi dietro la sua foto pagata: per questo si stampa.
+    # La prima riga tiene la chiave, e quindi gli eventi dell'agenda: quelli
+    # sanno solo nome+comune e fra due sedi non potrebbero scegliere. Le altre
+    # proseguono come righe a se'; l'ancora ripetuta la sistema gia' il
+    # guardiano degli slug piu' sotto, che aggiunge il -2.
+    fuori, doppi_catalogo, sovrapposti = {}, [], []
+    for l in catalogo:
+        k = _key(l['nome'], l['comune'])
+        if k not in fuori:
+            fuori[k] = l
+        elif stesso_posto(fuori[k], l):
+            sovrapposti.append(l)
+        else:
+            doppi_catalogo.append(l)
+    if doppi_catalogo:
+        print(f"[genera_luoghi] {len(doppi_catalogo)} sedi in piu' con lo stesso "
+              f"nome nello stesso comune: pubblicate tutte - " + _elenca(doppi_catalogo))
+    if sovrapposti:
+        print(f"[genera_luoghi] ATTENZIONE: {len(sovrapposti)} righe sono lo "
+              f"stesso posto di una gia' letta (indirizzo e coordinate uguali): "
+              f"NON pubblicate, ma restano sul foglio e ognuna ha la sua foto "
+              f"pagata. Da spegnere sul foglio - " + _elenca(sovrapposti))
     innestati = 0
 
     for k, a in agenda.items():
@@ -826,7 +875,8 @@ def unisci(catalogo, agenda):
             eta_min=0, eta_max=99, premium=False, premium_dal='',
             consigliato=False, evidenza=False, codice='', fonte='agenda', _grezzo=None)
 
-    elenco = [d for d in fuori.values() if d['nome'] and d['comune']]
+    elenco = [d for d in list(fuori.values()) + doppi_catalogo
+              if d['nome'] and d['comune']]
 
     # Un comune scritto in due modi e' due comuni. Nel foglio convivono
     # "Montegrosso d'Asti" e "Montegrosso D'Asti": in pagina uscivano due gruppi
