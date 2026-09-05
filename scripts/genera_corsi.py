@@ -449,9 +449,11 @@ def eta_testo(c):
 #
 # Il separatore numerico ammesso e' solo la barra (7/9, 07/09/2026). Il trattino
 # NO, ed e' voluto: "corso 7-9 anni" diventerebbe il 7 settembre, cioe' una
-# fascia d'eta' che cancella una prova buona.
+# fascia d'eta' che cancella una prova buona. E siccome anche la barra la usa
+# qualcuno per le eta' ("corso 7/9 anni"), la data seguita da "anni" non conta:
+# e' la stessa trappola, e costa una riga guardarla.
 _RE_PROVA_TESTO = re.compile(r'\b(\d{1,2})\s*[°º]?\s+(?:di\s+)?([a-zA-Z]{3,9})\b')
-_RE_PROVA_NUM = re.compile(r'\b(\d{1,2})/(\d{1,2})(?:/(\d{2,4}))?\b')
+_RE_PROVA_NUM = re.compile(r'\b(\d{1,2})/(\d{1,2})(?:/(\d{2,4}))?\b(?!\s*anni)')
 
 
 def _mese_scritto(parola):
@@ -591,12 +593,33 @@ def leggi_corsi():
         if fine and fine < oggi:
             scaduti += 1
             continue
+        # LA PROVA CON LA DATA PASSATA: via la CELLA, non la riga. La regola sta
+        # scritta per esteso sopra prova_ancora_valida().
+        #
+        # Il conto e' il TERZO, separato dagli altri due apposta: qui non e'
+        # sparito un corso, e' sparita una riga di dettaglio. Se un giorno
+        # questa regola sbaglia il danno e' un invito in meno, non un corso in
+        # meno, e i due numeri non devono potersi confondere - e' la stessa
+        # ragione per cui 'vecchi' e 'scaduti' non sono mai stati sommati.
+        if c['prova'] and not prova_ancora_valida(c['prova'], oggi):
+            prove.append((c['nome'], c['prova']))
+            c['prova'] = ''
         out.append(c)
     if vecchi:
         print(f"[genera_corsi] {vecchi} righe di stagioni passate, fuori dall'elenco")
     if scaduti:
         print(f"[genera_corsi] {scaduti} righe con la Scadenza passata, "
               f"fuori dall'elenco")
+    # Queste si stampano UNA PER UNA, col testo che c'era dentro. Le altre due
+    # sono numeri perche' sono righe che qualcuno aveva gia' deciso di far
+    # scadere; una Prova tolta invece e' una cosa che una societa' aveva scritto
+    # per essere letta, e chi legge il log deve poter dire "quella andava
+    # RINNOVATA, non lasciata scadere" senza riaprire il foglio.
+    if prove:
+        print(f"[genera_corsi] {len(prove)} celle Prova con la data passata, "
+              f"tolte dalla scheda (il corso resta pubblicato):")
+        for nome, testo in prove:
+            print(f"[genera_corsi]   - {nome}: {testo!r}")
     return out
 
 
