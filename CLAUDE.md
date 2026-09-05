@@ -5,6 +5,11 @@
 > Vale per tutti e tre i repo (downloader, sito, app). Leggilo quando ti
 > chiedono "i to-do" o "a che punto siamo", e aggiorna **quello** - non
 > farne una copia qui, che diventerebbe la seconda lista che dice altro.
+>
+> (Dal 05/09/2026 esiste UNO specchio, e uno solo: `docs/TODO.md` nel repo
+> `mappaDAOP/mobile`, allineato nei due sensi da `scripts/sync-github.ps1`. Serve
+> a leggere e aggiornare il TODO dal telefono, dove il repo del downloader non
+> arriva perche' e' locale e senza remote. Qui nel sito NON se ne fa una copia.)
 
 
 Sito statico su GitHub Pages (`main` → daop.it). Niente build, niente framework:
