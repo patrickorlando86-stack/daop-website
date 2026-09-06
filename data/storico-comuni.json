@@ -1330,6 +1330,28 @@
  },
  "caraglio": {
   "eventi": {
+   "corso-di-teatro-per-ragazzi-fare-teatro-santibriga-caraglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale Polivalente",
+    "manifest": "Fare Teatro 2026/2027",
+    "nome": "Corso di Teatro per Ragazzi - Fare Teatro 2026/2027 - Santibriganti Teatro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-01"
+   },
+   "scuola-di-teatro-per-adulti-fare-teatro-santibriga-caraglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale Polivalente",
+    "manifest": "Fare Teatro 2026/2027",
+    "nome": "Scuola di Teatro per Adulti - Fare Teatro 2026/2027 - Santibriganti Teatro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-01"
+   },
    "sport-in-piazza-comune-di-caraglio": {
     "anni": [
      2026
@@ -3297,6 +3319,17 @@
     "luogo": "",
     "manifest": "",
     "nome": "Corsi di Musica Dolce Post Parto - Deborah Dalmasso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-07"
+   },
+   "corsi-di-musica-gioco-inglese-deborah-dalmasso-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Corsi di Musica Gioco Inglese - Deborah Dalmasso",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-07"
