@@ -255,7 +255,8 @@ jobs:
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
                 data/guide.json data/realta-pagine.json \
                 data/locandine-usate.json \
-                eventi/ rubriche/ corsi/ guide/ idee/ assets/miniature/"
+                eventi/ rubriche/ corsi/ guide/ idee/ \
+                assets/miniature/ assets/loghi/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
           # data/luoghi.json nasce solo quando il tab "Luoghi" del foglio
@@ -438,6 +439,23 @@ jobs:
         # Offline (urlopen finto) e in un secondo.
         if: always()
         run: python scripts/prova_locandina_morta.py
+
+      - name: Il logo di una realta' esce nei quattro posti
+        # Gemella della prova qui sopra, su un'altra immagine e con un guaio in
+        # piu'. La colonna "Logo" esisteva dal 25/08 e nessuno l'aveva mai
+        # riempita: il suo valore finiva GREZZO dentro src=, og:image,
+        # twitter:image e i dati strutturati. Dal 07/09/2026 ci si scrive un nome
+        # di file, e quei quattro punti vogliono due forme diverse dello stesso
+        # indirizzo - relativa nell'<img>, ASSOLUTA nell'anteprima e nello
+        # schema.org, che una che comincia per "/" la scartano.
+        #
+        # E come per le locandine: se il file in assets/loghi non c'e', non si
+        # stampa niente. Una cella con un refuso fa una pagina senza marchio,
+        # non una pagina con un rettangolo rotto in cima.
+        #
+        # Offline e in un secondo.
+        if: always()
+        run: python scripts/prova_logo_realta.py
 
       - name: Ogni sede resta un corso a se'
         # Fra il 03/09 e il 07/09/2026 lo stesso corso in piu' paesi diventava
