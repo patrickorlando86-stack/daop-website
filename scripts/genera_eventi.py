@@ -3752,6 +3752,37 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
             '</section>')
 
 
+def _dove_invece(citta, prov, hub):
+    """I posti dove mandare chi arriva su una scheda RITIRATA, dal piu' vicino
+    al piu' largo. Torna una lista di (href, testo), mai vuota.
+
+    Prima l'avviso della ritirata offriva un link solo, /eventi.html: l'agenda
+    di tutte e tre le province. Due ragioni per non lasciarcelo da solo, e sono
+    misurate sull'export Search Console del 07/09/2026:
+      - come DESTINAZIONE risponde a un'altra domanda. Chi ha cercato "palio di
+        asti 2026" ed e' finito su una scheda ritirata non sta cercando "cosa
+        c'e' in Piemonte": sta cercando cos'altro c'e' ad Asti.
+      - come PAGINA e' la peggiore del sito: 30.820 impressioni al 2,77% in
+        posizione 7,76, cioe' il bacino piu' grande e il CTR piu' basso.
+    L'ordine e' quello della coda di blocco_vicini(), per la stessa ragione:
+    prima il comune, poi la provincia. L'agenda resta come ultima spiaggia -
+    comune senza pagina e provincia non pubblicata - e in quel caso e' l'unica
+    cosa vera che possiamo offrire, quindi ci va."""
+    voci = []
+    mio_hub = (hub or {}).get(_key(citta))
+    if mio_hub:
+        voci.append((f"/eventi/comune/{mio_hub['slug']}.html",
+                     f"gli eventi{a_citta(mio_hub['nome'])}"))
+    prov = (prov or '').upper()
+    if prov in PROVINCE_PUBBLICATE:
+        nome_prov = PROVINCE_NOMI[prov]
+        voci.append((f"/sagre-provincia-{slugify(nome_prov)}.html",
+                     f"le sagre in provincia di {nome_prov}"))
+    if not voci:
+        voci.append(("/eventi.html", "l'agenda DAOP"))
+    return voci
+
+
 def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     """HTML completo di una pagina evento.
 
@@ -3821,8 +3852,17 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     # continuavano a pubblicizzare l'evento. Il titolo lo dice subito.
     if ritirata:
         titolo_seo = trunc(f"Scheda ritirata: {nome}", 60) + " | DAOP"
-        meta_d = ("Questa scheda non fa più parte dell'agenda DAOP: l'appuntamento è "
-                  "stato annullato o corretto. Vai all'agenda per gli eventi confermati.")
+        # og:description e' la riga che si legge incollando il link in chat.
+        # Dire "vai all'agenda" a chi ha in mano il link di un evento ad Asti e'
+        # la stessa imprecisione dell'avviso in pagina: il comune si sa, e
+        # allora si scrive.
+        # Sta dentro i 152 col comune piu' lungo che abbiamo ('Madonnina di
+        # Serralunga di Crea', 31 caratteri): 149. Provato su tutti e 223 i
+        # comuni del registro, zero troncature - la prima stesura di questa
+        # riga ne troncava 223 su 223 e finiva con "sono nell'agenda...".
+        meta_d = trunc("Questa scheda è stata ritirata: l'appuntamento è stato annullato "
+                       "o corretto. In agenda trovi gli eventi confermati"
+                       f"{a_citta(citta)}.", 152)
 
     facts = []
     if e.get('ora'):
@@ -3868,17 +3908,25 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         azioni = '<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>'
         barra = ''
     elif ritirata:
+        # DOVE si manda chi e' arrivato qui, e non e' un dettaglio di copy: il
+        # 5-6 settembre 2026 la scheda ritirata del Palio di Asti ha preso 142
+        # clic da Google (8.023 impressioni all'1,77% - piu' clic e CTR doppio
+        # della pagina VIVA del Palio, che stava allo 0,92%). Il blocco "Altri
+        # eventi vicino a Asti" in fondo c'era gia' ed e' l'unica ragione per
+        # cui quei clic non sono stati buttati del tutto; ma l'avviso in cima,
+        # che e' la riga che si legge per prima, offriva /eventi.html e basta.
+        dove = _dove_invece(citta, e.get('prov'), hub)
+        link_dove = elenco_it([f'<a href="{h}">{esc(t)}</a>' for h, t in dove])
         avviso = ('<div class="ev-over"><strong>Scheda ritirata</strong>'
                   'Questo appuntamento non è più nell\'agenda DAOP: l\'abbiamo tolto '
                   'perché è stato annullato, è cambiato, oppure perché la scheda era '
-                  'sbagliata. Quello che leggi qui sotto non è confermato: per sapere '
-                  'cosa c\'è davvero in programma vai all\'<a href="/eventi.html">agenda '
-                  'DAOP</a>.</div>')
+                  'sbagliata. Quello che resta scritto qui non è confermato. '
+                  f'Quello che c\'è davvero, aggiornato: {link_dove}.</div>')
         # NIENTE "Aggiungi al calendario" e niente "Come arrivare": erano i due
         # bottoni piu' dannosi di tutti - scrivevano in agenda, e mandavano in
         # macchina, verso un appuntamento che non esiste.
-        azioni = ('<div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">'
-                  'Vedi cosa c\'è in programma</a></div>')
+        azioni = (f'<div class="ev-actions"><a class="btn btn-navy" href="{dove[0][0]}">'
+                  f'Vedi {esc(dove[0][1])}</a></div>')
         barra = ''
     else:
         avviso = ''
