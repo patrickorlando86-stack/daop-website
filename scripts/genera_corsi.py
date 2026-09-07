@@ -400,9 +400,6 @@ def eta_da_testo(testo):
     return (lo, hi) if 0 <= lo <= hi <= 25 else None
 
 
-_re_gruppi = __import__('re').compile(r'[a-z0-9]+')
-
-
 def eta_min_max(c):
     """La fascia da usare PER FILTRARE: prima le annate, poi l'eta' scritta.
 
@@ -1687,7 +1684,6 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     riquadro = ('<dl class="co-dati">' + ''.join(
         f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>') if dati else ''
 
-    corsi_org = raggruppa_per_comune(corsi_org)
     schede = "\n".join(card(c, i, qui_org=slug_realta(org))
                        for i, c in enumerate(corsi_org))
     ev = eventi_realta(corsi_org, org)
@@ -1950,110 +1946,65 @@ def _ancora(org):
 def _id_corso(c):
     """L'ancora di un singolo corso. Serve alla scheda della realta', che elenca
     i suoi corsi e ci deve poter mandare: senza, quell'elenco sarebbe un elenco
-    di nomi che non porta da nessuna parte."""
-    return 'c-' + G.slugify(f"{c.get('org', '')}-{c.get('nome', '')}")
+    di nomi che non porta da nessuna parte.
+
+    IL CODICE, e non il nome (07/09/2026). Finche' era societa'+nome, due sedi
+    dello stesso corso davano LO STESSO id: l'ASD Atletica Mondovi' ha
+    "Esordienti (Scuole Elementari)" a Mondovi' e a Dogliani, e "Atletica
+    Ragazzi/e (1 e 2 Media)" in quattro paesi. Sulla sua pagina finivano 13 card
+    con 4 id in tutto, e l'elenco "Corsi:" della scheda mandava tutti sulla
+    prima: chi cercava Ceva atterrava su Mondovi'. Non si vedeva perche' fino al
+    07/09 quelle righe erano FUSE in una card sola, e un doppione fuso e' un
+    doppione che non si nota. La prova sui gruppi guardava la fusione, non gli
+    id; adesso li conta prova_corsi_separati.py.
+    Il comune non basterebbe: due corsi omonimi nello stesso paese sono un caso
+    vero (ci girava sopra una prova). Il CODICE invece e' unico per costruzione,
+    non si riusa mai - e' l'ancora della scheda anche sull'app - e sopravvive al
+    cambio di nome, che e' la ragione per cui anche data-codice porta lui.
+    Il ripiego con nome e comune resta per le righe senza codice: sono quelle
+    scritte a mano nel foglio, e senza ripiego non avrebbero nessuna ancora."""
+    cod = (c.get('codice') or '').strip()
+    if cod:
+        return 'c-' + G.slugify(cod)
+    return 'c-' + G.slugify(
+        f"{c.get('org', '')}-{c.get('nome', '')}-{c.get('citta', '')}")
 
 
-# Quanto devono somigliarsi due nomi per essere lo stesso corso in due paesi.
-# MISURATA sui 23 corsi dell'ASD Atletica Mondovi' il 03/09/2026, e come per la
-# soglia dei comuni non e' stata una scelta: fra le coppie da unire e quelle da
-# tenere separate c'e' un BUCO, e il numero sta in mezzo al vuoto.
-#   da unire:      100, 100, 100 ... (tutte e 18: un nome e' contenuto nell'altro,
-#                  "Esordienti (Scuole Elementari)" dentro "Atletica Esordienti
-#                  (Scuole Elementari)")
-#   da NON unire:  14, 20, 40, 50, 50, 50 (Preparazione Atletica, Ritiro
-#                  Societario, Corsi di Atletica per tutte le eta': corsi
-#                  diversi che condividono solo la parola "atletica")
-# Fra 51 e 99 non c'e' niente. Se un giorno si riempie, e' li' che si torna.
-SOMIGLIANZA_STESSO_CORSO = 80
-
-
-def _parole_nome(s):
-    import unicodedata as _u
-    t = _u.normalize('NFKD', (s or '').lower())
-    t = ''.join(ch for ch in t if not _u.combining(ch))
-    return set(_re_gruppi.findall(t))
-
-
-def _somiglianza_nome(a, b):
-    """Quanto del nome PIU' CORTO sta dentro l'altro, 0-100.
-
-    Il contenimento e non la somiglianza simmetrica, perche' il caso vero e'
-    esattamente quello: la stessa societa' scrive "Esordienti (Scuole
-    Elementari)" a Mondovi' e "Atletica Esordienti (Scuole Elementari)" a Ceva.
-    """
-    pa, pb = _parole_nome(a), _parole_nome(b)
-    if not pa or not pb:
-        return 0
-    return round(100 * len(pa & pb) / min(len(pa), len(pb)))
-
-
-def raggruppa_per_comune(corsi):
-    """Lo stesso corso ripetuto in piu' paesi diventa UNA riga. (03/09/2026).
-
-    IL CONTO CHE L'HA FATTA NASCERE. L'ASD Atletica Mondovi' ha 23 corsi, che
-    sono 4 fasce d'eta' x 5 comuni piu' sei corsi unici: DICIASSETTE righe che
-    dicono quattro cose. La domanda di Patrick era "ha senso mettere x corsi di
-    atletica perche' cambia l'annata?", e i dati rispondono di no: l'annata NON
-    e' il doppione - e' l'asse su cui filtra un genitore, e distingue davvero i
-    corsi. Il doppione e' il COMUNE.
-
-    Qui si raggruppa solo per STAMPARE. Il foglio resta com'e', ogni corso tiene
-    il suo comune e il suo codice, e i filtri continuano a lavorare sulle righe
-    vere: e' la scelta B fra le tre discusse, quella che risolve la leggibilita'
-    senza toccare il modello dei dati - che si progetta meglio con dieci
-    societa' davanti che con cinque.
-
-    Si uniscono solo righe che hanno TUTTO uguale tranne il posto: stessa
-    societa', stessa categoria, stessa fascia d'eta' e nomi che si contengono
-    (vedi SOMIGLIANZA_STESSO_CORSO). E servono almeno DUE COMUNI diversi: due
-    righe nello stesso paese non sono un corso in due sedi, sono due corsi, e
-    fonderle nasconderebbe qualcosa invece di ordinarlo.
-
-    La riga che esce porta `_sedi`: [(comune, sede, giorni, codice)] di ognuna,
-    che la card stampa nel dettaglio. Cosi' non si perde niente di quello che
-    c'era prima - si smette solo di ripeterlo cinque volte.
-    """
-    fuori, usati = [], set()
-    for i, c in enumerate(corsi):
-        if i in usati:
-            continue
-        # Si SEGNANO le candidate, non si prendono: finche' il gruppo non ha
-        # passato i controlli qui sotto quelle righe sono ancora libere. Farlo
-        # al contrario - marcarle subito e liberarle in caso di rifiuto - le
-        # faceva stampare DUE volte, perche' nel frattempo erano gia' finite
-        # nell'elenco in uscita. Trovato dalla prova, con due corsi omonimi
-        # nello stesso comune: due righe in ingresso, tre in pagina.
-        simili = []
-        for j in range(i + 1, len(corsi)):
-            if j in usati:
-                continue
-            d = corsi[j]
-            if (slug_realta(c.get('org') or '') != slug_realta(d.get('org') or '')
-                    or (c.get('cat') or '') != (d.get('cat') or '')
-                    or eta_min_max(c) != eta_min_max(d)):
-                continue
-            if _somiglianza_nome(c.get('nome'), d.get('nome')) < SOMIGLIANZA_STESSO_CORSO:
-                continue
-            simili.append(j)
-        gruppo = [c] + [corsi[j] for j in simili]
-        comuni = {(g.get('citta') or '').strip().lower() for g in gruppo}
-        comuni.discard('')
-        if len(gruppo) < 2 or len(comuni) < 2:
-            # Non e' un gruppo. Esce SOLO il capofila: le altre restano libere e
-            # il ciclo le incontrera' al loro turno, ognuna per conto suo.
-            fuori.append(c)
-            continue
-        usati.update(simili)
-        # Il nome piu' CORTO fa da titolo: e' quello senza il prefisso della
-        # societa' ("Esordienti" e non "Atletica Esordienti"), che nella pagina
-        # di quella societa' e' gia' detto in cima.
-        capo = dict(min(gruppo, key=lambda g: len(g.get('nome') or '')))
-        capo['_sedi'] = [(g.get('citta') or '', g.get('sede') or '',
-                          g.get('giorni') or '', g.get('codice') or '')
-                         for g in sorted(gruppo, key=lambda g: (g.get('citta') or ''))]
-        fuori.append(capo)
-    return fuori
+# ANNULLATO IL 07/09/2026: lo stesso corso in piu' paesi NON si unisce piu'.
+#
+# Qui stava raggruppa_per_comune() (03/09/2026): le righe con lo stesso nome,
+# stessa societa', stessa categoria e stessa fascia d'eta' in comuni diversi
+# diventavano UNA card, con l'elenco delle sedi nel dettaglio. Il conto che
+# l'aveva fatta nascere era buono - l'ASD Atletica Mondovi' ha 4 fasce d'eta' x
+# 5 comuni, cioe' diciassette righe che dicono quattro cose - e la scelta era
+# esplicitamente "si raggruppa solo per STAMPARE, il foglio resta com'e'".
+#
+# PERCHE' NON FUNZIONAVA. La card e' UNA, e i campi sono uno per card: la
+# locandina, il referente, il contatto, la sede e i giorni restavano quelli
+# della capofila. Cosi' sotto "Si tiene in 5 comuni" un genitore di Ceva
+# leggeva il numero di Monica (Mondovi'), guardava la locandina di Mondovi' e
+# telefonava alla persona sbagliata. Non era un difetto di dati - sul foglio le
+# cinque righe sono complete e diverse, ognuna col suo referente e la sua
+# locandina - era la pagina a nasconderle: raggruppare mostra i campi di UNA
+# riga sopra i comuni di CINQUE, e non c'e' modo di scegliere quale mostrare.
+#
+# E il difetto si era gia' visto una volta, il 07/09 stesso, da un'altra porta:
+# i comuni delle sedi finivano nella tendina del filtro senza avere una card a
+# cui corrispondere, e sceglierli SVUOTAVA la pagina. La toppa di allora
+# (data-comuni con tutte le sedi) e' sparita con la fusione: adesso ogni card
+# ha il suo unico comune, che e' anche il solo modo in cui il filtro e il conto
+# dei comuni dicono la verita' senza attributi in piu'.
+#
+# La leggibilita' resta un problema vero (16 card attive per una societa' sola)
+# ma si risolve dove non si perde niente: nell'ORDINE e nei filtri, non
+# fondendo righe che hanno dati diversi. Se un domani si riprova, la sola
+# variante difendibile e' fondere solo quando locandina, referente, contatto,
+# sede e giorni sono IDENTICI su tutte le sedi - cioe' quando non c'e' niente
+# da scegliere. Sull'Atletica non scatterebbe mai.
+#
+# Con la funzione sono andati via _somiglianza_nome(), _parole_nome() e la
+# soglia SOMIGLIANZA_STESSO_CORSO (misurata: le coppie da unire stavano tutte a
+# 100, quelle da tenere separate a 50 o meno). Erano usati solo da lei.
 
 
 def card(c, idx, pagine=(), qui_org=None):
@@ -2089,12 +2040,7 @@ def card(c, idx, pagine=(), qui_org=None):
     et = eta_testo(c)
     if et:
         bits.append(G.esc(et))
-    sedi = c.get('_sedi') or []
-    if len(sedi) > 1:
-        # "5 comuni" e non l'elenco: in riga cinque nomi di paese non aiutano a
-        # scegliere piu' di quanto la allunghino. I nomi stanno nel dettaglio.
-        bits.append(f"{len(sedi)} comuni")
-    elif c['citta']:
+    if c['citta']:
         bits.append(G.esc(G.trunc(c['citta'], 34)))
 
     tags = []
@@ -2137,24 +2083,9 @@ def card(c, idx, pagine=(), qui_org=None):
         righe_det.append(
             f'<p class="co-openday"><strong>Open day:</strong> {testa}'
             + _a_openday(od, vedi) + '</p>')
-    if len(sedi) > 1:
-        # Ogni paese con la sua sede e i suoi giorni: e' esattamente cio' che
-        # prima stava in cinque righe separate, e qui non si perde.
-        voci = []
-        for comune, sede, giorni, _cod in sedi:
-            testo = comune or sede
-            if sede and comune and sede != comune:
-                testo = f"{comune} — {sede}"
-            if giorni:
-                testo += f" · {' '.join(giorni.split())}"
-            voci.append(f'<li>{G.esc(testo)}</li>')
-        righe_det.append('<p class="ev-where">' + G.PIN_SVG
-                         + f' Si tiene in {len(sedi)} comuni:</p>'
-                         + '<ul class="co-sedi">' + ''.join(voci) + '</ul>')
-    else:
-        dove = c['sede'] or c['citta']
-        if dove:
-            righe_det.append(f'<p class="ev-where">{G.PIN_SVG} {G.esc(dove)}</p>')
+    dove = c['sede'] or c['citta']
+    if dove:
+        righe_det.append(f'<p class="ev-where">{G.PIN_SVG} {G.esc(dove)}</p>')
 
     dati = []
     # L'ORGANIZZATORE E' IL PRIMO DATO DEL DETTAGLIO, e non sta piu' in riga.
@@ -2276,27 +2207,19 @@ def card(c, idx, pagine=(), qui_org=None):
     # corso si chiama "Volley U8" invece di "Volley Under 8 M/F" — lo slug
     # cambierebbe, e con lui si spezzerebbe la serie storica in GA4.
     cod_attr = f' data-codice="{G.esc(c["codice"])}"' if c.get('codice') else ''
-    # I COMUNI DELLA RIGA SONO PIU' DI UNO, quando la riga e' fusa (07/09/2026).
+    # UN COMUNE PER CARD, e per questo qui non c'e' nessun data-comuni.
     #
-    # raggruppa_per_comune() promette che "i filtri continuano a lavorare sulle
-    # righe vere". Non era vero: della riga fusa restava in pagina il comune
-    # della sola CAPOFILA, e i comuni delle altre sedi finivano nella tendina
-    # (che si compone dalle righe del foglio) senza avere piu' una scheda a cui
-    # corrispondere. Il 07/09 l'ASD Atletica Mondovi' ha accesso i suoi poli e
-    # la tendina comune ha preso quattro voci che SVUOTAVANO la pagina —
-    # Bossolasco, Camerana, Carru', Ceva — cioe' esattamente il guasto che il
-    # 26/08 aveva fatto nascere quella prova: chi sceglie il proprio paese vede
-    # zero righe e pensa che il filtro sia rotto. Solo che qui il corso a Ceva
-    # C'E', ed e' la riga fusa a nasconderlo.
-    #
-    # data-city resta la capofila e non si tocca: e' quello che legge chi conta
-    # i comuni di una pagina (genera_pdf.py) e la prova che misura se un comando
-    # divide. I comuni veri stanno in data-comuni, ed e' quello che guarda il
-    # filtro.
-    sedi_slug = [G.slugify(s[0]) for s in (c.get('_sedi') or []) if s[0]]
-    comuni = [x for x in dict.fromkeys([G.slugify(c['citta'])] + sedi_slug) if x]
-    comuni_attr = f' data-comuni="{" ".join(comuni)}"' if len(comuni) > 1 else ''
-    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}"{comuni_attr} data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(macro)}" data-disc="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-openday="{'1' if od else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+    # Il 07/09/2026, con le righe ancora fuse per comune, la card portava il
+    # comune della sola CAPOFILA mentre nella tendina del filtro (che si compone
+    # dalle righe del foglio) comparivano anche gli altri: sceglierli SVUOTAVA
+    # la pagina — Bossolasco, Camerana, Carru', Ceva — cioe' il guasto che il
+    # 26/08 aveva fatto nascere la prova sui filtri, con l'aggravante che il
+    # corso a Ceva C'ERA ed era la riga fusa a nasconderlo. La toppa di allora
+    # era un secondo attributo con tutte le sedi dentro; adesso che le righe
+    # sono tornate separate non serve piu', perche' data-city dice la verita' da
+    # solo. Ed e' anche quello che legge chi conta i comuni di una pagina
+    # (genera_pdf.py).
+    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(macro)}" data-disc="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-openday="{'1' if od else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
             <span class="ev-thumb is-ph" aria-hidden="true">{_icona(c)}</span>
             <span class="ev-main">
@@ -2517,8 +2440,6 @@ CSS = """
 .co-openday{margin:8px 0 0;color:#2E7D46}
 .co-openday a{color:#2E7D46;font-weight:700}
 .co-loc{width:100%;max-width:320px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
-.co-sedi{margin:2px 0 10px;padding-left:26px;list-style:disc}
-.co-sedi li{margin:1px 0;font-size:.92rem;line-height:1.45}
 .co-fuori{margin:10px 0 0}
 .co-fuori a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-fuori a:hover{text-decoration:underline}
@@ -2619,12 +2540,12 @@ FILTER_JS = """
           // comune ce n'era uno. Trovato dalla prova che sceglie ogni voce e
           // conta cosa resta.
           //
-          // E UNA RIGA STA IN PIU' COMUNI. Le righe fuse da
-          // raggruppa_per_comune() portano data-comuni con tutte le loro sedi:
-          // il corso di atletica degli Esordienti si tiene in cinque paesi, e
-          // fino al 07/09/2026 solo quello della capofila lo trovava. Senza
-          // l'attributo (la riga normale) l'elenco e' il suo unico comune.
-          if((c.dataset.comuni||c.dataset.city||'').split(' ').indexOf(v)<0) ok=false;
+          // UNA CARD, UN COMUNE. Fra il 03/09 e il 07/09/2026 le righe dello
+          // stesso corso in paesi diversi venivano fuse in una card sola, e qui
+          // serviva un secondo attributo con tutte le sedi dentro perche' il
+          // filtro le trovasse. Ora ogni sede e' una card sua: il comune di una
+          // card e' uno, ed e' data-city.
+          if(c.dataset.city!==v) ok=false;
           return;
         }
         if(c.dataset[campo]!==v) ok=false;
@@ -2900,7 +2821,7 @@ def render(corsi, css, nav, foot, realta=None):
     if ordinati:
         elenco = ('  <div class="events-list" id="co-lista">\n'
                   + "\n".join(card(c, i, pagine)
-                                for i, c in enumerate(raggruppa_per_comune(ordinati)))
+                                for i, c in enumerate(ordinati))
                   + '\n  </div>')
     else:
         elenco = nota_vuota()

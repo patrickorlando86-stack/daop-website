@@ -405,6 +405,19 @@ jobs:
         if: always()
         run: python scripts/prova_credito_foto.py
 
+      - name: Ogni sede resta un corso a se'
+        # Fra il 03/09 e il 07/09/2026 lo stesso corso in piu' paesi diventava
+        # UNA card, e i campi sono uno per card: locandina, referente, contatto,
+        # sede e giorni restavano quelli della capofila. Sotto "Si tiene in 5
+        # comuni" un genitore di Ceva leggeva il numero della referente di
+        # Mondovi'. La prova difende l'invariante nuova - una riga, una card, coi
+        # SUOI dati - e conta anche le ANCORE, che e' il difetto che la fusione
+        # teneva nascosto: 13 card con 4 id in tutto.
+        #
+        # Offline e in un secondo, e DOPO il commit come le altre.
+        if: always()
+        run: python scripts/prova_corsi_separati.py
+
       - name: Controlla il manifest delle locandine
         # Difende l'unica cosa che tiene in vita le locandine nel bucket: che
         # un nome citato dalla pagina finisca nel manifest (in TUTTE le forme
