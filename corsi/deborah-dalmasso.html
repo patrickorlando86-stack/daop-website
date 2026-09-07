@@ -915,16 +915,26 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
           }
           return;
         }
-        // IL NOME DEL CAMPO NON E' SEMPRE IL NOME DELL'ATTRIBUTO. La tendina
-        // del comune si chiama "citta" (come la colonna del foglio) ma la
-        // scheda scrive data-city (come le pagine comune del resto del sito):
-        // qui si leggeva c.dataset.citta, cioe' undefined, e QUALUNQUE comune
-        // scelto nascondeva tutte le righe. Il filtro comune non ha mai
-        // funzionato, e non si vedeva perche' la tendina si stampa solo con due
-        // comuni in pagina: fino al 26/08/2026 di comune ce n'era uno.
-        // Trovato dalla prova che sceglie ogni voce e conta cosa resta.
-        var chiave = campo==='citta' ? 'city' : campo;
-        if(c.dataset[chiave]!==v) ok=false;
+        if(campo==='citta'){
+          // IL NOME DEL CAMPO NON E' SEMPRE IL NOME DELL'ATTRIBUTO. La tendina
+          // del comune si chiama "citta" (come la colonna del foglio) ma la
+          // scheda scrive data-city (come le pagine comune del resto del
+          // sito): qui si leggeva c.dataset.citta, cioe' undefined, e
+          // QUALUNQUE comune scelto nascondeva tutte le righe. Il filtro
+          // comune non ha mai funzionato, e non si vedeva perche' la tendina
+          // si stampa solo con due comuni in pagina: fino al 26/08/2026 di
+          // comune ce n'era uno. Trovato dalla prova che sceglie ogni voce e
+          // conta cosa resta.
+          //
+          // E UNA RIGA STA IN PIU' COMUNI. Le righe fuse da
+          // raggruppa_per_comune() portano data-comuni con tutte le loro sedi:
+          // il corso di atletica degli Esordienti si tiene in cinque paesi, e
+          // fino al 07/09/2026 solo quello della capofila lo trovava. Senza
+          // l'attributo (la riga normale) l'elenco e' il suo unico comune.
+          if((c.dataset.comuni||c.dataset.city||'').split(' ').indexOf(v)<0) ok=false;
+          return;
+        }
+        if(c.dataset[campo]!==v) ok=false;
       });
       c.classList.toggle('is-hidden',!ok);
       if(ok){ vis++; orgVivi[c.dataset.org]=1; }
