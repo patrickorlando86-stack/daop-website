@@ -417,10 +417,46 @@ def eta_min_max(c):
 
 
 def eta_testo(c):
+    """L'eta' come la legge la riga chiusa. E deve dire quello che dice il FILTRO.
+
+    UN'ETA' SCRITTA IN CLASSI NON PORTA NESSUN NUMERO (07/09/2026). Il
+    03/09 eta_da_classi() ha insegnato al filtro a leggere "scuole
+    elementari" come la fascia 6-10 anni, e quel giorno la meta' che si
+    STAMPA e' rimasta indietro: la riga continuava a portare la cella del
+    foglio cosi' com'era. Il 07/09 l'ASD Atletica Mondovi' ha accesso i suoi
+    poli e in pagina sono comparse quattro righe cosi' -
+
+        "scuole elementari · 5 comuni"          filtro 6-10 anni
+        "1a e 2a media · 5 comuni"              filtro 11-12 anni
+        "3a media e 1a superiore · 4 comuni"    filtro 13-14 anni
+        "3a media · Murazzano"                  filtro 13 anni
+
+    - cioe' l'unica colonna dei tre dati in riga che si puo' confrontare col
+    filtro non era confrontabile: chi sceglie "6-8 anni" nella tendina si
+    trova una riga che di anni non ne nomina nessuno. Ed e' la cosa che
+    tests/corsi.js sorveglia da sempre ("se no il filtro e la riga direbbero
+    due cose"), che infatti e' diventata rossa quella notte.
+
+    Le parole della societa' restano PRIME, e non e' cortesia: "scuole
+    elementari" e' quello che c'e' sulla locandina e quello che un genitore
+    riconosce del proprio figlio senza fare il conto. Gli anni le seguono fra
+    parentesi, perche' sono l'unita' su cui filtra la pagina.
+
+    Se la cella dice GIA' gli anni ("dai 4 anni", "3-5 anni") non si aggiunge
+    niente: la si stampa com'e', come e' sempre stato.
+    """
     r = eta_range(c)
-    if not r:
-        return (c.get('eta') or '').strip()
-    return f"{r[0]} anni" if r[0] == r[1] else f"{r[0]}-{r[1]} anni"
+    if r:
+        return f"{r[0]} anni" if r[0] == r[1] else f"{r[0]}-{r[1]} anni"
+    t = (c.get('eta') or '').strip()
+    if not t or re.search(r'ann', t.lower()):
+        return t
+    classi = eta_da_classi(t)
+    if not classi:
+        return t
+    lo, hi = classi
+    anni = f"{lo} anni" if lo == hi else f"{lo}-{hi} anni"
+    return f"{t} ({anni})"
 
 
 # ── LA PROVA CHE PORTA UNA DATA, E LA DATA E' PASSATA (05/09/2026) ────
@@ -2240,7 +2276,27 @@ def card(c, idx, pagine=(), qui_org=None):
     # corso si chiama "Volley U8" invece di "Volley Under 8 M/F" — lo slug
     # cambierebbe, e con lui si spezzerebbe la serie storica in GA4.
     cod_attr = f' data-codice="{G.esc(c["codice"])}"' if c.get('codice') else ''
-    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(macro)}" data-disc="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-openday="{'1' if od else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
+    # I COMUNI DELLA RIGA SONO PIU' DI UNO, quando la riga e' fusa (07/09/2026).
+    #
+    # raggruppa_per_comune() promette che "i filtri continuano a lavorare sulle
+    # righe vere". Non era vero: della riga fusa restava in pagina il comune
+    # della sola CAPOFILA, e i comuni delle altre sedi finivano nella tendina
+    # (che si compone dalle righe del foglio) senza avere piu' una scheda a cui
+    # corrispondere. Il 07/09 l'ASD Atletica Mondovi' ha accesso i suoi poli e
+    # la tendina comune ha preso quattro voci che SVUOTAVANO la pagina —
+    # Bossolasco, Camerana, Carru', Ceva — cioe' esattamente il guasto che il
+    # 26/08 aveva fatto nascere quella prova: chi sceglie il proprio paese vede
+    # zero righe e pensa che il filtro sia rotto. Solo che qui il corso a Ceva
+    # C'E', ed e' la riga fusa a nasconderlo.
+    #
+    # data-city resta la capofila e non si tocca: e' quello che legge chi conta
+    # i comuni di una pagina (genera_pdf.py) e la prova che misura se un comando
+    # divide. I comuni veri stanno in data-comuni, ed e' quello che guarda il
+    # filtro.
+    sedi_slug = [G.slugify(s[0]) for s in (c.get('_sedi') or []) if s[0]]
+    comuni = [x for x in dict.fromkeys([G.slugify(c['citta'])] + sedi_slug) if x]
+    comuni_attr = f' data-comuni="{" ".join(comuni)}"' if len(comuni) > 1 else ''
+    return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}"{comuni_attr} data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(macro)}" data-disc="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-openday="{'1' if od else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
             <span class="ev-thumb is-ph" aria-hidden="true">{_icona(c)}</span>
             <span class="ev-main">
@@ -2552,16 +2608,26 @@ FILTER_JS = """
           }
           return;
         }
-        // IL NOME DEL CAMPO NON E' SEMPRE IL NOME DELL'ATTRIBUTO. La tendina
-        // del comune si chiama "citta" (come la colonna del foglio) ma la
-        // scheda scrive data-city (come le pagine comune del resto del sito):
-        // qui si leggeva c.dataset.citta, cioe' undefined, e QUALUNQUE comune
-        // scelto nascondeva tutte le righe. Il filtro comune non ha mai
-        // funzionato, e non si vedeva perche' la tendina si stampa solo con due
-        // comuni in pagina: fino al 26/08/2026 di comune ce n'era uno.
-        // Trovato dalla prova che sceglie ogni voce e conta cosa resta.
-        var chiave = campo==='citta' ? 'city' : campo;
-        if(c.dataset[chiave]!==v) ok=false;
+        if(campo==='citta'){
+          // IL NOME DEL CAMPO NON E' SEMPRE IL NOME DELL'ATTRIBUTO. La tendina
+          // del comune si chiama "citta" (come la colonna del foglio) ma la
+          // scheda scrive data-city (come le pagine comune del resto del
+          // sito): qui si leggeva c.dataset.citta, cioe' undefined, e
+          // QUALUNQUE comune scelto nascondeva tutte le righe. Il filtro
+          // comune non ha mai funzionato, e non si vedeva perche' la tendina
+          // si stampa solo con due comuni in pagina: fino al 26/08/2026 di
+          // comune ce n'era uno. Trovato dalla prova che sceglie ogni voce e
+          // conta cosa resta.
+          //
+          // E UNA RIGA STA IN PIU' COMUNI. Le righe fuse da
+          // raggruppa_per_comune() portano data-comuni con tutte le loro sedi:
+          // il corso di atletica degli Esordienti si tiene in cinque paesi, e
+          // fino al 07/09/2026 solo quello della capofila lo trovava. Senza
+          // l'attributo (la riga normale) l'elenco e' il suo unico comune.
+          if((c.dataset.comuni||c.dataset.city||'').split(' ').indexOf(v)<0) ok=false;
+          return;
+        }
+        if(c.dataset[campo]!==v) ok=false;
       });
       c.classList.toggle('is-hidden',!ok);
       if(ok){ vis++; orgVivi[c.dataset.org]=1; }
