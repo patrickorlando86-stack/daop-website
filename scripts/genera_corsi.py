@@ -799,6 +799,64 @@ COLONNE_REALTA = {
     'facebook': ('facebook', 'fb', 'pagina facebook'),
 }
 
+
+# ── IL LOGO DI UNA REALTA': dalla cella all'indirizzo ─────────────────────
+#
+# La cella "Logo" porta un NOME DI FILE, come la colonna Locandina degli eventi,
+# e questo e' l'unico posto in cui quel nome diventa un indirizzo. Vale la stessa
+# ragione di loc_path(): un f-string ricopiato in quattro punti e' un logo che si
+# vede nella scheda e non nell'anteprima di WhatsApp il giorno che la cartella
+# cambia nome.
+#
+# I LOGHI NON STANNO NEL BUCKET, stanno in git sotto assets/loghi. Sono la stessa
+# cosa delle miniature: immagini piccole che compaiono in un ELENCO - corsi.html
+# mostra la scheda di ogni societa', quindi una visita sola le scarica tutte - e
+# il bucket ha un tetto di traffico che quella forma di uso aveva gia' sfondato
+# una volta (08/08/2026, da ~10 a ~250 MB al giorno). In piu' il bucket viene
+# potato ogni notte da chi non sa niente dei loghi: una societa' messa in bozza
+# esce dalla pagina e sette giorni dopo il suo marchio non c'e' piu'.
+#
+# SE IL FILE NON C'E', NON SI STAMPA NIENTE. E' la regola di loc_path dopo il
+# 07/09/2026: essendo questo l'unico punto in cui un nome diventa un indirizzo,
+# basta tornare vuoto qui e spariscono insieme l'<img>, l'og:image e il "logo"
+# dei dati strutturati. Una cella scritta a mano con un refuso fa una pagina
+# senza marchio, non una pagina con un rettangolo rotto in cima.
+DIR_LOGHI = os.path.join('assets', 'loghi')
+HREF_LOGHI = '/assets/loghi'
+
+
+def logo_path(valore):
+    """URL del logo per il browser. Vuoto se la cella e' vuota o il file manca.
+
+    Un indirizzo gia' scritto per esteso (http, o una / iniziale) resta com'e':
+    la colonna si compila anche a mano, e chi ci ha incollato l'URL del proprio
+    sito non deve vederselo cancellare da un controllo che riguarda i nostri file.
+    """
+    v = (valore or '').strip()
+    if not v:
+        return ''
+    if v.startswith(('http://', 'https://', '/')):
+        return v
+    nome = os.path.basename(v.replace('\\', '/'))
+    if not os.path.exists(os.path.join(ROOT, DIR_LOGHI, nome)):
+        return ''
+    # quote: i nomi che scrive il downloader sono slug ASCII, ma la colonna si
+    # riempie anche a mano e uno spazio spezzerebbe l'attributo src.
+    return f"{HREF_LOGHI}/{urllib.parse.quote(nome)}"
+
+
+def logo_url(valore):
+    """Lo stesso logo in forma ASSOLUTA, per og:image e per i dati strutturati.
+
+    Non e' un vezzo: og:image con un indirizzo che comincia per "/" viene
+    scartato da chi genera l'anteprima, e schema.org vuole URL assoluti. Erano
+    i due punti in cui il valore della cella finiva grezzo dentro il meta."""
+    p = logo_path(valore)
+    if not p or p.startswith(('http://', 'https://')):
+        return p
+    return f"{SITE_URL}{p}"
+
+
 TAB_REALTA = os.environ.get('REALTA_TAB')
 TABS_REALTA = [TAB_REALTA] if TAB_REALTA else ['Realta', 'Realtà', 'Organizzatori']
 
@@ -974,7 +1032,7 @@ def scheda_realta(org, corsi_org, info):
     romperebbe quei link per guadagnare niente."""
     a = _ancora(org)
     dentro = []
-    logo = (info.get('logo') or '').strip()
+    logo = logo_path(info.get('logo'))
     if logo:
         dentro.append(f'<img class="co-logo" src="{G.esc(logo)}" alt="Logo di '
                       f'{G.esc(org)}" loading="lazy" decoding="async">')
@@ -1589,8 +1647,9 @@ def jsonld_realta(org, corsi_org, info):
          'url': f"{SITE_URL}{url_realta(org)}"}
     if info.get('descr'):
         o['description'] = info['descr']
-    if info.get('logo'):
-        o['logo'] = info['logo']
+    logo = logo_url(info.get('logo'))
+    if logo:
+        o['logo'] = logo
     if info.get('sito'):
         o['sameAs'] = [info['sito']]
     if info.get('tel'):
@@ -1659,8 +1718,9 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     robots = ('index, follow' if confermata(info) else 'noindex, follow')
 
     testa = []
-    if info.get('logo'):
-        testa.append(f'<img class="cr-logo" src="{G.esc(info["logo"])}" '
+    logo = logo_path(info.get('logo'))
+    if logo:
+        testa.append(f'<img class="cr-logo" src="{G.esc(logo)}" '
                      f'alt="Logo di {G.esc(org)}" loading="lazy" decoding="async">')
     if info.get('descr'):
         # LA DESCRIZIONE SI APRE E SI CHIUDE (26/08/2026, Giovanni: "posso anche
@@ -1708,11 +1768,11 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 <meta property="og:url" content="{url}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
-<meta property="og:image" content="{G.esc(info.get('logo') or G.DEFAULT_IMG)}">
+<meta property="og:image" content="{G.esc(logo_url(info.get('logo')) or G.DEFAULT_IMG)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{G.esc(G.trunc(titolo, 60))}">
 <meta name="twitter:description" content="{G.esc(G.trunc(descr, 120))}">
-<meta name="twitter:image" content="{G.esc(info.get('logo') or G.DEFAULT_IMG)}">
+<meta name="twitter:image" content="{G.esc(logo_url(info.get('logo')) or G.DEFAULT_IMG)}">
 <meta name="daop:citta" content="{G.esc(citta)}">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">

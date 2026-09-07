@@ -1355,6 +1355,45 @@ tre: `headers=1`, una colonna che si chiami `Organizzatore` (Luoghi ha `Nome`,
 quella), e soprattutto **una riga che non corrisponde a una società già in
 pagina viene buttata via**. Con l'ultima, un foglio sbagliato non entra comunque.
 
+#### Il `Logo` è un nome di file, e i file stanno in `assets/loghi/`
+
+La colonna `Logo` esisteva dal 25/08 e **nessuno l'aveva mai riempita**: il suo
+valore finiva grezzo dentro `src=`, dentro `og:image`, dentro `twitter:image` e
+dentro i dati strutturati. Dal 07/09/2026 il downloader ci scrive un **nome di
+file** — come la colonna `Locandina` degli eventi — e quei quattro posti passano
+tutti da due funzioni sole:
+
+- `logo_path()` → `/assets/loghi/<nome>`, per l'`<img>`;
+- `logo_url()` → lo stesso con il dominio davanti, per `og:image`,
+  `twitter:image` e lo `schema.org`. Non è pignoleria: un `og:image` che comincia
+  per `/` viene **scartato** da chi genera l'anteprima, e schema.org vuole URL
+  assoluti.
+
+Un indirizzo scritto per esteso (`http…`, o una `/` iniziale) passa intatto: la
+colonna si compila anche a mano.
+
+**Se il file non c'è, non si stampa niente** — stessa regola di `loc_path()` dopo
+il 07/09, e per lo stesso motivo: essendo `logo_path()` l'unico punto in cui un
+nome diventa un indirizzo, basta tornare vuoto lì e spariscono insieme l'`<img>`,
+l'anteprima (che torna al banner di DAOP) e il `logo` dei dati strutturati. Una
+cella con un refuso fa una pagina senza marchio, non un rettangolo rotto in cima.
+
+**I loghi stanno in git e non nel bucket**, ed è la stessa decisione delle
+miniature: un logo si vede in un **elenco** — su `corsi.html` ci sono tutte le
+società insieme — cioè la forma di traffico che l'08/08 aveva portato il bucket
+da ~10 a ~250 MB al giorno contro un tetto di 5 GB. E il bucket viene **potato
+ogni notte** da una funzione che dei loghi non sa niente: una società messa in
+`bozza` esce dalla pagina, il suo marchio non è più citato da nessun HTML e sette
+giorni dopo non c'è più. Il conto che aveva fatto uscire le locandine dal repo
+(~340 MB l'anno di blob) qui non si ripresenta: i loghi sono uno per **società**,
+non uno per evento.
+
+Le misure e le regole per chi ne mette uno a mano stanno in
+[`assets/loghi/LEGGIMI.md`](assets/loghi/LEGGIMI.md). In breve: WEBP dentro
+`600×600`, imbottito di trasparente se un lato scende sotto **200 px** — sotto
+`200×200` Facebook e WhatsApp ignorano l'`og:image`, e la pagina girerebbe senza
+immagine.
+
 #### `CORSI_IN_INDICE`: spento il 21/08/2026, **riacceso il 28/08**
 
 `corsi.html` è **in indice dal 28/08/2026**. Era fuori dal 21/08 perché Giovanni
@@ -5262,6 +5301,7 @@ python3 scripts/prova_spostata.py                   # un rimando non porta altro
 python3 scripts/prova_ritirata.py                   # un evento sparito non mente
 python3 scripts/prova_comuni_simili.py              # due grafie, un paese solo
 python3 scripts/prova_credito_foto.py               # il credito sotto la foto
+python3 scripts/prova_logo_realta.py                # il logo di una società
 cd tests && npm install && npm test                 # prove di fumo (Playwright)
 ```
 
