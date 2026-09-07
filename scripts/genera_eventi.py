@@ -565,6 +565,110 @@ def ha_miniatura(loc):
     return bool(m) and os.path.exists(os.path.join(MINIATURE_DIR, m))
 
 
+# Le locandine che il bucket NON ha piu'. Si riempie solo con
+# scalda_locandine(): un nome che nessuno ha controllato e' considerato VIVO.
+#
+# La direzione dell'errore e' scelta (07/09/2026) ed e' l'OPPOSTO di quella
+# della pulizia del bucket. La' si sbaglia tenendo, perche' un file cancellato
+# non torna; qui si sbaglia STAMPANDO, perche' se un intoppo di rete facesse
+# risultare morte tutte le locandine il sito uscirebbe senza nemmeno un'immagine
+# - e una pagina spogliata la rimette in piedi solo la run di domani. Quindi si
+# toglie un'immagine solo quando si e' avuta una risposta chiara che non c'e'.
+_LOC_MORTE = set()
+
+
+def locandina_viva(loc):
+    """False solo se un controllo ha detto chiaramente che quel file non c'e'."""
+    return (loc or '').strip() not in _LOC_MORTE
+
+
+def scalda_locandine(nomi, quanti_insieme=6):
+    """Controlla quali locandine il bucket ha ancora, e ricorda le morte.
+
+    PERCHE' ESISTE (07/09/2026): fino a oggi il sito stampava l'<img>, l'og:image
+    e l'"image" dei dati strutturati per qualunque nome ci fosse nella colonna
+    Locandina, senza sapere se dietro quel nome ci fosse un file. Quando la
+    pulizia notturna del bucket ha cominciato a cancellare cose che il sito
+    mostrava ancora, il risultato sono stati 1222 riferimenti rotti su 310 pagine
+    - il punto interrogativo azzurro al posto della locandina, e per Google un
+    Event con un'immagine che da' 404.
+
+    Costa una HEAD per nome: nessun byte di immagine scaricato, quindi non tocca
+    il tetto di traffico del bucket. In parallelo perche' sono ~400 nomi e in
+    fila sarebbero quaranta secondi a ogni run.
+
+    Il cache-buster serve: il bucket sta dietro una CDN e senza quello la
+    risposta puo' essere quella di ieri - cioe' "c'e'" di un file cancentato
+    stanotte, o "non c'e'" di uno caricato stamattina.
+    """
+    import concurrent.futures
+    import time
+    da_fare = sorted({(n or '').strip() for n in nomi
+                      if (n or '').strip()
+                      and not (n or '').strip().startswith(('http://', 'https://'))})
+    if not da_fare:
+        return set()
+
+    def c_e(nome):
+        """(nome, viva) - e `viva` e' None quando non si e' potuto sapere.
+
+        SI RIPROVA, e non e' un dettaglio: a chiedere in parallelo Supabase
+        risponde 429 (troppe richieste), e la prima versione di questa funzione
+        contava un 429 come "vivo" - cioe' come "l'immagine c'e'". Il 07/09/2026
+        il primo giro vero ne ha dichiarate morte 161 su 368, e un secondo giro
+        piu' lento ne ha trovate altre 48 fra quelle che il primo aveva
+        promosso: 67 pagine erano state riscritte lo stesso giorno tenendosi
+        un'immagine che non c'era. Il ripiego "in caso di dubbio tengo" e'
+        giusto, ma se il dubbio lo crea la fretta va prima sciolto.
+        """
+        url = (f"{SUPABASE_LOCANDINE}/{urllib.parse.quote(nome)}"
+               f"?c={datetime.datetime.now().strftime('%Y%m%d%H%M')}")
+        for tentativo in range(3):
+            req = urllib.request.Request(
+                url, method="HEAD", headers={'User-Agent': 'daop-genera'})
+            try:
+                with urllib.request.urlopen(req, timeout=15) as r:
+                    return nome, r.status < 300
+            except urllib.error.HTTPError as e:
+                # 400/404 = risposta chiara: quel file non c'e'. E' la regola
+                # che stava in genera_centri._immagine_c_e dal 12/08/2026,
+                # portata qui perche' il guasto non era solo dei centri.
+                if e.code in (400, 404):
+                    return nome, False
+            except Exception:
+                pass
+            time.sleep(0.6 * (tentativo + 1))
+        return nome, None      # non lo so
+
+    morte, incerte = set(), set()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=quanti_insieme) as ex:
+        for nome, viva in ex.map(c_e, da_fare):
+            if viva is None:
+                incerte.add(nome)
+            elif not viva:
+                morte.add(nome)
+    _LOC_MORTE.update(morte)
+    if incerte:
+        # Le incerte NON si tolgono dalle pagine, ma si DICONO: un controllo che
+        # rinuncia in silenzio e' come un backup che non si prova. Se questa riga
+        # diventa lunga, il bucket sta rispondendo male e il conto delle morte
+        # qui sotto va letto come un minimo, non come il totale.
+        print(f"  [locandine: {len(incerte)} non ho potuto controllarle, "
+              f"le tengo in pagina]")
+    if morte:
+        # ::warning:: perche' la run non deve diventare rossa - il sito esce
+        # comunque, e meglio - ma la riga si deve vedere nel log dell'azione.
+        print(f"::warning::{len(morte)} locandine citate e NON nel bucket: "
+              f"le pagine escono senza immagine. "
+              f"Per rimetterle: python ricarica_locandine.py --anche-eventi")
+        for n in sorted(morte)[:10]:
+            print(f"  [locandina morta] {n}")
+        if len(morte) > 10:
+            print(f"  [e altre {len(morte) - 10}]")
+    print(f"  locandine controllate: {len(da_fare)}, morte {len(morte)}")
+    return morte
+
+
 def loc_path(loc, mini=False):
     """URL della locandina per il browser: un nome file diventa l'URL pubblico
     nel bucket Supabase, un URL completo resta intatto. Vuoto se assente.
@@ -586,7 +690,16 @@ def loc_path(loc, mini=False):
 
     Il ripiego e' sull'originale, sempre: una locandina arrivata stanotte non ha
     ancora la sua miniatura - la fa genera_miniature.py alla run dopo - e nel
-    frattempo la pagina mostra quella grande invece di un buco."""
+    frattempo la pagina mostra quella grande invece di un buco.
+
+    E SE NEL BUCKET NON C'E' PIU', TORNA VUOTO (07/09/2026). Essendo l'unico
+    punto in cui un nome diventa un indirizzo, basta questo per far sparire
+    insieme l'<img>, l'og:image e l'"image" dei dati strutturati: i chiamanti il
+    caso "vuoto" lo gestiscono da sempre, perche' e' quello di una riga senza
+    locandina. La MINIATURA invece si stampa lo stesso quando c'e': sta in git,
+    quindi funziona anche se l'originale nel bucket e' sparito - ed e' meglio un
+    francobollo che un buco. Chi decide e' scalda_locandine(); senza di lui qui
+    non cambia niente."""
     loc = (loc or '').strip()
     if not loc:
         return ''
@@ -594,6 +707,8 @@ def loc_path(loc, mini=False):
         return f"{MINIATURE_HREF}/{urllib.parse.quote(nome_miniatura(loc))}"
     if loc.startswith(('http://', 'https://')):
         return loc
+    if not locandina_viva(loc):
+        return ''
     # quote: i nomi dal downloader sono ASCII, ma la colonna si compila anche a
     # mano e uno spazio spezzerebbe l'attributo src.
     return f"{SUPABASE_LOCANDINE}/{urllib.parse.quote(loc.lstrip('/'))}"
@@ -8905,6 +9020,13 @@ def scrivi_box(events, oggi):
 
 def main():
     events = normalize(fetch_rows())
+    # PRIMA di generare qualunque pagina: quali locandine il bucket ha ancora.
+    # Le pagine degli eventi FINITI si riscrivono dal registro e restano online
+    # per sempre, quindi i loro nomi vanno controllati insieme a quelli del
+    # foglio - sono anzi la maggior parte del guasto: il 07/09/2026 erano 307
+    # pagine su 310 a mostrare un'immagine che non c'era piu'.
+    scalda_locandine([e.get('loc') for e in events]
+                     + [r.get('loc') for r in carica_registro().values()])
     controlla_crollo(events)
     segnala_doppioni(events)
     segnala_sovrapposizioni(events)

@@ -421,6 +421,10 @@ def leggi_centri(tab, chiave):
     coda = f", {scartati} di altra stagione" if scartati else ""
     coda += f", {doppi} doppioni uniti" if doppi else ""
     print(f"[genera_centri] tab '{tab}': {len(out)} centri per '{chiave}'{coda}")
+    # Il controllo delle locandine va fatto PRIMA di contarle: dal 07/09/2026
+    # loc_path() si limita a consultare cio' che scalda_locandine() ha trovato,
+    # e senza questa riga il conto qui sotto direbbe sempre zero.
+    G.scalda_locandine([c['loc'] for c in out])
     senza = sum(1 for c in out if c['loc'].strip() and not locandina(c))
     if senza:
         print(f"[genera_centri] ATTENZIONE: {senza} locandine indicate nel foglio "
@@ -616,43 +620,23 @@ def guida(cfg):
 """
 
 
-_ESISTE = {}
-
-
-def _immagine_c_e(url):
-    """L'immagine risponde davvero a quell'indirizzo?
-
-    Il controllo esiste perche' la colonna Locandina dei centri e' compilata a
-    mano e ha sempre contenuto nomi di file mai importati: emetterli comunque
-    riempirebbe la pagina di immagini rotte. Prima si guardava sul disco
-    (assets/eventi/); ora che l'immagine sta nel bucket Supabase si guarda li',
-    che poi e' il posto da cui la prende il browser.
-
-    In caso di dubbio si TIENE l'immagine: solo un 404 o un 400 secco la
-    scartano. Un timeout o una rete che fa i capricci in GitHub Actions
-    cancellerebbe altrimenti locandine buone dalla pagina."""
-    if url in _ESISTE:
-        return _ESISTE[url]
-    ok = True
-    try:
-        req = urllib.request.Request(url, method='HEAD',
-                                     headers={'User-Agent': 'daop-genera-centri'})
-        with urllib.request.urlopen(req, timeout=10):
-            pass
-    except urllib.error.HTTPError as e:
-        ok = e.code not in (400, 404)
-    except Exception:
-        pass
-    _ESISTE[url] = ok
-    return ok
-
-
 def locandina(c):
-    """URL della locandina, ma solo se l'immagine c'e' davvero."""
-    p = G.loc_path(c['loc'])
-    if not p:
-        return ''
-    return p if _immagine_c_e(p) else ''
+    """URL della locandina, ma solo se l'immagine c'e' davvero.
+
+    IL CONTROLLO STA IN COMUNE dal 07/09/2026 (G.scalda_locandine +
+    G.locandina_viva, che loc_path consulta da solo). Qui c'era la SUA copia -
+    _immagine_c_e(), con la sua cache e la sua regola - nata perche' la colonna
+    Locandina dei centri si compila a mano e ha sempre contenuto nomi di file
+    mai importati. Quel giorno si e' scoperto che lo stesso guasto colpiva anche
+    eventi e corsi, dove i nomi li scrive il downloader: 1222 riferimenti rotti
+    su 310 pagine. Una regola sola in un posto solo, invece di due copie che si
+    somigliano.
+    Cosa NON e' cambiato: si tiene l'immagine in caso di dubbio, e solo un 400 o
+    un 404 secco la scartano. Un timeout di GitHub Actions non deve spogliare le
+    pagine.
+    Resta come funzione perche' la chiamano in due punti e perche' il nome dice
+    cosa fa; dentro adesso e' una riga."""
+    return G.loc_path(c['loc'])
 
 
 def periodo_testo(c):

@@ -405,6 +405,22 @@ jobs:
         if: always()
         run: python scripts/prova_credito_foto.py
 
+      - name: Una locandina che non c'e' non si stampa
+        # Il 07/09/2026 il sito stampava l'<img>, l'og:image e l'"image" dei
+        # dati strutturati per qualunque nome ci fosse nella colonna Locandina,
+        # senza sapere se dietro ci fosse un file: 1222 riferimenti rotti su 310
+        # pagine. Il controllo sta dentro loc_path(), l'unico punto in cui un
+        # nome diventa un indirizzo, cosi' i quattro posti spariscono insieme.
+        #
+        # La prova difende anche la DIREZIONE dell'errore, che e' la parte
+        # delicata: solo un 400/404 toglie un'immagine, un 429 la tiene - e
+        # prima di rinunciare si riprova, perche' contare un 429 come "c'e'" ha
+        # fatto riscrivere 67 pagine con un'immagine che non esisteva.
+        #
+        # Offline (urlopen finto) e in un secondo.
+        if: always()
+        run: python scripts/prova_locandina_morta.py
+
       - name: Ogni sede resta un corso a se'
         # Fra il 03/09 e il 07/09/2026 lo stesso corso in piu' paesi diventava
         # UNA card, e i campi sono uno per card: locandina, referente, contatto,

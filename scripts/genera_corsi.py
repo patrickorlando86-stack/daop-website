@@ -3006,6 +3006,11 @@ def main():
     # esce di scena tutta insieme - scheda e pagina dedicata comprese - invece di
     # restare online come un guscio senza corsi dentro.
     corsi = togli_corsi_spenti(corsi)
+    # Quali locandine il bucket ha ancora, prima di stampare qualunque <img>.
+    # Sui corsi e' il caso piu' bruciante: fino al 07/09/2026 la pulizia
+    # notturna cancellava TUTTE le loro locandine sette giorni dopo il
+    # caricamento, e la pagina continuava a mostrarle. Vedi G.scalda_locandine.
+    G.scalda_locandine([c.get('loc') for c in corsi])
     realta = leggi_realta({c['org'] for c in corsi})
     # Le realta' in bozza escono di qui, PRIMA di tutto il resto: da questa
     # lista discendono l'elenco, le schede in fondo, le pagine dedicate e il
