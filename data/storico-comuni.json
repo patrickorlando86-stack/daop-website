@@ -2899,6 +2899,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "cocconato-in-festa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Giordano",
+    "manifest": "Cocconato in Festa",
+    "nome": "Cocconato in Festa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-11"
    }
   },
   "nome": "Cocconato",
@@ -3321,7 +3332,7 @@
     "nome": "Corsi di Musica Dolce Post Parto - Deborah Dalmasso",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-07"
+    "ultima": "2026-09-14"
    },
    "corsi-di-musica-gioco-inglese-deborah-dalmasso-cuneo": {
     "anni": [
@@ -3329,10 +3340,10 @@
     ],
     "luogo": "",
     "manifest": "",
-    "nome": "Corsi di Musica Gioco Inglese - Deborah Dalmasso",
+    "nome": "Corsi di Musica Gioco - Inglese - Deborah Dalmasso",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-07"
+    "ultima": "2026-09-14"
    },
    "creazione-giochi-di-societa-chiosco-parri-cuneo": {
     "anni": [
@@ -4997,6 +5008,23 @@
   "nome": "Montà",
   "prov": "CN"
  },
+ "montegioco": {
+  "eventi": {
+   "sagra-della-polenta-pro-loco-montegioco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Montegioco",
+    "manifest": "",
+    "nome": "Sagra della Polenta - Pro Loco Montegioco",
+    "organizza": "Pro Loco Montegioco",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   }
+  },
+  "nome": "Montegioco",
+  "prov": "AL"
+ },
  "montemagno": {
   "eventi": {
    "le-500-nel-monferrato-fiat-500-club-italia-coordin-montemagno": {
@@ -5819,6 +5847,17 @@
  },
  "pecettodivalenza": {
   "eventi": {
+   "la-piazza-di-pecetto-festival-di-libri-e-cultura-pecetto-di-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "",
+    "nome": "La Piazza di Pecetto - Festival di libri e cultura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "notte-dei-desideri-gruppo-astrofili-galileo-pecetto-di-valenza": {
     "anni": [
      2026
@@ -6787,6 +6826,23 @@
   "nome": "Roccavione",
   "prov": "CN"
  },
+ "rocchettaligure": {
+  "eventi": {
+   "sagra-delle-fagiolane-pro-loco-di-rocchetta-rocchetta-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "Sagra delle Fagiolane - Pro Loco di Rocchetta",
+    "organizza": "Pro Loco di Rocchetta",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Rocchetta Ligure",
+  "prov": "AL"
+ },
  "rocchettatanaro": {
   "eventi": {
    "apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro": {
@@ -7402,6 +7458,23 @@
    }
   },
   "nome": "San Giorgio Scarampi",
+  "prov": "AT"
+ },
+ "sanmartinoalfieri": {
+  "eventi": {
+   "la-mia-divina-commedia-associazione-culturale-per-san-martino-alfieri": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Cortile del Don",
+    "manifest": "",
+    "nome": "La Mia Divina Commedia - Associazione Culturale Per San Martino",
+    "organizza": "Associazione Culturale Per San Martino",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   }
+  },
+  "nome": "San Martino Alfieri",
   "prov": "AT"
  },
  "sanmarzanooliveto": {
@@ -8395,6 +8468,23 @@
   },
   "nome": "Valfenera",
   "prov": "AT"
+ },
+ "valmadonna": {
+  "eventi": {
+   "valmadonna-western-edizione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile e Salone Parrocchiale",
+    "manifest": "Valmadonna Western 22ª Edizione",
+    "nome": "Valmadonna Western 22ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Valmadonna",
+  "prov": "AL"
  },
  "venasca": {
   "eventi": {
