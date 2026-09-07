@@ -116,6 +116,17 @@ p, li, .section-subtitle, .team-desc, .book-desc,
   stroke-linejoin: round;
 }
 
+/* Le icone di questo sistema sono disegnate a LINEA (vedi .icon qui sopra:
+   niente riempimento, il tratto prende il colore del testo). Un'icona
+   disegnata a CAMPITURE - come la esporta di solito un programma di grafica -
+   dentro quella regola sarebbe invisibile: il riempimento spento e un contorno
+   che non ha. Questa classe rovescia le due proprieta' e nient'altro, cosi'
+   anche un disegno pieno prende il colore della sua categoria.
+   La mette da sola _icona_dal_file() in genera_corsi.py, quando nel file non
+   trova dichiarato nessun tratto: chi aggiunge un'icona in assets/icone/ non
+   deve sapere niente di tutto questo. */
+.icon.is-piena { fill: currentColor; stroke: none; }
+
 .icon-lg { width: 2rem; height: 2rem; stroke-width: 1.5; }
 .icon-xl { width: 2.5rem; height: 2.5rem; stroke-width: 1.4; }
 

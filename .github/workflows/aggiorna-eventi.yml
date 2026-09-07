@@ -405,6 +405,24 @@ jobs:
         if: always()
         run: python scripts/prova_credito_foto.py
 
+      - name: Le icone dei corsi lette dalla cartella
+        # Le icone dei corsi stanno in assets/icone/ e non nel codice: si mette
+        # un file e compare, si toglie e torna quella di prima. La prova difende
+        # i tre modi in cui una cosa cosi' si rompe in silenzio: il ripiego che
+        # salta un gradino (e un corso resta senza francobollo), un disegno a
+        # CAMPITURE che nel CSS a linea diventa invisibile - una pagina di
+        # quadratini vuoti che a un controllo automatico sembra perfetta - e un
+        # colore scritto dentro il file, che inchioderebbe l'icona a quel colore
+        # su tutte le categorie.
+        #
+        # Piu' il guardiano sulla cartella vera: dentro solo .svg, e con nomi che
+        # il generatore riconosce. Un PNG buttato li' non si vedrebbe mai, e
+        # senza questo controllo nessuno lo direbbe.
+        #
+        # Offline e in un secondo.
+        if: always()
+        run: python scripts/prova_icone_corsi.py
+
       - name: Una locandina che non c'e' non si stampa
         # Il 07/09/2026 il sito stampava l'<img>, l'og:image e l'"image" dei
         # dati strutturati per qualunque nome ci fosse nella colonna Locandina,

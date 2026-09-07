@@ -32,6 +32,7 @@ import io
 import json
 import re
 import datetime
+import unicodedata
 import urllib.request
 import urllib.parse
 
@@ -2299,22 +2300,188 @@ ICONA_ALTRO = ('<path d="M14 22v-4a2 2 0 1 0-4 0v4"/>'
                '<circle cx="12" cy="9" r="2"/>')
 
 
+CARTELLA_ICONE = os.path.join(ROOT, 'assets', 'icone')
+
+# IL DIZIONARIO CHIUSO DELLE DISCIPLINE (07/09/2026).
+#
+# Perche' esiste. L'icona era una per FAMIGLIA, e su "Movimento" - che tiene
+# dentro atletica, pallavolo, nuoto, calcio e psicomotricita' - qualunque
+# disegno dice una cosa precisa e sbagliata per tutte le altre: infatti c'era
+# una BICICLETTA, e sui 22 corsi dell'ASD Atletica Mondovi' usciva il
+# francobollo del ciclismo.
+#
+# Perche' NON si legge la disciplina dal foglio cosi' com'e'. Il secondo livello
+# della categoria lo scrive il modello in libertà e cambia a ogni rilettura:
+# misurato il 07/09 sulle 41 righe vere, la sola famiglia Musica dava OTTO
+# diciture - "Educazione musicale", "Musica gioco", "Musica pop", "Musica
+# dolce", "Musica per bambini", "Coro", "Orchestra", "Strumento musicale". Un
+# francobollo appeso a quelle parole balla fra due riletture della stessa
+# locandina, ed e' la ragione per cui il 26/08 la strada era stata chiusa.
+#
+# Quindi le parole le decidiamo NOI: la chiave e' la parola da cercare dentro il
+# secondo livello, il valore e' il nome del file in assets/icone/. I sinonimi
+# puntano allo stesso file (come fa gia' il vocabolario dei luoghi: "roller" ->
+# pattinaggio, "mtb" -> ciclismo). Se il modello scrive una dicitura che qui non
+# c'e', non esce un'icona sbagliata: si ripiega sulla famiglia.
+#
+# I termini vengono da [F] DISCIPLINE SPORTIVE e [E] TEMI del vocabolario dei
+# luoghi (mappaDAOP/mobile/_TAG_DIZIONARIO.md, 11/08/2026), allungati con quello
+# che i corsi hanno davvero e che li' non c'era - a partire dall'atletica, che
+# oggi e' 22 righe su 41. Restano gli stessi termini a posta: due database che
+# parlano la stessa lingua si confrontano, due che ne parlano due no.
+#
+# AGGIUNGERE UNA DISCIPLINA = una riga qui e un file la'. Una riga senza il suo
+# file non costa niente e non rompe niente: si ripiega sulla famiglia finche'
+# l'icona non arriva.
+DISCIPLINE_ICONA = {
+    # [F] del vocabolario luoghi
+    'nuoto': 'nuoto', 'acquaticit': 'nuoto',
+    'calcio': 'calcio',
+    'basket': 'basket', 'pallacanestro': 'basket', 'minibasket': 'basket',
+    'pallavolo': 'pallavolo', 'volley': 'pallavolo',
+    'tennis': 'tennis',
+    'judo': 'judo', 'karate': 'judo', 'arti marziali': 'judo',
+    'equitazione': 'equitazione',
+    'arrampicata': 'arrampicata',
+    'pattinaggio': 'pattinaggio', 'roller': 'pattinaggio',
+    'ciclismo': 'ciclismo', 'mtb': 'ciclismo',
+    # quello che i corsi hanno e il vocabolario dei luoghi non aveva
+    'atletica': 'atletica', 'corsa': 'atletica',
+    'ginnastica': 'ginnastica',
+    'psicomotricit': 'psicomotricita',
+    'yoga': 'yoga',
+    'triathlon': 'triathlon',
+    # [E] TEMI: qui servono solo dove distinguono DENTRO una famiglia
+    'coro': 'coro', 'canto': 'coro',
+    'orchestra': 'orchestra',
+    'strumento': 'strumento', 'pianoforte': 'strumento',
+    'chitarra': 'strumento', 'violino': 'strumento',
+    'inglese': 'inglese',
+}
+
+# Le icone lette dalla cartella, per nome. Un None ricordato vale come "quel
+# file non c'e'": senza, ogni riga di ogni pagina ritenterebbe di aprirlo.
+_ICONE_FILE = {}
+
+
+def _icona_dal_file(nome):
+    """Il disegno di assets/icone/<nome>.svg pronto da incollare, o None.
+
+    Prende SOLO il contenuto dentro <svg>...</svg> e lo rimonta in un tag
+    nostro: cosi' larghezza, altezza e colore restano quelli del sistema (vedi
+    .icon in daop-system.css) qualunque cosa dichiari il file.
+
+    IL COLORE NON PUO' ARRIVARE DAL FILE. L'icona prende il colore della
+    famiglia dalla pagina (`stroke: currentColor`), quindi un nero scritto
+    dentro il disegno lo inchioderebbe a nero su tutte le categorie: i colori
+    dichiarati si riscrivono in `currentColor`.
+
+    E UN DISEGNO PIENO NON DEVE SPARIRE. Il CSS del sistema e' fatto per le
+    icone a LINEA (`fill: none; stroke: currentColor`): un'icona disegnata a
+    campiture - come la esporta di solito un programma di grafica - finirebbe
+    invisibile, perche' il suo riempimento viene spento e un contorno non ce
+    l'ha. Se non si vede dichiarato nessun tratto, allora e' piena, e si aggiunge
+    la classe che rovescia la regola (.icon.is-piena). Meglio accorgersene qui
+    che guardare una pagina di quadratini vuoti.
+
+    Non solleva mai: un file illeggibile o senza <svg> dentro vale "non c'e'", e
+    chi chiama ripiega."""
+    if nome in _ICONE_FILE:
+        return _ICONE_FILE[nome]
+    _ICONE_FILE[nome] = None
+    percorso = os.path.join(CARTELLA_ICONE, f'{nome}.svg')
+    if not os.path.exists(percorso):
+        return None
+    try:
+        with open(percorso, encoding='utf-8') as fh:
+            testo = fh.read()
+    except OSError as e:
+        print(f"[genera_corsi] icona {nome}.svg illeggibile ({e}): uso quella di prima")
+        return None
+
+    apertura = re.search(r'<svg\b([^>]*)>', testo, re.I)
+    if not apertura or '</svg>' not in testo:
+        print(f"[genera_corsi] icona {nome}.svg: non ci trovo un <svg> dentro, "
+              f"uso quella di prima")
+        return None
+    radice = apertura.group(1)
+    dentro = testo[apertura.end():testo.rindex('</svg>')]
+
+    # Quello che in una pagina non ci va: uno script, uno stile che sfugge
+    # dall'icona, un'immagine incorporata (che il colore non lo prende e pesa).
+    for cattivo in ('script', 'style', 'foreignObject', 'image', 'use'):
+        if re.search(rf'<{cattivo}\b', dentro, re.I):
+            dentro = re.sub(rf'<{cattivo}\b.*?</{cattivo}>', '', dentro,
+                            flags=re.I | re.S)
+            dentro = re.sub(rf'<{cattivo}\b[^>]*/?>', '', dentro, flags=re.I)
+            print(f"[genera_corsi] icona {nome}.svg: tolto <{cattivo}> dal disegno")
+    dentro = re.sub(r'\son[a-z]+\s*=\s*"[^"]*"', '', dentro, flags=re.I)
+
+    # Il tratto lo si cerca nella radice E dentro: Lucide e i suoi lo mettono
+    # sul tag <svg>, i programmi di grafica sui singoli tracciati.
+    def ha_tratto(s):
+        m = re.search(r'stroke\s*=\s*"([^"]*)"', s, re.I)
+        return bool(re.search(r'stroke-width\s*=', s, re.I)) or \
+            bool(m and m.group(1).strip().lower() not in ('none', ''))
+    piena = not (ha_tratto(radice) or ha_tratto(dentro))
+
+    def colore(m):
+        attr, val = m.group(1), m.group(2).strip().lower()
+        if val in ('none', 'currentcolor', 'transparent', ''):
+            return m.group(0)
+        return f'{attr}="currentColor"'
+    dentro = re.sub(r'\b(fill|stroke)\s*=\s*"([^"]*)"', colore, dentro, flags=re.I)
+
+    vb = re.search(r'viewBox\s*=\s*"([^"]*)"', radice, re.I)
+    _ICONE_FILE[nome] = (dentro.strip(),
+                         (vb.group(1).strip() if vb else '0 0 24 24'),
+                         piena)
+    return _ICONE_FILE[nome]
+
+
+def _nome_disciplina(c):
+    """Il nome del file per la DISCIPLINA di questo corso, o '' se non la
+    riconosciamo. Confronto per contenimento sulla parola, non per uguaglianza:
+    "Atletica leggera", "Atletica Esordienti" e "atletica" sono la stessa cosa,
+    e le prime due non le scriveremmo mai in un elenco chiuso."""
+    # Senza accenti e minuscolo: "Psicomotricità" e "psicomotricita" sono la
+    # stessa parola, e nel dizionario ci sta una volta sola.
+    testo = unicodedata.normalize('NFKD', _cat_foglia(c)) \
+        .encode('ascii', 'ignore').decode().lower()
+    for parola, file in DISCIPLINE_ICONA.items():
+        if parola in testo:
+            return file
+    return ''
+
+
 def _icona(c):
-    """L'icona del francobollo, decisa dalla MACRO categoria.
+    """L'icona del francobollo: la DISCIPLINA se la riconosciamo e il disegno
+    c'e', altrimenti la sua FAMIGLIA.
 
-    La mappa di prima leggeva `cat + nome`, cioe' anche il secondo livello della
-    categoria — proprio il testo che il 26/08/2026 e' stato dichiarato instabile
-    (vedi _cat_macro: le stesse locandine, rilette, davano "Coro"/"Canto
-    corale", "Musica gioco"/"Musica per bambini"). Un'icona appesa a una parola
-    che cambia a ogni rilettura cambia con lei, e due righe identiche escono con
-    due francobolli diversi. Il primo livello e' una lista chiusa, ed e' l'unica
-    cosa su cui si possa mappare — la stessa ragione per cui filtra lui.
+    IL RIPIEGO E' A CATENA, e ogni gradino e' piu' generico del precedente:
+      1. assets/icone/<disciplina>.svg, se la disciplina sta nel dizionario
+         chiuso (DISCIPLINE_ICONA) e il file esiste;
+      2. assets/icone/<famiglia>.svg, se qualcuno l'ha messo li';
+      3. il disegno scritto qui dentro (ICONE_CAT), che e' come ha sempre
+         funzionato;
+      4. ICONA_ALTRO per una famiglia che non conosciamo ancora.
+    Cosi' un'icona nuova si aggiunge mettendo un file in una cartella, e
+    togliere quel file rimette le cose come stavano.
 
-    Si perde la distinzione fra pallavolo e psicomotricita', che con le emoji
-    c'era. E' voluto: e' quello che fa anche l'agenda (un'icona per famiglia,
-    non per evento), e la disciplina precisa e' scritta in chiaro nell'occhiello
-    della riga, dove si legge invece di doverla indovinare da un pittogramma.
+    Fino al 26/08/2026 la mappa leggeva `cat + nome`, cioe' il testo libero, e
+    l'icona ballava fra due riletture della stessa locandina. La differenza di
+    oggi non e' che ci fidiamo di quel testo: e' che ci CERCHIAMO DENTRO le
+    parole di un elenco NOSTRO, e se non ne trova nessuna si sale di un
+    gradino. La disciplina precisa resta scritta in chiaro nell'occhiello della
+    riga, dove si legge invece di doverla indovinare da un pittogramma.
     """
+    for nome in (_nome_disciplina(c), G.slugify(_cat_macro(c))):
+        pronta = _icona_dal_file(nome) if nome else None
+        if pronta:
+            dentro, vb, piena = pronta
+            classe = 'icon is-piena' if piena else 'icon'
+            return (f'<svg class="{classe}" viewBox="{vb}" '
+                    f'aria-hidden="true">{dentro}</svg>')
     dentro = ICONE_CAT.get(G.slugify(_cat_macro(c)), ICONA_ALTRO)
     # viewBox obbligatorio: senza, sotto i 24px l'icona viene tagliata.
     return f'<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">{dentro}</svg>'
