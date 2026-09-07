@@ -131,6 +131,26 @@ jobs:
         # solo a chi gira in locale con un binario altrove.
         run: python scripts/genera_pdf.py
 
+      - name: Dichiara le locandine che il sito mostra
+        # ULTIMO DI TUTTI, e non e' indifferente: legge gli HTML appena scritti
+        # dai passi sopra. Girando prima dichiarerebbe le locandine di ieri, e
+        # una locandina arrivata stanotte resterebbe fuori dal manifest - cioe'
+        # verrebbe cancellata dal bucket mentre la sua pagina la mostra.
+        #
+        # A cosa serve (07/09/2026): la pulizia notturna del bucket (nel repo
+        # mobile, netlify/functions/sync-catalogo.js) cancellava tutto quello
+        # che non era citato dal FOGLIO. Ma il foglio dice cosa e' in programma,
+        # non cosa il sito sta mostrando: quando un evento scade la sua riga
+        # esce dal foglio e la sua pagina resta online per sempre. Cosi'
+        # sparivano l'immagine, og:image e i dati strutturati di 307 pagine
+        # evento, e tutte le locandine dei corsi (che nel foglio stanno in una
+        # tab che quella pulizia non guardava affatto).
+        #
+        # Non fallisce la run se non trova niente: con zero locandine NON
+        # riscrive il manifest e tiene quello di ieri, perche' dall'altra parte
+        # un elenco vuoto vorrebbe dire "cancella tutto".
+        run: python scripts/genera_manifest_locandine.py
+
       - name: Commit se cambiato
         run: |
           # eventi/ e data/pagine-evento.json vanno inclusi: sono le pagine per
@@ -197,6 +217,16 @@ jobs:
           #     prende comunque, ed e' il motivo per cui qui c'e' la cartella e
           #     non un elenco di file.
           #
+          #   data/locandine-usate.json  l'elenco delle locandine che il sito
+          #     mostra (dal 07/09). Non e' un dato del sito: e' l'unica cosa
+          #     che le tiene in vita nel bucket, perche' la pulizia notturna
+          #     del repo mobile cancella quello che ne' il manifest ne' il
+          #     foglio citano. Se questo file non venisse committato, online
+          #     resterebbe quello del giorno in cui e' nato e ogni locandina
+          #     arrivata dopo verrebbe cancellata sette giorni dopo. E' lo
+          #     stesso guasto di ferragosto.html, ma qui non si perde una
+          #     pagina: si perdono le immagini, e quelle non tornano.
+          #
           # L'elenco e' raggruppato per generatore, e ogni generatore va letto
           # per intero quando se ne aggiunge uno: il 18/08/2026 mancavano tutte
           # e sei le stagionali nate dopo ferragosto (befana, capodanno,
@@ -224,6 +254,7 @@ jobs:
                 data/luoghi.json data/luoghi-comuni.json \
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
                 data/guide.json data/realta-pagine.json \
+                data/locandine-usate.json \
                 eventi/ rubriche/ corsi/ guide/ idee/ assets/miniature/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
@@ -373,6 +404,22 @@ jobs:
         # altre sta DOPO il commit e non ferma il deploy.
         if: always()
         run: python scripts/prova_credito_foto.py
+
+      - name: Controlla il manifest delle locandine
+        # Difende l'unica cosa che tiene in vita le locandine nel bucket: che
+        # un nome citato dalla pagina finisca nel manifest (in TUTTE le forme
+        # in cui compare - img, og:image, twitter:image, dati strutturati), che
+        # esca scritto come sta nel bucket (senza %20 e senza &amp;: sbagliare
+        # l'uno o l'altro fa cancellare il file PROPRIO perche' era citato) e
+        # che un manifest vuoto non si scriva mai.
+        #
+        # Un difetto qui non si vede: il sito esce identico e le immagini
+        # muoiono sette giorni dopo. Il 07/09/2026 erano 238 su 393.
+        #
+        # Offline e in un secondo, come le altre, e DOPO il commit: non deve
+        # fermare il deploy.
+        if: always()
+        run: python scripts/prova_manifest_locandine.py
 
       - name: Nessun file generato resta indietro
         # Rete di sicurezza sull'elenco FILE del passo "Commit se cambiato".
