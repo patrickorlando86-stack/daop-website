@@ -2375,6 +2375,24 @@ ICONA_ALTRO = ('<path d="M14 22v-4a2 2 0 1 0-4 0v4"/>'
 
 CARTELLA_ICONE = os.path.join(ROOT, 'assets', 'icone')
 
+# Le due specie di francobollo, e non sono la stessa cosa vestita diversa.
+#
+# Un DISEGNO A LINEA (.svg) e' una .icon: 24px in mezzo al quadrato da 60,
+# colorato dalla pagina. Un'ILLUSTRAZIONE (.webp) invece il quadrato lo
+# RIEMPIE, e il colore ce l'ha suo.
+#
+# L'illustrazione e' arrivata dopo (08/09/2026) e la ragione e' che l'icona a
+# linea era la cosa fuori posto: nella stessa posizione, sull'agenda, 155
+# righe su 156 portano la miniatura della locandina, cioe' un quadrato PIENO.
+# Un simbolino dentro un quadratino colorato assomigliava al resto del sito
+# meno di quanto ci assomigli un disegno.
+#
+# Le due strade restano tutte e due, perche' rispondono a due domande
+# diverse: un'illustrazione la disegna qualcuno e costa, un disegno a linea si
+# prende dal set che il sito ha gia'. Dove l'illustrazione non c'e', il
+# gradino dopo e' l'icona, e sotto c'e' il disegno scritto qui nel codice.
+ESTENSIONI_RASTER = ('.webp', '.png', '.jpg', '.jpeg')
+
 # IL DIZIONARIO CHIUSO DELLE DISCIPLINE (07/09/2026).
 #
 # Perche' esiste. L'icona era una per FAMIGLIA, e su "Movimento" - che tiene
@@ -2435,6 +2453,32 @@ DISCIPLINE_ICONA = {
 # Le icone lette dalla cartella, per nome. Un None ricordato vale come "quel
 # file non c'e'": senza, ogni riga di ogni pagina ritenterebbe di aprirlo.
 _ICONE_FILE = {}
+_ICONE_RASTER = {}
+
+
+def _icona_raster(nome):
+    """L'indirizzo dell'illustrazione assets/icone/<nome>.<est>, o '' se non
+    c'e'.
+
+    NON si tocca il file e non si guarda dentro: quello che entra in pagina e'
+    un <img>, e la misura la detta il CSS (.ev-thumb.is-ph .ev-ico). Il peso e
+    le proporzioni le mette a posto scripts/genera_icone.py, che gira prima -
+    stessa divisione del lavoro fra genera_miniature.py e loc_path().
+
+    L'ORDINE DELLE ESTENSIONI NON E' ALFABETICO: .webp per primo perche' e'
+    quello che genera_icone.py produce, quindi il PNG originale eventualmente
+    rimasto in cartella non scavalca la versione buona. Un raster che arriva
+    prima della conversione entra comunque in pagina, pesante: e' la regola di
+    loc_path(), meglio una locandina grossa che un buco.
+    """
+    if nome in _ICONE_RASTER:
+        return _ICONE_RASTER[nome]
+    _ICONE_RASTER[nome] = ''
+    for est in ESTENSIONI_RASTER:
+        if os.path.exists(os.path.join(CARTELLA_ICONE, f'{nome}{est}')):
+            _ICONE_RASTER[nome] = f'/assets/icone/{nome}{est}'
+            break
+    return _ICONE_RASTER[nome]
 
 
 def _icona_dal_file(nome):
@@ -2532,12 +2576,14 @@ def _icona(c):
     c'e', altrimenti la sua FAMIGLIA.
 
     IL RIPIEGO E' A CATENA, e ogni gradino e' piu' generico del precedente:
-      1. assets/icone/<disciplina>.svg, se la disciplina sta nel dizionario
-         chiuso (DISCIPLINE_ICONA) e il file esiste;
-      2. assets/icone/<famiglia>.svg, se qualcuno l'ha messo li';
-      3. il disegno scritto qui dentro (ICONE_CAT), che e' come ha sempre
+      1. assets/icone/<disciplina>.webp - l'illustrazione, se la disciplina
+         sta nel dizionario chiuso (DISCIPLINE_ICONA) e il file esiste;
+      2. assets/icone/<disciplina>.svg - il disegno a linea;
+      3. assets/icone/<famiglia>.webp, se qualcuno l'ha messo li';
+      4. assets/icone/<famiglia>.svg;
+      5. il disegno scritto qui dentro (ICONE_CAT), che e' come ha sempre
          funzionato;
-      4. ICONA_ALTRO per una famiglia che non conosciamo ancora.
+      6. ICONA_ALTRO per una famiglia che non conosciamo ancora.
     Cosi' un'icona nuova si aggiunge mettendo un file in una cartella, e
     togliere quel file rimette le cose come stavano.
 
@@ -2549,7 +2595,22 @@ def _icona(c):
     riga, dove si legge invece di doverla indovinare da un pittogramma.
     """
     for nome in (_nome_disciplina(c), G.slugify(_cat_macro(c))):
-        pronta = _icona_dal_file(nome) if nome else None
+        if not nome:
+            continue
+        # DENTRO UN GRADINO L'ILLUSTRAZIONE VINCE SUL DISEGNO, e fra i due
+        # gradini vince sempre il piu' specifico: atletica.svg batte
+        # movimento.webp, perche' la disciplina giusta conta piu' del formato.
+        # Se per lo stesso nome ci sono tutti e due i file lo si dice nel log:
+        # un .svg dimenticato accanto all'illustrazione non deve restare a
+        # chiedersi per mesi perche' non si vede.
+        raster = _icona_raster(nome)
+        if raster:
+            if _icona_dal_file(nome):
+                print(f"[genera_corsi] icona {nome}: c'e' sia l'illustrazione "
+                      f"sia il disegno a linea, uso l'illustrazione")
+            return (f'<img class="ev-ico" src="{G.esc(raster)}" alt="" '
+                    f'loading="lazy" decoding="async" width="60" height="60">')
+        pronta = _icona_dal_file(nome)
         if pronta:
             dentro, vb, piena = pronta
             classe = 'icon is-piena' if piena else 'icon'

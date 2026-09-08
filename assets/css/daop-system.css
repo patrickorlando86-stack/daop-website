@@ -127,6 +127,39 @@ p, li, .section-subtitle, .team-desc, .book-desc,
    deve sapere niente di tutto questo. */
 .icon.is-piena { fill: currentColor; stroke: none; }
 
+/* L'ILLUSTRAZIONE nel francobollo (08/09/2026). Il quadrato da 60px (52 sul
+   telefono) puo' contenere due cose diverse: una .icon a linea, che sta in
+   mezzo a 24px e prende il colore della categoria, oppure un disegno che il
+   quadrato lo RIEMPIE. Il secondo e' la stessa specie di cosa che l'agenda
+   mostra nella stessa posizione - la miniatura della locandina - ed e' la
+   ragione per cui e' arrivato: un simbolino in un quadratino era la cosa
+   fuori posto, non il disegno.
+
+   object-fit: contain e NON cover, che e' quello che usa .ev-thumb per le
+   locandine: una locandina si taglia dal bordo alto e non si perde niente
+   (il titolo sta in cima), a un disegno si taglierebbe la testa.
+
+   border-radius: inherit perche' un disegno che arriva a filo del bordo
+   spunterebbe dagli angoli tondi del quadrato.
+
+   Il colore di sfondo del quadrato resta quello della categoria e si vede
+   attraverso la trasparenza del PNG: e' il motivo per cui genera_icone.py
+   avvisa quando un'illustrazione arriva con lo sfondo pieno.
+
+   STA QUI E NON NEL <style> DI eventi.html, che _guscio() copia: la regola
+   servirebbe in ~470 pagine per usarla in una, e ogni pagina se la
+   riscaricherebbe: qui il .min.css lo scarica una volta e lo tiene in cache.
+   Nessun conflitto di specificita' da temere - .ev-ico non e' nominata in
+   nessun altro foglio, quindi l'ordine del <head> (che fra pagine scritte a
+   mano e pagine generate NON e' lo stesso) qui non decide niente. */
+.ev-thumb.is-ph .ev-ico {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: inherit;
+}
+
 .icon-lg { width: 2rem; height: 2rem; stroke-width: 1.5; }
 .icon-xl { width: 2.5rem; height: 2.5rem; stroke-width: 1.4; }
 

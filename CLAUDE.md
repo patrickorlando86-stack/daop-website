@@ -1460,6 +1460,212 @@ Le misure e le regole per chi ne mette uno a mano stanno in
 `200×200` Facebook e WhatsApp ignorano l'`og:image`, e la pagina girerebbe senza
 immagine.
 
+#### Il francobollo dei corsi: un'illustrazione, e il meccanismo che non bastava
+
+Due giorni, e vale la pena tenerli distinti perché il secondo è nato dal
+fallimento misurato del primo.
+
+**07/09/2026 — il meccanismo.** L'icona era una per FAMIGLIA, e su «Movimento»
+— che tiene dentro atletica, pallavolo, nuoto, calcio, psicomotricità e yoga —
+qualunque disegno dice una cosa precisa e sbagliata per tutte le altre: era una
+**bicicletta**, e sui 22 corsi dell'ASD Atletica Mondovì usciva il francobollo
+del ciclismo. Da lì le icone sono uscite dal codice e sono andate in una
+cartella (`assets/icone/`), con la possibilità di essere per **disciplina** e
+non solo per famiglia. La disciplina non si legge dal foglio così com'è — il
+secondo livello lo scrive il modello e cambia a ogni rilettura, otto diciture
+per quattro corsi nella sola famiglia Musica — quindi le parole le decide un
+dizionario nostro, `DISCIPLINE_ICONA`.
+
+**08/09/2026 — il meccanismo era vuoto.** Misurato: `assets/icone/` conteneva
+**solo il suo LEGGIMI**, zero disegni. Quindi tutto ricadeva sulla famiglia, in
+pagina c'erano **5 disegni distinti su 32 righe**, e **18 righe su 32
+mostravano ancora la bicicletta** — cioè il difetto che quel lavoro era andato
+a chiudere, aperto identico undici giorni dopo. La cosa da ricordare non è la
+bicicletta: **un meccanismo che aspetta un file che nessuno ha il compito di
+consegnare non ha chiuso niente**, è la stessa forma del footer che sapeva
+`@daop_cuneo` nel codice e non in pagina.
+
+##### Perché un'illustrazione e non un'icona a linea
+
+Non è gusto, ed è la misura che ha spostato la decisione: il francobollo è un
+quadrato da **60px** (52 sul telefono) e dentro ci stava una `.icon` da
+**24px**. Nella stessa posizione, sull'agenda, quel quadrato è **pieno**: 155
+righe su 156 portano la miniatura della locandina. Quindi la cosa fuori posto
+era l'icona, non l'illustrazione — un simbolino dentro un quadratino colorato
+assomigliava al resto del sito meno di quanto ci assomigli un disegno.
+
+E lì non si perde nessuna informazione di colore, che è l'argomento con cui la
+strada era stata chiusa: su `corsi.html` il colore è **uno solo per tutte le
+righe** (`ACCENTO`, `#5B9BD5` su tinta `#eef5fc`), non uno per categoria come
+in agenda. Il quadrato tinto resta e si vede **attraverso la trasparenza** del
+disegno: è il motivo per cui `genera_icone.py` urla quando un PNG arriva con lo
+sfondo pieno, e l'unico difetto che capiterà per davvero.
+
+**La locandina in quel francobollo NON si mette**, ed è la proposta che
+tornerà. Misurato: 32 righe portano una locandina, ma i file distinti sono
+**20** — le quattro sedi dell'atletica ripetono lo stesso volantino tre volte —
+quindi **12 righe su 32 mostrerebbero un doppione**. La regola operativa di
+NN/g sui francobolli è che devono essere «recognizably different from each
+other»: sui centri (9 righe, 9 file distinti) l'immagine distingue e va bene,
+sui corsi no.
+
+##### L'ordine, e perché è quello e non un altro
+
+Cinque gradini, dal più specifico al più generico, e **dentro ogni gradino
+l'illustrazione batte il disegno a linea**:
+
+`<disciplina>.webp` → `<disciplina>.svg` → `<famiglia>.webp` →
+`<famiglia>.svg` → il disegno in `ICONE_CAT` → `ICONA_ALTRO`.
+
+Quindi **`atletica.svg` batte `movimento.webp`: la disciplina giusta conta più
+del formato.** È l'unico ordine in cui aggiungere un'illustrazione di famiglia
+non può **peggiorare** una riga che aveva già la sua disciplina — l'ordine
+opposto (il formato prima del gradino) farebbe esattamente quel danno, e in
+silenzio. Se per lo stesso nome ci sono tutti e due i file lo si stampa nel
+log: un `.svg` dimenticato accanto all'illustrazione non deve restare mesi a
+chiedersi perché non si vede.
+
+Le altre decisioni che non si ricavano dal diff:
+
+- **Il PNG grande non va in pagina, e la divisione del lavoro è quella delle
+  miniature.** `scripts/genera_icone.py` legge `assets/icone/sorgenti/` — il
+  disegno come lo consegna chi lo fa, 1024×1024, un megabyte — e scrive il
+  `.webp` da **256px, 2-3 KB**. `genera_corsi.py` si limita a guardare se il
+  file c'è, esattamente come `loc_path()` con le miniature.
+- **256 e non 180.** Il quadrato è 60px, quindi 180 basterebbe a 3×: su un
+  disegno piatto la differenza è qualche centinaio di byte, e si sta larghi una
+  volta invece di riaprire l'argomento a ogni schermo nuovo.
+- **Webp con perdita o senza, lo decide il file.** Su un disegno piatto il
+  senza perdita spesso vince anche in peso, oltre a non sgranare i contorni; su
+  uno con sfumature vince l'altro. Si provano tutti e due e si tiene il più
+  piccolo — costa un decimo di secondo e toglie la domanda a chiunque la
+  rifaccia.
+- **I sorgenti si tengono in git**, e non è abitudine: un'illustrazione persa
+  si potrebbe rigenerare, ma la seconda volta **lo stile non torna** — che è
+  l'unica cosa capace di rovinare un set intero. Costa ~1 MB di blob per file,
+  una volta. Per la stessa ragione le icone si generano **tutte nella stessa
+  chat**, chiedendo «stesso stile dell'immagine precedente».
+- **Un raster buttato in `assets/icone/` viene SPOSTATO in `sorgenti/`**, e lo
+  si dice. Così l'unica cosa da ricordare resta quella del LEGGIMI — «butta il
+  file in quella cartella» — e chi si dimentica la sottocartella non resta con
+  un PNG da un megabyte servito ai lettori.
+- **`--sfondo-via` è opt-in e non gira in CI.** Toglie un fondo uniforme
+  partendo dai quattro angoli; non prende i buchi chiusi e può lasciare un
+  alone sul bordo. La cura vera è un sorgente trasparente, quindi quello è un
+  ripiego e si chiede a mano guardando il disegno, non una notte alla cieca.
+- **Il nome che il generatore non conosce si urla.** Un'illustrazione
+  disegnata, convertita, messa in cartella e chiamata `pallavolo-bella` non
+  compare in nessuna pagina: è il difetto più caro possibile qui, perché il
+  lavoro è già stato fatto. Lo dice `genera_icone.py` alla conversione e lo
+  ridice rossa la prova.
+- **Il vocabolario dei nomi si legge da `genera_corsi.py`**, non si ricopia:
+  due elenchi delle stesse parole divergono al primo ritocco.
+
+##### Il CSS sta in `daop-system.css`, e stavolta non è per il guscio
+
+`.ev-thumb.is-ph .ev-ico` (l'illustrazione che riempie il quadrato,
+`object-fit: contain` e **non** `cover` — una locandina si taglia dal bordo
+alto e non si perde niente, a un disegno si taglierebbe la testa).
+
+Il criterio scritto per `.eco` e `.mm-sep` era «sta lì perché compare anche su
+pagine che non passano da `_guscio()`». Qui **non vale**: `corsi.html` dal
+guscio ci passa. Vale un secondo criterio, e va scritto perché è quello che
+deciderà i prossimi casi: la regola servirebbe in **~470 pagine per usarla in
+una**, e ogni pagina se la riscaricherebbe inline — nel `.min.css` la si
+scarica una volta e resta in cache.
+
+E la trappola documentata per il footer a due contrasti **qui non scatta**:
+`.ev-ico` non è nominata in nessun altro foglio, quindi l'ordine del `<head>`
+— che fra pagine scritte a mano e pagine generate **non è lo stesso** — non
+decide niente. È la prima cosa da verificare la prossima volta, non da dare per
+scontata.
+
+##### Le prove, e una che passava verde
+
+`scripts/prova_icone_corsi.py` difende la catena a cinque gradini, la
+precedenza dell'illustrazione dentro il gradino, la vittoria del gradino più
+specifico sul formato, l'indirizzo **assoluto** dalla radice (le pagine realtà
+stanno in `/corsi/`: un relativo si romperebbe), `width`/`height` sull'`<img>`,
+e che togliendo tutti i file si torni **identico** a prima. Più due controlli
+sul `.min.css`, che prendono il guasto ricorrente: `daop-system.css` modificato
+e `build_css.py` non rilanciato.
+
+Verificate rosse rimettendo **sei** difetti uno alla volta. Una passava verde,
+e l'errore è istruttivo: cercava la stringa `.ev-thumb.is-ph .ev-ico` nel CSS,
+e rinominando la regola in `.ev-ico-NO` la stringa **c'era ancora** — un nome
+più lungo contiene quello giusto. Ora si cerca il selettore col suo `{`
+attaccato. **Una prova che non si è vista fallire non è una prova**, ed è la
+seconda volta che questo repo lo scopre nello stesso modo (la prima fu il
+contrasto del footer, dove la versione che guardava la sola `eventi.html`
+passava col difetto rimesso).
+
+Una cosa è deliberatamente una **nota e non una prova**: «ogni illustrazione ha
+il suo sorgente in `sorgenti/`». Un `.webp` messo a mano e mai passato da
+`genera_icone.py` è uno stato legittimo, e una prova rossa quando il sito è
+giusto è l'inciampo che qui si è già pagato sei volte.
+
+##### Nel workflow
+
+`genera_icone.py` gira **dopo `genera_miniature.py` e prima di
+`genera_corsi.py`**, per la stessa ragione delle miniature: quello guarda solo
+se il file c'è, quindi un disegno arrivato stanotte entra nelle card già
+convertito. Non serve la rete, e senza sorgenti nuovi non fa niente.
+
+Nell'elenco dei file committati c'è **la cartella** `assets/icone/` e non un
+elenco di file: un'illustrazione nuova nasce untracked e
+`git status --untracked-files=no` non la vedrebbe. È la ragione già scritta per
+`corsi/`, `guide/` e `idee/`.
+
+**Il giorno in cui è stato scritto tutto questo, in pagina non è cambiato
+niente**: senza nessun file in cartella `corsi.html` esce **identica** (il
+generatore lo dice: «corsi.html invariata — 32 corsi»). È il comportamento
+voluto — la strada nuova dorme finché non arriva un disegno — ma vuol dire
+anche che **le 18 righe con la bicicletta sono ancora lì**, e a chiuderle
+serve un file, non una riga di codice. Vedi sopra: è già capitato una volta.
+
+##### Cosa resta aperto, misurato l'08/09/2026
+
+Sono i tre difetti trovati studiando l'uniformità dei francobolli e delle
+locandine su tutto il sito, e **nessuno dei tre è stato toccato**. Stanno qui
+perché i numeri costano mezz'ora di misura e senza scriverli si ricomincia da
+zero.
+
+- **757 KB per nove francobolli da 60px su `centri-estivi.html`.** Quella
+  pagina serve gli **originali**: i 9 JPG fanno 775.178 byte (47-130 KB l'uno)
+  misurati uno per uno con HEAD, contro ~123 KB di miniature (media 13,6 KB) —
+  **−84%**, sullo stesso bucket Supabase da 5 GB/mese. La causa non è una
+  dimenticanza nel generatore: quelle 9 sono **le sole locandine del sito senza
+  miniatura** (su 384 citate, 375 ce l'hanno), perché `genera_miniature.py`
+  legge solo `data/eventi.json`. Anche mettendo `mini=True` in
+  `genera_centri.py`, `loc_path()` ripiegherebbe in silenzio sull'originale. Il
+  pezzo che risolve **esiste dal 07/09**: `data/locandine-usate.json`, che
+  legge gli HTML veri e quindi copre centri, corsi e qualunque pagina futura
+  senza nessun elenco da tenere aggiornato. Arriva con un giro di ritardo, che
+  è il patto già accettato per `data/luoghi-comuni.json`.
+- **`width="900" height="1200"` sull'`.ev-loc` di 522 schede evento è sbagliato
+  per 462 immagini su 462.** Misurate le proporzioni delle miniature, che le
+  conservano: **428 sono 9:16** (formato storia), 21 quadrate, 12 ~5:7,
+  **nessuna 3:4**. Il browser riserva 420×560 e poi disegna 420×747 (**+187px**)
+  o 420×420 (**−140px**): salto di layout sulle pagine che fanno il 77% dei
+  clic. Il rapporto vero si ricava dalla miniatura, che è già su disco — zero
+  richieste di rete. Da guardare insieme: un 9:16 a 420px viene alto 747px,
+  cioè su un telefono una schermata intera di volantino.
+- **`luoghi.html` è l'ultima superficie a emoji: 881 righe, 74 emoji
+  distinte**, e dentro **21 righe con 🇬🇧**, che su Chrome/Windows stampa la
+  scritta «GB» (Segoe UI Emoji non ha le legature delle bandiere, e Chromium
+  usa il font di sistema). È parola per parola il difetto che il 28/08 ha fatto
+  uscire le emoji dai corsi, qui su 881 righe invece di 32. Più 14 righe con 🛝
+  (Emoji 14), che su Android vecchi è un rettangolo vuoto.
+
+E un quarto, di vocabolario più che di peso: **il segnaposto dice cinque cose
+diverse** — categoria (agenda, dallo sprite), **calendario sempre** (pagine
+comune e landing), **sole sempre** (centri, anche per quelli di Natale e di
+Pasqua), disciplina (corsi), categoria-come-emoji (luoghi). Il motivo storico è
+uno solo e vale solo per l'agenda: le altre pagine non hanno lo sprite inline,
+quindi `<use href="#i-party">` disegnerebbe il vuoto. Ma **`genera_corsi.py`
+quel problema l'ha già risolto** scrivendo i disegni per esteso (`ICONE_CAT`):
+la soluzione è in casa, in un posto solo, e non è arrivata alle altre.
+
 #### `CORSI_IN_INDICE`: spento il 21/08/2026, **riacceso il 28/08**
 
 `corsi.html` è **in indice dal 28/08/2026**. Era fuori dal 21/08 perché Giovanni

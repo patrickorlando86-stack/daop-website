@@ -53,6 +53,19 @@ jobs:
         # loc_path() ripiega sull'originale e la pagina esce comunque.
         run: python scripts/genera_miniature.py
 
+      - name: Genera icone dei corsi
+        # Normalizza le illustrazioni del francobollo: da assets/icone/sorgenti/
+        # (il PNG grande come lo consegna chi lo disegna) al .webp da 256px che
+        # va in pagina. Stessa divisione del lavoro delle miniature, e stessa
+        # ragione per stare QUI: genera_corsi.py guarda solo se il file c'e',
+        # quindi un disegno arrivato stanotte entra nelle card gia' convertito.
+        #
+        # Non serve la rete e non fallisce niente: senza sorgenti nuovi non fa
+        # nulla, e un file illeggibile lascia in pagina quello di prima.
+        # --sfondo-via NON si mette in CI: e' un giudizio, e lo si da' a mano
+        # guardando il disegno.
+        run: python scripts/genera_icone.py
+
       - name: Genera eventi
         # NON passiamo piu' EVENTI_CSV_URL: quel secret (CSV "Pubblica sul web")
         # veniva servito in cache da Google e faceva rigenerare dati vecchi. Lo
@@ -256,7 +269,7 @@ jobs:
                 data/guide.json data/realta-pagine.json \
                 data/locandine-usate.json \
                 eventi/ rubriche/ corsi/ guide/ idee/ \
-                assets/miniature/ assets/loghi/"
+                assets/miniature/ assets/loghi/ assets/icone/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
           # data/luoghi.json nasce solo quando il tab "Luoghi" del foglio
