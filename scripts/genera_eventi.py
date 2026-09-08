@@ -81,8 +81,12 @@ PROVINCE_IG = {
     # diventata @daop_cuneo con Giovanni curatore. Il flag 'nostra' non e' un
     # dettaglio grafico: girandolo, zone.html, le firme delle schede e le pagine
     # di provincia smettono da sole di scrivere "una pagina che non e' nostra".
-    # Nessun Facebook: quello che non c'e' non si stampa.
+    # Il Facebook e' arrivato l'08/09/2026: fino a quel giorno la riga non ce
+    # l'aveva, e la voce non si stampava ne' nel footer ne' nella card della
+    # home - "quello che non c'e' non si inventa". Aggiunto qui, le due
+    # superfici lo prendono da se': e' l'unico posto dove i profili vivono.
     'CN': {'ig': 'daop_cuneo', 'nostra': True,
+           'fb': 'https://www.facebook.com/daopcuneo',
            'curatore': 'Giovanni'},
 }
 
