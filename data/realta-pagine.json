@@ -1,10 +1,22 @@
 {
- "compagnia-santibriganti-teatro": {
-  "nome": "Compagnia Santibriganti Teatro",
-  "url": "/corsi-prova/compagnia-santibriganti-teatro.html"
+ "asd-atletica-mondovi-acqua-s-bernardo": {
+  "nome": "ASD Atletica Mondovì - Acqua S. Bernardo",
+  "url": "/corsi/asd-atletica-mondovi-acqua-s-bernardo.html"
  },
- "pgs-roccavione": {
-  "nome": "PGS Roccavione",
-  "url": "/corsi-prova/pgs-roccavione.html"
+ "carezza": {
+  "nome": "CàRezza",
+  "url": "/corsi/carezza.html"
+ },
+ "crome-in-movimento-aps": {
+  "nome": "Crome in Movimento APS",
+  "url": "/corsi/crome-in-movimento-aps.html"
+ },
+ "deborah-dalmasso": {
+  "nome": "Deborah Dalmasso",
+  "url": "/corsi/deborah-dalmasso.html"
+ },
+ "teatranza": {
+  "nome": "Teatranza",
+  "url": "/corsi/teatranza.html"
  }
 }
