@@ -339,10 +339,30 @@ Sono 7.467 su 7.676 totali. **Il numero alto di eventi per sessione è il nostro
 `scroll_depth` a quattro soglie, non un difetto**: se un giorno risalta di nuovo,
 la verifica è questa e non serve rifare l'indagine.
 
-Una pulizia che resta da fare: `scroll` (106 eventi) è l'evento **automatico** di
-GA4 e duplica il nostro. Il commento in `daop-track.js` lo prevedeva già —
-Amministratore → Flussi di dati → il flusso web → **Misurazione avanzata** →
-togliere "Scorrimenti". Meno rumore, e meno benzina per gli avvisi "anomalia".
+**Fatto l'08/09/2026: non c'è più niente da pulire qui.** Erano i due eventi
+automatici di GA4 che duplicavano i nostri — `scroll` (che scatta al 90% e
+copriva male quello che `scroll_depth` misura a quattro soglie) e `click`, i
+"clic in uscita". Spenti tutti e due da Amministratore → Flussi di dati → il
+flusso web → **Misurazione avanzata**.
+
+Il secondo è quello che valeva di più, e la ragione sta in `nome_evento()`: in
+fondo c'è un **ramo generico** — qualunque link `http(s)` fuori da `daop.it` che
+non è già riconosciuto diventa `click_sito_organizzatore` — quindi ogni clic in
+uscita aveva già un nome nostro, con `event_city` e `organizer_id` attaccati, e
+l'automatico ne faceva un secondo senza parametri. 332 eventi contati due volte
+nella finestra letta quel giorno.
+
+**Restano accese apposta**: «Visualizzazioni di pagina» (GA4 non la fa spegnere,
+ed è il `page_view`) e **«Ricerca su sito»** — dal 25/08 l'agenda scrive `?q=`
+nell'URL, quindi `view_search_results` misura chi apre un link filtrato
+condiviso, ed è l'unico modo che abbiamo di sapere se quella funzione viene
+usata. Modulo, video e download fanno 1, 0 e 0 eventi: inerti.
+
+**Aspettati uno scalino negli eventi per sessione**, e non è un calo di
+traffico. È il gemello del 12/08 nel verso opposto, e vale la stessa regola: se
+GA4 permette un'annotazione su quella data, mettila. `scripts/leggi_ga4.py`
+stampa l'avviso solo se `scroll` è ancora sopra zero, quindi la verifica si fa
+da sé alla lettura dopo.
 
 #### Le dimensioni personalizzate sono undici, e sono tutte registrate
 
@@ -826,10 +846,10 @@ Attenzione al periodo: `percent_scroll` esiste dal 15/08, quindi una finestra
 che parte prima mescola quattro giorni di dettaglio con giorni di `(not set)` e
 il rapporto esce sbagliato — la riga `(not set)` è il campanello.
 
-Due eventi automatici di GA4 sporcano questa tabella e sono gli stessi di cui si
-parla più sopra: **`scroll`** (50) e **`click`** (46, i "clic in uscita", che
-duplicano in parte i nostri `click_*`). Si spengono da Amministratore → Flussi
-di dati → il flusso web → **Misurazione avanzata**.
+Due eventi automatici di GA4 sporcavano questa tabella — **`scroll`** (50) e
+**`click`** (46, i "clic in uscita") — e **dall'08/09/2026 sono spenti tutti e
+due**: vedi «Fatto l'08/09/2026» più sopra. Una lettura che li ritrova sta
+guardando giorni precedenti a quella data, non un interruttore riacceso.
 
 **Il messaggio del giovedì non esiste più.** Lo scriveva `messaggio_canale()`
 in `data/messaggio-canale.txt`, perché WhatsApp non ha API pubbliche per
