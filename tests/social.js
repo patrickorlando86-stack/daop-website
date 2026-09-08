@@ -142,6 +142,51 @@ module.exports = async function (browser) {
         : `${f}: nessun profilo nel footer che il codice non conosca`);
   }
 
+  // LE CARD DELLA HOME. Secondo elenco di province scritto a mano su
+  // index.html, e secondo giro dello stesso difetto: l'08/09/2026 le card
+  // erano due - Alessandria e Asti - con Cuneo aperta dal 04/08 e presente in
+  // PROVINCE_IG. Il footer di quella stessa pagina la nominava, la sezione
+  // "Seguici" no, e nessuna prova guardava li'. Adesso il blocco lo compone
+  // blocco_social_home(): questa prova guarda che il marker ci sia ancora e
+  // che dica quello che dice la mappa.
+  {
+    const nomi = {};
+    const mn = (leggi('scripts/genera_eventi.py')
+      .match(/^PROVINCE_NOMI\s*=\s*\{([^}]*)\}/m) || [])[1] || '';
+    for (const m of mn.matchAll(/'([A-Z]{2})':\s*'([^']+)'/g)) nomi[m[1]] = m[2];
+    const blocco = (leggi('index.html').match(
+      /HOME-SOCIAL:START -->([\s\S]*?)<!-- HOME-SOCIAL:END/) || [])[1] || '';
+    r.ok(blocco !== '',
+      blocco !== '' ? 'index.html: le card social stanno fra i marker HOME-SOCIAL'
+        : "index.html: il marker HOME-SOCIAL non c'è più, le card sono tornate a mano");
+    const citta = [...blocco.matchAll(/class="social-city">([^<]*)</g)].map((m) => m[1].trim());
+    const mancano = attesi.filter((p) => !citta.includes(nomi[p.sigla]));
+    r.ok(blocco !== '' && mancano.length === 0, mancano.length
+      ? `index.html: nella sezione "Seguici" manca la card di ${mancano.map((p) => nomi[p.sigla]).join(', ')}`
+      : `index.html: ogni provincia pubblicata ha la sua card (${citta.join(', ')})`);
+    // Il verso opposto: una card che nomina una provincia che il codice non ha.
+    const attese = new Set(attesi.map((p) => nomi[p.sigla]));
+    const estranee = citta.filter((c) => !attese.has(c));
+    r.ok(estranee.length === 0, estranee.length
+      ? `index.html: c'è la card di ${estranee.join(', ')}, che PROVINCE_PUBBLICATE non ha`
+      : 'index.html: nessuna card di una provincia che il codice non pubblica');
+    // Facebook nei DUE versi: c'e' dove la mappa lo ha, e non c'e' dove no.
+    // Cuneo non ce l'ha, e "quello che manca non si inventa".
+    const pezzi = blocco.split('<div class="social-group-card').slice(1);
+    const male = attesi.filter((p) => {
+      const card = pezzi.find((c) => c.includes('instagram.com/' + p.ig)) || '';
+      return p.fb ? !card.includes('facebook.com') : card.includes('facebook.com');
+    });
+    r.ok(male.length === 0, male.length
+      ? `index.html: il bottone Facebook non segue la mappa per ${male.map((p) => nomi[p.sigla]).join(', ')}`
+      : "index.html: Facebook solo dove PROVINCE_IG ce l'ha (Cuneo non ce l'ha)");
+    // Nessuna icona accanto al nome della provincia (Patrick, 08/09/2026):
+    // erano decorazione, e per la terza si sarebbe dovuto inventare un
+    // simbolo di Cuneo.
+    r.ok(!/class="social-city">[^<]*<svg/.test(blocco) && !blocco.includes('<use'),
+      'index.html: nessuna icona decorativa nel titolo delle card');
+  }
+
   // I marker del guscio non devono sopravvivere in una pagina generata. E' il
   // difetto gia' preso DUE volte da tests/porte.js - coi centri e poi identico
   // coi corsi - e il terzo marker e' questo.
