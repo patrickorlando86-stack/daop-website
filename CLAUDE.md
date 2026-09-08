@@ -374,9 +374,9 @@ dimensione:
 
 | parametro | su quali eventi | cosa risponde |
 |---|---|---|
-| `event_city` | tutti | **in quali comuni è il pubblico** |
-| `event_province` | tutti | idem, per provincia |
-| `event_title` | tutti | quale scheda genera azioni, non solo visite |
+| `event_city` | i **clic**, non le visite (vedi la correzione sotto) | **da quali comuni nascono le azioni** |
+| `event_province` | idem | idem, per provincia |
+| `event_title` | i clic | quale scheda genera azioni, non solo visite |
 | `metodo_posizione` | `vicino_a_me` | gps / comune / gradino |
 | `raggio_km` | `vicino_a_me` | 10, 20, 30, 50 — **dimensione, non metrica** |
 | `percent_scroll` | `scroll_depth` | 25/50/75/100 |
@@ -392,9 +392,40 @@ registra e basta, non c'è niente da scegliere.
 **Le prime due valgono più delle altre cinque insieme, e non per il "vicino a
 me".** `event_city` è la risposta alla domanda che farà ogni cliente di
 `luoghi.html`: oggi si può dire "il sito fa 4.878 clic in tre mesi", con quella
-dimensione si dice a un posto di Ovada *quanti dei lettori guardano cose a
-Ovada*. È il primo pezzo di evidenza vendibile, e **il dato c'è dal 12 agosto**:
-non è più una cosa da preparare, è una cosa da leggere.
+dimensione si dice a un posto di Ovada *quante azioni deliberate nascono da una
+pagina su Ovada*. È il primo pezzo di evidenza vendibile, e **il dato c'è dal 12
+agosto**: non è più una cosa da preparare, è una cosa da leggere.
+
+**CORREZIONE dell'08/09/2026, la prima volta che quella dimensione è stata
+letta davvero.** La tabella qui sopra diceva «su quali eventi: **tutti**», e la
+riga qui sopra prometteva *«quanti dei lettori guardano cose a Ovada»*. Misurato
+incrociando `eventName` con `event_city` su 28 giorni:
+
+| | senza `event_city` | con |
+|---|---|---|
+| `page_view` | **13.098** | **0** |
+| `scroll_depth` | **11.577** | **0** |
+| `click_come_arrivare` | 19 | 170 |
+| `aggiungi_calendario` | 13 | 48 |
+| `apri_ginetto` | 11 | 21 |
+
+**`event_city` non sta sulle visite: sta sui clic.** La manda
+`contesto_riga()`/`nome_evento()` di `daop-track.js`, che girano sul clic —
+`page_view` lo manda `cookie-consent.js`, che dei meta della riga non sa niente.
+Quindi *«quanti leggono cose a Ovada»* **non lo misura nessuno**, e prometterlo
+a un cliente è una frase che il primo controllo smonta.
+
+**Quello che misura è più difficile da contestare, non meno**: non «quanti
+hanno guardato» ma «quanti hanno **chiesto le indicazioni**, salvato la data,
+telefonato» per un evento a Ovada. Per vendere è il numero migliore dei due — è
+solo un altro numero, e va detto con le sue parole.
+
+**E si legge per utenti, mai per eventi.** Prima riga della prima lettura vera:
+«Vezza d'Alba, 41 eventi, **4 utenti**» — dieci a testa, cioè noi che proviamo
+il sito. È la regola dei 2,5 già scritta per le pagine, e qui vale davvero
+proprio perché `event_city` sta solo sui clic: le azioni deliberate di una
+persona vera sono una o due, non dieci. `scripts/leggi_ga4.py` marca quelle
+righe da sé e le toglie dal totale «al netto».
 
 **Non sono retroattive**, ed è il motivo per cui la data di creazione conta più
 della dimensione stessa: quello raccolto prima resta invisibile per sempre.
@@ -2275,9 +2306,19 @@ fogli, ogni volta con gli stessi conti riscritti. Dall'**08/09/2026** quei conti
 stanno in uno script, e le letture nuove partono da lì.
 
 ```bash
-python3 scripts/leggi_gsc.py gsc/2026-09-09     # cartella, zip o xlsx
-python3 scripts/leggi_gsc.py                    # l'ultima cartella in gsc/
+python3 scripts/leggi_settimana.py gsc/2026-09-09   # tutte e due le meta'
+python3 scripts/leggi_settimana.py                  # l'ultima cartella in gsc/
+python3 scripts/leggi_gsc.py gsc/2026-09-09         # solo Search Console
+python3 scripts/leggi_ga4.py gsc/2026-09-09         # solo GA4
 ```
+
+**Le meta' sono due e rispondono a due domande diverse**: Search Console dice
+**chi ci trova**, GA4 dice **cosa fanno quelli che sono arrivati**. Stanno in due
+file perche' una settimana in cui GA4 non si scarica non deve portarsi giu'
+anche la lettura di Search Console, che funzionerebbe benissimo;
+`leggi_settimana.py` le fa girare tutte e due **in quest'ordine**, perche' la
+copertura GA4/GSC si calcola contro i clic di Search Console e vuole il suo
+`Grafico.csv` gia' in cartella.
 
 Stampa il cruscotto (pavimento feriale, CTR delle schede, quote, brand,
 bambini), le famiglie di pagine, le pagine che gonfiano le impressioni senza
@@ -2303,15 +2344,27 @@ si confrontano, e lo script se ne accorge da sé: legge la finestra da
 
 #### Il downloader scarica, il sito legge
 
-`scarica_gsc.py` sta nel repo del **downloader** e la sezione «Search Console»
-della sua finestra ha il bottone che lo lancia (3-4 secondi). Sta lì perché lì
-ci sono le chiavi: il service account `daop-script@…` che usano già 29 script di
-quella cartella. In questo repo non entra — `leggi_gsc.py` gira offline, non sa
-niente di Google, e funziona identico sui file scaricati a mano. Il ripiego è la
-stessa strada, quindi non marcisce.
+`scarica_gsc.py` e `scarica_ga4.py` stanno nel repo del **downloader**, e la
+sezione «Search Console» della sua finestra ha il bottone che li lancia tutti e
+due (~10 secondi). Stanno lì perché lì ci sono le chiavi: il service account
+`daop-script@…` che usano già 29 script di quella cartella. In questo repo non
+entrano — i lettori girano offline, non sanno niente di Google, e funzionano
+identici sui file scaricati a mano. Il ripiego è la stessa strada, quindi non
+marcisce.
 
-Lo scaricatore scrive gli **stessi sei fogli** dell'export a mano, più
-`DataPagina.csv`.
+`scarica_gsc.py` scrive gli **stessi sei fogli** dell'export a mano, più
+`DataPagina.csv`. `scarica_ga4.py` scrive i suoi `ga4-*.csv` e **prende la
+finestra da `Grafico.csv`**, cioè da quello che GSC ha appena scaricato: se
+ognuno prendesse «i suoi ultimi 28 giorni», GA4 ne avrebbe due in più (non ha il
+ritardo di Search Console) e per giunta due di weekend — e il rapporto di
+copertura verrebbe calcolato su giorni diversi, che è **esattamente** l'errore da
+cui è nato il «70%» poi corretto in «38%».
+
+Le tre API da tenere accese nel progetto Cloud `dove-andiamo-oggi-papi`:
+**Search Console API**, **Analytics Data API**, **Analytics Admin API**. Più due
+permessi, uno per prodotto: il service account utente della proprietà in Search
+Console, e Visualizzatore della proprietà GA4 `properties/486532604`. Se manca
+qualcosa gli script lo dicono con le parole del menù, invece di un 403 nudo.
 
 #### Due cose che l'export a mano non può dare, e sono costate due conclusioni sbagliate
 

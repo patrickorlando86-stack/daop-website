@@ -1,0 +1,27 @@
+{
+ "letture": [
+  {
+   "fine": "2026-09-06",
+   "inizio": "2026-08-10",
+   "utenti": 7101,
+   "sessioni": 8006,
+   "viste": 13098,
+   "pagine_sessione": 1.64,
+   "copertura": 40.3,
+   "ev_click_come_arrivare": 189,
+   "ev_click_telefono": 23,
+   "ev_click_email": 7,
+   "ev_click_locandina": 174,
+   "ev_click_sito_organizzatore": 20,
+   "ev_click_social": 17,
+   "ev_aggiungi_calendario": 61,
+   "ev_apri_ginetto": 32,
+   "ev_apri_corso": 129,
+   "ev_iscrizione_canale": 28,
+   "ev_vicino_a_me": 77,
+   "ev_scroll_depth": 11577,
+   "ginetto_pre": 26,
+   "ginetto_post": 6
+  }
+ ]
+}

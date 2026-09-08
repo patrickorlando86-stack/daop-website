@@ -650,7 +650,15 @@ def storico_precedente(ultimo, dich):
 
 
 def salva_lettura(ora):
-    letture = [l for l in _tutte() if l.get('ultimo') != ora['ultimo']]
+    # La chiave e' (ultimo giorno, FINESTRA), non il solo giorno. Con la sola
+    # data, un export a 28 giorni e uno a 3 mesi che finiscono lo stesso giorno
+    # si sovrascrivono - ed e' successo davvero l'08/09/2026: salvando il 28
+    # giorni ho perso la lettura a 3 mesi di poche ore prima, in silenzio.
+    # Sono due serie diverse (il confronto le tiene gia' separate per finestra),
+    # quindi devono poter convivere.
+    chiave = (ora['ultimo'], ora.get('finestra'))
+    letture = [l for l in _tutte()
+               if (l.get('ultimo'), l.get('finestra')) != chiave]
     letture.append(ora)
     letture.sort(key=lambda l: l['ultimo'])
     STORICO.parent.mkdir(parents=True, exist_ok=True)
@@ -695,11 +703,30 @@ def soglie(ora, prec):
 
 
 def ultima_cartella():
+    """La cartella scaricata piu' di recente, per data dei FILE.
+
+    Non l'ultima in ordine alfabetico, che e' la cosa ovvia e sbagliata: le
+    cartelle si chiamano col mercoledi' della settimana, quindi scaricando di
+    martedi' i file freschi finiscono in `2026-09-02` mentre in giro c'e' ancora
+    `2026-09-07` da un export vecchio - e alfabeticamente vince quello. Preso
+    davvero l'08/09/2026 alla prima prova: la lettura diceva numeri di due
+    giorni prima senza che niente sembrasse storto.
+
+    Il nome della cartella e' un'etichetta; quello che dice qual e' l'ultimo
+    scarico e' quando sono stati scritti i file.
+    """
     base = RADICE / 'gsc'
     if not base.is_dir():
         return None
-    c = sorted([d for d in base.iterdir() if d.is_dir()])
-    return c[-1] if c else None
+    cand = []
+    for d in base.iterdir():
+        if not d.is_dir():
+            continue
+        file = [f for f in d.iterdir()
+                if f.suffix.lower() in ('.csv', '.xlsx', '.zip')]
+        if file:
+            cand.append((max(f.stat().st_mtime for f in file), d))
+    return max(cand)[1] if cand else None
 
 
 def main(argv):
