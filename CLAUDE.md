@@ -8,8 +8,23 @@
 >
 > (Dal 05/09/2026 esiste UNO specchio, e uno solo: `docs/TODO.md` nel repo
 > `mappaDAOP/mobile`, allineato nei due sensi da `scripts/sync-github.ps1`. Serve
-> a leggere e aggiornare il TODO dal telefono, dove il repo del downloader non
-> arriva perche' e' locale e senza remote. Qui nel sito NON se ne fa una copia.)
+> a leggere e aggiornare il TODO dal telefono. Qui nel sito NON se ne fa una
+> copia.)
+>
+> **Correzione dell'08/09/2026: il downloader NON e' piu' «locale e senza
+> remote».** Qui c'era scritto che lo specchio serve perche' quel repo sul
+> telefono non arriva, «perche' e' locale e senza remote». Ha un remote —
+> `patrickorlando86-stack/daop-downloader`, privato, **creato il 05/09/2026**,
+> cioe' lo stesso giorno in cui e' stata scritta la riga che lo negava. Il repo
+> era nato locale davvero (il suo primo commit, 14/08, dice «repo LOCALE, niente
+> remote») e la giustificazione e' invecchiata in giornata.
+>
+> **Cosa cade e cosa no.** Cade il *motivo*: il TODO del downloader adesso si
+> legge da GitHub anche dal telefono, quindi lo specchio non e' piu' l'unica
+> strada. **Non cade la regola**, che e' l'unica cosa che conta qui: la lista e'
+> una, lo specchio e' uno, e in questo repo non se ne fa una copia. Se un giorno
+> lo specchio si vuole togliere, e' una decisione da prendere guardando com'e'
+> comodo aggiornarlo dal telefono — non una conseguenza di questa correzione.
 
 
 Sito statico su GitHub Pages (`main` → daop.it). Niente build, niente framework:
