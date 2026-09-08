@@ -1,0 +1,38 @@
+{
+ "letture": [
+  {
+   "ultimo": "2026-09-05",
+   "finestra": "Ultimi 28 giorni",
+   "giorni": 28,
+   "clic": 17244,
+   "impressioni": 242795,
+   "ctr_schede": 8.01,
+   "quota_schede": 77.47,
+   "pavimento": 511.8,
+   "pavimento_sett": "2026-08-24",
+   "ctr_aggregato": 7.1,
+   "ctr_pulito": 8.01,
+   "gonfie_quota_impr": 20.6,
+   "brand_clic": 13,
+   "daop_clic": 13,
+   "bambini_impr": 32
+  },
+  {
+   "ultimo": "2026-09-06",
+   "finestra": "Ultimi 3 mesi",
+   "giorni": 92,
+   "clic": 19640,
+   "impressioni": 294223,
+   "ctr_schede": 7.51,
+   "quota_schede": 77.44,
+   "pavimento": 433.5,
+   "pavimento_sett": "2026-08-31",
+   "ctr_aggregato": 6.68,
+   "ctr_pulito": 7.89,
+   "gonfie_quota_impr": 24.1,
+   "brand_clic": 24,
+   "daop_clic": 23,
+   "bambini_impr": 39
+  }
+ ]
+}

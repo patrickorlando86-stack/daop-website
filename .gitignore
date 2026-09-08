@@ -11,3 +11,10 @@ assets/eventi/*
 # Le prove di fumo (tests/) girano con Playwright: le dipendenze si
 # reinstallano da package-lock.json, non si committano.
 tests/node_modules/
+
+# Gli export di Search Console: restano sul PC, non in git.
+# Sono ~1 MB a settimana (50 MB l'anno) e servono solo a rifare un conto
+# vecchio. Quello che serve ai confronti e' data/gsc-storico.json, che sono
+# poche righe per lettura ed e' tracciato. E' la stessa divisione delle
+# locandine: il pesante fuori, il derivato leggero dentro.
+gsc/

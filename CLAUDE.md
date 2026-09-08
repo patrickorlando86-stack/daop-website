@@ -2253,6 +2253,76 @@ precedenza da decidere. `link_landing()` invece apre prima — dal 1° ottobre p
 Halloween — perché una voce in una riga di scorciatoie costa meno di una riga in
 evidenza.
 
+### Leggere un export di Search Console: `scripts/leggi_gsc.py`
+
+Le letture qui sotto sono decine di tabelle ricavate a mano dagli stessi sette
+fogli, ogni volta con gli stessi conti riscritti. Dall'**08/09/2026** quei conti
+stanno in uno script, e le letture nuove partono da lì.
+
+```bash
+python3 scripts/leggi_gsc.py gsc/2026-09-09     # cartella, zip o xlsx
+python3 scripts/leggi_gsc.py                    # l'ultima cartella in gsc/
+```
+
+Stampa il cruscotto (pavimento feriale, CTR delle schede, quote, brand,
+bambini), le famiglie di pagine, le pagine che gonfiano le impressioni senza
+convertire, i comuni, le query per tema, i giorni e le settimane — e in fondo
+dice **se questa settimana merita una sezione qui dentro**. Se no, non la si
+scrive: dodici sezioni quasi identiche e questo file non lo rilegge più nessuno.
+
+**I CSV grezzi non si leggono più.** Sono ~50.000 token contro i ~2.000
+dell'uscita, ma la ragione forte è un'altra: le stesse aggregazioni riscritte a
+mano ogni settimana sbagliano in modi nuovi ogni settimana — il «70% di
+copertura» che era il 38% e il «picco l'8 agosto» dichiarato due volte nascono
+tutti e due così.
+
+**La cadenza è il mercoledì, non la domenica**, e non è una preferenza: Search
+Console ha 2-3 giorni di ritardo, quindi un export scaricato di domenica chiude
+al giovedì e **il weekend appena passato non c'è** — cioè manca la parte dove
+sta il traffico. Di mercoledì chiude al lunedì e la settimana lun-dom è intera.
+
+**La finestra è sempre «Ultimi 28 giorni».** Due export con finestre diverse non
+si confrontano, e lo script se ne accorge da sé: legge la finestra da
+`Filtri.csv`, la confronta con la lettura precedente in `data/gsc-storico.json` e
+**spegne il confronto** invece di stampare percentuali senza senso.
+
+#### Il downloader scarica, il sito legge
+
+`scarica_gsc.py` sta nel repo del **downloader** e la sezione «Search Console»
+della sua finestra ha il bottone che lo lancia (3-4 secondi). Sta lì perché lì
+ci sono le chiavi: il service account `daop-script@…` che usano già 29 script di
+quella cartella. In questo repo non entra — `leggi_gsc.py` gira offline, non sa
+niente di Google, e funziona identico sui file scaricati a mano. Il ripiego è la
+stessa strada, quindi non marcisce.
+
+Lo scaricatore scrive gli **stessi sei fogli** dell'export a mano, più
+`DataPagina.csv`.
+
+#### Due cose che l'export a mano non può dare, e sono costate due conclusioni sbagliate
+
+Tutte e due scoperte l'08/09/2026, poche ore dopo aver scritto le conclusioni che
+hanno smontato. Valgono più dello script.
+
+- **`Query.csv` si ferma a 1.000 righe ordinate per clic.** L'API ne dà 4.317
+  sulla stessa finestra, e **3.300 hanno zero clic**. Non è un campione casuale:
+  taglia esattamente le query che prendono impressioni e nessun clic, cioè la
+  forma di una famiglia **che non hai ancora vinto**. Chiedere all'export se una
+  domanda nuova ti trova è chiederlo allo strumento fatto per non fartelo
+  vedere. È così che «per bambini» risultava 42 impressioni invece di 357.
+- **Nessun foglio incrocia le dimensioni**: `Pagine` non ha le date. Quindi
+  «questa pagina quando ha cominciato a prendere impressioni?» non ha risposta,
+  e senza quella risposta un numero che si muove si attribuisce alla prima causa
+  plausibile. È così che le 24.244 impressioni del Palio erano state date al fix
+  del 02/09, quando la pagina era semplicemente **nata il 31/08**.
+
+Da cui la regola: **prima di attribuire a una correzione un numero che si è
+mosso, si guardano `data × pagina` e `git log --diff-filter=A`.** Insieme costano
+due minuti, e sono le due cose che l'export non sa dirti.
+
+Gli export scaricati stanno in `gsc/AAAA-MM-GG/` e **non sono in git** (~1 MB a
+settimana): quello che serve ai confronti è `data/gsc-storico.json`, che è poche
+righe per lettura ed è tracciato.
+
 ### Il traffico sono le schede, e i loro URL non scadono
 
 Misurato sull'export di Search Console del 17/08/2026 (tre mesi, 16/05–15/08):
@@ -2868,6 +2938,15 @@ non vadano contate come pubblico mancato da recuperare.
 
 **Il Palio invece era un difetto vero, ed è chiuso.** Vedi qui sotto.
 
+**Le 8.673 impressioni sono diventate 38.171 una settimana dopo, e la regola
+regge identica.** Nell'export dell'08/09 Asti da sola fa il **18,7% delle
+impressioni di tutto il sito con l'1,06% di CTR**, e le pagine di capoluogo
+sopra soglia valgono un quarto delle impressioni del sito all'1,11%. Non è un
+peggioramento: è il calendario di settembre, che di capoluoghi ne ha cinque in
+due settimane. Quello che cambia è che il fenomeno non è più leggibile come
+un'eccezione da annotare — sposta il CTR aggregato del sito, e da lì nasce la
+regola di lettura scritta più sotto.
+
 ##### Il Palio di Asti rankava su un cartello, e la colpa era del numero di riga
 
 Trovato il 02/09/2026 leggendo l'export, non il codice, ed è il difetto più
@@ -2938,6 +3017,13 @@ CTR dello 0,93% non veniva dalla posizione: veniva dal fatto che il titolo in
 SERP cominciava con «Scheda spostata:». Le due righe si distinguono solo
 aprendo la pagina.
 
+**Verificato nell'export dell'08/09: il fix ha funzionato.** La scheda vera è
+passata da **zero a 24.244 impressioni** — seconda pagina del sito dopo
+`eventi.html` — e il cartello è uscito di scena. Converte comunque allo 0,56%
+in posizione 9,08, ed è la riga sopra: quella query si perde perché è un
+capoluogo, non perché il rimando fosse rotto. **Quello che il fix ha comprato
+non è un clic in più, è che la query la giochi la pagina che risponde.**
+
 ##### La zucca cresce, Halloween ancora no, e ottobre ha dieci eventi
 
 Sulle 1.000 query visibili (4.516 clic, il 30% del traffico): `halloween`,
@@ -2958,6 +3044,336 @@ Il brand: **`daop` fa 12 clic su 17 impressioni in posizione 1,35** (erano 10 su
 14). Compare per la prima volta anche `dove andiamo oggi`, con **34 impressioni
 e zero clic in posizione 8,91** — cioè il nome per esteso non è nostro in
 SERP. La curva resta quella da guardare, ed è ancora quasi piatta.
+
+#### Il 6 settembre fa il record di impressioni e il CTR più basso di sempre
+
+Export dell'**08/09/2026**, finestra **07/06-06/09**: 92 giorni, cioè **tre mesi
+e non 28** — le quote per famiglia si confrontano con gli export precedenti, **i
+valori assoluti no**. Totale: **19.640 clic, 294.223 impressioni, CTR 6,68%,
+posizione 6,5** (foglio Grafico; il foglio Pagine dice 19.809 e 316.746, ed è la
+solita anonimizzazione per dimensione).
+
+| | clic | impressioni | CTR | pos |
+|---|---|---|---|---|
+| sab 29/08 | 1.986 | 20.581 | 9,65% | 5,6 |
+| dom 30/08 | 1.116 | 15.400 | 7,25% | 6,2 |
+| **sab 05/09** | **1.039** | **22.299** | **4,66%** | 7,0 |
+| **dom 06/09** | **788** | **28.266** | **2,79%** | **8,3** |
+
+**Record di impressioni e CTR più basso di sempre non sono due notizie: sono
+una, ed è composizione.** La regola scritta il 02/09 — «il capoluogo non ha
+fossato» — in questo export non è più un'osservazione a margine: è la forza che
+comanda il numero aggregato.
+
+##### Il Palio di Asti: il merito non era del fix, e ci sono volute le date per pagina
+
+Sono due cose separate e vanno tenute separate, perché la prima è una vittoria e
+la seconda non è un difetto.
+
+**CORRETTO l'08/09/2026, poche ore dopo averlo scritto, ed è la correzione più
+istruttiva di questa pagina.** Qui c'era scritto: «il fix del 02/09 ha
+funzionato, la scheda vera è passata da zero a 24.244 impressioni». Era
+**un'inferenza da due export**, dichiarata come tale — e misurandola con
+`data × pagina` (che l'export CSV non dà, e la Search Console API sì) è
+risultata **sbagliata nella causa**.
+
+Cosa dicono i giorni:
+
+| | scheda vera | cartello «spostata» |
+|---|---|---|
+| 25-30/08 | **0 impressioni** (non esisteva) | 792-1.372/g |
+| **31/08** | 65 | 375 |
+| 01/09 | 919 | 235 |
+| 02/09 *(il fix)* | 1.279 | 347 |
+| 04/09 | 1.916 | 454 |
+| 05/09 | 3.907 | 539 |
+| **06/09** | **14.637** | 307 |
+
+**`eventi/palio-di-asti.html` è nata il 31/08/2026**, scritta dalla run notturna
+(`git log --diff-filter=A`). Aveva **un giorno di vita** quando l'export del
+02/09 le dava zero impressioni, e ha cominciato a prenderle il giorno dopo, cioè
+**prima** che il fix esistesse. Le 24.244 sono una pagina nuova indicizzata in
+ventiquattr'ore su una query la cui domanda stava esplodendo verso il 5-7
+settembre: **non è il fix che ha spostato Google.**
+
+Quello che il fix ha fatto davvero, ed era comunque da fare: ha tolto il
+canonical che mandava a una grigliata in un'altra provincia e ha messo il
+cartello fuori dall'indice. Si vede, ed è modesto — le sue impressioni passano
+da 539 il 05/09 a 307 il 06/09, mentre un `noindex` ci mette settimane a fare
+effetto.
+
+**E resta vero che il difetto era reale e la correzione giusta**: `_erede()`
+agganciava per numero di riga, e due decisioni prese da sola erano due decisioni
+sbagliate. Quello che cade è solo il merito che si era preso.
+
+**La cosa da ricordare non è il Palio, è il metodo**: un'inferenza da due export
+aggregati sembrava solidissima — «prima zero, dopo 24.244, in mezzo il fix» — e
+mancava l'unica cosa che la smontava, cioè **che giorno è nata la pagina**. Con
+i CSV quella domanda non ha risposta: `Pagine` non ha le date. Prima di
+attribuire a una correzione un numero che si è mosso, si guarda `data × pagina`
+e `git log --diff-filter=A`, che insieme costano due minuti.
+
+**E converte allo 0,56% in posizione 9,08** (136 clic). Il cartello, prima,
+faceva lo 0,93%: il rimando corretto non ha comprato un clic in più, ha comprato
+che la query la giochi la pagina che risponde. Contro il sito ufficiale del
+Palio e la stampa astigiana, in posizione 9, quel numero è quello che c'è da
+aspettarsi — e resta vero che **l'unica cosa che si poteva sbagliare lì era
+mandare Google al cartello**, non il CTR.
+
+Dentro lo stesso evento, il pezzo che funziona è quello che abbiamo di nostro:
+`sfilata palio asti 2026` fa **4,32% a posizione 5,95** e `sfilata bambini palio
+2026` il **3,08%**, contro lo 0,20% di `palio di asti 2026`. La coda con
+un'intenzione dentro si prende, la query secca no.
+
+##### Un quarto delle impressioni del sito converte all'1,11%
+
+Quindici pagine con almeno 800 impressioni e CTR sotto il 2,5%:
+
+| | impressioni | quota del sito | clic | CTR |
+|---|---|---|---|---|
+| le 15 pagine | **76.391** | **24,1%** | 845 (4,3%) | **1,11%** |
+| **il sito togliendole** | | | | **7,89%** |
+
+Le prime: Palio di Asti 24.244 (0,56%), il cartello del Palio 8.446, Alecomics
+7.634 (0,54%), `luoghi.html` 6.817 (1,11%), Festa delle Feste ad Acqui 5.386
+(0,80%), Festa della Città di Mondovì 3.524, Palio in Famiglia 2.581, Festival
+delle Sagre Astigiane 2.551, Fiera di Agosto a Novi 2.541, Festa del Vino a
+Casale 2.503 (**0,40%**), Cocco Wine 1.670.
+
+Sulle query lo stesso fenomeno è ancora più netto. **48 query** di grande evento
+di capoluogo valgono **28.804 impressioni (il 32,3% delle visibili) e 146 clic
+(il 2,4%), CTR 0,51%**; togliendole, le query visibili convertono al **9,65%**.
+Le peggiori: `palio di asti 2026` 7.633/0,20%, `palio asti 2026` 3.131/0,29%,
+`festa delle feste acqui terme 2026` 2.843/0,21%, `sagre asti 2026` 2.174/0,55%,
+`alecomics` + `alecomics 2026` 3.514 per **5 clic**, `festa del vino casale
+monferrato 2026` 1.436 per **1 clic**.
+
+**Da qui la regola di lettura, che è la cosa da ricordare al posto delle
+cifre:** quando in agenda c'è un grande evento di capoluogo, **il CTR aggregato
+del sito non si legge**. Non è un'informazione degradata, è un'informazione di
+un'altra cosa — misura quanta domanda generica ci è passata davanti, non quanto
+bene rispondiamo. Il numero da guardare al suo posto è **il CTR delle schede**
+(7,51% qui) oppure il CTR del sito togliendo le pagine sopra soglia. È la stessa
+disciplina già scritta per «il CTR del giorno dopo una festa non è il CTR del
+sito», con il verso opposto: là era la coda degli eventi finiti, qui è la testa
+di quelli che non vinciamo.
+
+##### I clic sono calati per davvero, e la ragione è il calendario
+
+Va detto, perché la composizione spiega il CTR e **non** spiega i clic:
+
+| settimana | clic | clic/g | impressioni | CTR |
+|---|---|---|---|---|
+| 24-30/08 | 6.164 | **880,6** | 75.837 | 8,13% |
+| **31/08-06/09** | **4.501** | **643,0** | 100.306 | 4,49% |
+| | **-27%** | | **+32%** | |
+
+Per giorni omologhi: lunedì +2%, martedì -22%, mercoledì -21%, giovedì -16%,
+venerdì -7%, **sabato -48%, domenica -29%** — con le impressioni in crescita
+ovunque, dal +8% al +84%.
+
+**La ragione non è il sito, e si legge in due schede.** Il weekend del 29 agosto
+la festa più grossa era una che vinciamo — Madonna della Guardia a Tortona,
+**1.012 clic, 15,57%, posizione 3,73**, la prima pagina del sito. Il weekend del
+5-6 settembre era il Palio, 136 clic. **Un weekend con la festa giusta vale il
+doppio di uno con la festa sbagliata**, ed è il calendario di settembre — Palio,
+Festival delle Sagre, Alecomics, Festa delle Feste, Festa del Vino, Fiera di
+Mondovì: cinque capoluoghi in due settimane.
+
+Due correzioni da applicare a quei numeri prima di citarli: **il 06/09 è
+l'ultimo giorno dell'export**, quindi vale ~10% in più — la domenica sta
+verosimilmente a ~870, cioè -22% e non -29%; e la **posizione media di giornata
+passa da 5,6-6,2 ad agosto a 8,3**, che è la stessa composizione vista da un
+altro lato.
+
+##### Quello che regge, e il pavimento che chiude la scommessa del 15 settembre
+
+| famiglia | pagine | clic | quota | impressioni | CTR |
+|---|---|---|---|---|---|
+| schede `/eventi/*` | 459 | 15.340 | **77,4%** | 204.157 | 7,51% |
+| `sagre-provincia-*` | 3 | 1.945 | 9,8% | 29.815 | 6,52% |
+| `eventi.html` | 1 | 1.195 | 6,0% | **44.165** | **2,71%** |
+| pagine comune | 28 | 463 | 2,3% | 10.803 | 4,29% |
+| `weekend-provincia-*` | 3 | 251 | 1,3% | 3.656 | 6,87% |
+| `ferragosto.html` | 1 | 221 | 1,1% | 7.543 | 2,93% |
+| home | 1 | 118 | 0,6% | 677 | 17,43% |
+| `oggi-provincia-*` | 3 | 88 | 0,4% | 5.822 | 1,51% |
+| `luoghi.html` | 1 | 76 | 0,4% | 6.817 | 1,11% |
+| **`eventi-provincia-*`** (2 giorni di vita) | 3 | 8 | 0,0% | 258 | 3,10% |
+
+Le quote non si muovono: le schede restano intorno al 77%, `eventi.html` un
+quindicesimo. Il fossato è intatto e si vede nelle query — `stratortona` 51,78%,
+`fuochi tortona 2026` 63,95%, `cassinasco festa 2026` 66,15%, `sagra della
+patata bozzole` 75%, `masca spigno monferrato` 100%.
+
+**Il pavimento feriale sta a ~440 clic/giorno** (mar-mer-gio 01-03/09: 402, 412,
+517), contro la soglia scritta il 24/08 — «sopra 150 = non c'è più una stagione
+da temere». **Il 15 settembre non è più una data da temere**: è già passata di
+fatto, con tre volte di margine, ed era già scritto il 02/09.
+
+**Il buco di `eventi.html` è alla sesta lettura consecutiva in crescita**: 44.165
+impressioni al 2,71%, cioè il 13,9% delle impressioni del sito su una pagina
+sola. Continua a non essere una cosa da riparare toccando l'H1.
+
+##### Asti da sola fa il 18,7% delle impressioni del sito, e converte all'1,06%
+
+Rifatta l'attribuzione per comune incrociando il foglio Pagine con
+`data/pagine-evento.json`: 15.340 clic su 15.340 finiscono in un comune, le 14
+pagine che non si attribuiscono hanno **zero** clic.
+
+| comune | prov | schede | clic | quota | impressioni | CTR |
+|---|---|---|---|---|---|---|
+| **Tortona** | AL | 8 | **1.428** | 9,3% | 8.478 | 16,84% |
+| Novi Ligure | AL | 12 | 672 | 4,4% | 7.496 | 8,96% |
+| Grondona | AL | 1 | 494 | 3,2% | 5.466 | 9,04% |
+| San Damiano d'Asti | AT | 10 | 448 | 2,9% | 3.724 | 12,03% |
+| Bubbio | AT | 1 | 424 | 2,8% | 3.068 | 13,82% |
+| Ferrere | AT | 2 | 421 | 2,7% | 2.706 | 15,56% |
+| Pecetto di Valenza | AL | 1 | 415 | 2,7% | 1.616 | **25,68%** |
+| **Asti** | AT | 6 | 404 | 2,6% | **38.171** | **1,06%** |
+
+Tre cose, e la terza vale più delle altre due.
+
+**Tortona ha scavalcato Novi Ligure** ed è il posto più forte del sito, con otto
+schede e un CTR da paese piccolo. Novi resta secondo con dodici. Sono le due
+meccaniche già descritte il 24/08, entrambe da tenere.
+
+**Asti è la misura del capoluogo, e adesso è una cifra sola**: sei schede,
+**38.171 impressioni — il 18,7% di tutto il sito — per 404 clic**. Non c'è
+niente da recuperare lì dentro e non va contato come pubblico mancato. Per
+provincia, sulle sole schede: AL 8.208 clic da 83 comuni (9,04%), AT 4.552 da 48
+(6,03%), CN 2.580 da 82 (6,83%) — e il CTR astigiano **scende dal 12,90% del
+24/08 al 6,03%** per una ragione sola, che sta nella riga sopra. Non è la
+provincia che ha smesso di funzionare: è il capoluogo che le è entrato dentro.
+
+**Il fossato rimisurato dice esattamente quello che diceva il 24/08**, ed è la
+terza lettura indipendente che lo conferma:
+
+| | comuni | clic | impressioni | CTR |
+|---|---|---|---|---|
+| **1 scheda** | 142 | 7.453 | 62.729 | **11,88%** |
+| 2-4 schede | 53 | 3.345 | 40.176 | 8,33% |
+| **5+ schede** | 18 | 4.542 | 101.234 | **4,49%** |
+
+La concentrazione si è allentata ancora: **18 comuni su 213 fanno metà dei clic
+delle schede, 50 ne fanno l'80%** — erano 13 e 37 il 24/08. Per chi vende è il
+numero che conta: la copertura si sta allargando, non concentrando.
+
+##### Su «eventi per bambini»: ci trovano, in fondo alla seconda pagina
+
+È il referto più importante di questo export, e non si vede guardando i clic.
+Tutto quello che nelle 1.000 query visibili contiene *bambini, famiglie, figli,
+bimbi*:
+
+| query | impressioni | clic | pos |
+|---|---|---|---|
+| `eventi provincia di cuneo questo weekend per bambini` | 24 | 1 | 8,29 |
+| `cosa fare con i bambini vicino a me` | 9 | 1 | 7,89 |
+| `cosa fare con bambini vicino a me` | 3 | 2 | 7,00 |
+| `posti al chiuso per bambini vicino a me` | 3 | 1 | 9,67 |
+| `centri estivi alessandria` | 3 | 1 | 11,00 |
+| **totale** | **42** | **6** | |
+
+**42 impressioni su 89.054 visibili, cioè lo 0,05%.** Le due `sfilata bambini
+palio` restano fuori: sono query sul corteo del Palio, non su dove portare i
+figli.
+
+##### CORREZIONE dell'08/09: erano 357, e l'export non le poteva far vedere
+
+Poche ore dopo aver scritto le righe qui sopra è stata accesa la Search Console
+API, e quel numero è saltato. **Non 42 impressioni ma 357, su 69 query** — e
+sono i **28 giorni**, non i tre mesi. La riga che era sbagliata in modo utile è
+questa, e la lascio scritta per intero perché è il ragionamento da non rifare:
+
+> «Non è un problema di campione. Google anonimizza il 70% delle query, ma una
+> famiglia con volume vero emerge lo stesso nel campione visibile. Se avesse
+> volume *per noi*, si vedrebbe.»
+
+**Falso, e per un motivo strutturale.** Il `Query.csv` dell'export si ferma a
+**1.000 righe ordinate per clic**. L'API ne dà **4.317 sulla stessa finestra**, e
+**3.300 hanno zero clic**. Cioè l'export non è un campione casuale: taglia
+esattamente le query che ricevono impressioni e nessun clic — che è la forma
+precisa di **una famiglia che non hai ancora vinto**. Chiedere all'export se una
+domanda nuova ti trova è chiederlo allo strumento costruito per non fartelo
+vedere. È lo stesso errore del pavimento misurato a cavallo di due settimane:
+non un dato sbagliato, uno strumento interrogato fuori dal suo mestiere.
+
+E la diagnosi cambia di natura, non solo di cifra:
+
+| | |
+|---|---|
+| 69 query, **357 impressioni, 5 clic** | CTR **1,40%** |
+| posizione mediana **8,7** | 25 query su 69 stanno **oltre la decima** |
+| **56 su 69 contengono un nome di posto** | è il fossato, sulla domanda giusta |
+
+Le prime: `attività adatte ai bambini a villanova d'asti` (72 impressioni, zero
+clic, **posizione 21,6**), `... a castelletto d'orba` (59, pos 14,4), `cosa fare
+a entracque con i bambini` (38, pos 12,3), `cosa fare in provincia di alessandria
+con bambini` (13, pos 9,6).
+
+**Non è «non ci trovano»: è «ci trovano in fondo alla seconda pagina».** Il che
+è una notizia migliore e un lavoro diverso — non serve creare una domanda,
+serve salire. E le pagine per salirci sono nate il 04/09, quattro giorni prima
+di questa misura: `/eventi-provincia-*` risponde letteralmente a `cosa fare in
+provincia di alessandria con bambini`, e queste query dicono che quella cella
+vuota della tabella era vuota davvero.
+
+Resta vero il referto del brand letto dall'altro lato — **siamo il riferimento
+per «che sagra c'è a Grondona», non ancora per «dove porto i bambini»** — e
+resta vero tutto quello che segue qui sotto sul 301. Cambia che la domanda ci
+sfiora già, invece di ignorarci.
+
+Due cose che non se ne ricavano, e una che sì.
+
+- **Non se ne ricava che manchi una superficie.** Le tre `/eventi-provincia-*`
+  sono esattamente quella cosa e in questo export hanno **due giorni di vita**
+  (258 impressioni, 8 clic). Il loro verdetto si legge a metà ottobre, non
+  adesso, e leggerlo prima vorrebbe dire bocciare una pagina per non essere
+  invecchiata.
+- **Non se ne ricava che la domanda non esista.** La SERP verificata il 04/09 su
+  `eventi e attività per bambini provincia di Cuneo` aveva annunci shopping, un
+  blocco «Le persone hanno chiesto anche» e Tripadvisor in pagina uno. Quello
+  che manca non è la domanda: è che oggi la intercetta qualcun altro.
+
+**Quello che se ne ricava è una cosa da fare, ed è già decisa a metà: il 301 di
+`eventiperbambinicuneo.it`.** Quel dominio è il secondo risultato su quella
+query, il 21/08 si è deciso di non usarlo più, e il 04/09 si è fatta la pagina
+di atterraggio apposta perché il 301 avesse dove andare. **L'ordine dei lavori
+era "la pagina prima, il 301 dopo": la pagina c'è, il 301 no.** Finché resta
+così, stiamo tenendo in piedi il concorrente che ci batte su quella query e
+lasciando a zero l'unica pagina scritta per vincerla. E vale l'avvertenza già
+scritta: con un 301 si trasferiscono link e storia, **non** il beneficio del
+dominio a corrispondenza esatta — quindi il numero da aspettarsi è un inizio, non
+un travaso.
+
+##### Il brand raddoppia per il terzo export di fila
+
+`daop` fa **23 clic su 37 impressioni in posizione 1,35** — era 12 su 17 il
+02/09, 10 su 14 il 30/08, 4 su 7 il 24/08. **Raddoppia a ogni lettura**, e la
+curva che il 24/08 era «piatta a zero» adesso è una curva. Resta niente in
+assoluto, e resta il KPI del cavallo di Troia: si guarda la curva, non il
+valore. Compaiono anche `ginetto app` (1 clic su 9, posizione 2,22) e `patrick
+orlando` (3 su 29).
+
+**Segnali d'autunno:** `zucca` fa **7 query per 1.323 impressioni e 70 clic** —
+era 973 impressioni il 02/09, 622 il 30/08, 173 il 24/08 — e `vendemm` 1 query
+per 46. `halloween`, `castagn`, `presep`, `natal`, `fungh`, `tartuf`,
+`carnevale`, `mercatin`: **zero**, per il quinto export di fila. L'agenda ha **16
+eventi a ottobre** (erano 10 il 02/09), 1 a novembre, 1 a dicembre, e **un solo
+evento di Halloween**. Vale la regola del 02/09: il conteggio si stampa, non si
+allarma — quello che resta è il *tempismo*, cioè che le schede stagionali si
+cercano prima dell'evento, e quella finestra si chiude verso il 10 ottobre.
+
+**Segmentazioni, per completezza.** Italia sola: **6,92%** invece del 6,68%
+aggregato; l'estero è sceso al **4,1% delle impressioni** (12.084 per 122 clic),
+col Regno Unito che da solo fa 4.208 impressioni e **5 clic**. Telefono **86,8%
+delle impressioni** al 6,95%, computer 12,2% al 4,72%, tablet 0,9%.
+
+**Il foglio «Aspetto nella ricerca» è vuoto anche stavolta**, ed è il sesto
+export di fila: conferma quello che c'è già scritto — **l'export non porta
+quella dimensione, punto** — e l'unico posto dove si guarda è il report
+Miglioramenti → Eventi in Search Console. Un foglio vuoto non è una diagnosi sul
+markup.
 
 #### Il calendario avanti non è un allarme: lo dice Patrick, e chiude il punto
 
