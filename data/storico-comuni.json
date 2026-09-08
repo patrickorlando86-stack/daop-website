@@ -210,6 +210,23 @@
   "nome": "Albaretto",
   "prov": "CN"
  },
+ "albarettodellatorre": {
+  "eventi": {
+   "fabriano-all-around-festival-del-disegno-albaretto-della-torre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Albaretto della Torre",
+    "manifest": "Fabriano All Around 2026 - Festival del Disegno",
+    "nome": "Fabriano All Around 2026 - Festival del Disegno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   }
+  },
+  "nome": "Albaretto della Torre",
+  "prov": "CN"
+ },
  "alberaligure": {
   "eventi": {
    "festa-al-mulino-pro-loco-albera-albera-ligure": {
@@ -847,6 +864,17 @@
  },
  "bergolo": {
   "eventi": {
+   "lo-spettacolo-scende-in-strada-con-lunaridens-show-bergolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Diverse location",
+    "manifest": "I Sapori della Pietra",
+    "nome": "Lo Spettacolo Scende in Strada con Lunaridens Show",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-12"
+   },
    "osservazione-astronomica-con-telescopio-comune-di-bergolo": {
     "anni": [
      2026
@@ -986,6 +1014,17 @@
     "nome": "Rivoira By Sport",
     "organizza": "",
     "pagina": true,
+    "ultima": "2026-09-12"
+   },
+   "sport-in-piazza-citta-di-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Caduti",
+    "manifest": "",
+    "nome": "Sport in Piazza - Città di Boves",
+    "organizza": "",
+    "pagina": false,
     "ultima": "2026-09-12"
    }
   },
@@ -1341,6 +1380,17 @@
     "pagina": true,
     "ultima": "2026-09-01"
    },
+   "quarantottesima-fiera-d-autunno-sagra-gnocchi-al-c-caraglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Caraglio centro",
+    "manifest": "",
+    "nome": "Quarantottesima Fiera d'Autunno 2026 - 23ª Sagra Gnocchi al Castelmagno - Pro Loco Caraglio",
+    "organizza": "Pro Loco Caraglio",
+    "pagina": true,
+    "ultima": "2026-09-25"
+   },
    "scuola-di-teatro-per-adulti-fare-teatro-santibriga-caraglio": {
     "anni": [
      2026
@@ -1452,6 +1502,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-07"
+   },
+   "mirabilia-a-carru": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Mercato",
+    "manifest": "Mirabilia a Carrù",
+    "nome": "Mirabilia a Carrù",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-18"
    }
   },
   "nome": "Carrù",
@@ -1977,6 +2038,23 @@
   },
   "nome": "Cassine",
   "prov": "AL"
+ },
+ "castagnito": {
+  "eventi": {
+   "sport-in-piazza-comune-di-castagnito": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza 1° Maggio",
+    "manifest": "",
+    "nome": "Sport in Piazza - Comune di Castagnito",
+    "organizza": "Comune di Castagnito",
+    "pagina": false,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Castagnito",
+  "prov": "CN"
  },
  "castagnoledellelanze": {
   "eventi": {
@@ -3323,6 +3401,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "cerchiamoci-laboratorio-psicomotorio-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cuneo Centro Quartiere",
+    "manifest": "",
+    "nome": "Cerchiamoci - Laboratorio Psicomotorio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-09"
+   },
    "corsi-di-musica-dolce-post-parto-deborah-dalmasso-cuneo": {
     "anni": [
      2026
@@ -3389,6 +3478,17 @@
     "pagina": true,
     "ultima": "2026-08-11"
    },
+   "il-corpo-giocoso-tutti-in-salute-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini Carolina Invernizio",
+    "manifest": "Tutti in Salute",
+    "nome": "Il Corpo Giocoso - Tutti in Salute",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
+   },
    "l-orco-nel-fagiolo-il-burattinificio-di-mammadraga-cuneo": {
     "anni": [
      2026
@@ -3421,6 +3521,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-23"
+   },
+   "orizzonti-sospesi-tutti-in-salute-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sclab",
+    "manifest": "",
+    "nome": "Orizzonti sospesi - Tutti in salute",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    },
    "passeggiate-nella-natura-per-bambini-e-famiglie-cuneo": {
     "anni": [
@@ -3643,6 +3754,17 @@
     "organizza": "Associazione Fuma che 'nduma",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "ma-che-posto-e-citta-di-dronero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Espaci Occitan",
+    "manifest": "Festeggiamenti Patronali Dronero 2026 - Madonna di Ripoli e Foglienzane",
+    "nome": "Ma che posto è? - Città di Dronero",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-09"
    }
   },
   "nome": "Dronero",
@@ -4482,6 +4604,23 @@
   "nome": "Grondona",
   "prov": "AL"
  },
+ "guarene": {
+  "eventi": {
+   "sport-in-piazza-comune-di-guarene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Morone",
+    "manifest": "",
+    "nome": "Sport in Piazza - Comune di Guarene",
+    "organizza": "Comune di Guarene",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Guarene",
+  "prov": "CN"
+ },
  "isasca": {
   "eventi": {
    "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-isasca": {
@@ -5297,6 +5436,23 @@
    }
   },
   "nome": "Murazzano",
+  "prov": "CN"
+ },
+ "narzole": {
+  "eventi": {
+   "grande-rievocazione-storica-di-narzole": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Locanda di Via Pace",
+    "manifest": "Grande Rievocazione Storica di Narzole",
+    "nome": "Grande Rievocazione Storica di Narzole",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Narzole",
   "prov": "CN"
  },
  "nizzamonferrato": {
@@ -6664,6 +6820,17 @@
  },
  "revello": {
   "eventi": {
+   "ernest-e-celestine-cinema-sotto-le-stelle-revello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile del Comune di Revello",
+    "manifest": "",
+    "nome": "Ernest e Celestine - Cinema Sotto le Stelle",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
    "octavia-in-movimento-revello": {
     "anni": [
      2026
@@ -7112,6 +7279,17 @@
  },
  "sampeyre": {
   "eventi": {
+   "fiera-di-san-michele-sagra-delle-raviole-sampeyre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tensostruttura Fiera di San Michele",
+    "manifest": "Fiera di San Michele - Sagra delle Raviole",
+    "nome": "Fiera di San Michele - Sagra delle Raviole",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-25"
+   },
    "gioca-con-la-c-r-i-croce-rossa-italiana-comitato-d-sampeyre": {
     "anni": [
      2026
@@ -7493,6 +7671,23 @@
   },
   "nome": "San Marzano Oliveto",
   "prov": "AT"
+ },
+ "sanpietromonterossograna": {
+  "eventi": {
+   "trekking-teatrale-serale-ecomuseo-terra-del-castel-san-pietro-monterosso-grana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Terra del Castelmagno",
+    "manifest": "",
+    "nome": "Trekking Teatrale Serale - Ecomuseo Terra del Castelmagno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   }
+  },
+  "nome": "San Pietro Monterosso Grana",
+  "prov": "CN"
  },
  "sansalvatoremonferrato": {
   "eventi": {
@@ -7932,6 +8127,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "i-treni-raccontano-storie-da-custodire-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Ferroviario Piemontese",
+    "manifest": "",
+    "nome": "I treni raccontano storie da custodire...",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
    }
   },
   "nome": "Savigliano",
@@ -8383,6 +8589,23 @@
   },
   "nome": "Tortona",
   "prov": "AL"
+ },
+ "treiso": {
+  "eventi": {
+   "leggiamo-insieme-che-stooria-treiso": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Treiso",
+    "manifest": "",
+    "nome": "Leggiamo Insieme - Che Stooria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Treiso",
+  "prov": "CN"
  },
  "trisobbio": {
   "eventi": {
