@@ -1650,9 +1650,29 @@ stampare quello che dice la locandina** (`0-12 mesi`), che è l'unica cosa vera 
 scrivere lì — è `eta_testo()` e non si tocca. Oggi è un corso su diciassette, ma
 baby yoga, pre-parto e nido si scrivono tutti in mesi.
 
-`eta_range()` non è toccata, ed è la ragione per cui il gemello `_attivitaEtaRange`
-in `app.js` (repo `daop-mobile`) non va allineato: l'unità vive nel **ripiego**
-scritto a parole, che di là non c'è ancora.
+`eta_range()` non è toccata: è la regola gemella di `_attivitaEtaRange` in
+`app.js` (repo `daop-mobile`) e le due restano identiche. Qui c'era scritto che il
+gemello «non va allineato, perché l'unità vive nel **ripiego**, che di là non c'è
+ancora»: **il 07/09/2026 il ripiego è stato portato di là**, e la verifica che ha
+fatto cambiare idea è un numero — **26 righe su 26 hanno le annate vuote**, quindi
+la coppia gemella non produce niente per nessuno e *tutta* l'età dei corsi passa
+dal ripiego, cioè dal pezzo che non era allineato.
+
+Di là il ripiego c'era a metà (`N-M anni`, `N anni`, `N-M mesi`), e le due cose che
+gli mancavano sono quelle che i dati veri usano: `dai 4 anni` (Crome, Corsi
+Individuali di Strumento) si leggeva **4-4**, quindi per un bimbo di 7 anni il
+corso finiva fra i *non adatti*; le classi dell'ASD Atletica Mondovì — sedici righe
+— non portavano nessun numero, quindi «non lo so». E `_corsiEtaSpan`, che legge la
+stessa cella, annunciava **«dai 3 ai 4 anni»** sulla scheda di una società che
+copre 3-14. Ora di là c'è `_attivitaEtaFallback()`, porta di `eta_da_classi()` +
+`eta_da_testo()` + `_eta_numeri()`, verificata con un confronto differenziale su
+294 etichette: zero divergenze, fascia e etichetta.
+
+**Restano due regole, non una.** `eta_range()`/`_attivitaEtaRange` sono gemelle e
+devono restare identiche; `eta_min_max()`/`_attivitaEtaFallback` sono la seconda
+coppia, ed è quella che oggi lavora davvero. Se nasce una forma nuova (una classe,
+un "a partire da"), si tocca su tutte e due le sponde: la guardia di qua è
+`tests/corsi.js`, quella di là `_test-attivita.mjs`.
 
 **Il secondo era una prova invecchiata.** `tests/corsi.js` pretendeva che una
 pagina realtà avesse lo **stesso robots dell'hub** — regola giusta fino al

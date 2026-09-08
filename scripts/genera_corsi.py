@@ -235,7 +235,12 @@ def eta_range(c):
     ⚠️ La stessa regola vive in app.js (_attivitaEtaRange, repo daop-mobile) per
     la scheda dentro l'app, con la sua guardia in _test-attivita.mjs. Le due
     devono restare d'accordo: se cambi qui, cambia anche li'. Il banco di prova
-    e' lo stesso, in tests/corsi.js."""
+    e' lo stesso, in tests/corsi.js.
+
+    Nota per chi ci mette mano: al 07/09/2026 questa funzione non produce nulla su
+    NESSUN corso vero (26 righe su 26 con le annate vuote), quindi una modifica qui
+    non si vede in pagina. Quello che si vede e' eta_min_max(), cioe' il ripiego.
+    """
     anni = [int(x) for x in _numeri4(c.get('annate'))]
     avvio = _numeri4(c.get('stagione'))
     if not anni or not avvio:
@@ -404,12 +409,20 @@ def eta_da_testo(testo):
 def eta_min_max(c):
     """La fascia da usare PER FILTRARE: prima le annate, poi l'eta' scritta.
 
-    Sta a parte da eta_range() a posta. eta_range() e' la regola gemella di
-    _attivitaEtaRange in app.js (repo daop-mobile) e le due devono restare
-    identiche: qui dentro invece c'e' un RIPIEGO che di la' non c'e' ancora.
-    Tenerle separate vuol dire che il gemello non e' rotto - fa quello che ha
-    sempre fatto - e che quando si porta anche la' si sa esattamente cosa
-    portare.
+    Sta a parte da eta_range() a posta, e le due coppie non vanno confuse:
+    eta_range() e' la gemella di _attivitaEtaRange in app.js (repo daop-mobile) e
+    le due devono restare identiche; il RIPIEGO che sta qui ha da oggi il suo
+    gemello, _attivitaEtaFallback, portato di la' il 07/09/2026.
+
+    Fino a quel giorno qui c'era scritto che di la' il ripiego "non c'e' ancora" e
+    che quindi il gemello "non e' rotto - fa quello che ha sempre fatto". La prima
+    meta' era vera, la seconda no, e il numero che lo dice e' questo: 26 righe su
+    26 hanno le annate VUOTE, cioe' la coppia gemella non produce niente per
+    nessuno e tutta l'eta' dei corsi passa di qui. Su Ginetto "dai 4 anni" si
+    leggeva 4-4 e le classi non si leggevano affatto.
+
+    Se nasce una forma nuova (una classe, un "a partire da"), si tocca su tutte e
+    due le sponde: guardia di qua tests/corsi.js, di la' _test-attivita.mjs.
     """
     return eta_range(c) or eta_da_testo(c.get('eta'))
 
