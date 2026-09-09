@@ -1836,6 +1836,45 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
+def _francobollo(c):
+    """Il quadrato a sinistra della riga: la MINIATURA della locandina se c'e',
+    se no il disegno (illustrazione o pittogramma).
+
+    09/09/2026, chiesto da Patrick due volte. Il no del giorno prima si reggeva
+    su una frase sbagliata — «le tre righe dell'atletica che differiscono solo
+    per l'eta' avrebbero tre francobolli identici, ed e' li' che si sceglie» —
+    e a smontarla e' bastato guardare l'ORDINE della pagina invece dei soli
+    conteggi. L'elenco e' disciplina -> eta' -> comune, quindi le tre righe che
+    condividono il volantino (Esordienti/Ragazzi/Cadetti dello stesso comune)
+    non sono MAI vicine: in mezzo ci stanno le altre sedi. Misurato: le righe
+    col volantino uguale a quella SOPRA sono **2 su 32**, non 20.
+
+    E il verso e' l'opposto di quello che avevo scritto. Le righe 6-10 sono
+    cinque Esordienti in cinque comuni: stessa identica icona (il corridore) e
+    cinque volantini diversi. Li' l'anteprima distingue e il disegno no.
+
+    Resta vero che a 60px un volantino verticale non si legge — ma la regola di
+    NN/g sui francobolli chiede che siano «recognizably different», non
+    leggibili, e distinti lo sono.
+
+    **La miniatura, non l'originale**, ed e' la differenza con i centri: questa
+    e' la posizione dell'ELENCO, dove vale la regola gia' scritta per l'agenda.
+    Le 20 locandine dei corsi hanno tutte la loro miniatura su disco (media
+    25,7 KB contro ~86 dell'originale), quindi qui costa zero — mentre
+    `centri-estivi.html`, che questa idea l'aveva per prima, serve ancora gli
+    originali ed e' il difetto aperto dell'08/09.
+
+    Il disegno NON sparisce: resta il ripiego per le righe senza locandina, che
+    e' la regola di `loc_path()` — quello che manca non si stampa e non si
+    inventa. Oggi sono zero, domani e' la prima riga che entra senza volantino.
+    """
+    src = G.loc_path(c['loc'], mini=True) if c['loc'] else ''
+    if src:
+        return (f'<img class="ev-thumb" src="{G.esc(src)}" alt="" '
+                f'loading="lazy" decoding="async">')
+    return f'<span class="ev-thumb is-ph" aria-hidden="true">{_icona(c)}</span>'
+
+
 def indice_realta_path():
     """Dove va il registro delle pagine realta'. SEGUE `DIR_REALTA`.
 
@@ -2348,7 +2387,7 @@ def card(c, idx, pagine=(), qui_org=None):
     # (genera_pdf.py).
     return f"""        <article class="event-card" id="{_id_corso(c)}" data-city="{G.slugify(c['citta'])}" data-prov="{(c['prov'] or '').lower()}" data-cat="{G.slugify(macro)}" data-disc="{G.slugify(cat)}" data-org="{G.slugify(c['org'] or 'altre-realta')}" data-org-nome="{G.esc(c['org'] or 'Altre realtà')}"{cod_attr} data-openday="{'1' if od else '0'}"{eta_attr} style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
-            <span class="ev-thumb is-ph" aria-hidden="true">{_icona(c)}</span>
+            {_francobollo(c)}
             <span class="ev-main">
               {riga_cat}
               <span class="ev-name">{G.esc(G.trunc(c['nome'], 110))}</span>
