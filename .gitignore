@@ -18,3 +18,9 @@ tests/node_modules/
 # poche righe per lettura ed e' tracciato. E' la stessa divisione delle
 # locandine: il pesante fuori, il derivato leggero dentro.
 gsc/
+
+# Il registro che prova_corsi.py scrive nella sua cartella: e' l'ombra di
+# data/realta-pagine.json per la run di prova (vedi indice_realta_path() in
+# scripts/genera_corsi.py). Le pagine di prova sono tracciate perche' si
+# guardano nel diff; questo e' un file di lavoro e non si guarda.
+corsi-prova/_realta-pagine.json

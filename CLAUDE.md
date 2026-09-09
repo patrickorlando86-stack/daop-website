@@ -1599,6 +1599,29 @@ seconda volta che questo repo lo scopre nello stesso modo (la prima fu il
 contrasto del footer, dove la versione che guardava la sola `eventi.html`
 passava col difetto rimesso).
 
+**L'ottava prova invecchiata è arrivata il giorno dopo, ed era questa
+sezione.** `tests/corsi.js` pretendeva che *ogni* francobollo fosse un
+`<svg>`: giusto finché erano pittogrammi, rosso il giorno che è entrata la
+prima illustrazione — cioè quando il meccanismo del 07/09 ha fatto la cosa per
+cui esiste. La forma è sempre la stessa: *una prova che pretende
+un'uniformità che il sito ha smesso di volere*.
+
+**E il rosso mentiva su cosa fosse rotto**, il che è la parte da ricordare.
+Diceva «francobolli fuori misura: 0x0» diciotto volte, e quello zero **non era
+una misura**: veniva dal ripiego della prova stessa (`svg ? rect : 0`) quando
+l'`svg` non c'era. Misurato in un browser vero, le diciotto illustrazioni sono
+**52×52 e caricano**: in pagina non c'era niente di rotto. Prima di inseguire
+un numero stampato da una prova, si guarda da dove quel numero viene.
+
+Ora la prova conosce tutte e due le specie (`svg, img.ev-ico`) e l'invariante
+è per costruzione la stessa per entrambe: **il disegno c'è e sta nel suo
+riquadro** — e il riquadro si *misura* (52 sul telefono, 60 su desktop) invece
+di scriverlo nella prova, se no diventa rossa al primo ritocco del CSS. La
+forbice stretta 16-32 resta, ma **solo sui pittogrammi**: l'illustrazione il
+riquadro lo riempie apposta. Verificate rosse rimettendo tre difetti uno alla
+volta — regola `.ev-ico` tolta dal CSS (`img 60x60 in un riquadro da 52`),
+un francobollo senza disegno, `.icon` portata a 8px — non supposte.
+
 Una cosa è deliberatamente una **nota e non una prova**: «ogni illustrazione ha
 il suo sorgente in `sorgenti/`». Un `.webp` messo a mano e mai passato da
 `genera_icone.py` è uno stato legittimo, e una prova rossa quando il sito è
@@ -2274,6 +2297,19 @@ Le decisioni che non si ricavano dal diff:
   pubblicarla quando la presenza finisce vuol dire pubblicare una realtà che non
   è più nella guida. È il problema che per i luoghi è ancora aperto
   (`Premium_al`, «niente si spegne da solo») risolto nel verso giusto.
+- **Il registro segue `DIR_REALTA`, e non è un secondo interruttore**
+  (`indice_realta_path()`, 09/09/2026). Le due cose erano indipendenti, e chi
+  deviava solo la prima — cioè `prova_corsi.py` — scriveva le realtà **finte**
+  dentro `data/realta-pagine.json`, quello vero. Nessun errore da nessuna
+  parte: al giro dopo la riga «Organizzatore: I corsi di …» sulle ~400 schede
+  evento avrebbe rimandato a `/corsi-prova/…`, che in produzione non esiste. A
+  salvare era solo il fatto che la run notturna riscrive sempre quel file —
+  bastava committarlo per pubblicare 400 link a un 404, ed è successo davvero
+  in sessione. Il ripiego **non** è «non scrivere niente»: è la stessa scelta
+  già fatta per le pagine, che la prova non salta ma reindirizza, così il
+  codice esercitato è lo stesso della produzione. Il file di prova finisce in
+  `corsi-prova/_realta-pagine.json` ed è in `.gitignore`: le pagine di prova
+  sono tracciate perché si guardano nel diff, un file di lavoro no.
 - **Le pagine di prova non vanno in `/corsi/`.** `prova_corsi.py` sposta
   `DIR_REALTA` su `corsi-prova/`: una scheda inventata dei Santibriganti in
   mezzo ai clienti veri è esattamente il danno che quella pagina esiste per
