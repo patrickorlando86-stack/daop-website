@@ -1666,6 +1666,91 @@ quindi `<use href="#i-party">` disegnerebbe il vuoto. Ma **`genera_corsi.py`
 quel problema l'ha già risolto** scrivendo i disegni per esteso (`ICONE_CAT`):
 la soluzione è in casa, in un posto solo, e non è arrivata alle altre.
 
+#### La locandina dei corsi è un'azione, non un contenuto
+
+Fatto il 09/09/2026, partendo da una proposta di Patrick: «metterei il pulsante
+vedi locandina come nei centri estivi, cioè la stessa struttura no?». Sì — e
+regge più di come era posta: **`corsi.html` era l'unica delle tre liste a riga
+che non usava quella struttura.** `genera_eventi.py` e `genera_centri.py`
+costruiscono tutti e due `<div class="event-actions">` con le pillole
+`.event-act`; i corsi avevano un `<p>` col link e il volantino incollato sotto
+a tutta larghezza.
+
+**Non è un ribaltamento della decisione del 26/08, è il suo compimento.** Quel
+giorno Giovanni aveva spostato la locandina in fondo al dettaglio — «prima
+diamo le info che abbiamo estrapolato, è quello il valore che stiamo dando» —
+ma spostata in fondo restava comunque *contenuto*, e si vede in una misura.
+Misurato a 412px aprendo **tutte e 32** le righe:
+
+| | prima | dopo |
+|---|---|---|
+| dettaglio di un corso (mediana) | **624px** | **~304px** |
+| di cui locandina | **320px, il 51%** — fino a 570 su un volantino verticale | 0 |
+| dettaglio di un centro, per confronto | 255px | 255px |
+
+Cioè più di metà di quello che si vedeva aprendo un corso era il volantino.
+Adesso smette di essere contenuto e diventa un'azione, che è quello che è già
+nei centri e nell'agenda.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Zero CSS nuovo.** `.event-actions` e `.event-act` arrivano dal `<style>`
+  che `_guscio()` copia da `eventi.html`, ed erano già dentro `corsi.html`
+  inutilizzate. Ricopiarle sarebbe la seconda definizione dello stesso
+  componente, che diverge alla prima modifica — la regola già scritta per
+  `.info-strip`.
+- **`locandina.js` non si tocca, e il caso si sposta invece di sparire.** Quel
+  file riconosce già `a.event-act` con un href che finisce per estensione di
+  immagine, quindi la lightbox continua a funzionare da sé. Il selettore
+  `img.co-loc`, nato il 03/09 proprio perché sui corsi la locandina *non* era
+  in un link, adesso non corrisponde più a niente e si toglie: un selettore
+  morto è una riga che fra sei mesi nessuno sa più se serve.
+- **Resta un `<a href>` vero**, quindi senza JS, col tasto centrale o con
+  «apri in una scheda nuova» il volantino si vede lo stesso.
+- **`rel="sponsored"` resta su «Scopri il corso».** La presenza nella guida è
+  una sola ed è pagata (21/08), e un link commerciale che passa PageRank è uno
+  schema di link: si paga con un'azione manuale sul **dominio**, cioè su
+  `eventi.html`. Sulla pillola della locandina no — punta al nostro bucket.
+- **Il bucket non rischia la potatura.** `genera_manifest_locandine.py` cerca
+  il pezzo di URL `storage/v1/object/public/locandine/…` ovunque compaia, non
+  l'attributo, e il suo commento contempla già «href del visualizzatore»:
+  verificato prima di toccare, perché passare da `src` a `href` senza quella
+  garanzia avrebbe fatto risultare 20 locandine «non citate da nessuno» e
+  cancellare sette giorni dopo — cioè il bottone nuovo che apre un 404.
+
+**Due difetti silenziosi si chiudono per strada**, e nessuno dei due si vedeva
+leggendo l'HTML:
+
+- l'`<img class="co-loc">` **non aveva `width`/`height`** e il CSS diceva
+  `height:auto`: la scatola valeva 0px finché l'immagine non arrivava, poi
+  saltava a 320-570px **dentro una riga che uno sta leggendo**. È la stessa
+  classe di guasto del `width="900" height="1200"` sbagliato su 462 schede
+  evento, con l'aggravante che qui non c'era proprio niente da riservare.
+- aprire una riga scaricava **l'originale** dal bucket (non la miniatura: una
+  locandina si guarda). Misurato: adesso aprire tutte le righe scarica **zero**
+  locandine, e la prima parte al clic. Il bucket ha 5 GB al mese.
+
+**Il francobollo NON diventa la locandina**, ed è la parte della proposta che
+non si prende. Rimisurato lo stesso giorno: 32 righe, **20 file distinti**, e
+20 righe su 32 stanno in un gruppo dove il volantino non le separa dal vicino.
+Il caso che decide è l'atletica — *Esordienti*, *Ragazzi/e*, *Cadetti/e* nello
+stesso comune, tre righe che **differiscono solo per l'età**, cioè il punto
+esatto in cui un genitore sceglie — che avrebbero tre francobolli identici. Va
+detto che sul puro «quanto distingue» la locandina batte anche il set completo
+di illustrazioni (20 contro 14, perché 16 righe su 32 sono `atletica-leggera`):
+l'argomento che regge non è il conteggio, è **dove** l'immagine fallisce, più
+il fatto che a 60px un volantino è una macchia di colore e non
+un'informazione. Sui centri funziona perché lì il rapporto è 1:1 — 7 righe, 7
+file distinti.
+
+E c'è un rovesciamento che vale la pena sapere prima di citare i centri come
+modello: **è la pagina che fa la cosa giusta a farla nel modo più caro.**
+`centri-estivi.html` serve gli **originali** nei francobolli da 60px (~86 KB
+l'uno, misurati l'08/09), mentre le 20 locandine dei corsi hanno già tutte la
+miniatura su disco (media 25,7 KB). Il pezzo che chiude quel buco esiste dal
+07/09 — `data/locandine-usate.json`, che copre già **7/7** dei centri — e non è
+collegato: `genera_miniature.py` legge ancora solo `data/eventi.json`.
+
 #### `CORSI_IN_INDICE`: spento il 21/08/2026, **riacceso il 28/08**
 
 `corsi.html` è **in indice dal 28/08/2026**. Era fuori dal 21/08 perché Giovanni
