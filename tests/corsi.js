@@ -147,7 +147,16 @@ module.exports = async function corsi(browser) {
       box: Math.round(box.width),
     };
   }));
-  r.ok(francobolli.length > 0, `${francobolli.length} francobolli senza locandina`);
+  // NON si pretende che ce ne SIA uno, ed e' la nona volta che questa prova
+  // rischiava di marcire nello stesso modo: dal 09/09 il francobollo porta la
+  // miniatura della locandina dove c'e', e il disegno e' il RIPIEGO. Oggi tutte
+  // e 32 le righe hanno un volantino, quindi i disegni in pagina sono zero —
+  // e zero e' lo stato giusto, non un guasto. Quello che si controlla e' che
+  // OGNI riga abbia il suo quadrato, di una delle due specie.
+  const conMini = await page.$$eval('img.ev-thumb', (ns) => ns.length);
+  const righe = await page.$$eval('.ev-row', (ns) => ns.length);
+  r.ok(conMini + francobolli.length === righe,
+    `${righe} righe = ${conMini} miniature + ${francobolli.length} disegni`);
   r.ok(francobolli.every((f) => f.disegno && !f.testo),
     "ogni francobollo e' un disegno (<svg> o illustrazione), e non ha testo dentro");
   // L'invariante che vale per tutte e due le specie: il disegno c'e' e sta nel
@@ -160,7 +169,7 @@ module.exports = async function corsi(browser) {
     ? `francobolli fuori misura: ${fuoriMisura.map((f) => `${f.disegno || 'niente'} ${f.w}x${f.h} in un riquadro da ${f.box}`).join(', ')}`
     : `${francobolli.filter((f) => f.disegno === 'svg').length} pittogrammi e `
       + `${francobolli.filter((f) => f.disegno === 'img').length} illustrazioni, `
-      + `tutti dentro il riquadro da ${francobolli[0].box}px`);
+      + `tutti dentro il riquadro da ${francobolli.length ? francobolli[0].box : 0}px`);
   // Il pittogramma ha la sua forbice stretta, che l'illustrazione non ha: sta
   // dentro il riquadro tinto e non lo riempie (.ev-thumb.is-ph .icon lo mette a
   // 24), mentre l'illustrazione lo riempie apposta (object-fit:contain).

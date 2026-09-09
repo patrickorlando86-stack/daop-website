@@ -1501,13 +1501,13 @@ in agenda. Il quadrato tinto resta e si vede **attraverso la trasparenza** del
 disegno: è il motivo per cui `genera_icone.py` urla quando un PNG arriva con lo
 sfondo pieno, e l'unico difetto che capiterà per davvero.
 
-**La locandina in quel francobollo NON si mette**, ed è la proposta che
-tornerà. Misurato: 32 righe portano una locandina, ma i file distinti sono
-**20** — le quattro sedi dell'atletica ripetono lo stesso volantino tre volte —
-quindi **12 righe su 32 mostrerebbero un doppione**. La regola operativa di
-NN/g sui francobolli è che devono essere «recognizably different from each
-other»: sui centri (9 righe, 9 file distinti) l'immagine distingue e va bene,
-sui corsi no.
+**La locandina in quel francobollo non si metteva, e dal 09/09/2026 si mette**
+— vedi «Il francobollo È la locandina» più sotto. Il no scritto qui si reggeva
+su un conteggio giusto letto male: 32 righe, 20 file distinti, «quindi 12 righe
+mostrerebbero un doppione». Vero, ma **i doppioni non sono adiacenti** — e la
+regola di NN/g («recognizably different from each other») parla di quello che
+si confronta guardando, non di un totale. Il disegno resta, come **ripiego**
+per le righe senza volantino.
 
 ##### L'ordine, e perché è quello e non un altro
 
@@ -1753,18 +1753,10 @@ leggendo l'HTML:
   locandina si guarda). Misurato: adesso aprire tutte le righe scarica **zero**
   locandine, e la prima parte al clic. Il bucket ha 5 GB al mese.
 
-**Il francobollo NON diventa la locandina**, ed è la parte della proposta che
-non si prende. Rimisurato lo stesso giorno: 32 righe, **20 file distinti**, e
-20 righe su 32 stanno in un gruppo dove il volantino non le separa dal vicino.
-Il caso che decide è l'atletica — *Esordienti*, *Ragazzi/e*, *Cadetti/e* nello
-stesso comune, tre righe che **differiscono solo per l'età**, cioè il punto
-esatto in cui un genitore sceglie — che avrebbero tre francobolli identici. Va
-detto che sul puro «quanto distingue» la locandina batte anche il set completo
-di illustrazioni (20 contro 14, perché 16 righe su 32 sono `atletica-leggera`):
-l'argomento che regge non è il conteggio, è **dove** l'immagine fallisce, più
-il fatto che a 60px un volantino è una macchia di colore e non
-un'informazione. Sui centri funziona perché lì il rapporto è 1:1 — 7 righe, 7
-file distinti.
+**Il francobollo NON diventa la locandina** — scritto qui il 09/09 e **rovesciato
+il giorno stesso**, su richiesta di Patrick che l'aveva chiesta due volte. Vedi
+«Il francobollo È la locandina» qui sotto: l'argomento era sbagliato, e come
+era sbagliato conta più della conclusione.
 
 E c'è un rovesciamento che vale la pena sapere prima di citare i centri come
 modello: **è la pagina che fa la cosa giusta a farla nel modo più caro.**
@@ -1773,6 +1765,62 @@ l'uno, misurati l'08/09), mentre le 20 locandine dei corsi hanno già tutte la
 miniatura su disco (media 25,7 KB). Il pezzo che chiude quel buco esiste dal
 07/09 — `data/locandine-usate.json`, che copre già **7/7** dei centri — e non è
 collegato: `genera_miniature.py` legge ancora solo `data/eventi.json`.
+
+#### Il francobollo È la locandina, e il no del giorno prima guardava i totali invece dell'ordine
+
+09/09/2026. Patrick l'aveva chiesta per prima («nei corsi come icone metterei
+l'anteprima della locandina come nei centri estivi»), si era risposto **no** con
+dei numeri, e lui l'ha chiesta di nuovo. Il no era sbagliato, e **l'errore è di
+metodo, non di gusto**: si erano contati i doppioni senza mai guardare in che
+**ordine** stanno in pagina.
+
+La frase che reggeva tutto era: «le tre righe dell'atletica che differiscono
+solo per l'età — Esordienti, Ragazzi/e, Cadetti/e nello stesso comune —
+avrebbero tre francobolli identici, ed è il punto esatto in cui un genitore
+sceglie». L'elenco però è ordinato **disciplina → età → comune**, quindi quelle
+tre righe **non sono mai vicine**: in mezzo ci stanno le altre sedi.
+
+Misurato scorrendo la pagina riga per riga: le righe col volantino uguale a
+quella **sopra** sono **2 su 32**, non 20. E il verso è l'opposto —
+
+| # | riga | volantino | icona di oggi |
+|---|---|---|---|
+| 6 | Atletica Esordienti · Camerana | `6_Camerana` | corridore |
+| 7 | Atletica Esordienti · Carrù | `2_Carru` | corridore |
+| 8 | Atletica Esordienti · Ceva | `3_Ceva` | corridore |
+| 9 | Esordienti · Dogliani | `4_Dogliani` | corridore |
+| 10 | Esordienti · Mondovì | `1_Mondovi` | corridore |
+
+Cinque righe adiacenti: **cinque volantini diversi e un'icona sola.** Lì
+l'anteprima distingue e il disegno no, che è esattamente il contrario di quello
+che il no affermava.
+
+Resta in piedi una sola obiezione, ed è più debole: a 60px un volantino
+verticale non si *legge*. Ma la regola di NN/g chiede che i francobolli siano
+«recognizably different», non leggibili — e distinti lo sono.
+
+Le decisioni che non si ricavano dal diff:
+
+- **La MINIATURA, non l'originale**, ed è la differenza con i centri. Questa è
+  la posizione dell'elenco, dove vale la regola già scritta per l'agenda: le 20
+  locandine dei corsi hanno tutte la loro miniatura su disco (**513 KB in
+  tutto, media 25,7 KB**) contro ~86 KB l'una degli originali. Qui costa zero;
+  `centri-estivi.html`, che questa idea l'aveva per prima, serve ancora gli
+  originali ed è il difetto aperto dell'08/09.
+- **Il disegno non sparisce, diventa il ripiego.** `_francobollo()` stampa la
+  miniatura se c'è, se no l'illustrazione o il pittogramma: è la regola di
+  `loc_path()` — quello che manca non si stampa e non si inventa. Oggi le righe
+  senza volantino sono zero, domani è la prima che entra senza.
+- **Il lavoro sulle illustrazioni non è buttato.** `assets/icone/` resta la
+  strada per le righe scoperte, e il vocabolario di `DISCIPLINE_ICONA` pure.
+
+**E la prova rischiava di marcire per la nona volta.** `tests/corsi.js`
+pretendeva `francobolli.length > 0` sui `.ev-thumb.is-ph`: con la miniatura su
+tutte e 32 le righe quel numero diventa **zero**, cioè sarebbe stata rossa
+proprio nello stato giusto. Ora l'invariante è un rapporto e non un minimo —
+**ogni riga ha il suo quadrato, di una delle due specie**
+(`miniature + disegni === righe`) — che regge sia oggi che il giorno in cui una
+riga arriverà senza volantino.
 
 #### `CORSI_IN_INDICE`: spento il 21/08/2026, **riacceso il 28/08**
 
