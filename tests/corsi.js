@@ -124,25 +124,51 @@ module.exports = async function corsi(browser) {
   // un simbolo che di suo sarebbe testo. Restano fuori, e devono restarci: →,
   // ←, ·, ✕ e ★ sono tipografia, e il sito li usa.
   const EMOJI = /[\p{Emoji_Presentation}\p{Regional_Indicator}]|\p{Extended_Pictographic}️/u;
+  // IL DISEGNO PUO' ESSERE DI DUE SPECIE, e la prova le conosce tutte e due.
+  // Fino all'08/09/2026 cercava solo un <svg>: era giusto finche' i francobolli
+  // erano pittogrammi, ed e' diventato rosso il giorno che e' arrivata la prima
+  // ILLUSTRAZIONE (assets/icone/movimento.webp), cioe' quando il meccanismo del
+  // 07/09 ha fatto la cosa per cui esiste. E' l'ottava volta che una prova qui
+  // pretende un'uniformita' che il sito ha smesso di volere.
+  //
+  // Il vecchio rosso diceva anche «fuori misura: 0x0», e quello 0 NON era una
+  // misura: veniva dal ripiego di questa stessa funzione quando l'svg non c'e'.
+  // Misurato in un browser vero, le illustrazioni sono 52x52 e caricano. Quindi
+  // si misura l'elemento che c'e' davvero, e non uno che si presume.
   const francobolli = await page.$$eval('.ev-thumb.is-ph', (ns) => ns.map((n) => {
-    const svg = n.querySelector('svg');
-    const b = svg ? svg.getBoundingClientRect() : null;
+    const dis = n.querySelector('svg, img.ev-ico');
+    const b = dis ? dis.getBoundingClientRect() : null;
+    const box = n.getBoundingClientRect();
     return {
-      svg: !!svg,
+      disegno: dis ? dis.tagName.toLowerCase() : null,
       testo: n.textContent.trim(),
       w: b ? Math.round(b.width) : 0,
       h: b ? Math.round(b.height) : 0,
+      box: Math.round(box.width),
     };
   }));
   r.ok(francobolli.length > 0, `${francobolli.length} francobolli senza locandina`);
-  r.ok(francobolli.every((f) => f.svg && !f.testo),
-    "ogni francobollo e' un <svg>, e non ha testo dentro");
-  // 16-32px: l'agenda gli da' 24 (.ev-thumb.is-ph .icon), il riquadro ne misura
-  // 52. Fuori da quella forbice o e' sparito o ha sfondato.
-  const fuoriMisura = francobolli.filter((f) => f.w < 16 || f.w > 32 || f.h < 16 || f.h > 32);
+  r.ok(francobolli.every((f) => f.disegno && !f.testo),
+    "ogni francobollo e' un disegno (<svg> o illustrazione), e non ha testo dentro");
+  // L'invariante che vale per tutte e due le specie: il disegno c'e' e sta nel
+  // suo riquadro. Sotto i 16px e' sparito, sopra il riquadro ha sfondato — e il
+  // riquadro si MISURA (52 sul telefono, 60 su desktop) invece di scriverlo qui,
+  // se no la prova diventa rossa al primo ritocco del CSS.
+  const fuoriMisura = francobolli.filter(
+    (f) => f.w < 16 || f.h < 16 || f.w > f.box || f.h > f.box);
   r.ok(fuoriMisura.length === 0, fuoriMisura.length
-    ? `francobolli fuori misura: ${fuoriMisura.map((f) => f.w + 'x' + f.h).join(', ')}`
-    : `disegnati a ${francobolli[0].w}x${francobolli[0].h}px dentro un riquadro da 52`);
+    ? `francobolli fuori misura: ${fuoriMisura.map((f) => `${f.disegno || 'niente'} ${f.w}x${f.h} in un riquadro da ${f.box}`).join(', ')}`
+    : `${francobolli.filter((f) => f.disegno === 'svg').length} pittogrammi e `
+      + `${francobolli.filter((f) => f.disegno === 'img').length} illustrazioni, `
+      + `tutti dentro il riquadro da ${francobolli[0].box}px`);
+  // Il pittogramma ha la sua forbice stretta, che l'illustrazione non ha: sta
+  // dentro il riquadro tinto e non lo riempie (.ev-thumb.is-ph .icon lo mette a
+  // 24), mentre l'illustrazione lo riempie apposta (object-fit:contain).
+  const svgFuori = francobolli.filter(
+    (f) => f.disegno === 'svg' && (f.w < 16 || f.w > 32 || f.h < 16 || f.h > 32));
+  r.ok(svgFuori.length === 0, svgFuori.length
+    ? `pittogrammi fuori dalla forbice 16-32: ${svgFuori.map((f) => f.w + 'x' + f.h).join(', ')}`
+    : 'i pittogrammi stanno nella forbice 16-32px');
   // E in tutta la riga non ne deve restare nessuna: il francobollo era il posto
   // piu' visibile, non l'unico possibile.
   //

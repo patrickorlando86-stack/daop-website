@@ -1836,6 +1836,30 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
+def indice_realta_path():
+    """Dove va il registro delle pagine realta'. SEGUE `DIR_REALTA`.
+
+    NON e' un secondo interruttore da ricordare, ed e' tutto il punto: il
+    registro dice a genera_eventi.py quali pagine esistono *in quella
+    cartella*, quindi se la cartella si sposta deve spostarsi anche lui.
+
+    Con due variabili indipendenti chi deviava solo la prima — cioe'
+    `prova_corsi.py`, che sposta `DIR_REALTA` su `corsi-prova/` — scriveva le
+    realta' FINTE dentro il registro VERO. Nessun errore da nessuna parte, e al
+    giro dopo la riga «Organizzatore: I corsi di …» sulle schede evento
+    rimandava a `/corsi-prova/…`, che in produzione non esiste. Lo salvava solo
+    il fatto che la run notturna riscrive il registro sempre: bastava
+    committare il file per pubblicare ~400 link a un 404.
+
+    Il ripiego non e' "non scrivere niente": e' la stessa scelta gia' fatta per
+    le pagine, che la prova non salta ma REINDIRIZZA in una cartella sua. Cosi'
+    la prova esercita lo stesso codice della produzione e resta ispezionabile.
+    """
+    if DIR_REALTA == 'corsi':
+        return G.INDICE_REALTA_PATH
+    return os.path.join(ROOT, DIR_REALTA, '_realta-pagine.json')
+
+
 def scrivi_realta(gruppi, realta, css, nav, foot):
     """Scrive le pagine delle realta' che se le meritano, e toglie quelle che
     non se le meritano piu'.
@@ -1889,7 +1913,7 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
     # centri-stagioni.json, che invece FONDE - li' un foglio non letto non deve
     # spegnere una voce di nav; qui la verita' e' cosa c'e' su disco, e questa
     # funzione l'ha appena stabilita.
-    with open(G.INDICE_REALTA_PATH, 'w', encoding='utf-8') as fh:
+    with open(indice_realta_path(), 'w', encoding='utf-8') as fh:
         json.dump(indice, fh, ensure_ascii=False, indent=1, sort_keys=True)
     print(f"[genera_corsi] pagine realta': {len(vive)} pubblicate "
           f"({scritte} riscritte), {len(in_indice)} in indice"
