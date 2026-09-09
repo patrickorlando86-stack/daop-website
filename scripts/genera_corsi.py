@@ -2223,32 +2223,61 @@ def card(c, idx, pagine=(), qui_org=None):
     if dati:
         righe_det.append('<dl class="co-dati">' + ''.join(
             f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>')
-    # "Scopri il corso →" deve portare alla pagina del corso sul sito della
-    # scuola, non alla home della societa'. Il rel non e' una formalita': un
-    # link commerciale che passa PageRank e' uno schema di link, e si paga con
-    # un'azione manuale sul DOMINIO — cioe' su eventi.html, che regge il
-    # traffico. Da quando la presenza e' una sola ed e' pagata e' sponsored per
-    # tutti: non c'e' piu' una meta' "nostra segnalazione" da distinguere.
+    # LE AZIONI SONO PILLOLE, COME NELL'AGENDA E NEI CENTRI (09/09/2026).
+    #
+    # Fino a qui i corsi erano l'unica delle tre liste a riga che NON usava
+    # <div class="event-actions"> con le .event-act: l'agenda e i centri lo
+    # fanno tutti e due, i corsi avevano un <p> col link e la locandina
+    # incollata sotto a tutta larghezza. Il CSS non e' nuovo — arriva dal
+    # <style> che _guscio() copia da eventi.html — quindi qui non si ricopia
+    # niente: una seconda definizione dello stesso componente divergerebbe
+    # alla prima modifica, come gia' scritto per .info-strip.
+    #
+    # Cosa cambia, misurato a 412px su tutte e 32 le righe aperte: il dettaglio
+    # passa da 624px di mediana a ~304, perche' la locandina in linea ne
+    # occupava 320 — il 51%, fino a 570px su un volantino verticale. Cioe' piu'
+    # di meta' di quello che si vedeva aprendo un corso era il volantino, che e'
+    # esattamente la cosa che il 26/08 Giovanni aveva messo per ultima ("prima
+    # diamo le info che abbiamo estrapolato, e' quello il valore che stiamo
+    # dando"). Quella decisione qui non si ribalta, si porta fino in fondo: il
+    # volantino smette di essere contenuto e diventa un'azione.
+    #
+    # Due difetti si chiudono per strada, e nessuno dei due si vedeva
+    # nell'HTML:
+    #  - l'<img> non aveva width/height e il CSS diceva height:auto, quindi la
+    #    scatola valeva 0px finche' l'immagine non arrivava e poi saltava a
+    #    320-570px DENTRO una riga che uno sta leggendo. Con la pillola il
+    #    salto non esiste, perche' non c'e' piu' niente da riservare.
+    #  - aprire una riga scaricava l'ORIGINALE dal bucket (non la miniatura:
+    #    una locandina si guarda). Adesso si scarica solo se uno la chiede, e
+    #    il bucket ha 5 GB al mese.
+    #
+    # La lightbox continua a funzionare senza toccare locandina.js: quel file
+    # riconosce gia' `a.event-act` con un href che finisce per estensione di
+    # immagine, che e' esattamente cio' che diventa questa pillola. E resta un
+    # <a href> vero, quindi senza JS, col tasto centrale o con "apri in una
+    # scheda nuova" il volantino si vede lo stesso.
+    #
+    # "Scopri il corso" tiene rel="sponsored": la presenza nella guida e' una
+    # sola ed e' pagata (21/08/2026), e un link commerciale che passa PageRank
+    # e' uno schema di link — si paga con un'azione manuale sul DOMINIO, cioe'
+    # su eventi.html, che regge il traffico. L'ordine e' quello dei centri: il
+    # sito della realta' davanti, il volantino dopo.
+    acts = []
     if c['sito']:
-        righe_det.append(
-            f'<p class="co-fuori"><a href="{G.esc(c["sito"])}" '
-            f'rel="sponsored noopener" target="_blank">Scopri il corso →</a></p>')
-    # LA LOCANDINA STA IN FONDO (26/08/2026, Giovanni: "prima diamo le info che
-    # abbiamo estrapolato, e' quello il valore che stiamo dando"). Ha ragione, e
-    # non e' solo gerarchia: l'immagine e' alta, e in cima spingeva eta', giorni
-    # e contatti sotto la piega proprio nel momento in cui uno apre la riga per
-    # leggerli. Chi vuole vedere il volantino originale scorre; chi vuole i dati
-    # non deve scorrere per niente.
-    # Qui va l'originale e non la miniatura - si guarda, e' la stessa regola
-    # degli elenchi al contrario. Sta dentro un dettaglio chiuso, che il browser
-    # non disegna: con loading=lazy non parte nessuna richiesta finche' la riga
-    # non si apre.
+        acts.append(
+            f'<a class="event-act" href="{G.esc(c["sito"])}" '
+            f'rel="sponsored noopener" target="_blank">'
+            f'{G.ACT_ARROW_SVG} Scopri il corso</a>')
     if c['loc']:
         src = G.loc_path(c['loc'])
         if src:
-            righe_det.append(
-                f'<img class="co-loc" src="{G.esc(src)}" alt="Locandina di '
-                f'{G.esc(c["nome"])}" loading="lazy" decoding="async">')
+            acts.append(
+                f'<a class="event-act" href="{G.esc(src)}" target="_blank" '
+                f'rel="noopener">{G.IMG_SVG} Locandina</a>')
+    if acts:
+        righe_det.append(
+            '<div class="event-actions">' + ''.join(acts) + '</div>')
     if c['verificato']:
         # Un corso non scade da solo come un evento: senza questa riga una
         # scheda ferma da un anno e' identica a una aggiornata ieri.
@@ -2740,10 +2769,6 @@ CSS = """
 .ev-pill.is-openday{background:#2E7D46;color:#fff}
 .co-openday{margin:8px 0 0;color:#2E7D46}
 .co-openday a{color:#2E7D46;font-weight:700}
-.co-loc{width:100%;max-width:320px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
-.co-fuori{margin:10px 0 0}
-.co-fuori a{font-weight:700;color:#2c5d8f;text-decoration:none}
-.co-fuori a:hover{text-decoration:underline}
 .co-dati{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:12px 0 0;font-size:.93rem}
 .co-dati dt{opacity:.65}
 .co-dati dd{margin:0;font-weight:600}

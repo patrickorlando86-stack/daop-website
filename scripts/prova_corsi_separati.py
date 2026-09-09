@@ -145,7 +145,11 @@ if not os.path.exists(pag):
 else:
     t = open(pag, encoding="utf-8").read()
     card_vere = t.count('<button class="ev-row"')
-    loc_vere = len(set(re.findall(r'class="co-loc" src="[^"]*/([^"/]+)"', t)))
+    # Dal 09/09/2026 la locandina non e' piu' un <img> in linea ma la pillola
+    # "Locandina" fra le .event-act, come nei centri: quello che si conta e'
+    # l'href verso il bucket, non piu' il src.
+    loc_vere = len(set(re.findall(
+        r'class="event-act" href="[^"]*/locandine/([^"/]+)"', t)))
     ok(f"{card_vere} card sulla pagina dell'Atletica (erano 5 fuse)",
        card_vere >= 10)
     ok(f"e {loc_vere} locandine diverse, non una per tutte", loc_vere >= 5)
