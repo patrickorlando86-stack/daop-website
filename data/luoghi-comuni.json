@@ -1161,7 +1161,7 @@
  },
  "c-cn-cuneo": {
   "comune": "Cuneo",
-  "n": 8,
+  "n": 9,
   "prov": "CN"
  },
  "c-cn-demonte": {
@@ -1176,7 +1176,7 @@
  },
  "c-cn-dronero": {
   "comune": "Dronero",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-entracque": {
@@ -1429,6 +1429,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-san-pietro-monterosso-grana": {
+  "comune": "San Pietro Monterosso Grana",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-sant-albano-stura": {
   "comune": "Sant'Albano Stura",
   "n": 1,
@@ -1441,7 +1446,7 @@
  },
  "c-cn-savigliano": {
   "comune": "Savigliano",
-  "n": 4,
+  "n": 5,
   "prov": "CN"
  },
  "c-cn-sommariva-del-bosco": {
@@ -1471,6 +1476,11 @@
  },
  "c-cn-torre-san-giorgio": {
   "comune": "Torre San Giorgio",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-treiso": {
+  "comune": "Treiso",
   "n": 1,
   "prov": "CN"
  },
