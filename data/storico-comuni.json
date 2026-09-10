@@ -193,6 +193,23 @@
   "nome": "Aisone",
   "prov": "CN"
  },
+ "alba": {
+  "eventi": {
+   "escape-room-at-the-museum-mudi-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Diocesano",
+    "manifest": "",
+    "nome": "Escape Room at the Museum - MUDI Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Alba",
+  "prov": "CN"
+ },
  "albaretto": {
   "eventi": {
    "passeggiata-a-cavallo-con-axel-circolo-la-torre-albaretto": {
@@ -318,6 +335,17 @@
     "pagina": true,
     "ultima": "2026-08-31"
    },
+   "ciclo-caccia-al-tesoro-ruote-in-pista-la-ruota-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pump Track",
+    "manifest": "",
+    "nome": "Ciclo-Caccia al Tesoro - Ruote in Pista / La Ruota",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
    "cinema-drive-in-e-t-l-extra-terrestre-i-spettacolo-alessandria": {
     "anni": [
      2026
@@ -361,6 +389,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "festa-della-birra-street-food-quartiere-cristo-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Verde Zona Scuola Morbelli - Via Campi",
+    "manifest": "Festa della Birra & Street Food - Quartiere Cristo",
+    "nome": "Festa della Birra & Street Food - Quartiere Cristo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
    },
    "jumpers-alessandria": {
     "anni": [
@@ -438,6 +477,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-01"
+   },
+   "open-day-atelier-ariel-spazio-creativo-per-bimbi-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Atelier Ariel Spazio Creativo",
+    "manifest": "",
+    "nome": "Open Day - Atelier Ariel Spazio Creativo per Bimbi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
    },
    "primi-passi-di-svezzamento-officina-femminile-alessandria": {
     "anni": [
@@ -1138,6 +1188,23 @@
   "nome": "Busca",
   "prov": "CN"
  },
+ "buttigieradasti": {
+  "eventi": {
+   "pompieropoli-associazione-nazionale-vigili-del-fuo-buttigiera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Veneto",
+    "manifest": "",
+    "nome": "Pompieropoli - Associazione Nazionale Vigili del Fuoco Sezione di Asti",
+    "organizza": "Associazione Nazionale Vigili del Fuoco Sezione di Asti",
+    "pagina": false,
+    "ultima": "2026-09-13"
+   }
+  },
+  "nome": "Buttigiera d'Asti",
+  "prov": "AT"
+ },
  "buttiglieradasti": {
   "eventi": {
    "agosto-letterario-buttigliera-d-asti": {
@@ -1352,6 +1419,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "la-notte-dei-peluches-biblioteca-civica-g-monticon-canelli": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica G. Monticone di Canelli",
+    "manifest": "Le Letture del Sabato in Biblioteca 2026/2027",
+    "nome": "La Notte dei Peluches - Biblioteca Civica G. Monticone di Canelli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-03-19"
+   },
    "la-settimana-del-palio-di-asti-canelli": {
     "anni": [
      2026
@@ -1362,6 +1440,29 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "le-letture-del-sabato-in-biblioteca-biblioteca-civ-canelli": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Biblioteca Civica G. Monticone di Canelli",
+    "manifest": "Le Letture del Sabato in Biblioteca 2026/2027",
+    "nome": "Le Letture del Sabato in Biblioteca - Biblioteca Civica G. Monticone di Canelli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-05-22"
+   },
+   "sport-land-la-festa-dello-sport-comune-di-canelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzetto dello Sport",
+    "manifest": "",
+    "nome": "Sport Land - La Festa dello Sport - Comune di Canelli",
+    "organizza": "Comune di Canelli",
+    "pagina": true,
+    "ultima": "2026-09-20"
    }
   },
   "nome": "Canelli",
@@ -1470,6 +1571,17 @@
  },
  "carru": {
   "eventi": {
+   "carrun-per-la-scuola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Mercato - Ala Borsarelli",
+    "manifest": "",
+    "nome": "Carrùn per la Scuola",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "incontro-informativo-di-primo-soccorso-gruppo-volo-carru": {
     "anni": [
      2026
@@ -1575,6 +1687,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "casale-citta-aperta-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico di Casale Monferrato",
+    "manifest": "Casale Città Aperta",
+    "nome": "Casale Città Aperta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
    },
    "festa-del-vino-del-monferrato-casale-monferrato": {
     "anni": [
@@ -1735,6 +1858,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-16"
+   },
+   "i-bambini-e-le-loro-famiglie-percorsi-per-crescere-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Casalnoceto",
+    "manifest": "Percorrere riparte a Settembre",
+    "nome": "I bambini e le loro famiglie: percorsi per crescere insieme - Associazione Percorrere",
+    "organizza": "Associazione Percorrere",
+    "pagina": false,
+    "ultima": "2026-09-24"
    },
    "i-giovedi-in-biblioteca-casalnoceto": {
     "anni": [
@@ -2266,6 +2400,17 @@
  },
  "castellettodorba": {
   "eventi": {
+   "castagnata-campagnola-circolo-acli-san-maurizio-cr-castelletto-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Circolo ACLI San Maurizio",
+    "manifest": "",
+    "nome": "Castagnata Campagnola - Circolo ACLI San Maurizio, Crebini Cazzuli, Passaronda",
+    "organizza": "Circolo ACLI San Maurizio, Crebini Cazzuli, Passaronda",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "coppa-dei-fiaschi-domenica-6-settembre-castelletto-d-orba": {
     "anni": [
      2026
@@ -2988,6 +3133,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-11"
+   },
+   "laboratorio-per-bambini-e-ragazzi-un-pomeriggio-ne-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile del Collegio",
+    "manifest": "",
+    "nome": "Laboratorio per bambini e ragazzi - Un Pomeriggio nel Medioevo! - Attiva Mente",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
    }
   },
   "nome": "Cocconato",
@@ -4342,6 +4498,23 @@
   "nome": "Frinco",
   "prov": "AT"
  },
+ "frugarolo": {
+  "eventi": {
+   "neverland-the-fantasy-garden-halloween-frugarolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Neverland The Fantasy Garden",
+    "manifest": "",
+    "nome": "Neverland The Fantasy Garden - Halloween 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Frugarolo",
+  "prov": "AL"
+ },
  "garbagna": {
   "eventi": {
    "ferragosto-in-piazza-doria-con-i-deejays-in-tour-p-garbagna": {
@@ -5457,6 +5630,28 @@
  },
  "nizzamonferrato": {
   "eventi": {
+   "allattare-come-e-perche-beatrice-botto-ostetrica-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Salotto di Bea",
+    "manifest": "",
+    "nome": "Allattare...come e perché? - Beatrice Botto Ostetrica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-30"
+   },
+   "allattare-come-e-perche-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salotto di Bea",
+    "manifest": "Incontri che Nutrono",
+    "nome": "Allattare...come e perchè?",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-30"
+   },
    "cinema-all-aperto-bad-guys-troppo-cattivi-oratorio-nizza-monferrato": {
     "anni": [
      2026
@@ -5468,6 +5663,39 @@
     "pagina": true,
     "ultima": "2026-08-09"
    },
+   "guida-pratica-al-neonato-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Movida Bar",
+    "manifest": "Incontri che Nutrono",
+    "nome": "Guida pratica al neonato",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-10-20"
+   },
+   "il-viaggio-nutrizionale-della-maternita-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Movida Bar",
+    "manifest": "Incontri che Nutrono",
+    "nome": "Il viaggio nutrizionale della maternità",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-10-13"
+   },
+   "la-salute-di-bambini-e-adulti-a-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Movida Bar",
+    "manifest": "Incontri che Nutrono",
+    "nome": "La salute di bambini e adulti a 360°",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-11-26"
+   },
    "nizza-e-sport-pro-loco-nizza-monferrato": {
     "anni": [
      2026
@@ -5478,6 +5706,50 @@
     "organizza": "Pro Loco Nizza Monferrato",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "nutrire-un-bambino-dopo-i-primi-mesi-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Movida Bar",
+    "manifest": "Incontri che Nutrono",
+    "nome": "Nutrire un bambino dopo i primi mesi",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-11-13"
+   },
+   "post-parto-salute-pelvica-e-addominale-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Movida Bar",
+    "manifest": "Incontri che Nutrono",
+    "nome": "Post parto: salute pelvica e addominale",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-10-26"
+   },
+   "preparare-il-pavimento-pelvico-al-parto-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salotto di Bea",
+    "manifest": "Incontri che Nutrono",
+    "nome": "Preparare il pavimento pelvico al parto",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-10-07"
+   },
+   "quando-venere-diventa-luna-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Soffitta dei Bambini",
+    "manifest": "Incontri che Nutrono",
+    "nome": "Quando Venere diventa Luna",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-11-18"
    }
   },
   "nome": "Nizza Monferrato",
@@ -5606,6 +5878,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "la-notte-dei-pupazzi-consegna-pupazzi-la-bottega-d-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Bottega del Sanconiglio",
+    "manifest": "La Notte dei Pupazzi",
+    "nome": "La Notte dei Pupazzi - Consegna Pupazzi - La Bottega del Sanconiglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-25"
+   },
+   "la-notte-dei-pupazzi-ritiro-pupazzi-e-colazione-la-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Bottega del Sanconiglio",
+    "manifest": "La Notte dei Pupazzi",
+    "nome": "La Notte dei Pupazzi - Ritiro Pupazzi e Colazione - La Bottega del Sanconiglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
    },
    "mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure": {
     "anni": [
@@ -6073,6 +6367,23 @@
   },
   "nome": "Piasco",
   "prov": "CN"
+ },
+ "piea": {
+  "eventi": {
+   "fiera-nazionale-della-zucca-la-zucca-delle-meravig-piea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "24ª Fiera Nazionale della Zucca - La Zucca delle Meraviglie",
+    "nome": "24ª Fiera Nazionale della Zucca - La Zucca delle Meraviglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   }
+  },
+  "nome": "Piea",
+  "prov": "AT"
  },
  "pietramarazzi": {
   "eventi": {
@@ -6846,6 +7157,23 @@
   "nome": "Revello",
   "prov": "CN"
  },
+ "revigliascodasti": {
+  "eventi": {
+   "mubum-in-piazza-revigliasco-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area giochi di Piazza Garons",
+    "manifest": "MUBUM in Piazza",
+    "nome": "MUBUM in Piazza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   }
+  },
+  "nome": "Revigliasco d'Asti",
+  "prov": "AT"
+ },
  "rivaltabormida": {
   "eventi": {
    "castelli-aperti-a-ferragosto-palazzo-lignana-rivalta-bormida": {
@@ -6995,6 +7323,17 @@
  },
  "rocchettaligure": {
   "eventi": {
+   "festa-del-volontariato-vivi-borbera-e-spinti-rocchetta-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rocchetta Ligure",
+    "manifest": "",
+    "nome": "Festa del Volontariato - Vivi Borbera e Spinti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "sagra-delle-fagiolane-pro-loco-di-rocchetta-rocchetta-ligure": {
     "anni": [
      2026
@@ -8520,6 +8859,17 @@
     "pagina": true,
     "ultima": "2026-08-24"
    },
+   "attivita-assistita-con-il-cane-associazione-percor-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Fassini",
+    "manifest": "Percorrere riparte a Settembre",
+    "nome": "Attività Assistita con il Cane - Associazione Percorrere",
+    "organizza": "Associazione Percorrere",
+    "pagina": false,
+    "ultima": "2026-09-26"
+   },
    "festa-della-madonna-della-guardia-tortona": {
     "anni": [
      2026
@@ -8563,6 +8913,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "open-street-basket-supercoppa-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Duomo",
+    "manifest": "Open Street Basket Supercoppa",
+    "nome": "Open Street Basket Supercoppa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
+   "percorrere-riparte-a-settembre-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Art Café",
+    "manifest": "Percorrere riparte a Settembre",
+    "nome": "Percorrere riparte a Settembre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-18"
    },
    "serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona": {
     "anni": [
@@ -8677,6 +9049,17 @@
  },
  "valfenera": {
   "eventi": {
+   "25-anni-parco-la-rocca-festeggiamo-insieme-valfenera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco La Rocca",
+    "manifest": "",
+    "nome": "25 Anni Parco La Rocca - Festeggiamo Insieme!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "fiera-di-san-bartolomeo-dell-aglio-e-del-pitu-valfenera": {
     "anni": [
      2026
