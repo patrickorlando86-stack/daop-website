@@ -8211,14 +8211,34 @@ def link_landing(oggi=None):
     linkiamo da 290 pagine. Senza 'oggi' l'elenco e' quello di sempre.
 
     Il ciclo su STAGIONI e' il motivo per cui aggiungere una festa non obbliga
-    a ricordarsi anche di questa funzione."""
+    a ricordarsi anche di questa funzione.
+
+    La voce provinciale e' /eventi-provincia-<nome>.html e non piu'
+    /sagre-provincia-<nome>.html (09/09/2026, chiesto da Giovanni). Il motivo:
+    questa riga si chiama "cosa cerchi" e sta su pagine che elencano TUTTA
+    l'agenda - laboratori, spettacoli, sport - mentre la pagina delle sagre ne
+    mostra una fetta sola (a Cuneo 16 righe su 74: il filtro butta via l'80%
+    del lavoro del curatore). Una scorciatoia che promette la provincia e
+    consegna le sagre e' la stessa cosa dell'occhiello dei corsi che prometteva
+    i costi che il foglio non ha.
+
+    NON si aggiunge accanto alla vecchia, la sostituisce: la riga si stampa su
+    ~290 pagine e tre voci in piu' la trasformano nella barra che nessuno
+    guarda - la ragione gia' scritta per le sei d'incrocio. Restano cinque
+    pillole, come prima.
+
+    Cosa perdono le sagre, misurato: i link dalle 16 pagine di intenzione senza
+    provincia (oggi, weekend, le otto stagionali, le sei d'incrocio). Cosa
+    tengono: la coda di ~460 schede evento - che fanno il 77% dei clic e sono
+    le pagine con l'autorita' vera - piu' il blocco in fondo a ogni
+    /eventi-provincia-* e il "TESTO DI ZONA" di eventi.html. Nessuna delle due
+    famiglie resta senza link entranti, ed e' la sola cosa da non fare."""
     voci = [("/eventi/oggi.html", "Cosa c'è oggi"),
             ("/eventi/weekend.html", "Questo weekend")]
     if oggi is not None:
         voci += [(st.href, st.nome) for st in STAGIONI if in_stagione(st, oggi)]
     for c in PROVINCE_PUBBLICATE:
-        nome = PROVINCE_NOMI.get(c, c)
-        voci.append((f"/sagre-provincia-{slugify(nome)}.html", f"Sagre {nome}"))
+        voci.append((href_eventi_prov(c), f"Eventi {PROVINCE_NOMI.get(c, c)}"))
     return voci
 
 
