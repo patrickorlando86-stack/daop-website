@@ -122,7 +122,13 @@
   .ev-toolbar{position:sticky;top:68px;z-index:40;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 0 11px;border-bottom:1px solid rgba(45,74,92,0.10)}
   .ev-search{position:relative;flex:1 1 230px;min-width:0;display:flex;align-items:center}
   .ev-search svg{position:absolute;left:15px;color:var(--text-light);pointer-events:none}
-  .ev-search input{width:100%;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:11px 16px 11px 42px;min-height:44px}
+  /* text-overflow:ellipsis: il segnaposto di un input si taglia a META' PAROLA,
+     e la larghezza di questo campo non la decide il CSS - la decide il DATO,
+     perche' Chrome dimensiona ogni <select> accanto sull'opzione piu' lunga
+     (su corsi.html "Borgo San Dalmazzo" prende 179px e alla ricerca ne
+     restano 182). Un comune piu' lungo domani stringe ancora il campo: la
+     rete va messa qui, non accorciando una frase per volta. */
+  .ev-search input{width:100%;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:11px 16px 11px 42px;min-height:44px;text-overflow:ellipsis}
   .ev-search input::placeholder{color:var(--text-light)}
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}

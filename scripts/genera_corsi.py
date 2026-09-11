@@ -3283,10 +3283,33 @@ def toolbar(corsi):
                      'Solo con open day</label>')
     if not campi:
         return ''
+    # IL SEGNAPOSTO STA IN 179px, e non e' il CSS a deciderlo. Questa barra ha
+    # tre tendine piu' la casella che prendono 586px degli 860 del contenitore,
+    # e alla ricerca resta il fondo: 179px sul desktop, 220px a 760 e a 320px.
+    # "Cerca un corso, una societa', un paese…" ne chiedeva 263 - usciva
+    # tagliato a meta' parola su tre larghezze su cinque, ed era anche l'unico
+    # testo di questa pagina con l'apostrofo al posto dell'accento.
+    #
+    # Nemmeno "Cerca un corso, un paese…" va bene, anche se i suoi 177px ci
+    # STANNO: la larghezza delle tendine la decide il DATO - Chrome le
+    # dimensiona sull'opzione piu' lunga, e "Borgo San Dalmazzo" da solo ne
+    # prende 179 - quindi un comune piu' lungo domani se li riprende e 2px di
+    # margine tornano rossi in silenzio. Serve un margine vero, non un pareggio.
+    #
+    # Delle tre parole si tiene "societa'" e non "paese" perche' il comune ha
+    # la sua tendina due centimetri a destra, e la societa' no: digitarla e'
+    # l'unica strada che c'e' (l'indice della ricerca e' il textContent della
+    # card, che dentro ha "Organizzatore"). Gli articoli cadono per stare nello
+    # spazio; l'aria-label resta la frase intera, quindi chi legge con lo
+    # screen reader non perde niente.
+    #
+    # Allargare il campo invece di accorciare la frase vorrebbe dire mandare a
+    # capo un controllo, e questa barra e' appiccicosa: si pagherebbe su ogni
+    # schermata dello scorrimento, non una volta.
     return f"""    <div class="ev-toolbar" id="co-toolbar">
       <div class="ev-search">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <input type="search" id="co-q" placeholder="Cerca un corso, una societa', un paese…" aria-label="Cerca fra i corsi" autocomplete="off">
+        <input type="search" id="co-q" placeholder="Cerca corso o società…" aria-label="Cerca fra i corsi" autocomplete="off">
       </div>
 {chr(10).join("      " + c for c in campi)}
     </div>
