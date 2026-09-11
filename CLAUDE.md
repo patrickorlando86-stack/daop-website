@@ -2287,6 +2287,68 @@ del bambino e per comune» — che sono i tre filtri veri, invece di elencare da
 che potrebbero mancare. È la stessa regola già scritta per l'agenda: una pagina
 non annuncia un dato che la riga sotto può non avere.
 
+#### I testi si scrivono dai dati, e le FAQ non hanno FAQPage
+
+Fatto l'11/09/2026 sull'analisi SEO di Giovanni: usare anche nei testi quello
+che raccogliamo già (attività, età, comune, sede, organizzatore). Su
+`corsi.html` l'hero, il paragrafo coi numeri, la description e sei domande
+frequenti; sulle pagine in `corsi/` il title, il paragrafo d'apertura, la
+description e tre-quattro domande. Tutto in `genera_corsi.py` (`testo_hero`,
+`testo_numeri`, `descr_corsi`, `faq_corsi`, `testo_realta`, `faq_realta`).
+
+Quattro cose hanno cambiato la proposta di partenza:
+
+- **Un comune si nomina solo se ha corsi.** La proposta elencava «Cuneo, Alba,
+  Bra, Mondovì, Fossano, Saluzzo, Savigliano», e all'11/09 quattro su sette
+  non ne avevano nessuno. La FAQ «musica, danza, teatro o inglese a Cuneo»
+  avrebbe dovuto rispondere di no: a Cuneo città i corsi sono 2, e niente
+  danza né teatro. I comuni escono in ordine di numero di corsi, al massimo
+  sei più «e in altri N».
+- **Niente giorni, orari o costi promessi**: è la regola qui sopra. I giorni
+  ci sono su 41 corsi su 53, la quota su 2. Anche la vecchia meta description
+  prometteva «giorni, costi» e nominava la danza, che nell'elenco non c'era.
+- **Una domanda senza dati non si stampa, e nessuna risposta dice «no».** Una
+  prova che manca nel foglio non vuol dire che non si possa provare. Prova (su
+  21 corsi) e open day (su 7) restano **due numeri**, per la ragione della
+  sezione qui sotto. Il filtro «Solo con open day» si nomina solo quando divide.
+- **Niente FAQPage in JSON-LD.** Google ha spento i risultati FAQ il
+  **07/05/2026** (dal 2023 li mostrava solo a siti governativi e sanitari), e
+  per le AI Overviews scrive che non serve nessuno schema. Resterebbe una
+  seconda copia dello stesso testo da tenere allineata. Anche il risultato
+  arricchito `Course` è stato ritirato a giugno 2025: il JSON-LD `Course` resta,
+  ma non va citato come leva.
+
+Le decisioni che non si ricavano dal diff:
+
+- **L'attività nel title di una realtà**: la disciplina se è una sola, la
+  famiglia se è una sola, due famiglie in forma breve («musica e movimento»),
+  con tre o più famiglie niente. «Lingue» diventa «inglese» solo se nessun corso
+  nomina un'altra lingua. La preposizione la mette `G.a_citta()`: era «a Alba».
+- **Niente ripetizioni.** Col capoluogo, dopo «a Cuneo» non si aggiunge «in
+  provincia di Cuneo»; se il comune sta già nel nome della società («Kids&Us
+  Alba»), la domanda non lo ripete.
+- **Le fasce d'età delle FAQ sono quelle del filtro**, non le celle del foglio:
+  l'Atletica scriveva la stessa fascia in tre modi («1a e 2a media», «1 e 2
+  media», «1ª e 2ª media»).
+- **La description di una realtà è il paragrafo scritto dai dati**, non la
+  presentazione della società, che resta in pagina sotto «Chi è».
+- **`G.esc()` toglie gli spazi in testa**: la preposizione va scritta fuori,
+  se no l'occhiello esce «Corsidi musica per bambinia Vezza d'Alba». È successo.
+
+Le prove sono due, e **nessuna conta i corsi**. `scripts/prova_testi_corsi.py`
+lavora su corsi finti; `tests/corsi.js` guarda la pagina vera con rapporti che
+reggono qualunque foglio: il numero scritto è quello delle schede in pagina, gli
+open day delle FAQ sono quelli con `data-openday="1"`, e ogni comune nominato
+(cercato fra i nomi di `data/luoghi-comuni.json`) ha almeno un corso.
+
+**L'aspettativa va tenuta bassa.** In 90 giorni `corsi.html` ha fatto 236
+impressioni in posizione 7, le pagine delle realtà sono nate fra il 03 e il
+10/09, e le poche query chiedono età e attività («corsi per bambini di 4 anni
+vicino a me»), non città. Su «corsi di inglese per bambini Alba» vincono i
+siti delle scuole; su «corsi bambini Cuneo» vince Orangogo, con pagine per
+comune e per sport, cioè una struttura che qui non si fa. Il frutto vero arriva
+con la stagione 2027/28.
+
 #### L'open day è un evento, la prova è un attributo
 
 La scheda aperta mostrava **due calendari per la stessa cosa**: la riga «Open
@@ -6331,6 +6393,7 @@ python3 scripts/prova_ritirata.py                   # un evento sparito non ment
 python3 scripts/prova_comuni_simili.py              # due grafie, un paese solo
 python3 scripts/prova_credito_foto.py               # il credito sotto la foto
 python3 scripts/prova_logo_realta.py                # il logo di una società
+python3 scripts/prova_testi_corsi.py                # i testi dei corsi dicono solo i dati
 cd tests && npm install && npm test                 # prove di fumo (Playwright)
 ```
 
