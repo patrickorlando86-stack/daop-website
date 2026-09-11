@@ -2673,13 +2673,24 @@ def aggiorna_registro(events):
     reg = carica_registro()
     oggi = datetime.date.today().isoformat()
     nuovi = 0
-    # Un solo evento per slug, il piu' completo, prima di toccare il registro.
+    # Un solo evento per slug prima di toccare il registro: il PROSSIMO, e fra
+    # due righe con la stessa data d'inizio il piu' completo.
+    #
+    # Fino all'11/09/2026 vinceva solo il piu' completo, e su una SERIE - lo
+    # stesso appuntamento ripetuto con date diverse, «Le Letture del Sabato» a
+    # Canelli, nove sabati fino a maggio 2027 - voleva dire che in cima alla
+    # scheda poteva finire una data a caso: bastava che la riga di ottobre
+    # avesse una virgola in piu' di quella di settembre. completezza() e' nata
+    # per i DOPPIONI (stesso evento inserito due volte), che hanno la stessa
+    # data d'inizio, e li' continua a decidere.
     migliori = {}
     for e in events:
         if not ha_pagina(e):
             continue
         s = slug_evento(e)
-        if s not in migliori or completezza(e) > completezza(migliori[s]):
+        if s not in migliori or ((-e['d_start'].toordinal(), completezza(e)) >
+                                 (-migliori[s]['d_start'].toordinal(),
+                                  completezza(migliori[s]))):
             migliori[s] = e
     # Uno slug NUOVO puo' essere l'edizione nuova di una pagina che c'e' gia',
     # con il nome scritto un po' diversamente. Si guarda solo qui: se lo slug e'
@@ -2881,6 +2892,11 @@ PAGINA_CSS = """
 .ev-prog-o{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:700;
   font-variant-numeric:tabular-nums;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:2px 9px;white-space:nowrap}
+/* «Tutte le date in programma» di una serie (blocco_date()): riusa il titolo e
+   la pillola dell'ora del programma, e aggiunge solo l'elenco. */
+.ev-date-l{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-date-l li{line-height:1.45;font-variant-numeric:tabular-nums}
+.ev-date-l time{font-weight:600}
 /* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
    cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
    non e' la pagina. */
@@ -2957,6 +2973,13 @@ PAGINA_CSS = """
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
+   grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
+   #5c6975 su bianco fa 5,6:1. */
+.ev-spons{margin:12px 0 0;font-size:.9rem;color:var(--text-mid,#4a5a66)}
+.ev-spons-l{display:inline-block;margin-right:6px;font-size:.66rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:#5c6975}
+.ev-spons a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 /* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
    famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
    a chi arriva dalla ricerca di essere nel posto giusto. */
@@ -3465,6 +3488,46 @@ def link_luoghi(citta, prov):
     quanti = "Un posto" if n == 1 else f"{n} posti"
     return (f'<a href="/luoghi.html#{ancora}">{quanti} per famiglie'
             f'{a_citta(esc(dati.get("comune") or citta))}</a>')
+
+
+def link_sponsor(citta, prov, oggi=None):
+    """La riga "Sponsorizzato · <posto>" in coda a una scheda evento, o ''.
+
+    Nata l'11/09/2026. Uno spazio venduto su /luoghi.html lo vedeva lo 0,4%
+    dei clic del sito; le schede evento ne fanno il 77%, e chi legge l'orario
+    di una sagra a Castelnuovo Scrivia e' esattamente la persona a cui
+    interessa un posto a Castelnuovo Scrivia. Qui la coerenza col contesto non
+    va costruita: e' il comune della scheda.
+
+    - La PAROLA viene prima del nome, e non c'e' un simbolo al suo posto: e'
+      la dichiarazione del pagamento (Codice del consumo, Digital Chart IAP,
+      FTC). Stesso grigio di .lg-spons, perche' e' la stessa avvertenza.
+    - UNA riga, non l'elenco dei clienti del comune: se sono piu' d'uno
+      ruotano un giorno per uno, sulla stessa base alfabetica del riquadro.
+    - Porta alla riga del posto su /luoghi.html, non al suo sito: un link
+      interno non passa PageRank a nessuno, e il cliente riceve il lettore
+      sulla scheda che ha pagato, dove ci sono foto e contatti.
+    - Si legge dallo stesso indice di link_luoghi(), quindi con lo stesso giro
+      di ritardo: un premium che scade oggi resta qui fino a domani notte.
+
+    Non e' una richiesta come Ginetto - non chiede niente a chi legge, gli dice
+    dove andare - ma sta nello stesso pezzo di pagina: `apri_ginetto` sulle
+    schede va letto prima e dopo."""
+    if not citta:
+        return ''
+    prov = (prov or '').strip()
+    slug = slugify(citta)
+    ancora = f"c-{prov.lower()}-{slug}" if prov else f"c-{slug}"
+    dati = indice_luoghi().get(ancora) or {}
+    sponsor = dati.get('sponsor') or []
+    if not sponsor:
+        return ''
+    oggi = oggi if isinstance(oggi, datetime.date) else datetime.date.today()
+    s = sponsor[oggi.toordinal() % len(sponsor)]
+    tipo = f' · {esc(s["tipo"])}' if s.get('tipo') else ''
+    return (f'<p class="ev-spons"><span class="ev-spons-l">Sponsorizzato</span> '
+            f'<a href="/luoghi.html#{esc(s["ancora"])}">{esc(s["nome"])}</a>'
+            f'{tipo}{a_citta(esc(dati.get("comune") or citta))}</p>')
 
 
 
@@ -3989,7 +4052,12 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
             f'<h2 id="ev-vicini-t">{esc(titolo)}</h2>'
             f'{elenco}'
             f'<p class="ev-vic-all">{" · ".join(coda)}</p>'
-            '</section>')
+            # Mai su una scheda ritirata o spostata: quella pagina dichiara di
+            # non essere attendibile, e vendere uno spazio li' e' chiedere
+            # fiducia nel punto esatto in cui l'abbiamo tolta.
+            + ('' if rec.get('ritirata') or rec.get('spostata')
+               else link_sponsor(rec.get('citta'), prov, oggi))
+            + '</section>')
 
 
 def _dove_invece(citta, prov, hub):
@@ -4021,6 +4089,65 @@ def _dove_invece(citta, prov, hub):
     if not voci:
         voci.append(("/eventi.html", "l'agenda DAOP"))
     return voci
+
+
+# ── Le date di una serie ──────────────────────────────────────────────────────
+# PERCHE' ESISTE (11/09/2026). Lo slug non porta la data, apposta (vedi
+# slug_evento()): cosi' un appuntamento che si ripete - «Le Letture del Sabato»
+# a Canelli, nove sabati fino a maggio 2027 - ha UNA scheda sola, che invecchia
+# invece di ripartire da zero a ogni data. Ma quella scheda diceva una data e
+# basta: chi ci arrivava da Google non sapeva che era un ciclo, e le altre otto
+# stavano solo in agenda. Al 11/09 le serie sono 10 schede su ~500.
+_SERIE = {'di': None, 'indice': {}}
+
+
+def date_serie(slug, vicini, oggi):
+    """Gli appuntamenti non ancora finiti che condividono lo slug, in ordine di
+    data. Due righe con stessa data, stesso orario d'inizio e stessa fine sono
+    un doppione e contano una volta.
+
+    L'indice per slug si costruisce una volta per run e non una per scheda:
+    slug_evento() su ~180 righe per ~500 schede sarebbero 90.000 chiamate."""
+    if _SERIE['di'] is not vicini:
+        indice = {}
+        for x in vicini:
+            if ha_pagina(x):
+                indice.setdefault(slug_evento(x), []).append(x)
+        _SERIE['di'], _SERIE['indice'] = vicini, indice
+    viste = {}
+    for x in _SERIE['indice'].get(slug, ()):
+        if x['d_end'] >= oggi:
+            viste.setdefault((x['d_start'], _ora_inizio(x.get('ora')), x['d_end']), x)
+    return [viste[k] for k in sorted(viste)]
+
+
+def blocco_date(serie, oggi):
+    """«Tutte le date in programma», solo se le date sono almeno due.
+
+    Sta subito sotto i fatti e non in coda: sono le date per cui uno e' venuto,
+    cioe' un servizio, e un servizio si mette davanti. L'anno si scrive solo
+    quando non e' quello in corso, come in agenda (anno_se_altro()). L'ora e' la
+    pillola del programma impaginato, che c'e' gia' in PAGINA_CSS."""
+    if len(serie) < 2:
+        return ''
+    voci = []
+    for x in serie:
+        di, df = x['d_start'], x['d_end']
+        if df == di:
+            testo = f"{GIORNI[di.weekday()]} {di.day} {MESI_LUNGHI[di.month - 1]}"
+        elif (df.year, df.month) == (di.year, di.month):
+            testo = f"{GIORNI[di.weekday()]} {di.day}-{df.day} {MESI_LUNGHI[df.month - 1]}"
+        else:
+            testo = (f"{GIORNI[di.weekday()]} {di.day} {MESI_LUNGHI[di.month - 1]}"
+                     f"{anno_se_altro(di, oggi) if di.year != df.year else ''}"
+                     f" - {df.day} {MESI_LUNGHI[df.month - 1]}")
+        testo += anno_se_altro(df, oggi)
+        ora = (f'<span class="ev-prog-o">{esc(trunc(x["ora"], 20))}</span>'
+               if (x.get('ora') or '').strip() else '')
+        voci.append(f'<li><time datetime="{di.isoformat()}">{esc(testo)}</time>{ora}</li>')
+    return ('<section class="ev-date" aria-labelledby="ev-date-t">'
+            '<h2 class="ev-prog-h" id="ev-date-t">Tutte le date in programma</h2>'
+            f'<ul class="ev-date-l">{"".join(voci)}</ul></section>\n  ')
 
 
 def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
@@ -4274,6 +4401,11 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
                         ensure_ascii=False, indent=2)
 
     corpo = corpo_descrizione(descr_txt)
+    # Le altre date solo su una scheda viva: su una conclusa non ce ne sono (la
+    # serie avrebbe gia' spostato la scheda sulla prossima), su una ritirata o
+    # orfana sarebbero date di un appuntamento che la pagina non garantisce.
+    date_html = (blocco_date(date_serie(rec['slug'], vicini, oggi), oggi)
+                 if vicini and not (concluso or ritirata or orfano) else '')
     famiglie = (blocco_famiglie(rec, vicini, oggi, hub=hub)
                 if vicini and not ritirata else '')
     consiglio = '' if ritirata else blocco_daop(e)
@@ -4349,7 +4481,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   <ul class="ev-facts">
     {"".join(facts)}
   </ul>
-  {img}
+  {date_html}{img}
   <div class="ev-body">
     {corpo}
   </div>

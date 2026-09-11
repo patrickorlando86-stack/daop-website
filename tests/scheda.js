@@ -236,5 +236,64 @@ module.exports = async function scheda(browser) {
     ? `${bugie.length} righe promettono un numero che la scheda non ha: ${bugie.slice(0, 2).join(' | ')}`
     : 'il numero promesso dalla riga e\' quello che la scheda consegna');
 
+  // ── Le date di una serie ──────────────────────────────────────────────
+  // Lo slug non porta la data, quindi un appuntamento che si ripete («Le
+  // Letture del Sabato», nove sabati fino a maggio 2027) ha UNA scheda. Quella
+  // scheda deve dire tutte le date, e in cima la prossima. Il confronto e' con
+  // l'agenda della stessa run e non con un numero: «9 date» sarebbe rosso il
+  // primo sabato che passa, cioe' quando il sito fa la cosa giusta.
+  r.titolo('eventi/*.html — le date di una serie');
+  const CARD = /<article class="event-card"[^>]*data-start="([\d-]+)"[\s\S]*?<\/article>/g;
+  const VERSO = /href="\/eventi\/([^"#]+)\.html"><svg[^>]*><use href="#i-arrow-right"\/><\/svg> Scheda completa/;
+  const ELENCO = /<ul class="ev-date-l">([\s\S]*?)<\/ul>/;
+  const inAgenda = new Map();
+  for (const m of agenda.matchAll(CARD)) {
+    const s = VERSO.exec(m[0]);
+    if (!s) continue;
+    if (!inAgenda.has(s[1])) inAgenda.set(s[1], new Set());
+    inAgenda.get(s[1]).add(m[1]);
+  }
+  const serie = [...inAgenda].filter(([, d]) => d.size > 1);
+  const senzaElenco = [], altreDate = [], nonProssima = [], disordine = [], abusivi = [];
+  for (const [slug, date] of serie) {
+    const dove = path.join(RADICE, 'eventi', `${slug}.html`);
+    if (!fs.existsSync(dove)) continue;
+    const ul = ELENCO.exec(fs.readFileSync(dove, 'utf8'));
+    if (!ul) { senzaElenco.push(`${slug} (${date.size} date in agenda)`); continue; }
+    const inScheda = [...ul[1].matchAll(/<time datetime="([\d-]+)"/g)].map((x) => x[1]);
+    const attese = [...date].sort();
+    if ([...new Set(inScheda)].sort().join() !== attese.join()) {
+      altreDate.push(`${slug}: la scheda dice ${[...new Set(inScheda)].join(' ')}, l'agenda ${attese.join(' ')}`);
+    }
+    if (inScheda.join() !== [...inScheda].sort().join()) disordine.push(slug);
+    // In cima alla scheda sta la data del registro: dev'essere la prima.
+    const inCima = (registro[slug] || {}).d_start;
+    if (inCima !== attese[0]) nonProssima.push(`${slug}: in cima ${inCima}, la prossima e' ${attese[0]}`);
+  }
+  // Il verso che si dimentica: un elenco di date su una scheda che in agenda
+  // ne ha una sola sarebbe una serie inventata.
+  const seriali = new Set(serie.map(([s]) => s));
+  for (const f of file) {
+    const slug = f.slice(0, -5);
+    if (seriali.has(slug)) continue;
+    if (ELENCO.test(fs.readFileSync(path.join(RADICE, 'eventi', f), 'utf8'))) abusivi.push(slug);
+  }
+
+  r.ok(senzaElenco.length === 0, senzaElenco.length
+    ? `${senzaElenco.length} schede di una serie non dicono le altre date: ${senzaElenco.slice(0, 3).join(', ')}`
+    : `${serie.length} serie in agenda, e ogni scheda elenca le sue date`);
+  r.ok(altreDate.length === 0, altreDate.length
+    ? `${altreDate.length} schede elencano date diverse dall'agenda: ${altreDate.slice(0, 2).join(' | ')}`
+    : 'le date della scheda sono quelle dell\'agenda, ne\' una di piu\' ne\' una di meno');
+  r.ok(disordine.length === 0, disordine.length
+    ? `${disordine.length} elenchi di date fuori ordine: ${disordine.slice(0, 3).join(', ')}`
+    : 'le date sono in ordine');
+  r.ok(nonProssima.length === 0, nonProssima.length
+    ? `${nonProssima.length} schede non mettono in cima la prossima data: ${nonProssima.slice(0, 2).join(' | ')}`
+    : 'in cima alla scheda sta la prossima data della serie');
+  r.ok(abusivi.length === 0, abusivi.length
+    ? `${abusivi.length} schede elencano date senza essere una serie: ${abusivi.slice(0, 3).join(', ')}`
+    : 'nessuna scheda con una data sola stampa l\'elenco');
+
   return r;
 };
