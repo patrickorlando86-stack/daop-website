@@ -1045,10 +1045,11 @@ def scheda_realta(org, corsi_org, info):
     romperebbe quei link per guadagnare niente."""
     a = _ancora(org)
     dentro = []
+    # Il logo sta ACCANTO al nome, piccolo, e non sotto (11/09/2026): stessa
+    # ragione della pagina della realta' — un blocco da 120px fra il nome e la
+    # descrizione staccava da tutto, e in una lista fatta per scorrere si
+    # prendeva lo spazio di tre righe.
     logo = logo_path(info.get('logo'))
-    if logo:
-        dentro.append(f'<img class="co-logo" src="{G.esc(logo)}" alt="Logo di '
-                      f'{G.esc(org)}" loading="lazy" decoding="async">')
     descr = (info.get('descr') or '').strip()
     if descr:
         # In fondo all'elenco basta l'attacco: la descrizione intera si legge
@@ -1116,9 +1117,14 @@ def scheda_realta(org, corsi_org, info):
     # trovarlo morto e' un clic che non risponde.
     titolo = (f'<a href="{url_realta(org)}">{G.esc(org)}</a>'
               if ha_pagina(info) else G.esc(org))
+    testa = f'<h3>{titolo}</h3>'
+    if logo:
+        testa = (f'<div class="co-realta-testa"><img class="co-logo" '
+                 f'src="{G.esc(logo)}" alt="Logo di {G.esc(org)}" width="600" '
+                 f'height="600" loading="lazy" decoding="async">{testa}</div>')
     return (f'  <div class="co-realta" id="{a}" data-org="{G.slugify(org)}"'
             f' data-org-nome="{G.esc(org)}">\n'
-            f'    <h3>{titolo}</h3>\n    '
+            f'    {testa}\n    '
             + '\n    '.join(dentro) + '\n  </div>')
 
 
@@ -1622,7 +1628,14 @@ CSS_REALTA = """
 .cr-crumb a{color:inherit}
 .page-hero .cr-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .cr-crumb a{color:rgba(255,255,255,.82)}
-.cr-logo{max-width:150px;height:auto;border-radius:12px;margin:22px 0 0;display:block}
+/* Il logo nell'intestazione, sopra il nome: una tessera bianca e non
+   l'immagine nuda, perche' quasi tutti i loghi arrivano col fondo bianco pieno
+   (vedi pagina_realta). object-fit:contain dentro il padding: un logo largo e
+   basso (Kids&Us, 600x242) resta intero e centrato, non si taglia. */
+.cr-logo{display:block;width:96px;height:96px;box-sizing:border-box;padding:8px;
+  margin:6px auto 14px;object-fit:contain;background:#fff;border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.22)}
+@media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
@@ -1730,11 +1743,24 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # era l'unica condizione che mancava.
     robots = ('index, follow' if confermata(info) else 'noindex, follow')
 
-    testa = []
+    # IL LOGO STA ALL'ALTEZZA DEL NOME (11/09/2026, Giovanni e le societa':
+    # "messo cosi' li' sotto stacca da tutto"). Stava da solo in un blocco da
+    # 150px sotto l'intestazione, allineato a sinistra sotto un titolo centrato:
+    # un quadrato bianco sul fondo crema, senza bordo, fra la testata e "Chi e'".
+    # Adesso e' una tessera dentro l'intestazione, sopra l'H1: e' il marchio di
+    # chi porta quel nome, e li' si legge come tale.
+    # La tessera e' BIANCA con un margine interno perche' quattro loghi su cinque
+    # arrivano col fondo bianco pieno (il downloader non scontorna): sul blu
+    # dell'intestazione un quadrato bianco nudo sarebbe un buco, una tessera
+    # e' un distintivo. Il logo trasparente ci sta dentro uguale.
+    # Niente loading="lazy": e' nella prima schermata. width/height veri, cosi'
+    # lo spazio e' riservato prima che l'immagine arrivi.
     logo = logo_path(info.get('logo'))
-    if logo:
-        testa.append(f'<img class="cr-logo" src="{G.esc(logo)}" '
-                     f'alt="Logo di {G.esc(org)}" loading="lazy" decoding="async">')
+    logo_testa = (f'<img class="cr-logo" src="{G.esc(logo)}" alt="Logo di '
+                  f'{G.esc(org)}" width="600" height="600" decoding="async">'
+                  if logo else '')
+
+    testa = []
     if info.get('descr'):
         # LA DESCRIZIONE SI APRE E SI CHIUDE (26/08/2026, Giovanni: "posso anche
         # non volerla leggere"). E' il testo piu' lungo della pagina e sta sopra
@@ -1807,6 +1833,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>{G.esc(org)}</span>
     </div>
+    {logo_testa}
     <span class="section-label">{G.esc(citta or 'Piemonte')}{' · ' + G.esc(' · '.join(macro[:2])) if macro else ''}</span>
     <h1>{G.esc(org)}</h1>
     {occhiello}
@@ -2855,7 +2882,14 @@ CSS = """
 .co-realta-vai{margin:12px 0 0;font-size:.95rem}
 .co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-realta-vai a:hover{text-decoration:underline}
-.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* Il logo accanto al nome della societa', come un avatar. Tessera bianca con
+   bordo leggero: sul bianco della scheda un logo col fondo bianco pieno non
+   avrebbe contorno. */
+.co-realta-testa{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.co-realta-testa h3{margin:0}
+.co-logo{flex:0 0 52px;width:52px;height:52px;box-sizing:border-box;padding:4px;
+  object-fit:contain;background:#fff;border:1px solid rgba(0,0,0,.09);
+  border-radius:12px}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
    ancora quello che sembra. */

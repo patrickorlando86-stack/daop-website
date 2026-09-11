@@ -588,7 +588,14 @@
 .co-realta-vai{margin:12px 0 0;font-size:.95rem}
 .co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-realta-vai a:hover{text-decoration:underline}
-.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* Il logo accanto al nome della societa', come un avatar. Tessera bianca con
+   bordo leggero: sul bianco della scheda un logo col fondo bianco pieno non
+   avrebbe contorno. */
+.co-realta-testa{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.co-realta-testa h3{margin:0}
+.co-logo{flex:0 0 52px;width:52px;height:52px;box-sizing:border-box;padding:4px;
+  object-fit:contain;background:#fff;border:1px solid rgba(0,0,0,.09);
+  border-radius:12px}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
    ancora quello che sembra. */
@@ -619,7 +626,14 @@
 .cr-crumb a{color:inherit}
 .page-hero .cr-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .cr-crumb a{color:rgba(255,255,255,.82)}
-.cr-logo{max-width:150px;height:auto;border-radius:12px;margin:22px 0 0;display:block}
+/* Il logo nell'intestazione, sopra il nome: una tessera bianca e non
+   l'immagine nuda, perche' quasi tutti i loghi arrivano col fondo bianco pieno
+   (vedi pagina_realta). object-fit:contain dentro il padding: un logo largo e
+   basso (Kids&Us, 600x242) resta intero e centrato, non si taglia. */
+.cr-logo{display:block;width:96px;height:96px;box-sizing:border-box;padding:8px;
+  margin:6px auto 14px;object-fit:contain;background:#fff;border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.22)}
+@media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
@@ -736,13 +750,13 @@
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>Deborah Dalmasso</span>
     </div>
+    <img class="cr-logo" src="/assets/loghi/deborah-dalmasso.webp" alt="Logo di Deborah Dalmasso" width="600" height="600" decoding="async">
     <span class="section-label">Cuneo · Lingue · Musica</span>
     <h1>Deborah Dalmasso</h1>
     <p class="cr-sub">Musicoterapeuta specializzata in musicoterapia per l’infanzia e l’età evolutiva.</p>
   </div>
 </header>
 <article class="cr-wrap" data-org="deborah-dalmasso" data-org-nome="Deborah Dalmasso">
-  <img class="cr-logo" src="/assets/loghi/deborah-dalmasso.webp" alt="Logo di Deborah Dalmasso" loading="lazy" decoding="async">
   <details class="cr-chi" open><summary>Chi è Deborah Dalmasso</summary><p class="cr-descr">Deborah Dalmasso è una musicoterapeuta specializzata in percorsi dedicati all’infanzia e all’età evolutiva. Propone attività individuali e di gruppo che, attraverso musica, suono, ritmo, movimento e voce, favoriscono comunicazione, espressione emotiva, relazione e benessere. Realizza inoltre laboratori presso nidi, scuole dell’infanzia e scuole primarie e percorsi dedicati a mamme e bambini.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Cuneo</dd><dt>Indirizzo</dt><dd>Via Tanaro 18</dd><dt>Attività</dt><dd>Inglese · Musica dolce</dd><dt>Contatti</dt><dd><a href="tel:3405518034">340 551 8034</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/deborahdalmassomt" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/deborahdalmassomt" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>

@@ -592,7 +592,14 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
 .co-realta-vai{margin:12px 0 0;font-size:.95rem}
 .co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-realta-vai a:hover{text-decoration:underline}
-.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* Il logo accanto al nome della societa', come un avatar. Tessera bianca con
+   bordo leggero: sul bianco della scheda un logo col fondo bianco pieno non
+   avrebbe contorno. */
+.co-realta-testa{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.co-realta-testa h3{margin:0}
+.co-logo{flex:0 0 52px;width:52px;height:52px;box-sizing:border-box;padding:4px;
+  object-fit:contain;background:#fff;border:1px solid rgba(0,0,0,.09);
+  border-radius:12px}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
    ancora quello che sembra. */
@@ -623,7 +630,14 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
 .cr-crumb a{color:inherit}
 .page-hero .cr-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .cr-crumb a{color:rgba(255,255,255,.82)}
-.cr-logo{max-width:150px;height:auto;border-radius:12px;margin:22px 0 0;display:block}
+/* Il logo nell'intestazione, sopra il nome: una tessera bianca e non
+   l'immagine nuda, perche' quasi tutti i loghi arrivano col fondo bianco pieno
+   (vedi pagina_realta). object-fit:contain dentro il padding: un logo largo e
+   basso (Kids&Us, 600x242) resta intero e centrato, non si taglia. */
+.cr-logo{display:block;width:96px;height:96px;box-sizing:border-box;padding:8px;
+  margin:6px auto 14px;object-fit:contain;background:#fff;border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.22)}
+@media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
@@ -784,6 +798,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si avv
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>Crome in Movimento APS</span>
     </div>
+    
     <span class="section-label">Vezza d&#x27;Alba · Musica · Movimento</span>
     <h1>Crome in Movimento APS</h1>
     <p class="cr-sub">Corsi di musica, movimento per bambini a Vezza d&#x27;Alba</p>

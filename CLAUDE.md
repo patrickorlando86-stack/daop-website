@@ -1454,6 +1454,18 @@ giorni dopo non c'è più. Il conto che aveva fatto uscire le locandine dal repo
 (~340 MB l'anno di blob) qui non si ripresenta: i loghi sono uno per **società**,
 non uno per evento.
 
+**Il logo sta all'altezza del nome, non sotto** (11/09/2026, Giovanni e le
+società: «messo così lì sotto stacca da tutto»). Sulla pagina della realtà era
+un blocco da 150px sotto l'intestazione, allineato a sinistra sotto un titolo
+centrato; sulla scheda in fondo a `corsi.html` un blocco da 120px fra il nome e
+la descrizione. Ora è una **tessera bianca** nell'intestazione sopra l'H1 (96px,
+116 su desktop) e una da 52px accanto all'`<h3>` della scheda. Bianca perché
+**4 loghi su 5 arrivano col fondo bianco pieno**: sul blu dell'intestazione un
+quadrato bianco nudo sembra un buco, una tessera è un distintivo. Sul telefono
+la pagina ci guadagna: la tessera aggiunge ~110px all'intestazione e il blocco
+tolto ne valeva ~170, quindi i corsi partono più in alto. `prova_logo_realta.py`
+controlla che il logo stia fra l'apertura di `.page-hero` e l'`<h1>`.
+
 Le misure e le regole per chi ne mette uno a mano stanno in
 [`assets/loghi/LEGGIMI.md`](assets/loghi/LEGGIMI.md). In breve: WEBP dentro
 `600×600`, imbottito di trasparente se un lato scende sotto **200 px** — sotto

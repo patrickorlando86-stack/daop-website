@@ -592,7 +592,14 @@ Grazie a corsi coinvolgenti, insegnanti specializzati e un ambiente…">
 .co-realta-vai{margin:12px 0 0;font-size:.95rem}
 .co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-realta-vai a:hover{text-decoration:underline}
-.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* Il logo accanto al nome della societa', come un avatar. Tessera bianca con
+   bordo leggero: sul bianco della scheda un logo col fondo bianco pieno non
+   avrebbe contorno. */
+.co-realta-testa{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.co-realta-testa h3{margin:0}
+.co-logo{flex:0 0 52px;width:52px;height:52px;box-sizing:border-box;padding:4px;
+  object-fit:contain;background:#fff;border:1px solid rgba(0,0,0,.09);
+  border-radius:12px}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
    ancora quello che sembra. */
@@ -623,7 +630,14 @@ Grazie a corsi coinvolgenti, insegnanti specializzati e un ambiente…">
 .cr-crumb a{color:inherit}
 .page-hero .cr-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .cr-crumb a{color:rgba(255,255,255,.82)}
-.cr-logo{max-width:150px;height:auto;border-radius:12px;margin:22px 0 0;display:block}
+/* Il logo nell'intestazione, sopra il nome: una tessera bianca e non
+   l'immagine nuda, perche' quasi tutti i loghi arrivano col fondo bianco pieno
+   (vedi pagina_realta). object-fit:contain dentro il padding: un logo largo e
+   basso (Kids&Us, 600x242) resta intero e centrato, non si taglia. */
+.cr-logo{display:block;width:96px;height:96px;box-sizing:border-box;padding:8px;
+  margin:6px auto 14px;object-fit:contain;background:#fff;border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.22)}
+@media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
@@ -771,13 +785,13 @@ Grazie a corsi coinvolgenti, insegnanti specializzati e un ambiente…">
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>Kids&amp;Us Alba</span>
     </div>
+    <img class="cr-logo" src="/assets/loghi/kids-us-alba.webp" alt="Logo di Kids&amp;Us Alba" width="600" height="600" decoding="async">
     <span class="section-label">Alba · Lingue</span>
     <h1>Kids&amp;Us Alba</h1>
     <p class="cr-sub">Scuola di Inglese Kids&amp;Us di Alba</p>
   </div>
 </header>
 <article class="cr-wrap" data-org="kids-us-alba" data-org-nome="Kids&amp;Us Alba">
-  <img class="cr-logo" src="/assets/loghi/kids-us-alba.webp" alt="Logo di Kids&amp;Us Alba" loading="lazy" decoding="async">
   <details class="cr-chi"><summary>Chi è Kids&amp;Us Alba</summary><p class="cr-descr">Kids &amp; Us Alba è la scuola di inglese dedicata ai bambini da 1 a 18 anni che ha rivoluzionato l&#x27;apprendimento delle lingue attraverso un metodo innovativo basato sul processo naturale di acquisizione della lingua madre.</p><p class="cr-descr">Grazie a corsi coinvolgenti, insegnanti specializzati e un ambiente stimolante, i bambini imparano l&#x27;inglese in modo spontaneo, divertente ed efficace fin dai primi anni di vita.</p><p class="cr-descr">La nuova sede di Kids &amp; Us Alba, in Corso Piave 16, offre corsi, attività ed eventi pensati per accompagnare bambini e ragazzi nel loro percorso di crescita linguistica, aiutandoli a sviluppare sicurezza e naturalezza nell&#x27;uso dell&#x27;inglese.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Alba</dd><dt>Indirizzo</dt><dd>Corso Piave 16</dd><dt>Attività</dt><dd>Lingue</dd><dt>Contatti</dt><dd><a href="tel:3756242932">3756242932</a></dd><dt>Email</dt><dd><a href="mailto:alba@kidsandus.it">alba@kidsandus.it</a></dd><dt>Sito</dt><dd><a href="https://www.kidsandus.it/it/scuole-inglese/alba" rel="sponsored noopener" target="_blank">https://www.kidsandus.it/it/scuole-inglese/alb…</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/kidsandus_alba/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/people/KidsUs-Alba/61591104551251/" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>

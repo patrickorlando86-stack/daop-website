@@ -587,7 +587,14 @@
 .co-realta-vai{margin:12px 0 0;font-size:.95rem}
 .co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-realta-vai a:hover{text-decoration:underline}
-.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* Il logo accanto al nome della societa', come un avatar. Tessera bianca con
+   bordo leggero: sul bianco della scheda un logo col fondo bianco pieno non
+   avrebbe contorno. */
+.co-realta-testa{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.co-realta-testa h3{margin:0}
+.co-logo{flex:0 0 52px;width:52px;height:52px;box-sizing:border-box;padding:4px;
+  object-fit:contain;background:#fff;border:1px solid rgba(0,0,0,.09);
+  border-radius:12px}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
    ancora quello che sembra. */
@@ -2604,8 +2611,7 @@ I PARTECIPANTI AI CORSI HANNO DIRITTO AL BIGLIETTO RIDOTTO EXTRA DEGLI SPETTACOL
     <h2 class="co-realta-t" id="co-realta-t">Chi organizza</h2>
     <p class="co-realta-sub">8 realtà in provincia di Cuneo: dove sono, come si contattano, cosa organizzano.</p>
   <div class="co-realta" id="r-allinea-mente" data-org="allinea-mente" data-org-nome="Allinea-mente">
-    <h3><a href="/corsi/allinea-mente.html">Allinea-mente</a></h3>
-    <img class="co-logo" src="/assets/loghi/allinea-mente.webp" alt="Logo di Allinea-mente" loading="lazy" decoding="async">
+    <div class="co-realta-testa"><img class="co-logo" src="/assets/loghi/allinea-mente.webp" alt="Logo di Allinea-mente" width="600" height="600" loading="lazy" decoding="async"><h3><a href="/corsi/allinea-mente.html">Allinea-mente</a></h3></div>
     <p class="co-realta-d">Allinea-Mente è un’associazione sportiva dedicata al benessere e al movimento, con corsi per bambini, ragazzi e adulti. 
 
 Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roller e atletica, per…</p>
@@ -2628,8 +2634,7 @@ Fondata sui valori della cura, dell&#x27;ascolto e dell&#x27;accoglienza, si…<
     <p class="co-realta-vai"><a href="/corsi/crome-in-movimento-aps.html">La pagina di Crome in Movimento APS →</a></p>
   </div>
   <div class="co-realta" id="r-carezza" data-org="carezza" data-org-nome="CàRezza">
-    <h3><a href="/corsi/carezza.html">CàRezza</a></h3>
-    <img class="co-logo" src="/assets/loghi/carezza.webp" alt="Logo di CàRezza" loading="lazy" decoding="async">
+    <div class="co-realta-testa"><img class="co-logo" src="/assets/loghi/carezza.webp" alt="Logo di CàRezza" width="600" height="600" loading="lazy" decoding="async"><h3><a href="/corsi/carezza.html">CàRezza</a></h3></div>
     <p class="co-realta-d">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.
 
 Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare…</p>
@@ -2637,22 +2642,19 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
     <p class="co-realta-vai"><a href="/corsi/carezza.html">La pagina di CàRezza →</a></p>
   </div>
   <div class="co-realta" id="r-deborah-dalmasso" data-org="deborah-dalmasso" data-org-nome="Deborah Dalmasso">
-    <h3><a href="/corsi/deborah-dalmasso.html">Deborah Dalmasso</a></h3>
-    <img class="co-logo" src="/assets/loghi/deborah-dalmasso.webp" alt="Logo di Deborah Dalmasso" loading="lazy" decoding="async">
+    <div class="co-realta-testa"><img class="co-logo" src="/assets/loghi/deborah-dalmasso.webp" alt="Logo di Deborah Dalmasso" width="600" height="600" loading="lazy" decoding="async"><h3><a href="/corsi/deborah-dalmasso.html">Deborah Dalmasso</a></h3></div>
     <p class="co-realta-d">Deborah Dalmasso è una musicoterapeuta specializzata in percorsi dedicati all’infanzia e all’età evolutiva. Propone attività individuali e di gruppo che, attraverso musica, suono, ritmo, movimento e voce, favoriscono…</p>
     <p class="co-realta-corsi">2 corsi · Inglese, Musica dolce</p>
     <p class="co-realta-vai"><a href="/corsi/deborah-dalmasso.html">La pagina di Deborah Dalmasso →</a></p>
   </div>
   <div class="co-realta" id="r-helen-doron-saluzzese" data-org="helen-doron-saluzzese" data-org-nome="Helen Doron Saluzzese">
-    <h3><a href="/corsi/helen-doron-saluzzese.html">Helen Doron Saluzzese</a></h3>
-    <img class="co-logo" src="/assets/loghi/helen-doron-saluzzese.webp" alt="Logo di Helen Doron Saluzzese" loading="lazy" decoding="async">
+    <div class="co-realta-testa"><img class="co-logo" src="/assets/loghi/helen-doron-saluzzese.webp" alt="Logo di Helen Doron Saluzzese" width="600" height="600" loading="lazy" decoding="async"><h3><a href="/corsi/helen-doron-saluzzese.html">Helen Doron Saluzzese</a></h3></div>
     <p class="co-realta-d">Helen Doron insegna inglese come lingua straniera a bambini di età compresa tra i 3 e i 19 anni. Le lezioni, divertenti e coinvolgenti, sono ricche di musica, giochi e attività attentamente pianificate.</p>
     <p class="co-realta-corsi">8 corsi · Lingue</p>
     <p class="co-realta-vai"><a href="/corsi/helen-doron-saluzzese.html">La pagina di Helen Doron Saluzzese →</a></p>
   </div>
   <div class="co-realta" id="r-kids-us-alba" data-org="kids-us-alba" data-org-nome="Kids&amp;Us Alba">
-    <h3><a href="/corsi/kids-us-alba.html">Kids&amp;Us Alba</a></h3>
-    <img class="co-logo" src="/assets/loghi/kids-us-alba.webp" alt="Logo di Kids&amp;Us Alba" loading="lazy" decoding="async">
+    <div class="co-realta-testa"><img class="co-logo" src="/assets/loghi/kids-us-alba.webp" alt="Logo di Kids&amp;Us Alba" width="600" height="600" loading="lazy" decoding="async"><h3><a href="/corsi/kids-us-alba.html">Kids&amp;Us Alba</a></h3></div>
     <p class="co-realta-d">Kids &amp; Us Alba è la scuola di inglese dedicata ai bambini da 1 a 18 anni che ha rivoluzionato l&#x27;apprendimento delle lingue attraverso un metodo innovativo basato sul processo naturale di acquisizione della lingua madre.…</p>
     <p class="co-realta-corsi">5 corsi · Lingue</p>
     <p class="co-realta-vai"><a href="/corsi/kids-us-alba.html">La pagina di Kids&amp;Us Alba →</a></p>

@@ -41,9 +41,14 @@ Ne viene fuori un file da 15–40 KB.
 In due posti, e li disegna `logo_path()` in
 [scripts/genera_corsi.py](../../scripts/genera_corsi.py):
 
-- la **scheda della società** in fondo a [corsi.html](../../corsi.html), larga
-  120 px;
-- la **pagina della società** (`/corsi/<slug>.html`), larga 150 px, e da lì il
+- la **scheda della società** in fondo a [corsi.html](../../corsi.html): una
+  tessera da 52 px **accanto al nome**;
+- la **pagina della società** (`/corsi/<slug>.html`): una tessera bianca da 96 px
+  (116 su desktop) **nell'intestazione, sopra il nome**. Fino all'11/09/2026 stava
+  sotto l'intestazione in un blocco suo da 150 px, e alle società non piaceva:
+  staccava da tutto. La tessera è bianca perché quasi tutti i loghi arrivano col
+  fondo bianco pieno, e sul blu dell'intestazione un quadrato bianco nudo sembra
+  un buco. Da lì il
   logo è anche l'`og:image` dell'anteprima e il `logo` dei dati strutturati —
   cioè quello che si vede quando qualcuno manda il link su WhatsApp. È il motivo
   dei 200 px qui sopra.

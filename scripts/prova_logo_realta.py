@@ -131,6 +131,14 @@ try:
         ok("twitter:image usa quello assoluto",
            f'name="twitter:image" content="{ass}"' in pagina)
         ok("i dati strutturati usano quello assoluto", f'"{ass}"' in pagina)
+        # Il logo sta nell'intestazione, all'altezza del nome (11/09/2026): sotto,
+        # in un blocco suo, "staccava da tutto". Si guarda l'ordine nell'HTML:
+        # dopo l'apertura di .page-hero e prima dell'<h1>.
+        i_hero = pagina.find('class="page-hero"')
+        i_logo = pagina.find('class="cr-logo"')
+        i_h1 = pagina.find('<h1>')
+        ok("il logo sta nell'intestazione, prima del nome",
+           -1 < i_hero < i_logo < i_h1)
         # E il caso che conta: una cella con un refuso non deve lasciare in
         # pagina ne' un <img> rotto ne' un'anteprima rotta - l'anteprima torna
         # al banner di DAOP, che e' un'immagine che esiste.

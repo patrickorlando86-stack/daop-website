@@ -592,7 +592,14 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
 .co-realta-vai{margin:12px 0 0;font-size:.95rem}
 .co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-realta-vai a:hover{text-decoration:underline}
-.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* Il logo accanto al nome della societa', come un avatar. Tessera bianca con
+   bordo leggero: sul bianco della scheda un logo col fondo bianco pieno non
+   avrebbe contorno. */
+.co-realta-testa{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.co-realta-testa h3{margin:0}
+.co-logo{flex:0 0 52px;width:52px;height:52px;box-sizing:border-box;padding:4px;
+  object-fit:contain;background:#fff;border:1px solid rgba(0,0,0,.09);
+  border-radius:12px}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
    ancora quello che sembra. */
@@ -623,7 +630,14 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
 .cr-crumb a{color:inherit}
 .page-hero .cr-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .cr-crumb a{color:rgba(255,255,255,.82)}
-.cr-logo{max-width:150px;height:auto;border-radius:12px;margin:22px 0 0;display:block}
+/* Il logo nell'intestazione, sopra il nome: una tessera bianca e non
+   l'immagine nuda, perche' quasi tutti i loghi arrivano col fondo bianco pieno
+   (vedi pagina_realta). object-fit:contain dentro il padding: un logo largo e
+   basso (Kids&Us, 600x242) resta intero e centrato, non si taglia. */
+.cr-logo{display:block;width:96px;height:96px;box-sizing:border-box;padding:8px;
+  margin:6px auto 14px;object-fit:contain;background:#fff;border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.22)}
+@media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
@@ -776,13 +790,13 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a> › <span>CàRezza</span>
     </div>
+    <img class="cr-logo" src="/assets/loghi/carezza.webp" alt="Logo di CàRezza" width="600" height="600" decoding="async">
     <span class="section-label">Racconigi · Movimento · Musica</span>
     <h1>CàRezza</h1>
     <p class="cr-sub">Spazio multidisciplinare a misura di famiglia</p>
   </div>
 </header>
 <article class="cr-wrap" data-org="carezza" data-org-nome="CàRezza">
-  <img class="cr-logo" src="/assets/loghi/carezza.webp" alt="Logo di CàRezza" loading="lazy" decoding="async">
   <details class="cr-chi"><summary>Chi è CàRezza</summary><p class="cr-descr">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.</p><p class="cr-descr">Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere i bambini in armonia e offrire supporto ai genitori.</p><p class="cr-descr">Un luogo speciale e protetto per vivere un tempo di qualità insieme ai propri bambini.</p><p class="cr-descr">Ogni evento presso CàRezza è studiato per accogliere insieme i bimbi con mamme, papà, nonni, caregivers.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Racconigi</dd><dt>Indirizzo</dt><dd>Piazza Caduti per la Libertà 12a</dd><dt>Attività</dt><dd>Psicomotricità · Educazione musicale · Massaggio infantile · Benessere familiare</dd><dt>Contatti</dt><dd>Roberta <a href="tel:+393297249359">+39 329 724 9359</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
