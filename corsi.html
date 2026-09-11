@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Corsi per bambini in provincia di Cuneo | DAOP</title>
-<meta name="description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.">
+<meta name="description" content="53 corsi per bambini e ragazzi in provincia di Cuneo: sport e movimento, inglese, musica, benessere e teatro. A Moretta, Borgo San Dalmazzo, Vezza d&#x27;Alba e altri 11 comuni, con l&#x27;età e, dove ci sono, la lezione di prova e l&#x27;open day.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/corsi.html">
 <meta property="og:title" content="Corsi per bambini in provincia di Cuneo | DAOP">
-<meta property="og:description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.">
+<meta property="og:description" content="53 corsi per bambini e ragazzi in provincia di Cuneo: sport e movimento, inglese, musica, benessere e teatro. A Moretta, Borgo San Dalmazzo, Vezza d&#x27;Alba e altri 11 comuni, con l&#x27;età e, dove ci sono, la lezione di prova e l&#x27;open day.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi.html">
 <meta property="og:locale" content="it_IT">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Corsi per bambini in provincia di Cuneo | DAOP">
-<meta name="twitter:description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con…">
+<meta name="twitter:description" content="53 corsi per bambini e ragazzi in provincia di Cuneo: sport e movimento, inglese, musica, benessere e teatro. A…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -554,6 +554,17 @@
 .page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
+/* Il paragrafo coi numeri sta sopra quello su cos'e' un corso: senza, i due
+   margini da 26+20 si sommano e sembrano due blocchi staccati. */
+.co-intro.co-numeri{margin-bottom:0}
+.co-numeri+.co-intro{margin-top:12px}
+/* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
+   delle realta' che le precedono. Un <div> e non <section>, per la stessa
+   ragione (section{padding:100px 24px} dal CSS di sistema). */
+.co-faq{margin:40px 0 0;scroll-margin-top:120px}
+.co-faq-t{font-size:1.3rem;margin:0 0 4px}
+.co-faq-q{font-size:1.02rem;margin:18px 0 4px}
+.co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
    --cat-ink, che la card imposta. */
@@ -1693,12 +1704,11 @@
     </div>
     <span class="section-label">Cuneo · Famiglie</span>
     <h1>Corsi per bambini <em>in provincia di Cuneo</em></h1>
-    <p>Sport, musica, danza, lingue, teatro: le attività a cui un bambino si iscrive,
-    con l'età che prendono, dove sono e quando si può andare a vederle.
-    Informazioni raccolte dalle locandine delle realtà, una società alla volta.</p>
+    <p>Trova corsi e attività per bambini e ragazzi in provincia di Cuneo: sport e movimento, inglese, musica, benessere e teatro, a Moretta, Borgo San Dalmazzo, Vezza d&#x27;Alba, Racconigi, Alba, Mondovì e in altri 8 comuni. Informazioni raccolte dalle locandine delle realtà, una società alla volta.</p>
   </div>
 </header>
 <article class="co-wrap">
+  <p class="co-intro co-numeri">Cerchi un corso per tuo figlio? Al momento qui ne trovi 53, di 8 realtà in 14 comuni: per 21 è prevista una lezione di prova e 7 hanno un open day in calendario.</p>
   <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,
   qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa
   sabato" ma "dove porto mio figlio quest'anno". Qui trovi quello che c'è, e lo scegli
@@ -2666,8 +2676,23 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
     <p class="co-realta-vai"><a href="/corsi/teatranza.html">La pagina di Teatranza →</a></p>
   </div>
   </div>
+  <div class="co-faq" id="domande">
+    <h2 class="co-faq-t">Domande frequenti</h2>
+    <h3 class="co-faq-q">Quali corsi per bambini ci sono in provincia di Cuneo?</h3>
+    <p class="co-faq-a">Al momento 53 corsi di 8 realtà: 25 di sport e movimento, 14 di inglese, 9 di musica, 3 di benessere e 2 di teatro. Nell&#x27;elenco si scelgono per attività, età del bambino e comune.</p>
+    <h3 class="co-faq-q">In quali comuni ci sono corsi per bambini in provincia di Cuneo?</h3>
+    <p class="co-faq-a">In 14 comuni: Moretta (8 corsi), Borgo San Dalmazzo (7), Vezza d&#x27;Alba (7), Racconigi (6), Alba (5), Mondovì (4), Camerana (3), Carrù (3), Ceva (3), Caraglio (2), Cuneo (2), Bossolasco (1), Dogliani (1), Murazzano (1). Per vedere solo quelli di un paese c&#x27;è il filtro per comune.</p>
+    <h3 class="co-faq-q">Quali sport ci sono per bambini in provincia di Cuneo?</h3>
+    <p class="co-faq-a">25 corsi di sport e movimento: atletica leggera (16), acrobatica, arti aeree, capoeira, ginnastica artistica, ginnastica ritmica, kickboxing, pole dance, psicomotricità e yoga. Ogni corso ha l&#x27;età e il comune scritti in riga.</p>
+    <h3 class="co-faq-q">Ci sono corsi per bambini sotto i 3 anni?</h3>
+    <p class="co-faq-a">Sì: 8 corsi accolgono anche bambini sotto i 3 anni, a Racconigi, Alba, Cuneo, Moretta e Vezza d&#x27;Alba (musica per bambini, educazione musicale, massaggio infantile, benessere familiare, musica dolce e lingue).</p>
+    <h3 class="co-faq-q">Ci sono corsi per bambini di 3, 4 o 5 anni?</h3>
+    <p class="co-faq-a">Sì: 24 corsi accolgono bambini fra i 3 e i 5 anni, a Vezza d&#x27;Alba, Borgo San Dalmazzo, Racconigi, Moretta, Alba, Cuneo e Mondovì (musica gioco, orchestra, musica pop, strumento musicale, musica per bambini e altre 13 attività). Nel filtro Età c&#x27;è la voce «3-5 anni».</p>
+    <h3 class="co-faq-q">Si può provare un corso prima di iscriversi?</h3>
+    <p class="co-faq-a">Per 21 corsi è prevista una lezione di prova: è scritta nel dettaglio del corso, con la data quando c&#x27;è. 7 corsi hanno un open day in calendario, e per vedere solo quelli c&#x27;è il filtro «Solo con open day». Per gli altri conviene chiederlo a chi organizza: i contatti sono nella scheda del corso.</p>
+  </div>
   <p class="co-nota"><strong>Sei una scuola, un'associazione o una società sportiva e proponi attività per bambini e ragazzi?</strong> Stiamo costruendo una guida alle attività per famiglie: la presenza comprende la vostra realtà, i corsi che proponete, le informazioni utili per le famiglie, le prove e gli open day collegati al calendario degli eventi. Scrivici a <a href="mailto:collabora@eventiperbambinicuneo.it">collabora@eventiperbambinicuneo.it</a>.</p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">188 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">184 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
   <div class="co-actions">
     <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
   </div>

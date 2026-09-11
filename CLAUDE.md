@@ -1149,7 +1149,7 @@ presenza è una sola ed è già pagata, quindi l'inventario della guida esiste g
 
 E vale la regola di sempre, che qui è più facile da rompere perché un PDF ha una
 copertina: **dentro la guida l'ordine non si vende.** Alfabetico come in
-`luoghi.html`, e "In evidenza" resta il blocco separato che si dichiara.
+`luoghi.html`, e "Sponsorizzati" resta il riquadro separato che si dichiara.
 
 ### Cosa era bloccato, e non dal codice — **sbloccato il 28/08/2026**
 
@@ -5562,20 +5562,80 @@ abbiamo fatto noi.
 Quindi la scheda premium cambia **cosa** c'è dentro (`Descrizione PREMIUM`, tutte
 e cinque le foto, contatti) e non **dove** sta la riga: resta al suo posto
 alfabetico, nel suo comune. L'unico spazio in cui la posizione si compra è il
-blocco "In evidenza" in cima, che è separato e lo dichiara — e le stesse schede
-restano comunque nell'elenco sotto.
+riquadro "Sponsorizzati" in cima, che è separato e lo dichiara — e le stesse
+schede restano comunque nell'elenco sotto.
 
 **"Consigliato DAOP" è un'altra cosa e non si compra**: è il bollino Family
-Friendly (`bollino.html`), lo stesso giudizio che esiste già in agenda. Le due
-pillole restano distinte apposta, e `#come-ordiniamo` lo dice a chi legge.
+Friendly (`bollino.html`), lo stesso giudizio che esiste già in agenda. È **solo
+un badge**: non sposta la riga, non ha un filtro, non ha uno spazio suo.
+`#come-ordiniamo` dice a chi legge la differenza fra i due.
 
-La vetrina la decide **una colonna del foglio** (`In evidenza`), non una regola
-dedotta. Per un giorno è stata `premium and consigliato`, e il risultato era che
-il blocco non compariva mai: le quattro schede a pagamento hanno tutte
-`Consigliato DAOP = no`, ed è giusto così — sono due giudizi diversi, uno lo dà
-il cliente e l'altro lo diamo noi. **Una condizione che spegne in silenzio uno
-spazio venduto è un difetto, non una cautela.** Serve comunque il premium: la
-posizione in cima si compra, e chi non l'ha comprata non ci finisce.
+#### Chi paga si dichiara con la parola «Sponsorizzato» — 11/09/2026
+
+Fino a quel giorno la scheda a pagamento diceva «★ Scheda curata» fra le
+pillole, e il riquadro in cima si chiamava «In evidenza». Il difetto grosso non
+si vedeva leggendo l'HTML: **sul telefono le pillole perdono la parola**
+(`.lg-tag i` è nascosto sotto i 600px), quindi a 412px chi paga era dichiarato
+da una stella e basta.
+
+Cercato in rete prima di scegliere, e le fonti dicono la stessa cosa:
+
+- **la parola**: «Sponsorizzato» è l'etichetta di Google Maps in italiano ed è
+  fra quelle ammesse dalla Digital Chart IAP; per la FTC «Ad»/«Sponsored» si
+  capiscono, «Promoted» e «Presented by» sono ambigui, e **un logo o un segno da
+  soli non bastano**. Nell'esperimento di Wojdynski ed Evans «advertising» e
+  «sponsored» si riconoscono circa sette volte più di «presented by». «In
+  evidenza» e «Scheda curata» stavano dalla parte sbagliata: dicevano la
+  posizione e il contenuto, non il pagamento;
+- **il posto**: davanti o sopra il titolo, non a destra (FTC) — dove lo mettono
+  anche Tripadvisor e Google;
+- **l'aspetto**: grigio e piccolo, non oro. È un'avvertenza, non un fregio, e un
+  fregio dorato su chi paga è proprio quello che lo fa scambiare per un giudizio.
+
+Da qui `.lg-spons`: la parola sopra il nome, **visibile a ogni larghezza**
+(#5c6975 su bianco, 5,6:1), solo sulle righe `is-prem`.
+
+**Il simbolo del Consigliato è il cuore, su tutto il sito.** Negli eventi era una
+stella, e nei luoghi la stella voleva dire "a pagamento": lo stesso segno per un
+giudizio nostro e per uno spazio venduto. Ora c'è `CONSIGLIATO_SVG` (lo stesso
+`#i-heart` di `bollino.html`) e `pill_consigliato()` in `genera_eventi.py`, **un
+posto solo** per cinque elenchi: agenda, corsie, pagine comune, pagine di
+intenzione, centri. **Nell'app Ginetto è ancora 🏅 / ✦**: va allineata nel suo
+repo.
+
+**Sugli eventi il Consigliato non era mai stato usato**, anche se il codice
+c'era: il downloader scrive `Consigliato DAOP = No` di default, e all'11/09 era
+«No» su tutte le righe. Si accende scrivendo «Si» nel foglio. Non nasce un filtro
+«solo consigliati»: dividerebbe l'agenda in buoni e meno buoni, che è la ragione
+per cui `Adatto Famiglie` non si usa per separare.
+
+#### Il riquadro Sponsorizzati segue la ricerca e ruota
+
+Deciso lo stesso giorno. Sono tre regole, e ognuna risponde a una domanda:
+
+- **Chi ci entra: tutti i premium, da sé.** La colonna `In evidenza` serve solo a
+  toglierne uno scrivendo «no». Prima ci voleva un «si», la colonna era vuota su
+  tutte e quattro le schede a pagamento, e **il riquadro non è mai comparso**:
+  uno spazio venduto spento in silenzio. Per un giorno era stata anche
+  `premium and consigliato`, che lo spegneva per la stessa via — sono due giudizi
+  diversi, uno lo dà il cliente e l'altro lo diamo noi.
+- **Quali si vedono: quelli che corrispondono alla ricerca**, come su Ginetto.
+  Chi sceglie Cuneo non vede in cima un posto di Alessandria che ha pagato. Le
+  righe del riquadro sono copie con gli stessi `data-*`, quindi passano dagli
+  stessi filtri del JS; se non ne passa nessuna il riquadro sparisce col suo
+  titolo. **Non si contano** nel «N luoghi con questi filtri».
+- **Il quarto cliente: rotazione.** Si stampano tutte le candidate, in ordine
+  alfabetico spostato di `oggi.toordinal() % n`, e la pagina si rifà ogni notte:
+  ogni giorno si parte da un'altra. Il JS mostra le prime `VETRINA_POSTI` (3) fra
+  quelle che passano; senza JS dalla quarta in poi nascono `hidden`.
+
+`tests/luoghi.js` difende cinque cose e **nessun numero di clienti**: la parola
+visibile nello **stile calcolato** a 412px su ogni `is-prem`, e su nessun'altra
+riga (il verso che si dimentica); il cuore disegnato e nessuna stella; il
+riquadro nei suoi posti e con sole schede pagate; che segua ogni provincia e
+sparisca vuoto; che il conteggio non raddoppi. Verificate rosse rimettendo tre
+difetti uno alla volta: etichetta nascosta sotto i 600px («7 su 7 no»), riquadro
+che ignora i filtri, conteggio doppio.
 
 Non è solo stile: **art. 22 comma 4-bis del Codice del consumo** (Omnibus, D.Lgs.
 26/2023) impone di dichiarare i parametri di ordinamento di una lista
@@ -5623,9 +5683,9 @@ le decisioni; quello che manca ancora è elencato in fondo.
 | | scarsità | note |
 |---|---|---|
 | la riga in elenco | infinita | ce l'hanno tutti e 823, gratis |
-| la **scheda curata ★** | infinita | costo marginale ~zero: descrizione lunga, 5 foto, orari, contatti |
-| **"In evidenza"** in cima | **3 posti** | l'unica scarsità vera, l'unica posizione che si compra |
-| il **bollino ♥** | — | **non si vende mai**, a nessun prezzo |
+| la **scheda sponsorizzata** | infinita | costo marginale ~zero: descrizione lunga, 5 foto, orari, contatti |
+| il riquadro **"Sponsorizzati"** in cima | **3 posti per ricerca, a rotazione** | l'unica scarsità vera, l'unica posizione che si compra |
+| il **bollino** (il cuore) | — | **non si vende mai**, a nessun prezzo |
 
 **Non c'è un tetto al numero di schede a pagamento**, ed è stato deciso dopo
 averne proposto uno e averlo scartato. Il timore veniva dalle directory in cui
@@ -5645,10 +5705,10 @@ riga che non paga**. Da qui la regola vera:
 È un vincolo su cosa **non** togliere, non su quanto vendere: lascia crescere il
 business quanto vuole.
 
-I due limiti che restano non sono editoriali. **"In evidenza" ha 3 posti**, e non
-c'è ancora una regola per il quarto cliente che li compra (rotazione? i più
-recenti? si alza il numero?) — va decisa **prima** di venderne il quarto, perché
-deciderla con un cliente che ha già pagato vuol dire deciderla male. E il secondo
+I due limiti che restano non sono editoriali. **Il riquadro "Sponsorizzati" ha 3
+posti**, e la regola per il quarto cliente è stata decisa l'11/09/2026, prima di
+venderne un quarto: **rotazione giornaliera** fra le schede che corrispondono
+alla ricerca (vedi "Il riquadro Sponsorizzati segue la ricerca e ruota"). E il secondo
 limite è **il tempo**: ogni scheda curata costa raccolta materiali più revisione,
 e cento clienti sono decine di ore. Non è una policy, è aritmetica, e si alza
 solo con un modulo che raccolga i materiali al posto tuo.
@@ -6017,7 +6077,7 @@ Com'è fatto quel tratto, e qui sta la cosa da non sbagliare:
 | barra filtri | 109 px |
 | conteggio + Agenda/Calendario | 44 px |
 | "Vicino a me" | 40 px |
-| "COSA CERCHI" + "VAI AL COMUNE" | 154 px |
+| "COSA CERCHI" + "VAI AL COMUNE" | 154 px (dall'11/09/2026 sono due righe etichettate, vedi sotto) |
 
 **L'hero non è spazio vuoto, è testo** — un paragrafo di cinque righe da 174 px
 più la riga sui centri estivi da 75. Ci si casca facilmente misurando solo gli
@@ -6050,6 +6110,64 @@ Sul testo si è deciso così, sempre il 15/08/2026, arrivando a **1.111 px** (da
   sulla pagina che regge il 12% dei clic, ed è anche la descrizione per chi
   arriva da Google senza sapere cos'è DAOP. **Sta dentro i marker
   `EVENTI-HERO`**: si cambia in `genera_eventi.py`, non a mano.
+
+#### La provincia si sceglie per nome, e ha una riga sua
+
+Fatto l'11/09/2026, chiesto da Giovanni. Erano due richieste, e la prima era
+**già fatta**: dal 09/09 le pillole di «Cosa cerchi» puntano a
+`/eventi-provincia-<nome>.html` e non più a `sagre-provincia-*` (il motivo sta
+nella docstring di `link_landing()`). Verificato sul sito online, non nel
+repo — quando una cosa «non si vede» il primo controllo è se è pubblicata.
+
+La seconda — «rendere più semplice scegliere gli eventi della propria
+provincia» — era vera, e la risposta **non è ingrandire le pillole**: è che in
+due punti su due la provincia era scritta in un modo che chiede al lettore di
+sapere qualcosa.
+
+**Nella barra dei filtri si scriveva «Prov. AL».** È parola per parola il
+difetto già chiuso il 05/09 nella colonna Community del footer, dove «Instagram
+AL» è diventato «Instagram Alessandria»: una sigla chiede a chi legge il codice
+della propria provincia. Ora la tendina dice `Provincia` / `Alessandria` /
+`Asti` / `Cuneo`, e vale anche per `_landing_filtri()`, che è la stessa tendina
+per lo stesso lettore su pagine che si linkano fra loro.
+
+**Costa zero pixel, ed è misurato**: la barra appiccicosa resta **156px** a
+320, 375 e 412px e **68px** a 1280; quella delle pagine di intenzione resta
+**111px**. Il motivo è che sul telefono `.ev-select` è `flex:1 1 auto;
+min-width:0`, quindi le tendine si ridistribuiscono la riga invece di mandarne
+una a capo — «Alessandria» entra in 144px a 320px. **Su `luoghi.html` non si
+tocca senza rimisurare**: lì i filtri sono quattro su due righe, ed è scritto
+apposta che le etichette restano corte perché Chrome dimensiona una `<select>`
+sull'opzione più lunga.
+
+**E le cinque pillole erano un blob.** Ora sono due righe etichettate — «La tua
+provincia» (Alessandria · Asti · Cuneo) e «Cosa cerchi» (oggi, weekend, la
+stagionale del momento) — divise per quello che chiedono: un **dove** e un
+**quando**.
+
+**Il blocco si è ACCORCIATO**, che è il contrario di quello che ci si aspetta
+aggiungendo una riga: **208px → 187px** a 320 e 375px, **→ 158px** a 412px. Il
+guadagno viene dal nome corto: in una riga che si chiama già «La tua
+provincia», scrivere «Eventi Alessandria» è la stessa ripetizione del `(CN)`
+tolto dalle righe delle pagine di una provincia sola. Senza quel prefisso le
+tre pillole stanno su una riga (106+54+71px a 375). Su desktop le due righe
+costano ~40px, e lì lo spazio c'è.
+
+Le decisioni che non si ricavano dal diff:
+
+- **La provincia viene prima.** È la scelta che vale tutto l'anno, mentre
+  «oggi» e «questo weekend» li offre già la tendina «quando» della barra
+  qui sopra. La stagionale resta nella seconda riga, che a 412px è alta 40px.
+- **Il prefisso «Eventi» resta in `link_landing()`**, e non è una svista: là le
+  stesse voci finiscono in `.lan-alt`, in fondo alle pagine di intenzione, dove
+  sopra non c'è nessuna etichetta e «Alessandria» da solo non direbbe di che
+  cosa. Il taglio è solo di `blocco_comuni()`, che l'etichetta ce l'ha.
+- **Gli href vengono da `href_eventi_prov()`**, la stessa funzione che usa
+  `link_landing()`, e non da un confronto sul testo delle voci: così le due
+  righe non possono divergere. Il nome corto viene da `PROVINCE_NOMI`, che è
+  l'altro posto solo.
+- **Restano cinque pillole**, non otto: vale ancora la regola scritta in
+  `link_landing()` — tre voci in più farebbero la barra che nessuno guarda.
 
 #### "Vai al comune" si ferma a otto pillole
 

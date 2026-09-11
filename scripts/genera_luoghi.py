@@ -51,8 +51,9 @@ selezione che abbiamo fatto noi. Quindi la scheda premium **aggiunge** (foto,
 descrizione lunga, orari, contatti) e sta nel suo posto in ordine alfabetico,
 dentro il suo comune, come tutte.
 
-L'unico spazio in cui la posizione si compra e' il blocco "In evidenza" in cima,
-che e' separato, dichiarato e non toglie la riga dall'elenco. Ed e' anche un
+L'unico spazio in cui la posizione si compra e' il riquadro "Sponsorizzati" in
+cima (fino all'11/09/2026 si chiamava "In evidenza"), che e' separato, dichiarato,
+segue i filtri di chi cerca e non toglie la riga dall'elenco. Ed e' anche un
 obbligo, non una scelta di stile: art. 22 comma 4-bis del Codice del consumo -
 in una lista ricercabile i parametri di ordinamento vanno dichiarati, e omettere
 che una posizione e' stata pagata sta nella lista nera delle pratiche ingannevoli
@@ -698,16 +699,16 @@ def leggi_catalogo():
             'eta_min': _eta(d['eta_min'], 0), 'eta_max': _eta(d['eta_max'], 99),
             'premium': premium, 'premium_dal': d['premium_dal'],
             'consigliato': si(d['consigliato']),
-            # La vetrina la decide una COLONNA del foglio, non una regola
-            # inventata qui. Per un giorno e' stata `premium and consigliato`,
-            # e il risultato e' che il blocco non compariva mai: le quattro
-            # schede a pagamento hanno tutte "Consigliato DAOP = no", perche'
-            # sono due giudizi diversi - uno lo dà il cliente, l'altro lo diamo
-            # noi - ed era stato tenuto separato apposta tre righe piu' su.
-            # Una condizione che spegne in silenzio uno spazio venduto e' un
-            # difetto, non una cautela. Serve comunque il premium: la posizione
-            # in cima si compra, e chi non l'ha comprata non ci finisce.
-            'evidenza': premium and si(d['evidenza']),
+            # Il riquadro "Sponsorizzati" FA PARTE del premium (deciso
+            # l'11/09/2026): chi paga ci entra da se', e la colonna "In
+            # evidenza" serve solo a toglierlo scrivendo "no". Prima era il
+            # contrario - ci voleva un "si" - e con la colonna vuota su tutte e
+            # quattro le schede a pagamento il riquadro non e' mai comparso:
+            # uno spazio venduto spento in silenzio. Per un giorno era stata
+            # anche `premium and consigliato`, che lo spegneva per la stessa
+            # via: sono due giudizi diversi, uno lo da' il cliente e l'altro noi.
+            'evidenza': premium and (d['evidenza'] or '').strip().lower()
+                        not in ('no', 'n', 'false', '0'),
             'codice': d['codice'],
             'n_eventi': 0, 'ultimo': '', 'prossimi': [], 'fonte': 'catalogo',
             '_grezzo': r if fresco else None,
@@ -1023,7 +1024,13 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-tag.is-ev{background:rgba(24,134,99,0.12);color:#146c51}
 .lg-tag.is-free{background:rgba(24,134,99,0.10);color:#167859}
 .lg-tag.is-daop{background:rgba(232,149,74,0.16);color:#a75b15}
-.lg-tag.is-prem{background:rgba(201,162,39,0.20);color:#846a1a}
+.lg-tag svg{width:11px;height:11px;vertical-align:-1px}
+/* "Sponsorizzato" sopra il nome, in parole e su ogni schermo: e' la
+   dichiarazione del pagamento, quindi non si nasconde sul telefono come le
+   parole delle pillole. Grigio e non oro: e' un'avvertenza, non un fregio
+   (Tripadvisor e Google Maps fanno lo stesso). #5c6975 su bianco = 5,6:1. */
+.lg-spons{display:block;font-size:0.66rem;font-weight:700;letter-spacing:0.05em;
+  text-transform:uppercase;color:#5c6975;line-height:1.3;margin:0 0 1px}
 .lg-chev{flex:0 0 auto;width:17px;height:17px;fill:none;stroke:var(--text-light);
   stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
 .lg-row[open] .lg-chev{transform:rotate(180deg)}
@@ -1082,8 +1089,9 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-galleria{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
 .lg-galleria img{width:104px;height:78px;object-fit:cover;border-radius:8px;background:var(--cream)}
 .lg-cura{margin:10px 0 0;font-size:0.76rem;color:var(--text-light)}
+.lg-manca svg{width:12px;height:12px;vertical-align:-1px;color:#a75b15}
 
-/* ── In evidenza: l'unico posto in cui la posizione si compra, e si dice ──── */
+/* ── Sponsorizzati: l'unico posto in cui la posizione si compra, e si dice ── */
 .lg-vetrina{margin:22px 0 0;padding:16px 16px 6px;border:1px solid rgba(201,162,39,0.35);
   border-radius:var(--radius-lg,16px);background:rgba(201,162,39,0.05)}
 .lg-vetrina > p{margin:0 0 4px;font-size:0.75rem;font-weight:700;text-transform:uppercase;
@@ -1117,7 +1125,16 @@ LUOGHI_JS = r"""<script>
   var comuniTutti = listaCom
     ? [].map.call(listaCom.options, function (o) { return { v: o.value, p: o.dataset.prov }; })
     : [];
-  var righe = [].slice.call(document.querySelectorAll('.lg-row[data-cat]'));
+  // Le righe del riquadro "Sponsorizzati" sono COPIE di righe dell'elenco, con
+  // gli stessi data-*: passano dagli stessi filtri - e' questo che lo fa
+  // seguire la ricerca, cosi' chi sceglie Cuneo non vede in cima un posto di
+  // Alessandria che ha pagato - ma non si contano nel "N luoghi", se no una
+  // scheda sponsorizzata varrebbe due.
+  var tutte = [].slice.call(document.querySelectorAll('.lg-row[data-cat]'));
+  var righe = tutte.filter(function (r) { return !r.closest('.lg-vetrina'); });
+  var vetr = tutte.filter(function (r) { return !!r.closest('.lg-vetrina'); });
+  var boxV = document.getElementById('lg-vetrina');
+  var postiV = boxV ? (parseInt(boxV.dataset.posti, 10) || 3) : 0;
 
   // Lo stesso slug che il generatore mette in data-comune, rifatto in JS: cosi'
   // "Novi" scritto a mano trova "novi-ligure" senza dover scrivere tutto, e
@@ -1138,7 +1155,7 @@ LUOGHI_JS = r"""<script>
   var testo = null;
   function indice() {
     if (!testo) {
-      testo = new Map(righe.map(function (r) {
+      testo = new Map(tutte.map(function (r) {
         return [r, r.textContent.toLowerCase().replace(/\s+/g, ' ')];
       }));
     }
@@ -1155,16 +1172,29 @@ LUOGHI_JS = r"""<script>
     var eta = f.eta && f.eta !== 'all' ? parseInt(f.eta, 10) : null;
     var com = inpCom ? slugifica(inpCom.value) : '';
     if (inpCom) inpCom.classList.toggle('is-on', !!inpCom.value.trim());
+    function passa(r) {
+      return (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
+             (!com || (r.dataset.comune || '').indexOf(com) > -1) &&
+             (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
+             (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
+             (!t || indice().get(r).indexOf(t) > -1);
+    }
     var visti = 0;
     righe.forEach(function (r) {
-      var ok = (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
-               (!com || (r.dataset.comune || '').indexOf(com) > -1) &&
-               (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
-               (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
-               (!t || indice().get(r).indexOf(t) > -1);
+      var ok = passa(r);
       r.hidden = !ok;
       if (ok) visti++;
     });
+    // Il riquadro: le prime `postiV` fra quelle che passano, nell'ordine del
+    // generatore - che ruota ogni notte. Nessuna che passa: il riquadro sparisce
+    // con la sua intestazione, invece di restare un titolo sopra il vuoto.
+    var inV = 0;
+    vetr.forEach(function (r) {
+      var ok = inV < postiV && passa(r);
+      if (ok) inV++;
+      r.hidden = !ok;
+    });
+    if (boxV) boxV.hidden = inV === 0;
     // Un gruppo svuotato dai filtri si porta via la sua intestazione: se no
     // resta in pagina il nome di un comune con niente sotto. E' il guasto che
     // si vede solo filtrando, quindi va scritto adesso.
@@ -1315,10 +1345,12 @@ def riga(l, oggi):
     # prime due, quindi davanti sta quello che chi legge non puo' dedurre
     # dall'elenco.
     pillole = []
-    if l.get('premium'):
-        pillole.append('<span class="lg-tag is-prem">★<i> Scheda curata</i></span>')
+    # Chi paga NON sta fra le pillole: sul telefono le pillole perdono la parola
+    # e resta il segno, e un segno da solo non dichiara un pagamento. Si dichiara
+    # con la parola sopra il nome (`spons`, piu' sotto).
     if l.get('consigliato'):
-        pillole.append('<span class="lg-tag is-daop">♥<i> Scelto da DAOP</i></span>')
+        pillole.append(f'<span class="lg-tag is-daop">{G.CONSIGLIATO_SVG}'
+                       f'<i> Consigliato DAOP</i></span>')
     if prossimi:
         # "1 evento in programma" e non "1 in programma": la pillola deve dire
         # di CHE COSA e' il numero. Senza il sostantivo la frase e' la sola
@@ -1430,16 +1462,25 @@ def riga(l, oggi):
     # e chi apre la scheda di una biblioteca col cuore arancione la domanda se
     # la fa proprio li'.
     if l.get('consigliato'):
-        corpo.append('<p class="lg-manca">♥ Questo posto ha il '
+        corpo.append(f'<p class="lg-manca">{G.CONSIGLIATO_SVG} Questo posto ha il '
                      '<a href="/bollino.html">bollino Family Friendly</a> di DAOP.</p>')
 
     if l.get('premium'):
-        corpo.append('<p class="lg-cura">Scheda curata da chi gestisce il luogo · '
-                     'spazio a pagamento, <a href="#come-ordiniamo">come funziona</a>.</p>')
+        corpo.append('<p class="lg-cura">Sponsorizzato: la scheda la scrive chi gestisce '
+                     'il luogo, che paga questo spazio. '
+                     '<a href="#come-ordiniamo">Come funziona</a>.</p>')
     else:
         corpo.append('<p class="lg-manca">Manca qualcosa o è cambiato? '
                      '<a href="/index.html#social">Scrivicelo</a>.</p>')
 
+    # "Sponsorizzato" SOPRA il nome, in parole, su ogni schermo. Cercato
+    # l'11/09/2026: e' la parola di Google Maps in italiano e una di quelle
+    # ammesse dalla Digital Chart IAP; per la FTC l'etichetta va "davanti o sopra
+    # il titolo" e un segno o un logo da soli non bastano; e "sponsorizzato" si
+    # riconosce molto piu' di "presentato da" o di un'etichetta sul contenuto.
+    # "Scheda curata" era proprio quello: diceva com'e' fatta la scheda, non che
+    # qualcuno la paga - e sul telefono ne restava solo la stella.
+    spons = '<span class="lg-spons">Sponsorizzato</span>' if l.get('premium') else ''
     sigla = f' ({l["prov"]})' if l['prov'] else ''
     etichetta = l.get('cat_sotto') or l.get('cat_nome') or 'Luogo'
     classe = f'lg-row cat-{l["cat"]}' + (' is-prem' if l.get('premium') else '')
@@ -1449,7 +1490,7 @@ def riga(l, oggi):
         f'data-etamin="{l.get("eta_min", 0)}" data-etamax="{l.get("eta_max", 99)}">'
         f'<summary>'
         f'<span class="lg-ico" aria-hidden="true">{e(l.get("icona") or "📍")}</span>'
-        f'<span class="lg-txt"><span class="lg-nome">{e(l["nome"])}</span>'
+        f'<span class="lg-txt">{spons}<span class="lg-nome">{e(l["nome"])}</span>'
         f'<span class="lg-meta"><span class="lg-cat">{e(etichetta)}</span> · '
         f'{e(l["comune"])}{sigla}</span></span>'
         f'<span class="lg-pills">{"".join(pillole)}</span>{CHEV}</summary>'
@@ -1600,17 +1641,44 @@ def gruppi_comune(elenco, oggi):
     return "\n".join(fuori)
 
 
+VETRINA_POSTI = 3
+
+
 def vetrina(elenco, oggi):
-    """Il blocco "In evidenza". Esiste solo se qualcuno l'ha comprato, e lo dice
-    in chiaro nella prima riga: e' l'unico punto della pagina in cui la
-    posizione non dipende dall'ordine alfabetico."""
-    scelti = [l for l in elenco if l.get('evidenza') and l.get('premium')][:3]
-    if not scelti:
+    """Il riquadro "Sponsorizzati". Esiste solo se qualcuno l'ha comprato, e lo
+    dice in chiaro nella prima riga: e' l'unico punto della pagina in cui la
+    posizione non dipende dall'ordine alfabetico.
+
+    SEGUE LA RICERCA, come su Ginetto: si stampano TUTTE le schede candidate e
+    il JS mostra le prime VETRINA_POSTI fra quelle che passano i filtri. Chi
+    sceglie Cuneo non si vede proporre in cima un posto di Alessandria che ha
+    pagato - che non serve a lui e non serve nemmeno a chi paga.
+
+    RUOTA OGNI GIORNO: la pagina si rigenera ogni notte e l'elenco parte da un
+    punto diverso. Cosi' il quarto cliente non e' un problema da decidere con
+    qualcuno che ha gia' pagato: tutti hanno lo stesso turno. La base della
+    rotazione e' alfabetica e non l'ordine del foglio, che cambia quando
+    qualcuno riordina le righe.
+
+    Senza JavaScript restano visibili le prime VETRINA_POSTI (le altre nascono
+    `hidden`): il riquadro non diventa mai una colonna di tutte le schede
+    pagate."""
+    candidati = sorted((l for l in elenco if l.get('evidenza') and l.get('premium')),
+                       key=lambda l: (G.slugify(l['nome']), l['slug']))
+    if not candidati:
         return ''
-    righe = "".join(riga(dict(l, slug=l['slug'] + '-ev'), oggi) for l in scelti)
-    return (f'<div class="lg-vetrina"><p>In evidenza '
+    k = oggi.toordinal() % len(candidati)
+    giro = candidati[k:] + candidati[:k]
+    righe = []
+    for i, l in enumerate(giro):
+        html_riga = riga(dict(l, slug=l['slug'] + '-ev'), oggi)
+        if i >= VETRINA_POSTI:
+            html_riga = html_riga.replace('<details ', '<details hidden ', 1)
+        righe.append(html_riga)
+    return (f'<div class="lg-vetrina" id="lg-vetrina" data-posti="{VETRINA_POSTI}">'
+            f'<p>Sponsorizzati '
             f'<span>· spazi a pagamento, <a href="#come-ordiniamo">come funziona</a></span></p>'
-            f'{righe}</div>')
+            f'{"".join(righe)}</div>')
 
 
 # Tre righe, non quattro paragrafi. Cancellarlo del tutto non si puo': l'art. 22
@@ -1623,11 +1691,14 @@ def vetrina(elenco, oggi):
 COME_ORDINIAMO = """    <section class="lg-ordine" id="come-ordiniamo">
       <h2>Come è ordinato questo elenco</h2>
       <p>Per comune, in ordine alfabetico. I filtri restringono l'elenco, non lo riordinano.</p>
-      <p>Le schede <b>★ curate</b> sono scritte da chi gestisce il luogo e paga questo
-      spazio: cambia <em>cosa</em> c'è dentro, non <em>dove</em> sta la riga. L'unica
-      posizione a pagamento è il blocco “In evidenza” in cima, che lo dichiara.</p>
-      <p>Il <b>♥ bollino</b> <a href="/bollino.html">Family Friendly</a> è un'altra cosa:
-      si merita, non si compra.</p>
+      <p>Le schede <b>Sponsorizzate</b> sono scritte da chi gestisce il luogo e paga
+      questo spazio: cambia <em>cosa</em> c'è dentro, non <em>dove</em> sta la riga.
+      L'unica posizione a pagamento è il riquadro “Sponsorizzati” in cima: mostra fino a
+      tre schede sponsorizzate fra quelle che corrispondono alla tua ricerca, e l'ordine
+      cambia ogni giorno.</p>
+      <p><b>Consigliato DAOP</b>, col cuore, è un'altra cosa: è il
+      <a href="/bollino.html">bollino Family Friendly</a>, si merita e non si compra, e
+      non sposta la riga.</p>
       <p>Un luogo descritto male, o che ha chiuso?
       <a href="/index.html#social">Scrivicelo</a>.</p>
     </section>"""
@@ -2252,8 +2323,8 @@ def main():
     # tipo di cosa che non si vede guardando la pagina (manca un blocco, non
     # compare un errore) e che costa a chi ha pagato.
     if premium and not in_vetrina:
-        print('[genera_luoghi] nessuno in vetrina: la colonna "In evidenza" del '
-              'foglio è vuota su tutte le schede a pagamento')
+        print('[genera_luoghi] riquadro Sponsorizzati vuoto: tutte le schede a '
+              'pagamento hanno "In evidenza = no" nel foglio')
     # Il proprio numero prima di scrivere: la riga delle quattro porte lo
     # rilegge, e le altre pagine lo vedranno alla loro run — cioe' domani. E' lo
     # stesso ritardo di un giro di data/luoghi-comuni.json, e va bene per la

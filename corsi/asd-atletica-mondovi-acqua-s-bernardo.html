@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASD Atletica Mondovì - Acqua S. Bernardo: corsi per bambini a Mondovì | DAOP</title>
-<meta name="description" content="L&#x27;ASD Atletica Mondovì – Acqua S. Bernardo promuove l&#x27;atletica leggera attraverso corsi e attività rivolti a bambini, ragazzi e adulti. A Mondovì le attività si svolgono presso la pista di atletica del Beila, con percorsi dedicati alle diverse età e specialità. La società è attiva anche sul…">
+<title>ASD Atletica Mondovì - Acqua S. Bernardo: corsi di atletica leggera per bambini a Mondovì | DAOP</title>
+<meta name="description" content="ASD Atletica Mondovì - Acqua S. Bernardo propone 16 corsi di atletica leggera a Mondovì, Camerana, Carrù, Ceva, Bossolasco, Dogliani e Murazzano, in provincia di Cuneo, per bambini e ragazzi da 3 a 14 anni.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/corsi/asd-atletica-mondovi-acqua-s-bernardo.html">
-<meta property="og:title" content="ASD Atletica Mondovì - Acqua S. Bernardo: corsi per bambini a Mondovì | DAOP">
-<meta property="og:description" content="L&#x27;ASD Atletica Mondovì – Acqua S. Bernardo promuove l&#x27;atletica leggera attraverso corsi e attività rivolti a bambini, ragazzi e adulti. A Mondovì le attività si svolgono presso la pista di atletica del Beila, con percorsi dedicati alle diverse età e specialità. La società è attiva anche sul…">
+<meta property="og:title" content="ASD Atletica Mondovì - Acqua S. Bernardo: corsi di atletica leggera per bambini a Mondovì | DAOP">
+<meta property="og:description" content="ASD Atletica Mondovì - Acqua S. Bernardo propone 16 corsi di atletica leggera a Mondovì, Camerana, Carrù, Ceva, Bossolasco, Dogliani e Murazzano, in provincia di Cuneo, per bambini e ragazzi da 3 a 14 anni.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi/asd-atletica-mondovi-acqua-s-bernardo.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ASD Atletica Mondovì - Acqua S. Bernardo: corsi per bambini…">
-<meta name="twitter:description" content="L&#x27;ASD Atletica Mondovì – Acqua S. Bernardo promuove l&#x27;atletica leggera attraverso corsi e attività rivolti a bambini,…">
+<meta name="twitter:title" content="ASD Atletica Mondovì - Acqua S. Bernardo: corsi di atletica…">
+<meta name="twitter:description" content="ASD Atletica Mondovì - Acqua S. Bernardo propone 16 corsi di atletica leggera a Mondovì, Camerana, Carrù, Ceva,…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="daop:citta" content="Mondovì">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
@@ -555,6 +555,17 @@
 .page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
+/* Il paragrafo coi numeri sta sopra quello su cos'e' un corso: senza, i due
+   margini da 26+20 si sommano e sembrano due blocchi staccati. */
+.co-intro.co-numeri{margin-bottom:0}
+.co-numeri+.co-intro{margin-top:12px}
+/* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
+   delle realta' che le precedono. Un <div> e non <section>, per la stessa
+   ragione (section{padding:100px 24px} dal CSS di sistema). */
+.co-faq{margin:40px 0 0;scroll-margin-top:120px}
+.co-faq-t{font-size:1.3rem;margin:0 0 4px}
+.co-faq-q{font-size:1.02rem;margin:18px 0 4px}
+.co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
    --cat-ink, che la card imposta. */
@@ -635,6 +646,8 @@
   box-shadow:0 6px 18px rgba(0,0,0,.22)}
 @media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
+/* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
+.cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
@@ -886,6 +899,7 @@
   </div>
 </header>
 <article class="cr-wrap" data-org="asd-atletica-mondovi-acqua-s-bernardo" data-org-nome="ASD Atletica Mondovì - Acqua S. Bernardo">
+  <p class="cr-intro">ASD Atletica Mondovì - Acqua S. Bernardo propone 16 corsi di atletica leggera a Mondovì, Camerana, Carrù, Ceva, Bossolasco, Dogliani e Murazzano, in provincia di Cuneo, per bambini e ragazzi da 3 a 14 anni.</p>
   <details class="cr-chi" open><summary>Chi è ASD Atletica Mondovì - Acqua S. Bernardo</summary><p class="cr-descr">L&#x27;ASD Atletica Mondovì – Acqua S. Bernardo promuove l&#x27;atletica leggera attraverso corsi e attività rivolti a bambini, ragazzi e adulti. A Mondovì le attività si svolgono presso la pista di atletica del Beila, con percorsi dedicati alle diverse età e specialità. La società è attiva anche sul territorio con corsi a Carrù e Ceva.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Mondovì</dd><dt>Indirizzo</dt><dd>Via Conti di Sambuy 10</dd><dt>Attività</dt><dd>Atletica leggera</dd><dt>Contatti</dt><dd><a href="tel:0174339255">0174 339255</a> - <a href="tel:3397839622">339 7839622</a></dd><dt>Email</dt><dd><a href="mailto:segreteria@atleticamondovi.net">segreteria@atleticamondovi.net</a></dd><dt>Sito</dt><dd><a href="https://www.atleticamondovi.net" rel="sponsored noopener" target="_blank">https://www.atleticamondovi.net</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/asd_atleticamondovi/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/asdatleticamondovi/" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
@@ -1149,8 +1163,18 @@
         </article>
   </div>
 
+  <div class="co-faq" id="domande">
+    <h2 class="co-faq-t">Domande frequenti su ASD Atletica Mondovì - Acqua S. Bernardo</h2>
+    <h3 class="co-faq-q">Che corsi propone ASD Atletica Mondovì - Acqua S. Bernardo?</h3>
+    <p class="co-faq-a">16 corsi di atletica leggera: Esordienti (Scuole Elementari), Ragazzi/e (1 e 2 Media), Cadetti/e (3 Media e 1 Superiore), Atletica Esordienti (Scuole Elementari), Atletica Ragazzi/e (1 e 2 Media), Atletica Cadetti/e (3 Media e 1 Superiore) e altri 3.</p>
+    <h3 class="co-faq-q">Da che età si possono frequentare i corsi di ASD Atletica Mondovì - Acqua S. Bernardo?</h3>
+    <p class="co-faq-a">Da 3 a 14 anni. Le fasce dei singoli corsi: scuole elementari (6-10 anni), 1a e 2a media (11-12 anni), 3a media e 1a superiore (13-14 anni), 1 e 2 media (11-12 anni), 3 media e 1 superiore (13-14 anni), 3a media (13 anni), 1ª e 2ª media (11-12 anni), 3ª media e 1ª superiore (13-14 anni) e 3-4 anni.</p>
+    <h3 class="co-faq-q">Dove si tengono i corsi di ASD Atletica Mondovì - Acqua S. Bernardo?</h3>
+    <p class="co-faq-a">In 7 comuni, in provincia di Cuneo: Mondovì (4), Camerana (3), Carrù (3), Ceva (3), Bossolasco (1), Dogliani (1), Murazzano (1). La sede di ogni corso è scritta nella sua scheda.</p>
+  </div>
+
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">188 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">184 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">

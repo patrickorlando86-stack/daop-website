@@ -937,9 +937,10 @@ def riga(e, today, hub=None):
     bits = [f"{esc(e['citta'])} ({e['prov']})" if e['citta'] else e['prov']]
     de = e['d_end']
     if ongoing:
-        bits.append('ultimo giorno' if de == today else f"fino al {de.day} {MESI[de.month-1]}")
+        bits.append('ultimo giorno' if de == today
+                    else f"fino al {de.day} {MESI[de.month-1]}{anno_se_altro(de, today)}")
     elif de != e['d_start']:
-        bits.append(f"fino al {de.day} {MESI[de.month-1]}")
+        bits.append(f"fino al {de.day} {MESI[de.month-1]}{anno_se_altro(de, today)}")
     if e['ora']:
         bits.append(esc(trunc(e['ora'], 28)))
     if e['eta']:
@@ -948,8 +949,8 @@ def riga(e, today, hub=None):
     tags = [f'<span class="ev-pill is-cat">{cat_icon} {esc(catlabel)}</span>']
     # Il consiglio di DAOP viene prima del prezzo e della manifestazione: e' il
     # motivo per cui uno guarda l'agenda nostra invece di un elenco qualsiasi.
-    if si(e.get('consigliato')):
-        tags.append(f'<span class="ev-pill is-daop">{STAR_SVG} Consigliato DAOP</span>')
+    if pill_consigliato(e):
+        tags.append(pill_consigliato(e))
     if ongoing:
         tags.append('<span class="ev-pill is-live">In corso</span>')
     pill = prezzo_pill(e)
@@ -1054,7 +1055,7 @@ def hl_card(e, eager=False):
             <span class="ev-hl-cat">{cat_icon} {esc(catlabel)}</span>
             <span class="ev-hl-name">{esc(trunc(e['nome'], 70))}</span>
             <span class="ev-hl-meta">{' · '.join(bits)}</span>
-            {pill}
+            {pill_consigliato(e)}{pill}
           </span>
         </a>'''
 
@@ -1073,16 +1074,34 @@ def rail(titolo, lista, slug, eager=False):
             '\n        </div>\n      </section>')
 
 
+def anno_se_altro(d, oggi):
+    """' 2027' se la data cade in un anno diverso da quello in corso, se no ''.
+
+    PERCHE' ESISTE (11/09/2026). Dal 10/09 nel foglio ci sono date fino a
+    maggio 2027 (le letture della Biblioteca Monticone di Canelli): l'agenda
+    passava da "sabato 19 dicembre" a "sabato 16 gennaio" senza dire che era
+    cambiato l'anno, e in coda alle schede "venerdi' 19 mar", letto a
+    settembre, sembrava un marzo gia' passato.
+
+    L'anno si scrive solo quando non e' questo, ed e' la stessa regola di
+    ambito() nel JS di eventi.html: sulle date dell'anno in corso sarebbe
+    rumore su ogni riga. In un posto solo perche' la usano l'agenda, le pagine
+    comune, le pagine di intenzione e la coda delle schede."""
+    return f" {d.year}" if d.year != oggi.year else ''
+
+
 def intestazione_giorno(d, today):
     """'Oggi · lunedì 27 luglio'. Il prefisso viene ricalcolato anche lato JS,
-    così resta corretto se la pagina viene servita da cache il giorno dopo."""
+    così resta corretto se la pagina viene servita da cache il giorno dopo.
+    Nell'anno dopo porta l'anno: 'sabato 16 gennaio 2027'."""
     if d == today:
         pre = 'Oggi · '
     elif d == today + datetime.timedelta(days=1):
         pre = 'Domani · '
     else:
         pre = ''
-    return f"{pre}{GIORNI[d.weekday()]} {d.day} {MESI_LUNGHI[d.month - 1]}"
+    return (f"{pre}{GIORNI[d.weekday()]} {d.day} {MESI_LUNGHI[d.month - 1]}"
+            f"{anno_se_altro(d, today)}")
 
 
 def render(events, hub=None):
@@ -3093,8 +3112,30 @@ PHONE_SVG = ('<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke
              'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
              '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>')
 
-STAR_SVG = ('<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" '
-            'aria-hidden="true"><path d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.4-5.8-3-5.8 3 1.1-6.4L2.6 9.4l6.5-.9z"/></svg>')
+# Il segno del "Consigliato DAOP" e' il CUORE, su tutto il sito: e' lo stesso
+# del bollino Family Friendly (bollino.html, #i-heart) e dei luoghi. Fino
+# all'11/09/2026 negli eventi era una stella, e la stella nei luoghi voleva dire
+# "scheda a pagamento": lo stesso simbolo per un giudizio nostro e per uno spazio
+# venduto e' la confusione che il Codice del consumo chiede di non fare. Chi paga
+# si dichiara con la PAROLA ("Sponsorizzato"), non con un simbolo.
+CONSIGLIATO_SVG = ('<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" '
+                   'aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 '
+                   '16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 '
+                   '1.5 4.05 3 5.5l7 7z"/></svg>')
+
+
+def pill_consigliato(e):
+    """La pillola "Consigliato DAOP", o '' se la riga non lo e'.
+
+    In un posto solo perche' la stampano cinque elenchi (agenda, corsie, pagine
+    comune, pagine di intenzione, centri): scritta cinque volte, la prima
+    modifica la fa divergere. E' un BADGE e basta - non sposta l'ordine di
+    nessun elenco e non ha un filtro suo: un "solo consigliati" dividerebbe
+    l'agenda in buoni e meno buoni, che e' la ragione per cui "Adatto Famiglie"
+    non si usa per separare."""
+    if not si(e.get('consigliato')):
+        return ''
+    return f'<span class="ev-pill is-daop">{CONSIGLIATO_SVG} Consigliato DAOP</span>'
 
 ORG_SVG = ('<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" '
            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
@@ -3891,7 +3932,8 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
             quando = "domani"
         else:
             quando = (data_estesa(e['d_start']).split(' ', 1)[0] + ' '
-                      + f"{e['d_start'].day} {MESI[e['d_start'].month - 1]}")
+                      + f"{e['d_start'].day} {MESI[e['d_start'].month - 1]}"
+                      + anno_se_altro(e['d_start'], oggi))
         righe.append(
             f'<li><a href="{href}"><span class="ev-vic-d">{esc(quando)}</span>'
             f'<span class="ev-vic-n">{esc(trunc(e.get("nome") or "", 70))}</span>'
@@ -4237,7 +4279,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     consiglio = '' if ritirata else blocco_daop(e)
     # "Consigliato DAOP" nel foglio e' gia' un giudizio, dato riga per riga:
     # tenerlo dentro il database e non mostrarlo era buttarlo via.
-    consigliato_badge = (f'<p class="ev-scelto">{STAR_SVG} Consigliato da DAOP</p>'
+    consigliato_badge = (f'<p class="ev-scelto">{CONSIGLIATO_SVG} Consigliato da DAOP</p>'
                          if si(e.get('consigliato')) and not ritirata else '')
     firma = firma_daop(rec, oggi, ritirata=ritirata)
     altri = blocco_vicini(rec, vicini, oggi, hub=hub) if vicini else ''
@@ -5314,11 +5356,45 @@ def blocco_comuni(hub, oggi):
     # sono la risposta alle query generiche su cui l'agenda ranka in settima
     # posizione, e da nessuna parte del sito ci arriverebbe un link. Una pagina
     # che solo la sitemap conosce, Google la tratta come tale.
-    scorc = "".join(f'<a href="{href}">{esc(testo)}</a>'
-                    for href, testo in link_landing(oggi))
-    testa = ('      <div class="ev-scorc-row">'
-             '<span class="ev-comuni-lab">Cosa cerchi</span>'
-             f'<div class="ev-comuni">{scorc}</div></div>\n')
+    # DUE RIGHE E NON UNA (11/09/2026, chiesto da Giovanni: "ingrandire un
+    # pochettino la possibilita' di scegliere gli eventi della propria
+    # provincia"). Sono le stesse cinque voci di prima, divise per quello che
+    # chiedono: "La tua provincia" e' un DOVE, "Cosa cerchi" e' un QUANDO
+    # (oggi, il weekend, la stagionale del momento). In fila indiana si
+    # leggevano come un blob di cinque pillole che a 375px andava a capo tre
+    # volte.
+    #
+    # Costa MENO di prima, ed e' misurato e non stimato: il blocco passa da
+    # 208px a 187px a 320 e a 375px, e a 158px a 412px. Il guadagno viene dal
+    # nome corto - in una riga che si chiama gia' "La tua provincia",
+    # scrivere "Eventi Alessandria" e' la stessa ripetizione del "(CN)" tolto
+    # dalle righe delle pagine di una provincia sola. Senza quel prefisso le
+    # tre pillole stanno su una riga (106+54+71px a 375).
+    #
+    # La provincia viene PRIMA: e' la scelta che vale tutto l'anno, mentre
+    # "oggi" e "questo weekend" li offre gia' la tendina "quando" della barra
+    # qui sopra. La stagionale resta nella seconda riga, che a 412px e' alta
+    # 40px: non le costa niente.
+    #
+    # Gli href vengono da href_eventi_prov() come in link_landing(), non da un
+    # confronto sul testo: e' la stessa funzione, quindi le due righe non
+    # possono divergere. Il nome corto viene da PROVINCE_NOMI, che e' l'altro
+    # posto solo. In link_landing() il prefisso "Eventi" RESTA, perche' li' la
+    # riga (.lan-alt, in fondo alle pagine di intenzione) non ha un'etichetta
+    # sopra e "Alessandria" da solo non direbbe di che cosa.
+    prov_href = {href_eventi_prov(c) for c in PROVINCE_PUBBLICATE}
+    altre = [(h, t) for h, t in link_landing(oggi) if h not in prov_href]
+
+    def _riga_pillole(etichetta, voci):
+        dentro = "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in voci)
+        return ('      <div class="ev-scorc-row">'
+                f'<span class="ev-comuni-lab">{esc(etichetta)}</span>'
+                f'<div class="ev-comuni">{dentro}</div></div>\n')
+
+    testa = _riga_pillole('La tua provincia',
+                          [(href_eventi_prov(c), PROVINCE_NOMI.get(c, c))
+                           for c in PROVINCE_PUBBLICATE])
+    testa += _riga_pillole('Cosa cerchi', altre)
     if not hub:
         return testa.rstrip('\n')
     voci = [d for d in sorted(hub.values(), key=lambda d: (-len(d['futuri']), d['nome']))
@@ -5612,7 +5688,7 @@ def _quando_breve(e, oggi):
         return "oggi"
     if (d - oggi).days == 1:
         return "domani"
-    return f"{GIORNI[d.weekday()][:3]} {d.day} {MESI[d.month - 1]}"
+    return f"{GIORNI[d.weekday()][:3]} {d.day} {MESI[d.month - 1]}{anno_se_altro(d, oggi)}"
 
 
 def _ricorrenti(archivio):
@@ -5703,7 +5779,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
         di, df = min(e['d_start'] for e in ev), max(e['d_end'] for e in ev)
         periodo = (data_estesa(di).capitalize() if di == df else
                    f"{_dal(di.day)} {MESI_LUNGHI[di.month - 1]} al "
-                   f"{df.day} {MESI_LUNGHI[df.month - 1]}")
+                   f"{df.day} {MESI_LUNGHI[df.month - 1]}{anno_se_altro(df, oggi)}")
         if len(ev) == 1:
             # Un evento solo: il titolo del gruppo E' l'evento. Ripeterlo sotto
             # come unica riga di elenco riempirebbe la pagina di doppioni, che
@@ -5714,7 +5790,9 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
                 f'<div class="com-b"><h3>'
                 f'<a class="com-go" href="{_href_evento(ev[0])}">'
                 f'{esc(trunc(g["titolo"], 80))}</a></h3>'
-                f'<p class="com-per">{esc(periodo)}</p></div></section>')
+                f'<p class="com-per">{esc(periodo)}</p>'
+                + (f'<span>{pill_consigliato(ev[0])}</span>' if pill_consigliato(ev[0]) else '')
+                + '</div></section>')
             continue
         # Le 13 serate di una patronale hanno quasi sempre LA STESSA locandina,
         # quella della festa. Ripeterla su ogni riga fa una colonna di sette
@@ -5763,7 +5841,12 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
             righe += (f'<li style="{riga_stile}">{thumb}<span class="com-b">'
                       f'<span class="com-d">{esc(quando)}{cat}</span>'
                       f'<a class="com-go" href="{_href_evento(e)}">'
-                      f'{esc(trunc(e.get("nome") or "", 80))}</a></span></li>')
+                      f'{esc(trunc(e.get("nome") or "", 80))}</a>'
+                      # Dentro uno <span> e non figlio diretto di .com-b, che e'
+                      # un flex in colonna: da solo la pillola si stirerebbe su
+                      # tutta la riga (e' la fascia da 251px di _landing_righe).
+                      + (f'<span>{pill_consigliato(e)}</span>' if pill_consigliato(e) else '')
+                      + '</span></li>')
         testa = (f'<img class="com-th" src="{esc(comune_a_tutti)}" alt="" '
                  f'loading="lazy" decoding="async" width="56" height="56">'
                  if comune_a_tutti else '')
@@ -6199,6 +6282,9 @@ def _landing_righe(ev, oggi, eta=False, gratis=False):
                 # intero sta sulla scheda. La classe arriva dal guscio.
                 + ('<span class="ev-pill is-free">Gratuito</span>'
                    if gratis and e_gratuito(e) else '')
+                # Il consiglio si stampa su tutte le pagine di intenzione, non
+                # solo dove c'e' un filtro: e' un badge, non un comando.
+                + pill_consigliato(e)
                 + '</span>'
                 + '</span></li>')
     return out, nude
@@ -6255,7 +6341,11 @@ def _landing_filtri(eventi, con_prov=True, con_quando=False, con_gratis=False):
         return ''
     cats = [f'<option value="{s}">{esc(LABELS[s])}</option>' for s in ORDER
             if any(bucket(e)[0] == s for e in eventi)]
-    provs = ([f'<option value="{c.lower()}">Prov. {c}</option>'
+    # Le province per esteso e non "Prov. AL": stessa decisione di
+    # opzioni_provincia(), e vale qui per la stessa ragione - sono la stessa
+    # tendina per lo stesso lettore, su pagine che si linkano fra loro.
+    # Misurato: la barra di /eventi/weekend.html resta 111px a 320 e a 375px.
+    provs = ([f'<option value="{c.lower()}">{esc(PROVINCE_NOMI.get(c, c))}</option>'
               for c in PROVINCE_PUBBLICATE
               if any((e.get('prov') or '').upper() == c for e in eventi)]
              if con_prov else [])
@@ -6277,7 +6367,7 @@ def _landing_filtri(eventi, con_prov=True, con_quando=False, con_gratis=False):
     if len(provs) > 1:
         tendine += ('<select class="ev-select" id="lan-dove" data-campo="province"'
                     ' aria-label="Filtra per provincia">'
-                    '<option value="all">Province</option>' + "".join(provs) + '</select>')
+                    '<option value="all">Provincia</option>' + "".join(provs) + '</select>')
     if len(cats) > 1:
         tendine += ('<select class="ev-select" id="lan-tipo" data-campo="category"'
                     ' aria-label="Filtra per tipo di evento">'
@@ -8304,12 +8394,28 @@ def opzioni_provincia(events):
     elenco ma non c'era modo di filtrarli. Ora l'elenco si genera da solo e non
     puo' piu' restare indietro. I value sono minuscoli perche' e' quello che il JS
     confronta con data-province sulle schede.
+
+    LE PROVINCE SI SCRIVONO PER ESTESO (11/09/2026, chiesto da Giovanni:
+    "rendere piu' semplice scegliere gli eventi della propria provincia").
+    "Prov. AL" chiede a chi legge di sapere la sigla della propria provincia,
+    ed e' parola per parola la decisione gia' presa il 05/09 per la colonna
+    Community del footer: "Instagram AL" e' diventato "Instagram Alessandria".
+
+    Costa zero pixel, ed e' misurato e non stimato: a 320, 375 e 412px la barra
+    appiccicosa resta alta 156px, a 1280 resta 68px. Il motivo e' che sul
+    telefono .ev-select e' `flex:1 1 auto; min-width:0`, quindi le tendine si
+    ridistribuiscono la riga invece di mandarne una a capo - "Alessandria"
+    entra in 144px a 320px. La regola scritta per luoghi.html ("Chrome
+    dimensiona una select sull'opzione piu' lunga, quindi le etichette restano
+    corte") vale ancora LI', dove i filtri sono quattro su due righe: la' non
+    si tocca senza rimisurare.
     """
     presenti = {e.get('prov') for e in events if e.get('prov')}
-    righe = ['        <option value="all">Province</option>']
+    righe = ['        <option value="all">Provincia</option>']
     for c in PROVINCE_PUBBLICATE:
         if c in presenti:
-            righe.append(f'        <option value="{c.lower()}">Prov. {c}</option>')
+            righe.append(f'        <option value="{c.lower()}">'
+                         f'{esc(PROVINCE_NOMI.get(c, c))}</option>')
     return "\n".join(righe)
 
 

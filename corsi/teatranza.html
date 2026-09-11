@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teatranza: corsi per bambini a Caraglio | DAOP</title>
-<meta name="description" content="Attiva dal 1987, Teatranza, in collaborazione con Santibriganti Teatro ha formato negli anni centinaia di attori, registi e professionisti dello spettacolo portando avanti una lunga esperienza nel mondo del teatro e della formazione. Da sempre, però, dedica una particolare attenzione ai più…">
+<title>Teatranza: corsi di recitazione per bambini a Caraglio | DAOP</title>
+<meta name="description" content="Teatranza propone 2 corsi di recitazione a Caraglio, in provincia di Cuneo, per bambini e ragazzi da 6 a 17 anni. Le lezioni si tengono presso Sala a Scacchi - Via Ferrini. Per tutti i corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/corsi/teatranza.html">
-<meta property="og:title" content="Teatranza: corsi per bambini a Caraglio | DAOP">
-<meta property="og:description" content="Attiva dal 1987, Teatranza, in collaborazione con Santibriganti Teatro ha formato negli anni centinaia di attori, registi e professionisti dello spettacolo portando avanti una lunga esperienza nel mondo del teatro e della formazione. Da sempre, però, dedica una particolare attenzione ai più…">
+<meta property="og:title" content="Teatranza: corsi di recitazione per bambini a Caraglio | DAOP">
+<meta property="og:description" content="Teatranza propone 2 corsi di recitazione a Caraglio, in provincia di Cuneo, per bambini e ragazzi da 6 a 17 anni. Le lezioni si tengono presso Sala a Scacchi - Via Ferrini. Per tutti i corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi/teatranza.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Teatranza: corsi per bambini a Caraglio | DAOP">
-<meta name="twitter:description" content="Attiva dal 1987, Teatranza, in collaborazione con Santibriganti Teatro ha formato negli anni centinaia di attori,…">
+<meta name="twitter:title" content="Teatranza: corsi di recitazione per bambini a Caraglio |…">
+<meta name="twitter:description" content="Teatranza propone 2 corsi di recitazione a Caraglio, in provincia di Cuneo, per bambini e ragazzi da 6 a 17 anni. Le…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="daop:citta" content="Caraglio">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
@@ -555,6 +555,17 @@
 .page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
+/* Il paragrafo coi numeri sta sopra quello su cos'e' un corso: senza, i due
+   margini da 26+20 si sommano e sembrano due blocchi staccati. */
+.co-intro.co-numeri{margin-bottom:0}
+.co-numeri+.co-intro{margin-top:12px}
+/* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
+   delle realta' che le precedono. Un <div> e non <section>, per la stessa
+   ragione (section{padding:100px 24px} dal CSS di sistema). */
+.co-faq{margin:40px 0 0;scroll-margin-top:120px}
+.co-faq-t{font-size:1.3rem;margin:0 0 4px}
+.co-faq-q{font-size:1.02rem;margin:18px 0 4px}
+.co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
    --cat-ink, che la card imposta. */
@@ -635,6 +646,8 @@
   box-shadow:0 6px 18px rgba(0,0,0,.22)}
 @media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
+/* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
+.cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
@@ -760,6 +773,7 @@
   </div>
 </header>
 <article class="cr-wrap" data-org="teatranza" data-org-nome="Teatranza">
+  <p class="cr-intro">Teatranza propone 2 corsi di recitazione a Caraglio, in provincia di Cuneo, per bambini e ragazzi da 6 a 17 anni. Le lezioni si tengono presso Sala a Scacchi - Via Ferrini. Per tutti i corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.</p>
   <details class="cr-chi"><summary>Chi è Teatranza</summary><p class="cr-descr">Attiva dal 1987, Teatranza, in collaborazione con Santibriganti Teatro ha formato negli anni centinaia di attori, registi e professionisti dello spettacolo portando avanti una lunga esperienza nel mondo del teatro e della formazione. Da sempre, però, dedica una particolare attenzione ai più piccoli, con corsi pensati per bambini e ragazzi. Durante i corsi di teatro i bambini e i ragazzi sviluppano creatività, fiducia di sé, capacità di comunicare e lavorare insieme, in un ambiente accogliente guidato da attori professionisti.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Caraglio</dd><dt>Indirizzo</dt><dd>Sala a Scacchi - Via Ferrini</dd><dt>Attività</dt><dd>Recitazione</dd><dt>Contatti</dt><dd><a href="tel:011645740">011645740</a> - dal lunedì al giovedì 11-17</dd><dt>Email</dt><dd><a href="mailto:segreteria@santibriganti.it">segreteria@santibriganti.it</a></dd><dt>Sito</dt><dd><a href="https://www.santibriganti.it/corsi-teatro-caraglio" rel="sponsored noopener" target="_blank">https://www.santibriganti.it/corsi-teatro-cara…</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/santibriganti/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/santibriganti.teatro/" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
@@ -808,8 +822,20 @@ I PARTECIPANTI AI CORSI HANNO DIRITTO AL BIGLIETTO RIDOTTO EXTRA DEGLI SPETTACOL
         </article>
   </div>
 
+  <div class="co-faq" id="domande">
+    <h2 class="co-faq-t">Domande frequenti su Teatranza</h2>
+    <h3 class="co-faq-q">Che corsi propone Teatranza a Caraglio?</h3>
+    <p class="co-faq-a">2 corsi di recitazione: Corso di teatro per ragazzi e Corso di teatro per bambini.</p>
+    <h3 class="co-faq-q">Da che età si possono frequentare i corsi di Teatranza?</h3>
+    <p class="co-faq-a">Da 6 a 17 anni. Le fasce dei singoli corsi: 12-17 anni e 6-11 anni.</p>
+    <h3 class="co-faq-q">Dove si tengono i corsi di Teatranza?</h3>
+    <p class="co-faq-a">Presso Sala a Scacchi - Via Ferrini, a Caraglio, in provincia di Cuneo.</p>
+    <h3 class="co-faq-q">Teatranza organizza lezioni di prova o open day?</h3>
+    <p class="co-faq-a">Sì: per tutti i corsi è prevista una lezione di prova. I dettagli sono nella scheda di ciascun corso.</p>
+  </div>
+
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">188 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">184 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">

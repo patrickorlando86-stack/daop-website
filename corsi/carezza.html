@@ -4,15 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CàRezza: corsi per bambini a Racconigi | DAOP</title>
-<meta name="description" content="CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.
-
-Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere…">
+<meta name="description" content="CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a. Per 2 corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/corsi/carezza.html">
 <meta property="og:title" content="CàRezza: corsi per bambini a Racconigi | DAOP">
-<meta property="og:description" content="CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.
-
-Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere…">
+<meta property="og:description" content="CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a. Per 2 corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi/carezza.html">
 <meta property="og:locale" content="it_IT">
@@ -20,7 +16,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
 <meta property="og:image" content="https://www.daop.it/assets/loghi/carezza.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CàRezza: corsi per bambini a Racconigi | DAOP">
-<meta name="twitter:description" content="CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e…">
+<meta name="twitter:description" content="CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le…">
 <meta name="twitter:image" content="https://www.daop.it/assets/loghi/carezza.webp">
 <meta name="daop:citta" content="Racconigi">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
@@ -559,6 +555,17 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
 .page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
+/* Il paragrafo coi numeri sta sopra quello su cos'e' un corso: senza, i due
+   margini da 26+20 si sommano e sembrano due blocchi staccati. */
+.co-intro.co-numeri{margin-bottom:0}
+.co-numeri+.co-intro{margin-top:12px}
+/* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
+   delle realta' che le precedono. Un <div> e non <section>, per la stessa
+   ragione (section{padding:100px 24px} dal CSS di sistema). */
+.co-faq{margin:40px 0 0;scroll-margin-top:120px}
+.co-faq-t{font-size:1.3rem;margin:0 0 4px}
+.co-faq-q{font-size:1.02rem;margin:18px 0 4px}
+.co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
    --cat-ink, che la card imposta. */
@@ -639,6 +646,8 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
   box-shadow:0 6px 18px rgba(0,0,0,.22)}
 @media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
+/* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
+.cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
@@ -797,6 +806,7 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
   </div>
 </header>
 <article class="cr-wrap" data-org="carezza" data-org-nome="CàRezza">
+  <p class="cr-intro">CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a. Per 2 corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.</p>
   <details class="cr-chi"><summary>Chi è CàRezza</summary><p class="cr-descr">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.</p><p class="cr-descr">Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere i bambini in armonia e offrire supporto ai genitori.</p><p class="cr-descr">Un luogo speciale e protetto per vivere un tempo di qualità insieme ai propri bambini.</p><p class="cr-descr">Ogni evento presso CàRezza è studiato per accogliere insieme i bimbi con mamme, papà, nonni, caregivers.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Racconigi</dd><dt>Indirizzo</dt><dd>Piazza Caduti per la Libertà 12a</dd><dt>Attività</dt><dd>Psicomotricità · Educazione musicale · Massaggio infantile · Benessere familiare</dd><dt>Contatti</dt><dd>Roberta <a href="tel:+393297249359">+39 329 724 9359</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
@@ -909,8 +919,20 @@ Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete 
     <a class="cr-ev" href="/eventi/tutti-a-tavola-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/evento_Locandine_20260828_073630_0000_20260828-090616_01_p12.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Tutti a Tavola!</span><span class="cr-ev-q">Mercoledì 30 settembre 2026, ore 10:00-11:30 · CàRezza</span></span></a>
     <a class="cr-ev" href="/eventi/allegro-con-moto-incontro-1-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/daop_cuneo_3973594077073391155.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Allegro con Moto - Incontro 1</span><span class="cr-ev-q">Mercoledì 21 ottobre 2026, ore 16:30-17:20 · CàRezza</span></span></a>
     <a class="cr-ev" href="/eventi/allegro-con-moto-incontro-2-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/daop_cuneo_3973594077073391155.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Allegro con Moto - Incontro 2</span><span class="cr-ev-q">Mercoledì 28 ottobre 2026, ore 16:30-17:20 · CàRezza</span></span></a>
+  <div class="co-faq" id="domande">
+    <h2 class="co-faq-t">Domande frequenti su CàRezza</h2>
+    <h3 class="co-faq-q">Che corsi propone CàRezza a Racconigi?</h3>
+    <p class="co-faq-a">6 corsi: Percorso di Psicomotricità 3-6 anni, Allegro con Moto, Presto, Prestissimo! – La musica nasce dalla relazione, Accarezzami – Corso di massaggio infantile Aimi, mini-MISP™ (fascia 2-3 anni) e MISP™ (fascia 4-12 anni).</p>
+    <h3 class="co-faq-q">Da che età si possono frequentare i corsi di CàRezza?</h3>
+    <p class="co-faq-a">Dai primi mesi fino a 12 anni. Le fasce dei singoli corsi: 3-6 anni, 0-3 anni, 0-12 mesi, 2-3 anni e 4-12 anni.</p>
+    <h3 class="co-faq-q">Dove si tengono i corsi di CàRezza?</h3>
+    <p class="co-faq-a">In Piazza Caduti per la Libertà 12a, a Racconigi, in provincia di Cuneo.</p>
+    <h3 class="co-faq-q">CàRezza organizza lezioni di prova o open day?</h3>
+    <p class="co-faq-a">Sì: per 2 corsi è prevista una lezione di prova. I dettagli sono nella scheda di ciascun corso.</p>
+  </div>
+
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">188 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">184 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">

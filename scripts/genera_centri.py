@@ -666,10 +666,9 @@ def card(c, accent, idx):
             bits.append(G.esc(G.trunc(testo, 30)))
     bits = [b for b in bits if b]
 
-    consigliato = c['consigliato'].strip().lower() in ('si', 'sì', 'x', 'true')
     tags = []
-    if consigliato:
-        tags.append(f'<span class="ev-pill is-daop">{G.STAR_SVG} Consigliato DAOP</span>')
+    if G.pill_consigliato(c):
+        tags.append(G.pill_consigliato(c))
     pill = G.prezzo_pill(c)
     if pill:
         tags.append(pill)

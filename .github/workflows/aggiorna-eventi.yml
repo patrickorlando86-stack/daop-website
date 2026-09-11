@@ -470,6 +470,19 @@ jobs:
         if: always()
         run: python scripts/prova_logo_realta.py
 
+      - name: I testi dei corsi dicono solo quello che i dati sanno
+        # Hero, description, paragrafo d'apertura e domande frequenti di
+        # corsi.html e delle pagine realta' si scrivono dai corsi (11/09/2026).
+        # La prima stesura, scritta a mano, nominava quattro comuni senza corsi
+        # e prometteva giorni e costi, che sono colonne facoltative. La prova
+        # difende: comuni e attivita' solo se ci sono, nessuna promessa su
+        # giorni/orari/costi, nessuna domanda senza dati, "ad" davanti a
+        # vocale, niente FAQPage.
+        #
+        # Offline, su corsi finti, in due secondi.
+        if: always()
+        run: python scripts/prova_testi_corsi.py
+
       - name: Ogni sede resta un corso a se'
         # Fra il 03/09 e il 07/09/2026 lo stesso corso in piu' paesi diventava
         # UNA card, e i campi sono uno per card: locandina, referente, contatto,

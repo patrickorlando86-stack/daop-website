@@ -3,24 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Allinea-mente: corsi per bambini a Borgo San Dalmazzo | DAOP</title>
-<meta name="description" content="Allinea-Mente è un’associazione sportiva dedicata al benessere e al movimento, con corsi per bambini, ragazzi e adulti. 
-
-Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roller e atletica, per divertirsi e sviluppare equilibrio, coordinazione e consapevolezza del proprio…">
+<title>Allinea-mente: corsi di sport e movimento per bambini a Borgo San Dalmazzo | DAOP</title>
+<meta name="description" content="Allinea-mente propone 7 corsi di sport e movimento a Borgo San Dalmazzo, in provincia di Cuneo, per bambini e ragazzi da 5 a 18 anni. Le lezioni si tengono in Corso Barale 95. Per tutti i corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/corsi/allinea-mente.html">
-<meta property="og:title" content="Allinea-mente: corsi per bambini a Borgo San Dalmazzo | DAOP">
-<meta property="og:description" content="Allinea-Mente è un’associazione sportiva dedicata al benessere e al movimento, con corsi per bambini, ragazzi e adulti. 
-
-Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roller e atletica, per divertirsi e sviluppare equilibrio, coordinazione e consapevolezza del proprio…">
+<meta property="og:title" content="Allinea-mente: corsi di sport e movimento per bambini a Borgo San Dalmazzo | DAOP">
+<meta property="og:description" content="Allinea-mente propone 7 corsi di sport e movimento a Borgo San Dalmazzo, in provincia di Cuneo, per bambini e ragazzi da 5 a 18 anni. Le lezioni si tengono in Corso Barale 95. Per tutti i corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi/allinea-mente.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://www.daop.it/assets/loghi/allinea-mente.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Allinea-mente: corsi per bambini a Borgo San Dalmazzo | DAOP">
-<meta name="twitter:description" content="Allinea-Mente è un’associazione sportiva dedicata al benessere e al movimento, con corsi per bambini, ragazzi e adulti.…">
+<meta name="twitter:title" content="Allinea-mente: corsi di sport e movimento per bambini a…">
+<meta name="twitter:description" content="Allinea-mente propone 7 corsi di sport e movimento a Borgo San Dalmazzo, in provincia di Cuneo, per bambini e ragazzi…">
 <meta name="twitter:image" content="https://www.daop.it/assets/loghi/allinea-mente.webp">
 <meta name="daop:citta" content="Borgo San Dalmazzo">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
@@ -559,6 +555,17 @@ Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roll
 .page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
+/* Il paragrafo coi numeri sta sopra quello su cos'e' un corso: senza, i due
+   margini da 26+20 si sommano e sembrano due blocchi staccati. */
+.co-intro.co-numeri{margin-bottom:0}
+.co-numeri+.co-intro{margin-top:12px}
+/* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
+   delle realta' che le precedono. Un <div> e non <section>, per la stessa
+   ragione (section{padding:100px 24px} dal CSS di sistema). */
+.co-faq{margin:40px 0 0;scroll-margin-top:120px}
+.co-faq-t{font-size:1.3rem;margin:0 0 4px}
+.co-faq-q{font-size:1.02rem;margin:18px 0 4px}
+.co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
    --cat-ink, che la card imposta. */
@@ -639,6 +646,8 @@ Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roll
   box-shadow:0 6px 18px rgba(0,0,0,.22)}
 @media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
+/* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
+.cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
@@ -806,6 +815,7 @@ Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roll
   </div>
 </header>
 <article class="cr-wrap" data-org="allinea-mente" data-org-nome="Allinea-mente">
+  <p class="cr-intro">Allinea-mente propone 7 corsi di sport e movimento a Borgo San Dalmazzo, in provincia di Cuneo, per bambini e ragazzi da 5 a 18 anni. Le lezioni si tengono in Corso Barale 95. Per tutti i corsi è prevista una lezione di prova: i dettagli sono nella scheda del corso.</p>
   <details class="cr-chi" open><summary>Chi è Allinea-mente</summary><p class="cr-descr">Allinea-Mente è un’associazione sportiva dedicata al benessere e al movimento, con corsi per bambini, ragazzi e adulti.</p><p class="cr-descr">Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roller e atletica, per divertirsi e sviluppare equilibrio, coordinazione e consapevolezza del proprio corpo.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Borgo San Dalmazzo</dd><dt>Indirizzo</dt><dd>Corso Barale 95</dd><dt>Attività</dt><dd>Acrobatica · Ginnastica artistica · Capoeira · Arti aeree · Kickboxing · Pole Dance · Ginnastica ritmica</dd><dt>Contatti</dt><dd><a href="tel:3468127680">346 8127680</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/allinea_mente/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=100078393063948" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
@@ -925,8 +935,20 @@ Propone attività coinvolgenti come acrobatica aerea, parkour, arrampicata, roll
         </article>
   </div>
 
+  <div class="co-faq" id="domande">
+    <h2 class="co-faq-t">Domande frequenti su Allinea-mente</h2>
+    <h3 class="co-faq-q">Che corsi propone Allinea-mente a Borgo San Dalmazzo?</h3>
+    <p class="co-faq-a">7 corsi di sport e movimento: Corso di Acrobatica per Bambini, Ginnastica Artistica Femminile Base, Corso Capoeira Kids, Cerchio Aereo e Tessuto Aereo - Bambini, Corso di Kickboxing bambini e ragazzi, Pole Dance Bambini e Ginnastica Ritmica.</p>
+    <h3 class="co-faq-q">Da che età si possono frequentare i corsi di Allinea-mente?</h3>
+    <p class="co-faq-a">Da 5 a 18 anni. Le fasce dei singoli corsi: 5-12 anni, dai 5 anni, 7-12 anni, 5 - 6 anni, 6-15 anni, 5-6 anni e dai 5 anni in su.</p>
+    <h3 class="co-faq-q">Dove si tengono i corsi di Allinea-mente?</h3>
+    <p class="co-faq-a">In Corso Barale 95, a Borgo San Dalmazzo, in provincia di Cuneo.</p>
+    <h3 class="co-faq-q">Allinea-mente organizza lezioni di prova o open day?</h3>
+    <p class="co-faq-a">Sì: per tutti i corsi è prevista una lezione di prova. I dettagli sono nella scheda di ciascun corso.</p>
+  </div>
+
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">188 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">184 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">

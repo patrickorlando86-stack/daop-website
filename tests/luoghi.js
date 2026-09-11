@@ -18,14 +18,17 @@ const fs = require('fs');
 const path = require('path');
 const { apri, esito, RADICE } = require('./_aiuto');
 
-const visibili = (page) => page.locator('.lg-row[data-cat]:not([hidden])').count();
+// Le righe dell'ELENCO. Il riquadro "Sponsorizzati" ne contiene delle copie,
+// che passano dagli stessi filtri ma non si contano: vedi le prove sul riquadro.
+const RIGA = '.lg-row[data-cat]:not(.lg-vetrina .lg-row)';
+const visibili = (page) => page.locator(`${RIGA}:not([hidden])`).count();
 
 module.exports = async function luoghi(browser) {
   const r = esito();
 
   r.titolo('luoghi.html — telefono 412px');
   let { ctx, page } = await apri(browser, 'luoghi.html', 412);
-  const tot = await page.locator('.lg-row[data-cat]').count();
+  const tot = await page.locator(RIGA).count();
   r.ok(tot > 0, `${tot} luoghi in pagina`);
 
   // ── senza JavaScript la riga si apre lo stesso ────────────────────────
@@ -247,7 +250,101 @@ module.exports = async function luoghi(browser) {
     // Fuori dalla vetrina dichiarata, una scheda curata non sta mai in cima al
     // suo gruppo per il fatto di essere curata: sta dove la mette l'alfabeto.
     return prem.every((p) => p.closest('.lg-vetrina') || p.closest('.lg-grp'));
-  }), 'le schede curate stanno nell\'elenco, non sopra di esso');
+  }), 'le schede sponsorizzate stanno nell\'elenco, non sopra di esso');
+
+  // ── chi paga si dichiara, a parole e su ogni schermo ──────────────────
+  // Fino all'11/09/2026 una scheda a pagamento diceva "★ Scheda curata", e sul
+  // telefono le pillole perdono la parola: a 412px restava la sola stella. Un
+  // segno da solo non dichiara un pagamento (FTC, Digital Chart IAP). Si guarda
+  // lo stile CALCOLATO e non l'HTML: una regola che nasconde l'etichetta sotto
+  // i 600px lascerebbe l'HTML perfettamente giusto.
+  const spons = await page.evaluate(() => {
+    const prem = [...document.querySelectorAll('.lg-row.is-prem')].filter((d) => !d.hidden);
+    const male = prem.filter((d) => {
+      const s = d.querySelector('.lg-txt > .lg-spons');
+      if (!s || s.textContent.trim() !== 'Sponsorizzato') return true;
+      for (let n = s; n && n !== d; n = n.parentElement) {
+        const st = getComputedStyle(n);
+        if (st.display === 'none' || st.visibility === 'hidden' || +st.opacity === 0) return true;
+      }
+      return parseFloat(getComputedStyle(s).fontSize) < 10;
+    });
+    // Il verso che si dimentica: la parola su una scheda che NON paga e' la
+    // stessa bugia girata al contrario.
+    const bugie = [...document.querySelectorAll('.lg-spons')]
+      .filter((s) => !s.closest('.lg-row.is-prem')).length;
+    return { prem: prem.length, male: male.length, bugie };
+  });
+  if (spons.prem) {
+    r.ok(spons.male === 0,
+      `ogni scheda a pagamento dice "Sponsorizzato" sopra il nome, anche sul telefono (${spons.male} su ${spons.prem} no)`);
+  } else {
+    console.log('  nota nessuna scheda a pagamento in pagina: la dichiarazione non si prova');
+  }
+  r.ok(spons.bugie === 0, `nessuna scheda gratuita porta la parola "Sponsorizzato" (${spons.bugie})`);
+
+  // Il Consigliato DAOP e' il cuore DISEGNATO: un carattere ♥ o ★ su Android
+  // diventa un'emoji, e la stella voleva dire "a pagamento". Nessuna stella
+  // resta nell'elenco.
+  r.ok(await page.evaluate(() =>
+    [...document.querySelectorAll('.lg-tag.is-daop')].every((t) => t.querySelector('svg'))
+      && !/[★♥]/.test(document.querySelector('.lg-wrap').textContent)),
+    'Consigliato DAOP col cuore disegnato, e nessuna stella o cuore come carattere');
+
+  // ── il riquadro Sponsorizzati segue la ricerca ────────────────────────
+  // Come su Ginetto: chi sceglie una provincia non vede in cima un posto di
+  // un'altra che ha pagato. Nessun numero di schede e' scritto qui - sarebbe
+  // rosso il giorno che entra il quinto cliente, cioe' quando il sito fa la
+  // cosa giusta. Si controllano rapporti: quante stanno nei posti, di che
+  // provincia sono, e che il riquadro vuoto sparisca col suo titolo.
+  if (await page.locator('#lg-vetrina').count()) {
+    const riposo = await page.evaluate(() => {
+      const b = document.getElementById('lg-vetrina');
+      const vis = [...b.querySelectorAll('.lg-row')].filter((d) => !d.hidden);
+      return {
+        vis: vis.length, posti: +b.dataset.posti,
+        pagate: vis.every((d) => d.classList.contains('is-prem')),
+        testa: (b.querySelector(':scope > p') || {}).textContent || '',
+      };
+    });
+    r.ok(riposo.vis > 0 && riposo.vis <= riposo.posti,
+      `a riposo il riquadro mostra ${riposo.vis} schede, al massimo ${riposo.posti}`);
+    r.ok(riposo.pagate, 'nel riquadro stanno solo schede a pagamento');
+    r.ok(/sponsorizzat/i.test(riposo.testa), 'il riquadro si intitola "Sponsorizzati"');
+
+    const province = await page.$$eval('#lg-toolbar [data-campo="prov"] option',
+      (o) => o.map((x) => x.value).filter((v) => v !== 'all'));
+    let segue = true;
+    let conta = true;
+    for (const p of province) {
+      await page.selectOption('#lg-toolbar [data-campo="prov"]', p);
+      await page.waitForTimeout(200);
+      const s = await page.evaluate((a) => {
+        const b = document.getElementById('lg-vetrina');
+        const vis = [...b.querySelectorAll('.lg-row')].filter((d) => !d.hidden);
+        const elenco = document.querySelectorAll(`${a.riga}:not([hidden])`).length;
+        const n = parseInt(((document.getElementById('lg-count').textContent || '')
+          .match(/\d+/) || ['-1'])[0], 10);
+        return {
+          provincia: vis.every((d) => d.dataset.prov === a.p),
+          vuotoNascosto: vis.length > 0 || b.hidden,
+          posti: vis.length <= +b.dataset.posti,
+          conta: n === elenco,
+        };
+      }, { p, riga: RIGA });
+      if (!s.provincia || !s.vuotoNascosto || !s.posti) segue = false;
+      if (!s.conta) conta = false;
+    }
+    await page.selectOption('#lg-toolbar [data-campo="prov"]', 'all');
+    await page.waitForTimeout(200);
+    r.ok(segue,
+      'il riquadro segue la provincia scelta, sta nei suoi posti, e senza schede di quella provincia sparisce col titolo');
+    r.ok(conta, 'il conteggio "N luoghi" non conta due volte le schede del riquadro');
+  } else if (spons.prem) {
+    // Non e' un errore per forza: "In evidenza = no" su tutte toglie il riquadro
+    // apposta, e il generatore lo stampa nel log.
+    console.log('  nota ci sono schede a pagamento ma il riquadro Sponsorizzati non c\'e\'');
+  }
 
   // La banda di Supabase. Nell'INTESTAZIONE non ci vanno immagini: al posto
   // della miniatura c'e' l'emoji del foglio. La foto sta nel corpo, cioe'

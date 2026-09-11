@@ -250,6 +250,69 @@ module.exports = async function agenda(browser) {
   }, id), 'arrivando da un\'ancora il link calendario risulta compilato');
   await ctx.close();
 
+  // ── la provincia si sceglie per nome ──────────────────────────────────
+  // 11/09/2026, chiesto da Giovanni. Due punti, e nessuna prova qui conta
+  // niente: "tre pillole" o "quattro opzioni" sarebbero rosse il giorno che
+  // apre la quarta provincia, cioe' quando il sito fa la cosa giusta.
+  //
+  // L'invariante forte e' che i DUE posti in cui una provincia si sceglie -
+  // la tendina della barra e la riga "La tua provincia" - la chiamino allo
+  // stesso modo. Tiene insieme anche il resto: se uno dei due tornasse a
+  // "Prov. AL" la prova e' rossa, e non c'e' un elenco di nomi da aggiornare
+  // qui dentro quando ne nasce una nuova.
+  r.titolo('eventi.html — scegliere la propria provincia');
+  ({ ctx, page } = await apri(browser, 'eventi.html', 412));
+
+  const righe = await page.$$eval('.ev-scorc-row', (rs) => rs.map((x) => ({
+    lab: (x.querySelector('.ev-comuni-lab') || {}).textContent || '',
+    voci: [...x.querySelectorAll('.ev-comuni a')].map((a) => ({
+      testo: a.textContent.trim(), href: a.getAttribute('href'),
+    })),
+  })));
+  const prov = righe.find((x) => /provincia/i.test(x.lab));
+  const altre = righe.find((x) => /cosa cerchi/i.test(x.lab));
+  r.ok(!!prov && !!altre,
+    `le scorciatoie sono due righe etichettate (${righe.map((x) => x.lab).join(' | ')})`);
+
+  // La prima richiesta di Giovanni: dalle scorciatoie si va alla pagina di
+  // TUTTA l'agenda della provincia, non a quella delle sole sagre - che a
+  // Cuneo e' il 20% del lavoro del curatore.
+  const sagre = righe.flatMap((x) => x.voci).filter((v) => /sagre-provincia/.test(v.href));
+  r.ok(sagre.length === 0, sagre.length
+    ? `scorciatoie che promettono la provincia e consegnano le sagre: ${sagre.map((v) => v.testo).join(', ')}`
+    : 'nessuna scorciatoia manda alla pagina delle sole sagre');
+  const fuoriposto = (prov ? prov.voci : []).filter((v) => !/^\/eventi-provincia-[a-z-]+\.html$/.test(v.href));
+  r.ok(prov && fuoriposto.length === 0, fuoriposto.length
+    ? `voci nella riga della provincia che non portano a una pagina provincia: ${fuoriposto.map((v) => v.href).join(', ')}`
+    : 'ogni voce di "La tua provincia" porta alla sua pagina provincia');
+
+  // Le due righe sono complementari: una voce sola, in un posto solo.
+  const doppie = (prov ? prov.voci : []).map((v) => v.href)
+    .filter((h) => (altre ? altre.voci : []).some((v) => v.href === h));
+  r.ok(doppie.length === 0, doppie.length
+    ? `voci ripetute nelle due righe: ${doppie.join(', ')}`
+    : 'nessuna voce compare in tutte e due le righe');
+
+  const opzioni = await page.$$eval('#f-dove option', (os) => os
+    .filter((o) => o.value !== 'all')
+    .map((o) => ({ val: o.value, testo: o.textContent.trim() })));
+  const sigle = opzioni.filter((o) => /^prov\b/i.test(o.testo)
+    || o.testo.toLowerCase() === o.val);
+  r.ok(opzioni.length > 0 && sigle.length === 0, !opzioni.length
+    ? 'la tendina delle province non ha nessuna voce'
+    : sigle.length
+      ? `la tendina chiede di sapere la sigla: ${sigle.map((o) => o.testo).join(', ')}`
+      : `le ${opzioni.length} province della tendina si leggono per esteso`);
+
+  // Il cuore: stesso nome nei due posti. Solo in questo verso - la tendina
+  // elenca le province che hanno eventi oggi, la riga le elenca tutte.
+  const scollate = opzioni.filter((o) => !(prov ? prov.voci : [])
+    .some((v) => v.testo === o.testo));
+  r.ok(scollate.length === 0, scollate.length
+    ? `la tendina e le pillole chiamano la stessa provincia in due modi: ${scollate.map((o) => o.testo).join(', ')}`
+    : 'tendina e pillole chiamano le province allo stesso modo');
+  await ctx.close();
+
   // ── "Vicino a me" ─────────────────────────────────────────────────────
   // Si riapre la pagina con una spia sulla Geolocation API: la regola numero
   // uno e' che la posizione non si chieda da sola. Il resto si prova dal
