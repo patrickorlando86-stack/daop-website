@@ -361,7 +361,10 @@ module.exports = async function corsi(browser) {
         if (/mes/i.test(riga)) return !(Number(hi) <= 2);
         return !new RegExp(`\\b${lo}\\b`).test(riga) || !/ann/i.test(riga);
       }
-      const atteso = lo === hi ? `${lo} anni` : `${lo}-${hi} anni`;
+      // Singolare: la scheda scrive "1 anno" (genera_corsi.py, _eta_riga) e fino
+      // all'11/09/2026 questa prova cercava "1 anni" — rossa su un corso giusto
+      // (il Mousy di Kids&Us, primo corso con fascia 1-1).
+      const atteso = lo === hi ? `${lo} ${lo === '1' ? 'anno' : 'anni'}` : `${lo}-${hi} anni`;
       return !riga.includes(atteso);
     }).map((c) => `${c.querySelector('.ev-name').textContent.trim()}`
       + ` [${c.dataset.etada}]`));
