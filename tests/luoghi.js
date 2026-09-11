@@ -346,6 +346,42 @@ module.exports = async function luoghi(browser) {
     console.log('  nota ci sono schede a pagamento ma il riquadro Sponsorizzati non c\'e\'');
   }
 
+  // ── l'apertura di una scheda arriva in GA4 ────────────────────────────
+  // Il denominatore che mancava: senza, a un cliente si puo' dire "47 hanno
+  // chiesto le indicazioni" ma non su quante aperture. Il consenso si accende
+  // DOPO il caricamento, come in tests/corsi.js: cookie-consent.js parte
+  // mettendo il flag a false.
+  await page.evaluate(() => {
+    window.__ga = [];
+    window.daopConsensoAnalytics = true;
+    window.gtag = function () { window.__ga.push([].slice.call(arguments)); };
+  });
+  const rigaElenco = page.locator(RIGA).first();
+  const idElenco = await rigaElenco.getAttribute('id');
+  await rigaElenco.locator('summary').click();
+  await page.waitForTimeout(150);
+  await rigaElenco.locator('summary').click();
+  await page.waitForTimeout(150);
+  const aperte = await page.evaluate(
+    () => window.__ga.filter((e) => e[1] === 'apri_luogo').map((e) => e[2]));
+  r.ok(aperte.length === 1, `apri_luogo: ${aperte.length} evento/i su un'apertura e una chiusura`);
+  r.ok(!!aperte[0] && aperte[0].organizer_id === idElenco && aperte[0].posizione === 'elenco'
+    && !!aperte[0].organizer_name,
+  `apri_luogo porta l'id della riga, il nome e la posizione (${JSON.stringify(aperte[0] || {})})`);
+  const inRiquadro = page.locator('#lg-vetrina .lg-row:not([hidden])').first();
+  if (await inRiquadro.count()) {
+    const idV = await inRiquadro.getAttribute('id');
+    await inRiquadro.locator('summary').click();
+    await page.waitForTimeout(150);
+    const dalRiquadro = await page.evaluate(
+      () => window.__ga.filter((e) => e[1] === 'apri_luogo').map((e) => e[2]).slice(1));
+    // La copia nel riquadro ha "-ev" in coda all'id: nei report deve essere lo
+    // stesso posto dell'elenco, se no un cliente avrebbe due righe.
+    r.ok(dalRiquadro.length === 1 && dalRiquadro[0].organizer_id === idV.replace(/-ev$/, '')
+      && dalRiquadro[0].posizione === 'sponsorizzati',
+    `dal riquadro: stesso id del posto e posizione "sponsorizzati" (${JSON.stringify(dalRiquadro[0] || {})})`);
+  }
+
   // La banda di Supabase. Nell'INTESTAZIONE non ci vanno immagini: al posto
   // della miniatura c'e' l'emoji del foglio. La foto sta nel corpo, cioe'
   // dentro un <details> chiuso, che il browser non disegna: con loading="lazy"
@@ -437,6 +473,66 @@ module.exports = async function luoghi(browser) {
   r.ok(rotti.length === 0, rotti.length
     ? `ancore inesistenti: ${rotti.slice(0, 3).map(([a, f]) => `#${a} (${f})`).join(', ')}`
     : 'ogni ancora linkata esiste davvero in luoghi.html');
+
+  // -- la riga "Sponsorizzato" in coda alle schede evento ---------------
+  // Porta a una riga di QUESTA pagina, quindi si controlla come il ponte qui
+  // sopra: l'ancora deve esistere, e la parola deve venire prima del nome.
+  // Che la riga porti a una scheda ancora pagata NON e' una prova ma una nota:
+  // l'indice arriva con un giro di ritardo, quindi il giorno dopo una scadenza
+  // la scheda evento puo' ancora nominare chi ha appena smesso di pagare.
+  const righeElenco = new Set(await page.$$eval('.lg-grp .lg-row[id]', (d) => d.map((x) => x.id)));
+  const pagate = new Set(await page.$$eval('.lg-grp .lg-row.is-prem[id]', (d) => d.map((x) => x.id)));
+  const sRotte = [];
+  const sMute = [];
+  const sDoppie = [];
+  const sNonPagate = [];
+  let fileSpons = null;
+  for (const f of schede) {
+    const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    const blocchi = [...html.matchAll(/<p class="ev-spons">([\s\S]*?)<\/p>/g)];
+    if (!blocchi.length) continue;
+    fileSpons = fileSpons || f;
+    if (blocchi.length > 1) sDoppie.push(f);
+    for (const [, dentro] of blocchi) {
+      if (!/^<span class="ev-spons-l">Sponsorizzato<\/span> <a /.test(dentro)) sMute.push(f);
+      const m = dentro.match(/href="\/luoghi\.html#(lg-[a-z0-9-]+)"/);
+      if (!m || !righeElenco.has(m[1])) sRotte.push(`${f} -> ${m ? m[1] : '?'}`);
+      else if (!pagate.has(m[1])) sNonPagate.push(m[1]);
+    }
+  }
+  if (fileSpons) {
+    r.ok(sRotte.length === 0, sRotte.length
+      ? `righe "Sponsorizzato" verso ancore inesistenti: ${sRotte.slice(0, 3).join(', ')}`
+      : 'ogni riga "Sponsorizzato" porta a una riga che esiste in luoghi.html');
+    r.ok(sMute.length === 0, sMute.length
+      ? `la parola "Sponsorizzato" non viene prima del nome: ${sMute.slice(0, 3).join(', ')}`
+      : 'la parola "Sponsorizzato" viene prima del nome, su ogni scheda');
+    r.ok(sDoppie.length === 0, sDoppie.length
+      ? `schede con piu' righe sponsorizzate: ${sDoppie.slice(0, 3).join(', ')}`
+      : 'una riga sponsorizzata per scheda, al massimo');
+    if (sNonPagate.length) {
+      console.log(`  nota ${sNonPagate.length} righe nominano un posto che oggi non paga (giro di ritardo dell'indice): ${[...new Set(sNonPagate)].slice(0, 3).join(', ')}`);
+    }
+    // Il clic si conta: e' uno spazio venduto, e a chi lo compra si deve poter
+    // dire quante volte e' stato toccato.
+    const spia = () => { window.addEventListener('click', (e) => e.preventDefault(), true); };
+    const s = await apri(browser, fileSpons, 412, spia);
+    await s.page.evaluate(() => {
+      window.__ga = [];
+      window.daopConsensoAnalytics = true;
+      window.gtag = function () { window.__ga.push([].slice.call(arguments)); };
+    });
+    await s.page.locator('.ev-spons a').first().click();
+    const cs = await s.page.evaluate(
+      () => window.__ga.filter((e) => e[1] === 'click_sponsorizzato').map((e) => e[2]));
+    r.ok(cs.length === 1 && /^lg-/.test(cs[0].organizer_id || '') && cs[0].posizione === 'scheda_evento',
+      cs.length
+        ? `click_sponsorizzato porta ${JSON.stringify(cs[0].organizer_id)} da ${JSON.stringify(cs[0].posizione)}`
+        : "click_sponsorizzato non e' arrivato: il clic sullo spazio venduto non si misura");
+    await s.ctx.close();
+  } else if (pagate.size) {
+    console.log('  nota ci sono schede a pagamento ma nessuna scheda evento le nomina ancora (l\'indice arriva al giro dopo)');
+  }
 
   // -- Ginetto: c'e', una volta sola, e nel posto giusto ----------------
   // Fino al 04/09/2026 questo blocco difendeva l'invito al canale WhatsApp.

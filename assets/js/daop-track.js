@@ -83,6 +83,33 @@
       var testo = n && (n.textContent || '').trim();
       if (testo) out.course_name = testo;
     }
+    /* Le schede di /luoghi.html. Stessi parametri dei corsi, e non una
+       dimensione nuova, perche' la domanda e' la stessa - "a quale realta'
+       va questo clic" - e le quattro dei corsi sono gia' registrate in GA4.
+       L'id non si stampa in un attributo: e' l'id della riga, che esiste gia'
+       (#lg-...), quindi 890 righe non pagano un byte in piu'. Le copie nel
+       riquadro Sponsorizzati hanno "-ev" in coda: si toglie, se no lo stesso
+       posto sarebbe due righe nei report. `posizione` dice da dove e' partito
+       il clic, ed e' la prova di quanto vale il riquadro a chi lo compra. */
+    var lg = !box && el.closest('.lg-row');
+    if (lg) {
+      var lid = (lg.id || '').replace(/-ev$/, '');
+      if (lid) out.organizer_id = lid;
+      var ln = lg.querySelector('.lg-nome');
+      var lt = ln && (ln.textContent || '').trim();
+      if (lt) out.organizer_name = lt;
+      out.posizione = lg.closest('.lg-vetrina') ? 'sponsorizzati' : 'elenco';
+    }
+    // La riga "Sponsorizzato" in coda a una scheda evento: il posto e' quello
+    // dell'ancora, cosi' il report lo mette sulla stessa riga delle aperture.
+    var sp = el.closest('.ev-spons');
+    if (sp) {
+      var sa = sp.querySelector('a[href*="#lg-"]');
+      var sid = sa && (sa.getAttribute('href') || '').split('#')[1];
+      if (sid) out.organizer_id = sid;
+      if (sa && sa.textContent) out.organizer_name = sa.textContent.trim();
+      out.posizione = 'scheda_evento';
+    }
     return out;
   }
 
@@ -173,7 +200,7 @@
     // L'id della scatola entra nella chiave perche' `apri_corso` non ha una
     // destinazione: senza, due corsi aperti in fila entro 800 ms sarebbero la
     // stessa chiave e il secondo si perderebbe.
-    var box = el && el.closest && el.closest('[data-org]');
+    var box = el && el.closest && (el.closest('[data-org]') || el.closest('.lg-row'));
     var chiave = nome + '|' + href + '|' + ((box && box.id) || '');
     var ora = Date.now();
     if (chiave === ultimo.chiave && ora - ultimo.quando < 800) return;
@@ -192,8 +219,25 @@
       var a = ev.target.closest && ev.target.closest('a[href]');
       if (a) {
         var href = a.getAttribute('href') || '';
+        // L'unico link INTERNO che si conta, e il perche' e' commerciale: e'
+        // uno spazio venduto, e a chi lo compra si deve poter dire quante
+        // volte e' stato toccato. Il page_view di /luoghi.html che segue non
+        // lo direbbe - non sa da quale riga di quale scheda si e' arrivati.
+        if (a.closest('.ev-spons')) { invia('click_sponsorizzato', href, a); return; }
         var nome = nome_evento(href);
         if (nome) invia(nome, href, a);
+        return;
+      }
+      /* L'APERTURA DI UNA SCHEDA LUOGO, il denominatore che mancava a
+         /luoghi.html: GA4 contava i clic DALLA scheda (mappe, telefono, sito)
+         ma non quante volte era stata aperta, quindi a un cliente si poteva
+         dire "47 hanno chiesto le indicazioni" e non su quante. Stessa regola
+         di apri_corso qui sotto: al momento del capture il <details> e' ancora
+         nello stato vecchio, quindi `open` falso vuol dire che si sta aprendo,
+         e richiudere non conta. */
+      var sum = ev.target.closest && ev.target.closest('.lg-row > summary');
+      if (sum) {
+        if (!sum.parentElement.open) invia('apri_luogo', '', sum.parentElement);
         return;
       }
       /* L'APERTURA DI UNA SCHEDA CORSO, che e' il denominatore di tutto il

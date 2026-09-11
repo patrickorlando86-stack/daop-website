@@ -470,6 +470,17 @@ jobs:
         if: always()
         run: python scripts/prova_logo_realta.py
 
+      - name: Uno spazio pagato si spegne alla sua scadenza
+        # Premium_al e' nata l'11/09/2026: prima nel foglio c'era solo
+        # Premium_dal e niente si spegneva da solo. La prova tiene ferme le
+        # regole che non si vedono: cella vuota = nessuna scadenza (la colonna
+        # nuova non spegne i clienti che c'erano), il giorno scritto e' ancora
+        # pagato, e una data illeggibile NON toglie dalla pagina chi ha pagato.
+        #
+        # Offline e in un secondo.
+        if: always()
+        run: python scripts/prova_premium_al.py
+
       - name: I testi dei corsi dicono solo quello che i dati sanno
         # Hero, description, paragrafo d'apertura e domande frequenti di
         # corsi.html e delle pagine realta' si scrivono dai corsi (11/09/2026).

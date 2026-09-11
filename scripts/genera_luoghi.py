@@ -159,6 +159,7 @@ COLONNE = {
     'lon': ('lng', 'lon', 'longitudine'),
     'premium': ('premium',),
     'premium_dal': ('premium_dal', 'premium dal'),
+    'premium_al': ('premium_al', 'premium al', 'premium fino al', 'scadenza premium'),
     'consigliato': ('consigliato daop', 'consigliato'),
     'evidenza': ('in evidenza', 'evidenza', 'vetrina'),
     'gratuito': ('gratuito', 'gratis'),
@@ -658,6 +659,50 @@ def _righe_grezze():
     return [], False
 
 
+def data_foglio(s):
+    """Una data scritta a mano nel foglio: 31/12/2026, 31-12-26, 31.12.2026 o
+    2026-12-31. None se vuota o se non si legge."""
+    s = (s or '').strip()
+    if not s:
+        return None
+    m = re.match(r'^(\d{4})-(\d{1,2})-(\d{1,2})', s)
+    if m:
+        a, mese, g = map(int, m.groups())
+    else:
+        m = re.match(r'^(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})$', s)
+        if not m:
+            return None
+        g, mese, a = map(int, m.groups())
+        if a < 100:
+            a += 2000
+    try:
+        return datetime.date(a, mese, g)
+    except ValueError:
+        return None
+
+
+def premium_attivo(cella_premium, cella_al, oggi):
+    """(attivo, scadenza, illeggibile) di una scheda a pagamento.
+
+    `Premium_al` e' nata l'11/09/2026 perche' prima NIENTE SI SPEGNEVA DA SOLO:
+    c'era solo `Premium_dal`, quindi uno spazio non piu' pagato restava
+    pubblicato - riquadro Sponsorizzati, `rel="sponsored"`, Place nei dati
+    strutturati - finche' qualcuno non se ne ricordava. Era un problema di cassa
+    (nessun innesco per il rinnovo) e di correttezza.
+
+    La scadenza vale TUTTO il giorno scritto: "al 31/12" vuol dire pagato anche
+    il 31. Cella vuota = nessuna scadenza, cioe' il comportamento di prima.
+    Una data che non si legge NON spegne la scheda: un refuso in una cella non
+    deve togliere dalla pagina un cliente che ha pagato. Lo si urla nel log."""
+    if not si(cella_premium):
+        return False, None, False
+    scadenza = data_foglio(cella_al)
+    illeggibile = bool((cella_al or '').strip()) and scadenza is None
+    if scadenza and scadenza < oggi:
+        return False, scadenza, False
+    return True, scadenza, illeggibile
+
+
 def leggi_catalogo():
     righe, fresco = _righe_grezze()
     fuori = []
@@ -673,7 +718,11 @@ def leggi_catalogo():
             continue
         primo, secondo = spacca_categoria(d['categoria'])
         slug_cat = G.slugify(primo) or 'altro'
-        premium = si(d['premium'])
+        premium, scadenza, illeggibile = premium_attivo(d['premium'], d['premium_al'],
+                                                        datetime.date.today())
+        if illeggibile:
+            print(f"[genera_luoghi] Premium_al illeggibile per {d['nome']} "
+                  f"('{d['premium_al']}'): resta premium finche' non si corregge")
         fuori.append({
             'nome': pulisci_nome(d['nome']),
             'comune': re.sub(r'\s+', ' ', d['comune'].strip()),
@@ -698,6 +747,8 @@ def leggi_catalogo():
             'foto_licenza': d['foto_licenza'],
             'eta_min': _eta(d['eta_min'], 0), 'eta_max': _eta(d['eta_max'], 99),
             'premium': premium, 'premium_dal': d['premium_dal'],
+            'premium_al': scadenza.isoformat() if scadenza else '',
+            'premium_scaduto': si(d['premium']) and not premium,
             'consigliato': si(d['consigliato']),
             # Il riquadro "Sponsorizzati" FA PARTE del premium (deciso
             # l'11/09/2026): chi paga ci entra da se', e la colonna "In
@@ -874,6 +925,7 @@ def unisci(catalogo, agenda):
             orari='', prezzo='', gratuito=False, sito='', tel='', email='',
             foto=[], foto_autore='', foto_licenza='',
             eta_min=0, eta_max=99, premium=False, premium_dal='',
+            premium_al='', premium_scaduto=False,
             consigliato=False, evidenza=False, codice='', fonte='agenda', _grezzo=None)
 
     elenco = [d for d in list(fuori.values()) + doppi_catalogo
@@ -2238,9 +2290,21 @@ def salva_indice_comuni(elenco):
     cui un comune nuovo compare una volta ogni tanto e' un prezzo giusto, e
     sbaglia dalla parte buona: un comune appena nato resta senza link per un
     giorno, invece di avere un link rotto subito."""
-    indice = {ancora_comune(prov, comune): {'comune': comune, 'prov': prov,
-                                            'n': len(righe)}
-              for (prov, comune), righe in _per_comune(elenco)}
+    indice = {}
+    for (prov, comune), righe in _per_comune(elenco):
+        voce = {'comune': comune, 'prov': prov, 'n': len(righe)}
+        # Chi paga, per la riga "Sponsorizzato" sulle schede evento dello
+        # stesso comune (link_sponsor() in genera_eventi.py). Stessa regola del
+        # riquadro in cima a questa pagina - premium e non "In evidenza = no" -
+        # e stessa base alfabetica, cosi' la rotazione giornaliera non dipende
+        # dall'ordine delle righe nel foglio.
+        sp = sorted((l for l in righe if l.get('premium') and l.get('evidenza')),
+                    key=lambda l: (G.slugify(l['nome']), l['slug']))
+        if sp:
+            voce['sponsor'] = [{'nome': l['nome'], 'ancora': l['slug'],
+                                'tipo': l.get('cat_sotto') or l.get('cat_nome') or ''}
+                               for l in sp]
+        indice[ancora_comune(prov, comune)] = voce
     with open(INDICE_COMUNI, "w", encoding="utf-8") as fh:
         json.dump(indice, fh, ensure_ascii=False, indent=1, sort_keys=True)
     print(f"[genera_luoghi] indice comuni: {len(indice)} comuni con almeno un luogo")
@@ -2325,6 +2389,17 @@ def main():
     if premium and not in_vetrina:
         print('[genera_luoghi] riquadro Sponsorizzati vuoto: tutte le schede a '
               'pagamento hanno "In evidenza = no" nel foglio')
+    # L'innesco del rinnovo: un mese prima lo si legge qui, il giorno dopo la
+    # scadenza la scheda e' gia' tornata una riga normale.
+    for l in elenco:
+        if l.get('premium_scaduto'):
+            print(f"[genera_luoghi] premium SCADUTO il {l['premium_al']}: {l['nome']} "
+                  f"({l['comune']}) torna una riga normale")
+        elif l.get('premium') and l.get('premium_al'):
+            giorni = (datetime.date.fromisoformat(l['premium_al']) - oggi).days
+            if giorni <= 30:
+                print(f"[genera_luoghi] premium in scadenza fra {giorni} giorni: "
+                      f"{l['nome']} ({l['comune']})")
     # Il proprio numero prima di scrivere: la riga delle quattro porte lo
     # rilegge, e le altre pagine lo vedranno alla loro run — cioe' domani. E' lo
     # stesso ritardo di un giro di data/luoghi-comuni.json, e va bene per la
