@@ -380,7 +380,7 @@
   "ora": "19:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 200,
+  "riga": 199,
   "slug": "aggiungi-un-posto-a-tavola-aica-associazione-impre-barge",
   "updated": "2026-09-11"
  },
@@ -549,7 +549,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 208,
+  "riga": 207,
   "slug": "alba-in-bici",
   "updated": "2026-09-11"
  },
@@ -632,7 +632,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 209,
+  "riga": 208,
   "slug": "all-ombra-di-un-racconto-ludofavole-d-autunno-mondovi",
   "updated": "2026-09-11"
  },
@@ -1958,7 +1958,7 @@
   "ora": "14:00",
   "prezzo": "20 euro (gioco + merenda, caparra 10 euro)",
   "prov": "CN",
-  "riga": 216,
+  "riga": 215,
   "slug": "caccia-al-tesoro-alle-meschie-vale-explorer-pradeboni",
   "updated": "2026-09-11"
  },
@@ -2014,7 +2014,7 @@
   "ora": "18:00",
   "prezzo": "5 euro (camminata + pasta e dolce, su prenotazione)",
   "prov": "CN",
-  "riga": 195,
+  "riga": 194,
   "slug": "camminata-per-tutti-pro-loco-santa-lucia-di-fossan-fossano",
   "updated": "2026-09-11"
  },
@@ -2154,7 +2154,7 @@
   "ora": "10:00",
   "prezzo": "8 euro (iscrizione + pranzo); 10 euro se iscrizione il giorno dell'evento",
   "prov": "CN",
-  "riga": 183,
+  "riga": 182,
   "slug": "carrun-per-la-scuola",
   "updated": "2026-09-11"
  },
@@ -3855,6 +3855,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 182,
+  "ritirata": "2026-09-11",
   "slug": "escape-room-at-the-museum-mudi-alba",
   "updated": "2026-09-11"
  },
@@ -3881,7 +3882,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 186,
+  "riga": 185,
   "slug": "escape-room-at-the-museum-museo-diocesano-alba",
   "updated": "2026-09-11"
  },
@@ -7274,7 +7275,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 217,
+  "riga": 216,
   "slug": "ghita-festa-dei-giochi-in-strada-farigliano",
   "updated": "2026-09-11"
  },
@@ -7523,7 +7524,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 197,
+  "riga": 196,
   "slug": "giochiamo-con-la-scienza-i-semi-viaggiatori-mondovi",
   "updated": "2026-09-11"
  },
@@ -7551,7 +7552,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 198,
+  "riga": 197,
   "slug": "giochiamo-con-la-scienza-lago-o-isola-mondovi",
   "updated": "2026-09-11"
  },
@@ -8196,7 +8197,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 196,
+  "riga": 195,
   "slug": "il-gioco-e-una-cosa-seria-edizione-madonna-bruna-a-borgo-san-dalmazzo",
   "updated": "2026-09-11"
  },
@@ -8307,7 +8308,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 211,
+  "riga": 210,
   "slug": "il-principe-tessitore-e-altre-storie-principesche-mondovi",
   "updated": "2026-09-11"
  },
@@ -8419,7 +8420,7 @@
   "ora": "10:00-12:30 e 16:00-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 218,
+  "riga": 217,
   "slug": "inaugurazione-sede-kids-us-alba-kids-us-alba",
   "updated": "2026-09-11"
  },
@@ -9083,7 +9084,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 207,
+  "riga": 206,
   "slug": "laboratorio-bimbi-dedicato-alla-zucca-piozzo",
   "updated": "2026-09-11"
  },
@@ -9166,7 +9167,7 @@
   "ora": "16:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 185,
+  "riga": 184,
   "slug": "laboratorio-creativo-con-alice-piaggio-mondovi",
   "updated": "2026-09-11"
  },
@@ -9362,7 +9363,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 206,
+  "riga": 205,
   "slug": "laboratorio-di-lettura-ad-alta-voce-abitare-la-nat-piasco",
   "updated": "2026-09-11"
  },
@@ -9920,7 +9921,7 @@
   "ora": "14:00",
   "prezzo": "8 euro (gadget + ristoro finale inclusi)",
   "prov": "CN",
-  "riga": 215,
+  "riga": 214,
   "slug": "memorial-sportivo-aldo-galfre-pro-loco-roccavione",
   "updated": "2026-09-11"
  },
@@ -10168,7 +10169,7 @@
   "ora": "10:00",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 213,
+  "riga": 212,
   "slug": "mot-kids-maira-occitan-trail-kids-marmora",
   "updated": "2026-09-11"
  },
@@ -11918,7 +11919,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 210,
+  "riga": 209,
   "slug": "qui-casca-l-asino-ludofavole-d-autunno-mondovi",
   "updated": "2026-09-11"
  },
@@ -14276,7 +14277,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 184,
+  "riga": 183,
   "slug": "sport-shop-moretta",
   "updated": "2026-09-11"
  },
@@ -15084,7 +15085,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 214,
+  "riga": 213,
   "slug": "una-storia-in-scatola-per-ascoltare-insieme-e-gioc-verzuolo",
   "updated": "2026-09-11"
  },

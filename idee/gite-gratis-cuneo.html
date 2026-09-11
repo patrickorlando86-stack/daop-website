@@ -121,7 +121,13 @@
   .ev-toolbar{position:sticky;top:68px;z-index:40;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 0 11px;border-bottom:1px solid rgba(45,74,92,0.10)}
   .ev-search{position:relative;flex:1 1 230px;min-width:0;display:flex;align-items:center}
   .ev-search svg{position:absolute;left:15px;color:var(--text-light);pointer-events:none}
-  .ev-search input{width:100%;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:11px 16px 11px 42px;min-height:44px}
+  /* text-overflow:ellipsis: il segnaposto di un input si taglia a META' PAROLA,
+     e la larghezza di questo campo non la decide il CSS - la decide il DATO,
+     perche' Chrome dimensiona ogni <select> accanto sull'opzione piu' lunga
+     (su corsi.html "Borgo San Dalmazzo" prende 179px e alla ricerca ne
+     restano 182). Un comune piu' lungo domani stringe ancora il campo: la
+     rete va messa qui, non accorciando una frase per volta. */
+  .ev-search input{width:100%;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:11px 16px 11px 42px;min-height:44px;text-overflow:ellipsis}
   .ev-search input::placeholder{color:var(--text-light)}
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
@@ -1055,6 +1061,32 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-vetrina > p span{font-weight:600;text-transform:none;letter-spacing:0;color:var(--text-light)}
 .lg-vetrina .lg-row{background:transparent}
 
+/* ── Le ancore di una pagina da 90.000px ───────────────────────────────────
+   Due difetti misurati l'11/09/2026 a 412 e 1280px, ed erano lo stesso
+   difetto visto da due parti: un'ancora, qui, non arriva dove dice.
+
+   1. `html{scroll-behavior:smooth}` arriva dal <style> di eventi.html che
+      _guscio() copia dappertutto, e su una pagina alta 90.000px non funziona:
+      l'animazione parte, le righe che attraversa si disegnano (hanno
+      content-visibility:auto, quindi fino a quel momento erano stimate) e il
+      bersaglio si sposta sotto i piedi dell'animazione. Misurato sul link
+      "come funziona" del riquadro Sponsorizzati: si atterra 217-685px OLTRE
+      la sezione, cioe' sulla striscia di Ginetto, e di quello che spiega
+      perche' quella riga sta li' non si vede niente. Senza smooth arriva a
+      zero, esatto, tutte e due le larghezze. Non e' un capriccio di Chrome:
+      sono le due funzioni che si contraddicono, e qui l'animazione vale meno
+      dell'arrivare. Vale anche per piscine.html, che ha lo stesso guscio.
+   2. Sopra c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la barra
+      dei filtri (156px sul telefono, 68px da 900px in su) - e un'ancora senza
+      scroll-margin ci finisce sotto. Non riguarda solo il link della vetrina:
+      le ~450 schede evento mandano a /luoghi.html#c-<prov>-<comune>, e
+      l'intestazione del comune arrivava a 14px dal bordo (a 1280px addirittura
+      a -31px), cioe' coperta. I due numeri sono i tetti misurati piu' un dito
+      d'aria, non stime. */
+html{scroll-behavior:auto}
+.lg-ordine,.lg-grp-h h2{scroll-margin-top:236px}
+@media(min-width:900px){.lg-ordine,.lg-grp-h h2{scroll-margin-top:148px}}
+
 .lg-ordine{margin:30px 0 0;padding:16px 18px;background:var(--cream);border-radius:14px;
   font-size:0.85rem;line-height:1.65;color:var(--text-mid)}
 .lg-ordine h2{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;
@@ -1140,7 +1172,7 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 <div class="id-voce"><p class="id-perche"><span class="id-num">4</span><span>Tre diorami raccontano montagna, collina e pianura del Po. Visite in piccoli gruppi e aperto tutto l&#x27;anno: la carta da giocare quando piove.</span></p><details class="lg-row cat-cultura-istruzione" id="lg-museo-naturalistico-del-fiume-po-revello" data-cat="cultura-istruzione" data-prov="cn" data-comune="revello" data-etamin="3" data-etamax="99"><summary><span class="lg-ico" aria-hidden="true">🏞️</span><span class="lg-txt"><span class="lg-nome">Museo Naturalistico del Fiume Po</span><span class="lg-meta"><span class="lg-cat">Musei &amp; Luoghi di Interesse</span> · Revello (CN)</span></span><span class="lg-pills"><span class="lg-tag is-free">€<i> Gratis</i></span></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/5002.jpg" alt="Museo Naturalistico del Fiume Po, Revello" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/106963492086549080982" target="_blank" rel="noopener nofollow">Mario “Mario Dc” DeCasa</a> · Google Maps</p><p>Centro visita del Parco del Monviso aperto tutto l&#x27;anno: tre grandi diorami raccontano la montagna, la collina e la pianura attraversate dal Po. Le visite si fanno in piccoli gruppi ed è il modo più semplice per far vedere ai bambini gli ambienti del fiume.</p><ul class="lg-serv"><li class="is-pratico">Su prenotazione</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Diorami, Visite guidate, Laboratori per bambini, Prenotazione consigliata</span></li><li><b>Dove:</b> <span>Piazza Denina 5</span></li><li><b>Se piove:</b> <span>Al chiuso</span></li><li><b>Orari:</b> <span>Aperto tutto l&#x27;anno; domenica 14:30-18:30, altri giorni su prenotazione</span></li><li><b>Ingresso:</b> <span>Gratuito</span></li><li><b>Età:</b> <span>da 3 anni</span></li><li><b>Telefono:</b> <a href="tel:0114321008">011 4321008</a></li></ul><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.6546771,7.3885306" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://www.parcomonviso.eu/visite/i-centri-visita/il-museo-naturalistico-del-fiume-po" target="_blank" rel="noopener nofollow">Sito del luogo</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details></div>
 <div class="id-voce"><p class="id-perche"><span class="id-num">5</span><span>Il Po comincia qui, ai piedi del Monviso, e la sorgente è a pochi passi dal parcheggio: ci arrivano anche i più piccoli. Si sale solo quando la strada di stagione è aperta.</span></p><details class="lg-row cat-natura-parchi" id="lg-pian-del-re-sorgenti-del-po-crissolo" data-cat="natura-parchi" data-prov="cn" data-comune="crissolo" data-etamin="3" data-etamax="99"><summary><span class="lg-ico" aria-hidden="true">💧</span><span class="lg-txt"><span class="lg-nome">Pian del Re - Sorgenti del Po</span><span class="lg-meta"><span class="lg-cat">Geoparchi</span> · Crissolo (CN)</span></span><span class="lg-pills"><span class="lg-tag is-free">€<i> Gratis</i></span></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/5003.jpg" alt="Pian del Re - Sorgenti del Po, Crissolo" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/117718120725119851000" target="_blank" rel="noopener nofollow">Massimliano Bivona</a> · Google Maps</p><p>Il pianoro ai piedi del Monviso dove nasce il Po: la sorgente è a pochi passi dal parcheggio, quindi anche i più piccoli ci arrivano. Intorno prati, ruscelli e sentieri facili dentro il Parco del Monviso; d&#x27;estate c&#x27;è il punto informativo del parco. Si raggiunge solo con la strada aperta in stagione.</p><ul class="lg-serv"><li class="is-pratico">Parcheggio</li><li class="is-pratico">Picnic</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Sorgente del Po, Sentieri, Punto informativo estivo</span></li><li><b>Dove:</b> <span>Pian del Re</span></li><li><b>Se piove:</b> <span>All'aperto</span></li><li><b>Orari:</b> <span>Sempre accessibile quando la strada per Pian del Re è aperta (indicativamente da giugno a ottobre); centro visita dal primo sabato di luglio alla prima domenica di settembre</span></li><li><b>Ingresso:</b> <span>Gratuito</span></li><li><b>Età:</b> <span>da 3 anni</span></li><li><b>Telefono:</b> <a href="tel:0114321008">011 4321008</a></li></ul><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.7002947,7.0924691" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://www.parcomonviso.eu" target="_blank" rel="noopener nofollow">Sito del luogo</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details></div>
     <section class="id-chiusa"><p><b>Perche' questi cinque.</b> Perché gratis non voglia dire poco, ognuno di questi ha una cosa da fare e non solo da guardare: un sentiero da percorrere, un paese da attraversare cercando i murales, un diorama in cui entrare. E perché stanno in valli diverse: se una domenica ha il tempo storto, ce n&#x27;è sempre uno dall&#x27;altra parte che tiene.</p><p class="id-quando">Questa selezione e' del 30 agosto 2026.</p><p>Questa e' una scelta, non tutto quello che abbiamo: <a href="/luoghi.html">l'elenco completo dei luoghi</a> si filtra per provincia, categoria e distanza. Come li verifichiamo sta in <a href="/metodo.html">metodo</a>.</p></section>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">217 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">55 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">216 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">55 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
     <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 11 settembre 2026.</p>
   </div>
 <section class="bg-cream ev-ginetto">
