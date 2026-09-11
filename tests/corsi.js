@@ -615,6 +615,82 @@ module.exports = async function corsi(browser) {
     ? `numeri non cliccabili nei Contatti: ${telSpenti.join(' | ')}`
     : 'i numeri nei Contatti sono link tel:, quindi si chiamano e si contano');
 
+  // ── i testi scritti dai dati (11/09/2026) ────────────────────────────
+  // Hero, description, paragrafo coi numeri e domande frequenti li scrive
+  // genera_corsi.py dai corsi (testo_hero, faq_corsi...). La prima stesura,
+  // quella scritta a mano, nominava sette comuni di cui quattro senza corsi e
+  // prometteva giorni e costi: e' la forma di difetto che non rompe niente di
+  // visibile, quindi la guardia sta qui. Le regole di dettaglio le difende
+  // scripts/prova_testi_corsi.py sui corsi finti; qui si guarda la pagina vera.
+  //
+  // NESSUN CONTEGGIO FISSO: si confrontano i numeri scritti con quelli in
+  // pagina, che e' un rapporto e regge qualunque foglio.
+  r.titolo('corsi.html — i testi scritti dai dati');
+  const testiDati = await page.evaluate(() => {
+    const t = (s) => [...document.querySelectorAll(s)].map((n) => n.textContent).join(' ');
+    return {
+      tutti: [t('.page-hero p'), t('.co-numeri'), t('.co-faq'),
+        (document.querySelector('meta[name="description"]') || {}).content || ''].join(' '),
+      promesse: [t('.page-hero p'), t('.co-numeri'),
+        (document.querySelector('meta[name="description"]') || {}).content || ''].join(' '),
+      numeri: t('.co-numeri'),
+      faq: [...document.querySelectorAll('.co-faq-q')].map((q) => ({
+        q: q.textContent.trim(),
+        a: q.nextElementSibling && q.nextElementSibling.matches('.co-faq-a')
+          ? q.nextElementSibling.textContent.trim() : '',
+      })),
+      citta: [...new Set([...document.querySelectorAll('.event-card[data-city]')]
+        .map((c) => c.dataset.city))],
+      od: document.querySelectorAll('.event-card[data-openday="1"]').length,
+      carte: document.querySelectorAll('.event-card').length,
+    };
+  });
+  // Un comune si nomina solo se ha corsi. L'elenco dei nomi da cercare e' quello
+  // dei comuni del catalogo luoghi (ci sono Bra, Fossano, Saluzzo...): i nomi
+  // lunghi si tolgono prima, se no "Alba" si troverebbe dentro "Vezza d'Alba".
+  const slug = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const fileLc = path.join(RADICE, 'data', 'luoghi-comuni.json');
+  const noti = fs.existsSync(fileLc)
+    ? [...new Set(Object.values(JSON.parse(fs.readFileSync(fileLc, 'utf8')))
+      .map((v) => v.comune).filter(Boolean))].sort((a, b) => b.length - a.length)
+    : [];
+  let resto = testiDati.tutti.replace(/provincia di [\p{Lu}][\p{L}' ]+?(?=[,.:;)]|\s(?:e|a|ad|in|per)\s|$)/gu, ' ');
+  const nominati = [];
+  for (const nome of noti) {
+    const esc = nome.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`(?<![\\p{L}])${esc}(?![\\p{L}])`, 'gu');
+    if (re.test(resto)) {
+      nominati.push(nome);
+      resto = resto.replace(re, ' ');
+    }
+  }
+  const senzaCorsi = nominati.filter((n) => !testiDati.citta.includes(slug(n)));
+  r.ok(noti.length > 0 && senzaCorsi.length === 0, !noti.length
+    ? 'data/luoghi-comuni.json manca: non so quali nomi di comune cercare'
+    : senzaCorsi.length
+      ? `comuni nominati nei testi senza nessun corso: ${senzaCorsi.join(', ')}`
+      : `${nominati.length} comuni nominati nei testi, tutti con almeno un corso`);
+  const promesseTesti = testiDati.promesse.match(/\b(giorni|orari|costi|prezzi)\b/gi);
+  r.ok(!promesseTesti, promesseTesti
+    ? `hero/description promettono ${[...new Set(promesseTesti)].join(', ')}: sono colonne facoltative`
+    : 'hero e description non promettono giorni, orari o costi');
+  const nNum = (testiDati.numeri.match(/ne trovi (\d+|uno)\b/) || [])[1];
+  r.ok(nNum && (nNum === 'uno' ? 1 : Number(nNum)) === testiDati.carte,
+    `il paragrafo dice ${nNum} corsi, in pagina ce ne sono ${testiDati.carte}`);
+  r.ok(testiDati.faq.length > 0 && testiDati.faq.every((x) => x.a),
+    `${testiDati.faq.length} domande frequenti, ognuna con la sua risposta`);
+  const dicoNo = testiDati.faq.filter((x) => /^no\b/i.test(x.a));
+  r.ok(dicoNo.length === 0, dicoNo.length
+    ? `risposte che dicono no (un dato che manca non e' un no): ${dicoNo.map((x) => x.q).join(' | ')}`
+    : 'nessuna risposta dice "no"');
+  const odFaq = testiDati.faq.map((x) => x.a).join(' ')
+    .match(/(\d+) cors[oi] (?:ha|hanno) un open day/);
+  r.ok(odFaq ? Number(odFaq[1]) === testiDati.od : testiDati.od === 0,
+    `le domande dicono ${odFaq ? odFaq[1] : 0} corsi con open day, in pagina ${testiDati.od}`);
+  r.ok(!fs.readFileSync(file, 'utf8').includes('FAQPage'),
+    'nessun FAQPage in JSON-LD: Google ha spento quei risultati il 07/05/2026');
+
   await ctx.close();
 
   // ── 9. le pagine dedicate delle realta' ──────────────────────────────
@@ -724,6 +800,22 @@ module.exports = async function corsi(browser) {
     const can = await q.page.locator('link[rel="canonical"]')
       .getAttribute('href').catch(() => '');
     r.ok(can.endsWith(`/corsi/${f}`), `${f}: canonical su se stessa (${can})`);
+
+    // Il title porta "ad" davanti a vocale: era "corsi per bambini a Alba".
+    const tit = await q.page.title();
+    r.ok(!/\sa [AEIOUÀÈÉÌÒÙ]/.test(tit), `${f}: title "${tit}"`);
+    // Il paragrafo scritto dai dati c'e', e non promette giorni, orari o costi.
+    const introR = await q.page.$eval('.cr-intro', (p) => p.textContent.trim())
+      .catch(() => '');
+    const promR = introR.match(/\b(giorni|orari|costi|prezzi)\b/i);
+    r.ok(introR.length > 0 && !promR, !introR
+      ? `${f}: manca il paragrafo d'apertura scritto dai dati`
+      : promR ? `${f}: il paragrafo promette "${promR[1]}"` : `${f}: ${introR}`);
+    const faqR = await q.page.$$eval('.co-faq-q', (qs) => qs.map((x) => ({
+      q: x.textContent.trim(),
+      a: x.nextElementSibling ? x.nextElementSibling.textContent.trim() : '' })));
+    r.ok(faqR.every((x) => x.a && !/^no\b/i.test(x.a)),
+      `${f}: ${faqR.length} domande, tutte con una risposta che non dice "no"`);
 
     // Le locandine degli eventi: se ce ne sono, i link devono esistere.
     const ev = await q.page.$$eval('.cr-ev', (as) => as.map((a) => a.getAttribute('href')));

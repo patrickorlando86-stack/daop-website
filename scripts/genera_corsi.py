@@ -274,7 +274,13 @@ def _eta_numeri(t):
     d'eta' non e' un compleanno, e un corso per lattanti sta nell'anno zero.
     """
     import re as _re
-    pezzi = list(_re.finditer(r'\d{1,2}', t))
+    # UN NUMERO A QUATTRO CIFRE NON E' UN'ETA' (11/09/2026). Con `\d{1,2}` la
+    # cella "Anno di nascita 2024" - come la scrive una scuola di lingue, e come
+    # e' arrivata dai corsi di Kids&Us Alba - si leggeva 20 e 24, cioe' un corso
+    # per bimbi di due anni finiva nel filtro dei VENTENNI. Si prendono i numeri
+    # interi e si tengono solo quelli corti; le annate le raccoglie
+    # _annate_nella_cella_eta(), che e' il posto giusto per loro.
+    pezzi = [m for m in _re.finditer(r'\d+', t) if len(m.group()) <= 2]
     unita = []
     for i, m in enumerate(pezzi):
         coda = t[m.end():pezzi[i + 1].start() if i + 1 < len(pezzi) else len(t)]
@@ -406,6 +412,21 @@ def eta_da_testo(testo):
     return (lo, hi) if 0 <= lo <= hi <= 25 else None
 
 
+def _annate_nella_cella_eta(c):
+    """La riga da dare a eta_range() quando le ANNATE sono finite nella cella
+    "Eta". None se li' dentro di anni a quattro cifre non ce n'e'.
+
+    Serve perche' quella colonna la scrivono anche le PERSONE - dal foglio, e dal
+    modulo con cui il partner corregge un corso - e una scuola che ragiona per
+    leve scrive "Anni di nascita 2021-2022" dove le viene comodo. La fonte
+    (annate_dall_eta nel downloader) raddrizza quello che passa di la'; questo
+    tiene su il resto.
+    """
+    if str(c.get('annate') or '').strip() or not _numeri4(c.get('eta')):
+        return None
+    return {'annate': c.get('eta'), 'stagione': c.get('stagione')}
+
+
 def eta_min_max(c):
     """La fascia da usare PER FILTRARE: prima le annate, poi l'eta' scritta.
 
@@ -424,7 +445,9 @@ def eta_min_max(c):
     Se nasce una forma nuova (una classe, un "a partire da"), si tocca su tutte e
     due le sponde: guardia di qua tests/corsi.js, di la' _test-attivita.mjs.
     """
-    return eta_range(c) or eta_da_testo(c.get('eta'))
+    finta = _annate_nella_cella_eta(c)
+    return (eta_range(c) or (eta_range(finta) if finta else None)
+            or eta_da_testo(c.get('eta')))
 
 
 def eta_testo(c):
@@ -456,9 +479,11 @@ def eta_testo(c):
     Se la cella dice GIA' gli anni ("dai 4 anni", "3-5 anni") non si aggiunge
     niente: la si stampa com'e', come e' sempre stato.
     """
-    r = eta_range(c)
+    finta = _annate_nella_cella_eta(c)
+    r = eta_range(c) or (eta_range(finta) if finta else None)
     if r:
-        return f"{r[0]} anni" if r[0] == r[1] else f"{r[0]}-{r[1]} anni"
+        return (f"{r[0]} {'anno' if r[0] == 1 else 'anni'}" if r[0] == r[1]
+                else f"{r[0]}-{r[1]} anni")
     t = (c.get('eta') or '').strip()
     if not t or re.search(r'ann', t.lower()):
         return t
@@ -1637,6 +1662,8 @@ CSS_REALTA = """
   box-shadow:0 6px 18px rgba(0,0,0,.22)}
 @media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
+/* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
+.cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
@@ -1666,6 +1693,398 @@ CSS_REALTA = """
 .cr-chi>summary:hover{text-decoration:underline}
 .cr-chi .cr-descr:first-of-type{margin-top:4px}
 """
+
+
+# ── I TESTI CHE SI SCRIVONO DAI DATI (11/09/2026) ─────────────────────────
+#
+# Dall'analisi SEO di Giovanni sulla sezione corsi: "l'idea non e' scrivere piu'
+# contenuti a mano, ma fare in modo che attivita' + eta' + comune + sede +
+# organizzatore, che gia' raccogliamo, vengano usati anche nei testi".
+#
+# TRE REGOLE, e sono quelle che hanno cambiato la proposta di partenza:
+#   - UN POSTO SI NOMINA SOLO SE CI SONO CORSI. La prima stesura elencava
+#     "Cuneo, Alba, Bra, Mondovi', Fossano, Saluzzo, Savigliano": all'11/09
+#     quattro su sette non avevano nessun corso. Un elenco scritto a mano coi
+#     comuni che la gente cerca e' la pagina che promette quello che la riga
+#     sotto non ha, e dei nomi di citta' messi li' senza niente dietro sono
+#     riempitivo.
+#   - NIENTE GIORNI, ORARI O COSTI PROMESSI: sono colonne facoltative per
+#     decisione del 21/08 (all'11/09 i giorni ci sono su 41 corsi di 53, la
+#     quota su 2). Era gia' scritto per l'hero, e la meta description se n'era
+#     dimenticata: diceva "con eta', giorni, costi".
+#   - UNA DOMANDA SENZA DATI NON SI STAMPA, e nessuna risposta dice "no". Una
+#     prova che non c'e' nel foglio non vuol dire che non si possa provare:
+#     vuol dire che la locandina non lo scriveva.
+#
+# LE FAQ SONO TESTO IN PAGINA, NIENTE FAQPage IN JSON-LD. Google ha spento i
+# risultati FAQ il 7 maggio 2026 (dal 2023 li mostrava solo ai siti governativi
+# e sanitari) e per le AI Overviews scrive che non serve nessuno schema: sarebbe
+# una seconda copia dello stesso testo da tenere allineata, per niente.
+
+# Le famiglie come si scrivono in una frase. "Movimento" e' la voce della
+# tendina, ma chi cerca scrive "sport".
+MACRO_PROSA = {'movimento': 'sport e movimento', 'sport': 'sport'}
+# Quando la famiglia sta in coppia con un'altra: "musica e sport e movimento"
+# sono due "e" di fila.
+MACRO_BREVE = {'movimento': 'movimento', 'sport': 'sport'}
+MAX_COMUNI_TESTO = 6
+_LINGUE_ALTRE = re.compile(r'frances|tedesc|spagnol|cines|russo|arabo|giappones')
+_SEDE_VIA = re.compile(r'(via|viale|v\.le|corso|c\.so|piazza|p\.za|piazzale|strada|'
+                       r'str\.|vicolo|largo|localit|loc\.|frazione|fraz\.)\b', re.I)
+
+
+def _n(n, uno, tanti):
+    return f"{n} {uno if n == 1 else tanti}"
+
+
+def _cap(s):
+    return s[:1].upper() + s[1:]
+
+
+def _e(voci):
+    """['a', 'b', 'c'] -> 'a, b e c'."""
+    voci = [v for v in voci if v]
+    if len(voci) < 2:
+        return ''.join(voci)
+    return ', '.join(voci[:-1]) + ' e ' + voci[-1]
+
+
+def _e_max(voci, massimo, coda):
+    """Come _e(), ma oltre `massimo` voci chiude con la coda ("altri {n} comuni").
+    Una voce sola in piu' si scrive: "e altri 1 comuni" occupa il suo posto."""
+    voci = [v for v in voci if v]
+    if len(voci) <= massimo + 1:
+        return _e(voci)
+    return ', '.join(voci[:massimo]) + ' e ' + coda.format(n=len(voci) - massimo)
+
+
+def _contati(valori):
+    """I valori col loro conteggio, dal piu' frequente; a parita', alfabetico.
+    Il confronto e' sullo slug, come fanno la tendina e il filtro."""
+    cont, nomi = {}, {}
+    for v in valori:
+        v = (v or '').strip()
+        if not v:
+            continue
+        k = G.slugify(v)
+        cont[k] = cont.get(k, 0) + 1
+        nomi.setdefault(k, v)
+    return [(nomi[k], q) for k, q in
+            sorted(cont.items(), key=lambda kv: (-kv[1], nomi[kv[0]].lower()))]
+
+
+def _parola_macro(macro, corsi, breve=False):
+    """La famiglia in prosa. "Lingue" diventa "inglese" quando i corsi di lingue
+    parlano solo di inglese: e' la parola che un genitore scrive, e dirla vale
+    solo se e' vera per tutti. Se compare un'altra lingua resta "lingue"."""
+    k = G.slugify(macro)
+    if k == 'lingue':
+        testo = ' '.join(f"{c.get('nome', '')} {c.get('cat', '')} {c.get('descr', '')}"
+                         for c in corsi if G.slugify(_cat_macro(c)) == 'lingue').lower()
+        if 'inglese' in testo and not _LINGUE_ALTRE.search(testo):
+            return 'inglese'
+    return (MACRO_BREVE if breve else MACRO_PROSA).get(k, macro.lower())
+
+
+def _attivita(corsi):
+    """Cosa fanno questi corsi in due-tre parole: "inglese", "atletica
+    leggera", "musica e teatro". Vuoto con piu' di due famiglie: "corsi di
+    benessere, movimento e musica" in un title e' un elenco, e CaRezza si
+    presenta meglio col suo occhiello (vedi pagina_realta)."""
+    macro = _uniche(_cat_macro(c) for c in corsi)
+    if len(macro) == 1:
+        foglie = _uniche(_cat_foglia(c) for c in corsi)
+        if (len(foglie) == 1 and G.slugify(foglie[0]) != G.slugify(macro[0])
+                and G.slugify(macro[0]) != 'lingue'):
+            return foglie[0].lower()
+        return _parola_macro(macro[0], corsi)
+    if len(macro) == 2:
+        return _e(_uniche(_parola_macro(m, corsi, breve=True) for m in macro))
+    return ''
+
+
+def _fascia(corsi):
+    """(minimo, massimo) sugli anni che il FILTRO legge, o None."""
+    rr = [r for r in (eta_min_max(c) for c in corsi) if r]
+    if not rr:
+        return None
+    return min(r[0] for r in rr), max(r[1] for r in rr)
+
+
+def _fascia_testo(lo, hi):
+    anni = lambda x: 'anno' if x == 1 else 'anni'  # noqa: E731
+    if lo == hi:
+        return f"di {lo} {anni(lo)}"
+    if lo == 0:
+        # Zero e' un corso per lattanti (i mesi si troncano all'anno, vedi
+        # _eta_numeri): "da 0 anni" non lo direbbe nessuno.
+        return f"dai primi mesi fino a {hi} {anni(hi)}"
+    return f"da {lo} a {hi} anni"
+
+
+def _chi(hi):
+    return 'bambini e ragazzi' if hi is None or hi >= 11 else 'bambini'
+
+
+def _comuni_testo(corsi):
+    """ "a Moretta, Borgo San Dalmazzo e in altri 8 comuni": solo comuni che
+    hanno corsi, dal piu' fornito. La preposizione la mette a_citta()."""
+    nomi = [n for n, _ in _contati(c.get('citta') for c in corsi)]
+    if not nomi:
+        return ''
+    return G.a_citta(_e_max(nomi, MAX_COMUNI_TESTO, 'in altri {n} comuni')).strip()
+
+
+def _prove_openday(corsi):
+    """Quanti corsi hanno una riga Prova e quanti un open day ancora da fare.
+    Sono due dati diversi e restano due numeri: la prova e' un attributo del
+    corso, l'open day un evento con una data (vedi card)."""
+    return (sum(1 for c in corsi if (c.get('prova') or '').strip()),
+            sum(1 for c in corsi if openday(c)))
+
+
+def testo_hero(corsi, dove):
+    """La riga sotto l'H1 di corsi.html."""
+    fonte = "Informazioni raccolte dalle locandine delle realtà, una società alla volta."
+    if not corsi:
+        return ("Le attività a cui un bambino si iscrive, con l'età che prendono "
+                "e dove sono. " + fonte)
+    cats = _e(_uniche(_parola_macro(m, corsi)
+                      for m, _ in _contati(_cat_macro(c) for c in corsi)))
+    comuni = _comuni_testo(corsi)
+    return (f"Trova corsi e attività per bambini e ragazzi{f' {dove}' if dove else ''}"
+            f"{': ' + cats if cats else ''}{', ' + comuni if comuni else ''}. " + fonte)
+
+
+def testo_numeri(corsi):
+    """Il paragrafo coi numeri, sopra quello che spiega cos'e' un corso."""
+    n = len(corsi)
+    realta = len(_uniche(c.get('org') for c in corsi))
+    comuni = len(_contati(c.get('citta') for c in corsi))
+    k, m = _prove_openday(corsi)
+    s = (f"Cerchi un corso per tuo figlio? Al momento qui ne trovi "
+         f"{'uno' if n == 1 else n}, di {_n(realta, 'realtà', 'realtà')}"
+         f"{' in ' + _n(comuni, 'comune', 'comuni') if comuni else ''}")
+    extra = []
+    if k:
+        extra.append(f"per {k} è prevista una lezione di prova")
+    if m:
+        extra.append(f"{m} {'ha' if m == 1 else 'hanno'} un open day in calendario")
+    return s + (': ' + _e(extra) if extra else '') + '.'
+
+
+def descr_corsi(corsi, dove):
+    """La meta description di corsi.html: numeri, famiglie, comuni veri."""
+    dove_sp = f' {dove}' if dove else ''
+    if not corsi:
+        return (f"Corsi per bambini e ragazzi{dove_sp}: le attività a cui un bambino "
+                "si iscrive, raccolte dalle locandine delle realtà.")
+    cats = _e(_uniche(_parola_macro(m, corsi)
+                      for m, _ in _contati(_cat_macro(c) for c in corsi)))
+    nomi = [x for x, _ in _contati(c.get('citta') for c in corsi)]
+    dove_c = G.a_citta(_e_max(nomi, 3, 'altri {n} comuni')).strip()
+    return (f"{_n(len(corsi), 'corso', 'corsi')} per bambini e ragazzi{dove_sp}"
+            f"{': ' + cats if cats else ''}. {_cap(dove_c)}, con l'età e, dove "
+            "ci sono, la lezione di prova e l'open day.")
+
+
+def faq_corsi(corsi, dove):
+    """Le domande in fondo a corsi.html, ognuna solo se i dati le rispondono."""
+    if not corsi:
+        return []
+    voci = []
+    dove_sp = f' {dove}' if dove else ''
+    n = len(corsi)
+    realta = len(_uniche(c.get('org') for c in corsi))
+
+    macro = _contati(_cat_macro(c) for c in corsi)
+    if macro:
+        parti = [f"{q} di {_parola_macro(m, corsi)}" for m, q in macro]
+        voci.append((f"Quali corsi per bambini ci sono{dove_sp}?",
+                     f"Al momento {_n(n, 'corso', 'corsi')} di "
+                     f"{_n(realta, 'realtà', 'realtà')}: {_e(parti)}. Nell'elenco "
+                     "si scelgono per attività, età del bambino e comune."))
+
+    comuni = _contati(c.get('citta') for c in corsi)
+    if comuni:
+        elenco = [f"{nome} ({_n(q, 'corso', 'corsi') if i == 0 else q})"
+                  for i, (nome, q) in enumerate(comuni)]
+        if len(comuni) == 1:
+            risp = f"Per ora in un comune solo: {elenco[0]}."
+        else:
+            risp = (f"In {len(comuni)} comuni: {', '.join(elenco)}. Per vedere "
+                    "solo quelli di un paese c'è il filtro per comune.")
+        voci.append((f"In quali comuni ci sono corsi per bambini{dove_sp}?", risp))
+
+    mov = [c for c in corsi if G.slugify(_cat_macro(c)) in MACRO_PROSA]
+    foglie = [(f, q) for f, q in _contati(_cat_foglia(c) for c in mov)
+              if G.slugify(f) not in MACRO_PROSA]
+    if foglie:
+        elenco = [f"{f.lower()} ({q})" if q > 1 else f.lower() for f, q in foglie]
+        voci.append((f"Quali sport ci sono per bambini{dove_sp}?",
+                     f"{_cap(_n(len(mov), 'corso', 'corsi'))} di sport e movimento: "
+                     f"{_e(elenco)}. Ogni corso ha l'età e il comune scritti in riga."))
+
+    coperte = _fasce_coperte(corsi)
+    for domanda, dentro, fascia_filtro, cosa in (
+            ("Ci sono corsi per bambini sotto i 3 anni?",
+             lambda r: r[0] <= 2, None, "anche bambini sotto i 3 anni"),
+            ("Ci sono corsi per bambini di 3, 4 o 5 anni?",
+             lambda r: r[0] <= 5 and r[1] >= 3, '3-5', "bambini fra i 3 e i 5 anni")):
+        sub = [c for c in corsi if eta_min_max(c) and dentro(eta_min_max(c))]
+        if not sub:
+            continue
+        # Le famiglie e non le discipline: le discipline le scrive il modello e
+        # cambiano a ogni rilettura (vedi _cat_macro), e in una risposta
+        # diventavano "musica gioco, orchestra, musica pop, strumento musicale".
+        att = _e(_uniche(_parola_macro(m, sub)
+                         for m, _ in _contati(_cat_macro(c) for c in sub)))
+        risp = (f"Sì: {_n(len(sub), 'corso accoglie', 'corsi accolgono')} {cosa}, "
+                f"{_comuni_testo(sub)}{' (' + att + ')' if att else ''}.")
+        if fascia_filtro and len(coperte) > 1 and fascia_filtro in coperte:
+            risp += " Nel filtro Età c'è la voce «3-5 anni»."
+        voci.append((domanda, risp))
+
+    k, m = _prove_openday(corsi)
+    if k or m:
+        parti = []
+        if k:
+            parti.append(f"Per {_n(k, 'corso', 'corsi')} è prevista una lezione di "
+                         "prova: è scritta nel dettaglio del corso, con la data quando c'è.")
+        if m:
+            s = f"{_n(m, 'corso ha', 'corsi hanno')} un open day in calendario"
+            if 0 < m < n:
+                s += ", e per vedere solo quelli c'è il filtro «Solo con open day»"
+            parti.append(s + '.')
+        con = sum(1 for c in corsi if (c.get('prova') or '').strip() or openday(c))
+        if con < n:
+            parti.append("Per gli altri conviene chiederlo a chi organizza: "
+                         "i contatti sono nella scheda del corso.")
+        voci.append(("Si può provare un corso prima di iscriversi?", ' '.join(parti)))
+    return voci
+
+
+def _prov_se_serve(corsi, comuni):
+    """ "in provincia di Cuneo", ma non dopo "a Cuneo": col capoluogo sarebbe
+    la stessa parola due volte in tre righe."""
+    prov, nome = zona(corsi)
+    if len(comuni) == 1 and nome and G.slugify(comuni[0][0]) == G.slugify(nome):
+        return ''
+    return prov
+
+
+def _sede_prosa(sede):
+    return f"in {sede}" if _SEDE_VIA.match(sede.strip()) else f"presso {sede}"
+
+
+def testo_realta(org, corsi_org, info):
+    """Il paragrafo che apre la pagina di una realta'."""
+    n = len(corsi_org)
+    att = _attivita(corsi_org)
+    comuni = _contati(c.get('citta') for c in corsi_org)
+    prov = _prov_se_serve(corsi_org, comuni)
+    fascia = _fascia(corsi_org)
+    dove = f" {_comuni_testo(corsi_org)}" if comuni else ''
+    s = (f"{org} propone {'un corso' if n == 1 else f'{n} corsi'}"
+         f"{' di ' + att if att else ''}{dove}{', ' + prov + ',' if prov else ''} "
+         f"per {_chi(fascia[1] if fascia else None)}"
+         f"{' ' + _fascia_testo(*fascia) if fascia else ''}.")
+    sedi = _uniche([info.get('indirizzo')]) or _uniche(c.get('sede') for c in corsi_org)
+    if len(sedi) == 1 and len(comuni) <= 1:
+        s += f" Le lezioni si tengono {_sede_prosa(sedi[0])}."
+    k, m = _prove_openday(corsi_org)
+    extra = []
+    if k:
+        extra.append("per il corso è prevista una lezione di prova" if n == 1 else
+                     f"per {'tutti i corsi' if k == n else _n(k, 'corso', 'corsi')} "
+                     "è prevista una lezione di prova")
+    if m:
+        extra.append("il corso ha un open day in calendario" if n == 1 else
+                     f"{_n(m, 'corso ha', 'corsi hanno')} un open day in calendario")
+    if extra:
+        s += f" {_cap(_e(extra))}: i dettagli sono nella scheda del corso."
+    return s
+
+
+def faq_realta(org, corsi_org, info):
+    """Le domande in fondo alla pagina di una realta', solo quelle con risposta."""
+    voci = []
+    n = len(corsi_org)
+    att = _attivita(corsi_org)
+    comuni = _contati(c.get('citta') for c in corsi_org)
+    prov = _prov_se_serve(corsi_org, comuni)
+    # "Che corsi propone Kids&Us Alba ad Alba?": se il comune sta gia' nel nome
+    # della societa', la domanda non lo ripete.
+    dove = (G.a_citta(comuni[0][0]) if len(comuni) == 1
+            and G.slugify(comuni[0][0]) not in G.slugify(org) else '')
+
+    nomi = _uniche(c.get('nome') for c in corsi_org)
+    if nomi:
+        voci.append((f"Che corsi propone {org}{dove}?",
+                     f"{'Un corso' if n == 1 else f'{n} corsi'}"
+                     f"{' di ' + att if att else ''}: "
+                     f"{_e_max(nomi, 6, 'altri {n}')}."))
+
+    fascia = _fascia(corsi_org)
+    if fascia:
+        # Le fasce del FILTRO, non le celle del foglio: le celle della stessa
+        # societa' dicevano "1a e 2a media", "1 e 2 media" e "1ª e 2ª media"
+        # per la stessa fascia, e in fila sembravano tre corsi diversi.
+        anni = lambda x: 'anno' if x == 1 else 'anni'  # noqa: E731
+        valori = [(f"fino a {hi} {anni(hi)}" if lo == 0 else f"{lo} {anni(lo)}")
+                  if lo == 0 or lo == hi else f"{lo}-{hi} anni"
+                  for lo, hi in sorted({r for r in (eta_min_max(c) for c in corsi_org) if r})]
+        risp = f"{_cap(_fascia_testo(*fascia))}."
+        if len(valori) > 1:
+            risp += f" Le fasce dei singoli corsi: {_e_max(valori, 8, 'altre {n}')}."
+        voci.append((f"Da che età si possono frequentare i corsi di {org}?", risp))
+
+    if comuni:
+        sedi = _uniche([info.get('indirizzo')]) or _uniche(c.get('sede') for c in corsi_org)
+        coda = f", {prov}" if prov else ''
+        if len(comuni) == 1:
+            citta = comuni[0][0]
+            a_c = G.a_citta(citta).strip()
+            if len(sedi) == 1:
+                risp = _cap(_sede_prosa(sedi[0]))
+                if G.slugify(citta) not in G.slugify(sedi[0]):
+                    risp += f", {a_c}"
+                risp += f"{coda}."
+            else:
+                risp = f"{_cap(a_c)}{coda}."
+                if sedi:
+                    risp += f" Le sedi: {_e_max(sedi, 4, 'altre {n}')}."
+        else:
+            elenco = ', '.join(f"{nome} ({q})" for nome, q in comuni)
+            risp = (f"In {len(comuni)} comuni{coda}: {elenco}. La sede di ogni corso "
+                    "è scritta nella sua scheda.")
+        voci.append((f"Dove si tengono i corsi di {org}?", risp))
+
+    k, m = _prove_openday(corsi_org)
+    if k or m:
+        parti = []
+        if k:
+            parti.append("per il corso è prevista una lezione di prova" if n == 1 else
+                         f"per {'tutti i corsi' if k == n else _n(k, 'corso', 'corsi')} "
+                         "è prevista una lezione di prova")
+        if m:
+            parti.append("il corso ha un open day in calendario" if n == 1 else
+                         f"{_n(m, 'corso ha', 'corsi hanno')} un open day in calendario")
+        voci.append((f"{org} organizza lezioni di prova o open day?",
+                     f"Sì: {_e(parti)}. I dettagli sono nella scheda di ciascun corso."))
+    return voci
+
+
+def blocco_faq(voci, titolo):
+    """Domande e risposte come testo in pagina: <h3> e <p>, niente <details>
+    (si leggono senza toccare niente) e niente JSON-LD (vedi sopra)."""
+    if not voci:
+        return ''
+    return ('  <div class="co-faq" id="domande">\n'
+            f'    <h2 class="co-faq-t">{G.esc(titolo)}</h2>\n'
+            + ''.join(f'    <h3 class="co-faq-q">{G.esc(q)}</h3>\n'
+                      f'    <p class="co-faq-a">{G.esc(a)}</p>\n' for q, a in voci)
+            + '  </div>\n')
 
 
 def jsonld_realta(org, corsi_org, info):
@@ -1722,20 +2141,27 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # Una societa' sa dirlo in una riga meglio di qualsiasi conteggio; quando non
     # l'ha detto si ricade sul conteggio, che per una societa' di pallavolo e'
     # esatto. La colonna la scrive il downloader (CAMPI_REALTA, campo del modulo).
+    # L'ATTIVITA' NEL TITLE, E "AD" DAVANTI A VOCALE (11/09/2026). Il title era
+    # "Kids&Us Alba: corsi per bambini a Alba": un "a Alba" in pagina dei
+    # risultati si nota, e mancava la parola che si cerca, "inglese". La
+    # preposizione la mette G.a_citta(), la stessa delle schede evento.
+    att = _attivita(corsi_org)
+    di_att = f' di {att}' if att else ''
     claim = (info.get('occhiello') or '').strip()
     if claim:
         occhiello = f'<p class="cr-sub">{G.esc(claim)}</p>'
     else:
-        che_corsi = (f"Corsi di {', '.join(m.lower() for m in macro[:2])}"
-                     if macro else "Corsi")
-        occhiello = (f'<p class="cr-sub">{G.esc(che_corsi)} per bambini'
-                     f'{f" a {G.esc(citta)}" if citta else ""}</p>')
+        # Gli spazi FUORI da G.esc(), che li toglie: dentro, usciva
+        # "Corsidi musica per bambinia Vezza d'Alba".
+        occhiello = (f'<p class="cr-sub">Corsi{" di " + G.esc(att) if att else ""} per bambini'
+                     f'{" " + G.esc(G.a_citta(citta).strip()) if citta else ""}</p>')
     url = f"{SITE_URL}{url_realta(org)}"
-    titolo = f"{org}: corsi per bambini{f' a {citta}' if citta else ''} | DAOP"
-    descr = G.trunc((info.get('descr') or '').strip() or claim or
-                    f"{org}: {len(corsi_org)} corsi per bambini e ragazzi"
-                    f"{f' a {citta}' if citta else ''}"
-                    f"{', ' + ', '.join(disc).lower() if disc else ''}.", 300)
+    titolo = f"{org}: corsi{di_att} per bambini{G.a_citta(citta)} | DAOP"
+    # La description e' il paragrafo scritto dai dati, non la presentazione
+    # della societa': in pagina dei risultati deve dire cosa, dove e per che
+    # eta'. La presentazione resta in pagina, sotto "Chi e'".
+    intro = testo_realta(org, corsi_org, info)
+    descr = G.trunc(intro, 300)
     # IN INDICE SE LA SOCIETA' HA CONFERMATO, una per una. L'interruttore globale
     # resta padrone dell'hub (/corsi.html, la nav, le quattro porte): quella e'
     # una decisione sulla sezione. Ma la singola pagina non ha bisogno di
@@ -1840,6 +2266,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
   </div>
 </header>
 <article class="cr-wrap" data-org="{slug_realta(org)}" data-org-nome="{G.esc(org)}">
+  <p class="cr-intro">{G.esc(intro)}</p>
 {chr(10).join('  ' + t for t in testa)}
   {'<h2 class="cr-h">Informazioni e contatti</h2>' if riquadro else ''}
   {riquadro}
@@ -1848,6 +2275,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 {schede}
   </div>
 {blocco_ev}
+{blocco_faq(faq_realta(org, corsi_org, info), f'Domande frequenti su {org}')}
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
 {G.blocco_ecosistema('corsi')}
 </article>
@@ -2849,6 +3277,17 @@ CSS = """
 .page-hero .co-crumb{color:rgba(255,255,255,.62);opacity:1}
 .page-hero .co-crumb a{color:rgba(255,255,255,.82)}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
+/* Il paragrafo coi numeri sta sopra quello su cos'e' un corso: senza, i due
+   margini da 26+20 si sommano e sembrano due blocchi staccati. */
+.co-intro.co-numeri{margin-bottom:0}
+.co-numeri+.co-intro{margin-top:12px}
+/* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
+   delle realta' che le precedono. Un <div> e non <section>, per la stessa
+   ragione (section{padding:100px 24px} dal CSS di sistema). */
+.co-faq{margin:40px 0 0;scroll-margin-top:120px}
+.co-faq-t{font-size:1.3rem;margin:0 0 4px}
+.co-faq-q{font-size:1.02rem;margin:18px 0 4px}
+.co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
    --cat-ink, che la card imposta. */
@@ -3226,8 +3665,9 @@ def render(corsi, css, nav, foot, realta=None):
     # esserci.
     dove_sp = f' {dove}' if dove else ''
     titolo = f"Corsi per bambini{dove_sp} | DAOP"
-    descr = (f"Corsi e attività continuative per bambini e ragazzi{dove_sp}: musica, sport, "
-             f"danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.")
+    # Dai dati, non scritta: fino all'11/09/2026 prometteva "giorni, costi" e
+    # nominava la danza, che nell'elenco non c'era. Vedi testo_hero().
+    descr = descr_corsi(corsi, dove)
 
     # L'ordine segue i filtri: prima la macro (che e' la tendina), poi la
     # disciplina, poi l'eta'. Con la sola disciplina, "Canto corale" e "Coro"
@@ -3283,7 +3723,9 @@ def render(corsi, css, nav, foot, realta=None):
     # riceve, e passargli quella ordinata riscriverebbe il @graph di corsi.html
     # senza che sia cambiato un corso. Un diff che non dice niente e' rumore
     # nella cronologia del sito, e su questo repo la cronologia si legge.
-    intro = INTRO if corsi else ''
+    intro = (f'  <p class="co-intro co-numeri">{G.esc(testo_numeri(corsi))}</p>\n'
+             + INTRO) if corsi else ''
+    faq = blocco_faq(faq_corsi(corsi, dove), 'Domande frequenti')
     dati = _grafo(corsi)
 
     return f"""<!DOCTYPE html>
@@ -3325,16 +3767,14 @@ def render(corsi, css, nav, foot, realta=None):
     </div>
     <span class="section-label">{G.esc(zona_breve) + ' · ' if zona_breve else ''}Famiglie</span>
     <h1>Corsi per bambini{f' <em>{G.esc(dove)}</em>' if dove else ''}</h1>
-    <p>Sport, musica, danza, lingue, teatro: le attività a cui un bambino si iscrive,
-    con l'età che prendono, dove sono e quando si può andare a vederle.
-    Informazioni raccolte dalle locandine delle realtà, una società alla volta.</p>
+    <p>{G.esc(testo_hero(corsi, dove))}</p>
   </div>
 </header>
 <article class="co-wrap">
 {avviso}{intro}{toolbar(corsi)}
 {elenco}
 {sezione}
-{blocco_adesione(corsi)}
+{faq}{blocco_adesione(corsi)}
 {G.blocco_ecosistema('corsi')}
   <div class="co-actions">
     <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
