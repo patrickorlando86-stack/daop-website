@@ -1460,6 +1460,19 @@ def raggruppa_per_realta(corsi):
 # importa quello, non il contrario.
 
 
+# Le paroline che da sole non finiscono un titolo. Se togliendo il nome della
+# societa' la card resterebbe appesa a una di queste ("Saggio di"), il nome
+# resta dov'e': una ripetizione si legge, una frase mozzata no.
+CODA_APPESA = {
+    'di', 'del', 'dello', 'della', 'dei', 'degli', 'delle', 'da', 'dal',
+    'dallo', 'dalla', 'dai', 'con', 'per', 'tra', 'fra', 'a', 'ad', 'al',
+    'allo', 'alla', 'ai', 'agli', 'alle', 'in', 'nel', 'nello', 'nella',
+    'nei', 'negli', 'nelle', 'su', 'sul', 'sullo', 'sulla', 'sui', 'sugli',
+    'sulle', 'presso', 'e', 'ed', 'o', 'il', 'lo', 'la', 'i', 'gli', 'le',
+    'un', "un'", 'uno', 'una', 'della', 'the', 'of',
+}
+
+
 def _senza_societa(nome, org):
     """Il nome dell'evento senza la coda, quando la coda e' questa societa'.
 
@@ -1470,11 +1483,36 @@ def _senza_societa(nome, org):
 
     Si toglie SOLO se la coda e' davvero la sua: un evento organizzato con
     un'altra realta' tiene il nome per intero, perche' li' quella parola non e'
-    una ripetizione, e' l'altro nome."""
+    una ripetizione, e' l'altro nome.
+
+    E il nome puo' stare anche DENTRO il titolo, non solo dopo il trattino:
+    "Inaugurazione sede Kids&Us Alba - Kids&Us Alba" tagliato sul trattino
+    resta "Inaugurazione sede Kids&Us Alba", e la card ripeteva la realta' lo
+    stesso (visto l'11/09/2026 su kids-us-alba.html, prova rossa in corsi.js).
+    Quindi dopo il taglio si guarda anche la FINE della testa, con lo stesso
+    confronto in slug - mai su tutto il titolo, che e' la cautela di
+    eventi_a_nome_di() qui sotto."""
     testa, coda = G.taglia_coda(nome)
     if coda and G.slugify(coda) == slug_realta(org or ''):
-        return testa
+        return _senza_coda_ripetuta(testa, org)
     return (nome or '').strip()
+
+
+def _senza_coda_ripetuta(testa, org):
+    """La testa senza il nome della societa', se ce l'ha anche lei in fondo.
+
+    Non si taglia mai tutto il titolo (`range` si ferma prima) e non si lascia
+    una parolina appesa: in tutti e due i casi torna la testa com'era."""
+    parole = (testa or '').split()
+    atteso = slug_realta(org or '')
+    for k in range(1, len(parole)):
+        if G.slugify(' '.join(parole[-k:])) != atteso:
+            continue
+        resto = ' '.join(parole[:-k]).strip(' -–—:,')
+        if resto and resto.split()[-1].lower().strip('.,') not in CODA_APPESA:
+            return resto
+        break
+    return testa
 
 
 def _pezzi_dentro(slug, cercato):
