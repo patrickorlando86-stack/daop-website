@@ -5900,6 +5900,53 @@ specchiato, ed è il verso che si dimentica. Più le tre invarianti sui dati
 strutturati. Verificate rosse rimettendo i difetti uno alla volta: dicono
 esattamente «31 bottoni mentono» e «2 Place dichiarano un social come url».
 
+#### «Come funziona» rimandava a boh: un'ancora su una pagina da 90.000px
+
+Trovato l'11/09/2026 da Patrick, che ha toccato il link «spazi a pagamento,
+**come funziona**» del riquadro Sponsorizzati e non è arrivato da nessuna parte.
+L'ancora c'era — `#come-ordiniamo` esiste ed è linkata da nove punti — e
+**questo è il modo in cui il difetto è sopravvissuto**: chi controlla guarda se
+l'ancora esiste, non dove si atterra.
+
+Misurato nel browser, non dedotto: si finisce **217px oltre** la sezione a
+412px e **685px oltre** a 1280px, cioè sulla striscia di Ginetto. Due cause che
+si sommano, e nessuna delle due si legge nell'HTML:
+
+- **`html{scroll-behavior:smooth}`**, che arriva dal `<style>` di `eventi.html`
+  copiato da `_guscio()`, su una pagina alta **90.000px** non ce la fa:
+  l'animazione parte, le righe che attraversa si **disegnano** mentre passa
+  (hanno `content-visibility:auto`, quindi fino a quel momento erano stimate a
+  74px) e il bersaglio si sposta sotto i piedi dell'animazione. Provato: senza
+  smooth arriva a **zero esatto** a tutte e due le larghezze, e togliendo solo
+  `content-visibility` succede lo stesso — sono le due funzioni che si
+  contraddicono, non un capriccio di Chrome.
+- **il tetto appiccicoso**, che qui è di due pezzi — nav 69px più la barra dei
+  filtri (156px sul telefono, 68px da 900px in su) — e un'ancora senza
+  `scroll-margin` ci finisce sotto comunque.
+
+**Il secondo pezzo non riguardava solo quel link, e vale molto di più**: le
+~450 schede evento mandano a `/luoghi.html#c-<prov>-<comune>`, cioè il ponte
+costruito il 14/08 perché questa pagina non riceveva link dal corpo di nessuna
+pagina. L'intestazione del comune arrivava a **14px dal bordo** a 412px e a
+**−31px** a 1280px: coperta dalla nav. Chi arrivava da una scheda vedeva
+l'elenco senza sapere di che comune fosse.
+
+`html{scroll-behavior:auto}` sta in `LUOGHI_CSS`, cioè tocca **solo
+`luoghi.html` e `piscine.html`** — verificato, non supposto. E la trappola del
+footer a due contrasti qui non scatta: le due regole stanno nello **stesso**
+`<style>`, quindi decide l'ordine di scrittura e non quello del `<head>`, che
+fra pagine scritte a mano e pagine generate non è lo stesso. **Restano 236px e
+148px**, che sono i due tetti misurati più un dito d'aria.
+
+`tests/luoghi.js` **misura il reso**, come la prova della barra alta 915px: non
+legge il CSS, e **non scrive il tetto dentro la prova** — lo misura anche lui da
+`nav` e dalla barra, se no diventa rossa al primo ritocco di quella barra.
+L'invariante è la stessa per tutti e due i versi: *il bersaglio è in vista, sta
+sotto il tetto, e nel punto dove sta non c'è nient'altro sopra*. Verificate
+rosse rimettendo i due difetti uno alla volta — con lo smooth dicono «a 1189px»
+e «a −668px», senza `scroll-margin` dicono «a 0px sotto un tetto di 224px», cioè
+le cifre esatte misurate a mano.
+
 #### I link in uscita di chi paga vanno qualificati
 
 Un link verso il sito di un cliente è un link commerciale, e le policy di Google

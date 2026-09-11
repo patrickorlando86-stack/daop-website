@@ -1151,6 +1151,32 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-vetrina > p span{font-weight:600;text-transform:none;letter-spacing:0;color:var(--text-light)}
 .lg-vetrina .lg-row{background:transparent}
 
+/* ── Le ancore di una pagina da 90.000px ───────────────────────────────────
+   Due difetti misurati l'11/09/2026 a 412 e 1280px, ed erano lo stesso
+   difetto visto da due parti: un'ancora, qui, non arriva dove dice.
+
+   1. `html{scroll-behavior:smooth}` arriva dal <style> di eventi.html che
+      _guscio() copia dappertutto, e su una pagina alta 90.000px non funziona:
+      l'animazione parte, le righe che attraversa si disegnano (hanno
+      content-visibility:auto, quindi fino a quel momento erano stimate) e il
+      bersaglio si sposta sotto i piedi dell'animazione. Misurato sul link
+      "come funziona" del riquadro Sponsorizzati: si atterra 217-685px OLTRE
+      la sezione, cioe' sulla striscia di Ginetto, e di quello che spiega
+      perche' quella riga sta li' non si vede niente. Senza smooth arriva a
+      zero, esatto, tutte e due le larghezze. Non e' un capriccio di Chrome:
+      sono le due funzioni che si contraddicono, e qui l'animazione vale meno
+      dell'arrivare. Vale anche per piscine.html, che ha lo stesso guscio.
+   2. Sopra c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la barra
+      dei filtri (156px sul telefono, 68px da 900px in su) - e un'ancora senza
+      scroll-margin ci finisce sotto. Non riguarda solo il link della vetrina:
+      le ~450 schede evento mandano a /luoghi.html#c-<prov>-<comune>, e
+      l'intestazione del comune arrivava a 14px dal bordo (a 1280px addirittura
+      a -31px), cioe' coperta. I due numeri sono i tetti misurati piu' un dito
+      d'aria, non stime. */
+html{scroll-behavior:auto}
+.lg-ordine,.lg-grp-h h2{scroll-margin-top:236px}
+@media(min-width:900px){.lg-ordine,.lg-grp-h h2{scroll-margin-top:148px}}
+
 .lg-ordine{margin:30px 0 0;padding:16px 18px;background:var(--cream);border-radius:14px;
   font-size:0.85rem;line-height:1.65;color:var(--text-mid)}
 .lg-ordine h2{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;

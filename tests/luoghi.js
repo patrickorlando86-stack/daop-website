@@ -474,6 +474,67 @@ module.exports = async function luoghi(browser) {
     ? `ancore inesistenti: ${rotti.slice(0, 3).map(([a, f]) => `#${a} (${f})`).join(', ')}`
     : 'ogni ancora linkata esiste davvero in luoghi.html');
 
+  // ── un'ancora che c'e' ma non porta ───────────────────────────────────
+  // L'esistenza non basta, ed e' il difetto trovato l'11/09/2026 sul link
+  // "come funziona" della vetrina: l'ancora c'era, e si atterrava 217-685px
+  // OLTRE la sezione. Due cause che si sommano, e nessuna delle due si vede
+  // leggendo l'HTML - lo `scroll-behavior:smooth` che il guscio copia da
+  // eventi.html non ce la fa su una pagina alta 90.000px le cui righe si
+  // disegnano mentre l'animazione le attraversa, e sopra c'e' un tetto
+  // appiccicoso (nav + barra dei filtri) sotto cui l'ancora finisce comunque.
+  //
+  // La prova quindi MISURA il reso, come quella della barra alta 915px, e non
+  // legge il CSS. E il tetto non e' scritto qui dentro: si misura anche lui
+  // (nav e barra sono alte diversamente a 412 e a 1280px, e cambiano al primo
+  // ritocco della barra), se no la prova diventa rossa quando il sito e' giusto.
+  const atterra = async (p, quale, vai) => {
+    await vai(p);
+    await p.waitForTimeout(1200);
+    return p.evaluate((sel) => {
+      const t = document.querySelector(sel);
+      if (!t) return { manca: true };
+      const b = t.getBoundingClientRect();
+      const nav = document.querySelector('nav');
+      const bar = document.getElementById('lg-toolbar');
+      const tetto = Math.max(nav ? nav.getBoundingClientRect().bottom : 0,
+                             bar ? bar.getBoundingClientRect().bottom : 0);
+      const sopra = document.elementFromPoint(Math.round(b.left + 4),
+                                              Math.round(b.top + b.height / 2));
+      return { top: Math.round(b.top), tetto: Math.round(tetto),
+               vh: window.innerHeight,
+               suo: !!(sopra && t.contains(sopra)) };
+    }, quale);
+  };
+
+  for (const larghezza of [412, 1280]) {
+    const a = larghezza === 412 ? { ctx, page } : await apri(browser, 'luoghi.html', larghezza);
+
+    // 1. il link della vetrina: "spazi a pagamento, come funziona".
+    const v = await atterra(a.page, '#come-ordiniamo h2', (p) => p.evaluate(() => {
+      window.scrollTo(0, 0);
+      document.querySelector('#lg-vetrina a[href="#come-ordiniamo"]').click();
+    }));
+    r.ok(!v.manca && v.top >= v.tetto && v.top < v.vh && v.suo, v.manca
+      ? `${larghezza}px: la sezione #come-ordiniamo non c'e'`
+      : `${larghezza}px: "come funziona" porta al suo titolo, a ${v.top}px sotto un tetto di ${v.tetto}px`);
+
+    // 2. il verso che arriva da fuori: /luoghi.html#c-<prov>-<comune>, cioe'
+    //    il ponte delle ~450 schede evento. Qui non c'e' nessun clic: e' il
+    //    browser che salta al caricamento, ed e' l'altra meta' dello stesso
+    //    difetto - l'intestazione del comune arrivava sotto la nav.
+    const primo = [...bersagli.keys()][0];
+    const c = await atterra(a.page, `#${primo}`, (p) => p.evaluate((h) => {
+      window.scrollTo(0, 0);
+      location.hash = '';
+      location.hash = h;
+    }, primo));
+    r.ok(!c.manca && c.top >= c.tetto && c.top < c.vh && c.suo, c.manca
+      ? `${larghezza}px: #${primo} non esiste`
+      : `${larghezza}px: #${primo} arriva scoperto, a ${c.top}px sotto un tetto di ${c.tetto}px`);
+
+    if (larghezza !== 412) await a.ctx.close();
+  }
+
   // -- la riga "Sponsorizzato" in coda alle schede evento ---------------
   // Porta a una riga di QUESTA pagina, quindi si controlla come il ponte qui
   // sopra: l'ancora deve esistere, e la parola deve venire prima del nome.
