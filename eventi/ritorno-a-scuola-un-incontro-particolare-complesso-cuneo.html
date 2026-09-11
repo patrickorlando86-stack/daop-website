@@ -578,6 +578,11 @@
 .ev-prog-o{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:700;
   font-variant-numeric:tabular-nums;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:2px 9px;white-space:nowrap}
+/* «Tutte le date in programma» di una serie (blocco_date()): riusa il titolo e
+   la pillola dell'ora del programma, e aggiunge solo l'elenco. */
+.ev-date-l{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-date-l li{line-height:1.45;font-variant-numeric:tabular-nums}
+.ev-date-l time{font-weight:600}
 /* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
    cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
    non e' la pagina. */
@@ -654,6 +659,13 @@
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
+   grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
+   #5c6975 su bianco fa 5,6:1. */
+.ev-spons{margin:12px 0 0;font-size:.9rem;color:var(--text-mid,#4a5a66)}
+.ev-spons-l{display:inline-block;margin-right:6px;font-size:.66rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:#5c6975}
+.ev-spons a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 /* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
    famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
    a chi arriva dalla ricerca di essere nel posto giusto. */
@@ -924,7 +936,7 @@
   
   <div class="ev-actions"><a class="btn btn-navy" href="/eventi.html">Vedi gli eventi di oggi</a></div>
   <aside class="ev-firma"><p class="ev-firma-t"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14.01l-3-3"/></svg> Scheda verificata da DAOP</p><p>Selezionata e verificata da <strong>DAOP – Dove Andiamo Oggi Papi</strong>, l'associazione delle famiglie di Alessandria, Asti e Cuneo. Ultimo controllo: <time datetime="2026-09-05">5 settembre 2026</time>.</p><p class="ev-fonte">Segnalato da <a class="ev-ig" href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo: seguila per gli eventi in arrivo. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, controlla eventuali aggiornamenti dell'organizzatore. <a href="/metodo.html">Come verifichiamo gli eventi</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Ritorno%20a%20scuola%21%20Un%20incontro%20particolare..%20-%20Complesso%20Monumentale%20di%20San%20Francesco">Segnala una correzione</a></p></aside>
-  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Cuneo</h2><ul><li><a href="/eventi/il-corpo-giocoso-tutti-in-salute-cuneo.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Il Corpo Giocoso - Tutti in Salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/orizzonti-sospesi-tutti-in-salute-cuneo.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Orizzonti sospesi - Tutti in salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/corsi-di-musica-dolce-post-parto-deborah-dalmasso-cuneo.html"><span class="ev-vic-d">lunedì 14 set</span><span class="ev-vic-n">Corsi di Musica Dolce Post Parto - Deborah Dalmasso</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/corsi-di-musica-gioco-inglese-deborah-dalmasso-cuneo.html"><span class="ev-vic-d">lunedì 14 set</span><span class="ev-vic-n">Corsi di Musica Gioco - Inglese - Deborah Dalmasso</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/il-corpo-giocoso-tutti-in-salute-cuneo.html"><span class="ev-vic-d">venerdì 18 set</span><span class="ev-vic-n">Il Corpo Giocoso - Tutti in Salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/orizzonti-sospesi-tutti-in-salute-cuneo.html"><span class="ev-vic-d">sabato 19 set</span><span class="ev-vic-n">Orizzonti sospesi - Tutti in salute</span><span class="ev-vic-c">Cuneo</span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/cuneo.html">Tutti gli eventi a Cuneo</a> · <a href="/luoghi.html#c-cn-cuneo">9 posti per famiglie a Cuneo</a> · <a href="/sagre-provincia-cuneo.html">Le sagre in provincia di Cuneo</a> · <a href="/eventi-provincia-cuneo.html">Eventi per bambini in provincia di Cuneo</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
+  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Cuneo</h2><ul><li><a href="/eventi/il-corpo-giocoso-tutti-in-salute-cuneo.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Il Corpo Giocoso - Tutti in Salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/orizzonti-sospesi-tutti-in-salute-cuneo.html"><span class="ev-vic-d">domani</span><span class="ev-vic-n">Orizzonti sospesi - Tutti in salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/corsi-di-musica-dolce-post-parto-deborah-dalmasso-cuneo.html"><span class="ev-vic-d">lunedì 14 set</span><span class="ev-vic-n">Corsi di Musica Dolce Post Parto - Deborah Dalmasso</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/corsi-di-musica-gioco-inglese-deborah-dalmasso-cuneo.html"><span class="ev-vic-d">lunedì 14 set</span><span class="ev-vic-n">Corsi di Musica Gioco - Inglese - Deborah Dalmasso</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/il-corpo-giocoso-tutti-in-salute-cuneo.html"><span class="ev-vic-d">venerdì 18 set</span><span class="ev-vic-n">Il Corpo Giocoso - Tutti in Salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi.html#ev-2026-09-18-pigiama-run-lilt-cuneo"><span class="ev-vic-d">venerdì 18 set</span><span class="ev-vic-n">Pigiama Run - LILT Cuneo</span><span class="ev-vic-c">Cuneo</span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/cuneo.html">Tutti gli eventi a Cuneo</a> · <a href="/luoghi.html#c-cn-cuneo">9 posti per famiglie a Cuneo</a> · <a href="/sagre-provincia-cuneo.html">Le sagre in provincia di Cuneo</a> · <a href="/eventi-provincia-cuneo.html">Eventi per bambini in provincia di Cuneo</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
 </article>
 </main>
 <footer>

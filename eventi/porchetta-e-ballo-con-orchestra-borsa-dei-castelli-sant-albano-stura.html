@@ -578,6 +578,11 @@
 .ev-prog-o{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:700;
   font-variant-numeric:tabular-nums;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:2px 9px;white-space:nowrap}
+/* «Tutte le date in programma» di una serie (blocco_date()): riusa il titolo e
+   la pillola dell'ora del programma, e aggiunge solo l'elenco. */
+.ev-date-l{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-date-l li{line-height:1.45;font-variant-numeric:tabular-nums}
+.ev-date-l time{font-weight:600}
 /* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
    cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
    non e' la pagina. */
@@ -654,6 +659,13 @@
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
+   grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
+   #5c6975 su bianco fa 5,6:1. */
+.ev-spons{margin:12px 0 0;font-size:.9rem;color:var(--text-mid,#4a5a66)}
+.ev-spons-l{display:inline-block;margin-right:6px;font-size:.66rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:#5c6975}
+.ev-spons a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 /* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
    famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
    a chi arriva dalla ricerca di essere nel posto giusto. */
@@ -865,7 +877,7 @@
   
   <div class="ev-actions"><a class="btn btn-navy" href="/eventi/comune/sant-albano-stura.html">Vedi gli eventi a Sant&#x27;Albano Stura</a></div>
   <aside class="ev-firma"><p class="ev-firma-t">Scheda ritirata da DAOP</p><p>Questa scheda non fa piu' parte dell'agenda di <strong>DAOP – Dove Andiamo Oggi Papi</strong>: risultava in programma fino al <time datetime="2026-08-21">21 agosto 2026</time>, poi l'abbiamo tolta. Non consideriamo confermato quello che c'e' scritto in questa pagina.</p><p class="ev-fonte">Segnalato da <a class="ev-ig" href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo: seguila per gli eventi in arrivo. <a href="/zone.html">Le pagine della tua zona</a></p><p class="ev-firma-nota"><a href="/eventi.html">Vai all'agenda aggiornata</a> · <a href="mailto:info@daop.it?subject=Correzione%20scheda%3A%20Porchetta%20e%20Ballo%20con%20Orchestra%20Borsa%20dei%20Castelli%20-%20Pro%20Loco%20Sant%27Albano%20Stura">Segnala una correzione</a></p></aside>
-  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Sant&#x27;Albano Stura</h2><ul><li><a href="/eventi/lunatorio-oratorio-carru.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Lunatorio - Oratorio Carrù</span><span class="ev-vic-c">Carrù</span></a></li><li><a href="/eventi/ernest-e-celestine-cinema-sotto-le-stelle-revello.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Ernest e Celestine - Cinema Sotto le Stelle</span><span class="ev-vic-c">Revello</span></a></li><li><a href="/eventi/festival-illustrada-mondovi.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Festival Illustrada</span><span class="ev-vic-c">Mondovì</span></a></li><li><a href="/eventi/il-corpo-giocoso-tutti-in-salute-cuneo.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Il Corpo Giocoso - Tutti in Salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi/osservazione-astronomica-con-telescopio-comune-di-bergolo.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Osservazione Astronomica con Telescopio - Comune di Bergolo</span><span class="ev-vic-c">Bergolo</span></a></li><li><a href="/eventi/serata-hamburger-patatine-e-birra-con-max-mania-88-govone.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Serata Hamburger, Patatine e Birra con Max Mania 883 Tribute Band -…</span><span class="ev-vic-c">Govone</span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/sant-albano-stura.html">Tutti gli eventi a Sant'Albano Stura</a> · <a href="/luoghi.html#c-cn-sant-albano-stura">Un posto per famiglie a Sant&#x27;Albano Stura</a> · <a href="/sagre-provincia-cuneo.html">Le sagre in provincia di Cuneo</a> · <a href="/eventi-provincia-cuneo.html">Eventi per bambini in provincia di Cuneo</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
+  <section class="ev-vicini" aria-labelledby="ev-vicini-t"><h2 id="ev-vicini-t">Altri eventi vicino a Sant&#x27;Albano Stura</h2><ul><li><a href="/eventi/lunatorio-oratorio-carru.html"><span class="ev-vic-d">in corso</span><span class="ev-vic-n">Lunatorio - Oratorio Carrù</span><span class="ev-vic-c">Carrù</span></a></li><li><a href="/eventi/camminata-per-tutti-pro-loco-santa-lucia-di-fossan-fossano.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Camminata per Tutti - Pro Loco Santa Lucia di Fossano</span><span class="ev-vic-c">Fossano</span></a></li><li><a href="/eventi/ernest-e-celestine-cinema-sotto-le-stelle-revello.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Ernest e Celestine - Cinema Sotto le Stelle</span><span class="ev-vic-c">Revello</span></a></li><li><a href="/eventi/festival-illustrada-mondovi.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Festival Illustrada</span><span class="ev-vic-c">Mondovì</span></a></li><li><a href="/eventi/il-corpo-giocoso-tutti-in-salute-cuneo.html"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">Il Corpo Giocoso - Tutti in Salute</span><span class="ev-vic-c">Cuneo</span></a></li><li><a href="/eventi.html#ev-2026-09-11-my-cup-of-tea"><span class="ev-vic-d">oggi</span><span class="ev-vic-n">My Cup of Tea</span><span class="ev-vic-c"></span></a></li></ul><p class="ev-vic-all"><a href="/eventi/comune/sant-albano-stura.html">Tutti gli eventi a Sant'Albano Stura</a> · <a href="/luoghi.html#c-cn-sant-albano-stura">Un posto per famiglie a Sant&#x27;Albano Stura</a> · <a href="/sagre-provincia-cuneo.html">Le sagre in provincia di Cuneo</a> · <a href="/eventi-provincia-cuneo.html">Eventi per bambini in provincia di Cuneo</a> · <a href="/eventi/oggi.html">Cosa c'è oggi</a> · <a href="/eventi/weekend.html">Questo weekend</a> · <a href="/eventi.html">Tutta l'agenda DAOP</a></p></section>
 </article>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">

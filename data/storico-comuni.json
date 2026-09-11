@@ -195,6 +195,17 @@
  },
  "alba": {
   "eventi": {
+   "alba-in-bici": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Medford e Piazza Sarti",
+    "manifest": "Alba in Bici 2026",
+    "nome": "Alba in Bici 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "escape-room-at-the-museum-mudi-alba": {
     "anni": [
      2026
@@ -205,6 +216,50 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "escape-room-at-the-museum-museo-diocesano-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Diocesano",
+    "manifest": "",
+    "nome": "Escape Room at the Museum - Museo Diocesano Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   },
+   "gruppo-di-cammino-per-donne-in-gravidanza-e-neogen-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Alba",
+    "manifest": "",
+    "nome": "Gruppo di Cammino per Donne in Gravidanza e Neogenitori - ASL CN2 & Biblioteca Civica di Alba",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-15"
+   },
+   "inaugurazione-sede-kids-us-alba-kids-us-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Kids&Us Alba",
+    "manifest": "",
+    "nome": "Inaugurazione sede Kids&Us Alba - Kids&Us Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
+   "pigiama-run-lilt-cuneo-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Partenza da Alba",
+    "manifest": "",
+    "nome": "Pigiama Run - LILT Cuneo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-18"
    }
   },
   "nome": "Alba",
@@ -807,6 +862,17 @@
  },
  "barge": {
   "eventi": {
+   "aggiungi-un-posto-a-tavola-aica-associazione-impre-barge": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ala Mercatale di Barge",
+    "manifest": "",
+    "nome": "Aggiungi un Posto a Tavola - AICA Associazione Imprenditori Commercianti Artigiani di Barge",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-18"
+   },
    "sport-in-piazza-festa-dello-sport-pro-loco-barge": {
     "anni": [
      2026
@@ -993,6 +1059,17 @@
  },
  "borgosandalmazzo": {
   "eventi": {
+   "il-gioco-e-una-cosa-seria-edizione-madonna-bruna-a-borgo-san-dalmazzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Madonna Bruna",
+    "manifest": "",
+    "nome": "Il Gioco è una Cosa Seria - 1ª Edizione Madonna Bruna - Associazione SIDHE",
+    "organizza": "Associazione SIDHE",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   },
    "sulle-ali-della-notte-borgo-san-dalmazzo": {
     "anni": [
      2026
@@ -1625,6 +1702,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-07"
+   },
+   "mercatini-di-natale-confcommercio-ascom-carru": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "",
+    "nome": "Mercatini di Natale - Confcommercio Ascom Carrù",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-11-29"
    },
    "mirabilia-a-carru": {
     "anni": [
@@ -3722,6 +3810,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "pigiama-run-lilt-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Partenza da Cuneo",
+    "manifest": "",
+    "nome": "Pigiama Run - LILT Cuneo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-18"
+   },
    "pomeriggio-di-giochi-cuneo": {
     "anni": [
      2026
@@ -4263,6 +4362,23 @@
   "nome": "Entraque",
   "prov": "CN"
  },
+ "farigliano": {
+  "eventi": {
+   "ghita-festa-dei-giochi-in-strada-farigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele II",
+    "manifest": "",
+    "nome": "GHITA! – Festa dei Giochi in Strada",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   }
+  },
+  "nome": "Farigliano",
+  "prov": "CN"
+ },
  "felizzano": {
   "eventi": {
    "festa-di-fine-estate-felizzano": {
@@ -4382,6 +4498,17 @@
  },
  "fossano": {
   "eventi": {
+   "camminata-per-tutti-pro-loco-santa-lucia-di-fossan-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesetta di Santa Lucia",
+    "manifest": "",
+    "nome": "Camminata per Tutti - Pro Loco Santa Lucia di Fossano",
+    "organizza": "Pro Loco Santa Lucia di Fossano",
+    "pagina": true,
+    "ultima": "2026-09-11"
+   },
    "castelli-aperti-a-ferragosto-castello-dei-principi-fossano": {
     "anni": [
      2026
@@ -5041,6 +5168,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-13"
+   },
+   "mot-kids-maira-occitan-trail-kids-marmora": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Polivalente Marmora/Canosio",
+    "manifest": "",
+    "nome": "MOT Kids - Maira Occitan Trail Kids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    }
   },
   "nome": "Marmora",
@@ -5183,6 +5321,17 @@
  },
  "mondovi": {
   "eventi": {
+   "all-ombra-di-un-racconto-ludofavole-d-autunno-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Ludofavole d'Autunno",
+    "nome": "All'Ombra di un Racconto - Ludofavole d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "bestiario-d-inchiostro-museo-civico-della-stampa-mondovi": {
     "anni": [
      2026
@@ -5227,6 +5376,50 @@
     "pagina": true,
     "ultima": "2026-09-11"
    },
+   "giochiamo-con-la-scienza-i-semi-viaggiatori-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Giochiamo con la Scienza",
+    "nome": "Giochiamo con la Scienza - «I Semi Viaggiatori»",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
+   "giochiamo-con-la-scienza-lago-o-isola-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Giochiamo con la Scienza",
+    "nome": "Giochiamo con la Scienza - «Lago o Isola?»",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
+   "il-principe-tessitore-e-altre-storie-principesche-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Ludofavole d'Autunno",
+    "nome": "Il Principe Tessitore e Altre Storie Principesche - Ludofavole d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "laboratorio-creativo-con-alice-piaggio-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Maggiore",
+    "manifest": "Illustrada",
+    "nome": "Laboratorio creativo con Alice Piaggio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-13"
+   },
    "laboratorio-di-carta-riciclata-il-melograno-societ-mondovi": {
     "anni": [
      2026
@@ -5248,6 +5441,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "qui-casca-l-asino-ludofavole-d-autunno-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Ludofavole d'Autunno",
+    "nome": "Qui Casca l'Asino - Ludofavole d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    }
   },
   "nome": "Mondovì",
@@ -5515,6 +5719,23 @@
   },
   "nome": "Morbello",
   "prov": "AL"
+ },
+ "moretta": {
+  "eventi": {
+   "sport-shop-moretta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Umberto I",
+    "manifest": "Sport & Shop",
+    "nome": "Sport & Shop",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-12"
+   }
+  },
+  "nome": "Moretta",
+  "prov": "CN"
  },
  "mornese": {
   "eventi": {
@@ -6374,6 +6595,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "laboratorio-di-lettura-ad-alta-voce-abitare-la-nat-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sentiero della Munatera",
+    "manifest": "",
+    "nome": "Laboratorio di Lettura ad Alta Voce - Abitare la Natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
    }
   },
   "nome": "Piasco",
@@ -6415,6 +6647,17 @@
  },
  "piozzo": {
   "eventi": {
+   "laboratorio-bimbi-dedicato-alla-zucca-piozzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Località Valle, 25",
+    "manifest": "",
+    "nome": "Laboratorio Bimbi dedicato alla Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "osserviamo-il-cielo-baladin-open-garden-piozzo": {
     "anni": [
      2026
@@ -6857,6 +7100,23 @@
   "nome": "Pozzolo Formigaro",
   "prov": "AL"
  },
+ "pradeboni": {
+  "eventi": {
+   "caccia-al-tesoro-alle-meschie-vale-explorer-pradeboni": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Località Meschie (Pradeboni)",
+    "manifest": "",
+    "nome": "Caccia al tesoro alle Meschie - Vale Explorer",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   }
+  },
+  "nome": "Pradeboni",
+  "prov": "CN"
+ },
  "pratolungo": {
   "eventi": {
    "sagra-del-raviolo-al-sugo-di-birra-pratolungo": {
@@ -7163,6 +7423,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "pigiama-run-lilt-cuneo-revello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Partenza da Revello",
+    "manifest": "",
+    "nome": "Pigiama Run - LILT Cuneo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-18"
    }
   },
   "nome": "Revello",
@@ -7184,6 +7455,23 @@
   },
   "nome": "Revigliasco d'Asti",
   "prov": "AT"
+ },
+ "rifreddo": {
+  "eventi": {
+   "pigiama-run-lilt-cuneo-rifreddo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Partenza da Rifreddo",
+    "manifest": "",
+    "nome": "Pigiama Run - LILT Cuneo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-18"
+   }
+  },
+  "nome": "Rifreddo",
+  "prov": "CN"
  },
  "rivaltabormida": {
   "eventi": {
@@ -7327,6 +7615,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "memorial-sportivo-aldo-galfre-pro-loco-roccavione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Polifunzionale",
+    "manifest": "",
+    "nome": "2° Memorial Sportivo Aldo Galfrè - Pro Loco Roccavione Chi di Teit",
+    "organizza": "Pro Loco Roccavione Chi di Teit",
+    "pagina": true,
+    "ultima": "2026-10-03"
    }
   },
   "nome": "Roccavione",
@@ -9155,6 +9454,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "pigiama-run-lilt-cuneo-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Partenza da Verzuolo",
+    "manifest": "",
+    "nome": "Pigiama Run - LILT Cuneo",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-18"
+   },
    "una-giornata-tra-gusto-e-divertimento-pro-loco-vil-verzuolo": {
     "anni": [
      2026
@@ -9165,6 +9475,17 @@
     "organizza": "Pro Loco Villa di Verzuolo",
     "pagina": true,
     "ultima": "2026-08-09"
+   },
+   "una-storia-in-scatola-per-ascoltare-insieme-e-gioc-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Cesare Segre",
+    "manifest": "Mappamondi - Biblioteche senza confini",
+    "nome": "Una storia... in scatola. Per ascoltare insieme e giocare con le lingue che conosciamo e... che non conosciamo!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    }
   },
   "nome": "Verzuolo",

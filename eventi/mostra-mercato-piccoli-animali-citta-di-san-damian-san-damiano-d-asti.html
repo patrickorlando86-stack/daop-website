@@ -578,6 +578,11 @@
 .ev-prog-o{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:700;
   font-variant-numeric:tabular-nums;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:2px 9px;white-space:nowrap}
+/* «Tutte le date in programma» di una serie (blocco_date()): riusa il titolo e
+   la pillola dell'ora del programma, e aggiunge solo l'elenco. */
+.ev-date-l{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-date-l li{line-height:1.45;font-variant-numeric:tabular-nums}
+.ev-date-l time{font-weight:600}
 /* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
    cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
    non e' la pagina. */
@@ -654,6 +659,13 @@
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
+   grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
+   #5c6975 su bianco fa 5,6:1. */
+.ev-spons{margin:12px 0 0;font-size:.9rem;color:var(--text-mid,#4a5a66)}
+.ev-spons-l{display:inline-block;margin-right:6px;font-size:.66rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:#5c6975}
+.ev-spons a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 /* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
    famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
    a chi arriva dalla ricerca di essere nel posto giusto. */
@@ -906,6 +918,7 @@
   <ul class="ev-facts">
     <li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Orario:</strong> 09:00-13:00</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Dove:</strong> Viale alberato di Baluardo Palestro · Viale alberato di Baluardo Palestro - San Damiano d&#x27;Asti (AT)</span></li><li><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span><strong>Ingresso:</strong> Gratuito</span></li><li><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg><span><strong>Età:</strong> Tutte le età (famiglie)</span></li>
   </ul>
+  <section class="ev-date" aria-labelledby="ev-date-t"><h2 class="ev-prog-h" id="ev-date-t">Tutte le date in programma</h2><ul class="ev-date-l"><li><time datetime="2026-10-04">domenica 4 ottobre</time><span class="ev-prog-o">09:00-13:00</span></li><li><time datetime="2026-11-01">domenica 1 novembre</time><span class="ev-prog-o">09:00-13:00</span></li><li><time datetime="2026-12-06">domenica 6 dicembre</time><span class="ev-prog-o">09:00-13:00</span></li></ul></section>
   <img class="ev-loc" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/daop_asti_3953380617483947119.jpg" alt="Locandina di Mostra mercato piccoli animali - Città di San Damiano d&#x27;Asti" loading="lazy" width="900" height="1200">
   <div class="ev-body">
     <p>Mostra mercato dedicata ai piccoli animali da cortile, con esposizione e vendita di pollame e animali da fattoria. L&#x27;appuntamento si tiene ogni prima domenica del mese lungo il viale alberato di Baluardo Palestro a San Damiano d&#x27;Asti, dalle 9:00 alle 13:00.</p>

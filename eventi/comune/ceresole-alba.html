@@ -577,6 +577,11 @@
 .ev-prog-o{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:700;
   font-variant-numeric:tabular-nums;color:#a75b15;background:rgba(232,149,74,.16);
   border-radius:100px;padding:2px 9px;white-space:nowrap}
+/* «Tutte le date in programma» di una serie (blocco_date()): riusa il titolo e
+   la pillola dell'ora del programma, e aggiunge solo l'elenco. */
+.ev-date-l{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ev-date-l li{line-height:1.45;font-variant-numeric:tabular-nums}
+.ev-date-l time{font-weight:600}
 /* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
    cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
    non e' la pagina. */
@@ -653,6 +658,13 @@
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
+   grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
+   #5c6975 su bianco fa 5,6:1. */
+.ev-spons{margin:12px 0 0;font-size:.9rem;color:var(--text-mid,#4a5a66)}
+.ev-spons-l{display:inline-block;margin-right:6px;font-size:.66rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:#5c6975}
+.ev-spons a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 /* Le attrazioni sotto il titolo, dentro la barra scura della hero: stessa
    famiglia di .ev-when, mezzo tono piu' acceso perche' e' la riga che conferma
    a chi arriva dalla ricerca di essere nel posto giusto. */
@@ -990,7 +1002,7 @@
     </div>
   </aside>
 
-  <h2>Altri comuni della provincia di Cuneo</h2><div class="com-link"><a href="/eventi/comune/caraglio.html">Caraglio</a><a href="/eventi/comune/carru.html">Carrù</a><a href="/eventi/comune/ceresole-d-alba.html">Ceresole d&#x27;Alba</a><a href="/eventi/comune/crissolo.html">Crissolo</a><a href="/eventi/comune/cuneo.html">Cuneo</a><a href="/eventi/comune/entracque.html">Entracque</a></div>
+  <h2>Altri comuni della provincia di Cuneo</h2><div class="com-link"><a href="/eventi/comune/alba.html">Alba</a><a href="/eventi/comune/caraglio.html">Caraglio</a><a href="/eventi/comune/carru.html">Carrù</a><a href="/eventi/comune/ceresole-d-alba.html">Ceresole d&#x27;Alba</a><a href="/eventi/comune/crissolo.html">Crissolo</a><a href="/eventi/comune/cuneo.html">Cuneo</a></div>
   <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">890 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">53 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
   <p class="com-fonte">Gli eventi a Ceresole Alba arrivano da <a class="ev-ig" href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo: seguila per gli eventi in arrivo. <a href="/zone.html">Le pagine della tua zona</a></p>
   <p class="ev-firma-nota">Pagina aggiornata il 11 settembre 2026.</p>

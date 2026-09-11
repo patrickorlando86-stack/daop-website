@@ -288,6 +288,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/natale.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/sagre-provincia-alessandria.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>daily</changefreq>
@@ -387,6 +393,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/aggiungi-un-posto-a-tavola-aica-associazione-impre-barge.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/agosto-letterario-buttigliera-d-asti.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -417,6 +429,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/alba-in-bici.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/albugnano-in-festa.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -424,6 +442,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/alecomics-festival-alessandria.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/all-ombra-di-un-racconto-ludofavole-d-autunno-mondovi.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -633,7 +657,19 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/caccia-al-tesoro-alle-meschie-vale-explorer-pradeboni.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/camminata-alla-ricerca-delle-stelle-cadenti-pro-lo-ponzano-monferrato.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/camminata-per-tutti-pro-loco-santa-lucia-di-fossan-fossano.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1000,6 +1036,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/escape-room-at-the-museum-mudi-alba.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/escape-room-at-the-museum-museo-diocesano-alba.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1683,6 +1725,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/ghita-festa-dei-giochi-in-strada-farigliano.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/gianmarco-bagutti-orchestra-italiana-sagra-del-pep-costigliole-d-asti.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -1726,6 +1774,18 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/giochiamo-a-basket-con-edo-kam-3841-crissolo.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/giochiamo-con-la-scienza-i-semi-viaggiatori-mondovi.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/giochiamo-con-la-scienza-lago-o-isola-mondovi.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1851,6 +1911,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/il-gioco-e-una-cosa-seria-edizione-madonna-bruna-a-borgo-san-dalmazzo.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr-crissolo.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -1869,6 +1935,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/il-principe-tessitore-e-altre-storie-principesche-mondovi.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/il-sapore-delle-emozioni-puraessenza-confreria.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -1882,6 +1954,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/in-viaggio-per-crescere-con-le-storie-nati-per-leg-casale-monferrato.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/inaugurazione-sede-kids-us-alba-kids-us-alba.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2013,7 +2091,19 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/laboratorio-bimbi-dedicato-alla-zucca-piozzo.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/laboratorio-creativo-acquerelli-da-verdura-e-frutt-ormea.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/laboratorio-creativo-con-alice-piaggio-mondovi.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2050,6 +2140,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/laboratorio-di-cioccolato-fagiolo-peirano-busca-castellar.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/laboratorio-di-lettura-ad-alta-voce-abitare-la-nat-piasco.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2169,6 +2265,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/memorial-sportivo-aldo-galfre-pro-loco-roccavione.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/menu-tradizionale-e-fritto-misto-di-pesce-con-jack-morsasco.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -2206,6 +2308,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/mot-kids-maira-occitan-trail-kids-marmora.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2542,6 +2650,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/questione-di-fiuto-barolo-castles-foundation-roddi.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/qui-casca-l-asino-ludofavole-d-autunno-mondovi.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -3021,6 +3135,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/sport-shop-moretta.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/storie-sotto-gli-alberi-la-bottega-del-sanconiglio-novi-ligure.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -3177,6 +3297,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/una-storia-in-scatola-per-ascoltare-insieme-e-gioc-verzuolo.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/una-storia-tira-l-altra-seguendo-il-richiamo-del-b-casteldelfino.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -3246,6 +3372,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/comune/alba.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/comune/alessandria.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -3301,6 +3433,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/comune/cuneo.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/fossano.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -3377,6 +3515,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/verzuolo.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- PAGINE-COMUNE:END -->
 
   <!-- CORSI:START (generato da scripts/genera_corsi.py — non modificare a mano) -->
@@ -3399,7 +3543,19 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/corsi/avis-atletica-bra.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/corsi/carezza.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/corsi/crome-in-movimento-aps.html</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
