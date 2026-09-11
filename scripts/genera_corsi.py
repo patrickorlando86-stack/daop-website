@@ -3306,6 +3306,29 @@ def toolbar(corsi):
     # Allargare il campo invece di accorciare la frase vorrebbe dire mandare a
     # capo un controllo, e questa barra e' appiccicosa: si pagherebbe su ogni
     # schermata dello scorrimento, non una volta.
+    #
+    # E QUANTO E' ALTA, misurato l'11/09/2026 a cinque larghezze - perche' la
+    # domanda "si puo' accorciare" torna ogni volta che qualcuno guarda questa
+    # pagina sul telefono, e la risposta e' un conto, non un'opinione.
+    #
+    #   larghezze naturali a 412px (font del telefono, controlli fuori dal flex)
+    #     ricerca 229 · Attivita' 112 · Comune 166 · Eta' 104 · casella 171
+    #     = 782px piu' i quattro spazi = 810, su righe da 372
+    #
+    # 810 su 372 fa tre righe, e non c'e' CSS che le faccia diventare due: due
+    # righe sono 744px di capienza. La barra sta a 160px a 360-600px, 207 a
+    # 320 (li' la quarta riga nasce perche' Attivita'+Comune fanno 285 contro
+    # 280 disponibili) e 68 da 900 in su. Per confronto l'agenda, con gli
+    # stessi stili, sta a 156: non e' una pagina messa peggio delle altre, ha
+    # un controllo in piu' e un'opzione piu' lunga dentro.
+    #
+    # Le uniche leve vere sono quindi due, e nessuna delle due e' CSS: un
+    # controllo in meno (ma tutti e quattro dividono - l'open day toglie 48
+    # righe su 55) oppure un'opzione piu' corta, e l'opzione piu' lunga e' il
+    # nome di un comune. Accorciare per pareggiare i 372px e' la trappola gia'
+    # descritta qui sopra: il comune piu' lungo di domani rimette tutto a capo
+    # in silenzio. Quello che invece SI e' fatto e' smettere di far pagare
+    # quell'altezza alle ancore - vedi scroll-margin-top in fondo al CSS.
     return f"""    <div class="ev-toolbar" id="co-toolbar">
       <div class="ev-search">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -3345,7 +3368,7 @@ CSS = """
 /* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
    delle realta' che le precedono. Un <div> e non <section>, per la stessa
    ragione (section{padding:100px 24px} dal CSS di sistema). */
-.co-faq{margin:40px 0 0;scroll-margin-top:120px}
+.co-faq{margin:40px 0 0}
 .co-faq-t{font-size:1.3rem;margin:0 0 4px}
 .co-faq-q{font-size:1.02rem;margin:18px 0 4px}
 .co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
@@ -3374,7 +3397,7 @@ CSS = """
 .co-realta-t{font-size:1.3rem;margin:0 0 4px}
 .co-realta-sub{margin:0 0 16px;font-size:.93rem;opacity:.72}
 .co-realta{padding:16px 18px;margin:0 0 14px;border:1px solid rgba(0,0,0,.09);
-  border-radius:14px;background:#fff;scroll-margin-top:120px}
+  border-radius:14px;background:#fff}
 .co-realta h3{font-size:1.1rem;margin:0 0 6px}
 .co-realta-d{margin:0 0 4px;font-size:.95rem;line-height:1.55;opacity:.85}
 .co-realta-corsi,.co-realta-ev{margin:12px 0 0;font-size:.93rem;line-height:1.7}
@@ -3395,9 +3418,48 @@ CSS = """
    ancora quello che sembra. */
 .co-avviso{background:#fdf3e0;border:1px solid #e6c98a;border-radius:10px;
   padding:14px 16px;margin:0 0 18px;font-size:.94rem;line-height:1.55;color:#6b4a10}
-/* Il bersaglio del "← Tutti i corsi" delle pagine realta'. Lo stesso stacco
-   delle schede: senza, l'elenco atterra sotto la barra in cima. */
-#co-lista{scroll-margin-top:120px}
+/* ── Le ancore arrivavano sotto la barra, e 120px era una stima ───────────
+   Misurato l'11/09/2026 a cinque larghezze, non dedotto. Sopra ogni ancora di
+   questa pagina c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la
+   barra dei filtri - e il tetto NON e' un numero:
+
+     <=600px   barra 160px (3 righe), 207 a 320px (4)  ->  tetto 228, 275
+     601-899   barra 120px (2 righe)                   ->  tetto 188
+     >=900px   barra  68px (1 riga)                    ->  tetto 136
+
+   Contro quei tetti, i 120px di prima atterravano SOTTO la barra di 108px sul
+   telefono, 68 a 760, 16 a 1280: il "← Tutti i corsi" delle nove pagine
+   realta' portava all'elenco e dell'elenco non si vedeva la testa. Il commento
+   che c'era qui diceva la cosa giusta ("senza, l'elenco atterra sotto la barra
+   in cima") con un numero che non era mai stato misurato.
+
+   Il numero giusto non si puo' scrivere qui, ed e' la stessa ragione per cui
+   il segnaposto della ricerca si sceglie contando: l'altezza di quella barra
+   la decide il DATO - Chrome dimensiona ogni <select> sull'opzione piu' lunga,
+   e "Borgo San Dalmazzo" da solo prende 166px dei 372 di un telefono. Un
+   comune piu' lungo domani manda a capo un controllo e rimette l'ancora sotto
+   la barra, in silenzio. Quindi la si MISURA, con la stessa --ev-sticky che
+   l'agenda scrive gia' per le intestazioni dei giorni: stessa variabile,
+   stesso significato (nav + barra), un solo vocabolario su due pagine.
+
+   I 12px sono un dito d'aria: senza, a 1280px si atterrava a 135 contro un
+   tetto di 136, cioe' un pixel sotto la barra per un arrotondamento. Il 228
+   del ripiego e' il tetto del telefono, che e' il caso in cui il JS non gira -
+   dove pero' non girano nemmeno i filtri, quindi e' una rete, non un secondo
+   progetto.
+
+   E html{scroll-behavior:auto}: arriva smooth dal <style> di eventi.html che
+   _guscio() copia dappertutto, e su questa pagina l'animazione parte, le righe
+   che attraversa si disegnano (content-visibility:auto) e il bersaglio scende
+   sotto i piedi dell'animazione - #r-carezza atterrava 355px oltre. E' lo
+   stesso difetto gia' chiuso su luoghi.html il giorno prima, e la stessa cura:
+   qui l'animazione vale meno dell'arrivare. */
+html{scroll-behavior:auto}
+/* #co-lista e' il bersaglio del "← Tutti i corsi"; .co-realta le ancore
+   #r-<slug> che girano su WhatsApp; .event-card i #c-<codice> che apriDaHash()
+   sa aprire. L'id davanti serve: .event-card porta gia' scroll-margin-top:160px
+   dal guscio, e una classe sola non lo batterebbe. */
+#co-lista,#co-lista .event-card,.co-realta,.co-faq{scroll-margin-top:calc(var(--ev-sticky,228px) + 12px)}
 .co-realta h3 a{color:inherit;text-decoration:none}
 .co-realta h3 a:hover{text-decoration:underline}
 """
@@ -3429,6 +3491,30 @@ FILTER_JS = """
   window.addEventListener('hashchange',apriDaHash);
   apriDaHash();
   var bar=document.getElementById('co-toolbar');
+  // --ev-sticky = nav + barra, cioe' quanto copre il tetto appiccicoso. La
+  // scrive gia' l'agenda per le intestazioni dei giorni; qui serve alle ancore
+  // (vedi il commento accanto a scroll-margin-top nel CSS), perche' l'altezza
+  // di quella barra la decide il dato e non il CSS. Stessa variabile e stesso
+  // significato delle due pagine: due nomi per la stessa misura divergerebbero.
+  //
+  // Le due cautele sono quelle gia' pagate sull'agenda, e valgono anche qui
+  // che le schede sono 55 e non 294: si scrive su <html>, quindi ogni scrittura
+  // invalida lo stile dell'intero documento - solo se il valore e' cambiato
+  // davvero - e si osserva la BARRA con un ResizeObserver invece del viewport,
+  // perche' su Android la barra dell'indirizzo che si ritira e' un resize a
+  // ogni scorrimento mentre i controlli vanno a capo due volte in tutto.
+  var stickyPx=0;
+  function misuraSticky(){
+    var v=68+(bar?bar.offsetHeight:0);
+    if(v===stickyPx) return;
+    stickyPx=v;
+    document.documentElement.style.setProperty('--ev-sticky',v+'px');
+  }
+  misuraSticky();
+  if(bar){
+    if(window.ResizeObserver) new ResizeObserver(misuraSticky).observe(bar);
+    else window.addEventListener('resize',misuraSticky);
+  }
   if(!bar) return;
   var q=document.getElementById('co-q'), count=document.getElementById('co-count'),
       campi=[].slice.call(bar.querySelectorAll('[data-campo]'));
