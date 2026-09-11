@@ -968,7 +968,13 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-tag.is-ev{background:rgba(24,134,99,0.12);color:#146c51}
 .lg-tag.is-free{background:rgba(24,134,99,0.10);color:#167859}
 .lg-tag.is-daop{background:rgba(232,149,74,0.16);color:#a75b15}
-.lg-tag.is-prem{background:rgba(201,162,39,0.20);color:#846a1a}
+.lg-tag svg{width:11px;height:11px;vertical-align:-1px}
+/* "Sponsorizzato" sopra il nome, in parole e su ogni schermo: e' la
+   dichiarazione del pagamento, quindi non si nasconde sul telefono come le
+   parole delle pillole. Grigio e non oro: e' un'avvertenza, non un fregio
+   (Tripadvisor e Google Maps fanno lo stesso). #5c6975 su bianco = 5,6:1. */
+.lg-spons{display:block;font-size:0.66rem;font-weight:700;letter-spacing:0.05em;
+  text-transform:uppercase;color:#5c6975;line-height:1.3;margin:0 0 1px}
 .lg-chev{flex:0 0 auto;width:17px;height:17px;fill:none;stroke:var(--text-light);
   stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
 .lg-row[open] .lg-chev{transform:rotate(180deg)}
@@ -1027,8 +1033,9 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-galleria{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
 .lg-galleria img{width:104px;height:78px;object-fit:cover;border-radius:8px;background:var(--cream)}
 .lg-cura{margin:10px 0 0;font-size:0.76rem;color:var(--text-light)}
+.lg-manca svg{width:12px;height:12px;vertical-align:-1px;color:#a75b15}
 
-/* ── In evidenza: l'unico posto in cui la posizione si compra, e si dice ──── */
+/* ── Sponsorizzati: l'unico posto in cui la posizione si compra, e si dice ── */
 .lg-vetrina{margin:22px 0 0;padding:16px 16px 6px;border:1px solid rgba(201,162,39,0.35);
   border-radius:var(--radius-lg,16px);background:rgba(201,162,39,0.05)}
 .lg-vetrina > p{margin:0 0 4px;font-size:0.75rem;font-weight:700;text-transform:uppercase;
@@ -1121,8 +1128,8 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 <div class="id-voce"><p class="id-perche"><span class="id-num">4</span><span>Tre diorami raccontano montagna, collina e pianura del Po. Visite in piccoli gruppi e aperto tutto l&#x27;anno: la carta da giocare quando piove.</span></p><details class="lg-row cat-cultura-istruzione" id="lg-museo-naturalistico-del-fiume-po-revello" data-cat="cultura-istruzione" data-prov="cn" data-comune="revello" data-etamin="3" data-etamax="99"><summary><span class="lg-ico" aria-hidden="true">🏞️</span><span class="lg-txt"><span class="lg-nome">Museo Naturalistico del Fiume Po</span><span class="lg-meta"><span class="lg-cat">Musei &amp; Luoghi di Interesse</span> · Revello (CN)</span></span><span class="lg-pills"><span class="lg-tag is-free">€<i> Gratis</i></span></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/5002.jpg" alt="Museo Naturalistico del Fiume Po, Revello" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/106963492086549080982" target="_blank" rel="noopener nofollow">Mario “Mario Dc” DeCasa</a> · Google Maps</p><p>Centro visita del Parco del Monviso aperto tutto l&#x27;anno: tre grandi diorami raccontano la montagna, la collina e la pianura attraversate dal Po. Le visite si fanno in piccoli gruppi ed è il modo più semplice per far vedere ai bambini gli ambienti del fiume.</p><ul class="lg-serv"><li class="is-pratico">Su prenotazione</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Diorami, Visite guidate, Laboratori per bambini, Prenotazione consigliata</span></li><li><b>Dove:</b> <span>Piazza Denina 5</span></li><li><b>Se piove:</b> <span>Al chiuso</span></li><li><b>Orari:</b> <span>Aperto tutto l&#x27;anno; domenica 14:30-18:30, altri giorni su prenotazione</span></li><li><b>Ingresso:</b> <span>Gratuito</span></li><li><b>Età:</b> <span>da 3 anni</span></li><li><b>Telefono:</b> <a href="tel:0114321008">011 4321008</a></li></ul><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.6546771,7.3885306" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://www.parcomonviso.eu/visite/i-centri-visita/il-museo-naturalistico-del-fiume-po" target="_blank" rel="noopener nofollow">Sito del luogo</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details></div>
 <div class="id-voce"><p class="id-perche"><span class="id-num">5</span><span>Il Po comincia qui, ai piedi del Monviso, e la sorgente è a pochi passi dal parcheggio: ci arrivano anche i più piccoli. Si sale solo quando la strada di stagione è aperta.</span></p><details class="lg-row cat-natura-parchi" id="lg-pian-del-re-sorgenti-del-po-crissolo" data-cat="natura-parchi" data-prov="cn" data-comune="crissolo" data-etamin="3" data-etamax="99"><summary><span class="lg-ico" aria-hidden="true">💧</span><span class="lg-txt"><span class="lg-nome">Pian del Re - Sorgenti del Po</span><span class="lg-meta"><span class="lg-cat">Geoparchi</span> · Crissolo (CN)</span></span><span class="lg-pills"><span class="lg-tag is-free">€<i> Gratis</i></span></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/5003.jpg" alt="Pian del Re - Sorgenti del Po, Crissolo" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/117718120725119851000" target="_blank" rel="noopener nofollow">Massimliano Bivona</a> · Google Maps</p><p>Il pianoro ai piedi del Monviso dove nasce il Po: la sorgente è a pochi passi dal parcheggio, quindi anche i più piccoli ci arrivano. Intorno prati, ruscelli e sentieri facili dentro il Parco del Monviso; d&#x27;estate c&#x27;è il punto informativo del parco. Si raggiunge solo con la strada aperta in stagione.</p><ul class="lg-serv"><li class="is-pratico">Parcheggio</li><li class="is-pratico">Picnic</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Sorgente del Po, Sentieri, Punto informativo estivo</span></li><li><b>Dove:</b> <span>Pian del Re</span></li><li><b>Se piove:</b> <span>All'aperto</span></li><li><b>Orari:</b> <span>Sempre accessibile quando la strada per Pian del Re è aperta (indicativamente da giugno a ottobre); centro visita dal primo sabato di luglio alla prima domenica di settembre</span></li><li><b>Ingresso:</b> <span>Gratuito</span></li><li><b>Età:</b> <span>da 3 anni</span></li><li><b>Telefono:</b> <a href="tel:0114321008">011 4321008</a></li></ul><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.7002947,7.0924691" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://www.parcomonviso.eu" target="_blank" rel="noopener nofollow">Sito del luogo</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details></div>
     <section class="id-chiusa"><p><b>Perche' questi cinque.</b> Perché gratis non voglia dire poco, ognuno di questi ha una cosa da fare e non solo da guardare: un sentiero da percorrere, un paese da attraversare cercando i murales, un diorama in cui entrare. E perché stanno in valli diverse: se una domenica ha il tempo storto, ce n&#x27;è sempre uno dall&#x27;altra parte che tiene.</p><p class="id-quando">Questa selezione e' del 30 agosto 2026.</p><p>Questa e' una scelta, non tutto quello che abbiamo: <a href="/luoghi.html">l'elenco completo dei luoghi</a> si filtra per provincia, categoria e distanza. Come li verifichiamo sta in <a href="/metodo.html">metodo</a>.</p></section>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">188 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">53 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
-    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 10 settembre 2026.</p>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">183 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">6 centri con le date e le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">53 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 11 settembre 2026.</p>
   </div>
 <section class="bg-cream ev-ginetto">
   <div class="section-inner">
@@ -1214,7 +1221,16 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
   var comuniTutti = listaCom
     ? [].map.call(listaCom.options, function (o) { return { v: o.value, p: o.dataset.prov }; })
     : [];
-  var righe = [].slice.call(document.querySelectorAll('.lg-row[data-cat]'));
+  // Le righe del riquadro "Sponsorizzati" sono COPIE di righe dell'elenco, con
+  // gli stessi data-*: passano dagli stessi filtri - e' questo che lo fa
+  // seguire la ricerca, cosi' chi sceglie Cuneo non vede in cima un posto di
+  // Alessandria che ha pagato - ma non si contano nel "N luoghi", se no una
+  // scheda sponsorizzata varrebbe due.
+  var tutte = [].slice.call(document.querySelectorAll('.lg-row[data-cat]'));
+  var righe = tutte.filter(function (r) { return !r.closest('.lg-vetrina'); });
+  var vetr = tutte.filter(function (r) { return !!r.closest('.lg-vetrina'); });
+  var boxV = document.getElementById('lg-vetrina');
+  var postiV = boxV ? (parseInt(boxV.dataset.posti, 10) || 3) : 0;
 
   // Lo stesso slug che il generatore mette in data-comune, rifatto in JS: cosi'
   // "Novi" scritto a mano trova "novi-ligure" senza dover scrivere tutto, e
@@ -1235,7 +1251,7 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
   var testo = null;
   function indice() {
     if (!testo) {
-      testo = new Map(righe.map(function (r) {
+      testo = new Map(tutte.map(function (r) {
         return [r, r.textContent.toLowerCase().replace(/\s+/g, ' ')];
       }));
     }
@@ -1252,16 +1268,29 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     var eta = f.eta && f.eta !== 'all' ? parseInt(f.eta, 10) : null;
     var com = inpCom ? slugifica(inpCom.value) : '';
     if (inpCom) inpCom.classList.toggle('is-on', !!inpCom.value.trim());
+    function passa(r) {
+      return (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
+             (!com || (r.dataset.comune || '').indexOf(com) > -1) &&
+             (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
+             (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
+             (!t || indice().get(r).indexOf(t) > -1);
+    }
     var visti = 0;
     righe.forEach(function (r) {
-      var ok = (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
-               (!com || (r.dataset.comune || '').indexOf(com) > -1) &&
-               (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
-               (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
-               (!t || indice().get(r).indexOf(t) > -1);
+      var ok = passa(r);
       r.hidden = !ok;
       if (ok) visti++;
     });
+    // Il riquadro: le prime `postiV` fra quelle che passano, nell'ordine del
+    // generatore - che ruota ogni notte. Nessuna che passa: il riquadro sparisce
+    // con la sua intestazione, invece di restare un titolo sopra il vuoto.
+    var inV = 0;
+    vetr.forEach(function (r) {
+      var ok = inV < postiV && passa(r);
+      if (ok) inV++;
+      r.hidden = !ok;
+    });
+    if (boxV) boxV.hidden = inV === 0;
     // Un gruppo svuotato dai filtri si porta via la sua intestazione: se no
     // resta in pagina il nome di un comune con niente sotto. E' il guasto che
     // si vede solo filtrando, quindi va scritto adesso.
