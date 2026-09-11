@@ -977,6 +977,94 @@ module.exports = async function corsi(browser) {
 
   await b.ctx.close();
 
+  // ── le ancore arrivano SOPRA la barra, non sotto ───────────────────────
+  // Difetto misurato l'11/09/2026: il "← Tutti i corsi" delle nove pagine
+  // realta' punta a #co-lista, e #co-lista atterrava 108px SOTTO la barra
+  // appiccicosa sul telefono (68 a 760px, 16 a 1280). Stessa cosa per le
+  // ancore #r-<slug>, che sono quelle che girano su WhatsApp. Il CSS aveva un
+  // scroll-margin-top:120px e un commento che diceva la cosa giusta ("senza,
+  // l'elenco atterra sotto la barra in cima"): il numero pero' non era mai
+  // stato misurato contro la barra vera, che sta a 160px sul telefono.
+  //
+  // LA PROVA MISURA IL RESO, e non legge il CSS: e' la lezione della barra
+  // delle azioni alta 915px e del crumb a 1,07:1. E il tetto lo MISURA anche
+  // lui, invece di scriverlo qui - se no diventa rossa al primo ritocco della
+  // barra, che e' alta quanto la decide il dato (Chrome dimensiona ogni
+  // <select> sull'opzione piu' lunga, e i comuni cambiano col foglio).
+  //
+  // Le ancore si pescano DALLA PAGINA e non si scrivono qui: un elenco di
+  // slug invecchierebbe alla prima realta' nuova, che e' l'inciampo gia'
+  // pagato piu' volte in questo repo.
+  //
+  // Si arriva con una navigazione vera, hash compreso, e non impostando
+  // location.hash a pagina ferma: meta' del difetto era html{scroll-behavior:
+  // smooth} ereditato dal guscio, che parte, attraversa righe che si disegnano
+  // mentre passa (content-visibility:auto) e si lascia il bersaglio sotto i
+  // piedi - #r-carezza finiva 355px oltre. Quel pezzo si vede solo al
+  // caricamento.
+  r.titolo('corsi.html — le ancore non finiscono sotto la barra');
+  for (const larghezza of [412, 1280]) {
+    const a = await apri(browser, 'corsi.html', larghezza);
+    const bersagli = await a.page.evaluate(() => {
+      const id = (s) => { const e = document.querySelector(s); return e && e.id ? '#' + e.id : null; };
+      return ['#co-lista', id('.co-realta[id]'), id('#co-lista .event-card[id]'), '#domande']
+        .filter((x) => x && document.querySelector(x));
+    });
+    r.ok(bersagli.length >= 2,
+      `${larghezza}px: ${bersagli.length} ancore da controllare (${bersagli.join(' ')})`);
+    for (const h of bersagli) {
+      await a.page.goto('file://' + path.join(RADICE, 'corsi.html') + h,
+        { waitUntil: 'load', timeout: 120000 });
+      await a.page.waitForTimeout(700);
+      const m = await a.page.evaluate((sel) => {
+        const e = document.querySelector(sel);
+        const b = e.getBoundingClientRect();
+        const nav = document.querySelector('nav');
+        const bar = document.querySelector('.ev-toolbar');
+        // Il tetto e' di due pezzi: la nav fissa e la barra dei filtri, che
+        // resta incollata sotto di essa per tutta la pagina.
+        let tetto = nav ? nav.getBoundingClientRect().bottom : 0;
+        if (bar && getComputedStyle(bar).position === 'sticky') {
+          const bb = bar.getBoundingClientRect();
+          if (bb.top <= tetto + 4) tetto = Math.max(tetto, bb.bottom);
+        }
+        // Il punto e' appena dentro il bordo alto e non a meta': questi
+        // bersagli sono anche contenitori alti migliaia di pixel, e il loro
+        // centro sta fuori schermo.
+        const sopra = document.elementFromPoint(Math.round(b.left + 4), Math.round(b.top + 4));
+        return { top: Math.round(b.top), tetto: Math.round(tetto),
+                 vh: window.innerHeight, suo: !!(sopra && e.contains(sopra)) };
+      }, h);
+      // Tre cose insieme, come per le ancore di luoghi.html: sotto il tetto,
+      // dentro lo schermo (se no si e' atterrati OLTRE - e' l'altra meta' del
+      // difetto, quella dello smooth) e in quel punto non c'e' nient'altro
+      // sopra.
+      r.ok(m.top >= m.tetto && m.top < m.vh && m.suo,
+        m.top < m.tetto
+          ? `${larghezza}px: ${h} arriva a ${m.top}px, COPERTO di ${m.tetto - m.top}px dalla barra`
+          : m.top >= m.vh
+            ? `${larghezza}px: ${h} arriva a ${m.top}px, cioe' OLTRE lo schermo (alto ${m.vh})`
+            : !m.suo
+              ? `${larghezza}px: ${h} arriva a ${m.top}px ma in quel punto c'e' qualcos'altro sopra`
+              : `${larghezza}px: ${h} arriva scoperto, a ${m.top}px sotto un tetto di ${m.tetto}px`);
+    }
+    // E --ev-sticky dice la stessa cosa del tetto misurato: e' la variabile
+    // con cui l'agenda tiene ferme le intestazioni dei giorni, e qui la
+    // scrivono le ancore. Due misure della stessa cosa che divergono sarebbero
+    // il difetto di domani, non di oggi.
+    const v = await a.page.evaluate(() => {
+      const bar = document.querySelector('.ev-toolbar');
+      return {
+        scritta: parseInt(getComputedStyle(document.documentElement)
+          .getPropertyValue('--ev-sticky'), 10) || 0,
+        vera: bar ? 68 + Math.round(bar.getBoundingClientRect().height) : 68,
+      };
+    });
+    r.ok(Math.abs(v.scritta - v.vera) <= 1,
+      `${larghezza}px: --ev-sticky vale ${v.scritta}px e la barra ne misura ${v.vera}`);
+    await a.ctx.close();
+  }
+
   // ── il verso opposto: dalla scheda evento alla pagina di chi organizza ──
   // Senza questo il legame e' mezzo: la pagina di CàRezza raccoglie i suoi
   // appuntamenti, ma chi arriva da Google su "Sogni d'Oro Racconigi" trovava
