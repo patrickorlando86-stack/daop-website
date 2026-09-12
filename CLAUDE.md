@@ -1137,11 +1137,11 @@ Quindi in due tempi, e il primo non è una mezza misura:
 
 ### Perché questo è il pezzo commerciale che mancava
 
-Nella lista delle cose che mancano per vendere, la numero 2 è «`Premium_al`, la
-data di scadenza. Niente si spegne da solo. È un problema di cassa: nessun
-innesco per il rinnovo».
+`Premium_al` (12/09/2026) dà alla scadenza una **data**, e a noi l'avviso che
+sta per arrivare. Non dà però un motivo per telefonare: "ti scade la scheda" è
+una richiesta di soldi, non una notizia.
 
-**Una guida stagionale è quell'innesco**, e non c'è niente di commerciale da
+**Una guida stagionale è quel motivo**, e non c'è niente di commerciale da
 inventare: «la Guida centri estivi 2027 chiude il 28 febbraio, la tua scheda c'è
 dentro?» è una telefonata **con una data**, che è l'unica specie di telefonata
 che si fa pagare. Sui corsi non si pone nemmeno il problema: dal 21/08 la
@@ -2417,8 +2417,9 @@ Le decisioni che non si ricavano dal diff:
   evento diventa «edizione conclusa» — perché l'anzianità dell'URL non si
   ricompra. Qui no: questa pagina è **uno spazio pagato**, e continuare a
   pubblicarla quando la presenza finisce vuol dire pubblicare una realtà che non
-  è più nella guida. È il problema che per i luoghi è ancora aperto
-  (`Premium_al`, «niente si spegne da solo») risolto nel verso giusto.
+  è più nella guida. Era il problema che per i luoghi è rimasto aperto fino al
+  12/09/2026 (`Premium_al`, «niente si spegne da solo»), risolto qui nel verso
+  giusto prima che lì.
 - **Il registro segue `DIR_REALTA`, e non è un secondo interruttore**
   (`indice_realta_path()`, 09/09/2026). Le due cose erano indipendenti, e chi
   deviava solo la prima — cioè `prova_corsi.py` — scriveva le realtà **finte**
@@ -6123,20 +6124,39 @@ che rispondono a ricerche vere, e sono l'inventario che poi si rivende.
 
 Cosa manca, in ordine di resa:
 
-1. **Il conteggio delle aperture di scheda.** GA4 registra i clic *dalla* scheda
-   (mappe, telefono, sito) ma non le aperture: al rinnovo puoi dire "47 hanno
-   chiesto le indicazioni" e non su quante volte. È il momento in cui smetti di
-   vendere fiducia e cominci a vendere evidenza.
-   Che la metà buona funzioni è già misurato, ed è il modello da copiare: nei
-   primi tre giorni post-fix gli eventi ci sono — `click_come_arrivare` 14,
-   `apri_ginetto` 11, `click_locandina` 9, `aggiungi_calendario` 6. **Su un
-   evento si sa già quante persone hanno detto "ci vado"; su un luogo non si sa
-   nemmeno quante volte la scheda è stata aperta.**
-2. **`Premium_al`, la data di scadenza.** Nel foglio c'è solo `Premium_dal`:
-   **niente si spegne da solo**. È un problema di cassa (nessun innesco per il
-   rinnovo) e di correttezza (continui a pubblicare uno spazio non più pagato).
-3. **Un modulo per i materiali** che scriva nel foglio. Il collo di bottiglia non
+1. **Un modulo per i materiali** che scriva nel foglio. Il collo di bottiglia non
    è vendere: è che i contenuti non arrivano mai.
+
+**Le altre due sono state fatte**, l'11 e il 12/09/2026. Restano scritte qui
+perché il *perché* è quello che si racconta al rinnovo — e perché la seconda
+insegna qualcosa sul modo in cui una cosa "fatta" può non funzionare.
+
+- ~~**Il conteggio delle aperture di scheda**~~ (11/09/2026). GA4 registrava i
+  clic *dalla* scheda (mappe, telefono, sito) ma non le aperture: al rinnovo
+  potevi dire "47 hanno chiesto le indicazioni" e non su quante volte. Ora c'è
+  `apri_luogo` in `daop-track.js`. È il momento in cui smetti di vendere fiducia
+  e cominci a vendere evidenza; il modello era già misurato sugli eventi — nei
+  primi tre giorni post-fix `click_come_arrivare` 14, `apri_ginetto` 11,
+  `click_locandina` 9, `aggiungi_calendario` 6.
+- ~~**`Premium_al`, la data di scadenza**~~ (11/09 qui, 12/09 le altre due
+  sponde). Era un problema di cassa — nessun innesco per il rinnovo — e di
+  correttezza: continuavi a pubblicare uno spazio non più pagato.
+  **E per un giorno intero è stata "fatta" senza spegnere niente.**
+  `premium_attivo` era scritta, provata e committata, ma la colonna sul FOGLIO
+  non era mai nata: riceveva sempre cella vuota e tornava sempre "attivo".
+  Misurato sull'istantanea grezza del tab (`data/luoghi.json`, riscritta dalla
+  run delle 16:17 dell'11/09, cioè *dopo* il commit): c'erano `premium` e
+  `premium_dal`, `premium_al` no. Il 12/09 il downloader ha preso il pannello
+  «Spazi sponsorizzati» — che la colonna la crea da sé alla prima scadenza
+  scritta — e Ginetto ha imparato la stessa regola, perché l'app legge il CSV
+  **grezzo** del foglio e non il calcolato di qui: uno spazio scaduto sarebbe
+  tornato una riga normale su daop.it restando premium nell'app, cioè dove sta
+  quasi tutto il traffico.
+  **La lezione, che vale oltre questo caso: una regola che legge una colonna non
+  è collegata a niente finché la colonna non esiste, e nessuno dei due lati dà
+  errore.** Le tre copie della regola (qui, `daop_pipeline.py`, `app.js`) hanno
+  gli stessi 12 casi nelle rispettive prove, che è il punto: non che esistano,
+  ma che non divergano in silenzio.
 
 Ultima cosa, fuori dal nostro mestiere: **DAOP è un'associazione e vendere spazi
 pubblicitari è attività commerciale**, con conseguenze fiscali che cambiano
@@ -6212,8 +6232,8 @@ diretti a €100-150/anno valgono tutto l'AdSense annuale**, i corsi sono già u
 presenza pagata, e AdSense rende il terzo cliente più difficile da firmare. Lo
 stesso centimetro quadrato venduto a mano vale 10-50 volte, e la macchina c'è
 già — `Premium` nei luoghi, `Stato` nei corsi, `#come-ordiniamo`,
-`rel="sponsored"`. Quello che manca per incassarlo è `Premium_al`, che è già il
-punto 2 della lista qui sopra.
+`rel="sponsored"`. E da settembre 2026 c'è anche `Premium_al`: uno spazio
+venduto si spegne alla scadenza, che era il pezzo che mancava per incassarlo.
 
 **Quando si cambia idea, ed è una data non un umore.** Se a marzo la vendita
 diretta è stata provata davvero — stagione delle guide passata, telefonate

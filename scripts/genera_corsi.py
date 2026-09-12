@@ -2401,9 +2401,9 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
     l'anzianita' dell'URL e' l'unico asset che non si ricompra. Qui e' diverso, e
     la differenza e' che questa pagina e' UNO SPAZIO PAGATO: quando la presenza
     finisce, continuare a pubblicarla vuol dire pubblicare una realta' che non e'
-    piu' nella guida. E' lo stesso problema che CLAUDE.md segnala per i luoghi
-    ("Premium_al, la data di scadenza: niente si spegne da solo"), risolto nel
-    verso giusto — qui qualcosa si spegne da solo.
+    piu' nella guida. Era lo stesso problema che i luoghi hanno avuto aperto fino
+    al 12/09/2026 ("Premium_al, la data di scadenza: niente si spegne da solo"),
+    risolto qui nel verso giusto — e prima che li'.
 
     La scheda in corsi.html invece resta finche' la realta' ha corsi nel foglio,
     e con lei l'ancora #r-…: i link gia' girati non si rompono comunque."""
