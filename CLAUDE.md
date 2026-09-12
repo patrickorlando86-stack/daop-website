@@ -4186,9 +4186,36 @@ percentuale che può scendere senza che niente sia rotto, la seconda è un danno
 viene letto due volte, esce con due frasi diverse — nel registro del 30/08/2026
 sono **cinque coppie**, stesso comune e stesso identico giorno: «Apertura Stand
 Gastronomico **con** Shary Band» e «… **e** Shary Band» (Rocchetta Tanaro, tre
-serate, cioè **sei pagine per tre eventi**, e tutte e sei vive), «Casalnoceto
-Kids» con e senza «- Comune di Casalnoceto», «Ciao Ciao Estate! Sorprese per
-Tutti» e «Laboratorio: Ciao Ciao Estate… Sorprese per Tutti!».
+serate, cioè **sei pagine per tre eventi**), «Casalnoceto Kids» con e senza
+«- Comune di Casalnoceto», «Ciao Ciao Estate! Sorprese per Tutti» e
+«Laboratorio: Ciao Ciao Estate… Sorprese per Tutti!».
+
+**Le tre di Rocchetta Tanaro NON sono più vive: consolidate il 12/09/2026**, e
+con loro una quarta coppia che qui non era elencata — la Fiera della Patata di
+Entracque, che da sola divideva 3.192 impressioni fra due pagine. Sulle
+perdenti c'è il timbro `spostata`, cioè canonical verso la sopravvissuta e
+fuori dalla sitemap.
+
+**Quale sopravvive non è stato deciso a gusto**, ed è la parte da riusare: a
+Rocchetta Tanaro la risposta era già nel registro. Le righe «e» hanno
+`last_seen` **07/08** e `riga: None` — erano state sostituite sul foglio una
+settimana prima delle serate — mentre le «con» restano lette fino alla propria
+data e portano i contatti. **Vince quella che il foglio ha tenuto**, una regola
+sola per tutte e tre. Su Entracque, dove quel segnale non c'era (tutte e due
+arrivate a fine corsa), ha deciso il traffico: 2.306 impressioni al 9,11% in
+posizione 5,28 contro 886 al 4,29%.
+
+**Il buco vero però resta aperto, ed è più importante delle quattro coppie.**
+`_doppioni_riscritti()` confronta le **righe lette oggi**: quando l'evento passa
+la pulizia degli scaduti toglie le righe dal foglio e il controllo **tace
+esattamente da quando il danno diventa permanente** — le righe spariscono, le
+due pagine restano indicizzate per sempre. Lo stesso confronto passato sul
+**registro** invece che sulle righe vive le trova tutte in un secondo (4 la
+mattina del 12/09, 0 dopo). E c'è una seconda domanda senza risposta: quelle
+tre pagine erano **orfane e future per nove giorni**, cioè il caso che
+`_erede()`/`ritirata` copre, e nessuno le ha timbrate. L'ipotesi comoda — la
+guardia `sano` rotta fino al 07/09 — non regge: in agosto 19 pagine sono state
+timbrate `ritirata`, quindi il meccanismo girava.
 
 `segnala_doppioni()` non le vedeva, e per una ragione precisa: **confronta lo
 slug esatto**, cioè riconosce la riga *copiata* e non la riga *riletta*. Ora
