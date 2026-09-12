@@ -657,12 +657,23 @@
            dell'elenco: sotto una dozzina di righe nascoste si scorre prima la
            lista che a cercare un comando.
            Sta nella PRIMA riga della barra, accanto alla ricerca, e non in
-           fondo: a 412px le tre tendine occupano 105+101+152 piu' i due spazi,
-           cioe' 372px esatti, e un quarto controllo li' dentro farebbe
-           ricrescere di 47px la barra appiccicosa per tutto lo scorrimento -
-           che e' la ragione per cui anche "vicino a me" sta fuori. Qui invece
-           lo spazio c'era: la ricerca prende tutta la riga perche' e' stirata,
-           non perche' le serva. -->
+           fondo: un quarto controllo insieme alle tendine farebbe ricrescere
+           di 47px la barra appiccicosa per tutto lo scorrimento - che e' la
+           ragione per cui anche "vicino a me" sta fuori. Qui invece lo spazio
+           c'era: la ricerca prende tutta la riga perche' e' stirata, non
+           perche' le serva.
+
+           QUI C'ERA SCRITTO "372px esatti", ED ERA IL DIFETTO. Le tre tendine
+           stavano in 105+101+152 piu' i due spazi, cioe' esattamente la riga,
+           zero margine - e il 11/09/2026 «Prov. AL» e' diventato
+           «Alessandria» (giusto: una sigla chiede a chi legge il codice della
+           propria provincia). Quella tendina e' passata da 96 a 115px, le tre
+           da 357 a 376 contro 372, e le due righe sono diventate tre: 109 ->
+           156px su ogni schermata, per QUATTRO pixel. Misurato il 12/09.
+           La lezione non e' il numero, e' che un pareggio non e' un margine:
+           la larghezza di una <select> la decide l'opzione piu' lunga, cioe'
+           una parola che qualcuno riscrivera'. Vale anche per il segnaposto
+           della ricerca, dove la stessa regola e' gia' scritta. -->
       <label class="ev-chk" id="ev-gratis-box" hidden>
         <input type="checkbox" id="f-gratis"> Solo gratuiti
       </label>

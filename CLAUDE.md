@@ -6240,14 +6240,67 @@ della propria provincia. Ora la tendina dice `Provincia` / `Alessandria` /
 `Asti` / `Cuneo`, e vale anche per `_landing_filtri()`, che è la stessa tendina
 per lo stesso lettore su pagine che si linkano fra loro.
 
-**Costa zero pixel, ed è misurato**: la barra appiccicosa resta **156px** a
-320, 375 e 412px e **68px** a 1280; quella delle pagine di intenzione resta
-**111px**. Il motivo è che sul telefono `.ev-select` è `flex:1 1 auto;
-min-width:0`, quindi le tendine si ridistribuiscono la riga invece di mandarne
-una a capo — «Alessandria» entra in 144px a 320px. **Su `luoghi.html` non si
-tocca senza rimisurare**: lì i filtri sono quattro su due righe, ed è scritto
-apposta che le etichette restano corte perché Chrome dimensiona una `<select>`
-sull'opzione più lunga.
+**Su `luoghi.html` non si tocca senza rimisurare**: lì i filtri sono quattro su
+due righe, ed è scritto apposta che le etichette restano corte perché Chrome
+dimensiona una `<select>` sull'opzione più lunga.
+
+##### CORREZIONE del 12/09/2026: non costava zero pixel, ne costava 47
+
+Qui c'era scritto **«Costa zero pixel, ed è misurato: la barra appiccicosa
+resta 156px a 320, 375 e 412px»**. Il 156 è giusto, ed è il modo esatto in cui
+quella misura inganna: **è stata presa solo dopo.** Prima di quel commit la
+barra stava a **109px**, e la riga che spiegava il perché — «le tendine si
+ridistribuiscono la riga invece di mandarne una a capo» — è il contrario di
+quello che fa il flexbox, che **manda a capo prima di stringere**.
+
+Misurato aprendo i due commit uno accanto all'altro (`0121cba`, il padre, e
+`8b72360`):
+
+| a 412px | tendine | più i due spazi | riga | barra |
+|---|---|---|---|---|
+| prima | 100 + **96** + 147 = 343 | 357 | 372 | **109px** (2 righe) |
+| dopo | 100 + **115** + 147 = 362 | 376 | 372 | **156px** (3 righe) |
+
+«Alessandria» è più lunga di «Prov. AL» e quella tendina passa da 96 a 115px:
+**quattro pixel di sforo**, e la terza tendina scende su una riga sua. Sono
+47px di schermo su **ogni** schermata dello scorrimento, sulle pagine che fanno
+il 77% dei clic.
+
+**Il cambio di parola resta giusto** — è il difetto già chiuso nel footer, e non
+si torna indietro per dei pixel. Quello che era sbagliato è il pareggio sotto:
+il 09/09 quella riga era stata portata a **372px esatti, zero margine**, e due
+giorni dopo una parola l'ha rotta. È la stessa regola che `genera_corsi.py` si
+scrive da solo a proposito del segnaposto della ricerca — *«serve un margine
+vero, non un pareggio»* — applicata alla riga sopra e non imparata.
+
+**A quali telefoni interessa, perché non è "il sito è peggiorato":**
+
+| | 360 | 375 | 390/393 | 400-414 | 420+ |
+|---|---|---|---|---|---|
+| prima | 156 | 156 | 156 | **109** | 109 |
+| oggi | 156 | 156 | 156 | **156** | 109 |
+
+Le due righe non le hanno **mai** avute 360, 375, 390 e 393 — quasi tutti gli
+iPhone e metà degli Android. Si è persa la sola fascia **400-414px** (Pixel,
+iPhone Plus/Max).
+
+**Cosa NON si è fatto, e i numeri per decidere il giorno che si riapre.**
+Misurate tre leve su `eventi.html`:
+
+| leva | tendine | torna a 2 righe da | margine a 412 |
+|---|---|---|---|
+| imbottitura di `.ev-select` 10 → 8px | 350 | 400px | **8px** |
+| `appearance:none` + freccia disegnata | 344 | 390px | 20px |
+| tutte e due | **332** | **375px** | **26px** |
+
+La prima **è da non fare**: 8px di margine è lo stesso pareggio che ci ha messo
+qui. La terza è l'unica che vale — restituisce la fascia persa *e* regala le due
+righe a 375-393, che non le hanno mai avute — ma tocca `.ev-select` nel
+`<style>` di `eventi.html`, cioè **~470 pagine**, ridisegna ogni tendina del
+sito, e **il grosso del guadagno è su iPhone, dove Safari non si può provare da
+qui**. Con l'auto-merge che pubblica in due minuti senza revisione, è una cosa
+da guardare con gli occhi prima, non da spedire alla cieca. Resta aperta con i
+numeri già fatti.
 
 **E le cinque pillole erano un blob.** Ora sono due righe etichettate — «La tua
 provincia» (Alessandria · Asti · Cuneo) e «Cosa cerchi» (oggi, weekend, la
