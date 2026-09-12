@@ -2495,6 +2495,95 @@ def segnala_comuni_simili(events):
             print(f"        {nome} ({prov}): {len(righe)} righe — {dove}")
 
 
+def segnala_doppioni_registro(reg, events):
+    """Le due pagine per un evento solo che il controllo di stasera NON vede.
+
+    PERCHE' ESISTE (12/09/2026). `_doppioni_riscritti()` confronta le righe LETTE
+    OGGI, e va benissimo finche' l'evento e' in programma. Il giorno dopo la
+    pulizia degli scaduti toglie le righe dal foglio e quel controllo **tace
+    esattamente da quando il danno diventa permanente**: le righe spariscono, le
+    due pagine restano online e indicizzate per sempre, a dividersi le
+    impressioni della stessa domanda.
+
+    Non e' teorico. Il 12/09/2026 il registro ne portava quattro, tutte nate in
+    agosto e tutte invisibili da settimane: la Fiera della Patata di Entracque
+    (3.192 impressioni divise fra due pagine, 2.306 al 9,11% contro 886 al
+    4,29%) e le tre serate di Rocchetta Tanaro, «Apertura Stand Gastronomico
+    CON Shary Band» contro «... E Shary Band».
+
+    SEGNALA E BASTA, ed e' la stessa ragione di `_doppioni_riscritti()`: quale
+    delle due URL sopravvive e' una decisione, non un calcolo. Su Entracque l'ha
+    presa il traffico, su Rocchetta il foglio (le perdenti erano state sostituite
+    il 07/08, una settimana prima delle serate). Il timbro `spostata` si mette a
+    mano nel registro, e una scelta sbagliata e' il guasto del Palio.
+
+    PERCHE' NON SI PUO' RIPARARE TIMBRANDO DA SOLI, che e' la prima idea: il
+    ramo che timbra chiede `d_end >= oggi` (vedi `orfano`), quindi una pagina
+    mancata mentre era futura non e' piu' timbrabile dopo. Allargare quella
+    condizione sarebbe molto peggio del problema: dopo la data OGNI evento
+    concluso e' "sparito dal foglio", e si timbrerebbero come ritirate
+    centinaia di pagine sane. La condizione e' giusta, e la rete che manca sta
+    qui.
+
+    Si riportano solo le coppie in cui ALMENO UNA non e' piu' sul foglio: se
+    ci sono tutte e due, la coppia la grida gia' `_doppioni_riscritti()` e due
+    avvisi per la stessa cosa sono un avviso che si impara a saltare.
+
+    Stampa anche `last_seen` e la riga, che non sono decorazione: sono il
+    segnale con cui la coppia si decide senza aprire Search Console - quella
+    sostituita sul foglio smette di essere letta prima dell'altra.
+
+    QUELLO CHE QUESTO CONTROLLO NON PRENDE, e va saputo prima di fidarsene: la
+    soglia e' la stessa del riaggancio (parole in comune sul totale), e la coppia
+    di Entracque - «Aspettando la 28° Fiera della Patata» contro «... 28ª Fiera
+    Patate di Entracque» - fa **0,40**, cioe' resta fuori. Le tre di Rocchetta
+    fanno 1,00 e si prendono tutte.
+
+    Non si abbassa la soglia per farcela entrare. Il motivo e' gia' scritto
+    accanto alle bande di `filtra_doppioni` nel downloader: sotto il 90 non
+    esiste un numero che separi i doppioni veri dagli eventi veri e distinti
+    della stessa sagra, e un avviso che grida sui secondi si impara a saltare -
+    e allora non prende piu' nemmeno i primi.
+
+    La coppia di Entracque, del resto, **era gia' stata presa dalla guardia
+    giusta al momento giusto**: `filtra_doppioni` le da' ~81 punti, cioe' la
+    banda "scrivo ma evidenzio, decide Patrick". Li' non e' mancato un
+    controllo, e' mancata una decisione. I due guardiani sono complementari:
+    quello del downloader vede le somiglianze larghe mentre la riga nasce,
+    questo vede quelle strette dopo che la pagina e' sopravvissuta.
+    """
+    vivi = {slug_evento(e) for e in events}
+    per_giorno = collections.defaultdict(list)
+    for slug, rec in reg.items():
+        if not isinstance(rec, dict) or rec.get('ritirata') or rec.get('spostata'):
+            continue
+        citta = (rec.get('citta') or '').strip().lower()
+        giorno = rec.get('d_start') or ''
+        if citta and giorno:
+            per_giorno[(citta, giorno)].append((slug, rec))
+    coppie = []
+    for (citta, giorno), gruppo in per_giorno.items():
+        for i, (sa, ra) in enumerate(gruppo):
+            for sb, rb in gruppo[i + 1:]:
+                if sa in vivi and sb in vivi:
+                    continue
+                ka, kb = _chiave_nome(ra.get('nome')), _chiave_nome(rb.get('nome'))
+                unione = ka | kb
+                if unione and len(ka & kb) / len(unione) >= SOGLIA_RIAGGANCIO:
+                    coppie.append((giorno, sa, ra, sb, rb))
+    if not coppie:
+        return
+    print(f"[genera_eventi] ATTENZIONE: {len(coppie)} coppie di PAGINE gia' "
+          f"pubblicate sono lo stesso evento scritto in due modi. Le righe non "
+          f"sono piu' sul foglio, quindi si uniscono col timbro 'spostata' in "
+          f"data/pagine-evento.json - sopravvive una URL sola:")
+    for giorno, sa, ra, sb, rb in sorted(coppie):
+        print(f"    {giorno}  {(ra.get('citta') or '')[:20]}")
+        for sl, r in ((sa, ra), (sb, rb)):
+            print(f"      {sl[:58]:60} vista fino al {r.get('last_seen')}, "
+                  f"riga {r.get('riga')}")
+
+
 def segnala_doppioni(events):
     """Elenca gli eventi inseriti piu' volte nel foglio.
 
@@ -9370,6 +9459,7 @@ def main():
                      + [r.get('loc') for r in carica_registro().values()])
     controlla_crollo(events)
     segnala_doppioni(events)
+    segnala_doppioni_registro(carica_registro(), events)
     segnala_sovrapposizioni(events)
     segnala_comuni_simili(events)
     segnala_durate_assurde(events)

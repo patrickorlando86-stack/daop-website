@@ -350,6 +350,20 @@ jobs:
         if: always()
         run: python scripts/prova_riaggancio.py
 
+      - name: Due pagine per un evento solo, dopo la data
+        # Aggiunta il 12/09/2026. Il controllo dei doppioni riscritti guarda le
+        # righe LETTE OGGI: quando l'evento passa, la pulizia degli scaduti
+        # toglie le righe dal foglio e quel controllo tace esattamente da quando
+        # il danno diventa permanente - le righe spariscono, le due pagine
+        # restano indicizzate a dividersi le impressioni. Erano quattro coppie
+        # nate in agosto e invisibili da settimane.
+        #
+        # Questa prova NON conta le coppie di oggi, che sono zero: sarebbe rossa
+        # il giorno che ne entra una, cioe' quando l'avviso fa il suo mestiere.
+        # Prova il comportamento su un registro finto, offline, in due secondi.
+        if: always()
+        run: python scripts/prova_doppioni_registro.py
+
       - name: La scheda spostata e quella ritirata
         # Aggiunte il 02/09/2026, e il motivo e' che ESISTEVANO GIA' senza
         # girare mai: due suite scritte il 30/08 e mai messe qui, cioe' verdi
