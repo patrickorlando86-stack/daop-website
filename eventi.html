@@ -5529,6 +5529,81 @@
   (function () {
     const list = document.getElementById('events-list');
     if (!list) return;
+
+    // Le schede gia' finite escono PRIMA di tutto il resto. L'agenda la scrive
+    // il generatore di notte, ma GitHub fa partire la run programmata con ore
+    // di ritardo (06:45-06:54 UTC a settembre 2026, cioe' verso le 9 in
+    // Italia): da mezzanotte a quell'ora la pagina apriva con gli eventi di
+    // ieri in cima, sotto un "venerdi' 11 settembre" letto di sabato
+    // (segnalato il 12/09/2026).
+    // Si tolgono dal DOM e non con una classe, e stanno qui in testa apposta:
+    // cosi' filtri, contatori, calendario, "vicino a me" e copia-incolla non
+    // le vedono mai, senza doverlo ricordare in ognuno di loro.
+    // Un evento cominciato prima di oggi e non ancora finito resta, e passa
+    // sotto "Gia' iniziati, ancora in corso": e' dove l'avrebbe messo il
+    // generatore, e nello stesso ordine (inizio, poi nome), perche' i gruppi
+    // passati arrivano gia' in ordine di data.
+    // Se sparirebbe TUTTO non si toglie niente: e' un orologio sbagliato o un
+    // generatore fermo da settimane, e una pagina vuota non aiuta nessuno.
+    (function togliFiniti() {
+      const d = new Date();
+      const oggi = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
+                   '-' + String(d.getDate()).padStart(2, '0');
+      const tutte = list.querySelectorAll('.event-card');
+      const finite = Array.from(tutte).filter(c => c.dataset.end && c.dataset.end < oggi);
+      if (!finite.length || finite.length === tutte.length) return;
+      finite.forEach(c => c.remove());
+      let corso = list.querySelector('.ev-day[data-day="in-corso"]');
+      list.querySelectorAll('.ev-day').forEach(g => {
+        if (g === corso || g.dataset.day >= oggi) return;
+        const resto = g.querySelectorAll('.event-card');
+        if (resto.length) {
+          if (!corso) {
+            corso = document.createElement('section');
+            corso.className = 'ev-day';
+            corso.dataset.day = 'in-corso';
+            corso.innerHTML = '<h3 class="ev-dayhead"><span class="ev-dayname">Già iniziati, ancora in corso</span>' +
+                              '<span class="ev-daycount"></span></h3>';
+          }
+          resto.forEach(c => corso.appendChild(c));
+        }
+        g.remove();
+      });
+      if (!corso) return;
+      const n = corso.querySelectorAll('.event-card').length;
+      if (!n) { corso.remove(); return; }
+      corso.querySelector('.ev-daycount').textContent = n;
+      // Una scheda cominciata ieri e' scritta come una che comincia quel
+      // giorno: le si da' quello che riga() stampa su una riga gia' iniziata -
+      // la classe, la pillola "In corso" dopo quella del Consigliato, e
+      // "ultimo giorno" al posto di "fino al" se finisce oggi. Su quelle che
+      // erano gia' in corso stanotte la pillola c'e', e non si raddoppia.
+      corso.querySelectorAll('.event-card').forEach(c => {
+        c.classList.add('is-ongoing');
+        const tags = c.querySelector('.ev-tags');
+        if (tags && !tags.querySelector('.is-live')) {
+          const pill = document.createElement('span');
+          pill.className = 'ev-pill is-live';
+          pill.textContent = 'In corso';
+          const dopo = tags.querySelector('.is-daop') || tags.querySelector('.is-cat');
+          if (dopo) dopo.after(pill); else tags.prepend(pill);
+        }
+        const riga = c.querySelector('.ev-line');
+        if (riga && c.dataset.end === oggi) {
+          // bits[0] e' sempre il comune: il periodo, quando c'e', e' il secondo.
+          const bits = riga.textContent.split(' · ');
+          if (bits[1] && bits[1].startsWith('fino al ')) {
+            bits[1] = 'ultimo giorno';
+            riga.textContent = bits.join(' · ');
+          }
+        }
+      });
+      // Il generatore apre l'agenda col giorno piu' vicino e mette "in corso"
+      // subito dopo: tolto il giorno di ieri, "in corso" sarebbe salito in cima.
+      const primo = list.querySelector('.ev-day:not([data-day="in-corso"])');
+      if (primo) primo.after(corso); else list.prepend(corso);
+    })();
+
     const q = document.getElementById('ev-q');
     const sel = {
       date: document.getElementById('f-quando'),

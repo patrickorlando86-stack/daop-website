@@ -5174,6 +5174,58 @@ L'app Android non ha questo problema: `daop-mobile/app.js` **clona** gli eventi
 brevi su ogni loro giorno invece di raggrupparli per inizio, e i lunghi li mette
 nei gruppi "Vieni quando vuoi" / "Solo in certi giorni".
 
+#### La mattina dopo, gli eventi di ieri li toglie la pagina
+
+Fatto il 12/09/2026, da una domanda di Patrick: «perché nella lista vedo gli
+eventi di ieri?». **Non era un dato sbagliato, era l'orario.** Il workflow è
+programmato alle 02:00 UTC, ma GitHub fa partire le run programmate con ore di
+ritardo: a settembre 2026 **fra le 06:45 e le 06:54 UTC**, cioè verso le 9 in
+Italia. Da mezzanotte a quell'ora `eventi.html` è quella di ieri e apriva con
+«venerdì 11 settembre» letto di sabato — **tutte le mattine**, cioè proprio
+quando si decide cosa fare nel weekend. Il JS rifaceva già «Oggi» e «Domani»
+(`etichette()`), ma nessuno toglieva le righe: `finestra()` filtra solo con un
+periodo scelto, e «Tutte le date» è quello di partenza.
+
+`togliFiniti()`, in testa all'IIFE dell'agenda, toglie **dal DOM** le schede con
+`data-end` prima di oggi (data locale del browser). Le decisioni:
+
+- **Dal DOM e non con una classe, e prima di `const cards`.** Così filtri,
+  contatori, calendario, «vicino a me» (che ricava il catalogo dalle righe) e
+  copia-incolla non le vedono mai, senza doverlo ricordare in ognuno. Una
+  classe `is-passato` sarebbe una condizione in più da rispettare in sette
+  posti, e il primo che la dimentica le rimette in pagina.
+- **Chi è cominciato ieri e continua non sparisce: passa sotto «Già iniziati,
+  ancora in corso»**, in coda, che è l'ordine del generatore (inizio, poi
+  nome). Il gruppo si sposta dopo il giorno più vicino, dove lo mette
+  `render()`; se non c'era si crea. E le righe ci arrivano **vestite come
+  quelle che il generatore ci ha messo**: classe `is-ongoing`, pillola «In
+  corso» dopo quella del Consigliato, e «ultimo giorno» al posto di «fino al …»
+  se finiscono oggi — se no nello stesso gruppo convivono due specie di righe
+  per la stessa cosa.
+- **Se sparirebbe tutto, non si toglie niente.** È un orologio sbagliato o un
+  generatore fermo da settimane, e una pagina vuota non aiuta nessuno.
+- **Costa zero quando la pagina è fresca**: nessuna scheda finita, la funzione
+  esce al primo controllo. Quando lavora tocca poche decine di nodi, prima del
+  primo disegno, quindi non forza layout.
+- **Un'ancora `#ev-…` a un evento finito atterra in cima.** `apriDaHash()` non
+  trova la scheda ed esce: l'evento è passato, la sua scheda in `/eventi/`
+  esiste ancora.
+
+**Resta fuori, apposta:** le pagine di intenzione e le pagine comune hanno lo
+stesso buco nella stessa fascia oraria, ma il loro JS lo scrive il generatore
+(`LANDING_JS`) e non è stato toccato. Se torna la stessa domanda su
+`/eventi/oggi.html`, il posto è quello.
+
+`tests/agenda.js` («letta il giorno dopo») sposta l'orologio della pagina al
+giorno dopo la fine più vicina, cioè al primo giorno in cui qualche riga è
+finita, e controlla **rapporti e non conteggi**: nessuna scheda finita resta,
+nessuna viva sparisce (confronto con l'HTML su disco), nessun gruppo intitolato
+a un giorno passato, ogni scheda nel gruppo giusto, «Già iniziati» subito dopo
+il giorno più vicino e in ordine, ogni intestazione conta quello che ha sotto,
+«Oggi» solo su oggi, «In corso» e «ultimo giorno» su tutte e sole le righe
+giuste. Più il verso opposto: con l'orologio dopo l'ultima fine la
+pagina non si svuota.
+
 ### L'età non si ripete nelle descrizioni
 
 La fascia d'età è già nella riga `Età:` dei dati della scheda e in ogni riga

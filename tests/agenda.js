@@ -481,5 +481,111 @@ module.exports = async function agenda(browser) {
   r.ok(dopo.utm === 'prova', "gli utm_* di chi arriva da una campagna restano nell'URL");
   await ctx.close();
 
+  // ── letta il giorno dopo ──────────────────────────────────────────────
+  // L'agenda la scrive il generatore di notte, ma la run parte con ore di
+  // ritardo: la mattina dopo la pagina contiene ancora gli eventi finiti ieri,
+  // e apriva con "venerdi' 11 settembre" letto di sabato (12/09/2026). Si
+  // simula quella mattina spostando l'orologio della pagina al giorno dopo la
+  // fine piu' vicina, cioe' il primo giorno in cui qualche riga e' finita.
+  // Nessun conteggio: si controllano rapporti fra il file e la pagina.
+  r.titolo('eventi.html — letta il giorno dopo');
+  const fs = require('fs');
+  const path = require('path');
+  const { RADICE } = require('./_aiuto');
+  const html = fs.readFileSync(path.join(RADICE, 'eventi.html'), 'utf8');
+  const nelFile = [...html.matchAll(
+    // La classe puo' portare altro dietro: "event-card is-ongoing" sono proprio
+    // le righe gia' iniziate, cioe' quelle che togliFiniti() tocca.
+    /<article class="event-card[^"]*" id="([^"]+)"[^>]*? data-start="([^"]+)" data-end="([^"]+)"/g)]
+    .map((m) => ({ id: m[1], start: m[2], end: m[3] }));
+  const piuUno = (iso) => {
+    const t = new Date(iso + 'T12:00:00Z');
+    t.setUTCDate(t.getUTCDate() + 1);
+    return t.toISOString().slice(0, 10);
+  };
+  // L'orologio finto: parte dalle 10 del giorno scelto e poi scorre.
+  const orologio = (iso) => `(() => {
+    const D = Date, base = new D('${iso}T10:00:00').getTime(), t0 = D.now();
+    class Finto extends D {
+      constructor(...a) { if (a.length) super(...a); else super(base + D.now() - t0); }
+      static now() { return base + D.now() - t0; }
+    }
+    window.Date = Finto;
+  })();`;
+  const domani = piuUno(nelFile.map((x) => x.end).sort()[0]);
+
+  ({ ctx, page } = await apri(browser, 'eventi.html', 412, orologio(domani)));
+  const st = await page.evaluate(() => {
+    const d = new Date();
+    return {
+      oggi: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
+            '-' + String(d.getDate()).padStart(2, '0'),
+      contatore: document.getElementById('events-count').textContent,
+      gruppi: Array.from(document.querySelectorAll('#events-list > .ev-day')).map((g) => ({
+        giorno: g.dataset.day,
+        nome: (g.querySelector('.ev-dayname') || {}).textContent || '',
+        conta: (g.querySelector('.ev-daycount') || {}).textContent || '',
+        schede: Array.from(g.querySelectorAll('.event-card'))
+          .map((c) => ({ id: c.id, start: c.dataset.start, end: c.dataset.end })),
+      })),
+    };
+  });
+  r.ok(st.oggi === domani, `l'orologio della pagina segna ${st.oggi} (atteso ${domani})`);
+  const inPagina = st.gruppi.flatMap((g) => g.schede);
+  const finite = inPagina.filter((c) => c.end < domani);
+  r.ok(finite.length === 0, finite.length
+    ? `${finite.length} schede gia' finite restano in agenda: ${finite.slice(0, 3).map((c) => c.id).join(', ')}`
+    : 'nessuna scheda finita prima di oggi resta in agenda');
+  const ids = new Set(inPagina.map((c) => c.id));
+  const perse = nelFile.filter((x) => x.end >= domani && !ids.has(x.id));
+  r.ok(perse.length === 0, perse.length
+    ? `${perse.length} schede ancora vive sparite: ${perse.slice(0, 3).map((x) => x.id).join(', ')}`
+    : `tutte le schede ancora vive restano (${ids.size})`);
+  r.ok(st.gruppi.every((g) => g.giorno === 'in-corso' || g.giorno >= domani),
+    'nessun gruppo intitolato a un giorno passato');
+  r.ok(st.gruppi.every((g) => g.giorno === 'in-corso'
+    ? g.schede.every((c) => c.start < domani)
+    : g.schede.every((c) => c.start === g.giorno)),
+  'ogni scheda sta nel gruppo giusto: il suo giorno d\'inizio, o "gia\' iniziati"');
+  const corso = st.gruppi.findIndex((g) => g.giorno === 'in-corso');
+  const datati = st.gruppi.some((g) => g.giorno !== 'in-corso');
+  r.ok(corso === -1 || corso === (datati ? 1 : 0),
+    `"gia' iniziati" subito dopo il giorno piu' vicino, come lo mette il generatore (posizione ${corso})`);
+  if (corso !== -1) {
+    const inizi = st.gruppi[corso].schede.map((c) => c.start);
+    r.ok(inizi.every((s, i) => i === 0 || inizi[i - 1] <= s),
+      '"gia\' iniziati" resta in ordine di inizio');
+  }
+  r.ok(st.gruppi.every((g) => g.conta === String(g.schede.length)),
+    'ogni intestazione conta le schede che ha sotto');
+  r.ok(st.gruppi.every((g) => /^Oggi · /.test(g.nome) === (g.giorno === domani)),
+    '"Oggi" sta solo sul gruppo di oggi');
+  r.ok(st.contatore.startsWith(ids.size + ' '), `il contatore dice ${st.contatore.trim()}`);
+  // Una riga passata sotto "gia' iniziati" deve dirlo come quelle che il
+  // generatore ci ha messo stanotte, se no in quel gruppo convivono due
+  // specie di righe per la stessa cosa.
+  const segni = await page.$$eval('#events-list .event-card', (cs) => cs.map((c) => ({
+    corso: c.closest('.ev-day').dataset.day === 'in-corso',
+    classe: c.classList.contains('is-ongoing'),
+    pillole: c.querySelectorAll('.ev-pill.is-live').length,
+    riga: (c.querySelector('.ev-line') || {}).textContent || '',
+    end: c.dataset.end,
+  })));
+  r.ok(segni.every((s) => s.classe === s.corso && s.pillole === (s.corso ? 1 : 0)),
+    '"In corso" (classe e una pillola) su tutte e sole le righe gia\' iniziate');
+  r.ok(segni.filter((s) => s.corso).every((s) =>
+    (s.end === domani) === s.riga.split(' · ').includes('ultimo giorno')),
+  '"ultimo giorno" su tutte e sole le righe gia\' iniziate che finiscono oggi');
+  await ctx.close();
+
+  // Se l'orologio dice che e' finito tutto, non si toglie niente: e' un
+  // orologio sbagliato, e una pagina vuota non aiuta nessuno.
+  const dopoTutto = piuUno(nelFile.map((x) => x.end).sort().pop());
+  ({ ctx, page } = await apri(browser, 'eventi.html', 412, orologio(dopoTutto)));
+  const restano = await page.locator('#events-list .event-card').count();
+  r.ok(restano === nelFile.length,
+    `con tutto finito (orologio al ${dopoTutto}) la pagina non si svuota: ${restano}/${nelFile.length}`);
+  await ctx.close();
+
   return r;
 };
