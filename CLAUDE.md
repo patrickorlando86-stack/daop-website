@@ -4205,17 +4205,64 @@ sola per tutte e tre. Su Entracque, dove quel segnale non c'era (tutte e due
 arrivate a fine corsa), ha deciso il traffico: 2.306 impressioni al 9,11% in
 posizione 5,28 contro 886 al 4,29%.
 
-**Il buco vero però resta aperto, ed è più importante delle quattro coppie.**
-`_doppioni_riscritti()` confronta le **righe lette oggi**: quando l'evento passa
-la pulizia degli scaduti toglie le righe dal foglio e il controllo **tace
-esattamente da quando il danno diventa permanente** — le righe spariscono, le
-due pagine restano indicizzate per sempre. Lo stesso confronto passato sul
-**registro** invece che sulle righe vive le trova tutte in un secondo (4 la
-mattina del 12/09, 0 dopo). E c'è una seconda domanda senza risposta: quelle
-tre pagine erano **orfane e future per nove giorni**, cioè il caso che
-`_erede()`/`ritirata` copre, e nessuno le ha timbrate. L'ipotesi comoda — la
-guardia `sano` rotta fino al 07/09 — non regge: in agosto 19 pagine sono state
-timbrate `ritirata`, quindi il meccanismo girava.
+##### Il buco che le aveva lasciate passare: `segnala_doppioni_registro()`
+
+Chiuso lo stesso giorno, ed erano **due buchi con una cura sola**.
+
+**Il primo.** `_doppioni_riscritti()` confronta le **righe lette oggi**: quando
+l'evento passa, la pulizia degli scaduti toglie le righe dal foglio e quel
+controllo **tace esattamente da quando il danno diventa permanente** — le righe
+spariscono, le due pagine restano indicizzate per sempre a dividersi le
+impressioni. Le quattro coppie erano nate in agosto ed erano invisibili da
+settimane.
+
+**Il secondo.** Le tre pagine di Rocchetta erano **orfane e future per nove
+giorni** (sparite dal foglio il 07/08, serate il 14-16), cioè il caso esatto che
+`_erede()`/`ritirata` copre, e nessuno le ha timbrate. Perché: **il primo timbro
+`ritirata` di tutto il registro è del 18/08**, cioè tutta la loro finestra sta
+prima che quel meccanismo timbrasse alcunché. (L'ipotesi comoda — la guardia
+`sano` rotta fino al 07/09 — non regge: in agosto 19 pagine *sono* state
+timbrate.)
+
+**E il secondo buco non si chiude timbrando**, che è la prima idea che viene:
+il ramo che timbra chiede `d_end >= oggi`, quindi una pagina mancata mentre era
+futura non è più timbrabile dopo. Allargare quella condizione sarebbe molto
+peggio del problema — passata la data **ogni** evento concluso è "sparito dal
+foglio", e si timbrerebbero come ritirate centinaia di pagine sane. La
+condizione è giusta; quello che mancava è una rete a valle.
+
+Quindi `segnala_doppioni_registro(reg, events)`, che gira ogni notte accanto
+agli altri segnalatori e **segnala e basta** — quale URL sopravvive è una
+decisione, non un calcolo, e un rimando sbagliato è il guasto del Palio. Due
+dettagli che non si ricavano dal diff:
+
+- **Riporta solo le coppie in cui almeno una non è più sul foglio.** Se ci sono
+  tutte e due, la coppia la grida già `_doppioni_riscritti()`, e due avvisi per
+  la stessa cosa sono un avviso che si impara a saltare.
+- **Stampa `last_seen` e la riga**, che non sono decorazione: sono il segnale
+  con cui la coppia si decide *senza* aprire Search Console. È così che si sono
+  risolte le tre di Rocchetta — le perdenti hanno `last_seen` 07/08 e `riga:
+  None`, cioè erano state sostituite sul foglio una settimana prima delle serate.
+
+**Cosa NON prende, e va saputo prima di fidarsene.** La soglia è quella del
+riaggancio, e la coppia di Entracque fa **0,40** (condividono «aspettando» e
+«fiera», non «patata»/«patate»/«entracque»): resta fuori. Le tre di Rocchetta
+fanno **1,00**. La soglia non si abbassa — sotto il 90 non esiste un numero che
+separi i doppioni veri dalle serate diverse della stessa sagra, ed è già scritto
+accanto alle bande di `filtra_doppioni`. Del resto Entracque **era già stata
+presa dalla guardia giusta al momento giusto**: ~81 punti in banda «scrivo ma
+evidenzio, decide Patrick». Lì non è mancato un controllo, è mancata una
+decisione. I due guardiani sono complementari: quello del downloader vede le
+somiglianze larghe mentre la riga nasce, questo le strette dopo che la pagina è
+sopravvissuta.
+
+`scripts/prova_doppioni_registro.py` difende nove casi e **nessuno è un
+conteggio** — «zero coppie» sarebbe rosso il giorno che ne entra una, cioè
+quando l'avviso fa il suo mestiere. Il nono difende un **no**: se qualcuno
+abbassa la soglia, Entracque entra e la prova diventa rossa ricordandogli il
+patto. Verificate rosse rimettendo tre difetti uno alla volta, e il controllo è
+stato provato anche **sui dati veri**, togliendo i timbri in memoria: ritrova le
+tre di Rocchetta con le due date accanto.
 
 `segnala_doppioni()` non le vedeva, e per una ragione precisa: **confronta lo
 slug esatto**, cioè riconosce la riga *copiata* e non la riga *riletta*. Ora
@@ -6516,6 +6563,7 @@ python3 scripts/valida_jsonld.py                    # dati strutturati
 python3 scripts/valida_pdf.py                       # le guide in PDF
 python3 scripts/prova_riaggancio.py                 # l'edizione dell'anno prossimo
 python3 scripts/prova_spostata.py                   # un rimando non porta altrove
+python3 scripts/prova_doppioni_registro.py          # due pagine per un evento solo
 python3 scripts/prova_ritirata.py                   # un evento sparito non mente
 python3 scripts/prova_comuni_simili.py              # due grafie, un paese solo
 python3 scripts/prova_credito_foto.py               # il credito sotto la foto
