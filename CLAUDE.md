@@ -5445,6 +5445,36 @@ promesso dalla riga sia quello che la scheda consegna** — se no la riga mente 
 una pagina che chi legge non ha ancora aperto. Verificate rosse tutte e tre
 rimettendo i difetti, non supposte.
 
+#### Un regex che pretende la virgoletta attaccata è cieco sulle righe in corso
+
+Rosso in CI il 13/09/2026, e **il difetto era nella prova**: il sito non ha mai
+sbagliato niente. La prova delle date di una serie diceva che la scheda di
+«Vendemmia in Vigna con i Bambini» elencava un 12 settembre che l'agenda non
+aveva, e che in cima c'era una data passata. In agenda quella card **c'è**: è la
+riga 12→13, cioè cominciata ieri e **ancora in corso oggi**, e sta nel gruppo
+«Già iniziati, ancora in corso». La scheda fa bene a elencarla — l'evento oggi
+c'è — e `serie_di()` la tiene perché filtra su `d_end >= oggi`, non su `d_start`.
+
+Il regex chiedeva `class="event-card"` **con la virgoletta attaccata**, e una
+riga in corso è `class="event-card is-ongoing"`: non la vedeva. Quindi non era
+una prova che sbagliava a volte, era una prova **cieca su un lato intero** —
+lato che si accende solo nei giorni in cui una serie ha una data in corso, cioè
+raramente e a sorpresa.
+
+**La cosa da ricordare è che questo inciampo era già stato pagato e scritto**:
+`tests/agenda.js` porta il commento «la classe puo' portare altro dietro» sopra
+il suo `[^"]*`, e nello stesso `scheda.js` il regex `RIGA`, venti righe più su,
+usa già `event-card[^>]*`. Solo il `CARD`, scritto dopo, non ha ricevuto quel
+trattamento — è la stessa forma del meccanismo delle icone che aspettava un file
+che nessuno aveva il compito di consegnare: **la lezione c'era, non è arrivata
+al pezzo nuovo.** Quando si scrive un regex sull'HTML dell'agenda, la classe non
+è mai sola.
+
+**Verificata rossa dopo la correzione**, togliendo una data dall'elenco della
+scheda: dice «la scheda dice 2026-09-12 2026-09-19 …, l'agenda 2026-09-12
+2026-09-13 …», cioè adesso conta cinque date dove prima ne vedeva quattro. Una
+prova resa verde e basta sarebbe stata il vero danno.
+
 ### I filtri solo dove si guadagnano il posto
 
 `MIN_FILTRI = 12`: sotto quel numero di eventi si scorre prima la lista che a
