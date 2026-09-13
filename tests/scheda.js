@@ -243,7 +243,11 @@ module.exports = async function scheda(browser) {
   // l'agenda della stessa run e non con un numero: «9 date» sarebbe rosso il
   // primo sabato che passa, cioe' quando il sito fa la cosa giusta.
   r.titolo('eventi/*.html — le date di una serie');
-  const CARD = /<article class="event-card"[^>]*data-start="([\d-]+)"[\s\S]*?<\/article>/g;
+  // La classe puo' portare altro dietro ("event-card is-ongoing"): pretendere la
+  // virgoletta attaccata lascia fuori proprio le righe gia' iniziate e ancora in
+  // corso, cioe' il gruppo "Gia' iniziati". La scheda quelle date le elenca —
+  // l'evento oggi c'e' ancora — quindi l'agenda sembrava averne una di meno.
+  const CARD = /<article class="event-card[^"]*"[^>]*data-start="([\d-]+)"[\s\S]*?<\/article>/g;
   const VERSO = /href="\/eventi\/([^"#]+)\.html"><svg[^>]*><use href="#i-arrow-right"\/><\/svg> Scheda completa/;
   const ELENCO = /<ul class="ev-date-l">([\s\S]*?)<\/ul>/;
   const inAgenda = new Map();
