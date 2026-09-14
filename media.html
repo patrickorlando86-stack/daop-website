@@ -5,6 +5,7 @@
 <!-- Consenso cookie + Google Analytics (caricato solo dopo consenso) -->
 <script src="assets/js/cookie-consent.js"></script>
 <script src="assets/js/daop-track.js" defer></script>
+<script src="assets/js/locandina.js" defer></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DAOP nei Media – Stampa, Radio e Collaborazioni | DAOP</title>
@@ -127,6 +128,10 @@
   .press-text p{font-size:0.88rem;color:var(--text-mid);line-height:1.6;margin:0}
   .press-photo{flex-shrink:0;width:120px;height:90px;border-radius:var(--radius-sm);overflow:hidden;align-self:center;margin-right:4px}
   .press-photo img{width:100%;height:100%;object-fit:cover}
+  /* L'articolo si ingrandisce sopra la pagina con locandina.js (a[data-locandina]).
+     La lente compare solo se lo script e' partito e ha messo data-lb. */
+  .press-photo a{display:block;width:100%;height:100%}
+  .press-photo a[data-lb]{cursor:zoom-in}
   @media(max-width:600px){.press-photo{display:none}}
 
   /* ── RADIO CARD ── */
@@ -305,7 +310,7 @@
             <p>Il progetto DAOP raccontato dalla Gazzetta d'Asti, con focus sull'espansione nella provincia di Asti grazie al lavoro di Alessandra Zaccone.</p>
           </div>
           <div class="press-photo">
-            <img src="assets/images/media1.webp" alt="Articolo Gazzetta d'Asti" loading="lazy" width="687" height="863">
+            <a href="assets/images/media1.webp" data-locandina><img src="assets/images/media1.webp" alt="Articolo Gazzetta d'Asti" loading="lazy" width="687" height="863"></a>
           </div>
         </div>
       </div>
@@ -322,7 +327,7 @@
             <p>La Voce di Asti racconta Patrick Orlando e la nascita di una piattaforma che unisce genitori e territori della provincia.</p>
           </div>
           <div class="press-photo">
-            <img src="assets/images/media2.webp" alt="Articolo La Voce di Asti" loading="lazy" width="818" height="695">
+            <a href="assets/images/media2.webp" data-locandina><img src="assets/images/media2.webp" alt="Articolo La Voce di Asti" loading="lazy" width="818" height="695"></a>
           </div>
         </div>
       </div>
@@ -339,7 +344,7 @@
             <p>DAOP in prima pagina sul Novese. Quello che era nato come un'idea per trovare attività da fare con i figli si è trasformato in qualcosa di più grande.</p>
           </div>
           <div class="press-photo">
-            <img src="assets/images/media3.webp" alt="Articolo Il Novese" loading="lazy" width="857" height="862">
+            <a href="assets/images/media3.webp" data-locandina><img src="assets/images/media3.webp" alt="Articolo Il Novese" loading="lazy" width="857" height="862"></a>
           </div>
         </div>
       </div>
@@ -356,7 +361,7 @@
             <p>Articolo dedicato a "Il Piatto Sano", l'app educativa sviluppata con la nutrizionista Serafina Cardaci nell'ambito del progetto S.A.N.E. Italia.</p>
           </div>
           <div class="press-photo">
-            <img src="assets/images/SANE1.webp" alt="Articolo Il Novese – Il Piatto Sano" loading="lazy" width="696" height="842">
+            <a href="assets/images/SANE1.webp" data-locandina><img src="assets/images/SANE1.webp" alt="Articolo Il Novese – Il Piatto Sano" loading="lazy" width="696" height="842"></a>
           </div>
         </div>
       </div>
@@ -387,7 +392,7 @@
             <p>L'intervista di Cristiana Luongo a Patrick Orlando: Ginetto è l'assistente digitale basato sull'Intelligenza Artificiale che aiuta le famiglie a scoprire cosa fare con i bambini nel weekend in provincia di Alessandria e Asti, conoscendo il territorio.</p>
           </div>
           <div class="press-photo">
-            <img src="assets/images/media-ginetto-gazzetta.webp" alt="Articolo Gazzetta d'Asti – Che fare nel weekend? Ci pensa Ginetto" loading="lazy" width="1080" height="1271">
+            <a href="assets/images/media-ginetto-gazzetta.webp" data-locandina><img src="assets/images/media-ginetto-gazzetta.webp" alt="Articolo Gazzetta d'Asti – Che fare nel weekend? Ci pensa Ginetto" loading="lazy" width="1080" height="1271"></a>
           </div>
         </div>
       </div>
