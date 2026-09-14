@@ -457,6 +457,100 @@ sul comportamento di luglio non ha risposta, e non è un problema di query.
 Nei report compaiono dopo 24-48 ore dalla creazione; in DebugView subito, ed è
 così che si verifica di aver scritto bene un nome senza aspettare due giorni.
 
+#### I blocchi misurati e il ponte verso i corsi — 14/09/2026
+
+Nati dall'analisi di Giovanni del 14/09 («Analisi Ecosistema DAOP», fatta col
+suo ChatGPT sugli export GA4 e Search Console). La domanda era giusta: le
+schede evento fanno il 77% dei clic, e **non si sapeva quanti poi arrivano
+altrove, né da quale blocco**. Il `page_view` dice da quale *pagina* si arriva,
+non da quale *blocco*, e non dice quante volte quel blocco è stato visto.
+
+**Due eventi, solo sui blocchi marcati `data-cta`.** `internal_cta_view` parte
+una volta per pagina quando il blocco è a schermo (metà del blocco, o il 40%
+dello schermo per un blocco più alto); `internal_cta_click` sui link *interni*
+dentro il blocco. I nomi sono quelli proposti da Giovanni, apposta: i report li
+legge lui. I link che escono dal sito tengono il loro evento (`apri_ginetto`,
+`click_sponsorizzato`) e ricevono in più `cta_id`. Fuori dai blocchi marcati la
+navigazione interna **resta affidata ai `page_view`**, come prima.
+
+| blocco | `cta_id` | dove |
+|---|---|---|
+| «Altri eventi vicino a X» + la sua coda | `vicini` | ~565 schede |
+| Ginetto (in cima o in fondo) | `ginetto` | ~610 pagine |
+| «Organizzatore: I corsi di X» | `organizzatore` | le schede con una realtà |
+
+Parametri: `cta_id`, `destination_url` (c'era già), **`destination_area`**
+(`evento` la scheda singola, `eventi` gli elenchi, `corsi`, `luoghi`, `centri`,
+`ginetto`, `altro`) più i soliti `event_city`/`event_province`. **`cta_id` e
+`destination_area` vanno registrate in GA4** come dimensioni con ambito Evento:
+non sono retroattive, e rispondono dal giorno in cui si creano.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Senza consenso la vista non si manda e non si segna.** Il blocco resta
+  osservato e si riprova al passaggio dopo: segnarlo lo stesso vorrebbe dire
+  contare i clic di chi accetta il banner senza la loro vista.
+- **Un blocco, non un link.** Quale link dentro il blocco lo dice
+  `destination_area`; un `cta_id` per link sarebbe una dimensione che cresce
+  coi dati.
+- **La vista sostituisce una stima.** `apri_ginetto` si leggeva contro la
+  soglia di scroll a cui il blocco era stato misurato a mano; adesso ha il suo
+  denominatore.
+
+**Il ponte: «N corsi per bambini a X» in coda alle schede** (`link_corsi()`),
+dopo i luoghi e prima della provincia. Il numero è quello che la pagina
+consegna: il link porta a `corsi.html?comune=<slug>#co-lista`, e il JS di
+`corsi.html` accende la tendina Comune su quel valore (un valore che non c'è
+apre la pagina intera; l'indirizzo non si riscrive, gli utm restano). Sotto
+`MIN_CORSI_COMUNE` (3) la riga parla della provincia, **solo finché tutti i
+corsi del sito stanno lì** — `corsi.html` non ha un filtro per provincia, e il
+giorno che entra un corso di Asti la riga smette da sola di promettere un numero
+sbagliato. Niente link con `CORSI_IN_INDICE` spento. Al 14/09 sono **227
+schede**, tutte in provincia di Cuneo: sulle altre non c'è niente da linkare.
+
+Il patto è un file, `data/corsi-comuni.json`, scritto da `genera_corsi.py` e
+letto da `genera_eventi.py` **al giro dopo** (stesso ritardo di
+`realta-pagine.json`, ed è nell'elenco del workflow). Segue `DIR_REALTA` come il
+registro delle realtà, così `prova_corsi.py` non scrive corsi finti nei link
+veri.
+
+**Cosa dell'analisi NON era vero, perché non lo si rincorra:**
+
+- *«`apri_corso` scatta sulla pagina del corso, forse più volte».* No:
+  `/corsi/<slug>.html` è la pagina della **società**, con l'elenco dei suoi
+  corsi da aprire. L'evento parte solo all'apertura, con l'antirimbalzo.
+- *«Meta 120 arrivi contro 28 sessioni GA4: controllare gli UTM».* Gli UTM
+  arrivano (`corsi.html` non riscrive l'indirizzo, `page_location` porta la
+  querystring). Sul sito non c'è un pixel Meta, e GA4 conta solo chi accetta i
+  cookie — nel browser interno di Instagram e Facebook il banner compare ogni
+  volta.
+- *«7.217 clic Search Console contro 3.474 sessioni: controllo tecnico».* È il
+  banner: vedi «Il buco è chiuso».
+- *«Ginetto: 7 sessioni».* Ginetto sta su `ginettoapp.it`; si conta con
+  `apri_ginetto`, non con le visite a `ginetto.html`.
+- *«Corsi e Luoghi hanno più engagement degli eventi».* `corsi.html` fa 2,8
+  pagine per utente: sopra 2,5 sei tu (vedi sotto), e dal 10/09 dentro c'è anche
+  il traffico a pagamento.
+- *«Il 3% di 2.814 ingressi sulle schede fa 84 visite ai corsi».* I corsi sono
+  tutti in provincia di Cuneo, e le schede cuneesi fanno ~17% dei clic: la base
+  vera è ~480, e il 3% sono ~15.
+
+**Un blocco nuovo alla volta.** Giovanni proponeva tre inviti sulla scheda —
+altri eventi subito dopo le informazioni, i corsi a metà, Ginetto in fondo. Qui
+se n'è fatto uno, dentro un blocco che c'era già, e la misura parte insieme:
+cambiando tre cose nello stesso giorno non si saprebbe quale ha mosso il numero.
+Portare «altri eventi» più in alto è il candidato successivo, ed è un servizio,
+non una richiesta.
+
+`tests/cta.js` difende tre cose e **nessun conteggio**: i blocchi portano
+`data-cta`; `?comune=` accende la tendina, lascia solo le card di quel comune e
+atterra sull'elenco; vista e clic arrivano a `gtag` coi parametri giusti, la
+vista una volta sola e mai prima del consenso. Il numero scritto sulle schede
+contro `corsi.html` è una **nota**, non una prova: viene dall'indice della notte
+prima, ed è la prova delle quattro porte già pagata. Verificate rosse rimettendo
+tre difetti uno alla volta (preset tolto, consenso ignorato, `data-cta` tolto da
+una scheda).
+
 #### Sopra 2,5 visualizzazioni per utente, stai guardando te stesso
 
 Nel primo export GA4 delle pagine `luoghi.html` risultava con 41 visualizzazioni,
@@ -6697,8 +6791,9 @@ calendario ricostruito al volo, filtri, ricerca, stato vuoto, ancore `#ev-` e
 file veri appena generati: non c'è un ambiente di prova. In un ambiente che ha
 già un Chromium, `CHROMIUM_PATH=/percorso/chrome npm test` evita lo scaricamento.
 
-Le suite sono nove, in `tests/run.js`: `agenda`, `landing`, `scheda`, `luoghi`,
-`corsi`, `porte`, `guide`, `sitemap`, `social`. Al 05/09/2026 sono **496 prove**.
+Le suite sono dieci, in `tests/run.js`: `agenda`, `landing`, `scheda`, `luoghi`,
+`corsi`, `porte`, `guide`, `sitemap`, `social`, `cta`. Al 14/09/2026 sono **525
+prove**.
 `sitemap.js` è l'unica che non apre il browser — legge i file e li incrocia con
 `sitemap.xml`, perché quello che difende non si vede su nessuna pagina.
 

@@ -43,6 +43,10 @@ INDICE_LUOGHI_PATH = os.path.join(ROOT, "data", "luoghi-comuni.json")
 # genera_corsi.py, che gira dopo: si legge quello della notte prima. Vedi
 # indice_realta() e link_realta().
 INDICE_REALTA_PATH = os.path.join(ROOT, "data", "realta-pagine.json")
+# Quanti corsi ci sono in ogni comune e in ogni provincia. Lo scrive
+# genera_corsi.py, che gira dopo: si legge quello della notte prima. Vedi
+# link_corsi().
+INDICE_CORSI_PATH = os.path.join(ROOT, "data", "corsi-comuni.json")
 
 # Province i cui eventi vengono pubblicati sul sito. Una sola lista, usata sia dal
 # filtro dei dati sia dal copy che dice "che zona copre DAOP": prima la sigla era
@@ -3201,12 +3205,14 @@ def blocco_ginetto(citta="", alto=False):
         <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di {province_in_elenco(PROVINCE_PUBBLICATE)}: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
       </div>
     </div>"""
+    # data-cta: la vista del blocco e' il denominatore di `apri_ginetto`, che
+    # fino al 14/09/2026 si leggeva contro una soglia di scroll stimata.
     if alto:
-        return f"""<aside class="ev-ginetto-alto">
+        return f"""<aside class="ev-ginetto-alto" data-cta="ginetto">
     {strip}
   </aside>
 """
-    return f"""<section class="bg-cream ev-ginetto">
+    return f"""<section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
     {strip}
   </div>
@@ -3713,7 +3719,78 @@ def link_realta(nome_evento):
     voce = indice_realta().get(slugify(coda))
     if not voce:
         return ''
-    return (f'<a href="{voce["url"]}">I corsi di {esc(voce["nome"])}</a>')
+    return (f'<a href="{voce["url"]}" data-cta="organizzatore">'
+            f'I corsi di {esc(voce["nome"])}</a>')
+
+
+_INDICE_CORSI = None
+
+
+def indice_corsi():
+    """Quanti corsi per comune e per provincia, letti una volta sola.
+
+    Il file lo scrive genera_corsi.py, che gira DOPO questo script: si legge
+    l'indice della notte prima, come data/realta-pagine.json. Se non c'e' il
+    dizionario e' vuoto e link_corsi() non stampa niente."""
+    global _INDICE_CORSI
+    if _INDICE_CORSI is None:
+        try:
+            with open(INDICE_CORSI_PATH, encoding="utf-8") as fh:
+                _INDICE_CORSI = json.load(fh)
+        except (OSError, ValueError):
+            _INDICE_CORSI = {}
+    return _INDICE_CORSI
+
+
+# Sotto questo numero la riga non parla del comune ma della provincia: "Un corso
+# per bambini a Dogliani" e' una ragione per NON toccare, la stessa aritmetica
+# di MIN_CONTEGGIO. Tre e non cinque perche' qui il comune e' quello della
+# scheda, cioe' il posto in cui chi legge sta gia' andando.
+MIN_CORSI_COMUNE = 3
+
+
+def link_corsi(citta, prov):
+    """Il link ai corsi vicino a una scheda evento, o ''.
+
+    Nato il 14/09/2026 dall'analisi di Giovanni. Le schede evento fanno il 77%
+    dei clic del sito e da nessuna si arrivava ai corsi, se non dalle otto che
+    hanno una realta' come organizzatore (link_realta). Chi legge l'orario di
+    una sagra a Moretta e' un genitore di quel posto, a settembre, cioe' nel
+    mese in cui i corsi si scelgono.
+
+    Due gradini, dal piu' vicino al piu' largo:
+      - il COMUNE, se ci sono almeno MIN_CORSI_COMUNE corsi. Il link accende la
+        tendina Comune di corsi.html (?comune=), quindi il numero promesso e'
+        quello che la pagina mostra - e' la regola del rimando al programma.
+      - la PROVINCIA, se tutti i corsi del sito stanno li'. corsi.html non ha
+        un filtro per provincia: il numero regge solo finche' la pagina intera
+        e' di quella provincia. Il giorno che entra un corso di Asti suona
+        CORSI_ZONA_ATTESA in genera_corsi.py, e questa riga smette da sola di
+        promettere un numero sbagliato - si decide li' cosa farne.
+
+    Niente se la sezione e' spenta (CORSI_IN_INDICE): e' la stessa regola della
+    nav, che il link ai corsi lo toglie quando la pagina e' fuori indice.
+
+    Si stampa il numero e non l'etichetta, e l'ancora #co-lista porta
+    all'elenco invece che all'intestazione: sono le due lezioni di
+    link_luoghi()."""
+    if not CORSI_IN_INDICE:
+        return ''
+    prov = (prov or '').strip().upper()
+    if not prov:
+        return ''
+    ind = indice_corsi()
+    if citta:
+        v = (ind.get('comuni') or {}).get(f"{prov.lower()}-{slugify(citta)}")
+        if v and (v.get('n') or 0) >= MIN_CORSI_COMUNE:
+            return (f'<a href="/corsi.html?comune={v["slug"]}#co-lista">'
+                    f'{v["n"]} corsi per bambini{a_citta(esc(v.get("nome") or citta))}</a>')
+    province = ind.get('province') or {}
+    n = province.get(prov) or 0
+    if n >= MIN_CONTEGGIO and n == sum(province.values()) and prov in PROVINCE_NOMI:
+        return (f'<a href="/corsi.html#co-lista">{n} corsi per bambini in '
+                f'provincia di {esc(PROVINCE_NOMI[prov])}</a>')
+    return ''
 
 
 # --- Le quattro porte -------------------------------------------------------
@@ -4128,6 +4205,13 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     lg = link_luoghi(rec.get('citta'), prov)
     if lg:
         coda.append(lg)
+    # I corsi, dal 14/09/2026 (vedi link_corsi): la stessa domanda dei luoghi -
+    # "cos'altro c'e' qui?" - con la risposta che dura una stagione invece di un
+    # pomeriggio. Sta subito dopo, e prima della provincia, per la stessa regola
+    # dal piu' vicino al piu' largo.
+    lc = link_corsi(rec.get('citta'), prov)
+    if lc:
+        coda.append(lc)
     if prov in PROVINCE_PUBBLICATE:
         nome_prov = PROVINCE_NOMI[prov]
         coda.append(f'<a href="/sagre-provincia-{slugify(nome_prov)}.html">'
@@ -4137,7 +4221,8 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     coda.append('<a href="/eventi/oggi.html">Cosa c\'è oggi</a>')
     coda.append('<a href="/eventi/weekend.html">Questo weekend</a>')
     coda.append('<a href="/eventi.html">Tutta l\'agenda DAOP</a>')
-    return ('<section class="ev-vicini" aria-labelledby="ev-vicini-t">'
+    # data-cta: il blocco si misura (vista e clic), vedi daop-track.js.
+    return ('<section class="ev-vicini" aria-labelledby="ev-vicini-t" data-cta="vicini">'
             f'<h2 id="ev-vicini-t">{esc(titolo)}</h2>'
             f'{elenco}'
             f'<p class="ev-vic-all">{" · ".join(coda)}</p>'

@@ -8,11 +8,19 @@
  * posto in cui si scrivono i clic, come cookie-consent.js e' l'unico posto in
  * cui si inizializza GA4.
  *
- * Cosa NON serve tracciare qui: la navigazione interna. Ogni pagina del sito
- * manda gia' un page_view (lo fa cookie-consent.js dopo il consenso), quindi
- * "da questa scheda dove vanno dopo" si legge gia' in GA4 con un'esplorazione
- * di percorso. Qui stanno solo i clic che NON producono un page_view: quelli
- * che portano fuori dal sito o che aprono un'app.
+ * Cosa NON serve tracciare qui: la navigazione interna qualunque. Ogni pagina
+ * del sito manda gia' un page_view (lo fa cookie-consent.js dopo il consenso),
+ * quindi "da questa scheda dove vanno dopo" si legge gia' in GA4 con
+ * un'esplorazione di percorso. Qui stanno i clic che NON producono un
+ * page_view: quelli che portano fuori dal sito o che aprono un'app.
+ *
+ * L'ECCEZIONE, dal 14/09/2026: i blocchi marcati `data-cta`. Il page_view dice
+ * da quale PAGINA si arriva, non da quale BLOCCO, e non dice quante volte quel
+ * blocco e' stato visto - quindi "il link ai corsi in coda alla scheda rende
+ * o no?" non aveva risposta. Per quei blocchi, e solo per quelli, partono
+ * `internal_cta_view` (una volta per pagina, quando il blocco e' a schermo) e
+ * `internal_cta_click`. I nomi sono quelli proposti da Giovanni nell'analisi
+ * del 14/09, apposta: chi legge i report e' lui.
  *
  * gtag esiste solo dopo il consenso ai cookie: ogni chiamata e' protetta, e
  * senza consenso lo script gira a vuoto senza errori.
@@ -119,6 +127,30 @@
     return location.pathname.replace(/\/index\.html$/i, '/') || '/';
   }
 
+  /* In quale famiglia del sito porta un link interno, per `destination_area`.
+     `destination_url` c'e' gia' e dice la pagina esatta; questo raggruppa, cosi'
+     "quanti vanno ai corsi" non chiede un filtro scritto a mano in GA4. Torna
+     '' per un link che esce dal sito: quelli hanno gia' il loro evento.
+     `evento` e' la scheda singola, `eventi` qualunque elenco di eventi. */
+  function area_destinazione(href) {
+    var u;
+    try { u = new URL(href, location.href); } catch (e) { return ''; }
+    if (u.host !== location.host && u.host.indexOf('daop.it') === -1) return '';
+    // Aperta da file:// su Windows, "/corsi.html" si risolve in /C:/corsi.html
+    // (la trappola gia' scritta in tests/_aiuto.js): online non capita mai, ma
+    // senza questa riga la prova vedrebbe "altro" dove il sito dice "corsi".
+    var p = u.pathname.replace(/^\/[A-Za-z]:(?=\/)/, '');
+    if (/^\/corsi(\.html$|\/)/.test(p)) return 'corsi';
+    if (p === '/luoghi.html' || p === '/piscine.html') return 'luoghi';
+    if (p === '/ginetto.html') return 'ginetto';
+    if (p.indexOf('/centri-') === 0) return 'centri';
+    if (p.indexOf('/eventi/comune/') === 0 ||
+        /^\/eventi\/(oggi|weekend)[^/]*\.html$/.test(p)) return 'eventi';
+    if (p.indexOf('/eventi/') === 0) return 'evento';
+    if (p === '/eventi.html' || /^\/(sagre|eventi)-provincia-/.test(p)) return 'eventi';
+    return 'altro';
+  }
+
   /* ── Invio ─────────────────────────────────────────────────────────────
      `event_name` non viene mandato come parametro: in GA4 e' gia' il nome
      dell'evento stesso (la dimensione "Nome evento"), e un parametro
@@ -137,6 +169,12 @@
     for (var k in CTX) { if (CTX[k]) p[k] = CTX[k]; }
     var riga = contesto_riga(el);
     for (var j in riga) { p[j] = riga[j]; }
+    /* Da quale blocco marcato e' partito il clic (vedi internal_cta_view in
+       avvia()). Vale anche per `apri_ginetto` e `click_sponsorizzato`: la
+       domanda "da quale posto della pagina" e' la stessa. */
+    var blocco = el && el.closest && el.closest('[data-cta]');
+    if (blocco) p.cta_id = blocco.getAttribute('data-cta');
+    if (nome === 'internal_cta_click') p.destination_area = area_destinazione(href);
     /* Quale guida. Sta in un attributo e non si deduce dal nome del file:
        "estivi-2027.pdf" andrebbe spezzato in due qui dentro, e il giorno che il
        nome cambia il report cambia in silenzio. Stessa ragione di
@@ -225,7 +263,12 @@
         // lo direbbe - non sa da quale riga di quale scheda si e' arrivati.
         if (a.closest('.ev-spons')) { invia('click_sponsorizzato', href, a); return; }
         var nome = nome_evento(href);
-        if (nome) invia(nome, href, a);
+        if (nome) { invia(nome, href, a); return; }
+        // Un link interno dentro un blocco marcato. Fuori da quei blocchi la
+        // navigazione interna resta affidata ai page_view, vedi in testa.
+        if (a.closest('[data-cta]') && area_destinazione(href)) {
+          invia('internal_cta_click', href, a);
+        }
         return;
       }
       /* L'APERTURA DI UNA SCHEDA LUOGO, il denominatore che mancava a
@@ -267,6 +310,44 @@
       var img = ev.target.closest && ev.target.closest('img.ev-loc');
       if (img) invia('click_locandina', img.getAttribute('src') || '', img);
     }, true);
+
+    /* LA VISTA DI UN BLOCCO MARCATO (`data-cta`), una volta per pagina.
+       E' il denominatore del clic: 20 clic sul link ai corsi non dicono niente
+       se non si sa se il blocco l'hanno visto in cento o in diecimila. Prima
+       quel numero si stimava da scroll_depth e dall'altezza misurata a mano
+       del blocco; cosi' si legge.
+
+       "Visto" vuol dire meta' del blocco a schermo, oppure - per un blocco
+       piu' alto dello schermo - una fetta pari al 40% dello schermo.
+
+       Senza consenso non si manda e NON si segna come visto: il blocco resta
+       osservato, e al prossimo passaggio di soglia (basta scorrere) si
+       riprova. Segnarlo lo stesso vorrebbe dire perdere per sempre la vista di
+       chi accetta il banner dopo aver gia' visto il blocco, cioe' contare clic
+       senza la loro vista.
+
+       Costa zero sulle pagine che non hanno blocchi marcati: senza elementi
+       l'osservatore non nasce nemmeno. */
+    var blocchi = document.querySelectorAll('[data-cta]');
+    if (blocchi.length && 'IntersectionObserver' in window) {
+      var visti = {};
+      var oss = new IntersectionObserver(function (voci) {
+        voci.forEach(function (v) {
+          if (!v.isIntersecting) return;
+          if (v.intersectionRatio < 0.5 &&
+              v.intersectionRect.height < window.innerHeight * 0.4) return;
+          var id = v.target.getAttribute('data-cta');
+          if (visti[id]) { oss.unobserve(v.target); return; }
+          if (!window.daopConsensoAnalytics || typeof gtag !== 'function') return;
+          visti[id] = true;
+          oss.unobserve(v.target);
+          var p = { page_path: percorso(), cta_id: id };
+          for (var k in CTX) { if (CTX[k]) p[k] = CTX[k]; }
+          gtag('event', 'internal_cta_view', p);
+        });
+      }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+      [].forEach.call(blocchi, function (b) { oss.observe(b); });
+    }
 
     /* "Vicino a me". Il filtro per distanza (daop-vicino.js) non chiama gtag
        da solo: emette un evento DOM e lo raccogliamo qui, cosi' gtag resta

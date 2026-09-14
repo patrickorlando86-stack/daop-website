@@ -24,3 +24,4 @@ gsc/
 # scripts/genera_corsi.py). Le pagine di prova sono tracciate perche' si
 # guardano nel diff; questo e' un file di lavoro e non si guarda.
 corsi-prova/_realta-pagine.json
+corsi-prova/_corsi-comuni.json

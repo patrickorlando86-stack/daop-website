@@ -223,6 +223,12 @@ jobs:
           #     trova, e nessuno se ne accorge: e' un link in meno, non un
           #     errore.
           #
+          #   data/corsi-comuni.json  quanti corsi ci sono in ogni comune e in
+          #     ogni provincia (dal 14/09). Lo scrive genera_corsi.py e lo legge
+          #     genera_eventi.py al giro DOPO, per la riga «N corsi per bambini
+          #     a X» in coda alle schede evento. Stesso patto, e stesso guasto
+          #     silenzioso se manca, di realta-pagine.json.
+          #
           #   corsi/  le pagine dedicate delle realta' (dal 21/08). Nascono
           #     UNTRACKED, quando una societa' nuova entra nella tab Realta: e'
           #     l'unico caso in cui la rete di sicurezza NON avrebbe protetto,
@@ -266,7 +272,7 @@ jobs:
                 data/pagine-landing.json data/storico-comuni.json \
                 data/luoghi.json data/luoghi-comuni.json \
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
-                data/guide.json data/realta-pagine.json \
+                data/guide.json data/realta-pagine.json data/corsi-comuni.json \
                 data/locandine-usate.json \
                 eventi/ rubriche/ corsi/ guide/ idee/ \
                 assets/miniature/ assets/loghi/ assets/icone/"

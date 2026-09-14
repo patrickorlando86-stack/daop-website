@@ -18,7 +18,7 @@ const { avvia } = require('./_aiuto');
     for (const suite of [require('./agenda'), require('./landing'), require('./scheda'),
                          require('./luoghi'), require('./corsi'), require('./porte'),
                          require('./guide'), require('./sitemap'),
-                         require('./social')]) {
+                         require('./social'), require('./cta')]) {
       const r = await suite(browser);
       passati += r.passati;
       falliti.push(...r.falliti);

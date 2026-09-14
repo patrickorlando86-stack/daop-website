@@ -870,7 +870,7 @@ html{scroll-behavior:auto}
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
 <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">174 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">895 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">estate, Natale e Pasqua, con le iscrizioni</span></a></div></section>
 </article>
-<section class="bg-cream ev-ginetto">
+<section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
     <div class="info-strip">
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
@@ -1065,6 +1065,20 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     if(!el) return;
     el.addEventListener('input',apply); el.addEventListener('change',apply);
   });
+  // ?comune=<slug>: la tendina Comune gia' accesa. Arriva dalla riga "N corsi
+  // per bambini a X" in coda alle schede evento (link_corsi in
+  // genera_eventi.py), che promette un numero: senza il filtro la pagina ne
+  // mostrerebbe un altro. Si imposta solo un valore che nella tendina c'e' -
+  // un comune che stanotte ha perso i suoi corsi apre la pagina intera invece
+  // di un elenco vuoto con un filtro che nessuno ha scelto. L'indirizzo NON si
+  // riscrive: gli utm di chi arriva da una campagna devono restare dove sono.
+  try{
+    var pre=new URLSearchParams(location.search).get('comune');
+    if(pre) campi.forEach(function(el){
+      if(el.dataset.campo!=='citta') return;
+      for(var i=0;i<el.options.length;i++){ if(el.options[i].value===pre){ el.value=pre; break; } }
+    });
+  }catch(e){}
   apply();
 })();
 </script>

@@ -3584,6 +3584,20 @@ FILTER_JS = """
     if(!el) return;
     el.addEventListener('input',apply); el.addEventListener('change',apply);
   });
+  // ?comune=<slug>: la tendina Comune gia' accesa. Arriva dalla riga "N corsi
+  // per bambini a X" in coda alle schede evento (link_corsi in
+  // genera_eventi.py), che promette un numero: senza il filtro la pagina ne
+  // mostrerebbe un altro. Si imposta solo un valore che nella tendina c'e' -
+  // un comune che stanotte ha perso i suoi corsi apre la pagina intera invece
+  // di un elenco vuoto con un filtro che nessuno ha scelto. L'indirizzo NON si
+  // riscrive: gli utm di chi arriva da una campagna devono restare dove sono.
+  try{
+    var pre=new URLSearchParams(location.search).get('comune');
+    if(pre) campi.forEach(function(el){
+      if(el.dataset.campo!=='citta') return;
+      for(var i=0;i<el.options.length;i++){ if(el.options[i].value===pre){ el.value=pre; break; } }
+    });
+  }catch(e){}
   apply();
 })();
 """
@@ -4000,6 +4014,53 @@ def aggiorna_sitemap(pagine=()):
           + ('' if G.CORSI_IN_INDICE else " (l'hub e' noindex)"))
 
 
+def indice_corsi_path():
+    """Dove va il conteggio dei corsi per comune. SEGUE `DIR_REALTA`, per la
+    stessa ragione di indice_realta_path(): prova_corsi.py sposta la cartella,
+    e con lei deve spostarsi il registro, se no i corsi finti finirebbero nei
+    link delle schede evento vere."""
+    if DIR_REALTA == 'corsi':
+        return G.INDICE_CORSI_PATH
+    return os.path.join(ROOT, DIR_REALTA, '_corsi-comuni.json')
+
+
+def scrivi_indice_corsi(corsi):
+    """Quanti corsi ci sono in ogni comune e in ogni provincia, per la riga
+    «N corsi per bambini a X» in coda alle schede evento (link_corsi() in
+    genera_eventi.py). Nata il 14/09/2026 dall'analisi di Giovanni: le schede
+    evento fanno il 77% dei clic del sito e da nessuna di loro si arrivava ai
+    corsi, se non per le otto che hanno una realta' come organizzatore.
+
+    Il numero e' quello che corsi.html CONSEGNA: la chiave del comune usa lo
+    stesso G.slugify(citta) che la card stampa in data-city, e il link porta a
+    corsi.html?comune=<slug>, che accende la tendina Comune su quel valore. Una
+    riga che promette cinque corsi e ne mostra tre mente su una pagina che chi
+    legge non ha ancora aperto.
+
+    Le chiavi dei comuni hanno la forma di data/luoghi-comuni.json (`cn-alba`),
+    cosi' dalla scheda si cercano con la stessa ancora dei luoghi.
+
+    Si riscrive SEMPRE, come realta-pagine.json: la verita' e' la lista di
+    stanotte, e un comune che perde i suoi corsi deve perdere anche il link.
+    Quando il foglio non si legge main() esce prima, e resta il file di ieri."""
+    comuni, province = {}, {}
+    for c in corsi:
+        p = (c.get('prov') or '').strip().upper()
+        if not p:
+            continue
+        province[p] = province.get(p, 0) + 1
+        if not c.get('citta'):
+            continue
+        slug = G.slugify(c['citta'])
+        v = comuni.setdefault(f"{p.lower()}-{slug}",
+                              {'nome': c['citta'], 'slug': slug, 'n': 0})
+        v['n'] += 1
+    with open(indice_corsi_path(), 'w', encoding='utf-8') as fh:
+        json.dump({'comuni': comuni, 'province': province}, fh,
+                  ensure_ascii=False, indent=1, sort_keys=True)
+        fh.write('\n')
+
+
 def main():
     corsi = leggi_corsi()
     if corsi is None:
@@ -4030,6 +4091,7 @@ def main():
     # Il proprio numero prima di render(), e DOPO il taglio: la riga delle
     # quattro porte lo rilegge, e deve contare i corsi che si vedono davvero.
     G.conteggio_scrivi('corsi', len(corsi))
+    scrivi_indice_corsi(corsi)
     css, nav, foot = G._guscio()
     # Le pagine delle realta' PRIMA di corsi.html: render() deve sapere quali
     # esistono per decidere dove manda il link "Organizzatore". Fra le due

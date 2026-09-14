@@ -1,0 +1,82 @@
+{
+ "comuni": {
+  "cn-alba": {
+   "n": 5,
+   "nome": "Alba",
+   "slug": "alba"
+  },
+  "cn-borgo-san-dalmazzo": {
+   "n": 7,
+   "nome": "Borgo San Dalmazzo",
+   "slug": "borgo-san-dalmazzo"
+  },
+  "cn-bossolasco": {
+   "n": 1,
+   "nome": "Bossolasco",
+   "slug": "bossolasco"
+  },
+  "cn-bra": {
+   "n": 2,
+   "nome": "Bra",
+   "slug": "bra"
+  },
+  "cn-camerana": {
+   "n": 3,
+   "nome": "Camerana",
+   "slug": "camerana"
+  },
+  "cn-caraglio": {
+   "n": 2,
+   "nome": "Caraglio",
+   "slug": "caraglio"
+  },
+  "cn-carru": {
+   "n": 3,
+   "nome": "Carrù",
+   "slug": "carru"
+  },
+  "cn-ceva": {
+   "n": 3,
+   "nome": "Ceva",
+   "slug": "ceva"
+  },
+  "cn-cuneo": {
+   "n": 2,
+   "nome": "Cuneo",
+   "slug": "cuneo"
+  },
+  "cn-dogliani": {
+   "n": 1,
+   "nome": "Dogliani",
+   "slug": "dogliani"
+  },
+  "cn-mondovi": {
+   "n": 4,
+   "nome": "Mondovì",
+   "slug": "mondovi"
+  },
+  "cn-moretta": {
+   "n": 8,
+   "nome": "Moretta",
+   "slug": "moretta"
+  },
+  "cn-murazzano": {
+   "n": 1,
+   "nome": "Murazzano",
+   "slug": "murazzano"
+  },
+  "cn-racconigi": {
+   "n": 6,
+   "nome": "Racconigi",
+   "slug": "racconigi"
+  },
+  "cn-vezza-d-alba": {
+   "n": 7,
+   "nome": "Vezza d'Alba",
+   "slug": "vezza-d-alba"
+  }
+ },
+ "province": {
+  "CN": 55
+ }
+}
