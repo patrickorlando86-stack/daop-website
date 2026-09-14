@@ -6725,3 +6725,14 @@ successo, ed è il tipo di guasto che si vede solo filtrando.
 
 Il workflow committa da solo su `main`. Prima di lavorare, `git pull origin
 main`: la run notturna ha quasi sempre spostato la testa.
+
+**Questa cartella è anche quella da cui pubblica il downloader**
+(`daop_pipeline.py`, `pubblica_locandine_su_git`): a ogni run genera, committa e
+spinge da qui, e committa **dove sta la testa**. Il 12/09/2026 una sessione l'ha
+lasciata sul ramo `claude/premium-scadenza-docs`: il run di quel pomeriggio ha
+committato sul ramo e spinto un `main` locale vecchio ("Everything up-to-date",
+codice 0, "pagine pubblicate" — online niente), quello del 14/09 è andato in
+conflitto. Dal 14/09 il downloader torna su `main` da solo e mette nello stash il
+lavoro che si scontra, ma il modo giusto resta non lasciarcela: per lavorare su
+un ramo usa una worktree (`git worktree add`), oppure torna su `main` prima di
+chiudere.
