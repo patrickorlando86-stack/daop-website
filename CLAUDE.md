@@ -482,8 +482,11 @@ navigazione interna **resta affidata ai `page_view`**, come prima.
 Parametri: `cta_id`, `destination_url` (c'era già), **`destination_area`**
 (`evento` la scheda singola, `eventi` gli elenchi, `corsi`, `luoghi`, `centri`,
 `ginetto`, `altro`) più i soliti `event_city`/`event_province`. **`cta_id` e
-`destination_area` vanno registrate in GA4** come dimensioni con ambito Evento:
-non sono retroattive, e rispondono dal giorno in cui si creano.
+`destination_area` sono registrate in GA4** come dimensioni con ambito Evento,
+create da Patrick il **14/09/2026**, il giorno stesso della pubblicazione: con
+le undici di prima fanno tredici. Non sono retroattive, quindi rispondono dal
+14/09 e non prima. Se servisse verificarle, l'unico posto che lo sa è l'elenco
+in Amministratore → Definizioni personalizzate, non questo file.
 
 Le decisioni che non si ricavano dal diff:
 
