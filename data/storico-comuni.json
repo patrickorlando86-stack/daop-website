@@ -84,6 +84,17 @@
     "pagina": false,
     "ultima": "2026-08-23"
    },
+   "cercasi-piccoli-detective-il-mistero-del-libro-sco-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello dei Paleologi",
+    "manifest": "",
+    "nome": "Cercasi Piccoli Detective! Il Mistero del Libro Scomparso - Notti Nere Acqui Terme",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "festa-delle-feste-acqui-terme": {
     "anni": [
      2026
@@ -434,6 +445,17 @@
     "pagina": true,
     "ultima": "2026-09-06"
    },
+   "festa-a-4-zampe-a-t-a-associazione-tutela-animali-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Canile Comunale Cascina Rosa",
+    "manifest": "",
+    "nome": "Festa a 4 Zampe - A.T.A. Associazione Tutela Animali",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "festa-della-birra-street-food-alessandria": {
     "anni": [
      2026
@@ -455,6 +477,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-26"
+   },
+   "i-torneo-di-bandiera-citta-di-alessandria-associaz": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Santa Maria di Castello",
+    "manifest": "",
+    "nome": "I Torneo di Bandiera Città di Alessandria - Associazione Aleramica",
+    "organizza": "Associazione Aleramica",
+    "pagina": true,
+    "ultima": "2026-09-19"
    },
    "jumpers-alessandria": {
     "anni": [
@@ -598,6 +631,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-25"
+   },
+   "torneo-nazionale-citta-di-alessandria-di-tennis-in": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Nuova Saves",
+    "manifest": "",
+    "nome": "10° Torneo Nazionale Città di Alessandria di Tennis in Carrozzina - Memorial Eugenio Taverna - SSD Volare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-17"
    },
    "un-bel-giorno-alessandria": {
     "anni": [
@@ -799,6 +843,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-07"
+   },
+   "sport-in-piazza-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Alfieri",
+    "manifest": "",
+    "nome": "Sport in Piazza 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    },
    "treno-storico-centoporte-per-cocconato-riviera-del-asti": {
     "anni": [
@@ -1853,6 +1908,17 @@
     "pagina": true,
     "ultima": "2026-09-15"
    },
+   "monferrato-green-farm-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Polo Fieristico Riccardo Coppo",
+    "manifest": "Monferrato Green Farm 2026",
+    "nome": "Monferrato Green Farm 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
+   },
    "spazio-creativita-i-colori-dell-autunno-biblioteca-casale-monferrato": {
     "anni": [
      2026
@@ -2854,6 +2920,17 @@
     "pagina": false,
     "ultima": "2026-08-23"
    },
+   "super-evento-in-fattoria-trucca-bimbi-e-palloncini-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Fattoria di Giulia",
+    "manifest": "",
+    "nome": "Super Evento in Fattoria! Trucca Bimbi e Palloncini Modellabili con Framillebolle e Lele il Giocoliere - La Fattoria di Giulia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "triangolare-di-calcio-castelnuovo-scrivia": {
     "anni": [
      2026
@@ -3211,6 +3288,39 @@
  },
  "cocconato": {
   "eventi": {
+   "aspettando-il-palio-banchetto-medievale-palio-degl-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile del Collegio",
+    "manifest": "Palio degli Asini 57°",
+    "nome": "Aspettando il Palio... Banchetto Medievale - Palio degli Asini 57°",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
+   "benedizione-dei-gonfaloni-dei-borghi-palio-degli-a-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale",
+    "manifest": "Palio degli Asini 57°",
+    "nome": "Benedizione dei Gonfaloni dei Borghi - Palio degli Asini 57°",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
+   "benedizione-drappi-e-mercatino-palio-degli-asini-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale e Cortile del Collegio",
+    "manifest": "Palio degli Asini 57°",
+    "nome": "Benedizione Drappi e Mercatino - Palio degli Asini 57°",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "cocco-wine-cocconato": {
     "anni": [
      2026
@@ -3233,6 +3343,28 @@
     "pagina": true,
     "ultima": "2026-09-11"
    },
+   "corsa-degli-asini-palio-degli-asini-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza di Melchiorre e Piazza Cavour",
+    "manifest": "Palio degli Asini 57°",
+    "nome": "Corsa degli Asini - Palio degli Asini 57°",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
+   "corteo-storico-dei-borghi-palio-degli-asini-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie del borgo",
+    "manifest": "Palio degli Asini 57°",
+    "nome": "Corteo Storico dei Borghi - Palio degli Asini 57°",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "laboratorio-per-bambini-e-ragazzi-un-pomeriggio-ne-cocconato": {
     "anni": [
      2026
@@ -3243,6 +3375,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "mercatino-medievale-palio-degli-asini-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Roma e Cortile del Collegio",
+    "manifest": "Palio degli Asini 57°",
+    "nome": "Mercatino Medievale - Palio degli Asini 57°",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
    }
   },
   "nome": "Cocconato",
@@ -4391,6 +4534,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "mago-morfeus-giochi-di-prestigio-bolle-di-sapone-s-felizzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Festa di Fine Estate",
+    "nome": "Mago Morfeus - Giochi di Prestigio, Bolle di Sapone & Spettacolo di Magia - PA Croce Verde Felizzano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
    }
   },
   "nome": "Felizzano",
@@ -4683,6 +4837,17 @@
  },
  "gavi": {
   "eventi": {
+   "falesia-in-festa-prova-gratuita-di-arrampicata-pro-gavi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Falesia di Gavi - Sentiero del Neirone",
+    "manifest": "",
+    "nome": "Falesia in Festa - Prova Gratuita di Arrampicata - Pro Loco di Gavi",
+    "organizza": "Pro Loco di Gavi",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "guidati-dal-cuore-lions-international-gavi-e-colli": {
     "anni": [
      2026
@@ -6354,6 +6519,17 @@
     "organizza": "Associazione Culturale Gardening in Collina",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "biblicando-chiesa-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco A. Rebora - Scuola di Musica",
+    "manifest": "",
+    "nome": "Biblicando - Chiesa Ovada",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    },
    "memorial-pasquale-messina-tamburello-cinaglio-vs-a-ovada": {
     "anni": [
@@ -8122,6 +8298,17 @@
     "pagina": true,
     "ultima": "2026-09-02"
    },
+   "sipario-festival-del-teatro-e-degli-artisti-di-str-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Roma",
+    "manifest": "Sipario 2026 - Festival del Teatro e degli Artisti di Strada",
+    "nome": "Sipario 2026 - Festival del Teatro e degli Artisti di Strada",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "tamburello-san-damiano-d-asti": {
     "anni": [
      2026
@@ -8378,6 +8565,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-14"
+   },
+   "l-addolorata-san-sebastiano-curone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roma e Ponte Vecchio",
+    "manifest": "L'Addolorata",
+    "nome": "L'Addolorata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    }
   },
   "nome": "San Sebastiano Curone",
@@ -8828,6 +9026,17 @@
  },
  "serravallescrivia": {
   "eventi": {
+   "ambulanza-senza-paura-croce-rossa-italiana-comitat-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Tripoli",
+    "manifest": "",
+    "nome": "Ambulanza Senza Paura - Croce Rossa Italiana Comitato di Serravalle Scrivia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "edutainment-imparare-divertendosi-play-land-serravalle-scrivia": {
     "anni": [
      2026
@@ -8838,6 +9047,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "festa-da-cuntro-d-sua-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Collegiata",
+    "manifest": "Festa da Cuntrò 'd Sua",
+    "nome": "Festa da Cuntrò 'd Sua",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-18"
    },
    "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia": {
     "anni": [
@@ -9133,6 +9353,23 @@
   },
   "nome": "Tassarolo",
   "prov": "AL"
+ },
+ "tonco": {
+  "eventi": {
+   "agrifiera-polli-e-buoi-dei-paesi-tuoi-tonco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele",
+    "manifest": "Agrifiera Polli e Buoi dei Paesi Tuoi",
+    "nome": "Agrifiera Polli e Buoi dei Paesi Tuoi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   }
+  },
+  "nome": "Tonco",
+  "prov": "AT"
  },
  "tortona": {
   "eventi": {
@@ -9720,6 +9957,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "un-pomeriggio-di-storie-e-giochi-a-villanova-d-ast-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ex asilo dei Savi",
+    "manifest": "",
+    "nome": "Un pomeriggio di storie e giochi a Villanova d'Asti - Biblioteca Comunale Comune di Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
    },
    "villanova-summer-festival-villanova-d-asti": {
     "anni": [

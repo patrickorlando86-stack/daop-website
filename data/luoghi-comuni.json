@@ -133,7 +133,7 @@
  },
  "c-al-casale-monferrato": {
   "comune": "Casale Monferrato",
-  "n": 41,
+  "n": 42,
   "prov": "AL"
  },
  "c-al-casaleggio-boiro": {
@@ -1017,7 +1017,7 @@
  },
  "c-cn-alba": {
   "comune": "Alba",
-  "n": 3,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-arguello": {
@@ -1290,6 +1290,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-marmora": {
+  "comune": "Marmora",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-monastero-di-vasco": {
   "comune": "Monastero di Vasco",
   "n": 1,
@@ -1387,7 +1392,7 @@
  },
  "c-cn-piasco": {
   "comune": "Piasco",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-piozzo": {
@@ -1427,7 +1432,7 @@
  },
  "c-cn-roccavione": {
   "comune": "Roccavione",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-roddi": {
