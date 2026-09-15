@@ -4008,6 +4008,17 @@
     "pagina": false,
     "ultima": "2026-09-07"
    },
+   "un-amuleto-per-il-mio-viaggio-museo-diocesano-san-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Diocesano San Sebastiano",
+    "manifest": "",
+    "nome": "Un amuleto per il mio viaggio - Museo Diocesano San Sebastiano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "vita-da-api-parco-fluviale-gesso-e-stura-cuneo": {
     "anni": [
      2026
@@ -4439,6 +4450,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-12"
+   },
+   "tu-che-animale-sei-montagne-del-mare-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Visita di Entracque",
+    "manifest": "",
+    "nome": "Tu che animale sei? - Montagne del Mare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
    },
    "una-montagna-di-scienza-marshmallow-challenge-entracque": {
     "anni": [
@@ -6171,6 +6193,17 @@
  },
  "novello": {
   "eventi": {
+   "fabriano-all-around-festival-del-disegno-novello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Novelab",
+    "manifest": "Fabriano All Around 2026 - Festival del Disegno",
+    "nome": "Fabriano All Around 2026 - Festival del Disegno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "l-albero-compagnia-il-cerchio-tondo-novello": {
     "anni": [
      2026
@@ -6604,6 +6637,17 @@
     "pagina": true,
     "ultima": "2026-08-14"
    },
+   "barbaluc-cantastorie-nel-bosco-della-trebulina-pia-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco della Trebulina - Pian Muné",
+    "manifest": "",
+    "nome": "Barbalüc - Cantastorie nel Bosco della Trebulina - Pian Muné",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "barbaluc-woodlab-alla-scoperta-degli-abitanti-del-paesana": {
     "anni": [
      2026
@@ -6744,6 +6788,17 @@
  },
  "peveragno": {
   "eventi": {
+   "camminiamo-insieme-per-la-salute-comune-di-peverag-peveragno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Polifunzionale A La Sousta",
+    "manifest": "",
+    "nome": "Camminiamo Insieme per la Salute - Comune di Peveragno",
+    "organizza": "Comune di Peveragno",
+    "pagina": true,
+    "ultima": "2026-09-30"
+   },
    "corso-trail-running-bambini-giornata-promozionale-peveragno": {
     "anni": [
      2026
@@ -9562,6 +9617,17 @@
  },
  "valdieri": {
   "eventi": {
+   "giardino-d-autunno-montagne-del-mare-valdieri": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardino Botanico Valderia",
+    "manifest": "",
+    "nome": "Giardino d'autunno - Montagne del Mare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "passi-nel-kuore-di-valdieri": {
     "anni": [
      2026
