@@ -1029,7 +1029,10 @@ def scrivi_stato(stato):
           f"(la nav del sito le segue dalla run di stanotte)")
 
 
-def aggiorna_sitemap(cambiate, indicizzabili=None):
+ROBOTS_NOINDEX = re.compile(r'<meta\s+name="robots"\s+content="[^"]*noindex', re.I)
+
+
+def aggiorna_sitemap(cambiate):
     """Tiene le pagine dei centri nella sitemap, dentro i propri marker.
 
     Elenca TUTTE le pagine di stagione presenti su disco, non solo quelle
@@ -1038,7 +1041,16 @@ def aggiorna_sitemap(cambiate, indicizzabili=None):
     (bastava un "genera_centri.py invernali" per far sparire gli estivi).
 
     Il lastmod si aggiorna solo per le pagine davvero cambiate: ristampare
-    la data di oggi su una pagina identica e' un segnale di freschezza falso."""
+    la data di oggi su una pagina identica e' un segnale di freschezza falso.
+
+    Chi entra lo decide il robots della pagina su disco, e basta: e' l'HTML
+    appena scritto (o quello di ieri, se il foglio non si e' letto), quindi
+    sitemap e robots non possono dire due cose diverse. Fino al 15/09/2026 il
+    conto si rifaceva qui (bool(attivi)) accanto a quello di render(), e
+    soprattutto con TUTTE le stagioni in noindex il blocco non si riscriveva:
+    "nessuna pagina, sitemap invariata" lasciava dentro centri-estivi.html in
+    noindex, cioe' la contraddizione che tests/sitemap.js esiste per trovare.
+    E' la stessa regola di scrivi_pagine_comune() in genera_eventi.py."""
     if not os.path.exists(SITEMAP_PATH):
         return
     # Ordine stabile e senza doppioni (piu' stagioni possono puntare allo
@@ -1052,14 +1064,13 @@ def aggiorna_sitemap(cambiate, indicizzabili=None):
         visti.add(f)
         # Una pagina in noindex non va in sitemap: sono due direttive che si
         # contraddicono, ed e' la coppia che halloween.html tiene insieme.
-        # Delle stagioni che questa run non ha riscritto non sappiamo niente:
-        # lo si chiede alla pagina su disco invece di indovinare.
-        dentro = (indicizzabili.get(f) if indicizzabili and f in indicizzabili
-                  else 'noindex' not in open(path, encoding='utf-8').read()[:4000])
-        (files if dentro else fuori).append(f)
-    if not files:
+        noindex = ROBOTS_NOINDEX.search(open(path, encoding='utf-8').read())
+        (fuori if noindex else files).append(f)
+    if not files and not fuori:
         print("[genera_centri] nessuna pagina centri su disco, sitemap invariata")
         return
+    # Tutte in noindex: il blocco si svuota ma i marker restano, cosi' la
+    # stagione che torna viva ha dove rientrare.
 
     oggi = datetime.date.today().isoformat()
     s = open(SITEMAP_PATH, encoding='utf-8').read()
@@ -1072,7 +1083,8 @@ def aggiorna_sitemap(cambiate, indicizzabili=None):
         f"    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>"
         for f in files)
     s, n = re.subn(r'(<!-- CENTRI:START.*?-->).*?( *<!-- CENTRI:END -->)',
-                   lambda m: f"{m.group(1)}\n{blocco}\n{m.group(2)}", s, count=1, flags=re.S)
+                   lambda m: f"{m.group(1)}\n{blocco + chr(10) if blocco else ''}{m.group(2)}",
+                   s, count=1, flags=re.S)
     if n != 1:
         print("[genera_centri] marker CENTRI non trovati in sitemap.xml, salto")
         return
@@ -1114,7 +1126,6 @@ def main(argv):
     # somma direbbe il vero senza dire niente.
     attivi_max = 0
     stato = {}
-    indicizzabili = {}
     for chiave in chiavi:
         cfg = STAGIONI[chiave]
         tab = os.environ.get(f"CENTRI_TAB_{chiave.upper()}", cfg['tab'])
@@ -1155,7 +1166,6 @@ def main(argv):
             'attivi': len(votanti),
             'inizio': date[0].isoformat() if date else None,
         }
-        indicizzabili[cfg['file']] = bool(attivi)
         nuovo = render(chiave, cfg, centri, css, nav, foot)
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
             print(f"[genera_centri] {cfg['file']}: invariata")
@@ -1169,7 +1179,7 @@ def main(argv):
     # sbaglia nel verso gratis.
     G.conteggio_scrivi('centri', attivi_max)
     scrivi_stato(stato)
-    aggiorna_sitemap(cambiate, indicizzabili)
+    aggiorna_sitemap(cambiate)
     return 0
 
 
