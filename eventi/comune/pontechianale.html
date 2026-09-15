@@ -640,8 +640,10 @@
 .ev-firma p{margin:0 0 6px}
 /* Da dove arriva la segnalazione: piu' leggero della firma, piu' presente
    della nota legale sotto - e' un credito, non un disclaimer. */
-.ev-fonte{font-size:.88rem;opacity:.85}
+.ev-fonte{font-size:.88rem;opacity:.85;margin:12px 0 10px}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
+/* I link di servizio su una riga loro, staccati dall'avvertenza. */
+.ev-firma-link{display:block;margin-top:4px}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
@@ -865,8 +867,9 @@
   margin:16px 0;font-size:.95rem}
 /* Il credito alla pagina di provenienza: stesso peso che ha sulle schede
    evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina.
-   Piu' specifici di .ev-wrap>p, se no vince quello e il filo si attacca. */
-.ev-wrap>p.com-fonte{font-size:.88rem;opacity:.85;margin:26px 0 0;padding-top:14px;
+   Dal 15/09/2026 e' un <div> con tre righe dentro (credito, mail, zone), quindi
+   .ev-wrap>p non lo tocca piu': basta la classe. */
+.com-fonte{font-size:.88rem;opacity:.85;margin:26px 0 0;padding-top:14px;
   border-top:1px solid rgba(45,74,92,.12);max-width:none}
 .com-fonte a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
 .ev-wrap>p.ev-firma-nota{margin:8px 0 0;max-width:none}
@@ -1023,7 +1026,7 @@
 
   <h2>Altri comuni della provincia di Cuneo</h2><div class="com-link"><a href="/eventi/comune/alba.html">Alba</a><a href="/eventi/comune/caraglio.html">Caraglio</a><a href="/eventi/comune/carru.html">Carrù</a><a href="/eventi/comune/ceresole-alba.html">Ceresole Alba</a><a href="/eventi/comune/ceresole-d-alba.html">Ceresole d&#x27;Alba</a><a href="/eventi/comune/crissolo.html">Crissolo</a></div>
   <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">896 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">estate, Natale e Pasqua, con le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">55 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
-  <p class="com-fonte">Gli eventi a Pontechianale arrivano da <a class="ev-ig" href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo: seguila per gli eventi in arrivo. Organizzi un evento in provincia di Cuneo? Scrivi a <a href="mailto:cuneo@daop.it">cuneo@daop.it</a>. <a href="/zone.html">Le pagine della tua zona</a></p>
+  <div class="com-fonte"><div class="fonte-chi">Gli eventi a Pontechianale arrivano da <a class="ev-ig" href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo: seguila per gli eventi in arrivo.</div><div class="fonte-mail"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>Organizzi un evento in provincia di Cuneo? Scrivi a <a href="mailto:cuneo@daop.it">cuneo@daop.it</a></span></div><div class="fonte-zona"><a href="/zone.html">Le pagine della tua zona</a></div></div>
   <p class="ev-firma-nota">Pagina aggiornata il 15 settembre 2026.</p>
 </article>
 </main>

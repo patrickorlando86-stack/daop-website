@@ -225,7 +225,16 @@ def blocco_social_home():
     return ''.join(card)
 
 
-def credito_fonte(f, apertura, classe='com-fonte', breve=False):
+# La busta davanti alla mail della provincia (lucide "mail"). Scritta per
+# esteso e non da sprite: il credito sta anche su pagine che lo sprite non
+# l'hanno inline, e <use href="#..."> li' disegnerebbe il vuoto.
+MAIL_SVG = ('<svg viewBox="0 0 24 24" width="16" height="16" fill="none" '
+            'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+            'stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" '
+            'x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>')
+
+
+def credito_fonte(f, apertura, classe='com-fonte', breve=False, zona=True):
     """Il credito alla pagina di provenienza. In un posto solo.
 
     PERCHE' QUI. Era scritto in cinque punti quasi identici - la firma della
@@ -251,26 +260,37 @@ def credito_fonte(f, apertura, classe='com-fonte', breve=False):
     'apertura' e' l'unica cosa che cambia davvero fra i cinque punti:
     "Segnalato da" su una scheda, "Gli eventi di Ovada arrivano da" su una
     pagina comune. 'breve' quando l'apertura ha gia' nominato la provincia,
-    per non scriverla due volte nella stessa frase."""
+    per non scriverla due volte nella stessa frase.
+
+    TRE RIGHE E NON UN PARAGRAFO (15/09/2026). Con la mail della provincia
+    dentro, lo stesso paragrafo diceva tre cose a due persone diverse - da dove
+    viene l'evento a chi legge, dove scrivere a chi organizza, e un link di
+    navigazione - e si leggeva come un blocco unico. Ognuna ha la sua riga:
+    il credito, la mail con la busta davanti (solo dove la provincia ne ha
+    una), il link alle zone. Resta tutto dentro lo stesso contenitore e allo
+    stesso peso: non e' una fascia e non sale.
+
+    'zona=False' quando chi chiama ha gia' una riga di link sua (la firma della
+    scheda): il link alle zone va li', e non si impilano due righe di link."""
     if not f:
         return ''
     dove = ('questa provincia' if breve
             else f"la provincia di {esc(f['provincia'])}")
     chi = (f"la nostra pagina per {dove}" if f['nostra'] else
            f"la pagina che segue {dove}, con cui collaboriamo")
-    # L'indirizzo della provincia, dove ce n'e' uno suo. Una frase dentro lo
-    # stesso paragrafo e non un blocco: parla a chi organizza, e per la regola
-    # qui sopra non diventa una seconda richiesta.
-    mail = ''
+    righe = (f'<div class="fonte-chi">{apertura} '
+             f'<a class="ev-ig" href="{f["url"]}" target="_blank" rel="noopener">'
+             f'@{esc(f["ig"])}</a>, {chi}: seguila per gli eventi in arrivo.</div>')
     if f.get('mail'):
         in_dove = ('in questa provincia' if breve
                    else f"in provincia di {esc(f['provincia'])}")
-        mail = (f'Organizzi un evento {in_dove}? Scrivi a '
-                f'<a href="mailto:{esc(f["mail"])}">{esc(f["mail"])}</a>. ')
-    return (f'<p class="{classe}">{apertura} '
-            f'<a class="ev-ig" href="{f["url"]}" target="_blank" rel="noopener">'
-            f'@{esc(f["ig"])}</a>, {chi}: seguila per gli eventi in arrivo. '
-            f'{mail}<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+        righe += (f'<div class="fonte-mail">{MAIL_SVG}<span>Organizzi un evento '
+                  f'{in_dove}? Scrivi a <a href="mailto:{esc(f["mail"])}">'
+                  f'{esc(f["mail"])}</a></span></div>')
+    if zona:
+        righe += (f'<div class="fonte-zona"><a href="{ZONE_HREF}">'
+                  f'Le pagine della tua zona</a></div>')
+    return f'<div class="{classe}">{righe}</div>'
 
 
 def province_in_elenco(codici):
@@ -3063,8 +3083,10 @@ PAGINA_CSS = """
 .ev-firma p{margin:0 0 6px}
 /* Da dove arriva la segnalazione: piu' leggero della firma, piu' presente
    della nota legale sotto - e' un credito, non un disclaimer. */
-.ev-fonte{font-size:.88rem;opacity:.85}
+.ev-fonte{font-size:.88rem;opacity:.85;margin:12px 0 10px}
 .ev-firma-nota{opacity:.78;font-size:.86rem}
+/* I link di servizio su una riga loro, staccati dall'avvertenza. */
+.ev-firma-link{display:block;margin-top:4px}
 .ev-firma a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
 /* Altri eventi vicini: link in uscita e motivo per restare sul sito.
    padding:0 e' obbligatorio: e' un <section>, e il CSS del sito ha
@@ -3473,7 +3495,11 @@ def firma_daop(rec, oggi, ritirata=False):
     # trasparenza su come la scheda e' nata - lo stesso posto in cui diciamo chi
     # l'ha controllata e quando.
     credito = credito_fonte(fonte_provincia(rec.get('prov')), 'Segnalato da',
-                            classe='ev-fonte')
+                            classe='ev-fonte', zona=False)
+    # La firma ha gia' la sua riga di link: quello alle zone va li', invece di
+    # impilare due righe di link una sopra l'altra.
+    zona = (f'<a href="{ZONE_HREF}">Le pagine della tua zona</a> · '
+            if fonte_provincia(rec.get('prov')) else '')
     # La correzione va a chi segue quella provincia (cuneo@daop.it per Cuneo).
     mail = mail_provincia(rec.get('prov'))
     # Scheda RITIRATA: la riga e' stata tolta dal foglio prima della sua data.
@@ -3492,9 +3518,10 @@ def firma_daop(rec, oggi, ritirata=False):
             f'<time datetime="{d.isoformat()}">{leggibile}</time>, poi l\'abbiamo tolta. '
             'Non consideriamo confermato quello che c\'e\' scritto in questa pagina.</p>'
             f'{credito}'
-            '<p class="ev-firma-nota">'
+            '<p class="ev-firma-nota"><span class="ev-firma-link">'
             '<a href="/eventi.html">Vai all\'agenda aggiornata</a> · '
-            f'<a href="mailto:{mail}?subject={ogg}">Segnala una correzione</a></p>'
+            f'{zona}<a href="mailto:{mail}?subject={ogg}">Segnala una correzione</a>'
+            '</span></p>'
             '</aside>')
     return (
         '<aside class="ev-firma">'
@@ -3504,9 +3531,10 @@ def firma_daop(rec, oggi, ritirata=False):
         f'<time datetime="{d.isoformat()}">{leggibile}</time>.</p>'
         f'{credito}'
         '<p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, '
-        'controlla eventuali aggiornamenti dell\'organizzatore. '
-        '<a href="/metodo.html">Come verifichiamo gli eventi</a> · '
-        f'<a href="mailto:{mail}?subject={ogg}">Segnala una correzione</a></p>'
+        'controlla eventuali aggiornamenti dell\'organizzatore.'
+        '<span class="ev-firma-link">'
+        f'{zona}<a href="/metodo.html">Come verifichiamo gli eventi</a> · '
+        f'<a href="mailto:{mail}?subject={ogg}">Segnala una correzione</a></span></p>'
         '</aside>')
 
 
@@ -5891,8 +5919,9 @@ COMUNE_CSS = """
   margin:16px 0;font-size:.95rem}
 /* Il credito alla pagina di provenienza: stesso peso che ha sulle schede
    evento (.ev-fonte), con il filo sopra che lo stacca dal corpo della pagina.
-   Piu' specifici di .ev-wrap>p, se no vince quello e il filo si attacca. */
-.ev-wrap>p.com-fonte{font-size:.88rem;opacity:.85;margin:26px 0 0;padding-top:14px;
+   Dal 15/09/2026 e' un <div> con tre righe dentro (credito, mail, zone), quindi
+   .ev-wrap>p non lo tocca piu': basta la classe. */
+.com-fonte{font-size:.88rem;opacity:.85;margin:26px 0 0;padding-top:14px;
   border-top:1px solid rgba(45,74,92,.12);max-width:none}
 .com-fonte a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
 .ev-wrap>p.ev-firma-nota{margin:8px 0 0;max-width:none}

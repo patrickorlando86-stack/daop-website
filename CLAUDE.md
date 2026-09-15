@@ -1459,8 +1459,22 @@ invito, il credito in fondo alle pagine di quella provincia («Organizzi un
 evento in provincia di Cuneo? Scrivi a cuneo@daop.it», dentro `credito_fonte()`:
 schede, pagine comune, provinciali) e il «Segnala una correzione» delle sue
 schede (`mail_provincia()`). Una provincia senza `mail` resta su `info@daop.it`
-e il credito non cambia. È una frase dentro il credito e non un blocco: parla a
-chi organizza, e in cima alla pagina resta solo Ginetto. La riga si compone dai
+e il credito non cambia. È una riga dentro il credito e non un blocco: parla a
+chi organizza, e in cima alla pagina resta solo Ginetto.
+
+**Il credito è tre righe e non un paragrafo** (15/09/2026, Patrick: «è un po'
+confuso tutto scritto assieme»). Con la mail dentro, lo stesso `<p>` diceva tre
+cose a due persone diverse — da dove viene l'evento, dove scrivere, un link di
+navigazione — e si leggeva come un blocco. Ora `credito_fonte()` stampa un
+`<div>` con `.fonte-chi` (il credito), `.fonte-mail` (la busta e l'indirizzo,
+solo dove c'è) e `.fonte-zona` (il link alle zone). Sulle schede il link alle
+zone non si stampa lì (`zona=False`) ma entra nella riga dei link della firma,
+`.ev-firma-link`, che va a capo sotto l'avvertenza: due righe di link impilate
+erano la seconda metà della confusione. Le regole delle tre righe stanno in
+`daop-system.css` (stessa ragione di `.ev-ig`); il contenitore resta in
+`PAGINA_CSS` (`.ev-fonte`) e in `COMUNE_CSS` (`.com-fonte`, che da `p` è
+diventato `div` e quindi non ha più bisogno di `.ev-wrap>p` davanti per vincere).
+`tests/social.js` difende la coerenza nei due versi e misura le righe nel reso. La riga si compone dai
 dati, non da un testo fisso: finché i corsi sono tutti di Cuneo si legge un
 indirizzo solo, e il secondo compare da sé con la prima società di Alessandria.
 Un testo scritto a mano con due indirizzi direbbe oggi una cosa non vera.

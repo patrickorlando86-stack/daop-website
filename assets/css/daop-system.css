@@ -651,3 +651,15 @@ img { height: auto; }
    link in linea sono esentati dal minimo di 24px di WCAG 2.5.8, quindi prima
    non era una violazione - si sbagliava e basta. */
 .ev-ig { display: inline-block; padding: 4px 3px; font-weight: 600; }
+
+/* Le righe del credito (credito_fonte in genera_eventi.py), 15/09/2026.
+   Con la mail della provincia dentro, il credito era un paragrafo solo che
+   diceva tre cose a due persone diverse: ora sono tre righe. Stanno qui per
+   la stessa ragione di .ev-ig: il credito esce su schede (PAGINA_CSS), pagine
+   comune e provinciali (COMUNE_CSS), e tre copie dello stesso componente
+   divergono alla prima modifica. Il contenitore (.ev-fonte / .com-fonte) resta
+   definito dove sta, perche' li' e' diverso davvero (il filo sopra, i margini). */
+.fonte-mail { display: flex; align-items: flex-start; gap: 7px; margin-top: 8px; }
+.fonte-mail svg { flex: none; margin-top: 3px; }
+.fonte-mail a { font-weight: 600; white-space: nowrap; }
+.fonte-zona { margin-top: 6px; }

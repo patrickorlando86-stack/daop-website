@@ -278,5 +278,63 @@ module.exports = async function (browser) {
     await s2.ctx.close();
   }
 
+  // La mail di una provincia (chiave 'mail' di PROVINCE_IG, dal 15/09/2026).
+  // Nessun conteggio: "229 schede di Cuneo" sarebbe rosso la notte che una
+  // sagra finisce. Si controllano rapporti, nei due versi: una pagina che
+  // accredita una provincia con la mail la stampa, una che non ce l'ha no, e la
+  // correzione della scheda va allo stesso indirizzo del credito.
+  r.titolo('La mail della provincia — su una riga sua, e solo dove c\'è');
+  const conCredito = [];
+  for (const dir of ['', 'eventi', 'eventi/comune']) {
+    for (const f of fs.readdirSync(path.join(RADICE, dir))) {
+      if (!f.endsWith('.html') || f.startsWith('box-')) continue;
+      const rel = dir ? `${dir}/${f}` : f;
+      const html = leggi(rel);
+      const cred = html.match(/<div class="(?:ev|com)-fonte">([\s\S]*?)<\/div><\/div>/);
+      if (!cred) continue;
+      const ig = (cred[1].match(/instagram\.com\/([^/"]+)\//) || [])[1];
+      const mail = (cred[1].match(/class="fonte-mail"[\s\S]*?mailto:([^"?]+)/) || [])[1] || null;
+      const corr = (html.match(/mailto:([^"?]+)\?subject=Correzione/) || [])[1] || null;
+      conCredito.push({ rel, ig, mail, corr });
+    }
+  }
+  const mailDi = {};
+  for (const p of conCredito) if (p.mail) (mailDi[p.ig] = mailDi[p.ig] || new Set()).add(p.mail);
+  r.ok(Object.keys(mailDi).length > 0,
+    `almeno una provincia stampa la sua mail (${Object.entries(mailDi).map(([k, v]) => '@' + k + ' → ' + [...v].join('/')).join(', ') || 'nessuna'})`);
+  const doppie = Object.entries(mailDi).filter(([, v]) => v.size > 1);
+  r.ok(doppie.length === 0, 'ogni pagina Instagram ha una mail sola, uguale su tutte le sue pagine');
+  const senza = conCredito.filter((p) => mailDi[p.ig] && !p.mail);
+  r.ok(senza.length === 0,
+    `nessuna pagina della provincia resta senza la mail${senza.length ? ': ' + senza.slice(0, 3).map((p) => p.rel).join(', ') : ''}`);
+  const storte = conCredito.filter((p) => p.corr && p.corr !== (p.mail || 'info@daop.it'));
+  r.ok(storte.length === 0,
+    `«Segnala una correzione» scrive allo stesso indirizzo del credito${storte.length ? ': ' + storte.slice(0, 3).map((p) => `${p.rel} (${p.corr})`).join(', ') : ''}`);
+
+  // Il reso: era un paragrafo solo con tre cose dentro, e si leggeva come un
+  // blocco. Si misura che mail e link stiano su righe loro, non si legge il CSS.
+  const cavia = conCredito.find((p) => p.mail && p.corr);
+  if (cavia) {
+    const s3 = await apri(browser, cavia.rel, 360);
+    const g = await s3.page.evaluate(() => {
+      const box = (s) => { const e = document.querySelector(s); return e && e.getBoundingClientRect(); };
+      const chi = box('.ev-fonte .fonte-chi');
+      const mail = box('.ev-fonte .fonte-mail');
+      const link = box('.ev-firma-link');
+      return {
+        chi: chi && chi.bottom, mail: mail && mail.top, mailFine: mail && mail.bottom,
+        link: link && link.top, busta: !!document.querySelector('.fonte-mail svg'),
+        largo: document.documentElement.scrollWidth > window.innerWidth,
+      };
+    });
+    r.ok(g.chi !== null && g.mail !== null && g.mail >= g.chi - 1,
+      `${cavia.rel}: la mail sta sotto il credito, su una riga sua`);
+    r.ok(g.busta, 'la riga della mail ha la busta davanti');
+    r.ok(g.link !== null && g.link >= g.mailFine,
+      'i link di servizio stanno su una riga loro, sotto la mail');
+    r.ok(!g.largo, 'a 360px la riga della mail non fa scorrere la pagina di lato');
+    await s3.ctx.close();
+  }
+
   return r;
 };
