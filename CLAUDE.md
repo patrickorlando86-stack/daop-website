@@ -1448,8 +1448,10 @@ tutti, e `rel="sponsored"` su **tutti** i link in uscita — non c'è più una m
 Ne segue l'invito in coda: **non dice più «la scheda è gratuita»**. Non dice
 nemmeno un prezzo — si tratta caso per caso — e dice invece *cosa comprende*,
 che è quello che una società deve sapere prima di scrivere. E dice **a chi**
-scrivere: `collabora@eventiperbambinicuneo.it` per Cuneo, `info@daop.it` per
-Alessandria e Asti (`MAIL_PROV` in `genera_corsi.py`). La riga si compone dai
+scrivere: `cuneo@daop.it` per Cuneo, `info@daop.it` per Alessandria e Asti
+(`MAIL_PROV` in `genera_corsi.py`). Fino al 15/09/2026 per Cuneo era
+`collabora@eventiperbambinicuneo.it`, il dominio del vecchio sito di Giovanni:
+da quel giorno il nome di quel sito non compare più in nessuna pagina. La riga si compone dai
 dati, non da un testo fisso: finché i corsi sono tutti di Cuneo si legge un
 indirizzo solo, e il secondo compare da sé con la prima società di Alessandria.
 Un testo scritto a mano con due indirizzi direbbe oggi una cosa non vera.

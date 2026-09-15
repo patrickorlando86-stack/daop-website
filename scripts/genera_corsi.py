@@ -2475,7 +2475,11 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
 # sono tutti di Cuneo si legge un indirizzo solo, e la seconda mail compare da
 # se' il giorno che entra la prima societa' di Alessandria. Un testo fisso con
 # due indirizzi direbbe oggi una cosa non vera.
-MAIL_PROV = {'CN': 'collabora@eventiperbambinicuneo.it'}
+#
+# Dal 15/09/2026 Giovanni scrive da cuneo@daop.it: prima era
+# collabora@eventiperbambinicuneo.it, il dominio del suo vecchio sito, che dal
+# 21/08 non si usa piu'. Il nome di quel sito non compare piu' in pagina.
+MAIL_PROV = {'CN': 'cuneo@daop.it'}
 MAIL_DEFAULT = 'info@daop.it'
 
 
