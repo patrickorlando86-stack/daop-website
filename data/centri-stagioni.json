@@ -1,8 +1,8 @@
 {
  "estivi": {
-  "attivi": 1,
+  "attivi": 0,
   "file": "centri-estivi.html",
-  "inizio": "2026-08-31",
+  "inizio": null,
   "voce": "Centri estivi"
  },
  "invernali": {

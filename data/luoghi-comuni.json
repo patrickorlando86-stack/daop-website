@@ -92,14 +92,7 @@
  "c-al-cantalupo-ligure": {
   "comune": "Cantalupo Ligure",
   "n": 4,
-  "prov": "AL",
-  "sponsor": [
-   {
-    "ancora": "lg-terra-di-pan-cantalupo-ligure",
-    "nome": "Terra di Pan",
-    "tipo": "Spazi per Bambini"
-   }
-  ]
+  "prov": "AL"
  },
  "c-al-capriata-d-orba": {
   "comune": "Capriata d'Orba",
@@ -189,19 +182,7 @@
  "c-al-castelnuovo-scrivia": {
   "comune": "Castelnuovo Scrivia",
   "n": 7,
-  "prov": "AL",
-  "sponsor": [
-   {
-    "ancora": "lg-elilu-soul-farm-castelnuovo-scrivia-castelnuovo-sc",
-    "nome": "Elilu Soul Farm – Castelnuovo Scrivia",
-    "tipo": "Fattorie Didattiche"
-   },
-   {
-    "ancora": "lg-la-fattoria-di-giulia-castelnuovo-scrivia",
-    "nome": "La Fattoria di Giulia",
-    "tipo": "Fattorie Didattiche"
-   }
-  ]
+  "prov": "AL"
  },
  "c-al-cavatore": {
   "comune": "Cavatore",
@@ -396,14 +377,7 @@
  "c-al-pasturana": {
   "comune": "Pasturana",
   "n": 4,
-  "prov": "AL",
-  "sponsor": [
-   {
-    "ancora": "lg-arceam-pasturana",
-    "nome": "Arceam",
-    "tipo": "Animazione & Feste"
-   }
-  ]
+  "prov": "AL"
  },
  "c-al-pecetto-di-valenza": {
   "comune": "Pecetto di Valenza",
@@ -1317,7 +1291,7 @@
  },
  "c-cn-mondovi": {
   "comune": "Mondovì",
-  "n": 3,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-monforte-d-alba": {
