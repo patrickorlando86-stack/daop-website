@@ -89,10 +89,22 @@ PROVINCE_IG = {
     # l'aveva, e la voce non si stampava ne' nel footer ne' nella card della
     # home - "quello che non c'e' non si inventa". Aggiunto qui, le due
     # superfici lo prendono da se': e' l'unico posto dove i profili vivono.
+    # 'mail' dal 15/09/2026: la provincia che ha un indirizzo suo lo stampa nel
+    # credito e nel "Segnala una correzione" delle sue schede; le altre restano
+    # su info@daop.it. E' anche l'indirizzo dell'invito alle societa' dei corsi
+    # (MAIL_PROV in genera_corsi.py lo legge da qui): un posto solo.
     'CN': {'ig': 'daop_cuneo', 'nostra': True,
            'fb': 'https://www.facebook.com/daopcuneo',
-           'curatore': 'Giovanni'},
+           'curatore': 'Giovanni',
+           'mail': 'cuneo@daop.it'},
 }
+
+MAIL_DAOP = 'info@daop.it'
+
+
+def mail_provincia(prov):
+    """L'indirizzo a cui scrivere per gli eventi di una provincia."""
+    return (PROVINCE_IG.get((prov or '').strip().upper()) or {}).get('mail') or MAIL_DAOP
 
 
 def fonte_provincia(prov):
@@ -246,10 +258,19 @@ def credito_fonte(f, apertura, classe='com-fonte', breve=False):
             else f"la provincia di {esc(f['provincia'])}")
     chi = (f"la nostra pagina per {dove}" if f['nostra'] else
            f"la pagina che segue {dove}, con cui collaboriamo")
+    # L'indirizzo della provincia, dove ce n'e' uno suo. Una frase dentro lo
+    # stesso paragrafo e non un blocco: parla a chi organizza, e per la regola
+    # qui sopra non diventa una seconda richiesta.
+    mail = ''
+    if f.get('mail'):
+        in_dove = ('in questa provincia' if breve
+                   else f"in provincia di {esc(f['provincia'])}")
+        mail = (f'Organizzi un evento {in_dove}? Scrivi a '
+                f'<a href="mailto:{esc(f["mail"])}">{esc(f["mail"])}</a>. ')
     return (f'<p class="{classe}">{apertura} '
             f'<a class="ev-ig" href="{f["url"]}" target="_blank" rel="noopener">'
             f'@{esc(f["ig"])}</a>, {chi}: seguila per gli eventi in arrivo. '
-            f'<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
+            f'{mail}<a href="{ZONE_HREF}">Le pagine della tua zona</a></p>')
 
 
 def province_in_elenco(codici):
@@ -3453,6 +3474,8 @@ def firma_daop(rec, oggi, ritirata=False):
     # l'ha controllata e quando.
     credito = credito_fonte(fonte_provincia(rec.get('prov')), 'Segnalato da',
                             classe='ev-fonte')
+    # La correzione va a chi segue quella provincia (cuneo@daop.it per Cuneo).
+    mail = mail_provincia(rec.get('prov'))
     # Scheda RITIRATA: la riga e' stata tolta dal foglio prima della sua data.
     # Qui non si puo' dire "verificata": il 18/08/2026 quella frase e' rimasta in
     # piedi, con tanto di "ultimo controllo", su un evento che avevamo cancellato
@@ -3471,7 +3494,7 @@ def firma_daop(rec, oggi, ritirata=False):
             f'{credito}'
             '<p class="ev-firma-nota">'
             '<a href="/eventi.html">Vai all\'agenda aggiornata</a> · '
-            f'<a href="mailto:info@daop.it?subject={ogg}">Segnala una correzione</a></p>'
+            f'<a href="mailto:{mail}?subject={ogg}">Segnala una correzione</a></p>'
             '</aside>')
     return (
         '<aside class="ev-firma">'
@@ -3483,7 +3506,7 @@ def firma_daop(rec, oggi, ritirata=False):
         '<p class="ev-firma-nota">Le informazioni possono cambiare. Prima di partire, '
         'controlla eventuali aggiornamenti dell\'organizzatore. '
         '<a href="/metodo.html">Come verifichiamo gli eventi</a> · '
-        f'<a href="mailto:info@daop.it?subject={ogg}">Segnala una correzione</a></p>'
+        f'<a href="mailto:{mail}?subject={ogg}">Segnala una correzione</a></p>'
         '</aside>')
 
 

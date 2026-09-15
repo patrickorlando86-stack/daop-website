@@ -2479,8 +2479,10 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
 # Dal 15/09/2026 Giovanni scrive da cuneo@daop.it: prima era
 # collabora@eventiperbambinicuneo.it, il dominio del suo vecchio sito, che dal
 # 21/08 non si usa piu'. Il nome di quel sito non compare piu' in pagina.
-MAIL_PROV = {'CN': 'cuneo@daop.it'}
-MAIL_DEFAULT = 'info@daop.it'
+# Gli indirizzi si leggono da PROVINCE_IG: sono gli stessi che il credito delle
+# schede evento stampa per quella provincia, e due elenchi divergerebbero.
+MAIL_PROV = {s: f['mail'] for s, f in G.PROVINCE_IG.items() if f.get('mail')}
+MAIL_DEFAULT = G.MAIL_DAOP
 
 
 def _mail_per(corsi):

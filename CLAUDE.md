@@ -1451,7 +1451,16 @@ che è quello che una società deve sapere prima di scrivere. E dice **a chi**
 scrivere: `cuneo@daop.it` per Cuneo, `info@daop.it` per Alessandria e Asti
 (`MAIL_PROV` in `genera_corsi.py`). Fino al 15/09/2026 per Cuneo era
 `collabora@eventiperbambinicuneo.it`, il dominio del vecchio sito di Giovanni:
-da quel giorno il nome di quel sito non compare più in nessuna pagina. La riga si compone dai
+da quel giorno il nome di quel sito non compare più in nessuna pagina.
+
+L'indirizzo di una provincia vive **in un posto solo**, la chiave `mail` di
+`PROVINCE_IG` in `genera_eventi.py`, e da lì lo prendono tre cose: questo
+invito, il credito in fondo alle pagine di quella provincia («Organizzi un
+evento in provincia di Cuneo? Scrivi a cuneo@daop.it», dentro `credito_fonte()`:
+schede, pagine comune, provinciali) e il «Segnala una correzione» delle sue
+schede (`mail_provincia()`). Una provincia senza `mail` resta su `info@daop.it`
+e il credito non cambia. È una frase dentro il credito e non un blocco: parla a
+chi organizza, e in cima alla pagina resta solo Ginetto. La riga si compone dai
 dati, non da un testo fisso: finché i corsi sono tutti di Cuneo si legge un
 indirizzo solo, e il secondo compare da sé con la prima società di Alessandria.
 Un testo scritto a mano con due indirizzi direbbe oggi una cosa non vera.
