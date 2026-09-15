@@ -41,7 +41,7 @@
    "slug": "ceva"
   },
   "cn-cuneo": {
-   "n": 2,
+   "n": 3,
    "nome": "Cuneo",
    "slug": "cuneo"
   },
@@ -50,8 +50,13 @@
    "nome": "Dogliani",
    "slug": "dogliani"
   },
+  "cn-fossano": {
+   "n": 1,
+   "nome": "Fossano",
+   "slug": "fossano"
+  },
   "cn-mondovi": {
-   "n": 4,
+   "n": 5,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -77,6 +82,6 @@
   }
  },
  "province": {
-  "CN": 55
+  "CN": 58
  }
 }
