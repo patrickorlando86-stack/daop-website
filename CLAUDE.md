@@ -6776,6 +6776,20 @@ Due dettagli che sembrano cavilli e non lo sono:
 
 Verificata rossa **rimettendo i due difetti uno alla volta**, non supposta.
 
+### Il blocco CENTRI: con tutte le stagioni spente non si riscriveva
+
+Rosso il 15/09/2026: `centri-estivi.html` era `noindex, follow` (zero centri
+attivi) e stava ancora in sitemap. `aggiorna_sitemap()` di `genera_centri.py`
+escludeva già le pagine in noindex, ma **quando lo erano tutte e tre** la lista
+restava vuota e la funzione usciva con «nessuna pagina centri su disco, sitemap
+invariata» — cioè lasciava il blocco di ieri. Il log mentiva: le pagine c'erano.
+
+Ora il blocco si svuota tenendo i marker (la stagione che torna viva ha dove
+rientrare), e chi entra lo decide **solo** il robots della pagina su disco, letto
+dal `<meta>`: il secondo conto (`bool(attivi)` accanto a quello di `render()`) non
+c'è più. È la regola di `scrivi_pagine_comune()`. Verificata rossa girando la
+funzione di prima sulle stesse pagine.
+
 ## Verifiche prima di pubblicare
 
 Girano tutti in CI **dopo** il commit: il sito si aggiorna comunque e la run
