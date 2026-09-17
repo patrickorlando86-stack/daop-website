@@ -1314,6 +1314,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-moretta": {
+  "comune": "Moretta",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-murazzano": {
   "comune": "Murazzano",
   "n": 1,
@@ -1331,6 +1336,11 @@
  },
  "c-cn-niella-tanaro": {
   "comune": "Niella Tanaro",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-novello": {
+  "comune": "Novello",
   "n": 1,
   "prov": "CN"
  },
@@ -1491,7 +1501,7 @@
  },
  "c-cn-valdieri": {
   "comune": "Valdieri",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-venasca": {

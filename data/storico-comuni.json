@@ -412,6 +412,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "ciclo-tornio-vuoi-la-trottola-pedala-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pump Track",
+    "manifest": "",
+    "nome": "Ciclo-Tornio – Vuoi la trottola? Pedala!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-18"
+   },
    "cinema-drive-in-e-t-l-extra-terrestre-i-spettacolo-alessandria": {
     "anni": [
      2026
@@ -478,6 +489,28 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "festa-volley-s3-academy-volley-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro d'Incontro Rione Cristo",
+    "manifest": "",
+    "nome": "Festa Volley S3 - Academy Volley Alessandria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
+   "gagliaudo-tra-i-mercanti-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie e piazze del centro storico",
+    "manifest": "Gagliaudo tra i Mercanti 2026",
+    "nome": "Gagliaudo tra i Mercanti 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "i-torneo-di-bandiera-citta-di-alessandria-associaz": {
     "anni": [
      2026
@@ -486,6 +519,28 @@
     "manifest": "",
     "nome": "I Torneo di Bandiera Città di Alessandria - Associazione Aleramica",
     "organizza": "Associazione Aleramica",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
+   "i-vestiti-dell-imperatrice-stregatti-compagnia-tea-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Caniggia",
+    "manifest": "Gagliaudo tra i Mercanti",
+    "nome": "I Vestiti dell'Imperatrice - Stregatti Compagnia Teatrale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
+   "il-piccolo-principe-centro-commerciale-panorama-al-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Commerciale Panorama Alessandria",
+    "manifest": "",
+    "nome": "Il Piccolo Principe - Centro Commerciale Panorama Alessandria",
+    "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
    },
@@ -788,6 +843,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-03"
+   },
+   "open-day-musici-e-sbandieratori-borgo-don-bosco-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palestra Scuola Galileo Ferraris",
+    "manifest": "Open Day Borgo Don Bosco",
+    "nome": "Open Day Musici e Sbandieratori - Borgo Don Bosco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
    },
    "paleolab-paleontologo-per-un-giorno-parco-paleonto-asti": {
     "anni": [
@@ -2357,6 +2423,17 @@
  },
  "castagnoledellelanze": {
   "eventi": {
+   "10-000-passi-contro-il-diabete-castagnole-delle-lanze": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Roma davanti alle scuole elementari",
+    "manifest": "10.000 Passi Contro il Diabete",
+    "nome": "10.000 Passi Contro il Diabete",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "castelli-aperti-a-ferragosto-torre-del-conte-balla-castagnole-delle-lanze": {
     "anni": [
      2026
@@ -4761,6 +4838,23 @@
   "nome": "Frabosa Soprana",
   "prov": "CN"
  },
+ "francavillabisio": {
+  "eventi": {
+   "raviolata-d-autunno-di-francavilla-b-francavilla-bisio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Francavilla B.",
+    "manifest": "Raviolata d'Autunno di Francavilla B.",
+    "nome": "Raviolata d'Autunno di Francavilla B.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   }
+  },
+  "nome": "Francavilla Bisio",
+  "prov": "AL"
+ },
  "frascaro": {
   "eventi": {
    "frutti-e-buoi-dei-paesi-tuoi-frascaro": {
@@ -4852,6 +4946,17 @@
     "organizza": "Pro Loco Garbagna",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "sagra-delle-castagne-pro-loco-garbagna": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Garbagna",
+    "manifest": "",
+    "nome": "55ª Sagra delle Castagne - Pro Loco Garbagna",
+    "organizza": "Pro Loco Garbagna",
+    "pagina": true,
+    "ultima": "2026-10-11"
    }
   },
   "nome": "Garbagna",
@@ -5371,6 +5476,23 @@
   "nome": "Marmora",
   "prov": "CN"
  },
+ "mirabellomonferrato": {
+  "eventi": {
+   "festa-inizio-anno-oratoriano-mirabello-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa di Mirabello Monferrato",
+    "manifest": "Festa Inizio Anno Oratoriano",
+    "nome": "Festa Inizio Anno Oratoriano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   }
+  },
+  "nome": "Mirabello Monferrato",
+  "prov": "AL"
+ },
  "molare": {
   "eventi": {
    "polentone-di-molare": {
@@ -5765,6 +5887,23 @@
    }
   },
   "nome": "Montemagno",
+  "prov": "AT"
+ },
+ "montemagnomonferrato": {
+  "eventi": {
+   "raduno-auto-sportive-e-storiche-memorial-accornero-montemagno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Caffé & Parole",
+    "manifest": "",
+    "nome": "7° Raduno Auto Sportive e Storiche - 5° Memorial Accornero Carlo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   }
+  },
+  "nome": "Montemagno Monferrato",
   "prov": "AT"
  },
  "monteuroero": {
@@ -6169,6 +6308,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-10-26"
+   },
+   "preparare-il-pavimento-pelvico-al-parto-beatrice-b-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Salotto di Bea",
+    "manifest": "",
+    "nome": "Preparare il pavimento pelvico al parto - Beatrice Botto Ostetrica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-07"
    },
    "preparare-il-pavimento-pelvico-al-parto-nizza-monferrato": {
     "anni": [
@@ -6782,6 +6932,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "la-piazza-di-pecetto-pecetto-di-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile del Municipio",
+    "manifest": "La Piazza di Pecetto",
+    "nome": "La Piazza di Pecetto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
+   },
    "notte-dei-desideri-gruppo-astrofili-galileo-pecetto-di-valenza": {
     "anni": [
      2026
@@ -6997,6 +7158,23 @@
   },
   "nome": "Pontechianale",
   "prov": "CN"
+ },
+ "pontecurone": {
+  "eventi": {
+   "ponte-in-ballo-ritmo-sapori-e-siamo-in-festa-comit-pontecurone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pontecurone",
+    "manifest": "Autunniamo XVII Edizione",
+    "nome": "Ponte... in Ballo! Ritmo Sapori... e Siamo in Festa! - Comitato Autunniamo",
+    "organizza": "Comitato Autunniamo",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   }
+  },
+  "nome": "Pontecurone",
+  "prov": "AL"
  },
  "ponti": {
   "eventi": {
@@ -9034,6 +9212,17 @@
     "organizza": "Pro Loco di Sarezzano",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "inaugurazione-alpaca-lounge-bioparco-cinofilo-del-sarezzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Alpaca Lounge - Bioparco Cinofilo del Piemonte Orientale",
+    "manifest": "",
+    "nome": "Inaugurazione Alpaca Lounge - Bioparco Cinofilo del Piemonte Orientale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
    }
   },
   "nome": "Sarezzano",
@@ -9954,6 +10143,23 @@
   },
   "nome": "Viarigi",
   "prov": "AT"
+ },
+ "vignoleborbera": {
+  "eventi": {
+   "festa-dello-sport-comune-di-vignole-borbera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Lorenzo",
+    "manifest": "",
+    "nome": "Festa dello Sport - Comune di Vignole Borbera",
+    "organizza": "Comune di Vignole Borbera",
+    "pagina": true,
+    "ultima": "2026-09-18"
+   }
+  },
+  "nome": "Vignole Borbera",
+  "prov": "AL"
  },
  "viguzzolo": {
   "eventi": {
