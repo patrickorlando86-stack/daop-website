@@ -56,7 +56,7 @@
    "slug": "fossano"
   },
   "cn-mondovi": {
-   "n": 6,
+   "n": 4,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -82,6 +82,6 @@
   }
  },
  "province": {
-  "CN": 59
+  "CN": 57
  }
 }
