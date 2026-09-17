@@ -509,14 +509,47 @@ module.exports = async function luoghi(browser) {
   for (const larghezza of [412, 1280]) {
     const a = larghezza === 412 ? { ctx, page } : await apri(browser, 'luoghi.html', larghezza);
 
-    // 1. il link della vetrina: "spazi a pagamento, come funziona".
+    // 1. il link "spazi a pagamento, come funziona". Lo stampano DUE posti, e
+    //    tutti e due esistono solo finche' qualcuno paga: la testa del riquadro
+    //    Sponsorizzati e il corpo di ogni scheda a pagamento. Il 17/09/2026
+    //    l'ultimo `Premium_al` era scaduto (quattro schede, tutte al
+    //    01/09/2026), il riquadro era sparito com'e' giusto - e qui si moriva
+    //    su un querySelector nullo, cioe' la prova era ROSSA proprio nello
+    //    stato in cui il sito fa la cosa per cui `Premium_al` e' nata. E non si
+    //    portava dietro solo se stessa: il crash saltava il controllo 2 - il
+    //    ponte delle ~450 schede evento, che e' quello che conta - e le sei
+    //    suite dopo questa, perche' run.js non incapsula le suite.
+    //
+    //    Quello che si difende e' l'ATTERRAGGIO, non il clic. Senza un link in
+    //    pagina si salta col solo hash, che e' esattamente la strada del
+    //    controllo 2 e la stessa su cui lo `scroll-behavior:smooth` del guscio
+    //    sbagliava: l'invariante e' identica, e del clic resta una nota. Non e'
+    //    un rosso - zero schede a pagamento e' uno stato legittimo (nessuna
+    //    posizione venduta da dichiarare) e la sezione resta in pagina
+    //    comunque, che e' quello che l'art. 22 comma 4-bis chiede.
+    const viaLink = await a.page.evaluate(() =>
+      [...document.querySelectorAll('a[href="#come-ordiniamo"]')].some((x) => x.offsetParent));
     const v = await atterra(a.page, '#come-ordiniamo h2', (p) => p.evaluate(() => {
       window.scrollTo(0, 0);
-      document.querySelector('#lg-vetrina a[href="#come-ordiniamo"]').click();
+      // Resi, non presenti: il link della scheda a pagamento vive dentro un
+      // <details> chiuso, quindi non e' cliccabile - e uno non cliccabile non
+      // proverebbe niente. La testa del riquadro viene prima perche' e' quella
+      // che ha trovato il difetto dell'11/09.
+      const resi = [...document.querySelectorAll('a[href="#come-ordiniamo"]')]
+        .filter((x) => x.offsetParent);
+      const l = resi.find((x) => x.closest('#lg-vetrina')) || resi[0];
+      if (l) { l.click(); return; }
+      location.hash = '';
+      location.hash = 'come-ordiniamo';
     }));
     r.ok(!v.manca && v.top >= v.tetto && v.top < v.vh && v.suo, v.manca
       ? `${larghezza}px: la sezione #come-ordiniamo non c'e'`
-      : `${larghezza}px: "come funziona" porta al suo titolo, a ${v.top}px sotto un tetto di ${v.tetto}px`);
+      : `${larghezza}px: #come-ordiniamo si raggiunge ${viaLink ? 'dal suo link' : 'col suo hash'}`
+        + ` e arriva a ${v.top}px sotto un tetto di ${v.tetto}px`);
+    if (!viaLink) {
+      console.log(`  nota ${larghezza}px: nessun link a #come-ordiniamo in pagina`
+        + ' (niente schede a pagamento), quindi si prova l\'atterraggio e non il clic');
+    }
 
     // 2. il verso che arriva da fuori: /luoghi.html#c-<prov>-<comune>, cioe'
     //    il ponte delle ~450 schede evento. Qui non c'e' nessun clic: e' il
@@ -820,7 +853,36 @@ module.exports = async function luoghi(browser) {
     /<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)]
     .map((m) => { try { return JSON.parse(m[1]); } catch (e) { return null; } })
     .filter((g) => g && g['@type'] === 'Place');
-  r.ok(posti.length > 0, `${posti.length} Place nei dati strutturati`);
+  // Il conteggio qui era `posti.length > 0`, e il crash qui sopra lo teneva
+  // nascosto: il Place lo stampa SOLO una scheda a pagamento (un Place per
+  // ognuno degli 800 luoghi sarebbe mezzo mega di dati strutturati che non
+  // produce nessun rich result), quindi scadute tutte e quattro le `Premium_al`
+  // quel minimo era rosso mentre il generatore faceva la cosa giusta. E' la
+  // forma di prova invecchiata gia' pagata piu' volte qui dentro - *una prova
+  // che pretende un'uniformita' che il sito ha smesso di volere*.
+  //
+  // L'invariante giusta e' un RAPPORTO fra due insiemi, che non ha una taglia
+  // giusta e regge in tutti e due i versi: ogni scheda a pagamento ha il suo
+  // Place, e nessuna gratuita ce l'ha. Con zero clienti e' verde; il giorno che
+  // il generatore smette di stamparlo per un cliente, o lo stampa per chi non
+  // paga, e' rossa.
+  const conPlace = new Set(posti
+    .map((p) => String(p['@id'] || '').split('#')[1]).filter(Boolean));
+  const senzaPlace = [...pagate].filter((id) => !conPlace.has(id));
+  const placeGratis = [...conPlace].filter((id) => !pagate.has(id));
+  r.ok(senzaPlace.length === 0 && placeGratis.length === 0,
+    senzaPlace.length || placeGratis.length
+      ? `Place e schede a pagamento non combaciano: ${senzaPlace.length} pagate senza Place`
+        + ` (${senzaPlace.slice(0, 3).join(', ')}), ${placeGratis.length} Place di schede che`
+        + ` non pagano (${placeGratis.slice(0, 3).join(', ')})`
+      : `un Place per ogni scheda a pagamento e per nessun'altra (${posti.length})`);
+  // I tre controlli qui sotto sono rapporti anche loro, quindi con zero Place
+  // passano a vuoto: si dice, se no si legge tre volte "ok" credendo di aver
+  // provato qualcosa.
+  if (!pagate.size) {
+    console.log('  nota nessuna scheda a pagamento in pagina: i tre controlli sui Place'
+      + ' passano a vuoto');
+  }
 
   const social = (u) => SOCIAL.some(([rx]) => rx.test(u || ''));
   const urlSocial = posti.filter((p) => social(p.url));
