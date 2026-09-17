@@ -5978,6 +5978,55 @@ sparisca vuoto; che il conteggio non raddoppi. Verificate rosse rimettendo tre
 difetti uno alla volta: etichetta nascosta sotto i 600px («7 su 7 no»), riquadro
 che ignora i filtri, conteggio doppio.
 
+##### Il giorno che i clienti sono zero la prova andava in crash, e teneva nascosta la seconda
+
+Il 17/09/2026: le quattro `Premium_al` erano **scadute il 01/09**, quindi zero
+schede a pagamento, zero `is-prem` e **nessun riquadro**. È il comportamento per
+cui `Premium_al` è nata — il generatore lo dice ogni notte, «premium SCADUTO il
+2026-09-01: … torna una riga normale» — e `tests/luoghi.js` ci moriva sopra da
+quindici giorni:
+
+```
+CRASH: page.evaluate: TypeError: Cannot read properties of null (reading 'click')
+```
+
+Era `document.querySelector('#lg-vetrina a[href="#come-ordiniamo"]').click()`, e
+**il crash costava molto più della sua prova**: saltava il controllo che viene
+subito dopo — il ponte `#c-<prov>-<comune>` delle ~450 schede evento, cioè la
+metà che conta — e, siccome `run.js` non incapsula le suite, le **sei suite dopo
+questa** (`corsi`, `porte`, `guide`, `sitemap`, `social`, `cta`) non giravano
+affatto. Una run rossa al quarto file su dieci non dice niente sugli altri sei.
+
+Adesso quello che si difende è l'**atterraggio, non il clic**: si cerca un link a
+`#come-ordiniamo` *reso* (la testa del riquadro se c'è, se no qualunque altro —
+quello dentro la scheda a pagamento vive in un `<details>` chiuso e un link non
+cliccabile non proverebbe niente), e senza nessuno si salta **col solo hash**,
+che è la strada del controllo 2 e la stessa su cui lo `scroll-behavior:smooth`
+sbagliava. L'invariante è identica, del clic resta una nota. **Non è un rosso**:
+zero clienti vuol dire nessuna posizione venduta da dichiarare, e la sezione
+resta in pagina comunque.
+
+**E dietro il crash c'era la nona prova invecchiata**, che nessuno poteva vedere
+perché la suite moriva prima: `r.ok(posti.length > 0)` sui `Place` dei dati
+strutturati. Il `Place` lo stampa **solo** una scheda a pagamento — uno per
+ognuno degli 800 luoghi sarebbe mezzo mega di dati che non produce nessun rich
+result — quindi quel minimo era rosso esattamente quando il generatore faceva la
+cosa giusta. È la forma di sempre: *una prova che pretende un'uniformità che il
+sito ha smesso di volere*. Ora è un **rapporto fra due insiemi**, e nei due
+versi: ogni scheda pagata ha il suo `Place`, e nessuna gratuita ce l'ha. Il verso
+nuovo è quello che conta — col vecchio `> 0`, tre `Place` su quattro clienti
+passavano, cioè un cliente perdeva i propri dati strutturati senza che niente
+diventasse rosso.
+
+Verificate rosse rimettendo tre difetti uno alla volta, e **la prima nello stato
+di oggi**, che è il punto: `scroll-margin` togliato con zero clienti dice
+«#come-ordiniamo … arriva a 16px sotto un tetto di 224px» invece di crashare;
+`Place` per tutti dice «4 pagate senza Place, 12 Place di schede che non pagano»;
+una pagata saltata dice «1 pagate senza Place». Lo stato coi clienti si rifà
+girando il generatore con `datetime.date.today` spostata prima della scadenza —
+lì il messaggio torna a dire «si raggiunge **dal suo link**», cioè il difetto
+dell'11/09 continua a misurarsi sulla strada vera.
+
 Non è solo stile: **art. 22 comma 4-bis del Codice del consumo** (Omnibus, D.Lgs.
 26/2023) impone di dichiarare i parametri di ordinamento di una lista
 ricercabile, e omettere che una posizione è stata pagata sta nella lista nera
