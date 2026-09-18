@@ -305,6 +305,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "quadri-di-quilling-novelab-albaretto-della-torre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Albaretto della Torre",
+    "manifest": "Fabriano All Around 2026 - Festival del Disegno",
+    "nome": "Quadri di Quilling - Novelab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
    }
   },
   "nome": "Albaretto della Torre",
@@ -1298,6 +1309,17 @@
  },
  "bra": {
   "eventi": {
+   "bra-s-festival": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini del Belvedere",
+    "manifest": "BRA'S Festival",
+    "nome": "BRA'S Festival",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "castelli-aperti-a-ferragosto-la-zizzola-bra": {
     "anni": [
      2026
@@ -1381,6 +1403,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "i-madrigal-storia-di-un-encanto-compagnia-teatrale-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Civico",
+    "manifest": "",
+    "nome": "I Madrigal - Storia di un Encanto - Compagnia teatrale Once Upon A Time",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-10-24"
+   },
+   "vi-racconto-una-bella-storia-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesetta di San Quintino",
+    "manifest": "",
+    "nome": "Vi Racconto una Bella Storia...",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-24"
    }
   },
   "nome": "Busca",
@@ -3876,6 +3920,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "biblio-storie-letture-a-cura-di-abl-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca 0-18",
+    "manifest": "ESSECI Opening",
+    "nome": "Biblio-Storie - Letture a cura di ABL",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "cerchiamoci-laboratorio-psicomotorio-cuneo": {
     "anni": [
      2026
@@ -3919,6 +3974,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "cuneo-vive-lo-sport-coldiretti-cuneo-campagna-amic": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco della Resistenza",
+    "manifest": "",
+    "nome": "Cuneo Vive lo Sport 2026 - Coldiretti Cuneo / Campagna Amica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    },
    "doppio-laboratorio-di-musica-e-argilla-chiosco-par-cuneo": {
     "anni": [
@@ -4234,6 +4300,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-06"
+   },
+   "sport-in-piazza-comune-di-dogliani": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Impianti Sportivi",
+    "manifest": "",
+    "nome": "Sport in Piazza - Comune di Dogliani",
+    "organizza": "Comune di Dogliani",
+    "pagina": false,
+    "ultima": "2026-09-19"
    }
   },
   "nome": "Dogliani",
@@ -5377,6 +5454,17 @@
     "pagina": false,
     "ultima": "2026-08-15"
    },
+   "giochi-senza-frontiere-trame-edition-magliano-alfieri": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo di Magliano Alfieri",
+    "manifest": "",
+    "nome": "Giochi Senza Frontiere - Trame Edition",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   },
    "soma-d-aj-biblioteca-civica-di-magliano-alfieri": {
     "anni": [
      2026
@@ -5772,6 +5860,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "sport-in-piazza-lo-sport-per-tutti-citta-di-mondov-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Monteregale",
+    "manifest": "",
+    "nome": "Sport in Piazza - Lo Sport per Tutti - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
    }
   },
   "nome": "Mondovì",
@@ -5918,6 +6017,17 @@
     "organizza": "Associazione Amar",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "tutti-i-colori-della-cultura-kids-monteu-roero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa AllWays",
+    "manifest": "Tutti i colori della cultura KIDS - Monteu Roero",
+    "nome": "Tutti i colori della cultura KIDS - Monteu Roero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    }
   },
   "nome": "Monteu Roero",
@@ -8325,6 +8435,17 @@
     "pagina": false,
     "ultima": "2026-08-08"
    },
+   "mercatino-dei-bambini-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Mercatino dei bambini",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-20"
+   },
    "negozi-in-strada-sport-in-piazza-confcommercio-sal-saluzzo": {
     "anni": [
      2026
@@ -9195,6 +9316,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-04"
+   },
+   "selvatiche-secondo-natura-santo-stefano-belbo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa Natale di Cesare Pavese",
+    "manifest": "",
+    "nome": "Selvatiche - Secondo Natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-20"
    }
   },
   "nome": "Santo Stefano Belbo",
@@ -9251,6 +9383,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-26"
+   },
+   "sport-in-piazza-comune-di-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Popolo e Piazza Santa Rosa",
+    "manifest": "",
+    "nome": "Sport in Piazza - Comune di Savigliano",
+    "organizza": "Comune di Savigliano",
+    "pagina": true,
+    "ultima": "2026-09-19"
    }
   },
   "nome": "Savigliano",
@@ -10278,6 +10421,23 @@
   "nome": "Villanova d'Asti",
   "prov": "AT"
  },
+ "villanovamondovi": {
+  "eventi": {
+   "addolorata-la-tradizione-siamo-noi-villanova-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Lorenzo",
+    "manifest": "Addolorata 2026 - La Tradizione Siamo Noi",
+    "nome": "Addolorata 2026 - La Tradizione Siamo Noi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-19"
+   }
+  },
+  "nome": "Villanova Mondovì",
+  "prov": "CN"
+ },
  "villaromagnano": {
   "eventi": {
    "asd-villaromagnano-festeggiamo-i-30-anni": {
@@ -10396,6 +10556,17 @@
  },
  "villarsancostanzo": {
   "eventi": {
+   "ciciurun-a-s-d-villar-cn060-e-i-massari-di-san-cos-villar-san-costanzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio vicino alla Chiesa",
+    "manifest": "",
+    "nome": "19° Ciciurun - A.S.D. Villar CN060 e I Massari di San Costanzo",
+    "organizza": "A.S.D. Villar CN060 e I Massari di San Costanzo",
+    "pagina": false,
+    "ultima": "2026-09-22"
+   },
    "serata-di-magia-blink-circolo-magico-villar-san-costanzo": {
     "anni": [
      2026
