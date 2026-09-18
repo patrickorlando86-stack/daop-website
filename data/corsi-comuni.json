@@ -16,9 +16,14 @@
    "slug": "bossolasco"
   },
   "cn-bra": {
-   "n": 2,
+   "n": 5,
    "nome": "Bra",
    "slug": "bra"
+  },
+  "cn-bricco": {
+   "n": 1,
+   "nome": "Bricco",
+   "slug": "bricco"
   },
   "cn-camerana": {
    "n": 3,
@@ -40,6 +45,11 @@
    "nome": "Ceva",
    "slug": "ceva"
   },
+  "cn-cherasco": {
+   "n": 5,
+   "nome": "Cherasco",
+   "slug": "cherasco"
+  },
   "cn-cuneo": {
    "n": 3,
    "nome": "Cuneo",
@@ -55,8 +65,13 @@
    "nome": "Fossano",
    "slug": "fossano"
   },
+  "cn-la-morra": {
+   "n": 1,
+   "nome": "La Morra",
+   "slug": "la-morra"
+  },
   "cn-mondovi": {
-   "n": 6,
+   "n": 14,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -79,9 +94,15 @@
    "n": 7,
    "nome": "Vezza d'Alba",
    "slug": "vezza-d-alba"
+  },
+  "to-cinzano": {
+   "n": 1,
+   "nome": "Cinzano",
+   "slug": "cinzano"
   }
  },
  "province": {
-  "CN": 59
+  "CN": 82,
+  "TO": 1
  }
 }
