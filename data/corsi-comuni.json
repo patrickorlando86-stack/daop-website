@@ -16,7 +16,7 @@
    "slug": "bossolasco"
   },
   "cn-bra": {
-   "n": 5,
+   "n": 4,
    "nome": "Bra",
    "slug": "bra"
   },
@@ -76,7 +76,7 @@
    "slug": "la-morra"
   },
   "cn-mondovi": {
-   "n": 14,
+   "n": 13,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -102,6 +102,6 @@
   }
  },
  "province": {
-  "CN": 83
+  "CN": 81
  }
 }
