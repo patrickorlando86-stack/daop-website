@@ -50,6 +50,11 @@
    "nome": "Cherasco",
    "slug": "cherasco"
   },
+  "cn-cinzano": {
+   "n": 1,
+   "nome": "Cinzano",
+   "slug": "cinzano"
+  },
   "cn-cuneo": {
    "n": 3,
    "nome": "Cuneo",
@@ -94,15 +99,9 @@
    "n": 7,
    "nome": "Vezza d'Alba",
    "slug": "vezza-d-alba"
-  },
-  "to-cinzano": {
-   "n": 1,
-   "nome": "Cinzano",
-   "slug": "cinzano"
   }
  },
  "province": {
-  "CN": 82,
-  "TO": 1
+  "CN": 83
  }
 }
