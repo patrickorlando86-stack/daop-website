@@ -167,11 +167,54 @@ module.exports = async function cta(browser) {
   });
   const viste = (id) => pg.evaluate((i) => window.__ga.filter(
     (e) => e[1] === 'internal_cta_view' && e[2] && e[2].cta_id === i).map((e) => e[2]), id);
+  // Il registro NON si svuota mai: si segna il punto e si guarda da li' in
+  // poi. Svuotarlo prima di un clic cancellava anche le viste arrivate prima,
+  // e una vista arriva quando il blocco passa a schermo - cioe' quando
+  // decide la pagina, non quando fa comodo alla prova. Con due blocchi
+  // vicini, "la vista di Ginetto arriva" sarebbe andata rossa per una vista
+  // arrivata puntuale e poi buttata via.
+  const segna = () => pg.evaluate(() => window.__ga.length);
+  const daQui = (n) => pg.evaluate((i) => window.__ga.slice(i), n);
+  // Porta un blocco a schermo, e se ne accerta.
+  //
+  // Lo scorrimento e' ISTANTANEO, e non e' un dettaglio di comodo: le pagine
+  // evento ereditano `html{scroll-behavior:smooth}` dal <style> di
+  // eventi.html, quindi scrollIntoView() ANIMA. Con un'attesa fissa di 400 ms
+  // questa prova misurava dove era arrivata l'animazione, non dove finisce -
+  // e il blocco di Ginetto (alto 413px su uno schermo da 915) si fermava a
+  // 201px scoperti in un giro e a 247 in quello dopo, cioe' sotto e sopra la
+  // meta' che l'osservatore pretende. Misurato il 19/09/2026: due rossi su
+  // sei giri, e i verdi erano verdi per caso. Qui si prova che un blocco a
+  // schermo manda la sua vista, non quanto e' fluido lo scorrimento.
+  //
+  // E poi non si aspetta a tempo: si aspetta la CONDIZIONE, che e' la stessa
+  // scritta in daop-track.js - meta' del blocco, oppure una fetta pari al 40%
+  // dello schermo per i blocchi piu' alti di esso. Se non ci arriva, a essere
+  // rotta e' la prova, e cade qui dicendo quello invece di far cadere
+  // l'asserzione dopo con "la vista non arriva".
+  //
+  // E i due scorrimenti vogliono un FOTOGRAMMA in mezzo. Non e' una pausa di
+  // cortesia: `IntersectionObserver` consegna i cambi di stato, e andare a
+  // zero e tornare indietro nello stesso giro di codice non e' un cambio -
+  // il blocco non e' mai stato fuori, quindi rientrando non attraversa
+  // niente e la vista non riparte. E' anche il contratto di daop-track.js:
+  // senza consenso non segna come visto, e ci riprova "al prossimo passaggio
+  // di soglia". Senza il fotogramma in mezzo quel passaggio non esiste.
+  const fotogrammi = (n) => pg.evaluate((quanti) => new Promise((ok) => {
+    let i = quanti;
+    (function giro() { i -= 1; return i > 0 ? requestAnimationFrame(giro) : ok(); }());
+  }), n);
   const vai = async (sel) => {
-    await pg.evaluate(() => window.scrollTo(0, 0));
-    await pg.waitForTimeout(250);
-    await pg.evaluate((s) => document.querySelector(s).scrollIntoView({ block: 'center' }), sel);
-    await pg.waitForTimeout(400);
+    await pg.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await fotogrammi(3);
+    await pg.evaluate((s) => document.querySelector(s)
+      .scrollIntoView({ block: 'center', behavior: 'instant' }), sel);
+    await pg.waitForFunction((s) => {
+      const b = document.querySelector(s).getBoundingClientRect();
+      const dentro = Math.min(b.bottom, innerHeight) - Math.max(b.top, 0);
+      return dentro >= b.height * 0.5 || dentro >= innerHeight * 0.4;
+    }, sel, { timeout: 5000 });
+    await fotogrammi(3);
   };
 
   await vai('[data-cta="vicini"]');
@@ -188,13 +231,14 @@ module.exports = async function cta(browser) {
 
   const sel = cavia ? '[data-cta="vicini"] a[href^="/corsi.html?comune="]'
     : '[data-cta="vicini"] .ev-vic-all a[href^="/"]';
+  const primaDelClic = await segna();
   const href = await pg.evaluate((s) => {
     const a = document.querySelector(s);
-    window.__ga = [];
     a.click();
     return a.getAttribute('href');
   }, sel);
-  const clic = await pg.evaluate(() => window.__ga.filter((e) => e[1] === 'internal_cta_click').map((e) => e[2]));
+  const clic = (await daQui(primaDelClic))
+    .filter((e) => e[1] === 'internal_cta_click').map((e) => e[2]);
   r.ok(clic.length === 1, `un clic nel blocco = un internal_cta_click (${clic.length})`);
   const k = clic[0] || {};
   r.ok(k.cta_id === 'vicini' && k.destination_url === href,
@@ -204,25 +248,24 @@ module.exports = async function cta(browser) {
   // Ginetto esce dal sito: resta `apri_ginetto`, con in piu' il blocco.
   if (await pg.locator('[data-cta="ginetto"] a[href*="ginettoapp.it"]').count()) {
     await vai('[data-cta="ginetto"]');
-    // La vista si legge PRIMA del clic: il clic svuota il registro.
     r.ok((await viste('ginetto')).length === 1, 'la vista di Ginetto arriva');
+    const primaDiGinetto = await segna();
     await pg.evaluate(() => {
-      window.__ga = [];
       document.querySelector('[data-cta="ginetto"] a[href*="ginettoapp.it"]').click();
     });
-    const g = await pg.evaluate(() => window.__ga.map((e) => [e[1], e[2] && e[2].cta_id]));
+    const g = (await daQui(primaDiGinetto)).map((e) => [e[1], e[2] && e[2].cta_id]);
     r.ok(g.some((e) => e[0] === 'apri_ginetto' && e[1] === 'ginetto')
       && !g.some((e) => e[0] === 'internal_cta_click'),
       `Ginetto: apri_ginetto col blocco, nessun clic interno (${JSON.stringify(g)})`);
   }
 
   // Un link interno FUORI dai blocchi resta affidato ai page_view.
+  const primaDelLinkNudo = await segna();
   await pg.evaluate(() => {
-    window.__ga = [];
     const a = [...document.querySelectorAll('a[href^="/"]')].find((x) => !x.closest('[data-cta]'));
     if (a) a.click();
   });
-  r.ok((await pg.evaluate(() => window.__ga.filter((e) => e[1] === 'internal_cta_click').length)) === 0,
+  r.ok((await daQui(primaDelLinkNudo)).filter((e) => e[1] === 'internal_cta_click').length === 0,
     'un link interno fuori dai blocchi non produce internal_cta_click');
   await c.ctx.close();
   return r;
