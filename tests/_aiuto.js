@@ -97,4 +97,25 @@ function esito() {
   return stato;
 }
 
-module.exports = { avvia, apri, esito, RADICE };
+// Due viste, UNA definizione di `.claude` - che e' il nome che mancava.
+//
+// Perche' sta qui e non in ogni prova (19/09/2026): la lista era scritta due
+// volte con due contenuti diversi - sitemap.js ne saltava sette, porte.js due -
+// e nessuna delle due conosceva `.claude`. Dentro `.claude/worktrees` git tiene
+// le copie di lavoro di altri rami: sono pagine vere, con dentro l'HTML di un
+// altro giorno, e le prove le leggevano come se fossero il sito pubblicato. Il
+// 19/09 erano TRE rossi su undici - fra cui un elenco di 24 file che nessuno
+// pubblica - e il costo non e' il rosso in se': e' che un rosso vero in mezzo a
+// quelli non si distingue piu'.
+//
+// COPIE_DI_LAVORO: quello che non e' il repo com'e' scritto - git, le copie di
+// lavoro degli altri rami, le dipendenze. Chiunque cammini per cartelle salta
+// queste.
+// FUORI_DAL_SITO: quelle piu' le cartelle che stanno nel repo ma non sono
+// pagine che qualcuno apre (sorgenti e dati). La usa chi cerca il SITO
+// PUBBLICATO, non chi cerca i file del repo.
+const COPIE_DI_LAVORO = ['.git', '.claude', 'node_modules'];
+const FUORI_DAL_SITO = [...COPIE_DI_LAVORO,
+                        'tests', 'scripts', 'contenuti', 'data', 'assets'];
+
+module.exports = { avvia, apri, esito, RADICE, FUORI_DAL_SITO, COPIE_DI_LAVORO };

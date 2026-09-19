@@ -31,12 +31,14 @@
 
 const fs = require('fs');
 const path = require('path');
-const { esito, RADICE } = require('./_aiuto');
+const { esito, RADICE, FUORI_DAL_SITO } = require('./_aiuto');
 
 const SITE = 'https://www.daop.it';
 
-// Cartelle che non sono il sito: sorgenti, dati, dipendenze delle prove.
-const FUORI = ['.git', 'tests', 'scripts', 'contenuti', 'data', 'assets', 'node_modules'];
+// Cartelle che non sono il sito: sorgenti, dati, dipendenze delle prove, e le
+// copie di lavoro dentro .claude/. L'elenco sta in _aiuto.js perche' lo usano
+// in due (vedi il commento li'): scritto due volte, divergeva - ed e' successo.
+const FUORI = FUORI_DAL_SITO;
 
 function pagine(dir = RADICE, base = '') {
   const out = [];

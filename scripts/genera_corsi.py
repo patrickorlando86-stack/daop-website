@@ -590,6 +590,105 @@ def prova_ancora_valida(testo, oggi=None):
     return max(date) >= (oggi or datetime.date.today())
 
 
+# ── COME CI SI ISCRIVE (19/09/2026) ───────────────────────────────────
+#
+# La colonna `Iscrizioni` stava in COLONNE dal primo giorno e non si stampava da
+# nessuna parte: l'unico posto in cui finiva era il cartellino "Iscrizioni
+# aperte/chiuse", tolto il 21/08/2026 su richiesta di Giovanni ("un dato che
+# scade in silenzio e che nessuno viene ad aggiornare"). Con il cartellino e'
+# uscito anche il TESTO, che e' un'altra cosa: "Iscriversi tramite WhatsApp al
+# 3398550332" non e' uno stato che invecchia, e' l'istruzione per entrare.
+#
+# I numeri del 19/09, contati sul foglio: la cella e' piena su 19 righe su 97, e
+# su SEI di quelle il Contatto e' VUOTO - cioe' li' dentro c'era l'unica
+# indicazione su come si entra in quel corso, e in pagina non compariva. Nei
+# CENTRI la stessa colonna e' alias di `sito` da sempre (genera_centri.py) e
+# diventa il bottone "Informazioni e iscrizioni": nei corsi no. Era una
+# dimenticanza, non una scelta.
+#
+# LA LEZIONE DEL 21/08 NON SI RIAPRE, ed e' il motivo per cui questa cella passa
+# dalla stessa guardia della Prova (vedi prova_ancora_valida): se porta una data
+# ed e' passata, si toglie la CELLA - non la riga. Un "entro il 30 settembre"
+# letto a ottobre e' precisamente il dato che scade in silenzio.
+_RE_URL = re.compile(r'https?://[^\s<>"\')]+')
+
+# LO STATO DELLE ISCRIZIONI RESTA FUORI, ed e' la meta' della decisione del
+# 21/08 che non si tocca. Quel giorno e' uscito un cartellino che diceva
+# "Iscrizioni aperte/chiuse", e la ragione - scritta in card() e difesa da
+# tests/corsi.js - e' che e' un dato che scade in silenzio: "alla pallavolo si
+# entra quasi sempre, a un corso di teatro quasi mai, e la risposta vera ce l'ha
+# la societa'". Una riga che dice "Aperte" a gennaio e' peggio di nessuna riga.
+#
+# Quello che torna in pagina dal 19/09/2026 e' l'ISTRUZIONE - "iscriversi
+# tramite WhatsApp al ...", il link del modulo - che e' un'altra cosa e non
+# invecchia allo stesso modo. Quando la cella, invece, dichiara che si e' aperti
+# o chiusi, vince la regola vecchia e la cella si toglie: e' esattamente il
+# dato che nessuno viene ad aggiornare.
+# Niente apostrofi dentro questa espressione, ed e' una precauzione pratica:
+# "gia'" e "e'" scritti all'italiana chiuderebbero la stringa. Le due grafie non
+# servono - "iscrizioni gia' aperte" contiene comunque "iscrizioni ... aperte".
+_RE_STATO_ISCRIZIONI = re.compile(
+    # Fino a tre parole in mezzo: ci sta "le iscrizioni non sono ancora
+    # aperte", che e' lo stesso dato scritto al contrario.
+    r'iscrizioni\s+(?:\w+\s+){0,3}?(?:aperte|chiuse|riaperte|terminate)'
+    r'|(?:a\s+)?numero\s+chiuso'
+    r'|posti\s+(?:esauriti|terminati)'
+    r'|al\s+completo'
+    r'|sold\s*out', re.I)
+
+
+def stato_iscrizioni(testo):
+    """La cella dice se si e' aperti o chiusi? Allora non si stampa.
+
+    Non e' un giudizio sulla frase intera: basta che ci sia dentro, perche' e'
+    quella meta' a invecchiare. "Iscrizioni aperte, si scrive in segreteria"
+    diventa falsa in tre mesi tutta insieme.
+    """
+    return bool(_RE_STATO_ISCRIZIONI.search(testo or ''))
+
+
+def _pezzo_contatti(x):
+    """contatti_html su un frammento, senza mangiarne gli spazi ai bordi.
+
+    contatti_html fa strip() sul testo che riceve - giustamente, e' nata per una
+    cella intera - e qui invece i frammenti stanno attaccati a un link: senza
+    questo si leggerebbe "Prenota qui:https://...".
+    """
+    if not x:
+        return ''
+    dentro = G.contatti_html(x)
+    if not dentro:
+        return ' ' if x.strip() == '' else ''
+    return (' ' if x[:1].isspace() else '') + dentro + (' ' if x[-1:].isspace() else '')
+
+
+def iscrizioni_html(testo):
+    """La cella come si legge in pagina: i recapiti e gli indirizzi cliccabili.
+
+    Numeri e mail li fa contatti_html, la STESSA della riga "Contatti": due
+    riconoscimenti diversi per la stessa cosa divergono al primo caso storto.
+    Qui si aggiunge solo l'indirizzo web, che li' non e' previsto e in questa
+    colonna capita - "https://teachernoemi.my.canva.site/corsi" e' un modulo
+    d'iscrizione, e stampato come testo non ci porta nessuno.
+
+    rel="sponsored" come per "Scopri il corso": la presenza nella guida e' una
+    sola ed e' pagata (21/08/2026), e un link commerciale che passa PageRank e'
+    uno schema di link.
+    """
+    t = (testo or '').strip()
+    if not t:
+        return ''
+    pezzi, pos = [], 0
+    for m in _RE_URL.finditer(t):
+        u = m.group(0).rstrip('.,;:')
+        pezzi.append(_pezzo_contatti(t[pos:m.start()]))
+        pezzi.append(f'<a href="{G.esc(u)}" rel="sponsored noopener" '
+                     f'target="_blank">{G.esc(u)}</a>')
+        pos = m.start() + len(u)
+    pezzi.append(_pezzo_contatti(t[pos:]))
+    return ''.join(pezzi)
+
+
 def leggi_corsi():
     """Le righe della tab, filtrate sulla stagione in corso.
 
@@ -638,6 +737,12 @@ def leggi_corsi():
     avvio = stagione_avvio()
     oggi = datetime.date.today()
     out, vecchi, scaduti, prove = [], 0, 0, []
+    # Le celle "Iscrizioni" con la data passata si contano A PARTE da quelle
+    # della Prova (19/09/2026): sono due celle diverse, scritte da due mani
+    # diverse, e sommarle vorrebbe dire non sapere piu' quale delle due regole
+    # ha lavorato il giorno che una delle due sbaglia. E' la stessa ragione per
+    # cui 'vecchi' e 'scaduti' non sono mai stati sommati.
+    iscrizioni_vecchie = []
     for r in righe[hi + 1:]:
         def val(campo):
             i = idx.get(campo)
@@ -676,6 +781,13 @@ def leggi_corsi():
         if c['prova'] and not prova_ancora_valida(c['prova'], oggi):
             prove.append((c['nome'], c['prova']))
             c['prova'] = ''
+        # E la stessa cosa per "come ci si iscrive": e' l'altra cella che una
+        # societa' scrive per farti entrare, e dal 19/09 si stampa - quindi da
+        # oggi puo' anche restare li' a nominare un termine gia' passato.
+        if c['iscrizioni'] and (not prova_ancora_valida(c['iscrizioni'], oggi)
+                                or stato_iscrizioni(c['iscrizioni'])):
+            iscrizioni_vecchie.append((c['nome'], c['iscrizioni']))
+            c['iscrizioni'] = ''
         out.append(c)
     if vecchi:
         print(f"[genera_corsi] {vecchi} righe di stagioni passate, fuori dall'elenco")
@@ -691,6 +803,15 @@ def leggi_corsi():
         print(f"[genera_corsi] {len(prove)} celle Prova con la data passata, "
               f"tolte dalla scheda (il corso resta pubblicato):")
         for nome, testo in prove:
+            print(f"[genera_corsi]   - {nome}: {testo!r}")
+    # Una per una come le Prove, e per la stessa ragione: e' una frase che
+    # qualcuno aveva scritto per essere letta, e chi legge il log deve poter
+    # dire "quella andava RINNOVATA, non lasciata scadere".
+    if iscrizioni_vecchie:
+        print(f"[genera_corsi] {len(iscrizioni_vecchie)} celle Iscrizioni tolte "
+              f"dalla scheda - data passata, o dichiarano aperto/chiuso "
+              f"(il corso resta pubblicato):")
+        for nome, testo in iscrizioni_vecchie:
             print(f"[genera_corsi]   - {nome}: {testo!r}")
     return out
 
@@ -2761,6 +2882,12 @@ def card(c, idx, pagine=(), qui_org=None):
         dati.append(('Prova', G.esc(c['prova'])))
     if c['prezzo']:
         dati.append(('Quota', G.esc(c['prezzo'])))
+    # COME CI SI ISCRIVE, dal 19/09/2026. Sta fra la quota e i contatti perche'
+    # e' l'ordine delle domande di chi ha appena deciso: quanto costa, cosa devo
+    # fare, chi chiamo. Vedi iscrizioni_html() per il perche' la colonna fino a
+    # ieri non si stampava da nessuna parte.
+    if c['iscrizioni']:
+        dati.append(('Iscrizioni', iscrizioni_html(c['iscrizioni'])))
     # NIENTE "Iscrizioni aperte/chiuse", tolto il 21/08/2026 su richiesta di
     # Giovanni. E' un dato che scade in silenzio e che nessuno viene ad
     # aggiornare: alla pallavolo si entra quasi sempre, a un corso di teatro

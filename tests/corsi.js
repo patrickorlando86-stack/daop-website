@@ -523,10 +523,27 @@ module.exports = async function corsi(browser) {
   // ── niente "Iscrizioni aperte/chiuse" ────────────────────────────────
   // Tolto il 21/08/2026: e' un dato che scade in silenzio e che nessuno viene
   // ad aggiornare. Se torna, torna sbagliato a gennaio.
-  const iscr = await page.$$eval('.co-dati dt',
-    (dts) => dts.filter((dt) => /iscrizion/i.test(dt.textContent)).length);
-  r.ok(iscr === 0, iscr
-    ? `${iscr} schede dichiarano lo stato delle iscrizioni`
+  //
+  // DAL 19/09/2026 LA RIGA «Iscrizioni» PUO' ESSERCI, e questa guardia guarda
+  // il DD invece di contare i DT. La differenza e' fra due cose che portavano
+  // lo stesso nome: lo STATO ("aperte", "chiuse", "a numero chiuso", "posti
+  // esauriti") invecchia da solo ed e' quello che il 21/08 e' uscito;
+  // l'ISTRUZIONE ("iscriversi tramite WhatsApp al ...", il link del modulo) no,
+  // e fino a ieri non si stampava da nessuna parte pur essendo compilata su 19
+  // righe su 97 - su sei delle quali era l'unica indicazione su come si entra,
+  // perche' il Contatto era vuoto.
+  //
+  // Il filtro vero sta nel generatore (stato_iscrizioni in genera_corsi.py);
+  // questo lo ricontrolla dall'altro capo, sul file pubblicato - come per i
+  // luoghi qui sotto. E stampa le righe colpevoli: un conto da solo non dice
+  // quale cella andava riscritta.
+  const stati = await page.$$eval('.co-dati dt', (dts) => dts
+    .filter((dt) => /iscrizion/i.test(dt.textContent))
+    .map((dt) => (dt.nextElementSibling || {}).textContent || '')
+    .filter((txt) => /iscrizioni\s+(\w+\s+){0,3}?(aperte|chiuse|riaperte|terminate)|numero\s+chiuso|posti\s+(esauriti|terminati)|al\s+completo|sold\s*out/i
+      .test(txt)));
+  r.ok(stati.length === 0, stati.length
+    ? `${stati.length} schede dichiarano lo stato delle iscrizioni: ${stati.join(' | ')}`
     : 'nessuna scheda dichiara "iscrizioni aperte/chiuse"');
 
   // ── 5b. questa pagina non e' il catalogo dei luoghi ─────────────────

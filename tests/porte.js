@@ -15,7 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { apri, esito, RADICE } = require('./_aiuto');
+const { apri, esito, RADICE, COPIE_DI_LAVORO } = require('./_aiuto');
 
 // La famiglia, il suo hub, e la chiave che quell'hub NON deve linkare (se
 // stesso). L'ordine e' quello della nav: prima "cosa si fa in una data", poi
@@ -83,7 +83,10 @@ function tutte() {
   const out = [];
   (function giu(dir) {
     for (const v of fs.readdirSync(path.join(RADICE, dir), { withFileTypes: true })) {
-      if (v.name === 'node_modules' || v.name === '.git') continue;
+      // Solo le copie di lavoro, non le cartelle-sorgente: questa camminata
+      // serve ai controlli su TUTTO il repo, e saltare contenuti/ o assets/
+      // restringerebbe una prova che oggi li guarda.
+      if (COPIE_DI_LAVORO.includes(v.name)) continue;
       const rel = dir ? path.join(dir, v.name) : v.name;
       if (v.isDirectory()) giu(rel);
       else if (v.name.endsWith('.html')) out.push(rel);
