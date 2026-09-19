@@ -353,12 +353,23 @@ module.exports = async function corsi(browser) {
         //
         // "0-12 mesi" (il massaggio infantile) e' il caso in cui le due
         // unita' non coincidono: la riga tiene quella della locandina, il
-        // filtro conta anni. Quello che deve tornare e' che la conversione
-        // ci sia stata (_eta_numeri in genera_corsi.py) - un corso per
-        // lattanti non puo' occupare una fascia larga di anni. Fino al
-        // 28/08/2026 questa prova pretendeva la parola "anni" in riga, ed
-        // era rossa su un corso scritto nel modo giusto.
-        if (/mes/i.test(riga)) return !(Number(hi) <= 2);
+        // filtro conta anni. Quello che deve tornare e' che la CONVERSIONE ci
+        // sia stata, e la conversione e' quella di _eta_numeri in
+        // genera_corsi.py: mesi // 12, troncati (12 mesi = 1 anno, 6 mesi = 0
+        // - una fascia d'eta' non e' un compleanno).
+        //
+        // QUI C'ERA UNA SOGLIA FISSA, `hi <= 2`, e il 19/09/2026 e' andata
+        // rossa su un corso scritto bene: "Danzatricita'®", eta' "0-36 mesi",
+        // filtro 0-3 anni. Trentasei mesi SONO tre anni; la soglia era nata
+        // sull'unico caso che allora esisteva (0-12) ed e' rimasta a
+        // descriverlo invece di descrivere la regola. Adesso si fa il conto:
+        // vale per 0-12, per 0-36 e per quello che arrivera'.
+        if (/mes/i.test(riga)) {
+          const mesi = (riga.match(/\d{1,3}(?=\s*mes)|\d{1,3}(?=[^\d]*mes)/g) || [])
+            .map(Number);
+          if (!mesi.length) return true;
+          return Number(hi) !== Math.floor(Math.max(...mesi) / 12);
+        }
         return !new RegExp(`\\b${lo}\\b`).test(riga) || !/ann/i.test(riga);
       }
       // Singolare: la scheda scrive "1 anno" (genera_corsi.py, _eta_riga) e fino
@@ -956,6 +967,7 @@ module.exports = async function corsi(browser) {
     '[data-org] a[href^="tel:"], [data-org] a[href^="mailto:"], '
     + '[data-org] a[href^="http:"], [data-org] a[href^="https:"]').all();
   let orfani = 0;
+  const orfaniHref = [];
   for (const ancora of esterni) {
     const href = await ancora.getAttribute('href');
     await b.page.evaluate(() => { window.__ga = []; });
@@ -966,10 +978,15 @@ module.exports = async function corsi(browser) {
       const e = window.__ga.find((x) => x[2] && x[2].destination_url === h);
       return e ? e[2] : null;
     }, href);
-    if (!p || !p.organizer_id) orfani += 1;
+    if (!p || !p.organizer_id) { orfani += 1; orfaniHref.push(href); }
   }
+  // IL MESSAGGIO DICE QUALE, e non e' pignoleria: il 19/09/2026 "1 clic su 161"
+  // e' costato mezz'ora di diagnosi con una prova usa-e-getta, e la risposta
+  // era un href - lo stesso numero due volte nella stessa scheda, il secondo
+  // scartato dall'antirimbalzo di daop-track.js (800 ms).
   r.ok(orfani === 0, orfani
-    ? `${orfani} clic su ${esterni.length} non sono attribuiti a nessuna realta'`
+    ? `${orfani} clic su ${esterni.length} non sono attribuiti a nessuna `
+      + `realta': ${orfaniHref.join(', ')}`
     : `${esterni.length} clic in uscita dentro una scheda, tutti attribuiti`);
 
   // E IL CONTRARIO, che e' la meta' che si dimentica: un link che non sta

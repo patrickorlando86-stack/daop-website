@@ -6813,6 +6813,18 @@ def _grafo_landing(url, titolo, descr, eventi, nome_lista, crumb, oggi, padre=No
                       ensure_ascii=False, indent=2)
 
 
+# `data-generata` sul <main> (19/09/2026): il giorno in cui la pagina e' stata
+# SCRITTA. Non e' un dato per chi legge ed e' per questo che sta in un attributo
+# e non in una riga di testo - ma senza, non si puo' provare cosa dice una
+# pagina quando invecchia, ed e' una domanda vera: "oggi" e "weekend" si
+# generano di notte e si leggono il giorno dopo, quando quello che chiamano
+# "oggi" e' ieri (tests/giorno_dopo.js le legge spostando l'orologio).
+#
+# Lo prendono tutte le landing che passano di qui, comprese le stagionali: la
+# domanda "di quando parli?" vale per tutte, e un attributo in piu' su venti
+# pagine non si vede. La SPIEGAZIONE invece sta qui e non nell'HTML - un
+# commento in fondo a ogni pagina generata e' esattamente cio' che
+# tests/porte.js impedisce ai marker della nav.
 def _landing_shell(spec, css, nav, foot, oggi):
     """Il guscio HTML condiviso dalle pagine di intenzione."""
     # Solo le landing provinciali hanno una provincia: /eventi/oggi.html e
@@ -6861,7 +6873,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 </head>
 <body>
 {nav}
-<main id="contenuto">
+<main id="contenuto" data-generata="{oggi:%Y-%m-%d}">
 <header class="page-hero ev-hero">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">

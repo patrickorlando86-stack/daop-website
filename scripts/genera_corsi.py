@@ -28,6 +28,7 @@ Il nome della tab si puo' forzare con ATTIVITA_TAB.
 """
 import os
 import csv
+import html as html_mod
 import io
 import json
 import re
@@ -647,22 +648,58 @@ def stato_iscrizioni(testo):
     return bool(_RE_STATO_ISCRIZIONI.search(testo or ''))
 
 
-def _pezzo_contatti(x):
+def _gia_nei_contatti(testo, contatto):
+    """I recapiti che questa cella ha in comune con la riga Contatti.
+
+    Serve a non stampare due volte lo stesso numero cliccabile nella stessa
+    scheda, e il motivo e' doppio (19/09/2026).
+
+    Per chi legge: "Iscrizioni: info e iscrizioni al 346 812 7680" con due righe
+    sotto "Contatti: 3468127680" e' la stessa ripetizione che le schede realta'
+    tolgono quando c'e' gia' una pagina dedicata.
+
+    E per chi misura: daop-track.js ha un antirimbalzo - stesso evento e stessa
+    destinazione entro 800 ms non contano due volte, perche' il doppio tocco sul
+    telefono e' comune - quindi il secondo `tel:` identico nella stessa scheda
+    non produce nessun `click_telefono`. Il 19/09 in tests/corsi.js era "1 clic
+    su 161 non attribuito", ed era esattamente questo.
+
+    Si confrontano le sole CIFRE (e le mail per esteso): "346 812 7680" e
+    "3468127680" sono lo stesso numero scritto in due modi.
+    """
+    def cifre(s):
+        return {re.sub(r'\D', '', x) for x in re.findall(r'[\d\s.\-/+]{7,}', s or '')}
+
+    def mail(s):
+        return {x.lower() for x in re.findall(r'[\w.+-]+@[\w-]+\.[\w.-]+', s or '')}
+
+    return (cifre(testo) & cifre(contatto)) | (mail(testo) & mail(contatto))
+
+
+def _pezzo_contatti(x, doppi=frozenset()):
     """contatti_html su un frammento, senza mangiarne gli spazi ai bordi.
 
     contatti_html fa strip() sul testo che riceve - giustamente, e' nata per una
     cella intera - e qui invece i frammenti stanno attaccati a un link: senza
     questo si leggerebbe "Prenota qui:https://...".
+
+    `doppi` sono i recapiti che la scheda ha gia' nella riga Contatti: quelli
+    qui restano testo, e il frammento si scherma e basta.
     """
     if not x:
         return ''
+    if doppi:
+        cifre = {re.sub(r'\D', '', y) for y in re.findall(r'[\d\s.\-/+]{7,}', x)}
+        mail = {y.lower() for y in re.findall(r'[\w.+-]+@[\w-]+\.[\w.-]+', x)}
+        if (cifre | mail) & doppi:
+            return html_mod.escape(x)
     dentro = G.contatti_html(x)
     if not dentro:
         return ' ' if x.strip() == '' else ''
     return (' ' if x[:1].isspace() else '') + dentro + (' ' if x[-1:].isspace() else '')
 
 
-def iscrizioni_html(testo):
+def iscrizioni_html(testo, contatto=''):
     """La cella come si legge in pagina: i recapiti e gli indirizzi cliccabili.
 
     Numeri e mail li fa contatti_html, la STESSA della riga "Contatti": due
@@ -674,18 +711,24 @@ def iscrizioni_html(testo):
     rel="sponsored" come per "Scopri il corso": la presenza nella guida e' una
     sola ed e' pagata (21/08/2026), e un link commerciale che passa PageRank e'
     uno schema di link.
+
+    `contatto` e' la cella Contatti della stessa scheda: quando il recapito e'
+    quello - il caso normale, "info e iscrizioni al <lo stesso numero>" - qui
+    resta TESTO, e il link cliccabile lo tiene la riga Contatti che e' il suo
+    posto. Vedi _gia_nei_contatti per le due ragioni.
     """
     t = (testo or '').strip()
     if not t:
         return ''
+    doppi = _gia_nei_contatti(t, contatto)
     pezzi, pos = [], 0
     for m in _RE_URL.finditer(t):
         u = m.group(0).rstrip('.,;:')
-        pezzi.append(_pezzo_contatti(t[pos:m.start()]))
+        pezzi.append(_pezzo_contatti(t[pos:m.start()], doppi))
         pezzi.append(f'<a href="{G.esc(u)}" rel="sponsored noopener" '
                      f'target="_blank">{G.esc(u)}</a>')
         pos = m.start() + len(u)
-    pezzi.append(_pezzo_contatti(t[pos:]))
+    pezzi.append(_pezzo_contatti(t[pos:], doppi))
     return ''.join(pezzi)
 
 
@@ -1585,6 +1628,10 @@ def raggruppa_per_realta(corsi):
 # societa' la card resterebbe appesa a una di queste ("Saggio di"), il nome
 # resta dov'e': una ripetizione si legge, una frase mozzata no.
 CODA_APPESA = {
+    # "insieme"/"assieme" stanno qui dal 19/09/2026: da soli non finiscono un
+    # titolo piu' di quanto lo finisca "con", e "insieme a" e' una coda di due
+    # parole - vedi _senza_coda_ripetuta, che le toglie in fila.
+    'insieme', 'assieme',
     'di', 'del', 'dello', 'della', 'dei', 'degli', 'delle', 'da', 'dal',
     'dallo', 'dalla', 'dai', 'con', 'per', 'tra', 'fra', 'a', 'ad', 'al',
     'allo', 'alla', 'ai', 'agli', 'alle', 'in', 'nel', 'nello', 'nella',
@@ -1616,7 +1663,17 @@ def _senza_societa(nome, org):
     testa, coda = G.taglia_coda(nome)
     if coda and G.slugify(coda) == slug_realta(org or ''):
         return _senza_coda_ripetuta(testa, org)
-    return (nome or '').strip()
+    # E QUANDO LA CODA NON E' LA SUA, si guarda la fine del titolo INTERO
+    # (19/09/2026). "OpenDay - Inglese con Teacher Noemi" tagliato sul trattino
+    # da' la coda "Inglese con Teacher Noemi", che non e' lo slug della societa'
+    # - quindi fin qui non si tentava nemmeno, e nella pagina di Teacher Noemi
+    # la card ripeteva "Teacher Noemi" due centimetri sotto l'intestazione.
+    #
+    # Il confronto resta quello di sempre, cioe' con la societa' DI QUESTA
+    # PAGINA: un evento fatto insieme a un'altra realta' tiene il nome per
+    # intero, perche' li' quella parola non e' una ripetizione, e' l'altro nome.
+    # E _senza_coda_ripetuta non taglia mai tutto ne' lascia frasi mozzate.
+    return _senza_coda_ripetuta((nome or '').strip(), org)
 
 
 def _senza_coda_ripetuta(testa, org):
@@ -1630,8 +1687,31 @@ def _senza_coda_ripetuta(testa, org):
         if G.slugify(' '.join(parole[-k:])) != atteso:
             continue
         resto = ' '.join(parole[:-k]).strip(' -–—:,')
-        if resto and resto.split()[-1].lower().strip('.,') not in CODA_APPESA:
+        if not resto:
+            break
+        if resto.split()[-1].lower().strip('.,') not in CODA_APPESA:
             return resto
+        # LA PAROLINA SI TOGLIE ANCHE LEI, quando quello che resta si legge
+        # (19/09/2026). Fino a ieri qui si rinunciava e basta, e su
+        # teacher-noemi.html la card diceva "OpenDay - Inglese con Teacher
+        # Noemi" dentro la pagina di Teacher Noemi - il nome ripetuto due
+        # centimetri sotto l'intestazione, cioe' la cosa che questa funzione
+        # esiste per togliere. Il difetto non era la protezione: era che la
+        # protezione aveva una via sola.
+        #
+        # "OpenDay - Inglese con" -> "OpenDay - Inglese", che si legge.
+        # "Saggio di" -> "Saggio", che e' una parola sola: li' si rinuncia
+        # davvero, ed e' il caso che il commento qui sopra racconta - una
+        # ripetizione si legge, una frase mozzata no.
+        # Si tolgono TUTTE quelle in fila, non una: "insieme a" ne e' fatta di
+        # due, e togliendo solo "a" resterebbe "Open day insieme", che e'
+        # mozzato quanto prima.
+        corto = resto.split()
+        while corto and corto[-1].lower().strip('.,') in CODA_APPESA:
+            corto = corto[:-1]
+        corto = ' '.join(corto).strip(' -–—:,')
+        if len(corto.split()) >= 2:
+            return corto
         break
     return testa
 
@@ -2887,7 +2967,7 @@ def card(c, idx, pagine=(), qui_org=None):
     # fare, chi chiamo. Vedi iscrizioni_html() per il perche' la colonna fino a
     # ieri non si stampava da nessuna parte.
     if c['iscrizioni']:
-        dati.append(('Iscrizioni', iscrizioni_html(c['iscrizioni'])))
+        dati.append(('Iscrizioni', iscrizioni_html(c['iscrizioni'], c['contatto'])))
     # NIENTE "Iscrizioni aperte/chiuse", tolto il 21/08/2026 su richiesta di
     # Giovanni. E' un dato che scade in silenzio e che nessuno viene ad
     # aggiornare: alla pallavolo si entra quasi sempre, a un corso di teatro

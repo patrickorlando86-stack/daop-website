@@ -247,6 +247,19 @@ module.exports = async function (browser) {
         testo: p.textContent.replace(/\s+/g, ' ').trim(),
         href: a.getAttribute('href'),
         quota: (rr.top + window.scrollY) / document.documentElement.scrollHeight,
+        // DUE MISURE CHE NON DIPENDONO DA QUANTO E' LUNGA LA PAGINA SOTTO
+        // (19/09/2026). Vedi il commento sulla soglia, piu' giu'.
+        sottoLaPiega: (rr.top + window.scrollY) > window.innerHeight,
+        dopoIlCorpo: (() => {
+          // L'ultimo pezzo della scheda vera e propria: le azioni, o in
+          // mancanza la descrizione. Il credito deve stare DOPO.
+          const corpo = document.querySelector('.event-actions')
+            || document.querySelector('.event-desc')
+            || document.querySelector('main h1');
+          if (!corpo) return null;
+          return rr.top + window.scrollY
+            > corpo.getBoundingClientRect().top + window.scrollY;
+        })(),
       };
     });
     r.ok(m !== null, m ? 'la maniglia del credito esiste' : "la maniglia .ev-ig non c'è");
@@ -272,8 +285,24 @@ module.exports = async function (browser) {
       // misurandole insieme non si saprebbe piu' quale ha mosso il numero.
       // Questa prova esiste perche' "facciamolo risaltare" e' esattamente la
       // proposta che tornera'.
-      r.ok(m.quota > 0.5,
-        `sta nella metà bassa della pagina (${Math.round(m.quota * 100)}%), non è una seconda richiesta in cima`);
+      // NON SI MISURA PIU' IN PERCENTUALE DELLA PAGINA (19/09/2026).
+      //
+      // La soglia era `quota > 0.5`, ed e' andata rossa al 44% su una scheda in
+      // cui il credito non si era mosso di un pixel: a crescere era la pagina
+      // SOTTO di lui (i blocchi interni, il footer). Cioe' la prova misurava la
+      // lunghezza del footer e la chiamava "posizione del credito" - un rosso
+      // che non dice niente a chi lo legge, e che il giorno che il credito
+      // salisse davvero in cima sarebbe indistinguibile.
+      //
+      // Le due misure che dicono la cosa vera - "non e' una seconda richiesta
+      // in cima" - non dipendono da cosa c'e' sotto: il credito sta sotto la
+      // piega, e sta dopo il corpo della scheda.
+      r.ok(m.sottoLaPiega,
+        `il credito sta sotto la piega (a ${Math.round(m.quota * 100)}% della pagina)`);
+      r.ok(m.dopoIlCorpo !== false,
+        m.dopoIlCorpo === null
+          ? 'la scheda non ha un corpo riconoscibile: controllo saltato'
+          : 'il credito sta dopo il corpo della scheda, non prima');
     }
     await s2.ctx.close();
   }

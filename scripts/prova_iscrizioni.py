@@ -74,6 +74,25 @@ print("   ", html)
 verifica("il link in mezzo a una frase non mangia gli spazi",
          "Modulo qui <a" in html and "</a> entro venerdi" in html)
 
+# IL NUMERO GIA' NEI CONTATTI resta testo: nella stessa scheda lo stesso
+# recapito cliccabile due volte e' una ripetizione per chi legge, e per
+# daop-track.js e' un clic che non esiste (antirimbalzo a 800 ms sulla stessa
+# destinazione). Il 19/09 era "1 clic su 161 non attribuito" in tests/corsi.js.
+html = C.iscrizioni_html("Info e iscrizioni al 3468127680", "3468127680")
+print("   ", html)
+verifica("il numero gia' nei Contatti non diventa un secondo link",
+         "<a" not in html and "3468127680" in html)
+verifica("...ma scritto in un altro modo e' lo stesso numero",
+         "<a" not in C.iscrizioni_html("Scrivere al 346 812 7680", "3468127680"))
+verifica("...e la mail uguale nemmeno",
+         "<a" not in C.iscrizioni_html("Prenota a x@y.it", "x@y.it"))
+verifica("un recapito DIVERSO resta cliccabile",
+         'href="tel:3468127680"' in C.iscrizioni_html(
+             "Info e iscrizioni al 3468127680", "0173 555111"))
+verifica("e il link del modulo resta link anche se il numero e' doppio",
+         'href="https://x.it/iscr"' in C.iscrizioni_html(
+             "Modulo https://x.it/iscr, o 3468127680", "3468127680"))
+
 verifica("una cella senza recapiti resta testo",
          C.iscrizioni_html("Corso a numero chiuso") == "Corso a numero chiuso")
 verifica("una cella vuota non stampa niente", C.iscrizioni_html("") == "")
@@ -112,6 +131,12 @@ verifica("...e prima dei Contatti", scheda.index("<dt>Iscrizioni</dt>")
 # del 21/08 su cosa si legge scorrendo.
 riga = scheda.split('<div class="ev-det"')[0]
 verifica("in riga NON compare (si legge aprendo)", "Iscriversi" not in riga)
+
+doppia = C.card(dict(corso, iscrizioni="Info e iscrizioni al 0173 123456"), 3)
+verifica("nella scheda il numero dei Contatti non si ripete cliccabile",
+         doppia.count('href="tel:0173123456"') == 1)
+verifica("...ma la frase si legge lo stesso",
+         "Info e iscrizioni al 0173 123456" in doppia)
 
 senza = C.card(dict(corso, iscrizioni=""), 1)
 verifica("un corso senza quella cella non stampa la riga vuota",
