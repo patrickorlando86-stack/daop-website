@@ -97,6 +97,28 @@ function esito() {
   return stato;
 }
 
+// L'orologio della pagina spostato a un giorno scelto: parte dalle 10 e poi
+// scorre. Serve alle prove "letta il giorno dopo" - la run notturna parte con
+// ore di ritardo, e quello che si prova e' la pagina di ieri letta oggi. Va
+// passato come `prima` ad apri().
+function orologio(iso) {
+  return `(() => {
+    const D = Date, base = new D('${iso}T10:00:00').getTime(), t0 = D.now();
+    class Finto extends D {
+      constructor(...a) { if (a.length) super(...a); else super(base + D.now() - t0); }
+      static now() { return base + D.now() - t0; }
+    }
+    window.Date = Finto;
+  })();`;
+}
+
+// Una data ISO spostata di n giorni, senza passare dal fuso orario.
+function piuGiorni(iso, n) {
+  const t = new Date(iso + 'T12:00:00Z');
+  t.setUTCDate(t.getUTCDate() + n);
+  return t.toISOString().slice(0, 10);
+}
+
 // Due viste, UNA definizione di `.claude` - che e' il nome che mancava.
 //
 // Perche' sta qui e non in ogni prova (19/09/2026): la lista era scritta due
@@ -108,9 +130,11 @@ function esito() {
 // pubblica - e il costo non e' il rosso in se': e' che un rosso vero in mezzo a
 // quelli non si distingue piu'.
 //
+// `node_modules` e `.git` c'erano gia': il nome che mancava era `.claude`.
+//
 // COPIE_DI_LAVORO: quello che non e' il repo com'e' scritto - git, le copie di
-// lavoro degli altri rami, le dipendenze. Chiunque cammini per cartelle salta
-// queste.
+// lavoro degli altri rami, le dipendenze. Non e' roba di nessuno: e' roba di
+// un altro giorno, e chiunque cammini per cartelle deve saltarla.
 // FUORI_DAL_SITO: quelle piu' le cartelle che stanno nel repo ma non sono
 // pagine che qualcuno apre (sorgenti e dati). La usa chi cerca il SITO
 // PUBBLICATO, non chi cerca i file del repo.
@@ -118,4 +142,5 @@ const COPIE_DI_LAVORO = ['.git', '.claude', 'node_modules'];
 const FUORI_DAL_SITO = [...COPIE_DI_LAVORO,
                         'tests', 'scripts', 'contenuti', 'data', 'assets'];
 
-module.exports = { avvia, apri, esito, RADICE, FUORI_DAL_SITO, COPIE_DI_LAVORO };
+module.exports = { avvia, apri, esito, RADICE, orologio, piuGiorni,
+                   FUORI_DAL_SITO, COPIE_DI_LAVORO };

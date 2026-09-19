@@ -767,6 +767,17 @@ module.exports = async function landing(browser) {
     await ctx.close();
   }
 
+  // ── lette il giorno dopo ──────────────────────────────────────────────
+  // La run notturna parte con ore di ritardo: la pagina di ieri letta oggi
+  // deve correggersi da sola. Le prove stanno in tests/giorno_dopo.js.
+  {
+    const { provaOggiDopo, provaWeekendDopo } = require('./giorno_dopo');
+    await provaOggiDopo(r, browser, 'eventi/oggi.html', true);
+    await provaOggiDopo(r, browser, 'eventi/oggi-provincia-cuneo.html');
+    await provaWeekendDopo(r, browser, 'eventi/weekend.html');
+    await provaWeekendDopo(r, browser, 'eventi/weekend-provincia-asti.html');
+  }
+
   // ── "Vicino a me" sulle pagine di intenzione ──────────────────────────
   // E' lo stesso modulo dell'agenda (/assets/js/daop-vicino.js) su un DOM
   // diverso: righe <li> nascoste con `hidden` invece di schede con una classe.

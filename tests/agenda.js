@@ -491,27 +491,14 @@ module.exports = async function agenda(browser) {
   r.titolo('eventi.html — letta il giorno dopo');
   const fs = require('fs');
   const path = require('path');
-  const { RADICE } = require('./_aiuto');
+  const { RADICE, orologio, piuGiorni } = require('./_aiuto');
   const html = fs.readFileSync(path.join(RADICE, 'eventi.html'), 'utf8');
   const nelFile = [...html.matchAll(
     // La classe puo' portare altro dietro: "event-card is-ongoing" sono proprio
     // le righe gia' iniziate, cioe' quelle che togliFiniti() tocca.
     /<article class="event-card[^"]*" id="([^"]+)"[^>]*? data-start="([^"]+)" data-end="([^"]+)"/g)]
     .map((m) => ({ id: m[1], start: m[2], end: m[3] }));
-  const piuUno = (iso) => {
-    const t = new Date(iso + 'T12:00:00Z');
-    t.setUTCDate(t.getUTCDate() + 1);
-    return t.toISOString().slice(0, 10);
-  };
-  // L'orologio finto: parte dalle 10 del giorno scelto e poi scorre.
-  const orologio = (iso) => `(() => {
-    const D = Date, base = new D('${iso}T10:00:00').getTime(), t0 = D.now();
-    class Finto extends D {
-      constructor(...a) { if (a.length) super(...a); else super(base + D.now() - t0); }
-      static now() { return base + D.now() - t0; }
-    }
-    window.Date = Finto;
-  })();`;
+  const piuUno = (iso) => piuGiorni(iso, 1);
   const domani = piuUno(nelFile.map((x) => x.end).sort()[0]);
 
   ({ ctx, page } = await apri(browser, 'eventi.html', 412, orologio(domani)));

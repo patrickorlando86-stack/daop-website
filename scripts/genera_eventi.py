@@ -6755,17 +6755,44 @@ def _landing_filtri(eventi, con_prov=True, con_quando=False, con_gratis=False):
             'niente. <button type="button" id="lan-reset">Azzera i filtri</button></p>')
 
 
-def _landing_sezione(titolo, sotto, ev, oggi, eta=False, gratis=False):
+def _apertura_scade(html, giorno):
+    """Marca l'apertura di una landing con l'ultimo giorno in cui dice il vero.
+
+    L'apertura nomina la data a lettere ("Quello che c'e' oggi, venerdi' 11
+    settembre"): e' la frase che mente per prima quando la pagina viene letta
+    il giorno dopo, ed e' esattamente quella segnalata il 12/09/2026. Qui si
+    marca soltanto; a nasconderla ci pensa LANDING_SCADUTI_JS nel browser -
+    l'HTML su disco resta quello giusto per il giorno in cui e' stato scritto."""
+    return html.replace('<p', f'<p data-scade="{giorno:%Y-%m-%d}"', 1)
+
+
+def _landing_sezione(titolo, sotto, ev, oggi, eta=False, gratis=False,
+                     ruolo=None, scade=None, ordine=None):
     """Un blocco di elenco con la sua intestazione. Vuoto se non c'e' niente:
     un titoletto senza righe sotto e' il modo piu' rapido per far sembrare
-    generata a macchina una pagina che non lo e'."""
+    generata a macchina una pagina che non lo e'.
+
+    I tre attributi in piu' servono a LANDING_SCADUTI_JS, che il giorno dopo
+    rimette in ordine quello che il generatore aveva deciso ieri:
+
+    - `ruolo` ("oggi", "domani", "primi"): a COSA serve il blocco, e non come
+      si intitola. Il titolo e' una frase e cambia; il ruolo e' la regola con
+      cui il generatore ha messo dentro le righe, ed e' l'unica cosa che il JS
+      puo' rifare da solo.
+    - `scade`: l'ultimo giorno in cui il blocco dice il vero. Sabato scade di
+      sabato: letto di domenica non e' un elenco vuoto, e' un elenco sbagliato.
+    - `ordine`: con quale chiave il generatore ha ordinato. Serve a chi sposta
+      righe da un blocco all'altro per rimetterle dove sarebbero nate."""
     if not ev:
         return ''
     testa = f'<h3>{esc(titolo)}</h3>'
     if sotto:
         testa += f'<p class="com-per">{esc(sotto)}</p>'
     righe, nude = _landing_righe(ev, oggi, eta=eta, gratis=gratis)
-    return (f'<section class="com-grp"><div class="com-head"><div class="com-b">'
+    extra = (f' data-ruolo="{ruolo}"' if ruolo else '')
+    extra += (f' data-scade="{scade:%Y-%m-%d}"' if scade else '')
+    extra += (f' data-ordine="{ordine}"' if ordine else '')
+    return (f'<section class="com-grp"{extra}><div class="com-head"><div class="com-b">'
             f'{testa}</div></div>'
             f'<ul class="com-ev{" is-nude" if nude else ""}">{righe}</ul></section>')
 
@@ -6832,6 +6859,12 @@ def _landing_shell(spec, css, nav, foot, oggi):
     # se no in GA4 quelle pagine riempiono i report di "(not set)".
     prov_meta = (f'\n<meta name="daop:provincia" content="{esc(spec["prov"])}">'
                  if spec.get('prov') else '')
+    # L'ultimo giorno in cui il sottotitolo dice il vero. Ce l'hanno solo le
+    # pagine che nominano una data ("oggi" e "weekend"): sulle altre - sagre,
+    # provincia, stagionali - il sottotitolo non invecchia, e un attributo che
+    # non scade mai e' un dato che non serve a nessuno.
+    scade_attr = (f' data-scade="{spec["scade"]:%Y-%m-%d}"'
+                  if spec.get('scade') else '')
     # Le pagine d'incrocio stanno SOTTO /eventi/oggi.html, non accanto: il
     # quarto gradino lo dice a chi legge, e _grafo_landing() lo ripete in
     # JSON-LD. Senza 'padre' le briciole restano i tre gradini di sempre.
@@ -6880,7 +6913,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
       {briciole}
     </div>
     <h1>{esc(spec['h1'])}</h1>
-    <p class="ev-when">{esc(spec['sotto'])}</p>
+    <p class="ev-when"{scade_attr}>{esc(spec['sotto'])}</p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
@@ -6898,7 +6931,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
-{('<script src="/assets/js/daop-vicino.js"></script>' + LANDING_JS) if 'lan-toolbar' in spec['corpo'] else ''}</body>
+{LANDING_SCADUTI_JS}{('<script src="/assets/js/daop-vicino.js"></script>' + LANDING_JS) if 'lan-toolbar' in spec['corpo'] else ''}</body>
 </html>
 """
 
@@ -6909,6 +6942,154 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 # risparmiare. Quello che si eredita e' l'aspetto - .ev-toolbar e .ev-select
 # arrivano dal CSS di eventi.html copiato da _guscio() - e il vocabolario:
 # data-province e data-category valgono le stesse cose nei due posti.
+# Le pagine di intenzione lette il giorno dopo.
+#
+# Il problema, segnalato il 12/09/2026: /eventi/oggi.html apriva dicendo
+# "oggi, venerdi' 11 settembre" letta di sabato, con sotto "Domani" quello che
+# era gia' oggi. La causa non e' il generatore - e' che la run notturna parte
+# alle 02:00 UTC e il commit arriva verso le 06:53 (.github/workflows/
+# aggiorna-eventi.yml), quindi da mezzanotte a quell'ora la pagina in linea e'
+# quella di ieri. Piu' i due casi che nessun cron risolve: la scheda lasciata
+# aperta e riguardata il giorno dopo, e la pagina servita da una cache.
+#
+# Il rimedio non e' inventato qui: e' togliFiniti() di eventi.html, che l'ha
+# sempre fatto - schede finite via dal DOM, i gruppi di ieri rifusi in "Gia'
+# iniziati, ancora in corso". Le landing non avevano l'equivalente, ed e'
+# l'unico difetto vero uscito dalla ripulitura del gate del 19/09/2026.
+#
+# Le regole, nell'ordine in cui girano:
+#   1. le righe gia' finite escono dal DOM (non una classe: cosi' filtri,
+#      contatori e "vicino a me" non le vedono mai, senza doverlo ricordare in
+#      ognuno di loro - e' la stessa ragione scritta in eventi.html);
+#   2. "in corso", "oggi" e "domani" si rifanno sull'oggi vero. Le date
+#      esplicite ("sab 20 set") non si toccano: erano vere e restano vere;
+#   3. quello che porta `data-scade` e nomina un giorno passato sparisce - il
+#      sottotitolo e l'apertura si nascondono, i blocchi di un giorno finito si
+#      rimuovono. Un elenco letto il giorno dopo non e' vuoto: e' sbagliato;
+#   4. quello che oggi e' aperto finisce sotto "In corso oggi", che e' dove il
+#      generatore l'avrebbe messo, nel suo stesso ordine (data-ordine);
+#   5. i blocchi rimasti senza righe se ne vanno.
+#
+# LA GUARDIA, ed e' la ragione per cui questo codice puo' essere corto: oltre
+# DUE giorni di scarto non si tocca niente. Uno scarto grosso non e' una pagina
+# vecchia di poche ore, e' un orologio sbagliato o un generatore fermo - e li'
+# indovinare fa piu' danno del difetto. Due giorni coprono il caso vero (la
+# notte, e il lunedi' mattina sul weekend) e nient'altro.
+#
+# Va nel guscio di TUTTE le landing, anche quelle senza barra filtri, e PRIMA
+# di LANDING_JS: quello conta le righe, e deve contare quelle rimaste.
+LANDING_SCADUTI_JS = r"""<script>
+(function () {
+  var main = document.getElementById('contenuto');
+  var wrap = document.querySelector('.ev-wrap');
+  if (!main || !wrap || !main.dataset.generata) return;
+  var gen = main.dataset.generata;
+  var ora = new Date();
+  var oggi = ora.getFullYear() + '-' + String(ora.getMonth() + 1).padStart(2, '0')
+    + '-' + String(ora.getDate()).padStart(2, '0');
+  if (oggi <= gen) return;
+  function giorno(iso, n) {
+    var t = new Date(iso + 'T12:00:00Z');
+    t.setUTCDate(t.getUTCDate() + n);
+    return t.toISOString().slice(0, 10);
+  }
+  if (oggi > giorno(gen, 2)) return;
+  var domani = giorno(oggi, 1);
+  var PUNTO = ' \u00B7 ';
+
+  // 1. le righe gia' finite
+  [].slice.call(wrap.querySelectorAll('li[data-end]')).forEach(function (l) {
+    if (l.dataset.end < oggi) l.remove();
+  });
+
+  // 2. le tre parole che dipendono da che giorno e'
+  [].slice.call(wrap.querySelectorAll('li[data-start]')).forEach(function (l) {
+    var s = l.dataset.start;
+    var vera = s < oggi ? 'in corso' : s === oggi ? 'oggi' : s === domani ? 'domani' : null;
+    if (!vera) return;
+    var n = l.querySelector('.com-d');
+    if (!n || !n.firstChild || n.firstChild.nodeType !== 3) return;
+    // Il testo e' "oggi" oppure "oggi · 15:00": si cambia solo il primo
+    // pezzo, l'orario non c'entra con che giorno e'.
+    var pezzi = n.firstChild.nodeValue.split(PUNTO);
+    if (pezzi[0] === vera) return;
+    pezzi[0] = vera;
+    n.firstChild.nodeValue = pezzi.join(PUNTO);
+  });
+
+  // 3. quello che nominava un giorno passato
+  [].slice.call(document.querySelectorAll('[data-scade]')).forEach(function (n) {
+    if (n.dataset.scade >= oggi) return;
+    if (n.classList.contains('com-grp')) n.remove(); else n.hidden = true;
+  });
+
+  // 4. quello che e' aperto oggi, sotto "In corso oggi"
+  var ruoli = [].slice.call(wrap.querySelectorAll('.com-grp[data-ruolo]'));
+  if (ruoli.length) {
+    var so = wrap.querySelector('.com-grp[data-ruolo="oggi"]');
+    var aperte = [], visti = {};
+    ruoli.forEach(function (g) {
+      [].slice.call(g.querySelectorAll('li[data-start]')).forEach(function (l) {
+        if (l.dataset.start > oggi || l.dataset.end < oggi) return;
+        var go = l.querySelector('.com-go');
+        var href = go ? go.getAttribute('href') : '';
+        // Quando oggi non c'e' niente, "I primi in arrivo" e "Domani" possono
+        // nominare gli stessi eventi: fusi in un blocco solo si vedrebbe.
+        if (href && visti[href]) { l.remove(); return; }
+        visti[href] = 1;
+        aperte.push(l);
+      });
+    });
+    if (aperte.length) {
+      if (!so) {
+        var modello = ruoli[0].querySelector('.com-ev');
+        so = document.createElement('section');
+        so.className = 'com-grp';
+        so.dataset.ruolo = 'oggi';
+        if (ruoli[0].dataset.ordine) so.dataset.ordine = ruoli[0].dataset.ordine;
+        so.innerHTML = '<div class="com-head"><div class="com-b">'
+          + '<h3>In corso oggi</h3></div></div><ul class="com-ev'
+          + (modello && modello.classList.contains('is-nude') ? ' is-nude' : '') + '"></ul>';
+        ruoli[0].parentNode.insertBefore(so, ruoli[0]);
+      }
+      var ul = so.querySelector('.com-ev');
+      aperte.forEach(function (l) { ul.appendChild(l); });
+      // E nell'ordine del generatore, non in quello in cui sono arrivate: la
+      // chiave e' quella che ha usato lui, dichiarata in data-ordine.
+      var perData = so.dataset.ordine === 'data';
+      function chiave(l) {
+        var go = l.querySelector('.com-go');
+        var lu = l.querySelector('.com-luogo');
+        var citta = (lu && lu.firstChild && lu.firstChild.nodeType === 3
+          ? lu.firstChild.nodeValue : '').replace(/ \([A-Z]{2}\)$/, '');
+        var k = [citta, go ? go.textContent : ''];
+        return perData ? [l.dataset.start].concat(k) : k;
+      }
+      [].slice.call(ul.children).map(function (l) { return { l: l, k: chiave(l) }; })
+        .sort(function (a, b) {
+          for (var i = 0; i < a.k.length; i++) {
+            if (a.k[i] < b.k[i]) return -1;
+            if (a.k[i] > b.k[i]) return 1;
+          }
+          return 0;
+        }).forEach(function (x) { ul.appendChild(x.l); });
+      // "I primi in arrivo" dice a chiare lettere "oggi non c'e' niente". Se
+      // oggi qualcosa c'e', quel blocco non e' vecchio: e' smentito.
+      var primi = wrap.querySelector('.com-grp[data-ruolo="primi"]');
+      if (primi && primi !== so) primi.remove();
+    }
+  }
+
+  // 5. i blocchi rimasti senza righe
+  [].slice.call(wrap.querySelectorAll('.com-grp')).forEach(function (g) {
+    var ul = g.querySelector('.com-ev');
+    if (ul && !ul.querySelector('li')) g.remove();
+  });
+})();
+</script>
+"""
+
+
 LANDING_JS = r"""<script>
 (function () {
   var bar = document.getElementById('lan-toolbar');
@@ -7103,7 +7284,14 @@ def spec_oggi(events, oggi, altre):
     adesso = ordina([e for e in events if in_corso(e, oggi)])
     domani = ordina([e for e in events if in_corso(e, oggi + datetime.timedelta(days=1))
                      and not in_corso(e, oggi)])
-    prossimi = ordina([e for e in events if e['d_start'] > oggi])[:12] if not adesso else []
+    # "I primi in arrivo" esce solo quando oggi non c'e' niente, e allora
+    # comincia da DOPODOMANI: quelli di domani hanno gia' il loro blocco due
+    # righe sotto, e senza questa riga le stesse tre sagre erano elencate due
+    # volte nella stessa pagina - una sotto "questi sono i prossimi" e una
+    # sotto "Domani".
+    gia_in_domani = {id(e) for e in domani}
+    prossimi = ordina([e for e in events if e['d_start'] > oggi
+                       and id(e) not in gia_in_domani])[:12] if not adesso else []
 
     titolo = _landing_titolo([f"Cosa fare oggi in provincia di {prov}",
                               f"Cosa fare oggi: {prov} | DAOP",
@@ -7129,13 +7317,13 @@ def spec_oggi(events, oggi, altre):
                      "l'agenda aggiornata ogni notte con i prossimi appuntamenti "
                      "per famiglie, verificati uno per uno."), 152)
 
-    corpo = apertura
+    corpo = _apertura_scade(apertura, oggi)
     # famiglie e' un sottoinsieme di adesso: negli elenchi si ripete, fra le
     # opzioni del filtro no, se no la stessa provincia comparirebbe due volte.
     corpo += _landing_filtri(adesso + domani + prossimi)
-    corpo += _landing_sezione("In corso oggi", None, adesso, oggi)
+    corpo += _landing_sezione("In corso oggi", None, adesso, oggi, ruolo='oggi')
     corpo += _landing_sezione("I primi in arrivo", "Oggi non c'è niente: questi sono i prossimi",
-                              prossimi, oggi)
+                              prossimi, oggi, ruolo='primi')
     # Qui c'era "Oggi con i bambini", un secondo elenco con i soli eventi
     # segnati "Adatto Famiglie" nel foglio. Tolto, per due ragioni che si
     # sommano.
@@ -7166,7 +7354,7 @@ def spec_oggi(events, oggi, altre):
     # dichiarata o laboratori/burattini/giochi scritti nel programma - e dice
     # "pensati PER i bambini", non "adatti", e infatti scrive a chiare lettere
     # che il resto e' comunque adatto alle famiglie.
-    corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi)
+    corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi, ruolo='domani')
     # Da qui in poi questa pagina fa anche da indice delle tre provinciali. E'
     # il mestiere che le resta: sulla query trasversale eventi.html vince
     # comunque - piu' contenuto, piu' autorita', e non gliela togliamo - mentre
@@ -7191,6 +7379,9 @@ def spec_oggi(events, oggi, altre):
         # eventi.html - quella non si fa - e' questa pagina che dice cosa
         # copre.
         'h1': f"Cosa fare oggi in provincia di {prov}", 'sotto': sotto, 'crumb': "Oggi",
+        # Il sottotitolo conta gli eventi e nomina il giorno: domani e' falso
+        # in tutte e due le meta'.
+        'scade': oggi,
         'corpo': corpo, 'robots': "index, follow",
         'jsonld': _grafo_landing(url, titolo, descr, adesso or prossimi,
                                  "Eventi di oggi", "Oggi", oggi),
@@ -7232,12 +7423,12 @@ def spec_weekend(events, oggi, altre):
                      if del_weekend else
                      "l'agenda si aggiorna ogni notte, appena arrivano le date."), 152)
 
-    corpo = apertura
+    corpo = _apertura_scade(apertura, dom)
     corpo += _landing_filtri(del_weekend)
     corpo += _landing_sezione(f"Sabato {sab.day} {MESI_LUNGHI[sab.month - 1]}", None,
-                              di_sabato, oggi)
+                              di_sabato, oggi, scade=sab)
     corpo += _landing_sezione(f"Domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}", None,
-                              di_domenica, oggi)
+                              di_domenica, oggi, scade=dom)
     # Qui c'era "Il weekend con i bambini": tolto per le stesse ragioni
     # scritte per esteso in spec_oggi.
     # E qui comincia il mestiere nuovo: indice delle tre provinciali.
@@ -7254,6 +7445,9 @@ def spec_weekend(events, oggi, altre):
         'h1': f"Eventi del weekend in provincia di {prov}",
         'sotto': sotto, 'crumb': "Weekend",
         'corpo': corpo, 'robots': "index, follow",
+        # Il weekend nominato nel sottotitolo vale fino a domenica sera: da
+        # lunedi' "questo weekend" e' un altro.
+        'scade': dom,
         'jsonld': _grafo_landing(url, titolo, descr, del_weekend,
                                  "Eventi del weekend", "Weekend", oggi),
         'eventi': len(del_weekend),
@@ -7346,8 +7540,15 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
                          if (e.get('prov') or '').upper() == prov
                          and in_corso(e, oggi + datetime.timedelta(days=1))
                          and not in_corso(e, oggi)])
+        # "I primi in arrivo" esce solo quando oggi non c'e' niente, e allora
+        # comincia da DOPODOMANI: quelli di domani hanno gia' il loro blocco due
+        # righe sotto, e senza questa riga le stesse tre sagre erano elencate due
+        # volte nella stessa pagina - una sotto "questi sono i prossimi" e una
+        # sotto "Domani".
+        gia_in_domani = {id(e) for e in domani}
         prossimi = ordina([e for e in _in_finestra(events, prov, oggi)
-                           if e['d_start'] > oggi])[:12] if not adesso else []
+                           if e['d_start'] > oggi
+                           and id(e) not in gia_in_domani])[:12] if not adesso else []
         principale = adesso
         # Il title dice "sagre", l'H1 dice "cosa fare": non e' una svista.
         #
@@ -7402,13 +7603,16 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
                          if adesso else
                          "i prossimi appuntamenti per famiglie, verificati uno per uno "
                          "da DAOP. L'agenda si rifà ogni notte."), 152)
-        corpo = apertura
+        corpo = _apertura_scade(apertura, oggi)
         corpo += _landing_filtri(adesso + domani + prossimi, con_prov=False)
-        corpo += _landing_sezione("In corso oggi", None, adesso, oggi)
+        corpo += _landing_sezione("In corso oggi", None, adesso, oggi,
+                                  ruolo='oggi', ordine='data')
         corpo += _landing_sezione("I primi in arrivo",
                                   "Oggi non c'è niente: questi sono i prossimi",
-                                  prossimi, oggi)
-        corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi)
+                                  prossimi, oggi, ruolo='primi', ordine='data')
+        corpo += _landing_sezione("Domani", "Da tenere d'occhio", domani, oggi,
+                                  ruolo='domani', ordine='data')
+        scade = oggi
         nome_lista = f"Eventi di oggi in provincia di {nome_prov}"
     else:
         sab, dom = weekend_range(oggi)
@@ -7450,12 +7654,13 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
                          "con orari e comune."
                          if del_weekend else
                          "l'agenda si aggiorna ogni notte, appena arrivano le date."), 152)
-        corpo = apertura
+        corpo = _apertura_scade(apertura, dom)
         corpo += _landing_filtri(del_weekend, con_prov=False)
         corpo += _landing_sezione(f"Sabato {sab.day} {MESI_LUNGHI[sab.month - 1]}", None,
-                                  di_sabato, oggi)
+                                  di_sabato, oggi, scade=sab)
         corpo += _landing_sezione(f"Domenica {dom.day} {MESI_LUNGHI[dom.month - 1]}", None,
-                                  di_domenica, oggi)
+                                  di_domenica, oggi, scade=dom)
+        scade = dom
         nome_lista = f"Eventi del weekend in provincia di {nome_prov}"
 
     # I comuni che hanno qualcosa nella finestra larga, non tutti quelli della
@@ -7493,7 +7698,7 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
     return {
         'path': href.lstrip('/'), 'url': url,
         'titolo': titolo, 'descr': descr,
-        'h1': h1, 'sotto': sotto, 'crumb': crumb,
+        'h1': h1, 'sotto': sotto, 'crumb': crumb, 'scade': scade,
         'padre': (padre, padre_nome),
         'corpo': corpo,
         # Vedi FINESTRA_INCROCIO: si decide sulla finestra larga, non su oggi.
