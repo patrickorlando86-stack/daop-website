@@ -643,6 +643,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "passeggiata-patrimoniale-alla-scoperta-della-citta-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cittadella di Alessandria",
+    "manifest": "",
+    "nome": "Passeggiata Patrimoniale alla scoperta della Cittadella di Alessandria - La Cittadella di Alessandria Faro di Pace in Europa ETS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "primi-passi-di-svezzamento-officina-femminile-alessandria": {
     "anni": [
      2026
@@ -769,6 +780,23 @@
   "nome": "Alluvioni Cambiò",
   "prov": "AL"
  },
+ "altavillamonferrato": {
+  "eventi": {
+   "cioccolato-nel-monferrato-comune-di-altavilla-monf-altavilla-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Altavilla Monferrato",
+    "manifest": "",
+    "nome": "Cioccolato nel Monferrato - Comune di Altavilla Monferrato",
+    "organizza": "Comune di Altavilla Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   }
+  },
+  "nome": "Altavilla Monferrato",
+  "prov": "AL"
+ },
  "aramengo": {
   "eventi": {
    "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo": {
@@ -822,6 +850,17 @@
  },
  "asti": {
   "eventi": {
+   "asti-e-la-mia-citta-giornata-nazionale-del-veicolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Libertà",
+    "manifest": "",
+    "nome": "Asti è la mia città - Giornata Nazionale del Veicolo d'Epoca - C.A.M.E.A.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "festival-delle-quando-e-dove-asti": {
     "anni": [
      2026
@@ -1627,6 +1666,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "festa-dello-sport-nuova-polisportiva-calossese-calosso": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piana del Salto",
+    "manifest": "",
+    "nome": "Festa dello Sport - Nuova Polisportiva Calossese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv": {
     "anni": [
      2026
@@ -1917,6 +1967,17 @@
     "organizza": "Pro Loco Cartosio",
     "pagina": true,
     "ultima": "2026-08-12"
+   },
+   "sagra-delle-castagne-di-cartosio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cartosio",
+    "manifest": "Sagra delle Castagne di Cartosio 2026",
+    "nome": "Sagra delle Castagne di Cartosio 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
    }
   },
   "nome": "Cartosio",
@@ -2112,6 +2173,17 @@
     "pagina": true,
     "ultima": "2026-09-01"
    },
+   "casalnoceto-kids-move-comune-di-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Strutture sportive di Casalnoceto",
+    "manifest": "",
+    "nome": "Casalnoceto Kids Move! - Comune di Casalnoceto",
+    "organizza": "Comune di Casalnoceto",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "cena-in-piazza-musica-con-nico-e-franz-casalnoceto": {
     "anni": [
      2026
@@ -2155,6 +2227,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-24"
+   },
+   "kids-move-final-fest-comune-di-casalnoceto": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Campo Sportivo Comunale di Casalnoceto",
+    "manifest": "",
+    "nome": "Kids Move! Final Fest - Comune di Casalnoceto",
+    "organizza": "Comune di Casalnoceto",
+    "pagina": true,
+    "ultima": "2027-06-19"
    },
    "la-radio-e-la-macchina-da-scrivere-nella-storia-casalnoceto": {
     "anni": [
@@ -2679,6 +2762,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "mostra-della-zucca-e-degli-ortaggi-locali-castellazzo-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale 1° Maggio - Area Comunale Polivalente",
+    "manifest": "35ª Mostra della Zucca e degli Ortaggi Locali",
+    "nome": "35ª Mostra della Zucca e degli Ortaggi Locali",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
    }
   },
   "nome": "Castellazzo Bormida",
@@ -4680,6 +4774,23 @@
   },
   "nome": "Entraque",
   "prov": "CN"
+ },
+ "fabbricacurone": {
+  "eventi": {
+   "festa-della-montagna-fabbrica-curone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "47ª Festa della Montagna",
+    "nome": "47ª Festa della Montagna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   }
+  },
+  "nome": "Fabbrica Curone",
+  "prov": "AL"
  },
  "farigliano": {
   "eventi": {
@@ -6722,6 +6833,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-08"
+   },
+   "volontari-in-piazza-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa della Collegiata",
+    "manifest": "Volontari in Piazza 2026",
+    "nome": "Volontari in Piazza 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
    }
   },
   "nome": "Novi Ligure",
@@ -6817,6 +6939,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-04"
+   },
+   "storica-fiera-bovina-s-eusebio-comune-di-ottiglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Fiera Campo Sportivo",
+    "manifest": "",
+    "nome": "Storica Fiera Bovina S. Eusebio - Comune di Ottiglio",
+    "organizza": "Comune di Ottiglio",
+    "pagina": true,
+    "ultima": "2026-10-04"
    }
   },
   "nome": "Ottiglio",
@@ -6904,6 +7037,23 @@
    }
   },
   "nome": "Ozzano Monferrato",
+  "prov": "AL"
+ },
+ "paderna": {
+  "eventi": {
+   "paderna-taxi-rally": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo Comunale",
+    "manifest": "Paderna Taxi Rally",
+    "nome": "Paderna Taxi Rally",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   }
+  },
+  "nome": "Paderna",
   "prov": "AL"
  },
  "paesana": {
@@ -7387,6 +7537,17 @@
     "organizza": "Pro Loco Ciglione",
     "pagina": true,
     "ultima": "2026-08-30"
+   },
+   "festa-della-montagna-piancastagna-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piancastagna",
+    "manifest": "XXVII Festa della Montagna Piancastagna - Ponzone",
+    "nome": "XXVII Festa della Montagna Piancastagna - Ponzone",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
    },
    "festa-sull-aia-pianlago-ponzone": {
     "anni": [
@@ -9511,6 +9672,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "robot-mania-robotica-fantascientifica-e-spaziale-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Commerciale Serravalle",
+    "manifest": "",
+    "nome": "Robot Mania - Robotica Fantascientifica e Spaziale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-21"
    }
   },
   "nome": "Serravalle Scrivia",
@@ -9727,6 +9899,23 @@
    }
   },
   "nome": "Strevi",
+  "prov": "AL"
+ },
+ "tagliolomonferrato": {
+  "eventi": {
+   "la-giostrina-dei-bambini-giostra-del-gusto-tagliolo-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Tagliolo",
+    "manifest": "",
+    "nome": "La Giostrina dei Bambini - Giostra del Gusto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   }
+  },
+  "nome": "Tagliolo Monferrato",
   "prov": "AL"
  },
  "tarantasca": {
@@ -10395,6 +10584,17 @@
     "pagina": true,
     "ultima": "2026-09-04"
    },
+   "ritratto-d-artista-con-angelo-casa-degli-alfieri-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa di San Martino",
+    "manifest": "Corti, Colline, Comunità... ed Ecomuseo BMA",
+    "nome": "Ritratto d'artista con angelo - Casa degli Alfieri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "un-pomeriggio-di-storie-e-giochi-a-villanova-d-ast-villanova-d-asti": {
     "anni": [
      2026
@@ -10626,6 +10826,23 @@
   },
   "nome": "Vinchio",
   "prov": "AT"
+ },
+ "visone": {
+  "eventi": {
+   "antica-fiera-della-madonna-del-rosario-pro-loco-vi-visone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Visone - Il borgo della Torre",
+    "manifest": "",
+    "nome": "Antica Fiera della Madonna del Rosario - Pro Loco Visone",
+    "organizza": "Pro Loco Visone",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   }
+  },
+  "nome": "Visone",
+  "prov": "AL"
  },
  "volpedo": {
   "eventi": {
