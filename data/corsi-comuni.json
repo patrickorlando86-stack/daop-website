@@ -56,7 +56,7 @@
    "slug": "chiusa-di-pesio"
   },
   "cn-chiusa-pesio": {
-   "n": 3,
+   "n": 2,
    "nome": "Chiusa Pesio",
    "slug": "chiusa-pesio"
   },
@@ -101,7 +101,7 @@
    "slug": "murazzano"
   },
   "cn-piozzo": {
-   "n": 5,
+   "n": 3,
    "nome": "Piozzo",
    "slug": "piozzo"
   },
@@ -117,6 +117,6 @@
   }
  },
  "province": {
-  "CN": 90
+  "CN": 87
  }
 }
