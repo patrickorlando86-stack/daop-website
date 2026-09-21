@@ -50,6 +50,16 @@
    "nome": "Cherasco",
    "slug": "cherasco"
   },
+  "cn-chiusa-di-pesio": {
+   "n": 2,
+   "nome": "Chiusa di Pesio",
+   "slug": "chiusa-di-pesio"
+  },
+  "cn-chiusa-pesio": {
+   "n": 3,
+   "nome": "Chiusa Pesio",
+   "slug": "chiusa-pesio"
+  },
   "cn-cinzano": {
    "n": 1,
    "nome": "Cinzano",
@@ -90,6 +100,11 @@
    "nome": "Murazzano",
    "slug": "murazzano"
   },
+  "cn-piozzo": {
+   "n": 5,
+   "nome": "Piozzo",
+   "slug": "piozzo"
+  },
   "cn-racconigi": {
    "n": 6,
    "nome": "Racconigi",
@@ -102,6 +117,6 @@
   }
  },
  "province": {
-  "CN": 80
+  "CN": 90
  }
 }
