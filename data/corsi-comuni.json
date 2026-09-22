@@ -90,6 +90,11 @@
    "nome": "Mondovì",
    "slug": "mondovi"
   },
+  "cn-mondovi-via-del-viadotto-15-a": {
+   "n": 1,
+   "nome": "Mondovì, via del viadotto 15/A",
+   "slug": "mondovi-via-del-viadotto-15-a"
+  },
   "cn-moretta": {
    "n": 8,
    "nome": "Moretta",
@@ -117,6 +122,6 @@
   }
  },
  "province": {
-  "CN": 87
+  "CN": 88
  }
 }

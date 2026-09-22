@@ -271,6 +271,39 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-18"
+   },
+   "settimana-mondiale-per-l-allattamento-laboratorio-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Giovanni Ferrero",
+    "manifest": "Settimana Mondiale per l'Allattamento 2026",
+    "nome": "Settimana Mondiale per l'Allattamento - Laboratorio di Lettura ad Alta Voce e Sportello Informativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-07"
+   },
+   "settimana-mondiale-per-l-allattamento-letture-e-sp-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mercato Cittadino, Piazza Elvio Pertinace",
+    "manifest": "Settimana Mondiale per l'Allattamento 2026",
+    "nome": "Settimana Mondiale per l'Allattamento - Letture e Sportello Informativo al Mercato Cittadino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
+   "settimana-mondiale-per-l-allattamento-tavola-roton-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Giovanni Ferrero",
+    "manifest": "Settimana Mondiale per l'Allattamento 2026",
+    "nome": "Settimana Mondiale per l'Allattamento - Tavola Rotonda alla Biblioteca Civica",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-10-07"
    }
   },
   "nome": "Alba",
@@ -1369,6 +1402,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "settimana-mondiale-per-l-allattamento-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mercato Cittadino, Piazza Giolitti",
+    "manifest": "Settimana Mondiale per l'Allattamento 2026",
+    "nome": "Settimana Mondiale per l'Allattamento 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
    }
   },
   "nome": "Bra",
@@ -3325,6 +3369,17 @@
  },
  "cherasco": {
   "eventi": {
+   "intrecci-di-famiglie-rete-mamma-cherasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cherasco",
+    "manifest": "",
+    "nome": "Intrecci di Famiglie - Rete Mamma",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "sagra-dello-gnocco-festa-patronale-cherasco": {
     "anni": [
      2026
@@ -3786,6 +3841,23 @@
   "nome": "Costigliole d'Asti",
   "prov": "AT"
  },
+ "costigliolesaluzzo": {
+  "eventi": {
+   "il-guardiano-del-borgo-la-fabbrica-dei-suoni-costigliole-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Generale Carlo Alberto Dalla Chiesa, retro di Palazzo La Tour",
+    "manifest": "89ª Sagra Regionale dell'Uva Quagliano",
+    "nome": "Il Guardiano del Borgo - La Fabbrica dei Suoni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   }
+  },
+  "nome": "Costigliole Saluzzo",
+  "prov": "CN"
+ },
  "crissolo": {
   "eventi": {
    "caccia-al-tesoro-kam-3841-crissolo": {
@@ -4124,6 +4196,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "l-agora-delle-farfalle-parco-fluviale-gesso-e-stur-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Infopoint Parco",
+    "manifest": "Autunno al Parco",
+    "nome": "L'Agorà delle Farfalle - Parco fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "l-orco-nel-fagiolo-il-burattinificio-di-mammadraga-cuneo": {
     "anni": [
      2026
@@ -4244,6 +4327,28 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-07"
+   },
+   "tipi-da-biblioteca-noau-officina-culturale-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "ESSECI sclab",
+    "manifest": "",
+    "nome": "Tipi da Biblioteca - Noau Officina Culturale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-28"
+   },
+   "torneo-scacchi-a-scuola-huc-academy-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Movicentro",
+    "manifest": "",
+    "nome": "Torneo Scacchi a Scuola - HUC Academy",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
    },
    "un-amuleto-per-il-mio-viaggio-museo-diocesano-san-cuneo": {
     "anni": [
@@ -4993,6 +5098,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "magie-d-autunno-parco-fluviale-gesso-e-stura-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Equitazione Disabili",
+    "manifest": "Autunno al Parco",
+    "nome": "Magie d'Autunno - Parco fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    },
    "sogni-di-mare-ricordi-di-sabbia-letture-favolose-fossano": {
     "anni": [
@@ -5862,6 +5978,17 @@
     "pagina": true,
     "ultima": "2026-08-28"
    },
+   "festa-dei-nonni-citta-di-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini del Belvedere",
+    "manifest": "",
+    "nome": "Festa dei Nonni - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
    "festa-della-citta-di-mondovi": {
     "anni": [
      2026
@@ -6115,6 +6242,23 @@
   },
   "nome": "Montemagno Monferrato",
   "prov": "AT"
+ },
+ "monterossograna": {
+  "eventi": {
+   "miele-castelmagno-monterosso-grana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Oste de Senpie",
+    "manifest": "Miele & Castelmagno",
+    "nome": "Miele & Castelmagno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   }
+  },
+  "nome": "Monterosso Grana",
+  "prov": "CN"
  },
  "monteuroero": {
   "eventi": {
@@ -8585,6 +8729,17 @@
  },
  "saluzzo": {
   "eventi": {
+   "cresco-con-te-bibliopride-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castiglia di Saluzzo",
+    "manifest": "Cresco con te – Bibliopride 2026",
+    "nome": "Cresco con te – Bibliopride 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "eventi-per-bambini-e-famiglie-wonderland-park-saluzzo": {
     "anni": [
      2026
@@ -9339,6 +9494,17 @@
     "organizza": "Pro Loco Sant'Albano Stura",
     "pagina": true,
     "ultima": "2026-08-30"
+   },
+   "missione-natura-una-mattina-all-oasi-parco-fluvial-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oasi naturalistica La Madonnina",
+    "manifest": "Autunno al Parco",
+    "nome": "Missione Natura | Una mattina all'Oasi - Parco fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
    },
    "percorso-apericena-e-street-food-pro-loco-sant-alb-sant-albano-stura": {
     "anni": [
