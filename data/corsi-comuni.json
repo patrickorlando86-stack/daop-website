@@ -51,14 +51,9 @@
    "slug": "cherasco"
   },
   "cn-chiusa-di-pesio": {
-   "n": 2,
+   "n": 4,
    "nome": "Chiusa di Pesio",
    "slug": "chiusa-di-pesio"
-  },
-  "cn-chiusa-pesio": {
-   "n": 2,
-   "nome": "Chiusa Pesio",
-   "slug": "chiusa-pesio"
   },
   "cn-cinzano": {
    "n": 1,
@@ -86,14 +81,9 @@
    "slug": "la-morra"
   },
   "cn-mondovi": {
-   "n": 13,
+   "n": 14,
    "nome": "Mondovì",
    "slug": "mondovi"
-  },
-  "cn-mondovi-via-del-viadotto-15-a": {
-   "n": 1,
-   "nome": "Mondovì, via del viadotto 15/A",
-   "slug": "mondovi-via-del-viadotto-15-a"
   },
   "cn-moretta": {
    "n": 8,
