@@ -502,6 +502,23 @@ p, li, .section-subtitle, .team-desc, .book-desc,
    nella colonna stretta del desktop, Facebook andava a capo da solo. */
 .footer-soc-p { flex-basis: 100%; color: rgba(255, 255, 255, 0.85); font-weight: 600; }
 .footer-col-links .footer-soc a { font-size: 0.8rem; }
+
+/* Sul telefono il footer e' a due colonne, e con tre colonne di link la
+   terza (DAOP) restava da sola a sinistra, larga meta', con "Come verifichiamo
+   gli eventi" su due righe e la meta' destra vuota. A tutta larghezza e con le
+   voci in due colonne la stessa roba occupa meta' dell'altezza. L'!important
+   serve solo per index.html, che scrive display:flex nell'attributo style. */
+@media (max-width: 600px) {
+  .footer-col-daop { grid-column: 1 / -1; }
+  .footer-col-daop .footer-col-links {
+    display: grid !important;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 8px 24px !important;
+  }
+  .footer-col-daop .footer-col-links a { white-space: nowrap; }
+}
 .footer-soc-sep { color: rgba(255, 255, 255, 0.4); }
 
 /* --------------------------------------------------------------------------

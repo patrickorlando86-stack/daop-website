@@ -223,8 +223,8 @@ def blocco_footer(assoluto=False, inline=False):
         ext = ' target="_blank" rel="noopener"' if esterno else ''
         return f'{ind}<a href="{href}"{ext}{st_a}>{testo}</a>'
 
-    def colonna(titolo, righe):
-        return (f'    <div>\n      <div class="footer-col-title"{st_tit}>{titolo}</div>\n'
+    def colonna(titolo, righe, cls=''):
+        return (f'    <div{cls}>\n      <div class="footer-col-title"{st_tit}>{titolo}</div>\n'
                 f'      <div class="footer-col-links"{st_col}>\n'
                 + '\n'.join(righe) + '\n      </div>\n    </div>')
 
@@ -243,7 +243,7 @@ def blocco_footer(assoluto=False, inline=False):
             a(f'{r}rubriche.html', 'Rubriche'),
             a(f'{r}libri.html', 'Libri')]
     return ('\n' + colonna('Esplora', esplora) + '\n' + colonna('Seguici', seguici)
-            + '\n' + colonna('DAOP', daop) + '\n    ')
+            + '\n' + colonna('DAOP', daop, ' class="footer-col-daop"') + '\n    ')
 
 
 def blocco_footer_fondo(assoluto=False, inline=False):
@@ -8189,16 +8189,12 @@ def spec_halloween(st, events, oggi, altre):
                        if len(finestra) > 1 else "la <strong>festa di Halloween</strong>")
                     + f" che abbiamo verificato una per una fra le province di {prov}, "
                     f"con l'orario, il paese e chi le organizza.</p>")
-        # Poche feste: lo si dice. E' lo stesso testo della pagina vuota, perche'
-        # la ragione e' la stessa.
+        # Poche feste: una frase in coda all'apertura, non un riquadro. Il
+        # riquadro "per ora in agenda sono 2" ripeteva il numero appena scritto
+        # (Patrick, 23/09/2026).
         if poche:
-            apertura += (
-                "<p class=\"lan-vuoto\">Per ora in agenda "
-                + ("ce n'è <strong>una</strong>" if len(finestra) == 1
-                   else f"sono <strong>{len(finestra)}</strong>")
-                + ": castelli e pro loco pubblicano i programmi di fine ottobre "
-                "spesso a due settimane dalla data. Aggiorniamo questa pagina ogni "
-                "giorno, man mano che arrivano nuovi eventi.</p>")
+            apertura = (apertura[:-len("</p>")] + " Altre arriveranno nelle "
+                        "prossime settimane: aggiorniamo la pagina ogni giorno.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
                       + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
@@ -8347,11 +8343,12 @@ def spec_halloween_prov(prov, events, oggi, altre):
                     + (f"<strong>{len(finestra)}</strong>, verificate una per una"
                        if len(finestra) > 1 else "<strong>una</strong>, verificata")
                     + ", con l'orario, il paese e chi le organizza.</p>")
+        # Poche feste: una frase in coda all'apertura, non un riquadro. Il
+        # riquadro "per ora in agenda sono 2" ripeteva il numero appena scritto
+        # (Patrick, 23/09/2026).
         if poche:
-            apertura += ("<p class=\"lan-vuoto\">Castelli e pro loco pubblicano i "
-                         "programmi di fine ottobre spesso a due settimane dalla "
-                         "data. Aggiorniamo questa pagina ogni giorno, man mano "
-                         "che arrivano nuovi eventi.</p>")
+            apertura = (apertura[:-len("</p>")] + " Altre arriveranno nelle "
+                        "prossime settimane: aggiorniamo la pagina ogni giorno.</p>")
         descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
                       + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
