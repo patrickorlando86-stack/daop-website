@@ -2991,9 +2991,14 @@ PAGINA_CSS = """
 .ev-hero--img::before{opacity:1;
   background:linear-gradient(90deg,rgba(10,14,26,.88) 0%,rgba(10,14,26,.62) 42%,rgba(10,14,26,.12) 78%),
     var(--fascia) center/cover no-repeat}
-@media(max-width:600px){.ev-hero--img::before{
-  background:linear-gradient(90deg,rgba(10,14,26,.78) 0%,rgba(10,14,26,.45) 55%,rgba(10,14,26,.05) 100%),
-    var(--fascia-m, var(--fascia)) 92% 100%/cover no-repeat}}
+/* Sul telefono il titolo occupa tutta la larghezza: col disegno dietro, i
+   personaggi finivano sotto le parole. Li' il disegno scende SOTTO il testo,
+   come una striscia sua alta 190px, allineata a destra dove stanno Ginetto e
+   Briciola; sopra resta il fondo scuro pieno, che sfuma nel disegno. */
+@media(max-width:600px){.ev-hero--img{padding-bottom:196px}
+.ev-hero--img::before{background:
+  linear-gradient(180deg,#0e1422 0%,#0e1422 calc(100% - 196px),rgba(14,20,34,0) calc(100% - 130px)),
+  var(--fascia-m, var(--fascia)) 82% 100%/auto 196px no-repeat,#0e1422}}
 /* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
 .ev-wrap--hero{padding-top:44px}
 @media(max-width:600px){.ev-wrap--hero{padding-top:32px}}
@@ -8227,7 +8232,7 @@ TEMI_STAGIONE = {
 # Le fasce illustrate delle stagionali: chiave -> nome dei file in
 # assets/images/stagioni/ (<nome>-1600.webp, <nome>-800.webp, <nome>-og.jpg).
 # Una festa senza voce qui tiene la barra scura di sempre.
-FASCE_STAGIONE = {'halloween': 'halloween'}
+FASCE_STAGIONE = {'halloween': 'halloween2'}
 
 
 def fascia_stagione(chiave):
