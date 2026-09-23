@@ -536,6 +536,24 @@
 .ev-hero .ev-when{font-size:1.08rem;font-weight:600;color:var(--gold,#c9a227);margin:0}
 .ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
 @media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
+/* La fascia illustrata di una stagionale (23/09/2026, prima /halloween.html).
+   Stessa .page-hero, ma al posto della texture all'8% c'e' il disegno pieno,
+   con un velo scuro da sinistra: il testo sta a sinistra e deve restare
+   leggibile anche dove il disegno si accende (zucche, luna). Le due misure
+   arrivano da variabili nello style dell'header, cosi' il CSS e' uno solo per
+   tutte le feste che avranno la loro fascia. */
+.ev-hero--img{background:#0e1422}
+.ev-hero--img::before{opacity:1;
+  background:linear-gradient(90deg,rgba(10,14,26,.88) 0%,rgba(10,14,26,.62) 42%,rgba(10,14,26,.12) 78%),
+    var(--fascia) center/cover no-repeat}
+/* Sul telefono il titolo occupa tutta la larghezza: col disegno dietro, i
+   personaggi finivano sotto le parole. Li' il disegno scende SOTTO il testo,
+   come una striscia sua alta 190px, allineata a destra dove stanno Ginetto e
+   Briciola; sopra resta il fondo scuro pieno, che sfuma nel disegno. */
+@media(max-width:600px){.ev-hero--img{padding-bottom:196px}
+.ev-hero--img::before{background:
+  linear-gradient(180deg,#0e1422 0%,#0e1422 calc(100% - 196px),rgba(14,20,34,0) calc(100% - 130px)),
+  var(--fascia-m, var(--fascia)) 82% 100%/auto 196px no-repeat,#0e1422}}
 /* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
 .ev-wrap--hero{padding-top:44px}
 @media(max-width:600px){.ev-wrap--hero{padding-top:32px}}
@@ -1013,7 +1031,7 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <p class="lan-vuoto">Per Ferragosto 2027 in agenda non abbiamo ancora niente, e lo scriviamo invece di riempire la pagina. Le sagre d'agosto arrivano tardi: i programmi si chiudono a luglio e molte pro loco li pubblicano a pochi giorni dalla festa. Questa pagina si rifà ogni notte, quindi appena entrano compaiono qui.</p><p>Ferragosto in zona non è una cosa sola: la mattina ci sono le processioni e i mercatini, il pomeriggio i giochi d'acqua e i laboratori, la sera lo stand gastronomico e i fuochi. Alle sagre di paese di solito non si prenota e si paga alla cassa, quindi con i bambini si arriva presto e si decide sul posto. Il <strong>pranzo del 15</strong> invece si prenota, e va prenotato con giorni di anticipo: gli <a href="/luoghi.html">agriturismi e i posti dove si mangia con i bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo. Se il 15 piove, la stessa pagina dice quali sono al coperto.</p><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/eventi-provincia-alessandria.html">Eventi Alessandria</a><a href="/eventi-provincia-asti.html">Eventi Asti</a><a href="/eventi-provincia-cuneo.html">Eventi Cuneo</a></div><section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">904 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">estate, Natale e Pasqua, con le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">88 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+  <p class="lan-vuoto">Per Ferragosto 2027 in agenda non abbiamo ancora niente, e lo scriviamo invece di riempire la pagina. Le sagre d'agosto arrivano tardi: i programmi si chiudono a luglio e molte pro loco li pubblicano a pochi giorni dalla festa. Questa pagina si rifà ogni notte, quindi appena entrano compaiono qui.</p><p>Ferragosto in zona non è una cosa sola: la mattina ci sono le processioni e i mercatini, il pomeriggio i giochi d'acqua e i laboratori, la sera lo stand gastronomico e i fuochi. Alle sagre di paese di solito non si prenota e si paga alla cassa, quindi con i bambini si arriva presto e si decide sul posto. Il <strong>pranzo del 15</strong> invece si prenota, e va prenotato con giorni di anticipo: gli <a href="/luoghi.html">agriturismi e i posti dove si mangia con i bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo. Se il 15 piove, la stessa pagina dice quali sono al coperto.</p><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/eventi-provincia-alessandria.html">Eventi Alessandria</a><a href="/eventi-provincia-asti.html">Eventi Asti</a><a href="/eventi-provincia-cuneo.html">Eventi Cuneo</a></div><section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">907 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">89 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
   <aside class="ev-ginetto-alto" data-cta="ginetto">
     <div class="info-strip">
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">

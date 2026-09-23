@@ -538,6 +538,24 @@
 .ev-hero .ev-when{font-size:1.08rem;font-weight:600;color:var(--gold,#c9a227);margin:0}
 .ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
 @media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
+/* La fascia illustrata di una stagionale (23/09/2026, prima /halloween.html).
+   Stessa .page-hero, ma al posto della texture all'8% c'e' il disegno pieno,
+   con un velo scuro da sinistra: il testo sta a sinistra e deve restare
+   leggibile anche dove il disegno si accende (zucche, luna). Le due misure
+   arrivano da variabili nello style dell'header, cosi' il CSS e' uno solo per
+   tutte le feste che avranno la loro fascia. */
+.ev-hero--img{background:#0e1422}
+.ev-hero--img::before{opacity:1;
+  background:linear-gradient(90deg,rgba(10,14,26,.88) 0%,rgba(10,14,26,.62) 42%,rgba(10,14,26,.12) 78%),
+    var(--fascia) center/cover no-repeat}
+/* Sul telefono il titolo occupa tutta la larghezza: col disegno dietro, i
+   personaggi finivano sotto le parole. Li' il disegno scende SOTTO il testo,
+   come una striscia sua alta 190px, allineata a destra dove stanno Ginetto e
+   Briciola; sopra resta il fondo scuro pieno, che sfuma nel disegno. */
+@media(max-width:600px){.ev-hero--img{padding-bottom:196px}
+.ev-hero--img::before{background:
+  linear-gradient(180deg,#0e1422 0%,#0e1422 calc(100% - 196px),rgba(14,20,34,0) calc(100% - 130px)),
+  var(--fascia-m, var(--fascia)) 82% 100%/auto 196px no-repeat,#0e1422}}
 /* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
 .ev-wrap--hero{padding-top:44px}
 @media(max-width:600px){.ev-wrap--hero{padding-top:32px}}
@@ -1025,7 +1043,7 @@
   </aside>
 
   <h2>Altri comuni della provincia di Cuneo</h2><div class="com-link"><a href="/eventi/comune/alba.html">Alba</a><a href="/eventi/comune/busca.html">Busca</a><a href="/eventi/comune/caraglio.html">Caraglio</a><a href="/eventi/comune/carru.html">Carrù</a><a href="/eventi/comune/ceresole-alba.html">Ceresole Alba</a><a href="/eventi/comune/ceresole-d-alba.html">Ceresole d&#x27;Alba</a></div>
-  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">904 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">estate, Natale e Pasqua, con le iscrizioni</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">88 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">907 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">89 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
   <div class="com-fonte"><div class="fonte-chi">Gli eventi a Sampeyre arrivano da <a class="ev-ig" href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">@daop_cuneo</a>, la nostra pagina per la provincia di Cuneo: seguila per gli eventi in arrivo.</div><div class="fonte-mail"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>Organizzi un evento in provincia di Cuneo? Scrivi a <a href="mailto:cuneo@daop.it">cuneo@daop.it</a></span></div><div class="fonte-zona"><a href="/zone.html">Le pagine della tua zona</a></div></div>
   <p class="ev-firma-nota">Pagina aggiornata il 23 settembre 2026.</p>
 </article>

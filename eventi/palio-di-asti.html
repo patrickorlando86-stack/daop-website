@@ -539,6 +539,24 @@
 .ev-hero .ev-when{font-size:1.08rem;font-weight:600;color:var(--gold,#c9a227);margin:0}
 .ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
 @media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
+/* La fascia illustrata di una stagionale (23/09/2026, prima /halloween.html).
+   Stessa .page-hero, ma al posto della texture all'8% c'e' il disegno pieno,
+   con un velo scuro da sinistra: il testo sta a sinistra e deve restare
+   leggibile anche dove il disegno si accende (zucche, luna). Le due misure
+   arrivano da variabili nello style dell'header, cosi' il CSS e' uno solo per
+   tutte le feste che avranno la loro fascia. */
+.ev-hero--img{background:#0e1422}
+.ev-hero--img::before{opacity:1;
+  background:linear-gradient(90deg,rgba(10,14,26,.88) 0%,rgba(10,14,26,.62) 42%,rgba(10,14,26,.12) 78%),
+    var(--fascia) center/cover no-repeat}
+/* Sul telefono il titolo occupa tutta la larghezza: col disegno dietro, i
+   personaggi finivano sotto le parole. Li' il disegno scende SOTTO il testo,
+   come una striscia sua alta 190px, allineata a destra dove stanno Ginetto e
+   Briciola; sopra resta il fondo scuro pieno, che sfuma nel disegno. */
+@media(max-width:600px){.ev-hero--img{padding-bottom:196px}
+.ev-hero--img::before{background:
+  linear-gradient(180deg,#0e1422 0%,#0e1422 calc(100% - 196px),rgba(14,20,34,0) calc(100% - 130px)),
+  var(--fascia-m, var(--fascia)) 82% 100%/auto 196px no-repeat,#0e1422}}
 /* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
 .ev-wrap--hero{padding-top:44px}
 @media(max-width:600px){.ev-wrap--hero{padding-top:32px}}
@@ -830,7 +848,7 @@
         "@id": "https://www.daop.it/#organization"
       },
       "datePublished": "2026-08-31",
-      "dateModified": "2026-09-21",
+      "dateModified": "2026-09-23",
       "lastReviewed": "2026-09-06"
     },
     {

@@ -4173,6 +4173,16 @@ def blocco_ecosistema(qui=None):
         if chiave == 'corsi' and not CORSI_IN_INDICE:
             continue
         q = n.get(chiave) or 0
+        # Stessa ragione, per i centri fuori stagione (23/09/2026, Patrick:
+        # «i centri estivi non ci sono attualmente ma c'e' la scheda.. male»).
+        # Con zero centri attivi la card prometteva "estate, Natale e Pasqua,
+        # con le iscrizioni" e apriva una pagina vuota: e' la regola dei chip
+        # dell'app, una porta non promette una cosa che non c'e'. Torna da sola
+        # quando genera_centri scrive un conteggio sopra zero (con un giro di
+        # ritardo, vedi conteggio_scrivi). Vale anche sulla home, dove il
+        # testo sotto il titolo si adegua (vedi sotto).
+        if chiave == 'centri' and not q:
+            continue
         sotto = _eco_riga(chiave, q) if q >= MIN_CONTEGGIO else riga
         voci.append(f'<a class="eco-c" href="{href}">'
                     f'<span class="eco-n">{esc(nome)}</span>'
@@ -4189,10 +4199,20 @@ def blocco_ecosistema(qui=None):
     # invece la riga e' un rimando laterale e la testa resta il solo titolo.
     testa = f'<h2 class="eco-t" id="eco-t">{titolo}</h2>'
     if porte:
-        testa = ('<span class="eco-lab">Le quattro sezioni</span>' + testa +
-                 '<p class="eco-sub">Eventi con una data, luoghi che ci sono '
-                 'sempre, centri e corsi con l&#x27;iscrizione: quattro modi '
-                 'diversi di stare nel tempo, ognuno con la sua pagina.</p>')
+        # Quattro quando ci sono i centri, tre fuori stagione: il testo dice
+        # quello che la riga mostra, non quello che la riga mostrava ad agosto.
+        if len(voci) == 4:
+            lab, sub = ('Le quattro sezioni',
+                        'Eventi con una data, luoghi che ci sono sempre, centri e '
+                        'corsi con l&#x27;iscrizione: quattro modi diversi di stare '
+                        'nel tempo, ognuno con la sua pagina.')
+        else:
+            lab, sub = ('Le sezioni',
+                        'Eventi con una data, luoghi che ci sono sempre, corsi con '
+                        'l&#x27;iscrizione: modi diversi di stare nel tempo, ognuno '
+                        'con la sua pagina.')
+        testa = (f'<span class="eco-lab">{lab}</span>' + testa +
+                 f'<p class="eco-sub">{sub}</p>')
     return (f'<section class="{cls}" aria-labelledby="eco-t">'
             f'{testa}'
             f'<div class="eco-g">{"".join(voci)}</div></section>')
@@ -7286,7 +7306,7 @@ LANDING_JS = r"""<script>
 """
 
 
-def _altre_landing(qui, elenco):
+def _altre_landing(qui, elenco, porte=True):
     """La riga di scorciatoie verso le altre pagine di intenzione, e sotto di
     essa la riga delle quattro porte.
 
@@ -7297,7 +7317,7 @@ def _altre_landing(qui, elenco):
     voci = "".join(f'<a href="{href}">{esc(testo)}</a>'
                    for href, testo in elenco if href != qui)
     scorciatoie = f'<div class="lan-alt">{voci}</div>' if voci else ''
-    return scorciatoie + blocco_ecosistema('eventi')
+    return scorciatoie + (blocco_ecosistema('eventi') if porte else '')
 
 
 def spec_oggi(events, oggi, altre):
@@ -8129,7 +8149,10 @@ def spec_halloween(st, events, oggi, altre):
         'da visitare con i bambini</a> stanno nel catalogo dei luoghi, con '
         'telefono e indirizzo. Se quel giorno piove, la stessa pagina dice '
         'quali sono al coperto.</p>')
-    corpo += _altre_landing("/halloween.html", altre)
+    # Senza la riga delle porte: sopra ci sono gia' Ginetto e la riga "cerchi
+    # altro da fare in quei giorni?", e una terza domanda uguale confonde
+    # (Patrick, 23/09/2026). Le scorciatoie verso le altre date restano.
+    corpo += _altre_landing("/halloween.html", altre, porte=False)
 
     return {
         'path': "halloween.html", 'url': url,

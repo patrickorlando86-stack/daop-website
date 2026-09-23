@@ -103,7 +103,10 @@ module.exports = async function porte(browser) {
   const corsiVivi = corsiInIndice();
   // Gli hub che partecipano alle porte. Un hub fuori indice non e' una porta:
   // ne' la propria ne' quella che le altre pagine gli aprono.
-  const PORTE = HUB.filter(([k]) => k !== 'corsi' || corsiVivi);
+  // Stessa regola per i centri fuori stagione (23/09/2026): con zero centri
+  // attivi la card prometteva iscrizioni e apriva una pagina vuota.
+  const PORTE = HUB.filter(([k]) => (k !== 'corsi' || corsiVivi)
+    && (k !== 'centri' || (conteggi.centri || 0) > 0));
   console.log(`  --   corsi ${corsiVivi ? 'in indice' : 'FUORI indice'}: `
     + `${PORTE.length} porte`);
 
@@ -307,7 +310,10 @@ module.exports = async function porte(browser) {
   // altezza zero) non si vede leggendo il sorgente.
   const { ctx, page } = await apri(browser, 'corsi.html', 412);
   const card = page.locator('.eco .eco-c');
-  r.ok(await card.count() === 3, 'corsi.html a 412px: tre card nel DOM');
+  // Le porte vive meno quella di corsi.html stessa: tre coi centri, due fuori
+  // stagione (23/09/2026).
+  const carteCorsi = PORTE.length - 1;
+  r.ok(await card.count() === carteCorsi, `corsi.html a 412px: ${carteCorsi} card nel DOM`);
   r.ok(await card.first().isVisible(), 'e la prima è visibile');
   const alto = await card.first().evaluate((el) => el.getBoundingClientRect().height);
   r.ok(alto >= 44, `l'area toccabile è alta ${Math.round(alto)}px (minimo 44)`);
