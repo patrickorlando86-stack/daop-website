@@ -498,7 +498,10 @@ p, li, .section-subtitle, .team-desc, .book-desc,
    non ce l'hanno; nessun altro foglio nomina queste classi, quindi l'ordine
    del <head> non decide niente. I link restano .footer-col-links a. */
 .footer-soc { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; font-size: 0.88rem; }
-.footer-soc-p { color: rgba(255, 255, 255, 0.85); font-weight: 600; min-width: 6.2em; }
+/* Il nome su una riga sua, i profili sotto e piu' piccoli: sulla stessa riga,
+   nella colonna stretta del desktop, Facebook andava a capo da solo. */
+.footer-soc-p { flex-basis: 100%; color: rgba(255, 255, 255, 0.85); font-weight: 600; }
+.footer-col-links .footer-soc a { font-size: 0.8rem; }
 .footer-soc-sep { color: rgba(255, 255, 255, 0.4); }
 
 /* --------------------------------------------------------------------------

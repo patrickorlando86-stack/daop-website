@@ -160,13 +160,15 @@ def blocco_social_footer(inline=False):
     # legge "Instagram, Instagram, Instagram" senza dire di chi.
     st_riga = (' style="display:flex;flex-wrap:wrap;align-items:baseline;'
                'gap:2px 8px;font-size:0.88rem;"' if inline else '')
-    st_prov = (' style="color:rgba(255,255,255,0.85);font-weight:600;'
-               'min-width:6.2em;"' if inline else '')
+    st_prov = (' style="flex-basis:100%;color:rgba(255,255,255,0.85);'
+               'font-weight:600;"' if inline else '')
+    st_ap = (' style="text-decoration:none;font-size:0.8rem;'
+             'color:rgba(255,255,255,0.62);"' if inline else '')
     st_sep = (' style="color:rgba(255,255,255,0.4);"' if inline else '')
 
     def link_p(href, testo, prov):
         return (f'<a href="{href}" target="_blank" rel="noopener" '
-                f'aria-label="{esc(testo)} {esc(prov)}"{st_a}>{esc(testo)}</a>')
+                f'aria-label="{esc(testo)} {esc(prov)}"{st_ap}>{esc(testo)}</a>')
 
     fonti = [f for f in (fonte_provincia(s) for s in PROVINCE_PUBBLICATE) if f]
     voci = []
