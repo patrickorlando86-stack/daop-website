@@ -104,7 +104,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 111,
+  "riga": 99,
   "slug": "25-anni-parco-la-rocca-festeggiamo-insieme-valfenera",
   "updated": "2026-09-23"
  },
@@ -132,7 +132,7 @@
   "ora": "16:30",
   "prezzo": "15 euro a iscrizione (sconto fratelli 25 euro)",
   "prov": "CN",
-  "riga": 33,
+  "riga": 29,
   "slug": "a-caccia-dell-orso-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -186,7 +186,7 @@
   "ora": "10:30-12:30 e 15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 21,
+  "riga": 19,
   "slug": "a-calosso-museo-e-dintorni-fiera-del-rapule",
   "updated": "2026-09-23"
  },
@@ -213,7 +213,7 @@
   "ora": "10:30-12:30 e 15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 20,
+  "riga": 18,
   "slug": "a-calosso-museo-e-dintorni-ottobre",
   "updated": "2026-09-23"
  },
@@ -714,7 +714,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 124,
+  "riga": 110,
   "slug": "all-ombra-di-un-racconto-ludofavole-d-autunno-mondovi",
   "updated": "2026-09-23"
  },
@@ -857,7 +857,7 @@
   "ora": "16:30-17:20",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 46,
+  "riga": 42,
   "slug": "allegro-con-moto-incontro-1-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -885,7 +885,7 @@
   "ora": "16:30-17:20",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 47,
+  "riga": 43,
   "slug": "allegro-con-moto-incontro-2-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -1087,7 +1087,7 @@
   "ora": "16:30-17:20",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 45,
+  "riga": 41,
   "slug": "allegro-con-moto-incontro-prova-gratuito-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -1195,7 +1195,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 207,
+  "riga": 179,
   "slug": "antica-fiera-della-madonna-del-rosario-pro-loco-vi-visone",
   "updated": "2026-09-23"
  },
@@ -1563,7 +1563,7 @@
   "ora": "19:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 149,
+  "riga": 129,
   "slug": "aspettando-il-palio-banchetto-medievale-palio-degl-cocconato",
   "updated": "2026-09-23"
  },
@@ -1705,7 +1705,7 @@
   "ora": "8:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 212,
+  "riga": 184,
   "slug": "asti-e-la-mia-citta-giornata-nazionale-del-veicolo",
   "updated": "2026-09-23"
  },
@@ -1845,7 +1845,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 150,
+  "riga": 130,
   "slug": "benedizione-dei-gonfaloni-dei-borghi-palio-degli-a-cocconato",
   "updated": "2026-09-23"
  },
@@ -2012,7 +2012,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 193,
+  "riga": 165,
   "slug": "biblio-storie-letture-a-cura-di-abl-cuneo",
   "updated": "2026-09-23"
  },
@@ -2290,7 +2290,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 31,
+  "riga": 28,
   "slug": "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-venasca",
   "updated": "2026-09-23"
  },
@@ -2318,7 +2318,7 @@
   "ora": "14:00",
   "prezzo": "20 euro (gioco + merenda, caparra 10 euro)",
   "prov": "CN",
-  "riga": 131,
+  "riga": 117,
   "slug": "caccia-al-tesoro-alle-meschie-vale-explorer-pradeboni",
   "updated": "2026-09-23"
  },
@@ -2458,7 +2458,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 163,
+  "riga": 141,
   "slug": "camminiamo-insieme-per-la-salute-comune-di-peverag-peveragno",
   "updated": "2026-09-23"
  },
@@ -2542,7 +2542,7 @@
   "ora": "10:00",
   "prezzo": "8 euro (iscrizione + pranzo); 10 euro se iscrizione il giorno dell'evento",
   "prov": "CN",
-  "riga": 112,
+  "riga": 100,
   "slug": "carrun-per-la-scuola",
   "updated": "2026-09-23"
  },
@@ -2653,7 +2653,7 @@
   "ora": "10:00-11:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 203,
+  "riga": 175,
   "slug": "casalnoceto-kids-move-comune-di-casalnoceto",
   "updated": "2026-09-23"
  },
@@ -2709,7 +2709,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 88,
+  "riga": 77,
   "slug": "castagnata-campagnola-circolo-acli-san-maurizio-cr-castelletto-d-orba",
   "updated": "2026-09-23"
  },
@@ -3460,7 +3460,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 196,
+  "riga": 168,
   "slug": "cioccolato-nel-monferrato-comune-di-altavilla-monf-altavilla-monferrato",
   "updated": "2026-09-23"
  },
@@ -3516,7 +3516,7 @@
   "ora": "18:30-19:15",
   "prezzo": "15 euro a incontro",
   "prov": "CN",
-  "riga": 37,
+  "riga": 33,
   "slug": "coccoliamo-ci-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -3882,7 +3882,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 152,
+  "riga": 132,
   "slug": "corsa-degli-asini-palio-degli-asini-cocconato",
   "updated": "2026-09-23"
  },
@@ -3993,7 +3993,7 @@
   "ora": "9:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 57,
+  "riga": 50,
   "slug": "corso-gratuito-manovre-salvavita-pediatriche-croce-novi-ligure",
   "updated": "2026-09-23"
  },
@@ -4076,7 +4076,7 @@
   "ora": "14:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 151,
+  "riga": 131,
   "slug": "corteo-storico-dei-borghi-palio-degli-asini-cocconato",
   "updated": "2026-09-23"
  },
@@ -4132,7 +4132,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 220,
+  "riga": 192,
   "slug": "cresco-con-te-bibliopride-saluzzo",
   "updated": "2026-09-23"
  },
@@ -4575,7 +4575,7 @@
   "ora": "16:30-17:15",
   "prezzo": "15 euro ad incontro",
   "prov": "CN",
-  "riga": 36,
+  "riga": 32,
   "slug": "espressione-in-gioco-fascia-2-6-anni-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -5298,7 +5298,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 223,
+  "riga": 195,
   "slug": "festa-dei-nonni-citta-di-mondovi",
   "updated": "2026-09-23"
  },
@@ -5523,7 +5523,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 29,
+  "riga": 26,
   "slug": "festa-del-vino-del-monferrato-weekend-2-casale-monferrato",
   "updated": "2026-09-23"
  },
@@ -5550,7 +5550,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 83,
+  "riga": 72,
   "slug": "festa-del-volontariato-vivi-borbera-e-spinti-rocchetta-ligure",
   "updated": "2026-09-23"
  },
@@ -5745,7 +5745,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 84,
+  "riga": 73,
   "slug": "festa-della-birra-street-food-quartiere-cristo-alessandria",
   "updated": "2026-09-23"
  },
@@ -5828,7 +5828,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 197,
+  "riga": 169,
   "slug": "festa-della-montagna-fabbrica-curone",
   "updated": "2026-09-23"
  },
@@ -5856,7 +5856,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 201,
+  "riga": 173,
   "slug": "festa-della-montagna-piancastagna-ponzone",
   "updated": "2026-09-23"
  },
@@ -6186,7 +6186,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 210,
+  "riga": 182,
   "slug": "festa-dello-sport-nuova-polisportiva-calossese-calosso",
   "updated": "2026-09-23"
  },
@@ -6799,7 +6799,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 43,
+  "riga": 39,
   "slug": "festa-patronale-di-san-maurizio-roccaforte-mondovi",
   "updated": "2026-09-23"
  },
@@ -7215,7 +7215,7 @@
   "ora": "10:00-20:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 63,
+  "riga": 56,
   "slug": "festa-vendemmia-cascina-fontanette-santo-stefano-belbo",
   "updated": "2026-09-23"
  },
@@ -7551,7 +7551,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 56,
+  "riga": 49,
   "slug": "fiera-della-zucca-e-mercato-contadino-pro-loco-di-parodi-ligure",
   "updated": "2026-09-23"
  },
@@ -7661,7 +7661,7 @@
   "ora": "vari",
   "prezzo": "Cena 25 euro",
   "prov": "CN",
-  "riga": 79,
+  "riga": 69,
   "slug": "fiera-di-san-michele-sagra-delle-raviole-sampeyre",
   "updated": "2026-09-23"
  },
@@ -7719,7 +7719,7 @@
   "ora": "vari",
   "prezzo": "5 euro (gratuito per bambini fino a 10 anni)",
   "prov": "AT",
-  "riga": 110,
+  "riga": 98,
   "slug": "fiera-nazionale-della-zucca-la-zucca-delle-meravig-piea",
   "updated": "2026-09-23"
  },
@@ -8161,7 +8161,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 58,
+  "riga": 51,
   "slug": "gara-dolciaria-dei-cucu-sfida-cittadina-a-colpi-di-ottiglio",
   "updated": "2026-09-23"
  },
@@ -8189,7 +8189,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 62,
+  "riga": 55,
   "slug": "germogli-0-3-la-cuerta-foglia-cortiglione",
   "updated": "2026-09-23"
  },
@@ -8216,7 +8216,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 132,
+  "riga": 118,
   "slug": "ghita-festa-dei-giochi-in-strada-farigliano",
   "updated": "2026-09-23"
  },
@@ -8270,7 +8270,7 @@
   "ora": "10:30-13:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 156,
+  "riga": 135,
   "slug": "giardino-d-autunno-montagne-del-mare-valdieri",
   "updated": "2026-09-23"
  },
@@ -8353,7 +8353,7 @@
   "ora": "14:00-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 44,
+  "riga": 40,
   "slug": "giochi-di-fine-estate-movimento-giovanile-centallo",
   "updated": "2026-09-23"
  },
@@ -8548,7 +8548,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 120,
+  "riga": 107,
   "slug": "giochiamo-con-la-scienza-lago-o-isola-mondovi",
   "updated": "2026-09-23"
  },
@@ -9080,7 +9080,7 @@
   "ora": "15:00",
   "prezzo": "7 euro (sia adulti che bambini)",
   "prov": "CN",
-  "riga": 77,
+  "riga": 67,
   "slug": "i-treni-raccontano-storie-da-custodire-savigliano",
   "updated": "2026-09-23"
  },
@@ -9193,7 +9193,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 71,
+  "riga": 64,
   "slug": "il-corpo-giocoso-tutti-in-salute-cuneo",
   "updated": "2026-09-23"
  },
@@ -9275,7 +9275,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 217,
+  "riga": 189,
   "slug": "il-guardiano-del-borgo-la-fabbrica-dei-suoni-costigliole-saluzzo",
   "updated": "2026-09-23"
  },
@@ -9413,7 +9413,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 126,
+  "riga": 112,
   "slug": "il-principe-tessitore-e-altre-storie-principesche-mondovi",
   "updated": "2026-09-23"
  },
@@ -9440,7 +9440,7 @@
   "ora": "18:30-22:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 162,
+  "riga": 140,
   "slug": "il-richiamo-del-bosco-la-notte-del-bramito-montagn-evento",
   "updated": "2026-09-23"
  },
@@ -9525,7 +9525,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 13,
+  "riga": 11,
   "slug": "in-viaggio-per-crescere-con-le-storie-nati-per-leg-casale-monferrato",
   "updated": "2026-09-23"
  },
@@ -9553,7 +9553,7 @@
   "ora": "14:00-17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 173,
+  "riga": 150,
   "slug": "inaugurazione-alpaca-lounge-bioparco-cinofilo-del-sarezzano",
   "updated": "2026-09-23"
  },
@@ -9635,7 +9635,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 216,
+  "riga": 188,
   "slug": "intrecci-di-famiglie-rete-mamma-cherasco",
   "updated": "2026-09-23"
  },
@@ -9691,7 +9691,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 204,
+  "riga": 176,
   "slug": "kids-move-final-fest-comune-di-casalnoceto",
   "updated": "2026-09-23"
  },
@@ -9746,7 +9746,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 213,
+  "riga": 185,
   "slug": "l-agora-delle-farfalle-parco-fluviale-gesso-e-stur-cuneo",
   "updated": "2026-09-23"
  },
@@ -9911,7 +9911,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 205,
+  "riga": 177,
   "slug": "la-giostrina-dei-bambini-giostra-del-gusto-tagliolo-monferrato",
   "updated": "2026-09-23"
  },
@@ -10079,7 +10079,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 99,
+  "riga": 87,
   "slug": "la-notte-dei-peluches-biblioteca-civica-g-monticon-canelli",
   "updated": "2026-09-23"
  },
@@ -10106,7 +10106,7 @@
   "ora": "16:30",
   "prezzo": "10 euro",
   "prov": "AL",
-  "riga": 85,
+  "riga": 74,
   "slug": "la-notte-dei-pupazzi-consegna-pupazzi-la-bottega-d-novi-ligure",
   "updated": "2026-09-23"
  },
@@ -10133,7 +10133,7 @@
   "ora": "10:30",
   "prezzo": "10 euro",
   "prov": "AL",
-  "riga": 86,
+  "riga": 75,
   "slug": "la-notte-dei-pupazzi-ritiro-pupazzi-e-colazione-la-novi-ligure",
   "updated": "2026-09-23"
  },
@@ -10886,7 +10886,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 94,
+  "riga": 82,
   "slug": "le-letture-del-sabato-in-biblioteca-biblioteca-civ-canelli",
   "updated": "2026-09-23"
  },
@@ -11164,7 +11164,7 @@
   "ora": "15:00-16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 214,
+  "riga": 186,
   "slug": "magie-d-autunno-parco-fluviale-gesso-e-stura-fossano",
   "updated": "2026-09-23"
  },
@@ -11301,7 +11301,7 @@
   "ora": "14:00",
   "prezzo": "8 euro (gadget + ristoro finale inclusi)",
   "prov": "CN",
-  "riga": 130,
+  "riga": 116,
   "slug": "memorial-sportivo-aldo-galfre-pro-loco-roccavione",
   "updated": "2026-09-23"
  },
@@ -11414,7 +11414,7 @@
   "ora": "17:30",
   "prezzo": "10 euro",
   "prov": "CN",
-  "riga": 215,
+  "riga": 187,
   "slug": "miele-castelmagno-monterosso-grana",
   "updated": "2026-09-23"
  },
@@ -11495,7 +11495,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 222,
+  "riga": 194,
   "slug": "missione-natura-una-mattina-all-oasi-parco-fluvial-sant-albano-stura",
   "updated": "2026-09-23"
  },
@@ -11522,7 +11522,7 @@
   "ora": "vari",
   "prezzo": "5 euro per tutti",
   "prov": "AL",
-  "riga": 145,
+  "riga": 126,
   "slug": "monferrato-green-farm-casale-monferrato",
   "updated": "2026-09-23"
  },
@@ -11604,7 +11604,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 206,
+  "riga": 178,
   "slug": "mostra-della-zucca-e-degli-ortaggi-locali-castellazzo-bormida",
   "updated": "2026-09-23"
  },
@@ -11686,7 +11686,7 @@
   "ora": "10:00",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 128,
+  "riga": 114,
   "slug": "mot-kids-maira-occitan-trail-kids-marmora",
   "updated": "2026-09-23"
  },
@@ -11823,7 +11823,7 @@
   "ora": "16:00-21:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 87,
+  "riga": 76,
   "slug": "neverland-the-fantasy-garden-halloween-frugarolo",
   "updated": "2026-09-23"
  },
@@ -12017,7 +12017,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 176,
+  "riga": 153,
   "slug": "open-day-musici-e-sbandieratori-borgo-don-bosco-asti",
   "updated": "2026-09-23"
  },
@@ -12128,7 +12128,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 73,
+  "riga": 65,
   "slug": "orizzonti-sospesi-tutti-in-salute-cuneo",
   "updated": "2026-09-23"
  },
@@ -12265,7 +12265,7 @@
   "ora": "vari",
   "prezzo": "10 euro a giro",
   "prov": "AL",
-  "riga": 200,
+  "riga": 172,
   "slug": "paderna-taxi-rally",
   "updated": "2026-09-23"
  },
@@ -12625,7 +12625,7 @@
   "ora": "9:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 202,
+  "riga": 174,
   "slug": "passeggiata-patrimoniale-alla-scoperta-della-citta-alessandria",
   "updated": "2026-09-23"
  },
@@ -13153,7 +13153,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 171,
+  "riga": 148,
   "slug": "ponte-in-ballo-ritmo-sapori-e-siamo-in-festa-comit-pontecurone",
   "updated": "2026-09-23"
  },
@@ -13298,7 +13298,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 180,
+  "riga": 157,
   "slug": "preparare-il-pavimento-pelvico-al-parto-beatrice-b-nizza-monferrato",
   "updated": "2026-09-23"
  },
@@ -13326,7 +13326,7 @@
   "ora": "17:30-18:20",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 48,
+  "riga": 44,
   "slug": "presto-prestissimo-incontro-prova-gratuito-racconigi",
   "updated": "2026-09-23"
  },
@@ -13354,7 +13354,7 @@
   "ora": "17:30-18:20",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 49,
+  "riga": 45,
   "slug": "presto-prestissimo-percorso-di-8-incontri-racconigi",
   "updated": "2026-09-23"
  },
@@ -13547,7 +13547,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 78,
+  "riga": 68,
   "slug": "quarantottesima-fiera-d-autunno-sagra-gnocchi-al-c-caraglio",
   "updated": "2026-09-23"
  },
@@ -13631,7 +13631,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 125,
+  "riga": 111,
   "slug": "qui-casca-l-asino-ludofavole-d-autunno-mondovi",
   "updated": "2026-09-23"
  },
@@ -13658,7 +13658,7 @@
   "ora": "14:30-19:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 179,
+  "riga": 156,
   "slug": "raduno-auto-sportive-e-storiche-memorial-accornero-montemagno-monferrato",
   "updated": "2026-09-23"
  },
@@ -13768,7 +13768,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 172,
+  "riga": 149,
   "slug": "raviolata-d-autunno-di-francavilla-b-francavilla-bisio",
   "updated": "2026-09-23"
  },
@@ -13908,7 +13908,7 @@
   "ora": "18:00",
   "prezzo": "Libero a offerta",
   "prov": "AT",
-  "riga": 211,
+  "riga": 183,
   "slug": "ritratto-d-artista-con-angelo-casa-degli-alfieri-villanova-d-asti",
   "updated": "2026-09-23"
  },
@@ -13963,7 +13963,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 198,
+  "riga": 170,
   "slug": "robot-mania-robotica-fantascientifica-e-spaziale-serravalle-scrivia",
   "updated": "2026-09-23"
  },
@@ -14790,7 +14790,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 209,
+  "riga": 181,
   "slug": "sagra-delle-castagne-di-cartosio",
   "updated": "2026-09-23"
  },
@@ -14817,7 +14817,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 174,
+  "riga": 151,
   "slug": "sagra-delle-castagne-pro-loco-garbagna",
   "updated": "2026-09-23"
  },
@@ -15852,7 +15852,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 218,
+  "riga": 190,
   "slug": "settimana-mondiale-per-l-allattamento-bra",
   "updated": "2026-09-23"
  },
@@ -15880,7 +15880,7 @@
   "ora": "17:00-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 226,
+  "riga": 198,
   "slug": "settimana-mondiale-per-l-allattamento-laboratorio-alba",
   "updated": "2026-09-23"
  },
@@ -15908,7 +15908,7 @@
   "ora": "10:00-12:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 224,
+  "riga": 196,
   "slug": "settimana-mondiale-per-l-allattamento-letture-e-sp-alba",
   "updated": "2026-09-23"
  },
@@ -15990,7 +15990,7 @@
   "ora": "10:00-11:30",
   "prezzo": "20 euro",
   "prov": "CN",
-  "riga": 34,
+  "riga": 30,
   "slug": "sogni-d-oro-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -16073,7 +16073,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 14,
+  "riga": 12,
   "slug": "spazio-creativita-i-colori-dell-autunno-biblioteca-casale-monferrato",
   "updated": "2026-09-23"
  },
@@ -16346,7 +16346,7 @@
   "ora": "14:00-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 194,
+  "riga": 166,
   "slug": "sport-in-piazza-lo-sport-per-tutti-citta-di-mondov-mondovi",
   "updated": "2026-09-23"
  },
@@ -16428,7 +16428,7 @@
   "ora": "8:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 208,
+  "riga": 180,
   "slug": "storica-fiera-bovina-s-eusebio-comune-di-ottiglio",
   "updated": "2026-09-23"
  },
@@ -16483,7 +16483,7 @@
   "ora": "09:30-11:30",
   "prezzo": "Adulti 30,00€; Ragazzi 7-12 anni 16,00€; Bambini fino a 6 anni gratis",
   "prov": "AT",
-  "riga": 22,
+  "riga": 20,
   "slug": "stramangiando-pro-loco-motta-di-costigliole-d-asti",
   "updated": "2026-09-23"
  },
@@ -16735,7 +16735,7 @@
   "ora": "dalle ore 15",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 221,
+  "riga": 193,
   "slug": "tipi-da-biblioteca-noau-officina-culturale-cuneo",
   "updated": "2026-09-23"
  },
@@ -16873,7 +16873,7 @@
   "ora": "08:00-18:15",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 219,
+  "riga": 191,
   "slug": "torneo-scacchi-a-scuola-huc-academy-cuneo",
   "updated": "2026-09-23"
  },
@@ -17038,7 +17038,7 @@
   "ora": "16:00-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 160,
+  "riga": 138,
   "slug": "tu-che-animale-sei-montagne-del-mare-entracque",
   "updated": "2026-09-23"
  },
@@ -17094,7 +17094,7 @@
   "ora": "17:00-19:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 24,
+  "riga": 22,
   "slug": "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi",
   "updated": "2026-09-23"
  },
@@ -17122,7 +17122,7 @@
   "ora": "10:00-11:30",
   "prezzo": "25 euro",
   "prov": "CN",
-  "riga": 35,
+  "riga": 31,
   "slug": "tutti-a-tavola-carezza-racconigi",
   "updated": "2026-09-23"
  },
@@ -17176,7 +17176,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 161,
+  "riga": 139,
   "slug": "un-amuleto-per-il-mio-viaggio-museo-diocesano-san-cuneo",
   "updated": "2026-09-23"
  },
@@ -17454,7 +17454,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 129,
+  "riga": 115,
   "slug": "una-storia-in-scatola-per-ascoltare-insieme-e-gioc-verzuolo",
   "updated": "2026-09-23"
  },
@@ -17567,7 +17567,7 @@
   "ora": "da verificare",
   "prezzo": "60 euro adulti, 45 euro bambini",
   "prov": "AT",
-  "riga": 17,
+  "riga": 15,
   "slug": "vendemmia-in-vigna-con-i-bambini-vini-piana-mombaruzzo",
   "updated": "2026-09-23"
  },
@@ -17594,7 +17594,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 192,
+  "riga": 164,
   "slug": "vi-racconto-una-bella-storia-busca",
   "updated": "2026-09-23"
  },
@@ -17730,7 +17730,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 199,
+  "riga": 171,
   "slug": "volontari-in-piazza-novi-ligure",
   "updated": "2026-09-23"
  },

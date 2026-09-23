@@ -1369,6 +1369,40 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     if(window.ResizeObserver) new ResizeObserver(misuraSticky).observe(bar);
     else window.addEventListener('resize',misuraSticky);
   }
+  // Il salto all'ancora lo fa il browser su una stima: le schede portano
+  // content-visibility:auto con 108px supposti, e il salto si calcola su
+  // quelli. Poi si disegnano le schede vicine all'arrivo, che a 1280px sono
+  // alte 105, e il bersaglio sale di 3px per ognuna - misurato il 23/09/2026:
+  // con 88 schede #r-allinea-mente atterrava a 90px sotto un tetto di 136
+  // (senza content-visibility: 148, esatto). Colpisce solo quello che sta
+  // DOPO l'elenco (le realta'), e cresce con le schede: e' per questo che e'
+  // diventato rosso da solo il 21/09, senza che nessuno toccasse il codice.
+  // Una stima migliore non basta, le schede non sono alte uguali (a 105px
+  // si atterrava comunque a 127). Si riallinea il bersaglio una volta
+  // disegnato quello che ha intorno, finche' sta fermo - e mai se nel
+  // frattempo chi legge ha gia' iniziato a scorrere da se'.
+  var mosso=false;
+  ['wheel','touchstart','keydown','mousedown'].forEach(function(t){
+    window.addEventListener(t,function(){mosso=true;},{passive:true});
+  });
+  function riallinea(){
+    var id=(location.hash||'').replace('#','');
+    var e=id&&document.getElementById(id);
+    if(!e) return;
+    var giri=0, prima=null;
+    mosso=false;
+    (function passo(){
+      if(mosso||giri++>5) return;
+      var top=Math.round(e.getBoundingClientRect().top);
+      if(top===prima) return;
+      e.scrollIntoView({block:'start'});
+      prima=Math.round(e.getBoundingClientRect().top);
+      requestAnimationFrame(function(){requestAnimationFrame(passo);});
+    })();
+  }
+  if(document.readyState==='complete') riallinea();
+  else window.addEventListener('load',riallinea);
+  window.addEventListener('hashchange',riallinea);
   if(!bar) return;
   var q=document.getElementById('co-q'), count=document.getElementById('co-count'),
       campi=[].slice.call(bar.querySelectorAll('[data-campo]'));

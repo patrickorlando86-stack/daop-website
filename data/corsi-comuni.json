@@ -81,7 +81,7 @@
    "slug": "la-morra"
   },
   "cn-mondovi": {
-   "n": 14,
+   "n": 15,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -112,6 +112,6 @@
   }
  },
  "province": {
-  "CN": 88
+  "CN": 89
  }
 }
