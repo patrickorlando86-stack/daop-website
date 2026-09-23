@@ -2981,6 +2981,19 @@ PAGINA_CSS = """
 .ev-hero .ev-when{font-size:1.08rem;font-weight:600;color:var(--gold,#c9a227);margin:0}
 .ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
 @media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
+/* La fascia illustrata di una stagionale (23/09/2026, prima /halloween.html).
+   Stessa .page-hero, ma al posto della texture all'8% c'e' il disegno pieno,
+   con un velo scuro da sinistra: il testo sta a sinistra e deve restare
+   leggibile anche dove il disegno si accende (zucche, luna). Le due misure
+   arrivano da variabili nello style dell'header, cosi' il CSS e' uno solo per
+   tutte le feste che avranno la loro fascia. */
+.ev-hero--img{background:#0e1422}
+.ev-hero--img::before{opacity:1;
+  background:linear-gradient(90deg,rgba(10,14,26,.88) 0%,rgba(10,14,26,.62) 42%,rgba(10,14,26,.12) 78%),
+    var(--fascia) center/cover no-repeat}
+@media(max-width:600px){.ev-hero--img::before{
+  background:linear-gradient(90deg,rgba(10,14,26,.78) 0%,rgba(10,14,26,.45) 55%,rgba(10,14,26,.05) 100%),
+    var(--fascia-m, var(--fascia)) 92% 100%/cover no-repeat}}
 /* Con la barra sopra, il corpo non deve piu' compensare la nav fissa. */
 .ev-wrap--hero{padding-top:44px}
 @media(max-width:600px){.ev-wrap--hero{padding-top:32px}}
@@ -6872,6 +6885,13 @@ def _landing_shell(spec, css, nav, foot, oggi):
     if spec.get('padre'):
         briciole += f'<a href="{spec["padre"][0]}">{esc(spec["padre"][1])}</a> › '
     briciole += f'<span>{esc(spec["crumb"])}</span>'
+    fascia = spec.get('fascia')
+    img_og = fascia['og'] if fascia else DEFAULT_IMG
+    hero_cls, hero_style = '', ''
+    if fascia:
+        hero_cls = ' ev-hero--img'
+        hero_style = (f' style="--fascia:url({fascia["grande"]});'
+                      f'--fascia-m:url({fascia["piccola"]})"')
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -6887,11 +6907,11 @@ def _landing_shell(spec, css, nav, foot, oggi):
 <meta property="og:url" content="{spec['url']}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
-<meta property="og:image" content="{DEFAULT_IMG}">
+<meta property="og:image" content="{img_og}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(spec['titolo'])}">
 <meta name="twitter:description" content="{esc(trunc(spec['descr'], 120))}">
-<meta name="twitter:image" content="{DEFAULT_IMG}">{prov_meta}
+<meta name="twitter:image" content="{img_og}">{prov_meta}
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -6907,7 +6927,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 <body>
 {nav}
 <main id="contenuto" data-generata="{oggi:%Y-%m-%d}">
-<header class="page-hero ev-hero">
+<header class="page-hero ev-hero{hero_cls}"{hero_style}>
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       {briciole}
@@ -8097,6 +8117,7 @@ def spec_halloween(st, events, oggi, altre):
         'jsonld': _grafo_landing(url, titolo, descr, finestra,
                                  f"Eventi di Halloween {anno}", "Halloween", oggi),
         'eventi': len(finestra),
+        'fascia': fascia_stagione('halloween'),
     }
 
 
@@ -8171,6 +8192,21 @@ TEMI_STAGIONE = {
         r"pasqu|\buov[ao]\b|colomba|luned[iì] dell'angelo", re.I),
     'ferragosto': re.compile(r"ferragost", re.I),
 }
+
+# Le fasce illustrate delle stagionali: chiave -> nome dei file in
+# assets/images/stagioni/ (<nome>-1600.webp, <nome>-800.webp, <nome>-og.jpg).
+# Una festa senza voce qui tiene la barra scura di sempre.
+FASCE_STAGIONE = {'halloween': 'halloween'}
+
+
+def fascia_stagione(chiave):
+    nome = FASCE_STAGIONE.get(chiave)
+    if not nome:
+        return None
+    base = f"/assets/images/stagioni/{nome}"
+    return {'grande': f"{base}-1600.webp", 'piccola': f"{base}-800.webp",
+            'og': f"{SITE_URL}{base}-og.jpg"}
+
 
 # Oltre questa durata una riga non e' un appuntamento del giorno ma una cosa
 # che "c'e'" - un corso, un percorso di otto incontri, una mostra - e nel
