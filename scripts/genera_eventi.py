@@ -9330,6 +9330,18 @@ def opzioni_provincia(events):
 MIN_SAGRE_HERO = 3
 FINESTRA_HERO = 30
 
+# Cosa conta come sagra per l'H1: il NOME, non la categoria. La categoria
+# "Sagra & Festa" (bucket 'feste') mette insieme sagre, patronali, fiere,
+# mercati, feste di Halloween e mercatini di Natale: contandola intera l'H1
+# direbbe "Sagre" tutto l'anno, dicembre compreso. Le radici in -at sono le
+# sagre che non si chiamano sagra (castagnata, raviolata, polentata).
+PAROLE_SAGRA = ('sagra', 'sagre', 'castagnat', 'raviolat', 'polentat')
+
+
+def e_sagra(e):
+    testo = f"{e.get('nome') or ''} {e.get('manifest') or ''}".lower()
+    return any(p in testo for p in PAROLE_SAGRA)
+
 
 # ===========================================================================
 # LE STAGIONI — l'unico posto in cui si dichiara una pagina stagionale.
@@ -9465,7 +9477,7 @@ def blocco_hero(events, oggi):
     l'anno): perde la parola sagre, che a dicembre non porta nessuno."""
     limite = oggi + datetime.timedelta(days=FINESTRA_HERO)
     sagre = sum(1 for e in events
-                if bucket(e)[0] == 'feste' and e['d_end'] >= oggi and e['d_start'] <= limite)
+                if e_sagra(e) and e['d_end'] >= oggi and e['d_start'] <= limite)
     if sagre >= MIN_SAGRE_HERO:
         h1 = "<em>Sagre ed eventi</em> oggi e questo weekend"
         occhiello = ("Tutte le sagre, le feste patronali, le fiere, i laboratori e gli "
