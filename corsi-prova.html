@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pagina di prova — Corsi | DAOP</title>
-<meta name="description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.">
+<meta name="description" content="6 corsi per bambini e ragazzi in provincia di Cuneo: sport e espressione. A Roccavione e Caraglio, con l&#x27;età e, dove ci sono, la lezione di prova e l&#x27;open day.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.daop.it/corsi-prova.html">
 <meta property="og:title" content="Corsi per bambini in provincia di Cuneo | DAOP">
-<meta property="og:description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con età, giorni, costi e le prove gratuite. Curato a mano.">
+<meta property="og:description" content="6 corsi per bambini e ragazzi in provincia di Cuneo: sport e espressione. A Roccavione e Caraglio, con l&#x27;età e, dove ci sono, la lezione di prova e l&#x27;open day.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi.html">
 <meta property="og:locale" content="it_IT">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Corsi per bambini in provincia di Cuneo | DAOP">
-<meta name="twitter:description" content="Corsi e attività continuative per bambini e ragazzi in provincia di Cuneo: musica, sport, danza, lingue, teatro. Con…">
+<meta name="twitter:description" content="6 corsi per bambini e ragazzi in provincia di Cuneo: sport e espressione. A Roccavione e Caraglio, con l&#x27;età e, dove ci…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -117,7 +117,13 @@
   .ev-toolbar{position:sticky;top:68px;z-index:40;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 0 11px;border-bottom:1px solid rgba(45,74,92,0.10)}
   .ev-search{position:relative;flex:1 1 230px;min-width:0;display:flex;align-items:center}
   .ev-search svg{position:absolute;left:15px;color:var(--text-light);pointer-events:none}
-  .ev-search input{width:100%;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:11px 16px 11px 42px;min-height:44px}
+  /* text-overflow:ellipsis: il segnaposto di un input si taglia a META' PAROLA,
+     e la larghezza di questo campo non la decide il CSS - la decide il DATO,
+     perche' Chrome dimensiona ogni <select> accanto sull'opzione piu' lunga
+     (su corsi.html "Borgo San Dalmazzo" prende 179px e alla ricerca ne
+     restano 182). Un comune piu' lungo domani stringe ancora il campo: la
+     rete va messa qui, non accorciando una frase per volta. */
+  .ev-search input{width:100%;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-dark);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:11px 16px 11px 42px;min-height:44px;text-overflow:ellipsis}
   .ev-search input::placeholder{color:var(--text-light)}
   .ev-select{font-family:'DM Sans',sans-serif;font-size:0.84rem;font-weight:600;color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);border-radius:100px;padding:10px 14px;min-height:44px;cursor:pointer;transition:var(--transition)}
   .ev-select:hover{border-color:var(--orange)}
@@ -557,6 +563,17 @@
 .co-prova-avviso a{color:#6b4a10;font-weight:700}
 .co-prova-avviso+.page-hero{padding-top:24px}
 .co-intro{margin:26px 0 20px;font-size:1.02rem;line-height:1.6}
+/* Il paragrafo coi numeri sta sopra quello su cos'e' un corso: senza, i due
+   margini da 26+20 si sommano e sembrano due blocchi staccati. */
+.co-intro.co-numeri{margin-bottom:0}
+.co-numeri+.co-intro{margin-top:12px}
+/* Le domande frequenti, in fondo: testo in pagina, stesso passo delle schede
+   delle realta' che le precedono. Un <div> e non <section>, per la stessa
+   ragione (section{padding:100px 24px} dal CSS di sistema). */
+.co-faq{margin:40px 0 0}
+.co-faq-t{font-size:1.3rem;margin:0 0 4px}
+.co-faq-q{font-size:1.02rem;margin:18px 0 4px}
+.co-faq-a{margin:0;font-size:.95rem;line-height:1.6}
 /* La disciplina scritta in riga. Stessi valori di .com-cat nelle pagine comune:
    e' la stessa cosa e deve leggersi allo stesso modo. Il colore viene da
    --cat-ink, che la card imposta. */
@@ -582,7 +599,7 @@
 .co-realta-t{font-size:1.3rem;margin:0 0 4px}
 .co-realta-sub{margin:0 0 16px;font-size:.93rem;opacity:.72}
 .co-realta{padding:16px 18px;margin:0 0 14px;border:1px solid rgba(0,0,0,.09);
-  border-radius:14px;background:#fff;scroll-margin-top:120px}
+  border-radius:14px;background:#fff}
 .co-realta h3{font-size:1.1rem;margin:0 0 6px}
 .co-realta-d{margin:0 0 4px;font-size:.95rem;line-height:1.55;opacity:.85}
 .co-realta-corsi,.co-realta-ev{margin:12px 0 0;font-size:.93rem;line-height:1.7}
@@ -590,15 +607,61 @@
 .co-realta-vai{margin:12px 0 0;font-size:.95rem}
 .co-realta-vai a{font-weight:700;color:#2c5d8f;text-decoration:none}
 .co-realta-vai a:hover{text-decoration:underline}
-.co-logo{max-width:120px;height:auto;border-radius:10px;margin:0 0 10px;display:block}
+/* Il logo accanto al nome della societa', come un avatar. Tessera bianca con
+   bordo leggero: sul bianco della scheda un logo col fondo bianco pieno non
+   avrebbe contorno. */
+.co-realta-testa{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+.co-realta-testa h3{margin:0}
+.co-logo{flex:0 0 52px;width:52px;height:52px;box-sizing:border-box;padding:4px;
+  object-fit:contain;background:#fff;border:1px solid rgba(0,0,0,.09);
+  border-radius:12px}
 /* L'avviso di sezione in preparazione. Stesso giallo della fascia di
    corsi-prova.html: e' la stessa cosa — una pagina che dichiara di non essere
    ancora quello che sembra. */
 .co-avviso{background:#fdf3e0;border:1px solid #e6c98a;border-radius:10px;
   padding:14px 16px;margin:0 0 18px;font-size:.94rem;line-height:1.55;color:#6b4a10}
-/* Il bersaglio del "← Tutti i corsi" delle pagine realta'. Lo stesso stacco
-   delle schede: senza, l'elenco atterra sotto la barra in cima. */
-#co-lista{scroll-margin-top:120px}
+/* ── Le ancore arrivavano sotto la barra, e 120px era una stima ───────────
+   Misurato l'11/09/2026 a cinque larghezze, non dedotto. Sopra ogni ancora di
+   questa pagina c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la
+   barra dei filtri - e il tetto NON e' un numero:
+
+     <=600px   barra 160px (3 righe), 207 a 320px (4)  ->  tetto 228, 275
+     601-899   barra 120px (2 righe)                   ->  tetto 188
+     >=900px   barra  68px (1 riga)                    ->  tetto 136
+
+   Contro quei tetti, i 120px di prima atterravano SOTTO la barra di 108px sul
+   telefono, 68 a 760, 16 a 1280: il "← Tutti i corsi" delle nove pagine
+   realta' portava all'elenco e dell'elenco non si vedeva la testa. Il commento
+   che c'era qui diceva la cosa giusta ("senza, l'elenco atterra sotto la barra
+   in cima") con un numero che non era mai stato misurato.
+
+   Il numero giusto non si puo' scrivere qui, ed e' la stessa ragione per cui
+   il segnaposto della ricerca si sceglie contando: l'altezza di quella barra
+   la decide il DATO - Chrome dimensiona ogni <select> sull'opzione piu' lunga,
+   e "Borgo San Dalmazzo" da solo prende 166px dei 372 di un telefono. Un
+   comune piu' lungo domani manda a capo un controllo e rimette l'ancora sotto
+   la barra, in silenzio. Quindi la si MISURA, con la stessa --ev-sticky che
+   l'agenda scrive gia' per le intestazioni dei giorni: stessa variabile,
+   stesso significato (nav + barra), un solo vocabolario su due pagine.
+
+   I 12px sono un dito d'aria: senza, a 1280px si atterrava a 135 contro un
+   tetto di 136, cioe' un pixel sotto la barra per un arrotondamento. Il 228
+   del ripiego e' il tetto del telefono, che e' il caso in cui il JS non gira -
+   dove pero' non girano nemmeno i filtri, quindi e' una rete, non un secondo
+   progetto.
+
+   E html{scroll-behavior:auto}: arriva smooth dal <style> di eventi.html che
+   _guscio() copia dappertutto, e su questa pagina l'animazione parte, le righe
+   che attraversa si disegnano (content-visibility:auto) e il bersaglio scende
+   sotto i piedi dell'animazione - #r-carezza atterrava 355px oltre. E' lo
+   stesso difetto gia' chiuso su luoghi.html il giorno prima, e la stessa cura:
+   qui l'animazione vale meno dell'arrivare. */
+html{scroll-behavior:auto}
+/* #co-lista e' il bersaglio del "← Tutti i corsi"; .co-realta le ancore
+   #r-<slug> che girano su WhatsApp; .event-card i #c-<codice> che apriDaHash()
+   sa aprire. L'id davanti serve: .event-card porta gia' scroll-margin-top:160px
+   dal guscio, e una classe sola non lo batterebbe. */
+#co-lista,#co-lista .event-card,.co-realta,.co-faq{scroll-margin-top:calc(var(--ev-sticky,228px) + 12px)}
 .co-realta h3 a{color:inherit;text-decoration:none}
 .co-realta h3 a:hover{text-decoration:underline}
 </style>
@@ -617,7 +680,7 @@
     <ul class="nav-links">
       <li><a href="/eventi.html" >Eventi</a></li>
       <li><a href="/luoghi.html">Luoghi</a></li>
-      <li><a href="/centri-estivi.html">Centri estivi</a></li>
+      
       <li><a href="/corsi.html">Corsi</a></li>
       <li><a href="/ginetto.html">Ginetto AI</a></li>
       <li><a href="/index.html#social" class="nav-cta">Contatti</a></li>
@@ -630,7 +693,7 @@
 <div class="mobile-menu" id="mobile-menu">
   <a href="/eventi.html" onclick="closeMobile()">Eventi</a>
   <a href="/luoghi.html" onclick="closeMobile()">Luoghi</a>
-  <a href="/centri-estivi.html" onclick="closeMobile()">Centri estivi</a>
+  
   <a href="/corsi.html" onclick="closeMobile()">Corsi</a>
   <span class="mm-sep">Il resto di DAOP</span>
   <a href="/ginetto.html" onclick="closeMobile()">Ginetto AI</a>
@@ -654,12 +717,11 @@
     </div>
     <span class="section-label">Cuneo · Famiglie</span>
     <h1>Corsi per bambini <em>in provincia di Cuneo</em></h1>
-    <p>Sport, musica, danza, lingue, teatro: le attività a cui un bambino si iscrive,
-    con l'età che prendono, dove sono e quando si può andare a vederle.
-    Informazioni raccolte dalle locandine delle realtà, una società alla volta.</p>
+    <p>Trova corsi e attività per bambini e ragazzi in provincia di Cuneo: sport e espressione, a Roccavione e Caraglio. Informazioni raccolte dalle locandine delle realtà, una società alla volta.</p>
   </div>
 </header>
 <article class="co-wrap">
+  <p class="co-intro co-numeri">Cerchi un corso per tuo figlio? Al momento qui ne trovi 6, di 2 realtà in 2 comuni: per 6 è prevista una lezione di prova e 1 ha un open day in calendario.</p>
   <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,
   qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa
   sabato" ma "dove porto mio figlio quest'anno". Qui trovi quello che c'è, e lo scegli
@@ -668,7 +730,7 @@
     <div class="ev-toolbar" id="co-toolbar">
       <div class="ev-search">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <input type="search" id="co-q" placeholder="Cerca un corso, una societa', un paese…" aria-label="Cerca fra i corsi" autocomplete="off">
+        <input type="search" id="co-q" placeholder="Cerca corso o società…" aria-label="Cerca fra i corsi" autocomplete="off">
       </div>
       <select class="ev-select" data-campo="cat" aria-label="Filtra per tipo di attività"><option value="all">Attività</option><option value="espressione">Espressione</option><option value="sport">Sport</option></select>
       <select class="ev-select" data-campo="citta" aria-label="Filtra per comune"><option value="all">Comune</option><option value="caraglio">Caraglio</option><option value="roccavione">Roccavione</option></select>
@@ -691,7 +753,7 @@
           </button></h3>
           <div class="ev-det" id="det-co-0" hidden>
             
-<p class="event-desc">Un percorso per &quot;giocare al teatro&quot;: i bambini imparano a stare sulla scena partendo dal gioco, e ci arrivano attraverso la socializzazione, l&#x27;espressione del corpo e della voce e la consapevolezza delle proprie capacità. Non si prepara uno spettacolo da mandare a memoria: si costruisce insieme, e quello che si porta a casa vale anche fuori dal palco.</p>            <p class="co-openday"><strong>Open day:</strong> Martedì 22 settembre 2026, ore 17:30 — <a href="https://www.santibriganti.it/corsi-teatro-caraglio" target="_blank" rel="noopener">vedi sul sito →</a></p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Teatro Civico di Caraglio, via Roma 118</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/compagnia-santibriganti-teatro.html">Compagnia Santibriganti Teatro</a></dd><dt>Periodo</dt><dd>Ottobre–giugno</dd><dt>Giorni</dt><dd>Una lezione settimanale, il pomeriggio</dd><dt>Prova</dt><dd>Sì, una lezione di prova gratuita</dd><dt>Contatti</dt><dd><a href="tel:0171000000">0171 000000</a></dd><dt>Referenti</dt><dd>Segreteria</dd></dl>            <div class="event-actions"><a class="event-act" href="https://www.santibriganti.it/corsi-teatro-caraglio" rel="sponsored noopener" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Scopri il corso</a></div>            <p class="co-verif">Dati verificati il 20/08/2026</p>
+<p class="event-desc">Un percorso per &quot;giocare al teatro&quot;: i bambini imparano a stare sulla scena partendo dal gioco, e ci arrivano attraverso la socializzazione, l&#x27;espressione del corpo e della voce e la consapevolezza delle proprie capacità. Non si prepara uno spettacolo da mandare a memoria: si costruisce insieme, e quello che si porta a casa vale anche fuori dal palco.</p>            <p class="co-openday"><strong>Open day:</strong> Martedì 22 settembre 2026, ore 17:30 — <a href="https://www.santibriganti.it/corsi-teatro-caraglio" target="_blank" rel="noopener">vedi sul sito →</a></p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Teatro Civico di Caraglio, via Roma 118</p>            <dl class="co-dati"><dt>Organizzatore</dt><dd><a href="/corsi-prova/compagnia-santibriganti-teatro.html">Compagnia Santibriganti Teatro</a></dd><dt>Periodo</dt><dd>Ottobre–giugno</dd><dt>Giorni</dt><dd>Una lezione settimanale, il pomeriggio</dd><dt>Prova</dt><dd>Sì, una lezione di prova gratuita</dd><dt>Iscrizioni</dt><dd>Aperte</dd><dt>Contatti</dt><dd><a href="tel:0171000000">0171 000000</a></dd><dt>Referenti</dt><dd>Segreteria</dd></dl>            <div class="event-actions"><a class="event-act" href="https://www.santibriganti.it/corsi-teatro-caraglio" rel="sponsored noopener" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Scopri il corso</a></div>            <p class="co-verif">Dati verificati il 20/08/2026</p>
           </div>
         </article>
         <article class="event-card" id="c-a001" data-city="roccavione" data-prov="cn" data-cat="sport" data-disc="pallavolo" data-org="pgs-roccavione" data-org-nome="PGS Roccavione" data-codice="A001" data-openday="0" data-etamin="6" data-etamax="7" data-etada="annate" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
@@ -792,13 +854,24 @@
     <p class="co-realta-vai"><a href="/corsi-prova/pgs-roccavione.html">La pagina di PGS Roccavione →</a></p>
   </div>
   </div>
+  <div class="co-faq" id="domande">
+    <h2 class="co-faq-t">Domande frequenti</h2>
+    <h3 class="co-faq-q">Quali corsi per bambini ci sono in provincia di Cuneo?</h3>
+    <p class="co-faq-a">Al momento 6 corsi di 2 realtà: 5 di sport e 1 di espressione. Nell&#x27;elenco si scelgono per attività, età del bambino e comune.</p>
+    <h3 class="co-faq-q">In quali comuni ci sono corsi per bambini in provincia di Cuneo?</h3>
+    <p class="co-faq-a">In 2 comuni: Roccavione (5 corsi), Caraglio (1). Per vedere solo quelli di un paese c&#x27;è il filtro per comune.</p>
+    <h3 class="co-faq-q">Quali sport ci sono per bambini in provincia di Cuneo?</h3>
+    <p class="co-faq-a">5 corsi di sport e movimento: pallavolo (5). Ogni corso ha l&#x27;età e il comune scritti in riga.</p>
+    <h3 class="co-faq-q">Si può provare un corso prima di iscriversi?</h3>
+    <p class="co-faq-a">Per 6 corsi è prevista una lezione di prova: è scritta nel dettaglio del corso, con la data quando c&#x27;è. 1 corso ha un open day in calendario, e per vedere solo quelli c&#x27;è il filtro «Solo con open day».</p>
+  </div>
   <p class="co-nota"><strong>Sei una scuola, un'associazione o una società sportiva e proponi attività per bambini e ragazzi?</strong> Stiamo costruendo una guida alle attività per famiglie: la presenza comprende la vostra realtà, i corsi che proponete, le informazioni utili per le famiglie, le prove e gli open day collegati al calendario degli eventi. Scrivici a <a href="mailto:cuneo@daop.it">cuneo@daop.it</a>.</p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">153 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">881 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/centri-estivi.html"><span class="eco-n">Centri estivi e vacanze</span><span class="eco-d">7 centri con le date e le iscrizioni</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">141 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">907 posti scelti a mano, dal parco al museo</span></a></div></section>
   <div class="co-actions">
     <a class="btn btn-teal" href="/eventi.html">Vedi cosa c'è in agenda</a>
   </div>
 </article>
-<section class="bg-cream ev-ginetto">
+<section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
     <div class="info-strip">
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
@@ -819,55 +892,49 @@
       </div>
       <p class="footer-desc">L'associazione delle famiglie di Alessandria, Asti e Cuneo, Piemonte.</p>
     </div>
+    
     <div>
-      <div class="footer-col-title">Prodotti</div>
+      <div class="footer-col-title">Esplora</div>
       <div class="footer-col-links">
         <a href="/eventi.html">Eventi</a>
         <a href="/luoghi.html">Luoghi</a>
         <a href="/centri-estivi.html">Centri estivi</a>
         <a href="/corsi.html">Corsi</a>
         <a href="https://ginettoapp.it" target="_blank" rel="noopener">Ginetto AI</a>
-        <a href="/rubriche.html">Rubriche</a>
-        <a href="/piattosano.html">Il Piatto Sano</a>
-        <a href="/libri.html">Libri</a>
-        <a href="/esploratore.html">Esploratore</a>
-        <a href="/bollino.html">Bollino</a>
-        <a href="/media.html">Media</a>
       </div>
     </div>
     <div>
-      <div class="footer-col-title">Community</div>
+      <div class="footer-col-title">Seguici</div>
       <div class="footer-col-links">
         
-        <a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener">Instagram Alessandria</a>
-        <a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener">Instagram Asti</a>
-        <a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener">Instagram Cuneo</a>
-        <a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener">Facebook Alessandria</a>
-        <a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener">Facebook Asti</a>
-        <a href="https://www.facebook.com/daopcuneo" target="_blank" rel="noopener">Facebook Cuneo</a>
+        <div class="footer-soc"><span class="footer-soc-p">Alessandria</span><a href="https://www.instagram.com/daop_alessandria/" target="_blank" rel="noopener" aria-label="Instagram Alessandria">Instagram</a><span class="footer-soc-sep" aria-hidden="true">·</span><a href="https://www.facebook.com/daopalessandria/" target="_blank" rel="noopener" aria-label="Facebook Alessandria">Facebook</a></div>
+        <div class="footer-soc"><span class="footer-soc-p">Asti</span><a href="https://www.instagram.com/daop_asti/" target="_blank" rel="noopener" aria-label="Instagram Asti">Instagram</a><span class="footer-soc-sep" aria-hidden="true">·</span><a href="https://www.facebook.com/daopasti" target="_blank" rel="noopener" aria-label="Facebook Asti">Facebook</a></div>
+        <div class="footer-soc"><span class="footer-soc-p">Cuneo</span><a href="https://www.instagram.com/daop_cuneo/" target="_blank" rel="noopener" aria-label="Instagram Cuneo">Instagram</a><span class="footer-soc-sep" aria-hidden="true">·</span><a href="https://www.facebook.com/daopcuneo" target="_blank" rel="noopener" aria-label="Facebook Cuneo">Facebook</a></div>
         <a href="https://www.youtube.com/@DOVEANDIAMOOGGIPAPI" target="_blank" rel="noopener">YouTube</a>
       
       </div>
     </div>
     <div>
-      <div class="footer-col-title">Contatti</div>
+      <div class="footer-col-title">DAOP</div>
       <div class="footer-col-links">
-        <a href="mailto:info@daop.it">info@daop.it</a>
         <a href="/index.html#chi-siamo">Chi siamo</a>
         <a href="/metodo.html">Come verifichiamo gli eventi</a>
         <a href="/zone.html">Le pagine della tua zona</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/cookie-policy.html">Cookie Policy</a>
+        <a href="/bollino.html">Bollino</a>
+        <a href="/rubriche.html">Rubriche</a>
+        <a href="/libri.html">Libri</a>
       </div>
     </div>
+    
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2026 DAOP – Dove Andiamo Oggi Papi · Alessandria &amp; Asti</p>
+    <p class="footer-copy">© 2026 DAOP – Dove Andiamo Oggi Papi · Alessandria, Asti e Cuneo</p>
     <div class="footer-bottom-links">
+      <a href="mailto:info@daop.it">info@daop.it</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/cookie-policy.html">Cookie</a>
-      <a href="mailto:info@daop.it">Contatti</a>
     </div>
+  
   </div>
 </footer>
 <script>
@@ -900,6 +967,64 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
   window.addEventListener('hashchange',apriDaHash);
   apriDaHash();
   var bar=document.getElementById('co-toolbar');
+  // --ev-sticky = nav + barra, cioe' quanto copre il tetto appiccicoso. La
+  // scrive gia' l'agenda per le intestazioni dei giorni; qui serve alle ancore
+  // (vedi il commento accanto a scroll-margin-top nel CSS), perche' l'altezza
+  // di quella barra la decide il dato e non il CSS. Stessa variabile e stesso
+  // significato delle due pagine: due nomi per la stessa misura divergerebbero.
+  //
+  // Le due cautele sono quelle gia' pagate sull'agenda, e valgono anche qui
+  // che le schede sono 55 e non 294: si scrive su <html>, quindi ogni scrittura
+  // invalida lo stile dell'intero documento - solo se il valore e' cambiato
+  // davvero - e si osserva la BARRA con un ResizeObserver invece del viewport,
+  // perche' su Android la barra dell'indirizzo che si ritira e' un resize a
+  // ogni scorrimento mentre i controlli vanno a capo due volte in tutto.
+  var stickyPx=0;
+  function misuraSticky(){
+    var v=68+(bar?bar.offsetHeight:0);
+    if(v===stickyPx) return;
+    stickyPx=v;
+    document.documentElement.style.setProperty('--ev-sticky',v+'px');
+  }
+  misuraSticky();
+  if(bar){
+    if(window.ResizeObserver) new ResizeObserver(misuraSticky).observe(bar);
+    else window.addEventListener('resize',misuraSticky);
+  }
+  // Il salto all'ancora lo fa il browser su una stima: le schede portano
+  // content-visibility:auto con 108px supposti, e il salto si calcola su
+  // quelli. Poi si disegnano le schede vicine all'arrivo, che a 1280px sono
+  // alte 105, e il bersaglio sale di 3px per ognuna - misurato il 23/09/2026:
+  // con 88 schede #r-allinea-mente atterrava a 90px sotto un tetto di 136
+  // (senza content-visibility: 148, esatto). Colpisce solo quello che sta
+  // DOPO l'elenco (le realta'), e cresce con le schede: e' per questo che e'
+  // diventato rosso da solo il 21/09, senza che nessuno toccasse il codice.
+  // Una stima migliore non basta, le schede non sono alte uguali (a 105px
+  // si atterrava comunque a 127). Si riallinea il bersaglio una volta
+  // disegnato quello che ha intorno, finche' sta fermo - e mai se nel
+  // frattempo chi legge ha gia' iniziato a scorrere da se'.
+  var mosso=false;
+  ['wheel','touchstart','keydown','mousedown'].forEach(function(t){
+    window.addEventListener(t,function(){mosso=true;},{passive:true});
+  });
+  function riallinea(){
+    var id=(location.hash||'').replace('#','');
+    var e=id&&document.getElementById(id);
+    if(!e) return;
+    var giri=0, prima=null;
+    mosso=false;
+    (function passo(){
+      if(mosso||giri++>5) return;
+      var top=Math.round(e.getBoundingClientRect().top);
+      if(top===prima) return;
+      e.scrollIntoView({block:'start'});
+      prima=Math.round(e.getBoundingClientRect().top);
+      requestAnimationFrame(function(){requestAnimationFrame(passo);});
+    })();
+  }
+  if(document.readyState==='complete') riallinea();
+  else window.addEventListener('load',riallinea);
+  window.addEventListener('hashchange',riallinea);
   if(!bar) return;
   var q=document.getElementById('co-q'), count=document.getElementById('co-count'),
       campi=[].slice.call(bar.querySelectorAll('[data-campo]'));
@@ -969,6 +1094,20 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     if(!el) return;
     el.addEventListener('input',apply); el.addEventListener('change',apply);
   });
+  // ?comune=<slug>: la tendina Comune gia' accesa. Arriva dalla riga "N corsi
+  // per bambini a X" in coda alle schede evento (link_corsi in
+  // genera_eventi.py), che promette un numero: senza il filtro la pagina ne
+  // mostrerebbe un altro. Si imposta solo un valore che nella tendina c'e' -
+  // un comune che stanotte ha perso i suoi corsi apre la pagina intera invece
+  // di un elenco vuoto con un filtro che nessuno ha scelto. L'indirizzo NON si
+  // riscrive: gli utm di chi arriva da una campagna devono restare dove sono.
+  try{
+    var pre=new URLSearchParams(location.search).get('comune');
+    if(pre) campi.forEach(function(el){
+      if(el.dataset.campo!=='citta') return;
+      for(var i=0;i<el.options.length;i++){ if(el.options[i].value===pre){ el.value=pre; break; } }
+    });
+  }catch(e){}
   apply();
 })();
 </script>

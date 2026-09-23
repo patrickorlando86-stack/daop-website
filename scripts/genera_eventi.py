@@ -152,13 +152,119 @@ def blocco_social_footer(inline=False):
         return (f'<a href="{href}" target="_blank" rel="noopener"{st_a}>'
                 f'{esc(testo)}</a>')
 
+    # Una riga per provincia ("Alessandria  Instagram · Facebook") invece di
+    # una riga per profilo: dal 23/09/2026, quando la colonna era la seconda
+    # piu' lunga del footer (sette righe) per dire tre cose. Il nome della
+    # provincia resta scritto per esteso, solo che si scrive una volta; il
+    # link porta comunque l'aria-label intera, se no un lettore di schermo
+    # legge "Instagram, Instagram, Instagram" senza dire di chi.
+    st_riga = (' style="display:flex;flex-wrap:wrap;align-items:baseline;'
+               'gap:2px 8px;font-size:0.88rem;"' if inline else '')
+    st_prov = (' style="color:rgba(255,255,255,0.85);font-weight:600;'
+               'min-width:6.2em;"' if inline else '')
+    st_sep = (' style="color:rgba(255,255,255,0.4);"' if inline else '')
+
+    def link_p(href, testo, prov):
+        return (f'<a href="{href}" target="_blank" rel="noopener" '
+                f'aria-label="{esc(testo)} {esc(prov)}"{st_a}>{esc(testo)}</a>')
+
     fonti = [f for f in (fonte_provincia(s) for s in PROVINCE_PUBBLICATE) if f]
-    voci = [link(f['url'], f"Instagram {f['provincia']}") for f in fonti]
-    voci += [link(f['fb'], f"Facebook {f['provincia']}")
-             for f in fonti if f.get('fb')]
+    voci = []
+    for f in fonti:
+        prof = [link_p(f['url'], 'Instagram', f['provincia'])]
+        if f.get('fb'):
+            prof.append(link_p(f['fb'], 'Facebook', f['provincia']))
+        sep_v = f'<span class="footer-soc-sep" aria-hidden="true"{st_sep}>·</span>'
+        voci.append(f'<div class="footer-soc"{st_riga}>'
+                    f'<span class="footer-soc-p"{st_prov}>{esc(f["provincia"])}</span>'
+                    + sep_v.join(prof) + '</div>')
     voci.append(link(YOUTUBE_URL, 'YouTube'))
     sep = chr(10) + ' ' * 8
     return sep + sep.join(voci) + chr(10) + ' ' * 6
+
+
+def blocco_footer(assoluto=False, inline=False):
+    """Le tre colonne del footer, COMPOSTE qui invece che scritte a mano.
+
+    Fino al 23/09/2026 le colonne erano copiate a mano in dodici pagine, e si
+    vedeva: in dieci su dodici mancavano "Come verifichiamo gli eventi" e "Le
+    pagine della tua zona", in quattro Ginetto portava alla landing invece che
+    all'app. E la colonna "Prodotti" aveva undici voci, Privacy e Cookie
+    comparivano due volte (in colonna e nella riga in fondo), la riga in fondo
+    di eventi.html - quella che _guscio() copia su ~700 pagine - diceva
+    "Alessandria & Asti" dimenticando Cuneo.
+
+    Cosa e' uscito e perche' non e' un taglio di link: Il Piatto Sano, Media,
+    Esploratore. Le prime due stanno nel menu mobile, che e' in ogni pagina
+    (quindi Google le trova lo stesso), l'Esploratore lo linkano la home,
+    libri.html e ginetto.html. Quello che invece NON esce:
+      - "Centri estivi", anche quando nessuna stagione e' aperta: la nav lo
+        toglie fuori stagione (stagione_centri()), e allora il footer e'
+        l'UNICO link sitewide all'hub. Il footer e' il catalogo, la nav e' cosa
+        c'e' adesso - la regola scritta per i centri e per i corsi.
+      - "Le pagine della tua zona" e "Come verifichiamo gli eventi": sono le
+        porte a zone.html e metodo.html da tutto il sito.
+
+    assoluto: href dalla radice (404.html, servita da qualunque indirizzo).
+    inline: stili negli attributi, per index.html che non ha le classi."""
+    r = '/' if assoluto else ''
+    st_tit = (' style="font-size:0.72rem;font-weight:700;text-transform:uppercase;'
+              'letter-spacing:0.1em;color:rgba(255,255,255,0.55);margin-bottom:16px;"'
+              if inline else '')
+    st_col = (' style="display:flex;flex-direction:column;gap:8px;"'
+              if inline else '')
+    st_a = (' style="text-decoration:none;font-size:0.88rem;'
+            'color:rgba(255,255,255,0.62);"' if inline else '')
+    ind = ' ' * 8
+
+    def a(href, testo, esterno=False):
+        ext = ' target="_blank" rel="noopener"' if esterno else ''
+        return f'{ind}<a href="{href}"{ext}{st_a}>{testo}</a>'
+
+    def colonna(titolo, righe):
+        return (f'    <div>\n      <div class="footer-col-title"{st_tit}>{titolo}</div>\n'
+                f'      <div class="footer-col-links"{st_col}>\n'
+                + '\n'.join(righe) + '\n      </div>\n    </div>')
+
+    esplora = [a(f'{r}eventi.html', 'Eventi'), a(f'{r}luoghi.html', 'Luoghi'),
+               a(f'{r}centri-estivi.html', 'Centri estivi'),
+               a(f'{r}corsi.html', 'Corsi'),
+               a('https://ginettoapp.it', 'Ginetto AI', esterno=True)]
+    seguici = [f'{ind}<!-- FOOTER-SOCIAL:START -->'
+               + blocco_social_footer(inline=inline)
+               + '<!-- FOOTER-SOCIAL:END -->']
+    chi = '#chi-siamo' if inline else f'{r}index.html#chi-siamo'
+    daop = [a(chi, 'Chi siamo'),
+            a('/metodo.html', 'Come verifichiamo gli eventi'),
+            a('/zone.html', 'Le pagine della tua zona'),
+            a(f'{r}bollino.html', 'Bollino'),
+            a(f'{r}rubriche.html', 'Rubriche'),
+            a(f'{r}libri.html', 'Libri')]
+    return ('\n' + colonna('Esplora', esplora) + '\n' + colonna('Seguici', seguici)
+            + '\n' + colonna('DAOP', daop) + '\n    ')
+
+
+def blocco_footer_fondo(assoluto=False, inline=False):
+    """La riga in fondo al footer: copyright, mail, privacy, cookie.
+
+    Le province si compongono da PROVINCE_PUBBLICATE: la riga di eventi.html,
+    copiata su ~700 pagine, diceva "Alessandria & Asti" due mesi dopo
+    l'apertura di Cuneo - lo stesso difetto di @daop_cuneo nel footer."""
+    r = '/' if assoluto else ''
+    st_p = (' style="font-size:0.82rem;color:rgba(255,255,255,0.55);"'
+            if inline else '')
+    st_box = ' style="display:flex;gap:20px;flex-wrap:wrap;"' if inline else ''
+    st_a = (' style="font-size:0.82rem;color:rgba(255,255,255,0.55);'
+            'text-decoration:none;"' if inline else '')
+    nomi = [PROVINCE_NOMI[s] for s in PROVINCE_PUBBLICATE if s in PROVINCE_NOMI]
+    zona = (', '.join(nomi[:-1]) + ' e ' + nomi[-1]) if len(nomi) > 1 else ''.join(nomi)
+    return (f'\n    <p class="footer-copy"{st_p}>© {datetime.date.today().year} DAOP'
+            f' – Dove Andiamo Oggi Papi · {esc(zona)}</p>\n'
+            f'    <div class="footer-bottom-links"{st_box}>\n'
+            f'      <a href="mailto:info@daop.it"{st_a}>info@daop.it</a>\n'
+            f'      <a href="{r}privacy.html"{st_a}>Privacy</a>\n'
+            f'      <a href="/cookie-policy.html"{st_a}>Cookie</a>\n'
+            f'    </div>\n  ')
 
 
 # I due marchi, scritti una volta. Stanno qui e non dentro la funzione perche'
@@ -4020,6 +4126,11 @@ def aggiorna_nav():
             # I profili social: qui 'assoluto' non c'entra - sono URL esterne,
             # quindi la voce e' la stessa in tutte e tre le varianti. Cambia
             # solo la vernice, per index.html che ha gli stili in linea.
+            # Il footer intero, prima della colonna social che ci sta dentro:
+            # l'ordine del dizionario e' l'ordine delle sostituzioni, e
+            # FOOTER-MENU riscrive anche i marker FOOTER-SOCIAL che contiene.
+            'FOOTER-MENU': blocco_footer(assoluto=assoluto, inline=inline),
+            'FOOTER-FONDO': blocco_footer_fondo(assoluto=assoluto, inline=inline),
             'FOOTER-SOCIAL': blocco_social_footer(inline=inline),
             # Le card per provincia della sezione "Seguici":
             # solo la home ha questo marker, e le sue classi
@@ -8063,8 +8174,11 @@ def spec_halloween(st, events, oggi, altre):
                               f"Cosa fare a Halloween {anno} con i bambini | DAOP",
                               f"Cosa fare a Halloween {anno} con i bambini"])
     if finestra:
-        sotto = (f"{len(finestra)} feste di Halloween dal 25 ottobre al 2 novembre "
-                 f"in {comuni} comuni"
+        # Non "dal 25 ottobre al 2 novembre": sotto il titolo si legge come la
+        # durata delle feste, e il 23/09 le due in agenda erano tutte e due il
+        # 31. La finestra resta nella description, dove e' un'informazione.
+        sotto = (f"{len(finestra)} feste di Halloween già in programma"
+                 + (f" in {comuni} comuni" if comuni > 1 else "")
                  if len(finestra) > 1 else "1 festa di Halloween in agenda, per ora")
         apertura = (f"<p>La notte del <strong>31 ottobre {anno}</strong> cade di "
                     f"{GIORNI[notte.weekday()]}, e col fine settimana prima e Ognissanti "
@@ -8081,8 +8195,8 @@ def spec_halloween(st, events, oggi, altre):
                 + ("ce n'è <strong>una</strong>" if len(finestra) == 1
                    else f"sono <strong>{len(finestra)}</strong>")
                 + ": castelli e pro loco pubblicano i programmi di fine ottobre "
-                "spesso a due settimane dalla data. Questa pagina si rifà ogni "
-                "notte, quindi appena entrano compaiono qui.</p>")
+                "spesso a due settimane dalla data. Aggiorniamo questa pagina ogni "
+                "giorno, man mano che arrivano nuovi eventi.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
                       + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
@@ -8092,8 +8206,8 @@ def spec_halloween(st, events, oggi, altre):
         apertura = (f"<p class=\"lan-vuoto\">Per Halloween {anno} in agenda non abbiamo "
                     f"ancora niente, e lo scriviamo invece di riempire la pagina. I "
                     f"programmi di fine ottobre escono tardi: castelli e pro loco li "
-                    f"pubblicano spesso a due settimane dalla data. Questa pagina si rifà "
-                    f"ogni notte, quindi appena entrano compaiono qui.</p>")
+                    f"pubblicano spesso a due settimane dalla data. Aggiorniamo questa "
+                    f"pagina ogni giorno, man mano che arrivano nuovi eventi.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
                       "feste, laboratori e castelli dal 25 ottobre al 2 novembre, "
                       "verificati uno per uno da DAOP.", 152)
@@ -8122,40 +8236,36 @@ def spec_halloween(st, events, oggi, altre):
                                 {(notte.month, notte.day): "La notte di Halloween",
                                  (11, 1): "Ognissanti"},
                                 chiave='halloween', quale="Halloween", eta=True)
-    # Ginetto subito dopo le feste finche' sono poche: con due righe l'elenco
-    # finisce nella prima schermata e Ginetto ci resta attaccato. E' la regola
-    # delle schede concluse ("un servizio si mette davanti, una richiesta no";
-    # in alto sta solo dove la pagina ha poco da dare): qui risponde a "e allora
-    # cosa faccio?". Quando le locandine arrivano torna in fondo da solo. Mai
-    # tutte e due le posizioni.
-    if poche:
-        corpo += blocco_ginetto(alto=True)
-    # Il resto di quei giorni non si butta: sta nelle pagine fatte per quello.
-    corpo += ('<p class="com-per">Cerchi altro da fare con i bambini in quei '
-              'giorni, anche senza zucche? Stanno nelle pagine per provincia: '
-              + ', '.join(f'<a href="{href_eventi_prov(p)}">'
-                          f'{esc(PROVINCE_NOMI.get(p, p))}</a>'
-                          for p in PROVINCE_PUBBLICATE)
-              + ', oppure in <a href="/eventi.html">tutta l\'agenda</a>.</p>')
     # Il pezzo che un elenco di date non ha. Due domande, e la seconda e'
     # l'unico link a /luoghi.html che parta dal corpo di una pagina: la prima
     # l'ha aperta /ferragosto.html, e questa e' la seconda superficie.
     corpo += (
         '<h2 id="fa-paura">Fa paura o no?</h2>'
-        '<p>È la domanda vera di Halloween, e la risposta cambia dello stesso '
-        'evento a seconda di chi porti: la caccia ai dolcetti in piazza e la '
-        'casa infestata nel castello finiscono nello stesso elenco. Noi non '
-        'dividiamo le due cose a naso — sarebbe un giudizio nostro su una festa '
-        'altrui, ricavato dal titolo. Facciamo l\'unica cosa che si può fare '
-        'onestamente: <strong>dove l\'età è dichiarata la trovi scritta in '
-        'riga</strong>, e dove non c\'è conviene aprire la scheda e leggere il '
-        'programma, che riportiamo per intero.</p>'
-        '<p>La seconda domanda è dove. Halloween in zona si fa nei <strong>'
-        'castelli, nelle cascine e nei borghi</strong>, e quasi sempre si '
-        'prenota: gli <a href="/luoghi.html">agriturismi, i castelli e i posti '
-        'da visitare con i bambini</a> stanno nel catalogo dei luoghi, con '
-        'telefono e indirizzo. Se quel giorno piove, la stessa pagina dice '
-        'quali sono al coperto.</p>')
+        # Corto apposta (23/09/2026): il paragrafo di prima spiegava perche' non
+        # dividiamo le feste "a naso" e si leggeva come una difesa. La regola
+        # resta la stessa - nessuna sezione "questi fanno paura" - e
+        # tests/landing.js la difende.
+        '<p>Ogni bambino vive Halloween a modo suo. <strong>Indichiamo l\'età '
+        'quando gli organizzatori la specificano</strong>; per capire se un '
+        'evento è adatto ai tuoi bambini, apri la scheda e leggi il programma, '
+        'che riportiamo per intero.</p>'
+        '<p>Halloween in zona si fa nei <strong>castelli, nelle cascine e nei '
+        'borghi</strong>, e quasi sempre si prenota: gli <a href="/luoghi.html">'
+        'agriturismi, i castelli e i posti da visitare con i bambini</a> stanno '
+        'nel catalogo dei luoghi, con telefono e indirizzo.</p>')
+    # Il resto di quei giorni non si butta: sta nelle pagine fatte per quello.
+    corpo += ('<p class="com-per">Per il resto di quei giorni, anche senza '
+              'zucche, ci sono le pagine per provincia: '
+              + ', '.join(f'<a href="{href_eventi_prov(p)}">'
+                          f'{esc(PROVINCE_NOMI.get(p, p))}</a>'
+                          for p in PROVINCE_PUBBLICATE)
+              + ', oppure in <a href="/eventi.html">tutta l\'agenda</a>.</p>')
+    # Ginetto DOPO "fa paura o no?" (23/09/2026): fra l'elenco e il consiglio
+    # su come leggerlo interrompeva la lettura. Resta dove la pagina ha poco da
+    # dare - finche' le feste sono poche - e risponde a "e allora cosa faccio?".
+    # Mai in due posizioni.
+    if poche:
+        corpo += blocco_ginetto(alto=True)
     # Senza la riga delle porte: sopra ci sono gia' Ginetto e la riga "cerchi
     # altro da fare in quei giorni?", e una terza domanda uguale confonde
     # (Patrick, 23/09/2026). Le scorciatoie verso le altre date restano.
@@ -8227,7 +8337,8 @@ def spec_halloween_prov(prov, events, oggi, altre):
                               f"Halloween {anno} in provincia di {nome} | DAOP",
                               f"Halloween {anno} in provincia di {nome}"])
     if finestra:
-        sotto = (f"{len(finestra)} feste di Halloween in {comuni} comuni"
+        sotto = (f"{len(finestra)} feste di Halloween già in programma"
+                 + (f" in {comuni} comuni" if comuni > 1 else "")
                  if len(finestra) > 1 else "1 festa di Halloween in agenda, per ora")
         apertura = (f"<p>Le feste di <strong>Halloween {anno}</strong> in provincia "
                     f"di {nome}, dal 25 ottobre al 2 novembre: "
@@ -8237,8 +8348,8 @@ def spec_halloween_prov(prov, events, oggi, altre):
         if poche:
             apertura += ("<p class=\"lan-vuoto\">Castelli e pro loco pubblicano i "
                          "programmi di fine ottobre spesso a due settimane dalla "
-                         "data. Questa pagina si rifà ogni notte, quindi appena "
-                         "entrano compaiono qui.</p>")
+                         "data. Aggiorniamo questa pagina ogni giorno, man mano "
+                         "che arrivano nuovi eventi.</p>")
         descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
                       + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
@@ -8249,8 +8360,8 @@ def spec_halloween_prov(prov, events, oggi, altre):
                     f"{nome} in agenda non abbiamo ancora niente, e lo scriviamo "
                     f"invece di riempire la pagina. Castelli e pro loco pubblicano i "
                     f"programmi di fine ottobre spesso a due settimane dalla data. "
-                    f"Questa pagina si rifà ogni notte, quindi appena entrano "
-                    f"compaiono qui.</p>")
+                    f"Aggiorniamo questa pagina ogni giorno, man mano che arrivano "
+                    f"nuovi eventi.</p>")
         descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: feste, "
                       "laboratori e castelli dal 25 ottobre al 2 novembre, "
                       "verificati uno per uno da DAOP.", 152)
@@ -8261,9 +8372,6 @@ def spec_halloween_prov(prov, events, oggi, altre):
                                 {(notte.month, notte.day): "La notte di Halloween",
                                  (11, 1): "Ognissanti"},
                                 chiave='halloween', quale="Halloween", eta=True)
-    # Ginetto dopo l'elenco finche' e' corto: stessa regola della generale.
-    if poche:
-        corpo += blocco_ginetto(alto=True)
     altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
     corpo += ('<p class="com-per">Halloween nelle altre province: '
               + ', '.join(f'<a href="{href_halloween_prov(c)}">'
@@ -8275,6 +8383,10 @@ def spec_halloween_prov(prov, events, oggi, altre):
               'dichiarata la trovi in riga; per il resto <a '
               'href="/halloween.html#fa-paura">ti spieghiamo come leggere un '
               'programma di Halloween</a>.</p>')
+    # Ginetto in coda al corpo finche' le feste sono poche: stessa regola
+    # della generale, dopo le righe che dicono come leggere l'elenco.
+    if poche:
+        corpo += blocco_ginetto(alto=True)
     corpo += _altre_landing(href, altre, porte=False)
 
     padre = ('/halloween.html', 'Halloween')

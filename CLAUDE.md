@@ -112,6 +112,26 @@ Le decisioni che non si ricavano dal diff:
   nelle generate è già risolta, quindi non ne deve sopravvivere nessuno —
   compreso quello che nascerà domani.
 
+#### Dal 23/09/2026 si compone tutto il footer, non solo la colonna social
+
+Le colonne erano copiate a mano in dodici pagine e si erano già separate (in
+dieci mancavano Zone e Metodo, in quattro Ginetto portava alla landing), e
+«Prodotti» aveva undici voci. Ora `blocco_footer()` e `blocco_footer_fondo()`
+scrivono fra i marker `FOOTER-MENU` e `FOOTER-FONDO`, con lo stesso meccanismo
+di `FOOTER-SOCIAL` (che sta dentro `FOOTER-MENU`, ed è riscritto per secondo).
+Tre colonne: **Esplora** (Eventi, Luoghi, Centri estivi, Corsi, Ginetto AI),
+**Seguici** (una riga per provincia, «Alessandria · Instagram · Facebook», più
+YouTube), **DAOP** (Chi siamo, Metodo, Zone, Bollino, Rubriche, Libri). Privacy,
+Cookie e la mail solo nella riga in fondo, le province del copyright da
+`PROVINCE_PUBBLICATE` (diceva «Alessandria & Asti»).
+
+- **«Centri estivi» resta anche fuori stagione**: quando la nav lo toglie, il
+  footer è l'unico link sitewide all'hub. Proposto di toglierlo, e rifiutato.
+- **Il Piatto Sano, Media, Esploratore sono usciti** perché hanno già un'altra
+  strada su ogni pagina (menu mobile) o dalla home, da `libri.html` e da `ginetto.html`.
+- Le classi `.footer-soc*` stanno in `daop-system.css`, non nel `<style>` di
+  `eventi.html`: servono anche alle dodici pagine a mano.
+
 **Tre pagine restano indietro di un giro, ed è normale:** `centri-*.html`,
 `corsi.html` e le pagine in `corsi/` prendono il footer da `G._guscio()`, ma i
 loro generatori **vogliono la rete**. Girando offline stampano «lascio la pagina

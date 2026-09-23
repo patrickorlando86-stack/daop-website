@@ -492,6 +492,15 @@ p, li, .section-subtitle, .team-desc, .book-desc,
 .footer-links a:hover,
 .footer-bottom-links a:hover { color: rgba(255, 255, 255, 0.92); }
 
+/* Una riga per provincia nella colonna Seguici (dal 23/09/2026): il nome una
+   volta, poi i profili. Sta qui e non nel <style> di eventi.html perche' la
+   stessa colonna esce anche sulle dodici pagine a mano, che quello <style>
+   non ce l'hanno; nessun altro foglio nomina queste classi, quindi l'ordine
+   del <head> non decide niente. I link restano .footer-col-links a. */
+.footer-soc { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; font-size: 0.88rem; }
+.footer-soc-p { color: rgba(255, 255, 255, 0.85); font-weight: 600; min-width: 6.2em; }
+.footer-soc-sep { color: rgba(255, 255, 255, 0.4); }
+
 /* --------------------------------------------------------------------------
    9. IMMAGINI
    width/height in HTML servono a riservare lo spazio (CLS), ma valgono anche
