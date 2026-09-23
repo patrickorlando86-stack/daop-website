@@ -8001,7 +8001,11 @@ def spec_halloween(st, events, oggi, altre):
     prov = province_in_elenco(PROVINCE_PUBBLICATE)
     finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
                       key=lambda e: (e['d_start'], (e.get('citta') or '')))
-    piccoli = [e for e in finestra if e_per_bambini(e)]
+    # In evidenza solo le feste di Halloween pensate per i piccoli: con il solo
+    # e_per_bambini() ci finivano corsi e laboratori qualsiasi, che l'eta' la
+    # dichiarano sempre (vedi TEMI_STAGIONE).
+    tema = [e for e in finestra if in_tema(e, 'halloween')]
+    piccoli = [e for e in tema if e_per_bambini(e)]
     comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
 
     titolo = _landing_titolo([f"Halloween {anno} con i bambini: {prov}",
@@ -8016,6 +8020,17 @@ def spec_halloween(st, events, oggi, altre):
                     f"<strong>{len(finestra)} eventi</strong> che abbiamo verificato uno "
                     f"per uno in {comuni} comuni fra le province di {prov}, con l'orario, "
                     f"il paese e chi li organizza.</p>")
+        # Poche feste vere: lo si dice, invece di lasciar credere che l'elenco
+        # sia Halloween. Il perche' e' lo stesso della pagina vuota.
+        if len(tema) < MIN_TEMA:
+            apertura += (
+                "<p class=\"lan-vuoto\">" +
+                ("Per ora le feste di Halloween in agenda sono "
+                 f"<strong>{len(tema)}</strong>" if tema else
+                 "Le feste di Halloween vere per ora non sono ancora uscite") +
+                ": castelli e pro loco pubblicano i programmi di fine ottobre "
+                "spesso a due settimane dalla data. Questa pagina si rifà ogni "
+                "notte, quindi appena entrano compaiono qui, in cima.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
                       f"{len(finestra)} eventi dal 25 ottobre al 2 novembre, verificati "
                       "uno per uno da DAOP.", 152)
@@ -8060,14 +8075,12 @@ def spec_halloween(st, events, oggi, altre):
         piccoli, oggi)
     # Poi tutto il programma, giorno per giorno e senza escludere niente: la
     # sezione qui sopra e' un'evidenza, non una selezione che declassa il resto.
-    for giorno in [da + datetime.timedelta(days=i) for i in range((a - da).days + 1)]:
-        del_giorno = [e for e in finestra if in_corso(e, giorno)]
-        corpo += _landing_sezione(
-            f"{GIORNI[giorno.weekday()].capitalize()} {giorno.day} "
-            f"{MESI_LUNGHI[giorno.month - 1]}",
-            "La notte di Halloween" if giorno == notte else
-            ("Ognissanti" if (giorno.month, giorno.day) == (11, 1) else None),
-            del_giorno, oggi)
+    # Dentro ogni giorno Halloween passa davanti, e corsi e percorsi lunghi
+    # escono una volta sola in fondo invece che in tutti e nove i giorni.
+    corpo += _giorno_per_giorno(finestra, da, a, oggi,
+                                {(notte.month, notte.day): "La notte di Halloween",
+                                 (11, 1): "Ognissanti"},
+                                chiave='halloween', quale="Halloween")
     corpo += _altre_landing("/halloween.html", altre)
 
     return {
@@ -8122,18 +8135,109 @@ def _stagione_out(st, oggi, finestra, titolo, descr, h1, sotto, corpo, nome_list
     }
 
 
-def _giorno_per_giorno(finestra, da, a, oggi, etichette=None):
+# ---------------------------------------------------------------------------
+# DI CHE FESTA PARLA LA RIGA (23/09/2026).
+#
+# La finestra di una stagionale prende TUTTO quello che e' aperto in quei
+# giorni, e a fine settembre /halloween.html apriva con un evento di sport del
+# 26 settembre e due incontri di un corso: in evidenza, davanti alle feste di
+# Halloween vere, perche' avevano un'eta' dichiarata. Chi arriva da Google ha
+# cercato "Halloween con i bambini" e trovava altro.
+#
+# Riconoscere la festa dal titolo e dal programma NON e' il giudizio che
+# spec_halloween vieta ("fa paura o no?"): quello e' un giudizio su com'e'
+# fatta una festa altrui; questo dice solo di QUALE festa si parla, cioe' cosa
+# c'e' scritto sulla locandina. Le parole sono strette apposta: "mostra" non e'
+# "mostri", "zucchine" non e' "zucca". Un falso negativo costa poco (la riga
+# resta nel programma del giorno), un falso positivo mette in cima una cosa che
+# non c'entra, che e' il difetto da cui nasce tutto questo.
+# ---------------------------------------------------------------------------
+TEMI_STAGIONE = {
+    'halloween': re.compile(
+        r"hallowe|\bzucc(?:a|he)\b|streg|\bmasc(?:a|he)\b|dolcetto|scherzetto|"
+        r"\bmostri|fantasm|spettr|vampir|zombi|pipistrell|horror|brivid|"
+        r"samhain|trick or treat", re.I),
+    'natale': re.compile(
+        r"natal|presep|babbo|avvento|santa lucia|zampogn|\belfi\b|\brenne\b|"
+        r"luminari|albero di", re.I),
+    'capodanno': re.compile(
+        r"capodann|silvestr|countdown|conto alla rovescia|veglion|fine anno|"
+        r"cenone", re.I),
+    'befana': re.compile(r"befan|epifani|re magi|\bcalz[ae]\b", re.I),
+    'carnevale': re.compile(
+        r"carneval|\bcarr[io]\b|coriandol|\bmascher[ae]\b|gioved[iì] grasso|"
+        r"marted[iì] grasso|\bbugie\b|frittell|chiacchiere", re.I),
+    'pasqua': re.compile(
+        r"pasqu|\buov[ao]\b|colomba|luned[iì] dell'angelo", re.I),
+    'ferragosto': re.compile(r"ferragost", re.I),
+}
+
+# Oltre questa durata una riga non e' un appuntamento del giorno ma una cosa
+# che "c'e'" - un corso, un percorso di otto incontri, una mostra - e nel
+# giorno per giorno compariva in OGNI giorno: su /halloween.html due righe
+# ripetute nove volte, e in certi giorni erano le uniche.
+LUNGO_GIORNI = 7
+
+# Sotto questa soglia di feste vere la pagina lo dice, invece di lasciare che
+# siano corsi e laboratori qualsiasi a riempire la parte alta.
+MIN_TEMA = 3
+
+
+def in_tema(e, chiave):
+    """True se titolo o programma dicono che la riga e' QUELLA festa."""
+    rx = TEMI_STAGIONE.get(chiave)
+    return bool(rx and rx.search(f"{e.get('nome') or ''} {e.get('descr') or ''}"))
+
+
+def e_lungo(e):
+    return (e['d_end'] - e['d_start']).days + 1 > LUNGO_GIORNI
+
+
+def _tema_prima(ev, chiave):
+    """Stesso ordine di prima, ma la festa davanti: il sort e' stabile."""
+    return sorted(ev, key=lambda e: not in_tema(e, chiave))
+
+
+def _lunghi_in_tema(finestra, chiave, oggi, quale):
+    """Le cose lunghe DELLA festa: una volta sola, prima dei giorni."""
+    return _landing_sezione(
+        "Per più giorni",
+        f"Vanno avanti per tutto il periodo di {quale}: le trovi qui una volta sola",
+        [e for e in finestra if e_lungo(e) and in_tema(e, chiave)], oggi)
+
+
+def _lunghi_fuori_tema(finestra, chiave, oggi, quale):
+    """Corsi e percorsi aperti anche in quei giorni: in fondo, e una volta."""
+    return _landing_sezione(
+        "Anche in quei giorni",
+        f"Corsi, percorsi e attività che durano settimane: non sono feste di "
+        f"{quale}, ma sono aperti anche in quei giorni",
+        [e for e in finestra if e_lungo(e) and not in_tema(e, chiave)], oggi)
+
+
+def _giorno_per_giorno(finestra, da, a, oggi, etichette=None, chiave=None,
+                       quale=None):
     """Un blocco per giorno. I giorni vuoti spariscono da soli
     (_landing_sezione torna '' senza righe), quindi si puo' ciclare su tutta
-    la finestra senza controllare prima se c'e' qualcosa."""
+    la finestra senza controllare prima se c'e' qualcosa.
+
+    Con `chiave` (la festa) le righe lunghe escono dal giorno per giorno e
+    finiscono una volta sola in due blocchi - quelle della festa prima, le
+    altre in fondo - e dentro ogni giorno la festa passa davanti."""
     etichette = etichette or {}
     fuori = ''
+    corti = [e for e in finestra if not (chiave and e_lungo(e))]
+    if chiave:
+        fuori += _lunghi_in_tema(finestra, chiave, oggi, quale or '')
     for i in range((a - da).days + 1):
         g = da + datetime.timedelta(days=i)
+        del_giorno = [e for e in corti if in_corso(e, g)]
         fuori += _landing_sezione(
             f"{GIORNI[g.weekday()].capitalize()} {g.day} {MESI_LUNGHI[g.month - 1]}",
             etichette.get((g.month, g.day)),
-            [e for e in finestra if in_corso(e, g)], oggi)
+            _tema_prima(del_giorno, chiave) if chiave else del_giorno, oggi)
+    if chiave:
+        fuori += _lunghi_fuori_tema(finestra, chiave, oggi, quale or '')
     return fuori
 
 
@@ -8203,6 +8307,9 @@ def spec_natale(st, events, oggi, altre):
     # A settimane e non giorno per giorno: la finestra e' lunga 26 giorni, e
     # ventisei titoletti - la meta' dei quali vuoti - fanno sembrare generata a
     # macchina una pagina che non lo e'.
+    # Le righe lunghe (un presepe aperto tutto il mese) una volta sola, non in
+    # tutte e quattro le settimane: vedi LUNGO_GIORNI.
+    corpo += _lunghi_in_tema(finestra, st.chiave, oggi, "Natale")
     for testa, coda, etichetta in ((1, 7, None),
                                    (8, 14, "C'è l'Immacolata"),
                                    (15, 21, None),
@@ -8212,7 +8319,10 @@ def spec_natale(st, events, oggi, altre):
         corpo += _landing_sezione(
             f"Dal {testa} al {coda} dicembre" if testa != 22 else "Dal 22 al 26 dicembre",
             etichetta,
-            [e for e in finestra if e['d_start'] <= d2 and e['d_end'] >= d1], oggi)
+            _tema_prima([e for e in finestra if not e_lungo(e)
+                         and e['d_start'] <= d2 and e['d_end'] >= d1], st.chiave),
+            oggi)
+    corpo += _lunghi_fuori_tema(finestra, st.chiave, oggi, "Natale")
     corpo += _altre_landing(st.href, altre)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Natale {anno} con i bambini", sotto, corpo,
@@ -8287,7 +8397,8 @@ def spec_capodanno(st, events, oggi, altre):
     corpo += _landing_filtri(finestra)
     corpo += _giorno_per_giorno(finestra, da, a, oggi,
                                 {(12, 31): "San Silvestro",
-                                 (1, 1): "Capodanno"})
+                                 (1, 1): "Capodanno"},
+                                chiave=st.chiave, quale="Capodanno")
     corpo += _altre_landing(st.href, altre)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Capodanno {anno + 1} con i bambini", sotto, corpo,
@@ -8352,7 +8463,8 @@ def spec_befana(st, events, oggi, altre):
         'ricominciata. Quelli che conosciamo stanno nel <a '
         'href="/luoghi.html">catalogo dei luoghi</a>, con orari e telefono.</p>')
     corpo += _landing_filtri(finestra)
-    corpo += _giorno_per_giorno(finestra, da, a, oggi, {(1, 6): "L'Epifania"})
+    corpo += _giorno_per_giorno(finestra, da, a, oggi, {(1, 6): "L'Epifania"},
+                                chiave=st.chiave, quale="Befana")
     corpo += _altre_landing(st.href, altre)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Cosa fare per la Befana {anno}", sotto, corpo,
@@ -8420,7 +8532,8 @@ def spec_carnevale(st, events, oggi, altre):
     corpo += _landing_filtri(finestra)
     corpo += _giorno_per_giorno(finestra, da, a, oggi,
                                 {(da.month, da.day): "Giovedì grasso",
-                                 (clou.month, clou.day): "Martedì grasso"})
+                                 (clou.month, clou.day): "Martedì grasso"},
+                                chiave=st.chiave, quale="Carnevale")
     corpo += _altre_landing(st.href, altre)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Carnevale {anno} con i bambini", sotto, corpo,
@@ -8491,7 +8604,8 @@ def spec_pasqua(st, events, oggi, altre):
     corpo += _giorno_per_giorno(finestra, da, a, oggi,
                                 {(da.month, da.day): "Venerdì Santo",
                                  (clou.month, clou.day): "Pasqua",
-                                 (pasquetta.month, pasquetta.day): "Pasquetta"})
+                                 (pasquetta.month, pasquetta.day): "Pasquetta"},
+                                chiave=st.chiave, quale="Pasqua")
     corpo += _altre_landing(st.href, altre)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Pasqua e Pasquetta {anno}", sotto, corpo,
