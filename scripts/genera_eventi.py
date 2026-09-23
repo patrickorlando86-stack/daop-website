@@ -6938,7 +6938,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 </header>
 <article class="ev-wrap ev-wrap--hero">
   {spec['corpo']}
-  {blocco_ginetto(alto=True)}
+  {'' if spec.get('ginetto_nel_corpo') else blocco_ginetto(alto=True)}
   <div class="com-link">
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
@@ -8021,39 +8021,48 @@ def spec_halloween(st, events, oggi, altre):
     prov = province_in_elenco(PROVINCE_PUBBLICATE)
     finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
                       key=lambda e: (e['d_start'], (e.get('citta') or '')))
-    # In evidenza solo le feste di Halloween pensate per i piccoli: con il solo
-    # e_per_bambini() ci finivano corsi e laboratori qualsiasi, che l'eta' la
-    # dichiarano sempre (vedi TEMI_STAGIONE).
-    tema = [e for e in finestra if in_tema(e, 'halloween')]
-    piccoli = [e for e in tema if e_per_bambini(e)]
+    # SOLO HALLOWEEN (23/09/2026). Patrick: «perche' in questa pagina
+    # pubblichiamo anche cose non di halloween?». Fino a qui la pagina prendeva
+    # tutto quello che era aperto nella finestra, e a fine settembre voleva dire
+    # un evento di sport, due corsi e due feste vere, con "8 eventi" sotto un
+    # titolo che promette Halloween. Il "cosa fare in quei giorni" ha gia' le sue
+    # pagine (weekend, provinciali per bambini) e qui diventa una riga che le
+    # linka. Il rischio della pagina magra e' di poche settimane: le locandine di
+    # Halloween arrivano a ondate a meta' ottobre (Patrick: "arriveranno
+    # tantissime locandine"). Cosa conta come Halloween: TEMI_STAGIONE.
+    finestra = [e for e in finestra if in_tema(e, 'halloween')]
+    piccoli = [e for e in finestra if e_per_bambini(e)]
     comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
+    poche = len(finestra) < MIN_TEMA
 
     titolo = _landing_titolo([f"Halloween {anno} con i bambini: {prov}",
                               f"Cosa fare a Halloween {anno} con i bambini | DAOP",
                               f"Cosa fare a Halloween {anno} con i bambini"])
     if finestra:
-        sotto = (f"{len(finestra)} eventi dal 25 ottobre al 2 novembre in {comuni} comuni"
-                 if len(finestra) > 1 else "1 evento nella settimana di Halloween")
+        sotto = (f"{len(finestra)} feste di Halloween dal 25 ottobre al 2 novembre "
+                 f"in {comuni} comuni"
+                 if len(finestra) > 1 else "1 festa di Halloween in agenda, per ora")
         apertura = (f"<p>La notte del <strong>31 ottobre {anno}</strong> cade di "
                     f"{GIORNI[notte.weekday()]}, e col fine settimana prima e Ognissanti "
-                    f"dopo diventa una decina di giorni di feste. Qui sotto ci sono i "
-                    f"<strong>{len(finestra)} eventi</strong> che abbiamo verificato uno "
-                    f"per uno in {comuni} comuni fra le province di {prov}, con l'orario, "
-                    f"il paese e chi li organizza.</p>")
-        # Poche feste vere: lo si dice, invece di lasciar credere che l'elenco
-        # sia Halloween. Il perche' e' lo stesso della pagina vuota.
-        if len(tema) < MIN_TEMA:
+                    f"dopo diventa una decina di giorni di feste. Qui sotto ci sono "
+                    + (f"le <strong>{len(finestra)} feste di Halloween</strong>"
+                       if len(finestra) > 1 else "la <strong>festa di Halloween</strong>")
+                    + f" che abbiamo verificato una per una fra le province di {prov}, "
+                    f"con l'orario, il paese e chi le organizza.</p>")
+        # Poche feste: lo si dice. E' lo stesso testo della pagina vuota, perche'
+        # la ragione e' la stessa.
+        if poche:
             apertura += (
-                "<p class=\"lan-vuoto\">" +
-                ("Per ora le feste di Halloween in agenda sono "
-                 f"<strong>{len(tema)}</strong>" if tema else
-                 "Le feste di Halloween vere per ora non sono ancora uscite") +
-                ": castelli e pro loco pubblicano i programmi di fine ottobre "
+                "<p class=\"lan-vuoto\">Per ora in agenda "
+                + ("ce n'è <strong>una</strong>" if len(finestra) == 1
+                   else f"sono <strong>{len(finestra)}</strong>")
+                + ": castelli e pro loco pubblicano i programmi di fine ottobre "
                 "spesso a due settimane dalla data. Questa pagina si rifà ogni "
-                "notte, quindi appena entrano compaiono qui, in cima.</p>")
+                "notte, quindi appena entrano compaiono qui.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
-                      f"{len(finestra)} eventi dal 25 ottobre al 2 novembre, verificati "
-                      "uno per uno da DAOP.", 152)
+                      + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
+                      + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
+                      152)
     else:
         sotto = f"Per Halloween {anno} non c'è ancora niente in agenda"
         apertura = (f"<p class=\"lan-vuoto\">Per Halloween {anno} in agenda non abbiamo "
@@ -8066,6 +8075,38 @@ def spec_halloween(st, events, oggi, altre):
                       "verificati uno per uno da DAOP.", 152)
 
     corpo = apertura
+    # PRIMA LE FESTE (23/09/2026). Patrick: «prima degli eventi devo leggermi
+    # quella pappardella». Chi arriva da Google vuole la lista: la frase di
+    # apertura dice quante sono, poi subito le righe. Le due domande editoriali
+    # ("fa paura o no?", "dove") restano - sono cio' che distingue la pagina da
+    # /eventi/weekend.html - ma DOPO l'elenco, per chi vuole leggere.
+    corpo += _landing_filtri(finestra)
+    corpo += _landing_sezione(
+        "Pensati per i più piccoli",
+        "Laboratori, zucche e giochi: qui l'età è dichiarata o il programma la dice",
+        piccoli, oggi)
+    # Poi tutte le feste, giorno per giorno: la sezione qui sopra e'
+    # un'evidenza, non una selezione che declassa il resto. Quelle lunghe (un
+    # parco a tema aperto tutti i weekend di ottobre) una volta sola.
+    corpo += _giorno_per_giorno(finestra, da, a, oggi,
+                                {(notte.month, notte.day): "La notte di Halloween",
+                                 (11, 1): "Ognissanti"},
+                                chiave='halloween', quale="Halloween")
+    # Ginetto subito dopo le feste finche' sono poche: con due righe l'elenco
+    # finisce nella prima schermata e Ginetto ci resta attaccato. E' la regola
+    # delle schede concluse ("un servizio si mette davanti, una richiesta no";
+    # in alto sta solo dove la pagina ha poco da dare): qui risponde a "e allora
+    # cosa faccio?". Quando le locandine arrivano torna in fondo da solo. Mai
+    # tutte e due le posizioni.
+    if poche:
+        corpo += blocco_ginetto(alto=True)
+    # Il resto di quei giorni non si butta: sta nelle pagine fatte per quello.
+    corpo += ('<p class="com-per">Cerchi altro da fare con i bambini in quei '
+              'giorni, anche senza zucche? Stanno nelle pagine per provincia: '
+              + ', '.join(f'<a href="{href_eventi_prov(p)}">'
+                          f'{esc(PROVINCE_NOMI.get(p, p))}</a>'
+                          for p in PROVINCE_PUBBLICATE)
+              + ', oppure in <a href="/eventi.html">tutta l\'agenda</a>.</p>')
     # Il pezzo che un elenco di date non ha. Due domande, e la seconda e'
     # l'unico link a /luoghi.html che parta dal corpo di una pagina: la prima
     # l'ha aperta /ferragosto.html, e questa e' la seconda superficie.
@@ -8078,29 +8119,15 @@ def spec_halloween(st, events, oggi, altre):
         'altrui, ricavato dal titolo. Facciamo l\'unica cosa che si può fare '
         'onestamente: <strong>dove l\'età è dichiarata la trovi scritta in '
         'riga</strong>, e dove non c\'è conviene aprire la scheda e leggere il '
-        'programma, che riportiamo per intero. Qui sotto mettiamo in evidenza '
-        'quelli <strong>pensati per i più piccoli</strong>: laboratori, zucche, '
-        'giochi, dolcetto o scherzetto. Il resto della pagina è tutto il '
-        'programma, senza cernite.</p>'
+        'programma, che riportiamo per intero. Per questo in cima mettiamo in '
+        'evidenza quelle <strong>pensate per i più piccoli</strong>: '
+        'laboratori, zucche, giochi, dolcetto o scherzetto.</p>'
         '<p>La seconda domanda è dove. Halloween in zona si fa nei <strong>'
         'castelli, nelle cascine e nei borghi</strong>, e quasi sempre si '
         'prenota: gli <a href="/luoghi.html">agriturismi, i castelli e i posti '
         'da visitare con i bambini</a> stanno nel catalogo dei luoghi, con '
         'telefono e indirizzo. Se quel giorno piove, la stessa pagina dice '
         'quali sono al coperto.</p>')
-    corpo += _landing_filtri(finestra)
-    corpo += _landing_sezione(
-        "Pensati per i più piccoli",
-        "Laboratori, zucche e giochi: qui l'età è dichiarata o il programma la dice",
-        piccoli, oggi)
-    # Poi tutto il programma, giorno per giorno e senza escludere niente: la
-    # sezione qui sopra e' un'evidenza, non una selezione che declassa il resto.
-    # Dentro ogni giorno Halloween passa davanti, e corsi e percorsi lunghi
-    # escono una volta sola in fondo invece che in tutti e nove i giorni.
-    corpo += _giorno_per_giorno(finestra, da, a, oggi,
-                                {(notte.month, notte.day): "La notte di Halloween",
-                                 (11, 1): "Ognissanti"},
-                                chiave='halloween', quale="Halloween")
     corpo += _altre_landing("/halloween.html", altre)
 
     return {
@@ -8112,12 +8139,16 @@ def spec_halloween(st, events, oggi, altre):
         # Fuori stagione resta online - i link girati su WhatsApp devono
         # continuare a funzionare - ma esce dall'indice: una pagina vuota
         # indicizzata per cinquanta settimane e' contenuto sottile proprio
-        # sull'URL che stiamo facendo invecchiare.
-        'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
+        # sull'URL che stiamo facendo invecchiare. Da quando la pagina conta
+        # solo Halloween la soglia e' UNA festa, non MIN_LANDING: con cinque si
+        # sarebbe spenta a fine settembre proprio mentre saliva su Google, e la
+        # pagina ha comunque il suo contenuto (fa paura o no, dove andare).
+        'robots': "index, follow" if finestra else "noindex, follow",
         'jsonld': _grafo_landing(url, titolo, descr, finestra,
                                  f"Eventi di Halloween {anno}", "Halloween", oggi),
         'eventi': len(finestra),
         'fascia': fascia_stagione('halloween'),
+        'ginetto_nel_corpo': poche,
     }
 
 
