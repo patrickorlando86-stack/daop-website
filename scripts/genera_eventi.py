@@ -8036,7 +8036,6 @@ def spec_halloween(st, events, oggi, altre):
     # Halloween arrivano a ondate a meta' ottobre (Patrick: "arriveranno
     # tantissime locandine"). Cosa conta come Halloween: TEMI_STAGIONE.
     finestra = [e for e in finestra if in_tema(e, 'halloween')]
-    piccoli = [e for e in finestra if e_per_bambini(e)]
     comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
     poche = len(finestra) < MIN_TEMA
 
@@ -8086,17 +8085,16 @@ def spec_halloween(st, events, oggi, altre):
     # ("fa paura o no?", "dove") restano - sono cio' che distingue la pagina da
     # /eventi/weekend.html - ma DOPO l'elenco, per chi vuole leggere.
     corpo += _landing_filtri(finestra)
-    corpo += _landing_sezione(
-        "Pensati per i più piccoli",
-        "Laboratori, zucche e giochi: qui l'età è dichiarata o il programma la dice",
-        piccoli, oggi)
-    # Poi tutte le feste, giorno per giorno: la sezione qui sopra e'
-    # un'evidenza, non una selezione che declassa il resto. Quelle lunghe (un
-    # parco a tema aperto tutti i weekend di ottobre) una volta sola.
+    # Niente piu' riquadro "Pensati per i piu' piccoli" (23/09/2026, Patrick:
+    # «confonde e basta»). Serviva quando la pagina mescolava tutto; con sole
+    # feste di Halloween ripeteva le stesse righe dell'elenco due righe sopra.
+    # L'unica cosa che dava - l'eta' - sta ora IN RIGA, come promette il testo
+    # "fa paura o no?". Le feste lunghe (un parco a tema aperto tutti i weekend
+    # di ottobre) una volta sola.
     corpo += _giorno_per_giorno(finestra, da, a, oggi,
                                 {(notte.month, notte.day): "La notte di Halloween",
                                  (11, 1): "Ognissanti"},
-                                chiave='halloween', quale="Halloween")
+                                chiave='halloween', quale="Halloween", eta=True)
     # Ginetto subito dopo le feste finche' sono poche: con due righe l'elenco
     # finisce nella prima schermata e Ginetto ci resta attaccato. E' la regola
     # delle schede concluse ("un servizio si mette davanti, una richiesta no";
@@ -8124,9 +8122,7 @@ def spec_halloween(st, events, oggi, altre):
         'altrui, ricavato dal titolo. Facciamo l\'unica cosa che si può fare '
         'onestamente: <strong>dove l\'età è dichiarata la trovi scritta in '
         'riga</strong>, e dove non c\'è conviene aprire la scheda e leggere il '
-        'programma, che riportiamo per intero. Per questo in cima mettiamo in '
-        'evidenza quelle <strong>pensate per i più piccoli</strong>: '
-        'laboratori, zucche, giochi, dolcetto o scherzetto.</p>'
+        'programma, che riportiamo per intero.</p>'
         '<p>La seconda domanda è dove. Halloween in zona si fa nei <strong>'
         'castelli, nelle cascine e nei borghi</strong>, e quasi sempre si '
         'prenota: gli <a href="/luoghi.html">agriturismi, i castelli e i posti '
@@ -8288,7 +8284,7 @@ def _lunghi_fuori_tema(finestra, chiave, oggi, quale):
 
 
 def _giorno_per_giorno(finestra, da, a, oggi, etichette=None, chiave=None,
-                       quale=None):
+                       quale=None, eta=False):
     """Un blocco per giorno. I giorni vuoti spariscono da soli
     (_landing_sezione torna '' senza righe), quindi si puo' ciclare su tutta
     la finestra senza controllare prima se c'e' qualcosa.
@@ -8307,7 +8303,8 @@ def _giorno_per_giorno(finestra, da, a, oggi, etichette=None, chiave=None,
         fuori += _landing_sezione(
             f"{GIORNI[g.weekday()].capitalize()} {g.day} {MESI_LUNGHI[g.month - 1]}",
             etichette.get((g.month, g.day)),
-            _tema_prima(del_giorno, chiave) if chiave else del_giorno, oggi)
+            _tema_prima(del_giorno, chiave) if chiave else del_giorno, oggi,
+            eta=eta)
     if chiave:
         fuori += _lunghi_fuori_tema(finestra, chiave, oggi, quale or '')
     return fuori
