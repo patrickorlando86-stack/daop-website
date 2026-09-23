@@ -8104,6 +8104,13 @@ def spec_halloween(st, events, oggi, altre):
     # apertura dice quante sono, poi subito le righe. Le due domande editoriali
     # ("fa paura o no?", "dove") restano - sono cio' che distingue la pagina da
     # /eventi/weekend.html - ma DOPO l'elenco, per chi vuole leggere.
+    # Le tre province hanno la loro pagina (vedi spec_halloween_prov): la
+    # generale le annuncia in cima, una riga, cosi' le quattro si tengono per
+    # mano invece di farsi concorrenza.
+    corpo += ('<p class="com-per">Per provincia: '
+              + ' · '.join(f'<a href="{href_halloween_prov(c)}">'
+                           f'{esc(PROVINCE_NOMI.get(c, c))}</a>'
+                           for c in PROVINCE_PUBBLICATE) + '</p>')
     corpo += _landing_filtri(finestra)
     # Niente piu' riquadro "Pensati per i piu' piccoli" (23/09/2026, Patrick:
     # «confonde e basta»). Serviva quando la pagina mescolava tutto; con sole
@@ -8134,7 +8141,7 @@ def spec_halloween(st, events, oggi, altre):
     # l'unico link a /luoghi.html che parta dal corpo di una pagina: la prima
     # l'ha aperta /ferragosto.html, e questa e' la seconda superficie.
     corpo += (
-        '<h2>Fa paura o no?</h2>'
+        '<h2 id="fa-paura">Fa paura o no?</h2>'
         '<p>È la domanda vera di Halloween, e la risposta cambia dello stesso '
         'evento a seconda di chi porti: la caccia ai dolcetti in piazza e la '
         'casa infestata nel castello finiscono nello stesso elenco. Noi non '
@@ -8170,6 +8177,119 @@ def spec_halloween(st, events, oggi, altre):
         'robots': "index, follow" if finestra else "noindex, follow",
         'jsonld': _grafo_landing(url, titolo, descr, finestra,
                                  f"Eventi di Halloween {anno}", "Halloween", oggi),
+        'eventi': len(finestra),
+        'fascia': fascia_stagione('halloween'),
+        'ginetto_nel_corpo': poche,
+    }
+
+
+def href_halloween_prov(prov):
+    return f"/halloween-provincia-{slugify(PROVINCE_NOMI.get(prov, prov))}.html"
+
+
+def spec_halloween_prov(prov, events, oggi, altre):
+    """/halloween-provincia-<nome>.html — Halloween di UNA provincia.
+
+    PERCHE' ESISTONO (23/09/2026). Il 23/09 le ricerche di Halloween in Search
+    Console erano tutte generiche ("festa halloween 2026") e la proposta era di
+    non farle. Patrick: «sicuramente ci saranno quelle ricerche», e il
+    precedente gli da' ragione - a Ferragosto le ricerche erano per provincia
+    ("ferragosto in provincia di cuneo" 77 impressioni, "ferragosto alessandria"
+    84, "ferragosto asti" 43) e la pagina era una sola. L'indirizzo non ha
+    l'anno, quindi si rafforza di edizione in edizione come la generale.
+
+    I DUE PALETTI, e sono la ragione per cui non fanno danni:
+    - in indice solo da MIN_TEMA feste in su. Sotto, la pagina esiste e si
+      raggiunge dai link, ma per Google non c'e': una provincia con una festa
+      sola e' la generale con meno righe, cioe' contenuto sottile.
+    - si tengono per mano con la generale: lei le annuncia in cima, loro
+      rimandano a lei (briciola 'padre', riga delle altre province). Il testo
+      "fa paura o no?" NON si ricopia: e' una riga che porta a quello della
+      generale, se no sono quattro copie dello stesso paragrafo.
+
+    Da rileggere a novembre: se in Search Console "halloween <provincia>" non
+    esiste, i paletti le hanno tenute fuori indice e non costano niente; se
+    esiste, la prova e' fatta per il 2027."""
+    da, notte, a = halloween_range(oggi)
+    anno = notte.year
+    nome = PROVINCE_NOMI.get(prov, prov)
+    href = href_halloween_prov(prov)
+    url = f"{SITE_URL}{href}"
+    finestra = sorted((e for e in events
+                       if e['d_start'] <= a and e['d_end'] >= da
+                       and (e.get('prov') or '').upper() == prov
+                       and in_tema(e, 'halloween')),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
+    poche = len(finestra) < MIN_TEMA
+
+    titolo = _landing_titolo([f"Halloween {anno} con i bambini in provincia di {nome}",
+                              f"Halloween {anno} in provincia di {nome} | DAOP",
+                              f"Halloween {anno} in provincia di {nome}"])
+    if finestra:
+        sotto = (f"{len(finestra)} feste di Halloween in {comuni} comuni"
+                 if len(finestra) > 1 else "1 festa di Halloween in agenda, per ora")
+        apertura = (f"<p>Le feste di <strong>Halloween {anno}</strong> in provincia "
+                    f"di {nome}, dal 25 ottobre al 2 novembre: "
+                    + (f"<strong>{len(finestra)}</strong>, verificate una per una"
+                       if len(finestra) > 1 else "<strong>una</strong>, verificata")
+                    + ", con l'orario, il paese e chi le organizza.</p>")
+        if poche:
+            apertura += ("<p class=\"lan-vuoto\">Castelli e pro loco pubblicano i "
+                         "programmi di fine ottobre spesso a due settimane dalla "
+                         "data. Questa pagina si rifà ogni notte, quindi appena "
+                         "entrano compaiono qui.</p>")
+        descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: "
+                      + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
+                      + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
+                      152)
+    else:
+        sotto = f"Per Halloween {anno} in provincia di {nome} non c'è ancora niente"
+        apertura = (f"<p class=\"lan-vuoto\">Per Halloween {anno} in provincia di "
+                    f"{nome} in agenda non abbiamo ancora niente, e lo scriviamo "
+                    f"invece di riempire la pagina. Castelli e pro loco pubblicano i "
+                    f"programmi di fine ottobre spesso a due settimane dalla data. "
+                    f"Questa pagina si rifà ogni notte, quindi appena entrano "
+                    f"compaiono qui.</p>")
+        descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: feste, "
+                      "laboratori e castelli dal 25 ottobre al 2 novembre, "
+                      "verificati uno per uno da DAOP.", 152)
+
+    corpo = apertura
+    corpo += _landing_filtri(finestra, con_prov=False)
+    corpo += _giorno_per_giorno(finestra, da, a, oggi,
+                                {(notte.month, notte.day): "La notte di Halloween",
+                                 (11, 1): "Ognissanti"},
+                                chiave='halloween', quale="Halloween", eta=True)
+    # Ginetto dopo l'elenco finche' e' corto: stessa regola della generale.
+    if poche:
+        corpo += blocco_ginetto(alto=True)
+    altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
+    corpo += ('<p class="com-per">Halloween nelle altre province: '
+              + ', '.join(f'<a href="{href_halloween_prov(c)}">'
+                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>' for c in altre_prov)
+              + ', o <a href="/halloween.html">tutte insieme</a>. Cerchi altro da '
+              f'fare con i bambini in provincia di {esc(nome)}? '
+              f'<a href="{href_eventi_prov(prov)}">Gli eventi della provincia</a>.</p>')
+    corpo += ('<p class="com-per"><strong>Fa paura o no?</strong> Dove l\'età è '
+              'dichiarata la trovi in riga; per il resto <a '
+              'href="/halloween.html#fa-paura">ti spieghiamo come leggere un '
+              'programma di Halloween</a>.</p>')
+    corpo += _altre_landing(href, altre, porte=False)
+
+    padre = ('/halloween.html', 'Halloween')
+    return {
+        'path': href.lstrip('/'), 'url': url,
+        'titolo': titolo, 'descr': descr,
+        'h1': f"Halloween {anno} con i bambini in provincia di {nome}",
+        'sotto': sotto, 'crumb': nome,
+        'padre': padre,
+        'corpo': corpo,
+        'robots': "noindex, follow" if poche else "index, follow",
+        'prov': prov,
+        'jsonld': _grafo_landing(url, titolo, descr, finestra,
+                                 f"Eventi di Halloween {anno} in provincia di {nome}",
+                                 nome, oggi, padre=padre),
         'eventi': len(finestra),
         'fascia': fascia_stagione('halloween'),
         'ginetto_nel_corpo': poche,
@@ -9128,6 +9248,9 @@ def scrivi_landing(events, hub, storico, oggi):
     # in noindex e fuori sitemap da sola). E' il rimpianto scritto su
     # spec_halloween — "su una stagionale l'asset e' l'anzianita' dell'URL".
     specs += [st.spec(st, events, oggi, altre) for st in STAGIONI]
+    # Halloween per provincia: vedi spec_halloween_prov. Girano sempre, come le
+    # stagionali, e sotto soglia restano fuori indice e fuori sitemap da sole.
+    specs += [spec_halloween_prov(c, events, oggi, altre) for c in PROVINCE_PUBBLICATE]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
     # La provincia senza finestra temporale: la quarta cella dell'asse
     # provincia x finestra, che era l'unica vuota. Vedi spec_eventi_prov.
