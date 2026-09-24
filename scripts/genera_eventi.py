@@ -6684,6 +6684,17 @@ LANDING_CSS = """
 .lan-alt a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .lan-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem;line-height:1.6}
+/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. */
+.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
+.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+/* "E dopo Halloween?": due porte e basta. La prima piena, la seconda col
+   bordo, cosi' non si leggono come una fila di scorciatoie. */
+.lan-dopo{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
+.lan-dopo a{display:inline-block;border:1px solid var(--navy,#2d4a5c);border-radius:100px;
+  padding:10px 18px;font-size:.95rem;font-weight:700;text-decoration:none;
+  color:var(--navy,#2d4a5c)}
+.lan-dopo a:first-child{background:var(--navy,#2d4a5c);color:#fff}
+.lan-dopo a:hover{opacity:.88}
 /* La barra filtri riusa .ev-toolbar/.ev-search/.ev-select dal CSS dell'agenda.
    Qui cambia solo l'ancoraggio: nelle pagine di intenzione non c'e' la barra
    dei giorni sotto, quindi si ferma direttamente sotto la nav del sito. */
@@ -6725,7 +6736,25 @@ def _eta_chip(testo):
     return trunc(t, 24)
 
 
-def _landing_righe(ev, oggi, eta=False, gratis=False):
+def _pill_costo(e):
+    if e_gratuito(e):
+        return '<span class="ev-pill is-free">Gratuito</span>'
+    pr = (e.get('prezzo') or '').strip()
+    if pr and len(pr) <= 26 and 'verific' not in pr.lower():
+        return f'<span class="ev-pill is-price">{esc(pr)}</span>'
+    return ''
+
+
+def _pill_prenota(e):
+    """'Su prenotazione' se la colonna lo dice. Un "no"/"non serve" non e'
+    un'informazione da mettere in riga: e' il caso normale."""
+    pr = (e.get('prenotazione') or '').strip().lower()
+    if not pr or pr.startswith(('no', 'non ')) or 'non serve' in pr:
+        return ''
+    return '<span class="ev-pill is-price">Su prenotazione</span>'
+
+
+def _landing_righe(ev, oggi, eta=False, gratis=False, dettagli=False):
     """(righe, nude) di un elenco, nel vocabolario delle pagine comune.
 
     `nude` dice se nessuna riga ha la miniatura: e' la stessa condizione che
@@ -6791,6 +6820,12 @@ def _landing_righe(ev, oggi, eta=False, gratis=False):
                 # intero sta sulla scheda. La classe arriva dal guscio.
                 + ('<span class="ev-pill is-free">Gratuito</span>'
                    if gratis and e_gratuito(e) else '')
+                # `dettagli` (Halloween, 24/09/2026): costo e prenotazione in
+                # riga, ma SOLO quando l'organizzatore li ha comunicati. Il
+                # prezzo si stampa se sta intero in una pillola e non dice
+                # "da verificare" - una pillola troncata o incerta non e' un
+                # dato; per il resto c'e' la scheda.
+                + (_pill_costo(e) + _pill_prenota(e) if dettagli else '')
                 # Il consiglio si stampa su tutte le pagine di intenzione, non
                 # solo dove c'e' un filtro: e' un badge, non un comando.
                 + pill_consigliato(e)
@@ -6918,7 +6953,7 @@ def _apertura_scade(html, giorno):
 
 
 def _landing_sezione(titolo, sotto, ev, oggi, eta=False, gratis=False,
-                     ruolo=None, scade=None, ordine=None):
+                     ruolo=None, scade=None, ordine=None, dettagli=False):
     """Un blocco di elenco con la sua intestazione. Vuoto se non c'e' niente:
     un titoletto senza righe sotto e' il modo piu' rapido per far sembrare
     generata a macchina una pagina che non lo e'.
@@ -6939,7 +6974,7 @@ def _landing_sezione(titolo, sotto, ev, oggi, eta=False, gratis=False,
     testa = f'<h3>{esc(titolo)}</h3>'
     if sotto:
         testa += f'<p class="com-per">{esc(sotto)}</p>'
-    righe, nude = _landing_righe(ev, oggi, eta=eta, gratis=gratis)
+    righe, nude = _landing_righe(ev, oggi, eta=eta, gratis=gratis, dettagli=dettagli)
     extra = (f' data-ruolo="{ruolo}"' if ruolo else '')
     extra += (f' data-scade="{scade:%Y-%m-%d}"' if scade else '')
     extra += (f' data-ordine="{ordine}"' if ordine else '')
@@ -7023,6 +7058,25 @@ def _landing_shell(spec, css, nav, foot, oggi):
     if spec.get('padre'):
         briciole += f'<a href="{spec["padre"][0]}">{esc(spec["padre"][1])}</a> › '
     briciole += f'<span>{esc(spec["crumb"])}</span>'
+    # La data dell'ultimo aggiornamento. Di norma sta in fondo; con
+    # 'agg_in_cima' (Halloween, 24/09/2026) sale sotto il numero delle feste,
+    # dove chi legge si chiede "e' ancora vero?", e la coda sparisce: dirla
+    # due volte non aggiunge niente. `oggi` e' la data della run, e la pagina
+    # si scrive solo se la run arriva in fondo: e' l'ultimo aggiornamento
+    # riuscito.
+    data_agg = f"{oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}"
+    if spec.get('agg_in_cima'):
+        agg_cima = (f'\n    <p class="ev-agg">Ultimo aggiornamento: {data_agg} · '
+                    '<a href="/metodo.html">Come verifichiamo gli eventi</a></p>')
+        coda = ''
+    else:
+        agg_cima = ''
+        coda = ('<div class="com-link">\n'
+                '    <a href="/eventi.html">Tutta l\'agenda DAOP</a>\n'
+                '    <a href="/metodo.html">Come verifichiamo gli eventi</a>\n'
+                '  </div>\n'
+                f'  <p class="ev-firma-nota">Pagina rigenerata ogni notte. '
+                f'Ultimo aggiornamento: {data_agg}.</p>')
     fascia = spec.get('fascia')
     img_og = fascia['og'] if fascia else DEFAULT_IMG
     hero_cls, hero_style = '', ''
@@ -7071,17 +7125,13 @@ def _landing_shell(spec, css, nav, foot, oggi):
       {briciole}
     </div>
     <h1>{esc(spec['h1'])}</h1>
-    <p class="ev-when"{scade_attr}>{esc(spec['sotto'])}</p>
+    <p class="ev-when"{scade_attr}>{esc(spec['sotto'])}</p>{agg_cima}
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
   {spec['corpo']}
   {'' if spec.get('ginetto_nel_corpo') else blocco_ginetto(alto=True)}
-  <div class="com-link">
-    <a href="/eventi.html">Tutta l'agenda DAOP</a>
-    <a href="/metodo.html">Come verifichiamo gli eventi</a>
-  </div>
-  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: {oggi.day} {MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
+  {coda}
 </article>
 </main>
 {foot}
@@ -8182,19 +8232,15 @@ def spec_halloween(st, events, oggi, altre):
         sotto = (f"{len(finestra)} feste di Halloween già in programma"
                  + (f" in {comuni} comuni" if comuni > 1 else "")
                  if len(finestra) > 1 else "1 festa di Halloween in agenda, per ora")
-        apertura = (f"<p>La notte del <strong>31 ottobre {anno}</strong> cade di "
-                    f"{GIORNI[notte.weekday()]}, e col fine settimana prima e Ognissanti "
-                    f"dopo diventa una decina di giorni di feste. Qui sotto ci sono "
-                    + (f"le <strong>{len(finestra)} feste di Halloween</strong>"
-                       if len(finestra) > 1 else "la <strong>festa di Halloween</strong>")
-                    + f" che abbiamo verificato una per una fra le province di {prov}, "
-                    f"con l'orario, il paese e chi le organizza.</p>")
-        # Poche feste: una frase in coda all'apertura, non un riquadro. Il
-        # riquadro "per ora in agenda sono 2" ripeteva il numero appena scritto
-        # (Patrick, 23/09/2026).
-        if poche:
-            apertura = (apertura[:-len("</p>")] + " Altre arriveranno nelle "
-                        "prossime settimane: aggiorniamo la pagina ogni giorno.</p>")
+        # Corta (24/09/2026): giorno, cosa c'e', e che la pagina cresce. Il
+        # numero sta gia' nel sottotitolo e la data dell'aggiornamento subito
+        # sotto: ripeterli qui era la "pappardella" prima dell'elenco. La frase
+        # sui nuovi eventi vale sempre, quindi il ramo `poche` non serve piu'.
+        apertura = (f"<p>Quest'anno Halloween cade <strong>{GIORNI[notte.weekday()]} "
+                    f"31 ottobre</strong>. Qui trovi le feste per bambini già "
+                    f"confermate nelle province di {prov}. Verifichiamo i programmi "
+                    f"e aggiungiamo i nuovi eventi man mano che vengono "
+                    f"pubblicati.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
                       + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
@@ -8233,7 +8279,8 @@ def spec_halloween(st, events, oggi, altre):
     corpo += _giorno_per_giorno(finestra, da, a, oggi,
                                 {(notte.month, notte.day): "La notte di Halloween",
                                  (11, 1): "Ognissanti"},
-                                chiave='halloween', quale="Halloween", eta=True)
+                                chiave='halloween', quale="Halloween", eta=True,
+                                dettagli=True)
     # Il pezzo che un elenco di date non ha. Due domande, e la seconda e'
     # l'unico link a /luoghi.html che parta dal corpo di una pagina: la prima
     # l'ha aperta /ferragosto.html, e questa e' la seconda superficie.
@@ -8248,29 +8295,31 @@ def spec_halloween(st, events, oggi, altre):
         'evento è adatto ai tuoi bambini, apri la scheda e leggi il programma, '
         'che riportiamo per intero.</p>'
         '<p>Halloween in zona si fa nei <strong>castelli, nelle cascine e nei '
-        'borghi</strong>, e quasi sempre si prenota: gli <a href="/luoghi.html">'
+        'borghi</strong>: gli <a href="/luoghi.html">'
         'agriturismi, i castelli e i posti da visitare con i bambini</a> stanno '
         'nel catalogo dei luoghi, con telefono e indirizzo.</p>')
-    # Il resto di quei giorni non si butta: sta nelle pagine fatte per quello.
-    corpo += ('<p class="com-per">Per il resto di quei giorni, anche senza '
-              'zucche, ci sono le pagine per provincia: '
-              + ', '.join(f'<a href="{href_eventi_prov(p)}">'
-                          f'{esc(PROVINCE_NOMI.get(p, p))}</a>'
-                          for p in PROVINCE_PUBBLICATE)
-              + ', oppure in <a href="/eventi.html">tutta l\'agenda</a>.</p>')
+    # "E dopo Halloween?" (24/09/2026): al posto della fila di scorciatoie
+    # (oggi, weekend, tre provinciali, tutta l'agenda) e della riga "per il
+    # resto di quei giorni". Il percorso della pagina diventa uno solo: le
+    # feste -> altri eventi o luoghi -> il consiglio di Ginetto, che segue. I
+    # link per provincia stanno gia' sopra l'elenco; libri, corsi e il resto
+    # restano nel menu e nel footer, apposta.
+    corpo += ('<h2 id="dopo">E dopo Halloween?</h2>'
+              '<div class="lan-dopo">'
+              '<a href="/luoghi.html">Esplora i luoghi per famiglie</a>'
+              '<a href="/eventi.html">Scopri i prossimi eventi</a>'
+              '</div>')
     # Ginetto DOPO "fa paura o no?" (23/09/2026): fra l'elenco e il consiglio
     # su come leggerlo interrompeva la lettura. Resta dove la pagina ha poco da
     # dare - finche' le feste sono poche - e risponde a "e allora cosa faccio?".
     # Mai in due posizioni.
     if poche:
         corpo += blocco_ginetto(alto=True)
-    # Senza la riga delle porte: sopra ci sono gia' Ginetto e la riga "cerchi
-    # altro da fare in quei giorni?", e una terza domanda uguale confonde
-    # (Patrick, 23/09/2026). Le scorciatoie verso le altre date restano.
-    corpo += _altre_landing("/halloween.html", altre, porte=False)
 
     return {
         'path': "halloween.html", 'url': url,
+        # La data sotto il conteggio, e niente coda in fondo (24/09/2026).
+        'agg_in_cima': True,
         'titolo': titolo, 'descr': descr,
         'h1': f"Cosa fare a Halloween {anno} con i bambini",
         'sotto': sotto, 'crumb': "Halloween",
@@ -8338,17 +8387,12 @@ def spec_halloween_prov(prov, events, oggi, altre):
         sotto = (f"{len(finestra)} feste di Halloween già in programma"
                  + (f" in {comuni} comuni" if comuni > 1 else "")
                  if len(finestra) > 1 else "1 festa di Halloween in agenda, per ora")
-        apertura = (f"<p>Le feste di <strong>Halloween {anno}</strong> in provincia "
-                    f"di {nome}, dal 25 ottobre al 2 novembre: "
-                    + (f"<strong>{len(finestra)}</strong>, verificate una per una"
-                       if len(finestra) > 1 else "<strong>una</strong>, verificata")
-                    + ", con l'orario, il paese e chi le organizza.</p>")
-        # Poche feste: una frase in coda all'apertura, non un riquadro. Il
-        # riquadro "per ora in agenda sono 2" ripeteva il numero appena scritto
-        # (Patrick, 23/09/2026).
-        if poche:
-            apertura = (apertura[:-len("</p>")] + " Altre arriveranno nelle "
-                        "prossime settimane: aggiorniamo la pagina ogni giorno.</p>")
+        # Stessa apertura corta della generale (24/09/2026).
+        apertura = (f"<p>Quest'anno Halloween cade <strong>{GIORNI[notte.weekday()]} "
+                    f"31 ottobre</strong>. Qui trovi le feste per bambini già "
+                    f"confermate in provincia di {nome}. Verifichiamo i programmi "
+                    f"e aggiungiamo i nuovi eventi man mano che vengono "
+                    f"pubblicati.</p>")
         descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
                       + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
@@ -8370,7 +8414,8 @@ def spec_halloween_prov(prov, events, oggi, altre):
     corpo += _giorno_per_giorno(finestra, da, a, oggi,
                                 {(notte.month, notte.day): "La notte di Halloween",
                                  (11, 1): "Ognissanti"},
-                                chiave='halloween', quale="Halloween", eta=True)
+                                chiave='halloween', quale="Halloween", eta=True,
+                                dettagli=True)
     altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
     corpo += ('<p class="com-per">Halloween nelle altre province: '
               + ', '.join(f'<a href="{href_halloween_prov(c)}">'
@@ -8384,13 +8429,19 @@ def spec_halloween_prov(prov, events, oggi, altre):
               'programma di Halloween</a>.</p>')
     # Ginetto in coda al corpo finche' le feste sono poche: stessa regola
     # della generale, dopo le righe che dicono come leggere l'elenco.
+    # "E dopo Halloween?": le due porte della generale (24/09/2026).
+    corpo += ('<h2 id="dopo">E dopo Halloween?</h2>'
+              '<div class="lan-dopo">'
+              '<a href="/luoghi.html">Esplora i luoghi per famiglie</a>'
+              '<a href="/eventi.html">Scopri i prossimi eventi</a>'
+              '</div>')
     if poche:
         corpo += blocco_ginetto(alto=True)
-    corpo += _altre_landing(href, altre, porte=False)
 
     padre = ('/halloween.html', 'Halloween')
     return {
         'path': href.lstrip('/'), 'url': url,
+        'agg_in_cima': True,
         'titolo': titolo, 'descr': descr,
         'h1': f"Halloween {anno} con i bambini in provincia di {nome}",
         'sotto': sotto, 'crumb': nome,
@@ -8520,25 +8571,25 @@ def _tema_prima(ev, chiave):
     return sorted(ev, key=lambda e: not in_tema(e, chiave))
 
 
-def _lunghi_in_tema(finestra, chiave, oggi, quale):
+def _lunghi_in_tema(finestra, chiave, oggi, quale, **righe):
     """Le cose lunghe DELLA festa: una volta sola, prima dei giorni."""
     return _landing_sezione(
         "Per più giorni",
         f"Vanno avanti per tutto il periodo di {quale}: le trovi qui una volta sola",
-        [e for e in finestra if e_lungo(e) and in_tema(e, chiave)], oggi)
+        [e for e in finestra if e_lungo(e) and in_tema(e, chiave)], oggi, **righe)
 
 
-def _lunghi_fuori_tema(finestra, chiave, oggi, quale):
+def _lunghi_fuori_tema(finestra, chiave, oggi, quale, **righe):
     """Corsi e percorsi aperti anche in quei giorni: in fondo, e una volta."""
     return _landing_sezione(
         "Anche in quei giorni",
         f"Corsi, percorsi e attività che durano settimane: non sono feste di "
         f"{quale}, ma sono aperti anche in quei giorni",
-        [e for e in finestra if e_lungo(e) and not in_tema(e, chiave)], oggi)
+        [e for e in finestra if e_lungo(e) and not in_tema(e, chiave)], oggi, **righe)
 
 
 def _giorno_per_giorno(finestra, da, a, oggi, etichette=None, chiave=None,
-                       quale=None, eta=False):
+                       quale=None, eta=False, dettagli=False):
     """Un blocco per giorno. I giorni vuoti spariscono da soli
     (_landing_sezione torna '' senza righe), quindi si puo' ciclare su tutta
     la finestra senza controllare prima se c'e' qualcosa.
@@ -8550,7 +8601,8 @@ def _giorno_per_giorno(finestra, da, a, oggi, etichette=None, chiave=None,
     fuori = ''
     corti = [e for e in finestra if not (chiave and e_lungo(e))]
     if chiave:
-        fuori += _lunghi_in_tema(finestra, chiave, oggi, quale or '')
+        fuori += _lunghi_in_tema(finestra, chiave, oggi, quale or '',
+                                 eta=eta, dettagli=dettagli)
     for i in range((a - da).days + 1):
         g = da + datetime.timedelta(days=i)
         del_giorno = [e for e in corti if in_corso(e, g)]
@@ -8558,9 +8610,10 @@ def _giorno_per_giorno(finestra, da, a, oggi, etichette=None, chiave=None,
             f"{GIORNI[g.weekday()].capitalize()} {g.day} {MESI_LUNGHI[g.month - 1]}",
             etichette.get((g.month, g.day)),
             _tema_prima(del_giorno, chiave) if chiave else del_giorno, oggi,
-            eta=eta)
+            eta=eta, dettagli=dettagli)
     if chiave:
-        fuori += _lunghi_fuori_tema(finestra, chiave, oggi, quale or '')
+        fuori += _lunghi_fuori_tema(finestra, chiave, oggi, quale or '',
+                                    eta=eta, dettagli=dettagli)
     return fuori
 
 
