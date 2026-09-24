@@ -460,14 +460,56 @@ module.exports = async function luoghi(browser) {
   r.ok(oltre.length === 0,
     `ogni riga mostrata, copie sponsorizzate comprese, dice la distanza e sta nel raggio (${oltre.slice(0, 3).join(', ') || 'ok'})`);
 
-  // Il raggio filtra e non riordina: l'ordine alfabetico e' quello dichiarato
-  // in #come-ordiniamo. Se un giorno si ordinasse per vicinanza, va cambiato
-  // anche quel testo - e questa prova ricorda di farlo.
-  const rimasteL = await page.evaluate((sel) =>
-    Array.from(document.querySelectorAll(`${sel}:not([hidden])`)).map((x) => x.id), RIGA);
-  let kL = -1;
-  r.ok(rimasteL.every((id) => { const i = ordineL.indexOf(id); if (i <= kL) return false; kL = i; return true; }),
-    'il raggio filtra e non riordina: l\'elenco resta in ordine alfabetico');
+  // Con un punto scelto l'elenco va dal piu' vicino: i comuni per il loro
+  // luogo visibile piu' vicino, e dentro ogni comune i luoghi per distanza. Si
+  // legge la distanza dal testo della riga ("a 12 km"), cioe' da quello che
+  // vede chi legge: un ordine giusto nel codice e sbagliato in pagina sarebbe
+  // rosso lo stesso. Il testo e' arrotondato al km, quindi si confronta coi km
+  // interi e un pareggio non e' un errore.
+  const ordinePerDistanza = () => page.evaluate(() => {
+    const km = (r) => {
+      const t = r.querySelector('.ev-km');
+      const m = t && t.textContent.match(/a (\d+) km|meno di 1 km/);
+      return !m ? Infinity : (m[1] ? Number(m[1]) : 0);
+    };
+    const errori = [];
+    let prima = -1;
+    document.querySelectorAll('.lg-grp:not([hidden])').forEach((g) => {
+      const rr = Array.from(g.querySelectorAll(':scope > .lg-row[data-cat]:not([hidden])'));
+      const ds = rr.map(km);
+      const min = Math.min(...ds);
+      if (min < prima) errori.push(`${g.querySelector('h2').textContent} (${min} km) dopo un comune a ${prima} km`);
+      prima = min;
+      for (let i = 1; i < ds.length; i++) {
+        if (ds[i] < ds[i - 1]) errori.push(`${g.querySelector('h2').textContent}: ${ds[i]} km dopo ${ds[i - 1]} km`);
+      }
+    });
+    return errori;
+  });
+  const disordine = await ordinePerDistanza();
+  r.ok(disordine.length === 0,
+    `con un punto scelto l'elenco va dal piu' vicino, comuni e luoghi (${disordine.slice(0, 2).join('; ') || 'ok'})`);
+  // Cambiando punto l'ordine si rifa' da capo. E' il caso che la prima
+  // versione sbagliava: leggeva la visibilita' dei gruppi del giro prima, e
+  // passando da un comune all'altro restava ordinato il vecchio.
+  const altroComune = await page.locator('#ev-geo-list option').last().getAttribute('value');
+  await page.fill('#ev-geo-q', altroComune);
+  await page.waitForTimeout(350);
+  const disordine2 = await ordinePerDistanza();
+  r.ok(disordine2.length === 0,
+    `cambiando punto (${altroComune}) l'ordine si rifa' (${disordine2.slice(0, 2).join('; ') || 'ok'})`);
+  await page.fill('#ev-geo-q', comuneL);
+  await page.waitForTimeout(350);
+  // Il riquadro Sponsorizzati sta dov'e': l'ordine per distanza non lo scavalca
+  // e non gli da' niente. Si controlla che resti prima di tutti i gruppi.
+  r.ok(await page.evaluate(() => {
+    const v = document.getElementById('lg-vetrina');
+    const g = document.querySelector('.lg-grp');
+    return !v || !g || !!(v.compareDocumentPosition(g) & Node.DOCUMENT_POSITION_FOLLOWING);
+  }), 'il riquadro Sponsorizzati resta sopra l\'elenco');
+  r.ok((await page.locator('#come-ordiniamo').textContent()).includes('più vicino'),
+    'come-ordiniamo dichiara l\'ordine per distanza');
+
   r.ok(await page.evaluate(() => Array.from(document.querySelectorAll('.lg-grp'))
     .every((g) => g.hidden === !g.querySelector('.lg-row[data-cat]:not([hidden])'))),
   'un comune fuori raggio si porta via la sua intestazione');
@@ -496,6 +538,10 @@ module.exports = async function luoghi(browser) {
   await page.waitForTimeout(300);
   r.ok(await visibili(page) === tutteL && await page.locator('.ev-km').count() === 0,
     '"Azzera i filtri" toglie anche il raggio e le distanze');
+  const ordineDopo = await page.evaluate((sel) =>
+    Array.from(document.querySelectorAll(sel)).map((x) => x.id), RIGA);
+  r.ok(ordineDopo.join('|') === ordineL.join('|'),
+    'tolto il punto, l\'elenco torna nell\'ordine alfabetico del generatore');
 
   // Un link diretto a un posto fuori raggio lo apre, invece di scorrere nel
   // vuoto sotto un filtro che chi arriva non ha scelto.

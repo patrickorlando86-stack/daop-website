@@ -370,7 +370,13 @@
          sta oltre i 20 km, e la sola traccia del perche' e' una riga sopra. */
       function spegni() { if (centro) togliCentro(false); }
 
-      return { entro: entro, attivo: attivo, conta: conta, azzera: spegni };
+      /* La distanza di una voce dal centro, in km; undefined senza centro o
+         senza coordinate. Serve a chi ordina per vicinanza (luoghi.html): il
+         modulo misura e basta, l'ordine resta una decisione della pagina. */
+      function distanzaDi(voce) { return centro ? dist.get(voce) : undefined; }
+
+      return { entro: entro, attivo: attivo, conta: conta, azzera: spegni,
+               distanza: distanzaDi };
     }
   };
 })();
