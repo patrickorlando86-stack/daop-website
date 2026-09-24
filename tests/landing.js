@@ -541,10 +541,20 @@ module.exports = async function landing(browser) {
     r.ok(await page.locator('#lan-dove').count() === 0,
       'niente tendina provincia: la pagina E\' una provincia');
     const totS = await page.locator('.ev-wrap li[data-category]').count();
-    await page.fill('#lan-q', 'acqui');
+    // Il paese si pesca dalla pagina, non si scrive: con 'acqui' fisso la
+    // prova era rossa ogni volta che ad Acqui non c'era una sagra in
+    // programma (24/09/2026: 0/35), cioe' quando il sito era giusto.
+    // Il primo comune che non copre tutte le righe, se no il filtro non
+    // avrebbe niente da togliere.
+    const paese = await page.evaluate(() => {
+      const c = [...document.querySelectorAll('.ev-wrap li[data-category] .com-luogo')]
+        .map((l) => l.textContent.replace(/\s*\([A-Z]{2}\)\s*$/, '').trim());
+      return c.find((x) => c.filter((y) => y === x).length < c.length) || '';
+    });
+    await page.fill('#lan-q', paese);
     await page.waitForTimeout(300);
     const n = await visibili(page);
-    r.ok(n > 0 && n < totS, `ricerca per paese: ${n}/${totS}`);
+    r.ok(paese && n > 0 && n < totS, `ricerca per paese "${paese}": ${n}/${totS}`);
     // L'elenco delle feste che tornano ogni anno non ha provincia ne'
     // categoria: filtrando non deve sparire.
     const anni = await page.locator('.com-anni li').count();
