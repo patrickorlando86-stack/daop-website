@@ -1926,8 +1926,11 @@ def render(elenco, oggi):
     # tagliare il titolo.
     titolo = f"Dove andare con i bambini in {zona}"
     descr = (f"{n} luoghi per famiglie in {comuni} comuni: parchi, fattorie didattiche, "
-             "musei, piscine, sport e spazi al chiuso. Si filtra per provincia, tipo, "
-             "età e se piove.")
+             "musei, piscine, sport e spazi al chiuso. Si filtra per provincia, comune, "
+             "tipo ed età.")
+    # Diceva "e se piove": quel filtro e' stato tolto il 13/08/2026, e la
+    # descrizione e' la riga che Google mostra - prometteva un comando che la
+    # pagina non ha (corretto il 24/09/2026).
 
     # Corta apposta. Il conteggio e la zona stanno gia' due righe sopra,
     # nell'occhiello, e i filtri si vedono subito sotto: elencarli a parole era
