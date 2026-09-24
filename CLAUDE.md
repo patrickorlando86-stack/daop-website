@@ -5344,7 +5344,7 @@ per come provarlo in locale.
 metrica perché è un numero, ma sommare i chilometri non vuol dire niente — serve
 sapere *quante volte* è stato scelto il gradino 30, cioè raggruppare per valore.
 
-#### Dal 24/09/2026 anche su `luoghi.html`, e la mappa aspetta
+#### Dal 24/09/2026 anche su `luoghi.html`, e poi la mappa
 
 **Il perché viene prima del come.** La proposta di partenza era una mappa dei
 luoghi. Le ricerche dicono che sul telefono **l'elenco resta la vista
@@ -5352,9 +5352,9 @@ principale** e la mappa è un'opzione in più (NN/g, *Maps and Location Finders
 on Mobile Devices*): mostra più informazioni nello stesso spazio, si sceglie
 prima, e la mappa dentro una pagina che scorre ruba il gesto a chi scorre. La
 domanda «cosa c'è vicino a dove vado?» ha una risposta che è ancora un
-elenco, ed era già scritta: questo modulo. **Quindi prima questo, e la mappa
-solo se servirà ancora.** Non è nata, e chi la riprende parte dalle note più
-sotto.
+elenco, ed era già scritta: questo modulo. **Quindi prima questo, e poi la
+mappa come opzione**: è arrivata lo stesso giorno, vedi «La mappa di
+`luoghi.html`» qui sotto.
 
 Cosa si è fatto, e le decisioni che non si ricavano dal diff:
 
@@ -5417,14 +5417,69 @@ diretto che tolgono il raggio. Verificate rosse rimettendo tre difetti
 uno alla volta: gradino che conta sul totale («59 promessi, 4 mostrati»),
 «Azzera» senza raggio, ancora senza raggio.
 
-**Se un giorno si fa la mappa**, le cose già verificate il 24/09/2026:
-OpenFreeMap dà le mappe di sfondo senza limiti, chiave né cookie, anche per uso
-commerciale, col solo credito a OpenStreetMap; MapLibre 5 (~280 KB compressi)
-si ospita in `assets/` e si carica **solo al tocco**; lo spostamento a due dita
-(`cooperativeGestures`) è quello che evita la trappola dello scorrimento;
-l'IP di chi guarda arriva comunque al server delle mappe (la sentenza di Monaco
-del 2022 sui Google Fonts), quindi una riga nella privacy policy. E la mappa
-segue gli stessi filtri, con i segnaposto uguali per chi paga e chi no.
+#### La mappa di `luoghi.html`: una vista dell'elenco, aperta a richiesta
+
+Fatta il 24/09/2026, chiesta da Patrick dopo il «vicino a me». Sotto la barra
+c'è l'interruttore **Elenco / Mappa**; la mappa parte chiusa e si apre sopra
+l'elenco, che resta lì sotto. La logica sta in `assets/js/daop-mappa.js`, la
+libreria in `assets/vendor/maplibre-gl-5.24.0/`.
+
+Le decisioni che non si ricavano dal diff:
+
+- **L'elenco resta la vista principale**, e non per prudenza: NN/g (*Maps and
+  Location Finders on Mobile Devices*) misura che sul telefono un elenco fa
+  scegliere prima e meglio, e che la mappa va offerta come opzione. Qui il 90%
+  del traffico è telefono.
+- **È una vista, non una seconda copia dei dati.** I segnaposto sono le righe
+  visibili, lette dal DOM (`data-lat`/`data-lon`, gli stessi di «vicino a
+  me»): filtri, raggio e ricerca valgono da soli, e toccare un segnaposto apre
+  la riga vera. Le copie del riquadro Sponsorizzati restano fuori.
+- **Si carica solo al tocco.** La libreria (~1 MB, ~280 KB compressi) e le
+  mappe di sfondo non partono finché nessuno tocca «Mappa»: `luoghi.html` pesa
+  già 2,1 MB, e chi non la usa non paga niente.
+- **MapLibre sta su daop.it, non su una CDN**: una CDN sarebbe un altro server
+  che riceve l'IP di chi legge. È la stessa scelta dei caratteri, già scritta
+  nella cookie policy. Tolto il commento `sourceMappingURL`, che chiedeva un
+  file che non c'è.
+- **Le mappe di sfondo sono di OpenFreeMap** (stile `positron`, chiaro, così i
+  colori delle categorie si vedono): senza chiave, senza cookie, **senza tetto
+  mensile**, uso commerciale ammesso col credito a OpenStreetMap, che MapLibre
+  stampa da sé. Un tetto mensile sarebbe il guasto del bucket da 5 GB: si
+  spegne da solo a fine mese. Riceve comunque l'IP di chi apre la mappa, e per
+  questo c'è una voce nella cookie policy (sezione 3). **Non verificato da
+  qui**: l'ambiente di sviluppo non raggiunge `tiles.openfreemap.org`, quindi
+  le mappe di sfondo vere si vedono solo online.
+- **Si sposta con due dita** (`cooperativeGestures`): con un dito si continua
+  a scorrere la pagina. Una mappa in una pagina che scorre, senza, ruba il
+  gesto — è il primo problema che le ricerche trovano sulle mappe su telefono.
+- **I segnaposto sono uguali per chi paga e chi no**: la mappa è un altro modo
+  di mettere in fila i risultati, e la posizione qui non si vende. Il colore è
+  quello della categoria (`--cat-color` della riga).
+- **I gruppi si separano toccandoli**; se sono posti nello stesso punto, che
+  ingrandendo non si separano, il tocco li elenca in un fumetto (al massimo 8).
+  Il fumetto si costruisce con `textContent`: i nomi vengono da un foglio
+  compilato a mano.
+- **Il numero sui gruppi usa un carattere che lo stile ha davvero**: il modulo
+  lo legge dai livelli dello stile invece di scriverne uno a mano. Se lo stile
+  non ne ha, niente numero, e il cerchio più grande dice lo stesso.
+- **Dal fumetto la riga si apre sotto la barra appiccicosa**: `block:'start'`
+  più lo `scroll-margin-top` delle righe (lo stesso tetto delle ancore dei
+  comuni). Centrata, una riga aperta finiva col nome dietro la barra.
+- **Senza WebGL** MapLibre non parte, e la pagina lo scrive: l'elenco resta.
+- **Il numero da leggere è `apri_mappa`** (in `daop-track.js`, una volta per
+  pagina, con `destination_area` = `luoghi`), contro i `page_view` di
+  `/luoghi.html` e con la regola dei 2,5 per utente. **Sugli eventi la mappa
+  si fa solo se questo numero dice che serve**: sull'agenda il «quando» conta
+  più del «dove», e «vicino a me» risponde già.
+
+`tests/luoghi.js` («la mappa») sostituisce le mappe di sfondo con uno stile
+finto e fa girare la libreria vera. Difende, senza conteggi: nessuna richiesta
+prima del tocco, libreria dal sito e non da fuori, un segnaposto per ogni riga
+visibile (anche dopo un filtro), due dita, fumetto giusto, riga aperta sotto la
+barra, `daop:mappa` una volta sola. Verificate rosse con quattro difetti rimessi
+(libreria caricata subito, filtri ignorati, riga centrata, un dito). Se la
+mappa non si disegna (niente WebGL nel runner), le prove che la vogliono
+disegnata si saltano con una nota, invece di diventare rosse.
 
 ### I gruppi dell'agenda sono per data di INIZIO, e il calendario chiede altro
 

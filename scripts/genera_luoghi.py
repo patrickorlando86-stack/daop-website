@@ -1195,8 +1195,28 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
       a -31px), cioe' coperta. I due numeri sono i tetti misurati piu' un dito
       d'aria, non stime. */
 html{scroll-behavior:auto}
-.lg-ordine,.lg-grp-h h2{scroll-margin-top:236px}
-@media(min-width:900px){.lg-ordine,.lg-grp-h h2{scroll-margin-top:148px}}
+.lg-ordine,.lg-grp-h h2,.lg-grp>.lg-row{scroll-margin-top:236px}
+@media(min-width:900px){.lg-ordine,.lg-grp-h h2,.lg-grp>.lg-row{scroll-margin-top:148px}}
+/* La mappa (24/09/2026). L'interruttore nasce `hidden` e lo accende il JS:
+   senza, sarebbe un bottone che non fa niente. [hidden] va ribadito perche'
+   .ev-viewtoggle e' inline-flex e batterebbe il display:none del browser -
+   e' l'inciampo gia' pagato con .ev-chk. */
+.lg-vista{margin-left:0}
+.lg-vista[hidden]{display:none}
+.lg-mappa{position:relative;margin:12px 0 6px;border:1px solid rgba(45,74,92,0.12);
+  border-radius:16px;overflow:hidden;background:#eef2f4}
+.dm-tela{height:min(60vh,440px)}
+@media(min-width:900px){.dm-tela{height:500px}}
+.dm-avviso{margin:0;padding:10px 14px;font-size:0.82rem;color:var(--text-mid);background:white}
+.dm-avviso:empty{display:none}
+.dm-pop{font-family:'DM Sans',sans-serif;max-height:260px;overflow:auto}
+.dm-voce{display:block;padding:7px 2px;border-bottom:1px solid rgba(45,74,92,0.08);
+  color:var(--navy);text-decoration:none}
+.dm-voce:last-child{border-bottom:0}
+.dm-voce b{display:block;font-size:0.9rem;line-height:1.3}
+.dm-voce span{display:block;font-size:0.76rem;color:var(--text-light);margin-top:2px}
+.dm-voce:hover b{text-decoration:underline}
+.dm-altri{margin:6px 2px 0;font-size:0.76rem;color:var(--text-light)}
 
 .lg-ordine{margin:30px 0 0;padding:16px 18px;background:var(--cream);border-radius:14px;
   font-size:0.85rem;line-height:1.65;color:var(--text-mid)}
@@ -1296,6 +1316,46 @@ LUOGHI_JS = r"""<script>
     alCambio: function () { applica(); }
   }) : null;
 
+  // La mappa: una VISTA dell'elenco, non una seconda copia. La logica sta in
+  // /assets/js/daop-mappa.js; qui solo i tre innesti che il modulo non puo'
+  // indovinare - quali righe si vedono, cosa scrivere nel fumetto, come si
+  // apre una riga. Le copie del riquadro Sponsorizzati restano fuori: sulla
+  // mappa ogni posto e' un segnaposto solo, uguale per chi paga e chi no.
+  var nodoMappa = document.getElementById('lg-mappa');
+  var vista = document.getElementById('lg-vista');
+  var mappa = (window.daopMappa && nodoMappa && vista) ? window.daopMappa.avvia({
+    nodo: nodoMappa,
+    tipo: 'luoghi',
+    voci: function () {
+      return [].filter.call(document.querySelectorAll('.lg-grp > .lg-row[data-cat]'),
+        function (r) { return !r.hidden; });
+    },
+    scheda: function (r) {
+      var n = r.querySelector('.lg-nome'), m = r.querySelector('.lg-meta');
+      return { titolo: n ? n.textContent : '', sotto: m ? m.textContent : '' };
+    },
+    vai: function (r) {
+      r.open = true;
+      history.replaceState(null, '', location.pathname + location.search + '#' + r.id);
+      // 'start' e non 'center': una riga aperta e' alta, e centrata finiva col
+      // nome sotto la barra appiccicosa. Lo scroll-margin della riga (stesso
+      // tetto delle ancore dei comuni) la ferma subito sotto.
+      r.scrollIntoView({ block: 'start' });
+    }
+  }) : null;
+  if (mappa) {
+    var bElenco = document.getElementById('lg-v-elenco');
+    var bMappa = document.getElementById('lg-v-mappa');
+    var scegli = function (conMappa) {
+      bElenco.setAttribute('aria-pressed', String(!conMappa));
+      bMappa.setAttribute('aria-pressed', String(conMappa));
+      if (conMappa) mappa.apri(); else mappa.chiudi();
+    };
+    bElenco.addEventListener('click', function () { scegli(false); });
+    bMappa.addEventListener('click', function () { scegli(true); });
+    vista.hidden = false;
+  }
+
   function applica() {
     var t = q ? q.value.trim().toLowerCase() : '';
     var f = {};
@@ -1349,6 +1409,7 @@ LUOGHI_JS = r"""<script>
       ? visti + (visti === 1 ? ' luogo' : ' luoghi') + ' con questi filtri'
       : '';
     if (vuoto) vuoto.hidden = visti !== 0;
+    if (mappa) mappa.aggiorna();
   }
 
   // Con un punto di partenza l'elenco va dal piu' vicino al piu' lontano: i
@@ -1829,7 +1890,9 @@ def filtri(elenco):
     <div class="ev-viewbar">
       <p class="lg-count" id="lg-count" role="status" aria-live="polite"></p>
       <button type="button" class="lg-reset" id="lg-reset" style="margin-left:auto">Azzera i filtri</button>
-    </div>"""
+      <div class="ev-viewtoggle lg-vista" id="lg-vista" role="group" aria-label="Come vedere i luoghi" hidden><button type="button" id="lg-v-elenco" aria-pressed="true">Elenco</button><button type="button" id="lg-v-mappa" aria-pressed="false">Mappa</button></div>
+    </div>
+    <div class="lg-mappa" id="lg-mappa" hidden></div>"""
 
 
 def _per_comune(elenco):
@@ -2210,6 +2273,9 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
      bisogno di window.daopVicino subito, e uno script differito girerebbe
      dopo. -->
 <script src="/assets/js/daop-vicino.js"></script>
+<!-- La mappa: questo file e' piccolo; la libreria vera (~280 KB compressi) e
+     le mappe di sfondo le carica lui, e solo quando qualcuno tocca «Mappa». -->
+<script src="/assets/js/daop-mappa.js"></script>
 {LUOGHI_JS}
 {jsonld(elenco)}
 </body>
