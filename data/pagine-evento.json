@@ -161,7 +161,7 @@
   "prov": "AT",
   "riga": 173,
   "slug": "a-calosso-museo-e-dintorni-agosto",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "a-calosso-museo-e-dintorni-fiera-del-rapule": {
   "anchor": "ev-2026-10-17-a-calosso-museo-e-dintorni-fiera-del-rapule",
@@ -242,7 +242,7 @@
   "prov": "AT",
   "riga": 56,
   "slug": "a-calosso-museo-e-dintorni-settembre-i",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "a-calosso-museo-e-dintorni-settembre-ii": {
   "anchor": "ev-2026-09-19-a-calosso-museo-e-dintorni-settembre-ii",
@@ -269,7 +269,7 @@
   "prov": "AT",
   "riga": 21,
   "slug": "a-calosso-museo-e-dintorni-settembre-ii",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "a-piccoli-passi-inaugurazione-forte-di-vinadio": {
   "adatto_famiglie": "Si",
@@ -831,7 +831,7 @@
   "riga": 185,
   "ritirata": "2026-09-10",
   "slug": "allattare-come-e-perche-beatrice-botto-ostetrica-nizza-monferrato",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "allegro-con-moto-incontro-1-carezza-racconigi": {
   "anchor": "ev-2026-10-21-allegro-con-moto-incontro-1-carezza",
@@ -1195,7 +1195,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 126,
+  "riga": 124,
   "slug": "antica-fiera-della-madonna-del-rosario-pro-loco-vi-visone",
   "updated": "2026-09-24"
  },
@@ -1226,7 +1226,7 @@
   "riga": 210,
   "ritirata": "2026-09-04",
   "slug": "apericena-di-comunita-cooperativa-sociale-emmanuel-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "aperitivo-di-santa-croce-cassano-spinola": {
   "anchor": "ev-2026-09-20-aperitivo-di-santa-croce",
@@ -1399,7 +1399,7 @@
   "prov": "AT",
   "slug": "apertura-stand-gastronomico-e-i-controcorrente-pro-rocchetta-tanaro",
   "spostata": "apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "apertura-stand-gastronomico-e-luigi-gallia-pro-loc-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -1427,7 +1427,7 @@
   "prov": "AT",
   "slug": "apertura-stand-gastronomico-e-luigi-gallia-pro-loc-rocchetta-tanaro",
   "spostata": "apertura-stand-gastronomico-con-luigi-gallia-pro-l-rocchetta-tanaro",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "apertura-stand-gastronomico-e-shary-band-pro-loco-rocchetta-tanaro": {
   "adatto_famiglie": "Si",
@@ -1455,7 +1455,7 @@
   "prov": "AT",
   "slug": "apertura-stand-gastronomico-e-shary-band-pro-loco-rocchetta-tanaro",
   "spostata": "apertura-stand-gastronomico-con-shary-band-pro-loc-rocchetta-tanaro",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "api-e-biodiversita-laboratorio-per-bambini-associa-monteu-roero": {
   "anchor": "ev-2026-09-06-api-e-biodiversita-laboratorio-per-bambini-associa",
@@ -1509,7 +1509,7 @@
   "prov": "CN",
   "riga": 108,
   "slug": "apiario-porte-aperte-vita-da-api-parco-fluviale-ge-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "arte-terapia-e-nutrizione-il-sapore-delle-emozioni-confreria": {
   "anchor": "ev-2026-09-03-arte-terapia-e-nutrizione-il-sapore-delle-emozioni",
@@ -1562,7 +1562,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 157,
+  "riga": 155,
   "slug": "arti-e-mercanti-asti",
   "updated": "2026-09-24"
  },
@@ -1648,7 +1648,7 @@
   "riga": 109,
   "slug": "aspettando-la-fiera-patate-di-entracque",
   "spostata": "aspettando-la-fiera-della-patata-entracque",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "ass-sarina-burattini-e-serata-gastronomica-con-dj-villaromagnano": {
   "adatto_famiglie": "Si",
@@ -1732,7 +1732,7 @@
   "ora": "8:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 131,
+  "riga": 129,
   "slug": "asti-e-la-mia-citta-giornata-nazionale-del-veicolo",
   "updated": "2026-09-24"
  },
@@ -1874,6 +1874,7 @@
   "prov": "AT",
   "riga": 92,
   "slug": "benedizione-dei-gonfaloni-dei-borghi-palio-degli-a-cocconato",
+  "spostata": "corteo-storico-dei-borghi-palio-degli-asini-cocconato",
   "updated": "2026-09-24"
  },
  "benedizione-drappi-e-mercatino-palio-degli-asini-cocconato": {
@@ -1931,7 +1932,7 @@
   "riga": 176,
   "slug": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-alba",
   "spostata": "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "benvenuto-ufficiale-alla-leva-pro-loco-ceresole-al-ceresole-d-alba": {
   "anchor": "ev-2026-09-06-benvenuto-ufficiale-alla-leva-2008-pro-loco-cereso",
@@ -1987,7 +1988,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "bestiario-d-inchiostro-museo-civico-della-stampa-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "biblicando-chiesa-ovada": {
   "anchor": "ev-2026-09-20-biblicando-chiesa-ovada",
@@ -2039,7 +2040,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 112,
+  "riga": 110,
   "slug": "biblio-storie-letture-a-cura-di-abl-cuneo",
   "updated": "2026-09-24"
  },
@@ -2485,7 +2486,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 100,
+  "riga": 99,
   "slug": "camminiamo-insieme-per-la-salute-comune-di-peverag-peveragno",
   "updated": "2026-09-24"
  },
@@ -2680,7 +2681,7 @@
   "ora": "10:00-11:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 122,
+  "riga": 120,
   "slug": "casalnoceto-kids-move-comune-di-casalnoceto",
   "updated": "2026-09-24"
  },
@@ -3322,7 +3323,7 @@
   "prov": "CN",
   "riga": 146,
   "slug": "cerchiamoci-laboratorio-psicomotorio-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "ciao-ciao-estate-sorprese-per-tutti-pro-loco-criss-crissolo": {
   "adatto_famiglie": "Si",
@@ -3433,7 +3434,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "slug": "cinema-all-aperto-bad-guys-troppo-cattivi-oratorio-nizza-monferrato",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "cinema-in-piazzetta-moulin-rouge-pro-loco-sanse-san-sebastiano-curone": {
   "adatto_famiglie": "Da verificare",
@@ -3487,7 +3488,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 115,
+  "riga": 113,
   "slug": "cioccolato-nel-monferrato-comune-di-altavilla-monf-altavilla-monferrato",
   "updated": "2026-09-24"
  },
@@ -3517,7 +3518,7 @@
   "prov": "AT",
   "riga": 109,
   "slug": "cocco-wine-cocconato",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "coccoliamo-ci-carezza-racconigi": {
   "anchor": "ev-2026-09-29-coccoliamo-ci-carezza",
@@ -3573,7 +3574,7 @@
   "prov": "AT",
   "riga": 79,
   "slug": "cocconato-in-festa",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "color-disco-party-pro-loco-oviglio": {
   "anchor": "ev-2026-08-29-color-disco-party-pro-loco-oviglio",
@@ -3716,7 +3717,7 @@
   "riga": 218,
   "slug": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-alba",
   "spostata": "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "consegna-dei-libri-alle-famiglie-progetto-che-stor-ceresole-d-alba": {
   "anchor": "ev-2026-09-06-consegna-dei-libri-alle-famiglie-progetto-che-stor",
@@ -3909,7 +3910,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 94,
+  "riga": 93,
   "slug": "corsa-degli-asini-palio-degli-asini-cocconato",
   "updated": "2026-09-24"
  },
@@ -3938,7 +3939,7 @@
   "prov": "CN",
   "riga": 81,
   "slug": "corsi-di-musica-dolce-post-parto-deborah-dalmasso-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "corsi-di-musica-gioco-inglese-deborah-dalmasso-cuneo": {
   "anchor": "ev-2026-09-14-corsi-di-musica-gioco-inglese-deborah-dalmasso",
@@ -3965,7 +3966,7 @@
   "prov": "CN",
   "riga": 80,
   "slug": "corsi-di-musica-gioco-inglese-deborah-dalmasso-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "corso-di-teatro-per-ragazzi-fare-teatro-santibriga-caraglio": {
   "anchor": "ev-2026-09-01-corso-di-teatro-per-ragazzi-fare-teatro-2026-2027",
@@ -4103,7 +4104,7 @@
   "ora": "14:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 93,
+  "riga": 92,
   "slug": "corteo-storico-dei-borghi-palio-degli-asini-cocconato",
   "updated": "2026-09-24"
  },
@@ -4133,7 +4134,7 @@
   "prov": "CN",
   "riga": 290,
   "slug": "creazione-giochi-di-societa-chiosco-parri-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "cresco-con-te-bibliopride-saluzzo": {
   "anchor": "ev-2026-10-04-cresco-con-te-bibliopride-2026",
@@ -4159,7 +4160,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 139,
+  "riga": 137,
   "slug": "cresco-con-te-bibliopride-saluzzo",
   "updated": "2026-09-24"
  },
@@ -4273,7 +4274,7 @@
   "prov": "CN",
   "riga": 199,
   "slug": "cuneo-vive-lo-sport-coldiretti-cuneo-campagna-amic",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "custodi-della-natura-cinque-sensi-per-sentire-la-n-fossano": {
   "anchor": "ev-2026-09-05-custodi-della-natura-cinque-sensi-per-sentire-la-n",
@@ -4326,7 +4327,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 148,
+  "riga": 146,
   "slug": "delizie-d-autunno-pro-loco-di-silvano-d-orba",
   "updated": "2026-09-24"
  },
@@ -4436,7 +4437,7 @@
   "ora": "10:00-20:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 155,
+  "riga": 153,
   "slug": "dolci-terre-speciale-cioccolato-edizione-novi-ligure",
   "updated": "2026-09-24"
  },
@@ -4464,7 +4465,7 @@
   "ora": "vari",
   "prezzo": "Aperitivo 10 euro",
   "prov": "AT",
-  "riga": 163,
+  "riga": 161,
   "slug": "donazioni-ricerca-per-aitc-cantarana",
   "updated": "2026-09-24"
  },
@@ -4494,7 +4495,7 @@
   "prov": "CN",
   "riga": 191,
   "slug": "doppio-laboratorio-di-musica-e-argilla-chiosco-par-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "edutainment-imparare-divertendosi-play-land-serravalle-scrivia": {
   "anchor": "ev-2026-08-22-edutainment-imparare-divertendosi-play-land",
@@ -4658,7 +4659,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "esposizione-internazionale-canina-cacib-mondovicin",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "espressione-in-gioco-fascia-2-6-anni-carezza-racconigi": {
   "anchor": "ev-2026-09-29-espressione-in-gioco-fascia-2-6-anni-carezza",
@@ -4850,7 +4851,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 147,
+  "riga": 145,
   "slug": "fabbrica-curone-nel-tempo-comune-di-fabbrica-curon",
   "updated": "2026-09-24"
  },
@@ -5075,7 +5076,7 @@
   "prezzo": "Ingresso adulto 17,00€ / Ingresso bambini 10,00€ / Bagno serale 5,00€",
   "prov": "CN",
   "slug": "ferragosto-family-eco-park-evento",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "ferragosto-senza-frontiere-comune-di-limone-piemon-limone-piemonte": {
   "adatto_famiglie": "Si",
@@ -5434,7 +5435,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 142,
+  "riga": 140,
   "slug": "festa-dei-nonni-citta-di-mondovi",
   "updated": "2026-09-24"
  },
@@ -5522,7 +5523,7 @@
   "ritirata": "2026-09-11",
   "slug": "festa-del-fungo-pro-loco-ciglione",
   "spostata": "festa-del-fungo-pro-loco-ciglione-ponzone",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "festa-del-fungo-pro-loco-ciglione-ponzone": {
   "anchor": "ev-2026-09-11-7a-festa-del-fungo-pro-loco-ciglione",
@@ -5771,7 +5772,7 @@
   "riga": 33,
   "slug": "festa-dell-uva-e-del-vino-pro-loco-ciglione",
   "spostata": "festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "festa-dell-uva-e-del-vino-pro-loco-ciglione-ponzone": {
   "adatto_famiglie": "Si",
@@ -5911,7 +5912,7 @@
   "prov": "CN",
   "riga": 53,
   "slug": "festa-della-citta-di-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "festa-della-madonna-del-rosario-e-festa-della-vend-cortiglione": {
   "anchor": "ev-2026-10-04-festa-della-madonna-del-rosario-e-festa-della-vend",
@@ -5937,7 +5938,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 162,
+  "riga": 160,
   "slug": "festa-della-madonna-del-rosario-e-festa-della-vend-cortiglione",
   "updated": "2026-09-24"
  },
@@ -5992,7 +5993,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 116,
+  "riga": 114,
   "slug": "festa-della-montagna-fabbrica-curone",
   "updated": "2026-09-24"
  },
@@ -6020,7 +6021,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 120,
+  "riga": 118,
   "slug": "festa-della-montagna-piancastagna-ponzone",
   "updated": "2026-09-24"
  },
@@ -6350,7 +6351,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 129,
+  "riga": 127,
   "slug": "festa-dello-sport-nuova-polisportiva-calossese-calosso",
   "updated": "2026-09-24"
  },
@@ -7632,7 +7633,7 @@
   "prov": "CN",
   "riga": 43,
   "slug": "festival-illustrada-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "festival-nuova-umanita-san-salvatore-monferrato": {
   "anchor": "ev-2026-08-29-festival-nuova-umanita",
@@ -8434,7 +8435,7 @@
   "ora": "10:30-13:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 95,
+  "riga": 94,
   "slug": "giardino-d-autunno-montagne-del-mare-valdieri",
   "updated": "2026-09-24"
  },
@@ -8491,7 +8492,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "giochi-d-acqua-chiosco-parri-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "giochi-di-fine-estate-movimento-giovanile-centallo": {
   "anchor": "ev-2026-09-26-giochi-di-fine-estate-movimento-giovanile",
@@ -8686,7 +8687,7 @@
   "prov": "CN",
   "riga": 125,
   "slug": "giochiamo-con-la-scienza-i-semi-viaggiatori-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "giochiamo-con-la-scienza-lago-o-isola-mondovi": {
   "anchor": "ev-2026-10-17-giochiamo-con-la-scienza-lago-o-isola",
@@ -9439,7 +9440,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 136,
+  "riga": 134,
   "slug": "il-guardiano-del-borgo-la-fabbrica-dei-suoni-costigliole-saluzzo",
   "updated": "2026-09-24"
  },
@@ -9604,7 +9605,7 @@
   "ora": "18:30-22:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 99,
+  "riga": 98,
   "slug": "il-richiamo-del-bosco-la-notte-del-bramito-montagn-evento",
   "updated": "2026-09-24"
  },
@@ -9688,7 +9689,7 @@
   "ora": "17:00-18:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 161,
+  "riga": 159,
   "slug": "in-scena-presentazione-del-corso-laboratorio-per-b-canelli",
   "updated": "2026-09-24"
  },
@@ -9744,7 +9745,7 @@
   "ora": "14:00-17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 103,
+  "riga": 102,
   "slug": "inaugurazione-alpaca-lounge-bioparco-cinofilo-del-sarezzano",
   "updated": "2026-09-24"
  },
@@ -9826,7 +9827,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 135,
+  "riga": 133,
   "slug": "intrecci-di-famiglie-rete-mamma-cherasco",
   "updated": "2026-09-24"
  },
@@ -9882,7 +9883,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 123,
+  "riga": 121,
   "slug": "kids-move-final-fest-comune-di-casalnoceto",
   "updated": "2026-09-24"
  },
@@ -9937,7 +9938,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 132,
+  "riga": 130,
   "slug": "l-agora-delle-farfalle-parco-fluviale-gesso-e-stur-cuneo",
   "updated": "2026-09-24"
  },
@@ -10022,7 +10023,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "l-orco-nel-fagiolo-il-burattinificio-di-mammadraga-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "la-contea-del-mondo-magico-di-harry-e-gandalf-pro-verzuolo": {
   "anchor": "ev-2026-09-19-la-contea-del-mondo-magico-di-harry-e-gandalf-pro",
@@ -10102,7 +10103,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 124,
+  "riga": 122,
   "slug": "la-giostrina-dei-bambini-giostra-del-gusto-tagliolo-monferrato",
   "updated": "2026-09-24"
  },
@@ -10130,7 +10131,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 152,
+  "riga": 150,
   "slug": "la-grande-festa-del-cristo-alessandria",
   "updated": "2026-09-24"
  },
@@ -10577,7 +10578,7 @@
   "prov": "CN",
   "riga": 170,
   "slug": "la-via-del-gigante-d-acqua-parco-fluviale-gesso-e-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "laboratori-di-giocoleria-circobus-associazione-fum-dronero": {
   "anchor": "ev-2026-08-29-laboratori-di-giocoleria-circobus-associazione-fum",
@@ -10714,7 +10715,7 @@
   "prov": "CN",
   "riga": 184,
   "slug": "laboratorio-creativo-con-alice-piaggio-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "laboratorio-creativo-di-feltro-ecomuseo-della-past-castellar": {
   "anchor": "ev-2026-09-13-laboratorio-creativo-di-feltro-ecomuseo-della-past",
@@ -10826,7 +10827,7 @@
   "prov": "CN",
   "riga": 0,
   "slug": "laboratorio-di-carta-riciclata-il-melograno-societ-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "laboratorio-di-caseificazione-con-emotionalp-castellar": {
   "anchor": "ev-2026-09-13-laboratorio-di-caseificazione-con-emotionalp",
@@ -11383,7 +11384,7 @@
   "ora": "15:00-16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 133,
+  "riga": 131,
   "slug": "magie-d-autunno-parco-fluviale-gesso-e-stura-fossano",
   "updated": "2026-09-24"
  },
@@ -11519,7 +11520,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 151,
+  "riga": 149,
   "slug": "meet-greet-con-bellafaccia-roblox-e-minecraft-alessandria",
   "updated": "2026-09-24"
  },
@@ -11605,7 +11606,7 @@
   "prov": "AT",
   "riga": 159,
   "slug": "mercatino-medievale-palio-degli-asini-cocconato",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "messa-solenne-e-giochi-popolari-pro-loco-sant-alba-sant-albano-stura": {
   "adatto_famiglie": "Si",
@@ -11660,7 +11661,7 @@
   "ora": "17:30",
   "prezzo": "10 euro",
   "prov": "CN",
-  "riga": 134,
+  "riga": 132,
   "slug": "miele-castelmagno-monterosso-grana",
   "updated": "2026-09-24"
  },
@@ -11689,7 +11690,7 @@
   "prov": "CN",
   "riga": 140,
   "slug": "mio-tuo-nostro-pandemonium-teatro-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "mirabilia-a-carru": {
   "anchor": "ev-2026-09-18-mirabilia-a-carru",
@@ -11741,7 +11742,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 141,
+  "riga": 139,
   "slug": "missione-natura-una-mattina-all-oasi-parco-fluvial-sant-albano-stura",
   "updated": "2026-09-24"
  },
@@ -11850,7 +11851,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 125,
+  "riga": 123,
   "slug": "mostra-della-zucca-e-degli-ortaggi-locali-castellazzo-bormida",
   "updated": "2026-09-24"
  },
@@ -12123,7 +12124,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 159,
+  "riga": 157,
   "slug": "nonni-nipoti-una-mattinata-dedicata-biblioteca-ast-asti",
   "updated": "2026-09-24"
  },
@@ -12206,7 +12207,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 150,
+  "riga": 148,
   "slug": "oltregiogo-days-novi-ligure",
   "updated": "2026-09-24"
  },
@@ -12317,7 +12318,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 105,
+  "riga": 104,
   "slug": "open-day-musici-e-sbandieratori-borgo-don-bosco-asti",
   "updated": "2026-09-24"
  },
@@ -12374,7 +12375,7 @@
   "prov": "CN",
   "riga": 177,
   "slug": "openday-inglese-con-teacher-noemi-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "orchestra-spettacolo-luigi-gallia-pro-loco-cunico": {
   "adatto_famiglie": "Si",
@@ -12511,7 +12512,7 @@
   "prov": "CN",
   "riga": 110,
   "slug": "otto-panzer-show-giovanni-risola-mondovi",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "ovada-in-festa-pro-loco-ovada-e-del-monferrato-ova": {
   "anchor": "ev-2026-08-29-ovada-in-festa-pro-loco-ovada-e-del-monferrato-ova",
@@ -12565,7 +12566,7 @@
   "ora": "vari",
   "prezzo": "10 euro a giro",
   "prov": "AL",
-  "riga": 119,
+  "riga": 117,
   "slug": "paderna-taxi-rally",
   "updated": "2026-09-24"
  },
@@ -12925,7 +12926,7 @@
   "ora": "9:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 121,
+  "riga": 119,
   "slug": "passeggiata-patrimoniale-alla-scoperta-della-citta-alessandria",
   "updated": "2026-09-24"
  },
@@ -12955,7 +12956,7 @@
   "prov": "CN",
   "riga": 72,
   "slug": "passeggiate-nella-natura-per-bambini-e-famiglie-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "passi-nel-kuore-di-valdieri": {
   "anchor": "ev-2026-08-29-passi-nel-kuore-di-valdieri",
@@ -13123,7 +13124,7 @@
   "prov": "CN",
   "riga": 34,
   "slug": "piccoli-semi-grandi-scoperte-parco-fluviale-gesso-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "picnic-tra-le-pagine-biblioteca-civica-di-sommariv-sommariva-del-bosco": {
   "anchor": "ev-2026-08-29-picnic-tra-le-pagine-biblioteca-civica-di-sommariv",
@@ -13453,7 +13454,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 101,
+  "riga": 100,
   "slug": "ponte-in-ballo-ritmo-sapori-e-siamo-in-festa-comit-pontecurone",
   "updated": "2026-09-24"
  },
@@ -13599,6 +13600,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 109,
+  "ritirata": "2026-09-24",
   "slug": "preparare-il-pavimento-pelvico-al-parto-beatrice-b-nizza-monferrato",
   "updated": "2026-09-24"
  },
@@ -13958,7 +13960,7 @@
   "ora": "14:30-19:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 108,
+  "riga": 107,
   "slug": "raduno-auto-sportive-e-storiche-memorial-accornero-montemagno-monferrato",
   "updated": "2026-09-24"
  },
@@ -14068,7 +14070,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 102,
+  "riga": 101,
   "slug": "raviolata-d-autunno-di-francavilla-b-francavilla-bisio",
   "updated": "2026-09-24"
  },
@@ -14179,7 +14181,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 158,
+  "riga": 156,
   "slug": "rifiutiamo-i-rifiuti-biblioteca-comunale-di-buttig-buttigliera-d-asti",
   "updated": "2026-09-24"
  },
@@ -14209,7 +14211,7 @@
   "prov": "CN",
   "riga": 144,
   "slug": "ritorno-a-scuola-un-incontro-particolare-complesso-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "ritratto-d-artista-con-angelo-casa-degli-alfieri-villanova-d-asti": {
   "anchor": "ev-2026-09-27-ritratto-d-artista-con-angelo-casa-degli-alfieri",
@@ -14235,7 +14237,7 @@
   "ora": "18:00",
   "prezzo": "Libero a offerta",
   "prov": "AT",
-  "riga": 130,
+  "riga": 128,
   "slug": "ritratto-d-artista-con-angelo-casa-degli-alfieri-villanova-d-asti",
   "updated": "2026-09-24"
  },
@@ -14290,7 +14292,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 117,
+  "riga": 115,
   "slug": "robot-mania-robotica-fantascientifica-e-spaziale-serravalle-scrivia",
   "updated": "2026-09-24"
  },
@@ -14951,7 +14953,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 160,
+  "riga": 158,
   "slug": "sagra-della-nocciola-di-san-damiano-d-asti",
   "updated": "2026-09-24"
  },
@@ -15145,7 +15147,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 128,
+  "riga": 126,
   "slug": "sagra-delle-castagne-di-cartosio",
   "updated": "2026-09-24"
  },
@@ -15172,7 +15174,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 104,
+  "riga": 103,
   "slug": "sagra-delle-castagne-pro-loco-garbagna",
   "updated": "2026-09-24"
  },
@@ -15313,7 +15315,7 @@
   "riga": 86,
   "slug": "sagra-dello-gnocco-festa-patronale-mombarcaro",
   "spostata": "sagra-dello-gnocco-festa-patronale-cherasco",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "sagra-dello-stufato-d-asino-calliano-monferrato": {
   "adatto_famiglie": "Si",
@@ -15791,7 +15793,7 @@
   "prov": "CN",
   "riga": 113,
   "slug": "scopri-gli-amici-alpaca-cuneo",
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
  },
  "scopri-natura-valderia": {
   "anchor": "ev-2026-08-17-scopri-natura",
@@ -16207,7 +16209,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 137,
+  "riga": 135,
   "slug": "settimana-mondiale-per-l-allattamento-bra",
   "updated": "2026-09-24"
  },
@@ -16235,7 +16237,7 @@
   "ora": "17:00-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 145,
+  "riga": 143,
   "slug": "settimana-mondiale-per-l-allattamento-laboratorio-alba",
   "updated": "2026-09-24"
  },
@@ -16263,7 +16265,7 @@
   "ora": "10:00-12:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 143,
+  "riga": 141,
   "slug": "settimana-mondiale-per-l-allattamento-letture-e-sp-alba",
   "updated": "2026-09-24"
  },
@@ -16290,7 +16292,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 156,
+  "riga": 154,
   "slug": "show-cooking-e-meet-greet-con-ernst-knam-novi-ligure",
   "updated": "2026-09-24"
  },
@@ -16728,7 +16730,7 @@
   "ora": "14:00-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 113,
+  "riga": 111,
   "slug": "sport-in-piazza-lo-sport-per-tutti-citta-di-mondov-mondovi",
   "updated": "2026-09-24"
  },
@@ -16810,7 +16812,7 @@
   "ora": "8:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 127,
+  "riga": 125,
   "slug": "storica-fiera-bovina-s-eusebio-comune-di-ottiglio",
   "updated": "2026-09-24"
  },
@@ -16837,7 +16839,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 154,
+  "riga": 152,
   "slug": "storie-coraggiose-per-super-lettori-biblioteca-civ-novi-ligure",
   "updated": "2026-09-24"
  },
@@ -17144,7 +17146,7 @@
   "ora": "dalle ore 15",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 140,
+  "riga": 138,
   "slug": "tipi-da-biblioteca-noau-officina-culturale-cuneo",
   "updated": "2026-09-24"
  },
@@ -17282,7 +17284,7 @@
   "ora": "08:00-18:15",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 138,
+  "riga": 136,
   "slug": "torneo-scacchi-a-scuola-huc-academy-cuneo",
   "updated": "2026-09-24"
  },
@@ -17310,7 +17312,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 164,
+  "riga": 162,
   "slug": "tradizionale-festa-della-madonna-delle-grazie-villa-san-secondo",
   "updated": "2026-09-24"
  },
@@ -17475,7 +17477,7 @@
   "ora": "16:00-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 97,
+  "riga": 96,
   "slug": "tu-che-animale-sei-montagne-del-mare-entracque",
   "updated": "2026-09-24"
  },
@@ -17613,7 +17615,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 98,
+  "riga": 97,
   "slug": "un-amuleto-per-il-mio-viaggio-museo-diocesano-san-cuneo",
   "updated": "2026-09-24"
  },
@@ -18003,7 +18005,7 @@
   "ora": "11:45",
   "prezzo": "Ingresso ad offerta libera",
   "prov": "AL",
-  "riga": 149,
+  "riga": 147,
   "slug": "vegunderground-fest-associazione-pandora-tortona",
   "updated": "2026-09-24"
  },
@@ -18058,7 +18060,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 111,
+  "riga": 109,
   "slug": "vi-racconto-una-bella-storia-busca",
   "updated": "2026-09-24"
  },
@@ -18194,7 +18196,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 118,
+  "riga": 116,
   "slug": "volontari-in-piazza-novi-ligure",
   "updated": "2026-09-24"
  },

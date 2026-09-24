@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eventi e sagre per famiglie a Nizza Monferrato 2026 | DAOP</title>
-<meta name="description" content="Eventi, sagre e feste per famiglie a Nizza Monferrato: 9 eventi in programma, fino al 26 novembre 2026. Date, orari e contatti, controllati uno per uno…">
+<meta name="description" content="Eventi, sagre e feste per famiglie a Nizza Monferrato: 8 eventi in programma, fino al 26 novembre 2026. Date, orari e contatti, controllati uno per uno…">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/eventi/comune/nizza-monferrato.html">
 <meta property="og:title" content="Eventi e sagre per famiglie a Nizza Monferrato 2026 | DAOP">
-<meta property="og:description" content="Eventi, sagre e feste per famiglie a Nizza Monferrato: 9 eventi in programma, fino al 26 novembre 2026. Date, orari e contatti, controllati uno per uno…">
+<meta property="og:description" content="Eventi, sagre e feste per famiglie a Nizza Monferrato: 8 eventi in programma, fino al 26 novembre 2026. Date, orari e contatti, controllati uno per uno…">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/eventi/comune/nizza-monferrato.html">
 <meta property="og:locale" content="it_IT">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Eventi e sagre per famiglie a Nizza Monferrato 2026 | DAOP">
-<meta name="twitter:description" content="Eventi, sagre e feste per famiglie a Nizza Monferrato: 9 eventi in programma, fino al 26 novembre 2026. Date, orari e…">
+<meta name="twitter:description" content="Eventi, sagre e feste per famiglie a Nizza Monferrato: 8 eventi in programma, fino al 26 novembre 2026. Date, orari e…">
 <meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
 <meta name="daop:citta" content="Nizza Monferrato">
 <meta name="daop:provincia" content="AT">
@@ -73,6 +73,19 @@
      di 111). Il jpg resta come ripiego senza image-set(). */
   .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('/assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('/assets/images/headerdaop-500.webp') type('image/webp'),url('/assets/images/headerdaop.jpg') type('image/jpeg'))}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+  /* La fascia illustrata dell'agenda (24/09/2026): Ginetto a sinistra,
+     Briciola a destra, il vuoto al centro. Il testo sta li', con un velo
+     scuro solo in mezzo. Sul telefono il disegno scende sotto il testo, a
+     tutta larghezza (e' 2,5:1), cosi' i due personaggi restano interi. Vale
+     anche per le /eventi-provincia-*, che copiano questo <style>. */
+  .page-hero.hero-fascia{background:#0f1d33;text-align:center}
+  .hero-fascia::before{opacity:1;background:linear-gradient(90deg,rgba(10,18,34,.15) 0%,rgba(10,18,34,.72) 30%,rgba(10,18,34,.78) 50%,rgba(10,18,34,.72) 70%,rgba(10,18,34,.15) 100%),var(--fascia) center/cover no-repeat}
+  .hero-fascia .ev-crumb{justify-content:center}
+  .hero-fascia .page-hero-inner{text-align:center}
+  @media(max-width:600px){
+    .page-hero.hero-fascia{padding-bottom:calc(40vw + 24px)}
+    .hero-fascia::before{background:linear-gradient(180deg,#0f1d33 0%,#0f1d33 calc(100% - 40vw - 24px),rgba(15,29,51,0) calc(100% - 30vw)),var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0f1d33}
+  }
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
@@ -910,7 +923,7 @@
       "@id": "https://www.daop.it/eventi/comune/nizza-monferrato.html",
       "url": "https://www.daop.it/eventi/comune/nizza-monferrato.html",
       "name": "Eventi e sagre per famiglie a Nizza Monferrato 2026 | DAOP",
-      "description": "Eventi, sagre e feste per famiglie a Nizza Monferrato: 9 eventi in programma, fino al 26 novembre 2026. Date, orari e contatti, controllati uno per uno…",
+      "description": "Eventi, sagre e feste per famiglie a Nizza Monferrato: 8 eventi in programma, fino al 26 novembre 2026. Date, orari e contatti, controllati uno per uno…",
       "inLanguage": "it-IT",
       "isPartOf": {
         "@type": "WebSite",
@@ -953,19 +966,6 @@
           "position": 3,
           "name": "Nizza Monferrato",
           "item": "https://www.daop.it/eventi/comune/nizza-monferrato.html"
-        }
-      ]
-    },
-    {
-      "@type": "ItemList",
-      "name": "Eventi a Nizza Monferrato",
-      "numberOfItems": 1,
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "url": "https://www.daop.it/eventi/preparare-il-pavimento-pelvico-al-parto-beatrice-b-nizza-monferrato.html",
-          "name": "Preparare il pavimento pelvico al parto - Beatrice Botto Ostetrica"
         }
       ]
     }
@@ -1016,16 +1016,16 @@
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Nizza Monferrato</span>
     </div>
     <h1>Eventi e sagre per famiglie a Nizza Monferrato</h1>
-    <p class="ev-when">9 eventi in programma, fino al 26 novembre 2026</p>
+    <p class="ev-when">8 eventi in programma, fino al 26 novembre 2026</p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <ul class="com-stat"><li>9 in programma</li><li>2 manifestazioni</li><li>provincia di Asti</li></ul>
-  <p>9 eventi in programma a Nizza Monferrato, in provincia di Asti: 2 manifestazioni diverse, con le date, gli orari e i contatti di chi le organizza. Le schede le controlliamo una per una prima di pubblicarle.</p>
+  <ul class="com-stat"><li>8 in programma</li><li>provincia di Asti</li></ul>
+  <p>8 eventi in programma a Nizza Monferrato, in provincia di Asti: una manifestazione, con le date, gli orari e i contatti di chi le organizza. Le schede le controlliamo una per una prima di pubblicarle.</p>
 
   <h2>In programma</h2>
   
-  <section class="com-grp" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><div class="com-head"><div class="com-b"><h3>Incontri che Nutrono</h3><p class="com-per">Dal 30 settembre al 26 novembre · 8 appuntamenti</p></div></div><ul class="com-ev"><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 30 set · 18:00</span><a class="com-go" href="/eventi.html#ev-2026-09-30-allattare-come-e-perche">Allattare...come e perchè?</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 7 ott · 18:00</span><a class="com-go" href="/eventi.html#ev-2026-10-07-preparare-il-pavimento-pelvico-al-parto">Preparare il pavimento pelvico al parto</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mar 13 ott · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-10-13-il-viaggio-nutrizionale-della-maternita">Il viaggio nutrizionale della maternità</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mar 20 ott · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-10-20-guida-pratica-al-neonato">Guida pratica al neonato</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 26 ott · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-10-26-post-parto-salute-pelvica-e-addominale">Post parto: salute pelvica e addominale</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 13 nov · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-11-13-nutrire-un-bambino-dopo-i-primi-mesi">Nutrire un bambino dopo i primi mesi</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 18 nov · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-11-18-quando-venere-diventa-luna">Quando Venere diventa Luna</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">gio 26 nov · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-11-26-la-salute-di-bambini-e-adulti-a-360">La salute di bambini e adulti a 360°</a></span></li></ul></section><section class="com-grp com-solo" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3986704886136989249.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/preparare-il-pavimento-pelvico-al-parto-beatrice-b-nizza-monferrato.html">Preparare il pavimento pelvico al parto - Beatrice Botto Ostetrica</a></h3><p class="com-per">Mercoledì 7 ottobre 2026</p></div></section><h2>Come funziona a Nizza Monferrato</h2><p>I posti che tornano più spesso: <strong>Movida Bar</strong>, <strong>Salotto di Bea</strong>, <strong>Il Salotto di Bea</strong> e <strong>La Soffitta dei Bambini</strong>.</p>
+  <section class="com-grp" style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><div class="com-head"><div class="com-b"><h3>Incontri che Nutrono</h3><p class="com-per">Dal 30 settembre al 26 novembre · 8 appuntamenti</p></div></div><ul class="com-ev"><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 30 set · 18:00</span><a class="com-go" href="/eventi.html#ev-2026-09-30-allattare-come-e-perche">Allattare...come e perchè?</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 7 ott · 18:00</span><a class="com-go" href="/eventi.html#ev-2026-10-07-preparare-il-pavimento-pelvico-al-parto">Preparare il pavimento pelvico al parto</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mar 13 ott · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-10-13-il-viaggio-nutrizionale-della-maternita">Il viaggio nutrizionale della maternità</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981878953853604028.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mar 20 ott · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-10-20-guida-pratica-al-neonato">Guida pratica al neonato</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">lun 26 ott · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-10-26-post-parto-salute-pelvica-e-addominale">Post parto: salute pelvica e addominale</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">ven 13 nov · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-11-13-nutrire-un-bambino-dopo-i-primi-mesi">Nutrire un bambino dopo i primi mesi</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">mer 18 nov · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-11-18-quando-venere-diventa-luna">Quando Venere diventa Luna</a></span></li><li style="--cat-color:#4a90b9;--cat-tint:rgba(74,144,185,0.14);--cat-ink:#397293"><img class="com-th" src="/assets/miniature/daop_asti_3981879528313896895.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">gio 26 nov · 10:00</span><a class="com-go" href="/eventi.html#ev-2026-11-26-la-salute-di-bambini-e-adulti-a-360">La salute di bambini e adulti a 360°</a></span></li></ul></section><h2>Come funziona a Nizza Monferrato</h2><p>I posti che tornano più spesso: <strong>Movida Bar</strong>, <strong>Salotto di Bea</strong>, <strong>La Soffitta dei Bambini</strong> e <strong>Il Salotto di Bea</strong>.</p>
 
   <div class="com-link">
     <a href="/luoghi.html#c-at-nizza-monferrato">15 posti per famiglie a Nizza Monferrato</a>

@@ -13,11 +13,11 @@
 <meta property="og:url" content="https://www.daop.it/eventi-provincia-alessandria.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
-<meta property="og:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<meta property="og:image" content="https://www.daop.it/assets/images/stagioni/eventi-og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Eventi e attività per bambini in provincia di Alessandria">
 <meta name="twitter:description" content="Eventi e attività per bambini in provincia di Alessandria: 46 appuntamenti in 24 comuni, con l&#x27;età, la data e il…">
-<meta name="twitter:image" content="https://www.daop.it/assets/images/headerdaop.jpg">
+<meta name="twitter:image" content="https://www.daop.it/assets/images/stagioni/eventi-og.jpg">
 <meta name="daop:provincia" content="AL">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -72,6 +72,19 @@
      di 111). Il jpg resta come ripiego senza image-set(). */
   .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('/assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('/assets/images/headerdaop-500.webp') type('image/webp'),url('/assets/images/headerdaop.jpg') type('image/jpeg'))}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+  /* La fascia illustrata dell'agenda (24/09/2026): Ginetto a sinistra,
+     Briciola a destra, il vuoto al centro. Il testo sta li', con un velo
+     scuro solo in mezzo. Sul telefono il disegno scende sotto il testo, a
+     tutta larghezza (e' 2,5:1), cosi' i due personaggi restano interi. Vale
+     anche per le /eventi-provincia-*, che copiano questo <style>. */
+  .page-hero.hero-fascia{background:#0f1d33;text-align:center}
+  .hero-fascia::before{opacity:1;background:linear-gradient(90deg,rgba(10,18,34,.15) 0%,rgba(10,18,34,.72) 30%,rgba(10,18,34,.78) 50%,rgba(10,18,34,.72) 70%,rgba(10,18,34,.15) 100%),var(--fascia) center/cover no-repeat}
+  .hero-fascia .ev-crumb{justify-content:center}
+  .hero-fascia .page-hero-inner{text-align:center}
+  @media(max-width:600px){
+    .page-hero.hero-fascia{padding-bottom:calc(40vw + 24px)}
+    .hero-fascia::before{background:linear-gradient(180deg,#0f1d33 0%,#0f1d33 calc(100% - 40vw - 24px),rgba(15,29,51,0) calc(100% - 30vw)),var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0f1d33}
+  }
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
@@ -1220,7 +1233,7 @@
 </div>
 
 <main id="contenuto" data-generata="2026-09-24">
-<header class="page-hero ev-hero">
+<header class="page-hero ev-hero hero-fascia" style="--fascia:url(/assets/images/stagioni/eventi-1600.webp);--fascia-m:url(/assets/images/stagioni/eventi-800.webp)">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>Eventi per bambini Alessandria</span>

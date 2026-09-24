@@ -7085,7 +7085,10 @@ def _landing_shell(spec, css, nav, foot, oggi):
     img_og = fascia['og'] if fascia else DEFAULT_IMG
     hero_cls, hero_style = '', ''
     if fascia:
-        hero_cls = ' ev-hero--img'
+        # La fascia dell'agenda (24/09/2026) ha i personaggi AI LATI e il vuoto
+        # in mezzo: il testo va al centro, non a sinistra come a Halloween.
+        # La regola .hero-fascia sta nel <style> di eventi.html, che la usa.
+        hero_cls = ' hero-fascia' if fascia.get('centro') else ' ev-hero--img'
         hero_style = (f' style="--fascia:url({fascia["grande"]});'
                       f'--fascia-m:url({fascia["piccola"]})"')
     return f"""<!DOCTYPE html>
@@ -8537,7 +8540,7 @@ TEMI_STAGIONE = {
 # Le fasce illustrate delle stagionali: chiave -> nome dei file in
 # assets/images/stagioni/ (<nome>-1600.webp, <nome>-800.webp, <nome>-og.jpg).
 # Una festa senza voce qui tiene la barra scura di sempre.
-FASCE_STAGIONE = {'halloween': 'halloween2'}
+FASCE_STAGIONE = {'halloween': 'halloween2', 'eventi': 'eventi'}
 
 
 def fascia_stagione(chiave):
@@ -9347,6 +9350,7 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
     # pagina resta online ed esce dall'indice, come le sagre e le stagionali.
     robots = "index, follow" if len(tutti) >= MIN_LANDING else "noindex, follow"
     return {
+        'fascia': dict(fascia_stagione('eventi'), centro=True),
         'path': f"{slug}.html", 'url': url,
         'titolo': titolo, 'descr': descr,
         'h1': h1, 'sotto': sotto, 'crumb': crumb,
