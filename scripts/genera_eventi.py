@@ -8540,7 +8540,7 @@ TEMI_STAGIONE = {
 # Le fasce illustrate delle stagionali: chiave -> nome dei file in
 # assets/images/stagioni/ (<nome>-1600.webp, <nome>-800.webp, <nome>-og.jpg).
 # Una festa senza voce qui tiene la barra scura di sempre.
-FASCE_STAGIONE = {'halloween': 'halloween2', 'eventi': 'eventi'}
+FASCE_STAGIONE = {'halloween': 'halloween2', 'eventi': 'eventi2'}
 
 
 def fascia_stagione(chiave):
