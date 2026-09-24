@@ -610,6 +610,17 @@
     "pagina": false,
     "ultima": "2026-08-11"
    },
+   "la-grande-festa-del-cristo-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Quartiere Cristo",
+    "manifest": "",
+    "nome": "La Grande Festa del Cristo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
    "mandrovai-se-non-a-mandrogne-alessandria": {
     "anni": [
      2026
@@ -620,6 +631,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "meet-greet-con-bellafaccia-roblox-e-minecraft-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Commerciale Panorama Alessandria",
+    "manifest": "",
+    "nome": "Meet & Greet con Bellafaccia - Roblox e Minecraft",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
    },
    "michael-alessandria": {
     "anni": [
@@ -883,6 +905,17 @@
  },
  "asti": {
   "eventi": {
+   "arti-e-mercanti-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Alfieri",
+    "manifest": "Arti e Mercanti 2026",
+    "nome": "Arti e Mercanti 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "asti-e-la-mia-citta-giornata-nazionale-del-veicolo": {
     "anni": [
      2026
@@ -926,6 +959,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-03"
+   },
+   "nonni-nipoti-una-mattinata-dedicata-biblioteca-ast-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bibliobimbi della Biblioteca Astense",
+    "manifest": "",
+    "nome": "Nonni & Nipoti - Una Mattinata Dedicata - Biblioteca Astense",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
    },
    "open-day-musici-e-sbandieratori-borgo-don-bosco-asti": {
     "anni": [
@@ -1576,6 +1620,17 @@
     "pagina": true,
     "ultima": "2026-09-13"
    },
+   "rifiutiamo-i-rifiuti-biblioteca-comunale-di-buttig-buttigliera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile di Casa Pelissero",
+    "manifest": "",
+    "nome": "Rifiutiamo i Rifiuti! - Biblioteca Comunale di Buttigliera d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "sagra-dell-aglio-e-del-tacchino-festa-di-san-berna-buttigliera-d-asti": {
     "anni": [
      2026
@@ -1766,6 +1821,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "in-scena-presentazione-del-corso-laboratorio-per-b-canelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via G.B. Giuliani, 29",
+    "manifest": "",
+    "nome": "In Scena - Presentazione del corso laboratorio per bambini - Teatro degli Acerbi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
    "la-notte-dei-peluches-biblioteca-civica-g-monticon-canelli": {
     "anni": [
      2027
@@ -1813,6 +1879,23 @@
    }
   },
   "nome": "Canelli",
+  "prov": "AT"
+ },
+ "cantarana": {
+  "eventi": {
+   "donazioni-ricerca-per-aitc-cantarana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede della Pro Loco di Cantarana",
+    "manifest": "+ Donazioni + Ricerca per AITC",
+    "nome": "+ Donazioni + Ricerca per AITC",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   }
+  },
+  "nome": "Cantarana",
   "prov": "AT"
  },
  "caraglio": {
@@ -3764,6 +3847,17 @@
  },
  "cortiglione": {
   "eventi": {
+   "festa-della-madonna-del-rosario-e-festa-della-vend-cortiglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Festa della Madonna del Rosario e Festa della Vendemmia",
+    "nome": "Festa della Madonna del Rosario e Festa della Vendemmia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "germogli-0-3-la-cuerta-foglia-cortiglione": {
     "anni": [
      2026
@@ -4882,6 +4976,17 @@
  },
  "fabbricacurone": {
   "eventi": {
+   "fabbrica-curone-nel-tempo-comune-di-fabbrica-curon": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico e Dintorni",
+    "manifest": "",
+    "nome": "Fabbrica Curone nel Tempo - Comune di Fabbrica Curone",
+    "organizza": "Comune di Fabbrica Curone",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "festa-della-montagna-fabbrica-curone": {
     "anni": [
      2026
@@ -6758,6 +6863,28 @@
  },
  "noviligure": {
   "eventi": {
+   "be-brave-be-read-l-avventura-di-leggere-biblioteca-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure - Sala Conferenze",
+    "manifest": "Bibliopride 2026 - Bibliobrave",
+    "nome": "BE BRAVE, BE READ! L'avventura di leggere - Biblioteca Civica di Novi Ligure",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-29"
+   },
+   "board-games-serata-giochi-da-tavolo-oltre-gioco-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "DLF Piazza Falcone e Borsellino",
+    "manifest": "",
+    "nome": "Board Games - Serata Giochi da Tavolo - Oltre Gioco",
+    "organizza": "",
+    "pagina": false,
+    "ultima": "2026-09-26"
+   },
    "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
     "anni": [
      2026
@@ -6801,6 +6928,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-08"
+   },
+   "dolci-terre-speciale-cioccolato-edizione-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Novi Ligure",
+    "manifest": "",
+    "nome": "Dolci Terre Speciale Cioccolato - Edizione 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
    },
    "festa-della-pizza-margherita-novi-ligure": {
     "anni": [
@@ -6901,6 +7039,17 @@
     "pagina": false,
     "ultima": "2026-09-08"
    },
+   "oltregiogo-days-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Negrotto-Cambiaso",
+    "manifest": "Oltregiogo Days 2026",
+    "nome": "Oltregiogo Days 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "open-day-esordienti-us-novese-novi-ligure": {
     "anni": [
      2026
@@ -6955,6 +7104,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "show-cooking-e-meet-greet-con-ernst-knam-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Novi Ligure",
+    "manifest": "Dolci Terre Speciale Cioccolato 2026",
+    "nome": "Show Cooking e Meet & Greet con Ernst Knam",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "storie-coraggiose-per-super-lettori-biblioteca-civ-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure",
+    "manifest": "Bibliopride 2026 - Bibliobrave",
+    "nome": "Storie coraggiose per Super Lettori - Biblioteca Civica di Novi Ligure",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    },
    "storie-sotto-gli-alberi-la-bottega-del-sanconiglio-novi-ligure": {
     "anni": [
@@ -8979,6 +9150,17 @@
     "pagina": true,
     "ultima": "2026-08-13"
    },
+   "sagra-della-nocciola-di-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Libertà",
+    "manifest": "2° Sagra della Nocciola di San Damiano d'Asti",
+    "nome": "2° Sagra della Nocciola di San Damiano d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "san-damiano-summer-festival-san-damiano-d-asti": {
     "anni": [
      2026
@@ -9890,6 +10072,17 @@
  },
  "silvanodorba": {
   "eventi": {
+   "delizie-d-autunno-pro-loco-di-silvano-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza C. Battisti",
+    "manifest": "",
+    "nome": "Delizie d'Autunno - Pro Loco di Silvano d'Orba",
+    "organizza": "Pro Loco di Silvano d'Orba",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   },
    "silvanoincontrada-silvano-d-orba": {
     "anni": [
      2026
@@ -10268,6 +10461,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "vegunderground-fest-associazione-pandora-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Orsi",
+    "manifest": "",
+    "nome": "VegUnderground FEST 2026 - Associazione Pandora",
+    "organizza": "Associazione Pandora",
+    "pagina": true,
+    "ultima": "2026-09-27"
    }
   },
   "nome": "Tortona",
@@ -10958,6 +11162,23 @@
   },
   "nome": "Villar San Costanzo",
   "prov": "CN"
+ },
+ "villasansecondo": {
+  "eventi": {
+   "tradizionale-festa-della-madonna-delle-grazie-villa-san-secondo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa della Madonnina",
+    "manifest": "Tradizionale Festa della Madonna delle Grazie",
+    "nome": "Tradizionale Festa della Madonna delle Grazie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
+   }
+  },
+  "nome": "Villa San Secondo",
+  "prov": "AT"
  },
  "vinadio": {
   "eventi": {
