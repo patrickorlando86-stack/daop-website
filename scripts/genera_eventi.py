@@ -9350,7 +9350,8 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
     # pagina resta online ed esce dall'indice, come le sagre e le stagionali.
     robots = "index, follow" if len(tutti) >= MIN_LANDING else "noindex, follow"
     return {
-        'fascia': dict(fascia_stagione('eventi'), centro=True),
+        'fascia': dict(fascia_stagione('eventi'), centro=True,
+                       piccola='/assets/images/stagioni/eventi2-m.webp'),
         'path': f"{slug}.html", 'url': url,
         'titolo': titolo, 'descr': descr,
         'h1': h1, 'sotto': sotto, 'crumb': crumb,

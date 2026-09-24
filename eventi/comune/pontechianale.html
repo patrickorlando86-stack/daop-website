@@ -76,7 +76,8 @@
   /* La fascia illustrata dell'agenda (24/09/2026): Ginetto a sinistra,
      Briciola a destra, il vuoto al centro. Il testo sta li', con un velo
      scuro solo in mezzo. Sul telefono il disegno scende sotto il testo, a
-     tutta larghezza (e' 2,5:1), cosi' i due personaggi restano interi. Vale
+     tutta larghezza, in una versione sua (eventi2-m) con Ginetto e Briciola
+     avvicinati: l'originale ha il vuoto al centro. Vale
      anche per le /eventi-provincia-*, che copiano questo <style>. */
   .page-hero.hero-fascia{background:#0f1d33;text-align:center}
   .hero-fascia::before{opacity:1;background:linear-gradient(90deg,rgba(10,18,34,.15) 0%,rgba(10,18,34,.72) 30%,rgba(10,18,34,.78) 50%,rgba(10,18,34,.72) 70%,rgba(10,18,34,.15) 100%),var(--fascia) center/cover no-repeat}
@@ -87,8 +88,8 @@
   @media(min-width:601px){.ev-hero.hero-fascia{box-sizing:border-box;min-height:535px;display:flex;flex-direction:column;justify-content:center}
     .ev-hero.hero-fascia .page-hero-inner{width:100%}}
   @media(max-width:600px){
-    .page-hero.hero-fascia{padding-bottom:calc(40vw + 24px)}
-    .hero-fascia::before{background:linear-gradient(180deg,#0f1d33 0%,#0f1d33 calc(100% - 40vw - 24px),rgba(15,29,51,0) calc(100% - 30vw)),var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0f1d33}
+    .page-hero.hero-fascia{padding-bottom:calc(58vw + 24px)}
+    .hero-fascia::before{background:linear-gradient(180deg,#0f1d33 0%,#0f1d33 calc(100% - 58vw - 24px),rgba(15,29,51,0) calc(100% - 50vw)),var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0f1d33}
   }
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
