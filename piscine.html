@@ -933,10 +933,24 @@
    - toccare la regola nel guscio sposterebbe l'hero di 290 file. Sul telefono
    sono allineati dal padding: 20px l'hero, 20px .lg-wrap. */
 .lg-hero .page-hero-inner{max-width:900px}
-/* La fascia illustrata (24/09/2026): e' .ev-hero--img di PAGINA_CSS, la stessa
-   di /halloween.html - testo a sinistra, disegno dietro con il velo da
-   sinistra; sul telefono il disegno scende sotto il testo. Ginetto e Briciola
-   stanno a destra nel disegno, cioe' dove il velo e' piu' leggero. */
+/* La fascia illustrata (24/09/2026): parte da .ev-hero--img di PAGINA_CSS (la
+   stessa di /halloween.html), ma SENZA il velo scuro da sinistra - il disegno
+   e' gia' in penombra a sinistra, dove sta il testo, e il velo ci aggiungeva
+   un alone blu (Patrick). Al suo posto un'ombra sotto le lettere.
+   Sotto i 900px il disegno scende sotto il testo, in una versione sua
+   (luoghi-m, di giorno e piu' alta), come la fascia di eventi.html: blu pieno
+   fin dove il disegno comincia, poi sfuma nel cielo. */
+.lg-hero.ev-hero--img::before{background:var(--fascia) center/cover no-repeat}
+.lg-hero.ev-hero--img h1,.lg-hero.ev-hero--img p,.lg-hero.ev-hero--img .ev-crumb{
+  text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 12px rgba(0,0,0,.35)}
+@media(max-width:900px){
+  .lg-hero.ev-hero--img{padding-bottom:calc(56.4vw - 8px);background:#0e1422}
+  .lg-hero.ev-hero--img::before{background:linear-gradient(180deg,#0e1422 0%,#0e1422 calc(100% - 56vw),
+    rgba(14,20,34,.8) calc(100% - 50vw),rgba(14,20,34,.45) calc(100% - 44vw),
+    rgba(14,20,34,.18) calc(100% - 38vw),rgba(14,20,34,0) calc(100% - 32vw)),
+    var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0e1422}
+  .lg-hero.ev-hero--img h1,.lg-hero.ev-hero--img p,.lg-hero.ev-hero--img .ev-crumb{text-shadow:none}
+}
 /* La frase che dice di cosa e' fatto l'elenco sta DENTRO l'hero, sotto
    l'occhiello d'oro: e' la stessa impaginazione dell'hero di eventi.html (titolo,
    riga di contesto, paragrafo). In fondo alla fascia, da sola sul crema, era un
