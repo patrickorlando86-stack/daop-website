@@ -983,6 +983,10 @@ LUOGHI_CSS = """
    - toccare la regola nel guscio sposterebbe l'hero di 290 file. Sul telefono
    sono allineati dal padding: 20px l'hero, 20px .lg-wrap. */
 .lg-hero .page-hero-inner{max-width:900px}
+/* La fascia illustrata (24/09/2026): e' .ev-hero--img di PAGINA_CSS, la stessa
+   di /halloween.html - testo a sinistra, disegno dietro con il velo da
+   sinistra; sul telefono il disegno scende sotto il testo. Ginetto e Briciola
+   stanno a destra nel disegno, cioe' dove il velo e' piu' leggero. */
 /* La frase che dice di cosa e' fatto l'elenco sta DENTRO l'hero, sotto
    l'occhiello d'oro: e' la stessa impaginazione dell'hero di eventi.html (titolo,
    riga di contesto, paragrafo). In fondo alla fascia, da sola sul crema, era un
@@ -2033,7 +2037,7 @@ def render(elenco, oggi):
 <body>
 {nav}
 <main id="contenuto">
-<header class="page-hero ev-hero lg-hero">
+<header class="page-hero ev-hero lg-hero ev-hero--img" style="--fascia:url(/assets/images/stagioni/luoghi-1600.webp);--fascia-m:url(/assets/images/stagioni/luoghi-1000.webp)">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <span>Luoghi</span>
