@@ -564,6 +564,109 @@ module.exports = async function luoghi(browser) {
     'in tutto questo la posizione non e\' mai stata chiesta');
   await ctx.close();
 
+  // ── La mappa ──────────────────────────────────────────────────────────
+  // Una VISTA dell'elenco (/assets/js/daop-mappa.js). Le mappe di sfondo di
+  // OpenFreeMap qui non si scaricano: al loro posto uno stile finto, solo lo
+  // sfondo, cosi' la prova non dipende dalla rete ma la libreria vera parte
+  // lo stesso. Nessun conteggio: il numero di segnaposto si confronta con le
+  // righe che l'elenco mostra, qualunque sia.
+  r.titolo('luoghi.html — la mappa');
+  ({ ctx, page } = await apri(browser, 'luoghi.html', 412, () => {
+    window.__mappa = 0;
+    document.addEventListener('daop:mappa', () => { window.__mappa++; });
+  }));
+  const STILE_FINTO = JSON.stringify({ version: 8, sources: {},
+    layers: [{ id: 'sfondo', type: 'background', paint: { 'background-color': '#e8eef0' } }] });
+  await page.route('https://tiles.openfreemap.org/**', (x) =>
+    x.fulfill({ status: 200, contentType: 'application/json', body: STILE_FINTO }));
+  const richMappa = [];
+  page.on('request', (q) => { if (/maplibre|openfreemap/i.test(q.url())) richMappa.push(q.url()); });
+
+  // Chi non la apre non paga niente: ne' la libreria ne' le mappe di sfondo.
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2));
+  await page.waitForTimeout(300);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  // Si guarda anche la pagina, non solo le richieste: quelle partite durante
+  // il caricamento arrivano prima che questa prova cominci ad ascoltare.
+  const giaCaricata = await page.evaluate(() =>
+    !!window.maplibregl || !!document.querySelector('script[src*="maplibre"],link[href*="maplibre"]'));
+  r.ok(richMappa.length === 0 && !giaCaricata,
+    `senza toccare «Mappa» non si carica niente (${richMappa.length} richieste,`
+    + ` libreria ${giaCaricata ? 'gia\' in pagina' : 'assente'})`);
+  r.ok(await page.locator('#lg-vista').isVisible(), 'l\'interruttore Elenco/Mappa compare quando il JS c\'e\'');
+  r.ok(await page.locator('#lg-mappa').isHidden(), 'la mappa parte chiusa: l\'elenco resta la vista principale');
+
+  await page.locator('#lg-v-mappa').click();
+  await page.waitForFunction(() => {
+    const n = document.getElementById('lg-mappa');
+    return n.dataset.pronta || /non /.test((n.querySelector('.dm-avviso') || {}).textContent || '');
+  }, null, { timeout: 30000 }).catch(() => {});
+  // La libreria sta su daop.it: una CDN esterna sarebbe un altro indirizzo IP
+  // regalato a terzi, e la cookie policy dice che non ce ne sono.
+  const esterne = richMappa.filter((u) => /maplibre/i.test(u) && !u.startsWith('file://'));
+  r.ok(richMappa.some((u) => /maplibre-gl\.js/.test(u)) && esterne.length === 0,
+    `al tocco si carica la libreria, ospitata sul sito (${esterne.length} da fuori)`);
+  r.ok(await page.evaluate(() => window.__mappa) === 1, 'aprire la mappa manda daop:mappa, una volta');
+
+  const righeConXY = () => page.evaluate(() =>
+    document.querySelectorAll('.lg-grp > .lg-row[data-cat][data-lat]:not([hidden])').length);
+  const punti = () => page.evaluate(() => Number(document.getElementById('lg-mappa').dataset.punti));
+  r.ok(await punti() === await righeConXY(),
+    `un segnaposto per ogni riga visibile, copie sponsorizzate escluse (${await punti()})`);
+  const provM = await page.locator('select[data-campo="prov"] option').nth(1).getAttribute('value');
+  await page.selectOption('select[data-campo="prov"]', provM);
+  await page.waitForTimeout(600);
+  r.ok(await punti() === await righeConXY(),
+    `la mappa segue i filtri (${provM}: ${await punti()} segnaposto, ${await righeConXY()} righe)`);
+
+  const pronta = await page.evaluate(() => !!document.getElementById('lg-mappa').dataset.pronta);
+  if (!pronta) {
+    // Senza WebGL MapLibre non parte, e la pagina lo dice. Non e' un difetto
+    // del sito: le prove che servono una mappa disegnata si saltano.
+    console.log('  nota la mappa non si e\' disegnata (niente WebGL?): '
+      + await page.locator('.dm-avviso').textContent());
+  } else {
+    r.ok(await page.locator('.maplibregl-cooperative-gesture-screen').count() === 1,
+      'la mappa si sposta con due dita: un dito continua a scorrere la pagina');
+    // Un posto solo in elenco: la mappa lo centra, lo si tocca, e deve aprire
+    // la riga vera, col nome sotto la barra appiccicosa e non dietro.
+    await page.selectOption('select[data-campo="prov"]', 'all');
+    const nomeUnico = await page.evaluate(() => {
+      const t = [...document.querySelectorAll('.lg-grp > .lg-row[data-lat] .lg-nome')].map((x) => x.textContent);
+      return t.find((n) => t.filter((m) => m === n).length === 1 && n.length > 10);
+    });
+    await page.fill('#lg-q', nomeUnico);
+    await page.waitForTimeout(1200);
+    await page.evaluate(() => document.querySelectorAll('[id*=cookie],[class*=cookie]').forEach((x) => x.remove()));
+    await page.locator('#lg-mappa').evaluate((n) => n.scrollIntoView({ block: 'end' }));
+    await page.waitForTimeout(500);
+    const tela = await page.locator('.dm-tela canvas').boundingBox();
+    await page.mouse.click(tela.x + tela.width / 2, tela.y + tela.height / 2);
+    await page.waitForTimeout(400);
+    const nelFumetto = await page.locator('.dm-voce b').allTextContents();
+    r.ok(nelFumetto.length === 1 && nelFumetto[0] === nomeUnico,
+      `toccando il segnaposto il fumetto dice il suo posto (${nelFumetto.join(', ') || 'niente'})`);
+    if (nelFumetto.length) {
+      await page.locator('.dm-voce').first().click();
+      await page.waitForTimeout(500);
+      const esito = await page.evaluate((n) => {
+        const riga = [...document.querySelectorAll('.lg-grp > .lg-row')]
+          .find((x) => x.querySelector('.lg-nome').textContent === n);
+        const tetto = Math.max(document.querySelector('nav').getBoundingClientRect().bottom,
+          document.getElementById('lg-toolbar').getBoundingClientRect().bottom);
+        return { aperta: riga.open, hash: location.hash === '#' + riga.id,
+                 top: Math.round(riga.getBoundingClientRect().top), tetto: Math.round(tetto) };
+      }, nomeUnico);
+      r.ok(esito.aperta && esito.hash && esito.top >= esito.tetto - 1 && esito.top < 915,
+        `dal fumetto si apre la riga, sotto la barra (a ${esito.top}px, tetto ${esito.tetto}px)`);
+    }
+  }
+  await page.locator('#lg-v-elenco').click();
+  r.ok(await page.locator('#lg-mappa').isHidden(), '«Elenco» richiude la mappa');
+  await page.locator('#lg-v-mappa').click();
+  r.ok(await page.evaluate(() => window.__mappa) === 1, 'riaprirla non conta una seconda volta');
+  await ctx.close();
+
   // ── la prova che conta davvero sulla banda ────────────────────────────
   // Il bucket Supabase ha 5 GB al mese e l'08/08/2026 le locandine lo hanno
   // quasi bruciato. Qui si controlla sul browser vero, non sul markup: si

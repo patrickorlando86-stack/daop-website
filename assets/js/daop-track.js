@@ -379,6 +379,19 @@
       gtag('event', 'vicino_a_me', p);
     });
 
+    /* La mappa di luoghi.html (daop-mappa.js). Come "vicino a me", il modulo
+       non chiama gtag: emette un evento DOM. Parte una volta per pagina, alla
+       prima apertura: e' il numero che dice se la mappa serve, e va letto
+       contro i page_view di /luoghi.html con la regola dei 2,5 per utente. */
+    document.addEventListener('daop:mappa', function (ev) {
+      if (!window.daopConsensoAnalytics || typeof gtag !== 'function') return;
+      var d = (ev && ev.detail) || {};
+      var p = { page_path: percorso() };
+      if (d.tipo) p.destination_area = d.tipo;
+      for (var k in CTX) { if (CTX[k]) p[k] = CTX[k]; }
+      gtag('event', 'apri_mappa', p);
+    });
+
     /* Profondita' di scroll: evento a 25/50/75/100%. Su una scheda evento
        dice se sono arrivati in fondo, dove stanno la firma e i link alle
        landing. E' voluto e NON e' un doppione dell'evento automatico
