@@ -559,6 +559,17 @@
 .ev-over + .ev-ginetto-alto{margin-top:0}
 .ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
 
+/* La fascia illustrata (24/09/2026): .hero-fascia arriva dal <style> di
+   eventi.html (testo al centro; sotto i 900px il disegno scende sotto il testo
+   e il blu sfuma nel cielo, con corsi-m). Su computer il disegno ha GIA' la
+   penombra al centro, dove sta il testo: il velo radiale di eventi qui non si
+   mette - era un alone in piu' (Patrick). Resta un'ombra sotto le lettere. */
+@media(min-width:901px){
+  .co-hero.hero-fascia::before{background:var(--fascia) center/cover no-repeat}
+  .co-hero.hero-fascia{box-sizing:border-box;min-height:500px;display:flex;flex-direction:column;justify-content:center}
+  .co-hero.hero-fascia .page-hero-inner{width:100%}
+  .co-hero h1,.co-hero p,.co-hero .co-crumb,.co-hero .section-label{text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 12px rgba(0,0,0,.35)}
+}
 .co-wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}
 /* Il breadcrumb sta dentro .page-hero, che ha lo sfondo scuro — e .page-hero
    veste h1, p, .section-label e a, cioe' nessuna delle due cose che ci sono qui

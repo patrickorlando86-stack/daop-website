@@ -1997,8 +1997,11 @@ def render(elenco, oggi):
         '  </div>',
     ] if x)
 
-    alt_og = ("Illustrazione: un adulto e un bambino camminano mano nella mano su un "
-              "sentiero fra le colline, sotto un arcobaleno")
+    alt_og = ("Illustrazione: Ginetto e Briciola indicano un parco giochi in una "
+              "piazza di paese")
+    # L'anteprima per WhatsApp e Facebook (24/09/2026): lo stesso disegno
+    # della fascia, ritagliato 1200x630 sui personaggi.
+    og_img = f"{G.SITE_URL}/assets/images/stagioni/luoghi-og.jpg"
     return f"""<!DOCTYPE html>
 <!-- PAGINA GENERATA da scripts/genera_luoghi.py: le modifiche scritte a mano
      qui dentro spariscono alla run successiva, senza avvisare. Si tocca il
@@ -2018,17 +2021,17 @@ def render(elenco, oggi):
 <meta property="og:url" content="{PAGE_URL}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
-<meta property="og:image" content="{G.DEFAULT_IMG}">
+<meta property="og:image" content="{og_img}">
 <!-- Misure e alt dell'immagine sociale: senza, WhatsApp e Facebook devono
      scaricarla per sapere come impaginarla, e finche' non ci riescono mostrano
-     l'anteprima senza figura. Sono i valori veri di headerdaop.jpg. -->
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="960">
+     l'anteprima senza figura. Sono i valori veri di luoghi-og.jpg. -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{alt_og}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{e(titolo)}">
 <meta name="twitter:description" content="{e(G.trunc(descr, 120))}">
-<meta name="twitter:image" content="{G.DEFAULT_IMG}">
+<meta name="twitter:image" content="{og_img}">
 <meta name="twitter:image:alt" content="{alt_og}">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">

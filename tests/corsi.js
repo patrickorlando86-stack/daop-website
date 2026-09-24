@@ -63,8 +63,13 @@ async function contrastoCrumb(page, sel) {
     if (!el) return null;
     const hero = el.closest('.page-hero');
     if (!hero) return null;
-    const g = getComputedStyle(hero).backgroundImage
-      .match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    // Con la fascia illustrata (24/09/2026) il fondo non e' piu' un gradiente
+    // ma un disegno, e il colore solido sta in background-color: e' quello su
+    // cui le briciole stanno davvero sul telefono. Senza questo ripiego la
+    // prova confrontava il testo chiaro col BIANCO e diceva 1:1.
+    const cs = getComputedStyle(hero);
+    const g = cs.backgroundImage.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/)
+      || cs.backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*1)?\)$/);
     const bg = g ? [+g[1], +g[2], +g[3]] : [255, 255, 255];
     const lin = (v) => {
       v /= 255;

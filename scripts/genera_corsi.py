@@ -3553,7 +3553,21 @@ def toolbar(corsi):
 """
 
 
+# La fascia illustrata di corsi.html e la sua anteprima (24/09/2026).
+OG_CORSI = f"{G.SITE_URL}/assets/images/stagioni/corsi-og.jpg"
+
 CSS = """
+/* La fascia illustrata (24/09/2026): .hero-fascia arriva dal <style> di
+   eventi.html (testo al centro; sotto i 900px il disegno scende sotto il testo
+   e il blu sfuma nel cielo, con corsi-m). Su computer il disegno ha GIA' la
+   penombra al centro, dove sta il testo: il velo radiale di eventi qui non si
+   mette - era un alone in piu' (Patrick). Resta un'ombra sotto le lettere. */
+@media(min-width:901px){
+  .co-hero.hero-fascia::before{background:var(--fascia) center/cover no-repeat}
+  .co-hero.hero-fascia{box-sizing:border-box;min-height:500px;display:flex;flex-direction:column;justify-content:center}
+  .co-hero.hero-fascia .page-hero-inner{width:100%}
+  .co-hero h1,.co-hero p,.co-hero .co-crumb,.co-hero .section-label{text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 12px rgba(0,0,0,.35)}
+}
 .co-wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}
 /* Il breadcrumb sta dentro .page-hero, che ha lo sfondo scuro — e .page-hero
    veste h1, p, .section-label e a, cioe' nessuna delle due cose che ci sono qui
@@ -4164,11 +4178,13 @@ def render(corsi, css, nav, foot, realta=None):
 <meta property="og:url" content="{URL}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
-<meta property="og:image" content="{G.DEFAULT_IMG}">
+<meta property="og:image" content="{OG_CORSI}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{G.esc(G.trunc(titolo, 60))}">
 <meta name="twitter:description" content="{G.esc(G.trunc(descr, 120))}">
-<meta name="twitter:image" content="{G.DEFAULT_IMG}">
+<meta name="twitter:image" content="{OG_CORSI}">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -4181,7 +4197,7 @@ def render(corsi, css, nav, foot, realta=None):
 <body>
 {nav}
 <main id="contenuto">
-<header class="page-hero">
+<header class="page-hero hero-fascia co-hero" style="--fascia:url(/assets/images/stagioni/corsi-1600.webp);--fascia-m:url(/assets/images/stagioni/corsi-m.webp)">
   <div class="page-hero-inner">
     <div class="co-crumb" role="navigation" aria-label="Percorso">
       <a href="/">Home</a> › <span>Corsi per bambini</span>
