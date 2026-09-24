@@ -72,6 +72,35 @@
      di 111). Il jpg resta come ripiego senza image-set(). */
   .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('/assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('/assets/images/headerdaop-500.webp') type('image/webp'),url('/assets/images/headerdaop.jpg') type('image/jpeg'))}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+  /* La fascia illustrata dell'agenda (24/09/2026): Ginetto a sinistra,
+     Briciola a destra, il vuoto al centro. Il testo sta li', con un velo
+     scuro morbido solo dietro al testo (il velo a banda verticale si leggeva come una fascia blu). Sotto i 900px il disegno scende sotto il testo, a
+     tutta larghezza, in una versione sua (eventi2-m) con Ginetto e Briciola
+     avvicinati: l'originale ha il vuoto al centro. Vale
+     anche per le /eventi-provincia-*, che copiano questo <style>. */
+  .page-hero.hero-fascia{background:#0f1d33;text-align:center}
+  .hero-fascia::before{opacity:1;background:radial-gradient(ellipse 34% 58% at 50% 52%,rgba(10,18,34,.62) 0%,rgba(10,18,34,.4) 55%,rgba(10,18,34,0) 100%),var(--fascia) center/cover no-repeat}
+  .hero-fascia .ev-crumb{justify-content:center}
+  .hero-fascia .page-hero-inner{text-align:center}
+  /* Sulle /eventi-provincia-* il testo e' meno: senza un minimo la fascia
+     veniva 381px contro i 535 dell'agenda, e il disegno usciva tagliato. */
+  @media(min-width:901px){.ev-hero.hero-fascia{box-sizing:border-box;min-height:535px;display:flex;flex-direction:column;justify-content:center}
+    .ev-hero.hero-fascia .page-hero-inner{width:100%}}
+  /* Sotto i 900px il fondo sopra il disegno e' CHIARO, color cielo, e sfuma
+     nel disegno: e' il trucco di /halloween.html, dove il blu notte continua
+     il cielo di notte. Qui il disegno e' di giorno, e un fondo blu sopra si
+     leggeva come una fascia a se' (24/09/2026). Col fondo chiaro il testo
+     diventa scuro: i selettori sono .page-hero.hero-fascia perche' devono
+     battere .ev-hero h1 / .ev-crumb / .ev-when di PAGINA_CSS, che arriva dopo. */
+  @media(max-width:900px){
+    .page-hero.hero-fascia{padding-bottom:calc(58vw + 8px);background:#f4efe4}
+    .hero-fascia::before{background:linear-gradient(180deg,#f4efe4 0%,#f4efe4 calc(100% - 58vw - 8px),rgba(244,239,228,.85) calc(100% - 56vw),rgba(244,239,228,0) calc(100% - 40vw)),var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#f4efe4}
+    .page-hero.hero-fascia .section-label,.page-hero.hero-fascia h1 em,.page-hero.hero-fascia .ev-when,.page-hero.hero-fascia a{color:#9a5212}
+    .page-hero.hero-fascia h1{color:var(--navy-dark)}
+    .page-hero.hero-fascia p{color:var(--text-mid)}
+    .page-hero.hero-fascia .ev-crumb{color:rgba(30,51,66,.66)}
+    .page-hero.hero-fascia .ev-crumb a{color:var(--navy-dark)}
+  }
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
@@ -1220,7 +1249,7 @@ html{scroll-behavior:auto}
   </div>
 
   <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">160 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">907 posti scelti a mano, dal parco al museo</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">158 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">907 posti scelti a mano, dal parco al museo</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
@@ -1352,9 +1381,18 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
   // diventato rosso da solo il 21/09, senza che nessuno toccasse il codice.
   // Una stima migliore non basta, le schede non sono alte uguali (a 105px
   // si atterrava comunque a 127). Si riallinea il bersaglio una volta
-  // disegnato quello che ha intorno, finche' sta fermo - e mai se nel
-  // frattempo chi legge ha gia' iniziato a scorrere da se'.
-  var mosso=false;
+  // disegnato quello che ha intorno - e mai se nel frattempo chi legge ha
+  // gia' iniziato a scorrere da se'.
+  //
+  // Si guarda per un TEMPO e non per un numero di frame. La prima versione
+  // (23/09) smetteva appena il bersaglio restava fermo per due frame: su una
+  // macchina carica le schede vicine si disegnano DOPO quei due frame, e il
+  // bersaglio risaliva a 90px sotto un tetto di 136 - rosso una volta su due
+  // nella suite intera su Windows, verde da solo (24/09/2026). Ora si
+  // controlla ogni 100ms per un secondo e mezzo e si rimette a posto ogni
+  // volta che si sposta: costa una getBoundingClientRect ogni 100ms, cioe'
+  // niente, e non dipende da quando il browser decide di disegnare.
+  var mosso=false, giro=0;
   ['wheel','touchstart','keydown','mousedown'].forEach(function(t){
     window.addEventListener(t,function(){mosso=true;},{passive:true});
   });
@@ -1362,15 +1400,19 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     var id=(location.hash||'').replace('#','');
     var e=id&&document.getElementById(id);
     if(!e) return;
-    var giri=0, prima=null;
+    var mio=++giro, fine=Date.now()+1500, dove=null;
     mosso=false;
     (function passo(){
-      if(mosso||giri++>5) return;
+      // Un riallinea() piu' recente (load e hashchange possono arrivare
+      // insieme) prende il posto di questo: due giri paralleli si
+      // contenderebbero lo scorrimento.
+      if(mosso||mio!==giro||Date.now()>fine) return;
       var top=Math.round(e.getBoundingClientRect().top);
-      if(top===prima) return;
-      e.scrollIntoView({block:'start'});
-      prima=Math.round(e.getBoundingClientRect().top);
-      requestAnimationFrame(function(){requestAnimationFrame(passo);});
+      if(top!==dove){
+        e.scrollIntoView({block:'start'});
+        dove=Math.round(e.getBoundingClientRect().top);
+      }
+      setTimeout(passo,100);
     })();
   }
   if(document.readyState==='complete') riallinea();
