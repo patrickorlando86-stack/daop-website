@@ -87,6 +87,10 @@ Vi aspettiamo per…">
   .hero-fascia::before{opacity:1;background:linear-gradient(90deg,rgba(10,18,34,.15) 0%,rgba(10,18,34,.72) 30%,rgba(10,18,34,.78) 50%,rgba(10,18,34,.72) 70%,rgba(10,18,34,.15) 100%),var(--fascia) center/cover no-repeat}
   .hero-fascia .ev-crumb{justify-content:center}
   .hero-fascia .page-hero-inner{text-align:center}
+  /* Sulle /eventi-provincia-* il testo e' meno: senza un minimo la fascia
+     veniva 381px contro i 535 dell'agenda, e il disegno usciva tagliato. */
+  @media(min-width:601px){.ev-hero.hero-fascia{box-sizing:border-box;min-height:535px;display:flex;flex-direction:column;justify-content:center}
+    .ev-hero.hero-fascia .page-hero-inner{width:100%}}
   @media(max-width:600px){
     .page-hero.hero-fascia{padding-bottom:calc(40vw + 24px)}
     .hero-fascia::before{background:linear-gradient(180deg,#0f1d33 0%,#0f1d33 calc(100% - 40vw - 24px),rgba(15,29,51,0) calc(100% - 30vw)),var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0f1d33}
