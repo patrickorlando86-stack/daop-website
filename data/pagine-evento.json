@@ -2374,7 +2374,7 @@
   "ora": "10:00-17:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 186,
+  "riga": 180,
   "slug": "caccia-ai-tesori-arancioni-revello",
   "updated": "2026-09-24"
  },
@@ -2430,7 +2430,7 @@
   "ora": "15:30-17:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 189,
+  "riga": 183,
   "slug": "caccia-al-tesoro-della-citta-dei-talenti-cuneo",
   "updated": "2026-09-24"
  },
@@ -4244,7 +4244,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 184,
+  "riga": 178,
   "slug": "creo-il-regalo-per-i-miei-nonni-associazione-santu-borgo-san-dalmazzo",
   "updated": "2026-09-24"
  },
@@ -4384,7 +4384,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 185,
+  "riga": 179,
   "slug": "cuneo-bike-festival-citta-di-cuneo",
   "updated": "2026-09-24"
  },
@@ -5602,7 +5602,7 @@
   "ora": "10:30",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 188,
+  "riga": 182,
   "slug": "festa-dei-nonni-lavoriamo-insieme-museo-civico-cun-cuneo",
   "updated": "2026-09-24"
  },
@@ -7883,7 +7883,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 199,
+  "riga": 193,
   "slug": "fiera-del-buon-gusto-e-della-tradizione-roburent",
   "updated": "2026-09-24"
  },
@@ -9609,7 +9609,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 187,
+  "riga": 181,
   "slug": "il-filo-della-gentilezza-biblioteca-comunale-miche-barge",
   "updated": "2026-09-24"
  },
@@ -12322,7 +12322,7 @@
   "ora": "16:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 198,
+  "riga": 192,
   "slug": "musibus-in-citta-tutti-giu-per-terra-scuola-apm-sa-cuneo",
   "updated": "2026-09-24"
  },
@@ -12652,7 +12652,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 192,
+  "riga": 186,
   "slug": "open-officina-spazio-aggregativo-saluzzo",
   "updated": "2026-09-24"
  },
@@ -13344,7 +13344,7 @@
   "ora": "14:00-17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 190,
+  "riga": 184,
   "slug": "pedalando-tra-gli-enigmi-di-plof-unione-montana-va-roccabruna",
   "updated": "2026-09-24"
  },
@@ -14517,6 +14517,7 @@
   "prezzo": "Gratuito",
   "prov": "AL",
   "riga": 177,
+  "ritirata": "2026-09-24",
   "slug": "ricette-di-cura-noau-officina-culturale-torino",
   "updated": "2026-09-24"
  },
@@ -15841,7 +15842,7 @@
   "ora": "14:00-17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 183,
+  "riga": 177,
   "slug": "salta-il-castello-fossano",
   "updated": "2026-09-24"
  },
@@ -17454,7 +17455,7 @@
   "ora": "8:30",
   "prezzo": "8€ solo corsa/camminata+pacco gara; 15€ pranzo+pacco gara adulti (dai 10 anni); 8€ pranzo+pacco gara bambini 4/9 anni; 8€ oltre i 600 solo pettorale",
   "prov": "CN",
-  "riga": 191,
+  "riga": 185,
   "slug": "tara-che-bugia-gruppo-eventi-tarantasca",
   "updated": "2026-09-24"
  },
