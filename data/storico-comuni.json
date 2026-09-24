@@ -1121,6 +1121,17 @@
     "pagina": true,
     "ultima": "2026-09-18"
    },
+   "il-filo-della-gentilezza-biblioteca-comunale-miche-barge": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale Michele Ginotta",
+    "manifest": "",
+    "nome": "Il filo della gentilezza - Biblioteca Comunale Michele Ginotta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
+   },
    "sport-in-piazza-festa-dello-sport-pro-loco-barge": {
     "anni": [
      2026
@@ -1307,6 +1318,17 @@
  },
  "borgosandalmazzo": {
   "eventi": {
+   "creo-il-regalo-per-i-miei-nonni-associazione-santu-borgo-san-dalmazzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Santuario di Monserrato",
+    "manifest": "",
+    "nome": "Creo il Regalo per i Miei Nonni - Associazione Santuario di Monserrato",
+    "organizza": "Associazione Santuario di Monserrato",
+    "pagina": true,
+    "ultima": "2026-09-26"
+   },
    "il-gioco-e-una-cosa-seria-edizione-madonna-bruna-a-borgo-san-dalmazzo": {
     "anni": [
      2026
@@ -1464,6 +1486,28 @@
  },
  "brossasco": {
   "eventi": {
+   "autunno-a-brossasco-laboratori-ludico-creativi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Segnavia - Porta di Valle",
+    "manifest": "Autunno a Brossasco",
+    "nome": "Autunno a Brossasco - Laboratori ludico/creativi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
+   "mattinata-di-giochi-sportivi-ed-attivita-in-movime-brossasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palestra/Campetto Parrocchiale di Brossasco",
+    "manifest": "",
+    "nome": "Mattinata di giochi sportivi ed attività in movimento - Proposta80 Cooperativa Sociale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "san-bernardo-brossasco": {
     "anni": [
      2026
@@ -4191,6 +4235,17 @@
     "pagina": true,
     "ultima": "2026-09-27"
    },
+   "caccia-al-tesoro-della-citta-dei-talenti-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rondò dei Talenti",
+    "manifest": "",
+    "nome": "Caccia al Tesoro della Città dei Talenti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
    "cerchiamoci-laboratorio-psicomotorio-cuneo": {
     "anni": [
      2026
@@ -4235,6 +4290,17 @@
     "pagina": true,
     "ultima": "2026-08-13"
    },
+   "cuneo-bike-festival-citta-di-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Galimberti",
+    "manifest": "",
+    "nome": "Cuneo Bike Festival - Città di Cuneo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-25"
+   },
    "cuneo-vive-lo-sport-coldiretti-cuneo-campagna-amic": {
     "anni": [
      2026
@@ -4256,6 +4322,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-25"
+   },
+   "festa-dei-nonni-lavoriamo-insieme-museo-civico-cun-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Civico - Complesso Monumentale di San Francesco",
+    "manifest": "",
+    "nome": "Festa dei nonni 2026 - lavoriamo insieme - Museo Civico Cuneo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    },
    "film-sotto-le-stelle-il-robot-selvaggio-cooperativ-cuneo": {
     "anni": [
@@ -4333,6 +4410,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-23"
+   },
+   "musibus-in-citta-tutti-giu-per-terra-scuola-apm-sa-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rondò dei Talenti",
+    "manifest": "",
+    "nome": "Musibus in Città - Tutti Giù per Terra - Scuola APM Saluzzo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
    },
    "orizzonti-sospesi-tutti-in-salute-cuneo": {
     "anni": [
@@ -5214,6 +5302,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "salta-il-castello-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "",
+    "nome": "Salta il Castello",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
    },
    "sogni-di-mare-ricordi-di-sabbia-letture-favolose-fossano": {
     "anni": [
@@ -7595,6 +7694,18 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "venerdi-dei-giochi-in-scatola-biblioteca-di-piasco": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Biblioteca di Piasco",
+    "manifest": "Venerdì dei Giochi in Scatola",
+    "nome": "Venerdì dei Giochi in Scatola - Biblioteca di Piasco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-04-16"
    }
   },
   "nome": "Piasco",
@@ -8419,6 +8530,17 @@
  },
  "revello": {
   "eventi": {
+   "caccia-ai-tesori-arancioni-revello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgo di Revello",
+    "manifest": "",
+    "nome": "Caccia ai Tesori Arancioni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "ernest-e-celestine-cinema-sotto-le-stelle-revello": {
     "anni": [
      2026
@@ -8509,6 +8631,17 @@
  },
  "roburent": {
   "eventi": {
+   "fiera-del-buon-gusto-e-della-tradizione-roburent": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo",
+    "manifest": "Fiera del Buon Gusto e della Tradizione",
+    "nome": "Fiera del Buon Gusto e della Tradizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "gymkana-in-bicicletta-pro-loco-roburent": {
     "anni": [
      2026
@@ -8522,6 +8655,23 @@
    }
   },
   "nome": "Roburent",
+  "prov": "CN"
+ },
+ "roccabruna": {
+  "eventi": {
+   "pedalando-tra-gli-enigmi-di-plof-unione-montana-va-roccabruna": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo di Roccabruna",
+    "manifest": "",
+    "nome": "Pedalando tra gli Enigmi di Plof - Unione Montana Valle Maira",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   }
+  },
+  "nome": "Roccabruna",
   "prov": "CN"
  },
  "roccadarazzo": {
@@ -8943,6 +9093,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "open-officina-spazio-aggregativo-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Fondazione Socio Assistenziale Gazzera-Magliano",
+    "manifest": "Open-Officina Spazio Aggregativo",
+    "nome": "Open-Officina Spazio Aggregativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
    }
   },
   "nome": "Saluzzo",
@@ -9882,6 +10043,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "game-on-centro-famiglie-e-ludoteca-la-casa-sull-al-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglie e Ludoteca La casa sull'albero",
+    "manifest": "Game On!",
+    "nome": "Game On! - Centro Famiglie e Ludoteca La casa sull'albero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
    "i-treni-raccontano-storie-da-custodire-savigliano": {
     "anni": [
      2026
@@ -10289,6 +10461,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "tara-che-bugia-gruppo-eventi-tarantasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Salone Polivalente",
+    "manifest": "",
+    "nome": "Tara Che Bugia 2026 - Gruppo Eventi Tarantasca",
+    "organizza": "Gruppo Eventi Tarantasca",
+    "pagina": true,
+    "ultima": "2026-10-04"
    }
   },
   "nome": "Tarantasca",
@@ -10327,6 +10510,23 @@
   },
   "nome": "Tonco",
   "prov": "AT"
+ },
+ "torino": {
+  "eventi": {
+   "ricette-di-cura-noau-officina-culturale-torino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Casa del Quartiere Donatello",
+    "manifest": "Tutti in Salute",
+    "nome": "Ricette di cura - Noau Officina Culturale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-02"
+   }
+  },
+  "nome": "Torino",
+  "prov": "AL"
  },
  "tortona": {
   "eventi": {
