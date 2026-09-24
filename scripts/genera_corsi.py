@@ -3738,9 +3738,18 @@ FILTER_JS = """
   // diventato rosso da solo il 21/09, senza che nessuno toccasse il codice.
   // Una stima migliore non basta, le schede non sono alte uguali (a 105px
   // si atterrava comunque a 127). Si riallinea il bersaglio una volta
-  // disegnato quello che ha intorno, finche' sta fermo - e mai se nel
-  // frattempo chi legge ha gia' iniziato a scorrere da se'.
-  var mosso=false;
+  // disegnato quello che ha intorno - e mai se nel frattempo chi legge ha
+  // gia' iniziato a scorrere da se'.
+  //
+  // Si guarda per un TEMPO e non per un numero di frame. La prima versione
+  // (23/09) smetteva appena il bersaglio restava fermo per due frame: su una
+  // macchina carica le schede vicine si disegnano DOPO quei due frame, e il
+  // bersaglio risaliva a 90px sotto un tetto di 136 - rosso una volta su due
+  // nella suite intera su Windows, verde da solo (24/09/2026). Ora si
+  // controlla ogni 100ms per un secondo e mezzo e si rimette a posto ogni
+  // volta che si sposta: costa una getBoundingClientRect ogni 100ms, cioe'
+  // niente, e non dipende da quando il browser decide di disegnare.
+  var mosso=false, giro=0;
   ['wheel','touchstart','keydown','mousedown'].forEach(function(t){
     window.addEventListener(t,function(){mosso=true;},{passive:true});
   });
@@ -3748,15 +3757,19 @@ FILTER_JS = """
     var id=(location.hash||'').replace('#','');
     var e=id&&document.getElementById(id);
     if(!e) return;
-    var giri=0, prima=null;
+    var mio=++giro, fine=Date.now()+1500, dove=null;
     mosso=false;
     (function passo(){
-      if(mosso||giri++>5) return;
+      // Un riallinea() piu' recente (load e hashchange possono arrivare
+      // insieme) prende il posto di questo: due giri paralleli si
+      // contenderebbero lo scorrimento.
+      if(mosso||mio!==giro||Date.now()>fine) return;
       var top=Math.round(e.getBoundingClientRect().top);
-      if(top===prima) return;
-      e.scrollIntoView({block:'start'});
-      prima=Math.round(e.getBoundingClientRect().top);
-      requestAnimationFrame(function(){requestAnimationFrame(passo);});
+      if(top!==dove){
+        e.scrollIntoView({block:'start'});
+        dove=Math.round(e.getBoundingClientRect().top);
+      }
+      setTimeout(passo,100);
     })();
   }
   if(document.readyState==='complete') riallinea();
