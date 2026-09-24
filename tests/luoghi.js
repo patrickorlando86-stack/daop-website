@@ -818,7 +818,7 @@ module.exports = async function luoghi(browser) {
     [/instagram\.com/i, 'Profilo Instagram'],
     [/youtube\.com/i, 'Canale YouTube']];
 
-  for (const f of ['luoghi.html', 'piscine.html']) {
+  for (const f of ['luoghi.html']) {
     const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
     const bottoni = [...html.matchAll(
       /<a href="(https?:\/\/[^"]+)"[^>]*>(Sito del luogo|Pagina Facebook|Profilo Instagram|Canale YouTube)<\/a>/g)]

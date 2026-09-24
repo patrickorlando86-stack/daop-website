@@ -5793,6 +5793,17 @@ nell'arancione delle sagre.
 
 ### `luoghi.html`: una pagina, non 800 schede
 
+**`/piscine.html` è stata tolta il 24/09/2026**, su decisione di Patrick. Era
+nata il 17/08 come l'unica pagina tematica dei luoghi, dichiarata scommessa nel
+commit («se fra sei mesi non prende niente, toglierla, non moltiplicarla»).
+Dopo cinque settimane faceva 1.352 impressioni e 10 clic in 28 giorni, quasi
+tutte ricerche su **una** piscina precisa — lo stesso problema di `luoghi.html`,
+non una domanda sua. Il file resta come **rimando** a `/luoghi.html` (schema di
+`ilpiattosano.html`, `noindex`), fuori sitemap e fuori dall'elenco del workflow;
+il codice che la scriveva è in `git log` (`b5f53645d`). Le altre pagine
+tematiche dei luoghi restano da non fare, per la ragione qui sotto.
+
+
 La domanda di partenza era "800 luoghi, faccio 800 schede?". No. Il sitemap ha
 270 URL: 800 pagine su template identico col nome del posto scambiato sarebbero i
 tre quarti del sito fatti delle pagine più deboli che abbiamo, cioè la

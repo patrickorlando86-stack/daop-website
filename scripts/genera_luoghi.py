@@ -1186,7 +1186,7 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
       perche' quella riga sta li' non si vede niente. Senza smooth arriva a
       zero, esatto, tutte e due le larghezze. Non e' un capriccio di Chrome:
       sono le due funzioni che si contraddicono, e qui l'animazione vale meno
-      dell'arrivare. Vale anche per piscine.html, che ha lo stesso guscio.
+      dell'arrivare.
    2. Sopra c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la barra
       dei filtri (156px sul telefono, 68px da 900px in su) - e un'ancora senza
       scroll-margin ci finisce sotto. Non riguarda solo il link della vetrina:
@@ -1983,16 +1983,6 @@ def render(elenco, oggi):
         vuoto,
         gruppi_comune(elenco, oggi),
         COME_ORDINIAMO,
-        # Il ponte verso /piscine.html, che fino al 20/08/2026 non ce l'aveva:
-        # misurato con grep, quella pagina riceveva ZERO link dal corpo di
-        # qualunque pagina del sito e non sta nemmeno in nav — cioe' esisteva
-        # solo in sitemap. E' il difetto gia' visto su luoghi.html il 14/08.
-        # Si stampa con la stessa soglia con cui la pagina entra in indice (5):
-        # sotto quel numero /piscine.html va in noindex, e linkare dal corpo una
-        # pagina che diciamo a Google di ignorare e' un segnale contro l'altro.
-        # E porta il numero, per la ragione di sempre: "32 piscine" e' un motivo
-        # per toccare, "Piscine" no.
-        _link_piscine(elenco),
         _link_idee(),
         '    <div class="com-link"><a href="/bollino.html">Il bollino Family Friendly</a>'
         '<a href="/metodo.html">Come verifichiamo</a>'
@@ -2085,25 +2075,13 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-PISCINE_URL = f"{G.SITE_URL}/piscine.html"
-PISCINE_PATH = os.path.join(ROOT, "piscine.html")
-# Le due sottocategorie che finiscono in pagina. `riparo` (aperto/chiuso) e'
-# gia' calcolato dai tag e fa da solo il taglio fra le due meta'.
-PISCINE_SOTTO = ('Piscine & Parchi Acquatici', 'Nuoto')
-
-
-def _link_piscine(elenco):
-    """La riga che manda a /piscine.html, o '' se la pagina non e' in indice.
-
-    Sta in un blocco suo e non nella riga dei link di servizio perche' e' un
-    'vedi anche' di contenuto: le piscine sono una fetta tematica del catalogo,
-    cioe' la prima delle pagine di incrocio, non un link istituzionale come il
-    bollino o il metodo."""
-    n = len(le_piscine(elenco))
-    if n < 5:
-        return ''
-    return ('    <div class="com-link"><a href="/piscine.html">'
-            f'{n} piscine per bambini</a></div>')
+# /piscine.html e' stata TOLTA il 24/09/2026 (Patrick). Era nata il 17/08 come
+# scommessa dichiarata ("se fra sei mesi non prende niente, toglierla, non
+# moltiplicarla"): dopo cinque settimane faceva 1.352 impressioni e 10 clic in
+# 28 giorni, quasi tutte ricerche su UNA piscina precisa ("piscina Quattordio"),
+# cioe' lo stesso problema di luoghi.html. Il file resta come rimando a
+# /luoghi.html (schema di ilpiattosano.html), cosi' i link vecchi non danno 404.
+# Il generatore non la scrive piu': render_piscine() e' in git log (b5f53645d).
 
 
 def _link_idee():
@@ -2141,164 +2119,6 @@ def _link_idee():
     if not voci:
         return ''
     return '    <div class="com-link">' + "".join(voci) + '</div>'
-
-
-def le_piscine(elenco):
-    return [l for l in elenco if (l.get('cat_sotto') or '') in PISCINE_SOTTO]
-
-
-def render_piscine(elenco, oggi):
-    """/piscine.html — UNA pagina, scritta a mano, non la prima di trenta.
-
-    ⚠️ LEGGERE IL PRIMO COMMENTO DEL FILE PRIMA DI COPIARE QUESTA FUNZIONE PER
-    UN'ALTRA CATEGORIA. Il motivo per cui gli 891 luoghi stanno in una pagina
-    sola e' che 800 pagine su template identico sono la definizione di scaled
-    content abuse, e la penalizzazione se la porta dietro il dominio. Trenta
-    pagine "<categoria> per bambini" sfornate da un ciclo sarebbero la stessa
-    cosa in piccolo. Questa esiste perche' ha una domanda sua a cui l'elenco
-    generale non risponde, ed e' l'unica condizione che ne giustifichi un'altra.
-
-    LA DOMANDA. Sotto la parola "piscina" ci sono due posti che si cercano in due
-    momenti diversi dell'anno e non si sostituiscono: quella all'aperto dove si
-    porta il bambino a fare il bagno a luglio (23 su 33), e la vasca coperta dove
-    lo si iscrive al corso a settembre (10). Chi cerca una non vuole l'altra, e
-    in un elenco unico ordinato per comune finiscono mescolate.
-
-    ⚠️ ONESTA' SUI NUMERI: al 17/08/2026 questa pagina nasce SENZA evidenza di
-    domanda. Nell'export Search Console 09-15/08 le query con dentro "piscina"
-    fanno 4 query, 5 impressioni e ZERO clic. E' una scommessa strutturale -
-    luoghi.html fa 538 impressioni e 3 clic, cioe' lo 0,56%, il peggior CTR del
-    sito, e il sospetto e' che sia perche' parla di tutto - non la risposta a una
-    domanda misurata. Se fra sei mesi non prende niente, la mossa giusta e'
-    toglierla, non moltiplicarla.
-    """
-    css, nav, foot = G._guscio()
-    e = G.esc
-    piscine = le_piscine(elenco)
-    aperte = [l for l in piscine if l.get('riparo') == 'aperto']
-    coperte = [l for l in piscine if l.get('riparo') != 'aperto']
-    n = len(piscine)
-    comuni = len({(l['prov'], l['comune']) for l in piscine})
-    zona = dove_siamo(piscine)
-
-    titolo = G.trunc(f"Piscine per bambini in {zona}", 62)
-    descr = (f"{n} piscine per bambini in {comuni} comuni: quelle all'aperto per il "
-             "bagno d'estate e quelle coperte per i corsi di nuoto, con orari e "
-             "contatti. Verificate una per una.")
-    intro = ('    <p class="lg-intro">Le piscine all\'aperto dove si va a fare il bagno '
-             'e le vasche coperte dove si fa il corso: sono due cose diverse, e qui '
-             'stanno divise. Apri una riga per orari, prezzi e contatti.</p>')
-
-    editoriale = (
-        '    <section class="lg-ordine">'
-        '<h2>Per il bagno o per il corso?</h2>'
-        '<p>È la prima cosa da chiarire, perché sotto la stessa parola ci sono due '
-        'posti che non si sostituiscono. La <strong>piscina all\'aperto</strong> è '
-        'una gita: si va a giugno, luglio e agosto, si sta un pomeriggio, spesso '
-        'c\'è il prato e il bar, e quello che conta è se c\'è una <strong>vasca '
-        'piccola</strong> per chi non tocca e quanta ombra c\'è nelle ore centrali. '
-        'La <strong>vasca coperta</strong> è un impegno annuale: ci si iscrive a '
-        'settembre, si va una o due volte a settimana, e quello che conta è '
-        'l\'orario del corso e quanti bambini ci sono per istruttore.</p>'
-        '<p>Sui <strong>prezzi</strong> conviene essere espliciti: quasi nessuno li '
-        'pubblica, e quelli che circolano invecchiano in una stagione. Dove il '
-        'gestore ce li ha dati li trovi nella riga; dove non ci sono, il telefono '
-        'c\'è e una chiamata risolve. Vale anche per gli <strong>ingressi '
-        'ridotti</strong> per i più piccoli e per l\'abbonamento a dieci ingressi: '
-        'quasi sempre esistono e quasi mai sono scritti da qualche parte.</p>'
-        '<p>Due avvertenze pratiche. Le piscine estive <strong>aprono e chiudono '
-        'con il tempo</strong>, non con il calendario: a giugno e a settembre '
-        'conviene chiamare prima di mettersi in macchina. E per i corsi, i posti '
-        'nelle fasce del tardo pomeriggio — le uniche compatibili con la scuola — '
-        'finiscono entro le prime due settimane di settembre.</p>'
-        '</section>')
-
-    def blocco(titoletto, sotto, lista):
-        if not lista:
-            return ''
-        return (f'    <section class="com-grp"><div class="com-head"><div class="com-b">'
-                f'<h3>{e(titoletto)}</h3><p class="com-per">{e(sotto)}</p></div></div>'
-                f'</section>' + gruppi_comune(lista, oggi))
-
-    corpo = "\n".join(x for x in [
-        '  <div class="lg-wrap">',
-        filtri(piscine),
-        editoriale,
-        blocco("All'aperto, per il bagno",
-               f"{len(aperte)} piscine estive: si va per la giornata, da giugno a settembre",
-               aperte),
-        blocco("Coperte, per i corsi",
-               f"{len(coperte)} vasche al chiuso: scuole nuoto e corsi tutto l'anno",
-               coperte),
-        '    <div class="com-link"><a href="/luoghi.html">Tutti i luoghi per famiglie</a>'
-        '<a href="/metodo.html">Come verifichiamo</a></div>',
-        # Questa pagina appartiene alla famiglia Luoghi, quindi la riga porta le
-        # altre tre: 'luoghi' e' la famiglia, non l'URL. Il link a /luoghi.html
-        # resta sopra ed e' un'altra cosa — quello e' il padre, questi i cugini.
-        G.blocco_ecosistema('luoghi'),
-        f'    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: '
-        f'{oggi.day} {G.MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>',
-        '  </div>',
-    ] if x)
-
-    return f"""<!DOCTYPE html>
-<!-- PAGINA GENERATA da scripts/genera_luoghi.py: le modifiche scritte a mano
-     qui dentro spariscono alla run successiva. Si tocca il generatore. -->
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{e(titolo)}</title>
-<meta name="description" content="{e(descr)}">
-<meta name="robots" content="{'index, follow' if n >= 5 else 'noindex, follow'}">
-<link rel="canonical" href="{PISCINE_URL}">
-<meta property="og:title" content="{e(titolo)}">
-<meta property="og:description" content="{e(descr)}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{PISCINE_URL}">
-<meta property="og:locale" content="it_IT">
-<meta property="og:site_name" content="DAOP">
-<meta property="og:image" content="{G.DEFAULT_IMG}">
-<meta property="og:image:width" content="1600">
-<meta property="og:image:height" content="960">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{e(titolo)}">
-<meta name="twitter:description" content="{e(G.trunc(descr, 120))}">
-<meta name="twitter:image" content="{G.DEFAULT_IMG}">
-<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
-<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preconnect" href="{SUPABASE_FOTO}" crossorigin>
-<link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{G.PAGINA_CSS}{G.COMUNE_CSS}{LUOGHI_CSS}{_css_categorie(piscine)}</style>
-<script src="/assets/js/cookie-consent.js"></script>
-<script src="/assets/js/daop-track.js" defer></script>
-</head>
-<body>
-{nav}
-<main id="contenuto">
-<header class="page-hero ev-hero lg-hero">
-  <div class="page-hero-inner">
-    <div class="ev-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <a href="/luoghi.html">Luoghi</a> › <span>Piscine</span>
-    </div>
-    <h1>Piscine <em>per bambini</em></h1>
-    <p class="ev-when">{e(zona)} · {n} piscine in {comuni} comuni</p>
-{intro}
-  </div>
-</header>
-{corpo}
-{G.blocco_ginetto()}</main>
-{foot}
-<script>
-function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
-function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
-</script>
-{LUOGHI_JS}
-{jsonld(piscine)}
-</body>
-</html>
-"""
 
 
 def salva_istantanea(elenco):
@@ -2463,17 +2283,6 @@ def main():
     salva_istantanea(foglio)
     salva_indice_comuni(elenco)
     update_sitemap(len(elenco))
-    # /piscine.html — sotto le 5 righe si scrive lo stesso ma esce in noindex e
-    # fuori sitemap, come le pagine di intenzione: la pagina resta raggiungibile
-    # e non promette un elenco che non ha.
-    piscine = le_piscine(elenco)
-    open(PISCINE_PATH, "w", encoding="utf-8").write(render_piscine(elenco, oggi))
-    if len(piscine) >= 5:
-        update_sitemap(len(piscine), PISCINE_URL)
-    aperte = sum(1 for l in piscine if l.get('riparo') == 'aperto')
-    print(f"[genera_luoghi] piscine.html: {len(piscine)} piscine "
-          f"({aperte} all'aperto, {len(piscine) - aperte} coperte)"
-          + ("" if len(piscine) >= 5 else " — sotto soglia, noindex"))
     peso = os.path.getsize(OUT_PATH) / 1024
     print(f"[genera_luoghi] luoghi.html: {len(elenco)} luoghi "
           f"({da_cat} da catalogo, {len(elenco) - da_cat} dall'agenda), "

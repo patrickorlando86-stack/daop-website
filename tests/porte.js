@@ -31,7 +31,8 @@ const HUB = [
 // SOLO perche' nav e footer non le nominano: se un giorno una di queste entra
 // in nav, questa prova diventa verde per il motivo sbagliato e va rifatta
 // guardando il corpo invece del file intero.
-const EX_ORFANE = ['centri-invernali.html', 'centri-pasquali.html', 'piscine.html'];
+const EX_ORFANE = ['centri-invernali.html', 'centri-pasquali.html'];
+// piscine.html era la terza: tolta il 24/09/2026, oggi e' un rimando a luoghi.html.
 
 function html(f) {
   return fs.readFileSync(path.join(RADICE, f), 'utf8');
