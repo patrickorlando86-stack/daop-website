@@ -981,8 +981,11 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
    si notavano, perche' le sezioni sono alte; filtrando restano una o due righe
    e quei 144px diventano il buco che si vede fra un comune e l'altro. */
 .lg-grp{margin:26px 0 0;padding:0}
-.lg-grp-h{display:flex;align-items:baseline;gap:10px;margin:0 0 6px;padding:0 0 6px;
+.lg-grp-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin:0 0 6px;padding:0 0 6px;
   border-bottom:1px solid rgba(45,74,92,0.10)}
+/* flex-wrap (24/09/2026): con un comune dal nome lungo il link "Eventi a
+   Castelnuovo Scrivia" non ci stava e usciva dallo schermo - a 360px la
+   pagina scorreva di lato di 11px. Ora scende sulla riga sotto, a destra. */
 .lg-grp-h h2{font-family:'Playfair Display',serif;font-size:1.24rem;font-weight:800;
   color:var(--navy);margin:0}
 .lg-grp-h span{font-size:0.78rem;font-weight:600;color:var(--text-light)}
@@ -1201,7 +1204,7 @@ html{scroll-behavior:auto}
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input type="search" id="lg-q" placeholder="Cerca un posto, un paese, un'attività…" aria-label="Cerca fra i luoghi" autocomplete="off">
       </div>
-      <select class="ev-select" data-campo="prov" aria-label="Filtra per provincia"><option value="all">Prov.</option><option value="al">Prov. AL</option><option value="at">Prov. AT</option><option value="cn">Prov. CN</option></select>
+      <select class="ev-select" data-campo="prov" aria-label="Filtra per provincia"><option value="all">Provincia</option><option value="al">Alessandria</option><option value="at">Asti</option><option value="cn">Cuneo</option></select>
       <input class="ev-select is-comune" type="search" data-campo="comune" id="lg-comune" list="lg-comuni" placeholder="Comune" aria-label="Filtra per comune" autocomplete="off"><datalist id="lg-comuni"><option value="Acqui Terme" data-prov="al"></option><option value="Alessandria" data-prov="al"></option><option value="Alluvioni Piovera" data-prov="al"></option><option value="Arquata Scrivia" data-prov="al"></option><option value="Borghetto di Borbera" data-prov="al"></option><option value="Borgoratto Alessandrino" data-prov="al"></option><option value="Capriata d&#x27;Orba" data-prov="al"></option><option value="Casale Monferrato" data-prov="al"></option><option value="Castelletto d&#x27;Orba" data-prov="al"></option><option value="Castelnuovo Scrivia" data-prov="al"></option><option value="Frugarolo" data-prov="al"></option><option value="Gavi" data-prov="al"></option><option value="Novi Ligure" data-prov="al"></option><option value="Ovada" data-prov="al"></option><option value="Quattordio" data-prov="al"></option><option value="San Salvatore Monferrato" data-prov="al"></option><option value="Serravalle Scrivia" data-prov="al"></option><option value="Spinetta Marengo" data-prov="al"></option><option value="Tortona" data-prov="al"></option><option value="Trisobbio" data-prov="al"></option><option value="Asti" data-prov="at"></option><option value="Nizza Monferrato" data-prov="at"></option><option value="Alba" data-prov="cn"></option><option value="Bossolasco" data-prov="cn"></option><option value="Bra" data-prov="cn"></option><option value="Camerana" data-prov="cn"></option><option value="Cortemilia" data-prov="cn"></option><option value="Cuneo" data-prov="cn"></option><option value="Entracque" data-prov="cn"></option><option value="Fossano" data-prov="cn"></option><option value="Mondovì" data-prov="cn"></option><option value="Montà" data-prov="cn"></option><option value="Paesana" data-prov="cn"></option><option value="Roccabruna" data-prov="cn"></option><option value="Saluzzo" data-prov="cn"></option><option value="Savigliano" data-prov="cn"></option><option value="Sommariva Perno" data-prov="cn"></option><option value="Torre Bormida" data-prov="cn"></option></datalist>
       <select class="ev-select" data-campo="cat" aria-label="Filtra per tipo di luogo"><option value="all">Tipo</option><option value="acqua-mare">Acqua</option><option value="sport">Sport</option></select>
     </div>

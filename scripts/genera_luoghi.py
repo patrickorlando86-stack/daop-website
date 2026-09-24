@@ -1031,8 +1031,11 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
    si notavano, perche' le sezioni sono alte; filtrando restano una o due righe
    e quei 144px diventano il buco che si vede fra un comune e l'altro. */
 .lg-grp{margin:26px 0 0;padding:0}
-.lg-grp-h{display:flex;align-items:baseline;gap:10px;margin:0 0 6px;padding:0 0 6px;
+.lg-grp-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin:0 0 6px;padding:0 0 6px;
   border-bottom:1px solid rgba(45,74,92,0.10)}
+/* flex-wrap (24/09/2026): con un comune dal nome lungo il link "Eventi a
+   Castelnuovo Scrivia" non ci stava e usciva dallo schermo - a 360px la
+   pagina scorreva di lato di 11px. Ora scende sulla riga sotto, a destra. */
 .lg-grp-h h2{font-family:'Playfair Display',serif;font-size:1.24rem;font-weight:800;
   color:var(--navy);margin:0}
 .lg-grp-h span{font-size:0.78rem;font-weight:600;color:var(--text-light)}
@@ -1606,9 +1609,13 @@ def filtri(elenco):
 
     prov = sorted({l['prov'] for l in elenco if l['prov']})
     if len(prov) > 1:
-        opts = "".join(f'<option value="{p.lower()}">Prov. {p}</option>' for p in prov)
+        # Il nome per esteso e non la sigla (24/09/2026), come nella barra
+        # dell'agenda dall'11/09: "Prov. AL" chiede a chi legge il codice
+        # della propria provincia. Il nome viene da PROVINCE_NOMI, un posto solo.
+        opts = "".join(f'<option value="{p.lower()}">{G.PROVINCE_NOMI.get(p, p)}</option>'
+                       for p in prov)
         campi.append('<select class="ev-select" data-campo="prov" aria-label="Filtra per provincia">'
-                     f'<option value="all">Prov.</option>{opts}</select>')
+                     f'<option value="all">Provincia</option>{opts}</select>')
 
     # Il comune NON e' una <select>, ed e' una scelta obbligata. Con 297 voci il
     # selettore nativo di Android diventa un pannello che copre quasi tutto lo
