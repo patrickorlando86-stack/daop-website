@@ -6797,7 +6797,11 @@ def _landing_righe(ev, oggi, eta=False, gratis=False, dettagli=False):
                 f' data-end="{e["d_end"].isoformat()}"{free_attr(e)}'
                 f'{geo_attrs(e)}>{thumb}<span class="com-b">'
                 f'<span class="com-d">{esc(quando)}'
-                f'<span class="com-cat">{esc(cat)}</span></span>'
+                # Con `dettagli` (le pagine di Halloween) la categoria non si
+                # stampa: sono tutte feste di Halloween, e "SAGRA & FESTA"
+                # davanti a ogni riga ripete il titolo della pagina (24/09).
+                + ('' if dettagli else f'<span class="com-cat">{esc(cat)}</span>')
+                + '</span>'
                 f'<a class="com-go" href="{_href_evento(e)}">'
                 f'{esc(trunc(e.get("nome") or "", 80))}</a>'
                 # L'eta' solo dove e' l'asse della pagina (le
