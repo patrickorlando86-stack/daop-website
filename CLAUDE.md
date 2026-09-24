@@ -5162,7 +5162,7 @@ non dentro le pagine: il JS in fondo a `eventi.html` non passa da `_guscio()`
 vedevano, e ricopiarlo nei template sarebbe stato tredici copie da tenere
 allineate — la stessa ragione per cui `daop-track.js` è un file solo.
 
-**Dove c'è, e sono 13 pagine**: `eventi.html`, `oggi`, `weekend`, le sei
+**Dove c'è, e sono 13 pagine** (più `luoghi.html` dal 24/09/2026, vedi sotto): `eventi.html`, `oggi`, `weekend`, le sei
 d'incrocio, le tre `sagre-provincia-*`, `ferragosto`. **Halloween no**, ed è il
 comportamento giusto: `_landing_geo()` conta gli eventi *con coordinate* e sotto
 `MIN_FILTRI` non stampa niente — a metà agosto quella pagina ne ha 2. Le pagine
@@ -5343,6 +5343,70 @@ per come provarlo in locale.
 `raggio_km` va **come dimensione, non come metrica**: GA4 lo propone anche come
 metrica perché è un numero, ma sommare i chilometri non vuol dire niente — serve
 sapere *quante volte* è stato scelto il gradino 30, cioè raggruppare per valore.
+
+#### Dal 24/09/2026 anche su `luoghi.html`, e la mappa aspetta
+
+**Il perché viene prima del come.** La proposta di partenza era una mappa dei
+luoghi. Le ricerche dicono che sul telefono **l'elenco resta la vista
+principale** e la mappa è un'opzione in più (NN/g, *Maps and Location Finders
+on Mobile Devices*): mostra più informazioni nello stesso spazio, si sceglie
+prima, e la mappa dentro una pagina che scorre ruba il gesto a chi scorre. La
+domanda «cosa c'è vicino a dove vado?» ha una risposta che è ancora un
+elenco, ed era già scritta: questo modulo. **Quindi prima questo, e la mappa
+solo se servirà ancora.** Non è nata, e chi la riprende parte dalle note più
+sotto.
+
+Cosa si è fatto, e le decisioni che non si ricavano dal diff:
+
+- **Le coordinate le stampa `G.geo_attrs()`**, la stessa funzione delle righe
+  dell'agenda: due pagine che scrivono gli stessi tre attributi in due modi
+  divergono alla prima modifica. Costano ~55 byte per riga, **~50 KB su 2,1
+  MB**. Al 24/09 le hanno 907 righe su 908.
+- **Il markup è quello di `G._landing_geo()`**, e sta nello stesso posto
+  dell'agenda: **fuori** dalla barra appiccicosa, che sul telefono qui è già
+  alta 156px. Zero CSS nuovo: `.ev-geo*` arriva dal `<style>` di `eventi.html`
+  via `_guscio()`.
+- **Il raggio filtra e non riordina, e qui vale doppio.** Nell'agenda l'ordine
+  è la data; qui è **alfabetico per comune, ed è dichiarato** in
+  `#come-ordiniamo` (art. 22 del Codice del consumo). Ordinare per distanza non
+  sarebbe vietato, ma andrebbe cambiato anche quel testo. Per ora chi parte da
+  Ovada vede prima Capriata d'Orba: ogni riga dice a quanti km sta.
+- **Le copie del riquadro Sponsorizzati passano dal raggio ma non si contano**:
+  una scheda pagata oltre i 10 km sparisce come le altre e dice la sua
+  distanza, ma nel numero sul gradino vale una volta sola. È la regola già
+  scritta per il «N luoghi».
+- **«Azzera i filtri» toglie anche il raggio**, e così un link diretto
+  `#lg-…` a un posto fuori raggio. Il modulo espone `azzera()` apposta: senza,
+  il bottone che promette l'elenco intero lasciava fuori tutto quello oltre il raggio.
+- **Il modulo sa dire «luogo»**: `nomi` e `dove` in `avvia()`, con l'agenda
+  come ripiego. Le due frasi che scrive da sé dicevano «evento» e «in agenda».
+
+**Un difetto preso dalla prova e non dall'occhio:** la funzione nuova si
+chiamava `azzera`, come la variabile che già teneva il bottone ✕. In JS la
+dichiarazione di funzione sale in cima e la `var` la sovrascrive: `vicino.azzera
+is not a function`, con l'HTML giusto. Rinominata `spegni`.
+
+**GA4 non cambia**: `vicino_a_me` porta già `page_path`, quindi i luoghi si
+separano dall'agenda da soli. Il numero da guardare è quante volte parte da
+`/luoghi.html` contro le visite a quella pagina, con la regola dei 2,5 per
+utente (sopra, sei tu che provi).
+
+`tests/luoghi.js` difende otto rapporti e **nessun conteggio**: posizione mai
+chiesta da sola, copertura ≥95%, controllo fuori dalla barra, **il numero sul
+gradino uguale alle righe mostrate** (anche con un tipo scelto), ogni riga
+mostrata nel raggio e con la sua distanza, ordine alfabetico intatto, «Azzera»
+e link diretto che tolgono il raggio. Verificate rosse rimettendo tre difetti
+uno alla volta: gradino che conta sul totale («59 promessi, 4 mostrati»),
+«Azzera» senza raggio, ancora senza raggio.
+
+**Se un giorno si fa la mappa**, le cose già verificate il 24/09/2026:
+OpenFreeMap dà le mappe di sfondo senza limiti, chiave né cookie, anche per uso
+commerciale, col solo credito a OpenStreetMap; MapLibre 5 (~280 KB compressi)
+si ospita in `assets/` e si carica **solo al tocco**; lo spostamento a due dita
+(`cooperativeGestures`) è quello che evita la trappola dello scorrimento;
+l'IP di chi guarda arriva comunque al server delle mappe (la sentenza di Monaco
+del 2022 sui Google Fonts), quindi una riga nella privacy policy. E la mappa
+segue gli stessi filtri, con i segnaposto uguali per chi paga e chi no.
 
 ### I gruppi dell'agenda sono per data di INIZIO, e il calendario chiede altro
 

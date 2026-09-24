@@ -58,6 +58,13 @@
     /* opz.voci      elementi con data-lat/data-lon (righe o schede)
        opz.alCambio  la pagina rifa' i suoi filtri
        opz.riga      dove appendere la distanza dentro una voce (opzionale)
+       opz.nomi      [singolare, plurale] di quello che la pagina elenca:
+                     ['evento', 'eventi'] se manca. Su luoghi.html sono
+                     ['luogo', 'luoghi'], e le due frasi che il modulo scrive
+                     da se' (il suggerimento a zero risultati e il comune che
+                     non c'e') devono dire la cosa giusta.
+       opz.dove      dove sta l'elenco, nella frase del comune che non c'e':
+                     'in agenda' se manca.
        Torna null se il controllo non si e' acceso: la pagina prosegue senza. */
     avvia: function (opz) {
       var nodo = document.getElementById('ev-geo');
@@ -78,6 +85,8 @@
       var hint = document.getElementById('ev-geo-hint');
       var nota = document.getElementById('ev-geo-note');
 
+      var nomi = opz.nomi || ['evento', 'eventi'];
+      var dove = opz.dove || 'in agenda';
       var centro = null, raggio = null, comuni = null, richiesta = 0;
       var dist = new Map();
       var alCambio = opz.alCambio || function () {};
@@ -225,7 +234,7 @@
         }
         hint.textContent = (dentro === 0 && prossimo >= 0)
           ? 'Niente entro ' + raggio + ' km. Entro ' + STEPS[prossimo] + ' km ' +
-            (per[prossimo] === 1 ? 'c\'è 1 evento.' : 'ce ne sono ' + per[prossimo] + '.')
+            (per[prossimo] === 1 ? 'c\'è 1 ' + nomi[0] + '.' : 'ce ne sono ' + per[prossimo] + '.')
           : '';
       }
 
@@ -285,7 +294,7 @@
            guasto. */
         if (t.length >= 3) {
           if (centro) togliCentro(true);
-          nota.textContent = 'Nessun evento in agenda a «' + campo.value.trim() +
+          nota.textContent = 'Nessun ' + nomi[0] + ' ' + dove + ' a «' + campo.value.trim() +
             '». Prova un comune vicino.';
         }
       }
@@ -356,7 +365,12 @@
         }).catch(function () {});
       }
 
-      return { entro: entro, attivo: attivo, conta: conta };
+      /* "Azzera i filtri" della pagina deve togliere anche il raggio: se no
+         il bottone che promette l'elenco intero lascia fuori tutto quello che
+         sta oltre i 20 km, e la sola traccia del perche' e' una riga sopra. */
+      function spegni() { if (centro) togliCentro(false); }
+
+      return { entro: entro, attivo: attivo, conta: conta, azzera: spegni };
     }
   };
 })();
