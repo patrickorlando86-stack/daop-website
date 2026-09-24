@@ -1245,6 +1245,24 @@ LUOGHI_JS = r"""<script>
   var gruppi = [].slice.call(document.querySelectorAll('.lg-grp'));
   if (!righe.length) return;
 
+  // L'ordine di partenza, che e' quello del generatore (alfabetico per comune)
+  // e quello a cui si torna togliendo il centro. Il segnaposto sta subito dopo
+  // l'ultimo gruppo: i gruppi si rimettono davanti a lui, cosi' niente di quello
+  // che segue (come e' ordinato l'elenco, i link in fondo) si sposta.
+  var righeDi = new Map(gruppi.map(function (g) {
+    return [g, [].slice.call(g.querySelectorAll(':scope > .lg-row[data-cat]'))];
+  }));
+  var fineGruppi = gruppi.length ? document.createComment('fine gruppi') : null;
+  var inizioGruppi = gruppi.length ? document.createComment('inizio gruppi') : null;
+  if (fineGruppi) {
+    var ultimo = gruppi[gruppi.length - 1];
+    ultimo.parentNode.insertBefore(fineGruppi, ultimo.nextSibling);
+    gruppi[0].parentNode.insertBefore(inizioGruppi, gruppi[0]);
+  }
+  var posGruppo = new Map(gruppi.map(function (g, i) { return [g, i]; }));
+  var posRiga = new Map();
+  righeDi.forEach(function (rr) { rr.forEach(function (r, i) { posRiga.set(r, i); }); });
+
   // L'indice si costruisce alla PRIMA ricerca, non al caricamento: leggere il
   // testo di centinaia di righe e' lavoro che quasi nessun visitatore usa.
   // Si legge il <details> INTERO e non la sola intestazione, cosi' la ricerca
@@ -1311,6 +1329,7 @@ LUOGHI_JS = r"""<script>
     // Il riquadro: le prime `postiV` fra quelle che passano, nell'ordine del
     // generatore - che ruota ogni notte. Nessuna che passa: il riquadro sparisce
     // con la sua intestazione, invece di restare un titolo sopra il vuoto.
+    ordina();
     var inV = 0;
     vetr.forEach(function (r) {
       var ok = inV < postiV && passa(r);
@@ -1330,6 +1349,77 @@ LUOGHI_JS = r"""<script>
       ? visti + (visti === 1 ? ' luogo' : ' luoghi') + ' con questi filtri'
       : '';
     if (vuoto) vuoto.hidden = visti !== 0;
+  }
+
+  // Con un punto di partenza l'elenco va dal piu' vicino al piu' lontano: i
+  // comuni per il loro luogo visibile piu' vicino, e dentro ogni comune i luoghi
+  // per distanza. Senza, torna l'ordine del generatore. Il gruppo per comune
+  // resta, perche' l'intestazione e' anche l'ancora #c-... che arriva dalle
+  // schede evento. Il riquadro Sponsorizzati non si tocca: e' l'unica posizione
+  // che si compra, e chi paga non guadagna niente da questo ordine - conta solo
+  // la distanza, scritta in #come-ordiniamo.
+  // Si spostano SOLO i gruppi visibili, in testa: con un raggio attivo sono
+  // una manciata su trecento, e quelli nascosti possono stare dove vogliono -
+  // non si vedono. Spostarli tutti costava ~300 ms su un telefono di fascia
+  // media (CPU 4x), quasi il triplo del filtro stesso; cosi' costa quanto
+  // sposta. Tolto il centro, un giro solo rimette l'ordine del generatore.
+  var sporchi = new Set(), rimescolato = false;
+  function ordina() {
+    if (!fineGruppi) return;
+    if (!(vicino && vicino.attivo())) {
+      sporchi.forEach(function (g) {
+        righeDi.get(g).forEach(function (r) { g.appendChild(r); });
+      });
+      sporchi.clear();
+      if (rimescolato) {
+        gruppi.forEach(function (g) { fineGruppi.parentNode.insertBefore(g, fineGruppi); });
+        rimescolato = false;
+      }
+      return;
+    }
+    function d(r) {
+      var x = vicino.distanza(r);
+      return x === undefined ? Infinity : x;
+    }
+    var visibili = [], chiave = new Map();
+    // Visibile = ha almeno una riga visibile. NON g.hidden: applica() lo
+    // aggiorna DOPO questa funzione, quindi li' c'e' ancora lo stato del giro
+    // prima - ed e' cosi' che passando da Ovada a Cuneo restavano ordinati i
+    // gruppi di Ovada.
+    gruppi.forEach(function (g) {
+      var min = Infinity, visto = false;
+      righeDi.get(g).forEach(function (r) {
+        if (r.hidden) return;
+        visto = true;
+        min = Math.min(min, d(r));
+      });
+      if (!visto) return;
+      chiave.set(g, min);
+      visibili.push(g);
+    });
+    // Dentro ogni gruppo visibile i luoghi per distanza.
+    visibili.forEach(function (g) {
+      var rr = righeDi.get(g).slice().sort(function (a, b) {
+        return (d(a) - d(b)) || (posRiga.get(a) - posRiga.get(b));
+      });
+      var gia = [].slice.call(g.querySelectorAll(':scope > .lg-row[data-cat]'));
+      if (gia.every(function (r, i) { return r === rr[i]; })) return;
+      rr.forEach(function (r) { g.appendChild(r); });
+      sporchi.add(g);
+    });
+    var voluto = visibili.slice().sort(function (a, b) {
+      return (chiave.get(a) - chiave.get(b)) || (posGruppo.get(a) - posGruppo.get(b));
+    });
+    // visibili e' nell'ordine del generatore, non in quello della pagina:
+    // l'ordine vero si legge dal DOM.
+    var inPagina = [].filter.call(document.querySelectorAll('.lg-grp'),
+      function (g) { return chiave.has(g); });
+    if (voluto.every(function (g, i) { return g === inPagina[i]; })) return;
+    // Davanti al segnaposto d'inizio, uno dopo l'altro: il segnaposto non si
+    // sposta mai, quindi l'ordine d'inserimento e' l'ordine in pagina. (Con un
+    // gruppo come riferimento, il primo spostato scavalcava gli altri.)
+    voluto.forEach(function (g) { inizioGruppi.parentNode.insertBefore(g, inizioGruppi); });
+    rimescolato = true;
   }
 
   // La tendina dei comuni segue quella delle province: scegliendo "Prov. AL"
@@ -1835,7 +1925,10 @@ def vetrina(elenco, oggi):
 # posto) e dov'e' l'unica posizione comprabile. Il resto era prosa.
 COME_ORDINIAMO = """    <section class="lg-ordine" id="come-ordiniamo">
       <h2>Come è ordinato questo elenco</h2>
-      <p>Per comune, in ordine alfabetico. I filtri restringono l'elenco, non lo riordinano.</p>
+      <p>Per comune, in ordine alfabetico. Se scegli un punto di partenza con
+      «Vicino a me», i comuni vanno dal più vicino al più lontano, e così i luoghi
+      dentro ogni comune: conta solo la distanza in linea d'aria. Gli altri filtri
+      restringono l'elenco, non lo riordinano.</p>
       <p>Le schede <b>Sponsorizzate</b> sono scritte da chi gestisce il luogo e paga
       questo spazio: cambia <em>cosa</em> c'è dentro, non <em>dove</em> sta la riga.
       L'unica posizione a pagamento è il riquadro “Sponsorizzati” in cima: mostra fino a

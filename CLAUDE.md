@@ -5366,11 +5366,28 @@ Cosa si è fatto, e le decisioni che non si ricavano dal diff:
   dell'agenda: **fuori** dalla barra appiccicosa, che sul telefono qui è già
   alta 156px. Zero CSS nuovo: `.ev-geo*` arriva dal `<style>` di `eventi.html`
   via `_guscio()`.
-- **Il raggio filtra e non riordina, e qui vale doppio.** Nell'agenda l'ordine
-  è la data; qui è **alfabetico per comune, ed è dichiarato** in
-  `#come-ordiniamo` (art. 22 del Codice del consumo). Ordinare per distanza non
-  sarebbe vietato, ma andrebbe cambiato anche quel testo. Per ora chi parte da
-  Ovada vede prima Capriata d'Orba: ogni riga dice a quanti km sta.
+- **Con un punto scelto l'elenco va dal più vicino** (dal 24/09/2026, chiesto
+  da Patrick). Qui è il contrario dell'agenda, e la differenza è voluta:
+  l'agenda è un calendario e il suo ordine è la data; un luogo non ha data, e
+  a chi ha appena detto «parto da Ovada» l'alfabetico non risponde a niente —
+  metteva Capriata d'Orba prima di Ovada. **I gruppi per comune restano**, e
+  vanno per il loro luogo visibile più vicino; dentro ogni comune i luoghi per
+  distanza. Il gruppo resta perché la sua intestazione è l'ancora `#c-…` che
+  arriva dalle ~450 schede evento. Tolto il punto torna l'ordine del
+  generatore.
+- **È dichiarato in `#come-ordiniamo`**, ed è la condizione per farlo: l'art.
+  22 chiede i parametri di ordinamento, e il testo diceva «i filtri non
+  riordinano». **Chi paga non guadagna niente** da quest'ordine — conta solo
+  la distanza — e il riquadro Sponsorizzati resta dov'è, sopra l'elenco.
+- **Si spostano solo i gruppi visibili**, e solo se l'ordine cambia davvero.
+  Spostarli tutti e trecento costava ~300 ms a CPU 4x, quasi il triplo del
+  filtro; così il punto nuovo costa 50-100 ms in più del filtro da solo. I
+  gruppi nascosti possono stare dove vogliono: non si vedono.
+- **La visibilità di un gruppo si legge dalle righe, non da `g.hidden`**:
+  `applica()` aggiorna quello *dopo* aver ordinato, quindi lì c'è lo stato del
+  giro prima. Il primo tentativo lo leggeva, e passando da Ovada a Cuneo
+  restava ordinato Ovada — con la prova verde, perché sceglieva un punto solo.
+  Ora la prova cambia punto.
 - **Le copie del riquadro Sponsorizzati passano dal raggio ma non si contano**:
   una scheda pagata oltre i 10 km sparisce come le altre e dice la sua
   distanza, ma nel numero sul gradino vale una volta sola. È la regola già
@@ -5394,8 +5411,9 @@ utente (sopra, sei tu che provi).
 `tests/luoghi.js` difende otto rapporti e **nessun conteggio**: posizione mai
 chiesta da sola, copertura ≥95%, controllo fuori dalla barra, **il numero sul
 gradino uguale alle righe mostrate** (anche con un tipo scelto), ogni riga
-mostrata nel raggio e con la sua distanza, ordine alfabetico intatto, «Azzera»
-e link diretto che tolgono il raggio. Verificate rosse rimettendo tre difetti
+mostrata nel raggio e con la sua distanza, ordine per distanza (anche
+cambiando punto) e ritorno all'alfabetico tolto il punto, «Azzera» e link
+diretto che tolgono il raggio. Verificate rosse rimettendo tre difetti
 uno alla volta: gradino che conta sul totale («59 promessi, 4 mostrati»),
 «Azzera» senza raggio, ancora senza raggio.
 
@@ -6137,7 +6155,7 @@ diverse** — non è un'incoerenza da sanare, è una scelta per ciascun mezzo.
 
 | | ordine | dove lo dice |
 |---|---|---|
-| `luoghi.html` (sito) | alfabetico per comune, **la posizione non si vende** | `#come-ordiniamo` |
+| `luoghi.html` (sito) | alfabetico per comune, o per distanza se si sceglie un punto; **la posizione non si vende** | `#come-ordiniamo` |
 | Ginetto (repo `daop-mobile`) | **Premium sempre primo, ha pagato**, poi distanza | badge `✦ Sponsorizzato` su ogni card + sezione "Come ordino i risultati" |
 
 Nell'app, `_tier()` in `app.js`: 0 = Premium, 1 = Consigliato DAOP *solo se non si
