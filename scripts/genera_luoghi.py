@@ -1261,6 +1261,23 @@ LUOGHI_JS = r"""<script>
     return testo;
   }
 
+  // "Vicino a me": la logica sta in /assets/js/daop-vicino.js, la stessa
+  // dell'agenda e delle pagine di intenzione. Qui restano gli innesti che il
+  // modulo non puo' indovinare. Le voci sono TUTTE le righe, copie del riquadro
+  // comprese: anche una scheda sponsorizzata deve sparire oltre il raggio e
+  // dire a quanti km sta. Nei conteggi dei gradini pero' le copie non entrano,
+  // per la stessa ragione per cui non entrano nel "N luoghi".
+  var vicino = window.daopVicino ? window.daopVicino.avvia({
+    voci: tutte,
+    riga: function (r) { return r.querySelector('.lg-meta'); },
+    nomi: ['luogo', 'luoghi'],
+    dove: 'in elenco',
+    // L'indice della ricerca e' il testo delle righe, che con un centro
+    // impostato contiene anche "a 12 km": se era gia' costruito va rifatto.
+    alRitocco: function () { testo = null; },
+    alCambio: function () { applica(); }
+  }) : null;
+
   function applica() {
     var t = q ? q.value.trim().toLowerCase() : '';
     var f = {};
@@ -1271,12 +1288,19 @@ LUOGHI_JS = r"""<script>
     var eta = f.eta && f.eta !== 'all' ? parseInt(f.eta, 10) : null;
     var com = inpCom ? slugifica(inpCom.value) : '';
     if (inpCom) inpCom.classList.toggle('is-on', !!inpCom.value.trim());
-    function passa(r) {
+    function passaAltri(r) {
       return (!f.prov || f.prov === 'all' || r.dataset.prov === f.prov) &&
              (!com || (r.dataset.comune || '').indexOf(com) > -1) &&
              (!f.cat || f.cat === 'all' || r.dataset.cat === f.cat) &&
              (eta === null || (eta >= +r.dataset.etamin && eta <= +r.dataset.etamax)) &&
              (!t || indice().get(r).indexOf(t) > -1);
+    }
+    function passa(r) { return passaAltri(r) && (!vicino || vicino.entro(r)); }
+    // I gradini contano quanti luoghi si vedrebbero DAVVERO a ogni distanza,
+    // cioe' dentro gli altri filtri: "30 km (6)" con una categoria scelta vuol
+    // dire sei posti di quella categoria, non sei in tutto.
+    if (vicino) {
+      vicino.conta(function (r) { return !r.closest('.lg-vetrina') && passaAltri(r); });
     }
     var visti = 0;
     righe.forEach(function (r) {
@@ -1300,7 +1324,8 @@ LUOGHI_JS = r"""<script>
     gruppi.forEach(function (g) {
       g.hidden = !g.querySelector('.lg-row[data-cat]:not([hidden])');
     });
-    var filtrato = !!t || !!com || sel.some(function (s) { return s.value !== 'all'; });
+    var filtrato = !!t || !!com || sel.some(function (s) { return s.value !== 'all'; }) ||
+      (vicino !== null && vicino.attivo());
     conta.textContent = filtrato
       ? visti + (visti === 1 ? ' luogo' : ' luoghi') + ' con questi filtri'
       : '';
@@ -1343,6 +1368,7 @@ LUOGHI_JS = r"""<script>
     if (q) q.value = '';
     if (inpCom) inpCom.value = '';
     sel.forEach(function (s) { s.value = 'all'; });
+    if (vicino) vicino.azzera();
     accordaComuni();
     applica();
     bar.scrollIntoView({ block: 'start' });
@@ -1359,7 +1385,12 @@ LUOGHI_JS = r"""<script>
     if (!r || !r.classList.contains('lg-row')) return;
     if (r.hidden) {
       if (q) q.value = '';
+      if (inpCom) inpCom.value = '';
       sel.forEach(function (s) { s.value = 'all'; });
+      // Anche il raggio: un link diretto a un posto a 60 km da qui deve
+      // aprirlo, non scorrere nel vuoto perche' e' oltre il gradino scelto.
+      if (vicino) vicino.azzera();
+      accordaComuni();
       applica();
     }
     r.open = true;
@@ -1586,7 +1617,11 @@ def riga(l, oggi):
     return (
         f'<details class="{classe}" id="{l["slug"]}" data-cat="{l["cat"]}" '
         f'data-prov="{l["prov"].lower()}" data-comune="{G.slugify(l["comune"])}" '
-        f'data-etamin="{l.get("eta_min", 0)}" data-etamax="{l.get("eta_max", 99)}">'
+        f'data-etamin="{l.get("eta_min", 0)}" data-etamax="{l.get("eta_max", 99)}"'
+        # Le coordinate per "vicino a me" (24/09/2026). La funzione e' quella
+        # dell'agenda, G.geo_attrs(), cosi' le due pagine non possono scrivere
+        # le stesse tre cose in due modi: ~55 byte per riga, ~50 KB su 2,1 MB.
+        f'{G.geo_attrs({"lat": l.get("lat"), "lon": l.get("lon"), "citta": l["comune"]})}>'
         f'<summary>'
         f'<span class="lg-ico" aria-hidden="true">{e(l.get("icona") or "📍")}</span>'
         f'<span class="lg-txt">{spons}<span class="lg-nome">{e(l["nome"])}</span>'
@@ -1687,6 +1722,12 @@ def filtri(elenco):
 
     if not campi:
         return ''
+    # "Vicino a me" (24/09/2026): lo stesso markup delle pagine di intenzione,
+    # scritto da G._landing_geo(), e lo stesso posto dell'agenda - FUORI dalla
+    # barra appiccicosa, che sul telefono e' gia' alta 156px e con una riga in
+    # piu' ricrescerebbe per tutto lo scorrimento. coord() legge 'lat'/'lon',
+    # che sono proprio le chiavi di un luogo.
+    geo = G._landing_geo(elenco)
     return f"""    <div class="ev-toolbar" id="lg-toolbar">
       <div class="ev-search">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -1694,6 +1735,7 @@ def filtri(elenco):
       </div>
 {chr(10).join("      " + c for c in campi)}
     </div>
+    {geo}
     <div class="ev-viewbar">
       <p class="lg-count" id="lg-count" role="status" aria-live="polite"></p>
       <button type="button" class="lg-reset" id="lg-reset" style="margin-left:auto">Azzera i filtri</button>
@@ -2071,6 +2113,10 @@ def render(elenco, oggi):
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
+<!-- Senza defer, come nelle pagine di intenzione: LUOGHI_JS qui sotto ha
+     bisogno di window.daopVicino subito, e uno script differito girerebbe
+     dopo. -->
+<script src="/assets/js/daop-vicino.js"></script>
 {LUOGHI_JS}
 {jsonld(elenco)}
 </body>

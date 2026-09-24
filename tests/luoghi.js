@@ -394,6 +394,130 @@ module.exports = async function luoghi(browser) {
     'ogni foto e\' lazy');
   await ctx.close();
 
+  // ── "Vicino a me" ─────────────────────────────────────────────────────
+  // Lo stesso modulo dell'agenda (/assets/js/daop-vicino.js), arrivato qui il
+  // 24/09/2026. Si prova dal ripiego "parti da un comune", che non chiede
+  // permessi, con una spia sulla Geolocation API: la posizione non si chiede
+  // mai da sola. Nessun conteggio scritto nella prova: solo rapporti fra quello
+  // che il controllo promette e quello che l'elenco mostra.
+  r.titolo('luoghi.html — vicino a me');
+  ({ ctx, page } = await apri(browser, 'luoghi.html', 412, () => {
+    window.__geo = 0;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition = function () { window.__geo++; };
+    }
+  }));
+  r.ok(await page.evaluate(() => window.__geo) === 0,
+    'la posizione NON si chiede al caricamento (serve un tocco)');
+
+  // Le coordinate si compilano a mano nel foglio: una soglia e non il 100%,
+  // per la ragione scritta in tests/agenda.js (la run rossa del 26/08/2026).
+  // La regressione vera - geo_attrs() che smette di stampare - fa crollare la
+  // copertura, non la fa scendere di una riga.
+  const tutteL = await page.locator(RIGA).count();
+  const conXY = await page.locator(`${RIGA}[data-lat][data-lon][data-citta]`).count();
+  r.ok(tutteL > 0 && conXY >= Math.ceil(tutteL * 0.95),
+    `le righe portano coordinate e comune: ${conXY}/${tutteL}`);
+  r.ok(await page.locator('#ev-geo').isVisible(), 'il controllo compare quando il JS c\'e\'');
+
+  // Il controllo sta FUORI dalla barra appiccicosa: dentro la farebbe crescere
+  // per tutto lo scorrimento.
+  r.ok(await page.locator('#lg-toolbar #ev-geo').count() === 0,
+    'il controllo non sta dentro la barra appiccicosa');
+
+  const ordineL = await page.evaluate((sel) =>
+    Array.from(document.querySelectorAll(sel)).map((x) => x.id), RIGA);
+  r.ok(await page.locator('#ev-geo-list option').count() === 0,
+    'l\'elenco dei comuni non si costruisce al caricamento');
+  await page.locator('#ev-geo-alt').click();
+  await page.waitForTimeout(200);
+  const comuneL = await page.locator('#ev-geo-list option').first().getAttribute('value');
+  r.ok(!!comuneL, 'l\'elenco dei comuni si costruisce alla prima apertura');
+  await page.fill('#ev-geo-q', comuneL);
+  await page.waitForTimeout(350);
+
+  const chipL = page.locator('#ev-geo-chips button[aria-pressed="true"]');
+  r.ok(await chipL.count() === 1, `un gradino attivo, centro ${comuneL}`);
+  const raggioL = parseInt(await chipL.textContent(), 10);
+  // Il numero sul gradino e' una promessa: deve essere quello che l'elenco
+  // mostra, non il totale a quella distanza.
+  const promessi = async () => parseInt(
+    (await chipL.textContent()).match(/\((\d+)\)/)[1], 10);
+  let mostrati = await visibili(page);
+  r.ok(mostrati > 0 && mostrati === await promessi(),
+    `il gradino ${raggioL} km promette ${await promessi()} luoghi e l'elenco ne mostra ${mostrati}`);
+
+  const oltre = await page.evaluate(([sel, rag]) => {
+    const fuori = [];
+    document.querySelectorAll(`${sel}:not([hidden])`).forEach((x) => {
+      const t = x.querySelector('.ev-km');
+      if (!t) return fuori.push(x.id + ' senza distanza');
+      const m = t.textContent.match(/a (\d+) km/);
+      if (m && Number(m[1]) > rag) fuori.push(x.id + ' a ' + m[1] + ' km');
+    });
+    return fuori;
+  }, ['.lg-row[data-cat]', raggioL]);
+  r.ok(oltre.length === 0,
+    `ogni riga mostrata, copie sponsorizzate comprese, dice la distanza e sta nel raggio (${oltre.slice(0, 3).join(', ') || 'ok'})`);
+
+  // Il raggio filtra e non riordina: l'ordine alfabetico e' quello dichiarato
+  // in #come-ordiniamo. Se un giorno si ordinasse per vicinanza, va cambiato
+  // anche quel testo - e questa prova ricorda di farlo.
+  const rimasteL = await page.evaluate((sel) =>
+    Array.from(document.querySelectorAll(`${sel}:not([hidden])`)).map((x) => x.id), RIGA);
+  let kL = -1;
+  r.ok(rimasteL.every((id) => { const i = ordineL.indexOf(id); if (i <= kL) return false; kL = i; return true; }),
+    'il raggio filtra e non riordina: l\'elenco resta in ordine alfabetico');
+  r.ok(await page.evaluate(() => Array.from(document.querySelectorAll('.lg-grp'))
+    .every((g) => g.hidden === !g.querySelector('.lg-row[data-cat]:not([hidden])'))),
+  'un comune fuori raggio si porta via la sua intestazione');
+
+  // Con un tipo scelto il gradino conta dentro il filtro, non sul totale.
+  const tipo = await page.locator('select[data-campo="cat"] option').nth(1).getAttribute('value');
+  await page.selectOption('select[data-campo="cat"]', tipo);
+  await page.waitForTimeout(300);
+  mostrati = await visibili(page);
+  r.ok(mostrati === await promessi(),
+    `con un tipo scelto il gradino conta dentro il filtro (${await promessi()} promessi, ${mostrati} mostrati)`);
+  if (mostrati === 0) {
+    const hint = await page.locator('#ev-geo-hint').textContent();
+    r.ok(hint === '' || /Entro \d+ km/.test(hint), `a zero risultati dice dove guardare: "${hint}"`);
+  }
+
+  await page.fill('#ev-geo-q', 'Zzzznonesiste');
+  await page.waitForTimeout(300);
+  r.ok((await page.locator('#ev-geo-note').textContent()).includes('Nessun luogo'),
+    'un comune senza luoghi lo dice con la parola giusta');
+
+  // "Azzera i filtri" promette l'elenco intero: deve togliere anche il raggio.
+  await page.fill('#ev-geo-q', comuneL);
+  await page.waitForTimeout(300);
+  await page.locator('#lg-reset').click();
+  await page.waitForTimeout(300);
+  r.ok(await visibili(page) === tutteL && await page.locator('.ev-km').count() === 0,
+    '"Azzera i filtri" toglie anche il raggio e le distanze');
+
+  // Un link diretto a un posto fuori raggio lo apre, invece di scorrere nel
+  // vuoto sotto un filtro che chi arriva non ha scelto.
+  await page.locator('#ev-geo-alt').click();
+  await page.fill('#ev-geo-q', comuneL);
+  await page.waitForTimeout(300);
+  const lontano = await page.evaluate((sel) => {
+    const x = document.querySelector(`${sel}[hidden]`);
+    return x ? x.id : null;
+  }, RIGA);
+  if (lontano) {
+    await page.evaluate((id) => { location.hash = id; }, lontano);
+    await page.waitForTimeout(400);
+    r.ok(await page.evaluate((id) => {
+      const x = document.getElementById(id);
+      return !x.hidden && x.open;
+    }, lontano), `un link diretto a un luogo fuori raggio lo apre (${lontano})`);
+  }
+  r.ok(await page.evaluate(() => window.__geo) === 0,
+    'in tutto questo la posizione non e\' mai stata chiesta');
+  await ctx.close();
+
   // ── la prova che conta davvero sulla banda ────────────────────────────
   // Il bucket Supabase ha 5 GB al mese e l'08/08/2026 le locandine lo hanno
   // quasi bruciato. Qui si controlla sul browser vero, non sul markup: si
