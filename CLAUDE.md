@@ -498,6 +498,8 @@ navigazione interna **resta affidata ai `page_view`**, come prima.
 | «Altri eventi vicino a X» + la sua coda | `vicini` | ~565 schede |
 | Ginetto (in cima o in fondo) | `ginetto` | ~610 pagine |
 | «Organizzatore: I corsi di X» | `organizzatore` | le schede con una realtà |
+| «Cosa c'è nei prossimi giorni vicino a X» (dal 25/09) | `ora` | le schede concluse |
+| «Altro per bambini qui vicino» (dal 25/09) | `bambini` | le schede con altri eventi per bambini in zona |
 
 Parametri: `cta_id`, `destination_url` (c'era già), **`destination_area`**
 (`evento` la scheda singola, `eventi` gli elenchi, `corsi`, `luoghi`, `centri`,
@@ -732,13 +734,20 @@ conclusa.
 **`tests/luoghi.js` difende sei cose**, verificate rosse rimettendo i difetti
 uno alla volta: che Ginetto ci sia su tutte e 522 le nostre pagine, che non ci
 sia due volte, che dell'invito al canale non resti traccia, che ogni conclusa
-lo abbia in cima, che nessuna scheda viva ce l'abbia in cima, e che su pagine
+abbia in cima lui o, dal 25/09/2026, gli eventi vicini, che nessuna scheda viva ce l'abbia in cima, e che su pagine
 comune e landing stia nel posto che era del canale. Le tre famiglie si
 riconoscono **dai file** — la cartella per le pagine comune, la firma di
 verifica per le schede — e non da un elenco scritto a mano, che invecchierebbe
 alla prima pagina nuova: è l'inciampo già pagato più volte qui dentro.
 
 ### L'eccezione alla coda è durata nove giorni, e il posto è passato a Ginetto
+
+> **Dal 25/09/2026 quel posto non è più di Ginetto: è degli eventi vicini.**
+> Vedi «In cima a una conclusa: cosa c'è nei prossimi giorni» qui sotto. Il
+> ragionamento di questa sezione resta — su una conclusa la pagina non ha più
+> niente da dare, quindi in cima si può mettere qualcosa — ma la risposta è
+> cambiata: Ginetto porta fuori dal sito, gli eventi vicini no.
+
 
 Dal 19/08/2026 su una scheda di **edizione conclusa** l'invito al canale saliva
 sotto l'avviso "Edizione conclusa". **Dal 28/08/2026 non più**: l'invito è
@@ -982,6 +991,46 @@ altro canale di Meta: niente statistiche oltre a iscritti/copertura, niente
 esportazione della lista (è di Meta, non nostra), niente segmentazione per
 età. Il "98% di open rate" che si trova in rete è dei messaggi 1-a-1 della
 Business API, **non dei canali**.
+
+### In cima a una conclusa: cosa c'è nei prossimi giorni — 25/09/2026
+
+Patrick: «la scheda è il cavallo di Troia, deve tenere le persone su DAOP».
+Misurato quel giorno: le schede concluse sono **489 su ~620, il 72%**, e sulla
+conclusa il primo blocco era Ginetto, che porta **fuori** dal sito
+(ginettoapp.it: 32 clic in quattro settimane su tutto il sito). Gli altri
+eventi di DAOP stavano al **54%** della pagina, dove arriva circa uno su
+quattro. Pagine per sessione in GA4 (10/08-06/09): **1,64**.
+
+Ora sotto «Edizione conclusa» c'è `blocco_ora_vicino()`: **fino a quattro
+eventi dei prossimi giorni lì vicino**, poi il link agli eventi della
+provincia. A 360px è interamente in vista all'**11%** dello scroll. Ginetto
+scende nella fascia in fondo, come sulle schede vive: una volta sola.
+
+Le decisioni che non si ricavano dal diff:
+
+- **Si sceglie mescolando tempo e spazio, si mostra per data.** Un giorno in
+  più vale 10 km: una festa domani a 30 km batte un laboratorio fra dodici
+  giorni sotto casa. Raggio `ORA_KM` (40), finestra due settimane, un mese se
+  in due settimane c'è meno di `ORA_MIN`. Senza coordinate: stesso comune 0 km,
+  stessa provincia 25. In pagina però l'ordine è la data, se no «domani,
+  domenica, domani» si legge come un elenco rotto.
+- **Una manifestazione compare una volta**: quattro serate della stessa sagra
+  sarebbero una scelta sola travestita da quattro.
+- **Gli eventi mostrati in cima non si ripetono** in «Altri eventi vicino» in
+  fondo (`salta=`): quella lista riparte da dove questa finisce.
+- **Senza eventi vicini il blocco non c'è e Ginetto torna in cima.** Oggi
+  succede su zero schede, ma d'inverno può succedere.
+- **Le ritirate restano com'erano**, per la ragione di sempre.
+- **Si misura** con `data-cta="ora"`, contro `vicini` (lo stesso elenco nel
+  posto di prima) e contro le pagine per sessione. È un cambio solo: il
+  prossimo (gli eventi vicini più in alto sulle schede VIVE) aspetta questo
+  numero. Insieme è partito solo `data-cta="bambini"` sul blocco «Altro per
+  bambini qui vicino», che in pagina non cambia niente.
+
+`tests/luoghi.js` difende: su ogni conclusa in cima c'è una delle due cose; se
+ci sono gli eventi vicini stanno sotto l'avviso e prima dei fatti, Ginetto è in
+fondo, nessun evento si ripete in fondo, nessun link porta a una scheda che non
+c'è, e sulle vive il blocco non compare. Verificate rosse rimettendo i difetti.
 
 ### La barra delle azioni sulle schede: un servizio si mette davanti
 

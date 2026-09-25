@@ -12,7 +12,7 @@ Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
 (opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
 raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob, difflib, itertools
+import os, re, csv, io, json, html, math, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob, difflib, itertools
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 # gid del tab "Eventi". Serve perche' la fonte e' l'export, non gviz: vedi sotto.
@@ -3235,6 +3235,9 @@ PAGINA_CSS = """
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* Gli eventi vicini in cima a una conclusa (blocco_ora_vicino): stesse righe
+   di .ev-vicini, ma subito sotto l'avviso, che ha gia' i suoi 22px. */
+.ev-ora{margin:0 0 30px}
 /* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
    grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
    #5c6975 su bianco fa 5,6:1. */
@@ -3599,7 +3602,11 @@ def blocco_famiglie(rec, events, oggi, hub=None):
                      f'<ul class="ev-fam-altri">{"".join(f"<li>{v}</li>" for v in voci)}</ul>'
                      + (f'<p class="ev-fam-piu">{tutti}</p>' if tutti else ''))
 
-    return ('<section class="ev-fam" aria-labelledby="ev-fam-t">'
+    # data-cta="bambini" (25/09/2026): il blocco si misura (vista e clic, vedi
+    # daop-track.js) solo quando porta davvero altri eventi, se no una "vista"
+    # conterebbe un riquadro senza niente da toccare.
+    cta = ' data-cta="bambini"' if cand else ''
+    return (f'<section class="ev-fam" aria-labelledby="ev-fam-t"{cta}>'
             f'<h2 id="ev-fam-t">{USER_SVG} Ci vado con i bambini?</h2>'
             + "".join(righe) + '</section>')
 
@@ -4331,7 +4338,129 @@ def blocco_ecosistema(qui=None):
             f'<div class="eco-g">{"".join(voci)}</div></section>')
 
 
-def blocco_vicini(rec, events, oggi, limite=6, hub=None):
+def _quando_vicino(e, oggi):
+    """La data corta di una riga degli eventi vicini ("oggi", "sabato 3 ott").
+
+    Una mostra iniziata a gennaio e ancora aperta non va etichettata "giovedì 1
+    gen": per chi legge oggi e' semplicemente in corso."""
+    if e['d_start'] < oggi:
+        return "in corso"
+    if e['d_start'] == oggi:
+        return "oggi"
+    if (e['d_start'] - oggi).days == 1:
+        return "domani"
+    return (data_estesa(e['d_start']).split(' ', 1)[0] + ' '
+            + f"{e['d_start'].day} {MESI[e['d_start'].month - 1]}"
+            + anno_se_altro(e['d_start'], oggi))
+
+
+def _km(a, b):
+    """Distanza in linea d'aria fra due coppie (lat, lon) di coord(), in km."""
+    la1, lo1, la2, lo2 = (math.radians(float(x)) for x in (*a, *b))
+    h = (math.sin((la2 - la1) / 2) ** 2
+         + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2)
+    return 6371 * 2 * math.asin(math.sqrt(h))
+
+
+# Quanto lontano e quanto avanti guarda il blocco in cima alle concluse. Il
+# raggio e' quello di un'uscita di un pomeriggio; la finestra e' due settimane,
+# e si allarga a un mese solo se in due settimane c'e' meno di ORA_MIN.
+ORA_KM = 40
+ORA_GIORNI = (14, 30)
+ORA_MIN = 2
+ORA_POSTI = 4
+
+
+def blocco_ora_vicino(rec, events, oggi):
+    """In cima a una scheda CONCLUSA: cosa c'e' nei prossimi giorni li' vicino.
+
+    Nato il 25/09/2026 (Patrick, "la scheda e' il cavallo di Troia: deve tenere
+    le persone su DAOP"). Le concluse sono il 72% delle schede (481 su ~620) e
+    prendono traffico vero: chi arriva da Google ha cercato una festa e scopre
+    che e' finita. In quel posto dal 28/08 c'era Ginetto, che pero' porta FUORI
+    dal sito (ginettoapp.it), mentre gli altri eventi di DAOP stavano al 54%
+    della pagina, dove arriva circa uno su quattro. Qui la pagina da' subito la
+    cosa che le manca - un'altra uscita, vicina e vicina nel tempo - e Ginetto
+    scende nella fascia in fondo, come sulle schede vive. E' un servizio, non
+    una richiesta: per questo puo' stare in cima.
+
+    L'ordine mescola tempo e spazio: un giorno in piu' vale 10 km. Una festa
+    domani a 30 km batte un laboratorio fra dodici giorni sotto casa. Senza
+    coordinate si ripiega sul comune e sulla provincia (0 e 25 km).
+
+    Una manifestazione compare una volta sola: le sue serate sono una cosa, e
+    quattro righe della stessa sagra sarebbero una scelta sola travestita da
+    quattro. Senza almeno una voce il blocco non si stampa, e in cima torna
+    Ginetto: e' la pagina che non ha niente da dare."""
+    mio = rec['slug']
+    mie_parole = _insieme_parole(rec.get('nome'))
+    qui = coord(rec)
+    citta = _key(rec.get('citta'))
+    prov = (rec.get('prov') or '').upper()
+    cand = []
+    for e in events:
+        if e['d_end'] < oggi or slug_evento(e) == mio:
+            continue
+        if _insieme_parole(e.get('nome')) == mie_parole:
+            continue
+        la = coord(e)
+        if qui and la:
+            km = _km(qui, la)
+        elif _key(e.get('citta')) == citta:
+            km = 0
+        elif (e.get('prov') or '').upper() == prov:
+            km = 25
+        else:
+            continue
+        if km > ORA_KM:
+            continue
+        giorni = (max(e['d_start'], oggi) - oggi).days
+        cand.append((giorni + km / 10, giorni, km, e))
+    cand.sort(key=lambda t: (t[0], t[3].get('nome') or ''))
+    scelti = []
+    for finestra in ORA_GIORNI:
+        scelti, visti = [], set()
+        for _, giorni, km, e in cand:
+            if giorni > finestra:
+                continue
+            chiave = _key(e.get('manifest') or '') or slug_evento(e)
+            if chiave in visti:
+                continue
+            visti.add(chiave)
+            scelti.append((km, e))
+            if len(scelti) == ORA_POSTI:
+                break
+        if len(scelti) >= ORA_MIN:
+            break
+    if not scelti:
+        return '', ()
+    # Si SCELGONO mescolando tempo e spazio, ma si MOSTRANO in ordine di data:
+    # "domani, domenica, domani" si legge come un elenco rotto.
+    scelti.sort(key=lambda t: (max(t[1]['d_start'], oggi), t[0]))
+    righe = []
+    for km, e in scelti:
+        dove = e.get('citta') or ''
+        if km >= 1 and _key(dove) != citta:
+            dove += f' · {round(km)} km'
+        righe.append(
+            f'<li><a href="{_href_evento(e)}"><span class="ev-vic-d">{esc(_quando_vicino(e, oggi))}</span>'
+            f'<span class="ev-vic-n">{esc(trunc(e.get("nome") or "", 70))}</span>'
+            f'<span class="ev-vic-c">{esc(dove)}</span></a></li>')
+    luogo = rec.get('citta')
+    titolo = (f"Cosa c'è nei prossimi giorni vicino a {luogo}" if luogo
+              else "Cosa c'è nei prossimi giorni qui vicino")
+    coda = ''
+    if prov in PROVINCE_PUBBLICATE:
+        coda = (f'<p class="ev-vic-all"><a href="{href_eventi_prov(prov)}">Tutti gli '
+                f'eventi in provincia di {esc(PROVINCE_NOMI[prov])} →</a></p>')
+    # data-cta="ora": si misura come gli altri blocchi (vista e clic), e si
+    # legge contro "vicini", che e' lo stesso elenco nel posto di prima.
+    sezione = ('<section class="ev-vicini ev-ora" aria-labelledby="ev-ora-t" data-cta="ora">'
+               f'<h2 id="ev-ora-t">{esc(titolo)}</h2><ul>{"".join(righe)}</ul>{coda}</section>')
+    return sezione, tuple(slug_evento(e) for _, e in scelti)
+
+
+def blocco_vicini(rec, events, oggi, limite=6, hub=None, salta=()):
     """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
 
     Serve a chi legge (l'evento e' finito, o piove: cosa c'e' invece?) e serve
@@ -4341,7 +4470,9 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     mio = rec['slug']
     cand = []
     for e in events:
-        if slug_evento(e) == mio:
+        # `salta`: quelli gia' mostrati in cima da blocco_ora_vicino(), che qui
+        # sotto sarebbero la stessa lista letta due volte.
+        if slug_evento(e) == mio or slug_evento(e) in salta:
             continue
         stessa = _key(e.get('citta')) == citta
         if not stessa and (e.get('prov') or '').upper() != prov:
@@ -4353,18 +4484,7 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None):
     for _, _, _, _, e in cand[:limite]:
         href = (f"/eventi/{slug_evento(e)}.html" if ha_pagina(e)
                 else f"/eventi.html#{e['anchor']}" if e.get('anchor') else "/eventi.html")
-        # Una mostra iniziata a gennaio e ancora aperta non va etichettata
-        # "giovedì 1 gen": per chi legge oggi e' semplicemente in corso.
-        if e['d_start'] < oggi:
-            quando = "in corso"
-        elif e['d_start'] == oggi:
-            quando = "oggi"
-        elif (e['d_start'] - oggi).days == 1:
-            quando = "domani"
-        else:
-            quando = (data_estesa(e['d_start']).split(' ', 1)[0] + ' '
-                      + f"{e['d_start'].day} {MESI[e['d_start'].month - 1]}"
-                      + anno_se_altro(e['d_start'], oggi))
+        quando = _quando_vicino(e, oggi)
         righe.append(
             f'<li><a href="{href}"><span class="ev-vic-d">{esc(quando)}</span>'
             f'<span class="ev-vic-n">{esc(trunc(e.get("nome") or "", 70))}</span>'
@@ -4712,8 +4832,19 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     # punto esatto in cui l'abbiamo appena tolta. Stessa logica per cui li'
     # spariscono i fatti e i due bottoni.
     in_cima = concluso and not ritirata
-    ginetto_alto = blocco_ginetto(citta, alto=True) if in_cima else ''
-    ginetto_coda = '' if in_cima else blocco_ginetto(citta)
+    #
+    # Dal 25/09/2026 quel posto in cima e' degli EVENTI VICINI, quando ce ne
+    # sono (blocco_ora_vicino): Ginetto porta fuori dal sito, e chi ha appena
+    # scoperto che la festa e' finita trova qui la risposta senza uscire. Lui
+    # scende nella fascia in fondo, come sulle schede vive - una volta sola,
+    # quindi la regola "non si ripete" resta. Senza eventi vicini torna in
+    # cima, perche' allora e' di nuovo l'unica cosa che la pagina puo' dare.
+    ora_vicino, gia_mostrati = ('', ())
+    if in_cima and vicini:
+        ora_vicino, gia_mostrati = blocco_ora_vicino(rec, vicini, oggi)
+    ginetto_in_cima = in_cima and not ora_vicino
+    ginetto_alto = blocco_ginetto(citta, alto=True) if ginetto_in_cima else ''
+    ginetto_coda = '' if ginetto_in_cima else blocco_ginetto(citta)
 
     ev_obj = event_jsonld(e, url)
     ev_obj["@id"] = f"{url}#event"
@@ -4790,7 +4921,8 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     consigliato_badge = (f'<p class="ev-scelto">{CONSIGLIATO_SVG} Consigliato da DAOP</p>'
                          if si(e.get('consigliato')) and not ritirata else '')
     firma = firma_daop(rec, oggi, ritirata=ritirata)
-    altri = blocco_vicini(rec, vicini, oggi, hub=hub) if vicini else ''
+    altri = (blocco_vicini(rec, vicini, oggi, hub=hub, salta=gia_mostrati)
+             if vicini else '')
 
     # Una ritirata esce dall'indice, e il perche' e' gia' scritto venti righe
     # piu' su per l'Event: se non dichiariamo a un assistente che quei dati
@@ -4853,7 +4985,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  {avviso}{ginetto_alto}
+  {avviso}{ora_vicino}{ginetto_alto}
   <ul class="ev-facts">
     {"".join(facts)}
   </ul>

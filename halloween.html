@@ -700,6 +700,9 @@
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* Gli eventi vicini in cima a una conclusa (blocco_ora_vicino): stesse righe
+   di .ev-vicini, ma subito sotto l'avviso, che ha gia' i suoi 22px. */
+.ev-ora{margin:0 0 30px}
 /* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
    grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
    #5c6975 su bianco fa 5,6:1. */
@@ -893,6 +896,11 @@
   font-variant-numeric:tabular-nums}
 .com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
 .com-anni a:hover{text-decoration:underline}
+/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. Sta
+   qui e non in LANDING_CSS perche' la usano anche luoghi.html (24/09/2026),
+   che COMUNE_CSS lo include e LANDING_CSS no: una regola in un posto solo. */
+.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
+.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
@@ -933,9 +941,6 @@
 .lan-alt a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .lan-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem;line-height:1.6}
-/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. */
-.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
-.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 /* "E dopo Halloween?": due porte e basta. La prima piena, la seconda col
    bordo, cosi' non si leggono come una fila di scorciatoie. */
 .lan-dopo{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
@@ -984,7 +989,7 @@
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "dateModified": "2026-09-24"
+      "dateModified": "2026-09-25"
     },
     {
       "@type": "BreadcrumbList",
@@ -1068,7 +1073,7 @@
   <a href="/index.html#social" onclick="closeMobile()">Contatti</a>
 </div>
 
-<main id="contenuto" data-generata="2026-09-24">
+<main id="contenuto" data-generata="2026-09-25">
 <header class="page-hero ev-hero ev-hero--img" style="--fascia:url(/assets/images/stagioni/halloween2-1600.webp);--fascia-m:url(/assets/images/stagioni/halloween2-800.webp)">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
@@ -1076,7 +1081,7 @@
     </div>
     <h1>Cosa fare a Halloween 2026 con i bambini</h1>
     <p class="ev-when">2 feste di Halloween già in programma in 2 comuni</p>
-    <p class="ev-agg">Ultimo aggiornamento: 24 settembre 2026 · <a href="/metodo.html">Come verifichiamo gli eventi</a></p>
+    <p class="ev-agg">Ultimo aggiornamento: 25 settembre 2026 · <a href="/metodo.html">Come verifichiamo gli eventi</a></p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
