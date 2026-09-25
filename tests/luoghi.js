@@ -948,7 +948,7 @@ module.exports = async function luoghi(browser) {
   let senzaGinetto = [], doppi = [], conCanale = [],
       conclusePosto = [], vivePosto = [], hubPosto = [],
       oraSuViva = [], oraFuoriPosto = [], oraRipetuti = [], oraRotti = [],
-      firmaPrima = [];
+      firmaPrima = [], briciole = [];
   let conOra = 0, concluse = 0;
   // Si cerca l'attributo class INTERO e non il solo nome: quei nomi stanno
   // anche nel <style> di ogni pagina (GINETTO_CSS e' incollata dappertutto),
@@ -1001,6 +1001,20 @@ module.exports = async function luoghi(browser) {
     // Dal 25/09/2026 gli eventi vicini vengono subito dopo i bottoni, PRIMA
     // del riquadro "Scheda verificata": messo in mezzo, diceva "la pagina e'
     // finita" proprio dove doveva cominciare la lista.
+    // Le briciole passano dal comune, o dalla provincia (25/09/2026). Si
+    // difende il verso pericoloso - il gradino porta a una pagina che esiste -
+    // e che i dati strutturati dicano la stessa strada che si vede.
+    if (dove === 'scheda' && !cartello(f)) {
+      const m = html.match(/Eventi<\/a> › <a href="(\/[^"]+)">([^<]+)<\/a> › <span>/);
+      if (!m) briciole.push(`${f} (manca il gradino del comune)`);
+      else {
+        if (!fs.existsSync(path.join(RADICE, m[1].slice(1)))) briciole.push(`${f} -> ${m[1]}`);
+        if (!html.includes(`"item": "https://www.daop.it${m[1]}"`)
+            && !html.includes(`"item":"https://www.daop.it${m[1]}"`)) {
+          briciole.push(`${f} (BreadcrumbList senza ${m[1]})`);
+        }
+      }
+    }
     if (dove === 'scheda') {
       const iVic = html.indexOf('data-cta="vicini"');
       const iFirma = html.indexOf('class="ev-firma"');
@@ -1033,6 +1047,9 @@ module.exports = async function luoghi(browser) {
   r.ok(oraRotti.length === 0, oraRotti.length
     ? `eventi vicini che portano a una scheda inesistente: ${oraRotti.length} (es. ${oraRotti[0]})`
     : 'ogni evento vicino in cima porta a una pagina che esiste');
+  r.ok(briciole.length === 0, briciole.length
+    ? `briciole delle schede sbagliate: ${briciole.length} (es. ${briciole[0]})`
+    : 'le briciole passano da una pagina comune o provinciale che esiste, anche nei dati strutturati');
   r.ok(firmaPrima.length === 0, firmaPrima.length
     ? `il riquadro della firma sta ancora prima degli eventi vicini: ${firmaPrima.length} (es. ${firmaPrima[0]})`
     : 'gli eventi vicini vengono prima della firma');

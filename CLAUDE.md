@@ -1050,6 +1050,22 @@ corpo, che è quello che `tests/social.js` gli chiede — e non sale in cima, ch
 scheda la lista venga prima della firma (verificata rossa: 664 su 664 sulle
 pagine di prima).
 
+#### Le briciole delle schede passano dal comune — 25/09/2026
+
+Terzo punto dello stesso giro. Erano «Home › Eventi › titolo»: ora «Home ›
+Eventi › **Racconigi** › titolo», col link alla pagina comune; se il comune non
+ha una pagina sua (sotto `MIN_EVENTI_HUB`) il gradino è «Provincia di Asti» e
+porta a `/eventi-provincia-asti.html`. Al 25/09: **356 schede col comune, 308
+con la provincia.** È il primo link in cima alla scheda verso il posto in cui
+si trova, e dice a Google com'è fatto il sito; il `BreadcrumbList` in JSON-LD
+ha lo stesso gradino (una lista `gradini` sola per le due cose). Col gradino in
+più il titolo nelle briciole si ferma a 40 caratteri: sul telefono andava su
+tre righe sopra un H1 che lo dice già per intero.
+
+`tests/luoghi.js` controlla che il gradino ci sia su ogni scheda, porti a un
+file che esiste e sia anche nei dati strutturati (verificata rossa: 664 su 664
+sulle pagine di prima).
+
 ### La barra delle azioni sulle schede: un servizio si mette davanti
 
 Fatta il 28/08/2026. Sul telefono, in fondo a ogni **scheda viva**, una barra
