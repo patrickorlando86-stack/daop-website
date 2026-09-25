@@ -1224,6 +1224,8 @@ html{scroll-behavior:auto}
   text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin:0 0 8px}
 .lg-ordine p{margin:0 0 8px}
 .lg-ordine p:last-child{margin:0}
+/* Senza, il link usciva nel blu di default del browser. */
+.lg-ordine a{color:var(--navy);text-underline-offset:2px}
 
 .lg-vuoto{margin:26px 0;padding:26px 20px;text-align:center;background:var(--cream);
   border-radius:14px;color:var(--text-mid)}
@@ -1986,22 +1988,16 @@ def vetrina(elenco, oggi):
 # caso. Ma l'obbligo e' dire la cosa, non scriverci sopra un tema: quello che
 # serve e' l'ordine (alfabetico), cosa cambia pagare (il contenuto, non il
 # posto) e dov'e' l'unica posizione comprabile. Il resto era prosa.
+# Il 24/09/2026 era tornato a quattro paragrafi, e cercando un comune con due
+# luoghi sotto c'era piu' testo nostro che risultati (Patrick: "pappardella").
+# Riportato a due righe; "Scrivicelo" non serve qui, ce l'ha ogni riga aperta.
 COME_ORDINIAMO = """    <section class="lg-ordine" id="come-ordiniamo">
       <h2>Come è ordinato questo elenco</h2>
-      <p>Per comune, in ordine alfabetico. Se scegli un punto di partenza con
-      «Vicino a me», i comuni vanno dal più vicino al più lontano, e così i luoghi
-      dentro ogni comune: conta solo la distanza in linea d'aria. Gli altri filtri
-      restringono l'elenco, non lo riordinano.</p>
-      <p>Le schede <b>Sponsorizzate</b> sono scritte da chi gestisce il luogo e paga
-      questo spazio: cambia <em>cosa</em> c'è dentro, non <em>dove</em> sta la riga.
-      L'unica posizione a pagamento è il riquadro “Sponsorizzati” in cima: mostra fino a
-      tre schede sponsorizzate fra quelle che corrispondono alla tua ricerca, e l'ordine
-      cambia ogni giorno.</p>
-      <p><b>Consigliato DAOP</b>, col cuore, è un'altra cosa: è il
-      <a href="/bollino.html">bollino Family Friendly</a>, si merita e non si compra, e
-      non sposta la riga.</p>
-      <p>Un luogo descritto male, o che ha chiuso?
-      <a href="/index.html#social">Scrivicelo</a>.</p>
+      <p>Per comune, in ordine alfabetico; con «Vicino a me», dal più vicino, in
+      linea d'aria. Chi paga ha una scheda più ricca e può comparire fra gli
+      <b>Sponsorizzati</b> in cima (tre alla volta, a rotazione), ma nell'elenco
+      non sale di posizione.</p>
+      <p>Il cuore, <a href="/bollino.html">Consigliato DAOP</a>, non si compra.</p>
     </section>"""
 
 
@@ -2171,6 +2167,10 @@ def render(elenco, oggi):
              'piscine, gelaterie, biblioteche e nidi: scelti uno per uno. '
              'Apri una riga per orari, prezzi e contatti.</p>')
 
+    # La data in cima, come su /halloween.html (24/09/2026): e' li' che chi
+    # legge si chiede "e' ancora vero?". In fondo non la leggeva nessuno.
+    agg = f'{oggi.day} {G.MESI_LUNGHI[oggi.month - 1]} {oggi.year}'
+
     vuoto = ('<div class="lg-vuoto" id="lg-vuoto" hidden><b>Nessun luogo con questi filtri.</b>'
              'Prova a togliere la provincia o il tipo di luogo.</div>')
 
@@ -2181,17 +2181,13 @@ def render(elenco, oggi):
         vuoto,
         gruppi_comune(elenco, oggi),
         COME_ORDINIAMO,
-        _link_idee(),
-        '    <div class="com-link"><a href="/bollino.html">Il bollino Family Friendly</a>'
-        '<a href="/metodo.html">Come verifichiamo</a>'
-        '<a href="/zone.html">Le zone</a></div>',
-        # "Tutta l'agenda DAOP" era qui e adesso sta nella riga delle quattro
-        # porte, col numero degli eventi attaccato: due link alla stessa pagina
-        # a quattro centimetri di distanza sono uno di troppo, e quello che
-        # sopravvive e' quello che dice quanti eventi ci sono.
-        G.blocco_ecosistema('luoghi'),
-        f'    <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: '
-        f'{oggi.day} {G.MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>',
+        # In fondo due porte e basta, piu' Ginetto subito sotto (24/09/2026).
+        # Erano sei blocchi: bollino, metodo e zone stanno gia' nel footer, e
+        # la riga delle quattro porte ripeteva eventi e corsi. Si tiene quello
+        # che serve a chi ha appena cercato un posto: cosa c'e' da fare questo
+        # weekend, e un'idea gia' pronta. Chi non ha trovato niente ha Ginetto.
+        '    <div class="com-link"><a href="/eventi/weekend.html">Cosa c\'è questo weekend</a>'
+        + _link_idee() + '</div>',
         '  </div>',
     ] if x)
 
@@ -2259,6 +2255,7 @@ def render(elenco, oggi):
     </div>
     <h1>Dove andare <em>con i bambini</em></h1>
     <p class="ev-when">{e(zona)} · {n} luoghi in {comuni} comuni</p>
+    <p class="ev-agg">Ultimo aggiornamento: {agg}</p>
 {intro}
   </div>
 </header>
@@ -2293,7 +2290,7 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 
 
 def _link_idee():
-    """I 'vedi anche' verso le pagine /idee/, o ''.
+    """I link verso le pagine /idee/, o '' (li mette nella riga in fondo).
 
     Le idee sono cinque posti scelti a mano (vedi scripts/genera_idee.py), e
     senza un link dal CORPO di una pagina nascono orfane: e' esattamente il
@@ -2324,9 +2321,7 @@ def _link_idee():
         if not os.path.exists(os.path.join(ROOT, 'idee', f'{slug}.html')):
             continue
         voci.append(f'<a href="/idee/{slug}.html">{G.esc(titolo)}</a>')
-    if not voci:
-        return ''
-    return '    <div class="com-link">' + "".join(voci) + '</div>'
+    return "".join(voci)
 
 
 def salva_istantanea(elenco):

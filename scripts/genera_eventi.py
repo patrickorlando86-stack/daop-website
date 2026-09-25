@@ -6062,6 +6062,11 @@ COMUNE_CSS = """
   font-variant-numeric:tabular-nums}
 .com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
 .com-anni a:hover{text-decoration:underline}
+/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. Sta
+   qui e non in LANDING_CSS perche' la usano anche luoghi.html (24/09/2026),
+   che COMUNE_CSS lo include e LANDING_CSS no: una regola in un posto solo. */
+.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
+.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
@@ -6684,9 +6689,6 @@ LANDING_CSS = """
 .lan-alt a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .lan-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem;line-height:1.6}
-/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. */
-.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
-.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 /* "E dopo Halloween?": due porte e basta. La prima piena, la seconda col
    bordo, cosi' non si leggono come una fila di scorciatoie. */
 .lan-dopo{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
