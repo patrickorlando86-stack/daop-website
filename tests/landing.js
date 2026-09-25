@@ -423,6 +423,27 @@ async function provaEventiProv(r, page, prov, slug) {
     r.ok(await page.locator(`.ev-wrap a[href="${href}"]`).count() > 0,
       `${prov}: il corpo manda alla sorella ${chi}`);
   }
+
+  // 14) LA CODA CORTA (24/09/2026). La data sta nell'intestazione e una volta
+  //     sola; in fondo non tornano la riga delle quattro porte, la nota
+  //     "Pagina rigenerata" e la prosa "Se la domanda e' un'altra". E i comuni
+  //     tagliati restano TUTTI nell'HTML: un link a una pagina comune che
+  //     sparisce e' un link entrante in meno, non un bottone in meno.
+  const coda = await page.evaluate(() => ({
+    inCima: !!document.querySelector('header.page-hero .ev-agg'),
+    volte: (document.body.textContent.match(/Ultimo aggiornamento/g) || []).length,
+    zavorra: !!document.querySelector('main .eco, main .ev-firma-nota'),
+    prosa: [...document.querySelectorAll('.ev-wrap h2')]
+      .some((h) => /domanda è un'altra/.test(h.textContent)),
+    comuni: document.querySelectorAll('.ev-wrap a[href^="/eventi/comune/"]').length,
+  }));
+  r.ok(coda.inCima && coda.volte === 1,
+    `${prov}: la data dell'aggiornamento sta in cima, una volta (${coda.volte})`);
+  r.ok(!coda.zavorra && !coda.prosa, `${prov}: in fondo niente porte, nota o prosa ripetuta`);
+  const titoloComuni = await page.evaluate(() => [...document.querySelectorAll('.ev-wrap h2')]
+    .some((h) => h.textContent.startsWith('I comuni della provincia')));
+  r.ok(!titoloComuni || coda.comuni > 0,
+    `${prov}: sotto "I comuni" ci sono i link (${coda.comuni}, anche quelli nel "+ altri")`);
 }
 
 module.exports = async function landing(browser) {

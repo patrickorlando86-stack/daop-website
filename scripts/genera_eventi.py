@@ -9323,29 +9323,50 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
             f"capisce dal programma, dentro la scheda",
             resto, oggi, eta=True, gratis=True)
 
+    # La coda corta (24/09/2026, Patrick: "pappardella"). Erano otto blocchi
+    # sotto l'elenco: i comuni tutti aperti, "Se la domanda e' un'altra" in
+    # prosa, il credito, la riga di scorciatoie, la riga delle quattro porte,
+    # Ginetto, "Tutta l'agenda" e la data. Restano tre porte, i comuni e il
+    # credito; la data sale nell'intestazione ('agg_in_cima').
+    #
+    # Le tre sorelle diventano bottoni. Il link non e' cortesia: tiene le
+    # quattro pagine provinciali a passarsi autorita' invece di contendersi la
+    # stessa query (tests/landing.js, punto 13). Il weekend viene primo perche'
+    # e' la domanda che chi scorre un'agenda intera ha piu' spesso in testa.
+    # Fuori: le altre province e le due pagine trasversali (le ha la nav) e la
+    # riga delle porte (luoghi e corsi sono in nav e nel footer).
+    corpo += ("<h2>Cerchi solo una parte?</h2>"
+              '<div class="lan-dopo">'
+              f'<a href="{href_incrocio(prov, "weekend")}">Questo weekend</a>'
+              f'<a href="{href_incrocio(prov, "oggi")}">Cosa c\'è oggi</a>'
+              f'<a href="{sagre_href}">Solo sagre e feste</a></div>')
+
+    # I comuni: i primi MAX_COMUNI_APERTI, il resto sotto "+ altri N". E' lo
+    # stesso taglio di "Vai al comune" in eventi.html, con le stesse classi
+    # (il CSS arriva dal guscio): i link restano tutti nell'HTML, dentro un
+    # <details> chiuso, e Google li segue lo stesso.
     comuni = sorted((d for d in (hub or {}).values() if d['prov'] == prov),
                     key=lambda d: -len(d['futuri']))
     if comuni:
-        link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
-                       for d in comuni)
+        def _a(d):
+            return f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
+        if len(comuni) <= MAX_COMUNI_APERTI + 2:
+            primi, resto = comuni, []
+        else:
+            primi, resto = comuni[:MAX_COMUNI_APERTI], comuni[MAX_COMUNI_APERTI:]
+        link = "".join(_a(d) for d in primi)
+        if resto:
+            link += ('<details class="ev-comuni-piu">'
+                     f'<summary aria-label="Mostra altri {len(resto)} comuni">'
+                     f'+ altri {len(resto)}</summary>'
+                     f'<div class="com-link">{"".join(_a(d) for d in resto)}</div>'
+                     '</details>')
         corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)}</h2>"
                   f'<div class="com-link">{link}</div>')
-
-    # Le tre sorelle. E' lo stesso link che ogni pagina d'incrocio ha verso le
-    # sagre, e serve a passarsi autorita' invece di farsi concorrenza: ognuna
-    # nomina la SUA domanda, non "vedi anche".
-    corpo += (f"<h2>Se la domanda è un'altra</h2>"
-              f"<p>Questa pagina è l'agenda completa della provincia. Se cerchi "
-              f'<a href="{sagre_href}">solo le sagre e le feste di paese</a> le trovi '
-              f'in ordine di mese, con anche quelle che tornano ogni anno; se invece '
-              f'la domanda è "e adesso?", <a href="{href_incrocio(prov, "oggi")}">cosa '
-              f'fare oggi</a> oppure <a href="{href_incrocio(prov, "weekend")}">gli '
-              f'eventi del weekend</a> in provincia di {esc(nome_prov)}.</p>')
 
     fonte = fonte_provincia(prov)
     corpo += credito_fonte(
         fonte, f'Gli eventi della provincia di {esc(nome_prov)} arrivano da', breve=True)
-    corpo += _altre_landing(href, altre)
 
     # Su TUTTA l'agenda della provincia, non su un sottoinsieme: e' la ragione
     # per cui questa e' la meno stagionale delle quattro. Sotto soglia la
@@ -9363,6 +9384,7 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
                                  f"Eventi per bambini in provincia di {nome_prov}",
                                  crumb, oggi),
         'eventi': len(tutti),
+        'agg_in_cima': True,
         'nota': f"{len(bimbi)} pensati per i bambini",
     }
 
