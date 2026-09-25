@@ -106,7 +106,7 @@
    "slug": "racconigi"
   },
   "cn-saluzzo": {
-   "n": 2,
+   "n": 1,
    "nome": "Saluzzo",
    "slug": "saluzzo"
   },
@@ -117,6 +117,6 @@
   }
  },
  "province": {
-  "CN": 95
+  "CN": 94
  }
 }
