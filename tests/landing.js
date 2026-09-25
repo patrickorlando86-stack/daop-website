@@ -808,13 +808,23 @@ module.exports = async function landing(browser) {
     const fs = require('fs');
     const path = require('path');
     const { RADICE } = require('./_aiuto');
-    r.titolo('oggi e weekend — la coda corta');
+    r.titolo('oggi, weekend, sagre e stagionali — la coda corta');
     const pagine = [];
     for (const modo of ['oggi', 'weekend']) {
       pagine.push([`eventi/${modo}.html`, modo, null]);
       for (const prov of ['alessandria', 'asti', 'cuneo']) {
         pagine.push([`eventi/${modo}-provincia-${prov}.html`, modo, prov]);
       }
+    }
+    // Dal 25/09/2026 la stessa coda corta vale per le sagre per provincia e
+    // per le stagionali: qui si chiede solo la data in cima e niente coda
+    // lunga, i loro link hanno prove loro.
+    for (const prov of ['alessandria', 'asti', 'cuneo']) {
+      pagine.push([`sagre-provincia-${prov}.html`, null, null]);
+    }
+    for (const st of ['ferragosto', 'halloween', 'natale', 'capodanno', 'befana',
+                      'carnevale', 'pasqua']) {
+      if (fs.existsSync(path.join(RADICE, `${st}.html`))) pagine.push([`${st}.html`, null, null]);
     }
     const storte = [];
     for (const [f, modo, prov] of pagine) {
@@ -828,6 +838,7 @@ module.exports = async function landing(browser) {
       if (/class="eco[ "]|class="ev-firma-nota"|class="lan-alt"/.test(corpo)) {
         storte.push(`${f}: in fondo e' tornata la coda lunga`);
       }
+      if (!modo) continue;
       const altra = modo === 'oggi' ? 'weekend' : 'oggi';
       const attesi = prov
         ? [`/eventi/${altra}-provincia-${prov}.html`, `/eventi-provincia-${prov}.html`,
@@ -839,7 +850,7 @@ module.exports = async function landing(browser) {
     }
     r.ok(storte.length === 0, storte.length
       ? `coda di oggi/weekend: ${storte.length} difetti (es. ${storte[0]})`
-      : `su tutte e ${pagine.length} le pagine oggi/weekend la data sta in cima e la coda e' corta`);
+      : `su tutte e ${pagine.length} le pagine di intenzione la data sta in cima e la coda e' corta`);
   }
 
   // ── lette il giorno dopo ──────────────────────────────────────────────
