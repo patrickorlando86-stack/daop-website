@@ -946,7 +946,9 @@ module.exports = async function luoghi(browser) {
     : (html.includes('class="ev-firma"') ? 'scheda' : 'landing');
 
   let senzaGinetto = [], doppi = [], conCanale = [],
-      conclusePosto = [], vivePosto = [], hubPosto = [];
+      conclusePosto = [], vivePosto = [], hubPosto = [],
+      oraSuViva = [], oraFuoriPosto = [], oraRipetuti = [], oraRotti = [];
+  let conOra = 0, concluse = 0;
   // Si cerca l'attributo class INTERO e non il solo nome: quei nomi stanno
   // anche nel <style> di ogni pagina (GINETTO_CSS e' incollata dappertutto),
   // quindi un includes sul nome secco direbbe "c'e'" su tutte le pagine.
@@ -964,7 +966,37 @@ module.exports = async function luoghi(browser) {
     // cosa faccio?". Su una scheda VIVA no: li' Ginetto e' una richiesta e
     // porterebbe fuori dal sito prima che la pagina abbia dato l'orario della
     // sagra - un servizio si mette davanti, una richiesta no.
-    if (dove === 'scheda' && conclusa && !alto) conclusePosto.push(f);
+    // Dal 25/09/2026 in cima a una conclusa ci va PRIMA quello che c'e' nei
+    // prossimi giorni li' vicino (blocco_ora_vicino), e Ginetto scende nella
+    // fascia in fondo; se eventi vicini non ce ne sono, Ginetto torna su.
+    // Quindi su una conclusa in cima c'e' sempre UNA delle due cose.
+    const ora = html.includes('class="ev-vicini ev-ora"');
+    if (dove === 'scheda' && conclusa) {
+      concluse++;
+      if (ora) conOra++;
+      if (!alto && !ora) conclusePosto.push(f);
+      if (ora && (alto || !coda)) conclusePosto.push(f + ' (Ginetto non e\' sceso in fondo)');
+      if (ora) {
+        // Subito sotto l'avviso, prima dei fatti della scheda: e' tutto il punto.
+        const iAvv = html.indexOf('<strong>Edizione conclusa</strong>');
+        const iOra = html.indexOf('class="ev-vicini ev-ora"');
+        const iFatti = html.indexOf('<ul class="ev-facts"');
+        if (!(iAvv < iOra && (iFatti < 0 || iOra < iFatti))) oraFuoriPosto.push(f);
+        // Gli eventi mostrati in cima non si ripetono nella lista in fondo.
+        const blocco = html.slice(iOra, html.indexOf('</section>', iOra));
+        const suoi = [...blocco.matchAll(/<li><a href="([^"]+)"/g)].map((m) => m[1]);
+        const giu = html.indexOf('data-cta="vicini"');
+        const fondo = giu < 0 ? '' : html.slice(giu, html.indexOf('</section>', giu));
+        if (suoi.some((h) => fondo.includes(`<li><a href="${h}"`))) oraRipetuti.push(f);
+        // Il verso pericoloso: un link in cima verso una scheda che non c'e'.
+        for (const h of suoi) {
+          if (h.startsWith('/eventi/') && !fs.existsSync(path.join(RADICE, h.slice(1)))) {
+            oraRotti.push(`${f} -> ${h}`);
+          }
+        }
+      }
+    }
+    if (dove === 'scheda' && !conclusa && ora) oraSuViva.push(f);
     if (dove === 'scheda' && !conclusa && alto) vivePosto.push(f);
     // Sulle pagine comune e sulle landing Ginetto ha preso il posto che era
     // dell'invito al canale (04/09/2026): dentro l'articolo, subito dopo
@@ -981,8 +1013,20 @@ module.exports = async function luoghi(browser) {
     ? `invito al canale WhatsApp ancora su ${conCanale.length} pagine (es. ${conCanale[0]})`
     : "nessuna traccia dell'invito al canale WhatsApp");
   r.ok(conclusePosto.length === 0, conclusePosto.length
-    ? `edizioni concluse senza Ginetto in cima: ${conclusePosto.length} (es. ${conclusePosto[0]})`
-    : "su ogni edizione conclusa Ginetto sta sotto l'avviso");
+    ? `edizioni concluse senza niente in cima: ${conclusePosto.length} (es. ${conclusePosto[0]})`
+    : `su ogni conclusa in cima ci sono gli eventi vicini o Ginetto (eventi vicini: ${conOra}/${concluse})`);
+  r.ok(oraFuoriPosto.length === 0, oraFuoriPosto.length
+    ? `eventi vicini non sotto l'avviso: ${oraFuoriPosto.length} (es. ${oraFuoriPosto[0]})`
+    : "gli eventi vicini stanno subito sotto l'avviso, prima dei fatti");
+  r.ok(oraRipetuti.length === 0, oraRipetuti.length
+    ? `eventi vicini ripetuti nella lista in fondo: ${oraRipetuti.length} (es. ${oraRipetuti[0]})`
+    : 'gli eventi in cima non si ripetono in fondo');
+  r.ok(oraRotti.length === 0, oraRotti.length
+    ? `eventi vicini che portano a una scheda inesistente: ${oraRotti.length} (es. ${oraRotti[0]})`
+    : 'ogni evento vicino in cima porta a una pagina che esiste');
+  r.ok(oraSuViva.length === 0, oraSuViva.length
+    ? `eventi vicini in cima su ${oraSuViva.length} schede vive (es. ${oraSuViva[0]})`
+    : 'sulle schede vive il blocco in cima non c\'e\'');
   r.ok(vivePosto.length === 0, vivePosto.length
     ? `Ginetto in cima su ${vivePosto.length} schede che hanno ancora qualcosa da dare (es. ${vivePosto[0]})`
     : 'sulle schede vive Ginetto resta in fondo');

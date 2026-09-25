@@ -700,6 +700,9 @@
 .ev-vic-c{font-size:.85rem;opacity:.7}
 .ev-vic-all{margin:14px 0 0;font-size:.92rem}
 .ev-vic-all a{color:var(--navy,#2d4a5c);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* Gli eventi vicini in cima a una conclusa (blocco_ora_vicino): stesse righe
+   di .ev-vicini, ma subito sotto l'avviso, che ha gia' i suoi 22px. */
+.ev-ora{margin:0 0 30px}
 /* La riga "Sponsorizzato" (link_sponsor): la parola prima del nome, piccola e
    grigia come .lg-spons su luoghi.html - e' la stessa avvertenza, non un fregio.
    #5c6975 su bianco fa 5,6:1. */
@@ -893,6 +896,11 @@
   font-variant-numeric:tabular-nums}
 .com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
 .com-anni a:hover{text-decoration:underline}
+/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. Sta
+   qui e non in LANDING_CSS perche' la usano anche luoghi.html (24/09/2026),
+   che COMUNE_CSS lo include e LANDING_CSS no: una regola in un posto solo. */
+.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
+.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
@@ -933,9 +941,6 @@
 .lan-alt a:hover{border-color:var(--teal,#6ba5a8);background:rgba(107,165,168,.09)}
 .lan-vuoto{border:1px solid rgba(45,74,92,.16);border-radius:16px;padding:16px 18px;
   margin:16px 0;font-size:.95rem;line-height:1.6}
-/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. */
-.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
-.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 /* "E dopo Halloween?": due porte e basta. La prima piena, la seconda col
    bordo, cosi' non si leggono come una fila di scorciatoie. */
 .lan-dopo{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
@@ -984,7 +989,7 @@
       "publisher": {
         "@id": "https://www.daop.it/#organization"
       },
-      "dateModified": "2026-09-24"
+      "dateModified": "2026-09-25"
     },
     {
       "@type": "BreadcrumbList",
@@ -1062,7 +1067,7 @@
   <a href="/index.html#social" onclick="closeMobile()">Contatti</a>
 </div>
 
-<main id="contenuto" data-generata="2026-09-24">
+<main id="contenuto" data-generata="2026-09-25">
 <header class="page-hero ev-hero">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
@@ -1073,7 +1078,7 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <p>I giorni fra <strong>Natale e Capodanno</strong> sono quelli in cui la scuola è chiusa e non si sa mai cosa fare. Qui sotto i <strong>1 eventi</strong> verificati uno per uno in 1 comuni fra le province di Alessandria, Asti e Cuneo, dal 27 dicembre al 1° gennaio, con l'orario, il paese e chi li organizza.</p><h2>I bambini a mezzanotte non ci arrivano</h2><p>È il problema vero del Capodanno in famiglia, e nessun elenco di eventi lo risolve da solo. Il <strong>veglione</strong> comincia quando i piccoli crollano, e alle due di notte si torna a casa con un bambino in braccio. La risposta che cercano in tanti — e che spesso non sanno nemmeno di poter cercare — è il <strong>countdown anticipato</strong>: le feste che fanno scoccare la mezzanotte alle sei o alle otto di sera, con i brindisi analcolici e i coriandoli, e poi tutti a casa. Dove il programma lo dice, l'orario lo trovi scritto in riga: è la prima cosa da guardare su questa pagina.</p><p>L'altra metà sono <strong>i giorni prima</strong>, il 27, il 28, il 29. La scuola è chiusa, le feste vere non sono ancora cominciate e sono esattamente le giornate in cui non si sa cosa fare: restano aperti i presepi, e i musei e le ludoteche fanno le aperture straordinarie. Il <strong>1° gennaio</strong> invece in zona è quasi tutto chiuso, e se qualcosa c'è è il pranzo — che si prenota prima di Natale, non dopo. Gli <a href="/luoghi.html">agriturismi, i musei e i posti al coperto per bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Anche in quei giorni</h3><p class="com-per">Corsi, percorsi e attività che durano settimane: non sono feste di Capodanno, ma sono aperti anche in quei giorni</p></div></div><ul class="com-ev"><li style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859" data-province="al" data-category="sport" data-start="2026-09-26" data-end="2027-05-30" data-free="1" data-lat="44.9131769" data-lon="8.9811563" data-citta="Casalnoceto"><img class="com-th" src="/assets/miniature/daop_alessandria_3990994686564360456.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">sab 26 set · 10:00-11:30<span class="com-cat">Sport</span></span><a class="com-go" href="/eventi/casalnoceto-kids-move-comune-di-casalnoceto.html">Casalnoceto Kids Move! - Comune di Casalnoceto</a><span class="com-luogo">Casalnoceto</span></span></li></ul></section><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/eventi-provincia-alessandria.html">Eventi Alessandria</a><a href="/eventi-provincia-asti.html">Eventi Asti</a><a href="/eventi-provincia-cuneo.html">Eventi Cuneo</a></div><section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">908 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">89 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+  <p>I giorni fra <strong>Natale e Capodanno</strong> sono quelli in cui la scuola è chiusa e non si sa mai cosa fare. Qui sotto i <strong>1 eventi</strong> verificati uno per uno in 1 comuni fra le province di Alessandria, Asti e Cuneo, dal 27 dicembre al 1° gennaio, con l'orario, il paese e chi li organizza.</p><h2>I bambini a mezzanotte non ci arrivano</h2><p>È il problema vero del Capodanno in famiglia, e nessun elenco di eventi lo risolve da solo. Il <strong>veglione</strong> comincia quando i piccoli crollano, e alle due di notte si torna a casa con un bambino in braccio. La risposta che cercano in tanti — e che spesso non sanno nemmeno di poter cercare — è il <strong>countdown anticipato</strong>: le feste che fanno scoccare la mezzanotte alle sei o alle otto di sera, con i brindisi analcolici e i coriandoli, e poi tutti a casa. Dove il programma lo dice, l'orario lo trovi scritto in riga: è la prima cosa da guardare su questa pagina.</p><p>L'altra metà sono <strong>i giorni prima</strong>, il 27, il 28, il 29. La scuola è chiusa, le feste vere non sono ancora cominciate e sono esattamente le giornate in cui non si sa cosa fare: restano aperti i presepi, e i musei e le ludoteche fanno le aperture straordinarie. Il <strong>1° gennaio</strong> invece in zona è quasi tutto chiuso, e se qualcosa c'è è il pranzo — che si prenota prima di Natale, non dopo. Gli <a href="/luoghi.html">agriturismi, i musei e i posti al coperto per bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>Anche in quei giorni</h3><p class="com-per">Corsi, percorsi e attività che durano settimane: non sono feste di Capodanno, ma sono aperti anche in quei giorni</p></div></div><ul class="com-ev"><li style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859" data-province="al" data-category="sport" data-start="2026-09-26" data-end="2027-05-30" data-free="1" data-lat="44.9131769" data-lon="8.9811563" data-citta="Casalnoceto"><img class="com-th" src="/assets/miniature/daop_alessandria_3990994686564360456.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">domani · 10:00-11:30<span class="com-cat">Sport</span></span><a class="com-go" href="/eventi/casalnoceto-kids-move-comune-di-casalnoceto.html">Casalnoceto Kids Move! - Comune di Casalnoceto</a><span class="com-luogo">Casalnoceto</span></span></li></ul></section><div class="lan-alt"><a href="/eventi/oggi.html">Cosa c&#x27;è oggi</a><a href="/eventi/weekend.html">Questo weekend</a><a href="/eventi-provincia-alessandria.html">Eventi Alessandria</a><a href="/eventi-provincia-asti.html">Eventi Asti</a><a href="/eventi-provincia-cuneo.html">Eventi Cuneo</a></div><section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">908 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">89 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
   <aside class="ev-ginetto-alto" data-cta="ginetto">
     <div class="info-strip">
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
@@ -1088,7 +1093,7 @@
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
-  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 24 settembre 2026.</p>
+  <p class="ev-firma-nota">Pagina rigenerata ogni notte. Ultimo aggiornamento: 25 settembre 2026.</p>
 </article>
 </main>
 <footer>
