@@ -295,6 +295,36 @@ generatori. Nessuno dei due script manda niente prima del consenso:
 `window.daopConsensoAnalytics` è la condizione, e `typeof gtag === 'function'`
 non basta — lo stub che accoda in `dataLayer` esiste da sempre.
 
+#### Consent Mode base, niente ping senza cookie, niente modellazione — 25/09/2026
+
+Verificato leggendo `cookie-consent.js`, perché è la domanda che torna ogni
+volta che si guarda il divario fra GA4 e Search Console.
+
+- **È Consent Mode v2 in modalità BASE.** Il `consent default` mette tutto a
+  `denied`, ma `gtag.js` si scarica solo dentro `avviaAnalytics()`, cioè dopo
+  «Accetta» o con una scelta già salvata. In modalità avanzata la libreria si
+  caricherebbe subito col consenso negato. Il `default` a `denied` quindi non
+  fa niente in pratica (quando la libreria arriva è già `granted`): innocuo, si
+  lascia.
+- **Con `analytics_storage` negato non parte niente**: nessun ping senza
+  cookie, perché non c'è la libreria che lo manderebbe. E nemmeno i nostri
+  eventi, fermati da `daopConsensoAnalytics`.
+- **La modellazione comportamentale di GA4 non è attiva e oggi non potrebbe
+  esserlo.** Impara dai ping senza cookie, quindi vuole la modalità avanzata. E
+  anche in avanzata servono, per 7 giorni, **≥1.000 eventi/giorno col consenso
+  negato** e **≥1.000 utenti/giorno col consenso dato** (7 giorni su 28): con
+  ~640 clic/giorno da Google e copertura ~38% siamo a ~250 utenti consenzienti
+  al giorno. Da GA4 si controlla in Amministratore → Visualizzazione dati →
+  Identità per i report (la voce «Combinata» dice se la proprietà è idonea) —
+  non verificato da qui.
+
+**Passare all'avanzata non conviene, e non per pigrizia.** Il banner e la cookie
+policy promettono che senza consenso non parte nessuna richiesta verso Google:
+con i ping senza cookie diventerebbero falsi e andrebbero riscritti, e il Garante
+non si è espresso chiaramente su quei ping. In cambio si avrebbero dati
+*modellati*, e solo dopo aver passato le soglie. Il divario con Search Console
+resta quello di «Il buco è chiuso» qui sotto: si stringe, non si chiude.
+
 #### Il buco è chiuso, e si misura con Search Console non con GA4
 
 Il fix è andato in produzione il 12/08/2026 alle 14:53. GA4 ha reagito subito, e
