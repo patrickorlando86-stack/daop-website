@@ -947,7 +947,8 @@ module.exports = async function luoghi(browser) {
 
   let senzaGinetto = [], doppi = [], conCanale = [],
       conclusePosto = [], vivePosto = [], hubPosto = [],
-      oraSuViva = [], oraFuoriPosto = [], oraRipetuti = [], oraRotti = [];
+      oraSuViva = [], oraFuoriPosto = [], oraRipetuti = [], oraRotti = [],
+      firmaPrima = [];
   let conOra = 0, concluse = 0;
   // Si cerca l'attributo class INTERO e non il solo nome: quei nomi stanno
   // anche nel <style> di ogni pagina (GINETTO_CSS e' incollata dappertutto),
@@ -997,6 +998,14 @@ module.exports = async function luoghi(browser) {
       }
     }
     if (dove === 'scheda' && !conclusa && ora) oraSuViva.push(f);
+    // Dal 25/09/2026 gli eventi vicini vengono subito dopo i bottoni, PRIMA
+    // del riquadro "Scheda verificata": messo in mezzo, diceva "la pagina e'
+    // finita" proprio dove doveva cominciare la lista.
+    if (dove === 'scheda') {
+      const iVic = html.indexOf('data-cta="vicini"');
+      const iFirma = html.indexOf('class="ev-firma"');
+      if (iVic > 0 && iFirma > 0 && iFirma < iVic) firmaPrima.push(f);
+    }
     if (dove === 'scheda' && !conclusa && alto) vivePosto.push(f);
     // Sulle pagine comune e sulle landing Ginetto ha preso il posto che era
     // dell'invito al canale (04/09/2026): dentro l'articolo, subito dopo
@@ -1024,6 +1033,9 @@ module.exports = async function luoghi(browser) {
   r.ok(oraRotti.length === 0, oraRotti.length
     ? `eventi vicini che portano a una scheda inesistente: ${oraRotti.length} (es. ${oraRotti[0]})`
     : 'ogni evento vicino in cima porta a una pagina che esiste');
+  r.ok(firmaPrima.length === 0, firmaPrima.length
+    ? `il riquadro della firma sta ancora prima degli eventi vicini: ${firmaPrima.length} (es. ${firmaPrima[0]})`
+    : 'gli eventi vicini vengono prima della firma');
   r.ok(oraSuViva.length === 0, oraSuViva.length
     ? `eventi vicini in cima su ${oraSuViva.length} schede vive (es. ${oraSuViva[0]})`
     : 'sulle schede vive il blocco in cima non c\'e\'');
