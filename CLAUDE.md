@@ -6969,9 +6969,11 @@ restringe QUESTO elenco, in fondo quello che porta ad altre pagine.**
   915px. Visto nella foto, non nell'HTML.
 - **L'H1 e l'hero non si sono toccati**, per la ragione di sempre.
 
-**Cosa resta com'era, e si può decidere dopo:** la fascia scura «Resta
-aggiornato / Seguici sui social» fra Ginetto e il footer. È una seconda
-richiesta vicino a Ginetto, e ripete la colonna Seguici del footer.
+**La fascia scura «Resta aggiornato / Seguici sui social» è stata tolta** lo
+stesso giorno (Patrick: «si togli»): era una seconda richiesta subito sotto
+Ginetto, cioè le due richieste nello stesso punto che si dimezzano, e
+ripeteva la colonna Seguici del footer due centimetri più giù. Con lei è
+uscito il CSS `.events-cta`, che nessun'altra pagina usava.
 
 `tests/agenda.js` controlla nel reso che l'indice stia sotto l'agenda e che
 prima del primo evento non ci sia nessuna pillola verso altre pagine
