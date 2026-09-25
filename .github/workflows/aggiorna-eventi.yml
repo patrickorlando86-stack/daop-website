@@ -263,6 +263,7 @@ jobs:
           FILE="eventi.html index.html metodo.html zone.html \
                 sagre-provincia-*.html \
                 eventi-provincia-*.html \
+                halloween-provincia-*.html mercatini-di-natale-provincia-*.html \
                 befana.html capodanno.html carnevale.html ferragosto.html \
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \

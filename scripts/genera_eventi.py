@@ -4270,19 +4270,13 @@ def _eco_riga(chiave, n):
     }.get(chiave, str(n))
 
 
-def blocco_ecosistema(qui=None):
-    """Le famiglie diverse da quella in cui siamo, in coda al corpo.
+def _porte_vive(qui=None):
+    """Le famiglie da proporre da una pagina della famiglia 'qui', gia' filtrate.
 
-    'qui' e' la chiave della famiglia della pagina: quella non si linka da se'.
-    Con qui=None escono tutte e quattro, ed e' il caso della home — dove non si
-    e' dentro nessuna famiglia, quindi non c'e' niente da escludere. Sono i due
-    soli casi: tre card in coda a una pagina, quattro sulla home.
-
-    Il titolo pone una domanda invece di dire "vedi anche", che e' la regola
-    gia' scritta per il ponte verso i luoghi: da dentro una famiglia la domanda
-    vera e' "e se non era un evento quello che cercavo?". Sulla home quella
-    domanda non ha senso — nessuno e' ancora dentro niente — e il titolo dice
-    che cosa c'e'."""
+    Una lista sola per le due forme in cui si propongono: le card di
+    blocco_ecosistema() e le pillole «Non un evento?» nell'indice in fondo a
+    eventi.html (blocco_comuni). Due filtri scritti due volte divergerebbero
+    alla prima stagione dei centri. Torna (chiave, href, nome, riga, numero)."""
     n = conteggi_leggi()
     voci = []
     for chiave, href, nome, riga in FAMIGLIE:
@@ -4300,13 +4294,31 @@ def blocco_ecosistema(qui=None):
         # dell'app, una porta non promette una cosa che non c'e'. Torna da sola
         # quando genera_centri scrive un conteggio sopra zero (con un giro di
         # ritardo, vedi conteggio_scrivi). Vale anche sulla home, dove il
-        # testo sotto il titolo si adegua (vedi sotto).
+        # testo sotto il titolo si adegua (vedi blocco_ecosistema).
         if chiave == 'centri' and not q:
             continue
         sotto = _eco_riga(chiave, q) if q >= MIN_CONTEGGIO else riga
-        voci.append(f'<a class="eco-c" href="{href}">'
-                    f'<span class="eco-n">{esc(nome)}</span>'
-                    f'<span class="eco-d">{esc(sotto)}</span></a>')
+        voci.append((chiave, href, nome, sotto, q))
+    return voci
+
+
+def blocco_ecosistema(qui=None):
+    """Le famiglie diverse da quella in cui siamo, in coda al corpo.
+
+    'qui' e' la chiave della famiglia della pagina: quella non si linka da se'.
+    Con qui=None escono tutte e quattro, ed e' il caso della home — dove non si
+    e' dentro nessuna famiglia, quindi non c'e' niente da escludere. Sono i due
+    soli casi: tre card in coda a una pagina, quattro sulla home.
+
+    Il titolo pone una domanda invece di dire "vedi anche", che e' la regola
+    gia' scritta per il ponte verso i luoghi: da dentro una famiglia la domanda
+    vera e' "e se non era un evento quello che cercavo?". Sulla home quella
+    domanda non ha senso — nessuno e' ancora dentro niente — e il titolo dice
+    che cosa c'e'."""
+    voci = [f'<a class="eco-c" href="{href}">'
+            f'<span class="eco-n">{esc(nome)}</span>'
+            f'<span class="eco-d">{esc(sotto)}</span></a>'
+            for _, href, nome, sotto, _ in _porte_vive(qui)]
     if not voci:
         return ''
     porte = qui is None
@@ -6016,61 +6028,64 @@ def url_comune(dati):
 
 
 def blocco_comuni(hub, oggi):
-    """L'elenco delle pagine per comune, per il fondo di eventi.html.
+    """L'indice in fondo a eventi.html: provincia, giorno, sagre, paesi, luoghi.
 
-    Le pagine comune esistevano gia' ma le linkavano solo zone.html e le poche
-    schede evento di quei comuni: dall'agenda, che e' la pagina piu' forte del
-    sito, non arrivava niente. Il conteggio accanto al nome non e' decorazione,
-    e' la promessa che dice se vale la pena entrare."""
-    # Le pagine di intenzione vanno per prime e ci sono sempre, hub o non hub:
-    # sono la risposta alle query generiche su cui l'agenda ranka in settima
-    # posizione, e da nessuna parte del sito ci arriverebbe un link. Una pagina
-    # che solo la sitemap conosce, Google la tratta come tale.
-    # DUE RIGHE E NON UNA (11/09/2026, chiesto da Giovanni: "ingrandire un
-    # pochettino la possibilita' di scegliere gli eventi della propria
-    # provincia"). Sono le stesse cinque voci di prima, divise per quello che
-    # chiedono: "La tua provincia" e' un DOVE, "Cosa cerchi" e' un QUANDO
-    # (oggi, il weekend, la stagionale del momento). In fila indiana si
-    # leggevano come un blob di cinque pillole che a 375px andava a capo tre
-    # volte.
-    #
-    # Costa MENO di prima, ed e' misurato e non stimato: il blocco passa da
-    # 208px a 187px a 320 e a 375px, e a 158px a 412px. Il guadagno viene dal
-    # nome corto - in una riga che si chiama gia' "La tua provincia",
-    # scrivere "Eventi Alessandria" e' la stessa ripetizione del "(CN)" tolto
-    # dalle righe delle pagine di una provincia sola. Senza quel prefisso le
-    # tre pillole stanno su una riga (106+54+71px a 375).
-    #
-    # La provincia viene PRIMA: e' la scelta che vale tutto l'anno, mentre
-    # "oggi" e "questo weekend" li offre gia' la tendina "quando" della barra
-    # qui sopra. La stagionale resta nella seconda riga, che a 412px e' alta
-    # 40px: non le costa niente.
-    #
-    # Gli href vengono da href_eventi_prov() come in link_landing(), non da un
-    # confronto sul testo: e' la stessa funzione, quindi le due righe non
-    # possono divergere. Il nome corto viene da PROVINCE_NOMI, che e' l'altro
-    # posto solo. In link_landing() il prefisso "Eventi" RESTA, perche' li' la
-    # riga (.lan-alt, in fondo alle pagine di intenzione) non ha un'etichetta
-    # sopra e "Alessandria" da solo non direbbe di che cosa.
+    STA IN FONDO dal 25/09/2026, e non in cima (Patrick: «troppi filtri nella
+    prima pagina, troppe cose nella seconda»). Fino a quel giorno le righe
+    «La tua provincia», «Cosa cerchi» e «Vai al comune» stavano sotto la barra
+    dei filtri: fra l'hero e il primo evento, a 360px, c'erano la barra, il
+    «vicino a me», il conteggio e poi altre tre righe di pillole che a chi
+    sta scegliendo un evento chiedono di scegliere prima un'altra pagina. In
+    cima restano solo i controlli che restringono QUESTO elenco; quelli che
+    portano altrove scendono qui, dove chi ha scorso l'agenda senza trovare si
+    fa la domanda a cui rispondono.
+
+    I link NON si tolgono: sono la ragione per cui esistono (dalla pagina piu'
+    forte del sito alle pagine comune e alle provinciali, che senza non
+    riceverebbero niente), e in fondo Google li vede uguale. Quello che cambia
+    e' che in fondo tutto questo era un muro di cinque paragrafi con i link
+    dentro: adesso e' un indice, un gruppo per domanda con la sua etichetta.
+
+    Cinque gruppi, e l'ordine e' quello delle domande:
+      - «La tua provincia»: l'agenda intera della provincia (eventi-provincia),
+        la richiesta di Giovanni dell'11/09 - che quindi resta, un piano piu'
+        giu'. Nome corto, senza «Eventi»: l'etichetta lo dice gia';
+      - «Quando»: oggi, il weekend, la stagionale del momento (link_landing);
+      - «Solo sagre e feste»: le sagre-provincia-*, che prima avevano il link
+        solo dal paragrafo scritto a mano;
+      - «Paese per paese»: le pagine comune col numero, i primi
+        MAX_COMUNI_APERTI e il resto sotto «+ altri N», piu' la mappa delle
+        zone. Non e' piu' un <details> che l'agenda chiude sotto i 600px: in
+        fondo non c'e' un primo evento da proteggere;
+      - «Non un evento?»: le altre famiglie (_porte_vive), che prima erano le
+        card «Cerchi un'altra cosa?» buttate fra il testo e Ginetto. Stesso
+        filtro, quindi i centri spariscono fuori stagione anche qui.
+
+    Gli href delle province vengono da href_eventi_prov(), gli altri da
+    link_landing(): sono le stesse funzioni delle altre pagine, quindi l'indice
+    non puo' promettere una pagina che il resto del sito non ha."""
     prov_href = {href_eventi_prov(c) for c in PROVINCE_PUBBLICATE}
     altre = [(h, t) for h, t in link_landing(oggi) if h not in prov_href]
 
-    def _riga_pillole(etichetta, voci):
-        dentro = "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in voci)
-        return ('      <div class="ev-scorc-row">'
+    def _gruppo(etichetta, dentro, cls=''):
+        return (f'      <div class="ev-scorc-row{cls}">'
                 f'<span class="ev-comuni-lab">{esc(etichetta)}</span>'
                 f'<div class="ev-comuni">{dentro}</div></div>\n')
 
-    testa = _riga_pillole('La tua provincia',
-                          [(href_eventi_prov(c), PROVINCE_NOMI.get(c, c))
-                           for c in PROVINCE_PUBBLICATE])
-    testa += _riga_pillole('Cosa cerchi', altre)
-    if not hub:
-        return testa.rstrip('\n')
-    voci = [d for d in sorted(hub.values(), key=lambda d: (-len(d['futuri']), d['nome']))
+    def _pillole(voci):
+        return "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in voci)
+
+    out = _gruppo('La tua provincia', _pillole(
+        [(href_eventi_prov(c), PROVINCE_NOMI.get(c, c)) for c in PROVINCE_PUBBLICATE]))
+    if altre:
+        out += _gruppo('Quando', _pillole(altre))
+    out += _gruppo('Solo sagre e feste', _pillole(
+        [(f'/sagre-provincia-{slugify(PROVINCE_NOMI.get(c, c))}.html',
+          PROVINCE_NOMI.get(c, c)) for c in PROVINCE_PUBBLICATE]))
+
+    voci = [d for d in sorted((hub or {}).values(),
+                              key=lambda d: (-len(d['futuri']), d['nome']))
             if d['futuri']]
-    if not voci:
-        return testa.rstrip('\n')
 
     # Il numero da solo tiene la pillola corta; "eventi in programma" per
     # esteso sta nell'aria-label, perche' un "12" nudo allo screen reader
@@ -6080,21 +6095,11 @@ def blocco_comuni(hub, oggi):
                 f'aria-label="{esc(d["nome"])}: {len(d["futuri"])} eventi in programma">'
                 f'{esc(d["nome"])} <span>{len(d["futuri"])}</span></a>')
 
-    # In alta stagione i comuni con almeno un evento sono venti, cioe' tre file
-    # di pillole fra i filtri e il primo evento: l'indice si mangiava la pagina
-    # che doveva indicizzare. Se ne mostrano MAX_COMUNI_APERTI - quelli con piu'
-    # eventi, che e' gia' l'ordine - e la coda va sotto un "+ altri N".
-    #
-    # Il taglio e' sul NUMERO di pillole, non sul conteggio degli eventi: il
-    # difetto da riparare e' di ingombro, ed e' l'ingombro a dover essere
-    # prevedibile. Una soglia tipo "almeno 2 eventi" farebbe ballare la riga fra
-    # cinque e quindici pillole secondo la stagione, cioe' non risolverebbe
-    # niente a Ferragosto e taglierebbe troppo a novembre.
-    #
-    # I link della coda restano nell'HTML, dentro un secondo <details> chiuso:
-    # e' la stessa ragione per cui il blocco e' un <details> e non JavaScript -
-    # Google li vede e li segue lo stesso, che era tutto il punto del blocco.
-    # Un "+ altri 1" occuperebbe il posto della pillola che nasconde, quindi
+    # Il taglio e' sul NUMERO di pillole, non sul conteggio degli eventi: una
+    # soglia tipo "almeno 2 eventi" farebbe ballare la riga fra cinque e
+    # quindici pillole secondo la stagione. I link della coda restano
+    # nell'HTML, dentro un <details> chiuso che Google segue lo stesso; un
+    # "+ altri 1" occuperebbe il posto della pillola che nasconde, quindi
     # sotto le due voci di coda non si taglia niente.
     if len(voci) <= MAX_COMUNI_APERTI + 2:
         primi, resto = voci, []
@@ -6107,18 +6112,19 @@ def blocco_comuni(hub, oggi):
                  f'+ altri {len(resto)}</summary>'
                  f'<div class="ev-comuni">{"".join(pillola(d) for d in resto)}</div>'
                  '</details>')
-    # <details> e non piu' una riga aperta: sul telefono questi 10-15 comuni
-    # occupavano da soli mezzo schermo fra i filtri e il primo evento, e chi
-    # apre l'agenda vuole vedere un evento, non un indice. Aperto di default
-    # (senza JS resta com'era e su desktop lo spazio c'e'); l'agenda lo chiude
-    # sotto i 600px. I link restano nell'HTML in ogni caso: dentro un details
-    # chiuso Google li vede e li segue lo stesso, che era tutto il punto del
-    # blocco.
-    return (testa
-            + '      <details class="ev-comuni-box" open>\n'
-            + f'        <summary class="ev-comuni-lab">Vai al comune<span class="ev-comuni-n">{len(voci)}</span></summary>\n'
-            + f'        <div class="ev-comuni">{link}</div>\n'
-            + '      </details>')
+    link += '<a class="ev-comuni-tutte" href="/zone.html">Tutte le zone &rarr;</a>'
+    out += _gruppo('Paese per paese', link)
+
+    # Il numero accanto al nome, come per i paesi: "908" e' una ragione per
+    # toccare, "Luoghi" no (la lezione di link_luoghi). Sotto MIN_CONTEGGIO
+    # il numero scoraggerebbe, e si stampa il nome e basta.
+    porte = [(href, nome, q) for _, href, nome, _, q in _porte_vive('eventi')]
+    if porte:
+        out += _gruppo('Non un evento?', "".join(
+            f'<a href="{href}">{esc(nome)}'
+            + (f' <span>{q}</span>' if q >= MIN_CONTEGGIO else '') + '</a>'
+            for href, nome, q in porte))
+    return out.rstrip('\n')
 
 
 COMUNE_CSS = """
@@ -8895,6 +8901,15 @@ def spec_natale(st, events, oggi, altre):
         'cercate un posto dove stare al caldo tutto il pomeriggio, gli <a '
         'href="/luoghi.html">agriturismi, i musei e i posti al coperto per '
         'bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo.</p>')
+    # I mercatini provincia per provincia: la query "mercatini di natale
+    # provincia di X" ha le sue pagine (spec_mercatini_prov), e questa e' il
+    # loro padre. Il link sta prima dell'elenco perche' e' la domanda piu'
+    # cercata di dicembre.
+    corpo += ('<p class="com-per"><strong>I mercatini di Natale</strong> '
+              'provincia per provincia: '
+              + ', '.join(f'<a href="{href_mercatini_prov(c)}">'
+                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>'
+                          for c in PROVINCE_PUBBLICATE) + '.</p>')
     corpo += _landing_filtri(finestra)
     # A settimane e non giorno per giorno: la finestra e' lunga 26 giorni, e
     # ventisei titoletti - la meta' dei quali vuoti - fanno sembrare generata a
@@ -8919,6 +8934,159 @@ def spec_natale(st, events, oggi, altre):
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Natale {anno} con i bambini", sotto, corpo,
                          f"Eventi di Natale {anno}")
+
+
+# ---------------------------------------------------------------------------
+# I MERCATINI DI NATALE PER PROVINCIA (25/09/2026, Patrick: «dovremmo creare
+# una pagina per i mercatini di natale in provincia... tre pagine»).
+#
+# "mercatini di natale provincia di cuneo" e' una query sua, con la provincia
+# dentro, ed e' la forma in cui a Ferragosto e a Halloween si e' cercato:
+# per provincia. /natale.html le risponde a meta' - e' il Natale intero delle
+# tre province, presepi e Babbo Natale compresi. Queste tre pagine rispondono
+# a quella domanda sola, e si tengono per mano con /natale.html come le
+# halloween-provincia-* con /halloween.html.
+#
+# NASCONO A SETTEMBRE, VUOTE E FUORI INDICE, APPOSTA: su una stagionale
+# l'asset e' l'anzianita' dell'URL (vedi spec_halloween), e a fine novembre
+# queste avranno due mesi di vita invece di zero. Sotto MIN_TEMA mercatini
+# restano noindex e fuori sitemap da sole. L'anno sta nel titolo e nell'H1,
+# mai nell'indirizzo.
+# ---------------------------------------------------------------------------
+
+# Un mercatino di Natale: la parola "mercatin" E una parola di Natale
+# (TEMI_STAGIONE['natale']: natale, presepi, Babbo Natale, avvento, luci...).
+# La sola "mercatin" prenderebbe il mercatino dell'usato del sabato, che a
+# dicembre c'e' lo stesso e non e' quello che si cerca.
+_MERCATINO = re.compile(r"mercatin", re.I)
+
+
+def e_mercatino_natale(e):
+    testo = f"{e.get('nome') or ''} {e.get('descr') or ''}"
+    return bool(_MERCATINO.search(testo)) and in_tema(e, 'natale')
+
+
+def mercatini_range(oggi):
+    """(15 novembre, 8 dicembre, 6 gennaio) della stagione utile.
+
+    Larga apposta: i mercatini aprono il weekend dopo meta' novembre e alcuni
+    restano fino all'Epifania. Il clou e' l'Immacolata, il ponte in cui se ne
+    fanno di piu'. Come le altre, dal 7 gennaio passa alla stagione dopo."""
+    return prossima_finestra(
+        lambda y: (datetime.date(y, 11, 15), datetime.date(y, 12, 8),
+                   datetime.date(y + 1, 1, 6)), oggi)
+
+
+def href_mercatini_prov(prov):
+    return f"/mercatini-di-natale-provincia-{slugify(PROVINCE_NOMI.get(prov, prov))}.html"
+
+
+def spec_mercatini_prov(prov, events, oggi, altre):
+    """/mercatini-di-natale-provincia-<nome>.html — i mercatini di UNA provincia.
+
+    Il blocco suo, quello che un elenco di date non ha: **quando** si fanno
+    (quasi tutti nei weekend, e il ponte dell'Immacolata e' il piu' pieno) e
+    **come ci si va con i bambini** (all'aperto, al freddo, e il pomeriggio
+    presto e' l'ora buona). "Al coperto o all'aperto?" per esteso sta in
+    /natale.html e non si ricopia: qui c'e' una riga che ci porta."""
+    da, clou, a = mercatini_range(oggi)
+    anno = clou.year
+    nome = PROVINCE_NOMI.get(prov, prov)
+    href = href_mercatini_prov(prov)
+    url = f"{SITE_URL}{href}"
+    finestra = sorted((e for e in events
+                       if e['d_start'] <= a and e['d_end'] >= da
+                       and (e.get('prov') or '').upper() == prov
+                       and e_mercatino_natale(e)),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
+    poche = len(finestra) < MIN_TEMA
+
+    titolo = _landing_titolo([f"Mercatini di Natale {anno} in provincia di {nome}",
+                              f"Mercatini di Natale {anno} a {nome} e provincia"])
+    h1 = f"Mercatini di Natale {anno} in provincia di {nome}"
+    if finestra:
+        sotto = (f"{len(finestra)} mercatini già in programma"
+                 + (f" in {comuni} comuni" if comuni > 1 else "")
+                 if len(finestra) > 1 else "1 mercatino in agenda, per ora")
+        apertura = (f"<p>I <strong>mercatini di Natale</strong> in provincia di "
+                    f"{nome}, con la data, il paese e chi li organizza. Li "
+                    f"verifichiamo uno per uno e aggiungiamo i nuovi man mano "
+                    f"che le pro loco pubblicano il programma.</p>")
+        descr = trunc(f"Mercatini di Natale {anno} in provincia di {nome}: "
+                      + (f"{len(finestra)} mercatini" if len(finestra) > 1
+                         else "1 mercatino")
+                      + " da fine novembre all'Epifania, verificati uno per uno da DAOP.",
+                      152)
+    else:
+        sotto = f"Per i mercatini di Natale {anno} in provincia di {nome} non c'è ancora niente"
+        apertura = (f"<p class=\"lan-vuoto\">Per i mercatini di Natale {anno} in "
+                    f"provincia di {nome} in agenda non abbiamo ancora niente, e "
+                    f"lo scriviamo invece di riempire la pagina. Le pro loco "
+                    f"decidono tardi: molti programmi escono a novembre. "
+                    f"Aggiorniamo questa pagina ogni giorno, man mano che "
+                    f"arrivano.</p>")
+        descr = trunc(f"Mercatini di Natale {anno} in provincia di {nome}: date e "
+                      "paesi da fine novembre all'Epifania, verificati uno per uno "
+                      "da DAOP.", 152)
+
+    corpo = apertura
+    corpo += (
+        '<h2>Quando andarci con i bambini</h2>'
+        '<p>Quasi tutti si fanno <strong>nei fine settimana</strong>, e il più '
+        'pieno è il ponte dell\'<strong>Immacolata</strong>. Sono all\'aperto e '
+        'si fanno anche col freddo: l\'ora buona è il primo pomeriggio, prima '
+        'che faccia buio. Dove c\'è Babbo Natale con un orario, lo trovi nella '
+        'scheda. <a href="/natale.html">Il resto del Natale</a> &mdash; presepi, '
+        'laboratori, spettacoli al coperto &mdash; sta nella pagina di Natale.</p>')
+    corpo += _landing_filtri(finestra, con_prov=False)
+    # Le righe lunghe (un mercatino aperto tutti i weekend di dicembre) una
+    # volta sola, poi a settimane: ventisei titoletti per giorno, meta' vuoti,
+    # farebbero una pagina che sembra generata a macchina.
+    lunghi = [e for e in finestra if e_lungo(e)]
+    corpo += _landing_sezione("Per più settimane",
+                              "Aperti più fine settimana di fila: li trovi qui una volta sola",
+                              lunghi, oggi, eta=True, dettagli=True)
+    corti = [e for e in finestra if not e_lungo(e)]
+    fasce = ((da, datetime.date(anno, 11, 30), "A novembre", None),
+             (datetime.date(anno, 12, 1), datetime.date(anno, 12, 8),
+              "Dal 1° all'8 dicembre", "C'è l'Immacolata"),
+             (datetime.date(anno, 12, 9), datetime.date(anno, 12, 15),
+              "Dal 9 al 15 dicembre", None),
+             (datetime.date(anno, 12, 16), datetime.date(anno, 12, 24),
+              "Dal 16 al 24 dicembre", "Gli ultimi prima di Natale"),
+             (datetime.date(anno, 12, 25), a, "Dopo Natale", "Fino all'Epifania"))
+    for d1, d2, testa, etichetta in fasce:
+        corpo += _landing_sezione(
+            testa, etichetta,
+            [e for e in corti if e['d_start'] <= d2 and e['d_end'] >= d1],
+            oggi, eta=True, dettagli=True)
+    altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
+    corpo += ('<p class="com-per">I mercatini nelle altre province: '
+              + ', '.join(f'<a href="{href_mercatini_prov(c)}">'
+                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>' for c in altre_prov)
+              + f'. Cerchi altro da fare con i bambini in provincia di {esc(nome)}? '
+              f'<a href="{href_eventi_prov(prov)}">Gli eventi della provincia</a>.</p>')
+    corpo += _dopo_stagione("i mercatini")
+    if poche:
+        corpo += blocco_ginetto(alto=True)
+
+    padre = ('/natale.html', 'Natale')
+    return {
+        'path': href.lstrip('/'), 'url': url,
+        'agg_in_cima': True,
+        'titolo': titolo, 'descr': descr,
+        'h1': h1, 'sotto': sotto, 'crumb': nome,
+        'padre': padre,
+        'corpo': corpo,
+        'robots': "noindex, follow" if poche else "index, follow",
+        'prov': prov,
+        'jsonld': _grafo_landing(url, titolo, descr, finestra,
+                                 f"Mercatini di Natale {anno} in provincia di {nome}",
+                                 nome, oggi, padre=padre),
+        'eventi': len(finestra),
+        'ginetto_nel_corpo': poche,
+    }
 
 
 def spec_capodanno(st, events, oggi, altre):
@@ -9639,6 +9807,10 @@ def scrivi_landing(events, hub, storico, oggi):
     # Halloween per provincia: vedi spec_halloween_prov. Girano sempre, come le
     # stagionali, e sotto soglia restano fuori indice e fuori sitemap da sole.
     specs += [spec_halloween_prov(c, events, oggi, altre) for c in PROVINCE_PUBBLICATE]
+    # I mercatini di Natale per provincia: vedi spec_mercatini_prov. Stessa
+    # regola, nascono a settembre per invecchiare e restano fuori indice finche'
+    # non arrivano i mercatini.
+    specs += [spec_mercatini_prov(c, events, oggi, altre) for c in PROVINCE_PUBBLICATE]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
     # La provincia senza finestra temporale: la quarta cella dell'asse
     # provincia x finestra, che era l'unica vuota. Vedi spec_eventi_prov.
@@ -9934,15 +10106,6 @@ def inject(tipo_opts, lista, jsonld, prov_opts=None, comuni_html=None, hero=None
         if n6 != 1:
             print("[genera_eventi] ATTENZIONE: marker EVENTI-HERO non trovati in "
                   "eventi.html: titolo e occhiello restano quelli scritti a mano")
-    # La riga delle quattro porte. Opzionale come gli altri tre blocchi, e per
-    # la stessa ragione: un eventi.html piu' vecchio del deploy non deve far
-    # fallire tutta la generazione.
-    s, n7 = re.subn(r'(<!-- EVENTI-ECO:START -->\n).*?(\n *<!-- EVENTI-ECO:END -->)',
-                    lambda m: m.group(1) + blocco_ecosistema('eventi') + m.group(2),
-                    s, count=1, flags=re.S)
-    if n7 != 1:
-        print("[genera_eventi] ATTENZIONE: marker EVENTI-ECO non trovati in "
-              "eventi.html: la riga delle quattro porte non viene scritta")
     if n1 != 1 or n2 != 1 or n3 != 1:
         raise SystemExit(f"Ancoraggi non trovati in eventi.html (tipo={n1}, lista={n2}, json-ld={n3})")
     open(HTML_PATH, "w", encoding="utf-8").write(s)
