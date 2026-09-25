@@ -283,7 +283,12 @@
      disegnata, cosi' la barra di scorrimento non balla. 'auto' la sostituisce
      con l'altezza vera dopo il primo disegno e se la riga si apre. 108px e'
      la riga chiusa tipica sul telefono (miniatura 52 + due righe di testo). */
-  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:160px;
+  /* scroll-margin-top: sotto la nav, la barra dei filtri (--ev-sticky le
+     somma tutte e due, e cambia quando i controlli vanno a capo) e la testa
+     del giorno, che e' appiccicosa anche lei. Era 160px fissi: a 360px la
+     barra da sola arriva a ~230, e chi atterrava da un link #ev- trovava il
+     titolo dell'evento nascosto sotto la data. */
+  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:calc(var(--ev-sticky,160px) + 64px);
     content-visibility:auto;contain-intrinsic-size:auto 108px}
   .event-card.is-hidden,.ev-day.is-hidden,.ev-hl-card.is-hidden,.ev-hl-block.is-hidden,.ev-highlights.is-hidden{display:none}
   .ev-h{margin:0;font-weight:400}
@@ -994,6 +999,19 @@
           "item": "https://www.daop.it/mercatini-di-natale-provincia-cuneo.html"
         }
       ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Mercatini di Natale 2026 in provincia di Cuneo",
+      "numberOfItems": 1,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "url": "https://www.daop.it/eventi/mercatini-di-natale-confcommercio-ascom-carru.html",
+          "name": "Mercatini di Natale - Confcommercio Ascom Carrù"
+        }
+      ]
     }
   ]
 }
@@ -1047,7 +1065,7 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
-  <p>I <strong>mercatini di Natale</strong> in provincia di Cuneo, con la data, il paese e chi li organizza. Li verifichiamo uno per uno e aggiungiamo i nuovi man mano che le pro loco pubblicano il programma.</p><h2>Quando andarci con i bambini</h2><p>Quasi tutti si fanno <strong>nei fine settimana</strong>, e il più pieno è il ponte dell'<strong>Immacolata</strong>. Sono all'aperto e si fanno anche col freddo: l'ora buona è il primo pomeriggio, prima che faccia buio. Dove c'è Babbo Natale con un orario, lo trovi nella scheda. <a href="/natale.html">Il resto del Natale</a> &mdash; presepi, laboratori, spettacoli al coperto &mdash; sta nella pagina di Natale.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>A novembre</h3></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="cn" data-category="feste" data-start="2026-11-29" data-end="2026-11-29" data-free="1" data-lat="44.4807314" data-lon="7.8511229" data-citta="Carrù"><img class="com-th" src="/assets/miniature/daop_cuneo_3981831680130185193.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 29 nov · 09:00-19:00</span><a class="com-go" href="/eventi.html#ev-2026-11-29-mercatini-di-natale-confcommercio-ascom-carru">Mercatini di Natale - Confcommercio Ascom Carrù</a><span class="com-luogo">Carrù<span class="ev-pill is-free">Gratuito</span></span></span></li></ul></section><p class="com-per">I mercatini nelle altre province: <a href="/mercatini-di-natale-provincia-alessandria.html">Alessandria</a>, <a href="/mercatini-di-natale-provincia-asti.html">Asti</a>. Cerchi altro da fare con i bambini in provincia di Cuneo? <a href="/eventi-provincia-cuneo.html">Gli eventi della provincia</a>.</p><h2 id="dopo">E dopo i mercatini?</h2><div class="lan-dopo"><a href="/luoghi.html">Esplora i luoghi per famiglie</a><a href="/eventi.html">Scopri i prossimi eventi</a></div><aside class="ev-ginetto-alto" data-cta="ginetto">
+  <p>I <strong>mercatini di Natale</strong> in provincia di Cuneo, con la data, il paese e chi li organizza. Li verifichiamo uno per uno e aggiungiamo i nuovi man mano che le pro loco pubblicano il programma.</p><h2>Quando andarci con i bambini</h2><p>Quasi tutti si fanno <strong>nei fine settimana</strong>, e il più pieno è il ponte dell'<strong>Immacolata</strong>. Sono all'aperto e si fanno anche col freddo: l'ora buona è il primo pomeriggio, prima che faccia buio. Dove c'è Babbo Natale con un orario, lo trovi nella scheda. <a href="/natale.html">Il resto del Natale</a> &mdash; presepi, laboratori, spettacoli al coperto &mdash; sta nella pagina di Natale.</p><section class="com-grp"><div class="com-head"><div class="com-b"><h3>A novembre</h3></div></div><ul class="com-ev"><li style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15" data-province="cn" data-category="feste" data-start="2026-11-29" data-end="2026-11-29" data-free="1" data-lat="44.4807314" data-lon="7.8511229" data-citta="Carrù"><img class="com-th" src="/assets/miniature/daop_cuneo_3981831680130185193.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">dom 29 nov · 09:00-19:00</span><a class="com-go" href="/eventi/mercatini-di-natale-confcommercio-ascom-carru.html">Mercatini di Natale - Confcommercio Ascom Carrù</a><span class="com-luogo">Carrù<span class="ev-pill is-free">Gratuito</span></span></span></li></ul></section><p class="com-per">I mercatini nelle altre province: <a href="/mercatini-di-natale-provincia-alessandria.html">Alessandria</a>, <a href="/mercatini-di-natale-provincia-asti.html">Asti</a>. Cerchi altro da fare con i bambini in provincia di Cuneo? <a href="/eventi-provincia-cuneo.html">Gli eventi della provincia</a>.</p><h2 id="dopo">E dopo i mercatini?</h2><div class="lan-dopo"><a href="/luoghi.html">Esplora i luoghi per famiglie</a><a href="/eventi.html">Scopri i prossimi eventi</a></div><aside class="ev-ginetto-alto" data-cta="ginetto">
     <div class="info-strip">
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
       <div>

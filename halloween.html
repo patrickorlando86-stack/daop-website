@@ -282,7 +282,12 @@
      disegnata, cosi' la barra di scorrimento non balla. 'auto' la sostituisce
      con l'altezza vera dopo il primo disegno e se la riga si apre. 108px e'
      la riga chiusa tipica sul telefono (miniatura 52 + due righe di testo). */
-  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:160px;
+  /* scroll-margin-top: sotto la nav, la barra dei filtri (--ev-sticky le
+     somma tutte e due, e cambia quando i controlli vanno a capo) e la testa
+     del giorno, che e' appiccicosa anche lei. Era 160px fissi: a 360px la
+     barra da sola arriva a ~230, e chi atterrava da un link #ev- trovava il
+     titolo dell'evento nascosto sotto la data. */
+  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:calc(var(--ev-sticky,160px) + 64px);
     content-visibility:auto;contain-intrinsic-size:auto 108px}
   .event-card.is-hidden,.ev-day.is-hidden,.ev-hl-card.is-hidden,.ev-hl-block.is-hidden,.ev-highlights.is-hidden{display:none}
   .ev-h{margin:0;font-weight:400}

@@ -284,7 +284,12 @@
      disegnata, cosi' la barra di scorrimento non balla. 'auto' la sostituisce
      con l'altezza vera dopo il primo disegno e se la riga si apre. 108px e'
      la riga chiusa tipica sul telefono (miniatura 52 + due righe di testo). */
-  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:160px;
+  /* scroll-margin-top: sotto la nav, la barra dei filtri (--ev-sticky le
+     somma tutte e due, e cambia quando i controlli vanno a capo) e la testa
+     del giorno, che e' appiccicosa anche lei. Era 160px fissi: a 360px la
+     barra da sola arriva a ~230, e chi atterrava da un link #ev- trovava il
+     titolo dell'evento nascosto sotto la data. */
+  .event-card{border-bottom:1px solid rgba(45,74,92,0.07);scroll-margin-top:calc(var(--ev-sticky,160px) + 64px);
     content-visibility:auto;contain-intrinsic-size:auto 108px}
   .event-card.is-hidden,.ev-day.is-hidden,.ev-hl-card.is-hidden,.ev-hl-block.is-hidden,.ev-highlights.is-hidden{display:none}
   .ev-h{margin:0;font-weight:400}
@@ -959,13 +964,19 @@
     {
       "@type": "ItemList",
       "name": "Eventi a Carrù",
-      "numberOfItems": 1,
+      "numberOfItems": 2,
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "url": "https://www.daop.it/eventi/carrun-per-la-scuola.html",
           "name": "Carrùn per la Scuola"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "url": "https://www.daop.it/eventi/mercatini-di-natale-confcommercio-ascom-carru.html",
+          "name": "Mercatini di Natale - Confcommercio Ascom Carrù"
         }
       ]
     }
@@ -1025,7 +1036,7 @@
 
   <h2>In programma</h2>
   
-  <section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="/assets/miniature/799547201_122267294282115779_86316458334_20260909-171714_01.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/carrun-per-la-scuola.html">Carrùn per la Scuola</a></h3><p class="com-per">Domenica 4 ottobre 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="/assets/miniature/daop_cuneo_3981831680130185193.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi.html#ev-2026-11-29-mercatini-di-natale-confcommercio-ascom-carru">Mercatini di Natale - Confcommercio Ascom Carrù</a></h3><p class="com-per">Domenica 29 novembre 2026</p></div></section><h2>Come funziona a Carrù</h2><p>I posti che tornano più spesso: <strong>Piazza Mercato - Ala Borsarelli</strong> e <strong>Centro Storico</strong>.</p>
+  <section class="com-grp com-solo" style="--cat-color:#188663;--cat-tint:rgba(24,134,99,0.14);--cat-ink:#167859"><img class="com-th" src="/assets/miniature/799547201_122267294282115779_86316458334_20260909-171714_01.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/carrun-per-la-scuola.html">Carrùn per la Scuola</a></h3><p class="com-per">Domenica 4 ottobre 2026</p></div></section><section class="com-grp com-solo" style="--cat-color:#e8954a;--cat-tint:rgba(232,149,74,0.14);--cat-ink:#a75b15"><img class="com-th" src="/assets/miniature/daop_cuneo_3981831680130185193.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><div class="com-b"><h3><a class="com-go" href="/eventi/mercatini-di-natale-confcommercio-ascom-carru.html">Mercatini di Natale - Confcommercio Ascom Carrù</a></h3><p class="com-per">Domenica 29 novembre 2026</p></div></section><h2>Come funziona a Carrù</h2><p>I posti che tornano più spesso: <strong>Piazza Mercato - Ala Borsarelli</strong> e <strong>Centro Storico</strong>.</p>
 
   <div class="com-link">
     <a href="/luoghi.html#c-cn-carru">3 posti per famiglie a Carrù</a>

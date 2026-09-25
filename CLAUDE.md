@@ -3020,6 +3020,26 @@ due mesi di vita invece di zero, che è la scommessa di Halloween.
   run notturna le riscriveva nel runner e le buttava via. È il guasto di
   `ferragosto.html`, la decima volta.
 
+**Ogni mercatino di Natale ha la sua scheda** (`ha_pagina()`, come le sagre).
+Il primo, Carrù, ne era rimasto senza per 10 caratteri di descrizione, e la
+riga della pagina mandava a `/eventi.html#ev-…`: un clic in più e un
+atterraggio in mezzo all'agenda (Patrick: «non è un click in più che
+potremmo risparmiare?»). «mercatini di natale carrù» è una ricerca col nome
+del paese, cioè il terreno che vinciamo.
+
+**E l'atterraggio sull'agenda era rotto per tutti**, non solo lì: si apriva la
+riga giusta e si restava **~7.000px sopra**. È il difetto di
+`#come-ordiniamo` su `luoghi.html` — `scroll-behavior:smooth` su una pagina
+con `content-visibility:auto`: le righe attraversate si disegnano, crescono,
+e il bersaglio scappa. Ora `mira()` in fondo a `eventi.html` salta secco e
+rimira finché la riga sta ferma (al massimo un secondo, e smette se chi legge
+tocca lo schermo); e `scroll-margin-top` della riga è
+`--ev-sticky + 64px`, perché con 160px fissi il titolo finiva sotto la barra
+dei filtri e la testa del giorno. Serve ai ~23 eventi senza scheda che le
+pagine di intenzione mandano ancora all'agenda. `tests/agenda.js` lo misura
+nel reso sull'ultima riga, arrivando da fuori (rossa sulla pagina di prima:
+«titolo a 6925px»).
+
 Non si insiste con Patrick sul riempirle: arrivano quando arrivano le
 locandine (vedi «Il calendario avanti non è un allarme»).
 

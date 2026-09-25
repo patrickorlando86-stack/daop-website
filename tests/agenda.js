@@ -264,6 +264,31 @@ module.exports = async function agenda(browser) {
     const a = document.getElementById(x).querySelector('.ev-gcal');
     return !a || a.href.includes('&text=');
   }, id), 'arrivando da un\'ancora il link calendario risulta compilato');
+
+  // Arrivando DA UN'ALTRA PAGINA su una riga lontana (25/09/2026): le pagine
+  // di intenzione mandano a /eventi.html#ev-... gli eventi senza scheda, e la
+  // riga si apriva ma si atterrava migliaia di pixel sopra («non si sa
+  // dove»). Si misura nel reso: il titolo dell'evento sta nello schermo e
+  // sotto tutto quello che e' appiccicoso (nav, barra, testa del giorno). La
+  // riga e' l'ultima dell'agenda, cioe' il caso peggiore: tutte le stime di
+  // content-visibility stanno in mezzo.
+  const lontana = await page.locator('.event-card').last().getAttribute('id');
+  const base = page.url().split('#')[0];
+  await page.goto('about:blank');
+  await page.goto(`${base}#${lontana}`);
+  await page.waitForTimeout(2000);
+  const atterra = await page.evaluate((x) => {
+    const t = document.getElementById(x).querySelector('.ev-name').getBoundingClientRect();
+    const tetto = Math.max(0, ...[...document.querySelectorAll('nav, #ev-toolbar, .ev-dayhead')]
+      .filter((e) => /fixed|sticky/.test(getComputedStyle(e).position))
+      .map((e) => e.getBoundingClientRect())
+      .filter((q) => q.top < innerHeight / 2 && q.bottom > 0 && q.bottom <= t.top + 1 + 400)
+      .map((q) => (q.bottom <= t.bottom ? q.bottom : 0)));
+    return { top: Math.round(t.top), bottom: Math.round(t.bottom), tetto: Math.round(tetto), h: innerHeight };
+  }, lontana);
+  r.ok(atterra.top >= atterra.tetto && atterra.bottom <= atterra.h,
+    `da un'altra pagina si atterra sulla riga: titolo a ${atterra.top}px, `
+    + `sotto un tetto di ${atterra.tetto}px, schermo alto ${atterra.h}px`);
   await ctx.close();
 
   // ── la provincia si sceglie per nome ──────────────────────────────────
