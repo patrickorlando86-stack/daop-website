@@ -5481,6 +5481,34 @@ barra, `daop:mappa` una volta sola. Verificate rosse con quattro difetti rimessi
 mappa non si disegna (niente WebGL nel runner), le prove che la vogliono
 disegnata si saltano con una nota, invece di diventare rosse.
 
+#### La coda di `luoghi.html`: due porte e Ginetto — 24/09/2026
+
+Patrick, guardando la pagina sul telefono dopo aver cercato «Basaluzzo»: due
+luoghi, e sotto **sei blocchi** — «Come è ordinato» in quattro paragrafi, il
+link alle idee, Bollino / Come verifichiamo / Le zone, la riga delle quattro
+porte, «Pagina rigenerata ogni notte», Ginetto. Più testo nostro che risultati.
+Senza filtri non si vedeva, perché sta sotto 900 righe: **è il filtro a portare
+la coda sotto gli occhi**, come per il padding dei `<section>`.
+
+- **La data sale nell'intestazione** (`.ev-agg`, come `/halloween.html`), e in
+  fondo sparisce. La regola CSS è passata da `LANDING_CSS` a `COMUNE_CSS`, che
+  le due pagine includono tutte e due: una regola in un posto solo.
+- **`#come-ordiniamo` torna a due righe.** Non si toglie: è l'art. 22 (vedi «Il
+  premium aggiunge, non riordina»). Dice l'ordine, che pagare non fa salire e
+  dov'è l'unico spazio pagato, e che il cuore non si compra. «Scrivicelo» è
+  uscito perché ce l'ha già ogni riga aperta.
+- **In fondo restano due voci, più Ginetto.** «Cosa c'è questo weekend»
+  (`/eventi/weekend.html`: chi cerca un posto sta organizzando un'uscita) e le
+  pagine `/idee/`. Bollino, Metodo e Zone stanno nel footer; la riga delle
+  quattro porte ripeteva eventi e corsi, che stanno in nav e footer.
+  **`luoghi.html` è quindi l'unico hub senza quella riga, apposta**, e
+  `tests/porte.js` lo sa (`SENZA_RIGA`). Ogni comune ha già il suo «Eventi a
+  X →», quindi il link del weekend resta generico.
+
+`tests/luoghi.js` controlla che la data stia nell'intestazione e una volta sola,
+e che la riga delle porte e la nota non tornino in fondo. Verificate rosse
+sulla pagina di prima.
+
 ### I gruppi dell'agenda sono per data di INIZIO, e il calendario chiede altro
 
 `eventi.html` raggruppa per giorno di partenza: una sagra dal 16 al 23 agosto sta

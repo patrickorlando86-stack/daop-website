@@ -34,6 +34,9 @@ const HUB = [
 const EX_ORFANE = ['centri-invernali.html', 'centri-pasquali.html'];
 // piscine.html era la terza: tolta il 24/09/2026, oggi e' un rimando a luoghi.html.
 
+// Gli hub che la riga delle porte NON la portano, per scelta: vedi sotto.
+const SENZA_RIGA = new Set(['luoghi.html']);
+
 function html(f) {
   return fs.readFileSync(path.join(RADICE, f), 'utf8');
 }
@@ -114,6 +117,15 @@ module.exports = async function porte(browser) {
   for (const [chiave, file, proprio] of HUB) {
     const s = html(file);
     const blocco = s.match(/<section class="eco[^"]*"[\s\S]*?<\/section>/);
+    // luoghi.html la riga l'ha tolta apposta il 24/09/2026 (Patrick): con un
+    // comune cercato e due luoghi sotto, la coda era piu' lunga dei risultati.
+    // Eventi e corsi restano raggiungibili dalla nav e dal footer. Qui si
+    // controlla solo che non ricompaia a meta' (una riga senza le sue card).
+    if (SENZA_RIGA.has(file)) {
+      r.ok(!blocco, blocco ? `${file}: la riga è tornata, ma era stata tolta apposta`
+        : `${file}: niente riga delle porte, come deciso`);
+      continue;
+    }
     r.ok(!!blocco, blocco
       ? `${file}: la riga c'è`
       : `${file}: la riga delle quattro porte NON c'è`);

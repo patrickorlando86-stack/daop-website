@@ -200,6 +200,20 @@ module.exports = async function luoghi(browser) {
   r.ok(await page.locator('#come-ordiniamo').count() === 1,
     'la pagina dichiara come e\' ordinata (art. 22 Codice del consumo)');
 
+  // La coda corta (24/09/2026): la data sta in cima, come su /halloween.html,
+  // e una volta sola; in fondo non tornano la riga delle porte e la nota
+  // "Pagina rigenerata". Cercando un comune con due luoghi, sotto c'era piu'
+  // testo nostro che risultati.
+  const agg = await page.evaluate(() => ({
+    inCima: !!document.querySelector('header.page-hero .ev-agg'),
+    volte: (document.body.textContent.match(/Ultimo aggiornamento/g) || []).length,
+    coda: !!document.querySelector('main .eco, main .ev-firma-nota'),
+  }));
+  r.ok(agg.inCima && agg.volte === 1, agg.inCima
+    ? `la data dell'aggiornamento sta in cima (${agg.volte} volta/e in pagina)`
+    : 'la data dell\'aggiornamento non sta nell\'intestazione');
+  r.ok(!agg.coda, 'in fondo niente riga delle porte ne\' nota di rigenerazione');
+
   // Due id uguali sono HTML non valido e mandano ogni ancora sul primo dei due.
   // Ci si arriva dai DATI, non dal codice: un comune scritto in due grafie
   // ("Montegrosso d'Asti" e "Montegrosso D'Asti") o lo stesso nome in due
