@@ -8743,6 +8743,9 @@ def _stagione_out(st, oggi, finestra, titolo, descr, h1, sotto, corpo, nome_list
     sana la pagina i mesi in cui e' vuota, senza mai cambiare indirizzo."""
     url = f"{SITE_URL}{st.href}"
     return {
+        # Solo le feste che hanno una fascia col vuoto al centro (Natale,
+        # Befana): le altre tengono la barra scura, Halloween ha la sua spec.
+        'fascia': fascia_stagione(st.chiave) if st.chiave in FASCE_CENTRO else None,
         'path': st.href.lstrip('/'), 'url': url,
         'titolo': titolo, 'descr': descr,
         'h1': h1, 'sotto': sotto, 'crumb': st.crumb,
@@ -8796,7 +8799,13 @@ TEMI_STAGIONE = {
 # assets/images/stagioni/ (<nome>-1600.webp, <nome>-800.webp, <nome>-og.jpg).
 # Una festa senza voce qui tiene la barra scura di sempre.
 FASCE_STAGIONE = {'halloween': 'halloween2', 'eventi': 'eventi2',
-                  'mercatini': 'mercatini'}
+                  'mercatini': 'mercatini', 'natale': 'natale', 'befana': 'befana'}
+
+# Le fasce col vuoto AL CENTRO (come quella dell'agenda): il testo sta li', e sul
+# telefono c'e' una versione sua (<nome>-m.webp) coi personaggi in mezzo, a tutta
+# larghezza sotto il testo. Halloween no: ha i personaggi a destra e il testo a
+# sinistra (.ev-hero--img).
+FASCE_CENTRO = ('mercatini', 'natale', 'befana')
 
 
 def fascia_stagione(chiave):
@@ -8804,8 +8813,11 @@ def fascia_stagione(chiave):
     if not nome:
         return None
     base = f"/assets/images/stagioni/{nome}"
-    return {'grande': f"{base}-1600.webp", 'piccola': f"{base}-800.webp",
-            'og': f"{SITE_URL}{base}-og.jpg"}
+    fascia = {'grande': f"{base}-1600.webp", 'piccola': f"{base}-800.webp",
+              'og': f"{SITE_URL}{base}-og.jpg"}
+    if chiave in FASCE_CENTRO:
+        fascia.update(centro=True, piccola=f"{base}-m.webp")
+    return fascia
 
 
 # Oltre questa durata una riga non e' un appuntamento del giorno ma una cosa
@@ -9122,8 +9134,7 @@ def spec_mercatini_prov(prov, events, oggi, altre):
         # La fascia dei mercatini (25/09/2026): come quella dell'agenda, vuoto
         # al centro su computer (testo al centro) e sul telefono una versione
         # sua con Ginetto e Briciola in mezzo, a tutta larghezza sotto il testo.
-        'fascia': dict(fascia_stagione('mercatini'), centro=True,
-                       piccola='/assets/images/stagioni/mercatini-m.webp'),
+        'fascia': fascia_stagione('mercatini'),
         'path': href.lstrip('/'), 'url': url,
         'agg_in_cima': True,
         'titolo': titolo, 'descr': descr,
@@ -9275,6 +9286,7 @@ def spec_natale_prov(prov, events, oggi, altre):
 
     padre = ('/natale.html', 'Natale')
     return {
+        'fascia': fascia_stagione('natale'),
         'path': href.lstrip('/'), 'url': url,
         'agg_in_cima': True,
         'titolo': titolo, 'descr': descr,
@@ -9350,6 +9362,7 @@ def spec_befana_prov(prov, events, oggi, altre):
 
     padre = ('/befana.html', 'Befana')
     return {
+        'fascia': fascia_stagione('befana'),
         'path': href.lstrip('/'), 'url': url,
         'agg_in_cima': True,
         'titolo': titolo, 'descr': descr,
