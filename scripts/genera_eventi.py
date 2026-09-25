@@ -1716,6 +1716,14 @@ def ha_pagina(e):
     nome = e.get('nome') or ''
     if any(w in nome.lower() for w in SAGRA_KW):
         return True
+    # I mercatini di Natale come le sagre (25/09/2026): "mercatini di natale
+    # carru'" e' una ricerca col nome del paese, cioe' il terreno che vinciamo,
+    # e senza scheda la riga delle pagine dei mercatini mandava all'agenda -
+    # un clic in piu' e un atterraggio in mezzo a trecento righe (Patrick:
+    # «non e' un click in piu' che potremmo risparmiare?»). Il mercatino di
+    # Carru' restava fuori per 10 caratteri di descrizione.
+    if e_mercatino_natale(e):
+        return True
     # Fuori dalle sagre serve tutto: un nome che si cerca E il testo per
     # riempire la pagina. Uno dei due da solo non basta.
     descr = len((e.get('descr') or '').strip())
