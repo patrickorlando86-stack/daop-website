@@ -366,52 +366,29 @@
   .events-empty-g{font-size:0.92rem;line-height:1.65}
   .events-empty-g a{color:var(--orange-ink,#a05714);font-weight:600;text-decoration:none}
   .events-empty-g a:hover{text-decoration:underline}
-  /* Le pagine per comune. Prima esistevano ma non le linkava nessuno tranne
-     zone.html e le poche schede evento di quei comuni: la pagina piu' forte
-     del sito non ci mandava niente. L'elenco lo scrive genera_eventi.py fra i
-     marker EVENTI-COMUNI e cresce da solo quando un comune passa la soglia. */
-  /* Sta con i filtri, non in fondo: e' un altro modo di restringere l'elenco,
-     e in coda a 250 schede non lo raggiungeva nessuno. Sopra l'agenda pero'
-     deve pesare poco, altrimenti spinge giu' il primo evento sul telefono:
-     niente titolo e niente paragrafo, solo l'etichetta e le pillole. */
-  /* position:static e background:none non sono ridondanti: il CSS del sito ha
-     nav{position:fixed;top:0;z-index:100;background:…} come selettore di
-     ELEMENTO, e senza questi il blocco si incollava in cima alla pagina sopra
-     la barra vera. Stesso inciampo del breadcrumb nelle pagine evento. */
-  .ev-comuni-nav{position:static;background:none;z-index:auto;box-shadow:none;border:0;
-    display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:14px 0 0;padding:0}
+  /* L'indice in fondo all'agenda (25/09/2026): le pagine per provincia, per
+     giorno, le sagre, i paesi e le altre famiglie. Lo scrive genera_eventi.py
+     fra i marker EVENTI-COMUNI (blocco_comuni). Fino a quel giorno queste
+     righe stavano sotto la barra dei filtri, fra l'hero e il primo evento:
+     sono scese qui, e il paragrafo lungo che le raccontava e' diventato
+     l'indice stesso. Un gruppo per domanda, con l'etichetta a sinistra su
+     desktop e sopra le pillole sul telefono. */
+  .ev-zone-p{max-width:760px}
+  .ev-indice{display:grid;gap:18px;margin:28px 0 36px}
+  .ev-scorc-row{display:grid;grid-template-columns:170px minmax(0,1fr);align-items:baseline;gap:8px 16px}
   .ev-comuni-lab{font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light)}
   .ev-comuni{display:flex;flex-wrap:wrap;gap:8px}
-  /* Le pagine di intenzione (oggi, weekend, sagre per provincia): stessa forma
-     delle pillole dei comuni ma riga tutta loro, perche' non sono un modo di
-     restringere l'elenco - sono un'altra pagina che risponde a un'altra
-     domanda. Il bordo caldo le distingue senza aggiungere un componente. */
-  .ev-scorc-row{flex-basis:100%;display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px}
-  /* Il bordo caldo da solo non bastava: accanto alle pillole dei comuni, sul
-     telefono, i due gruppi erano due file di ovali bianchi identici. Queste
-     sono pillole PIENE - portano a un'altra pagina che risponde a un'altra
-     domanda - e i comuni restano vuote, che e' la gerarchia vera. */
-  .ev-scorc-row .ev-comuni a{border-color:transparent;background:rgba(232,149,74,0.13);color:var(--orange-ink,#a05714);font-weight:700}
-  .ev-scorc-row .ev-comuni a:hover{border-color:var(--orange);background:rgba(232,149,74,0.2)}
-  /* "Vai al comune" e' un <details>: aperto di norma, chiuso dall'agenda sotto
-     i 600px. La freccetta la disegna il browser, qui serve solo che la riga
-     sembri cliccabile e che il conteggio dica cosa c'e' sotto. */
-  .ev-comuni-box{flex-basis:100%;min-width:0}
-  /* display:flex su <summary> fa sparire il triangolino che disegna il browser,
-     e la riga tornava a sembrare un'etichetta come "Cosa cerchi" invece di
-     qualcosa da toccare: il segnaposto va rimesso a mano. ::marker azzerato
-     perche' Safari lo tiene anche in flex e ne verrebbero due. */
-  .ev-comuni-box>summary{display:flex;align-items:center;gap:8px;cursor:pointer;
-    padding:6px 0;min-height:34px}
-  .ev-comuni-box>summary::marker,.ev-comuni-box>summary::-webkit-details-marker{content:'';display:none}
-  .ev-comuni-box>summary::after{content:'';width:9px;height:9px;margin-left:1px;
-    border-right:2px solid currentColor;border-bottom:2px solid currentColor;
-    transform:rotate(45deg) translate(-2px,-2px);transition:var(--transition)}
-  .ev-comuni-box[open]>summary::after{transform:rotate(-135deg) translate(-3px,-3px)}
-  .ev-comuni-box>summary:hover{color:var(--navy)}
-  .ev-comuni-box[open]>summary{margin-bottom:8px}
-  .ev-comuni-n{font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0;
-    color:var(--text-light);background:var(--cream);border:1px solid rgba(45,74,92,0.07);border-radius:100px;padding:2px 9px}
+  /* La provincia e' la domanda che vale tutto l'anno (Giovanni, 11/09):
+     pillole piene, le altre restano vuote. E' la gerarchia vera, e senza le
+     cinque righe sarebbero cinque file di ovali identici. */
+  .ev-scorc-row:first-child .ev-comuni a{border-color:transparent;background:rgba(232,149,74,0.13);color:var(--orange-ink,#a05714);font-weight:700}
+  .ev-scorc-row:first-child .ev-comuni a:hover{border-color:var(--orange);background:rgba(232,149,74,0.2)}
+  .ev-comuni a.ev-comuni-tutte{border-color:transparent;color:var(--orange-ink,#a05714);padding-left:6px;padding-right:6px}
+  .ev-comuni a.ev-comuni-tutte:hover{background:none;text-decoration:underline}
+  .ev-zone-g{margin-bottom:14px}
+  .ev-organizza{font-size:0.9rem;color:var(--text-mid);margin:0 0 0 4px}
+  .ev-organizza a{color:var(--orange-ink,#a05714);font-weight:600;text-decoration:none}
+  .ev-organizza a:hover{text-decoration:underline}
   .ev-comuni a{display:inline-flex;align-items:baseline;gap:7px;border:1px solid rgba(45,74,92,0.16);border-radius:100px;padding:7px 14px;font-size:0.86rem;font-weight:600;color:var(--navy);text-decoration:none;transition:var(--transition)}
   .ev-comuni a:hover{border-color:var(--teal);background:rgba(107,165,168,0.09)}
   .ev-comuni a span{font-size:0.8rem;font-weight:600;color:var(--text-light)}
@@ -452,10 +429,6 @@
   .info-strip a:hover{text-decoration:underline}
 
   /* ── CTA BAR ── */
-  .events-cta{background:var(--navy-dark);padding:80px 24px;text-align:center}
-  .events-cta .section-label{color:var(--gold)}
-  .events-cta h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:white;margin-bottom:16px;line-height:1.15}
-  .events-cta p{font-size:1rem;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7}
 
   /* ── FOOTER ── */
   footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.06);padding:40px 24px}
@@ -521,7 +494,8 @@
     .section-header{margin-bottom:16px}
     .section-subtitle{font-size:0.95rem;line-height:1.6}
     .bg-white{padding-top:28px}
-    .ev-comuni-nav{gap:6px 8px;margin-top:12px}
+    .ev-scorc-row{grid-template-columns:minmax(0,1fr);gap:8px}
+    .ev-indice{gap:20px;margin:22px 0 30px}
     .ev-comuni a{padding:8px 13px;font-size:0.84rem}
     .ev-highlights{margin-top:20px;gap:20px}
     /* La riga chiusa e' l'unita' che si scorre: piu' aria fra una e l'altra e
@@ -641,6 +615,11 @@
   font-variant-numeric:tabular-nums}
 .com-anni a{text-decoration:none;color:var(--navy,#2d4a5c);font-weight:600}
 .com-anni a:hover{text-decoration:underline}
+/* La data sotto il conteggio, nell'hero: piccola, e il link discreto. Sta
+   qui e non in LANDING_CSS perche' la usano anche luoghi.html (24/09/2026),
+   che COMUNE_CSS lo include e LANDING_CSS no: una regola in un posto solo. */
+.ev-hero .ev-agg{margin:8px 0 0;font-size:.82rem;opacity:.82}
+.ev-hero .ev-agg a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .com-link{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
 .com-link a{display:inline-block;border:1px solid rgba(45,74,92,.2);border-radius:100px;
   padding:7px 15px;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--navy,#2d4a5c)}
@@ -887,7 +866,7 @@
   <!-- GUIDA-PDF:END -->
   
   <h2>Le altre vacanze</h2><div class="com-link"><a href="/centri-invernali.html">Centri Invernali a Natale</a><a href="/centri-pasquali.html">Centri Pasquali a Pasqua</a></div>
-  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">189 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">908 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">89 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
+  <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">184 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">908 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">89 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
