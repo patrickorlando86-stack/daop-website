@@ -7640,6 +7640,43 @@ LANDING_JS = r"""<script>
 """
 
 
+def _comuni_aperti(comuni):
+    """La riga dei comuni in coda alle pagine di intenzione, col taglio di
+    "Vai al comune": i primi MAX_COMUNI_APERTI, il resto sotto "+ altri N".
+
+    Scritta in un posto solo perche' la usano le /eventi-provincia-* e le sei
+    d'incrocio (24-25/09/2026). I link della coda restano tutti nell'HTML,
+    dentro un <details> chiuso: Google li segue lo stesso, e le pagine comune
+    non perdono link entranti. Le classi (.ev-comuni-piu) arrivano dal guscio."""
+    def _a(d):
+        return f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
+    if len(comuni) <= MAX_COMUNI_APERTI + 2:
+        primi, resto = comuni, []
+    else:
+        primi, resto = comuni[:MAX_COMUNI_APERTI], comuni[MAX_COMUNI_APERTI:]
+    link = "".join(_a(d) for d in primi)
+    if resto:
+        link += ('<details class="ev-comuni-piu">'
+                 f'<summary aria-label="Mostra altri {len(resto)} comuni">'
+                 f'+ altri {len(resto)}</summary>'
+                 f'<div class="com-link">{"".join(_a(d) for d in resto)}</div>'
+                 '</details>')
+    return f'<div class="com-link">{link}</div>'
+
+
+def _altre_finestre(voci):
+    """La riga di bottoni in coda alle pagine "oggi" e "weekend" (25/09/2026).
+
+    Prende il posto di _altre_landing() su quelle otto pagine: lì c'erano la
+    riga di scorciatoie (cinque voci), la riga delle quattro porte e, in fondo,
+    "Tutta l'agenda / Come verifichiamo" con la data. Qui restano le due o tre
+    strade che chi ha trovato poco "oggi" prende davvero. Il primo bottone è
+    pieno (.lan-dopo, lo stile di "E dopo Halloween?"), così non si confonde
+    con le pillole dei comuni."""
+    return ('<div class="lan-dopo">'
+            + "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in voci) + '</div>')
+
+
 def _altre_landing(qui, elenco, porte=True):
     """La riga di scorciatoie verso le altre pagine di intenzione, e sotto di
     essa la riga delle quattro porte.
@@ -7742,7 +7779,10 @@ def spec_oggi(events, oggi, altre):
               f"<p>Le stesse cose di oggi, divise per provincia: sono le pagine da "
               f"salvare se guardi sempre la stessa zona.</p>"
               + _blocco_incroci('oggi', events, oggi))
-    corpo += _altre_landing("/eventi/oggi.html", altre)
+    # La coda corta (25/09/2026): vedi _altre_finestre().
+    corpo += ("<h2>Non per forza oggi?</h2>"
+              + _altre_finestre([("/eventi/weekend.html", "Questo weekend"),
+                                 ("/eventi.html", "Tutta l'agenda")]))
 
     return {
         # Percorso web, non di filesystem: sempre con la barra normale. Con
@@ -7764,6 +7804,7 @@ def spec_oggi(events, oggi, altre):
         'corpo': corpo, 'robots': "index, follow",
         'jsonld': _grafo_landing(url, titolo, descr, adesso or prossimi,
                                  "Eventi di oggi", "Oggi", oggi),
+        'agg_in_cima': True,
         'eventi': len(adesso),
     }
 
@@ -7815,7 +7856,10 @@ def spec_weekend(events, oggi, altre):
               f"<p>Lo stesso weekend, diviso per provincia: sono le pagine da salvare "
               f"se guardi sempre la stessa zona.</p>"
               + _blocco_incroci('weekend', events, oggi))
-    corpo += _altre_landing("/eventi/weekend.html", altre)
+    # La coda corta (25/09/2026): vedi _altre_finestre().
+    corpo += ("<h2>Non per forza nel weekend?</h2>"
+              + _altre_finestre([("/eventi/oggi.html", "Cosa c'è oggi"),
+                                 ("/eventi.html", "Tutta l'agenda")]))
 
     return {
         'path': "eventi/weekend.html", 'url': url,  # barra normale: vedi spec_oggi()
@@ -7829,6 +7873,7 @@ def spec_weekend(events, oggi, altre):
         'scade': dom,
         'jsonld': _grafo_landing(url, titolo, descr, del_weekend,
                                  "Eventi del weekend", "Weekend", oggi),
+        'agg_in_cima': True,
         'eventi': len(del_weekend),
     }
 
@@ -8048,31 +8093,35 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
     vivi = {_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()}
     comuni_link = sorted((d for d in (hub or {}).values()
                           if d['prov'] == prov and _key(d['nome']) in vivi),
-                         key=lambda d: -len(d['futuri']))[:12]
-    if comuni_link:
-        link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
-                       for d in comuni_link)
-        corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)} con eventi in "
-                  f"programma</h2>"
-                  f'<div class="com-link">{link}</div>')
+                         key=lambda d: -len(d['futuri']))
 
-    # Il link alla sorella senza finestra temporale: chi arriva qui da "oggi" e
-    # non trova niente ha comunque una pagina dove andare, e le due si passano
-    # autorita' invece di farsi concorrenza.
-    quando_no = "oggi" if modo == 'oggi' else "questo weekend"
-    corpo += (f'<p>Se quello che cerchi non è per forza {quando_no}: '
-              f'<a href="{sagre_href}">tutte le sagre e le feste della provincia di '
-              f'{esc(nome_prov)}</a>, in ordine di data e mese per mese, oppure '
-              f'<a href="{href_eventi_prov(prov)}">tutti gli eventi e le attività per '
-              f'bambini in provincia di {esc(nome_prov)}</a>, che è l\'agenda '
-              f'completa.</p>')
+    # La coda corta (25/09/2026). Il link alle sorelle senza finestra temporale
+    # resta - chi arriva qui da "oggi" e non trova niente ha comunque una pagina
+    # dove andare, e le pagine si passano autorita' invece di farsi concorrenza
+    # - ma da paragrafo diventa una riga di bottoni, col primo sull'altra
+    # finestra della stessa provincia.
+    if modo == 'oggi':
+        titolo_coda = "Non per forza oggi?"
+        altra = (href_incrocio(prov, "weekend"), "Questo weekend")
+    else:
+        titolo_coda = "Non per forza nel weekend?"
+        altra = (href_incrocio(prov, "oggi"), "Cosa c'è oggi")
+    corpo += (f"<h2>{titolo_coda}</h2>"
+              + _altre_finestre([altra,
+                                 (href_eventi_prov(prov), "Tutti gli eventi della provincia"),
+                                 (sagre_href, "Solo sagre e feste")]))
+
+    # Il tetto a 12 comuni e' diventato il taglio "+ altri N": i link restano
+    # tutti nell'HTML.
+    if comuni_link:
+        corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)} con eventi in "
+                  f"programma</h2>" + _comuni_aperti(comuni_link))
+
+    corpo += f'<h2>Le altre province</h2>{_blocco_incroci(modo, events, oggi, qui=href)}'
 
     fonte = fonte_provincia(prov)
     corpo += credito_fonte(
         fonte, f'Gli eventi della provincia di {esc(nome_prov)} arrivano da', breve=True)
-
-    corpo += f'<h2>Le altre province</h2>{_blocco_incroci(modo, events, oggi, qui=href)}'
-    corpo += _altre_landing(href, altre)
 
     return {
         'path': href.lstrip('/'), 'url': url,
@@ -8085,6 +8134,7 @@ def spec_incrocio(prov, modo, events, hub, oggi, altre):
         'prov': prov,
         'jsonld': _grafo_landing(url, titolo, descr, principale, nome_lista, crumb, oggi,
                                  padre=(padre, padre_nome)),
+        'agg_in_cima': True,
         'eventi': len(principale),
     }
 
@@ -9510,21 +9560,8 @@ def spec_eventi_prov(prov, events, hub, oggi, altre):
     comuni = sorted((d for d in (hub or {}).values() if d['prov'] == prov),
                     key=lambda d: -len(d['futuri']))
     if comuni:
-        def _a(d):
-            return f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
-        if len(comuni) <= MAX_COMUNI_APERTI + 2:
-            primi, resto = comuni, []
-        else:
-            primi, resto = comuni[:MAX_COMUNI_APERTI], comuni[MAX_COMUNI_APERTI:]
-        link = "".join(_a(d) for d in primi)
-        if resto:
-            link += ('<details class="ev-comuni-piu">'
-                     f'<summary aria-label="Mostra altri {len(resto)} comuni">'
-                     f'+ altri {len(resto)}</summary>'
-                     f'<div class="com-link">{"".join(_a(d) for d in resto)}</div>'
-                     '</details>')
         corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)}</h2>"
-                  f'<div class="com-link">{link}</div>')
+                  + _comuni_aperti(comuni))
 
     fonte = fonte_provincia(prov)
     corpo += credito_fonte(

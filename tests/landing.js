@@ -798,6 +798,50 @@ module.exports = async function landing(browser) {
     await ctx.close();
   }
 
+  // ── la coda corta delle pagine "oggi" e "weekend" (25/09/2026) ────────
+  // La data sta nell'intestazione e una volta sola; in fondo non tornano la
+  // riga delle quattro porte, la nota di rigenerazione e la riga di cinque
+  // scorciatoie. Le strade che contano restano: sulle d'incrocio le tre
+  // sorelle (l'altra finestra, la provincia intera, le sagre), sulle madri
+  // l'altra finestra. Si leggono i file: e' HTML, non comportamento.
+  {
+    const fs = require('fs');
+    const path = require('path');
+    const { RADICE } = require('./_aiuto');
+    r.titolo('oggi e weekend — la coda corta');
+    const pagine = [];
+    for (const modo of ['oggi', 'weekend']) {
+      pagine.push([`eventi/${modo}.html`, modo, null]);
+      for (const prov of ['alessandria', 'asti', 'cuneo']) {
+        pagine.push([`eventi/${modo}-provincia-${prov}.html`, modo, prov]);
+      }
+    }
+    const storte = [];
+    for (const [f, modo, prov] of pagine) {
+      const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+      const corpo = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+      const cima = corpo.slice(0, corpo.indexOf('</header>'));
+      if (!cima.includes('class="ev-agg"')) storte.push(`${f}: la data non sta in cima`);
+      if ((corpo.match(/Ultimo aggiornamento/g) || []).length !== 1) {
+        storte.push(`${f}: la data compare piu' di una volta`);
+      }
+      if (/class="eco[ "]|class="ev-firma-nota"|class="lan-alt"/.test(corpo)) {
+        storte.push(`${f}: in fondo e' tornata la coda lunga`);
+      }
+      const altra = modo === 'oggi' ? 'weekend' : 'oggi';
+      const attesi = prov
+        ? [`/eventi/${altra}-provincia-${prov}.html`, `/eventi-provincia-${prov}.html`,
+           `/sagre-provincia-${prov}.html`]
+        : [`/eventi/${altra}.html`];
+      for (const h of attesi) {
+        if (!corpo.includes(`href="${h}"`)) storte.push(`${f}: manca il link a ${h}`);
+      }
+    }
+    r.ok(storte.length === 0, storte.length
+      ? `coda di oggi/weekend: ${storte.length} difetti (es. ${storte[0]})`
+      : `su tutte e ${pagine.length} le pagine oggi/weekend la data sta in cima e la coda e' corta`);
+  }
+
   // ── lette il giorno dopo ──────────────────────────────────────────────
   // La run notturna parte con ore di ritardo: la pagina di ieri letta oggi
   // deve correggersi da sola. Le prove stanno in tests/giorno_dopo.js.
