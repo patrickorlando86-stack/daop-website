@@ -8763,7 +8763,8 @@ TEMI_STAGIONE = {
 # Le fasce illustrate delle stagionali: chiave -> nome dei file in
 # assets/images/stagioni/ (<nome>-1600.webp, <nome>-800.webp, <nome>-og.jpg).
 # Una festa senza voce qui tiene la barra scura di sempre.
-FASCE_STAGIONE = {'halloween': 'halloween2', 'eventi': 'eventi2'}
+FASCE_STAGIONE = {'halloween': 'halloween2', 'eventi': 'eventi2',
+                  'mercatini': 'mercatini'}
 
 
 def fascia_stagione(chiave):
@@ -9081,6 +9082,11 @@ def spec_mercatini_prov(prov, events, oggi, altre):
 
     padre = ('/natale.html', 'Natale')
     return {
+        # La fascia dei mercatini (25/09/2026): come quella dell'agenda, vuoto
+        # al centro su computer (testo al centro) e sul telefono una versione
+        # sua con Ginetto e Briciola in mezzo, a tutta larghezza sotto il testo.
+        'fascia': dict(fascia_stagione('mercatini'), centro=True,
+                       piccola='/assets/images/stagioni/mercatini-m.webp'),
         'path': href.lstrip('/'), 'url': url,
         'agg_in_cima': True,
         'titolo': titolo, 'descr': descr,

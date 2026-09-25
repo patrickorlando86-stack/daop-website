@@ -354,9 +354,11 @@ module.exports = async function porte(browser) {
     : 'in 404.html ogni percorso è assoluto: la nav regge da qualunque cartella');
 
   // La via d'uscita di una pagina di errore non puo' essere l'unico link che
-  // porta via dal sito.
-  r.ok(!/nav-cta[^>]*>\s*Gioca ora/.test(q404) && /nav-cta[^>]*>\s*Contatti/.test(q404),
-    'la CTA della 404 è Contatti, non un rimando fuori dominio');
+  // porta via dal sito. Dal 25/09/2026 Contatti non e' piu' un bottone
+  // (niente .nav-cta): si guarda la voce dentro la nav.
+  const nav404 = (q404.match(/<ul class="nav-links">[\s\S]*?<\/ul>/) || [''])[0];
+  r.ok(!/Gioca ora/.test(nav404) && />\s*Contatti\s*</.test(nav404) && />\s*Home\s*</.test(nav404),
+    'la nav della 404 porta a Home e Contatti, non a un rimando fuori dominio');
 
   await ctx.close();
   return r;
