@@ -7293,6 +7293,13 @@ def _landing_shell(spec, css, nav, foot, oggi):
                 f'Ultimo aggiornamento: {data_agg}.</p>')
     fascia = spec.get('fascia')
     img_og = fascia['og'] if fascia else DEFAULT_IMG
+    # Le misure si dichiarano solo per l'anteprima della fascia, che e' sempre
+    # 1200x630 (i *-og.jpg in assets/images/stagioni/). Senza, Facebook alla
+    # PRIMA condivisione di un indirizzo mai visto pubblica il post senza
+    # immagine, perche' la scarica dopo. headerdaop.jpg ha altre misure, e una
+    # misura sbagliata e' peggio di nessuna.
+    dim_og = ('\n<meta property="og:image:width" content="1200">'
+              '\n<meta property="og:image:height" content="630">') if fascia else ''
     hero_cls, hero_style = '', ''
     if fascia:
         # La fascia dell'agenda (24/09/2026) ha i personaggi AI LATI e il vuoto
@@ -7316,7 +7323,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
 <meta property="og:url" content="{spec['url']}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
-<meta property="og:image" content="{img_og}">
+<meta property="og:image" content="{img_og}">{dim_og}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(spec['titolo'])}">
 <meta name="twitter:description" content="{esc(trunc(spec['descr'], 120))}">
