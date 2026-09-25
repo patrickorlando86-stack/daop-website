@@ -5228,10 +5228,28 @@ lei spariscono «Tutta l'agenda» e la nota in fondo. Fuori anche le altre
 province e le due pagine trasversali (sono in nav) e la riga delle porte
 (luoghi e corsi sono in nav e nel footer).
 
-**Le altre sedici pagine di intenzione non sono state toccate**: `oggi`,
-`weekend`, le sagre, le sei d'incrocio e le stagionali hanno ancora la coda
-lunga. Se si vuole lo stesso lì, `'agg_in_cima'` è già un interruttore, e il
-resto sta in `_altre_landing()`.
+**Il 25/09/2026 lo stesso è arrivato su `oggi`, `weekend` e le sei
+d'incrocio** (Patrick: «semplifica pagine oggi e weekend»). Data in cima, e in
+coda al posto di scorciatoie + porte + «Tutta l'agenda» una riga di bottoni
+(`_altre_finestre()`, `.lan-dopo`) sotto un titolo che dice la domanda: «Non per
+forza oggi?» / «Non per forza nel weekend?».
+
+- **Sulle d'incrocio i bottoni sono tre**: l'altra finestra della stessa
+  provincia (piena), «Tutti gli eventi della provincia», «Solo sagre e feste».
+  È il paragrafo «Se quello che cerchi non è per forza oggi…» diventato
+  bottoni: i link alle sorelle restano, per la ragione di sempre.
+- **I comuni perdono il tetto a 12** e prendono il taglio «+ altri N» di
+  `_comuni_aperti()`, la stessa funzione delle `/eventi-provincia-*`.
+- **«Le altre province» resta**, e prima del credito: la prova delle d'incrocio
+  pretende quei link, e chi abita al confine li usa.
+- **Sulle due madri i bottoni sono due**: l'altra finestra e «Tutta l'agenda».
+  «Provincia per provincia» resta sopra, perché è il loro mestiere di indice.
+
+**Restano con la coda lunga** le `sagre-provincia-*` e le stagionali
+(Ferragosto, Halloween e le altre): passano ancora da `_altre_landing()`.
+`tests/landing.js` («la coda corta delle pagine "oggi" e "weekend"») controlla
+sulle otto pagine data in cima una volta, niente coda lunga e i link alle
+sorelle; verificata rossa sulle pagine di prima (22 difetti).
 
 `tests/landing.js` (punto 14) controlla data in cima e una volta sola, niente
 porte/nota/prosa in fondo, e che sotto «I comuni» i link ci siano. Verificate
