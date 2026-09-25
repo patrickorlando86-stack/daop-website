@@ -12,10 +12,26 @@ module.exports = async function agenda(browser) {
   r.titolo('eventi.html — telefono 412px');
   let { ctx, page } = await apri(browser, 'eventi.html', 412);
 
-  const comuni = page.locator('.ev-comuni-box');
-  if (await comuni.count()) {
-    r.ok(await comuni.evaluate((d) => !d.open), '"Vai al comune" e\' chiuso sul telefono');
-  }
+  // Dal 25/09/2026 fra i filtri e il primo evento non c'e' piu' niente che
+  // porti ALTROVE (Patrick: «troppi filtri nella prima pagina»): le righe
+  // della provincia, di "quando" e dei paesi sono scese nell'indice in fondo.
+  // Si controlla la posizione nel reso, non l'HTML: e' la stessa domanda
+  // ("cosa vede chi apre la pagina?") e non dipende da come si chiamano i
+  // blocchi il giorno che qualcuno ne rimette uno.
+  const indice = await page.evaluate(() => {
+    const ev = document.querySelector('.ev-hl-block, .event-card');
+    const idx = document.querySelector('.ev-indice');
+    const sopra = [...document.querySelectorAll('.ev-comuni a')].filter((a) =>
+      a.compareDocumentPosition(ev) & Node.DOCUMENT_POSITION_FOLLOWING);
+    return { c: !!idx, dopo: idx ? !!(ev.compareDocumentPosition(idx) & Node.DOCUMENT_POSITION_FOLLOWING) : false,
+      sopra: sopra.map((a) => a.textContent.trim()) };
+  });
+  r.ok(indice.c && indice.dopo, indice.c
+    ? (indice.dopo ? 'l\'indice delle zone sta sotto l\'agenda' : 'l\'indice delle zone è tornato sopra l\'agenda')
+    : 'l\'indice delle zone non c\'è');
+  r.ok(indice.sopra.length === 0, indice.sopra.length
+    ? `pillole che portano altrove prima del primo evento: ${indice.sopra.slice(0, 6).join(', ')}`
+    : 'prima del primo evento solo i filtri, nessuna pillola verso altre pagine');
 
   const prima = page.locator('.event-card').first();
   r.ok(await prima.locator('.ev-det').evaluate((d) => d.hidden), 'il dettaglio parte chiuso');
@@ -270,14 +286,18 @@ module.exports = async function agenda(browser) {
     })),
   })));
   const prov = righe.find((x) => /provincia/i.test(x.lab));
-  const altre = righe.find((x) => /cosa cerchi/i.test(x.lab));
+  const altre = righe.find((x) => /^quando$/i.test(x.lab.trim()));
   r.ok(!!prov && !!altre,
     `le scorciatoie sono due righe etichettate (${righe.map((x) => x.lab).join(' | ')})`);
 
   // La prima richiesta di Giovanni: dalle scorciatoie si va alla pagina di
   // TUTTA l'agenda della provincia, non a quella delle sole sagre - che a
   // Cuneo e' il 20% del lavoro del curatore.
-  const sagre = righe.flatMap((x) => x.voci).filter((v) => /sagre-provincia/.test(v.href));
+  // Dal 25/09 l'indice ha anche un gruppo "Solo sagre e feste", apposta e
+  // con quel nome: la regola vale per le righe che promettono la provincia
+  // o un giorno.
+  const sagre = [prov, altre].filter(Boolean).flatMap((x) => x.voci)
+    .filter((v) => /sagre-provincia/.test(v.href));
   r.ok(sagre.length === 0, sagre.length
     ? `scorciatoie che promettono la provincia e consegnano le sagre: ${sagre.map((v) => v.testo).join(', ')}`
     : 'nessuna scorciatoia manda alla pagina delle sole sagre');
@@ -452,10 +472,11 @@ module.exports = async function agenda(browser) {
   // ── desktop ───────────────────────────────────────────────────────────
   r.titolo('eventi.html — desktop 1280px');
   ({ ctx, page } = await apri(browser, 'eventi.html', 1280));
-  if (await page.locator('.ev-comuni-box').count()) {
-    r.ok(await page.$eval('.ev-comuni-box', (d) => d.open), '"Vai al comune" resta aperto su desktop');
-    r.ok(await page.locator('.ev-comuni-box .ev-comuni a').count() > 0,
-      'i link ai comuni sono nel DOM');
+  // I paesi: nel DOM e visibili senza aprire niente (i primi; la coda sta
+  // sotto "+ altri N", che Google segue lo stesso).
+  const paesi = page.locator('.ev-indice .ev-comuni a[href^="/eventi/comune/"]');
+  if (await paesi.count()) {
+    r.ok(await paesi.first().isVisible(), 'i link ai comuni sono nell\'indice e si vedono');
   }
 
   // ?gratis=1 preimpostato da link. Vale la regola numero uno dei preset: si

@@ -35,7 +35,7 @@ const EX_ORFANE = ['centri-invernali.html', 'centri-pasquali.html'];
 // piscine.html era la terza: tolta il 24/09/2026, oggi e' un rimando a luoghi.html.
 
 // Gli hub che la riga delle porte NON la portano, per scelta: vedi sotto.
-const SENZA_RIGA = new Set(['luoghi.html']);
+const SENZA_RIGA = new Set(['luoghi.html', 'eventi.html']);
 
 function html(f) {
   return fs.readFileSync(path.join(RADICE, f), 'utf8');
@@ -121,6 +121,8 @@ module.exports = async function porte(browser) {
     // comune cercato e due luoghi sotto, la coda era piu' lunga dei risultati.
     // Eventi e corsi restano raggiungibili dalla nav e dal footer. Qui si
     // controlla solo che non ricompaia a meta' (una riga senza le sue card).
+    // eventi.html dal 25/09/2026: le porte sono diventate il gruppo «Non un
+    // evento?» dell'indice in fondo, e il loro numero si controlla piu' giu'.
     if (SENZA_RIGA.has(file)) {
       r.ok(!blocco, blocco ? `${file}: la riga è tornata, ma era stata tolta apposta`
         : `${file}: niente riga delle porte, come deciso`);
@@ -186,9 +188,11 @@ module.exports = async function porte(browser) {
   for (const [chiave, , proprio] of PORTE) {
     const n = conteggi[chiave] || 0;
     if (chiave === 'eventi' || n < MIN) continue;
+    // Dal 25/09/2026 su eventi.html le porte sono pillole nell'indice in
+    // fondo («Non un evento?»), col numero accanto al nome.
     const card = eventi.match(new RegExp(
-      `<a class="eco-c" href="${proprio}">.*?<span class="eco-d">([^<]*)</span>`));
-    const stampato = card && card[1].match(/^(\d+) /);
+      `<a href="${proprio}">[^<]*<span>(\\d+)</span>`));
+    const stampato = card && [card[0], card[1]];
     r.ok(!!stampato, stampato
       ? `eventi.html: il conteggio di ${chiave} è in pagina (${stampato[1]})`
       : `eventi.html: la card di ${chiave} non stampa un numero`);

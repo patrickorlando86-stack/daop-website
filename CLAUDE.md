@@ -2994,6 +2994,35 @@ precedenza da decidere. `link_landing()` invece apre prima — dal 1° ottobre p
 Halloween — perché una voce in una riga di scorciatoie costa meno di una riga in
 evidenza.
 
+#### I mercatini di Natale per provincia — nati il 25/09/2026, vuoti
+
+`/mercatini-di-natale-provincia-<nome>.html`, tre pagine (`spec_mercatini_prov()`),
+chieste da Patrick. Stessa impalcatura delle `halloween-provincia-*`: l'anno nel
+title e nell'H1, **mai nell'indirizzo**; `noindex` e fuori sitemap sotto
+`MIN_TEMA` (3) mercatini; briciola verso `/natale.html`, che le linka tutte e tre
+prima del suo elenco. Nascono a settembre **apposta**: a fine novembre avranno
+due mesi di vita invece di zero, che è la scommessa di Halloween.
+
+- **Un mercatino è «mercatin» E una parola di Natale** (`e_mercatino_natale()`,
+  che riusa `TEMI_STAGIONE['natale']`). La parola sola prenderebbe il mercatino
+  dell'usato del sabato, che a dicembre c'è lo stesso.
+- **La finestra è 15 novembre – 6 gennaio** (`mercatini_range()`), più larga di
+  `/natale.html` (1-26 dicembre): i mercatini aprono il weekend dopo metà
+  novembre e qualcuno arriva all'Epifania. Dal 7 gennaio passa da sola alla
+  stagione dopo.
+- **Il blocco suo è «quando andarci con i bambini»**: weekend, il ponte
+  dell'Immacolata, il primo pomeriggio. «Al coperto o all'aperto?» sta per
+  esteso in `/natale.html` e qui è una riga che ci porta, non una copia.
+- **A settimane, non giorno per giorno**, con i mercatini aperti più weekend
+  una volta sola in cima: è la forma di `/natale.html`.
+- **Sono nell'elenco del workflow** (`mercatini-di-natale-provincia-*.html`),
+  e con loro le `halloween-provincia-*`, che **non c'erano**: nate il 23/09, la
+  run notturna le riscriveva nel runner e le buttava via. È il guasto di
+  `ferragosto.html`, la decima volta.
+
+Non si insiste con Patrick sul riempirle: arrivano quando arrivano le
+locandine (vedi «Il calendario avanti non è un allarme»).
+
 ### Leggere un export di Search Console: `scripts/leggi_gsc.py`
 
 Le letture qui sotto sono decine di tabelle ricavate a mano dagli stessi sette
@@ -5165,7 +5194,7 @@ traffico:
 | coda delle **schede evento** (`blocco_vicini()`) | ~450 | fanno il 77% dei clic del sito (export 02/09) |
 | `sagre-provincia-*` | 3 | la più forte della provincia, 209 link entranti sue |
 | le sei d'incrocio | 6 | la riga «se non è per forza oggi» aveva un solo sbocco |
-| `eventi.html`, blocco «TESTO DI ZONA» | 1 | scritto **a mano**, fuori dai marker |
+| `eventi.html`, l'indice «Le zone» in fondo | 1 | dal 25/09/2026 generato (`blocco_comuni()`), gruppo «La tua provincia» |
 
 Nella coda delle schede sta **dopo** la voce delle sagre e prima di
 «oggi»/«weekend»: la provincia è lo stesso cerchio e questa ne è la versione
@@ -6647,12 +6676,12 @@ restano fuori apposta: non sono di un comune, quindi non c'è un'ancora sola a c
 mandarle. Il loro ponte verso `luoghi.html` esiste già ed è di altra natura — il
 blocco "dove si mangia" di Ferragosto e Halloween.
 
-Fuori dai generatori restano le due pagine scritte a mano, ed è lì che il link
-si scrive **a mano una volta e basta**: in `eventi.html` sta in coda al blocco
-"TESTO DI ZONA", che è già l'elenco dei link interni e sta **sotto** la lista —
-non nell'hero, che è l'asset da non toccare; in `index.html` sta nel `path-alt`
-della card "Sei un genitore", l'unica delle tre che parla a chi cerca un posto.
-Nessuna delle due passa dai marker, quindi `genera_eventi.py` non le riscrive.
+Fuori dai generatori restano le due pagine scritte a mano. In `eventi.html`
+il link sta nell'indice «Le zone» **sotto** la lista — non nell'hero, che è
+l'asset da non toccare — e dal 25/09/2026 lo scrive `blocco_comuni()` nel
+gruppo «Non un evento?», col numero dei posti accanto; in `index.html` sta nel `path-alt`
+della card "Sei un genitore", l'unica delle tre che parla a chi cerca un posto,
+e lì `genera_eventi.py` non lo riscrive.
 
 La domanda che quel link deve porre è sempre la stessa, e non è "vedi anche":
 **non un evento, un posto** — cioè la cosa che serve nei giorni in cui in agenda
@@ -6872,7 +6901,7 @@ Com'è fatto quel tratto, e qui sta la cosa da non sbagliare:
 | barra filtri | 109 px |
 | conteggio + Agenda/Calendario | 44 px |
 | "Vicino a me" | 40 px |
-| "COSA CERCHI" + "VAI AL COMUNE" | 154 px (dall'11/09/2026 sono due righe etichettate, vedi sotto) |
+| "COSA CERCHI" + "VAI AL COMUNE" | 154 px — **dal 25/09/2026 non ci sono più**: scese nell'indice in fondo, vedi sotto |
 
 **L'hero non è spazio vuoto, è testo** — un paragrafo di cinque righe da 174 px
 più la riga sui centri estivi da 75. Ci si casca facilmente misurando solo gli
@@ -6906,7 +6935,54 @@ Sul testo si è deciso così, sempre il 15/08/2026, arrivando a **1.111 px** (da
   arriva da Google senza sapere cos'è DAOP. **Sta dentro i marker
   `EVENTI-HERO`**: si cambia in `genera_eventi.py`, non a mano.
 
+#### In cima solo i filtri, in fondo un indice — 25/09/2026
+
+Patrick, guardando la pagina sul telefono: «troppi filtri nella prima pagina,
+troppe cose nella seconda (che poi è in fondo) e la terza sembra buttata lì».
+Erano tre difetti diversi, e il rimedio è uno solo: **in cima quello che
+restringe QUESTO elenco, in fondo quello che porta ad altre pagine.**
+
+- **Le tre righe di pillole** («La tua provincia», «Cosa cerchi», «Vai al
+  comune») stavano sotto la barra dei filtri: a chi sta scegliendo un evento
+  chiedevano di scegliere prima un'altra pagina. Sono scese in fondo, e il
+  primo evento sale da **1.323 a 1.124px** a 360px. **Non si sono tolte**: i
+  link dalla pagina più forte del sito alle pagine comune e alle provinciali
+  sono la ragione per cui esistono, e in fondo Google li vede uguale.
+- **Il testo delle zone era cinque paragrafi con i link dentro.** Adesso sono
+  due righe scritte a mano (con le parole di zona — Monferrato, Acquese… — che
+  sono copertura di ricerca) e sotto l'**indice generato** da
+  `blocco_comuni()`, un gruppo per domanda: *La tua provincia* (pillole piene:
+  la richiesta di Giovanni dell'11/09 resta, un piano più giù), *Quando*,
+  *Solo sagre e feste*, *Paese per paese* (i primi otto, «+ altri N», «Tutte
+  le zone»), *Non un evento?* (luoghi e corsi col numero).
+- **Le card «Cerchi un'altra cosa?» sono diventate quel quinto gruppo**, con lo
+  stesso filtro (`_porte_vive()`, che ora usa anche `blocco_ecosistema()`: i
+  centri fuori stagione spariscono anche qui). Il marker `EVENTI-ECO` non c'è
+  più, ed `eventi.html` sta in `SENZA_RIGA` di `tests/porte.js` accanto a
+  `luoghi.html`; il numero delle porte si controlla sulle pillole.
+- **Ginetto sta nella stessa sezione**, subito dopo l'indice, e «Organizzi un
+  evento?» è una riga sotto di lui invece di un secondo riquadro: fra i due
+  c'erano 100px di vuoto e si leggevano come due avvisi pari.
+- **L'indice è un `<div role="navigation">` e non un `<nav>`.** Col `<nav>` si
+  incollava in cima allo schermo sopra la barra vera: è la regola di elemento
+  `nav{position:fixed}`, lo stesso inciampo della barra delle azioni alta
+  915px. Visto nella foto, non nell'HTML.
+- **L'H1 e l'hero non si sono toccati**, per la ragione di sempre.
+
+**Cosa resta com'era, e si può decidere dopo:** la fascia scura «Resta
+aggiornato / Seguici sui social» fra Ginetto e il footer. È una seconda
+richiesta vicino a Ginetto, e ripete la colonna Seguici del footer.
+
+`tests/agenda.js` controlla nel reso che l'indice stia sotto l'agenda e che
+prima del primo evento non ci sia nessuna pillola verso altre pagine
+(verificata rossa sulla pagina di prima: «Alessandria, Asti, Cuneo, Cosa c'è
+oggi…»), e che i paesi si vedano senza aprire niente. Le prove della provincia
+per nome valgono uguali, ora sul gruppo «Quando» invece di «Cosa cerchi».
+
 #### La provincia si sceglie per nome, e ha una riga sua
+
+> **Dal 25/09/2026 queste righe stanno in fondo**, nell'indice «Le zone»: vedi
+> la sezione qui sopra. Il ragionamento sul nome resta.
 
 Fatto l'11/09/2026, chiesto da Giovanni. Erano due richieste, e la prima era
 **già fatta**: dal 09/09 le pillole di «Cosa cerchi» puntano a
@@ -7018,6 +7094,10 @@ Le decisioni che non si ricavano dal diff:
   `link_landing()` — tre voci in più farebbero la barra che nessuno guarda.
 
 #### "Vai al comune" si ferma a otto pillole
+
+> **Dal 25/09/2026 è il gruppo «Paese per paese» dell'indice in fondo**, e
+> non è più un `<details>` che l'agenda chiude sotto i 600px. Il taglio a otto
+> resta, per la stessa ragione.
 
 Fatto il 21/08/2026. In alta stagione i comuni con almeno un evento in programma
 sono diciannove, cioè tre file di pillole fra i filtri e il primo evento:

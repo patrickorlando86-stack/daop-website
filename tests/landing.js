@@ -826,6 +826,10 @@ module.exports = async function landing(browser) {
                       'carnevale', 'pasqua']) {
       if (fs.existsSync(path.join(RADICE, `${st}.html`))) pagine.push([`${st}.html`, null, null]);
     }
+    for (const prov of ['alessandria', 'asti', 'cuneo']) {
+      const f = `mercatini-di-natale-provincia-${prov}.html`;
+      if (fs.existsSync(path.join(RADICE, f))) pagine.push([f, null, null]);
+    }
     const storte = [];
     for (const [f, modo, prov] of pagine) {
       const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
@@ -851,6 +855,51 @@ module.exports = async function landing(browser) {
     r.ok(storte.length === 0, storte.length
       ? `coda di oggi/weekend: ${storte.length} difetti (es. ${storte[0]})`
       : `su tutte e ${pagine.length} le pagine di intenzione la data sta in cima e la coda e' corta`);
+  }
+
+  // ── i mercatini di Natale per provincia ───────────────────────────────
+  // Nate il 25/09/2026, vuote e fuori indice, per invecchiare. Quello che si
+  // difende e' la forma, non il numero: l'anno nel titolo e mai
+  // nell'indirizzo (la regola di /ferragosto.html), il legame con
+  // /natale.html nei due versi, le sorelle fra loro, e robots coerente con
+  // quello che la pagina mostra - sotto tre mercatini fuori indice, da tre in
+  // su dentro. Nessun conteggio fisso: a settembre sono zero, a dicembre no.
+  r.titolo('mercatini di Natale per provincia');
+  {
+    const fs = require('fs');
+    const path = require('path');
+    const { RADICE } = require('./_aiuto');
+    const PROV = ['alessandria', 'asti', 'cuneo'];
+    const natale = fs.readFileSync(path.join(RADICE, 'natale.html'), 'utf8');
+    const storte = [];
+    for (const prov of PROV) {
+      const f = `mercatini-di-natale-provincia-${prov}.html`;
+      if (!fs.existsSync(path.join(RADICE, f))) { storte.push(`${f} non esiste`); continue; }
+      const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+      const can = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1] || '';
+      if (!can.endsWith(`/${f}`) || /\d/.test(can)) storte.push(`${f}: canonical ${can}`);
+      const titolo = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+      if (!/\b20\d\d\b/.test(titolo) || !/mercatini di natale/i.test(titolo)) {
+        storte.push(`${f}: titolo «${titolo}»`);
+      }
+      if (!natale.includes(`href="/${f}"`)) storte.push(`natale.html non linka ${f}`);
+      const corpo = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+      if (!corpo.includes('href="/natale.html"')) storte.push(`${f}: non torna a /natale.html`);
+      for (const altra of PROV.filter((x) => x !== prov)) {
+        if (!corpo.includes(`href="/mercatini-di-natale-provincia-${altra}.html"`)) {
+          storte.push(`${f}: manca la sorella ${altra}`);
+        }
+      }
+      const righe = new Set([...corpo.matchAll(/<li[^>]*data-category[^>]*>[\s\S]*?href="([^"]+)"/g)]
+        .map((m) => m[1])).size;
+      const noindex = /<meta name="robots" content="noindex/.test(html);
+      if (noindex !== (righe < 3)) {
+        storte.push(`${f}: ${righe} mercatini e robots ${noindex ? 'noindex' : 'index'}`);
+      }
+    }
+    r.ok(storte.length === 0, storte.length
+      ? `mercatini: ${storte.length} difetti (es. ${storte[0]})`
+      : 'le tre pagine dei mercatini: anno fuori dall\'indirizzo, legate a Natale e fra loro, robots coerente');
   }
 
   // ── lette il giorno dopo ──────────────────────────────────────────────
