@@ -12,12 +12,6 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["http-server", "-p", "8091", "-c-1"],
       "port": 8091
-    },
-    {
-      "name": "merc-preview",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["http-server", "C:\\Users\\ORLAND~1\\AppData\\Local\\Temp\\claude\\C--Users-Orlando-Patrick-Desktop-daop-website\\16defb42-9bf9-4fe5-8789-27b935845d54\\scratchpad\\merc", "-p", "8093", "-c-1"],
-      "port": 8093
     }
   ]
 }
