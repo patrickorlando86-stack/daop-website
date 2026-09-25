@@ -5245,11 +5245,17 @@ forza oggi?» / «Non per forza nel weekend?».
 - **Sulle due madri i bottoni sono due**: l'altra finestra e «Tutta l'agenda».
   «Provincia per provincia» resta sopra, perché è il loro mestiere di indice.
 
-**Restano con la coda lunga** le `sagre-provincia-*` e le stagionali
-(Ferragosto, Halloween e le altre): passano ancora da `_altre_landing()`.
-`tests/landing.js` («la coda corta delle pagine "oggi" e "weekend"») controlla
-sulle otto pagine data in cima una volta, niente coda lunga e i link alle
-sorelle; verificata rossa sulle pagine di prima (22 difetti).
+**Lo stesso giorno anche le `sagre-provincia-*` e le stagionali**, e
+`_altre_landing()` non esiste più: nessuna pagina la usava. Sulle sagre
+«Cosa c'è adesso in provincia di X» da paragrafo diventa tre bottoni (weekend,
+oggi, la provincia intera) e sale sopra i comuni, che prendono il taglio «+
+altri N». Le stagionali (Ferragosto, Natale, Capodanno, Befana, Carnevale,
+Pasqua) finiscono tutte con «E dopo <festa>?» — luoghi e prossimi eventi —
+cioè la coda che Halloween aveva dal 24/09, ora in `_dopo_stagione()`.
+
+`tests/landing.js` («la coda corta») controlla sulle diciotto pagine di
+intenzione data in cima una volta e niente coda lunga, e sulle otto «oggi» e
+«weekend» anche i link alle sorelle; verificata rossa sulle pagine di prima.
 
 `tests/landing.js` (punto 14) controlla data in cima e una volta sola, niente
 porte/nota/prosa in fondo, e che sotto «I comuni» i link ci siano. Verificate

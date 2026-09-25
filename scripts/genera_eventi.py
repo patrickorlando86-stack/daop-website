@@ -7667,7 +7667,8 @@ def _comuni_aperti(comuni):
 def _altre_finestre(voci):
     """La riga di bottoni in coda alle pagine "oggi" e "weekend" (25/09/2026).
 
-    Prende il posto di _altre_landing() su quelle otto pagine: lì c'erano la
+    Prende il posto della vecchia _altre_landing() (tolta il 25/09/2026, quando
+    nessuna pagina la usava piu'): lì c'erano la
     riga di scorciatoie (cinque voci), la riga delle quattro porte e, in fondo,
     "Tutta l'agenda / Come verifichiamo" con la data. Qui restano le due o tre
     strade che chi ha trovato poco "oggi" prende davvero. Il primo bottone è
@@ -7677,18 +7678,18 @@ def _altre_finestre(voci):
             + "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in voci) + '</div>')
 
 
-def _altre_landing(qui, elenco, porte=True):
-    """La riga di scorciatoie verso le altre pagine di intenzione, e sotto di
-    essa la riga delle quattro porte.
-
-    Le due righe stanno insieme e in questo ordine perche' rispondono a due
-    domande diverse: le scorciatoie a "un'altra data", le porte a "un'altra
-    cosa". Ed e' l'unico punto da toccare per averle su tutte e diciotto le
-    pagine di intenzione: ogni spec_* chiama questa funzione in coda al corpo."""
-    voci = "".join(f'<a href="{href}">{esc(testo)}</a>'
-                   for href, testo in elenco if href != qui)
-    scorciatoie = f'<div class="lan-alt">{voci}</div>' if voci else ''
-    return scorciatoie + (blocco_ecosistema('eventi') if porte else '')
+def _dopo_stagione(nome):
+    """La coda delle stagionali: "E dopo <festa>?" con due porte, i luoghi e i
+    prossimi eventi. Nata su /halloween.html il 24/09/2026 e portata a tutte le
+    stagionali il 25/09: al posto della fila di scorciatoie, della riga delle
+    quattro porte e di "Tutta l'agenda" con la data in fondo (che sale
+    nell'intestazione, 'agg_in_cima'). Libri, corsi e il resto stanno nel menu
+    e nel footer, apposta."""
+    return (f'<h2 id="dopo">E dopo {esc(nome)}?</h2>'
+            '<div class="lan-dopo">'
+            '<a href="/luoghi.html">Esplora i luoghi per famiglie</a>'
+            '<a href="/eventi.html">Scopri i prossimi eventi</a>'
+            '</div>')
 
 
 def spec_oggi(events, oggi, altre):
@@ -8316,7 +8317,7 @@ def spec_ferragosto(st, events, oggi, altre):
             f"{GIORNI[giorno.weekday()].capitalize()} {giorno.day} "
             f"{MESI_LUNGHI[giorno.month - 1]}",
             "Ferragosto" if giorno == il15 else None, del_giorno, oggi)
-    corpo += _altre_landing("/ferragosto.html", altre)
+    corpo += _dopo_stagione("Ferragosto")
 
     return {
         'path': "ferragosto.html", 'url': url,
@@ -8329,6 +8330,7 @@ def spec_ferragosto(st, events, oggi, altre):
         'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
         'jsonld': _grafo_landing(url, titolo, descr, finestra,
                                  f"Eventi di Ferragosto {anno}", "Ferragosto", oggi),
+        'agg_in_cima': True,
         'eventi': len(finestra),
     }
 
@@ -8525,11 +8527,7 @@ def spec_halloween(st, events, oggi, altre):
     # feste -> altri eventi o luoghi -> il consiglio di Ginetto, che segue. I
     # link per provincia stanno gia' sopra l'elenco; libri, corsi e il resto
     # restano nel menu e nel footer, apposta.
-    corpo += ('<h2 id="dopo">E dopo Halloween?</h2>'
-              '<div class="lan-dopo">'
-              '<a href="/luoghi.html">Esplora i luoghi per famiglie</a>'
-              '<a href="/eventi.html">Scopri i prossimi eventi</a>'
-              '</div>')
+    corpo += _dopo_stagione("Halloween")
     # Ginetto DOPO "fa paura o no?" (23/09/2026): fra l'elenco e il consiglio
     # su come leggerlo interrompeva la lettura. Resta dove la pagina ha poco da
     # dare - finche' le feste sono poche - e risponde a "e allora cosa faccio?".
@@ -8651,11 +8649,7 @@ def spec_halloween_prov(prov, events, oggi, altre):
     # Ginetto in coda al corpo finche' le feste sono poche: stessa regola
     # della generale, dopo le righe che dicono come leggere l'elenco.
     # "E dopo Halloween?": le due porte della generale (24/09/2026).
-    corpo += ('<h2 id="dopo">E dopo Halloween?</h2>'
-              '<div class="lan-dopo">'
-              '<a href="/luoghi.html">Esplora i luoghi per famiglie</a>'
-              '<a href="/eventi.html">Scopri i prossimi eventi</a>'
-              '</div>')
+    corpo += _dopo_stagione("Halloween")
     if poche:
         corpo += blocco_ginetto(alto=True)
 
@@ -8710,6 +8704,7 @@ def _stagione_out(st, oggi, finestra, titolo, descr, h1, sotto, corpo, nome_list
         'robots': "index, follow" if len(finestra) >= MIN_LANDING else "noindex, follow",
         'jsonld': _grafo_landing(url, titolo, descr, finestra, nome_lista,
                                  st.crumb, oggi),
+        'agg_in_cima': True,  # la data in cima, 25/09/2026
         'eventi': len(finestra),
     }
 
@@ -8920,7 +8915,7 @@ def spec_natale(st, events, oggi, altre):
                          and e['d_start'] <= d2 and e['d_end'] >= d1], st.chiave),
             oggi)
     corpo += _lunghi_fuori_tema(finestra, st.chiave, oggi, "Natale")
-    corpo += _altre_landing(st.href, altre)
+    corpo += _dopo_stagione(st.nome)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Natale {anno} con i bambini", sotto, corpo,
                          f"Eventi di Natale {anno}")
@@ -8996,7 +8991,7 @@ def spec_capodanno(st, events, oggi, altre):
                                 {(12, 31): "San Silvestro",
                                  (1, 1): "Capodanno"},
                                 chiave=st.chiave, quale="Capodanno")
-    corpo += _altre_landing(st.href, altre)
+    corpo += _dopo_stagione(st.nome)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Capodanno {anno + 1} con i bambini", sotto, corpo,
                          f"Eventi di Capodanno {anno + 1}")
@@ -9062,7 +9057,7 @@ def spec_befana(st, events, oggi, altre):
     corpo += _landing_filtri(finestra)
     corpo += _giorno_per_giorno(finestra, da, a, oggi, {(1, 6): "L'Epifania"},
                                 chiave=st.chiave, quale="Befana")
-    corpo += _altre_landing(st.href, altre)
+    corpo += _dopo_stagione(st.nome)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Cosa fare per la Befana {anno}", sotto, corpo,
                          f"Eventi della Befana {anno}")
@@ -9131,7 +9126,7 @@ def spec_carnevale(st, events, oggi, altre):
                                 {(da.month, da.day): "Giovedì grasso",
                                  (clou.month, clou.day): "Martedì grasso"},
                                 chiave=st.chiave, quale="Carnevale")
-    corpo += _altre_landing(st.href, altre)
+    corpo += _dopo_stagione(st.nome)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Carnevale {anno} con i bambini", sotto, corpo,
                          f"Eventi di Carnevale {anno}")
@@ -9203,7 +9198,7 @@ def spec_pasqua(st, events, oggi, altre):
                                  (clou.month, clou.day): "Pasqua",
                                  (pasquetta.month, pasquetta.day): "Pasquetta"},
                                 chiave=st.chiave, quale="Pasqua")
-    corpo += _altre_landing(st.href, altre)
+    corpo += _dopo_stagione(st.nome)
     return _stagione_out(st, oggi, finestra, titolo, descr,
                          f"Pasqua e Pasquetta {anno}", sotto, corpo,
                          f"Eventi di Pasqua {anno}")
@@ -9361,25 +9356,21 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
                   f"ogni notte.</p>"
                   f'<section class="com-grp"><ul class="com-ev'
                   f'{" is-nude" if nude else ""}">{righe}</ul></section>')
-    if comuni:
-        link = "".join(f'<a href="/eventi/comune/{d["slug"]}.html">{esc(d["nome"])}</a>'
-                       for d in comuni)
-        corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)}</h2>"
-                  f'<div class="com-link">{link}</div>')
     # Le sorelle con la finestra temporale. Questa pagina risponde a "dove",
     # quelle a "dove e quando": chi cerca l'una spesso vuole l'altra, ed e' il
-    # link che le tiene insieme invece di lasciarle competere.
+    # link che le tiene insieme invece di lasciarle competere. Dal 25/09/2026
+    # sono bottoni e non un paragrafo, e vengono prima dei comuni: e' la coda
+    # corta delle altre pagine di intenzione (vedi _altre_finestre()).
     corpo += (f"<h2>Cosa c'è adesso in provincia di {esc(nome_prov)}</h2>"
-              f'<p>Questa pagina è il calendario delle sagre. Se cerchi '
-              f'<a href="{href_eventi_prov(prov)}">tutti gli eventi e le attività per '
-              f'bambini della provincia</a> — sagre comprese, divisi per età — sono in '
-              f'una pagina sola. Se invece la domanda è '
-              f'"e stasera?": <a href="{href_incrocio(prov, "oggi")}">cosa fare oggi</a> '
-              f'oppure <a href="{href_incrocio(prov, "weekend")}">gli eventi del '
-              f'weekend</a> in provincia di {esc(nome_prov)}.</p>')
+              + _altre_finestre([(href_incrocio(prov, "weekend"), "Questo weekend"),
+                                 (href_incrocio(prov, "oggi"), "Cosa c'è oggi"),
+                                 (href_eventi_prov(prov),
+                                  "Tutti gli eventi della provincia")]))
+    if comuni:
+        corpo += (f"<h2>I comuni della provincia di {esc(nome_prov)}</h2>"
+                  + _comuni_aperti(comuni))
     corpo += credito_fonte(
         fonte, f'Le sagre della provincia di {esc(nome_prov)} arrivano da', breve=True)
-    corpo += _altre_landing(href, altre)
 
     # Sotto soglia la pagina resta (i link che girano non si rompono) ma esce
     # dall'indice e dalla sitemap: la stessa regola delle pagine comune.
@@ -9402,6 +9393,7 @@ def spec_sagre(prov, events, hub, storico, oggi, altre):
         # facendo il suo mestiere. Gli altri si stampano a parte nel log.
         'eventi': len(sagre),
         'altri': len(altri_ev),
+        'agg_in_cima': True,
     }
 
 
