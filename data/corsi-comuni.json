@@ -105,6 +105,11 @@
    "nome": "Racconigi",
    "slug": "racconigi"
   },
+  "cn-saluzzo": {
+   "n": 2,
+   "nome": "Saluzzo",
+   "slug": "saluzzo"
+  },
   "cn-vezza-d-alba": {
    "n": 7,
    "nome": "Vezza d'Alba",
@@ -112,6 +117,6 @@
   }
  },
  "province": {
-  "CN": 89
+  "CN": 91
  }
 }

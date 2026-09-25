@@ -11,7 +11,7 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 75,
+  "n": 76,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
@@ -156,11 +156,6 @@
  },
  "c-al-cassinelle": {
   "comune": "Cassinelle",
-  "n": 1,
-  "prov": "AL"
- },
- "c-al-castelceriolo-alessandria": {
-  "comune": "Castelceriolo (Alessandria)",
   "n": 1,
   "prov": "AL"
  },
