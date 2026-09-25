@@ -302,7 +302,7 @@
     "manifest": "Settimana Mondiale per l'Allattamento 2026",
     "nome": "Settimana Mondiale per l'Allattamento - Tavola Rotonda alla Biblioteca Civica",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-10-07"
    }
   },
@@ -1073,7 +1073,7 @@
     "manifest": "",
     "nome": "Bambinopoli - Pro Loco Bagnolo Piemonte",
     "organizza": "Pro Loco Bagnolo Piemonte",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-27"
    }
   },
@@ -1583,7 +1583,7 @@
     "manifest": "",
     "nome": "I Madrigal - Storia di un Encanto - Compagnia teatrale Once Upon A Time",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-10-24"
    },
    "vi-racconto-una-bella-storia-busca": {
@@ -6798,7 +6798,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "Allattare...come e perchè?",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-30"
    },
    "cinema-all-aperto-bad-guys-troppo-cattivi-oratorio-nizza-monferrato": {
@@ -6820,7 +6820,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "Guida pratica al neonato",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-10-20"
    },
    "il-viaggio-nutrizionale-della-maternita-nizza-monferrato": {
@@ -6831,7 +6831,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "Il viaggio nutrizionale della maternità",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-10-13"
    },
    "la-salute-di-bambini-e-adulti-a-nizza-monferrato": {
@@ -6842,7 +6842,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "La salute di bambini e adulti a 360°",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-11-26"
    },
    "nizza-e-sport-pro-loco-nizza-monferrato": {
@@ -6864,7 +6864,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "Nutrire un bambino dopo i primi mesi",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-11-13"
    },
    "post-parto-salute-pelvica-e-addominale-nizza-monferrato": {
@@ -6875,7 +6875,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "Post parto: salute pelvica e addominale",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-10-26"
    },
    "preparare-il-pavimento-pelvico-al-parto-beatrice-b-nizza-monferrato": {
@@ -6897,7 +6897,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "Preparare il pavimento pelvico al parto",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-10-07"
    },
    "quando-venere-diventa-luna-nizza-monferrato": {
@@ -6908,7 +6908,7 @@
     "manifest": "Incontri che Nutrono",
     "nome": "Quando Venere diventa Luna",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-11-18"
    }
   },
@@ -6970,7 +6970,7 @@
     "manifest": "Bibliopride 2026 - Bibliobrave",
     "nome": "BE BRAVE, BE READ! L'avventura di leggere - Biblioteca Civica di Novi Ligure",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-29"
    },
    "board-games-serata-giochi-da-tavolo-oltre-gioco-novi-ligure": {
@@ -6981,7 +6981,7 @@
     "manifest": "",
     "nome": "Board Games - Serata Giochi da Tavolo - Oltre Gioco",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-26"
    },
    "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
@@ -8466,7 +8466,7 @@
     "manifest": "",
     "nome": "Pilates in Gravidanza - CàRezza",
     "organizza": "",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-25"
    },
    "presto-prestissimo-incontro-prova-gratuito-racconigi": {
@@ -10571,7 +10571,7 @@
     "manifest": "Percorrere riparte a Settembre",
     "nome": "Attività Assistita con il Cane - Associazione Percorrere",
     "organizza": "Associazione Percorrere",
-    "pagina": false,
+    "pagina": true,
     "ultima": "2026-09-26"
    },
    "festa-della-madonna-della-guardia-tortona": {
