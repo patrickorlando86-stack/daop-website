@@ -5118,6 +5118,42 @@ Verificate **rosse rimettendo quattro difetti uno alla volta** — pillola
 togliata, blocchi scambiati, link alla sorella rimosso, pagina ridotta a una
 categoria — non supposte.
 
+#### La coda corta — 24/09/2026
+
+Stesso lavoro fatto su `luoghi.html` lo stesso giorno (Patrick: «pappardella»).
+Sotto l'elenco c'erano **otto blocchi**: i comuni tutti aperti (24 pillole a
+Cuneo), «Se la domanda è un'altra» in prosa, il credito, la riga di
+scorciatoie (oggi, weekend, le altre due province), la riga delle quattro
+porte, Ginetto, «Tutta l'agenda / Come verifichiamo» e la data. Ora sono
+quattro:
+
+1. **«Cerchi solo una parte?»**: Questo weekend · Cosa c'è oggi · Solo sagre e
+   feste, cioè **le tre sorelle** della stessa provincia, come bottoni
+   (`.lan-dopo`, lo stile di «E dopo Halloween?», così non si confondono con
+   le pillole dei comuni). Il weekend è primo e pieno: è la domanda che ha
+   in testa chi ha appena scorso un'agenda intera. Il link alle sorelle **non
+   si toglie**: è quello che tiene le quattro provinciali a passarsi autorità
+   (`tests/landing.js`, punto 13).
+2. **I comuni, con il taglio di «Vai al comune»**: i primi
+   `MAX_COMUNI_APERTI`, il resto sotto «+ altri N» (`.ev-comuni-piu`, CSS dal
+   guscio). I link restano tutti nell'HTML.
+3. **Il credito**, invariato: vedi «Il credito alla pagina di provenienza».
+4. **Ginetto.**
+
+La data sale nell'intestazione (`'agg_in_cima': True`, come Halloween), e con
+lei spariscono «Tutta l'agenda» e la nota in fondo. Fuori anche le altre
+province e le due pagine trasversali (sono in nav) e la riga delle porte
+(luoghi e corsi sono in nav e nel footer).
+
+**Le altre sedici pagine di intenzione non sono state toccate**: `oggi`,
+`weekend`, le sagre, le sei d'incrocio e le stagionali hanno ancora la coda
+lunga. Se si vuole lo stesso lì, `'agg_in_cima'` è già un interruttore, e il
+resto sta in `_altre_landing()`.
+
+`tests/landing.js` (punto 14) controlla data in cima e una volta sola, niente
+porte/nota/prosa in fondo, e che sotto «I comuni» i link ci siano. Verificate
+rosse sulle pagine di prima.
+
 #### Un rosso pre-esistente trovato per strada: `prova_spostata.py` (chiuso il 05/09/2026)
 
 Non c'entra con questa pagina e allora **non era stato toccato**, ma andava
