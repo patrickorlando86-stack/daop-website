@@ -264,6 +264,7 @@ jobs:
                 sagre-provincia-*.html \
                 eventi-provincia-*.html \
                 halloween-provincia-*.html mercatini-di-natale-provincia-*.html \
+                natale-provincia-*.html befana-provincia-*.html \
                 befana.html capodanno.html carnevale.html ferragosto.html \
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \

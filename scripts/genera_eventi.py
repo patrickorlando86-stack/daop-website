@@ -8926,7 +8926,7 @@ def spec_natale(st, events, oggi, altre):
 
     corpo = apertura
     corpo += (
-        '<h2>Al coperto o all\'aperto?</h2>'
+        '<h2 id="al-coperto">Al coperto o all\'aperto?</h2>'
         '<p>A dicembre è <em>la</em> domanda, e cambia la giornata più del '
         'programma: un mercatino in piazza con quattro gradi e la pioggia non è '
         'la stessa cosa di un presepe vivente sotto i portici. Dove lo sappiamo '
@@ -8949,6 +8949,11 @@ def spec_natale(st, events, oggi, altre):
     corpo += ('<p class="com-per"><strong>I mercatini di Natale</strong> '
               'provincia per provincia: '
               + ', '.join(f'<a href="{href_mercatini_prov(c)}">'
+                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>'
+                          for c in PROVINCE_PUBBLICATE)
+              + '. <strong>Il resto del Natale</strong> &mdash; presepi, Babbo '
+              'Natale, spettacoli &mdash; provincia per provincia: '
+              + ', '.join(f'<a href="{href_natale_prov(c)}">'
                           f'{esc(PROVINCE_NOMI.get(c, c))}</a>'
                           for c in PROVINCE_PUBBLICATE) + '.</p>')
     corpo += _landing_filtri(finestra)
@@ -9135,6 +9140,233 @@ def spec_mercatini_prov(prov, events, oggi, altre):
     }
 
 
+# ---------------------------------------------------------------------------
+# NATALE E BEFANA PER PROVINCIA (25/09/2026, Patrick: «io creerei tre pagine
+# per natale e tre pagine per epifania»).
+#
+# Stessa impalcatura delle halloween-provincia-*: nascono a settembre, vuote e
+# fuori indice, perche' su una stagionale l'asset e' l'anzianita' dell'URL; sotto
+# MIN_TEMA feste restano noindex e fuori sitemap da sole; si tengono per mano con
+# la generale (lei le annuncia, loro tornano a lei) e fra sorelle.
+#
+# LE DUE COSE DA NON RIFARE AL CONTRARIO:
+# - NATALE PER PROVINCIA NON RIPETE I MERCATINI. Hanno gia' le loro pagine
+#   (spec_mercatini_prov), e la stessa riga su due pagine della stessa
+#   provincia e' un doppione che si contende "natale <provincia>" con
+#   "mercatini di natale <provincia>". I due insiemi sono complementari - come
+#   "Non solo sagre" sulle sagre-provincia-* - e qui in cima c'e' il ponte.
+# - CAPODANNO PER PROVINCIA NON SI FA. Le feste di Capodanno per bambini sono
+#   poche (qualche "capodanno dei bambini" a mezzogiorno), quindi tre pagine
+#   resterebbero noindex quasi sempre; e le ricerche che Search Console mostra
+#   al 23/09 ("capodanno alessandrino") sono una festa di fine AGOSTO, non il 31
+#   dicembre. /capodanno.html basta.
+#
+# L'anno sta nel titolo e nell'H1, mai nell'indirizzo (la regola di
+# /ferragosto.html).
+# ---------------------------------------------------------------------------
+
+def href_natale_prov(prov):
+    return f"/natale-provincia-{slugify(PROVINCE_NOMI.get(prov, prov))}.html"
+
+
+def href_befana_prov(prov):
+    return f"/befana-provincia-{slugify(PROVINCE_NOMI.get(prov, prov))}.html"
+
+
+def _in_provincia(events, prov, da, a):
+    return [e for e in events if e['d_start'] <= a and e['d_end'] >= da
+            and (e.get('prov') or '').upper() == prov]
+
+
+def _sorelle(href_fn, prov, generale, quale, nome):
+    """La riga che lega una pagina per provincia alle sorelle e alla generale."""
+    altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
+    return (f'<p class="com-per">{quale} nelle altre province: '
+            + ', '.join(f'<a href="{href_fn(c)}">{esc(PROVINCE_NOMI.get(c, c))}</a>'
+                        for c in altre_prov)
+            + f', o <a href="{generale}">tutte insieme</a>. Cerchi altro da fare '
+            f'con i bambini in provincia di {esc(nome)}? '
+            f'<a href="{href_eventi_prov(prov)}">Gli eventi della provincia</a>.</p>')
+
+
+def spec_natale_prov(prov, events, oggi, altre):
+    """/natale-provincia-<nome>.html — il Natale di UNA provincia, senza i
+    mercatini (che hanno le loro pagine): presepi, Babbo Natale, spettacoli,
+    laboratori, luci. Dal 1° al 26 dicembre, come /natale.html. "Al coperto o
+    all'aperto?" per esteso sta nella generale e non si ricopia."""
+    da, clou, a = prossima_finestra(_finestra_natale, oggi)
+    anno = clou.year
+    nome = PROVINCE_NOMI.get(prov, prov)
+    href = href_natale_prov(prov)
+    url = f"{SITE_URL}{href}"
+    finestra = sorted((e for e in _in_provincia(events, prov, da, a)
+                       if in_tema(e, 'natale') and not e_mercatino_natale(e)),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
+    poche = len(finestra) < MIN_TEMA
+    # I mercatini con la finestra LORO (meta' novembre - Epifania), cioe' lo
+    # stesso numero che la loro pagina mostra: se no il ponte promette un
+    # numero e ne consegna un altro. Sotto MIN_CONTEGGIO parla la riga senza
+    # numero: "1 mercatino" e' una ragione per non toccare.
+    m_da, _m, m_a = mercatini_range(oggi)
+    n_merc = sum(1 for e in _in_provincia(events, prov, m_da, m_a) if e_mercatino_natale(e))
+
+    titolo = _landing_titolo([f"Natale {anno} con i bambini in provincia di {nome}",
+                              f"Natale {anno} in provincia di {nome} | DAOP",
+                              f"Natale {anno} in provincia di {nome}"])
+    if finestra:
+        sotto = (f"{len(finestra)} eventi di Natale già in programma"
+                 + (f" in {comuni} comuni" if comuni > 1 else "")
+                 if len(finestra) > 1 else "1 evento di Natale in agenda, per ora")
+        apertura = (f"<p>Presepi, Babbo Natale, spettacoli e laboratori del "
+                    f"<strong>Natale {anno}</strong> in provincia di {nome}, fino "
+                    f"a Santo Stefano. Li verifichiamo uno per uno e aggiungiamo "
+                    f"i nuovi man mano che vengono pubblicati.</p>")
+        descr = trunc(f"Natale {anno} con i bambini in provincia di {nome}: "
+                      + (f"{len(finestra)} eventi" if len(finestra) > 1 else "1 evento")
+                      + " fra presepi, Babbo Natale e spettacoli, verificati uno per "
+                      "uno da DAOP.", 152)
+    else:
+        sotto = f"Per il Natale {anno} in provincia di {nome} non c'è ancora niente"
+        apertura = (f"<p class=\"lan-vuoto\">Per il Natale {anno} in provincia di "
+                    f"{nome} in agenda non abbiamo ancora niente, e lo scriviamo "
+                    f"invece di riempire la pagina. Presepi viventi e arrivi di "
+                    f"Babbo Natale si annunciano tardi, spesso a fine novembre. "
+                    f"Aggiorniamo questa pagina ogni giorno, man mano che "
+                    f"arrivano.</p>")
+        descr = trunc(f"Natale {anno} con i bambini in provincia di {nome}: presepi, "
+                      "Babbo Natale, spettacoli e laboratori di dicembre, verificati "
+                      "uno per uno da DAOP.", 152)
+
+    merc = href_mercatini_prov(prov)
+    corpo = apertura
+    corpo += ('<p class="com-per"><strong>I mercatini</strong> hanno una pagina '
+              'loro: '
+              + (f'<a href="{merc}">{n_merc} mercatini di Natale in provincia di '
+                 f'{esc(nome)}</a>.' if n_merc >= MIN_CONTEGGIO else
+                 f'<a href="{merc}">i mercatini di Natale in provincia di '
+                 f'{esc(nome)}</a>.')
+              + '</p>')
+    corpo += _landing_filtri(finestra, con_prov=False)
+    corpo += _landing_sezione(
+        "Per più giorni",
+        "Presepi e luci aperti per settimane: li trovi qui una volta sola",
+        [e for e in finestra if e_lungo(e)], oggi, eta=True, dettagli=True)
+    for testa, coda, etichetta in ((1, 7, None),
+                                   (8, 14, "C'è l'Immacolata"),
+                                   (15, 21, None),
+                                   (22, 26, "Vigilia, Natale e Santo Stefano")):
+        d1 = datetime.date(anno, 12, testa)
+        d2 = datetime.date(anno, 12, coda)
+        corpo += _landing_sezione(
+            f"Dal {testa} al {coda} dicembre",
+            etichetta,
+            [e for e in finestra if not e_lungo(e)
+             and e['d_start'] <= d2 and e['d_end'] >= d1],
+            oggi, eta=True, dettagli=True)
+    corpo += ('<p class="com-per"><strong>Al coperto o all\'aperto?</strong> A '
+              'dicembre è la domanda che decide la giornata: <a '
+              'href="/natale.html#al-coperto">come regolarsi, e dove stare al '
+              'caldo</a>.</p>')
+    corpo += _sorelle(href_natale_prov, prov, '/natale.html', 'Il Natale', nome)
+    corpo += _dopo_stagione("Natale")
+    if poche:
+        corpo += blocco_ginetto(alto=True)
+
+    padre = ('/natale.html', 'Natale')
+    return {
+        'path': href.lstrip('/'), 'url': url,
+        'agg_in_cima': True,
+        'titolo': titolo, 'descr': descr,
+        'h1': f"Natale {anno} con i bambini in provincia di {nome}",
+        'sotto': sotto, 'crumb': nome,
+        'padre': padre,
+        'corpo': corpo,
+        'robots': "noindex, follow" if poche else "index, follow",
+        'prov': prov,
+        'jsonld': _grafo_landing(url, titolo, descr, finestra,
+                                 f"Eventi di Natale {anno} in provincia di {nome}",
+                                 nome, oggi, padre=padre),
+        'eventi': len(finestra),
+        'ginetto_nel_corpo': poche,
+    }
+
+
+def spec_befana_prov(prov, events, oggi, altre):
+    """/befana-provincia-<nome>.html — l'Epifania di UNA provincia, dal 2 al 6
+    gennaio come /befana.html. "A che ora arriva?" per esteso sta nella
+    generale e non si ricopia: qui c'e' una riga che ci porta."""
+    da, clou, a = prossima_finestra(_finestra_befana, oggi)
+    anno = clou.year
+    nome = PROVINCE_NOMI.get(prov, prov)
+    href = href_befana_prov(prov)
+    url = f"{SITE_URL}{href}"
+    finestra = sorted((e for e in _in_provincia(events, prov, da, a)
+                       if in_tema(e, 'befana')),
+                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
+    comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
+    poche = len(finestra) < MIN_TEMA
+
+    titolo = _landing_titolo([f"Befana {anno} con i bambini in provincia di {nome}",
+                              f"Befana {anno} in provincia di {nome} | DAOP",
+                              f"Befana {anno} in provincia di {nome}"])
+    if finestra:
+        sotto = (f"{len(finestra)} feste della Befana già in programma"
+                 + (f" in {comuni} comuni" if comuni > 1 else "")
+                 if len(finestra) > 1 else "1 festa della Befana in agenda, per ora")
+        apertura = (f"<p>Le feste della <strong>Befana {anno}</strong> in "
+                    f"provincia di {nome}, dal 2 al 6 gennaio: le calze in "
+                    f"piazza, la Befana che scende dal campanile, i presepi "
+                    f"ancora aperti. Le verifichiamo una per una e aggiungiamo le "
+                    f"nuove man mano che vengono pubblicate.</p>")
+        descr = trunc(f"Befana {anno} con i bambini in provincia di {nome}: "
+                      + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
+                      + " dal 2 al 6 gennaio, con l'orario, verificate una per una "
+                      "da DAOP.", 152)
+    else:
+        sotto = f"Per la Befana {anno} in provincia di {nome} non c'è ancora niente"
+        apertura = (f"<p class=\"lan-vuoto\">Per la Befana {anno} in provincia di "
+                    f"{nome} in agenda non abbiamo ancora niente, e lo scriviamo "
+                    f"invece di riempire la pagina. Le calze in piazza si "
+                    f"annunciano tardi, spesso dopo Capodanno. Aggiorniamo questa "
+                    f"pagina ogni giorno, man mano che arrivano.</p>")
+        descr = trunc(f"Befana {anno} con i bambini in provincia di {nome}: calze in "
+                      "piazza e feste dell'Epifania dal 2 al 6 gennaio, verificate "
+                      "una per una da DAOP.", 152)
+
+    corpo = apertura
+    corpo += _landing_filtri(finestra, con_prov=False)
+    corpo += _giorno_per_giorno(finestra, da, a, oggi, {(1, 6): "L'Epifania"},
+                                chiave='befana', quale="Befana", eta=True,
+                                dettagli=True)
+    corpo += ('<p class="com-per"><strong>A che ora arriva?</strong> La Befana '
+              'in piazza dura dieci minuti: dove l\'orario è dichiarato lo trovi in '
+              'riga, e <a href="/befana.html#a-che-ora">qui ti spieghiamo come '
+              'non arrivare tardi</a>.</p>')
+    corpo += _sorelle(href_befana_prov, prov, '/befana.html', 'La Befana', nome)
+    corpo += _dopo_stagione("la Befana")
+    if poche:
+        corpo += blocco_ginetto(alto=True)
+
+    padre = ('/befana.html', 'Befana')
+    return {
+        'path': href.lstrip('/'), 'url': url,
+        'agg_in_cima': True,
+        'titolo': titolo, 'descr': descr,
+        'h1': f"Befana {anno} con i bambini in provincia di {nome}",
+        'sotto': sotto, 'crumb': nome,
+        'padre': padre,
+        'corpo': corpo,
+        'robots': "noindex, follow" if poche else "index, follow",
+        'prov': prov,
+        'jsonld': _grafo_landing(url, titolo, descr, finestra,
+                                 f"Feste della Befana {anno} in provincia di {nome}",
+                                 nome, oggi, padre=padre),
+        'eventi': len(finestra),
+        'ginetto_nel_corpo': poche,
+    }
+
+
 def spec_capodanno(st, events, oggi, altre):
     """/capodanno.html — dal 27 dicembre al 1° gennaio.
 
@@ -9252,8 +9484,14 @@ def spec_befana(st, events, oggi, altre):
                       "verificati uno per uno da DAOP.", 152)
 
     corpo = apertura
+    # Le tre province hanno la loro pagina (vedi spec_befana_prov): la
+    # generale le annuncia in cima, una riga, come /halloween.html.
+    corpo += ('<p class="com-per">Per provincia: '
+              + ' · '.join(f'<a href="{href_befana_prov(c)}">'
+                           f'{esc(PROVINCE_NOMI.get(c, c))}</a>'
+                           for c in PROVINCE_PUBBLICATE) + '</p>')
     corpo += (
-        '<h2>A che ora arriva?</h2>'
+        '<h2 id="a-che-ora">A che ora arriva?</h2>'
         '<p>È la domanda che conta, e su questa pagina più che su tutte le altre. '
         'La Befana che scende dal campanile o arriva in piazza è un evento di '
         '<strong>dieci minuti</strong>, non una giornata: arrivare mezz\'ora dopo '
@@ -9857,6 +10095,10 @@ def scrivi_landing(events, hub, storico, oggi):
     # regola, nascono a settembre per invecchiare e restano fuori indice finche'
     # non arrivano i mercatini.
     specs += [spec_mercatini_prov(c, events, oggi, altre) for c in PROVINCE_PUBBLICATE]
+    # Natale (senza i mercatini) e Befana per provincia: vedi spec_natale_prov.
+    # Stessa regola, e Capodanno per provincia no, apposta.
+    specs += [spec_natale_prov(c, events, oggi, altre) for c in PROVINCE_PUBBLICATE]
+    specs += [spec_befana_prov(c, events, oggi, altre) for c in PROVINCE_PUBBLICATE]
     specs += [spec_sagre(c, events, hub, storico, oggi, altre) for c in PROVINCE_PUBBLICATE]
     # La provincia senza finestra temporale: la quarta cella dell'asse
     # provincia x finestra, che era l'unica vuota. Vedi spec_eventi_prov.

@@ -827,8 +827,10 @@ module.exports = async function landing(browser) {
       if (fs.existsSync(path.join(RADICE, `${st}.html`))) pagine.push([`${st}.html`, null, null]);
     }
     for (const prov of ['alessandria', 'asti', 'cuneo']) {
-      const f = `mercatini-di-natale-provincia-${prov}.html`;
-      if (fs.existsSync(path.join(RADICE, f))) pagine.push([f, null, null]);
+      for (const f of [`mercatini-di-natale-provincia-${prov}.html`,
+                       `natale-provincia-${prov}.html`, `befana-provincia-${prov}.html`]) {
+        if (fs.existsSync(path.join(RADICE, f))) pagine.push([f, null, null]);
+      }
     }
     const storte = [];
     for (const [f, modo, prov] of pagine) {
@@ -900,6 +902,63 @@ module.exports = async function landing(browser) {
     r.ok(storte.length === 0, storte.length
       ? `mercatini: ${storte.length} difetti (es. ${storte[0]})`
       : 'le tre pagine dei mercatini: anno fuori dall\'indirizzo, legate a Natale e fra loro, robots coerente');
+  }
+
+  // ── Natale e Befana per provincia ─────────────────────────────────────
+  // Nate il 25/09/2026 come le mercatini: si difende la forma, non il numero.
+  // In piu', su Natale: nessuna riga compare anche nei mercatini della stessa
+  // provincia (i due insiemi sono complementari, se no si fanno concorrenza).
+  r.titolo('Natale e Befana per provincia');
+  {
+    const fs = require('fs');
+    const path = require('path');
+    const { RADICE } = require('./_aiuto');
+    const PROV = ['alessandria', 'asti', 'cuneo'];
+    const righeDi = (corpo) => new Set([...corpo.matchAll(
+      /<li[^>]*data-category[^>]*>[\s\S]*?href="([^"]+)"/g)].map((m) => m[1]));
+    const storte = [];
+    for (const [festa, generale, parola] of [['natale', 'natale.html', /natale/i],
+                                             ['befana', 'befana.html', /befana/i]]) {
+      const gen = fs.readFileSync(path.join(RADICE, generale), 'utf8');
+      for (const prov of PROV) {
+        const f = `${festa}-provincia-${prov}.html`;
+        if (!fs.existsSync(path.join(RADICE, f))) { storte.push(`${f} non esiste`); continue; }
+        const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+        const can = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1] || '';
+        if (!can.endsWith(`/${f}`) || /\d/.test(can)) storte.push(`${f}: canonical ${can}`);
+        const titolo = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+        if (!/\b20\d\d\b/.test(titolo) || !parola.test(titolo)) storte.push(`${f}: titolo «${titolo}»`);
+        if (!gen.includes(`href="/${f}"`)) storte.push(`${generale} non linka ${f}`);
+        const corpo = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+        if (!corpo.includes(`href="/${generale}"`)) storte.push(`${f}: non torna a /${generale}`);
+        for (const altra of PROV.filter((x) => x !== prov)) {
+          if (!corpo.includes(`href="/${festa}-provincia-${altra}.html"`)) {
+            storte.push(`${f}: manca la sorella ${altra}`);
+          }
+        }
+        // le ancore della generale a cui la pagina manda devono esistere
+        for (const [, dove, ancora] of corpo.matchAll(/href="\/(natale|befana)\.html#([\w-]+)"/g)) {
+          const g = fs.readFileSync(path.join(RADICE, `${dove}.html`), 'utf8');
+          if (!g.includes(`id="${ancora}"`)) storte.push(`${f}: l'ancora #${ancora} non esiste`);
+        }
+        const righe = righeDi(corpo);
+        const noindex = /<meta name="robots" content="noindex/.test(html);
+        if (noindex !== (righe.size < 3)) {
+          storte.push(`${f}: ${righe.size} feste e robots ${noindex ? 'noindex' : 'index'}`);
+        }
+        if (festa === 'natale') {
+          const mf = `mercatini-di-natale-provincia-${prov}.html`;
+          if (!corpo.includes(`href="/${mf}"`)) storte.push(`${f}: manca il ponte ai mercatini`);
+          const mh = fs.readFileSync(path.join(RADICE, mf), 'utf8');
+          const merc = righeDi(mh.slice(mh.indexOf('<main'), mh.indexOf('</main>')));
+          const doppie = [...righe].filter((h) => merc.has(h));
+          if (doppie.length) storte.push(`${f}: ${doppie.length} righe anche nei mercatini (es. ${doppie[0]})`);
+        }
+      }
+    }
+    r.ok(storte.length === 0, storte.length
+      ? `Natale/Befana per provincia: ${storte.length} difetti (es. ${storte[0]})`
+      : 'le sei pagine di Natale e Befana: anno fuori dall\'indirizzo, legate alla generale e fra loro, niente doppioni coi mercatini, robots coerente');
   }
 
   // ── lette il giorno dopo ──────────────────────────────────────────────
