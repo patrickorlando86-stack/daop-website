@@ -3564,8 +3564,9 @@ CSS = """
    mette - era un alone in piu' (Patrick). Resta un'ombra sotto le lettere. */
 @media(min-width:901px){
   .co-hero.hero-fascia::before{background:var(--fascia) center/cover no-repeat}
-  .co-hero.hero-fascia{box-sizing:border-box;min-height:500px;display:flex;flex-direction:column;justify-content:center}
-  .co-hero.hero-fascia .page-hero-inner{width:100%}
+  /* L'altezza la da' il <style> di eventi.html, uguale per tutte le fasce
+     (535px). Il paragrafo resta a 520px: piu' largo finisce sopra i
+     personaggi, che stanno ai lati. */
   .co-hero h1,.co-hero p,.co-hero .co-crumb,.co-hero .section-label{text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 12px rgba(0,0,0,.35)}
 }
 .co-wrap{max-width:900px;margin:0 auto;padding:0 20px 48px}

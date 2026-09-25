@@ -82,10 +82,16 @@
   .hero-fascia::before{opacity:1;background:radial-gradient(ellipse 34% 58% at 50% 52%,rgba(10,18,34,.62) 0%,rgba(10,18,34,.4) 55%,rgba(10,18,34,0) 100%),var(--fascia) center/cover no-repeat}
   .hero-fascia .ev-crumb{justify-content:center}
   .hero-fascia .page-hero-inner{text-align:center}
-  /* Sulle /eventi-provincia-* il testo e' meno: senza un minimo la fascia
-     veniva 381px contro i 535 dell'agenda, e il disegno usciva tagliato. */
-  @media(min-width:901px){.ev-hero.hero-fascia{box-sizing:border-box;min-height:535px;display:flex;flex-direction:column;justify-content:center}
-    .ev-hero.hero-fascia .page-hero-inner{width:100%}}
+  /* Su computer TUTTE le fasce illustrate sono alte uguali (25/09/2026,
+     Patrick): agenda, /eventi-provincia-*, corsi, luoghi, Halloween. Erano
+     535, 535, 591, 423 e 410px, perche' l'altezza la dava il testo di ogni
+     pagina. Ora la da' questa riga sola - .ev-hero--img compreso, che e' la
+     fascia di luoghi e delle stagionali - e il testo sta al centro. I margini
+     (124 sopra, nav 69 compresa, e 40 sotto) sono il minimo: servono a far
+     stare il testo piu' lungo, quello di corsi (355px), dentro i 535. Sotto i
+     900px no: li' il disegno sta SOTTO il testo, e l'altezza e' testo+disegno. */
+  @media(min-width:901px){.hero-fascia,.ev-hero--img{box-sizing:border-box;min-height:535px;padding-top:124px;padding-bottom:40px;display:flex;flex-direction:column;justify-content:center}
+    .hero-fascia .page-hero-inner,.ev-hero--img .page-hero-inner{width:100%}}
   @media(max-width:900px){
     .page-hero.hero-fascia{padding-bottom:calc(56.4vw - 8px)}
     .hero-fascia::before{background:linear-gradient(180deg,#0f1d33 0%,#0f1d33 calc(100% - 56vw),rgba(15,29,51,.8) calc(100% - 50vw),rgba(15,29,51,.45) calc(100% - 44vw),rgba(15,29,51,.18) calc(100% - 38vw),rgba(15,29,51,0) calc(100% - 32vw)),var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0f1d33}
