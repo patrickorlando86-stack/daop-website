@@ -852,6 +852,23 @@
   "nome": "Altavilla Monferrato",
   "prov": "AL"
  },
+ "alzanoscrivia": {
+  "eventi": {
+   "festa-patronale-di-alzano-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone SOAMS",
+    "manifest": "Festa Patronale di Alzano Scrivia",
+    "nome": "Festa Patronale di Alzano Scrivia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-25"
+   }
+  },
+  "nome": "Alzano Scrivia",
+  "prov": "AL"
+ },
  "aramengo": {
   "eventi": {
    "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo": {
@@ -2041,6 +2058,23 @@
    }
   },
   "nome": "Carrega Ligure",
+  "prov": "AL"
+ },
+ "carrosio": {
+  "eventi": {
+   "vediamoci-al-parco-centro-per-le-famiglie-villa-zu-carrosio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco giochi davanti alle scuole",
+    "manifest": "",
+    "nome": "Vediamoci al Parco - Centro per le Famiglie Villa Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   }
+  },
+  "nome": "Carrosio",
   "prov": "AL"
  },
  "carru": {
@@ -5911,6 +5945,23 @@
   "nome": "Magliano Alfieri",
   "prov": "CN"
  },
+ "mango": {
+  "eventi": {
+   "mango-incontra-il-medioevo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Mango incontra il Medioevo",
+    "nome": "Mango incontra il Medioevo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   }
+  },
+  "nome": "Mango",
+  "prov": "CN"
+ },
  "manta": {
   "eventi": {
    "castelli-aperti-a-ferragosto-castello-della-manta": {
@@ -7039,6 +7090,17 @@
     "pagina": true,
     "ultima": "2026-10-10"
    },
+   "festa-della-comunita-pd-novi-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Fieristico Dolci Terre di Novi",
+    "manifest": "",
+    "nome": "Festa della ComUnità - PD Novi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
    "festa-della-pizza-margherita-novi-ligure": {
     "anni": [
      2026
@@ -7364,6 +7426,17 @@
     "organizza": "Comune di Ottiglio",
     "pagina": true,
     "ultima": "2026-10-04"
+   },
+   "terra-in-festa-ottiglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pro Loco Ottiglio",
+    "manifest": "Terra in Festa",
+    "nome": "Terra in Festa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
    }
   },
   "nome": "Ottiglio",
@@ -9029,6 +9102,23 @@
    }
   },
   "nome": "Rosignano Monferrato",
+  "prov": "AL"
+ },
+ "salamonferrato": {
+  "eventi": {
+   "terra-in-festa-sala-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corte di Casa Pirulla (Ex Albergo Italia)",
+    "manifest": "Terra in Festa",
+    "nome": "Terra in Festa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-09-27"
+   }
+  },
+  "nome": "Sala Monferrato",
   "prov": "AL"
  },
  "sale": {
