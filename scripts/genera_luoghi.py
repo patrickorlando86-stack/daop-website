@@ -845,7 +845,9 @@ def leggi_agenda():
             if e.get('d_end', '') >= oggi.isoformat():
                 d['prossimi'].append({
                     'nome': e.get('nome', ''), 'd': e.get('d_start', ''),
-                    'href': f"/eventi.html#{e['anchor']}" if e.get('anchor') else "/eventi.html",
+                    # Alla scheda dell'evento, non all'agenda (25/09/2026:
+                    # ogni evento ha la sua scheda, vedi G.ha_pagina).
+                    'href': G._href_evento(e),
                 })
             if (e.get('d_end') or '') > d['ultimo']:
                 d['ultimo'] = e.get('d_end') or ''

@@ -122,6 +122,30 @@ module.exports = async function () {
       (fantasmi.length ? ` — ${fantasmi.join(', ')}` : ''),
   );
 
+  // Un evento si apre sulla sua scheda, non sull'agenda (25/09/2026). Dal
+  // giorno in cui ogni evento ha una scheda, un link /eventi.html#ev-... da
+  // un'altra pagina e' un passaggio in piu' (Patrick: «e' un click in piu'
+  // che e' inutile») e un atterraggio in mezzo a trecento righe. Solo
+  // eventi.html usa le sue ancore, dentro se stessa. E il verso che conta
+  // davvero: ogni scheda linkata esiste su disco.
+  const allAgenda = [];
+  const schedeMancanti = new Set();
+  for (const r of tutte) {
+    const html = fs.readFileSync(path.join(RADICE, r), 'utf8');
+    if (r !== 'eventi.html' && /href="(?:\/|\.\.\/)?eventi\.html#ev-/.test(html)) allAgenda.push(r);
+    for (const m of html.matchAll(/href="\/eventi\/([a-z0-9-]+)\.html/g)) {
+      if (!fs.existsSync(path.join(RADICE, 'eventi', `${m[1]}.html`))) schedeMancanti.add(m[1]);
+    }
+  }
+  st.ok(allAgenda.length === 0,
+    allAgenda.length
+      ? `${allAgenda.length} pagine mandano un evento all'agenda invece che alla scheda — ${allAgenda.slice(0, 5).join(', ')}`
+      : 'nessuna pagina manda un evento all\'agenda: si apre la sua scheda');
+  st.ok(schedeMancanti.size === 0,
+    schedeMancanti.size
+      ? `${schedeMancanti.size} schede linkate che non esistono — ${[...schedeMancanti].slice(0, 5).join(', ')}`
+      : 'ogni scheda linkata esiste');
+
   // Non e' un'asserzione, e' il numero che rende leggibile il verde: se un
   // domani scende di colpo, e' li' che si guarda.
   const idx = tutte.filter((r) => (meta.get(r) || '').includes('index') &&

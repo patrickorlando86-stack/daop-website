@@ -172,6 +172,33 @@ niente dell'altra. È la stessa classe di guasto del crumb dei corsi a 1,07:1 e
 della barra delle azioni alta 915px: HTML giusto, CSS che a leggerlo sembra a
 posto, e nessuna prova che se ne accorge.
 
+### Ogni evento ha la sua scheda; Google vede solo quelle che la meritano — 25/09/2026
+
+Fino a quel giorno `ha_pagina()` dava la scheda solo alle sagre, ai nomi
+propri con abbastanza testo e agli eventi per bambini. Gli altri (23 su 184,
+quasi tutti laboratori e incontri con due righe) dalle pagine comune,
+provinciali, stagionali, dalla home e da `luoghi.html` mandavano a
+`/eventi.html#ev-…`. Patrick: «il passaggio che da una pagina poi arriva alla
+pagina eventi non mi piace… è un click in più che è inutile».
+
+Ora le cose sono due, e vanno tenute distinte:
+
+- **`ha_pagina()`: la scheda c'è sempre** (basta un nome). Ogni clic su un
+  evento, da qualunque pagina, apre la sua scheda.
+- **`merita_indice()`: se la scheda va in Google.** È il criterio di prima,
+  identico. Una scheda sottile è `noindex, follow`, fuori sitemap, fuori dalle
+  `ItemList` e non è l'`url` dell'`Event` in `eventi.html`: utile a chi ci
+  arriva da un link (indirizzo, mappa, calendario, contatti), ma indicizzata
+  sarebbe proprio lo *scaled content* da cui quel filtro difendeva il dominio.
+  Si ricalcola a ogni run sul record, quindi una descrizione allungata nel
+  foglio fa entrare la scheda da sola.
+
+Il primo giro: **17 schede nuove**, tutte sottili. `tests/sitemap.js` difende
+la regola senza contare niente: nessuna pagina tranne `eventi.html` linka
+`eventi.html#ev-`, e ogni `/eventi/<slug>.html` linkato esiste su disco
+(verificata rossa con la home di prima e con una scheda tolta). L'invariante
+robots/sitemap copre il resto.
+
 ### Il credito alla pagina di provenienza: un'attribuzione, con un verbo
 
 Rifatto il 05/09/2026 partendo da una domanda sull'usabilità dei contatti

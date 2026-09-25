@@ -1376,7 +1376,10 @@ def render_home(events):
         cover = (f'        <div class="he-cover"><img src="{cover_url}" '
                  f'alt="Locandina: {esc(trunc(e["nome"], 70))}" loading="lazy" decoding="async"></div>\n'
                  if cover_url else '')
-        href = f"eventi.html#{e.get('anchor', '')}"
+        # Alla scheda, non all'ancora dell'agenda (25/09/2026): dalla home si
+        # arrivava in /eventi.html in mezzo all'elenco, un passaggio in piu'
+        # prima di leggere l'evento. Ora ogni evento ha la sua scheda.
+        href = _href_evento(e)
         cards.append(f'''      <a class="he-card" href="{href}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
 {cover}        <div class="he-body">
           <div class="he-top">
@@ -1577,7 +1580,7 @@ def render_jsonld(events):
     controllarlo usa il Rich Results Test, che formatta da se'. inject() lo
     scrive in fondo al body, non nel <head>: e' il blocco piu' pesante della
     pagina e non ha niente da dire al browser prima del contenuto."""
-    graph = [event_jsonld(e, pagina_url(e) if ha_pagina(e) else None) for e in events]
+    graph = [event_jsonld(e, pagina_url(e) if merita_indice(e) else None) for e in events]
     payload = json.dumps({"@context": "https://schema.org", "@graph": graph},
                          ensure_ascii=False, separators=(',', ':'))
     return ('<script type="application/ld+json" id="eventi-jsonld">'
@@ -1710,7 +1713,26 @@ def nome_cercabile(nome):
 
 
 def ha_pagina(e):
-    """True se l'evento merita una pagina dedicata."""
+    """True se l'evento ha una scheda sua: dal 25/09/2026, TUTTI.
+
+    Fino a quel giorno la scheda era solo per chi la «meritava» (sagre, nomi
+    propri con abbastanza testo, eventi per bambini): gli altri - 23 su 184,
+    quasi tutti laboratori e incontri con due righe di descrizione - dalle
+    pagine comune, provinciali e stagionali rimandavano a /eventi.html#ev-...
+    Patrick: «il passaggio che da una pagina poi arriva alla pagina eventi non
+    mi piace... e' un click in piu' che e' inutile». Quindi la scheda c'e'
+    sempre, e il vecchio criterio decide un'altra cosa: se quella scheda va
+    in Google (merita_indice). Una scheda sottile e' utile a chi ci arriva da
+    un link - indirizzo, mappa, calendario, contatti - ma indicizzata sarebbe
+    proprio lo scaled content da cui questo filtro esisteva per difendere il
+    dominio: quindi noindex, fuori sitemap, fuori dalle ItemList."""
+    return bool((e.get('nome') or '').strip())
+
+
+def merita_indice(e):
+    """True se la scheda dell'evento va in Google (era ha_pagina fino al
+    25/09/2026: vedi sopra). Lavora sulla riga del foglio come sul record del
+    registro, che ne porta gli stessi campi."""
     if (e.get('categoria') or '') == 'Sagra & Festa':
         return True
     nome = e.get('nome') or ''
@@ -4985,7 +5007,10 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     # RESTA ONLINE, come sempre: il cartello serve a chi arriva da un link gia'
     # girato, ed e' proprio quella la persona da avvisare. E' la regola di
     # MIN_LANDING, applicata a una scheda.
-    robots = 'noindex, follow' if orfano or ritirata else 'index, follow'
+    # sottile: la scheda c'e' per chi ci arriva da un link, ma non va in Google
+    # (vedi ha_pagina / merita_indice, 25/09/2026).
+    robots = ('noindex, follow' if orfano or ritirata or not merita_indice(rec)
+              else 'index, follow')
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -5342,7 +5367,8 @@ def scrivi_pagine(events, hub=None):
     # cancella piu'. Stamparle per nome e' l'unico modo perche' qualcuno se ne
     # accorga finche' sono poche.
     nominali = [r for r in reg.values()
-                if (r.get('categoria') or '') != 'Sagra & Festa'
+                if merita_indice(r)
+                and (r.get('categoria') or '') != 'Sagra & Festa'
                 and not any(w in (r.get('nome') or '').lower() for w in SAGRA_KW)]
     if nominali:
         print(f"[genera_eventi] di cui {len(nominali)} aperte dal nome proprio "
@@ -5383,7 +5409,11 @@ def scrivi_pagine(events, hub=None):
               f"{', '.join(sorted(orfane))}")
     # Fuori dalla sitemap le orfane di oggi E tutte le timbrate: una ritirata non
     # rientra in sitemap il giorno dopo la sua data, quando smette di essere orfana.
-    fuori = set(orfane) | set(timbrate) | set(trasferite)
+    # E le sottili: hanno la scheda ma non la chiedono a Google (ha_pagina).
+    sottili = {s_ for s_, r in reg.items() if not merita_indice(r)}
+    if sottili:
+        print(f"[genera_eventi] schede sottili (noindex, fuori sitemap): {len(sottili)}")
+    fuori = set(orfane) | set(timbrate) | set(trasferite) | sottili
     return {s: r['updated'] for s, r in sorted(reg.items()) if s not in fuori}
 
 
@@ -6363,7 +6393,9 @@ def _voci_lista(eventi, limite=30):
     Il filtro si stringe da solo man mano che ha_pagina() si allarga: la strada
     per una lista lunga e' dare una pagina agli eventi, non dichiararli qui.
     """
-    con_pagina = [e for e in eventi if ha_pagina(e)]
+    # Solo le schede in indice (merita_indice): una voce che punta a una
+    # pagina noindex e' una voce che Google non puo' usare.
+    con_pagina = [e for e in eventi if merita_indice(e)]
     return [{"@type": "ListItem", "position": i + 1,
              "url": f"{SITE_URL}{_href_evento(e)}",
              "name": (e.get('nome') or '').strip()}
