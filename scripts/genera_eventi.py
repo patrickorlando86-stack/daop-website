@@ -4921,6 +4921,12 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     consigliato_badge = (f'<p class="ev-scelto">{CONSIGLIATO_SVG} Consigliato da DAOP</p>'
                          if si(e.get('consigliato')) and not ritirata else '')
     firma = firma_daop(rec, oggi, ritirata=ritirata)
+    # Gli eventi vicini vengono SUBITO DOPO i bottoni, e la firma scende sotto
+    # (25/09/2026). Prima fra i bottoni e questo elenco c'era il riquadro
+    # "Scheda verificata da DAOP": ~320px che a chi finisce di leggere dicono
+    # "la pagina e' finita", ed e' il punto esatto in cui NN/g misura che la
+    # gente smette di scorrere. La firma resta sotto la piega e dopo il corpo,
+    # che e' tutto quello che tests/social.js le chiede.
     altri = (blocco_vicini(rec, vicini, oggi, hub=hub, salta=gia_mostrati)
              if vicini else '')
 
@@ -4996,8 +5002,8 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
   {famiglie}
   {consiglio}
   {azioni}
-  {firma}
   {altri}
+  {firma}
 </article>
 {ginetto_coda}</main>
 {foot}

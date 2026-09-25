@@ -1032,6 +1032,24 @@ ci sono gli eventi vicini stanno sotto l'avviso e prima dei fatti, Ginetto è in
 fondo, nessun evento si ripete in fondo, nessun link porta a una scheda che non
 c'è, e sulle vive il blocco non compare. Verificate rosse rimettendo i difetti.
 
+#### E sulle schede vive gli eventi vicini salgono sopra la firma — 25/09/2026
+
+Il punto 2 dello stesso giro, fatto lo stesso giorno su richiesta di Patrick
+(quindi le due misure partono insieme: `ora` sta solo sulle concluse, e
+`vicini` va letto con `page_path` per separare vive e concluse). Fra i bottoni
+«Come arrivare / Calendario» e «Altri eventi vicino» c'era il riquadro «Scheda
+verificata da DAOP», ~320px che a chi ha finito di leggere dicono «la pagina è
+finita». NN/g: le proposte di altre pagine funzionano se stanno subito dopo il
+contenuto, senza niente in mezzo. Ora l'ordine è bottoni → eventi vicini →
+firma, su tutte le schede. Misurato a 412px: il titolo degli eventi vicini
+passa dal **40% al 32%** della pagina, la firma dal 39% al 62-64%.
+
+**Il credito non si muove di significato**: resta sotto la piega e dopo il
+corpo, che è quello che `tests/social.js` gli chiede — e non sale in cima, che
+è la cosa che quella prova difende. `tests/luoghi.js` controlla che su ogni
+scheda la lista venga prima della firma (verificata rossa: 664 su 664 sulle
+pagine di prima).
+
 ### La barra delle azioni sulle schede: un servizio si mette davanti
 
 Fatta il 28/08/2026. Sul telefono, in fondo a ogni **scheda viva**, una barra
