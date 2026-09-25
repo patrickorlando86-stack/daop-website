@@ -325,6 +325,35 @@ non si è espresso chiaramente su quei ping. In cambio si avrebbero dati
 *modellati*, e solo dopo aver passato le soglie. Il divario con Search Console
 resta quello di «Il buco è chiuso» qui sotto: si stringe, non si chiude.
 
+##### Dall'annuncio Meta: 120 clic, 103 arrivi, 18 sessioni
+
+La domanda che ha fatto nascere la sezione (Giovanni e la sua regia, 25/09/2026,
+sulla campagna dei corsi): Meta conta 120 clic sul link e 103 visualizzazioni
+della pagina di destinazione, GA4 18 sessioni «Paid Social». Sembra che 100
+persone rifiutino i cookie. Non è così, e i passaggi sono due.
+
+- **120 → 103**: chi tocca l'annuncio ed esce prima che la pagina carichi.
+  Normale. **Da chiarire con la regia come Meta conti le 103**: sul sito non c'è
+  un pixel Meta, e le visualizzazioni della pagina di destinazione di solito lo
+  richiedono.
+- **103 → 18 (~17%) è il banner**, per tre ragioni che si sommano: in modalità
+  base senza «Accetta» non parte niente; **il banner non blocca la pagina**,
+  quindi chi lo ignora e scorre vale come un rifiuto (non sono 100 rifiuti, sono
+  soprattutto banner non toccati); e **nel browser interno di Instagram e
+  Facebook il banner ricompare a ogni visita**, perché quel browser non ha il
+  localStorage di quello normale. Il 17% sta sotto il ~38% del sito intero, ed è
+  plausibile per quel pubblico.
+- **Il canale può perderne qualcuno per conto suo.** GA4 mette una sessione in
+  «Paid Social» solo se `utm_medium` è di un certo tipo (`paid…`, `cpc`, `ppc`
+  e simili): con un altro valore finisce in un altro canale. Per contarle si
+  filtra per **sorgente di sessione** (`facebook`, `instagram`, `ig`), non per
+  canale.
+
+La regola di lettura: **quante persone arrivano da una campagna lo dice Meta,
+cosa fanno dopo lo dice GA4.** Le sessioni GA4 non sono il denominatore di una
+campagna. E vale la regola dei giorni consolidati: la lettura si rifà il
+28/09 sul 22-24/09, non sul giorno in corso.
+
 #### Il buco è chiuso, e si misura con Search Console non con GA4
 
 Il fix è andato in produzione il 12/08/2026 alle 14:53. GA4 ha reagito subito, e
