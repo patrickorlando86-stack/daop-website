@@ -4889,14 +4889,38 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
         "description": (f"Associazione delle famiglie di {PROVINCE_TESTO}. Seleziona e "
                         "verifica gli eventi per famiglie del territorio."),
     }
+    # Le briciole passano dal COMUNE (25/09/2026): "Home › Eventi › Racconigi ›
+    # titolo". E' un link in cima a ogni scheda verso la pagina del suo comune,
+    # cioe' il primo passo naturale per chi e' arrivato da Google su una festa e
+    # vuole vedere cos'altro c'e' li'; e dice a Google com'e' fatto il sito
+    # (evento dentro comune dentro agenda). Se il comune non ha una pagina sua
+    # (sotto MIN_EVENTI_HUB) il gradino e' la provincia; fuori dalle province
+    # pubblicate restano i tre gradini di prima.
+    prov_sigla = (e.get('prov') or '').upper()
+    mio_hub = (hub or {}).get(_key(citta)) if citta else None
+    if mio_hub:
+        tappa = (f"/eventi/comune/{mio_hub['slug']}.html", mio_hub['nome'])
+    elif prov_sigla in PROVINCE_PUBBLICATE:
+        tappa = (href_eventi_prov(prov_sigla), f"Provincia di {PROVINCE_NOMI[prov_sigla]}")
+    else:
+        tappa = None
+    gradini = [("Home", SITE_URL), ("Eventi", PAGE_URL)]
+    if tappa:
+        gradini.append((tappa[1], SITE_URL + tappa[0]))
+    gradini.append((nome, url))
     breadcrumb = {
         "@type": "BreadcrumbList",
         "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL},
-            {"@type": "ListItem", "position": 2, "name": "Eventi", "item": PAGE_URL},
-            {"@type": "ListItem", "position": 3, "name": nome, "item": url},
+            {"@type": "ListItem", "position": k, "name": g_nome, "item": g_url}
+            for k, (g_nome, g_url) in enumerate(gradini, 1)
         ],
     }
+    # Col gradino in piu' il titolo si accorcia: sul telefono le briciole
+    # andavano su tre righe sopra un H1 che dice gia' la stessa cosa per intero.
+    briciole = '<a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › '
+    if tappa:
+        briciole += f'<a href="{tappa[0]}">{esc(tappa[1])}</a> › '
+    briciole += f'<span>{esc(trunc(nome, 40 if tappa else 60))}</span>'
     # Su una scheda ritirata l'Event non entra nel grafo: dichiararlo - anche
     # come "annullato" - vorrebbe dire garantire a un assistente che
     # l'appuntamento e' esistito con quei dati, e nel caso della riga sbagliata
@@ -4984,7 +5008,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
 <header class="page-hero ev-hero">
   <div class="page-hero-inner">
     <div class="ev-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <a href="/eventi.html">Eventi</a> › <span>{esc(trunc(nome, 60))}</span>
+      {briciole}
     </div>
     {consigliato_badge}<h1>{esc(nome)}</h1>
     <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>{gancio_html}
