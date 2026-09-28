@@ -8735,6 +8735,17 @@
  },
  "racconigi": {
   "eventi": {
+   "4-stagioni-da-toccare-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "4 Stagioni da Toccare - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "a-caccia-dell-orso-carezza-racconigi": {
     "anni": [
      2026
@@ -8845,6 +8856,28 @@
     "pagina": true,
     "ultima": "2026-09-30"
    },
+   "caccia-al-tesoro-di-halloween-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Caccia al Tesoro di Halloween - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
+   "carezza-di-stoffa-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Carezza di Stoffa - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
    "coccoliamo-ci-carezza-racconigi": {
     "anni": [
      2026
@@ -8856,27 +8889,82 @@
     "pagina": true,
     "ultima": "2026-09-29"
    },
+   "da-mamma-a-mamma-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Da Mamma a Mamma - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-28"
+   },
    "espressione-in-gioco-fascia-2-6-anni-carezza-racconigi": {
     "anni": [
      2026
     ],
     "luogo": "CàRezza",
     "manifest": "",
-    "nome": "Espressione in Gioco! fascia 2-6 anni - CàRezza",
+    "nome": "Espressione in Gioco! (fascia 2-6 anni) - CàRezza",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-29"
+    "ultima": "2026-10-13"
+   },
+   "espressione-in-gioco-fascia-9-mesi-2-anni-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Espressione in Gioco! (fascia 9 mesi-2 anni) - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-13"
+   },
+   "naturopatia-fiori-di-bach-e-altri-rimedi-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Naturopatia, Fiori di Bach e altri rimedi - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-13"
+   },
+   "occhi-in-gioco-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Occhi in Gioco - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-22"
    },
    "pilates-in-gravidanza-carezza-racconigi": {
     "anni": [
      2026
     ],
     "luogo": "CàRezza",
-    "manifest": "",
+    "manifest": "Pilates in Gravidanza",
     "nome": "Pilates in Gravidanza - CàRezza",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-25"
+    "ultima": "2026-10-20"
+   },
+   "pilates-post-parto-allenante-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Pilates Post Parto Allenante - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-06"
    },
    "presto-prestissimo-incontro-prova-gratuito-racconigi": {
     "anni": [
@@ -8909,7 +8997,18 @@
     "nome": "Sogni d'Oro - CàRezza",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-28"
+    "ultima": "2026-10-07"
+   },
+   "trick-or-treat-laboratorio-culinario-di-halloween-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Trick or Treat? Laboratorio culinario di Halloween in lingua inglese - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-27"
    },
    "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi": {
     "anni": [
@@ -8932,6 +9031,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-30"
+   },
+   "uno-scatto-con-i-miei-nonni-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Micronido Il Giardino degli Gnomi",
+    "manifest": "",
+    "nome": "Uno Scatto con i Miei Nonni - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
    }
   },
   "nome": "Racconigi",
