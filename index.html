@@ -635,7 +635,13 @@
   }
   .gn-testo { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 24px; }
   .gn-azioni { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  /* I due badge stanno insieme: sul telefono vanno a capo in gruppo sotto il
+     bottone, invece di lasciare l'App Store da solo su una riga. Il badge di
+     Google Play a 52px ha 6px trasparenti sopra e sotto, quindi il disegno e'
+     alto 40: quello di Apple (ufficiale, senza margine) sta a 40 e combacia. */
+  .gn-store { display: inline-flex; align-items: center; gap: 10px; }
   .gn-play img { height: 52px; width: auto; display: block; }
+  .gn-apple img { height: 40px; width: auto; display: block; }
   .gn-come { margin-top: 16px; font-weight: 600; }
   .gn-come a { color: var(--navy); }
   .gn-img img { width: 100%; display: block; border-radius: var(--radius-xl);
@@ -816,9 +822,14 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Apri Ginetto
           </a>
-          <a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener" aria-label="Scarica Ginetto su Google Play" class="gn-play">
-            <img src="/assets/images/google-play-badge-it.png" alt="Disponibile su Google Play" width="134" height="52" loading="lazy" decoding="async">
-          </a>
+          <span class="gn-store">
+            <a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener" aria-label="Scarica Ginetto su Google Play" class="gn-play">
+              <img src="/assets/images/google-play-badge-it.png" alt="Disponibile su Google Play" width="134" height="52" loading="lazy" decoding="async">
+            </a>
+            <a href="https://apps.apple.com/it/app/id6814767339" target="_blank" rel="noopener" aria-label="Scarica Ginetto dall'App Store" class="gn-apple">
+              <img src="/assets/images/app-store-badge-it.svg" alt="Scarica su App Store" width="120" height="40" loading="lazy" decoding="async">
+            </a>
+          </span>
         </div>
         <p class="gn-come"><a href="ginetto.html">Come funziona Ginetto →</a></p>
       </div>
