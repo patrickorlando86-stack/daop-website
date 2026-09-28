@@ -799,7 +799,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 223,
+  "riga": 218,
   "slug": "alla-scoperta-del-mondo-dei-rapaci-e-della-falcone-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -1513,16 +1513,16 @@
   "updated": "2026-09-25"
  },
  "apertura-stand-gastronomico-pro-loco-di-montiglio-montiglio-monferrato": {
-  "anchor": "ev-2026-10-04-apertura-stand-gastronomico-pro-loco-di-montiglio",
+  "anchor": "ev-2026-10-11-apertura-stand-gastronomico-pro-loco-di-montiglio",
   "categoria": "Sagra & Festa",
   "citta": "Montiglio Monferrato",
   "consigliato": "No",
   "contatto": "391.7277165 / 0141.994008",
-  "d_end": "2026-10-04",
-  "d_start": "2026-10-04",
+  "d_end": "2026-10-11",
+  "d_start": "2026-10-11",
   "descr": "Apertura dello stand gastronomico della Pro Loco di Montiglio con piatti tipici al tartufo. Situato nell'area manifestazioni in Via alla Stazione.",
-  "df": "04/10/2026",
-  "di": "04/10/2026",
+  "df": "11/10/2026",
+  "di": "11/10/2026",
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-09-28",
   "indirizzo": "Area manifestazioni Via alla Stazione - Montiglio Monferrato (AT)",
@@ -1536,7 +1536,7 @@
   "ora": "12:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 206,
+  "riga": 213,
   "slug": "apertura-stand-gastronomico-pro-loco-di-montiglio-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -1618,7 +1618,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 200,
+  "riga": 199,
   "slug": "arriva-la-banda-municipale-di-villafranca-d-asti-c-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -1646,7 +1646,7 @@
   "ora": "11:15",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 216,
+  "riga": 211,
   "slug": "arrivo-del-treno-storico-centoporte-da-torino-comu-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -1676,6 +1676,7 @@
   "prov": "AT",
   "riga": 204,
   "slug": "arrivo-della-littorina-da-torino-comune-e-pro-loco-montiglio-monferrato",
+  "spostata": "pranzo-pro-loco-di-montiglio-salone-polifunzionale-montiglio-monferrato",
   "updated": "2026-09-28"
  },
  "arte-terapia-e-nutrizione-il-sapore-delle-emozioni-confreria": {
@@ -5155,7 +5156,7 @@
   "ora": "10:15",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 201,
+  "riga": 200,
   "slug": "esposizione-dei-tartufi-e-premiazione-premio-cane-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -10850,7 +10851,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 221,
+  "riga": 216,
   "slug": "la-biblioteca-animata-aps-the-other-moon-company-m-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -11320,7 +11321,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 224,
+  "riga": 219,
   "slug": "la-quasi-band-pop-e-cantautori-italiani-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -11965,16 +11966,16 @@
   "updated": "2026-09-28"
  },
  "lancio-dei-paracadutisti-comune-e-pro-loco-montigl-montiglio-monferrato": {
-  "anchor": "ev-2026-10-04-lancio-dei-paracadutisti-comune-e-pro-loco-montigl",
+  "anchor": "ev-2026-10-11-lancio-dei-paracadutisti-comune-e-pro-loco-montigl",
   "categoria": "Spettacolo",
   "citta": "Montiglio Monferrato",
   "consigliato": "No",
   "contatto": "391.7277165 / 0141.994008",
-  "d_end": "2026-10-04",
-  "d_start": "2026-10-04",
-  "descr": "Lancio spettacolare dei paracadutisti con il bandierone di Montiglio in piazza Regina Margherita, uno degli appuntamenti più attesi della Fiera del Tartufo.",
-  "df": "04/10/2026",
-  "di": "04/10/2026",
+  "d_end": "2026-10-11",
+  "d_start": "2026-10-11",
+  "descr": "Lancio spettacolare dei paracadutisti con il bandierone di Montiglio in piazza Regina Margherita. Riproposto anche nella seconda domenica della fiera.",
+  "df": "11/10/2026",
+  "di": "11/10/2026",
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-09-28",
   "indirizzo": "Piazza Regina Margherita - Montiglio Monferrato (AT)",
@@ -11988,7 +11989,7 @@
   "ora": "11:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 205,
+  "riga": 212,
   "slug": "lancio-dei-paracadutisti-comune-e-pro-loco-montigl-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -12269,7 +12270,7 @@
   "ora": "14:45",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 222,
+  "riga": 217,
   "slug": "loris-gallo-e-la-sua-bubble-bike-magie-e-bolle-di-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -13781,7 +13782,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 203,
+  "riga": 202,
   "slug": "palatartufi-cooking-truffle-show-istituto-alberghi-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -14006,6 +14007,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 225,
+  "ritirata": "2026-09-28",
   "slug": "partenza-del-treno-storico-centoporte-verso-torino-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -14033,7 +14035,7 @@
   "ora": "16:45",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 211,
+  "riga": 207,
   "slug": "partenza-della-littorina-verso-torino-comune-e-pro-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -14394,7 +14396,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 210,
+  "riga": 206,
   "slug": "piccola-orchestra-sand-creek-se-omaggio-a-faber-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -14922,7 +14924,7 @@
   "ora": "12:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 208,
+  "riga": 204,
   "slug": "pranzo-pro-loco-di-montiglio-salone-polifunzionale-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -15009,7 +15011,7 @@
   "ora": "12:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 207,
+  "riga": 203,
   "slug": "premiazione-dei-piatti-e-degli-esemplari-concorso-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -15457,16 +15459,16 @@
   "updated": "2026-09-28"
  },
  "raduno-dei-tartufai-ed-apertura-della-fiera-comune-montiglio-monferrato": {
-  "anchor": "ev-2026-10-04-raduno-dei-tartufai-ed-apertura-della-fiera-comune",
+  "anchor": "ev-2026-10-11-raduno-dei-tartufai-ed-apertura-della-fiera-comune",
   "categoria": "Sagra & Festa",
   "citta": "Montiglio Monferrato",
   "consigliato": "No",
   "contatto": "391.7277165 / 0141.994008",
-  "d_end": "2026-10-04",
-  "d_start": "2026-10-04",
-  "descr": "Apertura ufficiale della Fiera Nazionale del Tartufo con il raduno dei tartufai e dei loro cani. Esposizione di prodotti tipici e non solo. Primo appuntamento della giornata del 4 ottobre.",
-  "df": "04/10/2026",
-  "di": "04/10/2026",
+  "d_end": "2026-10-11",
+  "d_start": "2026-10-11",
+  "descr": "Apertura ufficiale della seconda domenica della Fiera Nazionale del Tartufo con il raduno dei tartufai e dei loro cani. Esposizione di prodotti tipici.",
+  "df": "11/10/2026",
+  "di": "11/10/2026",
   "eta": "Tutte le età (famiglie)",
   "first_seen": "2026-09-28",
   "indirizzo": "Area manifestazioni Via alla Stazione - Montiglio Monferrato (AT)",
@@ -15480,7 +15482,7 @@
   "ora": "9:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 199,
+  "riga": 208,
   "slug": "raduno-dei-tartufai-ed-apertura-della-fiera-comune-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -15508,7 +15510,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 202,
+  "riga": 201,
   "slug": "raduno-del-circolo-astigiano-veicoli-storici-c-a-m-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -18172,7 +18174,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 209,
+  "riga": 205,
   "slug": "spettacolo-mago-bingo-mary-poppins-mi-fa-un-baffo-montiglio-monferrato",
   "updated": "2026-09-28"
  },
@@ -18696,7 +18698,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 213,
+  "riga": 209,
   "slug": "suona-la-banda-musicale-la-bersagliera-di-tonco-co-montiglio-monferrato",
   "updated": "2026-09-28"
  },
