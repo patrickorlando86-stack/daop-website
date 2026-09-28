@@ -6933,6 +6933,115 @@ rimasto, quindi è anche l'unico segnale che direbbe che si sta pagando, perché
 di cui sopra si misura lì e non nel rendiconto AdSense.
 
 
+#### Cosa vendere dopo i corsi: l'ordine, e perché — 28/09/2026
+
+Nato da una domanda di Patrick («e i professionisti, tipo la psicologa dei
+bambini?») e allargato a «quali altri campi non copro?». **Niente di questo è
+fatto**: è l'ordine dei lavori deciso quel giorno, e la regola che vale per
+tutti è una sola — **prima tre telefonate, poi il codice**. Se su tre persone
+che dovrebbero pagare due dicono sì, si costruisce; se no si è risparmiata una
+sezione. È la regola già scritta per l'email nelle guide («il gate solo se il
+primo giro mostra domanda»).
+
+**In parole semplici, dove si punta, in quest'ordine:**
+
+1. **Feste di compleanno.** Il buco più grande del catalogo: «Animazione &
+   Feste» ha **2 righe su 999** (Pazzanimazione a Novi, ARCEAM a Pasturana).
+   Ogni famiglia fa una-due feste l'anno, con una data e un budget; animatori,
+   sale feste, ludoteche e gonfiabili sono abituati a pagare per farsi
+   trovare (oggi su Instagram e Pagine Gialle); la ricerca porta il nome del
+   paese, cioè il nostro terreno; e niente vincoli di legge. In Ginetto è la
+   domanda perfetta. **È la prima.**
+2. **Nidi e scuole dell'infanzia.** Il catalogo c'è già — **122 nidi** nei
+   luoghi, gratis — e manca solo la data per telefonare. Le iscrizioni
+   all'infanzia sono di solito a gennaio (da verificare sul calendario 2027),
+   i nidi comunali in primavera: una «Guida nidi e scuole dell'infanzia 2027»
+   online a metà dicembre, con gli open day in agenda, è la telefonata con una
+   scadenza già descritta per le guide stagionali. Pagano nidi privati e
+   paritarie; si vende la scheda completa, non la posizione.
+3. **Comuni, Pro Loco, enti del turismo.** Il prodotto esiste già:
+   `eventi/box-al|at|cn.html`, l'agenda da incorporare nel loro sito. Si vende
+   un servizio (l'agenda del tuo territorio, aggiornata ogni notte, più i
+   numeri di `event_city`), non visibilità. I numeri sono clic e sottostimati
+   (~38%), e va detto a loro.
+4. **Bandi e fondazioni.** Non è un business, ma sono probabilmente i soldi
+   più grossi: DAOP è un'associazione e le fondazioni bancarie del territorio
+   (CRC, CR Alessandria, CR Asti) finanziano progetti per famiglie e infanzia.
+   Un contributo vale più di dieci spazi venduti e non tocca la fiducia di chi
+   legge. Da verificare quali bandi e con quali requisiti.
+5. **Professionisti per bambini** (psicologa, logopedista, ostetrica,
+   psicomotricità). Ha senso, ma dopo gli altri: è quello con più vincoli.
+
+**Cosa non si fa:** babysitter e tate (si vendono persone da far entrare in
+casa coi bambini: verifica e responsabilità non sono cose che reggiamo), e
+affiliazioni o e-commerce di prodotti per l'infanzia (stesso ragionamento di
+AdSense: si vende la fiducia per pochi euro).
+
+**Un campo scoperto che non è da vendere:** le gite fuori zona. Degli hotel
+per famiglie in catalogo uno solo è in provincia; gli altri (Liguria,
+Valsesia) li scarta `solo_province_nostre()`. Il blocco «una gita fuori»
+dichiarato come tale non esiste ancora: è contenuto, non ricavo.
+
+##### I professionisti: il modello è quello dei corsi, e la legge lo preferisce
+
+**È una lacuna del sito, non del mercato.** Le quattro porte rispondono tutte
+a «cosa facciamo?», nessuna a «mi serve aiuto per mio figlio». Ma la ricerca
+«logopedista bambini Cuneo» la vincono MioDottore, GuidaPsicologi, Pagine
+Gialle e i siti dei centri, e lì non vinciamo noi. Quello che non si è trovato
+in rete è una cosa **locale e per famiglie** che metta insieme ostetrica,
+logopedia, psicomotricità e sostegno ai genitori: i portali sono per singola
+professione e nazionali.
+
+**Chi pagherebbe c'è già, e gratis**: nel registro 11 schede evento di questo
+tipo (Beatrice Botto ostetrica, Officina Femminile, CàRezza, la Croce Rossa di
+Novi con le manovre salvavita pediatriche). Quello che **non** è misurato è
+la domanda di chi legge: arriva in modalità tempo libero, non «ho un
+problema». Un elenco da solo renderebbe poco; il ponte vero è **l'incontro per
+genitori in agenda**, che già funziona. La prima prova è offrire la scheda
+completa a chi c'è già.
+
+**Non nei corsi e non una pagina nuova, all'inizio.** Una psicologa non ha
+una stagione né una disciplina: nei corsi romperebbe filtri e titolo (resta il
+confine che c'è già: psicomotricità di gruppo = corso, valutazione = servizio).
+Una pagina nuova nascerebbe senza link e più povera dei portali. Quindi:
+
+- **fino a ~5**: righe in `luoghi.html`, sottocategoria nel foglio (es.
+  «Servizi per Bambini & Famiglie › Supporto e crescita»), zero codice. Scheda
+  completa per tutti, **`In evidenza = no`** (fuori dal riquadro
+  Sponsorizzati), **niente cuore del Consigliato** — un giudizio family
+  friendly su una psicologa si legge come un giudizio clinico;
+- **da una dozzina**: una pagina sua costruita come `corsi.html`
+  (`genera_corsi.py` come stampo): elenco per **area** (linguaggio,
+  apprendimento/DSA, emozioni, genitorialità, sviluppo motorio) → età →
+  comune, il **centro** con la sua pagina come la società, `Stato` per il sì al
+  testo. Titolo sul bisogno, non sull'albo.
+
+**Perché il modello dei corsi e non quello dei luoghi**: la legge. Dalla L.
+145/2018 art. 1 c. 525 (ritoccato nel 2023) e dall'art. 40 del codice
+deontologico degli psicologi, la comunicazione di un sanitario è **solo
+informativa** — titoli, specializzazioni, caratteristiche del servizio,
+prezzo — senza niente di promozionale o suggestivo. Una presenza sola uguale
+per tutti è esattamente questo; una posizione comprata no. Ne segue:
+
+- **niente offerte né sconti**, quindi niente «prima seduta gratuita» (è la
+  pillola «Prova gratuita» dei corsi, e qui non c'è);
+- **recensioni generiche sì, testimonianze cliniche mai** («mi sono trovata
+  bene» sì, «ha risolto l'ansia di mio figlio» no);
+- **in Ginetto i sanitari fuori dal primo posto pagato**: a «mio figlio ha
+  attacchi d'ansia» l'AI non risponde prima con chi ha pagato. Da decidere nel
+  repo `daop-mobile`, dove sta `_tier()`;
+- **i numeri solo aggregati**: un clic su «chiama la logopedista» legato a un
+  utente dice qualcosa sulla salute di un bambino. Oltre a `organizer_id` non
+  si manda niente, e nei report non si incrocia;
+- **il prezzo è da pionieri**, l'ordine dei 100-150 €/anno dei luoghi. I
+  portali vendono posizione e contatti a ~900-950 € + IVA l'anno (GuidaPsicologi
+  Premium, che per rientrare chiede ~13 sedute): noi non abbiamo ancora un
+  numero da mostrare per questa categoria.
+
+Prima del primo contratto, la scheda-tipo si fa vedere all'Ordine degli
+psicologi del Piemonte o a un legale: qui non c'è nessun parere, solo le norme
+lette.
+
 ### Le locandine: due misure, due posti
 
 Le immagini stanno nel bucket Supabase, **piano gratuito, tetto 5 GB di traffico
