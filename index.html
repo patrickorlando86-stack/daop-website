@@ -288,11 +288,6 @@
     }
     .hero-inner { padding: 96px 20px 8px; }
   }
-  .hero-benv {
-    display: inline-block; margin-bottom: 14px;
-    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--gold);
-  }
   .hero-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.4rem, 5.5vw, 3.8rem);
@@ -301,25 +296,34 @@
     margin-bottom: 16px;
   }
   .hero-title .accent { color: var(--gold); font-style: italic; }
+  /* Su computer il titolo sta su una riga: con il logo sopra, su due righe la
+     fascia usciva dai 535px delle altre. */
+  @media (min-width: 901px) {
+    .hero-inner { max-width: 820px; padding-top: 104px; padding-bottom: 32px; }
+    .hero-title br { display: none; }
+  }
   .hero-subtitle {
     font-size: 1.08rem; line-height: 1.65;
     color: rgba(255,255,255,0.82);
     max-width: 520px; margin: 0 auto 28px;
   }
-  /* Sul telefono «Scopri DAOP» era una seconda riga da 76px che porta alla
-     sezione subito sotto, cioe' dove si arriva scorrendo: resta solo il
-     bottone che va da qualche parte. */
+  /* «Scopri DAOP» non c'e' piu': portava alla sezione subito sotto, cioe'
+     dove si arriva scorrendo. Resta solo il bottone che va da qualche parte. */
   @media (max-width: 600px) {
     .hero-subtitle { font-size: 1rem; margin-bottom: 22px; }
-    #hero .btn-secondary { display: none; }
   }
+  /* Il logo al centro, in un cerchio bianco: e' nero su bianco, e sul blu
+     notte della fascia da solo non si vedrebbe. */
+  .hero-logo {
+    display: block; width: 92px; height: 92px; margin: 0 auto 12px;
+    border-radius: 50%; background: #fff; padding: 5px; box-sizing: border-box;
+    box-shadow: 0 6px 22px rgba(0,0,0,.35);
+  }
+  @media (max-width: 600px) { .hero-logo { width: 80px; height: 80px; } }
   .hero-actions {
     display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
   }
-  /* Il secondario era blu su crema: sul fondo scuro della fascia diventa
-     bianco, se no sparisce. Fuori da #hero resta com'era. */
-  #hero .btn-secondary { color: #fff; border-color: rgba(255,255,255,.75); }
-  #hero .btn-secondary:hover { background: #fff; color: var(--navy); }
+
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 28px;
@@ -1167,15 +1171,14 @@
      indirizzi qui e nei due <link rel="preload"> in testa. -->
 <section id="hero" style="--fascia:url(/assets/images/stagioni/eventi2-1600.webp);--fascia-m:url(/assets/images/stagioni/eventi3-m.webp)">
   <div class="hero-inner">
-    <span class="hero-benv">Benvenuti su DAOP</span>
-    <h1 class="hero-title">Dove andiamo<br>oggi <span class="accent">papi?</span></h1>
+    <img class="hero-logo" src="/assets/images/logodaop.webp" width="500" height="500" alt="DAOP - Dove andiamo oggi papi">
+    <h1 class="hero-title">Dove andiamo <br>oggi <span class="accent">papi?</span></h1>
     <p class="hero-subtitle">La guida delle famiglie di Alessandria, Asti e Cuneo per uscite, alimentazione sana e avventure quotidiane con i figli. Perché ogni giorno può essere una piccola grande scoperta.</p>
     <div class="hero-actions">
       <a href="eventi.html" class="btn btn-primary">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-calendar"/></svg>
         Cosa fare questo weekend
       </a>
-      <a href="#percorsi" class="btn btn-secondary">Scopri DAOP</a>
     </div>
   </div>
 </section>
