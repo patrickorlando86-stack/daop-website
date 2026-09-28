@@ -117,6 +117,17 @@
     "pagina": false,
     "ultima": "2026-08-06"
    },
+   "librando-mercatino-del-libro-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Bagni",
+    "manifest": "",
+    "nome": "Librando - Mercatino del Libro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "menu-alla-carta-carta-menu-acqui-terme": {
     "anni": [
      2026
@@ -138,6 +149,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-23"
+   },
+   "mercatino-del-bambino-giocando-si-impara-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "",
+    "nome": "53° Mercatino del Bambino - Giocando si Impara",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    },
    "mostra-collettiva-giudice-de-angelis-acqui-terme": {
     "anni": [
@@ -161,6 +183,28 @@
     "pagina": false,
     "ultima": "2026-08-08"
    },
+   "pigiama-walk-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Bollente",
+    "manifest": "",
+    "nome": "Pigiama Walk",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "presentazione-del-libro-la-caramella-del-coraggio-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Robellini - Sala Convegni",
+    "manifest": "",
+    "nome": "Presentazione del libro «La caramella del coraggio» di Annalisa Catalano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
    "saturday-open-ferragosto-in-citta-acqui-terme": {
     "anni": [
      2026
@@ -171,6 +215,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-15"
+   },
+   "scripta-festival-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello dei Paleologi",
+    "manifest": "",
+    "nome": "Scripta Festival",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    },
    "ti-racconto-acqui-storytelling-tours-acqui-terme": {
     "anni": [
