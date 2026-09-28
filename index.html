@@ -87,8 +87,8 @@
 
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)" href="/assets/images/stagioni/benvenuto-m.webp">
-<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)" href="/assets/images/stagioni/benvenuto-1600.webp">
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)" href="/assets/images/stagioni/eventi3-m.webp">
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)" href="/assets/images/stagioni/eventi2-1600.webp">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
@@ -1160,7 +1160,12 @@
 
 <main id="contenuto">
 <!-- ── HERO ── -->
-<section id="hero" style="--fascia:url(/assets/images/stagioni/benvenuto-1600.webp);--fascia-m:url(/assets/images/stagioni/benvenuto-m.webp)">
+<!-- Il disegno e' per ora quello dell'agenda (eventi2-1600 / eventi3-m), gli
+     stessi file: chi arriva sull'agenda li ha gia' in cache. Quando arriva il
+     disegno di benvenuto (benvenuto-1600.webp 1600x640 col vuoto al centro,
+     benvenuto-m.webp 900x507 coi personaggi al centro) si cambiano i due
+     indirizzi qui e nei due <link rel="preload"> in testa. -->
+<section id="hero" style="--fascia:url(/assets/images/stagioni/eventi2-1600.webp);--fascia-m:url(/assets/images/stagioni/eventi3-m.webp)">
   <div class="hero-inner">
     <span class="hero-benv">Benvenuti su DAOP</span>
     <h1 class="hero-title">Dove andiamo<br>oggi <span class="accent">papi?</span></h1>
