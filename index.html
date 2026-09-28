@@ -87,9 +87,8 @@
 
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-<link rel="preload" as="image" type="image/webp" fetchpriority="high"
-      imagesrcset="/assets/images/headerdaop-500.webp 500w, /assets/images/headerdaop-900.webp 900w, /assets/images/headerdaop.webp 1600w"
-      imagesizes="100vw">
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(max-width: 900px)" href="/assets/images/stagioni/benvenuto-m.webp">
+<link rel="preload" as="image" type="image/webp" fetchpriority="high" media="(min-width: 901px)" href="/assets/images/stagioni/benvenuto-1600.webp">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:italic;font-weight:400;font-display:swap;src:url(/assets/fonts/dm-sans-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/dm-sans-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:italic;font-weight:600 700;font-display:swap;src:url(/assets/fonts/playfair-display-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/playfair-display-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
@@ -253,129 +252,74 @@
     line-height: 1.7;
   }
 
-  /* ── HERO ── */
+  /* ── HERO ── la fascia di benvenuto (28/09/2026, Patrick: «la fascia
+     dell'immagine troppo alta», e un tema con Ginetto e Briciola).
+     Era alta TUTTO lo schermo (min-height:100vh: 1100px su computer, 844 su
+     un telefono da 844) col disegno del papa' e dell'arcobaleno. Ora e' la
+     stessa fascia illustrata delle altre pagine (agenda, corsi, luoghi,
+     Ginetto): su computer 535px come tutte, testo al centro nel vuoto del
+     disegno con un velo scuro solo dietro alle parole; sotto i 900px il
+     disegno scende SOTTO il testo, a tutta larghezza, nella sua versione -m.
+     Le misure sono quelle di .hero-fascia in eventi.html, riscritte qui
+     perche' index.html ha uno <style> suo e non passa da _guscio(). */
   #hero {
-    padding: 0;
-    min-height: 100vh;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
+    position: relative; overflow: hidden;
+    padding: 0; background: #0f1d33; text-align: center;
   }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: var(--navy-dark);
-    /* Ripiego per i browser senza image-set(): scaricano il jpg e basta. */
-    background-image: url('assets/images/headerdaop.jpg');
+  #hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 36% 60% at 50% 54%, rgba(10,18,34,.66) 0%, rgba(10,18,34,.42) 55%, rgba(10,18,34,0) 100%),
+      var(--fascia) center/cover no-repeat;
   }
-  /* Tre tagli: su un telefono da 390px non ha senso scaricare 1600px.
-     E' l'immagine LCP, quindi e' qui che si guadagna di piu'. */
-  @media (max-width: 600px) {
-    .hero-bg { background-image: image-set(url('assets/images/headerdaop-500.webp') type('image/webp'),
-                                           url('assets/images/headerdaop.jpg') type('image/jpeg')); }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 640px; margin: 0 auto;
+    padding: 124px 24px 40px;
   }
-  @media (min-width: 601px) and (max-width: 1100px) {
-    .hero-bg { background-image: image-set(url('assets/images/headerdaop-900.webp') type('image/webp'),
-                                           url('assets/images/headerdaop.jpg') type('image/jpeg')); }
+  @media (min-width: 901px) {
+    #hero { box-sizing: border-box; min-height: 535px; display: flex; flex-direction: column; justify-content: center; }
+    .hero-inner { width: 100%; }
   }
-  @media (min-width: 1101px) {
-    .hero-bg { background-image: image-set(url('assets/images/headerdaop.webp') type('image/webp'),
-                                           url('assets/images/headerdaop.jpg') type('image/jpeg')); }
+  @media (max-width: 900px) {
+    #hero { padding-bottom: calc(56.4vw - 8px); }
+    #hero::before {
+      background: linear-gradient(180deg,#0f1d33 0%,#0f1d33 calc(100% - 56vw),rgba(15,29,51,.8) calc(100% - 50vw),rgba(15,29,51,.45) calc(100% - 44vw),rgba(15,29,51,.18) calc(100% - 38vw),rgba(15,29,51,0) calc(100% - 32vw)),
+        var(--fascia-m, var(--fascia)) center bottom/100% auto no-repeat, #0f1d33;
+    }
+    .hero-inner { padding: 96px 20px 8px; }
   }
-  .hero-bg::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: rgba(253,248,243,0.48);
+  .hero-benv {
+    display: inline-block; margin-bottom: 14px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold);
   }
-  .hero-deco { display: none; }
-
-  .hero-content {
-    position: relative; z-index: 2;
-    width: 100%; max-width: 1200px;
-    padding: 120px 48px 80px;
-    display: grid;
-    grid-template-columns: 3fr 5fr;
-    align-items: center;
-    gap: 56px;
-  }
-  .hero-card {
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-radius: 0;
-    padding: 0;
-    width: 100%;
-    box-shadow: none;
-    border: none;
-  }
-  .hero-right {
-    display: flex; flex-direction: column; gap: 12px;
-  }
-  .hero-stat-card {
-    background: rgba(253,248,243,0.95);
-    backdrop-filter: blur(16px);
-    border-radius: var(--radius-md);
-    padding: 12px 20px;
-    border: 1px solid rgba(45,74,92,0.10);
-    box-shadow: 0 3px 16px rgba(45,74,92,0.10);
-    transition: var(--transition);
-  }
-  .hero-stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(45,74,92,0.15); }
-  .hero-stat-card-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.45rem; font-weight: 800;
-    color: var(--navy); display: block; line-height: 1;
-  }
-  .hero-stat-card-value.orange { color: var(--orange); }
-  .hero-stat-card-value.teal { color: var(--teal); font-size: 1.2rem; }
-  .hero-stat-card-label {
-    font-size: 0.67rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--text-light); margin-top: 2px; display: block;
-  }
-  .hero-badge-row {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px;
-  }
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 14px;
-    border-radius: 100px;
-    font-size: 0.76rem; font-weight: 600;
-    letter-spacing: 0.04em;
-  }
-  .badge-aps { background: var(--navy); color: white; border: 1px solid var(--navy); }
-  .badge-dot { background: white !important; }
-  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.6; }
-
   .hero-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-    font-weight: 800;
-    color: var(--navy);
-    line-height: 1.05;
-    margin-bottom: 18px;
-    letter-spacing: -0.02em;
-    text-shadow: 0 2px 12px rgba(253,248,243,0.8);
+    font-weight: 800; color: #fff;
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin-bottom: 16px;
   }
-  /* #e8954a su crema stava a 2.33:1: sotto il 3:1 richiesto per il
-     testo grande. Stessa tinta, solo piu' profonda. */
-  .hero-title .accent { color: #c9742f; font-style: italic; }
+  .hero-title .accent { color: var(--gold); font-style: italic; }
   .hero-subtitle {
-    font-size: 1.05rem;
-    color: var(--text-mid);
-    margin-bottom: 36px;
-    line-height: 1.75;
-    max-width: 480px;
-    font-weight: 700;
-    text-shadow: 0 1px 8px rgba(253,248,243,0.9), 0 0px 2px rgba(253,248,243,1);
+    font-size: 1.08rem; line-height: 1.65;
+    color: rgba(255,255,255,0.82);
+    max-width: 520px; margin: 0 auto 28px;
   }
-  .hero-stats { display: none; }
-
+  /* Sul telefono «Scopri DAOP» era una seconda riga da 76px che porta alla
+     sezione subito sotto, cioe' dove si arriva scorrendo: resta solo il
+     bottone che va da qualche parte. */
+  @media (max-width: 600px) {
+    .hero-subtitle { font-size: 1rem; margin-bottom: 22px; }
+    #hero .btn-secondary { display: none; }
+  }
   .hero-actions {
-    display: flex; gap: 12px; flex-wrap: wrap;
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
   }
+  /* Il secondario era blu su crema: sul fondo scuro della fascia diventa
+     bianco, se no sparisce. Fuori da #hero resta com'era. */
+  #hero .btn-secondary { color: #fff; border-color: rgba(255,255,255,.75); }
+  #hero .btn-secondary:hover { background: #fff; color: var(--navy); }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 14px 28px;
@@ -1107,11 +1051,6 @@
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    #hero { align-items: flex-start; }
-    .hero-bg { background-position: 40% center; }
-    .hero-content { grid-template-columns: 1fr; gap: 32px; padding: 84px 24px 60px; }
-    .hero-content > div:first-child { display: none; }
-    .hero-card { padding: 28px 24px; }
     .piatto-layout, .benefits-grid { grid-template-columns: 1fr; }
     .team-grid > .team-card { flex-basis: 100%; max-width: 420px; }
     .ginetto-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1129,9 +1068,6 @@
   }
   @media (max-width: 600px) {
     section { padding: 72px 20px; }
-    .hero-content { padding: 80px 20px 48px; }
-    .hero-card { padding: 24px 20px; }
-    .hero-right { grid-template-columns: repeat(2, 1fr); }
     .pillars-grid { grid-template-columns: 1fr; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .books-grid { grid-template-columns: 1fr; }
@@ -1224,30 +1160,17 @@
 
 <main id="contenuto">
 <!-- ── HERO ── -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div></div>
-    <div class="hero-card">
-      <div class="hero-badge-row">
-        <span class="badge badge-aps">
-          <span class="badge-dot"></span>
-          Associazione · Dal 2023
-        </span>
-        <span class="badge badge-aps" style="background:var(--orange);border-color:var(--orange);color:#1a2d3a;">
-          <span class="badge-dot"></span>
-          Ginetto AI è live
-        </span>
-      </div>
-      <h1 class="hero-title">Dove andiamo<br>oggi <span class="accent">papi?</span></h1>
-      <p class="hero-subtitle">La guida delle famiglie di Alessandria, Asti e Cuneo per uscite, alimentazione sana e avventure quotidiane con i figli. Perché ogni giorno può essere una piccola grande scoperta.</p>
-      <div class="hero-actions">
-        <a href="eventi.html" class="btn btn-primary">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-calendar"/></svg>
-          Cosa fare questo weekend
-        </a>
-        <a href="#percorsi" class="btn btn-secondary">Scopri DAOP</a>
-      </div>
+<section id="hero" style="--fascia:url(/assets/images/stagioni/benvenuto-1600.webp);--fascia-m:url(/assets/images/stagioni/benvenuto-m.webp)">
+  <div class="hero-inner">
+    <span class="hero-benv">Benvenuti su DAOP</span>
+    <h1 class="hero-title">Dove andiamo<br>oggi <span class="accent">papi?</span></h1>
+    <p class="hero-subtitle">La guida delle famiglie di Alessandria, Asti e Cuneo per uscite, alimentazione sana e avventure quotidiane con i figli. Perché ogni giorno può essere una piccola grande scoperta.</p>
+    <div class="hero-actions">
+      <a href="eventi.html" class="btn btn-primary">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-calendar"/></svg>
+        Cosa fare questo weekend
+      </a>
+      <a href="#percorsi" class="btn btn-secondary">Scopri DAOP</a>
     </div>
   </div>
 </section>
