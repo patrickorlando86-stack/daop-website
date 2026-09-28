@@ -47,7 +47,12 @@ Cosa si tocca a mano e cosa no, dentro `eventi.html`:
 | il `<style>` inline, il JS in fondo, nav e footer | a mano |
 
 I marker sono `EVENTI-TIPO`, `EVENTI-PROV`, `EVENTI-LISTA`, `EVENTI-COMUNI`,
-`EVENTI-HERO` in `eventi.html` e `HOME-EVENTI` in `index.html`.
+`EVENTI-HERO` in `eventi.html` e `HOME-PORTE`, `HOME-STAGIONE`, `HOME-SOCIAL`
+in `index.html`. Il carosello `HOME-EVENTI` e `HOME-NUMERI` non ci sono piu'
+dal 28/09/2026 (la home snella: fascia, porte, Ginetto, chi siamo, tre
+progetti, modulo per le attivita', social); `inject_home()` salta i marker che
+mancano senza fermarsi, e `#chi-siamo` / `#social` restano perche' li linka il
+footer di tutto il sito.
 
 ### Il CSS di eventi.html è il CSS di mezzo sito
 

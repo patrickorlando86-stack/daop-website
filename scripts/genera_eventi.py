@@ -10546,12 +10546,13 @@ def inject_home(cards_html, stagione='', numeri=''):
         print("[genera_eventi] index.html non trovato, salto carosello home")
         return
     s = open(HOME_PATH, encoding="utf-8").read()
+    # Il carosello e i numeri non ci sono piu' dal 28/09/2026 (la home snella:
+    # all'agenda si arriva dal menu, dalla fascia e dalle porte). Prima, senza i
+    # marker HOME-EVENTI la funzione usciva qui, e con lei sarebbero rimaste
+    # ferme anche le porte e la riga stagionale. Ogni marker vale per se'.
     block = "<!-- HOME-EVENTI:START -->\n" + cards_html + "\n      <!-- HOME-EVENTI:END -->"
     s, n = re.subn(r'<!-- HOME-EVENTI:START -->.*?<!-- HOME-EVENTI:END -->',
                    lambda _: block, s, count=1, flags=re.S)
-    if n != 1:
-        print("[genera_eventi] marker HOME-EVENTI non trovati in index.html, salto carosello home")
-        return
     # La riga sta FUORI da .he-track: dentro sarebbe un elemento della striscia
     # orizzontale delle card, cioe' una scheda finta larga quanto le altre.
     riga = f'<p class="he-stagione">{stagione}</p>' if stagione else ''
@@ -10568,12 +10569,12 @@ def inject_home(cards_html, stagione='', numeri=''):
                      lambda _: f'<!-- HOME-PORTE:START -->{porte}<!-- HOME-PORTE:END -->',
                      s, count=1, flags=re.S)
     open(HOME_PATH, "w", encoding="utf-8").write(s)
-    print("[genera_eventi] carosello eventi aggiornato in index.html"
+    print("[genera_eventi] index.html: "
+          + ("porte aggiornate" if np_ else "marker HOME-PORTE non trovati")
           + (f", riga stagionale: {'sì' if stagione else 'no'}" if ns else
              ", marker HOME-STAGIONE non trovati")
-          + (f", numeri: {'sì' if numeri else 'no'}" if nn else
-             ", marker HOME-NUMERI non trovati")
-          + ("" if np_ else ", marker HOME-PORTE non trovati"))
+          + (", carosello aggiornato" if n else "")
+          + (", numeri aggiornati" if nn else ""))
 
 
 def update_sitemap(slugs=(), comuni=(), landing=()):
