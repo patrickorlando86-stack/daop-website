@@ -6363,6 +6363,15 @@ Tre cose da sapere prima di rimetterci mano:
   guardia leggerebbe quello zero come "sto già girando sull'istantanea", cioè
   tacerebbe.
 
+**Dal 28/09/2026 si taglia anche per sottocategoria** (`togli_nascoste()`,
+`SOTTOCATEGORIE_NASCOSTE`), stesso principio: i dati restano sul foglio e
+nell'istantanea, la pagina no. Dentro c'è solo `nidi-e-micro-nidi`: 122 righe
+importate da un elenco, tutte con la stessa frase («nido o micro-nido
+autorizzato»), che in 14 comuni erano l'unico «posto per famiglie» — la riga
+in fondo alle schede evento mandava a un asilo. Riaccenderli è togliere la
+voce dalla tupla. **Ginetto non è toccato**: legge il CSV grezzo del foglio,
+quindi lì i nidi restano finché non si tolgono dal foglio o dall'app.
+
 `dove_siamo()` di conseguenza non dice più "e dintorni": nomina le province di
 `PROVINCE_PUBBLICATE` che hanno davvero delle righe — la sfumatura serve ancora,
 perché la stessa funzione scrive anche l'intestazione di `/piscine.html`, che è
@@ -6952,13 +6961,16 @@ primo giro mostra domanda»).
    trovare (oggi su Instagram e Pagine Gialle); la ricerca porta il nome del
    paese, cioè il nostro terreno; e niente vincoli di legge. In Ginetto è la
    domanda perfetta. **È la prima.**
-2. **Nidi e scuole dell'infanzia.** Il catalogo c'è già — **122 nidi** nei
-   luoghi, gratis — e manca solo la data per telefonare. Le iscrizioni
-   all'infanzia sono di solito a gennaio (da verificare sul calendario 2027),
-   i nidi comunali in primavera: una «Guida nidi e scuole dell'infanzia 2027»
-   online a metà dicembre, con gli open day in agenda, è la telefonata con una
-   scadenza già descritta per le guide stagionali. Pagano nidi privati e
-   paritarie; si vende la scheda completa, non la posizione.
+2. **Nidi e scuole dell'infanzia**, ma con meno clienti di quanto sembri.
+   Molti sono pubblici (statali, comunali) e non pagano: pagano solo i nidi
+   privati e le paritarie. La guida serve lo stesso, perché al genitore
+   servono le date di tutti, pubblici compresi: si vende la scheda completa,
+   non la posizione, e un nido comunale non deve sembrare peggio di uno
+   privato solo perché non paga. Le iscrizioni all'infanzia sono di solito a
+   gennaio (da verificare sul calendario 2027), i nidi comunali in primavera,
+   quindi la guida va online a metà dicembre. **I 122 nidi del foglio sono
+   fuori dalla pagina dal 28/09/2026** (vedi sotto): per la guida si riparte
+   da quelle righe, curate e con una colonna pubblico/privato.
 3. **Comuni, Pro Loco, enti del turismo.** Il prodotto esiste già:
    `eventi/box-al|at|cn.html`, l'agenda da incorporare nel loro sito. Si vende
    un servizio (l'agenda del tuo territorio, aggiornata ogni notte, più i

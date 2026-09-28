@@ -287,7 +287,8 @@ def main():
     foglio = L.leggi_catalogo()
     if not L.controlla_crollo(foglio):
         raise SystemExit(1)
-    elenco = L.unisci(L.solo_province_nostre(foglio), L.leggi_agenda())
+    elenco = L.unisci(L.togli_nascoste(L.solo_province_nostre(foglio)),
+                      L.leggi_agenda())
     if not elenco:
         print("[genera_idee] catalogo vuoto: lascio le pagine come stanno")
         return

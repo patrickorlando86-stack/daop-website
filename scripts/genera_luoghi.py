@@ -797,6 +797,31 @@ def solo_province_nostre(catalogo):
     return dentro
 
 
+# Sottocategorie che restano nel foglio ma non escono in pagina, per slug del
+# secondo livello. I nidi (122 righe) ci sono finiti il 28/09/2026: erano un
+# elenco importato, tutti con la stessa frase ("nido o micro-nido
+# autorizzato") e niente altro, e in 14 comuni erano l'unico "posto per
+# famiglie" - cioe' la riga "1 posto per famiglie a Solero" in fondo alle
+# schede evento mandava a un asilo. Le righe restano sul foglio (e
+# nell'istantanea): quando si fa la guida delle iscrizioni si riparte da li'.
+SOTTOCATEGORIE_NASCOSTE = ('nidi-e-micro-nidi',)
+
+
+def togli_nascoste(catalogo):
+    """Toglie le righe delle sottocategorie in SOTTOCATEGORIE_NASCOSTE.
+
+    Si taglia qui e non nel foglio per la stessa ragione delle province: i dati
+    restano dove sono, e riaccenderli e' togliere una voce dalla tupla. Il
+    numero si stampa a ogni run, cosi' non diventa un'esclusione dimenticata."""
+    dentro = [l for l in catalogo
+              if G.slugify(l.get('cat_sotto') or '') not in SOTTOCATEGORIE_NASCOSTE]
+    tolte = len(catalogo) - len(dentro)
+    if tolte:
+        print(f"[genera_luoghi] {tolte} luoghi non pubblicati per sottocategoria "
+              f"({', '.join(SOTTOCATEGORIE_NASCOSTE)}): restano sul foglio")
+    return dentro
+
+
 # ── Sorgente 2: l'agenda ─────────────────────────────────────────────────────
 
 def leggi_agenda():
@@ -2452,7 +2477,7 @@ def main():
     # come "sto girando sull'istantanea", cioe' tacerebbe.
     if not controlla_crollo(foglio):
         raise SystemExit(1)
-    catalogo = solo_province_nostre(foglio)
+    catalogo = togli_nascoste(solo_province_nostre(foglio))
     agenda = leggi_agenda()
     elenco = unisci(catalogo, agenda)
     if not elenco:
