@@ -16,7 +16,7 @@
    "slug": "bossolasco"
   },
   "cn-bra": {
-   "n": 5,
+   "n": 9,
    "nome": "Bra",
    "slug": "bra"
   },
@@ -80,8 +80,13 @@
    "nome": "La Morra",
    "slug": "la-morra"
   },
+  "cn-lurisia": {
+   "n": 2,
+   "nome": "Lurisia",
+   "slug": "lurisia"
+  },
   "cn-mondovi": {
-   "n": 15,
+   "n": 17,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -105,6 +110,11 @@
    "nome": "Racconigi",
    "slug": "racconigi"
   },
+  "cn-roreto": {
+   "n": 2,
+   "nome": "Roreto",
+   "slug": "roreto"
+  },
   "cn-saluzzo": {
    "n": 1,
    "nome": "Saluzzo",
@@ -117,6 +127,6 @@
   }
  },
  "province": {
-  "CN": 94
+  "CN": 104
  }
 }
