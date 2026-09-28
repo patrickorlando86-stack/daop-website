@@ -116,6 +116,11 @@
   .gn-azioni .btn{font-size:1rem;padding:14px 30px}
   .hero-playstore{display:inline-block;transition:var(--transition)}
   .hero-playstore img{display:block;height:48px;width:auto}
+  /* I due badge stanno insieme e vanno a capo in gruppo. Quello di Google Play
+     a 48px ha il disegno alto ~37 (margine trasparente sopra e sotto); quello
+     di Apple, ufficiale e senza margine, sta a 37 e combacia. */
+  .hero-store{display:inline-flex;align-items:center;gap:10px}
+  .hero-apple img{height:37px}
   .hero-playstore:hover{transform:translateY(-2px)}
   /* Il vuoto al centro di questo disegno e' piu' stretto di quello degli eventi:
      le nuvolette di Ginetto arrivano a ~32% della larghezza. Da qui la colonna
@@ -311,7 +316,7 @@
     <p>Scrivi cosa cerchi e Ginetto ti risponde con i posti e gli eventi per famiglie in provincia di Alessandria, Asti e Cuneo, scelti a mano da DAOP. Gratis, senza registrazione.</p>
     <div class="gn-azioni">
       <a href="https://ginettoapp.it" target="_blank" rel="noopener" class="btn btn-primary">Chiedi a Ginetto</a>
-      <a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener" class="hero-playstore" aria-label="Scarica Ginetto su Google Play"><img src="/assets/images/google-play-badge-it.png" alt="Disponibile su Google Play" width="145" height="56" decoding="async"></a>
+      <span class="hero-store"><a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener" class="hero-playstore" aria-label="Scarica Ginetto su Google Play"><img src="/assets/images/google-play-badge-it.png" alt="Disponibile su Google Play" width="145" height="56" decoding="async"></a><a href="https://apps.apple.com/it/app/id6814767339" target="_blank" rel="noopener" class="hero-playstore hero-apple" aria-label="Scarica Ginetto dall'App Store"><img src="/assets/images/app-store-badge-it.svg" alt="Scarica su App Store" width="120" height="40" decoding="async"></a></span>
     </div>
   </div>
 </header>
@@ -381,7 +386,7 @@
 
       <details class="faq-item">
         <summary>Su quali dispositivi funziona?</summary>
-        <div class="faq-answer">Da qualsiasi browser su telefono, tablet e computer, su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a>. Su Android puoi scaricarlo gratis da <a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener">Google Play</a>; su iPhone puoi aggiungerlo alla schermata home come un'app, direttamente dal browser.</div>
+        <div class="faq-answer">Da qualsiasi browser su telefono, tablet e computer, su <a href="https://ginettoapp.it" target="_blank" rel="noopener">ginettoapp.it</a>. Come app si scarica gratis da <a href="https://play.google.com/store/apps/details?id=it.ginettoapp.app" target="_blank" rel="noopener">Google Play</a> su Android e dall'<a href="https://apps.apple.com/it/app/id6814767339" target="_blank" rel="noopener">App Store</a> su iPhone.</div>
       </details>
 
       <details class="faq-item">
