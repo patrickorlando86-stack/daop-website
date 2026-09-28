@@ -314,9 +314,14 @@ def blocco_social_home():
     della provincia — Patrick, 08/09/2026: le due che c'erano (un palazzo per
     Alessandria, un grappolo per Asti) erano decorazione, e per la terza si
     sarebbe dovuto inventare un simbolo di Cuneo."""
-    def btn(href, testo, classe, svg):
+    # Il nome della provincia sta nel bottone solo per chi usa un lettore di
+    # schermo (28/09/2026, la sezione compatta): a occhio lo dice gia' il
+    # titolo della card, e "Instagram Alessandria" non ci stava accanto a
+    # "Facebook Alessandria" su una riga del telefono.
+    def btn(href, rete, nome, classe, svg):
         return (f'<a href="{href}" target="_blank" rel="noopener" '
-                f'class="social-btn {classe}">{svg} {esc(testo)}</a>')
+                f'class="social-btn {classe}">{svg} {rete}'
+                f'<span class="social-vh"> {esc(nome)}</span></a>')
 
     card = []
     for i, sigla in enumerate(PROVINCE_PUBBLICATE, 1):
@@ -324,9 +329,9 @@ def blocco_social_home():
         if not f:
             continue
         nome = f['provincia']
-        b = [btn(f['url'], f'Instagram {nome}', 'social-btn-ig', SVG_IG)]
+        b = [btn(f['url'], 'Instagram', nome, 'social-btn-ig', SVG_IG)]
         if f.get('fb'):
-            b.append(btn(f['fb'], f'Facebook {nome}', 'social-btn-fb', SVG_FB))
+            b.append(btn(f['fb'], 'Facebook', nome, 'social-btn-fb', SVG_FB))
         card.append(f'<div class="social-group-card fade-in fade-in-delay-{i}">'
                     f'<div class="social-city">{esc(nome)}</div>'
                     f'<div class="social-btns">{"".join(b)}</div></div>')
