@@ -8873,8 +8873,11 @@ def _stagione_out(st, oggi, finestra, titolo, descr, h1, sotto, corpo, nome_list
 # non c'entra, che e' il difetto da cui nasce tutto questo.
 # ---------------------------------------------------------------------------
 TEMI_STAGIONE = {
+    # Niente "streg" e "masca" (28/09/2026, Patrick): prendevano le
+    # rievocazioni dei processi alle streghe e le feste della masca, che sono
+    # storia e folklore, non Halloween.
     'halloween': re.compile(
-        r"hallowe|\bzucc(?:a|he)\b|streg|\bmasc(?:a|he)\b|dolcetto|scherzetto|"
+        r"hallowe|\bzucc(?:a|he)\b|dolcetto|scherzetto|"
         r"\bmostri|fantasm|spettr|vampir|zombi|pipistrell|horror|brivid|"
         r"samhain|trick or treat", re.I),
     'natale': re.compile(
