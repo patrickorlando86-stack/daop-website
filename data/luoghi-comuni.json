@@ -71,7 +71,7 @@
  },
  "c-al-bosio": {
   "comune": "Bosio",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-bozzole": {
@@ -131,7 +131,7 @@
  },
  "c-al-casaleggio-boiro": {
   "comune": "Casaleggio Boiro",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-casalnoceto": {
@@ -166,6 +166,11 @@
  },
  "c-al-castelletto-d-orba": {
   "comune": "Castelletto d'Orba",
+  "n": 1,
+  "prov": "AL"
+ },
+ "c-al-castelletto-monferrato": {
+  "comune": "Castelletto Monferrato",
   "n": 1,
   "prov": "AL"
  },
@@ -216,7 +221,7 @@
  },
  "c-al-fabbrica-curone": {
   "comune": "Fabbrica Curone",
-  "n": 2,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-felizzano": {
@@ -271,7 +276,7 @@
  },
  "c-al-lu-e-cuccaro-monferrato": {
   "comune": "Lu e Cuccaro Monferrato",
-  "n": 3,
+  "n": 4,
   "prov": "AL"
  },
  "c-al-melazzo": {
@@ -491,7 +496,7 @@
  },
  "c-al-serralunga-di-crea": {
   "comune": "Serralunga di Crea",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-serravalle-scrivia": {
@@ -981,7 +986,7 @@
  },
  "c-at-vinchio": {
   "comune": "Vinchio",
-  "n": 2,
+  "n": 3,
   "prov": "AT"
  },
  "c-cn-alba": {
@@ -1126,7 +1131,7 @@
  },
  "c-cn-chiusa-di-pesio": {
   "comune": "Chiusa di Pesio",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-ciglie": {
@@ -1224,6 +1229,11 @@
   "n": 2,
   "prov": "CN"
  },
+ "c-cn-guarene": {
+  "comune": "Guarene",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-lagnasco": {
   "comune": "Lagnasco",
   "n": 1,
@@ -1309,6 +1319,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-monteu-roero": {
+  "comune": "Monteu Roero",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-moretta": {
   "comune": "Moretta",
   "n": 1,
@@ -1326,7 +1341,7 @@
  },
  "c-cn-niella-belbo": {
   "comune": "Niella Belbo",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-niella-tanaro": {
@@ -1379,6 +1394,16 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-pocapaglia": {
+  "comune": "Pocapaglia",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-pontechianale": {
+  "comune": "Pontechianale",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-racconigi": {
   "comune": "Racconigi",
   "n": 1,
@@ -1426,7 +1451,7 @@
  },
  "c-cn-sampeyre": {
   "comune": "Sampeyre",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-san-benedetto-belbo": {
@@ -1496,7 +1521,12 @@
  },
  "c-cn-valdieri": {
   "comune": "Valdieri",
-  "n": 2,
+  "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-valgrana": {
+  "comune": "Valgrana",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-venasca": {
@@ -1536,6 +1566,11 @@
  },
  "c-cn-villar-san-costanzo": {
   "comune": "Villar San Costanzo",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-vinadio": {
+  "comune": "Vinadio",
   "n": 1,
   "prov": "CN"
  },

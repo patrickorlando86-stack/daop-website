@@ -4030,6 +4030,23 @@
   "nome": "Costigliole Saluzzo",
   "prov": "CN"
  },
+ "cremolino": {
+  "eventi": {
+   "la-gran-caccia-alla-castagna-pro-loco-cremolino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Comune",
+    "manifest": "",
+    "nome": "La Gran Caccia alla Castagna - Pro Loco Cremolino",
+    "organizza": "Pro Loco Cremolino",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   }
+  },
+  "nome": "Cremolino",
+  "prov": "AL"
+ },
  "crissolo": {
   "eventi": {
    "caccia-al-tesoro-kam-3841-crissolo": {
@@ -6545,6 +6562,61 @@
  },
  "montigliomonferrato": {
   "eventi": {
+   "alla-scoperta-del-mondo-dei-rapaci-e-della-falcone-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Alla scoperta del mondo dei rapaci e della falconeria - ASD Hieramatra",
+    "organizza": "ASD Hieramatra",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "apertura-stand-gastronomico-pro-loco-di-montiglio-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Apertura stand gastronomico Pro Loco di Montiglio - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "arriva-la-banda-municipale-di-villafranca-d-asti-c-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Arriva la Banda Municipale di Villafranca d'Asti - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
+   "arrivo-del-treno-storico-centoporte-da-torino-comu-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stazione FS Montiglio-Murisengo",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Arrivo del Treno Storico Centoporte da Torino - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "arrivo-della-littorina-da-torino-comune-e-pro-loco-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stazione FS Montiglio-Murisengo",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Arrivo della Littorina da Torino - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "concerto-di-san-lorenzo-duo-griot-fola-pro-loco-mo-montiglio-monferrato": {
     "anni": [
      2026
@@ -6566,6 +6638,17 @@
     "organizza": "Pro Loco Montiglio Monferrato",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "esposizione-dei-tartufi-e-premiazione-premio-cane-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Esposizione dei tartufi e Premiazione Premio Cane d'Argento e Premio Pro Loco - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-11"
    },
    "festa-di-san-rocco-pro-loco-montiglio-monferrato": {
     "anni": [
@@ -6589,6 +6672,50 @@
     "pagina": false,
     "ultima": "2026-08-07"
    },
+   "la-biblioteca-animata-aps-the-other-moon-company-m-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "La biblioteca animata - APS the other moon Company - Montiglio da Favola",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "la-quasi-band-pop-e-cantautori-italiani-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "La Quasi Band: Pop e cantautori italiani",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "lancio-dei-paracadutisti-comune-e-pro-loco-montigl-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Regina Margherita",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Lancio dei paracadutisti - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "loris-gallo-e-la-sua-bubble-bike-magie-e-bolle-di-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Loris Gallo e la sua Bubble Bike - Magie e bolle di sapone",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "luna-park-giostre-a-1-euro-pro-loco-montiglio-monf-montiglio-monferrato": {
     "anni": [
      2026
@@ -6599,6 +6726,94 @@
     "organizza": "Pro Loco Montiglio Monferrato",
     "pagina": false,
     "ultima": "2026-08-10"
+   },
+   "palatartufi-cooking-truffle-show-istituto-alberghi-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "PalaTartufi",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "PalaTartufi Cooking Truffle Show - Istituto Alberghiero G.Penna con Cinzia Montagna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "partenza-del-treno-storico-centoporte-verso-torino-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stazione FS Montiglio-Murisengo",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Partenza del Treno Storico Centoporte verso Torino - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "partenza-della-littorina-verso-torino-comune-e-pro-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stazione FS Montiglio-Murisengo",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Partenza della Littorina verso Torino - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
+   "piccola-orchestra-sand-creek-se-omaggio-a-faber-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Piccola Orchestra Sand Creek SE - Omaggio a FABER",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
+   "pranzo-pro-loco-di-montiglio-salone-polifunzionale-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Polifunzionale Bruno Mellone",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Pranzo Pro Loco di Montiglio - Salone Polifunzionale Bruno Mellone",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "premiazione-dei-piatti-e-degli-esemplari-concorso-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Premiazione dei piatti e degli esemplari - Concorso Nazionale La Splendida d'Italia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "raduno-dei-tartufai-ed-apertura-della-fiera-comune-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Raduno dei tartufai ed Apertura della Fiera - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "raduno-del-circolo-astigiano-veicoli-storici-c-a-m-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Regina Margherita",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Raduno del Circolo Astigiano Veicoli Storici C.A.M.E.A. - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-04"
    },
    "s-messa-in-onore-del-santo-patrono-pro-loco-montig-montiglio-monferrato": {
     "anni": [
@@ -6621,6 +6836,28 @@
     "organizza": "Pro Loco Montiglio Monferrato",
     "pagina": false,
     "ultima": "2026-08-09"
+   },
+   "spettacolo-mago-bingo-mary-poppins-mi-fa-un-baffo-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Spettacolo Mago Bingo 'Mary Poppins mi fa un baffo' - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
+   "suona-la-banda-musicale-la-bersagliera-di-tonco-co-montiglio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area manifestazioni Via alla Stazione",
+    "manifest": "Fiera Nazionale del Tartufo di Montiglio Monferrato 2026",
+    "nome": "Suona la Banda musicale La Bersagliera di Tonco - Comune e Pro Loco Montiglio Monferrato",
+    "organizza": "Comune e Pro Loco Montiglio Monferrato",
+    "pagina": true,
+    "ultima": "2026-10-11"
    }
   },
   "nome": "Montiglio Monferrato",
@@ -6745,6 +6982,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "autunno-in-festa-morsasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via A. Gramsci",
+    "manifest": "Autunno in Festa",
+    "nome": "Autunno in Festa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
    },
    "cena-nutella-party-e-dj-set-con-music-power-pro-lo-morsasco": {
     "anni": [
@@ -8828,6 +9076,17 @@
  },
  "roccagrimalda": {
   "eventi": {
+   "castagne-e-vino-rocca-grimalda": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Belvedere",
+    "manifest": "Castagne e Vino",
+    "nome": "Castagne e Vino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "festa-gastronomica-della-peirbuieira-rocca-grimalda": {
     "anni": [
      2026
@@ -10187,6 +10446,23 @@
   "nome": "Scurzolengo",
   "prov": "AT"
  },
+ "serole": {
+  "eventi": {
+   "sagra-delle-caldarroste-pro-loco-di-cuniola-serole": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "Sagra delle Caldarroste - Pro Loco di Cuniola",
+    "organizza": "Pro Loco di Cuniola",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   }
+  },
+  "nome": "Serole",
+  "prov": "AT"
+ },
  "serralungadalba": {
   "eventi": {
    "castelli-aperti-a-ferragosto-castello-di-serralung-serralunga-d-alba": {
@@ -10344,6 +10620,17 @@
     "organizza": "Pro Loco di Silvano d'Orba",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "natale-incontrada-silvano-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Per le vie del Centro",
+    "manifest": "",
+    "nome": "Natale Incontrada",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    },
    "silvanoincontrada-silvano-d-orba": {
     "anni": [
@@ -10685,6 +10972,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "l-autunno-attraverso-la-lettura-e-la-musica-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Namastè Book&Coffee",
+    "manifest": "",
+    "nome": "L'autunno attraverso la lettura e la musica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    },
    "la-mostra-gli-esplorattori-tortona": {
     "anni": [
@@ -11233,6 +11531,17 @@
  },
  "villanovadasti": {
   "eventi": {
+   "elogio-della-bionda-mostra-del-pollo-biondo-piemon-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Confraternita dei Batù",
+    "manifest": "24° Elogio della Bionda - 67ª Mostra del Pollo Biondo Piemontese",
+    "nome": "24° Elogio della Bionda - 67ª Mostra del Pollo Biondo Piemontese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
+   },
    "festa-patronale-di-sant-isidoro-villanova-d-asti": {
     "anni": [
      2026
