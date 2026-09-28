@@ -2424,6 +2424,13 @@ copre 3-14. Ora di là c'è `_attivitaEtaFallback()`, porta di `eta_da_classi()`
 `eta_da_testo()` + `_eta_numeri()`, verificata con un confronto differenziale su
 294 etichette: zero divergenze, fascia e etichetta.
 
+**La prova di coerenza fa lo stesso conto, non un caso particolare** (28/09/2026).
+Era rossa su «Dai 15 mesi ai 7 anni» (filtro 1-7, giusto): appena nella riga
+c'era «mesi» leggeva tutto in mesi e trovava solo il 15. Ora `tests/corsi.js`
+dà a ogni numero la sua unità come `_eta_numeri()` e confronta minimo e massimo.
+Verificata rossa con «7 mesi» al posto di «7 anni» e col massimo del filtro
+sbagliato.
+
 **Restano due regole, non una.** `eta_range()`/`_attivitaEtaRange` sono gemelle e
 devono restare identiche; `eta_min_max()`/`_attivitaEtaFallback` sono la seconda
 coppia, ed è quella che oggi lavora davvero. Se nasce una forma nuova (una classe,

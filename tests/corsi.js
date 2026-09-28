@@ -369,11 +369,27 @@ module.exports = async function corsi(browser) {
         // sull'unico caso che allora esisteva (0-12) ed e' rimasta a
         // descriverlo invece di descrivere la regola. Adesso si fa il conto:
         // vale per 0-12, per 0-36 e per quello che arrivera'.
+        //
+        // E IL 28/09/2026 E' ANDATA ROSSA LA SECONDA VOLTA, per la stessa forma:
+        // "Dai 15 mesi ai 7 anni" (Percorsi di Psicomotricita', filtro 1-7).
+        // La prova leggeva TUTTA la riga in mesi appena ci compariva la parola,
+        // e prendeva solo i numeri seguiti da "mesi": trovava il 15 e basta.
+        // Ma nel generatore ogni numero ha la sua unita' (_eta_numeri: quella
+        // scritta dopo, e chi non ce l'ha eredita quella del numero dopo), e
+        // qui si rifa' lo stesso conto invece di un caso particolare.
         if (/mes/i.test(riga)) {
-          const mesi = (riga.match(/\d{1,3}(?=\s*mes)|\d{1,3}(?=[^\d]*mes)/g) || [])
-            .map(Number);
-          if (!mesi.length) return true;
-          return Number(hi) !== Math.floor(Math.max(...mesi) / 12);
+          const eta = riga.split('·').find((p) => /mes/i.test(p));
+          const pezzi = [...eta.matchAll(/\d+/g)].filter((m) => m[0].length <= 2);
+          const unita = pezzi.map((m, i) => {
+            const coda = eta.slice(m.index + m[0].length,
+              i + 1 < pezzi.length ? pezzi[i + 1].index : eta.length);
+            return /mes/i.test(coda) ? 'mesi' : /ann/i.test(coda) ? 'anni' : null;
+          });
+          for (let i = unita.length - 2; i >= 0; i--) if (!unita[i]) unita[i] = unita[i + 1];
+          const anni = pezzi.map((m, i) => (unita[i] === 'mesi'
+            ? Math.floor(Number(m[0]) / 12) : Number(m[0])));
+          if (!anni.length) return true;
+          return Number(lo) !== Math.min(...anni) || Number(hi) !== Math.max(...anni);
         }
         return !new RegExp(`\\b${lo}\\b`).test(riga) || !/ann/i.test(riga);
       }
