@@ -789,12 +789,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/casalnoceto-kids-move-comune-di-casalnoceto.html</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/casorzo-monferrato-al-di-d-la-festa.html</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -2259,7 +2253,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/il-richiamo-del-bosco-la-notte-del-bramito-montagn-evento.html</loc>
+    <loc>https://www.daop.it/eventi/il-richiamo-del-bosco-la-notte-del-bramito-montagn-entracque.html</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -4195,6 +4189,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/comune/cuneo.html</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/entracque.html</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

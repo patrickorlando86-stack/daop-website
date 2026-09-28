@@ -4528,6 +4528,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "my-cup-of-tea-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca 0-18",
+    "manifest": "My Cup of Tea",
+    "nome": "My Cup of Tea",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
+   },
    "orizzonti-sospesi-tutti-in-salute-cuneo": {
     "anni": [
      2026
@@ -4992,6 +5003,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "il-richiamo-del-bosco-la-notte-del-bramito-montagn-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Faunistico",
+    "manifest": "",
+    "nome": "Il richiamo del Bosco: la notte del Bramito - Montagne del Mare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    },
    "la-delicatezza-del-silenzio-entracque": {
     "anni": [
