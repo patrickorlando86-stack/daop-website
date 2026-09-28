@@ -39,6 +39,7 @@ const parole = (html) => html
 module.exports = async function scheda(browser) {
   const r = esito();
   const registro = JSON.parse(fs.readFileSync(REG, 'utf8'));
+  const feedSchede = JSON.parse(fs.readFileSync(path.join(RADICE, 'data', 'eventi.json'), 'utf8'));
 
   // ── 1-3. sull'HTML vero di tutte le schede ────────────────────────────
   r.titolo('eventi/*.html — la descrizione impaginata');
@@ -71,10 +72,30 @@ module.exports = async function scheda(browser) {
     // Quindi si confrontano le parole SENZA le date, che devono coincidere in
     // pieno, e poi si controlla che di date non ne sia comparsa nessuna in
     // piu' - una data inventata sarebbe il difetto peggiore di tutti.
-    const a = parole(descr), b = parole(corpo);
     const testo = (t) => t.filter((x) => !SOLO_DATA.test(x)).join(' ');
     const date = (t) => t.filter((x) => SOLO_DATA.test(x)).length;
-    if (testo(a) !== testo(b) || date(b) > date(a)) perse.push(f);
+    if (corpo.includes('class="ev-prog-giorno"')) {
+      // Una serie con un programma per data: la prosa e' quella del registro,
+      // e ogni sezione deve avere le parole del programma della SUA riga del
+      // foglio - non di un'altra data, che e' il difetto che l'ha fatta nascere.
+      const MARCA_P = /(?:^|(?<=[.!?])\s+)Programma:\s*/i;
+      const rec = registro[slug] || {};
+      const prosaReg = descr.split(MARCA_P)[0];
+      const prosaPag = corpo.split('<h2 class="ev-prog-h" id="programma">')[0];
+      let ok = parole(prosaReg).join(' ') === parole(prosaPag).join(' ');
+      const sezioni = [...corpo.matchAll(
+        /<section class="ev-prog-giorno" id="programma-(\d{4}-\d{2}-\d{2})"[\s\S]*?<\/h3>([\s\S]*?)<\/section>/g)];
+      for (const [, giorno, dentro] of sezioni) {
+        const fonte = feedSchede.find((e) => e.d_start === giorno && e.nome === rec.nome
+          && e.citta === rec.citta);
+        const coda = fonte ? ((fonte.descr || '').split(MARCA_P)[1] || '') : null;
+        if (coda === null || testo(parole(coda)) !== testo(parole(dentro))) ok = false;
+      }
+      if (!ok || sezioni.length < 2) perse.push(f);
+    } else {
+      const a = parole(descr), b = parole(corpo);
+      if (testo(a) !== testo(b) || date(b) > date(a)) perse.push(f);
+    }
 
     // 2. niente grassetto sulla prosa: sta solo sulla data del programma, e
     // quello e' un <p class="ev-prog-d"> messo in grassetto dal CSS.
@@ -206,9 +227,21 @@ module.exports = async function scheda(browser) {
     if (!rim) continue;
     const [via, ancora] = rim[1].split('#');
     const dove = path.join(RADICE, via.replace(/^\//, ''));
-    if (ancora !== 'programma' || !fs.existsSync(dove)) { rotte.push(rim[1]); continue; }
-    const sch = fs.readFileSync(dove, 'utf8');
+    // Una serie con un programma per data (programmi_serie()) porta al
+    // programma di QUEL giorno, #programma-AAAA-MM-GG: lì si conta dentro la
+    // sua sezione, se no il numero della riga si confronterebbe con tutte le
+    // date insieme. È il difetto della Fiera del Tartufo di Montiglio
+    // (28/09/2026): la riga dell'11 ottobre prometteva 14 voci e la scheda
+    // mostrava le 13 del 4.
+    const perData = /^programma-\d{4}-\d{2}-\d{2}$/.test(ancora || '');
+    if ((ancora !== 'programma' && !perData) || !fs.existsSync(dove)) { rotte.push(rim[1]); continue; }
+    let sch = fs.readFileSync(dove, 'utf8');
     if (!sch.includes('id="programma"')) { rotte.push(rim[1]); continue; }
+    if (perData) {
+      const sez = new RegExp(`<section class="ev-prog-giorno" id="${ancora}"[\\s\\S]*?</section>`).exec(sch);
+      if (!sez) { rotte.push(rim[1]); continue; }
+      sch = sez[0];
+    }
     // Il conto: un <li> per voce dentro gli <ul class="ev-prog-v">, un
     // <p class="ev-prog-d"> per giorno. I giorni promessi sono quelli
     // DISTINTI, quindi non possono essere piu' dei gruppi che la scheda mostra.

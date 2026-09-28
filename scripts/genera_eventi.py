@@ -1171,7 +1171,7 @@ def riga(e, today, hub=None):
             {simbolo("i-chevron-down", "icon ev-chev")}
           </button></h4>
           <div class="ev-det" id="det-{anchor}" hidden>
-            <div class="event-desc">{descrizione_riga(e)}</div>{dove_html}
+            <div class="event-desc">{descrizione_riga(e, today)}</div>{dove_html}
             <div class="event-actions">
               {chr(10) + '              '.join(acts)}
             </div>{fonte_html}
@@ -2255,6 +2255,13 @@ def _programma_html(voci):
     diventano quattro blocchi leggibili."""
     if not voci:
         return ''
+    return ('<h2 class="ev-prog-h" id="programma">Programma</h2>'
+            f'<div class="ev-prog">{_programma_gruppi(voci)}</div>')
+
+
+def _programma_gruppi(voci):
+    """I gruppi per giorno di un programma, senza titolo: li usano la scheda
+    normale e quella di una serie con un programma per data."""
     gruppi, ultima = [], object()      # object(): nessuna data e' uguale a lui
     for data, testo, ora in voci:
         if data != ultima:
@@ -2270,13 +2277,12 @@ def _programma_html(voci):
         etichetta = f'<p class="ev-prog-d">{esc(data)}</p>' if data else ''
         blocchi.append(f'<div class="ev-prog-g">{etichetta}'
                        f'<ul class="ev-prog-v">{vv}</ul></div>')
-    # id="programma": ci punta il rimando che l'agenda stampa al posto della
-    # coda (descrizione_riga). Un'ancora che non esiste scarica in cima a una
-    # pagina lunga, ed e' peggio di nessun link - qui non puo' succedere,
-    # perche' chi stampa il rimando e chi stampa questo titolo guardano la
-    # stessa descrizione con la stessa funzione.
-    return ('<h2 class="ev-prog-h" id="programma">Programma</h2>'
-            f'<div class="ev-prog">{"".join(blocchi)}</div>')
+    # id="programma" (sta nel chiamante): ci punta il rimando che l'agenda
+    # stampa al posto della coda (descrizione_riga). Un'ancora che non esiste
+    # scarica in cima a una pagina lunga, ed e' peggio di nessun link - qui non
+    # puo' succedere, perche' chi stampa il rimando e chi stampa questo titolo
+    # guardano la stessa descrizione con la stessa funzione.
+    return "".join(blocchi)
 
 
 def paragrafi(testo):
@@ -2326,7 +2332,7 @@ def corpo_descrizione(descr):
 MIN_VOCI_RIMANDO = 3
 
 
-def descrizione_riga(e):
+def descrizione_riga(e, oggi=None):
     """La descrizione dentro la riga dell'agenda: la prosa impaginata, e il
     programma sostituito da un rimando alla scheda.
 
@@ -2371,14 +2377,26 @@ def descrizione_riga(e):
     voci = voci_programma(coda) if coda else []
     if voci:
         url = f'/eventi/{slug_evento(e)}.html#programma' if ha_pagina(e) else ''
+        # Una serie con un programma per data (programmi_serie()): la scheda
+        # ne stampa uno per giorno, e la riga porta al SUO, col SUO numero.
+        # Prima portava a "Programma" e basta, cioe' a quello della prima data:
+        # la Fiera del Tartufo di Montiglio dell'11 ottobre prometteva 14
+        # appuntamenti e mostrava i 13 del 4, con un altro treno e un altro
+        # spettacolo per i bambini.
+        divisa = (url and oggi and _SERIE_RUN['ev'] is not None
+                  and programmi_serie(date_serie(slug_evento(e), _SERIE_RUN['ev'], oggi)))
+        if divisa:
+            url = f'/eventi/{slug_evento(e)}.html#{_ancora_programma(e)}'
         if url and len(voci) >= MIN_VOCI_RIMANDO:
             # Il numero e non l'etichetta: "12 appuntamenti in 5 giorni" e' una
             # ragione per toccare, "vedi il programma" no. Lezione di
             # link_luoghi().
             gg = len({d for d, _, _ in voci if d})
             quando = f' in {gg} giorni' if gg > 1 else ''
+            di_chi = (f'Il programma di {esc(_giorno_programma(e).lower())}'
+                      if divisa else 'Il programma completo')
             blocchi.append(f'<p class="ev-prog-rim"><a href="{url}">'
-                           f'Il programma completo: {len(voci)} appuntamenti'
+                           f'{di_chi}: {len(voci)} appuntamenti'
                            f'{quando} &rarr;</a></p>')
         else:
             blocchi.append(f'<p>{esc("Programma: " + coda)}</p>')
@@ -3187,6 +3205,11 @@ PAGINA_CSS = """
 .ev-date-l{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .ev-date-l li{line-height:1.45;font-variant-numeric:tabular-nums}
 .ev-date-l time{font-weight:600}
+/* Una serie con un programma per data (programma_serie_html()): il giorno e'
+   un titolo sopra il suo elenco, e l'ancora non finisce sotto la nav fissa. */
+.ev-prog-cambia{margin:0 0 .4em;font-size:.92rem;opacity:.8}
+.ev-prog-giorno{scroll-margin-top:90px;margin-top:1.1em}
+.ev-prog-dh{margin:0 0 .5em;font-size:1rem;font-weight:700;color:#8a6a12}
 /* La locandina e' un ritratto 3:4: a tutta larghezza occupava 780x1040px,
    cioe' piu' di uno schermo di scroll prima della descrizione. Sta in colonna,
    non e' la pagina. */
@@ -4659,6 +4682,61 @@ def date_serie(slug, vicini, oggi):
     return [viste[k] for k in sorted(viste)]
 
 
+# Gli eventi della run, per descrizione_riga(): la riga dell'agenda deve
+# prendere la stessa decisione della scheda (programmi_serie()), e la scheda la
+# prende sulla serie ricavata da questo stesso elenco. Lo scrive main().
+_SERIE_RUN = {'ev': None}
+
+
+def _voci_di(x):
+    pezzi = PROG_MARCA.split((x.get('descr') or '').strip(), maxsplit=1)
+    return voci_programma(pezzi[1]) if len(pezzi) > 1 else []
+
+
+def programmi_serie(serie):
+    """Le date di una serie col loro programma, SOLO se i programmi sono
+    diversi; se no None, e la scheda stampa il programma una volta sola.
+
+    PERCHE' (28/09/2026). La Fiera Nazionale del Tartufo di Montiglio
+    Monferrato e' due domeniche con lo stesso nome, quindi una scheda sola
+    (lo slug non porta la data, apposta). Ma i programmi sono due: il 4 ottobre
+    la Littorina e Mago Bingo, l'11 il treno storico, i rapaci e le bolle di
+    sapone. La scheda stampava quello del 4 anche a chi arrivava per l'11.
+    Una serie che ripete lo stesso programma (le letture del sabato) resta
+    com'era: un programma per data identico sarebbe la stessa lista N volte."""
+    if len(serie) < 2:
+        return None
+    progs = [(x, _voci_di(x)) for x in serie]
+    if not any(v for _, v in progs) or all(v == progs[0][1] for _, v in progs):
+        return None
+    return [(x, v) for x, v in progs if v]
+
+
+def _ancora_programma(x):
+    return f"programma-{x['d_start'].isoformat()}"
+
+
+def _giorno_programma(x):
+    di = x['d_start']
+    return f"{GIORNI[di.weekday()]} {di.day} {MESI_LUNGHI[di.month - 1]}"
+
+
+def programma_serie_html(progs):
+    """Un programma per data, ognuno con la sua ancora: la riga dell'agenda di
+    quella data porta li' (descrizione_riga()). Il giorno e' un titolo e non
+    l'etichetta a 62px dei programmi di piu' giorni: "Domenica 11 ottobre" in
+    quella gola andrebbe su tre righe."""
+    parti = []
+    for x, voci in progs:
+        a = _ancora_programma(x)
+        parti.append(f'<section class="ev-prog-giorno" id="{a}" aria-labelledby="{a}-t">'
+                     f'<h3 class="ev-prog-dh" id="{a}-t">{esc(_giorno_programma(x))}</h3>'
+                     f'<div class="ev-prog">{_programma_gruppi(voci)}</div></section>')
+    return ('<h2 class="ev-prog-h" id="programma">Programma</h2>'
+            '<p class="ev-prog-cambia">Il programma cambia da una data all\'altra.</p>'
+            + ''.join(parti))
+
+
 def blocco_date(serie, oggi):
     """«Tutte le date in programma», solo se le date sono almeno due.
 
@@ -4973,12 +5051,19 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     jsonld = json.dumps({"@context": "https://schema.org", "@graph": grafo},
                         ensure_ascii=False, indent=2)
 
-    corpo = corpo_descrizione(descr_txt)
     # Le altre date solo su una scheda viva: su una conclusa non ce ne sono (la
     # serie avrebbe gia' spostato la scheda sulla prossima), su una ritirata o
     # orfana sarebbero date di un appuntamento che la pagina non garantisce.
-    date_html = (blocco_date(date_serie(rec['slug'], vicini, oggi), oggi)
-                 if vicini and not (concluso or ritirata or orfano) else '')
+    serie = (date_serie(rec['slug'], vicini, oggi)
+             if vicini and not (concluso or ritirata or orfano) else [])
+    date_html = blocco_date(serie, oggi)
+    progs = programmi_serie(serie)
+    if progs:
+        # La prosa resta quella della scheda, il programma e' uno per data.
+        corpo = (corpo_descrizione(PROG_MARCA.split(descr_txt, maxsplit=1)[0])
+                 + programma_serie_html(progs))
+    else:
+        corpo = corpo_descrizione(descr_txt)
     famiglie = (blocco_famiglie(rec, vicini, oggi, hub=hub)
                 if vicini and not ritirata else '')
     consiglio = '' if ritirata else blocco_daop(e)
@@ -11020,6 +11105,7 @@ def main():
     segnala_date_ignote(events)
     segnala_senza_coordinate(events)
     assegna_ancore(events)
+    _SERIE_RUN['ev'] = events
     # Il proprio numero si scrive PRIMA di generare qualunque pagina: la riga
     # delle quattro porte lo rilegge, e scritto dopo mostrerebbe quello di ieri
     # anche sulle pagine di stanotte.
