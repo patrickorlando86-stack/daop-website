@@ -775,6 +775,11 @@ module.exports = async function corsi(browser) {
   const fileReg = path.join(RADICE, 'data', 'pagine-evento.json');
   const registro = fs.existsSync(fileReg)
     ? JSON.parse(fs.readFileSync(fileReg, 'utf8')) : {};
+  // Le pagine realta' PUBBLICHE, come le scrive genera_corsi.py: quelle in
+  // corsi/ che qui non ci sono sono anteprime (vedi la prova in fondo al ciclo).
+  const fileRealta = path.join(RADICE, 'data', 'realta-pagine.json');
+  const realtaPubbliche = fs.existsSync(fileRealta)
+    ? JSON.parse(fs.readFileSync(fileRealta, 'utf8')) : {};
   // La data di OGGI in locale, non toISOString: quello e' UTC, e d'estate
   // fra mezzanotte e le due direbbe gia' domani. Una prova che diventa rossa
   // solo di notte e' peggio di una prova che manca.
@@ -927,8 +932,23 @@ module.exports = async function corsi(browser) {
       ? `${f}: card che ripetono "${h1}": ${ripetono.join(' · ')}`
       : `${f}: ${titoliEv.length} card, nessuna ripete il nome della realtà`);
 
-    r.ok(hub.includes(`/corsi/${f}`),
-      `${f}: corsi.html la linka (non è orfana)`);
+    // L'ANTEPRIMA (29/09/2026, Rovereto Central Park) e' orfana APPOSTA: e' la
+    // pagina di esempio mandata a una societa' che non ha ancora detto si', e
+    // ci si arriva solo dal link che le abbiamo mandato (STATI_ANTEPRIMA in
+    // genera_corsi.py). La si riconosce dal registro: data/realta-pagine.json
+    // e' l'elenco delle pagine PUBBLICHE, e un'anteprima non ci entra. Per lei
+    // la regola si rovescia, e vale tutta: niente link dall'hub, noindex e
+    // fuori sitemap - se una delle tre cade, l'anteprima e' uscita in pubblico.
+    const slug = f.replace(/\.html$/, '');
+    if (!(slug in realtaPubbliche)) {
+      r.ok(!hub.includes(`/corsi/${f}`),
+        `${f}: in anteprima, e corsi.html NON la linka`);
+      r.ok(/noindex/.test(rob) && !inSitemap,
+        `${f}: in anteprima, noindex e fuori sitemap`);
+    } else {
+      r.ok(hub.includes(`/corsi/${f}`),
+        `${f}: corsi.html la linka (non è orfana)`);
+    }
     await q.ctx.close();
   }
 
