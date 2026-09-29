@@ -1311,6 +1311,17 @@
  },
  "bergolo": {
   "eventi": {
+   "caccia-ai-tesori-arancioni-touring-club-italiano-b-bergolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borghi Bandiera Arancione",
+    "manifest": "",
+    "nome": "Caccia ai Tesori Arancioni - Touring Club Italiano Bandiere Arancioni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "lo-spettacolo-scende-in-strada-con-lunaridens-show-bergolo": {
     "anni": [
      2026
@@ -2062,6 +2073,23 @@
    }
   },
   "nome": "Caraglio",
+  "prov": "CN"
+ },
+ "caramagnapiemonte": {
+  "eventi": {
+   "gita-cicloturistica-al-bosco-del-merlino-e-sulle-c-caramagna-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco del Merlino",
+    "manifest": "Autunno nel Parco del Monviso",
+    "nome": "Gita cicloturistica al Bosco del Merlino e sulle ciclovie di Racconigi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   }
+  },
+  "nome": "Caramagna Piemonte",
   "prov": "CN"
  },
  "carbonarascrivia": {
@@ -3585,6 +3613,17 @@
  },
  "cherasco": {
   "eventi": {
+   "festa-dei-nonni-e-degli-angeli-custodi-museo-della-cherasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo della Magia",
+    "manifest": "",
+    "nome": "Festa dei Nonni e degli Angeli Custodi - Museo della Magia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
    "intrecci-di-famiglie-rete-mamma-cherasco": {
     "anni": [
      2026
@@ -4104,6 +4143,17 @@
  },
  "crissolo": {
   "eventi": {
+   "alle-sorgenti-del-po-acqua-ghiacciai-e-paesaggio-a-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pian del Re",
+    "manifest": "Autunno nel Parco del Monviso",
+    "nome": "Alle sorgenti del Po: acqua, ghiacciai e paesaggio alpino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "caccia-al-tesoro-kam-3841-crissolo": {
     "anni": [
      2026
@@ -4225,6 +4275,17 @@
     "pagina": false,
     "ultima": "2026-08-08"
    },
+   "la-grotta-di-rio-martino-prima-del-letargo-dei-pip-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Grotta di Rio Martino",
+    "manifest": "Autunno nel Parco del Monviso",
+    "nome": "La Grotta di Rio Martino prima del letargo dei pipistrelli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "laboratorio-ciao-ciao-estate-sorprese-per-tutti-pr-crissolo": {
     "anni": [
      2026
@@ -4235,6 +4296,17 @@
     "organizza": "Pro Loco Crissolo",
     "pagina": true,
     "ultima": "2026-08-18"
+   },
+   "mercatini-sotto-il-monviso-comune-di-crissolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Strade di Crissolo",
+    "manifest": "",
+    "nome": "Mercatini sotto il Monviso - Comune di Crissolo",
+    "organizza": "Comune di Crissolo",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "serata-culturale-la-marchesa-giulia-di-barolo-si-p-crissolo": {
     "anni": [
@@ -4440,6 +4512,17 @@
     "pagina": true,
     "ultima": "2026-10-03"
    },
+   "fiera-nazionale-del-marrone-citta-di-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "",
+    "nome": "27ª Fiera Nazionale del Marrone - Città di Cuneo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-16"
+   },
    "film-sotto-le-stelle-il-robot-selvaggio-cooperativ-cuneo": {
     "anni": [
      2026
@@ -4461,6 +4544,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-11"
+   },
+   "hortus-deliciarum-concerto-per-famiglie-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Monumentale di San Francesco, Chiostro",
+    "manifest": "Sinestesie - Classica in Movimento",
+    "nome": "Hortus Deliciarum - Concerto per Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
+   "il-chiostro-suonato-concerto-per-famiglie-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Complesso Monumentale di San Francesco, Chiostro",
+    "manifest": "Classica in Movimento",
+    "nome": "Il Chiostro Suonato - Concerto per Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    },
    "il-corpo-giocoso-tutti-in-salute-cuneo": {
     "anni": [
@@ -4659,6 +4764,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-26"
+   },
+   "un-fiume-di-note-concerto-per-famiglie-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa del Fiume, Sala Gesso",
+    "manifest": "Classica in Movimento - Sinestesie",
+    "nome": "Un Fiume di Note - Concerto per Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
    },
    "vita-da-api-parco-fluviale-gesso-e-stura-cuneo": {
     "anni": [
@@ -5365,6 +5481,17 @@
  },
  "fossano": {
   "eventi": {
+   "autunno-e-musica-centro-famiglie-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Tana",
+    "manifest": "La Tana dei Cuccioli - Laboratori 0-3 anni",
+    "nome": "Autunno e Musica - Centro Famiglie Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
    "camminata-per-tutti-pro-loco-santa-lucia-di-fossan-fossano": {
     "anni": [
      2026
@@ -5420,6 +5547,28 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "laboratorio-di-halloween-centro-famiglie-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Tana",
+    "manifest": "La Tana dei Cuccioli - Laboratori 0-3 anni",
+    "nome": "Laboratorio di Halloween - Centro Famiglie Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
+   },
+   "letture-e-colori-centro-famiglie-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Tana",
+    "manifest": "La Tana dei Cuccioli - Laboratori 0-3 anni",
+    "nome": "Letture e Colori - Centro Famiglie Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-15"
+   },
    "magie-d-autunno-parco-fluviale-gesso-e-stura-fossano": {
     "anni": [
      2026
@@ -5441,6 +5590,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "seminiamo-ricordi-libreria-ubik-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Ubik Fossano",
+    "manifest": "",
+    "nome": "Seminiamo Ricordi? - Libreria Ubik Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
    },
    "sogni-di-mare-ricordi-di-sabbia-letture-favolose-fossano": {
     "anni": [
@@ -5662,6 +5822,17 @@
  },
  "govone": {
   "eventi": {
+   "cabaret-zuzzurellone-duoflosh-in-collaborazione-co-govone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello Reale di Govone",
+    "manifest": "",
+    "nome": "Cabaret Zuzzurellone - DuoFlosh in collaborazione con Concentrica - Teatro della Caduta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "castelli-aperti-a-ferragosto-castello-reale-govone": {
     "anni": [
      2026
@@ -6525,6 +6696,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-02"
+   },
+   "laboratorio-di-lanterne-il-bosco-dell-ochetta-monta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Bosco dell'Ochetta",
+    "manifest": "",
+    "nome": "Laboratorio di Lanterne - Il Bosco dell'Ochetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
    },
    "yoga-della-risata-radici-di-luce-monta": {
     "anni": [
@@ -8104,6 +8286,83 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "letture-per-bambini-maestra-claudia-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale Don Giovanni Garnero",
+    "manifest": "Letture per bambini",
+    "nome": "Letture per bambini - maestra Claudia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
+   "letture-per-bambini-maestra-daniela-piasco": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Comunale Don Giovanni Garnero",
+    "manifest": "Letture per bambini",
+    "nome": "Letture per bambini - maestra Daniela",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-30"
+   },
+   "letture-per-bambini-maestra-fiorella-piasco": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Comunale Don Giovanni Garnero",
+    "manifest": "Letture per bambini",
+    "nome": "Letture per bambini - maestra Fiorella",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-27"
+   },
+   "letture-per-bambini-mamma-agnese-piasco": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Comunale Don Giovanni Garnero",
+    "manifest": "Letture per bambini",
+    "nome": "Letture per bambini - mamma Agnese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-05-15"
+   },
+   "letture-per-bambini-mamma-anna-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale Don Giovanni Garnero",
+    "manifest": "Letture per bambini",
+    "nome": "Letture per bambini - mamma Anna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "letture-per-bambini-mamma-isa-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale Don Giovanni Garnero",
+    "manifest": "Letture per bambini",
+    "nome": "Letture per bambini - mamma Isa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "letture-per-bambini-nonna-michela-e-nonno-giulio-piasco": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Comunale Don Giovanni Garnero",
+    "manifest": "Letture per bambini",
+    "nome": "Letture per bambini - nonna Michela e nonno Giulio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-04-03"
+   },
    "venerdi-dei-giochi-in-scatola-biblioteca-di-piasco": {
     "anni": [
      2026,
@@ -8205,6 +8464,17 @@
     "organizza": "Pro Loco Pontechianale",
     "pagina": false,
     "ultima": "2026-08-12"
+   },
+   "escursione-invernale-nel-bosco-dell-aleve-pontechianale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco dell'Alevè",
+    "manifest": "Autunno nel Parco del Monviso",
+    "nome": "Escursione invernale nel Bosco dell'Alevè",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
    },
    "fiero-dei-seze-ritorno-dall-alpe-pontechianale": {
     "anni": [
@@ -9071,6 +9341,17 @@
     "pagina": true,
     "ultima": "2026-09-11"
    },
+   "laboratorio-con-la-natura-al-museo-naturalistico-d-revello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Naturalistico del Fiume Po",
+    "manifest": "Autunno nel Parco del Monviso",
+    "nome": "Laboratorio con la natura al museo naturalistico del Fiume Po",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "octavia-in-movimento-revello": {
     "anni": [
      2026
@@ -9116,6 +9397,17 @@
  },
  "rifreddo": {
   "eventi": {
+   "la-notte-delle-streghe-mistero-a-rifreddo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Monastero di Santa Maria della Stella",
+    "manifest": "",
+    "nome": "La Notte delle Streghe - Mistero a Rifreddo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "pigiama-run-lilt-cuneo-rifreddo": {
     "anni": [
      2026
@@ -9718,6 +10010,17 @@
     "organizza": "ASD Transvaraita",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "obiettivo-foliage-workshop-fotografico-tra-i-color-sampeyre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sentiero dei Sarvanot",
+    "manifest": "Autunno nel Parco del Monviso",
+    "nome": "Obiettivo Foliage: workshop fotografico tra i colori dell'autunno in Val Varaita",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
    },
    "serata-cartoni-animati-bar-vittoria-sampeyre": {
     "anni": [
@@ -10396,6 +10699,17 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "missione-natura-visita-all-oasi-la-madonnina-parco-sant-albano-stura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oasi naturalistica La Madonnina",
+    "manifest": "Autunno al Parco 2026",
+    "nome": "Missione Natura - Visita all'Oasi 'La Madonnina' - Parco Fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "percorso-apericena-e-street-food-pro-loco-sant-alb-sant-albano-stura": {
     "anni": [
      2026
@@ -10590,6 +10904,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "equi-lab-centro-famiglie-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglie",
+    "manifest": "",
+    "nome": "Equi LAB - Centro Famiglie Savigliano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-28"
+   },
    "game-on-centro-famiglie-e-ludoteca-la-casa-sull-al-savigliano": {
     "anni": [
      2026
@@ -10612,6 +10937,17 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "prisma-di-benessere-la-voce-di-elisa-odv-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Graneris",
+    "manifest": "Festival del Rumore 2026",
+    "nome": "Prisma di Benessere - La Voce di Elisa ODV",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
    "sport-in-piazza-comune-di-savigliano": {
     "anni": [
      2026
@@ -10622,6 +10958,17 @@
     "organizza": "Comune di Savigliano",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "visita-guidata-corsette-sul-trenino-e-laboratorio-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Ferroviario Piemontese",
+    "manifest": "",
+    "nome": "Visita Guidata, Corsette sul Trenino e Laboratorio Creativo - Museo Ferroviario Piemontese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
    }
   },
   "nome": "Savigliano",
@@ -11274,7 +11621,7 @@
     "nome": "Leggiamo Insieme - Che Stooria",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-12"
+    "ultima": "2026-10-10"
    }
   },
   "nome": "Treiso",
