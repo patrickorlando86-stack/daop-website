@@ -1086,12 +1086,12 @@
  },
  "c-cn-crissolo": {
   "comune": "Crissolo",
-  "n": 5,
+  "n": 6,
   "prov": "CN"
  },
  "c-cn-cuneo": {
   "comune": "Cuneo",
-  "n": 12,
+  "n": 13,
   "prov": "CN"
  },
  "c-cn-demonte": {
@@ -1131,7 +1131,7 @@
  },
  "c-cn-fossano": {
   "comune": "Fossano",
-  "n": 4,
+  "n": 5,
   "prov": "CN"
  },
  "c-cn-frabosa-soprana": {
@@ -1342,6 +1342,11 @@
  "c-cn-revello": {
   "comune": "Revello",
   "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-rifreddo": {
+  "comune": "Rifreddo",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-robilante": {
