@@ -61,7 +61,7 @@
    "slug": "cinzano"
   },
   "cn-cuneo": {
-   "n": 3,
+   "n": 4,
    "nome": "Cuneo",
    "slug": "cuneo"
   },
@@ -127,6 +127,6 @@
   }
  },
  "province": {
-  "CN": 104
+  "CN": 105
  }
 }
