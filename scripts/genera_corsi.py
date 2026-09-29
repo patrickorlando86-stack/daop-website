@@ -1535,6 +1535,51 @@ def togli_nascoste(corsi, realta):
     return [c for c in corsi if slug_realta(c.get('org') or '') not in fuori]
 
 
+# ── L'ANTEPRIMA: la pagina da mostrare a una societa' che non ha detto si' ──
+#
+# Nata il 29/09/2026 per Rovereto Central Park (Alessandria). Per proporre la
+# guida corsi a una societa' si prepara la sua pagina e le si manda il link. La
+# scheda sulla tab Realta diceva "da inviare", e quello bastava a tenere fuori
+# da Google la PAGINA. Ma i sei corsi avevano lo Stato vuoto, che su questa tab
+# vuol dire "pubblica": stavano in corsi.html (in indice), nei conteggi dei
+# comuni e nell'app, quindi Ginetto poteva mandare una famiglia a un corso di
+# una societa' che non aveva ancora risposto. Patrick: "quando facciamo vedere
+# una pagina di esempio pubblichiamo proprio sul sito gia'... non ha senso".
+#
+# "anteprima" nella cella Stato di un CORSO vuol dire: esiste SOLO sulla pagina
+# della sua societa'. Fuori da corsi.html, dai conteggi, da data/corsi-comuni e
+# dal registro delle pagine (niente link dalle schede evento); la pagina si
+# scrive lo stesso, ma noindex e fuori sitemap qualunque cosa dica la tab
+# Realta. Quando la societa' dice si' si svuota la cella e il corso diventa
+# pubblico; se dice no, "bozza" e sparisce tutto, pagina compresa.
+#
+# E' una parola a parte e non una di STATI_BOZZA: un corso spento sparisce
+# anche dalla sua pagina, questo no - il link gia' mandato deve funzionare.
+# L'app ha la stessa parola (_STATI_ANTEPRIMA in app.js) e li' vale "spento",
+# perche' l'app pagine delle societa' non ne ha.
+STATI_ANTEPRIMA = ('anteprima',)
+
+
+def separa_anteprime(corsi):
+    """(pubblici, in_anteprima): i corsi con lo Stato "anteprima" da una parte.
+
+    Vedi STATI_ANTEPRIMA. Si stampa sempre chi c'e' in anteprima: e' l'unico
+    posto in cui si vede che un corso sul foglio NON e' sul sito, ed e' giusto
+    cosi' solo finche' qualcuno se lo ricorda."""
+    anteprime = [c for c in corsi if _stato_e({'stato': c.get('stato') or ''},
+                                              STATI_ANTEPRIMA)]
+    if not anteprime:
+        return corsi, []
+    per_org = {}
+    for c in anteprime:
+        per_org.setdefault(c.get('org') or '?', []).append(c)
+    for org, cs in sorted(per_org.items()):
+        print(f"[genera_corsi]   in anteprima: {org} ({len(cs)} corsi) — solo "
+              f"su {url_realta(org)}, noindex, fuori dall'elenco")
+    fuori = {id(c) for c in anteprime}
+    return [c for c in corsi if id(c) not in fuori], anteprime
+
+
 def togli_corsi_spenti(corsi):
     """I singoli corsi con lo Stato spento, fuori dall'elenco.
 
@@ -2593,7 +2638,7 @@ def indice_realta_path():
     return os.path.join(ROOT, DIR_REALTA, '_realta-pagine.json')
 
 
-def scrivi_realta(gruppi, realta, css, nav, foot):
+def scrivi_realta(gruppi, realta, css, nav, foot, in_anteprima=()):
     """Scrive le pagine delle realta' che se le meritano, e toglie quelle che
     non se le meritano piu'.
 
@@ -2607,7 +2652,10 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
     risolto qui nel verso giusto — e prima che li'.
 
     La scheda in corsi.html invece resta finche' la realta' ha corsi nel foglio,
-    e con lei l'ancora #r-…: i link gia' girati non si rompono comunque."""
+    e con lei l'ancora #r-…: i link gia' girati non si rompono comunque.
+
+    `in_anteprima`: gli slug delle societa' che hanno corsi in anteprima (vedi
+    STATI_ANTEPRIMA). La loro pagina c'e', ma fuori da registro e sitemap."""
     import glob as _glob
     dest = os.path.join(ROOT, DIR_REALTA)
     os.makedirs(dest, exist_ok=True)
@@ -2623,7 +2671,16 @@ def scrivi_realta(gruppi, realta, css, nav, foot):
             continue
         f = f"{slug_realta(org)}.html"
         vive.add(f)
-        indice[slug_realta(org)] = {'nome': org, 'url': f"/{DIR_REALTA}/{f}"}
+        # UNA SOCIETA' IN ANTEPRIMA (29/09/2026, vedi STATI_ANTEPRIMA): la
+        # pagina si scrive, perche' il link e' gia' stato mandato, ma nessuno
+        # ci arriva se non da quel link. Niente registro (le schede evento non
+        # ci puntano), niente sitemap, e noindex anche se la tab Realta dicesse
+        # "confermata": lo Stato vero, qui, e' quello dei suoi corsi.
+        if slug_realta(org) in in_anteprima:
+            info = dict(info, stato='anteprima')
+        else:
+            indice[slug_realta(org)] = {'nome': org,
+                                        'url': f"/{DIR_REALTA}/{f}"}
         # Solo le confermate vanno in sitemap. Non e' una restrizione in piu':
         # e' l'invariante che aggiorna_sitemap dichiara gia' - una URL in
         # sitemap con robots noindex sono due ordini che si contraddicono.
@@ -4365,6 +4422,11 @@ def main():
     # registro. Sta dopo leggi_realta() perche' la cella Stato che lo decide
     # arriva da li'.
     corsi = togli_nascoste(corsi, realta)
+    # Le ANTEPRIME escono qui, DOPO le bozze (una societa' in bozza sparisce
+    # tutta, anteprime comprese) e PRIMA di contare: da qui in giu' `corsi` e'
+    # quello che il sito pubblica, e le anteprime tornano solo per scrivere la
+    # pagina della loro societa'. Vedi STATI_ANTEPRIMA.
+    corsi, anteprime = separa_anteprime(corsi)
     # Il proprio numero prima di render(), e DOPO il taglio: la riga delle
     # quattro porte lo rilegge, e deve contare i corsi che si vedono davvero.
     G.conteggio_scrivi('corsi', len(corsi))
@@ -4374,8 +4436,10 @@ def main():
     # esistono per decidere dove manda il link "Organizzatore". Fra le due
     # chiamate la fonte e' la stessa (ha_pagina sulla riga della tab Realta),
     # quindi non possono divergere.
-    gruppi = raggruppa_per_realta(corsi)
-    pagine = scrivi_realta(gruppi, realta, css, nav, foot)
+    gruppi = raggruppa_per_realta(corsi + anteprime)
+    in_anteprima = {slug_realta(c.get('org') or '') for c in anteprime}
+    pagine = scrivi_realta(gruppi, realta, css, nav, foot,
+                           in_anteprima=in_anteprima)
     nuovo = render(corsi, css, nav, foot, realta)
     vecchio = open(PATH, encoding='utf-8').read() if os.path.exists(PATH) else ''
     if nuovo != vecchio:
