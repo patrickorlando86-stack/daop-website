@@ -1,5 +1,10 @@
 {
  "comuni": {
+  "al-alessandria": {
+   "n": 6,
+   "nome": "Alessandria",
+   "slug": "alessandria"
+  },
   "cn-alba": {
    "n": 5,
    "nome": "Alba",
@@ -127,6 +132,7 @@
   }
  },
  "province": {
+  "AL": 6,
   "CN": 104
  }
 }
