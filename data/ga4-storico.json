@@ -22,6 +22,29 @@
    "ev_scroll_depth": 11577,
    "ginetto_pre": 26,
    "ginetto_post": 6
+  },
+  {
+   "fine": "2026-09-27",
+   "inizio": "2026-08-31",
+   "utenti": 7146,
+   "sessioni": 8115,
+   "viste": 13313,
+   "pagine_sessione": 1.64,
+   "copertura": 45.6,
+   "ev_click_come_arrivare": 174,
+   "ev_click_telefono": 19,
+   "ev_click_email": 8,
+   "ev_click_locandina": 244,
+   "ev_click_sito_organizzatore": 15,
+   "ev_click_social": 34,
+   "ev_aggiungi_calendario": 67,
+   "ev_apri_ginetto": 43,
+   "ev_apri_corso": 691,
+   "ev_iscrizione_canale": 4,
+   "ev_vicino_a_me": 60,
+   "ev_scroll_depth": 12922,
+   "ginetto_pre": 1,
+   "ginetto_post": 42
   }
  ]
 }

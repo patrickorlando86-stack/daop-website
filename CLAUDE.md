@@ -4285,6 +4285,37 @@ quella dimensione, punto** — e l'unico posto dove si guarda è il report
 Miglioramenti → Eventi in Search Console. Un foglio vuoto non è una diagnosi sul
 markup.
 
+#### La lettura del 30/09: il restyling non si giudica ancora, e la base è 1,64
+
+Export del 30/09/2026, finestra **31/08-27/09**. Il sito è sano: 15.687 clic,
+settimane in risalita (462 → 550 → 586 clic/g), pavimento feriale ~307, brand
+`daop` da 14 a 34 clic, copertura GA4/GSC 45,6%. Tre cose da ricordare.
+
+- **Il CTR delle schede (5,20%, −2 punti) è composizione, non salute.** Tre
+  schede di capoluogo — Palio di Asti (28.046 impressioni), Festa del Vino di
+  Casale (due schede, ~21.000), Festival delle Sagre Astigiane (11.050) — fanno
+  60.000 impressioni sotto lo 0,6%. Tolte le schede sopra 800 impressioni e sotto
+  il 2,5%, le schede convertono all'**8,06%**. Da qui la regola: **nei mesi dei
+  capoluoghi anche il CTR delle schede si legge al netto delle gonfie**, non solo
+  quello aggregato.
+- **L'avviso «per bambini: prima volta» di `leggi_gsc.py` è falso**: 377
+  impressioni contro le 357 dell'08/09 (+6%). Scatta sulla soglia, non sulla
+  crescita. Le schede pensate per i bambini sono un terzo delle schede e il 5%
+  dei clic: un laboratorio in biblioteca non si cerca per nome.
+- **Le pagine comune calano (101 → 35 clic a settimana) per stagione**, non per
+  il restyling: il calo parte il 07/09. Vivevano di una festa (Govone, Spigno,
+  Ovada, Caraglio, Ponzone) e, finita la festa, vanno in `noindex` (15 su 48).
+
+**Il restyling del 24-28/09** (coda corta, indice in fondo all'agenda, eventi
+vicini sulle concluse, briciole dal comune, home snella) è dentro l'export per
+tre giorni: non si giudica. La base è **1,64 pagine per sessione**, identica da
+agosto. Nei primi tre giorni `internal_cta_click` su `internal_cta_view` passa
+da 4,7 a 7,1 — ma è gonfiato dai blocchi tracciati nuovi (`ora`, `bambini`) — e
+le pagine per sessione del weekend scendono da 1,60 a 1,46, forse per
+composizione. **Il numero onesto è quello delle pagine per sessione**, perché
+non dipende da cosa si traccia. Prima lettura valida: **mercoledì 14/10**
+(export fino al ~12/10), conferma il 28/10.
+
 #### Il calendario avanti non è un allarme: lo dice Patrick, e chiude il punto
 
 **02/09/2026, e vale da qui in avanti.** Per quattro export di fila la sezione
