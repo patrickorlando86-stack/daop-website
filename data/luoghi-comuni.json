@@ -11,12 +11,12 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 65,
+  "n": 72,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
   "comune": "Alfiano Natta",
-  "n": 3,
+  "n": 4,
   "prov": "AL"
  },
  "c-al-alice-bel-colle": {
@@ -91,7 +91,7 @@
  },
  "c-al-capriata-d-orba": {
   "comune": "Capriata d'Orba",
-  "n": 2,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-carentino": {
@@ -101,7 +101,7 @@
  },
  "c-al-carpeneto": {
   "comune": "Carpeneto",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-carrosio": {
@@ -116,12 +116,12 @@
  },
  "c-al-casal-cermelli": {
   "comune": "Casal Cermelli",
-  "n": 2,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-casale-monferrato": {
   "comune": "Casale Monferrato",
-  "n": 36,
+  "n": 37,
   "prov": "AL"
  },
  "c-al-casaleggio-boiro": {
@@ -281,7 +281,7 @@
  },
  "c-al-mongiardino-ligure": {
   "comune": "Mongiardino Ligure",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-monleale": {
@@ -321,7 +321,7 @@
  },
  "c-al-novi-ligure": {
   "comune": "Novi Ligure",
-  "n": 41,
+  "n": 43,
   "prov": "AL"
  },
  "c-al-olivola": {
@@ -344,9 +344,14 @@
   "n": 10,
   "prov": "AL"
  },
+ "c-al-oviglio": {
+  "comune": "Oviglio",
+  "n": 1,
+  "prov": "AL"
+ },
  "c-al-ozzano-monferrato": {
   "comune": "Ozzano Monferrato",
-  "n": 4,
+  "n": 5,
   "prov": "AL"
  },
  "c-al-pareto": {
@@ -356,7 +361,7 @@
  },
  "c-al-pasturana": {
   "comune": "Pasturana",
-  "n": 4,
+  "n": 5,
   "prov": "AL"
  },
  "c-al-pecetto-di-valenza": {
@@ -419,6 +424,11 @@
   "n": 1,
   "prov": "AL"
  },
+ "c-al-rivalta-bormida": {
+  "comune": "Rivalta Bormida",
+  "n": 1,
+  "prov": "AL"
+ },
  "c-al-rocca-grimalda": {
   "comune": "Rocca Grimalda",
   "n": 1,
@@ -452,11 +462,6 @@
  "c-al-san-giorgio-monferrato": {
   "comune": "San Giorgio Monferrato",
   "n": 2,
-  "prov": "AL"
- },
- "c-al-san-giuliano": {
-  "comune": "San Giuliano",
-  "n": 1,
   "prov": "AL"
  },
  "c-al-san-salvatore-monferrato": {
@@ -496,7 +501,7 @@
  },
  "c-al-spinetta-marengo": {
   "comune": "Spinetta Marengo",
-  "n": 5,
+  "n": 4,
   "prov": "AL"
  },
  "c-al-stazzano": {
@@ -516,7 +521,7 @@
  },
  "c-al-tassarolo": {
   "comune": "Tassarolo",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-terruggia": {
@@ -536,7 +541,7 @@
  },
  "c-al-treville": {
   "comune": "Treville",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-trisobbio": {
@@ -611,7 +616,7 @@
  },
  "c-at-asti": {
   "comune": "Asti",
-  "n": 51,
+  "n": 52,
   "prov": "AT"
  },
  "c-at-belveglio": {
