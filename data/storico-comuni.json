@@ -808,6 +808,17 @@
     "pagina": true,
     "ultima": "2026-08-13"
    },
+   "settimana-dell-allattamento-irccs-aou-al-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Presidio Ospedale Infantile Cesare Arrigo",
+    "manifest": "",
+    "nome": "Settimana dell'Allattamento - IRCCS AOU AL",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
    "super-mario-galaxy-alessandria": {
     "anni": [
      2026
@@ -1260,6 +1271,17 @@
  },
  "basaluzzo": {
   "eventi": {
+   "arriva-il-teatro-dei-burattini-basaluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Manifestazioni",
+    "manifest": "",
+    "nome": "Arriva il Teatro dei Burattini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
+   },
    "passeggiata-cicloturistica-per-bambini-e-bambine-c-basaluzzo": {
     "anni": [
      2026
@@ -1468,6 +1490,17 @@
  },
  "bosio": {
   "eventi": {
+   "bosio-castagnata": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza 1° Luglio",
+    "manifest": "Bosio Castagnata 2026",
+    "nome": "Bosio Castagnata 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "festa-del-major-bosio": {
     "anni": [
      2026
@@ -2273,6 +2306,17 @@
  },
  "casalcermelli": {
   "eventi": {
+   "fiera-del-cavolo-di-san-giovanni-casal-cermelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Carlo",
+    "manifest": "1^ Fiera del Cavolo di San Giovanni",
+    "nome": "1^ Fiera del Cavolo di San Giovanni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "sagra-della-focaccia-al-formaggio-e-delle-trofie-a-casal-cermelli": {
     "anni": [
      2026
@@ -7663,6 +7707,28 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "festa-quartiere-g3-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Quartiere G3",
+    "manifest": "Festa Quartiere G3 Novi Ligure 2026",
+    "nome": "Festa Quartiere G3 Novi Ligure 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
+   "giornata-ben-essere-i-r-i-s-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Comunale di Cultura G. Capurro - Biblioteca",
+    "manifest": "IV Giornata Ben-Essere I.R.I.S.",
+    "nome": "IV Giornata Ben-Essere I.R.I.S.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
    "i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure": {
     "anni": [
      2026
@@ -7805,6 +7871,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "storie-al-parco-per-la-festa-dei-nonni-la-bottega-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Castello",
+    "manifest": "",
+    "nome": "Storie al Parco per la Festa dei Nonni - La Bottega del Sanconiglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-02"
    },
    "storie-coraggiose-per-super-lettori-biblioteca-civ-novi-ligure": {
     "anni": [
@@ -8180,6 +8257,61 @@
  },
  "pasturana": {
   "eventi": {
+   "le-letture-del-sabato-halloween-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture del Sabato",
+    "nome": "Le Letture del Sabato - Halloween",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "le-letture-del-sabato-i-colori-dell-autunno-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture del Sabato",
+    "nome": "Le Letture del Sabato - I Colori dell'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "le-letture-del-sabato-il-litigio-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture del Sabato",
+    "nome": "Le Letture del Sabato - Il Litigio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
+   "le-letture-del-sabato-la-festa-dei-nonni-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture del Sabato",
+    "nome": "Le Letture del Sabato - La Festa dei Nonni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
+   "le-letture-del-sabato-tornati-a-scuola-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture del Sabato",
+    "nome": "Le Letture del Sabato - Tornati a Scuola!!!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
    "sagra-del-corzetto-settembre-pasturanese-pasturana": {
     "anni": [
      2026
@@ -9859,6 +9991,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-16"
+   },
+   "vendemmia-in-arte-edizione-rosignano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Saloni Morano",
+    "manifest": "Vendemmia in Arte - 31° Edizione",
+    "nome": "Vendemmia in Arte - 31° Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
    }
   },
   "nome": "Rosignano Monferrato",
@@ -12426,6 +12569,17 @@
     "organizza": "Pro Loco Voltaggio / PazzoAnimazione",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "festa-d-autunno-pro-loco-voltaggio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Sagre - Campo Sportivo",
+    "manifest": "",
+    "nome": "Festa d'Autunno - Pro Loco Voltaggio",
+    "organizza": "Pro Loco Voltaggio",
+    "pagina": true,
+    "ultima": "2026-10-18"
    },
    "sagra-degli-gnocchi-al-pesto-circolo-ricreativo-en-voltaggio": {
     "anni": [
