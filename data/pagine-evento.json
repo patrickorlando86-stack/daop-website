@@ -1422,7 +1422,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 235,
+  "riga": 234,
   "slug": "apertura-al-pubblico-la-fabbrica-dei-suoni-boves",
   "updated": "2026-10-01"
  },
@@ -3352,7 +3352,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito per titolari Abbonamento Musei Piemonte",
   "prov": "CN",
-  "riga": 234,
+  "riga": 233,
   "slug": "cartoline-saluti-da-visita-narrata-e-laboratorio-d-garessio",
   "updated": "2026-10-01"
  },
@@ -5413,7 +5413,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 233,
+  "riga": 232,
   "slug": "domenica-4-ottobre-revello",
   "updated": "2026-10-01"
  },
@@ -9522,7 +9522,7 @@
   "ora": "14:30",
   "prezzo": "5 euro (iscrizione sul luogo)",
   "prov": "CN",
-  "riga": 232,
+  "riga": 231,
   "slug": "fitwalking-pro-loco-barge",
   "updated": "2026-10-01"
  },
@@ -12464,6 +12464,7 @@
   "prezzo": "20 euro a persona (gratis per bimbi fino a 5 anni)",
   "prov": "CN",
   "riga": 237,
+  "ritirata": "2026-10-01",
   "slug": "la-raccolta-delle-castagne-evento",
   "updated": "2026-10-01"
  },
@@ -15067,7 +15068,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 236,
+  "riga": 235,
   "slug": "nonni-leggetemi-una-storia-festa-dei-nonni-santa-vittoria-d-alba",
   "updated": "2026-10-01"
  },
@@ -16818,6 +16819,7 @@
   "prezzo": "20 euro",
   "prov": "CN",
   "riga": 231,
+  "ritirata": "2026-10-01",
   "slug": "pony-games-di-halloween-la-canunia-evento",
   "updated": "2026-10-01"
  },
@@ -17965,7 +17967,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 238,
+  "riga": 236,
   "slug": "s-io-fossi-lupo-acceglio",
   "updated": "2026-10-01"
  },
@@ -20435,7 +20437,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 240,
+  "riga": 238,
   "slug": "sport-culture-festival-mondovi-si-muove",
   "updated": "2026-10-01"
  },
@@ -21400,7 +21402,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 239,
+  "riga": 237,
   "slug": "transumanza-e-castagnata-roburent",
   "updated": "2026-10-01"
  },
@@ -21705,7 +21707,7 @@
   "ora": "17:00-18:00",
   "prezzo": "20 euro (residenti Cardè e frequentatori Baby Parking), 25 euro per tutti gli altri. Inclusi materiale e merenda.",
   "prov": "CN",
-  "riga": 241,
+  "riga": 239,
   "slug": "un-abbraccio-d-autunno-l-ape-biricchina-baby-parki-carde",
   "updated": "2026-10-01"
  },
