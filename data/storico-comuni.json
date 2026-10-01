@@ -16,6 +16,23 @@
   "nome": "Abasse",
   "prov": "CN"
  },
+ "acceglio": {
+  "eventi": {
+   "s-io-fossi-lupo-acceglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Comune Acceglio",
+    "manifest": "S'io Fossi Lupo",
+    "nome": "S'io Fossi Lupo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   }
+  },
+  "nome": "Acceglio",
+  "prov": "CN"
+ },
  "acquiterme": {
   "eventi": {
    "acqui-prog-night-acqui-rock-festival-acqui-terme": {
@@ -304,6 +321,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-15"
+   },
+   "il-libro-della-buonanotte-storie-per-bambine-e-bam-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Marameo",
+    "manifest": "",
+    "nome": "Il Libro della Buonanotte - Storie per Bambine e Bambini Sognatori - Libreria Marameo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-13"
    },
    "inaugurazione-sede-kids-us-alba-kids-us-alba": {
     "anni": [
@@ -1204,6 +1232,17 @@
     "pagina": true,
     "ultima": "2026-09-18"
    },
+   "fitwalking-pro-loco-barge": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Garibaldi",
+    "manifest": "",
+    "nome": "FitWalking - Pro Loco Barge",
+    "organizza": "Pro Loco Barge",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
    "il-filo-della-gentilezza-biblioteca-comunale-miche-barge": {
     "anni": [
      2026
@@ -1518,6 +1557,61 @@
  },
  "boves": {
   "eventi": {
+   "apertura-al-pubblico-la-fabbrica-dei-suoni-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ex Filanda Favole",
+    "manifest": "Apertura al Pubblico La Fabbrica dei Suoni",
+    "nome": "Apertura al Pubblico La Fabbrica dei Suoni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
+   "biblio-baby-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca del Ricetto",
+    "manifest": "Ottobre in Biblioteca",
+    "nome": "Biblio Baby",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-23"
+   },
+   "bibliochef-con-elena-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca del Ricetto",
+    "manifest": "Ottobre in Biblioteca",
+    "nome": "Bibliochef con Elena",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
+   },
+   "favolando-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca del Ricetto",
+    "manifest": "Ottobre in Biblioteca",
+    "nome": "Favolando",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-28"
+   },
+   "minichef-con-elena-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca del Ricetto",
+    "manifest": "Ottobre in Biblioteca",
+    "nome": "Minichef con Elena",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-22"
+   },
    "rivoira-by-sport-boves": {
     "anni": [
      2026
@@ -1539,6 +1633,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-12"
+   },
+   "uncinetto-corso-base-con-ivana-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca del Ricetto",
+    "manifest": "Ottobre in Biblioteca",
+    "nome": "Uncinetto Corso Base con Ivana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-27"
    }
   },
   "nome": "Boves",
@@ -2141,6 +2246,23 @@
   },
   "nome": "Carbonara Scrivia",
   "prov": "AL"
+ },
+ "carde": {
+  "eventi": {
+   "un-abbraccio-d-autunno-l-ape-biricchina-baby-parki-carde": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Ape Biricchina Baby Parking",
+    "manifest": "",
+    "nome": "Un abbraccio d'autunno - L'Ape Biricchina Baby Parking",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-06"
+   }
+  },
+  "nome": "Cardè",
+  "prov": "CN"
  },
  "carpeneto": {
   "eventi": {
@@ -3034,6 +3156,39 @@
  },
  "castellar": {
   "eventi": {
+   "costruiamo-insieme-castellar": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Tomatis",
+    "manifest": "I Laboratori di Castellar",
+    "nome": "Costruiamo INSIEME - Castellar",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   },
+   "laboratori-d-autunno-castellar": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzetta del Municipio",
+    "manifest": "I Laboratori di Castellar",
+    "nome": "Laboratori d'autunno - Castellar",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-12"
+   },
+   "laboratori-di-halloween-castellar": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzetta del Municipio",
+    "manifest": "I Laboratori di Castellar",
+    "nome": "Laboratori di Halloween - Castellar",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-26"
+   },
    "laboratorio-creativo-di-feltro-ecomuseo-della-past-castellar": {
     "anni": [
      2026
@@ -5813,6 +5968,23 @@
   "nome": "Garbagna",
   "prov": "AL"
  },
+ "garessio": {
+  "eventi": {
+   "cartoline-saluti-da-visita-narrata-e-laboratorio-d-garessio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Casotto",
+    "manifest": "",
+    "nome": "Cartoline: saluti da... - Visita narrata e laboratorio di acquerelli en plein air",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   }
+  },
+  "nome": "Garessio",
+  "prov": "CN"
+ },
  "gavi": {
   "eventi": {
    "falesia-in-festa-prova-gratuita-di-arrampicata-pro-gavi": {
@@ -6673,6 +6845,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "sport-culture-festival-mondovi-si-muove": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro città di Mondovì",
+    "manifest": "",
+    "nome": "Sport & Culture Festival - Mondovì si Muove",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-08"
    },
    "sport-in-piazza-lo-sport-per-tutti-citta-di-mondov-mondovi": {
     "anni": [
@@ -9473,6 +9656,17 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "domenica-4-ottobre-revello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile Palazzo Comunale",
+    "manifest": "Domenica 4 Ottobre 2026 - Revello",
+    "nome": "Domenica 4 Ottobre 2026 - Revello",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "ernest-e-celestine-cinema-sotto-le-stelle-revello": {
     "anni": [
      2026
@@ -9606,6 +9800,17 @@
     "organizza": "Pro Loco Roburent",
     "pagina": true,
     "ultima": "2026-08-12"
+   },
+   "transumanza-e-castagnata-roburent": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cardini di Roburent",
+    "manifest": "Transumanza e Castagnata",
+    "nome": "Transumanza e Castagnata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
    }
   },
   "nome": "Roburent",
@@ -9979,6 +10184,34 @@
   "nome": "Roddi",
   "prov": "CN"
  },
+ "roddino": {
+  "eventi": {
+   "cappuccetto-rosso-e-le-mamme-che-incoraggiano-l-au-roddino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Via Marconi 12",
+    "manifest": "Narrazioni Multisensoriali",
+    "nome": "Cappuccetto Rosso e le Mamme che Incoraggiano l'Autonomia! - Insieme per Crescere Roddino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "il-gatto-con-gli-stivali-quando-il-cervello-ci-tir-roddino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Via Marconi 12",
+    "manifest": "Narrazioni Multisensoriali",
+    "nome": "Il Gatto con gli Stivali, Quando il Cervello ci Tira Fuori dai Guai - Insieme per Crescere Roddino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   }
+  },
+  "nome": "Roddino",
+  "prov": "CN"
+ },
  "rosignanomonferrato": {
   "eventi": {
    "castelli-aperti-a-ferragosto-visite-del-borgo-rosignano-monferrato": {
@@ -10043,6 +10276,17 @@
  },
  "saluzzo": {
   "eventi": {
+   "chef-challenge-sfida-ai-fornelli-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Quartiere - Spaccio Bistrot",
+    "manifest": "",
+    "nome": "Chef Challenge - Sfida ai fornelli!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "cresco-con-te-bibliopride-saluzzo": {
     "anni": [
      2026
@@ -10989,6 +11233,23 @@
   "nome": "Sant'Albano Stura",
   "prov": "CN"
  },
+ "santavittoriadalba": {
+  "eventi": {
+   "nonni-leggetemi-una-storia-festa-dei-nonni-santa-vittoria-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Primaria del Borgo",
+    "manifest": "",
+    "nome": "Nonni Leggetemi una Storia! - Festa dei Nonni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-03"
+   }
+  },
+  "nome": "Santa Vittoria d'Alba",
+  "prov": "CN"
+ },
  "santostefanobelbo": {
   "eventi": {
    "festa-vendemmia-cascina-fontanette-santo-stefano-belbo": {
@@ -11068,6 +11329,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-28"
+   },
+   "famiglia-in-gioco-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ala Polifunzionale di Savigliano",
+    "manifest": "Famiglia in Gioco",
+    "nome": "Famiglia in Gioco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-23"
    },
    "game-on-centro-famiglie-e-ludoteca-la-casa-sull-al-savigliano": {
     "anni": [
