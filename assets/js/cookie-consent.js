@@ -41,6 +41,35 @@
     return location.pathname.replace(/\/index\.html$/i, '/') || '/';
   }
 
+  /* Il traffico interno si MARCA, non si indovina (02/10/2026). Aprendo una
+     volta qualunque pagina con ?interno=1, questo browser resta segnato e
+     ogni evento parte con traffic_type=internal, che il filtro "Traffico
+     interno" di GA4 riconosce. ?interno=0 toglie il segno. Il parametro si
+     toglie subito dall'indirizzo, prima del config: cosi' non finisce nel
+     page_location e non gira se il link viene copiato. Il segno e' una
+     preferenza nostra, non un dato di misura: si scrive anche senza consenso,
+     e senza consenso non parte niente lo stesso. */
+  var INTERNO = 'daop-interno';
+  function traffico_interno() {
+    var q;
+    try { q = new URLSearchParams(location.search); } catch (e) { return false; }
+    var v = q.get('interno');
+    if (v !== null) {
+      try {
+        if (v === '0') localStorage.removeItem(INTERNO);
+        else localStorage.setItem(INTERNO, '1');
+      } catch (e) { /* storage non disponibile */ }
+      q.delete('interno');
+      var resto = q.toString();
+      try {
+        history.replaceState(history.state, '',
+          location.pathname + (resto ? '?' + resto : '') + location.hash);
+      } catch (e) {}
+    }
+    try { return localStorage.getItem(INTERNO) === '1'; } catch (e) { return false; }
+  }
+  var interno = traffico_interno();
+
 
   function leggiScelta() {
     try { return localStorage.getItem(KEY); } catch (e) { return null; }
@@ -76,10 +105,12 @@
        Verificato il 12/08/2026 leggendo le richieste a /g/collect. */
     gtag('consent', 'update', { analytics_storage: 'granted' });
     gtag('js', new Date());
-    gtag('config', GA_ID, {
+    var cfg = {
       page_path: percorso(),
       page_location: location.origin + percorso() + location.search
-    });
+    };
+    if (interno) cfg.traffic_type = 'internal';
+    gtag('config', GA_ID, cfg);
 
     var s = document.createElement('script');
     s.async = true;

@@ -300,6 +300,29 @@ generatori. Nessuno dei due script manda niente prima del consenso:
 `window.daopConsensoAnalytics` è la condizione, e `typeof gtag === 'function'`
 non basta — lo stub che accoda in `dataLayer` esiste da sempre.
 
+#### Il traffico interno si marca con `?interno=1` — 02/10/2026
+
+Chiesto da Giovanni insieme al pacchetto settimanale dei corsi
+(`scarica_corsi.py` nel downloader): «escludi il traffico interno solo se
+identificabile». La regola dei 2,5 è un indizio, non un'identificazione.
+
+Aprendo una volta qualunque pagina con `?interno=1`, quel browser resta
+segnato (`localStorage`, chiave `daop-interno`) e `cookie-consent.js` mette
+`traffic_type: 'internal'` nel `config`: tutti gli eventi di quel browser lo
+portano. `?interno=0` toglie il segno. Il parametro si toglie dall'indirizzo
+prima del `config`, quindi non entra nel `page_location` e non gira se il link
+si copia; gli altri parametri (gli `utm`) restano.
+
+- **Il segno vale per browser, non per persona**: va aperto su ogni telefono e
+  ogni browser. Nel browser interno di Instagram e Facebook non resta, per la
+  stessa ragione per cui lì il banner ricompare a ogni visita.
+- **Escludere lo fa GA4, non il sito**: Amministratore → Raccolta dati →
+  Filtri dati → «Internal Traffic». In «Test» i dati si tengono e si
+  riconoscono dalla dimensione «Nome filtro dati di test»; in «Attivo» si
+  scartano per sempre.
+- **Senza consenso non parte niente lo stesso**: il segno è una preferenza
+  nostra, non un dato di misura.
+
 #### Consent Mode base, niente ping senza cookie, niente modellazione — 25/09/2026
 
 Verificato leggendo `cookie-consent.js`, perché è la domanda che torna ogni
