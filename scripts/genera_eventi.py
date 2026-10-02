@@ -3913,6 +3913,35 @@ def spezza_nome_evento(nome):
     return slugify(testa), slugify(coda)
 
 
+# LA FORMA GIURIDICA NON FA PARTE DEL NOME (02/10/2026). La locandina dice
+# "La Canunia", il foglio Realta "La Canunia ASD": confrontati in slug esatto,
+# "la-canunia" e "la-canunia-asd" erano due societa' diverse, e il 01/10 i Pony
+# Games di Halloween sono usciti senza la riga "I corsi di La Canunia ASD" e
+# senza comparire sulla sua pagina. Il modello che legge il volantino scrive il
+# nome come sta sul volantino, e su un volantino "ASD" quasi non c'e' mai: non
+# e' un caso da correggere a mano riga per riga, e' la norma.
+#
+# Si toglie SOLO in testa o in coda, e solo pezzi interi: "Asd Atletica
+# Mondovi'" -> "atletica-mondovi", mai una parola di mezzo. Le forme puntate
+# ("A.S.D." -> "a-s-d") si ricompongono prima. Non si toglie mai tutto: una
+# societa' che si chiama solo "APS" resta "aps".
+FORME_GIURIDICHE = {'asd', 'aps', 'ssd', 'ssdrl', 'ets', 'odv', 'onlus',
+                    'srl', 'snc', 'sas', 'scs', 'arl', 'coop'}
+_FORME_PUNTATE = re.compile(r'(?:^|(?<=-))(a-s-d|a-p-s|s-s-d|o-d-v|e-t-s)(?=-|$)')
+
+
+def chiave_realta(testo):
+    """Lo slug di un nome di societa' senza la forma giuridica, per confronto."""
+    s = _FORME_PUNTATE.sub(lambda m: m.group(1).replace('-', ''),
+                           slugify(testo or ''))
+    pezzi = [x for x in s.split('-') if x]
+    while len(pezzi) > 1 and pezzi[-1] in FORME_GIURIDICHE:
+        pezzi.pop()
+    while len(pezzi) > 1 and pezzi[0] in FORME_GIURIDICHE:
+        pezzi.pop(0)
+    return '-'.join(pezzi)
+
+
 _INDICE_REALTA = None
 
 
@@ -3959,6 +3988,13 @@ def link_realta(nome_evento):
     if not coda:
         return ''
     voce = indice_realta().get(slugify(coda))
+    if not voce:
+        # Senza forma giuridica (chiave_realta), ma solo se la chiave porta a
+        # UNA realta': due societa' che differiscono solo per "ASD" non si
+        # scelgono a caso, e un link sbagliato e' peggio di nessun link.
+        cand = [v for k, v in indice_realta().items()
+                if chiave_realta(k) == chiave_realta(coda)]
+        voce = cand[0] if len(cand) == 1 else None
     if not voce:
         return ''
     return (f'<a href="{voce["url"]}" data-cta="organizzatore">'

@@ -1706,7 +1706,7 @@ def _senza_societa(nome, org):
     confronto in slug - mai su tutto il titolo, che e' la cautela di
     eventi_a_nome_di() qui sotto."""
     testa, coda = G.taglia_coda(nome)
-    if coda and G.slugify(coda) == slug_realta(org or ''):
+    if coda and G.chiave_realta(coda) == G.chiave_realta(org or ''):
         return _senza_coda_ripetuta(testa, org)
     # E QUANDO LA CODA NON E' LA SUA, si guarda la fine del titolo INTERO
     # (19/09/2026). "OpenDay - Inglese con Teacher Noemi" tagliato sul trattino
@@ -1727,9 +1727,9 @@ def _senza_coda_ripetuta(testa, org):
     Non si taglia mai tutto il titolo (`range` si ferma prima) e non si lascia
     una parolina appesa: in tutti e due i casi torna la testa com'era."""
     parole = (testa or '').split()
-    atteso = slug_realta(org or '')
+    atteso = G.chiave_realta(org or '')
     for k in range(1, len(parole)):
-        if G.slugify(' '.join(parole[-k:])) != atteso:
+        if G.chiave_realta(' '.join(parole[-k:])) != atteso:
             continue
         resto = ' '.join(parole[:-k]).strip(' -–—:,')
         if not resto:
@@ -1791,13 +1791,15 @@ def eventi_a_nome_di(reg, org, oggi):
     Un evento RITIRATO resta fuori: quella pagina dichiara di non essere
     attendibile, e annunciarla dalla pagina di chi la organizza vorrebbe dire
     mandare i suoi lettori a una nostra smentita."""
-    slug_org = slug_realta(org)
+    # Il confronto e' senza forma giuridica (G.chiave_realta): "- La Canunia"
+    # in coda e' La Canunia ASD. Resta stretto per tutto il resto.
+    slug_org = G.chiave_realta(org)
     trovati, quasi = [], []
     for slug, rec in (reg or {}).items():
         if rec.get('ritirata'):
             continue
         titolo, coda = G.spezza_nome_evento(rec.get('nome'))
-        if coda != slug_org:
+        if G.chiave_realta(coda) != slug_org:
             if _pezzi_dentro('-'.join(x for x in (titolo, coda) if x), slug_org):
                 quasi.append(rec.get('nome') or slug)
             continue
