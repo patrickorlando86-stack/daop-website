@@ -11,7 +11,7 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 74,
+  "n": 73,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
@@ -231,7 +231,7 @@
  },
  "c-al-fubine-monferrato": {
   "comune": "Fubine Monferrato",
-  "n": 2,
+  "n": 1,
   "prov": "AL"
  },
  "c-al-garbagna": {
@@ -364,11 +364,6 @@
   "n": 5,
   "prov": "AL"
  },
- "c-al-pecetto-di-valenza": {
-  "comune": "Pecetto di Valenza",
-  "n": 1,
-  "prov": "AL"
- },
  "c-al-piovera": {
   "comune": "Piovera",
   "n": 1,
@@ -456,7 +451,7 @@
  },
  "c-al-san-giorgio-monferrato": {
   "comune": "San Giorgio Monferrato",
-  "n": 2,
+  "n": 1,
   "prov": "AL"
  },
  "c-al-san-salvatore-monferrato": {
@@ -591,7 +586,7 @@
  },
  "c-al-voltaggio": {
   "comune": "Voltaggio",
-  "n": 3,
+  "n": 2,
   "prov": "AL"
  },
  "c-at-albugnano": {
@@ -889,11 +884,6 @@
   "n": 1,
   "prov": "AT"
  },
- "c-at-vigliano-d-asti": {
-  "comune": "Vigliano d'Asti",
-  "n": 1,
-  "prov": "AT"
- },
  "c-at-villa-san-secondo": {
   "comune": "Villa San Secondo",
   "n": 1,
@@ -906,7 +896,7 @@
  },
  "c-at-villanova-d-asti": {
   "comune": "Villanova d'Asti",
-  "n": 7,
+  "n": 6,
   "prov": "AT"
  },
  "c-at-vinchio": {
