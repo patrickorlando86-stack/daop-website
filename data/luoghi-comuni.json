@@ -1,7 +1,7 @@
 {
  "c-al-acqui-terme": {
   "comune": "Acqui Terme",
-  "n": 20,
+  "n": 9,
   "prov": "AL"
  },
  "c-al-albera-ligure": {
@@ -11,12 +11,12 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 74,
+  "n": 35,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
   "comune": "Alfiano Natta",
-  "n": 4,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-alice-bel-colle": {
@@ -41,7 +41,7 @@
  },
  "c-al-basaluzzo": {
   "comune": "Basaluzzo",
-  "n": 3,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-bassignana": {
@@ -91,7 +91,7 @@
  },
  "c-al-capriata-d-orba": {
   "comune": "Capriata d'Orba",
-  "n": 3,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-carentino": {
@@ -116,12 +116,12 @@
  },
  "c-al-casal-cermelli": {
   "comune": "Casal Cermelli",
-  "n": 3,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-casale-monferrato": {
   "comune": "Casale Monferrato",
-  "n": 37,
+  "n": 18,
   "prov": "AL"
  },
  "c-al-casaleggio-boiro": {
@@ -141,7 +141,7 @@
  },
  "c-al-cassano-spinola": {
   "comune": "Cassano Spinola",
-  "n": 2,
+  "n": 1,
   "prov": "AL"
  },
  "c-al-cassine": {
@@ -201,11 +201,6 @@
  },
  "c-al-costa-vescovato": {
   "comune": "Costa Vescovato",
-  "n": 2,
-  "prov": "AL"
- },
- "c-al-cremolino": {
-  "comune": "Cremolino",
   "n": 1,
   "prov": "AL"
  },
@@ -242,11 +237,6 @@
  "c-al-gavi": {
   "comune": "Gavi",
   "n": 5,
-  "prov": "AL"
- },
- "c-al-giarole": {
-  "comune": "Giarole",
-  "n": 1,
   "prov": "AL"
  },
  "c-al-grondona": {
@@ -321,7 +311,7 @@
  },
  "c-al-novi-ligure": {
   "comune": "Novi Ligure",
-  "n": 45,
+  "n": 18,
   "prov": "AL"
  },
  "c-al-olivola": {
@@ -341,7 +331,7 @@
  },
  "c-al-ovada": {
   "comune": "Ovada",
-  "n": 10,
+  "n": 4,
   "prov": "AL"
  },
  "c-al-oviglio": {
@@ -361,7 +351,7 @@
  },
  "c-al-pasturana": {
   "comune": "Pasturana",
-  "n": 5,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-piovera": {
@@ -401,7 +391,7 @@
  },
  "c-al-pozzolo-formigaro": {
   "comune": "Pozzolo Formigaro",
-  "n": 6,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-predosa": {
@@ -476,12 +466,7 @@
  },
  "c-al-serravalle-scrivia": {
   "comune": "Serravalle Scrivia",
-  "n": 12,
-  "prov": "AL"
- },
- "c-al-sezzadio": {
-  "comune": "Sezzadio",
-  "n": 1,
+  "n": 10,
   "prov": "AL"
  },
  "c-al-solonghello": {
@@ -524,14 +509,9 @@
   "n": 1,
   "prov": "AL"
  },
- "c-al-terzo": {
-  "comune": "Terzo",
-  "n": 1,
-  "prov": "AL"
- },
  "c-al-tortona": {
   "comune": "Tortona",
-  "n": 25,
+  "n": 12,
   "prov": "AL"
  },
  "c-al-treville": {
@@ -546,12 +526,7 @@
  },
  "c-al-valenza": {
   "comune": "Valenza",
-  "n": 13,
-  "prov": "AL"
- },
- "c-al-valmadonna": {
-  "comune": "Valmadonna",
-  "n": 1,
+  "n": 5,
   "prov": "AL"
  },
  "c-al-vendersi": {
@@ -606,7 +581,7 @@
  },
  "c-at-asti": {
   "comune": "Asti",
-  "n": 52,
+  "n": 24,
   "prov": "AT"
  },
  "c-at-belveglio": {
@@ -619,11 +594,6 @@
   "n": 4,
   "prov": "AT"
  },
- "c-at-callianetto": {
-  "comune": "Callianetto",
-  "n": 1,
-  "prov": "AT"
- },
  "c-at-calliano-monferrato": {
   "comune": "Calliano Monferrato",
   "n": 2,
@@ -631,7 +601,7 @@
  },
  "c-at-canelli": {
   "comune": "Canelli",
-  "n": 10,
+  "n": 6,
   "prov": "AT"
  },
  "c-at-cassinasco": {
@@ -656,7 +626,7 @@
  },
  "c-at-castell-alfero": {
   "comune": "Castell'Alfero",
-  "n": 2,
+  "n": 1,
   "prov": "AT"
  },
  "c-at-castelnuovo-calcea": {
@@ -714,11 +684,6 @@
   "n": 1,
   "prov": "AT"
  },
- "c-at-cortiglione": {
-  "comune": "Cortiglione",
-  "n": 1,
-  "prov": "AT"
- },
  "c-at-cossombrato": {
   "comune": "Cossombrato",
   "n": 1,
@@ -746,11 +711,6 @@
  },
  "c-at-maranzana": {
   "comune": "Maranzana",
-  "n": 1,
-  "prov": "AT"
- },
- "c-at-maretto": {
-  "comune": "Maretto",
   "n": 1,
   "prov": "AT"
  },
@@ -811,7 +771,7 @@
  },
  "c-at-nizza-monferrato": {
   "comune": "Nizza Monferrato",
-  "n": 12,
+  "n": 7,
   "prov": "AT"
  },
  "c-at-olmo-gentile": {
@@ -851,7 +811,7 @@
  },
  "c-at-san-damiano-d-asti": {
   "comune": "San Damiano d'Asti",
-  "n": 4,
+  "n": 3,
   "prov": "AT"
  },
  "c-at-san-martino-alfieri": {
@@ -894,11 +854,6 @@
   "n": 1,
   "prov": "AT"
  },
- "c-at-villafranca-d-asti": {
-  "comune": "Villafranca d'Asti",
-  "n": 1,
-  "prov": "AT"
- },
  "c-at-villanova-d-asti": {
   "comune": "Villanova d'Asti",
   "n": 6,
@@ -911,7 +866,7 @@
  },
  "c-cn-alba": {
   "comune": "Alba",
-  "n": 5,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-arguello": {
@@ -961,7 +916,7 @@
  },
  "c-cn-boves": {
   "comune": "Boves",
-  "n": 3,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-bra": {
@@ -1086,7 +1041,7 @@
  },
  "c-cn-cuneo": {
   "comune": "Cuneo",
-  "n": 13,
+  "n": 12,
   "prov": "CN"
  },
  "c-cn-demonte": {
@@ -1226,7 +1181,7 @@
  },
  "c-cn-mondovi": {
   "comune": "Mondovì",
-  "n": 6,
+  "n": 5,
   "prov": "CN"
  },
  "c-cn-monforte-d-alba": {
@@ -1254,11 +1209,6 @@
   "n": 1,
   "prov": "CN"
  },
- "c-cn-moretta": {
-  "comune": "Moretta",
-  "n": 1,
-  "prov": "CN"
- },
  "c-cn-murazzano": {
   "comune": "Murazzano",
   "n": 1,
@@ -1276,11 +1226,6 @@
  },
  "c-cn-niella-tanaro": {
   "comune": "Niella Tanaro",
-  "n": 1,
-  "prov": "CN"
- },
- "c-cn-novello": {
-  "comune": "Novello",
   "n": 1,
   "prov": "CN"
  },
@@ -1336,7 +1281,7 @@
  },
  "c-cn-racconigi": {
   "comune": "Racconigi",
-  "n": 2,
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-revello": {
@@ -1366,12 +1311,12 @@
  },
  "c-cn-roccaforte-mondovi": {
   "comune": "Roccaforte Mondovì",
-  "n": 2,
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-roccavione": {
   "comune": "Roccavione",
-  "n": 2,
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-roddi": {
@@ -1482,11 +1427,6 @@
  "c-cn-verzuolo": {
   "comune": "Verzuolo",
   "n": 3,
-  "prov": "CN"
- },
- "c-cn-vezza-d-alba": {
-  "comune": "Vezza d'Alba",
-  "n": 1,
   "prov": "CN"
  },
  "c-cn-vignolo": {

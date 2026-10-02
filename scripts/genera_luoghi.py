@@ -183,6 +183,8 @@ COLONNE = {
     # dato per riprendere la foto, non da stampare.
     'foto_autore': ('fotoautore', 'foto autore', 'autore foto'),
     'foto_licenza': ('fotolicenza', 'foto licenza', 'licenza foto'),
+    # Dal 02/10/2026, colonna AN: meta / sede / servizio (vedi solo_mete()).
+    'ruolo': ('ruolo',),
 }
 
 
@@ -798,6 +800,7 @@ def leggi_catalogo():
             'evidenza': premium and (d['evidenza'] or '').strip().lower()
                         not in ('no', 'n', 'false', '0'),
             'codice': d['codice'],
+            'ruolo': d['ruolo'].lower(),
             'n_eventi': 0, 'ultimo': '', 'prossimi': [], 'fonte': 'catalogo',
             '_grezzo': r if fresco else None,
         })
@@ -856,6 +859,37 @@ def togli_nascoste(catalogo):
     if tolte:
         print(f"[genera_luoghi] {tolte} luoghi non pubblicati per sottocategoria "
               f"({', '.join(SOTTOCATEGORIE_NASCOSTE)}): restano sul foglio")
+    return dentro
+
+
+# Il Ruolo di un luogo (colonna del foglio dal 02/10/2026, la regola sta in
+# mobile/lavorazioni/ruolo-luoghi-2026-10/LEGGIMI.md): `meta` e' un posto dove
+# si va con i bambini, `sede` e' dove si tiene un corso (societa' sportive,
+# scuole di musica e di danza), `servizio` e' a chi ci si rivolge (nidi, centri
+# per le famiglie, animatori). La pagina si intitola "Dove andare con i
+# bambini", quindi pubblica le mete: prima la prima riga era "Acqui F.C. -
+# Calcio", e una riga su cinque era un posto dove ci si iscrive. Ginetto fa lo
+# stesso taglio dallo stesso giorno. Le sedi hanno gia' corsi.html e le pagine
+# realta'; i servizi a pagamento avranno la loro sezione.
+# Cella vuota = si pubblica: il downloader le riempie da solo a ogni passata,
+# e un'istantanea di prima del 02/10 la colonna non ce l'ha - in tutti e due i
+# casi togliere la riga sarebbe un'esclusione decisa da nessuno.
+RUOLI_NASCOSTI = ('sede', 'servizio')
+
+
+def solo_mete(catalogo):
+    """Toglie le righe con Ruolo `sede` o `servizio`. Solo per questa pagina:
+    genera_idee.py sceglie i suoi codici a mano e passa da togli_nascoste()."""
+    dentro = [l for l in catalogo if l.get('ruolo') not in RUOLI_NASCOSTI]
+    tolte = collections.Counter(l['ruolo'] for l in catalogo
+                                if l.get('ruolo') in RUOLI_NASCOSTI)
+    if tolte:
+        print(f"[genera_luoghi] non pubblicati per Ruolo: "
+              f"{', '.join(f'{n} {r}' for r, n in tolte.most_common())} "
+              f"(restano sul foglio)")
+    vuoti = sum(1 for l in dentro if not l.get('ruolo'))
+    if vuoti:
+        print(f"[genera_luoghi] {vuoti} luoghi col Ruolo vuoto: pubblicati")
     return dentro
 
 
@@ -2248,8 +2282,8 @@ def render(elenco, oggi):
     # L'elenco degli esempi e' scritto a mano e non dedotto dai numeri. Provato:
     # ordinando per quantita' la frase cominciava con "Nidi e Micro-nidi", che e'
     # la categoria piu' numerosa (123) e la meno invitante su una pagina che si
-    # intitola "Dove andare con i bambini". I nidi ci sono e restano nominati -
-    # chi li cerca li trova - ma dopo le cose per cui si esce di casa.
+    # intitola "Dove andare con i bambini". I nidi sono poi usciti dalla pagina
+    # (28/09) e la frase li nominava ancora: tolti il 02/10/2026.
     # Niente coda "in N c'e' gia' un evento in programma": il numero e' piccolo
     # (9 su 823) e prometteva poco a costo di una riga in piu'. Chi ha un evento
     # lo dice gia' da solo, con la pillola verde sulla riga.
@@ -2258,7 +2292,7 @@ def render(elenco, oggi):
     # spiega perche' (vedi .lg-hero .lg-intro). Nell'hero e' il terzo gradino di
     # una scala che si legge: titolo, dove e quanti, di cosa e' fatto.
     intro = ('    <p class="lg-intro">Fattorie didattiche, musei, parchi e panchine giganti, '
-             'piscine, gelaterie, biblioteche e nidi: scelti uno per uno. '
+             'piscine, gelaterie e biblioteche: scelti uno per uno. '
              'Apri una riga per orari, prezzi e contatti.</p>')
 
     # La data in cima, come su /halloween.html (24/09/2026): e' li' che chi
@@ -2544,7 +2578,7 @@ def main():
     # come "sto girando sull'istantanea", cioe' tacerebbe.
     if not controlla_crollo(foglio):
         raise SystemExit(1)
-    catalogo = togli_nascoste(solo_province_nostre(foglio))
+    catalogo = solo_mete(togli_nascoste(solo_province_nostre(foglio)))
     agenda = leggi_agenda()
     elenco = unisci(catalogo, agenda)
     if not elenco:
