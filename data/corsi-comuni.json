@@ -86,7 +86,7 @@
    "slug": "lurisia"
   },
   "cn-mondovi": {
-   "n": 17,
+   "n": 19,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -127,6 +127,6 @@
   }
  },
  "province": {
-  "CN": 105
+  "CN": 107
  }
 }
