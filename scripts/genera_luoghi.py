@@ -402,8 +402,11 @@ RIPARO_DA_CAT = {
 
 
 def riparo_da_tag(tag, primo_slug):
-    t = (tag or '').lower()
-    chiuso = 'meteo-pioggia' in t or 'coperto' in t
+    # Spazi e virgole valgono come trattini, e "coperta"/"coperti" come
+    # "coperto" (02/10/2026): 38 Tag scritti "parco aperto bambini" e tre
+    # "piscina-coperta" non dicevano niente. Fra trattini, cosi' "scoperta" no.
+    t = re.sub(r'[\s,;]+', '-', (tag or '').strip().lower())
+    chiuso = 'meteo-pioggia' in t or bool(re.search(r'(^|-)copert[oaie](-|$)', t))
     aperto = 'all-aperto' in t or bool(re.search(r'(^|-)aperto(-|$)', t))
     # Tutt'e due nel Tag vuol dire tutt'e due (02/10/2026): un oratorio con
     # salone e campetto. Prima vinceva "coperto", e le 12 righe che lo dicevano
