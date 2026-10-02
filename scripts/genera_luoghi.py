@@ -424,12 +424,18 @@ def riparo_da_tag(tag, primo_slug):
 
 # Le poche etichette pratiche che vale la pena tirare fuori dal campo Tag. Il
 # Tag e' lungo e ripete quello che Servizi dice meglio: qui si tiene solo quello
-# che Servizi NON dice - il parcheggio, la carrozzina, i cani, la prenotazione.
+# che Servizi NON dice - il parcheggio, il passeggino, i cani, la prenotazione.
 # Cioe' le cose che fanno decidere se partire.
+#
+# "carrozzina" e' il PASSEGGINO, "disabili" la SEDIA A ROTELLE (02/10/2026):
+# scritte "Passa la carrozzina" e "Accessibile", il partner ha chiesto quale
+# delle due fosse - e una famiglia che legge la pastiglia ha lo stesso dubbio
+# senza nessuno a cui chiederlo. Le stesse parole del modulo «Correggi i dati»
+# (TAG_MODULO_LUOGO nel downloader): chi spunta e chi legge vedono la stessa frase.
 ETICHETTE_TAG = {
     'meteo-pioggia': 'Va bene se piove',
-    'carrozzina': 'Passa la carrozzina',
-    'disabili': 'Accessibile',
+    'carrozzina': 'Ci passa il passeggino',
+    'disabili': 'Accessibile in sedia a rotelle',
     'parcheggio': 'Parcheggio',
     'cani-ammessi': 'Cani ammessi',
     'prenotazione': 'Su prenotazione',
