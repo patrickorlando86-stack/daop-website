@@ -31,7 +31,9 @@ Qui dentro:
   3. senza numero vale il ciclo intero;
   4. "da" apre in alto, come per le eta' a parole;
   5. e le eta' scritte in ANNI continuano a funzionare come prima - comprese le
-     tre che tests/corsi.js sorveglia (mesi, "dai N", "fino a N").
+     tre che tests/corsi.js sorveglia (mesi, "dai N", "fino a N");
+  6. la riga chiusa (eta_testo) aggiunge gli anni fra parentesi solo a una
+     cella che non li dice gia'.
 
 Uso:
     python scripts/prova_eta_classi.py
@@ -104,6 +106,28 @@ print("\n=== e cio' che non e' una fascia resta senza fascia ===")
 prova("tutte le età", None)
 prova("", None)
 prova("   ", None)
+
+print("\n=== la riga chiusa: gli anni fra parentesi solo se la cella non li dice ===")
+# eta_testo() aggiunge "(6-10 anni)" dietro a una cella scritta in classi, e
+# lascia com'e' una cella che gli anni li nomina gia'. Fino al 02/10/2026 il
+# controllo "la cella dice gia' anni" aveva un carattere di controllo (\x08) al
+# posto di \b e non scattava mai: "6-10 anni (scuole elementari)" usciva
+# "6-10 anni (scuole elementari) (6-10 anni)". Nessuna cella del foglio aveva
+# quella forma, quindi in pagina non si vedeva; il giorno che arriva, si vede.
+
+
+def riga(testo, atteso):
+    avuto = g.eta_testo({"eta": testo})
+    verifica(f"{testo!r} -> {avuto!r} (atteso {atteso!r})", avuto == atteso)
+
+
+riga("scuole elementari", "scuole elementari (6-10 anni)")
+riga("1a e 2a media", "1a e 2a media (11-12 anni)")
+riga("6-10 anni (scuole elementari)", "6-10 anni (scuole elementari)")
+riga("Anni di nascita: scuola materna", "Anni di nascita: scuola materna")
+riga("dai 4 anni", "dai 4 anni")
+riga("0-12 mesi", "0-12 mesi")
+riga("", "")
 
 print()
 print("ESITO:", "tutto come previsto" if esito else "*** QUALCOSA NON TORNA ***")

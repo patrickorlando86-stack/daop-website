@@ -516,6 +516,16 @@ jobs:
         if: always()
         run: python scripts/prova_testi_corsi.py
 
+      - name: Le classi non si leggono come anni
+        # "1a e 2a media" e' la fascia 11-12, non 1-2 (03/09/2026), e la riga
+        # chiusa aggiunge "(N anni)" solo a una cella che gli anni non li
+        # nomina gia' (02/10/2026: il controllo aveva un \x08 al posto di \b e
+        # non scattava mai).
+        #
+        # Offline e in un secondo.
+        if: always()
+        run: python scripts/prova_eta_classi.py
+
       - name: Ogni sede resta un corso a se'
         # Fra il 03/09 e il 07/09/2026 lo stesso corso in piu' paesi diventava
         # UNA card, e i campi sono uno per card: locandina, referente, contatto,

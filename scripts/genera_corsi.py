@@ -486,7 +486,7 @@ def eta_testo(c):
         return (f"{r[0]} {'anno' if r[0] == 1 else 'anni'}" if r[0] == r[1]
                 else f"{r[0]}-{r[1]} anni")
     t = (c.get('eta') or '').strip()
-    if not t or re.search(r'ann', t.lower()):
+    if not t or re.search(r'\bann', t.lower()):
         return t
     classi = eta_da_classi(t)
     if not classi:
