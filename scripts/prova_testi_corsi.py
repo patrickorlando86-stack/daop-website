@@ -17,6 +17,10 @@ risposta che poteva solo dire "no". Le decisioni difese qui:
   4. "LINGUE" DIVENTA "INGLESE" SOLO SE E' VERO PER TUTTI i corsi di lingue.
   5. "AD" DAVANTI A VOCALE nel title delle realta' ("ad Alba", non "a Alba").
   6. NIENTE FAQPage in JSON-LD: Google ha spento quei risultati il 07/05/2026.
+  7. LA PAROLA DELLA REALTA' (02/10/2026): con "percorsi"/"sedute" nella tab
+     Realta la sua pagina non dice piu' "corso" ne' "lezione" da nessuna parte
+     (title, apertura, intestazione, domande), e gli articoli si accordano.
+     Una parola sconosciuta lascia quella di sempre.
 
 Nessuna prova conta i corsi veri: sarebbe rossa alla prima riga nuova del
 foglio. Si lavora su corsi finti costruiti qui.
@@ -162,6 +166,35 @@ print("6. le FAQ sono testo, non dati strutturati")
 hub = C.render(TUTTI, '', '', '', {})
 ok("corsi.html ha le domande in pagina", 'class="co-faq"' in hub and 'class="co-faq-q"' in hub)
 ok("e nessun FAQPage", 'FAQPage' not in hub and 'FAQPage' not in html)
+
+print("7. la parola con cui una realta' chiama corsi e lezioni")
+PAROLE = {'voce_corsi': 'percorsi', 'voce_lezioni': 'sedute'}
+prova = [dict(c, prova='si') for c in INGLESE]
+pag = C.pagina_realta('Scuola Finta', prova, PAROLE, '', '', '')
+# Solo il testo che si legge, e senza il nome dei corsi e la sede ("Corso
+# Piave 16"), che sono del foglio, ne' i link verso corsi.html, che resta
+# "corsi" apposta.
+leggibile = re.sub(r'<(script|style)\b.*?</\1>', ' ', pag, flags=re.S)
+leggibile = re.sub(r'<a [^>]*href="/corsi\.html[^"]*"[^>]*>.*?</a>', ' ', leggibile, flags=re.S)
+leggibile = re.sub(r'<[^>]+>', ' ', leggibile)
+for c in prova:
+    leggibile = leggibile.replace(c['nome'], ' ').replace(c['sede'], ' ')
+resto = re.findall(r'\b(?:[Cc]ors[oi]|[Ll]ezion[ei])\b', leggibile)
+ok(f"con 'percorsi'/'sedute' la pagina non dice piu' corso/lezione: {resto}", not resto)
+t7 = re.search(r'<title>(.*?)</title>', pag).group(1)
+ok(f"il title usa la parola: {t7!r}", t7.startswith('Scuola Finta: percorsi di inglese'))
+testi7 = C.testo_realta('Scuola Finta', prova, PAROLE) + ' '.join(
+    f"{q} {a}" for q, a in C.faq_realta('Scuola Finta', prova, PAROLE))
+ok("si accorda: 'Le sedute', 'tutti i percorsi', 'una seduta di prova'",
+   all(x in testi7 for x in ('Le sedute si tengono', 'tutti i percorsi',
+                             'è prevista una seduta di prova')))
+att = C.testo_realta('Scuola Finta', prova[:1], {'voce_corsi': 'attività',
+                                                  'voce_lezioni': 'incontri'})
+ok(f"e al femminile/maschile: {att!r}",
+   "un'attività" in att and 'Gli incontri' in att and 'è previsto un incontro' in att)
+ok("una parola sconosciuta lascia 'corsi'",
+   C.testo_realta('Scuola Finta', INGLESE, {'voce_corsi': 'boh'})
+   == C.testo_realta('Scuola Finta', INGLESE, {}))
 
 print()
 print("OK: i testi dei corsi dicono solo quello che i dati sanno" if esito

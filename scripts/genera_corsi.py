@@ -999,6 +999,12 @@ COLONNE_REALTA = {
     # sempre: daop-track.js riconosce instagram.com e facebook.com da se'.
     'instagram': ('instagram', 'ig', 'profilo instagram'),
     'facebook': ('facebook', 'fb', 'pagina facebook'),
+    # COME LA REALTA' CHIAMA I SUOI CORSI E LE SUE LEZIONI (02/10/2026). Vuote
+    # dicono "corsi" e "lezioni"; piene cambiano la parola su tutta la pagina
+    # della realta' (vedi Voce). Una parola sola per cella, al singolare o al
+    # plurale: "percorsi", "sedute".
+    'voce_corsi': ('parola corsi', 'chiama i corsi', 'nome dei corsi'),
+    'voce_lezioni': ('parola lezioni', 'chiama le lezioni', 'nome delle lezioni'),
 }
 
 
@@ -2263,37 +2269,141 @@ def _sede_prosa(sede):
     return f"in {sede}" if _SEDE_VIA.match(sede.strip()) else f"presso {sede}"
 
 
+# ── IL VOCABOLARIO DI UNA REALTA' (02/10/2026) ─────────────────────────────
+#
+# Studio EleMenti, tramite Giovanni: le psicologhe chiedevano "percorsi" e
+# "sedute" al posto di "corsi" e "lezioni". Non si sostituisce il paragrafo
+# d'apertura con un testo a mano: "corsi" compare altre sette volte sulla
+# stessa pagina (title, intestazione, domande), e la pagina parlerebbe due
+# lingue. Si cambia la PAROLA, e il resto continua a scriversi dai dati.
+#
+# Le parole sono un elenco chiuso, e non per pignoleria: l'italiano accorda
+# articoli e participi ("un incontro", "e' previsto"), e una parola che non so
+# declinare darebbe "un attivita'" o "e' prevista un incontro". Una parola
+# sconosciuta resta "corsi"/"lezioni" e si urla nel log, come gli stati. Per
+# aggiungerne una basta una riga qui.
+#
+# Vale SOLO sulla pagina della realta'. corsi.html resta "corsi", perche' li'
+# e' la sezione intera a chiamarsi cosi'.
+VOCI_CORSO = {
+    # singolare: (plurale, "un", "il", "i", "tutti i", "ciascun", "del", "dei singoli")
+    'corso': ('corsi', 'un', 'il', 'i', 'tutti i', 'ciascun', 'del', 'dei singoli'),
+    'percorso': ('percorsi', 'un', 'il', 'i', 'tutti i', 'ciascun', 'del', 'dei singoli'),
+    'laboratorio': ('laboratori', 'un', 'il', 'i', 'tutti i', 'ciascun', 'del',
+                    'dei singoli'),
+    'incontro': ('incontri', 'un', "l'", 'gli', 'tutti gli', 'ciascun', "dell'",
+                 'dei singoli'),
+    'attività': ('attività', "un'", "l'", 'le', 'tutte le', 'ciascuna', "dell'",
+                 'delle singole'),
+}
+VOCI_LEZIONE = {
+    # singolare: (plurale, "una", "le", participio di "e' prevista")
+    'lezione': ('lezioni', 'una', 'le', 'prevista'),
+    'seduta': ('sedute', 'una', 'le', 'prevista'),
+    'incontro': ('incontri', 'un', 'gli', 'previsto'),
+    'allenamento': ('allenamenti', 'un', 'gli', 'previsto'),
+}
+_VOCI_URLATE = set()
+
+
+def _con(art, parola):
+    return f"{art}{parola}" if art.endswith("'") else f"{art} {parola}"
+
+
+def _voce(cella, voci, quale, org):
+    if not (cella or '').strip():
+        return None
+    v = G.slugify(cella)
+    for sing, t in voci.items():
+        if v in (G.slugify(sing), G.slugify(t[0])):
+            return sing
+    if (org, cella) not in _VOCI_URLATE:
+        _VOCI_URLATE.add((org, cella))
+        print(f"[genera_corsi] ATTENZIONE: {org}: «{cella}» non è una parola che "
+              f"so usare per {quale} (conosco: {', '.join(t[0] for t in voci.values())}). "
+              "Resta quella di sempre: per aggiungerla, VOCI_CORSO/VOCI_LEZIONE.")
+    return None
+
+
+class Voce:
+    """Le parole con cui una realta' chiama corsi e lezioni, gia' accordate."""
+
+    def __init__(self, info=None, org=''):
+        info = info or {}
+        self.cs = _voce(info.get('voce_corsi'), VOCI_CORSO, 'i corsi', org) or 'corso'
+        self.ls = (_voce(info.get('voce_lezioni'), VOCI_LEZIONE, 'le lezioni', org)
+                   or 'lezione')
+        (self.cp, self._un, self._il, self._i, self._tutti, self._ciascun,
+         self._del, self._singoli) = VOCI_CORSO[self.cs]
+        self.lp, self._una, self._le, self._prevista = VOCI_LEZIONE[self.ls]
+
+    def corsi(self, n):
+        return _n(n, self.cs, self.cp)
+
+    def un_corso(self):
+        return _con(self._un, self.cs)
+
+    def il_corso(self):
+        return _con(self._il, self.cs)
+
+    def i_corsi(self):
+        return _con(self._i, self.cp)
+
+    def tutti_i_corsi(self):
+        return _con(self._tutti, self.cp)
+
+    def ciascun_corso(self):
+        return _con(self._ciascun, self.cs)
+
+    def del_corso(self):
+        return _con(self._del, self.cs)
+
+    def dei_singoli_corsi(self):
+        return _con(self._singoli, self.cp)
+
+    def le_lezioni(self):
+        return _con(self._le, self.lp)
+
+    def prova(self):
+        """ "e' prevista una lezione di prova", accordato."""
+        return f"è {self._prevista} {_con(self._una, self.ls)} di prova"
+
+    def corsi_hanno(self, n):
+        return _n(n, f'{self.cs} ha', f'{self.cp} hanno')
+
+
 def testo_realta(org, corsi_org, info):
     """Il paragrafo che apre la pagina di una realta'."""
+    v = Voce(info, org)
     n = len(corsi_org)
     att = _attivita(corsi_org)
     comuni = _contati(c.get('citta') for c in corsi_org)
     prov = _prov_se_serve(corsi_org, comuni)
     fascia = _fascia(corsi_org)
     dove = f" {_comuni_testo(corsi_org)}" if comuni else ''
-    s = (f"{org} propone {'un corso' if n == 1 else f'{n} corsi'}"
+    s = (f"{org} propone {v.un_corso() if n == 1 else v.corsi(n)}"
          f"{' di ' + att if att else ''}{dove}{', ' + prov + ',' if prov else ''} "
          f"per {_chi(fascia[1] if fascia else None)}"
          f"{' ' + _fascia_testo(*fascia) if fascia else ''}.")
     sedi = _uniche([info.get('indirizzo')]) or _uniche(c.get('sede') for c in corsi_org)
     if len(sedi) == 1 and len(comuni) <= 1:
-        s += f" Le lezioni si tengono {_sede_prosa(sedi[0])}."
+        s += f" {_cap(v.le_lezioni())} si tengono {_sede_prosa(sedi[0])}."
     k, m = _prove_openday(corsi_org)
     extra = []
     if k:
-        extra.append("per il corso è prevista una lezione di prova" if n == 1 else
-                     f"per {'tutti i corsi' if k == n else _n(k, 'corso', 'corsi')} "
-                     "è prevista una lezione di prova")
+        extra.append(f"per {v.il_corso()} {v.prova()}" if n == 1 else
+                     f"per {v.tutti_i_corsi() if k == n else v.corsi(k)} {v.prova()}")
     if m:
-        extra.append("il corso ha un open day in calendario" if n == 1 else
-                     f"{_n(m, 'corso ha', 'corsi hanno')} un open day in calendario")
+        extra.append(f"{v.il_corso()} ha un open day in calendario" if n == 1 else
+                     f"{v.corsi_hanno(m)} un open day in calendario")
     if extra:
-        s += f" {_cap(_e(extra))}: i dettagli sono nella scheda del corso."
+        s += f" {_cap(_e(extra))}: i dettagli sono nella scheda {v.del_corso()}."
     return s
 
 
 def faq_realta(org, corsi_org, info):
     """Le domande in fondo alla pagina di una realta', solo quelle con risposta."""
+    v = Voce(info, org)
     voci = []
     n = len(corsi_org)
     att = _attivita(corsi_org)
@@ -2306,8 +2416,8 @@ def faq_realta(org, corsi_org, info):
 
     nomi = _uniche(c.get('nome') for c in corsi_org)
     if nomi:
-        voci.append((f"Che corsi propone {org}{dove}?",
-                     f"{'Un corso' if n == 1 else f'{n} corsi'}"
+        voci.append((f"Che {v.cp} propone {org}{dove}?",
+                     f"{_cap(v.un_corso()) if n == 1 else v.corsi(n)}"
                      f"{' di ' + att if att else ''}: "
                      f"{_e_max(nomi, 6, 'altri {n}')}."))
 
@@ -2322,8 +2432,8 @@ def faq_realta(org, corsi_org, info):
                   for lo, hi in sorted({r for r in (eta_min_max(c) for c in corsi_org) if r})]
         risp = f"{_cap(_fascia_testo(*fascia))}."
         if len(valori) > 1:
-            risp += f" Le fasce dei singoli corsi: {_e_max(valori, 8, 'altre {n}')}."
-        voci.append((f"Da che età si possono frequentare i corsi di {org}?", risp))
+            risp += f" Le fasce {v.dei_singoli_corsi()}: {_e_max(valori, 8, 'altre {n}')}."
+        voci.append((f"Da che età si possono frequentare {v.i_corsi()} di {org}?", risp))
 
     if comuni:
         sedi = _uniche([info.get('indirizzo')]) or _uniche(c.get('sede') for c in corsi_org)
@@ -2342,22 +2452,22 @@ def faq_realta(org, corsi_org, info):
                     risp += f" Le sedi: {_e_max(sedi, 4, 'altre {n}')}."
         else:
             elenco = ', '.join(f"{nome} ({q})" for nome, q in comuni)
-            risp = (f"In {len(comuni)} comuni{coda}: {elenco}. La sede di ogni corso "
-                    "è scritta nella sua scheda.")
-        voci.append((f"Dove si tengono i corsi di {org}?", risp))
+            risp = (f"In {len(comuni)} comuni{coda}: {elenco}. La sede di ogni "
+                    f"{v.cs} è scritta nella sua scheda.")
+        voci.append((f"Dove si tengono {v.i_corsi()} di {org}?", risp))
 
     k, m = _prove_openday(corsi_org)
     if k or m:
         parti = []
         if k:
-            parti.append("per il corso è prevista una lezione di prova" if n == 1 else
-                         f"per {'tutti i corsi' if k == n else _n(k, 'corso', 'corsi')} "
-                         "è prevista una lezione di prova")
+            parti.append(f"per {v.il_corso()} {v.prova()}" if n == 1 else
+                         f"per {v.tutti_i_corsi() if k == n else v.corsi(k)} {v.prova()}")
         if m:
-            parti.append("il corso ha un open day in calendario" if n == 1 else
-                         f"{_n(m, 'corso ha', 'corsi hanno')} un open day in calendario")
-        voci.append((f"{org} organizza lezioni di prova o open day?",
-                     f"Sì: {_e(parti)}. I dettagli sono nella scheda di ciascun corso."))
+            parti.append(f"{v.il_corso()} ha un open day in calendario" if n == 1 else
+                         f"{v.corsi_hanno(m)} un open day in calendario")
+        voci.append((f"{org} organizza {v.lp} di prova o open day?",
+                     f"Sì: {_e(parti)}. I dettagli sono nella scheda di "
+                     f"{v.ciascun_corso()}."))
     return voci
 
 
@@ -2433,16 +2543,17 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # preposizione la mette G.a_citta(), la stessa delle schede evento.
     att = _attivita(corsi_org)
     di_att = f' di {att}' if att else ''
+    v = Voce(info, org)
     claim = (info.get('occhiello') or '').strip()
     if claim:
         occhiello = f'<p class="cr-sub">{G.esc(claim)}</p>'
     else:
         # Gli spazi FUORI da G.esc(), che li toglie: dentro, usciva
         # "Corsidi musica per bambinia Vezza d'Alba".
-        occhiello = (f'<p class="cr-sub">Corsi{" di " + G.esc(att) if att else ""} per bambini'
+        occhiello = (f'<p class="cr-sub">{_cap(v.cp)}{" di " + G.esc(att) if att else ""} per bambini'
                      f'{" " + G.esc(G.a_citta(citta).strip()) if citta else ""}</p>')
     url = f"{SITE_URL}{url_realta(org)}"
-    titolo = f"{org}: corsi{di_att} per bambini{G.a_citta(citta)} | DAOP"
+    titolo = f"{org}: {v.cp}{di_att} per bambini{G.a_citta(citta)} | DAOP"
     # La description e' il paragrafo scritto dai dati, non la presentazione
     # della societa': in pagina dei risultati deve dire cosa, dove e per che
     # eta'. La presentazione resta in pagina, sotto "Chi e'".
@@ -2496,7 +2607,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     riquadro = ('<dl class="co-dati">' + ''.join(
         f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>') if dati else ''
 
-    schede = "\n".join(card(c, i, qui_org=slug_realta(org))
+    schede = "\n".join(card(c, i, qui_org=slug_realta(org), voce=v)
                        for i, c in enumerate(corsi_org))
     ev = eventi_realta(corsi_org, org)
     blocco_ev = ''
@@ -2556,7 +2667,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 {chr(10).join('  ' + t for t in testa)}
   {'<h2 class="cr-h">Informazioni e contatti</h2>' if riquadro else ''}
   {riquadro}
-  <h2 class="cr-h" id="i-corsi">{f'I corsi di {G.esc(org)}' if len(corsi_org) > 1 else f'Il corso di {G.esc(org)}'}</h2>
+  <h2 class="cr-h" id="i-corsi">{_cap(v.i_corsi() if len(corsi_org) > 1 else v.il_corso())} di {G.esc(org)}</h2>
   <div class="events-list">
 {schede}
   </div>
@@ -2903,7 +3014,7 @@ def _id_corso(c):
 # 100, quelle da tenere separate a 50 o meno). Erano usati solo da lei.
 
 
-def card(c, idx, pagine=(), qui_org=None):
+def card(c, idx, pagine=(), qui_org=None, voce=None):
     """Una scheda in stile agenda: riga sempre visibile + dettaglio che si apre
     al tocco. Riusa le classi .event-card/.ev-* del resto del sito.
 
@@ -3096,7 +3207,7 @@ def card(c, idx, pagine=(), qui_org=None):
         acts.append(
             f'<a class="event-act" href="{G.esc(c["sito"])}" '
             f'rel="sponsored noopener" target="_blank">'
-            f'{G.ACT_ARROW_SVG} Scopri il corso</a>')
+            f'{G.ACT_ARROW_SVG} Scopri {(voce or Voce()).il_corso()}</a>')
     if c['loc']:
         src = G.loc_path(c['loc'])
         if src:
