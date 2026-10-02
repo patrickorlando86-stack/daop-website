@@ -403,13 +403,18 @@ RIPARO_DA_CAT = {
 
 def riparo_da_tag(tag, primo_slug):
     t = (tag or '').lower()
-    if 'meteo-pioggia' in t or 'al-coperto' in t:
+    chiuso = 'meteo-pioggia' in t or 'coperto' in t
+    aperto = 'all-aperto' in t or bool(re.search(r'(^|-)aperto(-|$)', t))
+    # Tutt'e due nel Tag vuol dire tutt'e due (02/10/2026): un oratorio con
+    # salone e campetto. Prima vinceva "coperto", e le 12 righe che lo dicevano
+    # uscivano «Al chiuso». Il modulo «Correggi i dati» del downloader scrive
+    # proprio cosi' la sua terza voce, e la regola gemella sta la' in
+    # riparo_del_tag (daop_pipeline.py): vanno tenute uguali.
+    if chiuso and aperto:
+        return 'misto'
+    if chiuso:
         return 'chiuso'
-    if 'all-aperto' in t:
-        return 'aperto'
-    if 'coperto' in t:
-        return 'chiuso'
-    if re.search(r'(^|-)aperto(-|$)', t):
+    if aperto:
         return 'aperto'
     # Senza indizi si va per categoria, e nel dubbio "misto": un misto compare
     # in tutte e due le risposte del filtro, quindi sbagliare qui nasconde meno
@@ -433,6 +438,28 @@ ETICHETTE_TAG = {
     'centri-estivi': 'Centri estivi',
     'picnic': 'Picnic',
 }
+
+
+# La torta della pillola «Feste di compleanno» (Lucide "cake", ISC, la stessa
+# famiglia dello sprite). Scritta per esteso perche' luoghi.html non ha lo
+# sprite inline: <use href> disegnerebbe il vuoto.
+TORTA_SVG = ('<svg viewBox="0 0 24 24" width="11" height="11" fill="none" '
+             'stroke="currentColor" stroke-width="2.4" stroke-linecap="round" '
+             'stroke-linejoin="round" aria-hidden="true">'
+             '<path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/>'
+             '<path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/>'
+             '<path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/>'
+             '<path d="M17 8v3"/></svg>')
+
+
+def fa_feste(tag):
+    """Il posto fa feste di compleanno: la parola `compleanno` nel Tag.
+
+    Il Tag e non i Servizi, e non e' pignoleria: e' la casella che Giovanni
+    accende e spegne dal modulo «Correggi i dati» (TAG_MODULO_LUOGO nel
+    downloader). Due sorgenti per la stessa pillola si contraddirebbero alla
+    prima correzione."""
+    return ETICHETTE_TAG['compleanno'] in servizi_pratici(tag)
 
 
 def servizi_pratici(tag):
@@ -734,6 +761,7 @@ def leggi_catalogo():
             'colore': colore_cat(slug_cat),
             'servizi': [s.strip() for s in d['servizi'].split(',') if s.strip()],
             'pratici': servizi_pratici(d['tag']),
+            'feste': fa_feste(d['tag']),
             'riparo': riparo_da_tag(d['tag'], slug_cat),
             'indirizzo': d['indirizzo'], 'lat': d['lat'], 'lon': d['lon'],
             'descr': d['descr'], 'descr_premium': d['descr_premium'],
@@ -1124,6 +1152,7 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
 .lg-tag.is-ev{background:rgba(24,134,99,0.12);color:#146c51}
 .lg-tag.is-free{background:rgba(24,134,99,0.10);color:#167859}
 .lg-tag.is-daop{background:rgba(232,149,74,0.16);color:#a75b15}
+.lg-tag.is-feste{background:rgba(155,47,108,0.10);color:#8a2a60}
 .lg-tag svg{width:11px;height:11px;vertical-align:-1px}
 /* "Sponsorizzato" sopra il nome, in parole e su ogni schermo: e' la
    dichiarazione del pagamento, quindi non si nasconde sul telefono come le
@@ -1553,6 +1582,27 @@ LUOGHI_JS = r"""<script>
     applica();
     bar.scrollIntoView({ block: 'start' });
   });
+
+  // Un link con la ricerca gia' scritta (02/10/2026): /luoghi.html?q=feste+di+
+  // compleanno&prov=cn, da mandare a chi chiede «dove facciamo la festa?» e da
+  // usare nelle telefonate. Si scrive nei controlli VERI - la casella di
+  // ricerca, la tendina della provincia - cosi' chi arriva vede cosa e' attivo
+  // e lo toglie da solo. Un valore che la tendina non ha si ignora: un filtro
+  // invisibile e' peggio di nessun filtro (la regola dei preset dell'agenda).
+  // L'indirizzo non si riscrive: gli utm di chi arriva restano.
+  try {
+    var par = new URLSearchParams(location.search);
+    var pq = (par.get('q') || '').trim().slice(0, 80);
+    if (q && pq) q.value = pq;
+    var pp = (par.get('prov') || '').trim().toLowerCase();
+    if (selProv && pp) {
+      var op = [].filter.call(selProv.options, function (o) {
+        return o.value !== 'all' &&
+          (o.value === pp || o.textContent.trim().toLowerCase() === pp);
+      })[0];
+      if (op) { selProv.value = op.value; accordaComuni(); }
+    }
+  } catch (e) { /* senza URLSearchParams la pagina parte intera */ }
   applica();
 
   // Link diretto a un luogo (/luoghi.html#lg-...). Un <details> non si apre da
@@ -1661,6 +1711,14 @@ def riga(l, oggi):
     if l.get('consigliato'):
         pillole.append(f'<span class="lg-tag is-daop">{G.CONSIGLIATO_SVG}'
                        f'<i> Consigliato DAOP</i></span>')
+    # «Feste di compleanno» nella riga CHIUSA (02/10/2026). Il dato c'era gia'
+    # nella riga aperta, fra i pratici: qui sale dove si vede scorrendo, perche'
+    # e' la domanda con cui uno arriva («dove facciamo la festa?») e la riga
+    # chiusa non lo diceva. Viene subito dopo il cuore: sul telefono le pillole
+    # visibili sono due, e questa non si deduce da nient'altro nella riga.
+    if l.get('feste'):
+        pillole.append(f'<span class="lg-tag is-feste" title="Feste di compleanno">'
+                       f'{TORTA_SVG}<i> Feste di compleanno</i></span>')
     if prossimi:
         # "1 evento in programma" e non "1 in programma": la pillola deve dire
         # di CHE COSA e' il numero. Senza il sostantivo la frase e' la sola

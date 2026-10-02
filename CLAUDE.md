@@ -5830,6 +5830,42 @@ la coda sotto gli occhi**, come per il padding dei `<section>`.
 e che la riga delle porte e la nota non tornino in fondo. Verificate rosse
 sulla pagina di prima.
 
+#### Le feste di compleanno si vedono nella riga chiusa — 02/10/2026
+
+Le feste di compleanno sono la prima cosa da vendere (vedi «Cosa vendere dopo
+i corsi»), e il dato c'era già: la parola `compleanno` nel **Tag**, che la riga
+aperta stampava fra i pratici. Ora sale nella riga chiusa come pillola con la
+torta (`fa_feste()`, `.lg-tag.is-feste`), subito dopo il cuore: sul telefono le
+pillole visibili sono due, e questa non si deduce da nient'altro. Al 02/10 sono
+64 posti nelle tre province.
+
+- **La sorgente è il Tag, non i Servizi.** È la casella che Giovanni accende e
+  spegne dal modulo «Correggi i dati» del downloader (`TAG_MODULO_LUOGO`):
+  compleanno, cani ammessi, carrozzina, prenotazione, più «se piove» a tre voci.
+  Il modulo manda la **differenza** («aggiungi compleanno») e il pipeline la
+  applica sulla cella del foglio letta in quel momento, non sulla fotografia. Da
+  lì si correggono anche i **Servizi**, come testo. Le parole sono le chiavi di
+  `ETICHETTE_TAG`: se ne cambia una, va cambiata anche là.
+- **«Coperto» e «aperto» insieme nel Tag ora valgono «tutti e due»**
+  (`riparo_da_tag`). Prima vinceva «coperto», e le 12 righe che dicevano tutt'e
+  due uscivano «Al chiuso». È la terza voce del modulo, e la regola gemella è
+  `riparo_del_tag` nel downloader: `prova_tag_luoghi.py` le confronta.
+- **Niente pagina dedicata e niente casella nella barra**, per ora. Una pagina
+  tematica dei luoghi è già stata tolta (`/piscine.html`, 10 clic in cinque
+  settimane), la regola è «prima tre telefonate, poi il codice», e la barra sul
+  telefono è già alta 156px. Al posto loro c'è un **link con la ricerca già
+  scritta**: `/luoghi.html?q=feste+di+compleanno&prov=cn`. `q` va nella casella
+  di ricerca, `prov` (sigla o nome) nella tendina; un valore che la tendina non
+  ha si ignora, e l'indirizzo non si riscrive (gli utm restano).
+- **Su ~50 righe la parola l'ha scritta Claude** quando la riga è nata, e si
+  mostra lo stesso: il dato era già pubblico nella riga aperta, la pillola non
+  aggiunge una promessa. Si corregge strada facendo dal modulo.
+
+`tests/luoghi.js` controlla pillola e riga aperta **nei due versi**, che sul
+telefono la pillola si veda, e il link (`?q=` e `?prov=cuneo` accesi, solo righe
+giuste, nessuna di Cuneo con la pillola persa, provincia sconosciuta ignorata).
+Nessun conteggio.
+
 ### I gruppi dell'agenda sono per data di INIZIO, e il calendario chiede altro
 
 `eventi.html` raggruppa per giorno di partenza: una sagra dal 16 al 23 agosto sta

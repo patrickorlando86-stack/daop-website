@@ -184,6 +184,70 @@ module.exports = async function luoghi(browser) {
   await page.waitForTimeout(300);
   r.ok(await visibili(page) === tot, '"azzera i filtri" li fa tornare tutti');
   r.ok(await page.locator('#lg-vuoto').evaluate((n) => n.hidden), 'il messaggio sparisce');
+
+  // ── «Feste di compleanno» nella riga chiusa (02/10/2026) ─────────────
+  // Nessun conteggio: «64 posti» sarebbe rosso il giorno che Giovanni spegne
+  // una casella, cioe' quando il sito fa la cosa giusta. Si prova che pillola
+  // e riga aperta dicano la stessa cosa, NEI DUE VERSI (la pillola viene dal
+  // Tag come il pratico: due sorgenti si contraddirebbero), e che sul telefono
+  // la pillola stia fra le due che si vedono.
+  const feste = await page.evaluate(() => {
+    const righe = [...document.querySelectorAll('.lg-grp > .lg-row[data-cat]')];
+    let soloPillola = 0, soloCorpo = 0, nascoste = 0, con = 0;
+    for (const d of righe) {
+      const pill = d.querySelector('.lg-pills .is-feste');
+      const corpo = [...d.querySelectorAll('.lg-serv .is-pratico')]
+        .some((li) => li.textContent.trim() === 'Feste di compleanno');
+      if (pill && !corpo) soloPillola++;
+      if (corpo && !pill) soloCorpo++;
+      if (pill) {
+        con++;
+        if (getComputedStyle(pill).display === 'none') nascoste++;
+      }
+    }
+    return { soloPillola, soloCorpo, nascoste, con };
+  });
+  if (feste.con) {
+    r.ok(feste.soloPillola === 0 && feste.soloCorpo === 0,
+      feste.soloPillola || feste.soloCorpo
+        ? `pillola e riga aperta non d'accordo: ${feste.soloPillola} solo pillola, ${feste.soloCorpo} solo corpo`
+        : 'la pillola «Feste di compleanno» c\'e\' dove la riga aperta lo dice, e solo li\'');
+    r.ok(feste.nascoste === 0,
+      feste.nascoste ? `${feste.nascoste} pillole compleanno nascoste sul telefono`
+        : 'sul telefono la pillola compleanno si vede (sta fra le prime due)');
+  } else {
+    console.log('  nota  nessun posto con feste di compleanno: prove della pillola saltate');
+  }
+  await ctx.close();
+
+  // ── il link con la ricerca gia' scritta ───────────────────────────────
+  r.titolo('luoghi.html?q=&prov= — il link da mandare');
+  ({ ctx, page } = await apri(browser, 'luoghi.html?q=feste+di+compleanno&prov=cuneo', 412));
+  const pre = await page.evaluate(() => {
+    const q = document.getElementById('lg-q');
+    const p = document.querySelector('#lg-toolbar select[data-campo="prov"]');
+    const righe = [...document.querySelectorAll('.lg-grp > .lg-row[data-cat]')];
+    const viste = righe.filter((d) => !d.hidden);
+    const attese = righe.filter((d) => d.dataset.prov === 'cn' && d.querySelector('.is-feste'));
+    return {
+      q: q ? q.value : null, prov: p ? p.value : null,
+      viste: viste.length,
+      fuori: viste.filter((d) => d.dataset.prov !== 'cn' ||
+        !d.textContent.toLowerCase().includes('feste di compleanno')).length,
+      perse: attese.filter((d) => d.hidden).length,
+    };
+  });
+  r.ok(pre.q === 'feste di compleanno', `?q= scrive nella casella di ricerca (${pre.q})`);
+  r.ok(pre.prov === 'cn', `?prov=cuneo accende la tendina per nome (${pre.prov})`);
+  r.ok(pre.fuori === 0, pre.fuori ? `${pre.fuori} righe mostrate che non c'entrano`
+    : 'si vedono solo righe di Cuneo che parlano di feste di compleanno');
+  r.ok(pre.perse === 0, pre.perse ? `${pre.perse} posti di Cuneo con la pillola restano nascosti`
+    : 'ogni posto di Cuneo con la pillola e\' nell\'elenco');
+  await ctx.close();
+  ({ ctx, page } = await apri(browser, 'luoghi.html?prov=torino', 412));
+  r.ok(await page.evaluate(() =>
+    document.querySelector('#lg-toolbar select[data-campo="prov"]').value === 'all'),
+    'una provincia che la tendina non ha si ignora: la pagina parte intera');
   await ctx.close();
 
   // ── le convenzioni che qualcuno smonterebbe per distrazione ───────────

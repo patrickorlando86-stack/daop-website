@@ -11,7 +11,7 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 72,
+  "n": 74,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
@@ -41,7 +41,7 @@
  },
  "c-al-basaluzzo": {
   "comune": "Basaluzzo",
-  "n": 2,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-bassignana": {
@@ -86,7 +86,7 @@
  },
  "c-al-cantalupo-ligure": {
   "comune": "Cantalupo Ligure",
-  "n": 4,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-capriata-d-orba": {
@@ -434,11 +434,6 @@
   "n": 1,
   "prov": "AL"
  },
- "c-al-ronco-scrivia": {
-  "comune": "Ronco Scrivia",
-  "n": 1,
-  "prov": "AL"
- },
  "c-al-rosignano-monferrato": {
   "comune": "Rosignano Monferrato",
   "n": 2,
@@ -571,11 +566,6 @@
  },
  "c-al-vignole-borbera": {
   "comune": "Vignole Borbera",
-  "n": 1,
-  "prov": "AL"
- },
- "c-al-villa-del-foro": {
-  "comune": "Villa del Foro",
   "n": 1,
   "prov": "AL"
  },
@@ -926,7 +916,7 @@
  },
  "c-cn-alba": {
   "comune": "Alba",
-  "n": 4,
+  "n": 5,
   "prov": "CN"
  },
  "c-cn-arguello": {
@@ -976,7 +966,7 @@
  },
  "c-cn-boves": {
   "comune": "Boves",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-bra": {
@@ -1011,6 +1001,11 @@
  },
  "c-cn-caraglio": {
   "comune": "Caraglio",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-caramagna-piemonte": {
+  "comune": "Caramagna Piemonte",
   "n": 1,
   "prov": "CN"
  },
@@ -1136,7 +1131,7 @@
  },
  "c-cn-fossano": {
   "comune": "Fossano",
-  "n": 5,
+  "n": 6,
   "prov": "CN"
  },
  "c-cn-frabosa-soprana": {
@@ -1152,6 +1147,11 @@
  "c-cn-frassino": {
   "comune": "Frassino",
   "n": 2,
+  "prov": "CN"
+ },
+ "c-cn-garessio": {
+  "comune": "Garessio",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-govone": {
@@ -1246,7 +1246,7 @@
  },
  "c-cn-montaldo-roero": {
   "comune": "Montaldo Roero",
-  "n": 2,
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-montelupo-albese": {
@@ -1336,7 +1336,7 @@
  },
  "c-cn-pontechianale": {
   "comune": "Pontechianale",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-racconigi": {
@@ -1371,7 +1371,7 @@
  },
  "c-cn-roccaforte-mondovi": {
   "comune": "Roccaforte Mondovì",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-roccavione": {
@@ -1381,6 +1381,11 @@
  },
  "c-cn-roddi": {
   "comune": "Roddi",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-roddino": {
+  "comune": "Roddino",
   "n": 1,
   "prov": "CN"
  },
@@ -1421,7 +1426,7 @@
  },
  "c-cn-savigliano": {
   "comune": "Savigliano",
-  "n": 6,
+  "n": 8,
   "prov": "CN"
  },
  "c-cn-sommariva-del-bosco": {
@@ -1431,7 +1436,7 @@
  },
  "c-cn-sommariva-perno": {
   "comune": "Sommariva Perno",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-tarantasca": {
