@@ -2460,6 +2460,17 @@ coppia, ed è quella che oggi lavora davvero. Se nasce una forma nuova (una clas
 un "a partire da"), si tocca su tutte e due le sponde: la guardia di qua è
 `tests/corsi.js`, quella di là `_test-attivita.mjs`.
 
+**Anni e classe nella stessa cella: vincono gli anni scritti** (02/10/2026).
+«3-6 anni scuola dell'infanzia» dava la fascia 5-5 (le classi si leggevano per
+prime, e il 6 contava dentro l'infanzia) mentre la riga stampava «3-6 anni».
+Ora `_eta_esplicita()` / `_etaEsplicita` prende solo i numeri con «anni» o
+«mesi» scritto subito dopo, così in «1a e 2a media (11-12 anni)» contano 11 e
+12, non 1 e 2; un anno solo accanto a una classe («3a media (13 anni)») è una
+glossa e vince la classe. Una cella senza classi non cambia. Quel giorno nessun
+corso del foglio aveva quella forma: confrontate 97 etichette fra le due sponde,
+zero divergenze. Le prove sono `scripts/prova_eta_classi.py` (in CI da quel
+giorno) e `_test-attivita.mjs`.
+
 **Il secondo era una prova invecchiata.** `tests/corsi.js` pretendeva che una
 pagina realtà avesse lo **stesso robots dell'hub** — regola giusta fino al
 26/08/2026, quando `confermata()` ha reso quella decisione della singola società

@@ -107,6 +107,20 @@ prova("tutte le età", None)
 prova("", None)
 prova("   ", None)
 
+print("\n=== anni E classe nella stessa cella: vincono gli anni scritti ===")
+# 02/10/2026: "3-6 anni scuola dell'infanzia" dava 5-5 (l'infanzia col 6 contato
+# dentro il ciclo) mentre la riga stampa "3-6 anni". Gli anni scritti dalla
+# societa' valgono piu' della classe da cui li deduciamo.
+prova("bambini 3-6 anni scuola dell'infanzia", (3, 6))
+prova("dai 4 anni (scuola dell'infanzia)", (4, 18))
+prova("fino a 10 anni, scuola primaria", (0, 10))
+prova("0-12 mesi, asilo nido", (0, 1))
+prova("6-10 anni (scuole elementari)", (6, 10))
+# ...ma i numeri DELLE classi non diventano anni: in "1a e 2a media (11-12
+# anni)" contano 11 e 12, non 1 e 2.
+prova("1a e 2a media (11-12 anni)", (11, 12))
+prova("3a media (13 anni)", (13, 13))
+
 print("\n=== la riga chiusa: gli anni fra parentesi solo se la cella non li dice ===")
 # eta_testo() aggiunge "(6-10 anni)" dietro a una cella scritta in classi, e
 # lascia com'e' una cella che gli anni li nomina gia'. Fino al 02/10/2026 il

@@ -295,6 +295,41 @@ def _eta_numeri(t):
             for m, u in zip(pezzi, unita)]
 
 
+# Fra due numeri della stessa fascia ci sta solo questo: "3-6 anni", "3 a 6
+# anni", "dai 3 ai 6 anni". Una parola vera in mezzo ("2a media (11") li separa.
+_COLLA_ETA = r'\s*(?:-|–|—|/|a|ai|al|e|fino a|fino ai)?\s*'
+
+
+def _eta_esplicita(t):
+    """I soli numeri che hanno l'unita' SCRITTA (anni o mesi), in anni. [] se
+    non ce n'e'.
+
+    Nasce il 02/10/2026 per le celle che dicono gli anni E la classe, tipo
+    "bambini 3-6 anni scuola dell'infanzia". eta_da_classi() la leggeva come
+    l'infanzia col 6 contato DENTRO il ciclo, cioe' la fascia 5-5, mentre la
+    riga chiusa stampa "3-6 anni": il filtro e la riga dicevano due cose. Gli
+    anni scritti dalla societa' valgono piu' della classe da cui li deduciamo.
+
+    Piu' stretta di _eta_numeri(), apposta: l'unita' deve stare SUBITO dopo il
+    numero, e la eredita solo chi le sta attaccato con un trattino o un "a".
+    Cosi' in "1a e 2a media (11-12 anni)" contano l'11 e il 12, non l'1 e il 2.
+    Gemella di _etaEsplicita in app.js (repo daop-mobile).
+    """
+    import re as _re
+    pezzi = [m for m in _re.finditer(r'\d+', t) if len(m.group()) <= 2]
+    unita = []
+    for m in pezzi:
+        dopo = t[m.end():]
+        unita.append('mesi' if _re.match(r'\s*mes', dopo)
+                     else 'anni' if _re.match(r'\s*ann', dopo) else None)
+    for i in range(len(pezzi) - 2, -1, -1):
+        colla = t[pezzi[i].end():pezzi[i + 1].start()]
+        if unita[i] is None and unita[i + 1] and _re.fullmatch(_COLLA_ETA, colla):
+            unita[i] = unita[i + 1]
+    return [int(m.group()) // 12 if u == 'mesi' else int(m.group())
+            for m, u in zip(pezzi, unita) if u]
+
+
 # Il ciclo scolastico -> gli anni che ci si passa dentro. Non e' anagrafe fine:
 # e' la fascia in cui cade chi frequenta quella classe, che e' quello che serve a
 # un filtro "che eta' ha mio figlio".
@@ -395,10 +430,18 @@ def eta_da_testo(testo):
         return None
     # Le CLASSI prima dei numeri nudi, o si legge "1a e 2a media" come la fascia
     # 1-2 ANNI. Vedi eta_da_classi(): e' il caso vero del 03/09/2026.
+    # Ma se la cella scrive ANCHE gli anni ("3-6 anni scuola dell'infanzia"),
+    # vincono quelli: vedi _eta_esplicita(). Senza classi non cambia niente.
+    # Un numero solo, senza "dai" o "fino a", accanto a una classe e' una
+    # glossa ("3a media (13 anni)"), non una fascia aperta: lì vince la classe.
     classi = eta_da_classi(t)
     if classi:
-        return classi
-    numeri = _eta_numeri(t)
+        numeri = _eta_esplicita(t)
+        if not numeri or (len(numeri) == 1 and not _re.search(
+                r'\b(da|dai|dal|dalla|partire|fino|entro|max|massimo)\b', t)):
+            return classi
+    else:
+        numeri = _eta_numeri(t)
     if not numeri:
         return None
     if len(numeri) >= 2:
