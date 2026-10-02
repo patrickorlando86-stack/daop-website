@@ -11,7 +11,7 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 73,
+  "n": 74,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
@@ -321,7 +321,7 @@
  },
  "c-al-novi-ligure": {
   "comune": "Novi Ligure",
-  "n": 43,
+  "n": 45,
   "prov": "AL"
  },
  "c-al-olivola": {
@@ -402,6 +402,11 @@
  "c-al-pozzolo-formigaro": {
   "comune": "Pozzolo Formigaro",
   "n": 6,
+  "prov": "AL"
+ },
+ "c-al-predosa": {
+  "comune": "Predosa",
+  "n": 1,
   "prov": "AL"
  },
  "c-al-quargnento": {
