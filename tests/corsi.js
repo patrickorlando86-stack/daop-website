@@ -919,6 +919,17 @@ module.exports = async function corsi(browser) {
       ? `${f}: annuncia eventi gia' conclusi: ${conclusi.map((x) => x.nome).join(', ')}`
       : `${f}: nessun evento concluso fra quelli annunciati`);
 
+    // Nessuna scheda SPOSTATA (02/10/2026, La Canunia): una riga corretta nel
+    // foglio cambia slug, e il vecchio resta in registro come cartello verso il
+    // nuovo. Annunciarlo vuol dire lo stesso evento due volte in fila, una delle
+    // due verso una pagina che dice "si e' spostata".
+    const spostati = ev
+      .map((h) => registro[h.replace('/eventi/', '').replace('.html', '')])
+      .filter((rec) => rec && rec.spostata);
+    r.ok(spostati.length === 0, spostati.length
+      ? `${f}: annuncia schede spostate: ${spostati.map((x) => x.slug).join(', ')}`
+      : `${f}: nessuna scheda spostata fra quelle annunciate`);
+
     // E il nome della societa' non si ripete su ogni card: sta nel titolo
     // della sezione tre centimetri sopra, e ripeterlo e' la stessa
     // ripetizione che le pagine comune tolgono quando un gruppo e' tutto

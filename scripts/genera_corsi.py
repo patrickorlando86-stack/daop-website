@@ -970,6 +970,13 @@ def openday(c, oggi=None):
     # finire, che e' quella a cui si fa ancora in tempo ad andare.
     futuri = []
     for slug, rec in trovati:
+        # Una scheda SPOSTATA porta lo stesso nome e la stessa data di quella
+        # nuova, e a pari data vinceva l'ordine alfabetico: "<nome>-evento" (la
+        # riga senza Citta') batte "<nome>-<citta'>", cioe' il link andava al
+        # cartello "si e' spostata" (02/10/2026, La Canunia). Una RITIRATA per
+        # la stessa ragione di eventi_a_nome_di(): e' una nostra smentita.
+        if rec.get('spostata') or rec.get('ritirata'):
+            continue
         try:
             di = datetime.date.fromisoformat(rec['d_start'])
             df = datetime.date.fromisoformat(rec['d_end'])
@@ -1839,13 +1846,21 @@ def eventi_a_nome_di(reg, org, oggi):
 
     Un evento RITIRATO resta fuori: quella pagina dichiara di non essere
     attendibile, e annunciarla dalla pagina di chi la organizza vorrebbe dire
-    mandare i suoi lettori a una nostra smentita."""
+    mandare i suoi lettori a una nostra smentita.
+
+    E resta fuori anche uno SPOSTATO (02/10/2026, Pony Games di Halloween di La
+    Canunia due volte): la riga e' entrata nel foglio senza Citta', il giorno
+    dopo la citta' c'era e lo slug e' cambiato. Il registro lo sapeva gia' - il
+    vecchio slug porta il timbro 'spostata' verso il nuovo - ma qui si saltava
+    solo il ritirato, quindi i due slug erano due eventi e si deduplicava
+    sull'URL. La scheda vecchia e' un cartello che rimanda all'altra: la pagina
+    della societa' annuncia la nuova, una volta."""
     # Il confronto e' senza forma giuridica (G.chiave_realta): "- La Canunia"
     # in coda e' La Canunia ASD. Resta stretto per tutto il resto.
     slug_org = G.chiave_realta(org)
     trovati, quasi = [], []
     for slug, rec in (reg or {}).items():
-        if rec.get('ritirata'):
+        if rec.get('ritirata') or rec.get('spostata'):
             continue
         titolo, coda = G.spezza_nome_evento(rec.get('nome'))
         if G.chiave_realta(coda) != slug_org:
