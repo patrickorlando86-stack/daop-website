@@ -33,6 +33,39 @@ module.exports = async function agenda(browser) {
     ? `pillole che portano altrove prima del primo evento: ${indice.sopra.slice(0, 6).join(', ')}`
     : 'prima del primo evento solo i filtri, nessuna pillola verso altre pagine');
 
+  // La corsia "Appena aggiunti" (05/10/2026). Puo' mancare - sotto tre
+  // candidati non si stampa - e allora non si pretende niente: nessun minimo.
+  // Se c'e': solo eventi lontani (i vicini sono gia' in cima per data), ognuno
+  // con la data scritta, l'ancora che esiste in agenda, e la corsia misurata.
+  const nuovi = await page.evaluate(() => {
+    const b = document.querySelector('[data-rail="nuovi"]');
+    if (!b) return null;
+    const d = new Date(); d.setDate(d.getDate() + 7);
+    const soglia = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
+                   '-' + String(d.getDate()).padStart(2, '0');
+    const cards = [...b.querySelectorAll('.ev-hl-card')];
+    return {
+      cta: b.dataset.cta,
+      visibili: b.querySelectorAll('.ev-hl-card:not(.is-hidden)').length === cards.length,
+      vicini: cards.filter((c) => c.dataset.start <= soglia).map((c) => c.dataset.start),
+      senzaData: cards.filter((c) => !/\d/.test(c.querySelector('.ev-hl-meta').textContent.split('·')[0])).length,
+      orfane: cards.filter((c) => !document.getElementById(c.getAttribute('href').slice(1))).length,
+      ordine: cards.every((c, i) => !i || cards[i - 1].dataset.start <= c.dataset.start),
+    };
+  });
+  if (nuovi) {
+    r.ok(nuovi.cta === 'nuovi', 'appena aggiunti: la corsia porta data-cta="nuovi"');
+    r.ok(nuovi.visibili, 'appena aggiunti: il JS delle corsie non la nasconde');
+    r.ok(nuovi.vicini.length === 0, nuovi.vicini.length
+      ? `appena aggiunti: eventi entro la settimana, già in cima: ${nuovi.vicini.join(', ')}`
+      : 'appena aggiunti: solo eventi da qui a più di una settimana');
+    r.ok(nuovi.senzaData === 0, `appena aggiunti: ${nuovi.senzaData} card senza la data`);
+    r.ok(nuovi.orfane === 0, `appena aggiunti: ${nuovi.orfane} card verso un'ancora che non c'è`);
+    r.ok(nuovi.ordine, 'appena aggiunti: in ordine di data');
+  } else {
+    console.log('  nota appena aggiunti: corsia assente stanotte (meno di tre candidati)');
+  }
+
   const prima = page.locator('.event-card').first();
   r.ok(await prima.locator('.ev-det').evaluate((d) => d.hidden), 'il dettaglio parte chiuso');
 

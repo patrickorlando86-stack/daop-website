@@ -614,6 +614,7 @@ navigazione interna **resta affidata ai `page_view`**, come prima.
 | «Organizzatore: I corsi di X» | `organizzatore` | le schede con una realtà |
 | «Cosa c'è nei prossimi giorni vicino a X» (dal 25/09) | `ora` | le schede concluse |
 | «Altro per bambini qui vicino» (dal 25/09) | `bambini` | le schede con altri eventi per bambini in zona |
+| la corsia «Appena aggiunti» (dal 05/10) | `nuovi` | `eventi.html` |
 
 Parametri: `cta_id`, `destination_url` (c'era già), **`destination_area`**
 (`evento` la scheda singola, `eventi` gli elenchi, `corsi`, `luoghi`, `centri`,
@@ -5899,6 +5900,35 @@ pillole visibili sono due, e questa non si deduce da nient'altro. Al 02/10 sono
 telefono la pillola si veda, e il link (`?q=` e `?prov=cuneo` accesi, solo righe
 giuste, nessuna di Cuneo con la pillola persa, provincia sconosciuta ignorata).
 Nessun conteggio.
+
+### La corsia «Appena aggiunti» — 05/10/2026
+
+Chiesta da Patrick: mostrare in agenda gli eventi nuovi del run. Terza corsia
+dopo «Oggi» e «Questo weekend» (`appena_aggiunti()` in `genera_eventi.py`).
+
+- **Solo eventi che cadono fra più di una settimana** (`NUOVI_DA_GIORNI`).
+  La fonte dà una settimana di preavviso mediano: il 05/10, dei 135 eventi
+  entrati in sette giorni più di metà cadeva entro la settimana, cioè stava
+  già in cima all'agenda. Gli altri finiscono in fondo a ~290 righe.
+- **«Nuovo» = `first_seen` del registro, cercato per ancora**, negli ultimi
+  `NUOVI_GIORNI` (7). Un'ancora che nel registro non c'è è entrata stanotte.
+  Senza registro la corsia non si stampa.
+- **Si scelgono i dodici entrati più di recente e si mostrano per data.**
+  Scelti per data, il 05/10 i dodici posti andavano tutti alla settimana dopo
+  e Halloween e i mercatini restavano fuori.
+- **Una manifestazione compare una volta.** Sotto `NUOVI_MIN` (3) candidati la
+  corsia non c'è. La card porta la data in testa (`hl_card(oggi=…)`), che sulle
+  altre due corsie è il titolo.
+- **Il JS a mano non la rifiltra per data**: prima ogni corsia che non era
+  «oggi» veniva trattata come «weekend». Con un filtro attivo sparisce insieme
+  alle altre.
+- **Costa ~400px sul telefono** prima della lista per giorni. Si misura con
+  `data-cta="nuovi"` (`internal_cta_view`/`click`): se fra un mese nessuno la
+  tocca, si toglie.
+
+`tests/agenda.js` controlla, se la corsia c'è: niente eventi entro la
+settimana, la data su ogni card, ancore esistenti, ordine per data, il JS che
+non la nasconde. Nessun minimo. Verificata rossa con la soglia a zero.
 
 ### I gruppi dell'agenda sono per data di INIZIO, e il calendario chiede altro
 

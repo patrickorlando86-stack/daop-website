@@ -1184,7 +1184,7 @@ def riga(e, today, hub=None):
         </article>'''
 
 
-def hl_card(e, eager=False):
+def hl_card(e, eager=False, oggi=None):
     """Scheda compatta con locandina per le corsie "Oggi" e "Questo weekend".
     Punta all'ancora della riga corrispondente più in basso nell'agenda.
 
@@ -1204,6 +1204,10 @@ def hl_card(e, eager=False):
     img = (f'<img src="{cover}" alt="" {load} decoding="async">'
            if cover else f'<span class="ev-hl-ph" aria-hidden="true">{cat_icon}</span>')
     bits = [f"{esc(e['citta'])} ({e['prov']})" if e['citta'] else e['prov']]
+    # Su "Oggi" e "Questo weekend" la data e' il titolo della corsia; su
+    # "Appena aggiunti" no, e senza si leggerebbe come una cosa di oggi.
+    if oggi is not None:
+        bits.insert(0, _quando_breve(e, oggi))
     if e['ora']:
         bits.append(esc(trunc(e['ora'], 20)))
     pill = prezzo_pill(e)
@@ -1221,15 +1225,72 @@ def hl_card(e, eager=False):
 EAGER_HL = 2  # quante schede della prima corsia caricano l'immagine subito
 
 
-def rail(titolo, lista, slug, eager=False):
+def rail(titolo, lista, slug, eager=False, cta=None, oggi=None):
     if not lista:
         return ''
-    cards = '\n'.join(hl_card(e, eager=eager and i < EAGER_HL)
+    cards = '\n'.join(hl_card(e, eager=eager and i < EAGER_HL, oggi=oggi)
                       for i, e in enumerate(lista))
-    return (f'      <section class="ev-hl-block" data-rail="{slug}">\n'
+    cta_attr = f' data-cta="{cta}"' if cta else ''
+    return (f'      <section class="ev-hl-block" data-rail="{slug}"{cta_attr}>\n'
             f'        <h3 class="ev-hl-title">{titolo}<span class="ev-hl-n">{len(lista)}</span></h3>\n'
             f'        <div class="ev-rail">\n' + cards +
             '\n        </div>\n      </section>')
+
+
+NUOVI_GIORNI = 7     # "appena aggiunto" = entrato in agenda negli ultimi N giorni
+NUOVI_DA_GIORNI = 8  # ...e che cade almeno fra N giorni: i vicini sono gia' in cima
+NUOVI_MIN = 3        # sotto, la corsia non si stampa
+
+
+def appena_aggiunti(events, today, escludi=()):
+    """La corsia "Appena aggiunti" di eventi.html (05/10/2026).
+
+    PERCHE' SOLO QUELLI LONTANI. La fonte da' una settimana di preavviso
+    mediano: misurato il 05/10, dei 135 eventi entrati in sette giorni piu'
+    di meta' cadeva entro la settimana, cioe' stava gia' in cima all'agenda
+    per data. Mostrarli anche qui sarebbe la stessa riga due volte. Quelli che
+    cadono fra due settimane o tre mesi invece finiscono in fondo a una pagina
+    da ~290 righe, e li' "e' arrivato questo" e' un'informazione che l'agenda
+    non da'.
+
+    La data d'ingresso e' `first_seen` del registro delle schede, cercata per
+    ancora; un evento che nel registro non c'e' e' entrato stanotte. Senza
+    registro la corsia non si stampa: tutto risulterebbe nuovo.
+
+    Una manifestazione compare una volta: quattro serate della stessa sagra
+    sarebbero una scelta sola travestita da quattro (la regola di
+    blocco_ora_vicino). L'ordine e' la data, come il resto dell'agenda."""
+    reg = carica_registro()
+    if not reg:
+        return []
+    ingresso = {r['anchor']: r.get('first_seen') for r in reg.values()
+                if r.get('anchor')}
+    da = today + datetime.timedelta(days=NUOVI_DA_GIORNI)
+    visti, out = set(), []
+    for e in sorted(events, key=lambda e: (e['d_start'], e['nome'])):
+        if id(e) in escludi or e['d_start'] < da:
+            continue
+        fs = ingresso.get(e.get('anchor'))
+        try:
+            entrato = datetime.date.fromisoformat(fs[:10]) if fs else today
+        except ValueError:
+            continue
+        if (today - entrato).days >= NUOVI_GIORNI:
+            continue
+        chiave = (e['manifest'] or e['nome']).strip().lower()
+        if chiave in visti:
+            continue
+        visti.add(chiave)
+        out.append((entrato, e))
+    if len(out) < NUOVI_MIN:
+        return []
+    # Si SCELGONO gli ultimi entrati e si MOSTRANO per data. Il 05/10 i
+    # candidati erano 42: presi per data, i dodici posti andavano tutti alla
+    # settimana dopo, e Halloween e i mercatini - cioe' la ragione della
+    # corsia - restavano fuori.
+    out.sort(key=lambda t: (-t[0].toordinal(), t[1]['d_start'], t[1]['nome']))
+    scelti = [e for _, e in out[:HL_LIMIT]]
+    return sorted(scelti, key=lambda e: (e['d_start'], e['nome']))
 
 
 def anno_se_altro(d, oggi):
@@ -1272,8 +1333,11 @@ def render(events, hub=None):
     oggi = [e for e in events if e['d_start'] <= today <= e['d_end']]
     visti = {id(e) for e in oggi}
     wknd = [e for e in events if id(e) not in visti and e['d_start'] <= sun and e['d_end'] >= sat]
+    nuovi = appena_aggiunti(events, today,
+                            escludi={id(e) for e in oggi + wknd})
     blocchi = [rail('Oggi', oggi[:HL_LIMIT], 'oggi'),
-               rail('Questo weekend', wknd[:HL_LIMIT], 'weekend')]
+               rail('Questo weekend', wknd[:HL_LIMIT], 'weekend'),
+               rail('Appena aggiunti', nuovi, 'nuovi', cta='nuovi', oggi=today)]
     blocchi = [b for b in blocchi if b]
     highlights = ''
     if blocchi:
@@ -8912,9 +8976,14 @@ TEMI_STAGIONE = {
     # Niente "streg" e "masca" (28/09/2026, Patrick): prendevano le
     # rievocazioni dei processi alle streghe e le feste della masca, che sono
     # storia e folklore, non Halloween.
+    # Fuori anche "pipistrell" e la zucca nel programma (05/10/2026): sulle
+    # pagine per provincia entravano la visita alla grotta di Rio Martino
+    # "prima del letargo dei pipistrelli" e la Fiera di San Simone a Bubbio,
+    # che ha un "Gran Premio della Zucca" fra funghi e trippa. La zucca resta,
+    # ma solo nel TITOLO (TEMI_SOLO_TITOLO): "L'Orto delle Zucche" si'.
     'halloween': re.compile(
-        r"hallowe|\bzucc(?:a|he)\b|dolcetto|scherzetto|"
-        r"\bmostri|fantasm|spettr|vampir|zombi|pipistrell|horror|brivid|"
+        r"hallowe|dolcetto|scherzetto|"
+        r"\bmostri|fantasm|spettr|vampir|zombi|horror|brivid|"
         r"samhain|trick or treat", re.I),
     'natale': re.compile(
         r"natal|presep|babbo|avvento|santa lucia|zampogn|\belfi\b|\brenne\b|"
@@ -8967,10 +9036,20 @@ LUNGO_GIORNI = 7
 MIN_TEMA = 3
 
 
+# Parole che dicono la festa solo se stanno nel titolo: nel programma una zucca
+# e' quasi sempre una sagra d'autunno, nel nome dell'evento e' il suo tema.
+TEMI_SOLO_TITOLO = {
+    'halloween': re.compile(r"\bzucc(?:a|he)\b", re.I),
+}
+
+
 def in_tema(e, chiave):
     """True se titolo o programma dicono che la riga e' QUELLA festa."""
     rx = TEMI_STAGIONE.get(chiave)
-    return bool(rx and rx.search(f"{e.get('nome') or ''} {e.get('descr') or ''}"))
+    if rx and rx.search(f"{e.get('nome') or ''} {e.get('descr') or ''}"):
+        return True
+    rx_t = TEMI_SOLO_TITOLO.get(chiave)
+    return bool(rx_t and rx_t.search(e.get('nome') or ''))
 
 
 def e_lungo(e):
