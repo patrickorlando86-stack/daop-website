@@ -387,6 +387,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-07"
+   },
+   "the-messy-playroom-kids-us-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Marameo, Corso Piave 10",
+    "manifest": "",
+    "nome": "The Messy Playroom - Kids&Us Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
    }
   },
   "nome": "Alba",
@@ -965,6 +976,17 @@
  },
  "aramengo": {
   "eventi": {
+   "bacchanalia-aramengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Bacchanalia 2026",
+    "nome": "Bacchanalia 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
    "primo-raduno-trattori-d-epoca-ruggine-piemontese-aramengo": {
     "anni": [
      2026
@@ -1038,6 +1060,17 @@
     "pagina": true,
     "ultima": "2026-09-27"
    },
+   "famu-giornata-nazionale-delle-famiglie-al-museo-as-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Civico di Palazzo Mazzetti",
+    "manifest": "",
+    "nome": "Famu - Giornata nazionale delle famiglie al museo - Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "festival-delle-quando-e-dove-asti": {
     "anni": [
      2026
@@ -1060,6 +1093,39 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "foglie-storie-e-asinelli-fondazione-biblioteca-ast-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Rio Crosio",
+    "manifest": "",
+    "nome": "Foglie, Storie e Asinelli - Fondazione Biblioteca Astense Giorgio Faletti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "giochi-di-ruolo-e-librogame-le-cronache-del-crepus-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Astense Giorgio Faletti",
+    "manifest": "",
+    "nome": "Giochi di Ruolo e Librogame - Le Cronache del Crepuscolo - Biblioteca Astense",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "humana-foresta-compagnia-teatrale-petra-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Rio Crosio",
+    "manifest": "Acerbi AL PARCO 2026",
+    "nome": "Humana Foresta - Compagnia Teatrale Petra",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "la-settimana-del-palio-di-asti": {
     "anni": [
      2026
@@ -1070,6 +1136,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-03"
+   },
+   "letture-ad-alta-voce-nati-per-leggere-ed-attivita-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Foyer delle Famiglie",
+    "manifest": "Festa dei Popoli",
+    "nome": "Letture ad Alta Voce 'Nati per Leggere' ed Attività per Bambini - Fondazione Biblioteca Astense Giorgio Faletti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
    },
    "nonni-nipoti-una-mattinata-dedicata-biblioteca-ast-asti": {
     "anni": [
@@ -1158,6 +1235,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "torneo-di-scacchi-aperto-a-tutti-comitato-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Portici di Piazza San Secondo",
+    "manifest": "",
+    "nome": "Torneo di Scacchi Aperto a Tutti - Comitato di Asti per l'UNICEF",
+    "organizza": "Comitato di Asti per l'UNICEF",
+    "pagina": true,
+    "ultima": "2026-10-10"
    },
    "treno-storico-centoporte-per-cocconato-riviera-del-asti": {
     "anni": [
@@ -1369,6 +1457,23 @@
   },
   "nome": "Belforte Monferrato",
   "prov": "AL"
+ },
+ "belveglio": {
+  "eventi": {
+   "sagra-della-bagna-cauda-belveglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone in Via XX Settembre 1",
+    "manifest": "39ª Sagra della Bagna Cauda",
+    "nome": "39ª Sagra della Bagna Cauda",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Belveglio",
+  "prov": "AT"
  },
  "bergolo": {
   "eventi": {
@@ -1756,6 +1861,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-23"
+   },
+   "fiera-di-san-simone-bubbio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bubbio",
+    "manifest": "Fiera di San Simone",
+    "nome": "Fiera di San Simone",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
    }
   },
   "nome": "Bubbio",
@@ -1958,6 +2074,17 @@
  },
  "callianomonferrato": {
   "eventi": {
+   "paglio-ragliante-edizione-calliano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tensostruttura riscaldata in Piazza Marconi",
+    "manifest": "Paglio Ragliante 54ª Edizione",
+    "nome": "Paglio Ragliante 54ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-16"
+   },
    "sagra-dello-stufato-d-asino-calliano-monferrato": {
     "anni": [
      2026
@@ -3015,6 +3142,18 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "camminate-domenicali-a-castagnole-delle-lanze-comu": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Piazza San Bartolomeo",
+    "manifest": "Camminate Domenicali a Castagnole delle Lanze",
+    "nome": "Camminate Domenicali a Castagnole delle Lanze - Comune di Castagnole delle Lanze",
+    "organizza": "Comune di Castagnole delle Lanze",
+    "pagina": true,
+    "ultima": "2027-01-01"
+   },
    "castelli-aperti-a-ferragosto-torre-del-conte-balla-castagnole-delle-lanze": {
     "anni": [
      2026
@@ -3025,6 +3164,28 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-16"
+   },
+   "inaugurazione-del-nuovo-polo-dell-infanzia-ruscone-castagnole-delle-lanze": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Polo dell'Infanzia Ruscone Valle",
+    "manifest": "",
+    "nome": "Inaugurazione del nuovo Polo dell'Infanzia Ruscone Valle - Comune di Castagnole delle Lanze",
+    "organizza": "Comune di Castagnole delle Lanze",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "leggiamo-insieme-storie-da-brividi-castagnole-delle-lanze": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale di Castagnole delle Lanze",
+    "manifest": "",
+    "nome": "Leggiamo Insieme - Storie da Brividi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-05"
    }
   },
   "nome": "Castagnole delle Lanze",
@@ -3264,6 +3425,23 @@
   },
   "nome": "Castellazzo Bormida",
   "prov": "AL"
+ },
+ "castellero": {
+  "eventi": {
+   "fiera-citta-della-nocciola-castellero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castellero d'Asti",
+    "manifest": "",
+    "nome": "44ª Fiera Città della Nocciola",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-08"
+   }
+  },
+  "nome": "Castellero",
+  "prov": "AT"
  },
  "castellettodorba": {
   "eventi": {
@@ -6885,6 +7063,17 @@
     "pagina": true,
     "ultima": "2026-08-24"
    },
+   "mr-book-biblioteca-civica-don-alfredo-bianco-monga-mongardino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone del Comune",
+    "manifest": "Mr. Book",
+    "nome": "Mr. Book - Biblioteca Civica Don Alfredo Bianco Mongardino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "pigiama-party-pro-loco-mongardino": {
     "anni": [
      2026
@@ -7706,6 +7895,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-07"
+   },
+   "puntini-e-virgolette-incontro-informativo-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Salotto di Bea",
+    "manifest": "",
+    "nome": "Puntini e Virgolette - Incontro Informativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    },
    "quando-venere-diventa-luna-nizza-monferrato": {
     "anni": [
@@ -10504,6 +10704,17 @@
     "pagina": true,
     "ultima": "2026-08-19"
    },
+   "ciaurin-l-orto-delle-zucche-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Martinetta 53B",
+    "manifest": "Ciaurin - L'Orto delle Zucche",
+    "nome": "Ciaurin - L'Orto delle Zucche",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-04"
+   },
    "comitato-palio-san-damiano-d-asti": {
     "anni": [
      2026
@@ -12414,6 +12625,23 @@
    }
   },
   "nome": "Viarigi",
+  "prov": "AT"
+ },
+ "viglianodasti": {
+  "eventi": {
+   "bagna-cauda-d-autunno-vigliano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Comunale",
+    "manifest": "Bagna Cauda d'Autunno",
+    "nome": "Bagna Cauda d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Vigliano d'Asti",
   "prov": "AT"
  },
  "vignoleborbera": {
