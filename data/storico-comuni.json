@@ -572,6 +572,17 @@
     "pagina": false,
     "ultima": "2026-09-19"
    },
+   "entriamo-nel-mondo-dei-libri-con-nat-associazione-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "Ottobre a Il Contastorie",
+    "nome": "Entriamo nel mondo dei libri con Nat - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "estate-di-eventi-al-quartiere-cristo-alessandria": {
     "anni": [
      2026
@@ -671,6 +682,39 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "il-contalibro-gruppo-di-lettura-11-13-anni-associa-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "Ottobre a Il Contastorie",
+    "nome": "Il Contalibro - Gruppo di lettura (11-13 anni) - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "il-contalibro-gruppo-di-lettura-8-10-anni-associaz-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "Ottobre a Il Contastorie",
+    "nome": "Il Contalibro - Gruppo di lettura (8-10 anni) - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "il-lungo-viaggio-di-ulisse-in-7-tappe-associazione-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "Ottobre a Il Contastorie",
+    "nome": "Il lungo viaggio di Ulisse...in 7 tappe - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "il-piccolo-principe-centro-commerciale-panorama-al-alessandria": {
     "anni": [
      2026
@@ -714,6 +758,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-01"
+   },
+   "letture-spaventose-associazione-il-contastorie-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "Ottobre a Il Contastorie",
+    "nome": "Letture spaventose - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-10-25"
    },
    "mandrovai-se-non-a-mandrogne-alessandria": {
     "anni": [
@@ -780,6 +835,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-01"
+   },
+   "nel-bosco-di-lorien-gruppo-di-giochi-di-ruolo-asso-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "Ottobre a Il Contastorie",
+    "nome": "Nel bosco di Lorien - Gruppo di Giochi di Ruolo - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "open-day-atelier-ariel-spazio-creativo-per-bimbi-alessandria": {
     "anni": [
@@ -2555,6 +2621,17 @@
  },
  "casalcermelli": {
   "eventi": {
+   "festa-d-autunno-bimbi-di-campagna-casal-cermelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Ovada 120",
+    "manifest": "",
+    "nome": "Festa d'Autunno - Bimbi di Campagna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "fiera-del-cavolo-di-san-giovanni-casal-cermelli": {
     "anni": [
      2026
@@ -3506,6 +3583,17 @@
  },
  "castellettomonferrato": {
   "eventi": {
+   "festa-di-halloween-con-escape-room-mani-di-fata-co-castelletto-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "SOMS di Castelletto Monferrato",
+    "manifest": "",
+    "nome": "Festa di Halloween con Escape Room - Mani di Fata Cooking",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "sagra-della-zucca-castelletto-monferrato": {
     "anni": [
      2026
@@ -6024,6 +6112,17 @@
  },
  "francavillabisio": {
   "eventi": {
+   "arriva-il-teatro-dei-burattini-francavilla-bisio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini delle Scuole",
+    "manifest": "",
+    "nome": "Arriva il Teatro dei Burattini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-07"
+   },
    "raviolata-d-autunno-di-francavilla-b-francavilla-bisio": {
     "anni": [
      2026
@@ -6404,6 +6503,17 @@
  },
  "grondona": {
   "eventi": {
+   "festa-del-fungo-e-della-castagna-grondona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Riccardo Garrone",
+    "manifest": "Festa del Fungo e della Castagna 2026",
+    "nome": "Festa del Fungo e della Castagna 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona": {
     "anni": [
      2026
@@ -6735,6 +6845,17 @@
  },
  "molare": {
   "eventi": {
+   "castagnata-pro-loco-san-luca-di-molare": {
+    "anni": [
+     2026
+    ],
+    "luogo": "San Luca di Molare",
+    "manifest": "",
+    "nome": "Castagnata - Pro Loco San Luca di Molare",
+    "organizza": "Pro Loco San Luca di Molare",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "polentone-di-molare": {
     "anni": [
      2026
@@ -7149,6 +7270,23 @@
   },
   "nome": "Montà",
   "prov": "CN"
+ },
+ "montecastello": {
+  "eventi": {
+   "castagnata-pro-loco-montecastello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Montecastello",
+    "manifest": "",
+    "nome": "Castagnata - Pro Loco Montecastello",
+    "organizza": "Pro Loco Montecastello",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   }
+  },
+  "nome": "Montecastello",
+  "prov": "AL"
  },
  "montegioco": {
   "eventi": {
@@ -11042,6 +11180,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "life-share-lab-laboratorio-di-musicoterapia-casa-d-san-salvatore-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa della Speranza",
+    "manifest": "Life Share LAB",
+    "nome": "Life Share LAB - Laboratorio di Musicoterapia - Casa della Speranza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    }
   },
   "nome": "San Salvatore Monferrato",
@@ -11512,6 +11661,17 @@
     "organizza": "Pro Loco di Sarezzano",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "festa-patronale-di-sarezzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "Festa Patronale di Sarezzano 2026",
+    "nome": "Festa Patronale di Sarezzano 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
    },
    "inaugurazione-alpaca-lounge-bioparco-cinofilo-del-sarezzano": {
     "anni": [

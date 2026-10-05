@@ -282,6 +282,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/halloween-provincia-alessandria.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/halloween-provincia-asti.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>daily</changefreq>
@@ -586,6 +592,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/arriva-il-teatro-dei-burattini-basaluzzo.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/arriva-il-teatro-dei-burattini-francavilla-bisio.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -910,6 +922,18 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/castagnata-campagnola-circolo-acli-san-maurizio-cr-castelletto-d-orba.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/castagnata-pro-loco-montecastello.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/castagnata-pro-loco-san-luca-di-molare.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1329,6 +1353,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/entriamo-nel-mondo-dei-libri-con-nat-associazione-alessandria.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/equi-lab-centro-famiglie-savigliano.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -1503,6 +1533,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/festa-d-autunno-bimbi-di-campagna-casal-cermelli.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/festa-d-autunno-pro-loco-voltaggio.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -1576,6 +1612,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/festa-del-bro-d-carvo-pro-loco-caldirola.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festa-del-fungo-e-della-castagna-grondona.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1767,6 +1809,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/festa-di-halloween-con-escape-room-mani-di-fata-co-castelletto-monferrato.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -1900,6 +1948,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/festa-patronale-di-santa-varena-villa-del-foro.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/festa-patronale-di-sarezzano.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2487,6 +2541,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/il-lungo-viaggio-di-ulisse-in-7-tappe-associazione-alessandria.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/il-panino-piu-lungo-del-mondo-con-gaia-pro-loco-cr-crissolo.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -3003,6 +3063,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/letture-spaventose-associazione-il-contastorie-alessandria.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/life-share-lab-laboratorio-di-musicoterapia-casa-d-san-salvatore-monferrato.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/lirica-in-piazza-x-edizione-associazione-stazzanes-stazzano.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -3220,6 +3292,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/negozi-in-strada-sport-in-piazza-confcommercio-sal-saluzzo.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/nel-bosco-di-lorien-gruppo-di-giochi-di-ruolo-asso-alessandria.html</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
