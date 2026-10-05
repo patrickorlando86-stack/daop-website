@@ -3204,6 +3204,11 @@ PAGINA_CSS = """
 .ev-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.9rem);
   font-weight:800;color:#fff;line-height:1.12;margin:0 0 12px;letter-spacing:-.02em}
 .ev-hero .ev-when{font-size:1.08rem;font-weight:600;color:var(--gold,#c9a227);margin:0}
+/* Ginetto nella fascia (05/10/2026, solo /halloween.html per ora): una riga,
+   non un riquadro. Vedi 'ginetto_fascia' in _landing_shell(). */
+.ev-hero .ev-ginetto-fascia{margin:10px 0 0;font-size:1rem;color:#fff}
+.ev-hero .ev-ginetto-fascia a{color:var(--gold,#c9a227);font-weight:700;
+  text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
 @media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
 /* La fascia illustrata di una stagionale (23/09/2026, prima /halloween.html).
@@ -7481,6 +7486,20 @@ def _landing_shell(spec, css, nav, foot, oggi):
                 '  </div>\n'
                 f'  <p class="ev-firma-nota">Pagina rigenerata ogni notte. '
                 f'Ultimo aggiornamento: {data_agg}.</p>')
+    # Ginetto nella fascia (05/10/2026, Patrick: «se vogliamo puntare su
+    # quello»). Una riga sotto il numero, non un riquadro: sulla stagionale la
+    # domanda di chi arriva ("cosa faccio con mio figlio?") e' quella di
+    # Ginetto, e il disegno della fascia e' gia' lui. Il blocco in fondo resta:
+    # e' un'eccezione dichiarata a "una volta sola per pagina", e si misura a
+    # parte col suo cta_id, cosi' si sa quale delle due la gente tocca. Se fra
+    # un mese questa non rende, si toglie; se rende, si allarga alle altre.
+    ginetto_fascia = ''
+    if spec.get('ginetto_fascia'):
+        ginetto_fascia = (
+            '\n    <p class="ev-ginetto-fascia" data-cta="ginetto-fascia">'
+            f'{spec["ginetto_fascia"]} '
+            '<a href="https://ginettoapp.it" target="_blank" rel="noopener">'
+            'Chiedilo a Ginetto&nbsp;&rarr;</a></p>')
     fascia = spec.get('fascia')
     img_og = fascia['og'] if fascia else DEFAULT_IMG
     # Le misure si dichiarano solo per l'anteprima della fascia, che e' sempre
@@ -7539,7 +7558,7 @@ def _landing_shell(spec, css, nav, foot, oggi):
       {briciole}
     </div>
     <h1>{esc(spec['h1'])}</h1>
-    <p class="ev-when"{scade_attr}>{esc(spec['sotto'])}</p>{agg_cima}
+    <p class="ev-when"{scade_attr}>{esc(spec['sotto'])}</p>{ginetto_fascia}{agg_cima}
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">
@@ -8799,6 +8818,9 @@ def spec_halloween(st, events, oggi, altre):
         'eventi': len(finestra),
         'fascia': fascia_stagione('halloween'),
         'ginetto_nel_corpo': poche,
+        # Solo quando c'e' da scegliere: con una o due feste Ginetto sta gia'
+        # nel corpo, e "quale" non avrebbe senso.
+        'ginetto_fascia': None if poche else "Non sai quale sia il più adatto per tuo figlio?",
     }
 
 
