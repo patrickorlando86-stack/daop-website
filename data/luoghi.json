@@ -34821,7 +34821,7 @@
   "codice": "5367",
   "nome": "Agricampeggio Mac a Pè",
   "icona": "⛺",
-  "categoria": "Natura & Parchi › Campeggi",
+  "categoria": "Soggiorno › Campeggi",
   "servizi": "Piazzole raggiungibili a piedi, Parcheggio sottostante, Asini e capre, Spazi gioco per bambini, Prodotti a km 0, Sentieri per famiglie",
   "tag": "campeggio-agricampeggio-tenda-fattoria-animali-asini-capre-biologico-montagna-valle-stura-trekking-all-aperto-famiglie-dormire",
   "indirizzo": "Loc. Bagnulin - Ciamin 2",
@@ -34857,7 +34857,7 @@
   "fotoautore": "<a href=\"https://maps.google.com/maps/contrib/110376039642308274211\">Agricampeggio Mac a pè</a>",
   "fotolicenza": "",
   "premium_al": "31/12/2026",
-  "ruolo": "meta"
+  "ruolo": "servizio"
  },
  {
   "codice": "5086",
@@ -35325,7 +35325,7 @@
   "codice": "5366",
   "nome": "Agricampeggio Cit Ciabot",
   "icona": "⛺",
-  "categoria": "Natura & Parchi › Campeggi",
+  "categoria": "Soggiorno › Campeggi",
   "servizi": "Piazzole ampie per camper tende e van, Corrente elettrica, Carico e scarico acqua, Bagno completo, Lavabo esterno, Cesto di benvenuto, Prodotti dell'azienda",
   "tag": "campeggio-agricampeggio-camper-tenda-azienda-agricola-bike-monviso-all-aperto-famiglie-dormire",
   "indirizzo": "Via Carrà 28",
@@ -35361,7 +35361,7 @@
   "fotoautore": "<a href=\"https://maps.google.com/maps/contrib/110328682605942735213\">Sergio Camosso</a>",
   "fotolicenza": "",
   "premium_al": "31/12/2026",
-  "ruolo": "meta"
+  "ruolo": "servizio"
  },
  {
   "codice": "5058",
@@ -38013,7 +38013,7 @@
   "codice": "5368",
   "nome": "Camping Il Melo",
   "icona": "⛺",
-  "categoria": "Natura & Parchi › Campeggi",
+  "categoria": "Soggiorno › Campeggi",
   "servizi": "Campeggio nel verde, Noleggio e-bike, Pista ciclabile per il paese, Vicino a parchi naturali e terme",
   "tag": "campeggio-camping-tenda-camper-e-bike-ciclabile-bisalta-montagna-all-aperto-famiglie-dormire",
   "indirizzo": "Via dello Sport 1",
@@ -38049,7 +38049,7 @@
   "fotoautore": "<a href=\"https://maps.google.com/maps/contrib/107407488908617354486\">Camping Il Melo</a>",
   "fotolicenza": "",
   "premium_al": "31/12/2026",
-  "ruolo": "meta"
+  "ruolo": "servizio"
  },
  {
   "codice": "3104",

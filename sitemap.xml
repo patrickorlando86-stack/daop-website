@@ -5043,4 +5043,30 @@
     <priority>0.6</priority>
   </url>
   <!-- CORSI:END -->
+  <!-- LUOGHI-PAGINE:START (generato da scripts/pagine_luoghi.py — non modificare a mano) -->
+  <url>
+    <loc>https://www.daop.it/luoghi/agricampeggio-cit-ciabot-envie.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/luoghi/agricampeggio-mac-a-pe-demonte.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/luoghi/camping-il-melo-peveragno.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/luoghi/cascina-gabutti-monforte-d-alba.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- LUOGHI-PAGINE:END -->
 </urlset>

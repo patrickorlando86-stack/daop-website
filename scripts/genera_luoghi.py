@@ -1851,6 +1851,10 @@ def riga(l, oggi):
         corpo.append(f'<div class="lg-next"><p>In programma qui</p><ul>{elenco}</ul></div>')
 
     azioni = [f'<a href="{maps_href(l)}" target="_blank" rel="noopener">Apri nelle mappe</a>']
+    # La pagina dello sponsorizzato (05/10/2026, pagine_luoghi.py): lista
+    # gratuita, pagina a pagamento. Primo bottone, perche' e' la cosa comprata.
+    if l.get('pagina'):
+        azioni.insert(0, f'<a href="{e(l["pagina"])}">La pagina di {e(l["nome"])}</a>')
     if url_sito(l.get('sito')):
         sito = url_sito(l['sito'])
         # Un link verso il sito di chi ci paga e' un link commerciale, e le
@@ -2578,12 +2582,21 @@ def main():
     # come "sto girando sull'istantanea", cioe' tacerebbe.
     if not controlla_crollo(foglio):
         raise SystemExit(1)
-    catalogo = solo_mete(togli_nascoste(solo_province_nostre(foglio)))
+    # `base` tiene anche sedi e servizi: la LISTA pubblica solo le mete, ma la
+    # PAGINA di uno sponsorizzato sta sopra le liste (un campeggio paga e non e'
+    # una meta). Vedi pagine_luoghi.py.
+    base = togli_nascoste(solo_province_nostre(foglio))
+    catalogo = solo_mete(base)
     agenda = leggi_agenda()
     elenco = unisci(catalogo, agenda)
     if not elenco:
         print("[genera_luoghi] nessun luogo: lascio la pagina com'è")
         return
+    import pagine_luoghi
+    pagine = pagine_luoghi.scrivi(base, elenco, agenda)
+    for l in elenco:
+        if pagine.get(l['slug']):
+            l['pagina'] = pagine[l['slug']]
     da_cat = sum(1 for l in elenco if l.get('fonte') == 'catalogo')
     premium = sum(1 for l in elenco if l.get('premium'))
     consigliati = sum(1 for l in elenco if l.get('consigliato'))

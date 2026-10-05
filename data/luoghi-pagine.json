@@ -1,0 +1,30 @@
+{
+ "agricampeggio-cit-ciabot-envie": {
+  "codice": "5366",
+  "dal": "2026-10-05",
+  "nome": "Agricampeggio Cit Ciabot",
+  "premium_al": "2026-12-31",
+  "ultimo": "2026-10-05"
+ },
+ "agricampeggio-mac-a-pe-demonte": {
+  "codice": "5367",
+  "dal": "2026-10-05",
+  "nome": "Agricampeggio Mac a Pè",
+  "premium_al": "2026-12-31",
+  "ultimo": "2026-10-05"
+ },
+ "camping-il-melo-peveragno": {
+  "codice": "5368",
+  "dal": "2026-10-05",
+  "nome": "Camping Il Melo",
+  "premium_al": "2026-12-31",
+  "ultimo": "2026-10-05"
+ },
+ "cascina-gabutti-monforte-d-alba": {
+  "codice": "5365",
+  "dal": "2026-10-05",
+  "nome": "Cascina Gabutti",
+  "premium_al": "2026-12-31",
+  "ultimo": "2026-10-05"
+ }
+}

@@ -275,8 +275,8 @@ jobs:
                 data/luoghi.json data/luoghi-comuni.json \
                 data/rubriche.json data/conteggi.json data/centri-stagioni.json \
                 data/guide.json data/realta-pagine.json data/corsi-comuni.json \
-                data/locandine-usate.json \
-                eventi/ rubriche/ corsi/ guide/ idee/ \
+                data/locandine-usate.json data/luoghi-pagine.json \
+                eventi/ rubriche/ corsi/ guide/ idee/ luoghi/ \
                 assets/miniature/ assets/loghi/ assets/icone/"
           # Solo i file che esistono davvero. `git add` su un percorso che non
           # c'e' non e' un avviso, e' un `fatal:` che ferma la run: e
