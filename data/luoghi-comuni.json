@@ -1052,7 +1052,14 @@
  "c-cn-demonte": {
   "comune": "Demonte",
   "n": 2,
-  "prov": "CN"
+  "prov": "CN",
+  "sponsor": [
+   {
+    "ancora": "lg-agricampeggio-mac-a-pe-demonte",
+    "nome": "Agricampeggio Mac a Pè",
+    "tipo": "Campeggi"
+   }
+  ]
  },
  "c-cn-dogliani": {
   "comune": "Dogliani",
@@ -1072,7 +1079,14 @@
  "c-cn-envie": {
   "comune": "Envie",
   "n": 2,
-  "prov": "CN"
+  "prov": "CN",
+  "sponsor": [
+   {
+    "ancora": "lg-agricampeggio-cit-ciabot-envie",
+    "nome": "Agricampeggio Cit Ciabot",
+    "tipo": "Campeggi"
+   }
+  ]
  },
  "c-cn-farigliano": {
   "comune": "Farigliano",
@@ -1192,7 +1206,14 @@
  "c-cn-monforte-d-alba": {
   "comune": "Monforte d'Alba",
   "n": 2,
-  "prov": "CN"
+  "prov": "CN",
+  "sponsor": [
+   {
+    "ancora": "lg-cascina-gabutti-monforte-d-alba",
+    "nome": "Cascina Gabutti",
+    "tipo": "Fattorie Didattiche"
+   }
+  ]
  },
  "c-cn-monta": {
   "comune": "Montà",
@@ -1257,7 +1278,14 @@
  "c-cn-peveragno": {
   "comune": "Peveragno",
   "n": 4,
-  "prov": "CN"
+  "prov": "CN",
+  "sponsor": [
+   {
+    "ancora": "lg-camping-il-melo-peveragno",
+    "nome": "Camping Il Melo",
+    "tipo": "Campeggi"
+   }
+  ]
  },
  "c-cn-pianfei": {
   "comune": "Pianfei",
