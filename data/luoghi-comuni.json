@@ -1051,7 +1051,7 @@
  },
  "c-cn-demonte": {
   "comune": "Demonte",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-dogliani": {
@@ -1071,7 +1071,7 @@
  },
  "c-cn-envie": {
   "comune": "Envie",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-farigliano": {
@@ -1256,7 +1256,7 @@
  },
  "c-cn-peveragno": {
   "comune": "Peveragno",
-  "n": 3,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-pianfei": {
