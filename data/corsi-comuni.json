@@ -81,7 +81,7 @@
    "slug": "la-morra"
   },
   "cn-lagnasco": {
-   "n": 1,
+   "n": 2,
    "nome": "Lagnasco",
    "slug": "lagnasco"
   },
@@ -91,7 +91,7 @@
    "slug": "lurisia"
   },
   "cn-mondovi": {
-   "n": 19,
+   "n": 21,
    "nome": "Mondovì",
    "slug": "mondovi"
   },
@@ -132,6 +132,6 @@
   }
  },
  "province": {
-  "CN": 117
+  "CN": 120
  }
 }
