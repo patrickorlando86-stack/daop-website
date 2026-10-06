@@ -172,10 +172,12 @@ PAROLE = {'voce_corsi': 'percorsi', 'voce_lezioni': 'sedute'}
 prova = [dict(c, prova='si') for c in INGLESE]
 pag = C.pagina_realta('Scuola Finta', prova, PAROLE, '', '', '')
 # Solo il testo che si legge, e senza il nome dei corsi e la sede ("Corso
-# Piave 16"), che sono del foglio, ne' i link verso corsi.html, che resta
-# "corsi" apposta.
+# Piave 16"), che sono del foglio, ne' i link verso corsi.html e verso
+# corsi-provincia-<nome>.html (il «Tutti i corsi in provincia di ...» in fondo,
+# dal 06/10/2026): sono pagine del sito e restano "corsi" apposta.
 leggibile = re.sub(r'<(script|style)\b.*?</\1>', ' ', pag, flags=re.S)
-leggibile = re.sub(r'<a [^>]*href="/corsi\.html[^"]*"[^>]*>.*?</a>', ' ', leggibile, flags=re.S)
+leggibile = re.sub(r'<a [^>]*href="/corsi(?:-provincia-[a-z-]+)?\.html[^"]*"[^>]*>.*?</a>',
+                   ' ', leggibile, flags=re.S)
 leggibile = re.sub(r'<[^>]+>', ' ', leggibile)
 for c in prova:
     leggibile = leggibile.replace(c['nome'], ' ').replace(c['sede'], ' ')
