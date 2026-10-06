@@ -1,7 +1,7 @@
 {
  "comuni": {
   "cn-alba": {
-   "n": 5,
+   "n": 14,
    "nome": "Alba",
    "slug": "alba"
   },
@@ -80,6 +80,11 @@
    "nome": "La Morra",
    "slug": "la-morra"
   },
+  "cn-lagnasco": {
+   "n": 1,
+   "nome": "Lagnasco",
+   "slug": "lagnasco"
+  },
   "cn-lurisia": {
    "n": 2,
    "nome": "Lurisia",
@@ -127,6 +132,6 @@
   }
  },
  "province": {
-  "CN": 107
+  "CN": 117
  }
 }

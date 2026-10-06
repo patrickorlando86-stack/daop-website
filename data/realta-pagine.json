@@ -1,4 +1,8 @@
 {
+ "a-s-d-ippica-saluzzese": {
+  "nome": "A.S.D. Ippica Saluzzese",
+  "url": "/corsi/a-s-d-ippica-saluzzese.html"
+ },
  "allinea-mente": {
   "nome": "Allinea-mente",
   "url": "/corsi/allinea-mente.html"
@@ -39,6 +43,10 @@
   "nome": "Deborah Dalmasso",
   "url": "/corsi/deborah-dalmasso.html"
  },
+ "federica-robo-tech-lab": {
+  "nome": "Federica- Robo Tech Lab",
+  "url": "/corsi/federica-robo-tech-lab.html"
+ },
  "free-minds-asd": {
   "nome": "Free Minds ASD",
   "url": "/corsi/free-minds-asd.html"
@@ -78,5 +86,9 @@
  "teatranza": {
   "nome": "Teatranza",
   "url": "/corsi/teatranza.html"
+ },
+ "teatro-di-tela": {
+  "nome": "Teatro di Tela",
+  "url": "/corsi/teatro-di-tela.html"
  }
 }
