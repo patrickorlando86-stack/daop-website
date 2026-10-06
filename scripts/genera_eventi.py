@@ -8636,6 +8636,22 @@ def spec_ferragosto(st, events, oggi, altre):
 HALLOWEEN_DA = (10, 25)
 HALLOWEEN_A = (11, 2)
 
+# L'ELENCO parte prima della finestra (06/10/2026). Giovanni: Biblio Baby a
+# Boves, «appuntamento a tema Halloween» il 16 e il 23 ottobre, non era nella
+# pagina; e del corso Creepy Halloween di Bra c'era la domenica 25 ma non il
+# sabato 24. Il 25 ottobre veniva da quando la pagina prendeva TUTTO quello che
+# c'era in quei giorni, e una finestra larga l'avrebbe fatta doppione di
+# /eventi/weekend.html; dal 23/09 prende solo le righe in_tema(), e le feste di
+# Halloween di biblioteche e laboratori si spalmano su tutto ottobre.
+# La finestra della Stagione (link, avviso in home, il suo conteggio) resta
+# 25/10-2/11: quel conteggio prende tutti gli eventi, non solo quelli a tema.
+HALLOWEEN_ELENCO_DA = (10, 10)
+
+
+def halloween_elenco_da(notte):
+    """Da quando le pagine di Halloween elencano le feste a tema."""
+    return datetime.date(notte.year, *HALLOWEEN_ELENCO_DA)
+
 
 def _finestra_halloween(anno):
     return (datetime.date(anno, *HALLOWEEN_DA),
@@ -8683,7 +8699,7 @@ def _finestra_befana(anno):
 
 
 def spec_halloween(st, events, oggi, altre):
-    """/halloween.html — il 25 ottobre-2 novembre, con la domanda vera in cima.
+    """/halloween.html — 10 ottobre-2 novembre, con la domanda vera in cima.
 
     **Non e' un filtro di date.** Se fosse solo l'elenco della finestra sarebbe
     /eventi/weekend.html con un altro titolo, e il doppione lo perde la pagina
@@ -8703,7 +8719,8 @@ def spec_halloween(st, events, oggi, altre):
     e si mette in evidenza solo il gruppo su cui il dato c'e' davvero,
     e_per_bambini(), che dice "pensati PER i bambini" e non "adatti".
     """
-    da, notte, a = halloween_range(oggi)
+    _da, notte, a = halloween_range(oggi)
+    da = halloween_elenco_da(notte)
     anno = notte.year
     url = f"{SITE_URL}/halloween.html"
     prov = province_in_elenco(PROVINCE_PUBBLICATE)
@@ -8743,7 +8760,7 @@ def spec_halloween(st, events, oggi, altre):
                     f"pubblicati.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
-                      + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
+                      + " dal 10 ottobre al 2 novembre, verificate una per una da DAOP.",
                       152)
     else:
         sotto = f"Per Halloween {anno} non c'è ancora niente in agenda"
@@ -8753,7 +8770,7 @@ def spec_halloween(st, events, oggi, altre):
                     f"pubblicano spesso a due settimane dalla data. Aggiorniamo questa "
                     f"pagina ogni giorno, man mano che arrivano nuovi eventi.</p>")
         descr = trunc(f"Cosa fare a Halloween {anno} con i bambini in provincia di {prov}: "
-                      "feste, laboratori e castelli dal 25 ottobre al 2 novembre, "
+                      "feste, laboratori e castelli dal 10 ottobre al 2 novembre, "
                       "verificati uno per uno da DAOP.", 152)
 
     corpo = apertura
@@ -8866,7 +8883,8 @@ def spec_halloween_prov(prov, events, oggi, altre):
     Da rileggere a novembre: se in Search Console "halloween <provincia>" non
     esiste, i paletti le hanno tenute fuori indice e non costano niente; se
     esiste, la prova e' fatta per il 2027."""
-    da, notte, a = halloween_range(oggi)
+    _da, notte, a = halloween_range(oggi)
+    da = halloween_elenco_da(notte)
     anno = notte.year
     nome = PROVINCE_NOMI.get(prov, prov)
     href = href_halloween_prov(prov)
@@ -8894,7 +8912,7 @@ def spec_halloween_prov(prov, events, oggi, altre):
                     f"pubblicati.</p>")
         descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: "
                       + (f"{len(finestra)} feste" if len(finestra) > 1 else "1 festa")
-                      + " dal 25 ottobre al 2 novembre, verificate una per una da DAOP.",
+                      + " dal 10 ottobre al 2 novembre, verificate una per una da DAOP.",
                       152)
     else:
         sotto = f"Per Halloween {anno} in provincia di {nome} non c'è ancora niente"
@@ -8905,7 +8923,7 @@ def spec_halloween_prov(prov, events, oggi, altre):
                     f"Aggiorniamo questa pagina ogni giorno, man mano che arrivano "
                     f"nuovi eventi.</p>")
         descr = trunc(f"Halloween {anno} con i bambini in provincia di {nome}: feste, "
-                      "laboratori e castelli dal 25 ottobre al 2 novembre, "
+                      "laboratori e castelli dal 10 ottobre al 2 novembre, "
                       "verificati uno per uno da DAOP.", 152)
 
     corpo = apertura
@@ -9018,9 +9036,11 @@ TEMI_STAGIONE = {
     # "prima del letargo dei pipistrelli" e la Fiera di San Simone a Bubbio,
     # che ha un "Gran Premio della Zucca" fra funghi e trippa. La zucca resta,
     # ma solo nel TITOLO (TEMI_SOLO_TITOLO): "L'Orto delle Zucche" si'.
+    # "mostri" a parola intera (06/10/2026): «storie fantastiche con
+    # mostriciattoli, robot, pirati e gatti» era un libro della buonanotte.
     'halloween': re.compile(
         r"hallowe|dolcetto|scherzetto|"
-        r"\bmostri|fantasm|spettr|vampir|zombi|horror|brivid|"
+        r"\bmostri\b|fantasm|spettr|vampir|zombi|horror|brivid|"
         r"samhain|trick or treat", re.I),
     'natale': re.compile(
         r"natal|presep|babbo|avvento|santa lucia|zampogn|\belfi\b|\brenne\b|"

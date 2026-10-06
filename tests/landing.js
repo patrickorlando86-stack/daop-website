@@ -704,11 +704,11 @@ module.exports = async function landing(browser) {
   const totH = await page.locator('.ev-wrap li[data-category]').count();
   const robotsH = await page.$eval('meta[name=robots]', (m) => m.content);
   if (totH) {
-    // Le sezioni sono giorni della finestra 25/10-2/11: mai altri mesi.
+    // Le sezioni sono giorni dal 10/10 al 2/11: mai altri mesi.
     const mesi = (await page.locator('.ev-wrap .com-grp h3').allTextContents())
       .filter((t) => /\d/.test(t));
     r.ok(mesi.every((t) => /ottobre|novembre/i.test(t)),
-      `la finestra resta 25 ottobre-2 novembre: ${mesi.join(' / ')}`);
+      `la finestra resta 10 ottobre-2 novembre: ${mesi.join(' / ')}`);
   } else {
     r.ok(robotsH.startsWith('noindex'),
       'a vuoto la pagina è in noindex, follow: resta online ma fuori indice');
