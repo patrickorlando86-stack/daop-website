@@ -708,6 +708,11 @@ module.exports = async function corsi(browser) {
       .map((v) => v.comune).filter(Boolean))].sort((a, b) => b.length - a.length)
     : [];
   let resto = testiDati.tutti.replace(/provincia di [\p{Lu}][\p{L}' ]+?(?=[,.:;)]|\s(?:e|a|ad|in|per)\s|$)/gu, ' ');
+  // E il plurale (06/10/2026): col primo corso di Alessandria l'hub dice
+  // "nelle province di Alessandria e Cuneo", e "Alessandria" li' e' la
+  // provincia, non il comune. Le province sono un elenco chiuso, quindi si
+  // tolgono per nome e non con un'espressione che indovina dove finisce.
+  resto = resto.replace(/province di (?:Alessandria|Asti|Cuneo)(?:(?:, | e )(?:Alessandria|Asti|Cuneo))*/g, ' ');
   const nominati = [];
   for (const nome of noti) {
     const esc = nome.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

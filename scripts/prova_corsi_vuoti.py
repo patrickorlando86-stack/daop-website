@@ -28,8 +28,10 @@ Qui dentro:
   4. non nomina un posto: zona() ricava la geografia dai corsi, e senza corsi
      un "in Piemonte" direbbe la regione in cui i corsi ce li abbiamo;
   5. non linka se stessa;
-  6. e - il controllo che tiene fermo tutto il resto - con dei corsi dentro la
-     pagina e' ancora esattamente quella di prima.
+  6. lo split e' acceso (dal 06/10/2026) e le province attese sono le tre;
+  7. la pagina provincia vuota - Asti il giorno dello split - dice la sua
+     provincia, manda all'hub e sta fuori indice;
+  8. le porte delle province non portano verso una provincia senza corsi.
 
 Uso:
     python scripts/prova_corsi_vuoti.py
@@ -130,12 +132,47 @@ ok(f"FILE e' l'hub ({c.FILE}) e la nota non rimanda a se stessa",
 ok("la nota manda comunque da qualche parte", '/eventi.html' in VUOTA)
 
 print()
-print("=== 6) l'interruttore dello split e' ancora spento ===")
-# Se qualcuno lo accende senza fare il resto (sitemap a N hub, FAMIGLIE,
-# voce_corsi, link_landing, breadcrumb, valida_jsonld, tests/porte.js) la
-# sezione si spacca a meta'. Vedi il commento su CORSI_PER_PROVINCIA.
-ok("CORSI_PER_PROVINCIA = False", c.CORSI_PER_PROVINCIA is False)
-ok("CORSI_ZONA_ATTESA = ('CN',)", tuple(c.CORSI_ZONA_ATTESA) == ('CN',))
+print("=== 6) lo split e' acceso, e le province attese sono quelle del sito ===")
+# Acceso il 06/10/2026 col primo corso di Alessandria. Le province attese sono
+# quelle che una pagina ce l'hanno: se divergono, una provincia nuova non
+# suonerebbe piu' (o suonerebbe una che la pagina ce l'ha gia').
+ok("CORSI_PER_PROVINCIA = True", c.CORSI_PER_PROVINCIA is True)
+ok("CORSI_ZONA_ATTESA = le province del sito",
+   tuple(c.CORSI_ZONA_ATTESA) == tuple(c.G.PROVINCE_PUBBLICATE))
+
+print()
+print("=== 7) la pagina provincia vuota (Asti, il giorno dello split) ===")
+# E' il ramo per cui la nota vuota e' stata scritta: una pagina provincia
+# senza corsi. Qui il posto SI nomina - e' la provincia della pagina, non una
+# geografia dedotta dai corsi - e la nota manda all'hub.
+VUOTA_AT = c.render([], CSS, NAV, FOOT, {}, prov='AT')
+PIENA_CN = c.render(CAMPIONE, CSS, NAV, FOOT, {}, prov='CN')
+ok("l'H1 dice la provincia",
+   'in provincia di Asti' in re.search(r'<h1>(.*?)</h1>', VUOTA_AT, re.S).group(1))
+ok("dice che non c'e' ancora nessun corso", 'ancora nessun corso' in testo(VUOTA_AT))
+ok("la nota manda all'hub", 'href="/corsi.html">tutti i corsi che abbiamo' in VUOTA_AT)
+ok("canonical su se stessa",
+   'rel="canonical" href="https://www.daop.it/corsi-provincia-asti.html"' in VUOTA_AT)
+ok("vuota = fuori indice", 'content="noindex, follow"' in VUOTA_AT)
+ok("il percorso torna all'hub",
+   '<a href="/corsi.html">Corsi per bambini</a> › <span>Provincia di Asti</span>' in VUOTA_AT)
+ok("nessun blocco ld+json", 'application/ld+json' not in VUOTA_AT)
+# Due corsi sono sotto MIN_LANDING: anche piena, resta fuori indice.
+ok(f"sotto {c.G.MIN_LANDING} corsi resta fuori indice",
+   'content="noindex, follow"' in PIENA_CN)
+ok("prov_in_indice segue MIN_LANDING",
+   c.prov_in_indice(c.G.MIN_LANDING) is bool(c.G.CORSI_IN_INDICE)
+   and c.prov_in_indice(c.G.MIN_LANDING - 1) is False)
+
+print()
+print("=== 8) le porte delle province non promettono il vuoto ===")
+porte = c.porte_province({'CN': 3, 'AL': 1})
+ok("sull'hub: le province con corsi", 'corsi-provincia-cuneo.html' in porte
+   and 'corsi-provincia-alessandria.html' in porte)
+ok("Asti, senza corsi, non c'e'", 'corsi-provincia-asti.html' not in porte)
+ok("sulla pagina di Cuneo non c'e' Cuneo",
+   'corsi-provincia-cuneo.html' not in c.porte_province({'CN': 3, 'AL': 1}, qui='CN'))
+ok("nessuna provincia con corsi = nessuna riga", c.porte_province({}) == '')
 
 print()
 print("ESITO:", "tutto come previsto" if esito else "*** QUALCOSA NON TORNA ***")

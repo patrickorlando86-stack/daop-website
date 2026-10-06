@@ -633,6 +633,17 @@
    ancora quello che sembra. */
 .co-avviso{background:#fdf3e0;border:1px solid #e6c98a;border-radius:10px;
   padding:14px 16px;margin:0 0 18px;font-size:.94rem;line-height:1.55;color:#6b4a10}
+/* Le province (06/10/2026, lo split): sull'hub "Per provincia", sulle
+   /corsi-provincia-* "Altre province". Pillole come i filtri, con il numero
+   dei corsi che la pagina mostra; vanno a capo da sole sul telefono. */
+.co-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px;
+  font-size:.92rem}
+.co-prov-t{color:#555;font-weight:600}
+.co-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;
+  padding:6px 14px;border-radius:999px;background:#eef5fc;color:#2c5d8f;
+  border:1px solid #cfe1f3;text-decoration:none;font-weight:600}
+.co-prov a:hover{background:#dcebf9}
+.co-prov small{font-weight:500;opacity:.8}
 /* ── Le ancore arrivavano sotto la barra, e 120px era una stima ───────────
    Misurato l'11/09/2026 a cinque larghezze, non dedotto. Sopra ogni ancora di
    questa pagina c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la
@@ -860,7 +871,7 @@ html{scroll-behavior:auto}
     <p class="co-faq-a">In Piazza Foro Boario, a Cuneo.</p>
   </div>
 
-  <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
+  <p class="cr-torna"><a href="/corsi-provincia-cuneo.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
 <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">189 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">650 posti scelti a mano, dal parco al museo</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">

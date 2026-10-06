@@ -268,7 +268,7 @@ jobs:
                 befana.html capodanno.html carnevale.html ferragosto.html \
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \
-                rubriche.html luoghi.html corsi.html \
+                rubriche.html luoghi.html corsi.html corsi-provincia-*.html \
                 esploratore.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
@@ -406,11 +406,10 @@ jobs:
         # diceva "Le prime schede stanno arrivando", cioe' prometteva sopra il
         # vuoto (l'invariante del 17/08: zero schede, intro onesta).
         #
-        # E non resta un ramo morto: il giorno che i corsi si dividono per
-        # provincia (CORSI_PER_PROVINCIA in genera_corsi.py) Alessandria e Asti
-        # nascono senza un corso, cioe' il codice mai eseguito diventa in una
-        # notte due pagine su tre. Scoprirlo quel giorno vuol dire scoprirlo
-        # online.
+        # E non e' un ramo morto: dal 06/10/2026 i corsi sono divisi per
+        # provincia (CORSI_PER_PROVINCIA in genera_corsi.py), e quel giorno
+        # Asti e' nata senza un corso - /corsi-provincia-asti.html E' questo
+        # ramo, online. La prova controlla anche lei (blocchi 7 e 8).
         #
         # Le prove in tests/ qui non arrivano: aprono i file HTML che stanno su
         # disco, e un corsi.html vuoto su disco non c'e'.

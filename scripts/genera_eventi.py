@@ -4120,22 +4120,37 @@ def link_corsi(citta, prov):
 
     Si stampa il numero e non l'etichetta, e l'ancora #co-lista porta
     all'elenco invece che all'intestazione: sono le due lezioni di
-    link_luoghi()."""
+    link_luoghi().
+
+    DAL 06/10/2026 (lo split dei corsi) i due gradini portano alla PAGINA
+    DELLA PROVINCIA, quando c'e' ed e' in indice: e' la pagina piu' vicina a
+    chi legge, e i link delle schede - le pagine con l'autorita' vera - sono
+    quello che la fa salire. Il filtro ?comune= ce l'ha uguale (stessa
+    toolbar), quindi il numero promesso resta quello mostrato. Il gradino
+    della provincia non pretende piu' che TUTTI i corsi stiano li': quella
+    condizione esisteva perche' l'unica pagina era l'hub di tutte le province.
+    Se la pagina provincia non c'e' su disco, o sta sotto soglia (fuori
+    indice), si torna all'hub di prima: un link dalle schede non deve portare
+    su una pagina che a Google diciamo di non tenere."""
     if not CORSI_IN_INDICE:
         return ''
     prov = (prov or '').strip().upper()
     if not prov:
         return ''
     ind = indice_corsi()
+    province = ind.get('province') or {}
+    n = province.get(prov) or 0
+    pagina = href_corsi_prov(prov)
+    sua = (prov in PROVINCE_PUBBLICATE and n >= MIN_LANDING
+           and os.path.exists(os.path.join(ROOT, pagina.lstrip('/'))))
+    base = pagina if sua else '/corsi.html'
     if citta:
         v = (ind.get('comuni') or {}).get(f"{prov.lower()}-{slugify(citta)}")
         if v and (v.get('n') or 0) >= MIN_CORSI_COMUNE:
-            return (f'<a href="/corsi.html?comune={v["slug"]}#co-lista">'
+            return (f'<a href="{base}?comune={v["slug"]}#co-lista">'
                     f'{v["n"]} corsi per bambini{a_citta(esc(v.get("nome") or citta))}</a>')
-    province = ind.get('province') or {}
-    n = province.get(prov) or 0
-    if n >= MIN_CONTEGGIO and n == sum(province.values()) and prov in PROVINCE_NOMI:
-        return (f'<a href="/corsi.html#co-lista">{n} corsi per bambini in '
+    if sua and n >= MIN_CONTEGGIO:
+        return (f'<a href="{base}#co-lista">{n} corsi per bambini in '
                 f'provincia di {esc(PROVINCE_NOMI[prov])}</a>')
     return ''
 
@@ -9935,6 +9950,15 @@ def href_eventi_prov(prov):
     href_incrocio(): un indirizzo ripetuto e' un indirizzo che un giorno
     cambia in tre punti su quattro."""
     return f"/eventi-provincia-{slugify(PROVINCE_NOMI.get(prov, prov))}.html"
+
+
+def href_corsi_prov(prov):
+    """L'indirizzo della pagina dei corsi di una provincia (dal 06/10/2026, lo
+    split dei corsi). Sta qui accanto a href_eventi_prov() e non in
+    genera_corsi.py perche' lo usano tutti e due i generatori, e genera_corsi
+    importa questo modulo, non il contrario."""
+    p = (prov or '').strip().upper()
+    return f"/corsi-provincia-{slugify(PROVINCE_NOMI.get(p, p))}.html"
 
 
 def spec_sagre(prov, events, hub, storico, oggi, altre):

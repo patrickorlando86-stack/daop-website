@@ -140,7 +140,9 @@
     // (la trappola gia' scritta in tests/_aiuto.js): online non capita mai, ma
     // senza questa riga la prova vedrebbe "altro" dove il sito dice "corsi".
     var p = u.pathname.replace(/^\/[A-Za-z]:(?=\/)/, '');
-    if (/^\/corsi(\.html$|\/)/.test(p)) return 'corsi';
+    // /corsi-provincia-* dal 06/10/2026 (lo split): sono corsi come l'hub, e
+    // i link dalle schede evento ora portano li'.
+    if (/^\/corsi(\.html$|\/|-provincia-)/.test(p)) return 'corsi';
     if (p === '/luoghi.html' || p === '/piscine.html') return 'luoghi';
     if (p === '/ginetto.html') return 'ginetto';
     if (p.indexOf('/centri-') === 0) return 'centri';

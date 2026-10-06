@@ -2611,6 +2611,11 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
         occhiello = (f'<p class="cr-sub">{_cap(v.cp)}{" di " + G.esc(att) if att else ""} per bambini'
                      f'{" " + G.esc(G.a_citta(citta).strip()) if citta else ""}</p>')
     url = f"{SITE_URL}{url_realta(org)}"
+    # "← Tutti i corsi in provincia di X" porta alla pagina di X (06/10/2026,
+    # lo split): il testo lo prometteva gia', e l'hub di tutte e tre ne
+    # mostrava di piu'. Una societa' su due province torna all'hub.
+    p_torna = prov_della_pagina(corsi_org)
+    torna = href_corsi_prov(p_torna) if p_torna else '/corsi.html'
     titolo = f"{org}: {v.cp}{di_att} per bambini{G.a_citta(citta)} | DAOP"
     # La description e' il paragrafo scritto dai dati, non la presentazione
     # della societa': in pagina dei risultati deve dire cosa, dove e per che
@@ -2731,7 +2736,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
   </div>
 {blocco_ev}
 {blocco_faq(faq_realta(org, corsi_org, info), f'Domande frequenti su {org}')}
-  <p class="cr-torna"><a href="/corsi.html#co-lista">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
+  <p class="cr-torna"><a href="{torna}#co-lista">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
 {G.blocco_ecosistema('corsi')}
 </article>
 {G.blocco_ginetto()}</main>
@@ -3874,6 +3879,17 @@ CSS = """
    ancora quello che sembra. */
 .co-avviso{background:#fdf3e0;border:1px solid #e6c98a;border-radius:10px;
   padding:14px 16px;margin:0 0 18px;font-size:.94rem;line-height:1.55;color:#6b4a10}
+/* Le province (06/10/2026, lo split): sull'hub "Per provincia", sulle
+   /corsi-provincia-* "Altre province". Pillole come i filtri, con il numero
+   dei corsi che la pagina mostra; vanno a capo da sole sul telefono. */
+.co-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px;
+  font-size:.92rem}
+.co-prov-t{color:#555;font-weight:600}
+.co-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;
+  padding:6px 14px;border-radius:999px;background:#eef5fc;color:#2c5d8f;
+  border:1px solid #cfe1f3;text-decoration:none;font-weight:600}
+.co-prov a:hover{background:#dcebf9}
+.co-prov small{font-weight:500;opacity:.8}
 /* ── Le ancore arrivavano sotto la barra, e 120px era una stima ───────────
    Misurato l'11/09/2026 a cinque larghezze, non dedotto. Sopra ogni ancora di
    questa pagina c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la
@@ -4152,7 +4168,12 @@ def jsonld(corsi):
 #
 # QUANDO SUONA: si gira CORSI_PER_PROVINCIA (qui sotto) e si aggiorna questa
 # riga. Aggiornarla per far tacere il log e' l'unico modo di usarla male.
-CORSI_ZONA_ATTESA = ('CN',)
+#
+# SUONATA IL 06/10/2026 con il primo corso di Alessandria (Shorinji Kempo
+# Casale Monferrato, un cliente della guida). Da allora sono le tre province
+# del sito: se suona di nuovo e' una provincia che una pagina sua non ce l'ha
+# (un "TO" sul foglio), e i suoi corsi stanno solo sull'hub.
+CORSI_ZONA_ATTESA = ('AL', 'AT', 'CN')
 
 # LA DECISIONE E' PRESA, E QUESTO E' L'INTERRUTTORE CHE LA ESEGUE (02/09/2026).
 #
@@ -4185,7 +4206,53 @@ CORSI_ZONA_ATTESA = ('CN',)
 # tests/porte.js. Sono stati lasciati indietro di proposito il 02/09 -
 # scriverli senza dati veri di AL/AT voleva dire dichiarare "pronto" del codice
 # mai eseguito.
-CORSI_PER_PROVINCIA = False
+#
+# GIRATO IL 06/10/2026, e scritto il resto. Com'e' andato, voce per voce:
+#   - le pagine: render(prov=...) e scrivi_province(), una per provincia del
+#     sito (G.PROVINCE_PUBBLICATE) anche vuota, perche' l'URL invecchia;
+#   - l'hub: resta tutto com'era, piu' porte_province() in cima;
+#   - la sitemap: aggiorna_sitemap() riceve anche le province in indice;
+#   - le pagine in corsi/: il "← Tutti i corsi" porta alla provincia;
+#   - genera_eventi.py: link_corsi() manda alla provincia. FAMIGLIE,
+#     voce_corsi() e link_landing() NON cambiano, apposta: la nav e le quattro
+#     porte dicono "Corsi", e "Corsi" e' l'hub. Tre province in piu' nella
+#     riga dei link_landing sarebbero la barra che nessuno guarda (stessa
+#     ragione scritta la' per le sei d'incrocio);
+#   - valida_jsonld.py prende gia' ogni *.html della radice: niente da fare;
+#   - i file da committare: corsi-provincia-*.html nel workflow e in
+#     FILE_GENERATI_SITO del downloader (le due liste vanno tenute uguali).
+CORSI_PER_PROVINCIA = True
+
+
+# L'indirizzo della pagina dei corsi di una provincia. Scritto UNA volta, in
+# genera_eventi.py, perche' lo usano l'hub, le pagine delle realta' e le
+# schede evento: un indirizzo ripetuto e' un indirizzo che un giorno cambia in
+# due posti su tre.
+href_corsi_prov = G.href_corsi_prov
+
+
+def prov_della_pagina(corsi):
+    """La sigla della provincia se i corsi stanno tutti in UNA provincia che ha
+    la sua pagina, altrimenti ''. Serve a chi rimanda "a tutti i corsi": una
+    societa' con sedi in due province torna all'hub, che le tiene tutte."""
+    provs = {(c.get('prov') or '').strip().upper() for c in corsi}
+    provs.discard('')
+    if CORSI_PER_PROVINCIA and len(provs) == 1:
+        p = next(iter(provs))
+        if p in G.PROVINCE_PUBBLICATE:
+            return p
+    return ''
+
+
+def prov_in_indice(n):
+    """Una pagina provincia va su Google solo con abbastanza corsi dentro.
+
+    E' MIN_LANDING, la soglia delle sagre-provincia-* e delle stagionali:
+    sotto, la pagina resta online e raggiungibile ma non si annuncia - con un
+    corso solo sarebbe un doppione sottile della pagina della sua societa'. E
+    vale solo se la SEZIONE e' in indice (CORSI_IN_INDICE): una provincia non
+    puo' stare su Google mentre l'hub ne e' fuori."""
+    return bool(G.CORSI_IN_INDICE) and n >= G.MIN_LANDING
 
 
 def _controlla_zona(corsi):
@@ -4245,8 +4312,12 @@ def zona(corsi):
 FILE_HUB = 'corsi.html'
 
 
-def nota_vuota():
+def nota_vuota(file=None):
     """Cosa si scrive quando di corsi non ce n'e' NESSUNO.
+
+    `file` e' la pagina su cui si stampa (06/10/2026): fino allo split ce n'era
+    una sola e bastava il FILE del modulo. Una pagina provincia vuota deve
+    mandare all'hub; l'hub vuoto no, perche' manderebbe a se stesso.
 
     Fino al 02/09/2026 qui c'era scritto "Le prime schede stanno arrivando", ed
     e' una promessa: dice che qualcosa sta per succedere, e chi legge se ne va
@@ -4264,7 +4335,7 @@ def nota_vuota():
     strano e falso, visto che in Piemonte i corsi ce li abbiamo. "Di questa
     zona" e' vero comunque, e chi legge la zona ce l'ha nell'H1 sopra.
     """
-    altrove = ("" if FILE == FILE_HUB else
+    altrove = ("" if (file or FILE) == FILE_HUB else
                '<a href="/corsi.html">tutti i corsi che abbiamo</a> oppure ')
     return (
         '  <p class="co-nota"><strong>Qui non c\'è ancora nessun corso.</strong> '
@@ -4300,8 +4371,54 @@ INTRO = (
 )
 
 
-def render(corsi, css, nav, foot, realta=None):
+def conta_province(corsi):
+    """{sigla: quanti corsi} delle sole province che hanno una pagina."""
+    n = {}
+    for c in corsi:
+        p = (c.get('prov') or '').strip().upper()
+        if p in G.PROVINCE_PUBBLICATE:
+            n[p] = n.get(p, 0) + 1
+    return n
+
+
+def porte_province(conteggi, qui=None):
+    """La riga delle province in cima all'elenco: sull'hub "Per provincia",
+    su una pagina provincia "Altre province". (06/10/2026)
+
+    Solo verso le province che un corso ce l'hanno. E' la regola delle quattro
+    porte (_porte_vive in genera_eventi.py): una porta non promette una cosa
+    che non c'e', e Asti il giorno dello split ha una pagina ma zero corsi. La
+    pagina c'e' lo stesso - e' l'URL che invecchia - ma non la si propone.
+
+    Il numero accanto al nome e' quello che la pagina mostra: viene dalla
+    stessa lista che la scrive."""
+    voci = [(p, conteggi[p]) for p in G.PROVINCE_PUBBLICATE
+            if p != qui and conteggi.get(p)]
+    if not voci:
+        return ''
+    etichetta = 'Altre province' if qui else 'Per provincia'
+    link = ' '.join(
+        f'<a href="{href_corsi_prov(p)}">{G.esc(PROV_NOME.get(p, p))} '
+        f'<small>{n}</small></a>' for p, n in voci)
+    # Un <div role="navigation"> e non un <nav>, come il percorso in cima: nel
+    # CSS del sito `nav` e' la barra in alto, position:fixed. Un <nav> qui si
+    # e' piazzato sopra il menu, misurato il 06/10/2026 a 375px.
+    return (f'  <div class="co-prov" role="navigation" aria-label="Corsi per provincia">'
+            f'<span class="co-prov-t">{etichetta}:</span> {link}</div>\n')
+
+
+def render(corsi, css, nav, foot, realta=None, prov=None, porte=''):
     """La pagina: un elenco piatto di corsi, e in fondo le schede delle realta'.
+
+    `prov` (06/10/2026, lo split): la sigla di una provincia, e la pagina
+    diventa /corsi-provincia-<nome>.html con dentro solo i suoi corsi. E' la
+    STESSA pagina e non una sorella scritta a parte - stesse card, stessi
+    filtri, stesse schede in fondo - perche' due template divergerebbero alla
+    prima correzione. Cambiano l'indirizzo, il percorso in cima, la soglia
+    del robots (prov_in_indice) e il posto nell'H1: sull'hub lo ricava zona()
+    dai corsi, qui e' la provincia della pagina, che resta vera anche a
+    elenco vuoto ("Corsi per bambini in provincia di Asti" sopra "qui non c'e'
+    ancora nessun corso"). `porte` e' la riga di porte_province(), gia' fatta.
 
     L'ELENCO NON E' PIU' RAGGRUPPATO PER SOCIETA', ed e' il cambio piu' grosso
     del 21/08/2026. Prima ogni realta' aveva il suo <h2> con sotto i suoi corsi:
@@ -4321,8 +4438,17 @@ def render(corsi, css, nav, foot, realta=None):
     corsi di pallavolo di due societa' diverse stanno vicini, che e' quello che
     serve a chi confronta. E non per societa', per la ragione di sopra."""
     realta = realta or {}
-    _controlla_zona(corsi)
-    dove, zona_breve = zona(corsi)
+    if prov:
+        nome_prov = PROV_NOME.get(prov, prov)
+        dove, zona_breve = f'in provincia di {nome_prov}', nome_prov
+        file = href_corsi_prov(prov).lstrip('/')
+    else:
+        # Il controllo sulla copertura guarda TUTTI i corsi, quindi solo qui:
+        # una pagina provincia per definizione non ne vede di altre.
+        _controlla_zona(corsi)
+        dove, zona_breve = zona(corsi)
+        file = FILE
+    url = f"{SITE_URL}/{file}"
     # Lo spazio sta QUI e non nelle f-string: con `dove` vuoto (zero corsi, vedi
     # zona()) "Corsi per bambini  | DAOP" avrebbe due spazi e l'H1 un <em>
     # vuoto. Le tre righe sotto sono le uniche che sanno che `dove` puo' non
@@ -4351,7 +4477,7 @@ def render(corsi, css, nav, foot, realta=None):
                                 for i, c in enumerate(ordinati))
                   + '\n  </div>')
     else:
-        elenco = nota_vuota()
+        elenco = nota_vuota(file)
 
     gruppi = raggruppa_per_realta(ordinati)
     if gruppi:
@@ -4375,7 +4501,13 @@ def render(corsi, css, nav, foot, realta=None):
         'Stiamo raccogliendo i corsi con le società, una alla volta, e '
         'verifichiamo con loro ogni scheda prima di pubblicarla. Quello che vedi '
         'qui è un primo elenco: non è ancora completo.</div>\n')
-    robots = 'index, follow' if G.CORSI_IN_INDICE else 'noindex, follow'
+    if prov:
+        robots = 'index, follow' if prov_in_indice(len(corsi)) else 'noindex, follow'
+        percorso = (f'<a href="/">Home</a> › <a href="/corsi.html">Corsi per bambini</a>'
+                    f' › <span>Provincia di {G.esc(nome_prov)}</span>')
+    else:
+        robots = 'index, follow' if G.CORSI_IN_INDICE else 'noindex, follow'
+        percorso = '<a href="/">Home</a> › <span>Corsi per bambini</span>'
 
     # Le due cose che con zero corsi diventerebbero una promessa sopra il vuoto,
     # e che quindi seguono l'elenco invece di essere stampate sempre: il
@@ -4400,11 +4532,11 @@ def render(corsi, css, nav, foot, realta=None):
 <title>{G.esc(titolo)}</title>
 <meta name="description" content="{G.esc(descr)}">
 <meta name="robots" content="{robots}">
-<link rel="canonical" href="{URL}">
+<link rel="canonical" href="{url}">
 <meta property="og:title" content="{G.esc(titolo)}">
 <meta property="og:description" content="{G.esc(descr)}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{URL}">
+<meta property="og:url" content="{url}">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="{OG_CORSI}">
@@ -4429,7 +4561,7 @@ def render(corsi, css, nav, foot, realta=None):
 <header class="page-hero hero-fascia co-hero" style="--fascia:url(/assets/images/stagioni/corsi-1600.webp);--fascia-m:url(/assets/images/stagioni/corsi-m.webp)">
   <div class="page-hero-inner">
     <div class="co-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <span>Corsi per bambini</span>
+      {percorso}
     </div>
     <span class="section-label">{G.esc(zona_breve) + ' · ' if zona_breve else ''}Famiglie</span>
     <h1>Corsi per bambini{f' <em>{G.esc(dove)}</em>' if dove else ''}</h1>
@@ -4437,7 +4569,7 @@ def render(corsi, css, nav, foot, realta=None):
   </div>
 </header>
 <article class="co-wrap">
-{avviso}{intro}{toolbar(corsi)}
+{avviso}{porte}{intro}{toolbar(corsi)}
 {elenco}
 {sezione}
 {faq}{blocco_adesione(corsi)}
@@ -4458,8 +4590,12 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def aggiorna_sitemap(pagine=()):
+def aggiorna_sitemap(pagine=(), province=()):
     """Il blocco della sitemap: ci sta dentro solo quello che e' in indice.
+
+    `province` (06/10/2026): i file delle pagine provincia IN INDICE, gia'
+    filtrati da prov_in_indice() - la stessa funzione che ne scrive il robots,
+    quindi le due cose non possono dire il contrario.
 
     L'invariante vale in tutti e due i versi. In sitemap nessuna URL con robots
     noindex: chiedere a Google di scansionare una pagina per poi dirgli di non
@@ -4495,6 +4631,11 @@ def aggiorna_sitemap(pagine=()):
             f"    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>"]
     if not G.CORSI_IN_INDICE:
         voci = []
+    for f in sorted(province):
+        voci.append(f"  <url>\n    <loc>{SITE_URL}/{f}</loc>\n"
+                    f"    <lastmod>{oggi}</lastmod>\n"
+                    f"    <changefreq>weekly</changefreq>\n"
+                    f"    <priority>0.7</priority>\n  </url>")
     for f in sorted(pagine):
         voci.append(f"  <url>\n    <loc>{SITE_URL}/{DIR_REALTA}/{f}</loc>\n"
                     f"    <lastmod>{oggi}</lastmod>\n"
@@ -4515,6 +4656,7 @@ def aggiorna_sitemap(pagine=()):
         s = s.replace('</urlset>', blocco + '\n</urlset>')
     open(SITEMAP_PATH, 'w', encoding='utf-8').write(s)
     print(f"[genera_corsi] sitemap: {'corsi.html + ' if G.CORSI_IN_INDICE else ''}"
+          f"{len(province)} province + "
           f"{len(pagine)} pagine realta' confermate"
           + ('' if G.CORSI_IN_INDICE else " (l'hub e' noindex)"))
 
@@ -4611,15 +4753,52 @@ def main():
     in_anteprima = {slug_realta(c.get('org') or '') for c in anteprime}
     pagine = scrivi_realta(gruppi, realta, css, nav, foot,
                            in_anteprima=in_anteprima)
-    nuovo = render(corsi, css, nav, foot, realta)
-    vecchio = open(PATH, encoding='utf-8').read() if os.path.exists(PATH) else ''
-    if nuovo != vecchio:
-        open(PATH, 'w', encoding='utf-8').write(nuovo)
-        print(f"[genera_corsi] {FILE} riscritta — {len(corsi)} corsi")
-    else:
-        print(f"[genera_corsi] {FILE} invariata — {len(corsi)} corsi")
-    aggiorna_sitemap(pagine)
+    conteggi = conta_province(corsi)
+    porte = porte_province(conteggi) if CORSI_PER_PROVINCIA else ''
+    _scrivi_se_cambia(PATH, FILE,
+                      render(corsi, css, nav, foot, realta, porte=porte),
+                      len(corsi))
+    province = scrivi_province(corsi, conteggi, realta, css, nav, foot)
+    aggiorna_sitemap(pagine, province)
     return 0
+
+
+def _scrivi_se_cambia(path, nome, nuovo, quanti):
+    vecchio = open(path, encoding='utf-8').read() if os.path.exists(path) else ''
+    if nuovo != vecchio:
+        open(path, 'w', encoding='utf-8').write(nuovo)
+        print(f"[genera_corsi] {nome} riscritta — {quanti} corsi")
+    else:
+        print(f"[genera_corsi] {nome} invariata — {quanti} corsi")
+
+
+def scrivi_province(corsi, conteggi, realta, css, nav, foot):
+    """Le /corsi-provincia-<nome>.html, una per provincia del sito. Restituisce
+    i nomi dei file IN INDICE, per la sitemap. (06/10/2026)
+
+    TUTTE E TRE, anche quella senza corsi: e' la regola delle stagionali e
+    delle sagre-provincia-* - l'URL deve esistere prima per invecchiare, e
+    sotto soglia resta fuori indice da solo. Il ramo vuoto (nota_vuota) e'
+    scritto e provato dal 02/09 apposta per questo giorno.
+
+    Non si cancella mai niente: le province sono una lista fissa
+    (G.PROVINCE_PUBBLICATE), quindi una pagina scritta oggi si riscrive domani.
+    Con CORSI_PER_PROVINCIA spento non se ne scrive nessuna, e quelle gia' su
+    disco restano come sono (e fuori dalla sitemap): lo stesso "la pagina
+    resta online" dell'interruttore della sezione."""
+    if not CORSI_PER_PROVINCIA:
+        return []
+    in_indice = []
+    for p in G.PROVINCE_PUBBLICATE:
+        suoi = [c for c in corsi if (c.get('prov') or '').strip().upper() == p]
+        file = href_corsi_prov(p).lstrip('/')
+        _scrivi_se_cambia(os.path.join(ROOT, file), file,
+                          render(suoi, css, nav, foot, realta, prov=p,
+                                 porte=porte_province(conteggi, qui=p)),
+                          len(suoi))
+        if prov_in_indice(len(suoi)):
+            in_indice.append(file)
+    return in_indice
 
 
 if __name__ == '__main__':

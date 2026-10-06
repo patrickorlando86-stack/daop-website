@@ -22,8 +22,30 @@ const fs = require('fs');
 const path = require('path');
 const { apri, esito, RADICE } = require('./_aiuto');
 
-const LINK_COMUNE = /href="\/corsi\.html\?comune=([^"#]*)#co-lista">(\d+) corsi per bambini/g;
-const LINK_PROV = /href="\/corsi\.html#co-lista">(\d+) corsi per bambini in provincia/g;
+// Dal 06/10/2026 (lo split dei corsi) il link porta alla pagina della
+// provincia quando c'e' ed e' in indice, se no all'hub: le due forme valgono,
+// e il numero si confronta con la pagina a cui il link porta davvero.
+const LINK_COMUNE = /href="\/(corsi(?:-provincia-[a-z-]+)?\.html)\?comune=([^"#]*)#co-lista">(\d+) corsi per bambini/g;
+const LINK_PROV = /href="\/(corsi(?:-provincia-[a-z-]+)?\.html)#co-lista">(\d+) corsi per bambini in provincia/g;
+
+// Le card di una pagina corsi: quante in tutto e quante per comune. Lette dal
+// file, una volta per pagina.
+const _carte = {};
+function carte(pagina) {
+  if (_carte[pagina]) return _carte[pagina];
+  const f = path.join(RADICE, pagina);
+  const out = { tot: 0, perCitta: {} };
+  if (fs.existsSync(f)) {
+    for (const t of fs.readFileSync(f, 'utf8').match(/<article class="event-card[^>]*>/g) || []) {
+      const m = /data-city="([^"]*)"/.exec(t);
+      if (!m) continue;
+      out.tot++;
+      out.perCitta[m[1]] = (out.perCitta[m[1]] || 0) + 1;
+    }
+  }
+  _carte[pagina] = out;
+  return out;
+}
 
 function schede(dir) {
   const out = [];
@@ -41,15 +63,9 @@ module.exports = async function cta(browser) {
   // ── 1. i blocchi sono marcati ─────────────────────────────────────────
   r.titolo('eventi/ — blocchi misurati e link ai corsi');
   const file = schede(path.join(RADICE, 'eventi'));
-  const corsiHtml = fs.readFileSync(path.join(RADICE, 'corsi.html'), 'utf8');
-  const perCitta = {};
-  let totCorsi = 0;
-  for (const t of corsiHtml.match(/<article class="event-card[^>]*>/g) || []) {
-    const m = /data-city="([^"]*)"/.exec(t);
-    if (!m) continue;
-    totCorsi++;
-    perCitta[m[1]] = (perCitta[m[1]] || 0) + 1;
-  }
+  const { perCitta } = carte('corsi.html');
+  // Le pagine a cui portano davvero i link ai comuni, per la prova del filtro.
+  const destinazioni = {};
 
   let vicini = 0, ginetto = 0, conCorsi = 0;
   const senzaMarca = [], note = [], malformati = [];
@@ -70,16 +86,22 @@ module.exports = async function cta(browser) {
     let trovato = false;
     for (const m of html.matchAll(LINK_COMUNE)) {
       trovato = true;
-      const n = Number(m[2]);
-      if (!m[1] || !(n > 0)) malformati.push(rel);
-      else if (perCitta[m[1]] !== n) {
-        note.push(`${rel}: promette ${n} corsi a ${m[1]}, corsi.html ne ha ${perCitta[m[1]] || 0}`);
+      const [, pagina, citta, quanti] = m;
+      const n = Number(quanti);
+      if (!citta || !(n > 0)) malformati.push(rel);
+      else if (!fs.existsSync(path.join(RADICE, pagina))) malformati.push(`${rel} -> ${pagina} che non c'e'`);
+      else {
+        destinazioni[pagina] = destinazioni[pagina] || citta;
+        const ha = carte(pagina).perCitta[citta] || 0;
+        if (ha !== n) note.push(`${rel}: promette ${n} corsi a ${citta}, ${pagina} ne ha ${ha}`);
       }
     }
     for (const m of html.matchAll(LINK_PROV)) {
       trovato = true;
-      if (Number(m[1]) !== totCorsi) {
-        note.push(`${rel}: promette ${m[1]} corsi in provincia, corsi.html ne ha ${totCorsi}`);
+      const [, pagina, quanti] = m;
+      if (!fs.existsSync(path.join(RADICE, pagina))) malformati.push(`${rel} -> ${pagina} che non c'e'`);
+      else if (Number(quanti) !== carte(pagina).tot) {
+        note.push(`${rel}: promette ${quanti} corsi in provincia, ${pagina} ne ha ${carte(pagina).tot}`);
       }
     }
     if (trovato) {
@@ -100,49 +122,56 @@ module.exports = async function cta(browser) {
     malformati.length ? `link ai corsi senza comune o senza numero: ${malformati.slice(0, 5).join(', ')}`
       : `${conCorsi} pagine con il link ai corsi, tutti col comune e il numero`);
   if (note.length) {
-    console.log(`  nota ${note.length} numeri diversi da corsi.html (indice di ieri?): `
+    console.log(`  nota ${note.length} numeri diversi dalla pagina dei corsi (indice di ieri?): `
       + note.slice(0, 3).join(' | '));
   }
 
   // ── 2. il link consegna quello che promette ───────────────────────────
-  r.titolo('corsi.html?comune= — la tendina accesa dal link');
-  const citta = Object.keys(perCitta).sort((a, b) => perCitta[b] - perCitta[a])[0];
-  if (citta) {
-    const a = await apri(browser, `corsi.html?comune=${citta}#co-lista`, 412);
-    const s = await a.page.evaluate((c) => {
-      const sel = document.querySelector('[data-campo="citta"]');
-      const card = [...document.querySelectorAll('.event-card[data-city]')];
-      const lista = document.getElementById('co-lista');
-      return {
-        valore: sel && sel.value,
-        visibili: card.filter((x) => !x.classList.contains('is-hidden')).length,
-        diQuelComune: card.filter((x) => x.dataset.city === c).length,
-        estranei: card.filter((x) => !x.classList.contains('is-hidden') && x.dataset.city !== c).length,
-        conteggio: (document.getElementById('co-count') || {}).textContent || '',
-        top: lista ? lista.getBoundingClientRect().top : null,
-        alto: innerHeight,
-      };
-    }, citta);
-    r.ok(s.valore === citta, `?comune=${citta} accende la tendina (vale ${JSON.stringify(s.valore)})`);
-    r.ok(s.visibili === s.diQuelComune && s.estranei === 0 && s.visibili > 0,
-      `restano le ${s.diQuelComune} card di ${citta}: visibili ${s.visibili}, di altri comuni ${s.estranei}`);
-    r.ok(s.conteggio.startsWith(String(s.diQuelComune) + ' '),
-      `il contatore dice lo stesso numero ("${s.conteggio}")`);
-    r.ok(s.top !== null && s.top >= 0 && s.top < s.alto,
-      `si atterra sull'elenco, non sull'intestazione (a ${Math.round(s.top)}px)`);
-    await a.ctx.close();
+  // L'hub sempre, e ogni pagina provincia a cui un link porta davvero (06/10).
+  const pagineFiltro = [['corsi.html', null], ...Object.entries(destinazioni)
+    .filter(([p]) => p !== 'corsi.html')];
+  for (const [paginaCorsi, cittaLink] of pagineFiltro) {
+    r.titolo(`${paginaCorsi}?comune= — la tendina accesa dal link`);
+    const suePerCitta = carte(paginaCorsi).perCitta;
+    const citta = cittaLink
+      || Object.keys(suePerCitta).sort((a, b) => suePerCitta[b] - suePerCitta[a])[0];
+    if (citta) {
+      const a = await apri(browser, `${paginaCorsi}?comune=${citta}#co-lista`, 412);
+      const s = await a.page.evaluate((c) => {
+        const sel = document.querySelector('[data-campo="citta"]');
+        const card = [...document.querySelectorAll('.event-card[data-city]')];
+        const lista = document.getElementById('co-lista');
+        return {
+          valore: sel && sel.value,
+          visibili: card.filter((x) => !x.classList.contains('is-hidden')).length,
+          diQuelComune: card.filter((x) => x.dataset.city === c).length,
+          estranei: card.filter((x) => !x.classList.contains('is-hidden') && x.dataset.city !== c).length,
+          conteggio: (document.getElementById('co-count') || {}).textContent || '',
+          top: lista ? lista.getBoundingClientRect().top : null,
+          alto: innerHeight,
+        };
+      }, citta);
+      r.ok(s.valore === citta, `?comune=${citta} accende la tendina (vale ${JSON.stringify(s.valore)})`);
+      r.ok(s.visibili === s.diQuelComune && s.estranei === 0 && s.visibili > 0,
+        `restano le ${s.diQuelComune} card di ${citta}: visibili ${s.visibili}, di altri comuni ${s.estranei}`);
+      r.ok(s.conteggio.startsWith(String(s.diQuelComune) + ' '),
+        `il contatore dice lo stesso numero ("${s.conteggio}")`);
+      r.ok(s.top !== null && s.top >= 0 && s.top < s.alto,
+        `si atterra sull'elenco, non sull'intestazione (a ${Math.round(s.top)}px)`);
+      await a.ctx.close();
 
-    // Un comune che stanotte ha perso i suoi corsi: pagina intera, non vuota.
-    const b = await apri(browser, 'corsi.html?comune=comune-che-non-esiste', 412);
-    const t = await b.page.evaluate(() => ({
-      valore: (document.querySelector('[data-campo="citta"]') || {}).value,
-      nascoste: document.querySelectorAll('.event-card.is-hidden').length,
-    }));
-    r.ok(t.valore === 'all' && t.nascoste === 0,
-      `un comune sconosciuto apre la pagina intera (tendina ${JSON.stringify(t.valore)}, ${t.nascoste} nascoste)`);
-    await b.ctx.close();
-  } else {
-    r.ok(false, 'corsi.html senza card con data-city: il filtro non si puo\' provare');
+      // Un comune che stanotte ha perso i suoi corsi: pagina intera, non vuota.
+      const b = await apri(browser, `${paginaCorsi}?comune=comune-che-non-esiste`, 412);
+      const t = await b.page.evaluate(() => ({
+        valore: (document.querySelector('[data-campo="citta"]') || {}).value,
+        nascoste: document.querySelectorAll('.event-card.is-hidden').length,
+      }));
+      r.ok(t.valore === 'all' && t.nascoste === 0,
+        `un comune sconosciuto apre la pagina intera (tendina ${JSON.stringify(t.valore)}, ${t.nascoste} nascoste)`);
+      await b.ctx.close();
+    } else {
+      r.ok(false, `${paginaCorsi} senza card con data-city: il filtro non si puo' provare`);
+    }
   }
 
   // ── 3. vista e clic arrivano a gtag ───────────────────────────────────
@@ -229,7 +258,7 @@ module.exports = async function cta(browser) {
   await vai('[data-cta="vicini"]');
   r.ok((await viste('vicini')).length === 1, 'ripassando sul blocco la vista non si ripete');
 
-  const sel = cavia ? '[data-cta="vicini"] a[href^="/corsi.html?comune="]'
+  const sel = cavia ? '[data-cta="vicini"] a[href^="/corsi"][href*="?comune="]'
     : '[data-cta="vicini"] .ev-vic-all a[href^="/"]';
   const primaDelClic = await segna();
   const href = await pg.evaluate((s) => {
