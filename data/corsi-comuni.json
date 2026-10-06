@@ -85,11 +85,6 @@
    "nome": "La Morra",
    "slug": "la-morra"
   },
-  "cn-lagnasco": {
-   "n": 2,
-   "nome": "Lagnasco",
-   "slug": "lagnasco"
-  },
   "cn-lurisia": {
    "n": 2,
    "nome": "Lurisia",
@@ -138,6 +133,6 @@
  },
  "province": {
   "AL": 1,
-  "CN": 119
+  "CN": 117
  }
 }
