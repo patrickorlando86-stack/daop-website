@@ -1328,6 +1328,23 @@
   "nome": "Asti",
   "prov": "AT"
  },
+ "bagnasco": {
+  "eventi": {
+   "la-6-ponti-memorial-piero-fornaseri-bagnasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo",
+    "manifest": "",
+    "nome": "La 6 Ponti - Memorial Piero Fornaseri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   }
+  },
+  "nome": "Bagnasco",
+  "prov": "CN"
+ },
  "bagnolopiemonte": {
   "eventi": {
    "bambinopoli-pro-loco-bagnolo-piemonte": {
@@ -1457,6 +1474,28 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-13"
+   },
+   "giornata-nazionale-delle-famiglie-al-museo-wimu-mu-barolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "WiMu Museo del Vino a Barolo",
+    "manifest": "",
+    "nome": "Giornata Nazionale delle Famiglie al Museo - WiMu Museo del Vino a Barolo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "halloween-al-wimu-rob-a-da-masche-barolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "WiMu Museo del Vino a Barolo",
+    "manifest": "",
+    "nome": "Halloween al WiMu - Rob a da Masche!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Barolo",
@@ -1578,6 +1617,23 @@
    }
   },
   "nome": "Bergolo",
+  "prov": "CN"
+ },
+ "bernezzo": {
+  "eventi": {
+   "sufiarace-pro-loco-bernezzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Martiri",
+    "manifest": "",
+    "nome": "SufiaRace - Pro Loco Bernezzo",
+    "organizza": "Pro Loco Bernezzo",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Bernezzo",
   "prov": "CN"
  },
  "bistagno": {
@@ -1839,6 +1895,39 @@
  },
  "bra": {
   "eventi": {
+   "bibliobebe-con-floriana-lovera-bambini-19-35-mesi-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Bibliobebè - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Bibliobebè con Floriana Lovera - bambini 19-35 mesi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "bibliobebe-con-floriana-lovera-bambini-9-18-mesi-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Bibliobebè - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Bibliobebè con Floriana Lovera - bambini 9-18 mesi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "bibliobebe-con-valentina-radici-semi-e-parole-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Bibliobebè - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Bibliobebè con Valentina - Radici, semi e parole",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-10"
+   },
    "bra-s-festival": {
     "anni": [
      2026
@@ -1860,6 +1949,83 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "corso-bimbi-creepy-halloween-sessione-domenica-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giamp Pasticceria",
+    "manifest": "Corso Bimbi Creepy Halloween",
+    "nome": "Corso Bimbi Creepy Halloween - Sessione Domenica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
+   "corso-bimbi-creepy-halloween-sessione-sabato-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giamp Pasticceria",
+    "manifest": "Corso Bimbi Creepy Halloween",
+    "nome": "Corso Bimbi Creepy Halloween - Sessione Sabato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "letture-animate-autunno-in-allegria-ad-opera-dei-n-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Letture animate - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Letture animate - \"Autunno in allegria\" ad opera dei Nasi rossi dell'associazione Arcobaleno V.ip.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-26"
+   },
+   "letture-animate-fantasia-in-valigia-a-cura-di-anto-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Letture animate - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Letture animate - \"Fantasia in valigia\" a cura di Antonio Argenio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-19"
+   },
+   "letture-animate-tesori-d-autunno-a-cura-di-officin-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Letture animate - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Letture animate - \"Tesori d'autunno\" a cura di Officine Zeta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-12"
+   },
+   "magic-english-playing-learning-con-elena-f-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Magic English - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Magic English - Playing & Learning con Elena F.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
+   "magic-english-words-rhymes-con-elena-a-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca civica Giovanni Arpino",
+    "manifest": "Magic English - Biblioteca civica Giovanni Arpino Bra",
+    "nome": "Magic English - Words & Rhymes con Elena A.",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "settimana-mondiale-per-l-allattamento-bra": {
     "anni": [
@@ -4076,6 +4242,34 @@
   "nome": "Cerreto d'Asti",
   "prov": "AT"
  },
+ "cervasca": {
+  "eventi": {
+   "la-via-dei-castagni-i-trekking-del-parco-cervasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ritrovo Via Asilo 6",
+    "manifest": "Autunno al Parco 2026",
+    "nome": "La Via dei Castagni - I Trekking del Parco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "piccoli-a-i-b-al-lavoro-aib-cervasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Piccoli A.I.B. al Lavoro! - AIB Cervasca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   }
+  },
+  "nome": "Cervasca",
+  "prov": "CN"
+ },
  "cherasco": {
   "eventi": {
    "festa-dei-nonni-e-degli-angeli-custodi-museo-della-cherasco": {
@@ -4867,6 +5061,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "ben-essere-in-movimento-seven-stars-moovement-free-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Rondò dei Talenti",
+    "manifest": "",
+    "nome": "Ben-Essere in Movimento - Seven Stars Moovement Freestyle Sports Association",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "biblio-storie-letture-a-cura-di-abl-cuneo": {
     "anni": [
      2026
@@ -4955,6 +5160,17 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "dentro-e-fuori-dai-libri-con-le-facce-di-pandino-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca 0-18 di Cuneo",
+    "manifest": "",
+    "nome": "Dentro e Fuori dai Libri... con le Facce di Pandino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-14"
+   },
    "doppio-laboratorio-di-musica-e-argilla-chiosco-par-cuneo": {
     "anni": [
      2026
@@ -5042,6 +5258,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-02"
+   },
+   "il-memory-delle-storie-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca 0-18",
+    "manifest": "",
+    "nome": "Il Memory delle Storie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-07"
    },
    "l-agora-delle-farfalle-parco-fluviale-gesso-e-stur-cuneo": {
     "anni": [
@@ -5408,6 +5635,17 @@
  },
  "dronero": {
   "eventi": {
+   "comunitiamo-dronero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area della Bocciofila di Dronero",
+    "manifest": "Comunitiamo",
+    "nome": "Comunitiamo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "laboratori-di-giocoleria-circobus-associazione-fum-dronero": {
     "anni": [
      2026
@@ -5957,6 +6195,17 @@
  },
  "fossano": {
   "eventi": {
+   "armonie-di-frutta-e-miele-coldiretti-cuneo-campagn-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Dompè",
+    "manifest": "Coloratissimo Autunno",
+    "nome": "Armonie di Frutta e Miele - Coldiretti Cuneo / Campagna Amica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "autunno-e-musica-centro-famiglie-fossano": {
     "anni": [
      2026
@@ -6205,6 +6454,23 @@
   },
   "nome": "Frugarolo",
   "prov": "AL"
+ },
+ "gaiola": {
+  "eventi": {
+   "bassa-valle-sturun-edizione-gaiola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Gramigna",
+    "manifest": "Bassa Valle StuRUN 2a Edizione",
+    "nome": "Bassa Valle StuRUN 2a Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Gaiola",
+  "prov": "CN"
  },
  "garbagna": {
   "eventi": {
@@ -6632,6 +6898,17 @@
     "pagina": true,
     "ultima": "2026-08-15"
    },
+   "foglie-storie-e-colori-letture-e-laboratorio-creat-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca e Museo dello Sci di Limone Piemonte",
+    "manifest": "",
+    "nome": "Foglie, Storie e Colori - Letture e Laboratorio Creativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "letture-ad-alta-voce-estate-di-storie-limone-piemonte": {
     "anni": [
      2026
@@ -6797,6 +7074,23 @@
   },
   "nome": "Mantovana",
   "prov": "AL"
+ },
+ "marene": {
+  "eventi": {
+   "abitare-la-natura-piccole-scoperte-in-punta-di-pie-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Marene",
+    "manifest": "",
+    "nome": "Abitare la Natura - Piccole Scoperte in Punta di Piedi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   }
+  },
+  "nome": "Marene",
+  "prov": "CN"
  },
  "marmora": {
   "eventi": {
@@ -7805,6 +8099,23 @@
   "nome": "Mornese",
   "prov": "AL"
  },
+ "morozzo": {
+  "eventi": {
+   "birdwatching-dei-piccoli-e-delle-piccole-lipu-morozzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Visite Riserva Naturale Crava-Morozzo",
+    "manifest": "",
+    "nome": "Birdwatching dei piccoli e delle piccole - LIPU",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   }
+  },
+  "nome": "Morozzo",
+  "prov": "CN"
+ },
  "morsasco": {
   "eventi": {
    "agosto-morsasco": {
@@ -8454,6 +8765,17 @@
  },
  "ormea": {
   "eventi": {
+   "ciak-si-gira-il-piccolo-talent-ormea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Spazio Giovani",
+    "manifest": "",
+    "nome": "Ciak, si Gira! Il Piccolo Talent",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
    "estate-in-coro-laboratorio-di-canto-corale-aeropla-ormea": {
     "anni": [
      2026
@@ -8486,6 +8808,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-07"
+   },
+   "pizza-party-ormea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spazio Giovani",
+    "manifest": "",
+    "nome": "Pizza Party",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
    },
    "ti-racconto-una-storia-letture-per-bambini-bibliot-ormea": {
     "anni": [
@@ -8528,6 +8861,23 @@
    }
   },
   "nome": "Osasco",
+  "prov": "CN"
+ },
+ "ostana": {
+  "eventi": {
+   "ostana-foliage-rifugio-galaberna-ostana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rifugio Galaberna",
+    "manifest": "",
+    "nome": "Ostana Foliage - Rifugio Galaberna Ostana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   }
+  },
+  "nome": "Ostana",
   "prov": "CN"
  },
  "ottiglio": {
@@ -8939,6 +9289,28 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "la-notte-dei-pupazzi-consegna-pupazzo-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Piasco",
+    "manifest": "La Notte dei Pupazzi",
+    "nome": "La Notte dei Pupazzi - consegna pupazzo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-23"
+   },
+   "la-notte-dei-pupazzi-recupero-e-lettura-animata-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Piasco",
+    "manifest": "La Notte dei Pupazzi",
+    "nome": "La Notte dei Pupazzi - recupero e lettura animata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "laboratorio-di-lettura-ad-alta-voce-abitare-la-nat-piasco": {
     "anni": [
      2026
@@ -9026,6 +9398,18 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2027-04-03"
+   },
+   "silent-book-party-piasco": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Biblioteca",
+    "manifest": "Silent Book Party",
+    "nome": "Silent Book Party",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-07-12"
    },
    "venerdi-dei-giochi-in-scatola-biblioteca-di-piasco": {
     "anni": [
@@ -10070,6 +10454,23 @@
   "nome": "Revigliasco d'Asti",
   "prov": "AT"
  },
+ "riforano": {
+  "eventi": {
+   "laboratorio-autunnale-tata-lisa-riforano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Parrocchiale di Riforano",
+    "manifest": "",
+    "nome": "Laboratorio Autunnale - Tata Lisa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   }
+  },
+  "nome": "Riforano",
+  "prov": "AL"
+ },
  "rifreddo": {
   "eventi": {
    "la-notte-delle-streghe-mistero-a-rifreddo": {
@@ -10556,6 +10957,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-07"
+   },
+   "il-giardino-botanico-di-roddino-tra-memoria-e-futu": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sferisterio di Roddino",
+    "manifest": "",
+    "nome": "Il giardino botanico di Roddino tra memoria e futuro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
    }
   },
   "nome": "Roddino",
@@ -11150,6 +11562,23 @@
   },
   "nome": "San Marzano Oliveto",
   "prov": "AT"
+ },
+ "sanmichelemondovi": {
+  "eventi": {
+   "castagnata-passeggiata-in-mezzo-ai-castagneti-san-san-michele-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ristorante Da Elvira",
+    "manifest": "Castagnata & Passeggiata in mezzo ai castagneti - San Paolo",
+    "nome": "Castagnata & Passeggiata in mezzo ai castagneti - San Paolo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   }
+  },
+  "nome": "San Michele Mondovì",
+  "prov": "CN"
  },
  "sanpietromonterossograna": {
   "eventi": {
@@ -12541,6 +12970,23 @@
   },
   "nome": "Valfenera",
   "prov": "AT"
+ },
+ "vallepopaesana": {
+  "eventi": {
+   "la-trebulina-in-autunno-laboratori-di-pianmune-valle-po-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pianmune",
+    "manifest": "",
+    "nome": "La Trebulina in Autunno - Laboratori di Pianmune",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   }
+  },
+  "nome": "Valle Po - Paesana",
+  "prov": "CN"
  },
  "valmadonna": {
   "eventi": {
