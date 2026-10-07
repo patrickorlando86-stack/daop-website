@@ -2815,6 +2815,13 @@ servizi, gli altri restano corsi e la pagina rimanda alla loro.
   diventa una colonna del foglio.
 - **`servizi/` è nell'elenco del workflow come cartella**, per la ragione di
   `corsi/`.
+- **Non è la pagina dei corsi con un'altra etichetta**, ed è la prima versione
+  che lo era: si confondeva. La differenza è **chi sceglie il giorno** — il corso
+  ha il calendario dell'organizzatore, il servizio lo prenota la famiglia quando
+  le serve. Quindi qui schede **aperte** (per chi, dove, «anche a domicilio» solo
+  se la descrizione lo dice), un riquadro solo «Come si prenota» col bottone per
+  chiamare, e **nessun calendario**: gli appuntamenti stanno sulla pagina dei
+  corsi, a cui si rimanda in fondo. Il CSS (`SERVIZI_CSS`) sta solo qui.
 
 #### Gli eventi di una realtà: il legame è il nome, non una colonna nuova
 

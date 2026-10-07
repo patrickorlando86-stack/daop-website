@@ -2793,12 +2793,118 @@ def testo_servizi(org, servizi, info):
          f"{' ' + _comuni_testo(servizi) if comuni else ''}"
          f", per {_chi(fascia[1] if fascia else None)}"
          f"{' ' + _fascia_testo(*fascia) if fascia else ''}.")
-    return s + f" Si prenotano direttamente con {org}: i contatti sono qui sotto."
+    return s
+
+
+SERVIZI_CSS = """
+/* La pagina servizi NON e' la pagina dei corsi con un'altra etichetta. Un corso
+   ha il calendario dell'organizzatore (righe da scorrere, orari, filtri); un
+   servizio lo prenota la famiglia quando le serve. Quindi qui poche schede
+   APERTE - cosa ti fanno, per chi, dove - e un'azione sola: prenotare. */
+.sv-lista{display:flex;flex-direction:column;gap:14px;margin:0 0 8px}
+.sv-card{display:flex;gap:14px;align-items:flex-start;padding:16px;
+  background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:14px}
+.sv-loc{flex:0 0 84px;display:block;line-height:0}
+.sv-loc img{width:84px;height:84px;object-fit:cover;border-radius:10px}
+.sv-body{min-width:0;flex:1}
+.sv-nome{font-size:1.08rem;line-height:1.3;margin:2px 0 8px}
+.sv-dati{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 0 8px;
+  font-size:.92rem}
+.sv-dati dt{opacity:.62}
+.sv-dati dd{margin:0;font-weight:600}
+.sv-descr{margin:0;font-size:.95rem;line-height:1.55}
+@media(max-width:480px){.sv-card{flex-direction:column}
+  .sv-loc{flex-basis:auto}.sv-loc img{width:100%;height:160px;object-position:top}}
+.sv-prenota{margin:26px 0 0;padding:20px;border-radius:14px;
+  background:var(--cream,#fdf8f3);border:1px solid rgba(45,74,92,.14)}
+.sv-prenota h2{margin:0 0 6px;font-size:1.22rem}
+.sv-prenota p{margin:0 0 12px;font-size:.96rem;line-height:1.55}
+.sv-chiama{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:0 22px;border-radius:999px;background:var(--navy,#2d4a5c);
+  color:#fff;font-weight:700;text-decoration:none}
+.sv-chiama:hover{background:var(--navy-dark,#1e3342)}
+.sv-altro{margin:12px 0 0;font-size:.92rem}
+.sv-altro a,.sv-torna a{color:var(--navy,#2d4a5c);font-weight:600}
+"""
+
+
+def _card_servizio(c, org, info):
+    """Una scheda servizio, aperta: per chi, dove, com'e' fatto. I dati sono
+    quelli della riga del corso; cambia la domanda a cui rispondono."""
+    dati = []
+    eta = eta_testo(c)
+    if eta:
+        dati.append(('Per chi', G.esc(eta)))
+    dove = ', '.join(_uniche([c.get('sede'), c.get('citta')]))
+    # "anche a domicilio" solo se la descrizione lo dice: non si promette.
+    if 'domicilio' in (c.get('descr') or '').lower():
+        dove = f"{dove} · anche a domicilio" if dove else 'a domicilio'
+    if dove:
+        dati.append(('Dove', G.esc(dove)))
+    if c.get('periodo'):
+        dati.append(('Quando', G.esc(c['periodo'])))
+    if c.get('prezzo'):
+        dati.append(('Costo', G.esc(c['prezzo'])))
+    if c.get('iscrizioni'):
+        dati.append(('Prenotazione', G.esc(c['iscrizioni'])))
+    loc = ''
+    if c.get('loc'):
+        mini, grande = G.loc_path(c['loc'], mini=True), G.loc_path(c['loc'])
+        if mini and grande:
+            loc = (f'<a class="sv-loc" href="{G.esc(grande)}" data-locandina '
+                   f'target="_blank" rel="noopener" aria-label="Locandina di '
+                   f'{G.esc(c["nome"])}"><img src="{G.esc(mini)}" alt="" '
+                   f'width="84" height="84" loading="lazy" decoding="async"></a>')
+    return (f'<article class="sv-card" id="s-{G.slugify(c.get("codice") or c["nome"])}" '
+            f'data-org="{slug_realta(org)}" data-org-nome="{G.esc(org)}" '
+            f'data-codice="{G.esc(_id_corso(c))}">{loc}<div class="sv-body">'
+            f'<span class="co-cat">{G.esc(_cat_foglia(c))}</span>'
+            f'<h3 class="sv-nome">{G.esc(c["nome"])}</h3>'
+            + ('<dl class="sv-dati">' + ''.join(f'<dt>{k}</dt><dd>{v}</dd>'
+                                                for k, v in dati) + '</dl>'
+               if dati else '')
+            + (f'<p class="sv-descr">{G.esc(c["descr"])}</p>' if c.get('descr') else '')
+            + '</div></article>')
+
+
+def _blocco_prenota(org, servizi, info):
+    """"Come si prenota": l'unica cosa da fare su questa pagina. Il bottone
+    chiama il primo numero dei recapiti (G.primo_telefono, lo stesso della
+    barra delle schede evento); sotto, gli altri modi, se ci sono."""
+    tel = (info.get('tel') or '').strip() or (
+        _uniche(c.get('contatto') for c in servizi)[:1] or [''])[0]
+    num = G.primo_telefono(tel)
+    righe = []
+    if num:
+        righe.append(f'<a class="sv-chiama" href="tel:{G.esc(num)}">Chiama per prenotare</a>')
+    altri = []
+    if tel:
+        altri.append(G.contatti_html(tel))
+    mail = (info.get('email') or '').strip()
+    if mail:
+        altri.append(f'<a href="mailto:{G.esc(mail)}">{G.esc(mail)}</a>')
+    for campo, etichetta in (('instagram', 'Instagram'), ('facebook', 'Facebook')):
+        u = (info.get(campo) or '').strip()
+        if u:
+            altri.append(f'<a href="{G.esc(u)}" rel="sponsored noopener" '
+                         f'target="_blank">{etichetta}</a>')
+    if not righe and not altri:
+        return ''
+    indirizzo = ' · '.join(_uniche([info.get('indirizzo'), info.get('citta')]))
+    return ('<section class="sv-prenota" aria-labelledby="sv-prenota-h">'
+            '<h2 id="sv-prenota-h">Come si prenota</h2>'
+            f'<p>Il giorno si concorda direttamente con {G.esc(org)}.'
+            f'{" " + G.esc(indirizzo) + "." if indirizzo else ""}</p>'
+            + ''.join(righe)
+            + (f'<p class="sv-altro">{" · ".join(altri)}</p>' if altri else '')
+            + '</section>')
 
 
 def pagina_servizi(org, servizi, altri, info, css, nav, foot):
-    """La pagina servizi di una realta': chi e', i servizi, contatti, eventi.
-    I suoi corsi stanno sulla pagina dei corsi, e da qui ci si arriva."""
+    """La pagina servizi di una realta': cosa ti fanno, per chi, come si
+    prenota. I suoi corsi e i suoi appuntamenti stanno sulla pagina dei corsi:
+    un calendario qui sarebbe il linguaggio dei corsi, ed e' quello che la
+    faceva confondere con quella (07/10/2026)."""
     slug = slug_realta(org)
     citta = (info.get('citta') or '').strip() or ', '.join(
         _uniche(c['citta'] for c in servizi))
@@ -2818,35 +2924,14 @@ def pagina_servizi(org, servizi, altri, info, css, nav, foot):
                   if logo else '')
     chi = ''
     if info.get('descr'):
-        aperto = ' open' if len(info['descr'].strip()) < 400 else ''
-        chi = (f'<details class="cr-chi"{aperto}><summary>Chi è {G.esc(org)}</summary>'
+        chi = (f'<details class="cr-chi"><summary>Chi è {G.esc(org)}</summary>'
                + _paragrafi(info['descr'], 'cr-descr') + '</details>')
-    # Gli stessi dati della pagina dei corsi (_dati_realta), calcolati sui
-    # servizi: "Attivita'" deve dire massaggio infantile, non psicomotricita'.
-    dati = _dati_realta(org, servizi, info)
-    riquadro = ('<dl class="co-dati">' + ''.join(
-        f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>') if dati else ''
-    contatti = (f'<h2 class="cr-h">Informazioni e contatti</h2>\n  {riquadro}'
-                if riquadro else '')
-    v = Voce(info, org)
-    schede = "\n".join(card(c, i, qui_org=slug, voce=v)
-                       for i, c in enumerate(servizi))
+    schede = "\n".join(_card_servizio(c, org, info) for c in servizi)
     corsi = ''
-    if altri:
-        # Il link va alla pagina dei corsi se esiste, se no all'ancora della
-        # scheda in fondo a corsi.html: la regola di "Organizzatore" in card().
-        href = (url_realta(org) + '#i-corsi') if ha_pagina(info) else f'/corsi.html#{_ancora(org)}'
-        nomi = _e(_uniche(_cat_foglia(c).lower() for c in altri)[:3])
-        n_corsi = _n(len(altri), 'corso', 'corsi')
-        corsi = (f'  <h2 class="cr-h">Anche i corsi</h2>\n'
-                 f'  <p class="cr-intro">{G.esc(org)} organizza anche {n_corsi}'
-                 f'{" di " + G.esc(nomi) if nomi else ""}. '
-                 f'<a href="{G.esc(href)}">I corsi di {G.esc(org)} →</a></p>')
-    ev = eventi_realta(servizi + altri, org)
-    blocco_ev = ''
-    if ev:
-        blocco_ev = (f'  <h2 class="cr-h">Prossimi appuntamenti da {G.esc(org)}</h2>\n'
-                     + "\n".join(_card_evento(od, rec, org) for od, rec in ev))
+    if altri and ha_pagina(info):
+        corsi = (f'<p class="cr-torna sv-torna"><a href="{G.esc(url_realta(org))}">'
+                 f'{G.esc(org)} organizza anche corsi: i corsi e i prossimi '
+                 f'appuntamenti →</a></p>')
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -2869,7 +2954,7 @@ def pagina_servizi(org, servizi, altri, info, css, nav, foot):
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}</style>
+<style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}{SERVIZI_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
@@ -2883,21 +2968,20 @@ def pagina_servizi(org, servizi, altri, info, css, nav, foot):
       <a href="/">Home</a> › <span>Servizi per le famiglie</span> › <span>{G.esc(org)}</span>
     </div>
     {logo_testa}
-    <span class="section-label">{G.esc(citta or 'Piemonte')} · Servizi</span>
+    <span class="section-label">{G.esc(citta or 'Piemonte')} · Servizi per le famiglie</span>
     <h1>{G.esc(org)}</h1>
     {occhiello}
   </div>
 </header>
 <article class="cr-wrap" data-org="{slug}" data-org-nome="{G.esc(org)}">
   <p class="cr-intro">{G.esc(intro)}</p>
-  {chi}
-  <h2 class="cr-h" id="i-servizi">I servizi di {G.esc(org)}</h2>
-  <div class="events-list">
+  <h2 class="cr-h" id="i-servizi">Cosa offre</h2>
+  <div class="sv-lista">
 {schede}
   </div>
-  {contatti}
-{blocco_ev}
-{corsi}
+  {_blocco_prenota(org, servizi, info)}
+  {chi}
+  {corsi}
 </article>
 {G.blocco_ginetto()}</main>
 {foot}
@@ -2905,7 +2989,6 @@ def pagina_servizi(org, servizi, altri, info, css, nav, foot):
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
-<script>{FILTER_JS}</script>
 </body>
 </html>
 """

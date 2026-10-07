@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CàRezza: massaggio infantile e benessere familiare per le famiglie a Racconigi | DAOP</title>
-<meta name="description" content="CàRezza offre 3 servizi di massaggio infantile e benessere familiare per le famiglie a Racconigi, per bambini e ragazzi dai primi mesi fino a 12 anni. Si prenotano direttamente con CàRezza: i contatti sono qui sotto.">
+<meta name="description" content="CàRezza offre 3 servizi di massaggio infantile e benessere familiare per le famiglie a Racconigi, per bambini e ragazzi dai primi mesi fino a 12 anni.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.daop.it/servizi/carezza.html">
 <meta property="og:title" content="CàRezza: massaggio infantile e benessere familiare per le famiglie a Racconigi | DAOP">
-<meta property="og:description" content="CàRezza offre 3 servizi di massaggio infantile e benessere familiare per le famiglie a Racconigi, per bambini e ragazzi dai primi mesi fino a 12 anni. Si prenotano direttamente con CàRezza: i contatti sono qui sotto.">
+<meta property="og:description" content="CàRezza offre 3 servizi di massaggio infantile e benessere familiare per le famiglie a Racconigi, per bambini e ragazzi dai primi mesi fino a 12 anni.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/servizi/carezza.html">
 <meta property="og:locale" content="it_IT">
@@ -744,6 +744,35 @@ html{scroll-behavior:auto}
 .cr-chi[open]>summary::before{content:"▾ "}
 .cr-chi>summary:hover{text-decoration:underline}
 .cr-chi .cr-descr:first-of-type{margin-top:4px}
+
+/* La pagina servizi NON e' la pagina dei corsi con un'altra etichetta. Un corso
+   ha il calendario dell'organizzatore (righe da scorrere, orari, filtri); un
+   servizio lo prenota la famiglia quando le serve. Quindi qui poche schede
+   APERTE - cosa ti fanno, per chi, dove - e un'azione sola: prenotare. */
+.sv-lista{display:flex;flex-direction:column;gap:14px;margin:0 0 8px}
+.sv-card{display:flex;gap:14px;align-items:flex-start;padding:16px;
+  background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:14px}
+.sv-loc{flex:0 0 84px;display:block;line-height:0}
+.sv-loc img{width:84px;height:84px;object-fit:cover;border-radius:10px}
+.sv-body{min-width:0;flex:1}
+.sv-nome{font-size:1.08rem;line-height:1.3;margin:2px 0 8px}
+.sv-dati{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 0 8px;
+  font-size:.92rem}
+.sv-dati dt{opacity:.62}
+.sv-dati dd{margin:0;font-weight:600}
+.sv-descr{margin:0;font-size:.95rem;line-height:1.55}
+@media(max-width:480px){.sv-card{flex-direction:column}
+  .sv-loc{flex-basis:auto}.sv-loc img{width:100%;height:160px;object-position:top}}
+.sv-prenota{margin:26px 0 0;padding:20px;border-radius:14px;
+  background:var(--cream,#fdf8f3);border:1px solid rgba(45,74,92,.14)}
+.sv-prenota h2{margin:0 0 6px;font-size:1.22rem}
+.sv-prenota p{margin:0 0 12px;font-size:.96rem;line-height:1.55}
+.sv-chiama{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:0 22px;border-radius:999px;background:var(--navy,#2d4a5c);
+  color:#fff;font-weight:700;text-decoration:none}
+.sv-chiama:hover{background:var(--navy-dark,#1e3342)}
+.sv-altro{margin:12px 0 0;font-size:.92rem}
+.sv-altro a,.sv-torna a{color:var(--navy,#2d4a5c);font-weight:600}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
@@ -793,83 +822,22 @@ html{scroll-behavior:auto}
       <a href="/">Home</a> › <span>Servizi per le famiglie</span> › <span>CàRezza</span>
     </div>
     <img class="cr-logo" src="/assets/loghi/carezza.webp" alt="Logo di CàRezza" width="600" height="600" decoding="async">
-    <span class="section-label">Racconigi · Servizi</span>
+    <span class="section-label">Racconigi · Servizi per le famiglie</span>
     <h1>CàRezza</h1>
     <p class="cr-sub">Spazio multidisciplinare a misura di famiglia</p>
   </div>
 </header>
 <article class="cr-wrap" data-org="carezza" data-org-nome="CàRezza">
-  <p class="cr-intro">CàRezza offre 3 servizi di massaggio infantile e benessere familiare per le famiglie a Racconigi, per bambini e ragazzi dai primi mesi fino a 12 anni. Si prenotano direttamente con CàRezza: i contatti sono qui sotto.</p>
-  <details class="cr-chi"><summary>Chi è CàRezza</summary><p class="cr-descr">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.</p><p class="cr-descr">Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere i bambini in armonia e offrire supporto ai genitori.</p><p class="cr-descr">Un luogo speciale e protetto per vivere un tempo di qualità insieme ai propri bambini.</p><p class="cr-descr">Ogni evento presso CàRezza è studiato per accogliere insieme i bimbi con mamme, papà, nonni, caregivers.</p></details>
-  <h2 class="cr-h" id="i-servizi">I servizi di CàRezza</h2>
-  <div class="events-list">
-        <article class="event-card" id="c-a016" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="massaggio-infantile" data-org="carezza" data-org-nome="CàRezza" data-codice="A016" data-openday="0" data-etamin="0" data-etamax="1" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
-          <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-0">
-            <img class="ev-thumb" src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="co-cat">Massaggio infantile</span>
-              <span class="ev-name">Accarezzami – Corso di massaggio infantile Aimi</span>
-              <span class="ev-line">0-12 mesi · Racconigi</span>
-              <span class="ev-tags"></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h3>
-          <div class="ev-det" id="det-co-0" hidden>
-            
-<p class="event-desc">Corso di massaggio infantile Aimi per famiglie con bambini nella fascia 0-12 mesi. 5 incontri in piccolissimo gruppo o individuali; date e orario da concordare in base alle esigenze delle famiglie partecipanti. Si svolge presso CàRezza a Racconigi o a domicilio.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> CàRezza</p>            <dl class="co-dati"><dt>Iscrizioni</dt><dd>Posti limitati – informazioni e prenotazione contattando Roberta Ronco</dd><dt>Referenti</dt><dd>Roberta Ronco</dd></dl>            <div class="event-actions"><a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a></div>
-          </div>
-        </article>
-        <article class="event-card" id="c-a017" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="benessere-familiare" data-org="carezza" data-org-nome="CàRezza" data-codice="A017" data-openday="0" data-etamin="2" data-etamax="3" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
-          <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-1">
-            <img class="ev-thumb" src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="co-cat">Benessere familiare</span>
-              <span class="ev-name">mini-MISP™ (fascia 2-3 anni)</span>
-              <span class="ev-line">2-3 anni · Racconigi</span>
-              <span class="ev-tags"></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h3>
-          <div class="ev-det" id="det-co-1" hidden>
-            
-<p class="event-desc">Percorso di 3 incontri da 30-45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 2-3 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> CàRezza</p>            <dl class="co-dati"><dt>Referenti</dt><dd>Roberta Ronco</dd></dl>            <div class="event-actions"><a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a></div>
-          </div>
-        </article>
-        <article class="event-card" id="c-a018" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="benessere-familiare" data-org="carezza" data-org-nome="CàRezza" data-codice="A018" data-openday="0" data-etamin="4" data-etamax="12" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
-          <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-2">
-            <img class="ev-thumb" src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="co-cat">Benessere familiare</span>
-              <span class="ev-name">MISP™ (fascia 4-12 anni)</span>
-              <span class="ev-line">4-12 anni · Racconigi</span>
-              <span class="ev-tags"></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h3>
-          <div class="ev-det" id="det-co-2" hidden>
-            
-<p class="event-desc">Percorso di 5 incontri da 45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 4-12 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie. Si svolge presso la sede o a domicilio.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> CàRezza</p>            <dl class="co-dati"><dt>Referenti</dt><dd>Roberta Ronco</dd></dl>            <div class="event-actions"><a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a></div>
-          </div>
-        </article>
+  <p class="cr-intro">CàRezza offre 3 servizi di massaggio infantile e benessere familiare per le famiglie a Racconigi, per bambini e ragazzi dai primi mesi fino a 12 anni.</p>
+  <h2 class="cr-h" id="i-servizi">Cosa offre</h2>
+  <div class="sv-lista">
+<article class="sv-card" id="s-a016" data-org="carezza" data-org-nome="CàRezza" data-codice="c-a016"><a class="sv-loc" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" data-locandina target="_blank" rel="noopener" aria-label="Locandina di Accarezzami – Corso di massaggio infantile Aimi"><img src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" alt="" width="84" height="84" loading="lazy" decoding="async"></a><div class="sv-body"><span class="co-cat">Massaggio infantile</span><h3 class="sv-nome">Accarezzami – Corso di massaggio infantile Aimi</h3><dl class="sv-dati"><dt>Per chi</dt><dd>0-12 mesi</dd><dt>Dove</dt><dd>CàRezza, Racconigi · anche a domicilio</dd><dt>Prenotazione</dt><dd>Posti limitati – informazioni e prenotazione contattando Roberta Ronco</dd></dl><p class="sv-descr">Corso di massaggio infantile Aimi per famiglie con bambini nella fascia 0-12 mesi. 5 incontri in piccolissimo gruppo o individuali; date e orario da concordare in base alle esigenze delle famiglie partecipanti. Si svolge presso CàRezza a Racconigi o a domicilio.</p></div></article>
+<article class="sv-card" id="s-a017" data-org="carezza" data-org-nome="CàRezza" data-codice="c-a017"><a class="sv-loc" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" data-locandina target="_blank" rel="noopener" aria-label="Locandina di mini-MISP™ (fascia 2-3 anni)"><img src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" width="84" height="84" loading="lazy" decoding="async"></a><div class="sv-body"><span class="co-cat">Benessere familiare</span><h3 class="sv-nome">mini-MISP™ (fascia 2-3 anni)</h3><dl class="sv-dati"><dt>Per chi</dt><dd>2-3 anni</dd><dt>Dove</dt><dd>CàRezza, Racconigi</dd></dl><p class="sv-descr">Percorso di 3 incontri da 30-45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 2-3 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie.</p></div></article>
+<article class="sv-card" id="s-a018" data-org="carezza" data-org-nome="CàRezza" data-codice="c-a018"><a class="sv-loc" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" data-locandina target="_blank" rel="noopener" aria-label="Locandina di MISP™ (fascia 4-12 anni)"><img src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" width="84" height="84" loading="lazy" decoding="async"></a><div class="sv-body"><span class="co-cat">Benessere familiare</span><h3 class="sv-nome">MISP™ (fascia 4-12 anni)</h3><dl class="sv-dati"><dt>Per chi</dt><dd>4-12 anni</dd><dt>Dove</dt><dd>CàRezza, Racconigi · anche a domicilio</dd></dl><p class="sv-descr">Percorso di 5 incontri da 45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 4-12 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie. Si svolge presso la sede o a domicilio.</p></div></article>
   </div>
-  <h2 class="cr-h">Informazioni e contatti</h2>
-  <dl class="co-dati"><dt>Dove</dt><dd>Racconigi</dd><dt>Indirizzo</dt><dd>Piazza Caduti per la Libertà 12a</dd><dt>Attività</dt><dd>Massaggio infantile · Benessere familiare</dd><dt>Contatti</dt><dd>Roberta <a href="tel:+393297249359">+39 329 724 9359</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
-  <h2 class="cr-h">Prossimi appuntamenti da CàRezza</h2>
-    <a class="cr-ev" href="/eventi/sogni-d-oro-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_16_3_20260928-153529_03.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Sogni d&#x27;Oro</span><span class="cr-ev-q">Mercoledì 7 ottobre 2026, ore 10:00-11:30 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/carezza-di-stoffa-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_16_4_20260928-153529_04.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Carezza di Stoffa</span><span class="cr-ev-q">Sabato 10 ottobre 2026, ore 10:00 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/espressione-in-gioco-fascia-2-6-anni-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_16_6_20260928-153529_06.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Espressione in Gioco! (fascia 2-6 anni)</span><span class="cr-ev-q">Martedì 13 ottobre 2026, ore 16:30-17:15 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/espressione-in-gioco-fascia-9-mesi-2-anni-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_16_6_20260928-153529_06.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Espressione in Gioco! (fascia 9 mesi-2 anni)</span><span class="cr-ev-q">Martedì 13 ottobre 2026, ore 17:30-18:15 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/naturopatia-fiori-di-bach-e-altri-rimedi-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_16_5_20260928-153529_05.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Naturopatia, Fiori di Bach e altri rimedi</span><span class="cr-ev-q">Martedì 13 ottobre 2026, ore 11:00-14:30 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/da-mamma-a-mamma-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_17_1_20260928-153529_07.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Da Mamma a Mamma</span><span class="cr-ev-q">Mercoledì 14 ottobre 2026, ore 10:30 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/pilates-in-gravidanza-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_18_20260928-153529_12.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Pilates in Gravidanza</span><span class="cr-ev-q">Venerdì 16 ottobre 2026, ore 10:15-11:15 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/4-stagioni-da-toccare-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_17_2_20260928-153529_08.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">4 Stagioni da Toccare</span><span class="cr-ev-q">Sabato 17 ottobre 2026, ore 9:45-10:30 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/allegro-con-moto-incontro-1-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/daop_cuneo_3973594077073391155.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Allegro con Moto - Incontro 1</span><span class="cr-ev-q">Mercoledì 21 ottobre 2026, ore 16:30-17:20 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/occhi-in-gioco-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_17_3_20260928-153529_09.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Occhi in Gioco</span><span class="cr-ev-q">Giovedì 22 ottobre 2026, ore 16:30-17:30 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/trick-or-treat-laboratorio-culinario-di-halloween-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_17_4_20260928-153529_10.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Trick or Treat? Laboratorio culinario di Halloween in lingua inglese</span><span class="cr-ev-q">Martedì 27 ottobre 2026, ore 16:30-17:15 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/allegro-con-moto-incontro-2-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/daop_cuneo_3973594077073391155.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Allegro con Moto - Incontro 2</span><span class="cr-ev-q">Mercoledì 28 ottobre 2026, ore 16:30-17:20 · CàRezza</span></span></a>
-    <a class="cr-ev" href="/eventi/caccia-al-tesoro-di-halloween-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_17_5_20260928-153529_11.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Caccia al Tesoro di Halloween</span><span class="cr-ev-q">Venerdì 30 ottobre 2026, ore 16:30-17:30 · CàRezza</span></span></a>
-  <h2 class="cr-h">Anche i corsi</h2>
-  <p class="cr-intro">CàRezza organizza anche 3 corsi di psicomotricità e educazione musicale. <a href="/corsi/carezza.html#i-corsi">I corsi di CàRezza →</a></p>
+  <section class="sv-prenota" aria-labelledby="sv-prenota-h"><h2 id="sv-prenota-h">Come si prenota</h2><p>Il giorno si concorda direttamente con CàRezza. Piazza Caduti per la Libertà 12a · Racconigi.</p><a class="sv-chiama" href="tel:+393297249359">Chiama per prenotare</a><p class="sv-altro">Roberta <a href="tel:+393297249359">+39 329 724 9359</a> · <a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></p></section>
+  <details class="cr-chi"><summary>Chi è CàRezza</summary><p class="cr-descr">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.</p><p class="cr-descr">Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere i bambini in armonia e offrire supporto ai genitori.</p><p class="cr-descr">Un luogo speciale e protetto per vivere un tempo di qualità insieme ai propri bambini.</p><p class="cr-descr">Ogni evento presso CàRezza è studiato per accogliere insieme i bimbi con mamme, papà, nonni, caregivers.</p></details>
+  <p class="cr-torna sv-torna"><a href="/corsi/carezza.html">CàRezza organizza anche corsi: i corsi e i prossimi appuntamenti →</a></p>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
@@ -940,189 +908,6 @@ html{scroll-behavior:auto}
 <script>
 function toggleMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}
 function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}
-</script>
-<script>
-(function(){
-  var cards=[].slice.call(document.querySelectorAll('.event-card'));
-  cards.forEach(function(c){
-    var btn=c.querySelector('.ev-row'), det=c.querySelector('.ev-det');
-    if(!btn||!det) return;
-    btn.addEventListener('click',function(){
-      var open=c.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded',open?'true':'false');
-      det.hidden=!open;
-    });
-  });
-  // Un link verso un corso (dalla scheda della realta') deve APRIRE la riga,
-  // non solo scorrerci sopra: altrimenti si arriva su una riga chiusa che
-  // sembra la stessa di prima, e il link pare rotto.
-  function apriDaHash(){
-    var id=(location.hash||'').replace('#','');
-    if(!id) return;
-    var c=document.getElementById(id);
-    if(!c||!c.classList.contains('event-card')||c.classList.contains('is-open')) return;
-    var btn=c.querySelector('.ev-row');
-    if(btn) btn.click();
-  }
-  window.addEventListener('hashchange',apriDaHash);
-  apriDaHash();
-  var bar=document.getElementById('co-toolbar');
-  // --ev-sticky = nav + barra, cioe' quanto copre il tetto appiccicoso. La
-  // scrive gia' l'agenda per le intestazioni dei giorni; qui serve alle ancore
-  // (vedi il commento accanto a scroll-margin-top nel CSS), perche' l'altezza
-  // di quella barra la decide il dato e non il CSS. Stessa variabile e stesso
-  // significato delle due pagine: due nomi per la stessa misura divergerebbero.
-  //
-  // Le due cautele sono quelle gia' pagate sull'agenda, e valgono anche qui
-  // che le schede sono 55 e non 294: si scrive su <html>, quindi ogni scrittura
-  // invalida lo stile dell'intero documento - solo se il valore e' cambiato
-  // davvero - e si osserva la BARRA con un ResizeObserver invece del viewport,
-  // perche' su Android la barra dell'indirizzo che si ritira e' un resize a
-  // ogni scorrimento mentre i controlli vanno a capo due volte in tutto.
-  var stickyPx=0;
-  function misuraSticky(){
-    var v=68+(bar?bar.offsetHeight:0);
-    if(v===stickyPx) return;
-    stickyPx=v;
-    document.documentElement.style.setProperty('--ev-sticky',v+'px');
-  }
-  misuraSticky();
-  if(bar){
-    if(window.ResizeObserver) new ResizeObserver(misuraSticky).observe(bar);
-    else window.addEventListener('resize',misuraSticky);
-  }
-  // Il salto all'ancora lo fa il browser su una stima: le schede portano
-  // content-visibility:auto con 108px supposti, e il salto si calcola su
-  // quelli. Poi si disegnano le schede vicine all'arrivo, che a 1280px sono
-  // alte 105, e il bersaglio sale di 3px per ognuna - misurato il 23/09/2026:
-  // con 88 schede #r-allinea-mente atterrava a 90px sotto un tetto di 136
-  // (senza content-visibility: 148, esatto). Colpisce solo quello che sta
-  // DOPO l'elenco (le realta'), e cresce con le schede: e' per questo che e'
-  // diventato rosso da solo il 21/09, senza che nessuno toccasse il codice.
-  // Una stima migliore non basta, le schede non sono alte uguali (a 105px
-  // si atterrava comunque a 127). Si riallinea il bersaglio una volta
-  // disegnato quello che ha intorno - e mai se nel frattempo chi legge ha
-  // gia' iniziato a scorrere da se'.
-  //
-  // Si guarda per un TEMPO e non per un numero di frame. La prima versione
-  // (23/09) smetteva appena il bersaglio restava fermo per due frame: su una
-  // macchina carica le schede vicine si disegnano DOPO quei due frame, e il
-  // bersaglio risaliva a 90px sotto un tetto di 136 - rosso una volta su due
-  // nella suite intera su Windows, verde da solo (24/09/2026). Ora si
-  // controlla ogni 100ms per un secondo e mezzo e si rimette a posto ogni
-  // volta che si sposta: costa una getBoundingClientRect ogni 100ms, cioe'
-  // niente, e non dipende da quando il browser decide di disegnare.
-  var mosso=false, giro=0;
-  ['wheel','touchstart','keydown','mousedown'].forEach(function(t){
-    window.addEventListener(t,function(){mosso=true;},{passive:true});
-  });
-  function riallinea(){
-    var id=(location.hash||'').replace('#','');
-    var e=id&&document.getElementById(id);
-    if(!e) return;
-    var mio=++giro, fine=Date.now()+1500, dove=null;
-    mosso=false;
-    (function passo(){
-      // Un riallinea() piu' recente (load e hashchange possono arrivare
-      // insieme) prende il posto di questo: due giri paralleli si
-      // contenderebbero lo scorrimento.
-      if(mosso||mio!==giro||Date.now()>fine) return;
-      var top=Math.round(e.getBoundingClientRect().top);
-      if(top!==dove){
-        e.scrollIntoView({block:'start'});
-        dove=Math.round(e.getBoundingClientRect().top);
-      }
-      setTimeout(passo,100);
-    })();
-  }
-  if(document.readyState==='complete') riallinea();
-  else window.addEventListener('load',riallinea);
-  window.addEventListener('hashchange',riallinea);
-  if(!bar) return;
-  var q=document.getElementById('co-q'), count=document.getElementById('co-count'),
-      campi=[].slice.call(bar.querySelectorAll('[data-campo]'));
-  function norm(s){return (s||'').toLowerCase();}
-  function apply(){
-    var term=norm(q&&q.value.trim()), vis=0, orgVivi={};
-    cards.forEach(function(c){
-      var ok=!term||norm(c.textContent).indexOf(term)>=0;
-      campi.forEach(function(el){
-        if(!ok) return;
-        var campo=el.dataset.campo;
-        if(campo==='openday'){ if(el.checked && c.dataset.openday!=='1') ok=false; return; }
-        var v=el.value;
-        if(!v||v==='all') return;
-        if(campo==='eta'){
-          var f=v.split('-').map(Number), lo=c.dataset.etamin, hi=c.dataset.etamax;
-          // Senza eta' dichiarata il corso resta visibile: nasconderlo vorrebbe
-          // dire far sparire una realta' vera per un dato che non ci ha dato.
-          if(lo!==undefined&&hi!==undefined&&lo!==''&&hi!==''){
-            if(!(Number(lo)<=f[1]&&Number(hi)>=f[0])) ok=false;
-          }
-          return;
-        }
-        if(campo==='citta'){
-          // IL NOME DEL CAMPO NON E' SEMPRE IL NOME DELL'ATTRIBUTO. La tendina
-          // del comune si chiama "citta" (come la colonna del foglio) ma la
-          // scheda scrive data-city (come le pagine comune del resto del
-          // sito): qui si leggeva c.dataset.citta, cioe' undefined, e
-          // QUALUNQUE comune scelto nascondeva tutte le righe. Il filtro
-          // comune non ha mai funzionato, e non si vedeva perche' la tendina
-          // si stampa solo con due comuni in pagina: fino al 26/08/2026 di
-          // comune ce n'era uno. Trovato dalla prova che sceglie ogni voce e
-          // conta cosa resta.
-          //
-          // UNA CARD, UN COMUNE. Fra il 03/09 e il 07/09/2026 le righe dello
-          // stesso corso in paesi diversi venivano fuse in una card sola, e qui
-          // serviva un secondo attributo con tutte le sedi dentro perche' il
-          // filtro le trovasse. Ora ogni sede e' una card sua: il comune di una
-          // card e' uno, ed e' data-city.
-          if(c.dataset.city!==v) ok=false;
-          return;
-        }
-        if(c.dataset[campo]!==v) ok=false;
-      });
-      c.classList.toggle('is-hidden',!ok);
-      if(ok){ vis++; orgVivi[c.dataset.org]=1; }
-    });
-    // Una realta' di cui non resta visibile nessun corso esce anche dalle
-    // schede in fondo: se no il filtro "Musica" lascerebbe in pagina la scheda
-    // della societa' di pallavolo, che e' esattamente cio' che si e' chiesto di
-    // togliere. E con zero corsi visibili sparisce anche il titolo della
-    // sezione, che altrimenti resta in aria sopra il vuoto.
-    var schede=[].slice.call(document.querySelectorAll('.co-realta')), viveUna=false;
-    schede.forEach(function(s){
-      var viva=!!orgVivi[s.dataset.org];
-      s.style.display=viva?'':'none';
-      if(viva) viveUna=true;
-    });
-    var wrap=document.getElementById('realta');
-    if(wrap) wrap.style.display=viveUna?'':'none';
-    campi.forEach(function(el){
-      if(el.tagName==='SELECT') el.classList.toggle('is-on',el.value&&el.value!=='all');
-    });
-    if(count) count.textContent=vis+(vis===1?' corso':' corsi');
-  }
-  campi.concat([q]).forEach(function(el){
-    if(!el) return;
-    el.addEventListener('input',apply); el.addEventListener('change',apply);
-  });
-  // ?comune=<slug>: la tendina Comune gia' accesa. Arriva dalla riga "N corsi
-  // per bambini a X" in coda alle schede evento (link_corsi in
-  // genera_eventi.py), che promette un numero: senza il filtro la pagina ne
-  // mostrerebbe un altro. Si imposta solo un valore che nella tendina c'e' -
-  // un comune che stanotte ha perso i suoi corsi apre la pagina intera invece
-  // di un elenco vuoto con un filtro che nessuno ha scelto. L'indirizzo NON si
-  // riscrive: gli utm di chi arriva da una campagna devono restare dove sono.
-  try{
-    var pre=new URLSearchParams(location.search).get('comune');
-    if(pre) campi.forEach(function(el){
-      if(el.dataset.campo!=='citta') return;
-      for(var i=0;i<el.options.length;i++){ if(el.options[i].value===pre){ el.value=pre; break; } }
-    });
-  }catch(e){}
-  apply();
-})();
 </script>
 </body>
 </html>
