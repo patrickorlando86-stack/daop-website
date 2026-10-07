@@ -2799,6 +2799,23 @@ Le decisioni che non si ricavano dal diff:
   le spegne insieme. Con due blocchi, spegnere i corsi lascerebbe in sitemap
   proprio le pagine che senza l'hub non hanno più un posto da cui si arriva.
 
+#### La pagina servizi d'esempio: `/servizi/<slug>.html` — 07/10/2026
+
+Giovanni vuole vendere una sezione SERVIZI (animatori, fotografi, benessere) e
+per farlo gli serve una pagina da mostrare. La prima è CàRezza, **fatta coi
+dati che c'erano già**: i suoi corsi della famiglia «Benessere» (massaggio
+infantile, MISP: su appuntamento, individuali, anche a domicilio) sono i
+servizi, gli altri restano corsi e la pagina rimanda alla loro.
+
+- **È un'anteprima**: `noindex`, fuori sitemap e registro, nessun link dal sito.
+  La sezione vera (elenco, Ginetto, link dalle schede) si fa coi primi sì.
+- **La scrive `genera_corsi.py`** (`scrivi_servizi()`), dalla stessa lettura dei
+  corsi, e la pota come le pagine realtà. `SERVIZI_ANTEPRIMA` (slug → famiglie
+  che sono servizi) si riempie a mano e si svuota: quando la sezione nasce
+  diventa una colonna del foglio.
+- **`servizi/` è nell'elenco del workflow come cartella**, per la ragione di
+  `corsi/`.
+
 #### Gli eventi di una realtà: il legame è il nome, non una colonna nuova
 
 Chiuso il 28/08/2026. Fino a quel giorno gli eventi sulla pagina di una società

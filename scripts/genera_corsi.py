@@ -2751,6 +2751,199 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
+# ── LA PAGINA SERVIZI: L'ESEMPIO IN ANTEPRIMA (07/10/2026) ────────────────
+#
+# Giovanni vuole una sezione SERVIZI (animatori, fotografi, benessere...) e
+# per venderla gli serve una pagina d'esempio da far vedere. La prima e'
+# CaRezza, e i dati sono quelli che ci sono gia': i suoi corsi della famiglia
+# "Benessere" (massaggio infantile, MISP) sono servizi - su appuntamento,
+# individuali o in piccolo gruppo, anche a domicilio - e gli altri restano
+# corsi. Quindi la divisione si legge dalla CATEGORIA del foglio, non da un
+# elenco di corsi scritto qui.
+#
+# E' UN'ANTEPRIMA, e vale tutto quello che vale per le anteprime dei corsi
+# (STATI_ANTEPRIMA, 29/09): la pagina c'e' per chi ha il link, ma e' noindex,
+# fuori sitemap, fuori dal registro, e nessuna pagina del sito ci porta. La
+# sezione vera - un elenco, Ginetto, i link dalle schede - si costruisce coi
+# primi si', non prima (TODO del downloader, "Sezione SERVIZI").
+#
+# SERVIZI_ANTEPRIMA e' quindi una lista che si riempie a mano e si svuota: slug
+# della societa' -> le famiglie di categoria che per lei sono servizi. Togliere
+# una voce cancella la pagina alla run dopo (scrivi_servizi la pota come
+# scrivi_realta). Il giorno che la sezione nasce davvero, questo diventa una
+# colonna del foglio e la lista sparisce.
+SERVIZI_ANTEPRIMA = {'carezza': ('benessere',)}
+DIR_SERVIZI = 'servizi'
+
+
+def _e_servizio(c, famiglie):
+    return G.slugify(_cat_macro(c)) in famiglie
+
+
+def testo_servizi(org, servizi, info):
+    """Il paragrafo che apre la pagina servizi: cosa, dove, per che eta'.
+    Come testo_realta(), dice solo quello che i dati sanno - niente giorni,
+    orari o prezzi, che nel foglio sono facoltativi."""
+    disc = _uniche(_cat_foglia(c).lower() for c in servizi)
+    comuni = _contati(c.get('citta') for c in servizi)
+    fascia = _fascia(servizi)
+    n = len(servizi)
+    s = (f"{org} offre {_n(n, 'servizio', 'servizi')}"
+         f"{' di ' + _e(disc) if disc else ''} per le famiglie"
+         f"{' ' + _comuni_testo(servizi) if comuni else ''}"
+         f", per {_chi(fascia[1] if fascia else None)}"
+         f"{' ' + _fascia_testo(*fascia) if fascia else ''}.")
+    return s + f" Si prenotano direttamente con {org}: i contatti sono qui sotto."
+
+
+def pagina_servizi(org, servizi, altri, info, css, nav, foot):
+    """La pagina servizi di una realta': chi e', i servizi, contatti, eventi.
+    I suoi corsi stanno sulla pagina dei corsi, e da qui ci si arriva."""
+    slug = slug_realta(org)
+    citta = (info.get('citta') or '').strip() or ', '.join(
+        _uniche(c['citta'] for c in servizi))
+    disc = _uniche(_cat_foglia(c).lower() for c in servizi)
+    url = f"{SITE_URL}/{DIR_SERVIZI}/{slug}.html"
+    titolo = (f"{org}: {_e(disc[:2]) or 'servizi'} per le famiglie"
+              f"{G.a_citta(citta)} | DAOP")
+    intro = testo_servizi(org, servizi, info)
+    descr = G.trunc(intro, 300)
+    claim = (info.get('occhiello') or '').strip()
+    occhiello = (f'<p class="cr-sub">{G.esc(claim)}</p>' if claim else
+                 f'<p class="cr-sub">{G.esc(_cap(_e(disc)))} per le famiglie'
+                 f'{" " + G.esc(G.a_citta(citta).strip()) if citta else ""}</p>')
+    logo = logo_path(info.get('logo'))
+    logo_testa = (f'<img class="cr-logo" src="{G.esc(logo)}" alt="Logo di '
+                  f'{G.esc(org)}" width="600" height="600" decoding="async">'
+                  if logo else '')
+    chi = ''
+    if info.get('descr'):
+        aperto = ' open' if len(info['descr'].strip()) < 400 else ''
+        chi = (f'<details class="cr-chi"{aperto}><summary>Chi è {G.esc(org)}</summary>'
+               + _paragrafi(info['descr'], 'cr-descr') + '</details>')
+    # Gli stessi dati della pagina dei corsi (_dati_realta), calcolati sui
+    # servizi: "Attivita'" deve dire massaggio infantile, non psicomotricita'.
+    dati = _dati_realta(org, servizi, info)
+    riquadro = ('<dl class="co-dati">' + ''.join(
+        f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>') if dati else ''
+    contatti = (f'<h2 class="cr-h">Informazioni e contatti</h2>\n  {riquadro}'
+                if riquadro else '')
+    v = Voce(info, org)
+    schede = "\n".join(card(c, i, qui_org=slug, voce=v)
+                       for i, c in enumerate(servizi))
+    corsi = ''
+    if altri:
+        # Il link va alla pagina dei corsi se esiste, se no all'ancora della
+        # scheda in fondo a corsi.html: la regola di "Organizzatore" in card().
+        href = (url_realta(org) + '#i-corsi') if ha_pagina(info) else f'/corsi.html#{_ancora(org)}'
+        nomi = _e(_uniche(_cat_foglia(c).lower() for c in altri)[:3])
+        n_corsi = _n(len(altri), 'corso', 'corsi')
+        corsi = (f'  <h2 class="cr-h">Anche i corsi</h2>\n'
+                 f'  <p class="cr-intro">{G.esc(org)} organizza anche {n_corsi}'
+                 f'{" di " + G.esc(nomi) if nomi else ""}. '
+                 f'<a href="{G.esc(href)}">I corsi di {G.esc(org)} →</a></p>')
+    ev = eventi_realta(servizi + altri, org)
+    blocco_ev = ''
+    if ev:
+        blocco_ev = (f'  <h2 class="cr-h">Prossimi appuntamenti da {G.esc(org)}</h2>\n'
+                     + "\n".join(_card_evento(od, rec, org) for od, rec in ev))
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{G.esc(titolo)}</title>
+<meta name="description" content="{G.esc(descr)}">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{G.esc(titolo)}">
+<meta property="og:description" content="{G.esc(descr)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{G.esc(logo_url(info.get('logo')) or G.DEFAULT_IMG)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="daop:citta" content="{G.esc(citta)}">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
+<script src="/assets/js/locandina.js" defer></script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="cr-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <span>Servizi per le famiglie</span> › <span>{G.esc(org)}</span>
+    </div>
+    {logo_testa}
+    <span class="section-label">{G.esc(citta or 'Piemonte')} · Servizi</span>
+    <h1>{G.esc(org)}</h1>
+    {occhiello}
+  </div>
+</header>
+<article class="cr-wrap" data-org="{slug}" data-org-nome="{G.esc(org)}">
+  <p class="cr-intro">{G.esc(intro)}</p>
+  {chi}
+  <h2 class="cr-h" id="i-servizi">I servizi di {G.esc(org)}</h2>
+  <div class="events-list">
+{schede}
+  </div>
+  {contatti}
+{blocco_ev}
+{corsi}
+</article>
+{G.blocco_ginetto()}</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+<script>{FILTER_JS}</script>
+</body>
+</html>
+"""
+
+
+def scrivi_servizi(gruppi, realta, css, nav, foot):
+    """Scrive le pagine servizi di SERVIZI_ANTEPRIMA e toglie le altre.
+    Una societa' senza servizi fra i corsi pubblicati non ha pagina: resta
+    detto nel log, invece di una pagina vuota."""
+    import glob as _glob
+    dest = os.path.join(ROOT, DIR_SERVIZI)
+    vive = set()
+    for org, corsi_org in gruppi.items():
+        slug = slug_realta(org)
+        famiglie = SERVIZI_ANTEPRIMA.get(slug)
+        if not famiglie:
+            continue
+        servizi = [c for c in corsi_org if _e_servizio(c, famiglie)]
+        if not servizi:
+            print(f"[genera_corsi] servizi: {org} non ha corsi di "
+                  f"{', '.join(famiglie)}, nessuna pagina")
+            continue
+        altri = [c for c in corsi_org if not _e_servizio(c, famiglie)]
+        os.makedirs(dest, exist_ok=True)
+        f = f"{slug}.html"
+        vive.add(f)
+        info = realta.get(G.slugify(org), {})
+        _scrivi_se_cambia(os.path.join(dest, f), f"{DIR_SERVIZI}/{f}",
+                          pagina_servizi(org, servizi, altri, info, css, nav, foot),
+                          len(servizi))
+    for path in _glob.glob(os.path.join(dest, '*.html')):
+        if os.path.basename(path) not in vive:
+            os.remove(path)
+            print(f"[genera_corsi] servizi: tolta {os.path.basename(path)}")
+    for slug in set(SERVIZI_ANTEPRIMA) - {slug_realta(o) for o in gruppi}:
+        print(f"[genera_corsi] servizi: {slug} non e' fra le societa' pubblicate")
+
+
 def _francobollo(c):
     """Il quadrato a sinistra della riga: la MINIATURA della locandina se c'e',
     se no il disegno (illustrazione o pittogramma).
@@ -4753,6 +4946,8 @@ def main():
     in_anteprima = {slug_realta(c.get('org') or '') for c in anteprime}
     pagine = scrivi_realta(gruppi, realta, css, nav, foot,
                            in_anteprima=in_anteprima)
+    # La pagina servizi d'esempio: dalle stesse societa', anteprime comprese.
+    scrivi_servizi(gruppi, realta, css, nav, foot)
     conteggi = conta_province(corsi)
     porte = porte_province(conteggi) if CORSI_PER_PROVINCIA else ''
     _scrivi_se_cambia(PATH, FILE,
