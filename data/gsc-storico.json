@@ -67,6 +67,23 @@
    "brand_clic": 34,
    "daop_clic": 33,
    "bambini_impr": 377
+  },
+  {
+   "ultimo": "2026-10-04",
+   "finestra": "Ultimi 28 giorni",
+   "giorni": 28,
+   "clic": 15283,
+   "impressioni": 259220,
+   "ctr_schede": 5.99,
+   "quota_schede": 69.31,
+   "pavimento": 318.0,
+   "pavimento_sett": "2026-09-28",
+   "ctr_aggregato": 5.9,
+   "ctr_pulito": 6.71,
+   "gonfie_quota_impr": 20.7,
+   "brand_clic": 39,
+   "daop_clic": 38,
+   "bambini_impr": 422
   }
  ]
 }
