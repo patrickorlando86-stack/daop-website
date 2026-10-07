@@ -676,7 +676,12 @@ def soglie(ora, prec):
             f" i {PAVIMENTO_ALLARME} della soglia. Il sistema non si regge da"
             " solo: e' la sola riga di questo cruscotto che chiede una decisione"
             " subito.")
-    if ora['bambini_impr'] >= BAMBINI_SVEGLIA:
+    # Suona quando la soglia si PASSA, non a ogni lettura che ci sta sopra:
+    # dal 30/09/2026 diceva "la prima volta" tutte le settimane, e un avviso
+    # che suona sempre smette di essere letto.
+    prima = (prec or {}).get('bambini_impr')
+    if (ora['bambini_impr'] >= BAMBINI_SVEGLIA
+            and (prima is None or prima < BAMBINI_SVEGLIA)):
         fuori.append(
             f"le query 'per bambini' fanno {ora['bambini_impr']} impressioni"
             f" (soglia {BAMBINI_SVEGLIA}): quella domanda ci ha trovati, ed e'"
