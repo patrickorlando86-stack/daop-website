@@ -528,6 +528,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "alessandria-veg-festival": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini Pubblici di Corso Crimea",
+    "manifest": "Alessandria Veg Festival 2026",
+    "nome": "Alessandria Veg Festival 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
    "buen-camino-alessandria": {
     "anni": [
      2026
@@ -759,6 +770,17 @@
     "pagina": false,
     "ultima": "2026-08-11"
    },
+   "la-giornata-nazionale-delle-famiglie-al-museo-teat-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro delle Scienze",
+    "manifest": "",
+    "nome": "La Giornata Nazionale delle Famiglie al Museo - Teatro delle Scienze",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "la-grande-festa-del-cristo-alessandria": {
     "anni": [
      2026
@@ -802,6 +824,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "menti-in-movimento-centro-commerciale-panorama-ale-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Commerciale Panorama Alessandria",
+    "manifest": "",
+    "nome": "Menti in Movimento - Centro Commerciale Panorama Alessandria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-08"
    },
    "michael-alessandria": {
     "anni": [
@@ -978,6 +1011,28 @@
     "organizza": "Associazione Attività e Commercio Quartiere Cristo",
     "pagina": true,
     "ultima": "2026-08-23"
+   },
+   "una-cena-da-brividi-burger-king-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Burger King Alessandria",
+    "manifest": "",
+    "nome": "Una Cena da Brividi - Burger King Alessandria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "viaggio-nel-cosmo-centro-commerciale-panorama-ales-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Commerciale Panorama Alessandria",
+    "manifest": "",
+    "nome": "Viaggio nel Cosmo - Centro Commerciale Panorama Alessandria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-14"
    }
   },
   "nome": "Alessandria",
@@ -1170,6 +1225,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "fiera-d-autunno-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Alfieri",
+    "manifest": "",
+    "nome": "Fiera d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "foglie-storie-e-asinelli-fondazione-biblioteca-ast-asti": {
     "anni": [
      2026
@@ -1188,6 +1254,17 @@
     "luogo": "Biblioteca Astense Giorgio Faletti",
     "manifest": "",
     "nome": "Giochi di Ruolo e Librogame - Le Cronache del Crepuscolo - Biblioteca Astense",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "giornate-fai-d-autunno-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Relais Le Cattedrali",
+    "manifest": "Giornate FAI d'Autunno Asti",
+    "nome": "Giornate FAI d'Autunno Asti",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
@@ -1524,6 +1601,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-02"
+   },
+   "dolcetto-o-scherzetto-comune-di-basaluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale Scuole",
+    "manifest": "",
+    "nome": "Dolcetto o Scherzetto - Comune di Basaluzzo",
+    "organizza": "Comune di Basaluzzo",
+    "pagina": true,
+    "ultima": "2026-10-29"
    },
    "passeggiata-cicloturistica-per-bambini-e-bambine-c-basaluzzo": {
     "anni": [
@@ -2422,6 +2510,17 @@
     "pagina": true,
     "ultima": "2026-10-16"
    },
+   "fiera-del-rapule-tra-i-colori-d-autunno-comune-di-calosso": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Calosso",
+    "manifest": "",
+    "nome": "Fiera del Rapulé - tra i colori d'autunno - Comune di Calosso",
+    "organizza": "Comune di Calosso",
+    "pagina": true,
+    "ultima": "2026-10-16"
+   },
    "sagra-del-rapule-calosso-pro-loco-san-marzano-oliv": {
     "anni": [
      2026
@@ -2681,6 +2780,17 @@
  },
  "carrosio": {
   "eventi": {
+   "frittellata-d-autunno-carrosio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Ex Asilo",
+    "manifest": "4ª Frittellata d'Autunno",
+    "nome": "4ª Frittellata d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "vediamoci-al-parco-centro-per-le-famiglie-villa-zu-carrosio": {
     "anni": [
      2026
@@ -2903,6 +3013,17 @@
     "pagina": true,
     "ultima": "2026-09-24"
    },
+   "intrecci-a-colazione-intrecci-di-salute-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Intrecci di Salute",
+    "manifest": "",
+    "nome": "Intrecci a Colazione - Intrecci di Salute",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-12"
+   },
    "la-polizia-locale-incontra-i-piccoli-lettori-regol-casale-monferrato": {
     "anni": [
      2026
@@ -3117,6 +3238,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-09"
+   },
+   "trucca-bimbi-con-pazza-animazione-halloween-a-casa-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palestra Edificio Scolastico",
+    "manifest": "",
+    "nome": "Trucca Bimbi con Pazza Animazione - Halloween a Casalnoceto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Casalnoceto",
@@ -3893,6 +4025,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-15"
+   },
+   "i-supereroi-acrobatici-arrivano-a-castelnuovo-don-castelnuovo-don-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "I.C. San Giovanni Bosco",
+    "manifest": "",
+    "nome": "I Supereroi Acrobatici arrivano a Castelnuovo Don Bosco - Comune di Castelnuovo Don Bosco",
+    "organizza": "Comune di Castelnuovo Don Bosco",
+    "pagina": true,
+    "ultima": "2026-10-14"
    }
   },
   "nome": "Castelnuovo Don Bosco",
@@ -4075,6 +4218,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-23"
+   },
+   "storie-appese-a-un-filo-letture-ad-alta-voce-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale Pier Angelo Soldini",
+    "manifest": "",
+    "nome": "Storie Appese a un Filo - Letture ad alta voce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-26"
    },
    "super-evento-in-fattoria-trucca-bimbi-e-palloncini-castelnuovo-scrivia": {
     "anni": [
@@ -6405,6 +6559,17 @@
     "pagina": true,
     "ultima": "2026-10-07"
    },
+   "pronti-ad-essere-intortati-scuola-primaria-di-fran-francavilla-bisio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Lubiano",
+    "manifest": "",
+    "nome": "Pronti ad Essere Intortati? - Scuola Primaria di Francavilla Bisio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "raviolata-d-autunno-di-francavilla-b-francavilla-bisio": {
     "anni": [
      2026
@@ -6979,6 +7144,23 @@
   "nome": "Limone Piemonte",
   "prov": "CN"
  },
+ "lu": {
+  "eventi": {
+   "ritratti-a-pezzi-la-giornata-nazionale-delle-famig-lu": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo San Giacomo",
+    "manifest": "",
+    "nome": "Ritratti a pezzi - La Giornata Nazionale delle Famiglie al Museo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   }
+  },
+  "nome": "Lu",
+  "prov": "AL"
+ },
  "lunassi": {
   "eventi": {
    "festa-della-panissa-circolo-lunassese-lunassi": {
@@ -7172,6 +7354,17 @@
  },
  "molare": {
   "eventi": {
+   "battagliosi-in-festa-castagnata-e-fiazein-pro-loco-molare": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Battagliosi - Albareto",
+    "manifest": "",
+    "nome": "Battagliosi in Festa - Castagnata e Fiazein - Pro Loco Battagliosi Albareto",
+    "organizza": "Pro Loco Battagliosi Albareto",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "castagnata-pro-loco-san-luca-di-molare": {
     "anni": [
      2026
@@ -7314,6 +7507,56 @@
    }
   },
   "nome": "Moncalvo",
+  "prov": "AT"
+ },
+ "moncuccotorinese": {
+  "eventi": {
+   "esserearte-arte-e-teatro-nei-luoghi-del-gesso-moncucco-torinese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Moncucco e Mu.Ge - Museo del Gesso",
+    "manifest": "EsSereArte",
+    "nome": "EsSereArte - Arte e teatro nei luoghi del gesso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
+   "esserearte-domenica-visite-al-museo-del-gesso-moncucco-torinese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Moncucco",
+    "manifest": "EssereArte",
+    "nome": "EssereArte - Domenica (visite al Museo del Gesso)",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   },
+   "esserearte-per-famiglie-moncucco-torinese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Moncucco e Mu.Ge - Museo del Gesso",
+    "manifest": "EsSereArte",
+    "nome": "EsSereArte per famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
+   "esserearte-sabato-camminate-visite-mostre-laborato-moncucco-torinese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Moncucco",
+    "manifest": "EssereArte",
+    "nome": "EssereArte - Sabato (camminate, visite, mostre, laboratori)",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   }
+  },
+  "nome": "Moncucco Torinese",
   "prov": "AT"
  },
  "mondovi": {
@@ -8061,6 +8304,17 @@
  },
  "morbello": {
   "eventi": {
+   "castagnata-fera-a-la-costa-morbello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Morbello",
+    "manifest": "49a Castagnata - Fèra à la Costa",
+    "nome": "49a Castagnata - Fèra à la Costa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "sagra-del-cinghiale-morbello": {
     "anni": [
      2026
@@ -8345,6 +8599,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "notte-in-nizza-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza XX Settembre e Centro Storico",
+    "manifest": "Notte in Nizza",
+    "nome": "Notte in Nizza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
+   },
    "nutrire-un-bambino-dopo-i-primi-mesi-nizza-monferrato": {
     "anni": [
      2026
@@ -8484,6 +8749,17 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "ceramica-terzo-fuoco-e-modellato-associazione-cult-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Centro Comunale di Cultura G. Capurro",
+    "manifest": "Impara l'arte e...",
+    "nome": "Ceramica: terzo fuoco e modellato - Associazione Culturale Laboratori d'Arte",
+    "organizza": "Associazione Culturale Laboratori d'Arte",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
    "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
     "anni": [
      2026
@@ -8527,6 +8803,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-08"
+   },
+   "disegno-collage-e-fantasia-associazione-culturale-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Centro Comunale di Cultura G. Capurro",
+    "manifest": "Impara l'arte e...",
+    "nome": "Disegno, collage e fantasia - Associazione Culturale Laboratori d'Arte",
+    "organizza": "Associazione Culturale Laboratori d'Arte",
+    "pagina": true,
+    "ultima": "2026-10-24"
    },
    "dolci-terre-speciale-cioccolato-edizione-novi-ligure": {
     "anni": [
@@ -8715,6 +9002,17 @@
     "pagina": false,
     "ultima": "2026-09-20"
    },
+   "pittura-e-tecnica-mista-associazione-culturale-lab-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Centro Comunale di Cultura G. Capurro",
+    "manifest": "Impara l'arte e...",
+    "nome": "Pittura e tecnica mista - Associazione Culturale Laboratori d'Arte",
+    "organizza": "Associazione Culturale Laboratori d'Arte",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "sagra-dei-ceci-novi-ligure": {
     "anni": [
      2026
@@ -8805,6 +9103,23 @@
    }
   },
   "nome": "Novi Ligure",
+  "prov": "AL"
+ },
+ "odalengopiccolo": {
+  "eventi": {
+   "tufo-tartufo-fiera-regionale-del-tartufo-bianco-odalengo-piccolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Piemonte e spazi intorno alla Casa Comunale",
+    "manifest": "Tufo & Tartufo - 33ª Fiera Regionale del Tartufo Bianco",
+    "nome": "Tufo & Tartufo - 33ª Fiera Regionale del Tartufo Bianco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   }
+  },
+  "nome": "Odalengo Piccolo",
   "prov": "AL"
  },
  "ormea": {
@@ -8986,6 +9301,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "in-balia-di-halloween-in-balia-degli-eventi-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sferisterio Comunale",
+    "manifest": "",
+    "nome": "In Balia di Halloween - In Balia degli Eventi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "memorial-pasquale-messina-tamburello-cinaglio-vs-a-ovada": {
     "anni": [
@@ -10880,6 +11206,17 @@
     "pagina": false,
     "ultima": "2026-08-18"
    },
+   "halloween-party-sabato-da-paura-pro-loco-rocchetta-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Fattoria Roceta",
+    "manifest": "",
+    "nome": "Halloween Party - Sabato da Paura - Pro Loco Rocchetta Tanaro",
+    "organizza": "Pro Loco Rocchetta Tanaro",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "passaggio-della-corsa-ciclistica-monsterrando-pro-rocchetta-tanaro": {
     "anni": [
      2026
@@ -12647,6 +12984,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "sapori-d-autunno-e-castagnata-tagliolo-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgo Medioevale di Tagliolo Monferrato",
+    "manifest": "Sapori d'Autunno e Castagnata",
+    "nome": "Sapori d'Autunno e Castagnata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
    }
   },
   "nome": "Tagliolo Monferrato",
@@ -12697,6 +13045,23 @@
   "nome": "Tassarolo",
   "prov": "AL"
  },
+ "terruggia": {
+  "eventi": {
+   "decimo-anniversario-del-micronido-a-casa-delle-tat-terruggia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco di Villa Poggio",
+    "manifest": "",
+    "nome": "Decimo anniversario del Micronido \"A Casa delle Tate\"",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   }
+  },
+  "nome": "Terruggia",
+  "prov": "AL"
+ },
  "tonco": {
   "eventi": {
    "agrifiera-polli-e-buoi-dei-paesi-tuoi-tonco": {
@@ -12744,6 +13109,28 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "adulti-connessi-come-lo-smartphone-impatta-sulla-q-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Connessi con Cura",
+    "nome": "Adulti connessi: come lo smartphone impatta sulla qualità delle relazioni - Connessi con Cura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-11"
+   },
+   "aiuto-o-ai-intelligenza-artificiale-digitale-e-nuo-tortona": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "Connessi con Cura",
+    "nome": "AIUTO o AI? Intelligenza artificiale, digitale e nuove forme di dipendenza - Connessi con Cura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-03-31"
+   },
    "alla-ri-scoperta-delle-favole-disney-alice-nel-pae-tortona": {
     "anni": [
      2026
@@ -12765,6 +13152,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-24"
+   },
+   "artisti-senza-pennello-l-arte-della-natura-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "L'arte della natura",
+    "nome": "Artisti senza pennello - L'arte della natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-13"
    },
    "attivita-assistita-con-il-cane-associazione-percor-tortona": {
     "anni": [
@@ -12788,6 +13186,17 @@
     "pagina": true,
     "ultima": "2026-08-28"
    },
+   "halloween-party-jack-il-tortonese-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casetta degli Alpini",
+    "manifest": "",
+    "nome": "Halloween Party - Jack il Tortonese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "hop-hop-street-food-tortona": {
     "anni": [
      2026
@@ -12798,6 +13207,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "i-patti-digitali-di-comunita-e-la-promozione-delle-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "Connessi con Cura",
+    "nome": "I Patti Digitali di Comunità e la promozione delle alleanze genitoriali - Connessi con Cura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-19"
+   },
+   "l-amore-ai-tempi-dei-social-affettivita-e-sessuali-tortona": {
+    "anni": [
+     2027
+    ],
+    "luogo": "",
+    "manifest": "Connessi con Cura",
+    "nome": "L'amore ai tempi dei social. Affettività e sessualità online - Connessi con Cura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-16"
    },
    "l-autunno-attraverso-la-lettura-e-la-musica-tortona": {
     "anni": [
@@ -12810,6 +13241,17 @@
     "pagina": true,
     "ultima": "2026-10-24"
    },
+   "la-fattoria-in-biblioteca-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Tortona sez. Ragazzi",
+    "manifest": "",
+    "nome": "La Fattoria in Biblioteca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-17"
+   },
    "la-mostra-gli-esplorattori-tortona": {
     "anni": [
      2026
@@ -12821,6 +13263,17 @@
     "pagina": true,
     "ultima": "2026-08-27"
    },
+   "la-natura-si-trasforma-l-arte-della-natura-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "L'arte della natura",
+    "nome": "La natura si trasforma - L'arte della natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-27"
+   },
    "le-regole-della-mia-citta-gli-esplorattori-tortona": {
     "anni": [
      2026
@@ -12831,6 +13284,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "oltre-i-like-capire-social-algoritmi-challenge-e-p-tortona": {
+    "anni": [
+     2027
+    ],
+    "luogo": "",
+    "manifest": "Connessi con Cura",
+    "nome": "Oltre i like: capire social, algoritmi, challenge e pressioni online - Connessi con Cura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-03-03"
    },
    "open-street-basket-supercoppa-tortona": {
     "anni": [
@@ -12853,6 +13317,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-18"
+   },
+   "piccoli-artisti-di-land-art-l-arte-della-natura-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "L'arte della natura",
+    "nome": "Piccoli artisti di Land art - L'arte della natura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-20"
+   },
+   "postare-o-non-postare-il-dilemma-dello-sharenting-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Connessi con Cura",
+    "nome": "Postare o non postare? Il dilemma dello Sharenting e del consenso - Connessi con Cura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-21"
    },
    "serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona": {
     "anni": [
@@ -13445,6 +13931,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "zucche-in-fuga-az-agricola-la-cascinetta-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Az. Agricola La Cascinetta",
+    "manifest": "",
+    "nome": "Zucche in Fuga - Az. Agricola La Cascinetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    }
   },
   "nome": "Villanova d'Asti",
@@ -13713,6 +14210,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-23"
+   },
+   "swappy-halloween-volpedo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Hub Volpedo",
+    "manifest": "Swappy Halloween",
+    "nome": "Swappy Halloween",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    }
   },
   "nome": "Volpedo",

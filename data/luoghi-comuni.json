@@ -746,7 +746,7 @@
  },
  "c-at-moncucco-torinese": {
   "comune": "Moncucco Torinese",
-  "n": 1,
+  "n": 2,
   "prov": "AT"
  },
  "c-at-mongardino": {
@@ -1192,14 +1192,7 @@
  "c-cn-monforte-d-alba": {
   "comune": "Monforte d'Alba",
   "n": 2,
-  "prov": "CN",
-  "sponsor": [
-   {
-    "ancora": "lg-cascina-gabutti-monforte-d-alba",
-    "nome": "Cascina Gabutti",
-    "tipo": "Fattorie Didattiche"
-   }
-  ]
+  "prov": "CN"
  },
  "c-cn-monta": {
   "comune": "Montà",
