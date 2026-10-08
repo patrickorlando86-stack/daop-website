@@ -409,6 +409,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-09"
+   },
+   "visita-guidata-a-ritmo-di-musica-hip-hop-ass-cultu-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "MUDI Alba",
+    "manifest": "Tutti i Colori della Cultura Kids",
+    "nome": "Visita guidata a ritmo di musica hip hop - Ass. Culturale BE STREET HIP HOP SCHOOL ALBA & BRA",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    }
   },
   "nome": "Alba",
@@ -457,6 +468,23 @@
    }
   },
   "nome": "Albaretto della Torre",
+  "prov": "CN"
+ },
+ "albarettotorre": {
+  "eventi": {
+   "cena-in-maschera-di-halloween-pro-loco-albaretto-t-albaretto-torre": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Polivalente di Albaretto Torre",
+    "manifest": "",
+    "nome": "Cena in Maschera di Halloween - Pro Loco Albaretto Torre",
+    "organizza": "Pro Loco Albaretto Torre",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Albaretto Torre",
   "prov": "CN"
  },
  "alberaligure": {
@@ -1489,6 +1517,23 @@
   "nome": "Baldichieri d'Asti",
   "prov": "AT"
  },
+ "baldisserodalba": {
+  "eventi": {
+   "passeggiata-a-sei-zampe-baldissero-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Martiri",
+    "manifest": "",
+    "nome": "Passeggiata a Sei Zampe",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Baldissero d'Alba",
+  "prov": "CN"
+ },
  "barge": {
   "eventi": {
    "aggiungi-un-posto-a-tavola-aica-associazione-impre-barge": {
@@ -1641,6 +1686,17 @@
  },
  "beinette": {
   "eventi": {
+   "mercatino-delle-pulci-pro-loco-beinette": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bar della Pro Loco",
+    "manifest": "",
+    "nome": "Mercatino delle Pulci - Pro Loco Beinette",
+    "organizza": "Pro Loco Beinette",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   },
    "torneo-di-pallaprigioniera-animatori-beinette": {
     "anni": [
      2026
@@ -2136,6 +2192,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-12"
+   },
+   "natura-in-mostra-radici-semi-e-parole-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Il Crocicchio Ubik Bra",
+    "manifest": "",
+    "nome": "Natura in Mostra - Radici, semi e Parole",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    },
    "settimana-mondiale-per-l-allattamento-bra": {
     "anni": [
@@ -2830,6 +2897,17 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "castagnata-oratorio-di-carru": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio di Carrù",
+    "manifest": "",
+    "nome": "Castagnata 2026 - Oratorio di Carrù",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "incontro-informativo-di-primo-soccorso-gruppo-volo-carru": {
     "anni": [
      2026
@@ -2884,6 +2962,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-18"
+   },
+   "sabati-in-oratorio-prove-della-recita-e-giochi-carru": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio di Carrù",
+    "manifest": "",
+    "nome": "Sabati in oratorio - prove della recita e giochi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
    }
   },
   "nome": "Carrù",
@@ -5584,6 +5673,17 @@
     "pagina": true,
     "ultima": "2026-08-20"
    },
+   "piccole-tracce-grandi-viaggi-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Diocesano",
+    "manifest": "",
+    "nome": "Piccole tracce, grandi viaggi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "piccoli-semi-grandi-scoperte-parco-fluviale-gesso-cuneo": {
     "anni": [
      2026
@@ -6454,6 +6554,17 @@
     "pagina": false,
     "ultima": "2026-08-15"
    },
+   "corso-primo-soccorso-pediatrico-croce-bianca-fossa-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Croce Bianca - Piazza della Paglia",
+    "manifest": "",
+    "nome": "Corso primo soccorso pediatrico - Croce Bianca Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "cresco-con-te-biblioteca-civica-di-fossano": {
     "anni": [
      2026
@@ -6475,6 +6586,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "equi-lab-laboratorio-sulla-parita-di-genere-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglie",
+    "manifest": "Equi LAB",
+    "nome": "Equi LAB - Laboratorio sulla parità di genere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-22"
    },
    "il-passaporto-dei-sogni-museo-diocesano-cuneo-fossano": {
     "anni": [
@@ -7023,6 +7145,17 @@
  },
  "guarene": {
   "eventi": {
+   "alimentazione-nell-eta-scolare-e-prescolare-comune-guarene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Comune di Guarene",
+    "manifest": "",
+    "nome": "Alimentazione nell'età scolare e prescolare - Comune di Guarene",
+    "organizza": "Comune di Guarene",
+    "pagina": true,
+    "ultima": "2026-11-05"
+   },
    "sport-in-piazza-comune-di-guarene": {
     "anni": [
      2026
@@ -7088,6 +7221,45 @@
   },
   "nome": "Isola Sant'Antonio",
   "prov": "AL"
+ },
+ "levaldigi": {
+  "eventi": {
+   "crea-il-tuo-gioco-consorzio-monviso-solidale-propo-levaldigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Asilo di Levaldigi",
+    "manifest": "3 Incontri Speciali a Ottobre",
+    "nome": "Crea il Tuo Gioco - Consorzio Monviso Solidale / Proposta 80",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
+   },
+   "giochiamo-insieme-consorzio-monviso-solidale-propo-levaldigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Asilo di Levaldigi",
+    "manifest": "3 Incontri Speciali a Ottobre",
+    "nome": "Giochiamo Insieme - Consorzio Monviso Solidale / Proposta 80",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-16"
+   },
+   "yoga-per-genitori-e-bambini-consorzio-monviso-soli-levaldigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Asilo di Levaldigi",
+    "manifest": "3 Incontri Speciali a Ottobre",
+    "nome": "Yoga per Genitori e Bambini - Consorzio Monviso Solidale / Proposta 80",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-23"
+   }
+  },
+  "nome": "Levaldigi",
+  "prov": "CN"
  },
  "limonepiemonte": {
   "eventi": {
@@ -7330,6 +7502,105 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-17"
+   },
+   "multisensoriale-in-biblioteca-bambini-3-6-anni-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - bambini 3-6 anni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-12"
+   },
+   "multisensoriale-in-biblioteca-bambini-3-6-anni-ore-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - bambini 3-6 anni ore 16:30",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-30"
+   },
+   "multisensoriale-in-biblioteca-bambini-6-9-anni-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - bambini 6-9 anni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-12"
+   },
+   "multisensoriale-in-biblioteca-bambini-6-9-anni-ore-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - bambini 6-9 anni ore 15:30",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-30"
+   },
+   "multisensoriale-in-biblioteca-famiglia-ore-10-00-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - famiglia (ore 10:00)",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "multisensoriale-in-biblioteca-famiglia-ore-11-00-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - famiglia (ore 11:00)",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "multisensoriale-in-biblioteca-genitori-e-bambini-0-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - genitori e bambini 0-1 anni ore 11:00",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
+   "multisensoriale-in-biblioteca-genitori-e-bambini-1-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - genitori e bambini 1-3 anni ore 10:00",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
+   "multisensoriale-in-biblioteca-turno-famiglia-ore-1-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Stanza dei Colori del Vento - Biblioteca di Marene",
+    "manifest": "Multisensoriale in Biblioteca",
+    "nome": "Multisensoriale in Biblioteca - turno famiglia ore 11:00",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    }
   },
   "nome": "Marene",
@@ -7732,6 +8003,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "peccati-di-gola-xxviii-fiera-regionale-del-tartufo-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mondovì",
+    "manifest": "Peccati di Gola 2026",
+    "nome": "Peccati di Gola 2026 - XXVIII Fiera Regionale del Tartufo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "qui-casca-l-asino-ludofavole-d-autunno-mondovi": {
     "anni": [
      2026
@@ -7764,6 +8046,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "tutti-i-colori-della-cultura-kids-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Fauzone",
+    "manifest": "Tutti i Colori della Cultura Kids",
+    "nome": "Tutti i Colori della Cultura Kids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Mondovì",
@@ -7966,6 +8259,17 @@
     "organizza": "Associazione Amar",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "roero-segreto-misteri-e-stelle-al-castello-monteu-roero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuderie del Castello",
+    "manifest": "Roero Segreto - Misteri e Stelle al Castello",
+    "nome": "Roero Segreto - Misteri e Stelle al Castello",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    },
    "tutti-i-colori-della-cultura-kids-monteu-roero": {
     "anni": [
@@ -8360,6 +8664,17 @@
  },
  "moretta": {
   "eventi": {
+   "expo-oratorio-grande-gioco-per-le-vie-di-moretta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio di Moretta",
+    "manifest": "Expo Oratorio 2026",
+    "nome": "Expo Oratorio - Grande gioco per le vie di Moretta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-10"
+   },
    "serata-genitori-helen-doron-saluzzese-moretta": {
     "anni": [
      2026
@@ -9797,6 +10112,17 @@
     "pagina": true,
     "ultima": "2027-04-03"
    },
+   "sagra-circus-una-serata-tra-magia-e-arte-circense-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pala Sagra",
+    "manifest": "Piasco Sagra d'Autunno",
+    "nome": "Sagra Circus - Una serata tra magia e arte circense - APE Pro Loco Piasco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-12"
+   },
    "silent-book-party-piasco": {
     "anni": [
      2026,
@@ -11111,6 +11437,17 @@
     "organizza": "Pro Loco Roccavione Chi di Teit",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "torneo-della-castagna-asd-roccavione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Roccavione",
+    "manifest": "",
+    "nome": "3° Torneo della Castagna - ASD Roccavione",
+    "organizza": "ASD Roccavione",
+    "pagina": true,
+    "ultima": "2026-10-11"
    }
   },
   "nome": "Roccavione",
@@ -11468,6 +11805,17 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "equi-lab-centro-famiglie-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglie",
+    "manifest": "",
+    "nome": "Equi LAB - Centro Famiglie Saluzzo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-20"
+   },
    "eventi-per-bambini-e-famiglie-wonderland-park-saluzzo": {
     "anni": [
      2026
@@ -11478,6 +11826,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "halloween-party-helen-doron-english-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Halloween Party - Helen Doron English Saluzzo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    },
    "mercatino-dei-bambini-saluzzo": {
     "anni": [
@@ -13770,6 +14129,17 @@
  },
  "vezzadalba": {
   "eventi": {
+   "io-sono-un-artista-crome-in-movimento-aps-vezza-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Crome in Movimento APS",
+    "manifest": "",
+    "nome": "Io Sono Un'Artista!!! - Crome in Movimento APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
+   },
    "open-day-corsi-di-musica-crome-in-movimento-aps-vezza-d-alba": {
     "anni": [
      2026
