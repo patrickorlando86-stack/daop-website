@@ -120,11 +120,6 @@
    "nome": "Roreto",
    "slug": "roreto"
   },
-  "cn-saluzzo": {
-   "n": 1,
-   "nome": "Saluzzo",
-   "slug": "saluzzo"
-  },
   "cn-vezza-d-alba": {
    "n": 7,
    "nome": "Vezza d'Alba",
@@ -133,6 +128,6 @@
  },
  "province": {
   "AL": 1,
-  "CN": 117
+  "CN": 116
  }
 }
