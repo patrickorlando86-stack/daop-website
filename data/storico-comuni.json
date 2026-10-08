@@ -1379,6 +1379,17 @@
     "pagina": false,
     "ultima": "2026-08-07"
    },
+   "si-riparte-insieme-oratorio-don-bosco-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio Don Bosco",
+    "manifest": "",
+    "nome": "Si Riparte Insieme! - Oratorio Don Bosco Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
+   },
    "sport-in-piazza-asti": {
     "anni": [
      2026
@@ -4266,6 +4277,23 @@
   },
   "nome": "Castelnuovo Scrivia",
   "prov": "AL"
+ },
+ "cellarengo": {
+  "eventi": {
+   "san-firmino-in-festa-cellarengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Circonvallazione 22",
+    "manifest": "San Firmino in Festa!",
+    "nome": "San Firmino in Festa!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-09"
+   }
+  },
+  "nome": "Cellarengo",
+  "prov": "AT"
  },
  "celleenomondo": {
   "eventi": {
@@ -11657,6 +11685,17 @@
     "pagina": true,
     "ultima": "2026-08-20"
    },
+   "festa-del-volontariato-citta-di-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Libertà",
+    "manifest": "",
+    "nome": "Festa del Volontariato - Città di San Damiano d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "giochiamo-insieme-san-damiano-d-asti": {
     "anni": [
      2026
@@ -14121,6 +14160,28 @@
  },
  "villasansecondo": {
   "eventi": {
+   "grande-gioco-dell-oca-pro-loco-villa-san-secondo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie del paese",
+    "manifest": "",
+    "nome": "Grande Gioco dell'Oca - Pro Loco Villa San Secondo",
+    "organizza": "Pro Loco Villa San Secondo",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
+   "il-signor-mammamia-e-il-dottor-sotuttoio-spettacol-villa-san-secondo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro per Tutti",
+    "manifest": "",
+    "nome": "Il Signor Mammamia e il Dottor Sotuttoio - Spettacolo con muppets",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "tradizionale-festa-della-madonna-delle-grazie-villa-san-secondo": {
     "anni": [
      2026
