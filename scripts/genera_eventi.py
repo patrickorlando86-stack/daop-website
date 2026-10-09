@@ -1254,8 +1254,17 @@ def appena_aggiunti(events, today, escludi=()):
     non da'.
 
     La data d'ingresso e' `first_seen` del registro delle schede, cercata per
-    ancora; un evento che nel registro non c'e' e' entrato stanotte. Senza
-    registro la corsia non si stampa: tutto risulterebbe nuovo.
+    SLUG e solo in ripiego per ancora; un evento che nel registro non c'e' e'
+    entrato stanotte. Senza registro la corsia non si stampa: tutto
+    risulterebbe nuovo.
+
+    NON PER ANCORA (09/10/2026). Il registro ha un record per scheda, e la sua
+    ancora e' quella della prima data della serie: le altre date di un corso
+    settimanale ("Pilates in Gravidanza", ogni martedi') hanno un'ancora che
+    li' non c'e', e risultavano entrate stanotte TUTTE LE NOTTI. Con la data
+    d'ingresso piu' recente possibile vincevano sempre: il 09/10 i dodici posti
+    erano tutti serie ricorrenti, una entrata il 24/09, e gli 81 eventi
+    caricati il giorno prima restavano fuori.
 
     Una manifestazione compare una volta: quattro serate della stessa sagra
     sarebbero una scelta sola travestita da quattro (la regola di
@@ -1263,14 +1272,17 @@ def appena_aggiunti(events, today, escludi=()):
     reg = carica_registro()
     if not reg:
         return []
-    ingresso = {r['anchor']: r.get('first_seen') for r in reg.values()
-                if r.get('anchor')}
+    per_ancora = {r['anchor']: r.get('first_seen') for r in reg.values()
+                  if r.get('anchor')}
     da = today + datetime.timedelta(days=NUOVI_DA_GIORNI)
     visti, out = set(), []
     for e in sorted(events, key=lambda e: (e['d_start'], e['nome'])):
         if id(e) in escludi or e['d_start'] < da:
             continue
-        fs = ingresso.get(e.get('anchor'))
+        # Per ancora solo in ripiego: e' il caso di un'edizione riagganciata a
+        # una pagina vecchia, che nel registro sta sotto lo slug di prima.
+        fs = (reg.get(slug_evento(e)) or {}).get('first_seen') \
+            or per_ancora.get(e.get('anchor'))
         try:
             entrato = datetime.date.fromisoformat(fs[:10]) if fs else today
         except ValueError:
@@ -8933,13 +8945,7 @@ def spec_halloween_prov(prov, events, oggi, altre):
                                  (11, 1): "Ognissanti"},
                                 chiave='halloween', quale="Halloween", eta=True,
                                 dettagli=True)
-    altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
-    corpo += ('<p class="com-per">Halloween nelle altre province: '
-              + ', '.join(f'<a href="{href_halloween_prov(c)}">'
-                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>' for c in altre_prov)
-              + ', o <a href="/halloween.html">tutte insieme</a>. Cerchi altro da '
-              f'fare con i bambini in provincia di {esc(nome)}? '
-              f'<a href="{href_eventi_prov(prov)}">Gli eventi della provincia</a>.</p>')
+    corpo += _sorelle(href_halloween_prov, prov, '/halloween.html', 'Halloween', nome)
     corpo += ('<p class="com-per"><strong>Fa paura o no?</strong> Dove l\'età è '
               'dichiarata la trovi in riga; per il resto <a '
               'href="/halloween.html#fa-paura">ti spieghiamo come leggere un '
@@ -9391,12 +9397,8 @@ def spec_mercatini_prov(prov, events, oggi, altre):
             testa, etichetta,
             [e for e in corti if e['d_start'] <= d2 and e['d_end'] >= d1],
             oggi, eta=True, dettagli=True)
-    altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
-    corpo += ('<p class="com-per">I mercatini nelle altre province: '
-              + ', '.join(f'<a href="{href_mercatini_prov(c)}">'
-                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>' for c in altre_prov)
-              + f'. Cerchi altro da fare con i bambini in provincia di {esc(nome)}? '
-              f'<a href="{href_eventi_prov(prov)}">Gli eventi della provincia</a>.</p>')
+    corpo += _sorelle(href_mercatini_prov, prov, '/natale.html', 'I mercatini', nome,
+                      generale_testo='Tutto il Natale, in tutte le province')
     corpo += _dopo_stagione("i mercatini")
     if poche:
         corpo += blocco_ginetto(alto=True)
@@ -9461,15 +9463,26 @@ def _in_provincia(events, prov, da, a):
             and (e.get('prov') or '').upper() == prov]
 
 
-def _sorelle(href_fn, prov, generale, quale, nome):
-    """La riga che lega una pagina per provincia alle sorelle e alla generale."""
+def _sorelle(href_fn, prov, generale, quale, nome, generale_testo=None):
+    """I bottoni che legano una pagina per provincia alla generale e alle
+    sorelle, subito dopo l'elenco.
+
+    Fino al 09/10/2026 era una frase con i link dentro («... o tutte insieme»)
+    e Patrick, cercando "halloween in provincia di alessandria", non trovava il
+    modo di tornare alla pagina di Halloween: un link in una riga di prosa non
+    si vede. Ora la generale e' il primo bottone, pieno (.lan-dopo), e le altre
+    province gli stanno accanto. La briciola 'padre' resta, ma sta in cima."""
     altre_prov = [c for c in PROVINCE_PUBBLICATE if c != prov]
-    return (f'<p class="com-per">{quale} nelle altre province: '
-            + ', '.join(f'<a href="{href_fn(c)}">{esc(PROVINCE_NOMI.get(c, c))}</a>'
-                        for c in altre_prov)
-            + f', o <a href="{generale}">tutte insieme</a>. Cerchi altro da fare '
-            f'con i bambini in provincia di {esc(nome)}? '
-            f'<a href="{href_eventi_prov(prov)}">Gli eventi della provincia</a>.</p>')
+    testo = generale_testo or f"{quale} in tutte le province"
+    return (f'<h2 id="altre-province">{esc(quale)} nelle altre province</h2>'
+            '<div class="lan-dopo">'
+            f'<a href="{generale}">{esc(testo)}</a>'
+            + ''.join(f'<a href="{href_fn(c)}">{esc(PROVINCE_NOMI.get(c, c))}</a>'
+                      for c in altre_prov)
+            + '</div>'
+            f'<p class="com-per">Cerchi altro da fare con i bambini in provincia di '
+            f'{esc(nome)}? <a href="{href_eventi_prov(prov)}">Gli eventi della '
+            'provincia</a>.</p>')
 
 
 def spec_natale_prov(prov, events, oggi, altre):
