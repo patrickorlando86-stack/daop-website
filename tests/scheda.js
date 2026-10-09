@@ -283,14 +283,24 @@ module.exports = async function scheda(browser) {
   const CARD = /<article class="event-card[^"]*"[^>]*data-start="([\d-]+)"[\s\S]*?<\/article>/g;
   const VERSO = /href="\/eventi\/([^"#]+)\.html"><svg[^>]*><use href="#i-arrow-right"\/><\/svg> Scheda completa/;
   const ELENCO = /<ul class="ev-date-l">([\s\S]*?)<\/ul>/;
-  const inAgenda = new Map();
+  // Una serie non si conta sui giorni ma sugli appuntamenti, come fa
+  // date_serie(): inizio, ora d'inizio e fine. Due turni nello stesso giorno
+  // («turno famiglia ore 10:00» e «ore 11:00», 14/11/2026 a Marene: lo slug
+  // taglia il nome a 50 caratteri e li fa coincidere) sono due appuntamenti, e
+  // la scheda fa bene a elencarli tutti e due. Contando solo i giorni la prova
+  // li chiamava «una serie inventata» (rossa il 09/10/2026).
+  const ORA = /<span class="ev-line">[^<]*?\b(\d{1,2})[:.](\d{2})\b/;
+  const FINE = /data-end="([\d-]+)"/;
+  const inAgenda = new Map(), appuntamenti = new Map();
   for (const m of agenda.matchAll(CARD)) {
     const s = VERSO.exec(m[0]);
     if (!s) continue;
-    if (!inAgenda.has(s[1])) inAgenda.set(s[1], new Set());
+    if (!inAgenda.has(s[1])) { inAgenda.set(s[1], new Set()); appuntamenti.set(s[1], new Set()); }
     inAgenda.get(s[1]).add(m[1]);
+    const o = ORA.exec(m[0]), f = FINE.exec(m[0]);
+    appuntamenti.get(s[1]).add(`${m[1]}|${o ? o[1].padStart(2, '0') + ':' + o[2] : ''}|${f ? f[1] : ''}`);
   }
-  const serie = [...inAgenda].filter(([, d]) => d.size > 1);
+  const serie = [...inAgenda].filter(([slug]) => appuntamenti.get(slug).size > 1);
   const senzaElenco = [], altreDate = [], nonProssima = [], disordine = [], abusivi = [];
   for (const [slug, date] of serie) {
     const dove = path.join(RADICE, 'eventi', `${slug}.html`);
