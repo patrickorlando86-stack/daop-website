@@ -148,6 +148,10 @@ COLONNE = {
     # superficie e vivo sull'altra - cioe' peggio di non averla.
     'scadenza': ('scadenza', 'data scadenza', 'valida fino al', 'valido fino al',
                  'data fine', 'datafine', 'fine'),
+    # CORSO O SERVIZIO (09/10/2026). Vuota = corso; "servizio" = la riga va
+    # ANCHE sulla pagina /servizi/ della societa' (vedi scrivi_servizi). La
+    # scrive il downloader quando il pacco e' segnato «Sono SERVIZI».
+    'tipo': ('tipo',),
 }
 
 # Fasce del filtro eta', quelle suggerite nel documento. Il confronto e' per
@@ -2767,17 +2771,20 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 # sezione vera - un elenco, Ginetto, i link dalle schede - si costruisce coi
 # primi si', non prima (TODO del downloader, "Sezione SERVIZI").
 #
-# SERVIZI_ANTEPRIMA e' quindi una lista che si riempie a mano e si svuota: slug
-# della societa' -> le famiglie di categoria che per lei sono servizi. Togliere
-# una voce cancella la pagina alla run dopo (scrivi_servizi la pota come
-# scrivi_realta). Il giorno che la sezione nasce davvero, questo diventa una
-# colonna del foglio e la lista sparisce.
-SERVIZI_ANTEPRIMA = {'carezza': ('benessere',)}
+# DAL 09/10/2026 LO DICE LA COLONNA "Tipo" della tab Attivita: "servizio" =
+# una cosa che si prenota quando serve. La scrive il downloader quando chi
+# carica segna il pacco «Sono SERVIZI»; si puo' scrivere anche a mano. La riga
+# resta fra i corsi (e nell'app) come prima, e in piu' va sulla pagina servizi.
+# Una societa' con almeno un servizio ha la sua pagina; senza, la pagina si
+# toglie alla run dopo (scrivi_servizi la pota come scrivi_realta).
+# Restano noindex finche' la sezione vera non nasce, coi primi si' (TODO del
+# downloader, "Sezione SERVIZI").
 DIR_SERVIZI = 'servizi'
+TIPI_SERVIZIO = ('servizio', 'servizi')
 
 
-def _e_servizio(c, famiglie):
-    return G.slugify(_cat_macro(c)) in famiglie
+def _e_servizio(c):
+    return (c.get('tipo') or '').strip().lower() in TIPI_SERVIZIO
 
 
 def testo_servizi(org, servizi, info):
@@ -2995,23 +3002,17 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 
 
 def scrivi_servizi(gruppi, realta, css, nav, foot):
-    """Scrive le pagine servizi di SERVIZI_ANTEPRIMA e toglie le altre.
-    Una societa' senza servizi fra i corsi pubblicati non ha pagina: resta
-    detto nel log, invece di una pagina vuota."""
+    """Scrive una pagina servizi per ogni societa' che ha righe col Tipo
+    "servizio" (vedi TIPI_SERVIZIO) e toglie le altre."""
     import glob as _glob
     dest = os.path.join(ROOT, DIR_SERVIZI)
     vive = set()
     for org, corsi_org in gruppi.items():
         slug = slug_realta(org)
-        famiglie = SERVIZI_ANTEPRIMA.get(slug)
-        if not famiglie:
-            continue
-        servizi = [c for c in corsi_org if _e_servizio(c, famiglie)]
+        servizi = [c for c in corsi_org if _e_servizio(c)]
         if not servizi:
-            print(f"[genera_corsi] servizi: {org} non ha corsi di "
-                  f"{', '.join(famiglie)}, nessuna pagina")
             continue
-        altri = [c for c in corsi_org if not _e_servizio(c, famiglie)]
+        altri = [c for c in corsi_org if not _e_servizio(c)]
         os.makedirs(dest, exist_ok=True)
         f = f"{slug}.html"
         vive.add(f)
@@ -3023,8 +3024,10 @@ def scrivi_servizi(gruppi, realta, css, nav, foot):
         if os.path.basename(path) not in vive:
             os.remove(path)
             print(f"[genera_corsi] servizi: tolta {os.path.basename(path)}")
-    for slug in set(SERVIZI_ANTEPRIMA) - {slug_realta(o) for o in gruppi}:
-        print(f"[genera_corsi] servizi: {slug} non e' fra le societa' pubblicate")
+    if vive:
+        print(f"[genera_corsi] servizi: {len(vive)} "
+              + ("pagina" if len(vive) == 1 else "pagine")
+              + f" ({', '.join(sorted(vive))})")
 
 
 def _francobollo(c):
