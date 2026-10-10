@@ -44,5 +44,41 @@ verifica("la festa di Halloween a Villa Zucca entra",
          G.in_tema(ev("Festa di Halloween - Centro per le Famiglie Villa Zucca"),
                    'halloween'))
 
+print("\n── le pagine delle feste prendono solo la festa ──")
+# /natale.html diceva «22 eventi di dicembre» e di Natale ce n'erano due: il
+# resto erano laboratori settimanali con una data in dicembre.
+import datetime  # noqa: E402
+
+stagioni = {s.chiave: s for s in G.STAGIONI}
+oggi = datetime.date(2026, 10, 10)
+
+
+def riga(nome, giorno, descr=''):
+    return {'nome': nome, 'descr': descr, 'citta': 'Bra',
+            'd_start': giorno, 'd_end': giorno}
+
+
+dic = datetime.date(2026, 12, 12)
+eventi = [riga("Magic English - Playing & Learning", dic),
+          riga("Bibliobebè con Floriana", dic),
+          riga("Arriva Babbo Natale in piazza", dic),
+          riga("Presepe vivente", dic)]
+nomi = {e['nome'] for e in G._stagione_dati(stagioni['natale'], eventi, oggi)[3]}
+verifica(f"Natale: solo le feste di Natale ({sorted(nomi)})",
+         nomi == {"Arriva Babbo Natale in piazza", "Presepe vivente"})
+
+cap = datetime.date(2026, 12, 29)
+eventi = [riga("Laboratorio di pittura", cap),
+          riga("Presepe vivente", cap),
+          riga("Countdown dei bambini", datetime.date(2026, 12, 31))]
+nomi = {e['nome'] for e in G._stagione_dati(stagioni['capodanno'], eventi, oggi)[3]}
+verifica(f"Capodanno: la sua festa e i presepi ancora aperti ({sorted(nomi)})",
+         nomi == {"Presepe vivente", "Countdown dei bambini"})
+
+ago = datetime.date(2027, 8, 15)
+eventi = [riga("Laboratorio di pittura", ago)]
+verifica("Ferragosto resta un filtro di date",
+         len(G._stagione_dati(stagioni['ferragosto'], eventi, oggi)[3]) == 1)
+
 print("\nTUTTO OK" if esito else "\nQUALCOSA NON VA")
 sys.exit(0 if esito else 1)

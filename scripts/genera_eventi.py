@@ -8986,10 +8986,29 @@ def spec_halloween_prov(prov, events, oggi, altre):
 # spec_halloween). Una stagionale senza la sua domanda propria la perde.
 # ---------------------------------------------------------------------------
 
+# SOLO LA FESTA, come /halloween.html dal 23/09 (10/10/2026, Patrick: «controlla
+# anche le altre pagine»). /natale.html prendeva tutto quello che cadeva in
+# dicembre: «22 eventi di dicembre» sotto un titolo di Natale, e di Natale ce
+# n'erano due - il resto erano Bibliobebe', Magic English e laboratori
+# settimanali con una data in dicembre. Il "cosa fare in quei giorni" ha gia'
+# le sue pagine. Capodanno e Befana prendono anche il Natale: presepi e luci
+# restano aperti fino all'Epifania. Ferragosto non c'e' apposta: li' la festa
+# e' la data, non un tema, e qualunque cosa del 14-16 agosto e' "Ferragosto".
+TEMI_PAGINA = {
+    'natale': ('natale',),
+    'capodanno': ('capodanno', 'natale'),
+    'befana': ('befana', 'natale'),
+    'carnevale': ('carnevale',),
+    'pasqua': ('pasqua',),
+}
+
+
 def _stagione_dati(st, events, oggi):
     """I conti che servono a tutte: finestra, elenco in finestra, comuni."""
     da, clou, a = prossima_finestra(st.finestra, oggi)
-    finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
+    temi = TEMI_PAGINA.get(st.chiave)
+    finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da
+                       and (not temi or any(in_tema(e, t) for t in temi))),
                       key=lambda e: (e['d_start'], (e.get('citta') or '')))
     comuni = len({_key(e.get('citta')) for e in finestra
                   if (e.get('citta') or '').strip()})
