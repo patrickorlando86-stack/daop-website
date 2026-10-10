@@ -12681,6 +12681,33 @@
   "slug": "halloween-al-wimu-rob-a-da-masche-barolo",
   "updated": "2026-10-10"
  },
+ "halloween-dei-piccoli-biblioteca-g-s-p-raiteri-quargnento": {
+  "anchor": "ev-2026-10-31-halloween-dei-piccoli-biblioteca-g-s-p-raiteri",
+  "categoria": "Laboratorio",
+  "citta": "Quargnento",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Letture e piccolo laboratorio creativo a tema Halloween tra zucche, fantasmini simpatici e tanta fantasia. Solo storie, colori e divertimento! I bambini devono essere accompagnati da un adulto.",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "2-6 anni",
+  "first_seen": "2026-10-10",
+  "indirizzo": "Via Dionigi Motta 1, Quargnento (AL)",
+  "last_seen": "2026-10-10",
+  "lat": "44.9450557",
+  "loc": "daop_alessandria_4004273101819906064.webp",
+  "lon": "8.4874079",
+  "luogo": "Biblioteca G.S.P. Raiteri",
+  "manifest": "",
+  "nome": "Halloween dei Piccoli - Biblioteca G.S.P. Raiteri",
+  "ora": "11:00-12:00",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 357,
+  "slug": "halloween-dei-piccoli-biblioteca-g-s-p-raiteri-quargnento",
+  "updated": "2026-10-10"
+ },
  "halloween-dei-piccoli-biblioteca-gsp-raiten-quargnento": {
   "anchor": "ev-2026-10-31-halloween-dei-piccoli-biblioteca-gsp-raiten",
   "categoria": "Laboratorio",
@@ -12706,6 +12733,7 @@
   "prov": "AL",
   "riga": 357,
   "slug": "halloween-dei-piccoli-biblioteca-gsp-raiten-quargnento",
+  "spostata": "halloween-dei-piccoli-biblioteca-g-s-p-raiteri-quargnento",
   "updated": "2026-10-10"
  },
  "halloween-in-biblioteca-quargnento": {
