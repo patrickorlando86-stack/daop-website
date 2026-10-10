@@ -9101,8 +9101,13 @@ MIN_TEMA = 3
 
 # Parole che dicono la festa solo se stanno nel titolo: nel programma una zucca
 # e' quasi sempre una sagra d'autunno, nel nome dell'evento e' il suo tema.
+# Non dopo Villa/Cascina/Via/Piazza/Borgo (10/10/2026): «Centro per le Famiglie
+# Villa Zucca» e' un posto di Arquata Scrivia, e i suoi incontri sui mattoncini
+# e sul neonato finivano su /halloween.html. Il nome del posto non dice la festa.
 TEMI_SOLO_TITOLO = {
-    'halloween': re.compile(r"\bzucc(?:a|he)\b", re.I),
+    'halloween': re.compile(
+        r"(?<!villa )(?<!cascina )(?<!via )(?<!piazza )(?<!borgo )"
+        r"\bzucc(?:a|he)\b", re.I),
 }
 
 
