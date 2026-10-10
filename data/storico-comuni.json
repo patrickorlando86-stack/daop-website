@@ -622,6 +622,17 @@
     "pagina": false,
     "ultima": "2026-09-19"
    },
+   "concerto-benefico-sanremo-junior-i-banditi-di-rocc-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Ambra",
+    "manifest": "",
+    "nome": "Concerto Benefico Sanremo Junior - I Banditi di Rocchetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-16"
+   },
    "entriamo-nel-mondo-dei-libri-con-nat-associazione-alessandria": {
     "anni": [
      2026
@@ -709,6 +720,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "halloween-party-inaugurazione-stagione-27-iceinlin-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pista di Pattinaggio Alessandria - Retail Park",
+    "manifest": "",
+    "nome": "Halloween Party - Inaugurazione Stagione 2026/27 - Iceinline Pattinaggio ASD",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "i-torneo-di-bandiera-citta-di-alessandria-associaz": {
     "anni": [
@@ -974,6 +996,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "screening-gratuiti-aperti-a-tutti-lions-club-aless-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale Parrocchia San Giovanni Evangelista",
+    "manifest": "",
+    "nome": "Screening Gratuiti Aperti a Tutti - Lions Club Alessandria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-11"
+   },
    "sentimental-value-alessandria": {
     "anni": [
      2026
@@ -1191,6 +1224,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-07"
+   },
+   "sicurezza-e-benessere-neonato-sportello-ostetrico-arquata-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Gaetano Poggi",
+    "manifest": "",
+    "nome": "Sicurezza e Benessere Neonato: Sportello Ostetrico e Psico-Educativo - Centro per le Famiglie Villa Zucca / CSP Arquata Scrivia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-15"
+   },
+   "zampeta-o-scherzeto-edizione-arquata-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area SOMS",
+    "manifest": "Zampeta o Scherzeto? 1ª edizione",
+    "nome": "Zampeta o Scherzeto? 1ª edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Arquata Scrivia",
@@ -1198,6 +1253,17 @@
  },
  "asti": {
   "eventi": {
+   "a-piccoli-passi-la-salute-e-un-cammino-che-inizia-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco E. Pastrone lungo Borbore",
+    "manifest": "",
+    "nome": "A piccoli passi! La salute è un cammino che inizia da bambini - ASL Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-12"
+   },
    "arti-e-mercanti-asti": {
     "anni": [
      2026
@@ -1533,6 +1599,23 @@
   },
   "nome": "Baldissero d'Alba",
   "prov": "CN"
+ },
+ "balzola": {
+  "eventi": {
+   "halloween-a-balzola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Balzola",
+    "manifest": "Halloween a Balzola",
+    "nome": "Halloween a Balzola",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Balzola",
+  "prov": "AL"
  },
  "barge": {
   "eventi": {
@@ -3707,6 +3790,17 @@
  },
  "castelceriolo": {
   "eventi": {
+   "castagnata-in-maschera-festa-di-halloween-autunno-castelceriolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio di Castelceriolo",
+    "manifest": "",
+    "nome": "Castagnata in Maschera - Festa di Halloween & Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "festa-dei-rioni-gli-amici-del-campetto-castelceriolo": {
     "anni": [
      2026
@@ -3999,6 +4093,23 @@
    }
   },
   "nome": "Castelletto d'Orba",
+  "prov": "AL"
+ },
+ "castellettomerli": {
+  "eventi": {
+   "notte-halloween-castelletto-merli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Società di Mutuo Soccorso Castelletto Merli",
+    "manifest": "",
+    "nome": "Notte Halloween",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Castelletto Merli",
   "prov": "AL"
  },
  "castellettomonferrato": {
@@ -4396,6 +4507,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "ti-racconto-una-storia-celle-enomondo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone dell'Opera Pia",
+    "manifest": "",
+    "nome": "Ti Racconto Una Storia...",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
    }
   },
   "nome": "Celle Enomondo",
@@ -5054,6 +5176,17 @@
     "organizza": "Pro Loco Motta di Costigliole d'Asti",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "un-albero-per-ogni-bambino-comune-di-costigliole-d-costigliole-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale degli Alpini",
+    "manifest": "",
+    "nome": "Un albero per ogni bambino - Comune di Costigliole d'Asti",
+    "organizza": "Comune di Costigliole d'Asti",
+    "pagina": true,
+    "ultima": "2026-10-11"
    }
   },
   "nome": "Costigliole d'Asti",
@@ -9035,10 +9168,21 @@
     "organizza": "Comitato per Noche",
     "pagina": false,
     "ultima": "2026-08-13"
+   },
+   "halloween-night-comitato-per-noche": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Comitato per Noche",
+    "manifest": "",
+    "nome": "Halloween Night - Comitato per Noche",
+    "organizza": "Comitato per Noche",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Noche",
-  "prov": "CN"
+  "prov": "AT"
  },
  "novello": {
   "eventi": {
@@ -9432,6 +9576,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-08"
+   },
+   "un-mondo-di-mattoncini-centro-per-le-famiglie-vill-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglie Villa Zucca",
+    "manifest": "Un Mondo di Mattoncini",
+    "nome": "Un Mondo di Mattoncini - Centro per le Famiglie Villa Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-11"
    },
    "volontari-in-piazza-novi-ligure": {
     "anni": [
@@ -9896,6 +10051,17 @@
     "pagina": true,
     "ultima": "2026-10-10"
    },
+   "percorso-stregato-pasturana-horror": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Elementare di Pasturana",
+    "manifest": "",
+    "nome": "Percorso Stregato - Pasturana Horror",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "sagra-del-corzetto-settembre-pasturanese-pasturana": {
     "anni": [
      2026
@@ -9913,6 +10079,17 @@
  },
  "pecettodivalenza": {
   "eventi": {
+   "halloween-a-pecetto-pro-loco-borsalino-aps-pecetto-di-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale",
+    "manifest": "",
+    "nome": "Halloween a Pecetto - Pro Loco Borsalino APS",
+    "organizza": "Pro Loco Borsalino APS",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "la-piazza-di-pecetto-festival-di-libri-e-cultura-pecetto-di-valenza": {
     "anni": [
      2026
@@ -10760,6 +10937,28 @@
  },
  "quargnento": {
   "eventi": {
+   "halloween-dei-piccoli-biblioteca-gsp-raiten-quargnento": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca GSP Raiten",
+    "manifest": "",
+    "nome": "Halloween dei Piccoli - Biblioteca GSP Raiten",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "halloween-in-biblioteca-quargnento": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Quargnento",
+    "manifest": "Halloween in Biblioteca",
+    "nome": "Halloween in Biblioteca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "sagra-della-melanzana-quargnento": {
     "anni": [
      2026
@@ -11298,6 +11497,17 @@
  },
  "roccadarazzo": {
   "eventi": {
+   "festa-di-halloween-biblioteca-del-tempo-e-dei-sape-rocca-d-arazzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca del Tempo e dei Saperi",
+    "manifest": "",
+    "nome": "Festa di Halloween - Biblioteca del Tempo e dei Saperi di Rocca d'Arazzo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "i-bambini-del-palio-mostra-fotografica-di-enzo-isa-rocca-d-arazzo": {
     "anni": [
      2026
@@ -11766,6 +11976,17 @@
  },
  "sale": {
   "eventi": {
+   "sale-in-zucca-pro-loco-di-sale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "SOMS di Sale",
+    "manifest": "",
+    "nome": "Sale in Zucca - Pro Loco di Sale",
+    "organizza": "Pro Loco di Sale",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "settembeer-fest-sale": {
     "anni": [
      2026
@@ -13455,6 +13676,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "terruggia-halloween": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco di Villa Poggio",
+    "manifest": "Terruggia Halloween 2026",
+    "nome": "Terruggia Halloween 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Terruggia",
@@ -13727,6 +13959,17 @@
     "pagina": true,
     "ultima": "2026-10-20"
    },
+   "pizza-e-cinema-di-halloween-centro-per-le-famiglie-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "",
+    "nome": "Pizza e cinema di Halloween - Centro per le Famiglie di Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "postare-o-non-postare-il-dilemma-dello-sharenting-tortona": {
     "anni": [
      2026
@@ -13866,6 +14109,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "la-strapigiama-i-edizione-associazione-gli-amici-d-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Gramsci",
+    "manifest": "",
+    "nome": "La StraPigiama I Edizione - Associazione Gli Amici Di Mario",
+    "organizza": "Associazione Gli Amici Di Mario",
+    "pagina": true,
+    "ultima": "2026-10-25"
    }
   },
   "nome": "Valenza",
@@ -14620,6 +14874,17 @@
  },
  "volpedo": {
   "eventi": {
+   "castagnata-a-volpedo-pro-loco-volpedo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "SOAMS di Volpedo",
+    "manifest": "",
+    "nome": "Castagnata a Volpedo - Pro Loco Volpedo",
+    "organizza": "Pro Loco Volpedo",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "festa-patronale-volpedo": {
     "anni": [
      2026
