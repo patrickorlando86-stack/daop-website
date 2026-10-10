@@ -12,7 +12,7 @@ Rigenera SOLO, dentro eventi.html, quello che sta fra i marker EVENTI-TIPO
 (opzioni del filtro per tipo), EVENTI-LISTA (corsie "in evidenza" + agenda
 raggruppata per giornata) e il blocco JSON-LD. Tutto il resto resta intatto.
 """
-import os, re, csv, io, json, html, math, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob, difflib, itertools
+import os, re, csv, io, json, html, math, datetime, urllib.request, urllib.parse, unicodedata, sys, collections, random, glob, difflib, itertools, functools
 
 SHEET_ID = "186XuLRXD2DXHL5CVy1vgNfmbEhpSbpW5pSgr4ARhugs"
 # gid del tab "Eventi". Serve perche' la fonte e' l'export, non gviz: vedi sotto.
@@ -808,6 +808,35 @@ def locandina_viva(loc):
     return (loc or '').strip() not in _LOC_MORTE
 
 
+# Variabile d'ambiente con cui il downloader passa il file dell'elenco.
+VAR_ELENCO_LOCANDINE = "DAOP_ELENCO_LOCANDINE"
+
+
+def elenco_dal_downloader():
+    """Set dei nomi nel bucket "locandine", se il downloader ce l'ha passato.
+
+    None (= "non lo so, chiedi una per una") se la variabile non c'e', se il file
+    non si legge, o se e' vecchio piu' di mezz'ora: un elenco di ieri direbbe
+    "c'e'" di una locandina cancellata stanotte."""
+    import time
+    f = os.environ.get(VAR_ELENCO_LOCANDINE, "").strip()
+    if not f:
+        return None
+    try:
+        if time.time() - os.path.getmtime(f) > 1800:
+            print("  [locandine: l'elenco del downloader e' vecchio, controllo una per una]")
+            return None
+        with open(f, encoding="utf-8") as fh:
+            nomi = json.load(fh)
+        if not isinstance(nomi, list) or not nomi:
+            return None
+        return {str(n) for n in nomi}
+    except Exception as e:
+        print(f"  [locandine: elenco del downloader illeggibile ({type(e).__name__}), "
+              f"controllo una per una]")
+        return None
+
+
 def scalda_locandine(nomi, quanti_insieme=6):
     """Controlla quali locandine il bucket ha ancora, e ricorda le morte.
 
@@ -867,8 +896,22 @@ def scalda_locandine(nomi, quanti_insieme=6):
         return nome, None      # non lo so
 
     morte, incerte = set(), set()
+    # L'ELENCO DEL BUCKET, quando c'e' (10/10/2026). Se a lanciarci e' il
+    # downloader, che la chiave di Supabase ce l'ha, ci passa in un file l'elenco
+    # completo del bucket: una richiesta sola, 0,8 s per 797 file. Le HEAD una per
+    # una erano 740 domande in sei fili, e Supabase ne rifiutava 117 con 429 -
+    # piu' di un minuto, e 12 locandine restavano "non controllate". L'elenco viene
+    # dal bucket e non dalla CDN, quindi non ha il problema del cache-buster.
+    # Di notte (GitHub, senza chiave) il file non c'e' e si fa come sempre.
+    elenco = elenco_dal_downloader()
+    if elenco is not None:
+        da_chiedere = [n for n in da_fare if '/' in n]   # sottocartelle: non elencate
+        morte.update(n for n in da_fare if '/' not in n and n not in elenco)
+        print(f"  [locandine: elenco del bucket dal downloader, {len(elenco)} file]")
+    else:
+        da_chiedere = da_fare
     with concurrent.futures.ThreadPoolExecutor(max_workers=quanti_insieme) as ex:
-        for nome, viva in ex.map(c_e, da_fare):
+        for nome, viva in ex.map(c_e, da_chiedere):
             if viva is None:
                 incerte.add(nome)
             elif not viva:
@@ -1857,11 +1900,18 @@ ROMANO_INIZIALE_RE = re.compile(
 
 
 def slug_evento(e):
+    # Chiamata ~1 milione di volte per ~1000 eventi (10/10/2026: 17 s su 129).
+    # Dipende solo da nome e citta', quindi si ricorda.
+    return _slug_evento(e.get('nome') or '', e.get('citta') or '')
+
+
+@functools.lru_cache(maxsize=None)
+def _slug_evento(nome_grezzo, citta_grezza):
     """Slug stabile fra un'edizione e l'altra: togliamo l'anno e il numero di
     edizione dal nome ("40ª Sagra del Guanciotto 2026" -> "sagra-del-guanciotto")
     e aggiungiamo la citta'. Cosi' l'edizione 2027 aggiorna la stessa URL invece
     di crearne una nuova che riparte da zero."""
-    nome = re.sub(r'\b(?:19|20)\d{2}\b', ' ', e.get('nome') or '')
+    nome = re.sub(r'\b(?:19|20)\d{2}\b', ' ', nome_grezzo)
     # Numero di edizione, in tutte le grafie che compaiono nel foglio: 1°, 3ª,
     # 3^, 40ª, 6º, 3a. Va tolto o l'edizione successiva creerebbe una URL nuova
     # invece di aggiornare questa, che è tutto il punto dello slug evergreen.
@@ -1870,7 +1920,7 @@ def slug_evento(e):
     nome = re.sub(r'(?<!\w)\d+a\b', ' ', nome)
     nome = ROMANO_INIZIALE_RE.sub('', nome, count=1)
     base = slugify(nome)
-    citta = slugify(e.get('citta') or '')
+    citta = slugify(citta_grezza)
     if citta and citta not in base:
         base = f"{base}-{citta}"
     base = base.strip('-')[:80].strip('-') or 'evento'
