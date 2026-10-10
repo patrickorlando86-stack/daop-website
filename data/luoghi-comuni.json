@@ -254,6 +254,11 @@
   "n": 1,
   "prov": "AL"
  },
+ "c-al-lu": {
+  "comune": "Lu",
+  "n": 1,
+  "prov": "AL"
+ },
  "c-al-lu-e-cuccaro-monferrato": {
   "comune": "Lu e Cuccaro Monferrato",
   "n": 3,
@@ -926,7 +931,7 @@
  },
  "c-cn-bra": {
   "comune": "Bra",
-  "n": 5,
+  "n": 6,
   "prov": "CN"
  },
  "c-cn-briaglia": {
@@ -1186,7 +1191,7 @@
  },
  "c-cn-mondovi": {
   "comune": "Mondovì",
-  "n": 5,
+  "n": 6,
   "prov": "CN"
  },
  "c-cn-monforte-d-alba": {
@@ -1336,7 +1341,7 @@
  },
  "c-cn-saluzzo": {
   "comune": "Saluzzo",
-  "n": 3,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-sampeyre": {
