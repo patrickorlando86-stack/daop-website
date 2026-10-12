@@ -1,7 +1,7 @@
 {
  "comuni": {
   "al-casale-monferrato": {
-   "n": 1,
+   "n": 16,
    "nome": "Casale Monferrato",
    "slug": "casale-monferrato"
   },
@@ -95,6 +95,11 @@
    "nome": "Mondovì",
    "slug": "mondovi"
   },
+  "cn-monticello-d-alba": {
+   "n": 1,
+   "nome": "Monticello d'Alba",
+   "slug": "monticello-d-alba"
+  },
   "cn-moretta": {
    "n": 8,
    "nome": "Moretta",
@@ -104,6 +109,11 @@
    "n": 1,
    "nome": "Murazzano",
    "slug": "murazzano"
+  },
+  "cn-piobesi-d-alba": {
+   "n": 1,
+   "nome": "Piobesi d'Alba",
+   "slug": "piobesi-d-alba"
   },
   "cn-piozzo": {
    "n": 3,
@@ -127,7 +137,7 @@
   }
  },
  "province": {
-  "AL": 1,
-  "CN": 116
+  "AL": 16,
+  "CN": 118
  }
 }

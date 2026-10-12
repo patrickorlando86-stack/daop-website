@@ -5709,6 +5709,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/corsi-provincia-alessandria.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/corsi-provincia-cuneo.html</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -5775,6 +5781,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/corsi/english-school-training-consulting.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/corsi/federica-robo-tech-lab.html</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
@@ -5818,6 +5830,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/corsi/shorinji-kempo-casale-monferrato.html</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/corsi/sistyoga.html</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
