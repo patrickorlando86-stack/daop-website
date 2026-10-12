@@ -2010,11 +2010,13 @@ CSS_REALTA = """
 /* Il logo nell'intestazione, sopra il nome: una tessera bianca e non
    l'immagine nuda, perche' quasi tutti i loghi arrivano col fondo bianco pieno
    (vedi pagina_realta). object-fit:contain dentro il padding: un logo largo e
-   basso (Kids&Us, 600x242) resta intero e centrato, non si taglia. */
-.cr-logo{display:block;width:96px;height:96px;box-sizing:border-box;padding:8px;
-  margin:6px auto 14px;object-fit:contain;background:#fff;border-radius:18px;
+   basso (Kids&Us, 600x242) resta intero e centrato, non si taglia. Era
+   piccolo (12/10/2026, Patrick): a 96-116px un logo tondo con le scritte
+   intorno (English School) non si leggeva. */
+.cr-logo{display:block;width:140px;height:140px;box-sizing:border-box;padding:6px;
+  margin:6px auto 16px;object-fit:contain;background:#fff;border-radius:22px;
   box-shadow:0 6px 18px rgba(0,0,0,.22)}
-@media(min-width:768px){.cr-logo{width:116px;height:116px;padding:10px}}
+@media(min-width:768px){.cr-logo{width:180px;height:180px;padding:8px;border-radius:26px}}
 .cr-descr{margin:18px 0 0;font-size:1.02rem;line-height:1.65}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
