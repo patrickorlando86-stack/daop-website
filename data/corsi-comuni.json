@@ -1,7 +1,7 @@
 {
  "comuni": {
   "al-casale-monferrato": {
-   "n": 16,
+   "n": 11,
    "nome": "Casale Monferrato",
    "slug": "casale-monferrato"
   },
@@ -137,7 +137,7 @@
   }
  },
  "province": {
-  "AL": 16,
+  "AL": 11,
   "CN": 118
  }
 }
