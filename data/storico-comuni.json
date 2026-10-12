@@ -410,6 +410,17 @@
     "pagina": true,
     "ultima": "2026-10-07"
    },
+   "story-time-kids-us-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Kids&Us Alba",
+    "manifest": "",
+    "nome": "Story Time - Kids&Us Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "the-messy-playroom-kids-us-alba": {
     "anni": [
      2026
@@ -1881,6 +1892,17 @@
  },
  "bernezzo": {
   "eventi": {
+   "la-castagna-a-berness-bernezzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Martiri",
+    "manifest": "La Castagna a Berness 2026",
+    "nome": "La Castagna a Berness 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "sufiarace-pro-loco-bernezzo": {
     "anni": [
      2026
@@ -4698,6 +4720,17 @@
  },
  "cherasco": {
   "eventi": {
+   "castagnata-e-festa-di-inizio-anno-catechistico-a-r-cherasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa della Gioventù",
+    "manifest": "Castagnata e Festa di Inizio Anno Catechistico a Roreto 2026",
+    "nome": "Castagnata e Festa di Inizio Anno Catechistico a Roreto 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   },
    "festa-dei-nonni-e-degli-angeli-custodi-museo-della-cherasco": {
     "anni": [
      2026
@@ -7602,6 +7635,17 @@
     "pagina": true,
     "ultima": "2026-08-29"
    },
+   "mercante-per-un-giorno-comune-di-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cascina Aia",
+    "manifest": "",
+    "nome": "Mercante per un Giorno - Comune di Manta",
+    "organizza": "Comune di Manta",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "sere-fai-d-estate-camminata-sotto-la-luna-al-caste-manta": {
     "anni": [
      2026
@@ -7934,6 +7978,23 @@
   },
   "nome": "Monastero Bormida",
   "prov": "AT"
+ },
+ "monasterolodisavigliano": {
+  "eventi": {
+   "scacco-matto-a-s-d-il-posto-degli-scacchi-monasterolo-di-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Monasterolo di Savigliano",
+    "manifest": "",
+    "nome": "Scacco Matto - A.S.D. Il Posto degli Scacchi",
+    "organizza": "A.S.D. Il Posto degli Scacchi",
+    "pagina": true,
+    "ultima": "2026-10-14"
+   }
+  },
+  "nome": "Monasterolo di Savigliano",
+  "prov": "CN"
  },
  "moncalvo": {
   "eventi": {
@@ -11463,6 +11524,17 @@
  },
  "roburent": {
   "eventi": {
+   "castagnata-roburent": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sangiacomo di Roburent",
+    "manifest": "",
+    "nome": "Castagnata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "fiera-del-buon-gusto-e-della-tradizione-roburent": {
     "anni": [
      2026
@@ -11557,9 +11629,20 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-23"
+   },
+   "la-cultura-a-porte-aperte-al-castello-rocca-de-baldi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Rocca de' Baldi",
+    "manifest": "La Cultura a Porte Aperte al Castello",
+    "nome": "La Cultura a Porte Aperte al Castello",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
    }
   },
-  "nome": "Rocca De' Baldi",
+  "nome": "Rocca de' Baldi",
   "prov": "CN"
  },
  "roccaforteligure": {
@@ -12026,6 +12109,17 @@
  },
  "saluzzo": {
   "eventi": {
+   "castiglia-da-brivido-processo-ad-una-masca-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castiglia di Saluzzo",
+    "manifest": "",
+    "nome": "Castiglia da Brivido - Processo ad una Masca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "chef-challenge-sfida-ai-fornelli-saluzzo": {
     "anni": [
      2026
@@ -12080,6 +12174,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "le-erbe-delle-streghe-musei-saluzzo-itur": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biglietteria della Castiglia",
+    "manifest": "",
+    "nome": "Le erbe delle streghe - Musei Saluzzo / ITUR",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    },
    "mercatino-dei-bambini-saluzzo": {
     "anni": [
@@ -14174,6 +14279,23 @@
   },
   "nome": "Valfenera",
   "prov": "AT"
+ },
+ "valgrana": {
+  "eventi": {
+   "autunno-in-fiera-pro-loco-valgrana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Valgrana",
+    "manifest": "",
+    "nome": "Autunno in Fiera - Pro Loco Valgrana",
+    "organizza": "Pro Loco Valgrana",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   }
+  },
+  "nome": "Valgrana",
+  "prov": "CN"
  },
  "vallepopaesana": {
   "eventi": {
