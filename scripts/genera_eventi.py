@@ -4712,6 +4712,36 @@ def blocco_ora_vicino(rec, events, oggi):
     return sezione, tuple(slug_evento(e) for _, e in scelti)
 
 
+def link_stagione(rec, events, oggi):
+    """Il link alla pagina stagionale da una scheda che parla di quella festa,
+    o ''. Solo nella finestra in cui la pagina si linka (in_stagione), cosi'
+    una scheda di Halloween non rimanda a una pagina vuota a marzo.
+
+    Halloween porta il numero, che e' quello della pagina (feste_halloween):
+    la lezione di link_luoghi(), «22 posti» e' una ragione per toccare. Le
+    altre feste solo il nome, finche' non hanno un conteggio loro in un posto
+    solo."""
+    for st in STAGIONI:
+        if not in_tema(rec, st.chiave) or not in_stagione(st, oggi):
+            continue
+        if st.chiave == 'halloween':
+            # Solo le schede che la pagina elenca (o elencava: una festa di
+            # sabato scorso resta nella finestra). Senza, ci finivano le fiere
+            # della zucca di settembre, che hanno il tema nel titolo e nessun
+            # posto su /halloween.html.
+            _da, notte, a = halloween_range(oggi)
+            di, df = rec.get('d_start') or '', rec.get('d_end') or ''
+            if not (di <= a.isoformat() and df >= halloween_elenco_da(notte).isoformat()):
+                return ''
+            n = len(feste_halloween(events, oggi))
+            if n >= MIN_TEMA:
+                return (f'<a href="{st.href}">Tutte le {n} feste di Halloween '
+                        f'per bambini</a>')
+            return ''
+        return f'<a href="{st.href}">Tutti gli eventi di {esc(st.nome)}</a>'
+    return ''
+
+
 def blocco_vicini(rec, events, oggi, limite=6, hub=None, salta=()):
     """Altri eventi vicini: stessa citta' prima, poi stessa provincia.
 
@@ -4772,6 +4802,16 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None, salta=()):
     # domanda ("cos'altro c'e' qui?") con l'altra meta' della risposta: non un
     # altro evento, un posto dove andare quando eventi non ce ne sono.
     coda = []
+    # La pagina della festa, dal 13/10/2026: le ~35 schede di Halloween non
+    # linkavano /halloween.html, che riceveva link solo dall'indice in fondo
+    # all'agenda e dalle sue tre provinciali (Giovanni: «all'interno del sito
+    # non c'e' nessun rimando»). Sta PRIMA del comune: chi legge una festa di
+    # Halloween cerca le altre feste di Halloween prima degli altri eventi del
+    # paese.
+    if not (rec.get('ritirata') or rec.get('spostata')):
+        ls = link_stagione(rec, events, oggi)
+        if ls:
+            coda.append(ls)
     mio_hub = (hub or {}).get(citta)
     if mio_hub:
         coda.append(f'<a href="/eventi/comune/{mio_hub["slug"]}.html">Tutti gli eventi'
@@ -8715,6 +8755,17 @@ def halloween_elenco_da(notte):
     return datetime.date(notte.year, *HALLOWEEN_ELENCO_DA)
 
 
+def feste_halloween(events, oggi):
+    """Le righe che /halloween.html elenca, in un posto solo: le usano la
+    pagina, l'avviso in home e in cima all'agenda (blocco_stagione) e il link
+    dalle schede (link_stagione). Tre conti separati direbbero tre numeri."""
+    _da, notte, a = halloween_range(oggi)
+    da = halloween_elenco_da(notte)
+    return sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da
+                   and in_tema(e, 'halloween')),
+                  key=lambda e: (e['d_start'], (e.get('citta') or '')))
+
+
 def _finestra_halloween(anno):
     return (datetime.date(anno, *HALLOWEEN_DA),
             datetime.date(anno, 10, 31),
@@ -8786,8 +8837,6 @@ def spec_halloween(st, events, oggi, altre):
     anno = notte.year
     url = f"{SITE_URL}/halloween.html"
     prov = province_in_elenco(PROVINCE_PUBBLICATE)
-    finestra = sorted((e for e in events if e['d_start'] <= a and e['d_end'] >= da),
-                      key=lambda e: (e['d_start'], (e.get('citta') or '')))
     # SOLO HALLOWEEN (23/09/2026). Patrick: «perche' in questa pagina
     # pubblichiamo anche cose non di halloween?». Fino a qui la pagina prendeva
     # tutto quello che era aperto nella finestra, e a fine settembre voleva dire
@@ -8797,7 +8846,7 @@ def spec_halloween(st, events, oggi, altre):
     # linka. Il rischio della pagina magra e' di poche settimane: le locandine di
     # Halloween arrivano a ondate a meta' ottobre (Patrick: "arriveranno
     # tantissime locandine"). Cosa conta come Halloween: TEMI_STAGIONE.
-    finestra = [e for e in finestra if in_tema(e, 'halloween')]
+    finestra = feste_halloween(events, oggi)
     comuni = len({_key(e.get('citta')) for e in finestra if (e.get('citta') or '').strip()})
     poche = len(finestra) < MIN_TEMA
 
@@ -10614,7 +10663,7 @@ STAGIONI = (
              _finestra_ferragosto, apre=35, avviso=9,
              quale="del 14-16 agosto", spec=spec_ferragosto),
     Stagione('halloween', "Halloween", "/halloween.html", "Halloween",
-             _finestra_halloween, apre=24, avviso=5,
+             _finestra_halloween, apre=24, avviso=24,
              quale="dal 25 ottobre al 2 novembre", spec=spec_halloween),
     Stagione('natale', "Natale", "/natale.html", "Natale",
              _finestra_natale, apre=16, avviso=0,
@@ -10677,6 +10726,12 @@ def blocco_stagione(events, oggi):
             continue
         href, nome, quale = st.href, st.nome, st.quale
         quanti = sum(1 for e in events if e['d_start'] <= a and e['d_end'] >= da)
+        if st.chiave == 'halloween':
+            # /halloween.html elenca solo le feste a tema, e dal 10 ottobre: il
+            # conteggio di tutti gli eventi del 25/10-2/11 diceva un numero che
+            # la pagina non mostra.
+            quanti = len(feste_halloween(events, oggi))
+            quale = "per bambini già in programma"
         if quanti < MIN_LANDING:
             return ''
         manca = (centro - oggi).days
@@ -10688,7 +10743,8 @@ def blocco_stagione(events, oggi):
             quando = "è oggi"
         else:
             quando = "è in corso"
-        return (f'<a href="{href}">{nome} {quando}: i {quanti} eventi '
+        cosa = "le {} feste" if st.chiave == 'halloween' else "i {} eventi"
+        return (f'<a href="{href}">{nome} {quando}: {cosa.format(quanti)} '
                 f'{quale} →</a>')
     return ''
 

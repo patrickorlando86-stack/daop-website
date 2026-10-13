@@ -3145,11 +3145,25 @@ codice comune, si estrae allora.
 
 Quello che invece è già condiviso è **come ci si arriva**: `blocco_stagione()`
 legge la tabella `STAGIONI` e stampa la riga in home e in cima all'agenda per la
-stagione attiva (Ferragosto dal 5 agosto, Halloween dal 20 ottobre). Le finestre
+stagione attiva (Ferragosto dal 5 agosto, Halloween dal 1° ottobre). Le finestre
 non si sovrappongono, quindi la prima che risponde vince e non c'è nessuna
-precedenza da decidere. `link_landing()` invece apre prima — dal 1° ottobre per
-Halloween — perché una voce in una riga di scorciatoie costa meno di una riga in
-evidenza.
+precedenza da decidere. `link_landing()` apre dal 1° ottobre per Halloween.
+
+**Halloween dal 13/10/2026 si annuncia per un mese, non per cinque giorni**
+(Giovanni: «all'interno del sito non c'è nessun rimando»). Dal restyling di
+settembre le scorciatoie di `link_landing()` stanno solo nell'indice in fondo
+all'agenda, quindi fino al 20 ottobre `/halloween.html` riceveva link solo da lì
+e dalle sue tre provinciali, mentre la pagina era già piena e prendeva ~15 clic
+al giorno da Google. Due cose:
+
+- **`avviso=24`**: la riga in home e in cima all'agenda parte con il link. Su
+  Halloween la «riga che si impara a non vedere» pesa meno: le feste si spalmano
+  su tutto ottobre (la pagina elenca dal 10).
+- **`link_stagione()` in coda alle schede**, primo della coda: «Tutte le N feste
+  di Halloween per bambini», solo sulle schede che la pagina stessa elenca
+  (`in_tema` + finestra dal 10/10). Il numero viene da `feste_halloween()`, un
+  posto solo per pagina, avviso e link: l'avviso prima contava *tutti* gli
+  eventi del 25/10-2/11, un numero che la pagina non mostra.
 
 #### I mercatini di Natale per provincia — nati il 25/09/2026, vuoti
 
