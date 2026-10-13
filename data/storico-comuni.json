@@ -1308,6 +1308,50 @@
     "pagina": true,
     "ultima": "2026-09-27"
    },
+   "consulenza-educativa-centro-per-le-famiglie-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie",
+    "manifest": "Un ottobre in famiglia",
+    "nome": "Consulenza educativa - Centro per le Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
+   "esperienze-outdoor-centro-per-le-famiglie-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Barolo",
+    "manifest": "Un ottobre in famiglia",
+    "nome": "Esperienze Outdoor - Centro per le Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-22"
+   },
+   "esploriamo-la-citta-centro-per-le-famiglie-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo del Palio",
+    "manifest": "Un ottobre in famiglia",
+    "nome": "Esploriamo la città - Centro per le Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "essere-genitori-che-fatica-centro-per-le-famiglie-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie",
+    "manifest": "Un ottobre in famiglia",
+    "nome": "Essere genitori, che fatica - Centro per le Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "famu-giornata-nazionale-delle-famiglie-al-museo-as-asti": {
     "anni": [
      2026
@@ -1318,6 +1362,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-11"
+   },
+   "festa-di-halloween-centro-per-le-famiglie-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie",
+    "manifest": "Un ottobre in famiglia",
+    "nome": "Festa di Halloween - Centro per le Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
    },
    "festival-delle-quando-e-dove-asti": {
     "anni": [
@@ -1417,6 +1472,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-11"
+   },
+   "massaggio-infantile-a-i-m-i-centro-per-le-famiglie-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie",
+    "manifest": "Un ottobre in famiglia",
+    "nome": "Massaggio infantile A.I.M.I. - Centro per le Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-01"
+   },
+   "non-siamo-d-accordo-conflitti-in-famiglia-centro-p-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie",
+    "manifest": "Un ottobre in famiglia",
+    "nome": "Non siamo d'accordo: conflitti in famiglia - Centro per le Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    },
    "nonni-nipoti-una-mattinata-dedicata-biblioteca-ast-asti": {
     "anni": [
@@ -1935,6 +2012,23 @@
   "nome": "Bistagno",
   "prov": "AL"
  },
+ "borghettoborbera": {
+  "eventi": {
+   "autunnoland-mercatino-d-autunno-borghetto-borbera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Fieristico DOCUP",
+    "manifest": "Autunnoland Mercatino d'Autunno",
+    "nome": "Autunnoland Mercatino d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   }
+  },
+  "nome": "Borghetto Borbera",
+  "prov": "AL"
+ },
  "borghettodiborbera": {
   "eventi": {
    "laboratorio-di-pittura-per-bambini-e-ragazzi-assoc-borghetto-di-borbera": {
@@ -2010,6 +2104,17 @@
  },
  "boscomarengo": {
   "eventi": {
+   "castagne-cioccolata-calda-vin-brule-e-animazione-a-bosco-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Mercato",
+    "manifest": "",
+    "nome": "Castagne, Cioccolata Calda, Vin Brulé e Animazione - A.T. Pro Loco Bosco Marengo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "fiorinchiostro-mostra-mercato-florovivaistica-bosco-marengo": {
     "anni": [
      2026
@@ -2537,6 +2642,17 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "ritroviamoci-con-coccole-storie-buttigliera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale di Buttigliera d'Asti",
+    "manifest": "",
+    "nome": "Ritroviamoci con Coccole & Storie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "sagra-dell-aglio-e-del-tacchino-festa-di-san-berna-buttigliera-d-asti": {
     "anni": [
      2026
@@ -2564,6 +2680,17 @@
     "organizza": "Pro Loco Cabella Ligure",
     "pagina": true,
     "ultima": "2026-08-10"
+   },
+   "festa-d-autunno-cabella-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cabella Ligure centro",
+    "manifest": "Festa d'Autunno",
+    "nome": "Festa d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
    },
    "festa-della-birra-pro-loco-cabella-ligure": {
     "anni": [
@@ -3174,6 +3301,17 @@
  },
  "casalemonferrato": {
   "eventi": {
+   "abbracciati-dalle-storie-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Luzzati",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Abbracciati dalle storie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-15"
+   },
    "anniversario-associazione-tillo-s-smile-casale-monferrato": {
     "anni": [
      2026
@@ -3184,6 +3322,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "bibliobicicletta-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Imbarcadero sul Lungo Po",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Bibliobicicletta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
    },
    "casale-citta-aperta-casale-monferrato": {
     "anni": [
@@ -3218,6 +3367,17 @@
     "pagina": true,
     "ultima": "2026-09-25"
    },
+   "fumettista-per-un-giorno-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Luzzati",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Fumettista per un giorno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "in-viaggio-per-crescere-con-le-storie-nati-per-leg-casale-monferrato": {
     "anni": [
      2026
@@ -3240,6 +3400,17 @@
     "pagina": true,
     "ultima": "2026-10-12"
    },
+   "kocho-farfalle-a-colori-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Marescalchi",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Kochō, Farfalle a colori",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-10"
+   },
    "la-polizia-locale-incontra-i-piccoli-lettori-regol-casale-monferrato": {
     "anni": [
      2026
@@ -3250,6 +3421,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-10"
+   },
+   "laboratorio-da-brivido-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Luzzati",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Laboratorio da Brivido!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-22"
    },
    "laboratorio-orticolo-del-prof-ganora-il-girasole-b-casale-monferrato": {
     "anni": [
@@ -3273,6 +3455,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "origami-farfalla-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Marescalchi",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Origami farfalla",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
+   },
    "spazio-creativita-i-colori-dell-autunno-biblioteca-casale-monferrato": {
     "anni": [
      2026
@@ -3294,6 +3487,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-17"
+   },
+   "teru-teru-bozu-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Marescalchi",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Teru Teru Bozu",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-05"
+   },
+   "un-cane-per-sorridere-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Luzzati",
+    "manifest": "Avventure in biblioteca",
+    "nome": "Un cane per sorridere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-27"
    },
    "vietato-sputare-fuoco-con-ass-penelope-emozioni-pe-casale-monferrato": {
     "anni": [
@@ -3720,6 +3935,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "halloween-pro-loco-di-cassine": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "Halloween - Pro Loco di Cassine",
+    "nome": "Halloween - Pro Loco di Cassine",
+    "organizza": "Pro Loco di Cassine",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Cassine",
@@ -4484,6 +4710,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "the-little-book-club-comune-di-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale Pier Angelo Soldini",
+    "manifest": "",
+    "nome": "The Little Book Club - Comune di Castelnuovo Scrivia",
+    "organizza": "Comune di Castelnuovo Scrivia",
+    "pagina": true,
+    "ultima": "2026-11-30"
    },
    "triangolare-di-calcio-castelnuovo-scrivia": {
     "anni": [
@@ -6946,6 +7183,23 @@
   "nome": "Frassino",
   "prov": "CN"
  },
+ "fresonara": {
+  "eventi": {
+   "festa-d-autunno-pro-loco-fresonara": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Orione",
+    "manifest": "",
+    "nome": "Festa d'Autunno - Pro Loco Fresonara",
+    "organizza": "Pro Loco Fresonara",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   }
+  },
+  "nome": "Fresonara",
+  "prov": "AL"
+ },
  "frinco": {
   "eventi": {
    "frinco": {
@@ -7347,6 +7601,23 @@
   },
   "nome": "Guarene",
   "prov": "CN"
+ },
+ "guazzora": {
+  "eventi": {
+   "halloween-circus-pro-loco-di-guazzora": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Edificio Tagliacarne - Piazza De Giovanni",
+    "manifest": "",
+    "nome": "Halloween Circus - Pro Loco di Guazzora",
+    "organizza": "Pro Loco di Guazzora",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Guazzora",
+  "prov": "AL"
  },
  "isasca": {
   "eventi": {
@@ -12414,6 +12685,17 @@
     "pagina": true,
     "ultima": "2026-08-12"
    },
+   "halloween-in-piazza-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Libertà",
+    "manifest": "Halloween in Piazza",
+    "nome": "Halloween in Piazza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "il-bastone-della-parola-laboratorio-espressivo-san-damiano-d-asti": {
     "anni": [
      2026
@@ -13529,6 +13811,17 @@
     "organizza": "Pro Loco di Silvano d'Orba",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "grande-castagnata-d-autunno-oratorio-di-silvano-d-silvano-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio Don Bosco",
+    "manifest": "",
+    "nome": "Grande Castagnata d'Autunno - Oratorio di Silvano d'Orba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
    },
    "natale-incontrada-silvano-d-orba": {
     "anni": [
@@ -14827,6 +15120,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "halloween-a-villaromagnano-pro-loco-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Giochi Corso Italia",
+    "manifest": "",
+    "nome": "Halloween a Villaromagnano - Pro Loco Villaromagnano",
+    "organizza": "Pro Loco Villaromagnano",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "inaugurazione-mostra-di-pittura-oltre-la-tela-villaromagnano": {
     "anni": [
