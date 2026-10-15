@@ -151,7 +151,14 @@ module.exports = async function cta(browser) {
           alto: innerHeight,
         };
       }, citta);
-      r.ok(s.valore === citta, `?comune=${citta} accende la tendina (vale ${JSON.stringify(s.valore)})`);
+      // Con un comune solo la tendina non si stampa (una voce sola non divide):
+      // allora si chiede che NON ci sia, e il filtro si prova sulle card.
+      const unComune = Object.keys(suePerCitta).length < 2;
+      if (unComune) {
+        r.ok(s.valore == null, `un comune solo in pagina: niente tendina (vale ${JSON.stringify(s.valore)})`);
+      } else {
+        r.ok(s.valore === citta, `?comune=${citta} accende la tendina (vale ${JSON.stringify(s.valore)})`);
+      }
       r.ok(s.visibili === s.diQuelComune && s.estranei === 0 && s.visibili > 0,
         `restano le ${s.diQuelComune} card di ${citta}: visibili ${s.visibili}, di altri comuni ${s.estranei}`);
       r.ok(s.conteggio.startsWith(String(s.diQuelComune) + ' '),
@@ -166,7 +173,7 @@ module.exports = async function cta(browser) {
         valore: (document.querySelector('[data-campo="citta"]') || {}).value,
         nascoste: document.querySelectorAll('.event-card.is-hidden').length,
       }));
-      r.ok(t.valore === 'all' && t.nascoste === 0,
+      r.ok((unComune ? t.valore === undefined : t.valore === 'all') && t.nascoste === 0,
         `un comune sconosciuto apre la pagina intera (tendina ${JSON.stringify(t.valore)}, ${t.nascoste} nascoste)`);
       await b.ctx.close();
     } else {
