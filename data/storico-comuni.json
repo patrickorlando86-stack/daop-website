@@ -1616,6 +1616,17 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "taniween-dolcetto-o-scherzetto-per-le-vie-del-borg-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede del Borgo Tanaro",
+    "manifest": "",
+    "nome": "Taniween - Dolcetto o Scherzetto per le Vie del Borgo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "torneo-di-scacchi-aperto-a-tutti-comitato-di-asti": {
     "anni": [
      2026
@@ -2053,6 +2064,17 @@
  },
  "borghettodiborbera": {
   "eventi": {
+   "autunnoland-mercatino-d-autunno-borghetto-di-borbera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Fieristico DOCUP",
+    "manifest": "Autunnoland Mercatino d'Autunno",
+    "nome": "Autunnoland Mercatino d'Autunno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "laboratorio-di-pittura-per-bambini-e-ragazzi-assoc-borghetto-di-borbera": {
     "anni": [
      2026
@@ -5453,6 +5475,23 @@
   },
   "nome": "Confreria - Cuneo",
   "prov": "CN"
+ },
+ "corsione": {
+  "eventi": {
+   "pije-en-castagna-corsione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza IV Novembre",
+    "manifest": "Pijé ën Castagna!",
+    "nome": "Pijé ën Castagna!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   }
+  },
+  "nome": "Corsione",
+  "prov": "AT"
  },
  "cortazzone": {
   "eventi": {
