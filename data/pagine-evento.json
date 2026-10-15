@@ -13124,6 +13124,34 @@
   "slug": "govone-in-festa-sagra-della-lumaca",
   "updated": "2026-10-15"
  },
+ "gran-castagnata-al-parco-dell-ingenio-busca": {
+  "anchor": "ev-2026-11-08-gran-castagnata-al-parco-dell-ingenio",
+  "categoria": "Sagra & Festa",
+  "citta": "Busca",
+  "consigliato": "No",
+  "contatto": "333 84580013",
+  "d_end": "2026-11-08",
+  "d_start": "2026-11-08",
+  "descr": "Al Parco dell'Ingenio domenica 8 novembre va in scena la Gran Castagnata, una festa autunnale all'aria aperta pensata per famiglie e bambini. Nel pomeriggio si parte con laboratori creativi e attività manuali per i più piccoli, per poi lasciar spazio a caldarroste, vin brulè e musica dal vivo. L'ingresso è gratuito, ma è obbligatorio prenotare entro il 3 novembre al numero indicato. Programma: Laboratori per i bambini - Associazione Ingenium (15:00); Gran Festa con Caldarroste, Vin Brulè e Musica - Associazione Ingenium (16:30).",
+  "df": "08/11/2026",
+  "di": "08/11/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-15",
+  "indirizzo": "Viale Monsignor Leone Ossola 1, Busca",
+  "last_seen": "2026-10-15",
+  "lat": "44.5296207",
+  "loc": "daop_cuneo_4007151774752917138.webp",
+  "lon": "7.4682821",
+  "luogo": "Parco dell'Ingenio",
+  "manifest": "Gran Castagnata al Parco dell'Ingenio",
+  "nome": "Gran Castagnata al Parco dell'Ingenio",
+  "ora": "vari",
+  "prezzo": "Gratuito",
+  "prov": "CN",
+  "riga": 327,
+  "slug": "gran-castagnata-al-parco-dell-ingenio-busca",
+  "updated": "2026-10-15"
+ },
  "gran-castagnata-al-parco-dell-ingenio-evento": {
   "anchor": "ev-2026-11-08-gran-castagnata-al-parco-dell-ingenio",
   "categoria": "Sagra & Festa",
@@ -13148,6 +13176,7 @@
   "prov": "CN",
   "riga": 327,
   "slug": "gran-castagnata-al-parco-dell-ingenio-evento",
+  "spostata": "gran-castagnata-al-parco-dell-ingenio-busca",
   "updated": "2026-10-15"
  },
  "gran-fritto-misto-pro-loco-sant-albano-stura": {

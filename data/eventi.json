@@ -5240,7 +5240,7 @@
   "di": "08/11/2026",
   "df": "08/11/2026",
   "ora": "vari",
-  "citta": "",
+  "citta": "Busca",
   "prov": "CN",
   "categoria": "Sagra & Festa",
   "eta": "Tutte le età (famiglie)",
@@ -5249,11 +5249,13 @@
   "manifest": "Gran Castagnata al Parco dell'Ingenio",
   "loc": "daop_cuneo_4007151774752917138.webp",
   "luogo": "Parco dell'Ingenio",
-  "indirizzo": "Parco dell'Ingenio",
+  "indirizzo": "Viale Monsignor Leone Ossola 1, Busca",
   "d_start": "2026-11-08",
   "d_end": "2026-11-08",
   "contatto": "333 84580013",
   "consigliato": "No",
+  "lat": "44.5296207",
+  "lon": "7.4682821",
   "anchor": "ev-2026-11-08-gran-castagnata-al-parco-dell-ingenio"
  },
  {
