@@ -589,6 +589,17 @@
     "pagina": true,
     "ultima": "2026-10-10"
    },
+   "aspettando-halloween-yo-yo-active-play-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Yo Yo Active Play",
+    "manifest": "",
+    "nome": "Aspettando Halloween - Yo Yo Active Play",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "buen-camino-alessandria": {
     "anni": [
      2026
@@ -742,6 +753,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "giocare-per-crescere-giochi-motori-e-creativi-yo-y-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Savonarola 16",
+    "manifest": "",
+    "nome": "Giocare per Crescere - Giochi Motori e Creativi - Yo-Yo Active Play",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    },
    "halloween-party-inaugurazione-stagione-27-iceinlin-alessandria": {
     "anni": [
@@ -2204,6 +2226,17 @@
     "pagina": true,
     "ultima": "2026-10-29"
    },
+   "boves-stregata": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "Boves Stregata 2026",
+    "nome": "Boves Stregata 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "favolando-boves": {
     "anni": [
      2026
@@ -2214,6 +2247,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-28"
+   },
+   "mani-che-creano-laboratorio-di-presepi-per-adulti-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo della Castagna - Cascina Marquet",
+    "manifest": "Mani che creano",
+    "nome": "Mani che creano - Laboratorio di presepi per adulti (giovedì)",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-22"
+   },
+   "mani-che-creano-laboratorio-di-presepi-per-bambini-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo della Castagna - Cascina Marquet",
+    "manifest": "Mani che creano",
+    "nome": "Mani che creano - Laboratorio di presepi per bambini e ragazzi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
    },
    "minichef-con-elena-boves": {
     "anni": [
@@ -2509,6 +2564,17 @@
  },
  "busca": {
   "eventi": {
+   "apertura-settimanale-ludoteca-bim-bum-bam-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ludoteca Bim Bum Bam",
+    "manifest": "",
+    "nome": "Apertura settimanale - Ludoteca Bim Bum Bam",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-20"
+   },
    "busca-comics-games-associazione-ingenium-a-p-s": {
     "anni": [
      2026
@@ -2530,6 +2596,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-16"
+   },
+   "festa-di-apertura-ludoteca-bim-bum-bam-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ludoteca Bim Bum Bam",
+    "manifest": "",
+    "nome": "Festa di Apertura - Ludoteca Bim Bum Bam",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    },
    "festa-patronale-san-chiaffredo-busca": {
     "anni": [
@@ -2976,6 +3053,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-01"
+   },
+   "festa-di-halloween-in-via-brofferio-caraglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Brofferio",
+    "manifest": "",
+    "nome": "Festa di Halloween in via Brofferio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "quarantottesima-fiera-d-autunno-sagra-gnocchi-al-c-caraglio": {
     "anni": [
@@ -3524,6 +3612,23 @@
   },
   "nome": "Casale Monferrato",
   "prov": "AL"
+ },
+ "casalgrasso": {
+  "eventi": {
+   "festa-di-halloween-bambini-in-maschera-a-casalgras-casalgrasso": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casalgrasso",
+    "manifest": "Festa di Halloween - Bambini in Maschera",
+    "nome": "Festa di Halloween - Bambini in Maschera a Casalgrasso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-27"
+   }
+  },
+  "nome": "Casalgrasso",
+  "prov": "CN"
  },
  "casalnoceto": {
   "eventi": {
@@ -6032,6 +6137,17 @@
     "pagina": true,
     "ultima": "2026-08-29"
    },
+   "laboratorio-creativo-di-halloween-ritratti-di-fami-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Libreria per bambini e ragazzi STORIE",
+    "manifest": "",
+    "nome": "Laboratorio Creativo di Halloween - Ritratti di Famiglia... da Paura! - Lipani",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "mio-tuo-nostro-pandemonium-teatro-cuneo": {
     "anni": [
      2026
@@ -6835,6 +6951,17 @@
  },
  "ferrere": {
   "eventi": {
+   "ferrere-imiele": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Comune",
+    "manifest": "Ferrere IMiele 2026",
+    "nome": "Ferrere IMiele 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "festa-patronale-di-sant-agostino-pro-loco-ferrere": {
     "anni": [
      2026
@@ -7033,6 +7160,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "laboratorio-creativo-di-halloween-ritratti-di-fami-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Villaggio Sportivo VISPO",
+    "manifest": "",
+    "nome": "Laboratorio Creativo di Halloween - Ritratti di Famiglia da Paura! - Lipani di Francesca Rolando",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    },
    "laboratorio-di-halloween-centro-famiglie-fossano": {
     "anni": [
@@ -8106,6 +8244,17 @@
  },
  "mirabellomonferrato": {
   "eventi": {
+   "castagnata-a-mirabello-m-to-mirabello-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio di Mirabello M.to",
+    "manifest": "",
+    "nome": "Castagnata a Mirabello M.to",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "festa-inizio-anno-oratoriano-mirabello-monferrato": {
     "anni": [
      2026
@@ -8207,6 +8356,17 @@
  },
  "mombercelli": {
   "eventi": {
+   "fiera-nazionale-del-tartufo-bianco-di-mombercelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Alfieri",
+    "manifest": "45° Fiera Nazionale del Tartufo Bianco di Mombercelli",
+    "nome": "45° Fiera Nazionale del Tartufo Bianco di Mombercelli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
+   },
    "rewined-festival-mombercelli": {
     "anni": [
      2026
@@ -8290,6 +8450,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-03"
+   },
+   "fiera-nazionale-del-tartufo-moncalvo-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazze centrali e Antichi Portici",
+    "manifest": "72a Fiera Nazionale del Tartufo Moncalvo Monferrato",
+    "nome": "72a Fiera Nazionale del Tartufo Moncalvo Monferrato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
    }
   },
   "nome": "Moncalvo",
@@ -9161,6 +9332,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "festa-di-halloween-bambini-in-maschera-a-moretta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Moretta",
+    "manifest": "Festa di Halloween - Bambini in Maschera",
+    "nome": "Festa di Halloween - Bambini in Maschera a Moretta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
    },
    "serata-genitori-helen-doron-saluzzese-moretta": {
     "anni": [
@@ -10277,6 +10459,28 @@
     "pagina": false,
     "ultima": "2026-08-08"
    },
+   "la-festa-di-halloween-passeggiata-nel-bosco-merend-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pian Muné",
+    "manifest": "",
+    "nome": "La Festa di Halloween - Passeggiata nel Bosco + Merenda Mostruosa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   },
+   "le-notti-di-halloween-nel-bosco-della-trebulina-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco della Trebulina - Pian Muné",
+    "manifest": "Le Notti di Halloween nel Bosco della Trebulina",
+    "nome": "Le Notti di Halloween nel Bosco della Trebulina",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "marmotte-adventure-laboratori-di-pian-mune-paesana": {
     "anni": [
      2026
@@ -10444,6 +10648,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "la-castagnata-pro-loco-giuseppe-borsalino-aps-pecetto-di-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo Pecetto di Valenza",
+    "manifest": "",
+    "nome": "La Castagnata - Pro Loco Giuseppe Borsalino APS",
+    "organizza": "Pro Loco Giuseppe Borsalino APS",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "la-piazza-di-pecetto-festival-di-libri-e-cultura-pecetto-di-valenza": {
     "anni": [
      2026
@@ -10515,6 +10730,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-09"
+   },
+   "masche-puca-e-sarvanot-peveragno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale di Peveragno",
+    "manifest": "",
+    "nome": "Masche, Puca e Sarvanòt",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-17"
    }
   },
   "nome": "Peveragno",
@@ -10753,6 +10979,23 @@
    }
   },
   "nome": "Piozzo",
+  "prov": "CN"
+ },
+ "polonghera": {
+  "eventi": {
+   "halloween-party-festa-di-halloween-pro-loco-polong-polonghera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pro Loco Polonghera",
+    "manifest": "",
+    "nome": "Halloween Party - Festa di Halloween - Pro Loco Polonghera",
+    "organizza": "Pro Loco Polonghera",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Polonghera",
   "prov": "CN"
  },
  "pontechianale": {
@@ -12949,6 +13192,23 @@
   "nome": "San Giorgio Scarampi",
   "prov": "AT"
  },
+ "sangiulianovecchio": {
+  "eventi": {
+   "halloween-ad-hogwarts-soms-di-san-giuliano-vecchio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone SOMS",
+    "manifest": "",
+    "nome": "Halloween ad Hogwarts - SOMS di San Giuliano Vecchio ETS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   }
+  },
+  "nome": "San Giuliano Vecchio",
+  "prov": "AL"
+ },
  "sanmartinoalfieri": {
   "eventi": {
    "la-mia-divina-commedia-associazione-culturale-per-san-martino-alfieri": {
@@ -14637,6 +14897,17 @@
  },
  "venasca": {
   "eventi": {
+   "apertura-mensile-la-fabbrica-dei-suoni-venasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Fabbrica dei Suoni",
+    "manifest": "",
+    "nome": "Apertura Mensile La Fabbrica dei Suoni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-18"
+   },
    "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-venasca": {
     "anni": [
      2026
