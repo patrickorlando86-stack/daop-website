@@ -7700,6 +7700,17 @@ su una pagina finta scritta dentro lo script, quindi gira anche nei giorni in cu
 il foglio non si legge. Poi guarda i PDF veri, se ci sono — e che manchino non è
 un errore: senza date nel foglio nessuna guida nasce, ed è voluto.
 
+**«Campo mancante "offers"» non si insegue nel codice** (email di Search
+Console del 14/10/2026, problema non critico). `event_jsonld()` mette `offers`
+solo quando il prezzo è noto: gratuito, oppure una cifra con € accanto. Al
+16/10 restano senza 93 righe su 305, cioè 362 `Event` su 1.580 contando le
+schede: 78 dicono «Non indicato», 10 «A pagamento (da verificare)», 3 sono
+vuote, 2 «offerta libera». Non ci sono rimedi lato codice. Un `Offer` senza `price`
+sposta l'avviso su «price mancante», e una cifra inventata è un dato
+strutturato falso, cioè un rischio per il dominio invece di un suggerimento.
+Il rich result non cambia: `offers` è consigliato, non obbligatorio. Si chiude
+solo dal foglio, scrivendo il prezzo quando la locandina lo dice.
+
 `valida_jsonld.py` legge l'HTML: vede i dati strutturati, non il JavaScript.
 Riferimento all'11/08/2026: 289 pagine, 532 Event, 8 avvisi noti, 0 errori.
 

@@ -1682,8 +1682,11 @@ def event_jsonld(e, url_override=None):
         obj["description"] = descr
 
     # offers: includiamo price + priceCurrency + validFrom (richiesti per un'offerta valida).
-    # Per gli eventi "a pagamento" senza una cifra nota omettiamo offers, così da non
-    # generare un'offerta incompleta (causa degli avvisi di Search Console).
+    # Senza una cifra nota ("Non indicato", "A pagamento (da verificare)") offers
+    # si omette. Search Console lo segnala come «Campo mancante "offers"», non
+    # critico (email del 14/10/2026): e' voluto. Un'offerta senza price darebbe
+    # «price mancante» al posto suo, e una cifra inventata sarebbe un dato
+    # strutturato falso. Si chiude solo scrivendo il prezzo nel foglio.
     if e_gratuito(e):
         price = "0"
         obj["isAccessibleForFree"] = True
