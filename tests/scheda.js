@@ -106,7 +106,11 @@ module.exports = async function scheda(browser) {
       conProgramma++;
       // 3. il marcatore diventa l'intestazione: se resta scritto "Programma:"
       // in mezzo al testo vuol dire che una parte non e' stata riconosciuta.
-      if (/Programma:/i.test(corpo)) marcatore.push(f);
+      // Il marcatore e' quello di PROG_MARCA in genera_eventi.py: apre una
+      // frase. "In programma: apertura fiera..." e' prosa, non un marcatore
+      // (Ferrere IMiele, 16/10/2026: la prova era rossa su una pagina giusta).
+      const testoCorpo = corpo.replace(/<[^>]+>/g, ' ');
+      if (/(?:^|[.!?])\s*Programma:/i.test(testoCorpo)) marcatore.push(f);
       if (/<div class="ev-prog-g">\s*<ul/.test(corpo)) senzaData = senzaData || f;
       else conData = conData || f;
     }

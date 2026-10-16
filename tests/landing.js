@@ -473,7 +473,9 @@ module.exports = async function landing(browser) {
     r.ok(await page.evaluate((c) =>
       [...document.querySelectorAll('.ev-wrap li[data-category]:not([hidden])')]
         .every((l) => l.dataset.category === c), cat), 'restano solo le righe della categoria scelta');
-    r.ok(/\d+ eventi? con questi filtri/.test(await page.textContent('#lan-count')),
+    // "1 evento" al singolare: con "eventi?" la prova era rossa i giorni in cui
+    // il filtro lasciava una riga sola (12 e 14/10/2026, "feste: 1/18").
+    r.ok(/\d+ event[oi] con questi filtri/.test(await page.textContent('#lan-count')),
       'il conteggio compare quando si filtra');
     r.ok(await page.$eval('#lan-tipo', (s) => s.classList.contains('is-on')),
       'la tendina attiva si evidenzia');
@@ -1034,7 +1036,7 @@ module.exports = async function landing(browser) {
 
     // Il conteggio della pagina deve accorgersi del raggio: prima contava solo
     // ricerca e tendine, e con il solo raggio attivo sarebbe restato muto.
-    r.ok(/\d+ eventi? con questi filtri/.test(await page.textContent('#lan-count')),
+    r.ok(/\d+ event[oi] con questi filtri/.test(await page.textContent('#lan-count')),
       'il conteggio della pagina considera anche il raggio');
 
     // I gradini contano dentro gli altri filtri, non sul totale della pagina.
