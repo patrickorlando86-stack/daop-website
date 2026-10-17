@@ -30,3 +30,9 @@ Note:
   l'immagine generica `headerdaop.jpg`).
 - I centri estivi hanno un controllo in più: se il nome scritto nel foglio non
   esiste nel bucket, la scheda esce senza immagine invece che con una foto rotta.
+
+**L'eccezione: `assets/locandine/`** (17/10/2026). Una locandina che va
+sostituita quando dal PC non si può caricare nel bucket (il rinvio del Mercante
+per un Giorno di Manta, mandato da Giovanni). Sta in git e nel foglio la
+colonna `Locandina` ha l'URL completo `https://www.daop.it/assets/locandine/...`.
+È una via d'emergenza, non la strada: ogni file qui resta nei blob per sempre.
