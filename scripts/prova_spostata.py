@@ -224,9 +224,20 @@ ok("fuori dalla sitemap", CAVIA not in sitemap)
 # comune puo' comparire solo come dato - indirizzo, mappa, descrizione.
 vecchia_citta = (reg_vero[CAVIA].get("citta") or "").strip()
 nome_cavia = (reg_vero[CAVIA].get("nome") or "").strip()
+#
+# Il nome va tolto anche TRONCATO: nel <title>, in og:title e in twitter:title
+# esce accorciato con i puntini ("A Calosso Museo e Dintorni - Fiera del…"), e
+# la forma intera li' non c'e' (18/10/2026, stessa prova rossa per la stessa
+# ragione, con la cavia "A Calosso Museo e Dintorni"). Si tolgono i prefissi
+# del nome seguiti da "…", dal piu' lungo: solo quelli, non il <title> intero,
+# che se un giorno tornasse a dire "a Calosso" sarebbe proprio il difetto.
+troncati = []
+for n in range(len(nome_cavia), 0, -1):
+    pezzo = nome_cavia[:n].rstrip()
+    troncati += [g.esc(pezzo) + "…", pezzo + "…"]
 residuo = vecchia
-for legittimo in (g.esc(nome_cavia), nome_cavia, NUOVO, CAVIA):
-    if legittimo:
+for legittimo in (g.esc(nome_cavia), nome_cavia, *troncati, NUOVO, CAVIA):
+    if legittimo and legittimo != "…":
         residuo = residuo.replace(legittimo, "")
 ok(f"il comune sbagliato ({vecchia_citta}) non compare piu' come dato",
    vecchia_citta.lower() not in residuo.lower())
