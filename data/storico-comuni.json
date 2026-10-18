@@ -763,7 +763,7 @@
     "nome": "Giocare per Crescere - Giochi Motori e Creativi - Yo-Yo Active Play",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-10-17"
+    "ultima": "2026-11-21"
    },
    "halloween-party-inaugurazione-stagione-27-iceinlin-alessandria": {
     "anni": [
@@ -2092,6 +2092,17 @@
  },
  "borgorattoalessandrino": {
   "eventi": {
+   "la-castagnata-pro-loco-borgoratto-borgoratto-alessandrino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roma",
+    "manifest": "",
+    "nome": "La Castagnata - Pro Loco Borgoratto",
+    "organizza": "Pro Loco Borgoratto",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "pigiama-run-pro-loco-borgoratto-borgoratto-alessandrino": {
     "anni": [
      2026
