@@ -655,6 +655,28 @@
     "pagina": false,
     "ultima": "2026-09-19"
    },
+   "cinemini-alessandria-film-festival": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spazio YGGDRA",
+    "manifest": "",
+    "nome": "Cinemini - Alessandria Film Festival",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "citta-a-misura-di-bambino-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ordine degli Architetti della Provincia di Alessandria",
+    "manifest": "",
+    "nome": "Città a misura di bambino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "concerto-benefico-sanremo-junior-i-banditi-di-rocc-alessandria": {
     "anni": [
      2026
@@ -1290,6 +1312,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "zampetta-o-scherzetto-arquata-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area SOMS",
+    "manifest": "Zampetta o Scherzetto?",
+    "nome": "Zampetta o Scherzetto?",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Arquata Scrivia",
@@ -1648,6 +1681,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "viatosto-si-tinge-di-halloween-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Borgo Viatosto",
+    "manifest": "",
+    "nome": "Viatosto si tinge di Halloween",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Asti",
@@ -1686,6 +1730,23 @@
   },
   "nome": "Bagnolo Piemonte",
   "prov": "CN"
+ },
+ "baldichieri": {
+  "eventi": {
+   "inaugurazione-asilo-nido-una-favola-blu-tra-sogno-baldichieri": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Asilo Nido Una Favola Blu",
+    "manifest": "",
+    "nome": "Inaugurazione Asilo Nido Una Favola Blu - Tra Sogno e Realtà",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Baldichieri",
+  "prov": "AT"
  },
  "baldichieridasti": {
   "eventi": {
@@ -5572,6 +5633,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-06"
+   },
+   "halloween-magico-a-cortiglione-caccia-al-tesoro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Circolo Ricreativo Cortiglionese",
+    "manifest": "",
+    "nome": "Halloween Magico a Cortiglione - Caccia al Tesoro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Cortiglione",
@@ -7333,6 +7405,28 @@
     "pagina": true,
     "ultima": "2026-10-07"
    },
+   "brividi-di-carta-halloween-e-alle-porte-art-lab-francavilla-bisio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Società",
+    "manifest": "",
+    "nome": "Brividi di Carta, Halloween è... alle Porte - Art&Lab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
+   "festa-di-halloween-non-aprite-quella-porta-francavilla-bisio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Lubiano",
+    "manifest": "",
+    "nome": "Festa di Halloween - Non Aprite Quella Porta!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "pronti-ad-essere-intortati-scuola-primaria-di-fran-francavilla-bisio": {
     "anni": [
      2026
@@ -7442,6 +7536,23 @@
    }
   },
   "nome": "Frugarolo",
+  "prov": "AL"
+ },
+ "gabiano": {
+  "eventi": {
+   "halloween-dei-bambini-pro-loco-gabiano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Pro Loco Gabiano",
+    "manifest": "",
+    "nome": "Halloween dei Bambini - Pro Loco Gabiano",
+    "organizza": "Pro Loco Gabiano",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Gabiano",
   "prov": "AL"
  },
  "gaiola": {
@@ -7848,6 +7959,17 @@
  },
  "isoladasti": {
   "eventi": {
+   "autunno-pauroso-biblioteca-comunale-di-isola-d-ast-isola-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale di Isola d'Asti",
+    "manifest": "",
+    "nome": "Autunno Pauroso - Biblioteca Comunale di Isola d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "estate-in-frazione-palco-a-sorpresa-con-i-fuori-di-isola-d-asti": {
     "anni": [
      2026
@@ -9661,6 +9783,17 @@
     "pagina": true,
     "ultima": "2026-11-26"
    },
+   "libri-in-nizza-super-umani-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Foro Boario",
+    "manifest": "Libri in Nizza 2026 - Super Umani",
+    "nome": "Libri in Nizza 2026 - Super Umani",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "nizza-e-sport-pro-loco-nizza-monferrato": {
     "anni": [
      2026
@@ -9898,6 +10031,17 @@
     "organizza": "Associazione Culturale Laboratori d'Arte",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "dolcetto-o-scherzetto-la-grande-festa-dei-bambini-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Androne di Palazzo Dellepiane",
+    "manifest": "Dolcetto o Scherzetto? La Grande Festa dei Bambini",
+    "nome": "Dolcetto o Scherzetto? La Grande Festa dei Bambini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "dolci-terre-speciale-cioccolato-edizione-novi-ligure": {
     "anni": [
@@ -10299,6 +10443,45 @@
   },
   "nome": "Ormea",
   "prov": "CN"
+ },
+ "orsarabormida": {
+  "eventi": {
+   "festa-patronale-di-san-martino-orsara-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzale Alpini",
+    "manifest": "Festa Patronale di San Martino",
+    "nome": "Festa Patronale di San Martino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
+   "notte-di-halloween-pro-loco-orsara-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Struttura della Pro Loco",
+    "manifest": "Notte di Halloween - Pro Loco Orsara Bormida",
+    "nome": "Notte di Halloween - Pro Loco Orsara Bormida",
+    "organizza": "Pro Loco Orsara Bormida",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "tradizionale-raviolata-trattoria-quattro-ruote-orsara-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Trattoria Quattro Ruote",
+    "manifest": "Festa Patronale di San Martino",
+    "nome": "Tradizionale Raviolata - Trattoria Quattro Ruote",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-11"
+   }
+  },
+  "nome": "Orsara Bormida",
+  "prov": "AL"
  },
  "osasco": {
   "eventi": {
@@ -11957,6 +12140,23 @@
   "nome": "Racconigi",
   "prov": "CN"
  },
+ "refrancore": {
+  "eventi": {
+   "festa-dei-ceci-shopping-a-gogo-pro-loco-refrancore": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Umberto I",
+    "manifest": "",
+    "nome": "Festa dei Ceci & Shopping à Gogo - Pro Loco Refrancore",
+    "organizza": "Pro Loco Refrancore",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   }
+  },
+  "nome": "Refrancore",
+  "prov": "AT"
+ },
  "revello": {
   "eventi": {
    "caccia-ai-tesori-arancioni-revello": {
@@ -12938,6 +13138,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "vediamoci-al-parco-centro-per-le-famiglie-villa-zu-san-cristoforo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco del Castello",
+    "manifest": "",
+    "nome": "Vediamoci al Parco - Centro per le Famiglie Villa Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-19"
    }
   },
   "nome": "San Cristoforo",
@@ -13378,6 +13589,17 @@
     "organizza": "Pro Loco Sanse",
     "pagina": true,
     "ultima": "2026-08-12"
+   },
+   "halloween-san-sebastiano-curone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ponte Vecchio",
+    "manifest": "Halloween 2026 - San Sebastiano Curone",
+    "nome": "Halloween 2026 - San Sebastiano Curone",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
    },
    "il-borgo-diventa-osteria-edizione-san-sebastiano-curone": {
     "anni": [
@@ -14037,6 +14259,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-18"
+   },
+   "halloween-a-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Villa Caffarena",
+    "manifest": "Halloween a Serravalle Scrivia 2026",
+    "nome": "Halloween a Serravalle Scrivia 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia": {
     "anni": [
@@ -14799,6 +15032,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-15"
+   },
+   "fiera-nazionale-del-tartufo-bianco-trisobbio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico e Castello",
+    "manifest": "21ª Fiera Nazionale del Tartufo Bianco Trisobbio 2026",
+    "nome": "21ª Fiera Nazionale del Tartufo Bianco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
    }
   },
   "nome": "Trisobbio",
@@ -14900,6 +15144,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-30"
+   },
+   "sagra-del-bollito-valfenera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Sportivo Palabollito",
+    "manifest": "26ª Sagra del Bollito - Valfenera",
+    "nome": "26ª Sagra del Bollito - Valfenera",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    }
   },
   "nome": "Valfenera",
