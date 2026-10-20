@@ -333,6 +333,39 @@
     "pagina": false,
     "ultima": "2026-09-15"
    },
+   "halloween-in-libreria-la-bookeria-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Bookeria",
+    "manifest": "",
+    "nome": "Halloween in Libreria! - La Bookeria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
+   },
+   "halloween-party-ginnastica-ritmica-victoria-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Impianto Sportivo Vaccheria",
+    "manifest": "",
+    "nome": "Halloween Party 2026 - Ginnastica Ritmica Victoria Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
+   "halloween-party-reticoli-aps-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Giovanni",
+    "manifest": "",
+    "nome": "Halloween Party - Reticoli APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "il-libro-della-buonanotte-storie-per-bambine-e-bam-alba": {
     "anni": [
      2026
@@ -354,6 +387,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "la-paura-fa-halloween-in-biblioteca-e-in-museo-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Civico",
+    "manifest": "La Paura Fa... Halloween in Biblioteca e in Museo",
+    "nome": "La Paura Fa... Halloween in Biblioteca e in Museo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "musica-maestro-libreria-marameo-alba": {
     "anni": [
@@ -1494,6 +1538,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "halloween-al-parco-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Emanuele Pastrone",
+    "manifest": "Halloween al Parco",
+    "nome": "Halloween al Parco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
    },
    "humana-foresta-compagnia-teatrale-petra-asti": {
     "anni": [
@@ -2734,6 +2789,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "sulle-note-di-halloween-laboratorio-musicale-1-3-a-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Studio Ciravegna",
+    "manifest": "",
+    "nome": "Sulle Note di Halloween - Laboratorio Musicale 1/3 anni - Studio Ciravegna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "sulle-note-di-halloween-laboratorio-musicale-3-5-a-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Studio Ciravegna",
+    "manifest": "",
+    "nome": "Sulle Note di Halloween - Laboratorio Musicale 3/5 anni - Studio Ciravegna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "vi-racconto-una-bella-storia-busca": {
     "anni": [
@@ -6039,6 +6116,17 @@
     "pagina": true,
     "ultima": "2026-09-27"
    },
+   "brif-bruf-braf-laboratorio-di-lettura-e-creativo-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca 0-18 di Cuneo",
+    "manifest": "",
+    "nome": "Brif Bruf Braf - Laboratorio di Lettura e Creativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-20"
+   },
    "caccia-al-tesoro-della-citta-dei-talenti-cuneo": {
     "anni": [
      2026
@@ -6281,6 +6369,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "laboratorio-halloween-il-melograno-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa delle Generazioni",
+    "manifest": "",
+    "nome": "Laboratorio Halloween - Il Melograno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "mio-tuo-nostro-pandemonium-teatro-cuneo": {
     "anni": [
      2026
@@ -6468,6 +6567,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "una-festa-per-le-nonne-e-i-nonni-cerchiamoci-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Nido Girasoli",
+    "manifest": "",
+    "nome": "Una Festa per le Nonne e i Nonni - Cerchiamoci",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-21"
+   },
    "vita-da-api-parco-fluviale-gesso-e-stura-cuneo": {
     "anni": [
      2026
@@ -6595,6 +6705,17 @@
     "organizza": "Pro Loco Dogliani Castello",
     "pagina": true,
     "ultima": "2026-08-08"
+   },
+   "halloween-in-contrada-dogliani": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Gorizia",
+    "manifest": "Halloween in Contrada",
+    "nome": "Halloween in Contrada",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "san-lorenzo-celso-dogliani": {
     "anni": [
@@ -7007,6 +7128,23 @@
    }
   },
   "nome": "Entraque",
+  "prov": "CN"
+ },
+ "envie": {
+  "eventi": {
+   "castagnata-mercatino-edizione-envie": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "Castagnata Mercatino - 23ª edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   }
+  },
+  "nome": "Envie",
   "prov": "CN"
  },
  "fabbricacurone": {
@@ -8119,6 +8257,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "storie-da-brividino-letture-e-disegni-da-colorare-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca e Museo dello Sci di Limone Piemonte",
+    "manifest": "",
+    "nome": "Storie da Brividino - Letture e Disegni da Colorare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Limone Piemonte",
@@ -8157,6 +8306,23 @@
   },
   "nome": "Lunassi",
   "prov": "AL"
+ },
+ "macra": {
+  "eventi": {
+   "valle-stregata-edizione-macra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "Valle Stregata 2ª Edizione",
+    "nome": "Valle Stregata 2ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   }
+  },
+  "nome": "Macra",
+  "prov": "CN"
  },
  "maglianoalfieri": {
   "eventi": {
@@ -8237,6 +8403,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "laboratorio-creativo-di-halloween-fascia-1-2-6-ann-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale di Manta",
+    "manifest": "",
+    "nome": "Laboratorio Creativo di Halloween - Fascia 1 (2-6 anni) - Mano nella Mano Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
+   "laboratorio-creativo-di-halloween-fascia-2-6-12-an-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale di Manta",
+    "manifest": "",
+    "nome": "Laboratorio Creativo di Halloween - Fascia 2 (6-12 anni) - Mano nella Mano Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
    },
    "mercante-per-un-giorno-comune-di-manta": {
     "anni": [
@@ -8821,6 +9009,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-14"
+   },
+   "laboratorio-halloween-il-melograno-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Officina111",
+    "manifest": "",
+    "nome": "Laboratorio Halloween - Il Melograno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-28"
    },
    "openday-inglese-con-teacher-noemi-mondovi": {
     "anni": [
@@ -9927,6 +10126,17 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "i-sabatini-con-marta-valsania-novello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Teatro Novelab",
+    "manifest": "I Sabatini con Marta Valsania",
+    "nome": "I Sabatini con Marta Valsania",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "l-albero-compagnia-il-cerchio-tondo-novello": {
     "anni": [
      2026
@@ -10502,6 +10712,17 @@
  },
  "ostana": {
   "eventi": {
+   "halloween-al-rifugio-galaberna-ostana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rifugio Galaberna",
+    "manifest": "Halloween al Rifugio Galaberna",
+    "nome": "Halloween al Rifugio Galaberna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "ostana-foliage-rifugio-galaberna-ostana": {
     "anni": [
      2026
@@ -12203,6 +12424,17 @@
     "pagina": true,
     "ultima": "2026-12-06"
    },
+   "letture-mostruose-per-persone-curiose-revello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Ragazzi di Revello",
+    "manifest": "Letture Mostruose per Persone Curiose",
+    "nome": "Letture Mostruose per Persone Curiose",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "octavia-in-movimento-revello": {
     "anni": [
      2026
@@ -12307,6 +12539,23 @@
   },
   "nome": "Rivalta Bormida",
   "prov": "AL"
+ },
+ "robilante": {
+  "eventi": {
+   "mini-staffetta-pro-loco-robilante": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Michele Olivero",
+    "manifest": "",
+    "nome": "Mini Staffetta - Pro Loco Robilante",
+    "organizza": "Pro Loco Robilante",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   }
+  },
+  "nome": "Robilante",
+  "prov": "CN"
  },
  "roburent": {
   "eventi": {
@@ -13338,6 +13587,17 @@
  },
  "sangiacomodiroburent": {
   "eventi": {
+   "halloween-a-san-giacomo-di-roburent": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Sant'Anna 111",
+    "manifest": "Halloween a San Giacomo di Roburent",
+    "nome": "Halloween a San Giacomo di Roburent",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "laboratorio-di-candele-in-cera-di-riso-pro-loco-sa-san-giacomo-di-roburent": {
     "anni": [
      2026
@@ -14126,6 +14386,17 @@
     "pagina": true,
     "ultima": "2026-12-18"
    },
+   "halloween-in-scuderia-centro-ippico-equimaresco-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Ippico Equimaresco",
+    "manifest": "",
+    "nome": "Halloween in Scuderia - Centro Ippico Equimaresco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "i-treni-raccontano-storie-da-custodire-savigliano": {
     "anni": [
      2026
@@ -14136,6 +14407,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-26"
+   },
+   "il-treno-dell-autunno-museo-ferroviario-piemontese-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Ferroviario Piemontese",
+    "manifest": "",
+    "nome": "Il treno dell'Autunno - Museo Ferroviario Piemontese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "prisma-di-benessere-la-voce-di-elisa-odv-savigliano": {
     "anni": [
@@ -15015,6 +15297,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "libri-spaventosi-a-spasso-per-il-paese-biblioteca-treiso": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "",
+    "nome": "Libri Spaventosi a Spasso per il Paese - Biblioteca Civica Comune di Treiso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    }
   },
   "nome": "Treiso",
@@ -15461,6 +15754,23 @@
   "nome": "Viarigi",
   "prov": "AT"
  },
+ "vicoforte": {
+  "eventi": {
+   "avventure-da-brividi-vicoforte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Bosco delle Scoperte",
+    "manifest": "Avventure da Brividi",
+    "nome": "Avventure da Brividi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Vicoforte",
+  "prov": "CN"
+ },
  "viglianodasti": {
   "eventi": {
    "bagna-cauda-d-autunno-vigliano-d-asti": {
@@ -15572,6 +15882,23 @@
   },
   "nome": "Villa del Foro",
   "prov": "AL"
+ },
+ "villafalletto": {
+  "eventi": {
+   "hallowvill-il-villaggio-da-brivido-villafalletto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglia di Villafalletto",
+    "manifest": "HallowVill - Il Villaggio da Brivido",
+    "nome": "HallowVill - Il Villaggio da Brivido",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   }
+  },
+  "nome": "Villafalletto",
+  "prov": "CN"
  },
  "villanovadasti": {
   "eventi": {
