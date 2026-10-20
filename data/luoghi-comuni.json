@@ -61,7 +61,7 @@
  },
  "c-al-borghetto-di-borbera": {
   "comune": "Borghetto di Borbera",
-  "n": 3,
+  "n": 4,
   "prov": "AL"
  },
  "c-al-borgoratto-alessandrino": {
@@ -112,6 +112,11 @@
  "c-al-carpeneto": {
   "comune": "Carpeneto",
   "n": 2,
+  "prov": "AL"
+ },
+ "c-al-carrega-ligure": {
+  "comune": "Carrega Ligure",
+  "n": 1,
   "prov": "AL"
  },
  "c-al-carrosio": {
@@ -741,7 +746,7 @@
  },
  "c-at-monastero-bormida": {
   "comune": "Monastero Bormida",
-  "n": 2,
+  "n": 3,
   "prov": "AT"
  },
  "c-at-moncalvo": {
@@ -826,7 +831,7 @@
  },
  "c-at-san-damiano-d-asti": {
   "comune": "San Damiano d'Asti",
-  "n": 4,
+  "n": 5,
   "prov": "AT"
  },
  "c-at-san-martino-alfieri": {
@@ -846,6 +851,11 @@
  },
  "c-at-scurzolengo": {
   "comune": "Scurzolengo",
+  "n": 1,
+  "prov": "AT"
+ },
+ "c-at-tigliole": {
+  "comune": "Tigliole",
   "n": 1,
   "prov": "AT"
  },
@@ -1041,7 +1051,7 @@
  },
  "c-cn-cortemilia": {
   "comune": "Cortemilia",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-cossano-belbo": {
@@ -1066,7 +1076,7 @@
  },
  "c-cn-dogliani": {
   "comune": "Dogliani",
-  "n": 3,
+  "n": 4,
   "prov": "CN"
  },
  "c-cn-dronero": {
@@ -1291,7 +1301,7 @@
  },
  "c-cn-pontechianale": {
   "comune": "Pontechianale",
-  "n": 2,
+  "n": 3,
   "prov": "CN"
  },
  "c-cn-racconigi": {
@@ -1326,7 +1336,7 @@
  },
  "c-cn-roccaforte-mondovi": {
   "comune": "Roccaforte Mondovì",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-roccavione": {
@@ -1377,6 +1387,11 @@
  "c-cn-santo-stefano-belbo": {
   "comune": "Santo Stefano Belbo",
   "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-santo-stefano-roero": {
+  "comune": "Santo Stefano Roero",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-savigliano": {
@@ -1446,7 +1461,7 @@
  },
  "c-cn-vignolo": {
   "comune": "Vignolo",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-villanova-mondovi": {
