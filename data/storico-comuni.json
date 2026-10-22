@@ -123,6 +123,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "fiera-di-santa-caterina-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "Fiera di Santa Caterina",
+    "nome": "Fiera di Santa Caterina",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "jam-fest-centro-giovanile-yepp-acqui-terme": {
     "anni": [
      2026
@@ -831,6 +842,17 @@
     "pagina": true,
     "ultima": "2026-11-21"
    },
+   "halloween-al-teatro-delle-scienze-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro delle Scienze",
+    "manifest": "Halloween al Teatro delle Scienze",
+    "nome": "Halloween al Teatro delle Scienze",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-25"
+   },
    "halloween-party-inaugurazione-stagione-27-iceinlin-alessandria": {
     "anni": [
      2026
@@ -841,6 +863,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "happy-halloween-centro-commerciale-panorama-alessa-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Commerciale Panorama Alessandria",
+    "manifest": "Happy Halloween",
+    "nome": "Happy Halloween - Centro Commerciale Panorama Alessandria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
    },
    "i-torneo-di-bandiera-citta-di-alessandria-associaz": {
     "anni": [
@@ -1226,6 +1259,23 @@
   "nome": "Alfiano Natta",
   "prov": "AL"
  },
+ "alicebelcolle": {
+  "eventi": {
+   "halloween-festa-per-bambini-alice-bel-colle": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Guacchione",
+    "manifest": "",
+    "nome": "Halloween - Festa per bambini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Alice Bel Colle",
+  "prov": "AL"
+ },
  "alluvionicambio": {
   "eventi": {
    "sagra-del-sedano-alluvioni-cambio": {
@@ -1418,6 +1468,17 @@
     "pagina": true,
     "ultima": "2026-10-01"
    },
+   "dolcetto-o-libretto-ubik-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ubik Asti",
+    "manifest": "",
+    "nome": "Dolcetto o Libretto - Ubik Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "esperienze-outdoor-centro-per-le-famiglie-asti": {
     "anni": [
      2026
@@ -1549,6 +1610,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-29"
+   },
+   "halloween-da-pauraaa-biblioteca-astense-giorgio-fa-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spazio KOR",
+    "manifest": "",
+    "nome": "Halloween da Pauraaa - Biblioteca Astense Giorgio Faletti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    },
    "humana-foresta-compagnia-teatrale-petra-asti": {
     "anni": [
@@ -2324,6 +2396,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-11"
+   },
+   "bosio-halloween": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza I Luglio",
+    "manifest": "Bosio Halloween",
+    "nome": "Bosio Halloween",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "festa-del-major-bosio": {
     "anni": [
@@ -3334,6 +3417,23 @@
   },
   "nome": "Cardè",
   "prov": "CN"
+ },
+ "carezzano": {
+  "eventi": {
+   "festa-di-halloween-pro-loco-di-carezzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie del paese",
+    "manifest": "",
+    "nome": "Festa di Halloween - Pro Loco di Carezzano",
+    "organizza": "Pro Loco di Carezzano",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Carezzano",
+  "prov": "AL"
  },
  "carpeneto": {
   "eventi": {
@@ -4625,6 +4725,17 @@
     "organizza": "Comune di Castelletto d'Orba",
     "pagina": true,
     "ultima": "2026-08-10"
+   },
+   "game-night-biblioteca-civica-comunale-castelletto-castelletto-d-orba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale",
+    "manifest": "",
+    "nome": "Game Night - Biblioteca Civica Comunale Castelletto d'Orba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-06"
    },
    "sagra-campagnola-crebini-cazzuli-passaronda-castelletto-d-orba": {
     "anni": [
@@ -8078,6 +8189,23 @@
   "nome": "Guazzora",
   "prov": "AL"
  },
+ "incisascapaccino": {
+  "eventi": {
+   "sagra-del-cardo-gobbo-e-della-friciula-incisa-scapaccino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Ferraro",
+    "manifest": "52° Sagra del Cardo Gobbo e della Friciùla",
+    "nome": "52° Sagra del Cardo Gobbo e della Friciùla",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Incisa Scapaccino",
+  "prov": "AT"
+ },
  "isasca": {
   "eventi": {
    "c-e-posto-nel-bosco-con-il-sarvanot-pluf-la-fabbri-isasca": {
@@ -8118,6 +8246,17 @@
     "organizza": "Pro Loco Isola d'Asti",
     "pagina": false,
     "ultima": "2026-09-05"
+   },
+   "halloween-isola-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro di Isola d'Asti",
+    "manifest": "Halloween 2026 - Isola d'Asti",
+    "nome": "Halloween 2026 - Isola d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Isola d'Asti",
@@ -8612,6 +8751,23 @@
   },
   "nome": "Marmora",
   "prov": "CN"
+ },
+ "masio": {
+  "eventi": {
+   "festa-di-halloween-pro-loco-masio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie del paese",
+    "manifest": "",
+    "nome": "Festa di Halloween - Pro Loco Masio",
+    "organizza": "Pro Loco Masio",
+    "pagina": true,
+    "ultima": "2026-10-29"
+   }
+  },
+  "nome": "Masio",
+  "prov": "AL"
  },
  "mirabellomonferrato": {
   "eventi": {
@@ -9136,6 +9292,17 @@
     "organizza": "Pro Loco Mongardino",
     "pagina": true,
     "ultima": "2026-08-26"
+   },
+   "una-corsa-mostruosa-mongardino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo Mongardino",
+    "manifest": "",
+    "nome": "Una Corsa Mostruosa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    }
   },
   "nome": "Mongardino",
@@ -9754,6 +9921,17 @@
  },
  "mornese": {
   "eventi": {
+   "castagnata-di-san-nicolino-xvi-edizione-mornese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Polivalente San Giovanni Bosco",
+    "manifest": "Castagnata di San Nicolino XVI Edizione",
+    "nome": "Castagnata di San Nicolino XVI Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   },
    "cena-sotto-le-stelle-mornese": {
     "anni": [
      2026
@@ -9764,6 +9942,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-08"
+   },
+   "mornesween-l-halloween-party-che-non-ti-aspetti-mornese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Polivalente",
+    "manifest": "",
+    "nome": "Mornesween - L'Halloween Party che non ti aspetti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "passeggiata-a-4-zampe-nella-pineta-di-mornese": {
     "anni": [
@@ -10319,6 +10508,17 @@
     "pagina": true,
     "ultima": "2026-10-18"
    },
+   "giochi-in-simboli-centro-paideia-di-torino-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure",
+    "manifest": "",
+    "nome": "Giochi in Simboli - Centro Paideia di Torino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "giornata-ben-essere-i-r-i-s-novi-ligure": {
     "anni": [
      2026
@@ -10330,6 +10530,17 @@
     "pagina": true,
     "ultima": "2026-10-03"
    },
+   "halloween-party-libreria-i-girasoli-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria I Girasoli",
+    "manifest": "",
+    "nome": "Halloween Party - Libreria I Girasoli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "i-musicanti-di-brema-teatrino-dell-erba-matta-novi-ligure": {
     "anni": [
      2026
@@ -10340,6 +10551,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "il-gran-borbottante-laboratorio-a-cura-di-sergio-c-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure",
+    "manifest": "",
+    "nome": "Il Gran Borbottante - laboratorio a cura di Sergio Cabella",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "la-notte-dei-pupazzi-consegna-pupazzi-la-bottega-d-novi-ligure": {
     "anni": [
@@ -10363,6 +10585,28 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "le-avventure-della-famiglia-catastrofino-il-profes-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure",
+    "manifest": "",
+    "nome": "Le avventure della Famiglia Catastrofino. Il Professor Marchingenio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-17"
+   },
+   "matite-sotto-l-albero-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure - Sala 0-6",
+    "manifest": "",
+    "nome": "Matite sotto l'albero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "mostra-delle-illusioni-museo-dei-campionissimi-novi-ligure": {
     "anni": [
      2026
@@ -10373,6 +10617,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-01-01"
+   },
+   "natale-con-attilio-la-bottega-del-sanconiglio-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure - Sala 0-6",
+    "manifest": "",
+    "nome": "Natale con Attilio - La Bottega del Sanconiglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "oceania-novi-ligure": {
     "anni": [
@@ -10506,6 +10761,17 @@
     "pagina": true,
     "ultima": "2026-10-03"
    },
+   "storie-da-brivido-storie-suonate-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure",
+    "manifest": "",
+    "nome": "Storie da Brivido - Storie Suonate",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-27"
+   },
    "storie-sotto-gli-alberi-la-bottega-del-sanconiglio-novi-ligure": {
     "anni": [
      2026
@@ -10527,6 +10793,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-08"
+   },
+   "un-bosco-a-tutto-ritmo-settimana-nazionale-nati-pe-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure",
+    "manifest": "",
+    "nome": "Un bosco a tutto ritmo - Settimana Nazionale Nati per Leggere 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "un-mondo-di-mattoncini-centro-per-le-famiglie-vill-novi-ligure": {
     "anni": [
@@ -10850,6 +11127,17 @@
     "organizza": "Pro Loco Oviglio",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "oviglio-da-paura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Verde della Pro Loco",
+    "manifest": "Oviglio da Paura",
+    "nome": "Oviglio da Paura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Oviglio",
@@ -11019,6 +11307,17 @@
  },
  "pasturana": {
   "eventi": {
+   "castagnata-e-ciclocross-di-s-martino-festa-patrona-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone SOMS",
+    "manifest": "Castagnata e Ciclocross di S. Martino - Festa Patronale",
+    "nome": "Castagnata e Ciclocross di S. Martino - Festa Patronale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
    "le-letture-del-sabato-halloween-pasturana": {
     "anni": [
      2026
@@ -11402,6 +11701,17 @@
     "organizza": "Comune di Pietra Marazzi",
     "pagina": true,
     "ultima": "2026-08-30"
+   },
+   "halloween-a-pietra-marazzi-s-o-m-s-di-pietra-maraz": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Umberto I",
+    "manifest": "",
+    "nome": "Halloween a Pietra Marazzi - S.O.M.S. di Pietra Marazzi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Pietra Marazzi",
@@ -12477,6 +12787,23 @@
   },
   "nome": "Revigliasco d'Asti",
   "prov": "AT"
+ },
+ "ricaldone": {
+  "eventi": {
+   "fiera-del-vino-e-del-tartufo-ricaldone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ricaldone",
+    "manifest": "Fiera del Vino e del Tartufo - Ricaldone 2026",
+    "nome": "Fiera del Vino e del Tartufo - Ricaldone 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-24"
+   }
+  },
+  "nome": "Ricaldone",
+  "prov": "AL"
  },
  "riforano": {
   "eventi": {
@@ -14520,6 +14847,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "dance-show-punteacapo-studio-danza-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Serravalle",
+    "manifest": "",
+    "nome": "Dance Show - PunteaCapo Studio Danza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   },
    "edutainment-imparare-divertendosi-play-land-serravalle-scrivia": {
     "anni": [
      2026
@@ -15285,6 +15623,23 @@
   "nome": "Tortona",
   "prov": "AL"
  },
+ "tramontana": {
+  "eventi": {
+   "vino-ceci-e-tartufi-edizione-tramontana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tramontana - vie del paese",
+    "manifest": "",
+    "nome": "Vino, Ceci e Tartufi - 3ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   }
+  },
+  "nome": "Tramontana",
+  "prov": "CN"
+ },
  "treiso": {
   "eventi": {
    "leggiamo-insieme-che-stooria-treiso": {
@@ -15437,6 +15792,18 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-30"
+   },
+   "mi-leggi-una-storia-biblioteca-civica-di-valfenera": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Scuola dell'Infanzia Regina Margherita",
+    "manifest": "Mi Leggi Una Storia?",
+    "nome": "Mi Leggi Una Storia? - Biblioteca Civica di Valfenera",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-06"
    },
    "sagra-del-bollito-valfenera": {
     "anni": [
