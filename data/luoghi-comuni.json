@@ -891,7 +891,7 @@
  },
  "c-cn-alba": {
   "comune": "Alba",
-  "n": 5,
+  "n": 7,
   "prov": "CN"
  },
  "c-cn-arguello": {
@@ -1457,6 +1457,11 @@
  "c-cn-verzuolo": {
   "comune": "Verzuolo",
   "n": 3,
+  "prov": "CN"
+ },
+ "c-cn-vicoforte": {
+  "comune": "Vicoforte",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-vignolo": {
