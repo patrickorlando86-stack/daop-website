@@ -2076,10 +2076,16 @@ def gruppi_comune(elenco, oggi):
 VETRINA_POSTI = 3
 
 
-def vetrina(elenco, oggi):
+def vetrina(elenco, oggi, fuori_lista=()):
     """Il riquadro "Sponsorizzati". Esiste solo se qualcuno l'ha comprato, e lo
     dice in chiaro nella prima riga: e' l'unico punto della pagina in cui la
     posizione non dipende dall'ordine alfabetico.
+
+    ANCHE CHI LA LISTA NON PUBBLICA (23/10/2026): `fuori_lista` sono gli
+    sponsorizzati con Ruolo sede/servizio - i tre campeggi di Cuneo. Avevano
+    la loro pagina dal 05/10, ma nessun link del sito ci portava: il riquadro
+    pescava solo da `elenco`, cioe' dopo solo_mete(). Qui stanno da soli, senza
+    la riga gemella nei gruppi per comune, e quindi nemmeno sulla mappa.
 
     SEGUE LA RICERCA, come su Ginetto: si stampano TUTTE le schede candidate e
     il JS mostra le prime VETRINA_POSTI fra quelle che passano i filtri. Chi
@@ -2095,7 +2101,8 @@ def vetrina(elenco, oggi):
     Senza JavaScript restano visibili le prime VETRINA_POSTI (le altre nascono
     `hidden`): il riquadro non diventa mai una colonna di tutte le schede
     pagate."""
-    candidati = sorted((l for l in elenco if l.get('evidenza') and l.get('premium')),
+    candidati = sorted((l for l in list(elenco) + list(fuori_lista)
+                        if l.get('evidenza') and l.get('premium')),
                        key=lambda l: (G.slugify(l['nome']), l['slug']))
     if not candidati:
         return ''
@@ -2261,7 +2268,7 @@ def _css_categorie(elenco):
         for slug, (c, t, i) in sorted(visti.items())) + "\n"
 
 
-def render(elenco, oggi):
+def render(elenco, oggi, fuori_lista=()):
     css, nav, foot = G._guscio()
     e = G.esc
     n = len(elenco)
@@ -2309,7 +2316,7 @@ def render(elenco, oggi):
     corpo = "\n".join(x for x in [
         '  <div class="lg-wrap">',
         filtri(elenco),
-        vetrina(elenco, oggi),
+        vetrina(elenco, oggi, fuori_lista),
         vuoto,
         gruppi_comune(elenco, oggi),
         COME_ORDINIAMO,
@@ -2597,10 +2604,18 @@ def main():
     for l in elenco:
         if pagine.get(l['slug']):
             l['pagina'] = pagine[l['slug']]
+    # Gli sponsorizzati che la lista non pubblica (un campeggio e' `servizio`):
+    # niente riga nei gruppi, ma il riquadro Sponsorizzati si', se no la pagina
+    # che hanno comprato resta senza un link che ci porti. Vedi vetrina().
+    in_elenco = {l.get('codice') for l in elenco if l.get('codice')}
+    fuori_lista = [x for x in pagine_luoghi.candidati(base, elenco, agenda)
+                   if x.get('codice') not in in_elenco and pagine.get(x['slug'])]
+    for x in fuori_lista:
+        x['pagina'] = pagine[x['slug']]
     da_cat = sum(1 for l in elenco if l.get('fonte') == 'catalogo')
     premium = sum(1 for l in elenco if l.get('premium'))
     consigliati = sum(1 for l in elenco if l.get('consigliato'))
-    in_vetrina = sum(1 for l in elenco if l.get('evidenza') and l.get('premium'))
+    in_vetrina = sum(1 for l in elenco + fuori_lista if l.get('evidenza') and l.get('premium'))
     # Se ci sono schede a pagamento e la vetrina resta vuota, lo si dice: e' il
     # tipo di cosa che non si vede guardando la pagina (manca un blocco, non
     # compare un errore) e che costa a chi ha pagato.
@@ -2623,7 +2638,7 @@ def main():
     # stesso ritardo di un giro di data/luoghi-comuni.json, e va bene per la
     # stessa ragione: un numero di ieri sbaglia di poco e sbaglia gratis.
     G.conteggio_scrivi('luoghi', len(elenco))
-    open(OUT_PATH, "w", encoding="utf-8").write(render(elenco, oggi))
+    open(OUT_PATH, "w", encoding="utf-8").write(render(elenco, oggi, fuori_lista))
     salva_istantanea(foglio)
     salva_indice_comuni(elenco)
     update_sitemap(len(elenco))

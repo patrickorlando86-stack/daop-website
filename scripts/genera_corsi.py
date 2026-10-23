@@ -2974,7 +2974,7 @@ def pagina_servizi(org, servizi, altri, info, css, nav, foot):
 <header class="page-hero">
   <div class="page-hero-inner">
     <div class="cr-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <span>Servizi per le famiglie</span> › <span>{G.esc(org)}</span>
+      <a href="/">Home</a> › <a href="/servizi/">Servizi per le famiglie</a> › <span>{G.esc(org)}</span>
     </div>
     {logo_testa}
     <span class="section-label">{G.esc(citta or 'Piemonte')} · Servizi per le famiglie</span>
@@ -3003,12 +3003,89 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
+def pagina_indice_servizi(voci, css, nav, foot):
+    """/servizi/: una scheda per societa', coi suoi servizi in fila e il link
+    alla sua pagina. Lo stampo e' quello della pagina servizi (schede aperte,
+    niente calendario), non quello dei corsi: qui la domanda e' «chi mi fa
+    cosa», e la risposta sta in poche righe. `voci` = (org, servizi, info, file)."""
+    url = f"{SITE_URL}/{DIR_SERVIZI}/"
+    titolo = "Servizi per le famiglie | DAOP"
+    voci = sorted(voci, key=lambda v: G.slugify(v[0]))
+    n = sum(len(v[1]) for v in voci)
+    descr = (f"{_n(len(voci), 'realtà', 'realtà')} e {_n(n, 'servizio', 'servizi')} "
+             f"per le famiglie: cosa offrono, per chi, come si prenota.")
+    schede = []
+    for org, servizi, info, f in voci:
+        citta = (info.get('citta') or '').strip() or ', '.join(
+            _uniche(c['citta'] for c in servizi))
+        logo = logo_path(info.get('logo'))
+        img = (f'<span class="sv-loc"><img src="{G.esc(logo)}" alt="" width="84" '
+               f'height="84" loading="lazy" decoding="async"></span>' if logo else '')
+        nomi = "".join(f'<li>{G.esc(c["nome"])}</li>' for c in servizi)
+        schede.append(
+            f'<article class="sv-card" data-org="{slug_realta(org)}" '
+            f'data-org-nome="{G.esc(org)}">{img}<div class="sv-body">'
+            f'<span class="co-cat">{G.esc(_cap(_e(_uniche(_cat_foglia(c).lower() for c in servizi))))}</span>'
+            f'<h2 class="sv-nome"><a href="/{DIR_SERVIZI}/{f}">{G.esc(org)}</a></h2>'
+            + (f'<p class="sv-descr">{G.esc(citta)}</p>' if citta else '')
+            + f'<ul class="sv-elenco">{nomi}</ul>'
+            f'<p class="sv-altro"><a href="/{DIR_SERVIZI}/{f}">Cosa offre e come si prenota →</a></p>'
+            '</div></article>')
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{G.esc(titolo)}</title>
+<meta name="description" content="{G.esc(descr)}">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="{url}">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}{SERVIZI_CSS}
+.sv-nome a{{color:inherit;text-decoration:none}}
+.sv-elenco{{margin:6px 0 0;padding-left:1.1em;font-size:.95rem;line-height:1.55}}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="cr-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <span>Servizi per le famiglie</span>
+    </div>
+    <span class="section-label">Piemonte · Servizi per le famiglie</span>
+    <h1>Servizi per le famiglie</h1>
+    <p class="cr-sub">Quello che prenoti tu, quando ti serve.</p>
+  </div>
+</header>
+<article class="cr-wrap">
+  <p class="cr-intro">{G.esc(descr)}</p>
+  <div class="sv-lista">
+{chr(10).join(schede)}
+  </div>
+</article>
+{G.blocco_ginetto()}</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+
+
 def scrivi_servizi(gruppi, realta, css, nav, foot):
     """Scrive una pagina servizi per ogni societa' che ha righe col Tipo
     "servizio" (vedi TIPI_SERVIZIO) e toglie le altre."""
     import glob as _glob
     dest = os.path.join(ROOT, DIR_SERVIZI)
-    vive = set()
+    vive, voci = set(), []
     for org, corsi_org in gruppi.items():
         slug = slug_realta(org)
         servizi = [c for c in corsi_org if _e_servizio(c)]
@@ -3022,6 +3099,16 @@ def scrivi_servizi(gruppi, realta, css, nav, foot):
         _scrivi_se_cambia(os.path.join(dest, f), f"{DIR_SERVIZI}/{f}",
                           pagina_servizi(org, servizi, altri, info, css, nav, foot),
                           len(servizi))
+        voci.append((org, servizi, info, f))
+    # L'INDICE (23/10/2026), chiesto da Giovanni: «/servizi non esiste, anche
+    # solo per noi». Noindex come le pagine che raccoglie, fuori dalla sitemap
+    # e senza link dal sito: ci si arriva solo dalle briciole di una pagina
+    # servizi. Sparisce con l'ultima societa' (il glob qui sotto lo pota).
+    if voci:
+        vive.add('index.html')
+        _scrivi_se_cambia(os.path.join(dest, 'index.html'), f"{DIR_SERVIZI}/index.html",
+                          pagina_indice_servizi(voci, css, nav, foot),
+                          sum(len(v[1]) for v in voci))
     for path in _glob.glob(os.path.join(dest, '*.html')):
         if os.path.basename(path) not in vive:
             os.remove(path)
