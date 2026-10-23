@@ -148,9 +148,11 @@ COLONNE = {
     # superficie e vivo sull'altra - cioe' peggio di non averla.
     'scadenza': ('scadenza', 'data scadenza', 'valida fino al', 'valido fino al',
                  'data fine', 'datafine', 'fine'),
-    # CORSO O SERVIZIO (09/10/2026). Vuota = corso; "servizio" = la riga va
-    # ANCHE sulla pagina /servizi/ della societa' (vedi scrivi_servizi). La
-    # scrive il downloader quando il pacco e' segnato «Sono SERVIZI».
+    # CORSO O SERVIZIO (09/10/2026). Vuota = corso; "servizio" = sulla pagina
+    # della societa' la riga sta nella sezione «Servizi su prenotazione» e non
+    # fra i corsi, e va nell'indice /servizi/ (vedi pagina_realta e
+    # scrivi_servizi). La scrive il downloader quando il pacco e' segnato
+    # «Sono SERVIZI».
     'tipo': ('tipo',),
 }
 
@@ -2570,7 +2572,10 @@ def jsonld_realta(org, corsi_org, info):
             o['address']['streetAddress'] = info['indirizzo']
     graph = [o]
     for c in corsi_org:
-        graph.append({'@type': 'Course', 'name': c['nome'],
+        # Una riga col Tipo "servizio" non e' un corso nemmeno per Google: la
+        # pagina la mostra nella sezione dei servizi, e il dato dice lo stesso.
+        graph.append({'@type': 'Service' if _e_servizio(c) else 'Course',
+                      'name': c['nome'],
                       'provider': {'@type': 'Organization', 'name': org},
                       'description': (c['descr'] or '').strip()
                       or f"{c['nome']} con {org}."})
@@ -2579,7 +2584,22 @@ def jsonld_realta(org, corsi_org, info):
 
 
 def pagina_realta(org, corsi_org, info, css, nav, foot):
-    """La pagina di una realta': chi e', dove, i suoi corsi, i suoi eventi."""
+    """La pagina di una realta': chi e', dove, i suoi corsi, i suoi servizi,
+    i suoi eventi."""
+    # UNA PAGINA SOLA PER REALTA' (23/10/2026, Giovanni: «Carezza ha due URL
+    # diversi, come organizzatore corsi e come servizi, mentre dovrebbe essere
+    # unico»). Le righe col Tipo "servizio" stavano qui come corsi E su
+    # /servizi/<slug>.html come servizi: la stessa offerta in due pagine, con
+    # due presentazioni. Adesso stanno qui una volta, nella loro sezione
+    # (#servizi, schede aperte e «Come si prenota», cioe' quello che era la
+    # pagina servizi), e /servizi/ rimanda qui. Il conteggio, il title, le FAQ
+    # e il JSON-LD «Course» parlano dei soli corsi; i dati della realta' (il
+    # riquadro, gli eventi) di tutto. Vedi scrivi_servizi().
+    servizi = [c for c in corsi_org if _e_servizio(c)]
+    corsi_veri = [c for c in corsi_org if not _e_servizio(c)]
+    # Una realta' di soli servizi non ha corsi da contare: il testo e il title
+    # li prendono dai servizi, che sono le uniche righe che ha.
+    base = corsi_veri or corsi_org
     citta = (info.get('citta') or '').strip() or ', '.join(
         _uniche(c['citta'] for c in corsi_org))
     disc = _uniche(_cat_foglia(c) for c in corsi_org)
@@ -2605,12 +2625,16 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # "Kids&Us Alba: corsi per bambini a Alba": un "a Alba" in pagina dei
     # risultati si nota, e mancava la parola che si cerca, "inglese". La
     # preposizione la mette G.a_citta(), la stessa delle schede evento.
-    att = _attivita(corsi_org)
+    att = _attivita(base)
     di_att = f' di {att}' if att else ''
     v = Voce(info, org)
     claim = (info.get('occhiello') or '').strip()
     if claim:
         occhiello = f'<p class="cr-sub">{G.esc(claim)}</p>'
+    elif not corsi_veri:
+        # Soli servizi: la riga della pagina servizi, non «Corsi di …».
+        occhiello = (f'<p class="cr-sub">{G.esc(_cap(_e(_uniche(_cat_foglia(c).lower() for c in servizi))))}'
+                     f' per le famiglie{" " + G.esc(G.a_citta(citta).strip()) if citta else ""}</p>')
     else:
         # Gli spazi FUORI da G.esc(), che li toglie: dentro, usciva
         # "Corsidi musica per bambinia Vezza d'Alba".
@@ -2622,11 +2646,22 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # mostrava di piu'. Una societa' su due province torna all'hub.
     p_torna = prov_della_pagina(corsi_org)
     torna = href_corsi_prov(p_torna) if p_torna else '/corsi.html'
-    titolo = f"{org}: {v.cp}{di_att} per bambini{G.a_citta(citta)} | DAOP"
+    if corsi_veri:
+        titolo = f"{org}: {v.cp}{di_att} per bambini{G.a_citta(citta)} | DAOP"
+    else:
+        disc_sv = _uniche(_cat_foglia(c).lower() for c in servizi)
+        titolo = (f"{org}: {_e(disc_sv[:2]) or 'servizi'} per le famiglie"
+                  f"{G.a_citta(citta)} | DAOP")
     # La description e' il paragrafo scritto dai dati, non la presentazione
     # della societa': in pagina dei risultati deve dire cosa, dove e per che
     # eta'. La presentazione resta in pagina, sotto "Chi e'".
-    intro = testo_realta(org, corsi_org, info)
+    if corsi_veri:
+        intro = testo_realta(org, corsi_veri, info)
+        if servizi:
+            intro += (f" Offre anche {_n(len(servizi), 'servizio', 'servizi')} "
+                      f"su prenotazione, nella sezione qui sotto.")
+    else:
+        intro = testo_servizi(org, servizi, info)
     descr = G.trunc(intro, 300)
     # IN INDICE SE LA SOCIETA' HA CONFERMATO, una per una. L'interruttore globale
     # resta padrone dell'hub (/corsi.html, la nav, le quattro porte): quella e'
@@ -2676,8 +2711,23 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     riquadro = ('<dl class="co-dati">' + ''.join(
         f'<dt>{k}</dt><dd>{v}</dd>' for k, v in dati) + '</dl>') if dati else ''
 
-    schede = "\n".join(card(c, i, qui_org=slug_realta(org), voce=v)
-                       for i, c in enumerate(corsi_org))
+    blocco_corsi = ''
+    if corsi_veri:
+        schede = "\n".join(card(c, i, qui_org=slug_realta(org), voce=v)
+                           for i, c in enumerate(corsi_veri))
+        blocco_corsi = (f'  <h2 class="cr-h" id="i-corsi">{_cap(v.i_corsi() if len(corsi_veri) > 1 else v.il_corso())} di {G.esc(org)}</h2>\n'
+                        f'  <div class="events-list">\n{schede}\n  </div>')
+    blocco_sv, css_sv = '', ''
+    if servizi:
+        # L'id e' "servizi" e non "i-servizi": e' l'indirizzo che si scrive a
+        # mano e che /servizi/ usa per mandare qui (/corsi/<slug>.html#servizi).
+        css_sv = SERVIZI_CSS
+        blocco_sv = (f'  <section id="servizi" aria-labelledby="servizi-h">\n'
+                     f'  <h2 class="cr-h" id="servizi-h">Servizi su prenotazione</h2>\n'
+                     f'  <div class="sv-lista">\n'
+                     + "\n".join(_card_servizio(c, org, info) for c in servizi)
+                     + f'\n  </div>\n  {_blocco_prenota(org, servizi, info)}\n'
+                     f'  </section>')
     ev = eventi_realta(corsi_org, org)
     blocco_ev = ''
     if ev:
@@ -2709,7 +2759,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}</style>
+<style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}{css_sv}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 <script src="/assets/js/locandina.js" defer></script>
@@ -2736,12 +2786,9 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 {chr(10).join('  ' + t for t in testa)}
   {'<h2 class="cr-h">Informazioni e contatti</h2>' if riquadro else ''}
   {riquadro}
-  <h2 class="cr-h" id="i-corsi">{_cap(v.i_corsi() if len(corsi_org) > 1 else v.il_corso())} di {G.esc(org)}</h2>
-  <div class="events-list">
-{schede}
-  </div>
+{chr(10).join(b for b in (blocco_corsi, blocco_sv) if b)}
 {blocco_ev}
-{blocco_faq(faq_realta(org, corsi_org, info), f'Domande frequenti su {org}')}
+{blocco_faq(faq_realta(org, corsi_veri, info), f'Domande frequenti su {org}')}
   <p class="cr-torna"><a href="{torna}#co-lista">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
 {G.blocco_ecosistema('corsi')}
 </article>
@@ -2776,11 +2823,12 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 # DAL 09/10/2026 LO DICE LA COLONNA "Tipo" della tab Attivita: "servizio" =
 # una cosa che si prenota quando serve. La scrive il downloader quando chi
 # carica segna il pacco «Sono SERVIZI»; si puo' scrivere anche a mano. La riga
-# resta fra i corsi (e nell'app) come prima, e in piu' va sulla pagina servizi.
-# Una societa' con almeno un servizio ha la sua pagina; senza, la pagina si
-# toglie alla run dopo (scrivi_servizi la pota come scrivi_realta).
-# Restano noindex finche' la sezione vera non nasce, coi primi si' (TODO del
-# downloader, "Sezione SERVIZI").
+# resta in corsi.html (e nell'app) come prima.
+# DAL 23/10/2026 UN INDIRIZZO SOLO PER REALTA': chi ha la pagina della realta'
+# mostra i servizi li' (#servizi) e /servizi/<slug>.html e' un rimando; la
+# pagina servizi qui sotto si scrive solo per chi quella pagina non ce l'ha.
+# Vedi scrivi_servizi(). L'indice /servizi/ resta noindex finche' la sezione
+# vera non nasce, coi primi si' (TODO del downloader, "Sezione SERVIZI").
 DIR_SERVIZI = 'servizi'
 TIPI_SERVIZIO = ('servizio', 'servizi')
 
@@ -2910,10 +2958,10 @@ def _blocco_prenota(org, servizi, info):
 
 
 def pagina_servizi(org, servizi, altri, info, css, nav, foot):
-    """La pagina servizi di una realta': cosa ti fanno, per chi, come si
-    prenota. I suoi corsi e i suoi appuntamenti stanno sulla pagina dei corsi:
-    un calendario qui sarebbe il linguaggio dei corsi, ed e' quello che la
-    faceva confondere con quella (07/10/2026)."""
+    """La pagina servizi di una realta' che NON ha la sua pagina: cosa ti
+    fanno, per chi, come si prenota. Niente calendario: sarebbe il linguaggio
+    dei corsi, ed e' quello che la faceva confondere con quella (07/10/2026).
+    Chi la pagina ce l'ha, i servizi li mostra li' (pagina_realta, #servizi)."""
     slug = slug_realta(org)
     citta = (info.get('citta') or '').strip() or ', '.join(
         _uniche(c['citta'] for c in servizi))
@@ -2936,11 +2984,9 @@ def pagina_servizi(org, servizi, altri, info, css, nav, foot):
         chi = (f'<details class="cr-chi"><summary>Chi è {G.esc(org)}</summary>'
                + _paragrafi(info['descr'], 'cr-descr') + '</details>')
     schede = "\n".join(_card_servizio(c, org, info) for c in servizi)
-    corsi = ''
-    if altri and ha_pagina(info):
-        corsi = (f'<p class="cr-torna sv-torna"><a href="{G.esc(url_realta(org))}">'
-                 f'{G.esc(org)} organizza anche corsi: i corsi e i prossimi '
-                 f'appuntamenti →</a></p>')
+    # Il rimando «organizza anche corsi» non c'e' piu' (23/10/2026): questa
+    # pagina si scrive solo per chi una pagina della realta' non ce l'ha
+    # (scrivi_servizi), quindi non c'era niente a cui rimandare.
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -2990,7 +3036,6 @@ def pagina_servizi(org, servizi, altri, info, css, nav, foot):
   </div>
   {_blocco_prenota(org, servizi, info)}
   {chi}
-  {corsi}
 </article>
 {G.blocco_ginetto()}</main>
 {foot}
@@ -3007,7 +3052,7 @@ def pagina_indice_servizi(voci, css, nav, foot):
     """/servizi/: una scheda per societa', coi suoi servizi in fila e il link
     alla sua pagina. Lo stampo e' quello della pagina servizi (schede aperte,
     niente calendario), non quello dei corsi: qui la domanda e' «chi mi fa
-    cosa», e la risposta sta in poche righe. `voci` = (org, servizi, info, file)."""
+    cosa», e la risposta sta in poche righe. `voci` = (org, servizi, info, href)."""
     url = f"{SITE_URL}/{DIR_SERVIZI}/"
     titolo = "Servizi per le famiglie | DAOP"
     voci = sorted(voci, key=lambda v: G.slugify(v[0]))
@@ -3016,6 +3061,8 @@ def pagina_indice_servizi(voci, css, nav, foot):
              f"per le famiglie: cosa offrono, per chi, come si prenota.")
     schede = []
     for org, servizi, info, f in voci:
+        # `f` e' gia' l'indirizzo giusto: la pagina della realta' (#servizi) se
+        # ce l'ha, la pagina servizi se e' l'unica che ha (scrivi_servizi).
         citta = (info.get('citta') or '').strip() or ', '.join(
             _uniche(c['citta'] for c in servizi))
         logo = logo_path(info.get('logo'))
@@ -3026,10 +3073,10 @@ def pagina_indice_servizi(voci, css, nav, foot):
             f'<article class="sv-card" data-org="{slug_realta(org)}" '
             f'data-org-nome="{G.esc(org)}">{img}<div class="sv-body">'
             f'<span class="co-cat">{G.esc(_cap(_e(_uniche(_cat_foglia(c).lower() for c in servizi))))}</span>'
-            f'<h2 class="sv-nome"><a href="/{DIR_SERVIZI}/{f}">{G.esc(org)}</a></h2>'
+            f'<h2 class="sv-nome"><a href="{G.esc(f)}">{G.esc(org)}</a></h2>'
             + (f'<p class="sv-descr">{G.esc(citta)}</p>' if citta else '')
             + f'<ul class="sv-elenco">{nomi}</ul>'
-            f'<p class="sv-altro"><a href="/{DIR_SERVIZI}/{f}">Cosa offre e come si prenota →</a></p>'
+            f'<p class="sv-altro"><a href="{G.esc(f)}">Cosa offre e come si prenota →</a></p>'
             '</div></article>')
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -3080,9 +3127,45 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
+def rimando_servizi(org, verso):
+    """/servizi/<slug>.html di una realta' che ha la sua pagina: un rimando
+    alla sezione #servizi di quella pagina, non un 404.
+
+    E' la forma di rimando() in pagine_luoghi.py: GitHub Pages non fa redirect
+    lato server, quindi refresh a zero piu' location.replace, canonical sul
+    bersaglio. Niente noindex, per la ragione scritta in pagina_spostata() di
+    genera_eventi.py: accanto a un canonical che punta altrove e' il segnale
+    opposto, e rischia di passare alla pagina buona. In sitemap non c'era e
+    non entra."""
+    e = G.esc
+    dest = f"{SITE_URL}{verso.split('#')[0]}"
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>{e(org)}: servizi per le famiglie | DAOP</title>
+<link rel="canonical" href="{e(dest)}">
+<meta http-equiv="refresh" content="0; url={e(verso)}">
+<script>location.replace({json.dumps(verso)});</script>
+</head>
+<body>
+<p><a href="{e(verso)}">I servizi di {e(org)} su DAOP</a></p>
+</body>
+</html>
+"""
+
+
 def scrivi_servizi(gruppi, realta, css, nav, foot):
-    """Scrive una pagina servizi per ogni societa' che ha righe col Tipo
-    "servizio" (vedi TIPI_SERVIZIO) e toglie le altre."""
+    """I servizi di ogni societa' che ha righe col Tipo "servizio" (vedi
+    TIPI_SERVIZIO): l'indice /servizi/ e, per ciascuna, un solo indirizzo.
+
+    UN RIFERIMENTO UNICO PER REALTA' (23/10/2026). Se la realta' ha la sua
+    pagina (ha_pagina), i servizi stanno li', nella sezione #servizi, e
+    /servizi/<slug>.html diventa un rimando a quella sezione: l'indirizzo
+    gia' mandato in giro (CaRezza, dal 07/10) continua a funzionare. Se la
+    pagina non ce l'ha, la pagina servizi e' l'unica che ha, e si scrive come
+    prima; il giorno che la realta' ha la sua pagina diventa un rimando da
+    sola. Toglie le pagine delle societa' che i servizi non li hanno piu'."""
     import glob as _glob
     dest = os.path.join(ROOT, DIR_SERVIZI)
     vive, voci = set(), []
@@ -3096,10 +3179,15 @@ def scrivi_servizi(gruppi, realta, css, nav, foot):
         f = f"{slug}.html"
         vive.add(f)
         info = realta.get(G.slugify(org), {})
+        if ha_pagina(info):
+            href = f"{url_realta(org)}#servizi"
+            pagina = rimando_servizi(org, href)
+        else:
+            href = f"/{DIR_SERVIZI}/{f}"
+            pagina = pagina_servizi(org, servizi, altri, info, css, nav, foot)
         _scrivi_se_cambia(os.path.join(dest, f), f"{DIR_SERVIZI}/{f}",
-                          pagina_servizi(org, servizi, altri, info, css, nav, foot),
-                          len(servizi))
-        voci.append((org, servizi, info, f))
+                          pagina, len(servizi))
+        voci.append((org, servizi, info, href))
     # L'INDICE (23/10/2026), chiesto da Giovanni: «/servizi non esiste, anche
     # solo per noi». Noindex come le pagine che raccoglie, fuori dalla sitemap
     # e senza link dal sito: ci si arriva solo dalle briciole di una pagina
