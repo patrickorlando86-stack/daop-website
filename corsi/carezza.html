@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CàRezza: corsi per bambini a Racconigi | DAOP</title>
-<meta name="description" content="CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a.">
+<title>CàRezza: corsi di movimento e musica per bambini a Racconigi | DAOP</title>
+<meta name="description" content="CàRezza propone 3 corsi di movimento e musica a Racconigi, in provincia di Cuneo, per bambini dai primi mesi fino a 6 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a. Offre anche 3 servizi su prenotazione, nella sezione qui sotto.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.daop.it/corsi/carezza.html">
-<meta property="og:title" content="CàRezza: corsi per bambini a Racconigi | DAOP">
-<meta property="og:description" content="CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a.">
+<meta property="og:title" content="CàRezza: corsi di movimento e musica per bambini a Racconigi | DAOP">
+<meta property="og:description" content="CàRezza propone 3 corsi di movimento e musica a Racconigi, in provincia di Cuneo, per bambini dai primi mesi fino a 6 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a. Offre anche 3 servizi su prenotazione, nella sezione qui sotto.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.daop.it/corsi/carezza.html">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="DAOP">
 <meta property="og:image" content="https://www.daop.it/assets/loghi/carezza.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="CàRezza: corsi per bambini a Racconigi | DAOP">
-<meta name="twitter:description" content="CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le…">
+<meta name="twitter:title" content="CàRezza: corsi di movimento e musica per bambini a…">
+<meta name="twitter:description" content="CàRezza propone 3 corsi di movimento e musica a Racconigi, in provincia di Cuneo, per bambini dai primi mesi fino a 6…">
 <meta name="twitter:image" content="https://www.daop.it/assets/loghi/carezza.webp">
 <meta name="daop:citta" content="Racconigi">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
@@ -749,6 +749,35 @@ html{scroll-behavior:auto}
 .cr-chi[open]>summary::before{content:"▾ "}
 .cr-chi>summary:hover{text-decoration:underline}
 .cr-chi .cr-descr:first-of-type{margin-top:4px}
+
+/* La pagina servizi NON e' la pagina dei corsi con un'altra etichetta. Un corso
+   ha il calendario dell'organizzatore (righe da scorrere, orari, filtri); un
+   servizio lo prenota la famiglia quando le serve. Quindi qui poche schede
+   APERTE - cosa ti fanno, per chi, dove - e un'azione sola: prenotare. */
+.sv-lista{display:flex;flex-direction:column;gap:14px;margin:0 0 8px}
+.sv-card{display:flex;gap:14px;align-items:flex-start;padding:16px;
+  background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:14px}
+.sv-loc{flex:0 0 84px;display:block;line-height:0}
+.sv-loc img{width:84px;height:84px;object-fit:cover;border-radius:10px}
+.sv-body{min-width:0;flex:1}
+.sv-nome{font-size:1.08rem;line-height:1.3;margin:2px 0 8px}
+.sv-dati{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 0 8px;
+  font-size:.92rem}
+.sv-dati dt{opacity:.62}
+.sv-dati dd{margin:0;font-weight:600}
+.sv-descr{margin:0;font-size:.95rem;line-height:1.55}
+@media(max-width:480px){.sv-card{flex-direction:column}
+  .sv-loc{flex-basis:auto}.sv-loc img{width:100%;height:160px;object-position:top}}
+.sv-prenota{margin:26px 0 0;padding:20px;border-radius:14px;
+  background:var(--cream,#fdf8f3);border:1px solid rgba(45,74,92,.14)}
+.sv-prenota h2{margin:0 0 6px;font-size:1.22rem}
+.sv-prenota p{margin:0 0 12px;font-size:.96rem;line-height:1.55}
+.sv-chiama{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:0 22px;border-radius:999px;background:var(--navy,#2d4a5c);
+  color:#fff;font-weight:700;text-decoration:none}
+.sv-chiama:hover{background:var(--navy-dark,#1e3342)}
+.sv-altro{margin:12px 0 0;font-size:.92rem}
+.sv-altro a,.sv-torna a{color:var(--navy,#2d4a5c);font-weight:600}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
@@ -800,7 +829,7 @@ html{scroll-behavior:auto}
    "description": "Percorso di 8 incontri tra voce, movimento, ascolto e gioco per condividere i primi suoni e le prime emozioni. Rivolto a bambini nella fascia 0-3 anni accompagnati da un adulto. Corso attivo con numero minimo di partecipanti."
   },
   {
-   "@type": "Course",
+   "@type": "Service",
    "name": "Accarezzami – Corso di massaggio infantile Aimi",
    "provider": {
     "@type": "Organization",
@@ -809,7 +838,7 @@ html{scroll-behavior:auto}
    "description": "Corso di massaggio infantile Aimi per famiglie con bambini nella fascia 0-12 mesi. 5 incontri in piccolissimo gruppo o individuali; date e orario da concordare in base alle esigenze delle famiglie partecipanti. Si svolge presso CàRezza a Racconigi o a domicilio."
   },
   {
-   "@type": "Course",
+   "@type": "Service",
    "name": "mini-MISP™ (fascia 2-3 anni)",
    "provider": {
     "@type": "Organization",
@@ -818,7 +847,7 @@ html{scroll-behavior:auto}
    "description": "Percorso di 3 incontri da 30-45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 2-3 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie."
   },
   {
-   "@type": "Course",
+   "@type": "Service",
    "name": "MISP™ (fascia 4-12 anni)",
    "provider": {
     "@type": "Organization",
@@ -880,7 +909,7 @@ html{scroll-behavior:auto}
   </div>
 </header>
 <article class="cr-wrap" data-org="carezza" data-org-nome="CàRezza">
-  <p class="cr-intro">CàRezza propone 6 corsi a Racconigi, in provincia di Cuneo, per bambini e ragazzi dai primi mesi fino a 12 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a.</p>
+  <p class="cr-intro">CàRezza propone 3 corsi di movimento e musica a Racconigi, in provincia di Cuneo, per bambini dai primi mesi fino a 6 anni. Le lezioni si tengono in Piazza Caduti per la Libertà 12a. Offre anche 3 servizi su prenotazione, nella sezione qui sotto.</p>
   <details class="cr-chi"><summary>Chi è CàRezza</summary><p class="cr-descr">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.</p><p class="cr-descr">Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere i bambini in armonia e offrire supporto ai genitori.</p><p class="cr-descr">Un luogo speciale e protetto per vivere un tempo di qualità insieme ai propri bambini.</p><p class="cr-descr">Ogni evento presso CàRezza è studiato per accogliere insieme i bimbi con mamme, papà, nonni, caregivers.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Racconigi</dd><dt>Indirizzo</dt><dd>Piazza Caduti per la Libertà 12a</dd><dt>Attività</dt><dd>Psicomotricità · Educazione musicale · Massaggio infantile · Benessere familiare</dd><dt>Contatti</dt><dd>Roberta <a href="tel:+393297249359">+39 329 724 9359</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
@@ -934,55 +963,16 @@ html{scroll-behavior:auto}
 <p class="event-desc">Percorso di 8 incontri tra voce, movimento, ascolto e gioco per condividere i primi suoni e le prime emozioni. Rivolto a bambini nella fascia 0-3 anni accompagnati da un adulto. Corso attivo con numero minimo di partecipanti.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> CàRezza</p>            <dl class="co-dati"><dt>Periodo</dt><dd>dal 21 ottobre al 9 dicembre</dd><dt>Giorni</dt><dd>Mercoledi 17.30-18.20</dd><dt>Iscrizioni</dt><dd>Informazioni e prenotazione presso Roberta Ronco</dd><dt>Referenti</dt><dd>Roberta Ronco · Manuela Allemano</dd></dl>            <div class="event-actions"><a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p14.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a></div>
           </div>
         </article>
-        <article class="event-card" id="c-a016" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="massaggio-infantile" data-org="carezza" data-org-nome="CàRezza" data-codice="A016" data-openday="0" data-etamin="0" data-etamax="1" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
-          <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-3">
-            <img class="ev-thumb" src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="co-cat">Massaggio infantile</span>
-              <span class="ev-name">Accarezzami – Corso di massaggio infantile Aimi</span>
-              <span class="ev-line">0-12 mesi · Racconigi</span>
-              <span class="ev-tags"></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h3>
-          <div class="ev-det" id="det-co-3" hidden>
-            
-<p class="event-desc">Corso di massaggio infantile Aimi per famiglie con bambini nella fascia 0-12 mesi. 5 incontri in piccolissimo gruppo o individuali; date e orario da concordare in base alle esigenze delle famiglie partecipanti. Si svolge presso CàRezza a Racconigi o a domicilio.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> CàRezza</p>            <dl class="co-dati"><dt>Iscrizioni</dt><dd>Posti limitati – informazioni e prenotazione contattando Roberta Ronco</dd><dt>Referenti</dt><dd>Roberta Ronco</dd></dl>            <div class="event-actions"><a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a></div>
-          </div>
-        </article>
-        <article class="event-card" id="c-a017" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="benessere-familiare" data-org="carezza" data-org-nome="CàRezza" data-codice="A017" data-openday="0" data-etamin="2" data-etamax="3" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
-          <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-4">
-            <img class="ev-thumb" src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="co-cat">Benessere familiare</span>
-              <span class="ev-name">mini-MISP™ (fascia 2-3 anni)</span>
-              <span class="ev-line">2-3 anni · Racconigi</span>
-              <span class="ev-tags"></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h3>
-          <div class="ev-det" id="det-co-4" hidden>
-            
-<p class="event-desc">Percorso di 3 incontri da 30-45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 2-3 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> CàRezza</p>            <dl class="co-dati"><dt>Referenti</dt><dd>Roberta Ronco</dd></dl>            <div class="event-actions"><a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a></div>
-          </div>
-        </article>
-        <article class="event-card" id="c-a018" data-city="racconigi" data-prov="cn" data-cat="benessere" data-disc="benessere-familiare" data-org="carezza" data-org-nome="CàRezza" data-codice="A018" data-openday="0" data-etamin="4" data-etamax="12" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
-          <h3 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="det-co-5">
-            <img class="ev-thumb" src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" loading="lazy" decoding="async">
-            <span class="ev-main">
-              <span class="co-cat">Benessere familiare</span>
-              <span class="ev-name">MISP™ (fascia 4-12 anni)</span>
-              <span class="ev-line">4-12 anni · Racconigi</span>
-              <span class="ev-tags"></span>
-            </span>
-            <svg class="ev-chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </button></h3>
-          <div class="ev-det" id="det-co-5" hidden>
-            
-<p class="event-desc">Percorso di 5 incontri da 45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 4-12 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie. Si svolge presso la sede o a domicilio.</p>            <p class="ev-where"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> CàRezza</p>            <dl class="co-dati"><dt>Referenti</dt><dd>Roberta Ronco</dd></dl>            <div class="event-actions"><a class="event-act" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg> Locandina</a></div>
-          </div>
-        </article>
   </div>
+  <section id="servizi" aria-labelledby="servizi-h">
+  <h2 class="cr-h" id="servizi-h">Servizi su prenotazione</h2>
+  <div class="sv-lista">
+<article class="sv-card" id="s-a016" data-org="carezza" data-org-nome="CàRezza" data-codice="c-a016"><a class="sv-loc" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" data-locandina target="_blank" rel="noopener" aria-label="Locandina di Accarezzami – Corso di massaggio infantile Aimi"><img src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p3.webp" alt="" width="84" height="84" loading="lazy" decoding="async"></a><div class="sv-body"><span class="co-cat">Massaggio infantile</span><h3 class="sv-nome">Accarezzami – Corso di massaggio infantile Aimi</h3><dl class="sv-dati"><dt>Per chi</dt><dd>0-12 mesi</dd><dt>Dove</dt><dd>CàRezza, Racconigi · anche a domicilio</dd><dt>Prenotazione</dt><dd>Posti limitati – informazioni e prenotazione contattando Roberta Ronco</dd></dl><p class="sv-descr">Corso di massaggio infantile Aimi per famiglie con bambini nella fascia 0-12 mesi. 5 incontri in piccolissimo gruppo o individuali; date e orario da concordare in base alle esigenze delle famiglie partecipanti. Si svolge presso CàRezza a Racconigi o a domicilio.</p></div></article>
+<article class="sv-card" id="s-a017" data-org="carezza" data-org-nome="CàRezza" data-codice="c-a017"><a class="sv-loc" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" data-locandina target="_blank" rel="noopener" aria-label="Locandina di mini-MISP™ (fascia 2-3 anni)"><img src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" width="84" height="84" loading="lazy" decoding="async"></a><div class="sv-body"><span class="co-cat">Benessere familiare</span><h3 class="sv-nome">mini-MISP™ (fascia 2-3 anni)</h3><dl class="sv-dati"><dt>Per chi</dt><dd>2-3 anni</dd><dt>Dove</dt><dd>CàRezza, Racconigi</dd></dl><p class="sv-descr">Percorso di 3 incontri da 30-45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 2-3 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie.</p></div></article>
+<article class="sv-card" id="s-a018" data-org="carezza" data-org-nome="CàRezza" data-codice="c-a018"><a class="sv-loc" href="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/locandine/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" data-locandina target="_blank" rel="noopener" aria-label="Locandina di MISP™ (fascia 4-12 anni)"><img src="/assets/miniature/Locandine_20260828_073630_0000_20260828-090616_01_p4.webp" alt="" width="84" height="84" loading="lazy" decoding="async"></a><div class="sv-body"><span class="co-cat">Benessere familiare</span><h3 class="sv-nome">MISP™ (fascia 4-12 anni)</h3><dl class="sv-dati"><dt>Per chi</dt><dd>4-12 anni</dd><dt>Dove</dt><dd>CàRezza, Racconigi · anche a domicilio</dd></dl><p class="sv-descr">Percorso di 5 incontri da 45 minuti sul contatto sano ed emotivamente nutritivo, rivolto a famiglie con bambini di 4-12 anni. Lavoro individuale o in piccolo gruppo, date e orari concordati con le famiglie. Si svolge presso la sede o a domicilio.</p></div></article>
+  </div>
+  <section class="sv-prenota" aria-labelledby="sv-prenota-h"><h2 id="sv-prenota-h">Come si prenota</h2><p>Il giorno si concorda direttamente con CàRezza. Piazza Caduti per la Libertà 12a · Racconigi.</p><a class="sv-chiama" href="tel:+393297249359">Chiama per prenotare</a><p class="sv-altro">Roberta <a href="tel:+393297249359">+39 329 724 9359</a> · <a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></p></section>
+  </section>
   <h2 class="cr-h">Open day ed eventi di CàRezza</h2>
     <a class="cr-ev" href="/eventi/trick-or-treat-laboratorio-culinario-di-halloween-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_17_4_20260928-153529_10.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Trick or Treat? Laboratorio culinario di Halloween in lingua inglese</span><span class="cr-ev-q">Martedì 27 ottobre 2026, ore 16:30-17:15 · CàRezza</span></span></a>
     <a class="cr-ev" href="/eventi/allegro-con-moto-incontro-2-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/daop_cuneo_3973594077073391155.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Allegro con Moto - Incontro 2</span><span class="cr-ev-q">Mercoledì 28 ottobre 2026, ore 16:30-17:20 · CàRezza</span></span></a>
@@ -991,15 +981,15 @@ html{scroll-behavior:auto}
   <div class="co-faq" id="domande">
     <h2 class="co-faq-t">Domande frequenti su CàRezza</h2>
     <h3 class="co-faq-q">Che corsi propone CàRezza a Racconigi?</h3>
-    <p class="co-faq-a">6 corsi: Percorso di Psicomotricità 3-6 anni, Allegro con Moto, Presto, Prestissimo! – La musica nasce dalla relazione, Accarezzami – Corso di massaggio infantile Aimi, mini-MISP™ (fascia 2-3 anni) e MISP™ (fascia 4-12 anni).</p>
+    <p class="co-faq-a">3 corsi di movimento e musica: Percorso di Psicomotricità 3-6 anni, Allegro con Moto e Presto, Prestissimo! – La musica nasce dalla relazione.</p>
     <h3 class="co-faq-q">Da che età si possono frequentare i corsi di CàRezza?</h3>
-    <p class="co-faq-a">Dai primi mesi fino a 12 anni. Le fasce dei singoli corsi: fino a 1 anno, fino a 3 anni, 2-3 anni, 3-6 anni e 4-12 anni.</p>
+    <p class="co-faq-a">Dai primi mesi fino a 6 anni. Le fasce dei singoli corsi: fino a 3 anni e 3-6 anni.</p>
     <h3 class="co-faq-q">Dove si tengono i corsi di CàRezza?</h3>
     <p class="co-faq-a">In Piazza Caduti per la Libertà 12a, a Racconigi, in provincia di Cuneo.</p>
   </div>
 
   <p class="cr-torna"><a href="/corsi-provincia-cuneo.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">337 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">668 posti scelti a mano, dal parco al museo</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">337 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">671 posti scelti a mano, dal parco al museo</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
