@@ -2823,6 +2823,33 @@ servizi, gli altri restano corsi e la pagina rimanda alla loro.
   chiamare, e **nessun calendario**: gli appuntamenti stanno sulla pagina dei
   corsi, a cui si rimanda in fondo. Il CSS (`SERVIZI_CSS`) sta solo qui.
 
+**Dal 23/10/2026 i servizi stanno sulla pagina della realtà, e `/servizi/<slug>.html`
+rimanda lì.** Giovanni: «Carezza ha due URL diversi, come organizzatore corsi e
+come servizi, mentre dovrebbe essere unico». Nei dati il riferimento era già uno
+(una riga in `Realta`, una riga per offerta, la colonna `Tipo`), ma il sito ne
+stampava due pagine, e le tre righe «servizio» comparivano in tutte e due: fra i
+corsi, presentate come corsi, sull'una; come servizi sull'altra.
+
+- **Una realtà, un indirizzo**: `/corsi/<slug>.html`, con le sezioni corsi →
+  **Servizi su prenotazione** (`id="servizi"`, le schede aperte e il «Come si
+  prenota» che erano la pagina servizi) → eventi → FAQ. Una riga «servizio» sta
+  nella sua sezione e non più anche fra i corsi; il conteggio dell'intro, il
+  title e le FAQ parlano dei soli corsi, il JSON-LD la dichiara `Service` e non
+  `Course`. Una realtà senza servizi esce **identica byte per byte** a prima.
+- **L'indirizzo resta `/corsi/`**, anche se una realtà che fa corsi, servizi ed
+  eventi starebbe meglio sotto un nome neutro: la pagina è già in Google, e qui
+  non ci sono 301. Il nome nell'URL conta poco, cambiarlo costa posizionamento.
+- **`/servizi/<slug>.html` diventa un rimando** (`rimando_servizi()`: refresh a
+  zero, `location.replace`, canonical sul bersaglio, niente noindex — la forma
+  di `pagina_spostata()`), perché il link d'esempio è già stato mandato in giro.
+  **Solo se la realtà ha la sua pagina** (`ha_pagina`): senza, la pagina servizi
+  è l'unica che ha e si scrive come prima, e il giorno che la pagina nasce
+  diventa un rimando da sola. In ogni momento una realtà ha un indirizzo solo.
+- **L'indice `/servizi/` porta a `/corsi/<slug>.html#servizi`** (o alla pagina
+  servizi, per chi ha solo quella). Resta noindex e fuori sitemap.
+- **Le righe restano dove sono in `corsi.html`, nell'app e in Ginetto**: una riga
+  sola sul foglio, che si trova da tutte e due le strade.
+
 #### Gli eventi di una realtà: il legame è il nome, non una colonna nuova
 
 Chiuso il 28/08/2026. Fino a quel giorno gli eventi sulla pagina di una società
