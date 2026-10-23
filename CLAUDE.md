@@ -5575,6 +5575,25 @@ passo «Commit se cambiato» viene **prima** delle prove, quindi le pagine di qu
 due giorni erano già pubblicate e giuste. Rossa era solo la guardia — che però
 manda una mail al giorno, e una guardia che grida sempre smette di essere letta.
 
+**Rossa di nuovo il 23/10/2026, e di nuovo era la prova.** La cavia del giorno
+era un incontro per adulti a Tortona con 144 caratteri di testo, cioè una
+scheda sottile: dal 25/09 (`merita_indice`) quelle stanno fuori dalla sitemap
+anche quando non si spostano, e la prova pretendeva ancora la pagina nuova in
+sitemap. Ora chiede quello che decide `merita_indice` sulla cavia, e la cavia
+si sceglie preferendo una scheda da indice, così di solito si guarda il verso
+in cui la pagina deve entrare. Verificata rossa nel caso sottile rimettendo la
+vecchia condizione.
+
+Lo stesso giorno era rossa anche `tests/scheda.js` su «Famiglia in Gioco» a
+Savigliano, e lì il difetto era della pagina. La serie ha due righe (23-24 e
+25/10) e solo la prima ha un programma: `programmi_serie()` tiene le date con
+un programma, quindi ne restava una sola, sotto la frase «Il programma cambia
+da una data all'altra». Con un programma solo ora la frase dice di che giorno
+è e che per le altre date non è indicato, e il titolo della sezione porta
+tutti i giorni della riga («venerdì 23-24 ottobre», non «venerdì 23 ottobre»
+sopra le voci del 24). La prova accetta una sezione sola, ma allora pretende
+che la frase non dica «cambia da una data all'altra».
+
 ### "Vicino a me": il raggio filtra, e la posizione non si chiede mai da soli
 
 Fatto il 15/08/2026. La logica sta in **`assets/js/daop-vicino.js`** (15 KB) e

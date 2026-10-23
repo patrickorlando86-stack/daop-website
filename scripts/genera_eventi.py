@@ -4947,8 +4947,16 @@ def _ancora_programma(x):
 
 
 def _giorno_programma(x):
-    di = x['d_start']
-    return f"{GIORNI[di.weekday()]} {di.day} {MESI_LUNGHI[di.month - 1]}"
+    """Il titolo della sezione: il giorno, o i giorni se la riga ne copre piu'
+    d'uno. "Famiglia in Gioco" a Savigliano (23/10/2026) era una riga 23-24 col
+    titolo "venerdi' 23 ottobre" sopra le voci del 24."""
+    di, df = x['d_start'], x.get('d_end') or x['d_start']
+    if df == di:
+        return f"{GIORNI[di.weekday()]} {di.day} {MESI_LUNGHI[di.month - 1]}"
+    if df.month == di.month:
+        return f"{GIORNI[di.weekday()]} {di.day}-{df.day} {MESI_LUNGHI[di.month - 1]}"
+    return (f"{GIORNI[di.weekday()]} {di.day} {MESI_LUNGHI[di.month - 1]}"
+            f" - {df.day} {MESI_LUNGHI[df.month - 1]}")
 
 
 def programma_serie_html(progs):
@@ -4962,8 +4970,17 @@ def programma_serie_html(progs):
         parti.append(f'<section class="ev-prog-giorno" id="{a}" aria-labelledby="{a}-t">'
                      f'<h3 class="ev-prog-dh" id="{a}-t">{esc(_giorno_programma(x))}</h3>'
                      f'<div class="ev-prog">{_programma_gruppi(voci)}</div></section>')
+    # Un programma solo, quando le altre date della serie non ne hanno uno
+    # (programmi_serie() le toglie): "cambia da una data all'altra" sopra una
+    # sezione sola non e' vero, e chi arriva per un'altra data deve sapere che
+    # quello non e' il suo.
+    if len(progs) == 1:
+        cambia = (f'Il programma è quello di {esc(_giorno_programma(progs[0][0]))}: '
+                  'per le altre date non è indicato.')
+    else:
+        cambia = 'Il programma cambia da una data all\'altra.'
     return ('<h2 class="ev-prog-h" id="programma">Programma</h2>'
-            '<p class="ev-prog-cambia">Il programma cambia da una data all\'altra.</p>'
+            f'<p class="ev-prog-cambia">{cambia}</p>'
             + ''.join(parti))
 
 

@@ -142,7 +142,10 @@ if not CAVIE:
     print("nessuna cavia senza gemelli nel registro: niente da provare")
     sys.exit(0)
 # Con il numero di riga se ce n'e' una, se no si prova quello che si puo'.
-CAVIA = next((s for s in CAVIE if ha_riga(s)), CAVIE[0])
+# Meglio una cavia da indice: cosi' la prova della sitemap guarda il verso in
+# cui la pagina nuova ci deve entrare. Se non c'e', vale anche una sottile.
+CAVIA = next((s for s in CAVIE if ha_riga(s) and g.merita_indice(reg_vero[s])),
+             next((s for s in CAVIE if ha_riga(s)), CAVIE[0]))
 ALTRI = [s for s in FUTURI if s != CAVIA]
 
 
@@ -251,7 +254,13 @@ ok("niente Event nei dati strutturati", '"@type": "Event"' not in vecchia)
 nuova = leggi(NUOVO)
 ok("la pagina NUOVA e' una scheda normale e verificata",
    "Scheda verificata da DAOP" in nuova and NUOVO_COMUNE in nuova)
-ok("la pagina nuova e' in sitemap", NUOVO in sitemap)
+# In sitemap solo se la scheda merita l'indice (merita_indice, dal 25/09/2026):
+# una scheda sottile e' noindex e fuori sitemap anche quando non si sposta. Il
+# 23/10/2026 la cavia era un incontro per adulti con 144 caratteri di testo, e
+# la prova pretendeva in sitemap una pagina che il generatore tiene fuori apposta.
+in_indice = g.merita_indice(come_evento(reg_vero[CAVIA]))
+ok(f"la pagina nuova e' {'in' if in_indice else 'fuori dalla'} sitemap, come una scheda"
+   f" {'da indice' if in_indice else 'sottile'}", (NUOVO in sitemap) == in_indice)
 ok("le altre pagine restano normali", "Scheda verificata da DAOP" in leggi(ALTRI[0]))
 
 print()

@@ -91,7 +91,11 @@ module.exports = async function scheda(browser) {
         const coda = fonte ? ((fonte.descr || '').split(MARCA_P)[1] || '') : null;
         if (coda === null || testo(parole(coda)) !== testo(parole(dentro))) ok = false;
       }
-      if (!ok || sezioni.length < 2) perse.push(f);
+      // Una sezione sola e' legittima: le altre date della serie non hanno un
+      // programma (Famiglia in Gioco a Savigliano, 23/10/2026). Ma allora la
+      // pagina non puo' dire che il programma cambia da una data all'altra.
+      const cambia = /<p class="ev-prog-cambia">[^<]*da una data all/.test(corpo);
+      if (!ok || sezioni.length < 1 || (sezioni.length === 1) === cambia) perse.push(f);
     } else {
       const a = parole(descr), b = parole(corpo);
       if (testo(a) !== testo(b) || date(b) > date(a)) perse.push(f);
