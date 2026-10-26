@@ -2960,14 +2960,14 @@
   "anchor": "ev-2026-10-31-pony-games-di-halloween-la-canunia"
  },
  {
-  "nome": "Raccontami una storia che fa paura",
+  "nome": "Raccontami una storia che fa paura - PERCORRERE APS",
   "di": "31/10/2026",
   "df": "31/10/2026",
   "ora": "vari",
   "citta": "Tortona",
   "prov": "AL",
   "categoria": "Spettacolo",
-  "eta": "Tutte le età (famiglie)",
+  "eta": "3-9 anni",
   "prezzo": "Non indicato",
   "descr": "Due appuntamenti al mattino per festeggiare Halloween con le letture animate di PERCORRERE APS, pensate per i bambini dai 3 ai 9 anni: storie che fanno paura da ascoltare insieme, in un'atmosfera di sana paura e allegria. La partecipazione prevede un contributo a favore del progetto Crescere Insieme. La prenotazione è obbligatoria. Programma: Raccontami una storia che fa paura (3-5 anni) - PERCORRERE APS (10:00); Raccontami una storia che fa paura (6-9 anni) - PERCORRERE APS (11:00).",
   "manifest": "Raccontami una storia che fa paura",
@@ -2980,7 +2980,7 @@
   "consigliato": "No",
   "lat": "44.896",
   "lon": "8.8653",
-  "anchor": "ev-2026-10-31-raccontami-una-storia-che-fa-paura"
+  "anchor": "ev-2026-10-31-raccontami-una-storia-che-fa-paura-percorrere-aps"
  },
  {
   "nome": "Sale in Zucca - Pro Loco di Sale",
@@ -3504,25 +3504,27 @@
   "anchor": "ev-2026-11-05-alimentazione-nell-eta-scolare-e-prescolare-comune"
  },
  {
-  "nome": "Pratica Psicomotoria - Percorrere",
+  "nome": "Pratica Psicomotoria - PERCORRERE APS",
   "di": "05/11/2026",
   "df": "26/11/2026",
   "ora": "16:15",
-  "citta": "",
-  "prov": "CN",
+  "citta": "Tortona",
+  "prov": "AL",
   "categoria": "Laboratorio",
   "eta": "3 anni",
   "prezzo": "Tessera associativa 30 euro",
   "descr": "4 incontri di pratica psicomotoria dedicati ai bambini di 3 anni: un tempo per giocare, muoversi, esplorare e crescere. Al termine del percorso è previsto un colloquio di restituzione con i genitori. Percorso a scopo educativo-preventivo finanziato dal progetto 'Crescere Insieme'.",
   "manifest": "",
   "loc": "evento_Pratica_Psicomotoria_20261026-114230_01.webp",
-  "luogo": "",
-  "indirizzo": "",
+  "luogo": "PERCORRERE APS – Centro di Pratica Psicomotoria",
+  "indirizzo": "PERCORRERE APS – Centro di Pratica Psicomotoria - Tortona (AL)",
   "d_start": "2026-11-05",
   "d_end": "2026-11-26",
   "contatto": "351 373 0787",
   "consigliato": "No",
-  "anchor": "ev-2026-11-05-pratica-psicomotoria-percorrere"
+  "lat": "44.896",
+  "lon": "8.8653",
+  "anchor": "ev-2026-11-05-pratica-psicomotoria-percorrere-aps"
  },
  {
   "nome": "Teru Teru Bozu",
