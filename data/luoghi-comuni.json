@@ -891,7 +891,7 @@
  },
  "c-cn-alba": {
   "comune": "Alba",
-  "n": 7,
+  "n": 8,
   "prov": "CN"
  },
  "c-cn-arguello": {
@@ -946,7 +946,7 @@
  },
  "c-cn-bra": {
   "comune": "Bra",
-  "n": 7,
+  "n": 9,
   "prov": "CN"
  },
  "c-cn-briaglia": {
@@ -1066,7 +1066,7 @@
  },
  "c-cn-cuneo": {
   "comune": "Cuneo",
-  "n": 12,
+  "n": 14,
   "prov": "CN"
  },
  "c-cn-demonte": {
@@ -1206,7 +1206,7 @@
  },
  "c-cn-mondovi": {
   "comune": "Mondovì",
-  "n": 6,
+  "n": 7,
   "prov": "CN"
  },
  "c-cn-monforte-d-alba": {
@@ -1231,7 +1231,7 @@
  },
  "c-cn-monteu-roero": {
   "comune": "Monteu Roero",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-murazzano": {
@@ -1321,7 +1321,7 @@
  },
  "c-cn-robilante": {
   "comune": "Robilante",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-rocca-de-baldi": {
