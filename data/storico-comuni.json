@@ -344,6 +344,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "festa-di-halloween-aps-il-paiolo-fiorito-e-luna-di-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Polifunzionale di Viale Masera",
+    "manifest": "",
+    "nome": "Festa di Halloween - Aps Il Paiolo Fiorito e Luna di Lana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   },
    "gallerie-da-brivido-gallerie-del-territorio-alba": {
     "anni": [
      2026
@@ -398,6 +409,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "halloween-yoga-lab-chandra-h-om-e-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chandra Home",
+    "manifest": "",
+    "nome": "Halloween Yoga Lab - Chandra H.om.E",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    },
    "il-libro-della-buonanotte-storie-per-bambine-e-bam-alba": {
     "anni": [
@@ -1963,6 +1985,17 @@
     "organizza": "Pro Loco Bagnolo Piemonte",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "notte-horror-il-gatto-nero-e-il-labirinto-di-menti-bagnolo-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Confraternita, 42",
+    "manifest": "Notte Horror - Il Gatto Nero e il Labirinto di Menti Infrante",
+    "nome": "Notte Horror - Il Gatto Nero e il Labirinto di Menti Infrante",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    }
   },
   "nome": "Bagnolo Piemonte",
@@ -2196,6 +2229,23 @@
   },
   "nome": "Basaluzzo",
   "prov": "AL"
+ },
+ "bastiamondovi": {
+  "eventi": {
+   "vieni-anche-tu-pomeriggi-creativi-nel-monregalese-bastia-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "RAF L'Aquilone (Casa Protetta)",
+    "manifest": "Vieni Anche Tu! 3ª Edizione",
+    "nome": "Vieni Anche Tu! - Pomeriggi Creativi nel Monregalese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   }
+  },
+  "nome": "Bastia Mondovì",
+  "prov": "CN"
  },
  "beinette": {
   "eventi": {
@@ -2816,6 +2866,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "halloween-in-libreria-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Il Crocicchio",
+    "manifest": "",
+    "nome": "Halloween in Libreria!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "halloween-party-giocolandia-bra": {
     "anni": [
@@ -3545,6 +3606,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "mercatino-di-natale-e-babbo-run-caraj-a-t-pro-loco-caraglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Roma",
+    "manifest": "",
+    "nome": "3° Mercatino di Natale e 8^ Babbo Run Caraj - A.T. Pro Loco Insieme per Caraglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "quarantottesima-fiera-d-autunno-sagra-gnocchi-al-c-caraglio": {
     "anni": [
      2026
@@ -3628,6 +3700,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "halloween-night-l-ape-biricchina-baby-parking-carde": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Ape Biricchina Baby Parking",
+    "manifest": "",
+    "nome": "Halloween Night - L'Ape Biricchina Baby Parking",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    },
    "un-abbraccio-d-autunno-l-ape-biricchina-baby-parki-carde": {
     "anni": [
@@ -5640,6 +5723,34 @@
   "nome": "Cervasca",
   "prov": "CN"
  },
+ "ceva": {
+  "eventi": {
+   "halloween-a-ceva-dolcetto-o-scherzetto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Marenco",
+    "manifest": "",
+    "nome": "Halloween a Ceva - Dolcetto o Scherzetto?",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "vieni-anche-tu-pomeriggi-creativi-nel-monregalese-ceva": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Vieni Anche Tu! 3ª Edizione",
+    "nome": "Vieni Anche Tu! - Pomeriggi Creativi nel Monregalese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   }
+  },
+  "nome": "Ceva",
+  "prov": "CN"
+ },
  "cherasco": {
   "eventi": {
    "castagnata-e-festa-di-inizio-anno-catechistico-a-r-cherasco": {
@@ -6564,6 +6675,17 @@
     "pagina": true,
     "ultima": "2026-09-09"
    },
+   "corone-di-natura-parco-fluviale-gesso-e-stura-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Casa del Fiume",
+    "manifest": "",
+    "nome": "Corone di Natura - Parco Fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "corsi-di-musica-dolce-post-parto-deborah-dalmasso-cuneo": {
     "anni": [
      2026
@@ -6838,6 +6960,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-30"
+   },
+   "lanterna-che-brilli-lanterna-che-vai-parco-fluvial-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Casa del Fiume",
+    "manifest": "La Notte di San Martino",
+    "nome": "Lanterna che Brilli, Lanterna che Vai - Parco Fluviale Gesso e Stura",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
    },
    "mio-tuo-nostro-pandemonium-teatro-cuneo": {
     "anni": [
@@ -7403,6 +7536,17 @@
     "pagina": true,
     "ultima": "2026-08-13"
    },
+   "halloween-party-entracque": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bar Gran Viver",
+    "manifest": "Halloween Party Entracque 2026",
+    "nome": "Halloween Party Entracque 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "il-magico-mondo-dei-folletti-del-bosco-guida-tizia-entracque": {
     "anni": [
      2026
@@ -7623,6 +7767,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "festa-d-autunno-oratorio-di-envie": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Locali della Canonica",
+    "manifest": "",
+    "nome": "Festa d'Autunno - Oratorio di EnVie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Envie",
@@ -7912,6 +8067,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-22"
+   },
+   "halloween-in-ludoteca-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ludoteca in Cascina Sacerdote",
+    "manifest": "Halloween in Ludoteca",
+    "nome": "Halloween in Ludoteca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
    },
    "il-passaporto-dei-sogni-museo-diocesano-cuneo-fossano": {
     "anni": [
@@ -9527,6 +9693,17 @@
     "pagina": true,
     "ultima": "2026-08-14"
    },
+   "camminata-per-le-famiglie-edizione-autunno-citta-d-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bosco della Nova",
+    "manifest": "",
+    "nome": "Camminata per le Famiglie - Edizione Autunno - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
    "esposizione-internazionale-canina-cacib-mondovicin": {
     "anni": [
      2026
@@ -9604,6 +9781,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "i-misteri-della-notte-e-le-parole-luminose-citta-d-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Ellero",
+    "manifest": "",
+    "nome": "I misteri della notte e le parole luminose - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "il-principe-tessitore-e-altre-storie-principesche-mondovi": {
     "anni": [
      2026
@@ -9637,6 +9825,17 @@
     "pagina": true,
     "ultima": "2026-08-14"
    },
+   "laboratorio-di-intaglio-zucche-az-agricola-e-fatto-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Ellero",
+    "manifest": "",
+    "nome": "Laboratorio di intaglio zucche - Az. Agricola e fattoria didattica La Botalla",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "laboratorio-halloween-il-melograno-mondovi": {
     "anni": [
      2026
@@ -9647,6 +9846,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-28"
+   },
+   "laboratorio-per-piccoli-detective-merenda-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Fauzone",
+    "manifest": "",
+    "nome": "Laboratorio per Piccoli Detective + Merenda",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "openday-inglese-con-teacher-noemi-mondovi": {
     "anni": [
@@ -9692,6 +9902,17 @@
     "pagina": true,
     "ultima": "2026-10-03"
    },
+   "spazio-trucca-bimbi-in-piazza-ellero-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Ellero",
+    "manifest": "",
+    "nome": "Spazio trucca bimbi in Piazza Ellero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   },
    "sport-culture-festival-mondovi-si-muove": {
     "anni": [
      2026
@@ -9714,6 +9935,17 @@
     "pagina": true,
     "ultima": "2026-09-27"
    },
+   "the-dark-bright-night-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Ellero",
+    "manifest": "The Dark Bright Night",
+    "nome": "The Dark Bright Night",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "tutti-i-colori-della-cultura-kids-mondovi": {
     "anni": [
      2026
@@ -9724,6 +9956,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "vieni-anche-tu-pomeriggi-creativi-nel-monregalese-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo della Stampa",
+    "manifest": "Vieni Anche Tu! 3ª Edizione",
+    "nome": "Vieni Anche Tu! - Pomeriggi Creativi nel Monregalese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    }
   },
   "nome": "Mondovì",
@@ -10353,6 +10596,17 @@
  },
  "moretta": {
   "eventi": {
+   "castagnata-dell-oratorio-moretta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cimitero di Moretta",
+    "manifest": "",
+    "nome": "Castagnata dell'Oratorio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "expo-oratorio-grande-gioco-per-le-vie-di-moretta": {
     "anni": [
      2026
@@ -10553,6 +10807,17 @@
  },
  "murazzano": {
   "eventi": {
+   "halloween-a-murazzano-pomeriggio-da-paura-comune-d": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Umberto I",
+    "manifest": "",
+    "nome": "Halloween a Murazzano - Pomeriggio da Paura - Comune di Murazzano",
+    "organizza": "Comune di Murazzano",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "san-lorenzo-family-night-comune-di-murazzano": {
     "anni": [
      2026
@@ -14728,6 +14993,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "vieni-anche-tu-pomeriggi-creativi-nel-monregalese-san-michele-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Vieni Anche Tu! 3ª Edizione",
+    "nome": "Vieni Anche Tu! - Pomeriggi Creativi nel Monregalese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "San Michele Mondovì",
@@ -15694,6 +15970,17 @@
  },
  "sommarivadelbosco": {
   "eventi": {
+   "notte-dei-peluches-sommariva-del-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Sommariva del Bosco",
+    "manifest": "",
+    "nome": "Notte dei Peluches",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "picnic-tra-le-pagine-biblioteca-civica-di-sommariv-sommariva-del-bosco": {
     "anni": [
      2026
@@ -16647,6 +16934,17 @@
  },
  "verzuolo": {
   "eventi": {
+   "dal-seme-all-albero-laboratorio-di-lettura-ad-alta-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Cesare Segre",
+    "manifest": "",
+    "nome": "Dal seme all'albero - Laboratorio di lettura ad alta voce e arteterapia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "ferragosto-al-castello-pro-loco-villa-di-verzuolo": {
     "anni": [
      2026
