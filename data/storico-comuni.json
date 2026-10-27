@@ -79,6 +79,17 @@
     "pagina": false,
     "ultima": "2026-08-29"
    },
+   "caccia-al-tesoro-di-halloween-cuoregiovane-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Bollente",
+    "manifest": "",
+    "nome": "Caccia al Tesoro di Halloween - CuoreGiovane",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "castelli-aperti-a-ferragosto-acqui-terme": {
     "anni": [
      2026
@@ -764,6 +775,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-16"
+   },
+   "dolcetto-o-scherzetto-festa-di-halloween-punto-di-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Punto Di",
+    "manifest": "",
+    "nome": "Dolcetto o Scherzetto? Festa di Halloween - Punto Di",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-29"
    },
    "entriamo-nel-mondo-dei-libri-con-nat-associazione-alessandria": {
     "anni": [
@@ -1479,6 +1501,17 @@
     "pagina": true,
     "ultima": "2026-10-12"
    },
+   "a-spasso-col-fantasma-laboratorio-spaventoso-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Mazzetti",
+    "manifest": "",
+    "nome": "A Spasso col Fantasma - Laboratorio spaventoso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "arti-e-mercanti-asti": {
     "anni": [
      2026
@@ -1655,6 +1688,17 @@
     "pagina": true,
     "ultima": "2026-10-29"
    },
+   "halloween-da-paura-letture-ad-alta-voce-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Astense",
+    "manifest": "",
+    "nome": "Halloween da Paura - Letture ad alta voce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "halloween-da-pauraaa-biblioteca-astense-giorgio-fa-asti": {
     "anni": [
      2026
@@ -1665,6 +1709,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-30"
+   },
+   "halloween-in-museo-visita-stregata-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Paleontologico",
+    "manifest": "",
+    "nome": "Halloween in Museo - Visita stregata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "humana-foresta-compagnia-teatrale-petra-asti": {
     "anni": [
@@ -3367,6 +3422,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "fiera-nazionale-del-tartufo-e-di-san-martin-canelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pala Tartufo",
+    "manifest": "Fiera Nazionale del Tartufo e di San Martin",
+    "nome": "Fiera Nazionale del Tartufo e di San Martin",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   },
    "in-scena-presentazione-del-corso-laboratorio-per-b-canelli": {
     "anni": [
      2026
@@ -3648,6 +3714,17 @@
  },
  "carrosio": {
   "eventi": {
+   "festa-di-halloween-pro-loco-carrosio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Ex-Asilo",
+    "manifest": "",
+    "nome": "Festa di Halloween - Pro Loco Carrosio",
+    "organizza": "Pro Loco Carrosio",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "frittellata-d-autunno-carrosio": {
     "anni": [
      2026
@@ -3935,6 +4012,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "halloween-a-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Mazzini",
+    "manifest": "Halloween a Casale Monferrato",
+    "nome": "Halloween a Casale Monferrato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    },
    "in-viaggio-per-crescere-con-le-storie-nati-per-leg-casale-monferrato": {
     "anni": [
@@ -7997,6 +8085,17 @@
  },
  "frascaro": {
   "eventi": {
+   "castagnata-in-piazza-societa-operaia-di-mutuo-socc-frascaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Rangone",
+    "manifest": "",
+    "nome": "Castagnata in Piazza - Società Operaia di Mutuo Soccorso Frascaro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   },
    "frutti-e-buoi-dei-paesi-tuoi-frascaro": {
     "anni": [
      2026
@@ -8604,6 +8703,23 @@
    }
   },
   "nome": "Isola Sant'Antonio",
+  "prov": "AL"
+ },
+ "lerma": {
+  "eventi": {
+   "aspettando-halloween-associazione-culturale-un-lib-lerma": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Polifunzionale di Lerma",
+    "manifest": "",
+    "nome": "Aspettando Halloween - Associazione Culturale 'Un Libro per Amico' e Biblioteca Civica di Lerma",
+    "organizza": "Associazione Culturale 'Un Libro per Amico' e Biblioteca Civica di Lerma",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   }
+  },
+  "nome": "Lerma",
   "prov": "AL"
  },
  "levaldigi": {
@@ -12623,6 +12739,17 @@
  },
  "pozzoloformigaro": {
   "eventi": {
+   "letture-da-brivido-ma-per-sorridere-halloween-bibl-pozzolo-formigaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cantine del Castello",
+    "manifest": "",
+    "nome": "Letture da Brivido... ma per Sorridere! Halloween - Biblioteca Comunale Caterina De Marco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-28"
+   },
    "vivi-pozzolo-estate-nella-corte-del-castello-pozzolo-formigaro": {
     "anni": [
      2026
@@ -12759,6 +12886,17 @@
     "luogo": "Oratorio Don Bosco di Quargnento",
     "manifest": "",
     "nome": "Holy Ween - Un pomeriggio di luce e gioia per tutti! - ANSPI",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "pronti-a-entrare-nel-gioco-avventura-dungeons-and-quargnento": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Quargnento",
+    "manifest": "",
+    "nome": "Pronti a Entrare nel Gioco? - Avventura Dungeons and Dragons - Biblioteca di Quargnento",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
@@ -15454,6 +15592,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-21"
+   },
+   "serravhalloween-devil-circus-magic-circus-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Serravalle",
+    "manifest": "",
+    "nome": "SerravHalloween! - Devil Circus & Magic Circus",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    }
   },
   "nome": "Serravalle Scrivia",
@@ -16329,6 +16478,17 @@
     "pagina": true,
     "ultima": "2026-09-04"
    },
+   "halloween-a-valenza-citta-di-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzetta Verdi",
+    "manifest": "",
+    "nome": "Halloween a Valenza - Città di Valenza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "la-strapigiama-i-edizione-associazione-gli-amici-d-valenza": {
     "anni": [
      2026
@@ -17099,6 +17259,17 @@
  },
  "villasansecondo": {
   "eventi": {
+   "dolcetto-scherzetto-se-in-giro-vai-col-carretto-pr-villa-san-secondo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sede Pro Loco Villa San Secondo",
+    "manifest": "",
+    "nome": "Dolcetto Scherzetto Se in Giro Vai col Carretto - Pro Loco Villa San Secondo",
+    "organizza": "Pro Loco Villa San Secondo",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "grande-gioco-dell-oca-pro-loco-villa-san-secondo": {
     "anni": [
      2026
@@ -17182,6 +17353,17 @@
     "organizza": "Pro Loco Visone",
     "pagina": true,
     "ultima": "2026-10-04"
+   },
+   "tradizionale-distribuzione-dei-ceci-pro-loco-vison-visone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Matteotti",
+    "manifest": "",
+    "nome": "Tradizionale Distribuzione dei Ceci - Pro Loco Visone",
+    "organizza": "Pro Loco Visone",
+    "pagina": true,
+    "ultima": "2026-11-02"
    }
   },
   "nome": "Visone",

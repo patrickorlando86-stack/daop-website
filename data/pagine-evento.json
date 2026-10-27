@@ -355,6 +355,33 @@
   "slug": "a-piccoli-passi-la-salute-e-un-cammino-che-inizia-asti",
   "updated": "2026-10-27"
  },
+ "a-spasso-col-fantasma-laboratorio-spaventoso-asti": {
+  "anchor": "ev-2026-10-31-a-spasso-col-fantasma-laboratorio-spaventoso",
+  "categoria": "Laboratorio",
+  "citta": "Asti",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Laboratorio spaventoso per bambini a tema Halloween presso Palazzo Mazzetti di Asti. Due turni disponibili alle 15:00 e alle 16:30 per un Halloween da brividi.",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "3-10 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Palazzo Mazzetti - Asti (AT)",
+  "last_seen": "2026-10-27",
+  "lat": "44.9007",
+  "loc": "daop_asti_4016664260909371501.webp",
+  "lon": "8.2068",
+  "luogo": "Palazzo Mazzetti",
+  "manifest": "",
+  "nome": "A Spasso col Fantasma - Laboratorio spaventoso",
+  "ora": "15:00 e 16:30",
+  "prezzo": "Non indicato",
+  "prov": "AT",
+  "riga": 369,
+  "slug": "a-spasso-col-fantasma-laboratorio-spaventoso-asti",
+  "updated": "2026-10-27"
+ },
  "a-spasso-con-la-marchesa-wi-mu-castello-di-barolo": {
   "anchor": "ev-2026-09-13-a-spasso-con-la-marchesa-wi-mu-castello-di-barolo",
   "categoria": "Cultura",
@@ -546,7 +573,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 124,
+  "riga": 121,
   "slug": "adulti-connessi-come-lo-smartphone-impatta-sulla-q-tortona",
   "updated": "2026-10-27"
  },
@@ -715,7 +742,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 128,
+  "riga": 125,
   "slug": "aiuto-o-ai-intelligenza-artificiale-digitale-e-nuo-tortona",
   "updated": "2026-10-27"
  },
@@ -743,7 +770,7 @@
   "ora": "vari",
   "prezzo": "17 euro",
   "prov": "CN",
-  "riga": 337,
+  "riga": 332,
   "slug": "aj-a-caraj-caraglio",
   "updated": "2026-10-27"
  },
@@ -935,7 +962,7 @@
   "ora": "20:45",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 154,
+  "riga": 150,
   "slug": "alimentazione-nell-eta-scolare-e-prescolare-comune-guarene",
   "updated": "2026-10-27"
  },
@@ -2209,6 +2236,33 @@
   "slug": "artisti-senza-pennello-l-arte-della-natura-tortona",
   "updated": "2026-10-27"
  },
+ "aspettando-halloween-associazione-culturale-un-lib-lerma": {
+  "anchor": "ev-2026-10-30-aspettando-halloween-associazione-culturale-un-lib",
+  "categoria": "Sagra & Festa",
+  "citta": "Lerma",
+  "consigliato": "No",
+  "d_end": "2026-10-30",
+  "d_start": "2026-10-30",
+  "descr": "Pomeriggio di Halloween per bambini e famiglie con dolcetto o scherzetto per le vie del paese, pentolacce, banchetti di libri e oggettistica, giochi e merendone per tutti. Organizzato dall'Associazione Culturale 'Un Libro per Amico' e dalla Biblioteca Civica di Lerma.",
+  "df": "30/10/2026",
+  "di": "30/10/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Centro Polifunzionale di Lerma - Lerma (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.6356857",
+  "loc": "daop_alessandria_4016658144726938723.webp",
+  "lon": "8.7133561",
+  "luogo": "Centro Polifunzionale di Lerma",
+  "manifest": "",
+  "nome": "Aspettando Halloween - Associazione Culturale 'Un Libro per Amico' e Biblioteca Civica di Lerma",
+  "ora": "dalle ore 15",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 361,
+  "slug": "aspettando-halloween-associazione-culturale-un-lib-lerma",
+  "updated": "2026-10-27"
+ },
  "aspettando-halloween-laboratorio-creativo-letture-fossano": {
   "anchor": "ev-2026-10-30-aspettando-halloween-laboratorio-creativo-letture",
   "categoria": "Laboratorio",
@@ -2233,7 +2287,7 @@
   "ora": "16:30-18:00",
   "prezzo": "8 euro",
   "prov": "CN",
-  "riga": 320,
+  "riga": 315,
   "slug": "aspettando-halloween-laboratorio-creativo-letture-fossano",
   "updated": "2026-10-27"
  },
@@ -2261,7 +2315,7 @@
   "ora": "17:30-19:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 211,
+  "riga": 207,
   "slug": "aspettando-halloween-yo-yo-active-play-alessandria",
   "updated": "2026-10-27"
  },
@@ -2627,7 +2681,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 180,
+  "riga": 176,
   "slug": "autunno-in-fiera-pro-loco-valgrana",
   "updated": "2026-10-27"
  },
@@ -2738,7 +2792,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 264,
+  "riga": 260,
   "slug": "avventure-da-brividi-vicoforte",
   "updated": "2026-10-27"
  },
@@ -3237,7 +3291,7 @@
   "ora": "11:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 94,
+  "riga": 92,
   "slug": "bibliobebe-con-floriana-lovera-bambini-19-35-mesi-bra",
   "updated": "2026-10-27"
  },
@@ -3265,7 +3319,7 @@
   "ora": "10:00-11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 93,
+  "riga": 91,
   "slug": "bibliobebe-con-floriana-lovera-bambini-9-18-mesi-bra",
   "updated": "2026-10-27"
  },
@@ -3293,7 +3347,7 @@
   "ora": "16:45-17:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 91,
+  "riga": 89,
   "slug": "bibliobebe-con-valentina-radici-semi-e-parole-bra",
   "updated": "2026-10-27"
  },
@@ -3349,7 +3403,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 69,
+  "riga": 68,
   "slug": "bibliochef-con-elena-boves",
   "updated": "2026-10-27"
  },
@@ -3516,7 +3570,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 289,
+  "riga": 285,
   "slug": "bosio-halloween",
   "updated": "2026-10-27"
  },
@@ -3544,7 +3598,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 221,
+  "riga": 217,
   "slug": "boves-stregata",
   "updated": "2026-10-27"
  },
@@ -3986,8 +4040,35 @@
   "ora": "16:30-17:30",
   "prezzo": "15 euro a bambino",
   "prov": "CN",
-  "riga": 50,
+  "riga": 49,
   "slug": "caccia-al-tesoro-di-halloween-carezza-racconigi",
+  "updated": "2026-10-27"
+ },
+ "caccia-al-tesoro-di-halloween-cuoregiovane-acqui-terme": {
+  "anchor": "ev-2026-10-31-caccia-al-tesoro-di-halloween-cuoregiovane",
+  "categoria": "Spettacolo",
+  "citta": "Acqui Terme",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "11ª edizione della Caccia al Tesoro di Halloween ad Acqui Terme. Dalle 15:30 alle 18:00 il classico 'Dolcetto e Scherzetto' si arricchisce di una caccia all'indizio nelle attività commerciali aderenti. Iscrizione gratuita alla partenza in Piazza Bollente; vincono tutti i gruppi che completano la mappa!",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "4-12 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Piazza Bollente - Acqui Terme (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.6740198",
+  "loc": "daop_alessandria_4016658368484624144.webp",
+  "lon": "8.4726563",
+  "luogo": "Piazza Bollente",
+  "manifest": "",
+  "nome": "Caccia al Tesoro di Halloween - CuoreGiovane",
+  "ora": "15:30-18:00",
+  "prezzo": "Gratuito",
+  "prov": "AL",
+  "riga": 362,
+  "slug": "caccia-al-tesoro-di-halloween-cuoregiovane-acqui-terme",
   "updated": "2026-10-27"
  },
  "camminata-alla-ricerca-delle-stelle-cadenti-pro-lo-ponzano-monferrato": {
@@ -4125,7 +4206,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 81,
+  "riga": 79,
   "slug": "camminate-domenicali-a-castagnole-delle-lanze-comu",
   "updated": "2026-10-27"
  },
@@ -4571,7 +4652,7 @@
   "ora": "dalle 15",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 325,
+  "riga": 320,
   "slug": "castagnata-di-halloween-pro-loco-di-limonetto",
   "updated": "2026-10-27"
  },
@@ -4627,7 +4708,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 281,
+  "riga": 277,
   "slug": "castagnata-e-ciclocross-di-s-martino-festa-patrona-pasturana",
   "updated": "2026-10-27"
  },
@@ -4654,7 +4735,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 181,
+  "riga": 177,
   "slug": "castagnata-e-festa-di-inizio-anno-catechistico-a-r-cherasco",
   "updated": "2026-10-27"
  },
@@ -4708,7 +4789,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 163,
+  "riga": 159,
   "slug": "castagnata-in-maschera-festa-di-halloween-autunno-castelceriolo",
   "updated": "2026-10-27"
  },
@@ -4737,6 +4818,33 @@
   "prov": "AL",
   "riga": 346,
   "slug": "castagnata-in-oratorio-pro-loco-e-comune-di-borgo-borgo-san-martino",
+  "updated": "2026-10-27"
+ },
+ "castagnata-in-piazza-societa-operaia-di-mutuo-socc-frascaro": {
+  "anchor": "ev-2026-11-01-castagnata-in-piazza-societa-operaia-di-mutuo-socc",
+  "categoria": "Sagra & Festa",
+  "citta": "Frascaro",
+  "consigliato": "No",
+  "d_end": "2026-11-01",
+  "d_start": "2026-11-01",
+  "descr": "Tradizionale castagnata in piazza con caldarroste e vin brulé in piazza Rangone. In caso di maltempo la manifestazione si terrà al coperto presso i locali SOMS di via Cavour.",
+  "df": "01/11/2026",
+  "di": "01/11/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Piazza Rangone - Frascaro (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.826449",
+  "loc": "daop_alessandria_4016338186667041610.webp",
+  "lon": "8.532245",
+  "luogo": "Piazza Rangone",
+  "manifest": "",
+  "nome": "Castagnata in Piazza - Società Operaia di Mutuo Soccorso Frascaro",
+  "ora": "15:30",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 357,
+  "slug": "castagnata-in-piazza-societa-operaia-di-mutuo-socc-frascaro",
   "updated": "2026-10-27"
  },
  "castagnata-mercatino-edizione-envie": {
@@ -5171,7 +5279,7 @@
   "ora": "20:30",
   "prezzo": "10 euro a persona; gratuito per bambini sotto i 6 anni se accompagnati",
   "prov": "CN",
-  "riga": 182,
+  "riga": 178,
   "slug": "castiglia-da-brivido-processo-ad-una-masca-saluzzo",
   "updated": "2026-10-27"
  },
@@ -5342,7 +5450,7 @@
   "ora": "19:30",
   "prezzo": "15 euro",
   "prov": "CN",
-  "riga": 157,
+  "riga": 153,
   "slug": "cena-in-maschera-di-halloween-pro-loco-albaretto-t-albaretto-torre",
   "updated": "2026-10-27"
  },
@@ -5733,7 +5841,7 @@
   "ora": "14:00-17:30",
   "prezzo": "Voucher acquisto prodotti da 6 euro (obbligatorio per tutti); bambini sotto i 2 anni gratuito",
   "prov": "AT",
-  "riga": 117,
+  "riga": 114,
   "slug": "ciaurin-l-orto-delle-zucche-san-damiano-d-asti",
   "updated": "2026-10-27"
  },
@@ -6290,7 +6398,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 200,
+  "riga": 196,
   "slug": "consulenza-educativa-centro-per-le-famiglie-asti",
   "updated": "2026-10-27"
  },
@@ -7069,7 +7177,7 @@
   "ora": "10:30",
   "prezzo": "Contributo libero",
   "prov": "CN",
-  "riga": 48,
+  "riga": 47,
   "slug": "da-mamma-a-mamma-carezza-racconigi",
   "updated": "2026-10-27"
  },
@@ -7124,7 +7232,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 293,
+  "riga": 289,
   "slug": "dance-show-punteacapo-studio-danza-serravalle-scrivia",
   "updated": "2026-10-27"
  },
@@ -7345,7 +7453,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 300,
+  "riga": 296,
   "slug": "dolcetto-o-libretto-ubik-asti",
   "updated": "2026-10-27"
  },
@@ -7372,8 +7480,35 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 132,
+  "riga": 129,
   "slug": "dolcetto-o-scherzetto-comune-di-basaluzzo",
+  "updated": "2026-10-27"
+ },
+ "dolcetto-o-scherzetto-festa-di-halloween-punto-di-alessandria": {
+  "anchor": "ev-2026-10-29-dolcetto-o-scherzetto-festa-di-halloween-punto-di",
+  "categoria": "Sagra & Festa",
+  "citta": "Alessandria",
+  "consigliato": "No",
+  "d_end": "2026-10-29",
+  "d_start": "2026-10-29",
+  "descr": "Festa di Halloween per bambini in costume a tema presso il negozio Punto Di di Alessandria. Un pomeriggio di divertimento tra dolcetti e scherzetti, con i piccoli invitati a presentarsi vestiti a tema. L'evento si svolge dalle 16:30 alle 17:30 in Via Parini 21.",
+  "df": "29/10/2026",
+  "di": "29/10/2026",
+  "eta": "3-10 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Via Parini 21, Alessandria (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.9110327",
+  "loc": "daop_alessandria_4016574570283774201.webp",
+  "lon": "8.6148186",
+  "luogo": "Punto Di",
+  "manifest": "",
+  "nome": "Dolcetto o Scherzetto? Festa di Halloween - Punto Di",
+  "ora": "16:30-17:30",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 360,
+  "slug": "dolcetto-o-scherzetto-festa-di-halloween-punto-di-alessandria",
   "updated": "2026-10-27"
  },
  "dolcetto-o-scherzetto-la-grande-festa-dei-bambini-novi-ligure": {
@@ -7399,8 +7534,36 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 231,
+  "riga": 227,
   "slug": "dolcetto-o-scherzetto-la-grande-festa-dei-bambini-novi-ligure",
+  "updated": "2026-10-27"
+ },
+ "dolcetto-scherzetto-se-in-giro-vai-col-carretto-pr-villa-san-secondo": {
+  "anchor": "ev-2026-10-31-dolcetto-scherzetto-se-in-giro-vai-col-carretto-pr",
+  "categoria": "Sagra & Festa",
+  "citta": "Villa San Secondo",
+  "consigliato": "No",
+  "contatto": "141905609",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "A bordo del carretto e a piedi, i bimbi faranno dolcetto o scherzetto per le vie del paese con sosta golosa di panini offerti dalla Pro Loco. Per gli accompagnatori, in attesa del ritorno dal giro, possibilità di gustare un piatto di pasta e un bicchiere di vino al costo di 5 euro. Al rientro, un piccolo rinfresco per tutti presso la sede della Pro Loco. Prenotazione obbligatoria entro il 28/10 al numero indicato.",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "3-12 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Sede Pro Loco - Villa San Secondo (AT)",
+  "last_seen": "2026-10-27",
+  "lat": "45.005075",
+  "loc": "daop_asti_4015679849531711494.webp",
+  "lon": "8.1352487",
+  "luogo": "Sede Pro Loco Villa San Secondo",
+  "manifest": "",
+  "nome": "Dolcetto Scherzetto Se in Giro Vai col Carretto - Pro Loco Villa San Secondo",
+  "ora": "19:30",
+  "prezzo": "Gratuito (panini offerti dalla Pro Loco per i bimbi; pasta e vino per accompagnatori 5 euro)",
+  "prov": "AT",
+  "riga": 367,
+  "slug": "dolcetto-scherzetto-se-in-giro-vai-col-carretto-pr-villa-san-secondo",
   "updated": "2026-10-27"
  },
  "dolci-terre-speciale-cioccolato-edizione-novi-ligure": {
@@ -7648,7 +7811,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 52,
+  "riga": 51,
   "slug": "equi-lab-centro-famiglie-savigliano",
   "updated": "2026-10-27"
  },
@@ -7813,7 +7976,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 62,
+  "riga": 61,
   "slug": "escursione-invernale-nel-bosco-dell-aleve-pontechianale",
   "updated": "2026-10-27"
  },
@@ -8037,7 +8200,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 199,
+  "riga": 195,
   "slug": "essere-genitori-che-fatica-centro-per-le-famiglie-asti",
   "updated": "2026-10-27"
  },
@@ -8065,7 +8228,7 @@
   "ora": "sab 14:00-20:00; dom visite al museo su prenotazione",
   "prezzo": "",
   "prov": "AT",
-  "riga": 119,
+  "riga": 116,
   "slug": "esserearte-arte-e-teatro-nei-luoghi-del-gesso-moncucco-torinese",
   "updated": "2026-10-27"
  },
@@ -8593,7 +8756,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 71,
+  "riga": 69,
   "slug": "favolando-boves",
   "updated": "2026-10-27"
  },
@@ -9118,7 +9281,7 @@
   "ora": "10:00-17:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 244,
+  "riga": 240,
   "slug": "festa-dei-ceci-shopping-a-gogo-pro-loco-refrancore",
   "updated": "2026-10-27"
  },
@@ -10396,7 +10559,7 @@
   "ora": "dalle 16",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 344,
+  "riga": 339,
   "slug": "festa-di-halloween-a-carentino-pro-loco-di-carenti",
   "updated": "2026-10-27"
  },
@@ -10424,7 +10587,7 @@
   "ora": "17:00-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 219,
+  "riga": 215,
   "slug": "festa-di-halloween-bambini-in-maschera-a-casalgras-casalgrasso",
   "updated": "2026-10-27"
  },
@@ -10452,7 +10615,7 @@
   "ora": "16:30-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 220,
+  "riga": 216,
   "slug": "festa-di-halloween-bambini-in-maschera-a-moretta",
   "updated": "2026-10-27"
  },
@@ -10480,7 +10643,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 177,
+  "riga": 173,
   "slug": "festa-di-halloween-biblioteca-del-tempo-e-dei-sape-rocca-d-arazzo",
   "updated": "2026-10-27"
  },
@@ -10508,7 +10671,7 @@
   "ora": "16:45-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 198,
+  "riga": 194,
   "slug": "festa-di-halloween-centro-per-le-famiglie-asti",
   "updated": "2026-10-27"
  },
@@ -10536,7 +10699,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 89,
+  "riga": 87,
   "slug": "festa-di-halloween-con-escape-room-mani-di-fata-co-castelletto-monferrato",
   "updated": "2026-10-27"
  },
@@ -10563,7 +10726,7 @@
   "ora": "15:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 222,
+  "riga": 218,
   "slug": "festa-di-halloween-in-via-brofferio-caraglio",
   "updated": "2026-10-27"
  },
@@ -10590,7 +10753,7 @@
   "ora": "20:45",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 236,
+  "riga": 232,
   "slug": "festa-di-halloween-non-aprite-quella-porta-francavilla-bisio",
   "updated": "2026-10-27"
  },
@@ -10621,6 +10784,33 @@
   "slug": "festa-di-halloween-per-i-bambini-pro-loco-san-marz-san-marzano-oliveto",
   "updated": "2026-10-27"
  },
+ "festa-di-halloween-pro-loco-carrosio": {
+  "anchor": "ev-2026-10-31-festa-di-halloween-pro-loco-carrosio",
+  "categoria": "Sagra & Festa",
+  "citta": "Carrosio",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Festa di Halloween organizzata dalla Pro Loco di Carrosio presso la sede dell'ex asilo. In programma laboratori spaventosi, merenda mostruosa e il classico dolcetto o scherzetto per le vie del paese. Aperta a bambini di tutte le età, meglio presentarsi in costume!",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Sede Ex-Asilo - Carrosio (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.6582837",
+  "loc": "daop_alessandria_4015665864012582010.webp",
+  "lon": "8.8315737",
+  "luogo": "Sede Ex-Asilo",
+  "manifest": "",
+  "nome": "Festa di Halloween - Pro Loco Carrosio",
+  "ora": "17:30",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 356,
+  "slug": "festa-di-halloween-pro-loco-carrosio",
+  "updated": "2026-10-27"
+ },
  "festa-di-halloween-pro-loco-di-carezzano": {
   "anchor": "ev-2026-10-31-festa-di-halloween-pro-loco-di-carezzano",
   "categoria": "Sagra & Festa",
@@ -10645,7 +10835,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 288,
+  "riga": 284,
   "slug": "festa-di-halloween-pro-loco-di-carezzano",
   "updated": "2026-10-27"
  },
@@ -10672,7 +10862,7 @@
   "ora": "mattina",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 292,
+  "riga": 288,
   "slug": "festa-di-halloween-pro-loco-masio",
   "updated": "2026-10-27"
  },
@@ -11173,7 +11363,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 229,
+  "riga": 225,
   "slug": "festa-patronale-di-san-martino-orsara-bormida",
   "updated": "2026-10-27"
  },
@@ -11870,7 +12060,7 @@
   "riga": 166,
   "ritirata": "2026-08-31",
   "slug": "festival-delle-quando-e-dove-asti",
-  "updated": "2026-10-25"
+  "updated": "2026-10-27"
  },
  "festival-delle-sagre-astigiane": {
   "anchor": "ev-2026-09-12-festival-delle-sagre-astigiane-2026",
@@ -12091,7 +12281,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 67,
+  "riga": 66,
   "slug": "fiera-del-cavolo-di-san-giovanni-casal-cermelli",
   "updated": "2026-10-27"
  },
@@ -12367,7 +12557,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 276,
+  "riga": 272,
   "slug": "fiera-di-santa-caterina-acqui-terme",
   "updated": "2026-10-27"
  },
@@ -12508,6 +12698,33 @@
   "prov": "AT",
   "riga": 80,
   "slug": "fiera-nazionale-del-tartufo-di-montiglio-monferrat-montiglio-monferrato",
+  "updated": "2026-10-27"
+ },
+ "fiera-nazionale-del-tartufo-e-di-san-martin-canelli": {
+  "anchor": "ev-2026-11-08-fiera-nazionale-del-tartufo-e-di-san-martin",
+  "categoria": "Sagra & Festa",
+  "citta": "Canelli",
+  "consigliato": "No",
+  "d_end": "2026-11-08",
+  "d_start": "2026-11-08",
+  "descr": "La Fiera Nazionale del Tartufo e di San Martin porta a Canelli una giornata di festa con il profumo d'autunno protagonista, tra mercati, tradizioni e il fascino del tartufo canellese. Chi arriva in treno può vivere un momento speciale con il treno storico alla stazione ferroviaria. Per tutta la giornata i bambini possono cimentarsi in una caccia al tesoro nel centro storico alla ricerca dei sassi poetici decorati e nascosti dagli alunni dell'Istituto Comprensivo di Canelli. Nel pomeriggio, al Pala Tartufo, spazio ai più piccoli con letture animate al profumo d'autunno. Programma: Tartufo e Bambini - Letture al profumo d'autunno (16:00); Caccia al Tesoro - Sassi DiVersi (Tutta la giornata); Arrivo Treno Storico (10:43).",
+  "df": "08/11/2026",
+  "di": "08/11/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Piazzale FS - C.so Libertà 75 - Canelli (AT)",
+  "last_seen": "2026-10-27",
+  "lat": "44.7190311",
+  "loc": "daop_asti_4016622216719919075.webp",
+  "lon": "8.2869065",
+  "luogo": "Pala Tartufo",
+  "manifest": "Fiera Nazionale del Tartufo e di San Martin",
+  "nome": "Fiera Nazionale del Tartufo e di San Martin",
+  "ora": "vari",
+  "prezzo": "Non indicato",
+  "prov": "AT",
+  "riga": 366,
+  "slug": "fiera-nazionale-del-tartufo-e-di-san-martin-canelli",
   "updated": "2026-10-27"
  },
  "fiera-nazionale-del-tartufo-moncalvo-monferrato": {
@@ -13223,7 +13440,7 @@
   "ora": "21:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 280,
+  "riga": 276,
   "slug": "game-night-biblioteca-civica-comunale-castelletto-castelletto-d-orba",
   "updated": "2026-10-27"
  },
@@ -13443,7 +13660,7 @@
   "ora": "10:00-11:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 205,
+  "riga": 201,
   "slug": "giocare-per-crescere-giochi-motori-e-creativi-yo-y-alessandria",
   "updated": "2026-10-27"
  },
@@ -13582,7 +13799,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 273,
+  "riga": 269,
   "slug": "giochi-in-simboli-centro-paideia-di-torino-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -13972,7 +14189,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 60,
+  "riga": 59,
   "slug": "gita-cicloturistica-al-bosco-del-merlino-e-sulle-c-caramagna-piemonte",
   "updated": "2026-10-27"
  },
@@ -14056,7 +14273,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 213,
+  "riga": 209,
   "slug": "gran-castagnata-al-parco-dell-ingenio-busca",
   "updated": "2026-10-27"
  },
@@ -14446,7 +14663,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 165,
+  "riga": 161,
   "slug": "halloween-a-balzola",
   "updated": "2026-10-27"
  },
@@ -14474,8 +14691,35 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 333,
+  "riga": 328,
   "slug": "halloween-a-casa-galimberti-cuneo",
+  "updated": "2026-10-27"
+ },
+ "halloween-a-casale-monferrato": {
+  "anchor": "ev-2026-10-31-halloween-a-casale-monferrato",
+  "categoria": "Sagra & Festa",
+  "citta": "Casale Monferrato",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Halloween a Casale Monferrato è una festa pensata per le famiglie, con un pomeriggio ricco di atmosfera e divertimento per i più piccoli. Si parte da Piazza Mazzini per una parata itinerante tra le vie della città, tra dolcetti e scherzetti. Si chiude poi al Paraboloide con uno spettacolo musicale ispirato al film animato Coco. Programma: Parata Itinerante di Halloween (15:30); Coco - Il Musical (17:00).",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Piazza Mazzini - Casale Monferrato (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "45.1362661",
+  "loc": "daop_alessandria_4016658510050978513.webp",
+  "lon": "8.4498127",
+  "luogo": "Piazza Mazzini",
+  "manifest": "Halloween a Casale Monferrato",
+  "nome": "Halloween a Casale Monferrato",
+  "ora": "vari",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 363,
+  "slug": "halloween-a-casale-monferrato",
   "updated": "2026-10-27"
  },
  "halloween-a-pecetto-pro-loco-borsalino-aps-pecetto-di-valenza": {
@@ -14501,7 +14745,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 169,
+  "riga": 165,
   "slug": "halloween-a-pecetto-pro-loco-borsalino-aps-pecetto-di-valenza",
   "updated": "2026-10-27"
  },
@@ -14528,7 +14772,7 @@
   "ora": "21:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 282,
+  "riga": 278,
   "slug": "halloween-a-pietra-marazzi-s-o-m-s-di-pietra-maraz",
   "updated": "2026-10-27"
  },
@@ -14556,7 +14800,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 265,
+  "riga": 261,
   "slug": "halloween-a-san-giacomo-di-roburent",
   "updated": "2026-10-27"
  },
@@ -14583,8 +14827,35 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 232,
+  "riga": 228,
   "slug": "halloween-a-serravalle-scrivia",
+  "updated": "2026-10-27"
+ },
+ "halloween-a-valenza-citta-di-valenza": {
+  "anchor": "ev-2026-10-31-halloween-a-valenza-citta-di-valenza",
+  "categoria": "Sagra & Festa",
+  "citta": "Valenza",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Un pomeriggio da brividi in Piazzetta Verdi: sfilata e premi per le maschere, spettacolo di fuoco, truccabimbi, laboratori e animazione, danza e caldarroste. Dalle 17:00 alle 18:00 'Note di Terrore': canzoni itineranti in Corso Garibaldi. Venite con il costume più spaventoso!",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Piazzetta Verdi - Valenza (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "45.0147871",
+  "loc": "daop_alessandria_4016660760430656105.webp",
+  "lon": "8.6456664",
+  "luogo": "Piazzetta Verdi",
+  "manifest": "",
+  "nome": "Halloween a Valenza - Città di Valenza",
+  "ora": "16:30-19:00",
+  "prezzo": "Ingresso libero",
+  "prov": "AL",
+  "riga": 364,
+  "slug": "halloween-a-valenza-citta-di-valenza",
   "updated": "2026-10-27"
  },
  "halloween-a-villaromagnano-pro-loco-villaromagnano": {
@@ -14611,7 +14882,7 @@
   "ora": "16:00",
   "prezzo": "5 euro",
   "prov": "AL",
-  "riga": 194,
+  "riga": 190,
   "slug": "halloween-a-villaromagnano-pro-loco-villaromagnano",
   "updated": "2026-10-27"
  },
@@ -14666,7 +14937,7 @@
   "ora": "10:30",
   "prezzo": "5 euro a partecipante",
   "prov": "CN",
-  "riga": 319,
+  "riga": 314,
   "slug": "halloween-al-museo-di-chi-e-questa-mano-cuneo",
   "updated": "2026-10-27"
  },
@@ -14693,7 +14964,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 242,
+  "riga": 238,
   "slug": "halloween-al-parco-asti",
   "updated": "2026-10-27"
  },
@@ -14746,7 +15017,7 @@
   "ora": "vari",
   "prezzo": "20 euro (adulti e bambini), sconto 5 euro a famiglia",
   "prov": "CN",
-  "riga": 263,
+  "riga": 259,
   "slug": "halloween-al-rifugio-galaberna-ostana",
   "updated": "2026-10-27"
  },
@@ -14802,7 +15073,7 @@
   "ora": "20:30-00:30",
   "prezzo": "30 euro a squadra (1-5 persone) + biglietto d'ingresso",
   "prov": "CN",
-  "riga": 109,
+  "riga": 106,
   "slug": "halloween-al-wimu-rob-a-da-masche-barolo",
   "updated": "2026-10-27"
  },
@@ -14830,7 +15101,7 @@
   "ora": "18:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 196,
+  "riga": 192,
   "slug": "halloween-circus-pro-loco-di-guazzora",
   "updated": "2026-10-27"
  },
@@ -14858,8 +15129,35 @@
   "ora": "16:00-18:00",
   "prezzo": "10 euro a bimbo (8 euro per famiglie tesserate)",
   "prov": "CN",
-  "riga": 324,
+  "riga": 319,
   "slug": "halloween-con-la-compagnia-del-cardo-festa-in-masc-carde",
+  "updated": "2026-10-27"
+ },
+ "halloween-da-paura-letture-ad-alta-voce-asti": {
+  "anchor": "ev-2026-10-30-halloween-da-paura-letture-ad-alta-voce",
+  "categoria": "Cultura",
+  "citta": "Asti",
+  "consigliato": "No",
+  "d_end": "2026-10-30",
+  "d_start": "2026-10-30",
+  "descr": "Letture ad alta voce a tema Halloween alla Biblioteca Astense di Asti. Un pomeriggio di storie spaventose per i più piccoli in occasione della notte delle streghe.",
+  "df": "30/10/2026",
+  "di": "30/10/2026",
+  "eta": "4-12 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Biblioteca Astense - Asti (AT)",
+  "last_seen": "2026-10-27",
+  "lat": "44.9621126",
+  "loc": "daop_asti_4016664260909371501.webp",
+  "lon": "7.9491609",
+  "luogo": "Biblioteca Astense",
+  "manifest": "",
+  "nome": "Halloween da Paura - Letture ad alta voce",
+  "ora": "17:00",
+  "prezzo": "Non indicato",
+  "prov": "AT",
+  "riga": 368,
+  "slug": "halloween-da-paura-letture-ad-alta-voce-asti",
   "updated": "2026-10-27"
  },
  "halloween-da-pauraaa-biblioteca-astense-giorgio-fa-asti": {
@@ -14885,7 +15183,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 302,
+  "riga": 298,
   "slug": "halloween-da-pauraaa-biblioteca-astense-giorgio-fa-asti",
   "updated": "2026-10-27"
  },
@@ -14913,7 +15211,7 @@
   "ora": "16:30-17:45",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 348,
+  "riga": 343,
   "slug": "halloween-da-pauraaa-biblioteca-civica-francesca-c-alessandria",
   "updated": "2026-10-27"
  },
@@ -14940,7 +15238,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 234,
+  "riga": 230,
   "slug": "halloween-dei-bambini-pro-loco-gabiano",
   "updated": "2026-10-27"
  },
@@ -14967,7 +15265,7 @@
   "ora": "11:00-12:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 171,
+  "riga": 167,
   "slug": "halloween-dei-piccoli-biblioteca-g-s-p-raiteri-quargnento",
   "updated": "2026-10-27"
  },
@@ -15023,7 +15321,7 @@
   "ora": "17:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 347,
+  "riga": 342,
   "slug": "halloween-dolcetto-o-scherzetto-comune-di-gamalero",
   "updated": "2026-10-27"
  },
@@ -15050,7 +15348,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 291,
+  "riga": 287,
   "slug": "halloween-festa-per-bambini-alice-bel-colle",
   "updated": "2026-10-27"
  },
@@ -15078,7 +15376,7 @@
   "ora": "15:00-16:30 / 17:00-19:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 170,
+  "riga": 166,
   "slug": "halloween-in-biblioteca-quargnento",
   "updated": "2026-10-27"
  },
@@ -15105,7 +15403,7 @@
   "ora": "vari",
   "prezzo": "10 euro",
   "prov": "CN",
-  "riga": 252,
+  "riga": 248,
   "slug": "halloween-in-contrada-dogliani",
   "updated": "2026-10-27"
  },
@@ -15133,8 +15431,35 @@
   "ora": "17:00",
   "prezzo": "10 euro a bambino",
   "prov": "CN",
-  "riga": 256,
+  "riga": 252,
   "slug": "halloween-in-libreria-la-bookeria-alba",
+  "updated": "2026-10-27"
+ },
+ "halloween-in-museo-visita-stregata-asti": {
+  "anchor": "ev-2026-10-31-halloween-in-museo-visita-stregata",
+  "categoria": "Cultura",
+  "citta": "Asti",
+  "consigliato": "No",
+  "d_end": "2026-11-01",
+  "d_start": "2026-10-31",
+  "descr": "Visita stregata al Museo Paleontologico di Asti per Halloween: il 31 ottobre dalle 17:30 e il 1° novembre alle 11:00 e alle 15:00. Un percorso spaventoso tra i fossili del museo.",
+  "df": "01/11/2026",
+  "di": "31/10/2026",
+  "eta": "4-12 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Museo Paleontologico - Asti (AT)",
+  "last_seen": "2026-10-27",
+  "lat": "44.9621126",
+  "loc": "daop_asti_4016664260909371501.webp",
+  "lon": "7.9491609",
+  "luogo": "Museo Paleontologico",
+  "manifest": "",
+  "nome": "Halloween in Museo - Visita stregata",
+  "ora": "vari",
+  "prezzo": "Non indicato",
+  "prov": "AT",
+  "riga": 370,
+  "slug": "halloween-in-museo-visita-stregata-asti",
   "updated": "2026-10-27"
  },
  "halloween-in-piazza-pro-loco-robilante": {
@@ -15161,7 +15486,7 @@
   "ora": "17:30",
   "prezzo": "1 euro a bambino",
   "prov": "CN",
-  "riga": 321,
+  "riga": 316,
   "slug": "halloween-in-piazza-pro-loco-robilante",
   "updated": "2026-10-27"
  },
@@ -15188,7 +15513,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 203,
+  "riga": 199,
   "slug": "halloween-in-piazza-san-damiano-d-asti",
   "updated": "2026-10-27"
  },
@@ -15216,7 +15541,7 @@
   "ora": "14:30-18:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 266,
+  "riga": 262,
   "slug": "halloween-in-scuderia-centro-ippico-equimaresco-savigliano",
   "updated": "2026-10-27"
  },
@@ -15243,7 +15568,7 @@
   "ora": "17:00-20:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 156,
+  "riga": 152,
   "slug": "halloween-in-tesiland-tesi-square-cherasco",
   "updated": "2026-10-27"
  },
@@ -15296,7 +15621,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 301,
+  "riga": 297,
   "slug": "halloween-isola-d-asti",
   "updated": "2026-10-27"
  },
@@ -15323,7 +15648,7 @@
   "ora": "15:30-17:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 322,
+  "riga": 317,
   "slug": "halloween-kids-party-blockbusters-mondovi",
   "updated": "2026-10-27"
  },
@@ -15350,7 +15675,7 @@
   "ora": "21:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 243,
+  "riga": 239,
   "slug": "halloween-magico-a-cortiglione-caccia-al-tesoro",
   "updated": "2026-10-27"
  },
@@ -15377,7 +15702,7 @@
   "ora": "21:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 176,
+  "riga": 172,
   "slug": "halloween-night-comitato-per-noche",
   "updated": "2026-10-27"
  },
@@ -15404,7 +15729,7 @@
   "ora": "16:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 214,
+  "riga": 210,
   "slug": "halloween-party-festa-di-halloween-pro-loco-polong-polonghera",
   "updated": "2026-10-27"
  },
@@ -15431,7 +15756,7 @@
   "ora": "17:00-19:00",
   "prezzo": "5 euro a bambino",
   "prov": "CN",
-  "riga": 258,
+  "riga": 254,
   "slug": "halloween-party-ginnastica-ritmica-victoria-alba",
   "updated": "2026-10-27"
  },
@@ -15458,7 +15783,7 @@
   "ora": "17:00-22:00",
   "prezzo": "10 euro (bambini e adulti)",
   "prov": "CN",
-  "riga": 330,
+  "riga": 325,
   "slug": "halloween-party-giocolandia-bra",
   "updated": "2026-10-27"
  },
@@ -15513,7 +15838,7 @@
   "ora": "14:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 164,
+  "riga": 160,
   "slug": "halloween-party-inaugurazione-stagione-27-iceinlin-alessandria",
   "updated": "2026-10-27"
  },
@@ -15568,7 +15893,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 286,
+  "riga": 282,
   "slug": "halloween-party-libreria-i-girasoli-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -15595,7 +15920,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 351,
+  "riga": 346,
   "slug": "halloween-party-oratorio-parrocchiale-di-fubine",
   "updated": "2026-10-27"
  },
@@ -15623,7 +15948,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 329,
+  "riga": 324,
   "slug": "halloween-party-pro-loco-polonghera",
   "updated": "2026-10-27"
  },
@@ -15650,7 +15975,7 @@
   "ora": "16:30",
   "prezzo": "Offerta libera",
   "prov": "CN",
-  "riga": 255,
+  "riga": 251,
   "slug": "halloween-party-reticoli-aps-alba",
   "updated": "2026-10-27"
  },
@@ -15677,7 +16002,7 @@
   "ora": "16:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 135,
+  "riga": 132,
   "slug": "halloween-party-sabato-da-paura-pro-loco-rocchetta-rocchetta-tanaro",
   "updated": "2026-10-27"
  },
@@ -15704,7 +16029,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 195,
+  "riga": 191,
   "slug": "halloween-pro-loco-di-cassine",
   "updated": "2026-10-27"
  },
@@ -15732,7 +16057,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 235,
+  "riga": 231,
   "slug": "halloween-san-sebastiano-curone",
   "updated": "2026-10-27"
  },
@@ -15759,7 +16084,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 346,
+  "riga": 341,
   "slug": "halloween-truccabimbi-e-merenda-pro-loco-spigno-mo-spigno-monferrato",
   "updated": "2026-10-27"
  },
@@ -15786,7 +16111,7 @@
   "ora": "21:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 350,
+  "riga": 345,
   "slug": "halloween-una-festa-mostruosa-pro-loco-di-altavill-altavilla-monferrato",
   "updated": "2026-10-27"
  },
@@ -15813,7 +16138,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 345,
+  "riga": 340,
   "slug": "halloween-voltaggio",
   "updated": "2026-10-27"
  },
@@ -15841,7 +16166,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 259,
+  "riga": 255,
   "slug": "hallowvill-il-villaggio-da-brivido-villafalletto",
   "updated": "2026-10-27"
  },
@@ -15868,7 +16193,7 @@
   "ora": "15:00-19:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 283,
+  "riga": 279,
   "slug": "happy-halloween-centro-commerciale-panorama-alessa-alessandria",
   "updated": "2026-10-27"
  },
@@ -15896,7 +16221,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 349,
+  "riga": 344,
   "slug": "holy-ween-un-pomeriggio-di-luce-e-gioia-per-tutti-quargnento",
   "updated": "2026-10-27"
  },
@@ -15923,7 +16248,7 @@
   "ora": "15:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 328,
+  "riga": 323,
   "slug": "holyween-party-racconigi",
   "updated": "2026-10-27"
  },
@@ -16144,7 +16469,7 @@
   "ora": "vari",
   "prezzo": "10 euro",
   "prov": "CN",
-  "riga": 250,
+  "riga": 246,
   "slug": "i-sabatini-con-marta-valsania-novello",
   "updated": "2026-10-27"
  },
@@ -16338,7 +16663,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 343,
+  "riga": 338,
   "slug": "il-bosco-delle-storie-la-corte-agricola-castelnuovo-scrivia",
   "updated": "2026-10-27"
  },
@@ -16505,7 +16830,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 72,
+  "riga": 70,
   "slug": "il-gatto-con-gli-stivali-quando-il-cervello-ci-tir-roddino",
   "updated": "2026-10-27"
  },
@@ -16614,7 +16939,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 272,
+  "riga": 268,
   "slug": "il-gran-borbottante-laboratorio-a-cura-di-sergio-c-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -16975,7 +17300,7 @@
   "ora": "16:15",
   "prezzo": "5 euro a bambino",
   "prov": "CN",
-  "riga": 334,
+  "riga": 329,
   "slug": "il-segreto-della-chiave-caccia-al-tesoro-in-castel-serralunga-d-alba",
   "updated": "2026-10-27"
  },
@@ -17029,7 +17354,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 327,
+  "riga": 322,
   "slug": "il-tesoro-del-brigante-e-la-fata-valentina-visite-monteu-roero",
   "updated": "2026-10-27"
  },
@@ -17057,7 +17382,7 @@
   "ora": "15:00",
   "prezzo": "7 euro (sia adulti che bambini)",
   "prov": "CN",
-  "riga": 268,
+  "riga": 264,
   "slug": "il-treno-dell-autunno-museo-ferroviario-piemontese-savigliano",
   "updated": "2026-10-27"
  },
@@ -17095,7 +17420,7 @@
   "consigliato": "No",
   "d_end": "2026-10-31",
   "d_start": "2026-10-31",
-  "descr": "Festa di Halloween al Sferisterio Comunale di Ovada con street food, truccabimbi, labirinto di paglia, mercatino hobbisti, DJ set, photo booth, allestimento tematico, laboratorio zucche, dolcetto o scherzetto e giochi. Ingresso gratuito, alcune attività a pagamento. Ingresso vietato ai minori non accompagnati.",
+  "descr": "Al Sferisterio Comunale di Ovada, il 31 ottobre va in scena un pomeriggio di Halloween pensato per famiglie e bambini. Tra gonfiabili, truccabimbi, laboratorio delle zucche, giochi, dolcetto o scherzetto e pony, i più piccoli avranno di che divertirsi per ore; nel mezzo, workshop dedicati alle vere origini di Halloween offrono un momento curioso e coinvolgente anche per i grandi. La festa si anima poi con musica dal vivo e balli per i bambini, fino a chiudersi in serata con un dj set. Programma: Attività per bambini - In Balia degli Eventi Halloween (16:00-19:00); Esibizione Mambo Rico - In Balia degli Eventi Halloween (16:30); Workshop Le Vere Origini di Halloween - In Balia degli Eventi Halloween (16:45); Esibizione Mambo Rico (seconda) - In Balia degli Eventi Halloween (17:00); Workshop Le Vere Origini di Halloween (secondo) - In Balia degli Eventi Halloween (17:15); Baby Dance con Mambo Rico - In Balia degli Eventi Halloween (17:30); Musica CelticLegends - In Balia degli Eventi Halloween (17:45); DJ Set by AluDJ - In Balia degli Eventi Halloween (18:10).",
   "df": "31/10/2026",
   "di": "31/10/2026",
   "eta": "Tutte le età (famiglie)",
@@ -17111,7 +17436,7 @@
   "ora": "16:00-23:00",
   "prezzo": "Ingresso gratuito - attività a pagamento",
   "prov": "AL",
-  "riga": 131,
+  "riga": 128,
   "slug": "in-balia-di-halloween-in-balia-degli-eventi-ovada",
   "updated": "2026-10-27"
  },
@@ -17442,7 +17767,7 @@
   "ora": "17:00-18:15",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 136,
+  "riga": 133,
   "slug": "io-sono-un-artista-crome-in-movimento-aps-vezza-d-alba",
   "updated": "2026-10-27"
  },
@@ -17526,7 +17851,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 188,
+  "riga": 184,
   "slug": "kocho-farfalle-a-colori-casale-monferrato",
   "updated": "2026-10-27"
  },
@@ -17637,7 +17962,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 126,
+  "riga": 123,
   "slug": "l-amore-ai-tempi-dei-social-affettivita-e-sessuali-tortona",
   "updated": "2026-10-27"
  },
@@ -17969,7 +18294,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 129,
+  "riga": 126,
   "slug": "la-fattoria-in-biblioteca-tortona",
   "updated": "2026-10-27"
  },
@@ -17996,7 +18321,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 216,
+  "riga": 212,
   "slug": "la-festa-di-halloween-passeggiata-nel-bosco-merend-paesana",
   "updated": "2026-10-27"
  },
@@ -18218,7 +18543,7 @@
   "ora": "16:30-17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 122,
+  "riga": 119,
   "slug": "la-natura-si-trasforma-l-arte-della-natura-tortona",
   "updated": "2026-10-27"
  },
@@ -18492,7 +18817,7 @@
   "ora": "vari",
   "prezzo": "7 euro",
   "prov": "CN",
-  "riga": 251,
+  "riga": 247,
   "slug": "la-paura-fa-halloween-in-biblioteca-e-in-museo-alba",
   "updated": "2026-10-27"
  },
@@ -18744,7 +19069,7 @@
   "riga": 207,
   "ritirata": "2026-09-03",
   "slug": "la-settimana-del-palio-di-asti",
-  "updated": "2026-10-25"
+  "updated": "2026-10-27"
  },
  "la-settimana-del-palio-di-asti-canelli": {
   "anchor": "ev-2026-09-05-la-settimana-del-palio-di-asti-2026",
@@ -18772,7 +19097,7 @@
   "riga": 208,
   "ritirata": "2026-09-03",
   "slug": "la-settimana-del-palio-di-asti-canelli",
-  "updated": "2026-10-18"
+  "updated": "2026-10-27"
  },
  "la-strapigiama-i-edizione-associazione-gli-amici-d-valenza": {
   "anchor": "ev-2026-10-25-la-strapigiama-i-edizione-associazione-gli-amici-d",
@@ -19104,7 +19429,7 @@
   "ora": "14:30-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 61,
+  "riga": 60,
   "slug": "laboratorio-con-la-natura-al-museo-naturalistico-d-revello",
   "updated": "2026-10-27"
  },
@@ -19269,7 +19594,7 @@
   "ora": "10:30-12:00",
   "prezzo": "12 euro a bambino",
   "prov": "CN",
-  "riga": 218,
+  "riga": 214,
   "slug": "laboratorio-creativo-di-halloween-ritratti-di-fami-cuneo",
   "updated": "2026-10-27"
  },
@@ -19297,7 +19622,7 @@
   "ora": "16:15-18:00",
   "prezzo": "15 euro a bambino (costo atelier + merenda)",
   "prov": "CN",
-  "riga": 217,
+  "riga": 213,
   "slug": "laboratorio-creativo-di-halloween-ritratti-di-fami-fossano",
   "updated": "2026-10-27"
  },
@@ -19493,7 +19818,7 @@
   "ora": "9:30-11:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 51,
+  "riga": 50,
   "slug": "laboratorio-di-halloween-centro-famiglie-fossano",
   "updated": "2026-10-27"
  },
@@ -19577,7 +19902,7 @@
   "ora": "16:00-17:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 303,
+  "riga": 299,
   "slug": "laboratorio-di-manga-palestr3-giovani-demonte",
   "updated": "2026-10-27"
  },
@@ -19634,7 +19959,7 @@
   "ora": "9:30-12:00",
   "prezzo": "15 euro a bambino",
   "prov": "CN",
-  "riga": 326,
+  "riga": 321,
   "slug": "laboratorio-di-spagnolo-di-halloween-studio-espano-chiusa-di-pesio",
   "updated": "2026-10-27"
  },
@@ -19662,7 +19987,7 @@
   "ora": "17:00-18:00",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 254,
+  "riga": 250,
   "slug": "laboratorio-halloween-il-melograno-cuneo",
   "updated": "2026-10-27"
  },
@@ -19690,7 +20015,7 @@
   "ora": "17:00-18:00",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 253,
+  "riga": 249,
   "slug": "laboratorio-halloween-il-melograno-mondovi",
   "updated": "2026-10-27"
  },
@@ -19887,7 +20212,7 @@
   "ora": "17:15",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 271,
+  "riga": 267,
   "slug": "le-avventure-della-famiglia-catastrofino-il-profes-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -19915,7 +20240,7 @@
   "ora": "17:00",
   "prezzo": "5 euro a bambino",
   "prov": "CN",
-  "riga": 183,
+  "riga": 179,
   "slug": "le-erbe-delle-streghe-musei-saluzzo-itur",
   "updated": "2026-10-27"
  },
@@ -19943,7 +20268,7 @@
   "ora": "10:00-11:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 66,
+  "riga": 65,
   "slug": "le-letture-del-sabato-halloween-pasturana",
   "updated": "2026-10-27"
  },
@@ -20110,7 +20435,7 @@
   "ora": "19:00, 20:00, 21:00",
   "prezzo": "Adulti 10 euro, bambini gratuito (under 14)",
   "prov": "CN",
-  "riga": 215,
+  "riga": 211,
   "slug": "le-notti-di-halloween-nel-bosco-della-trebulina-paesana",
   "updated": "2026-10-27"
  },
@@ -20393,6 +20718,33 @@
   "slug": "letture-animate-tesori-d-autunno-a-cura-di-officin-bra",
   "updated": "2026-10-27"
  },
+ "letture-da-brivido-ma-per-sorridere-halloween-bibl-pozzolo-formigaro": {
+  "anchor": "ev-2026-10-28-letture-da-brivido-ma-per-sorridere-halloween-bibl",
+  "categoria": "Cultura",
+  "citta": "Pozzolo Formigaro",
+  "consigliato": "No",
+  "d_end": "2026-10-28",
+  "d_start": "2026-10-28",
+  "descr": "Letture animate a tema Halloween dedicate ai bambini della Scuola dell'Infanzia, organizzate dalla Biblioteca Comunale Caterina De Marco di Pozzolo Formigaro. Un appuntamento giocoso e colorato tra fantasmini, zucche sorridenti e storie da brivido... ma per sorridere!",
+  "df": "28/10/2026",
+  "di": "28/10/2026",
+  "eta": "0-6 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Cantine del Castello - Pozzolo Formigaro (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.7929799",
+  "loc": "daop_alessandria_4016510725259498778.webp",
+  "lon": "8.783417",
+  "luogo": "Cantine del Castello",
+  "manifest": "",
+  "nome": "Letture da Brivido... ma per Sorridere! Halloween - Biblioteca Comunale Caterina De Marco",
+  "ora": "10:15",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 359,
+  "slug": "letture-da-brivido-ma-per-sorridere-halloween-bibl-pozzolo-formigaro",
+  "updated": "2026-10-27"
+ },
  "letture-e-colori-centro-famiglie-fossano": {
   "anchor": "ev-2026-10-15-letture-e-colori-centro-famiglie-fossano",
   "categoria": "Laboratorio",
@@ -20500,7 +20852,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 267,
+  "riga": 263,
   "slug": "letture-mostruose-per-persone-curiose-revello",
   "updated": "2026-10-27"
  },
@@ -20527,7 +20879,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 53,
+  "riga": 52,
   "slug": "letture-per-bambini-maestra-claudia-piasco",
   "updated": "2026-10-27"
  },
@@ -20554,7 +20906,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 55,
+  "riga": 54,
   "slug": "letture-per-bambini-maestra-daniela-piasco",
   "updated": "2026-10-27"
  },
@@ -20581,7 +20933,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 56,
+  "riga": 55,
   "slug": "letture-per-bambini-maestra-fiorella-piasco",
   "updated": "2026-10-27"
  },
@@ -20608,7 +20960,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 58,
+  "riga": 57,
   "slug": "letture-per-bambini-mamma-agnese-piasco",
   "updated": "2026-10-27"
  },
@@ -20635,7 +20987,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 54,
+  "riga": 53,
   "slug": "letture-per-bambini-mamma-anna-piasco",
   "updated": "2026-10-27"
  },
@@ -20690,7 +21042,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 57,
+  "riga": 56,
   "slug": "letture-per-bambini-nonna-michela-e-nonno-giulio-piasco",
   "updated": "2026-10-27"
  },
@@ -20800,7 +21152,7 @@
   "ora": "20:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 260,
+  "riga": 256,
   "slug": "libri-spaventosi-a-spasso-per-il-paese-biblioteca-treiso",
   "updated": "2026-10-27"
  },
@@ -20940,7 +21292,7 @@
   "ora": "15:00-22:00",
   "prezzo": "2 euro a giostra (escluse giostre a tempo e a premio con sconto 1 euro)",
   "prov": "AT",
-  "riga": 352,
+  "riga": 347,
   "slug": "luna-park-nizza-apertura-nizza-monferrato",
   "updated": "2026-10-27"
  },
@@ -20967,7 +21319,7 @@
   "ora": "10:00-20:00",
   "prezzo": "2 euro a giostra (escluse giostre a tempo e a premio con sconto 1 euro)",
   "prov": "AT",
-  "riga": 353,
+  "riga": 348,
   "slug": "luna-park-nizza-gran-finale-nizza-monferrato",
   "updated": "2026-10-27"
  },
@@ -21022,7 +21374,7 @@
   "ora": "10:00-11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 99,
+  "riga": 97,
   "slug": "magic-english-playing-learning-con-elena-f-bra",
   "updated": "2026-10-27"
  },
@@ -21050,7 +21402,7 @@
   "ora": "11:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 100,
+  "riga": 98,
   "slug": "magic-english-words-rhymes-con-elena-a-bra",
   "updated": "2026-10-27"
  },
@@ -21217,7 +21569,7 @@
   "ora": "09:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 212,
+  "riga": 208,
   "slug": "mani-che-creano-laboratorio-di-presepi-per-bambini-boves",
   "updated": "2026-10-27"
  },
@@ -21328,7 +21680,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 201,
+  "riga": 197,
   "slug": "massaggio-infantile-a-i-m-i-centro-per-le-famiglie-asti",
   "updated": "2026-10-27"
  },
@@ -21356,7 +21708,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 275,
+  "riga": 271,
   "slug": "matite-sotto-l-albero-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -21577,7 +21929,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 64,
+  "riga": 63,
   "slug": "mercatini-sotto-il-monviso-comune-di-crissolo",
   "updated": "2026-10-27"
  },
@@ -21633,7 +21985,7 @@
   "ora": "dalle 9",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 159,
+  "riga": 155,
   "slug": "mercatino-delle-pulci-pro-loco-beinette",
   "updated": "2026-10-27"
  },
@@ -21717,7 +22069,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 297,
+  "riga": 293,
   "slug": "mi-leggi-una-storia-biblioteca-civica-di-valfenera",
   "updated": "2026-10-27"
  },
@@ -21772,7 +22124,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 311,
+  "riga": 307,
   "slug": "minestra-di-strega-tribu-autunno-saluzzo",
   "updated": "2026-10-27"
  },
@@ -22018,7 +22370,7 @@
   "ora": "14:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 285,
+  "riga": 281,
   "slug": "mornesween-l-halloween-party-che-non-ti-aspetti-mornese",
   "updated": "2026-10-27"
  },
@@ -22182,7 +22534,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 76,
+  "riga": 74,
   "slug": "mr-book-biblioteca-civica-don-alfredo-bianco-monga-mongardino",
   "updated": "2026-10-27"
  },
@@ -22263,7 +22615,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 146,
+  "riga": 142,
   "slug": "multisensoriale-in-biblioteca-bambini-3-6-anni-ore-marene",
   "updated": "2026-10-27"
  },
@@ -22317,7 +22669,7 @@
   "ora": "15:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 145,
+  "riga": 141,
   "slug": "multisensoriale-in-biblioteca-bambini-6-9-anni-ore-marene",
   "updated": "2026-10-27"
  },
@@ -22398,7 +22750,7 @@
   "ora": "11:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 144,
+  "riga": 140,
   "slug": "multisensoriale-in-biblioteca-genitori-e-bambini-0-marene",
   "updated": "2026-10-27"
  },
@@ -22425,7 +22777,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 143,
+  "riga": 139,
   "slug": "multisensoriale-in-biblioteca-genitori-e-bambini-1-marene",
   "updated": "2026-10-27"
  },
@@ -22452,7 +22804,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 141,
+  "riga": 137,
   "slug": "multisensoriale-in-biblioteca-turno-famiglia-ore-1-marene",
   "updated": "2026-10-27"
  },
@@ -22536,7 +22888,7 @@
   "ora": "17:00-18:30",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 331,
+  "riga": 326,
   "slug": "museum-in-the-dark-bra",
   "updated": "2026-10-27"
  },
@@ -22646,7 +22998,7 @@
   "ora": "10:15",
   "prezzo": "20 euro",
   "prov": "AL",
-  "riga": 355,
+  "riga": 350,
   "slug": "musichiamo-crescere-con-la-musica-12-24-mesi-perco-tortona",
   "updated": "2026-10-27"
  },
@@ -22674,8 +23026,34 @@
   "ora": "11:15",
   "prezzo": "20 euro",
   "prov": "AL",
-  "riga": 356,
+  "riga": 351,
   "slug": "musichiamo-crescere-con-la-musica-24-36-mesi-perco-tortona",
+  "updated": "2026-10-27"
+ },
+ "musichiamo-crescere-con-la-musica-evento": {
+  "anchor": "ev-2026-10-31-musichiamo-crescere-con-la-musica",
+  "categoria": "Laboratorio",
+  "citta": "",
+  "consigliato": "No",
+  "contatto": "351 373 0787",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Musichiamo è un laboratorio musicale pensato per i più piccoli e per chi li accompagna. Attraverso il gioco e la musica, i bambini dai 12 ai 36 mesi esplorano suoni e ritmi insieme ai propri genitori, in un'atmosfera allegra e coinvolgente. Gli appuntamenti si svolgono al mattino e la prenotazione è obbligatoria. Programma: Musichiamo - Crescere con la musica (12-24 mesi) (10:15); Musichiamo - Crescere con la musica (24-36 mesi) (11:15).",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "",
+  "last_seen": "2026-10-27",
+  "loc": "daop_alessandria_4017078638324236349.webp",
+  "luogo": "",
+  "manifest": "Musichiamo - Crescere con la musica",
+  "nome": "Musichiamo - Crescere con la musica",
+  "ora": "vari",
+  "prezzo": "20 euro",
+  "prov": "AL",
+  "riga": 365,
+  "slug": "musichiamo-crescere-con-la-musica-evento",
   "updated": "2026-10-27"
  },
  "my-cup-of-tea-cuneo": {
@@ -22757,7 +23135,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 274,
+  "riga": 270,
   "slug": "natale-con-attilio-la-bottega-del-sanconiglio-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -22784,7 +23162,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 47,
+  "riga": 46,
   "slug": "natale-incontrada-silvano-d-orba",
   "updated": "2026-10-27"
  },
@@ -22895,7 +23273,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 88,
+  "riga": 86,
   "slug": "nel-bosco-di-lorien-gruppo-di-giochi-di-ruolo-asso-alessandria",
   "updated": "2026-10-27"
  },
@@ -23060,7 +23438,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 233,
+  "riga": 229,
   "slug": "notte-di-halloween-pro-loco-orsara-bormida",
   "updated": "2026-10-27"
  },
@@ -23088,7 +23466,7 @@
   "ora": "18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 172,
+  "riga": 168,
   "slug": "notte-halloween-castelletto-merli",
   "updated": "2026-10-27"
  },
@@ -23284,7 +23662,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 127,
+  "riga": 124,
   "slug": "oltre-i-like-capire-social-algoritmi-challenge-e-p-tortona",
   "updated": "2026-10-27"
  },
@@ -23505,7 +23883,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 42,
+  "riga": 41,
   "slug": "open-officina-spazio-aggregativo-saluzzo",
   "updated": "2026-10-27"
  },
@@ -23616,7 +23994,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 186,
+  "riga": 182,
   "slug": "origami-farfalla-casale-monferrato",
   "updated": "2026-10-27"
  },
@@ -23807,7 +24185,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 290,
+  "riga": 286,
   "slug": "oviglio-da-paura",
   "updated": "2026-10-27"
  },
@@ -24036,7 +24414,7 @@
   "riga": 32,
   "ritirata": "2026-09-02",
   "slug": "palio-di-asti-sabato-05-settembre",
-  "updated": "2026-10-25"
+  "updated": "2026-10-27"
  },
  "parco-scenico-zenzero-pontechianale": {
   "adatto_famiglie": "Si",
@@ -24422,7 +24800,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 155,
+  "riga": 151,
   "slug": "peccati-di-gola-xxviii-fiera-regionale-del-tartufo-mondovi",
   "updated": "2026-10-27"
  },
@@ -24534,7 +24912,7 @@
   "ora": "17:00-22:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 167,
+  "riga": 163,
   "slug": "percorso-stregato-pasturana-horror",
   "updated": "2026-10-27"
  },
@@ -24756,7 +25134,7 @@
   "ora": "9:00-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 323,
+  "riga": 318,
   "slug": "piccolo-museo-del-treno-riapertura-robilante",
   "updated": "2026-10-27"
  },
@@ -25035,7 +25413,7 @@
   "ora": "19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 168,
+  "riga": 164,
   "slug": "pizza-e-cinema-di-halloween-centro-per-le-famiglie-tortona",
   "updated": "2026-10-27"
  },
@@ -25339,7 +25717,7 @@
   "ora": "14:30-18:00",
   "prezzo": "20 euro",
   "prov": "CN",
-  "riga": 75,
+  "riga": 73,
   "slug": "pony-games-di-halloween-la-canunia-roccaforte-mondovi",
   "updated": "2026-10-27"
  },
@@ -25424,7 +25802,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 125,
+  "riga": 122,
   "slug": "postare-o-non-postare-il-dilemma-dello-sharenting-tortona",
   "updated": "2026-10-27"
  },
@@ -25539,7 +25917,7 @@
   "ora": "16:15",
   "prezzo": "Tessera associativa 30 euro",
   "prov": "AL",
-  "riga": 358,
+  "riga": 353,
   "slug": "pratica-psicomotoria-percorrere-aps-tortona",
   "updated": "2026-10-27"
  },
@@ -25934,6 +26312,33 @@
   "slug": "proiezione-le-colline-del-mare-comune-di-santo-ste-vesime",
   "updated": "2026-10-27"
  },
+ "pronti-a-entrare-nel-gioco-avventura-dungeons-and-quargnento": {
+  "anchor": "ev-2026-10-31-pronti-a-entrare-nel-gioco-avventura-dungeons-and",
+  "categoria": "Laboratorio",
+  "citta": "Quargnento",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Un'avventura di Dungeons and Dragons a tema Halloween per ragazzi dagli 11 ai 16 anni. Nessuna esperienza richiesta: scegli chi essere, lancia i dadi e decidi cosa accadrà. Nel giorno più pauroso dell'anno, tra libri, magie e creature misteriose, il protagonista sei tu!",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "11-16 anni",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Via Dionigi Motta 1 - Quargnento (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.9450557",
+  "loc": "daop_alessandria_4015582339849041235.webp",
+  "lon": "8.4874079",
+  "luogo": "Biblioteca di Quargnento",
+  "manifest": "",
+  "nome": "Pronti a Entrare nel Gioco? - Avventura Dungeons and Dragons - Biblioteca di Quargnento",
+  "ora": "da verificare",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 355,
+  "slug": "pronti-a-entrare-nel-gioco-avventura-dungeons-and-quargnento",
+  "updated": "2026-10-27"
+ },
  "pronti-ad-essere-intortati-scuola-primaria-di-fran-francavilla-bisio": {
   "anchor": "ev-2026-10-11-pronti-ad-essere-intortati-scuola-primaria-di-fran",
   "categoria": "Sagra & Festa",
@@ -26179,7 +26584,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 357,
+  "riga": 352,
   "slug": "raccontami-una-storia-che-fa-paura-percorrere-aps-tortona",
   "updated": "2026-10-27"
  },
@@ -26208,6 +26613,7 @@
   "prezzo": "Non indicato",
   "prov": "AL",
   "riga": 357,
+  "ritirata": "2026-10-27",
   "slug": "raccontami-una-storia-che-fa-paura-tortona",
   "spostata": "raccontami-una-storia-che-fa-paura-percorrere-aps-tortona",
   "updated": "2026-10-26"
@@ -26655,7 +27061,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 202,
+  "riga": 198,
   "slug": "ritroviamoci-con-coccole-storie-buttigliera-d-asti",
   "updated": "2026-10-27"
  },
@@ -26822,7 +27228,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 150,
+  "riga": 146,
   "slug": "sabati-in-oratorio-prove-della-recita-e-giochi-carru",
   "updated": "2026-10-27"
  },
@@ -28090,7 +28496,7 @@
   "ora": "dalle 15:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 173,
+  "riga": 169,
   "slug": "sale-in-zucca-pro-loco-di-sale",
   "updated": "2026-10-27"
  },
@@ -29018,6 +29424,33 @@
   "slug": "sere-fai-d-estate-camminata-sotto-la-luna-al-caste-manta",
   "updated": "2026-10-27"
  },
+ "serravhalloween-devil-circus-magic-circus-serravalle-scrivia": {
+  "anchor": "ev-2026-10-30-serravhalloween-devil-circus-magic-circus",
+  "categoria": "Spettacolo",
+  "citta": "Serravalle Scrivia",
+  "consigliato": "No",
+  "d_end": "2026-11-01",
+  "d_start": "2026-10-30",
+  "descr": "SerravHalloween torna al Centro Serravalle dal 30 ottobre al 1 novembre con Devil Circus & Magic Circus. Clown stregati, danze rituali, sorprendenti giochi di magia e laboratori a tema per il circo più magico, spaventoso e divertente dell'Halloween.",
+  "df": "01/11/2026",
+  "di": "30/10/2026",
+  "eta": "4-12 anni (da verificare)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Centro Serravalle - Serravalle Scrivia (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.7350776",
+  "loc": "daop_alessandria_4016509285833045818.webp",
+  "lon": "8.8372996",
+  "luogo": "Centro Serravalle",
+  "manifest": "",
+  "nome": "SerravHalloween! - Devil Circus & Magic Circus",
+  "ora": "vari",
+  "prezzo": "Ingresso libero",
+  "prov": "AL",
+  "riga": 358,
+  "slug": "serravhalloween-devil-circus-magic-circus-serravalle-scrivia",
+  "updated": "2026-10-27"
+ },
  "settembeer-fest-sale": {
   "anchor": "ev-2026-09-19-settembeer-fest",
   "categoria": "Sagra & Festa",
@@ -29318,7 +29751,7 @@
   "ora": "17:30-19:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 110,
+  "riga": 107,
   "slug": "silent-book-party-piasco",
   "updated": "2026-10-27"
  },
@@ -30004,7 +30437,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 257,
+  "riga": 253,
   "slug": "storie-da-brividino-letture-e-disegni-da-colorare-limone-piemonte",
   "updated": "2026-10-27"
  },
@@ -30032,7 +30465,7 @@
   "ora": "17:15",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 269,
+  "riga": 265,
   "slug": "storie-da-brivido-storie-suonate-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -30059,7 +30492,7 @@
   "ora": "16:45-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 335,
+  "riga": 330,
   "slug": "storie-in-soffitta-grow-up-bernezzo",
   "updated": "2026-10-27"
  },
@@ -30086,7 +30519,7 @@
   "ora": "16:45-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 336,
+  "riga": 331,
   "slug": "storie-in-soffitta-magico-mondo-di-babbo-natale-gr-bernezzo",
   "updated": "2026-10-27"
  },
@@ -30311,7 +30744,7 @@
   "ora": "9:30-10:30",
   "prezzo": "10 euro coppia bambino/genitore",
   "prov": "CN",
-  "riga": 261,
+  "riga": 257,
   "slug": "sulle-note-di-halloween-laboratorio-musicale-1-3-a-busca",
   "updated": "2026-10-27"
  },
@@ -30339,7 +30772,7 @@
   "ora": "11:00-12:00",
   "prezzo": "10 euro coppia bambino/genitore",
   "prov": "CN",
-  "riga": 262,
+  "riga": 258,
   "slug": "sulle-note-di-halloween-laboratorio-musicale-3-5-a-busca",
   "updated": "2026-10-27"
  },
@@ -30452,7 +30885,7 @@
   "ora": "18:00",
   "prezzo": "5€ bambino, 15€ adulto",
   "prov": "AT",
-  "riga": 223,
+  "riga": 219,
   "slug": "taniween-dolcetto-o-scherzetto-per-le-vie-del-borg-asti",
   "updated": "2026-10-27"
  },
@@ -30618,7 +31051,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 166,
+  "riga": 162,
   "slug": "terruggia-halloween",
   "updated": "2026-10-27"
  },
@@ -30646,7 +31079,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 187,
+  "riga": 183,
   "slug": "teru-teru-bozu-casale-monferrato",
   "updated": "2026-10-27"
  },
@@ -30674,7 +31107,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 189,
+  "riga": 185,
   "slug": "the-little-book-club-comune-di-castelnuovo-scrivia",
   "updated": "2026-10-27"
  },
@@ -31009,6 +31442,33 @@
   "slug": "torneo-scacchi-a-scuola-huc-academy-cuneo",
   "updated": "2026-10-27"
  },
+ "tradizionale-distribuzione-dei-ceci-pro-loco-vison-visone": {
+  "anchor": "ev-2026-11-02-tradizionale-distribuzione-dei-ceci-pro-loco-vison",
+  "categoria": "Sagra & Festa",
+  "citta": "Visone",
+  "consigliato": "No",
+  "d_end": "2026-11-02",
+  "d_start": "2026-11-02",
+  "descr": "La Pro Loco di Visone propone la tradizionale distribuzione dei ceci, preparati secondo un'antica ricetta della cucina piemontese. Un appuntamento che unisce la comunità locale in Piazza Matteotti, all'insegna della tradizione e dei sapori autunnali.",
+  "df": "02/11/2026",
+  "di": "02/11/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-27",
+  "indirizzo": "Piazza Matteotti - Visone (AL)",
+  "last_seen": "2026-10-27",
+  "lat": "44.6527865",
+  "loc": "daop_alessandria_4016150777899797342.webp",
+  "lon": "8.506379",
+  "luogo": "Piazza Matteotti",
+  "manifest": "",
+  "nome": "Tradizionale Distribuzione dei Ceci - Pro Loco Visone",
+  "ora": "11:00",
+  "prezzo": "Ingresso libero",
+  "prov": "AL",
+  "riga": 354,
+  "slug": "tradizionale-distribuzione-dei-ceci-pro-loco-vison-visone",
+  "updated": "2026-10-27"
+ },
  "tradizionale-festa-della-madonna-delle-grazie-villa-san-secondo": {
   "anchor": "ev-2026-10-09-tradizionale-festa-della-madonna-delle-grazie",
   "categoria": "Sagra & Festa",
@@ -31087,7 +31547,7 @@
   "ora": "19:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 230,
+  "riga": 226,
   "slug": "tradizionale-raviolata-trattoria-quattro-ruote-orsara-bormida",
   "updated": "2026-10-27"
  },
@@ -31227,7 +31687,7 @@
   "ora": "16:30-17:15",
   "prezzo": "15 euro a bambino",
   "prov": "CN",
-  "riga": 49,
+  "riga": 48,
   "slug": "trick-or-treat-laboratorio-culinario-di-halloween-racconigi",
   "updated": "2026-10-27"
  },
@@ -31281,7 +31741,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 130,
+  "riga": 127,
   "slug": "trucca-bimbi-con-pazza-animazione-halloween-a-casa-casalnoceto",
   "updated": "2026-10-27"
  },
@@ -31309,7 +31769,7 @@
   "ora": "15:00",
   "prezzo": "Offerta minima 5 euro",
   "prov": "AT",
-  "riga": 354,
+  "riga": 349,
   "slug": "trucca-bimbi-di-halloween-e-lettura-tarocchi-asti",
   "updated": "2026-10-27"
  },
@@ -31475,7 +31935,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 158,
+  "riga": 154,
   "slug": "tutti-i-colori-della-cultura-kids-mondovi",
   "updated": "2026-10-27"
  },
@@ -31667,7 +32127,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 270,
+  "riga": 266,
   "slug": "un-bosco-a-tutto-ritmo-settimana-nazionale-nati-pe-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -31695,7 +32155,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 185,
+  "riga": 181,
   "slug": "un-cane-per-sorridere-casale-monferrato",
   "updated": "2026-10-27"
  },
@@ -31833,7 +32293,7 @@
   "ora": "17:30-19:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 160,
+  "riga": 156,
   "slug": "un-mondo-di-mattoncini-centro-per-le-famiglie-vill-novi-ligure",
   "updated": "2026-10-27"
  },
@@ -31888,7 +32348,7 @@
   "ora": "19:00-21:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 133,
+  "riga": 130,
   "slug": "una-cena-da-brividi-burger-king-alessandria",
   "updated": "2026-10-27"
  },
@@ -31916,7 +32376,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 294,
+  "riga": 290,
   "slug": "una-corsa-mostruosa-mongardino",
   "updated": "2026-10-27"
  },
@@ -32140,7 +32600,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 68,
+  "riga": 67,
   "slug": "uncinetto-corso-base-con-ivana-boves",
   "updated": "2026-10-27"
  },
@@ -32525,7 +32985,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 241,
+  "riga": 237,
   "slug": "viatosto-si-tinge-di-halloween-asti",
   "updated": "2026-10-27"
  },
@@ -32608,7 +33068,7 @@
   "ora": "09:00-17:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 287,
+  "riga": 283,
   "slug": "vino-ceci-e-tartufi-edizione-tramontana",
   "updated": "2026-10-27"
  },
@@ -32717,7 +33177,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 342,
+  "riga": 337,
   "slug": "vita-vino-e-tartufi-ovada",
   "updated": "2026-10-27"
  },
@@ -32852,7 +33312,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 338,
+  "riga": 333,
   "slug": "wow-winter-outdoor-weekend-fiera-della-montagna-en-borgo-san-dalmazzo",
   "updated": "2026-10-27"
  },
@@ -32935,7 +33395,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 174,
+  "riga": 170,
   "slug": "zampeta-o-scherzeto-edizione-arquata-scrivia",
   "updated": "2026-10-27"
  },
