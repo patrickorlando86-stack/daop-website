@@ -3127,6 +3127,17 @@
     "pagina": true,
     "ultima": "2026-10-24"
    },
+   "la-vuoi-una-caldarrosta-gran-castagnata-al-parco-d-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco dell'Ingenio",
+    "manifest": "La Vuoi una Caldarrosta? Gran Castagnata al Parco dell'Ingenio",
+    "nome": "La Vuoi una Caldarrosta? Gran Castagnata al Parco dell'Ingenio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   },
    "sulle-note-di-halloween-laboratorio-musicale-1-3-a-busca": {
     "anni": [
      2026
@@ -12080,6 +12091,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-21"
+   },
+   "vino-ceci-e-tartufi-edizione-parodi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tramontana - vie del paese",
+    "manifest": "",
+    "nome": "Vino, Ceci e Tartufi - 3ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
    }
   },
   "nome": "Parodi Ligure",

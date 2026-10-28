@@ -11,7 +11,7 @@
  },
  "c-al-alessandria": {
   "comune": "Alessandria",
-  "n": 33,
+  "n": 34,
   "prov": "AL"
  },
  "c-al-alfiano-natta": {
@@ -31,7 +31,7 @@
  },
  "c-al-arquata-scrivia": {
   "comune": "Arquata Scrivia",
-  "n": 2,
+  "n": 3,
   "prov": "AL"
  },
  "c-al-avolasca": {
@@ -171,7 +171,7 @@
  },
  "c-al-castelletto-d-orba": {
   "comune": "Castelletto d'Orba",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-castelletto-monferrato": {
@@ -331,7 +331,7 @@
  },
  "c-al-novi-ligure": {
   "comune": "Novi Ligure",
-  "n": 18,
+  "n": 19,
   "prov": "AL"
  },
  "c-al-olivola": {
@@ -591,7 +591,7 @@
  },
  "c-at-asti": {
   "comune": "Asti",
-  "n": 27,
+  "n": 29,
   "prov": "AT"
  },
  "c-at-belveglio": {
@@ -786,7 +786,7 @@
  },
  "c-at-nizza-monferrato": {
   "comune": "Nizza Monferrato",
-  "n": 7,
+  "n": 8,
   "prov": "AT"
  },
  "c-at-olmo-gentile": {
@@ -946,7 +946,7 @@
  },
  "c-cn-bra": {
   "comune": "Bra",
-  "n": 9,
+  "n": 10,
   "prov": "CN"
  },
  "c-cn-briaglia": {
@@ -1397,6 +1397,11 @@
  "c-cn-savigliano": {
   "comune": "Savigliano",
   "n": 8,
+  "prov": "CN"
+ },
+ "c-cn-serralunga-d-alba": {
+  "comune": "Serralunga d'Alba",
+  "n": 1,
   "prov": "CN"
  },
  "c-cn-sommariva-del-bosco": {
