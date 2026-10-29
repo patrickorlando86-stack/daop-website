@@ -410,6 +410,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "halloween-time-yoga-bimbi-a-tema-halloween-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Lucerna Gioco e Creo",
+    "manifest": "",
+    "nome": "Halloween Time - Yoga Bimbi a Tema Halloween",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "halloween-yoga-lab-chandra-h-om-e-alba": {
     "anni": [
      2026
@@ -2534,6 +2545,17 @@
  },
  "borgosandalmazzo": {
   "eventi": {
+   "borgo-orienteering-wow-winter-outdoor-weekend-borgo-san-dalmazzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Bertello",
+    "manifest": "",
+    "nome": "Borgo Orienteering - WOW Winter Outdoor Weekend",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "creo-il-regalo-per-i-miei-nonni-associazione-santu-borgo-san-dalmazzo": {
     "anni": [
      2026
@@ -2701,16 +2723,27 @@
     "pagina": true,
     "ultima": "2026-10-23"
    },
+   "bibliobaby-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
+    "nome": "Bibliobaby",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
+   },
    "bibliochef-con-elena-boves": {
     "anni": [
      2026
     ],
-    "luogo": "Biblioteca del Ricetto",
-    "manifest": "Ottobre in Biblioteca",
-    "nome": "Bibliochef con Elena",
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
+    "nome": "BiblioChef con Elena",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-10-29"
+    "ultima": "2026-11-19"
    },
    "boves-stregata": {
     "anni": [
@@ -2723,6 +2756,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "creolab-games-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
+    "nome": "CreoLab & Games",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
+   },
    "favolando-boves": {
     "anni": [
      2026
@@ -2733,6 +2777,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-28"
+   },
+   "favolando-mini-letture-per-bebe-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
+    "nome": "Favolando - Mini letture per bebè",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-25"
+   },
+   "fumettilab-con-dody-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
+    "nome": "FumettiLab con DodY",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-10"
    },
    "mani-che-creano-laboratorio-di-presepi-per-adulti-boves": {
     "anni": [
@@ -2760,12 +2826,23 @@
     "anni": [
      2026
     ],
-    "luogo": "Biblioteca del Ricetto",
-    "manifest": "Ottobre in Biblioteca",
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
     "nome": "Minichef con Elena",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-10-22"
+    "ultima": "2026-11-12"
+   },
+   "piccolo-yogi-in-crescita-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
+    "nome": "Piccolo Yogi in crescita",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "rivoira-by-sport-boves": {
     "anni": [
@@ -2799,6 +2876,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-27"
+   },
+   "uncinetto-lab-con-ivana-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Novembre in Biblioteca - Biblioteca Civica del Ricetto Boves",
+    "nome": "Uncinetto Lab con Ivana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
    }
   },
   "nome": "Boves",
@@ -3660,6 +3748,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-01"
+   },
+   "faboo-il-potere-dell-immaginazione-caraglio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Civico Caraglio",
+    "manifest": "",
+    "nome": "Faboo - Il potere dell'immaginazione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
    },
    "festa-di-halloween-in-via-brofferio-caraglio": {
     "anni": [
@@ -5851,6 +5950,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "houdini-cento-anni-di-mistero-nella-notte-di-hallo-cherasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo della Magia",
+    "manifest": "Houdini - Cento anni di mistero nella notte di Halloween",
+    "nome": "Houdini - Cento anni di mistero nella notte di Halloween",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
    },
    "intrecci-di-famiglie-rete-mamma-cherasco": {
     "anni": [
@@ -8178,6 +8288,17 @@
     "pagina": true,
     "ultima": "2026-10-29"
    },
+   "laboratorio-di-manga-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spazio NEL CHILL - Cascina Sacredote",
+    "manifest": "",
+    "nome": "Laboratorio di Manga",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
+   },
    "letture-e-colori-centro-famiglie-fossano": {
     "anni": [
      2026
@@ -8249,6 +8370,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-28"
+   },
+   "halloween-momstruoso-moms-di-frabosa-soprana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Comune di Frabosa Soprana",
+    "manifest": "",
+    "nome": "Halloween MOMstruoso - MOMS di Frabosa Soprana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Frabosa Soprana",
@@ -8815,6 +8947,28 @@
     "pagina": true,
     "ultima": "2026-11-05"
    },
+   "castagnata-dei-santi-pro-loco-guarene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza dello Sferisterio",
+    "manifest": "",
+    "nome": "Castagnata dei Santi - Pro Loco Guarene",
+    "organizza": "Pro Loco Guarene",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   },
+   "spooky-game-night-la-tana-dei-goblin-guarene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Tana dei Goblin Guarene",
+    "manifest": "",
+    "nome": "Spooky Game Night - La Tana dei Goblin Guarene",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-30"
+   },
    "sport-in-piazza-comune-di-guarene": {
     "anni": [
      2026
@@ -9236,6 +9390,17 @@
  },
  "manta": {
   "eventi": {
+   "attivita-giochi-al-centro-centro-aggregativo-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ciari Nrussla spazio giovani",
+    "manifest": "Centro Aggregativo Novembre 2026",
+    "nome": "Attività/Giochi al Centro - Centro Aggregativo Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-18"
+   },
    "castelli-aperti-a-ferragosto-castello-della-manta": {
     "anni": [
      2026
@@ -9257,6 +9422,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "giardinaggio-centro-aggregativo-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ciari Nrussla spazio giovani",
+    "manifest": "Centro Aggregativo Novembre 2026",
+    "nome": "Giardinaggio - Centro Aggregativo Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
    },
    "laboratorio-creativo-di-halloween-fascia-1-2-6-ann-manta": {
     "anni": [
@@ -9280,6 +9456,17 @@
     "pagina": true,
     "ultima": "2026-10-24"
    },
+   "laboratorio-di-cucina-centro-aggregativo-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ciari Nrussla spazio giovani",
+    "manifest": "Centro Aggregativo Novembre 2026",
+    "nome": "Laboratorio di Cucina - Centro Aggregativo Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
+   },
    "mercante-per-un-giorno-comune-di-manta": {
     "anni": [
      2026
@@ -9291,6 +9478,17 @@
     "pagina": true,
     "ultima": "2026-10-25"
    },
+   "pomeriggio-della-gentilezza-centro-aggregativo-man-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ciari Nrussla spazio giovani",
+    "manifest": "Centro Aggregativo Novembre 2026",
+    "nome": "Pomeriggio della Gentilezza - Centro Aggregativo Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   },
    "sere-fai-d-estate-camminata-sotto-la-luna-al-caste-manta": {
     "anni": [
      2026
@@ -9301,6 +9499,39 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-28"
+   },
+   "torneo-di-calcetto-centro-aggregativo-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ciari Nrussla spazio giovani",
+    "manifest": "Centro Aggregativo Novembre 2026",
+    "nome": "Torneo di Calcetto - Centro Aggregativo Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-11"
+   },
+   "torneo-di-calcio-e-pallavolo-centro-aggregativo-ma-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ciari Nrussla spazio giovani",
+    "manifest": "Centro Aggregativo Novembre 2026",
+    "nome": "Torneo di Calcio e Pallavolo - Centro Aggregativo Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-04"
+   },
+   "torneo-di-ping-pong-centro-aggregativo-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ciari Nrussla spazio giovani",
+    "manifest": "Centro Aggregativo Novembre 2026",
+    "nome": "Torneo di Ping-Pong - Centro Aggregativo Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-25"
    }
   },
   "nome": "Manta",
@@ -9903,6 +10134,17 @@
     "pagina": true,
     "ultima": "2026-10-10"
    },
+   "la-camminata-dei-babbi-natale-asilo-infantile-don-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza di San Biagio di Mondovì",
+    "manifest": "",
+    "nome": "La Camminata dei Babbi Natale - Asilo Infantile Don Campana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "laboratorio-creativo-con-alice-piaggio-mondovi": {
     "anni": [
      2026
@@ -10263,6 +10505,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-27"
+   },
+   "tourto-mato-laboratorio-di-cucina-per-bambini-il-f-monterosso-grana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ex Oratorio (al campo)",
+    "manifest": "",
+    "nome": "Tourto Mato - Laboratorio di cucina per bambini - Il Falco Società Semplice Agricola",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
    }
   },
   "nome": "Monterosso Grana",
@@ -14081,6 +14334,23 @@
   "nome": "Rocca Grimalda",
   "prov": "AL"
  },
+ "roccasparvera": {
+  "eventi": {
+   "castagnata-di-roccasparvera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Per le vie del paese",
+    "manifest": "Castagnata di Roccasparvera",
+    "nome": "Castagnata di Roccasparvera",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   }
+  },
+  "nome": "Roccasparvera",
+  "prov": "CN"
+ },
  "roccavione": {
   "eventi": {
    "green-volley-torneo-2vs2-pgs-roccavione": {
@@ -15754,6 +16024,17 @@
     "luogo": "Centro Ippico Equimaresco",
     "manifest": "",
     "nome": "Halloween in Scuderia - Centro Ippico Equimaresco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
+   "i-pomeriggi-tenebrosi-di-halloween-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Popolo",
+    "manifest": "I Pomeriggi Tenebrosi di Halloween",
+    "nome": "I Pomeriggi Tenebrosi di Halloween",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
