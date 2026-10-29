@@ -659,6 +659,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-05"
+   },
+   "halloween-albugnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Giochi",
+    "manifest": "Halloween Albugnano",
+    "nome": "Halloween Albugnano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Albugnano",
@@ -1462,6 +1473,39 @@
  },
  "arquatascrivia": {
   "eventi": {
+   "nutrire-leggere-e-respirare-centro-per-le-famiglie-arquata-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Gaetano Poggi",
+    "manifest": "",
+    "nome": "Nutrire, Leggere e Respirare - Centro per le Famiglie Villa Zucca / CSP Arquata Scrivia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-19"
+   },
+   "parliamone-insieme-centro-per-le-famiglie-villa-zu-arquata-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Comune di Arquata Scrivia",
+    "manifest": "",
+    "nome": "Parliamone Insieme - Centro per le famiglie Villa Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
+   },
+   "prepararsi-al-parto-centro-per-le-famiglie-villa-z-arquata-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Gaetano Poggi",
+    "manifest": "",
+    "nome": "Prepararsi al Parto - Centro per le Famiglie Villa Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-12"
+   },
    "sagra-delle-frittelle-arquata-scrivia": {
     "anni": [
      2026
@@ -3204,6 +3248,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "festa-di-halloween-per-tutti-i-bambini-pro-loco-bu-buttigliera-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Umberto I",
+    "manifest": "",
+    "nome": "Festa di Halloween per tutti i bambini - Pro Loco Buttigliera d'Asti",
+    "organizza": "Pro Loco Buttigliera d'Asti",
+    "pagina": true,
+    "ultima": "2026-10-30"
    },
    "letture-e-laboratori-creativi-biblioteca-comunale-buttigliera-d-asti": {
     "anni": [
@@ -8794,6 +8849,17 @@
  },
  "incisascapaccino": {
   "eventi": {
+   "festa-di-halloween-comune-di-incisa-scapaccino-e-p": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Foro Boario",
+    "manifest": "",
+    "nome": "Festa di Halloween - Comune di Incisa Scapaccino e Parrocchia di Incisa Scapaccino",
+    "organizza": "Comune di Incisa Scapaccino e Parrocchia di Incisa Scapaccino",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "sagra-del-cardo-gobbo-e-della-friciula-incisa-scapaccino": {
     "anni": [
      2026
@@ -9123,6 +9189,18 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "nati-per-leggere-biblioteca-civica-comune-di-magli-magliano-alfieri": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Biblioteca Civica Comune di Magliano Alfieri",
+    "manifest": "",
+    "nome": "Nati per Leggere - Biblioteca Civica Comune di Magliano Alfieri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-05-10"
    },
    "soma-d-aj-biblioteca-civica-di-magliano-alfieri": {
     "anni": [
@@ -9625,6 +9703,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-18"
+   },
+   "moncalvo-halloween-dalla-fracia-al-dazio-comune-di": {
+    "anni": [
+     2026
+    ],
+    "luogo": "dalla Fracia al Dazio",
+    "manifest": "",
+    "nome": "Moncalvo Halloween - dalla Fracia al Dazio - Comune di Moncalvo",
+    "organizza": "Comune di Moncalvo",
+    "pagina": true,
+    "ultima": "2026-10-31"
    }
   },
   "nome": "Moncalvo",
@@ -11376,6 +11465,17 @@
     "pagina": true,
     "ultima": "2026-11-17"
    },
+   "luna-park-fiera-di-santa-caterina-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Pernigotti",
+    "manifest": "",
+    "nome": "Luna Park - Fiera di Santa Caterina",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-02"
+   },
    "matite-sotto-l-albero-novi-ligure": {
     "anni": [
      2026
@@ -11573,6 +11673,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-08"
+   },
+   "un-bosco-a-tutto-ritmo-presentazione-del-libro-con-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica - Centro Comunale di Cultura G. Capurro",
+    "manifest": "",
+    "nome": "Un Bosco a Tutto Ritmo - Presentazione del libro con laboratorio musicale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "un-bosco-a-tutto-ritmo-settimana-nazionale-nati-pe-novi-ligure": {
     "anni": [
@@ -17161,6 +17272,17 @@
  },
  "viarigi": {
   "eventi": {
+   "festa-di-halloween-con-mago-morfeus-anspi-viarigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Circolo di Viarigi",
+    "manifest": "",
+    "nome": "Festa di Halloween con Mago Morfeus - ANSPI",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   },
    "saltimpiazza-viarigi": {
     "anni": [
      2026
