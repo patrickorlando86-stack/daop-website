@@ -80,6 +80,10 @@
   /* ── HERO ── */
   .page-hero{padding:148px 24px 88px;background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 60%,#3a6070 100%);text-align:center;position:relative;overflow:hidden}
   /* Niente disegno di sfondo (papa', bambino, arcobaleno), come in esploratore.html (30/10/2026). */
+  /* Su computer alta come le fasce di Eventi, Luoghi e Corsi (535px, la
+     .hero-fascia di eventi.html), col testo in mezzo. Sul telefono no: la'
+     sono alte perche' sotto il testo c'e' l'immagine. */
+  @media(min-width:901px){.page-hero{box-sizing:border-box;min-height:535px;padding-top:124px;padding-bottom:40px;display:flex;flex-direction:column;justify-content:center}}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
