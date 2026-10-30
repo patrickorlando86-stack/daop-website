@@ -126,7 +126,7 @@
    "slug": "piozzo"
   },
   "cn-racconigi": {
-   "n": 6,
+   "n": 21,
    "nome": "Racconigi",
    "slug": "racconigi"
   },
@@ -143,6 +143,6 @@
  },
  "province": {
   "AL": 11,
-  "CN": 121
+  "CN": 136
  }
 }
