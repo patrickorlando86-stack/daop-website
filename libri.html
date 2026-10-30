@@ -85,6 +85,21 @@
      sono alte perche' sotto il testo c'e' l'immagine. */
   @media(min-width:901px){.page-hero{box-sizing:border-box;min-height:535px;padding-top:124px;padding-bottom:40px;display:flex;flex-direction:column;justify-content:center}}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+  /* I libri aperti (30/10/2026), come Ginetto in esploratore.html: sul
+     telefono sopra il titolo, da 901px a destra del testo. La luce sta dalla
+     parte dell'immagine; dove c'e' il testo il blu resta quello del sito,
+     perche' il sottotitolo bianco su azzurro chiaro scende sotto 4,5:1. */
+  .page-hero{background:linear-gradient(180deg,#5b93b4 0%,#3d6a84 34%,var(--navy) 58%,var(--navy-dark) 100%)}
+  .hero-figura{position:relative;z-index:1;width:min(170px,46vw);margin:-12px auto 14px}
+  .hero-figura::before{content:'';position:absolute;inset:6% 0 4%;border-radius:50%;background:radial-gradient(closest-side,rgba(240,200,120,0.30),rgba(240,200,120,0))}
+  .hero-figura img{position:relative;display:block;width:100%;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,0.28))}
+  @media(min-width:901px){
+    .page-hero{background:linear-gradient(100deg,var(--navy-dark) 0%,var(--navy) 48%,#3f6f8a 74%,#5f98b8 100%)}
+    .page-hero-flex{display:flex;align-items:center;justify-content:center;gap:56px;max-width:1040px;margin:0 auto;width:100%}
+    .page-hero-flex .page-hero-inner{margin:0;text-align:left;max-width:560px}
+    .page-hero-flex .page-hero-inner p{margin:0}
+    .page-hero-flex .hero-figura{order:2;width:280px;margin:0;flex-shrink:0}
+  }
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
@@ -253,10 +268,15 @@
 <main id="contenuto">
 <!-- HERO -->
 <header class="page-hero">
+  <div class="page-hero-flex">
+  <div class="hero-figura">
+    <img src="assets/libri/libri-aperti-360.webp" srcset="assets/libri/libri-aperti-360.webp 360w, assets/libri/libri-aperti-640.webp 640w" sizes="(min-width:901px) 280px, 170px" width="640" height="812" alt="Una pila di libri colorati con un libro aperto da cui escono una nuvola, la luna, stelle e germogli" fetchpriority="high" decoding="async">
+  </div>
   <div class="page-hero-inner">
     <span class="section-label">Patrick Orlando</span>
     <h1>I Nostri <em>Libri</em></h1>
     <p>Storie illustrate per bambini e romanzi per adulti — scritti da un papà per tutte le famiglie</p>
+  </div>
   </div>
 </header>
 
