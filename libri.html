@@ -147,6 +147,15 @@
   .footer-bottom-links a:hover{color:rgba(255,255,255,0.6)}
 
   /* ── RESPONSIVE ── */
+  /* La collana di Ginetto (scritta da genera_ginetto.py): testo a sinistra,
+     copertine a destra da 900px; sul telefono le copertine vanno sotto. */
+  .gl-wrap{display:grid;gap:28px;align-items:center}
+  .gl-cop{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;list-style:none;margin:0;padding:0}
+  .gl-cop a{display:block;text-decoration:none;color:var(--text-mid);font-size:0.8rem;font-weight:600;text-align:center;line-height:1.3}
+  .gl-cop img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(30,51,66,0.18);margin-bottom:6px;transition:var(--transition)}
+  .gl-cop a:hover img{transform:translateY(-3px);box-shadow:0 10px 24px rgba(30,51,66,0.24)}
+  .gl-cop .gl-soon{display:block;font-weight:500;color:var(--text-light,#8a96a0)}
+  @media(min-width:900px){.gl-wrap{grid-template-columns:1fr 1.05fr;gap:56px}}
   @media(max-width:900px){
     .nav-links{display:none}
     .hamburger{display:flex}
@@ -250,14 +259,26 @@
 </header>
 
 <!-- COLLANA GINETTO L'ESPLORATORE -->
+<!-- GINETTO:LIBRI:START -->
 <section class="bg-white">
-  <div class="section-inner">
-    <span class="section-label">La collana</span>
-    <h2 class="section-title">Ginetto l'Esploratore</h2>
-    <p class="section-subtitle">I paesi del territorio raccontati ai bambini, un volume alla volta: Casale Monferrato, Castelnuovo Scrivia, Garbagna e Ovada.</p>
-    <a href="esploratore.html" class="btn btn-navy" style="margin-top:28px;">Scopri la collana →</a>
+  <div class="section-inner gl-wrap">
+    <div>
+      <span class="section-label">La collana</span>
+      <h2 class="section-title">Ginetto l'Esploratore</h2>
+      <p class="section-subtitle">I paesi del territorio raccontati ai bambini, un volume alla volta: Casale Monferrato, Castelnuovo Scrivia, Garbagna, Ovada e Novi Ligure. In arrivo: Valenza.</p>
+      <a href="esploratore.html" class="btn btn-navy" style="margin-top:28px;">Scopri la collana →</a>
+    </div>
+    <ul class="gl-cop">
+      <li><a href="esploratore/casale-monferrato.html"><img src="assets/ginetto/copertine/vol-1-casale-monferrato.webp" alt="Copertina del volume 1 di Ginetto l&#x27;Esploratore, dedicato a Casale Monferrato" width="980" height="980" loading="lazy" decoding="async">Casale Monferrato</a></li>
+      <li><a href="esploratore/castelnuovo-scrivia.html"><img src="assets/ginetto/copertine/vol-2-castelnuovo-scrivia.webp" alt="Copertina del volume 2 di Ginetto l&#x27;Esploratore, dedicato a Castelnuovo Scrivia" width="980" height="980" loading="lazy" decoding="async">Castelnuovo Scrivia</a></li>
+      <li><a href="esploratore/garbagna.html"><img src="assets/ginetto/copertine/vol-3-garbagna.webp" alt="Copertina del volume 3 di Ginetto l&#x27;Esploratore, dedicato a Garbagna" width="980" height="980" loading="lazy" decoding="async">Garbagna</a></li>
+      <li><a href="esploratore/ovada.html"><img src="assets/ginetto/copertine/vol-4-ovada.webp" alt="Copertina del volume 4 di Ginetto l&#x27;Esploratore, dedicato a Ovada" width="980" height="980" loading="lazy" decoding="async">Ovada</a></li>
+      <li><a href="esploratore/novi-ligure.html"><img src="assets/ginetto/copertine/vol-5-novi-ligure.webp" alt="Copertina del volume 5 di Ginetto l&#x27;Esploratore, dedicato a Novi Ligure" width="980" height="980" loading="lazy" decoding="async">Novi Ligure</a></li>
+      <li><a href="esploratore/valenza.html"><img src="assets/ginetto/copertine/vol-6-valenza.webp" alt="Copertina del volume 6 di Ginetto l&#x27;Esploratore, dedicato a Valenza" width="980" height="980" loading="lazy" decoding="async">Valenza<span class="gl-soon">in arrivo</span></a></li>
+    </ul>
   </div>
 </section>
+<!-- GINETTO:LIBRI:END -->
 
 <!-- LIBRI PER BAMBINI -->
 <section class="bg-cream">

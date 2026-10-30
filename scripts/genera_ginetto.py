@@ -29,6 +29,7 @@ import genera_eventi as G
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JSON_PATH = os.path.join(ROOT, "data", "ginetto-collana.json")
 HTML_PATH = os.path.join(ROOT, "esploratore.html")
+LIBRI_PATH = os.path.join(ROOT, "libri.html")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 
 # Con l'estensione: /esploratore senza .html non esiste come file e rispondeva
@@ -513,6 +514,53 @@ def sitemap_volumi(urls, oggi):
     open(SITEMAP_PATH, "w", encoding="utf-8").write(s)
 
 
+# ─────────────────────────── libri.html ───────────────────────────
+
+def _elenco(nomi):
+    return nomi[0] if len(nomi) == 1 else ", ".join(nomi[:-1]) + " e " + nomi[-1]
+
+
+def render_libri(volumi):
+    """La sezione della collana in libri.html (30/10/2026).
+
+    Fino a quel giorno era scritta a mano e diceva «Casale Monferrato,
+    Castelnuovo Scrivia, Garbagna e Ovada» con i volumi gia' a sei: la
+    pagina che vende i libri era l'ultima a sapere quanti sono. Ora i paesi
+    e le copertine vengono dallo stesso JSON di esploratore.html, e ogni
+    copertina porta alla pagina del suo paese."""
+    vol = [v for v in volumi if v.get("paese")]
+    usciti = [v["paese"] for v in vol if v.get("stato") != "in-arrivo"]
+    in_arrivo = [v["paese"] for v in vol if v.get("stato") == "in-arrivo"]
+    frase = ("I paesi del territorio raccontati ai bambini, un volume alla volta: "
+             + _elenco(usciti) + ".")
+    if in_arrivo:
+        frase += " In arrivo: " + _elenco(in_arrivo) + "."
+    cop = []
+    for v in vol:
+        if not esiste(v.get("copertina", "")):
+            continue
+        href = f"esploratore/{v['id']}.html" if ha_pagina(v) else "esploratore.html#volumi"
+        soon = ('<span class="gl-soon">in arrivo</span>'
+                if v.get("stato") == "in-arrivo" else "")
+        cop.append(f'      <li><a href="{e(href)}"><img src="{e(v["copertina"])}" '
+                   f'alt="{e(v.get("copertina_alt"))}" width="980" height="980" '
+                   f'loading="lazy" decoding="async">{e(v["paese"])}{soon}</a></li>')
+    return "\n".join([
+        '<section class="bg-white">',
+        '  <div class="section-inner gl-wrap">',
+        '    <div>',
+        '      <span class="section-label">La collana</span>',
+        '      <h2 class="section-title">Ginetto l\'Esploratore</h2>',
+        f'      <p class="section-subtitle">{e(frase)}</p>',
+        '      <a href="esploratore.html" class="btn btn-navy" style="margin-top:28px;">Scopri la collana →</a>',
+        '    </div>',
+        '    <ul class="gl-cop">',
+        *cop,
+        '    </ul>',
+        '  </div>',
+        '</section>'])
+
+
 # ─────────────────────────── iniezione ───────────────────────────
 
 def alterna_fasce(pagina):
@@ -586,6 +634,14 @@ def main():
     pagina = alterna_fasce(pagina)
     open(HTML_PATH, "w", encoding="utf-8").write(pagina)
     update_sitemap()
+    libri = open(LIBRI_PATH, encoding="utf-8").read()
+    libri, k = re.subn(r"(<!-- GINETTO:LIBRI:START -->)(.*?)(<!-- GINETTO:LIBRI:END -->)",
+                       lambda m: m.group(1) + "\n" + render_libri(volumi) + "\n" + m.group(3),
+                       libri, flags=re.S)
+    if k == 1:
+        open(LIBRI_PATH, "w", encoding="utf-8").write(libri)
+    else:
+        print("[genera_ginetto] libri.html: marker GINETTO:LIBRI non trovato, salto")
     urls = scrivi_pagine_volumi(volumi)
     print(f"[genera_ginetto] {len(urls)} pagine in esploratore/: "
           + ", ".join(u.rsplit("/", 1)[-1] for u in urls))

@@ -269,7 +269,7 @@ jobs:
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \
                 rubriche.html luoghi.html corsi.html corsi-provincia-*.html \
-                esploratore.html \
+                esploratore.html libri.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
                 data/luoghi.json data/luoghi-comuni.json \

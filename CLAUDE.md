@@ -1302,6 +1302,12 @@ Casale Monferrato, Castelnuovo Scrivia, Garbagna, Ovada, Novi Ligure, Valenza.
 - **In sitemap** stanno nel blocco `ESPLORATORE`, e nel workflow c'è la
   cartella `esploratore/` (le pagine nuove nascono untracked).
 
+**La sezione della collana in `libri.html` la scrive lo stesso generatore**
+(marker `GINETTO:LIBRI`), dal 30/10/2026: paesi e copertine dal JSON, ogni
+copertina porta alla pagina del suo paese. Era scritta a mano e diceva quattro
+paesi con i volumi già a sei. Per questo `libri.html` è nell'elenco dei file
+del workflow.
+
 Copertina e link Amazon di un volume nuovo si aggiungono nel JSON. Fino ad
 allora la pagina mostra un segnaposto e «Cerca il libro su Amazon» porta alla
 pagina autore, e il log lo elenca sotto «DA CARICARE».
