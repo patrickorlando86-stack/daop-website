@@ -13782,7 +13782,18 @@
     "nome": "Da Mamma a Mamma - CàRezza",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-10-28"
+    "ultima": "2026-11-11"
+   },
+   "espressione-in-gioco-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Espressione in Gioco! - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
    },
    "espressione-in-gioco-fascia-2-6-anni-carezza-racconigi": {
     "anni": [
@@ -13806,6 +13817,17 @@
     "pagina": true,
     "ultima": "2026-10-13"
    },
+   "gioco-destrutturato-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Gioco Destrutturato - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-18"
+   },
    "holyween-party-racconigi": {
     "anni": [
      2026
@@ -13816,6 +13838,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "lo-sto-viziando-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Lo Sto Viziando? - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
+   },
+   "mondo-tullet-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Mondo Tullet - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
    },
    "naturopatia-fiori-di-bach-e-altri-rimedi-carezza-racconigi": {
     "anni": [
@@ -13833,11 +13877,11 @@
      2026
     ],
     "luogo": "CàRezza",
-    "manifest": "",
+    "manifest": "Occhi in Gioco",
     "nome": "Occhi in Gioco - CàRezza",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-10-22"
+    "ultima": "2026-11-28"
    },
    "pilates-in-gravidanza-carezza-racconigi": {
     "anni": [
@@ -13894,6 +13938,28 @@
     "pagina": true,
     "ultima": "2026-10-07"
    },
+   "sogni-d-oro-strategie-dolci-per-migliorare-il-sonn-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Sogni d'Oro - Strategie dolci per migliorare il sonno familiare - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-25"
+   },
+   "storie-piccine-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Storie Piccine - CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-10"
+   },
    "trick-or-treat-laboratorio-culinario-di-halloween-racconigi": {
     "anni": [
      2026
@@ -13914,7 +13980,7 @@
     "nome": "TuteliAMO - Corso Manovre Salvavita Pediatriche - CàRezza",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-24"
+    "ultima": "2026-12-11"
    },
    "tutti-a-tavola-carezza-racconigi": {
     "anni": [
@@ -13926,6 +13992,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-30"
+   },
+   "una-serata-tutta-per-voi-anima-bimbi-carezza-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "CàRezza",
+    "manifest": "",
+    "nome": "Una Serata Tutta per Voi - Anima Bimbi / CàRezza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "uno-scatto-con-i-miei-nonni-carezza-racconigi": {
     "anni": [
