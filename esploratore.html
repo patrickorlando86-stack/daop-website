@@ -245,6 +245,11 @@
      di 111). Il jpg resta come ripiego senza image-set(). */
   /* Niente disegno di sfondo (papa', bambino, arcobaleno): qui la fascia ha
      Ginetto, e i due disegni insieme facevano confusione (30/10/2026). */
+  /* La luce sta dalla parte di Ginetto: in alto sul telefono, a destra da
+     900px. Dove c'e' il testo il blu resta quello del sito, perche' il
+     sottotitolo (bianco al 74%) su un azzurro chiaro scende sotto 4,5:1.
+     L'azzurro e' quello dei cieli delle copertine. */
+  .page-hero{background:linear-gradient(180deg,#5b93b4 0%,#3d6a84 34%,var(--navy) 58%,var(--navy-dark) 100%)}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
   /* Ginetto e Briciola che leggono: l'immagine della collana (30/10/2026).
      Sul telefono sta sopra il titolo; da 900px a destra del testo. Lo sfondo
@@ -386,6 +391,7 @@
     .footer-bottom{flex-direction:row;text-align:left}
   }
   @media(min-width:900px){
+    .page-hero{background:linear-gradient(100deg,var(--navy-dark) 0%,var(--navy) 48%,#3f6f8a 74%,#5f98b8 100%)}
     .page-hero-flex{display:flex;align-items:center;justify-content:center;gap:40px;max-width:1040px;margin:0 auto}
     .page-hero-flex .page-hero-inner{margin:0;text-align:left;max-width:560px}
     .page-hero-flex .page-hero-inner p{margin:0}
