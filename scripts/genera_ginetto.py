@@ -23,6 +23,9 @@ Uso:
 """
 import os, re, json, html, datetime, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import genera_eventi as G
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JSON_PATH = os.path.join(ROOT, "data", "ginetto-collana.json")
 HTML_PATH = os.path.join(ROOT, "esploratore.html")
@@ -35,6 +38,10 @@ SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 # mano nell'HTML.
 PAGE_URL = "https://www.daop.it/esploratore.html"
 AMAZON_AUTORE = "https://www.amazon.it/stores/Patrick-Orlando/author/B0F8B95YG5"
+
+# Le pagine dei singoli volumi: /esploratore/<id>.html. Vedi render_tappe().
+CARTELLA_VOL = os.path.join(ROOT, "esploratore")
+VOL_URL = "https://www.daop.it/esploratore/{}.html"
 
 mancanti = []   # file citati dal JSON ma non presenti nel repo
 
@@ -117,6 +124,9 @@ def render_volumi(volumi):
                 '<circle cx="12" cy="10" r="2.6"/></svg>'
                 f'<span>{e(v.get("paese"))} <span class="vol-prov">({e(v.get("provincia"))})</span></span></p>')
         out.append(f'          <p class="vol-desc">{e(v.get("descrizione"))}</p>')
+        if ha_pagina(v):
+            out.append(f'          <p class="vol-percorso"><a href="/esploratore/{e(v["id"])}.html">'
+                       f'Le {len(v["tappe"])} tappe del percorso a {e(v["paese"])} &rarr;</a></p>')
 
         if in_arrivo:
             out.append('          <p class="vol-soon">In preparazione</p>')
@@ -259,6 +269,250 @@ def render_jsonld(volumi):
             + '\n</script>')
 
 
+# ─────────────────────────── pagine dei volumi ───────────────────────────
+#
+# Una pagina per volume, /esploratore/<id>.html, nata il 30/10/2026.
+#
+# La pagina parla del PAESE, non del libro: nessuno cerca «Ginetto alla
+# scoperta di Garbagna», si cerca «Garbagna con i bambini». Quindi title e H1
+# sono quelli, il corpo e' il percorso a tappe da fare a piedi, e il libro sta
+# sotto, come la ragione per cui quel percorso esiste.
+#
+# - Le tappe sono un RIASSUNTO delle pagine del libro (data/ginetto-collana.json,
+#   chiave "tappe"), non il testo: il libro e' quello che si vende.
+# - Senza tappe la pagina non nasce: sarebbe una copertina e quattro righe, cioe'
+#   piu' povera della scheda che c'e' gia' in esploratore.html.
+# - Sei pagine, una per volume: l'insieme cresce di uno ogni volta che esce un
+#   libro, non coi dati. Non e' scaled content.
+# - Le pagine esistono anche per un volume in arrivo: i posti sono veri da
+#   subito, e al posto del link ad Amazon c'e' «in arrivo».
+
+GN_CSS = """
+.gn-wrap h2{margin:34px 0 10px;font-size:1.3rem;line-height:1.32}
+.gn-wrap>p{margin:0 0 12px;line-height:1.7;max-width:66ch}
+.gn-wrap>p a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
+.gn-tappe{list-style:none;margin:8px 0 0;padding:0;counter-reset:gn}
+.gn-tappe li{counter-increment:gn;position:relative;padding:0 0 18px 44px}
+.gn-tappe li::before{content:counter(gn);position:absolute;left:0;top:1px;width:30px;height:30px;
+ border-radius:50%;background:var(--navy,#2d4a5c);color:#fff;font-weight:700;font-size:.9rem;
+ display:flex;align-items:center;justify-content:center}
+.gn-tappe h3{margin:0 0 4px;font-size:1.05rem;line-height:1.35;color:var(--navy,#2d4a5c)}
+.gn-tappe p{margin:0;line-height:1.65}
+.gn-libro{display:flex;gap:18px;align-items:flex-start;margin:30px 0 10px;padding:18px;
+ border:1px solid var(--linea,#e2d8cb);border-radius:14px;background:var(--carta,#fffcf8)}
+.gn-libro img,.gn-libro .gn-cop-vuota{flex:0 0 132px;width:132px;height:132px;border-radius:8px;object-fit:cover}
+.gn-cop-vuota{background:#2d4a5c;color:#fff;display:flex;align-items:center;justify-content:center;
+ font:700 1.1rem Georgia,serif}
+.gn-libro p{margin:0 0 10px;line-height:1.6}
+.gn-libro .gn-occh{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mid,#6a7a85);margin:0 0 4px}
+.gn-libro h2{margin:0 0 8px;font-size:1.15rem}
+.gn-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border-radius:10px;
+ background:var(--navy,#2d4a5c);color:#fff;font-weight:600;text-decoration:none}
+.gn-soon{font-weight:600;color:var(--text-mid,#6a7a85)}
+@media (max-width:600px){.gn-libro{flex-direction:column}.gn-libro img,.gn-libro .gn-cop-vuota{width:160px;height:160px;flex-basis:auto}}
+"""
+
+
+def ha_pagina(v):
+    return bool(v.get("tappe")) and bool(v.get("paese")) and v.get("id")
+
+
+def _sigla(provincia):
+    nomi = {n.lower(): s for s, n in G.PROVINCE_NOMI.items()}
+    return nomi.get((provincia or "").strip().lower(), "")
+
+
+def _libro_html(v):
+    titolo = v.get("titolo", "")
+    if esiste(v.get("copertina", "")):
+        cop = (f'<img src="/{e(v["copertina"])}" alt="{e(v.get("copertina_alt"))}" '
+               f'width="980" height="980" loading="lazy" decoding="async">')
+    else:
+        cop = f'<div class="gn-cop-vuota" role="img" aria-label="{e(titolo)}">Vol. {e(v.get("numero"))}</div>'
+    if v.get("stato") == "in-arrivo":
+        azione = '<p class="gn-soon">Il libro è in arrivo.</p>'
+    else:
+        link = v.get("amazon") or AMAZON_AUTORE
+        etich = "Vedi il libro su Amazon" if v.get("amazon") else "Cerca il libro su Amazon"
+        azione = (f'<a class="gn-btn" href="{e(link)}" target="_blank" rel="noopener">'
+                  f'{etich}</a>')
+    return (f'<section class="gn-libro">{cop}<div>'
+            f'<p class="gn-occh">Il libro · Volume {e(v.get("numero"))}</p>'
+            f'<h2>{e(titolo)}</h2>'
+            f'<p>{e(v.get("descrizione"))}</p>{azione}</div></section>')
+
+
+def render_tappe(v, volumi, oggi):
+    css, nav, foot = G._guscio()
+    paese, tappe = v["paese"], v["tappe"]
+    sigla = _sigla(v.get("provincia"))
+    url = VOL_URL.format(v["id"])
+    n = len(tappe)
+    titolo = f"{paese} con i bambini: le {n} tappe di Ginetto | DAOP"
+    nomi = [t["nome"] for t in tappe]
+    descr = G.trunc(f"Cosa vedere a {paese} con i bambini, a piedi: "
+                    + ", ".join(nomi) + ". Il percorso del libro di Ginetto l'Esploratore.", 158)
+    a_paese = G.a_citta(e(paese))
+
+    lis = "\n".join(f'    <li><h3>{e(t["nome"])}</h3><p>{e(t["testo"])}</p></li>'
+                    for t in tappe)
+
+    # «Altro qui»: la pagina comune se c'e' su disco, i luoghi se c'e' l'ancora.
+    # Quello che manca non si stampa (la regola di link_luoghi()).
+    altro = []
+    slug = G.slugify(paese)
+    if os.path.isfile(os.path.join(ROOT, "eventi", "comune", f"{slug}.html")):
+        altro.append(f'<a href="/eventi/comune/{slug}.html">Gli eventi{a_paese}</a>')
+    lg = G.link_luoghi(paese, sigla)
+    if lg:
+        altro.append(lg)
+    altro.append('<a href="/esploratore.html">Tutta la collana di Ginetto</a>')
+
+    altri = [w for w in volumi if w is not v and ha_pagina(w)]
+    altri_html = "".join(f'<a href="/esploratore/{e(w["id"])}.html">{e(w["paese"])}</a>'
+                         for w in altri)
+
+    libro = {
+        "@type": "Book", "name": v.get("titolo"), "inLanguage": "it",
+        "bookEdition": f"Volume {v.get('numero')}",
+        "author": {"@type": "Person", "name": "Patrick Orlando"},
+        "isPartOf": {"@type": "BookSeries", "name": "Ginetto l'Esploratore", "url": PAGE_URL},
+        "about": {"@type": "Place", "name": paese,
+                  "address": {"@type": "PostalAddress", "addressLocality": paese,
+                              "addressRegion": v.get("provincia"), "addressCountry": "IT"}},
+    }
+    if esiste(v.get("copertina", "")):
+        libro["image"] = f"{G.SITE_URL}/{v['copertina']}"
+    if v.get("amazon"):
+        libro["url"] = v["amazon"]
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "@id": url, "url": url, "name": titolo, "description": descr,
+         "isPartOf": {"@type": "WebSite", "name": "DAOP", "url": G.SITE_URL},
+         "mainEntity": {"@type": "ItemList", "name": f"Le tappe di Ginetto a {paese}",
+                        "numberOfItems": n,
+                        "itemListElement": [{"@type": "ListItem", "position": i, "name": t}
+                                            for i, t in enumerate(nomi, 1)]},
+         "about": libro},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": G.SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Ginetto l'Esploratore", "item": PAGE_URL},
+            {"@type": "ListItem", "position": 3, "name": paese, "item": url}]},
+    ]}
+    immagine = (f"{G.SITE_URL}/{v['copertina']}" if esiste(v.get("copertina", ""))
+                else f"{G.SITE_URL}/assets/ginetto/og-esploratore.jpg")
+
+    return f"""<!DOCTYPE html>
+<!-- PAGINA GENERATA da scripts/genera_ginetto.py: il testo sta in
+     data/ginetto-collana.json. Le modifiche scritte a mano qui dentro
+     spariscono alla run successiva. -->
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{e(titolo)}</title>
+<meta name="description" content="{e(descr)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{e(titolo)}">
+<meta property="og:description" content="{e(descr)}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{url}">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="DAOP">
+<meta property="og:image" content="{e(immagine)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(titolo)}">
+<meta name="twitter:description" content="{e(G.trunc(descr, 120))}">
+<meta name="twitter:image" content="{e(immagine)}">
+<meta name="daop:citta" content="{e(paese)}">
+<meta name="daop:provincia" content="{e(sigla)}">
+<link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/daop-system.min.css">
+<style>{css}{G.PAGINA_CSS}{G.COMUNE_CSS}{GN_CSS}</style>
+<script src="/assets/js/cookie-consent.js"></script>
+<script src="/assets/js/daop-track.js" defer></script>
+<script type="application/ld+json">
+{json.dumps(ld, ensure_ascii=False, indent=1)}
+</script>
+</head>
+<body>
+{nav}
+<main id="contenuto">
+<header class="page-hero ev-hero">
+  <div class="page-hero-inner">
+    <div class="ev-crumb" role="navigation" aria-label="Percorso">
+      <a href="/">Home</a> › <a href="/esploratore.html">Ginetto l'Esploratore</a> › <span>{e(paese)}</span>
+    </div>
+    <h1>{e(paese)} con i bambini</h1>
+    <p class="ev-when">Il percorso di Ginetto l'Esploratore · {n} tappe a piedi · provincia di {e(v.get("provincia"))}</p>
+  </div>
+</header>
+<article class="ev-wrap ev-wrap--hero gn-wrap">
+  <p>Nel libro <i>{e(v.get("titolo"))}</i> Ginetto e la topolina Briciola attraversano {e(paese)} tappa dopo tappa. Sono posti veri: qui sotto c'è il percorso, da fare un pomeriggio con i bambini, con quello che vale la pena di cercare in ognuno.</p>
+  <h2>Le {n} tappe</h2>
+  <ol class="gn-tappe">
+{lis}
+  </ol>
+  {_libro_html(v)}
+  <h2>Altro{a_paese}</h2>
+  <div class="com-link">{"".join(altro)}</div>
+  {f'<h2>Gli altri paesi di Ginetto</h2><div class="com-link">{altri_html}</div>' if altri_html else ''}
+  <p class="ev-firma-nota">Pagina aggiornata il {oggi.day} {G.MESI_LUNGHI[oggi.month - 1]} {oggi.year}.</p>
+</article>
+{G.blocco_ginetto(paese)}</main>
+{foot}
+<script>
+function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
+function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
+</script>
+</body>
+</html>
+"""
+
+
+def scrivi_pagine_volumi(volumi):
+    """Scrive /esploratore/<id>.html per ogni volume con le tappe, toglie
+    quelle di un volume che non le ha piu', e rifa' il blocco in sitemap.
+    Ritorna gli URL scritti."""
+    oggi = datetime.date.today()
+    os.makedirs(CARTELLA_VOL, exist_ok=True)
+    vivi = [v for v in volumi if ha_pagina(v)]
+    for v in vivi:
+        open(os.path.join(CARTELLA_VOL, f"{v['id']}.html"), "w",
+             encoding="utf-8").write(render_tappe(v, volumi, oggi))
+    tenuti = {f"{v['id']}.html" for v in vivi}
+    for f in os.listdir(CARTELLA_VOL):
+        if f.endswith(".html") and f not in tenuti:
+            os.remove(os.path.join(CARTELLA_VOL, f))
+            print(f"[genera_ginetto] tolta esploratore/{f}: il volume non ha piu' le tappe")
+    urls = [VOL_URL.format(v["id"]) for v in vivi]
+    sitemap_volumi(urls, oggi)
+    return urls
+
+
+def sitemap_volumi(urls, oggi):
+    if not os.path.exists(SITEMAP_PATH):
+        return
+    s = open(SITEMAP_PATH, encoding="utf-8").read()
+    voci = "".join(f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{oggi.isoformat()}</lastmod>\n"
+                   f"    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n"
+                   for u in urls)
+    inizio = "  <!-- ESPLORATORE:START (generato da scripts/genera_ginetto.py — non modificare a mano) -->\n"
+    fine = "  <!-- ESPLORATORE:END -->\n"
+    blocco = inizio + voci + fine
+    if "<!-- ESPLORATORE:START" in s:
+        s = re.sub(r"  <!-- ESPLORATORE:START.*?<!-- ESPLORATORE:END -->\n",
+                   lambda _: blocco, s, count=1, flags=re.S)
+    else:
+        s, k = re.subn(r"(?=  <!-- CORSI:START)", lambda _: blocco, s, count=1)
+        if k != 1:
+            print("[genera_ginetto] sitemap: non trovo dove mettere le pagine dei volumi")
+            return
+    open(SITEMAP_PATH, "w", encoding="utf-8").write(s)
+
+
 # ─────────────────────────── iniezione ───────────────────────────
 
 def alterna_fasce(pagina):
@@ -332,6 +586,9 @@ def main():
     pagina = alterna_fasce(pagina)
     open(HTML_PATH, "w", encoding="utf-8").write(pagina)
     update_sitemap()
+    urls = scrivi_pagine_volumi(volumi)
+    print(f"[genera_ginetto] {len(urls)} pagine in esploratore/: "
+          + ", ".join(u.rsplit("/", 1)[-1] for u in urls))
 
     pubblicati = sum(1 for v in volumi if v.get("stato") != "in-arrivo")
     scaricabili = sum(1 for v in volumi for m in (v.get("materiali") or [])

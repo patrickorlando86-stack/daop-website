@@ -37,6 +37,32 @@
      "file": "assets/ginetto/materiali/vol-1-casale-monferrato-checklist.pdf",
      "formato": "PDF A4"
     }
+   ],
+   "tappe": [
+    {
+     "nome": "Il Castello",
+     "testo": "La fortezza di mattoni rossi voluta nel 1352 da Giovanni II Paleologo, con le torri tonde e il fossato tutto intorno. Da qui comincia il giro: provate a contare le torri."
+    },
+    {
+     "nome": "Il Duomo di Sant'Evasio",
+     "testo": "Consacrato nel 1107, più di novecento anni fa. Dentro si alza lo sguardo: le volte sono un cielo azzurro pieno di stelle dorate, dipinto nell'Ottocento quando il Duomo fu salvato e restaurato."
+    },
+    {
+     "nome": "La festa di Sant'Evasio",
+     "testo": "Il patrono si festeggia il 12 novembre, con i galletti di pasta frolla. Il galletto ha una storia: quello d'ottone del Duomo fu portato via nel 1215 e oggi fa da banderuola sul Municipio di Alessandria."
+    },
+    {
+     "nome": "La Sinagoga",
+     "testo": "Inaugurata nel 1595 e quasi invisibile dalla strada: ci si arriva da cortili e passaggi. Dentro è tutta ori, stucchi e legni, e al piano di sopra ci sono il Museo degli Argenti e il Museo dei Lumi."
+    },
+    {
+     "nome": "Piazza del Cavallo",
+     "testo": "Piazza Mazzini, con la statua equestre di Carlo Alberto vestito da imperatore romano. Si racconta che il figlio, vedendola, abbia detto di non aver mai visto suo padre in pigiama."
+    },
+    {
+     "nome": "I Krumiri",
+     "testo": "I biscotti a forma di baffo nati a Casale nel 1878, nel laboratorio di Domenico Rossi, ispirati ai baffi di Vittorio Emanuele II. Ancora oggi si piegano a mano, uno per uno."
+    }
    ]
   },
   {
@@ -71,6 +97,32 @@
      "file": "assets/ginetto/materiali/vol-2-castelnuovo-scrivia-disegni.pdf",
      "formato": "PDF A4"
     }
+   ],
+   "tappe": [
+    {
+     "nome": "La torre e il castello",
+     "testo": "La torre è alta 39 metri, come un palazzo di tredici piani, con i merli in cima. Sotto c'è il portico ad archi dove nel Medioevo gli abitanti si riunivano: l'arengo. Sulle mura si cercano le feritoie."
+    },
+    {
+     "nome": "La chiesa dei Santi Pietro e Paolo",
+     "testo": "Il portale di pietra è del 1183: sopra il portone ci sono Sansone e Davide che affrontano due leoni, e sulle colonnine i grifoni e i lavori dei campi. C'è ancora la firma dello scultore, Magister Albertus."
+    },
+    {
+     "nome": "La festa di San Desiderio",
+     "testo": "Il patrono si festeggia a maggio con una rievocazione medievale e la quarta domenica di agosto con la festa patronale: dame, tamburini, sbandieratori, e la bandiera nuova issata in cima alla torre."
+    },
+    {
+     "nome": "Matteo Bandello",
+     "testo": "Lo scrittore nato qui nel 1485 riscrisse la storia di Giulietta e Romeo, che poi arrivò fino a Shakespeare. Il paese lo ricorda anche con il Bandellino, un biscotto da un'antica ricetta locale."
+    },
+    {
+     "nome": "Lo Scrivia e il Parco dei Neonati",
+     "testo": "Lungo la riva destra del torrente c'è una riserva naturale con più di 180 specie di uccelli. Dentro c'è il Parco dei Neonati: dal 1992 si pianta un albero per ogni bambino nato a Castelnuovo."
+    },
+    {
+     "nome": "L'oro blu",
+     "testo": "Dal gualdo, una pianta dalle foglie verdi, si ricavava un blu prezioso per tingere le stoffe: il tessuto diventava azzurro all'aria, davanti agli occhi. Il mercato del gualdo fece la ricchezza del paese."
+    }
    ]
   },
   {
@@ -85,7 +137,33 @@
    "copertina": "assets/ginetto/copertine/vol-3-garbagna.webp",
    "copertina_alt": "Copertina del volume 3 di Ginetto l'Esploratore, dedicato a Garbagna",
    "amazon": "https://www.amazon.it/dp/B0HGFMNNVX",
-   "materiali": []
+   "materiali": [],
+   "tappe": [
+    {
+     "nome": "Piazza Doria e il pozzo",
+     "testo": "Il cuore del paese: quattro ippocastani piantati nel 1853, un arco di pietra con il vecchio pozzo pubblico, Palazzo Doria e l'Oratorio di San Rocco, che si festeggia il 16 agosto con l'incanto delle torte."
+    },
+    {
+     "nome": "La Contrada",
+     "testo": "Via XIV Marzo attraversa il centro storico tra case alte e vicine, archi, balconi e portali scolpiti: sembra un borgo ligure. Si passano Palazzo Fieschi-Alvigini, Palazzo Cervini e Palazzo Doria."
+    },
+    {
+     "nome": "La pietra dell'olmo e la chiesa",
+     "testo": "Accanto a San Giovanni Battista c'è «a piassa da l'urmu», con la grande pietra scura già citata in un documento del 1435: sotto l'olmo si prendevano le decisioni del paese. In chiesa, una tela attribuita al Moncalvo e un organo del Seicento."
+    },
+    {
+     "nome": "Il castello",
+     "testo": "I ruderi sopra il paese, con la torre quadrata, la porta e un tratto di mura, sono il punto panoramico più bello di Garbagna e di sera sono illuminati. Da Piazza Doria si sale per Via Castello in un quarto d'ora a piedi."
+    },
+    {
+     "nome": "La Madonna del Lago",
+     "testo": "Il santuario in località Lago di Feiga, legato a un'apparizione del 1341 che secondo la tradizione riportò la pace in paese. La festa è il terzo venerdì di maggio."
+    },
+    {
+     "nome": "La Bella di Garbagna",
+     "testo": "La ciliegia della Val Grue, raccolta a mano a inizio giugno da alberi alti e vigorosi. Dal 2004 è Presidio Slow Food: la polpa soda la rende perfetta per confetture e dolci al cioccolato."
+    }
+   ]
   },
   {
    "id": "ovada",
@@ -99,11 +177,125 @@
    "copertina": "assets/ginetto/copertine/vol-4-ovada.webp",
    "copertina_alt": "Copertina del volume 4 di Ginetto l'Esploratore, dedicato a Ovada",
    "amazon": "https://www.amazon.it/dp/B0HGFR7R6P",
-   "materiali": []
+   "materiali": [],
+   "tappe": [
+    {
+     "nome": "Il Museo dei fossili",
+     "testo": "Il Museo Paleontologico Giulio Maini sta nell'antica chiesa di Sant'Antonio. Conchiglie, coralli e granchi fossili trovati sulle colline intorno: trenta milioni di anni fa qui c'era il mare. Uno dei granchi porta il nome di Maini."
+    },
+    {
+     "nome": "I campanili gemelli",
+     "testo": "La parrocchiale di Nostra Signora Assunta ha due campanili alti 47 metri, modellati su una basilica di Genova. Davanti, il palazzo con l'angolo curvo sorge dove c'era Porta Genovese."
+    },
+    {
+     "nome": "I carruggi",
+     "testo": "Le stradine strette del centro, con le case colorate e i portali di ardesia, come a Genova: per circa tre secoli Ovada appartenne alla Repubblica di Genova. Si gioca a contare le finestre di un carruggio."
+    },
+    {
+     "nome": "La casa di San Paolo della Croce",
+     "testo": "Qui nacque nel 1694 Paolo Danei, fondatore dei Passionisti. Sulla facciata, uno sotto l'altro, l'affresco della Madonna del Carmine, lo stemma della famiglia e la statua nella nicchia. È monumento nazionale dal 1918."
+    },
+    {
+     "nome": "L'Oratorio dell'Annunziata",
+     "testo": "Custodisce due enormi casse processionali di legno, che a luglio vengono portate a spalla per le vie. La più famosa, l'Annunciazione, è di Anton Maria Maragliano, scultore genovese."
+    },
+    {
+     "nome": "La vendemmia",
+     "testo": "Le colline dell'Alto Monferrato intorno alla città sono vigneti: a settembre si vendemmia, e il vino di qui si chiama Ovada DOCG. Sotto i filari, le rocce sono il fondo dell'antico mare."
+    },
+    {
+     "nome": "La bela càuda",
+     "testo": "La farinata, che a Ovada si chiama «bella calda» e si mangia appena sfornata: farina di ceci, acqua, olio e sale, cotti in una teglia di rame. Ci sono locali dove è la protagonista del menù."
+    },
+    {
+     "nome": "Il Parco di Villa Gabrieli",
+     "testo": "Un giardino all'inglese con 171 alberi, una sequoia, i cedri del Libano e un laghetto, attorno alla villa costruita tra il 1910 e il 1913. Si gira per sentieri che curvano, e a ogni svolta compare qualcosa."
+    }
+   ]
+  },
+  {
+   "id": "novi-ligure",
+   "numero": 5,
+   "visibile": true,
+   "stato": "pubblicato",
+   "titolo": "Ginetto alla scoperta di Novi Ligure",
+   "paese": "Novi Ligure",
+   "provincia": "Alessandria",
+   "descrizione": "Novi è in Piemonte: perché allora si chiama Ligure? Ginetto lo scopre tappa dopo tappa, tra le meridiane di Piazza Dellepiane, il Teatro Marenco, le biciclette dei Campionissimi, il cioccolato e la focaccia. In ogni illustrazione si nasconde Briciola, la topolina: trovarla è il gioco che accompagna la lettura.",
+   "copertina": "assets/ginetto/copertine/vol-5-novi-ligure.webp",
+   "copertina_alt": "Copertina del volume 5 di Ginetto l'Esploratore, dedicato a Novi Ligure",
+   "amazon": "",
+   "materiali": [],
+   "tappe": [
+    {
+     "nome": "Piazza Dellepiane",
+     "testo": "Davanti c'è la Collegiata di Santa Maria Assunta, al centro la Fontana del Sale. Sulla facciata dipinta di Palazzo Negroni si cercano due meridiane di epoca napoleonica: una segnava l'ora, l'altra quanto mancava al tramonto."
+    },
+    {
+     "nome": "Il Teatro Marenco",
+     "testo": "Aperto nel 1839, con la sala modellata anche sul Carlo Felice di Genova. Porta il nome di Romualdo Marenco, nato a Novi, autore del balletto Excelsior. Custodisce 29 marionette antiche, tra cui il genovese Baciccia."
+    },
+    {
+     "nome": "Il Museo dei Campionissimi",
+     "testo": "In un ex capannone di quasi 3.000 metri quadrati, la storia della bicicletta e di Girardengo e Coppi. Coppi da ragazzo faceva le consegne in bici per una salumeria di via Paolo da Novi."
+    },
+    {
+     "nome": "Il cioccolato di Novi",
+     "testo": "La città del cioccolato: Pernigotti dal 1860, Novi dal 1903, e le botteghe artigiane. Nel 2001 qui si fece un gianduiotto da oltre 40 quintali, grande come 400.000 normali."
+    },
+    {
+     "nome": "La focaccia novese",
+     "testo": "Sottile, dorata, con gli avvallamenti fatti con i polpastrelli: è un prodotto tradizionale del Piemonte, del Novese e dell'Ovadese. Qualcuno la inzuppa nel cappuccino."
+    },
+    {
+     "nome": "Il Parco Castello",
+     "testo": "Sulla collina che domina la città, la torre del castello e un tratto di mura dentro un grande parco per giocare e guardare Novi dall'alto. Qui si scioglie il mistero: «Ligure» è nel nome dal 1863, per il lungo legame con Genova."
+    }
+   ]
+  },
+  {
+   "id": "valenza",
+   "numero": 6,
+   "visibile": true,
+   "stato": "in-arrivo",
+   "titolo": "Ginetto alla scoperta di Valenza",
+   "paese": "Valenza",
+   "provincia": "Alessandria",
+   "descrizione": "Tommaso ha trovato in soffitta il diario del nonno, con un foglio pieno di disegni strani: una colomba, un airone, una perla, una mezzaluna. Ginetto li segue per Valenza, dal museo dell'arte orafa al belvedere della Colombina, fino a scoprire che cosa nascondono. Un'avventura tra indizi, oro e un diario misterioso.",
+   "copertina": "assets/ginetto/copertine/vol-6-valenza.webp",
+   "copertina_alt": "Copertina del volume 6 di Ginetto l'Esploratore, dedicato a Valenza",
+   "amazon": "",
+   "materiali": [],
+   "tappe": [
+    {
+     "nome": "Il Centro Espositivo dell'Arte Orafa",
+     "testo": "In via IX Febbraio, in un antico convento: disegni, gioielli e la ricostruzione del laboratorio di un orafo di cento anni fa, con il banco e gli attrezzi."
+    },
+    {
+     "nome": "Sulle tracce di Caramora",
+     "testo": "Nella Contrada Maestra, la via della città vecchia, si cerca tra le pietre del selciato un grande diamante. Qui, più di duecento anni fa, Francesco Caramora aprì la prima bottega orafa: è da lui che Valenza è diventata la città dell'oro."
+    },
+    {
+     "nome": "La Colombina e le antiche mura",
+     "testo": "Il belvedere della Colombina, che prende il nome dalla leggenda di San Massimo e della colomba da cui sarebbe nata la città. Accanto resta il bastione, l'ultimo pezzo delle mura abbattute nel 1805."
+    },
+    {
+     "nome": "Il Po e la Garzaia",
+     "testo": "Dal belvedere si vede il Po, con boschi, canne e lanche. Poco lontano c'è la Garzaia, un'area protetta dove nidifica l'airone rosso, raro in Piemonte: si prova a restare immobili come lui."
+    },
+    {
+     "nome": "Il Duomo e la palla di cannone",
+     "testo": "Il Duomo di Santa Maria Maggiore, iniziato nel 1619, con l'organo dei fratelli Serassi del 1852. Vicino all'altare c'è una palla di cannone incastrata nel muro: quella dell'assedio del 1635, «la palla del miracolo»."
+    },
+    {
+     "nome": "Nella bottega dell'orafo",
+     "testo": "Valenza è piena di laboratori dove si lavorano anelli, collane e ciondoli a mano. Il libro finisce qui, tra pinze e lime: si guarda una vetrina e si prova a inventare un gioiello."
+    }
+   ]
   },
   {
    "id": "prossimo-paese",
-   "numero": 5,
+   "numero": 7,
    "visibile": false,
    "stato": "in-arrivo",
    "titolo": "Il prossimo paese",
@@ -115,5 +307,6 @@
    "amazon": "",
    "materiali": []
   }
- ]
+ ],
+ "_tappe": "Le tappe di ogni volume diventano la pagina /esploratore/<id>.html (scripts/genera_ginetto.py). Sono un riassunto delle pagine del libro, non il testo: il libro e' quello che si vende. Un volume senza tappe non ha la pagina."
 }

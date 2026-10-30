@@ -1276,6 +1276,36 @@ me": quella e' a ~109px sul telefono e una riga in piu' la farebbe ricrescere
 **per tutto lo scorrimento**, cioe' si pagherebbe su ogni schermata quello che
 si guadagna su una.
 
+## I libri di Ginetto: una pagina per paese — 30/10/2026
+
+`/esploratore/<id>.html`, una per volume della collana, scritte da
+`genera_ginetto.py` accanto a `esploratore.html`. Al 30/10 i volumi sono sei:
+Casale Monferrato, Castelnuovo Scrivia, Garbagna, Ovada, Novi Ligure, Valenza.
+
+- **La pagina parla del paese, non del libro.** Nessuno cerca «Ginetto alla
+  scoperta di Garbagna», si cerca «Garbagna con i bambini». Title e H1 sono
+  quelli, il corpo è il percorso a tappe, e il libro sta sotto.
+- **Le tappe stanno in `data/ginetto-collana.json`** (chiave `tappe`), e sono
+  un riassunto delle pagine del libro preso dai file KDP su Canva, non il
+  testo: il libro è quello che si vende. Valenza su Canva è impaginato a
+  immagini, il testo si legge solo dalle anteprime.
+- **Senza tappe la pagina non nasce**, e se un volume le perde la pagina si
+  toglie. Sarebbe una copertina e quattro righe, cioè più povera della scheda
+  in `esploratore.html`.
+- **Non è scaled content**: l'insieme cresce di uno quando esce un libro.
+- **Un volume in arrivo ha la sua pagina**: i posti sono veri da subito, e al
+  posto del link ad Amazon c'è «Il libro è in arrivo».
+- **I link arrivano da dove c'è traffico**: `link_libro()` in
+  `genera_eventi.py` mette «Le N tappe di Ginetto a X» in coda alle schede
+  evento del comune (dopo i luoghi) e nelle pagine comune. Si stampa solo se il
+  file c'è su disco.
+- **In sitemap** stanno nel blocco `ESPLORATORE`, e nel workflow c'è la
+  cartella `esploratore/` (le pagine nuove nascono untracked).
+
+Copertina e link Amazon di un volume nuovo si aggiungono nel JSON. Fino ad
+allora la pagina mostra un segnaposto e «Cerca il libro su Amazon» porta alla
+pagina autore, e il log lo elenca sotto «DA CARICARE».
+
 ## Le guide stagionali: la prima cosa che ci si porta via
 
 Deciso il 24/08/2026. Fino a qui il sito è un posto dove si **arriva** — da

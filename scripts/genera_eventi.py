@@ -3961,6 +3961,36 @@ def link_luoghi(citta, prov):
             f'{a_citta(esc(dati.get("comune") or citta))}</a>')
 
 
+_LIBRI_GINETTO = None
+
+
+def link_libro(citta):
+    """Il link al percorso di Ginetto l'Esploratore nel comune, o ''.
+
+    Nato il 30/10/2026 con le pagine /esploratore/<id>.html: una per libro, e
+    ogni libro e' un paese. Chi legge una sagra a Ovada e' la persona a cui
+    interessa che esista un percorso a piedi per i bambini a Ovada. Si legge
+    data/ginetto-collana.json e si stampa solo se la pagina c'e' su disco: un
+    volume senza tappe non ha la pagina, e un link a un 404 e' peggio di niente
+    (la regola di link_luoghi())."""
+    global _LIBRI_GINETTO
+    if _LIBRI_GINETTO is None:
+        _LIBRI_GINETTO = {}
+        try:
+            dati = json.load(open(os.path.join(ROOT, "data", "ginetto-collana.json"),
+                                  encoding="utf-8"))
+        except (OSError, ValueError):
+            dati = {}
+        for v in dati.get("volumi", []):
+            if v.get("visibile") and v.get("paese") and v.get("tappe"):
+                _LIBRI_GINETTO[slugify(v["paese"])] = v
+    v = _LIBRI_GINETTO.get(slugify(citta or ""))
+    if not v or not os.path.isfile(os.path.join(ROOT, "esploratore", f"{v['id']}.html")):
+        return ''
+    return (f'<a href="/esploratore/{v["id"]}.html">Le {len(v["tappe"])} tappe di Ginetto'
+            f'{a_citta(esc(v["paese"]))}</a>')
+
+
 def link_sponsor(citta, prov, oggi=None):
     """La riga "Sponsorizzato · <posto>" in coda a una scheda evento, o ''.
 
@@ -4822,6 +4852,9 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None, salta=()):
     lg = link_luoghi(rec.get('citta'), prov)
     if lg:
         coda.append(lg)
+    ll = link_libro(rec.get('citta'))
+    if ll:
+        coda.append(ll)
     # I corsi, dal 14/09/2026 (vedi link_corsi): la stessa domanda dei luoghi -
     # "cos'altro c'e' qui?" - con la risposta che dura una stagione invece di un
     # pomeriggio. Sta subito dopo, e prima della provincia, per la stessa regola
@@ -7085,6 +7118,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
 
   <div class="com-link">
     {link_luoghi(citta, dati['prov'])}
+    {link_libro(citta)}
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
     <a href="/metodo.html">Come verifichiamo gli eventi</a>
   </div>
