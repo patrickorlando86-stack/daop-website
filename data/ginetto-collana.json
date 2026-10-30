@@ -256,7 +256,7 @@
   {
    "id": "valenza",
    "numero": 6,
-   "visibile": false,
+   "visibile": true,
    "stato": "in-arrivo",
    "titolo": "Ginetto alla scoperta di Valenza",
    "paese": "Valenza",
@@ -292,7 +292,7 @@
      "testo": "Valenza è piena di laboratori dove si lavorano anelli, collane e ciondoli a mano. Il libro finisce qui, tra pinze e lime: si guarda una vetrina e si prova a inventare un gioiello."
     }
    ],
-   "_visibile": "Spento il 30/10/2026: il libro non e' ancora uscito. Le tappe sono pronte: quando esce si mette visibile true (e stato pubblicato, amazon, copertina)."
+   "_stato": "In arrivo (30/10/2026: esce fra qualche giorno). Quando e' su Amazon: stato pubblicato, link amazon, copertina in assets/ginetto/copertine."
   },
   {
    "id": "prossimo-paese",
