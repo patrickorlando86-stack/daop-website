@@ -5584,6 +5584,11 @@ si sceglie preferendo una scheda da indice, così di solito si guarda il verso
 in cui la pagina deve entrare. Verificata rossa nel caso sottile rimettendo la
 vecchia condizione.
 
+**Rossa il 28 e il 29/10/2026, terza volta la prova.** La cavia era un
+laboratorio ad Asti, e «Asti» sta nel guscio di ogni pagina: la colonna Seguici
+del footer e il copyright. Ora il comune si cerca tolti anche `<nav>` e
+`<footer>`. Verificata rossa con una riga «Prima era a Asti» nel corpo.
+
 Lo stesso giorno era rossa anche `tests/scheda.js` su «Famiglia in Gioco» a
 Savigliano, e lì il difetto era della pagina. La serie ha due righe (23-24 e
 25/10) e solo la prima ha un programma: `programmi_serie()` tiene le date con

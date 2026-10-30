@@ -238,7 +238,11 @@ troncati = []
 for n in range(len(nome_cavia), 0, -1):
     pezzo = nome_cavia[:n].rstrip()
     troncati += [g.esc(pezzo) + "…", pezzo + "…"]
-residuo = vecchia
+# E va tolto il GUSCIO: nav e footer arrivano da eventi.html e nominano le
+# tre province su ogni pagina ("Seguici: Asti · Instagram", il copyright).
+# Con una cavia in un capoluogo che da' il nome alla provincia la prova era
+# rossa sul footer, non sul cartello (28-29/10/2026, cavia ad Asti).
+residuo = re.sub(r"<footer\b.*?</footer>|<nav\b.*?</nav>", "", vecchia, flags=re.S)
 for legittimo in (g.esc(nome_cavia), nome_cavia, *troncati, NUOVO, CAVIA):
     if legittimo and legittimo != "…":
         residuo = residuo.replace(legittimo, "")
