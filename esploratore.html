@@ -243,7 +243,8 @@
   .page-hero{padding:118px 20px 64px;background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 60%,#3a6070 100%);text-align:center;position:relative;overflow:hidden}
   /* Texture all'8% di opacita': basta il taglio piccolo (12 KB invece
      di 111). Il jpg resta come ripiego senza image-set(). */
-  .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('assets/images/headerdaop-500.webp') type('image/webp'),url('assets/images/headerdaop.jpg') type('image/jpeg'))}
+  /* Niente disegno di sfondo (papa', bambino, arcobaleno): qui la fascia ha
+     Ginetto, e i due disegni insieme facevano confusione (30/10/2026). */
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
   /* Ginetto e Briciola che leggono: l'immagine della collana (30/10/2026).
      Sul telefono sta sopra il titolo; da 900px a destra del testo. Lo sfondo
