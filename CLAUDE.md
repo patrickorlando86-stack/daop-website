@@ -1555,6 +1555,11 @@ Le decisioni da non rifare al contrario:
   (`.nav-links` è una flex row senza `wrap`); con Centri e Corsi sarebbero state
   undici. Il resto è sceso nel footer, dove c'era già. Sul telefono non si è
   tolto niente: le quattro porte davanti, poi `.mm-sep` e sotto tutto il resto.
+  **Dal 30/10/2026 sono sette**, con «Libri» dopo «Ginetto AI» (chiesto da
+  Patrick, in aggiunta e non al posto di un'altra), e otto quando c'è la voce
+  dei centri. Misurato: a 901px otto voci stanno in riga con ~130px liberi
+  accanto al logo. La voce è scritta a mano in tutte le pagine; le generate la
+  riprendono da `eventi.html` via `_guscio()`. Una nona va rimisurata.
 - **`blocco_ecosistema()` in `genera_eventi.py`** stampa la riga con le altre
   tre famiglie, **col numero e non l'etichetta** (lezione di `link_luoghi()`),
   **in coda al corpo** (regola dell'invito al canale) e **non sulle ~300 schede

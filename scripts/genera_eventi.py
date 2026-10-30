@@ -4340,8 +4340,9 @@ def voce_centri(mobile=False, assoluto=False):
     """La voce di nav, vuota se nessuna stagione ha centri.
 
     Vuota vuol dire una voce in meno in nav, non un buco: e' il comportamento
-    giusto, perche' .nav-links e' una flex row senza wrap e sei voci sono il
-    massimo che sta in riga sopra i 901px."""
+    giusto, perche' .nav-links e' una flex row senza wrap. Dal 30/10/2026 le
+    voci sono sette (c'e' Libri) e otto in stagione: misurate, a 901px stanno
+    in riga con ~130px liberi accanto al logo. Una nona va rimisurata."""
     v = stagione_centri()
     if not v:
         return ''
