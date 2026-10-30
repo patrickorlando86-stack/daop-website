@@ -15782,6 +15782,34 @@
   "prov": "CN",
   "riga": 305,
   "slug": "halloween-da-paura-michiland-parco-giochi-evento",
+  "spostata": "halloween-da-paura-michiland-parco-giochi-genola",
+  "updated": "2026-10-30"
+ },
+ "halloween-da-paura-michiland-parco-giochi-genola": {
+  "anchor": "ev-2026-10-31-halloween-da-paura-michiland-parco-giochi",
+  "categoria": "Sagra & Festa",
+  "citta": "Genola",
+  "consigliato": "No",
+  "d_end": "2026-10-31",
+  "d_start": "2026-10-31",
+  "descr": "Halloween da Paura a Michiland: dalle 16:00 inizia la festa con truccabimbi a cura di Ciccia Pasticcia, merenda da paura inclusa nel biglietto, mini disco e musica da brividi, aperitivo e Zombie Drink per i genitori. Tutti in maschera! La serata continua poi con la cena.",
+  "df": "31/10/2026",
+  "di": "31/10/2026",
+  "eta": "Tutte le età (famiglie)",
+  "first_seen": "2026-10-30",
+  "indirizzo": "Michiland Parco Giochi",
+  "last_seen": "2026-10-30",
+  "lat": "44.6004512",
+  "loc": "daop_cuneo_4014327303516039416.webp",
+  "lon": "7.6592765",
+  "luogo": "Michiland Parco Giochi",
+  "manifest": "",
+  "nome": "Halloween da Paura! - Michiland Parco Giochi",
+  "ora": "10:00-24:00",
+  "prezzo": "12 euro primo bambino, 6 euro dal secondo figlio; adulti accompagnatori gratuito",
+  "prov": "CN",
+  "riga": 305,
+  "slug": "halloween-da-paura-michiland-parco-giochi-genola",
   "updated": "2026-10-30"
  },
  "halloween-da-pauraaa-biblioteca-astense-giorgio-fa-asti": {
@@ -22136,7 +22164,7 @@
   "riga": 69,
   "ritirata": "2026-10-20",
   "slug": "letture-per-bambini-mamma-isa-piasco",
-  "updated": "2026-10-25"
+  "updated": "2026-10-30"
  },
  "letture-per-bambini-nonna-michela-e-nonno-giulio-piasco": {
   "anchor": "ev-2027-04-03-letture-per-bambini-nonna-michela-e-nonno-giulio",

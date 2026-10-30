@@ -891,7 +891,7 @@
  },
  "c-cn-alba": {
   "comune": "Alba",
-  "n": 8,
+  "n": 9,
   "prov": "CN"
  },
  "c-cn-arguello": {
@@ -976,7 +976,7 @@
  },
  "c-cn-caraglio": {
   "comune": "Caraglio",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-caramagna-piemonte": {
@@ -1031,7 +1031,7 @@
  },
  "c-cn-ceva": {
   "comune": "Ceva",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-chiusa-di-pesio": {
@@ -1129,6 +1129,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-genola": {
+  "comune": "Genola",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-govone": {
   "comune": "Govone",
   "n": 1,
@@ -1206,7 +1211,7 @@
  },
  "c-cn-mondovi": {
   "comune": "Mondovì",
-  "n": 7,
+  "n": 8,
   "prov": "CN"
  },
  "c-cn-monforte-d-alba": {

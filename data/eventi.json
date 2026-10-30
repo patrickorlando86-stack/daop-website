@@ -2225,7 +2225,7 @@
   "di": "31/10/2026",
   "df": "31/10/2026",
   "ora": "10:00-24:00",
-  "citta": "",
+  "citta": "Genola",
   "prov": "CN",
   "categoria": "Sagra & Festa",
   "eta": "Tutte le età (famiglie)",
@@ -2238,6 +2238,8 @@
   "d_start": "2026-10-31",
   "d_end": "2026-10-31",
   "consigliato": "No",
+  "lat": "44.6004512",
+  "lon": "7.6592765",
   "anchor": "ev-2026-10-31-halloween-da-paura-michiland-parco-giochi"
  },
  {

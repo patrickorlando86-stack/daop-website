@@ -8695,6 +8695,23 @@
   "nome": "Gavi",
   "prov": "AL"
  },
+ "genola": {
+  "eventi": {
+   "halloween-da-paura-michiland-parco-giochi-genola": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Michiland Parco Giochi",
+    "manifest": "",
+    "nome": "Halloween da Paura! - Michiland Parco Giochi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-31"
+   }
+  },
+  "nome": "Genola",
+  "prov": "CN"
+ },
  "gerbo": {
   "eventi": {
    "festa-di-ferragosto-pro-loco-gerbo": {
