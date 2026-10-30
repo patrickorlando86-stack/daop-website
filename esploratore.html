@@ -245,6 +245,13 @@
      di 111). Il jpg resta come ripiego senza image-set(). */
   .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('assets/images/headerdaop-500.webp') type('image/webp'),url('assets/images/headerdaop.jpg') type('image/jpeg'))}
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+  /* Ginetto e Briciola che leggono: l'immagine della collana (30/10/2026).
+     Sul telefono sta sopra il titolo; da 900px a destra del testo. Lo sfondo
+     dell'immagine e' trasparente, e l'alone dietro la fa stare sulla fascia
+     blu invece di sembrare un ritaglio incollato. */
+  .hero-figura{position:relative;z-index:1;width:min(220px,58vw);margin:-12px auto 14px}
+  .hero-figura::before{content:'';position:absolute;inset:8% 4% 2%;border-radius:50%;background:radial-gradient(closest-side,rgba(240,200,120,0.32),rgba(240,200,120,0))}
+  .hero-figura img{position:relative;display:block;width:100%;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,0.28))}
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,3.6rem);font-weight:800;color:white;line-height:1.12;margin-bottom:16px;letter-spacing:-0.02em}
   .page-hero h1 em{color:var(--gold);font-style:italic}
@@ -378,6 +385,10 @@
     .footer-bottom{flex-direction:row;text-align:left}
   }
   @media(min-width:900px){
+    .page-hero-flex{display:flex;align-items:center;justify-content:center;gap:40px;max-width:1040px;margin:0 auto}
+    .page-hero-flex .page-hero-inner{margin:0;text-align:left;max-width:560px}
+    .page-hero-flex .page-hero-inner p{margin:0}
+    .page-hero-flex .hero-figura{order:2;width:340px;margin:0;flex-shrink:0}
     .nav-links{display:flex}
     .hamburger{display:none}
     .vol-grid{grid-template-columns:repeat(3,1fr);gap:28px}
@@ -464,6 +475,10 @@
 <main id="contenuto">
 <!-- HERO -->
 <header class="page-hero">
+  <div class="page-hero-flex">
+  <div class="hero-figura">
+    <img src="assets/ginetto/ginetto-legge-360.webp" srcset="assets/ginetto/ginetto-legge-360.webp 360w, assets/ginetto/ginetto-legge-640.webp 640w" sizes="(min-width:900px) 340px, 220px" width="640" height="645" alt="Ginetto il lupetto esploratore e la topolina Briciola leggono insieme un libro illustrato" fetchpriority="high" decoding="async">
+  </div>
   <div class="page-hero-inner">
     <span class="section-label">Collana illustrata</span>
     <h1>Ginetto <em>l'Esploratore</em></h1>
@@ -472,6 +487,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 19.5V6a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 1.5z"/><path d="M8.5 8.5h6"/></svg>
       I volumi della collana
     </a>
+  </div>
   </div>
 </header>
 
