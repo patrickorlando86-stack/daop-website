@@ -79,9 +79,7 @@
 
   /* ── HERO ── */
   .page-hero{padding:148px 24px 88px;background:linear-gradient(160deg,var(--navy-dark) 0%,var(--navy) 60%,#3a6070 100%);text-align:center;position:relative;overflow:hidden}
-  /* Texture all'8% di opacita': basta il taglio piccolo (12 KB invece
-     di 111). Il jpg resta come ripiego senza image-set(). */
-  .page-hero::before{content:'';position:absolute;inset:0;opacity:0.08;background:url('assets/images/headerdaop.jpg') center/cover no-repeat;background-image:image-set(url('assets/images/headerdaop-500.webp') type('image/webp'),url('assets/images/headerdaop.jpg') type('image/jpeg'))}
+  /* Niente disegno di sfondo (papa', bambino, arcobaleno), come in esploratore.html (30/10/2026). */
   .page-hero-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
   .page-hero .section-label{color:var(--gold)}
   .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;color:white;line-height:1.1;margin-bottom:18px;letter-spacing:-0.02em}
