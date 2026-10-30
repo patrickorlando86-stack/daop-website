@@ -2948,6 +2948,37 @@ def segnala_doppioni(events):
                   f"{len(x['descr'])} caratteri")
 
 
+def segnala_sedi_diverse(events):
+    """Elenca le schede che raccolgono date in POSTI diversi (30/10/2026).
+
+    La scheda mostra il posto della prima riga, quindi per le altre date mente:
+    «Vieni Anche Tu!» a Mondovi' diceva Museo della Ceramica anche per la
+    biblioteca. Non si divide da qui: lo slug che dipende dalle altre righe
+    cambierebbe quando le date passate escono dal foglio. Si corregge il Nome nel
+    foglio; il downloader lo fa da solo sulle righe nuove (distingui_sedi). Le
+    parole di un posto dentro quelle dell'altro sono lo stesso posto scritto in
+    due modi (la biblioteca di Boves)."""
+    vuote = {'di', 'del', 'dello', 'della', 'dei', 'degli', 'delle', 'il', 'la', 'lo',
+             'le', 'i', 'gli', 'l', 'd', 'al', 'alla', 'in', 'a', 'e', 'presso',
+             'piazza', 'via'}
+    g = collections.defaultdict(list)
+    for e in events:
+        g[slug_evento(e)].append(e)
+    for s, righe in sorted(g.items()):
+        distinti = []
+        for x in righe:
+            parole = frozenset(p for p in re.sub(r'[^\w]+', ' ', (x.get('luogo') or '').lower()).split()
+                               if p not in vuote)
+            if parole and not any(parole <= d or d <= parole for d in distinti):
+                distinti.append(parole)
+        if len(distinti) > 1:
+            print(f"[genera_eventi] ATTENZIONE: {s}: {len(righe)} date in {len(distinti)} posti "
+                  f"diversi, la scheda ne mostra uno solo. Si corregge il Nome nel foglio "
+                  f"(il posto entro i primi 50 caratteri: slugify() taglia li'):")
+            for x in righe:
+                print(f"    {_rif(x)}  {x['d_start'].strftime('%d/%m')}  {(x.get('luogo') or '')[:52]}")
+
+
 def segnala_senza_coordinate(events):
     """Elenca le righe del foglio senza lat/lon, cioe' invisibili a "vicino a me".
 
@@ -11492,6 +11523,7 @@ def main():
     segnala_durate_assurde(events)
     segnala_date_ignote(events)
     segnala_senza_coordinate(events)
+    segnala_sedi_diverse(events)
     assegna_ancore(events)
     _SERIE_RUN['ev'] = events
     # Il proprio numero si scrive PRIMA di generare qualunque pagina: la riga

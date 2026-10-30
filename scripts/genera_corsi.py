@@ -2023,6 +2023,13 @@ CSS_REALTA = """
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -2731,8 +2738,20 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     ev = eventi_realta(corsi_org, org)
     blocco_ev = ''
     if ev:
-        blocco_ev = (f'  <h2 class="cr-h">Open day ed eventi di {G.esc(org)}</h2>\n'
+        blocco_ev = (f'  <h2 class="cr-h" id="gli-eventi">Open day ed eventi di {G.esc(org)}</h2>\n'
                      + "\n".join(_card_evento(od, rec, org) for od, rec in ev))
+    # LE PORTE DELLA PAGINA (30/10/2026, Giovanni: arrivare «direttamente alle 3
+    # sezioni con un click»). Su CaRezza i corsi stanno in cima e gli eventi sotto
+    # dodici schede di servizi. Con una sezione sola non c'e' niente da scegliere.
+    # Un <div role="navigation"> e non un <nav>: vedi porte_province().
+    porte_pagina = [(f, t, n) for f, t, n in (
+        ('#i-corsi', 'Corsi', len(corsi_veri)), ('#servizi', 'Servizi', len(servizi)),
+        ('#gli-eventi', 'Eventi', len(ev))) if n]
+    salta = ''
+    if len(porte_pagina) > 1:
+        salta = ('<div class="cr-salta" role="navigation" aria-label="Sezioni della pagina">'
+                 + ''.join(f'<a href="{f}">{t} <small>{n}</small></a>'
+                           for f, t, n in porte_pagina) + '</div>')
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -2786,6 +2805,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 {chr(10).join('  ' + t for t in testa)}
   {'<h2 class="cr-h">Informazioni e contatti</h2>' if riquadro else ''}
   {riquadro}
+  {salta}
 {chr(10).join(b for b in (blocco_corsi, blocco_sv) if b)}
 {blocco_ev}
 {blocco_faq(faq_realta(org, corsi_veri, info), f'Domande frequenti su {org}')}
@@ -5196,6 +5216,14 @@ def main():
     # quello che il sito pubblica, e le anteprime tornano solo per scrivere la
     # pagina della loro societa'. Vedi STATI_ANTEPRIMA.
     corsi, anteprime = separa_anteprime(corsi)
+    # I SERVIZI NON SONO CORSI (30/10/2026, Giovanni: «gli ultimi servizi aggiunti
+    # a Carezza sono finiti anche nei CORSI»). La colonna Tipo era letta solo dalla
+    # pagina della societa' e da /servizi/: corsi.html e le pagine provincia li
+    # stampavano fra i corsi, e il conteggio li contava. `tutte` resta per quello
+    # che parla della societa' intera (le sue pagine, /servizi/); `corsi`, da qui
+    # in giu', e' quello che si conta e che va negli elenchi dei corsi.
+    tutte = corsi
+    corsi = [c for c in tutte if not _e_servizio(c)]
     # Il proprio numero prima di render(), e DOPO il taglio: la riga delle
     # quattro porte lo rilegge, e deve contare i corsi che si vedono davvero.
     G.conteggio_scrivi('corsi', len(corsi))
@@ -5205,7 +5233,7 @@ def main():
     # esistono per decidere dove manda il link "Organizzatore". Fra le due
     # chiamate la fonte e' la stessa (ha_pagina sulla riga della tab Realta),
     # quindi non possono divergere.
-    gruppi = raggruppa_per_realta(corsi + anteprime)
+    gruppi = raggruppa_per_realta(tutte + anteprime)
     in_anteprima = {slug_realta(c.get('org') or '') for c in anteprime}
     pagine = scrivi_realta(gruppi, realta, css, nav, foot,
                            in_anteprima=in_anteprima)

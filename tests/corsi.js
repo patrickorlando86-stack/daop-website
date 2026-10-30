@@ -748,6 +748,19 @@ module.exports = async function corsi(browser) {
   r.ok(!fs.readFileSync(file, 'utf8').includes('FAQPage'),
     'nessun FAQPage in JSON-LD: Google ha spento quei risultati il 07/05/2026');
 
+  // I servizi stanno sulla pagina della societa', non fra i corsi (30/10/2026).
+  const fileCar = path.join(RADICE, 'corsi', 'carezza.html');
+  if (fs.existsSync(fileCar)) {
+    const car = fs.readFileSync(fileCar, 'utf8');
+    const lista = fs.readFileSync(file, 'utf8');
+    const sv = [...car.matchAll(/<h3 class="sv-nome">([^<]+)<\/h3>/g)].map((m) => m[1]);
+    const dentro = sv.filter((n) => lista.includes(`>${n}<`));
+    r.ok(sv.length > 0 && dentro.length === 0,
+      `${sv.length} servizi sulla pagina della societa', in corsi.html ${dentro.length}`);
+    r.ok(/<div class="cr-salta"[^>]*>(?:(?!<\/div>).)*#i-corsi(?:(?!<\/div>).)*#servizi/.test(car),
+      'la pagina con corsi e servizi ha i link alle sezioni');
+  }
+
   await ctx.close();
 
   // ── 9. le pagine dedicate delle realta' ──────────────────────────────
