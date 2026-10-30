@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -895,6 +902,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi"><summary>Chi è Teatro di Tela</summary><p class="cr-descr">Teatro di Tela è una realtà teatrale di Alba dedicata alla formazione, alla creazione e alla diffusione delle arti sceniche. Propone corsi e laboratori teatrali per bambini, ragazzi e adulti, insieme a spettacoli, progetti culturali e percorsi che utilizzano il teatro come spazio di espressione, relazione e scoperta.</p><p class="cr-descr">Per bambini e ragazzi il teatro diventa un&#x27;occasione per sperimentare attraverso il corpo, la voce, il gioco e l&#x27;immaginazione, sviluppando creatività, capacità espressive e relazione con gli altri.</p><p class="cr-descr">Teatro di Tela realizza inoltre spettacoli e laboratori dedicati alle famiglie, collaborando con biblioteche, musei, festival e realtà culturali del territorio.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Alba</dd><dt>Indirizzo</dt><dd>Via San Pio V 4/A</dd><dt>Attività</dt><dd>Recitazione · Danza classica · Danza contemporanea · Capoeira · Hip hop</dd><dt>Contatti</dt><dd><a href="tel:3484638135">348 463 8135</a></dd><dt>Email</dt><dd><a href="mailto:teatroditela@gmail.com">teatroditela@gmail.com</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/teatroditela" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/teatroditela" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  
   <h2 class="cr-h" id="i-corsi">I corsi di Teatro di Tela</h2>
   <div class="events-list">
         <article class="event-card" id="c-a144" data-city="alba" data-prov="cn" data-cat="teatro" data-disc="recitazione" data-org="teatro-di-tela" data-org-nome="Teatro di Tela" data-codice="A144" data-openday="0" data-etamin="4" data-etamax="6" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">

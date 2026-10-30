@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -850,6 +857,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi"><summary>Chi è SistYoga</summary><p class="cr-descr">SistYoga è un progetto dedicato alla pratica dello yoga e alla scoperta del movimento consapevole.</p><p class="cr-descr">Attraverso attività che possono combinare movimento, respirazione, gioco e ascolto di sé, lo yoga offre occasioni per sperimentare il proprio corpo, favorire la concentrazione e coltivare il benessere.</p><p class="cr-descr">La pagina DAOP raccoglierà le proposte di SistYoga rivolte ai bambini e alle famiglie, con informazioni sui percorsi disponibili, sulle fasce d&#x27;età e sulle modalità di partecipazione.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Sommariva Perno</dd><dt>Indirizzo</dt><dd>Località Maunera 57/B</dd><dt>Attività</dt><dd>Yoga</dd><dt>Contatti</dt><dd><a href="tel:+393935288152">+39 393 528 8152</a></dd><dt>Email</dt><dd><a href="mailto:valentina.dacasto@gmail.com">valentina.dacasto@gmail.com</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/sistyogini/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61565407107734" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  
   <h2 class="cr-h" id="i-corsi">I corsi di SistYoga</h2>
   <div class="events-list">
         <article class="event-card" id="c-a171" data-city="piobesi-d-alba" data-prov="cn" data-cat="movimento" data-disc="yoga" data-org="sistyoga" data-org-nome="SistYoga" data-codice="A171" data-openday="0" data-etamin="6" data-etamax="10" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">

@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -867,6 +874,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi" open><summary>Chi è Deborah Dalmasso</summary><p class="cr-descr">Deborah Dalmasso è una musicoterapeuta specializzata in percorsi dedicati all’infanzia e all’età evolutiva. Propone attività individuali e di gruppo che, attraverso musica, suono, ritmo, movimento e voce, favoriscono comunicazione, espressione emotiva, relazione e benessere. Realizza inoltre laboratori presso nidi, scuole dell’infanzia e scuole primarie e percorsi dedicati a mamme e bambini.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Cuneo</dd><dt>Indirizzo</dt><dd>Via Tanaro 18</dd><dt>Attività</dt><dd>Inglese · Musica dolce · Musica</dd><dt>Contatti</dt><dd><a href="tel:3405518034">340 551 8034</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/deborahdalmassomt" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/deborahdalmassomt" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  
   <h2 class="cr-h" id="i-corsi">I corsi di Deborah Dalmasso</h2>
   <div class="events-list">
         <article class="event-card" id="c-a042" data-city="cuneo" data-prov="cn" data-cat="lingue" data-disc="inglese" data-org="deborah-dalmasso" data-org-nome="Deborah Dalmasso" data-codice="A042" data-openday="0" data-etamin="3" data-etamax="6" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">

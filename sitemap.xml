@@ -6867,6 +6867,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/vieni-anche-tu-biblioteca-civica-mondovi.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/vieni-anche-tu-museo-della-ceramica-mondovi.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/vieni-anche-tu-museo-della-stampa-mondovi.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/vieni-anche-tu-pomeriggi-creativi-nel-monregalese-bastia-mondovi.html</loc>
     <lastmod>2026-10-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -6874,12 +6892,6 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/vieni-anche-tu-pomeriggi-creativi-nel-monregalese-ceva.html</loc>
-    <lastmod>2026-10-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/vieni-anche-tu-pomeriggi-creativi-nel-monregalese-mondovi.html</loc>
     <lastmod>2026-10-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

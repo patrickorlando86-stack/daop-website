@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -871,6 +878,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi" open><summary>Chi è ASD New Twirling Bra</summary><p class="cr-descr">New Twirling Bra ASD è un&#x27;associazione sportiva di Bra che avvicina bambini e ragazzi al movimento attraverso il twirling e diverse attività ginniche e motorie. Propone percorsi a partire dai più piccoli, con un approccio che unisce sport, coordinazione, espressività e divertimento, accompagnando chi lo desidera dall&#x27;avviamento fino all&#x27;attività agonistica.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Bra</dd><dt>Indirizzo</dt><dd>Viale Risorgimento 31/A</dd><dt>Attività</dt><dd>Twirling</dd><dt>Contatti</dt><dd><a href="tel:3343588505">334 3588505</a></dd><dt>Email</dt><dd><a href="mailto:newtwirlingbra@gmail.com">newtwirlingbra@gmail.com</a></dd><dt>Sito</dt><dd><a href="https://newtwirlingbra.wixsite.com/twirling" rel="sponsored noopener" target="_blank">https://newtwirlingbra.wixsite.com/twirling</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/new.twirling.bra" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/Asd-New-Twirling-Bra-120164209834431/" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  
   <h2 class="cr-h" id="i-corsi">I corsi di ASD New Twirling Bra</h2>
   <div class="events-list">
         <article class="event-card" id="c-a128" data-city="bra" data-prov="cn" data-cat="movimento" data-disc="twirling" data-org="asd-new-twirling-bra" data-org-nome="ASD New Twirling Bra" data-codice="A128" data-openday="0" data-etamin="3" data-etamax="5" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">

@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -889,6 +896,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi"><summary>Chi è Studio EleMenti</summary><p class="cr-descr">Studio EleMenti è uno studio multidisciplinare di Mondovì dedicato al benessere e allo sviluppo della persona, con particolare attenzione anche all&#x27;infanzia e alla famiglia.</p><p class="cr-descr">Le diverse professioniste lavorano in équipe proponendo attività di psicomotricità, neuropsicomotricità, pratiche somatopsichiche, psicologia e psicoterapia, logopedia, valutazione e sostegno alla genitorialità.</p><p class="cr-descr">Per i più piccoli vengono proposti percorsi che, attraverso il gioco e il movimento, accompagnano lo sviluppo motorio, emotivo, cognitivo e relazionale.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Mondovì</dd><dt>Indirizzo</dt><dd>Corso Statuto 1/A</dd><dt>Attività</dt><dd>Psicomotricità · Musica</dd><dt>Contatti</dt><dd><a href="tel:3335215000">333 521 5000</a></dd><dt>Email</dt><dd><a href="mailto:info@elementistudio.com">info@elementistudio.com</a></dd><dt>Sito</dt><dd><a href="https://www.elementistudio.com/" rel="sponsored noopener" target="_blank">https://www.elementistudio.com/</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/studioelementimondovi/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=100063597252418" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  
   <h2 class="cr-h" id="i-corsi">I percorsi di Studio EleMenti</h2>
   <div class="events-list">
         <article class="event-card" id="c-a124" data-city="mondovi" data-prov="cn" data-cat="movimento" data-disc="psicomotricita" data-org="studio-elementi" data-org-nome="Studio EleMenti" data-codice="A124" data-openday="0" data-etamin="1" data-etamax="7" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">

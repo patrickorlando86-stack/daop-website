@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -888,6 +895,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi"><summary>Chi è Rovereto Central Park</summary><p class="cr-descr">Rovereto Central Park è il centro sportivo di Rovereto Sport &amp; Social Club ASD, in corso Monferrato ad Alessandria, aperto nel 2018. Ha quattro sale, 110 metri quadrati di tatami e un parco per il calisthenics al coperto e all&#x27;aperto.</p><p class="cr-descr">Per bambini e ragazzi dai 3 ai 17 anni propone corsi di movimento, arti marziali e allenamento a corpo libero, con istruttori laureati in Scienze motorie o riconosciuti dal CONI. D&#x27;estate organizza anche i centri estivi.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Alessandria</dd><dt>Indirizzo</dt><dd>Corso Monferrato 8</dd><dt>Attività</dt><dd>Giocomotricità · Multisport · Brazilian Jiu Jitsu · Allenamento funzionale · Calisthenics</dd><dt>Contatti</dt><dd><a href="tel:3920629700">392 062 9700</a></dd><dt>Email</dt><dd><a href="mailto:centrorovereto@gmail.com">centrorovereto@gmail.com</a></dd><dt>Sito</dt><dd><a href="https://www.roveretocentralpark.it/" rel="sponsored noopener" target="_blank">https://www.roveretocentralpark.it/</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/roveretocentralparkalessandria/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=100063743702528" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  
   <h2 class="cr-h" id="i-corsi">I corsi di Rovereto Central Park</h2>
   <div class="events-list">
         <article class="event-card" id="c-a132" data-city="alessandria" data-prov="al" data-cat="movimento" data-disc="giocomotricita" data-org="rovereto-central-park" data-org-nome="Rovereto Central Park" data-codice="A132" data-openday="0" data-etamin="3" data-etamax="6" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">

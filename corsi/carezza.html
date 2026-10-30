@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -995,6 +1002,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi"><summary>Chi è CàRezza</summary><p class="cr-descr">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.</p><p class="cr-descr">Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare percorsi, laboratori, eventi e momenti di condivisione pensati per far crescere i bambini in armonia e offrire supporto ai genitori.</p><p class="cr-descr">Un luogo speciale e protetto per vivere un tempo di qualità insieme ai propri bambini.</p><p class="cr-descr">Ogni evento presso CàRezza è studiato per accogliere insieme i bimbi con mamme, papà, nonni, caregivers.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Racconigi</dd><dt>Indirizzo</dt><dd>Piazza Caduti per la Libertà 12a</dd><dt>Attività</dt><dd>Psicomotricità · Educazione musicale · Animazione feste · Massaggio infantile · Massaggio · Benessere bambini · Gravidanza e post-parto · Benessere mamma · Bagno sonoro · Sonno · Naturopatia · Allattamento · Consulenza neonatale · Rebozo</dd><dt>Contatti</dt><dd>Roberta <a href="tel:+393297249359">+39 329 724 9359</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  <div class="cr-salta" role="navigation" aria-label="Sezioni della pagina"><a href="#i-corsi">Corsi <small>3</small></a><a href="#servizi">Servizi <small>12</small></a><a href="#gli-eventi">Eventi <small>1</small></a></div>
   <h2 class="cr-h" id="i-corsi">I corsi di CàRezza</h2>
   <div class="events-list">
         <article class="event-card" id="c-a013" data-city="racconigi" data-prov="cn" data-cat="movimento" data-disc="psicomotricita" data-org="carezza" data-org-nome="CàRezza" data-codice="A013" data-openday="0" data-etamin="3" data-etamax="6" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
@@ -1064,7 +1072,7 @@ html{scroll-behavior:auto}
   </div>
   <section class="sv-prenota" aria-labelledby="sv-prenota-h"><h2 id="sv-prenota-h">Come si prenota</h2><p>Il giorno si concorda direttamente con CàRezza. Piazza Caduti per la Libertà 12a · Racconigi.</p><a class="sv-chiama" href="tel:+393297249359">Chiama per prenotare</a><p class="sv-altro">Roberta <a href="tel:+393297249359">+39 329 724 9359</a> · <a href="https://www.instagram.com/ca.rezza/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/coccolepeerlatte" rel="sponsored noopener" target="_blank">Facebook</a></p></section>
   </section>
-  <h2 class="cr-h">Open day ed eventi di CàRezza</h2>
+  <h2 class="cr-h" id="gli-eventi">Open day ed eventi di CàRezza</h2>
     <a class="cr-ev" href="/eventi/caccia-al-tesoro-di-halloween-carezza-racconigi.html"><img class="cr-ev-loc" src="/assets/miniature/WhatsApp_Image_2026-09-27_at_07_57_17_5_20260928-153529_11.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Caccia al Tesoro di Halloween</span><span class="cr-ev-q">Venerdì 30 ottobre 2026, ore 16:30-17:30 · CàRezza</span></span></a>
   <div class="co-faq" id="domande">
     <h2 class="co-faq-t">Domande frequenti su CàRezza</h2>

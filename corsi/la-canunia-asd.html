@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -853,6 +860,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi"><summary>Chi è La Canunia ASD</summary><p class="cr-descr">La Canunia ASD è un centro equestre di Lurisia dedicato all&#x27;equitazione e all&#x27;escursionismo a cavallo, con attività pensate anche per bambini e ragazzi.</p><p class="cr-descr">Nata nel 1984, propone esperienze per avvicinarsi al mondo del cavallo attraverso lezioni, attività in campo, passeggiate, pony games ed escursionismo, con particolare attenzione alla natura, alla sicurezza e alla crescita dell&#x27;autonomia dei ragazzi.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Lurisia Terme – Roccaforte Mondovì (CN)</dd><dt>Indirizzo</dt><dd>Via delle Terme 25</dd><dt>Attività</dt><dd>Equitazione</dd><dt>Contatti</dt><dd><a href="tel:3397327877">339 7327877</a> / <a href="tel:3933052668">393 3052668</a></dd><dt>Email</dt><dd><a href="mailto:info@lacanunia.com">info@lacanunia.com</a></dd><dt>Sito</dt><dd><a href="https://www.lacanunia.com" rel="sponsored noopener" target="_blank">https://www.lacanunia.com</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/lacanunia/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/lacanunia" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  <div class="cr-salta" role="navigation" aria-label="Sezioni della pagina"><a href="#i-corsi">Corsi <small>2</small></a><a href="#gli-eventi">Eventi <small>1</small></a></div>
   <h2 class="cr-h" id="i-corsi">I corsi di La Canunia ASD</h2>
   <div class="events-list">
         <article class="event-card" id="c-a122" data-city="lurisia" data-prov="cn" data-cat="movimento" data-disc="equitazione" data-org="la-canunia-asd" data-org-nome="La Canunia ASD" data-codice="A122" data-openday="0" data-etamin="5" data-etamax="14" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
@@ -888,7 +896,7 @@ html{scroll-behavior:auto}
           </div>
         </article>
   </div>
-  <h2 class="cr-h">Open day ed eventi di La Canunia ASD</h2>
+  <h2 class="cr-h" id="gli-eventi">Open day ed eventi di La Canunia ASD</h2>
     <a class="cr-ev" href="/eventi/pony-games-di-halloween-la-canunia-roccaforte-mondovi.html"><img class="cr-ev-loc" src="/assets/miniature/Screenshot_2026-10-01_alle_13_28_07_20261001-132846_01.webp" alt="" loading="lazy" decoding="async"><span class="cr-ev-t"><span class="cr-ev-n">Pony Games di Halloween</span><span class="cr-ev-q">Sabato 31 ottobre 2026, ore 14:30-18:00 · La Canunia</span></span></a>
   <div class="co-faq" id="domande">
     <h2 class="co-faq-t">Domande frequenti su La Canunia ASD</h2>

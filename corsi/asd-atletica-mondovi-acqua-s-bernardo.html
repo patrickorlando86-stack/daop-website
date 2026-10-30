@@ -722,6 +722,13 @@ html{scroll-behavior:auto}
 /* Il paragrafo scritto dai dati (testo_realta): cosa, dove, per che eta'. */
 .cr-intro{margin:24px 0 0;font-size:1.02rem;line-height:1.6}
 .cr-h{font-size:1.22rem;margin:34px 0 12px}
+/* La barra in alto e' fissa: senza margine il titolo della sezione ci finisce sotto. */
+.cr-h,#servizi{scroll-margin-top:84px}
+.cr-salta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.cr-salta a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;font-weight:600;text-decoration:none}
+.cr-salta a:hover{background:#dcebf9}
+.cr-salta small{font-weight:500;opacity:.8}
 .cr-ev{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;
   border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;
   text-decoration:none;color:inherit}
@@ -979,6 +986,7 @@ html{scroll-behavior:auto}
   <details class="cr-chi" open><summary>Chi è ASD Atletica Mondovì - Acqua S. Bernardo</summary><p class="cr-descr">L&#x27;ASD Atletica Mondovì – Acqua S. Bernardo promuove l&#x27;atletica leggera attraverso corsi e attività rivolti a bambini, ragazzi e adulti. A Mondovì le attività si svolgono presso la pista di atletica del Beila, con percorsi dedicati alle diverse età e specialità. La società è attiva anche sul territorio con corsi a Carrù e Ceva.</p></details>
   <h2 class="cr-h">Informazioni e contatti</h2>
   <dl class="co-dati"><dt>Dove</dt><dd>Mondovì</dd><dt>Indirizzo</dt><dd>Via Conti di Sambuy 10</dd><dt>Attività</dt><dd>Atletica leggera · Atletica</dd><dt>Contatti</dt><dd><a href="tel:0174339255">0174 339255</a> - <a href="tel:3397839622">339 7839622</a></dd><dt>Email</dt><dd><a href="mailto:segreteria@atleticamondovi.net">segreteria@atleticamondovi.net</a></dd><dt>Sito</dt><dd><a href="https://www.atleticamondovi.net" rel="sponsored noopener" target="_blank">https://www.atleticamondovi.net</a></dd><dt>Social</dt><dd><a href="https://www.instagram.com/asd_atleticamondovi/" rel="sponsored noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/asdatleticamondovi/" rel="sponsored noopener" target="_blank">Facebook</a></dd></dl>
+  
   <h2 class="cr-h" id="i-corsi">I corsi di ASD Atletica Mondovì - Acqua S. Bernardo</h2>
   <div class="events-list">
         <article class="event-card" id="c-a020" data-city="mondovi" data-prov="cn" data-cat="movimento" data-disc="atletica-leggera" data-org="asd-atletica-mondovi-acqua-s-bernardo" data-org-nome="ASD Atletica Mondovì - Acqua S. Bernardo" data-codice="A020" data-openday="0" data-etamin="6" data-etamax="10" data-etada="testo" style="--cat-color:#5B9BD5;--cat-tint:#eef5fc;--cat-ink:#2c5d8f">
