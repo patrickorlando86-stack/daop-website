@@ -1902,10 +1902,16 @@ ROMANO_INIZIALE_RE = re.compile(
     r'^\s*(?=[MDCLXVI]{2,}\b)M*(?:C[MD]|D?C*)(?:X[CL]|L?X*)(?:I[XV]|V?I*)\b\s*')
 
 
+# Slug del nome di oggi -> pagina gia' in registro a cui e' riagganciato (vedi
+# prepara_riagganci). Vuoto finche' main() non lo riempie.
+_SLUG_RIAGGANCIATI = {}
+
+
 def slug_evento(e):
     # Chiamata ~1 milione di volte per ~1000 eventi (10/10/2026: 17 s su 129).
     # Dipende solo da nome e citta', quindi si ricorda.
-    return _slug_evento(e.get('nome') or '', e.get('citta') or '')
+    s = _slug_evento(e.get('nome') or '', e.get('citta') or '')
+    return _SLUG_RIAGGANCIATI.get(s, s)
 
 
 @functools.lru_cache(maxsize=None)
@@ -3123,11 +3129,11 @@ def candidati_edizione(e, reg, presi):
     return fuori
 
 
-def aggiorna_registro(events):
-    """Fonde gli eventi correnti nel registro persistente. Non rimuove nulla."""
-    reg = carica_registro()
-    oggi = datetime.date.today().isoformat()
-    nuovi = 0
+def _migliori_e_riagganci(events, reg):
+    """Un evento per slug, e quali slug nuovi scrivono su una pagina che c'e' gia'.
+
+    Ritorna (migliori, riagganci, ambigui). `migliori` e' gia' sotto gli slug
+    riagganciati."""
     # Un solo evento per slug prima di toccare il registro: il PROSSIMO, e fra
     # due righe con la stessa data d'inizio il piu' completo.
     #
@@ -3166,10 +3172,38 @@ def aggiorna_registro(events):
             presi.add(vecchio)
         elif cand:
             ambigui.append((s, cand))
+    return migliori, riagganci, ambigui
+
+
+def _stampa_riagganci(riagganci):
     for s, vecchio, nome_nuovo, nome_vecchio in riagganci:
         print(f"[genera_eventi] riaggancio: \"{nome_nuovo[:44]}\" scrive su "
               f"/eventi/{vecchio}.html (invece di aprire /eventi/{s}.html)")
         print(f"                 l'edizione in registro si chiamava \"{nome_vecchio[:44]}\"")
+
+
+def prepara_riagganci(events):
+    """Fa valere i riagganci per TUTTA la run, non solo per la scrittura (31/10/2026).
+
+    Il riaggancio scriveva la scheda sullo slug vecchio, ma agenda, sitemap e
+    pagine comune linkavano lo slug del nome di oggi, e quello dava 404: «Una
+    Serata Tutta per Voi con Anima Bimbi» a Racconigi, nome ritoccato sul foglio
+    a un giorno dalla nascita della pagina. Lo stesso sarebbe successo a ogni
+    edizione 2027 riagganciata. Va chiamata prima di qualunque slug_evento() che
+    finisca in una pagina."""
+    _SLUG_RIAGGANCIATI.clear()
+    _, riagganci, _ = _migliori_e_riagganci(events, carica_registro())
+    _stampa_riagganci(riagganci)
+    _SLUG_RIAGGANCIATI.update({s: vecchio for s, vecchio, _n, _v in riagganci})
+
+
+def aggiorna_registro(events):
+    """Fonde gli eventi correnti nel registro persistente. Non rimuove nulla."""
+    reg = carica_registro()
+    oggi = datetime.date.today().isoformat()
+    nuovi = 0
+    migliori, riagganci, ambigui = _migliori_e_riagganci(events, reg)
+    _stampa_riagganci(riagganci)
     for s, cand in ambigui:
         # Non e' un errore: e' la prudenza che funziona, e si stampa perche' un
         # nome scritto meglio nel foglio la toglierebbe di mezzo.
@@ -11516,6 +11550,7 @@ def main():
     scalda_locandine([e.get('loc') for e in events]
                      + [r.get('loc') for r in carica_registro().values()])
     controlla_crollo(events)
+    prepara_riagganci(events)
     segnala_doppioni(events)
     segnala_doppioni_registro(carica_registro(), events)
     segnala_sovrapposizioni(events)

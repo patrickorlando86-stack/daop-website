@@ -94,6 +94,20 @@ cand = g.candidati_edizione(nuovo, reg, set())
 ok(cand == ["sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona"],
    "senza la coda dell'organizzatore ritrova la sua pagina", str(cand))
 
+print("\n3b. Il link segue la pagina riagganciata (31/10/2026: il 404 di Racconigi)")
+vero_carica, vero_ha_pagina = g.carica_registro, g.ha_pagina
+vecchia = "una-serata-tutta-per-voi-anima-bimbi-carezza-racconigi"
+g.carica_registro = lambda: {vecchia: rec("Una Serata Tutta per Voi - Anima Bimbi / CàRezza",
+                                          "Racconigi", "14/11/2026")}
+g.ha_pagina = lambda _e: True
+serata = dict(ev("Una Serata Tutta per Voi con Anima Bimbi - CàRezza", "Racconigi", "14/11/2026"))
+ok(g.slug_evento(serata) != vecchia, "prima del riaggancio lo slug e' quello del nome nuovo")
+g.prepara_riagganci([serata])
+ok(g.slug_evento(serata) == vecchia, "dopo, il link porta alla pagina che esiste", g.slug_evento(serata))
+ok(vecchia in g.aggiorna_registro([serata])[0], "e la scheda si scrive allo stesso indirizzo")
+g.carica_registro, g.ha_pagina = vero_carica, vero_ha_pagina
+g._SLUG_RIAGGANCIATI.clear()
+
 print("\n4. Due candidati: non si sceglie")
 reg_amb = {
     "apertura-stand-gastronomico-con-shary-band-rocchetta-tanaro":
