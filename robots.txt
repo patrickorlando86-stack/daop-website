@@ -9,6 +9,12 @@ Allow: /
 # secondo "User-agent: *": Google li unisce, ma non tutti i parser lo fanno e
 # qualcuno guarda solo il primo.
 Disallow: /guide/
+# No all'addestramento AI, si' alla ricerca: la riga e' la bozza IETF aipref
+# (draft-ietf-aipref-attach). Chi non la conosce la ignora, quindi non tocca la
+# SEO; la riserva legale vera (art. 70-septies L. 633/41, dalla L. 132/2025)
+# sta in /.well-known/tdmrep.json, che vale per TUTTI i bot e non solo per
+# quelli elencati sotto per nome.
+Content-Usage: train-ai=n
 
 # --- Bot di ADDESTRAMENTO AI: bloccati (prendono i dati, non citano) ---
 User-agent: GPTBot

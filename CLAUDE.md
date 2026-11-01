@@ -7760,6 +7760,25 @@ dal `<meta>`: il secondo conto (`bool(attivi)` accanto a quello di `render()`) n
 c'è più. È la regola di `scrivi_pagine_comune()`. Verificata rossa girando la
 funzione di prima sulle stesse pagine.
 
+## L'AI: no all'addestramento, sì alla ricerca — 01/11/2026
+
+`robots.txt` blocca per nome i bot di addestramento e ammette quelli che citano
+(OAI-SearchBot, Claude-SearchBot, Perplexity…): da lì arrivano traffico e
+nome. Dal 01/11/2026 ci sono anche:
+
+- **`/.well-known/tdmrep.json`**: la riserva TDM leggibile da una macchina, cioè
+  l'opt-out che chiede l'art. 70-septies (L. 132/2025). Vale per tutti i bot,
+  non solo per quelli in elenco. Sta in una cartella col punto davanti, e la
+  pubblica solo perché c'è `.nojekyll`: se quel file sparisce, sparisce anche lei.
+- **`Content-Usage: train-ai=n`** nel primo gruppo di `robots.txt`: è la bozza
+  IETF aipref, quasi nessuno la legge e chi non la conosce la ignora.
+- **la sezione `#tdm` in `privacy.html`**, a cui punta `tdm-policy`.
+
+**Cloudflare davanti al sito non si mette**, ed è deciso: spostare i DNS per un
+proxy anti-bot rischia di bloccare un crawler di ricerca su un sito che vive di
+Google, per proteggere date e orari che le Pro Loco vogliono far girare. Le
+licenze a pagamento (RSL) non si preparano: non arriveranno a un sito locale.
+
 ## Verifiche prima di pubblicare
 
 Girano tutti in CI **dopo** il commit: il sito si aggiorna comunque e la run
