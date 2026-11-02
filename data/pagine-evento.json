@@ -881,7 +881,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 372,
+  "riga": 371,
   "slug": "albert-einstein-e-mc2-un-universo-di-idee-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -4899,7 +4899,7 @@
   "ora": "14:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 384,
+  "riga": 383,
   "slug": "castagnata-di-san-martino-pro-loco-montaldeo",
   "updated": "2026-11-02"
  },
@@ -6004,7 +6004,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 377,
+  "riga": 376,
   "slug": "charlie-chaplin-risate-senza-parole-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -6058,7 +6058,7 @@
   "ora": "16:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 381,
+  "riga": 380,
   "slug": "chiamata-alla-parata-alessandria-giro-di-ruota",
   "updated": "2026-11-02"
  },
@@ -7725,7 +7725,7 @@
   "ora": "16:30",
   "prezzo": "8 euro (1 accompagnatore 5€, 2° accompagnatore omaggio)",
   "prov": "AT",
-  "riga": 391,
+  "riga": 390,
   "slug": "detective-dell-olimpo-caccia-ai-miti-musei-di-asti",
   "updated": "2026-11-02"
  },
@@ -10138,7 +10138,7 @@
   "ora": "10:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 370,
+  "riga": 369,
   "slug": "festa-del-ringraziamento-e-della-transumanza-rivarone",
   "updated": "2026-11-02"
  },
@@ -13158,7 +13158,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 383,
+  "riga": 382,
   "slug": "fiera-di-san-baudolino-edizione-alessandria",
   "updated": "2026-11-02"
  },
@@ -13325,7 +13325,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 388,
+  "riga": 387,
   "slug": "fiera-nazionale-del-tartufo-bianco-del-monferrato-montechiaro-d-asti",
   "updated": "2026-11-02"
  },
@@ -13875,7 +13875,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 376,
+  "riga": 375,
   "slug": "fratelli-wright-finalmente-si-vola-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -15345,7 +15345,7 @@
   "ora": "vari",
   "prezzo": "Poltroncina 12€ (offerta lancio, invece di 30€)",
   "prov": "AL",
-  "riga": 382,
+  "riga": 381,
   "slug": "gravity-circus-connection-alessandria",
   "updated": "2026-11-02"
  },
@@ -18333,7 +18333,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 394,
+  "riga": 393,
   "slug": "il-magico-paese-di-natale-asti",
   "updated": "2026-11-02"
  },
@@ -18582,7 +18582,7 @@
   "ora": "14:30",
   "prezzo": "10 € ragazzi 6-14, 12 € adulti",
   "prov": "AT",
-  "riga": 385,
+  "riga": 384,
   "slug": "il-rifugio-nel-bosco-animali-e-piante-della-riserv-asti",
   "updated": "2026-11-02"
  },
@@ -19134,7 +19134,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 374,
+  "riga": 373,
   "slug": "isaac-newton-tutta-colpa-di-una-mela-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -20131,6 +20131,7 @@
   "prezzo": "Non indicato",
   "prov": "AL",
   "riga": 369,
+  "ritirata": "2026-11-02",
   "slug": "la-notte-dei-pupazzi-in-biblioteca-rivanazzano-terme",
   "updated": "2026-11-02"
  },
@@ -22219,7 +22220,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 373,
+  "riga": 372,
   "slug": "leonardo-da-vinci-un-genio-senza-tempo-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -22879,7 +22880,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 379,
+  "riga": 378,
   "slug": "lionel-messi-piccolo-di-statura-gigante-nel-calcio-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -22992,7 +22993,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 375,
+  "riga": 374,
   "slug": "louis-braille-leggere-con-le-dita-sognare-senza-li-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -23020,7 +23021,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 378,
+  "riga": 377,
   "slug": "ludwig-van-beethoven-quattro-note-che-hanno-fatto-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -23406,7 +23407,7 @@
   "ora": "17:00",
   "prezzo": "8 euro",
   "prov": "AT",
-  "riga": 392,
+  "riga": 391,
   "slug": "mani-in-pasta-costruisci-il-tuo-mondo-3d-musei-di-asti",
   "updated": "2026-11-02"
  },
@@ -23628,7 +23629,7 @@
   "ora": "14:30",
   "prezzo": "10 € ragazzi 6-14, 12 € adulti",
   "prov": "AT",
-  "riga": 386,
+  "riga": 385,
   "slug": "megalodonte-il-mare-del-monferrato-e-i-suoi-abitan-asti",
   "updated": "2026-11-02"
  },
@@ -25413,7 +25414,7 @@
   "ora": "da verificare",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 380,
+  "riga": 379,
   "slug": "notte-al-museo-orario-serale-con-pizzata-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -27526,7 +27527,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 390,
+  "riga": 389,
   "slug": "pista-di-pattinaggio-su-ghiaccio-di-asti",
   "updated": "2026-11-02"
  },
@@ -28614,7 +28615,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 389,
+  "riga": 388,
   "slug": "pulciningamba-crescendo-in-sol-a-villanova-d-asti",
   "updated": "2026-11-02"
  },
@@ -31029,7 +31030,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 393,
+  "riga": 392,
   "slug": "san-martin-giornata-del-ringraziamento-maretto",
   "updated": "2026-11-02"
  },
@@ -33582,7 +33583,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 371,
+  "riga": 370,
   "slug": "thomas-edison-e-luce-fu-novi-ligure",
   "updated": "2026-11-02"
  },
@@ -34935,7 +34936,7 @@
   "ora": "14:30",
   "prezzo": "10 € ragazzi 6-14, 12 € adulti",
   "prov": "AT",
-  "riga": 387,
+  "riga": 386,
   "slug": "un-viaggio-tra-minerali-e-fossili-asti",
   "updated": "2026-11-02"
  },
