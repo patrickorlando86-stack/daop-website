@@ -754,6 +754,17 @@
     "pagina": true,
     "ultima": "2026-08-31"
    },
+   "chiamata-alla-parata-alessandria-giro-di-ruota": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini della Stazione - Corso Crimea, monumento equestre",
+    "manifest": "",
+    "nome": "Chiamata alla Parata - Alessandria Giro di Ruota",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
    "ciclo-caccia-al-tesoro-ruote-in-pista-la-ruota-alessandria": {
     "anni": [
      2026
@@ -908,6 +919,17 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "fiera-di-san-baudolino-edizione-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Fiera di San Baudolino – 40ª Edizione",
+    "nome": "Fiera di San Baudolino – 40ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
    "gagliaudo-tra-i-mercanti-alessandria": {
     "anni": [
      2026
@@ -929,6 +951,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-21"
+   },
+   "gravity-circus-connection-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Viale Milite Ignoto",
+    "manifest": "",
+    "nome": "Gravity Circus - Connection",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-06"
    },
    "halloween-al-teatro-delle-scienze-alessandria": {
     "anni": [
@@ -1622,6 +1655,17 @@
     "pagina": true,
     "ultima": "2026-10-01"
    },
+   "detective-dell-olimpo-caccia-ai-miti-musei-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Mazzetti",
+    "manifest": "",
+    "nome": "Detective dell'Olimpo: Caccia ai Miti - Musei di Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
    "dolcetto-o-libretto-ubik-asti": {
     "anni": [
      2026
@@ -1809,6 +1853,28 @@
     "pagina": true,
     "ultima": "2026-10-11"
    },
+   "il-magico-paese-di-natale-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Alfieri",
+    "manifest": "",
+    "nome": "Il Magico Paese di Natale 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   },
+   "il-rifugio-nel-bosco-animali-e-piante-della-riserv-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parcheggio della Balena",
+    "manifest": "Novembre al Museo - Le Giornate delle Famiglie",
+    "nome": "Il Rifugio nel Bosco: animali e piante della Riserva Naturale di Valle Andona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   },
    "la-settimana-del-palio-di-asti": {
     "anni": [
      2026
@@ -1831,6 +1897,17 @@
     "pagina": true,
     "ultima": "2026-10-11"
    },
+   "mani-in-pasta-costruisci-il-tuo-mondo-3d-musei-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Mazzetti",
+    "manifest": "",
+    "nome": "Mani in Pasta: Costruisci il Tuo Mondo 3D! - Musei di Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   },
    "massaggio-infantile-a-i-m-i-centro-per-le-famiglie-asti": {
     "anni": [
      2026
@@ -1841,6 +1918,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-01"
+   },
+   "megalodonte-il-mare-del-monferrato-e-i-suoi-abitan-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Paleontologico",
+    "manifest": "Novembre al Museo - Le Giornate delle Famiglie",
+    "nome": "Megalodonte: il mare del Monferrato e i suoi abitanti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
    },
    "non-siamo-d-accordo-conflitti-in-famiglia-centro-p-asti": {
     "anni": [
@@ -1930,6 +2018,17 @@
     "pagina": false,
     "ultima": "2026-08-07"
    },
+   "pista-di-pattinaggio-su-ghiaccio-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Statuto",
+    "manifest": "",
+    "nome": "Pista di pattinaggio su ghiaccio di Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   },
    "si-riparte-insieme-oratorio-don-bosco-asti": {
     "anni": [
      2026
@@ -1995,6 +2094,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "un-viaggio-tra-minerali-e-fossili-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Paleontologico",
+    "manifest": "Novembre al Museo - Le Giornate delle Famiglie",
+    "nome": "Un viaggio tra minerali e fossili",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "viatosto-si-tinge-di-halloween-asti": {
     "anni": [
@@ -9687,6 +9797,23 @@
   "nome": "Marene",
   "prov": "CN"
  },
+ "maretto": {
+  "eventi": {
+   "san-martin-giornata-del-ringraziamento-maretto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Malino",
+    "manifest": "San Martin - Giornata del Ringraziamento",
+    "nome": "San Martin - Giornata del Ringraziamento",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   }
+  },
+  "nome": "Maretto",
+  "prov": "AT"
+ },
  "marmora": {
   "eventi": {
    "fiero-di-debi-marmora": {
@@ -10475,6 +10602,23 @@
   "nome": "Montà",
   "prov": "CN"
  },
+ "montaldeo": {
+  "eventi": {
+   "castagnata-di-san-martino-pro-loco-montaldeo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile del Castello Doria",
+    "manifest": "",
+    "nome": "Castagnata di San Martino - Pro Loco Montaldeo",
+    "organizza": "Pro Loco Montaldeo",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   }
+  },
+  "nome": "Montaldeo",
+  "prov": "AL"
+ },
  "montecastello": {
   "eventi": {
    "castagnata-pro-loco-montecastello": {
@@ -10491,6 +10635,23 @@
   },
   "nome": "Montecastello",
   "prov": "AL"
+ },
+ "montechiarodasti": {
+  "eventi": {
+   "fiera-nazionale-del-tartufo-bianco-del-monferrato-montechiaro-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Montechiaro d'Asti",
+    "manifest": "Fiera Nazionale del Tartufo Bianco del Monferrato",
+    "nome": "Fiera Nazionale del Tartufo Bianco del Monferrato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   }
+  },
+  "nome": "Montechiaro d'Asti",
+  "prov": "AT"
  },
  "montegioco": {
   "eventi": {
@@ -11515,6 +11676,17 @@
  },
  "noviligure": {
   "eventi": {
+   "albert-einstein-e-mc2-un-universo-di-idee-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Albert Einstein - E = mc²: un universo di idee!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "be-brave-be-read-l-avventura-di-leggere-biblioteca-novi-ligure": {
     "anni": [
      2026
@@ -11547,6 +11719,17 @@
     "organizza": "Associazione Culturale Laboratori d'Arte",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "charlie-chaplin-risate-senza-parole-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Charlie Chaplin - Risate senza parole!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-03-13"
    },
    "con-il-naso-all-insu-museo-dell-apicoltura-magliet-novi-ligure": {
     "anni": [
@@ -11680,6 +11863,17 @@
     "pagina": true,
     "ultima": "2026-10-18"
    },
+   "fratelli-wright-finalmente-si-vola-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Fratelli Wright - Finalmente si vola!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-27"
+   },
    "giochi-in-simboli-centro-paideia-di-torino-novi-ligure": {
     "anni": [
      2026
@@ -11735,6 +11929,17 @@
     "pagina": true,
     "ultima": "2026-11-21"
    },
+   "isaac-newton-tutta-colpa-di-una-mela-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Isaac Newton - Tutta colpa di una mela?",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-30"
+   },
    "la-notte-dei-pupazzi-consegna-pupazzi-la-bottega-d-novi-ligure": {
     "anni": [
      2026
@@ -11757,6 +11962,17 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "la-scuola-dei-misteri-centro-per-le-famiglie-villa-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglie Villa Zucca",
+    "manifest": "",
+    "nome": "La Scuola dei Misteri - Centro per le Famiglie Villa Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-05"
+   },
    "le-avventure-della-famiglia-catastrofino-il-profes-novi-ligure": {
     "anni": [
      2026
@@ -11767,6 +11983,50 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-17"
+   },
+   "leonardo-da-vinci-un-genio-senza-tempo-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Leonardo da Vinci - Un genio senza tempo!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-16"
+   },
+   "lionel-messi-piccolo-di-statura-gigante-nel-calcio-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Lionel Messi - Piccolo di statura, gigante nel calcio!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-04-17"
+   },
+   "louis-braille-leggere-con-le-dita-sognare-senza-li-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Louis Braille - Leggere con le dita, sognare senza limiti!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-20"
+   },
+   "ludwig-van-beethoven-quattro-note-che-hanno-fatto-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Ludwig van Beethoven - Quattro note che hanno fatto storia!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-04-03"
    },
    "luna-park-fiera-di-santa-caterina-novi-ligure": {
     "anni": [
@@ -11811,6 +12071,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-12"
+   },
+   "notte-al-museo-orario-serale-con-pizzata-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Notte al Museo - Orario serale con pizzata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-05-08"
    },
    "oceania-novi-ligure": {
     "anni": [
@@ -11976,6 +12247,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-08"
+   },
+   "thomas-edison-e-luce-fu-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Grandi Storie, Grandi Scoperte - Il Viaggio nel Tempo",
+    "nome": "Thomas Edison - E luce fu!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
    },
    "un-bosco-a-tutto-ritmo-presentazione-del-libro-con-novi-ligure": {
     "anni": [
@@ -14224,6 +14506,40 @@
    }
   },
   "nome": "Rivalta Bormida",
+  "prov": "AL"
+ },
+ "rivanazzanoterme": {
+  "eventi": {
+   "la-notte-dei-pupazzi-in-biblioteca-rivanazzano-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Popolare F. Migliora",
+    "manifest": "La Notte dei Pupazzi In...Biblioteca",
+    "nome": "La Notte dei Pupazzi In...Biblioteca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-06"
+   }
+  },
+  "nome": "Rivanazzano Terme",
+  "prov": "AL"
+ },
+ "rivarone": {
+  "eventi": {
+   "festa-del-ringraziamento-e-della-transumanza-rivarone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rivarone",
+    "manifest": "Festa del Ringraziamento e della Transumanza",
+    "nome": "Festa del Ringraziamento e della Transumanza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   }
+  },
+  "nome": "Rivarone",
   "prov": "AL"
  },
  "robilante": {
@@ -16762,6 +17078,17 @@
  },
  "tassarolo": {
   "eventi": {
+   "giornata-dell-infanzia-non-calpestare-i-sogni-ediz-tassarolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Infanzia Paolo Spinola",
+    "manifest": "Giornata dell'Infanzia - Non Calpestare i Sogni 6ª Edizione",
+    "nome": "Giornata dell'Infanzia - Non Calpestare i Sogni 6ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "sagra-di-san-rocco-con-il-superagnolotto-tassarolo": {
     "anni": [
      2026
@@ -17886,6 +18213,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "pulciningamba-crescendo-in-sol-a-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Micronido Navone Hello Bimbo",
+    "manifest": "PULCININGAMBA 2026/2027 - Crescendo in Sol a Villanova d'Asti",
+    "nome": "PULCININGAMBA 2026/2027 - Crescendo in Sol a Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
    },
    "ritratto-d-artista-con-angelo-casa-degli-alfieri-villanova-d-asti": {
     "anni": [
