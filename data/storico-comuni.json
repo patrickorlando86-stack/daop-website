@@ -2213,6 +2213,17 @@
  },
  "baldisserodalba": {
   "eventi": {
+   "mercatini-di-natale-iv-edizione-pro-loco-baldisser-baldissero-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Martiri",
+    "manifest": "",
+    "nome": "Mercatini di Natale - IV Edizione - Pro Loco Baldissero d'Alba",
+    "organizza": "Pro Loco Baldissero d'Alba",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "passeggiata-a-sei-zampe-baldissero-d-alba": {
     "anni": [
      2026
@@ -2301,12 +2312,12 @@
     "anni": [
      2026
     ],
-    "luogo": "Wi.Mu. Castello Comunale di Barolo",
+    "luogo": "Wi.Mu. Castello comunale di Barolo",
     "manifest": "",
     "nome": "A Spasso con la Marchesa - Wi.Mu. Castello di Barolo",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-13"
+    "ultima": "2026-11-08"
    },
    "castelli-aperti-a-ferragosto-castello-falletti-e-w-barolo": {
     "anni": [
@@ -5948,6 +5959,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "tombolata-merenda-pro-loco-ceresole-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone del MUBATT",
+    "manifest": "",
+    "nome": "Tombolata & Merenda - Pro Loco Ceresole d'Alba",
+    "organizza": "Pro Loco Ceresole d'Alba",
+    "pagina": true,
+    "ultima": "2026-11-22"
    }
   },
   "nome": "Ceresole d'Alba",
@@ -7049,6 +7071,17 @@
     "pagina": true,
     "ultima": "2026-10-14"
    },
+   "desideria-sabato-di-gioco-benessere-e-musica-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ex scuola elementare",
+    "manifest": "Desideria - polo educativo di quartiere Cerialdo",
+    "nome": "Desideria - Sabato di gioco, benessere e musica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "doppio-laboratorio-di-musica-e-argilla-chiosco-par-cuneo": {
     "anni": [
      2026
@@ -7591,6 +7624,23 @@
    }
   },
   "nome": "Demonte",
+  "prov": "CN"
+ },
+ "dianodalba": {
+  "eventi": {
+   "fera-d-dian-diano-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale",
+    "manifest": "Fera 'd Dian 2026",
+    "nome": "Fera 'd Dian 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   }
+  },
+  "nome": "Diano d'Alba",
   "prov": "CN"
  },
  "dogliani": {
@@ -8354,6 +8404,17 @@
     "pagina": true,
     "ultima": "2026-10-22"
    },
+   "gocce-di-pioggia-e-soffici-nuvole-centro-famiglie-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Tana",
+    "manifest": "La Tana dei Cuccioli - Laboratori 0-3 anni",
+    "nome": "Gocce di pioggia e soffici nuvole - Centro Famiglie Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-26"
+   },
    "halloween-in-ludoteca-fossano": {
     "anni": [
      2026
@@ -8364,6 +8425,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-29"
+   },
+   "il-magico-tappeto-di-foglie-centro-famiglie-fossan-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Tana",
+    "manifest": "La Tana dei Cuccioli - Laboratori 0-3 anni",
+    "nome": "Il magico tappeto di foglie - Centro Famiglie Fossano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-12"
    },
    "il-passaporto-dei-sogni-museo-diocesano-cuneo-fossano": {
     "anni": [
@@ -8431,6 +8503,17 @@
     "pagina": true,
     "ultima": "2026-10-24"
    },
+   "piccoli-allevatori-crescono-coldiretti-cuneo-campa-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Brut e Bun",
+    "manifest": "",
+    "nome": "Piccoli Allevatori Crescono! - Coldiretti Cuneo / Campagna Amica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
    "salta-il-castello-fossano": {
     "anni": [
      2026
@@ -8463,6 +8546,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-02"
+   },
+   "un-chicco-mille-scoperte-coldiretti-cuneo-campagna-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Brut e Bun",
+    "manifest": "",
+    "nome": "Un Chicco, Mille Scoperte! - Coldiretti Cuneo / Campagna Amica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
    }
   },
   "nome": "Fossano",
@@ -9616,6 +9710,17 @@
     "pagina": true,
     "ultima": "2026-11-13"
    },
+   "san-martino-tra-storie-luci-e-passi-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale di Manta",
+    "manifest": "",
+    "nome": "San Martino tra storie, luci e passi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "sere-fai-d-estate-camminata-sotto-la-luna-al-caste-manta": {
     "anni": [
      2026
@@ -10343,6 +10448,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "mettiamoci-in-gioco-da-10-a-99-anni-culdur-ferun-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio del Ferrone",
+    "manifest": "",
+    "nome": "Mettiamoci in Gioco da 10 a 99 Anni - Culdür Ferun",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "openday-inglese-con-teacher-noemi-mondovi": {
     "anni": [
@@ -11281,6 +11397,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-11"
+   },
+   "la-festa-degli-alberi-go-green-morozzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Visite della Riserva Naturale Crava-Morozzo",
+    "manifest": "",
+    "nome": "La Festa degli Alberi - Go Green",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "laboratorio-autunnale-tata-lisa-morozzo": {
     "anni": [
@@ -12802,6 +12929,23 @@
   },
   "nome": "Parodi Ligure",
   "prov": "AL"
+ },
+ "paroldo": {
+  "eventi": {
+   "paroldo-l-estate-di-san-martino-laboratori-in-fier": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Fiera di Paroldo",
+    "manifest": "Paroldo l'Estate di San Martino - Laboratori in fiera",
+    "nome": "Paroldo l'Estate di San Martino - Laboratori in fiera",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   }
+  },
+  "nome": "Paroldo",
+  "prov": "CN"
  },
  "pasturana": {
   "eventi": {
@@ -16515,6 +16659,17 @@
     "pagina": true,
     "ultima": "2026-11-14"
    },
+   "letture-sceniche-con-i-ghissbross-cappuccetto-ross-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala S. Agostino - Biblioteca Civica di Savigliano",
+    "manifest": "",
+    "nome": "Letture Sceniche con i Ghissbross - Cappuccetto Rosso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-07"
+   },
    "prisma-di-benessere-la-voce-di-elisa-odv-savigliano": {
     "anni": [
      2026
@@ -16561,6 +16716,23 @@
    }
   },
   "nome": "Savigliano",
+  "prov": "CN"
+ },
+ "scarnafigi": {
+  "eventi": {
+   "fitwalking-di-natale-pro-loco-scarnafigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Beccaria",
+    "manifest": "",
+    "nome": "Fitwalking di Natale - Pro Loco Scarnafigi",
+    "organizza": "Pro Loco Scarnafigi",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   }
+  },
+  "nome": "Scarnafigi",
   "prov": "CN"
  },
  "scurzolengo": {
@@ -17060,6 +17232,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "laboratorio-funzioni-esecutive-t-centro-tarantasca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "T-centro Tarantasca",
+    "manifest": "Laboratorio Funzioni Esecutive",
+    "nome": "Laboratorio Funzioni Esecutive - T-centro Tarantasca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-10"
    },
    "tara-che-bugia-gruppo-eventi-tarantasca": {
     "anni": [
@@ -18288,6 +18471,23 @@
    }
   },
   "nome": "Villanova Mondovì",
+  "prov": "CN"
+ },
+ "villanovasolaro": {
+  "eventi": {
+   "un-incontro-con-matisse-forme-colori-e-meraviglia-villanova-solaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Villanova Solaro",
+    "manifest": "",
+    "nome": "Un incontro con Matisse - Forme, colori e meraviglia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-08"
+   }
+  },
+  "nome": "Villanova Solaro",
   "prov": "CN"
  },
  "villaromagnano": {
