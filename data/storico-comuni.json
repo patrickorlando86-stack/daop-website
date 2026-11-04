@@ -487,6 +487,17 @@
     "pagina": true,
     "ultima": "2026-10-14"
    },
+   "open-day-back-to-school-fun-kids-us-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Kids&Us Alba",
+    "manifest": "",
+    "nome": "Open Day Back to School Fun - Kids&Us Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-06"
+   },
    "pigiama-run-lilt-cuneo-alba": {
     "anni": [
      2026
@@ -9333,6 +9344,23 @@
   },
   "nome": "Isola Sant'Antonio",
   "prov": "AL"
+ },
+ "lagnasco": {
+  "eventi": {
+   "vivi-il-pony-in-coppia-ippica-saluzzese-lagnasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ippica Saluzzese",
+    "manifest": "",
+    "nome": "Vivi il Pony in Coppia - Ippica Saluzzese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   }
+  },
+  "nome": "Lagnasco",
+  "prov": "CN"
  },
  "lerma": {
   "eventi": {

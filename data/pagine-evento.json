@@ -406,7 +406,7 @@
   "ora": "15:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 367,
+  "riga": 247,
   "slug": "a-spasso-con-la-marchesa-wi-mu-castello-di-barolo",
   "updated": "2026-11-04"
  },
@@ -573,7 +573,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 80,
+  "riga": 69,
   "slug": "adulti-connessi-come-lo-smartphone-impatta-sulla-q-tortona",
   "updated": "2026-11-04"
  },
@@ -742,7 +742,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 84,
+  "riga": 73,
   "slug": "aiuto-o-ai-intelligenza-artificiale-digitale-e-nuo-tortona",
   "updated": "2026-11-04"
  },
@@ -770,7 +770,7 @@
   "ora": "vari",
   "prezzo": "17 euro",
   "prov": "CN",
-  "riga": 212,
+  "riga": 129,
   "slug": "aj-a-caraj-caraglio",
   "updated": "2026-11-04"
  },
@@ -881,7 +881,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 342,
+  "riga": 222,
   "slug": "albert-einstein-e-mc2-un-universo-di-idee-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -990,7 +990,7 @@
   "ora": "20:45",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 99,
+  "riga": 84,
   "slug": "alimentazione-nell-eta-scolare-e-prescolare-comune-guarene",
   "updated": "2026-11-04"
  },
@@ -2569,7 +2569,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 303,
+  "riga": 184,
   "slug": "attivita-giochi-al-centro-centro-aggregativo-manta",
   "updated": "2026-11-04"
  },
@@ -2626,7 +2626,7 @@
   "ora": "09:45-11:45",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 29,
+  "riga": 26,
   "slug": "autunno-a-brossasco-laboratori-ludico-creativi",
   "updated": "2026-11-04"
  },
@@ -2737,7 +2737,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 119,
+  "riga": 88,
   "slug": "autunno-in-fiera-pro-loco-valgrana",
   "updated": "2026-11-04"
  },
@@ -3346,7 +3346,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 288,
+  "riga": 173,
   "slug": "bibliobaby-boves",
   "updated": "2026-11-04"
  },
@@ -3374,7 +3374,7 @@
   "ora": "11:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 65,
+  "riga": 56,
   "slug": "bibliobebe-con-floriana-lovera-bambini-19-35-mesi-bra",
   "updated": "2026-11-04"
  },
@@ -3402,7 +3402,7 @@
   "ora": "10:00-11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 64,
+  "riga": 55,
   "slug": "bibliobebe-con-floriana-lovera-bambini-9-18-mesi-bra",
   "updated": "2026-11-04"
  },
@@ -3430,7 +3430,7 @@
   "ora": "16:45-17:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 60,
+  "riga": 53,
   "slug": "bibliobebe-con-valentina-radici-semi-e-parole-bra",
   "updated": "2026-11-04"
  },
@@ -3485,7 +3485,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 297,
+  "riga": 182,
   "slug": "bibliochef-con-elena-boves",
   "updated": "2026-11-04"
  },
@@ -3624,7 +3624,7 @@
   "ora": "13:30",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 322,
+  "riga": 202,
   "slug": "borgo-orienteering-wow-winter-outdoor-weekend-borgo-san-dalmazzo",
   "updated": "2026-11-04"
  },
@@ -4234,7 +4234,7 @@
   "ora": "09:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 246,
+  "riga": 145,
   "slug": "camminata-per-le-famiglie-edizione-autunno-citta-d-mondovi",
   "updated": "2026-11-04"
  },
@@ -4344,7 +4344,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 55,
+  "riga": 49,
   "slug": "camminate-domenicali-a-castagnole-delle-lanze-comu",
   "updated": "2026-11-04"
  },
@@ -4871,7 +4871,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 316,
+  "riga": 197,
   "slug": "castagnata-di-roccasparvera",
   "updated": "2026-11-04"
  },
@@ -4899,7 +4899,7 @@
   "ora": "14:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 354,
+  "riga": 234,
   "slug": "castagnata-di-san-martino-pro-loco-montaldeo",
   "updated": "2026-11-04"
  },
@@ -4955,7 +4955,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 178,
+  "riga": 115,
   "slug": "castagnata-e-ciclocross-di-s-martino-festa-patrona-pasturana",
   "updated": "2026-11-04"
  },
@@ -4982,7 +4982,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 120,
+  "riga": 89,
   "slug": "castagnata-e-festa-di-inizio-anno-catechistico-a-r-cherasco",
   "updated": "2026-11-04"
  },
@@ -6004,7 +6004,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 347,
+  "riga": 227,
   "slug": "charlie-chaplin-risate-senza-parole-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -6058,7 +6058,7 @@
   "ora": "16:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 351,
+  "riga": 231,
   "slug": "chiamata-alla-parata-alessandria-giro-di-ruota",
   "updated": "2026-11-04"
  },
@@ -6811,7 +6811,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 249,
+  "riga": 148,
   "slug": "corone-di-natura-parco-fluviale-gesso-e-stura-cuneo",
   "updated": "2026-11-04"
  },
@@ -7282,7 +7282,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 295,
+  "riga": 180,
   "slug": "creolab-games-boves",
   "updated": "2026-11-04"
  },
@@ -7533,7 +7533,7 @@
   "ora": "10:30",
   "prezzo": "Contributo libero",
   "prov": "CN",
-  "riga": 330,
+  "riga": 210,
   "slug": "da-mamma-a-mamma-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -7589,7 +7589,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 265,
+  "riga": 154,
   "slug": "dal-seme-all-albero-laboratorio-di-lettura-ad-alta-verzuolo",
   "updated": "2026-11-04"
  },
@@ -7616,7 +7616,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 188,
+  "riga": 118,
   "slug": "dance-show-punteacapo-studio-danza-serravalle-scrivia",
   "updated": "2026-11-04"
  },
@@ -7726,7 +7726,7 @@
   "ora": "16:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 373,
+  "riga": 253,
   "slug": "desideria-sabato-di-gioco-benessere-e-musica-cuneo",
   "updated": "2026-11-04"
  },
@@ -7753,7 +7753,7 @@
   "ora": "16:30",
   "prezzo": "8 euro (1 accompagnatore 5€, 2° accompagnatore omaggio)",
   "prov": "AT",
-  "riga": 361,
+  "riga": 241,
   "slug": "detective-dell-olimpo-caccia-ai-miti-musei-di-asti",
   "updated": "2026-11-04"
  },
@@ -8415,7 +8415,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 47,
+  "riga": 43,
   "slug": "escursione-invernale-nel-bosco-dell-aleve-pontechianale",
   "updated": "2026-11-04"
  },
@@ -8583,7 +8583,7 @@
   "ora": "16:30-17:15",
   "prezzo": "15 euro ad incontro",
   "prov": "CN",
-  "riga": 325,
+  "riga": 205,
   "slug": "espressione-in-gioco-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -8695,7 +8695,7 @@
   "ora": "sab 14:00-20:00; dom visite al museo su prenotazione",
   "prezzo": "",
   "prov": "AT",
-  "riga": 79,
+  "riga": 68,
   "slug": "esserearte-arte-e-teatro-nei-luoghi-del-gesso-moncucco-torinese",
   "updated": "2026-11-04"
  },
@@ -8998,7 +8998,7 @@
   "ora": "16:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 315,
+  "riga": 196,
   "slug": "faboo-il-potere-dell-immaginazione-caraglio",
   "updated": "2026-11-04"
  },
@@ -9277,7 +9277,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 284,
+  "riga": 169,
   "slug": "favolando-mini-letture-per-bebe-boves",
   "updated": "2026-11-04"
  },
@@ -9304,7 +9304,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 386,
+  "riga": 266,
   "slug": "fera-d-dian-diano-d-alba",
   "updated": "2026-11-04"
  },
@@ -9856,7 +9856,7 @@
   "ora": "10:00-17:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 157,
+  "riga": 105,
   "slug": "festa-dei-ceci-shopping-a-gogo-pro-loco-refrancore",
   "updated": "2026-11-04"
  },
@@ -10193,7 +10193,7 @@
   "ora": "10:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 340,
+  "riga": 220,
   "slug": "festa-del-ringraziamento-e-della-transumanza-rivarone",
   "updated": "2026-11-04"
  },
@@ -12074,7 +12074,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 147,
+  "riga": 102,
   "slug": "festa-patronale-di-san-martino-orsara-bormida",
   "updated": "2026-11-04"
  },
@@ -12992,7 +12992,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 50,
+  "riga": 45,
   "slug": "fiera-del-cavolo-di-san-giovanni-casal-cermelli",
   "updated": "2026-11-04"
  },
@@ -13213,7 +13213,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 353,
+  "riga": 233,
   "slug": "fiera-di-san-baudolino-edizione-alessandria",
   "updated": "2026-11-04"
  },
@@ -13295,7 +13295,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 176,
+  "riga": 113,
   "slug": "fiera-di-santa-caterina-acqui-terme",
   "updated": "2026-11-04"
  },
@@ -13380,7 +13380,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 358,
+  "riga": 238,
   "slug": "fiera-nazionale-del-tartufo-bianco-del-monferrato-montechiaro-d-asti",
   "updated": "2026-11-04"
  },
@@ -13489,7 +13489,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 236,
+  "riga": 138,
   "slug": "fiera-nazionale-del-tartufo-e-di-san-martin-canelli",
   "updated": "2026-11-04"
  },
@@ -13736,7 +13736,7 @@
   "ora": "8:30",
   "prezzo": "5 euro (costo pettorale)",
   "prov": "CN",
-  "riga": 382,
+  "riga": 262,
   "slug": "fitwalking-di-natale-pro-loco-scarnafigi",
   "updated": "2026-11-04"
  },
@@ -13958,7 +13958,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 346,
+  "riga": 226,
   "slug": "fratelli-wright-finalmente-si-vola-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -14124,7 +14124,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 291,
+  "riga": 176,
   "slug": "fumettilab-con-dody-boves",
   "updated": "2026-11-04"
  },
@@ -14289,7 +14289,7 @@
   "ora": "21:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 177,
+  "riga": 114,
   "slug": "game-night-biblioteca-civica-comunale-castelletto-castelletto-d-orba",
   "updated": "2026-11-04"
  },
@@ -14317,7 +14317,7 @@
   "ora": "19:30-22:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 26,
+  "riga": 24,
   "slug": "game-on-centro-famiglie-e-ludoteca-la-casa-sull-al-savigliano",
   "updated": "2026-11-04"
  },
@@ -14455,7 +14455,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 309,
+  "riga": 190,
   "slug": "giardinaggio-centro-aggregativo-manta",
   "updated": "2026-11-04"
  },
@@ -14537,7 +14537,7 @@
   "ora": "10:00-11:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 135,
+  "riga": 96,
   "slug": "giocare-per-crescere-giochi-motori-e-creativi-yo-y-alessandria",
   "updated": "2026-11-04"
  },
@@ -14676,7 +14676,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 173,
+  "riga": 110,
   "slug": "giochi-in-simboli-centro-paideia-di-torino-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -14929,7 +14929,7 @@
   "ora": "10:00-11:00",
   "prezzo": "12 euro",
   "prov": "CN",
-  "riga": 327,
+  "riga": 207,
   "slug": "gioco-destrutturato-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -15040,7 +15040,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 338,
+  "riga": 218,
   "slug": "giornata-dell-infanzia-non-calpestare-i-sogni-ediz-tassarolo",
   "updated": "2026-11-04"
  },
@@ -15122,7 +15122,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 45,
+  "riga": 41,
   "slug": "gita-cicloturistica-al-bosco-del-merlino-e-sulle-c-caramagna-piemonte",
   "updated": "2026-11-04"
  },
@@ -15150,7 +15150,7 @@
   "ora": "9:30-11:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 376,
+  "riga": 256,
   "slug": "gocce-di-pioggia-e-soffici-nuvole-centro-famiglie-fossano",
   "updated": "2026-11-04"
  },
@@ -15234,7 +15234,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 139,
+  "riga": 100,
   "slug": "gran-castagnata-al-parco-dell-ingenio-busca",
   "updated": "2026-11-04"
  },
@@ -15456,7 +15456,7 @@
   "ora": "vari",
   "prezzo": "Poltroncina 12€ (offerta lancio, invece di 30€)",
   "prov": "AL",
-  "riga": 352,
+  "riga": 232,
   "slug": "gravity-circus-connection-alessandria",
   "updated": "2026-11-04"
  },
@@ -18225,7 +18225,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 51,
+  "riga": 46,
   "slug": "il-gatto-con-gli-stivali-quando-il-cervello-ci-tir-roddino",
   "updated": "2026-11-04"
  },
@@ -18334,7 +18334,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 172,
+  "riga": 109,
   "slug": "il-gran-borbottante-laboratorio-a-cura-di-sergio-c-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -18444,7 +18444,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 364,
+  "riga": 244,
   "slug": "il-magico-paese-di-natale-asti",
   "updated": "2026-11-04"
  },
@@ -18472,7 +18472,7 @@
   "ora": "9:30-11:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 375,
+  "riga": 255,
   "slug": "il-magico-tappeto-di-foglie-centro-famiglie-fossan-fossano",
   "updated": "2026-11-04"
  },
@@ -18721,7 +18721,7 @@
   "ora": "14:30",
   "prezzo": "10 € ragazzi 6-14, 12 € adulti",
   "prov": "AT",
-  "riga": 355,
+  "riga": 235,
   "slug": "il-rifugio-nel-bosco-animali-e-piante-della-riserv-asti",
   "updated": "2026-11-04"
  },
@@ -18860,7 +18860,7 @@
   "ora": "15:00",
   "prezzo": "7 euro (sia adulti che bambini)",
   "prov": "CN",
-  "riga": 169,
+  "riga": 106,
   "slug": "il-treno-dell-autunno-museo-ferroviario-piemontese-savigliano",
   "updated": "2026-11-04"
  },
@@ -19245,7 +19245,7 @@
   "ora": "17:00-18:15",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 90,
+  "riga": 75,
   "slug": "io-sono-un-artista-crome-in-movimento-aps-vezza-d-alba",
   "updated": "2026-11-04"
  },
@@ -19273,7 +19273,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 344,
+  "riga": 224,
   "slug": "isaac-newton-tutta-colpa-di-una-mela-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -19329,7 +19329,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 22,
+  "riga": 20,
   "slug": "kids-move-final-fest-comune-di-casalnoceto",
   "updated": "2026-11-04"
  },
@@ -19357,7 +19357,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 123,
+  "riga": 91,
   "slug": "kocho-farfalle-a-colori-casale-monferrato",
   "updated": "2026-11-04"
  },
@@ -19468,7 +19468,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 82,
+  "riga": 71,
   "slug": "l-amore-ai-tempi-dei-social-affettivita-e-sessuali-tortona",
   "updated": "2026-11-04"
  },
@@ -19636,7 +19636,7 @@
   "ora": "14:00",
   "prezzo": "10 euro (quota devoluta ad Autismo Help Cuneo)",
   "prov": "CN",
-  "riga": 314,
+  "riga": 195,
   "slug": "la-camminata-dei-babbi-natale-asilo-infantile-don-mondovi",
   "updated": "2026-11-04"
  },
@@ -19828,7 +19828,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 85,
+  "riga": 74,
   "slug": "la-fattoria-in-biblioteca-tortona",
   "updated": "2026-11-04"
  },
@@ -19855,7 +19855,7 @@
   "ora": "10:30-16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 366,
+  "riga": 246,
   "slug": "la-festa-degli-alberi-go-green-morozzo",
   "updated": "2026-11-04"
  },
@@ -20216,7 +20216,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 10,
+  "riga": 8,
   "slug": "la-notte-dei-peluches-biblioteca-civica-g-monticon-canelli",
   "updated": "2026-11-04"
  },
@@ -20599,7 +20599,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 16,
+  "riga": 14,
   "slug": "la-salute-di-bambini-e-adulti-a-nizza-monferrato",
   "updated": "2026-11-04"
  },
@@ -20655,7 +20655,7 @@
   "ora": "17:30-19:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 339,
+  "riga": 219,
   "slug": "la-scuola-dei-misteri-centro-per-le-famiglie-villa-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -20850,7 +20850,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 248,
+  "riga": 147,
   "slug": "la-vuoi-una-caldarrosta-gran-castagnata-al-parco-d-busca",
   "updated": "2026-11-04"
  },
@@ -21102,7 +21102,7 @@
   "ora": "14:30-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 46,
+  "riga": 42,
   "slug": "laboratorio-con-la-natura-al-museo-naturalistico-d-revello",
   "updated": "2026-11-04"
  },
@@ -21491,7 +21491,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 307,
+  "riga": 188,
   "slug": "laboratorio-di-cucina-centro-aggregativo-manta",
   "updated": "2026-11-04"
  },
@@ -21629,7 +21629,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 310,
+  "riga": 191,
   "slug": "laboratorio-di-manga-fossano",
   "updated": "2026-11-04"
  },
@@ -21657,7 +21657,7 @@
   "ora": "16:00-17:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 194,
+  "riga": 123,
   "slug": "laboratorio-di-manga-palestr3-giovani-demonte",
   "updated": "2026-11-04"
  },
@@ -21742,7 +21742,7 @@
   "ora": "15:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 378,
+  "riga": 258,
   "slug": "laboratorio-funzioni-esecutive-t-centro-tarantasca",
   "updated": "2026-11-04"
  },
@@ -21993,7 +21993,7 @@
   "ora": "16:30-19:00",
   "prezzo": "5 euro a persona",
   "prov": "CN",
-  "riga": 247,
+  "riga": 146,
   "slug": "lanterna-che-brilli-lanterna-che-vai-parco-fluvial-cuneo",
   "updated": "2026-11-04"
  },
@@ -22050,7 +22050,7 @@
   "ora": "17:15",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 171,
+  "riga": 108,
   "slug": "le-avventure-della-famiglia-catastrofino-il-profes-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -22190,7 +22190,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 6,
+  "riga": 4,
   "slug": "le-letture-del-sabato-in-biblioteca-biblioteca-civ-canelli",
   "updated": "2026-11-04"
  },
@@ -22330,7 +22330,7 @@
   "ora": "10:30",
   "prezzo": "8 euro",
   "prov": "CN",
-  "riga": 383,
+  "riga": 263,
   "slug": "le-piccole-storie-di-marameo-alba",
   "updated": "2026-11-04"
  },
@@ -22468,7 +22468,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 343,
+  "riga": 223,
   "slug": "leonardo-da-vinci-un-genio-senza-tempo-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -22799,7 +22799,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 39,
+  "riga": 35,
   "slug": "letture-per-bambini-maestra-claudia-piasco",
   "updated": "2026-11-04"
  },
@@ -22826,7 +22826,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 41,
+  "riga": 37,
   "slug": "letture-per-bambini-maestra-daniela-piasco",
   "updated": "2026-11-04"
  },
@@ -22853,7 +22853,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 42,
+  "riga": 38,
   "slug": "letture-per-bambini-maestra-fiorella-piasco",
   "updated": "2026-11-04"
  },
@@ -22880,7 +22880,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 44,
+  "riga": 40,
   "slug": "letture-per-bambini-mamma-agnese-piasco",
   "updated": "2026-11-04"
  },
@@ -22907,7 +22907,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 40,
+  "riga": 36,
   "slug": "letture-per-bambini-mamma-anna-piasco",
   "updated": "2026-11-04"
  },
@@ -22962,7 +22962,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 43,
+  "riga": 39,
   "slug": "letture-per-bambini-nonna-michela-e-nonno-giulio-piasco",
   "updated": "2026-11-04"
  },
@@ -22990,7 +22990,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 369,
+  "riga": 249,
   "slug": "letture-sceniche-con-i-ghissbross-cappuccetto-ross-savigliano",
   "updated": "2026-11-04"
  },
@@ -23156,7 +23156,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 349,
+  "riga": 229,
   "slug": "lionel-messi-piccolo-di-statura-gigante-nel-calcio-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -23212,7 +23212,7 @@
   "ora": "18:30-20:00",
   "prezzo": "25 euro (singolo o coppia genitoriale); spazio gioco bambini 5 euro a bambino",
   "prov": "CN",
-  "riga": 334,
+  "riga": 214,
   "slug": "lo-sto-viziando-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -23269,7 +23269,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 345,
+  "riga": 225,
   "slug": "louis-braille-leggere-con-le-dita-sognare-senza-li-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -23297,7 +23297,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 348,
+  "riga": 228,
   "slug": "ludwig-van-beethoven-quattro-note-che-hanno-fatto-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -23352,7 +23352,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 268,
+  "riga": 157,
   "slug": "luna-park-fiera-di-santa-caterina-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -23406,7 +23406,7 @@
   "ora": "10:00-20:00",
   "prezzo": "2 euro a giostra (escluse giostre a tempo e a premio con sconto 1 euro)",
   "prov": "AT",
-  "riga": 222,
+  "riga": 133,
   "slug": "luna-park-nizza-gran-finale-nizza-monferrato",
   "updated": "2026-11-04"
  },
@@ -23461,7 +23461,7 @@
   "ora": "10:00-11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 68,
+  "riga": 59,
   "slug": "magic-english-playing-learning-con-elena-f-bra",
   "updated": "2026-11-04"
  },
@@ -23489,7 +23489,7 @@
   "ora": "11:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 69,
+  "riga": 60,
   "slug": "magic-english-words-rhymes-con-elena-a-bra",
   "updated": "2026-11-04"
  },
@@ -23656,7 +23656,7 @@
   "ora": "09:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 138,
+  "riga": 99,
   "slug": "mani-che-creano-laboratorio-di-presepi-per-bambini-boves",
   "updated": "2026-11-04"
  },
@@ -23683,7 +23683,7 @@
   "ora": "17:00",
   "prezzo": "8 euro",
   "prov": "AT",
-  "riga": 362,
+  "riga": 242,
   "slug": "mani-in-pasta-costruisci-il-tuo-mondo-3d-musei-di-asti",
   "updated": "2026-11-04"
  },
@@ -23822,7 +23822,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 175,
+  "riga": 112,
   "slug": "matite-sotto-l-albero-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -23850,7 +23850,7 @@
   "ora": "9:30-11:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "CN",
-  "riga": 32,
+  "riga": 28,
   "slug": "mattinata-di-giochi-sportivi-ed-attivita-in-movime-brossasco",
   "updated": "2026-11-04"
  },
@@ -23905,7 +23905,7 @@
   "ora": "14:30",
   "prezzo": "10 € ragazzi 6-14, 12 € adulti",
   "prov": "AT",
-  "riga": 356,
+  "riga": 236,
   "slug": "megalodonte-il-mare-del-monferrato-e-i-suoi-abitan-asti",
   "updated": "2026-11-04"
  },
@@ -24043,7 +24043,7 @@
   "ora": "09:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 21,
+  "riga": 19,
   "slug": "mercatini-di-natale-confcommercio-ascom-carru",
   "updated": "2026-11-04"
  },
@@ -24070,7 +24070,7 @@
   "ora": "09:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 377,
+  "riga": 257,
   "slug": "mercatini-di-natale-iv-edizione-pro-loco-baldisser-baldissero-d-alba",
   "updated": "2026-11-04"
  },
@@ -24098,7 +24098,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 48,
+  "riga": 44,
   "slug": "mercatini-sotto-il-monviso-comune-di-crissolo",
   "updated": "2026-11-04"
  },
@@ -24154,7 +24154,7 @@
   "ora": "dalle 9",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 104,
+  "riga": 86,
   "slug": "mercatino-delle-pulci-pro-loco-beinette",
   "updated": "2026-11-04"
  },
@@ -24182,7 +24182,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 250,
+  "riga": 149,
   "slug": "mercatino-di-natale-e-babbo-run-caraj-a-t-pro-loco-caraglio",
   "updated": "2026-11-04"
  },
@@ -24266,7 +24266,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 385,
+  "riga": 265,
   "slug": "mettiamoci-in-gioco-da-10-a-99-anni-culdur-ferun-mondovi",
   "updated": "2026-11-04"
  },
@@ -24293,7 +24293,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 189,
+  "riga": 119,
   "slug": "mi-leggi-una-storia-biblioteca-civica-di-valfenera",
   "updated": "2026-11-04"
  },
@@ -24403,7 +24403,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 296,
+  "riga": 181,
   "slug": "minichef-con-elena-boves",
   "updated": "2026-11-04"
  },
@@ -24567,7 +24567,7 @@
   "ora": "17:00-18:00",
   "prezzo": "12 euro a bambino",
   "prov": "CN",
-  "riga": 336,
+  "riga": 216,
   "slug": "mondo-tullet-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -24758,7 +24758,7 @@
   "ora": "09:00-13:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 4,
+  "riga": 3,
   "slug": "mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti",
   "updated": "2026-11-04"
  },
@@ -24812,7 +24812,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 53,
+  "riga": 47,
   "slug": "mr-book-biblioteca-civica-don-alfredo-bianco-monga-mongardino",
   "updated": "2026-11-04"
  },
@@ -24893,7 +24893,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 97,
+  "riga": 82,
   "slug": "multisensoriale-in-biblioteca-bambini-3-6-anni-ore-marene",
   "updated": "2026-11-04"
  },
@@ -24947,7 +24947,7 @@
   "ora": "15:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 96,
+  "riga": 81,
   "slug": "multisensoriale-in-biblioteca-bambini-6-9-anni-ore-marene",
   "updated": "2026-11-04"
  },
@@ -25028,7 +25028,7 @@
   "ora": "11:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 95,
+  "riga": 80,
   "slug": "multisensoriale-in-biblioteca-genitori-e-bambini-0-marene",
   "updated": "2026-11-04"
  },
@@ -25055,7 +25055,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 94,
+  "riga": 79,
   "slug": "multisensoriale-in-biblioteca-genitori-e-bambini-1-marene",
   "updated": "2026-11-04"
  },
@@ -25082,7 +25082,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 92,
+  "riga": 77,
   "slug": "multisensoriale-in-biblioteca-turno-famiglia-ore-1-marene",
   "updated": "2026-11-04"
  },
@@ -25358,7 +25358,7 @@
   "ora": "16:00-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 17,
+  "riga": 15,
   "slug": "my-cup-of-tea-cuneo",
   "updated": "2026-11-04"
  },
@@ -25414,7 +25414,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 174,
+  "riga": 111,
   "slug": "natale-con-attilio-la-bottega-del-sanconiglio-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -25441,7 +25441,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 38,
+  "riga": 34,
   "slug": "natale-incontrada-silvano-d-orba",
   "updated": "2026-11-04"
  },
@@ -25468,7 +25468,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 277,
+  "riga": 162,
   "slug": "nati-per-leggere-biblioteca-civica-comune-di-magli-magliano-alfieri",
   "updated": "2026-11-04"
  },
@@ -25744,7 +25744,7 @@
   "ora": "da verificare",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 350,
+  "riga": 230,
   "slug": "notte-al-museo-orario-serale-con-pizzata-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -25911,7 +25911,7 @@
   "ora": "9:00-13:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 266,
+  "riga": 155,
   "slug": "nutrire-leggere-e-respirare-centro-per-le-famiglie-arquata-scrivia",
   "updated": "2026-11-04"
  },
@@ -25938,7 +25938,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 14,
+  "riga": 12,
   "slug": "nutrire-un-bambino-dopo-i-primi-mesi-nizza-monferrato",
   "updated": "2026-11-04"
  },
@@ -25995,7 +25995,7 @@
   "ora": "16:00-17:00",
   "prezzo": "20 euro a bambino",
   "prov": "CN",
-  "riga": 331,
+  "riga": 211,
   "slug": "occhi-in-gioco-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -26079,7 +26079,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 83,
+  "riga": 72,
   "slug": "oltre-i-like-capire-social-algoritmi-challenge-e-p-tortona",
   "updated": "2026-11-04"
  },
@@ -26192,6 +26192,33 @@
   "slug": "open-day-atelier-ariel-spazio-creativo-per-bimbi-alessandria",
   "updated": "2026-11-04"
  },
+ "open-day-back-to-school-fun-kids-us-alba": {
+  "anchor": "ev-2026-11-06-open-day-back-to-school-fun-kids-us-alba",
+  "categoria": "Laboratorio",
+  "citta": "Alba",
+  "consigliato": "No",
+  "d_end": "2026-11-06",
+  "d_start": "2026-11-06",
+  "descr": "Open Day 'Back to School Fun' presso Kids&Us Alba: vieni a vivere una giornata nella scuola di inglese! I bambini da 1 a 9 anni potranno personalizzare il loro zainetto Kids&Us oppure creare un quadernetto da disegnare e colorare. Attività aperta a iscritti e non iscritti, con i genitori invitati a partecipare insieme ai bambini. Prenotazione obbligatoria tramite QR code.",
+  "df": "06/11/2026",
+  "di": "06/11/2026",
+  "eta": "1-9 anni",
+  "first_seen": "2026-11-04",
+  "indirizzo": "Corso Piave 16 - Alba (CN)",
+  "last_seen": "2026-11-04",
+  "lat": "44.7008347",
+  "loc": "Kids_Us_20261103-152914_01.webp",
+  "lon": "8.0368809",
+  "luogo": "Kids&Us Alba",
+  "manifest": "",
+  "nome": "Open Day Back to School Fun - Kids&Us Alba",
+  "ora": "17:00-19:00",
+  "prezzo": "Gratuito",
+  "prov": "CN",
+  "riga": 268,
+  "slug": "open-day-back-to-school-fun-kids-us-alba",
+  "updated": "2026-11-04"
+ },
  "open-day-corsi-di-musica-crome-in-movimento-aps-vezza-d-alba": {
   "anchor": "ev-2026-09-20-open-day-corsi-di-musica-crome-in-movimento-aps",
   "categoria": "Musica",
@@ -26300,7 +26327,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 34,
+  "riga": 30,
   "slug": "open-officina-spazio-aggregativo-saluzzo",
   "updated": "2026-11-04"
  },
@@ -26884,7 +26911,7 @@
   "ora": "9:00-13:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 271,
+  "riga": 160,
   "slug": "parliamone-insieme-centro-per-le-famiglie-villa-zu-arquata-scrivia",
   "updated": "2026-11-04"
  },
@@ -26911,7 +26938,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 368,
+  "riga": 248,
   "slug": "paroldo-l-estate-di-san-martino-laboratori-in-fier",
   "updated": "2026-11-04"
  },
@@ -27551,7 +27578,7 @@
   "ora": "15:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 370,
+  "riga": 250,
   "slug": "piccoli-allevatori-crescono-coldiretti-cuneo-campa-fossano",
   "updated": "2026-11-04"
  },
@@ -27662,6 +27689,7 @@
   "prezzo": "Non indicato",
   "prov": "CN",
   "riga": 298,
+  "ritirata": "2026-11-04",
   "slug": "piccolo-yogi-in-crescita-boves",
   "updated": "2026-11-04"
  },
@@ -27911,7 +27939,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 360,
+  "riga": 240,
   "slug": "pista-di-pattinaggio-su-ghiaccio-di-asti",
   "updated": "2026-11-04"
  },
@@ -28161,7 +28189,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 305,
+  "riga": 186,
   "slug": "pomeriggio-della-gentilezza-centro-aggregativo-man-manta",
   "updated": "2026-11-04"
  },
@@ -28384,7 +28412,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 81,
+  "riga": 70,
   "slug": "postare-o-non-postare-il-dilemma-dello-sharenting-tortona",
   "updated": "2026-11-04"
  },
@@ -28499,7 +28527,7 @@
   "ora": "16:15",
   "prezzo": "Tessera associativa 30 euro",
   "prov": "AL",
-  "riga": 227,
+  "riga": 134,
   "slug": "pratica-psicomotoria-percorrere-aps-tortona",
   "updated": "2026-11-04"
  },
@@ -28668,7 +28696,7 @@
   "ora": "9:00-13:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 267,
+  "riga": 156,
   "slug": "prepararsi-al-parto-centro-per-le-famiglie-villa-z-arquata-scrivia",
   "updated": "2026-11-04"
  },
@@ -28999,7 +29027,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 359,
+  "riga": 239,
   "slug": "pulciningamba-crescendo-in-sol-a-villanova-d-asti",
   "updated": "2026-11-04"
  },
@@ -29082,7 +29110,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 15,
+  "riga": 13,
   "slug": "quando-venere-diventa-luna-nizza-monferrato",
   "updated": "2026-11-04"
  },
@@ -29698,7 +29726,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 133,
+  "riga": 95,
   "slug": "ritroviamoci-con-coccole-storie-buttigliera-d-asti",
   "updated": "2026-11-04"
  },
@@ -29865,7 +29893,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 98,
+  "riga": 83,
   "slug": "sabati-in-oratorio-prove-della-recita-e-giochi-carru",
   "updated": "2026-11-04"
  },
@@ -31414,7 +31442,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 363,
+  "riga": 243,
   "slug": "san-martin-giornata-del-ringraziamento-maretto",
   "updated": "2026-11-04"
  },
@@ -31441,7 +31469,7 @@
   "ora": "16:00-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 384,
+  "riga": 264,
   "slug": "san-martino-tra-storie-luci-e-passi-manta",
   "updated": "2026-11-04"
  },
@@ -32443,7 +32471,7 @@
   "ora": "17:30-19:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 73,
+  "riga": 63,
   "slug": "silent-book-party-piasco",
   "updated": "2026-11-04"
  },
@@ -32553,7 +32581,7 @@
   "ora": "10:30",
   "prezzo": "20 euro",
   "prov": "CN",
-  "riga": 335,
+  "riga": 215,
   "slug": "sogni-d-oro-strategie-dolci-per-migliorare-il-sonn-racconigi",
   "updated": "2026-11-04"
  },
@@ -33323,7 +33351,7 @@
   "ora": "10:00-11:00",
   "prezzo": "Offerta minima 8 euro a bambino",
   "prov": "CN",
-  "riga": 329,
+  "riga": 209,
   "slug": "storie-piccine-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -33883,7 +33911,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 122,
+  "riga": 90,
   "slug": "teru-teru-bozu-casale-monferrato",
   "updated": "2026-11-04"
  },
@@ -33938,7 +33966,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 125,
+  "riga": 93,
   "slug": "the-little-book-club-comune-di-castelnuovo-scrivia",
   "updated": "2026-11-04"
  },
@@ -33994,7 +34022,7 @@
   "ora": "16:00-18:00",
   "prezzo": "5 euro a bambino",
   "prov": "AL",
-  "riga": 341,
+  "riga": 221,
   "slug": "thomas-edison-e-luce-fu-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -34185,7 +34213,7 @@
   "ora": "14:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 365,
+  "riga": 245,
   "slug": "tombolata-merenda-pro-loco-ceresole-d-alba",
   "updated": "2026-11-04"
  },
@@ -34241,7 +34269,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 304,
+  "riga": 185,
   "slug": "torneo-di-calcetto-centro-aggregativo-manta",
   "updated": "2026-11-04"
  },
@@ -34269,7 +34297,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 302,
+  "riga": 183,
   "slug": "torneo-di-calcio-e-pallavolo-centro-aggregativo-ma-manta",
   "updated": "2026-11-04"
  },
@@ -34325,7 +34353,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 308,
+  "riga": 189,
   "slug": "torneo-di-ping-pong-centro-aggregativo-manta",
   "updated": "2026-11-04"
  },
@@ -34436,7 +34464,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 317,
+  "riga": 198,
   "slug": "tourto-mato-laboratorio-di-cucina-per-bambini-il-f-monterosso-grana",
   "updated": "2026-11-04"
  },
@@ -34545,7 +34573,7 @@
   "ora": "19:00",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 148,
+  "riga": 103,
   "slug": "tradizionale-raviolata-trattoria-quattro-ruote-orsara-bormida",
   "updated": "2026-11-04"
  },
@@ -34878,7 +34906,7 @@
   "ora": "17:00-19:30",
   "prezzo": "Offerta libera",
   "prov": "CN",
-  "riga": 337,
+  "riga": 217,
   "slug": "tuteliamo-corso-manovre-salvavita-pediatriche-care-racconigi",
   "updated": "2026-11-04"
  },
@@ -35125,7 +35153,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 272,
+  "riga": 161,
   "slug": "un-bosco-a-tutto-ritmo-presentazione-del-libro-con-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -35153,7 +35181,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 170,
+  "riga": 107,
   "slug": "un-bosco-a-tutto-ritmo-settimana-nazionale-nati-pe-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -35208,7 +35236,7 @@
   "ora": "11:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 371,
+  "riga": 251,
   "slug": "un-chicco-mille-scoperte-coldiretti-cuneo-campagna-fossano",
   "updated": "2026-11-04"
  },
@@ -35345,7 +35373,7 @@
   "ora": "15:30-17:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 372,
+  "riga": 252,
   "slug": "un-incontro-con-matisse-forme-colori-e-meraviglia-villanova-solaro",
   "updated": "2026-11-04"
  },
@@ -35373,7 +35401,7 @@
   "ora": "17:30-19:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 105,
+  "riga": 87,
   "slug": "un-mondo-di-mattoncini-centro-per-le-famiglie-vill-novi-ligure",
   "updated": "2026-11-04"
  },
@@ -35428,7 +35456,7 @@
   "ora": "14:30",
   "prezzo": "10 € ragazzi 6-14, 12 € adulti",
   "prov": "AT",
-  "riga": 357,
+  "riga": 237,
   "slug": "un-viaggio-tra-minerali-e-fossili-asti",
   "updated": "2026-11-04"
  },
@@ -35651,7 +35679,7 @@
   "ora": "18:30-22:30",
   "prezzo": "20 euro (intera serata), 25 euro con pizza, 7 euro/h",
   "prov": "CN",
-  "riga": 323,
+  "riga": 203,
   "slug": "una-serata-tutta-per-voi-anima-bimbi-carezza-racconigi",
   "updated": "2026-11-04"
  },
@@ -35763,7 +35791,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 292,
+  "riga": 177,
   "slug": "uncinetto-lab-con-ivana-boves",
   "updated": "2026-11-04"
  },
@@ -36066,7 +36094,7 @@
   "ora": "20:45",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 23,
+  "riga": 21,
   "slug": "venerdi-dei-giochi-in-scatola-biblioteca-di-piasco",
   "updated": "2026-11-04"
  },
@@ -36175,7 +36203,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 241,
+  "riga": 141,
   "slug": "vieni-anche-tu-biblioteca-civica-mondovi",
   "updated": "2026-11-04"
  },
@@ -36202,7 +36230,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 240,
+  "riga": 140,
   "slug": "vieni-anche-tu-museo-della-ceramica-mondovi",
   "updated": "2026-11-04"
  },
@@ -36229,7 +36257,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 242,
+  "riga": 142,
   "slug": "vieni-anche-tu-museo-della-stampa-mondovi",
   "updated": "2026-11-04"
  },
@@ -36257,7 +36285,7 @@
   "ora": "15:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 244,
+  "riga": 143,
   "slug": "vieni-anche-tu-pomeriggi-creativi-nel-monregalese-bastia-mondovi",
   "updated": "2026-11-04"
  },
@@ -36285,7 +36313,7 @@
   "ora": "15:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 245,
+  "riga": 144,
   "slug": "vieni-anche-tu-pomeriggi-creativi-nel-monregalese-ceva",
   "updated": "2026-11-04"
  },
@@ -36562,8 +36590,36 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 214,
+  "riga": 131,
   "slug": "vita-vino-e-tartufi-ovada",
+  "updated": "2026-11-04"
+ },
+ "vivi-il-pony-in-coppia-ippica-saluzzese-lagnasco": {
+  "anchor": "ev-2026-11-28-vivi-il-pony-in-coppia-ippica-saluzzese",
+  "categoria": "Sport",
+  "citta": "Lagnasco",
+  "consigliato": "No",
+  "contatto": "348 2566193",
+  "d_end": "2026-11-28",
+  "d_start": "2026-11-28",
+  "descr": "Un pomeriggio speciale dedicato ai bambini dai 3 ai 10 anni, da vivere in coppia con un genitore tra pony, divertimento e tante emozioni. Merenda per tutti inclusa. Prenotazione consigliata.",
+  "df": "28/11/2026",
+  "di": "28/11/2026",
+  "eta": "3-10 anni",
+  "first_seen": "2026-11-04",
+  "indirizzo": "Via Savigliano 16, Lagnasco (CN)",
+  "last_seen": "2026-11-04",
+  "lat": "44.6277993",
+  "loc": "Saluzzese-giornata_genitorifigli_20261103-133545_01.webp",
+  "lon": "7.5564762",
+  "luogo": "Ippica Saluzzese",
+  "manifest": "",
+  "nome": "Vivi il Pony in Coppia - Ippica Saluzzese",
+  "ora": "14:30-17:00",
+  "prezzo": "Non indicato",
+  "prov": "CN",
+  "riga": 267,
+  "slug": "vivi-il-pony-in-coppia-ippica-saluzzese-lagnasco",
   "updated": "2026-11-04"
  },
  "vivi-pozzolo-estate-nella-corte-del-castello-pozzolo-formigaro": {
@@ -36697,7 +36753,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 213,
+  "riga": 130,
   "slug": "wow-winter-outdoor-weekend-fiera-della-montagna-en-borgo-san-dalmazzo",
   "updated": "2026-11-04"
  },
