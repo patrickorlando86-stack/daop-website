@@ -3103,6 +3103,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "concorso-fotografico-immagina-il-tuo-natale-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Boves",
+    "manifest": "",
+    "nome": "Concorso Fotografico Immagina il Tuo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
+   },
    "creolab-games-boves": {
     "anni": [
      2026
@@ -3605,6 +3616,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "la-parata-degli-elfi-di-natale-biblioteca-civica-b-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Busca",
+    "manifest": "",
+    "nome": "La Parata degli Elfi di Natale - Biblioteca Civica Busca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-10"
    },
    "la-vuoi-una-caldarrosta-gran-castagnata-al-parco-d-busca": {
     "anni": [
@@ -10147,6 +10169,17 @@
     "pagina": true,
     "ultima": "2026-10-17"
    },
+   "l-albero-terravia-vanessa-barile-marene": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio di Marene",
+    "manifest": "",
+    "nome": "L'Albero - TerraVia / Vanessa Barile",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-18"
+   },
    "multisensoriale-in-biblioteca-bambini-3-6-anni-marene": {
     "anni": [
      2026
@@ -10266,6 +10299,23 @@
   },
   "nome": "Maretto",
   "prov": "AT"
+ },
+ "margarita": {
+  "eventi": {
+   "mercatini-di-natale-margarita": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile della Residenza A. e G. Giubergia",
+    "manifest": "Mercatini di Natale Margarita 2026",
+    "nome": "Mercatini di Natale Margarita 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   }
+  },
+  "nome": "Margarita",
+  "prov": "CN"
  },
  "marmora": {
   "eventi": {
@@ -10631,6 +10681,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-07"
+   },
+   "dal-giappone-a-mondovi-laboratorio-di-fumetto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Saletta Stazione di Valle della Funicolare",
+    "manifest": "Dal Giappone a Mondovì",
+    "nome": "Dal Giappone a Mondovì - Laboratorio di Fumetto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "esposizione-internazionale-canina-cacib-mondovicin": {
     "anni": [
@@ -15836,6 +15897,23 @@
   "nome": "Sale",
   "prov": "AL"
  },
+ "saliceto": {
+  "eventi": {
+   "storie-in-valigia-saliceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Saliceto",
+    "manifest": "",
+    "nome": "Storie in Valigia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-12"
+   }
+  },
+  "nome": "Saliceto",
+  "prov": "CN"
+ },
  "saluzzo": {
   "eventi": {
    "castiglia-da-brivido-processo-ad-una-masca-saluzzo": {
@@ -17212,6 +17290,17 @@
     "pagina": true,
     "ultima": "2026-11-14"
    },
+   "incantevole-natale-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ala Polifunzionale L. Morello",
+    "manifest": "Incantevole Natale 2026",
+    "nome": "Incantevole Natale 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "letture-sceniche-con-i-ghissbross-cappuccetto-ross-savigliano": {
     "anni": [
      2026
@@ -17244,6 +17333,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-23"
+   },
+   "shh-il-bosco-si-e-addormentato-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Messaggi",
+    "manifest": "",
+    "nome": "Shh... il bosco si è addormentato!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
    },
    "sport-in-piazza-comune-di-savigliano": {
     "anni": [
@@ -19315,6 +19415,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "che-forte-natale-mercatino-vinadio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Forte di Vinadio - Caserma Carlo Alberto",
+    "manifest": "Che Forte Natale XXII Edizione",
+    "nome": "Che Forte Natale - Mercatino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
+   "rassegna-di-presepi-tradizionali-incanto-vinadio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Forte di Vinadio e vie del borgo",
+    "manifest": "Che Forte Natale XXII Edizione",
+    "nome": "Rassegna di Presepi Tradizionali - Incanto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    }
   },
   "nome": "Vinadio",
