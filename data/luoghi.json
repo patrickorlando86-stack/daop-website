@@ -37167,7 +37167,7 @@
   "descrizione premium": "",
   "lat": "44.3166309",
   "lng": "7.2680928",
-  "premium": "Si",
+  "premium": "No",
   "premium_dal": "05/10/2026",
   "consigliato daop": "no",
   "gratuito": "no",
@@ -37192,7 +37192,7 @@
   "fotolicenza": "",
   "premium_al": "31/12/2026",
   "ruolo": "servizio",
-  "in evidenza": ""
+  "in evidenza": "No"
  },
  {
   "codice": "5086",
@@ -37726,7 +37726,7 @@
   "descrizione premium": "",
   "lat": "44.6920487",
   "lng": "7.3665069",
-  "premium": "Si",
+  "premium": "No",
   "premium_dal": "05/10/2026",
   "consigliato daop": "no",
   "gratuito": "no",
@@ -37751,7 +37751,7 @@
   "fotolicenza": "",
   "premium_al": "31/12/2026",
   "ruolo": "servizio",
-  "in evidenza": ""
+  "in evidenza": "No"
  },
  {
   "codice": "5058",
@@ -40779,7 +40779,7 @@
   "descrizione premium": "",
   "lat": "44.3255592",
   "lng": "7.6064643",
-  "premium": "Si",
+  "premium": "No",
   "premium_dal": "05/10/2026",
   "consigliato daop": "no",
   "gratuito": "no",
@@ -40804,7 +40804,7 @@
   "fotolicenza": "",
   "premium_al": "31/12/2026",
   "ruolo": "servizio",
-  "in evidenza": ""
+  "in evidenza": "No"
  },
  {
   "codice": "3104",
