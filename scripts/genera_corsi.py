@@ -4358,7 +4358,7 @@ CSS = """
 /* Le province (06/10/2026, lo split): sull'hub "Per provincia", sulle
    /corsi-provincia-* "Altre province". Pillole come i filtri, con il numero
    dei corsi che la pagina mostra; vanno a capo da sole sul telefono. */
-.co-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px;
+.co-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:24px 0 0;
   font-size:.92rem}
 .co-prov-t{color:#555;font-weight:600}
 .co-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;
