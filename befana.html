@@ -978,6 +978,15 @@
 /* "E dopo Halloween?": due porte e basta. La prima piena, la seconda col
    bordo, cosi' non si leggono come una fila di scorciatoie. */
 .lan-dopo{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
+/* Le due righe sotto il titolo nelle intestazioni illustrate (06/11/2026,
+   Patrick: «un po' storto»). .page-hero p e' larga 520px e si centra col
+   margine auto, ma .ev-when e .ev-agg rimettono margin:0 e restavano
+   appoggiate a sinistra dentro un contenitore da 820px. */
+.hero-fascia .ev-when,.hero-fascia .ev-agg{margin-left:auto;margin-right:auto}
+/* Una riga di bottoni con l'etichetta davanti: i link per provincia di
+   /natale.html. L'etichetta e' uno <span>, quindi il primo bottone non si
+   riempie (la regola :first-child sopra guarda gli <a>). */
+.lan-dopo-t{align-self:center;font-weight:600;font-size:.95rem;color:var(--navy,#2d4a5c);margin-right:2px}
 .lan-dopo a{display:inline-block;border:1px solid var(--navy,#2d4a5c);border-radius:100px;
   padding:10px 18px;font-size:.95rem;font-weight:700;text-decoration:none;
   color:var(--navy,#2d4a5c)}
