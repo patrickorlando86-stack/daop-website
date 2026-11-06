@@ -80,5 +80,42 @@ eventi = [riga("Laboratorio di pittura", ago)]
 verifica("Ferragosto resta un filtro di date",
          len(G._stagione_dati(stagioni['ferragosto'], eventi, oggi)[3]) == 1)
 
+# ---- La colonna Festa, scritta dal modello nel downloader (06/11/2026) ----
+cris = riga("Mercatini sotto il Monviso - Comune di Crissolo", datetime.date(2026, 11, 29),
+            "Mercatini di Natale tra le strade di Crissolo")
+cris['festa'] = 'mercatino di natale'
+verifica("Festa = mercatino di natale: e' un mercatino e un evento di Natale",
+         G.e_mercatino_natale(cris) and G.in_tema(cris, 'natale'))
+ceci = riga("Festa dei Ceci & Shopping", datetime.date(2026, 11, 15), "shopping natalizio")
+ceci['festa'] = 'nessuna'
+verifica("Festa = nessuna vince sulle parole («natalizio» nel programma)", not G.in_tema(ceci, 'natale'))
+pres = riga("Rassegna", datetime.date(2026, 12, 8), "")
+pres['festa'] = 'Presepe '
+verifica("Festa = presepe (maiuscole e spazi non contano): sta nel Natale, non fra i mercatini",
+         G.in_tema(pres, 'natale') and not G.e_mercatino_natale(pres))
+vuota = riga("Arriva Babbo Natale in piazza", dic)
+verifica("cella vuota: decidono le parole come prima", G.in_tema(vuota, 'natale'))
+strana = riga("Arriva Babbo Natale in piazza", dic)
+strana['festa'] = 'natalle'
+verifica("valore sconosciuto (refuso): decidono le parole", G.in_tema(strana, 'natale'))
+
+# ---- La riga di Natale in cima all'agenda (06/11/2026) ----
+def merc(citta, prov, g, festa='mercatino di natale'):
+    e = riga(f"Mercatino di {citta}", g)
+    e.update(citta=citta, prov=prov, festa=festa)
+    return e
+nov = datetime.date(2026, 11, 6)
+ev = ([merc(f"C{i}", 'CN', datetime.date(2026, 11, 21 + i)) for i in range(3)]
+      + [merc("A1", 'AT', datetime.date(2026, 11, 29))]
+      + [dict(riga(f"Natale {i}", datetime.date(2026, 12, 2 + i)), festa='natale', prov='AL')
+         for i in range(5)])
+r = G.blocco_stagione(ev, nov)
+verifica("riga di Natale: i mercatini della provincia in indice, col numero", 'mercatini-di-natale-provincia-cuneo.html">Cuneo (3)' in r)
+verifica("…non la provincia sotto soglia (Asti, 1 mercatino)", 'provincia-asti' not in r)
+verifica("…«dal 21 novembre» prima che comincino", 'dal 21 novembre' in r)
+verifica("…e /natale.html col numero della sua pagina",
+         'href="/natale.html">Tutto il Natale: i 5 eventi' in r)
+verifica("prima del 6 novembre la riga non c'e'", G.blocco_stagione(ev, datetime.date(2026, 11, 5)) == '')
+
 print("\nTUTTO OK" if esito else "\nQUALCOSA NON VA")
 sys.exit(0 if esito else 1)

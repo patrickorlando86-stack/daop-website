@@ -539,6 +539,9 @@ CAMPI_EXTRA = {
     'adatto_famiglie': ("Adatto Famiglie", "Adatto alle famiglie", "Adatto famiglie"),
     'lat':             ("Latitude", "Latitudine", "Lat"),
     'lon':             ("Longitude", "Longitudine", "Lon", "Lng"),
+    # La festa dell'evento, decisa da un modello nel downloader (riempi_feste_vuote,
+    # 06/11/2026). Vedi festa_di().
+    'festa':           ("Festa",),
 }
 
 
@@ -9382,8 +9385,32 @@ TEMI_SOLO_TITOLO = {
 }
 
 
+# LA FESTA LA DICE IL FOGLIO (06/11/2026, Patrick: «non usare regex, usa il modello»).
+# La colonna Festa la scrive il downloader facendo leggere nome e descrizione a un modello
+# (riempi_feste_vuote), e la leggono nello stesso modo sito, app e notifica: prima ognuno
+# cercava le sue parole e si scollavano (Crissolo era un mercatino qui e niente per Ginetto).
+# Le parole di TEMI_STAGIONE restano solo per le celle vuote o con un valore che non conosciamo.
+FESTE = ('mercatino di natale', 'natale', 'presepe', 'halloween', 'capodanno', 'befana',
+         'carnevale', 'pasqua', 'nessuna')
+FESTA_TEMA = {
+    'natale': ('natale', 'mercatino di natale', 'presepe'),
+    'halloween': ('halloween',), 'capodanno': ('capodanno',), 'befana': ('befana',),
+    'carnevale': ('carnevale',), 'pasqua': ('pasqua',),
+}
+
+
+def festa_di(e):
+    """La cella Festa ripulita, o '' se e' vuota o non e' una delle FESTE."""
+    f = re.sub(r'\s+', ' ', str(e.get('festa') or '')).strip().lower()
+    return f if f in FESTE else ''
+
+
 def in_tema(e, chiave):
-    """True se titolo o programma dicono che la riga e' QUELLA festa."""
+    """True se la riga e' QUELLA festa: lo dice la colonna Festa, e solo se e'
+    vuota titolo e programma."""
+    f = festa_di(e)
+    if f and chiave in FESTA_TEMA:
+        return f in FESTA_TEMA[chiave]
     rx = TEMI_STAGIONE.get(chiave)
     if rx and rx.search(f"{e.get('nome') or ''} {e.get('descr') or ''}"):
         return True
@@ -9574,6 +9601,9 @@ _MERCATINO = re.compile(r"mercatin", re.I)
 
 
 def e_mercatino_natale(e):
+    f = festa_di(e)
+    if f:
+        return f == 'mercatino di natale'
     testo = f"{e.get('nome') or ''} {e.get('descr') or ''}"
     return bool(_MERCATINO.search(testo)) and in_tema(e, 'natale')
 
@@ -10819,7 +10849,7 @@ STAGIONI = (
              _finestra_halloween, apre=24, avviso=24,
              quale="dal 25 ottobre al 2 novembre", spec=spec_halloween),
     Stagione('natale', "Natale", "/natale.html", "Natale",
-             _finestra_natale, apre=16, avviso=0,
+             _finestra_natale, apre=25, avviso=25,
              quale="dal 1° al 26 dicembre", spec=spec_natale),
 )
 
@@ -10878,7 +10908,13 @@ def blocco_stagione(events, oggi):
         if not (da - datetime.timedelta(days=st.avviso) <= oggi <= a):
             continue
         href, nome, quale = st.href, st.nome, st.quale
+        if st.chiave == 'natale':
+            return riga_natale(events, oggi)
         quanti = sum(1 for e in events if e['d_start'] <= a and e['d_end'] >= da)
+        if st.chiave in TEMI_PAGINA:
+            # Come per Halloween: la pagina elenca solo la festa (TEMI_PAGINA),
+            # quindi il numero e' il suo, non quello di tutti gli eventi in finestra.
+            quanti = len(_stagione_dati(st, events, oggi)[3])
         if st.chiave == 'halloween':
             # /halloween.html elenca solo le feste a tema, e dal 10 ottobre: il
             # conteggio di tutti gli eventi del 25/10-2/11 diceva un numero che
@@ -10900,6 +10936,43 @@ def blocco_stagione(events, oggi):
         return (f'<a href="{href}">{nome} {quando}: {cosa.format(quanti)} '
                 f'{quale} →</a>')
     return ''
+
+
+def riga_natale(events, oggi):
+    """La riga di Natale per l'agenda e la home, o ''. (06/11/2026, Patrick:
+    «nella pagina eventi come per Halloween fai apparire qualche gancio alle
+    pagine natalizie».)
+
+    Non e' la riga di Halloween con un altro nome, perche' il Natale ha due
+    porte: i mercatini, che cominciano a meta' novembre e hanno una pagina per
+    provincia, e /natale.html, che va dal 1° al 26 dicembre e i mercatini di
+    novembre non li elenca. Quindi la riga le nomina tutte e due, e ogni numero
+    e' quello della pagina a cui porta. Una provincia entra solo se la sua
+    pagina dei mercatini e' in indice (MIN_TEMA), /natale.html solo da
+    MIN_LANDING eventi: sono le stesse soglie del loro robots."""
+    m_da, _c, m_a = mercatini_range(oggi)
+    per_prov = []
+    for c in PROVINCE_PUBBLICATE:
+        n = sum(1 for e in events if e['d_start'] <= m_a and e['d_end'] >= m_da
+                and (e.get('prov') or '').upper() == c and e_mercatino_natale(e))
+        if n >= MIN_TEMA:
+            per_prov.append(f'<a href="{href_mercatini_prov(c)}">'
+                            f'{esc(PROVINCE_NOMI.get(c, c))} ({n})</a>')
+    st = next(x for x in STAGIONI if x.chiave == 'natale')
+    n_nat = len(_stagione_dati(st, events, oggi)[3])
+    pezzi = []
+    if per_prov:
+        # «dal 21 novembre» solo prima che la stagione cominci: dopo, il primo
+        # mercatino rimasto sarebbe un «dal» che a meta' stagione mente.
+        primo = min((e['d_start'] for e in events if e['d_start'] <= m_a
+                     and e['d_end'] >= m_da and e_mercatino_natale(e)), default=None)
+        quando = (f" dal {primo.day} {MESI_LUNGHI[primo.month - 1]}"
+                  if primo and primo > oggi else "")
+        pezzi.append(f"Mercatini di Natale{quando}: " + " · ".join(per_prov))
+    if n_nat >= MIN_LANDING:
+        pezzi.append(f'<a href="{st.href}">Tutto il Natale: i {n_nat} eventi di '
+                     f'dicembre per bambini →</a>')
+    return " · ".join(pezzi)
 
 
 def blocco_hero(events, oggi):
