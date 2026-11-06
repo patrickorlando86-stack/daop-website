@@ -10923,6 +10923,8 @@ def blocco_stagione(events, oggi):
             quale = "per bambini già in programma"
         if quanti < MIN_LANDING:
             return ''
+        if st.chiave in TITOLO_STAGIONE:
+            return _card_festa(st, quanti, centro, events, oggi)
         manca = (centro - oggi).days
         if manca > 1:
             quando = f"fra {manca} giorni"
@@ -10952,7 +10954,7 @@ def riga_natale(events, oggi):
     eventi: sono le stesse soglie del loro robots.
 
     E' un <aside> e non un <p>: blocco_hero() e inject_home() lo mettono cosi'
-    com'e'. Lo stile (.stag-natale) sta in daop-system.css, che eventi.html e
+    com'e'. Lo stile (.stag) sta in daop-system.css, che eventi.html e
     index.html caricano dopo il loro <style>: non tocca le ~470 pagine del guscio.
     Il disegno e' quello della fascia dei mercatini, ridotto (mercatini-card.webp)."""
     m_da, _c, m_a = mercatini_range(oggi)
@@ -10981,22 +10983,99 @@ def riga_natale(events, oggi):
     tot = sum(n for _c, n in prov)
     sotto = (f"{tot} mercatini già in programma. Scegli la provincia:" if prov
              else "Presepi, Babbo Natale, spettacoli e laboratori, verificati uno per uno.")
-    pill = ''.join(
-        f'<a class="stag-natale-p" href="{href_mercatini_prov(c)}" aria-label="{n} mercatini '
-        f'di Natale in provincia di {esc(PROVINCE_NOMI.get(c, c))}">'
-        f'<span>{esc(PROVINCE_NOMI.get(c, c))}</span><b>{n}</b></a>' for c, n in prov)
-    cta = (f'<a class="stag-natale-cta" href="{st.href}">Tutto il Natale: '
-           f'{n_nat} eventi →</a>' if n_nat >= MIN_LANDING else '')
+    cta = (f'Tutto il Natale: {n_nat} eventi →' if n_nat >= MIN_LANDING else '')
+    return card_stagione('natale', f"Natale {anno}", titolo, sotto,
+                         [(href_mercatini_prov(c), PROVINCE_NOMI.get(c, c), n,
+                           f"{n} mercatini di Natale in provincia di {PROVINCE_NOMI.get(c, c)}")
+                          for c, n in prov],
+                         st.href, cta)
+
+
+# IL RIQUADRO DELLE FESTE (06/11/2026, Patrick: «fallo per tutti: Halloween, Befana,
+# Pasqua, Carnevale»). Uno solo, con i colori di ogni festa: il disegno di Ginetto e
+# Briciola dove c'e' (assets/images/stagioni/<nome>-card.webp, 560x316, ridotto dalla
+# fascia della pagina), se no l'icona grande. Un disegno nuovo si aggiunge qui.
+# Lo stile (.stag, .stag--<chiave>) sta in daop-system.css.
+CARD_STAGIONE = {
+    'natale':     {'img': 'mercatini-card.webp', 'icona': '🎄'},
+    'halloween':  {'img': 'halloween-card.webp', 'icona': '🎃'},
+    'befana':     {'img': 'befana-card.webp', 'icona': '🧦'},
+    'capodanno':  {'icona': '🎆'},
+    'carnevale':  {'icona': '🎭'},
+    'pasqua':     {'icona': '🐣'},
+    'ferragosto': {'icona': '☀️'},
+}
+# Come si dice che la festa sta arrivando (con {q} = «fra 4 giorni», «domani») e che c'e'.
+TITOLO_STAGIONE = {
+    'halloween':  ("Halloween è {q}", "È Halloween"),
+    'befana':     ("La Befana arriva {q}", "È arrivata la Befana"),
+    'capodanno':  ("Capodanno è {q}", "È Capodanno"),
+    'carnevale':  ("Martedì grasso è {q}", "È Carnevale"),
+    'pasqua':     ("Pasqua è {q}", "È Pasqua"),
+    'ferragosto': ("Ferragosto è {q}", "È Ferragosto"),
+}
+DI_STAGIONE = {'halloween': "di Halloween", 'befana': "della Befana", 'capodanno': "di Capodanno",
+               'carnevale': "di Carnevale", 'pasqua': "di Pasqua", 'ferragosto': "di Ferragosto"}
+
+
+def _pillole_prov(spec_fn, href_fn, events, oggi, cosa):
+    """Le province con la loro pagina IN INDICE, col numero che la pagina scrive:
+    lo chiede direttamente alla spec della pagina, cosi' non puo' divergere."""
+    fuori = []
+    for c in PROVINCE_PUBBLICATE:
+        d = spec_fn(c, events, oggi, [])
+        if d.get('robots', '').startswith('index') and d.get('eventi'):
+            nome = PROVINCE_NOMI.get(c, c)
+            fuori.append((href_fn(c), nome, d['eventi'], f"{d['eventi']} {cosa} in provincia di {nome}"))
+    return fuori
+
+
+def card_stagione(chiave, etichetta, titolo, sotto, pillole, href, cta):
+    """Il riquadro di una festa. `pillole`: [(href, nome, numero, aria-label)]."""
+    c = CARD_STAGIONE.get(chiave, {})
+    if c.get('img'):
+        media = (f'<img class="stag-img" src="/assets/images/stagioni/{c["img"]}" '
+                 'width="560" height="316" alt="" decoding="async">')
+    else:
+        media = f'<div class="stag-img stag-ico" aria-hidden="true">{c.get("icona", "✦")}</div>'
+    pill = ''.join(f'<a class="stag-p" href="{h}" aria-label="{esc(al)}">'
+                   f'<span>{esc(nome)}</span><b>{n}</b></a>' for h, nome, n, al in pillole)
     return (
-        '<aside class="stag-natale" aria-label="Natale e mercatini">'
-        '<img class="stag-natale-img" src="/assets/images/stagioni/mercatini-card.webp" '
-        'width="560" height="316" alt="" decoding="async">'
-        '<div class="stag-natale-txt">'
-        f'<p class="stag-natale-k">✦ Natale {anno} ✦</p>'
-        f'<p class="stag-natale-t">{esc(titolo)}</p>'
-        f'<p class="stag-natale-s">{esc(sotto)}</p>'
-        + (f'<div class="stag-natale-pp">{pill}</div>' if pill else '')
-        + cta + '</div></aside>')
+        f'<aside class="stag stag--{chiave}" aria-label="{esc(etichetta)}">{media}'
+        '<div class="stag-txt">'
+        f'<p class="stag-k">✦ {esc(etichetta)} ✦</p>'
+        f'<p class="stag-t">{esc(titolo)}</p>'
+        f'<p class="stag-s">{esc(sotto)}</p>'
+        + (f'<div class="stag-pp">{pill}</div>' if pill else '')
+        + (f'<a class="stag-cta" href="{href}">{esc(cta)}</a>' if cta else '')
+        + '</div></aside>')
+
+
+def _card_festa(st, quanti, centro, events, oggi):
+    """Il riquadro di Halloween, Befana, Capodanno, Carnevale, Pasqua, Ferragosto."""
+    prima, durante = TITOLO_STAGIONE[st.chiave]
+    manca = (centro - oggi).days
+    if manca > 1:
+        titolo = prima.format(q=f"fra {manca} giorni")
+    elif manca == 1:
+        titolo = prima.format(q="domani")
+    else:
+        titolo = durante
+    pillole = []
+    if st.chiave == 'halloween':
+        pillole = _pillole_prov(spec_halloween_prov, href_halloween_prov, events, oggi,
+                                "feste di Halloween")
+    elif st.chiave == 'befana':
+        pillole = _pillole_prov(spec_befana_prov, href_befana_prov, events, oggi,
+                                "eventi della Befana")
+    cosa = "feste per bambini" if st.chiave == 'halloween' else "eventi per bambini"
+    sotto = (f"{quanti} {cosa} già in programma"
+             + (". Scegli la provincia:" if pillole else "."))
+    cta = (f"Tutte le {quanti} feste →" if st.chiave == 'halloween'
+           else f"Tutti gli eventi {DI_STAGIONE[st.chiave]} →")
+    # L'anno della pagina: Capodanno e' «Capodanno 2027» anche se la notte e' del 2026.
+    anno = centro.year + 1 if st.chiave == 'capodanno' else centro.year
+    return card_stagione(st.chiave, f"{st.nome} {anno}", titolo, sotto, pillole, st.href, cta)
 
 
 def blocco_hero(events, oggi):

@@ -693,37 +693,50 @@ img { height: auto; }
 .fonte-mail a { font-weight: 600; white-space: nowrap; }
 .fonte-zona { margin-top: 6px; }
 
-/* Il riquadro di Natale (06/11/2026, Patrick: «i grandi eventi devono risaltare»).
-   Lo scrive riga_natale() in genera_eventi.py, sotto l'H1 di eventi.html e in home.
-   Sta qui e non nel <style> di eventi.html perche' quello lo ricopia _guscio() in
-   ~470 pagine, e il riquadro esce solo su due. Ogni selettore porta .stag-natale
-   davanti: .page-hero p e .page-hero a (0,1,1) vincerebbero su una classe sola. */
-.stag-natale { display: flex; flex-direction: column; max-width: 720px; margin: 26px auto 0;
+/* Il riquadro delle feste (06/11/2026, Patrick: «i grandi eventi devono risaltare»,
+   e poi «fallo per tutti»). Lo scrive card_stagione() in genera_eventi.py, sotto l'H1
+   di eventi.html e in home, quando una festa e' vicina. Sta qui e non nel <style> di
+   eventi.html perche' quello lo ricopia _guscio() in ~470 pagine, e il riquadro esce solo
+   su due. Ogni selettore porta .stag davanti: .page-hero p e .page-hero a (0,1,1)
+   vincerebbero su una classe sola. I colori della festa sono le variabili di .stag--<festa>:
+   --s1 --s2 --s3 il fondo, --oro bordo/pillole/bottone, --ink il testo sull'oro. Il testo
+   bianco sta sempre su toni scuri (contrasto AA). */
+.stag { --s1: #8e1b24; --s2: #b3262f; --s3: #1f5a3a; --oro: #e9c46a; --oro2: #f4d58d; --ink: #4a0d12;
+  display: flex; flex-direction: column; max-width: 720px; margin: 26px auto 0;
   border-radius: 20px; overflow: hidden; text-align: left;
   background: radial-gradient(circle at 12% 20%, rgba(255,255,255,.09) 0 2px, transparent 3px) 0 0/38px 38px,
               radial-gradient(circle at 70% 60%, rgba(255,255,255,.07) 0 1.5px, transparent 2.5px) 0 0/29px 29px,
-              linear-gradient(135deg, #8e1b24 0%, #b3262f 45%, #1f5a3a 100%);
-  border: 2px solid #e9c46a; box-shadow: 0 14px 34px rgba(0,0,0,.35), inset 0 0 0 4px rgba(233,196,106,.18); }
-.stag-natale .stag-natale-img { display: block; width: 100%; height: 150px; object-fit: cover; object-position: 50% 62%; }
-.stag-natale .stag-natale-txt { padding: 14px 16px 16px; }
-.stag-natale p.stag-natale-k { margin: 0 0 4px; max-width: none; font-size: .78rem; font-weight: 800;
-  letter-spacing: .14em; text-transform: uppercase; color: #f4d58d; }
-.stag-natale p.stag-natale-t { margin: 0; max-width: none; font-family: 'Playfair Display', Georgia, serif;
+              linear-gradient(135deg, var(--s1) 0%, var(--s2) 45%, var(--s3) 100%);
+  border: 2px solid var(--oro); box-shadow: 0 14px 34px rgba(0,0,0,.35), inset 0 0 0 4px rgba(255,255,255,.08); }
+.stag--halloween  { --s1: #1d1030; --s2: #43205c; --s3: #8a3a12; --oro: #f39c35; --oro2: #f7b766; --ink: #2a1206; }
+.stag--befana     { --s1: #1c2547; --s2: #47306f; --s3: #7d2b4c; --oro: #f2c94c; --oro2: #f7da7f; --ink: #2b1a3d; }
+.stag--capodanno  { --s1: #0b1530; --s2: #1e2f6b; --s3: #4f2577; --oro: #e9c46a; --oro2: #f4d58d; --ink: #141a33; }
+.stag--carnevale  { --s1: #7a1d4a; --s2: #a3285c; --s3: #145e6b; --oro: #ffd166; --oro2: #ffe09a; --ink: #3d0d25; }
+.stag--pasqua     { --s1: #1f4d34; --s2: #2f6e45; --s3: #5b3a7a; --oro: #f6d365; --oro2: #fae29a; --ink: #22301c; }
+.stag--ferragosto { --s1: #0b4a66; --s2: #0f6a87; --s3: #8a3b12; --oro: #ffc857; --oro2: #ffd98a; --ink: #3a1d05; }
+.stag .stag-img { display: block; width: 100%; height: 150px; object-fit: cover; object-position: 50% 62%; }
+.stag .stag-ico { display: grid; place-items: center; height: 110px; font-size: 64px; line-height: 1;
+  background: radial-gradient(circle, rgba(255,255,255,.18) 0, rgba(255,255,255,0) 60%); }
+.stag .stag-txt { padding: 14px 16px 16px; }
+.stag p.stag-k { margin: 0 0 4px; max-width: none; font-size: .78rem; font-weight: 800;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--oro2); }
+.stag p.stag-t { margin: 0; max-width: none; font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.3rem; line-height: 1.2; font-weight: 700; color: #fff; }
-.stag-natale p.stag-natale-s { margin: 6px 0 10px; max-width: none; font-size: .95rem; color: rgba(255,255,255,.88); }
-.stag-natale .stag-natale-pp { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.stag-natale a.stag-natale-p { display: inline-flex; align-items: center; gap: 6px; min-height: 40px;
+.stag p.stag-s { margin: 6px 0 10px; max-width: none; font-size: .95rem; color: rgba(255,255,255,.9); }
+.stag .stag-pp { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.stag a.stag-p { display: inline-flex; align-items: center; gap: 6px; min-height: 40px;
   padding: 5px 6px 5px 11px; font-size: .92rem; border-radius: 999px; background: rgba(255,255,255,.14);
   border: 1px solid rgba(255,255,255,.35); color: #fff; font-weight: 700; text-decoration: none; }
-.stag-natale a.stag-natale-p b { display: inline-grid; place-items: center; min-width: 28px; height: 28px;
-  padding: 0 6px; border-radius: 999px; background: #e9c46a; color: #5a1016; font-size: .9rem; }
-.stag-natale a.stag-natale-p:hover { background: rgba(255,255,255,.24); }
-.stag-natale a.stag-natale-cta { display: inline-block; padding: 11px 18px; border-radius: 999px;
-  background: #e9c46a; color: #4a0d12; font-weight: 800; text-decoration: none; }
-.stag-natale a.stag-natale-cta:hover { background: #f4d58d; }
+.stag a.stag-p b { display: inline-grid; place-items: center; min-width: 28px; height: 28px;
+  padding: 0 6px; border-radius: 999px; background: var(--oro); color: var(--ink); font-size: .9rem; }
+.stag a.stag-p:hover { background: rgba(255,255,255,.24); }
+.stag a.stag-cta { display: inline-block; padding: 11px 18px; border-radius: 999px;
+  background: var(--oro); color: var(--ink); font-weight: 800; text-decoration: none; }
+.stag a.stag-cta:hover { background: var(--oro2); }
 @media (min-width: 700px) {
-  .stag-natale { flex-direction: row; align-items: stretch; }
-  .stag-natale .stag-natale-img { width: 42%; height: auto; object-position: 50% 50%; }
-  .stag-natale .stag-natale-txt { flex: 1; padding: 22px 24px; }
-  .stag-natale p.stag-natale-t { font-size: 1.45rem; }
+  .stag { flex-direction: row; align-items: stretch; }
+  .stag .stag-img { width: 42%; height: auto; object-position: 50% 50%; }
+  .stag .stag-ico { width: 30%; height: auto; font-size: 84px; }
+  .stag .stag-txt { flex: 1; padding: 22px 24px; }
+  .stag p.stag-t { font-size: 1.45rem; }
 }

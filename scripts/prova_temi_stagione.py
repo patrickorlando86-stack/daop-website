@@ -112,12 +112,39 @@ ev = ([merc(f"C{i}", 'CN', datetime.date(2026, 11, 21 + i)) for i in range(3)]
 r = G.blocco_stagione(ev, nov)
 verifica("riquadro di Natale: i mercatini della provincia in indice, col numero",
          'href="/mercatini-di-natale-provincia-cuneo.html"' in r and '<span>Cuneo</span><b>3</b>' in r)
-verifica("…ed e' un riquadro (<aside class=stag-natale>), non una riga", r.startswith('<aside class="stag-natale"'))
+verifica("…ed e' un riquadro (<aside class=stag stag--natale>), non una riga", r.startswith('<aside class="stag stag--natale"'))
 verifica("…non la provincia sotto soglia (Asti, 1 mercatino)", 'provincia-asti' not in r)
 verifica("…«cominciano il 21 novembre» prima che comincino", 'cominciano il 21 novembre' in r)
 verifica("…e /natale.html col numero della sua pagina",
          'href="/natale.html">Tutto il Natale: 5 eventi' in r)
 verifica("prima del 6 novembre la riga non c'e'", G.blocco_stagione(ev, datetime.date(2026, 11, 5)) == '')
+
+# ---- Il riquadro per tutte le feste (06/11/2026) ----
+def fake(nome, d, prov):
+    e = riga(f"{nome} {prov}", d)
+    e.update(prov=prov, citta='C' + prov, categoria='Sagra & Festa', eta='', prezzo='Gratuito',
+             ora='', anchor='ev-x', lat='', lon='', loc='', luogo='', indirizzo='', manifest='',
+             di=d.strftime('%d/%m/%Y'), df=d.strftime('%d/%m/%Y'), consigliato='No')
+    return e
+for chiave, oggi_f, nome in (('halloween', datetime.date(2027, 10, 20), "Festa di Halloween"),
+                             ('befana', datetime.date(2027, 1, 3), "Arriva la Befana"),
+                             ('capodanno', datetime.date(2026, 12, 28), "Capodanno dei bambini"),
+                             ('ferragosto', datetime.date(2027, 8, 10), "Festa di Ferragosto")):
+    da_f = max(G.prossima_finestra(stagioni[chiave].finestra, oggi_f)[0], oggi_f)
+    evs = [fake(f"{nome} {i}", da_f + datetime.timedelta(days=i % 2), p)
+           for p in ('AL', 'AT', 'CN') for i in range(4)]
+    r = G.blocco_stagione(evs, oggi_f)
+    verifica(f"{chiave}: riquadro coi colori della festa", r.startswith(f'<aside class="stag stag--{chiave}"'))
+    verifica(f"{chiave}: il bottone porta alla pagina della festa",
+             f'href="{stagioni[chiave].href}"' in r)
+    if chiave in ('halloween', 'befana'):
+        verifica(f"{chiave}: le province col numero della loro pagina",
+                 f'href="/{chiave}-provincia-cuneo.html"' in r and '<span>Cuneo</span><b>4</b>' in r)
+r = G.blocco_stagione([fake("Capodanno dei bambini", datetime.date(2026, 12, 31), p) for p in ('AL',) * 6],
+                      datetime.date(2026, 12, 28))
+verifica("capodanno: l'anno e' quello della pagina (2027)", 'Capodanno 2027' in r)
+verifica("sotto MIN_LANDING nessun riquadro",
+         G.blocco_stagione([fake("Festa di Halloween", datetime.date(2027, 10, 30), 'AL')], datetime.date(2027, 10, 20)) == '')
 
 print("\nTUTTO OK" if esito else "\nQUALCOSA NON VA")
 sys.exit(0 if esito else 1)
