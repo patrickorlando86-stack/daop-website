@@ -3368,6 +3368,18 @@ PAGINA_CSS = """
 .ev-hero .ev-ginetto-fascia a{color:var(--gold,#c9a227);font-weight:700;
   text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
+/* La pillola di Ginetto sotto il titolo delle schede vive (06/11/2026, prova,
+   cta_id ginetto-testa). Faccina + domanda + invito, tutta cliccabile, nel
+   dorato dei riquadri delle feste. */
+.ev-hero .ev-gin-testa{margin:14px 0 0}
+/* :only-child perche' .page-hero p > a:only-child (0,2,2) la faceva dorata. */
+.ev-hero .ev-gin-testa > a:only-child{display:inline-flex;align-items:center;gap:10px;max-width:100%;
+  padding:5px 16px 5px 5px;border-radius:999px;background:rgba(255,255,255,.12);
+  border:1.5px solid #e9c46a;color:#fff;text-decoration:none;line-height:1.3;font-size:.95rem}
+.ev-hero .ev-gin-testa > a:only-child:hover{background:rgba(255,255,255,.2)}
+.ev-hero .ev-gin-testa img{width:44px;height:44px;flex:none;border-radius:50%;
+  background:#fdf3dc;border:2px solid #e9c46a}
+.ev-hero .ev-gin-testa b{color:#f4d58d;white-space:nowrap}
 @media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
 /* La fascia illustrata di una stagionale (23/09/2026, prima /halloween.html).
    Stessa .page-hero, ma al posto della texture all'8% c'e' il disegno pieno,
@@ -5247,6 +5259,28 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
     # ricerca deve vedere subito che è finito nel posto giusto.
     gancio_html = (f'\n    <p class="ev-gancio">{esc(elenco_it(attrazioni).capitalize())}</p>'
                    if attrazioni else '')
+    # GINETTO NELL'INTESTAZIONE (06/11/2026, Patrick: «questo riquadro in fondo agli
+    # eventi... perche' non in alto?»). Una riga, non un riquadro, sotto quando e dove:
+    # la scheda ha gia' dato orario e posto, quindi chiedere qui non toglie niente a chi
+    # e' venuto per quelli. E' la riga che /halloween.html ha dal 05/10 (ginetto_fascia),
+    # allargata alle schede senza aspettarne il numero, per scelta di Patrick: e' una
+    # PROVA. Il riquadro in fondo resta (eccezione dichiarata a "una volta per pagina")
+    # e le due si contano a parte: cta_id ginetto-testa contro ginetto. Fra un mese si
+    # guarda apri_ginetto per cta_id: se la riga non prende clic si toglie.
+    # Solo sulle schede VIVE: sulle concluse in cima ci sono gia' gli eventi vicini
+    # (cta_id ora, in misura dal 25/09), e due richieste nello stesso punto si dimezzano.
+    # Sulle ritirate e le spostate no, per la ragione di sempre.
+    ginetto_testa = ''
+    if not (concluso or ritirata):
+        dove_g = f" vicino {esc(a_citta(citta).strip())}" if citta else ""
+        # Con la faccina e tutta cliccabile (Patrick: «il faccino di Ginetto, se no puo'
+        # essere poco evidente»): una pillola, non una riga di testo che si salta.
+        ginetto_testa = (
+            f'\n    <p class="ev-gin-testa" data-cta="ginetto-testa">'
+            '<a href="https://ginettoapp.it" target="_blank" rel="noopener">'
+            '<img src="/assets/images/ginetto-faccina.webp" width="112" height="112" alt="">'
+            f'<span>Cerchi altro da fare{dove_g}? <b>Chiedilo a Ginetto&nbsp;&rarr;</b></span>'
+            '</a></p>')
     meta_d = trunc(f"{testa}. {descr_txt}" if descr_txt
                    else f"{nome}{a_citta(citta)}: {periodo_esteso(e)}.", 152)
     # noindex tiene la scheda ritirata fuori da Google, non fuori da WhatsApp:
@@ -5560,7 +5594,7 @@ def render_pagina(rec, css, nav, foot, oggi, orfano=False, vicini=(), hub=None):
       {briciole}
     </div>
     {consigliato_badge}<h1>{esc(nome)}</h1>
-    <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>{gancio_html}
+    <p class="ev-when">{esc(periodo_esteso(e))}{' · ' + esc(citta) if citta else ''}</p>{gancio_html}{ginetto_testa}
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">

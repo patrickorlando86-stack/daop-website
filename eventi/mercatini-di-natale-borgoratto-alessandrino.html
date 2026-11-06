@@ -546,6 +546,18 @@
 .ev-hero .ev-ginetto-fascia a{color:var(--gold,#c9a227);font-weight:700;
   text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .ev-hero .ev-scelto{background:rgba(255,255,255,.14);color:#f6d9b4;margin:0 0 12px}
+/* La pillola di Ginetto sotto il titolo delle schede vive (06/11/2026, prova,
+   cta_id ginetto-testa). Faccina + domanda + invito, tutta cliccabile, nel
+   dorato dei riquadri delle feste. */
+.ev-hero .ev-gin-testa{margin:14px 0 0}
+/* :only-child perche' .page-hero p > a:only-child (0,2,2) la faceva dorata. */
+.ev-hero .ev-gin-testa > a:only-child{display:inline-flex;align-items:center;gap:10px;max-width:100%;
+  padding:5px 16px 5px 5px;border-radius:999px;background:rgba(255,255,255,.12);
+  border:1.5px solid #e9c46a;color:#fff;text-decoration:none;line-height:1.3;font-size:.95rem}
+.ev-hero .ev-gin-testa > a:only-child:hover{background:rgba(255,255,255,.2)}
+.ev-hero .ev-gin-testa img{width:44px;height:44px;flex:none;border-radius:50%;
+  background:#fdf3dc;border:2px solid #e9c46a}
+.ev-hero .ev-gin-testa b{color:#f4d58d;white-space:nowrap}
 @media(max-width:600px){.ev-hero{padding:120px 20px 44px}}
 /* La fascia illustrata di una stagionale (23/09/2026, prima /halloween.html).
    Stessa .page-hero, ma al posto della texture all'8% c'e' il disegno pieno,
@@ -987,6 +999,7 @@
     <h1>Mercatini di Natale - Borgoratto Alessandrino 2026</h1>
     <p class="ev-when">Martedì 8 dicembre 2026 · Borgoratto Alessandrino</p>
     <p class="ev-gancio">Mercatino e musica dal vivo</p>
+    <p class="ev-gin-testa" data-cta="ginetto-testa"><a href="https://ginettoapp.it" target="_blank" rel="noopener"><img src="/assets/images/ginetto-faccina.webp" width="112" height="112" alt=""><span>Cerchi altro da fare vicino a Borgoratto Alessandrino? <b>Chiedilo a Ginetto&nbsp;&rarr;</b></span></a></p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero">

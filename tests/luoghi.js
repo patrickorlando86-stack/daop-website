@@ -1123,6 +1123,25 @@ module.exports = async function luoghi(browser) {
   r.ok(vivePosto.length === 0, vivePosto.length
     ? `Ginetto in cima su ${vivePosto.length} schede che hanno ancora qualcosa da dare (es. ${vivePosto[0]})`
     : 'sulle schede vive Ginetto resta in fondo');
+  // La riga di Ginetto nell'intestazione delle schede (06/11/2026, prova): una sola,
+  // sotto quando e dove, su ogni scheda VIVA; mai su una conclusa (li' in cima ci
+  // sono gli eventi vicini) ne' su una ritirata. Il riquadro in fondo resta.
+  {
+    const testaStorte = [];
+    for (const f of nostre) {
+      const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+      if (famiglia(f, html) !== 'scheda') continue;
+      const n = (html.match(/data-cta="ginetto-testa"/g) || []).length;
+      const finita = html.includes('<strong>Edizione conclusa</strong>')
+        || html.includes('<strong>Scheda ritirata</strong>');
+      if (finita ? n !== 0 : n !== 1) testaStorte.push(`${f} (${n})`);
+      if (n === 1 && html.indexOf('data-cta="ginetto-testa"') > html.indexOf('class="ev-actions')
+          && html.indexOf('class="ev-actions') > 0) testaStorte.push(`${f} (non in cima)`);
+    }
+    r.ok(testaStorte.length === 0, testaStorte.length
+      ? `riga di Ginetto in cima alle schede: ${testaStorte.length} storte (es. ${testaStorte[0]})`
+      : 'ogni scheda viva ha una riga di Ginetto sotto il titolo, le concluse no');
+  }
   r.ok(hubPosto.length === 0, hubPosto.length
     ? `Ginetto ancora in fondo su ${hubPosto.length} pagine comune o landing (es. ${hubPosto[0]})`
     : "su pagine comune e landing Ginetto sta nel posto che era del canale");
