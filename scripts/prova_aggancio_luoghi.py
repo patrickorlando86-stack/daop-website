@@ -57,5 +57,24 @@ prova('due candidati: non si sceglie', 'Biblioteca',
       [cat('Biblioteca civica'), cat('Biblioteca dei ragazzi')], None)
 prova('il solo nome del comune non e\' un posto', 'Boves', boves, None)
 
+print('sponsorizzato fuori lista (prossimi_di)')
+camp = cat('Campeggio del Ricetto')
+righe = [camp, cat('Biblioteca civica del Ricetto di Boves')]
+ev = lambda h, d: {'href': h, 'd': d}
+agenda = {
+    L._key('Campeggio Ricetto', 'Boves'): {'nome': 'Campeggio Ricetto', 'comune': 'Boves',
+                                           'prossimi': [ev('/eventi/b.html', '2026-12-02'),
+                                                        ev('/eventi/a.html', '2026-12-01')]},
+    L._key('Campeggio del Ricetto', 'Boves'): {'nome': 'Campeggio del Ricetto', 'comune': 'Boves',
+                                               'prossimi': [ev('/eventi/a.html', '2026-12-01')]},
+    L._key('Biblioteca del Ricetto', 'Boves'): {'nome': 'Biblioteca del Ricetto', 'comune': 'Boves',
+                                                'prossimi': [ev('/eventi/c.html', '2026-12-03')]},
+}
+presi = [p['href'] for p in L.prossimi_di(camp, righe, agenda)]
+ok = presi == ['/eventi/a.html', '/eventi/b.html']
+errori += not ok
+print(f"  {'ok  ' if ok else 'NO  '} chiave esatta + grafia diversa, senza doppioni "
+      f"ne' eventi della biblioteca: {presi}")
+
 print(f"\n{'tutto torna' if not errori else f'{errori} controlli saltati'}")
 sys.exit(1 if errori else 0)

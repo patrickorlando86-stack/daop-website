@@ -394,8 +394,8 @@ def candidati(base, elenco, agenda):
 
     Chi sta nell'elenco si prende da li' (ha gia' slug ed eventi). Gli altri -
     un campeggio, un hotel - sono righe del catalogo prima di solo_mete(): lo
-    slug si calcola come in unisci() e gli eventi si agganciano con la stessa
-    chiave."""
+    slug si calcola come in unisci() e gli eventi si agganciano con le stesse
+    regole (chiave esatta, poi il nome: L.prossimi_di)."""
     per_codice = {x.get('codice'): x for x in elenco if x.get('codice')}
     out = []
     for l in base:
@@ -405,8 +405,7 @@ def candidati(base, elenco, agenda):
         if x is None:
             x = dict(l)
             x['slug'] = 'lg-' + G.slugify(f"{x['nome']} {x['comune']}")[:70]
-            a = agenda.get(L._key(x['nome'], x['comune'])) or {}
-            x['prossimi'] = a.get('prossimi') or []
+            x['prossimi'] = L.prossimi_di(l, base, agenda)
         out.append(x)
     return out
 
