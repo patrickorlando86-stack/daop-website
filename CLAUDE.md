@@ -5995,6 +5995,32 @@ la coda sotto gli occhi**, come per il padding dei `<section>`.
 e che la riga delle porte e la nota non tornino in fondo. Verificate rosse
 sulla pagina di prima.
 
+#### Gli eventi trovano il loro luogo anche col nome scritto diverso — 06/11/2026
+
+Patrick: «le biblioteche non vedono gli eventi che si fanno presso di loro».
+La Biblioteca civica del Ricetto di Boves aveva **11 eventi in programma e
+zero sulla sua riga**: nell'agenda si chiama «Biblioteca Civica del Ricetto»
+(e anche «Biblioteca del Ricetto», «Biblioteca di Boves»), e `unisci()`
+agganciava solo col nome identico (`_key()`). A Bra funzionava perché i due
+nomi coincidevano.
+
+Ora, se la chiave esatta non trova niente, `aggancia_per_nome()` prova nello
+stesso comune: tolti articoli e nome del comune, le parole di un nome stanno
+tutte nell'altro **e cominciano con la stessa** (il tipo di posto), e il
+candidato è **uno solo**. Più grafie che finiscono sulla stessa riga si
+sommano. Il primo giro: da **79 a 152** luoghi con eventi, 102 grafie
+agganciate, nessuna ambigua; scorse una per una, sono tutte lo stesso posto.
+
+- **Le coordinate non si usano**: molte righe dell'agenda hanno quelle del
+  centro del comune, e ad Asti un museo le divide con due gelaterie.
+- **La prima parola** tiene fuori «Piazza Italia» dentro «Bar Piazza Italia».
+- **Due candidati: non si sceglie**, e il log lo dice.
+- **Il riquadro degli sponsorizzati fuori lista** (`pagine_luoghi.candidati()`)
+  usa ancora la sola chiave esatta.
+
+`scripts/prova_aggancio_luoghi.py` (in CI) difende i due versi; verificata
+rossa togliendo la regola della prima parola.
+
 #### Le feste di compleanno si vedono nella riga chiusa — 02/10/2026
 
 Le feste di compleanno sono la prima cosa da vendere (vedi «Cosa vendere dopo
@@ -7793,6 +7819,7 @@ python3 scripts/prova_spostata.py                   # un rimando non porta altro
 python3 scripts/prova_doppioni_registro.py          # due pagine per un evento solo
 python3 scripts/prova_ritirata.py                   # un evento sparito non mente
 python3 scripts/prova_comuni_simili.py              # due grafie, un paese solo
+python3 scripts/prova_aggancio_luoghi.py            # gli eventi trovano il loro luogo
 python3 scripts/prova_credito_foto.py               # il credito sotto la foto
 python3 scripts/prova_logo_realta.py                # il logo di una società
 python3 scripts/prova_testi_corsi.py                # i testi dei corsi dicono solo i dati

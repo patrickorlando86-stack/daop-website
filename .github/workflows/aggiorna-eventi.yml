@@ -502,6 +502,18 @@ jobs:
         if: always()
         run: python scripts/prova_premium_al.py
 
+      - name: Un luogo scritto in un altro modo trova la sua riga
+        # Nell'agenda la biblioteca di Boves e' «Biblioteca Civica del Ricetto»,
+        # nel catalogo «Biblioteca civica del Ricetto di Boves»: fino al
+        # 06/11/2026 i suoi undici eventi non arrivavano alla sua riga di
+        # luoghi.html. La prova difende i due versi: le grafie dello stesso
+        # posto si agganciano, un posto diverso (una piazza dentro il nome di un
+        # bar, due biblioteche nello stesso comune) no.
+        #
+        # Offline e in un secondo.
+        if: always()
+        run: python scripts/prova_aggancio_luoghi.py
+
       - name: I testi dei corsi dicono solo quello che i dati sanno
         # Hero, description, paragrafo d'apertura e domande frequenti di
         # corsi.html e delle pagine realta' si scrivono dai corsi (11/09/2026).
