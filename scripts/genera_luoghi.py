@@ -560,6 +560,27 @@ def aggancia_per_nome(a, candidati):
     return presi[0] if presi else None
 
 
+def prossimi_di(riga, righe, agenda):
+    """Gli eventi in programma di UNA riga che non sta nell'elenco (uno
+    sponsorizzato fuori lista, vedi pagine_luoghi.candidati), con le stesse
+    regole di unisci(): prima la chiave esatta, poi il nome. `righe` sono le
+    righe del catalogo fra cui il nome deve essere l'unico candidato."""
+    com = G.slugify(riga['comune'])
+    vicini = [r for r in righe if G.slugify(r['comune']) == com]
+    chiavi = {_key(r['nome'], r['comune']) for r in vicini}
+    mia = _key(riga['nome'], riga['comune'])
+    out, visti = [], set()
+    for k, a in agenda.items():
+        if G.slugify(a['comune']) != com:
+            continue
+        if k == mia or (k not in chiavi and aggancia_per_nome(a, vicini) is riga):
+            for p in a['prossimi']:
+                if (p['href'], p['d']) not in visti:
+                    visti.add((p['href'], p['d']))
+                    out.append(p)
+    return sorted(out, key=lambda p: p['d'])
+
+
 def _alfabetico(s):
     """La chiave con cui si ordina, cioe' l'ordine alfabetico come lo legge una
     persona: senza accenti e senza punteggiatura, non con i trattini di slugify.

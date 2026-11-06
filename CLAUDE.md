@@ -6015,8 +6015,10 @@ agganciate, nessuna ambigua; scorse una per una, sono tutte lo stesso posto.
   centro del comune, e ad Asti un museo le divide con due gelaterie.
 - **La prima parola** tiene fuori «Piazza Italia» dentro «Bar Piazza Italia».
 - **Due candidati: non si sceglie**, e il log lo dice.
-- **Il riquadro degli sponsorizzati fuori lista** (`pagine_luoghi.candidati()`)
-  usa ancora la sola chiave esatta.
+- **Gli sponsorizzati fuori lista** (`pagine_luoghi.candidati()`, un campeggio
+  che paga ma non è una meta) passano da `prossimi_di()`, con le stesse regole:
+  chiave esatta, poi il nome. Verificato che su tutte le righe dell'elenco dà
+  gli stessi eventi di `unisci()`.
 
 `scripts/prova_aggancio_luoghi.py` (in CI) difende i due versi; verificata
 rossa togliendo la regola della prima parola.
