@@ -904,6 +904,33 @@ module.exports = async function landing(browser) {
     r.ok(storte.length === 0, storte.length
       ? `mercatini: ${storte.length} difetti (es. ${storte[0]})`
       : 'le tre pagine dei mercatini: anno fuori dall\'indirizzo, legate a Natale e fra loro, robots coerente');
+
+    // Il ponte dalle schede (06/11/2026, link_mercatini): ogni scheda elencata
+    // da una pagina dei mercatini IN INDICE torna a quella pagina, e il numero
+    // che promette e' quello che la pagina scrive. Fuori indice nessun link.
+    const ponte = [];
+    for (const prov of PROV) {
+      const f = `mercatini-di-natale-provincia-${prov}.html`;
+      if (!fs.existsSync(path.join(RADICE, f))) continue;
+      const html = fs.readFileSync(path.join(RADICE, f), 'utf8');
+      const noindex = /<meta name="robots" content="noindex/.test(html);
+      const corpo = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+      const schede = new Set([...corpo.matchAll(/<li[^>]*data-category[^>]*>[\s\S]*?href="(\/eventi\/[a-z0-9-]+\.html)"/g)]
+        .map((m) => m[1]));
+      const promesso = (html.match(/(\d+) mercatini già in programma/) || [])[1];
+      for (const s of schede) {
+        const p = path.join(RADICE, s);
+        if (!fs.existsSync(p)) continue;
+        const sch = fs.readFileSync(p, 'utf8');
+        const m = sch.match(new RegExp(`href="/${f}">(\\d+) mercatini`));
+        if (noindex && m) ponte.push(`${s}: linka ${f}, che e' noindex`);
+        if (!noindex && !m) ponte.push(`${s}: non torna a ${f}`);
+        if (m && promesso && m[1] !== promesso) ponte.push(`${s}: promette ${m[1]}, la pagina ne dice ${promesso}`);
+      }
+    }
+    r.ok(ponte.length === 0, ponte.length
+      ? `ponte schede → mercatini: ${ponte.length} difetti (es. ${ponte[0]})`
+      : 'ogni scheda di mercatino torna alla pagina della sua provincia, col numero della pagina');
   }
 
   // ── Natale e Befana per provincia ─────────────────────────────────────

@@ -4820,6 +4820,9 @@ def link_stagione(rec, events, oggi):
     la lezione di link_luoghi(), «22 posti» e' una ragione per toccare. Le
     altre feste solo il nome, finche' non hanno un conteggio loro in un posto
     solo."""
+    lm = link_mercatini(rec, events, oggi)
+    if lm:
+        return lm
     for st in STAGIONI:
         if not in_tema(rec, st.chiave) or not in_stagione(st, oggi):
             continue
@@ -4839,6 +4842,36 @@ def link_stagione(rec, events, oggi):
             return ''
         return f'<a href="{st.href}">Tutti gli eventi di {esc(st.nome)}</a>'
     return ''
+
+
+def link_mercatini(rec, events, oggi):
+    """Da una scheda di mercatino di Natale alla pagina dei mercatini della sua
+    provincia, col numero, o ''. Vince sul link a /natale.html.
+
+    06/11/2026: le tre mercatini-di-natale-provincia-* erano in indice e
+    ricevevano link solo dalle altre pagine di Natale. Le schede dei mercatini
+    non le linkavano, e dal 15/11 avrebbero linkato /natale.html, che parte dal
+    1° dicembre e non elenca i mercatini di novembre (il 29/11 ce ne sono otto).
+    Il numero e il robots sono quelli della pagina (stessa finestra, stesso
+    filtro, MIN_TEMA): sotto soglia la pagina e' noindex e non si linka."""
+    if not e_mercatino_natale(rec):
+        return ''
+    prov = (rec.get('prov') or '').upper()
+    if prov not in PROVINCE_PUBBLICATE:
+        return ''
+    da, _clou, a = mercatini_range(oggi)
+    di, df = str(rec.get('d_start') or ''), str(rec.get('d_end') or '')
+    if not (di and df and di <= a.isoformat() and df >= da.isoformat()):
+        return ''
+    n = sum(1 for e in events if e['d_start'] <= a and e['d_end'] >= da
+            and (e.get('prov') or '').upper() == prov and e_mercatino_natale(e))
+    if n < MIN_TEMA:
+        return ''
+    nome = PROVINCE_NOMI.get(prov, prov)
+    # Senza articolo («I 8» e' sbagliato, «gli 8» vorrebbe la regola per ogni
+    # numero): come «3 posti per famiglie a Carru'» accanto.
+    return (f'<a href="{href_mercatini_prov(prov)}">{n} mercatini di Natale '
+            f'in provincia di {esc(nome)}</a>')
 
 
 def blocco_vicini(rec, events, oggi, limite=6, hub=None, salta=()):
