@@ -1748,6 +1748,15 @@ sopra il vuoto. Ora è un elenco piatto ordinato per **disciplina → età →
 comune**: due corsi di pallavolo di due società diverse stanno vicini, che è
 quello che serve a chi confronta.
 
+**Per arrivarci c'è l'interruttore «Corsi / Chi organizza»** (06/11/2026,
+Patrick: «devo scorrere 110 corsi»), sopra la barra dei filtri
+(`blocco_vista()`). «Chi organizza» nasconde barra ed elenco e lascia tutte le
+schede subito sotto, con l'interruttore incollato in alto; le schede restano
+in fondo anche nella vista dei corsi. Sono due link a `#co-lista` e `#realta`:
+senza JS si scende alle schede, e la vista la decide l'hash (`#r-<slug>` apre
+le realtà, un'ancora a un corso riporta ai corsi). Non si stampa con meno di
+due realtà. `tests/corsi.js` lo difende senza conteggi.
+
 **Le società non spariscono, scendono.** In fondo c'è una scheda per ognuna —
 `#r-pgs-roccavione`, il link che si manda su WhatsApp, **la stessa ancora di
 prima**, quindi nessun link già in giro si rompe — e da ogni corso ci si arriva

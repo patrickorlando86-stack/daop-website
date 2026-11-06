@@ -4403,11 +4403,25 @@ CSS = """
    stesso difetto gia' chiuso su luoghi.html il giorno prima, e la stessa cura:
    qui l'animazione vale meno dell'arrivare. */
 html{scroll-behavior:auto}
+/* L'interruttore "Corsi / Chi organizza" (blocco_vista). Con le realta' la
+   barra dei filtri e l'elenco spariscono, e l'interruttore diventa lui il
+   tetto appiccicoso: se no, per tornare ai corsi, bisognerebbe risalire. Le
+   schede tornano tutte visibili (!important batte lo style="display:none"
+   che apply() mette a quelle filtrate): qui si guarda chi organizza, non il
+   risultato di un filtro che non si vede piu'. */
+.co-vista{display:flex;gap:6px;margin:0 0 10px;padding:4px;border-radius:999px;background:#eef1f3;width:max-content;max-width:100%}
+.co-vista-b{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border-radius:999px;font-weight:700;font-size:.93rem;color:#2c4a5c;text-decoration:none}
+.co-vista-b span{font-weight:600;opacity:.6}
+.co-vista-b.is-on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.co-wrap.is-realta #co-toolbar,.co-wrap.is-realta .ev-viewbar,.co-wrap.is-realta #co-lista{display:none}
+.co-wrap.is-realta .co-vista{position:sticky;top:68px;z-index:40;box-shadow:0 0 0 6px #fff}
+.co-wrap.is-realta #realta,.co-wrap.is-realta .co-realta{display:block!important}
+.co-wrap.is-realta .co-realta-wrap{margin-top:14px}
 /* #co-lista e' il bersaglio del "← Tutti i corsi"; .co-realta le ancore
    #r-<slug> che girano su WhatsApp; .event-card i #c-<codice> che apriDaHash()
    sa aprire. L'id davanti serve: .event-card porta gia' scroll-margin-top:160px
    dal guscio, e una classe sola non lo batterebbe. */
-#co-lista,#co-lista .event-card,.co-realta,.co-faq{scroll-margin-top:calc(var(--ev-sticky,228px) + 12px)}
+#co-lista,#co-lista .event-card,#realta,.co-realta,.co-faq{scroll-margin-top:calc(var(--ev-sticky,228px) + 12px)}
 .co-realta h3 a{color:inherit;text-decoration:none}
 .co-realta h3 a:hover{text-decoration:underline}
 """
@@ -4436,6 +4450,35 @@ FILTER_JS = """
     var btn=c.querySelector('.ev-row');
     if(btn) btn.click();
   }
+  // LA VISTA (blocco_vista) la decide l'ancora: un #r-<slug> o #realta
+  // apre le realta', un corso o #co-lista i corsi. Deve girare PRIMA di
+  // apriDaHash e riallinea, che cercano un bersaglio visibile - per questo il
+  // suo ascoltatore di hashchange e' registrato per primo.
+  var wrap0=document.querySelector('.co-wrap'), vbar=document.getElementById('co-vista');
+  function vista(v){
+    if(!vbar||!wrap0) return;
+    var r=v==='realta';
+    wrap0.classList.toggle('is-realta',r);
+    [].forEach.call(vbar.querySelectorAll('[data-vista]'),function(a){
+      var on=a.dataset.vista===v;
+      a.classList.toggle('is-on',on);
+      if(on) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current');
+    });
+    if(typeof misuraSticky==='function') misuraSticky();
+  }
+  function vistaDaHash(){
+    var id=(location.hash||'').replace('#',''), e=id&&document.getElementById(id);
+    if(!e) return;
+    var rw=document.getElementById('realta');
+    if(rw&&rw.contains(e)) vista('realta');
+    else if(e.id==='co-lista'||e.closest('#co-lista')) vista('corsi');
+  }
+  if(vbar) vbar.addEventListener('click',function(ev){
+    var a=ev.target.closest('[data-vista]');
+    if(a) vista(a.dataset.vista);
+  });
+  window.addEventListener('hashchange',vistaDaHash);
+  vistaDaHash();
   window.addEventListener('hashchange',apriDaHash);
   apriDaHash();
   var bar=document.getElementById('co-toolbar');
@@ -4454,6 +4497,9 @@ FILTER_JS = """
   var stickyPx=0;
   function misuraSticky(){
     var v=68+(bar?bar.offsetHeight:0);
+    // Con le realta' la barra e' nascosta (offsetHeight 0) e il tetto e'
+    // l'interruttore.
+    if(wrap0&&vbar&&wrap0.classList.contains('is-realta')) v=74+vbar.offsetHeight;
     if(v===stickyPx) return;
     stickyPx=v;
     document.documentElement.style.setProperty('--ev-sticky',v+'px');
@@ -4883,6 +4929,34 @@ def porte_province(conteggi, qui=None):
             f'<span class="co-prov-t">{etichetta}:</span> {link}</div>\n')
 
 
+def blocco_vista(n_corsi, n_realta):
+    """L'interruttore "Corsi / Chi organizza", sopra la barra dei filtri
+    (06/11/2026, Patrick: "devo scorrere 110 corsi" per arrivare alle realta').
+
+    LE REALTA' RESTANO IN FONDO, ed e' la decisione del 21/08 che non si
+    rifa': l'elenco e' dei corsi, perche' un genitore sceglie prima il corso.
+    Quello che mancava era la strada per arrivarci, non il posto. Con "Chi
+    organizza" il JS nasconde barra ed elenco dei corsi e lascia le schede
+    subito sotto l'interruttore; "Corsi" torna com'era.
+
+    Sono due LINK ad ancore che esistono gia' (#co-lista, #realta), non due
+    bottoni: senza JS il secondo scende alle schede, e a decidere la vista e'
+    l'hash - cosi' un #r-<slug> girato su WhatsApp apre la vista delle realta',
+    e un link a un corso dalla scheda di una realta' riporta ai corsi.
+
+    Non si stampa se non c'e' niente da scegliere: zero corsi, o una realta'
+    sola, che sta comunque dentro ogni riga "Organizzatore"."""
+    if not n_corsi or n_realta < 2:
+        return ''
+    return (
+        '  <div class="co-vista" id="co-vista" role="group" aria-label="Cosa mostrare">\n'
+        f'    <a class="co-vista-b is-on" href="#co-lista" data-vista="corsi" aria-current="true">'
+        f'Corsi <span>{n_corsi}</span></a>\n'
+        f'    <a class="co-vista-b" href="#realta" data-vista="realta">'
+        f'Chi organizza <span>{n_realta}</span></a>\n'
+        '  </div>\n')
+
+
 def render(corsi, css, nav, foot, realta=None, prov=None, porte=''):
     """La pagina: un elenco piatto di corsi, e in fondo le schede delle realta'.
 
@@ -4967,6 +5041,7 @@ def render(corsi, css, nav, foot, realta=None, prov=None, porte=''):
                    + "\n".join(blocchi) + '\n  </div>')
     else:
         sezione = ''
+    vista = blocco_vista(len(ordinati), len(gruppi))
 
     # La pagina fuori indice lo dice anche a chi legge, non solo a Google. Un
     # link girato su WhatsApp continua a funzionare — e' tutto il senso di
@@ -5045,7 +5120,7 @@ def render(corsi, css, nav, foot, realta=None, prov=None, porte=''):
   </div>
 </header>
 <article class="co-wrap">
-{avviso}{porte}{intro}{toolbar(corsi)}
+{avviso}{porte}{intro}{vista}{toolbar(corsi)}
 {elenco}
 {sezione}
 {faq}{blocco_adesione(corsi)}

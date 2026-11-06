@@ -324,6 +324,67 @@ module.exports = async function corsi(browser) {
   }
 
 
+  // ── «Corsi / Chi organizza»: le realta' senza scorrere tutti i corsi ──
+  // (06/11/2026). Le schede restano in fondo (decisione del 21/08), e
+  // l'interruttore e' la strada per arrivarci. Nessun conteggio: si chiede
+  // che con due realta' o piu' ci sia, che la vista mostri TUTTE le schede
+  // (anche quelle che un filtro aveva spento) subito sotto l'interruttore e
+  // senza i corsi, e che si torni indietro. In piu' l'hash comanda: #r-<slug>
+  // apre le realta', e un'ancora a un corso riporta ai corsi - se no il link
+  // dalla scheda della realta' a un suo corso atterrerebbe su una riga nascosta.
+  r.titolo('corsi.html — «Corsi / Chi organizza»');
+  const nRealta = await page.locator('.co-realta').count();
+  const vbar = page.locator('#co-vista');
+  r.ok(nRealta < 2 || await vbar.count() === 1,
+    nRealta < 2 ? `${nRealta} realtà: l'interruttore non serve`
+      : `${nRealta} realtà, e c'è l'interruttore per arrivarci`);
+  if (nRealta >= 2 && await vbar.count()) {
+    const stato = () => page.evaluate(() => {
+      const vis = (e) => !!e && e.offsetParent !== null;
+      const v = document.getElementById('co-vista').getBoundingClientRect();
+      const t = document.getElementById('co-realta-t').getBoundingClientRect();
+      return {
+        corsi: [...document.querySelectorAll('.event-card')].filter(vis).length,
+        schede: [...document.querySelectorAll('.co-realta')].filter(vis).length,
+        barra: vis(document.getElementById('co-toolbar')),
+        titoloSotto: t.top >= v.bottom - 1 && t.top < innerHeight,
+      };
+    });
+    const cat2 = page.locator('#co-toolbar [data-campo="cat"]');
+    if (await cat2.count()) {
+      await cat2.selectOption(await cat2.evaluate((x) => x.options[1].value));
+      await page.waitForTimeout(150);
+    }
+    await page.locator('[data-vista="realta"]').click();
+    await page.waitForTimeout(400);
+    const s1 = await stato();
+    r.ok(s1.corsi === 0 && !s1.barra, s1.corsi === 0 && !s1.barra
+      ? 'con «Chi organizza» corsi e filtri spariscono'
+      : `con «Chi organizza» restano ${s1.corsi} corsi, barra ${s1.barra}`);
+    r.ok(s1.schede === nRealta, `si vedono ${s1.schede} schede su ${nRealta}, anche con un filtro acceso`);
+    r.ok(s1.titoloSotto, s1.titoloSotto ? 'il titolo della sezione è a schermo, sotto l\'interruttore'
+      : 'il titolo della sezione finisce sotto l\'interruttore o fuori schermo');
+    await page.locator('[data-vista="corsi"]').click();
+    await page.waitForTimeout(300);
+    const s2 = await stato();
+    r.ok(s2.corsi > 0 && s2.barra, `tornando a «Corsi» ritornano ${s2.corsi} corsi e la barra`);
+    if (await cat2.count()) { await cat2.selectOption('all'); await page.waitForTimeout(150); }
+    const idR = await page.locator('.co-realta').first().getAttribute('id');
+    await page.evaluate((h) => { location.hash = h; }, idR);
+    await page.waitForTimeout(300);
+    r.ok((await stato()).corsi === 0, `#${idR} apre la vista delle realtà`);
+    const idC = await page.locator('.event-card').first().getAttribute('id');
+    await page.evaluate((h) => { location.hash = h; }, idC);
+    await page.waitForTimeout(300);
+    const s3 = await page.evaluate((h) => document.getElementById(h).offsetParent !== null, idC);
+    r.ok(s3, `#${idC} riporta ai corsi, e la riga si vede`);
+    await page.evaluate(() => { history.replaceState(null, '', location.pathname); });
+    if (await page.locator('.event-card.is-open').count()) {
+      await page.locator('.event-card.is-open .ev-row').first().click();
+    }
+    await page.evaluate(() => scrollTo(0, 0));
+  }
+
   // ── il dettaglio si apre e dice qualcosa ──────────────────────────────
   await page.locator('.event-card .ev-row').first().click();
   await page.waitForTimeout(200);
