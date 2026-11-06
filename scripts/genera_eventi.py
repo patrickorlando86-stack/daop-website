@@ -3315,6 +3315,31 @@ GINETTO_CSS = """
    conclusa" ha gia' i suoi 22px sotto, e sommandoli l'aria raddoppia. */
 .ev-over + .ev-ginetto-alto{margin-top:0}
 .ev-ginetto-alto .info-strip{margin-bottom:0;align-items:center;padding:18px 20px}
+/* Il vestito del riquadro (06/11/2026): come i riquadri delle feste (.stag in
+   daop-system.css) - fondo scuro, bordo oro, puntini - ma coi colori di DAOP.
+   .info-strip.gin-card (0,2,0) vince su .info-strip p e .info-strip a del guscio
+   (0,1,1) solo con l'elemento davanti: per questo i selettori sono lunghi. */
+.info-strip.gin-card{position:relative;overflow:hidden;border:2px solid #e9c46a;border-radius:20px;
+  color:#fff;box-shadow:0 14px 34px rgba(20,32,43,.28);
+  background:radial-gradient(circle at 12% 20%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/38px 38px,
+    radial-gradient(circle at 70% 60%,rgba(255,255,255,.06) 0 1.5px,transparent 2.5px) 0 0/29px 29px,
+    linear-gradient(135deg,#1a2c3a 0%,#2d4a5c 55%,#2f6366 100%)}
+.info-strip.gin-card .ginetto-faccia{width:132px;height:132px;border-radius:50%;
+  background:radial-gradient(circle,#fdf3dc 0,#f4e2b8 62%,rgba(244,226,184,0) 70%)}
+.info-strip.gin-card p.gin-k{margin:0 0 4px;font-size:.76rem;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:#f4d58d}
+.info-strip.gin-card h3{color:#fff;font-size:1.35rem;line-height:1.2;margin-bottom:8px}
+.info-strip.gin-card p{color:rgba(255,255,255,.9);font-size:.95rem}
+.info-strip.gin-card p strong{color:#fff}
+.info-strip.gin-card p.gin-bolla{display:inline-block;margin:10px 0;padding:10px 14px;
+  background:#fff;color:#1e3342;border-radius:16px 16px 16px 4px;font-size:.95rem;
+  box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.info-strip.gin-card p.gin-bolla em{color:#1e3342}
+.info-strip.gin-card a.gin-btn{display:inline-block;margin-top:14px;padding:11px 20px;border-radius:999px;
+  background:#e9c46a;color:#3a2a06;font-weight:800;text-decoration:none}
+.info-strip.gin-card a.gin-btn:hover{background:#f4d58d;text-decoration:none}
+@media(max-width:600px){.info-strip.gin-card{align-items:center;text-align:center}
+  .info-strip.gin-card .ginetto-faccia{width:120px;height:120px}}
 """
 
 
@@ -3630,11 +3655,23 @@ def blocco_ginetto(citta="", alto=False):
     sopra. E' quello che tests/luoghi.js difende."""
     # a_citta() mette la d eufonica: "vicino ad Acqui Terme", non "a Acqui".
     dove = " vicino " + esc(a_citta(citta)) if citta else " con i bambini"
-    strip = f"""<div class="info-strip">
+    # IL RIQUADRO (06/11/2026, Patrick: «fai un bel riquadro anche per l'app di
+    # Ginetto», dopo quelli delle feste). Stesse parole di prima, vestite: fondo
+    # blu notte col bordo oro dei riquadri delle feste, la domanda d'esempio in un
+    # fumetto da chat (e' quello che si fa su Ginetto: si scrive) e un bottone
+    # vero al posto del link in coda al paragrafo. La classe .info-strip resta
+    # (prende margini e colonna sul telefono dal guscio), .gin-card la veste:
+    # le regole stanno in GINETTO_CSS. ⚠️ apri_ginetto cambia aspetto dal
+    # 06/11: un salto nel numero dopo questa data e' il riquadro, non il traffico.
+    strip = f"""<div class="info-strip gin-card">
       <img class="ginetto-faccia" src="/assets/images/ginetto-esplora.webp" alt="Ginetto, la mascotte di DAOP" width="500" height="500" loading="lazy">
       <div>
+        <p class="gin-k">✦ Ginetto AI ✦</p>
         <h3>Cerchi altro da fare{dove}?</h3>
-        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di {province_in_elenco(PROVINCE_PUBBLICATE)}: gli scrivi come parleresti a un amico &mdash; <em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em> &mdash; e ti risponde con luoghi ed eventi veri, scelti a mano. <a href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a></p>
+        <p>Chiedilo a <strong>Ginetto AI</strong>, la prima intelligenza artificiale pensata per le famiglie di {province_in_elenco(PROVINCE_PUBBLICATE)}: gli scrivi come parleresti a un amico</p>
+        <p class="gin-bolla"><em>&laquo;dove andiamo domenica con un bimbo di 4 anni?&raquo;</em></p>
+        <p>e ti risponde con luoghi ed eventi veri, scelti a mano.</p>
+        <a class="gin-btn" href="https://ginettoapp.it" target="_blank" rel="noopener">Apri Ginetto &rarr;</a>
       </div>
     </div>"""
     # data-cta: la vista del blocco e' il denominatore di `apri_ginetto`, che
