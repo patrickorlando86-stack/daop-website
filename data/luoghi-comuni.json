@@ -436,7 +436,7 @@
  },
  "c-al-rocca-grimalda": {
   "comune": "Rocca Grimalda",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-rosignano-monferrato": {
@@ -591,7 +591,7 @@
  },
  "c-at-asti": {
   "comune": "Asti",
-  "n": 29,
+  "n": 30,
   "prov": "AT"
  },
  "c-at-belveglio": {
@@ -636,7 +636,7 @@
  },
  "c-at-castell-alfero": {
   "comune": "Castell'Alfero",
-  "n": 1,
+  "n": 2,
   "prov": "AT"
  },
  "c-at-castelnuovo-calcea": {
@@ -1076,6 +1076,11 @@
  },
  "c-cn-demonte": {
   "comune": "Demonte",
+  "n": 1,
+  "prov": "CN"
+ },
+ "c-cn-diano-d-alba": {
+  "comune": "Diano d'Alba",
   "n": 1,
   "prov": "CN"
  },

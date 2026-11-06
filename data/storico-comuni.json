@@ -2214,7 +2214,7 @@
     "nome": "Rabbia, pianti e porte sbattute - Centro per le Famiglie Asti",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-11-06"
+    "ultima": "2026-11-26"
    },
    "si-riparte-insieme-oratorio-don-bosco-asti": {
     "anni": [
@@ -12646,11 +12646,11 @@
      2026
     ],
     "luogo": "Piazza Pernigotti",
-    "manifest": "",
+    "manifest": "418ª Fiera di S. Caterina 2026",
     "nome": "Luna Park - Fiera di Santa Caterina",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-11-02"
+    "ultima": "2026-11-07"
    },
    "luna-park-novi-ligure": {
     "anni": [
@@ -12926,6 +12926,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-19"
+   },
+   "un-giochino-per-ogni-bambino-via-girardengo-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Girardengo (angolo ex sede Bpn)",
+    "manifest": "",
+    "nome": "Un giochino per ogni bambino - Via Girardengo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "un-mondo-di-mattoncini-centro-per-le-famiglie-vill-novi-ligure": {
     "anni": [
