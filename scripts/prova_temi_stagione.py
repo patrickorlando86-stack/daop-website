@@ -110,11 +110,13 @@ ev = ([merc(f"C{i}", 'CN', datetime.date(2026, 11, 21 + i)) for i in range(3)]
       + [dict(riga(f"Natale {i}", datetime.date(2026, 12, 2 + i)), festa='natale', prov='AL')
          for i in range(5)])
 r = G.blocco_stagione(ev, nov)
-verifica("riga di Natale: i mercatini della provincia in indice, col numero", 'mercatini-di-natale-provincia-cuneo.html">Cuneo (3)' in r)
+verifica("riquadro di Natale: i mercatini della provincia in indice, col numero",
+         'href="/mercatini-di-natale-provincia-cuneo.html"' in r and '<span>Cuneo</span><b>3</b>' in r)
+verifica("…ed e' un riquadro (<aside class=stag-natale>), non una riga", r.startswith('<aside class="stag-natale"'))
 verifica("…non la provincia sotto soglia (Asti, 1 mercatino)", 'provincia-asti' not in r)
-verifica("…«dal 21 novembre» prima che comincino", 'dal 21 novembre' in r)
+verifica("…«cominciano il 21 novembre» prima che comincino", 'cominciano il 21 novembre' in r)
 verifica("…e /natale.html col numero della sua pagina",
-         'href="/natale.html">Tutto il Natale: i 5 eventi' in r)
+         'href="/natale.html">Tutto il Natale: 5 eventi' in r)
 verifica("prima del 6 novembre la riga non c'e'", G.blocco_stagione(ev, datetime.date(2026, 11, 5)) == '')
 
 print("\nTUTTO OK" if esito else "\nQUALCOSA NON VA")

@@ -692,3 +692,38 @@ img { height: auto; }
 .fonte-mail svg { flex: none; margin-top: 3px; }
 .fonte-mail a { font-weight: 600; white-space: nowrap; }
 .fonte-zona { margin-top: 6px; }
+
+/* Il riquadro di Natale (06/11/2026, Patrick: «i grandi eventi devono risaltare»).
+   Lo scrive riga_natale() in genera_eventi.py, sotto l'H1 di eventi.html e in home.
+   Sta qui e non nel <style> di eventi.html perche' quello lo ricopia _guscio() in
+   ~470 pagine, e il riquadro esce solo su due. Ogni selettore porta .stag-natale
+   davanti: .page-hero p e .page-hero a (0,1,1) vincerebbero su una classe sola. */
+.stag-natale { display: flex; flex-direction: column; max-width: 720px; margin: 26px auto 0;
+  border-radius: 20px; overflow: hidden; text-align: left;
+  background: radial-gradient(circle at 12% 20%, rgba(255,255,255,.09) 0 2px, transparent 3px) 0 0/38px 38px,
+              radial-gradient(circle at 70% 60%, rgba(255,255,255,.07) 0 1.5px, transparent 2.5px) 0 0/29px 29px,
+              linear-gradient(135deg, #8e1b24 0%, #b3262f 45%, #1f5a3a 100%);
+  border: 2px solid #e9c46a; box-shadow: 0 14px 34px rgba(0,0,0,.35), inset 0 0 0 4px rgba(233,196,106,.18); }
+.stag-natale .stag-natale-img { display: block; width: 100%; height: 150px; object-fit: cover; object-position: 50% 62%; }
+.stag-natale .stag-natale-txt { padding: 14px 16px 16px; }
+.stag-natale p.stag-natale-k { margin: 0 0 4px; max-width: none; font-size: .78rem; font-weight: 800;
+  letter-spacing: .14em; text-transform: uppercase; color: #f4d58d; }
+.stag-natale p.stag-natale-t { margin: 0; max-width: none; font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem; line-height: 1.2; font-weight: 700; color: #fff; }
+.stag-natale p.stag-natale-s { margin: 6px 0 10px; max-width: none; font-size: .95rem; color: rgba(255,255,255,.88); }
+.stag-natale .stag-natale-pp { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.stag-natale a.stag-natale-p { display: inline-flex; align-items: center; gap: 6px; min-height: 40px;
+  padding: 5px 6px 5px 11px; font-size: .92rem; border-radius: 999px; background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.35); color: #fff; font-weight: 700; text-decoration: none; }
+.stag-natale a.stag-natale-p b { display: inline-grid; place-items: center; min-width: 28px; height: 28px;
+  padding: 0 6px; border-radius: 999px; background: #e9c46a; color: #5a1016; font-size: .9rem; }
+.stag-natale a.stag-natale-p:hover { background: rgba(255,255,255,.24); }
+.stag-natale a.stag-natale-cta { display: inline-block; padding: 11px 18px; border-radius: 999px;
+  background: #e9c46a; color: #4a0d12; font-weight: 800; text-decoration: none; }
+.stag-natale a.stag-natale-cta:hover { background: #f4d58d; }
+@media (min-width: 700px) {
+  .stag-natale { flex-direction: row; align-items: stretch; }
+  .stag-natale .stag-natale-img { width: 42%; height: auto; object-position: 50% 50%; }
+  .stag-natale .stag-natale-txt { flex: 1; padding: 22px 24px; }
+  .stag-natale p.stag-natale-t { font-size: 1.45rem; }
+}

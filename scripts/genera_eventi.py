@@ -10939,40 +10939,64 @@ def blocco_stagione(events, oggi):
 
 
 def riga_natale(events, oggi):
-    """La riga di Natale per l'agenda e la home, o ''. (06/11/2026, Patrick:
+    """Il riquadro di Natale per l'agenda e la home, o ''. (06/11/2026, Patrick:
     «nella pagina eventi come per Halloween fai apparire qualche gancio alle
-    pagine natalizie».)
+    pagine natalizie», e poi: «i grandi eventi devono risaltare».)
 
     Non e' la riga di Halloween con un altro nome, perche' il Natale ha due
     porte: i mercatini, che cominciano a meta' novembre e hanno una pagina per
     provincia, e /natale.html, che va dal 1° al 26 dicembre e i mercatini di
-    novembre non li elenca. Quindi la riga le nomina tutte e due, e ogni numero
-    e' quello della pagina a cui porta. Una provincia entra solo se la sua
-    pagina dei mercatini e' in indice (MIN_TEMA), /natale.html solo da
-    MIN_LANDING eventi: sono le stesse soglie del loro robots."""
+    novembre non li elenca. Il riquadro le nomina tutte e due, e ogni numero e'
+    quello della pagina a cui porta. Una provincia entra solo se la sua pagina
+    dei mercatini e' in indice (MIN_TEMA), /natale.html solo da MIN_LANDING
+    eventi: sono le stesse soglie del loro robots.
+
+    E' un <aside> e non un <p>: blocco_hero() e inject_home() lo mettono cosi'
+    com'e'. Lo stile (.stag-natale) sta in daop-system.css, che eventi.html e
+    index.html caricano dopo il loro <style>: non tocca le ~470 pagine del guscio.
+    Il disegno e' quello della fascia dei mercatini, ridotto (mercatini-card.webp)."""
     m_da, _c, m_a = mercatini_range(oggi)
-    per_prov = []
+    prov = []
     for c in PROVINCE_PUBBLICATE:
         n = sum(1 for e in events if e['d_start'] <= m_a and e['d_end'] >= m_da
                 and (e.get('prov') or '').upper() == c and e_mercatino_natale(e))
         if n >= MIN_TEMA:
-            per_prov.append(f'<a href="{href_mercatini_prov(c)}">'
-                            f'{esc(PROVINCE_NOMI.get(c, c))} ({n})</a>')
+            prov.append((c, n))
     st = next(x for x in STAGIONI if x.chiave == 'natale')
     n_nat = len(_stagione_dati(st, events, oggi)[3])
-    pezzi = []
-    if per_prov:
-        # «dal 21 novembre» solo prima che la stagione cominci: dopo, il primo
-        # mercatino rimasto sarebbe un «dal» che a meta' stagione mente.
-        primo = min((e['d_start'] for e in events if e['d_start'] <= m_a
-                     and e['d_end'] >= m_da and e_mercatino_natale(e)), default=None)
-        quando = (f" dal {primo.day} {MESI_LUNGHI[primo.month - 1]}"
-                  if primo and primo > oggi else "")
-        pezzi.append(f"Mercatini di Natale{quando}: " + " · ".join(per_prov))
-    if n_nat >= MIN_LANDING:
-        pezzi.append(f'<a href="{st.href}">Tutto il Natale: i {n_nat} eventi di '
-                     f'dicembre per bambini →</a>')
-    return " · ".join(pezzi)
+    if not prov and n_nat < MIN_LANDING:
+        return ''
+    anno = prossima_finestra(st.finestra, oggi)[1].year
+    # «dal 21 novembre» solo prima che la stagione cominci: dopo, il primo
+    # mercatino rimasto sarebbe un «dal» che a meta' stagione mente.
+    primo = min((e['d_start'] for e in events if e['d_start'] <= m_a
+                 and e['d_end'] >= m_da and e_mercatino_natale(e)), default=None)
+    if prov and primo and primo > oggi:
+        titolo = (f"I mercatini di Natale cominciano il {primo.day} "
+                  f"{MESI_LUNGHI[primo.month - 1]}")
+    elif prov:
+        titolo = "È il tempo dei mercatini di Natale"
+    else:
+        titolo = f"Il Natale {anno} con i bambini"
+    tot = sum(n for _c, n in prov)
+    sotto = (f"{tot} mercatini già in programma. Scegli la provincia:" if prov
+             else "Presepi, Babbo Natale, spettacoli e laboratori, verificati uno per uno.")
+    pill = ''.join(
+        f'<a class="stag-natale-p" href="{href_mercatini_prov(c)}" aria-label="{n} mercatini '
+        f'di Natale in provincia di {esc(PROVINCE_NOMI.get(c, c))}">'
+        f'<span>{esc(PROVINCE_NOMI.get(c, c))}</span><b>{n}</b></a>' for c, n in prov)
+    cta = (f'<a class="stag-natale-cta" href="{st.href}">Tutto il Natale: '
+           f'{n_nat} eventi →</a>' if n_nat >= MIN_LANDING else '')
+    return (
+        '<aside class="stag-natale" aria-label="Natale e mercatini">'
+        '<img class="stag-natale-img" src="/assets/images/stagioni/mercatini-card.webp" '
+        'width="560" height="316" alt="" decoding="async">'
+        '<div class="stag-natale-txt">'
+        f'<p class="stag-natale-k">✦ Natale {anno} ✦</p>'
+        f'<p class="stag-natale-t">{esc(titolo)}</p>'
+        f'<p class="stag-natale-s">{esc(sotto)}</p>'
+        + (f'<div class="stag-natale-pp">{pill}</div>' if pill else '')
+        + cta + '</div></aside>')
 
 
 def blocco_hero(events, oggi):
@@ -11007,7 +11031,9 @@ def blocco_hero(events, oggi):
     # ranka tutto l'anno. Niente classe nuova, cosi' non tocchiamo il <style>
     # che _guscio() ricopia in ~260 file per una riga stagionale.
     stagione = blocco_stagione(events, oggi)
-    coda = f"\n    <p>{stagione}</p>" if stagione else ""
+    # Il riquadro di Natale e' un blocco suo (riga_natale), le altre una riga.
+    coda = (f"\n    {stagione}" if stagione.startswith('<aside') else
+            f"\n    <p>{stagione}</p>" if stagione else "")
     return f"    <h1>{h1}</h1>\n    <p>{occhiello}</p>{coda}"
 
 
@@ -11113,7 +11139,8 @@ def inject_home(cards_html, stagione='', numeri=''):
                    lambda _: block, s, count=1, flags=re.S)
     # La riga sta FUORI da .he-track: dentro sarebbe un elemento della striscia
     # orizzontale delle card, cioe' una scheda finta larga quanto le altre.
-    riga = f'<p class="he-stagione">{stagione}</p>' if stagione else ''
+    riga = (stagione if stagione.startswith('<aside') else
+            f'<p class="he-stagione">{stagione}</p>' if stagione else '')
     s, ns = re.subn(r'<!-- HOME-STAGIONE:START -->.*?<!-- HOME-STAGIONE:END -->',
                     lambda _: f'<!-- HOME-STAGIONE:START -->{riga}<!-- HOME-STAGIONE:END -->',
                     s, count=1, flags=re.S)
