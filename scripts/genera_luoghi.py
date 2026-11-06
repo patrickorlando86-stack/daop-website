@@ -512,6 +512,54 @@ def _key(nome, comune):
     return f"{t}|{G.slugify(comune or '')}"
 
 
+# Le parole che non dicono QUALE posto: articoli, preposizioni, e il nome del
+# comune, che sta gia' nella chiave.
+_VUOTE = frozenset('di del della dello dei degli delle da dal d de la il lo l '
+                   'i gli le e ed a al alla in san s'.split())
+
+
+def _parole_posto(nome, comune):
+    c = set(G.slugify(comune or '').split('-'))
+    return [w for w in _key(nome, '').split('|')[0].split()
+            if w not in _VUOTE and w not in c]
+
+
+def aggancia_per_nome(a, candidati):
+    """La riga di catalogo a cui appartiene un luogo dell'agenda scritto in
+    un altro modo, o None.
+
+    Nel foglio eventi il luogo lo scrive chi legge la locandina, e la stessa
+    biblioteca di Boves e' «Biblioteca Civica del Ricetto», «Biblioteca del
+    Ricetto» e «Biblioteca di Boves», mentre nel catalogo e' «Biblioteca civica
+    del Ricetto di Boves». Con la sola chiave esatta i suoi undici eventi in
+    programma non arrivavano alla sua riga (Patrick, 06/11/2026). A Bra
+    funzionava solo perche' i due nomi erano identici.
+
+    Lo stesso posto quando, tolti articoli e nome del comune, le parole di un
+    nome stanno tutte nell'altro E cominciano con la stessa (il tipo di posto:
+    «Biblioteca», «Museo», «Teatro»). La prima parola tiene fuori «Piazza
+    Italia» dentro «Bar Piazza Italia». E deve esserci UN candidato solo nel
+    comune: con due non si sceglie. Le coordinate non si usano: molte righe
+    dell'agenda hanno quelle del centro del comune, e ad Asti due gelaterie le
+    condividono con un museo."""
+    pa = _parole_posto(a['nome'], a['comune'])
+    if not pa:
+        return None
+    presi = []
+    for c in candidati:
+        pc = _parole_posto(c['nome'], c['comune'])
+        if not pc or pc[0] != pa[0]:
+            continue
+        corto, lungo = (pa, pc) if len(pa) <= len(pc) else (pc, pa)
+        if set(corto) <= set(lungo):
+            presi.append(c)
+    if len(presi) > 1:
+        print(f"[genera_luoghi] luogo dell'agenda ambiguo, non agganciato: "
+              f"{a['nome']} ({a['comune']}) -> " + _elenca(presi))
+        return None
+    return presi[0] if presi else None
+
+
 def _alfabetico(s):
     """La chiave con cui si ordina, cioe' l'ordine alfabetico come lo legge una
     persona: senza accenti e senza punteggiatura, non con i trattini di slugify.
@@ -992,10 +1040,27 @@ def unisci(catalogo, agenda):
               f"pagata. Da spegnere sul foglio - " + _elenca(sovrapposti))
     innestati = 0
 
+    per_comune = collections.defaultdict(list)
+    for d in fuori.values():
+        per_comune[G.slugify(d['comune'])].append(d)
+    agganciati = set()
+    per_nome = 0
     for k, a in agenda.items():
-        if k in fuori:
-            d = fuori[k]
-            d['n_eventi'], d['ultimo'], d['prossimi'] = a['n_eventi'], a['ultimo'], a['prossimi']
+        d = fuori.get(k)
+        if d is None and catalogo:
+            d = aggancia_per_nome(a, per_comune.get(G.slugify(a['comune']), ()))
+            per_nome += d is not None
+        if d is not None:
+            # Piu' grafie dell'agenda possono finire sulla stessa riga: si
+            # sommano, non si sovrascrivono.
+            if id(d) not in agganciati:
+                agganciati.add(id(d))
+                d['n_eventi'], d['ultimo'], d['prossimi'] = 0, '', []
+            visti = {(p['href'], p['d']) for p in d['prossimi']}
+            d['prossimi'] += [p for p in a['prossimi'] if (p['href'], p['d']) not in visti]
+            d['prossimi'].sort(key=lambda p: p['d'])
+            d['n_eventi'] = max(d['n_eventi'] + a['n_eventi'], len(d['prossimi']))
+            d['ultimo'] = max(d['ultimo'], a['ultimo'])
             for campo in ('indirizzo', 'lat', 'lon'):
                 if not d.get(campo):
                     d[campo] = a.get(campo, '')
@@ -1060,7 +1125,8 @@ def unisci(catalogo, agenda):
             d['slug'] = f"{d['slug']}-{visti[d['slug']]}"
     elenco.sort(key=lambda d: (d['prov'], _alfabetico(d['comune']), _alfabetico(d['nome'])))
     if innestati:
-        print(f"[genera_luoghi] {innestati} luoghi del catalogo hanno eventi in agenda")
+        print(f"[genera_luoghi] {len(agganciati)} luoghi del catalogo hanno eventi in agenda "
+              f"({per_nome} grafie dell'agenda agganciate per nome)")
     return elenco
 
 
