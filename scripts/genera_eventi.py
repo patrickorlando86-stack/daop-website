@@ -7439,6 +7439,15 @@ LANDING_CSS = """
 /* "E dopo Halloween?": due porte e basta. La prima piena, la seconda col
    bordo, cosi' non si leggono come una fila di scorciatoie. */
 .lan-dopo{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 8px}
+/* Le due righe sotto il titolo nelle intestazioni illustrate (06/11/2026,
+   Patrick: «un po' storto»). .page-hero p e' larga 520px e si centra col
+   margine auto, ma .ev-when e .ev-agg rimettono margin:0 e restavano
+   appoggiate a sinistra dentro un contenitore da 820px. */
+.hero-fascia .ev-when,.hero-fascia .ev-agg{margin-left:auto;margin-right:auto}
+/* Una riga di bottoni con l'etichetta davanti: i link per provincia di
+   /natale.html. L'etichetta e' uno <span>, quindi il primo bottone non si
+   riempie (la regola :first-child sopra guarda gli <a>). */
+.lan-dopo-t{align-self:center;font-weight:600;font-size:.95rem;color:var(--navy,#2d4a5c);margin-right:2px}
 .lan-dopo a{display:inline-block;border:1px solid var(--navy,#2d4a5c);border-radius:100px;
   padding:10px 18px;font-size:.95rem;font-weight:700;text-decoration:none;
   color:var(--navy,#2d4a5c)}
@@ -9589,37 +9598,30 @@ def spec_natale(st, events, oggi, altre):
                       "L'agenda si aggiorna ogni notte.", 152)
 
     corpo = apertura
+    # Le province subito dopo l'apertura, come due righe di bottoni (06/11/2026,
+    # Patrick: piu' evidenti). Prima erano un paragrafo grigio di link sotto la
+    # spiegazione, e "mercatini di natale provincia di X" e' la domanda piu'
+    # cercata di dicembre: ha le sue pagine (spec_mercatini_prov), e questa e'
+    # il loro padre.
+    def _riga_prov(etichetta, href):
+        return ('<div class="lan-dopo"><span class="lan-dopo-t">' + etichetta
+                + '</span>' + ''.join(
+                    f'<a href="{href(c)}">{esc(PROVINCE_NOMI.get(c, c))}</a>'
+                    for c in PROVINCE_PUBBLICATE) + '</div>')
+    corpo += (_riga_prov('Mercatini di Natale:', href_mercatini_prov)
+              + _riga_prov('Presepi, Babbo Natale, spettacoli:', href_natale_prov))
+    # Accorciato lo stesso giorno ("troppo testo"): restano la regola pratica
+    # e il ponte verso i luoghi, che e' il link che questa pagina da' al
+    # catalogo. L'ancora #al-coperto resta: la citano le pagine provinciali.
     corpo += (
         '<h2 id="al-coperto">Al coperto o all\'aperto?</h2>'
-        '<p>A dicembre è <em>la</em> domanda, e cambia la giornata più del '
-        'programma: un mercatino in piazza con quattro gradi e la pioggia non è '
-        'la stessa cosa di un presepe vivente sotto i portici. Dove lo sappiamo '
-        'lo scriviamo nella scheda, ma la regola pratica è più semplice: i '
-        '<strong>mercatini e i presepi viventi</strong> sono quasi sempre '
-        'all\'aperto e si fanno lo stesso, quindi si va coperti e si mette in '
-        'conto di stare poco; le <strong>tombole, i laboratori e gli spettacoli '
-        'di Natale</strong> stanno in oratorio, in biblioteca o in teatro, e '
-        'reggono qualsiasi tempo.</p>'
-        '<p>La seconda domanda è <strong>Babbo Natale a che ora</strong>. Quando '
-        'c\'è un orario preciso lo trovi in riga: è la differenza fra arrivare e '
-        'trovarlo, e arrivare e trovare una piazza che si smonta. Se invece '
-        'cercate un posto dove stare al caldo tutto il pomeriggio, gli <a '
-        'href="/luoghi.html">agriturismi, i musei e i posti al coperto per '
-        'bambini</a> stanno nel catalogo dei luoghi, con telefono e indirizzo.</p>')
-    # I mercatini provincia per provincia: la query "mercatini di natale
-    # provincia di X" ha le sue pagine (spec_mercatini_prov), e questa e' il
-    # loro padre. Il link sta prima dell'elenco perche' e' la domanda piu'
-    # cercata di dicembre.
-    corpo += ('<p class="com-per"><strong>I mercatini di Natale</strong> '
-              'provincia per provincia: '
-              + ', '.join(f'<a href="{href_mercatini_prov(c)}">'
-                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>'
-                          for c in PROVINCE_PUBBLICATE)
-              + '. <strong>Il resto del Natale</strong> &mdash; presepi, Babbo '
-              'Natale, spettacoli &mdash; provincia per provincia: '
-              + ', '.join(f'<a href="{href_natale_prov(c)}">'
-                          f'{esc(PROVINCE_NOMI.get(c, c))}</a>'
-                          for c in PROVINCE_PUBBLICATE) + '.</p>')
+        '<p>I <strong>mercatini e i presepi viventi</strong> sono quasi sempre '
+        'all\'aperto e si fanno anche col freddo: si va coperti e si mette in '
+        'conto di stare poco. <strong>Tombole, laboratori e spettacoli</strong> '
+        'stanno in oratorio, in biblioteca o in teatro. Dove c\'è l\'orario di '
+        'Babbo Natale lo trovi in riga, e per stare al caldo tutto il pomeriggio '
+        'ci sono <a href="/luoghi.html">agriturismi, musei e posti al coperto '
+        'per bambini</a>.</p>')
     corpo += _landing_filtri(finestra)
     # A settimane e non giorno per giorno: la finestra e' lunga 26 giorni, e
     # ventisei titoletti - la meta' dei quali vuoti - fanno sembrare generata a
