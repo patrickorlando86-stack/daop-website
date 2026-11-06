@@ -25,6 +25,29 @@ def minify(css: str) -> str:
     return css.replace(";}", "}").strip()
 
 
+# LA VERSIONE NEL LINK (06/11/2026). Il riquadro delle feste e' uscito senza stile sul
+# telefono di Patrick: l'HTML nuovo era arrivato, il .min.css no - il browser (e la cache di
+# GitHub Pages, 10 minuti) teneva quello di prima, perche' l'indirizzo era lo stesso. Nelle
+# pagine che usano per prime una regola nuova il link porta ?v=<impronta del file>: cambia il
+# CSS, cambia l'indirizzo, e il browser lo riscarica. Si fa qui perche' e' l'unico momento in
+# cui il CSS cambia. Le altre pagine restano col link nudo: le regole che usano non cambiano.
+VERSIONATE = ("eventi.html", "index.html")
+
+
+def versiona(mini: str) -> None:
+    import hashlib
+    v = hashlib.sha1(mini.encode("utf-8")).hexdigest()[:8]
+    for nome in VERSIONATE:
+        f = ROOT / nome
+        if not f.exists():
+            continue
+        html = f.read_text(encoding="utf-8")
+        nuovo = re.sub(r'(/assets/css/daop-system\.min\.css)(\?v=[0-9a-f]+)?"', rf'\1?v={v}"', html)
+        if nuovo != html:
+            f.write_text(nuovo, encoding="utf-8")
+            print(f"{nome}: daop-system.min.css?v={v}")
+
+
 def main() -> int:
     if not SRC.exists():
         print(f"sorgente mancante: {SRC}", file=sys.stderr)
@@ -43,6 +66,7 @@ def main() -> int:
         return 0
 
     OUT.write_text(mini, encoding="utf-8")
+    versiona(mini)
     print(f"{SRC.name} {len(css) / 1024:.1f} KB -> {OUT.name} {len(mini) / 1024:.1f} KB "
           f"(-{100 * (len(css) - len(mini)) / len(css):.0f}%)")
     return 0
