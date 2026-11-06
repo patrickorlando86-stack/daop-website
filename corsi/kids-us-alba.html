@@ -1038,7 +1038,7 @@ Orario da definire</p>            <p class="ev-where"><svg viewBox="0 0 24 24" w
   </div>
 
   <p class="cr-torna"><a href="/corsi-provincia-cuneo.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
-<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">298 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">695 posti scelti a mano, dal parco al museo</span></a></div></section>
+<section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">298 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">699 posti scelti a mano, dal parco al museo</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
@@ -1160,9 +1160,23 @@ function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.class
     if(rw&&rw.contains(e)) vista('realta');
     else if(e.id==='co-lista'||e.closest('#co-lista')) vista('corsi');
   }
+  // Al tocco la pagina NON salta all'ancora (06/11/2026, Patrick: "si sposta
+  // la visuale, io la terrei ferma"): l'interruttore resta dov'era sullo
+  // schermo e cambia solo quello che c'e' sotto. Si misura prima e dopo e si
+  // compensa la differenza - serve tornando ai corsi dal fondo delle realta',
+  // dove l'interruttore era incollato in alto e da solo finirebbe altrove.
+  // L'indirizzo si aggiorna senza salto (replaceState), cosi' il link copiato
+  // apre la stessa vista; senza JS restano i due link alle ancore.
   if(vbar) vbar.addEventListener('click',function(ev){
     var a=ev.target.closest('[data-vista]');
-    if(a) vista(a.dataset.vista);
+    if(!a) return;
+    ev.preventDefault();
+    var prima=vbar.getBoundingClientRect().top;
+    vista(a.dataset.vista);
+    try{ history.replaceState(null,'',a.dataset.vista==='realta'
+      ? '#realta' : location.pathname+location.search); }catch(e){}
+    var d=vbar.getBoundingClientRect().top-prima;
+    if(d) window.scrollBy(0,d);
   });
   window.addEventListener('hashchange',vistaDaHash);
   vistaDaHash();
