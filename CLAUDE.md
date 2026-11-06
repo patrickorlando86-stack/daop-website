@@ -1754,8 +1754,10 @@ Patrick: «devo scorrere 110 corsi»), sopra la barra dei filtri
 schede subito sotto, con l'interruttore incollato in alto; le schede restano
 in fondo anche nella vista dei corsi. Sono due link a `#co-lista` e `#realta`:
 senza JS si scende alle schede, e la vista la decide l'hash (`#r-<slug>` apre
-le realtà, un'ancora a un corso riporta ai corsi). Non si stampa con meno di
-due realtà. `tests/corsi.js` lo difende senza conteggi.
+le realtà, un'ancora a un corso riporta ai corsi). **Al tocco la pagina sta
+ferma**: l'interruttore resta dov'era sullo schermo e cambia solo quello che
+c'è sotto (Patrick: «si sposta la visuale, la terrei ferma»); l'indirizzo si
+aggiorna con `replaceState`. Non si stampa con meno di due realtà. `tests/corsi.js` lo difende senza conteggi.
 
 **Le società non spariscono, scendono.** In fondo c'è una scheda per ognuna —
 `#r-pgs-roccavione`, il link che si manda su WhatsApp, **la stessa ancora di

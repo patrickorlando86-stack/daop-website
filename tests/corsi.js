@@ -355,8 +355,16 @@ module.exports = async function corsi(browser) {
       await cat2.selectOption(await cat2.evaluate((x) => x.options[1].value));
       await page.waitForTimeout(150);
     }
+    // La pagina sta ferma: l'interruttore resta dov'era sullo schermo.
+    const topVista = () => page.evaluate(() => Math.round(
+      document.getElementById('co-vista').getBoundingClientRect().top));
+    await page.evaluate(() => document.getElementById('co-vista').scrollIntoView({ block: 'center' }));
+    await page.waitForTimeout(150);
+    const t0 = await topVista();
     await page.locator('[data-vista="realta"]').click();
     await page.waitForTimeout(400);
+    const t1 = await topVista();
+    r.ok(Math.abs(t1 - t0) <= 2, `toccando «Chi organizza» l'interruttore resta a ${t0}px (ora ${t1}px)`);
     const s1 = await stato();
     r.ok(s1.corsi === 0 && !s1.barra, s1.corsi === 0 && !s1.barra
       ? 'con «Chi organizza» corsi e filtri spariscono'
@@ -364,8 +372,13 @@ module.exports = async function corsi(browser) {
     r.ok(s1.schede === nRealta, `si vedono ${s1.schede} schede su ${nRealta}, anche con un filtro acceso`);
     r.ok(s1.titoloSotto, s1.titoloSotto ? 'il titolo della sezione è a schermo, sotto l\'interruttore'
       : 'il titolo della sezione finisce sotto l\'interruttore o fuori schermo');
+    await page.evaluate(() => scrollBy(0, 400));
+    await page.waitForTimeout(150);
+    const t2 = await topVista();
     await page.locator('[data-vista="corsi"]').click();
     await page.waitForTimeout(300);
+    const t3 = await topVista();
+    r.ok(Math.abs(t3 - t2) <= 2, `tornando a «Corsi» dal fondo l'interruttore resta a ${t2}px (ora ${t3}px)`);
     const s2 = await stato();
     r.ok(s2.corsi > 0 && s2.barra, `tornando a «Corsi» ritornano ${s2.corsi} corsi e la barra`);
     if (await cat2.count()) { await cat2.selectOption('all'); await page.waitForTimeout(150); }

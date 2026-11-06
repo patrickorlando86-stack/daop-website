@@ -4473,9 +4473,23 @@ FILTER_JS = """
     if(rw&&rw.contains(e)) vista('realta');
     else if(e.id==='co-lista'||e.closest('#co-lista')) vista('corsi');
   }
+  // Al tocco la pagina NON salta all'ancora (06/11/2026, Patrick: "si sposta
+  // la visuale, io la terrei ferma"): l'interruttore resta dov'era sullo
+  // schermo e cambia solo quello che c'e' sotto. Si misura prima e dopo e si
+  // compensa la differenza - serve tornando ai corsi dal fondo delle realta',
+  // dove l'interruttore era incollato in alto e da solo finirebbe altrove.
+  // L'indirizzo si aggiorna senza salto (replaceState), cosi' il link copiato
+  // apre la stessa vista; senza JS restano i due link alle ancore.
   if(vbar) vbar.addEventListener('click',function(ev){
     var a=ev.target.closest('[data-vista]');
-    if(a) vista(a.dataset.vista);
+    if(!a) return;
+    ev.preventDefault();
+    var prima=vbar.getBoundingClientRect().top;
+    vista(a.dataset.vista);
+    try{ history.replaceState(null,'',a.dataset.vista==='realta'
+      ? '#realta' : location.pathname+location.search); }catch(e){}
+    var d=vbar.getBoundingClientRect().top-prima;
+    if(d) window.scrollBy(0,d);
   });
   window.addEventListener('hashchange',vistaDaHash);
   vistaDaHash();
