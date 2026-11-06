@@ -290,7 +290,33 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add $PRESENTI sitemap.xml
             git commit -m "Aggiornamento automatico eventi"
-            git push
+            # SE MAIN SI E' MOSSO MENTRE LA RUN GIRAVA (06/11/2026). Fino a qui
+            # c'era un `git push` secco: un commit arrivato su main durante i
+            # ~2 minuti dei generatori lo faceva rifiutare ("fetch first") e
+            # le pagine generate si buttavano via col runner. E' successo due
+            # volte di fila lanciando la run a mano subito dopo un commit.
+            # Ora si riprende main e si rimette sopra il commit delle pagine:
+            # dove i due toccano lo stesso pezzo di un file vince il nostro
+            # (-X theirs, che nel rebase e' il commit che si sta rimettendo),
+            # cioe' l'uscita dei generatori di adesso. Se il conflitto e' di
+            # quelli che -X non risolve (un file cancellato da una parte), la
+            # run diventa rossa come prima: non si spinge niente di mezzo.
+            # Tre tentativi bastano: main si muove di rado, e uno che si
+            # muove tre volte in un minuto e' un'altra cosa da guardare.
+            for TENTATIVO in 1 2 3; do
+              if git push; then break; fi
+              if [ "$TENTATIVO" = 3 ]; then
+                echo "::error::Push rifiutato tre volte: main continua a muoversi."
+                exit 1
+              fi
+              echo "Push rifiutato: riprendo main e rimetto sopra le pagine (tentativo $TENTATIVO)."
+              git fetch origin main
+              if ! git rebase -X theirs origin/main; then
+                git rebase --abort || true
+                echo "::error::Le pagine generate non si rimettono sopra main senza un conflitto da decidere a mano."
+                exit 1
+              fi
+            done
           else
             # nessun cambiamento ai contenuti: scarta il bump di lastmod
             git checkout -- sitemap.xml 2>/dev/null || true
