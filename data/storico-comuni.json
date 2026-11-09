@@ -123,6 +123,17 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "ex-caserma-piazza-don-dolermo-fiera-di-santa-cater-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ex Caserma - Piazza Don Dolermo",
+    "manifest": "Fiera di Santa Caterina",
+    "nome": "Ex Caserma - Piazza Don Dolermo - Fiera di Santa Caterina",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   },
    "festa-delle-feste-acqui-terme": {
     "anni": [
      2026
@@ -743,6 +754,17 @@
     "pagina": true,
     "ultima": "2026-10-10"
    },
+   "andrzejki-la-vigilia-di-sant-andrea-associazione-i-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "",
+    "nome": "Andrzejki – La vigilia di Sant'Andrea - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "aspettando-halloween-yo-yo-active-play-alessandria": {
     "anni": [
      2026
@@ -1051,6 +1073,17 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "il-contalibro-associazione-il-contastorie-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione il Contastorie",
+    "manifest": "",
+    "nome": "Il Contalibro - Associazione il Contastorie",
+    "organizza": "Associazione il Contastorie",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "il-contalibro-gruppo-di-lettura-11-13-anni-associa-alessandria": {
     "anni": [
      2026
@@ -1078,11 +1111,11 @@
      2026
     ],
     "luogo": "Associazione il Contastorie",
-    "manifest": "Ottobre a Il Contastorie",
-    "nome": "Il lungo viaggio di Ulisse...in 7 tappe - Associazione il Contastorie",
+    "manifest": "",
+    "nome": "Il lungo viaggio di Ulisse… in 7 tappe - Associazione il Contastorie",
     "organizza": "Associazione il Contastorie",
     "pagina": true,
-    "ultima": "2026-10-18"
+    "ultima": "2026-11-15"
    },
    "il-piccolo-principe-centro-commerciale-panorama-al-alessandria": {
     "anni": [
@@ -1232,11 +1265,11 @@
      2026
     ],
     "luogo": "Associazione il Contastorie",
-    "manifest": "Ottobre a Il Contastorie",
-    "nome": "Nel bosco di Lorien - Gruppo di Giochi di Ruolo - Associazione il Contastorie",
+    "manifest": "",
+    "nome": "Nel bosco di Lorien - Associazione il Contastorie",
     "organizza": "Associazione il Contastorie",
     "pagina": true,
-    "ultima": "2026-10-31"
+    "ultima": "2026-11-22"
    },
    "open-day-atelier-ariel-spazio-creativo-per-bimbi-alessandria": {
     "anni": [
@@ -1358,6 +1391,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "un-due-tre-stella-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Nido Comunale Paola Trucco",
+    "manifest": "Un, Due, Tre... Stella!",
+    "nome": "Un, Due, Tre... Stella!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "un-estate-al-quartiere-cristo-associazione-attivit-alessandria": {
     "anni": [
@@ -2007,6 +2051,17 @@
     "pagina": true,
     "ultima": "2026-11-07"
    },
+   "inaugurazione-magico-paese-di-natale-mille-voci-pe-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Secondo",
+    "manifest": "Magico Paese di Natale 2026",
+    "nome": "Inaugurazione Magico Paese di Natale - Mille Voci per Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   },
    "incontro-di-gruppo-con-lo-psicologo-centro-per-le-asti": {
     "anni": [
      2026
@@ -2072,6 +2127,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-15"
+   },
+   "mercatini-di-natale-magico-paese-di-natale-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Alfieri",
+    "manifest": "Magico Paese di Natale 2026",
+    "nome": "Mercatini di Natale - Magico Paese di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "musica-con-mamma-e-papa-0-3-anni-centro-per-le-fam-asti": {
     "anni": [
@@ -4928,6 +4994,17 @@
     "pagina": true,
     "ultima": "2026-11-17"
    },
+   "la-porta-del-natale-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Comune",
+    "manifest": "La Porta del Natale",
+    "nome": "La Porta del Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "la-radio-e-la-macchina-da-scrivere-nella-storia-casalnoceto": {
     "anni": [
      2026
@@ -5321,6 +5398,40 @@
   "nome": "Castagnole delle Lanze",
   "prov": "AT"
  },
+ "castagnolelanze": {
+  "eventi": {
+   "oro-incenso-mirra-presepi-nel-monferrato-castagnol-castagnole-lanze": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Paese dei Presepi",
+    "manifest": "Oro Incenso Mirra - 11ª Edizione",
+    "nome": "Oro Incenso Mirra - Presepi nel Monferrato - Castagnole Lanze",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   }
+  },
+  "nome": "Castagnole Lanze",
+  "prov": "AT"
+ },
+ "castagnolemonferrato": {
+  "eventi": {
+   "oro-incenso-mirra-presepi-nel-monferrato-castagnol-castagnole-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Tenuta La Mercantile",
+    "manifest": "Oro Incenso Mirra - 11ª Edizione",
+    "nome": "Oro Incenso Mirra - Presepi nel Monferrato - Castagnole Monferrato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   }
+  },
+  "nome": "Castagnole Monferrato",
+  "prov": "AT"
+ },
  "castelboglione": {
   "eventi": {
    "festa-patronale-di-castel-boglione": {
@@ -5430,6 +5541,72 @@
  },
  "castellalfero": {
   "eventi": {
+   "aspettando-babbo-natale-letture-natalizie-e-trucca-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Verde - Castello di Castell'Alfero",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Aspettando Babbo Natale - Letture natalizie e truccabimbi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "caccia-al-presepe-e-premiazione-cooperativa-second-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Verde - Castello di Castell'Alfero",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Caccia al presepe e premiazione - Cooperativa Seconda Stella",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "camminata-della-befana-associazione-camminare-in-c-castell-alfero": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Camminata della Befana - Associazione Camminare in Collina",
+    "organizza": "Associazione Camminare in Collina",
+    "pagina": true,
+    "ultima": "2027-01-06"
+   },
+   "camminata-tra-piloni-votivi-e-presepi-compagnia-de-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Camminata tra piloni votivi e presepi - Compagnia degli Erranti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "cantando-sulle-vie-del-presepe-camminata-musicale-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Cantando sulle vie del presepe - Camminata musicale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
+   "concerto-degli-auguri-musiche-di-ennio-morricone-a-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Verde - Castello di Castell'Alfero",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Concerto degli auguri \"Musiche di Ennio Morricone\" - Associazione Milaresol",
+    "organizza": "Associazione Milaresol",
+    "pagina": true,
+    "ultima": "2026-12-30"
+   },
    "giochi-in-piazza-castell-alfero": {
     "anni": [
      2026
@@ -5440,6 +5617,50 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "il-pastore-gilindo-a-castell-alfero-spettacolo-tea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Piazza Castello",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Il pastore Gilindo a Castell'Alfero - Spettacolo teatrale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "inaugurazione-iv-edizione-mostra-presepi-e-cappell-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Rosso - Castello di Castell'Alfero",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Inaugurazione IV edizione Mostra presepi e cappelle votive",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "notte-bianca-con-accensione-albero-di-natale-e-lum-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Mazzini",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Notte Bianca con accensione albero di Natale e luminarie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "oro-incenso-mirra-presepi-nel-monferrato-castell-a-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello, concentrico, Callianetto & Cappelle votive",
+    "manifest": "Oro Incenso Mirra - 11ª Edizione",
+    "nome": "Oro Incenso Mirra - Presepi nel Monferrato - Castell'Alfero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    },
    "palio-baldichieri-castell-alfero": {
     "anni": [
@@ -5452,6 +5673,17 @@
     "pagina": true,
     "ultima": "2026-09-02"
    },
+   "pomeriggio-di-festa-giochi-per-bambini-e-tombolata-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "Pomeriggio di festa: giochi per bambini e tombolata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "presepi-al-castello-comune-di-castell-alfero": {
     "anni": [
      2026
@@ -5460,6 +5692,17 @@
     "manifest": "",
     "nome": "Presepi al Castello - Comune di Castell'Alfero",
     "organizza": "Comune di Castell'Alfero",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "sul-cammino-di-artaban-spettacolo-nell-ambito-di-c-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Piazza Castello",
+    "manifest": "Presepi al Castello Castell'Alfero 2026/2027",
+    "nome": "\"Sul cammino di Artabàn\" - Spettacolo nell'ambito di Cuntè Munfrà 2026",
+    "organizza": "",
     "pagina": true,
     "ultima": "2026-12-08"
    }
@@ -5791,6 +6034,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-29"
+   },
+   "mercatini-di-natale-pro-loco-castelneuv-briso-comu-castelnuovo-calcea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazze e vie del Paese",
+    "manifest": "",
+    "nome": "Mercatini di Natale - Pro Loco Castelneuv Brisò / Comune di Castelnuovo Calcea",
+    "organizza": "Pro Loco Castelneuv Brisò / Comune di Castelnuovo Calcea",
+    "pagina": true,
+    "ultima": "2026-11-29"
    }
   },
   "nome": "Castelnuovo Calcea",
@@ -6107,6 +6361,17 @@
  },
  "cellarengo": {
   "eventi": {
+   "open-school-scuola-primaria-cellarengo-e-villanova": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Primaria Cellarengo e Villanova Stazione",
+    "manifest": "Open School - Istituto Comprensivo Villanova d'Asti",
+    "nome": "Open School - Scuola Primaria Cellarengo e Villanova Stazione - Istituto Comprensivo Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "san-firmino-in-festa-cellarengo": {
     "anni": [
      2026
@@ -6124,6 +6389,17 @@
  },
  "celleenomondo": {
   "eventi": {
+   "crescere-bambine-consapevoli-educazione-sessuo-aff-celle-enomondo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone dell'Opera Pia",
+    "manifest": "",
+    "nome": "Crescere bambine consapevoli: Educazione sessuo-affettiva nell'infanzia - Centro InclusivaMente",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   },
    "festa-di-san-rocco-celle-enomondo": {
     "anni": [
      2026
@@ -6680,6 +6956,17 @@
     "pagina": true,
     "ultima": "2026-09-27"
    },
+   "il-grande-emporio-di-babbo-natale-nodo-zero-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale - Cortile del Collegio",
+    "manifest": "",
+    "nome": "Il Grande Emporio di Babbo Natale - Nodo Zero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "laboratorio-per-bambini-e-ragazzi-un-pomeriggio-ne-cocconato": {
     "anni": [
      2026
@@ -6712,6 +6999,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "oro-incenso-mirra-presepi-nel-monferrato-cocconato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Oro Incenso Mirra - 11ª Edizione",
+    "nome": "Oro Incenso Mirra - Presepi nel Monferrato - Cocconato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    }
   },
   "nome": "Cocconato",
@@ -8069,6 +8367,17 @@
     "organizza": "Parrocchia Santi Rocco e Michele",
     "pagina": true,
     "ultima": "2026-08-15"
+   },
+   "open-school-scuola-primaria-dusino-san-michele-ist": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Primaria Dusino San Michele",
+    "manifest": "Open School - Istituto Comprensivo Villanova d'Asti",
+    "nome": "Open School - Scuola Primaria Dusino San Michele - Istituto Comprensivo Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    }
   },
   "nome": "Dusino San Michele",
@@ -8939,6 +9248,17 @@
     "pagina": true,
     "ultima": "2026-10-25"
    },
+   "con-le-mani-tra-foglie-e-castagne-art-lab-francavilla-bisio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Società di Francavilla Bisio",
+    "manifest": "",
+    "nome": "Con le Mani tra Foglie e...Castagne - Art&Lab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   },
    "festa-di-halloween-non-aprite-quella-porta-francavilla-bisio": {
     "anni": [
      2026
@@ -9174,6 +9494,17 @@
     "organizza": "Pro Loco Garbagna",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "lanternata-di-san-martino-talea-aps-garbagna": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Garbagna",
+    "manifest": "",
+    "nome": "Lanternata di San Martino - Talea APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-11"
    },
    "sagra-delle-castagne-pro-loco-garbagna": {
     "anni": [
@@ -10500,6 +10831,23 @@
    }
   },
   "nome": "Mombercelli",
+  "prov": "AT"
+ },
+ "monale": {
+  "eventi": {
+   "oro-incenso-mirra-presepi-nel-monferrato-monale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Oro Incenso Mirra - 11ª Edizione",
+    "nome": "Oro Incenso Mirra - Presepi nel Monferrato - Monale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   }
+  },
+  "nome": "Monale",
   "prov": "AT"
  },
  "monasterobormida": {
@@ -12531,6 +12879,17 @@
     "pagina": true,
     "ultima": "2026-11-21"
    },
+   "il-viaggio-nel-tempo-edutainment-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Albert Einstein E=mc²: Un Universo di Idee!",
+    "nome": "Il Viaggio nel Tempo - Edutainment",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "isaac-newton-tutta-colpa-di-una-mela-novi-ligure": {
     "anni": [
      2027
@@ -12585,6 +12944,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-17"
+   },
+   "leonardo-da-vinci-genio-in-movimento-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "",
+    "nome": "Leonardo da Vinci - Genio in Movimento",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-01-01"
    },
    "leonardo-da-vinci-un-genio-senza-tempo-novi-ligure": {
     "anni": [
@@ -13578,6 +13948,17 @@
     "pagina": true,
     "ultima": "2026-11-28"
    },
+   "le-letture-in-biblioteca-il-pane-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture in Biblioteca",
+    "nome": "Le Letture in Biblioteca - Il Pane",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "le-letture-in-biblioteca-le-ombre-biblioteca-di-pa-pasturana": {
     "anni": [
      2026
@@ -13589,6 +13970,17 @@
     "pagina": true,
     "ultima": "2026-11-21"
    },
+   "le-letture-in-biblioteca-le-ombre-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture in Biblioteca",
+    "nome": "Le Letture in Biblioteca - Le Ombre",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "le-letture-in-biblioteca-san-martino-biblioteca-di-pasturana": {
     "anni": [
      2026
@@ -13596,6 +13988,17 @@
     "luogo": "Biblioteca di Pasturana Eugenio Arecco",
     "manifest": "Le letture in biblioteca 2026",
     "nome": "Le letture in biblioteca: San Martino - Biblioteca di Pasturana Eugenio Arecco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
+   "le-letture-in-biblioteca-san-martino-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale E. Arecco",
+    "manifest": "Le Letture in Biblioteca",
+    "nome": "Le Letture in Biblioteca - San Martino",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-14"
@@ -14558,6 +14961,28 @@
  },
  "quargnento": {
   "eventi": {
+   "a-tutto-gas-giochiamo-con-i-mezzi-di-trasporto-quargnento": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca GSP Raiteri",
+    "manifest": "Il Sabato dei Piccoli - Biblioteca dei Bambini e dei Ragazzi",
+    "nome": "\"A tutto gas\" - Giochiamo con i mezzi di trasporto!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
+   "arte-in-gioco-laboratorio-creativo-quargnento": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca GSP Raiteri",
+    "manifest": "Il Sabato dei Piccoli - Biblioteca dei Bambini e dei Ragazzi",
+    "nome": "\"Arte in gioco\" - Laboratorio creativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "halloween-dei-piccoli-biblioteca-g-s-p-raiteri-quargnento": {
     "anni": [
      2026
@@ -15643,6 +16068,17 @@
  },
  "rocchettatanaro": {
   "eventi": {
+   "accendiamo-rocchetta-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Rocchetta Tanaro",
+    "manifest": "",
+    "nome": "AccendiAMO Rocchetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "apertura-stand-gastronomico-con-i-controcorrente-p-rocchetta-tanaro": {
     "anni": [
      2026
@@ -15926,6 +16362,17 @@
  },
  "sale": {
   "eventi": {
+   "autunno-in-biblioteca-sale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale di Sale",
+    "manifest": "",
+    "nome": "Autunno in Biblioteca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-19"
+   },
    "sale-in-zucca-pro-loco-di-sale": {
     "anni": [
      2026
@@ -16385,6 +16832,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "oro-incenso-mirra-presepi-nel-monferrato-san-damia-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico - Borgo del Sutè",
+    "manifest": "Oro Incenso Mirra - 11ª Edizione",
+    "nome": "Oro Incenso Mirra - Presepi nel Monferrato - San Damiano d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    },
    "presepe-vivente-san-damiano-d-asti": {
     "anni": [
@@ -17839,6 +18297,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "tracce-d-autunno-centro-gioco-il-bianconiglio-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Gioco Il Bianconiglio",
+    "manifest": "Un, Due, Tre... Stella!",
+    "nome": "Tracce d'Autunno - Centro Gioco Il Bianconiglio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-16"
    }
   },
   "nome": "Spinetta Marengo",
@@ -18618,6 +19087,17 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "camminata-dei-babbi-natale-dell-avis-valfenera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Valfenera d'Asti",
+    "manifest": "",
+    "nome": "Camminata dei Babbi Natale dell'AVIS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "fiera-di-san-bartolomeo-dell-aglio-e-del-pitu-valfenera": {
     "anni": [
      2026
@@ -18640,6 +19120,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2027-02-06"
+   },
+   "open-school-scuola-primaria-valfenera-e-san-paolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Primaria Valfenera e San Paolo Solbrito",
+    "manifest": "Open School - Istituto Comprensivo Villanova d'Asti",
+    "nome": "Open School - Scuola Primaria Valfenera e San Paolo Solbrito - Istituto Comprensivo Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "sagra-del-bollito-valfenera": {
     "anni": [
@@ -19025,6 +19516,28 @@
     "organizza": "Comune di Vignole Borbera",
     "pagina": true,
     "ultima": "2026-09-18"
+   },
+   "io-ci-rigioco-raccolta-di-giocattoli-presso-area-s-vignole-borbera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Sociale della CRI di Vignole Borbera",
+    "manifest": "Io Ci Rigioco",
+    "nome": "Io Ci Rigioco - Raccolta di giocattoli presso Area Sociale CRI",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-07"
+   },
+   "io-ci-rigioco-raccolta-di-giocattoli-presso-farmac-vignole-borbera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Farmacia Di Matteo",
+    "manifest": "Io Ci Rigioco",
+    "nome": "Io Ci Rigioco - Raccolta di giocattoli presso Farmacia Di Matteo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-07"
    }
   },
   "nome": "Vignole Borbera",
@@ -19042,6 +19555,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-14"
+   },
+   "mercatini-di-natale-a-viguzzolo-pro-loco-viguzzolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Padiglione Food Riscaldato",
+    "manifest": "",
+    "nome": "Mercatini di Natale a Viguzzolo - Pro Loco Viguzzolo",
+    "organizza": "Pro Loco Viguzzolo",
+    "pagina": true,
+    "ultima": "2026-12-08"
    }
   },
   "nome": "Viguzzolo",
@@ -19148,6 +19672,39 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "open-school-scuola-primaria-villanova-capoluogo-is-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Primaria Villanova Capoluogo",
+    "manifest": "Open School - Istituto Comprensivo Villanova d'Asti",
+    "nome": "Open School - Scuola Primaria Villanova Capoluogo - Istituto Comprensivo Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
+   "open-school-scuola-secondaria-di-primo-grado-istit-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Secondaria di Primo Grado",
+    "manifest": "Open School - Istituto Comprensivo Villanova d'Asti",
+    "nome": "Open School - Scuola Secondaria di Primo Grado - Istituto Comprensivo Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
+   },
+   "open-school-scuole-dell-infanzia-cellarengo-dusino-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuole dell'Infanzia",
+    "manifest": "Open School - Istituto Comprensivo Villanova d'Asti",
+    "nome": "Open School - Scuole dell'Infanzia (Cellarengo, Dusino, Valfenera, Villanova Cap.) - Istituto Comprensivo Villanova d'Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "pulciningamba-crescendo-in-sol-a-villanova-d-asti": {
     "anni": [
