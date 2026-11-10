@@ -4902,8 +4902,8 @@ def link_mercatini(rec, events, oggi):
 
     06/11/2026: le tre mercatini-di-natale-provincia-* erano in indice e
     ricevevano link solo dalle altre pagine di Natale. Le schede dei mercatini
-    non le linkavano, e dal 15/11 avrebbero linkato /natale.html, che parte dal
-    1° dicembre e non elenca i mercatini di novembre (il 29/11 ce ne sono otto).
+    non le linkavano, e dal 15/11 avrebbero linkato /natale.html, che allora partiva
+    dal 1° dicembre e non elencava i mercatini di novembre (il 29/11 ce n'erano otto).
     Il numero e il robots sono quelli della pagina (stessa finestra, stesso
     filtro, MIN_TEMA): sotto soglia la pagina e' noindex e non si linka."""
     if not e_mercatino_natale(rec):
@@ -9018,7 +9018,7 @@ def halloween_range(oggi):
 #
 # LE FESTE DI DICEMBRE SONO TRE PAGINE, NON UNA. Il periodo e' un continuo
 # dall'Immacolata all'Epifania, ma le domande sono tre e diverse:
-#   "mercatini di natale <paese>"     -> /natale.html      1 - 26 dicembre
+#   "mercatini di natale <paese>"     -> /natale.html     15 nov - 26 dic
 #   "capodanno con bambini <paese>"   -> /capodanno.html  27 dic - 1 gennaio
 #   "calza della befana <paese>"      -> /befana.html      2 -  6 gennaio
 # Su un URL solo si farebbero concorrenza fra loro: e' lo stesso errore che
@@ -9028,7 +9028,12 @@ def halloween_range(oggi):
 # restano DISGIUNTE, che e' l'invariante su cui si regge blocco_stagione():
 # "la prima che risponde vince". Lo verifica _controlla_stagioni().
 def _finestra_natale(anno):
-    return (datetime.date(anno, 12, 1),
+    # Dal 15 novembre (10/11/2026, Patrick: «perché l'accensione dell'albero di Willy Wonka non
+    # rientra?»): partiva il 1° dicembre, e il Natale di fine novembre - alberi e luminarie
+    # accesi, camminate dei Babbi Natale - non stava in nessuna pagina, perche' non e' un
+    # mercatino. Ora parte con i mercatini (mercatini_range), e le due pagine dicono la stessa
+    # cosa. L'avviso pero' resta a inizio novembre (apre/avviso = 10): Halloween finisce il 2.
+    return (datetime.date(anno, 11, 15),
             datetime.date(anno, 12, 25),
             datetime.date(anno, 12, 26))
 
@@ -9554,8 +9559,20 @@ def _giorno_per_giorno(finestra, da, a, oggi, etichette=None, chiave=None,
     return fuori
 
 
+def _settimane_natale(anno):
+    """I blocchi delle pagine di Natale: (dal, al, titolo, etichetta). La seconda meta' di
+    novembre e' un blocco solo - in quei giorni il Natale e' l'albero acceso e il primo
+    mercatino, poca roba - poi le settimane di dicembre come prima."""
+    g = lambda m, d: datetime.date(anno, m, d)
+    return ((g(11, 15), g(11, 30), "Dal 15 al 30 novembre", "Aspettando il Natale"),
+            (g(12, 1), g(12, 7), "Dal 1 al 7 dicembre", None),
+            (g(12, 8), g(12, 14), "Dall'8 al 14 dicembre", "C'è l'Immacolata"),
+            (g(12, 15), g(12, 21), "Dal 15 al 21 dicembre", None),
+            (g(12, 22), g(12, 26), "Dal 22 al 26 dicembre", "Vigilia, Natale e Santo Stefano"))
+
+
 def spec_natale(st, events, oggi, altre):
-    """/natale.html — dal 1° al 26 dicembre.
+    """/natale.html — dal 15 novembre al 26 dicembre.
 
     La domanda vera di dicembre non e' "che eventi ci sono": e' **dove sono i
     mercatini e i presepi**, e soprattutto **quali si fanno al coperto**. A
@@ -9573,10 +9590,11 @@ def spec_natale(st, events, oggi, altre):
                               f"Mercatini e presepi di Natale {anno} | DAOP",
                               f"Natale {anno} con i bambini"])
     if finestra:
-        sotto = (f"{len(finestra)} eventi di dicembre in {comuni} comuni"
-                 if len(finestra) > 1 else "1 evento in programma a dicembre")
+        sotto = (f"{len(finestra)} eventi di Natale in {comuni} comuni"
+                 if len(finestra) > 1 else "1 evento di Natale in programma")
         apertura = (f"<p>Il <strong>Natale {anno}</strong> in zona comincia "
-                    f"con l'Immacolata e va avanti fino a Santo Stefano. Qui "
+                    f"a metà novembre, con le prime luci e i primi mercatini, e "
+                    f"va avanti fino a Santo Stefano. Qui "
                     f"sotto ci sono i <strong>{len(finestra)} eventi</strong> "
                     f"che abbiamo verificato uno per uno in {comuni} comuni fra "
                     f"le province di {prov}"
@@ -9586,10 +9604,10 @@ def spec_natale(st, events, oggi, altre):
                       f"in provincia di {prov}: "
                       + (f"{len(finestra)} appuntamenti" if len(finestra) > 1
                          else "1 appuntamento")
-                      + " in dicembre, verificati uno per uno da DAOP.", 152)
+                      + " fino a Santo Stefano, verificati uno per uno da DAOP.", 152)
     else:
         sotto = f"Per il Natale {anno} non c'è ancora niente in agenda"
-        apertura = ("<p class=\"lan-vuoto\">Per dicembre in agenda non abbiamo "
+        apertura = ("<p class=\"lan-vuoto\">Per il Natale in agenda non abbiamo "
                     "ancora niente, e lo scriviamo invece di riempire la pagina. "
                     "I mercatini di paese si decidono tardi: molte pro loco "
                     "pubblicano il programma a fine novembre. Questa pagina si "
@@ -9624,21 +9642,15 @@ def spec_natale(st, events, oggi, altre):
         'ci sono <a href="/luoghi.html">agriturismi, musei e posti al coperto '
         'per bambini</a>.</p>')
     corpo += _landing_filtri(finestra)
-    # A settimane e non giorno per giorno: la finestra e' lunga 26 giorni, e
-    # ventisei titoletti - la meta' dei quali vuoti - fanno sembrare generata a
+    # A settimane e non giorno per giorno: la finestra e' lunga 42 giorni, e
+    # quaranta titoletti - la meta' dei quali vuoti - fanno sembrare generata a
     # macchina una pagina che non lo e'.
     # Le righe lunghe (un presepe aperto tutto il mese) una volta sola, non in
     # tutte e quattro le settimane: vedi LUNGO_GIORNI.
     corpo += _lunghi_in_tema(finestra, st.chiave, oggi, "Natale")
-    for testa, coda, etichetta in ((1, 7, None),
-                                   (8, 14, "C'è l'Immacolata"),
-                                   (15, 21, None),
-                                   (22, 26, "Vigilia, Natale e Santo Stefano")):
-        d1 = datetime.date(anno, 12, testa)
-        d2 = datetime.date(anno, 12, coda)
+    for d1, d2, testa, etichetta in _settimane_natale(anno):
         corpo += _landing_sezione(
-            f"Dal {testa} al {coda} dicembre" if testa != 22 else "Dal 22 al 26 dicembre",
-            etichetta,
+            testa, etichetta,
             _tema_prima([e for e in finestra if not e_lungo(e)
                          and e['d_start'] <= d2 and e['d_end'] >= d1], st.chiave),
             oggi)
@@ -9868,7 +9880,7 @@ def _sorelle(href_fn, prov, generale, quale, nome, generale_testo=None):
 def spec_natale_prov(prov, events, oggi, altre):
     """/natale-provincia-<nome>.html — il Natale di UNA provincia, senza i
     mercatini (che hanno le loro pagine): presepi, Babbo Natale, spettacoli,
-    laboratori, luci. Dal 1° al 26 dicembre, come /natale.html. "Al coperto o
+    laboratori, luci. Dal 15 novembre al 26 dicembre, come /natale.html. "Al coperto o
     all'aperto?" per esteso sta nella generale e non si ricopia."""
     da, clou, a = prossima_finestra(_finestra_natale, oggi)
     anno = clou.year
@@ -9928,15 +9940,9 @@ def spec_natale_prov(prov, events, oggi, altre):
         "Per più giorni",
         "Presepi e luci aperti per settimane: li trovi qui una volta sola",
         [e for e in finestra if e_lungo(e)], oggi, eta=True, dettagli=True)
-    for testa, coda, etichetta in ((1, 7, None),
-                                   (8, 14, "C'è l'Immacolata"),
-                                   (15, 21, None),
-                                   (22, 26, "Vigilia, Natale e Santo Stefano")):
-        d1 = datetime.date(anno, 12, testa)
-        d2 = datetime.date(anno, 12, coda)
+    for d1, d2, testa, etichetta in _settimane_natale(anno):
         corpo += _landing_sezione(
-            f"Dal {testa} al {coda} dicembre",
-            etichetta,
+            testa, etichetta,
             [e for e in finestra if not e_lungo(e)
              and e['d_start'] <= d2 and e['d_end'] >= d1],
             oggi, eta=True, dettagli=True)
@@ -10923,8 +10929,8 @@ STAGIONI = (
              _finestra_halloween, apre=24, avviso=24,
              quale="dal 25 ottobre al 2 novembre", spec=spec_halloween),
     Stagione('natale', "Natale", "/natale.html", "Natale",
-             _finestra_natale, apre=25, avviso=25,
-             quale="dal 1° al 26 dicembre", spec=spec_natale),
+             _finestra_natale, apre=10, avviso=10,
+             quale="da metà novembre a Santo Stefano", spec=spec_natale),
 )
 
 
@@ -11021,8 +11027,7 @@ def riga_natale(events, oggi):
 
     Non e' la riga di Halloween con un altro nome, perche' il Natale ha due
     porte: i mercatini, che cominciano a meta' novembre e hanno una pagina per
-    provincia, e /natale.html, che va dal 1° al 26 dicembre e i mercatini di
-    novembre non li elenca. Il riquadro le nomina tutte e due, e ogni numero e'
+    provincia, e /natale.html, che va da meta' novembre a Santo Stefano. Il riquadro le nomina tutte e due, e ogni numero e'
     quello della pagina a cui porta. Una provincia entra solo se la sua pagina
     dei mercatini e' in indice (MIN_TEMA), /natale.html solo da MIN_LANDING
     eventi: sono le stesse soglie del loro robots.
