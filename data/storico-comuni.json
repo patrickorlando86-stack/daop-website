@@ -200,6 +200,17 @@
     "pagina": true,
     "ultima": "2026-10-11"
    },
+   "luna-park-acqui-terme-fiera-di-santa-caterina": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Dolermo",
+    "manifest": "Luna Park Acqui Terme - Fiera di Santa Caterina",
+    "nome": "Luna Park Acqui Terme - Fiera di Santa Caterina",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   },
    "menu-alla-carta-carta-menu-acqui-terme": {
     "anni": [
      2026
@@ -376,6 +387,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "battistorie-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Associazione Marta & Maria",
+    "manifest": "",
+    "nome": "Battistorie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
+   },
+   "buon-natale-orso-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Alba",
+    "manifest": "Un Tempo Per...",
+    "nome": "Buon Natale, Orso!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
    },
    "escape-room-at-the-museum-kids-us-alba": {
     "anni": [
@@ -575,6 +608,17 @@
     "pagina": true,
     "ultima": "2026-11-06"
    },
+   "papa-leggi-con-me-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "",
+    "nome": "Papà Leggi Con Me!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "pigiama-run-lilt-cuneo-alba": {
     "anni": [
      2026
@@ -585,6 +629,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-18"
+   },
+   "prime-parole-prime-storie-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "",
+    "nome": "Prime Parole, Prime Storie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-10"
    },
    "settimana-mondiale-per-l-allattamento-laboratorio-alba": {
     "anni": [
@@ -618,6 +673,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-07"
+   },
+   "storie-di-piazza-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mercato della Terra, piazza Pertinace",
+    "manifest": "",
+    "nome": "Storie di Piazza",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "story-time-kids-us-alba": {
     "anni": [
@@ -863,6 +929,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-31"
+   },
+   "cenerentola-sottosopra-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiostro di Santa Maria di Castello",
+    "manifest": "Teatro in Crescita",
+    "nome": "Cenerentola Sottosopra",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
    },
    "chiamata-alla-parata-alessandria-giro-di-ruota": {
     "anni": [
@@ -1238,6 +1315,17 @@
     "pagina": true,
     "ultima": "2026-10-01"
    },
+   "la-magia-delle-maschere-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiostro di Santa Maria di Castello",
+    "manifest": "Teatro in Crescita",
+    "nome": "La Magia delle Maschere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "letture-spaventose-associazione-il-contastorie-alessandria": {
     "anni": [
      2026
@@ -1336,6 +1424,17 @@
     "organizza": "Associazione il Contastorie",
     "pagina": true,
     "ultima": "2026-11-22"
+   },
+   "nove-giorni-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Auditorium San Baudolino",
+    "manifest": "Teatro in Crescita",
+    "nome": "Nove Giorni",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
    },
    "open-day-atelier-ariel-spazio-creativo-per-bimbi-alessandria": {
     "anni": [
@@ -1446,6 +1545,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-17"
+   },
+   "tra-sbadigli-e-smorfie-esploriamo-la-mappa-della-n-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Casa delle Donne TFQ Alessandria",
+    "manifest": "Atlas delle Emozioni",
+    "nome": "Tra Sbadigli e Smorfie - Esploriamo la Mappa della Noia e del Disgusto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
    },
    "un-bel-giorno-alessandria": {
     "anni": [
