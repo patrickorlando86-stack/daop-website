@@ -542,6 +542,17 @@
     "pagina": true,
     "ultima": "2026-12-05"
    },
+   "little-chef-let-s-cook-in-english-kids-us-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Kids&Us Alba",
+    "manifest": "",
+    "nome": "Little Chef - Let's Cook in English - Kids&Us Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
+   },
    "musica-maestro-libreria-marameo-alba": {
     "anni": [
      2026
@@ -2216,6 +2227,17 @@
     "pagina": true,
     "ultima": "2026-11-12"
    },
+   "natale-tra-i-fossili-laboratorio-creativo-di-argil-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco e Museo Paleontologico Territoriale dell'Astigiano",
+    "manifest": "",
+    "nome": "Natale tra i Fossili: Laboratorio Creativo di Argilla",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "non-siamo-d-accordo-conflitti-in-famiglia-centro-p-asti": {
     "anni": [
      2026
@@ -2627,6 +2649,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "mercatini-di-natale-pro-loco-barge": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie della Città",
+    "manifest": "",
+    "nome": "Mercatini di Natale - Pro Loco Barge",
+    "organizza": "Pro Loco Barge",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "sport-in-piazza-festa-dello-sport-pro-loco-barge": {
     "anni": [
      2026
@@ -2761,6 +2794,17 @@
  },
  "beinette": {
   "eventi": {
+   "giochi-della-tradizione-l-albero-del-macrame-beinette": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza di Circo",
+    "manifest": "Piazza di Circo - Risonanze Artistiche",
+    "nome": "Giochi della Tradizione - L'Albero del Macramè",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   },
    "mercatino-delle-pulci-pro-loco-beinette": {
     "anni": [
      2026
@@ -3587,6 +3631,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-02"
+   },
+   "tutti-ai-fornelli-workshop-genitori-figli-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mensa dell'Incontro della Caritas",
+    "manifest": "",
+    "nome": "Tutti ai Fornelli! - Workshop Genitori Figli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-13"
    }
   },
   "nome": "Bra",
@@ -6414,6 +6469,23 @@
   "nome": "Castelnuovo Scrivia",
   "prov": "AL"
  },
+ "cavallermaggiore": {
+  "eventi": {
+   "seme-foglia-albero-con-vanessa-barile-cavallermaggiore": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Nuto Revelli",
+    "manifest": "",
+    "nome": "Seme, Foglia, Albero con Vanessa Barile",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-12"
+   }
+  },
+  "nome": "Cavallermaggiore",
+  "prov": "CN"
+ },
  "cellarengo": {
   "eventi": {
    "open-school-scuola-primaria-cellarengo-e-villanova": {
@@ -7650,6 +7722,17 @@
     "pagina": true,
     "ultima": "2026-09-09"
    },
+   "come-riconoscere-un-innaffiatoio-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Diocesano",
+    "manifest": "",
+    "nome": "Come riconoscere un innaffiatoio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "corone-di-natura-parco-fluviale-gesso-e-stura-cuneo": {
     "anni": [
      2026
@@ -8056,6 +8139,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-18"
+   },
+   "pinocchio-fuori-dalle-righe-lipani-di-francesca-re-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria per bambini e ragazzi Storie",
+    "manifest": "",
+    "nome": "Pinocchio Fuori dalle Righe - Lipani di Francesca Remaudo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
    },
    "pomeriggio-di-giochi-cuneo": {
     "anni": [
@@ -9049,6 +9143,17 @@
     "pagina": false,
     "ultima": "2026-08-15"
    },
+   "chiara-legge-ai-bambini-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Fossano - Sala del Teatrino",
+    "manifest": "Settimana Nazionale Nati per Leggere 2026",
+    "nome": "Chiara legge ai bambini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-18"
+   },
    "corso-primo-soccorso-pediatrico-croce-bianca-fossa-fossano": {
     "anni": [
      2026
@@ -9181,6 +9286,17 @@
     "pagina": true,
     "ultima": "2026-10-15"
    },
+   "libri-da-sentire-suoni-a-piccoli-passi-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Fossano - Sala Ragazzi",
+    "manifest": "",
+    "nome": "Libri da sentire: suoni a piccoli passi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "magie-d-autunno-parco-fluviale-gesso-e-stura-fossano": {
     "anni": [
      2026
@@ -9191,6 +9307,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "mercatino-di-natale-dei-bambini-comune-di-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Roma",
+    "manifest": "",
+    "nome": "Mercatino di Natale dei Bambini - Comune di Fossano",
+    "organizza": "Comune di Fossano",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "piccoli-allevatori-crescono-coldiretti-cuneo-campa-fossano": {
     "anni": [
@@ -9246,6 +9373,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-08"
+   },
+   "un-incontro-con-matisse-allin-cultura-per-crescere-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Fossano",
+    "manifest": "",
+    "nome": "Un incontro con Matisse - Allin Cultura per Crescere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    }
   },
   "nome": "Fossano",
@@ -10047,6 +10185,28 @@
  },
  "lagnasco": {
   "eventi": {
+   "la-camminata-di-babbo-natale-lagnasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Umberto I",
+    "manifest": "",
+    "nome": "La Camminata di Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
+   "mercatini-di-natale-on-the-road-lagnasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardino delle Essenze",
+    "manifest": "I Mercatini di Natale on the Road",
+    "nome": "Mercatini di Natale on the Road - Lagnasco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "vivi-il-pony-in-coppia-ippica-saluzzese-lagnasco": {
     "anni": [
      2026
@@ -10207,6 +10367,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "storie-tra-i-rami-letture-ad-alta-voce-limone-piemonte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca e Museo dello Sci di Limone Piemonte",
+    "manifest": "",
+    "nome": "Storie tra i Rami - Letture ad Alta Voce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    }
   },
   "nome": "Limone Piemonte",
@@ -10946,6 +11117,17 @@
  },
  "monasterolodisavigliano": {
   "eventi": {
+   "notte-dei-pupazzi-monasterolo-di-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Monasterolo di Savigliano",
+    "manifest": "Notte dei pupazzi",
+    "nome": "Notte dei pupazzi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
+   },
    "scacco-matto-a-s-d-il-posto-degli-scacchi-monasterolo-di-savigliano": {
     "anni": [
      2026
@@ -11417,6 +11599,23 @@
    }
   },
   "nome": "Mondovì",
+  "prov": "CN"
+ },
+ "monfortedalba": {
+  "eventi": {
+   "oratorio-monforte-a-porte-aperte-monforte-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio Monforte",
+    "manifest": "",
+    "nome": "Oratorio Monforte a porte aperte!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-01-10"
+   }
+  },
+  "nome": "Monforte d'Alba",
   "prov": "CN"
  },
  "mongardino": {
@@ -14318,6 +14517,17 @@
     "pagina": true,
     "ultima": "2027-04-03"
    },
+   "mercatini-di-natale-on-the-road-kauss-piasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Birrificio Kauss",
+    "manifest": "I Mercatini di Natale on the Road",
+    "nome": "Mercatini di Natale on the Road - Kauss Piasco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "sagra-circus-una-serata-tra-magia-e-arte-circense-piasco": {
     "anni": [
      2026
@@ -14514,6 +14724,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-05"
+   },
+   "mercatini-di-natale-pro-loco-pontechianale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pontechianale centro",
+    "manifest": "",
+    "nome": "Mercatini di Natale - Pro Loco Pontechianale",
+    "organizza": "Pro Loco Pontechianale",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "obiettivo-impollinatori-parco-del-monviso-pontechianale": {
     "anni": [
@@ -15012,6 +15233,34 @@
    }
   },
   "nome": "Priero",
+  "prov": "CN"
+ },
+ "priocca": {
+  "eventi": {
+   "agri-pino-un-maxi-albero-di-natale-fatto-di-tratto-priocca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Agri-Pino - Un maxi albero di natale fatto di trattori",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
+   "cena-del-contadino-pro-loco-di-priocca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Cena del Contadino - Pro Loco di Priocca",
+    "organizza": "Pro Loco di Priocca",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   }
+  },
+  "nome": "Priocca",
   "prov": "CN"
  },
  "quargnento": {
@@ -15981,6 +16230,18 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "presepe-vivente-di-prea-edizione-roccaforte-mondovi": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Prea",
+    "manifest": "Presepe Vivente di Prea 2026",
+    "nome": "Presepe Vivente di Prea - 44ª edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-05"
    }
   },
   "nome": "Roccaforte Mondovì",
@@ -16473,6 +16734,17 @@
  },
  "saluzzo": {
   "eventi": {
+   "avventure-tra-le-pagine-tra-cielo-e-stelle-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castiglia",
+    "manifest": "",
+    "nome": "Avventure tra le pagine - Tra cielo e stelle",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "castiglia-da-brivido-processo-ad-una-masca-saluzzo": {
     "anni": [
      2026
@@ -16527,6 +16799,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "fiera-di-sant-andrea-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Quartiere",
+    "manifest": "Fiera di Sant'Andrea 2026",
+    "nome": "Fiera di Sant'Andrea 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
    },
    "halloween-party-helen-doron-english-saluzzo": {
     "anni": [
@@ -17869,6 +18152,17 @@
     "pagina": true,
     "ultima": "2026-12-12"
    },
+   "la-casa-di-babbo-natale-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ala Polifunzionale",
+    "manifest": "Incantevole Natale",
+    "nome": "La Casa di Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "letture-sceniche-con-i-ghissbross-cappuccetto-ross-savigliano": {
     "anni": [
      2026
@@ -18266,6 +18560,23 @@
    }
   },
   "nome": "Sommariva del Bosco",
+  "prov": "CN"
+ },
+ "sommarivaperno": {
+  "eventi": {
+   "mercatini-di-natale-pro-loco-sommariva-perno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Europa e lungo il viale alberato",
+    "manifest": "",
+    "nome": "Mercatini di Natale - Pro Loco Sommariva Perno",
+    "organizza": "Pro Loco Sommariva Perno",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   }
+  },
+  "nome": "Sommariva Perno",
   "prov": "CN"
  },
  "spignomonferrato": {
@@ -18991,6 +19302,17 @@
  },
  "treiso": {
   "eventi": {
+   "alla-ricerca-del-fiore-dorato-leggiamo-insieme-treiso": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Treiso",
+    "manifest": "",
+    "nome": "Alla Ricerca del Fiore Dorato - Leggiamo Insieme",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "leggiamo-insieme-che-stooria-treiso": {
     "anni": [
      2026
@@ -19315,6 +19637,17 @@
     "organizza": "Pro Loco Villa di Verzuolo",
     "pagina": true,
     "ultima": "2026-08-15"
+   },
+   "i-mercatini-di-natale-on-the-road-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Armando Vivai Verzuolo",
+    "manifest": "I Mercatini di Natale on the Road",
+    "nome": "I Mercatini di Natale on the Road",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
    },
    "la-contea-del-mondo-magico-di-harry-e-gandalf-pro-verzuolo": {
     "anni": [
