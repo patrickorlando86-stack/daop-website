@@ -35,6 +35,17 @@
  },
  "acquiterme": {
   "eventi": {
+   "accensione-dell-albero-e-delle-luminarie-di-natale-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "",
+    "nome": "Accensione dell'Albero e delle luminarie di Natale con Willy Wonka",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "acqui-prog-night-acqui-rock-festival-acqui-terme": {
     "anni": [
      2026
@@ -89,6 +100,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "caff-libro-junior-raccontami-una-storia-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Ex Kaimano",
+    "manifest": "",
+    "nome": "Caff&Libro Junior - Raccontami una storia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "castelli-aperti-a-ferragosto-acqui-terme": {
     "anni": [
@@ -232,6 +254,39 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "mostra-presepi-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Movicentro",
+    "manifest": "",
+    "nome": "Mostra Presepi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
+   "open-day-scuola-dell-infanzia-e-sezione-primavera-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Fondazione MOISO - Scuola dell'Infanzia",
+    "manifest": "",
+    "nome": "Open Day Scuola dell'Infanzia e Sezione Primavera - MOISO",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
+   "open-day-tobe-together-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "ToBE Together Acqui Terme",
+    "manifest": "",
+    "nome": "Open Day - ToBE Together",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "pigiama-walk-acqui-terme": {
     "anni": [
@@ -2023,7 +2078,7 @@
      2026
     ],
     "luogo": "Piazza Alfieri",
-    "manifest": "",
+    "manifest": "Magico Paese di Natale 2026",
     "nome": "Il Magico Paese di Natale 2026",
     "organizza": "",
     "pagina": true,
@@ -12954,7 +13009,7 @@
     "nome": "Leonardo da Vinci - Genio in Movimento",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-01-01"
+    "ultima": "2026-10-30"
    },
    "leonardo-da-vinci-un-genio-senza-tempo-novi-ligure": {
     "anni": [

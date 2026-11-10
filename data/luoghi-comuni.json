@@ -246,7 +246,7 @@
  },
  "c-al-garbagna": {
   "comune": "Garbagna",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-gavi": {
@@ -451,7 +451,7 @@
  },
  "c-al-sale": {
   "comune": "Sale",
-  "n": 1,
+  "n": 2,
   "prov": "AL"
  },
  "c-al-san-giorgio": {
@@ -626,7 +626,7 @@
  },
  "c-at-castagnole-monferrato": {
   "comune": "Castagnole Monferrato",
-  "n": 2,
+  "n": 3,
   "prov": "AT"
  },
  "c-at-castel-boglione": {
@@ -1369,6 +1369,11 @@
   "n": 1,
   "prov": "CN"
  },
+ "c-cn-saliceto": {
+  "comune": "Saliceto",
+  "n": 1,
+  "prov": "CN"
+ },
  "c-cn-saluzzo": {
   "comune": "Saluzzo",
   "n": 4,
@@ -1411,7 +1416,7 @@
  },
  "c-cn-savigliano": {
   "comune": "Savigliano",
-  "n": 8,
+  "n": 9,
   "prov": "CN"
  },
  "c-cn-serralunga-d-alba": {
@@ -1506,7 +1511,7 @@
  },
  "c-cn-vinadio": {
   "comune": "Vinadio",
-  "n": 1,
+  "n": 2,
   "prov": "CN"
  },
  "c-cn-viola": {

@@ -1,250 +1,5 @@
 [
  {
-  "nome": "Letture ad alta voce - Storie avvolte nella nebbia del mistero",
-  "di": "09/11/2026",
-  "df": "09/11/2026",
-  "ora": "17:00",
-  "citta": "Castelnuovo Scrivia",
-  "prov": "AL",
-  "categoria": "Laboratorio",
-  "eta": "0-6 anni (da verificare)",
-  "prezzo": "Non indicato",
-  "descr": "Franca vi aspetta in biblioteca con letture ad alta voce e laboratori sul tema 'Storie avvolte nella nebbia del mistero'. Appuntamento rivolto ai bimbi dell'infanzia accompagnati. Prima data: lunedì 9 novembre 2026 alle ore 17:00.",
-  "manifest": "",
-  "loc": "daop_alessandria_4022162313995082950.webp",
-  "luogo": "Biblioteca Comunale Pier Angelo Soldini",
-  "indirizzo": "Biblioteca Comunale Pier Angelo Soldini - Castelnuovo Scrivia (AL)",
-  "d_start": "2026-11-09",
-  "d_end": "2026-11-09",
-  "contatto": "0131.826754 - biblioteca@comune.castelnuovoscrivia.al.it",
-  "consigliato": "No",
-  "lat": "44.9808006",
-  "lon": "8.8804053",
-  "anchor": "ev-2026-11-09-letture-ad-alta-voce-storie-avvolte-nella-nebbia-d"
- },
- {
-  "nome": "Nati per Leggere - Biblioteca Civica Comune di Magliano Alfieri",
-  "di": "09/11/2026",
-  "df": "09/11/2026",
-  "ora": "16:30",
-  "citta": "Magliano Alfieri",
-  "prov": "CN",
-  "categoria": "Cultura",
-  "eta": "0-6 anni (da verificare)",
-  "prezzo": "Non indicato",
-  "descr": "Appuntamento con Nati per Leggere, il programma nazionale di lettura ad alta voce per bambini in età prescolare. Incontro mensile del lunedì alle 16:30 presso la Biblioteca Civica di Magliano Alfieri, con la collaborazione del Comune.",
-  "manifest": "",
-  "loc": "daop_asti_4017363649852253517.webp",
-  "luogo": "Biblioteca Civica Comune di Magliano Alfieri",
-  "indirizzo": "Via IV Novembre 43 - Magliano Alfieri (CN)",
-  "d_start": "2026-11-09",
-  "d_end": "2026-11-09",
-  "consigliato": "No",
-  "lat": "44.7603234",
-  "lon": "8.0704243",
-  "anchor": "ev-2026-11-09-nati-per-leggere-biblioteca-civica-comune-di-magli"
- },
- {
-  "nome": "Silent Book Party",
-  "di": "09/11/2026",
-  "df": "09/11/2026",
-  "ora": "17:30-19:00",
-  "citta": "Piasco",
-  "prov": "CN",
-  "categoria": "Cultura",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Non indicato",
-  "descr": "Porta il libro che stai leggendo (o scegline uno in biblioteca), metti il telefono da parte e leggi. Non serve aver letto lo stesso libro degli altri: ci si immerge nelle proprie pagine, si conoscono altri lettori e si condivide un momento di lettura silenziosa.",
-  "manifest": "Silent Book Party",
-  "loc": "daop_cuneo_4001447708706060695.webp",
-  "luogo": "Biblioteca",
-  "indirizzo": "Biblioteca - Piasco (CN)",
-  "d_start": "2026-11-09",
-  "d_end": "2026-11-09",
-  "consigliato": "No",
-  "lat": "44.5784504",
-  "lon": "7.4582064",
-  "anchor": "ev-2026-11-09-silent-book-party"
- },
- {
-  "nome": "Leonardo da Vinci - Genio in Movimento",
-  "di": "01/01/2026",
-  "df": "28/02/2027",
-  "ora": "vari",
-  "citta": "Novi Ligure",
-  "prov": "AL",
-  "categoria": "Cultura",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Intero 10 € | Ridotto 8 € | Studenti 6 €",
-  "descr": "Mostra interattiva per tutta la famiglia dedicata alle invenzioni di Leonardo da Vinci. Espone 45 macchine e invenzioni, molte delle quali azionabili dai visitatori, tra macchine volanti, ingranaggi ed esperienze immersive. Presente un'area dedicata ai laboratori didattici.",
-  "manifest": "",
-  "loc": "daop_alessandria_4023532313167223213.webp",
-  "luogo": "Museo dei Campionissimi",
-  "indirizzo": "Museo dei Campionissimi - Novi Ligure (AL)",
-  "d_start": "2026-01-01",
-  "d_end": "2027-02-28",
-  "contatto": "museodeicampionissimi.it",
-  "consigliato": "No",
-  "lat": "44.7554907",
-  "lon": "8.7758364",
-  "anchor": "ev-2026-01-01-leonardo-da-vinci-genio-in-movimento"
- },
- {
-  "nome": "Io Ci Rigioco - Raccolta di giocattoli presso Area Sociale CRI",
-  "di": "07/10/2026",
-  "df": "30/11/2026",
-  "ora": "09:00-12:00",
-  "citta": "Vignole Borbera",
-  "prov": "AL",
-  "categoria": "Altro",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Gratuito",
-  "descr": "Raccolta di giocattoli usati in buone condizioni, per tutte le età. I giocattoli verranno sanificati e donati nel periodo natalizio a famiglie e bambini in difficoltà. Punto di raccolta: Area Sociale della CRI, Viale Torino (vicino al Comune), apertura il mercoledì, giovedì e venerdì dalle 9:00 alle 12:00.",
-  "manifest": "Io Ci Rigioco",
-  "loc": "daop_alessandria_4024211088548631095.webp",
-  "luogo": "Area Sociale della CRI di Vignole Borbera",
-  "indirizzo": "Viale Torino - Vignole Borbera (AL)",
-  "d_start": "2026-10-07",
-  "d_end": "2026-11-30",
-  "consigliato": "No",
-  "lat": "44.7087243",
-  "lon": "8.8897085",
-  "anchor": "ev-2026-10-07-io-ci-rigioco-raccolta-di-giocattoli-presso-area-s"
- },
- {
-  "nome": "Io Ci Rigioco - Raccolta di giocattoli presso Farmacia Di Matteo",
-  "di": "07/10/2026",
-  "df": "30/11/2026",
-  "ora": "vari",
-  "citta": "Vignole Borbera",
-  "prov": "AL",
-  "categoria": "Altro",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Gratuito",
-  "descr": "Raccolta di giocattoli usati in buone condizioni, per tutte le età. I giocattoli verranno sanificati e donati nel periodo natalizio a famiglie e bambini in difficoltà. Punto di raccolta: Farmacia Di Matteo, Viale Vochieri 6, negli orari di turno della farmacia.",
-  "manifest": "Io Ci Rigioco",
-  "loc": "daop_alessandria_4024211088548631095.webp",
-  "luogo": "Farmacia Di Matteo",
-  "indirizzo": "Viale Vochieri 6 - Vignole Borbera (AL)",
-  "d_start": "2026-10-07",
-  "d_end": "2026-11-30",
-  "consigliato": "No",
-  "lat": "44.7087243",
-  "lon": "8.8897085",
-  "anchor": "ev-2026-10-07-io-ci-rigioco-raccolta-di-giocattoli-presso-farmac"
- },
- {
-  "nome": "Concorso Fotografico Immagina il Tuo Natale",
-  "di": "01/11/2026",
-  "df": "20/11/2026",
-  "ora": "da verificare",
-  "citta": "Boves",
-  "prov": "CN",
-  "categoria": "Laboratorio",
-  "eta": "3-14 anni (da verificare)",
-  "prezzo": "Gratuito",
-  "descr": "Concorso fotografico a tema natalizio dedicato a bambini e ragazzi. Le foto devono essere consegnate presso la Biblioteca di Boves entro il 20 novembre, in formato minimo 20/30 cm lato lungo. Le foto verranno riconsegnate dopo la premiazione del 6 gennaio. In palio ricchi premi in buoni acquisto.",
-  "manifest": "",
-  "loc": "daop_cuneo_4023706100905724227.webp",
-  "luogo": "Biblioteca di Boves",
-  "indirizzo": "Biblioteca di Boves - Boves (CN)",
-  "d_start": "2026-11-01",
-  "d_end": "2026-11-20",
-  "contatto": "biblioteca@comune.boves.cn.it",
-  "consigliato": "No",
-  "lat": "44.2994897",
-  "lon": "7.5677018",
-  "anchor": "ev-2026-11-01-concorso-fotografico-immagina-il-tuo-natale"
- },
- {
-  "nome": "Pista di pattinaggio su ghiaccio di Asti",
-  "di": "01/11/2026",
-  "df": "15/02/2027",
-  "ora": "vari",
-  "citta": "Asti",
-  "prov": "AT",
-  "categoria": "Sport",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "A pagamento (da verificare)",
-  "descr": "Dal 1 novembre 2026 al 15 febbraio 2027, Piazza Statuto ad Asti ospita la tradizionale pista di pattinaggio su ghiaccio. La struttura è allestita con balaustre in legno e casetta per il noleggio pattini, aperta al pubblico con orari minimi: mattino festivo 9-12, pomeriggio 12-18 e sera 18-23. Disponibili attrezzature per principianti come i 'pinguini' e un impianto musicale.",
-  "manifest": "",
-  "loc": "daop_asti_4021411890177077793.webp",
-  "luogo": "Piazza Statuto",
-  "indirizzo": "Piazza Statuto - Asti (AT)",
-  "d_start": "2026-11-01",
-  "d_end": "2027-02-15",
-  "consigliato": "No",
-  "lat": "44.900542",
-  "lon": "8.2068876",
-  "anchor": "ev-2026-11-01-pista-di-pattinaggio-su-ghiaccio-di-asti"
- },
- {
-  "nome": "Gravity Circus - Connection",
-  "di": "06/11/2026",
-  "df": "22/11/2026",
-  "ora": "vari",
-  "citta": "Alessandria",
-  "prov": "AL",
-  "categoria": "Spettacolo",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Poltroncina 12€ (offerta lancio, invece di 30€)",
-  "descr": "Gravity Circus arriva ad Alessandria con 'Connection', il nuovo spettacolo 2026/2027. Sotto il grande tendone, artisti e protagonisti internazionali conducono il pubblico in un'esperienza ricca di emozione, adrenalina e meraviglia. Durata dello spettacolo: 120 minuti.",
-  "manifest": "",
-  "loc": "daop_alessandria_4021409713041429061.webp",
-  "luogo": "Viale Milite Ignoto",
-  "indirizzo": "Viale Milite Ignoto - Alessandria (AL)",
-  "d_start": "2026-11-06",
-  "d_end": "2026-11-22",
-  "consigliato": "No",
-  "lat": "44.9110327",
-  "lon": "8.6148186",
-  "anchor": "ev-2026-11-06-gravity-circus-connection"
- },
- {
-  "nome": "Luna Park - Fiera di Santa Caterina",
-  "di": "07/11/2026",
-  "df": "25/11/2026",
-  "ora": "vari",
-  "citta": "Novi Ligure",
-  "prov": "AL",
-  "categoria": "Sagra & Festa",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "A pagamento (da verificare)",
-  "descr": "Luna Park in Piazza Pernigotti nell'ambito della 418ª Fiera di S. Caterina di Novi Ligure. Giostre e attrazioni per tutta la famiglia dal 7 al 25 novembre 2026.",
-  "manifest": "418ª Fiera di S. Caterina 2026",
-  "loc": "daop_alessandria_4022923907083495948.webp",
-  "luogo": "Piazza Pernigotti",
-  "indirizzo": "Piazza Pernigotti - Novi Ligure (AL)",
-  "d_start": "2026-11-07",
-  "d_end": "2026-11-25",
-  "consigliato": "No",
-  "lat": "44.76085",
-  "lon": "8.789551",
-  "anchor": "ev-2026-11-07-luna-park-fiera-di-santa-caterina"
- },
- {
-  "nome": "Fiera dei Santi 2026",
-  "di": "08/11/2026",
-  "df": "09/11/2026",
-  "ora": "vari",
-  "citta": "San Damiano d'Asti",
-  "prov": "AT",
-  "categoria": "Sagra & Festa",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Ingresso libero",
-  "descr": "La Fiera dei Santi è uno degli appuntamenti più attesi dell'autunno astigiano e si svolge a San Damiano d'Asti l'8 e il 9 novembre. Tra le bancarelle del gran mercato commerciale nel Concentrico e l'esposizione di macchine agricole in Piazza 1275, non mancano la mostra mercato di animali di bassa corte al Baluardo Palestro e il Luna Park in Piazza Stefanizzi, ideale per i più piccoli. In Piazza Libertà si susseguono esibizioni di banda, majorettes e sbandieratori, mentre dal mezzogiorno è possibile fermarsi allo stand gastronomico del Comitato Palio e degustare i vini dell'Enoteca Regionale Colline Alfieri. Programma: 08/11 Esposizione Macchine Agricole e Gran Mercato Commerciale; 08/11 Mostra Mercato Animali di Bassa Corte; 08/11 Esibizione Banda Alfiera e Gruppo Majorettes Silver Girls (9:30); 08/11 Stand Gastronomico e Degustazione di Vini (12:30); 08/11 Esibizione Sbandieratori e Musici del Comitato Palio e Palestre Sandamianesi (15:30); 08/11 Luna Park; 09/11 Esposizione Macchine Agricole e Gran Mercato Commerciale (8:30-12:30).",
-  "manifest": "Fiera dei Santi 2026",
-  "loc": "daop_asti_4023520720117802768.webp",
-  "luogo": "Piazza 1275 e Concentrico",
-  "indirizzo": "Piazza 1275 - San Damiano d'Asti (AT)",
-  "d_start": "2026-11-08",
-  "d_end": "2026-11-09",
-  "consigliato": "No",
-  "lat": "44.833445",
-  "lon": "8.063534",
-  "anchor": "ev-2026-11-08-fiera-dei-santi-2026"
- },
- {
   "nome": "Filo di Mamme - Tutti a tavola! - Centro per le Famiglie Asti",
   "di": "10/11/2026",
   "df": "10/11/2026",
@@ -264,6 +19,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-10-filo-di-mamme-tutti-a-tavola-centro-per-le-famigli"
  },
  {
@@ -286,6 +42,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-10-fumettilab-con-dody"
  },
  {
@@ -309,6 +66,7 @@
   "consigliato": "No",
   "lat": "45.1362661",
   "lon": "8.4498127",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-10-kocho-farfalle-a-colori"
  },
  {
@@ -331,6 +89,7 @@
   "consigliato": "No",
   "lat": "44.5567073",
   "lon": "7.7374513",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-10-laboratorio-di-manga"
  },
  {
@@ -354,6 +113,7 @@
   "consigliato": "No",
   "lat": "44.6878448",
   "lon": "8.8853385",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-10-parliamone-insieme-centro-per-le-famiglie-villa-zu"
  },
  {
@@ -377,7 +137,171 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-10-storie-piccine-carezza"
+ },
+ {
+  "nome": "Io Ci Rigioco - Raccolta di giocattoli presso Area Sociale CRI",
+  "di": "07/10/2026",
+  "df": "30/11/2026",
+  "ora": "vari",
+  "citta": "Vignole Borbera",
+  "prov": "AL",
+  "categoria": "Altro",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Gratuito",
+  "descr": "Raccolta di giocattoli usati in buone condizioni, per tutte le età. I giocattoli verranno sanificati e donati nel periodo natalizio a famiglie e bambini in difficoltà. Punto di raccolta: Area Sociale della CRI, Viale Torino (vicino al Comune), apertura il mercoledì, giovedì e venerdì dalle 9:00 alle 12:00.",
+  "manifest": "Io Ci Rigioco",
+  "loc": "daop_alessandria_4024211088548631095.webp",
+  "luogo": "Area Sociale della CRI di Vignole Borbera",
+  "indirizzo": "Viale Torino - Vignole Borbera (AL)",
+  "d_start": "2026-10-07",
+  "d_end": "2026-11-30",
+  "consigliato": "No",
+  "lat": "44.7087243",
+  "lon": "8.8897085",
+  "festa": "nessuna",
+  "anchor": "ev-2026-10-07-io-ci-rigioco-raccolta-di-giocattoli-presso-area-s"
+ },
+ {
+  "nome": "Io Ci Rigioco - Raccolta di giocattoli presso Farmacia Di Matteo",
+  "di": "07/10/2026",
+  "df": "30/11/2026",
+  "ora": "vari",
+  "citta": "Vignole Borbera",
+  "prov": "AL",
+  "categoria": "Altro",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Gratuito",
+  "descr": "Raccolta di giocattoli usati in buone condizioni, per tutte le età. I giocattoli verranno sanificati e donati nel periodo natalizio a famiglie e bambini in difficoltà. Punto di raccolta: Farmacia Di Matteo, Viale Vochieri 6, negli orari di turno della farmacia.",
+  "manifest": "Io Ci Rigioco",
+  "loc": "daop_alessandria_4024211088548631095.webp",
+  "luogo": "Farmacia Di Matteo",
+  "indirizzo": "Viale Vochieri 6 - Vignole Borbera (AL)",
+  "d_start": "2026-10-07",
+  "d_end": "2026-11-30",
+  "consigliato": "No",
+  "lat": "44.7087243",
+  "lon": "8.8897085",
+  "festa": "nessuna",
+  "anchor": "ev-2026-10-07-io-ci-rigioco-raccolta-di-giocattoli-presso-farmac"
+ },
+ {
+  "nome": "Leonardo da Vinci - Genio in Movimento",
+  "di": "30/10/2026",
+  "df": "28/02/2027",
+  "ora": "vari",
+  "citta": "Novi Ligure",
+  "prov": "AL",
+  "categoria": "Cultura",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Intero 10 € | Ridotto 8 € | Studenti 6 €",
+  "descr": "Mostra interattiva per tutta la famiglia dedicata alle invenzioni di Leonardo da Vinci. Espone 45 macchine e invenzioni, molte delle quali azionabili dai visitatori, tra macchine volanti, ingranaggi ed esperienze immersive. Presente un'area dedicata ai laboratori didattici.",
+  "manifest": "",
+  "loc": "daop_alessandria_4023532313167223213.webp",
+  "luogo": "Museo dei Campionissimi",
+  "indirizzo": "Museo dei Campionissimi - Novi Ligure (AL)",
+  "d_start": "2026-10-30",
+  "d_end": "2027-02-28",
+  "contatto": "museodeicampionissimi.it",
+  "consigliato": "No",
+  "lat": "44.7554907",
+  "lon": "8.7758364",
+  "festa": "nessuna",
+  "anchor": "ev-2026-10-30-leonardo-da-vinci-genio-in-movimento"
+ },
+ {
+  "nome": "Concorso Fotografico Immagina il Tuo Natale",
+  "di": "01/11/2026",
+  "df": "20/11/2026",
+  "ora": "da verificare",
+  "citta": "Boves",
+  "prov": "CN",
+  "categoria": "Laboratorio",
+  "eta": "3-14 anni (da verificare)",
+  "prezzo": "Gratuito",
+  "descr": "Concorso fotografico a tema natalizio dedicato a bambini e ragazzi. Le foto devono essere consegnate presso la Biblioteca di Boves entro il 20 novembre, in formato minimo 20/30 cm lato lungo. Le foto verranno riconsegnate dopo la premiazione del 6 gennaio. In palio ricchi premi in buoni acquisto.",
+  "manifest": "",
+  "loc": "daop_cuneo_4023706100905724227.webp",
+  "luogo": "Biblioteca di Boves",
+  "indirizzo": "Biblioteca di Boves - Boves (CN)",
+  "d_start": "2026-11-01",
+  "d_end": "2026-11-20",
+  "contatto": "biblioteca@comune.boves.cn.it",
+  "consigliato": "No",
+  "lat": "44.2994897",
+  "lon": "7.5677018",
+  "festa": "natale",
+  "anchor": "ev-2026-11-01-concorso-fotografico-immagina-il-tuo-natale"
+ },
+ {
+  "nome": "Pista di pattinaggio su ghiaccio di Asti",
+  "di": "01/11/2026",
+  "df": "15/02/2027",
+  "ora": "vari",
+  "citta": "Asti",
+  "prov": "AT",
+  "categoria": "Sport",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "A pagamento (da verificare)",
+  "descr": "Dal 1 novembre 2026 al 15 febbraio 2027, Piazza Statuto ad Asti ospita la tradizionale pista di pattinaggio su ghiaccio. La struttura è allestita con balaustre in legno e casetta per il noleggio pattini, aperta al pubblico con orari minimi: mattino festivo 9-12, pomeriggio 12-18 e sera 18-23. Disponibili attrezzature per principianti come i 'pinguini' e un impianto musicale.",
+  "manifest": "",
+  "loc": "daop_asti_4021411890177077793.webp",
+  "luogo": "Piazza Statuto",
+  "indirizzo": "Piazza Statuto - Asti (AT)",
+  "d_start": "2026-11-01",
+  "d_end": "2027-02-15",
+  "consigliato": "No",
+  "lat": "44.900542",
+  "lon": "8.2068876",
+  "festa": "nessuna",
+  "anchor": "ev-2026-11-01-pista-di-pattinaggio-su-ghiaccio-di-asti"
+ },
+ {
+  "nome": "Gravity Circus - Connection",
+  "di": "06/11/2026",
+  "df": "22/11/2026",
+  "ora": "vari",
+  "citta": "Alessandria",
+  "prov": "AL",
+  "categoria": "Spettacolo",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Poltroncina 12€ (offerta lancio, invece di 30€)",
+  "descr": "Gravity Circus arriva ad Alessandria con 'Connection', il nuovo spettacolo 2026/2027. Sotto il grande tendone, artisti e protagonisti internazionali conducono il pubblico in un'esperienza ricca di emozione, adrenalina e meraviglia. Durata dello spettacolo: 120 minuti.",
+  "manifest": "",
+  "loc": "daop_alessandria_4021409713041429061.webp",
+  "luogo": "Viale Milite Ignoto",
+  "indirizzo": "Viale Milite Ignoto - Alessandria (AL)",
+  "d_start": "2026-11-06",
+  "d_end": "2026-11-22",
+  "consigliato": "No",
+  "lat": "44.9110327",
+  "lon": "8.6148186",
+  "festa": "nessuna",
+  "anchor": "ev-2026-11-06-gravity-circus-connection"
+ },
+ {
+  "nome": "Luna Park - Fiera di Santa Caterina",
+  "di": "07/11/2026",
+  "df": "25/11/2026",
+  "ora": "vari",
+  "citta": "Novi Ligure",
+  "prov": "AL",
+  "categoria": "Sagra & Festa",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "A pagamento (da verificare)",
+  "descr": "Luna Park in Piazza Pernigotti nell'ambito della 418ª Fiera di S. Caterina di Novi Ligure. Giostre e attrazioni per tutta la famiglia dal 7 al 25 novembre 2026.",
+  "manifest": "418ª Fiera di S. Caterina 2026",
+  "loc": "daop_alessandria_4022923907083495948.webp",
+  "luogo": "Piazza Pernigotti",
+  "indirizzo": "Piazza Pernigotti - Novi Ligure (AL)",
+  "d_start": "2026-11-07",
+  "d_end": "2026-11-25",
+  "consigliato": "No",
+  "lat": "44.76085",
+  "lon": "8.789551",
+  "festa": "nessuna",
+  "anchor": "ev-2026-11-07-luna-park-fiera-di-santa-caterina"
  },
  {
   "nome": "Adulti connessi: come lo smartphone impatta sulla qualità delle relazioni - Connessi con Cura",
@@ -400,6 +324,7 @@
   "consigliato": "No",
   "lat": "44.8840488",
   "lon": "8.858816",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-adulti-connessi-come-lo-smartphone-impatta-sulla-q"
  },
  {
@@ -423,6 +348,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-da-mamma-a-mamma-carezza"
  },
  {
@@ -445,6 +371,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-favolando-mini-letture-per-bebe"
  },
  {
@@ -468,6 +395,7 @@
   "consigliato": "No",
   "lat": "44.3243071",
   "lon": "7.3033518",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-laboratorio-di-manga-palestr3-giovani"
  },
  {
@@ -490,6 +418,7 @@
   "consigliato": "No",
   "lat": "44.7797675",
   "lon": "8.9972855",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-lanternata-di-san-martino-talea-aps"
  },
  {
@@ -513,6 +442,7 @@
   "consigliato": "No",
   "lat": "44.6143972",
   "lon": "7.4828028",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-torneo-di-calcetto-centro-aggregativo-manta"
  },
  {
@@ -535,6 +465,7 @@
   "consigliato": "No",
   "lat": "44.6898889",
   "lon": "8.5619212",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-tradizionale-raviolata-trattoria-quattro-ruote"
  },
  {
@@ -558,6 +489,7 @@
   "consigliato": "No",
   "lat": "44.7606",
   "lon": "8.7897",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-11-un-mondo-di-mattoncini-centro-per-le-famiglie-vill"
  },
  {
@@ -581,6 +513,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-bibliobebe-con-valentina-radici-semi-e-parole"
  },
  {
@@ -604,6 +537,7 @@
   "consigliato": "No",
   "lat": "44.5493489",
   "lon": "7.7250155",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-il-magico-tappeto-di-foglie-centro-famiglie-fossan"
  },
  {
@@ -626,6 +560,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-minichef-con-elena"
  },
  {
@@ -648,6 +583,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-musica-con-mamma-e-papa-0-3-anni-centro-per-le-fam"
  },
  {
@@ -670,6 +606,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-musica-con-mamma-e-papa-3-6-anni-centro-per-le-fam"
  },
  {
@@ -693,6 +630,7 @@
   "consigliato": "No",
   "lat": "44.6865702",
   "lon": "8.8857724",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-prepararsi-al-parto-centro-per-le-famiglie-villa-z"
  },
  {
@@ -716,6 +654,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-rabbia-pianti-e-porte-sbattute-centro-per-le-famig"
  },
  {
@@ -739,6 +678,7 @@
   "consigliato": "No",
   "lat": "44.4168706",
   "lon": "8.1839222",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-12-storie-in-valigia"
  },
  {
@@ -751,7 +691,7 @@
   "categoria": "Sagra & Festa",
   "eta": "Tutte le età (famiglie)",
   "prezzo": "Ingresso libero",
-  "descr": "La Fiera di Santa Caterina è uno degli appuntamenti tradizionali di Acqui Terme e anima la città dal 13 al 22 novembre 2026. Per tutta la durata della manifestazione, il Luna Park allestito all'Ex Caserma di Piazza Don Dolermo offre attrazioni e divertimento per grandi e piccini. Il tradizionale mercato fieristico porta invece bancarelle e curiosità nel cuore del centro cittadino, lungo Corso Cavour, Corso Dante, Piazza Italia, Via XX Settembre e Corso Bagni fino a Ponte Carlo Alberto. Programma: 13/11 Luna Park - Fiera di Santa Caterina; 15/11 Mercato - Fiera di Santa Caterina.",
+  "descr": "La Fiera di Santa Caterina è uno degli appuntamenti tradizionali di Acqui Terme. Dal 13 al 22 novembre 2026 il Luna Park allestito all'Ex Caserma di Piazza Don Dolermo offre attrazioni e divertimento per grandi e piccini. Dal 15 al 17 novembre il tradizionale mercato fieristico porta bancarelle e curiosità nel centro, lungo Corso Cavour, Corso Dante, Piazza Italia, Via XX Settembre e Corso Bagni fino a Ponte Carlo Alberto. Programma: 13/11 Apre il Luna Park all'Ex Caserma; 15/11 Mercato fieristico in centro; 16/11 Mercato fieristico in centro; 17/11 Mercato fieristico in centro.",
   "manifest": "Fiera di Santa Caterina",
   "loc": "daop_alessandria_4023693137722504672.webp",
   "luogo": "Ex Caserma - Piazza Don Dolermo",
@@ -761,6 +701,7 @@
   "consigliato": "No",
   "lat": "44.6740198",
   "lon": "8.4726563",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-ex-caserma-piazza-don-dolermo-fiera-di-santa-cater"
  },
  {
@@ -783,6 +724,7 @@
   "consigliato": "No",
   "lat": "44.651555",
   "lon": "8.0265432",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-fera-d-dian-2026"
  },
  {
@@ -805,6 +747,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-festa-del-bambino"
  },
  {
@@ -828,6 +771,7 @@
   "consigliato": "No",
   "lat": "44.6494634",
   "lon": "7.6707274",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-game-on-centro-famiglie-e-ludoteca-la-casa-sull-al"
  },
  {
@@ -840,8 +784,8 @@
   "categoria": "Sagra & Festa",
   "eta": "Tutte le età (famiglie)",
   "prezzo": "Ingresso libero",
-  "descr": "Dal 13 novembre al 20 dicembre 2026, Piazza Alfieri ad Asti ospita il Magico Paese di Natale, il villaggio natalizio che anima il centro cittadino con attrazioni e atmosfera festosa. L'evento richiama una notevole affluenza di visitatori. Per l'intero periodo sono in vigore specifiche misure di regolazione della viabilità nell'area.",
-  "manifest": "",
+  "descr": "Oltre 150 casette dedicate ad artigianato, decorazioni, idee regalo e street food in Piazza Alfieri, insieme ad animazioni e iniziative per grandi e piccoli. Accesso al mercatino gratuito. 20ª edizione del Magico Paese di Natale di Asti.",
+  "manifest": "Magico Paese di Natale 2026",
   "loc": "daop_asti_4021411890093169899.webp",
   "luogo": "Piazza Alfieri",
   "indirizzo": "Piazza Alfieri - Asti (AT)",
@@ -850,6 +794,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-13-il-magico-paese-di-natale-2026"
  },
  {
@@ -872,6 +817,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "natale",
   "anchor": "ev-2026-11-13-inaugurazione-magico-paese-di-natale-mille-voci-pe"
  },
  {
@@ -895,6 +841,7 @@
   "consigliato": "No",
   "lat": "44.7615317",
   "lon": "7.9832871",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-io-sono-un-artista-crome-in-movimento-aps"
  },
  {
@@ -917,6 +864,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-libri-che-uniscono-una-comunita-che-cresce-asilo-s"
  },
  {
@@ -939,6 +887,7 @@
   "consigliato": "No",
   "lat": "44.9007",
   "lon": "8.2068",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-mani-in-pasta-costruisci-il-tuo-mondo-3d-musei-di"
  },
  {
@@ -961,6 +910,7 @@
   "consigliato": "No",
   "lat": "44.7733095",
   "lon": "8.353709",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-nutrire-un-bambino-dopo-i-primi-mesi"
  },
  {
@@ -984,6 +934,7 @@
   "consigliato": "No",
   "lat": "44.6143972",
   "lon": "7.4828028",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-pomeriggio-della-gentilezza-centro-aggregativo-man"
  },
  {
@@ -1006,6 +957,7 @@
   "consigliato": "No",
   "lat": "44.3260753",
   "lon": "7.4796989",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-13-wow-winter-outdoor-weekend-fiera-della-montagna-en"
  },
  {
@@ -1028,6 +980,7 @@
   "consigliato": "No",
   "lat": "44.9450557",
   "lon": "8.4874079",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-a-tutto-gas-giochiamo-con-i-mezzi-di-trasporto"
  },
  {
@@ -1051,6 +1004,7 @@
   "consigliato": "No",
   "lat": "44.8352031",
   "lon": "8.6256506",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-1-fiera-del-cavolo-di-san-giovanni"
  },
  {
@@ -1074,6 +1028,7 @@
   "consigliato": "No",
   "lat": "44.4174947",
   "lon": "7.4278882",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-aj-a-caraj-2026"
  },
  {
@@ -1097,6 +1052,7 @@
   "consigliato": "No",
   "lat": "44.3260753",
   "lon": "7.4796989",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-borgo-orienteering-wow-winter-outdoor-weekend"
  },
  {
@@ -1120,6 +1076,7 @@
   "consigliato": "No",
   "lat": "44.3885927",
   "lon": "7.8297855",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-dal-giappone-a-mondovi-laboratorio-di-fumetto"
  },
  {
@@ -1143,6 +1100,7 @@
   "consigliato": "No",
   "lat": "44.6002174",
   "lon": "7.480348",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-dal-seme-all-albero-laboratorio-di-lettura-ad-alta"
  },
  {
@@ -1155,7 +1113,7 @@
   "categoria": "Sagra & Festa",
   "eta": "Tutte le età (famiglie)",
   "prezzo": "Non indicato",
-  "descr": "La Fiera di Santa Caterina torna ad Acqui Terme per quattro giorni di festa, dal 14 al 17 novembre. In piazza è protagonista la polentata, con polenta concia, al ragù e con spezzatino abbinata a vino rosso, disponibile anche da asporto e a pranzo. Nel pomeriggio i più piccoli possono divertirsi con giochi e truccabimbi, mentre il fine settimana si animano con un flash mob in Piazza Italia. Programma: 14/11 Giochi e Truccabimbi - CuoreGiovane APS (17:00); 14/11 Flash Mob - ASD The Artis (17:00); 14/11 Polentata - Acquieventi APS.",
+  "descr": "La Fiera di Santa Caterina torna ad Acqui Terme e Piazza Italia si riempie di polenta: concia, al ragù e con spezzatino, abbinata a un buon vino rosso, anche da asporto. Si comincia sabato 14 alle 18 e poi tutti i giorni fino al 17, anche a pranzo. Sabato pomeriggio i più piccoli hanno giochi e truccabimbi, e sabato e domenica alle 17 c'è un flash mob in piazza. Programma: 14/11 Giochi e truccabimbi (17:00); 14/11 Flash mob (17:00); 14/11 Polentata (dalle 18:00); 15/11 Flash mob (17:00); 15/11 Polentata, anche a pranzo; 16/11 Polentata, anche a pranzo; 17/11 Polentata, anche a pranzo.",
   "manifest": "Fiera di Santa Caterina",
   "loc": "daop_alessandria_4013046144573174096.webp",
   "luogo": "Piazza Italia",
@@ -1166,6 +1124,7 @@
   "consigliato": "No",
   "lat": "44.6740198",
   "lon": "8.4726563",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-fiera-di-santa-caterina"
  },
  {
@@ -1189,6 +1148,7 @@
   "consigliato": "No",
   "lat": "44.9110327",
   "lon": "8.6148186",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-giocare-per-crescere-giochi-motori-e-creativi-yo-y"
  },
  {
@@ -1212,6 +1172,7 @@
   "consigliato": "No",
   "lat": "44.6408617",
   "lon": "7.6640568",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-il-treno-dell-autunno-museo-ferroviario-piemontese"
  },
  {
@@ -1234,6 +1195,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-incontro-di-gruppo-con-lo-psicologo-centro-per-le"
  },
  {
@@ -1257,30 +1219,8 @@
   "consigliato": "No",
   "lat": "44.4988942",
   "lon": "7.5348735",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-laboratorio-funzioni-esecutive-t-centro-tarantasca"
- },
- {
-  "nome": "Le Letture in Biblioteca - San Martino",
-  "di": "14/11/2026",
-  "df": "14/11/2026",
-  "ora": "10:00-11:30",
-  "citta": "Pasturana",
-  "prov": "AL",
-  "categoria": "Cultura",
-  "eta": "3-10 anni (da verificare)",
-  "prezzo": "Non indicato",
-  "descr": "La Biblioteca Comunale E. Arecco invita i bambini della scuola dell'infanzia e primaria per un appuntamento di letture animate. Il tema di questo sabato è 'San Martino'. Iniziativa nell'ambito del programma Nati per Leggere.",
-  "manifest": "Le Letture in Biblioteca",
-  "loc": "daop_alessandria_4024985339585320592.webp",
-  "luogo": "Biblioteca Comunale E. Arecco",
-  "indirizzo": "Biblioteca Comunale E. Arecco - Pasturana (AL)",
-  "d_start": "2026-11-14",
-  "d_end": "2026-11-14",
-  "contatto": "biblioteca@comune.pasturana.al.it / 3383842579",
-  "consigliato": "No",
-  "lat": "44.7500018",
-  "lon": "8.7457524",
-  "anchor": "ev-2026-11-14-le-letture-in-biblioteca-san-martino"
  },
  {
   "nome": "Le letture in biblioteca: San Martino - Biblioteca di Pasturana Eugenio Arecco",
@@ -1294,7 +1234,7 @@
   "prezzo": "Gratuito",
   "descr": "Mattinata di letture ad alta voce dedicata a San Martino, per i bambini della scuola dell'infanzia e primaria. Appuntamento in biblioteca, presso il Comune di Pasturana, dalle 10:00 alle 11:30. In collaborazione con Nati per Leggere.",
   "manifest": "Le letture in biblioteca 2026",
-  "loc": "",
+  "loc": "daop_alessandria_4024985339585320592.webp",
   "luogo": "Biblioteca di Pasturana Eugenio Arecco",
   "indirizzo": "Via Roma 1 - Pasturana (AL)",
   "d_start": "2026-11-14",
@@ -1303,29 +1243,8 @@
   "consigliato": "No",
   "lat": "44.7508565",
   "lon": "8.749035282",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-le-letture-in-biblioteca-san-martino-biblioteca-di"
- },
- {
-  "nome": "Mercatini di Natale - Magico Paese di Natale",
-  "di": "14/11/2026",
-  "df": "20/12/2026",
-  "ora": "vari",
-  "citta": "Asti",
-  "prov": "AT",
-  "categoria": "Mercato",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Gratuito",
-  "descr": "Oltre 150 casette dedicate ad artigianato, decorazioni, idee regalo e street food in Piazza Alfieri, insieme ad animazioni e iniziative per grandi e piccoli. Accesso al mercatino gratuito. 20ª edizione del Magico Paese di Natale di Asti.",
-  "manifest": "Magico Paese di Natale 2026",
-  "loc": "daop_asti_4024463930679235119.webp",
-  "luogo": "Piazza Alfieri",
-  "indirizzo": "Piazza Alfieri - Asti (AT)",
-  "d_start": "2026-11-14",
-  "d_end": "2026-12-20",
-  "consigliato": "No",
-  "lat": "44.900542",
-  "lon": "8.2068876",
-  "anchor": "ev-2026-11-14-mercatini-di-natale-magico-paese-di-natale"
  },
  {
   "nome": "Mettiamoci in Gioco da 10 a 99 Anni - Culdür Ferun",
@@ -1347,6 +1266,7 @@
   "consigliato": "No",
   "lat": "44.3885927",
   "lon": "7.8297855",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-mettiamoci-in-gioco-da-10-a-99-anni-culdur-ferun"
  },
  {
@@ -1369,6 +1289,7 @@
   "consigliato": "No",
   "lat": "44.901746",
   "lon": "7.964331",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-mi-leggi-una-storia-biblioteca-civica-di-valfenera"
  },
  {
@@ -1391,6 +1312,7 @@
   "consigliato": "No",
   "lat": "44.6621382",
   "lon": "7.7291058",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-multisensoriale-in-biblioteca-turno-famiglia-ore-1"
  },
  {
@@ -1413,6 +1335,7 @@
   "consigliato": "No",
   "lat": "44.6621382",
   "lon": "7.7291058",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-multisensoriale-in-biblioteca-turno-famiglia-ore-1-2"
  },
  {
@@ -1436,6 +1359,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-occhi-in-gioco-carezza"
  },
  {
@@ -1458,6 +1382,7 @@
   "consigliato": "No",
   "lat": "44.901746",
   "lon": "7.964331",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-open-school-scuola-primaria-valfenera-e-san-paolo"
  },
  {
@@ -1480,6 +1405,7 @@
   "consigliato": "No",
   "lat": "44.9418888",
   "lon": "7.9375025",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-open-school-scuola-primaria-villanova-capoluogo-is"
  },
  {
@@ -1502,6 +1428,7 @@
   "consigliato": "No",
   "lat": "44.6143972",
   "lon": "7.4828028",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-san-martino-tra-storie-luci-e-passi"
  },
  {
@@ -1525,6 +1452,7 @@
   "consigliato": "No",
   "lat": "44.9808006",
   "lon": "8.8804053",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-ti-presento-il-gatto-comune-di-castelnuovo-scrivia"
  },
  {
@@ -1548,6 +1476,7 @@
   "consigliato": "No",
   "lat": "44.7613607",
   "lon": "8.782713",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-un-bosco-a-tutto-ritmo-settimana-nazionale-nati-pe"
  },
  {
@@ -1570,6 +1499,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-un-tappeto-di-storie-centro-per-le-famiglie-asti"
  },
  {
@@ -1593,6 +1523,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-una-serata-tutta-per-voi-con-anima-bimbi-carezza"
  },
  {
@@ -1615,6 +1546,7 @@
   "consigliato": "No",
   "lat": "44.3897173",
   "lon": "7.8287636",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-14-vieni-anche-tu-biblioteca-civica"
  },
  {
@@ -1638,6 +1570,7 @@
   "consigliato": "No",
   "lat": "44.6654999",
   "lon": "8.7253292",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-castagnata-di-san-martino-pro-loco-montaldeo"
  },
  {
@@ -1660,6 +1593,7 @@
   "consigliato": "No",
   "lat": "44.734649",
   "lon": "8.731251",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-con-le-mani-tra-foglie-e-castagne-art-lab"
  },
  {
@@ -1683,6 +1617,7 @@
   "consigliato": "No",
   "lat": "44.8573468",
   "lon": "8.1223923",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-crescere-bambine-consapevoli-educazione-sessuo-aff"
  },
  {
@@ -1705,6 +1640,7 @@
   "consigliato": "No",
   "lat": "44.7350776",
   "lon": "8.8372996",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-dance-show-punteacapo-studio-danza"
  },
  {
@@ -1727,6 +1663,7 @@
   "consigliato": "No",
   "lat": "44.9378628",
   "lon": "8.3437219",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-festa-dei-ceci-shopping-a-gogo-pro-loco-refrancore"
  },
  {
@@ -1750,6 +1687,7 @@
   "consigliato": "No",
   "lat": "44.7931826",
   "lon": "7.7115768",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-gita-cicloturistica-al-bosco-del-merlino-e-sulle-c"
  },
  {
@@ -1773,6 +1711,7 @@
   "consigliato": "No",
   "lat": "44.9110327",
   "lon": "8.6148186",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-il-lungo-viaggio-di-ulisse-in-7-tappe-associazione"
  },
  {
@@ -1796,6 +1735,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-megalodonte-il-mare-del-monferrato-e-i-suoi-abitan"
  },
  {
@@ -1819,6 +1759,7 @@
   "consigliato": "No",
   "lat": "44.3648103",
   "lon": "7.6534364",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-mercatino-delle-pulci-pro-loco-beinette"
  },
  {
@@ -1842,6 +1783,7 @@
   "consigliato": "No",
   "lat": "44.9447112",
   "lon": "8.0342714",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-15-san-martin-giornata-del-ringraziamento"
  },
  {
@@ -1864,6 +1806,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-16-oltre-le-parole-centro-per-le-famiglie-asti"
  },
  {
@@ -1887,6 +1830,7 @@
   "consigliato": "No",
   "lat": "44.9808006",
   "lon": "8.8804053",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-16-the-little-book-club-comune-di-castelnuovo-scrivia"
  },
  {
@@ -1910,6 +1854,7 @@
   "consigliato": "No",
   "lat": "44.885",
   "lon": "8.698",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-16-tracce-d-autunno-centro-gioco-il-bianconiglio"
  },
  {
@@ -1933,6 +1878,7 @@
   "consigliato": "No",
   "lat": "44.9118791",
   "lon": "8.9834301",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-17-la-biblioteca-per-i-piu-piccoli"
  },
  {
@@ -1956,6 +1902,7 @@
   "consigliato": "No",
   "lat": "44.8840488",
   "lon": "8.858816",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-17-la-fattoria-in-biblioteca"
  },
  {
@@ -1978,6 +1925,7 @@
   "consigliato": "No",
   "lat": "44.5567073",
   "lon": "7.7374513",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-17-laboratorio-di-manga"
  },
  {
@@ -2001,6 +1949,7 @@
   "consigliato": "No",
   "lat": "44.7613607",
   "lon": "8.782713",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-17-le-avventure-della-famiglia-catastrofino-il-profes"
  },
  {
@@ -2023,6 +1972,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-17-uncinetto-lab-con-ivana"
  },
  {
@@ -2046,6 +1996,7 @@
   "consigliato": "No",
   "lat": "44.6143972",
   "lon": "7.4828028",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-attivita-giochi-al-centro-centro-aggregativo-manta"
  },
  {
@@ -2069,6 +2020,7 @@
   "consigliato": "No",
   "lat": "44.7606",
   "lon": "8.7897",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-corso-di-primo-soccorso-pediatrico"
  },
  {
@@ -2091,6 +2043,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-favolando-mini-letture-per-bebe"
  },
  {
@@ -2113,6 +2066,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-festa-del-bambino"
  },
  {
@@ -2136,6 +2090,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-gioco-destrutturato-carezza"
  },
  {
@@ -2159,6 +2114,7 @@
   "consigliato": "No",
   "lat": "44.6621382",
   "lon": "7.7291058",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-l-albero-terravia-vanessa-barile"
  },
  {
@@ -2182,6 +2138,7 @@
   "consigliato": "No",
   "lat": "44.3243071",
   "lon": "7.3033518",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-laboratorio-di-manga-palestr3-giovani"
  },
  {
@@ -2204,6 +2161,7 @@
   "consigliato": "No",
   "lat": "44.7733095",
   "lon": "8.353709",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-18-quando-venere-diventa-luna"
  },
  {
@@ -2227,6 +2185,7 @@
   "consigliato": "No",
   "lat": "44.985156",
   "lon": "8.8087218",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-19-autunno-in-biblioteca"
  },
  {
@@ -2249,6 +2208,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-19-bibliochef-con-elena"
  },
  {
@@ -2271,6 +2231,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-19-colori-da-gustare-centro-per-le-famiglie-asti"
  },
  {
@@ -2293,6 +2254,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-19-giornata-dell-inclusione"
  },
  {
@@ -2316,6 +2278,7 @@
   "consigliato": "No",
   "lat": "44.6865702",
   "lon": "8.8857724",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-19-nutrire-leggere-e-respirare-centro-per-le-famiglie"
  },
  {
@@ -2339,6 +2302,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-19-rabbia-pianti-e-porte-sbattute-centro-per-le-famig"
  },
  {
@@ -2361,6 +2325,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-19-un-giochino-per-ogni-bambino-piazza-xx-settembre"
  },
  {
@@ -2383,6 +2348,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-20-creolab-games"
  },
  {
@@ -2406,6 +2372,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-20-espressione-in-gioco-carezza"
  },
  {
@@ -2429,6 +2396,7 @@
   "consigliato": "No",
   "lat": "44.6143972",
   "lon": "7.4828028",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-20-laboratorio-di-cucina-centro-aggregativo-manta"
  },
  {
@@ -2451,6 +2419,7 @@
   "consigliato": "No",
   "lat": "44.3941723",
   "lon": "7.549982",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-20-my-cup-of-tea"
  },
  {
@@ -2474,6 +2443,7 @@
   "consigliato": "No",
   "lat": "44.6446052",
   "lon": "7.4926009",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-20-open-officina-spazio-aggregativo"
  },
  {
@@ -2497,6 +2467,7 @@
   "consigliato": "No",
   "lat": "44.644037",
   "lon": "7.655929",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-20-shh-il-bosco-si-e-addormentato"
  },
  {
@@ -2519,6 +2490,7 @@
   "consigliato": "No",
   "lat": "44.5661954",
   "lon": "7.4566022",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-20-venerdi-dei-giochi-in-scatola-biblioteca-di-piasco"
  },
  {
@@ -2541,7 +2513,32 @@
   "consigliato": "No",
   "lat": "44.9450557",
   "lon": "8.4874079",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-arte-in-gioco-laboratorio-creativo"
+ },
+ {
+  "nome": "Accensione dell'Albero e delle luminarie di Natale con Willy Wonka",
+  "di": "21/11/2026",
+  "df": "21/11/2026",
+  "ora": "17:30",
+  "citta": "Acqui Terme",
+  "prov": "AL",
+  "categoria": "Sagra & Festa",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Ingresso libero",
+  "descr": "Acqui Terme accende il Natale: in Piazza Italia si illuminano l'albero e le luminarie della città, e a fare gli onori di casa c'è Willy Wonka.",
+  "manifest": "",
+  "loc": "daop_alessandria_acqui_calendario_20261110.webp",
+  "luogo": "Piazza Italia",
+  "indirizzo": "Piazza Italia - Acqui Terme (AL)",
+  "d_start": "2026-11-21",
+  "d_end": "2026-11-21",
+  "contatto": "IAT 0144 322142 - iat@comune.acquiterme.al.it",
+  "consigliato": "No",
+  "lat": "44.6740198",
+  "lon": "8.4726563",
+  "festa": "natale",
+  "anchor": "ev-2026-11-21-accensione-dell-albero-e-delle-luminarie-di-natale"
  },
  {
   "nome": "Albert Einstein - E = mc²: un universo di idee!",
@@ -2564,6 +2561,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-albert-einstein-e-mc2-un-universo-di-idee"
  },
  {
@@ -2587,7 +2585,32 @@
   "consigliato": "No",
   "lat": "44.6112926",
   "lon": "7.2841315",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-autunno-a-brossasco-laboratori-ludico-creativi"
+ },
+ {
+  "nome": "Caff&Libro Junior - Raccontami una storia",
+  "di": "21/11/2026",
+  "df": "21/11/2026",
+  "ora": "15:30",
+  "citta": "Acqui Terme",
+  "prov": "AL",
+  "categoria": "Cultura",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Non indicato",
+  "descr": "«Raccontami una storia»: il pomeriggio di Caff&Libro dedicato ai più piccoli, con storie da ascoltare nella sala ex Kaimano.",
+  "manifest": "",
+  "loc": "daop_alessandria_acqui_calendario_20261110.webp",
+  "luogo": "Sala Ex Kaimano",
+  "indirizzo": "Via Maggiorino Ferraris - Acqui Terme (AL)",
+  "d_start": "2026-11-21",
+  "d_end": "2026-11-21",
+  "contatto": "IAT 0144 322142 - iat@comune.acquiterme.al.it",
+  "consigliato": "No",
+  "lat": "44.6781349",
+  "lon": "8.4667455",
+  "festa": "nessuna",
+  "anchor": "ev-2026-11-21-caff-libro-junior-raccontami-una-storia"
  },
  {
   "nome": "Che Forte Natale - Mercatino",
@@ -2609,6 +2632,7 @@
   "consigliato": "No",
   "lat": "44.3088861",
   "lon": "7.1728098",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-21-che-forte-natale-mercatino"
  },
  {
@@ -2632,6 +2656,7 @@
   "consigliato": "No",
   "lat": "44.3885927",
   "lon": "7.8297855",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-dal-giappone-a-mondovi-laboratorio-di-fumetto"
  },
  {
@@ -2655,6 +2680,7 @@
   "consigliato": "No",
   "lat": "44.9110327",
   "lon": "8.6148186",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-giocare-per-crescere-giochi-motori-e-creativi-yo-y"
  },
  {
@@ -2678,6 +2704,7 @@
   "consigliato": "No",
   "lat": "44.728549",
   "lon": "8.771552",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-giornata-dell-infanzia-non-calpestare-i-sogni-6a-e"
  },
  {
@@ -2700,6 +2727,7 @@
   "consigliato": "No",
   "lat": "44.9007",
   "lon": "8.2068",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-giornata-internazionale-dei-diritti-dei-bambini-le"
  },
  {
@@ -2723,6 +2751,7 @@
   "consigliato": "No",
   "lat": "44.7613607",
   "lon": "8.782713",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-il-gran-borbottante-laboratorio-a-cura-di-sergio-c"
  },
  {
@@ -2745,6 +2774,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-il-viaggio-nel-tempo-edutainment"
  },
  {
@@ -2768,6 +2798,7 @@
   "consigliato": "No",
   "lat": "44.728549",
   "lon": "8.771552",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-invito-alla-festa-giornata-internazionale-dei-diri"
  },
  {
@@ -2791,6 +2822,7 @@
   "consigliato": "No",
   "lat": "44.3885927",
   "lon": "7.8297855",
+  "festa": "natale",
   "anchor": "ev-2026-11-21-la-camminata-dei-babbi-natale-asilo-infantile-don"
  },
  {
@@ -2813,6 +2845,7 @@
   "consigliato": "No",
   "lat": "44.4283545",
   "lon": "7.6929081",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-la-festa-degli-alberi-go-green"
  },
  {
@@ -2836,30 +2869,8 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-le-letture-del-sabato-in-biblioteca-biblioteca-civ"
- },
- {
-  "nome": "Le Letture in Biblioteca - Le Ombre",
-  "di": "21/11/2026",
-  "df": "21/11/2026",
-  "ora": "10:00-11:30",
-  "citta": "Pasturana",
-  "prov": "AL",
-  "categoria": "Cultura",
-  "eta": "3-10 anni (da verificare)",
-  "prezzo": "Non indicato",
-  "descr": "La Biblioteca Comunale E. Arecco invita i bambini della scuola dell'infanzia e primaria per un appuntamento di letture animate. Il tema di questo sabato è 'Le Ombre'. Iniziativa nell'ambito del programma Nati per Leggere.",
-  "manifest": "Le Letture in Biblioteca",
-  "loc": "daop_alessandria_4024985339585320592.webp",
-  "luogo": "Biblioteca Comunale E. Arecco",
-  "indirizzo": "Biblioteca Comunale E. Arecco - Pasturana (AL)",
-  "d_start": "2026-11-21",
-  "d_end": "2026-11-21",
-  "contatto": "biblioteca@comune.pasturana.al.it / 3383842579",
-  "consigliato": "No",
-  "lat": "44.7500018",
-  "lon": "8.7457524",
-  "anchor": "ev-2026-11-21-le-letture-in-biblioteca-le-ombre"
  },
  {
   "nome": "Le letture in biblioteca: Le Ombre - Biblioteca di Pasturana Eugenio Arecco",
@@ -2873,7 +2884,7 @@
   "prezzo": "Gratuito",
   "descr": "Mattinata di letture ad alta voce dedicata alle ombre, per i bambini della scuola dell'infanzia e primaria. Appuntamento in biblioteca, presso il Comune di Pasturana, dalle 10:00 alle 11:30. In collaborazione con Nati per Leggere.",
   "manifest": "Le letture in biblioteca 2026",
-  "loc": "",
+  "loc": "daop_alessandria_4024985339585320592.webp",
   "luogo": "Biblioteca di Pasturana Eugenio Arecco",
   "indirizzo": "Via Roma 1 - Pasturana (AL)",
   "d_start": "2026-11-21",
@@ -2882,6 +2893,7 @@
   "consigliato": "No",
   "lat": "44.7508565",
   "lon": "8.749035282",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-le-letture-in-biblioteca-le-ombre-biblioteca-di-pa"
  },
  {
@@ -2905,6 +2917,7 @@
   "consigliato": "No",
   "lat": "44.6112926",
   "lon": "7.2841315",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-mattinata-di-giochi-sportivi-ed-attivita-in-movime"
  },
  {
@@ -2927,6 +2940,7 @@
   "consigliato": "No",
   "lat": "44.8492328",
   "lon": "8.2184747",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-mr-book-biblioteca-civica-don-alfredo-bianco-monga"
  },
  {
@@ -2949,6 +2963,7 @@
   "consigliato": "No",
   "lat": "44.6621382",
   "lon": "7.7291058",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-multisensoriale-in-biblioteca-genitori-e-bambini-0"
  },
  {
@@ -2971,6 +2986,7 @@
   "consigliato": "No",
   "lat": "44.6621382",
   "lon": "7.7291058",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-multisensoriale-in-biblioteca-genitori-e-bambini-1"
  },
  {
@@ -2994,7 +3010,32 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-occhi-in-gioco-carezza"
+ },
+ {
+  "nome": "Open Day - ToBE Together",
+  "di": "21/11/2026",
+  "df": "21/11/2026",
+  "ora": "10:00-12:00",
+  "citta": "Acqui Terme",
+  "prov": "AL",
+  "categoria": "Laboratorio",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Gratuito",
+  "descr": "Mattinata di porte aperte alla scuola ToBE Together: si visitano gli spazi e si conosce la proposta per bambini e ragazzi.",
+  "manifest": "",
+  "loc": "daop_alessandria_acqui_calendario_20261110.webp",
+  "luogo": "ToBE Together Acqui Terme",
+  "indirizzo": "Via Don Bosco 6 - Acqui Terme (AL)",
+  "d_start": "2026-11-21",
+  "d_end": "2026-11-21",
+  "contatto": "IAT 0144 322142 - iat@comune.acquiterme.al.it",
+  "consigliato": "No",
+  "lat": "44.677",
+  "lon": "8.4677",
+  "festa": "nessuna",
+  "anchor": "ev-2026-11-21-open-day-tobe-together"
  },
  {
   "nome": "Open School - Scuola Primaria Cellarengo e Villanova Stazione - Istituto Comprensivo Villanova d'Asti",
@@ -3016,6 +3057,7 @@
   "consigliato": "No",
   "lat": "44.8658073",
   "lon": "7.9442383",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-open-school-scuola-primaria-cellarengo-e-villanova"
  },
  {
@@ -3038,6 +3080,7 @@
   "consigliato": "No",
   "lat": "44.9254929",
   "lon": "7.9721895",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-open-school-scuola-primaria-dusino-san-michele-ist"
  },
  {
@@ -3060,6 +3103,7 @@
   "consigliato": "No",
   "lat": "44.3088861",
   "lon": "7.1728098",
+  "festa": "presepe",
   "anchor": "ev-2026-11-21-rassegna-di-presepi-tradizionali-incanto"
  },
  {
@@ -3083,6 +3127,7 @@
   "consigliato": "No",
   "lat": "45.0208692",
   "lon": "7.9500929",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-ritroviamoci-con-coccole-storie"
  },
  {
@@ -3105,6 +3150,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-un-giochino-per-ogni-bambino-via-girardengo"
  },
  {
@@ -3127,6 +3173,7 @@
   "consigliato": "No",
   "lat": "44.9110327",
   "lon": "8.6148186",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-un-due-tre-stella"
  },
  {
@@ -3149,6 +3196,7 @@
   "consigliato": "No",
   "lat": "44.385338",
   "lon": "7.8317969",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-21-vieni-anche-tu-museo-della-stampa"
  },
  {
@@ -3171,6 +3219,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-22-bancarelle"
  },
  {
@@ -3193,6 +3242,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-22-battesimo-della-sella-scuderia-i-tre-ponti-a-s-d"
  },
  {
@@ -3215,6 +3265,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-22-esposizione-trattori-d-epoca-associazione-trattori"
  },
  {
@@ -3238,6 +3289,7 @@
   "consigliato": "No",
   "lat": "44.670279",
   "lon": "8.6485294",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-22-lachera-dei-bambini-laboratorio-di-danze-e-mascher"
  },
  {
@@ -3261,6 +3313,7 @@
   "consigliato": "No",
   "lat": "44.9110327",
   "lon": "8.6148186",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-22-nel-bosco-di-lorien-associazione-il-contastorie"
  },
  {
@@ -3283,6 +3336,7 @@
   "consigliato": "No",
   "lat": "44.76085",
   "lon": "8.789551",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-22-salotto-delle-auto-il-cuore-di-novi"
  },
  {
@@ -3305,6 +3359,7 @@
   "consigliato": "No",
   "lat": "44.8014607",
   "lon": "7.8202769",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-22-tombolata-merenda-pro-loco-ceresole-d-alba"
  },
  {
@@ -3328,6 +3383,7 @@
   "consigliato": "No",
   "lat": "44.9808006",
   "lon": "8.8804053",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-23-letture-ad-alta-voce-storie-avvolte-nella-nebbia-d"
  },
  {
@@ -3350,6 +3406,7 @@
   "consigliato": "No",
   "lat": "44.5567073",
   "lon": "7.7374513",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-24-laboratorio-di-manga"
  },
  {
@@ -3373,6 +3430,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-24-lo-sto-viziando-carezza"
  },
  {
@@ -3396,6 +3454,7 @@
   "consigliato": "No",
   "lat": "44.6878448",
   "lon": "8.8853385",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-24-parliamone-insieme-centro-per-le-famiglie-villa-zu"
  },
  {
@@ -3418,6 +3477,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-24-uncinetto-lab-con-ivana"
  },
  {
@@ -3440,6 +3500,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-25-favolando-mini-letture-per-bebe"
  },
  {
@@ -3463,6 +3524,7 @@
   "consigliato": "No",
   "lat": "44.3243071",
   "lon": "7.3033518",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-25-laboratorio-di-manga-palestr3-giovani"
  },
  {
@@ -3486,6 +3548,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-25-sogni-d-oro-strategie-dolci-per-migliorare-il-sonn"
  },
  {
@@ -3509,6 +3572,7 @@
   "consigliato": "No",
   "lat": "44.6143972",
   "lon": "7.4828028",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-25-torneo-di-ping-pong-centro-aggregativo-manta"
  },
  {
@@ -3531,6 +3595,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-26-chi-c-e-sotto-le-foglie-centro-per-le-famiglie-ast"
  },
  {
@@ -3554,6 +3619,7 @@
   "consigliato": "No",
   "lat": "44.5493489",
   "lon": "7.7250155",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-26-gocce-di-pioggia-e-soffici-nuvole-centro-famiglie"
  },
  {
@@ -3576,6 +3642,7 @@
   "consigliato": "No",
   "lat": "44.7733095",
   "lon": "8.353709",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-26-la-salute-di-bambini-e-adulti-a-360"
  },
  {
@@ -3599,6 +3666,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-26-rabbia-pianti-e-porte-sbattute-centro-per-le-famig"
  },
  {
@@ -3621,6 +3689,7 @@
   "consigliato": "No",
   "lat": "44.3293757",
   "lon": "7.5504573",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-27-bibliobaby"
  },
  {
@@ -3644,6 +3713,7 @@
   "consigliato": "No",
   "lat": "44.6143972",
   "lon": "7.4828028",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-27-giardinaggio-centro-aggregativo-manta"
  },
  {
@@ -3667,6 +3737,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-27-mondo-tullet-carezza"
  },
  {
@@ -3689,6 +3760,7 @@
   "consigliato": "No",
   "lat": "44.9418888",
   "lon": "7.9375025",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-27-open-school-scuola-secondaria-di-primo-grado-istit"
  },
  {
@@ -3712,6 +3784,7 @@
   "consigliato": "No",
   "lat": "44.8975",
   "lon": "8.8644",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-27-serata-gratuita-pizza-e-cinema-centro-per-le-famig"
  },
  {
@@ -3735,6 +3808,7 @@
   "consigliato": "No",
   "lat": "44.4174947",
   "lon": "7.4278882",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-28-3-mercatino-di-natale-e-8-babbo-run-caraj-a-t-pro"
  },
  {
@@ -3757,6 +3831,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-benvenuti-al-centro-per-le-famiglie-centro-per-le"
  },
  {
@@ -3780,6 +3855,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-bibliobebe-con-floriana-lovera-bambini-19-35-mesi"
  },
  {
@@ -3803,6 +3879,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-bibliobebe-con-floriana-lovera-bambini-9-18-mesi"
  },
  {
@@ -3825,6 +3902,7 @@
   "consigliato": "No",
   "lat": "44.3088861",
   "lon": "7.1728098",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-28-che-forte-natale-mercatino"
  },
  {
@@ -3847,6 +3925,7 @@
   "consigliato": "No",
   "lat": "44.3858871",
   "lon": "7.5509214",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-corone-di-natura-parco-fluviale-gesso-e-stura"
  },
  {
@@ -3870,6 +3949,7 @@
   "consigliato": "No",
   "lat": "44.3885927",
   "lon": "7.8297855",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-dal-giappone-a-mondovi-laboratorio-di-fumetto"
  },
  {
@@ -3893,6 +3973,7 @@
   "consigliato": "No",
   "lat": "44.7613607",
   "lon": "8.782713",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-giochi-in-simboli-centro-paideia-di-torino"
  },
  {
@@ -3916,6 +3997,7 @@
   "consigliato": "No",
   "lat": "44.9110327",
   "lon": "8.6148186",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-il-contalibro-associazione-il-contastorie"
  },
  {
@@ -3939,30 +4021,8 @@
   "consigliato": "No",
   "lat": "44.4988942",
   "lon": "7.5348735",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-laboratorio-funzioni-esecutive-t-centro-tarantasca"
- },
- {
-  "nome": "Le Letture in Biblioteca - Il Pane",
-  "di": "28/11/2026",
-  "df": "28/11/2026",
-  "ora": "10:00-11:30",
-  "citta": "Pasturana",
-  "prov": "AL",
-  "categoria": "Cultura",
-  "eta": "3-10 anni (da verificare)",
-  "prezzo": "Non indicato",
-  "descr": "La Biblioteca Comunale E. Arecco invita i bambini della scuola dell'infanzia e primaria per un appuntamento di letture animate. Il tema di questo sabato è 'Il Pane'. Iniziativa nell'ambito del programma Nati per Leggere.",
-  "manifest": "Le Letture in Biblioteca",
-  "loc": "daop_alessandria_4024985339585320592.webp",
-  "luogo": "Biblioteca Comunale E. Arecco",
-  "indirizzo": "Biblioteca Comunale E. Arecco - Pasturana (AL)",
-  "d_start": "2026-11-28",
-  "d_end": "2026-11-28",
-  "contatto": "biblioteca@comune.pasturana.al.it / 3383842579",
-  "consigliato": "No",
-  "lat": "44.7500018",
-  "lon": "8.7457524",
-  "anchor": "ev-2026-11-28-le-letture-in-biblioteca-il-pane"
  },
  {
   "nome": "Le letture in biblioteca: Il Pane - Biblioteca di Pasturana Eugenio Arecco",
@@ -3976,7 +4036,7 @@
   "prezzo": "Gratuito",
   "descr": "Mattinata di letture ad alta voce dedicata al pane, per i bambini della scuola dell'infanzia e primaria. Appuntamento in biblioteca, presso il Comune di Pasturana, dalle 10:00 alle 11:30. In collaborazione con Nati per Leggere.",
   "manifest": "Le letture in biblioteca 2026",
-  "loc": "",
+  "loc": "daop_alessandria_4024985339585320592.webp",
   "luogo": "Biblioteca di Pasturana Eugenio Arecco",
   "indirizzo": "Via Roma 1 - Pasturana (AL)",
   "d_start": "2026-11-28",
@@ -3985,6 +4045,7 @@
   "consigliato": "No",
   "lat": "44.7508565",
   "lon": "8.749035282",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-le-letture-in-biblioteca-il-pane-biblioteca-di-pas"
  },
  {
@@ -4007,6 +4068,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-letture-per-bambini-maestra-claudia"
  },
  {
@@ -4030,7 +4092,32 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-occhi-in-gioco-carezza"
+ },
+ {
+  "nome": "Open Day Scuola dell'Infanzia e Sezione Primavera - MOISO",
+  "di": "28/11/2026",
+  "df": "28/11/2026",
+  "ora": "16:00-18:30",
+  "citta": "Acqui Terme",
+  "prov": "AL",
+  "categoria": "Laboratorio",
+  "eta": "2-6 anni",
+  "prezzo": "Gratuito",
+  "descr": "Porte aperte alla scuola dell'infanzia e alla sezione Primavera della Fondazione MOISO: si visitano gli spazi e si conoscono le insegnanti, con i bambini. Due date: sabato 28 novembre pomeriggio e domenica 29 mattina.",
+  "manifest": "",
+  "loc": "daop_alessandria_acqui_calendario_20261110.webp",
+  "luogo": "Fondazione MOISO - Scuola dell'Infanzia",
+  "indirizzo": "Via F.lli Moiso 28 - Acqui Terme (AL)",
+  "d_start": "2026-11-28",
+  "d_end": "2026-11-28",
+  "contatto": "IAT 0144 322142 - iat@comune.acquiterme.al.it",
+  "consigliato": "No",
+  "lat": "44.67535609",
+  "lon": "8.464180826",
+  "festa": "nessuna",
+  "anchor": "ev-2026-11-28-open-day-scuola-dell-infanzia-e-sezione-primavera"
  },
  {
   "nome": "Open School - Scuole dell'Infanzia (Cellarengo, Dusino, Valfenera, Villanova Cap.) - Istituto Comprensivo Villanova d'Asti",
@@ -4052,6 +4139,7 @@
   "consigliato": "No",
   "lat": "44.9418888",
   "lon": "7.9375025",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-open-school-scuole-dell-infanzia-cellarengo-dusino"
  },
  {
@@ -4075,6 +4163,7 @@
   "consigliato": "No",
   "lat": "44.4483763",
   "lon": "7.8989078",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-vieni-anche-tu-pomeriggi-creativi-nel-monregalese"
  },
  {
@@ -4098,6 +4187,7 @@
   "consigliato": "No",
   "lat": "44.6277993",
   "lon": "7.5564762",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-28-vivi-il-pony-in-coppia-ippica-saluzzese"
  },
  {
@@ -4121,6 +4211,7 @@
   "consigliato": "No",
   "lat": "44.9110327",
   "lon": "8.6148186",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-29-andrzejki-la-vigilia-di-sant-andrea-associazione-i"
  },
  {
@@ -4143,6 +4234,7 @@
   "consigliato": "No",
   "lat": "44.7561171",
   "lon": "8.1490009",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-29-camminate-domenicali-a-castagnole-delle-lanze-comu"
  },
  {
@@ -4166,6 +4258,7 @@
   "consigliato": "No",
   "lat": "44.6922048",
   "lon": "7.5576862",
+  "festa": "natale",
   "anchor": "ev-2026-11-29-fitwalking-di-natale-pro-loco-scarnafigi"
  },
  {
@@ -4189,6 +4282,7 @@
   "consigliato": "No",
   "lat": "44.670279",
   "lon": "8.6485294",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-29-lachera-dei-bambini-laboratorio-di-danze-e-mascher"
  },
  {
@@ -4212,6 +4306,7 @@
   "consigliato": "No",
   "lat": "44.4807314",
   "lon": "7.8511229",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-29-mercatini-di-natale-confcommercio-ascom-carru"
  },
  {
@@ -4234,29 +4329,8 @@
   "consigliato": "No",
   "lat": "44.7614655",
   "lon": "7.9117384",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-29-mercatini-di-natale-iv-edizione-pro-loco-baldisser"
- },
- {
-  "nome": "Mercatini di Natale - Pro Loco Castelneuv Brisò / Comune di Castelnuovo Calcea",
-  "di": "29/11/2026",
-  "df": "29/11/2026",
-  "ora": "da verificare",
-  "citta": "Castelnuovo Calcea",
-  "prov": "AT",
-  "categoria": "Mercato",
-  "eta": "Tutte le età (famiglie)",
-  "prezzo": "Ingresso libero",
-  "descr": "Mercatini di Natale con 60 bancarelle nelle piazze e vie di Castelnuovo Calcea. In programma: Babbo Natale, gastronomia e specialità locali, spettacoli e musica, attività per bambini e Corsa Natalizia di 6 km.",
-  "manifest": "",
-  "loc": "daop_asti_4023538926274313779.webp",
-  "luogo": "Piazze e vie del Paese",
-  "indirizzo": "Piazze e vie del Paese - Castelnuovo Calcea (AT)",
-  "d_start": "2026-11-29",
-  "d_end": "2026-11-29",
-  "consigliato": "No",
-  "lat": "44.7881057",
-  "lon": "8.2852996",
-  "anchor": "ev-2026-11-29-mercatini-di-natale-pro-loco-castelneuv-briso-comu"
  },
  {
   "nome": "Mercatini di Natale Castelnuovo Calcea 2026",
@@ -4279,6 +4353,7 @@
   "consigliato": "No",
   "lat": "44.7881057",
   "lon": "8.2852996",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-29-mercatini-di-natale-castelnuovo-calcea-2026"
  },
  {
@@ -4302,6 +4377,7 @@
   "consigliato": "No",
   "lat": "44.3966325",
   "lon": "7.6693401",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-29-mercatini-di-natale-margarita-2026"
  },
  {
@@ -4325,6 +4401,7 @@
   "consigliato": "No",
   "lat": "44.6115932",
   "lon": "8.2421652",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-29-mercatini-di-natale-san-giorgio-scarampi-2026"
  },
  {
@@ -4348,6 +4425,7 @@
   "consigliato": "No",
   "lat": "44.6978198",
   "lon": "7.1587165",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-29-mercatini-sotto-il-monviso-comune-di-crissolo"
  },
  {
@@ -4370,7 +4448,32 @@
   "consigliato": "No",
   "lat": "45.0874595",
   "lon": "8.0392207",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-11-29-mercatino-di-natale"
+ },
+ {
+  "nome": "Open Day Scuola dell'Infanzia e Sezione Primavera - MOISO",
+  "di": "29/11/2026",
+  "df": "29/11/2026",
+  "ora": "10:00-12:30",
+  "citta": "Acqui Terme",
+  "prov": "AL",
+  "categoria": "Laboratorio",
+  "eta": "2-6 anni",
+  "prezzo": "Gratuito",
+  "descr": "Porte aperte alla scuola dell'infanzia e alla sezione Primavera della Fondazione MOISO: si visitano gli spazi e si conoscono le insegnanti, con i bambini. Due date: sabato 28 novembre pomeriggio e domenica 29 mattina.",
+  "manifest": "",
+  "loc": "daop_alessandria_acqui_calendario_20261110.webp",
+  "luogo": "Fondazione MOISO - Scuola dell'Infanzia",
+  "indirizzo": "Via F.lli Moiso 28 - Acqui Terme (AL)",
+  "d_start": "2026-11-29",
+  "d_end": "2026-11-29",
+  "contatto": "IAT 0144 322142 - iat@comune.acquiterme.al.it",
+  "consigliato": "No",
+  "lat": "44.67535609",
+  "lon": "8.464180826",
+  "festa": "nessuna",
+  "anchor": "ev-2026-11-29-open-day-scuola-dell-infanzia-e-sezione-primavera"
  },
  {
   "nome": "Un viaggio tra minerali e fossili",
@@ -4393,6 +4496,7 @@
   "consigliato": "No",
   "lat": "44.900542",
   "lon": "8.2068876",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-29-un-viaggio-tra-minerali-e-fossili"
  },
  {
@@ -4415,6 +4519,7 @@
   "consigliato": "No",
   "lat": "44.6621382",
   "lon": "7.7291058",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-30-multisensoriale-in-biblioteca-bambini-3-6-anni-ore"
  },
  {
@@ -4437,6 +4542,7 @@
   "consigliato": "No",
   "lat": "44.6621382",
   "lon": "7.7291058",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-30-multisensoriale-in-biblioteca-bambini-6-9-anni-ore"
  },
  {
@@ -4460,6 +4566,7 @@
   "consigliato": "No",
   "lat": "44.9808006",
   "lon": "8.8804053",
+  "festa": "nessuna",
   "anchor": "ev-2026-11-30-the-little-book-club-comune-di-castelnuovo-scrivia"
  },
  {
@@ -4482,6 +4589,7 @@
   "consigliato": "No",
   "lat": "44.5567073",
   "lon": "7.7374513",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-01-laboratorio-di-manga"
  },
  {
@@ -4505,6 +4613,7 @@
   "consigliato": "No",
   "lat": "44.4988942",
   "lon": "7.5348735",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-03-laboratorio-funzioni-esecutive-t-centro-tarantasca"
  },
  {
@@ -4528,6 +4637,7 @@
   "consigliato": "No",
   "lat": "44.728549",
   "lon": "8.771552",
+  "festa": "natale",
   "anchor": "ev-2026-12-04-bimbe-e-bimbi-di-tassarolo-speciale-natale-2026-sc"
  },
  {
@@ -4550,6 +4660,7 @@
   "consigliato": "No",
   "lat": "44.3941723",
   "lon": "7.549982",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-04-my-cup-of-tea"
  },
  {
@@ -4573,6 +4684,7 @@
   "consigliato": "No",
   "lat": "44.6446052",
   "lon": "7.4926009",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-04-open-officina-spazio-aggregativo"
  },
  {
@@ -4596,6 +4708,7 @@
   "consigliato": "No",
   "lat": "44.389633",
   "lon": "7.5479007",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-05-desideria-sabato-di-gioco-benessere-e-musica"
  },
  {
@@ -4619,7 +4732,32 @@
   "consigliato": "No",
   "lat": "44.6946372",
   "lon": "8.029436",
+  "festa": "natale",
   "anchor": "ev-2026-12-05-le-piccole-storie-di-marameo"
+ },
+ {
+  "nome": "Mostra Presepi",
+  "di": "05/12/2026",
+  "df": "06/01/2027",
+  "ora": "vari",
+  "citta": "Acqui Terme",
+  "prov": "AL",
+  "categoria": "Cultura",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Non indicato",
+  "descr": "Per tutto il periodo delle feste, dal 5 dicembre al 6 gennaio, il Movicentro di Acqui Terme ospita la mostra dei presepi.",
+  "manifest": "",
+  "loc": "daop_alessandria_acqui_calendario_20261110.webp",
+  "luogo": "Movicentro",
+  "indirizzo": "Movicentro - Acqui Terme (AL)",
+  "d_start": "2026-12-05",
+  "d_end": "2027-01-06",
+  "contatto": "IAT 0144 322142 - iat@comune.acquiterme.al.it",
+  "consigliato": "No",
+  "lat": "44.6728559",
+  "lon": "8.4757493",
+  "festa": "presepe",
+  "anchor": "ev-2026-12-05-mostra-presepi"
  },
  {
   "nome": "Oro Incenso Mirra - Presepi nel Monferrato - San Damiano d'Asti",
@@ -4641,6 +4779,7 @@
   "consigliato": "No",
   "lat": "44.833445",
   "lon": "8.063534",
+  "festa": "presepe",
   "anchor": "ev-2026-12-05-oro-incenso-mirra-presepi-nel-monferrato-san-damia"
  },
  {
@@ -4664,6 +4803,7 @@
   "consigliato": "No",
   "lat": "44.386117",
   "lon": "8.0342098",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-05-vieni-anche-tu-pomeriggi-creativi-nel-monregalese"
  },
  {
@@ -4687,6 +4827,7 @@
   "consigliato": "No",
   "lat": "44.6546771",
   "lon": "7.3885306",
+  "festa": "natale",
   "anchor": "ev-2026-12-06-laboratorio-con-la-natura-al-museo-naturalistico-d"
  },
  {
@@ -4709,6 +4850,7 @@
   "consigliato": "No",
   "lat": "44.9966126",
   "lon": "8.4742649",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-06-mercatini-di-natale-e-casa-di-babbo-natale-pro-loc"
  },
  {
@@ -4732,6 +4874,7 @@
   "consigliato": "No",
   "lat": "44.8028318",
   "lon": "8.9651435",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-06-mercatino-di-natale-work-in-progress-pro-loco-di-a"
  },
  {
@@ -4754,6 +4897,7 @@
   "consigliato": "No",
   "lat": "44.833445",
   "lon": "8.063534",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-06-mostra-mercato-piccoli-animali-citta-di-san-damian"
  },
  {
@@ -4776,6 +4920,7 @@
   "consigliato": "No",
   "lat": "44.833445",
   "lon": "8.063534",
+  "festa": "presepe",
   "anchor": "ev-2026-12-06-presepe-vivente-2026"
  },
  {
@@ -4799,6 +4944,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "natale",
   "anchor": "ev-2026-12-08-sul-cammino-di-artaban-spettacolo-nell-ambito-di-c"
  },
  {
@@ -4821,6 +4967,7 @@
   "consigliato": "No",
   "lat": "44.8582394",
   "lon": "8.345432",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-08-accendiamo-rocchetta"
  },
  {
@@ -4844,6 +4991,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "natale",
   "anchor": "ev-2026-12-08-aspettando-babbo-natale-letture-natalizie-e-trucca"
  },
  {
@@ -4867,6 +5015,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-inaugurazione-iv-edizione-mostra-presepi-e-cappell"
  },
  {
@@ -4889,6 +5038,7 @@
   "consigliato": "No",
   "lat": "44.8363034",
   "lon": "8.5396195",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-08-mercatini-di-natale-borgoratto-alessandrino-2026"
  },
  {
@@ -4911,6 +5061,7 @@
   "consigliato": "No",
   "lat": "44.905507",
   "lon": "8.9186164",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-08-mercatini-di-natale-a-viguzzolo-pro-loco-viguzzolo"
  },
  {
@@ -4933,6 +5084,7 @@
   "consigliato": "No",
   "lat": "44.6869148",
   "lon": "8.6749599",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-08-natale-incontrada"
  },
  {
@@ -4955,6 +5107,7 @@
   "consigliato": "No",
   "lat": "44.837151",
   "lon": "8.681548",
+  "festa": "natale",
   "anchor": "ev-2026-12-08-neverland-e-la-magia-del-natale"
  },
  {
@@ -4978,6 +5131,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "natale",
   "anchor": "ev-2026-12-08-notte-bianca-con-accensione-albero-di-natale-e-lum"
  },
  {
@@ -5000,6 +5154,7 @@
   "consigliato": "No",
   "lat": "44.7541616",
   "lon": "8.1499606",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-oro-incenso-mirra-presepi-nel-monferrato-castagnol"
  },
  {
@@ -5022,6 +5177,7 @@
   "consigliato": "No",
   "lat": "44.9615961",
   "lon": "8.3062346",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-oro-incenso-mirra-presepi-nel-monferrato-castagnol-2"
  },
  {
@@ -5044,6 +5200,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-oro-incenso-mirra-presepi-nel-monferrato-castell-a"
  },
  {
@@ -5066,6 +5223,7 @@
   "consigliato": "No",
   "lat": "45.0874595",
   "lon": "8.0392207",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-oro-incenso-mirra-presepi-nel-monferrato-cocconato"
  },
  {
@@ -5088,6 +5246,7 @@
   "consigliato": "No",
   "lat": "44.9360495",
   "lon": "8.0718593",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-oro-incenso-mirra-presepi-nel-monferrato-monale"
  },
  {
@@ -5110,6 +5269,7 @@
   "consigliato": "No",
   "lat": "44.833445",
   "lon": "8.063534",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-presepe-vivente-2026"
  },
  {
@@ -5133,6 +5293,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "presepe",
   "anchor": "ev-2026-12-08-presepi-al-castello-comune-di-castell-alfero"
  },
  {
@@ -5156,6 +5317,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-10-bibliobebe-con-valentina-radici-semi-e-parole"
  },
  {
@@ -5179,6 +5341,7 @@
   "consigliato": "No",
   "lat": "44.5139248",
   "lon": "7.4733075",
+  "festa": "natale",
   "anchor": "ev-2026-12-10-la-parata-degli-elfi-di-natale-biblioteca-civica-b"
  },
  {
@@ -5202,6 +5365,7 @@
   "consigliato": "No",
   "lat": "44.4988942",
   "lon": "7.5348735",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-10-laboratorio-funzioni-esecutive-t-centro-tarantasca"
  },
  {
@@ -5225,6 +5389,7 @@
   "consigliato": "No",
   "lat": "44.7615317",
   "lon": "7.9832871",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-11-io-sono-un-artista-crome-in-movimento-aps"
  },
  {
@@ -5247,6 +5412,7 @@
   "consigliato": "No",
   "lat": "44.3941723",
   "lon": "7.549982",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-11-my-cup-of-tea"
  },
  {
@@ -5270,6 +5436,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-11-tuteliamo-corso-manovre-salvavita-pediatriche-care"
  },
  {
@@ -5293,6 +5460,7 @@
   "consigliato": "No",
   "lat": "44.6112926",
   "lon": "7.2841315",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-12-autunno-a-brossasco-laboratori-ludico-creativi"
  },
  {
@@ -5315,6 +5483,7 @@
   "consigliato": "No",
   "lat": "44.647824",
   "lon": "7.6538015",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-12-incantevole-natale-2026"
  },
  {
@@ -5338,6 +5507,7 @@
   "consigliato": "No",
   "lat": "44.9131769",
   "lon": "8.9811563",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-12-la-porta-del-natale"
  },
  {
@@ -5361,6 +5531,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-12-magic-english-playing-learning-con-elena-f"
  },
  {
@@ -5384,6 +5555,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-12-magic-english-words-rhymes-con-elena-a"
  },
  {
@@ -5407,6 +5579,7 @@
   "consigliato": "No",
   "lat": "44.6112926",
   "lon": "7.2841315",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-12-mattinata-di-giochi-sportivi-ed-attivita-in-movime"
  },
  {
@@ -5429,6 +5602,7 @@
   "consigliato": "No",
   "lat": "44.901746",
   "lon": "7.964331",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-12-mi-leggi-una-storia-biblioteca-civica-di-valfenera"
  },
  {
@@ -5452,6 +5626,7 @@
   "consigliato": "No",
   "lat": "44.7613607",
   "lon": "8.782713",
+  "festa": "natale",
   "anchor": "ev-2026-12-12-natale-con-attilio-la-bottega-del-sanconiglio"
  },
  {
@@ -5475,6 +5650,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-12-pomeriggio-di-festa-giochi-per-bambini-e-tombolata"
  },
  {
@@ -5498,6 +5674,7 @@
   "consigliato": "No",
   "lat": "44.776978",
   "lon": "7.6612137",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-12-una-serata-tutta-per-voi-con-anima-bimbi-carezza"
  },
  {
@@ -5521,6 +5698,7 @@
   "consigliato": "No",
   "lat": "44.901746",
   "lon": "7.964331",
+  "festa": "natale",
   "anchor": "ev-2026-12-13-camminata-dei-babbi-natale-dell-avis"
  },
  {
@@ -5544,6 +5722,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "presepe",
   "anchor": "ev-2026-12-13-camminata-tra-piloni-votivi-e-presepi-compagnia-de"
  },
  {
@@ -5566,6 +5745,7 @@
   "consigliato": "No",
   "lat": "44.7561171",
   "lon": "8.1490009",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-13-camminate-domenicali-a-castagnole-delle-lanze-comu"
  },
  {
@@ -5589,6 +5769,7 @@
   "consigliato": "No",
   "lat": "44.670279",
   "lon": "8.6485294",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-13-lachera-dei-bambini-laboratorio-di-danze-e-mascher"
  },
  {
@@ -5612,6 +5793,7 @@
   "consigliato": "No",
   "lat": "44.8999639",
   "lon": "8.4362123",
+  "festa": "mercatino di natale",
   "anchor": "ev-2026-12-13-mercatini-di-natale-felizzano"
  },
  {
@@ -5634,6 +5816,7 @@
   "consigliato": "No",
   "lat": "44.833445",
   "lon": "8.063534",
+  "festa": "presepe",
   "anchor": "ev-2026-12-13-presepe-vivente-2026"
  },
  {
@@ -5656,6 +5839,7 @@
   "consigliato": "No",
   "lat": "44.7603234",
   "lon": "8.0704243",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-14-nati-per-leggere-biblioteca-civica-comune-di-magli"
  },
  {
@@ -5679,6 +5863,7 @@
   "consigliato": "No",
   "lat": "44.6494634",
   "lon": "7.6707274",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-18-game-on-centro-famiglie-e-ludoteca-la-casa-sull-al"
  },
  {
@@ -5702,6 +5887,7 @@
   "consigliato": "No",
   "lat": "44.6446052",
   "lon": "7.4926009",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-18-open-officina-spazio-aggregativo"
  },
  {
@@ -5725,6 +5911,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-19-bibliobebe-con-floriana-lovera-bambini-19-35-mesi"
  },
  {
@@ -5748,6 +5935,7 @@
   "consigliato": "No",
   "lat": "44.7025897",
   "lon": "7.8553589",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-19-bibliobebe-con-floriana-lovera-bambini-9-18-mesi"
  },
  {
@@ -5771,6 +5959,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "presepe",
   "anchor": "ev-2026-12-19-caccia-al-presepe-e-premiazione-cooperativa-second"
  },
  {
@@ -5793,6 +5982,7 @@
   "consigliato": "No",
   "lat": "45.0874595",
   "lon": "8.0392207",
+  "festa": "natale",
   "anchor": "ev-2026-12-19-il-grande-emporio-di-babbo-natale-nodo-zero"
  },
  {
@@ -5816,6 +6006,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "presepe",
   "anchor": "ev-2026-12-19-il-pastore-gilindo-a-castell-alfero-spettacolo-tea"
  },
  {
@@ -5839,6 +6030,7 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-19-le-letture-del-sabato-in-biblioteca-biblioteca-civ"
  },
  {
@@ -5861,6 +6053,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-19-letture-per-bambini-mamma-anna"
  },
  {
@@ -5884,6 +6077,7 @@
   "consigliato": "No",
   "lat": "44.7613607",
   "lon": "8.782713",
+  "festa": "natale",
   "anchor": "ev-2026-12-19-matite-sotto-l-albero"
  },
  {
@@ -5906,6 +6100,7 @@
   "consigliato": "No",
   "lat": "44.8492328",
   "lon": "8.2184747",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-19-mr-book-biblioteca-civica-don-alfredo-bianco-monga"
  },
  {
@@ -5928,6 +6123,7 @@
   "consigliato": "No",
   "lat": "44.833445",
   "lon": "8.063534",
+  "festa": "natale",
   "anchor": "ev-2026-12-20-animazioni-natalizie-per-bambini"
  },
  {
@@ -5951,6 +6147,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "presepe",
   "anchor": "ev-2026-12-20-cantando-sulle-vie-del-presepe-camminata-musicale"
  },
  {
@@ -5974,6 +6171,7 @@
   "consigliato": "No",
   "lat": "44.6459675",
   "lon": "7.0290013",
+  "festa": "natale",
   "anchor": "ev-2026-12-20-escursione-invernale-nel-bosco-dell-aleve"
  },
  {
@@ -5997,6 +6195,7 @@
   "consigliato": "No",
   "lat": "44.670279",
   "lon": "8.6485294",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-20-lachera-dei-bambini-laboratorio-di-danze-e-mascher"
  },
  {
@@ -6020,6 +6219,7 @@
   "consigliato": "No",
   "lat": "44.8840488",
   "lon": "8.858816",
+  "festa": "nessuna",
   "anchor": "ev-2026-12-21-postare-o-non-postare-il-dilemma-dello-sharenting"
  },
  {
@@ -6043,6 +6243,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "natale",
   "anchor": "ev-2026-12-30-concerto-degli-auguri-musiche-di-ennio-morricone-a"
  },
  {
@@ -6065,6 +6266,7 @@
   "consigliato": "No",
   "lat": "44.7561171",
   "lon": "8.1490009",
+  "festa": "capodanno",
   "anchor": "ev-2027-01-01-camminate-domenicali-a-castagnole-delle-lanze-comu"
  },
  {
@@ -6088,6 +6290,7 @@
   "consigliato": "No",
   "lat": "44.9824812",
   "lon": "8.2090158",
+  "festa": "befana",
   "anchor": "ev-2027-01-06-camminata-della-befana-associazione-camminare-in-c"
  },
  {
@@ -6110,6 +6313,7 @@
   "consigliato": "No",
   "lat": "44.7603234",
   "lon": "8.0704243",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-11-nati-per-leggere-biblioteca-civica-comune-di-magli"
  },
  {
@@ -6133,6 +6337,7 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-16-le-letture-del-sabato-in-biblioteca-biblioteca-civ"
  },
  {
@@ -6156,6 +6361,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-16-leonardo-da-vinci-un-genio-senza-tempo"
  },
  {
@@ -6179,6 +6385,7 @@
   "consigliato": "No",
   "lat": "44.670279",
   "lon": "8.6485294",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-17-lachera-dei-bambini-laboratorio-di-danze-e-mascher"
  },
  {
@@ -6202,6 +6409,7 @@
   "consigliato": "No",
   "lat": "44.670279",
   "lon": "8.6485294",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-24-lachera-dei-bambini-laboratorio-di-danze-e-mascher"
  },
  {
@@ -6224,6 +6432,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-25-silent-book-party"
  },
  {
@@ -6247,6 +6456,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-30-isaac-newton-tutta-colpa-di-una-mela"
  },
  {
@@ -6269,6 +6479,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-01-30-letture-per-bambini-maestra-daniela"
  },
  {
@@ -6292,6 +6503,7 @@
   "consigliato": "No",
   "lat": "44.670279",
   "lon": "8.6485294",
+  "festa": "carnevale",
   "anchor": "ev-2027-01-31-sfilata-di-carnevale-lachera-dei-bambini"
  },
  {
@@ -6314,6 +6526,7 @@
   "consigliato": "No",
   "lat": "44.901746",
   "lon": "7.964331",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-06-mi-leggi-una-storia-biblioteca-civica-di-valfenera"
  },
  {
@@ -6336,6 +6549,7 @@
   "consigliato": "No",
   "lat": "44.7603234",
   "lon": "8.0704243",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-08-nati-per-leggere-biblioteca-civica-comune-di-magli"
  },
  {
@@ -6359,6 +6573,7 @@
   "consigliato": "No",
   "lat": "44.8840488",
   "lon": "8.858816",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-16-l-amore-ai-tempi-dei-social-affettivita-e-sessuali"
  },
  {
@@ -6381,6 +6596,7 @@
   "consigliato": "No",
   "lat": "44.5661954",
   "lon": "7.4566022",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-19-venerdi-dei-giochi-in-scatola-biblioteca-di-piasco"
  },
  {
@@ -6404,6 +6620,7 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-20-le-letture-del-sabato-in-biblioteca-biblioteca-civ"
  },
  {
@@ -6427,6 +6644,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-20-louis-braille-leggere-con-le-dita-sognare-senza-li"
  },
  {
@@ -6450,6 +6668,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-27-fratelli-wright-finalmente-si-vola"
  },
  {
@@ -6472,6 +6691,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-02-27-letture-per-bambini-maestra-fiorella"
  },
  {
@@ -6495,6 +6715,7 @@
   "consigliato": "No",
   "lat": "44.8840488",
   "lon": "8.858816",
+  "festa": "nessuna",
   "anchor": "ev-2027-03-03-oltre-i-like-capire-social-algoritmi-challenge-e-p"
  },
  {
@@ -6517,6 +6738,7 @@
   "consigliato": "No",
   "lat": "44.7603234",
   "lon": "8.0704243",
+  "festa": "nessuna",
   "anchor": "ev-2027-03-08-nati-per-leggere-biblioteca-civica-comune-di-magli"
  },
  {
@@ -6540,6 +6762,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-03-13-charlie-chaplin-risate-senza-parole"
  },
  {
@@ -6563,6 +6786,7 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2027-03-19-la-notte-dei-peluches-biblioteca-civica-g-monticon"
  },
  {
@@ -6586,6 +6810,7 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2027-03-20-le-letture-del-sabato-in-biblioteca-biblioteca-civ"
  },
  {
@@ -6609,6 +6834,7 @@
   "consigliato": "No",
   "lat": "44.8975",
   "lon": "8.8644",
+  "festa": "nessuna",
   "anchor": "ev-2027-03-31-aiuto-o-ai-intelligenza-artificiale-digitale-e-nuo"
  },
  {
@@ -6631,6 +6857,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-04-03-letture-per-bambini-nonna-michela-e-nonno-giulio"
  },
  {
@@ -6654,6 +6881,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-04-03-ludwig-van-beethoven-quattro-note-che-hanno-fatto"
  },
  {
@@ -6676,6 +6904,7 @@
   "consigliato": "No",
   "lat": "44.7603234",
   "lon": "8.0704243",
+  "festa": "nessuna",
   "anchor": "ev-2027-04-12-nati-per-leggere-biblioteca-civica-comune-di-magli"
  },
  {
@@ -6698,6 +6927,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-04-12-silent-book-party"
  },
  {
@@ -6720,6 +6950,7 @@
   "consigliato": "No",
   "lat": "44.5661954",
   "lon": "7.4566022",
+  "festa": "nessuna",
   "anchor": "ev-2027-04-16-venerdi-dei-giochi-in-scatola-biblioteca-di-piasco"
  },
  {
@@ -6743,6 +6974,7 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2027-04-17-le-letture-del-sabato-in-biblioteca-biblioteca-civ"
  },
  {
@@ -6766,6 +6998,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-04-17-lionel-messi-piccolo-di-statura-gigante-nel-calcio"
  },
  {
@@ -6789,6 +7022,7 @@
   "consigliato": "No",
   "lat": "44.7554907",
   "lon": "8.7758364",
+  "festa": "nessuna",
   "anchor": "ev-2027-05-08-notte-al-museo-orario-serale-con-pizzata"
  },
  {
@@ -6811,6 +7045,7 @@
   "consigliato": "No",
   "lat": "44.7603234",
   "lon": "8.0704243",
+  "festa": "nessuna",
   "anchor": "ev-2027-05-10-nati-per-leggere-biblioteca-civica-comune-di-magli"
  },
  {
@@ -6833,6 +7068,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-05-15-letture-per-bambini-mamma-agnese"
  },
  {
@@ -6856,6 +7092,7 @@
   "consigliato": "No",
   "lat": "44.7201204",
   "lon": "8.2874236",
+  "festa": "nessuna",
   "anchor": "ev-2027-05-22-le-letture-del-sabato-in-biblioteca-biblioteca-civ"
  },
  {
@@ -6878,6 +7115,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-06-14-silent-book-party"
  },
  {
@@ -6901,6 +7139,7 @@
   "consigliato": "No",
   "lat": "44.9131769",
   "lon": "8.9811563",
+  "festa": "nessuna",
   "anchor": "ev-2027-06-19-kids-move-final-fest-comune-di-casalnoceto"
  },
  {
@@ -6923,6 +7162,7 @@
   "consigliato": "No",
   "lat": "44.5784504",
   "lon": "7.4582064",
+  "festa": "nessuna",
   "anchor": "ev-2027-07-12-silent-book-party"
  }
 ]
