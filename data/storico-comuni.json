@@ -410,6 +410,17 @@
     "pagina": true,
     "ultima": "2026-12-01"
    },
+   "escape-room-at-the-museum-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Diocesano",
+    "manifest": "",
+    "nome": "Escape Room at the Museum",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "escape-room-at-the-museum-kids-us-alba": {
     "anni": [
      2026
@@ -2689,6 +2700,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-11"
+   },
+   "presepe-vivente-di-bagnasco-sacra-rappresentazione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bagnasco",
+    "manifest": "Presepe Vivente di Bagnasco 2026",
+    "nome": "Presepe Vivente di Bagnasco - Sacra Rappresentazione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-26"
+   },
+   "presepe-vivente-di-bagnasco-santa-messa-con-figura": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa di Sant'Antonio",
+    "manifest": "Presepe Vivente di Bagnasco 2026",
+    "nome": "Presepe Vivente di Bagnasco - Santa Messa con Figuranti in Costume",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-24"
    }
   },
   "nome": "Bagnasco",
@@ -3830,6 +3863,28 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "sognando-la-neve-associazione-arcbaleno-vip-i-nasi-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Giovanni Arpino",
+    "manifest": "Lunedì in Biblioteca - Appuntamenti di Novembre 2026",
+    "nome": "Sognando la neve - Associazione Arcbaleno VIP I Nasi Rossi",
+    "organizza": "Associazione Arcbaleno VIP I Nasi Rossi",
+    "pagina": true,
+    "ultima": "2026-11-30"
+   },
+   "storie-di-lana-e-di-amicizia-associazione-officine-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Giovanni Arpino",
+    "manifest": "Lunedì in Biblioteca - Appuntamenti di Novembre 2026",
+    "nome": "Storie di lana ...e di amicizia - Associazione Officine Zeta",
+    "organizza": "Associazione Officine Zeta",
+    "pagina": true,
+    "ultima": "2026-11-23"
+   },
    "tutti-ai-fornelli-workshop-genitori-figli-bra": {
     "anni": [
      2026
@@ -3840,6 +3895,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-13"
+   },
+   "vorrei-un-tempo-lento-associazione-nuove-rotte-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Giovanni Arpino",
+    "manifest": "Lunedì in Biblioteca - Appuntamenti di Novembre 2026",
+    "nome": "Vorrei un tempo lento - Associazione Nuove Rotte",
+    "organizza": "Associazione Nuove Rotte",
+    "pagina": true,
+    "ultima": "2026-11-16"
    }
   },
   "nome": "Bra",
@@ -3990,6 +4056,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "la-notte-dei-pupazzi-in-biblioteca-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Busca",
+    "manifest": "",
+    "nome": "La Notte dei Pupazzi in Biblioteca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-25"
    },
    "la-parata-degli-elfi-di-natale-biblioteca-civica-b-busca": {
     "anni": [
@@ -6730,7 +6807,7 @@
     "nome": "Seme, Foglia, Albero con Vanessa Barile",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-11-12"
+    "ultima": "2026-11-19"
    }
   },
   "nome": "Cavallermaggiore",
@@ -9597,6 +9674,17 @@
     "pagina": true,
     "ultima": "2026-11-07"
    },
+   "piemonte-cavalli-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello degli Acaja - Sala Barbero",
+    "manifest": "Piemonte Cavalli",
+    "nome": "Piemonte Cavalli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "salta-il-castello-fossano": {
     "anni": [
      2026
@@ -11136,6 +11224,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-29"
+   },
+   "mercatini-di-natale-rsa-a-e-g-giubergia-margarita": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortile RSA A. e G. Giubergia",
+    "manifest": "Mercatini di Natale - RSA A. e G. Giubergia",
+    "nome": "Mercatini di Natale - RSA A. e G. Giubergia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    }
   },
   "nome": "Margarita",
@@ -12007,6 +12106,23 @@
   "nome": "Montà",
   "prov": "CN"
  },
+ "montadalba": {
+  "eventi": {
+   "alla-ricerca-del-fiore-dorato-che-stooria-monta-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca comunale di Montà d'Alba",
+    "manifest": "",
+    "nome": "Alla ricerca del fiore dorato - Che Stooria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   }
+  },
+  "nome": "Montà d'Alba",
+  "prov": "CN"
+ },
  "montaldeo": {
   "eventi": {
    "castagnata-di-san-martino-pro-loco-montaldeo": {
@@ -12182,6 +12298,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "un-magico-natale-al-castello-dei-roero-monteu-roero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Saletta Polifunzionale Don Lino Brossa",
+    "manifest": "Un Magico Natale al Castello dei Roero",
+    "nome": "Un Magico Natale al Castello dei Roero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    }
   },
   "nome": "Monteu Roero",
@@ -15105,6 +15232,23 @@
   "nome": "Piozzo",
   "prov": "CN"
  },
+ "pocapaglia": {
+  "eventi": {
+   "mercatini-di-natale-al-sapore-di-miele-pocapaglia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Principessa Maria Pia",
+    "manifest": "Mercatini di Natale al Sapore di Miele",
+    "nome": "Mercatini di Natale al Sapore di Miele",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   }
+  },
+  "nome": "Pocapaglia",
+  "prov": "CN"
+ },
  "polonghera": {
   "eventi": {
    "halloween-party-festa-di-halloween-pro-loco-polong-polonghera": {
@@ -15712,6 +15856,17 @@
     "organizza": "Pro Loco di Priocca",
     "pagina": true,
     "ultima": "2026-12-12"
+   },
+   "festa-degli-alberi-comune-di-priocca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area verde Viale Regina Margherita",
+    "manifest": "",
+    "nome": "Festa degli Alberi - Comune di Priocca",
+    "organizza": "Comune di Priocca",
+    "pagina": true,
+    "ultima": "2026-11-17"
    }
   },
   "nome": "Priocca",
@@ -16010,6 +16165,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-13"
+   },
+   "fiera-di-santa-lucia-fiera-capponi-racconigi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro città",
+    "manifest": "",
+    "nome": "Fiera di Santa Lucia - Fiera Capponi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-17"
    },
    "gioco-destrutturato-carezza-racconigi": {
     "anni": [
@@ -17337,6 +17503,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "negozi-in-strada-christmas-edition-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "",
+    "nome": "Negozi in Strada Christmas Edition",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "negozi-in-strada-sport-in-piazza-confcommercio-sal-saluzzo": {
     "anni": [
      2026
@@ -17733,6 +17910,23 @@
   },
   "nome": "San Damiano d'Asti",
   "prov": "AT"
+ },
+ "sanfront": {
+  "eventi": {
+   "fiera-di-s-martino-sanfront": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Risorgimento",
+    "manifest": "Fiera di S. Martino Sanfront 2026",
+    "nome": "Fiera di S. Martino Sanfront 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   }
+  },
+  "nome": "Sanfront",
+  "prov": "CN"
  },
  "sangiacomodiroburent": {
   "eventi": {
@@ -19035,6 +19229,39 @@
  },
  "sommarivaperno": {
   "eventi": {
+   "aspettando-il-natale-a-sommariva-perno-24-tappe-co": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Sommariva Perno",
+    "manifest": "Aspettando il Natale a Sommariva Perno",
+    "nome": "Aspettando il Natale a Sommariva Perno - 24 tappe con giochi, laboratori e letture",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
+   },
+   "aspettando-il-natale-a-sommariva-perno-ritiro-pass": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Santa Post Office",
+    "manifest": "Aspettando il Natale a Sommariva Perno",
+    "nome": "Aspettando il Natale a Sommariva Perno - Ritiro Passaporto del Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
+   },
+   "letture-per-ridere-lettura-animata-e-laboratorio-c-sommariva-perno": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Sommariva Perno",
+    "manifest": "",
+    "nome": "Letture per Ridere - lettura animata e laboratorio creativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "mercatini-di-natale-pro-loco-sommariva-perno": {
     "anni": [
      2026
