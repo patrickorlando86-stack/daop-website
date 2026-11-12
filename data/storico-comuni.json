@@ -864,6 +864,17 @@
     "pagina": true,
     "ultima": "2026-08-24"
    },
+   "accensione-delle-luminarie-quartiere-cristo-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Quartiere Cristo",
+    "manifest": "Christmas Show - Quartiere Cristo Alessandria",
+    "nome": "Accensione delle luminarie - Quartiere Cristo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "alecomics-festival-alessandria": {
     "anni": [
      2026
@@ -896,6 +907,17 @@
     "organizza": "Associazione il Contastorie",
     "pagina": true,
     "ultima": "2026-11-29"
+   },
+   "arrivo-della-befana-con-caramelle-e-sorprese-alessandria": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Parco Scuola Morbelli",
+    "manifest": "Christmas Show - Quartiere Cristo Alessandria",
+    "nome": "Arrivo della Befana con caramelle e sorprese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-06"
    },
    "aspettando-halloween-yo-yo-active-play-alessandria": {
     "anni": [
@@ -1117,6 +1139,17 @@
     "pagina": true,
     "ultima": "2026-11-07"
    },
+   "foto-con-babbo-natale-e-gli-elfi-consegna-letterin-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Scuola Morbelli",
+    "manifest": "Christmas Show - Quartiere Cristo Alessandria",
+    "nome": "Foto con Babbo Natale e gli Elfi - Consegna letterine",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
    "gagliaudo-tra-i-mercanti-alessandria": {
     "anni": [
      2026
@@ -1138,6 +1171,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-21"
+   },
+   "grande-inaugurazione-christmas-show-spettacoli-acr-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Scuola Morbelli",
+    "manifest": "Christmas Show - Quartiere Cristo Alessandria",
+    "nome": "Grande Inaugurazione Christmas Show - Spettacoli, Acrobati, Area Food",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
    },
    "gravity-circus-connection-alessandria": {
     "anni": [
@@ -1524,6 +1568,17 @@
     "pagina": true,
     "ultima": "2026-10-01"
    },
+   "spettacolo-di-capodanno-e-festa-di-capodanno-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Scuola Morbelli",
+    "manifest": "Christmas Show - Quartiere Cristo Alessandria",
+    "nome": "Spettacolo di Capodanno e Festa di Capodanno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-31"
+   },
    "super-mario-galaxy-alessandria": {
     "anni": [
      2026
@@ -1556,6 +1611,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-13"
+   },
+   "tributo-k-pop-musical-show-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Scuola Morbelli",
+    "manifest": "Christmas Show - Quartiere Cristo Alessandria",
+    "nome": "Tributo K-Pop Musical Show",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
    },
    "un-bel-giorno-alessandria": {
     "anni": [
@@ -1611,6 +1677,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-14"
+   },
+   "zampognari-per-le-vie-del-quartiere-quartiere-cris-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Quartiere Cristo",
+    "manifest": "Christmas Show - Quartiere Cristo Alessandria",
+    "nome": "Zampognari per le vie del quartiere - Quartiere Cristo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    }
   },
   "nome": "Alessandria",
@@ -2017,6 +2094,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-11"
+   },
+   "festa-della-musica-citta-di-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Alfieri",
+    "manifest": "",
+    "nome": "Festa della Musica - Città di Asti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-19"
    },
    "festa-di-halloween-centro-per-le-famiglie-asti": {
     "anni": [
@@ -4112,6 +4200,36 @@
   "nome": "Cabella Ligure",
   "prov": "AL"
  },
+ "calamandrana": {
+  "eventi": {
+   "open-day-scuola-dell-infanzia-don-stefano-minetti-calamandrana": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Scuola dell'Infanzia Don Stefano Minetti",
+    "manifest": "",
+    "nome": "Open Day - Scuola dell'Infanzia Don Stefano Minetti Calamandrana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-12"
+   },
+   "open-day-scuola-primaria-r-solito-calamandrana": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Scuola Primaria R. Solito",
+    "manifest": "",
+    "nome": "Open Day - Scuola Primaria R. Solito Calamandrana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-08"
+   }
+  },
+  "nome": "Calamandrana",
+  "prov": "AT"
+ },
  "caldirola": {
   "eventi": {
    "festa-del-bro-d-carvo-pro-loco-caldirola": {
@@ -5675,6 +5793,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-12"
+   },
+   "mercatino-di-natale-castel-boglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "6° Mercatino di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    }
   },
   "nome": "Castel Boglione",
@@ -7345,6 +7474,23 @@
    }
   },
   "nome": "Corsione",
+  "prov": "AT"
+ },
+ "cortanze": {
+  "eventi": {
+   "castello-di-cortanze-in-festa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Cortanze",
+    "manifest": "Castello di Cortanze in Festa",
+    "nome": "Castello di Cortanze in Festa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   }
+  },
+  "nome": "Cortanze",
   "prov": "AT"
  },
  "cortazzone": {
@@ -11092,6 +11238,17 @@
     "pagina": true,
     "ultima": "2026-10-18"
    },
+   "mercatini-di-natale-molare": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Molare",
+    "manifest": "",
+    "nome": "Mercatini di Natale - Molare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "polentone-di-molare": {
     "anni": [
      2026
@@ -12861,6 +13018,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-18"
+   },
+   "schermi-e-relazioni-come-orientarsi-nel-mondo-digi-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Studio Professionale Dott.sse Dabene e Chinelli",
+    "manifest": "",
+    "nome": "Schermi e Relazioni - Come orientarsi nel mondo digitale con i più piccoli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    }
   },
   "nome": "Nizza Monferrato",
@@ -13088,6 +13256,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "dolci-terre-di-novi-edizione-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Fieristico Dolci Terre di Novi",
+    "manifest": "",
+    "nome": "Dolci Terre di Novi - 29ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    },
    "dolci-terre-speciale-cioccolato-edizione-novi-ligure": {
     "anni": [
@@ -13967,6 +14146,94 @@
     "pagina": true,
     "ultima": "2026-09-20"
    },
+   "biodiversita-delle-api-lettura-laboratorio-e-arnia-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "BIODIVERSITÀ DELLE API - Lettura, laboratorio e arnia didattica",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-05-15"
+   },
+   "con-mappa-e-bussola-orientamento-con-uscita-guidat-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "CON MAPPA E BUSSOLA - Orientamento con uscita guidata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-16"
+   },
+   "il-bosco-degli-imperfetti-hana-la-fatina-del-bosco-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "IL BOSCO DEGLI IMPERFETTI - Hana, la fatina del bosco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
+   "il-bosco-degli-imperfetti-l-ape-milla-e-l-importan-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "IL BOSCO DEGLI IMPERFETTI - L'ape Milla e l'importanza della squadra",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-04-03"
+   },
+   "il-carnevale-degli-animali-laboratorio-musicale-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "IL CARNEVALE DEGLI ANIMALI - Laboratorio musicale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-06"
+   },
+   "il-corpo-e-mio-e-decido-io-a-chi-dare-un-bacino-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "IL CORPO È MIO E DECIDO IO - a chi dare un bacino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-30"
+   },
+   "il-fiore-del-partigiano-libera-manipolazione-di-ar-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "IL FIORE DEL PARTIGIANO - Libera manipolazione di argilla",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
+   "il-piccolo-ranocchio-nello-stagno-arcobaleno-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "IL PICCOLO RANOCCHIO nello stagno arcobaleno",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "in-balia-di-halloween-in-balia-degli-eventi-ovada": {
     "anni": [
      2026
@@ -13999,6 +14266,72 @@
     "organizza": "Pro Loco Ovada e del Monferrato Ovadese",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "pasqua-oltre-le-alpi-tra-gessetti-di-gusci-d-uovo-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "PASQUA OLTRE LE ALPI - Tra gessetti di gusci d'uovo e pulcini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-03-20"
+   },
+   "pierino-e-il-lupo-laboratorio-musicale-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "PIERINO E IL LUPO - Laboratorio musicale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "ritorno-al-bosco-delle-acacie-esperienza-di-yoga-p-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "RITORNO AL BOSCO DELLE ACACIE - Esperienza di yoga per famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-04-17"
+   },
+   "storie-con-il-cuore-lettura-dedicata-alla-festa-de-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "STORIE CON IL CUORE - Lettura dedicata alla festa della mamma",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-05-08"
+   },
+   "storie-per-il-mio-papa-lettura-dedicata-alla-festa-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "STORIE PER IL MIO PAPÀ - Lettura dedicata alla festa del papà",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-03-13"
+   },
+   "una-storia-da-gustare-la-bottega-fiorita-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Biblioteca Civica Coniugi Ighina",
+    "manifest": "16 Appuntamenti da Non Perdere - Biblioteca Civica Coniugi Ighina Ovada",
+    "nome": "UNA STORIA DA GUSTARE - La Bottega Fiorita",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-20"
    },
    "vita-vino-e-tartufi-ovada": {
     "anni": [
@@ -16137,6 +16470,23 @@
   },
   "nome": "Rivarone",
   "prov": "AL"
+ },
+ "roatto": {
+  "eventi": {
+   "monferrato-miles-roatto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Piemonte",
+    "manifest": "",
+    "nome": "Monferrato Miles",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   }
+  },
+  "nome": "Roatto",
+  "prov": "AT"
  },
  "robilante": {
   "eventi": {
@@ -19168,6 +19518,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-19"
+   },
+   "iron-mind-marco-berry-aps-magic-for-children-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palestra Codevilla",
+    "manifest": "",
+    "nome": "Iron Mind - Marco Berry APS Magic for Children",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "l-amore-ai-tempi-dei-social-affettivita-e-sessuali-tortona": {
     "anni": [
