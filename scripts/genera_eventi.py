@@ -4503,6 +4503,31 @@ def voce_corsi(mobile=False, assoluto=False):
     return f'<li><a href="{href}">Corsi</a></li>'
 
 
+def voce_servizi(mobile=False):
+    """La voce Servizi in nav (13/11/2026, Patrick: «metti servizi nel menu»),
+    vuota finche' /servizi/ non e' pubblico.
+
+    La fonte e' il conteggio che genera_corsi scrive quando l'indice dei
+    servizi ha almeno una societa' confermata (data/conteggi.json, chiave
+    `servizi`): zero = nessuna voce, come per i centri fuori stagione.
+
+    NON HA UN MARKER SUO: viaggia dentro quello dei corsi (NAV-CORSI, MM-CORSI),
+    subito dopo «Corsi». Un marker nuovo andrebbe scritto a mano nelle dodici
+    pagine che nessun generatore scrive (vedi aggiorna_nav), e finche' una non
+    ce l'ha quella pagina resta senza la voce: cosi' ci arriva dappertutto al
+    primo giro. L'indirizzo e' sempre dalla radice, perche' /servizi/ e' una
+    cartella e un href relativo da 404.html o da una scheda non la trova.
+
+    LA MISURA: con questa le voci sono otto, nove in stagione di centri. La
+    nota di voce_centri() dice che la nona va rimisurata a 901px: fatto il
+    13/11 con otto (vedi il TODO del downloader), con nove no - d'estate."""
+    if not (conteggi_leggi().get('servizi') or 0):
+        return ''
+    if mobile:
+        return '<a href="/servizi/" onclick="closeMobile()">Servizi</a>'
+    return '<li><a href="/servizi/">Servizi</a></li>'
+
+
 def aggiorna_nav():
     """Riscrive la voce dei centri dove la nav e' scritta a mano.
 
@@ -4521,8 +4546,10 @@ def aggiorna_nav():
             'NAV-CENTRI': voce_centri(assoluto=assoluto),
             'MM-CENTRI': voce_centri(mobile=True, assoluto=assoluto),
             'HERO-CENTRI': riga_centri_hero(),
-            'NAV-CORSI': voce_corsi(assoluto=assoluto),
-            'MM-CORSI': voce_corsi(mobile=True, assoluto=assoluto),
+            # I servizi stanno DENTRO il marker dei corsi: vedi voce_servizi().
+            'NAV-CORSI': voce_corsi(assoluto=assoluto) + voce_servizi(),
+            'MM-CORSI': (voce_corsi(mobile=True, assoluto=assoluto)
+                         + voce_servizi(mobile=True)),
             # I profili social: qui 'assoluto' non c'entra - sono URL esterne,
             # quindi la voce e' la stessa in tutte e tre le varianti. Cambia
             # solo la vernice, per index.html che ha gli stili in linea.

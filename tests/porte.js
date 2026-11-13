@@ -271,8 +271,15 @@ module.exports = async function porte(browser) {
     // La nav a nove voci era gia' tagliata a destra sopra i 901px, che e' il
     // motivo per cui le porte non ci stavano: se qualcuno la riallunga, questa
     // prova lo dice prima dello screenshot.
+    //
+    // RIMISURATA IL 13/11/2026, quando e' entrata «Servizi» (otto voci, nove
+    // in stagione di centri). A 901px, la larghezza piu' stretta in cui la nav
+    // e' in riga: con otto la prima voce parte a 303px e il marchio finisce a
+    // 133; con una nona simulata («Centri estivi») parte a 195, una riga sola,
+    // nessuno sforo. Nove ci stanno con 62px di margine, una decima no: le
+    // voci di quel giorno erano piu' corte di quelle del taglio di allora.
     const voci = (nav[0].match(/<li>/g) || []).length;
-    r.ok(voci <= 7, `nav di ${voci} voci: sopra le sette si taglia sul desktop`);
+    r.ok(voci <= 9, `nav di ${voci} voci: sopra le nove si taglia sul desktop`);
   }
 
   // Sul telefono il cassetto e' l'unica nav che esiste (il 90% del traffico):
