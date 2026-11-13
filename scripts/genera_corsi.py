@@ -3105,7 +3105,6 @@ BISOGNI_SERVIZI = (
 # Sul foglio la tipologia di riserva e' «Altro»; in pagina, da titolo di una
 # sezione, «Altro» da solo non dice di cosa.
 BISOGNO_ALTRO = 'Altri servizi'
-_RE_STACCO = re.compile(r'\s+[-–—]\s+')
 
 
 def bisogno_servizio(c):
@@ -3120,68 +3119,15 @@ def bisogno_servizio(c):
     return BISOGNO_ALTRO
 
 
-def raggruppa_varianti(servizi):
-    """I servizi di UNA societa', con le varianti dello stesso servizio in una
-    voce sola: [(titolo, [(etichetta_variante, c), ...]), ...].
-
-    «Battesimo - Shooting Chiesa», «Battesimo - Shooting Casa + Chiesa» e
-    «... + Ristorante» sono un servizio con tre pacchetti, non tre servizi: sul
-    foglio restano tre righe (ognuna ha la sua descrizione e la sua scheda
-    sulla pagina della societa'), nell'indice e' una scheda. Due segnali, nei
-    NOMI, e servono almeno due righe perche' scatti:
-      1. la stessa testa prima di un trattino staccato («Battesimo - ...»);
-      2. le stesse prime DUE parole («Compleanno Tematico Baby Spa» / «...
-         Pizza Party»). Una sola non basta: «Compleanno con Animazione» e
-         «Compleanno sensoriale» sono due cose diverse, e «Sessione Newborn»
-         non e' un pacchetto di «Sessione fotografica Maternity».
-    Chi resta solo tiene il suo nome intero. L'ordine e' quello del foglio."""
-    def testa(c):
-        pezzi = _RE_STACCO.split(c['nome'].strip(), 1)
-        return pezzi[0].strip().lower() if len(pezzi) == 2 else None
-
-    def due(c):
-        parole = c['nome'].split()
-        return ' '.join(parole[:2]).lower() if len(parole) > 2 else None
-
-    chiave = {}
-    for regola in (testa, due):
-        conta = {}
-        for c in servizi:
-            if id(c) not in chiave and regola(c):
-                conta.setdefault(regola(c), []).append(c)
-        for k, cc in conta.items():
-            if len(cc) > 1:
-                for c in cc:
-                    chiave[id(c)] = (regola.__name__, k)
-    gruppi, dove = [], {}
-    for c in servizi:
-        k = chiave.get(id(c))
-        if k is None:
-            gruppi.append((c['nome'], [('', c)]))
-            continue
-        if k not in dove:
-            dove[k] = len(gruppi)
-            gruppi.append((None, []))
-        gruppi[dove[k]][1].append((None, c))
-    fuori = []
-    for titolo, voci in gruppi:
-        if titolo is None:
-            nomi = [c['nome'].strip() for _, c in voci]
-            if _RE_STACCO.search(nomi[0]):
-                titolo = _RE_STACCO.split(nomi[0], 1)[0].strip()
-                voci = [(_RE_STACCO.split(n, 1)[1].strip(), c)
-                        for n, (_, c) in zip(nomi, voci)]
-            else:
-                # Il prefisso comune piu' lungo, a parole intere.
-                righe = [n.split() for n in nomi]
-                k = 0
-                while (all(len(r) > k + 1 for r in righe)
-                       and len({r[k].lower() for r in righe}) == 1):
-                    k += 1
-                titolo = ' '.join(righe[0][:k])
-                voci = [(' '.join(r[k:]), c) for r, (_, c) in zip(righe, voci)]
-        fuori.append((titolo, voci))
-    return fuori
+# NIENTE PIU' PACCHETTI (13/11/2026, Patrick: «perche' non possono esserci tutti
+# i servizi delle singole pagine?»). Fino a oggi l'indice fondeva in una scheda
+# le righe di una societa' con lo stesso inizio di nome (le prime due parole, o
+# la testa prima di « - »): «Servizio Fotografico Natalizio / Battesimo /
+# Comunione-Cresima» di Denis diventavano una scheda con tre «pacchetti», mentre
+# «Sessione Newborn» o «Smash Cake» restavano a se'. La regola guardava come e'
+# SCRITTO il nome, non cosa e' il servizio: un battesimo e il Natale non sono
+# varianti dello stesso servizio. Ora l'indice ha UNA SCHEDA PER RIGA, come la
+# pagina della societa' (#servizi): stesse schede, stesso conto.
 
 
 def _frase(testo, massimo=170):
@@ -3201,13 +3147,13 @@ def _frase(testo, massimo=170):
     return out
 
 
-def _card_indice_servizio(titolo, varianti, org, info, href):
+def _card_indice_servizio(c, org, info, href):
     """Una scheda dell'indice: il servizio, chi lo fa, dove, e la strada per
     prenotarlo. `href` e' l'indirizzo dei servizi di quella societa'
     (scrivi_servizi): il link porta alla scheda di QUEL servizio (s-<codice>,
     lo stesso id di _card_servizio), che ha la descrizione intera e sotto
     «Come si prenota»."""
-    primo = varianti[0][1]
+    primo = c
     base = href.split('#')[0]
     ancora = f"{base}#s-{G.slugify(primo.get('codice') or primo['nome'])}"
     img = ''
@@ -3217,29 +3163,24 @@ def _card_indice_servizio(titolo, varianti, org, info, href):
         img = (f'<a class="sv-loc" href="{G.esc(ancora)}" tabindex="-1" aria-hidden="true">'
                f'<img src="{G.esc(foto)}" alt="" width="84" height="84" '
                f'loading="lazy" decoding="async"></a>')
-    cc = [c for _, c in varianti]
-    dove = ', '.join(_uniche(c.get('citta') for c in cc)) or (info.get('citta') or '').strip()
-    if any('domicilio' in (c.get('descr') or '').lower() for c in cc):
+    cc = [c]
+    dove = ', '.join(_uniche(x.get('citta') for x in cc)) or (info.get('citta') or '').strip()
+    if 'domicilio' in (c.get('descr') or '').lower():
         dove = f"{dove} · anche a domicilio" if dove else 'a domicilio'
     dati = []
-    eta = _uniche(eta_testo(c) for c in cc)
+    eta = _uniche(eta_testo(x) for x in cc)
     if len(eta) == 1:
         dati.append(('Per chi', G.esc(eta[0])))
     if dove:
         dati.append(('Dove', G.esc(dove)))
-    prezzi = _uniche(c.get('prezzo') for c in cc)
-    if len(prezzi) == 1 and len(cc) == 1:
-        dati.append(('Costo', G.esc(prezzi[0])))
-    if len(varianti) > 1:
-        corpo = ('<p class="sv-pacchetti-t">' + _n(len(varianti), 'pacchetto', 'pacchetti')
-                 + ':</p><ul class="sv-elenco">'
-                 + ''.join(f'<li>{G.esc(_cap(e))}</li>' for e, _ in varianti) + '</ul>')
-    else:
-        d = _frase(primo.get('descr'))
-        corpo = f'<p class="sv-descr">{G.esc(d)}</p>' if d else ''
+    prezzo = (c.get('prezzo') or '').strip()
+    if prezzo:
+        dati.append(('Costo', G.esc(prezzo)))
+    d = _frase(c.get('descr'))
+    corpo = f'<p class="sv-descr">{G.esc(d)}</p>' if d else ''
     return (f'<article class="sv-card" data-org="{slug_realta(org)}" '
             f'data-org-nome="{G.esc(org)}">{img}<div class="sv-body">'
-            f'<h3 class="sv-nome"><a href="{G.esc(ancora)}">{G.esc(titolo)}</a></h3>'
+            f'<h3 class="sv-nome"><a href="{G.esc(ancora)}">{G.esc(c["nome"])}</a></h3>'
             f'<p class="sv-chi">di <a href="{G.esc(href)}">{G.esc(org)}</a></p>'
             + ('<dl class="sv-dati">' + ''.join(f'<dt>{k}</dt><dd>{v}</dd>'
                                                 for k, v in dati) + '</dl>'
@@ -3286,10 +3227,78 @@ def porte_servizi_province(conteggi, qui=None):
             f'<span class="co-prov-t">{etichetta}:</span> {link}</div>\n')
 
 
+# L'INTRODUZIONE DI /servizi/ (13/11/2026, Patrick: «testo introduttivo SEO
+# friendly»). Prima la pagina apriva con una riga di conti («2 realta' e 18
+# servizi per le famiglie: ...»), che a Google non dice per quali ricerche
+# rispondere. Ora due paragrafi con le parole che una famiglia scrive davvero
+# («fotografo battesimo», «animazione compleanno», «massaggio infantile»), ma
+# SOLO per le tipologie che in pagina ci sono: un testo che promette un
+# fotografo dove fotografi non ce ne sono e' una pagina che mente a chi arriva
+# da Google. Le frasi seguono BISOGNI_SERVIZI: tipologia nuova = una riga qui.
+_SERVIZI_DOMANDA = {
+    'Fotografia': 'un fotografo per il battesimo o per il neonato',
+    'Feste e animazione': "un'animazione per la festa di compleanno",
+    'Benessere mamma e bambino': 'un corso di massaggio infantile',
+}
+_SERVIZI_TIPO = {
+    'Fotografia': 'fotografi',
+    'Feste e animazione': 'feste di compleanno con animazione',
+    'Benessere mamma e bambino': 'benessere per mamma e bambino',
+}
+
+
+def testo_intro_servizi(voci, prov=None):
+    """(html dei due paragrafi, meta description) dell'indice dei servizi.
+    `voci` come in pagina_indice_servizi; vuote = None (ci pensa il chiamante)."""
+    tutti = [c for _, servizi, _, _ in voci for c in servizi]
+    if not tutti:
+        return None
+    presenti = [b for b, _ in BISOGNI_SERVIZI
+                if any(bisogno_servizio(c) == b for c in tutti)]
+    sigle = sorted({(c.get('prov') or '').strip().upper() for c in tutti if c.get('prov')})
+    if prov:
+        dove = f"in provincia di {PROV_NOME.get(prov, prov)}"
+    elif sigle:
+        nomi = [PROV_NOME.get(p, p) for p in sigle]
+        dove = (f"in provincia di {nomi[0]}" if len(nomi) == 1
+                else f"nelle province di {_e(nomi)}")
+    else:
+        dove = 'in Piemonte'
+    # I comuni non vanno nel testo: le citta' sul foglio sono scritte come
+    # vengono («Cuneo e dintorni»), e in fila diventano una frase storta. Le
+    # dice ogni scheda.
+    domande = [_SERVIZI_DOMANDA[b] for b in presenti]
+    tipi = [_SERVIZI_TIPO[b] for b in presenti]
+    if domande:
+        chiede = (domande[0] if len(domande) == 1
+                  else f"{', '.join(domande[:-1])} o {domande[-1]}")
+        p1 = (f"Cerchi {chiede}? Qui DAOP raccoglie i servizi per famiglie "
+              f"con bambini {dove}: {_e(tipi)}. Le realtà in elenco le "
+              f"scegliamo noi, una per una.")
+    else:
+        p1 = (f"Qui DAOP raccoglie i servizi per famiglie con bambini {dove}. "
+              f"Le realtà in elenco le scegliamo noi, una per una.")
+    p2 = ("Non sono corsi con un calendario fisso né eventi con una data: sono "
+          "servizi che prenoti tu, quando ti servono. Per ognuno trovi a che età è "
+          "pensato, dove si svolge, il prezzo quando è dichiarato e come contattare "
+          "direttamente chi lo offre. "
+          f"Oggi in elenco: {_n(len(voci), 'realtà', 'realtà')} e "
+          f"{_n(len(tutti), 'servizio', 'servizi')}.")
+    html = (f'  <p class="cr-intro">{G.esc(p1)}</p>\n'
+            f'  <p class="cr-intro sv-intro2">{G.esc(p2)}</p>\n')
+    tipi_meta = _cap(_e(tipi)) if tipi else 'Servizi per famiglie con bambini'
+    meta = (f"{tipi_meta} {dove}: i servizi per famiglie con bambini scelti "
+            f"da DAOP, e come prenotarli.")
+    if len(meta) > 160:
+        meta = (f"Servizi per famiglie con bambini {dove}, scelti da DAOP: "
+                f"per chi sono, dove, quanto costano e come si prenotano.")
+    return html, meta
+
+
 def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
                           porte=''):
     """/servizi/: i servizi PER BISOGNO (vedi BISOGNI_SERVIZI), una scheda per
-    servizio con le varianti raggruppate (raggruppa_varianti) e la societa'
+    servizio (una per riga del foglio, come sulla pagina della societa') e la societa'
     come firma. Lo stampo resta quello della pagina servizi - schede aperte,
     niente calendario. `voci` = (org, servizi, info, href)."""
     # `prov` = la sigla, sulla pagina di una provincia (le voci arrivano gia'
@@ -3303,14 +3312,13 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
     voci = sorted(voci, key=lambda v: G.slugify(v[0]))
     n = sum(len(v[1]) for v in voci)
     if n:
-        descr = (f"{_n(len(voci), 'realtà', 'realtà')} e {_n(n, 'servizio', 'servizi')} "
-                 f"per le famiglie{' ' + dove if dove else ''}: cosa offrono, "
-                 f"per chi, come si prenota.")
+        intro_html, descr = testo_intro_servizi(voci, prov)
         vuota = ''
     else:
         # La provincia senza servizi: la pagina c'e' (e' l'indirizzo che
         # invecchia), dice il vero e rimanda all'hub. E' fuori indice.
         descr = f"Servizi per le famiglie {dove}: in elenco non ce ne sono ancora."
+        intro_html = f'  <p class="cr-intro">{G.esc(descr)}</p>\n'
         vuota = (f'  <p class="sv-altro"><a href="/{DIR_SERVIZI}/">Guarda tutti i '
                  f'servizi per le famiglie</a> delle altre province.</p>\n')
     if prov:
@@ -3325,9 +3333,9 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
         for c in servizi:
             suoi.setdefault(bisogno_servizio(c), []).append(c)
         for b, cc in suoi.items():
-            for tit, varianti in raggruppa_varianti(cc):
+            for c in cc:
                 per_bisogno.setdefault(b, []).append(
-                    _card_indice_servizio(tit, varianti, org, info, href))
+                    _card_indice_servizio(c, org, info, href))
     ordine = [b for b, _ in BISOGNI_SERVIZI] + [BISOGNO_ALTRO]
     bisogni = [(b, per_bisogno[b]) for b in ordine if b in per_bisogno]
     salta = ''
@@ -3365,8 +3373,7 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
 .sv-nome a:hover{{text-decoration:underline}}
 .sv-chi{{margin:0 0 8px;font-size:.92rem;opacity:.8}}
 .sv-chi a{{color:var(--navy,#2d4a5c);font-weight:600}}
-.sv-pacchetti-t{{margin:0;font-size:.92rem;opacity:.62}}
-.sv-elenco{{margin:2px 0 0;padding-left:1.1em;font-size:.95rem;line-height:1.55}}</style>
+.sv-intro2{{margin-top:10px}}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>
@@ -3384,8 +3391,7 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
   </div>
 </header>
 <article class="cr-wrap">
-  <p class="cr-intro">{G.esc(descr)}</p>
-{porte}{salta}{sezioni}{vuota}
+{intro_html}{porte}{salta}{sezioni}{vuota}
 </article>
 {G.blocco_ginetto()}</main>
 {foot}
