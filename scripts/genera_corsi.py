@@ -3069,36 +3069,208 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
+# I BISOGNI DELL'INDICE /servizi/ (13/11/2026).
+#
+# Fino a oggi l'indice era una scheda per SOCIETA' con sotto l'elenco dei nomi.
+# Ma chi arriva qui non cerca CaRezza: cerca «chi mi fa le foto al battesimo»,
+# «un'animazione per il compleanno». La pagina entra dal bisogno, e la societa'
+# e' la firma sotto la scheda - e' l'ordine delle directory di servizi, ed e'
+# il contrario di corsi.html per una ragione: li' si filtra un calendario, qui
+# si riconosce una cosa da prenotare.
+#
+# UNA LISTA CHIUSA E CORTA, ricavata per parole. Non si usa il secondo livello
+# della categoria cosi' com'e' per la ragione scritta in _cat_macro: non e'
+# stabile fra una rilettura e l'altra («Fotografia» / «Fotografia newborn»), e
+# CaRezza da sola ne porta sei. Vince la PRIMA regola che trova una sua parola
+# nella categoria o nel nome; quello che non ne trova va in «Altri servizi»,
+# che e' il segnale per aggiungere una riga qui, non per scriverla sul foglio.
+#
+# NIENTE FILTRI NE' RICERCA, apposta: con una manciata di societa' filtrerebbero
+# il vuoto. Le voci in cima sono ancore. Si riguarda sopra le 6-8 societa'.
+BISOGNI_SERVIZI = (
+    ('Fotografia', ('fotograf', 'shooting', 'foto ')),
+    ('Feste e compleanni', ('compleann', 'festa', 'feste', 'animazion')),
+    ('Benessere per mamma e bambino',
+     ('benessere', 'massaggi', 'gravidanz', 'pancione', 'rebozo', 'mamma',
+      'neonat', 'misp', 'blessingway')),
+)
+BISOGNO_ALTRO = 'Altri servizi'
+_RE_STACCO = re.compile(r'\s+[-–—]\s+')
+
+
+def bisogno_servizio(c):
+    testo = f"{c.get('cat') or ''} {c.get('nome') or ''} ".lower()
+    for nome, parole in BISOGNI_SERVIZI:
+        if any(p in testo for p in parole):
+            return nome
+    return BISOGNO_ALTRO
+
+
+def raggruppa_varianti(servizi):
+    """I servizi di UNA societa', con le varianti dello stesso servizio in una
+    voce sola: [(titolo, [(etichetta_variante, c), ...]), ...].
+
+    «Battesimo - Shooting Chiesa», «Battesimo - Shooting Casa + Chiesa» e
+    «... + Ristorante» sono un servizio con tre pacchetti, non tre servizi: sul
+    foglio restano tre righe (ognuna ha la sua descrizione e la sua scheda
+    sulla pagina della societa'), nell'indice e' una scheda. Due segnali, nei
+    NOMI, e servono almeno due righe perche' scatti:
+      1. la stessa testa prima di un trattino staccato («Battesimo - ...»);
+      2. le stesse prime DUE parole («Compleanno Tematico Baby Spa» / «...
+         Pizza Party»). Una sola non basta: «Compleanno con Animazione» e
+         «Compleanno sensoriale» sono due cose diverse, e «Sessione Newborn»
+         non e' un pacchetto di «Sessione fotografica Maternity».
+    Chi resta solo tiene il suo nome intero. L'ordine e' quello del foglio."""
+    def testa(c):
+        pezzi = _RE_STACCO.split(c['nome'].strip(), 1)
+        return pezzi[0].strip().lower() if len(pezzi) == 2 else None
+
+    def due(c):
+        parole = c['nome'].split()
+        return ' '.join(parole[:2]).lower() if len(parole) > 2 else None
+
+    chiave = {}
+    for regola in (testa, due):
+        conta = {}
+        for c in servizi:
+            if id(c) not in chiave and regola(c):
+                conta.setdefault(regola(c), []).append(c)
+        for k, cc in conta.items():
+            if len(cc) > 1:
+                for c in cc:
+                    chiave[id(c)] = (regola.__name__, k)
+    gruppi, dove = [], {}
+    for c in servizi:
+        k = chiave.get(id(c))
+        if k is None:
+            gruppi.append((c['nome'], [('', c)]))
+            continue
+        if k not in dove:
+            dove[k] = len(gruppi)
+            gruppi.append((None, []))
+        gruppi[dove[k]][1].append((None, c))
+    fuori = []
+    for titolo, voci in gruppi:
+        if titolo is None:
+            nomi = [c['nome'].strip() for _, c in voci]
+            if _RE_STACCO.search(nomi[0]):
+                titolo = _RE_STACCO.split(nomi[0], 1)[0].strip()
+                voci = [(_RE_STACCO.split(n, 1)[1].strip(), c)
+                        for n, (_, c) in zip(nomi, voci)]
+            else:
+                # Il prefisso comune piu' lungo, a parole intere.
+                righe = [n.split() for n in nomi]
+                k = 0
+                while (all(len(r) > k + 1 for r in righe)
+                       and len({r[k].lower() for r in righe}) == 1):
+                    k += 1
+                titolo = ' '.join(righe[0][:k])
+                voci = [(' '.join(r[k:]), c) for r, (_, c) in zip(righe, voci)]
+        fuori.append((titolo, voci))
+    return fuori
+
+
+def _frase(testo, massimo=170):
+    """La prima frase di una descrizione, o le prime che stanno in `massimo`:
+    nell'indice serve la riga che fa capire cos'e', il resto sta sulla scheda."""
+    testo = ' '.join((testo or '').split())
+    if len(testo) <= massimo:
+        return testo
+    frasi = re.split(r'(?<=[.!?])\s+', testo)
+    out = ''
+    for f in frasi:
+        if out and len(out) + 1 + len(f) > massimo:
+            break
+        out = f"{out} {f}".strip()
+    if len(out) > massimo:
+        out = out[:massimo].rsplit(' ', 1)[0].rstrip(',;:') + '…'
+    return out
+
+
+def _card_indice_servizio(titolo, varianti, org, info, href):
+    """Una scheda dell'indice: il servizio, chi lo fa, dove, e la strada per
+    prenotarlo. `href` e' l'indirizzo dei servizi di quella societa'
+    (scrivi_servizi): il link porta alla scheda di QUEL servizio (s-<codice>,
+    lo stesso id di _card_servizio), che ha la descrizione intera e sotto
+    «Come si prenota»."""
+    primo = varianti[0][1]
+    base = href.split('#')[0]
+    ancora = f"{base}#s-{G.slugify(primo.get('codice') or primo['nome'])}"
+    img = ''
+    mini = G.loc_path(primo['loc'], mini=True) if primo.get('loc') else ''
+    foto = mini or logo_path(info.get('logo'))
+    if foto:
+        img = (f'<a class="sv-loc" href="{G.esc(ancora)}" tabindex="-1" aria-hidden="true">'
+               f'<img src="{G.esc(foto)}" alt="" width="84" height="84" '
+               f'loading="lazy" decoding="async"></a>')
+    cc = [c for _, c in varianti]
+    dove = ', '.join(_uniche(c.get('citta') for c in cc)) or (info.get('citta') or '').strip()
+    if any('domicilio' in (c.get('descr') or '').lower() for c in cc):
+        dove = f"{dove} · anche a domicilio" if dove else 'a domicilio'
+    dati = []
+    eta = _uniche(eta_testo(c) for c in cc)
+    if len(eta) == 1:
+        dati.append(('Per chi', G.esc(eta[0])))
+    if dove:
+        dati.append(('Dove', G.esc(dove)))
+    prezzi = _uniche(c.get('prezzo') for c in cc)
+    if len(prezzi) == 1 and len(cc) == 1:
+        dati.append(('Costo', G.esc(prezzi[0])))
+    if len(varianti) > 1:
+        corpo = ('<p class="sv-pacchetti-t">' + _n(len(varianti), 'pacchetto', 'pacchetti')
+                 + ':</p><ul class="sv-elenco">'
+                 + ''.join(f'<li>{G.esc(_cap(e))}</li>' for e, _ in varianti) + '</ul>')
+    else:
+        d = _frase(primo.get('descr'))
+        corpo = f'<p class="sv-descr">{G.esc(d)}</p>' if d else ''
+    return (f'<article class="sv-card" data-org="{slug_realta(org)}" '
+            f'data-org-nome="{G.esc(org)}">{img}<div class="sv-body">'
+            f'<h3 class="sv-nome"><a href="{G.esc(ancora)}">{G.esc(titolo)}</a></h3>'
+            f'<p class="sv-chi">di <a href="{G.esc(href)}">{G.esc(org)}</a></p>'
+            + ('<dl class="sv-dati">' + ''.join(f'<dt>{k}</dt><dd>{v}</dd>'
+                                                for k, v in dati) + '</dl>'
+               if dati else '')
+            + corpo
+            + f'<p class="sv-altro"><a href="{G.esc(ancora)}">Dettagli e come si prenota →</a></p>'
+            '</div></article>')
+
+
 def pagina_indice_servizi(voci, css, nav, foot, in_indice=False):
-    """/servizi/: una scheda per societa', coi suoi servizi in fila e il link
-    alla sua pagina. Lo stampo e' quello della pagina servizi (schede aperte,
-    niente calendario), non quello dei corsi: qui la domanda e' «chi mi fa
-    cosa», e la risposta sta in poche righe. `voci` = (org, servizi, info, href)."""
+    """/servizi/: i servizi PER BISOGNO (vedi BISOGNI_SERVIZI), una scheda per
+    servizio con le varianti raggruppate (raggruppa_varianti) e la societa'
+    come firma. Lo stampo resta quello della pagina servizi - schede aperte,
+    niente calendario. `voci` = (org, servizi, info, href)."""
     url = f"{SITE_URL}/{DIR_SERVIZI}/"
     titolo = "Servizi per le famiglie | DAOP"
     voci = sorted(voci, key=lambda v: G.slugify(v[0]))
     n = sum(len(v[1]) for v in voci)
     descr = (f"{_n(len(voci), 'realtà', 'realtà')} e {_n(n, 'servizio', 'servizi')} "
              f"per le famiglie: cosa offrono, per chi, come si prenota.")
-    schede = []
-    for org, servizi, info, f in voci:
-        # `f` e' gia' l'indirizzo giusto: la pagina della realta' (#servizi) se
-        # ce l'ha, la pagina servizi se e' l'unica che ha (scrivi_servizi).
-        citta = (info.get('citta') or '').strip() or ', '.join(
-            _uniche(c['citta'] for c in servizi))
-        logo = logo_path(info.get('logo'))
-        img = (f'<span class="sv-loc"><img src="{G.esc(logo)}" alt="" width="84" '
-               f'height="84" loading="lazy" decoding="async"></span>' if logo else '')
-        nomi = "".join(f'<li>{G.esc(c["nome"])}</li>' for c in servizi)
-        schede.append(
-            f'<article class="sv-card" data-org="{slug_realta(org)}" '
-            f'data-org-nome="{G.esc(org)}">{img}<div class="sv-body">'
-            f'<span class="co-cat">{G.esc(_cap(_e(_uniche(_cat_foglia(c).lower() for c in servizi))))}</span>'
-            f'<h2 class="sv-nome"><a href="{G.esc(f)}">{G.esc(org)}</a></h2>'
-            + (f'<p class="sv-descr">{G.esc(citta)}</p>' if citta else '')
-            + f'<ul class="sv-elenco">{nomi}</ul>'
-            f'<p class="sv-altro"><a href="{G.esc(f)}">Cosa offre e come si prenota →</a></p>'
-            '</div></article>')
+    # bisogno -> schede, nell'ordine di BISOGNI_SERVIZI e con «Altri» in coda.
+    per_bisogno = {}
+    for org, servizi, info, href in voci:
+        suoi = {}
+        for c in servizi:
+            suoi.setdefault(bisogno_servizio(c), []).append(c)
+        for b, cc in suoi.items():
+            for tit, varianti in raggruppa_varianti(cc):
+                per_bisogno.setdefault(b, []).append(
+                    _card_indice_servizio(tit, varianti, org, info, href))
+    ordine = [b for b, _ in BISOGNI_SERVIZI] + [BISOGNO_ALTRO]
+    bisogni = [(b, per_bisogno[b]) for b in ordine if b in per_bisogno]
+    salta = ''
+    if len(bisogni) > 1:
+        # Un <div role="navigation"> e non un <nav>: vedi porte_province().
+        salta = ('  <div class="co-prov" role="navigation" aria-label="Che cosa cerchi">'
+                 '<span class="co-prov-t">Che cosa cerchi?</span> '
+                 + ' '.join(f'<a href="#b-{G.slugify(b)}">{G.esc(b)} '
+                            f'<small>{len(schede)}</small></a>' for b, schede in bisogni)
+                 + '</div>\n')
+    sezioni = "\n".join(
+        f'  <section class="sv-bisogno" id="b-{G.slugify(b)}" aria-labelledby="bh-{G.slugify(b)}">\n'
+        f'  <h2 class="cr-h" id="bh-{G.slugify(b)}">{G.esc(b)}</h2>\n'
+        f'  <div class="sv-lista">\n' + "\n".join(schede) + '\n  </div>\n  </section>'
+        for b, schede in bisogni)
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -3113,8 +3285,16 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False):
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
 <style>{css}{G.GINETTO_CSS}{CSS}{CSS_REALTA}{SERVIZI_CSS}
+/* padding:0 - il guscio del sito da' 100px a ogni <section>. */
+.sv-bisogno{{scroll-margin-top:84px;margin:0;padding:0}}
+.sv-bisogno .cr-h{{margin:30px 0 12px}}
+.sv-nome{{margin:2px 0 2px}}
 .sv-nome a{{color:inherit;text-decoration:none}}
-.sv-elenco{{margin:6px 0 0;padding-left:1.1em;font-size:.95rem;line-height:1.55}}</style>
+.sv-nome a:hover{{text-decoration:underline}}
+.sv-chi{{margin:0 0 8px;font-size:.92rem;opacity:.8}}
+.sv-chi a{{color:var(--navy,#2d4a5c);font-weight:600}}
+.sv-pacchetti-t{{margin:0;font-size:.92rem;opacity:.62}}
+.sv-elenco{{margin:2px 0 0;padding-left:1.1em;font-size:.95rem;line-height:1.55}}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>
@@ -3133,9 +3313,7 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False):
 </header>
 <article class="cr-wrap">
   <p class="cr-intro">{G.esc(descr)}</p>
-  <div class="sv-lista">
-{chr(10).join(schede)}
-  </div>
+{salta}{sezioni}
 </article>
 {G.blocco_ginetto()}</main>
 {foot}
