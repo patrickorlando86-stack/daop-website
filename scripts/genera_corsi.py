@@ -3249,17 +3249,75 @@ def _card_indice_servizio(titolo, varianti, org, info, href):
             '</div></article>')
 
 
-def pagina_indice_servizi(voci, css, nav, foot, in_indice=False):
+# LE PAGINE PER PROVINCIA E LA FASCIA ILLUSTRATA (13/11/2026), chieste da
+# Patrick: «la pagina corsi ha le pagine divise per provincia, con una bella
+# immagine di header... rifarei la stessa struttura». Quindi /servizi/ resta
+# l'hub e ogni provincia del sito ha la sua /servizi-provincia-<nome>.html,
+# con la riga «Per provincia» in cima: e' lo split dei corsi del 06/10, con le
+# stesse regole (vedi scrivi_province) - la pagina esiste anche vuota, perche'
+# e' l'indirizzo che invecchia, ma non si propone e non va in indice.
+# Quello che NON si copia dai corsi e' il corpo: niente elenco con i filtri,
+# restano le sezioni per tipologia.
+#
+# L'IMMAGINE E' IN PRESTITO: e' la fascia dei corsi. Quando c'e' quella dei
+# servizi (stesso formato: <nome>-1600.webp e <nome>-m.webp in
+# assets/images/stagioni/) basta cambiare questa riga.
+FASCIA_SERVIZI = '/assets/images/stagioni/corsi'
+
+
+def href_servizi_prov(prov):
+    p = (prov or '').strip().upper()
+    return f"/servizi-provincia-{G.slugify(PROV_NOME.get(p, p))}.html"
+
+
+def porte_servizi_province(conteggi, qui=None):
+    """La riga delle province in cima ai servizi: il gemello di
+    porte_province(), stessa regola - solo verso le province che un servizio
+    ce l'hanno, col numero che la pagina mostra."""
+    voci = [(p, conteggi[p]) for p in G.PROVINCE_PUBBLICATE
+            if p != qui and conteggi.get(p)]
+    if not voci:
+        return ''
+    etichetta = 'Altre province' if qui else 'Per provincia'
+    link = ' '.join(
+        f'<a href="{href_servizi_prov(p)}">{G.esc(PROV_NOME.get(p, p))} '
+        f'<small>{n}</small></a>' for p, n in voci)
+    return (f'  <div class="co-prov" role="navigation" aria-label="Servizi per provincia">'
+            f'<span class="co-prov-t">{etichetta}:</span> {link}</div>\n')
+
+
+def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
+                          porte=''):
     """/servizi/: i servizi PER BISOGNO (vedi BISOGNI_SERVIZI), una scheda per
     servizio con le varianti raggruppate (raggruppa_varianti) e la societa'
     come firma. Lo stampo resta quello della pagina servizi - schede aperte,
     niente calendario. `voci` = (org, servizi, info, href)."""
-    url = f"{SITE_URL}/{DIR_SERVIZI}/"
-    titolo = "Servizi per le famiglie | DAOP"
+    # `prov` = la sigla, sulla pagina di una provincia (le voci arrivano gia'
+    # ristrette ai suoi servizi); None sull'hub. `porte` e' la riga di
+    # porte_servizi_province(), gia' fatta.
+    nome_prov = PROV_NOME.get(prov, prov) if prov else ''
+    dove = f"in provincia di {nome_prov}" if prov else ''
+    url = (f"{SITE_URL}{href_servizi_prov(prov)}" if prov
+           else f"{SITE_URL}/{DIR_SERVIZI}/")
+    titolo = f"Servizi per le famiglie{' ' + dove if dove else ''} | DAOP"
     voci = sorted(voci, key=lambda v: G.slugify(v[0]))
     n = sum(len(v[1]) for v in voci)
-    descr = (f"{_n(len(voci), 'realtà', 'realtà')} e {_n(n, 'servizio', 'servizi')} "
-             f"per le famiglie: cosa offrono, per chi, come si prenota.")
+    if n:
+        descr = (f"{_n(len(voci), 'realtà', 'realtà')} e {_n(n, 'servizio', 'servizi')} "
+                 f"per le famiglie{' ' + dove if dove else ''}: cosa offrono, "
+                 f"per chi, come si prenota.")
+        vuota = ''
+    else:
+        # La provincia senza servizi: la pagina c'e' (e' l'indirizzo che
+        # invecchia), dice il vero e rimanda all'hub. E' fuori indice.
+        descr = f"Servizi per le famiglie {dove}: in elenco non ce ne sono ancora."
+        vuota = (f'  <p class="sv-altro"><a href="/{DIR_SERVIZI}/">Guarda tutti i '
+                 f'servizi per le famiglie</a> delle altre province.</p>\n')
+    if prov:
+        percorso = (f'<a href="/">Home</a> › <a href="/{DIR_SERVIZI}/">Servizi per le '
+                    f'famiglie</a> › <span>{G.esc(nome_prov)}</span>')
+    else:
+        percorso = '<a href="/">Home</a> › <span>Servizi per le famiglie</span>'
     # bisogno -> schede, nell'ordine di BISOGNI_SERVIZI e con «Altri» in coda.
     per_bisogno = {}
     for org, servizi, info, href in voci:
@@ -3315,19 +3373,19 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False):
 <body>
 {nav}
 <main id="contenuto">
-<header class="page-hero">
+<header class="page-hero hero-fascia co-hero" style="--fascia:url({FASCIA_SERVIZI}-1600.webp);--fascia-m:url({FASCIA_SERVIZI}-m.webp)">
   <div class="page-hero-inner">
-    <div class="cr-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <span>Servizi per le famiglie</span>
+    <div class="co-crumb" role="navigation" aria-label="Percorso">
+      {percorso}
     </div>
-    <span class="section-label">Piemonte · Servizi per le famiglie</span>
-    <h1>Servizi per le famiglie</h1>
-    <p class="cr-sub">Quello che prenoti tu, quando ti serve.</p>
+    <span class="section-label">{G.esc(nome_prov) + ' · ' if nome_prov else ''}Famiglie</span>
+    <h1>Servizi per le famiglie{f' <em>{G.esc(dove)}</em>' if dove else ''}</h1>
+    <p>Quello che prenoti tu, quando ti serve.</p>
   </div>
 </header>
 <article class="cr-wrap">
   <p class="cr-intro">{G.esc(descr)}</p>
-{salta}{sezioni}
+{porte}{salta}{sezioni}{vuota}
 </article>
 {G.blocco_ginetto()}</main>
 {foot}
@@ -3380,8 +3438,9 @@ def scrivi_servizi(gruppi, realta, css, nav, foot, anteprime=()):
     prima; il giorno che la realta' ha la sua pagina diventa un rimando da
     sola. Toglie le pagine delle societa' che i servizi non li hanno piu'.
 
-    Restituisce quanti servizi elenca l'indice PUBBLICO, 0 se l'indice e'
-    ancora nascosto (vedi sotto): lo leggono corsi.html e la sitemap."""
+    Restituisce (quanti servizi elenca l'indice PUBBLICO - 0 se e' ancora
+    nascosto, vedi sotto - e i file delle pagine provincia in indice): li
+    leggono corsi.html, la home e la sitemap."""
     import glob as _glob
     in_anteprima = {id(c) for c in anteprime}
     dest = os.path.join(ROOT, DIR_SERVIZI)
@@ -3423,12 +3482,46 @@ def scrivi_servizi(gruppi, realta, css, nav, foot, anteprime=()):
         if suoi and confermata(info):
             pubbliche.append((org, suoi, info, href))
     n_pubblici = sum(len(v[1]) for v in pubbliche)
+    # Le pagine provincia (13/11/2026) nascono con l'indice pubblico e spariscono
+    # con lui: finche' la sezione e' «per noi» non c'e' niente da dividere.
+    conteggi_prov = {}
+    for _org, suoi, _info, _href in pubbliche:
+        for c in suoi:
+            sigla = (c.get('prov') or '').strip().upper()
+            if sigla in G.PROVINCE_PUBBLICATE:
+                conteggi_prov[sigla] = conteggi_prov.get(sigla, 0) + 1
+    prov_in_indice_sv = []
+    for sigla in G.PROVINCE_PUBBLICATE:
+        file = href_servizi_prov(sigla).lstrip('/')
+        path = os.path.join(ROOT, file)
+        if not pubbliche:
+            if os.path.exists(path):
+                os.remove(path)
+                print(f"[genera_corsi] servizi: tolta {file}")
+            continue
+        sue = [(org, [c for c in suoi
+                      if (c.get('prov') or '').strip().upper() == sigla],
+                info, href) for org, suoi, info, href in pubbliche]
+        sue = [v for v in sue if v[1]]
+        quanti = conteggi_prov.get(sigla, 0)
+        # In indice con la soglia delle altre pagine provincia (MIN_LANDING):
+        # sotto, sarebbe un doppione sottile della pagina di una societa'.
+        dentro = quanti >= G.MIN_LANDING
+        _scrivi_se_cambia(path, file,
+                          pagina_indice_servizi(
+                              sue, css, nav, foot, in_indice=dentro, prov=sigla,
+                              porte=porte_servizi_province(conteggi_prov, qui=sigla)),
+                          quanti)
+        if dentro:
+            prov_in_indice_sv.append(file)
     if voci:
         vive.add('index.html')
         in_pagina = pubbliche or voci
         _scrivi_se_cambia(os.path.join(dest, 'index.html'), f"{DIR_SERVIZI}/index.html",
-                          pagina_indice_servizi(in_pagina, css, nav, foot,
-                                                in_indice=bool(pubbliche)),
+                          pagina_indice_servizi(
+                              in_pagina, css, nav, foot,
+                              in_indice=bool(pubbliche),
+                              porte=porte_servizi_province(conteggi_prov)),
                           sum(len(v[1]) for v in in_pagina))
         fuori = [v[0] for v in voci if v[0] not in {p[0] for p in pubbliche}]
         if pubbliche and fuori:
@@ -3445,7 +3538,7 @@ def scrivi_servizi(gruppi, realta, css, nav, foot, anteprime=()):
         print(f"[genera_corsi] servizi: {len(vive)} "
               + ("pagina" if len(vive) == 1 else "pagine")
               + f" ({', '.join(sorted(vive))})")
-    return n_pubblici
+    return n_pubblici, prov_in_indice_sv
 
 
 def porta_servizi(n):
@@ -5388,7 +5481,7 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def aggiorna_sitemap(pagine=(), province=(), servizi=False):
+def aggiorna_sitemap(pagine=(), province=(), servizi=False, servizi_prov=()):
     """Il blocco della sitemap: ci sta dentro solo quello che e' in indice.
 
     `province` (06/10/2026): i file delle pagine provincia IN INDICE, gia'
@@ -5446,6 +5539,11 @@ def aggiorna_sitemap(pagine=(), province=(), servizi=False):
                     f"    <lastmod>{oggi}</lastmod>\n"
                     f"    <changefreq>weekly</changefreq>\n"
                     f"    <priority>0.6</priority>\n  </url>")
+    for f in sorted(servizi_prov):
+        voci.append(f"  <url>\n    <loc>{SITE_URL}/{f}</loc>\n"
+                    f"    <lastmod>{oggi}</lastmod>\n"
+                    f"    <changefreq>weekly</changefreq>\n"
+                    f"    <priority>0.5</priority>\n  </url>")
     if not voci:
         fuori = re_via.sub('', s)
         if fuori != s:
@@ -5568,7 +5666,7 @@ def main():
                            in_anteprima=in_anteprima)
     # Le pagine servizi: dalle stesse societa', anteprime comprese. L'indice
     # /servizi/ invece e' dei soli confermati: vedi scrivi_servizi().
-    n_servizi = scrivi_servizi(gruppi, realta, css, nav, foot,
+    n_servizi, servizi_prov = scrivi_servizi(gruppi, realta, css, nav, foot,
                                anteprime=anteprime)
     conteggi = conta_province(corsi)
     porte = porte_province(conteggi) if CORSI_PER_PROVINCIA else ''
@@ -5580,7 +5678,8 @@ def main():
                       render(corsi, css, nav, foot, realta, porte=porte),
                       len(corsi))
     province = scrivi_province(corsi, conteggi, realta, css, nav, foot)
-    aggiorna_sitemap(pagine, province, servizi=bool(n_servizi))
+    aggiorna_sitemap(pagine, province, servizi=bool(n_servizi),
+                     servizi_prov=servizi_prov)
     return 0
 
 

@@ -8740,6 +8740,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://www.daop.it/servizi-provincia-cuneo.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <!-- CORSI:END -->
   <!-- LUOGHI-PAGINE:START (generato da scripts/pagine_luoghi.py — non modificare a mano) -->
   <url>
