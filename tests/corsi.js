@@ -886,8 +886,12 @@ module.exports = async function corsi(browser) {
       .getAttribute('data-org-nome').catch(() => null);
     r.ok(!!h1 && h1 === (org || h1), `${f}: l'H1 è la realtà (${h1})`);
 
+    // Corsi O servizi (13/11/2026): una realta' di soli servizi - il fotografo -
+    // di .event-card non ne ha nessuna, e la sua pagina e' piena lo stesso.
     const corsiQui = await q.page.locator('.event-card').count();
-    r.ok(corsiQui > 0, `${f}: ${corsiQui} corsi in pagina`);
+    const serviziQui = await q.page.locator('.sv-card').count();
+    r.ok(corsiQui + serviziQui > 0,
+      `${f}: ${corsiQui} corsi e ${serviziQui} servizi in pagina`);
 
     // Il materiale che giustifica la pagina. Senza descrizione questa pagina
     // dice meno della scheda che la realta' ha gia' in corsi.html, cioe' e' un

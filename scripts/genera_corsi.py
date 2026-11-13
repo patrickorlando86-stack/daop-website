@@ -2847,8 +2847,9 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 # DAL 23/10/2026 UN INDIRIZZO SOLO PER REALTA': chi ha la pagina della realta'
 # mostra i servizi li' (#servizi) e /servizi/<slug>.html e' un rimando; la
 # pagina servizi qui sotto si scrive solo per chi quella pagina non ce l'ha.
-# Vedi scrivi_servizi(). L'indice /servizi/ resta noindex finche' la sezione
-# vera non nasce, coi primi si' (TODO del downloader, "Sezione SERVIZI").
+# Vedi scrivi_servizi(). DAL 13/11/2026 l'indice /servizi/ e' pubblico per le
+# sole societa' confermate (li' il perche'); Ginetto e i link dalle schede
+# restano da fare (TODO del downloader, "Sezione SERVIZI").
 DIR_SERVIZI = 'servizi'
 TIPI_SERVIZIO = ('servizio', 'servizi')
 
@@ -3068,7 +3069,7 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def pagina_indice_servizi(voci, css, nav, foot):
+def pagina_indice_servizi(voci, css, nav, foot, in_indice=False):
     """/servizi/: una scheda per societa', coi suoi servizi in fila e il link
     alla sua pagina. Lo stampo e' quello della pagina servizi (schede aperte,
     niente calendario), non quello dei corsi: qui la domanda e' «chi mi fa
@@ -3105,7 +3106,7 @@ def pagina_indice_servizi(voci, css, nav, foot):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{G.esc(titolo)}</title>
 <meta name="description" content="{G.esc(descr)}">
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="{'index, follow' if in_indice else 'noindex, follow'}">
 <link rel="canonical" href="{url}">
 <link rel="icon" href="/assets/images/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -3175,7 +3176,7 @@ def rimando_servizi(org, verso):
 """
 
 
-def scrivi_servizi(gruppi, realta, css, nav, foot):
+def scrivi_servizi(gruppi, realta, css, nav, foot, anteprime=()):
     """I servizi di ogni societa' che ha righe col Tipo "servizio" (vedi
     TIPI_SERVIZIO): l'indice /servizi/ e, per ciascuna, un solo indirizzo.
 
@@ -3185,8 +3186,12 @@ def scrivi_servizi(gruppi, realta, css, nav, foot):
     gia' mandato in giro (CaRezza, dal 07/10) continua a funzionare. Se la
     pagina non ce l'ha, la pagina servizi e' l'unica che ha, e si scrive come
     prima; il giorno che la realta' ha la sua pagina diventa un rimando da
-    sola. Toglie le pagine delle societa' che i servizi non li hanno piu'."""
+    sola. Toglie le pagine delle societa' che i servizi non li hanno piu'.
+
+    Restituisce quanti servizi elenca l'indice PUBBLICO, 0 se l'indice e'
+    ancora nascosto (vedi sotto): lo leggono corsi.html e la sitemap."""
     import glob as _glob
+    in_anteprima = {id(c) for c in anteprime}
     dest = os.path.join(ROOT, DIR_SERVIZI)
     vive, voci = set(), []
     for org, corsi_org in gruppi.items():
@@ -3209,14 +3214,37 @@ def scrivi_servizi(gruppi, realta, css, nav, foot):
                           pagina, len(servizi))
         voci.append((org, servizi, info, href))
     # L'INDICE (23/10/2026), chiesto da Giovanni: «/servizi non esiste, anche
-    # solo per noi». Noindex come le pagine che raccoglie, fuori dalla sitemap
-    # e senza link dal sito: ci si arriva solo dalle briciole di una pagina
-    # servizi. Sparisce con l'ultima societa' (il glob qui sotto lo pota).
+    # solo per noi». Sparisce con l'ultima societa' (il glob qui sotto lo pota).
+    #
+    # DAL 13/11/2026 E' PUBBLICO, MA SOLO COI SI' (Patrick: «fallo vedere nel
+    # sito»). Ci entrano le societa' con la scheda confermata() e, di quelle, i
+    # servizi che non sono in anteprima: e' la regola dei corsi (una proposta
+    # non esce in nessun elenco finche' non dice si'), e quel giorno c'erano
+    # CaRezza confermata e Denis Dutto ancora proposta. Con almeno un si'
+    # l'indice e' in indice, in sitemap e linkato da corsi.html; la societa'
+    # entra da sola quando la sua cella Stato cambia.
+    # Senza nessun si' resta com'era nato: tutte le societa', noindex, senza
+    # link - la pagina «per noi» da far vedere a chi deve ancora rispondere.
+    pubbliche = []
+    for org, servizi, info, href in voci:
+        suoi = [c for c in servizi if id(c) not in in_anteprima]
+        if suoi and confermata(info):
+            pubbliche.append((org, suoi, info, href))
+    n_pubblici = sum(len(v[1]) for v in pubbliche)
     if voci:
         vive.add('index.html')
+        in_pagina = pubbliche or voci
         _scrivi_se_cambia(os.path.join(dest, 'index.html'), f"{DIR_SERVIZI}/index.html",
-                          pagina_indice_servizi(voci, css, nav, foot),
-                          sum(len(v[1]) for v in voci))
+                          pagina_indice_servizi(in_pagina, css, nav, foot,
+                                                in_indice=bool(pubbliche)),
+                          sum(len(v[1]) for v in in_pagina))
+        fuori = [v[0] for v in voci if v[0] not in {p[0] for p in pubbliche}]
+        if pubbliche and fuori:
+            print(f"[genera_corsi] servizi: indice pubblico con {len(pubbliche)} "
+                  f"societa'; fuori finche' non dicono si': {', '.join(sorted(fuori))}")
+        elif not pubbliche:
+            print("[genera_corsi] servizi: nessuna societa' confermata, "
+                  "l'indice resta noindex e senza link")
     for path in _glob.glob(os.path.join(dest, '*.html')):
         if os.path.basename(path) not in vive:
             os.remove(path)
@@ -3225,6 +3253,19 @@ def scrivi_servizi(gruppi, realta, css, nav, foot):
         print(f"[genera_corsi] servizi: {len(vive)} "
               + ("pagina" if len(vive) == 1 else "pagine")
               + f" ({', '.join(sorted(vive))})")
+    return n_pubblici
+
+
+def porta_servizi(n):
+    """La riga «Cerchi un servizio?» in cima a corsi.html, sotto le province:
+    il link che porta a /servizi/ (13/11/2026). Stesso stampo di
+    porte_province() - e per la stessa ragione un <div role="navigation"> e non
+    un <nav>. Non si stampa finche' l'indice non e' pubblico (n = 0)."""
+    if not n:
+        return ''
+    return (f'  <div class="co-prov" role="navigation" aria-label="Servizi per le famiglie">'
+            f'<span class="co-prov-t">Cerchi un servizio?</span> '
+            f'<a href="/{DIR_SERVIZI}/">Servizi per le famiglie <small>{n}</small></a></div>\n')
 
 
 def _francobollo(c):
@@ -5155,7 +5196,7 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 """
 
 
-def aggiorna_sitemap(pagine=(), province=()):
+def aggiorna_sitemap(pagine=(), province=(), servizi=False):
     """Il blocco della sitemap: ci sta dentro solo quello che e' in indice.
 
     `province` (06/10/2026): i file delle pagine provincia IN INDICE, gia'
@@ -5205,6 +5246,13 @@ def aggiorna_sitemap(pagine=(), province=()):
         voci.append(f"  <url>\n    <loc>{SITE_URL}/{DIR_REALTA}/{f}</loc>\n"
                     f"    <lastmod>{oggi}</lastmod>\n"
                     f"    <changefreq>monthly</changefreq>\n"
+                    f"    <priority>0.6</priority>\n  </url>")
+    # L'indice dei servizi (13/11/2026): dentro solo quando e' pubblico, cioe'
+    # quando scrivi_servizi() gli ha scritto "index" - la stessa invariante.
+    if servizi:
+        voci.append(f"  <url>\n    <loc>{SITE_URL}/{DIR_SERVIZI}/</loc>\n"
+                    f"    <lastmod>{oggi}</lastmod>\n"
+                    f"    <changefreq>weekly</changefreq>\n"
                     f"    <priority>0.6</priority>\n  </url>")
     if not voci:
         fuori = re_via.sub('', s)
@@ -5326,15 +5374,18 @@ def main():
     in_anteprima = {slug_realta(c.get('org') or '') for c in anteprime}
     pagine = scrivi_realta(gruppi, realta, css, nav, foot,
                            in_anteprima=in_anteprima)
-    # La pagina servizi d'esempio: dalle stesse societa', anteprime comprese.
-    scrivi_servizi(gruppi, realta, css, nav, foot)
+    # Le pagine servizi: dalle stesse societa', anteprime comprese. L'indice
+    # /servizi/ invece e' dei soli confermati: vedi scrivi_servizi().
+    n_servizi = scrivi_servizi(gruppi, realta, css, nav, foot,
+                               anteprime=anteprime)
     conteggi = conta_province(corsi)
     porte = porte_province(conteggi) if CORSI_PER_PROVINCIA else ''
+    porte += porta_servizi(n_servizi)
     _scrivi_se_cambia(PATH, FILE,
                       render(corsi, css, nav, foot, realta, porte=porte),
                       len(corsi))
     province = scrivi_province(corsi, conteggi, realta, css, nav, foot)
-    aggiorna_sitemap(pagine, province)
+    aggiorna_sitemap(pagine, province, servizi=bool(n_servizi))
     return 0
 
 

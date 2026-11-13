@@ -52,7 +52,10 @@ function pagine(dir = RADICE, base = '') {
 }
 
 // L'URL pubblica di un file. La home e' servita da "/" e in sitemap sta cosi'.
-const urlDi = (rel) => (rel === 'index.html' ? '/' : '/' + rel);
+// L'indice di una cartella si annuncia con la barra, non col nome del file:
+// /servizi/ e non /servizi/index.html (13/11/2026, la prima cartella col suo
+// indice in sitemap). E' la stessa regola della home, un livello piu' giu'.
+const urlDi = (rel) => '/' + rel.replace(/(^|\/)index\.html$/, '$1');
 
 const robotsDi = (html) => {
   const m = html.match(/<meta\s+name="robots"\s+content="([^"]+)"/i);
