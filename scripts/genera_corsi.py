@@ -3087,18 +3087,32 @@ function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.clas
 #
 # NIENTE FILTRI NE' RICERCA, apposta: con una manciata di societa' filtrerebbero
 # il vuoto. Le voci in cima sono ancore. Si riguarda sopra le 6-8 societa'.
+#
+# DAL 13/11/2026 (sera) E' LA TIPOLOGIA DEL FOGLIO. Giovanni ha chiesto la
+# stessa lista nella tendina del carico, e ora una riga servizio nasce con la
+# Categoria "Tipologia › Specifico" («Fotografia › Battesimo»): la prima meta'
+# la sceglie una persona o il modello da TIPOLOGIE_SERVIZI nel downloader. I
+# nomi qui sotto sono UNA COPIA di quella lista (piu' le parole, anche quelle
+# copiate da _PAROLE_TIPOLOGIA): se cambia una cambia l'altra. Si legge prima
+# la cella; le parole restano per le righe che la tipologia non ce l'hanno.
 BISOGNI_SERVIZI = (
     ('Fotografia', ('fotograf', 'shooting', 'foto ')),
-    ('Feste e compleanni', ('compleann', 'festa', 'feste', 'animazion')),
-    ('Benessere per mamma e bambino',
+    ('Feste e animazione', ('compleann', 'festa', 'feste', 'animazion')),
+    ('Benessere mamma e bambino',
      ('benessere', 'massaggi', 'gravidanz', 'pancione', 'rebozo', 'mamma',
       'neonat', 'misp', 'blessingway')),
 )
+# Sul foglio la tipologia di riserva e' «Altro»; in pagina, da titolo di una
+# sezione, «Altro» da solo non dice di cosa.
 BISOGNO_ALTRO = 'Altri servizi'
 _RE_STACCO = re.compile(r'\s+[-–—]\s+')
 
 
 def bisogno_servizio(c):
+    prima = _cat_macro(c).lower()
+    for nome, _ in BISOGNI_SERVIZI:
+        if prima == nome.lower():
+            return nome
     testo = f"{c.get('cat') or ''} {c.get('nome') or ''} ".lower()
     for nome, parole in BISOGNI_SERVIZI:
         if any(p in testo for p in parole):
