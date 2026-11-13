@@ -159,9 +159,20 @@ module.exports = async function porte(browser) {
   r.ok(!!fascia, fascia ? 'index.html: la fascia c\'è' : 'index.html: la fascia NON c\'è');
   if (fascia) {
     const card = (fascia[0].match(/class="eco-c"/g) || []).length;
-    r.ok(card === PORTE.length, card === PORTE.length
+    // Piu' i servizi (13/11/2026), che stanno SOLO qui e solo quando il loro
+    // indice e' pubblico. Come per i corsi, lo stato si legge dal risultato:
+    // /servizi/ in indice e la porta sulla home devono andare insieme.
+    let serviziPubblici = false;
+    try {
+      serviziPubblici = /name="robots" content="index/.test(html('servizi/index.html'));
+    } catch (e) { /* nessun indice dei servizi: nessuna porta */ }
+    const attese = PORTE.length + (serviziPubblici ? 1 : 0);
+    r.ok(card === attese, card === attese
       ? `index.html: ${card} porte`
-      : `index.html: ${card} porte invece di ${PORTE.length}`);
+      : `index.html: ${card} porte invece di ${attese}`);
+    r.ok(fascia[0].includes('href="/servizi/"') === serviziPubblici,
+      serviziPubblici ? 'index.html: la fascia porta ai servizi'
+        : 'index.html: nessuna porta ai servizi finché il loro indice non è pubblico');
     for (const [chiave, , proprio] of PORTE) {
       r.ok(fascia[0].includes(`href="${proprio}"`),
         `index.html: la fascia porta a ${chiave}`);

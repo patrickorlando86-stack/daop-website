@@ -4713,6 +4713,23 @@ def blocco_ecosistema(qui=None):
     if not voci:
         return ''
     porte = qui is None
+    # I SERVIZI, SOLO SULLA HOME (13/11/2026, Patrick: «e come ci arrivo dal
+    # sito ai servizi?»). Non sono una quinta famiglia in FAMIGLIE, apposta:
+    # li' vorrebbe dire una card in coda a ogni pagina del sito e una voce in
+    # nav, per una sezione che quel giorno aveva una societa' sola. Qui e' una
+    # porta in piu' nella fascia della home, e c'e' solo quando /servizi/ e'
+    # pubblico: il numero lo scrive genera_corsi (scrivi_servizi), ed e' zero
+    # finche' nessuna societa' ha detto si'. La regola e' quella dei centri
+    # fuori stagione: una porta non promette una cosa che non c'e'.
+    n_servizi = conteggi_leggi().get('servizi') or 0 if porte else 0
+    n_famiglie = len(voci)
+    if n_servizi:
+        sotto = (f"{n_servizi} servizi da prenotare, quando ti servono"
+                 if n_servizi >= MIN_CONTEGGIO
+                 else 'quello che prenoti tu, quando ti serve')
+        voci.append('<a class="eco-c" href="/servizi/">'
+                    '<span class="eco-n">Servizi per le famiglie</span>'
+                    f'<span class="eco-d">{esc(sotto)}</span></a>')
     cls = 'eco eco--porte' if porte else 'eco'
     titolo = ('Cosa trovi su DAOP' if porte else 'Cerchi un&#x27;altra cosa?')
     # Sulla home la sezione ha l'occhiello e la riga di sotto come tutte le
@@ -4724,7 +4741,15 @@ def blocco_ecosistema(qui=None):
     if porte:
         # Quattro quando ci sono i centri, tre fuori stagione: il testo dice
         # quello che la riga mostra, non quello che la riga mostrava ad agosto.
-        if len(voci) == 4:
+        if n_servizi:
+            # Con i servizi la riga non e' piu' «quattro modi di stare nel
+            # tempo»: l'ultima porta non ha un calendario, e il testo lo dice.
+            iscr = 'centri e corsi' if n_famiglie == 4 else 'corsi'
+            lab, sub = ('Le sezioni',
+                        f'Eventi con una data, luoghi che ci sono sempre, {iscr} '
+                        'con l&#x27;iscrizione, servizi da prenotare quando '
+                        'servono: ognuno con la sua pagina.')
+        elif len(voci) == 4:
             lab, sub = ('Le quattro sezioni',
                         'Eventi con una data, luoghi che ci sono sempre, centri e '
                         'corsi con l&#x27;iscrizione: quattro modi diversi di stare '

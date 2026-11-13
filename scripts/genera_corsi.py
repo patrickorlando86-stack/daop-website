@@ -5559,6 +5559,9 @@ def main():
     conteggi = conta_province(corsi)
     porte = porte_province(conteggi) if CORSI_PER_PROVINCIA else ''
     porte += porta_servizi(n_servizi)
+    # Lo legge la fascia della home (blocco_ecosistema in genera_eventi.py), con
+    # un giro di ritardo come gli altri conteggi: zero = nessuna porta.
+    G.conteggio_scrivi('servizi', n_servizi)
     _scrivi_se_cambia(PATH, FILE,
                       render(corsi, css, nav, foot, realta, porte=porte),
                       len(corsi))
