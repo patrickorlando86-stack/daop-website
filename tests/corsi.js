@@ -858,7 +858,14 @@ module.exports = async function corsi(browser) {
   // Ogni pagina dedicata dev'essere raggiungibile da corsi.html: una pagina che
   // non riceve link dal corpo di nessun'altra e' orfana, ed e' il guasto gia'
   // costato tutto il traffico a luoghi.html.
+  // Dal 14/11 una realta' che ha SOLO servizi (0 corsi: il fotografo, gli
+  // animatori) sta nella linguetta «Chi li offre» di servizi/index.html, non
+  // in corsi.html: vale l'uno o l'altro hub. Il 14/11 la prova guardava solo
+  // corsi.html ed e' diventata rossa su Denis Dutto, che era linkato da /servizi/.
   const hub = fs.readFileSync(file, 'utf8');
+  const fileHubServizi = path.join(RADICE, 'servizi', 'index.html');
+  const hubServizi = fs.existsSync(fileHubServizi)
+    ? fs.readFileSync(fileHubServizi, 'utf8') : '';
   const fileSitemap = path.join(RADICE, 'sitemap.xml');
   const sitemap = fs.existsSync(fileSitemap)
     ? fs.readFileSync(fileSitemap, 'utf8') : '';
@@ -1048,13 +1055,18 @@ module.exports = async function corsi(browser) {
     // fuori sitemap - se una delle tre cade, l'anteprima e' uscita in pubblico.
     const slug = f.replace(/\.html$/, '');
     if (!(slug in realtaPubbliche)) {
-      r.ok(!hub.includes(`/corsi/${f}`),
-        `${f}: in anteprima, e corsi.html NON la linka`);
+      r.ok(!hub.includes(`/corsi/${f}`) && !hubServizi.includes(`/corsi/${f}`),
+        `${f}: in anteprima, e né corsi.html né servizi/ la linkano`);
       r.ok(/noindex/.test(rob) && !inSitemap,
         `${f}: in anteprima, noindex e fuori sitemap`);
     } else {
-      r.ok(hub.includes(`/corsi/${f}`),
-        `${f}: corsi.html la linka (non è orfana)`);
+      const daCorsi = hub.includes(`/corsi/${f}`);
+      const daServizi = hubServizi.includes(`/corsi/${f}`);
+      r.ok(daCorsi || daServizi, daCorsi
+        ? `${f}: corsi.html la linka (non è orfana)`
+        : daServizi
+          ? `${f}: servizi/ la linka (non è orfana: ha solo servizi)`
+          : `${f}: né corsi.html né servizi/ la linkano (è orfana)`);
     }
     await q.ctx.close();
   }
