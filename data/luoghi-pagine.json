@@ -25,6 +25,13 @@
   "dal": "2026-10-05",
   "nome": "Cascina Gabutti",
   "premium_al": "2026-12-31",
-  "ultimo": "2026-11-13"
+  "ultimo": "2026-11-14"
+ },
+ "pazzanimazione-novi-ligure": {
+  "codice": "2019",
+  "dal": "2026-11-14",
+  "nome": "Pazzanimazione",
+  "premium_al": "2026-12-31",
+  "ultimo": "2026-11-14"
  }
 }
