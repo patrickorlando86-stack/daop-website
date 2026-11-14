@@ -2042,7 +2042,8 @@ CSS_REALTA = """
 .cr-ev-t{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cr-ev-n{font-weight:700;font-size:.98rem}
 .cr-ev-q{font-size:.86rem;opacity:.72}
-.cr-torna{margin:30px 0 0;font-size:.95rem}
+.cr-torna{margin:30px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.cr-torna .btn{text-decoration:none}
 /* Il sottotitolo sotto l'H1: dice cosa fa la societa' e dove, che l'H1 (il solo
    nome) non dice. */
 .cr-sub{margin:6px 0 0;font-size:1.02rem;opacity:.85}
@@ -2809,7 +2810,10 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
 {chr(10).join(b for b in (blocco_corsi, blocco_sv) if b)}
 {blocco_ev}
 {blocco_faq(faq_realta(org, corsi_veri, info), f'Domande frequenti su {org}')}
-  <p class="cr-torna"><a href="{torna}#co-lista">← Tutti i corsi {zona(corsi_org)[0]}</a></p>
+  <div class="cr-torna" role="navigation" aria-label="Corsi e servizi">
+    <a class="btn btn-primary" href="{torna}#co-lista">Tutti i corsi {zona(corsi_org)[0]}</a>
+    <a class="btn btn-teal" href="/{DIR_SERVIZI}/">Tutti i servizi per le famiglie</a>
+  </div>
 {G.blocco_ecosistema('corsi')}
 </article>
 {G.blocco_ginetto()}</main>
@@ -3235,11 +3239,6 @@ def porte_servizi_province(conteggi, qui=None):
 # SOLO per le tipologie che in pagina ci sono: un testo che promette un
 # fotografo dove fotografi non ce ne sono e' una pagina che mente a chi arriva
 # da Google. Le frasi seguono BISOGNI_SERVIZI: tipologia nuova = una riga qui.
-_SERVIZI_DOMANDA = {
-    'Fotografia': 'un fotografo per il battesimo o per il neonato',
-    'Feste e animazione': "un'animazione per la festa di compleanno",
-    'Benessere mamma e bambino': 'un corso di massaggio infantile',
-}
 _SERVIZI_TIPO = {
     'Fotografia': 'fotografi',
     'Feste e animazione': 'feste di compleanno con animazione',
@@ -3267,25 +3266,45 @@ def testo_intro_servizi(voci, prov=None):
     # I comuni non vanno nel testo: le citta' sul foglio sono scritte come
     # vengono («Cuneo e dintorni»), e in fila diventano una frase storta. Le
     # dice ogni scheda.
-    domande = [_SERVIZI_DOMANDA[b] for b in presenti]
+    # IL TESTO E' QUELLO SCRITTO DA PATRICK (14/11/2026), parola per parola. Di
+    # dinamico ci sono solo il posto («in provincia di Cuneo») e le frasi di una
+    # tipologia, che si stampano solo se quella tipologia in pagina c'e': senza
+    # fotografi, «se cerchi un fotografo...» sarebbe una promessa vuota.
     tipi = [_SERVIZI_TIPO[b] for b in presenti]
-    if domande:
-        chiede = (domande[0] if len(domande) == 1
-                  else f"{', '.join(domande[:-1])} o {domande[-1]}")
-        p1 = (f"Cerchi {chiede}? Qui DAOP raccoglie i servizi per famiglie "
-              f"con bambini {dove}: {_e(tipi)}. Le realtà in elenco le "
-              f"scegliamo noi, una per una.")
-    else:
-        p1 = (f"Qui DAOP raccoglie i servizi per famiglie con bambini {dove}. "
-              f"Le realtà in elenco le scegliamo noi, una per una.")
-    p2 = ("Non sono corsi con un calendario fisso né eventi con una data: sono "
-          "servizi che prenoti tu, quando ti servono. Per ognuno trovi a che età è "
-          "pensato, dove si svolge, il prezzo quando è dichiarato e come contattare "
-          "direttamente chi lo offre. "
-          f"Oggi in elenco: {_n(len(voci), 'realtà', 'realtà')} e "
-          f"{_n(len(tutti), 'servizio', 'servizi')}.")
-    html = (f'  <p class="cr-intro">{G.esc(p1)}</p>\n'
-            f'  <p class="cr-intro sv-intro2">{G.esc(p2)}</p>\n')
+    foto = 'Fotografia' in presenti
+    feste = 'Feste e animazione' in presenti
+    mamma = 'Benessere mamma e bambino' in presenti
+    domande = []
+    if foto:
+        domande.append("Cerchi un fotografo per il battesimo o per i primi giorni del tuo bambino?")
+    if feste and mamma:
+        domande.append("Stai organizzando una festa di compleanno o vorresti provare il massaggio infantile?")
+    elif feste:
+        domande.append("Stai organizzando una festa di compleanno?")
+    elif mamma:
+        domande.append("Vorresti provare il massaggio infantile?")
+    p1 = ' '.join(domande + [
+        f"Su DAOP trovi servizi per famiglie con bambini {dove}, proposti da "
+        "professionisti e realtà del territorio che selezioniamo uno per uno."])
+    p2 = ["Parti da quello che ti serve e guarda dove si svolge il servizio, a chi "
+          "si rivolge e che cosa comprende."]
+    if feste:
+        p2.append("Se stai preparando una festa, puoi vedere che tipo di animazione viene proposta.")
+    if foto:
+        p2.append("Se cerchi un fotografo, puoi consultare le informazioni sulle sessioni "
+                  "e sui pacchetti disponibili.")
+    if mamma:
+        p2.append("Per le attività dedicate a mamma e bambino, trovi le indicazioni "
+                  "sull’età e su come si svolgono gli incontri, quando riportate nella scheda.")
+    p3 = ("Nelle schede trovi anche il prezzo, quando indicato, e i contatti di chi "
+          "offre il servizio. Puoi scrivere o telefonare direttamente per chiedere "
+          "disponibilità, chiarire i dettagli e concordare la prenotazione per la "
+          "data che ti serve.")
+    numeri = (f"Oggi in elenco: {_n(len(voci), 'realtà', 'realtà')} e "
+              f"{_n(len(tutti), 'servizio', 'servizi')}.")
+    html = ''.join(f'  <p class="cr-intro{" sv-intro2" if k else ""}">{G.esc(t)}</p>\n'
+                   for k, t in enumerate([p1, ' '.join(p2), p3]))
+    html += f'  <p class="cr-intro sv-intro2 sv-numeri">{G.esc(numeri)}</p>\n'
     tipi_meta = _cap(_e(tipi)) if tipi else 'Servizi per famiglie con bambini'
     meta = (f"{tipi_meta} {dove}: i servizi per famiglie con bambini scelti "
             f"da DAOP, e come prenotarli.")
@@ -3373,7 +3392,8 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
 .sv-nome a:hover{{text-decoration:underline}}
 .sv-chi{{margin:0 0 8px;font-size:.92rem;opacity:.8}}
 .sv-chi a{{color:var(--navy,#2d4a5c);font-weight:600}}
-.sv-intro2{{margin-top:10px}}</style>
+.sv-intro2{{margin-top:10px}}
+.sv-numeri{{font-weight:600}}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>
@@ -5226,10 +5246,9 @@ def _grafo(corsi):
     return '<script type="application/ld+json">' + "\n" + jsonld(corsi) + "\n</script>\n"
 
 
-# Il paragrafo che apre il corpo della pagina. E' una costante e non testo
-# dentro il template per una ragione sola: con l'elenco vuoto non si stampa.
-# Dice "qui trovi quello che c'e', e lo scegli per tipo, per eta' e per
-# comune" - tre filtri e un catalogo sopra zero corsi.
+# Il paragrafo di prima (generico, vero ovunque): resta per le province che un
+# testo scritto non ce l'hanno. Quello di Cuneo nomina danza, musica, teatro,
+# inglese: ad Alessandria (11 corsi, 2 realta', un comune) sarebbe falso.
 INTRO = (
     '  <p class="co-intro">Un corso non è un evento: dura nel tempo — una stagione intera,\n'
     '  qualche mese, a volte poche lezioni — e la domanda di un genitore non è "cosa si fa\n'
@@ -5237,6 +5256,70 @@ INTRO = (
     '  come lo sceglieresti davvero: per tipo di attività, per età del bambino e per comune.\n'
     "  Dove c'è un open day per andare a vedere prima di decidere, è scritto.</p>\n"
 )
+PROV_CON_TESTO = {'CN'}
+
+
+# I TESTI DI APERTURA SCRITTI DA PATRICK (14/11/2026): uno per corsi.html, uno
+# per le pagine di provincia (scritto per Cuneo). Parola per parola; di dinamico
+# solo le province e i quattro comuni piu' forniti, che cambiano col foglio.
+# La riga coi numeri (testo_numeri) va SOTTO, senza la sua domanda iniziale:
+# due «Cerchi un corso...?» di fila no.
+def intro_corsi(corsi, prov=None):
+    if prov and prov not in PROV_CON_TESTO:
+        return (f'  <p class="co-intro co-numeri">{G.esc(testo_numeri(corsi))}</p>\n' + INTRO)
+    if prov:
+        nome = PROV_NOME.get(prov, prov)
+        top = [n for n, _ in _contati(c.get('citta') for c in corsi)]
+        if len(top) > 4:
+            dove = G.a_citta(', '.join(top[:4])).strip() + ' e in altri comuni della provincia'
+        elif top:
+            dove = G.a_citta(_e(top)).strip()
+        else:
+            dove = ''
+        paragrafi = [
+            f"Cerchi un corso per bambini o ragazzi in provincia di {nome}? Su DAOP "
+            "trovi attività da fare dopo la scuola o durante il fine settimana, a "
+            "seconda del corso. Ci sono percorsi che durano tutta la stagione e "
+            "proposte di poche lezioni. Puoi esplorare sport e movimento, danza, "
+            "musica, teatro, inglese e laboratori creativi"
+            + (f", con attività {dove}." if dove else "."),
+            "Se cerchi una prima attività per un bambino piccolo, parti dall’età. Se "
+            "invece sai già che cosa gli piacerebbe provare, scegli il tipo di corso e "
+            "guarda in quali comuni è disponibile. Puoi anche cercare direttamente il "
+            "nome di un corso o di una realtà che conosci.",
+            "Raccogliamo le informazioni dalle locandine e dalle proposte degli "
+            "organizzatori. Nelle schede trovi, quando disponibili, l’età consigliata, "
+            "la sede, i giorni e gli orari, la locandina e i contatti. Se il corso "
+            "prevede una lezione di prova o un open day, lo indichiamo nella scheda, "
+            "così puoi capire come partecipare prima di decidere se iscriverlo.",
+        ]
+    else:
+        sigle = sorted({(c.get('prov') or '').strip().upper() for c in corsi
+                        if (c.get('prov') or '').strip()},
+                       key=lambda p: PROV_NOME.get(p, p))
+        nomi = [PROV_NOME.get(p, p) for p in sigle]
+        dove = (f"nelle province di {_e(nomi)}" if len(nomi) > 1
+                else f"in provincia di {nomi[0]}" if nomi else "in Piemonte")
+        paragrafi = [
+            "Cerchi un’attività da fare dopo la scuola o un corso da provare nel fine "
+            f"settimana? Su DAOP trovi corsi per bambini e ragazzi {dove}. Il catalogo "
+            "raccoglie proposte di sport e movimento, danza, musica, teatro, lingue e "
+            "attività creative. Alcuni corsi durano tutta la stagione, altri si "
+            "svolgono in pochi incontri.",
+            "Puoi partire dal tuo comune o da quelli vicini e restringere la ricerca per "
+            "età e tipo di attività. Se tuo figlio ha già in mente qualcosa che vorrebbe "
+            "provare, cerca il nome della disciplina. Se stai ancora valutando, "
+            "confronta le proposte della tua zona per vedere quali si adattano meglio "
+            "ai suoi interessi e agli orari di famiglia.",
+            "Raccogliamo le informazioni dalle locandine e dalle proposte degli "
+            "organizzatori. Nelle schede trovi, quando disponibili, l’età consigliata, "
+            "la sede, i giorni e gli orari, la locandina e i contatti. Se è prevista una "
+            "lezione di prova o un open day, lo segnaliamo così puoi chiedere come "
+            "partecipare prima di decidere se iscriverlo.",
+        ]
+    numeri = testo_numeri(corsi).replace('Cerchi un corso per tuo figlio? ', '', 1)
+    return (''.join(f'  <p class="co-intro">{G.esc(t)}</p>\n' for t in paragrafi)
+            + f'  <p class="co-intro co-numeri">{G.esc(numeri)}</p>\n')
 
 
 def conta_province(corsi):
@@ -5416,8 +5499,7 @@ def render(corsi, css, nav, foot, realta=None, prov=None, porte=''):
     # riceve, e passargli quella ordinata riscriverebbe il @graph di corsi.html
     # senza che sia cambiato un corso. Un diff che non dice niente e' rumore
     # nella cronologia del sito, e su questo repo la cronologia si legge.
-    intro = (f'  <p class="co-intro co-numeri">{G.esc(testo_numeri(corsi))}</p>\n'
-             + INTRO) if corsi else ''
+    intro = intro_corsi(corsi, prov) if corsi else ''
     faq = blocco_faq(faq_corsi(corsi, dove), 'Domande frequenti')
     dati = _grafo(corsi)
 

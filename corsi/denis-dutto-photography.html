@@ -780,7 +780,8 @@ html{scroll-behavior:auto}
 .cr-ev-t{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cr-ev-n{font-weight:700;font-size:.98rem}
 .cr-ev-q{font-size:.86rem;opacity:.72}
-.cr-torna{margin:30px 0 0;font-size:.95rem}
+.cr-torna{margin:30px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.cr-torna .btn{text-decoration:none}
 /* Il sottotitolo sotto l'H1: dice cosa fa la societa' e dove, che l'H1 (il solo
    nome) non dice. */
 .cr-sub{margin:6px 0 0;font-size:1.02rem;opacity:.85}
@@ -990,7 +991,10 @@ durante le sessioni. Potrai,però, contare su di me,qualora avessi bisogno di co
   </section>
 
 
-  <p class="cr-torna"><a href="/corsi-provincia-cuneo.html#co-lista">← Tutti i corsi in provincia di Cuneo</a></p>
+  <div class="cr-torna" role="navigation" aria-label="Corsi e servizi">
+    <a class="btn btn-primary" href="/corsi-provincia-cuneo.html#co-lista">Tutti i corsi in provincia di Cuneo</a>
+    <a class="btn btn-teal" href="/servizi/">Tutti i servizi per le famiglie</a>
+  </div>
 <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">379 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">706 posti scelti a mano, dal parco al museo</span></a></div></section>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
