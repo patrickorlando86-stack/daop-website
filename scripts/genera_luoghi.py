@@ -231,6 +231,11 @@ _RE_A = re.compile(r'<a\s[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
                    re.I | re.S)
 _HOST_GOOGLE = re.compile(r'^(?:[a-z0-9-]+\.)*google\.com$', re.I)
 _HOST_COMMONS = re.compile(r'^(?:[a-z0-9-]+\.)*wikimedia\.org$', re.I)
+# La terza fonte (14/11/2026): le foto pubblicate dai Comuni sui loro siti, che
+# nelle note legali le rilasciano in CC BY 4.0. Il dominio di un Comune ha una
+# forma sola, `comune.<nome>.<provincia>.it`, ed e' riservato ai Comuni: e' per
+# questo che puo' stare in una whitelist senza elencarli uno per uno.
+_HOST_COMUNE = re.compile(r'^(?:[a-z0-9-]+\.)*comune\.[a-z0-9-]+\.[a-z]{2}\.it$', re.I)
 # Solo per la colonna della licenza: li' l'unico link sensato e' il testo della
 # licenza, che sta su creativecommons.org.
 _HOST_LICENZA = re.compile(r'^(?:[a-z0-9-]+\.)*creativecommons\.org$', re.I)
@@ -272,7 +277,8 @@ def credito_foto(grezzo):
     esito sbagliato.
     """
     return _smonta(grezzo, lambda h: bool(_HOST_GOOGLE.match(h) or
-                                          _HOST_COMMONS.match(h)))
+                                          _HOST_COMMONS.match(h) or
+                                          _HOST_COMUNE.match(h)))
 
 
 def licenza_foto(grezzo):
@@ -291,9 +297,20 @@ def fonte_foto(link_autore):
     Senza link resta "Google Maps": e' la fonte delle righe vecchie riempite a
     mano, e le righe di Commons il link ce l'hanno sempre (glielo mettiamo noi,
     ed e' la pagina del file).
+
+    Per una foto del sito di un Comune torna '': l'autore scritto e' gia' il
+    Comune, e aggiungere "Google Maps" attribuirebbe la foto a chi non l'ha mai
+    avuta. Chi chiama non scrive niente al posto della fonte.
     """
     if link_autore and 'wikimedia.org' in (link_autore or ''):
         return 'Wikimedia Commons'
+    if link_autore:
+        try:
+            host = urllib.parse.urlparse(link_autore).hostname or ''
+        except ValueError:
+            host = ''
+        if _HOST_COMUNE.match(host):
+            return ''
     return 'Google Maps'
 
 
@@ -315,7 +332,9 @@ def html_credito_foto(grezzo, licenza_grezza=''):
         pezzi.append(f'<a href="{G.esc(lic_link)}" target="_blank" '
                      f'rel="noopener nofollow">{G.esc(lic)}</a>'
                      if lic_link else G.esc(lic))
-    pezzi.append(fonte_foto(link))
+    fonte = fonte_foto(link)
+    if fonte:
+        pezzi.append(fonte)
     return f'<p class="lg-credito">Foto: {" · ".join(pezzi)}</p>'
 
 

@@ -197,6 +197,31 @@ ok("il credito c'e' e sta dopo la foto", 0 < i_foto < i_cred)
 ok("la licenza e' arrivata fino in pagina", 'CC BY-SA 3.0' in riga)
 
 print()
+print("=== 5b) le foto dei siti dei Comuni: CC BY 4.0, ne' Google ne' Commons ===")
+# 14/11/2026: le sale dei bambini delle biblioteche di Ovada e Casale vengono
+# dai siti dei due Comuni. Col ripiego di prima uscivano "Comune di Ovada · CC
+# BY 4.0 · Google Maps": una fonte falsa sotto una foto pubblicata.
+COMUNE = ('<a href="https://www.comune.ovada.al.it/vivere_il_comune/gallerie/'
+          'galleria_5.html">Comune di Ovada</a>')
+CCBY = '<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>'
+p = L.html_credito_foto(COMUNE, CCBY)
+ok("dice il Comune e la licenza", 'Comune di Ovada' in p and 'CC BY 4.0' in p)
+ok("NON dice Google Maps ne' Wikimedia Commons",
+   'Google Maps' not in p and 'Wikimedia' not in p)
+ok("il link porta alla pagina del Comune",
+   'href="https://www.comune.ovada.al.it/vivere_il_comune/gallerie/galleria_5.html"' in p)
+ok("non resta un separatore appeso in fondo", not p.rstrip('</p>').rstrip().endswith('·'))
+p = L.html_credito_foto('<a href="https://comune.casale-monferrato.al.it/x">Comune di Casale Monferrato</a>', CCBY)
+ok("vale anche senza www e col trattino nel nome",
+   'href="https://comune.casale-monferrato.al.it/x"' in p and 'Google Maps' not in p)
+for cattivo in ['https://comune.ovada.al.it.cattivo.invalid/x',
+                'https://cattivo.invalid/comune.ovada.al.it',
+                'https://comune.it/x']:
+    p = L.html_credito_foto(f'<a href="{cattivo}">Comune di Ovada</a>', CCBY)
+    ok(f"un finto Comune ({cattivo[8:40]}): nome tenuto, link buttato",
+       'Comune di Ovada' in p and cattivo not in p)
+
+print()
 print("=== 6) le colonne del foglio si leggono ===")
 ok("'fotoautore' e' fra le grafie ammesse",
    'fotoautore' in L.COLONNE['foto_autore'])
