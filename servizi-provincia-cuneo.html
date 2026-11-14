@@ -823,7 +823,14 @@ html{scroll-behavior:auto}
 .sv-chi{margin:0 0 8px;font-size:.92rem;opacity:.8}
 .sv-chi a{color:var(--navy,#2d4a5c);font-weight:600}
 .sv-intro2{margin-top:10px}
-.sv-numeri{font-weight:600}</style>
+.sv-numeri{font-weight:600}
+/* Le linguette (vedi SV_VISTA_JS): le regole valgono solo con .sv-js, che
+   mette lo script. Senza JS si vede tutto, le realta' in fondo. */
+#sv-vista{margin:18px 0 0}
+.sv-js:not(.is-realta) #realta{display:none}
+.sv-js.is-realta #sv-servizi{display:none}
+.sv-js.is-realta #realta{margin-top:14px}
+.sv-wrap .co-realta{scroll-margin-top:84px}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>
@@ -881,6 +888,12 @@ html{scroll-behavior:auto}
   <p class="cr-intro sv-intro2">Parti da quello che ti serve e guarda dove si svolge il servizio, a chi si rivolge e che cosa comprende. Se stai preparando una festa, puoi vedere che tipo di animazione viene proposta. Se cerchi un fotografo, puoi consultare le informazioni sulle sessioni e sui pacchetti disponibili. Per le attività dedicate a mamma e bambino, trovi le indicazioni sull’età e su come si svolgono gli incontri, quando riportate nella scheda.</p>
   <p class="cr-intro sv-intro2">Nelle schede trovi anche il prezzo, quando indicato, e i contatti di chi offre il servizio. Puoi scrivere o telefonare direttamente per chiedere disponibilità, chiarire i dettagli e concordare la prenotazione per la data che ti serve.</p>
   <p class="cr-intro sv-intro2 sv-numeri">Oggi in elenco: 2 realtà e 18 servizi.</p>
+  <div class="co-vista" id="sv-vista" role="group" aria-label="Cosa mostrare">
+    <a class="co-vista-b is-on" href="#sv-servizi" data-vista="servizi" aria-current="true">Servizi <span>18</span></a>
+    <a class="co-vista-b" href="#realta" data-vista="realta">Chi li offre <span>2</span></a>
+  </div>
+<div class="sv-wrap" id="sv-wrap">
+<div id="sv-servizi">
   <div class="co-prov" role="navigation" aria-label="Che cosa cerchi"><span class="co-prov-t">Che cosa cerchi?</span> <a href="#b-fotografia">Fotografia <small>7</small></a> <a href="#b-feste-e-animazione">Feste e animazione <small>5</small></a> <a href="#b-benessere-mamma-e-bambino">Benessere mamma e bambino <small>6</small></a></div>
   <section class="sv-bisogno" id="b-fotografia" aria-labelledby="bh-fotografia">
   <h2 class="cr-h" id="bh-fotografia">Fotografia</h2>
@@ -915,6 +928,30 @@ html{scroll-behavior:auto}
 <article class="sv-card" data-org="carezza" data-org-nome="CàRezza"><a class="sv-loc" href="/corsi/carezza.html#s-a192" tabindex="-1" aria-hidden="true"><img src="/assets/miniature/WhatsApp_Image_2026-10-30_at_10_50_17_20261030-154622_05.webp" alt="" width="84" height="84" loading="lazy" decoding="async"></a><div class="sv-body"><h3 class="sv-nome"><a href="/corsi/carezza.html#s-a192">Coccole al Pancione</a></h3><p class="sv-chi">di <a href="/corsi/carezza.html#servizi">CàRezza</a></p><dl class="sv-dati"><dt>Per chi</dt><dd>dalla 15ª settimana di gravidanza</dd><dt>Dove</dt><dd>Racconigi</dd></dl><p class="sv-descr">Sessioni individuali per future mamme a partire dalla 15ª settimana di gravidanza: coccole con il rebozo oppure stimolazione e connessione con il bambino.</p><p class="sv-altro"><a href="/corsi/carezza.html#s-a192">Dettagli e come si prenota →</a></p></div></article>
   </div>
   </section>
+</div>
+  <div class="co-realta-wrap" id="realta">
+    <h2 class="co-realta-t">Chi offre i servizi</h2>
+    <p class="co-realta-sub">2 realtà in provincia di Cuneo: chi sono, dove lavorano, cosa offrono.</p>
+  <div class="co-realta" id="r-carezza" data-org="carezza" data-org-nome="CàRezza">
+    <div class="co-realta-testa"><img class="co-logo" src="/assets/loghi/carezza.webp" alt="Logo di CàRezza" width="600" height="600" loading="lazy" decoding="async"><h3><a href="/corsi/carezza.html#servizi">CàRezza</a></h3></div>
+    <p class="co-realta-d">CàRezza è lo spazio multidisciplinare a misura di famiglia, guidato da Roberta Ronco, dove il benessere di grandi e piccini è di casa.
+
+Fondato sui valori dell&#x27;ascolto, della cura e del non giudizio, qua potete trovare…</p>
+    <p class="co-realta-corsi">11 servizi · Benessere mamma e bambino, Feste e animazione · Racconigi</p>
+    <p class="co-realta-vai"><a href="/corsi/carezza.html#servizi">I servizi di CàRezza e come si prenotano →</a></p>
+  </div>
+  <div class="co-realta" id="r-denis-dutto-photography" data-org="denis-dutto-photography" data-org-nome="Denis Dutto Photography">
+    <div class="co-realta-testa"><img class="co-logo" src="/assets/loghi/denis-dutto-photography.webp" alt="Logo di Denis Dutto Photography" width="600" height="600" loading="lazy" decoding="async"><h3><a href="/corsi/denis-dutto-photography.html#servizi">Denis Dutto Photography</a></h3></div>
+    <p class="co-realta-d">Ho sempre avuto un legame fortissimo con i ricordi e, da quando sono diventato papà di due meravigliosi bambini, ho capito ancor di più quanto sia importante
+immortalare momenti che vorremmo ricordare per sempre.
+
+La…</p>
+    <p class="co-realta-corsi">7 servizi · Fotografia · Cuneo e dintorni</p>
+    <p class="co-realta-vai"><a href="/corsi/denis-dutto-photography.html#servizi">I servizi di Denis Dutto Photography e come si prenotano →</a></p>
+  </div>
+  </div>
+</div>
+
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">
@@ -990,5 +1027,20 @@ html{scroll-behavior:auto}
 function toggleMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}
 function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}
 </script>
+<script>
+(function(){var w=document.getElementById('sv-wrap'),b=document.getElementById('sv-vista');
+if(!w||!b)return;w.classList.add('sv-js');
+function vista(v){w.classList.toggle('is-realta',v==='realta');
+[].forEach.call(b.querySelectorAll('[data-vista]'),function(a){var on=a.dataset.vista===v;
+a.classList.toggle('is-on',on);if(on)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});}
+function daHash(){var id=(location.hash||'').slice(1),e=id&&document.getElementById(id),r=document.getElementById('realta');
+if(e&&r&&r.contains(e))vista('realta');else if(e&&w.contains(e))vista('servizi');}
+b.addEventListener('click',function(ev){var a=ev.target.closest('[data-vista]');if(!a)return;ev.preventDefault();
+var p=b.getBoundingClientRect().top;vista(a.dataset.vista);
+try{history.replaceState(null,'',a.dataset.vista==='realta'?'#realta':location.pathname+location.search);}catch(e){}
+var d=b.getBoundingClientRect().top-p;if(d)window.scrollBy(0,d);});
+window.addEventListener('hashchange',daHash);daHash();})();
+</script>
+
 </body>
 </html>

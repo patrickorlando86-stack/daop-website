@@ -823,7 +823,14 @@ html{scroll-behavior:auto}
 .sv-chi{margin:0 0 8px;font-size:.92rem;opacity:.8}
 .sv-chi a{color:var(--navy,#2d4a5c);font-weight:600}
 .sv-intro2{margin-top:10px}
-.sv-numeri{font-weight:600}</style>
+.sv-numeri{font-weight:600}
+/* Le linguette (vedi SV_VISTA_JS): le regole valgono solo con .sv-js, che
+   mette lo script. Senza JS si vede tutto, le realta' in fondo. */
+#sv-vista{margin:18px 0 0}
+.sv-js:not(.is-realta) #realta{display:none}
+.sv-js.is-realta #sv-servizi{display:none}
+.sv-js.is-realta #realta{margin-top:14px}
+.sv-wrap .co-realta{scroll-margin-top:84px}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>
@@ -956,5 +963,6 @@ html{scroll-behavior:auto}
 function toggleMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}
 function closeMobile(){var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}
 </script>
+
 </body>
 </html>

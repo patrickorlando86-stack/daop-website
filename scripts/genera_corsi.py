@@ -3314,6 +3314,55 @@ def testo_intro_servizi(voci, prov=None):
     return html, meta
 
 
+def _scheda_offerente(org, servizi, info, href):
+    """La scheda di chi offre i servizi, nella linguetta «Chi li offre» di
+    /servizi/. Lo stampo e' quello di scheda_realta() (logo accanto al nome,
+    l'attacco della descrizione, una riga di numeri, il link alla pagina), ma
+    conta SERVIZI e porta alla sezione #servizi della sua pagina. L'ancora e'
+    la stessa (#r-<slug>), cosi' un link a una realta' apre questa vista."""
+    logo = logo_path(info.get('logo'))
+    nome = f'<a href="{G.esc(href)}">{G.esc(org)}</a>'
+    testa = f'<h3>{nome}</h3>'
+    if logo:
+        testa = (f'<div class="co-realta-testa"><img class="co-logo" '
+                 f'src="{G.esc(logo)}" alt="Logo di {G.esc(org)}" width="600" '
+                 f'height="600" loading="lazy" decoding="async">{testa}</div>')
+    dentro = []
+    descr = (info.get('descr') or '').strip()
+    if descr:
+        dentro.append(f'<p class="co-realta-d">{G.esc(G.trunc(descr, 220))}</p>')
+    tipi = _uniche(bisogno_servizio(c) for c in servizi)
+    dove = ', '.join(_uniche(c.get('citta') for c in servizi)) or (info.get('citta') or '').strip()
+    riga = [_n(len(servizi), 'servizio', 'servizi')] + ([', '.join(tipi)] if tipi else []) \
+        + ([dove] if dove else [])
+    dentro.append(f'<p class="co-realta-corsi">{G.esc(" · ".join(riga))}</p>')
+    dentro.append(f'<p class="co-realta-vai"><a href="{G.esc(href)}">'
+                  f'I servizi di {G.esc(org)} e come si prenotano →</a></p>')
+    return (f'  <div class="co-realta" id="{_ancora(org)}" data-org="{G.slugify(org)}"'
+            f' data-org-nome="{G.esc(org)}">\n    {testa}\n    '
+            + '\n    '.join(dentro) + '\n  </div>')
+
+
+# Lo script delle linguette di /servizi/: il gemello piccolo di quello dei
+# corsi (vedi blocco_vista) - la vista la decide l'hash, al tocco la pagina non
+# salta e l'indirizzo si aggiorna senza ricaricare.
+SV_VISTA_JS = """<script>
+(function(){var w=document.getElementById('sv-wrap'),b=document.getElementById('sv-vista');
+if(!w||!b)return;w.classList.add('sv-js');
+function vista(v){w.classList.toggle('is-realta',v==='realta');
+[].forEach.call(b.querySelectorAll('[data-vista]'),function(a){var on=a.dataset.vista===v;
+a.classList.toggle('is-on',on);if(on)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});}
+function daHash(){var id=(location.hash||'').slice(1),e=id&&document.getElementById(id),r=document.getElementById('realta');
+if(e&&r&&r.contains(e))vista('realta');else if(e&&w.contains(e))vista('servizi');}
+b.addEventListener('click',function(ev){var a=ev.target.closest('[data-vista]');if(!a)return;ev.preventDefault();
+var p=b.getBoundingClientRect().top;vista(a.dataset.vista);
+try{history.replaceState(null,'',a.dataset.vista==='realta'?'#realta':location.pathname+location.search);}catch(e){}
+var d=b.getBoundingClientRect().top-p;if(d)window.scrollBy(0,d);});
+window.addEventListener('hashchange',daHash);daHash();})();
+</script>
+"""
+
+
 def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
                           porte=''):
     """/servizi/: i servizi PER BISOGNO (vedi BISOGNI_SERVIZI), una scheda per
@@ -3370,6 +3419,32 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
         f'  <h2 class="cr-h" id="bh-{G.slugify(b)}">{G.esc(b)}</h2>\n'
         f'  <div class="sv-lista">\n' + "\n".join(schede) + '\n  </div>\n  </section>'
         for b, schede in bisogni)
+    # LE DUE LINGUETTE «Servizi / Chi li offre» (14/11/2026, Patrick: «come nella
+    # pagina corsi»). Stesso interruttore di blocco_vista e stesse regole: due
+    # link ad ancore, la vista la decide l'hash (un #r-<slug> apre chi li offre),
+    # senza JS le schede delle realta' stanno in fondo. Con una realta' sola non
+    # c'e' niente da scegliere e non si stampa. Le schede sono loro e non
+    # scheda_realta(): quella conta «corsi» e linka righe della pagina corsi.
+    vista, realta_html = '', ''
+    if n and len(voci) > 1:
+        vista = (
+            '  <div class="co-vista" id="sv-vista" role="group" aria-label="Cosa mostrare">\n'
+            f'    <a class="co-vista-b is-on" href="#sv-servizi" data-vista="servizi" aria-current="true">'
+            f'Servizi <span>{n}</span></a>\n'
+            f'    <a class="co-vista-b" href="#realta" data-vista="realta">'
+            f'Chi li offre <span>{len(voci)}</span></a>\n'
+            '  </div>\n')
+        realta_html = (
+            '  <div class="co-realta-wrap" id="realta">\n'
+            '    <h2 class="co-realta-t">Chi offre i servizi</h2>\n'
+            f'    <p class="co-realta-sub">{_n(len(voci), "realtà", "realtà")}'
+            f'{" " + dove if dove else ""}: chi sono, dove lavorano, cosa offrono.</p>\n'
+            + "\n".join(_scheda_offerente(org, servizi, info, href)
+                        for org, servizi, info, href in voci)
+            + '\n  </div>\n')
+    corpo = (f'{porte}{vista}<div class="sv-wrap" id="sv-wrap">\n'
+             f'<div id="sv-servizi">\n{salta}{sezioni}\n</div>\n{realta_html}</div>\n'
+             if vista else f'{porte}{salta}{sezioni}')
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -3393,7 +3468,14 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
 .sv-chi{{margin:0 0 8px;font-size:.92rem;opacity:.8}}
 .sv-chi a{{color:var(--navy,#2d4a5c);font-weight:600}}
 .sv-intro2{{margin-top:10px}}
-.sv-numeri{{font-weight:600}}</style>
+.sv-numeri{{font-weight:600}}
+/* Le linguette (vedi SV_VISTA_JS): le regole valgono solo con .sv-js, che
+   mette lo script. Senza JS si vede tutto, le realta' in fondo. */
+#sv-vista{{margin:18px 0 0}}
+.sv-js:not(.is-realta) #realta{{display:none}}
+.sv-js.is-realta #sv-servizi{{display:none}}
+.sv-js.is-realta #realta{{margin-top:14px}}
+.sv-wrap .co-realta{{scroll-margin-top:84px}}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 </head>
@@ -3411,7 +3493,7 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
   </div>
 </header>
 <article class="cr-wrap">
-{intro_html}{porte}{salta}{sezioni}{vuota}
+{intro_html}{corpo}{vuota}
 </article>
 {G.blocco_ginetto()}</main>
 {foot}
@@ -3419,6 +3501,7 @@ def pagina_indice_servizi(voci, css, nav, foot, in_indice=False, prov=None,
 function toggleMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.toggle('open');}}
 function closeMobile(){{var m=document.getElementById('mobile-menu');if(m)m.classList.remove('open');}}
 </script>
+{SV_VISTA_JS if vista else ''}
 </body>
 </html>
 """
