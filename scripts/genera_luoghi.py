@@ -1792,7 +1792,11 @@ LUOGHI_JS = r"""<script>
 
 CHEV = ('<svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true">'
         '<polyline points="6 9 12 15 18 9"/></svg>')
-RIPARO_LABEL = {'chiuso': 'Al chiuso', 'aperto': "All'aperto", 'misto': 'Chiuso e aperto'}
+# Una risposta alla domanda «Se piove:», non un'etichetta (15/11/2026, Patrick: «Se piove: Al chiuso
+# non e' molto capibile»). Dice se ci si va e perche'. La usano anche le schede (pagine_luoghi.py).
+RIPARO_LABEL = {'chiuso': "Si va lo stesso, è al chiuso",
+                'aperto': "Meglio un altro giorno, è all'aperto",
+                'misto': "Una parte è al chiuso"}
 
 
 def maps_href(l):
