@@ -1502,6 +1502,61 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "open-day-infanzia-e-primaria-zanzi-ic-sibilla-aler-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Plesso Zanzi",
+    "manifest": "Open Day 2026 - IC Sibilla Aleramo",
+    "nome": "Open Day - Infanzia e Primaria Zanzi - IC Sibilla Aleramo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
+   "open-day-infanzia-sabin-e-primaria-ferrero-ic-sibi-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Infanzia Sabin e Primaria Ferrero",
+    "manifest": "Open Day 2026 - IC Sibilla Aleramo",
+    "nome": "Open Day - Infanzia Sabin e Primaria Ferrero - IC Sibilla Aleramo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
+   },
+   "open-day-scuola-dell-infanzia-campi-ic-sibilla-ale-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia Campi",
+    "manifest": "Open Day 2026 - IC Sibilla Aleramo",
+    "nome": "Open Day - Scuola dell'Infanzia Campi - IC Sibilla Aleramo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-30"
+   },
+   "open-day-scuola-dell-infanzia-e-primaria-morbelli-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia e Primaria Morbelli",
+    "manifest": "Open Day 2026 - IC Sibilla Aleramo",
+    "nome": "Open Day - Scuola dell'Infanzia e Primaria Morbelli - IC Sibilla Aleramo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
+   "open-day-scuola-dell-infanzia-l-lama-cantalupo-ic-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia L. Lama",
+    "manifest": "Open Day 2026 - IC Sibilla Aleramo",
+    "nome": "Open Day - Scuola dell'Infanzia L. Lama Cantalupo - IC Sibilla Aleramo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "passeggiata-patrimoniale-alla-scoperta-della-citta-alessandria": {
     "anni": [
      2026
@@ -3270,6 +3325,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-08"
+   },
+   "open-day-scuola-primaria-mazzini-di-borgoratto-ic-borgoratto-alessandrino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Primaria Mazzini",
+    "manifest": "Open Day 2026 - IC Sibilla Aleramo",
+    "nome": "Open Day - Scuola Primaria Mazzini di Borgoratto - IC Sibilla Aleramo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "pigiama-run-pro-loco-borgoratto-borgoratto-alessandrino": {
     "anni": [
@@ -10014,6 +10080,17 @@
     "organizza": "Comune di Gamalero",
     "pagina": true,
     "ultima": "2026-10-30"
+   },
+   "open-day-scuola-dell-infanzia-di-gamalero-ic-sibil": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia di Gamalero",
+    "manifest": "Open Day 2026 - IC Sibilla Aleramo",
+    "nome": "Open Day - Scuola dell'Infanzia di Gamalero - IC Sibilla Aleramo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    }
   },
   "nome": "Gamalero",
@@ -13230,6 +13307,17 @@
  },
  "noviligure": {
   "eventi": {
+   "abcd-emozioni-dispari-teatro-teatro-marenco-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Romualdo Marenco",
+    "manifest": "La domenica dei bambini - Teatro Marenco",
+    "nome": "ABCD'Emozioni - Dispari Teatro - Teatro Marenco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-15"
+   },
    "albert-einstein-e-mc2-un-universo-di-idee-novi-ligure": {
     "anni": [
      2026
@@ -13240,6 +13328,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-21"
+   },
+   "balloons-adventures-teatro-marenco-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Romualdo Marenco",
+    "manifest": "La domenica dei bambini - Teatro Marenco",
+    "nome": "Balloons Adventures - Teatro Marenco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-03-21"
    },
    "bancarelle-novi-ligure": {
     "anni": [
@@ -13582,6 +13681,17 @@
     "pagina": true,
     "ultima": "2027-01-30"
    },
+   "la-bella-mai-addormentata-teatro-marenco-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Romualdo Marenco",
+    "manifest": "La domenica dei bambini - Teatro Marenco",
+    "nome": "La bella mai addormentata - Teatro Marenco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-17"
+   },
    "la-notte-dei-pupazzi-consegna-pupazzi-la-bottega-d-novi-ligure": {
     "anni": [
      2026
@@ -13824,6 +13934,17 @@
     "pagina": false,
     "ultima": "2026-09-20"
    },
+   "peter-pan-teatro-marenco-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Romualdo Marenco",
+    "manifest": "La domenica dei bambini - Teatro Marenco",
+    "nome": "Peter Pan - Teatro Marenco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-04-04"
+   },
    "pittura-e-tecnica-mista-associazione-culturale-lab-novi-ligure": {
     "anni": [
      2026
@@ -13867,6 +13988,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-22"
+   },
+   "sconcerto-d-amore-le-acrobazie-musicali-di-una-cop-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Romualdo Marenco",
+    "manifest": "La domenica dei bambini - Teatro Marenco",
+    "nome": "Sconcerto d'amore. Le acrobazie musicali di una coppia in disaccordo - Teatro Marenco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-28"
    },
    "show-cooking-e-meet-greet-con-ernst-knam-novi-ligure": {
     "anni": [
@@ -14021,6 +14153,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-26"
+   },
+   "winnie-the-pooh-ora-abbiamo-sei-anni-teatro-marenc-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Romualdo Marenco",
+    "manifest": "La domenica dei bambini - Teatro Marenco",
+    "nome": "Winnie the Pooh. Ora abbiamo sei anni - Teatro Marenco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-26"
+   },
+   "yes-land-teatro-marenco-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Romualdo Marenco",
+    "manifest": "La domenica dei bambini - Teatro Marenco",
+    "nome": "Yes Land! - Teatro Marenco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-24"
    }
   },
   "nome": "Novi Ligure",
