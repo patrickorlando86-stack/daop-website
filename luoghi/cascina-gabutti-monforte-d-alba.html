@@ -722,6 +722,12 @@ input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert
   .lg-pills .lg-tag:nth-child(n+3){display:none}
   .lg-row[open] .lg-tag i{display:inline}
   .lg-row[open] .lg-pills .lg-tag:nth-child(n+3){display:inline-flex}
+  /* Aperta, le parole intere delle pillole accanto al nome lo schiacciavano in una colonna di
+     una parola per riga (15/11/2026, screenshot di Patrick sulla Luzzati di Casale): vanno sotto. */
+  .lg-row[open] > summary{flex-wrap:wrap}
+  .lg-row[open] .lg-txt{flex:1 1 0}
+  .lg-row[open] .lg-chev{order:2}
+  .lg-row[open] .lg-pills{order:3;flex-basis:100%;flex-wrap:wrap;padding-left:46px}
 }
 
 /* ── Il corpo aperto ─────────────────────────────────────────────────────── */
