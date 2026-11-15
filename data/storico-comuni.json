@@ -1161,6 +1161,17 @@
     "pagina": true,
     "ultima": "2026-12-18"
    },
+   "frozen-elsa-e-il-castello-di-ghiaccio-teatro-aless-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Alessandrino",
+    "manifest": "",
+    "nome": "Frozen - Elsa e il Castello di Ghiaccio - Teatro Alessandrino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "gagliaudo-tra-i-mercanti-alessandria": {
     "anni": [
      2026
@@ -2017,6 +2028,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "alice-nel-paese-delle-meraviglie-teatro-alfieri-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Alfieri",
+    "manifest": "",
+    "nome": "Alice nel Paese delle Meraviglie - Teatro Alfieri",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
    },
    "arti-e-mercanti-asti": {
     "anni": [
@@ -14438,6 +14460,17 @@
     "pagina": true,
     "ultima": "2027-05-15"
    },
+   "cappuccetto-rosso-e-il-lupo-solitario-teatro-comun-ovada": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Comunale Dino Crocco",
+    "manifest": "",
+    "nome": "Cappuccetto Rosso e il lupo solitario - Teatro Comunale Ovada",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-21"
+   },
    "con-mappa-e-bussola-orientamento-con-uscita-guidat-ovada": {
     "anni": [
      2027
@@ -19855,6 +19888,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-24"
+   },
+   "arlecchino-colombina-e-la-festa-da-ballo-teatro-ci-tortona": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Civico",
+    "manifest": "",
+    "nome": "Arlecchino, Colombina e la festa da ballo - Teatro Civico Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-03"
+   },
+   "arlecchino-e-la-luna-nel-sacco-teatro-civico-torto-tortona": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Civico",
+    "manifest": "",
+    "nome": "Arlecchino e la luna nel sacco - Teatro Civico Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-02-14"
    },
    "artisti-senza-pennello-l-arte-della-natura-tortona": {
     "anni": [
