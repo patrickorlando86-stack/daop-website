@@ -41,10 +41,12 @@
    "tappe": [
     {
      "nome": "Il Castello",
+     "codice": "2148",
      "testo": "La fortezza di mattoni rossi voluta nel 1352 da Giovanni II Paleologo, con le torri tonde e il fossato tutto intorno. Da qui comincia il giro: provate a contare le torri."
     },
     {
      "nome": "Il Duomo di Sant'Evasio",
+     "codice": "3140",
      "testo": "Consacrato nel 1107, più di novecento anni fa. Dentro si alza lo sguardo: le volte sono un cielo azzurro pieno di stelle dorate, dipinto nell'Ottocento quando il Duomo fu salvato e restaurato."
     },
     {
@@ -53,6 +55,7 @@
     },
     {
      "nome": "La Sinagoga",
+     "codice": "3141",
      "testo": "Inaugurata nel 1595 e quasi invisibile dalla strada: ci si arriva da cortili e passaggi. Dentro è tutta ori, stucchi e legni, e al piano di sopra ci sono il Museo degli Argenti e il Museo dei Lumi."
     },
     {
@@ -234,10 +237,12 @@
     },
     {
      "nome": "Il Teatro Marenco",
+     "codice": "2115",
      "testo": "Aperto nel 1839, con la sala modellata anche sul Carlo Felice di Genova. Porta il nome di Romualdo Marenco, nato a Novi, autore del balletto Excelsior. Custodisce 29 marionette antiche, tra cui il genovese Baciccia."
     },
     {
      "nome": "Il Museo dei Campionissimi",
+     "codice": "2519",
      "testo": "In un ex capannone di quasi 3.000 metri quadrati, la storia della bicicletta e di Girardengo e Coppi. Coppi da ragazzo faceva le consegne in bici per una salumeria di via Paolo da Novi."
     },
     {
@@ -250,6 +255,7 @@
     },
     {
      "nome": "Il Parco Castello",
+     "codice": "3025",
      "testo": "Sulla collina che domina la città, la torre del castello e un tratto di mura dentro un grande parco per giocare e guardare Novi dall'alto. Qui si scioglie il mistero: «Ligure» è nel nome dal 1863, per il lungo legame con Genova."
     }
    ]
