@@ -1302,6 +1302,25 @@ Casale Monferrato, Castelnuovo Scrivia, Garbagna, Ovada, Novi Ligure, Valenza.
 - **In sitemap** stanno nel blocco `ESPLORATORE`, e nel workflow c'è la
   cartella `esploratore/` (le pagine nuove nascono untracked).
 
+**Dal 16/11/2026 la pagina dice anche cosa c'è adesso nel paese**, perché è il
+bersaglio del QR in fondo ai libri (`?utm_source=libro` per contarli in GA4):
+in cima Ginetto che saluta (`ginetto-legge-360.webp`), sotto le tappe fino a 4
+eventi in programma e fino a 4 posti per famiglie.
+
+- **Gli eventi vengono dal registro** `data/pagine-evento.json`, non da un
+  calcolo nuovo degli slug: si linka solo una scheda che c'è su disco, e una
+  manifestazione compare una volta. Senza eventi in paese si prendono i
+  dintorni entro 15 km, e il titolo dice «nei dintorni». Senza niente il
+  blocco non c'è.
+- **I posti sono le righe di `/luoghi.html`** (`L.riga`, come `/idee/`), solo
+  mete, in ordine: con la foto, con appuntamenti, poi il nome. Chi paga non
+  sale.
+- **Il bottone «chiedi a Ginetto cosa fare a X» con la domanda già scritta non
+  c'è**: l'app non legge una domanda dal link, e aggiungerla è un lavoro su
+  daop-mobile.
+- **Negli screenshot a pagina intera le righe dei posti escono bianche**: è
+  `content-visibility:auto`, non la pagina. Si guardano scorrendo.
+
 **La sezione della collana in `libri.html` la scrive lo stesso generatore**
 (marker `GINETTO:LIBRI`), dal 30/10/2026: paesi e copertine dal JSON, ogni
 copertina porta alla pagina del suo paese. Era scritta a mano e diceva quattro
