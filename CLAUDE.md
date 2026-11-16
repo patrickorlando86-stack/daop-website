@@ -1318,6 +1318,13 @@ eventi in programma e fino a 4 posti per famiglie.
 - **L'ordine è tappe → eventi → posti → libro.** Chi arriva dal QR il libro
   ce l'ha già, e per chi arriva da Google il libro è una richiesta: va dopo i
   servizi.
+- **«Scoperte», non «tappe a piedi»** (16/11/2026): metà delle tappe di ogni
+  libro è una festa, una storia o un cibo, non un posto dove andare. Il titolo
+  dice «N scoperte con Ginetto»; la chiave JSON resta `tappe`.
+- **Il saluto di Ginetto è per paese** (chiave `saluto` del volume): un invito
+  da fare sul posto, scritto solo con cose che stanno nelle tappe. Senza, il
+  saluto generico. Sotto le scoperte «Hai trovato Briciola?» porta a `#libro`,
+  solo se la descrizione del volume nomina Briciola (Valenza no).
 - **Una tappa può portare alla sua scheda**: chiave `codice` della tappa in
   `data/ginetto-collana.json` (il CODICE del foglio Luoghi) → «La scheda: X →»
   verso `/luoghi.html#lg-…`. Primo caso Castelnuovo, torre → Castello
