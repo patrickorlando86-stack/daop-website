@@ -1315,6 +1315,16 @@ eventi in programma e fino a 4 posti per famiglie.
 - **I posti sono le righe di `/luoghi.html`** (`L.riga`, come `/idee/`), solo
   mete, in ordine: con la foto, con appuntamenti, poi il nome. Chi paga non
   sale.
+- **L'ordine è tappe → eventi → posti → libro.** Chi arriva dal QR il libro
+  ce l'ha già, e per chi arriva da Google il libro è una richiesta: va dopo i
+  servizi.
+- **Una tappa può portare alla sua scheda**: chiave `codice` della tappa in
+  `data/ginetto-collana.json` (il CODICE del foglio Luoghi) → «La scheda: X →»
+  verso `/luoghi.html#lg-…`. Primo caso Castelnuovo, torre → Castello
+  Podestarile (3155). Codice vuoto o non più in elenco: niente link.
+- **Gli eventi senza manifestazione si contano uno per uno**: `G.slugify('')`
+  dà `evento`, e usato come chiave li fondeva tutti in uno (Castelnuovo perdeva
+  le letture del 23/11).
 - **Il bottone «chiedi a Ginetto cosa fare a X» con la domanda già scritta non
   c'è**: l'app non legge una domanda dal link, e aggiungerla è un lavoro su
   daop-mobile.

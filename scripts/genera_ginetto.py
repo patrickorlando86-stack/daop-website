@@ -315,7 +315,8 @@ GN_CSS = """
 .gn-saluto img{flex:0 0 72px;width:72px;height:auto}
 .gn-saluto p{margin:0;line-height:1.55;font-style:italic}
 .gn-tutti,.gn-nota{margin:8px 0 0;font-size:.92rem;color:var(--text-mid,#6a7a85)}
-.gn-tutti a{color:var(--navy,#2d4a5c);font-weight:600}
+.gn-tutti a,.gn-scheda{color:var(--navy,#2d4a5c);font-weight:600}
+.gn-scheda{display:inline-block;margin-top:4px;text-decoration:underline;text-underline-offset:2px}
 .gn-luoghi{padding:0;margin-top:10px}
 @media (max-width:600px){.gn-libro{flex-direction:column}.gn-libro img,.gn-libro .gn-cop-vuota{width:160px;height:160px;flex-basis:auto}}
 """
@@ -416,7 +417,10 @@ def eventi_del_paese(paese, reg, luoghi, oggi):
         righe = sorted(righe, key=lambda r: (max(r["d_start"], iso), r["d_start"], r["nome"]))
         out, viste = [], set()
         for r in righe:
-            chiave = _norm(r.get("manifest")) or r["slug"]
+            # Senza manifestazione la chiave e' la scheda: G.slugify('') da'
+            # 'evento', e tutte le righe senza manifestazione diventavano una.
+            m = (r.get("manifest") or "").strip()
+            chiave = ("m", _norm(m)) if m else ("s", r["slug"])
             if chiave in viste:
                 continue
             viste.add(chiave)
@@ -499,8 +503,8 @@ def _saluto(paese):
     return ('<div class="gn-saluto">'
             '<img src="/assets/ginetto/ginetto-legge-360.webp" alt="Ginetto" '
             'width="96" height="97" decoding="async">'
-            f'<p>Ciao! A {e(paese)} ci sono stato davvero. Qui sotto trovi le tappe del mio '
-            'libro, da fare a piedi in un pomeriggio, e cosa c\'è da fare adesso in paese.</p>'
+            f'<p>Ciao! A {e(paese)} ci sono stato davvero. Segui le mie tappe, e poi guarda '
+            'cosa c\'è da fare in paese nei prossimi giorni.</p>'
             '</div>')
 
 
@@ -541,10 +545,23 @@ def render_tappe(v, volumi, oggi, ctx=None):
                     + ", ".join(nomi) + ". Il percorso del libro di Ginetto l'Esploratore.", 158)
     a_paese = G.a_citta(e(paese))
 
-    lis = "\n".join(f'    <li><h3>{e(t["nome"])}</h3><p>{e(t["testo"])}</p></li>'
+    reg, L, luoghi = ctx or ({}, None, [])
+    per_codice = {str(l.get("codice") or "").strip(): l for l in luoghi}
+
+    def _scheda(t):
+        # Una tappa che e' anche un posto del catalogo (chiave «codice» nel
+        # JSON) porta alla sua riga in /luoghi.html. Se il codice non e' piu'
+        # in elenco il link non si stampa.
+        cod = str(t.get("codice") or "").strip()
+        l = per_codice.get(cod) if cod else None
+        if not l or not l.get("slug"):
+            return ""
+        return (f' <a class="gn-scheda" href="/luoghi.html#{e(l["slug"])}">'
+                f'La scheda: {e(l["nome"])} &rarr;</a>')
+
+    lis = "\n".join(f'    <li><h3>{e(t["nome"])}</h3><p>{e(t["testo"])}{_scheda(t)}</p></li>'
                     for t in tappe)
 
-    reg, L, luoghi = ctx or ({}, None, [])
     blocco_ev = _blocco_eventi(paese, reg, luoghi, oggi)
     blocco_lg, css_lg = _blocco_luoghi(paese, L, luoghi, oggi)
 
@@ -644,14 +661,14 @@ def render_tappe(v, volumi, oggi, ctx=None):
 </header>
 <article class="ev-wrap ev-wrap--hero gn-wrap">
   {_saluto(paese)}
-  <p>Nel libro <i>{e(v.get("titolo"))}</i> Ginetto e la topolina Briciola attraversano {e(paese)} tappa dopo tappa. Sono posti veri: qui sotto c'è il percorso, da fare un pomeriggio con i bambini, con quello che vale la pena di cercare in ognuno.</p>
+  <p>Nel libro <i>{e(v.get("titolo"))}</i> Ginetto e la topolina Briciola attraversano {e(paese)} tappa dopo tappa. Sono posti veri, da fare a piedi in un pomeriggio: per ognuno, quello che vale la pena di cercare.</p>
   <h2>Le {n} tappe</h2>
   <ol class="gn-tappe">
 {lis}
   </ol>
-  {_libro_html(v)}
   {blocco_ev}
   {blocco_lg}
+  {_libro_html(v)}
   <h2>Altro{a_paese}</h2>
   <div class="com-link">{"".join(altro)}</div>
   {f'<h2>Gli altri paesi di Ginetto</h2><div class="com-link">{altri_html}</div>' if altri_html else ''}
