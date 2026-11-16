@@ -1324,7 +1324,9 @@ eventi in programma e fino a 4 posti per famiglie.
 - **Il saluto di Ginetto è per paese** (chiave `saluto` del volume): un invito
   da fare sul posto, scritto solo con cose che stanno nelle tappe. Senza, il
   saluto generico. Sotto le scoperte «Hai trovato Briciola?» porta a `#libro`,
-  solo se la descrizione del volume nomina Briciola (Valenza no).
+  su tutti i volumi: Briciola si nasconde nelle tavole di ogni libro. Valenza
+  ha una storia sua (Tommaso e il diario del nonno, chiave `storia_propria`):
+  lì la pagina non dice che Ginetto e Briciola girano il paese insieme.
 - **Una tappa può portare alla sua scheda**: chiave `codice` della tappa in
   `data/ginetto-collana.json` (il CODICE del foglio Luoghi) → «La scheda: X →»
   verso `/luoghi.html#lg-…`. Primo caso Castelnuovo, torre → Castello

@@ -571,14 +571,17 @@ def render_tappe(v, volumi, oggi, ctx=None):
                     for t in tappe)
 
     # Il primo gioco della pagina, subito dopo le scoperte: chi ha il libro la
-    # cerca, chi non ce l'ha scopre che c'è un gioco. Solo dove il volume la
-    # nomina (Valenza ha un'altra storia).
-    c_e_briciola = "Briciola" in (v.get("descrizione") or "")
+    # cerca, chi non ce l'ha scopre che c'è un gioco.
+    # Briciola si nasconde nelle tavole di TUTTI i libri, quindi il gioco
+    # «Hai trovato Briciola?» c'è sempre. Ma a Valenza la storia è un'altra
+    # (Tommaso e il diario del nonno, chiave «storia_propria»): lì non si dice
+    # che Ginetto e Briciola girano il paese insieme.
+    c_e_briciola = not v.get("storia_propria")
     chi = "Ginetto e Briciola" if c_e_briciola else "Ginetto"
     chi_lungo = "Ginetto e la topolina Briciola" if c_e_briciola else "Ginetto"
     briciola = ('<p class="gn-briciola"><b>Hai trovato Briciola?</b> Nel libro la topolina si '
                 'nasconde in ogni illustrazione. <a href="#libro">Guarda il libro &darr;</a></p>'
-                if "Briciola" in (v.get("descrizione") or "") else "")
+                )
     blocco_ev = _blocco_eventi(paese, reg, luoghi, oggi)
     blocco_lg, css_lg = _blocco_luoghi(paese, L, luoghi, oggi)
 
