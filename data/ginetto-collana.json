@@ -264,14 +264,14 @@
    "id": "valenza",
    "numero": 6,
    "visibile": true,
-   "stato": "in-arrivo",
+   "stato": "pubblicato",
    "titolo": "Ginetto alla scoperta di Valenza",
    "paese": "Valenza",
    "provincia": "Alessandria",
    "descrizione": "Tommaso ha trovato in soffitta il diario del nonno, con un foglio pieno di disegni strani: una colomba, un airone, una perla, una mezzaluna. Ginetto li segue per Valenza, dal museo dell'arte orafa al belvedere della Colombina, fino a scoprire che cosa nascondono. Un'avventura tra indizi, oro e un diario misterioso.",
    "copertina": "assets/ginetto/copertine/vol-6-valenza.webp",
    "copertina_alt": "Copertina del volume 6 di Ginetto l'Esploratore, dedicato a Valenza",
-   "amazon": "",
+   "amazon": "https://amzn.eu/d/0gwK7Tia",
    "materiali": [],
    "tappe": [
     {
