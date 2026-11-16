@@ -4104,7 +4104,7 @@ def link_libro(citta):
     v = _LIBRI_GINETTO.get(slugify(citta or ""))
     if not v or not os.path.isfile(os.path.join(ROOT, "esploratore", f"{v['id']}.html")):
         return ''
-    return (f'<a href="/esploratore/{v["id"]}.html">Le {len(v["tappe"])} tappe di Ginetto'
+    return (f'<a href="/esploratore/{v["id"]}.html">Le {len(v["tappe"])} scoperte di Ginetto'
             f'{a_citta(esc(v["paese"]))}</a>')
 
 

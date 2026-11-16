@@ -127,7 +127,7 @@ def render_volumi(volumi):
         out.append(f'          <p class="vol-desc">{e(v.get("descrizione"))}</p>')
         if ha_pagina(v):
             out.append(f'          <p class="vol-percorso"><a href="/esploratore/{e(v["id"])}.html">'
-                       f'Le {len(v["tappe"])} tappe del percorso a {e(v["paese"])} &rarr;</a></p>')
+                       f'Le {len(v["tappe"])} scoperte a {e(v["paese"])} &rarr;</a></p>')
 
         if in_arrivo:
             out.append('          <p class="vol-soon">In preparazione</p>')
@@ -314,6 +314,8 @@ GN_CSS = """
  border-radius:14px;background:var(--carta,#fffcf8);border:1px solid var(--linea,#e2d8cb)}
 .gn-saluto img{flex:0 0 72px;width:72px;height:auto}
 .gn-saluto p{margin:0;line-height:1.55;font-style:italic}
+.gn-briciola{margin:4px 0 0;padding:12px 16px;border-radius:12px;background:var(--carta,#fffcf8);border:1px dashed var(--linea,#e2d8cb);line-height:1.55}
+.gn-briciola a{color:var(--navy,#2d4a5c);font-weight:600}
 .gn-tutti,.gn-nota{margin:8px 0 0;font-size:.92rem;color:var(--text-mid,#6a7a85)}
 .gn-tutti a,.gn-scheda{color:var(--navy,#2d4a5c);font-weight:600}
 .gn-scheda{display:inline-block;margin-top:4px;text-decoration:underline;text-underline-offset:2px}
@@ -496,16 +498,22 @@ def _blocco_luoghi(paese, L, luoghi, oggi):
     return html_, L.LUOGHI_CSS + L._css_categorie(mostra)
 
 
-def _saluto(paese):
-    """Ginetto che parla, in cima. Il disegno c'e' gia' (ginetto-legge)."""
+def _saluto(v):
+    """Ginetto che parla, in cima. Il disegno c'e' gia' (ginetto-legge).
+
+    La frase sta nel JSON (chiave «saluto», una per volume) e dice cosa fare
+    davanti alla prima scoperta: si scrive solo con cose che stanno nelle tappe.
+    Senza, il saluto generico."""
+    paese = v["paese"]
     if not esiste("assets/ginetto/ginetto-legge-360.webp"):
         return ""
     return ('<div class="gn-saluto">'
             '<img src="/assets/ginetto/ginetto-legge-360.webp" alt="Ginetto" '
             'width="96" height="97" decoding="async">'
-            f'<p>Ciao! A {e(paese)} ci sono stato davvero. Segui le mie tappe, e poi guarda '
-            'cosa c\'è da fare in paese nei prossimi giorni.</p>'
-            '</div>')
+            + (f'<p>{e(v["saluto"])}</p>' if v.get("saluto") else
+               f'<p>Ciao! A {e(paese)} ci sono stato davvero. Segui le mie scoperte, e poi '
+               'guarda cosa c\'è da fare in paese nei prossimi giorni.</p>')
+            + '</div>')
 
 
 def _sigla(provincia):
@@ -527,7 +535,7 @@ def _libro_html(v):
         etich = "Vedi il libro su Amazon" if v.get("amazon") else "Cerca il libro su Amazon"
         azione = (f'<a class="gn-btn" href="{e(link)}" target="_blank" rel="noopener">'
                   f'{etich}</a>')
-    return (f'<section class="gn-libro">{cop}<div>'
+    return (f'<section class="gn-libro" id="libro">{cop}<div>'
             f'<p class="gn-occh">Il libro · Volume {e(v.get("numero"))}</p>'
             f'<h2>{e(titolo)}</h2>'
             f'<p>{e(v.get("descrizione"))}</p>{azione}</div></section>')
@@ -539,9 +547,9 @@ def render_tappe(v, volumi, oggi, ctx=None):
     sigla = _sigla(v.get("provincia"))
     url = VOL_URL.format(v["id"])
     n = len(tappe)
-    titolo = f"{paese} con i bambini: le {n} tappe di Ginetto | DAOP"
+    titolo = f"{paese} con i bambini: {n} scoperte con Ginetto | DAOP"
     nomi = [t["nome"] for t in tappe]
-    descr = G.trunc(f"Cosa vedere a {paese} con i bambini, a piedi: "
+    descr = G.trunc(f"Cosa vedere e scoprire a {paese} con i bambini: "
                     + ", ".join(nomi) + ". Il percorso del libro di Ginetto l'Esploratore.", 158)
     a_paese = G.a_citta(e(paese))
 
@@ -562,6 +570,15 @@ def render_tappe(v, volumi, oggi, ctx=None):
     lis = "\n".join(f'    <li><h3>{e(t["nome"])}</h3><p>{e(t["testo"])}{_scheda(t)}</p></li>'
                     for t in tappe)
 
+    # Il primo gioco della pagina, subito dopo le scoperte: chi ha il libro la
+    # cerca, chi non ce l'ha scopre che c'è un gioco. Solo dove il volume la
+    # nomina (Valenza ha un'altra storia).
+    c_e_briciola = "Briciola" in (v.get("descrizione") or "")
+    chi = "Ginetto e Briciola" if c_e_briciola else "Ginetto"
+    chi_lungo = "Ginetto e la topolina Briciola" if c_e_briciola else "Ginetto"
+    briciola = ('<p class="gn-briciola"><b>Hai trovato Briciola?</b> Nel libro la topolina si '
+                'nasconde in ogni illustrazione. <a href="#libro">Guarda il libro &darr;</a></p>'
+                if "Briciola" in (v.get("descrizione") or "") else "")
     blocco_ev = _blocco_eventi(paese, reg, luoghi, oggi)
     blocco_lg, css_lg = _blocco_luoghi(paese, L, luoghi, oggi)
 
@@ -598,7 +615,7 @@ def render_tappe(v, volumi, oggi, ctx=None):
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "WebPage", "@id": url, "url": url, "name": titolo, "description": descr,
          "isPartOf": {"@type": "WebSite", "name": "DAOP", "url": G.SITE_URL},
-         "mainEntity": {"@type": "ItemList", "name": f"Le tappe di Ginetto a {paese}",
+         "mainEntity": {"@type": "ItemList", "name": f"Le scoperte di Ginetto a {paese}",
                         "numberOfItems": n,
                         "itemListElement": [{"@type": "ListItem", "position": i, "name": t}
                                             for i, t in enumerate(nomi, 1)]},
@@ -656,16 +673,17 @@ def render_tappe(v, volumi, oggi, ctx=None):
       <a href="/">Home</a> › <a href="/esploratore.html">Ginetto l'Esploratore</a> › <span>{e(paese)}</span>
     </div>
     <h1>{e(paese)} con i bambini</h1>
-    <p class="ev-when">Il percorso di Ginetto l'Esploratore · {n} tappe a piedi · provincia di {e(v.get("provincia"))}</p>
+    <p class="ev-when">Ginetto l'Esploratore · {n} scoperte con {chi} · provincia di {e(v.get("provincia"))}</p>
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero gn-wrap">
-  {_saluto(paese)}
-  <p>Nel libro <i>{e(v.get("titolo"))}</i> Ginetto e la topolina Briciola attraversano {e(paese)} tappa dopo tappa. Sono posti veri, da fare a piedi in un pomeriggio: per ognuno, quello che vale la pena di cercare.</p>
-  <h2>Le {n} tappe</h2>
+  {_saluto(v)}
+  <p>Nel libro <i>{e(v.get("titolo"))}</i> {chi_lungo} {'attraversano' if c_e_briciola else 'attraversa'} {e(paese)} tappa dopo tappa. Sono posti e storie veri del paese, da scoprire in un pomeriggio: per ognuno, quello che vale la pena di cercare.</p>
+  <h2>Le {n} scoperte</h2>
   <ol class="gn-tappe">
 {lis}
   </ol>
+  {briciola}
   {blocco_ev}
   {blocco_lg}
   {_libro_html(v)}
