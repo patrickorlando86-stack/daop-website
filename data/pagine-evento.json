@@ -161,6 +161,7 @@
   "prezzo": "Ingresso libero",
   "prov": "AL",
   "riga": 407,
+  "ritirata": "2026-11-16",
   "slug": "5-installazioni-immersive-natalizie-serravalle-out-serravalle-scrivia",
   "updated": "2026-11-16"
  },
@@ -217,7 +218,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 443,
+  "riga": 435,
   "slug": "a-caccia-dell-orso-pulciningamba-valfenera",
   "updated": "2026-11-16"
  },
@@ -659,7 +660,7 @@
   "ora": "17:30",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 435,
+  "riga": 427,
   "slug": "accensione-albero-e-luci-di-natale-e-concerto-di-n-san-damiano-d-asti",
   "updated": "2026-11-16"
  },
@@ -688,6 +689,7 @@
   "prezzo": "Ingresso libero",
   "prov": "AL",
   "riga": 411,
+  "ritirata": "2026-11-16",
   "slug": "accensione-albero-e-luminarie-di-natale-citta-di-a-acqui-terme",
   "updated": "2026-11-16"
  },
@@ -1223,7 +1225,7 @@
   "ora": "15:00-20:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 448,
+  "riga": 440,
   "slug": "al-mercato-di-natale-eo-arte-asti",
   "updated": "2026-11-16"
  },
@@ -4093,7 +4095,7 @@
   "ora": "8:30-18:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 446,
+  "riga": 438,
   "slug": "benefica-on-the-road-cocconato-d-asti",
   "updated": "2026-11-16"
  },
@@ -4600,7 +4602,7 @@
   "ora": "21:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 413,
+  "riga": 409,
   "slug": "board-games-serata-giochi-da-tavolo-oltre-gioco-novi-ligure",
   "updated": "2026-11-16"
  },
@@ -5889,7 +5891,7 @@
   "ora": "16:00-17:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 420,
+  "riga": 415,
   "slug": "casalnoceto-fa-l-albero-laboratorio-artistico-comu",
   "updated": "2026-11-16"
  },
@@ -9542,7 +9544,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 408,
+  "riga": 406,
   "slug": "detective-cercasi-toscience-tortona",
   "updated": "2026-11-16"
  },
@@ -16342,6 +16344,7 @@
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
   "riga": 418,
+  "ritirata": "2026-11-16",
   "slug": "frozen-elsa-e-il-castello-di-ghiaccio-alessandria",
   "updated": "2026-11-16"
  },
@@ -16676,7 +16679,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 447,
+  "riga": 439,
   "slug": "gelindo-la-combriccola-e-mitichieleculli-villanova-d-asti",
   "updated": "2026-11-16"
  },
@@ -17516,7 +17519,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 428,
+  "riga": 423,
   "slug": "giornata-nazionale-dell-albero-san-giorgio-monferrato",
   "updated": "2026-11-16"
  },
@@ -22897,6 +22900,7 @@
   "prezzo": "Non indicato",
   "prov": "AL",
   "riga": 406,
+  "ritirata": "2026-11-16",
   "slug": "la-casa-di-babbo-natale-serravalle-outlet-serravalle-scrivia",
   "updated": "2026-11-16"
  },
@@ -22953,7 +22957,7 @@
   "ora": "14:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 412,
+  "riga": 408,
   "slug": "la-castagnata-comitato-parrocchiale-castelceriolo",
   "updated": "2026-11-16"
  },
@@ -25185,7 +25189,7 @@
   "ora": "11:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 417,
+  "riga": 413,
   "slug": "laboratorio-di-yoga-per-bimbi-inchiostro-festival-alessandria",
   "updated": "2026-11-16"
  },
@@ -25299,7 +25303,7 @@
   "ora": "16:00",
   "prezzo": "6 euro a bambino",
   "prov": "AL",
-  "riga": 424,
+  "riga": 419,
   "slug": "laboratorio-natalizio-per-famiglie-mudi-tortona",
   "updated": "2026-11-16"
  },
@@ -25356,7 +25360,7 @@
   "ora": "15:30-18:00",
   "prezzo": "15 euro a bambino (compresa merenda)",
   "prov": "AL",
-  "riga": 419,
+  "riga": 414,
   "slug": "laboratorio-per-bambini-cooperativa-paideia-spinetta-marengo",
   "updated": "2026-11-16"
  },
@@ -25668,6 +25672,7 @@
   "prezzo": "Non indicato",
   "prov": "AL",
   "riga": 410,
+  "ritirata": "2026-11-16",
   "slug": "le-avventure-della-famiglia-catastrofino-laborator-novi-ligure",
   "updated": "2026-11-16"
  },
@@ -28423,7 +28428,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 425,
+  "riga": 420,
   "slug": "mercatini-di-natale-mornese",
   "updated": "2026-11-16"
  },
@@ -28681,6 +28686,7 @@
   "prezzo": "Ingresso libero",
   "prov": "AL",
   "riga": 429,
+  "ritirata": "2026-11-16",
   "slug": "mercatini-di-natale-sassello",
   "updated": "2026-11-16"
  },
@@ -28709,7 +28715,7 @@
   "ora": "14:30-19:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 427,
+  "riga": 422,
   "slug": "mercatini-di-natale-soms-di-san-giuliano-vecchio-e",
   "updated": "2026-11-16"
  },
@@ -28823,7 +28829,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 431,
+  "riga": 424,
   "slug": "mercatino-di-natale-a-san-giorgio-vi-edizione-san-giorgio-monferrato",
   "updated": "2026-11-16"
  },
@@ -28938,6 +28944,7 @@
   "prezzo": "Ingresso libero",
   "prov": "AL",
   "riga": 432,
+  "ritirata": "2026-11-16",
   "slug": "mercatino-di-natale-di-casalnoceto",
   "updated": "2026-11-16"
  },
@@ -29023,7 +29030,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 436,
+  "riga": 428,
   "slug": "mercatino-di-natale-san-damiano-d-asti",
   "updated": "2026-11-16"
  },
@@ -29109,7 +29116,7 @@
   "ora": "9:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 426,
+  "riga": 421,
   "slug": "mercatino-natalizio-consorzio-la-torre-garbagna-ec",
   "updated": "2026-11-16"
  },
@@ -29470,7 +29477,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 409,
+  "riga": 407,
   "slug": "missione-p-a-p-e-r-toscience-tortona",
   "updated": "2026-11-16"
  },
@@ -30859,7 +30866,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 445,
+  "riga": 437,
   "slug": "nizzae-fiera-del-bue-grasso-e-del-manzo-di-razza-p-nizza-monferrato",
   "updated": "2026-11-16"
  },
@@ -32184,7 +32191,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 434,
+  "riga": 426,
   "slug": "open-school-statale-castell-alfero",
   "updated": "2026-11-16"
  },
@@ -33411,6 +33418,7 @@
   "prezzo": "Ingresso libero",
   "prov": "AL",
   "riga": 430,
+  "ritirata": "2026-11-16",
   "slug": "pazzoshow-la-magia-del-natale-casalnoceto",
   "updated": "2026-11-16"
  },
@@ -35124,7 +35132,7 @@
   "ora": "14:00-19:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 440,
+  "riga": 432,
   "slug": "presepe-vivente-nei-sotterranei-del-paese-san-damiano-d-asti",
   "updated": "2026-11-16"
  },
@@ -36356,7 +36364,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 444,
+  "riga": 436,
   "slug": "riunione-organizzativa-presepi-a-castagnole-comune-castagnole-lanze",
   "updated": "2026-11-16"
  },
@@ -40275,7 +40283,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 414,
+  "riga": 410,
   "slug": "storie-in-cerchio-casale-monferrato",
   "updated": "2026-11-16"
  },
@@ -42903,7 +42911,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 416,
+  "riga": 412,
   "slug": "un-mondo-di-cereali-casale-monferrato",
   "updated": "2026-11-16"
  },
@@ -44050,7 +44058,7 @@
   "ora": "10:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 423,
+  "riga": 418,
   "slug": "villaggio-di-natale-a-mandrogne-sms-societa-mutuo",
   "updated": "2026-11-16"
  },
@@ -44493,7 +44501,7 @@
   "ora": "15:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 433,
+  "riga": 425,
   "slug": "xmas-inaugurazione-casetta-di-babbo-natale-in-bali-ovada",
   "updated": "2026-11-16"
  },
