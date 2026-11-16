@@ -35,6 +35,17 @@
  },
  "acquiterme": {
   "eventi": {
+   "accensione-albero-e-luminarie-di-natale-citta-di-a-acqui-terme": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "Dolce Natale ad Acqui Terme",
+    "nome": "Accensione Albero e Luminarie di Natale - Città di Acqui Terme",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "accensione-dell-albero-e-delle-luminarie-di-natale-acqui-terme": {
     "anni": [
      2026
@@ -1161,6 +1172,17 @@
     "pagina": true,
     "ultima": "2026-12-18"
    },
+   "frozen-elsa-e-il-castello-di-ghiaccio-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Alessandrino",
+    "manifest": "",
+    "nome": "Frozen - Elsa e il Castello di Ghiaccio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "frozen-elsa-e-il-castello-di-ghiaccio-teatro-aless-alessandria": {
     "anni": [
      2026
@@ -1391,6 +1413,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-29"
+   },
+   "laboratorio-di-yoga-per-bimbi-inchiostro-festival-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Spazio Inchiostro",
+    "manifest": "",
+    "nome": "Laboratorio di Yoga per Bimbi - Inchiostro Festival",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
    },
    "letture-spaventose-associazione-il-contastorie-alessandria": {
     "anni": [
@@ -2028,6 +2061,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "al-mercato-di-natale-eo-arte-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "EO Arte",
+    "manifest": "",
+    "nome": "Al Mercato di Natale - EO Arte",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
    },
    "alice-nel-paese-delle-meraviglie-teatro-alfieri-asti": {
     "anni": [
@@ -5320,6 +5364,17 @@
     "pagina": true,
     "ultima": "2026-09-29"
    },
+   "storie-in-cerchio-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca ragazzi Emanuele Luzzati",
+    "manifest": "Novembre in biblioteca",
+    "nome": "Storie in cerchio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-19"
+   },
    "teatro-in-inglese-con-kids-us-around-the-world-bib-casale-monferrato": {
     "anni": [
      2026
@@ -5352,6 +5407,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-27"
+   },
+   "un-mondo-di-cereali-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca ragazzi Emanuele Luzzati",
+    "manifest": "Novembre in biblioteca",
+    "nome": "Un mondo di cereali",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
    },
    "vietato-sputare-fuoco-con-ass-penelope-emozioni-pe-casale-monferrato": {
     "anni": [
@@ -5408,6 +5474,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-14"
+   },
+   "casalnoceto-fa-l-albero-laboratorio-artistico-comu": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale",
+    "manifest": "Casalnoceto Fa l'Albero!",
+    "nome": "Casalnoceto Fa l'Albero! - Laboratorio Artistico - Comune di Casalnoceto",
+    "organizza": "Comune di Casalnoceto",
+    "pagina": true,
+    "ultima": "2026-11-30"
    },
    "casalnoceto-kids": {
     "anni": [
@@ -5529,6 +5606,28 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-14"
+   },
+   "mercatino-di-natale-di-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "Mercatino di Natale di Casalnoceto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
+   "pazzoshow-la-magia-del-natale-casalnoceto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "PazzoShow - La Magia del Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "serata-astronomica-casalnoceto": {
     "anni": [
@@ -5828,6 +5927,17 @@
     "organizza": "Pro Loco di Cassine",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "mercatino-di-natale-pro-loco-cassine": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cassine centro",
+    "manifest": "",
+    "nome": "Mercatino di Natale - Pro Loco Cassine",
+    "organizza": "Pro Loco Cassine",
+    "pagina": true,
+    "ultima": "2026-12-20"
    }
   },
   "nome": "Cassine",
@@ -5924,6 +6034,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-08"
+   },
+   "riunione-organizzativa-presepi-a-castagnole-comune-castagnole-lanze": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Consiliare del Comune",
+    "manifest": "",
+    "nome": "Riunione Organizzativa Presepi a Castagnole - Comune di Castagnole Lanze",
+    "organizza": "Comune di Castagnole Lanze",
+    "pagina": true,
+    "ultima": "2026-11-17"
    }
   },
   "nome": "Castagnole Lanze",
@@ -5997,6 +6118,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-16"
+   },
+   "la-castagnata-comitato-parrocchiale-castelceriolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio B.V. Immacolata di Bettale",
+    "manifest": "",
+    "nome": "La Castagnata - Comitato Parrocchiale",
+    "organizza": "Comitato Parrocchiale",
+    "pagina": true,
+    "ultima": "2026-11-22"
    }
   },
   "nome": "Castelceriolo",
@@ -6175,6 +6307,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-08"
+   },
+   "open-school-statale-castell-alfero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia di Castell'Alfero",
+    "manifest": "",
+    "nome": "Open School - Statale Castell'Alfero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-14"
    },
    "oro-incenso-mirra-presepi-nel-monferrato-castell-a-castell-alfero": {
     "anni": [
@@ -7555,6 +7698,23 @@
    }
   },
   "nome": "Cocconato",
+  "prov": "AT"
+ },
+ "cocconatodasti": {
+  "eventi": {
+   "benefica-on-the-road-cocconato-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazze di Cocconato d'Asti",
+    "manifest": "",
+    "nome": "Benefica on the Road",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   }
+  },
+  "nome": "Cocconato d'Asti",
   "prov": "AT"
  },
  "confreria": {
@@ -10153,6 +10313,17 @@
     "pagina": true,
     "ultima": "2026-11-11"
    },
+   "mercatino-natalizio-consorzio-la-torre-garbagna-ec": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Esposizioni Piazza Alvigini",
+    "manifest": "",
+    "nome": "Mercatino Natalizio - Consorzio La Torre Garbagna Eccellenza Artigiana",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "sagra-delle-castagne-pro-loco-garbagna": {
     "anni": [
      2026
@@ -10972,6 +11143,23 @@
   },
   "nome": "Magliano Alfieri",
   "prov": "CN"
+ },
+ "mandrogne": {
+  "eventi": {
+   "villaggio-di-natale-a-mandrogne-sms-societa-mutuo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "SMS Società Mutuo Soccorso di Mandrogne",
+    "manifest": "",
+    "nome": "Villaggio di Natale a Mandrogne - SMS Società Mutuo Soccorso di Mandrogne",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   }
+  },
+  "nome": "Mandrogne",
+  "prov": "AL"
  },
  "mango": {
   "eventi": {
@@ -12874,6 +13062,17 @@
     "pagina": true,
     "ultima": "2026-08-08"
    },
+   "mercatini-di-natale-mornese": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico di Mornese",
+    "manifest": "Mercatini di Natale Mornese 2026",
+    "nome": "Mercatini di Natale Mornese 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "mornesween-l-halloween-party-che-non-ti-aspetti-mornese": {
     "anni": [
      2026
@@ -13168,6 +13367,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "nizzae-fiera-del-bue-grasso-e-del-manzo-di-razza-p-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Garibaldi",
+    "manifest": "NIZZAè 20° Fiera del Bue Grasso e del Manzo di Razza Piemontese 2026",
+    "nome": "NIZZAè 20° Fiera del Bue Grasso e del Manzo di Razza Piemontese 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "notte-in-nizza-nizza-monferrato": {
     "anni": [
      2026
@@ -13404,7 +13614,7 @@
     "nome": "Board Games - Serata Giochi da Tavolo - Oltre Gioco",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-09-26"
+    "ultima": "2026-11-21"
    },
    "ceramica-terzo-fuoco-e-modellato-associazione-cult-novi-ligure": {
     "anni": [
@@ -13754,6 +13964,17 @@
     "luogo": "Biblioteca Civica di Novi Ligure",
     "manifest": "",
     "nome": "Le avventure della Famiglia Catastrofino. Il Professor Marchingenio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-17"
+   },
+   "le-avventure-della-famiglia-catastrofino-laborator-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica - Centro Comunale di Cultura G. Capurro",
+    "manifest": "",
+    "nome": "Le Avventure della Famiglia Catastrofino - Laboratorio di scrittura creativa e presentazione del libro",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-17"
@@ -14657,6 +14878,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-07"
+   },
+   "xmas-inaugurazione-casetta-di-babbo-natale-in-bali-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via San Paolo - ingresso Via Torino",
+    "manifest": "",
+    "nome": "Xmas 2026 - Inaugurazione Casetta di Babbo Natale - In Balia degli Eventi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    }
   },
   "nome": "Ovada",
@@ -15925,6 +16157,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-28"
+   },
+   "mercatino-vintage-comune-di-pozzolo-formigaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Vittorio Veneto",
+    "manifest": "",
+    "nome": "Mercatino Vintage - Comune di Pozzolo Formigaro",
+    "organizza": "Comune di Pozzolo Formigaro",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "vivi-pozzolo-estate-nella-corte-del-castello-pozzolo-formigaro": {
     "anni": [
@@ -17874,6 +18117,17 @@
  },
  "sandamianodasti": {
   "eventi": {
+   "accensione-albero-e-luci-di-natale-e-concerto-di-n-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Libertà",
+    "manifest": "Natale a San Damiano d'Asti - Il Magico Paese di Natale",
+    "nome": "Accensione Albero e Luci di Natale e Concerto di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "alla-scoperta-della-croce-rossa-piccoli-volontari-san-damiano-d-asti": {
     "anni": [
      2026
@@ -17984,6 +18238,17 @@
     "pagina": true,
     "ultima": "2026-08-31"
    },
+   "mercatino-di-natale-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Natale a San Damiano d'Asti - Il Magico Paese di Natale",
+    "nome": "Mercatino di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
    "mostra-mercato-piccoli-animali-citta-di-san-damian-san-damiano-d-asti": {
     "anni": [
      2026
@@ -18016,6 +18281,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-05"
+   },
+   "presepe-vivente-nei-sotterranei-del-paese-san-damiano-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Borgo dei Sutè - Piazza Santi Cosma e Damiano",
+    "manifest": "Natale a San Damiano d'Asti - Il Magico Paese di Natale",
+    "nome": "Presepe Vivente nei sotterranei del paese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "presepe-vivente-san-damiano-d-asti": {
     "anni": [
@@ -18178,6 +18454,17 @@
     "pagina": true,
     "ultima": "2026-09-05"
    },
+   "giornata-nazionale-dell-albero-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa della Madonna della Neve",
+    "manifest": "",
+    "nome": "Giornata Nazionale dell'Albero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-23"
+   },
    "li-brogli-miracolosi-compagnia-teatrale-separe-san-giorgio-monferrato": {
     "anni": [
      2026
@@ -18188,6 +18475,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-29"
+   },
+   "mercatino-di-natale-a-san-giorgio-vi-edizione-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Caprioglio",
+    "manifest": "Mercatino di Natale a San Giorgio VI edizione",
+    "nome": "Mercatino di Natale a San Giorgio VI edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "mercatino-interparrocchiale-zia-bianca-e-amiche-san-giorgio-monferrato": {
     "anni": [
@@ -18277,6 +18575,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "mercatini-di-natale-soms-di-san-giuliano-vecchio-e": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone SOMS",
+    "manifest": "",
+    "nome": "Mercatini di Natale - SOMS di San Giuliano Vecchio ETS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    }
   },
   "nome": "San Giuliano Vecchio",
@@ -18892,6 +19201,23 @@
   "nome": "Sarezzano",
   "prov": "AL"
  },
+ "sassello": {
+  "eventi": {
+   "mercatini-di-natale-sassello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "",
+    "nome": "Mercatini di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   }
+  },
+  "nome": "Sassello",
+  "prov": "AL"
+ },
  "savigliano": {
   "eventi": {
    "cresco-con-te-cura-con-il-cuore-savigliano": {
@@ -19166,6 +19492,17 @@
  },
  "serravallescrivia": {
   "eventi": {
+   "5-installazioni-immersive-natalizie-serravalle-out-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Serravalle Designer Outlet",
+    "manifest": "Il Natale si accende al Serravalle Outlet",
+    "nome": "5 Installazioni Immersive Natalizie - Serravalle Outlet",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
+   },
    "accensione-dell-albero-di-natale-serravalle-design-serravalle-scrivia": {
     "anni": [
      2026
@@ -19253,6 +19590,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "la-casa-di-babbo-natale-serravalle-outlet-serravalle-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Serravalle Designer Outlet",
+    "manifest": "Il Natale si accende al Serravalle Outlet",
+    "nome": "La Casa di Babbo Natale - Serravalle Outlet",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-14"
    },
    "play-land-kids-summer-events-ass-animatamente-serravalle-scrivia": {
     "anni": [
@@ -19343,6 +19691,17 @@
  },
  "sezzadio": {
   "eventi": {
+   "natale-a-sezzadio": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Maria Immacolata",
+    "manifest": "Natale a Sezzadio",
+    "nome": "Natale a Sezzadio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
    "sagra-del-fritto-misto-e-non-solo-sezzadio": {
     "anni": [
      2026
@@ -19560,6 +19919,17 @@
  },
  "spinettamarengo": {
   "eventi": {
+   "laboratorio-per-bambini-cooperativa-paideia-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Campo Sportivo Quartieruzzi",
+    "manifest": "",
+    "nome": "Laboratorio per Bambini - Cooperativa Paideia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "spinetta-in-festa-spinetta-marengo": {
     "anni": [
      2026
@@ -19933,6 +20303,17 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "detective-cercasi-toscience-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Laboratori Scientifici per Bambini - Intrecci",
+    "nome": "Detective cercasi - ToScience",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "festa-della-madonna-della-guardia-tortona": {
     "anni": [
      2026
@@ -20043,6 +20424,17 @@
     "pagina": true,
     "ultima": "2026-10-27"
    },
+   "laboratorio-natalizio-per-famiglie-mudi-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Polo Culturale Diocesano MuDi Tortona",
+    "manifest": "",
+    "nome": "Laboratorio natalizio per famiglie - MuDi Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "le-regole-della-mia-citta-gli-esplorattori-tortona": {
     "anni": [
      2026
@@ -20053,6 +20445,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-20"
+   },
+   "missione-p-a-p-e-r-toscience-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Laboratori Scientifici per Bambini - Intrecci",
+    "nome": "Missione P.A.P.E.R. - ToScience",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "musichiamo-crescere-con-la-musica-12-24-mesi-perco-tortona": {
     "anni": [
@@ -20354,6 +20757,17 @@
  },
  "valenza": {
   "eventi": {
+   "accensione-dell-albero-di-sognacolori-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sognacolori",
+    "manifest": "Calendario delle Attività a tema natalizio",
+    "nome": "Accensione dell'Albero di Sognacolori",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
+   },
    "festa-dell-oratorio-valenza": {
     "anni": [
      2026
@@ -20386,6 +20800,17 @@
     "organizza": "Associazione Gli Amici Di Mario",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "laboratori-creativi-a-tema-natalizio-sognacolori-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sognacolori",
+    "manifest": "Calendario delle Attività a tema natalizio",
+    "nome": "Laboratori creativi a tema natalizio - Sognacolori",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-26"
    }
   },
   "nome": "Valenza",
@@ -20403,6 +20828,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-04"
+   },
+   "a-caccia-dell-orso-pulciningamba-valfenera": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia Valfenera",
+    "manifest": "",
+    "nome": "A Caccia dell'Orso - Pulciningamba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "camminata-dei-babbi-natale-dell-avis-valfenera": {
     "anni": [
@@ -20977,6 +21413,23 @@
   "nome": "Villafalletto",
   "prov": "CN"
  },
+ "villalvernia": {
+  "eventi": {
+   "un-albero-per-ogni-nato-comune-di-villalvernia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Pierino Bonaventura",
+    "manifest": "",
+    "nome": "Un albero per ogni nato 2026 - Comune di Villalvernia",
+    "organizza": "Comune di Villalvernia",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   }
+  },
+  "nome": "Villalvernia",
+  "prov": "AL"
+ },
  "villanovadasti": {
   "eventi": {
    "elogio-della-bionda-mostra-del-pollo-biondo-piemon-villanova-d-asti": {
@@ -21000,6 +21453,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "gelindo-la-combriccola-e-mitichieleculli-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ex Cinema Comunale",
+    "manifest": "",
+    "nome": "Gelindo - La Combriccola e MiTiChieleCullì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    },
    "open-school-scuola-primaria-villanova-capoluogo-is-villanova-d-asti": {
     "anni": [
