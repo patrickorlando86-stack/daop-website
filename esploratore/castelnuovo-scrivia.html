@@ -959,6 +959,278 @@
   .com-ev .com-th{width:46px;height:46px;flex-basis:46px}
 }
 
+/* Il padding in alto NON e' decorativo: e' l'unica pagina generata che non usa
+   .ev-wrap, e .ev-wrap--hero mette 44px fra la fascia scura e il primo elemento.
+   Senza, il corpo partiva incollato al bordo dell'hero (misurato: 329px la fine
+   dell'hero, 329px l'inizio del primo paragrafo) e la fascia sembrava tagliata. */
+.lg-wrap{max-width:940px;margin:0 auto;padding:40px 20px 40px}
+@media(max-width:600px){.lg-wrap{padding:30px 20px 32px}}
+
+/* L'hero e il corpo devono cominciare dalla STESSA x. Il guscio da' all'hero un
+   inner da 820px (`.ev-hero .page-hero-inner`) e qui la colonna dell'elenco e'
+   larga 900: l'H1 partiva 40px piu' a destra del primo comune, ed era il difetto
+   che si vedeva senza saperlo nominare. Si allarga l'inner solo su questa pagina
+   - toccare la regola nel guscio sposterebbe l'hero di 290 file. Sul telefono
+   sono allineati dal padding: 20px l'hero, 20px .lg-wrap. */
+.lg-hero .page-hero-inner{max-width:900px}
+/* La fascia illustrata (24/09/2026): parte da .ev-hero--img di PAGINA_CSS (la
+   stessa di /halloween.html), ma SENZA il velo scuro da sinistra - il disegno
+   e' gia' in penombra a sinistra, dove sta il testo, e il velo ci aggiungeva
+   un alone blu (Patrick). Al suo posto un'ombra sotto le lettere.
+   Sotto i 900px il disegno scende sotto il testo, in una versione sua
+   (luoghi-m, di giorno e piu' alta), come la fascia di eventi.html: blu pieno
+   fin dove il disegno comincia, poi sfuma nel cielo. */
+.lg-hero.ev-hero--img::before{background:var(--fascia) center/cover no-repeat}
+.lg-hero.ev-hero--img h1,.lg-hero.ev-hero--img p,.lg-hero.ev-hero--img .ev-crumb{
+  text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 12px rgba(0,0,0,.35)}
+@media(max-width:900px){
+  .lg-hero.ev-hero--img{padding-bottom:calc(56.4vw - 8px);background:#0e1422}
+  .lg-hero.ev-hero--img::before{background:linear-gradient(180deg,#0e1422 0%,#0e1422 calc(100% - 56vw),
+    rgba(14,20,34,.8) calc(100% - 50vw),rgba(14,20,34,.45) calc(100% - 44vw),
+    rgba(14,20,34,.18) calc(100% - 38vw),rgba(14,20,34,0) calc(100% - 32vw)),
+    var(--fascia-m,var(--fascia)) center bottom/100% auto no-repeat,#0e1422}
+  .lg-hero.ev-hero--img h1,.lg-hero.ev-hero--img p,.lg-hero.ev-hero--img .ev-crumb{text-shadow:none}
+}
+/* La frase che dice di cosa e' fatto l'elenco sta DENTRO l'hero, sotto
+   l'occhiello d'oro: e' la stessa impaginazione dell'hero di eventi.html (titolo,
+   riga di contesto, paragrafo). In fondo alla fascia, da sola sul crema, era un
+   paragrafo grigio senza niente che lo tenesse su - e larga 900px passava i 100
+   caratteri per riga, il doppio della misura usata in tutto il resto del sito.
+   `.page-hero p` la centrerebbe (max-width 520 + margin auto): serve margin:0,
+   perche' questo hero e' allineato a sinistra. */
+.lg-hero .lg-intro{max-width:60ch;margin:12px 0 0;font-size:1.02rem;line-height:1.62;
+  color:rgba(255,255,255,.72)}
+/* Chrome dimensiona una <select> sull'opzione PIU' LUNGA: con dentro
+   "Castelceriolo (Alessandria)" la tendina dei comuni da sola chiedeva mezza
+   barra. Si limita e si taglia con i puntini - il valore scelto resta
+   leggibile, e l'elenco aperto lo disegna il browser alla sua larghezza (sul
+   telefono e' un pannello a tutto schermo). */
+/* I filtri NON si allungano per riempire la riga. Con il flex-grow che eredita
+   dall'agenda, l'ultimo rimasto da solo sulla seconda riga si stirava a tutta
+   larghezza: "Età" diventava una pillola da 380px per una parola di tre lettere,
+   e sembrava un campo di ricerca invece di un menu. Larghezza naturale, e la
+   riga finisce dove finiscono i controlli. */
+#lg-toolbar .ev-select{flex:0 1 auto}
+
+/* Il campo comune e' un <input>, non una <select>: veste la stessa pillola ma
+   gli servono le cose che .ev-select da' per scontate su un menu. */
+input.ev-select.is-comune{max-width:150px;text-overflow:ellipsis;cursor:text;
+  -webkit-appearance:none;appearance:none}
+input.ev-select.is-comune::placeholder{color:var(--text-mid);opacity:1;font-weight:600}
+input.ev-select.is-comune.is-on::placeholder{color:rgba(255,255,255,.75)}
+/* La ✕ per svuotare e la freccetta dei suggerimenti le disegna il browser in
+   scuro: sulla pillola attiva, che e' blu notte, sparivano. */
+input.ev-select.is-comune.is-on::-webkit-search-cancel-button,
+input.ev-select.is-comune.is-on::-webkit-calendar-picker-indicator{filter:invert(1) brightness(1.8)}
+@media(max-width:600px){input.ev-select.is-comune{max-width:126px}}
+.lg-count{font-size:0.8rem;font-weight:600;color:var(--text-light);margin:10px 0 0;min-height:1em}
+.lg-reset{font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-mid);
+  background:none;border:0;border-bottom:1px solid rgba(45,74,92,0.25);padding:0 0 1px;cursor:pointer}
+.lg-reset:hover{color:var(--orange-ink,#a05714);border-color:currentColor}
+
+/* padding:0 NON e' di troppo: il foglio di stile del sito ha una regola
+   `section{padding:100px 24px}` (72px 20px sotto i 600px) pensata per le fasce
+   della home, e il gruppo comune e' un <section> perche' ha un suo <h2>. Il
+   risultato erano 72px di vuoto sopra e 72 sotto ogni comune: senza filtri non
+   si notavano, perche' le sezioni sono alte; filtrando restano una o due righe
+   e quei 144px diventano il buco che si vede fra un comune e l'altro. */
+.lg-grp{margin:26px 0 0;padding:0}
+.lg-grp-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin:0 0 6px;padding:0 0 6px;
+  border-bottom:1px solid rgba(45,74,92,0.10)}
+/* flex-wrap (24/09/2026): con un comune dal nome lungo il link "Eventi a
+   Castelnuovo Scrivia" non ci stava e usciva dallo schermo - a 360px la
+   pagina scorreva di lato di 11px. Ora scende sulla riga sotto, a destra. */
+.lg-grp-h h2{font-family:'Playfair Display',serif;font-size:1.24rem;font-weight:800;
+  color:var(--navy);margin:0}
+.lg-grp-h span{font-size:0.78rem;font-weight:600;color:var(--text-light)}
+.lg-grp-h a{font-size:0.78rem;font-weight:600;color:var(--text-mid);margin-left:auto;white-space:nowrap}
+
+/* ── La riga ──────────────────────────────────────────────────────────────
+   E' un <details>, non una riga con del JS sopra: senza JavaScript si apre lo
+   stesso, la tastiera la governa da sola e Ctrl+F la trova anche chiusa.
+   content-visibility come nell'agenda - a centinaia di righe e' la voce piu'
+   pesante della pagina, e il testo resta comunque nel DOM. */
+.lg-row{content-visibility:auto;contain-intrinsic-size:auto 74px;
+  border-left:3px solid var(--cat-color,#7e8c99);border-bottom:1px solid rgba(45,74,92,0.07);
+  background:white;transition:background .18s ease}
+.lg-row:hover{background:var(--cat-tint,rgba(45,74,92,0.04))}
+/* Aperta la riga prende il crema neutro, non la tinta di categoria: quella e'
+   pensata per una pillola da 36px, e stesa su mezzo schermo di scheda faceva
+   un fondo lilla su cui il testo si legge peggio. Il colore della categoria
+   resta dov'e' leggibile - il bordo a sinistra e il quadratino dell'icona. */
+.lg-row[open]{background:var(--cream,#fdf8f0)}
+.lg-row > summary{display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;
+  list-style:none;min-height:48px}
+.lg-row > summary::-webkit-details-marker{display:none}
+.lg-row > summary::marker{content:''}
+.lg-row > summary:focus-visible{outline:2px solid var(--orange);outline-offset:-2px}
+.lg-ico{flex:0 0 auto;width:36px;height:36px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-size:1.15rem;line-height:1;
+  background:var(--cat-tint,rgba(45,74,92,0.08))}
+.lg-txt{min-width:0;flex:1 1 auto}
+.lg-nome{display:block;font-size:0.99rem;font-weight:700;color:var(--navy);line-height:1.3}
+.lg-meta{display:block;font-size:0.79rem;color:var(--text-light);margin-top:2px}
+/* La categoria si scrive, non solo si colora: un verde e un blu senza etichetta
+   sono due colori. Stessa regola delle pagine comune. */
+.lg-cat{font-weight:700;color:var(--cat-ink,#606d7a)}
+.lg-pills{flex:0 0 auto;display:flex;gap:5px;align-items:center}
+/* inline-block e NON inline-flex: in un contenitore flex lo spazio in testa a
+   un elemento figlio viene mangiato, e "2 eventi in programma" usciva
+   "2EVENTI IN PROGRAMMA".
+   Lo spazio sta dentro l'<i> apposta - cosi' se ne va insieme alla parola
+   quando sul telefono resta il solo numero - ma serve un contesto in cui
+   contenga davvero. */
+.lg-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;
+  border-radius:100px;padding:4px 9px;white-space:nowrap;display:inline-block;
+  line-height:1.5;text-align:center}
+.lg-tag i{font-style:normal}
+.lg-tag.is-ev{background:rgba(24,134,99,0.12);color:#146c51}
+.lg-tag.is-free{background:rgba(24,134,99,0.10);color:#167859}
+.lg-tag.is-daop{background:rgba(232,149,74,0.16);color:#a75b15}
+.lg-tag.is-feste{background:rgba(155,47,108,0.10);color:#8a2a60}
+.lg-tag svg{width:11px;height:11px;vertical-align:-1px}
+/* "Sponsorizzato" sopra il nome, in parole e su ogni schermo: e' la
+   dichiarazione del pagamento, quindi non si nasconde sul telefono come le
+   parole delle pillole. Grigio e non oro: e' un'avvertenza, non un fregio
+   (Tripadvisor e Google Maps fanno lo stesso). #5c6975 su bianco = 5,6:1. */
+.lg-spons{display:block;font-size:0.66rem;font-weight:700;letter-spacing:0.05em;
+  text-transform:uppercase;color:#5c6975;line-height:1.3;margin:0 0 1px}
+.lg-chev{flex:0 0 auto;width:17px;height:17px;fill:none;stroke:var(--text-light);
+  stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
+.lg-row[open] .lg-chev{transform:rotate(180deg)}
+@media(max-width:600px){
+  .lg-row > summary{padding:12px 8px;gap:10px}
+  .lg-nome{font-size:0.94rem}
+  /* Sul telefono resta il segno, non la parola: senza pillole le righe erano
+     tutte identiche, con le parole intere tre pillole mangiavano il nome.
+     La riga aperta ha spazio e riprende le parole. */
+  .lg-tag i{display:none}
+  .lg-tag{padding:4px 7px;min-width:24px}
+  .lg-pills .lg-tag:nth-child(n+3){display:none}
+  .lg-row[open] .lg-tag i{display:inline}
+  .lg-row[open] .lg-pills .lg-tag:nth-child(n+3){display:inline-flex}
+  /* Aperta, le parole intere delle pillole accanto al nome lo schiacciavano in una colonna di
+     una parola per riga (15/11/2026, screenshot di Patrick sulla Luzzati di Casale): vanno sotto. */
+  .lg-row[open] > summary{flex-wrap:wrap}
+  .lg-row[open] .lg-txt{flex:1 1 0}
+  .lg-row[open] .lg-chev{order:2}
+  .lg-row[open] .lg-pills{order:3;flex-basis:100%;flex-wrap:wrap;padding-left:46px}
+}
+
+/* ── Il corpo aperto ─────────────────────────────────────────────────────── */
+.lg-body{padding:2px 14px 18px 62px;font-size:0.9rem;line-height:1.62;color:var(--text-mid)}
+@media(max-width:600px){.lg-body{padding:2px 8px 16px 8px}}
+.lg-facts{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px}
+.lg-facts li{display:flex;gap:8px}
+.lg-facts b{font-weight:700;color:var(--text-dark);flex:0 0 auto}
+.lg-serv{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding:0;list-style:none}
+.lg-serv li{font-size:0.78rem;border-radius:100px;padding:4px 11px;
+  background:rgba(24,134,99,0.09);color:#146c51;font-weight:600}
+.lg-next{margin:12px 0 0;padding:12px 14px;background:var(--cream);border-radius:12px}
+.lg-next p{margin:0 0 7px;font-size:0.8rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.04em;color:var(--text-light)}
+.lg-next ul{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.lg-next a{color:var(--navy);font-weight:600}
+.lg-act{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 0}
+.lg-act a{display:inline-flex;align-items:center;gap:6px;font-size:0.83rem;font-weight:600;
+  color:var(--text-mid);background:white;border:1px solid rgba(45,74,92,0.14);
+  border-radius:100px;padding:9px 15px;min-height:40px;transition:var(--transition)}
+.lg-act a:hover{border-color:var(--orange);color:var(--orange-ink,#a05714)}
+.lg-manca{margin:12px 0 0;font-size:0.83rem;color:var(--text-light)}
+.lg-manca a{color:var(--text-mid);text-decoration:underline}
+/* La foto sta DENTRO la riga chiusa, quindi non viene scaricata finche' non si
+   apre: con loading="lazy" il browser non carica le immagini di un sottoalbero
+   che non disegna. E' la ragione per cui 800 foto su Supabase non diventano
+   800 richieste - lo stesso conto di banda gia' sbagliato una volta con le
+   locandine, quando il bucket passo' da 10 a 250 MB al giorno. */
+.lg-foto{display:block;width:100%;max-width:360px;height:auto;aspect-ratio:4/3;object-fit:cover;
+  border-radius:12px;margin:0 0 12px;background:var(--cream)}
+/* Il credito della foto: obbligatorio, quindi si legge, ma e' una didascalia e
+   non un contenuto - piccolo, chiaro, attaccato all'immagine. Il margine sopra
+   e' NEGATIVO e non si tocca quello di .lg-foto: il credito ce l'ha solo una
+   riga su tre (le 712 vecchie non hanno l'autore), e ridurre il margine della
+   foto avrebbe stretto la scheda anche a chi il paragrafo non ce l'ha.
+   Senza il recupero il nome dell'autore galleggiava a mezza strada fra la foto
+   e la descrizione, e non si capiva a quale delle due appartenesse. */
+.lg-credito{max-width:360px;margin:-8px 0 12px;font-size:0.72rem;line-height:1.4;
+  color:var(--text-light)}
+.lg-credito a{color:var(--text-light);text-decoration:underline}
+.lg-credito a:hover{color:var(--text-mid)}
+.lg-galleria{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.lg-galleria img{width:104px;height:78px;object-fit:cover;border-radius:8px;background:var(--cream)}
+.lg-cura{margin:10px 0 0;font-size:0.76rem;color:var(--text-light)}
+.lg-manca svg{width:12px;height:12px;vertical-align:-1px;color:#a75b15}
+
+/* ── Sponsorizzati: l'unico posto in cui la posizione si compra, e si dice ── */
+.lg-vetrina{margin:22px 0 0;padding:16px 16px 6px;border:1px solid rgba(201,162,39,0.35);
+  border-radius:var(--radius-lg,16px);background:rgba(201,162,39,0.05)}
+.lg-vetrina > p{margin:0 0 4px;font-size:0.75rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.05em;color:#846a1a}
+.lg-vetrina > p span{font-weight:600;text-transform:none;letter-spacing:0;color:var(--text-light)}
+.lg-vetrina .lg-row{background:transparent}
+
+/* ── Le ancore di una pagina da 90.000px ───────────────────────────────────
+   Due difetti misurati l'11/09/2026 a 412 e 1280px, ed erano lo stesso
+   difetto visto da due parti: un'ancora, qui, non arriva dove dice.
+
+   1. `html{scroll-behavior:smooth}` arriva dal <style> di eventi.html che
+      _guscio() copia dappertutto, e su una pagina alta 90.000px non funziona:
+      l'animazione parte, le righe che attraversa si disegnano (hanno
+      content-visibility:auto, quindi fino a quel momento erano stimate) e il
+      bersaglio si sposta sotto i piedi dell'animazione. Misurato sul link
+      "come funziona" del riquadro Sponsorizzati: si atterra 217-685px OLTRE
+      la sezione, cioe' sulla striscia di Ginetto, e di quello che spiega
+      perche' quella riga sta li' non si vede niente. Senza smooth arriva a
+      zero, esatto, tutte e due le larghezze. Non e' un capriccio di Chrome:
+      sono le due funzioni che si contraddicono, e qui l'animazione vale meno
+      dell'arrivare.
+   2. Sopra c'e' un tetto appiccicoso di due pezzi - la nav (69px) e la barra
+      dei filtri (156px sul telefono, 68px da 900px in su) - e un'ancora senza
+      scroll-margin ci finisce sotto. Non riguarda solo il link della vetrina:
+      le ~450 schede evento mandano a /luoghi.html#c-<prov>-<comune>, e
+      l'intestazione del comune arrivava a 14px dal bordo (a 1280px addirittura
+      a -31px), cioe' coperta. I due numeri sono i tetti misurati piu' un dito
+      d'aria, non stime. */
+html{scroll-behavior:auto}
+.lg-ordine,.lg-grp-h h2,.lg-grp>.lg-row{scroll-margin-top:236px}
+@media(min-width:900px){.lg-ordine,.lg-grp-h h2,.lg-grp>.lg-row{scroll-margin-top:148px}}
+/* La mappa (24/09/2026). L'interruttore nasce `hidden` e lo accende il JS:
+   senza, sarebbe un bottone che non fa niente. [hidden] va ribadito perche'
+   .ev-viewtoggle e' inline-flex e batterebbe il display:none del browser -
+   e' l'inciampo gia' pagato con .ev-chk. */
+.lg-vista{margin-left:0}
+.lg-vista[hidden]{display:none}
+.lg-mappa{position:relative;margin:12px 0 6px;border:1px solid rgba(45,74,92,0.12);
+  border-radius:16px;overflow:hidden;background:#eef2f4}
+.dm-tela{height:min(60vh,440px)}
+@media(min-width:900px){.dm-tela{height:500px}}
+.dm-avviso{margin:0;padding:10px 14px;font-size:0.82rem;color:var(--text-mid);background:white}
+.dm-avviso:empty{display:none}
+.dm-pop{font-family:'DM Sans',sans-serif;max-height:260px;overflow:auto}
+.dm-voce{display:block;padding:7px 2px;border-bottom:1px solid rgba(45,74,92,0.08);
+  color:var(--navy);text-decoration:none}
+.dm-voce:last-child{border-bottom:0}
+.dm-voce b{display:block;font-size:0.9rem;line-height:1.3}
+.dm-voce span{display:block;font-size:0.76rem;color:var(--text-light);margin-top:2px}
+.dm-voce:hover b{text-decoration:underline}
+.dm-altri{margin:6px 2px 0;font-size:0.76rem;color:var(--text-light)}
+
+.lg-ordine{margin:30px 0 0;padding:16px 18px;background:var(--cream);border-radius:14px;
+  font-size:0.85rem;line-height:1.65;color:var(--text-mid)}
+.lg-ordine h2{font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin:0 0 8px}
+.lg-ordine p{margin:0 0 8px}
+.lg-ordine p:last-child{margin:0}
+/* Senza, il link usciva nel blu di default del browser. */
+.lg-ordine a{color:var(--navy);text-underline-offset:2px}
+
+.lg-vuoto{margin:26px 0;padding:26px 20px;text-align:center;background:var(--cream);
+  border-radius:14px;color:var(--text-mid)}
+.lg-vuoto b{display:block;color:var(--navy);margin-bottom:4px}
+
+.cat-cultura-istruzione{--cat-color:#6c63a6;--cat-tint:rgba(108,99,166,0.14);--cat-ink:#5c5493}
+.cat-fattorie-didattiche{--cat-color:#5c9a4a;--cat-tint:rgba(92,154,74,0.14);--cat-ink:#487a3a}
+
 .gn-wrap h2{margin:34px 0 10px;font-size:1.3rem;line-height:1.32}
 .gn-wrap>p{margin:0 0 12px;line-height:1.7;max-width:66ch}
 .gn-wrap>p a{color:var(--navy,#2d4a5c);text-decoration:underline;text-underline-offset:2px}
@@ -980,6 +1252,13 @@
 .gn-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border-radius:10px;
  background:var(--navy,#2d4a5c);color:#fff;font-weight:600;text-decoration:none}
 .gn-soon{font-weight:600;color:var(--text-mid,#6a7a85)}
+.gn-saluto{display:flex;gap:14px;align-items:center;margin:0 0 18px;padding:14px 16px;
+ border-radius:14px;background:var(--carta,#fffcf8);border:1px solid var(--linea,#e2d8cb)}
+.gn-saluto img{flex:0 0 72px;width:72px;height:auto}
+.gn-saluto p{margin:0;line-height:1.55;font-style:italic}
+.gn-tutti,.gn-nota{margin:8px 0 0;font-size:.92rem;color:var(--text-mid,#6a7a85)}
+.gn-tutti a{color:var(--navy,#2d4a5c);font-weight:600}
+.gn-luoghi{padding:0;margin-top:10px}
 @media (max-width:600px){.gn-libro{flex-direction:column}.gn-libro img,.gn-libro .gn-cop-vuota{width:160px;height:160px;flex-basis:auto}}
 </style>
 <script src="/assets/js/cookie-consent.js"></script>
@@ -1140,6 +1419,7 @@
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero gn-wrap">
+  <div class="gn-saluto"><img src="/assets/ginetto/ginetto-legge-360.webp" alt="Ginetto" width="96" height="97" decoding="async"><p>Ciao! A Castelnuovo Scrivia ci sono stato davvero. Qui sotto trovi le tappe del mio libro, da fare a piedi in un pomeriggio, e cosa c'è da fare adesso in paese.</p></div>
   <p>Nel libro <i>Ginetto alla scoperta di Castelnuovo Scrivia</i> Ginetto e la topolina Briciola attraversano Castelnuovo Scrivia tappa dopo tappa. Sono posti veri: qui sotto c'è il percorso, da fare un pomeriggio con i bambini, con quello che vale la pena di cercare in ognuno.</p>
   <h2>Le 6 tappe</h2>
   <ol class="gn-tappe">
@@ -1151,10 +1431,20 @@
     <li><h3>L&#x27;oro blu</h3><p>Dal gualdo, una pianta dalle foglie verdi, si ricavava un blu prezioso per tingere le stoffe: il tessuto diventava azzurro all&#x27;aria, davanti agli occhi. Il mercato del gualdo fece la ricchezza del paese.</p></li>
   </ol>
   <section class="gn-libro"><img src="/assets/ginetto/copertine/vol-2-castelnuovo-scrivia.webp" alt="Copertina del volume 2 di Ginetto l&#x27;Esploratore, dedicato a Castelnuovo Scrivia" width="980" height="980" loading="lazy" decoding="async"><div><p class="gn-occh">Il libro · Volume 2</p><h2>Ginetto alla scoperta di Castelnuovo Scrivia</h2><p>Lungo la Scrivia, Ginetto arriva al paese di Matteo Bandello e ne gira le vie, il castello e le cascine intorno, sulle tracce dell&#x27;oro blu. Come nel primo volume, in ogni illustrazione si nasconde Briciola: trovarla è il gioco che accompagna la lettura.</p><a class="gn-btn" href="https://www.amazon.it/dp/B0HCBRNTVV" target="_blank" rel="noopener">Vedi il libro su Amazon</a></div></section>
+  <h2>In programma a Castelnuovo Scrivia</h2>
+  <ul class="com-ev"><li style="--cat-color:#6ba5a8;--cat-tint:rgba(107,165,168,0.16);--cat-ink:#467477" data-province="al" data-category="laboratori" data-start="2026-11-16" data-end="2026-11-16" data-lat="44.9808006" data-lon="8.8804053" data-citta="Castelnuovo Scrivia"><img class="com-th" src="/assets/miniature/daop_alessandria_4007113665775120212.webp" alt="" loading="lazy" decoding="async" width="56" height="56"><span class="com-b"><span class="com-d">oggi · 17:00<span class="com-cat">Laboratorio</span></span><a class="com-go" href="/eventi/the-little-book-club-comune-di-castelnuovo-scrivia.html">The Little Book Club - Comune di Castelnuovo Scrivia</a><span class="com-luogo">Castelnuovo Scrivia</span></span></li></ul>
+  <p class="gn-tutti"><a href="/eventi/comune/castelnuovo-scrivia.html">Tutti gli eventi a Castelnuovo Scrivia &rarr;</a></p>
+  <h2>Posti per famiglie a Castelnuovo Scrivia</h2>
+  <p class="gn-nota">Prima quelli con la foto e con appuntamenti in programma; chi paga non sale. Tocca una riga per aprirla.</p>
+  <div class="lg-wrap gn-luoghi"><details class="lg-row cat-cultura-istruzione" id="lg-biblioteca-comunale-pier-angelo-soldini-castelnuov" data-cat="cultura-istruzione" data-prov="al" data-comune="castelnuovo-scrivia" data-etamin="0" data-etamax="14" data-lat="44.9808006" data-lon="8.8804053" data-citta="Castelnuovo Scrivia"><summary><span class="lg-ico" aria-hidden="true">📚</span><span class="lg-txt"><span class="lg-nome">Biblioteca Comunale &quot;Pier Angelo Soldini&quot;</span><span class="lg-meta"><span class="lg-cat">Biblioteche</span> · Castelnuovo Scrivia (AL)</span></span><span class="lg-pills"><span class="lg-tag is-daop"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg><i> Consigliato DAOP</i></span><span class="lg-tag is-ev"><b>3</b><i> eventi in programma</i></span></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/2516.jpg" alt="Biblioteca Comunale &quot;Pier Angelo Soldini&quot;, Castelnuovo Scrivia" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/112471036996542152106" target="_blank" rel="noopener nofollow">daniela milanese</a> · Google Maps</p><p>La Biblioteca Comunale &quot;Pier Angelo Soldini&quot; è il cuore culturale di Castelnuovo Scrivia: oltre 22.000 volumi liberamente accessibili dagli scaffali, una sezione per bambini con i libri riconoscibili grazie alle etichette colorate — così i più piccoli scelgono in autonomia — e un angolo dedicato ai ragazzi. Durante l&#x27;anno organizza laboratori creativi e attività per famiglie, dalle letture…</p><ul class="lg-serv"><li class="is-pratico">Ci passa il passeggino</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Biblioteca, Sezione bambini, Letture ad alta voce, The Little Book Club, Laboratori creativi, Kamishibai, Ingresso libero</span></li><li><b>Dove:</b> <span>Via Solferino 3</span></li><li><b>Se piove:</b> <span>Si va lo stesso, è al chiuso</span></li><li><b>Orari:</b> <span>Lun–Ven 15:00–18:30; Gio anche 09:00–12:15; Sab 09:00–12:15; Dom chiuso</span></li><li><b>Ingresso:</b> <span>Gratuito</span></li><li><b>Età:</b> <span>fino a 14 anni</span></li><li><b>Telefono:</b> <a href="tel:0131826754">0131 826754</a></li></ul><p class="lg-manca">Qui DAOP ha seguito 5 eventi per famiglie, l'ultimo il 30 novembre 2026.</p><div class="lg-next"><p>In programma qui</p><ul><li><a href="/eventi/the-little-book-club-comune-di-castelnuovo-scrivia.html">The Little Book Club - Comune di Castelnuovo Scrivia</a> <span>· 16 nov</span></li><li><a href="/eventi/letture-ad-alta-voce-storie-avvolte-nella-nebbia-d-castelnuovo-scrivia.html">Letture ad alta voce - Storie avvolte nella nebbia del mistero</a> <span>· 23 nov</span></li><li><a href="/eventi/the-little-book-club-comune-di-castelnuovo-scrivia.html">The Little Book Club - Comune di Castelnuovo Scrivia</a> <span>· 30 nov</span></li></ul></div><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.98080061,8.880405333" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://www.facebook.com/BibliotecaComunaleCastelnuovoScrivia" target="_blank" rel="noopener nofollow">Pagina Facebook</a><a href="mailto:biblioteca@comune.castelnuovoscrivia.al.it">Scrivi al luogo</a></div><p class="lg-manca"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg> Questo posto ha il <a href="/bollino.html">bollino Family Friendly</a> di DAOP.</p><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details>
+<details class="lg-row cat-cultura-istruzione" id="lg-castello-podestarile-castelnuovo-scrivia" data-cat="cultura-istruzione" data-prov="al" data-comune="castelnuovo-scrivia" data-etamin="5" data-etamax="99" data-lat="44.9807574" data-lon="8.8806522" data-citta="Castelnuovo Scrivia"><summary><span class="lg-ico" aria-hidden="true">🏰</span><span class="lg-txt"><span class="lg-nome">Castello Podestarile</span><span class="lg-meta"><span class="lg-cat">Musei &amp; Luoghi di Interesse</span> · Castelnuovo Scrivia (AL)</span></span><span class="lg-pills"><span class="lg-tag is-free">€<i> Gratis</i></span></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/3155.jpg" alt="Castello Podestarile, Castelnuovo Scrivia" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/109363296167917130707" target="_blank" rel="noopener nofollow">antonella castaldello</a> · Google Maps</p><p>Il Castello Podestarile — o Palazzo Pretorio dei Torriani e dei Bandello — è l’edificio storico che domina il centro di Castelnuovo Scrivia, con una torre di 39 metri. Le visite guidate comprendono il cortile, le due sale affrescate del primo piano e il sottotetto, dove gli affreschi quattrocenteschi proseguono sulla facciata originale. L’ingresso è gratuito e si prenota. Il cortile ospita…</p><ul class="lg-serv"><li class="is-pratico">Su prenotazione</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Visite guidate su richiesta, Ingresso gratuito, Cortile storico, Sale affrescate del primo piano, Torre panoramica (solo durante la rievocazione), Spettacoli ed eventi culturali, Rievocazioni storiche, Biblioteca comunale al piano terra</span></li><li><b>Dove:</b> <span>Via Solferino, 3</span></li><li><b>Se piove:</b> <span>Meglio un altro giorno, è all'aperto</span></li><li><b>Orari:</b> <span>Visite guidate su richiesta; aperture Castelli Aperti 15:00-18:00. Biblioteca: Lun-Ven 15:00-18:30; Gio e Sab 9:00-12:15</span></li><li><b>Ingresso:</b> <span>Ingresso gratuito</span></li><li><b>Età:</b> <span>da 5 anni</span></li><li><b>Telefono:</b> <a href="tel:0131826754">0131 826754</a></li></ul><p class="lg-manca">Qui DAOP ha seguito 3 eventi per famiglie, l'ultimo il 23 agosto 2026.</p><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.9807574,8.8806522" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://www.comune.castelnuovoscrivia.al.it" target="_blank" rel="noopener nofollow">Sito del luogo</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details>
+<details class="lg-row cat-fattorie-didattiche" id="lg-elilu-soul-farm-castelnuovo-scrivia-castelnuovo-sc" data-cat="fattorie-didattiche" data-prov="al" data-comune="castelnuovo-scrivia" data-etamin="3" data-etamax="12" data-lat="44.9456564" data-lon="8.8977771" data-citta="Castelnuovo Scrivia"><summary><span class="lg-ico" aria-hidden="true">🐮</span><span class="lg-txt"><span class="lg-nome">Elilu Soul Farm – Castelnuovo Scrivia</span><span class="lg-meta"><span class="lg-cat">Fattorie Didattiche</span> · Castelnuovo Scrivia (AL)</span></span><span class="lg-pills"></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/36.jpg" alt="Elilu Soul Farm – Castelnuovo Scrivia, Castelnuovo Scrivia" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/108688012773474320667" target="_blank" rel="noopener nofollow">Jan-Willem Zonneveld</a> · Google Maps</p><p>Azienda agricola familiare e fattoria didattica accreditata dalla Regione Piemonte, a Castelnuovo Scrivia. Condotta da Elisa e Giorgia, propone laboratori creativi, contatto con gli animali, agriturismo, planetario e centri estivi per bambini e ragazzi. Produzione biologica a Km0.</p><ul class="lg-serv"><li class="is-pratico">Parcheggio</li><li class="is-pratico">Su prenotazione</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Fattoria didattica, Animali, Laboratori, Ristorazione, Planetario, Centri estivi, Agriturismo, Bottega</span></li><li><b>Dove:</b> <span>strada Piccagallo 19</span></li><li><b>Se piove:</b> <span>Meglio un altro giorno, è all'aperto</span></li><li><b>Orari:</b> <span>lun-ven 9:00-16:00 (centri estivi); agriturismo apr-ott nel weekend; altre attività su prenotazione</span></li><li><b>Età:</b> <span>da 3 a 12 anni</span></li><li><b>Telefono:</b> <a href="tel:3891358919">389 135 8919</a></li></ul><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.94565639,8.897777099" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://soulfarm.it" target="_blank" rel="noopener nofollow">Sito del luogo</a><a href="mailto:soulfarm.elilu@gmail.com">Scrivi al luogo</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details>
+<details class="lg-row cat-fattorie-didattiche" id="lg-la-fattoria-di-giulia-castelnuovo-scrivia" data-cat="fattorie-didattiche" data-prov="al" data-comune="castelnuovo-scrivia" data-etamin="2" data-etamax="14" data-lat="44.9699841" data-lon="8.8386116" data-citta="Castelnuovo Scrivia"><summary><span class="lg-ico" aria-hidden="true">🐮</span><span class="lg-txt"><span class="lg-nome">La Fattoria di Giulia</span><span class="lg-meta"><span class="lg-cat">Fattorie Didattiche</span> · Castelnuovo Scrivia (AL)</span></span><span class="lg-pills"><span class="lg-tag is-feste" title="Feste di compleanno"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/></svg><i> Feste di compleanno</i></span></span><svg class="lg-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="lg-body"><img class="lg-foto" src="https://aaseyjdsldgjerjqlumu.supabase.co/storage/v1/object/public/luoghi-foto/57.jpg" alt="La Fattoria di Giulia, Castelnuovo Scrivia" loading="lazy" decoding="async" width="360" height="270"><p class="lg-credito">Foto: <a href="https://maps.google.com/maps/contrib/106535837716643846875" target="_blank" rel="noopener nofollow">La Fattoria di Giulia</a> · Google Maps</p><p>La Fattoria di Giulia è un luogo speciale dove adulti e bambini possono riscoprire la campagna autentica incontrare animali affettuosi e vivere esperienze educative e divertenti a contatto con la natura.Tra visite guidate laboratori campus estivi e feste di compleanno ogni giornata in fattoria diventa un’avventura unica da ricordare!</p><ul class="lg-serv"><li class="is-pratico">Parcheggio</li><li class="is-pratico">Su prenotazione</li><li class="is-pratico">Feste di compleanno</li><li class="is-pratico">Centri estivi</li></ul><ul class="lg-facts"><li><b>Cosa c'è:</b> <span>Fattoria didattica, Animali, Ristorazione, Compleanni, Laboratori, Campus estivo, Area giochi</span></li><li><b>Dove:</b> <span>Via Gerbidi 12</span></li><li><b>Se piove:</b> <span>Meglio un altro giorno, è all'aperto</span></li><li><b>Età:</b> <span>da 2 a 14 anni</span></li><li><b>Telefono:</b> <a href="tel:3498921916">349 892 1916</a></li></ul><p class="lg-manca">Qui DAOP ha seguito 1 evento per famiglie, l'ultimo il 20 settembre 2026.</p><div class="lg-act"><a href="https://www.google.com/maps/search/?api=1&query=44.96998407,8.838611602" target="_blank" rel="noopener">Apri nelle mappe</a><a href="https://www.facebook.com/p/La-Fattoria-di-Giulia-100063887417640/" target="_blank" rel="noopener nofollow">Pagina Facebook</a><a href="mailto:info.lafattoriadigiulia@gmail.com">Scrivi al luogo</a></div><p class="lg-manca">Manca qualcosa o è cambiato? <a href="/index.html#social">Scrivicelo</a>.</p></div></details></div>
+  <div class="com-link"><a href="/luoghi.html#c-al-castelnuovo-scrivia">6 posti per famiglie a Castelnuovo Scrivia</a></div>
   <h2>Altro a Castelnuovo Scrivia</h2>
-  <div class="com-link"><a href="/eventi/comune/castelnuovo-scrivia.html">Gli eventi a Castelnuovo Scrivia</a><a href="/luoghi.html#c-al-castelnuovo-scrivia">6 posti per famiglie a Castelnuovo Scrivia</a><a href="/esploratore.html">Tutta la collana di Ginetto</a></div>
+  <div class="com-link"><a href="/esploratore.html">Tutta la collana di Ginetto</a></div>
   <h2>Gli altri paesi di Ginetto</h2><div class="com-link"><a href="/esploratore/casale-monferrato.html">Casale Monferrato</a><a href="/esploratore/garbagna.html">Garbagna</a><a href="/esploratore/ovada.html">Ovada</a><a href="/esploratore/novi-ligure.html">Novi Ligure</a><a href="/esploratore/valenza.html">Valenza</a></div>
-  <p class="ev-firma-nota">Pagina aggiornata il 15 novembre 2026.</p>
+  <p class="ev-firma-nota">Pagina aggiornata il 16 novembre 2026.</p>
 </article>
 <section class="bg-cream ev-ginetto" data-cta="ginetto">
   <div class="section-inner">

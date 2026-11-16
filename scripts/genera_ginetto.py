@@ -310,12 +310,198 @@ GN_CSS = """
 .gn-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border-radius:10px;
  background:var(--navy,#2d4a5c);color:#fff;font-weight:600;text-decoration:none}
 .gn-soon{font-weight:600;color:var(--text-mid,#6a7a85)}
+.gn-saluto{display:flex;gap:14px;align-items:center;margin:0 0 18px;padding:14px 16px;
+ border-radius:14px;background:var(--carta,#fffcf8);border:1px solid var(--linea,#e2d8cb)}
+.gn-saluto img{flex:0 0 72px;width:72px;height:auto}
+.gn-saluto p{margin:0;line-height:1.55;font-style:italic}
+.gn-tutti,.gn-nota{margin:8px 0 0;font-size:.92rem;color:var(--text-mid,#6a7a85)}
+.gn-tutti a{color:var(--navy,#2d4a5c);font-weight:600}
+.gn-luoghi{padding:0;margin-top:10px}
 @media (max-width:600px){.gn-libro{flex-direction:column}.gn-libro img,.gn-libro .gn-cop-vuota{width:160px;height:160px;flex-basis:auto}}
 """
 
 
 def ha_pagina(v):
     return bool(v.get("tappe")) and bool(v.get("paese")) and v.get("id")
+
+
+# ── Cosa c'e' adesso nel paese (16/11/2026) ──────────────────────────────────
+# La pagina e' il bersaglio del QR in fondo ai libri: chi la apre ha appena
+# letto il percorso e ha in mano il paese. Le tappe le conosce gia'; quello che
+# il libro non puo' dirgli e' cosa c'e' da fare QUESTA settimana. Quindi sotto
+# le tappe: gli eventi in programma e i posti per famiglie, presi dalle stesse
+# fonti delle altre pagine e rifatti ogni notte.
+#
+# - Gli eventi vengono dal REGISTRO delle schede (data/pagine-evento.json), non
+#   da un secondo calcolo degli slug: e' l'unico posto che sa quali schede
+#   esistono. Un link si stampa solo se il file c'e' su disco.
+# - Una manifestazione compare una volta (la regola della corsia «Appena
+#   aggiunti»): quattro serate della stessa sagra sono una scelta sola.
+# - Senza eventi in paese si guarda nei dintorni, e il titolo lo dice. Senza
+#   niente nemmeno li', il blocco non c'e': nessuna promessa vuota.
+# - I posti sono le righe di /luoghi.html (L.riga), cioe' nessun secondo modo
+#   di scrivere un luogo: stessa scheda, stesso credito sotto la foto, stessa
+#   scritta «Sponsorizzato» su chi paga. Chi paga NON sale: l'ordine e' «ha la
+#   foto», poi «ha appuntamenti», poi il nome.
+
+REGISTRO_EV = os.path.join(ROOT, "data", "pagine-evento.json")
+EV_MAX = 4
+EV_DINTORNI_KM = 15
+LUOGHI_MAX = 4
+
+
+def _norm(s):
+    return G.slugify(s or "")
+
+
+def leggi_contesto():
+    """(registro delle schede, modulo luoghi, elenco luoghi), letti una volta.
+
+    Se il catalogo non si legge o e' crollato, l'elenco e' vuoto e le pagine
+    escono senza il blocco dei posti: e' una pagina un po' piu' povera, non una
+    pagina rotta."""
+    try:
+        reg = json.load(open(REGISTRO_EV, encoding="utf-8"))
+    except Exception:
+        reg = {}
+    try:
+        import genera_luoghi as L
+        foglio = L.leggi_catalogo()
+        if not L.controlla_crollo(foglio):
+            return reg, L, []
+        base = L.togli_nascoste(L.solo_province_nostre(foglio))
+        return reg, L, L.unisci(L.solo_mete(base), L.leggi_agenda())
+    except Exception as ex:
+        print(f"[genera_ginetto] luoghi non letti ({ex}): pagine senza i posti")
+        return reg, None, []
+
+
+def _km(a, b):
+    import math
+    la1, lo1, la2, lo2 = map(math.radians, (a[0], a[1], b[0], b[1]))
+    h = (math.sin((la2 - la1) / 2) ** 2
+         + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2)
+    return 6371 * 2 * math.asin(math.sqrt(h))
+
+
+def _coord(x):
+    try:
+        la, lo = float(x.get("lat")), float(x.get("lon"))
+    except (TypeError, ValueError):
+        return None
+    return (la, lo) if la and lo else None
+
+
+def _centro(paese, reg, luoghi):
+    """Il punto del paese: la media dei luoghi e delle schede che sono li'."""
+    punti = [c for c in (_coord(x) for x in luoghi if _norm(x.get("comune")) == _norm(paese)) if c]
+    punti += [c for c in (_coord(r) for r in reg.values() if _norm(r.get("citta")) == _norm(paese)) if c]
+    if not punti:
+        return None
+    return (sum(p[0] for p in punti) / len(punti), sum(p[1] for p in punti) / len(punti))
+
+
+def eventi_del_paese(paese, reg, luoghi, oggi):
+    """(eventi da stampare, vicino): `vicino` e' vero se vengono dai dintorni."""
+    iso = oggi.isoformat()
+    vivi = []
+    for r in reg.values():
+        if r.get("ritirata") or r.get("spostata") or (r.get("d_end") or "") < iso:
+            continue
+        if not os.path.isfile(os.path.join(ROOT, "eventi", f"{r.get('slug')}.html")):
+            continue
+        vivi.append(r)
+
+    def scegli(righe):
+        righe = sorted(righe, key=lambda r: (max(r["d_start"], iso), r["d_start"], r["nome"]))
+        out, viste = [], set()
+        for r in righe:
+            chiave = _norm(r.get("manifest")) or r["slug"]
+            if chiave in viste:
+                continue
+            viste.add(chiave)
+            out.append(r)
+            if len(out) == EV_MAX:
+                break
+        return out
+
+    qui = scegli([r for r in vivi if _norm(r.get("citta")) == _norm(paese)])
+    if qui:
+        return qui, False
+    centro = _centro(paese, reg, luoghi)
+    if not centro:
+        return [], False
+    vicini = [r for r in vivi if _coord(r) and _km(centro, _coord(r)) <= EV_DINTORNI_KM]
+    return scegli(vicini), True
+
+
+def _righe_eventi(scelti, oggi):
+    """Le righe nel vocabolario delle pagine comune (G._landing_righe).
+
+    Il link lo calcola G._href_evento dal nome; se la scheda e' stata
+    riagganciata a un'edizione precedente il nome non basta, e il registro
+    sa lo slug vero: lo si dice a G come fa la run di genera_eventi."""
+    ev = []
+    for r in scelti:
+        e_ = dict(r)
+        e_["d_start"] = datetime.date.fromisoformat(r["d_start"])
+        e_["d_end"] = datetime.date.fromisoformat(r["d_end"])
+        calcolato = G._slug_evento(r.get("nome") or "", r.get("citta") or "")
+        if calcolato != r["slug"]:
+            G._SLUG_RIAGGANCIATI[calcolato] = r["slug"]
+        ev.append(e_)
+    righe, nude = G._landing_righe(ev, oggi)
+    return f'<ul class="com-ev{" is-nude" if nude else ""}">{righe}</ul>'
+
+
+def _blocco_eventi(paese, reg, luoghi, oggi):
+    scelti, vicino = eventi_del_paese(paese, reg, luoghi, oggi)
+    if not scelti:
+        return ""
+    titolo = (f"In programma nei dintorni di {e(paese)}" if vicino
+              else f"In programma{G.a_citta(e(paese))}")
+    sotto = ""
+    slug = G.slugify(paese)
+    if not vicino and os.path.isfile(os.path.join(ROOT, "eventi", "comune", f"{slug}.html")):
+        sotto = (f'<p class="gn-tutti"><a href="/eventi/comune/{slug}.html">'
+                 f'Tutti gli eventi{G.a_citta(e(paese))} &rarr;</a></p>')
+    elif vicino:
+        sotto = ('<p class="gn-tutti">Entro una quindicina di chilometri, in linea d\'aria. '
+                 '<a href="/eventi.html">Tutta l\'agenda &rarr;</a></p>')
+    return f'<h2>{titolo}</h2>\n  {_righe_eventi(scelti, oggi)}\n  {sotto}'
+
+
+def _blocco_luoghi(paese, L, luoghi, oggi):
+    """(html, css) dei posti per famiglie del paese, o ('', '') se non ce ne sono."""
+    if not L:
+        return "", ""
+    qui = [l for l in luoghi if _norm(l.get("comune")) == _norm(paese)]
+    if not qui:
+        return "", ""
+    qui.sort(key=lambda l: (not l.get("foto"), -len(l.get("prossimi") or []),
+                            (l.get("nome") or "").lower()))
+    mostra = qui[:LUOGHI_MAX]
+    righe = "\n".join(L.riga(l, oggi) for l in mostra)
+    sigla = (mostra[0].get("prov") or "").upper()
+    tutti = G.link_luoghi(paese, sigla) if len(qui) > len(mostra) else ""
+    html_ = (f'<h2>Posti per famiglie{G.a_citta(e(paese))}</h2>\n'
+             f'  <p class="gn-nota">Prima quelli con la foto e con appuntamenti in '
+             f'programma; chi paga non sale. Tocca una riga per aprirla.</p>\n'
+             f'  <div class="lg-wrap gn-luoghi">{righe}</div>\n'
+             + (f'  <div class="com-link">{tutti}</div>' if tutti else ''))
+    return html_, L.LUOGHI_CSS + L._css_categorie(mostra)
+
+
+def _saluto(paese):
+    """Ginetto che parla, in cima. Il disegno c'e' gia' (ginetto-legge)."""
+    if not esiste("assets/ginetto/ginetto-legge-360.webp"):
+        return ""
+    return ('<div class="gn-saluto">'
+            '<img src="/assets/ginetto/ginetto-legge-360.webp" alt="Ginetto" '
+            'width="96" height="97" decoding="async">'
+            f'<p>Ciao! A {e(paese)} ci sono stato davvero. Qui sotto trovi le tappe del mio '
+            'libro, da fare a piedi in un pomeriggio, e cosa c\'è da fare adesso in paese.</p>'
+            '</div>')
 
 
 def _sigla(provincia):
@@ -343,7 +529,7 @@ def _libro_html(v):
             f'<p>{e(v.get("descrizione"))}</p>{azione}</div></section>')
 
 
-def render_tappe(v, volumi, oggi):
+def render_tappe(v, volumi, oggi, ctx=None):
     css, nav, foot = G._guscio()
     paese, tappe = v["paese"], v["tappe"]
     sigla = _sigla(v.get("provincia"))
@@ -358,14 +544,20 @@ def render_tappe(v, volumi, oggi):
     lis = "\n".join(f'    <li><h3>{e(t["nome"])}</h3><p>{e(t["testo"])}</p></li>'
                     for t in tappe)
 
-    # «Altro qui»: la pagina comune se c'e' su disco, i luoghi se c'e' l'ancora.
-    # Quello che manca non si stampa (la regola di link_luoghi()).
+    reg, L, luoghi = ctx or ({}, None, [])
+    blocco_ev = _blocco_eventi(paese, reg, luoghi, oggi)
+    blocco_lg, css_lg = _blocco_luoghi(paese, L, luoghi, oggi)
+
+    # «Altro qui»: quello che i due blocchi sopra non hanno gia' linkato. La
+    # pagina comune se c'e' su disco, i luoghi se c'e' l'ancora: quello che
+    # manca non si stampa (la regola di link_luoghi()).
     altro = []
     slug = G.slugify(paese)
-    if os.path.isfile(os.path.join(ROOT, "eventi", "comune", f"{slug}.html")):
+    if "gn-tutti" not in blocco_ev and os.path.isfile(
+            os.path.join(ROOT, "eventi", "comune", f"{slug}.html")):
         altro.append(f'<a href="/eventi/comune/{slug}.html">Gli eventi{a_paese}</a>')
     lg = G.link_luoghi(paese, sigla)
-    if lg:
+    if lg and lg not in blocco_lg:
         altro.append(lg)
     altro.append('<a href="/esploratore.html">Tutta la collana di Ginetto</a>')
 
@@ -431,7 +623,7 @@ def render_tappe(v, volumi, oggi):
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/dm-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/daop-system.min.css">
-<style>{css}{G.PAGINA_CSS}{G.COMUNE_CSS}{GN_CSS}</style>
+<style>{css}{G.PAGINA_CSS}{G.COMUNE_CSS}{css_lg}{GN_CSS}</style>
 <script src="/assets/js/cookie-consent.js"></script>
 <script src="/assets/js/daop-track.js" defer></script>
 <script type="application/ld+json">
@@ -451,12 +643,15 @@ def render_tappe(v, volumi, oggi):
   </div>
 </header>
 <article class="ev-wrap ev-wrap--hero gn-wrap">
+  {_saluto(paese)}
   <p>Nel libro <i>{e(v.get("titolo"))}</i> Ginetto e la topolina Briciola attraversano {e(paese)} tappa dopo tappa. Sono posti veri: qui sotto c'è il percorso, da fare un pomeriggio con i bambini, con quello che vale la pena di cercare in ognuno.</p>
   <h2>Le {n} tappe</h2>
   <ol class="gn-tappe">
 {lis}
   </ol>
   {_libro_html(v)}
+  {blocco_ev}
+  {blocco_lg}
   <h2>Altro{a_paese}</h2>
   <div class="com-link">{"".join(altro)}</div>
   {f'<h2>Gli altri paesi di Ginetto</h2><div class="com-link">{altri_html}</div>' if altri_html else ''}
@@ -480,9 +675,10 @@ def scrivi_pagine_volumi(volumi):
     oggi = datetime.date.today()
     os.makedirs(CARTELLA_VOL, exist_ok=True)
     vivi = [v for v in volumi if ha_pagina(v)]
+    ctx = leggi_contesto() if vivi else None
     for v in vivi:
         open(os.path.join(CARTELLA_VOL, f"{v['id']}.html"), "w",
-             encoding="utf-8").write(render_tappe(v, volumi, oggi))
+             encoding="utf-8").write(render_tappe(v, volumi, oggi, ctx))
     tenuti = {f"{v['id']}.html" for v in vivi}
     for f in os.listdir(CARTELLA_VOL):
         if f.endswith(".html") and f not in tenuti:
