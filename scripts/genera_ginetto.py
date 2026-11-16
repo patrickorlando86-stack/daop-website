@@ -489,8 +489,8 @@ def _blocco_luoghi(paese, L, luoghi, oggi):
     sigla = (mostra[0].get("prov") or "").upper()
     tutti = G.link_luoghi(paese, sigla) if len(qui) > len(mostra) else ""
     html_ = (f'<h2>Posti per famiglie{G.a_citta(e(paese))}</h2>\n'
-             f'  <p class="gn-nota">Prima quelli con la foto e con appuntamenti in '
-             f'programma; chi paga non sale. Tocca una riga per aprirla.</p>\n'
+             f'  <p class="gn-nota">Tocca una riga per indirizzo, orari e attività. '
+             f'Prima quelli con la foto e con appuntamenti in programma.</p>\n'
              f'  <div class="lg-wrap gn-luoghi">{righe}</div>\n'
              + (f'  <div class="com-link">{tutti}</div>' if tutti else ''))
     return html_, L.LUOGHI_CSS + L._css_categorie(mostra)

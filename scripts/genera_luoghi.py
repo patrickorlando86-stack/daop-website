@@ -889,7 +889,7 @@ def leggi_catalogo():
                         not in ('no', 'n', 'false', '0'),
             'codice': d['codice'],
             'ruolo': d['ruolo'].lower(),
-            'n_eventi': 0, 'ultimo': '', 'prossimi': [], 'fonte': 'catalogo',
+            'n_eventi': 0, 'ultimo': '', 'ultimo_passato': '', 'prossimi': [], 'fonte': 'catalogo',
             '_grezzo': r if fresco else None,
         })
     return fuori
@@ -998,7 +998,7 @@ def leggi_agenda():
             'nome': nome.strip(), 'comune': (comune or '').strip(),
             'prov': (prov or '').strip().upper(),
             'indirizzo': '', 'lat': '', 'lon': '',
-            'n_eventi': 0, 'ultimo': '', 'prossimi': [],
+            'n_eventi': 0, 'ultimo': '', 'ultimo_passato': '', 'prossimi': [],
         })
         for campo, val in extra.items():
             if val and not d.get(campo):
@@ -1016,6 +1016,8 @@ def leggi_agenda():
                 d['n_eventi'] += 1
                 if (ev.get('ultima') or '') > d['ultimo']:
                     d['ultimo'] = ev.get('ultima') or ''
+                if d['ultimo_passato'] < (ev.get('ultima') or '') < oggi.isoformat():
+                    d['ultimo_passato'] = ev.get('ultima')
 
     if os.path.exists(EVENTI_JSON):
         with open(EVENTI_JSON, encoding="utf-8") as fh:
@@ -1035,6 +1037,8 @@ def leggi_agenda():
                 })
             if (e.get('d_end') or '') > d['ultimo']:
                 d['ultimo'] = e.get('d_end') or ''
+            if d['ultimo_passato'] < (e.get('d_end') or '') < oggi.isoformat():
+                d['ultimo_passato'] = e.get('d_end')
 
     for d in luoghi.values():
         d['prossimi'].sort(key=lambda p: p['d'])
@@ -1095,12 +1099,13 @@ def unisci(catalogo, agenda):
             # sommano, non si sovrascrivono.
             if id(d) not in agganciati:
                 agganciati.add(id(d))
-                d['n_eventi'], d['ultimo'], d['prossimi'] = 0, '', []
+                d['n_eventi'], d['ultimo'], d['ultimo_passato'], d['prossimi'] = 0, '', '', []
             visti = {(p['href'], p['d']) for p in d['prossimi']}
             d['prossimi'] += [p for p in a['prossimi'] if (p['href'], p['d']) not in visti]
             d['prossimi'].sort(key=lambda p: p['d'])
             d['n_eventi'] = max(d['n_eventi'] + a['n_eventi'], len(d['prossimi']))
             d['ultimo'] = max(d['ultimo'], a['ultimo'])
+            d['ultimo_passato'] = max(d.get('ultimo_passato', ''), a.get('ultimo_passato', ''))
             for campo in ('indirizzo', 'lat', 'lon'):
                 if not d.get(campo):
                     d[campo] = a.get(campo, '')
@@ -1954,10 +1959,18 @@ def riga(l, oggi):
     corpo.append(f'<ul class="lg-facts">{"".join(fatti)}</ul>')
 
     # La memoria dell'agenda: e' il dato che questa pagina ha e le altre no.
-    if l['n_eventi']:
-        quanti = ("1 evento per famiglie" if l['n_eventi'] == 1
-                  else f"{l['n_eventi']} eventi per famiglie")
-        quando = f", l'ultimo il {data_lunga(l['ultimo'])}" if l.get('ultimo') else ""
+    # Solo gli eventi GIA' PASSATI (16/11/2026): «ha seguito … l'ultimo il 30
+    # novembre» detto il 16 era una data futura al passato, su 45 righe. Quelli
+    # in programma stanno nell'elenco qui sotto, e lì si contano.
+    passati = l['n_eventi'] - len(l.get('prossimi') or [])
+    if passati > 0:
+        quanti = ("1 evento per famiglie" if passati == 1
+                  else f"{passati} eventi per famiglie")
+        quando = ""
+        if l.get('ultimo_passato'):
+            dl = data_lunga(l['ultimo_passato'])
+            # «l'8», «l'11»: davanti a una vocale l'articolo si apostrofa.
+            quando = f", l'ultimo {'l' + chr(39) if dl[:1] == '8' or dl[:2] == '11' else 'il '}{dl}"
         corpo.append(f'<p class="lg-manca">Qui DAOP ha seguito {quanti}{quando}.</p>')
 
     if prossimi:
