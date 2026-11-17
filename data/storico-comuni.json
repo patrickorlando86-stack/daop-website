@@ -421,6 +421,17 @@
     "pagina": true,
     "ultima": "2026-12-01"
    },
+   "convegno-in-memoria-di-donato-bosca-con-intervento-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Banca d'Alba",
+    "manifest": "Jè r Màsche - Misteri e Memorie tra Langhe e Roero",
+    "nome": "Convegno in memoria di Donato Bosca con intervento musicale di Simona Colonna",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "escape-room-at-the-museum-alba": {
     "anni": [
      2026
@@ -464,6 +475,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "facciamo-che-ero-una-masca-animazione-teatrale-e-l-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Banca d'Alba",
+    "manifest": "Jè r Màsche - Misteri e Memorie tra Langhe e Roero",
+    "nome": "\"Facciamo che ero... una masca\" - Animazione teatrale e laboratorio per famiglie e bambini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "festa-di-halloween-aps-il-paiolo-fiorito-e-luna-di-alba": {
     "anni": [
@@ -608,6 +630,17 @@
     "pagina": true,
     "ultima": "2026-11-13"
    },
+   "mostra-je-r-masche-misteri-e-memorie-tra-langhe-e-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Banca d'Alba",
+    "manifest": "Jè r Màsche - Misteri e Memorie tra Langhe e Roero",
+    "nome": "Mostra \"Jè r Màsche - Misteri e Memorie tra Langhe e Roero\"",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-10-23"
+   },
    "musica-maestro-libreria-marameo-alba": {
     "anni": [
      2026
@@ -717,6 +750,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-17"
+   },
+   "story-time-the-very-hungry-caterpillar-kids-us-alb-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Mondadori",
+    "manifest": "",
+    "nome": "Story Time: The Very Hungry Caterpillar - Kids&Us Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
+   "thanksgiving-party-kids-us-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Kids&Us Alba",
+    "manifest": "",
+    "nome": "Thanksgiving Party - Kids&Us Alba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
    },
    "the-messy-playroom-kids-us-alba": {
     "anni": [
@@ -2923,6 +2978,17 @@
  },
  "baldisserodalba": {
   "eventi": {
+   "mercatini-di-natale-iv-edizione-baldissero-d-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Martiri",
+    "manifest": "",
+    "nome": "Mercatini di Natale - IV edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "mercatini-di-natale-iv-edizione-pro-loco-baldisser-baldissero-d-alba": {
     "anni": [
      2026
@@ -3587,6 +3653,17 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "babbo-natale-bovesano-la-sporta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia, Via Partigiani e Piazza dell'Olmo",
+    "manifest": "Babbo Natale Bovesano",
+    "nome": "Babbo Natale Bovesano - La Sporta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "biblio-baby-boves": {
     "anni": [
      2026
@@ -3718,6 +3795,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-12"
+   },
+   "natale-di-solidarieta-edizione-corsa-e-camminata-b-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Mottini",
+    "manifest": "",
+    "nome": "Natale di Solidarietà - 24ª Edizione Corsa e Camminata - Boves Run",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
    },
    "piccolo-yogi-in-crescita-boves": {
     "anni": [
@@ -3907,6 +3995,28 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "il-museo-che-non-vedi-persone-competenze-e-nuove-p-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Politeama",
+    "manifest": "Egitto - Sulle tracce degli dèi",
+    "nome": "Il museo che non vedi: persone, competenze e nuove prospettive",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
+   },
+   "lettura-al-museo-il-bosco-si-addormenta-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Craveri",
+    "manifest": "",
+    "nome": "Lettura al Museo - Il bosco si addormenta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-17"
+   },
    "letture-animate-autunno-in-allegria-ad-opera-dei-n-bra": {
     "anni": [
      2026
@@ -3995,6 +4105,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "silvio-curto-da-bra-alle-piramidi-una-vita-dedicat": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala del Consiglio",
+    "manifest": "Egitto - Sulle tracce degli dèi",
+    "nome": "Silvio Curto, da Bra alle Piramidi. Una vita dedicata alla scoperta dell'antico Egitto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-17"
+   },
    "sognando-la-neve-associazione-arcbaleno-vip-i-nasi-bra": {
     "anni": [
      2026
@@ -4017,6 +4138,17 @@
     "pagina": true,
     "ultima": "2026-11-23"
    },
+   "sulle-tracce-degli-dei-caccia-al-tesoro-per-le-vie-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Mathis",
+    "manifest": "Egitto - Sulle tracce degli dèi",
+    "nome": "Sulle tracce degli dèi - Caccia al tesoro per le vie del centro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "tutti-ai-fornelli-workshop-genitori-figli-bra": {
     "anni": [
      2026
@@ -4027,6 +4159,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-13"
+   },
+   "visita-guidata-alla-mostra-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palazzo Mathis",
+    "manifest": "Egitto - Sulle tracce degli dèi",
+    "nome": "Visita guidata alla Mostra",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "vorrei-un-tempo-lento-associazione-nuove-rotte-bra": {
     "anni": [
@@ -4188,6 +4331,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "i-mercatini-delle-feste-ingenium-aps-busca": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Parco Museo dell'Ingenio",
+    "manifest": "",
+    "nome": "I Mercatini delle Feste - Ingenium APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "la-notte-dei-pupazzi-in-biblioteca-busca": {
     "anni": [
@@ -4591,6 +4745,127 @@
  },
  "canale": {
   "eventi": {
+   "arrivo-di-babbo-natale-e-accensione-albero-di-nata-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Arrivo di Babbo Natale e accensione Albero di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
+   "circus-show-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Parrocchia",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Circus Show",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
+   "concerti-itineranti-con-zampognari-e-street-band-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Concerti itineranti con Zampognari e Street Band",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "concerto-di-natale-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "San Giovanni",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Concerto di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "esibizione-babbi-bike-e-arrivo-del-grinch-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Esibizione Babbi Bike e arrivo del Grinch",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "esibizione-della-ballerina-con-carillon-e-pianofor-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Roma",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Esibizione della Ballerina con Carillon e Pianoforte Bianco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
+   "lettura-animata-a-tema-natalizio-con-sara-troletti-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Lettura Animata a tema natalizio con Sara Troletti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
+   "mercatini-natalizi-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Mercatini Natalizi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
+   "musica-itinerante-con-miniatori-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Musica itinerante con Miniatori",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
+   "pranzo-solidale-ambulanza-sede-di-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Pranzo Solidale - Ambulanza sede di Canale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "show-disney-atmosphere-canale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "San Giovanni",
+    "manifest": "Fiera del Pesco Christmas Edition 2026",
+    "nome": "Show Disney Atmosphere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
    "sport-in-piazza-citta-di-canale": {
     "anni": [
      2026
@@ -6390,6 +6665,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "i-mercatini-di-natale-del-marchesato-castellar": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castellar",
+    "manifest": "I Mercatini di Natale del Marchesato 2026",
+    "nome": "I Mercatini di Natale del Marchesato 2026 - Castellar",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "laboratori-d-autunno-castellar": {
     "anni": [
@@ -8292,6 +8578,17 @@
     "pagina": true,
     "ultima": "2026-10-20"
    },
+   "caccia-al-tesoro-dei-3-re-magi-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Open Baladin - Piazza Foro Boario",
+    "manifest": "",
+    "nome": "Caccia al Tesoro dei 3 Re Magi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
+   },
    "caccia-al-tesoro-della-citta-dei-talenti-cuneo": {
     "anni": [
      2026
@@ -8302,6 +8599,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "cena-di-natale-con-dj-set-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Open Baladin - Piazza Foro Boario",
+    "manifest": "",
+    "nome": "Cena di Natale con DJ Set",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
    },
    "cerchiamoci-laboratorio-psicomotorio-cuneo": {
     "anni": [
@@ -8373,12 +8681,12 @@
     "anni": [
      2026
     ],
-    "luogo": "Biblioteca 0-18",
+    "luogo": "",
     "manifest": "",
     "nome": "Crescere con la Musica, le Immagini e le Parole",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-10-24"
+    "ultima": "2026-11-21"
    },
    "cuneo-bike-festival-citta-di-cuneo": {
     "anni": [
@@ -8434,6 +8742,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-25"
+   },
+   "dore-m-illumina-fa-sol-la-cura-la-cura-nello-sguar-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Polo Culturale ESSECI - Biblioteca Civica",
+    "manifest": "",
+    "nome": "DoRe M'illumina Fa Sol La Cura - La Cura nello Sguardo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-07"
    },
    "festa-dei-nonni-lavoriamo-insieme-museo-civico-cun-cuneo": {
     "anni": [
@@ -8666,6 +8985,17 @@
     "pagina": true,
     "ultima": "2026-12-11"
    },
+   "nessuno-tranne-me-laboratorio-di-lettura-e-creativ-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Nessuno Tranne Me - Laboratorio di lettura e creativo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-17"
+   },
    "oltre-la-collina-geografie-dell-incontro-incontro-cuneo": {
     "anni": [
      2026
@@ -8786,6 +9116,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-07"
+   },
+   "sii-umano-laboratorio-per-famiglie-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vescovado Nuovo",
+    "manifest": "",
+    "nome": "Sii Umano - Laboratorio per Famiglie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "tipi-da-biblioteca-noau-officina-culturale-cuneo": {
     "anni": [
@@ -9069,6 +9410,17 @@
     "organizza": "Associazione Fuma che 'nduma",
     "pagina": true,
     "ultima": "2026-08-29"
+   },
+   "leggimi-perche-cosi-stiamo-insieme-dronero": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Dronero",
+    "manifest": "",
+    "nome": "Leggimi Perché Così Stiamo Insieme",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "ma-che-posto-e-citta-di-dronero": {
     "anni": [
@@ -9877,6 +10229,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-15"
+   },
+   "letture-in-libreria-storie-per-piccoli-e-grandi-le-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Libreria Ubik Fossano",
+    "manifest": "Letture in Libreria",
+    "nome": "Letture in Libreria - Storie per piccoli e grandi lettori (7-10 anni)",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
    },
    "libri-da-sentire-suoni-a-piccoli-passi-fossano": {
     "anni": [
@@ -12085,6 +12448,17 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "laboratorio-di-natale-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mondovicino Lab",
+    "manifest": "",
+    "nome": "Laboratorio di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "laboratorio-halloween-il-melograno-mondovi": {
     "anni": [
      2026
@@ -12117,6 +12491,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-14"
+   },
+   "nicoletta-costa-in-mostra-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Galleria Mondovicino Shopping Center & Retail Park",
+    "manifest": "",
+    "nome": "Nicoletta Costa in mostra!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
    },
    "openday-inglese-con-teacher-noemi-mondovi": {
     "anni": [
@@ -13236,6 +13621,23 @@
    }
   },
   "nome": "Murazzano",
+  "prov": "CN"
+ },
+ "murazzofossano": {
+  "eventi": {
+   "once-upon-a-christmas-once-upon-a-choir-murazzo-fossano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale di Santa Maria della Neve",
+    "manifest": "",
+    "nome": "Once Upon A Christmas - Once Upon A Choir",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   }
+  },
+  "nome": "Murazzo (Fossano)",
   "prov": "CN"
  },
  "narzole": {
@@ -15034,6 +15436,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-05"
+   },
+   "paesana-bricks-expo-4": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Incontri",
+    "manifest": "Paesana Bricks Expo 4",
+    "nome": "Paesana Bricks Expo 4",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    }
   },
   "nome": "Paesana",
@@ -15653,6 +16066,28 @@
  },
  "pocapaglia": {
   "eventi": {
+   "allenatori-emotivi-accompagnare-e-sostenere-nelle-pocapaglia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Riunioni del Comune",
+    "manifest": "",
+    "nome": "Allenatori Emotivi! Accompagnare e Sostenere nelle Relazioni - Genitori in Gioco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-19"
+   },
+   "basta-ansia-in-cartella-genitori-in-gioco-pocapaglia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Riunioni Comune",
+    "manifest": "",
+    "nome": "Basta Ansia in Cartella! - Genitori in Gioco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
+   },
    "mercatini-di-natale-al-sapore-di-miele-pocapaglia": {
     "anni": [
      2026
@@ -17395,6 +17830,17 @@
     "pagina": true,
     "ultima": "2026-08-29"
    },
+   "la-rocca-illuminata-iii-edizione-roccavione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Per le vie del paese",
+    "manifest": "La Rocca Illuminata III Edizione",
+    "nome": "La Rocca Illuminata III Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "memorial-sportivo-aldo-galfre-pro-loco-roccavione": {
     "anni": [
      2026
@@ -17888,6 +18334,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "i-mercatini-di-natale-del-marchesato-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Saluzzo centro storico",
+    "manifest": "I Mercatini di Natale del Marchesato 2026",
+    "nome": "I Mercatini di Natale del Marchesato 2026 - Saluzzo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    },
    "le-erbe-delle-streghe-musei-saluzzo-itur": {
     "anni": [
@@ -20810,7 +21267,7 @@
     "nome": "Laboratori creativi a tema natalizio - Sognacolori",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-11-26"
+    "ultima": "2026-12-10"
    }
   },
   "nome": "Valenza",
@@ -21236,6 +21693,17 @@
  },
  "vicoforte": {
   "eventi": {
+   "aspettando-la-fatina-dei-libri-operazione-200-anni-vicoforte": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Vicoforte",
+    "manifest": "",
+    "nome": "Aspettando la Fatina dei Libri... Operazione 200 Anni! - Biblioteca di Vicoforte",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
    "avventure-da-brividi-vicoforte": {
     "anni": [
      2026
@@ -21306,6 +21774,34 @@
   },
   "nome": "Vignole Borbera",
   "prov": "AL"
+ },
+ "vignolo": {
+  "eventi": {
+   "mercatini-di-natale-a-vignolo-pro-loco-di-vignolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vignolo",
+    "manifest": "",
+    "nome": "Mercatini di Natale a Vignolo - Pro Loco di Vignolo",
+    "organizza": "Pro Loco di Vignolo",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
+   "svuota-solai-bambini-vignolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Polivalente Vignolo",
+    "manifest": "",
+    "nome": "Svuota Solai Bambini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   }
+  },
+  "nome": "Vignolo",
+  "prov": "CN"
  },
  "viguzzolo": {
   "eventi": {
