@@ -5737,7 +5737,7 @@
   "anchor": "ev-2026-12-06-mostra-mercato-piccoli-animali-citta-di-san-damian"
  },
  {
-  "nome": "Musica itinerante con Miniatori",
+  "nome": "Musica itinerante con Miniottoni",
   "di": "06/12/2026",
   "df": "06/12/2026",
   "ora": "14:00",
@@ -5746,7 +5746,7 @@
   "categoria": "Musica",
   "eta": "Tutte le età (famiglie)",
   "prezzo": "Ingresso libero",
-  "descr": "Musica itinerante nel Centro Storico di Canale con il gruppo Miniatori, nell'ambito della Fiera del Pesco Christmas Edition 2026.",
+  "descr": "Musica itinerante nel Centro Storico di Canale con il gruppo Miniottoni, nell'ambito della Fiera del Pesco Christmas Edition 2026.",
   "manifest": "Fiera del Pesco Christmas Edition 2026",
   "loc": "daop_cuneo_4031941053055093182.webp",
   "luogo": "Centro Storico",
@@ -5756,8 +5756,8 @@
   "consigliato": "No",
   "lat": "44.8021334",
   "lon": "8.0099645",
-  "festa": "mercatino di natale",
-  "anchor": "ev-2026-12-06-musica-itinerante-con-miniatori"
+  "festa": "natale",
+  "anchor": "ev-2026-12-06-musica-itinerante-con-miniottoni"
  },
  {
   "nome": "Natale di Solidarietà - 24ª Edizione Corsa e Camminata - Boves Run",
@@ -7166,7 +7166,7 @@
   "consigliato": "No",
   "lat": "44.8021334",
   "lon": "8.0099645",
-  "festa": "mercatino di natale",
+  "festa": "natale",
   "anchor": "ev-2026-12-13-concerti-itineranti-con-zampognari-e-street-band"
  },
  {
