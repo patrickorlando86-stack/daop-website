@@ -1989,7 +1989,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 450,
+  "riga": 447,
   "slug": "allenatori-emotivi-accompagnare-e-sostenere-nelle-pocapaglia",
   "updated": "2026-11-17"
  },
@@ -3198,7 +3198,7 @@
   "ora": "10:30-12:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 457,
+  "riga": 454,
   "slug": "aspettando-la-fatina-dei-libri-operazione-200-anni-vicoforte",
   "updated": "2026-11-17"
  },
@@ -3763,7 +3763,7 @@
   "ora": "09:30-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 464,
+  "riga": 461,
   "slug": "babbo-natale-bovesano-la-sporta",
   "updated": "2026-11-17"
  },
@@ -4014,7 +4014,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 460,
+  "riga": 457,
   "slug": "basta-ansia-in-cartella-genitori-in-gioco-pocapaglia",
   "updated": "2026-11-17"
  },
@@ -5356,7 +5356,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 470,
+  "riga": 467,
   "slug": "caccia-al-tesoro-dei-3-re-magi-cuneo",
   "updated": "2026-11-17"
  },
@@ -7222,6 +7222,7 @@
   "prezzo": "20,00 euro a persona",
   "prov": "CN",
   "riga": 471,
+  "ritirata": "2026-11-17",
   "slug": "cena-di-natale-con-dj-set-cuneo",
   "updated": "2026-11-17"
  },
@@ -8032,7 +8033,7 @@
   "ora": "14:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 443,
+  "riga": 441,
   "slug": "circus-show-canale",
   "updated": "2026-11-17"
  },
@@ -8427,6 +8428,7 @@
   "prov": "CN",
   "riga": 437,
   "slug": "concerti-itineranti-con-zampognari-e-street-band-canale",
+  "spostata": "pranzo-solidale-ambulanza-sede-di-canale",
   "updated": "2026-11-17"
  },
  "concerto-benefico-sanremo-junior-i-banditi-di-rocc-alessandria": {
@@ -8510,6 +8512,7 @@
   "prezzo": "Ingresso libero",
   "prov": "CN",
   "riga": 440,
+  "ritirata": "2026-11-17",
   "slug": "concerto-di-natale-canale",
   "updated": "2026-11-17"
  },
@@ -8708,6 +8711,7 @@
   "prezzo": "Non indicato",
   "prov": "CN",
   "riga": 449,
+  "ritirata": "2026-11-17",
   "slug": "convegno-in-memoria-di-donato-bosca-con-intervento-alba",
   "updated": "2026-11-17"
  },
@@ -9378,7 +9382,7 @@
   "ora": "11:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 454,
+  "riga": 451,
   "slug": "crescere-con-la-musica-le-immagini-e-le-parole-cuneo",
   "updated": "2026-11-17"
  },
@@ -10297,7 +10301,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 479,
+  "riga": 475,
   "slug": "dore-m-illumina-fa-sol-la-cura-la-cura-nello-sguar-cuneo",
   "updated": "2026-11-17"
  },
@@ -10685,7 +10689,7 @@
   "ora": "14:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 439,
+  "riga": 438,
   "slug": "esibizione-babbi-bike-e-arrivo-del-grinch-canale",
   "updated": "2026-11-17"
  },
@@ -10713,7 +10717,7 @@
   "ora": "11:30-16:45",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 441,
+  "riga": 439,
   "slug": "esibizione-della-ballerina-con-carillon-e-pianofor-canale",
   "updated": "2026-11-17"
  },
@@ -11410,7 +11414,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 448,
+  "riga": 446,
   "slug": "facciamo-che-ero-una-masca-animazione-teatrale-e-l-alba",
   "updated": "2026-11-17"
  },
@@ -20689,7 +20693,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 461,
+  "riga": 458,
   "slug": "i-mercatini-delle-feste-ingenium-aps-busca",
   "updated": "2026-11-17"
  },
@@ -20718,7 +20722,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 478,
+  "riga": 474,
   "slug": "i-mercatini-di-natale-del-marchesato-castellar",
   "updated": "2026-11-17"
  },
@@ -20747,7 +20751,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 477,
+  "riga": 473,
   "slug": "i-mercatini-di-natale-del-marchesato-saluzzo",
   "updated": "2026-11-17"
  },
@@ -21783,7 +21787,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 474,
+  "riga": 470,
   "slug": "il-museo-che-non-vedi-persone-competenze-e-nuove-p-bra",
   "updated": "2026-11-17"
  },
@@ -24550,7 +24554,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 462,
+  "riga": 459,
   "slug": "la-rocca-illuminata-iii-edizione-roccavione",
   "updated": "2026-11-17"
  },
@@ -25700,7 +25704,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 467,
+  "riga": 464,
   "slug": "laboratorio-di-natale-mondovi",
   "updated": "2026-11-17"
  },
@@ -26890,7 +26894,7 @@
   "ora": "9:30-12:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 446,
+  "riga": 444,
   "slug": "leggimi-perche-cosi-stiamo-insieme-dronero",
   "updated": "2026-11-17"
  },
@@ -26976,7 +26980,7 @@
   "ora": "17:00-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 445,
+  "riga": 443,
   "slug": "lettura-al-museo-il-bosco-si-addormenta-bra",
   "updated": "2026-11-17"
  },
@@ -27311,7 +27315,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 452,
+  "riga": 449,
   "slug": "letture-in-libreria-storie-per-piccoli-e-grandi-le-fossano",
   "updated": "2026-11-17"
  },
@@ -29053,7 +29057,7 @@
   "ora": "09:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 459,
+  "riga": 456,
   "slug": "mercatini-di-natale-iv-edizione-baldissero-d-alba",
   "updated": "2026-11-17"
  },
@@ -29509,7 +29513,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 444,
+  "riga": 442,
   "slug": "mercatini-natalizi-canale",
   "updated": "2026-11-17"
  },
@@ -30549,7 +30553,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 447,
+  "riga": 445,
   "slug": "mostra-je-r-masche-misteri-e-memorie-tra-langhe-e-alba",
   "updated": "2026-11-17"
  },
@@ -31411,7 +31415,7 @@
   "ora": "10:00 camminata / 10:40 corsa",
   "prezzo": "Offerta libera",
   "prov": "CN",
-  "riga": 468,
+  "riga": 465,
   "slug": "natale-di-solidarieta-edizione-corsa-e-camminata-b-boves",
   "updated": "2026-11-17"
  },
@@ -31663,7 +31667,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 451,
+  "riga": 448,
   "slug": "nessuno-tranne-me-laboratorio-di-lettura-e-creativ-cuneo",
   "updated": "2026-11-17"
  },
@@ -31747,7 +31751,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 466,
+  "riga": 463,
   "slug": "nicoletta-costa-in-mostra-mondovi",
   "updated": "2026-11-17"
  },
@@ -32452,7 +32456,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 463,
+  "riga": 460,
   "slug": "once-upon-a-christmas-once-upon-a-choir-murazzo-fossano",
   "updated": "2026-11-17"
  },
@@ -33710,7 +33714,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 469,
+  "riga": 466,
   "slug": "paesana-bricks-expo-4",
   "updated": "2026-11-17"
  },
@@ -35814,7 +35818,7 @@
   "ora": "12:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 438,
+  "riga": 437,
   "slug": "pranzo-solidale-ambulanza-sede-di-canale",
   "updated": "2026-11-17"
  },
@@ -40279,7 +40283,7 @@
   "ora": "14:45",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 442,
+  "riga": 440,
   "slug": "show-disney-atmosphere-canale",
   "updated": "2026-11-17"
  },
@@ -40363,7 +40367,7 @@
   "ora": "16:00-19:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 458,
+  "riga": 455,
   "slug": "sii-umano-laboratorio-per-famiglie-cuneo",
   "updated": "2026-11-17"
  },
@@ -40447,7 +40451,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 472,
+  "riga": 468,
   "slug": "silvio-curto-da-bra-alle-piramidi-una-vita-dedicat",
   "updated": "2026-11-17"
  },
@@ -41644,7 +41648,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 456,
+  "riga": 453,
   "slug": "story-time-the-very-hungry-caterpillar-kids-us-alb-alba",
   "updated": "2026-11-17"
  },
@@ -41901,7 +41905,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 475,
+  "riga": 471,
   "slug": "sulle-tracce-degli-dei-caccia-al-tesoro-per-le-vie-bra",
   "updated": "2026-11-17"
  },
@@ -42265,7 +42269,7 @@
   "ora": "16:30",
   "prezzo": "Evento a offerta libera",
   "prov": "CN",
-  "riga": 455,
+  "riga": 452,
   "slug": "thanksgiving-party-kids-us-alba",
   "updated": "2026-11-17"
  },
@@ -45418,7 +45422,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 473,
+  "riga": 469,
   "slug": "visita-guidata-alla-mostra-bra",
   "updated": "2026-11-17"
  },
