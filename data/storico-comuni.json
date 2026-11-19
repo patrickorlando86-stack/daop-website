@@ -1502,6 +1502,17 @@
     "pagina": true,
     "ultima": "2026-12-14"
    },
+   "le-tappe-dello-sviluppo-da-0-a-10-anni-yoyo-active-alessandria": {
+    "anni": [
+     2027
+    ],
+    "luogo": "YoYo Active Play",
+    "manifest": "Giocare per Crescere",
+    "nome": "Le Tappe dello Sviluppo da 0 a 10 Anni - YoYo Active Play",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-25"
+   },
    "letture-spaventose-associazione-il-contastorie-alessandria": {
     "anni": [
      2026
@@ -16899,6 +16910,17 @@
     "pagina": true,
     "ultima": "2026-12-01"
    },
+   "estrazione-lotteria-della-befana-vidalegra-aps-predosa": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Predosa",
+    "manifest": "Il Natale a Predosa 2026",
+    "nome": "Estrazione Lotteria della Befana - VidAlegra APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-06"
+   },
    "gli-elfi-di-babbo-natale-vanno-dai-bambini-a-scuol-predosa": {
     "anni": [
      2026
@@ -16920,6 +16942,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-24"
+   },
+   "la-festa-della-befana-vidalegra-aps-predosa": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Predosa",
+    "manifest": "Il Natale a Predosa 2026",
+    "nome": "La Festa della Befana - VidAlegra APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-06"
    },
    "vendita-biglietti-lotteria-della-befana-vidalegra-predosa": {
     "anni": [
@@ -21182,14 +21215,15 @@
    },
    "la-fattoria-in-biblioteca-tortona": {
     "anni": [
-     2026
+     2026,
+     2027
     ],
-    "luogo": "Biblioteca Civica Tortona sez. Ragazzi",
+    "luogo": "Biblioteca Civica Tortona sez Ragazzi",
     "manifest": "",
     "nome": "La Fattoria in Biblioteca",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-11-17"
+    "ultima": "2027-02-16"
    },
    "la-mostra-gli-esplorattori-tortona": {
     "anni": [
