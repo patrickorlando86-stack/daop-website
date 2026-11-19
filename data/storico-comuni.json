@@ -1007,6 +1007,17 @@
     "pagina": true,
     "ultima": "2026-10-30"
    },
+   "babbo-natale-e-qua-yo-yo-active-play-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Yo-Yo Active Play",
+    "manifest": "",
+    "nome": "Babbo Natale è Qua! - Yo-Yo Active Play",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "buen-camino-alessandria": {
     "anni": [
      2026
@@ -1480,6 +1491,17 @@
     "pagina": true,
     "ultima": "2026-11-22"
    },
+   "le-tappe-dello-sviluppo-da-0-a-10-anni-incontro-4-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "YoYo Active Play",
+    "manifest": "Giocare per Crescere - Le Tappe dello Sviluppo da 0 a 10 Anni",
+    "nome": "Le Tappe dello Sviluppo da 0 a 10 Anni - Incontro 4 - YoYo Active Play",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-14"
+   },
    "letture-spaventose-associazione-il-contastorie-alessandria": {
     "anni": [
      2026
@@ -1666,6 +1688,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-26"
+   },
+   "pigiama-party-yo-yo-gioca-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Yo-Yo Gioca",
+    "manifest": "",
+    "nome": "Pigiama Party - Yo-Yo Gioca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
    },
    "primi-passi-di-svezzamento-officina-femminile-alessandria": {
     "anni": [
@@ -2056,6 +2089,17 @@
     "pagina": true,
     "ultima": "2026-10-15"
    },
+   "un-pomeriggio-speciale-ad-arquata-scrivia-nati-per": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Arquata Scrivia",
+    "manifest": "",
+    "nome": "Un Pomeriggio Speciale ad Arquata Scrivia - Nati per Leggere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-20"
+   },
    "zampeta-o-scherzeto-edizione-arquata-scrivia": {
     "anni": [
      2026
@@ -2380,6 +2424,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-01"
+   },
+   "giochi-di-ruolo-e-librogame-iv-avventure-nelle-lan-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Astense Giorgio Faletti",
+    "manifest": "",
+    "nome": "Giochi di Ruolo e Librogame IV - Avventure nelle Lande Ghiacciate",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
    },
    "giochi-di-ruolo-e-librogame-le-cronache-del-crepus-asti": {
     "anni": [
@@ -3191,6 +3246,23 @@
    }
   },
   "nome": "Basaluzzo",
+  "prov": "AL"
+ },
+ "bassignana": {
+  "eventi": {
+   "mercatini-di-natale-edizione-associazione-memorial-bassignana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Vittoria e Corso Italia",
+    "manifest": "",
+    "nome": "Mercatini di Natale 4° Edizione - Associazione Memorial Cristian Zucconi APS",
+    "organizza": "Associazione Memorial Cristian Zucconi APS",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   }
+  },
+  "nome": "Bassignana",
   "prov": "AL"
  },
  "bastiamondovi": {
@@ -6770,6 +6842,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-02"
+   },
+   "un-piccolo-dono-un-grande-sorriso-castellazzo-socc-castellazzo-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazzetta della Lega",
+    "manifest": "",
+    "nome": "Un Piccolo Dono, Un Grande Sorriso - Castellazzo Soccorso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    }
   },
   "nome": "Castellazzo Bormida",
@@ -6989,6 +7072,17 @@
     "pagina": true,
     "ultima": "2026-11-29"
    },
+   "mercatini-di-natale-pro-loco-castelneuv-briso-castelnuovo-calcea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazze e vie del Paese",
+    "manifest": "",
+    "nome": "Mercatini di Natale - Pro Loco Castelneuv Brisò",
+    "organizza": "Pro Loco Castelneuv Brisò",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "mercatini-di-natale-pro-loco-castelneuv-briso-comu-castelnuovo-calcea": {
     "anni": [
      2026
@@ -7055,6 +7149,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-05"
+   },
+   "facciamo-l-albero-insieme-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Facciamo l'Albero Insieme!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    },
    "festa-dei-coscritti-classe-castelnuovo-scrivia": {
     "anni": [
@@ -8224,6 +8329,17 @@
     "pagina": false,
     "ultima": "2026-08-15"
    },
+   "il-castello-di-natale-costigliole-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Costigliole d'Asti",
+    "manifest": "",
+    "nome": "Il Castello di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "stramangiando-pro-loco-motta-di-costigliole-d-asti": {
     "anni": [
      2026
@@ -8279,6 +8395,17 @@
     "organizza": "Pro Loco Cremolino",
     "pagina": true,
     "ultima": "2026-10-18"
+   },
+   "un-borgo-di-presepi-cremolino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Cremolino",
+    "manifest": "Un Borgo di Presepi",
+    "nome": "Un Borgo di Presepi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    }
   },
   "nome": "Cremolino",
@@ -8520,6 +8647,23 @@
   },
   "nome": "Crissolo",
   "prov": "CN"
+ },
+ "cuccaromonferrato": {
+  "eventi": {
+   "mercatini-di-natale-di-cuccaro-cuccaro-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Per le vie del paese",
+    "manifest": "Mercatini di Natale di Cuccaro",
+    "nome": "Mercatini di Natale di Cuccaro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   }
+  },
+  "nome": "Cuccaro Monferrato",
+  "prov": "AL"
  },
  "cuneo": {
   "eventi": {
@@ -10512,6 +10656,17 @@
     "organizza": "Pro Loco Fresonara",
     "pagina": true,
     "ultima": "2026-10-18"
+   },
+   "natale-a-fresonara": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Orione",
+    "manifest": "Natale a Fresonara",
+    "nome": "Natale a Fresonara",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    }
   },
   "nome": "Fresonara",
@@ -12897,6 +13052,23 @@
   "nome": "Montemagno Monferrato",
   "prov": "AT"
  },
+ "montemarzino": {
+  "eventi": {
+   "alla-scoperta-degli-animali-con-le-piume-e-non-sol-montemarzino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Alla scoperta degli Animali con le Piume... e non solo!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   }
+  },
+  "nome": "Montemarzino",
+  "prov": "AL"
+ },
  "monterossograna": {
   "eventi": {
    "miele-castelmagno-monterosso-grana": {
@@ -13802,6 +13974,17 @@
     "pagina": true,
     "ultima": "2026-11-13"
    },
+   "piccoli-occhi-grandi-sguardi-inaugurazione-mostra-nizza-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Palloncino Rosso art shop & gallery",
+    "manifest": "",
+    "nome": "Piccoli occhi Grandi sguardi - Inaugurazione mostra d'arte",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "post-parto-salute-pelvica-e-addominale-nizza-monferrato": {
     "anni": [
      2026
@@ -14138,6 +14321,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "dove-andiamo-oggi-papi-e-cosa-mettiamo-nel-piatto-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica di Novi Ligure",
+    "manifest": "",
+    "nome": "Dove andiamo oggi, Papi? E cosa mettiamo nel piatto? - Associazione DAOP",
+    "organizza": "Associazione DAOP",
+    "pagina": true,
+    "ultima": "2026-12-01"
    },
    "esposizione-trattori-d-epoca-associazione-trattori-novi-ligure": {
     "anni": [
@@ -16681,6 +16875,67 @@
   "nome": "Prato Nevoso",
   "prov": "CN"
  },
+ "predosa": {
+  "eventi": {
+   "accensione-delle-luci-di-natale-vidalegra-aps-predosa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Predosa",
+    "manifest": "Il Natale a Predosa 2026",
+    "nome": "Accensione delle luci di Natale - VidAlegra APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "arriva-la-cassetta-della-posta-di-babbo-natale-vid-predosa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Predosa",
+    "manifest": "Il Natale a Predosa 2026",
+    "nome": "Arriva la Cassetta della Posta di Babbo Natale - VidAlegra APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
+   },
+   "gli-elfi-di-babbo-natale-vanno-dai-bambini-a-scuol-predosa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Predosa",
+    "manifest": "Il Natale a Predosa 2026",
+    "nome": "Gli Elfi di Babbo Natale vanno dai bambini a scuola e all'asilo - VidAlegra APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-22"
+   },
+   "il-magico-arrivo-di-babbo-natale-vidalegra-aps-predosa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Predosa",
+    "manifest": "Il Natale a Predosa 2026",
+    "nome": "Il magico arrivo di Babbo Natale - VidAlegra APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-24"
+   },
+   "vendita-biglietti-lotteria-della-befana-vidalegra-predosa": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Predosa",
+    "manifest": "Il Natale a Predosa 2026",
+    "nome": "Vendita biglietti Lotteria della Befana 2026 - VidAlegra APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
+   }
+  },
+  "nome": "Predosa",
+  "prov": "AL"
+ },
  "priero": {
   "eventi": {
    "castelli-aperti-a-ferragosto-borgo-e-torre-medieva-priero": {
@@ -17357,6 +17612,17 @@
  },
  "revigliascodasti": {
   "eventi": {
+   "la-via-dei-presepi-mostra-di-presepi-all-aperto-revigliasco-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico di Revigliasco d'Asti",
+    "manifest": "Avvento Revigliaschese 2026",
+    "nome": "La Via dei Presepi - Mostra di presepi all'aperto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "mubum-in-piazza-revigliasco-d-asti": {
     "anni": [
      2026
@@ -17487,6 +17753,17 @@
  },
  "rivarone": {
   "eventi": {
+   "a-rivarone-il-natale-arriva-prima": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Contrada Grande",
+    "manifest": "A Rivarone il Natale arriva prima",
+    "nome": "A Rivarone il Natale arriva prima",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "festa-del-ringraziamento-e-della-transumanza-rivarone": {
     "anni": [
      2026
@@ -18223,6 +18500,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-19"
+   },
+   "strasale-sotto-zero-pro-loco-di-sale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Garibaldi",
+    "manifest": "",
+    "nome": "Strasale Sotto Zero - Pro Loco di Sale",
+    "organizza": "Pro Loco di Sale",
+    "pagina": true,
+    "ultima": "2026-12-12"
    }
   },
   "nome": "Sale",
@@ -19200,6 +19488,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-20"
+   },
+   "l-officina-del-natale-pro-loco-sanse-san-sebastiano-curone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Roma 15",
+    "manifest": "",
+    "nome": "L'Officina del Natale - Pro Loco Sanse",
+    "organizza": "Pro Loco Sanse",
+    "pagina": true,
+    "ultima": "2026-12-14"
    }
   },
   "nome": "San Sebastiano Curone",
@@ -19593,6 +19892,17 @@
  },
  "santostefanobelbo": {
   "eventi": {
+   "fera-di-cubio-comune-di-santo-stefano-belbo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "34° Féra di Cubióт - Comune di Santo Stefano Belbo",
+    "organizza": "Comune di Santo Stefano Belbo",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "festa-vendemmia-cascina-fontanette-santo-stefano-belbo": {
     "anni": [
      2026
@@ -20760,6 +21070,28 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "concerto-di-natale-civica-accademia-musicale-peros-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Civico di Tortona",
+    "manifest": "Luci di Natale 2026",
+    "nome": "Concerto di Natale - Civica Accademia Musicale Perosi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
+   "derthona-in-duomo-vacanze-di-natale-a-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Duomo",
+    "manifest": "Luci di Natale 2026",
+    "nome": "Derthona-in Duomo. Vacanze di Natale a Tortona 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "detective-cercasi-toscience-tortona": {
     "anni": [
      2026
@@ -20903,6 +21235,17 @@
     "pagina": true,
     "ultima": "2026-08-20"
    },
+   "mercatini-di-natale-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini della Stazione di Tortona",
+    "manifest": "Luci di Natale 2026",
+    "nome": "Mercatini di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "missione-p-a-p-e-r-toscience-tortona": {
     "anni": [
      2026
@@ -20913,6 +21256,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-29"
+   },
+   "motoraduno-di-babbo-natale-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Duomo",
+    "manifest": "Luci di Natale 2026",
+    "nome": "Motoraduno di Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "musichiamo-crescere-con-la-musica-12-24-mesi-perco-tortona": {
     "anni": [
@@ -21035,6 +21389,28 @@
     "pagina": true,
     "ultima": "2026-10-31"
    },
+   "rassegna-assoli-befana-in-baracca-associazione-pep-tortona": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Teatro Civico di Tortona",
+    "manifest": "Luci di Natale 2026",
+    "nome": "33° Rassegna Assoli: Befana in Baracca - Associazione Peppino Sarina",
+    "organizza": "Associazione Peppino Sarina",
+    "pagina": true,
+    "ultima": "2027-01-03"
+   },
+   "rassegna-assoli-sua-altezza-e-il-musico-associazio-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "vie della città",
+    "manifest": "Luci di Natale 2026",
+    "nome": "33° Rassegna Assoli: Sua Altezza e il Musico - Associazione Peppino Sarina",
+    "organizza": "Associazione Peppino Sarina",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "serata-finale-cinema-e-pizza-disney-il-gabbiano-tortona": {
     "anni": [
      2026
@@ -21057,6 +21433,17 @@
     "pagina": true,
     "ultima": "2026-11-27"
    },
+   "sfilata-dei-babbo-natale-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini della Stazione di Tortona",
+    "manifest": "Luci di Natale 2026",
+    "nome": "Sfilata dei Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "stratortona-croce-rossa-italiana-comitato-di-torto": {
     "anni": [
      2026
@@ -21067,6 +21454,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "tradizionale-camminata-natalizia-con-benedizione-d-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa del Sacro Cuore",
+    "manifest": "Luci di Natale 2026",
+    "nome": "Tradizionale Camminata Natalizia con Benedizione dei Bambinelli",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
    },
    "vegunderground-fest-associazione-pandora-tortona": {
     "anni": [
@@ -21950,6 +22348,17 @@
     "pagina": true,
     "ultima": "2026-09-04"
    },
+   "fiera-di-santa-caterina-pro-loco-di-villanova-d-as-villanova-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "",
+    "nome": "Fiera di Santa Caterina - Pro Loco di Villanova d'Asti",
+    "organizza": "Pro Loco di Villanova d'Asti",
+    "pagina": true,
+    "ultima": "2026-11-26"
+   },
    "gelindo-la-combriccola-e-mitichieleculli-villanova-d-asti": {
     "anni": [
      2026
@@ -22069,6 +22478,23 @@
   },
   "nome": "Villanova Mondovì",
   "prov": "CN"
+ },
+ "villanovamonferrato": {
+  "eventi": {
+   "festa-dell-albero-villanova-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia",
+    "manifest": "Festa dell'Albero 2026",
+    "nome": "Festa dell'Albero 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-23"
+   }
+  },
+  "nome": "Villanova Monferrato",
+  "prov": "AL"
  },
  "villanovasolaro": {
   "eventi": {
