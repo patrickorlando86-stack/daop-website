@@ -2964,6 +2964,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-24"
+   },
+   "storie-con-la-coda-bagnasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Comunale Aldo Eugenio Oggerino",
+    "manifest": "",
+    "nome": "Storie con la Coda",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
    }
   },
   "nome": "Bagnasco",
@@ -3407,6 +3418,17 @@
  },
  "bernezzo": {
   "eventi": {
+   "il-mondo-di-natale-bernezzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Collina di Bernezzo",
+    "manifest": "Il Mondo di Natale",
+    "nome": "Il Mondo di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "la-castagna-a-berness-bernezzo": {
     "anni": [
      2026
@@ -4088,6 +4110,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-27"
+   },
+   "la-magia-del-riciclo-museo-civico-craveri-di-stori-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Civico Craveri di Storia Naturale",
+    "manifest": "",
+    "nome": "La Magia del Riciclo - Museo Civico Craveri di Storia Naturale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "lettura-al-museo-il-bosco-si-addormenta-bra": {
     "anni": [
@@ -9019,6 +9052,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "il-giardino-di-babbo-natale-paesaggi-garden-vivaio-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Paesaggi Garden Vivaio",
+    "manifest": "",
+    "nome": "Il Giardino di Babbo Natale - Paesaggi Garden Vivaio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "il-memory-delle-storie-cuneo": {
     "anni": [
      2026
@@ -9029,6 +9073,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-07"
+   },
+   "illuminatale-i-simboli-del-natale-pop-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Galimberti",
+    "manifest": "IllumiNatale 2026 - I Simboli del Natale Pop",
+    "nome": "IllumiNatale 2026 - I Simboli del Natale Pop",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    },
    "incontro-di-prova-gratuito-deborah-dalmasso-cuneo": {
     "anni": [
@@ -9337,6 +9392,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-02"
+   },
+   "un-museo-per-tutti-si-puo-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Civico di Cuneo",
+    "manifest": "",
+    "nome": "Un museo per tutti: si può!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
    },
    "una-festa-per-le-nonne-e-i-nonni-cerchiamoci-cuneo": {
     "anni": [
@@ -18612,6 +18678,28 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "dal-seme-all-albero-l-albero-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Quartiere",
+    "manifest": "TRIBÙ – Dal Seme all'Albero",
+    "nome": "Dal Seme all'Albero – L'Albero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-21"
+   },
+   "dal-seme-all-albero-la-foglia-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Quartiere",
+    "manifest": "TRIBÙ – Dal Seme all'Albero",
+    "nome": "Dal Seme all'Albero – La Foglia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "equi-lab-centro-famiglie-saluzzo": {
     "anni": [
      2026
@@ -18743,6 +18831,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-18"
+   },
+   "villaggio-di-natale-il-magico-mondo-di-memole-saluzzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Saluzzo",
+    "manifest": "",
+    "nome": "Villaggio di Natale - Il Magico Mondo di Memole",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    }
   },
   "nome": "Saluzzo",
@@ -19936,6 +20035,17 @@
     "pagina": true,
     "ultima": "2026-12-06"
    },
+   "fera-di-cubiot-comune-di-santo-stefano-belbo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "34° Féra di Cubiót - Comune di Santo Stefano Belbo",
+    "organizza": "Comune di Santo Stefano Belbo",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "festa-vendemmia-cascina-fontanette-santo-stefano-belbo": {
     "anni": [
      2026
@@ -20020,6 +20130,17 @@
  },
  "savigliano": {
   "eventi": {
+   "aspettando-il-natale-al-museo-ferroviario-piemonte-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Museo Ferroviario Piemontese",
+    "manifest": "",
+    "nome": "Aspettando il Natale al Museo Ferroviario Piemontese",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "cresco-con-te-cura-con-il-cuore-savigliano": {
     "anni": [
      2026
@@ -20108,6 +20229,17 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "il-passo-che-unisce-giornata-nazionale-parkinson-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Ippico Equi Maresco",
+    "manifest": "",
+    "nome": "Il Passo che Unisce - Giornata Nazionale Parkinson",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-22"
+   },
    "il-treno-dell-autunno-museo-ferroviario-piemontese-savigliano": {
     "anni": [
      2026
@@ -20129,6 +20261,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-12"
+   },
+   "l-orso-della-luna-crescente-meraki-teatro-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala S. Agostino",
+    "manifest": "",
+    "nome": "L'Orso della Luna Crescente - Meraki Teatro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "la-casa-di-babbo-natale-savigliano": {
     "anni": [
@@ -20162,6 +20305,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "quadretti-d-inverno-laboratorio-degli-elfi-savigliano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Ala Polifunzionale L. Morello",
+    "manifest": "Incantevole Natale",
+    "nome": "Quadretti d'inverno - Laboratorio degli Elfi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "scassarompifracassino-la-compagnia-in-stabile-savigliano": {
     "anni": [
