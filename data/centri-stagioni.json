@@ -6,9 +6,9 @@
   "voce": "Centri estivi"
  },
  "invernali": {
-  "attivi": 0,
+  "attivi": 1,
   "file": "centri-invernali.html",
-  "inizio": null,
+  "inizio": "2026-12-28",
   "voce": "Centri invernali"
  },
  "pasquali": {
