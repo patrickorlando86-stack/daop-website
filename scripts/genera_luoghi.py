@@ -87,8 +87,16 @@ STORICO_JSON = os.path.join(ROOT, "data", "storico-comuni.json")
 SITEMAP_PATH = G.SITEMAP_PATH
 
 PAGE_URL = f"{G.SITE_URL}/luoghi.html"
+# L'EXPORT, non gviz (20/11/2026), come genera_eventi dal 31/08 e come l'app da
+# sempre. gviz decide UN TIPO per colonna e restituisce VUOTE le celle dell'altro:
+# CODICE, CAP, Eta_min ed Eta_max sono numeri su quasi tutte le righe, e i luoghi
+# nuovi scritti come testo (5355-5405) uscivano dal sito senza codice, CAP ed
+# eta' - 12 CODICE, 15 CAP, 15 Eta_min e 14 Eta_max su 1115 righe. L'export da'
+# le celle come si vedono. La sua trappola sono i FILTRI del foglio: vedi il
+# controllo in leggi_catalogo().
+LUOGHI_GID = "668165408"
 DEFAULT_CSV = (f"https://docs.google.com/spreadsheets/d/{G.SHEET_ID}"
-               "/gviz/tq?tqx=out:csv&sheet=Luoghi")
+               f"/export?format=csv&gid={LUOGHI_GID}")
 SUPABASE_FOTO = "https://aaseyjdsldgjerjqlumu.supabase.co"
 
 # Quanti eventi passati bastano perche' un posto della sola agenda entri in
@@ -768,7 +776,21 @@ def _righe_grezze():
         if any(h in COLONNE['nome'] for h in head) and any(h in COLONNE['categoria'] for h in head):
             righe = [dict(zip(head, r)) for r in lettore[1:] if any(c.strip() for c in r)]
             print(f"[genera_luoghi] {len(righe)} righe lette dal tab Luoghi")
-            return righe, True
+            # L'export rispetta i FILTRI del foglio: un filtro attivo restituisce
+            # un CSV corto e valido, senza errore. Il catalogo non ha stagioni -
+            # cresce e basta - quindi un calo forte rispetto all'istantanea di
+            # ieri e' il filtro, e si pubblica l'istantanea invece del buco.
+            try:
+                with open(JSON_PATH, encoding="utf-8") as fh:
+                    ieri = len(json.load(fh))
+            except Exception:
+                ieri = 0
+            if ieri and len(righe) < ieri * 0.8:
+                print(f"[genera_luoghi] ATTENZIONE: {len(righe)} righe lette, ieri "
+                      f"{ieri}: probabile FILTRO attivo sul tab Luoghi. Uso "
+                      f"l'istantanea; togli il filtro dal foglio.")
+            else:
+                return righe, True
         # Il tab non c'e': gviz risponde comunque, col primo foglio o con una
         # pagina d'errore. Meglio accorgersene qui che pubblicare un elenco di
         # eventi travestito da elenco di luoghi.
