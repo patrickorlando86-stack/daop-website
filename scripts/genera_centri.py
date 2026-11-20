@@ -531,6 +531,8 @@ CSS = """
 .ce-faq-a{padding:0 0 14px}
 .ce-faq-a p:last-child,.ce-faq-a ul:last-child{margin-bottom:0}
 .ce-intro{margin:6px 0 18px;font-size:1.02rem;line-height:1.6}
+.ce-alla-guida{margin:28px 0 0;font-size:.98rem}
+.ce-alla-guida a{font-weight:600}
 .ce-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;font-size:.92rem}
 .ce-prov-t{color:#555;font-weight:600}
 .ce-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 14px;
@@ -694,7 +696,7 @@ def guida(cfg):
   <h3>Il primo giorno</h3>
   {cfg['p_primo_giorno']}
 """
-    return (f'\n<section class="ce-guide">\n'
+    return (f'\n<section class="ce-guide" id="guida">\n'
             f'  <h2>Come scegliere un {cfg["singolare"]}</h2>\n'
             f'  <p>Le domande da fare prima di iscrivere: tocca quella che ti '
             f'serve.</p>\n{a_domande(corpo)}</section>\n')
@@ -1049,8 +1051,11 @@ def render(chiave, cfg, centri, css, nav, foot, porte_prov=()):
             f'    <div class="ev-search">{SEARCH_SVG}'
             '<input type="search" id="ce-q" placeholder="Cerca un centro, un paese, un gestore…" '
             'aria-label="Cerca fra i centri"></div>\n'
-            f'    <select class="ev-select" id="ce-prov" aria-label="Filtra per provincia">'
-            f'{"".join(opt_prov)}</select>\n'
+            # Con una provincia sola (sempre, sulle pagine per provincia) la
+            # tendina non sceglie niente: via. FILTER_JS regge il suo assente.
+            + (f'    <select class="ev-select" id="ce-prov" aria-label="Filtra per provincia">'
+               f'{"".join(opt_prov)}</select>\n' if len(provs) > 1 else '')
+            +
             f'    <select class="ev-select" id="ce-city" aria-label="Filtra per città">'
             f'{"".join(opt_city)}</select>\n'
             '  </div>\n'
@@ -1109,13 +1114,11 @@ def render(chiave, cfg, centri, css, nav, foot, porte_prov=()):
         crumb = (f'<a href="/">Home</a> › <a href="/{padre["file"]}">'
                  f'{G.esc(padre["h1"])}</a> › <span>{G.esc(PROV_LABEL[cfg["sigla"]])}</span>')
         # Niente guida qui: e' sulla pagina generale, e ripeterla in tre
-        # province farebbe tre doppioni. Un link e basta.
-        corpo = (f'{elenco}\n  <div class="ce-guidapdf">\n'
-                 f'    <h2>Come scegliere un {cfg["singolare"]}</h2>\n'
-                 f'    <p>Cosa chiedere prima di iscrivere, quando ci si iscrive e '
-                 f'quali documenti servono: è tutto nella guida.</p>\n'
-                 f'    <p><a class="btn btn-teal" href="/{padre["file"]}">Leggi la '
-                 f'guida ai {G.esc(padre["h1"].lower())}</a></p>\n  </div>')
+        # province farebbe tre doppioni. Un link e basta: una riga sola e non
+        # un riquadro, come la generale rifatta sui corsi (20/11/2026).
+        corpo = (f'{elenco}\n  <p class="ce-alla-guida">Come scegliere un '
+                 f'{cfg["singolare"]}? <a href="/{padre["file"]}#guida">Le domande '
+                 f'da fare prima di iscrivere</a></p>')
         guida_pdf = ''
     else:
         crumb = f'<a href="/">Home</a> › <span>{G.esc(cfg["h1"])}</span>'

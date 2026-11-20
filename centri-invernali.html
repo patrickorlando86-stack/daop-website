@@ -736,6 +736,8 @@
 .ce-faq-a{padding:0 0 14px}
 .ce-faq-a p:last-child,.ce-faq-a ul:last-child{margin-bottom:0}
 .ce-intro{margin:6px 0 18px;font-size:1.02rem;line-height:1.6}
+.ce-alla-guida{margin:28px 0 0;font-size:.98rem}
+.ce-alla-guida a{font-weight:600}
 .ce-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;font-size:.92rem}
 .ce-prov-t{color:#555;font-weight:600}
 .ce-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 14px;
@@ -865,7 +867,6 @@
     <p class="ce-intro">1 centro aperto o in arrivo in 1 comune. Tocca un centro per date, orari, prezzi e contatti.</p>
   <div class="ev-toolbar">
     <div class="ev-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="ce-q" placeholder="Cerca un centro, un paese, un gestore…" aria-label="Cerca fra i centri"></div>
-    <select class="ev-select" id="ce-prov" aria-label="Filtra per provincia"><option value="all">Tutte le province</option><option value="cn">Cuneo</option></select>
     <select class="ev-select" id="ce-city" aria-label="Filtra per città"><option value="all">Tutte le città</option><option value="racconigi">Racconigi</option></select>
   </div>
   <div class="ev-viewbar"><p class="events-count" id="ce-count"></p></div>
@@ -893,7 +894,7 @@
 </div>
   <p class="events-empty" id="ce-empty">Nessun centro con questi filtri. Prova a togliere qualche filtro.</p>
   
-<section class="ce-guide">
+<section class="ce-guide" id="guida">
   <h2>Come scegliere un centro invernale</h2>
   <p>Le domande da fare prima di iscrivere: tocca quella che ti serve.</p>
   <details class="ce-faq"><summary><h3>Qui il problema non è scegliere, è trovare</h3></summary>
