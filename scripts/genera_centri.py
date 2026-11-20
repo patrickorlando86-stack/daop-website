@@ -64,12 +64,40 @@ ZONA = G.PROVINCE_TESTO
 ETICHETTA = ' · '.join([G.PROVINCE_NOMI[c] for c in G.PROVINCE_PUBBLICATE]
                        + ['Famiglie'])
 
+# DA DOVE SI LEGGONO I CENTRI (20/11/2026). Fino a oggi dalla tab "Centri
+# Est/Inv", riempita dalla raccolta Instagram «Centri…». Decisione di Patrick:
+# i centri entrano SOLO se la societa' paga, si caricano dalla finestra come i
+# corsi («Sono CENTRI») e finiscono sulla tab "Attivita" con Tipo "centro",
+# primo giorno in "Dal" e ultimo in "Scadenza". La riga NON si cancella a fine
+# centro: e' lo storico per ricontattare la societa' l'anno dopo. Quindi qui si
+# leggono solo le righe Tipo "centro" (TIPO_CENTRO), e lo storico si tiene
+# fuori pagina con ARCHIVIO_GIORNI.
+TAB_CENTRI = 'Attivita'
+TIPO_CENTRO = 'centro'
+
+# Quanto resta in pagina un centro finito, nel blocco "Anche questi hanno
+# aperto quest'anno". Prima la tab si svuotava da sola e il blocco era
+# l'edizione appena passata; con lo storico sul foglio, senza un limite, a
+# luglio 2029 ci sarebbero tre estati.
+ARCHIVIO_GIORNI = 330
+
+# La soglia delle pagine per PROVINCIA (centri-estivi-provincia-cuneo.html):
+# la stessa di MIN_LANDING in genera_eventi.py. Sotto, una pagina per provincia
+# non direbbe niente in piu' di quella generale, che ha gia' il filtro.
+MIN_PROVINCIA = G.MIN_LANDING
+
+# Gli Stati di riga che tengono un centro fuori pagina: le stesse parole di
+# genera_corsi.py (STATI_BOZZA + STATI_ANTEPRIMA), cosi' «sospeso» spegne un
+# centro come spegne un corso.
+STATI_FUORI = ('bozza', 'draft', 'sospesa', 'sospeso', 'nascosta', 'nascosto',
+               'ritirata', 'ritirato', 'no', 'anteprima')
+
 # Una voce per stagione. Aggiungere gli invernali significa aggiungere una
 # riga qui: il resto del codice non cambia.
 STAGIONI = {
     'estivi': {
         'file': 'centri-estivi.html',
-        'tab': 'Centri Est/Inv',
+        'tab': TAB_CENTRI,
         'h1': 'Centri Estivi',
         # parte in corsivo oro dell'H1, come "Oggi" nell'hero degli eventi
         'h1_em': ZONA,
@@ -82,6 +110,9 @@ STAGIONI = {
         'breve': "d'estate",
         'iscrizioni': 'fra marzo e maggio',
         'quando_riaprono': 'in primavera',
+        # I mesi in cui la gente CERCA (20/11/2026): la pagina sta in Google
+        # anche senza centri, perche' e' li' che si prende la domanda.
+        'mesi_iscrizioni': (2, 3, 4, 5, 6),
         'parole': ('estiv', 'estat', 'summer'),
         'p_iscrizioni': """<p>Le iscrizioni si aprono di solito fra marzo e
   maggio, cioè con mesi di anticipo. I posti nelle strutture più richieste
@@ -116,7 +147,7 @@ STAGIONI = {
     },
     'invernali': {
         'file': 'centri-invernali.html',
-        'tab': 'Centri Est/Inv',
+        'tab': TAB_CENTRI,
         'h1': 'Centri Invernali',
         'h1_em': ZONA,
         'singolare': 'centro invernale',
@@ -128,6 +159,9 @@ STAGIONI = {
         'breve': 'a Natale',
         'iscrizioni': 'fra ottobre e novembre',
         'quando_riaprono': 'in autunno',
+        # I mesi in cui la gente CERCA (20/11/2026): la pagina sta in Google
+        # anche senza centri, perche' e' li' che si prende la domanda.
+        'mesi_iscrizioni': (10, 11, 12),
         'parole': ('invern', 'natal', 'winter', 'befana'),
         'p_iscrizioni': """<p>Qui il calendario è stretto: le proposte escono
   fra ottobre e novembre e si riempiono in fretta, perché sono poche e i posti
@@ -172,7 +206,7 @@ STAGIONI = {
     # anno non apre nessuno, dirlo e' un'informazione utile quanto un elenco.
     'pasquali': {
         'file': 'centri-pasquali.html',
-        'tab': 'Centri Est/Inv',
+        'tab': TAB_CENTRI,
         'h1': 'Centri Pasquali',
         'h1_em': ZONA,
         'singolare': 'centro per le vacanze di Pasqua',
@@ -184,6 +218,9 @@ STAGIONI = {
         'breve': 'a Pasqua',
         'iscrizioni': 'fra febbraio e marzo',
         'quando_riaprono': 'a fine inverno',
+        # I mesi in cui la gente CERCA (20/11/2026): la pagina sta in Google
+        # anche senza centri, perche' e' li' che si prende la domanda.
+        'mesi_iscrizioni': (2, 3, 4),
         'parole': ('pasqu', 'easter'),
         'p_iscrizioni': """<p>Quando qualcosa apre, si annuncia con due o tre
   settimane di preavviso e si riempie in pochi giorni: è troppo corto perché i
@@ -229,12 +266,13 @@ STAGIONI = {
 COLONNE = {
     'nome': ('nome', 'denominazione', 'centro', 'titolo'),
     'di': ('data inizio', 'inizio', 'dal'),
-    'df': ('data fine', 'fine', 'al'),
+    # "scadenza" e' l'ultimo giorno sulla tab Attivita (20/11/2026).
+    'df': ('data fine', 'fine', 'al', 'scadenza'),
     'citta': ('città', 'citta', 'comune', 'paese'),
     'prov': ('provincia', 'prov'),
     'eta': ('età', 'eta', 'fascia', 'fascia età', 'fascia eta'),
     'prezzo': ('prezzo', 'costo', 'tariffa', 'quota'),
-    'ora': ('ora', 'orario', 'orari'),
+    'ora': ('ora', 'orario', 'orari', 'giorni'),
     'descr': ('descrizione', 'note', 'dettagli'),
     'luogo': ('luogo', 'sede', 'struttura', 'nome luogo'),
     'indirizzo': ('indirizzo completo', 'indirizzo', 'via'),
@@ -247,6 +285,12 @@ COLONNE = {
     # la usiamo, ma il criterio affidabile sono le date: un centro che parte a
     # giugno e' estivo comunque sia compilata la riga.
     'stagione': ('stagione', 'tipo', 'tipologia', 'est/inv'),
+    # Sulla tab Attivita (20/11/2026). "Tipo" e' anche un alias di 'stagione',
+    # ma _mappa da' ogni colonna al PRIMO campo libero: li' "Stagione" viene
+    # prima di "Tipo", quindi 'stagione' e' gia' preso e "Tipo" arriva qui.
+    'tipo_riga': ('tipo',),
+    'stato': ('stato',),
+    'periodo': ('periodo',),
 }
 
 # Mesi di inizio che identificano la stagione, quando non c'e' una colonna.
@@ -259,7 +303,10 @@ COLONNE = {
 # 25 aprile: nessun mese si sovrappone alle altre due stagioni.
 MESI_STAGIONE = {
     'estivi': (5, 6, 7, 8, 9),
-    'invernali': (11, 12, 1, 2),
+    # Ottobre (20/11/2026): non era di nessuna stagione. Un centro del ponte
+    # d'autunno va con le chiusure scolastiche. Gli stessi mesi stanno in
+    # STAGIONE_DEI_MESI_CENTRI nel downloader, che scrive la colonna Stagione.
+    'invernali': (10, 11, 12, 1, 2),
     'pasquali': (3, 4),
 }
 
@@ -303,8 +350,11 @@ def leggi_centri(tab, chiave):
            run notturna per pubblicare la pagina svuotata."""
     # safe='' e' obbligatorio: la tab si chiama "Centri Est/Inv" e con la quote
     # di default lo slash resterebbe tale, spezzando il parametro sheet.
+    # headers=1 (20/11/2026): senza, sulla tab Attivita gviz fonde
+    # l'intestazione con la prima riga ("CODICE A007", "Nome Io sono...") e
+    # nessuna colonna si riconosce piu'.
     url = (f"https://docs.google.com/spreadsheets/d/{G.SHEET_ID}/gviz/tq"
-           f"?tqx=out:csv&sheet={urllib.parse.quote(tab, safe='')}"
+           f"?tqx=out:csv&headers=1&sheet={urllib.parse.quote(tab, safe='')}"
            f"&_cb={int(datetime.datetime.now().timestamp())}")
     try:
         req = urllib.request.Request(url, headers={
@@ -350,11 +400,23 @@ def leggi_centri(tab, chiave):
     # "la sta usando?". Una colonna che esiste ma e' vuota si comporta
     # identica a una colonna che non c'e', e dal log non si distingueva.
     da_colonna = da_mese = 0
+    # Sulla tab Attivita stanno corsi, servizi e centri: qui solo i centri.
+    # Una tab senza colonna Tipo (la vecchia "Centri Est/Inv") e' tutta di
+    # centri, come prima.
+    solo_centri = 'tipo_riga' in idx
+    spenti = 0
     for r in righe[hi + 1:]:
         def val(campo):
             i = idx.get(campo)
             return (r[i].strip() if i is not None and i < len(r) else '')
         if not val('nome'):
+            continue
+        if solo_centri and val('tipo_riga').lower() != TIPO_CENTRO:
+            continue
+        st_riga = val('stato').lower()
+        if st_riga and (st_riga in STATI_FUORI
+                        or st_riga.split()[0].strip('.,;:') in STATI_FUORI):
+            spenti += 1
             continue
         prov = val('prov').upper()
         # La lista era scritta a mano ('AL', 'AT') ed e' rimasta ferma quando
@@ -420,6 +482,7 @@ def leggi_centri(tab, chiave):
               f"{da_colonna} righe, il mese di inizio su {da_mese}")
     coda = f", {scartati} di altra stagione" if scartati else ""
     coda += f", {doppi} doppioni uniti" if doppi else ""
+    coda += f", {spenti} spenti dalla colonna Stato" if spenti else ""
     print(f"[genera_centri] tab '{tab}': {len(out)} centri per '{chiave}'{coda}")
     # Il controllo delle locandine va fatto PRIMA di contarle: dal 07/09/2026
     # loc_path() si limita a consultare cio' che scalda_locandine() ha trovato,
@@ -674,10 +737,25 @@ def card(c, accent, idx):
         tags.append(pill)
 
     link = c['sito'].strip()
+    # Sulla tab Attivita la colonna che arriva qui e' «Iscrizioni», cioe' una
+    # frase ("Aperte fino al 30 maggio"), non un indirizzo (20/11/2026): con
+    # https:// davanti era un link rotto. Una frase va nel dettaglio, come testo.
+    iscrizioni = ''
+    if link and (' ' in link or '.' not in link):
+        iscrizioni, link = link, ''
     if link and not link.startswith(('http://', 'https://')):
         link = 'https://' + link
     img = locandina(c)
     acts = []
+    # LA PAGINA DELLA SOCIETA' (20/11/2026): un centro caricato dalla finestra
+    # e' di una societa' che paga, e la sua pagina in corsi/ ha la scheda
+    # completa. E' anche il link che Google segue dalla pagina che si cerca
+    # ("centri estivi") a quella che si trova per nome. Solo se la pagina c'e'
+    # (il registro di genera_corsi): un link a una pagina che non c'e' e' un 404.
+    pag = G.indice_realta().get(G.slugify(c['gestore'] or '')) if c['gestore'] else None
+    if pag and pag.get('url'):
+        acts.append(f'<a class="event-act" href="{G.esc(pag["url"])}">'
+                    f'{G.ACT_ARROW_SVG} Chi lo organizza: {G.esc(pag.get("nome") or c["gestore"])}</a>')
     if link:
         acts.append(f'<a class="event-act" href="{G.esc(link)}" target="_blank" '
                     f'rel="noopener">{G.ACT_ARROW_SVG} Informazioni e iscrizioni</a>')
@@ -706,6 +784,14 @@ def card(c, accent, idx):
     dove_html = f'\n            <p class="ev-where">{G.PIN_SVG} {dove}</p>' if dove else ''
     contatti = (f'\n            <p class="ce-contatti">Contatti: {G.esc(c["contatti"])}</p>'
                 if c['contatti'] else '')
+    if iscrizioni:
+        contatti += (f'\n            <p class="ce-contatti">Iscrizioni: '
+                     f'{G.esc(iscrizioni)}</p>')
+    # Il periodo a parole del downloader ("dal 22 dicembre al 7 gennaio,
+    # settimane da lunedi' a venerdi'") dice di piu' delle due date in riga.
+    if c.get('periodo') and c['periodo'] != periodo_testo(c):
+        contatti = (f'\n            <p class="ce-contatti">Quando: '
+                    f'{G.esc(c["periodo"])}</p>') + contatti
 
     return f'''        <article class="event-card" data-province="{c['prov'].lower()}" data-city="{cslug(c['citta'])}" style="--cat-color:{color};--cat-tint:{tint};--cat-ink:{ink}">
           <h4 class="ev-h"><button class="ev-row" type="button" aria-expanded="false" aria-controls="{det_id}">
@@ -740,7 +826,7 @@ def jsonld(cfg, centri, url):
     if centri:
         graph.append({
             "@type": "ItemList",
-            "name": f"{cfg['h1']} in {ZONA}",
+            "name": f"{cfg['h1']} in {cfg.get('zona', ZONA)}",
             "numberOfItems": len(centri),
             "itemListElement": [
                 {"@type": "ListItem", "position": i + 1,
@@ -827,7 +913,43 @@ def link_guida(chiave):
         f'  </div>')
 
 
-def render(chiave, cfg, centri, css, nav, foot):
+def file_provincia(cfg, sigla):
+    """centri-estivi.html -> centri-estivi-provincia-cuneo.html (20/11/2026).
+    Lo stesso schema delle sagre-provincia-* e delle eventi-provincia-*."""
+    return cfg['file'].replace('.html', f"-provincia-{G.slugify(PROV_LABEL[sigla])}.html")
+
+
+def cfg_provincia(cfg, sigla):
+    """La configurazione di una stagione ristretta a una provincia.
+
+    Cambia solo quello che dice DOVE: file, titolo, descrizione, la zona
+    nell'H1. La guida NON si ripete (vedi render): sarebbe la stessa pagina
+    tre volte, e il doppione lo perde la pagina piu' debole."""
+    nome = PROV_LABEL[sigla]
+    zona = f"provincia di {nome}"
+    out = dict(cfg)
+    out.update({
+        'file': file_provincia(cfg, sigla),
+        'h1_em': f"in {zona}",
+        'zona': zona,
+        'titolo': f"{cfg['h1']} in {zona} | DAOP",
+        'descr': (f"{cfg['h1']} per bambini in {zona}: l'elenco con età, "
+                  f"periodo, orari e costi, e chi li organizza."),
+        'padre': cfg,
+        'sigla': sigla,
+    })
+    return out
+
+
+def render(chiave, cfg, centri, css, nav, foot, porte_prov=()):
+    """La pagina di una stagione, o di una stagione in una provincia.
+
+    `cfg` con la chiave 'padre' e' una pagina per provincia (cfg_provincia):
+    stesso elenco filtrato, senza la guida, con il link alla pagina generale.
+    `porte_prov` sono le pagine per provincia vive, [(nome, file)]: la
+    generale le linka sopra l'elenco."""
+    padre = cfg.get('padre')
+    zona = cfg.get('zona', ZONA)
     url = f"{SITE_URL}/{cfg['file']}"
     accent = ACCENTO.get(chiave, ACCENTO['estivi'])
     # Un centro concluso non va mostrato come se fosse aperto. Ma l'elenco
@@ -835,7 +957,10 @@ def render(chiave, cfg, centri, css, nav, foot):
     # prossimo, purche' sia dichiarato per quello che e'.
     oggi = datetime.date.today()
     attivi = [c for c in centri if not c['d_end'] or c['d_end'] >= oggi]
-    passati = [c for c in centri if c['d_end'] and c['d_end'] < oggi]
+    # Lo storico resta sul foglio, in pagina solo l'edizione appena passata:
+    # vedi ARCHIVIO_GIORNI.
+    archivio = oggi - datetime.timedelta(days=ARCHIVIO_GIORNI)
+    passati = [c for c in centri if c['d_end'] and archivio <= c['d_end'] < oggi]
 
     n = [0]  # indice progressivo, per id univoci dei dettagli (det-ce-N)
 
@@ -858,7 +983,21 @@ def render(chiave, cfg, centri, css, nav, foot):
     # c'e' niente all'orizzonte. Nell'anno gira due volte per stagione - il
     # giorno dopo l'ultimo centro, e il giorno che arriva la prima riga nuova -
     # non ogni notte.
-    robots = 'index, follow' if attivi else 'noindex, follow'
+    #
+    # MA NEI MESI DELLE ISCRIZIONI LA PAGINA GENERALE RESTA IN INDICE
+    # (20/11/2026). Da quando i centri entrano solo se pagano, a marzo l'elenco
+    # puo' essere vuoto proprio mentre la gente cerca "centri estivi": la
+    # regola di prima avrebbe tolto la pagina da Google nel suo mese migliore.
+    # In quei mesi la guida e' la risposta, e la pagina se la merita.
+    # La pagina per PROVINCIA invece sta in indice solo con MIN_PROVINCIA
+    # centri: senza, e' un doppione piu' povero della generale.
+    in_iscrizioni = oggi.month in cfg.get('mesi_iscrizioni', ())
+    if padre:
+        robots = ('index, follow' if len(attivi) >= MIN_PROVINCIA
+                  else 'noindex, follow')
+    else:
+        robots = ('index, follow' if attivi or in_iscrizioni
+                  else 'noindex, follow')
 
     if attivi:
         provs = sorted({c['prov'] for c in attivi if c['prov']})
@@ -886,6 +1025,14 @@ def render(chiave, cfg, centri, css, nav, foot):
                   + '\n  <p class="events-empty" id="ce-empty">Nessun centro con questi '
                     'filtri. Prova a togliere qualche filtro.</p>')
         avviso = ''
+    elif in_iscrizioni:
+        elenco = ''
+        avviso = (f'<div class="ce-note"><strong>Stiamo raccogliendo i centri di '
+                  f'quest\'anno</strong>Le iscrizioni si aprono di solito '
+                  f'{cfg["iscrizioni"]}: i centri compaiono qui appena gli '
+                  f'organizzatori ce li mandano. Intanto qui sotto trovi la guida per '
+                  f'scegliere, e nell\'<a href="/eventi.html">agenda DAOP</a> quello '
+                  f'che c\'è in programma in questi giorni.</div>')
     else:
         elenco = ''
         avviso = (f'<div class="ce-note"><strong>Iscrizioni non ancora aperte</strong>'
@@ -902,6 +1049,37 @@ def render(chiave, cfg, centri, css, nav, foot):
                    f'servono a farsi un\'idea di chi organizza in zona, per quali età e a '
                    f'quali prezzi. Verifica sempre con il gestore prima di contare su una '
                    f'riapertura.</p>\n' + lista(passati))
+
+    # Le porte verso le pagine per provincia, sopra l'elenco della generale.
+    porte = ''
+    if porte_prov and not padre:
+        porte = ('<div class="com-link" aria-label="Per provincia">'
+                 + ''.join(f'<a href="/{f}">{G.esc(cfg["h1"])} in provincia di '
+                           f'{G.esc(n)}</a>' for n, f in porte_prov)
+                 + '</div>')
+    if padre:
+        crumb = (f'<a href="/">Home</a> › <a href="/{padre["file"]}">'
+                 f'{G.esc(padre["h1"])}</a> › <span>{G.esc(PROV_LABEL[cfg["sigla"]])}</span>')
+        # Niente guida qui: e' sulla pagina generale, e ripeterla in tre
+        # province farebbe tre doppioni. Un link e basta.
+        corpo = (f'{elenco}\n  <div class="ce-guidapdf">\n'
+                 f'    <h2>Come scegliere un {cfg["singolare"]}</h2>\n'
+                 f'    <p>Cosa chiedere prima di iscrivere, quando ci si iscrive e '
+                 f'quali documenti servono: è tutto nella guida.</p>\n'
+                 f'    <p><a class="btn btn-teal" href="/{padre["file"]}">Leggi la '
+                 f'guida ai {G.esc(padre["h1"].lower())}</a></p>\n  </div>')
+        guida_pdf = ''
+    else:
+        crumb = f'<a href="/">Home</a> › <span>{G.esc(cfg["h1"])}</span>'
+        corpo = f"""<!-- GUIDA-PDF:START — quello che sta qui dentro finisce anche nel PDF di
+       guide/. Lo estrae scripts/genera_pdf.py per stringa, quindi i due marker
+       non si tolgono e non si annidano. Fuori restano nav, footer, filtri di
+       stagione e i bottoni: in una guida stampata non servono a niente. -->
+  {porte}
+  {elenco}
+  {guida(cfg)}
+  <!-- GUIDA-PDF:END -->"""
+        guida_pdf = link_guida(chiave)
 
     return f"""<!DOCTYPE html>
 <html lang="it">
@@ -948,26 +1126,20 @@ def render(chiave, cfg, centri, css, nav, foot):
 <header class="page-hero">
   <div class="page-hero-inner">
     <div class="ce-crumb" role="navigation" aria-label="Percorso">
-      <a href="/">Home</a> › <span>{G.esc(cfg['h1'])}</span>
+      {crumb}
     </div>
-    <span class="section-label">{ETICHETTA}</span>
+    <span class="section-label">{f"{PROV_LABEL[cfg['sigla']]} · Famiglie" if padre else ETICHETTA}</span>
     <h1>{G.esc(cfg['h1'])} <em>{cfg['h1_em']}</em></h1>
-    <p>I centri per bambini attivi durante {cfg['periodo']} in {ZONA}, con età,
-    orari e costi. Sotto, la guida per scegliere:
-    quando ci si iscrive, cosa chiedere prima e quali documenti servono.</p>
+    <p>I centri per bambini attivi durante {cfg['periodo']} in {zona}, con età,
+    orari e costi{"" if padre else """. Sotto, la guida per scegliere:
+    quando ci si iscrive, cosa chiedere prima e quali documenti servono"""}.</p>
     <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi qualcosa per oggi? Vedi le <a href="/eventi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">sagre e gli eventi in {ZONA}</a>.</p>
   </div>
 </header>
 <article class="ce-wrap">
   {avviso}
-  <!-- GUIDA-PDF:START — quello che sta qui dentro finisce anche nel PDF di
-       guide/. Lo estrae scripts/genera_pdf.py per stringa, quindi i due marker
-       non si tolgono e non si annidano. Fuori restano nav, footer, filtri di
-       stagione e i bottoni: in una guida stampata non servono a niente. -->
-  {elenco}
-  {guida(cfg)}
-  <!-- GUIDA-PDF:END -->
-  {link_guida(chiave)}
+  {corpo}
+  {guida_pdf}
   {sorelle(chiave)}
   {G.blocco_ecosistema('centri')}
 </article>
@@ -1056,8 +1228,13 @@ def aggiorna_sitemap(cambiate):
     # Ordine stabile e senza doppioni (piu' stagioni possono puntare allo
     # stesso file), limitato alle pagine che esistono davvero.
     files, visti, fuori = [], set(), []
+    # Le pagine per provincia (20/11/2026) stanno nello stesso blocco, dietro
+    # la loro stagione: entrano solo se esistono e non sono in noindex.
+    tutte = []
     for cfg in STAGIONI.values():
-        f = cfg['file']
+        tutte.append(cfg['file'])
+        tutte += [file_provincia(cfg, s) for s in G.PROVINCE_PUBBLICATE]
+    for f in tutte:
         path = os.path.join(ROOT, f)
         if f in visti or not os.path.exists(path):
             continue
@@ -1166,7 +1343,27 @@ def main(argv):
             'attivi': len(votanti),
             'inizio': date[0].isoformat() if date else None,
         }
-        nuovo = render(chiave, cfg, centri, css, nav, foot)
+        # LE PAGINE PER PROVINCIA (20/11/2026). Nasce solo con MIN_PROVINCIA
+        # centri in corso o in arrivo; una volta nata non si cancella (i link
+        # girati devono funzionare, l'URL deve invecchiare), va in noindex e
+        # fuori sitemap finche' non torna sopra soglia - la regola di render().
+        porte_prov = []
+        for sigla in G.PROVINCE_PUBBLICATE:
+            cfg_p = cfg_provincia(cfg, sigla)
+            path_p = os.path.join(ROOT, cfg_p['file'])
+            suoi = [c for c in centri if (c['prov'] or '').upper() == sigla]
+            vivi = [c for c in suoi if not c['d_end'] or c['d_end'] >= oggi]
+            if len(vivi) >= MIN_PROVINCIA:
+                porte_prov.append((PROV_LABEL[sigla], cfg_p['file']))
+            elif not os.path.exists(path_p):
+                continue
+            nuovo_p = render(chiave, cfg_p, suoi, css, nav, foot)
+            if os.path.exists(path_p) and open(path_p, encoding='utf-8').read() == nuovo_p:
+                continue
+            open(path_p, 'w', encoding='utf-8').write(nuovo_p)
+            print(f"[genera_centri] {cfg_p['file']}: scritta ({len(vivi)} centri vivi)")
+            cambiate.add(cfg_p['file'])
+        nuovo = render(chiave, cfg, centri, css, nav, foot, porte_prov=porte_prov)
         if os.path.exists(path) and open(path, encoding='utf-8').read() == nuovo:
             print(f"[genera_centri] {cfg['file']}: invariata")
         else:

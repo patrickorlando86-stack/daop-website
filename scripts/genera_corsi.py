@@ -154,6 +154,9 @@ COLONNE = {
     # scrivi_servizi). La scrive il downloader quando il pacco e' segnato
     # «Sono SERVIZI».
     'tipo': ('tipo',),
+    # Il primo giorno di un CENTRO (20/11/2026, Tipo "centro"): l'ultimo e'
+    # la Scadenza. Sulle righe di corso e' vuota.
+    'dal': ('dal',),
 }
 
 # Fasce del filtro eta', quelle suggerite nel documento. Il confronto e' per
@@ -2582,7 +2585,7 @@ def jsonld_realta(org, corsi_org, info):
     for c in corsi_org:
         # Una riga col Tipo "servizio" non e' un corso nemmeno per Google: la
         # pagina la mostra nella sezione dei servizi, e il dato dice lo stesso.
-        graph.append({'@type': 'Service' if _e_servizio(c) else 'Course',
+        graph.append({'@type': 'Course' if _e_corso(c) else 'Service',
                       'name': c['nome'],
                       'provider': {'@type': 'Organization', 'name': org},
                       'description': (c['descr'] or '').strip()
@@ -2604,7 +2607,8 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # e il JSON-LD «Course» parlano dei soli corsi; i dati della realta' (il
     # riquadro, gli eventi) di tutto. Vedi scrivi_servizi().
     servizi = [c for c in corsi_org if _e_servizio(c)]
-    corsi_veri = [c for c in corsi_org if not _e_servizio(c)]
+    centri = [c for c in corsi_org if _e_centro(c)]
+    corsi_veri = [c for c in corsi_org if _e_corso(c)]
     # Una realta' di soli servizi non ha corsi da contare: il testo e il title
     # li prendono dai servizi, che sono le uniche righe che ha.
     base = corsi_veri or corsi_org
@@ -2639,6 +2643,11 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     claim = (info.get('occhiello') or '').strip()
     if claim:
         occhiello = f'<p class="cr-sub">{G.esc(claim)}</p>'
+    elif not corsi_veri and not servizi:
+        # Soli centri (20/11/2026): una societa' che da DAOP ha solo il suo
+        # centro estivo. Le stagioni come le scrive il downloader.
+        occhiello = (f'<p class="cr-sub">{G.esc(_cap(_stagioni_centri(centri)))} per bambini'
+                     f'{" " + G.esc(G.a_citta(citta).strip()) if citta else ""}</p>')
     elif not corsi_veri:
         # Soli servizi: la riga della pagina servizi, non «Corsi di …».
         occhiello = (f'<p class="cr-sub">{G.esc(_cap(_e(_uniche(_cat_foglia(c).lower() for c in servizi))))}'
@@ -2656,6 +2665,9 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     torna = href_corsi_prov(p_torna) if p_torna else '/corsi.html'
     if corsi_veri:
         titolo = f"{org}: {v.cp}{di_att} per bambini{G.a_citta(citta)} | DAOP"
+    elif not servizi:
+        titolo = (f"{org}: {_stagioni_centri(centri)} per bambini"
+                  f"{G.a_citta(citta)} | DAOP")
     else:
         disc_sv = _uniche(_cat_foglia(c).lower() for c in servizi)
         titolo = (f"{org}: {_e(disc_sv[:2]) or 'servizi'} per le famiglie"
@@ -2668,8 +2680,14 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
         if servizi:
             intro += (f" Offre anche {_n(len(servizi), 'servizio', 'servizi')} "
                       f"su prenotazione, nella sezione qui sotto.")
-    else:
+    elif servizi:
         intro = testo_servizi(org, servizi, info)
+    else:
+        intro = (f"{org} organizza {_stagioni_centri(centri)} per bambini"
+                 f"{G.a_citta(citta)}: date, età, orari e costi qui sotto.")
+    if centri and (corsi_veri or servizi):
+        intro += (f" Organizza anche {_stagioni_centri(centri)}, "
+                  f"nella sezione qui sotto.")
     descr = G.trunc(intro, 300)
     # IN INDICE SE LA SOCIETA' HA CONFERMATO, una per una. L'interruttore globale
     # resta padrone dell'hub (/corsi.html, la nav, le quattro porte): quella e'
@@ -2726,6 +2744,17 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
         blocco_corsi = (f'  <h2 class="cr-h" id="i-corsi">{_cap(v.i_corsi() if len(corsi_veri) > 1 else v.il_corso())} di {G.esc(org)}</h2>\n'
                         f'  <div class="events-list">\n{schede}\n  </div>')
     blocco_sv, css_sv = '', ''
+    # I CENTRI (20/11/2026): la loro sezione, con le schede dei servizi (lo
+    # stesso CSS) e il link alla pagina della stagione.
+    blocco_ce = ''
+    if centri:
+        css_sv = SERVIZI_CSS
+        schede_ce = sorted(centri, key=lambda c: G.pdate(c.get('dal')) or datetime.date.max)
+        blocco_ce = ('  <section id="centri" aria-labelledby="centri-h">\n'
+                     f'  <h2 class="cr-h" id="centri-h">{G.esc(_cap(_stagioni_centri(centri)))}</h2>\n'
+                     '  <div class="sv-lista">\n'
+                     + "\n".join(_card_centro(c, org) for c in schede_ce)
+                     + '\n  </div>\n  </section>')
     if servizi:
         # L'id e' "servizi" e non "i-servizi": e' l'indirizzo che si scrive a
         # mano e che /servizi/ usa per mandare qui (/corsi/<slug>.html#servizi).
@@ -2747,6 +2776,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
     # Un <div role="navigation"> e non un <nav>: vedi porte_province().
     porte_pagina = [(f, t, n) for f, t, n in (
         ('#i-corsi', 'Corsi', len(corsi_veri)), ('#servizi', 'Servizi', len(servizi)),
+        ('#centri', 'Centri', len(centri)),
         ('#gli-eventi', 'Eventi', len(ev))) if n]
     salta = ''
     if len(porte_pagina) > 1:
@@ -2807,7 +2837,7 @@ def pagina_realta(org, corsi_org, info, css, nav, foot):
   {'<h2 class="cr-h">Informazioni e contatti</h2>' if riquadro else ''}
   {riquadro}
   {salta}
-{chr(10).join(b for b in (blocco_corsi, blocco_sv) if b)}
+{chr(10).join(b for b in (blocco_corsi, blocco_sv, blocco_ce) if b)}
 {blocco_ev}
 {blocco_faq(faq_realta(org, corsi_veri, info), f'Domande frequenti su {org}')}
   <div class="cr-torna" role="navigation" aria-label="Corsi e servizi">
@@ -2862,6 +2892,23 @@ def _e_servizio(c):
     return (c.get('tipo') or '').strip().lower() in TIPI_SERVIZIO
 
 
+# I CENTRI (20/11/2026). Tipo "centro" = un centro estivo, invernale o
+# pasquale, caricato dalla finestra con «Sono CENTRI» (solo chi paga). La sua
+# pagina e' centri-*.html (genera_centri.py); qui sta solo sulla pagina della
+# societa', nella sua sezione, e MAI fra i corsi: ha due date e non una
+# stagione, e in corsi.html sarebbe un corso che dura due settimane.
+TIPI_CENTRO = ('centro', 'centri')
+
+
+def _e_centro(c):
+    return (c.get('tipo') or '').strip().lower() in TIPI_CENTRO
+
+
+def _e_corso(c):
+    """Una riga che e' un corso vero: ne' servizio ne' centro."""
+    return not _e_servizio(c) and not _e_centro(c)
+
+
 def testo_servizi(org, servizi, info):
     """Il paragrafo che apre la pagina servizi: cosa, dove, per che eta'.
     Come testo_realta(), dice solo quello che i dati sanno - niente giorni,
@@ -2908,6 +2955,68 @@ SERVIZI_CSS = """
 .sv-altro{margin:12px 0 0;font-size:.92rem}
 .sv-altro a,.sv-torna a{color:var(--navy,#2d4a5c);font-weight:600}
 """
+
+
+# Le pagine dei centri per stagione, come le scrive genera_centri.py: la
+# colonna Stagione la scrive il downloader (STAGIONE_DEI_MESI_CENTRI).
+PAGINE_CENTRI = {'estivi': ('centri estivi', '/centri-estivi.html'),
+                 'invernali': ('centri invernali', '/centri-invernali.html'),
+                 'pasquali': ('centri pasquali', '/centri-pasquali.html')}
+
+
+def _stagioni_centri(centri):
+    """'centri estivi e invernali' dalle stagioni delle righe."""
+    st = [k for k in PAGINE_CENTRI
+          if any(k in (c.get('stagione') or '').lower() for c in centri)]
+    if not st:
+        return 'centri per le vacanze'
+    agg = [PAGINE_CENTRI[k][0].split()[1] for k in st]
+    return 'centri ' + (agg[0] if len(agg) == 1 else ', '.join(agg[:-1]) + ' e ' + agg[-1])
+
+
+def _card_centro(c, org):
+    """Una scheda centro sulla pagina della societa' (20/11/2026). Le classi
+    sono quelle di _card_servizio: stessa forma, altre domande."""
+    dati = []
+    eta = eta_testo(c)
+    if eta:
+        dati.append(('Per chi', G.esc(eta)))
+    di, df = G.pdate(c.get('dal')), G.pdate(c.get('scadenza'))
+    quando = (c.get('periodo') or '').strip()
+    if not quando and di:
+        quando = (f"dal {di:%d/%m/%Y}" + (f" al {df:%d/%m/%Y}" if df and df != di else ''))
+    if quando:
+        dati.append(('Quando', G.esc(quando)))
+    if c.get('giorni'):
+        dati.append(('Orari', G.esc(c['giorni'])))
+    dove = ', '.join(_uniche([c.get('sede'), c.get('citta')]))
+    if dove:
+        dati.append(('Dove', G.esc(dove)))
+    if c.get('prezzo'):
+        dati.append(('Costo', G.esc(c['prezzo'])))
+    if c.get('iscrizioni'):
+        dati.append(('Iscrizioni', G.esc(c['iscrizioni'])))
+    loc = ''
+    if c.get('loc'):
+        mini, grande = G.loc_path(c['loc'], mini=True), G.loc_path(c['loc'])
+        if mini and grande:
+            loc = (f'<a class="sv-loc" href="{G.esc(grande)}" data-locandina '
+                   f'target="_blank" rel="noopener" aria-label="Locandina di '
+                   f'{G.esc(c["nome"])}"><img src="{G.esc(mini)}" alt="" '
+                   f'width="84" height="84" loading="lazy" decoding="async"></a>')
+    st = next((v for k, v in PAGINE_CENTRI.items()
+               if k in (c.get('stagione') or '').lower()), None)
+    altri = (f'<p class="sv-descr"><a href="{st[1]}">Tutti i {st[0]}</a></p>'
+             if st else '')
+    return (f'<article class="sv-card" id="c-{G.slugify(c.get("codice") or c["nome"])}" '
+            f'data-org="{slug_realta(org)}" data-org-nome="{G.esc(org)}" '
+            f'data-codice="{G.esc(_id_corso(c))}">{loc}<div class="sv-body">'
+            f'<h3 class="sv-nome">{G.esc(c["nome"])}</h3>'
+            + ('<dl class="sv-dati">' + ''.join(f'<dt>{k}</dt><dd>{v}</dd>'
+                                                for k, v in dati) + '</dl>'
+               if dati else '')
+            + (f'<p class="sv-descr">{G.esc(c["descr"])}</p>' if c.get('descr') else '')
+            + altri + '</div></article>')
 
 
 def _card_servizio(c, org, info):
@@ -3559,7 +3668,7 @@ def scrivi_servizi(gruppi, realta, css, nav, foot, anteprime=()):
         servizi = [c for c in corsi_org if _e_servizio(c)]
         if not servizi:
             continue
-        altri = [c for c in corsi_org if not _e_servizio(c)]
+        altri = [c for c in corsi_org if _e_corso(c)]
         os.makedirs(dest, exist_ok=True)
         f = f"{slug}.html"
         vive.add(f)
@@ -5821,7 +5930,8 @@ def main():
     # che parla della societa' intera (le sue pagine, /servizi/); `corsi`, da qui
     # in giu', e' quello che si conta e che va negli elenchi dei corsi.
     tutte = corsi
-    corsi = [c for c in tutte if not _e_servizio(c)]
+    # E i CENTRI (20/11/2026): stanno in centri-*.html, non fra i corsi.
+    corsi = [c for c in tutte if _e_corso(c)]
     # Il proprio numero prima di render(), e DOPO il taglio: la riga delle
     # quattro porte lo rilegge, e deve contare i corsi che si vedono davvero.
     G.conteggio_scrivi('corsi', len(corsi))
