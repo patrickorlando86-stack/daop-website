@@ -723,8 +723,26 @@
 .ce-contatti{margin:10px 0 0;font-size:.9rem;opacity:.85}
 .ce-past-h{margin:2.4em 0 .2em;font-size:1.25rem}
 .ce-past-note{opacity:.8;margin:0 0 6px}
-.ce-guide h2{margin:2em 0 .5em}
-.ce-guide h3{margin:1.6em 0 .35em;font-size:1.05rem}
+.ce-guide h2{margin:2em 0 .3em}
+.ce-guide>p{margin:0 0 10px;opacity:.85}
+/* La guida a domande chiuse, come le domande dei corsi (20/11/2026). */
+.ce-faq{border-bottom:1px solid rgba(0,0,0,.1)}
+.ce-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;min-height:48px;padding:6px 0}
+.ce-faq summary::-webkit-details-marker{display:none}
+.ce-faq summary::after{content:"+";font-size:1.4rem;font-weight:300;opacity:.6}
+.ce-faq[open] summary::after{content:"\2212"}
+.ce-faq h3{margin:0;font-size:1.02rem}
+.ce-faq-a{padding:0 0 14px}
+.ce-faq-a p:last-child,.ce-faq-a ul:last-child{margin-bottom:0}
+.ce-intro{margin:6px 0 18px;font-size:1.02rem;line-height:1.6}
+.ce-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;font-size:.92rem}
+.ce-prov-t{color:#555;font-weight:600}
+.ce-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;border:1px solid #cfe1f3;
+  text-decoration:none;font-weight:600}
+.ce-prov a:hover{background:#dcebf9}
+.ce-prov small{font-weight:500;opacity:.8}
 .ce-guide p,.ce-guide li{line-height:1.7}
 .ce-guide ul{padding-left:1.15em}
 /* Il richiamo alla guida in PDF. <div> e non <section>: section{padding:100px
@@ -833,8 +851,7 @@
     <span class="section-label">Alessandria · Asti · Cuneo · Famiglie</span>
     <h1>Centri Invernali <em>Alessandria, Asti e Cuneo</em></h1>
     <p>I centri per bambini attivi durante le vacanze di Natale e le chiusure scolastiche invernali in Alessandria, Asti e Cuneo, con età,
-    orari e costi. Sotto, la guida per scegliere:
-    quando ci si iscrive, cosa chiedere prima e quali documenti servono.</p>
+    orari e costi.</p>
     <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi qualcosa per oggi? Vedi le <a href="/eventi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">sagre e gli eventi in Alessandria, Asti e Cuneo</a>.</p>
   </div>
 </header>
@@ -845,7 +862,8 @@
        non si tolgono e non si annidano. Fuori restano nav, footer, filtri di
        stagione e i bottoni: in una guida stampata non servono a niente. -->
   
-    <div class="ev-toolbar">
+    <p class="ce-intro">1 centro aperto o in arrivo in 1 comune. Tocca un centro per date, orari, prezzi e contatti.</p>
+  <div class="ev-toolbar">
     <div class="ev-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="ce-q" placeholder="Cerca un centro, un paese, un gestore…" aria-label="Cerca fra i centri"></div>
     <select class="ev-select" id="ce-prov" aria-label="Filtra per provincia"><option value="all">Tutte le province</option><option value="cn">Cuneo</option></select>
     <select class="ev-select" id="ce-city" aria-label="Filtra per città"><option value="all">Tutte le città</option><option value="racconigi">Racconigi</option></select>
@@ -877,11 +895,9 @@
   
 <section class="ce-guide">
   <h2>Come scegliere un centro invernale</h2>
-  <p>La scelta si gioca su poche cose concrete, e quasi tutte si chiariscono con
-  una telefonata prima di iscrivere. Ecco cosa conviene chiedere.</p>
-
-  <h3>Qui il problema non è scegliere, è trovare</h3>
-  <p>È la differenza vera con l'estate, e conviene dirla subito: i centri
+  <p>Le domande da fare prima di iscrivere: tocca quella che ti serve.</p>
+  <details class="ce-faq"><summary><h3>Qui il problema non è scegliere, è trovare</h3></summary>
+  <div class="ce-faq-a"><p>È la differenza vera con l'estate, e conviene dirla subito: i centri
   invernali sono <strong>pochi</strong>. La scuola chiude per due settimane, i
   genitori lavorano quasi tutti fino al 24 e ricominciano il 7, e le strutture
   che aprono in quei giorni si contano sulle dita. Non è una scelta fra dieci
@@ -896,18 +912,16 @@
   <p>Sugli <strong>orari</strong> vale lo stesso avvertimento: d'inverno molti
   centri fanno solo la mattina, dalle 8 alle 13, senza mensa. Se lavorate a
   tempo pieno una mattina non risolve la giornata, e conviene saperlo prima di
-  contare su quel posto.</p>
-
-  <h3>Quando ci si iscrive</h3>
-  <p>Qui il calendario è stretto: le proposte escono
+  contare su quel posto.</p></div></details>
+  <details class="ce-faq"><summary><h3>Quando ci si iscrive</h3></summary>
+  <div class="ce-faq-a"><p>Qui il calendario è stretto: le proposte escono
   fra ottobre e novembre e si riempiono in fretta, perché sono poche e i posti
   pochi. Non aspettate il volantino — a ottobre conviene chiedere direttamente
   all'oratorio, alla ludoteca e all'ufficio scuola del Comune se organizzano
   qualcosa durante le vacanze, perché spesso si decide tardi e si annuncia solo
-  su un gruppo WhatsApp o una bacheca.</p>
-
-  <h3>Le domande che contano</h3>
-  <ul>
+  su un gruppo WhatsApp o una bacheca.</p></div></details>
+  <details class="ce-faq"><summary><h3>Le domande che contano</h3></summary>
+  <div class="ce-faq-a"><ul>
     <li><strong>Rapporto educatori/bambini.</strong> È il dato che più incide
     sulla qualità della giornata. Chiedete quanti adulti ci sono per gruppo e
     come sono divise le fasce d'età.</li>
@@ -921,19 +935,17 @@
     <li><strong>Se nevica o la struttura chiude.</strong> A dicembre e gennaio capita: chiedete se avvisano la sera prima, se recuperano la giornata e chi tiene i bambini se chiudono all'improvviso.</li>
     <li><strong>Cosa succede se il bambino si assenta.</strong> Se la quota si
     recupera o si perde, in caso di malattia o di cambio programma.</li>
-  </ul>
-
-  <h3>Cosa serve per iscriversi</h3>
-  <p>Di norma servono il modulo di iscrizione firmato da chi esercita la
+  </ul></div></details>
+  <details class="ce-faq"><summary><h3>Cosa serve per iscriversi</h3></summary>
+  <div class="ce-faq-a"><p>Di norma servono il modulo di iscrizione firmato da chi esercita la
   responsabilità genitoriale, i recapiti di più di una persona reperibile in
   caso di necessità, l'elenco di eventuali allergie o terapie in corso e le
   deleghe per chi può ritirare il bambino. Diverse strutture chiedono anche un
   certificato medico: verificate per tempo, perché ottenerlo può richiedere
   giorni. I documenti richiesti cambiano da gestore a gestore, quindi fatevi
-  dare l'elenco completo al momento della prenotazione.</p>
-
-  <h3>Sui costi</h3>
-  <p>Il prezzo dipende soprattutto dalla durata della giornata, dalla presenza
+  dare l'elenco completo al momento della prenotazione.</p></div></details>
+  <details class="ce-faq"><summary><h3>Sui costi</h3></summary>
+  <div class="ce-faq-a"><p>Il prezzo dipende soprattutto dalla durata della giornata, dalla presenza
   del pranzo e dal numero di uscite o gite incluse. Confrontate a parità di
   condizioni: una quota più bassa senza mensa e con uscita alle 13 non è più
   conveniente di una più alta a tempo pieno. Chiedete sempre cosa è incluso e
@@ -941,25 +953,27 @@
   <p>Informatevi anche su riduzioni per più figli iscritti, tariffe agevolate
   per residenti, contributi comunali e sulle misure di sostegno alle famiglie
   attive nell'anno in corso: cambiano spesso, e vale la pena chiedere
-  direttamente al gestore e al proprio Comune quali siano disponibili.</p>
-
-  <h3>Bambini con esigenze particolari</h3>
-  <p>Se vostro figlio ha una disabilità, una patologia da gestire durante la
+  direttamente al gestore e al proprio Comune quali siano disponibili.</p></div></details>
+  <details class="ce-faq"><summary><h3>Bambini con esigenze particolari</h3></summary>
+  <div class="ce-faq-a"><p>Se vostro figlio ha una disabilità, una patologia da gestire durante la
   giornata o semplicemente fatica nei gruppi grandi, parlatene prima
   dell'iscrizione e non il primo giorno. Chiedete se è previsto un educatore di
   supporto, come viene organizzato e con quale preavviso va richiesto: spesso
-  dipende da finanziamenti che vanno attivati per tempo.</p>
-
-  <h3>Il primo giorno</h3>
-  <p>Su una o due settimane l'inserimento graduale non
+  dipende da finanziamenti che vanno attivati per tempo.</p></div></details>
+  <details class="ce-faq"><summary><h3>Il primo giorno</h3></summary>
+  <div class="ce-faq-a"><p>Su una o due settimane l'inserimento graduale non
   esiste: si comincia e basta, e se il bambino non conosce nessuno vale la pena
   saperlo prima. Chiedete se il gruppo è lo stesso dell'estate — spesso sì, ed è
   un vantaggio — e preparate lo zaino per stare al chiuso: cambio, scarpe da
-  ginnastica pulite da usare dentro, e qualcosa di caldo per gli spostamenti.</p>
+  ginnastica pulite da usare dentro, e qualcosa di caldo per gli spostamenti.</p></div></details>
 </section>
 
   <!-- GUIDA-PDF:END -->
-  
+    <div class="ce-guidapdf">
+    <h2>Portala con te</h2>
+    <p>La stessa guida in un foglio solo, con l'elenco completo e le date: da stampare o da guardare insieme, anche senza connessione.</p>
+    <p><a class="btn btn-teal" href="/guide/invernali-2026.pdf" data-guida="invernali">Scarica la guida 2026 (PDF, 116 kB)</a></p>
+  </div>
   <h2>Le altre vacanze</h2><div class="com-link"><a href="/centri-estivi.html">Centri Estivi d&#x27;estate</a><a href="/centri-pasquali.html">Centri Pasquali a Pasqua</a></div>
   <section class="eco" aria-labelledby="eco-t"><h2 class="eco-t" id="eco-t">Cerchi un&#x27;altra cosa?</h2><div class="eco-g"><a class="eco-c" href="/eventi.html"><span class="eco-n">Eventi e sagre</span><span class="eco-d">435 eventi in agenda, aggiornati ogni notte</span></a><a class="eco-c" href="/luoghi.html"><span class="eco-n">Luoghi per famiglie</span><span class="eco-d">712 posti scelti a mano, dal parco al museo</span></a><a class="eco-c" href="/corsi.html"><span class="eco-n">Corsi per bambini</span><span class="eco-d">129 corsi, con l&#x27;età e la prova gratuita</span></a></div></section>
 </article>

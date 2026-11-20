@@ -723,8 +723,26 @@
 .ce-contatti{margin:10px 0 0;font-size:.9rem;opacity:.85}
 .ce-past-h{margin:2.4em 0 .2em;font-size:1.25rem}
 .ce-past-note{opacity:.8;margin:0 0 6px}
-.ce-guide h2{margin:2em 0 .5em}
-.ce-guide h3{margin:1.6em 0 .35em;font-size:1.05rem}
+.ce-guide h2{margin:2em 0 .3em}
+.ce-guide>p{margin:0 0 10px;opacity:.85}
+/* La guida a domande chiuse, come le domande dei corsi (20/11/2026). */
+.ce-faq{border-bottom:1px solid rgba(0,0,0,.1)}
+.ce-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;min-height:48px;padding:6px 0}
+.ce-faq summary::-webkit-details-marker{display:none}
+.ce-faq summary::after{content:"+";font-size:1.4rem;font-weight:300;opacity:.6}
+.ce-faq[open] summary::after{content:"\2212"}
+.ce-faq h3{margin:0;font-size:1.02rem}
+.ce-faq-a{padding:0 0 14px}
+.ce-faq-a p:last-child,.ce-faq-a ul:last-child{margin-bottom:0}
+.ce-intro{margin:6px 0 18px;font-size:1.02rem;line-height:1.6}
+.ce-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;font-size:.92rem}
+.ce-prov-t{color:#555;font-weight:600}
+.ce-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;border:1px solid #cfe1f3;
+  text-decoration:none;font-weight:600}
+.ce-prov a:hover{background:#dcebf9}
+.ce-prov small{font-weight:500;opacity:.8}
 .ce-guide p,.ce-guide li{line-height:1.7}
 .ce-guide ul{padding-left:1.15em}
 /* Il richiamo alla guida in PDF. <div> e non <section>: section{padding:100px
@@ -812,8 +830,7 @@
     <span class="section-label">Alessandria · Asti · Cuneo · Famiglie</span>
     <h1>Centri Estivi <em>Alessandria, Asti e Cuneo</em></h1>
     <p>I centri per bambini attivi durante giugno, luglio e agosto in Alessandria, Asti e Cuneo, con età,
-    orari e costi. Sotto, la guida per scegliere:
-    quando ci si iscrive, cosa chiedere prima e quali documenti servono.</p>
+    orari e costi.</p>
     <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi qualcosa per oggi? Vedi le <a href="/eventi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">sagre e gli eventi in Alessandria, Asti e Cuneo</a>.</p>
   </div>
 </header>
@@ -828,11 +845,9 @@
   
 <section class="ce-guide">
   <h2>Come scegliere un centro estivo</h2>
-  <p>La scelta si gioca su poche cose concrete, e quasi tutte si chiariscono con
-  una telefonata prima di iscrivere. Ecco cosa conviene chiedere.</p>
-
-  <h3>Tre mesi non si comprano tutti insieme</h3>
-  <p>L'estate è lunga e quasi nessuno la copre per intero: si mettono insieme
+  <p>Le domande da fare prima di iscrivere: tocca quella che ti serve.</p>
+  <details class="ce-faq"><summary><h3>Tre mesi non si comprano tutti insieme</h3></summary>
+  <div class="ce-faq-a"><p>L'estate è lunga e quasi nessuno la copre per intero: si mettono insieme
   due settimane qui, una là, i nonni, le ferie. Conviene ragionare a blocchi e
   partire da quelli che <em>devono</em> essere coperti — le settimane in cui
   lavorate entrambi e non c'è nessun altro — e riempire il resto dopo.</p>
@@ -840,18 +855,16 @@
   <strong>il caldo</strong>. Chiedete dove stanno i bambini fra le due e le
   quattro del pomeriggio, se ci sono spazi ombreggiati o climatizzati, e quanta
   acqua è prevista. Un centro tutto all'aperto a luglio in pianura è una cosa
-  diversa da uno con la palestra e il cortile alberato.</p>
-
-  <h3>Quando ci si iscrive</h3>
-  <p>Le iscrizioni si aprono di solito fra marzo e
+  diversa da uno con la palestra e il cortile alberato.</p></div></details>
+  <details class="ce-faq"><summary><h3>Quando ci si iscrive</h3></summary>
+  <div class="ce-faq-a"><p>Le iscrizioni si aprono di solito fra marzo e
   maggio, cioè con mesi di anticipo. I posti nelle strutture più richieste
   finiscono nelle prime settimane, quindi conviene informarsi presto anche
   senza aver deciso: quasi tutti i gestori permettono di prenotare le settimane
   singolarmente e chiedono un acconto per bloccarle. Se lavorate entrambi,
-  partite dal calendario delle vostre ferie e non da quello dei centri.</p>
-
-  <h3>Le domande che contano</h3>
-  <ul>
+  partite dal calendario delle vostre ferie e non da quello dei centri.</p></div></details>
+  <details class="ce-faq"><summary><h3>Le domande che contano</h3></summary>
+  <div class="ce-faq-a"><ul>
     <li><strong>Rapporto educatori/bambini.</strong> È il dato che più incide
     sulla qualità della giornata. Chiedete quanti adulti ci sono per gruppo e
     come sono divise le fasce d'età.</li>
@@ -865,19 +878,17 @@
     <li><strong>In caso di maltempo.</strong> Dove si sta e cosa si fa quando non si può uscire: è la differenza fra una bella settimana e una lunga.</li>
     <li><strong>Cosa succede se il bambino si assenta.</strong> Se la quota si
     recupera o si perde, in caso di malattia o di cambio programma.</li>
-  </ul>
-
-  <h3>Cosa serve per iscriversi</h3>
-  <p>Di norma servono il modulo di iscrizione firmato da chi esercita la
+  </ul></div></details>
+  <details class="ce-faq"><summary><h3>Cosa serve per iscriversi</h3></summary>
+  <div class="ce-faq-a"><p>Di norma servono il modulo di iscrizione firmato da chi esercita la
   responsabilità genitoriale, i recapiti di più di una persona reperibile in
   caso di necessità, l'elenco di eventuali allergie o terapie in corso e le
   deleghe per chi può ritirare il bambino. Diverse strutture chiedono anche un
   certificato medico: verificate per tempo, perché ottenerlo può richiedere
   giorni. I documenti richiesti cambiano da gestore a gestore, quindi fatevi
-  dare l'elenco completo al momento della prenotazione.</p>
-
-  <h3>Sui costi</h3>
-  <p>Il prezzo dipende soprattutto dalla durata della giornata, dalla presenza
+  dare l'elenco completo al momento della prenotazione.</p></div></details>
+  <details class="ce-faq"><summary><h3>Sui costi</h3></summary>
+  <div class="ce-faq-a"><p>Il prezzo dipende soprattutto dalla durata della giornata, dalla presenza
   del pranzo e dal numero di uscite o gite incluse. Confrontate a parità di
   condizioni: una quota più bassa senza mensa e con uscita alle 13 non è più
   conveniente di una più alta a tempo pieno. Chiedete sempre cosa è incluso e
@@ -885,21 +896,19 @@
   <p>Informatevi anche su riduzioni per più figli iscritti, tariffe agevolate
   per residenti, contributi comunali e sulle misure di sostegno alle famiglie
   attive nell'anno in corso: cambiano spesso, e vale la pena chiedere
-  direttamente al gestore e al proprio Comune quali siano disponibili.</p>
-
-  <h3>Bambini con esigenze particolari</h3>
-  <p>Se vostro figlio ha una disabilità, una patologia da gestire durante la
+  direttamente al gestore e al proprio Comune quali siano disponibili.</p></div></details>
+  <details class="ce-faq"><summary><h3>Bambini con esigenze particolari</h3></summary>
+  <div class="ce-faq-a"><p>Se vostro figlio ha una disabilità, una patologia da gestire durante la
   giornata o semplicemente fatica nei gruppi grandi, parlatene prima
   dell'iscrizione e non il primo giorno. Chiedete se è previsto un educatore di
   supporto, come viene organizzato e con quale preavviso va richiesto: spesso
-  dipende da finanziamenti che vanno attivati per tempo.</p>
-
-  <h3>Il primo giorno</h3>
-  <p>Per i più piccoli, o alla prima esperienza fuori
+  dipende da finanziamenti che vanno attivati per tempo.</p></div></details>
+  <details class="ce-faq"><summary><h3>Il primo giorno</h3></summary>
+  <div class="ce-faq-a"><p>Per i più piccoli, o alla prima esperienza fuori
   casa, chiedete se è possibile un inserimento graduale: su tre mesi c'è tutto
   il tempo, ed è la cosa che fa la differenza fra una bella estate e due
   settimane di pianti. Nello zaino l'essenziale: cambio completo, borraccia,
-  cappellino, crema solare, e tutto marcato con nome e cognome.</p>
+  cappellino, crema solare, e tutto marcato con nome e cognome.</p></div></details>
 </section>
 
   <!-- GUIDA-PDF:END -->

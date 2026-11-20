@@ -518,8 +518,26 @@ CSS = """
 .ce-contatti{margin:10px 0 0;font-size:.9rem;opacity:.85}
 .ce-past-h{margin:2.4em 0 .2em;font-size:1.25rem}
 .ce-past-note{opacity:.8;margin:0 0 6px}
-.ce-guide h2{margin:2em 0 .5em}
-.ce-guide h3{margin:1.6em 0 .35em;font-size:1.05rem}
+.ce-guide h2{margin:2em 0 .3em}
+.ce-guide>p{margin:0 0 10px;opacity:.85}
+/* La guida a domande chiuse, come le domande dei corsi (20/11/2026). */
+.ce-faq{border-bottom:1px solid rgba(0,0,0,.1)}
+.ce-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;min-height:48px;padding:6px 0}
+.ce-faq summary::-webkit-details-marker{display:none}
+.ce-faq summary::after{content:"+";font-size:1.4rem;font-weight:300;opacity:.6}
+.ce-faq[open] summary::after{content:"\\2212"}
+.ce-faq h3{margin:0;font-size:1.02rem}
+.ce-faq-a{padding:0 0 14px}
+.ce-faq-a p:last-child,.ce-faq-a ul:last-child{margin-bottom:0}
+.ce-intro{margin:6px 0 18px;font-size:1.02rem;line-height:1.6}
+.ce-prov{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;font-size:.92rem}
+.ce-prov-t{color:#555;font-weight:600}
+.ce-prov a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 14px;
+  border-radius:999px;background:#eef5fc;color:#2c5d8f;border:1px solid #cfe1f3;
+  text-decoration:none;font-weight:600}
+.ce-prov a:hover{background:#dcebf9}
+.ce-prov small{font-weight:500;opacity:.8}
 .ce-guide p,.ce-guide li{line-height:1.7}
 .ce-guide ul{padding-left:1.15em}
 /* Il richiamo alla guida in PDF. <div> e non <section>: section{padding:100px
@@ -623,11 +641,7 @@ def guida(cfg):
     arriva ed e' la prima che indicizza Google. Le due voci `b_giornata` e
     `b_meteo` sono le domande dell'elenco che in stagioni diverse hanno risposte
     diverse: d'estate "quanto si sta fuori", d'inverno "cosa si fa dentro"."""
-    return f"""
-<section class="ce-guide">
-  <h2>Come scegliere un {cfg['singolare']}</h2>
-  <p>La scelta si gioca su poche cose concrete, e quasi tutte si chiariscono con
-  una telefonata prima di iscrivere. Ecco cosa conviene chiedere.</p>
+    corpo = f"""
 {cfg['specifico']}
 
   <h3>Quando ci si iscrive</h3>
@@ -679,8 +693,28 @@ def guida(cfg):
 
   <h3>Il primo giorno</h3>
   {cfg['p_primo_giorno']}
-</section>
 """
+    return (f'\n<section class="ce-guide">\n'
+            f'  <h2>Come scegliere un {cfg["singolare"]}</h2>\n'
+            f'  <p>Le domande da fare prima di iscrivere: tocca quella che ti '
+            f'serve.</p>\n{a_domande(corpo)}</section>\n')
+
+
+def a_domande(html):
+    """Ogni <h3> della guida diventa una domanda che si apre (20/11/2026).
+
+    Patrick: «la pagina ha troppo testo, devi farla come i corsi». La guida
+    erano ~760 parole su ~1000, aperte tutte sotto l'elenco. Il testo resta
+    TUTTO in pagina (e' quello che la tiene in indice nei mesi senza centri,
+    vedi in_iscrizioni) ma chiuso: si legge il titolo, si apre quello che serve.
+    L'<h3> resta dentro il <summary>: genera_pdf.sezioni() ci costruisce
+    l'indice del PDF, e documento() apre i <details> prima di stampare."""
+    pezzi = re.split(r'(<h3>.*?</h3>)', html, flags=re.S)
+    out = [pezzi[0].strip()] if pezzi[0].strip() else []
+    for i in range(1, len(pezzi), 2):
+        out.append(f'  <details class="ce-faq"><summary>{pezzi[i]}</summary>\n'
+                   f'  <div class="ce-faq-a">{pezzi[i + 1].strip()}</div></details>')
+    return '\n'.join(out) + '\n'
 
 
 def locandina(c):
@@ -1021,7 +1055,14 @@ def render(chiave, cfg, centri, css, nav, foot, porte_prov=()):
             f'{"".join(opt_city)}</select>\n'
             '  </div>\n'
             '  <div class="ev-viewbar"><p class="events-count" id="ce-count"></p></div>\n')
-        elenco = (toolbar + lista(attivi, active=True)
+        comuni = {cslug(c['citta']) for c in attivi if c['citta']}
+        numeri = (f'  <p class="ce-intro">{len(attivi)} '
+                  f'{"centro" if len(attivi) == 1 else "centri"} '
+                  f'{"aperto o in arrivo" if len(attivi) == 1 else "aperti o in arrivo"}'
+                  + (f' in {len(comuni)} {"comune" if len(comuni) == 1 else "comuni"}'
+                     if comuni else '')
+                  + '. Tocca un centro per date, orari, prezzi e contatti.</p>\n')
+        elenco = (numeri + toolbar + lista(attivi, active=True)
                   + '\n  <p class="events-empty" id="ce-empty">Nessun centro con questi '
                     'filtri. Prova a togliere qualche filtro.</p>')
         avviso = ''
@@ -1045,17 +1086,24 @@ def render(chiave, cfg, centri, css, nav, foot, porte_prov=()):
         titolo = ("Anche questi hanno aperto quest'anno" if attivi
                   else f"I centri dell'edizione {passati[-1]['d_end'].year}")
         elenco += (f'\n<h2 class="ce-past-h">{titolo}</h2>\n'
-                   f'<p class="ce-past-note">Le date sono quelle dell\'edizione conclusa: '
-                   f'servono a farsi un\'idea di chi organizza in zona, per quali età e a '
-                   f'quali prezzi. Verifica sempre con il gestore prima di contare su una '
-                   f'riapertura.</p>\n' + lista(passati))
+                   f'<p class="ce-past-note">Edizione conclusa: utile per sapere chi '
+                   f'organizza in zona. Verifica la riapertura con il gestore.</p>\n'
+                   + lista(passati))
 
     # Le porte verso le pagine per provincia, sopra l'elenco della generale.
+    # Le porte come nei corsi: chip col numero, non una riga di link lunghi.
     porte = ''
     if porte_prov and not padre:
-        porte = ('<div class="com-link" aria-label="Per provincia">'
-                 + ''.join(f'<a href="/{f}">{G.esc(cfg["h1"])} in provincia di '
-                           f'{G.esc(n)}</a>' for n, f in porte_prov)
+        per_nome = {}
+        for c in attivi:
+            nome_p = PROV_LABEL.get(c['prov'])
+            if nome_p:
+                per_nome[nome_p] = per_nome.get(nome_p, 0) + 1
+        porte = ('<div class="ce-prov" role="navigation" aria-label="Per provincia">'
+                 '<span class="ce-prov-t">Per provincia:</span> '
+                 + ' '.join(f'<a href="/{f}">{G.esc(n)}'
+                            + (f' <small>{per_nome[n]}</small>' if per_nome.get(n) else '')
+                            + '</a>' for n, f in porte_prov)
                  + '</div>')
     if padre:
         crumb = (f'<a href="/">Home</a> › <a href="/{padre["file"]}">'
@@ -1131,8 +1179,7 @@ def render(chiave, cfg, centri, css, nav, foot, porte_prov=()):
     <span class="section-label">{f"{PROV_LABEL[cfg['sigla']]} · Famiglie" if padre else ETICHETTA}</span>
     <h1>{G.esc(cfg['h1'])} <em>{cfg['h1_em']}</em></h1>
     <p>I centri per bambini attivi durante {cfg['periodo']} in {zona}, con età,
-    orari e costi{"" if padre else """. Sotto, la guida per scegliere:
-    quando ci si iscrive, cosa chiedere prima e quali documenti servono"""}.</p>
+    orari e costi.</p>
     <p style="margin-top:14px;font-size:0.95rem;opacity:0.9;">Cerchi qualcosa per oggi? Vedi le <a href="/eventi.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">sagre e gli eventi in {ZONA}</a>.</p>
   </div>
 </header>
