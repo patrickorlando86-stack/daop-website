@@ -5866,6 +5866,17 @@
     "pagina": true,
     "ultima": "2026-10-02"
    },
+   "non-sono-pronta-attraversare-piccoli-e-grandi-camb-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca ragazzi Emanuele Luzzati",
+    "manifest": "Novembre in biblioteca",
+    "nome": "Non sono pronta: attraversare piccoli e grandi cambiamenti - Racconti per crescere",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "origami-farfalla-casale-monferrato": {
     "anni": [
      2026
@@ -5931,6 +5942,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-27"
+   },
+   "un-cane-per-sorridere-interventi-assistiti-con-gli-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca ragazzi Emanuele Luzzati",
+    "manifest": "Novembre in biblioteca",
+    "nome": "Un cane per sorridere - Interventi Assistiti con gli Animali",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-26"
    },
    "un-mondo-di-cereali-casale-monferrato": {
     "anni": [
@@ -11174,6 +11196,17 @@
  },
  "gavi": {
   "eventi": {
+   "accensione-dell-albero-di-natale-pro-loco-di-gavi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico",
+    "manifest": "Mercatini di Natale 2026",
+    "nome": "Accensione dell'Albero di Natale - Pro Loco di Gavi",
+    "organizza": "Pro Loco di Gavi",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "falesia-in-festa-prova-gratuita-di-arrampicata-pro-gavi": {
     "anni": [
      2026
@@ -11195,6 +11228,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "mercatini-enogastronomici-artigianali-pro-loco-di-gavi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico",
+    "manifest": "Mercatini di Natale 2026",
+    "nome": "Mercatini Enogastronomici Artigianali - Pro Loco di Gavi",
+    "organizza": "Pro Loco di Gavi",
+    "pagina": true,
+    "ultima": "2026-12-08"
    }
   },
   "nome": "Gavi",
@@ -16322,6 +16366,17 @@
     "pagina": true,
     "ultima": "2026-11-14"
    },
+   "passeggiata-con-le-lanterne-per-famiglia-popcornki-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Melo",
+    "manifest": "Novi Kids Club",
+    "nome": "Passeggiata con le Lanterne per Famiglia - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "percorso-stregato-pasturana-horror": {
     "anni": [
      2026
@@ -16332,6 +16387,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "sabato-nella-natura-a-il-melo-popcornkids-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Melo",
+    "manifest": "Novi Kids Club",
+    "nome": "Sabato nella Natura a Il Melo - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
+   "sabato-nella-natura-popcornkids-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Melo",
+    "manifest": "Novi Kids Club",
+    "nome": "Sabato nella Natura - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "sagra-del-corzetto-settembre-pasturanese-pasturana": {
     "anni": [

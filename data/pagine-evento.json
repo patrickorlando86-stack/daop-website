@@ -547,7 +547,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 466,
+  "riga": 465,
   "slug": "a-trisobbio-c-e-gia-magia-di-natale",
   "updated": "2026-11-23"
  },
@@ -688,7 +688,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 439,
+  "riga": 438,
   "slug": "accendiamo-il-natale-facciamo-squadra-fraschetta-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -716,7 +716,7 @@
   "ora": "10:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 209,
+  "riga": 208,
   "slug": "accendiamo-rocchetta-rocchetta-tanaro",
   "updated": "2026-11-23"
  },
@@ -744,7 +744,7 @@
   "ora": "17:30",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 330,
+  "riga": 329,
   "slug": "accensione-albero-e-luci-di-natale-e-concerto-di-n-san-damiano-d-asti",
   "updated": "2026-11-23"
  },
@@ -775,6 +775,34 @@
   "riga": 411,
   "ritirata": "2026-11-16",
   "slug": "accensione-albero-e-luminarie-di-natale-citta-di-a-acqui-terme",
+  "updated": "2026-11-23"
+ },
+ "accensione-dell-albero-di-natale-pro-loco-di-gavi": {
+  "anchor": "ev-2026-12-08-accensione-dell-albero-di-natale-pro-loco-di-gavi",
+  "categoria": "Sagra & Festa",
+  "citta": "Gavi",
+  "consigliato": "No",
+  "d_end": "2026-12-08",
+  "d_start": "2026-12-08",
+  "descr": "Alle 17, durante i Mercatini di Natale, si accende l'albero di Natale nel centro storico di Gavi.",
+  "df": "08/12/2026",
+  "di": "08/12/2026",
+  "eta": "Tutte le età (famiglie)",
+  "festa": "natale",
+  "first_seen": "2026-11-23",
+  "indirizzo": "Centro storico, Gavi",
+  "last_seen": "2026-11-23",
+  "lat": "44.6887314",
+  "loc": "daop_alessandria_4035575899486481717.webp",
+  "lon": "8.8061512",
+  "luogo": "Centro storico",
+  "manifest": "Mercatini di Natale 2026",
+  "nome": "Accensione dell'Albero di Natale - Pro Loco di Gavi",
+  "ora": "17:00",
+  "prezzo": "Gratuito",
+  "prov": "AL",
+  "riga": 493,
+  "slug": "accensione-dell-albero-di-natale-pro-loco-di-gavi",
   "updated": "2026-11-23"
  },
  "accensione-dell-albero-di-natale-serravalle-design-serravalle-scrivia": {
@@ -830,7 +858,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 307,
+  "riga": 306,
   "slug": "accensione-dell-albero-di-sognacolori-valenza",
   "updated": "2026-11-23"
  },
@@ -887,7 +915,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 396,
+  "riga": 395,
   "slug": "accensione-delle-luci-di-natale-vidalegra-aps-predosa",
   "updated": "2026-11-23"
  },
@@ -915,7 +943,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 261,
+  "riga": 260,
   "slug": "accensione-delle-luminarie-quartiere-cristo-alessandria",
   "updated": "2026-11-23"
  },
@@ -1169,7 +1197,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 234,
+  "riga": 233,
   "slug": "agri-pino-un-maxi-albero-di-natale-fatto-di-tratto-priocca",
   "updated": "2026-11-23"
  },
@@ -1337,7 +1365,7 @@
   "ora": "15:00-20:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 339,
+  "riga": 338,
   "slug": "al-mercato-di-natale-eo-arte-asti",
   "updated": "2026-11-23"
  },
@@ -1505,7 +1533,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 302,
+  "riga": 301,
   "slug": "alice-nel-paese-delle-meraviglie-teatro-alfieri-asti",
   "updated": "2026-11-23"
  },
@@ -1702,7 +1730,7 @@
   "ora": "14:30",
   "prezzo": "A offerta libera",
   "prov": "AL",
-  "riga": 406,
+  "riga": 405,
   "slug": "alla-scoperta-degli-animali-con-le-piume-e-non-sol-montemarzino",
   "updated": "2026-11-23"
  },
@@ -2186,7 +2214,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 179,
+  "riga": 178,
   "slug": "andrzejki-la-vigilia-di-sant-andrea-associazione-i-alessandria",
   "updated": "2026-11-23"
  },
@@ -2241,7 +2269,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 153,
+  "riga": 152,
   "slug": "animazioni-natalizie-per-bambini-san-damiano-d-asti",
   "updated": "2026-11-23"
  },
@@ -2749,7 +2777,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 303,
+  "riga": 302,
   "slug": "arlecchino-colombina-e-la-festa-da-ballo-teatro-ci-tortona",
   "updated": "2026-11-23"
  },
@@ -2778,7 +2806,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 304,
+  "riga": 303,
   "slug": "arlecchino-e-la-luna-nel-sacco-teatro-civico-torto-tortona",
   "updated": "2026-11-23"
  },
@@ -2916,7 +2944,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 395,
+  "riga": 394,
   "slug": "arriva-la-cassetta-della-posta-di-babbo-natale-vid-predosa",
   "updated": "2026-11-23"
  },
@@ -2973,7 +3001,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 267,
+  "riga": 266,
   "slug": "arrivo-della-befana-con-caramelle-e-sorprese-alessandria",
   "updated": "2026-11-23"
  },
@@ -3031,7 +3059,7 @@
   "ora": "14:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 345,
+  "riga": 344,
   "slug": "arrivo-di-babbo-natale-e-accensione-albero-di-nata-canale",
   "updated": "2026-11-23"
  },
@@ -3171,7 +3199,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 188,
+  "riga": 187,
   "slug": "aspettando-babbo-natale-letture-natalizie-e-trucca-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -3282,7 +3310,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 285,
+  "riga": 284,
   "slug": "aspettando-il-natale-a-sommariva-perno-24-tappe-co",
   "updated": "2026-11-23"
  },
@@ -3310,7 +3338,7 @@
   "ora": "15:15-16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 284,
+  "riga": 283,
   "slug": "aspettando-il-natale-a-sommariva-perno-ritiro-pass",
   "updated": "2026-11-23"
  },
@@ -3339,7 +3367,7 @@
   "ora": "15:00",
   "prezzo": "7 euro sia adulti che bambini",
   "prov": "CN",
-  "riga": 434,
+  "riga": 433,
   "slug": "aspettando-il-natale-al-museo-ferroviario-piemonte-savigliano",
   "updated": "2026-11-23"
  },
@@ -3481,7 +3509,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 461,
+  "riga": 460,
   "slug": "aspettando-natale-in-fattoria-castelnuovo-scrivia",
   "updated": "2026-11-23"
  },
@@ -3990,7 +4018,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 438,
+  "riga": 437,
   "slug": "babbo-natale-arriva-in-vespa-vespa-club-castellazz-castellazzo-bormida",
   "updated": "2026-11-23"
  },
@@ -4018,7 +4046,7 @@
   "ora": "09:30-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 366,
+  "riga": 365,
   "slug": "babbo-natale-bovesano-la-sporta",
   "updated": "2026-11-23"
  },
@@ -4047,7 +4075,7 @@
   "ora": "10:30-12:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 408,
+  "riga": 407,
   "slug": "babbo-natale-e-qua-yo-yo-active-play-alessandria",
   "updated": "2026-11-23"
  },
@@ -4131,7 +4159,7 @@
   "ora": "17:00",
   "prezzo": "5 euro",
   "prov": "AL",
-  "riga": 292,
+  "riga": 291,
   "slug": "balloons-adventures-teatro-marenco-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -4187,7 +4215,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 137,
+  "riga": 136,
   "slug": "bancarelle-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -4298,7 +4326,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 362,
+  "riga": 361,
   "slug": "basta-ansia-in-cartella-genitori-in-gioco-pocapaglia",
   "updated": "2026-11-23"
  },
@@ -4548,7 +4576,7 @@
   "ora": "15:30",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 160,
+  "riga": 159,
   "slug": "benvenuti-al-centro-per-le-famiglie-centro-per-le-asti",
   "updated": "2026-11-23"
  },
@@ -4915,7 +4943,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 144,
+  "riga": 143,
   "slug": "bimbe-e-bimbi-di-tassarolo-speciale-natale-scuola",
   "updated": "2026-11-23"
  },
@@ -4971,7 +4999,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 260,
+  "riga": 259,
   "slug": "biodiversita-delle-api-lettura-laboratorio-e-arnia-ovada",
   "updated": "2026-11-23"
  },
@@ -5251,7 +5279,7 @@
   "ora": "18:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 467,
+  "riga": 466,
   "slug": "brindisi-natalizio-con-il-malabrocca-fiab-tortona",
   "updated": "2026-11-23"
  },
@@ -5390,7 +5418,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 246,
+  "riga": 245,
   "slug": "buon-natale-orso-alba",
   "updated": "2026-11-23"
  },
@@ -5612,7 +5640,7 @@
   "ora": "15:00-16:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 193,
+  "riga": 192,
   "slug": "caccia-al-presepe-e-premiazione-cooperativa-second-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -5668,7 +5696,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 372,
+  "riga": 371,
   "slug": "caccia-al-tesoro-dei-3-re-magi-cuneo",
   "updated": "2026-11-23"
  },
@@ -5808,7 +5836,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 460,
+  "riga": 459,
   "slug": "caffe-e-laboratori-creativi-popcornkids-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -5866,7 +5894,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 208,
+  "riga": 207,
   "slug": "camminata-dei-babbi-natale-dell-avis-valfenera",
   "updated": "2026-11-23"
  },
@@ -5895,7 +5923,7 @@
   "ora": "14:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 197,
+  "riga": 196,
   "slug": "camminata-della-befana-associazione-camminare-in-c-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -6035,7 +6063,7 @@
   "ora": "14:30",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 192,
+  "riga": 191,
   "slug": "camminata-tra-piloni-votivi-e-presepi-compagnia-de-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -6120,7 +6148,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 195,
+  "riga": 194,
   "slug": "cantando-sulle-vie-del-presepe-camminata-musicale-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -6177,7 +6205,7 @@
   "ora": "16:00",
   "prezzo": "4,50 euro",
   "prov": "AL",
-  "riga": 305,
+  "riga": 304,
   "slug": "cappuccetto-rosso-e-il-lupo-solitario-teatro-comun-ovada",
   "updated": "2026-11-23"
  },
@@ -6344,7 +6372,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 287,
+  "riga": 286,
   "slug": "casa-di-babbo-natale-e-installazioni-natalizie-ser-serravalle-scrivia",
   "updated": "2026-11-23"
  },
@@ -6400,7 +6428,7 @@
   "ora": "16:00-17:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 319,
+  "riga": 318,
   "slug": "casalnoceto-fa-l-albero-laboratorio-artistico-comu",
   "updated": "2026-11-23"
  },
@@ -7306,7 +7334,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 269,
+  "riga": 268,
   "slug": "castello-di-cortanze-in-festa",
   "updated": "2026-11-23"
  },
@@ -7984,7 +8012,7 @@
   "ora": "da verificare",
   "prezzo": "3 €",
   "prov": "CN",
-  "riga": 165,
+  "riga": 164,
   "slug": "che-forte-natale-mercatino-vinadio",
   "updated": "2026-11-23"
  },
@@ -8039,7 +8067,7 @@
   "ora": "16:45-18:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 159,
+  "riga": 158,
   "slug": "chi-c-e-sotto-le-foglie-centro-per-le-famiglie-ast-asti",
   "updated": "2026-11-23"
  },
@@ -8289,7 +8317,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 447,
+  "riga": 446,
   "slug": "cinema-di-natale-con-topolino-facciamo-squadra-fra-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -8345,7 +8373,7 @@
   "ora": "10:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 444,
+  "riga": 443,
   "slug": "cinema-per-i-bambini-della-scuola-dell-infanzia-fa-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -8429,7 +8457,7 @@
   "ora": "14:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 350,
+  "riga": 349,
   "slug": "circus-show-canale",
   "updated": "2026-11-23"
  },
@@ -8794,7 +8822,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 251,
+  "riga": 250,
   "slug": "con-mappa-e-bussola-orientamento-con-uscita-guidat-ovada",
   "updated": "2026-11-23"
  },
@@ -8880,7 +8908,7 @@
   "ora": "21:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 196,
+  "riga": 195,
   "slug": "concerto-degli-auguri-musiche-di-ennio-morricone-a-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -8908,7 +8936,7 @@
   "ora": "17:30",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 489,
+  "riga": 487,
   "slug": "concerto-del-coro-polifonico-astense-calliano-monferrato",
   "updated": "2026-11-23"
  },
@@ -8966,7 +8994,7 @@
   "ora": "21:00",
   "prezzo": "10 euro",
   "prov": "AL",
-  "riga": 389,
+  "riga": 388,
   "slug": "concerto-di-natale-civica-accademia-musicale-peros-tortona",
   "updated": "2026-11-23"
  },
@@ -9752,7 +9780,7 @@
   "ora": "16:30-17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 453,
+  "riga": 452,
   "slug": "creiamo-insieme-una-lanterna-l-arte-della-luce-tortona",
   "updated": "2026-11-23"
  },
@@ -10118,7 +10146,7 @@
   "ora": "09:30-12:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 163,
+  "riga": 162,
   "slug": "dal-giappone-a-mondovi-laboratorio-di-fumetto",
   "updated": "2026-11-23"
  },
@@ -10204,7 +10232,7 @@
   "ora": "11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 424,
+  "riga": 423,
   "slug": "dal-seme-all-albero-la-foglia-saluzzo",
   "updated": "2026-11-23"
  },
@@ -10371,7 +10399,7 @@
   "ora": "15:00-00:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 383,
+  "riga": 382,
   "slug": "derthona-in-duomo-vacanze-di-natale-a-tortona",
   "updated": "2026-11-23"
  },
@@ -10400,7 +10428,7 @@
   "ora": "16:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 119,
+  "riga": 118,
   "slug": "desideria-sabato-di-gioco-benessere-e-musica-cuneo",
   "updated": "2026-11-23"
  },
@@ -10483,7 +10511,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 486,
+  "riga": 484,
   "slug": "di-cortile-in-cortile-mercatino-pino-d-asti",
   "updated": "2026-11-23"
  },
@@ -10759,7 +10787,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 268,
+  "riga": 267,
   "slug": "dolci-terre-di-novi-edizione-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -10898,7 +10926,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 376,
+  "riga": 375,
   "slug": "dore-m-illumina-fa-sol-la-cura-la-cura-nello-sguar-cuneo",
   "updated": "2026-11-23"
  },
@@ -10926,7 +10954,7 @@
   "ora": "17:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 404,
+  "riga": 403,
   "slug": "dove-andiamo-oggi-papi-e-cosa-mettiamo-nel-piatto-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -10954,7 +10982,7 @@
   "ora": "16:00-19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 468,
+  "riga": 467,
   "slug": "drogheria-di-angelo-e-maddalena-cinque-appuntament-tortona",
   "updated": "2026-11-23"
  },
@@ -11342,7 +11370,7 @@
   "ora": "14:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 347,
+  "riga": 346,
   "slug": "esibizione-babbi-bike-e-arrivo-del-grinch-canale",
   "updated": "2026-11-23"
  },
@@ -11370,7 +11398,7 @@
   "ora": "11:30-16:45",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 348,
+  "riga": 347,
   "slug": "esibizione-della-ballerina-con-carillon-e-pianofor-canale",
   "updated": "2026-11-23"
  },
@@ -11874,7 +11902,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 422,
+  "riga": 421,
   "slug": "estrazione-lotteria-della-befana-vidalegra-aps-predosa",
   "updated": "2026-11-23"
  },
@@ -12123,7 +12151,7 @@
   "ora": "15:30-17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 399,
+  "riga": 398,
   "slug": "facciamo-l-albero-insieme-castelnuovo-scrivia",
   "updated": "2026-11-23"
  },
@@ -12433,7 +12461,7 @@
   "ora": "11:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 416,
+  "riga": 415,
   "slug": "fera-di-cubiot-comune-di-santo-stefano-belbo",
   "updated": "2026-11-23"
  },
@@ -13407,7 +13435,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 463,
+  "riga": 462,
   "slug": "festa-del-tartufo-bianco-del-monferrato-casale-monferrato",
   "updated": "2026-11-23"
  },
@@ -13544,7 +13572,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 401,
+  "riga": 400,
   "slug": "festa-dell-albero-villanova-monferrato",
   "updated": "2026-11-23"
  },
@@ -16649,7 +16677,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 465,
+  "riga": 464,
   "slug": "fiera-di-sant-andrea-ovada",
   "updated": "2026-11-23"
  },
@@ -16677,7 +16705,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 227,
+  "riga": 226,
   "slug": "fiera-di-sant-andrea-saluzzo",
   "updated": "2026-11-23"
  },
@@ -16734,7 +16762,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 412,
+  "riga": 411,
   "slug": "fiera-di-santa-caterina-pro-loco-di-villanova-d-as-villanova-d-asti",
   "updated": "2026-11-23"
  },
@@ -16762,7 +16790,7 @@
   "ora": "7:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 275,
+  "riga": 274,
   "slug": "fiera-di-santa-lucia-fiera-capponi-racconigi",
   "updated": "2026-11-23"
  },
@@ -17067,7 +17095,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 485,
+  "riga": 483,
   "slug": "fiera-regionale-del-tartufo-di-castelnuovo-don-bos-castelnuovo-don-bosco",
   "updated": "2026-11-23"
  },
@@ -17288,7 +17316,7 @@
   "ora": "8:30",
   "prezzo": "5 euro (costo pettorale)",
   "prov": "CN",
-  "riga": 125,
+  "riga": 124,
   "slug": "fitwalking-di-natale-pro-loco-scarnafigi",
   "updated": "2026-11-23"
  },
@@ -17482,7 +17510,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 264,
+  "riga": 263,
   "slug": "foto-con-babbo-natale-e-gli-elfi-consegna-letterin-alessandria",
   "updated": "2026-11-23"
  },
@@ -18015,7 +18043,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 338,
+  "riga": 337,
   "slug": "gelindo-la-combriccola-e-mitichieleculli-villanova-d-asti",
   "updated": "2026-11-23"
  },
@@ -18182,7 +18210,7 @@
   "ora": "14:00-17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 469,
+  "riga": 468,
   "slug": "giardini-della-stazione-cinque-appuntamenti-in-cit-tortona",
   "updated": "2026-11-23"
  },
@@ -18378,7 +18406,7 @@
   "ora": "16:30-17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 450,
+  "riga": 449,
   "slug": "giochi-di-luce-e-ombra-l-arte-della-luce-tortona",
   "updated": "2026-11-23"
  },
@@ -18463,7 +18491,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 446,
+  "riga": 445,
   "slug": "giochi-e-animazione-con-anima-azione-facciamo-squa-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -18969,7 +18997,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 326,
+  "riga": 325,
   "slug": "giornata-nazionale-dell-albero-san-giorgio-monferrato",
   "updated": "2026-11-23"
  },
@@ -19080,7 +19108,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 397,
+  "riga": 396,
   "slug": "gli-elfi-di-babbo-natale-vanno-dai-bambini-a-scuol-predosa",
   "updated": "2026-11-23"
  },
@@ -19109,7 +19137,7 @@
   "ora": "9:30-11:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 120,
+  "riga": 119,
   "slug": "gocce-di-pioggia-e-soffici-nuvole-centro-famiglie-fossano",
   "updated": "2026-11-23"
  },
@@ -19388,7 +19416,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 263,
+  "riga": 262,
   "slug": "grande-inaugurazione-christmas-show-spettacoli-acr-alessandria",
   "updated": "2026-11-23"
  },
@@ -21743,7 +21771,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 363,
+  "riga": 362,
   "slug": "i-mercatini-delle-feste-ingenium-aps-busca",
   "updated": "2026-11-23"
  },
@@ -21772,7 +21800,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 375,
+  "riga": 374,
   "slug": "i-mercatini-di-natale-del-marchesato-castellar",
   "updated": "2026-11-23"
  },
@@ -21801,7 +21829,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 374,
+  "riga": 373,
   "slug": "i-mercatini-di-natale-del-marchesato-saluzzo",
   "updated": "2026-11-23"
  },
@@ -22191,7 +22219,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 257,
+  "riga": 256,
   "slug": "il-bosco-degli-imperfetti-l-ape-milla-e-l-importan-ovada",
   "updated": "2026-11-23"
  },
@@ -22247,7 +22275,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 253,
+  "riga": 252,
   "slug": "il-carnevale-degli-animali-laboratorio-musicale-ovada",
   "updated": "2026-11-23"
  },
@@ -22275,7 +22303,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 414,
+  "riga": 413,
   "slug": "il-castello-di-natale-costigliole-d-asti",
   "updated": "2026-11-23"
  },
@@ -22331,7 +22359,7 @@
   "ora": "15:00-16:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 178,
+  "riga": 177,
   "slug": "il-contalibro-associazione-il-contastorie-alessandria",
   "updated": "2026-11-23"
  },
@@ -22416,7 +22444,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 252,
+  "riga": 251,
   "slug": "il-corpo-e-mio-e-decido-io-a-chi-dare-un-bacino-ovada",
   "updated": "2026-11-23"
  },
@@ -22501,7 +22529,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 249,
+  "riga": 248,
   "slug": "il-fiore-del-partigiano-libera-manipolazione-di-ar-ovada",
   "updated": "2026-11-23"
  },
@@ -22585,7 +22613,7 @@
   "ora": "10:30-16:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 427,
+  "riga": 426,
   "slug": "il-giardino-di-babbo-natale-paesaggi-garden-vivaio-cuneo",
   "updated": "2026-11-23"
  },
@@ -22696,7 +22724,7 @@
   "ora": "16:00",
   "prezzo": "10 euro a bambino",
   "prov": "AT",
-  "riga": 186,
+  "riga": 185,
   "slug": "il-grande-emporio-di-babbo-natale-nodo-zero-cocconato",
   "updated": "2026-11-23"
  },
@@ -22724,7 +22752,7 @@
   "ora": "15:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 441,
+  "riga": 440,
   "slug": "il-grande-raduno-solidale-dei-babbi-natale-facciam-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -22836,7 +22864,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 398,
+  "riga": 397,
   "slug": "il-magico-arrivo-di-babbo-natale-vidalegra-aps-predosa",
   "updated": "2026-11-23"
  },
@@ -22864,7 +22892,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 116,
+  "riga": 115,
   "slug": "il-magico-paese-di-natale-asti",
   "updated": "2026-11-23"
  },
@@ -22949,7 +22977,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 431,
+  "riga": 430,
   "slug": "il-mondo-di-natale-bernezzo",
   "updated": "2026-11-23"
  },
@@ -23120,7 +23148,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 194,
+  "riga": 193,
   "slug": "il-pastore-gilindo-a-castell-alfero-spettacolo-tea",
   "updated": "2026-11-23"
  },
@@ -23176,7 +23204,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 248,
+  "riga": 247,
   "slug": "il-piccolo-ranocchio-nello-stagno-arcobaleno-ovada",
   "updated": "2026-11-23"
  },
@@ -23400,7 +23428,7 @@
   "ora": "16:30-17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 451,
+  "riga": 450,
   "slug": "il-teatro-delle-ombre-l-arte-della-luce-tortona",
   "updated": "2026-11-23"
  },
@@ -23484,7 +23512,7 @@
   "ora": "16:00-19:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 470,
+  "riga": 469,
   "slug": "il-vascello-veloce-cinque-appuntamenti-in-citta-co-tortona",
   "updated": "2026-11-23"
  },
@@ -23567,7 +23595,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 433,
+  "riga": 432,
   "slug": "illuminatale-i-simboli-del-natale-pop-cuneo",
   "updated": "2026-11-23"
  },
@@ -23814,7 +23842,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 440,
+  "riga": 439,
   "slug": "inaugurazione-giostra-di-natale-facciamo-squadra-f-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -23843,7 +23871,7 @@
   "ora": "14:30",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 187,
+  "riga": 186,
   "slug": "inaugurazione-iv-edizione-mostra-presepi-e-cappell-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -23926,7 +23954,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 170,
+  "riga": 169,
   "slug": "incantevole-natale-savigliano",
   "updated": "2026-11-23"
  },
@@ -23954,7 +23982,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 471,
+  "riga": 470,
   "slug": "incontriamoci-a-natale-castelletto-merli",
   "updated": "2026-11-23"
  },
@@ -24150,7 +24178,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 182,
+  "riga": 181,
   "slug": "io-ci-rigioco-raccolta-di-giocattoli-presso-area-s-vignole-borbera",
   "updated": "2026-11-23"
  },
@@ -24178,7 +24206,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 181,
+  "riga": 180,
   "slug": "io-ci-rigioco-raccolta-di-giocattoli-presso-farmac-vignole-borbera",
   "updated": "2026-11-23"
  },
@@ -24463,7 +24491,7 @@
   "ora": "14:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 454,
+  "riga": 453,
   "slug": "l-albero-di-natale-con-i-trattori-camera-lavori-co-casal-cermelli",
   "updated": "2026-11-23"
  },
@@ -24606,7 +24634,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 379,
+  "riga": 378,
   "slug": "l-officina-del-natale-pro-loco-sanse-san-sebastiano-curone",
   "updated": "2026-11-23"
  },
@@ -24662,7 +24690,7 @@
   "ora": "10:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 428,
+  "riga": 427,
   "slug": "l-orso-della-luna-crescente-meraki-teatro-savigliano",
   "updated": "2026-11-23"
  },
@@ -24718,7 +24746,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 448,
+  "riga": 447,
   "slug": "la-befana-vien-giocando-facciamo-squadra-fraschett-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -24747,7 +24775,7 @@
   "ora": "17:00",
   "prezzo": "5 euro",
   "prov": "AL",
-  "riga": 289,
+  "riga": 288,
   "slug": "la-bella-mai-addormentata-teatro-marenco-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -24882,16 +24910,16 @@
   "first_seen": "2026-11-23",
   "indirizzo": "Mulino di Pravaglione - Mongiardino Ligure (AL)",
   "last_seen": "2026-11-23",
-  "lat": "44.6401393",
+  "lat": "44.6640672",
   "loc": "daop_alessandria_4033940570077971856.webp",
-  "lon": "9.0618536",
+  "lon": "9.0507217",
   "luogo": "Mulino di Pravaglione",
   "manifest": "",
   "nome": "La casa di Babbo Natale - Pro Loco Mongiardino",
   "ora": "14:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 455,
+  "riga": 454,
   "slug": "la-casa-di-babbo-natale-pro-loco-mongiardino-mongiardino-ligure",
   "updated": "2026-11-23"
  },
@@ -24919,7 +24947,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 232,
+  "riga": 231,
   "slug": "la-casa-di-babbo-natale-savigliano",
   "updated": "2026-11-23"
  },
@@ -25170,7 +25198,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 419,
+  "riga": 418,
   "slug": "la-fattoria-in-biblioteca-tortona",
   "updated": "2026-11-23"
  },
@@ -25226,7 +25254,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 421,
+  "riga": 420,
   "slug": "la-festa-della-befana-vidalegra-aps-predosa",
   "updated": "2026-11-23"
  },
@@ -25419,7 +25447,7 @@
   "ora": "16:00-17:30",
   "prezzo": "5 euro",
   "prov": "CN",
-  "riga": 426,
+  "riga": 425,
   "slug": "la-magia-del-riciclo-museo-civico-craveri-di-stori-bra",
   "updated": "2026-11-23"
  },
@@ -25448,7 +25476,7 @@
   "ora": "17:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 242,
+  "riga": 241,
   "slug": "la-magia-delle-maschere-alessandria",
   "updated": "2026-11-23"
  },
@@ -25727,7 +25755,7 @@
   "ora": "16:30-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 281,
+  "riga": 280,
   "slug": "la-notte-dei-pupazzi-in-biblioteca-busca",
   "updated": "2026-11-23"
  },
@@ -25864,7 +25892,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 171,
+  "riga": 170,
   "slug": "la-parata-degli-elfi-di-natale-biblioteca-civica-b-busca",
   "updated": "2026-11-23"
  },
@@ -26003,7 +26031,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 184,
+  "riga": 183,
   "slug": "la-porta-del-natale-casalnoceto",
   "updated": "2026-11-23"
  },
@@ -26115,7 +26143,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 364,
+  "riga": 363,
   "slug": "la-rocca-illuminata-iii-edizione-roccavione",
   "updated": "2026-11-23"
  },
@@ -26366,7 +26394,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 415,
+  "riga": 414,
   "slug": "la-via-dei-presepi-mostra-di-presepi-all-aperto-revigliasco-d-asti",
   "updated": "2026-11-23"
  },
@@ -26482,7 +26510,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 306,
+  "riga": 305,
   "slug": "laboratori-creativi-a-tema-natalizio-sognacolori-valenza",
   "updated": "2026-11-23"
  },
@@ -26679,7 +26707,7 @@
   "ora": "10:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 432,
+  "riga": 431,
   "slug": "laboratorio-bimbi-christmas-edition-paesana",
   "updated": "2026-11-23"
  },
@@ -27350,7 +27378,7 @@
   "ora": "16:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 369,
+  "riga": 368,
   "slug": "laboratorio-di-natale-mondovi",
   "updated": "2026-11-23"
  },
@@ -27464,7 +27492,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 122,
+  "riga": 121,
   "slug": "laboratorio-funzioni-esecutive-t-centro-tarantasca",
   "updated": "2026-11-23"
  },
@@ -27549,7 +27577,7 @@
   "ora": "16:00",
   "prezzo": "6 euro a bambino",
   "prov": "AL",
-  "riga": 322,
+  "riga": 321,
   "slug": "laboratorio-natalizio-per-famiglie-mudi-tortona",
   "updated": "2026-11-23"
  },
@@ -27745,7 +27773,7 @@
   "ora": "14:00-17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 129,
+  "riga": 128,
   "slug": "lachera-dei-bambini-laboratorio-di-danze-e-mascher-rocca-grimalda",
   "updated": "2026-11-23"
  },
@@ -28172,7 +28200,7 @@
   "ora": "10:00-11:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 173,
+  "riga": 172,
   "slug": "le-letture-in-biblioteca-il-pane-biblioteca-di-pas-pasturana",
   "updated": "2026-11-23"
  },
@@ -28402,7 +28430,7 @@
   "ora": "10:30",
   "prezzo": "8 euro",
   "prov": "CN",
-  "riga": 126,
+  "riga": 125,
   "slug": "le-piccole-storie-di-marameo-alba",
   "updated": "2026-11-23"
  },
@@ -28486,7 +28514,7 @@
   "ora": "17:00-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 382,
+  "riga": 381,
   "slug": "le-tappe-dello-sviluppo-da-0-a-10-anni-incontro-4-alessandria",
   "updated": "2026-11-23"
  },
@@ -28515,7 +28543,7 @@
   "ora": "17:00-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 417,
+  "riga": 416,
   "slug": "le-tappe-dello-sviluppo-da-0-a-10-anni-yoyo-active-alessandria",
   "updated": "2026-11-23"
  },
@@ -28544,7 +28572,7 @@
   "ora": "15:30-17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 462,
+  "riga": 461,
   "slug": "leggi-e-scrivi-con-rick-mr-wolf-academy-casale-monferrato",
   "updated": "2026-11-23"
  },
@@ -28628,7 +28656,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 479,
+  "riga": 478,
   "slug": "leggiamo-insieme-storie-di-libri-castagnole-delle-lanze",
   "updated": "2026-11-23"
  },
@@ -28685,7 +28713,7 @@
   "ora": "vari",
   "prezzo": "Intero 10 € | Ridotto 8 € | Studenti 6 €",
   "prov": "AL",
-  "riga": 185,
+  "riga": 184,
   "slug": "leonardo-da-vinci-genio-in-movimento-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -28770,7 +28798,7 @@
   "ora": "16:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 346,
+  "riga": 345,
   "slug": "lettura-animata-a-tema-natalizio-con-sara-troletti-canale",
   "updated": "2026-11-23"
  },
@@ -28881,7 +28909,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 142,
+  "riga": 141,
   "slug": "letture-ad-alta-voce-storie-avvolte-nella-nebbia-d-castelnuovo-scrivia",
   "updated": "2026-11-23"
  },
@@ -29077,7 +29105,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 356,
+  "riga": 355,
   "slug": "letture-in-libreria-storie-per-piccoli-e-grandi-le-fossano",
   "updated": "2026-11-23"
  },
@@ -29693,7 +29721,7 @@
   "ora": "16:30-18:30",
   "prezzo": "30 euro per bambino oppure 2 bambini 50 euro",
   "prov": "AL",
-  "riga": 456,
+  "riga": 455,
   "slug": "little-photographers-popcornkids-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -29893,7 +29921,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 136,
+  "riga": 135,
   "slug": "luna-park-fiera-di-santa-caterina-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -30619,7 +30647,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 342,
+  "riga": 341,
   "slug": "mercatini-di-natale-a-vignolo-pro-loco-di-vignolo",
   "updated": "2026-11-23"
  },
@@ -30647,7 +30675,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 183,
+  "riga": 182,
   "slug": "mercatini-di-natale-a-viguzzolo-pro-loco-viguzzolo",
   "updated": "2026-11-23"
  },
@@ -30676,7 +30704,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 286,
+  "riga": 285,
   "slug": "mercatini-di-natale-al-sapore-di-miele-pocapaglia",
   "updated": "2026-11-23"
  },
@@ -30704,7 +30732,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 147,
+  "riga": 146,
   "slug": "mercatini-di-natale-borgoratto-alessandrino",
   "updated": "2026-11-23"
  },
@@ -30733,7 +30761,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 157,
+  "riga": 156,
   "slug": "mercatini-di-natale-castelnuovo-calcea",
   "updated": "2026-11-23"
  },
@@ -30790,7 +30818,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 405,
+  "riga": 404,
   "slug": "mercatini-di-natale-di-cuccaro-cuccaro-monferrato",
   "updated": "2026-11-23"
  },
@@ -30818,7 +30846,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 145,
+  "riga": 144,
   "slug": "mercatini-di-natale-e-casa-di-babbo-natale-pro-loc-lu-e-cuccaro-monferrato",
   "updated": "2026-11-23"
  },
@@ -30847,7 +30875,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 402,
+  "riga": 401,
   "slug": "mercatini-di-natale-edizione-associazione-memorial-bassignana",
   "updated": "2026-11-23"
  },
@@ -30876,7 +30904,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 148,
+  "riga": 147,
   "slug": "mercatini-di-natale-felizzano",
   "updated": "2026-11-23"
  },
@@ -30933,7 +30961,7 @@
   "ora": "09:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 121,
+  "riga": 120,
   "slug": "mercatini-di-natale-iv-edizione-pro-loco-baldisser-baldissero-d-alba",
   "updated": "2026-11-23"
  },
@@ -30990,7 +31018,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 169,
+  "riga": 168,
   "slug": "mercatini-di-natale-margarita",
   "updated": "2026-11-23"
  },
@@ -31018,7 +31046,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 247,
+  "riga": 246,
   "slug": "mercatini-di-natale-molare",
   "updated": "2026-11-23"
  },
@@ -31046,7 +31074,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 323,
+  "riga": 322,
   "slug": "mercatini-di-natale-mornese",
   "updated": "2026-11-23"
  },
@@ -31132,7 +31160,7 @@
   "ora": "9:30-18:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 233,
+  "riga": 232,
   "slug": "mercatini-di-natale-pro-loco-barge",
   "updated": "2026-11-23"
  },
@@ -31217,7 +31245,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 231,
+  "riga": 230,
   "slug": "mercatini-di-natale-pro-loco-pontechianale",
   "updated": "2026-11-23"
  },
@@ -31246,7 +31274,7 @@
   "ora": "9:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 230,
+  "riga": 229,
   "slug": "mercatini-di-natale-pro-loco-sommariva-perno",
   "updated": "2026-11-23"
  },
@@ -31304,7 +31332,7 @@
   "ora": "10:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 158,
+  "riga": 157,
   "slug": "mercatini-di-natale-san-giorgio-scarampi",
   "updated": "2026-11-23"
  },
@@ -31362,7 +31390,7 @@
   "ora": "14:30-19:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 325,
+  "riga": 324,
   "slug": "mercatini-di-natale-soms-di-san-giuliano-vecchio-e",
   "updated": "2026-11-23"
  },
@@ -31390,8 +31418,36 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 385,
+  "riga": 384,
   "slug": "mercatini-di-natale-tortona",
+  "updated": "2026-11-23"
+ },
+ "mercatini-enogastronomici-artigianali-pro-loco-di-gavi": {
+  "anchor": "ev-2026-12-08-mercatini-enogastronomici-artigianali-pro-loco-di",
+  "categoria": "Mercato",
+  "citta": "Gavi",
+  "consigliato": "No",
+  "d_end": "2026-12-08",
+  "d_start": "2026-12-08",
+  "descr": "Mercatini enogastronomici e artigianali di Natale nelle vie del centro storico di Gavi, dalle 10 alle 18. Alle 17 l'accensione dell'albero di Natale.",
+  "df": "08/12/2026",
+  "di": "08/12/2026",
+  "eta": "Tutte le età (famiglie)",
+  "festa": "mercatino di natale",
+  "first_seen": "2026-11-23",
+  "indirizzo": "Centro storico, Gavi",
+  "last_seen": "2026-11-23",
+  "lat": "44.6887314",
+  "loc": "daop_alessandria_4035575899486481717.webp",
+  "lon": "8.8061512",
+  "luogo": "Centro storico",
+  "manifest": "Mercatini di Natale 2026",
+  "nome": "Mercatini Enogastronomici Artigianali - Pro Loco di Gavi",
+  "ora": "10:00-18:00",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 492,
+  "slug": "mercatini-enogastronomici-artigianali-pro-loco-di-gavi",
   "updated": "2026-11-23"
  },
  "mercatini-natalizi-canale": {
@@ -31418,7 +31474,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 351,
+  "riga": 350,
   "slug": "mercatini-natalizi-canale",
   "updated": "2026-11-23"
  },
@@ -31532,7 +31588,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 327,
+  "riga": 326,
   "slug": "mercatino-di-natale-a-san-giorgio-vi-edizione-san-giorgio-monferrato",
   "updated": "2026-11-23"
  },
@@ -31561,7 +31617,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 273,
+  "riga": 272,
   "slug": "mercatino-di-natale-castel-boglione",
   "updated": "2026-11-23"
  },
@@ -31589,7 +31645,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 156,
+  "riga": 155,
   "slug": "mercatino-di-natale-cocconato",
   "updated": "2026-11-23"
  },
@@ -31617,7 +31673,7 @@
   "ora": "15:00-17:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 229,
+  "riga": 228,
   "slug": "mercatino-di-natale-dei-bambini-comune-di-fossano",
   "updated": "2026-11-23"
  },
@@ -31705,7 +31761,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 308,
+  "riga": 307,
   "slug": "mercatino-di-natale-pro-loco-cassine",
   "updated": "2026-11-23"
  },
@@ -31733,7 +31789,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 472,
+  "riga": 471,
   "slug": "mercatino-di-natale-pro-loco-ponzone",
   "updated": "2026-11-23"
  },
@@ -31761,7 +31817,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 331,
+  "riga": 330,
   "slug": "mercatino-di-natale-san-damiano-d-asti",
   "updated": "2026-11-23"
  },
@@ -31790,7 +31846,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 146,
+  "riga": 145,
   "slug": "mercatino-di-natale-work-in-progress-pro-loco-di-a-avolasca",
   "updated": "2026-11-23"
  },
@@ -31847,7 +31903,7 @@
   "ora": "9:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 324,
+  "riga": 323,
   "slug": "mercatino-natalizio-consorzio-la-torre-garbagna-ec",
   "updated": "2026-11-23"
  },
@@ -32208,7 +32264,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 313,
+  "riga": 312,
   "slug": "missione-p-a-p-e-r-toscience-tortona",
   "updated": "2026-11-23"
  },
@@ -32237,7 +32293,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 480,
+  "riga": 479,
   "slug": "moncalvo-centro-storico-fiera-nazionale-del-bue-gr",
   "updated": "2026-11-23"
  },
@@ -32515,7 +32571,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 353,
+  "riga": 352,
   "slug": "mostra-je-r-masche-misteri-e-memorie-tra-langhe-e-alba",
   "updated": "2026-11-23"
  },
@@ -32572,7 +32628,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 212,
+  "riga": 211,
   "slug": "mostra-presepi-acqui-terme",
   "updated": "2026-11-23"
  },
@@ -32627,7 +32683,7 @@
   "ora": "11:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 384,
+  "riga": 383,
   "slug": "motoraduno-di-babbo-natale-tortona",
   "updated": "2026-11-23"
  },
@@ -33125,7 +33181,7 @@
   "ora": "14:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 344,
+  "riga": 343,
   "slug": "musica-itinerante-con-miniottoni-canale",
   "updated": "2026-11-23"
  },
@@ -33347,7 +33403,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 464,
+  "riga": 463,
   "slug": "natale-a-corte-gabiano",
   "updated": "2026-11-23"
  },
@@ -33375,7 +33431,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 409,
+  "riga": 408,
   "slug": "natale-a-fresonara",
   "updated": "2026-11-23"
  },
@@ -33403,7 +33459,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 309,
+  "riga": 308,
   "slug": "natale-a-sezzadio",
   "updated": "2026-11-23"
  },
@@ -33460,7 +33516,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 443,
+  "riga": 442,
   "slug": "natale-con-tim-burton-facciamo-squadra-fraschetta-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -33489,7 +33545,7 @@
   "ora": "10:00 camminata / 10:40 corsa",
   "prezzo": "Offerta libera",
   "prov": "CN",
-  "riga": 370,
+  "riga": 369,
   "slug": "natale-di-solidarieta-edizione-corsa-e-camminata-b-boves",
   "updated": "2026-11-23"
  },
@@ -33517,7 +33573,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 473,
+  "riga": 472,
   "slug": "natale-in-piazza-grondona",
   "updated": "2026-11-23"
  },
@@ -33574,7 +33630,7 @@
   "ora": "20:30",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 491,
+  "riga": 489,
   "slug": "natale-sui-pattini-a-s-d-new-asti-skating",
   "updated": "2026-11-23"
  },
@@ -33602,7 +33658,7 @@
   "ora": "vari",
   "prezzo": "Gratuito il 14 e 15 novembre; altri giorni non indicato",
   "prov": "AT",
-  "riga": 235,
+  "riga": 234,
   "slug": "natale-tra-i-fossili-laboratorio-creativo-di-argil-asti",
   "updated": "2026-11-23"
  },
@@ -33714,7 +33770,7 @@
   "ora": "09:00-19:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 282,
+  "riga": 281,
   "slug": "negozi-in-strada-christmas-edition-saluzzo",
   "updated": "2026-11-23"
  },
@@ -33826,7 +33882,7 @@
   "ora": "15:30-18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 149,
+  "riga": 148,
   "slug": "neverland-e-la-magia-del-natale-frugarolo",
   "updated": "2026-11-23"
  },
@@ -33882,7 +33938,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 368,
+  "riga": 367,
   "slug": "nicoletta-costa-in-mostra-mondovi",
   "updated": "2026-11-23"
  },
@@ -33970,6 +34026,34 @@
   "slug": "non-siamo-d-accordo-conflitti-in-famiglia-centro-p-asti",
   "updated": "2026-11-23"
  },
+ "non-sono-pronta-attraversare-piccoli-e-grandi-camb-casale-monferrato": {
+  "anchor": "ev-2026-11-28-non-sono-pronta-attraversare-piccoli-e-grandi-camb",
+  "categoria": "Laboratorio",
+  "citta": "Casale Monferrato",
+  "consigliato": "No",
+  "d_end": "2026-11-28",
+  "d_start": "2026-11-28",
+  "descr": "Momento di lettura animata e laboratorio artistico realizzato in collaborazione con l'Associazione Penelope, riservato a bambini dai 3 ai 6 anni insieme ai loro accompagnatori. Dopo la lettura di un libro, confronto con genitori e accompagnatori e laboratorio artistico in cui i bambini rappresenteranno la propria storia.",
+  "df": "28/11/2026",
+  "di": "28/11/2026",
+  "eta": "3-6 anni",
+  "festa": "nessuna",
+  "first_seen": "2026-11-23",
+  "indirizzo": "Piazza Castello, Casale Monferrato",
+  "last_seen": "2026-11-23",
+  "lat": "45.136927",
+  "loc": "daop_alessandria_4036620010524197193.webp",
+  "lon": "8.448289",
+  "luogo": "Biblioteca ragazzi Emanuele Luzzati",
+  "manifest": "Novembre in biblioteca",
+  "nome": "Non sono pronta: attraversare piccoli e grandi cambiamenti - Racconti per crescere",
+  "ora": "10:30",
+  "prezzo": "Non indicato",
+  "prov": "AL",
+  "riga": 491,
+  "slug": "non-sono-pronta-attraversare-piccoli-e-grandi-camb-casale-monferrato",
+  "updated": "2026-11-23"
+ },
  "nonni-leggetemi-una-storia-festa-dei-nonni-santa-vittoria-d-alba": {
   "anchor": "ev-2026-10-03-nonni-leggetemi-una-storia-festa-dei-nonni",
   "categoria": "Laboratorio",
@@ -34050,7 +34134,7 @@
   "ora": "19:00-23:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 437,
+  "riga": 436,
   "slug": "notte-al-museo-gran-finale-con-pizzata-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -34080,6 +34164,7 @@
   "prezzo": "5 euro a bambino",
   "prov": "AL",
   "riga": 112,
+  "ritirata": "2026-11-23",
   "slug": "notte-al-museo-orario-serale-con-pizzata-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -34108,7 +34193,7 @@
   "ora": "17:00-21:30",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 189,
+  "riga": 188,
   "slug": "notte-bianca-con-accensione-albero-di-natale-e-lum-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -34616,7 +34701,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 365,
+  "riga": 364,
   "slug": "once-upon-a-christmas-once-upon-a-choir-murazzo-fossano",
   "updated": "2026-11-23"
  },
@@ -34781,7 +34866,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 300,
+  "riga": 299,
   "slug": "open-day-infanzia-e-primaria-zanzi-ic-sibilla-aler-alessandria",
   "updated": "2026-11-23"
  },
@@ -34809,7 +34894,7 @@
   "ora": "16:45-18:45",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 295,
+  "riga": 294,
   "slug": "open-day-infanzia-sabin-e-primaria-ferrero-ic-sibi-alessandria",
   "updated": "2026-11-23"
  },
@@ -34865,7 +34950,7 @@
   "ora": "16:30-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 298,
+  "riga": 297,
   "slug": "open-day-scuola-dell-infanzia-campi-ic-sibilla-ale-alessandria",
   "updated": "2026-11-23"
  },
@@ -34893,7 +34978,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 297,
+  "riga": 296,
   "slug": "open-day-scuola-dell-infanzia-di-gamalero-ic-sibil",
   "updated": "2026-11-23"
  },
@@ -34922,7 +35007,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 271,
+  "riga": 270,
   "slug": "open-day-scuola-dell-infanzia-don-stefano-minetti-calamandrana",
   "updated": "2026-11-23"
  },
@@ -34950,7 +35035,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 296,
+  "riga": 295,
   "slug": "open-day-scuola-dell-infanzia-e-primaria-morbelli-alessandria",
   "updated": "2026-11-23"
  },
@@ -34979,7 +35064,7 @@
   "ora": "16:00-18:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 214,
+  "riga": 213,
   "slug": "open-day-scuola-dell-infanzia-e-sezione-primavera-acqui-terme",
   "updated": "2026-11-23"
  },
@@ -35036,7 +35121,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 299,
+  "riga": 298,
   "slug": "open-day-scuola-primaria-mazzini-di-borgoratto-ic-borgoratto-alessandrino",
   "updated": "2026-11-23"
  },
@@ -35065,7 +35150,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 274,
+  "riga": 273,
   "slug": "open-day-scuola-primaria-r-solito-calamandrana",
   "updated": "2026-11-23"
  },
@@ -35152,7 +35237,7 @@
   "ora": "16:15-18:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 475,
+  "riga": 474,
   "slug": "open-school-scuola-dell-infanzia-cattedrale-asti",
   "updated": "2026-11-23"
  },
@@ -35180,7 +35265,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 487,
+  "riga": 485,
   "slug": "open-school-scuola-dell-infanzia-di-castel-boglion-castel-boglione",
   "updated": "2026-11-23"
  },
@@ -35320,7 +35405,7 @@
   "ora": "17:00-20:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 198,
+  "riga": 197,
   "slug": "open-school-scuola-secondaria-di-primo-grado-istit-villanova-d-asti",
   "updated": "2026-11-23"
  },
@@ -35348,7 +35433,7 @@
   "ora": "09:00-12:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 199,
+  "riga": 198,
   "slug": "open-school-scuole-dell-infanzia-cellarengo-dusino-villanova-d-asti",
   "updated": "2026-11-23"
  },
@@ -35377,7 +35462,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 329,
+  "riga": 328,
   "slug": "open-school-statale-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -35460,7 +35545,7 @@
   "ora": "14:30-17:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 237,
+  "riga": 236,
   "slug": "oratorio-monforte-a-porte-aperte-monforte-d-alba",
   "updated": "2026-11-23"
  },
@@ -35572,7 +35657,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 202,
+  "riga": 201,
   "slug": "oro-incenso-mirra-presepi-nel-monferrato-castagnol-castagnole-lanze",
   "updated": "2026-11-23"
  },
@@ -35600,7 +35685,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 203,
+  "riga": 202,
   "slug": "oro-incenso-mirra-presepi-nel-monferrato-castagnol-castagnole-monferrato",
   "updated": "2026-11-23"
  },
@@ -35628,7 +35713,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 204,
+  "riga": 203,
   "slug": "oro-incenso-mirra-presepi-nel-monferrato-castell-a-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -35656,7 +35741,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 205,
+  "riga": 204,
   "slug": "oro-incenso-mirra-presepi-nel-monferrato-cocconato",
   "updated": "2026-11-23"
  },
@@ -35684,7 +35769,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 206,
+  "riga": 205,
   "slug": "oro-incenso-mirra-presepi-nel-monferrato-monale",
   "updated": "2026-11-23"
  },
@@ -35712,7 +35797,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 207,
+  "riga": 206,
   "slug": "oro-incenso-mirra-presepi-nel-monferrato-san-damia-san-damiano-d-asti",
   "updated": "2026-11-23"
  },
@@ -35931,7 +36016,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 371,
+  "riga": 370,
   "slug": "paesana-bricks-expo-4",
   "updated": "2026-11-23"
  },
@@ -36355,7 +36440,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 256,
+  "riga": 255,
   "slug": "pasqua-oltre-le-alpi-tra-gessetti-di-gusci-d-uovo-ovada",
   "updated": "2026-11-23"
  },
@@ -36549,6 +36634,35 @@
   "prov": "AL",
   "riga": 459,
   "slug": "passeggiata-con-le-lanterne-per-famiglia-popcornki-novi-ligure",
+  "spostata": "passeggiata-con-le-lanterne-per-famiglia-popcornki-pasturana",
+  "updated": "2026-11-23"
+ },
+ "passeggiata-con-le-lanterne-per-famiglia-popcornki-pasturana": {
+  "anchor": "ev-2026-12-05-passeggiata-con-le-lanterne-per-famiglia-popcornki",
+  "categoria": "Natura",
+  "citta": "Pasturana",
+  "consigliato": "No",
+  "d_end": "2026-12-05",
+  "d_start": "2026-12-05",
+  "descr": "Passeggiata serale con le lanterne per famiglie, alle 17:15 presso Il Melo. Un'esperienza magica all'aperto nell'ambito del Novi Kids Club organizzato da PopcornKids.",
+  "df": "05/12/2026",
+  "di": "05/12/2026",
+  "eta": "Tutte le età (famiglie)",
+  "festa": "nessuna",
+  "first_seen": "2026-11-23",
+  "indirizzo": "Via Francavilla 20, Pasturana",
+  "last_seen": "2026-11-23",
+  "lat": "44.7656156",
+  "loc": "daop_alessandria_4035215211001965446.webp",
+  "lon": "8.7072887",
+  "luogo": "Il Melo",
+  "manifest": "Novi Kids Club",
+  "nome": "Passeggiata con le Lanterne per Famiglia - PopcornKids",
+  "ora": "17:15",
+  "prezzo": "25 euro per famiglia",
+  "prov": "AL",
+  "riga": 458,
+  "slug": "passeggiata-con-le-lanterne-per-famiglia-popcornki-pasturana",
   "updated": "2026-11-23"
  },
  "passeggiata-patrimoniale-alla-scoperta-della-citta-alessandria": {
@@ -36858,7 +36972,7 @@
   "ora": "17:00",
   "prezzo": "5 euro",
   "prov": "AL",
-  "riga": 293,
+  "riga": 292,
   "slug": "peter-pan-teatro-marenco-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -36887,7 +37001,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 482,
+  "riga": 481,
   "slug": "piazza-olinda-maranzana-fiera-nazionale-del-bue-gr-moncalvo",
   "updated": "2026-11-23"
  },
@@ -37082,7 +37196,7 @@
   "ora": "16:30-17:30",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 452,
+  "riga": 451,
   "slug": "piccoli-artisti-luminosi-l-arte-della-luce-tortona",
   "updated": "2026-11-23"
  },
@@ -37110,7 +37224,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 413,
+  "riga": 412,
   "slug": "piccoli-occhi-grandi-sguardi-inaugurazione-mostra-nizza-monferrato",
   "updated": "2026-11-23"
  },
@@ -37278,7 +37392,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 250,
+  "riga": 249,
   "slug": "pierino-e-il-lupo-laboratorio-musicale-ovada",
   "updated": "2026-11-23"
  },
@@ -37503,7 +37617,7 @@
   "ora": "16:30-18:00",
   "prezzo": "12 euro a bambino",
   "prov": "CN",
-  "riga": 228,
+  "riga": 227,
   "slug": "pinocchio-fuori-dalle-righe-lipani-di-francesca-re-cuneo",
   "updated": "2026-11-23"
  },
@@ -37559,7 +37673,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 115,
+  "riga": 114,
   "slug": "pista-di-pattinaggio-su-ghiaccio-di-asti",
   "updated": "2026-11-23"
  },
@@ -37839,7 +37953,7 @@
   "ora": "14:30",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 191,
+  "riga": 190,
   "slug": "pomeriggio-di-festa-giochi-per-bambini-e-tombolata-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -38036,7 +38150,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 481,
+  "riga": 480,
   "slug": "portici-storici-di-moncalvo-fiera-nazionale-del-bu",
   "updated": "2026-11-23"
  },
@@ -38463,7 +38577,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 280,
+  "riga": 279,
   "slug": "presepe-vivente-di-bagnasco-sacra-rappresentazione",
   "updated": "2026-11-23"
  },
@@ -38491,7 +38605,7 @@
   "ora": "23:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 279,
+  "riga": 278,
   "slug": "presepe-vivente-di-bagnasco-santa-messa-con-figura",
   "updated": "2026-11-23"
  },
@@ -38520,7 +38634,7 @@
   "ora": "20:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 224,
+  "riga": 223,
   "slug": "presepe-vivente-di-prea-edizione-roccaforte-mondovi",
   "updated": "2026-11-23"
  },
@@ -38606,7 +38720,7 @@
   "ora": "14:00-19:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 150,
+  "riga": 149,
   "slug": "presepe-vivente-san-damiano-d-asti",
   "updated": "2026-11-23"
  },
@@ -38635,7 +38749,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 161,
+  "riga": 160,
   "slug": "presepi-al-castello-comune-di-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -38885,7 +38999,7 @@
   "ora": "15:00",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 442,
+  "riga": 441,
   "slug": "proiezione-il-bianconiglio-facciamo-squadra-frasch-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -39050,7 +39164,7 @@
   "ora": "10:00-11:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 435,
+  "riga": 434,
   "slug": "quadretti-d-inverno-laboratorio-degli-elfi-savigliano",
   "updated": "2026-11-23"
  },
@@ -39246,7 +39360,7 @@
   "ora": "9:00-12:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 155,
+  "riga": 154,
   "slug": "rabbia-pianti-e-porte-sbattute-centro-per-le-famig-asti",
   "updated": "2026-11-23"
  },
@@ -39446,7 +39560,7 @@
   "ora": "14:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 445,
+  "riga": 444,
   "slug": "raduno-e-parata-dei-babbi-natale-in-harley-davidso-spinetta-marengo",
   "updated": "2026-11-23"
  },
@@ -39502,7 +39616,7 @@
   "ora": "16:30",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AL",
-  "riga": 390,
+  "riga": 389,
   "slug": "rassegna-assoli-befana-in-baracca-associazione-pep-tortona",
   "updated": "2026-11-23"
  },
@@ -39530,7 +39644,7 @@
   "ora": "16:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 387,
+  "riga": 386,
   "slug": "rassegna-assoli-sua-altezza-e-il-musico-associazio-tortona",
   "updated": "2026-11-23"
  },
@@ -39558,7 +39672,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 166,
+  "riga": 165,
   "slug": "rassegna-di-presepi-tradizionali-incanto-vinadio",
   "updated": "2026-11-23"
  },
@@ -39669,7 +39783,7 @@
   "ora": "20:00",
   "prezzo": "10 euro bambini, 20 euro adulti",
   "prov": "AT",
-  "riga": 484,
+  "riga": 482,
   "slug": "red-night-terre-dei-santi-castelnuovo-don-bosco",
   "updated": "2026-11-23"
  },
@@ -39837,7 +39951,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 258,
+  "riga": 257,
   "slug": "ritorno-al-bosco-delle-acacie-esperienza-di-yoga-p-ovada",
   "updated": "2026-11-23"
  },
@@ -40061,6 +40175,7 @@
   "prezzo": "Gratuito",
   "prov": "AT",
   "riga": 483,
+  "ritirata": "2026-11-23",
   "slug": "rossini-a-colori-biblioteca-astense-giorgio-falett-asti",
   "updated": "2026-11-23"
  },
@@ -40088,7 +40203,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 477,
+  "riga": 476,
   "slug": "rossini-a-colori-con-il-tenore-enrico-iviglia-asti",
   "updated": "2026-11-23"
  },
@@ -40203,6 +40318,35 @@
   "prov": "AL",
   "riga": 458,
   "slug": "sabato-nella-natura-a-il-melo-popcornkids-novi-ligure",
+  "spostata": "sabato-nella-natura-a-il-melo-popcornkids-pasturana",
+  "updated": "2026-11-23"
+ },
+ "sabato-nella-natura-a-il-melo-popcornkids-pasturana": {
+  "anchor": "ev-2026-12-05-sabato-nella-natura-a-il-melo-popcornkids",
+  "categoria": "Natura",
+  "citta": "Pasturana",
+  "consigliato": "No",
+  "d_end": "2026-12-05",
+  "d_start": "2026-12-05",
+  "descr": "Attività nella natura con due fasce orarie: 10:00-12:00 per bambini 1-3 anni e 15:00-17:00 per ragazzi dagli 11 anni in su. Presso Il Melo, nell'ambito del Novi Kids Club di PopcornKids.",
+  "df": "05/12/2026",
+  "di": "05/12/2026",
+  "eta": "1-3 anni e 11+ anni",
+  "festa": "nessuna",
+  "first_seen": "2026-11-23",
+  "indirizzo": "Via Francavilla 20, Pasturana",
+  "last_seen": "2026-11-23",
+  "lat": "44.7656156",
+  "loc": "daop_alessandria_4035215211001965446.webp",
+  "lon": "8.7072887",
+  "luogo": "Il Melo",
+  "manifest": "Novi Kids Club",
+  "nome": "Sabato nella Natura a Il Melo - PopcornKids",
+  "ora": "10:00-12:00 (1-3 anni) / 15:00-17:00 (11+)",
+  "prezzo": "18 euro per persona",
+  "prov": "AL",
+  "riga": 457,
+  "slug": "sabato-nella-natura-a-il-melo-popcornkids-pasturana",
   "updated": "2026-11-23"
  },
  "sabato-nella-natura-popcornkids-novi-ligure": {
@@ -40231,6 +40375,35 @@
   "prov": "AL",
   "riga": 457,
   "slug": "sabato-nella-natura-popcornkids-novi-ligure",
+  "spostata": "sabato-nella-natura-popcornkids-pasturana",
+  "updated": "2026-11-23"
+ },
+ "sabato-nella-natura-popcornkids-pasturana": {
+  "anchor": "ev-2026-11-28-sabato-nella-natura-popcornkids",
+  "categoria": "Natura",
+  "citta": "Pasturana",
+  "consigliato": "No",
+  "d_end": "2026-11-28",
+  "d_start": "2026-11-28",
+  "descr": "Attività nella natura per bambini dai 4 ai 10 anni, presso Il Melo. Parte del programma Novi Kids Club di PopcornKids, esperienze immersive in italiano, inglese e spagnolo.",
+  "df": "28/11/2026",
+  "di": "28/11/2026",
+  "eta": "4-10 anni",
+  "festa": "nessuna",
+  "first_seen": "2026-11-23",
+  "indirizzo": "Via Francavilla 20, Pasturana",
+  "last_seen": "2026-11-23",
+  "lat": "44.7656156",
+  "loc": "daop_alessandria_4035215211001965446.webp",
+  "lon": "8.7072887",
+  "luogo": "Il Melo",
+  "manifest": "Novi Kids Club",
+  "nome": "Sabato nella Natura - PopcornKids",
+  "ora": "15:00-16:30",
+  "prezzo": "18 euro per persona",
+  "prov": "AL",
+  "riga": 456,
+  "slug": "sabato-nella-natura-popcornkids-pasturana",
   "updated": "2026-11-23"
  },
  "sagra-campagnola-crebini-cazzuli-passaronda-castelletto-d-orba": {
@@ -41863,7 +42036,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 490,
+  "riga": 488,
   "slug": "santa-messa-della-vigilia-di-natale-con-cioccolata-calliano-monferrato",
   "updated": "2026-11-23"
  },
@@ -42116,7 +42289,7 @@
   "ora": "10:00",
   "prezzo": "Gratuito",
   "prov": "AT",
-  "riga": 270,
+  "riga": 269,
   "slug": "schermi-e-relazioni-come-orientarsi-nel-mondo-digi-nizza-monferrato",
   "updated": "2026-11-23"
  },
@@ -42145,7 +42318,7 @@
   "ora": "17:00",
   "prezzo": "5 euro",
   "prov": "AL",
-  "riga": 291,
+  "riga": 290,
   "slug": "sconcerto-d-amore-le-acrobazie-musicali-di-una-cop-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -42538,7 +42711,7 @@
   "ora": "dalle ore 19",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 143,
+  "riga": 142,
   "slug": "serata-gratuita-pizza-e-cinema-centro-per-le-famig-tortona",
   "updated": "2026-11-23"
  },
@@ -42900,7 +43073,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 474,
+  "riga": 473,
   "slug": "sfilata-babbo-natale-a-modo-mio-pro-loco-novi-ligu-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -42928,7 +43101,7 @@
   "ora": "15:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 386,
+  "riga": 385,
   "slug": "sfilata-dei-babbo-natale-tortona",
   "updated": "2026-11-23"
  },
@@ -42957,7 +43130,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 134,
+  "riga": 133,
   "slug": "sfilata-di-carnevale-lachera-dei-bambini-rocca-grimalda",
   "updated": "2026-11-23"
  },
@@ -43041,7 +43214,7 @@
   "ora": "14:45",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 349,
+  "riga": 348,
   "slug": "show-disney-atmosphere-canale",
   "updated": "2026-11-23"
  },
@@ -43125,7 +43298,7 @@
   "ora": "16:00-19:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 361,
+  "riga": 360,
   "slug": "sii-umano-laboratorio-per-famiglie-cuneo",
   "updated": "2026-11-23"
  },
@@ -43265,7 +43438,7 @@
   "ora": "17:00-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 278,
+  "riga": 277,
   "slug": "sognando-la-neve-associazione-arcbaleno-vip-i-nasi-bra",
   "updated": "2026-11-23"
  },
@@ -43460,7 +43633,7 @@
   "ora": "16:30",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 266,
+  "riga": 265,
   "slug": "spettacolo-di-capodanno-e-festa-di-capodanno-alessandria",
   "updated": "2026-11-23"
  },
@@ -43982,7 +44155,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 259,
+  "riga": 258,
   "slug": "storie-con-il-cuore-lettura-dedicata-alla-festa-de-ovada",
   "updated": "2026-11-23"
  },
@@ -44011,7 +44184,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 429,
+  "riga": 428,
   "slug": "storie-con-la-coda-bagnasco",
   "updated": "2026-11-23"
  },
@@ -44123,7 +44296,7 @@
   "ora": "17:00-18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 277,
+  "riga": 276,
   "slug": "storie-di-lana-e-di-amicizia-associazione-officine-bra",
   "updated": "2026-11-23"
  },
@@ -44151,7 +44324,7 @@
   "ora": "10:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 245,
+  "riga": 244,
   "slug": "storie-di-piazza-alba",
   "updated": "2026-11-23"
  },
@@ -44294,7 +44467,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 255,
+  "riga": 254,
   "slug": "storie-per-il-mio-papa-lettura-dedicata-alla-festa-ovada",
   "updated": "2026-11-23"
  },
@@ -44492,7 +44665,7 @@
   "ora": "14:30",
   "prezzo": "5 euro + scaldacollo omaggio",
   "prov": "AL",
-  "riga": 410,
+  "riga": 409,
   "slug": "strasale-sotto-zero-pro-loco-di-sale",
   "updated": "2026-11-23"
  },
@@ -44607,7 +44780,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "AT",
-  "riga": 190,
+  "riga": 189,
   "slug": "sul-cammino-di-artaban-spettacolo-nell-ambito-di-c-castell-alfero",
   "updated": "2026-11-23"
  },
@@ -44721,7 +44894,7 @@
   "ora": "16:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 373,
+  "riga": 372,
   "slug": "sulle-tracce-degli-dei-caccia-al-tesoro-per-le-vie-bra",
   "updated": "2026-11-23"
  },
@@ -44807,7 +44980,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 343,
+  "riga": 342,
   "slug": "svuota-solai-bambini-vignolo",
   "updated": "2026-11-23"
  },
@@ -45757,7 +45930,7 @@
   "ora": "14:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 388,
+  "riga": 387,
   "slug": "tradizionale-camminata-natalizia-con-benedizione-d-tortona",
   "updated": "2026-11-23"
  },
@@ -46007,7 +46180,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 265,
+  "riga": 264,
   "slug": "tributo-k-pop-musical-show-alessandria",
   "updated": "2026-11-23"
  },
@@ -46532,7 +46705,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 407,
+  "riga": 406,
   "slug": "un-borgo-di-presepi-cremolino",
   "updated": "2026-11-23"
  },
@@ -46620,6 +46793,34 @@
   "prov": "AL",
   "riga": 181,
   "slug": "un-cane-per-sorridere-casale-monferrato",
+  "updated": "2026-11-23"
+ },
+ "un-cane-per-sorridere-interventi-assistiti-con-gli-casale-monferrato": {
+  "anchor": "ev-2026-11-26-un-cane-per-sorridere-interventi-assistiti-con-gli",
+  "categoria": "Laboratorio",
+  "citta": "Casale Monferrato",
+  "consigliato": "No",
+  "d_end": "2026-11-26",
+  "d_start": "2026-11-26",
+  "descr": "I professionisti dell'Associazione Un cane per sorridere ETS di Mirabello, con i loro colleghi a quattro zampe, spiegheranno ai bambini come interagire correttamente con i cani e i benefici degli Interventi Assistiti con gli Animali (ex pet-therapy). Prenotazione obbligatoria.",
+  "df": "26/11/2026",
+  "di": "26/11/2026",
+  "eta": "4-11 anni",
+  "festa": "nessuna",
+  "first_seen": "2026-11-23",
+  "indirizzo": "Piazza Castello, Casale Monferrato",
+  "last_seen": "2026-11-23",
+  "lat": "45.136927",
+  "loc": "daop_alessandria_4036620010524197193.webp",
+  "lon": "8.448289",
+  "luogo": "Biblioteca ragazzi Emanuele Luzzati",
+  "manifest": "Novembre in biblioteca",
+  "nome": "Un cane per sorridere - Interventi Assistiti con gli Animali",
+  "ora": "17:00",
+  "prezzo": "Gratuito",
+  "prov": "AL",
+  "riga": 490,
+  "slug": "un-cane-per-sorridere-interventi-assistiti-con-gli-casale-monferrato",
   "updated": "2026-11-23"
  },
  "un-chicco-mille-scoperte-coldiretti-cuneo-campagna-fossano": {
@@ -46979,7 +47180,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 283,
+  "riga": 282,
   "slug": "un-magico-natale-al-castello-dei-roero-monteu-roero",
   "updated": "2026-11-23"
  },
@@ -47008,7 +47209,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 316,
+  "riga": 315,
   "slug": "un-mondo-di-cereali-casale-monferrato",
   "updated": "2026-11-23"
  },
@@ -47066,7 +47267,7 @@
   "ora": "10:00-12:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 430,
+  "riga": 429,
   "slug": "un-museo-per-tutti-si-puo-cuneo",
   "updated": "2026-11-23"
  },
@@ -47095,7 +47296,7 @@
   "ora": "09:00-18:00",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 403,
+  "riga": 402,
   "slug": "un-piccolo-dono-un-grande-sorriso-castellazzo-socc-castellazzo-bormida",
   "updated": "2026-11-23"
  },
@@ -47207,7 +47408,7 @@
   "ora": "14:30",
   "prezzo": "10 € ragazzi 6-14, 12 € adulti",
   "prov": "AT",
-  "riga": 114,
+  "riga": 113,
   "slug": "un-viaggio-tra-minerali-e-fossili-asti",
   "updated": "2026-11-23"
  },
@@ -47460,7 +47661,7 @@
   "ora": "da verificare",
   "prezzo": "Gratuito",
   "prov": "AL",
-  "riga": 254,
+  "riga": 253,
   "slug": "una-storia-da-gustare-la-bottega-fiorita-ovada",
   "updated": "2026-11-23"
  },
@@ -47877,7 +48078,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "AL",
-  "riga": 394,
+  "riga": 393,
   "slug": "vendita-biglietti-lotteria-della-befana-vidalegra-predosa",
   "updated": "2026-11-23"
  },
@@ -48269,7 +48470,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 449,
+  "riga": 448,
   "slug": "villaggio-di-babbo-natale-alessandria",
   "updated": "2026-11-23"
  },
@@ -48297,7 +48498,7 @@
   "ora": "10:30",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 321,
+  "riga": 320,
   "slug": "villaggio-di-natale-a-mandrogne-sms-societa-mutuo",
   "updated": "2026-11-23"
  },
@@ -48325,7 +48526,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 436,
+  "riga": 435,
   "slug": "villaggio-di-natale-il-magico-mondo-di-memole-saluzzo",
   "updated": "2026-11-23"
  },
@@ -48353,7 +48554,7 @@
   "ora": "10:00-18:30",
   "prezzo": "Ingresso libero",
   "prov": "AT",
-  "riga": 488,
+  "riga": 486,
   "slug": "villaggio-di-natale-mercatino-natalizio-e-babbo-na-calliano-monferrato",
   "updated": "2026-11-23"
  },
@@ -48604,7 +48805,7 @@
   "ora": "14:30-17:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 127,
+  "riga": 126,
   "slug": "vivi-il-pony-in-coppia-ippica-saluzzese-lagnasco",
   "updated": "2026-11-23"
  },
@@ -48741,7 +48942,7 @@
   "ora": "vari",
   "prezzo": "A pagamento (da verificare)",
   "prov": "AT",
-  "riga": 478,
+  "riga": 477,
   "slug": "weekend-sul-ghiaccio-il-regno-di-ghiaccio-asti",
   "updated": "2026-11-23"
  },
@@ -48770,7 +48971,7 @@
   "ora": "17:00",
   "prezzo": "5 euro",
   "prov": "AL",
-  "riga": 288,
+  "riga": 287,
   "slug": "winnie-the-pooh-ora-abbiamo-sei-anni-teatro-marenc-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -48854,7 +49055,7 @@
   "ora": "15:00",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 328,
+  "riga": 327,
   "slug": "xmas-inaugurazione-casetta-di-babbo-natale-in-bali-ovada",
   "updated": "2026-11-23"
  },
@@ -48910,7 +49111,7 @@
   "ora": "17:00",
   "prezzo": "5 euro",
   "prov": "AL",
-  "riga": 290,
+  "riga": 289,
   "slug": "yes-land-teatro-marenco-novi-ligure",
   "updated": "2026-11-23"
  },
@@ -49023,7 +49224,7 @@
   "ora": "da verificare",
   "prezzo": "Ingresso libero",
   "prov": "AL",
-  "riga": 262,
+  "riga": 261,
   "slug": "zampognari-per-le-vie-del-quartiere-quartiere-cris-alessandria",
   "updated": "2026-11-23"
  },
