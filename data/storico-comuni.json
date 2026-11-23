@@ -1887,6 +1887,17 @@
     "pagina": true,
     "ultima": "2026-10-14"
    },
+   "villaggio-di-babbo-natale-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Libertà",
+    "manifest": "",
+    "nome": "Villaggio di Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-04"
+   },
    "zampognari-per-le-vie-del-quartiere-quartiere-cris-alessandria": {
     "anni": [
      2026
@@ -2678,6 +2689,17 @@
     "pagina": true,
     "ultima": "2026-11-12"
    },
+   "natale-sui-pattini-a-s-d-new-asti-skating": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palabrumar",
+    "manifest": "",
+    "nome": "Natale sui Pattini - A.S.D. New Asti Skating",
+    "organizza": "A.S.D. New Asti Skating",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "natale-tra-i-fossili-laboratorio-creativo-di-argil-asti": {
     "anni": [
      2026
@@ -2732,6 +2754,18 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-01"
+   },
+   "open-school-scuola-dell-infanzia-cattedrale-asti": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Scuola dell'Infanzia Cattedrale",
+    "manifest": "",
+    "nome": "Open School - Scuola dell'Infanzia Cattedrale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-09"
    },
    "paleolab-paleontologo-per-un-giorno-parco-paleonto-asti": {
     "anni": [
@@ -2809,6 +2843,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-26"
+   },
+   "rossini-a-colori-biblioteca-astense-giorgio-falett-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Astense Giorgio Faletti",
+    "manifest": "",
+    "nome": "Rossini a Colori - Biblioteca Astense Giorgio Faletti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
+   "rossini-a-colori-con-il-tenore-enrico-iviglia-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Astense Giorgio Faletti",
+    "manifest": "",
+    "nome": "Rossini a Colori - con il Tenore Enrico Iviglia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "si-riparte-insieme-oratorio-don-bosco-asti": {
     "anni": [
@@ -2908,6 +2964,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "weekend-sul-ghiaccio-il-regno-di-ghiaccio-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Statuto",
+    "manifest": "",
+    "nome": "Weekend sul Ghiaccio - Il Regno di Ghiaccio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-01"
    }
   },
   "nome": "Asti",
@@ -4728,6 +4795,17 @@
  },
  "callianomonferrato": {
   "eventi": {
+   "concerto-del-coro-polifonico-astense-calliano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale",
+    "manifest": "Villaggio di Natale Calliano Monferrato",
+    "nome": "Concerto del Coro Polifonico Astense",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "paglio-ragliante-edizione-calliano-monferrato": {
     "anni": [
      2026
@@ -4749,6 +4827,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-28"
+   },
+   "santa-messa-della-vigilia-di-natale-con-cioccolata-calliano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale",
+    "manifest": "Villaggio di Natale Calliano Monferrato",
+    "nome": "Santa Messa della Vigilia di Natale con cioccolata calda e vin brulé",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-24"
+   },
+   "villaggio-di-natale-mercatino-natalizio-e-babbo-na-calliano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza antistante la Chiesa del SS. Nome di Maria",
+    "manifest": "Villaggio di Natale Calliano Monferrato",
+    "nome": "Villaggio di Natale - Mercatino natalizio e Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    }
   },
   "nome": "Calliano Monferrato",
@@ -5551,6 +5651,17 @@
     "pagina": true,
     "ultima": "2026-11-14"
    },
+   "l-albero-di-natale-con-i-trattori-camera-lavori-co-casal-cermelli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vicolo San Giovanni 1/10",
+    "manifest": "",
+    "nome": "L'Albero di Natale con i Trattori - Camera Lavori Conto Terzi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "sagra-della-focaccia-al-formaggio-e-delle-trofie-a-casal-cermelli": {
     "anni": [
      2026
@@ -5611,6 +5722,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-12"
+   },
+   "festa-del-tartufo-bianco-del-monferrato-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Mazzini",
+    "manifest": "Festa del Tartufo Bianco del Monferrato",
+    "nome": "Festa del Tartufo Bianco del Monferrato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "festa-del-vino-del-monferrato-casale-monferrato": {
     "anni": [
@@ -5721,6 +5843,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-15"
+   },
+   "leggi-e-scrivi-con-rick-mr-wolf-academy-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Emanuele Luzzati",
+    "manifest": "",
+    "nome": "Leggi e Scrivi con Rick - Mr. Wolf Academy",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "monferrato-green-farm-casale-monferrato": {
     "anni": [
@@ -6408,6 +6541,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-05"
+   },
+   "leggiamo-insieme-storie-di-libri-castagnole-delle-lanze": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone del Centro Polifunzionale",
+    "manifest": "Biblioteche in Festa V Edizione",
+    "nome": "Leggiamo Insieme \"Storie di Libri\"",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-23"
    }
   },
   "nome": "Castagnole delle Lanze",
@@ -6481,6 +6625,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-08"
+   },
+   "open-school-scuola-dell-infanzia-di-castel-boglion-castel-boglione": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia di Castel Boglione",
+    "manifest": "",
+    "nome": "Open School - Scuola dell'Infanzia di Castel Boglione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    }
   },
   "nome": "Castel Boglione",
@@ -6854,6 +7009,17 @@
  },
  "castellazzobormida": {
   "eventi": {
+   "babbo-natale-arriva-in-vespa-vespa-club-castellazz-castellazzo-bormida": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele",
+    "manifest": "",
+    "nome": "Babbo Natale Arriva in Vespa - Vespa Club Castellazzo Bormida",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
    "coco-cinema-sotto-le-stelle-castellazzo-bormida": {
     "anni": [
      2026
@@ -6993,6 +7159,17 @@
  },
  "castellettomerli": {
   "eventi": {
+   "incontriamoci-a-natale-castelletto-merli": {
+    "anni": [
+     2026
+    ],
+    "luogo": "S.O.M.S. di Godio",
+    "manifest": "Incontriamoci... a Natale!",
+    "nome": "Incontriamoci... a Natale!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "notte-halloween-castelletto-merli": {
     "anni": [
      2026
@@ -7166,6 +7343,17 @@
     "pagina": true,
     "ultima": "2026-08-15"
    },
+   "fiera-regionale-del-tartufo-di-castelnuovo-don-bos-castelnuovo-don-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Don Bosco",
+    "manifest": "Fiera Regionale del Tartufo di Castelnuovo Don Bosco XXXIV edizione",
+    "nome": "Fiera Regionale del Tartufo di Castelnuovo Don Bosco XXXIV edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "i-supereroi-acrobatici-arrivano-a-castelnuovo-don-castelnuovo-don-bosco": {
     "anni": [
      2026
@@ -7176,6 +7364,17 @@
     "organizza": "Comune di Castelnuovo Don Bosco",
     "pagina": true,
     "ultima": "2026-10-14"
+   },
+   "red-night-terre-dei-santi-castelnuovo-don-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cantina Terre dei Santi",
+    "manifest": "",
+    "nome": "Red Night - Terre dei Santi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
    }
   },
   "nome": "Castelnuovo Don Bosco",
@@ -7193,6 +7392,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-05"
+   },
+   "aspettando-natale-in-fattoria-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Soul Farm",
+    "manifest": "Aspettando Natale in Fattoria",
+    "nome": "Aspettando Natale in Fattoria",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    },
    "facciamo-l-albero-insieme-castelnuovo-scrivia": {
     "anni": [
@@ -10823,6 +11033,17 @@
     "organizza": "Pro Loco Gabiano",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "natale-a-corte-gabiano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Europa",
+    "manifest": "Natale a Corte",
+    "nome": "Natale a Corte",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    }
   },
   "nome": "Gabiano",
@@ -11219,6 +11440,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-11"
+   },
+   "natale-in-piazza-grondona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "Natale in Piazza Grondona 2026",
+    "nome": "Natale in Piazza Grondona 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "sagra-della-capra-e-della-fersulla-pro-loco-grondo-grondona": {
     "anni": [
@@ -12426,6 +12658,17 @@
     "pagina": true,
     "ultima": "2026-10-18"
    },
+   "moncalvo-centro-storico-fiera-nazionale-del-bue-gr": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Moncalvo centro storico",
+    "manifest": "388ª Fiera Nazionale del Bue Grasso e Sagra del Bollito",
+    "nome": "Moncalvo centro storico - 388ª Fiera Nazionale del Bue Grasso e Sagra del Bollito",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "moncalvo-halloween-dalla-fracia-al-dazio-comune-di": {
     "anni": [
      2026
@@ -12436,6 +12679,28 @@
     "organizza": "Comune di Moncalvo",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "piazza-olinda-maranzana-fiera-nazionale-del-bue-gr-moncalvo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Olinda Maranzana",
+    "manifest": "388ª Fiera Nazionale del Bue Grasso e Sagra del Bollito",
+    "nome": "Piazza Olinda Maranzana - 388ª Fiera Nazionale del Bue Grasso e Sagra del Bollito",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-02"
+   },
+   "portici-storici-di-moncalvo-fiera-nazionale-del-bu": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Portici storici di Moncalvo",
+    "manifest": "388ª Fiera Nazionale del Bue Grasso e Sagra del Bollito",
+    "nome": "Portici storici di Moncalvo - 388ª Fiera Nazionale del Bue Grasso e Sagra del Bollito",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
    }
   },
   "nome": "Moncalvo",
@@ -12948,6 +13213,23 @@
   },
   "nome": "Mongardino",
   "prov": "AT"
+ },
+ "mongiardinoligure": {
+  "eventi": {
+   "la-casa-di-babbo-natale-pro-loco-mongiardino-mongiardino-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mulino di Pravaglione",
+    "manifest": "",
+    "nome": "La casa di Babbo Natale - Pro Loco Mongiardino",
+    "organizza": "Pro Loco Mongiardino",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   }
+  },
+  "nome": "Mongiardino Ligure",
+  "prov": "AL"
  },
  "monta": {
   "eventi": {
@@ -14278,6 +14560,17 @@
     "pagina": true,
     "ultima": "2026-11-21"
    },
+   "caffe-e-laboratori-creativi-popcornkids-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Novi Kids Club",
+    "nome": "Caffè e Laboratori Creativi - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
+   },
    "ceramica-terzo-fuoco-e-modellato-associazione-cult-novi-ligure": {
     "anni": [
      2026
@@ -14696,6 +14989,17 @@
     "pagina": true,
     "ultima": "2027-04-17"
    },
+   "little-photographers-popcornkids-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Studio di Carlotta Orani",
+    "manifest": "Novi Kids Club",
+    "nome": "Little Photographers - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-27"
+   },
    "louis-braille-leggere-con-le-dita-sognare-senza-li-novi-ligure": {
     "anni": [
      2027
@@ -14773,6 +15077,17 @@
     "pagina": true,
     "ultima": "2026-12-12"
    },
+   "notte-al-museo-gran-finale-con-pizzata-novi-ligure": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Museo dei Campionissimi",
+    "manifest": "Il Viaggio nel Tempo - Grandi Storie, Grandi Scoperte",
+    "nome": "Notte al Museo - Gran Finale con Pizzata",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-05-08"
+   },
    "notte-al-museo-orario-serale-con-pizzata-novi-ligure": {
     "anni": [
      2027
@@ -14828,6 +15143,17 @@
     "pagina": true,
     "ultima": "2026-08-24"
    },
+   "passeggiata-con-le-lanterne-per-famiglia-popcornki-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Melo",
+    "manifest": "Novi Kids Club",
+    "nome": "Passeggiata con le Lanterne per Famiglia - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "paw-patrol-missione-dinosauri-anteprima-nazionale-novi-ligure": {
     "anni": [
      2026
@@ -14872,6 +15198,28 @@
     "pagina": true,
     "ultima": "2026-10-17"
    },
+   "sabato-nella-natura-a-il-melo-popcornkids-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Melo",
+    "manifest": "Novi Kids Club",
+    "nome": "Sabato nella Natura a Il Melo - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
+   "sabato-nella-natura-popcornkids-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Melo",
+    "manifest": "Novi Kids Club",
+    "nome": "Sabato nella Natura - PopcornKids",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "sagra-dei-ceci-novi-ligure": {
     "anni": [
      2026
@@ -14915,6 +15263,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2027-02-28"
+   },
+   "sfilata-babbo-natale-a-modo-mio-pro-loco-novi-ligu-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie del centro",
+    "manifest": "",
+    "nome": "Sfilata Babbo Natale a Modo Mio - Pro Loco Novi Ligure",
+    "organizza": "Pro Loco Novi Ligure",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "show-cooking-e-meet-greet-con-ernst-knam-novi-ligure": {
     "anni": [
@@ -15375,6 +15734,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2027-01-16"
+   },
+   "fiera-di-sant-andrea-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico di Ovada",
+    "manifest": "",
+    "nome": "Fiera di Sant'Andrea",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "il-bosco-degli-imperfetti-hana-la-fatina-del-bosco-ovada": {
     "anni": [
@@ -16307,6 +16677,23 @@
   "nome": "Pietra Marazzi",
   "prov": "AL"
  },
+ "pinodasti": {
+  "eventi": {
+   "di-cortile-in-cortile-mercatino-pino-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cortili del centro storico",
+    "manifest": "Di Cortile in Cortile - Mercatino",
+    "nome": "Di Cortile in Cortile - Mercatino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   }
+  },
+  "nome": "Pino d'Asti",
+  "prov": "AT"
+ },
  "piozzo": {
   "eventi": {
    "laboratorio-bimbi-dedicato-alla-zucca-piozzo": {
@@ -16658,6 +17045,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-22"
+   },
+   "mercatino-di-natale-pro-loco-ponzone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "",
+    "nome": "Mercatino di Natale - Pro Loco Ponzone",
+    "organizza": "Pro Loco Ponzone",
+    "pagina": true,
+    "ultima": "2026-12-08"
    },
    "musical-chiudo-gli-occhi-e-penso-a-te-pro-loco-cig-ponzone": {
     "anni": [
@@ -20884,6 +21282,83 @@
  },
  "spinettamarengo": {
   "eventi": {
+   "accendiamo-il-natale-facciamo-squadra-fraschetta-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Genova",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Accendiamo il Natale! - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
+   "cinema-di-natale-con-topolino-facciamo-squadra-fra-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "da verificare",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Cinema di Natale con Topolino - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "cinema-per-i-bambini-della-scuola-dell-infanzia-fa-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "da verificare",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Cinema per i bambini della scuola dell'infanzia - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "giochi-e-animazione-con-anima-azione-facciamo-squa-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "da verificare",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Giochi e Animazione con Anima & Azione - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "il-grande-raduno-solidale-dei-babbi-natale-facciam-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Bar Roma Cafè",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Il Grande Raduno Solidale dei Babbi Natale - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "inaugurazione-giostra-di-natale-facciamo-squadra-f-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Verde di Via Genova",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Inaugurazione Giostra di Natale - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
+   "la-befana-vien-giocando-facciamo-squadra-fraschett-spinetta-marengo": {
+    "anni": [
+     2027
+    ],
+    "luogo": "da verificare",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "La Befana Vien Giocando - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-06"
+   },
    "laboratorio-per-bambini-cooperativa-paideia-spinetta-marengo": {
     "anni": [
      2026
@@ -20894,6 +21369,39 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-21"
+   },
+   "natale-con-tim-burton-facciamo-squadra-fraschetta-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "da verificare",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Natale con Tim Burton - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
+   "proiezione-il-bianconiglio-facciamo-squadra-frasch-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "da verificare",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Proiezione Il Bianconiglio - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
+   "raduno-e-parata-dei-babbi-natale-in-harley-davidso-spinetta-marengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Maino",
+    "manifest": "Natale 2026 in Fraschetta",
+    "nome": "Raduno e Parata dei Babbi Natale in Harley-Davidson - Facciamo Squadra Fraschetta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
    },
    "spinetta-in-festa-spinetta-marengo": {
     "anni": [
@@ -21268,6 +21776,17 @@
     "pagina": true,
     "ultima": "2026-09-26"
    },
+   "brindisi-natalizio-con-il-malabrocca-fiab-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Aroma Wine Bar",
+    "manifest": "Cinque appuntamenti in città con la Cargo Bike e un brindisi natalizio",
+    "nome": "Brindisi natalizio con il Malabrocca - FIAB Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-03"
+   },
    "concerto-di-natale-civica-accademia-musicale-peros-tortona": {
     "anni": [
      2026
@@ -21278,6 +21797,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-20"
+   },
+   "creiamo-insieme-una-lanterna-l-arte-della-luce-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "L'arte della luce - L'Officina delle Arti",
+    "nome": "Creiamo insieme una lanterna - L'arte della luce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-22"
    },
    "derthona-in-duomo-vacanze-di-natale-a-tortona": {
     "anni": [
@@ -21301,6 +21831,17 @@
     "pagina": true,
     "ultima": "2026-11-22"
    },
+   "drogheria-di-angelo-e-maddalena-cinque-appuntament-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Drogheria di Angelo e Maddalena",
+    "manifest": "Cinque appuntamenti in città con la Cargo Bike e un brindisi natalizio",
+    "nome": "Drogheria di Angelo e Maddalena - Cinque appuntamenti in città con la Cargo Bike - FIAB Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "festa-della-madonna-della-guardia-tortona": {
     "anni": [
      2026
@@ -21311,6 +21852,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-28"
+   },
+   "giardini-della-stazione-cinque-appuntamenti-in-cit-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini della Stazione",
+    "manifest": "Cinque appuntamenti in città con la Cargo Bike e un brindisi natalizio",
+    "nome": "Giardini della Stazione - Cinque appuntamenti in città con la Cargo Bike - FIAB Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "giochi-di-luce-e-ombra-l-arte-della-luce-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "L'arte della luce - L'Officina delle Arti",
+    "nome": "Giochi di luce e ombra - L'arte della luce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
    },
    "halloween-party-jack-il-tortonese-tortona": {
     "anni": [
@@ -21344,6 +21907,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-19"
+   },
+   "il-teatro-delle-ombre-l-arte-della-luce-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "L'arte della luce - L'Officina delle Arti",
+    "nome": "Il teatro delle ombre - L'arte della luce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-15"
+   },
+   "il-vascello-veloce-cinque-appuntamenti-in-citta-co-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Il Vascello Veloce",
+    "manifest": "Cinque appuntamenti in città con la Cargo Bike e un brindisi natalizio",
+    "nome": "Il Vascello Veloce - Cinque appuntamenti in città con la Cargo Bike - FIAB Tortona",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
    },
    "iron-mind-marco-berry-aps-magic-for-children-tortona": {
     "anni": [
@@ -21532,6 +22117,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-20"
+   },
+   "piccoli-artisti-luminosi-l-arte-della-luce-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro per le Famiglie di Tortona",
+    "manifest": "L'arte della luce - L'Officina delle Arti",
+    "nome": "Piccoli artisti luminosi - L'arte della luce",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-17"
    },
    "pizza-e-cinema-di-halloween-centro-per-le-famiglie-tortona": {
     "anni": [
@@ -21738,6 +22334,17 @@
  },
  "trisobbio": {
   "eventi": {
+   "a-trisobbio-c-e-gia-magia-di-natale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico di Trisobbio",
+    "manifest": "A Trisobbio c'è già Magia di Natale",
+    "nome": "A Trisobbio c'è già Magia di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "castelli-aperti-a-ferragosto-salita-alla-torre-del-trisobbio": {
     "anni": [
      2026
