@@ -744,12 +744,12 @@
     "anni": [
      2026
     ],
-    "luogo": "Kids&Us Alba",
+    "luogo": "Libreria Marameo",
     "manifest": "",
     "nome": "Story Time - Kids&Us Alba",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-10-17"
+    "ultima": "2026-11-27"
    },
    "story-time-the-very-hungry-caterpillar-kids-us-alb-alba": {
     "anni": [
@@ -783,6 +783,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-09"
+   },
+   "tutti-al-mab-fiabe-sonore-ore-16-15-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala MAB - Biblioteca Diocesana",
+    "manifest": "Che Stooria",
+    "nome": "Tutti al MAB. Fiabe Sonore - ore 16.15",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "tutti-al-mab-fiabe-sonore-ore-17-15-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala MAB - Biblioteca Diocesana",
+    "manifest": "Che Stooria",
+    "nome": "Tutti al MAB. Fiabe Sonore - ore 17.15",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "visita-guidata-a-ritmo-di-musica-hip-hop-ass-cultu-alba": {
     "anni": [
@@ -3935,6 +3957,17 @@
     "pagina": true,
     "ultima": "2026-11-10"
    },
+   "lupus-in-tabula-spazio-lab-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca di Boves - Terzo Piano",
+    "manifest": "",
+    "nome": "Lupus in Tabula - Spazio Lab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-25"
+   },
    "mani-che-creano-laboratorio-di-presepi-per-adulti-boves": {
     "anni": [
      2026
@@ -4057,6 +4090,39 @@
  },
  "bra": {
   "eventi": {
+   "accensione-albero-di-natale-e-auguri-dell-amminist-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Caduti per la Libertà",
+    "manifest": "Natale a Bra",
+    "nome": "Accensione albero di Natale e auguri dell'Amministrazione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "auguridanza-ass-il-sole-a-mezzanotte-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Caduti per la Libertà",
+    "manifest": "Natale a Bra",
+    "nome": "Auguridanza - Ass. Il Sole a Mezzanotte",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "baz-stand-up-comedy-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Politeama",
+    "manifest": "Natale a Bra",
+    "nome": "BAZ - Stand Up Comedy",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "bibliobebe-con-floriana-lovera-bambini-19-35-mesi-bra": {
     "anni": [
      2026
@@ -4090,6 +4156,17 @@
     "pagina": true,
     "ultima": "2026-12-10"
    },
+   "bra-ciocconatale": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Cittadino",
+    "manifest": "Natale a Bra",
+    "nome": "Bra Ciocconatale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
    "bra-s-festival": {
     "anni": [
      2026
@@ -4101,6 +4178,28 @@
     "pagina": true,
     "ultima": "2026-09-19"
    },
+   "caccia-al-tesoro-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Cittadino",
+    "manifest": "Natale a Bra",
+    "nome": "Caccia al Tesoro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "campioni-un-anno-da-ricordare-spettacolo-dei-treil-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Politeama",
+    "manifest": "Natale a Bra",
+    "nome": "Campioni. Un anno da ricordare - spettacolo dei Treilu",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
+   },
    "castelli-aperti-a-ferragosto-la-zizzola-bra": {
     "anni": [
      2026
@@ -4111,6 +4210,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "cioccolata-calda-e-vin-brule-con-gli-alpini-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Caduti per la Libertà",
+    "manifest": "Natale a Bra",
+    "nome": "Cioccolata calda e Vin Brulè con gli Alpini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    },
    "corso-bimbi-creepy-halloween-sessione-domenica-bra": {
     "anni": [
@@ -4134,6 +4244,39 @@
     "pagina": true,
     "ultima": "2026-10-24"
    },
+   "creazione-di-una-ghirlanda-natalizia-in-lana-the-p-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Albero Inverso",
+    "manifest": "Laboratori Creativi di Natale in Inglese",
+    "nome": "Creazione di una ghirlanda natalizia in lana - The Play Lab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-17"
+   },
+   "creazione-e-pittura-di-calamite-natalizie-in-legno-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Albero Inverso",
+    "manifest": "Laboratori Creativi di Natale in Inglese",
+    "nome": "Creazione e pittura di calamite natalizie in legno - The Play Lab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-26"
+   },
+   "decorazioni-per-l-albero-di-natale-con-la-tecnica-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Albero Inverso",
+    "manifest": "Laboratori Creativi di Natale in Inglese",
+    "nome": "Decorazioni per l'albero di Natale con la tecnica dello sbalzo su metallo - The Play Lab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-10"
+   },
    "gallerie-da-brivido-gallerie-del-territorio-bra": {
     "anni": [
      2026
@@ -4144,6 +4287,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "giorgio-vanni-live-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Auditorium G. Arpino",
+    "manifest": "Natale a Bra",
+    "nome": "Giorgio Vanni live",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    },
    "halloween-in-libreria-bra": {
     "anni": [
@@ -4177,6 +4331,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-27"
+   },
+   "jingle-quartet-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Caduti per la Libertà",
+    "manifest": "Natale a Bra",
+    "nome": "Jingle Quartet",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
    },
    "la-magia-del-riciclo-museo-civico-craveri-di-stori-bra": {
     "anni": [
@@ -4233,6 +4398,17 @@
     "pagina": true,
     "ultima": "2026-10-12"
    },
+   "magia-viennese-e-concerto-di-natale-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Politeama",
+    "manifest": "Natale a Bra",
+    "nome": "Magia Viennese e Concerto di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-17"
+   },
    "magic-english-playing-learning-con-elena-f-bra": {
     "anni": [
      2026
@@ -4255,6 +4431,39 @@
     "pagina": true,
     "ultima": "2026-12-12"
    },
+   "mercatino-di-natale-piazza-giolitti-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Giolitti",
+    "manifest": "Natale a Bra",
+    "nome": "Mercatino di Natale - Piazza Giolitti",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
+   "mercatino-di-natale-via-vittorio-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Vittorio",
+    "manifest": "Natale a Bra",
+    "nome": "Mercatino di Natale - Via Vittorio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
+   "mercato-straordinario-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Carlo Alberto",
+    "manifest": "Natale a Bra",
+    "nome": "Mercato straordinario",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
    "museum-in-the-dark-bra": {
     "anni": [
      2026
@@ -4276,6 +4485,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-24"
+   },
+   "realizzazione-di-un-portacandela-the-play-lab-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Albero Inverso",
+    "manifest": "Laboratori Creativi di Natale in Inglese",
+    "nome": "Realizzazione di un portacandela - The Play Lab",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-03"
    },
    "settimana-mondiale-per-l-allattamento-bra": {
     "anni": [
@@ -4331,6 +4551,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-08"
+   },
+   "the-greatest-show-bra": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Teatro Politeama",
+    "manifest": "Natale a Bra",
+    "nome": "The Greatest Show",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-23"
    },
    "tutti-ai-fornelli-workshop-genitori-figli-bra": {
     "anni": [
@@ -5506,6 +5737,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-25"
+   },
+   "giocarru-evento-ludico": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Divisione Alpina Cuneense",
+    "manifest": "",
+    "nome": "GioCarrù - Evento ludico",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
    },
    "incontro-informativo-di-primo-soccorso-gruppo-volo-carru": {
     "anni": [
@@ -7981,6 +8223,17 @@
  },
  "cherasco": {
   "eventi": {
+   "camminata-per-la-pace-cherasco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Municipio",
+    "manifest": "Camminata per la Pace Cherasco 2026",
+    "nome": "Camminata per la Pace Cherasco 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "castagnata-e-festa-di-inizio-anno-catechistico-a-r-cherasco": {
     "anni": [
      2026
@@ -9427,6 +9680,17 @@
     "pagina": true,
     "ultima": "2026-12-11"
    },
+   "natale-al-parco-edizione-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "La Casa del Fiume",
+    "manifest": "",
+    "nome": "Natale al Parco - 20^ edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "nessuno-tranne-me-laboratorio-di-lettura-e-creativ-cuneo": {
     "anni": [
      2026
@@ -9636,6 +9900,17 @@
     "pagina": true,
     "ultima": "2026-11-24"
    },
+   "un-segreto-importante-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "Un Segreto Importante",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-26"
+   },
    "una-festa-per-le-nonne-e-i-nonni-cerchiamoci-cuneo": {
     "anni": [
      2026
@@ -9657,6 +9932,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-08"
+   },
+   "winnie-the-pooh-laboratorio-di-lettura-e-gioco-cuneo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca 0-18",
+    "manifest": "",
+    "nome": "Winnie-the-Pooh - Laboratorio di lettura e gioco",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-24"
    }
   },
   "nome": "Cuneo",
@@ -9792,6 +10078,17 @@
  },
  "dogliani": {
   "eventi": {
+   "dogliani-christmas-wow": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Umberto I e Centro Storico",
+    "manifest": "Dogliani Christmas Wow 2026",
+    "nome": "Dogliani Christmas Wow 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "festa-dei-bambini-pro-loco-dogliani-castello": {
     "anni": [
      2026
@@ -9813,6 +10110,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "mercatino-di-natale-dogliani": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Storico",
+    "manifest": "Mercatino di Natale Dogliani 2026",
+    "nome": "Mercatino di Natale Dogliani 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
    },
    "san-lorenzo-celso-dogliani": {
     "anni": [
@@ -10831,9 +11139,37 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "mercatino-di-natale-handmade-delle-moms-frabosa-soprana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza di Frabosa Soprana",
+    "manifest": "Mercatino di Natale Handmade delle Moms",
+    "nome": "Mercatino di Natale Handmade delle Moms",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
    }
   },
   "nome": "Frabosa Soprana",
+  "prov": "CN"
+ },
+ "frabosasottana": {
+  "eventi": {
+   "presepe-vivente-di-pianvignale-presepe-per-la-pace-frabosa-sottana": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Pianvignale",
+    "manifest": "",
+    "nome": "Presepe Vivente di Pianvignale - Presepe per la Pace",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-03"
+   }
+  },
+  "nome": "Frabosa Sottana",
   "prov": "CN"
  },
  "francavillabisio": {
@@ -12139,6 +12475,17 @@
     "pagina": true,
     "ultima": "2026-10-25"
    },
+   "natale-di-luce-a-manta": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Popolo",
+    "manifest": "Natale di Luce a Manta",
+    "nome": "Natale di Luce a Manta",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "pomeriggio-della-gentilezza-centro-aggregativo-man-manta": {
     "anni": [
      2026
@@ -12372,6 +12719,17 @@
  },
  "margarita": {
   "eventi": {
+   "festa-di-natale-pro-loco-margarita": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Palacoj Margarita",
+    "manifest": "",
+    "nome": "Festa di Natale - Pro Loco Margarita",
+    "organizza": "Pro Loco Margarita",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "mercatini-di-natale-margarita": {
     "anni": [
      2026
@@ -12912,6 +13270,17 @@
     "pagina": true,
     "ultima": "2026-10-17"
    },
+   "gospel-sunshine-choir-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Maggiore",
+    "manifest": "",
+    "nome": "Gospel Sunshine Choir",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "halloween-kids-party-blockbusters-mondovi": {
     "anni": [
      2026
@@ -13066,6 +13435,17 @@
     "pagina": true,
     "ultima": "2026-09-12"
    },
+   "parata-natalizia-citta-di-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie del Centro Storico",
+    "manifest": "",
+    "nome": "Parata Natalizia - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "peccati-di-gola-xxviii-fiera-regionale-del-tartufo-mondovi": {
     "anni": [
      2026
@@ -13087,6 +13467,39 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-03"
+   },
+   "raduno-aerostatico-dell-epifania-citta-di-mondovi": {
+    "anni": [
+     2027
+    ],
+    "luogo": "In Città",
+    "manifest": "",
+    "nome": "Raduno Aerostatico dell'Epifania - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-04"
+   },
+   "re-mercante-citta-di-mondovi": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Piazza Maggiore",
+    "manifest": "",
+    "nome": "Re Mercante - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-06"
+   },
+   "ruota-panoramica-citta-di-mondovi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Statuto",
+    "manifest": "",
+    "nome": "Ruota Panoramica - Città di Mondovì",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
    },
    "spazio-trucca-bimbi-in-piazza-ellero-mondovi": {
     "anni": [
@@ -14520,6 +14933,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-06"
+   },
+   "natale-storie-e-creativita-novello": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Asilo Nido di Novello",
+    "manifest": "",
+    "nome": "Natale, storie e creatività",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    }
   },
   "nome": "Novello",
@@ -15540,6 +15964,17 @@
     "pagina": true,
     "ultima": "2026-08-16"
    },
+   "insieme-e-meglio-ormea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Conferenze Lavoro",
+    "manifest": "",
+    "nome": "Insieme è Meglio!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-25"
+   },
    "laboratorio-creativo-acquerelli-da-verdura-e-frutt-ormea": {
     "anni": [
      2026
@@ -16143,6 +16578,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-05"
+   },
+   "presepe-vivente-alle-meire-pian-croesio-paesana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Meire Pian Croesio",
+    "manifest": "",
+    "nome": "Presepe Vivente alle Meire Pian Croesio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
    }
   },
   "nome": "Paesana",
@@ -17438,6 +17884,41 @@
   "nome": "Prato Nevoso",
   "prov": "CN"
  },
+ "prazzo": {
+  "eventi": {
+   "la-magia-dell-arbu-prazzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del paese",
+    "manifest": "La magia dell'Arbu",
+    "nome": "La magia dell'Arbu",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   }
+  },
+  "nome": "Prazzo",
+  "prov": "CN"
+ },
+ "prea": {
+  "eventi": {
+   "presepe-vivente-di-prea": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Prea",
+    "manifest": "",
+    "nome": "Presepe Vivente di Prea",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-05"
+   }
+  },
+  "nome": "Prea",
+  "prov": "CN"
+ },
  "predosa": {
   "eventi": {
    "accensione-delle-luci-di-natale-vidalegra-aps-predosa": {
@@ -18242,6 +18723,17 @@
  },
  "riforano": {
   "eventi": {
+   "festa-di-natale-tata-lisa-riforano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone di Riforano",
+    "manifest": "",
+    "nome": "Festa di Natale - Tata Lisa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-23"
+   },
    "laboratorio-autunnale-tata-lisa-riforano": {
     "anni": [
      2026
@@ -18252,10 +18744,21 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "laboratorio-di-natale-tata-lisa-riforano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Parrocchiale di Riforano",
+    "manifest": "",
+    "nome": "Laboratorio di Natale - Tata Lisa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-07"
    }
   },
   "nome": "Riforano",
-  "prov": "AL"
+  "prov": "CN"
  },
  "rifreddo": {
   "eventi": {
@@ -18517,6 +19020,17 @@
  },
  "roccadebaldi": {
   "eventi": {
+   "festa-di-natale-pro-loco-di-rocca-de-baldi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Polivalente di Crava",
+    "manifest": "",
+    "nome": "Festa di Natale - Pro Loco di Rocca de' Baldi",
+    "organizza": "Pro Loco di Rocca de' Baldi",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
    "festa-di-san-bartolomeo-rocca-de-baldi": {
     "anni": [
      2026
@@ -19756,6 +20270,17 @@
  },
  "sangiacomodiroburent": {
   "eventi": {
+   "essere-con-babbo-natale-essere-sangiacomo-san-giacomo-di-roburent": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Al Giardina",
+    "manifest": "",
+    "nome": "Essere con Babbo Natale - Essere Sangiacomo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "halloween-a-san-giacomo-di-roburent": {
     "anni": [
      2026
@@ -22728,6 +23253,23 @@
   "nome": "Venasca",
   "prov": "CN"
  },
+ "vernante": {
+  "eventi": {
+   "sapori-di-neve-vernante": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Vie del paese",
+    "manifest": "Sapori di Neve 2026",
+    "nome": "Sapori di Neve 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   }
+  },
+  "nome": "Vernante",
+  "prov": "CN"
+ },
  "verzuolo": {
   "eventi": {
    "dal-seme-all-albero-laboratorio-di-lettura-ad-alta-verzuolo": {
@@ -22740,6 +23282,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-14"
+   },
+   "esploratori-di-immagini-verzuolo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica Cesare Segre",
+    "manifest": "Biblioteche in Festa V Edizione",
+    "nome": "Esploratori di immagini",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    },
    "ferragosto-al-castello-pro-loco-villa-di-verzuolo": {
     "anni": [
