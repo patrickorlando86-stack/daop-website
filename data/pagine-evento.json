@@ -744,7 +744,7 @@
   "ora": "18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 489,
+  "riga": 488,
   "slug": "accensione-albero-di-natale-e-auguri-dell-amminist-bra",
   "updated": "2026-11-24"
  },
@@ -4493,7 +4493,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 497,
+  "riga": 496,
   "slug": "baz-stand-up-comedy-bra",
   "updated": "2026-11-24"
  },
@@ -5309,7 +5309,7 @@
   "ora": "15:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 496,
+  "riga": 495,
   "slug": "bra-ciocconatale",
   "updated": "2026-11-24"
  },
@@ -5810,6 +5810,7 @@
   "prov": "CN",
   "riga": 488,
   "slug": "caccia-al-tesoro-bra",
+  "spostata": "accensione-albero-di-natale-e-auguri-dell-amminist-bra",
   "updated": "2026-11-24"
  },
  "caccia-al-tesoro-dei-3-re-magi-cuneo": {
@@ -6091,7 +6092,7 @@
   "ora": "vari",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 534,
+  "riga": 531,
   "slug": "camminata-per-la-pace-cherasco",
   "updated": "2026-11-24"
  },
@@ -6315,7 +6316,7 @@
   "ora": "20:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 492,
+  "riga": 491,
   "slug": "campioni-un-anno-da-ricordare-spettacolo-dei-treil-bra",
   "updated": "2026-11-24"
  },
@@ -8625,7 +8626,7 @@
   "ora": "18:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 491,
+  "riga": 490,
   "slug": "cioccolata-calda-e-vin-brule-con-gli-alpini-bra",
   "updated": "2026-11-24"
  },
@@ -9975,7 +9976,7 @@
   "ora": "17:00-18:30",
   "prezzo": "15 euro (singolo laboratorio) oppure 48 euro per tutti e 4",
   "prov": "CN",
-  "riga": 505,
+  "riga": 504,
   "slug": "creazione-di-una-ghirlanda-natalizia-in-lana-the-p-bra",
   "updated": "2026-11-24"
  },
@@ -10003,7 +10004,7 @@
   "ora": "17:00-18:30",
   "prezzo": "15 euro (singolo laboratorio) oppure 48 euro per tutti e 4",
   "prov": "CN",
-  "riga": 502,
+  "riga": 501,
   "slug": "creazione-e-pittura-di-calamite-natalizie-in-legno-bra",
   "updated": "2026-11-24"
  },
@@ -10624,7 +10625,7 @@
   "ora": "17:00-18:30",
   "prezzo": "15 euro (singolo laboratorio) oppure 48 euro per tutti e 4",
   "prov": "CN",
-  "riga": 504,
+  "riga": 503,
   "slug": "decorazioni-per-l-albero-di-natale-con-la-tecnica-bra",
   "updated": "2026-11-24"
  },
@@ -10931,7 +10932,7 @@
   "ora": "vari",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 520,
+  "riga": 517,
   "slug": "dogliani-christmas-wow",
   "updated": "2026-11-24"
  },
@@ -11791,7 +11792,7 @@
   "ora": "10:30",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 511,
+  "riga": 510,
   "slug": "esploratori-di-immagini-verzuolo",
   "updated": "2026-11-24"
  },
@@ -12016,7 +12017,7 @@
   "ora": "16:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 528,
+  "riga": 525,
   "slug": "essere-con-babbo-natale-essere-sangiacomo-san-giacomo-di-roburent",
   "updated": "2026-11-24"
  },
@@ -15322,7 +15323,7 @@
   "ora": "14:30",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 508,
+  "riga": 507,
   "slug": "festa-di-natale-pro-loco-di-rocca-de-baldi",
   "updated": "2026-11-24"
  },
@@ -15351,8 +15352,37 @@
   "ora": "14:00-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 536,
+  "riga": 533,
   "slug": "festa-di-natale-pro-loco-margarita",
+  "updated": "2026-11-24"
+ },
+ "festa-di-natale-tata-lisa-morozzo": {
+  "anchor": "ev-2026-12-23-festa-di-natale-tata-lisa",
+  "categoria": "Laboratorio",
+  "citta": "Morozzo",
+  "consigliato": "No",
+  "contatto": "3283549182",
+  "d_end": "2026-12-23",
+  "d_start": "2026-12-23",
+  "descr": "Una festa di Natale con letture, laboratori e una buona merenda natalizia, organizzata da Tata Lisa. Prenotazione necessaria per l'organizzazione. L'evento si svolge dalle 16 alle 18 al Salone di Riforano.",
+  "df": "23/12/2026",
+  "di": "23/12/2026",
+  "eta": "3-10 anni (da verificare)",
+  "festa": "natale",
+  "first_seen": "2026-11-24",
+  "indirizzo": "Salone di Riforano - Riforano, Morozzo (CN)",
+  "last_seen": "2026-11-24",
+  "lat": "44.4252964",
+  "loc": "daop_cuneo_4036822583403752750.webp",
+  "lon": "7.6584942",
+  "luogo": "Salone di Riforano",
+  "manifest": "",
+  "nome": "Festa di Natale - Tata Lisa",
+  "ora": "16:00-18:00",
+  "prezzo": "Offerta libera",
+  "prov": "CN",
+  "riga": 509,
+  "slug": "festa-di-natale-tata-lisa-morozzo",
   "updated": "2026-11-24"
  },
  "festa-di-natale-tata-lisa-riforano": {
@@ -15382,6 +15412,7 @@
   "prov": "CN",
   "riga": 510,
   "slug": "festa-di-natale-tata-lisa-riforano",
+  "spostata": "festa-di-natale-tata-lisa-morozzo",
   "updated": "2026-11-24"
  },
  "festa-di-san-bartolomeo-rocca-de-baldi": {
@@ -18801,7 +18832,7 @@
   "ora": "10:00-19:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 509,
+  "riga": 508,
   "slug": "giocarru-evento-ludico",
   "updated": "2026-11-24"
  },
@@ -19337,7 +19368,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 494,
+  "riga": 493,
   "slug": "giorgio-vanni-live-bra",
   "updated": "2026-11-24"
  },
@@ -19728,7 +19759,7 @@
   "ora": "18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 526,
+  "riga": 523,
   "slug": "gospel-sunshine-choir-mondovi",
   "updated": "2026-11-24"
  },
@@ -24658,7 +24689,7 @@
   "ora": "20:00-22:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 513,
+  "riga": 512,
   "slug": "insieme-e-meglio-ormea",
   "updated": "2026-11-24"
  },
@@ -24914,7 +24945,7 @@
   "ora": "18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 490,
+  "riga": 489,
   "slug": "jingle-quartet-bra",
   "updated": "2026-11-24"
  },
@@ -26097,7 +26128,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 529,
+  "riga": 526,
   "slug": "la-magia-dell-arbu-prazzo",
   "updated": "2026-11-24"
  },
@@ -28033,6 +28064,35 @@
   "slug": "laboratorio-di-natale-mondovi",
   "updated": "2026-11-24"
  },
+ "laboratorio-di-natale-tata-lisa-morozzo": {
+  "anchor": "ev-2026-12-07-laboratorio-di-natale-tata-lisa",
+  "categoria": "Laboratorio",
+  "citta": "Morozzo",
+  "consigliato": "No",
+  "contatto": "3283549182",
+  "d_end": "2026-12-07",
+  "d_start": "2026-12-07",
+  "descr": "Laboratorio natalizio per bambini: si prepara insieme la letterina per Babbo Natale, che... sorpresa... risponderà per davvero nelle settimane successive! Attività creativa con prenotazione obbligatoria. Contributo di 1 euro.",
+  "df": "07/12/2026",
+  "di": "07/12/2026",
+  "eta": "3-10 anni (da verificare)",
+  "festa": "natale",
+  "first_seen": "2026-11-24",
+  "indirizzo": "Salone Parrocchiale di Riforano - Riforano, Morozzo (CN)",
+  "last_seen": "2026-11-24",
+  "lat": "44.4252964",
+  "loc": "daop_cuneo_4036822391388521404.webp",
+  "lon": "7.6584942",
+  "luogo": "Salone Parrocchiale di Riforano",
+  "manifest": "",
+  "nome": "Laboratorio di Natale - Tata Lisa",
+  "ora": "16:00-18:00",
+  "prezzo": "1 euro",
+  "prov": "CN",
+  "riga": 532,
+  "slug": "laboratorio-di-natale-tata-lisa-morozzo",
+  "updated": "2026-11-24"
+ },
  "laboratorio-di-natale-tata-lisa-riforano": {
   "anchor": "ev-2026-12-07-laboratorio-di-natale-tata-lisa",
   "categoria": "Laboratorio",
@@ -28060,6 +28120,7 @@
   "prov": "AL",
   "riga": 535,
   "slug": "laboratorio-di-natale-tata-lisa-riforano",
+  "spostata": "laboratorio-di-natale-tata-lisa-morozzo",
   "updated": "2026-11-24"
  },
  "laboratorio-di-pittura-per-bambini-e-ragazzi-assoc-borghetto-di-borbera": {
@@ -30739,7 +30800,7 @@
   "ora": "17:00-19:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 514,
+  "riga": 513,
   "slug": "lupus-in-tabula-spazio-lab-boves",
   "updated": "2026-11-24"
  },
@@ -30767,7 +30828,7 @@
   "ora": "21:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 498,
+  "riga": 497,
   "slug": "magia-viennese-e-concerto-di-natale-bra",
   "updated": "2026-11-24"
  },
@@ -32468,7 +32529,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 537,
+  "riga": 534,
   "slug": "mercatino-di-natale-dogliani",
   "updated": "2026-11-24"
  },
@@ -32525,7 +32586,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 531,
+  "riga": 528,
   "slug": "mercatino-di-natale-handmade-delle-moms-frabosa-soprana",
   "updated": "2026-11-24"
  },
@@ -32553,7 +32614,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 493,
+  "riga": 492,
   "slug": "mercatino-di-natale-piazza-giolitti-bra",
   "updated": "2026-11-24"
  },
@@ -32808,7 +32869,7 @@
   "ora": "10:00-18:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 499,
+  "riga": 498,
   "slug": "mercato-straordinario-bra",
   "updated": "2026-11-24"
  },
@@ -34365,7 +34426,7 @@
   "ora": "16:00 - 17:00 - 18:00 - 19:00",
   "prezzo": "5 euro a persona",
   "prov": "CN",
-  "riga": 506,
+  "riga": 505,
   "slug": "natale-al-parco-edizione-cuneo",
   "updated": "2026-11-24"
  },
@@ -34450,7 +34511,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 530,
+  "riga": 527,
   "slug": "natale-di-luce-a-manta",
   "updated": "2026-11-24"
  },
@@ -34564,7 +34625,7 @@
   "ora": "16:00-18:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 523,
+  "riga": 520,
   "slug": "natale-storie-e-creativita-novello",
   "updated": "2026-11-24"
  },
@@ -37234,7 +37295,7 @@
   "ora": "15:30",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 533,
+  "riga": 530,
   "slug": "parata-natalizia-citta-di-mondovi",
   "updated": "2026-11-24"
  },
@@ -39568,7 +39629,7 @@
   "ora": "21:00-00:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 532,
+  "riga": 529,
   "slug": "presepe-vivente-alle-meire-pian-croesio-paesana",
   "updated": "2026-11-24"
  },
@@ -39653,7 +39714,7 @@
   "ora": "10:00-17:00",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 524,
+  "riga": 521,
   "slug": "presepe-vivente-di-pianvignale-presepe-per-la-pace-frabosa-sottana",
   "updated": "2026-11-24"
  },
@@ -40916,7 +40977,7 @@
   "ora": "17:00-18:30",
   "prezzo": "15 euro (singolo laboratorio) oppure 48 euro per tutti e 4",
   "prov": "CN",
-  "riga": 503,
+  "riga": 502,
   "slug": "realizzazione-di-un-portacandela-the-play-lab-bra",
   "updated": "2026-11-24"
  },
@@ -41392,7 +41453,7 @@
   "ora": "vari",
   "prezzo": "Gratuito durante la settimana",
   "prov": "CN",
-  "riga": 525,
+  "riga": 522,
   "slug": "ruota-panoramica-citta-di-mondovi",
   "updated": "2026-11-24"
  },
@@ -43366,7 +43427,7 @@
   "ora": "vari",
   "prezzo": "Ingresso libero",
   "prov": "CN",
-  "riga": 527,
+  "riga": 524,
   "slug": "sapori-di-neve-vernante",
   "updated": "2026-11-24"
  },
@@ -45798,7 +45859,7 @@
   "ora": "da verificare",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 522,
+  "riga": 519,
   "slug": "story-time-kids-us-alba",
   "updated": "2026-11-24"
  },
@@ -46532,7 +46593,7 @@
   "ora": "21:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 501,
+  "riga": 500,
   "slug": "the-greatest-show-bra",
   "updated": "2026-11-24"
  },
@@ -47709,6 +47770,35 @@
   "slug": "tutti-ai-fornelli-workshop-genitori-figli-bra",
   "updated": "2026-11-24"
  },
+ "tutti-al-mab-fiabe-sonore-alba": {
+  "anchor": "ev-2026-11-28-tutti-al-mab-fiabe-sonore",
+  "categoria": "Spettacolo",
+  "citta": "Alba",
+  "consigliato": "No",
+  "contatto": "mudialba14@gmail.com",
+  "d_end": "2026-11-28",
+  "d_start": "2026-11-28",
+  "descr": "Letture multisensoriali ad alta voce, a cura di Elisabetta Bernocco, neuropsicomotricista e cantautrice. Partecipazione gratuita con prenotazione obbligatoria.",
+  "df": "28/11/2026",
+  "di": "28/11/2026",
+  "eta": "0-6 anni (da verificare)",
+  "festa": "nessuna",
+  "first_seen": "2026-11-24",
+  "indirizzo": "Piazza Vittorio Veneto, Seminario Vescovile - Alba (CN)",
+  "last_seen": "2026-11-24",
+  "lat": "44.7008347",
+  "loc": "daop_cuneo_4036637617835345164.webp",
+  "lon": "8.0368809",
+  "luogo": "Sala MAB - Biblioteca Diocesana",
+  "manifest": "Che Stooria",
+  "nome": "Tutti al MAB. Fiabe Sonore",
+  "ora": "16:15 e 17:15",
+  "prezzo": "Gratuito",
+  "prov": "CN",
+  "riga": 515,
+  "slug": "tutti-al-mab-fiabe-sonore-alba",
+  "updated": "2026-11-24"
+ },
  "tutti-al-mab-fiabe-sonore-ore-16-15-alba": {
   "anchor": "ev-2026-11-28-tutti-al-mab-fiabe-sonore-ore-16-15",
   "categoria": "Spettacolo",
@@ -47735,6 +47825,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 516,
+  "ritirata": "2026-11-24",
   "slug": "tutti-al-mab-fiabe-sonore-ore-16-15-alba",
   "updated": "2026-11-24"
  },
@@ -47764,6 +47855,7 @@
   "prezzo": "Gratuito",
   "prov": "CN",
   "riga": 517,
+  "ritirata": "2026-11-24",
   "slug": "tutti-al-mab-fiabe-sonore-ore-17-15-alba",
   "updated": "2026-11-24"
  },
@@ -48684,7 +48776,7 @@
   "ora": "17:00",
   "prezzo": "Non indicato",
   "prov": "CN",
-  "riga": 515,
+  "riga": 514,
   "slug": "un-segreto-importante-cuneo",
   "updated": "2026-11-24"
  },
@@ -50303,7 +50395,7 @@
   "ora": "17:00",
   "prezzo": "Gratuito",
   "prov": "CN",
-  "riga": 512,
+  "riga": 511,
   "slug": "winnie-the-pooh-laboratorio-di-lettura-e-gioco-cuneo",
   "updated": "2026-11-24"
  },

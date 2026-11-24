@@ -3075,7 +3075,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/festa-di-natale-tata-lisa-riforano.html</loc>
+    <loc>https://www.daop.it/eventi/festa-di-natale-tata-lisa-morozzo.html</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -5433,7 +5433,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/laboratorio-di-natale-tata-lisa-riforano.html</loc>
+    <loc>https://www.daop.it/eventi/laboratorio-di-natale-tata-lisa-morozzo.html</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -8847,13 +8847,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/tutti-al-mab-fiabe-sonore-ore-16-15-alba.html</loc>
-    <lastmod>2026-11-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.daop.it/eventi/tutti-al-mab-fiabe-sonore-ore-17-15-alba.html</loc>
+    <loc>https://www.daop.it/eventi/tutti-al-mab-fiabe-sonore-alba.html</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -9661,6 +9655,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/comune/mornese.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/comune/morozzo.html</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

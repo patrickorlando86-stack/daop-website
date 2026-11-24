@@ -784,6 +784,17 @@
     "pagina": true,
     "ultima": "2026-10-09"
    },
+   "tutti-al-mab-fiabe-sonore-alba": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala MAB - Biblioteca Diocesana",
+    "manifest": "Che Stooria",
+    "nome": "Tutti al MAB. Fiabe Sonore",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "tutti-al-mab-fiabe-sonore-ore-16-15-alba": {
     "anni": [
      2026
@@ -14485,6 +14496,17 @@
     "pagina": true,
     "ultima": "2026-10-11"
    },
+   "festa-di-natale-tata-lisa-morozzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone di Riforano",
+    "manifest": "",
+    "nome": "Festa di Natale - Tata Lisa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-23"
+   },
    "la-festa-degli-alberi-go-green-morozzo": {
     "anni": [
      2026
@@ -14506,6 +14528,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "laboratorio-di-natale-tata-lisa-morozzo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Parrocchiale di Riforano",
+    "manifest": "",
+    "nome": "Laboratorio di Natale - Tata Lisa",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-07"
    }
   },
   "nome": "Morozzo",
