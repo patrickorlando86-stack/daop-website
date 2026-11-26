@@ -907,6 +907,17 @@
  },
  "alberaligure": {
   "eventi": {
+   "aspettando-il-natale-albera-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza della Chiesa",
+    "manifest": "Aspettando il Natale",
+    "nome": "Aspettando il Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "festa-al-mulino-pro-loco-albera-albera-ligure": {
     "anni": [
      2026
@@ -2737,12 +2748,12 @@
     "anni": [
      2026
     ],
-    "luogo": "Parco e Museo Paleontologico Territoriale dell'Astigiano",
-    "manifest": "",
-    "nome": "Natale tra i Fossili: Laboratorio Creativo di Argilla",
+    "luogo": "Museo Paleontologico Astigiano",
+    "manifest": "Natale tra i fossili",
+    "nome": "Natale tra i fossili - Laboratorio Creativo di Argilla al Museo",
     "organizza": "",
     "pagina": true,
-    "ultima": "2026-11-14"
+    "ultima": "2026-12-19"
    },
    "non-siamo-d-accordo-conflitti-in-famiglia-centro-p-asti": {
     "anni": [
@@ -3208,6 +3219,23 @@
   },
   "nome": "Balzola",
   "prov": "AL"
+ },
+ "bandita": {
+  "eventi": {
+   "festa-di-natale-pro-loco-bandita": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza del Bar",
+    "manifest": "Festa di Natale Pro Loco Bandita",
+    "nome": "Festa di Natale Pro Loco Bandita",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   }
+  },
+  "nome": "Bandita",
+  "prov": "CN"
  },
  "barge": {
   "eventi": {
@@ -5620,6 +5648,17 @@
  },
  "carentino": {
   "eventi": {
+   "aspettando-il-natale-a-carentino": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Pro Loco di Carentino",
+    "manifest": "Aspettando il Natale a Carentino",
+    "nome": "Aspettando il Natale a Carentino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "festa-di-halloween-a-carentino-pro-loco-di-carenti": {
     "anni": [
      2026
@@ -5664,6 +5703,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-08-13"
+   },
+   "mercatino-di-natale-e-fiera-del-tartufo-carpeneto": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro storico di Carpeneto",
+    "manifest": "Mercatino di Natale e Fiera del Tartufo 2026",
+    "nome": "Mercatino di Natale e Fiera del Tartufo 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
    }
   },
   "nome": "Carpeneto",
@@ -6140,6 +6190,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-29"
+   },
+   "pista-di-pattinaggio-sul-ghiaccio-natale-sul-ghiac-casale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Castello",
+    "manifest": "",
+    "nome": "Pista di pattinaggio sul ghiaccio - Natale sul ghiaccio Casale Monferrato",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-01"
    },
    "spazio-creativita-i-colori-dell-autunno-biblioteca-casale-monferrato": {
     "anni": [
@@ -7589,6 +7650,17 @@
     "organizza": "Pro Loco Castelneuv Brisò / Comune di Castelnuovo Calcea",
     "pagina": true,
     "ultima": "2026-11-29"
+   },
+   "open-school-scuola-primaria-sandro-aluffi-castelnuovo-calcea": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola Primaria Sandro Aluffi",
+    "manifest": "",
+    "nome": "Open School - Scuola Primaria Sandro Aluffi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
    }
   },
   "nome": "Castelnuovo Calcea",
@@ -7640,6 +7712,17 @@
     "pagina": true,
     "ultima": "2026-10-14"
    },
+   "raduno-dei-babbi-natale-al-san-giuseppe-comune-di-castelnuovo-don-bosco": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Italia",
+    "manifest": "",
+    "nome": "Raduno dei Babbi Natale al San Giuseppe - Comune di Castelnuovo Don Bosco",
+    "organizza": "Comune di Castelnuovo Don Bosco",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
    "red-night-terre-dei-santi-castelnuovo-don-bosco": {
     "anni": [
      2026
@@ -7657,6 +7740,17 @@
  },
  "castelnuovoscrivia": {
   "eventi": {
+   "allestimento-alberi-di-natale-in-piazza-comune-di-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Vittorio Emanuele",
+    "manifest": "",
+    "nome": "Allestimento alberi di Natale in piazza - Comune di Castelnuovo Scrivia",
+    "organizza": "Comune di Castelnuovo Scrivia",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "anna-tatangelo-summer-tour-giornata-franca-cassola-castelnuovo-scrivia": {
     "anni": [
      2026
@@ -7733,6 +7827,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-24"
+   },
+   "i-laboratori-sono-in-biblioteca-il-dolce-dell-amic-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale",
+    "manifest": "I Laboratori sono in Biblioteca",
+    "nome": "I Laboratori sono in Biblioteca - Il dolce dell'amicizia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    },
    "il-bosco-delle-storie-la-corte-agricola-castelnuovo-scrivia": {
     "anni": [
@@ -7855,6 +7960,17 @@
     "pagina": false,
     "ultima": "2026-08-22"
    },
+   "presentazione-del-libro-ginetto-alla-scoperta-di-c-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Pessini",
+    "manifest": "",
+    "nome": "Presentazione del libro \"Ginetto alla scoperta di Castelnuovo\" - Comune di Castelnuovo Scrivia",
+    "organizza": "Comune di Castelnuovo Scrivia",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "presentazione-libro-due-vite-di-ninna-quario-castelnuovo-scrivia": {
     "anni": [
      2026
@@ -7907,6 +8023,17 @@
     "manifest": "",
     "nome": "The Little Book Club - Comune di Castelnuovo Scrivia",
     "organizza": "Comune di Castelnuovo Scrivia",
+    "pagina": true,
+    "ultima": "2026-11-30"
+   },
+   "three-gifts-for-santa-claus-the-little-book-club-castelnuovo-scrivia": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Comunale Pier Angelo Soldini",
+    "manifest": "",
+    "nome": "Three gifts for Santa Claus - The Little Book Club",
+    "organizza": "",
     "pagina": true,
     "ultima": "2026-11-30"
    },
@@ -7963,6 +8090,23 @@
   },
   "nome": "Cavallermaggiore",
   "prov": "CN"
+ },
+ "cellamonte": {
+  "eventi": {
+   "open-day-infanzia-cella-monte": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Scuola dell'Infanzia Cella Monte",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia Cella Monte",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-13"
+   }
+  },
+  "nome": "Cella Monte",
+  "prov": "AL"
  },
  "cellarengo": {
   "eventi": {
@@ -8880,6 +9024,17 @@
     "pagina": true,
     "ultima": "2026-12-05"
    },
+   "il-castello-di-natale-edizione-costigliole-d-asti": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Castello di Costigliole d'Asti",
+    "manifest": "",
+    "nome": "Il Castello di Natale - 3ª Edizione",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "stramangiando-pro-loco-motta-di-costigliole-d-asti": {
     "anni": [
      2026
@@ -9190,6 +9345,17 @@
  },
  "cuccaromonferrato": {
   "eventi": {
+   "la-casa-di-babbo-natale-pro-loco-cuccarese-cuccaro-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Cuccaro Monferrato",
+    "manifest": "Mercatini di Natale di Cuccaro",
+    "nome": "La Casa di Babbo Natale - Pro Loco Cuccarese",
+    "organizza": "Pro Loco Cuccarese",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
    "mercatini-di-natale-di-cuccaro-cuccaro-monferrato": {
     "anni": [
      2026
@@ -10686,6 +10852,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-13"
+   },
+   "mercatini-di-natale-parrocchia-dei-santi-michele-e-felizzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza San Pietro",
+    "manifest": "Mercatini di Natale 2026 Felizzano",
+    "nome": "Mercatini di Natale 2026 - Parrocchia dei Santi Michele e Pietro",
+    "organizza": "Parrocchia dei Santi Michele e Pietro",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "sabato-si-riparte-tutti-in-oratorio-allegra-festa-felizzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Oratorio Felizzano",
+    "manifest": "",
+    "nome": "Sabato si Riparte... Tutti in Oratorio! Allegra Festa per i Bambini!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    }
   },
   "nome": "Felizzano",
@@ -13864,6 +14052,39 @@
  },
  "montemagnomonferrato": {
   "eventi": {
+   "accensione-dell-albero-di-natale-comune-di-montema-montemagno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Voltoni della Scalea Barocca",
+    "manifest": "i Nostri Eventi 2026 - Montemagno Monferrato",
+    "nome": "Accensione dell'Albero di Natale - Comune di Montemagno Monferrato",
+    "organizza": "Comune di Montemagno Monferrato",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
+   "apertura-presepi-comune-di-montemagno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Voltoni della Scalea Barocca",
+    "manifest": "i Nostri Eventi 2026 - Montemagno Monferrato",
+    "nome": "Apertura Presepi - Comune di Montemagno Monferrato",
+    "organizza": "Comune di Montemagno Monferrato",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
+   "concerto-di-natale-con-il-gruppo-polifonico-hasta-montemagno-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale dei Santi Martino e Stefano",
+    "manifest": "i Nostri Eventi 2026 - Montemagno Monferrato",
+    "nome": "Concerto di Natale con il gruppo polifonico Hasta Madrigalis",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
    "raduno-auto-sportive-e-storiche-memorial-accornero-montemagno-monferrato": {
     "anni": [
      2026
@@ -15182,6 +15403,17 @@
     "pagina": true,
     "ultima": "2026-12-05"
    },
+   "dolci-terre-per-i-piccoli-laboratori-in-area-bimbi-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Area Bimbi",
+    "manifest": "Dolci Terre per i Piccoli - Laboratori in Area Bimbi",
+    "nome": "Dolci Terre per i Piccoli - Laboratori in Area Bimbi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "dolci-terre-speciale-cioccolato-edizione-novi-ligure": {
     "anni": [
      2026
@@ -15192,6 +15424,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-10"
+   },
+   "dolciterre-di-novi-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "",
+    "nome": "DolciTerre di Novi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    },
    "dove-andiamo-oggi-papi-e-cosa-mettiamo-nel-piatto-novi-ligure": {
     "anni": [
@@ -15299,6 +15542,17 @@
     "luogo": "Biblioteca Civica di Novi Ligure",
     "manifest": "",
     "nome": "Giochi in Simboli - Centro Paideia di Torino",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
+   "giochi-in-simboli-letture-e-giochi-in-simboli-dell-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica",
+    "manifest": "",
+    "nome": "Giochi in Simboli - Letture e giochi in simboli della CAA",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-28"
@@ -15687,6 +15941,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2027-04-04"
+   },
+   "piccoli-grandi-scienziati-centro-per-le-famiglie-v-novi-ligure": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Famiglie Villa Zucca",
+    "manifest": "",
+    "nome": "Piccoli Grandi Scienziati - Centro per le Famiglie Villa Zucca",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-03"
    },
    "pittura-e-tecnica-mista-associazione-culturale-lab-novi-ligure": {
     "anni": [
@@ -16164,6 +16429,28 @@
     "pagina": true,
     "ultima": "2026-10-04"
    },
+   "open-day-infanzia-ottiglio-altavilla": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Scuola dell'Infanzia Ottiglio Altavilla",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia Ottiglio Altavilla",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-14"
+   },
+   "open-day-infanzia-ottiglio-altavilla-festa-di-nata": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia Ottiglio Altavilla",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia Ottiglio Altavilla (Festa di Natale)",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
    "storica-fiera-bovina-s-eusebio-comune-di-ottiglio": {
     "anni": [
      2026
@@ -16489,6 +16776,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "open-day-infanzia-ozzano-ozzano-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia Ozzano",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia Ozzano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-15"
    }
   },
   "nome": "Ozzano Monferrato",
@@ -16702,6 +17000,28 @@
  },
  "pasturana": {
   "eventi": {
+   "accensione-luminarie-e-presepe-diffuso-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Aspettando il Natale Pasturana 2026",
+    "nome": "Accensione luminarie e Presepe Diffuso",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
+   "canti-di-natale-sotto-la-buona-stella-coro-ed-ense-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Chiesa Parrocchiale",
+    "manifest": "Aspettando il Natale Pasturana 2026",
+    "nome": "Canti di Natale...sotto la Buona Stella - Coro ed Ensemble Strumentale dell'Unità Pastorale Orba",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "castagnata-e-ciclocross-di-s-martino-festa-patrona-pasturana": {
     "anni": [
      2026
@@ -16712,6 +17032,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-07"
+   },
+   "cioccolata-calda-dopo-messa-della-notte-di-natale-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Aspettando il Natale Pasturana 2026",
+    "nome": "Cioccolata calda dopo Messa della Notte di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-24"
    },
    "le-letture-del-sabato-halloween-pasturana": {
     "anni": [
@@ -16899,6 +17230,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-09-04"
+   },
+   "spettacolo-sognattrici-il-pastore-gelindo-pasturana": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone SOMS",
+    "manifest": "Aspettando il Natale Pasturana 2026",
+    "nome": "Spettacolo Sognattrici - Il Pastore Gelindo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "toumbula-da-gnepa-tombola-dialettale-pasturana": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Sala Europa",
+    "manifest": "Aspettando il Natale Pasturana 2026",
+    "nome": "Toumbula da Gnepa - Tombola dialettale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-06"
    }
   },
   "nome": "Pasturana",
@@ -17228,6 +17581,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "l-elfa-di-babbo-natale-consegna-i-regali-comune-di-pietra-marazzi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Mercatini di Natale",
+    "manifest": "Natale in Comune",
+    "nome": "L'Elfa di Babbo Natale consegna i regali - Comune di Pietra Marazzi",
+    "organizza": "Comune di Pietra Marazzi",
+    "pagina": true,
+    "ultima": "2026-12-19"
+   },
+   "scrivi-la-tua-letterina-di-natale-comune-di-pietra-pietra-marazzi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Atrio del Comune",
+    "manifest": "Natale in Comune",
+    "nome": "Scrivi la tua Letterina di Natale - Comune di Pietra Marazzi",
+    "organizza": "Comune di Pietra Marazzi",
+    "pagina": true,
+    "ultima": "2026-12-03"
    }
   },
   "nome": "Pietra Marazzi",
@@ -18895,6 +19270,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-08"
+   },
+   "il-sabato-del-villaggio-con-bancarelle-di-natale-rivarone": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Via Contrada Grande",
+    "manifest": "Il Sabato del Villaggio con bancarelle di Natale",
+    "nome": "Il Sabato del Villaggio con bancarelle di Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
    }
   },
   "nome": "Rivarone",
@@ -19415,6 +19801,17 @@
     "organizza": "Pro Loco Rocchetta Tanaro",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "open-day-scuola-dell-infanzia-di-rocchetta-tanaro": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia di Rocchetta Tanaro",
+    "manifest": "",
+    "nome": "Open Day - Scuola dell'Infanzia di Rocchetta Tanaro",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-16"
    },
    "passaggio-della-corsa-ciclistica-monsterrando-pro-rocchetta-tanaro": {
     "anni": [
@@ -20430,6 +20827,17 @@
     "pagina": false,
     "ultima": "2026-08-29"
    },
+   "open-day-infanzia-san-giorgio-san-giorgio-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia San Giorgio",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia San Giorgio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-14"
+   },
    "san-giorgio-bike-ride-san-giorgio-monferrato": {
     "anni": [
      2026
@@ -20468,6 +20876,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-08-15"
+   },
+   "magie-di-natale-pro-loco-san-giorgio-scarampi": {
+    "anni": [
+     2026
+    ],
+    "luogo": "San Giorgio Scarampi",
+    "manifest": "",
+    "nome": "Magie di Natale - Pro Loco San Giorgio Scarampi",
+    "organizza": "Pro Loco San Giorgio Scarampi",
+    "pagina": true,
+    "ultima": "2026-11-30"
    },
    "mercatini-di-natale-san-giorgio-scarampi": {
     "anni": [
@@ -21129,6 +21548,17 @@
     "pagina": false,
     "ultima": "2026-08-08"
    },
+   "festa-di-natale-in-piazza-pro-loco-sarezzano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Piazza Marconi",
+    "manifest": "",
+    "nome": "Festa di Natale in Piazza - Pro Loco Sarezzano",
+    "organizza": "Pro Loco Sarezzano",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
    "festa-patronale-di-sarezzano": {
     "anni": [
      2026
@@ -21428,6 +21858,17 @@
  },
  "scurzolengo": {
   "eventi": {
+   "festa-di-accensione-dell-albero-di-natale-scurzole-scurzolengo": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Sala Consiliare",
+    "manifest": "Festa di Accensione dell'Albero di Natale - Scurzolengo",
+    "nome": "Festa di Accensione dell'Albero di Natale - Scurzolengo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
    "san-lorenzo-pro-loco-di-scurzolengo": {
     "anni": [
      2026
@@ -21487,6 +21928,24 @@
   },
   "nome": "Serralunga d'Alba",
   "prov": "CN"
+ },
+ "serralungadicrea": {
+  "eventi": {
+   "open-day-infanzia-serralunga-di-crea": {
+    "anni": [
+     2026,
+     2027
+    ],
+    "luogo": "Scuola dell'Infanzia Serralunga di Crea",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia Serralunga di Crea",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-16"
+   }
+  },
+  "nome": "Serralunga di Crea",
+  "prov": "AL"
  },
  "serravallescrivia": {
   "eventi": {
@@ -22261,6 +22720,17 @@
     "pagina": true,
     "ultima": "2026-10-10"
    },
+   "open-day-infanzia-terruggia": {
+    "anni": [
+     2027
+    ],
+    "luogo": "Scuola dell'Infanzia Terruggia",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia Terruggia",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-16"
+   },
    "terruggia-halloween": {
     "anni": [
      2026
@@ -22775,6 +23245,17 @@
     "pagina": true,
     "ultima": "2026-10-30"
    },
+   "pomeriggio-giochi-la-fenice-aps-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Giovani",
+    "manifest": "",
+    "nome": "Pomeriggio giochi - La Fenice APS",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-29"
+   },
    "postare-o-non-postare-il-dilemma-dello-sharenting-tortona": {
     "anni": [
      2026
@@ -22874,6 +23355,17 @@
     "pagina": true,
     "ultima": "2026-12-13"
    },
+   "sfilata-e-mercatini-di-natale-tortona": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Giardini della Stazione",
+    "manifest": "",
+    "nome": "Sfilata e Mercatini di Natale Tortona 2026",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "stratortona-croce-rossa-italiana-comitato-di-torto": {
     "anni": [
      2026
@@ -22966,6 +23458,23 @@
   },
   "nome": "Treiso",
   "prov": "CN"
+ },
+ "treville": {
+  "eventi": {
+   "l-armanach-ad-tarvilla-treville": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Salone Comunale di Casa Devasini",
+    "manifest": "L'armanàch ad Tarvilla",
+    "nome": "L'armanàch ad Tarvilla",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   }
+  },
+  "nome": "Treville",
+  "prov": "AL"
  },
  "trisobbio": {
   "eventi": {
@@ -23064,6 +23573,39 @@
     "pagina": true,
     "ultima": "2026-12-11"
    },
+   "alla-ricerca-di-babbo-natale-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "Alla ricerca di Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
+   "canzoni-sotto-l-albero-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "Canzoni sotto l'albero",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-04"
+   },
+   "christmas-circus-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "Christmas Circus",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-08"
+   },
    "festa-dell-oratorio-valenza": {
     "anni": [
      2026
@@ -23075,6 +23617,17 @@
     "pagina": true,
     "ultima": "2026-09-04"
    },
+   "gioie-natalizie-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "Gioie natalizie",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-13"
+   },
    "halloween-a-valenza-citta-di-valenza": {
     "anni": [
      2026
@@ -23085,6 +23638,39 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-10-31"
+   },
+   "happy-christmas-happy-hour-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "Happy Christmas, Happy Hour!",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
+   },
+   "it-s-the-most-wonderful-time-of-the-year-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "It's the Most Wonderful Time of the Year",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
+   "la-befana-tutte-le-feste-porta-via-valenza": {
+    "anni": [
+     2027
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "La Befana tutte le feste porta via...",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2027-01-06"
    },
    "la-strapigiama-i-edizione-associazione-gli-amici-d-valenza": {
     "anni": [
@@ -23107,6 +23693,28 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-10"
+   },
+   "nel-laboratorio-degli-elfi-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "Nel laboratorio degli Elfi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
+   },
+   "un-natale-spettacolare-valenza": {
+    "anni": [
+     2026
+    ],
+    "luogo": "",
+    "manifest": "Un Natale Brillante - Valenza 2026",
+    "nome": "Un Natale spettacolare",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-19"
    }
   },
   "nome": "Valenza",
@@ -23603,6 +24211,23 @@
   "nome": "Vigliano d'Asti",
   "prov": "AT"
  },
+ "vignalemonferrato": {
+  "eventi": {
+   "open-day-infanzia-vignale-vignale-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Scuola dell'Infanzia Vignale",
+    "manifest": "Open Day Scuole dell'Infanzia IC Ozzano Vignale",
+    "nome": "Open Day - Infanzia Vignale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-15"
+   }
+  },
+  "nome": "Vignale Monferrato",
+  "prov": "AL"
+ },
  "vignoleborbera": {
   "eventi": {
    "festa-dello-sport-comune-di-vignole-borbera": {
@@ -23960,6 +24585,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-11-23"
+   },
+   "hobby-maison-ospita-babbo-natale-villanova-monferrato": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Centro Commerciale Bennet",
+    "manifest": "",
+    "nome": "Hobby Maison ospita Babbo Natale",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-05"
    }
   },
   "nome": "Villanova Monferrato",
@@ -24060,6 +24696,17 @@
     "organizza": "",
     "pagina": false,
     "ultima": "2026-09-05"
+   },
+   "natale-a-villaromagnano": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Italia",
+    "manifest": "Natale a Villaromagnano",
+    "nome": "Natale a Villaromagnano",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-20"
    },
    "piru-e-il-cavaliere-di-mezzotacco-compagnia-walter-villaromagnano": {
     "anni": [
