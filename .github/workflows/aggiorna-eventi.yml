@@ -268,7 +268,7 @@ jobs:
                 befana.html capodanno.html carnevale.html ferragosto.html \
                 halloween.html natale.html pasqua.html \
                 centri-estivi.html centri-invernali.html centri-pasquali.html \
-                rubriche.html luoghi.html corsi.html corsi-provincia-*.html \
+                rubriche.html luoghi.html corsi.html corsi-provincia-*.html                 servizi-provincia-*.html                 $(grep -l 'NAV-CENTRI:START' *.html) \
                 esploratore.html libri.html \
                 data/eventi.json data/pagine-evento.json data/pagine-comune.json \
                 data/pagine-landing.json data/storico-comuni.json \
@@ -283,6 +283,12 @@ jobs:
           # data/luoghi.json nasce solo quando il tab "Luoghi" del foglio
           # esiste, quindi fino a quel giorno l'elenco ne conterrebbe uno
           # inesistente. La stessa protezione vale per tutto il resto.
+          # Le pagine con la nav scritta a mano (404, bollino, privacy...) le
+          # riscrive aggiorna_nav() dove trova il marker NAV-CENTRI: si prendono
+          # dal marker e non da un elenco, cosi' una pagina nuova col marker entra
+          # da sola. Dal 20/11/2026, quando la nav ha cominciato a dire
+          # «Centri invernali», la run e' rimasta rossa otto giorni. Lo stesso
+          # per servizi-provincia-*, nate il 13/11 senza entrare qui.
           PRESENTI=""
           for f in $FILE; do [ -e "$f" ] && PRESENTI="$PRESENTI $f"; done
           if [ -n "$(git status --porcelain $PRESENTI)" ]; then

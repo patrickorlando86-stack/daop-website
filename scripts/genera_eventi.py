@@ -9784,12 +9784,36 @@ def spec_natale(st, events, oggi, altre):
 _MERCATINO = re.compile(r"mercatin", re.I)
 
 
-def e_mercatino_natale(e):
+def _riga_mercatino(e):
     f = festa_di(e)
     if f:
         return f == 'mercatino di natale'
     testo = f"{e.get('nome') or ''} {e.get('descr') or ''}"
     return bool(_MERCATINO.search(testo)) and in_tema(e, 'natale')
+
+
+# Le schede che hanno almeno una riga di mercatino (27/11/2026). La scheda e'
+# una sola per tutte le righe di una serie, quindi la famiglia si decide per
+# scheda e non per riga: «Dogliani Christmas Wow» aveva il 29/11 segnato
+# «natale» e il 13/12 «mercatino di natale», e la stessa scheda finiva sia in
+# /natale-provincia-cuneo.html sia nei mercatini, senza tornare a nessuna
+# delle due. Lo riempie prepara_mercatini() prima di qualunque pagina.
+_SLUG_MERCATINO = set()
+
+
+def prepara_mercatini(events):
+    _SLUG_MERCATINO.clear()
+    _SLUG_MERCATINO.update(slug_evento(e) for e in events if _riga_mercatino(e))
+    miste = sorted({slug_evento(e) for e in events
+                    if slug_evento(e) in _SLUG_MERCATINO and not _riga_mercatino(e)
+                    and in_tema(e, 'natale')})
+    if miste:
+        print(f"[genera_eventi] serie con righe di Natale e di mercatino, "
+              f"contate tutte come mercatino: {', '.join(miste)}")
+
+
+def e_mercatino_natale(e):
+    return _riga_mercatino(e) or slug_evento(e) in _SLUG_MERCATINO
 
 
 def mercatini_range(oggi):
@@ -11949,6 +11973,7 @@ def main():
     segnala_senza_coordinate(events)
     segnala_sedi_diverse(events)
     assegna_ancore(events)
+    prepara_mercatini(events)
     _SERIE_RUN['ev'] = events
     # Il proprio numero si scrive PRIMA di generare qualunque pagina: la riga
     # delle quattro porte lo rilegge, e scritto dopo mostrerebbe quello di ieri
