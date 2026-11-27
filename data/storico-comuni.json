@@ -1051,6 +1051,28 @@
     "pagina": true,
     "ultima": "2026-10-30"
    },
+   "aspettando-l-immacolata-in-corso-acqui-quartiere-c-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Corso Acqui",
+    "manifest": "",
+    "nome": "Aspettando l'Immacolata in corso Acqui - Quartiere Cristo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-06"
+   },
+   "aspettando-natale-con-babbo-natale-e-i-suoi-elfi-q-alessandria": {
+    "anni": [
+     2026
+    ],
+    "luogo": "L'Angolo di Raffaella",
+    "manifest": "",
+    "nome": "Aspettando Natale con Babbo Natale e i suoi Elfi - Quartiere Cristo",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-11-28"
+   },
    "babbo-natale-e-qua-yo-yo-active-play-alessandria": {
     "anni": [
      2026
@@ -3930,6 +3952,17 @@
     "pagina": true,
     "ultima": "2026-12-18"
    },
+   "bibliobaby-biblioteca-civica-del-ricetto-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Dicembre in Biblioteca",
+    "nome": "Bibliobaby - Biblioteca Civica del Ricetto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-18"
+   },
    "bibliobaby-boves": {
     "anni": [
      2026
@@ -3948,6 +3981,17 @@
     "luogo": "Biblioteca Civica del Picerio",
     "manifest": "Dicembre in Biblioteca",
     "nome": "Bibliochef con Elena - Biblioteca Civica del Picerio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-10"
+   },
+   "bibliochef-con-elena-biblioteca-civica-del-ricetto-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Dicembre in Biblioteca",
+    "nome": "Bibliochef con Elena - Biblioteca Civica del Ricetto",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-10"
@@ -4007,6 +4051,17 @@
     "pagina": true,
     "ultima": "2026-12-11"
    },
+   "creolab-games-escape-room-biblioteca-civica-del-ri-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Dicembre in Biblioteca",
+    "nome": "Creolab Games - Escape Room - Biblioteca Civica del Ricetto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-11"
+   },
    "favolando-biblioteca-civica-del-picerio-boves": {
     "anni": [
      2026
@@ -4017,6 +4072,17 @@
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-24"
+   },
+   "favolando-biblioteca-civica-del-ricetto-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Dicembre in Biblioteca",
+    "nome": "Favolando - Biblioteca Civica del Ricetto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-23"
    },
    "favolando-boves": {
     "anni": [
@@ -4051,6 +4117,17 @@
     "pagina": true,
     "ultima": "2026-12-15"
    },
+   "fumettilab-con-dody-biblioteca-civica-del-ricetto-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Dicembre in Biblioteca",
+    "nome": "Fumettilab con DodY - Biblioteca Civica del Ricetto",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-15"
+   },
    "fumettilab-con-dody-boves": {
     "anni": [
      2026
@@ -4077,9 +4154,9 @@
     "anni": [
      2026
     ],
-    "luogo": "Biblioteca Civica del Picerio",
+    "luogo": "Biblioteca Civica del Ricetto",
     "manifest": "Dicembre in Biblioteca",
-    "nome": "Magiche Letture di Natale... Per Tutti! - Biblioteca Civica del Picerio",
+    "nome": "Magiche Letture di Natale... Per Tutti! - Biblioteca Civica del Ricetto",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-22"
@@ -4113,6 +4190,17 @@
     "luogo": "Biblioteca Civica del Picerio",
     "manifest": "Dicembre in Biblioteca",
     "nome": "Minichef - Biblioteca Civica del Picerio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-03"
+   },
+   "minichef-biblioteca-civica-del-ricetto-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Dicembre in Biblioteca",
+    "nome": "Minichef - Biblioteca Civica del Ricetto",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-03"
@@ -4190,6 +4278,17 @@
     "luogo": "Biblioteca Civica del Picerio",
     "manifest": "Dicembre in Biblioteca",
     "nome": "Uncinetto Lab con Ivana - Biblioteca Civica del Picerio",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-17"
+   },
+   "uncinetto-lab-con-ivana-biblioteca-civica-del-rice-boves": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Biblioteca Civica del Ricetto",
+    "manifest": "Dicembre in Biblioteca",
+    "nome": "Uncinetto Lab con Ivana - Biblioteca Civica del Ricetto",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-17"
@@ -11012,7 +11111,7 @@
     "ultima": "2026-11-28"
    }
   },
-  "nome": "EnVie",
+  "nome": "Envie",
   "prov": "CN"
  },
  "fabbricacurone": {
@@ -13892,7 +13991,7 @@
      2026
     ],
     "luogo": "Mondovicino Lab",
-    "manifest": "",
+    "manifest": "Il Mondo di Natale - Christmas Events",
     "nome": "Laboratorio di Natale",
     "organizza": "",
     "pagina": true,
@@ -17135,6 +17234,17 @@
     "luogo": "Via San Paolo - ingresso Via Torino",
     "manifest": "",
     "nome": "Xmas 2026 - Inaugurazione Casetta di Babbo Natale - In Balia degli Eventi",
+    "organizza": "",
+    "pagina": true,
+    "ultima": "2026-12-12"
+   },
+   "xmas-mercatini-di-natale-in-balia-degli-eventi-ovada": {
+    "anni": [
+     2026
+    ],
+    "luogo": "Civica Scuola di Musica Antonio Rebora",
+    "manifest": "",
+    "nome": "Xmas 2026 - Mercatini di Natale - In Balia degli Eventi",
     "organizza": "",
     "pagina": true,
     "ultima": "2026-12-12"

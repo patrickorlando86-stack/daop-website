@@ -561,6 +561,29 @@
   "anchor": "ev-2026-11-28-accensione-delle-luminarie-quartiere-cristo"
  },
  {
+  "nome": "Aspettando Natale con Babbo Natale e i suoi Elfi - Quartiere Cristo",
+  "di": "28/11/2026",
+  "df": "28/11/2026",
+  "ora": "15:30",
+  "citta": "Alessandria",
+  "prov": "AL",
+  "categoria": "Sagra & Festa",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Non indicato",
+  "descr": "Un pomeriggio in atmosfera di Natale all'Angolo di Raffaella, bar in Piazza Campora nel quartiere Cristo: arrivano Babbo Natale e i suoi Elfi, con musica, allegria e una merenda. «Porta il tuo bambino». Lo promuove l'Associazione Attività e Commercio Quartiere Cristo.",
+  "manifest": "",
+  "loc": "alessandria_cristo_aspettando_natale_2026.webp",
+  "luogo": "L'Angolo di Raffaella",
+  "indirizzo": "Piazza Campora - Alessandria (AL)",
+  "d_start": "2026-11-28",
+  "d_end": "2026-11-28",
+  "consigliato": "No",
+  "lat": "44.894081",
+  "lon": "8.5848671",
+  "festa": "natale",
+  "anchor": "ev-2026-11-28-aspettando-natale-con-babbo-natale-e-i-suoi-elfi-q"
+ },
+ {
   "nome": "Benvenuti al Centro per le Famiglie! - Centro per le Famiglie Asti",
   "di": "28/11/2026",
   "df": "28/11/2026",
@@ -1060,7 +1083,7 @@
   "di": "28/11/2026",
   "df": "28/11/2026",
   "ora": "15:00-18:00",
-  "citta": "EnVie",
+  "citta": "Envie",
   "prov": "CN",
   "categoria": "Laboratorio",
   "eta": "3-10 anni (da verificare)",
@@ -2861,7 +2884,7 @@
   "anchor": "ev-2026-12-01-dove-andiamo-oggi-papi-e-cosa-mettiamo-nel-piatto"
  },
  {
-  "nome": "Fumettilab con DodY - Biblioteca Civica del Picerio",
+  "nome": "Fumettilab con DodY - Biblioteca Civica del Ricetto",
   "di": "01/12/2026",
   "df": "01/12/2026",
   "ora": "16:30",
@@ -2873,8 +2896,8 @@
   "descr": "Laboratorio di fumetto con DodY per ragazzi dai 7 ai 12 anni. Prenotazione obbligatoria in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-01",
   "d_end": "2026-12-01",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -2882,7 +2905,7 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-01-fumettilab-con-dody-biblioteca-civica-del-picerio"
+  "anchor": "ev-2026-12-01-fumettilab-con-dody-biblioteca-civica-del-ricetto"
  },
  {
   "nome": "Giochi di luce e ombra - L'arte della luce",
@@ -3025,6 +3048,30 @@
   "anchor": "ev-2026-12-01-vendita-biglietti-lotteria-della-befana-2026-vidal"
  },
  {
+  "nome": "Favolando - Biblioteca Civica del Ricetto",
+  "di": "02/12/2026",
+  "df": "02/12/2026",
+  "ora": "10:00",
+  "citta": "Boves",
+  "prov": "CN",
+  "categoria": "Cultura",
+  "eta": "0-24 mesi",
+  "prezzo": "Gratuito",
+  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
+  "manifest": "Dicembre in Biblioteca",
+  "loc": "daop_cuneo_4037528189633281486.webp",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
+  "d_start": "2026-12-02",
+  "d_end": "2026-12-02",
+  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
+  "consigliato": "No",
+  "lat": "44.2994897",
+  "lon": "7.5677018",
+  "festa": "nessuna",
+  "anchor": "ev-2026-12-02-favolando-biblioteca-civica-del-ricetto"
+ },
+ {
   "nome": "Indovina Chi è Babbo Natale! - Pro Loco Robilante",
   "di": "02/12/2026",
   "df": "02/12/2026",
@@ -3095,30 +3142,6 @@
   "anchor": "ev-2026-12-03-brindisi-natalizio-con-il-malabrocca-fiab-tortona"
  },
  {
-  "nome": "Favolando - Biblioteca Civica del Picerio",
-  "di": "03/12/2026",
-  "df": "03/12/2026",
-  "ora": "10:00",
-  "citta": "Boves",
-  "prov": "CN",
-  "categoria": "Cultura",
-  "eta": "0-24 mesi",
-  "prezzo": "Gratuito",
-  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
-  "manifest": "Dicembre in Biblioteca",
-  "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
-  "d_start": "2026-12-03",
-  "d_end": "2026-12-03",
-  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
-  "consigliato": "No",
-  "lat": "44.2994897",
-  "lon": "7.5677018",
-  "festa": "nessuna",
-  "anchor": "ev-2026-12-03-favolando-biblioteca-civica-del-picerio"
- },
- {
   "nome": "Laboratori creativi a tema natalizio - Sognacolori",
   "di": "03/12/2026",
   "df": "03/12/2026",
@@ -3167,7 +3190,7 @@
   "anchor": "ev-2026-12-03-laboratorio-funzioni-esecutive-t-centro-tarantasca"
  },
  {
-  "nome": "Minichef - Biblioteca Civica del Picerio",
+  "nome": "Minichef - Biblioteca Civica del Ricetto",
   "di": "03/12/2026",
   "df": "03/12/2026",
   "ora": "16:30",
@@ -3179,8 +3202,8 @@
   "descr": "Laboratorio culinario Minichef per bambini dai 4 ai 6 anni. Prenotazione obbligatoria in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-03",
   "d_end": "2026-12-03",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -3188,7 +3211,7 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-03-minichef-biblioteca-civica-del-picerio"
+  "anchor": "ev-2026-12-03-minichef-biblioteca-civica-del-ricetto"
  },
  {
   "nome": "Piccoli Grandi Scienziati - Centro per le Famiglie Villa Zucca",
@@ -3356,7 +3379,7 @@
   "anchor": "ev-2026-12-04-open-officina-spazio-aggregativo"
  },
  {
-  "nome": "Uncinetto Lab con Ivana - Biblioteca Civica del Picerio",
+  "nome": "Uncinetto Lab con Ivana - Biblioteca Civica del Ricetto",
   "di": "04/12/2026",
   "df": "04/12/2026",
   "ora": "16:30",
@@ -3368,8 +3391,8 @@
   "descr": "Laboratorio di uncinetto con Ivana per bambini e ragazzi dai 7 anni. Prenotazione obbligatoria in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-04",
   "d_end": "2026-12-04",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -3377,7 +3400,7 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-04-uncinetto-lab-con-ivana-biblioteca-civica-del-pice"
+  "anchor": "ev-2026-12-04-uncinetto-lab-con-ivana-biblioteca-civica-del-rice"
  },
  {
   "nome": "Villaggio di Babbo Natale",
@@ -3880,7 +3903,7 @@
   "eta": "3-10 anni (da verificare)",
   "prezzo": "Gratuito",
   "descr": "Laboratorio creativo natalizio ispirato alle illustrazioni di Nicoletta Costa, organizzato nell'ambito della mostra. Posti limitati, prenotazione obbligatoria via mail. Al termine seguirà una merenda offerta da Coop Liguria. Evento gratuito.",
-  "manifest": "",
+  "manifest": "Il Mondo di Natale - Christmas Events",
   "loc": "daop_cuneo_4029652196288776983.webp",
   "luogo": "Mondovicino Lab",
   "indirizzo": "Mondovicino Lab - Mondovì (CN)",
@@ -3892,29 +3915,6 @@
   "lon": "7.8297855",
   "festa": "natale",
   "anchor": "ev-2026-12-05-laboratorio-di-natale"
- },
- {
-  "nome": "Laboratorio di Natale in collaborazione con il Festival Illustrada - Mondovicino Centro Commerciale",
-  "di": "05/12/2026",
-  "df": "05/12/2026",
-  "ora": "16:30",
-  "citta": "Mondovì",
-  "prov": "CN",
-  "categoria": "Laboratorio",
-  "eta": "3-10 anni (da verificare)",
-  "prezzo": "Non indicato",
-  "descr": "Laboratorio creativo natalizio realizzato in collaborazione con il Festival Illustrada. Un pomeriggio di attività manuali a tema Natale presso il centro commerciale Mondovicino.",
-  "manifest": "Il Mondo di Natale - Christmas Events",
-  "loc": "daop_cuneo_4039128594030361137.webp",
-  "luogo": "Mondovicino Centro Commerciale",
-  "indirizzo": "Mondovicino Centro Commerciale - Mondovì (CN)",
-  "d_start": "2026-12-05",
-  "d_end": "2026-12-05",
-  "consigliato": "No",
-  "lat": "44.3885927",
-  "lon": "7.8297855",
-  "festa": "natale",
-  "anchor": "ev-2026-12-05-laboratorio-di-natale-in-collaborazione-con-il-fes"
  },
  {
   "nome": "Le Piccole Storie di Marameo",
@@ -4450,6 +4450,29 @@
   "lon": "8.0099645",
   "festa": "natale",
   "anchor": "ev-2026-12-06-arrivo-di-babbo-natale-e-accensione-albero-di-nata"
+ },
+ {
+  "nome": "Aspettando l'Immacolata in corso Acqui - Quartiere Cristo",
+  "di": "06/12/2026",
+  "df": "06/12/2026",
+  "ora": "tutto il giorno",
+  "citta": "Alessandria",
+  "prov": "AL",
+  "categoria": "Sagra & Festa",
+  "eta": "Tutte le età (famiglie)",
+  "prezzo": "Ingresso libero",
+  "descr": "Domenica in festa in corso Acqui, nel quartiere Cristo, sotto le luminarie di Natale: negozi aperti tutto il giorno, caldarroste, crepes, frittelle di mele, fritto misto, gli zampognari e musica. Lo promuove l'Associazione Attività e Commercio Quartiere Cristo.",
+  "manifest": "",
+  "loc": "",
+  "luogo": "Corso Acqui",
+  "indirizzo": "Corso Acqui - Alessandria (AL)",
+  "d_start": "2026-12-06",
+  "d_end": "2026-12-06",
+  "consigliato": "No",
+  "lat": "44.9013806",
+  "lon": "8.6013817",
+  "festa": "natale",
+  "anchor": "ev-2026-12-06-aspettando-l-immacolata-in-corso-acqui-quartiere-c"
  },
  {
   "nome": "Babbo Natale Bovesano - La Sporta",
@@ -5990,6 +6013,30 @@
   "anchor": "ev-2026-12-09-dolci-strenne-natalizie-laboratorio-per-piccoli-pa"
  },
  {
+  "nome": "Favolando - Biblioteca Civica del Ricetto",
+  "di": "09/12/2026",
+  "df": "09/12/2026",
+  "ora": "10:00",
+  "citta": "Boves",
+  "prov": "CN",
+  "categoria": "Cultura",
+  "eta": "0-24 mesi",
+  "prezzo": "Gratuito",
+  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
+  "manifest": "Dicembre in Biblioteca",
+  "loc": "daop_cuneo_4037528189633281486.webp",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
+  "d_start": "2026-12-09",
+  "d_end": "2026-12-09",
+  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
+  "consigliato": "No",
+  "lat": "44.2994897",
+  "lon": "7.5677018",
+  "festa": "nessuna",
+  "anchor": "ev-2026-12-09-favolando-biblioteca-civica-del-ricetto"
+ },
+ {
   "nome": "Bibliobebè con Valentina - Radici, semi e parole",
   "di": "10/12/2026",
   "df": "10/12/2026",
@@ -6014,7 +6061,7 @@
   "anchor": "ev-2026-12-10-bibliobebe-con-valentina-radici-semi-e-parole"
  },
  {
-  "nome": "Bibliochef con Elena - Biblioteca Civica del Picerio",
+  "nome": "Bibliochef con Elena - Biblioteca Civica del Ricetto",
   "di": "10/12/2026",
   "df": "10/12/2026",
   "ora": "16:30",
@@ -6026,8 +6073,8 @@
   "descr": "Laboratorio culinario Bibliochef con Elena per bambini e ragazzi dai 7 ai 12 anni. Prenotazione obbligatoria in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-10",
   "d_end": "2026-12-10",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -6035,7 +6082,7 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-10-bibliochef-con-elena-biblioteca-civica-del-picerio"
+  "anchor": "ev-2026-12-10-bibliochef-con-elena-biblioteca-civica-del-ricetto"
  },
  {
   "nome": "Decorazioni per l'albero di Natale con la tecnica dello sbalzo su metallo - The Play Lab",
@@ -6059,30 +6106,6 @@
   "lon": "7.8553589",
   "festa": "natale",
   "anchor": "ev-2026-12-10-decorazioni-per-l-albero-di-natale-con-la-tecnica"
- },
- {
-  "nome": "Favolando - Biblioteca Civica del Picerio",
-  "di": "10/12/2026",
-  "df": "10/12/2026",
-  "ora": "10:00",
-  "citta": "Boves",
-  "prov": "CN",
-  "categoria": "Cultura",
-  "eta": "0-24 mesi",
-  "prezzo": "Gratuito",
-  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
-  "manifest": "Dicembre in Biblioteca",
-  "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
-  "d_start": "2026-12-10",
-  "d_end": "2026-12-10",
-  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
-  "consigliato": "No",
-  "lat": "44.2994897",
-  "lon": "7.5677018",
-  "festa": "nessuna",
-  "anchor": "ev-2026-12-10-favolando-biblioteca-civica-del-picerio"
  },
  {
   "nome": "La Parata degli Elfi di Natale - Biblioteca Civica Busca",
@@ -6251,7 +6274,7 @@
   "anchor": "ev-2026-12-11-caccia-al-tesoro-dei-3-re-magi"
  },
  {
-  "nome": "Creolab Games - Escape Room - Biblioteca Civica del Picerio",
+  "nome": "Creolab Games - Escape Room - Biblioteca Civica del Ricetto",
   "di": "11/12/2026",
   "df": "11/12/2026",
   "ora": "16:30",
@@ -6263,8 +6286,8 @@
   "descr": "Creolab Games: Escape Room per ragazzi dai 10 ai 14 anni. Prenotazione obbligatoria in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-11",
   "d_end": "2026-12-11",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -6272,7 +6295,7 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-11-creolab-games-escape-room-biblioteca-civica-del-pi"
+  "anchor": "ev-2026-12-11-creolab-games-escape-room-biblioteca-civica-del-ri"
  },
  {
   "nome": "Io Sono Un'Artista!!! - Crome in Movimento APS",
@@ -7260,27 +7283,27 @@
   "anchor": "ev-2026-12-12-una-serata-tutta-per-voi-con-anima-bimbi-carezza"
  },
  {
-  "nome": "Xmas 2026 - Inaugurazione Casetta di Babbo Natale - In Balia degli Eventi",
+  "nome": "Xmas 2026 - Mercatini di Natale - In Balia degli Eventi",
   "di": "12/12/2026",
-  "df": "12/12/2026",
-  "ora": "15:00",
+  "df": "13/12/2026",
+  "ora": "9:30-19:00",
   "citta": "Ovada",
   "prov": "AL",
-  "categoria": "Sagra & Festa",
+  "categoria": "Mercato",
   "eta": "Tutte le età (famiglie)",
   "prezzo": "Ingresso libero",
-  "descr": "Inaugurazione della Casetta di Babbo Natale in Via San Paolo a Ovada. L'evento include mascotte, La Grotta del Grinch, spettacoli con il Mago Giò, giochi in legno e laboratorio biglietti di Natale. Organizzato da In Balia degli Eventi con il patrocinio del Comune di Ovada.",
+  "descr": "Due giorni di mercatino di Natale nel giardino della Scuola di Musica Rebora, nel centro storico di Ovada, con 20 espositori. Per i bambini gli spettacoli di magia del Mago Giò e del Mago Paolo e 23 postazioni di giochi in legno. Di fronte al mercatino la Casetta di Babbo Natale, inaugurata sabato 12 alle 15, nella vetrina del negozio CentroSport: si fanno le foto con Babbo Natale e si stampano sul posto, e il ricavato va alla Fondazione Cigno. C'è anche il Grinch nella sua grotta, e domenica 13 alle 17, a chiusura, nevicherà. Organizzato da In Balia degli Eventi con il patrocinio del Comune di Ovada.",
   "manifest": "",
-  "loc": "daop_alessandria_4031627735693564556.webp",
-  "luogo": "Via San Paolo - ingresso Via Torino",
-  "indirizzo": "Via San Paolo - Ovada (AL)",
+  "loc": "ovada_xmas_mercatini_2026.webp",
+  "luogo": "Civica Scuola di Musica Antonio Rebora",
+  "indirizzo": "Via San Paolo (ingresso Via Torino) - Ovada (AL)",
   "d_start": "2026-12-12",
-  "d_end": "2026-12-12",
+  "d_end": "2026-12-13",
   "consigliato": "No",
-  "lat": "44.6425087",
-  "lon": "8.6481477",
+  "lat": "44.6382277",
+  "lon": "8.6475592",
   "festa": "natale",
-  "anchor": "ev-2026-12-12-xmas-2026-inaugurazione-casetta-di-babbo-natale-in"
+  "anchor": "ev-2026-12-12-xmas-2026-mercatini-di-natale-in-balia-degli-event"
  },
  {
   "nome": "Animazione Itinerante - Mondovicino Centro Commerciale",
@@ -8238,7 +8261,7 @@
   "anchor": "ev-2026-12-14-open-school-statale-castell-alfero"
  },
  {
-  "nome": "Fumettilab con DodY - Biblioteca Civica del Picerio",
+  "nome": "Fumettilab con DodY - Biblioteca Civica del Ricetto",
   "di": "15/12/2026",
   "df": "15/12/2026",
   "ora": "16:30",
@@ -8250,8 +8273,8 @@
   "descr": "Laboratorio di fumetto con DodY per ragazzi dai 7 ai 12 anni. Prenotazione obbligatoria in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-15",
   "d_end": "2026-12-15",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -8259,7 +8282,7 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-15-fumettilab-con-dody-biblioteca-civica-del-picerio"
+  "anchor": "ev-2026-12-15-fumettilab-con-dody-biblioteca-civica-del-ricetto"
  },
  {
   "nome": "Il teatro delle ombre - L'arte della luce",
@@ -8332,6 +8355,30 @@
   "anchor": "ev-2026-12-15-open-day-infanzia-vignale"
  },
  {
+  "nome": "Favolando - Biblioteca Civica del Ricetto",
+  "di": "16/12/2026",
+  "df": "16/12/2026",
+  "ora": "10:00",
+  "citta": "Boves",
+  "prov": "CN",
+  "categoria": "Cultura",
+  "eta": "0-24 mesi",
+  "prezzo": "Gratuito",
+  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
+  "manifest": "Dicembre in Biblioteca",
+  "loc": "daop_cuneo_4037528189633281486.webp",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
+  "d_start": "2026-12-16",
+  "d_end": "2026-12-16",
+  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
+  "consigliato": "No",
+  "lat": "44.2994897",
+  "lon": "7.5677018",
+  "festa": "nessuna",
+  "anchor": "ev-2026-12-16-favolando-biblioteca-civica-del-ricetto"
+ },
+ {
   "nome": "Open Day - Scuola dell'Infanzia di Rocchetta Tanaro",
   "di": "16/12/2026",
   "df": "16/12/2026",
@@ -8401,30 +8448,6 @@
   "lon": "7.8553589",
   "festa": "natale",
   "anchor": "ev-2026-12-17-creazione-di-una-ghirlanda-natalizia-in-lana-the-p"
- },
- {
-  "nome": "Favolando - Biblioteca Civica del Picerio",
-  "di": "17/12/2026",
-  "df": "17/12/2026",
-  "ora": "10:00",
-  "citta": "Boves",
-  "prov": "CN",
-  "categoria": "Cultura",
-  "eta": "0-24 mesi",
-  "prezzo": "Gratuito",
-  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
-  "manifest": "Dicembre in Biblioteca",
-  "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
-  "d_start": "2026-12-17",
-  "d_end": "2026-12-17",
-  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
-  "consigliato": "No",
-  "lat": "44.2994897",
-  "lon": "7.5677018",
-  "festa": "nessuna",
-  "anchor": "ev-2026-12-17-favolando-biblioteca-civica-del-picerio"
  },
  {
   "nome": "Fiera di Santa Lucia - Fiera Capponi",
@@ -8520,7 +8543,7 @@
   "anchor": "ev-2026-12-17-piccoli-artisti-luminosi-l-arte-della-luce"
  },
  {
-  "nome": "Uncinetto Lab con Ivana - Biblioteca Civica del Picerio",
+  "nome": "Uncinetto Lab con Ivana - Biblioteca Civica del Ricetto",
   "di": "17/12/2026",
   "df": "17/12/2026",
   "ora": "16:30",
@@ -8532,8 +8555,8 @@
   "descr": "Laboratorio di uncinetto con Ivana per bambini e ragazzi dai 7 anni. Prenotazione obbligatoria in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-17",
   "d_end": "2026-12-17",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -8541,10 +8564,10 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-17-uncinetto-lab-con-ivana-biblioteca-civica-del-pice"
+  "anchor": "ev-2026-12-17-uncinetto-lab-con-ivana-biblioteca-civica-del-rice"
  },
  {
-  "nome": "Bibliobaby - Biblioteca Civica del Picerio",
+  "nome": "Bibliobaby - Biblioteca Civica del Ricetto",
   "di": "18/12/2026",
   "df": "18/12/2026",
   "ora": "16:30",
@@ -8556,8 +8579,8 @@
   "descr": "Appuntamento Bibliobaby per bambini di 3-6 anni circa. Prenotazione consigliata in biblioteca.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-18",
   "d_end": "2026-12-18",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -8565,7 +8588,7 @@
   "lat": "44.2994897",
   "lon": "7.5677018",
   "festa": "nessuna",
-  "anchor": "ev-2026-12-18-bibliobaby-biblioteca-civica-del-picerio"
+  "anchor": "ev-2026-12-18-bibliobaby-biblioteca-civica-del-ricetto"
  },
  {
   "nome": "Foto con Babbo Natale e gli Elfi - Consegna letterine",
@@ -10205,7 +10228,7 @@
   "anchor": "ev-2026-12-22-gli-elfi-di-babbo-natale-vanno-dai-bambini-a-scuol"
  },
  {
-  "nome": "Magiche Letture di Natale... Per Tutti! - Biblioteca Civica del Picerio",
+  "nome": "Magiche Letture di Natale... Per Tutti! - Biblioteca Civica del Ricetto",
   "di": "22/12/2026",
   "df": "22/12/2026",
   "ora": "16:30",
@@ -10217,8 +10240,8 @@
   "descr": "Letture magiche a tema natalizio aperte a tutti. Un pomeriggio di storie per famiglie e bambini di ogni età.",
   "manifest": "Dicembre in Biblioteca",
   "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
   "d_start": "2026-12-22",
   "d_end": "2026-12-22",
   "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
@@ -10250,6 +10273,30 @@
   "lon": "7.8297855",
   "festa": "natale",
   "anchor": "ev-2026-12-23-concerto-di-natale-mondovicino-centro-commerciale"
+ },
+ {
+  "nome": "Favolando - Biblioteca Civica del Ricetto",
+  "di": "23/12/2026",
+  "df": "23/12/2026",
+  "ora": "10:00",
+  "citta": "Boves",
+  "prov": "CN",
+  "categoria": "Cultura",
+  "eta": "0-24 mesi",
+  "prezzo": "Gratuito",
+  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
+  "manifest": "Dicembre in Biblioteca",
+  "loc": "daop_cuneo_4037528189633281486.webp",
+  "luogo": "Biblioteca Civica del Ricetto",
+  "indirizzo": "Biblioteca Civica del Ricetto - Boves (CN)",
+  "d_start": "2026-12-23",
+  "d_end": "2026-12-23",
+  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
+  "consigliato": "No",
+  "lat": "44.2994897",
+  "lon": "7.5677018",
+  "festa": "nessuna",
+  "anchor": "ev-2026-12-23-favolando-biblioteca-civica-del-ricetto"
  },
  {
   "nome": "Festa di Natale - Tata Lisa",
@@ -10343,30 +10390,6 @@
   "lon": "8.7457524",
   "festa": "natale",
   "anchor": "ev-2026-12-24-cioccolata-calda-dopo-messa-della-notte-di-natale"
- },
- {
-  "nome": "Favolando - Biblioteca Civica del Picerio",
-  "di": "24/12/2026",
-  "df": "24/12/2026",
-  "ora": "10:00",
-  "citta": "Boves",
-  "prov": "CN",
-  "categoria": "Cultura",
-  "eta": "0-24 mesi",
-  "prezzo": "Gratuito",
-  "descr": "Mini letture per bebè 0-24 mesi con mamme, papà, nonni, zii. Senza iscrizione. Ogni mercoledì di dicembre dalle ore 10.",
-  "manifest": "Dicembre in Biblioteca",
-  "loc": "daop_cuneo_4037528189633281486.webp",
-  "luogo": "Biblioteca Civica del Picerio",
-  "indirizzo": "Biblioteca Civica del Picerio - Boves (CN)",
-  "d_start": "2026-12-24",
-  "d_end": "2026-12-24",
-  "contatto": "0171 391834 - biblioteca@comune.boves.cn.it",
-  "consigliato": "No",
-  "lat": "44.2994897",
-  "lon": "7.5677018",
-  "festa": "nessuna",
-  "anchor": "ev-2026-12-24-favolando-biblioteca-civica-del-picerio"
  },
  {
   "nome": "Il magico arrivo di Babbo Natale - VidAlegra APS",

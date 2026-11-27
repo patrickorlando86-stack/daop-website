@@ -975,6 +975,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.daop.it/eventi/aspettando-l-immacolata-in-corso-acqui-quartiere-c-alessandria.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.daop.it/eventi/aspettando-la-fatina-dei-libri-operazione-200-anni-vicoforte.html</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -982,6 +988,12 @@
   </url>
   <url>
     <loc>https://www.daop.it/eventi/aspettando-la-fiera-della-patata-entracque.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.daop.it/eventi/aspettando-natale-con-babbo-natale-e-i-suoi-elfi-q-alessandria.html</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1209,7 +1221,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/bibliochef-con-elena-biblioteca-civica-del-picerio-boves.html</loc>
+    <loc>https://www.daop.it/eventi/bibliochef-con-elena-biblioteca-civica-del-ricetto-boves.html</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -5649,12 +5661,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/laboratorio-di-natale-in-collaborazione-con-il-fes-mondovi.html</loc>
-    <lastmod>2026-11-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.daop.it/eventi/laboratorio-di-natale-mondovi.html</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -9783,7 +9789,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.daop.it/eventi/xmas-inaugurazione-casetta-di-babbo-natale-in-bali-ovada.html</loc>
+    <loc>https://www.daop.it/eventi/xmas-mercatini-di-natale-in-balia-degli-eventi-ovada.html</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
