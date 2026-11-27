@@ -589,6 +589,9 @@ def render_tappe(v, volumi, oggi, ctx=None):
     # pagina comune se c'e' su disco, i luoghi se c'e' l'ancora: quello che
     # manca non si stampa (la regola di link_luoghi()).
     altro = []
+    cc = G.link_caccia(paese)
+    if cc:
+        altro.append(cc)
     slug = G.slugify(paese)
     if "gn-tutti" not in blocco_ev and os.path.isfile(
             os.path.join(ROOT, "eventi", "comune", f"{slug}.html")):
@@ -718,12 +721,17 @@ def scrivi_pagine_volumi(volumi):
         open(os.path.join(CARTELLA_VOL, f"{v['id']}.html"), "w",
              encoding="utf-8").write(render_tappe(v, volumi, oggi, ctx))
     tenuti = {f"{v['id']}.html" for v in vivi}
+    # Le pagine della caccia di Natale (scripts/caccia_ginetto.py) stanno
+    # nella stessa cartella: si scrivono qui e non si potano come i volumi.
+    import caccia_ginetto
+    cacce, urls_cacce = caccia_ginetto.scrivi(oggi)
+    tenuti |= cacce
     for f in os.listdir(CARTELLA_VOL):
         if f.endswith(".html") and f not in tenuti:
             os.remove(os.path.join(CARTELLA_VOL, f))
             print(f"[genera_ginetto] tolta esploratore/{f}: il volume non ha piu' le tappe")
     urls = [VOL_URL.format(v["id"]) for v in vivi]
-    sitemap_volumi(urls, oggi)
+    sitemap_volumi(urls + urls_cacce, oggi)
     return urls
 
 

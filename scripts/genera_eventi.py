@@ -4108,6 +4108,41 @@ def link_libro(citta):
             f'{a_citta(esc(v["paese"]))}</a>')
 
 
+def link_caccia(citta, oggi=None):
+    """Il link alla caccia di Natale di Ginetto nel comune, o '' (27/11/2026).
+
+    Le pagine /esploratore/caccia-di-natale-<paese>.html le scrive
+    scripts/caccia_ginetto.py (dentro genera_ginetto.py, che gira DOPO questo:
+    il link usa la pagina della notte prima, il ritardo di un giro gia' noto).
+    Si stampa solo se il file c'e' e la caccia non e' finita: il meta
+    daop:caccia della pagina porta l'ultimo giorno (premi compresi)."""
+    f = os.path.join(ROOT, "esploratore", f"caccia-di-natale-{slugify(citta or '')}.html")
+    if not citta or not os.path.isfile(f):
+        return ''
+    m = re.search(r'name="daop:caccia" content="([\d-]+)"', open(f, encoding="utf-8").read())
+    oggi = oggi or datetime.date.today()
+    if not m or m[1] < oggi.isoformat():
+        return ''
+    return (f'<a href="/esploratore/caccia-di-natale-{slugify(citta)}.html">'
+            f'🎄 La caccia al tesoro di Natale di Ginetto{a_citta(esc(citta))}</a>')
+
+
+def cacce_attive(oggi=None):
+    """[(citta, href)] delle cacce di Natale ancora in corso, per /natale.html."""
+    oggi = oggi or datetime.date.today()
+    out = []
+    cart = os.path.join(ROOT, "esploratore")
+    for f in sorted(os.listdir(cart)) if os.path.isdir(cart) else []:
+        if not (f.startswith("caccia-di-natale-") and f.endswith(".html")):
+            continue
+        t = open(os.path.join(cart, f), encoding="utf-8").read()
+        m = re.search(r'name="daop:caccia" content="([\d-]+)"', t)
+        c = re.search(r'name="daop:citta" content="([^"]+)"', t)
+        if m and c and m[1] >= oggi.isoformat():
+            out.append((html.unescape(c[1]), f"/esploratore/{f}"))
+    return out
+
+
 def link_sponsor(citta, prov, oggi=None):
     """La riga "Sponsorizzato · <posto>" in coda a una scheda evento, o ''.
 
@@ -5055,6 +5090,9 @@ def blocco_vicini(rec, events, oggi, limite=6, hub=None, salta=()):
     lg = link_luoghi(rec.get('citta'), prov)
     if lg:
         coda.append(lg)
+    lcc = link_caccia(rec.get('citta'))
+    if lcc:
+        coda.append(lcc)
     ll = link_libro(rec.get('citta'))
     if ll:
         coda.append(ll)
@@ -7342,6 +7380,7 @@ def render_comune(dati, css, nav, foot, oggi, vicini=None):
   {"".join(blocchi)}
 
   <div class="com-link">
+    {link_caccia(citta)}
     {link_luoghi(citta, dati['prov'])}
     {link_libro(citta)}
     <a href="/eventi.html">Tutta l'agenda DAOP</a>
@@ -9681,6 +9720,13 @@ def spec_natale(st, events, oggi, altre):
                     for c in PROVINCE_PUBBLICATE) + '</div>')
     corpo += (_riga_prov('Mercatini di Natale:', href_mercatini_prov)
               + _riga_prov('Presepi, Babbo Natale, spettacoli:', href_natale_prov))
+    # La caccia al tesoro di Natale di Ginetto nei negozi (27/11/2026): una
+    # riga di bottoni come le province, solo finche' la caccia e' in corso.
+    _cc = cacce_attive(oggi)
+    if _cc:
+        corpo += ('<div class="lan-dopo"><span class="lan-dopo-t">Caccia al tesoro '
+                  'di Natale di Ginetto:</span>' + ''.join(
+                      f'<a href="{h}">{esc(c)}</a>' for c, h in _cc) + '</div>')
     # Accorciato lo stesso giorno ("troppo testo"): restano la regola pratica
     # e il ponte verso i luoghi, che e' il link che questa pagina da' al
     # catalogo. L'ancora #al-coperto resta: la citano le pagine provinciali.
