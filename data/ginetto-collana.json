@@ -309,8 +309,53 @@
    "_stato": "In arrivo (30/10/2026: esce fra qualche giorno). Quando e' su Amazon: stato pubblicato, link amazon, copertina in assets/ginetto/copertine."
   },
   {
-   "id": "prossimo-paese",
+   "id": "fresonara",
    "numero": 7,
+   "visibile": true,
+   "stato": "pubblicato",
+   "titolo": "Ginetto alla scoperta di Fresonara",
+   "paese": "Fresonara",
+   "saluto": "Si parte da Palazzo Trotti, che qui tutti chiamano «il castello»! Poi alza gli occhi: il campanile ha la punta a forma di cipolla. Cerca le impronte di Briciola fino al vecchio gelso Morione, e arriva in piazza Italia per la festa del paese.",
+   "provincia": "Alessandria",
+   "descrizione": "Mancano tre giorni al compleanno di Fresonara e Giulia e i suoi amici devono preparare una recita, ma il palco è vuoto. Ginetto li accompagna dal castello all'Orba, dal campanile a cipolla al vecchio gelso, a caccia delle storie da mettere in scena. In fondo al libro c'è il copione per rifare la recita a scuola, e in ogni tappa si nasconde Briciola.",
+   "copertina": "assets/ginetto/copertine/vol-7-fresonara.webp",
+   "copertina_alt": "Copertina del volume 7 di Ginetto l'Esploratore, dedicato a Fresonara",
+   "amazon": "",
+   "materiali": [],
+   "tappe": [
+    {
+     "nome": "Palazzo Trotti e Piazza Vecchia",
+     "testo": "Nella parte più antica del paese c'è Palazzo Trotti, che tutti chiamano «il castello», e da lì i vicoli scendono fino a Piazza Vecchia. Nel 1404 il condottiero Facino Cane lo attaccò e la campana suonò l'allarme: il castello fu distrutto, ma gli abitanti ricostruirono il paese."
+    },
+    {
+     "nome": "Il campanile a cipolla",
+     "testo": "È alto 28 metri e ha la punta tonda, a forma di cipolla. Si racconta che per pagarlo Fresonara abbia «venduto il confine», cioè dei terreni agli abitanti di Bosco Marengo. Sotto l'orologio c'è una scritta in latino ancora da decifrare."
+    },
+    {
+     "nome": "L'Orba e i frassini",
+     "testo": "Il torrente Orba scorre al confine del paese, tra sassi e alberi. Qui c'era una grande foresta dove andavano a caccia i re longobardi. Forse il nome viene da Frassinaria, la terra dei frassini: nello stemma del paese c'è proprio un albero."
+    },
+    {
+     "nome": "La cappella di San Glicerio",
+     "testo": "In mezzo ai campi c'è una chiesetta piccola piccola. Il 10 maggio si festeggia San Glicerio, in dialetto San Ghirfé, e un tempo intorno c'era una grande fiera con dolci e giocattoli. Nel 1859 qui si accamparono i soldati di Napoleone III."
+    },
+    {
+     "nome": "La scuola e il Monumento ai Caduti",
+     "testo": "In cima alla colonna c'è un'aquila con le ali spiegate: è il monumento del 1922 con i nomi dei fresonaresi caduti in guerra. Accanto c'è la scuola Edmondo De Amicis, dove i bambini facevano teatro già nel 1984."
+    },
+    {
+     "nome": "Il gelso Morione",
+     "testo": "È un gelso così vecchio che per reggere un ramo spezzato gli hanno messo delle cinghie: oggi è un albero monumentale. Un tempo tante famiglie allevavano i bachi da seta, che mangiano solo foglie di gelso."
+    },
+    {
+     "nome": "Piazza Italia e la regina Adelaide",
+     "testo": "In piazza c'è il Municipio con l'orologio e accanto l'Oratorio di San Rocco, del 1631. Più di mille anni fa la regina Adelaide regalò Fresonara ai monaci di Pavia, e il documento è del 1° ottobre 981: per questo il compleanno del paese si festeggia il 1° ottobre."
+    }
+   ]
+  },
+  {
+   "id": "prossimo-paese",
+   "numero": 8,
    "visibile": false,
    "stato": "in-arrivo",
    "titolo": "Il prossimo paese",
